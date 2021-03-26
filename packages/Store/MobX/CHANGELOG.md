@@ -1,0 +1,28 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 0.0.6 (2021-03-24)
+
+
+### Bug Fixes
+
+* fix infinite loop in facetStore when limit has been set already ([#5](https://github.com/searchspring/snap-store-mobx/issues/5)) ([b7c6039](https://github.com/searchspring/snap-store-mobx/commit/b7c60390cbc54c8dda2b151794d6afcd427a5d55))
+
+### 0.0.5 (2021-03-22)
+
+
+### Features
+
+* added merchStore and inline merch to resultStore ([#4](https://github.com/searchspring/snap-store-mobx/issues/4)) ([6f02c15](https://github.com/searchspring/snap-store-mobx/commit/6f02c15858974f9899617c275ab6af89afc76e01))
+
+### 0.0.4 (2021-03-09)
+
+### 0.0.3 (2021-03-04)
+
+### 0.0.2 (2021-03-03)
+
+
+### Features
+
+* **allthethings:** combine all mobx stores under one package/repo ([edaf3a7](https://github.com/searchspring/snap-store-mobx/commit/edaf3a7779b9a53521f24d8c9135e6bc9a281b2b))

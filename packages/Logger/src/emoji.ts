@@ -1,0 +1,18 @@
+export const emoji = {
+	bang: String.fromCodePoint(0x203c),
+	bright: String.fromCodePoint(0x1f506),
+	check: String.fromCodePoint(0x2714),
+	clock: String.fromCodePoint(0x1f556),
+	cloud: String.fromCodePoint(0x2601),
+	dim: String.fromCodePoint(0x1f505),
+	gear: String.fromCodePoint(0x2699),
+	interobang: String.fromCodePoint(0x2049),
+	lightning: String.fromCodePoint(0x26a1),
+	magic: String.fromCodePoint(0x2728),
+	rocket: String.fromCodePoint(0x1f680),
+	search: String.fromCodePoint(0x1f50d),
+	snap: String.fromCodePoint(0x1f4a5),
+	ufo: String.fromCodePoint(0x1f6f8),
+	vortex: String.fromCodePoint(0x1f300),
+	warning: String.fromCodePoint(0x26a0),
+};

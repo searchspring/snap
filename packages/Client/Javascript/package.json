@@ -1,0 +1,38 @@
+{
+	"name": "@searchspring/snap-client-javascript",
+	"version": "1.0.6",
+	"description": "SNAP Javascript Client",
+	"license": "Unlicense",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "rm -rf dist && babel src -d dist",
+		"commit": "cz",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"prepare": "npm run build",
+		"preversion": "npm test && npm run build",
+		"version": "standard-version",
+		"postversion": "git push && git push --tags",
+		"prepublishOnly": "npm test && npm run build"
+	},
+	"browser": {
+		"fs": false
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/searchspring/snap-client-javascript.git"
+	},
+	"dependencies": {
+		"deepmerge": "^4.2.2",
+		"querystring": "^0.2.1",
+		"superagent": "5.3.1"
+	},
+	"files": [
+		"dist"
+	],
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}

@@ -1,0 +1,134 @@
+{
+  "sortOptions": [
+    {
+      "type": "field",
+      "field": "sales_rank",
+      "direction": "desc",
+      "label": "Most Popular"
+    },
+    {
+      "type": "field",
+      "field": "title",
+      "direction": "asc",
+      "label": "Name (A - Z)"
+    },
+    {
+      "type": "field",
+      "field": "price",
+      "direction": "desc",
+      "label": "Price ($$$ - $)"
+    },
+    {
+      "type": "field",
+      "field": "title",
+      "direction": "desc",
+      "label": "Name (Z - A)"
+    },
+    {
+      "type": "field",
+      "field": "price",
+      "direction": "asc",
+      "label": "Price ($ - $S$)"
+    }
+  ],
+  "facets": {
+    "price": {
+      "display": "list",
+      "label": "Price",
+      "collapse": false,
+      "multiple": "or"
+    },
+    "price_slider": {
+      "display": "slider",
+      "label": "Price",
+      "collapse": false,
+      "formatSeparator": "-",
+      "formatValue": "$%01.2f"
+    },
+    "color_family": {
+      "display": "palette",
+      "label": "Color",
+      "collapse": true,
+      "multiple": "or"
+    },
+    "brand": {
+      "display": "list",
+      "label": "Brand",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "ss_category_hierarchy": {
+      "display": "hierarchy",
+      "label": "Category",
+      "collapse": false,
+      "multiple": "single",
+      "hierarchyDelimiter": ">"
+    },
+    "on_sale": {
+      "display": "list",
+      "label": "On Sale",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "size": {
+      "display": "grid",
+      "label": "Size",
+      "collapse": true,
+      "multiple": "and"
+    },
+    "size_dress": {
+      "display": "grid",
+      "label": "Dress Size",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "material": {
+      "display": "list",
+      "label": "Material",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "season": {
+      "display": "list",
+      "label": "Season",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "pattern": {
+      "display": "list",
+      "label": "Pattern",
+      "collapse": true,
+      "multiple": "single"
+    },
+    "dress_length_name": {
+      "display": "list",
+      "label": "Dress Length",
+      "collapse": true,
+      "multiple": "or"
+    },
+    "size_footwear": {
+      "display": "grid",
+      "label": "Shoe Size",
+      "collapse": false,
+      "multiple": "single"
+    },
+    "collection": {
+      "display": "list",
+      "label": "Collection",
+      "collapse": false,
+      "multiple": "single"
+    },
+    "saturation": {
+      "display": "list",
+      "label": "Color Intensity",
+      "collapse": false,
+      "multiple": "single"
+    },
+    "size_pants": {
+      "display": "list",
+      "label": "Pant Size",
+      "collapse": true,
+      "multiple": "single"
+    }
+  }
+}

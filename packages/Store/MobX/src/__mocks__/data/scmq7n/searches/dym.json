@@ -1,0 +1,20 @@
+{
+  "search": {
+    "query": "dresss",
+    "didYouMean": "dress"
+  },
+  "filters": [],
+  "pagination": {
+    "totalResults": 0,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30
+  },
+  "sorting": [],
+  "results": [],
+  "facets": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {}
+  }
+}

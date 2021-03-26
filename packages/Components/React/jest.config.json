@@ -1,0 +1,29 @@
+{
+	"moduleNameMapper": {
+		"^react$": "preact/compat",
+		"^react-dom/test-utils$": "preact/test-utils",
+		"^react-dom$": "preact/compat",
+		"\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
+	},
+	"collectCoverage": true,
+	"roots": ["src/components"],
+	"collectCoverageFrom": [
+		"**/*.{js,jsx}",
+		"!**/*.stories.{js,jsx}",
+		"!**/node_modules/**",
+		"!**/coverage/**",
+		"!**/index.js"
+	],
+	"coverageThreshold": {
+		"global": {
+			"branches": 80,
+			"functions": 80,
+			"lines": 80,
+			"statements": 80
+		}
+	},
+	"setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
+	"transform": {
+		"^.+\\.(t|j)sx?$": "ts-jest"
+	}
+}
