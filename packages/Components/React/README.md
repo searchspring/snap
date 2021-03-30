@@ -1,1 +1,0 @@
-### Searchspring Preact Components

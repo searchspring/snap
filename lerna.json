@@ -1,14 +1,8 @@
 {
   "packages": [
-    "packages/Client/Javascript",
-    "packages/Components/React",
-    "packages/Controller",
-    "packages/EventManager",
-    "packages/Logger",
-    "packages/Store/MobX",
-    "packages/Toolbox",
-    "packages/UrlManager",
-    "packages/Profiler"
+    "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }
