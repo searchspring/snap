@@ -1,0 +1,95 @@
+{
+	"name": "@searchspring/snap-preact-components",
+	"version": "0.0.9",
+	"description": "Snap Preact Component Library",
+	"author": "Searchspring",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/searchspring/snap-preact-components.git"
+	},
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"scripts": {
+		"build": "echo 'building snap-preact-components' && rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"commit": "cz",
+		"format": "prettier --write 'src/**/*.{js,ts,tsx}'",
+		"lint": "eslint 'src/components/**/*.{js,ts,tsx}'",
+		"storybook": "start-storybook -p 6006",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"preversion": "npm run lint && npm test && npm run build",
+		"version": "standard-version -a",
+		"postversion": "git push && git push --tags",
+		"storybook:build": "build-storybook -o ./docs"
+	},
+	"prettier": "@searchspring/prettier",
+	"dependencies": {
+		"@emotion/react": "^11.1.5",
+		"@searchspring/snap-toolbox": "^0.0.24",
+		"classnames": "^2.2.6",
+		"mobx-react-lite": "^3.2.0",
+		"react-ranger": "^2.1.0"
+	},
+	"peerDependencies": {
+		"preact": "^10.5.13"
+	},
+	"devDependencies": {
+		"@searchspring/prettier": "^1.0.2",
+		"@searchspring/snap-client-javascript": "^1.0.6",
+		"@searchspring/snap-controller": "0.0.5",
+		"@searchspring/snap-store-mobx": "0.0.6",
+		"@searchspring/snap-event-manager": "0.0.16",
+		"@searchspring/snap-logger": "0.0.1",
+		"@searchspring/snap-profiler": "0.0.12",
+		"@searchspring/snap-url-manager": "0.0.13",
+		"@storybook/addon-actions": "^6.1.21",
+		"@storybook/addon-essentials": "^6.1.21",
+		"@storybook/addon-links": "^6.1.21",
+		"@storybook/preact": "^6.1.21",
+		"@storybook/theming": "^6.1.21",
+		"@testing-library/jest-dom": "^5.11.10",
+		"@testing-library/preact": "^2.0.1",
+		"@testing-library/user-event": "^13.0.15",
+		"@types/jest": "^26.0.21",
+		"@typescript-eslint/eslint-plugin": "^4.19.0",
+		"@typescript-eslint/parser": "^4.19.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^7.22.0",
+		"eslint-config-prettier": "^8.1.0",
+		"husky": "^5.2.0",
+		"jest": "^26.6.3",
+		"lint-staged": "^10.5.4",
+		"mobx-react": "^7.1.0",
+		"node-sass": "^5.0.0",
+		"preact": "^10.5.13",
+		"standard-version": "^9.1.1",
+		"ts-jest": "^26.5.4",
+		"ts-loader": "^8.0.18",
+		"typescript": "^4.2.3"
+	},
+	"sideEffects": false,
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"./package.json": [
+			"prettier --write"
+		],
+		"*.{js,ts,tsx}": [
+			"prettier --write"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}

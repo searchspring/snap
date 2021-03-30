@@ -5,8 +5,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna exec --parallel -- yarn run build",
-    "test": "lerna exec --parallel -- yarn run test",
-    "dev": "lerna exec --parallel -- yarn run dev"
+    "build": "npx lerna exec 'yarn run build'",
+    "test": "npx lerna exec --parallel -- yarn run test",
+    "cypress": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --scope 'snap-preact-demo' -- yarn run dev && yarn run test",
+    "dev": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel -- yarn run dev",
+    "clean": "npx lerna clean -y && rm -rf ./node_modules",
+    "setup": "yarn install --registry https://registry.npmjs.org"
   }
 }

@@ -7,7 +7,7 @@
 	"author": "Searchspring",
 	"license": "MIT",
 	"scripts": {
-		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"build": "echo 'building snap-controller' && rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"commit": "cz",
 		"dev": "tsc --watch",
 		"format": "prettier --write \"src/**/*.ts\"",
