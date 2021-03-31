@@ -1,0 +1,6 @@
+coverage/**
+dist/**
+**test**
+**__test__**
+**tests**
+**__tests__**

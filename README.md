@@ -1,100 +1,68 @@
-# Prerequisites:
-- node >= 12
-- npm >= 6
-- SearchSpring Chrome Extension
+# Snap
 
-# Install and authenticate snapfu
-```sh
-$ npm install -g snapfu
-$ snapfu login
+All snap packages that are published to npm are found under the `/packages` directory
+
+Yarn workspaces is used to hoist package dependancies to the root `node_modules` directory
+
+Lerna is used to execute commands across the packages. See commands below or in the root `package.json`
+
+## Prerequisite
+### ~/.npmrc 
+Only required if packages are still private. Replace `{token}` with a Github personal access token
+```
+@searchspring:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken={token}
+registry=https://registry.npmjs.org/
 ```
 
-# Initialize new project
+## Commands
+While at the <b>repo root</b>, the following commands are available:
+### Install dependancies
+```
+yarn run setup
+```
+### Dev
+Executes `yarn run dev` across all packages sequentially. All packages will be linked with hot reloading.
+```
+yarn run dev
+```
+http://localhost:3333 Demo store
 
-Run `snapfu init` in answer the prompts. 
+http://localhost:8888 Webpack bundle analyzer
 
-You will be asked for your Site ID, which you can learn about [here]
-When asked what framework, select Preact. 
-When asked what template, select Custom.
-
-This will create a new project with git repo.
-
-Then run,
-
-```sh
-cd searchspring_integration_[your site id]
-npm install # or yarn install
-npm run dev
+### Storybook
+http://localhost:6006
+```
+yarn run storybook
+```
+### Unit Tests
+```
+yarn run test
+```
+### Cypress E2E Tests
+Only applies to `packages/snap-preact-demo`
+```
+yarn run cypress
+```
+### Build
+Executes `yarn run build` across all packages sequentially. 
+```
+yarn run build
+```
+### Clean
+Removes all package and root `node_modules` directories
+```
+yarn run clean
+```
+### Execute custom script in all packages
+Executes package.json script across all packages
+```
+yarn workspaces run [command]
 ```
 
-# Connect SearchSpring Chrome Extension to local dev server
-
-Visit the website you are developing for. Pull down the extension set the mode to `local`. 
-
-Open up `./components/index.js` 
-
-Paste in:
-
-```js
-class HelloWorld {
-	render() {
-		return (
-			<h1>Hello, Snapfu!</h1>
-		);
-	}
-}
-
-class MainContainer {
-	render() {
-		return (
-			<div>
-				<HelloWorld />
-			</div>
-		);
-	}
-}
-
-module.exports = [
-	{
-		target: '#some_id .some_class',
-		component: MainContainer
-	}
-];
+### Execute custom script in single package
+Executes package.json script in specific package
 ```
-
-The page should automatically update using live reload with your changes.
-
-Note: It's considered best practice to have unique selectors for your components. For example, an element on your website:
-
-```js
-<div data-searchspring="main-container">
-	...
+yarn workspace [package] run [command]
 ```
-
-With this as your target selector:
-```js
-{
-	target: '[data-searchspring="main-container"]',
-	component: MainContainer
-}
-```
-
-# Deploy the bundle
-
-```sh
-$ git commit -am "Hello, snapfu"
-$ git push
-```
-
-The bundle will automatically be built and deployed to this URL: `https://cdn.searchspring.net/snap/[your_site_id]/bundle.js`
-
-You can now view this integration on your site from any Chrome browser with the SearchSpring extension with the following settings:
-
-- Mode: production
-- Site ID: [your_site_id]
-
-You can also preview your work on a different branch with the following config:
-
-- Mode: preview
-- Site ID: [your_site_id]
-- Branch: [your branch name]
+Example: `yarn workspace @searchspring/snap-controller run test`

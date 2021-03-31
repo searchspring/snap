@@ -6,10 +6,13 @@
   ],
   "scripts": {
     "build": "npx lerna exec 'yarn run build'",
-    "test": "npx lerna exec --parallel -- yarn run test",
-    "cypress": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --scope 'snap-preact-demo' -- yarn run dev && yarn run test",
-    "dev": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel -- yarn run dev",
+    "build.bak": "npx lerna exec --scope '@searchspring/snap-*' 'yarn run build'",
+    "build:demo": "npx lerna exec --scope 'snap-preact-demo' 'yarn run build'",
+    "test": "npx lerna exec --parallel 'yarn run test'",
+    "cypress": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --scope 'snap-preact-demo' 'yarn run dev && yarn run test'",
+    "dev": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --stream 'yarn run dev'",
     "clean": "npx lerna clean -y && rm -rf ./node_modules",
-    "setup": "yarn install --registry https://registry.npmjs.org"
+    "setup": "yarn install --registry https://registry.npmjs.org",
+    "storybook": "npx lerna exec --scope '@searchspring/snap-preact-components' 'yarn run storybook'"
   }
 }
