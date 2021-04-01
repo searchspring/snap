@@ -9,7 +9,7 @@ Lerna is used to publish packages to npm, and to execute commands across the pac
 ## Prerequisite
 ### NPM v7.x
 Npm v7.x is required for it's workspaces feature
-Npm v7.7.0 is required for executing scripts in specific packages
+Npm v7.7.0 is optional for executing scripts in workspaces
 ### ~/.npmrc
 Only required if packages are still private. Replace `{token}` with a Github personal access token
 ```
