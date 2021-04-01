@@ -87,7 +87,7 @@ export const FacetHierarchyOptions = observer(
 
 		return (
 			values?.length && (
-				<div className={classnames('ss-hierarchy', !disableStyles && CSS.list({ style }), className)}>
+				<div css={!disableStyles && CSS.list({ style })} className={classnames('ss-hierarchy', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss-hierarchy__link', { filtered: value.filtered }, { history: value.history && !value.filtered })}

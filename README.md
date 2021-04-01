@@ -2,15 +2,17 @@
 
 All snap packages that are published to npm are found under the `/packages` directory
 
-Yarn workspaces is used to hoist package dependancies to the root `node_modules` directory
+Npm workspaces is used to hoist package dependancies to the root `node_modules` directory, and link all packages together
 
-Lerna is used to execute commands across the packages. See commands below or in the root `package.json`
+Lerna is used to publish packages to npm, and to execute commands across the packages. See commands below or in the root `package.json`
 
 ## Prerequisite
-### ~/.npmrc 
+### NPM v7.x
+Npm v7.x is required for it's workspaces feature
+Npm v7.7.0 is required for executing scripts in specific packages
+### ~/.npmrc
 Only required if packages are still private. Replace `{token}` with a Github personal access token
 ```
-@searchspring:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken={token}
 registry=https://registry.npmjs.org/
 ```
@@ -19,12 +21,12 @@ registry=https://registry.npmjs.org/
 While at the <b>repo root</b>, the following commands are available:
 ### Install dependancies
 ```
-yarn run setup
+npm install
 ```
 ### Dev
-Executes `yarn run dev` across all packages sequentially. All packages will be linked with hot reloading.
+Executes `npm run dev` across all packages sequentially. All packages will be linked with hot reloading.
 ```
-yarn run dev
+npm run dev
 ```
 http://localhost:3333 Demo store
 
@@ -33,36 +35,35 @@ http://localhost:8888 Webpack bundle analyzer
 ### Storybook
 http://localhost:6006
 ```
-yarn run storybook
+npm run storybook
 ```
 ### Unit Tests
 ```
-yarn run test
+npm run test
 ```
 ### Cypress E2E Tests
 Only applies to `packages/snap-preact-demo`
 ```
-yarn run cypress
+npm run cypress
 ```
 ### Build
-Executes `yarn run build` across all packages sequentially. 
+Executes `npm run build` across all packages sequentially. 
 ```
-yarn run build
+npm run build
 ```
 ### Clean
 Removes all package and root `node_modules` directories
 ```
-yarn run clean
+npm run clean
 ```
 ### Execute custom script in all packages
 Executes package.json script across all packages
 ```
-yarn workspaces run [command]
+npm run <command> --workspaces
 ```
 
 ### Execute custom script in single package
-Executes package.json script in specific package
+Executes package.json script in specific packages
 ```
-yarn workspace [package] run [command]
+npm run <command> [--workspace=<package> | -w <package>] [--workspace=<package> | -w <package>]
 ```
-Example: `yarn workspace @searchspring/snap-controller run test`

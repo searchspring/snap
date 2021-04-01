@@ -5,14 +5,14 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npx lerna exec 'yarn run build'",
-    "build.bak": "npx lerna exec --scope '@searchspring/snap-*' 'yarn run build'",
-    "build:demo": "npx lerna exec --scope 'snap-preact-demo' 'yarn run build'",
-    "test": "npx lerna exec --parallel 'yarn run test'",
-    "cypress": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --scope 'snap-preact-demo' 'yarn run dev && yarn run test'",
-    "dev": "kill $(lsof -ti:3333,8888) || npx lerna exec --parallel --stream 'yarn run dev'",
-    "clean": "npx lerna clean -y && rm -rf ./node_modules",
-    "setup": "yarn install --registry https://registry.npmjs.org",
-    "storybook": "npx lerna exec --scope '@searchspring/snap-preact-components' 'yarn run storybook'"
+    "build": "node_modules/.bin/lerna exec --stream 'npm run build'",
+    "test": "node_modules/.bin/lerna exec --parallel --stream 'npm run test'",
+    "cypress": "kill $(lsof -ti:3333,8888) || node_modules/.bin/lerna exec --parallel --stream --scope 'snap-preact-demo' 'npm run dev && npm run test'",
+    "dev": "kill $(lsof -ti:3333,8888) || node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
+    "clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
+    "storybook": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-components' 'npm run storybook'"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
   }
 }
