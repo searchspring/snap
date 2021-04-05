@@ -47,7 +47,7 @@
 		"@searchspring/snap-event-manager": "0.0.16",
 		"@searchspring/snap-logger": "0.0.1",
 		"@searchspring/snap-profiler": "0.0.12",
-		"@searchspring/snap-url-manager": "0.0.13",
+		"@searchspring/snap-url-manager": "0.0.15",
 		"@storybook/addon-actions": "^6.1.21",
 		"@storybook/addon-essentials": "^6.1.21",
 		"@storybook/addon-links": "^6.1.21",
