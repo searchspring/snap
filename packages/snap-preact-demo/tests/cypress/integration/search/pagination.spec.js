@@ -4,14 +4,14 @@ describe('Pagination', () => {
 	});
 
 	it('can paginate', () => {
-		cy.get('.ss-pagination .ss-pagination-row .ss-active:first').should('have.text', '1');
+		cy.get('.ss-pagination .ss-active:first').should('have.text', '1');
 
-		cy.get('.ss-pagination:first .ss-page-next .ss-page-link').click();
+		cy.get('.ss-pagination:first .ss-page-next').click();
 
-		cy.get('.ss-pagination .ss-pagination-row .ss-active:first').should('have.text', '2');
+		cy.get('.ss-pagination .ss-active:first').should('have.text', '2');
 
-		cy.get('.ss-pagination:first .ss-page-previous .ss-page-link').click();
+		cy.get('.ss-pagination:first .ss-page-previous').click();
 
-		cy.get('.ss-pagination .ss-pagination-row .ss-active:first').should('have.text', '1');
+		cy.get('.ss-pagination .ss-active:first').should('have.text', '1');
 	});
 });

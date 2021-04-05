@@ -1,5 +1,5 @@
 {
-	"name": "snap-preact-demo",
+	"name": "@searchspring/snap-preact-demo",
 	"version": "1.0.1",
 	"description": "",
 	"main": "index.js",
@@ -11,14 +11,14 @@
 		"cypress": "cypress open --project tests",
 		"format": "prettier --write \"**/*.{js,ts,json}\"",
 		"lint": "eslint --fix \"**/*.{js,ts}\"",
-		"test": "cypress run --project tests"
+		"test": "kill $(lsof -ti:3333) || (webpack serve & ((cypress run --project tests) && kill $(lsof -ti:3333)))"
 	},
 	"author": "",
 	"license": "ISC",
 	"prettier": "@searchspring/prettier",
 	"dependencies": {
 		"@searchspring/snap-client-javascript": "^1.0.6",
-		"@searchspring/snap-controller": "0.0.5",
+		"@searchspring/snap-controller": "0.0.6",
 		"@searchspring/snap-event-manager": "0.0.16",
 		"@searchspring/snap-preact-components": "0.0.9",
 		"@searchspring/snap-profiler": "0.0.12",

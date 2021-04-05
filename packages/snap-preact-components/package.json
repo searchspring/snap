@@ -42,7 +42,7 @@
 	"devDependencies": {
 		"@searchspring/prettier": "^1.0.2",
 		"@searchspring/snap-client-javascript": "^1.0.6",
-		"@searchspring/snap-controller": "0.0.5",
+		"@searchspring/snap-controller": "0.0.6",
 		"@searchspring/snap-store-mobx": "0.0.6",
 		"@searchspring/snap-event-manager": "0.0.16",
 		"@searchspring/snap-logger": "0.0.1",

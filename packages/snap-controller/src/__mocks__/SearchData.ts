@@ -1,5 +1,6 @@
 // TODO: possibly move this into the toolbox as other repos also use this same class
-import fs = require('fs');
+
+import fs from 'fs';
 
 type Settings = {
 	siteId?: string;

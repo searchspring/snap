@@ -6,6 +6,6 @@ describe('Query', () => {
 		cy.get('.ss-results-count-total').should('contain.text', 261);
 
 		// has some facets
-		cy.get('.ss-facets .ss-facet-container').should('have.lengthOf.at.least', 1);
+		cy.get('.ss-facets').should('have.lengthOf.at.least', 1);
 	});
 });
