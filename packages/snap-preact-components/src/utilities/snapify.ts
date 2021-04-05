@@ -1,6 +1,6 @@
 /* searchspring imports */
 import SnapClient from '@searchspring/snap-client-javascript';
-import { UrlManager, QueryStringTranslator, ReactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 // import { SearchController } from '@searchspring/snap-controller-search';
@@ -17,7 +17,7 @@ export class Snapify {
 
 		const client = new SnapClient(config.globals, clientConfig);
 		const store = new SearchStore();
-		const urlManager = new UrlManager(new QueryStringTranslator(), ReactLinker).detach();
+		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();

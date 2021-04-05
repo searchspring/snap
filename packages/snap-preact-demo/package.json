@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"analyze": "webpack --config --analyze",
 		"build": "rm -fr ./dist && webpack --mode=production",
 		"build:watch": "rm -fr ./dist && webpack --watch --mode=production",
 		"dev": "webpack serve",

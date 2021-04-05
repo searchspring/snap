@@ -1,6 +1,6 @@
-import { UrlManager, QueryStringTranslator, ReactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 
-const urlManager = new UrlManager(new QueryStringTranslator(), ReactLinker);
+const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 
 export const mockSearchController = {
 	config: {

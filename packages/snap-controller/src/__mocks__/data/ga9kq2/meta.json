@@ -1,0 +1,166 @@
+{
+    "sortOptions": [
+      {
+        "type": "field",
+        "field": "ga_unique_purchases",
+        "direction": "desc",
+        "label": "Best Selling"
+      },
+      {
+        "type": "field",
+        "field": "sortable_date_created",
+        "direction": "desc",
+        "label": "Newest Items"
+      },
+      {
+        "type": "field",
+        "field": "name",
+        "direction": "asc",
+        "label": "Alphabetical: A to Z"
+      },
+      {
+        "type": "field",
+        "field": "name",
+        "direction": "desc",
+        "label": "Alphabetical: Z to A"
+      },
+      {
+        "type": "field",
+        "field": "reviews_product_score",
+        "direction": "desc",
+        "label": "Avg. Customer Review"
+      },
+      {
+        "type": "field",
+        "field": "calculated_price",
+        "direction": "asc",
+        "label": "Price: Low to High"
+      },
+      {
+        "type": "field",
+        "field": "calculated_price",
+        "direction": "desc",
+        "label": "Price: High to Low"
+      }
+    ],
+    "facets": {
+      "custom_deal_type": {
+        "display": "list",
+        "label": "Current Deals!",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_accessory_type": {
+        "display": "list",
+        "label": "Product Type",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "accessory_location": {
+        "display": "list",
+        "label": "Accessory Location",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_tire_size_1": {
+        "display": "grid",
+        "label": "Tire Size (1)",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_tire_size_2": {
+        "display": "grid",
+        "label": "Tire Size (2)",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_color": {
+        "display": "list",
+        "label": "Color / Finish",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_wheel_size": {
+        "display": "grid",
+        "label": "Wheel Size",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_tire_type": {
+        "display": "list",
+        "label": "Tread Type",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_wheel_width": {
+        "display": "list",
+        "label": "Wheel Width",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_wheel_bolt_pattern": {
+        "display": "list",
+        "label": "Wheel Bolt Pattern",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_wheel_offset": {
+        "display": "list",
+        "label": "Wheel Offset",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_product_brand": {
+        "display": "list",
+        "label": "Brand",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_lift_height": {
+        "display": "list",
+        "label": "Lift Height",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "custom_tire_load": {
+        "display": "list",
+        "label": "Tire Load",
+        "collapse": true,
+        "multiple": "or"
+      },
+      "calculated_price": {
+        "display": "slider",
+        "label": "Price",
+        "collapse": true,
+        "formatSeparator": "-",
+        "formatValue": "$%01.2f"
+      },
+      "ss_vehicle": {
+        "display": "hierarchy",
+        "label": "Wheels by Vehicle",
+        "collapse": true,
+        "multiple": "single",
+        "hierarchyDelimiter": ">"
+      },
+      "ss_accessory": {
+        "display": "hierarchy",
+        "label": "Accessories by Vehicle",
+        "collapse": true,
+        "multiple": "single",
+        "hierarchyDelimiter": ">"
+      },
+      "ss_tire": {
+        "display": "hierarchy",
+        "label": "Tires by Vehicle",
+        "collapse": true,
+        "multiple": "single",
+        "hierarchyDelimiter": ">"
+      },
+      "reviews_product_score": {
+        "display": "list",
+        "label": "Rating",
+        "collapse": true,
+        "multiple": "or"
+      }
+    }
+  }

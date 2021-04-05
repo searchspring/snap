@@ -107,7 +107,13 @@ export class SearchController extends AbstractController {
 			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
 			const response = await this.client.search(params);
-			response.meta = this.client.meta;
+			if(!response.meta) {
+				/**
+				 * MockSnapClient will overwrite the client search() method and use 
+				 * SearchData to return mock data which already contains meta data
+				 */
+				response.meta = this.client.meta;
+			}
 
 			// modify response
 			// TODO: move to store
@@ -149,6 +155,7 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
+			// console.log("this.store:", this.store)
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
