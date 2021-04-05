@@ -1,0 +1,6 @@
+{
+	"name": "@searchspring/snap-toolbox-filters",
+	"main": "../dist/cjs/filters/src/filters.js",
+	"module": "../dist/esm/filters/src/filters.js",
+	"version": "0.0.1"
+}
