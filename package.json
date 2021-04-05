@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "commit": "cz",
     "build": "node_modules/.bin/lerna exec --stream 'npm run build'",
     "test": "node_modules/.bin/lerna exec --parallel --stream 'npm run test'",
     "cypress": "kill $(lsof -ti:3333,8888) || node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-demo' 'npm run cypress'",
@@ -14,8 +15,27 @@
   },
   "prettier": "@searchspring/prettier",
   "devDependencies": {
-    "lerna": "^4.0.0",
+    "@searchspring/prettier": "^1.0.2",
+    "cz-conventional-changelog": "^3.3.0",
     "husky": "^6.0.0",
-    "@searchspring/prettier": "^1.0.2"
+    "lerna": "^4.0.0",
+    "lint-staged": "^10.5.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "bash -c tsc",
+      "eslint",
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

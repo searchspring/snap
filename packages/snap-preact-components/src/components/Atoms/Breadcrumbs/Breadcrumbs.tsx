@@ -52,7 +52,7 @@ export const Breadcrumbs = observer(
 	}
 );
 
-interface BreadcrumbProps extends ComponentProps {
+export interface BreadcrumbProps extends ComponentProps {
 	data: {
 		label: string;
 		url?: string;

@@ -13,7 +13,6 @@
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"dev": "tsc --watch",
-		"commit": "cz",
 		"format": "prettier --write 'src/**/*.{js,ts,tsx}'",
 		"lint": "eslint 'src/components/**/*.{js,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",

@@ -1,3 +1,5 @@
+import { ImmutableObject } from 'seamless-immutable';
+
 export enum RangeValueProperties {
 	LOW = 'low',
 	HIGH = 'high',
@@ -31,7 +33,7 @@ export interface UrlTranslator {
 	getCurrentUrl(): string;
 	getConfig(): Record<string, unknown>;
 
-	serialize(state: UrlState): string;
+	serialize(state: UrlState | ImmutableObject<UrlState>): string;
 	deserialize(url: string): UrlState;
 
 	bindExternalEvents?(update: () => void): void;

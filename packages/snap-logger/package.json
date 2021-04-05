@@ -8,7 +8,6 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "echo 'building snap-logger' && rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
-		"commit": "cz",
 		"dev": "tsc --watch",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",

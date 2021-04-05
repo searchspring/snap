@@ -1,33 +1,33 @@
 /** @jsx h */
 import { h } from 'preact';
 
-import { Title, Subtitle, Description, Primary, ArgsTable, Stories, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+// import { Title, Subtitle, Description, Primary, ArgsTable, Stories, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { componentArgs } from '../../../utilities';
 import { Badge } from './Badge';
 
 export default {
 	title: `Atoms/Badge`,
 	component: Badge,
-	parameters: {
-		docs: {
-			description: {
-				component: 'badge component _markdown_',
-			},
-			page: () => (
-				<div>
-					<Title />
-					<Subtitle />
-					<Description />
-					<ArgsTable story={PRIMARY_STORY} />
-					<Primary />
-					<div>
-						<h1>hi</h1>
-					</div>
-					<Stories />
-				</div>
-			),
-		},
-	},
+	// parameters: {
+	// 	docs: {
+	// 		description: {
+	// 			component: 'badge component _markdown_',
+	// 		},
+	// 		page: () => (
+	// 			<div>
+	// 				<Title />
+	// 				<Subtitle />
+	// 				<Description />
+	// 				<ArgsTable story={PRIMARY_STORY} />
+	// 				<Primary />
+	// 				<div>
+	// 					<h1>hi</h1>
+	// 				</div>
+	// 				<Stories />
+	// 			</div>
+	// 		),
+	// 	},
+	// },
 	decorators: [
 		(Story) => (
 			<div

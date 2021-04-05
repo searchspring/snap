@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h } from 'preact';
 
-import { currency } from '@searchspring/snap-toolbox';
+import { filters } from '@searchspring/snap-toolbox';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -37,7 +37,7 @@ export function Price(properties: PriceProps): JSX.Element {
 
 	const { lineThrough, value, symbol, decimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style } = props;
 
-	const formattedPrice = currency(value, {
+	const formattedPrice = filters.currency(value, {
 		symbol,
 		decimalPlaces,
 		thousandsSeparator,

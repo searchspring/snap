@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { formatNumber } from '@searchspring/snap-toolbox';
+import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
 import { Theme, useTheme } from '../../../providers/theme';
@@ -39,7 +39,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 
 	return (
 		<span className={classnames('ss-formattednumber', className)} style={!disableStyles && style}>
-			{formatNumber(value, {
+			{filters.formatNumber(value, {
 				symbol,
 				decimalPlaces,
 				padDecimalPlaces,

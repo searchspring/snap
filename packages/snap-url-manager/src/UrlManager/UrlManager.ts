@@ -242,7 +242,7 @@ export class UrlManager {
 	}
 
 	get href(): string {
-		return this.translator.serialize(this.state as UrlState);
+		return this.translator.serialize(this.state);
 	}
 
 	go(): void {

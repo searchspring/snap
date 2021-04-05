@@ -1,22 +1,12 @@
 {
+	"extends": "../../tsconfig.json",
+	"include": [
+		"src"
+	],
 	"compilerOptions": {
-		"target": "es5",
-		"module": "es6",
-		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"declaration": true,
-		"declarationMap": true,
+		"outDir": "./dist/esm",
 		"jsx": "react",
 		"jsxFactory": "h",
 		"jsxFragmentFactory": "Fragment",
-		"outDir": "./dist/esm",
-		"lib": [
-			"dom",
-			"es2017"
-		],
-		"strict": false
-	},
-	"include": [
-		"src/index.ts"
-	]
+	}
 }

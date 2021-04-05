@@ -6,7 +6,6 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"build": "echo 'building snap-client-javascript' && rm -rf dist && babel src -d dist",
-		"commit": "cz",
 		"dev": "babel --watch src -d dist",
 		"test": "jest",
 		"test:watch": "jest --watch",

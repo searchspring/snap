@@ -1,8 +1,9 @@
 {
-	"extends": "./tsconfig.json",
+	"extends": "../../tsconfig.cjs.json",
 	"compilerOptions": {
-		"target": "es5",
-		"module": "CommonJS",
-		"outDir": "./dist/cjs"
+		"outDir": "./dist/cjs",
+		"jsx": "react",
+		"jsxFactory": "h",
+		"jsxFragmentFactory": "Fragment"
 	}
 }

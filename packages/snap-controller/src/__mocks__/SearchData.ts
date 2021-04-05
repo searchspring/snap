@@ -1,6 +1,6 @@
 // TODO: possibly move this into the toolbox as other repos also use this same class
 
-import fs from 'fs';
+import * as fs from 'fs';
 
 type Settings = {
 	siteId?: string;
