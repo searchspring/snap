@@ -12,7 +12,10 @@
     "clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
     "storybook": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-components' 'npm run storybook'"
   },
+  "prettier": "@searchspring/prettier",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "husky": "^6.0.0",
+    "@searchspring/prettier": "^1.0.2"
   }
 }

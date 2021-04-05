@@ -5,7 +5,7 @@
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"author": "Searchspring",
-	"license": "ISC",
+	"license": "MIT",
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"commit": "cz",
@@ -18,12 +18,10 @@
 		"version": "standard-version",
 		"postversion": "git push && git push --tags"
 	},
-	"prettier": "@searchspring/prettier",
 	"dependencies": {
 		"seamless-immutable": "^7.1.4"
 	},
 	"devDependencies": {
-		"@searchspring/prettier": "^1.0.2",
 		"@types/jest": "^26.0.14",
 		"@types/seamless-immutable": "^7.1.13",
 		"@typescript-eslint/eslint-plugin": "^4.4.0",
@@ -31,7 +29,6 @@
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^7.11.0",
 		"eslint-config-prettier": "^6.12.0",
-		"husky": "^4.3.0",
 		"jest": "^26.4.2",
 		"lint-staged": "^10.4.0",
 		"prettier": "^2.1.2",
@@ -42,21 +39,5 @@
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
-	],
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.{ts,tsx}": [
-			"eslint",
-			"prettier --write"
-		]
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	}
+	]
 }
