@@ -1,4 +1,9 @@
-export * as filters from '../filters/src/filters';
+export * from './filters/currency';
+export * from './filters/filters';
+export * from './filters/formatNumber';
+export * from './filters/handleize';
+export * from './filters/stripHTML';
+export * from './filters/truncate';
 export * from './DomTargeter/DomTargeter';
 export * from './featureFlags/featureFlags';
 export * from './cookies/cookies';
