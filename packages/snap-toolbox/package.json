@@ -6,15 +6,11 @@
 	"module": "dist/esm/src/index.js",
 	"author": "Searchspring",
 	"license": "MIT",
-	"exports": {
-		".": "./dist/esm/src/index.js",
-		"./filters": "./dist/esm/filters/src/filters.js"
-	},
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"commit": "cz",
 		"dev": "tsc --watch",
-		"format": "prettier --write \"src/**/*.ts\" \"filters/**/*.ts\"",
+		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint '*/**/*.{js,ts,tsx}'",
 		"test": "jest",
 		"test:watch": "jest --watch",
