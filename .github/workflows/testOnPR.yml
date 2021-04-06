@@ -1,8 +1,7 @@
 on:
-  push:
+  pull_request:
     branches:
-      - 'main'
-      - 'npm-lerna'
+      - main
 
 jobs:
   Publish:
@@ -10,11 +9,6 @@ jobs:
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
-
-      # - name: Publish README.md to ZenDesk
-      #   run: |
-      #     curl https://searchspring.zendesk.com/api/v2/help_center/articles/360059001311/translations/en-us.json \
-      #     -d "`npx showdown makehtml -i README.md | jq -Rs '{"translation": {"title": "Snap Quickstart", "body": . }}'`" \
 
       - name: Set Github Credentials
         run: |
@@ -48,8 +42,3 @@ jobs:
 
       - name: Tests
         run: npm run test
-
-      - name: Publish changed package(s) to Github using lerna
-        run: npm run publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
