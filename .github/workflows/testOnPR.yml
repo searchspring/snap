@@ -40,5 +40,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
+      - name: Build
+        run: npm run build
+
       - name: Tests
         run: npm run test
