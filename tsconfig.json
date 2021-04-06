@@ -14,11 +14,15 @@
 		"strict": false
 	},
 	"exclude": [
-		"**/node_modules/**",
-		"**/coverage/**",
+		"**/node_modules/*",
+		"**/coverage/*",
+		"**/dist/**",
 		"**/*.spec.ts",
+		"**/*.spec.tsx",
 		"**/*.test.ts",
+		"**/*.test.tsx",
 		"**/__tests__/*",
+		"**/__mocks__/*",
 		"**/test/*",
 	]
 }

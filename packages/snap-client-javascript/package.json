@@ -1,11 +1,11 @@
 {
 	"name": "@searchspring/snap-client-javascript",
 	"version": "1.0.6",
-	"description": "SNAP Javascript Client",
+	"description": "Snap Javascript Client",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "echo 'building snap-client-javascript' && rm -rf dist && babel src -d dist",
+		"build": "rm -rf dist && babel src -d dist",
 		"dev": "babel --watch src -d dist",
 		"test": "jest",
 		"test:watch": "jest --watch",
