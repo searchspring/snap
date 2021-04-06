@@ -3,6 +3,9 @@
 	"version": "1.0.1",
 	"description": "",
 	"main": "index.js",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
 	"scripts": {
 		"analyze": "webpack --config --analyze",
 		"build": "rm -fr ./dist && webpack --mode=production",

@@ -6,16 +6,16 @@
 	"module": "dist/esm/index.js",
 	"author": "Searchspring",
 	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"dev": "tsc --watch",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint '*/**/*.{js,ts,tsx}'",
 		"test": "jest --passWithNoTests",
-		"test:watch": "jest --watch",
-		"preversion": "npm run lint && npm test && npm run build",
-		"version": "standard-version",
-		"postversion": "git push && git push --tags"
+		"test:watch": "jest --watch"
 	},
 	"sideEffects": false,
 	"files": [

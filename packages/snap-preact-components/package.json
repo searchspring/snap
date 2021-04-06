@@ -6,6 +6,9 @@
 	"license": "ISC",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
 	"files": [
 		"dist",
 		"README.md"
@@ -18,9 +21,6 @@
 		"storybook": "start-storybook -p 6006",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"preversion": "npm run lint && npm test && npm run build",
-		"version": "standard-version -a",
-		"postversion": "git push && git push --tags",
 		"storybook:build": "build-storybook -o ./docs"
 	},
 	"dependencies": {
