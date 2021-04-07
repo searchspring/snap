@@ -1,5 +1,5 @@
 import { UrlManager } from './UrlManager/UrlManager';
-import { QueryStringTranslator, HybridTranslator, NoopTranslator } from './translators';
+import { QueryStringTranslator, HybridTranslator } from './translators';
 import { UrlState, UrlTranslator } from './types';
 
 let url = '';
@@ -349,6 +349,68 @@ describe('UrlManager Integration Tests', () => {
 			const removeSorts = setNewSort.remove('sort');
 			expect(removeSorts.state).toStrictEqual({});
 			expect(removeSorts.href).toBe('#/');
+		});
+
+		it('supports customization of parameters', () => {
+			const config = {
+				queryParameter: 'search',
+				urlRoot: 'https://www.website.com/search.html',
+				parameters: {
+					hash: ['store'],
+					search: ['view'],
+				},
+			};
+			const hybrid = new UrlManager(new MockHybridTranslator(config));
+
+			const hashAndQuery = hybrid.set({
+				query: 'the query',
+				sort: { field: 'price', direction: 'asc' },
+				store: ['products'],
+				view: ['search'],
+			});
+
+			expect(hashAndQuery.href).toBe(config.urlRoot + '?search=the%20query&view=search#/sort:price:asc/store:products');
+
+			const hashAndQueryModifications = hashAndQuery.merge('store', 'articles').set('view', 'spring');
+
+			expect(hashAndQueryModifications.href).toBe(config.urlRoot + '?search=the%20query&view=spring#/sort:price:asc/store:products/store:articles');
+		});
+
+		it('supports existing hash and query params and remembers which they are', () => {
+			url = 'https://somesite.com/search?view=spring&finder=wheels#/size:front:225/size:back:230';
+			const existingParams = new UrlManager(new MockHybridTranslator());
+			const params = {
+				view: ['spring'],
+				finder: ['wheels'],
+				size: {
+					front: ['225'],
+					back: ['230'],
+				},
+			};
+
+			expect(existingParams.state).toStrictEqual(params);
+
+			const removeAll = existingParams.reset();
+			expect(removeAll.state).toStrictEqual({});
+
+			const addParamsBack = removeAll.set(params);
+			expect(addParamsBack.state).toStrictEqual(params);
+			expect(addParamsBack.href).toBe('?view=spring&finder=wheels#/size:front:225/size:back:230');
+		});
+
+		it('implicitly sets unknown params as hash', () => {
+			url = 'https://somesite.com/';
+			const emptyState = new UrlManager(new MockHybridTranslator());
+
+			expect(emptyState.state).toStrictEqual({});
+
+			const unknownParams = emptyState.merge('view', 'search');
+			expect(unknownParams.state).toStrictEqual({ view: 'search' });
+			expect(unknownParams.href).toBe('#/view:search');
+
+			const moreUnknownParams = unknownParams.merge('view', 'spring');
+			expect(moreUnknownParams.state).toStrictEqual({ view: ['search', 'spring'] });
+			expect(moreUnknownParams.href).toBe('#/view:search/view:spring');
 		});
 	});
 });

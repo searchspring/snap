@@ -261,10 +261,12 @@ describe('UrlManager', () => {
 
 			const urlManager = new UrlManager(new MockTranslator());
 
-			expect(urlManager.set('foo.bar', { newValue: 1 }).state).toEqual({
+			expect(urlManager.set('foo.bar.baz', { newValue: 1 }).state).toEqual({
 				foo: {
 					bar: {
-						newValue: 1,
+						baz: {
+							newValue: 1,
+						},
 					},
 				},
 				extraUrlParam: 7,

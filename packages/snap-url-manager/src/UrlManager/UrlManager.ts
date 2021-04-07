@@ -149,32 +149,12 @@ export class UrlManager {
 		return { path, state };
 	}
 
-	private getPathsFromObj(...args: Array<unknown>): Array<Array<string>> {
-		const { path, state } = this.unpackPathAndState(args[0], args[1]);
-
-		if (!path.length) {
-			return Object.keys(state).map((k) => [k]);
-		}
-
-		return Object.keys(state).reduce((acc: Array<Array<string>>, key: string): Array<Array<string>> => {
-			const value: unknown = state[key];
-
-			if (value instanceof Array) {
-				return [...acc, path.concat([key])];
-			} else if (typeof value == 'object') {
-				return [...acc, ...this.getPathsFromObj(path.concat(key), value)];
-			}
-
-			return [...acc, path.concat([key])];
-		}, []);
-	}
-
 	set(...args: Array<unknown>): UrlManager {
 		const { path, state } = this.unpackPathAndState(args[0], args[1]);
 
 		const newState = path.length ? this.localState.setIn(path, removeArrayDuplicates(state)) : removeArrayDuplicates(state);
 		const omissions = removeArrayDuplicates(
-			this.omissions.concat(path.length ? { path } : this.getPathsFromObj(this.urlState).map((path) => ({ path })))
+			this.omissions.concat(path.length ? { path } : Object.keys(this.urlState).map((key) => ({ path: [key] })))
 		);
 
 		return new UrlManager(this.translator, this.linker, newState, this.watcherPool, omissions, this.detached);
@@ -241,10 +221,6 @@ export class UrlManager {
 			this.omissions,
 			this.detached
 		);
-	}
-
-	getOmissions(): Array<omission> {
-		return this.omissions;
 	}
 
 	getTranslatorConfig(): Record<string, unknown> {
