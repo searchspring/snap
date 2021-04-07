@@ -102,7 +102,6 @@ describe('Finder Controller', () => {
         expect(controller.store.selections[0].selected).toBe(valueToSelect)
     });
 
-    // TODO: beforeStore is missing from Controller
     const events = ['beforeSearch', 'afterSearch', 'afterStore']
     events.forEach(event => {
         it(`tests ${event} middleware err handled`, async () => {

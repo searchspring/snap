@@ -150,7 +150,6 @@ describe('Search Controller', () => {
         expect(controller.store.results.length).toBeGreaterThan(0)
     });
 
-    // TODO: beforeStore is missing from Controller
     const events = ['beforeSearch', 'afterSearch', 'afterStore']
     events.forEach(event => {
         it(`tests ${event} middleware err handled`, async function() {
