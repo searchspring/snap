@@ -1,136 +1,254 @@
 import { HybridTranslator } from './HybridTranslator';
+import { UrlState } from '../../types';
 
-describe('translator:Hybrid', () => {
-	it('deserializes query strings correctly', () => {
-		const url = 'http://somesite.com?page=2&q=foo#/filter:color:blue/filter:color:green$2520striped/filter:brand:nike';
+describe('HybridTranslator', () => {
+	it('generates relative URL by default', () => {
+		const url = 'http://example.com?bar=baz';
+		const queryString = new HybridTranslator();
 
-		const hybrid = new HybridTranslator();
-
-		const params: any = hybrid.deserialize(url);
-
-		expect(params.filter).toEqual({
-			color: ['blue', 'green striped'],
-			brand: ['nike'],
-		});
-
-		expect(params.page).toBe(2);
-
-		expect(params.query).toBe('foo');
-
-		const emptyParams: any = hybrid.deserialize('');
-
-		expect(emptyParams).toEqual({});
-	});
-
-	it('de/serializes with other queryParams', () => {
-		const hybrid = new HybridTranslator({
-			queryParameter: 'search',
-		});
-
-		const url = 'http://somesite.com?other.thing=3';
-
-		const params: any = hybrid.deserialize(url);
-
-		expect(params.other.thing).toEqual(['3']);
-
-		expect(hybrid.serialize(params)).toBe('?other.thing=3');
-	});
-
-	it('de/serializes with other hashParams', () => {
-		const hybrid = new HybridTranslator({
-			queryParameter: 'search',
-		});
-
-		const url = 'http://somesite.com#/other:thing:3/thing';
-
-		const params: any = hybrid.deserialize(url);
-
-		expect(params.other.thing).toEqual(['3']);
-		expect(params.thing).toEqual([]);
-
-		expect(hybrid.serialize(params)).toBe('#/other:thing:3/thing');
-	});
-
-	it('de/serializes with other no queryParams or hashParams', () => {
-		const hybrid = new HybridTranslator({
-			queryParameter: 'search',
-		});
-
-		const url = 'http://somesite.com/search.html';
-
-		const params: any = hybrid.deserialize(url);
-
-		expect(params).toEqual({});
-
-		expect(hybrid.serialize(params)).toBe('#/');
-	});
-
-	it('deserializes with query param override', () => {
-		const hybrid = new HybridTranslator({
-			queryParameter: 'search',
-		});
-
-		const url = 'http://somesite.com?q=incorrect&search=correct&q=alsoincorrect#/filter:color:blue/filter:brand:nike/filter:brand:adidas';
-
-		const params: any = hybrid.deserialize(url);
-
-		expect(params.query).toBe('correct');
-
-		expect(params.filter.color).toEqual(['blue']);
-		expect(params.filter.brand).toEqual(['nike', 'adidas']);
-	});
-
-	it('serializes query strings correctly', () => {
 		const params = {
-			filter: {
-				color: ['red', 'orange'],
-				brand: ['adidas'],
-			},
-			page: 7,
-			query: 'shoes',
+			...queryString.deserialize(url),
+			foo: ['bar'],
 		};
 
-		const hybrid = new HybridTranslator();
+		expect(queryString.serialize(params)).toBe('?bar=baz#/foo:bar');
 
-		const query = hybrid.serialize(params);
-
-		expect(query).toBe('?page=7&q=shoes#/filter:color:red/filter:color:orange/filter:brand:adidas');
+		expect(queryString.serialize({})).toBe('#/');
 	});
 
-	it('serializes with query param override', () => {
+	it('generates absolute URL if urlRoot provided', () => {
+		const url = 'http://example.com?bar=baz';
+		class CustomHybrid extends HybridTranslator {
+			getCurrentUrl() {
+				return url;
+			}
+		}
+
+		const queryString = new CustomHybrid({ urlRoot: '//example2.com' });
+
 		const params = {
-			query: 'the query',
+			...queryString.deserialize(url),
+			foo: 'bar',
 		};
 
-		const hybrid = new HybridTranslator({
-			queryParameter: 'search',
+		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz#/foo:bar');
+
+		expect(queryString.serialize({})).toBe('//example2.com');
+	});
+
+	describe('deserialize', () => {
+		it('deserializes empty string correctly', () => {
+			const queryString = new HybridTranslator();
+			const emptyParams: UrlState = queryString.deserialize('');
+
+			expect(emptyParams).toEqual({});
 		});
 
-		const query = hybrid.serialize(params);
+		it('deserializes with query param override', () => {
+			const hybrid = new HybridTranslator({
+				queryParameter: 'search',
+			});
 
-		expect(query).toBe('?search=the%20query');
+			const url = 'http://somesite.com?q=incorrect&search=correct&q=alsoincorrect#/filter:color:blue/filter:brand:nike/filter:brand:adidas';
+
+			const params: UrlState = hybrid.deserialize(url);
+
+			expect(params.query).toBe('correct');
+
+			expect(params.filter.color).toEqual(['blue']);
+			expect(params.filter.brand).toEqual(['nike', 'adidas']);
+		});
+
+		it('deserializes core state correctly', () => {
+			const url = 'http://somesite.com?q=foo&page=2#/filter:brand:nike/filter:color:blue/filter:color:green%20striped/sort:price:asc';
+			const queryString = new HybridTranslator();
+			const params: UrlState = queryString.deserialize(url);
+
+			expect(params.query).toBe('foo');
+
+			expect(params.page).toBe(2);
+
+			expect(params.filter).toEqual({
+				color: ['blue', 'green striped'],
+				brand: ['nike'],
+			});
+
+			expect(params.sort).toEqual([
+				{
+					field: 'price',
+					direction: 'asc',
+				},
+			]);
+		});
+
+		it('deserializes range filters correctly', () => {
+			const url =
+				'http://somesite.com#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*';
+			const queryString = new HybridTranslator();
+			const params: UrlState = queryString.deserialize(url);
+
+			expect(params.filter).toEqual({
+				price: [
+					{ low: null, high: 10 },
+					{ low: 10, high: 100 },
+					{ low: 100, high: null },
+				],
+			});
+
+			expect(params.page).toBe(undefined);
+
+			expect(params.query).toBe(undefined);
+		});
+
+		it('deserializes with invalid range filters correctly', () => {
+			const url = 'http://somesite.com#/filter:price:low:nope/filter:price:high:nah/filter:price:low:100/filter:stuff:high:100';
+			const queryString = new HybridTranslator();
+			const params: UrlState = queryString.deserialize(url);
+
+			expect(params.filter).toEqual({
+				price: [{ low: null, high: null }],
+			});
+
+			expect(params.page).toBe(undefined);
+
+			expect(params.query).toBe(undefined);
+		});
+
+		it('deserializes with other hashParams', () => {
+			const hybrid = new HybridTranslator({
+				queryParameter: 'search',
+			});
+
+			const url = 'http://somesite.com#/other:thing:3/thing';
+
+			const params: UrlState = hybrid.deserialize(url);
+
+			expect(params.other).toEqual({ thing: ['3'] });
+			expect(params.thing).toEqual([]);
+		});
 	});
 
-	it('has urlRoot', () => {
-		const params = {
-			query: 'the query',
-			sort: { field: 'price', direction: 'asc' },
-			ga: ['googs'],
-			googs: ['ga'],
-		};
+	describe('serialize', () => {
+		it('serializes empty params correctly', () => {
+			const queryString = new HybridTranslator();
+			const params: UrlState = {};
+			const query = queryString.serialize(params);
 
-		const config = {
-			queryParameter: 'search',
-			urlRoot: 'https://www.website.com/search.html',
-			parameters: {
-				hash: ['ga'],
-				search: ['googs'],
-			},
-		};
-		const hybrid = new HybridTranslator(config);
+			expect(query).toBe('#/');
+		});
 
-		const query = hybrid.serialize(params);
+		it('serializes with query param override', () => {
+			const hybrid = new HybridTranslator({
+				queryParameter: 'search',
+			});
 
-		expect(query).toBe(config.urlRoot + '?search=the%20query&googs=ga#/sort:price:asc/ga:googs');
+			const query = hybrid.serialize({
+				query: 'the query',
+			});
+
+			expect(query).toBe('?search=the%20query');
+		});
+
+		it('serializes core state correctly', () => {
+			const params = {
+				filter: {
+					color: ['red', 'orange'],
+					brand: ['adidas'],
+					price: [{ low: 99.99, high: 299.99 }],
+				},
+				page: 7,
+				query: 'shoes',
+				sort: [
+					{
+						field: 'name',
+						direction: 'desc',
+					},
+				],
+			};
+
+			const hybrid = new HybridTranslator();
+
+			const query = hybrid.serialize(params);
+
+			expect(query).toBe(
+				'?q=shoes&page=7#/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:low:99.99/filter:price:high:299.99/sort:name:desc'
+			);
+		});
+
+		it('serializes other state correctly (as hash params)', () => {
+			const hybrid = new HybridTranslator({
+				queryParameter: 'search',
+			});
+
+			const params: UrlState = {
+				roots: {
+					trunk: {
+						branch: {
+							leaf: ['thing'],
+						},
+					},
+				},
+				array: ['uno', 'dos', 'tres'],
+			};
+
+			expect(hybrid.serialize(params)).toBe('#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
+		});
+
+		it('serializes range filters correctly', () => {
+			const queryString = new HybridTranslator();
+
+			const params: UrlState = {
+				filter: {
+					price: [
+						{ low: null, high: 10 },
+						{ low: 10, high: 100 },
+						{ low: 100, high: null },
+					],
+				},
+			};
+
+			const query = queryString.serialize(params);
+
+			expect(query).toBe(
+				'#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*'
+			);
+		});
+
+		it('serializes with invalid range filters correctly', () => {
+			const queryString = new HybridTranslator();
+
+			const params = {
+				filter: {
+					price: [{ low: null }, { low: 10, high: 100 }, { high: 100 }],
+				},
+			};
+
+			const query = queryString.serialize(params as UrlState);
+
+			expect(query).toBe('#/filter:price:low:10/filter:price:high:100');
+		});
+	});
+
+	describe('custom parameters', () => {
+		it('supports customization of parameters', () => {
+			const config = {
+				queryParameter: 'search',
+				urlRoot: 'https://www.website.com/search.html',
+				parameters: {
+					hash: ['ga'],
+					search: ['googs'],
+				},
+			};
+			const hybrid = new HybridTranslator(config);
+
+			const query = hybrid.serialize({
+				query: 'the query',
+				sort: { field: 'price', direction: 'asc' },
+				ga: ['googs'],
+				googs: ['ga'],
+			});
+
+			expect(query).toBe(config.urlRoot + '?search=the%20query&googs=ga#/sort:price:asc/ga:googs');
+		});
 	});
 });

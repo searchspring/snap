@@ -8,7 +8,7 @@ describe('QueryStringTranslator', () => {
 
 		const params = {
 			...queryString.deserialize(url),
-			foo: 'bar',
+			foo: ['bar'],
 		};
 
 		expect(queryString.serialize(params)).toBe('?bar=baz&foo=bar');
@@ -85,7 +85,8 @@ describe('QueryStringTranslator', () => {
 		});
 
 		it('deserializes query strings with range filters correctly', () => {
-			const url = 'http://somesite.com?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100';
+			const url =
+				'http://somesite.com?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=100&filter.price.low=100&filter.price.high=*';
 			const queryString = new QueryStringTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
@@ -93,6 +94,7 @@ describe('QueryStringTranslator', () => {
 				price: [
 					{ low: null, high: 10 },
 					{ low: 10, high: 100 },
+					{ low: 100, high: null },
 				],
 			});
 
@@ -113,32 +115,6 @@ describe('QueryStringTranslator', () => {
 			expect(params.page).toBe(undefined);
 
 			expect(params.query).toBe(undefined);
-		});
-
-		it('deserializes core query strings correctly', () => {
-			const url = 'http://somesite.com?sort.price=asc&sort.price=desc&filter.color=blue&filter.color=green%20striped&page=2&q=foo&filter.brand=nike';
-			const queryString = new QueryStringTranslator();
-			const params: UrlState = queryString.deserialize(url);
-
-			expect(params.query).toBe('foo');
-
-			expect(params.page).toBe(2);
-
-			expect(params.filter).toEqual({
-				color: ['blue', 'green striped'],
-				brand: ['nike'],
-			});
-
-			expect(params.sort).toEqual([
-				{
-					field: 'price',
-					direction: 'asc',
-				},
-				{
-					field: 'price',
-					direction: 'desc',
-				},
-			]);
 		});
 
 		it('deserializes other query strings correctly', () => {
@@ -182,6 +158,32 @@ describe('QueryStringTranslator', () => {
 			expect(query).toBe('?search=the%20query');
 		});
 
+		it('serializes core state correctly', () => {
+			const queryString = new QueryStringTranslator();
+
+			const params: UrlState = {
+				filter: {
+					color: ['red', 'orange'],
+					brand: ['adidas'],
+					price: [{ low: 99.99, high: 299.99 }],
+				},
+				page: 7,
+				query: 'shoes',
+				sort: [
+					{
+						field: 'name',
+						direction: 'desc',
+					},
+				],
+			};
+
+			const query = queryString.serialize(params);
+
+			expect(query).toBe(
+				'?q=shoes&page=7&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
+			);
+		});
+
 		it('serializes other state correctly', () => {
 			const queryString = new QueryStringTranslator();
 
@@ -201,7 +203,7 @@ describe('QueryStringTranslator', () => {
 			expect(query).toBe('?roots.trunk.branch.leaf=thing&array=uno&array=dos&array=tres');
 		});
 
-		it('serializes with range filters correctly', () => {
+		it('serializes range filters correctly', () => {
 			const queryString = new QueryStringTranslator();
 
 			const params: UrlState = {
@@ -233,32 +235,6 @@ describe('QueryStringTranslator', () => {
 			const query = queryString.serialize(params as UrlState);
 
 			expect(query).toBe('?filter.price.low=10&filter.price.high=100');
-		});
-
-		it('serializes core state correctly', () => {
-			const queryString = new QueryStringTranslator();
-
-			const params: UrlState = {
-				filter: {
-					color: ['red', 'orange'],
-					brand: ['adidas'],
-					price: [{ low: 99.99, high: 299.99 }],
-				},
-				page: 7,
-				query: 'shoes',
-				sort: [
-					{
-						field: 'name',
-						direction: 'desc',
-					},
-				],
-			};
-
-			const query = queryString.serialize(params);
-
-			expect(query).toBe(
-				'?q=shoes&page=7&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc'
-			);
 		});
 	});
 });

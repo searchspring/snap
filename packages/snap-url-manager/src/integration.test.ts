@@ -46,15 +46,17 @@ describe('UrlManager Integration Tests', () => {
 			});
 
 			url = 'https://somesite.com';
-
 			const emptyUrlManager = new UrlManager(new MockQueryStringTranslator());
-
 			expect(emptyUrlManager.state).toStrictEqual({});
+
+			url = 'https://somesite.com?q=testing+with+plus+signs';
+			const queryWithSpaces = new UrlManager(new MockQueryStringTranslator());
+			expect(queryWithSpaces.state).toStrictEqual({ query: 'testing with plus signs' });
+			expect(queryWithSpaces.href).toBe('?q=testing%20with%20plus%20signs');
 		});
 
 		it('can overwrite state that it started with', () => {
 			url = 'https://somesite.com?q=test&page=3&filter.color=red&filter.price.low=*&filter.price.high=5&other=thing&page=3&sort.name=desc';
-
 			const urlManager = new UrlManager(new MockQueryStringTranslator());
 
 			expect(urlManager.state).toStrictEqual({
@@ -67,10 +69,286 @@ describe('UrlManager Integration Tests', () => {
 				sort: [{ field: 'name', direction: 'desc' }],
 				other: ['thing'],
 			});
+			expect(urlManager.href).toBe('?q=test&page=3&filter.color=red&filter.price.low=*&filter.price.high=5&sort.name=desc&other=thing');
+
+			const overwrite = urlManager
+				.set('query', 'overwritten')
+				.set('page', 7)
+				.set('filter', { color: 'blue' })
+				.remove('other')
+				.set('sort', { field: 'price', direction: 'desc' });
+
+			expect(overwrite.state).toStrictEqual({
+				query: 'overwritten',
+				filter: { color: 'blue' },
+				page: 7,
+				sort: { field: 'price', direction: 'desc' },
+			});
+			expect(overwrite.href).toBe('?q=overwritten&page=7&filter.color=blue&sort.price=desc');
+		});
+
+		it('can be given a root URL and queryParameter via config', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(new MockQueryStringTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
+			expect(urlManager.href).toBe('https://somesite.com/search');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
+		});
+
+		it('supports typical value filter usage', () => {
+			const colorFilter = new UrlManager(new MockQueryStringTranslator()).set('filter.color', 'red');
+			expect(colorFilter.href).toBe('?filter.color=red');
+
+			const colorFilterMergeSame = colorFilter.merge('filter.color', 'red');
+			expect(colorFilterMergeSame.href).toBe('?filter.color=red');
+
+			const colorFilterMergeAnother = colorFilter.merge('filter.color', 'blue');
+			expect(colorFilterMergeAnother.href).toBe('?filter.color=red&filter.color=blue');
+
+			const colorFilterMergeArray = colorFilterMergeAnother.merge('filter.color', ['red', 'blue', 'green']);
+			expect(colorFilterMergeArray.href).toBe('?filter.color=red&filter.color=blue&filter.color=green');
+
+			const colorFilterRemoveArray = colorFilterMergeArray.remove('filter.color', ['red', 'green']);
+			expect(colorFilterRemoveArray.href).toBe('?filter.color=blue');
+
+			const colorFilterRemoveAll = colorFilterMergeArray.remove('filter.color');
+			expect(colorFilterRemoveAll.href).toBe('?');
+
+			const mergeSizeWithColor = colorFilterRemoveAll.merge('filter.color', ['red', 'blue', 'green']).merge('filter', { size: [0, 1, 2] });
+			expect(mergeSizeWithColor.href).toBe('?filter.color=red&filter.color=blue&filter.color=green&filter.size=0&filter.size=1&filter.size=2');
+
+			const resetColorFilterWithSize = mergeSizeWithColor.set('filter.color', 'red');
+			expect(resetColorFilterWithSize.href).toBe('?filter.color=red&filter.size=0&filter.size=1&filter.size=2');
+
+			const resetColorFilter = resetColorFilterWithSize.set('filter', { color: 'red' });
+			expect(resetColorFilter.href).toBe('?filter.color=red');
+		});
+
+		it('supports typical range filter usage', () => {
+			const objectType = new UrlManager(new MockQueryStringTranslator()).set('filter.price', { low: 0, high: 10 });
+			expect(objectType.state).toStrictEqual({ filter: { price: { low: 0, high: 10 } } });
+			expect(objectType.href).toBe('?filter.price.low=0&filter.price.high=10');
+
+			const arrayOfObjects = new UrlManager(new MockQueryStringTranslator()).set('filter.price', [
+				{ low: null, high: 10 },
+				{ low: 10, high: 20 },
+				{ low: 20, high: null },
+			]);
+			expect(arrayOfObjects.state).toStrictEqual({
+				filter: {
+					price: [
+						{ low: null, high: 10 },
+						{ low: 10, high: 20 },
+						{ low: 20, high: null },
+					],
+				},
+			});
+			expect(arrayOfObjects.href).toBe(
+				'?filter.price.low=*&filter.price.high=10&filter.price.low=10&filter.price.high=20&filter.price.low=20&filter.price.high=*'
+			);
+			const arrayOfObjectsModified = arrayOfObjects.remove('filter.price', { low: 10, high: 20 });
+			expect(arrayOfObjectsModified.href).toBe('?filter.price.low=*&filter.price.high=10&filter.price.low=20&filter.price.high=*');
+
+			const objectArrayType = new UrlManager(new MockQueryStringTranslator()).set('filter.boolean', [true, false]);
+			expect(objectArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
+		});
+
+		it('supports typical sort usage', () => {
+			const singleSort = new UrlManager(new MockQueryStringTranslator()).set('sort', { field: 'price', direction: 'asc' });
+			expect(singleSort.state).toStrictEqual({
+				sort: { field: 'price', direction: 'asc' },
+			});
+			expect(singleSort.href).toBe('?sort.price=asc');
+
+			const singleSortOverwrite = singleSort.merge('sort', { field: 'name', direction: 'desc' });
+			expect(singleSortOverwrite.state).toStrictEqual({
+				sort: { field: 'name', direction: 'desc' },
+			});
+			expect(singleSortOverwrite.href).toBe('?sort.name=desc');
+
+			const multipleSorts = singleSort.merge('sort', [{ field: 'name', direction: 'desc' }]);
+			expect(multipleSorts.state).toStrictEqual({
+				sort: [
+					{ field: 'price', direction: 'asc' },
+					{ field: 'name', direction: 'desc' },
+				],
+			});
+			expect(multipleSorts.href).toBe('?sort.price=asc&sort.name=desc');
+
+			const setNewSort = multipleSorts.set('sort', [{ field: 'relevance', direction: 'desc' }]);
+			expect(setNewSort.state).toStrictEqual({
+				sort: [{ field: 'relevance', direction: 'desc' }],
+			});
+			expect(setNewSort.href).toBe('?sort.relevance=desc');
+
+			const removeSorts = setNewSort.remove('sort');
+			expect(removeSorts.state).toStrictEqual({});
+			expect(removeSorts.href).toBe('?');
 		});
 	});
 
-	// describe('Hybrid Translator', () => {
-	// 	it('generates the expected URL', () => {});
-	// });
+	describe('Hybrid Translator', () => {
+		it('starts with expected state from URL', () => {
+			url =
+				'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/other:thing/page:3/sort:name:desc/hashstuffs';
+
+			const fullUrlManager = new UrlManager(new MockHybridTranslator());
+
+			expect(fullUrlManager.state).toStrictEqual({
+				query: 'test',
+				page: 3,
+				filter: {
+					color: ['red'],
+					price: [{ low: null, high: 5 }],
+				},
+				sort: [{ field: 'name', direction: 'desc' }],
+				other: ['thing'],
+				hashstuffs: [],
+			});
+
+			url = 'https://somesite.com';
+			const emptyUrlManager = new UrlManager(new MockHybridTranslator());
+			expect(emptyUrlManager.state).toStrictEqual({});
+
+			url = 'https://somesite.com?q=testing+with+plus+signs';
+			const queryWithSpaces = new UrlManager(new MockHybridTranslator());
+			expect(queryWithSpaces.state).toStrictEqual({ query: 'testing with plus signs' });
+			expect(queryWithSpaces.href).toBe('?q=testing%20with%20plus%20signs');
+		});
+
+		it('can overwrite state that it started with', () => {
+			url = 'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/page:3/sort:name:desc/other:thing';
+			const urlManager = new UrlManager(new MockHybridTranslator());
+
+			expect(urlManager.state).toStrictEqual({
+				query: 'test',
+				page: 3,
+				filter: {
+					color: ['red'],
+					price: [{ low: null, high: 5 }],
+				},
+				sort: [{ field: 'name', direction: 'desc' }],
+				other: ['thing'],
+			});
+			expect(urlManager.href).toBe('?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/sort:name:desc/other:thing');
+
+			const overwrite = urlManager
+				.set('query', 'overwritten')
+				.set('page', 7)
+				.set('filter', { color: 'blue' })
+				.remove('other')
+				.set('sort', { field: 'price', direction: 'desc' });
+
+			expect(overwrite.state).toStrictEqual({
+				query: 'overwritten',
+				filter: { color: 'blue' },
+				page: 7,
+				sort: { field: 'price', direction: 'desc' },
+			});
+			expect(overwrite.href).toBe('?q=overwritten&page=7#/filter:color:blue/sort:price:desc');
+		});
+
+		it('can be given a root URL and queryParameter via config', () => {
+			url = 'https://somesite.com';
+
+			const urlManager = new UrlManager(new MockHybridTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
+			expect(urlManager.href).toBe('https://somesite.com/search');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
+		});
+
+		it('supports typical value filter usage', () => {
+			const colorFilter = new UrlManager(new MockHybridTranslator()).set('filter.color', 'red');
+			expect(colorFilter.href).toBe('#/filter:color:red');
+
+			const colorFilterMergeSame = colorFilter.merge('filter.color', 'red');
+			expect(colorFilterMergeSame.href).toBe('#/filter:color:red');
+
+			const colorFilterMergeAnother = colorFilter.merge('filter.color', 'blue');
+			expect(colorFilterMergeAnother.href).toBe('#/filter:color:red/filter:color:blue');
+
+			const colorFilterMergeArray = colorFilterMergeAnother.merge('filter.color', ['red', 'blue', 'green']);
+			expect(colorFilterMergeArray.href).toBe('#/filter:color:red/filter:color:blue/filter:color:green');
+
+			const colorFilterRemoveArray = colorFilterMergeArray.remove('filter.color', ['red', 'green']);
+			expect(colorFilterRemoveArray.href).toBe('#/filter:color:blue');
+
+			const colorFilterRemoveAll = colorFilterMergeArray.remove('filter.color');
+			expect(colorFilterRemoveAll.href).toBe('#/');
+
+			const mergeSizeWithColor = colorFilterRemoveAll.merge('filter.color', ['red', 'blue', 'green']).merge('filter', { size: [0, 1, 2] });
+			expect(mergeSizeWithColor.href).toBe('#/filter:color:red/filter:color:blue/filter:color:green/filter:size:0/filter:size:1/filter:size:2');
+
+			const resetColorFilterWithSize = mergeSizeWithColor.set('filter.color', 'red');
+			expect(resetColorFilterWithSize.href).toBe('#/filter:color:red/filter:size:0/filter:size:1/filter:size:2');
+
+			const resetColorFilter = resetColorFilterWithSize.set('filter', { color: 'red' });
+			expect(resetColorFilter.href).toBe('#/filter:color:red');
+		});
+
+		it('supports typical range filter usage', () => {
+			const objectType = new UrlManager(new MockHybridTranslator()).set('filter.price', { low: 0, high: 10 });
+			expect(objectType.state).toStrictEqual({ filter: { price: { low: 0, high: 10 } } });
+			expect(objectType.href).toBe('#/filter:price:low:0/filter:price:high:10');
+
+			const arrayOfObjects = new UrlManager(new MockHybridTranslator()).set('filter.price', [
+				{ low: null, high: 10 },
+				{ low: 10, high: 20 },
+				{ low: 20, high: null },
+			]);
+			expect(arrayOfObjects.state).toStrictEqual({
+				filter: {
+					price: [
+						{ low: null, high: 10 },
+						{ low: 10, high: 20 },
+						{ low: 20, high: null },
+					],
+				},
+			});
+			expect(arrayOfObjects.href).toBe(
+				'#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:20/filter:price:low:20/filter:price:high:*'
+			);
+			const arrayOfObjectsModified = arrayOfObjects.remove('filter.price', { low: 10, high: 20 });
+			expect(arrayOfObjectsModified.href).toBe('#/filter:price:low:*/filter:price:high:10/filter:price:low:20/filter:price:high:*');
+
+			const objectArrayType = new UrlManager(new MockHybridTranslator()).set('filter.boolean', [true, false]);
+			expect(objectArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
+		});
+
+		it('supports typical sort usage', () => {
+			const singleSort = new UrlManager(new MockHybridTranslator()).set('sort', { field: 'price', direction: 'asc' });
+			expect(singleSort.state).toStrictEqual({
+				sort: { field: 'price', direction: 'asc' },
+			});
+			expect(singleSort.href).toBe('#/sort:price:asc');
+
+			const singleSortOverwrite = singleSort.merge('sort', { field: 'name', direction: 'desc' });
+			expect(singleSortOverwrite.state).toStrictEqual({
+				sort: { field: 'name', direction: 'desc' },
+			});
+			expect(singleSortOverwrite.href).toBe('#/sort:name:desc');
+
+			const multipleSorts = singleSort.merge('sort', [{ field: 'name', direction: 'desc' }]);
+			expect(multipleSorts.state).toStrictEqual({
+				sort: [
+					{ field: 'price', direction: 'asc' },
+					{ field: 'name', direction: 'desc' },
+				],
+			});
+			expect(multipleSorts.href).toBe('#/sort:price:asc/sort:name:desc');
+
+			const setNewSort = multipleSorts.set('sort', [{ field: 'relevance', direction: 'desc' }]);
+			expect(setNewSort.state).toStrictEqual({
+				sort: [{ field: 'relevance', direction: 'desc' }],
+			});
+			expect(setNewSort.href).toBe('#/sort:relevance:desc');
+
+			const removeSorts = setNewSort.remove('sort');
+			expect(removeSorts.state).toStrictEqual({});
+			expect(removeSorts.href).toBe('#/');
+		});
+	});
 });

@@ -13,7 +13,7 @@ export type UrlStateRangeValue = {
 export type UrlStateFilterType = string | number | boolean | UrlStateRangeValue;
 
 export type UrlStateFilter = {
-	[fieldName: string]: Array<UrlStateFilterType>;
+	[fieldName: string]: UrlStateFilterType | Array<UrlStateFilterType>;
 };
 
 export type UrlStateSort = {
