@@ -261,10 +261,12 @@ describe('UrlManager', () => {
 
 			const urlManager = new UrlManager(new MockTranslator());
 
-			expect(urlManager.set('foo.bar', { newValue: 1 }).state).toEqual({
+			expect(urlManager.set('foo.bar.baz', { newValue: 1 }).state).toEqual({
 				foo: {
 					bar: {
-						newValue: 1,
+						baz: {
+							newValue: 1,
+						},
 					},
 				},
 				extraUrlParam: 7,
@@ -336,35 +338,38 @@ describe('UrlManager', () => {
 				},
 			});
 		});
-	});
 
-	describe('merge transform', () => {
-		it('merges from base URL without modifying original', () => {
-			url = '{ "foo": { "bar": ["one", "two" ] }, "arr": [ 0, 1 ] }';
+		it('supports various value types (what you set is what you get)', () => {
+			const booleanType = new UrlManager(new MockTranslator()).set('filter.boolean', true);
+			expect(booleanType.state).toStrictEqual({ filter: { boolean: true } });
 
-			const urlManager = new UrlManager(new MockTranslator());
-			const urlManagerModified = urlManager
-				.merge({ foo: { baz: 2 } })
-				.merge('color', 'red')
-				.merge('arr', [2])
-				.merge('arr', 0);
+			const booleanArrayType = new UrlManager(new MockTranslator()).set('filter.boolean', [true, false]);
+			expect(booleanArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
 
-			expect(urlManager.state).toEqual({ foo: { bar: ['one', 'two'] }, arr: [0, 1] });
-			expect(urlManagerModified.state).toEqual({
-				foo: { bar: ['one', 'two'], baz: 2 },
-				color: 'red',
-				arr: [0, 1, 2, 0],
+			const objectType = new UrlManager(new MockTranslator()).set('filter.object', { low: 0, high: 10 });
+			expect(objectType.state).toStrictEqual({ filter: { object: { low: 0, high: 10 } } });
+
+			const ArrayArrayType = new UrlManager(new MockTranslator()).set('filter.array', [
+				['uno', 'dos', 'uno'],
+				[1, 2],
+			]);
+			expect(ArrayArrayType.state).toStrictEqual({
+				filter: {
+					array: [
+						['uno', 'dos', 'uno'],
+						[1, 2],
+					],
+				},
 			});
 		});
 
-		it('merges multiple', () => {
-			const urlManager = new UrlManager(new MockTranslator());
-
-			const merged = urlManager.merge('color', 'blue').merge('color', 'red');
-
-			expect(merged.state).toEqual({ color: ['blue', 'red'] });
+		it('removes duplicates when set', () => {
+			const duplicateSet = new UrlManager(new MockTranslator()).set('filter.boolean', [true, false, true]);
+			expect(duplicateSet.state).toStrictEqual({ filter: { boolean: [true, false] } });
 		});
+	});
 
+	describe('merge transform', () => {
 		it('can merge with optional path as string or array', () => {
 			const urlManagerBase = new UrlManager(new MockTranslator()).set({
 				key1: { foo: { bar: 1 } },
@@ -384,6 +389,63 @@ describe('UrlManager', () => {
 			expect(modified2.state).toEqual({
 				key1: { foo: { bar: 1 } },
 				key2: ['some', 'array', 'values', 'another value'],
+			});
+		});
+
+		it('merges from base URL without modifying original', () => {
+			url = '{ "foo": { "bar": ["one", "two" ] }, "arr": [ 0, 1 ] }';
+
+			const urlManager = new UrlManager(new MockTranslator());
+			expect(urlManager.state).toEqual({ foo: { bar: ['one', 'two'] }, arr: [0, 1] });
+
+			const urlManagerModified = urlManager
+				.merge({ foo: { baz: 2 } })
+				.merge('color', 'red')
+				.merge('arr', [2])
+				.merge('arr', 0);
+			expect(urlManagerModified.state).toEqual({
+				foo: { bar: ['one', 'two'], baz: 2 },
+				color: 'red',
+				arr: [0, 1, 2],
+			});
+		});
+
+		it('merges single values into array', () => {
+			const urlManager = new UrlManager(new MockTranslator());
+
+			const merged = urlManager.merge('color', 'blue').merge('color', 'red').merge('color', 'blue');
+
+			expect(merged.state).toEqual({ color: ['blue', 'red'] });
+		});
+
+		it('does not merge duplicates', () => {
+			const urlManager = new UrlManager(new MockTranslator());
+
+			const merge = urlManager.merge('filter.color', 'blue');
+
+			expect(merge.state).toEqual({ filter: { color: 'blue' } });
+			const mergeAgain = merge.merge('filter.color', 'blue');
+			expect(mergeAgain.state).toEqual({ filter: { color: 'blue' } });
+			const mergeAgainArray = merge.merge('filter.color', ['blue']);
+			expect(mergeAgainArray.state).toEqual({ filter: { color: 'blue' } });
+			const mergeAgainArrayMultiples = merge.merge('filter.color', ['blue', 'red', 'blue', 'blue']);
+			expect(mergeAgainArrayMultiples.state).toEqual({ filter: { color: ['blue', 'red'] } });
+
+			const mergeObject = urlManager.merge('filter.price', { low: 0, high: 10 });
+			expect(mergeObject.state).toStrictEqual({ filter: { price: { low: 0, high: 10 } } });
+			const mergeObjectWithArray = mergeObject.merge('filter.price', [
+				{ low: 0, high: 10 },
+				{ low: 0, high: 10 },
+				{ low: 10, high: 20 },
+				{ low: 10, high: 20 },
+			]);
+			expect(mergeObjectWithArray.state).toStrictEqual({
+				filter: {
+					price: [
+						{ low: 0, high: 10 },
+						{ low: 10, high: 20 },
+					],
+				},
 			});
 		});
 	});
@@ -482,82 +544,6 @@ describe('UrlManager', () => {
 				v: ['huh'],
 			});
 			expect(arrValRemoved.href).toBe('?key1.foo.bar=one&key1.foo.bar=three&v=huh&some.deeper.value=the_val');
-		});
-	});
-
-	describe('filter behavior', () => {
-		it('expects filters to be arrays and merges them that way', () => {
-			const urlManager = new UrlManager(new MockQueryStringTranslator());
-
-			const mergeAsObject = urlManager.merge({ filter: { color: ['blue', 'green', 'red'] } });
-			expect(mergeAsObject.state).toEqual({ filter: { color: ['blue', 'green', 'red'] } });
-			const remergeAsObject = mergeAsObject.merge({ filter: { color: ['yellow'] } });
-			expect(remergeAsObject.state).toEqual({ filter: { color: ['blue', 'green', 'red', 'yellow'] } });
-			const remergeAsObjectAgain = remergeAsObject.merge('filter.color', ['yellow']);
-			expect(remergeAsObjectAgain.state).toEqual({ filter: { color: ['blue', 'green', 'red', 'yellow', 'yellow'] } });
-
-			const mergeAsArraySingle = urlManager.merge(['filter', 'color'], ['red']);
-			expect(mergeAsArraySingle.state).toEqual({ filter: { color: ['red'] } });
-
-			const mergeAsArrayMultiple = urlManager.merge(['filter', 'color'], ['blue', 'green', 'red']);
-			expect(mergeAsArrayMultiple.state).toEqual({ filter: { color: ['blue', 'green', 'red'] } });
-
-			const mergeAsString = urlManager.merge('filter.color', ['blue', 'green', 'red']);
-			expect(mergeAsString.state).toEqual({ filter: { color: ['blue', 'green', 'red'] } });
-		});
-
-		it('expects filters to be arrays and removes them that way', () => {
-			const urlManager = new UrlManager(new MockQueryStringTranslator());
-
-			const setAsObject = urlManager.set({ filter: { color: ['blue', 'green', 'red'] } });
-			expect(setAsObject.state).toEqual({ filter: { color: ['blue', 'green', 'red'] } });
-
-			const fullyRemovedAsArray = setAsObject.remove(['filter', 'color']);
-			expect(fullyRemovedAsArray.state).toEqual({ filter: {} });
-
-			const fullyRemovedAsString = setAsObject.remove('filter.color');
-			expect(fullyRemovedAsString.state).toEqual({ filter: {} });
-
-			// doesn't remove because path doesn't exist
-			const removeSingleAsArray = setAsObject.remove(['filter', 'color', 'red']);
-			expect(removeSingleAsArray.state).toEqual({ filter: { color: ['blue', 'green', 'red'] } });
-
-			// should this be supported?
-			const removeAsArrayString = setAsObject.remove(['filter', 'color'], 'red');
-			expect(removeAsArrayString.state).toEqual({ filter: { color: ['blue', 'green'] } });
-
-			const removeAsArray = setAsObject.remove(['filter', 'color'], ['red']);
-			expect(removeAsArray.state).toEqual({ filter: { color: ['blue', 'green'] } });
-
-			const removeMultipleAsArray = setAsObject.remove(['filter', 'color'], ['red', 'blue']);
-			expect(removeMultipleAsArray.state).toEqual({ filter: { color: ['green'] } });
-
-			const removeSingleAsString = setAsObject.remove('filter.color', ['red']);
-			expect(removeSingleAsString.state).toEqual({ filter: { color: ['blue', 'green'] } });
-			expect(removeSingleAsString.href).toBe('?filter.color=blue&filter.color=green');
-
-			const removeMutlipleAsString = setAsObject.remove('filter.color', ['red', 'blue']);
-			expect(removeMutlipleAsString.state).toEqual({ filter: { color: ['green'] } });
-			expect(removeMutlipleAsString.href).toBe('?filter.color=green');
-
-			const removeAll = setAsObject.remove('filter.color', ['red', 'blue', 'green']);
-			expect(removeAll.state).toEqual({ filter: { color: [] } });
-			expect(removeAll.href).toBe('?');
-		});
-
-		it('supports various value types', () => {
-			// TODO: Look into how to handle this
-			// const booleanType = new UrlManager(new MockTranslator()).set('filter.boolean', true);
-			// expect(booleanType.state).toStrictEqual({ filter: { boolean: [true] } });
-
-			const booleanArrayType = new UrlManager(new MockTranslator()).set('filter.boolean', [true, false]);
-			expect(booleanArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
-
-			const objectType = new UrlManager(new MockTranslator()).set('filter.object', { low: 0, high: 10 });
-			expect(objectType.state).toStrictEqual({ filter: { object: { low: 0, high: 10 } } });
-
-			const objectArrayType = new UrlManager(new MockTranslator()).set('filter.boolean', [true, false]);
-			expect(objectArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
 		});
 	});
 });
