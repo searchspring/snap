@@ -1,0 +1,59 @@
+{
+	"name": "@searchspring/snap-preact-components",
+	"version": "0.0.11",
+	"description": "Snap Preact Component Library",
+	"author": "Searchspring",
+	"license": "ISC",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write 'src/**/*.{js,ts,tsx}'",
+		"lint": "eslint 'src/components/**/*.{js,ts,tsx}'",
+		"storybook": "start-storybook -p 6006",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"storybook:build": "build-storybook -o ./docs"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.1.5",
+		"@searchspring/snap-toolbox": "^0.0.26",
+		"classnames": "^2.2.6",
+		"mobx-react-lite": "^3.2.0",
+		"react-ranger": "^2.1.0"
+	},
+	"peerDependencies": {
+		"preact": "^10.5.13"
+	},
+	"devDependencies": {
+		"@searchspring/snap-client-javascript": "^1.0.8",
+		"@searchspring/snap-controller": "^0.0.8",
+		"@searchspring/snap-event-manager": "^0.0.18",
+		"@searchspring/snap-logger": "^0.0.3",
+		"@searchspring/snap-profiler": "^0.0.14",
+		"@searchspring/snap-store-mobx": "^0.0.8",
+		"@searchspring/snap-toolbox": "0.0.24",
+		"@searchspring/snap-url-manager": "^0.0.17",
+		"@storybook/addon-actions": "^6.1.21",
+		"@storybook/addon-essentials": "^6.1.21",
+		"@storybook/addon-links": "^6.1.21",
+		"@storybook/preact": "^6.1.21",
+		"@storybook/theming": "^6.1.21",
+		"@testing-library/jest-dom": "^5.11.10",
+		"@testing-library/preact": "^2.0.1",
+		"@testing-library/user-event": "^13.0.15",
+		"mobx-react": "^7.1.0",
+		"node-sass": "^5.0.0",
+		"preact": "^10.5.13",
+		"ts-loader": "^8.0.18"
+	},
+	"sideEffects": false
+}

@@ -1,0 +1,24 @@
+{
+	"name": "@searchspring/snap-toolbox",
+	"version": "0.0.26",
+	"description": "Snap Toolbox",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"author": "Searchspring",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint '*/**/*.{js,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	]
+}

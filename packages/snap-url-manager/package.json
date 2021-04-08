@@ -1,0 +1,27 @@
+{
+	"name": "@searchspring/snap-url-manager",
+	"version": "0.0.17",
+	"description": "Snap URL Manager",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"author": "Searchspring",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"seamless-immutable": "^7.1.4"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	]
+}

@@ -1,0 +1,35 @@
+{
+	"name": "@searchspring/snap-controller",
+	"version": "0.0.8",
+	"description": "Snap Controllers",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"author": "Searchspring",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"deepmerge": "^4.2.2"
+	},
+	"devDependencies": {
+		"@searchspring/snap-client-javascript": "^1.0.8",
+		"@searchspring/snap-event-manager": "^0.0.18",
+		"@searchspring/snap-logger": "^0.0.3",
+		"@searchspring/snap-profiler": "^0.0.14",
+		"@searchspring/snap-store-mobx": "^0.0.8",
+		"@searchspring/snap-url-manager": "^0.0.17"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	]
+}

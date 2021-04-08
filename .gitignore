@@ -1,0 +1,8 @@
+node_modules
+yarn-error.log
+.DS_Store
+dist
+coverage
+packages/snap-preact-demo/tests/cypress/videos
+packages/snap-preact-demo/tests/cypress/screenshots
+packages/snap-preact-components/docs

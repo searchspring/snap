@@ -1,0 +1,31 @@
+{
+	"name": "@searchspring/snap-store-mobx",
+	"version": "0.0.8",
+	"description": "Snap MobX Store",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"author": "Searchspring",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"@searchspring/snap-toolbox": "^0.0.26",
+		"mobx": "^6.1.8"
+	},
+	"devDependencies": {
+		"@searchspring/snap-url-manager": "^0.0.17"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	]
+}

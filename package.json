@@ -1,0 +1,56 @@
+{
+	"name": "@searchspring/snap",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"commit": "cz",
+		"build": "node_modules/.bin/lerna exec --stream 'npm run build'",
+		"test": "npm run test --workspaces",
+		"cypress": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-demo' 'npm run cypress'",
+		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
+		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
+		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
+		"storybook": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-components' 'npm run storybook'",
+		"publish": "node_modules/.bin/lerna publish --yes"
+	},
+	"prettier": "@searchspring/prettier",
+	"devDependencies": {
+		"@searchspring/prettier": "^1.0.2",
+		"@types/jest": "^26.0.22",
+		"@types/jsdom": "^16.2.6",
+		"@types/seamless-immutable": "^7.1.13",
+		"@typescript-eslint/eslint-plugin": "^4.20.0",
+		"@typescript-eslint/parser": "^4.20.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^7.23.0",
+		"eslint-config-prettier": "^8.1.0",
+		"eslint-plugin-react": "^7.22.0",
+		"husky": "^6.0.0",
+		"jest": "^26.6.3",
+		"jsdom": "^16.4.0",
+		"lerna": "^4.0.0",
+		"lint-staged": "^10.5.4",
+		"prettier": "^2.2.1",
+		"regenerator-runtime": "^0.13.7",
+		"standard-version": "^9.1.1",
+		"ts-jest": "^26.5.4",
+		"typescript": "^4.2.3"
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"bash -c tsc",
+			"eslint",
+			"prettier --write"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}

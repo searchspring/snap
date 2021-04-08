@@ -1,0 +1,21 @@
+{
+    "autocomplete": {
+      "query": ""
+    },
+    "search": {
+      "query": ""
+    },
+    "pagination": {
+      "totalResults": 0,
+      "page": 1,
+      "defaultPageSize": 30,
+      "pageSize": 6
+    },
+    "sorting": [],
+    "results": [],
+    "facets": [],
+    "merchandising": {
+      "redirect": "",
+      "content": {}
+    }
+  }

@@ -1,0 +1,28 @@
+{
+	"presets": [
+		"@babel/preset-react",
+		[
+			"@babel/preset-env",
+			{
+				"useBuiltIns": "usage",
+				"corejs": {
+					"version": 3
+				},
+				"targets": {
+					"ie": "11"
+				}
+			}
+		]
+	],
+	"plugins": [
+		["@babel/plugin-transform-runtime"],
+		[ "@babel/plugin-proposal-decorators", {
+			"legacy": true
+		}],
+		["@babel/plugin-proposal-class-properties"],
+		[ "@babel/plugin-transform-react-jsx", {
+			"pragma": "h",
+			"pragmaFrag": "Fragment"
+		}]
+	]
+}

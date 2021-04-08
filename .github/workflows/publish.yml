@@ -10,13 +10,43 @@ jobs:
       - name: Checkout repositiory
         uses: actions/checkout@v2
 
+      - name: Set Github Credentials
+        run: |
+          git config user.name searchspring-machine
+          git config user.email machine@searchspring.com
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 15
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@searchspring'
 
-      - name: Publish README.md to ZenDesk
-        run: |
-          curl https://searchspring.zendesk.com/api/v2/help_center/articles/360059001311/translations/en-us.json \
-          -d "`npx showdown makehtml -i README.md | jq -Rs '{"translation": {"title": "Snap Quickstart", "body": . }}'`" \
-          -u ${{ secrets.ZenDeskAPIAuthUsername }}:${{ secrets.ZenDeskAPIAuthPassword }} -X PUT -H "Content-Type: application/json"
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install packages
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests
+        run: npm run test
+
+      - name: Publish changed package(s) to Github using lerna
+        run: npm run publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}

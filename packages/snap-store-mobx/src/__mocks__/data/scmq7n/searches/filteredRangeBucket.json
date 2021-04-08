@@ -1,0 +1,3355 @@
+{
+  "search": {},
+  "filters": [
+    {
+      "type": "range",
+      "field": "price",
+      "label": "$20 to $30",
+      "value": {
+        "low": 20,
+        "high": 30
+      }
+    },
+    {
+      "type": "value",
+      "field": "color_family",
+      "label": "Blue",
+      "value": "Blue"
+    }
+  ],
+  "pagination": {
+    "totalResults": 92,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "108378",
+      "mappings": {
+        "core": {
+          "uid": "108378",
+          "price": 24,
+          "msrp": 25,
+          "url": "/product/D-155636",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a7512_2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a7512_2_large.jpg",
+          "name": "Word To The Wise Journal",
+          "sku": "D-155636",
+          "brand": "Kate Spade"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw0TU0NTUzNmMwBEJjAwZLI4b0oswUAHXaBts",
+        "intellisuggestSignature": "6af40527d14701bddaccdf7607e323ee96bf455cf97574ce8fa14f9fdb68d432",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "59",
+        "ss_product_type": "Journal",
+        "keywords": [
+          "ksny",
+          "kate spade ny",
+          "katespade",
+          "kate",
+          "ny",
+          "kate ny",
+          "kate spade new york",
+          "kate spad",
+          "kate space",
+          "all kate spade",
+          "kate spafe",
+          "kate spde",
+          "kate ade",
+          "kate spake",
+          "journal"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "your autobiography is worthy of this classic and elegant journal by kate spade new york®. filled with 300 lined pages for all your inner most hopes and dreams, gentle musings, sketches and to-do lists, this journal also features a book cloth cover and six multicolored ribbon bookmarks. the best part? the gold foil-adorned mantra on the front that offers a little something special. 300 pages lined, wood-free, ivory colored pages 6 multicolored ribbon bookmarks book cloth covered, hard cover case bound lay flat design gold foil accented marketing frame in a re-sealable acetate bag 8&quot; h x 5&quot; w x 1 1/8&quot; d",
+        "title": "Word To The Wise Journal",
+        "ss_clicks": "2149",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "4320",
+        "ss_sale_price": "24",
+        "product_type": [
+          "Home &amp; Office Decor &gt; Brands &gt; Kate Spade New York &gt; Office",
+          "Home &amp; Office Decor &gt; Desk Decor &gt; journals",
+          "Home &amp; Office Decor &gt; Brands &gt; Kate Spade New York",
+          "Home &amp; Office Decor &gt; Desk Decor",
+          "Home &amp; Office Decor &gt; Brands",
+          "Going Fast",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "112",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Home &amp; Office Decor&gt;Brands",
+          "Home &amp; Office Decor",
+          "Gifts for Her&gt;Gifts Under $25",
+          "Going Fast",
+          "Gifts for Her",
+          "Home &amp; Office Decor&gt;Brands&gt;Kate Spade New York&gt;Office",
+          "Home &amp; Office Decor&gt;Brands&gt;Kate Spade New York",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Home &amp; Office Decor&gt;Desk Decor&gt;journals",
+          "Home &amp; Office Decor&gt;Desk Decor"
+        ],
+        "on_sale": "No",
+        "quantity_available": "1",
+        "popularity": "4320",
+        "product_type_unigram": "journal",
+        "id": "ef6d481ff9a5e450355e423bbacf38ef"
+      }
+    },
+    {
+      "id": "181341",
+      "mappings": {
+        "core": {
+          "uid": "181341",
+          "price": 22,
+          "msrp": 25,
+          "url": "/product/J-JO-I5-E4579",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1511_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1511_copyright_reddressboutique_2017__large.jpg",
+          "name": "Modern Mix Up Turquoise Pendant Earrings",
+          "sku": "J-JO-I5-E4579",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0vXy1_U01XU1MTW3ZDBkMGIwNmCwNGJIL8pMAQCkUAg3",
+        "intellisuggestSignature": "c9e5400364eb4e5c6b4e93ca9777e4ed4e5e76993ba253ffadb10ce17d67d896",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "58",
+        "ss_product_type": "Pen",
+        "keywords": [
+          "turquoise blue",
+          "aqua",
+          "turquoise",
+          "ball pendants",
+          "pendant earrings",
+          "jewelry",
+          "drop earrings",
+          "dangle earrings",
+          "statement jewelry"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "It's a Modern Mix Up indeed when you think that being a powerhouse at the office, somehow means I don't LOVE fashion. Please. I may be able to negotiate contracts with the best of them, but put me in front of some clothes and girl, I'll show you what's hot and what's not. Like these earrings ... hot. That backwards attitude you're sporting from 1997? Not so much. • Imported",
+        "title": "Modern Mix Up Turquoise Pendant Earrings",
+        "ss_clicks": "3388",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "4183",
+        "ss_sale_price": "22",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "8",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Gifts for Her&gt;Gifts Under $25",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "28",
+        "popularity": "4183",
+        "product_type_unigram": "earrings",
+        "id": "92a51e37b9cc577817f4ba09a26d1cb2"
+      }
+    },
+    {
+      "id": "178240",
+      "mappings": {
+        "core": {
+          "uid": "178240",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/J-GS-I3-07611",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_02_08_studio_set_3_012-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_02_08_studio_set_3_012-2_large.jpg",
+          "name": "Refined Details Aqua Tassel Earrings",
+          "sku": "J-GS-I3-07611",
+          "brand": "Stella"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nUP1vU01jUwNzM0ZDBkMGYwNmCwNGJIL8pMAQCiBwgY",
+        "intellisuggestSignature": "f575cb3eace5578983f7f9f88e0e6d5061a461313f3d0f91ec60b55f2e57c2f4",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "63",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "aqua",
+          "blue",
+          "aqua earrings",
+          "aqua beads",
+          "beaded earrings",
+          "tassels",
+          "tassel earrings",
+          "statement jewelry",
+          "accessories"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "If you’ve ever been called “refined” before, then you know that it’s one of the most unexpectedly flattering compliments one can receive. And, if you haven’t had the pleasure yet, you don’t know what you’re missing. And because you don’t know, then you don’t know to be bitterly covetous to be called such—which is probably a good thing, unless you look good in green. But there’s one sure-fire way to find out, and be able to think back on all the compliments you’ve received before with a scoff, because nothing will make you feel more lady–like than hearing those words describe you. So find yourself a classy gown, adorn with these lovely earrings, and keep your ears peeled. Okay, maybe not peeled; I guess that idiom really only works with eyes. But you catch my drift. • Imported",
+        "title": "Refined Details Aqua Tassel Earrings",
+        "ss_clicks": "3734",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "4000",
+        "ss_sale_price": "30",
+        "product_type": [
+          "Shop By Trend &gt; Worth The Tassel",
+          "All Jewelry &gt; Earrings",
+          "Shop By Trend",
+          "What's New",
+          "All Jewelry",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "40",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Worth The Tassel",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "53",
+        "popularity": "4000",
+        "product_type_unigram": "earrings",
+        "id": "22c47ba05b343bb8111e0e67a54dad73"
+      }
+    },
+    {
+      "id": "180276",
+      "mappings": {
+        "core": {
+          "uid": "180276",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/F-CCF-I5-GIGIS",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3463_copyright_reddressboutique_2017-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3463_copyright_reddressboutique_2017-2_large.jpg",
+          "name": "Ideal Spring Denim Blue Wedges",
+          "sku": "F-CCF-I5-GIGIS",
+          "brand": "City Classified"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw03V2dtP1NNV193T3DGYwZDBhMDZgsDRiSC_KTAEAsgwIvQ",
+        "intellisuggestSignature": "89f8791edf2723cfdd583e916d4b26944e1d1129f0d47d7e129ef6635f10ab48",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "72",
+        "ss_product_type": "Wedges",
+        "keywords": [
+          "denim",
+          "blue",
+          "blue jean",
+          "chambray",
+          "chambrae",
+          "denim blue wedges",
+          "wedges",
+          "platforms",
+          "wedge shoes",
+          "espadrilles",
+          "shoes",
+          "spring shoes",
+          "summer",
+          "spring"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Want to have an Ideal Spring? Then slide your tootsies into these gorgeous Denim Blue Wedges!! Such a cute shoe, for such a cute gal! Slingback espadrille wedge with a round toe. Heel measures 3&quot; • Non-Skid Sole • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Ideal Spring Denim Blue Wedges",
+        "ss_clicks": "291",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "3965",
+        "ss_sale_price": "30",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Shoes&gt;Shoes on Trend",
+          "All Shoes",
+          "Shop By Trend&gt;Summer Staples",
+          "All Shoes&gt;Shoes on Trend&gt;Platforms+Wedges",
+          "Shop By Trend&gt;Prep In Your Step",
+          "All Shoes&gt;All Heels",
+          "Style Influencer",
+          "Gifts for Her",
+          "All Shoes&gt;All Wedges",
+          "Style Influencer&gt;Laura Beverlin",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Shoes &gt; Shoes on Trend &gt; Platforms+Wedges",
+          "Shop By Trend &gt; Prep In Your Step",
+          "Shop By Trend &gt; Summer Staples",
+          "All Shoes &gt; All Heels",
+          "Style Influencer &gt; Laura Beverlin",
+          "All Shoes &gt; All Wedges",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "material": "Denim",
+        "days_since_published": "3",
+        "quantity_available": "45",
+        "popularity": "3965",
+        "product_type_unigram": "wedges",
+        "id": "09048d6e3b269918a02e5349200ef25e"
+      }
+    },
+    {
+      "id": "180989",
+      "mappings": {
+        "core": {
+          "uid": "180989",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-STY-I2-S214B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1045_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1045_copyright_reddressboutique_2017__large.jpg",
+          "name": "Soak In The Sun Blue Bikini Bottom",
+          "sku": "C-STY-I2-S214B",
+          "brand": "Stylish"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g0OidT1NNINNjI0cWIwZDBlMDZgsDRiSC_KTAEAsf4IpQ",
+        "intellisuggestSignature": "8af59c40b5b7e6e0fb58ffd4ace4ea204e9009ca7ddc8f46313807f92a477332",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "72",
+        "ss_product_type": "Bottom",
+        "keywords": [
+          "blue Bikini Bottom",
+          "blue Bottom",
+          "Bikini",
+          "Bikini Bottom",
+          "Swimwear",
+          "Two Piece",
+          "Swimsuit",
+          "2 Piece Swimsuit",
+          "solid Bikini",
+          "bright",
+          "bottoms",
+          "swim",
+          "poolside",
+          "pool",
+          "vacation",
+          "summer"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "If you're going to Soak In The Sun (and it's almost Summer, so let's face it, you're going to try your best) you might as well choose the absolute best swimsuit possible. And for that, you need us. Not another one of those fly-by-night boutiques who pop-up one minute and are gone the next. No, ma'am, you need someone who has been there for long enough to know what you like and don't like. And since you've been reading this for longer than ten seconds, you totally like this swimsuit and are still considering it so we think you should at least think about putting it in your cart. You know, just until you're ready to check out. Can't hurt. Bikini bottoms feature peek-a-boo banded sides. Model is wearing a small. • 82% Nylon 18% Elastane • Hand Wash Cold • Imported",
+        "title": "Soak In The Sun Blue Bikini Bottom",
+        "ss_clicks": "3101",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3918",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Shop By Trend &gt; Vacation Ready",
+          "Shop By Trend",
+          "Swimwear",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": "98",
+        "season": "Summer",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Swimwear&gt;Two Piece",
+          "What's New",
+          "Gifts for Her",
+          "Swimwear",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "35",
+        "popularity": "3918",
+        "product_type_unigram": "bottom",
+        "id": "f40de9ac75c3ba34743e3de616950dcb"
+      }
+    },
+    {
+      "id": "179060",
+      "mappings": {
+        "core": {
+          "uid": "179060",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/J-GS-I6-07641",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1094_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1094_copyright_reddressboutique_2017__large.jpg",
+          "name": "Something Wonderful Turquoise Blue Tassel Earrings",
+          "sku": "J-GS-I6-07641",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nUP1vU00zUwNzMxZDBkMGMwNmCwNGJIL8pMAQCioAgh",
+        "intellisuggestSignature": "438d75aac368b44f3b188322589e1d84dddc0fcd887af3e6e48c8cbaedac2aec",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "64",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "tassel",
+          "tassel earrings",
+          "beaded earrings",
+          "statement earrings",
+          "statement jewelry",
+          "bauble bar",
+          "blue",
+          "multi",
+          "pendant earrings"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "You're Something Wonderful, even if the people closest to you fail to recognize it when you need them to. So treat yourself to a little something and splurge a tiny bit on these beautiful earrings. It's a small price to pay for the huge things you do for everyone else. Plus, maybe they'll finally take notice and ask what the occasion was, to which you can answer, &quot;my awesomeness.&quot; That response never gets old. • Imported",
+        "title": "Something Wonderful Turquoise Blue Tassel Earrings",
+        "ss_clicks": "230",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3571",
+        "ss_sale_price": "30",
+        "product_type": [
+          "Shop By Trend &gt; Worth The Tassel",
+          "All Jewelry &gt; Earrings",
+          "All Jewelry",
+          "Shop By Trend",
+          "What's New",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "105",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Accessories",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Worth The Tassel",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "13",
+        "popularity": "3571",
+        "product_type_unigram": "earrings",
+        "id": "09a5f8764259ce487368473fd00fd162"
+      }
+    },
+    {
+      "id": "178741",
+      "mappings": {
+        "core": {
+          "uid": "178741",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/H-HOH-I3-HB221",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_01_studio_020768copyright_reddressboutique__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_01_studio_020768copyright_reddressboutique__large.jpg",
+          "name": "Trove Of Wonders Turquoise Headpiece",
+          "sku": "H-HOH-I3-HB221",
+          "brand": "Headbands of Hope"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0PXw99D1NNb1cDIyMmQwZDBnMDZgsDRiSC_KTAEArp0Ifw",
+        "intellisuggestSignature": "9f747feefd904bfa59fcd9801e2d2c6fd4ff69a1fbf6a95e02ee603a49327b9f",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "74",
+        "keywords": [
+          "Head",
+          "hair",
+          "accessories",
+          "headband",
+          "band",
+          "hair piece"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "Bored with wearing your hair down or plain old pony tails? So were we! So check out this Trove Of Wonders Headpiece!! Put a little excitement in your hair that makes others stop and notice that accessories aren't limited to earrings and necklaces. Go on girl, you can pull it off!",
+        "title": "Trove Of Wonders Turquoise Headpiece",
+        "ss_clicks": "1800",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3295",
+        "ss_sale_price": "30",
+        "product_type": [
+          "Shop By Trend &gt; Vacation Ready",
+          "Going Fast",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "145",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Accessories",
+          "Going Fast",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "quantity_available": "1",
+        "popularity": "3295",
+        "product_type_unigram": "headpiece",
+        "id": "5e02042a918c6d72412b3e119be05be8"
+      }
+    },
+    {
+      "id": "135369",
+      "mappings": {
+        "core": {
+          "uid": "135369",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/J-JO-I5-S1084",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a3999_3_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a3999_3_large.jpg",
+          "name": "Round Up Necklace",
+          "sku": "J-JO-I5-S1084",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0vXy1_U01Q02NLAwYTBksGAwNmCwNGJIL8pMAQCk3gg_",
+        "intellisuggestSignature": "a4510cde88abc73b6e9ce1a8fb577d09a6116a3f43120cfb7961018a4e5e970f",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "64",
+        "ss_product_type": "Necklace",
+        "keywords": [
+          "round",
+          "round faceted",
+          "faceted",
+          "circle",
+          "bib",
+          "tier",
+          "layer",
+          "bib",
+          "bib necklace",
+          "neck lace",
+          "jewelry",
+          "jewery",
+          "blue",
+          "gold"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Go ahead and “Round Up” your best getup because you’re ready to make a statement today. This dazzling bib necklace will add some kick to your outfit and some pep in your step. There’s no hiding today. Your beauty is going to be proudly on display. Gold chain bib necklace with round faceted gems and a lobster clasp closure. Length measures 17.5&quot; with a 3&quot; extension",
+        "title": "Round Up Necklace",
+        "sale_price": "10",
+        "ss_clicks": "2649",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3117",
+        "ss_sale_price": "26",
+        "product_type": [
+          "All Sale &gt; Jewelry on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "74",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Jewelry on Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "quantity_available": "1",
+        "popularity": "3117",
+        "product_type_unigram": "necklace",
+        "id": "a77648e665c7105ded69161cfa066be5"
+      }
+    },
+    {
+      "id": "183630",
+      "mappings": {
+        "core": {
+          "uid": "183630",
+          "price": 28,
+          "msrp": 50,
+          "url": "/product/J-AZ-P9-E1844-1",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7007_copyright_reddressboutique_2017_-4_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7007_copyright_reddressboutique_2017_-4_1_large.jpg",
+          "name": "Most Popular Pink Statement Earrings",
+          "sku": "J-AZ-P9-E1844-1",
+          "brand": "Anzell"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nWM0g2w1HU1tDAx0TVkMGSwZDA2YLA0YkgvykwBALYXCKE",
+        "intellisuggestSignature": "78814e888215e437639641560c6a787cd5aec04505fa8be98dbb8c9193c56ed6",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "52",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "earring",
+          "earrings",
+          "earing",
+          "earings",
+          "beads",
+          "beaded",
+          "pendant",
+          "pendent",
+          "ball",
+          "bauble",
+          "bobble",
+          "bauble bar",
+          "statement",
+          "statement earring",
+          "gold",
+          "summer",
+          "fun",
+          "cute",
+          "trendy"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "You and these earrings have a surprising amount in common. For example, when you wear them, and instantly become the Most Popular girl in the room, then the earrings in turn will become the Most Popular accessory in your jewelry collection. If that doesn’t make you soul mates, we don’t know what does. Earring measures 2.5&quot; • Imported",
+        "title": "Most Popular Pink Statement Earrings",
+        "ss_clicks": "975",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "2786",
+        "ss_sale_price": "28",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "10",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "39",
+        "popularity": "2786",
+        "product_type_unigram": "earrings",
+        "id": "402307faa597d448f00345e766e88759"
+      }
+    },
+    {
+      "id": "180993",
+      "mappings": {
+        "core": {
+          "uid": "180993",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-STY-I2-S214",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0004_6761_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0004_6761_copyright_reddressboutique_2017_large.jpg",
+          "name": "Soak In The Sun Blue Bikini Top",
+          "sku": "C-STY-I2-S214",
+          "brand": "Stylish"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g0OidT1NNINNjI0YTBkMDRgMDZgsDRiSC_KTAEAsFAIjw",
+        "intellisuggestSignature": "5b8023529ffe72e95ba82c0fd3e97bb492a472976c32a807204781df84a10623",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "72",
+        "ss_product_type": "Top",
+        "keywords": [
+          "blue Bikini top",
+          "blue top",
+          "Bikini",
+          "Bikini top",
+          "Swimwear",
+          "Two Piece",
+          "Swimsuit",
+          "2 Piece Swimsuit",
+          "solid Bikini",
+          "swim",
+          "summer",
+          "vacation",
+          "neon",
+          "bright"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "If you're going to Soak In The Sun (and it's almost Summer, so let's face it, you're going to try your best) you might as well choose the absolute best swimsuit possible. And for that, you need us. Not another one of those fly-by-night boutiques who pop-up one minute and are gone the next. No, ma'am, you need someone who has been there for long enough to know what you like and don't like. And since you've been reading this for longer than ten seconds, you totally like this swimsuit and are still considering it so we think you should at least think about putting it in your cart. You know, just until you're ready to check out. Can't hurt. Model is wearing a small. • 82% Nylon 18% Elastane • Hand Wash Cold • Imported",
+        "title": "Soak In The Sun Blue Bikini Top",
+        "ss_clicks": "1888",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "2764",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Shop By Trend &gt; Vacation Ready",
+          "Shop By Trend",
+          "Swimwear",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": "129",
+        "season": "Summer",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Swimwear&gt;Two Piece",
+          "What's New",
+          "Gifts for Her",
+          "Swimwear",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "34",
+        "popularity": "2764",
+        "product_type_unigram": "top",
+        "id": "327e485865433e0c17ad7817c5209682"
+      }
+    },
+    {
+      "id": "180923",
+      "mappings": {
+        "core": {
+          "uid": "180923",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-TY-I4-T2331",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0846_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0846_copyright_reddressboutique_2017__large.jpg",
+          "name": "All Hail Turquoise Top",
+          "sku": "C-TY-I4-T2331",
+          "brand": "Tyche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g2J1PU00Q0xMjY2ZABCQwZjAwZLI4b0oswUAK2fCHI",
+        "intellisuggestSignature": "6472229d562d6725ededc370cc6cdb577889194a40ed0b5965aee77cdc863a92",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "64",
+        "ss_product_type": "Top",
+        "keywords": [
+          "tank top",
+          "tank",
+          "turquoise",
+          "teal",
+          "blue",
+          "strappy",
+          "summer",
+          "top",
+          "bright",
+          "vacation",
+          "turquoise top",
+          "teal top",
+          "blue top",
+          "spaghetti strap",
+          "keyhole -"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Wouldn't it be awesome if you landed in some far off land in some place you've never heard of, where they've never seen clothing before ... but they've been waiting for this item to arrive in the form of what amounts to a Turquoise Top, to somehow deliver them from depression and make all of their lives better? So when you arrive they mistake you for a goddess and worship your top as as a deity and you as its divine messenger? You know, All Hail Turquoise Top? Why do I see Steve Martin playing a role in the movie version of narrative? Anyway, if that were ever to happen, this would totally be the top they would choose. It is totally worthy of being adored. Sleeveless top features a layered hemline with a single button closure on a keyhole cut-out. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Made in the USA",
+        "title": "All Hail Turquoise Top",
+        "ss_clicks": "1824",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "2725",
+        "ss_sale_price": "29",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Tops&gt;Tank Tops",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Tops"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Vacation Ready",
+          "All Tops &gt; Tank Tops",
+          "All Tops",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "51",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "20",
+        "popularity": "2725",
+        "product_type_unigram": "top",
+        "id": "d1b04baedcd850b9fa1bf2a85b1ac110"
+      }
+    },
+    {
+      "id": "182555",
+      "mappings": {
+        "core": {
+          "uid": "182555",
+          "price": 24,
+          "msrp": 25,
+          "url": "/product/J-PAN-I3-N0705",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5811_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5811_copyright_reddressboutique_2017__large.jpg",
+          "name": "Just Dropping In Aqua And Gold Layer Necklace",
+          "sku": "J-PAN-I3-N0705",
+          "brand": "Pannee"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0g1w9NP1NNb1MzA3MGUwZDA0YjA2YLA0YkgvykwBALaFCKg",
+        "intellisuggestSignature": "a7b725f575e28593ace64a52bd98ebca82df20623a29b59bc2617380f3e53922",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "71",
+        "ss_product_type": "Necklace",
+        "keywords": [
+          "layer",
+          "tiered",
+          "set",
+          "choker",
+          "long",
+          "pendant",
+          "chain",
+          "gold",
+          "aqua"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "Oh hi, I'm your new Gold Layer Necklace. I'm Just Dropping In to say that I'm on my way to your neckline. I'll be adding that special something to your wardrobe before you can blink. You need me, in case you were wondering. You might not know it yet, but you do. Just thought I should speak for myself since everyone else around here seems to do the talking for all of the other accessories. I'm my own thang, ya know, just like you? OK, see ya soon doll. Layers, out! • Imported",
+        "title": "Just Dropping In Aqua And Gold Layer Necklace",
+        "ss_clicks": "446",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "2634",
+        "ss_sale_price": "24",
+        "product_type": [
+          "All Jewelry &gt; Necklaces",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "53",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Gifts for Her&gt;Gifts Under $25",
+          "What's New",
+          "Gifts for Her",
+          "All Jewelry&gt;Necklaces",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "22",
+        "popularity": "2634",
+        "product_type_unigram": "necklace",
+        "id": "39b15e58d6d098e636ae4b776a4b3d56"
+      }
+    },
+    {
+      "id": "183294",
+      "mappings": {
+        "core": {
+          "uid": "183294",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-TY-I4-P3255",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5822_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5822_copyright_reddressboutique_2017__large.jpg",
+          "name": "Make The Trip Turquoise Blue Print Shorts",
+          "sku": "C-TY-I4-P3255",
+          "brand": "Tyche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g2J1PU00Q0wNjI1ZTBkMDRmMDZgsDRiSC_KTAEArcwIdg",
+        "intellisuggestSignature": "a207b4a423f4b514aaf33a5283bcb9a4fe67bba3a383a475eb7d272f6adaf847",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "63",
+        "ss_product_type": "Shorts",
+        "keywords": [
+          "palm",
+          "print",
+          "purple",
+          "shorts",
+          "print",
+          "tropical",
+          "fun",
+          "bright",
+          "colorful",
+          "elastic waist",
+          "palm print",
+          "summer",
+          "vacation",
+          "flowy shorts"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "pattern": "Print",
+        "description": "In the journey to looking totally hot, a girl’s legs are essential. And if you’re going to Make the Trip, make sure those babies look darn good, by decking them out in a good-looking pair of shorts. Showcase those girls with pride, with these Make the Trip shorts. You may not have far to go (considering how long you’ve already been there), but at least you’ll do it in style. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Made in the USA",
+        "title": "Make The Trip Turquoise Blue Print Shorts",
+        "ss_clicks": "3516",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "2518",
+        "ss_sale_price": "29",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Bottoms&gt;Shorts",
+          "Shop By Trend&gt;Spring Preview",
+          "All Bottoms",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Spring Preview",
+          "All Bottoms &gt; Shorts",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "All Bottoms",
+          "Shop By Trend",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "45",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "40",
+        "popularity": "2518",
+        "product_type_unigram": "shorts",
+        "id": "de6a72b1ef58622991452fdfef064a00"
+      }
+    },
+    {
+      "id": "177392",
+      "mappings": {
+        "core": {
+          "uid": "177392",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-ZS-I4-44034",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/unspecified-22_2.jpeg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/unspecified-22_2.jpeg",
+          "name": "Z Supply Pocket T-Shirt",
+          "sku": "C-ZS-I4-44034",
+          "brand": "Z Supply"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1o0K1vU00TUxMTA2YTBkMDRhMDZgsDRiSC_KTAEAq0sIVw",
+        "intellisuggestSignature": "53bf6e59b2dae0b0a886fa125b3c8bc29f185c26824021ce448cf6df0fa676dd",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "62",
+        "ss_product_type": "T-Shirt",
+        "keywords": [
+          "blue",
+          "blue tee",
+          "regatta",
+          "regatta blue tee",
+          "blue pocket tee",
+          "regatta tee",
+          "short sleeve top",
+          "shortsleeves",
+          "pocket tee",
+          "tshirt",
+          "t-shirt",
+          "z supply",
+          "z-supply",
+          "zee supply",
+          "zsupply",
+          "casual tee",
+          "fall"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Casually chic and simply classic, the Z Supply Pocket Tee In Regatta Blue has always got your back! This burnout jersey tee features a curved V neck, slouchy raw edge pocket, short sleeves, and hi lo hem. Model is wearing an x-small. • 60% Cotton, 40% Polyester • Hand Wash Cold • Unlined • Imported",
+        "title": "Z Supply Pocket T-Shirt",
+        "ss_clicks": "2158",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "1731",
+        "ss_sale_price": "29",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Tops&gt;Casual Tops",
+          "Brands We Love&gt;Z Supply",
+          "Shop By Trend&gt;Comfy Casual",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Dusty Pastels",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "All Tops",
+          "All Tops&gt;Tees"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Dusty Pastels",
+          "Brands We Love &gt; Z Supply",
+          "Shop By Trend &gt; Comfy Casual",
+          "Shop By Trend &gt; Spring Preview",
+          "All Tops &gt; Casual Tops",
+          "All Tops &gt; Tees",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "6",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "53",
+        "popularity": "1731",
+        "product_type_unigram": "tshirt",
+        "id": "8d3de49cf137a05ee9c78ab6b73468b4"
+      }
+    },
+    {
+      "id": "172264",
+      "mappings": {
+        "core": {
+          "uid": "172264",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-PK-I2-T2801",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5617_3_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5617_3_large.jpg",
+          "name": "Piko Easy Kind Limpet Shell Blue V-Neck Top",
+          "sku": "C-PK-I2-T2801",
+          "brand": "Piko"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g3w1vU00g0xsjAwZABCUwZjAwZLI4b0oswUAKvyCGQ",
+        "intellisuggestSignature": "6cc5ba3fa62cdfc98f85f29507ce42f8101eff652efccc1e8299f127b48f9d37",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "51",
+        "ss_product_type": "Top",
+        "keywords": [
+          "piko",
+          "piko top",
+          "piko brand",
+          "piko shirt",
+          "peeko",
+          "peko",
+          "limpet shell blue",
+          "blue top",
+          "light blue",
+          "v neck",
+          "v-neck top",
+          "tee",
+          "short sleeve top",
+          "short sleeves",
+          "shirt",
+          "top",
+          "blouse",
+          "dolman",
+          "dolman top",
+          "comfy",
+          "casual",
+          "basic",
+          "layer",
+          "cute"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Model is wearing a small. • 95% Bamboo, 5% Spandex • Machine Wash Cold • Imported",
+        "title": "Piko Easy Kind Limpet Shell Blue V-Neck Top",
+        "ss_clicks": "3155",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "1455",
+        "ss_sale_price": "29",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "14.5",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "102",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "1455",
+        "product_type_unigram": "top",
+        "id": "7129648ddf01c9c9dcf9b9fa246016ae"
+      }
+    },
+    {
+      "id": "183566",
+      "mappings": {
+        "core": {
+          "uid": "183566",
+          "price": 28,
+          "msrp": 50,
+          "url": "/product/C-ZS-I5-65135",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4737_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4737_copyright_reddressboutique_2017__large.jpg",
+          "name": "Z Supply Pocket Racer Tank Top",
+          "sku": "C-ZS-I5-65135",
+          "brand": "Z Supply"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1o0K1vU01TUzNTQ2ZTBkMDRjMDZgsDRiSC_KTAEAq9wIXw",
+        "intellisuggestSignature": "896b2ee3abfd2a79b222dd023939a98c9ea3ada6a6b59415308ecdb2f04df061",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "56",
+        "ss_product_type": "Top",
+        "keywords": [
+          "zsupply",
+          "z supply",
+          "zee supply",
+          "z-supply",
+          "supply",
+          "z",
+          "zee",
+          "tank",
+          "tank top",
+          "racer back tank",
+          "racerback tank",
+          "racerback tank top",
+          "racer tank",
+          "pocket tank top",
+          "pocket tank",
+          "tank",
+          "cute",
+          "casual",
+          "staple",
+          "basic",
+          "pink",
+          "dragonfruit"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Whether it’s warm or cold, the Z Supply Pocket Racer Tank In Dragon Fruit has got your back! It’s perfect for keeping cool in the heat and layering up in the cold! This tank top features a rounded V-neck, breast pocket, racer back, and shirttail hem. Model is wearing an x-small. • 55% Cotton, 45% Polyester • Hand Wash Cold • Unlined • Sheer • Imported",
+        "title": "Z Supply Pocket Racer Tank Top",
+        "ss_clicks": "2682",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "1036",
+        "ss_sale_price": "28",
+        "product_type": [
+          "Brands We Love &gt; Z Supply",
+          "Shop By Trend &gt; Comfy Casual",
+          "All Tops &gt; Casual Tops",
+          "Shop By Trend &gt; Spring Preview",
+          "All Tops &gt; Tank Tops",
+          "All Tops &gt; Cami Tops",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "162",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Tops&gt;Casual Tops",
+          "Brands We Love&gt;Z Supply",
+          "Shop By Trend&gt;Comfy Casual",
+          "Shop By Trend&gt;Spring Preview",
+          "All Tops&gt;Tank Tops",
+          "Gifts for Her",
+          "All Tops&gt;Cami Tops",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "All Tops"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "15",
+        "popularity": "1036",
+        "product_type_unigram": "top",
+        "id": "e391b74d1520dcbf7fd3239cbc141806"
+      }
+    },
+    {
+      "id": "183571",
+      "mappings": {
+        "core": {
+          "uid": "183571",
+          "price": 28,
+          "msrp": 50,
+          "url": "/product/J-AZ-Y8-E1844",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a0710_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a0710_1_large.jpg",
+          "name": "Most Popular Gold Statement Earrings",
+          "sku": "J-AZ-Y8-E1844",
+          "brand": "Anzell"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nWM0o200HU1tDAxYTBkMDRnMDZgsDRiSC_KTAEArfwIeg",
+        "intellisuggestSignature": "a7463ed6fdc368b4d0e80a72f8ee796f66bf9058f024e9e5812dc894d518f939",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "75",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "earring",
+          "earrings",
+          "earing",
+          "earings",
+          "beads",
+          "beaded",
+          "pendant",
+          "pendent",
+          "ball",
+          "bauble",
+          "bobble",
+          "bauble bar",
+          "statement",
+          "statement earring",
+          "gold",
+          "summer",
+          "fun",
+          "cute",
+          "trendy"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "You and these earrings have a surprising amount in common. For example, when you wear them, and instantly become the Most Popular girl in the room, then the earrings in turn will become the Most Popular accessory in your jewelry collection. If that doesn’t make you soul mates, we don’t know what does. Earring measures 2.5&quot; • Imported",
+        "title": "Most Popular Gold Statement Earrings",
+        "ss_clicks": "3423",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "1012",
+        "ss_sale_price": "28",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "57",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "37",
+        "popularity": "1012",
+        "product_type_unigram": "earrings",
+        "id": "16bd5d6cb2672cb3a1e950895ea90937"
+      }
+    },
+    {
+      "id": "146129",
+      "mappings": {
+        "core": {
+          "uid": "146129",
+          "price": 20,
+          "msrp": 25,
+          "url": "/product/J-HOH-E7-00HC1",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/emptyname_69_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_69_1_large.jpg",
+          "name": "Headbands of Hope Blue Layered Head Chain",
+          "sku": "J-HOH-E7-00HC1",
+          "brand": "Headbands of Hope"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0vXw99B1Ndc1MPBwNmQAQgsGYwMGSyOG9KLMFAC2pgiw",
+        "intellisuggestSignature": "552a8bd443e87582d7b6977de91de7898710e2983219644134b739aace4cf718",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "60",
+        "ss_product_type": "Headband",
+        "keywords": [
+          "Blue Layered Head Chain",
+          "Head Chain",
+          "Blue",
+          "Layered Head Chain",
+          "Head Band",
+          "Hair Accessory",
+          "Accessory",
+          "Blue Bead",
+          "Beads",
+          "Beaded"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Accessorize your hair with something cuter than a scrunchie with our Headbands of Hope Blue Layered Head Chain. For every headband sold, one is given to a child with cancer. This head chain features blue bead trim along with two layers of chain and gold combs on the end.",
+        "title": "Headbands of Hope Blue Layered Head Chain",
+        "ss_clicks": "3711",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "846",
+        "ss_sale_price": "20",
+        "product_type": [
+          "Going Fast",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "157",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Gifts for Her&gt;Gifts Under $25",
+          "Going Fast",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "quantity_available": "1",
+        "popularity": "846",
+        "product_type_unigram": "chain",
+        "id": "27f821f9a7fe78aac408a00913413689"
+      }
+    },
+    {
+      "id": "181879",
+      "mappings": {
+        "core": {
+          "uid": "181879",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-TY-I4-P3185",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0815_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0815_copyright_reddressboutique_2017__large.jpg",
+          "name": "Chart Topping Blue Print Shorts",
+          "sku": "C-TY-I4-P3185",
+          "brand": "Tyche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g2J1PU00Q0wNrQwZTBkMLRkMDZgsDRiSC_KTAEArjcIfg",
+        "intellisuggestSignature": "f5fc5b4f914e497044d707a643e0f3fc4641165f7233d19dd3c1e17dbcc83ee3",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "75",
+        "ss_product_type": "Top",
+        "keywords": [
+          "print",
+          "bright",
+          "fun",
+          "pattern",
+          "shorts",
+          "summer",
+          "vacation",
+          "aqua",
+          "blue",
+          "teal",
+          "turquoise",
+          "patterned shorts",
+          "print shorts",
+          "summer shorts",
+          "colorful shorts"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "pattern": "Print",
+        "description": "You might not have a Chart Topping music record, but you can still be number one with these Aqua Print Shorts. Yes, they look that good, and they'll look that good on your, ahem, back end. They'll love to see you arrive and they'll love to see you leave. Now if that isn't Chart Topping quality, then I don't know what is. Total aces! Printed shorts have a flowy silhouette with an elastic waist and functional pockets. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Made in the USA",
+        "title": "Chart Topping Blue Print Shorts",
+        "ss_clicks": "2043",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "696",
+        "ss_sale_price": "29",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Bottoms&gt;Shorts",
+          "All Bottoms",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Tropical Prints"
+        ],
+        "on_sale": "No",
+        "collection": "Chart Topping",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Tropical Prints",
+          "All Bottoms &gt; Shorts",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "All Bottoms",
+          "Shop By Trend",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "146",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "28",
+        "popularity": "696",
+        "product_type_unigram": "shorts",
+        "id": "25ca477c5e22b0451e16d96de9c7a46c"
+      }
+    },
+    {
+      "id": "179949",
+      "mappings": {
+        "core": {
+          "uid": "179949",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-FAI-I2-K6194",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26108_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26108_large.jpg",
+          "name": "Paddle Out Light Blue Bikini Bottom",
+          "sku": "C-FAI-I2-K6194",
+          "brand": "5th Avenue"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVz9NT1NNL1NjO0NGEwZDAyYDA2YLA0YkgvykwBALRPCJU",
+        "intellisuggestSignature": "663f47f77b9357aca90c41276535abaca562a429ac69348bb2306eb3ff0f0c5c",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "52",
+        "ss_product_type": "Bottom",
+        "keywords": [
+          "Blue- Light Blue",
+          "Blue Bikini Bottom",
+          "Blue Bottom",
+          "Bikini",
+          "Bikini Bottom",
+          "Swimwear",
+          "Two Piece",
+          "Swimsuit",
+          "2 Piece Swimsuit",
+          "Beach",
+          "Vacation",
+          "Summer"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Some people say there’s nothing more relaxing than lounging around on a water bed, lulling yourself to a dreamy state to the motion of the ocean. Of course, those people have clearly never lounged on a raft at the beach, feeling the literal motion of the ocean. So paddle on out there, and spruce up your tan in style. Bonus points for doing it in a swimsuit fit for the occasion (see exhibit A, the Paddle Out bikini). Lined traditional bikini bottoms features tie sides that are adjustable. Model is wearing a small. • 80% Nylon 20% Spandex • 100% Poly lining • Hand Wash Cold • Imported",
+        "title": "Paddle Out Light Blue Bikini Bottom",
+        "ss_clicks": "1686",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "659",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Swimwear",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "9",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Swimwear&gt;Two Piece",
+          "Gifts for Her",
+          "Swimwear",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "12",
+        "popularity": "659",
+        "product_type_unigram": "bottom",
+        "id": "04484cbabf77414c7d9b0898f0a38e1e"
+      }
+    },
+    {
+      "id": "181092",
+      "mappings": {
+        "core": {
+          "uid": "181092",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-FAI-I2-6190B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1151_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1151_copyright_reddressboutique_2017__large.jpg",
+          "name": "Rays For Days Turquoise Print Bikini Bottom",
+          "sku": "C-FAI-I2-6190B",
+          "brand": "Fifth Avenue"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVz9NT1NNI1M7Q0cGIwZDAyZDA2YLA0YkgvykwBALMiCIk",
+        "intellisuggestSignature": "cf2bf3d0a64f4201a38197bd7787d4055eb21cafba9fbcf1aa85d9a001a1a665",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "57",
+        "ss_product_type": "Bottom",
+        "keywords": [
+          "swimsuit",
+          "swim suit",
+          "swimwear",
+          "bathing suit",
+          "print",
+          "multi",
+          "fun",
+          "turquoise",
+          "bikini",
+          "bottoms"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "pattern": "Print",
+        "description": "There’s nothing worse than going to the beach and having it rain the entire time you’re on your beach vacation. Now, we’re not promising that this bikini will spare you that disaster. But we’re not saying that it won’t. Statistically speaking, there’s a possibility that it could happen. It’s totally up to you whether or not you choose to correlate the two things. So, Rays For Days … cool new bikini … coincidence? You tell us. Model is wearing a small. • 82% Nylon 18% Spandex • 100% Polyester lining • Hand Wash Cold • Imported",
+        "title": "Rays For Days Turquoise Print Bikini Bottom",
+        "ss_clicks": "2555",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "531",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Back in Stock",
+          "Swimwear&gt;Two Piece",
+          "Going Fast",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Swimwear",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Vacation Ready",
+          "Swimwear &gt; Two Piece",
+          "Swimwear",
+          "Going Fast",
+          "Back in Stock",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "37",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "2",
+        "popularity": "531",
+        "product_type_unigram": "rays",
+        "id": "5628e188b65d68d791173ccff880f038"
+      }
+    },
+    {
+      "id": "179944",
+      "mappings": {
+        "core": {
+          "uid": "179944",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-FAI-I2-G6194",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2m4a7355_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2m4a7355_large.jpg",
+          "name": "Paddle Out Light Blue Bikini Top",
+          "sku": "C-FAI-I2-G6194",
+          "brand": "5th Avenue"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nVz9NT1NNJ1NzO0NGEwZDAyYjA2YLA0YkgvykwBALQTCJM",
+        "intellisuggestSignature": "aec5246f4f7fd16f5e0927a19db6aaf8324a1efe313630a0a235123839228064",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "40",
+        "ss_product_type": "Top",
+        "keywords": [
+          "Blue",
+          "Light Blue",
+          "Blue Bikini Top",
+          "Bikini Top",
+          "Bikini",
+          "2 piece",
+          "Swimwear",
+          "Two Piece",
+          "Swimsuit",
+          "Print Swimsuit",
+          "Prints",
+          "Fun Bikini"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Some people say there’s nothing more relaxing than lounging around on a water bed, lulling yourself to a dreamy state to the motion of the ocean. Of course, those people have clearly never lounged on a raft at the beach, feeling the literal motion of the ocean. So paddle on out there, and spruce up your tan in style. Bonus points for doing it in a swimsuit fit for the occasion (see exhibit A, the Paddle Out bikini). Lined racer back top with adjustable straps, back cut outs and removable padded inserts. Model is wearing a small. • 80% Nylon 20% Spandex • 100% Poly lining • Hand Wash Cold • Imported",
+        "title": "Paddle Out Light Blue Bikini Top",
+        "ss_clicks": "2148",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "4295",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Swimwear",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "151",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Swimwear&gt;Two Piece",
+          "Gifts for Her",
+          "Swimwear",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "7",
+        "popularity": "4295",
+        "product_type_unigram": "top",
+        "id": "2c2b4bafcd8c47db141cc1ad6b13ae9b"
+      }
+    },
+    {
+      "id": "173679",
+      "mappings": {
+        "core": {
+          "uid": "173679",
+          "price": 28,
+          "msrp": 50,
+          "url": "/product/A-LBM-I4-HM808",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/282_4414_copyright_reddressboutique_2016_1__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/282_4414_copyright_reddressboutique_2016_1__large.jpg",
+          "name": "Frostbite Free Blue Infinity Scarf",
+          "sku": "A-LBM-I4-HM808",
+          "brand": "Look by M"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1PVx8tX1NNH18LUwsGAwZDAyZjA2YLA0YkgvykwBALdECLk",
+        "intellisuggestSignature": "7b3f07cc56d1db7560fc887ab5475ba78fe97bb86c40ccb7deed29637ad2d4cb",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "37",
+        "ss_product_type": "Scarf",
+        "keywords": [
+          "blue",
+          "blue scarf -blue infinity scarf",
+          "knit",
+          "knit scarf",
+          "cable knit",
+          "knit infinity scarf",
+          "infinity scarf",
+          "chunky knit",
+          "chunky infinity scarf",
+          "fall",
+          "winter",
+          "cold weather",
+          "cold weather accessories",
+          "warm scarf"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Frostbite Free, this Blue Infinity Scarf will make sure you stay comfy and cute no matter how frigid it gets! The cold won’t bother you one bit! Thick cable knit infinity scarf. • 80% Acrylic, 20% Polyester • Hand Wash Cold • Imported",
+        "title": "Frostbite Free Blue Infinity Scarf",
+        "ss_clicks": "160",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "3936",
+        "ss_sale_price": "28",
+        "size_universal": "One Size",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "14",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "23",
+        "quantity_available": "53",
+        "popularity": "3936",
+        "product_type_unigram": "scarf",
+        "id": "c63c077268710ea211ee5caafe9cacc9"
+      }
+    },
+    {
+      "id": "183052",
+      "mappings": {
+        "core": {
+          "uid": "183052",
+          "price": 24,
+          "msrp": 25,
+          "url": "/product/J-JO-I7-E1437",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5893_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5893_copyright_reddressboutique_2017__large.jpg",
+          "name": "Dipped In Dreams Blue Tassel Earrings",
+          "sku": "J-JO-I7-E1437",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0vXy1_U013U1NDE2ZzBkMDJhMDZgsDRiSC_KTAEAq_gIYw",
+        "intellisuggestSignature": "4b11f48289feedc0b39744d347139f2092e6b82e5a9b3c2bce34fd656262ce5f",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "47",
+        "ss_product_type": "Dip",
+        "keywords": [
+          "earrings",
+          "ear rings",
+          "accessories",
+          "jewelry",
+          "blue",
+          "tassel",
+          "dangle",
+          "beaded"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Check out the stunning earrings! It’s like someone took awesome, dipped them in dream, then hung them like the priceless ornaments they are. And thus, the perfect earrings are born. Earrings measure 3&quot; and feature gold hardware. • Imported",
+        "title": "Dipped In Dreams Blue Tassel Earrings",
+        "ss_clicks": "915",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3822",
+        "ss_sale_price": "24",
+        "product_type": [
+          "Shop By Trend &gt; Vacation Ready",
+          "All Jewelry &gt; Earrings",
+          "Shop By Trend &gt; Worth The Tassel",
+          "Shop By Trend",
+          "What's New",
+          "All Jewelry",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "96",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Gifts for Her&gt;Gifts Under $25",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Worth The Tassel",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "29",
+        "popularity": "3822",
+        "product_type_unigram": "earrings",
+        "id": "6839d88dda84d92adb7d6ca64a908378"
+      }
+    },
+    {
+      "id": "183074",
+      "mappings": {
+        "core": {
+          "uid": "183074",
+          "price": 29,
+          "msrp": 50,
+          "url": "/product/C-TY-I4-P3184",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4834_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4834_copyright_reddressboutique_2017__large.jpg",
+          "name": "Chart Topping Mint Print Shorts",
+          "sku": "C-TY-I4-P3184",
+          "brand": "Tyche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g2J1PU00Q0wNrQwYTBkMDJlMDZgsDRiSC_KTAEArgMIeg",
+        "intellisuggestSignature": "e76f8569908a94a0db080e70f0bd241a6ba94382e82620adebbc0e3dc74ba10c",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "33",
+        "ss_product_type": "Top",
+        "keywords": [
+          "print",
+          "bright",
+          "fun",
+          "pattern",
+          "shorts",
+          "summer",
+          "vacation",
+          "mint",
+          "blue",
+          "multi",
+          "turquoise",
+          "patterned shorts",
+          "print shorts",
+          "summer shorts",
+          "colorful shorts",
+          "teal"
+        ],
+        "color": [
+          "Blue",
+          "Mint"
+        ],
+        "multi_colors": "yes",
+        "pattern": "Print",
+        "description": "You might not have a Chart Topping music record, but you can still be number one with these Aqua Print Shorts. Yes, they look that good, and they'll look that good on your, ahem, back end. They'll love to see you arrive and they'll love to see you leave. Now if that isn't Chart Topping quality, then I don't know what is. Total aces! Printed shorts have a flowy silhouette with an elastic waist and functional pockets. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Made in the USA",
+        "title": "Chart Topping Mint Print Shorts",
+        "ss_clicks": "3750",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "3651",
+        "ss_sale_price": "29",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Bottoms&gt;Shorts",
+          "All Bottoms",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Tropical Prints"
+        ],
+        "on_sale": "No",
+        "collection": "Chart Topping",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Tropical Prints",
+          "All Bottoms &gt; Shorts",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "All Bottoms",
+          "Shop By Trend",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "102",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "25",
+        "popularity": "3651",
+        "product_type_unigram": "shorts",
+        "id": "3699664a7d8747115600847b866fca4d"
+      }
+    },
+    {
+      "id": "177196",
+      "mappings": {
+        "core": {
+          "uid": "177196",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/J-GS-I3-66635",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4873_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4873_large.jpg",
+          "name": "Tell A Tale Turquoise Pendant Necklace",
+          "sku": "J-GS-I3-66635",
+          "brand": "Stella"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nUP1vU01jUzMzM2ZTBkMDJjMDZgsDRiSC_KTAEAqvgIWA",
+        "intellisuggestSignature": "807476c5b8447f10218322136c900b07588e0935c647e4461db452c8731e6d14",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "31",
+        "ss_product_type": "Pen",
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "They say that every piece of jewelry will Tell A Tale if you listen closely. What will these Turquoise Pendant Necklaces divulge? You'll have to find out for yourself, but buy yours quickly because we have a feeling that these won't last long! • Imported",
+        "title": "Tell A Tale Turquoise Pendant Necklace",
+        "ss_clicks": "712",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3533",
+        "ss_sale_price": "26",
+        "product_type": [
+          "All Jewelry &gt; Necklaces",
+          "Going Fast",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "158",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Going Fast",
+          "Gifts for Her",
+          "All Jewelry&gt;Necklaces",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "3",
+        "popularity": "3533",
+        "product_type_unigram": "necklace",
+        "id": "b21c93154ec4a98938c14998b151b9cc"
+      }
+    },
+    {
+      "id": "181668",
+      "mappings": {
+        "core": {
+          "uid": "181668",
+          "price": 24,
+          "msrp": 25,
+          "url": "/product/A-JO-E5-674HL",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2872_copyright_reddressboutique_2017_-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2872_copyright_reddressboutique_2017_-2_large.jpg",
+          "name": "Basics Of Love Aqua Belt",
+          "sku": "A-JO-E5-674HL",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1PXy13U11TUzN_HwYTBkMDJnMDZgsDRiSC_KTAEArKUIeA",
+        "intellisuggestSignature": "69f3040669e8785dee798c44c9a77adc282483bacfe001271ef9b4c6fcad3e5e",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "34",
+        "ss_product_type": "Belt",
+        "keywords": [
+          "aqua belt",
+          "basic belt",
+          "skinny belt",
+          "accessory",
+          "accessories",
+          "vegan"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "Get back to the Basics of Love and good style with this becoming Aqua Belt. Simple, chic, and sophisticated, it’s a wardrobe staple that can be worn with a multitude of things. This skinny pink belt features matte hardware. Belt measures 40&quot; long with 5 hole adjustments. • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Basics Of Love Aqua Belt",
+        "ss_clicks": "2047",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": "3515",
+        "ss_sale_price": "24",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Accessories",
+          "All Accessories&gt;Belts",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Pastels",
+          "Gifts for Her&gt;Gifts Under $25",
+          "Shop By Trend&gt;Dusty Pastels",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "collection": "Basics Of Love",
+        "condition": "New",
+        "product_type": [
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Pastels",
+          "All Accessories &gt; Belts",
+          "Shop By Trend &gt; Dusty Pastels",
+          "Shop By Trend",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "145",
+        "quantity_available": "22",
+        "popularity": "3515",
+        "product_type_unigram": "belt",
+        "id": "91963acc1d9a0891b6a3f2b8e53d32cd"
+      }
+    },
+    {
+      "id": "177727",
+      "mappings": {
+        "core": {
+          "uid": "177727",
+          "price": 24,
+          "msrp": 25,
+          "url": "/product/J-GS-I4-75478",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_3_6796_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_3_6796_large.jpg",
+          "name": "Add Intrigue Turquoise Cuff Bracelet",
+          "sku": "J-GS-I4-75478",
+          "brand": "Stella"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nUP1vU00TU3NTG3YDBkMLJgMDZgsDRiSC_KTAEAq30IYA",
+        "intellisuggestSignature": "b1bdf6c1fec1297188af518729b1504fe064ee2f0494da51e505a64e4a11ec6f",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "27",
+        "ss_product_type": "Cuff",
+        "keywords": [
+          "turquoise",
+          "teal",
+          "cuff",
+          "cuff bracelet",
+          "bracelet",
+          "stones",
+          "jeweled bracelet",
+          "chunky",
+          "statement piece",
+          "statement jewelry",
+          "accessories"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "A recipe for a good date: A colorful top for a pinch of playfulness. A flowy skirt for a dash of bohemian free-spiritness. And dangly earrings for a sprinkling of fun. Now to just Add Intrigue, with a splash of turquoise, and you’re all set. Ready for date in two hours, and you’ll know it’s ready when your spirits rise. No easier instructions to follow than close eyes and kiss. • Imported",
+        "title": "Add Intrigue Turquoise Cuff Bracelet",
+        "ss_clicks": "3902",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3387",
+        "ss_sale_price": "24",
+        "product_type": [
+          "All Jewelry &gt; Bracelets",
+          "Back in Stock",
+          "What's New",
+          "All Jewelry",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "135",
+        "ss_category_hierarchy": [
+          "Back in Stock",
+          "All Jewelry&gt;Bracelets",
+          "Gifts for Her&gt;Gifts Under $25",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "21",
+        "popularity": "3387",
+        "product_type_unigram": "bracelet",
+        "id": "197bf22e210d5b56741fdf2d0d525e57"
+      }
+    },
+    {
+      "id": "179218",
+      "mappings": {
+        "core": {
+          "uid": "179218",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/J-GS-I1-08060",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/emptyname_55-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_55-2_large.jpg",
+          "name": "City Of Stars Blue Earrings",
+          "sku": "J-GS-I1-08060",
+          "brand": "Stella"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGDw0nUP1vU01DWwMDAzYDBkMLJkMDZgsDRiSC_KTAEAqgcITQ",
+        "intellisuggestSignature": "686bd389332649fea477b88e92f2220c56fd05f71c02fd3519ed5b025e528069",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "31",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "blue",
+          "earrings",
+          "accessories",
+          "jewelry",
+          "dangle",
+          "pendant",
+          "pretty",
+          "simple",
+          "details",
+          "statement",
+          "three balls",
+          "ball earrings",
+          "statement"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "multi_colors": "no",
+        "description": "Every outfit depends upon two crucial elements: you, and the accessories you choose to pair with what you're wearing. Our City Of Stars Blue Earrings, are the icing on your cake. And well, you are already awesome so that part is totally covered. So there, you're all set. Fun sequin earrings feature gold hardware and post back. Earrings measure 3&quot; • Imported",
+        "collection": "City Of Stars",
+        "title": "City Of Stars Blue Earrings",
+        "ss_clicks": "3659",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3342",
+        "ss_sale_price": "26",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "41",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "14",
+        "popularity": "3342",
+        "product_type_unigram": "earrings",
+        "id": "5bfeeadb8816c299811b938e00637b9c"
+      }
+    },
+    {
+      "id": "181060",
+      "mappings": {
+        "core": {
+          "uid": "181060",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-STY-E2-1744B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1180_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1180_copyright_reddressboutique_2017__large.jpg",
+          "name": "Destined For Paradise Bikini Bottom",
+          "sku": "C-STY-E2-1744B",
+          "brand": "Stylish"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1g0OidR1NdI1NDcxcWIwZDA2ACFLI4b0oswUALfICLU",
+        "intellisuggestSignature": "24c08c10ca349811300e3db8a40c0a7494fed2a311aef62eef2829413d2f737b",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "33",
+        "ss_product_type": "Bottom",
+        "keywords": [
+          "swim suit",
+          "swimsuit",
+          "bathing suit",
+          "swimwear",
+          "swim wear",
+          "multi",
+          "multi color",
+          "aqua bikini",
+          "bikini bottom",
+          "bikini"
+        ],
+        "color": [
+          "Aqua"
+        ],
+        "multi_colors": "no",
+        "description": "Some folks are destined for greatness. Some for mediocrity. Then there are those of us with better ambitions who are Destined For Paradise, and we planned ahead and splurged a little on this super flattering little bikini from RDB. So in a way, that makes us destined for greatness AND paradise. Sounds like another win/win really. Model is wearing a small. • Fabric • Hand Wash Cold • Unlined • Made in the USA • Imported",
+        "title": "Destined For Paradise Bikini Bottom",
+        "ss_clicks": "747",
+        "color_family": [
+          "Blue"
+        ],
+        "condition": "New",
+        "sales_rank": "3202",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "Swimwear",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": "37",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Swimwear&gt;Two Piece",
+          "What's New",
+          "Gifts for Her",
+          "Swimwear",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "10",
+        "popularity": "3202",
+        "product_type_unigram": "destined",
+        "id": "cb66d995d45138bf139e252046363657"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "range-buckets",
+      "field": "price",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "low": 0,
+          "high": 20,
+          "label": "up to $20",
+          "count": 47
+        },
+        {
+          "filtered": true,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 92
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 306
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 259
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 73
+        },
+        {
+          "filtered": false,
+          "low": 75,
+          "high": 100,
+          "label": "$75 to $100",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "low": 100,
+          "high": 150,
+          "label": "$100 to $150",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "low": 150,
+          "high": 200,
+          "label": "$150 to $200",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "color_family",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 125
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 110
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 105
+        },
+        {
+          "filtered": true,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 92
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 85
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 71
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 67
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 31
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 24
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "brand",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "American Bazi",
+          "label": "American Bazi",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Anzell",
+          "label": "Anzell",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Bamboo",
+          "label": "Bamboo",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Breckelle's",
+          "label": "Breckelle's",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ciffy Classified",
+          "label": "Ciffy Classified",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "City Classified",
+          "label": "City Classified",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Colorfully Yours",
+          "label": "Colorfully Yours",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Essue",
+          "label": "Essue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fifth Avenue",
+          "label": "Fifth Avenue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fun 2 Fun",
+          "label": "Fun 2 Fun",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ginger G",
+          "label": "Ginger G",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Headbands of Hope",
+          "label": "Headbands of Hope",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Illa Illa",
+          "label": "Illa Illa",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Joia",
+          "label": "Joia",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Kate Spade",
+          "label": "Kate Spade",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Look by M",
+          "label": "Look by M",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Love Riche",
+          "label": "Love Riche",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Miracle Miles",
+          "label": "Miracle Miles",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "My Delicious",
+          "label": "My Delicious",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Naked Zebra",
+          "label": "Naked Zebra",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Nikibiki",
+          "label": "Nikibiki",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ovi",
+          "label": "Ovi",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Pannee",
+          "label": "Pannee",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Paper Crane",
+          "label": "Paper Crane",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Pepper",
+          "label": "Pepper",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Piko",
+          "label": "Piko",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Qupid",
+          "label": "Qupid",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "RDB",
+          "label": "RDB",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Sans Souci",
+          "label": "Sans Souci",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Signature 8",
+          "label": "Signature 8",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Soda",
+          "label": "Soda",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Stella",
+          "label": "Stella",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Stylish",
+          "label": "Stylish",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "The Hanger",
+          "label": "The Hanger",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Thirty-A Threads",
+          "label": "Thirty-A Threads",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Tres Bien",
+          "label": "Tres Bien",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Two Bee",
+          "label": "Two Bee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Tyche",
+          "label": "Tyche",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Z Supply",
+          "label": "Z Supply",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "ss_category_hierarchy",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 92
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "All Jewelry",
+          "label": "All Jewelry",
+          "count": 28
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 28
+        },
+        {
+          "filtered": false,
+          "value": "All Accessories",
+          "label": "All Accessories",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Home & Office Decor",
+          "label": "Home & Office Decor",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 70
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "ONE SIZE",
+          "label": "ONE SIZE",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "material",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Rubber",
+          "label": "Rubber",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_dress",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "season",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "pattern",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_footwear",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "collection",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Balancing Act",
+          "label": "Balancing Act",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Basics Of Love",
+          "label": "Basics Of Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Bazaar Beauty",
+          "label": "Bazaar Beauty",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Bold Streak",
+          "label": "Bold Streak",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Chart Topping",
+          "label": "Chart Topping",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "City Of Stars",
+          "label": "City Of Stars",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {}
+  }
+}
