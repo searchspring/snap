@@ -27,9 +27,9 @@ class ApiClient {
 		/**
 		 * The base URL against which to resolve every API call's (relative) path.
 		 * @type {String}
-		 * @default http://snapi.kube.searchspring.io/api/v1
+		 * @default https://snapi.kube.searchspring.io/api/v1
 		 */
-		this.basePath = basePath || 'http://snapi.kube.searchspring.io/api/v1'.replace(/\/+$/, '');
+		this.basePath = basePath || 'https://snapi.kube.searchspring.io/api/v1'.replace(/\/+$/, '');
 
 		/**
 		 * The authentication methods to be included for all API calls.
@@ -503,7 +503,7 @@ class ApiClient {
 	hostSettings() {
 		return [
 			{
-				url: 'http://snapi.kube.searchspring.io/api/v1',
+				url: 'https://snapi.kube.searchspring.io/api/v1',
 				description: 'No description provided',
 			},
 		];
