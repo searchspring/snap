@@ -62,7 +62,8 @@ const clientConfig = {
 };
 ```
 
-## Search Controller
+<h2 id="SearchController">SearchController</h2>
+
 ### Default Config
 `id` - a unique identifier for this controller. Will appear in console log & warn
 
@@ -153,7 +154,7 @@ Events are invoked in the following order:
 - Always invoked after data has been stored in mobx store
 - no operation
 
-## Autocomplete Controller
+<h2 id="AutocompleteController">AutocompleteController</h2>
 
 ### Default Config
 `id` - a unique identifier for this controller. Will appear in console log & warn
@@ -251,7 +252,7 @@ Events are invoked in the following order:
 - no operation
 
 
-## Finder Controller
+<h2 id="FinderController">FinderController</h2>
 ### Default Config
 <!-- TODO: add url, selector, wrapSelector, type, className ? -->
 `id` - a unique identifier for this controller. Will appear in console log & warn

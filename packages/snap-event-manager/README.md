@@ -11,7 +11,8 @@ It also allows for custom defined events to be used throughout your implementati
 
 # Dependency
 
-Snap Event Manager is a dependancy of [snap-controller](../snap-controller)
+Snap Event Manager is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+
 
 <details>
     <summary>Package dependencies hierarchy</summary>
@@ -28,7 +29,7 @@ npm install --save @searchspring/snap-event-manager
 
 # Events
 |                                                                      | `[custom event]`   | init               | beforeSearch       | afterSearch        | afterStore         | focusChange        | 
-| ---                                                                  | ---                | ---                | ---                | ---                | ---                | ---                |
+| --:                                                                  | :-:                | :-:                | :-:                | :-:                | :-:                | :-:                |
 | [SearchController](../snap-controller/#SearchController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
 | [AutocompleteController](../snap-controller/#AutocompleteController) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | [FinderController](../snap-controller/#FinderController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
