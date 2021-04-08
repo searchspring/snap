@@ -5,7 +5,7 @@ import { h, Fragment, render } from 'preact';
 import { SearchController } from '@searchspring/snap-controller';
 import SnapClient from '@searchspring/snap-client-javascript';
 import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, HybridTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -44,7 +44,7 @@ const cntrlrConfig = {
 const cntrlr = (window.cntrlr = new SearchController(cntrlrConfig, {
 	client: new SnapClient(globals, clientConfig),
 	store: new SearchStore(),
-	urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+	urlManager: new UrlManager(new HybridTranslator(), reactLinker),
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger()

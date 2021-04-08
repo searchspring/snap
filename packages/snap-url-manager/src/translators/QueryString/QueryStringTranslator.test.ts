@@ -13,7 +13,7 @@ describe('QueryStringTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('?bar=baz&foo=bar');
 
-		expect(queryString.serialize({})).toBe('?');
+		expect(queryString.serialize({})).toBe('/');
 	});
 
 	it('generates absolute URL if urlRoot provided', () => {
@@ -33,7 +33,7 @@ describe('QueryStringTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz&foo=bar');
 
-		expect(queryString.serialize({})).toBe('//example2.com');
+		expect(queryString.serialize({})).toBe('//example2.com/');
 	});
 
 	describe('deserialize', () => {
@@ -141,7 +141,7 @@ describe('QueryStringTranslator', () => {
 			const params: UrlState = {};
 			const query = queryString.serialize(params);
 
-			expect(query).toBe('?');
+			expect(query).toBe('/');
 		});
 
 		it('serializes with query param override', () => {

@@ -12,12 +12,12 @@ export class QueryStore {
 		this.query = search?.query;
 
 		if (search?.didYouMean) {
-			this.didYouMean = new AlternateQuery(controller, search.didYouMean)
+			this.didYouMean = new AlternateQuery(controller, search.didYouMean);
 			observables.didYouMean = observable;
 		}
 
 		if (search?.originalQuery) {
-			this.originalQuery = new AlternateQuery(controller, search.originalQuery)
+			this.originalQuery = new AlternateQuery(controller, search.originalQuery);
 			observables.originalQuery = observable;
 		}
 
@@ -38,10 +38,10 @@ class AlternateQuery {
 	constructor(controller, query) {
 		this.query = query;
 
-		this.url = controller.urlManager.reset().set('query', this.query);
+		this.url = controller.set({ query: this.query });
 
 		makeObservable(this, {
-			query: observable
+			query: observable,
 		});
 	}
 }

@@ -12,7 +12,7 @@ export class FacetStore extends Array {
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {
 			facet.values?.forEach((value) => {
-				value.url = controller.urlManager.set('filter', { [facet.field]: value.value });
+				value.url = controller.urlManager.set(`filter.${facet.field}`, [value.value]);
 
 				value.preview = () => {
 					facets.map((facet) => {

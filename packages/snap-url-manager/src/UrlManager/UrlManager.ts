@@ -178,6 +178,11 @@ export class UrlManager {
 						// not an object or array
 						const newValues = (Array.isArray(state) ? state : [state]).filter((value) => !compareObjects(value, oldState));
 						return newValues.length ? removeArrayDuplicates([oldState].concat(newValues)) : oldState;
+					} else if (typeof oldState == 'undefined') {
+						const urlState = this.urlState.getIn(path);
+						if (urlState instanceof Array && !Array.isArray(state)) {
+							return [state];
+						}
 					}
 
 					return state;

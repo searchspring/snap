@@ -36,7 +36,7 @@ export class HybridTranslator implements UrlTranslator {
 
 	constructor(config: { queryParameter?: string; urlRoot?: string; parameters?: { hash?: Array<string>; search?: Array<string> } } = {}) {
 		this.config = Immutable({
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot : '',
+			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
 			parameters: {
 				hash: Immutable(config.parameters?.hash || []),
@@ -76,8 +76,7 @@ export class HybridTranslator implements UrlTranslator {
 	}
 
 	protected generateQueryString(queryParams: Array<QueryParameter>, hashParams: Array<HashParameter>): string {
-		return (
-			this.config.urlRoot +
+		const paramString =
 			(queryParams.length
 				? '?' +
 				  queryParams
@@ -85,16 +84,17 @@ export class HybridTranslator implements UrlTranslator {
 							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
 						})
 						.join('&')
-				: '') +
-			(hashParams.length || (!queryParams.length && !this.config.urlRoot)
+				: location.pathname) +
+			(hashParams.length
 				? '#/' +
 				  hashParams
 						.map((param) => {
 							return param.map((v) => encodeHashComponent(v)).join(':');
 						})
 						.join('/')
-				: '')
-		);
+				: '');
+
+		return `${this.config.urlRoot}${paramString}`;
 	}
 
 	protected parseHashString(hashString: string): Array<HashParameter> {

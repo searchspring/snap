@@ -65,7 +65,7 @@ class Option {
 		if (this.default) {
 			this.url = controller.urlManager.remove('page').remove('sort');
 		} else {
-			this.url = controller.urlManager.remove('page').set('sort', { [this.field]: this.direction });
+			this.url = controller.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }]);
 		}
 
 		makeObservable(this, {
