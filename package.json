@@ -14,6 +14,7 @@
 		"cypress": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-demo' 'npm run cypress'",
 		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
+		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
 		"storybook": "node_modules/.bin/lerna exec --stream --scope '@searchspring/snap-preact-components' 'npm run storybook'",
 		"publish": "node_modules/.bin/lerna publish --yes"
 	},

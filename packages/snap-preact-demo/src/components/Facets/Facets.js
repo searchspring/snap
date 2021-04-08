@@ -11,13 +11,13 @@ export class Facets extends Component {
 	render() {
 		const facets = this.props.store.facets;
 		const controller = this.props.store.controller;
-		controller.log.debug('facets', facets)
+		controller.log.debug('facets', facets);
 
 		return (
 			<Profile name="facets" controller={controller}>
 				<div class="ss-facets">
 					{facets.map((facet) => {
-						return <Facet facet={facet}></Facet>
+						return <Facet facet={facet}></Facet>;
 					})}
 				</div>
 			</Profile>

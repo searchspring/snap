@@ -7,7 +7,7 @@ export function afterStore(ctrlr) {
 	});
 
 	// log the store
-	cntrlr.on('afterStore', async({ controller }, next) => {
+	cntrlr.on('afterStore', async ({ controller }, next) => {
 		controller.log.debug('store', controller.store.toJSON());
 		await next();
 	});

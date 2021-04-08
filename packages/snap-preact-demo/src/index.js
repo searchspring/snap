@@ -47,7 +47,7 @@ const cntrlr = (window.cntrlr = new SearchController(cntrlrConfig, {
 	urlManager: new UrlManager(new HybridTranslator(), reactLinker),
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
-	logger: new Logger()
+	logger: new Logger(),
 }));
 
 /*

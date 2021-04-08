@@ -31,7 +31,9 @@ export class FilterSummary extends Component {
 							))}
 
 						<div class="ss-list-option ss-summary-reset">
-							<a {...removeAll.link} class="ss-list-link">Clear All</a>
+							<a {...removeAll.link} class="ss-list-link">
+								Clear All
+							</a>
 							<a class="ss-list-link">Clear All</a>
 						</div>
 					</div>
