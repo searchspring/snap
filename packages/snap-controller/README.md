@@ -1,12 +1,42 @@
 # Snap Controller
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+
+The heart of controlling Search, Autocomplete, & Finder functionallity
+
+---
+
+# Dependencies
+
+Snap Controller is a top level package that requires the following dependanies:
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a> [@searchspring/snap-client-javascript](../snap-client-javascript)
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a> [@searchspring/snap-store-mobx](../snap-store-mobx)
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> [@searchspring/snap-url-manager](../snap-url-manager)
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a> [@searchspring/snap-event-manager](../snap-event-manager)
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a> [@searchspring/snap-profiler](../snap-profiler)
+
+<a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](../snap-logger)
+
+<details>
+    <summary>Package dependencies hierarchy</summary>
+    <br/>
+    <img src="../../images/snap-dependencies.jpg" width="500">
+</details>
+
+
 
 # Installation
 
 ```bash
 npm install --save @searchspring/snap-controller @searchspring/snap-client-javascript @searchspring/snap-store-mobx @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger
 ```
+
 # Usage
 ## Global Config
 Object required for all controllers
@@ -190,7 +220,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 ### Bind
 <!-- TODO: set/test link to DomTargeter -->
-Invoking the `bind` method is required to attach event listeners to each input. See [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter) for recommended usage. 
+Invoking the `bind` method is required to attach event listeners to each input. See [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter) for recommended usage 
 
 ```typescript
 autocompleteController.bind();
@@ -251,7 +281,7 @@ type FinderFieldConfig = {
 ```
 
 #### Hierarchy Config
-If using a field that is of hierarchy type, specifying `levels` will display a dropdown for each hierarchy level. Hierarchy Finders using `levels` will ensure selections are made in order by disabling dropdowns. 
+Specifying `levels` will display a dropdown for each hierarchy level. Finders that use hierarchy fields will enforce selecting dropdowns in order by disabling following dropdowns
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
@@ -267,7 +297,7 @@ const finderConfig: FinderControllerConfig = {
 };
 ```
 
-Optionally if `levels` is not defined, a single dropdown will be displayed on initial load. Each selection will dynamically append additional dropdowns until there are no more available selections.
+Optionally if `levels` is not defined, a single dropdown will be displayed on initial load. Each selection will dynamically append additional dropdowns until there are no more available selections
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
@@ -283,17 +313,29 @@ const finderConfig: FinderControllerConfig = {
 
 
 #### Non-Hierarchy Config
-If using fields are that not of hierarchy type:
+If using fields are that not of hierarchy type, `levels` is not required
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
     id: 'finder',
 	globals: {},
 	fields: [
-        { field: 'custom_wheel_size' }, 
-        { field: 'custom_wheel_width' }, 
-        { field: 'custom_wheel_bolt_pattern' }, 
-        { field: 'custom_color' }
+        { 
+            field: 'custom_wheel_size' 
+            label: 'Size',
+        }, 
+        { 
+            field: 'custom_wheel_width' 
+            label: 'Width',
+        }, 
+        { 
+            field: 'custom_wheel_bolt_pattern' 
+            label: 'Bolt Pattern',
+        }, 
+        { 
+            field: 'custom_color'
+            label: 'Color',
+        }
     ]
 };
 ```
@@ -355,9 +397,9 @@ Events are invoked in the following order:
 - no operation
 
 
-## Custom Middlewear (Search, Autocomplete, & Finder Controllers)
+## Middlewear (Search, Autocomplete, & Finder Controllers)
 
-### Middlewear `use` method
+### `use` method
 Apply multiple event middlewear using the `use` method
 
 If `next()` is not called or `false` is returned, the middlewear chain will not continue
@@ -374,7 +416,7 @@ const middleware = (controller) => {
 searchController.use(middlewear);
 ```
 
-### Middlewear `on` method
+### `on` method
 Alternatively, you can also use the `on` method. Invoking `next()` is not required here
 ```typescript
 searchController.on('init', async ({ controller }) => {});
