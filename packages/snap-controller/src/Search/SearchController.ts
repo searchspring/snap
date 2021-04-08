@@ -67,8 +67,7 @@ export class SearchController extends AbstractController {
 	}
 
 	get params(): Record<string, any> {
-		const urlState = this.urlManager.state;
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
+		const params: Record<string, any> = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
 		if (!this.config.settings?.redirects?.merchandising) {
@@ -107,9 +106,9 @@ export class SearchController extends AbstractController {
 			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
 			const response = await this.client.search(params);
-			if(!response.meta) {
+			if (!response.meta) {
 				/**
-				 * MockSnapClient will overwrite the client search() method and use 
+				 * MockSnapClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
 				response.meta = this.client.meta;
@@ -122,6 +121,8 @@ export class SearchController extends AbstractController {
 					if (!facet.filtered && facet.values?.length == 1) {
 						return facet.values[0].count != response.pagination.totalResults;
 					} else if (facet.values?.length == 0) {
+						return false;
+					} else if (facet.type == 'range' && facet.range.low == facet.range.high) {
 						return false;
 					}
 

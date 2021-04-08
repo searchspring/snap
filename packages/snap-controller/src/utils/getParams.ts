@@ -4,32 +4,33 @@ type searchParams = {
 	search?: {
 		query?: {
 			string?: string;
-		}
+		};
 		subQuery?: string;
 		originalQuery?: string;
-	},
+	};
 	pagination?: {
 		pageSize?: number;
 		page?: number;
-	},
+	};
 	sorts?: {
 		field: string;
 		direction: string;
-	}[],
+	}[];
 	filters?: {
 		type: string;
 		field: string;
-		value: string | {
-			low: number;
-			high: number;
-		};
+		value:
+			| string
+			| {
+					low: number;
+					high: number;
+			  };
 		background?: boolean;
-	}[],
+	}[];
 	merchandising?: {
-		landingPage?: string
-	}
-}
-
+		landingPage?: string;
+	};
+};
 
 export function getSearchParams(state): Record<string, any> {
 	const params: searchParams = {};
@@ -67,18 +68,16 @@ export function getSearchParams(state): Record<string, any> {
 
 	if (state.sort) {
 		params.sorts = params.sorts || [];
-		Object.keys(state.sort).forEach((field) => {
-			const direction = state.sort[field];
 
-			if (typeof field != 'string' || !Array.isArray(direction) || direction.length != 1) {
-				return;
-			}
+		const sorts = Array.isArray(state.sort) ? state.sort : [state.sort];
+		const sort = sorts[0];
 
+		if (sort && sort.field && sort.direction) {
 			params.sorts.push({
-				field: field,
-				direction: direction[0],
+				field: sort.field,
+				direction: sort.direction,
 			});
-		});
+		}
 	}
 
 	if (state.filter) {
@@ -91,40 +90,24 @@ export function getSearchParams(state): Record<string, any> {
 
 			const filter = state.filter[field];
 
-			const values = filter;
-			const keys = Object.keys(filter || {});
+			// ensure values are an array
+			const values = Array.isArray(filter) ? filter : [filter];
 
-			// TODO: should always be an array
-			if (values.length) {
-				// value filters
-				if (Array.isArray(values)) {
-					values.forEach((value) => {
-						params.filters.push({
-							type: 'value',
-							field: field,
-							value: value,
-						});
-					});
-				} else {
+			values.forEach((value) => {
+				if (typeof value != 'object') {
 					params.filters.push({
 						type: 'value',
 						field: field,
-						value: values,
+						value,
 					});
-				}
-			} else if (keys.length && filter.low && filter.high && filter.low.length == filter.high.length) {
-				// range filters
-				filter.low.forEach((value, i) => {
+				} else if (typeof value.low != 'undefined' && typeof value.high != 'undefined') {
 					params.filters.push({
 						type: 'range',
 						field: field,
-						value: {
-							low: filter.low[i],
-							high: filter.high[i],
-						},
+						value,
 					});
-				});
-			}
+				}
+			});
 		});
 	}
 

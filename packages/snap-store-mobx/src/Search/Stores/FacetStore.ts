@@ -61,7 +61,7 @@ class Facet {
 
 	get clear() {
 		return {
-			url: this.controller?.urlManager?.remove('page').remove(['filter', this.field]),
+			url: this.controller?.urlManager?.remove('page').remove(`filter.${this.field}`),
 		};
 	}
 
@@ -89,7 +89,6 @@ class RangeFacet extends Facet {
 		super(controller, storage, facet, facetMeta);
 
 		this.step = facet.step;
-		this.active = facet.active;
 
 		const storedRange = this.storage.get(`${this.field}.range`);
 		if (!storedRange || !facet.filtered) {
@@ -106,6 +105,10 @@ class RangeFacet extends Facet {
 		} else {
 			// range hasn't changed
 		}
+
+		// TODO: Fix api
+		// needed when API returns no active (only seems to be when range.low == range.high)
+		this.active = facet.active || facet.range;
 
 		this.formatSeparator = facetMeta.formatSeparator;
 		this.formatValue = facetMeta.formatValue;
@@ -243,13 +246,13 @@ class Value {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = this.controller?.urlManager?.remove('page').remove(['filter', facet.field, value.value]);
+			this.url = this.controller?.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value);
 		} else {
-			let urlManager = this.controller?.urlManager;
+			let valueUrl = this.controller?.urlManager.remove('page');
 			if (facet.multiple == 'single') {
-				urlManager = urlManager?.remove(['filter', facet.field]);
+				valueUrl = valueUrl?.remove(`filter.${facet.field}`);
 			}
-			this.url = urlManager?.remove('page').merge('filter', { [facet.field]: value.value });
+			this.url = valueUrl?.merge(`filter.${facet.field}`, value.value);
 		}
 	}
 }
@@ -273,12 +276,9 @@ class HierarchyValue extends Value {
 		}
 
 		if (value.value) {
-			this.url = controller?.urlManager
-				?.remove('page')
-				.remove(['filter', facet.field])
-				.merge('filter', { [facet.field]: value.value });
+			this.url = controller?.urlManager?.remove('page').set(`filter.${facet.field}`, value.value);
 		} else {
-			this.url = controller?.urlManager?.remove('page').remove(['filter', facet.field]);
+			this.url = controller?.urlManager?.remove('page').remove(`filter.${facet.field}`);
 		}
 	}
 }
@@ -299,15 +299,15 @@ class RangeValue {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = this.controller?.urlManager.remove('page').remove('filter', { [facet.field]: { low: this.low, high: this.high } });
+			this.url = this.controller?.urlManager.remove('page').remove(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
 		} else {
-			let urlManager = this.controller?.urlManager;
+			let valueUrl = this.controller?.urlManager.remove('page');
 
 			if (facet.multiple == 'single') {
-				urlManager = urlManager?.remove(['filter', facet.field]);
+				valueUrl = valueUrl?.remove(`filter.${facet.field}`);
 			}
 
-			this.url = urlManager?.remove('page').merge('filter', { [facet.field]: { low: this.low, high: this.high } });
+			this.url = valueUrl?.merge(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
 		}
 	}
 }

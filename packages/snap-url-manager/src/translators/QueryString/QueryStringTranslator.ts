@@ -17,7 +17,7 @@ export class QueryStringTranslator implements UrlTranslator {
 
 	constructor(config: { queryParameter?: string; urlRoot?: string } = {}) {
 		this.config = Immutable({
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot : '',
+			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
 			...config,
 		});
@@ -48,17 +48,16 @@ export class QueryStringTranslator implements UrlTranslator {
 	}
 
 	protected generateQueryString(params: Array<QueryParameter>): string {
-		return (
-			this.config.urlRoot +
-			(params.length || !this.config.urlRoot
-				? '?' +
-				  params
-						.map((param) => {
-							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
-						})
-						.join('&')
-				: '')
-		);
+		const paramString = params.length
+			? '?' +
+			  params
+					.map((param) => {
+						return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
+					})
+					.join('&')
+			: location.pathname;
+
+		return `${this.config.urlRoot}${paramString}`;
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {

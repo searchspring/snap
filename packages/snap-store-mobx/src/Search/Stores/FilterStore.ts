@@ -63,7 +63,7 @@ class Filter {
 		this.value = filter.value;
 		this.label = `${filter.facet.label}: ${filter.value.label}`;
 
-		this.url = this.controller?.urlManager?.remove('page').remove(['filter', filter.facet.field, filter.value.value]);
+		this.url = this.controller?.urlManager?.remove('page').remove(`filter.${this.facet.field}`, this.value.value);
 
 		makeObservable(this, {
 			facet: observable,
@@ -96,10 +96,7 @@ class RangeFilter {
 		this.value = filter.value;
 		this.label = `${filter.facet.label}: ${filter.value.label}`;
 
-		this.url = this.controller?.urlManager
-			?.remove('page')
-			.remove(['filter', filter.facet.field, 'low', filter.value.low])
-			.remove(['filter', filter.facet.field, 'high', filter.value.high]);
+		this.url = this.controller?.urlManager?.remove('page').remove(`filter.${filter.facet.field}`, { low: filter.value.low, high: filter.value.high });
 
 		makeObservable(this, {
 			facet: observable,

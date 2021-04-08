@@ -13,7 +13,7 @@ describe('HybridTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('?bar=baz#/foo:bar');
 
-		expect(queryString.serialize({})).toBe('#/');
+		expect(queryString.serialize({})).toBe('/');
 	});
 
 	it('generates absolute URL if urlRoot provided', () => {
@@ -24,7 +24,7 @@ describe('HybridTranslator', () => {
 			}
 		}
 
-		const queryString = new CustomHybrid({ urlRoot: '//example2.com' });
+		const queryString = new CustomHybrid({ urlRoot: '//example2.com/' });
 
 		const params = {
 			...queryString.deserialize(url),
@@ -33,7 +33,7 @@ describe('HybridTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz#/foo:bar');
 
-		expect(queryString.serialize({})).toBe('//example2.com');
+		expect(queryString.serialize({})).toBe('//example2.com/');
 	});
 
 	describe('deserialize', () => {
@@ -134,7 +134,7 @@ describe('HybridTranslator', () => {
 			const params: UrlState = {};
 			const query = queryString.serialize(params);
 
-			expect(query).toBe('#/');
+			expect(query).toBe('/');
 		});
 
 		it('serializes with query param override', () => {
@@ -191,7 +191,7 @@ describe('HybridTranslator', () => {
 				array: ['uno', 'dos', 'tres'],
 			};
 
-			expect(hybrid.serialize(params)).toBe('#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
+			expect(hybrid.serialize(params)).toBe('/#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
 		});
 
 		it('serializes range filters correctly', () => {
@@ -210,7 +210,7 @@ describe('HybridTranslator', () => {
 			const query = queryString.serialize(params);
 
 			expect(query).toBe(
-				'#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*'
+				'/#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*'
 			);
 		});
 
@@ -225,7 +225,7 @@ describe('HybridTranslator', () => {
 
 			const query = queryString.serialize(params as UrlState);
 
-			expect(query).toBe('#/filter:price:low:10/filter:price:high:100');
+			expect(query).toBe('/#/filter:price:low:10/filter:price:high:100');
 		});
 	});
 
