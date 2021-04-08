@@ -38,7 +38,7 @@ class AlternateQuery {
 	constructor(controller, query) {
 		this.query = query;
 
-		this.url = controller.set({ query: this.query });
+		this.url = controller.urlManager.set({ query: this.query });
 
 		makeObservable(this, {
 			query: observable,
