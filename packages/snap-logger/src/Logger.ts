@@ -87,7 +87,7 @@ export class Logger {
 
 	public profile(profile: any): void {
 		this.dev(
-			`%c ${emoji.gear} %c${this.prefix}%c${profile.type}  %c~  ${profile.name}  ::  %c${profile.status.toUpperCase()}${
+			`%c ${emoji.gear} %c${this.prefix}%c${profile.type}  %c~  ${profile.name}  ::  %c${profile.status?.toUpperCase()}${
 				profile.status == 'finished' ? '  ::  %c' + profile.time.run + 'ms' : ''
 			}`,
 			`color: ${colors.orange}; font-size: 14px; line-height: 12px;`,

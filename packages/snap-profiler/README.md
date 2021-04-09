@@ -1,3 +1,196 @@
 # Snap Profiler
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
+
+A utility for profiling the performance of Snap features
+
+---
+
+# Dependency
+
+Snap Profiler is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+
+
+<details>
+    <summary>Package dependencies hierarchy</summary>
+    <br/>
+    <img src="../../images/snap-dependencies.jpg"/>
+</details>
+
+
+# Installation
+
+```bash
+npm install --save @searchspring/snap-profiler
+```
+
+
+# Usage
+## Import
+### CommonJS
+```typescript
+const Profiler = require('@searchspring/snap-profiler');
+```
+
+### ES Module
+```typescript
+import { Profiler } from '@searchspring/snap-profiler';
+```
+
+
+<h2 id="Profiler">Profiler</h2>
+
+An options `namespace` can be passed to the Profiler constructor
+
+```typescript
+import { Profiler } from '@searchspring/snap-profiler';
+
+const profiler = new Profiler('namespace');
+```
+
+### `setNamespace` method
+
+Programatically set namespace instead of setting in constructor
+
+```typescript
+import { Profiler } from '@searchspring/snap-profiler';
+
+const profiler = new Profiler();
+
+profiler.setNamespace('namespace');
+```
+
+### `create` method
+Creates a new profile
+
+```typescript
+import { Profiler } from '@searchspring/snap-profiler';
+
+const profiler = new Profiler();
+
+const searchProfile = profiler.create({ 
+    type: 'event', 
+    name: 'search', 
+    context: params
+}: ProfileDetails)
+```
+
+```typescript
+type ProfileDetails<T> = { 
+    type: string; 
+    name: string; 
+    context: T;
+}
+```
+
+Create returns an instance of `Profile`. See [Profile section](#Profile)
+
+
+<h2 id="Profile">Profile</h2>
+
+Note that `Profile` is not an exported member of the Snap Profiler package.
+
+A `Profile` is only returned in the [Profiler](#Profiler)'s `create` method
+
+### `start` method
+Can only be invoked on the return on the `create` method. 
+This will start the profiler timer.
+
+```typescript
+searchProfile.start();
+```
+
+### `stop` method
+Can only be invoked on the return on the `create` method. 
+This will stop the profiler timer.
+
+```typescript
+searchProfile.stop();
+```
+
+### `namespace` property
+Profile namespace that was set using the `Profiler` constructor or the `setNamespace` method
+
+```typescript
+console.log(`namespace: ${searchProfile.namespace}`)
+```
+
+### `type` property
+Profile type that was set in the `create` method `ProfileDetails` parameters
+
+```typescript
+console.log(`type: ${searchProfile.type}`)
+```
+
+### `name` property
+Profile name that was set in the `create` method `ProfileDetails` parameters
+
+```typescript
+console.log(`name: ${searchProfile.name}`)
+```
+
+### `context` property
+Profile context that was set in the `create` method `ProfileDetails` parameters
+
+```typescript
+console.log(`context: ${searchProfile.context}`)
+```
+
+### `status` property
+Profile status. Default value is `pending`
+
+Value will change to `started` when `start` method is invoked
+
+Value will change to `finished` when `stop` method is invoked
+
+```typescript
+console.log(`context: ${searchProfile.status}`)
+```
+
+### `time` property
+Profile time object `ProfileTime`
+
+```typescript
+const time: ProfileTime = {
+	date: number;
+	begin: number;
+	end: number;
+	run: number;
+};
+```
+
+`ProfileTime.date` - set to `Date.now()` when `start` method is invoked
+
+`ProfileTime.begin` - set to `window.performance.now()` when `start` method is invoked
+
+`ProfileTime.end` - set to `window.performance.now()` when `stop` method is invoked
+
+`ProfileTime.run` - set to the total running time in milliseconds between when the `start` and `stop` methods have been invoked
+
+
+## Logging profiles
+It is recommended to using the Snap Logger's `profile` method to log Snap Profiles
+
+For further use of Snap Logger, see [@searchspring/snap-logger](../snap-logger) <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
+
+```typescript
+import { Profiler } from '@searchspring/snap-profiler';
+import { Logger } from '@searchspring/snap-logger';
+
+const logger = new Logger();
+const profiler = new Profiler();
+
+const searchProfile = profiler.create({ 
+    type: 'event', 
+    name: 'search', 
+    context: {} 
+}: ProfileDetails).start();
+
+// code to profile
+
+searchProfile.stop();
+
+logger.profile(searchProfile)
+```
+

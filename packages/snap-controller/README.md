@@ -26,7 +26,7 @@ Snap Controller is a top level package that requires the following dependanies:
 <details>
     <summary>Package dependencies hierarchy</summary>
     <br/>
-    <img src="../../images/snap-dependencies.jpg" width="500">
+    <img src="../../images/snap-dependencies.jpg"/>
 </details>
 
 
@@ -55,11 +55,22 @@ const globals = {
 Object required for all controllers
 
 `apiHost` (optional) - Specify local [Snapi](https://link.to.snapi) endpoint for development
+<!-- TODO: snapi link -->
 
 ```typescript
 const clientConfig = {
 	apiHost: 'http://localhost:8080/api/v1'
 };
+```
+## Import
+### CommonJS
+```typescript
+const SearchController = require('@searchspring/snap-controller');
+```
+
+### ES Module
+```typescript
+import { SearchController } from '@searchspring/snap-controller';
 ```
 
 <h2 id="SearchController">SearchController</h2>
@@ -90,7 +101,7 @@ const searchConfig: SearchControllerConfig = {
 	},
 };
 ```
-### Import & Instantiate
+### Instantiate
 Search controller requires a `SearchControllerConfig` object and `ControllerServices` object
 
 ```typescript
@@ -187,7 +198,7 @@ const autocompleteConfig: AutocompleteControllerConfig = {
 };
 ```
 
-### Import & Instantiate
+### Instantiate
 Autocomplete controller requires a `AutocompleteControllerConfig` object and `ControllerServices` object
 
 ```typescript
@@ -343,7 +354,7 @@ const finderConfig: FinderControllerConfig = {
 
 ### Installation
 
-### Import & Instantiate
+### Instantiate
 Search controller requires a `SearchControllerConfig` object and `ControllerServices` object
 
 ```typescript

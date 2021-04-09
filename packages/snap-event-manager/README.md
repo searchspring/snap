@@ -17,7 +17,7 @@ Snap Event Manager is a dependancy of [@searchspring/snap-controller](../snap-co
 <details>
     <summary>Package dependencies hierarchy</summary>
     <br/>
-    <img src="../../images/snap-dependencies.jpg" width="500">
+    <img src="../../images/snap-dependencies.jpg"/>
 </details>
 
 
@@ -27,7 +27,19 @@ Snap Event Manager is a dependancy of [@searchspring/snap-controller](../snap-co
 npm install --save @searchspring/snap-event-manager
 ```
 
-# Events
+# Usage
+## Import
+### CommonJS
+```typescript
+const EventManager = require('@searchspring/snap-event-manager');
+```
+
+### ES Module
+```typescript
+import { EventManager } from '@searchspring/snap-event-manager';
+```
+
+## Events
 |                                                                      | `[custom event]`   | init               | beforeSearch       | afterSearch        | afterStore         | focusChange        | 
 | --:                                                                  | :-:                | :-:                | :-:                | :-:                | :-:                | :-:                |
 | [SearchController](../snap-controller/#SearchController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
@@ -35,10 +47,10 @@ npm install --save @searchspring/snap-event-manager
 | [FinderController](../snap-controller/#FinderController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
 
 
-## custom event
+### custom event
 Must first be defined using `on` method before called using `fire` method
 
-## init
+### init
 The `init` event must be called after instantiating an instance of any Controller in order for changes in the urlManager to take effect by subscribing to changes.
 
 Therefore, we reccomend using the respective Controller's `init` method instead of invoking the init event directly using `fire` method
@@ -56,17 +68,11 @@ autocompleteController.init();
 finderController.init();
 ```
 
-Not Recommended:
-```typescript
-eventManager.fire('init')
-```
-
-
-## beforeSearch
+### beforeSearch
 - Always invoked before an API request is made 
 - Sets `controller.store.loading = true`
 
-## afterSearch
+### afterSearch
 - Always invoked after an API request is made 
 - Sets `controller.store.loading = false`
 - When using SearchController:
@@ -75,23 +81,10 @@ eventManager.fire('init')
 - When using AutocompleteController:
     - Cancels search if no input or query doesn't match current urlManager state
 
-## afterStore
+### afterStore
 - Always invoked after data has been stored in mobx store
 - no operation
 
-
-
-# Usage
-## Import
-### CommonJS
-```typescript
-const SnapClient = require('@searchspring/snap-client-javascript');
-```
-
-### ES Module
-```typescript
-import { EventManager } from '@searchspring/snap-event-manager';
-```
 
 ## `on` method
 Adds a new event to event manager
