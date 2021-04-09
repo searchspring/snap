@@ -6,7 +6,8 @@ import { withStore } from '../../services/providers';
 @observer
 export class FilterSummary extends Component {
 	render() {
-		const { facets, filters, slideOutTriggered } = this.props.store;
+		const { facets, filters, slideOutTriggered, controller } = this.props.store;
+		const removeAll = controller.urlManager.remove('filter');
 
 		return filters.length ? (
 			<div class="ss-summary">
@@ -30,9 +31,9 @@ export class FilterSummary extends Component {
 							))}
 
 						<div class="ss-list-option ss-summary-reset">
-							{/* TODO - waitiing on url Maganger 
-								this seems messy..  */}
-							{/* <a href={ location().remove('filter').remove('rq').url() } class="ss-list-link">Clear All</a> */}
+							<a {...removeAll.link} class="ss-list-link">
+								Clear All
+							</a>
 							<a class="ss-list-link">Clear All</a>
 						</div>
 					</div>

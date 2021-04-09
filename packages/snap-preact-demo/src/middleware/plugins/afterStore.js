@@ -5,6 +5,12 @@ export function afterStore(ctrlr) {
 
 		await next();
 	});
+
+	// log the store
+	cntrlr.on('afterStore', async ({ controller }, next) => {
+		controller.log.debug('store', controller.store.toJSON());
+		await next();
+	});
 }
 
 function mutateFacets(facets) {

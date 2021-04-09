@@ -10,7 +10,6 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = true;
 	public loaded = false;
-	
 	constructor() {
 		makeObservable(this, {
 			custom: observable,

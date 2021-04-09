@@ -1,7 +1,8 @@
-import { UrlState, UrlTranslator, UrlStateSort, UrlStateRangeValue } from '../../types';
+import { UrlState, UrlTranslator, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
 import { ImmutableArray } from 'seamless-immutable';
+import { black } from 'color-name';
 
 export enum LocationType {
 	HASH = 'hash',
@@ -31,12 +32,11 @@ type HashConfig = {
 
 export class HybridTranslator implements UrlTranslator {
 	private config: HashConfig;
-	private detached = false;
 	private lookup: LocationLookup = {};
 
 	constructor(config: { queryParameter?: string; urlRoot?: string; parameters?: { hash?: Array<string>; search?: Array<string> } } = {}) {
 		this.config = Immutable({
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot : '',
+			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
 			parameters: {
 				hash: Immutable(config.parameters?.hash || []),
@@ -70,9 +70,31 @@ export class HybridTranslator implements UrlTranslator {
 			.split('&')
 			.filter((v) => v)
 			.map((kvPair) => {
-				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v));
+				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
 				return { key: key.split('.'), value };
 			});
+	}
+
+	protected generateQueryString(queryParams: Array<QueryParameter>, hashParams: Array<HashParameter>): string {
+		const paramString =
+			(queryParams.length
+				? '?' +
+				  queryParams
+						.map((param) => {
+							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
+						})
+						.join('&')
+				: location.pathname) +
+			(hashParams.length
+				? '#/' +
+				  hashParams
+						.map((param) => {
+							return param.map((v) => encodeHashComponent(v)).join(':');
+						})
+						.join('/')
+				: '');
+
+		return `${this.config.urlRoot}${paramString}`;
 	}
 
 	protected parseHashString(hashString: string): Array<HashParameter> {
@@ -86,26 +108,12 @@ export class HybridTranslator implements UrlTranslator {
 			});
 	}
 
-	protected generateQueryString(queryParams: Array<QueryParameter>, hashParams: Array<HashParameter>): string {
-		return (
-			this.config.urlRoot +
-			(queryParams.length
-				? '?' +
-				  queryParams
-						.map((param) => {
-							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
-						})
-						.join('&')
-				: '') +
-			(hashParams.length || !queryParams.length
-				? '#/' +
-				  hashParams
-						.map((param) => {
-							return param.map((v) => encodeHashComponent(v)).join(':');
-						})
-						.join('/')
-				: '')
-		);
+	protected parseQuery(queryParams: Array<QueryParameter>): UrlState {
+		const qParamKey: string = this.getConfig().queryParameter;
+
+		const qParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == qParamKey);
+
+		return qParam ? { query: qParam.value } : {};
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
@@ -186,27 +194,67 @@ export class HybridTranslator implements UrlTranslator {
 		return state;
 	}
 
-	protected parseQuery(queryParams: Array<QueryParameter>): UrlState {
-		const qParamKey: string = this.getConfig().queryParameter;
-
-		const qParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == qParamKey);
-
-		return qParam ? { query: qParam.value } : {};
-	}
-
 	protected parseHashFilter(hashParameters: Array<HashParameter>): UrlState {
 		const filters = hashParameters.filter((p) => p[0] == 'filter');
+		const valueFilterParams = filters.filter((p) => p.length == 3);
+		const rangeFilterParams = filters.filter((p) => p.length == 4);
 
-		return filters.reduce((state: UrlState, param: HashParameter): UrlState => {
+		const valueFilters = valueFilterParams.reduce((state: UrlState, param: HashParameter): UrlState => {
 			const [type, field, value] = param;
+			const currentValue = (state.filter || {})[field] || [];
 
 			return {
 				filter: {
 					...state.filter,
-					[field]: [...((state.filter || {})[field] || []), value],
+					[field]: [...(Array.isArray(currentValue) ? currentValue : [currentValue]), value],
 				},
 			};
 		}, {});
+
+		const rangeFilters = rangeFilterParams.reduce((state: UrlState, param: HashParameter, index: number): UrlState => {
+			// ranges should come in pairs!
+			// use index to build pairs, ignore non pairs
+			// build set as encountered - only return full sets (low + high)
+
+			let newState = state;
+			const nextRangeParam = rangeFilterParams[index + 1];
+			const [type, field, bound, value] = param;
+			if (
+				index % 2 == 0 &&
+				nextRangeParam &&
+				nextRangeParam[1] == field &&
+				bound == RangeValueProperties.LOW &&
+				nextRangeParam[2] == RangeValueProperties.HIGH
+			) {
+				const currentValue = (state.filter || {})[field] || [];
+
+				newState = {
+					filter: {
+						...state.filter,
+						[field]: [
+							...(Array.isArray(currentValue) ? currentValue : [currentValue]),
+							{
+								[RangeValueProperties.LOW]: +value || null,
+								[RangeValueProperties.HIGH]: +nextRangeParam[3] || null,
+							},
+						],
+					},
+				};
+			}
+
+			return newState;
+		}, {});
+
+		return {
+			...(valueFilters.filter || rangeFilters.filter
+				? {
+						filter: {
+							...valueFilters.filter,
+							...rangeFilters.filter,
+						},
+				  }
+				: {}),
+		};
 	}
 
 	protected parseHashSort(hashParameters: Array<HashParameter>): UrlState {
@@ -218,7 +266,7 @@ export class HybridTranslator implements UrlTranslator {
 			const sortArray = state.sort ? (Array.isArray(state.sort) ? state.sort : [state.sort]) : [];
 
 			return {
-				sort: [...sortArray, { [field]: direction } as UrlStateSort],
+				sort: [...sortArray, { field, direction } as UrlStateSort],
 			};
 		}, {});
 	}
@@ -262,7 +310,7 @@ export class HybridTranslator implements UrlTranslator {
 					);
 				} else if (typeof value == 'object') {
 					addRecursive(value, [...currentPath, key]);
-				} else {
+				} else if (typeof value != 'undefined') {
 					params = params.concat([{ key: [...currentPath, key], value }]);
 				}
 			});
@@ -285,12 +333,24 @@ export class HybridTranslator implements UrlTranslator {
 
 			const filter = state.filter[key];
 
-			return (filter instanceof Array ? filter : [filter]).map((value: string | number | boolean | UrlStateRangeValue) => {
-				if (typeof value == 'string' || typeof value == 'number') {
-					return ['filter', key, '' + value];
+			return (filter instanceof Array ? filter : [filter]).flatMap(
+				(value: UrlStateFilterType): Array<HashParameter> => {
+					if (typeof value == 'string' || typeof value == 'number' || typeof value == 'boolean') {
+						return [['filter', key, '' + value]];
+					} else if (
+						typeof value == 'object' &&
+						typeof value[RangeValueProperties.LOW] != 'undefined' &&
+						typeof value[RangeValueProperties.HIGH] != 'undefined'
+					) {
+						return [
+							['filter', key, RangeValueProperties.LOW, '' + (value[RangeValueProperties.LOW] ?? '*')],
+							['filter', key, RangeValueProperties.HIGH, '' + (value[RangeValueProperties.HIGH] ?? '*')],
+						];
+					}
+
+					return [];
 				}
-				return [];
-			});
+			);
 		});
 	}
 
@@ -299,9 +359,7 @@ export class HybridTranslator implements UrlTranslator {
 			return [];
 		}
 
-		const sortArray = Array.isArray(state.sort) ? state.sort : [state.sort];
-
-		return sortArray.map((sort: UrlStateSort) => {
+		return (state.sort instanceof Array ? state.sort : [state.sort]).map((sort: UrlStateSort) => {
 			return ['sort', sort.field, sort.direction];
 		});
 	}
@@ -325,6 +383,8 @@ export class HybridTranslator implements UrlTranslator {
 					);
 				} else if (typeof value == 'object' && !Array.isArray(value)) {
 					addRecursive(value, [...currentPath, key]);
+				} else if (typeof value != 'undefined' && !Array.isArray(value)) {
+					params.push([...currentPath, key, value]);
 				} else {
 					params.push([...currentPath, key]);
 				}
@@ -338,30 +398,32 @@ export class HybridTranslator implements UrlTranslator {
 
 	protected queryParamsToState(queryParams: Array<QueryParameter>): UrlState {
 		return {
-			page: this.parsePage(queryParams).page,
-			query: this.parseQuery(queryParams).query,
+			...this.parseQuery(queryParams),
+			...this.parsePage(queryParams),
 			...this.parseOther(queryParams, ['page', this.getConfig().queryParameter]),
 		};
 	}
 
 	protected hashParamsToState(hashParameters: Array<HashParameter>): UrlState {
 		return {
-			sort: this.parseHashSort(hashParameters).sort,
-			filter: this.parseHashFilter(hashParameters).filter,
-			...this.parseHashOther(hashParameters, ['sort', 'filter']),
+			...this.parseHashOther(hashParameters, ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]),
+			...this.parseHashFilter(hashParameters),
+			...this.parseHashSort(hashParameters),
 		};
 	}
 
 	protected stateToQueryParams(state: UrlState = {}): Array<QueryParameter> {
 		const whitelist = this.lookup.search;
 
-		return [...this.encodePage(state), ...this.encodeQuery(state), ...this.encodeOther(state, whitelist)];
+		return [...this.encodeQuery(state), ...this.encodePage(state), ...this.encodeOther(state, whitelist)];
 	}
 
 	protected stateToHashParams(state: UrlState = {}): Array<HashParameter> {
-		const blacklist = ['page', 'query', 'filter', 'sort'].concat(this.lookup.search);
-
-		return [...this.encodeHashFilter(state), ...this.encodeHashSort(state), ...this.encodeHashOther(state, blacklist)];
+		return [
+			...this.encodeHashFilter(state),
+			...this.encodeHashSort(state),
+			...this.encodeHashOther(state, ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]),
+		];
 	}
 
 	serialize(state: UrlState): string {

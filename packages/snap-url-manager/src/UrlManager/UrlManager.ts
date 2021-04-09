@@ -149,30 +149,13 @@ export class UrlManager {
 		return { path, state };
 	}
 
-	private getPathsFromObj(...args: Array<unknown>): Array<Array<string>> {
-		const { path, state } = this.unpackPathAndState(args[0], args[1]);
-
-		if (!path.length) {
-			return Object.keys(state).map((k) => [k]);
-		}
-
-		return Object.keys(state).reduce((acc: Array<Array<string>>, key: string): Array<Array<string>> => {
-			const value: unknown = state[key];
-
-			if (value instanceof Array) {
-				return [...acc, path.concat([key])];
-			} else if (typeof value == 'object') {
-				return [...acc, ...this.getPathsFromObj(path.concat(key), value)];
-			}
-
-			return [...acc, path.concat([key])];
-		}, []);
-	}
-
 	set(...args: Array<unknown>): UrlManager {
 		const { path, state } = this.unpackPathAndState(args[0], args[1]);
-		const newState = path.length ? this.localState.setIn(path, state) : state;
-		const omissions = this.omissions.concat(path.length ? { path } : this.getPathsFromObj(this.urlState).map((path) => ({ path })));
+
+		const newState = path.length ? this.localState.setIn(path, removeArrayDuplicates(state)) : removeArrayDuplicates(state);
+		const omissions = removeArrayDuplicates(
+			this.omissions.concat(path.length ? { path } : Object.keys(this.urlState).map((key) => ({ path: [key] })))
+		);
 
 		return new UrlManager(this.translator, this.linker, newState, this.watcherPool, omissions, this.detached);
 	}
@@ -183,11 +166,23 @@ export class UrlManager {
 		const newState = path.length
 			? this.localState.updateIn(path, (oldState: any) => {
 					if (oldState instanceof Array) {
-						return oldState.concat(state);
+						const newValues = Array.isArray(state) ? state : [state];
+						return removeArrayDuplicates(oldState.concat(newValues));
 					} else if (typeof oldState == 'object') {
-						return oldState.merge(state, { deep: true, merger: arrayConcatMerger });
+						if (Array.isArray(state)) {
+							return state.length ? removeArrayDuplicates([oldState].concat(state)) : oldState;
+						} else {
+							return oldState.merge(state, { deep: true, merger: arrayConcatMerger });
+						}
 					} else if (typeof oldState != 'undefined') {
-						return [oldState].concat([state]);
+						// not an object or array
+						const newValues = (Array.isArray(state) ? state : [state]).filter((value) => !compareObjects(value, oldState));
+						return newValues.length ? removeArrayDuplicates([oldState].concat(newValues)) : oldState;
+					} else if (typeof oldState == 'undefined') {
+						const urlState = this.urlState.getIn(path);
+						if (urlState instanceof Array && !Array.isArray(state)) {
+							return [state];
+						}
 					}
 
 					return state;
@@ -202,7 +197,7 @@ export class UrlManager {
 		values = typeof values != 'undefined' ? (values instanceof Array ? values : [values]) : [];
 
 		const without = this.without(this.localState, path, values);
-		const omissions = this.omissions.concat({ path, values: values as Array<any> });
+		const omissions = removeArrayDuplicates(this.omissions.concat({ path, values: values as Array<any> }));
 
 		return new UrlManager(this.translator, this.linker, without, this.watcherPool, omissions, this.detached);
 	}
@@ -231,10 +226,6 @@ export class UrlManager {
 			this.omissions,
 			this.detached
 		);
-	}
-
-	getOmissions(): Array<omission> {
-		return this.omissions;
 	}
 
 	getTranslatorConfig(): Record<string, unknown> {
@@ -279,9 +270,25 @@ export class UrlManager {
 	}
 }
 
-function arrayConcatMerger(current: unknown, other: unknown) {
+function removeArrayDuplicates(array: Array<any> | any): Array<any> | any {
+	if (Array.isArray(array) && array.length) {
+		return array.reduce(
+			(accu, item) => {
+				if (!accu.some((keep) => compareObjects(keep, item))) {
+					accu.push(item);
+				}
+
+				return accu;
+			},
+			[array[0]]
+		);
+	}
+	return array;
+}
+
+function arrayConcatMerger(current: unknown, other: unknown): Array<any> {
 	if (current instanceof Array && other instanceof Array) {
-		return [...current, ...other];
+		return removeArrayDuplicates([...current, ...other]);
 	}
 }
 

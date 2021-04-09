@@ -1,4 +1,4 @@
-import { UrlState, UrlTranslator, UrlStateRangeValue, RangeValueProperties, UrlStateFilterType } from '../../types';
+import { UrlState, UrlTranslator, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
 
@@ -17,7 +17,7 @@ export class QueryStringTranslator implements UrlTranslator {
 
 	constructor(config: { queryParameter?: string; urlRoot?: string } = {}) {
 		this.config = Immutable({
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot : '',
+			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
 			...config,
 		});
@@ -42,23 +42,22 @@ export class QueryStringTranslator implements UrlTranslator {
 			.split('&')
 			.filter((v) => v)
 			.map((kvPair) => {
-				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v));
+				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
 				return { key: key.split('.'), value };
 			});
 	}
 
 	protected generateQueryString(params: Array<QueryParameter>): string {
-		return (
-			this.config.urlRoot +
-			(params.length || !this.config.urlRoot
-				? '?' +
-				  params
-						.map((param) => {
-							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
-						})
-						.join('&')
-				: '')
-		);
+		const paramString = params.length
+			? '?' +
+			  params
+					.map((param) => {
+						return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
+					})
+					.join('&')
+			: location.pathname;
+
+		return `${this.config.urlRoot}${paramString}`;
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
@@ -129,10 +128,11 @@ export class QueryStringTranslator implements UrlTranslator {
 		const rangeFilterParams = queryParams.filter((p) => p.key.length == 3 && p.key[0] == 'filter');
 
 		const valueFilters = valueFilterParams.reduce((state: UrlState, param: QueryParameter): UrlState => {
+			const currentValue = (state.filter || {})[param.key[1]] || [];
 			return {
 				filter: {
 					...state.filter,
-					[param.key[1]]: [...((state.filter || {})[param.key[1]] || []), param.value],
+					[param.key[1]]: [...(Array.isArray(currentValue) ? currentValue : [currentValue]), param.value],
 				},
 			};
 		}, {});
@@ -151,11 +151,13 @@ export class QueryStringTranslator implements UrlTranslator {
 				param.key[2] == RangeValueProperties.LOW &&
 				nextRangeParam.key[2] == RangeValueProperties.HIGH
 			) {
+				const currentValue = (state.filter || {})[param.key[1]] || [];
+
 				newState = {
 					filter: {
 						...state.filter,
 						[param.key[1]]: [
-							...((state.filter || {})[param.key[1]] || []),
+							...(Array.isArray(currentValue) ? currentValue : [currentValue]),
 							{
 								[RangeValueProperties.LOW]: +param.value || null,
 								[RangeValueProperties.HIGH]: +nextRangeParam.value || null,
@@ -235,7 +237,7 @@ export class QueryStringTranslator implements UrlTranslator {
 			return [];
 		}
 
-		return (state.sort instanceof Array ? state.sort : [state.sort]).flatMap((sort) => {
+		return (state.sort instanceof Array ? state.sort : [state.sort]).map((sort) => {
 			return {
 				key: ['sort', sort.field],
 				value: sort.direction,
@@ -275,7 +277,7 @@ export class QueryStringTranslator implements UrlTranslator {
 						},
 						{
 							key: ['filter', key, RangeValueProperties.HIGH],
-							value: '' + (value[RangeValueProperties.HIGH] || '*'),
+							value: '' + (value[RangeValueProperties.HIGH] ?? '*'),
 						},
 					];
 				}
@@ -289,20 +291,20 @@ export class QueryStringTranslator implements UrlTranslator {
 		// Todo: Special stage storage for sorts
 		return {
 			...this.parseQuery(queryParams),
-			...this.parseOther(queryParams, ['page', this.getConfig().queryParameter, 'filter', 'sort']),
 			...this.parsePage(queryParams),
 			...this.parseFilter(queryParams),
 			...this.parseSort(queryParams),
+			...this.parseOther(queryParams, ['page', this.getConfig().queryParameter, 'filter', 'sort']),
 		};
 	}
 
 	protected stateToQueryParams(state: UrlState = {}): Array<QueryParameter> {
 		return [
 			...this.encodeQuery(state),
-			...this.encodeOther(state, ['page', 'query', 'filter', 'sort', this.getConfig().queryParameter]),
 			...this.encodePage(state),
 			...this.encodeFilter(state),
 			...this.encodeSort(state),
+			...this.encodeOther(state, ['page', 'query', 'filter', 'sort', this.getConfig().queryParameter]),
 		];
 	}
 
