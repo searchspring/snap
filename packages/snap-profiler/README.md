@@ -1,6 +1,5 @@
 # Snap Profiler
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
 
 A utility for profiling the performance of Snap features
@@ -28,12 +27,6 @@ npm install --save @searchspring/snap-profiler
 
 # Usage
 ## Import
-### CommonJS
-```typescript
-const Profiler = require('@searchspring/snap-profiler');
-```
-
-### ES Module
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
 ```
@@ -174,23 +167,4 @@ It is recommended to using the Snap Logger's `profile` method to log Snap Profil
 
 For further use of Snap Logger, see [@searchspring/snap-logger](../snap-logger) <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
 
-```typescript
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-
-const logger = new Logger();
-const profiler = new Profiler();
-
-const searchProfile = profiler.create({ 
-    type: 'event', 
-    name: 'search', 
-    context: {} 
-}: ProfileDetails).start();
-
-// code to profile
-
-searchProfile.stop();
-
-logger.profile(searchProfile)
-```
 

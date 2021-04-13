@@ -1,6 +1,5 @@
 # Snap Logger
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
 
 Simple logger for debugging
@@ -31,12 +30,6 @@ npm install --save @searchspring/snap-logger
 # Usage
 
 ## Import
-### CommonJS
-```typescript
-const Logger = require('@searchspring/snap-logger');
-```
-
-### ES Module
 ```typescript
 import { Logger } from '@searchspring/snap-logger';
 ```
@@ -50,33 +43,15 @@ const logger = new Logger(prefix)
 ```
 
 ## Controller usage
-```typescript
-import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
-import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
+Snap Logger is a dependancy of Snap Controller and it is recommended to use logging methods of the controller
 
-const searchController = new SearchController(searchConfig, {
-        client: new SnapClient(globals, clientConfig),
-        store: new SearchStore(),
-        urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-        eventManager: new EventManager(),
-        profiler: new Profiler(),
-        logger: new Logger()
-    }: ControllerServices
-));
-
-searchController.log.warn('')
-```
+See [Typical Usage](../../README.md#TypicalUsage)
 
 ## Standalone usage
 ```typescript
 const logger = new Logger();
 
-logger.warn('');
+logger.warn('this is a warning');
 ```
 
 ## `getGroup` method
@@ -145,7 +120,7 @@ Note: if mode is set to `LogMode.PRODUCTION`, `imageText` logs will not be displ
 logger.imageText({
     url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
     text: `imageText`,
-    style: `color: ${searchController.log.colors.indigo}; font-weight: bold;`,
+    style: `color: #4c3ce2; font-weight: bold;`,
 });
 ```
 
@@ -163,14 +138,18 @@ See [@searchspring/snap-profiler](../snap-profiler) <a href="https://www.npmjs.c
 
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
+import { Logger } from '@searchspring/snap-logger';
 
+const logger = new Logger();
 const profiler = new Profiler();
 
 const searchProfile = profiler.create({ 
     type: 'event', 
     name: 'search', 
     context: {} 
-}).start();
+});
+
+searchProfile.start();
 
 // code to profile
 

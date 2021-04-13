@@ -1,6 +1,5 @@
 # Snap Controller
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 The heart of controlling Search, Autocomplete, & Finder functionallity
@@ -63,14 +62,8 @@ const clientConfig = {
 };
 ```
 ## Import
-### CommonJS
 ```typescript
-const SearchController = require('@searchspring/snap-controller');
-```
-
-### ES Module
-```typescript
-import { SearchController } from '@searchspring/snap-controller';
+import { SearchController, AutocompleteController, FinderController } from '@searchspring/snap-controller';
 ```
 
 <h2 id="SearchController">SearchController</h2>
@@ -232,41 +225,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 ### Bind
 <!-- TODO: set/test link to DomTargeter -->
-Invoking the `bind` method is required to attach event listeners to each input. See [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter) for recommended usage 
+Invoking the `bind` method is required to attach event listeners to each input.
 
 ```typescript
 autocompleteController.bind();
 ```
 
-### AutocompleteController Event lifecycle
-Events are invoked in the following order:
-
-#### init
-- Must be called manually
-- subscribes to changes in the urlManager
-
-#### beforeSearch
-- Always invoked before an API request is made 
-- Sets `controller.store.loading = true`
-
-#### afterSearch
-- Always invoked after an API request is made 
-- Sets `controller.store.loading = false`
-- Cancels search if no input or query doesn't match current urlManager state
-
-#### afterStore
-- Always invoked after data has been stored in mobx store
-- no operation
-
-#### focusChange
-- Invoked when an input has been focused
-- no operation
-
 
 <h2 id="FinderController">FinderController</h2>
+
 ### Default Config
-<!-- TODO: add url, selector, wrapSelector, type, className ? -->
+<!-- TODO: add selector, wrapSelector, type, className ? -->
+
 `id` - a unique identifier for this controller. Will appear in console log & warn
+
+`url` - url to be redirected to upon clicking finder's 'find' button
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
@@ -281,6 +254,7 @@ Events are invoked in the following order:
 ```typescript
 const finderConfig: FinderControllerConfig = {
     id: 'finder',
+    url: '',
 	globals: {},
 	fields: FinderFieldConfig[],
 };
@@ -298,6 +272,7 @@ Specifying `levels` will display a dropdown for each hierarchy level. Finders th
 ```typescript
 const finderConfig: FinderControllerConfig = {
     id: 'finder',
+    url: '/search',
 	globals: {},
 	fields: [
         {
@@ -314,6 +289,7 @@ Optionally if `levels` is not defined, a single dropdown will be displayed on in
 ```typescript
 const finderConfig: FinderControllerConfig = {
     id: 'finder',
+    url: '/search',
 	globals: {},
 	fields: [
         {
@@ -325,11 +301,12 @@ const finderConfig: FinderControllerConfig = {
 
 
 #### Non-Hierarchy Config
-If using fields are that not of hierarchy type, `levels` is not required
+If using fields that are not of hierarchy type, `levels` is not required
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
     id: 'finder',
+    url: '/search',
 	globals: {},
 	fields: [
         { 
@@ -355,7 +332,7 @@ const finderConfig: FinderControllerConfig = {
 ### Installation
 
 ### Instantiate
-Search controller requires a `SearchControllerConfig` object and `ControllerServices` object
+FinderController requires a `FinderControllerConfig` object and `ControllerServices` object
 
 ```typescript
 import { FinderController } from '@searchspring/snap-controller';
@@ -389,6 +366,13 @@ This will invoke an initial search request to Searchspring's search API and rend
 finderController.search();
 ```
 
+### Find
+After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the Finder controller which will redirect to the specified `url` in the config, along with it's selection data.
+
+```typescript
+finderController.find();
+```
+
 ### FinderController Event lifecycle
 Events are invoked in the following order:
 
@@ -410,6 +394,14 @@ Events are invoked in the following order:
 
 
 ## Middlewear (Search, Autocomplete, & Finder Controllers)
+Each controller has several events that you are able to hook into before data is rendered. 
+Since Snap Event Manager is a dependancie of all the controllers, it is recommended to use the event manager via the controller. For direct usage, see [Snap Event Manager](../snap-event-manager/)
+
+|                                                                      | `[custom event]`   | init               | beforeSearch       | afterSearch        | afterStore         | focusChange        | 
+| --:                                                                  | :-:                | :-:                | :-:                | :-:                | :-:                | :-:                |
+| [SearchController](#SearchController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
+| [AutocompleteController](#AutocompleteController) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [FinderController](#FinderController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
 
 ### `use` method
 Apply multiple event middlewear using the `use` method
@@ -433,3 +425,30 @@ Alternatively, you can also use the `on` method. Invoking `next()` is not requir
 ```typescript
 searchController.on('init', async ({ controller }) => {});
 ```
+
+### Events
+Must first be defined using `on` method before called using `fire` method
+
+#### init
+The `init` event must be called after instantiating an instance of any Controller in order for changes in the urlManager to take effect by subscribing to changes.
+
+#### beforeSearch
+- Always invoked before an API request is made 
+- Sets `controller.store.loading = true`
+
+#### afterSearch
+- Always invoked after an API request is made 
+- Sets `controller.store.loading = false`
+- When using SearchController:
+    - Invokes `window.location.replace()` if API response contains merchandising redirects AND if `searchConfig.settings.redirects.merchandising = true` (default)
+    - Invokes `window.location.replace()` to redirect to product detail page if API response returned a single product AND `searchConfig.settings.redirects.singleResult = true` (default)
+- When using AutocompleteController:
+    - Cancels search if no input or query doesn't match current urlManager state
+
+#### afterStore
+- Always invoked after data has been stored in mobx store
+- no operation
+
+#### focusChange
+- Invoked when an input has been focused
+- no operation

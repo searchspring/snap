@@ -1,6 +1,5 @@
 # SNAP Javascript Client
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 <a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a>
 
 Simple Javascript client for communicating with the Searchspring SNAP API.
@@ -33,12 +32,6 @@ npm install --save @searchspring/snap-client-javascript
 
 # Usage
 ## Import
-### CommonJS
-```typescript
-const SnapClient = require('@searchspring/snap-client-javascript');
-```
-
-### ES Module
 ```typescript
 import SnapClient from '@searchspring/snap-client-javascript';
 ```
@@ -87,33 +80,9 @@ const clientConfig = {
 ```
 
 ## Controller usage
-Snap Client is a dependancy of Snap Controller. 
-It is recommended to use the Controller's `search` method to perform a search. 
+Snap Client is a dependancy of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
 
-Recommended:
-```typescript
-import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
-import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-
-const searchController = new SearchController(searchConfig, {
-        client: new SnapClient(globals, clientConfig),
-        store: new SearchStore(),
-        urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-        eventManager: new EventManager(),
-        profiler: new Profiler(),
-        logger: new Logger()
-    }: ControllerServices
-));
-
-searchController.init();
-
-const results = await searchController.search();
-```
+See [Search Typical Usage](../../README.md#SearchTypicalUsage)
 
 
 ## Standalone usage
