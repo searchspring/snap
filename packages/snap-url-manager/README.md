@@ -1,6 +1,5 @@
 # SNAP URL Manager
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 The SNAP URL manager is a service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It's primary purpose is to provide a standard API to manage URL across SNAP products.
 

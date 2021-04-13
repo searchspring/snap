@@ -1,5 +1,7 @@
 # SNAP Javascript Client
 
+<a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a>
+
 Simple Javascript client for communicating with the Searchspring SNAP API.
 
 ---
@@ -25,13 +27,9 @@ $ npm run build
 $ npm install @searchspring/snap-client-javascript
 ```
 
-##### Using CommonJS module system:
-```javascipt
-const SnapClient = require('@searchspring/snap-client-javascript');
-```
-
-##### Using ES module system:
-```javascipt
+# Usage
+## Import
+```typescript
 import SnapClient from '@searchspring/snap-client-javascript';
 ```
 
@@ -58,6 +56,37 @@ let client = new SnapClient({
     type: 'value',
     background: true
   }]
+};
+```
+
+## Client Config
+Object required for all controllers
+
+`apiHost` (optional) - Specify local [Snapi](https://link.to.snapi) endpoint for development
+<!-- TODO: snapi link -->
+
+```typescript
+const clientConfig = {
+	apiHost: 'http://localhost:8080/api/v1'
+};
+```
+
+## Controller usage
+Snap Client is a dependancy of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
+
+See [Search Typical Usage](../../README.md#SearchTypicalUsage)
+
+
+## Standalone usage
+```typescript
+const client = new SnapClient(globals, clientConfig);
+
+const results = await client.search({
+  search: {
+    query: {
+      string: 'dress'
+    }
+  }
 });
 ```
 
