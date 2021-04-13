@@ -2,13 +2,13 @@
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
-The heart of controlling Search, Autocomplete, & Finder functionallity
+The heart of controlling Search, Autocomplete, & Finder functionality
 
 ---
 
 # Dependencies
 
-Snap Controller is a top level package that requires the following dependanies:
+Snap Controller is a top-level package that requires the following dependencies:
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a> [@searchspring/snap-client-javascript](../snap-client-javascript)
 
@@ -73,7 +73,7 @@ import { SearchController, AutocompleteController, FinderController } from '@sea
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
-`settings.redirects.merchandising` - merchandisings redirects
+`settings.redirects.merchandising` - merchandising redirects
 
 `settings.redirects.singleResult` - redirect to product detail page if search yields 1 result count
 
@@ -95,7 +95,7 @@ const searchConfig: SearchControllerConfig = {
 };
 ```
 ### Instantiate
-Search controller requires a `SearchControllerConfig` object and `ControllerServices` object
+Search controller requires a `SearchControllerConfig` and `ControllerServices` object
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
@@ -117,7 +117,7 @@ const searchController = new SearchController(searchConfig, {
 ));
 ```
 ### Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the `url-manager` 
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager
 
 ```typescript
 searchController.init();
@@ -142,7 +142,7 @@ Events are invoked in the following order:
 
 #### init
 - Must be called manually
-- subscribes to changes in the urlManager
+- subscribes to changes in the UrlManager
 
 #### beforeSearch
 - Always invoked before an API request is made 
@@ -165,13 +165,13 @@ Events are invoked in the following order:
 
 `selector` - css selector that targets all search input(s)
 
-`action` - If input does not contain a form, or you would like to override the form action
+`action` - If the input does not contain a parent form element, or you would like to override the form action
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
-`settings.initializeFromUrl` - initialize controller with query from URL if present
+`settings.initializeFromUrl` - initialize the controller with query parameters from URL
 
-`settings.syncInputs` - if selector targets multiple inputs, the value of those inputs will be synced
+`settings.syncInputs` - if the selector targets multiple inputs, the value of those inputs will be synced
 
 `settings.facets.trim` - facets that do not change results will be removed
 
@@ -192,7 +192,7 @@ const autocompleteConfig: AutocompleteControllerConfig = {
 ```
 
 ### Instantiate
-Autocomplete controller requires a `AutocompleteControllerConfig` object and `ControllerServices` object
+Autocomplete controller requires an `AutocompleteControllerConfig` and `ControllerServices` object
 
 ```typescript
 import { AutocompleteController } from '@searchspring/snap-controller';
@@ -215,7 +215,7 @@ const autocompleteController = new AutocompleteController(autocompleteConfig, {
 ```
 
 ### Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the `url-manager` 
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager
 
 ```typescript
 window.addEventListener('DOMContentLoaded', () => {
@@ -243,7 +243,7 @@ autocompleteController.bind();
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
-`fields` - array of finder field configuration
+`fields` - an array of finder field configurations
 
 `fields.field` - required field name
 
@@ -267,7 +267,7 @@ type FinderFieldConfig = {
 ```
 
 #### Hierarchy Config
-Specifying `levels` will display a dropdown for each hierarchy level. Finders that use hierarchy fields will enforce selecting dropdowns in order by disabling following dropdowns
+Specifying `levels` will display a dropdown for each hierarchy level. Finders that use hierarchy fields will enforce selecting dropdowns in order by disabling the following dropdowns
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
@@ -284,7 +284,7 @@ const finderConfig: FinderControllerConfig = {
 };
 ```
 
-Optionally if `levels` is not defined, a single dropdown will be displayed on initial load. Each selection will dynamically append additional dropdowns until there are no more available selections
+Optionally if `levels` are not defined, a single dropdown will be displayed on the initial load. Each selection will dynamically append additional dropdowns until there are no more available selections
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
@@ -301,7 +301,7 @@ const finderConfig: FinderControllerConfig = {
 
 
 #### Non-Hierarchy Config
-If using fields that are not of hierarchy type, `levels` is not required
+If using fields that are not of hierarchy type, `levels` are not required
 
 ```typescript
 const finderConfig: FinderControllerConfig = {
@@ -332,7 +332,7 @@ const finderConfig: FinderControllerConfig = {
 ### Installation
 
 ### Instantiate
-FinderController requires a `FinderControllerConfig` object and `ControllerServices` object
+FinderController requires a `FinderControllerConfig` and `ControllerServices` object
 
 ```typescript
 import { FinderController } from '@searchspring/snap-controller';
@@ -354,7 +354,7 @@ const finderController = new FinderController(searchConfig, {
 ));
 ```
 ### Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the `url-manager` 
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager
 
 ```typescript
 finderController.init();
@@ -394,8 +394,8 @@ Events are invoked in the following order:
 
 
 ## Middleware (Search, Autocomplete, & Finder Controllers)
-Each controller has several events that you are able to hook into before data is rendered. 
-Since Snap Event Manager is a dependancie of all the controllers, it is recommended to use the event manager via the controller. For direct usage, see [Snap Event Manager](../snap-event-manager/)
+Each controller has several events that you can hook into before data is rendered. 
+Since Snap Event Manager is a dependency of all the controllers, it is recommended to use the event manager via the controller. For direct usage, see [Snap Event Manager](../snap-event-manager/)
 
 |                                                                      | `[custom event]`   | init               | beforeSearch       | afterSearch        | afterStore         | focusChange        | 
 | --:                                                                  | :-:                | :-:                | :-:                | :-:                | :-:                | :-:                |
@@ -430,7 +430,7 @@ searchController.on('init', async ({ controller }) => {});
 Must first be defined using `on` method before called using `fire` method
 
 #### init
-The `init` event must be called after instantiating an instance of any Controller in order for changes in the urlManager to take effect by subscribing to changes.
+The `init` event must be called after instantiating an instance of any Controller for changes in the urlManager to take effect by subscribing to changes.
 
 #### beforeSearch
 - Always invoked before an API request is made 

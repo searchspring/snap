@@ -8,7 +8,7 @@ A utility for profiling the performance of Snap features
 
 # Dependency
 
-Snap Profiler is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Profiler is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 
 <details>
@@ -34,7 +34,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 
 <h2 id="Profiler">Profiler</h2>
 
-An options `namespace` can be passed to the Profiler constructor
+An optional `namespace` can be passed to the Profiler constructor
 
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
@@ -44,7 +44,7 @@ const profiler = new Profiler('namespace');
 
 ### `setNamespace` method
 
-Programatically set namespace instead of setting in constructor
+Programatically set namespace
 
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
@@ -55,7 +55,7 @@ profiler.setNamespace('namespace');
 ```
 
 ### `create` method
-Creates a new profile
+Create a new profile
 
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
@@ -77,14 +77,12 @@ type ProfileDetails<T> = {
 }
 ```
 
-Create returns an instance of `Profile`. See [Profile section](#Profile)
+Returns an instance of `Profile`. See [Profile](#Profile) section below
 
 
 <h2 id="Profile">Profile</h2>
 
-Note that `Profile` is not an exported member of the Snap Profiler package.
-
-A `Profile` is only returned in the [Profiler](#Profiler)'s `create` method
+`Profile` is not an exported member of the Snap Profiler package. It is only returned in the [Profiler](#Profiler)'s `create` method
 
 ### `start` method
 Can only be invoked on the return on the `create` method. 
@@ -131,11 +129,11 @@ console.log(`context: ${searchProfile.context}`)
 ```
 
 ### `status` property
-Profile status. Default value is `pending`
+Profile status. The default value is `pending`
 
-Value will change to `started` when `start` method is invoked
+The value will change to `started` when `start` method is invoked
 
-Value will change to `finished` when `stop` method is invoked
+The value will change to `finished` when `stop` method is invoked
 
 ```typescript
 console.log(`context: ${searchProfile.status}`)

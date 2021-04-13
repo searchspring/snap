@@ -15,7 +15,7 @@ Simple Javascript client for communicating with the Searchspring SNAP API.
 
 # Dependency
 
-Snap Client is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Client is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
     <summary>Package dependencies hierarchy</summary>
@@ -39,7 +39,7 @@ import SnapClient from '@searchspring/snap-client-javascript';
 ## Global Config
 Client is constructed with `globals`.  
 
-Globals are API parameters that will be applied to all searches requested by the client. This will typically contain just the *siteId*; but could also include global filters, background filters, sorts or merchandising segments.
+Globals are API parameters that will be applied to all searches requested by the client. This will typically contain just the *siteId*; but could also include global filters, background filters, sorts, or merchandising segments.
 
 `siteId` (required)
 
@@ -51,7 +51,7 @@ const globals = {
 
 Any other keys defined here will be passed to the API request
 
-For full list of parameters please see the [Snap API docs](http://snapi.kube.searchspring.io/api/v1/)
+For a full list of parameters please see the [Snap API docs](http://snapi.kube.searchspring.io/api/v1/)
 
 For example, with background filter:
 
@@ -80,7 +80,7 @@ const clientConfig = {
 ```
 
 ## Controller usage
-Snap Client is a dependancy of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
+Snap Client is a dependency of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
 
 See [Search Typical Usage](../../README.md#SearchTypicalUsage)
 
@@ -133,7 +133,7 @@ const results = await client.autocomplete({
 ```
 
 ## `meta` property
-The meta property contains the meta data related to the siteId that the client was instantiated with. This data is to be used together with search results. Meta data contains site configuration like facet and sorting information.
+The meta property contains the metadata related to the siteId that the client was instantiated with. This data is to be used together with search results. Metadata contains site configuration like facet and sorting information.
 
 Note that the `search` method sets the `meta` property, therefore it must be called before attempting to access the `meta` property.
 

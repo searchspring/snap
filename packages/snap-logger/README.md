@@ -11,7 +11,7 @@ Simple logger for debugging
 
 # Dependency
 
-Snap Logger is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Logger is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
     <summary>Package dependencies hierarchy</summary>
@@ -35,7 +35,7 @@ import { Logger } from '@searchspring/snap-logger';
 ```
 
 ## Config
-Snap Logger accepts am optional string prefix
+Snap Logger accepts an optional string prefix
 
 ```typescript
 const prefix = 'Log:';
@@ -43,7 +43,7 @@ const logger = new Logger(prefix)
 ```
 
 ## Controller usage
-Snap Logger is a dependancy of Snap Controller and it is recommended to use logging methods of the controller
+Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller
 
 See [Typical Usage](../../README.md#TypicalUsage)
 
@@ -55,7 +55,7 @@ logger.warn('this is a warning');
 ```
 
 ## `getGroup` method
-Sets prefix instead of defining a prefix in constructor.
+Sets prefix instead of defining a prefix in the constructor.
 ```typescript
 const logger = new Logger();
 
@@ -167,7 +167,7 @@ logger.dev('dev')
 
 
 ## `emojis` property
-When using log emojis, the logger's `emoji` property contains various emojis
+The `emoji` property contains various emojis that can be used
 
 The following emojis are available:
 
@@ -195,7 +195,7 @@ const emoji = {
 ```
 
 ## `colors` property
-When using log styles, the logger's `colors` property contains various colors
+The `colors` property contains various colors that can be used
 
 The following colors are available:
 

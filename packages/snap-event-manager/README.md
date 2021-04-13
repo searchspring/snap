@@ -4,13 +4,13 @@
 
 The Snap Event Manager allows you to hook into controller events before data is rendered.
 
-It also allows for custom defined events to be used throughout your implementation.
+It also allows for custom events to be used throughout your implementation.
 
 ---
 
 # Dependency
 
-Snap Event Manager is a dependancy of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Event Manager is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 
 <details>
@@ -32,13 +32,13 @@ npm install --save @searchspring/snap-event-manager
 import { EventManager } from '@searchspring/snap-event-manager';
 ```
 ## Controller usage
-Snap Event Manager is a dependancy of Snap Controller and it is recommended to use methods of the controller to attach events to the EventManager
+Snap Event Manager is a dependency of Snap Controller and it is recommended to use methods of the controller to attach events to the EventManager
 
 See [Typical Usage](../../README.md#TypicalUsage)
 
 ## Standalone usage
 ### `on` method
-Adds a new event to event manager
+Add a new event
 
 ```typescript
 const eventManager = new EventManager();
@@ -52,7 +52,7 @@ eventManager.on('scrollToTop', () => {
 ```
 
 ### `fire` method
-Invokes event from event manager
+Invoke event
 
 ```typescript
 eventManager.fire('scrollToTop')
