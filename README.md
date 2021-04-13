@@ -42,11 +42,11 @@ A collection of interface elements for front end libraries
 
 [@searchspring/snap-controller](packages/snap-controller)
 
-The heart of controlling Search, Autocomplete, & Finder functionallity
+The heart of controlling Search, Autocomplete, & Finder functionality
 
 ## Demo
 
-A demo store utlizing all Snap packages and components. Check it out at [try.searchspring.com](http://try.searchspring.com/) or use it as a reference
+A demo store utilizing all Snap packages and components. Check it out at [try.searchspring.com](http://try.searchspring.com/) or use it as a reference
 <!-- TODO: Update try.searchspring.com to Snap deployed demostore -->
 
 [@searchspring/snap-preact-demo](packages/snap-preact-demo)
@@ -109,7 +109,7 @@ A standard API for URL management across all Snap products
 
 ## NPM v7.x
 
-Npm v7.x is required for it's workspaces feature
+Npm v7.x is required for its workspaces feature
 
 Npm v7.7.0 is optional for executing scripts in workspaces
 ## ~/.npmrc
@@ -123,7 +123,7 @@ registry=https://registry.npmjs.org/
 # Commands
 While at the <b>repo root</b>, the following commands are available:
 
-## Install dependancies
+## Install dependencies
 ```shell
 npm install
 ```
@@ -138,7 +138,7 @@ http://localhost:3333 Demo store
 http://localhost:8888 Webpack bundle analyzer
 
 ## Commit
-Instead of using `git commit`, use `npm run commit` to utlize Commitizen
+Instead of using `git commit`, use `npm run commit` to utilize Commitizen
 ```shell
 npm run commit
 ```
@@ -188,13 +188,13 @@ npm run <command> [--workspace=<package> | -w <package>] [--workspace=<package> 
 This section will provide an overview of how to get up and running with Snap
 
 ## Installation & Imports
-First, we'll start by installing all Snap dependancies
+First, we'll start by installing all Snap dependencies
 
 ```shell
 npm install --save @searchspring/snap-client-javascript @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger @searchspring/snap-toolbox @searchspring/snap-controller @searchspring/snap-store-mobx
 ```
 
-Then we'll import them in our main entrypoint `index.js`
+Then we'll import them in our main entry point `index.js`
 
 ```typescript
 import SnapClient from '@searchspring/snap-client-javascript';
@@ -228,7 +228,7 @@ const clientConfig = {
 ```
 
 ### Global Config
-If the project has been created using `@searchspring/snapfu`, the siteId can be referenced from the `package.json`
+If the project has been created using `@searchspring/snapfu`, the `siteId` can be referenced from the `package.json`
 
 ```typescript
 import { searchspring } from '../package.json';
@@ -250,7 +250,7 @@ const globals = {
 
 <h2 id="SearchTypicalUsage">Search</h2>
 
-To set up search using Snap, we'll need to utilize a `SearchController` which requires two objects:  `SearchControllerConfig` and `ControllerServices`
+To set up Search using Snap, we'll need to utilize a `SearchController` which requires two objects:  `SearchControllerConfig` and `ControllerServices`
 ```typescript
 const search = new SearchController(searchConfig, searchControllerServices);
 ```
@@ -314,9 +314,9 @@ if (v3Context?.category) {
 
 
 ### ControllerServices
-The `ControllerServices` object contains all of the controller's dependancies
+The `ControllerServices` object contains all of the controller's dependencies
 
-Note that the `UrlManager` is utilizing a `HybridTranslator` which will use `'q'` as the url query parameter. This can be overwritten by providing a `queryParameter` config such as in this example:
+Note that the `UrlManager` is utilizing a `HybridTranslator` which will use `'q'` as the URL query parameter. This can be overwritten by providing a `queryParameter` config such as in this example:
 
 ```typescript
 const searchControllerServices = {
@@ -329,8 +329,8 @@ const searchControllerServices = {
 }
 ```
 
-<h3 id="SearchMiddlewear">Middlewear</h3>
-Now that our SearchController is defined, we can optionally attach middlewear to hook into various events. There are two ways of doing this, using the Controller's `use` or `on` methods
+<h3 id="SearchMiddleware">Middleware</h3>
+Now that our SearchController is defined, we can optionally attach middleware to hook into various events. There are two ways of doing this, using the Controller's `use` or `on` methods
 
 #### via `use` method:
 ```typescript
@@ -444,7 +444,7 @@ search.on('init', async ({ controller }, next) => {
 ```
 
 ### Initialize
-Initializing the controller by invoking it's `init` method will subscribe to any url state changes.
+Initializing the controller by invoking its `init` method will subscribe to any URL state changes.
 
 ```typescript
 search.init();
@@ -489,9 +489,9 @@ const autocompleteConfig : AutocompleteControllerConfig = {
 ```
 
 ### ControllerServices
-The `ControllerServices` object contains all of the controller's dependancies. Note the difference between SearchController's ControllerServices is the different store. Here we are using `AutocompleteStore`
+The `ControllerServices` object contains all of the controller's dependencies. Note the difference between SearchController's ControllerServices is the different store. Here we are using `AutocompleteStore`
 
-Note that the `UrlManager` is utilizing a `HybridTranslator` which will use `'q'` as the url query parameter. This can be overwritten by providing a `queryParameter` config such as in this example:
+Note that the `UrlManager` is utilizing a `HybridTranslator` which will use `'q'` as the URL query parameter. This can be overwritten by providing a `queryParameter` config such as in this example:
 
 ```typescript
 const autocompleteControllerServices = {
@@ -504,8 +504,8 @@ const autocompleteControllerServices = {
 }
 ```
 
-### Middlewear
-Autocomplete supports middlewear to hook into various events. See [Search Middlewear](#SearchMiddlewear) above for exact same usage via `use` and `on` methods
+### Middleware
+Autocomplete supports middleware to hook into various events. See [Search Middleware](#SearchMiddleware) above for same usage via `use` and `on` methods
 
 
 ## DomTargeter
@@ -545,7 +545,7 @@ autocomplete.on('init', async ({ controller }) => {
 ```
 
 ### Initialize
-Initializing the controller by invoking it's `init` method will subscribe to any url state changes.
+Initializing the controller by invoking its `init` method will subscribe to any URL state changes.
 
 ```typescript
 autocomplete.init();
@@ -559,10 +559,10 @@ const finder = new FinderController(finderConfig, finderControllerServices);
 ```
 
 ### Config (FinderControllerConfig)
-There are two types of Finder configurations, a Hierarchy and Non-Hierarchy. The difference is type of field being used and how it is configured in the Searchspring Management Console.
+There are two types of Finder configurations, a Hierarchy and Non-Hierarchy. The difference is they type of field being used and how it is configured in the Searchspring Management Console.
 
 #### Hierarchy Config
-To use a Hierarchy configuration, ensure that fields contains a single entry and that it's field is of type `hierarchy` in the Searchspring Managerment Console. Here is an example of a Hierarchy `FinderControllerConfig` object:
+To use a Hierarchy configuration, ensure that the config's `fields` array contain a single entry, and `fields.field` is of type `hierarchy` in the Searchspring Management Console. Here is an example of a Hierarchy `FinderControllerConfig` object:
 
 ```typescript
 const finderConfig : FinderControllerConfig = {
@@ -578,7 +578,7 @@ const finderConfig : FinderControllerConfig = {
 ```
 
 #### Non-Hierarchy Config
-To use a Non-Hierarchy configuration, each dropdown will contain it's own field and can be of any type. Here is an example of a Non-Hierarchy `FinderControllerConfig` object:
+To use a Non-Hierarchy configuration, each dropdown will contain its own field and can be of any type. Here is an example of a Non-Hierarchy `FinderControllerConfig` object:
 
 Note if using fields that are not of hierarchy type, `levels` is not required
 
@@ -610,7 +610,7 @@ const finderConfig: FinderControllerConfig = {
 
 
 ### ControllerServices
-The `ControllerServices` object contains all of the controller's dependancies. Note the difference between SearchController's ControllerServices is the different store. Here we are using `FinderStore`
+The `ControllerServices` object contains all of the controller's dependencies. Note the difference between SearchController's ControllerServices is the different store. Here we are using `FinderStore`
 
 ```typescript
 const finderControllerServices = {
@@ -624,7 +624,7 @@ const finderControllerServices = {
 ```
 
 ### Multiple Finder Instances
-It is common to have multiple Finder instances on a page, each with their own configurations. Here is an example of how that may look:
+It is common to have multiple Finder instances on a page, each with its own configuration. Here is an example of how that may look:
 
 ```typescript
 const finderConfigs = [
@@ -680,8 +680,8 @@ finderConfigs.forEach((finderConfig) => {
 });
 ```
 
-### Middlewear
-Finder supports middlewear to hook into various events. See [Search Middlewear](#SearchMiddlewear) above for exact same usage via `use` and `on` methods
+### Middleware
+Finder supports middleware to hook into various events. See [Search Middleware](#SearchMiddleware) above for same usage via `use` and `on` methods
 
 
 ## DomTargeter
@@ -719,7 +719,7 @@ finder.on('init', async ({ controller }) => {
 ```
 
 ### Initialize
-Initializing the controller by invoking it's `init` method will subscribe to any url state changes.
+Initializing the controller by invoking its `init` method will subscribe to any URL state changes.
 
 ```typescript
 finder.init();
@@ -727,14 +727,14 @@ finder.init();
 
 
 ### Search
-After the controller has been initialized, the search method must be invoked for the finder to fetch it's initial data. In the example above, this is being invoked in the DomTargeter 
+After the controller has been initialized, the search method must be invoked for the finder to fetch its initial data. In the example above, this is being invoked in the DomTargeter 
 
 ```typescript
 finder.search();
 ```
 
 ### Find
-After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the Finder controller which will redirect to the specified `url` in the config, along with it's selection data.
+After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the Finder controller which will redirect to the specified `url` in the config, along with its selection data.
 
 ```typescript
 finder.find();
@@ -744,7 +744,7 @@ finder.find();
 
 # Troubleshooting
 
-## Target element not present while invoking `init`
+## Target element is not present while invoking `init`
 If you attempt to initialize a snap component before the target element exists on the page, it may not be fully initialized. We recommend calling init after the DOMContentLoaded event has been invoked. 
 
 ```typescript

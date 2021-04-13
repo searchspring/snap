@@ -169,7 +169,7 @@ Events are invoked in the following order:
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
-`settings.initializeFromUrl` - initialize controller with query from url if present
+`settings.initializeFromUrl` - initialize controller with query from URL if present
 
 `settings.syncInputs` - if selector targets multiple inputs, the value of those inputs will be synced
 
@@ -239,7 +239,7 @@ autocompleteController.bind();
 
 `id` - a unique identifier for this controller. Will appear in console log & warn
 
-`url` - url to be redirected to upon clicking finder's 'find' button
+`url` - URL to be redirected to upon clicking finder's 'find' button
 
 `globals` - keys defined here will be passed to the API request (overwrites global config)
 
@@ -367,7 +367,7 @@ finderController.search();
 ```
 
 ### Find
-After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the Finder controller which will redirect to the specified `url` in the config, along with it's selection data.
+After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the Finder controller which will redirect to the specified `url` in the config, along with its selection data.
 
 ```typescript
 finderController.find();
@@ -393,7 +393,7 @@ Events are invoked in the following order:
 - no operation
 
 
-## Middlewear (Search, Autocomplete, & Finder Controllers)
+## Middleware (Search, Autocomplete, & Finder Controllers)
 Each controller has several events that you are able to hook into before data is rendered. 
 Since Snap Event Manager is a dependancie of all the controllers, it is recommended to use the event manager via the controller. For direct usage, see [Snap Event Manager](../snap-event-manager/)
 
@@ -404,9 +404,9 @@ Since Snap Event Manager is a dependancie of all the controllers, it is recommen
 | [FinderController](#FinderController)             | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
 
 ### `use` method
-Apply multiple event middlewear using the `use` method
+Apply multiple event middleware using the `use` method
 
-If `next()` is not called or `false` is returned, the middlewear chain will not continue
+If `next()` is not called or `false` is returned, the middleware chain will not continue
 ```typescript
 const middleware = (controller) => {
     controller.on('afterStore', ({ controller }, next) => {
@@ -417,7 +417,7 @@ const middleware = (controller) => {
 		next();
 	});
 }
-searchController.use(middlewear);
+searchController.use(middleware);
 ```
 
 ### `on` method
