@@ -40,3 +40,8 @@ export interface UrlTranslator {
 
 	go(url: string): void;
 }
+
+export interface UrlTranslatorConfig {
+	queryParameter?: string;
+	urlRoot?: string;
+}

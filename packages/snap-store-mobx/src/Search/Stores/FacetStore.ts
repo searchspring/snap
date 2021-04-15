@@ -9,13 +9,15 @@ export class FacetStore extends Array {
 
 	constructor(controller, storage: StorageStore, facets = [], meta) {
 		facets = facets.map((facet) => {
+			const facetMeta = meta.facets[facet.field];
+
 			switch (facet.type) {
 				case 'range':
-					return new RangeFacet(controller, storage, facet, meta.facets[facet.field]);
+					return new RangeFacet(controller, storage, facet, facetMeta);
 				case 'value':
 				case 'range-buckets':
 				default:
-					return new ValueFacet(controller, storage, facet, meta.facets[facet.field]);
+					return new ValueFacet(controller, storage, facet, facetMeta);
 			}
 		});
 
@@ -110,8 +112,8 @@ class RangeFacet extends Facet {
 		// needed when API returns no active (only seems to be when range.low == range.high)
 		this.active = facet.active || facet.range;
 
-		this.formatSeparator = facetMeta.formatSeparator;
-		this.formatValue = facetMeta.formatValue;
+		this.formatSeparator = facetMeta.formatSeparator || '-';
+		this.formatValue = facetMeta.formatValue || '';
 
 		makeObservable(this, {
 			step: observable,

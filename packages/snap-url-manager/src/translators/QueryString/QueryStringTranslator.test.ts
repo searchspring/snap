@@ -33,7 +33,7 @@ describe('QueryStringTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz&foo=bar');
 
-		expect(queryString.serialize({})).toBe('//example2.com/');
+		expect(queryString.serialize({})).toBe('//example2.com');
 	});
 
 	describe('deserialize', () => {
