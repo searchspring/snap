@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.19 (2021-04-15)
+
+
+### Bug Fixes
+
+* **package-lock:** removing snapp stuff from package-lock... derp ([7a72eae](https://github.com/searchspring/snap/commit/7a72eae82a59e366aec813a7d374508be2165559))
+
+
+
+
+
 ## 0.0.18 (2021-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager
