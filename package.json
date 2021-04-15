@@ -2,7 +2,8 @@
 	"name": "@searchspring/snap",
 	"private": true,
 	"workspaces": [
-		"packages/*"
+		"packages/*",
+		"packages/snapps/*"
 	],
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/searchspring"
@@ -41,10 +42,13 @@
 		"ts-jest": "^26.5.4",
 		"typescript": "^4.2.3"
 	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
 	"lint-staged": {
-		"*.{ts,tsx}": [
-			"bash -c tsc",
-			"eslint",
+		"*.{js,ts,tsx}": [
 			"prettier --write"
 		]
 	},

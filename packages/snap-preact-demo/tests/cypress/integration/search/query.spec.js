@@ -1,6 +1,6 @@
 describe('Query', () => {
 	it('runs the query', () => {
-		cy.visit('http://localhost:3333/?q=red');
+		cy.visit('http://localhost:4444/?q=red');
 
 		// not a good test - but an example
 		cy.get('.ss-results-count-total').should('contain.text', 261);
