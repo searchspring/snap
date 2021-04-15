@@ -2,7 +2,8 @@
 	"name": "@searchspring/snap",
 	"private": true,
 	"workspaces": [
-		"packages/*"
+		"packages/*",
+		"packages/snapps/*"
 	],
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/searchspring"
@@ -30,7 +31,6 @@
 		"eslint": "^7.23.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-react": "^7.22.0",
-		"husky": "^6.0.0",
 		"jest": "^26.6.3",
 		"jsdom": "^16.4.0",
 		"lerna": "^4.0.0",
@@ -40,13 +40,6 @@
 		"standard-version": "^9.1.1",
 		"ts-jest": "^26.5.4",
 		"typescript": "^4.2.3"
-	},
-	"lint-staged": {
-		"*.{ts,tsx}": [
-			"bash -c tsc",
-			"eslint",
-			"prettier --write"
-		]
 	},
 	"config": {
 		"commitizen": {

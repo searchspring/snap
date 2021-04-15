@@ -53,7 +53,7 @@ module.exports = {
 	},
 	devtool: 'source-map',
 	devServer: {
-		port: 3333,
+		port: 4444,
 		contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'dist')],
 		contentBasePublicPath: ['/', '/dist'],
 		publicPath: '/dev',

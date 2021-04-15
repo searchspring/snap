@@ -28,7 +28,7 @@ Executes `npm run dev` across all packages sequentially. All packages will be li
 ```
 npm run dev
 ```
-http://localhost:3333 Demo store
+http://localhost:4444 Demo store
 
 http://localhost:8888 Webpack bundle analyzer
 
