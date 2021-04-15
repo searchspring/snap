@@ -24,7 +24,12 @@ export class FinderController extends AbstractController {
 
 		// set the root URL on urlManager
 		if (this.config.url) {
-			this.urlManager.translator.config.urlRoot = this.config.url;
+			this.urlManager = this.urlManager.withConfig((translatorConfig) => {
+				return {
+					...translatorConfig,
+					urlRoot: this.config.url,
+				};
+			});
 		}
 
 		// add 'beforeSearch' middleware

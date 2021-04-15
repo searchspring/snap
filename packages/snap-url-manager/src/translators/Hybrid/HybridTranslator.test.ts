@@ -24,7 +24,7 @@ describe('HybridTranslator', () => {
 			}
 		}
 
-		const queryString = new CustomHybrid({ urlRoot: '//example2.com/' });
+		const queryString = new CustomHybrid({ urlRoot: '//example2.com' });
 
 		const params = {
 			...queryString.deserialize(url),
@@ -33,7 +33,7 @@ describe('HybridTranslator', () => {
 
 		expect(queryString.serialize(params)).toBe('//example2.com?bar=baz#/foo:bar');
 
-		expect(queryString.serialize({})).toBe('//example2.com/');
+		expect(queryString.serialize({})).toBe('//example2.com');
 	});
 
 	describe('deserialize', () => {
@@ -82,8 +82,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('deserializes range filters correctly', () => {
-			const url =
-				'http://somesite.com#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*';
+			const url = 'http://somesite.com#/filter:price:*:10/filter:price:10:100/filter:price:100:*';
 			const queryString = new HybridTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
@@ -101,12 +100,15 @@ describe('HybridTranslator', () => {
 		});
 
 		it('deserializes with invalid range filters correctly', () => {
-			const url = 'http://somesite.com#/filter:price:low:nope/filter:price:high:nah/filter:price:low:100/filter:stuff:high:100';
+			const url = 'http://somesite.com#/filter:price:nope:nah/filter:price:nope:9000';
 			const queryString = new HybridTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
 			expect(params.filter).toEqual({
-				price: [{ low: null, high: null }],
+				price: [
+					{ low: null, high: null },
+					{ low: null, high: 9000 },
+				],
 			});
 
 			expect(params.page).toBe(undefined);
@@ -170,9 +172,7 @@ describe('HybridTranslator', () => {
 
 			const query = hybrid.serialize(params);
 
-			expect(query).toBe(
-				'?q=shoes&page=7#/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:low:99.99/filter:price:high:299.99/sort:name:desc'
-			);
+			expect(query).toBe('?q=shoes&page=7#/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc');
 		});
 
 		it('serializes other state correctly (as hash params)', () => {
@@ -209,9 +209,7 @@ describe('HybridTranslator', () => {
 
 			const query = queryString.serialize(params);
 
-			expect(query).toBe(
-				'/#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:100/filter:price:low:100/filter:price:high:*'
-			);
+			expect(query).toBe('/#/filter:price:*:10/filter:price:10:100/filter:price:100:*');
 		});
 
 		it('serializes with invalid range filters correctly', () => {
@@ -225,7 +223,7 @@ describe('HybridTranslator', () => {
 
 			const query = queryString.serialize(params as UrlState);
 
-			expect(query).toBe('/#/filter:price:low:10/filter:price:high:100');
+			expect(query).toBe('/#/filter:price:10:100');
 		});
 	});
 

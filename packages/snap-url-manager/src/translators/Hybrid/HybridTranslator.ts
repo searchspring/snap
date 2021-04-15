@@ -1,8 +1,7 @@
-import { UrlState, UrlTranslator, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
+import { UrlState, UrlTranslator, UrlTranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
-import { ImmutableArray } from 'seamless-immutable';
-import { black } from 'color-name';
+import { ImmutableObject, ImmutableArray } from 'seamless-immutable';
 
 export enum LocationType {
 	HASH = 'hash',
@@ -30,11 +29,18 @@ type HashConfig = {
 	};
 };
 
+interface HybridUrlTranslatorConfig extends UrlTranslatorConfig {
+	parameters?: {
+		hash?: Array<string>;
+		search?: Array<string>;
+	};
+}
+
 export class HybridTranslator implements UrlTranslator {
-	private config: HashConfig;
+	private config: ImmutableObject<HashConfig>;
 	private lookup: LocationLookup = {};
 
-	constructor(config: { queryParameter?: string; urlRoot?: string; parameters?: { hash?: Array<string>; search?: Array<string> } } = {}) {
+	constructor(config: HybridUrlTranslatorConfig = {}) {
 		this.config = Immutable({
 			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
@@ -60,7 +66,7 @@ export class HybridTranslator implements UrlTranslator {
 	}
 
 	getConfig(): HashConfig {
-		return this.config;
+		return this.config.asMutable();
 	}
 
 	protected parseQueryString(queryString: string): Array<QueryParameter> {
@@ -84,6 +90,8 @@ export class HybridTranslator implements UrlTranslator {
 							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
 						})
 						.join('&')
+				: this.config.urlRoot
+				? ''
 				: location.pathname) +
 			(hashParams.length
 				? '#/' +
@@ -98,7 +106,7 @@ export class HybridTranslator implements UrlTranslator {
 	}
 
 	protected parseHashString(hashString: string): Array<HashParameter> {
-		const justHashString = hashString.split('#').pop() || '';
+		const justHashString = hashString.split('#').join('/') || '';
 
 		return justHashString
 			.split('/')
@@ -211,38 +219,26 @@ export class HybridTranslator implements UrlTranslator {
 			};
 		}, {});
 
-		const rangeFilters = rangeFilterParams.reduce((state: UrlState, param: HashParameter, index: number): UrlState => {
-			// ranges should come in pairs!
+		const rangeFilters = rangeFilterParams.reduce((state: UrlState, param: HashParameter): UrlState => {
+			// ranges should come as single param
 			// use index to build pairs, ignore non pairs
 			// build set as encountered - only return full sets (low + high)
 
-			let newState = state;
-			const nextRangeParam = rangeFilterParams[index + 1];
-			const [type, field, bound, value] = param;
-			if (
-				index % 2 == 0 &&
-				nextRangeParam &&
-				nextRangeParam[1] == field &&
-				bound == RangeValueProperties.LOW &&
-				nextRangeParam[2] == RangeValueProperties.HIGH
-			) {
-				const currentValue = (state.filter || {})[field] || [];
+			const [type, field, low, high] = param;
+			const currentState = (state.filter || {})[field] || [];
 
-				newState = {
-					filter: {
-						...state.filter,
-						[field]: [
-							...(Array.isArray(currentValue) ? currentValue : [currentValue]),
-							{
-								[RangeValueProperties.LOW]: +value || null,
-								[RangeValueProperties.HIGH]: +nextRangeParam[3] || null,
-							},
-						],
-					},
-				};
-			}
-
-			return newState;
+			return {
+				filter: {
+					...state.filter,
+					[field]: [
+						...(Array.isArray(currentState) ? currentState : [currentState]),
+						{
+							[RangeValueProperties.LOW]: +low || null,
+							[RangeValueProperties.HIGH]: +high || null,
+						},
+					],
+				},
+			};
 		}, {});
 
 		return {
@@ -342,10 +338,7 @@ export class HybridTranslator implements UrlTranslator {
 						typeof value[RangeValueProperties.LOW] != 'undefined' &&
 						typeof value[RangeValueProperties.HIGH] != 'undefined'
 					) {
-						return [
-							['filter', key, RangeValueProperties.LOW, '' + (value[RangeValueProperties.LOW] ?? '*')],
-							['filter', key, RangeValueProperties.HIGH, '' + (value[RangeValueProperties.HIGH] ?? '*')],
-						];
+						return [['filter', key, '' + (value[RangeValueProperties.LOW] ?? '*'), '' + (value[RangeValueProperties.HIGH] ?? '*')]];
 					}
 
 					return [];
@@ -435,7 +428,7 @@ export class HybridTranslator implements UrlTranslator {
 
 	deserialize(url: string): UrlState {
 		const queryString = url.includes('?') ? (url.split('?').pop() || '').split('#').shift() || '' : '';
-		const hashString = url.includes('#') ? url.split('#').pop() || '' : '';
+		const hashString = url.includes('#') ? url.substring(url.indexOf('#') + 1) || '' : '';
 
 		const queryParams = this.parseQueryString(queryString);
 		const hashParams = this.parseHashString(hashString);
