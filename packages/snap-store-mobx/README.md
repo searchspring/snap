@@ -94,7 +94,7 @@ Boolean that is set to `true` if the Store `update` method has been called at le
 # SearchStore
 
 ## `meta` property
-The meta property is an object containing the meta data retrived from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
 
 
 <h2 id="SearchStoreMerchandising">`merchandising` property</h2>
@@ -127,21 +127,21 @@ Banners are configured in the Searchspring Management Console
 
 ```typescript
 {
-	[ContentType.HEADER]: ['<p>header banner</p>', '<p>header banner 2</p>']
+    [ContentType.HEADER]: ['<p>header banner</p>', '<p>header banner 2</p>']
 }
 ```
 
 ```typescript
 enum ContentType {
-	HEADER = 'header',
-	BANNER = 'banner',
-	FOOTER = 'footer',
-	LEFT = 'left',
-	INLINE = 'inline',
+    HEADER = 'header',
+    BANNER = 'banner',
+    FOOTER = 'footer',
+    LEFT = 'left',
+    INLINE = 'inline',
 }
 ```
 
-An example of how to retrieve header banner content:
+An example of how to retrieve the combined content of all header banners:
 
 ```typescript
 const headerBannerContent = store?.merchandising?.content['header'].join('');
@@ -181,7 +181,7 @@ Contains information about the query that was requested from the Search API
 
 `search.didYouMean` - AlternateQuery object - suggested query after spelling correction
 
-`search.originalQuery` - AlternateQuery object - original query if spell correction occured
+`search.originalQuery` - AlternateQuery object - original query if spell correction occurred
 
 ### AlternateQuery object
 An AlternateQuery object contains the respective `query` and generated query `url`
@@ -233,7 +233,7 @@ This is the default facet type.
 #### `range` type
 Range facets can only apply to a field that contains all numerical values. It is typically used for price sliders
 
-In addition to the base properties, facets of type `range` will contain following properties:
+In addition to the base properties, facets of type `range` will contain the following properties:
 
 ```typescript
 {
@@ -324,7 +324,7 @@ Contains a reference to the [StorageStore](#StorageStore)
 
 
 ### `step` property
-Only applicable to facets with `type` of `range`
+Only applicable to facets where `type` is `range`
 
 The step value is calculated based on the min and max values of the range. It is typically set to the step attribute of an input element:
 
@@ -333,12 +333,12 @@ The step value is calculated based on the min and max values of the range. It is
 ```
 
 ### `range` property
-Only applicable to facets with `type` of `range`
+Only applicable to facets where `type` is `range`
 
 Contains an object with `low` and `high` properties
 
 ### `active` property
-Only applicable to facets with `type` of `range`
+Only applicable to facets where `type` is `range`
 
 Contains an object with `low` and `high` properties
 
@@ -346,7 +346,7 @@ Contains an object with `low` and `high` properties
 
 
 ### `formatSeparator` property
-Only applicable to facets with `type` of `range`
+Only applicable to facets where `type` is `range`
 
 The text to separate `min` and `max` values. Typically set to `-`
 
@@ -357,7 +357,7 @@ const priceToDisplay = `$${facet.active.min} ${facet.formatSeparator} $${facet.a
 
 
 ### `formatValue` property
-Only applicable to facets with `type` of `range`
+Only applicable to facets where `type` is `range`
 
 A [printf format string](https://en.wikipedia.org/wiki/Printf_format_string) for how to format numerical values
 
@@ -367,19 +367,19 @@ For example, `9.99` with a formateValue of `$%01.2f` will be formatted to `$9.99
 
 
 ### `values` property
-Only applicable to facets with `type` of `value` or `range-buckets`
+Only applicable to facets where `type` is `value` or `range-buckets`
 
 Contains an array of facet value objects for this facet
 
 #### `values` object with facet type `value`
 
-If the facet `display` property is `hierarchy`, object will contain the following properties:
+If the facet `display` property is `hierarchy`, the object will contain the following properties:
 
 `level` - numerical hierarchy level, set to `0` if no hierarchy selections have been selected yet
 
 `history` - boolean set to true if the value's level is less than or equal to the filtered level
 
-Otherwise, If the facet `display` property is `palette`, `list` or `slider`, the object will contain the following properties:
+Otherwise, If the facet `display` property is `palette`, `list`, or `slider`, the object will contain the following properties:
 
 `label` - inherited from facet
 
@@ -413,7 +413,7 @@ Otherwise, If the facet `display` property is `palette`, `list` or `slider`, the
 
 
 ### `search` property
-Only applicable to facets with `type` of `value` or `range-buckets`
+Only applicable to facets where `type` is `value` or `range-buckets`
 
 An object with a single key:
 
@@ -423,15 +423,16 @@ Typical usage is to use this with a search input for each facet, allowing a user
 
 
 <h3 id="SearchFacetsMultiple">`multiple` property</h3>
-Only applicable to facets with `type` of `value` or `range-buckets`
 
-Facet multiple type can be configured per facet in the Searchspring Management Console to the following values:
+Only applicable to facets where `type` is `value` or `range-buckets`
+
+Facet `multiple` can be configured per facet in the Searchspring Management Console to the following values:
 
 `single` - a facet can only contain a single active selection at any given time
 
 `or` - a facet can have multiple active selections and the filtered results will contain a result set that matches any selections. For example, selecting a 'shoe size' facet value of '12' and '12.5' will yield results containing any shoe size of '12' or '12.5'
 
-`and` - a facet can have multiple active selection and the filtered results will contain a result set that matches all selected values. For example, selecting a 'color' facet value of 'red' and 'pink' will yield results that contain both a 'color' of 'red' and 'pink' variants
+`and` - a facet can have multiple active selections and the filtered results will contain a result set that matches all selected values. For example, selecting a 'color' facet value of 'red' and 'pink' will yield results that contain both a 'color' of 'red' and 'pink' variants
 
 ```typescript
 enum FacetMultiple {
@@ -443,7 +444,7 @@ enum FacetMultiple {
 
 
 ### `overflow` property
-Only applicable to facets with `type` of `value` or `range-buckets`
+Only applicable to facets where `type` is `value` or `range-buckets`
 
 Facet overflow state to handle the 'show more' facet functionality. 
 
@@ -460,7 +461,7 @@ Number of values to display before overflow occurs
 Number of values remaining in the overflow.  `remaining = values.length - overflow.limit`
 
 #### `setLimit` function
-Sets limit value
+Set limit value. This is the number of values to display before the remaining values overflow
 
 ```typescript
 facet.overflow.setLimit(10)
@@ -663,7 +664,7 @@ The number of products displayed per page
 The current page
 
 ### `pageSizeOptions` property
-Array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page
+An array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page
 
 `label` - label text to display
 
@@ -688,13 +689,13 @@ Default values:
 ```
 
 ### `defaultPageSize` property
-Default number of results per page. Default is `24`
+The default number of results per page. Default is `24`
 
 ### `totalResults` property
 The total result count
 
 ### `begin` getter
-The number of the first product position of the current page.
+The number of the first product position on the current page.
 For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `25`
 
 Calculation: 
@@ -703,7 +704,7 @@ return pageSize * (page - 1) + 1;
 ```
 
 ### `end` getter
-The number of the last product position of the current page.
+The number of the last product position on the current page.
 For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `48`
 
 Calculation: 
@@ -716,7 +717,7 @@ if (pageSize * page > totalResults) {
 ```
 
 ### `totalPages` getter
-The number of total pages
+The total number of pages
 
 Calculation:
 ```typescript
@@ -724,11 +725,11 @@ return Math.ceil(totalResults / pageSize);
 ```
 
 ### `multiplePages` getter
-Boolean if there are more than 1 page
+Boolean if there is more than 1 page
 
 
 ### `current` getter
-Returns a `Page` object of the current active page
+Returns a `Page` object of the current page
 
 ### `first` getter
 Returns a `Page` object of the first page
@@ -773,10 +774,10 @@ A page object is returned when invoking the following getters/methods: `current`
 The number of the page
 
 #### `active` property
-Boolean if this page is the current active page
+Boolean if this page is the current page
 
 #### `url` property
-Set to an instance of UrlManager for the page. Typical usages is to use the `url.href` value as the `href` of a pagination option
+Set to an instance of UrlManager for the page. Typical usage is to use the `url.href` value as the `href` of a pagination option
 
 #### `key` property
 A unique value (set to `url.href`) available to use as a `key` prop when rendering [react keys](https://reactjs.org/docs/lists-and-keys.html)
@@ -789,35 +790,35 @@ Contains sorting information that was requested from the Meta API
 `options` - an array of sorting Option objects
 
 ### `current` getter
-Returns an Option object of the current selected sort option
+Returns an `Option` object of the current selected sort option
 
 ### `Option` object
 
 #### `active` property
-Boolean set `true` if this option is the current active selection
+Boolean set `true` if this option is the current selection
 
 #### `default` property
 Boolean set `true` if this option is the first selection
 
 #### `field` property
-Field name of the sorting option ie. 'ss_price'
+The field name of the sorting option ie. 'ss_price'
 
 #### `label` property
 Label of this sorting, ie. 'Price'
 
 #### `direction` property
-Sorting direction. Will be one of two possible values:
+Sorting direction. It will be one of two possible values:
 
 `asc` - ascending
+
 `desc` - descending
 
 #### `type` property
 Sorting type. Will be one of two possible values:
 
 `field` - the Option is sorting using a field
-`relevance` - the Option is sorting by relevance
 
-<!-- TODO: confirm this is correct? -->
+`relevance` - the Option is sorting by relevance
 
 #### `value` property
 The value of the sorting Option, set to `` `${option.field}:${option.direction}` ``, ie. 'ss_price:asc'
@@ -839,7 +840,7 @@ console.log(store)
 ```
 
 ## `reset` method
-Reset autocomplete store to initial state and clear locks
+Reset store to the initial state by clearing data and locks
 
 ```typescript
 const store = new AutocompleteStore();
@@ -848,14 +849,14 @@ store.reset()
 ```
 
 ## `meta` property
-The meta property is an object containing the meta data retrived from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
 
 ## `state` property
 Contains autocomplete lock state
 
 A "lock" refers to a locked state of a certain component of autocomplete. There are two lock components of autocomplete:
 
-`state.locks.terms` - this becomes locked when a term's `preview` method is called, resulting in the terms not changing while the user interacts with the facets and results for the the locked term. Without locking, Autocomplete API requests from user interaction would cause the terms to change unexpectedly
+`state.locks.terms` - this becomes locked when a term's `preview` method is called, resulting in the terms not changing while the user interacts with the facets and results for the locked term. Without locking, Autocomplete API requests from user interaction would cause the terms to change unexpectedly
 
 `state.locks.facets`, similar to the terms lock, this prevents facets from changing when interacting with other facets
 
@@ -928,16 +929,16 @@ Contains an object with the following properties:
 
 `query` - query that was searched
 
-`originalQuery` - Original query if spell correction occured
+`originalQuery` - Original query if spell correction occurred
 
 ## `terms` property
 An array of Term objects.
 
 ### `Term` object
-Each Term object, corresponds to a term returned from the Autocomplete API and/or Suggest API
+Each `Term` object corresponds to a term returned from the Autocomplete API and/or Suggest API
 
 ### `active` property
-Boolean set to `true` when term is active by invoking the `preview` method
+Boolean set to `true` when the term is active, such when invoking the `preview` method
 
 ### `value` property
 Term text value
@@ -986,7 +987,7 @@ console.log(store)
 ```
 
 ## `meta` property
-The meta property is an object containing the meta data retrived from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
 
 ## `pagination` property
 See [SearchStore Pagination](#SearchStorePagination)
@@ -1085,7 +1086,7 @@ storage.get('path') // 'value'
 ```
 
 ## `config` object
-If a config is not provided, storage will be saved to its own internal `state` object
+If `config` is not provided, storage will be saved to its internal `state` object
 
 `type` - the type of storage to use: `session`, `local`, or `cookie`
 
@@ -1122,7 +1123,7 @@ Retrieves a value by path from storage
 storage.get(`facet.values`)
 ```
 
-It is also possible to retrive the entire storage without providing a path:
+It is also possible to retrieve the entire storage without providing a path:
 
 ```typescript
 storage.get()
@@ -1136,7 +1137,7 @@ storage.clear()
 ```
 
 ## `state` property
-If a config has not been provided, the StorageStore will manage it's own `state` object instead of using session storage, local storage, or cookies. 
+If a config has not been provided, the StorageStore will manage its `state` object instead of using session storage, local storage, or cookies. 
 
 This `state` object can be accessed directly:
 
