@@ -266,7 +266,7 @@ type FinderFieldConfig = {
 };
 ```
 
-#### Hierarchy Config
+<h4 id="HierarchyConfig">Hierarchy Config</h4>
 Specifying `levels` will display a dropdown for each hierarchy level. Finders that use hierarchy fields will enforce selecting dropdowns in order by disabling the following dropdowns
 
 ```typescript
@@ -300,7 +300,7 @@ const finderConfig: FinderControllerConfig = {
 ```
 
 
-#### Non-Hierarchy Config
+<h4 id="NonHierarchyConfig">Non-Hierarchy Config</h4>
 If using fields that are not of hierarchy type, `levels` are not required
 
 ```typescript
