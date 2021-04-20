@@ -1,10 +1,10 @@
-import { HybridTranslator } from './HybridTranslator';
+import { UrlTranslator } from './UrlTranslator';
 import { UrlState } from '../../types';
 
-describe('HybridTranslator', () => {
+describe('UrlTranslator', () => {
 	it('generates relative URL by default', () => {
 		const url = 'http://example.com?bar=baz';
-		const queryString = new HybridTranslator();
+		const queryString = new UrlTranslator();
 
 		const params = {
 			...queryString.deserialize(url),
@@ -18,7 +18,7 @@ describe('HybridTranslator', () => {
 
 	it('generates absolute URL if urlRoot provided', () => {
 		const url = 'http://example.com?bar=baz';
-		class CustomHybrid extends HybridTranslator {
+		class CustomHybrid extends UrlTranslator {
 			getCurrentUrl() {
 				return url;
 			}
@@ -38,14 +38,14 @@ describe('HybridTranslator', () => {
 
 	describe('deserialize', () => {
 		it('deserializes empty string correctly', () => {
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 			const emptyParams: UrlState = queryString.deserialize('');
 
 			expect(emptyParams).toEqual({});
 		});
 
 		it('deserializes with query param override', () => {
-			const hybrid = new HybridTranslator({
+			const hybrid = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
@@ -61,7 +61,7 @@ describe('HybridTranslator', () => {
 
 		it('deserializes core state correctly', () => {
 			const url = 'http://somesite.com?q=foo&page=2#/filter:brand:nike/filter:color:blue/filter:color:green%20striped/sort:price:asc';
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
 			expect(params.query).toBe('foo');
@@ -83,7 +83,7 @@ describe('HybridTranslator', () => {
 
 		it('deserializes range filters correctly', () => {
 			const url = 'http://somesite.com#/filter:price:*:10/filter:price:10:100/filter:price:100:*';
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
 			expect(params.filter).toEqual({
@@ -101,7 +101,7 @@ describe('HybridTranslator', () => {
 
 		it('deserializes with invalid range filters correctly', () => {
 			const url = 'http://somesite.com#/filter:price:nope:nah/filter:price:nope:9000';
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 			const params: UrlState = queryString.deserialize(url);
 
 			expect(params.filter).toEqual({
@@ -117,7 +117,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('deserializes with other hashParams', () => {
-			const hybrid = new HybridTranslator({
+			const hybrid = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
@@ -132,7 +132,7 @@ describe('HybridTranslator', () => {
 
 	describe('serialize', () => {
 		it('serializes empty params correctly', () => {
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 			const params: UrlState = {};
 			const query = queryString.serialize(params);
 
@@ -140,7 +140,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('serializes with query param override', () => {
-			const hybrid = new HybridTranslator({
+			const hybrid = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
@@ -168,7 +168,7 @@ describe('HybridTranslator', () => {
 				],
 			};
 
-			const hybrid = new HybridTranslator();
+			const hybrid = new UrlTranslator();
 
 			const query = hybrid.serialize(params);
 
@@ -176,7 +176,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('serializes other state correctly (as hash params)', () => {
-			const hybrid = new HybridTranslator({
+			const hybrid = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
@@ -195,7 +195,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('serializes range filters correctly', () => {
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 
 			const params: UrlState = {
 				filter: {
@@ -213,7 +213,7 @@ describe('HybridTranslator', () => {
 		});
 
 		it('serializes with invalid range filters correctly', () => {
-			const queryString = new HybridTranslator();
+			const queryString = new UrlTranslator();
 
 			const params = {
 				filter: {
@@ -237,7 +237,7 @@ describe('HybridTranslator', () => {
 					search: ['googs'],
 				},
 			};
-			const hybrid = new HybridTranslator(config);
+			const hybrid = new UrlTranslator(config);
 
 			const query = hybrid.serialize({
 				query: 'the query',

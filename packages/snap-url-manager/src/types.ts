@@ -29,7 +29,7 @@ export type UrlState = {
 	[any: string]: unknown;
 };
 
-export interface UrlTranslator {
+export interface Translator {
 	getCurrentUrl(): string;
 	getConfig(): Record<string, unknown>;
 
@@ -41,7 +41,7 @@ export interface UrlTranslator {
 	go(url: string): void;
 }
 
-export interface UrlTranslatorConfig {
+export interface TranslatorConfig {
 	queryParameter?: string;
 	urlRoot?: string;
 }

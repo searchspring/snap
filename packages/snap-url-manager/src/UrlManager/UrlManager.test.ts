@@ -1,10 +1,9 @@
 import { UrlManager } from './UrlManager';
-import { QueryStringTranslator } from '../translators';
-import { UrlState, UrlTranslator } from '../types';
+import { UrlState, Translator } from '../types';
 
 let url = '';
 
-class MockTranslator implements UrlTranslator {
+class MockTranslator implements Translator {
 	constructor(private config?: Record<string, unknown>) {}
 
 	getConfig() {
