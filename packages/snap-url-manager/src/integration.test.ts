@@ -1,5 +1,5 @@
 import { UrlManager } from './UrlManager/UrlManager';
-import { QueryStringTranslator, UrlTranslator } from './translators';
+import { QueryStringTranslator, UrlTranslator } from './Translators';
 
 let url = '';
 
