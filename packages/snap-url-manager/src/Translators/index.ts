@@ -1,3 +1,3 @@
 export * from './QueryString/QueryStringTranslator';
-export * from './Hybrid/HybridTranslator';
+export * from './Url/UrlTranslator';
 export * from './Noop/NoopTranslator';

@@ -1,4 +1,4 @@
-import { UrlState, UrlTranslator, UrlTranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
+import { UrlState, Translator, TranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
 import { ImmutableObject, ImmutableArray } from 'seamless-immutable';
@@ -19,7 +19,7 @@ type QueryParameter = {
 
 type HashParameter = Array<string>;
 
-type HashConfig = {
+type Config = {
 	queryParameter: string;
 	urlRoot: string;
 	parameters: {
@@ -29,18 +29,18 @@ type HashConfig = {
 	};
 };
 
-interface HybridUrlTranslatorConfig extends UrlTranslatorConfig {
+interface UrlTranslatorConfig extends TranslatorConfig {
 	parameters?: {
 		hash?: Array<string>;
 		search?: Array<string>;
 	};
 }
 
-export class HybridTranslator implements UrlTranslator {
-	private config: ImmutableObject<HashConfig>;
+export class UrlTranslator implements Translator {
+	private config: ImmutableObject<Config>;
 	private lookup: LocationLookup = {};
 
-	constructor(config: HybridUrlTranslatorConfig = {}) {
+	constructor(config: UrlTranslatorConfig = {}) {
 		this.config = Immutable({
 			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
@@ -65,7 +65,7 @@ export class HybridTranslator implements UrlTranslator {
 		return location.search + location.hash;
 	}
 
-	getConfig(): HashConfig {
+	getConfig(): Config {
 		return this.config.asMutable();
 	}
 

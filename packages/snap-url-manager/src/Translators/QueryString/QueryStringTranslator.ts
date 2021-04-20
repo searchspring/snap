@@ -1,4 +1,4 @@
-import { UrlState, UrlTranslator, UrlTranslatorConfig, RangeValueProperties, UrlStateFilterType } from '../../types';
+import { UrlState, Translator, TranslatorConfig, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
 import { ImmutableObject } from 'seamless-immutable';
@@ -8,15 +8,15 @@ type QueryParameter = {
 	value: string;
 };
 
-type QueryParameterConfig = {
+type Config = {
 	queryParameter: string;
 	urlRoot: string;
 };
 
-export class QueryStringTranslator implements UrlTranslator {
-	private config: ImmutableObject<QueryParameterConfig>;
+export class QueryStringTranslator implements Translator {
+	private config: ImmutableObject<Config>;
 
-	constructor(config: UrlTranslatorConfig = {}) {
+	constructor(config: TranslatorConfig = {}) {
 		this.config = Immutable({
 			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
 			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
@@ -32,7 +32,7 @@ export class QueryStringTranslator implements UrlTranslator {
 		return location.search || '';
 	}
 
-	getConfig(): QueryParameterConfig {
+	getConfig(): Config {
 		return this.config.asMutable();
 	}
 

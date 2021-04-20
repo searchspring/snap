@@ -1,6 +1,6 @@
-import { UrlState, UrlTranslator } from '../../types';
+import { UrlState, Translator } from '../../types';
 
-export class NoopTranslator implements UrlTranslator {
+export class NoopTranslator implements Translator {
 	private url = '{}';
 
 	getCurrentUrl(): string {
