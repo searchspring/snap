@@ -14,7 +14,7 @@
 		"cypress": "cypress open --project tests",
 		"format": "prettier --write \"**/*.{js,ts,json}\"",
 		"lint": "eslint --fix \"**/*.{js,ts}\"",
-		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests || kill $(lsof -ti:4444,8888))"
+		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
 	},
 	"author": "",
 	"license": "MIT",
