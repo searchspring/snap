@@ -32,18 +32,23 @@ export class ResultStore extends Array {
 class Banner {
 	type = 'banner';
 	id: string;
+	attributes = {};
+	mappings = {
+		core: {},
+	};
+	custom = {};
 	config = {};
-	value;
+	value: string;
 
 	constructor(controller, banner) {
-		this.id = 'ssib-' + banner.config.position.index;
+		this.id = 'ss-ib-' + banner.config.position.index;
 		this.config = banner.config;
 		this.value = banner.value;
 
 		makeObservable(this, {
 			id: observable,
-			config: observable,
-			value: observable,
+			mappings: observable,
+			attributes: observable,
 		});
 	}
 }

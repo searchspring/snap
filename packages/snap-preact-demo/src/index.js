@@ -41,14 +41,14 @@ const cntrlrConfig = {
 	},
 };
 
-const cntrlr = (window.cntrlr = new SearchController(cntrlrConfig, {
+const cntrlr = new SearchController(cntrlrConfig, {
 	client: new SnapClient(globals, clientConfig),
 	store: new SearchStore(),
 	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
-}));
+});
 
 /*
 	middlewares
@@ -121,7 +121,7 @@ cntrlr.on('afterStore', async ({ controller }, next) => {
 });
 
 // using plugins (groups of middleware)
-// cntrlr.use(afterStore);
+cntrlr.use(afterStore);
 
 // using a function
 cntrlr.on('afterStore', scrollToTop);
@@ -136,6 +136,14 @@ cntrlr.init();
 // run initial search
 // cntrlr.urlManager.set('query', 'blue').go();
 cntrlr.search();
+
+
+// for testing purposes
+window.sssnap = {
+	search: cntrlr
+};
+
+
 
 /*
 	render targets
