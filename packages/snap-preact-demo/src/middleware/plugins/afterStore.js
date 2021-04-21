@@ -1,5 +1,5 @@
-export function afterStore(ctrlr) {
-	ctrlr.on('afterStore', async ({ controller: { store } }, next) => {
+export function afterStore(controller) {
+	controller.on('afterStore', async ({ controller: { store } }, next) => {
 		mutateFacets(store.facets);
 		mutateResults(store.results);
 
@@ -7,7 +7,7 @@ export function afterStore(ctrlr) {
 	});
 
 	// log the store
-	cntrlr.on('afterStore', async ({ controller }, next) => {
+	controller.on('afterStore', async ({ controller }, next) => {
 		controller.log.debug('store', controller.store.toJSON());
 		await next();
 	});
@@ -20,7 +20,7 @@ function mutateFacets(facets) {
 			limit = 16;
 		}
 
-		facet.overflow && facet.overflow.setLimit(limit);
+		facet.overflow?.setLimit(limit);
 	}
 }
 

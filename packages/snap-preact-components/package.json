@@ -26,7 +26,7 @@
 	"dependencies": {
 		"@emotion/react": "^11.1.5",
 		"@searchspring/snap-toolbox": "^0.0.28",
-		"classnames": "^2.2.6",
+		"classnames": "^2.3.1",
 		"mobx-react-lite": "^3.2.0",
 		"react-ranger": "^2.1.0"
 	},
@@ -40,20 +40,21 @@
 		"@searchspring/snap-logger": "^0.0.5",
 		"@searchspring/snap-profiler": "^0.0.16",
 		"@searchspring/snap-store-mobx": "^0.0.10",
-		"@searchspring/snap-toolbox": "0.0.24",
+		"@searchspring/snap-toolbox": "0.0.28",
 		"@searchspring/snap-url-manager": "^0.0.19",
-		"@storybook/addon-actions": "^6.1.21",
-		"@storybook/addon-essentials": "^6.1.21",
-		"@storybook/addon-links": "^6.1.21",
-		"@storybook/preact": "^6.1.21",
-		"@storybook/theming": "^6.1.21",
+		"@storybook/addon-actions": "^6.2.8",
+		"@storybook/addon-essentials": "^6.2.8",
+		"@storybook/addon-links": "^6.2.8",
+		"@storybook/builder-webpack5": "^6.2.8",
+		"@storybook/preact": "^6.2.8",
+		"@storybook/theming": "^6.2.8",
 		"@testing-library/jest-dom": "^5.11.10",
 		"@testing-library/preact": "^2.0.1",
-		"@testing-library/user-event": "^13.0.15",
+		"@testing-library/user-event": "^13.1.5",
 		"mobx-react": "^7.1.0",
 		"node-sass": "^5.0.0",
 		"preact": "^10.5.13",
-		"ts-loader": "^8.0.18"
+		"ts-loader": "^9.0.2"
 	},
 	"sideEffects": false
 }

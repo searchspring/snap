@@ -52,19 +52,12 @@ describe('ResultStore', () => {
 	});
 
 	describe('with inline banners', () => {
-		// const searchDataArray = [
-		// 	new SearchData({ search: 'inlineBanners' }),
-		// 	new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page1' }),
-		// 	new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page2' }),
-		// 	,
-		// ];
-
 		it('splices inline banners into the results array', () => {
 			const searchData = new SearchData({ search: 'inlineBanners' });
 			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
-			expect(results[1].value).toBe(searchData.merchandising.content.inline[0].value);
+			expect(results[1].attributes.value).toBe(searchData.merchandising.content.inline[0].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -72,8 +65,10 @@ describe('ResultStore', () => {
 			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
-			expect(results[2].value).toBe(searchData.merchandising.content.inline[0].value);
-			expect(results[3].value).toBe(searchData.merchandising.content.inline[1].value);
+			expect(results[2].id).toBe(`ss-ib-${searchData.merchandising.content.inline[0].config.position.index}`);
+			expect(results[2].attributes.value).toBe(searchData.merchandising.content.inline[0].value);
+			expect(results[3].id).toBe(`ss-ib-${searchData.merchandising.content.inline[1].config.position.index}`);
+			expect(results[3].attributes.value).toBe(searchData.merchandising.content.inline[1].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -81,7 +76,8 @@ describe('ResultStore', () => {
 			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
-			expect(results[0].value).toBe(searchData.merchandising.content.inline[2].value);
+			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
+			expect(results[0].attributes.value).toBe(searchData.merchandising.content.inline[2].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -126,7 +122,8 @@ describe('ResultStore', () => {
 			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
-			expect(results[0].value).toBe(searchData.merchandising.content.inline[2].value);
+			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
+			expect(results[0].attributes.value).toBe(searchData.merchandising.content.inline[2].value);
 		});
 	});
 });

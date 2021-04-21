@@ -11,7 +11,6 @@ export class Facets extends Component {
 	render() {
 		const facets = this.props.store.facets;
 		const controller = this.props.store.controller;
-		controller.log.debug('facets', facets);
 
 		return (
 			<Profile name="facets" controller={controller}>
