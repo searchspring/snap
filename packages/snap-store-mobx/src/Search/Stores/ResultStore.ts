@@ -32,18 +32,18 @@ export class ResultStore extends Array {
 class Banner {
 	type = 'banner';
 	id: string;
+	attributes = {};
 	mappings = {
-		config: {},
 		core: {},
 	};
-	attributes = {
-		value: '',
-	};
+	custom = {};
+	config = {};
+	value: string;
 
 	constructor(controller, banner) {
 		this.id = 'ss-ib-' + banner.config.position.index;
-		this.mappings.config = banner.config;
-		this.attributes.value = banner.value;
+		this.config = banner.config;
+		this.value = banner.value;
 
 		makeObservable(this, {
 			id: observable,
@@ -94,17 +94,14 @@ function addBannersToResults(results, banners, paginationData) {
 		.reduce((adding, banner) => {
 			const resultCount = productCount + adding.length;
 
-			if (
-				banner.mappings.config.position.index >= minIndex &&
-				(banner.mappings.config.position.index < maxIndex || resultCount < paginationData.pageSize)
-			) {
+			if (banner.config.position.index >= minIndex && (banner.config.position.index < maxIndex || resultCount < paginationData.pageSize)) {
 				adding.push(banner);
 			}
 
 			return adding;
 		}, [])
 		.forEach((banner, index) => {
-			let adjustedIndex = banner.mappings.config.position.index - minIndex;
+			let adjustedIndex = banner.config.position.index - minIndex;
 			if (adjustedIndex > productCount - 1) {
 				adjustedIndex = productCount + index;
 			}
