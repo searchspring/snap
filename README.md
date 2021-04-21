@@ -6,12 +6,12 @@ Welcome to Snap - Searchspring's SDK for integrating into front end web apps.
 
 # Contributing
 
-We invite your participation through issues and pull requests! Please reference Searchspring's [Community CONTRIBUTING.md](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md)
+We invite your participation through issues and pull requests! Please reference Searchspring's [Community Contribution Guidelines](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md).
 
 # Packages
 Snap packages that are published to NPM's registry are found under the `/packages` directory. 
 
-Documentation for each package can be found in its respective README file
+Documentation for each package can be found in its respective README file.
 
 <details>
     <summary>Package dependencies hierarchy</summary>
@@ -23,9 +23,9 @@ Documentation for each package can be found in its respective README file
 
 [@searchspring/snap-client-javascript](packages/snap-client-javascript) <a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a>
 
-Simple Javascript client for communicating with Searchspring's API
+Simple Javascript client for communicating with Searchspring's API.
 
-## Component Library
+## Component Libraries
 
 A collection of interface elements for front end libraries
 ### React / Preact
@@ -37,11 +37,13 @@ A collection of interface elements for front end libraries
 
 [@searchspring/snap-controller](packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
-The heart of controlling Search, Autocomplete, & Finder functionality
+The heart of controlling Search, Autocomplete, & Finder functionality.
 
-## Demo
+## Demo Stores
 
-A demo store utilizing all Snap packages and components. Check it out at [try.searchspring.com](http://try.searchspring.com/) or use it as a reference.
+A demo store utilizing all Snap packages and components.
+### React / Preact
+Check it out at [try.searchspring.com](http://try.searchspring.com/) or use it as a reference.
 <!-- TODO: Update try.searchspring.com to Snap deployed demostore -->
 
 [@searchspring/snap-preact-demo](packages/snap-preact-demo)
@@ -50,7 +52,7 @@ A demo store utilizing all Snap packages and components. Check it out at [try.se
 
 [@searchspring/snap-event-manager](packages/snap-event-manager) <a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a>
 
-Hook into custom events for modifying data
+Hook into custom events for modifying data.
 
 ## Logger
 
@@ -84,7 +86,7 @@ A standard API for URL management across all Snap products
 
 # Quick Links
 
-[Snap API docs](http://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
+[Snap API docs](https://searchspring.github.io/snapi-oas/) - Search & Autocomplete API documentation
 
 [Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API.
 
