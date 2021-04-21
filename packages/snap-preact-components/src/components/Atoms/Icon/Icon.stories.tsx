@@ -5,11 +5,22 @@ import { IconProps } from '../../../types';
 import { iconPaths } from './paths';
 
 import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+// @ts-ignore
+import Readme from '../Icon/readme.md';
 
 export default {
 	title: `Atoms/Icon`,
 	component: Icon,
 	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
 		actions: {
 			disabled: true,
 		},

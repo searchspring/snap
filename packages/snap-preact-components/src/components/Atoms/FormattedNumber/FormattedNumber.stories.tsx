@@ -1,10 +1,23 @@
 import { h } from 'preact';
 
 import { FormattedNumber } from './FormattedNumber';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+// @ts-ignore
+import Readme from '../FormattedNumber/readme.md';
 
 export default {
 	title: `Atoms/FormattedNumber`,
 	component: FormattedNumber,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		value: {
 			description: 'Numeric value to be formatted',

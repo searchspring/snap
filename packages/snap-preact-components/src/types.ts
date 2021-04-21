@@ -14,6 +14,7 @@ export interface Result {
 	id: string;
 	mappings: Mappings;
 	attributes: any;
+	type?: string;
 }
 export enum BannerType {
 	HEADER = 'header',
@@ -52,7 +53,7 @@ export enum Layout {
 	LIST = 'list',
 }
 
-export type LayoutType = Layout.GRID | Layout.LIST;
+export type LayoutType = Layout.GRID | Layout.LIST ;
 
 export interface Pagination {
 	page: number;
@@ -195,6 +196,7 @@ export interface BaseFacetValue {
 
 export interface ValueFacetValue extends BaseFacetValue {
 	value: string;
+	preview?: () => void;
 }
 
 export interface ValueFacetHierarchyValue extends ValueFacetValue {

@@ -110,7 +110,7 @@ export const Dropdown = observer(
 );
 
 export interface DropdownProps extends ComponentProps {
-	button?: string | JSX.Element;
+	button: string | JSX.Element;
 	content?: string | JSX.Element;
 	disabled?: boolean;
 	open?: boolean;

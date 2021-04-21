@@ -1,12 +1,25 @@
 import { h } from 'preact';
 
 import { Button } from './Button';
-
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { componentArgs } from '../../../utilities';
+
+// @ts-ignore
+import Readme from '../Button/readme.md';
 
 export default {
 	title: `Atoms/Button`,
 	component: Button,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		content: {
 			description: 'Content to be displayed in button',

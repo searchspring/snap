@@ -3,10 +3,24 @@ import { Result, ResultProps } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Result/readme.md';
 
 export default {
 	title: `Molecules/Result`,
 	component: Result,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div style={{ margin: '1em' }}>
@@ -86,6 +100,28 @@ export default {
 				defaultValue: { summary: FALLBACK_IMAGE_URL },
 			},
 			control: { type: 'text' },
+		},
+		width: {
+			defaultValue: '',
+			description: 'result width, %, px, em',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		layout: {
+			description: 'Results layout',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: {
+				type: 'select',
+				options: ['grid', 'list'],
+			},
 		},
 		...componentArgs,
 	},

@@ -3,10 +3,23 @@ import { h } from 'preact';
 import { LoadingBar } from './LoadingBar';
 import { defaultTheme } from '../../../providers/theme';
 import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+// @ts-ignore
+import Readme from '../Loading/readme.md';
 
 export default {
 	title: `Atoms/LoadingBar`,
 	component: LoadingBar,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		active: {
 			defaultValue: false,

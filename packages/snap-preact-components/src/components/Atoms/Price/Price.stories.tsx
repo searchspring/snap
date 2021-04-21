@@ -1,10 +1,24 @@
 import { h } from 'preact';
 
 import { Price } from './Price';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Price/readme.md';
 
 export default {
 	title: `Atoms/Price`,
 	component: Price,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		value: {
 			description: 'Numeric value to be formatted',

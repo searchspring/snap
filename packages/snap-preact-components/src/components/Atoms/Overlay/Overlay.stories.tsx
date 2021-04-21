@@ -3,10 +3,24 @@ import { h } from 'preact';
 import { Overlay } from './Overlay';
 
 import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Overlay/readme.md';
 
 export default {
 	title: `Atoms/Overlay`,
 	component: Overlay,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		active: {
 			defaultValue: false,

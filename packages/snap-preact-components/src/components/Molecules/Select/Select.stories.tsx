@@ -6,10 +6,24 @@ import { Select, SelectProps } from './Select';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { iconPaths } from '../../Atoms/Icon';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Select/readme.md';
 
 export default {
 	title: `Molecules/Select`,
 	component: Select,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		options: {
 			description: 'Select options from store reference',

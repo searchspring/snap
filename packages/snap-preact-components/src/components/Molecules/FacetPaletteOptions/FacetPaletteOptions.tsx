@@ -93,7 +93,7 @@ export const FacetPaletteOptions = observer(
 			...properties.theme?.components?.facetpaletteoptions,
 		};
 
-		const { values, hideLabel, columns, gapSize, hideIcon, onClick, disableStyles, className, style } = props;
+		const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, mouseEvents, disableStyles, className, style } = props;
 
 		const subProps: FacetPaletteOptionsSubProps = {
 			icon: {
@@ -125,7 +125,15 @@ export const FacetPaletteOptions = observer(
 				>
 					{values.map((value) => {
 						return (
-							<a css={!disableStyles && CSS.optionWrapper()} onClick={onClick} {...value.url?.link}>
+							<a 
+								css={!disableStyles && CSS.optionWrapper()} 
+								onClick={onClick} 
+								onFocus={() => {
+									previewOnFocus && value.preview && value.preview();
+								}}
+								{...mouseEvents}
+								{...value.url?.link}
+							>
 								<div css={!disableStyles && CSS.paletteOption({ color: value.value })} className={'ss-palette-option'}>
 									{/* TODO: fuuuuture add imageurl  */}
 									{!hideIcon && value.filtered && (
@@ -169,6 +177,8 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	gapSize?: string;
 	hideIcon?: boolean;
 	onClick?: (e: Event) => void;
+	previewOnFocus?: boolean;
+	mouseEvents?: any;
 }
 
 interface FacetPaletteOptionsSubProps {

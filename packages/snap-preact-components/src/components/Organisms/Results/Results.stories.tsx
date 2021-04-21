@@ -1,12 +1,28 @@
 import { h } from 'preact';
 
-import { Results, ResultsProp } from './Results';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+import { Results } from './Results';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { LayoutType } from "../../../types";
+
+// @ts-ignore
+import Readme from '../Results/readme.md';
 
 export default {
 	title: `Organisms/Results`,
 	component: Results,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div
@@ -16,7 +32,7 @@ export default {
 					border: '1px solid lightgrey',
 				}}
 			>
-				<Story height="200px" />
+				<Story/>
 			</div>
 		),
 	],
@@ -48,25 +64,46 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
-const Template = (args: ResultsProp, { loaded: { controller } }) => <Results {...args} results={controller?.store?.results} />;
+const responsive = [
+	{
+		viewport: 350,
+		numAcross: 1,
+		numRows: 5,	
+			
+	},
+	{
+		viewport: 450,
+		numAcross: 2,
+		numRows: 3,	
+		layout: "list" as LayoutType,	
+	},
+	{
+		viewport: 500,
+		numAcross: 3,
+		numRows: 2,	
+	},
+	{
+		viewport: 600,
+		numAcross: 5,
+		numRows: 4,	
+	},
+	{
+		viewport: 700,
+		numAcross: 5,
+	}
+]
 
-export const Grid = Template.bind({});
+const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+export const Grid = (props, { loaded: { controller } }) => <Results layout='grid' results={controller?.store?.results} responsive={responsive} {...props}/>;
 Grid.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),
 	}),
 ];
-Grid.args = {
-	layout: 'grid',
-};
 
-export const List = Template.bind({});
+export const List = (props, { loaded: { controller } }) => <Results layout='list' results={controller?.store?.results} responsive={responsive} {...props}/>;
 List.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),
 	}),
 ];
-List.args = {
-	layout: 'list',
-};

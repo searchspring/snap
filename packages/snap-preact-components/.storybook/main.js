@@ -1,6 +1,21 @@
 module.exports = {
 	stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-	addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+	addons: [
+		{
+			name: '@storybook/addon-docs',
+			options: {
+				configureJSX: true,
+				babelOptions: {},
+				transcludeMarkdown: true,
+				inlineStories: true,
+				sourceLoaderOptions: null
+			},
+		},
+		'@storybook/addon-controls',
+		'@storybook/addon-links', 
+		'@storybook/addon-essentials',
+	],
+
 	typescript: {
 		check: false,
 		checkOptions: {},
