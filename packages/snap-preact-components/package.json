@@ -43,9 +43,9 @@
 		"@searchspring/snap-toolbox": "0.0.28",
 		"@searchspring/snap-url-manager": "^0.0.19",
 		"@storybook/addon-actions": "^6.2.8",
+		"@storybook/addon-docs": "^6.2.8",
 		"@storybook/addon-essentials": "^6.2.8",
 		"@storybook/addon-links": "^6.2.8",
-		"@storybook/builder-webpack5": "^6.2.8",
 		"@storybook/preact": "^6.2.8",
 		"@storybook/theming": "^6.2.8",
 		"@testing-library/jest-dom": "^5.11.10",
@@ -54,7 +54,9 @@
 		"mobx-react": "^7.1.0",
 		"node-sass": "^5.0.0",
 		"preact": "^10.5.13",
-		"ts-loader": "^9.0.2"
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"ts-loader": "^8.1.0"
 	},
 	"sideEffects": false
 }

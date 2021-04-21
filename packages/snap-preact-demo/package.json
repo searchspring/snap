@@ -7,7 +7,7 @@
 		"registry": "https://npm.pkg.github.com/searchspring"
 	},
 	"scripts": {
-		"analyze": "webpack --config --analyze",
+		"analyze": "webpack --analyze",
 		"build": "rm -fr ./dist && webpack --mode=production",
 		"build:watch": "rm -fr ./dist && webpack --watch --mode=production",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve",
@@ -47,12 +47,11 @@
 		"css-loader": "^5.2.4",
 		"cypress": "^7.1.0",
 		"file-loader": "^6.2.0",
-		"html-webpack-plugin": "^5.3.1",
 		"lighthouse": "^7.3.0",
 		"node-sass": "^5.0.0",
-		"sass-loader": "^11.0.1",
+		"sass-loader": "^10.1.1",
 		"style-loader": "^2.0.0",
-		"webpack": "^5.34.0",
+		"webpack": "^4.46.0",
 		"webpack-bundle-analyzer": "^4.4.1",
 		"webpack-cli": "^4.6.0",
 		"webpack-dev-server": "^3.11.2",
