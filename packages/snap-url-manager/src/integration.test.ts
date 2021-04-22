@@ -419,9 +419,9 @@ describe('UrlManager Integration Tests', () => {
 					search: ['view'],
 				},
 			};
-			const hybrid = new UrlManager(new MockUrlTranslator(config));
+			const translator = new UrlManager(new MockUrlTranslator(config));
 
-			const hashAndQuery = hybrid.set({
+			const hashAndQuery = translator.set({
 				query: 'the query',
 				sort: { field: 'price', direction: 'asc' },
 				store: ['products'],
