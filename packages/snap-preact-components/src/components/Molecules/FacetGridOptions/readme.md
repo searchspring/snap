@@ -1,6 +1,6 @@
 ## Facet Grid Options
 
-Renders a grid of facet options. Customizable columns and gapSize. onClick and mouseEvents. previewOnFocus prop for use with AutoComplete.
+Renders a grid of facet options. Customizable columns and gapSize. onClick and valueProps. previewOnFocus prop for use with AutoComplete.
 
 ## Usage
 Default

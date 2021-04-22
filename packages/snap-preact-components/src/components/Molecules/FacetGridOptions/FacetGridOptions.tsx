@@ -68,7 +68,7 @@ export const FacetGridOptions = observer(
 			...properties.theme?.components?.facetGridOptions,
 		};
 
-		const { values, columns, gapSize, onClick, previewOnFocus, mouseEvents, disableStyles, className, style } = props;
+		const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
 
 		// using props or theme if no props, if no theme using defaultTheme
 		const colorPalette = theme.colors ? theme.colors : defaultTheme.colors;
@@ -84,7 +84,7 @@ export const FacetGridOptions = observer(
 							onFocus={() => {
 								previewOnFocus && value.preview && value.preview();
 							}}
-							{...mouseEvents}
+							{...valueProps}
 							{...value.url?.link}
 						>
 							<div className={classnames('ss-grid-option', { filtered: value.filtered })} css={!disableStyles && CSS.gridOption({ colorPalette })} />
@@ -105,5 +105,5 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	gapSize?: string;
 	onClick?: (e: Event) => void;
 	previewOnFocus?: boolean;
-	mouseEvents?: any;
+	valueProps?: any;
 }

@@ -93,7 +93,7 @@ export const FacetPaletteOptions = observer(
 			...properties.theme?.components?.facetpaletteoptions,
 		};
 
-		const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, mouseEvents, disableStyles, className, style } = props;
+		const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
 
 		const subProps: FacetPaletteOptionsSubProps = {
 			icon: {
@@ -131,7 +131,7 @@ export const FacetPaletteOptions = observer(
 								onFocus={() => {
 									previewOnFocus && value.preview && value.preview();
 								}}
-								{...mouseEvents}
+								{...valueProps}
 								{...value.url?.link}
 							>
 								<div css={!disableStyles && CSS.paletteOption({ color: value.value })} className={'ss-palette-option'}>
@@ -178,7 +178,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	hideIcon?: boolean;
 	onClick?: (e: Event) => void;
 	previewOnFocus?: boolean;
-	mouseEvents?: any;
+	valueProps?: any;
 }
 
 interface FacetPaletteOptionsSubProps {

@@ -66,7 +66,7 @@ export const FacetListOptions = observer(
 			...properties.theme?.components?.facetListOptions,
 		};
 
-		const { values, hideCheckbox, hideCount, onClick, previewOnFocus, mouseEvents, disableStyles, className, style } = props;
+		const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
 
 		const subProps: FacetListOptionsSubProps = {
 			checkbox: {
@@ -93,7 +93,7 @@ export const FacetListOptions = observer(
 							onFocus={() => {
 								previewOnFocus && value.preview && value.preview();
 							}}
-							{...mouseEvents}
+							{...valueProps}
 							{...value.url?.link}
 							onClick={(e) => {
 								if (typeof onClick == 'function') {
@@ -126,7 +126,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	hideCount?: boolean;
 	onClick?: (e: any) => void;
 	previewOnFocus?: boolean;
-	mouseEvents?: any;
+	valueProps?: any;
 }
 
 interface FacetListOptionsSubProps {

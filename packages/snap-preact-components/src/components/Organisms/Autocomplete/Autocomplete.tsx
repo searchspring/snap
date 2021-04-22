@@ -385,7 +385,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let delayTimeout;
 	const delayTime = 200;
-	const mouseEvents = {
+	const valueProps = {
 		onMouseEnter: (e) => {
 			clearTimeout(delayTimeout);
 			delayTimeout = setTimeout(() => {
@@ -402,7 +402,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			<div css={CSS.Autocomplete({style})} className={classnames('ss-autocomplete', className)} onClick={(e)=> { e.stopPropagation() }}>
 				<div className="ss-ac-container">
 					{!hideTerms && (
-						<Terms terms={terms} search={search} mouseEvents={mouseEvents}/>
+						<Terms terms={terms} search={search} valueProps={valueProps}/>
 					)}
 
 					<div className="ss-ac-content">
@@ -419,7 +419,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														facet.display && (facet.display != 'hierarchy' || facet.display != 'slider') ? facet.display : 'list'
 													}`}
 												>
-													<Facet {...subProps.facet} facet={facet} previewOnFocus={true} mouseEvents={mouseEvents} />
+													<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
 												</div>	
 											)
 										})}
@@ -482,7 +482,7 @@ const emIfy = (term, search) => {
 	)</>
 };
 
-const Terms = (props: {terms, search, mouseEvents}) => {
+const Terms = (props: {terms, search, valueProps}) => {
 	return (
 		<div className="ss-ac-terms">
 			<ul className="ss-list">
@@ -491,7 +491,7 @@ const Terms = (props: {terms, search, mouseEvents}) => {
 						<a
 							href={term.url.href}
 							className="ss-list-link"
-							{...props.mouseEvents}
+							{...props.valueProps}
 							onFocus={() => {
 								term.preview();
 							}}
