@@ -23,7 +23,6 @@
 		"test:watch": "jest --watch",
 		"storybook:build": "build-storybook -o ./docs"
 	},
-	"prettier": "@searchspring/prettier",
 	"dependencies": {
 		"@emotion/react": "^11.1.5",
 		"@searchspring/snap-toolbox": "^0.0.29",
