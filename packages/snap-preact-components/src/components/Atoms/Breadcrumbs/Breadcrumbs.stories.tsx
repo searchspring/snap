@@ -1,12 +1,25 @@
 import { h } from 'preact';
 
 import { Breadcrumbs } from './Breadcrumbs';
-
 import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Breadcrumbs/readme.md';
 
 export default {
 	title: `Atoms/Breadcrumbs`,
 	component: Breadcrumbs,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		data: {
 			description: 'Breadcrumb data object',

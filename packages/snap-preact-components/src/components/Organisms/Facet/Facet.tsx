@@ -84,6 +84,8 @@ export const Facet = observer(
 			optionsLimitCount,
 			iconColor,
 			color,
+			previewOnFocus, 
+			valueProps,
 			disableStyles,
 			className,
 			style,
@@ -110,6 +112,8 @@ export const Facet = observer(
 				// inherited props
 				...defined({
 					disableStyles,
+					previewOnFocus,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetListOptions,
@@ -122,18 +126,21 @@ export const Facet = observer(
 				// inherited props
 				...defined({
 					disableStyles,
+					previewOnFocus,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetGridOptions,
 			},
 			facetPaletteOptions: {
 				// default props
-
 				// global theme
 				...globalTheme?.components?.facetPaletteOptions,
 				// inherited props
 				...defined({
 					disableStyles,
+					previewOnFocus,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetPaletteOptions,
@@ -240,4 +247,6 @@ export interface FacetProps extends ComponentProps {
 	iconExpand?: IconType | string;
 	hideIcon?: boolean;
 	optionsLimitCount?: number;
+	previewOnFocus?: boolean;
+	valueProps?: any;
 }

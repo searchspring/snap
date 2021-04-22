@@ -1,18 +1,25 @@
 import { h } from 'preact';
 
 import { Slideout, SlideoutProps } from './Slideout';
-
 import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Button } from '../../Atoms/Button';
-import { Icon } from '../../Atoms/Icon';
-import { Facets } from '../../Organisms/Facets';
-import { FilterSummary } from '../../Organisms/FilterSummary';
+// @ts-ignore
+import Readme from '../Slideout/readme.md';
 
 export default {
 	title: `Molecules/Slideout`,
 	component: Slideout,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		active: {
 			defaultValue: false,
@@ -95,7 +102,7 @@ export default {
 	},
 };
 
-const _HelloWorld = (args: SlideoutProps, { loaded: { controller } }) => (
+const _HelloWorld = (args: SlideoutProps) => (
 	<Slideout {...args}>
 		<div>props.children will be rendered here</div>
 	</Slideout>

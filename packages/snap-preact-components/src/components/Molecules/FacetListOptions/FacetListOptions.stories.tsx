@@ -4,10 +4,24 @@ import { observer } from 'mobx-react';
 import { FacetListOptions, FacetListOptionsProps } from './FacetListOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../FacetListOptions/readme.md';
 
 export default {
 	title: `Molecules/FacetListOptions`,
 	component: FacetListOptions,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>
