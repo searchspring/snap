@@ -186,9 +186,72 @@ describe('UrlManager Integration Tests', () => {
 			expect(removeSorts.state).toStrictEqual({});
 			expect(removeSorts.href).toBe('/');
 		});
+
+		it('can be extended as mockTranslator', () => {
+			let url = '';
+			class MockTranslator extends QueryStringTranslator {
+				getCurrentUrl() {
+					return url;
+				}
+
+				go(_url) {
+					url = _url;
+				}
+
+				serialize(state) {
+					return '#' + JSON.stringify(state);
+				}
+
+				deserialize(url) {
+					return JSON.parse(url.replace(/^#/, '') || '{}');
+				}
+			}
+
+			const state = { query: 'string', page: 3 };
+			const mock = new MockTranslator();
+			const stateUrl = mock.serialize(state);
+
+			expect(stateUrl).toBe('#{"query":"string","page":3}');
+			expect(mock.deserialize(stateUrl)).toStrictEqual(state);
+
+			mock.go(stateUrl);
+			expect(url).toBe(stateUrl);
+		});
+
+		it('can be extended as described in the documentation', () => {
+			class HashTranslator extends QueryStringTranslator {
+				getCurrentUrl() {
+					return window.location.hash;
+				}
+
+				go(hash) {
+					window.location.hash = hash;
+				}
+
+				serialize(state) {
+					return '#' + super.serialize(state).split('?').pop();
+				}
+
+				deserialize(url) {
+					return super.deserialize('?' + url.replace(/^\#?\/*/, ''));
+				}
+			}
+
+			const hashy = new HashTranslator();
+			const emptyStateUrl = hashy.serialize({});
+			const emptyState = hashy.deserialize(emptyStateUrl);
+			expect(emptyStateUrl).toBe('#/');
+			expect(emptyState).toStrictEqual({});
+
+			const state = { query: 'thing', page: 3 };
+			const stateFullUrl = hashy.serialize(state);
+			const queryState = hashy.deserialize(stateFullUrl);
+			expect(stateFullUrl).toBe('#q=thing&page=3');
+			expect(queryState).toStrictEqual(state);
+		});
 	});
 
-	describe('Hybrid Translator', () => {
+	describe('Url Translator', () => {
 		it('starts with expected state from URL', () => {
 			url = 'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:*:5/other:thing/page:3/sort:name:desc/hashstuffs';
 
