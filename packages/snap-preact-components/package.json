@@ -16,8 +16,8 @@
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"dev": "tsc --watch",
-		"format": "prettier --write 'src/**/*.{js,ts,tsx}'",
-		"lint": "eslint 'src/components/**/*.{js,ts,tsx}'",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint 'src/components/**/*.{js,jsx,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",
 		"test": "jest",
 		"test:watch": "jest --watch",

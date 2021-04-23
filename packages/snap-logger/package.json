@@ -12,8 +12,8 @@
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"dev": "tsc --watch",
-		"format": "prettier --write \"src/**/*.ts\"",
-		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest --passWithNoTests",
 		"test:watch": "jest --watch"
 	},
