@@ -24,12 +24,6 @@ export default {
 		actions: {
 			disabled: true,
 		},
-		controls: {
-			disabled: false,
-		},
-		options: {
-			showPanel: true,
-		},
 	},
 	argTypes: {
 		icon: {
@@ -155,6 +149,7 @@ Gallery.args = {
 };
 Gallery.parameters = {
 	controls: {
+		expanded: false,
 		disabled: true,
 	},
 	options: {
