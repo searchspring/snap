@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.10 (2021-04-23)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+
+
+
 ## 1.0.9 (2021-04-23)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
