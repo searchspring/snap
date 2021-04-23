@@ -12,8 +12,8 @@
 		"build:watch": "rm -fr ./dist && webpack --watch --mode=production",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve",
 		"cypress": "cypress open --project tests",
-		"format": "prettier --write \"**/*.{js,ts,json}\"",
-		"lint": "eslint --fix \"**/*.{js,ts}\"",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
 	},
 	"author": "",
