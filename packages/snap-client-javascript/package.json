@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-client-javascript",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "Snap Javascript Client",
 	"license": "MIT",
 	"main": "dist/index.js",

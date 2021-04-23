@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-preact-components",
-	"version": "0.0.15",
+	"version": "0.0.16",
 	"description": "Snap Preact Component Library",
 	"author": "Searchspring",
 	"license": "ISC",
@@ -25,7 +25,7 @@
 	},
 	"dependencies": {
 		"@emotion/react": "^11.1.5",
-		"@searchspring/snap-toolbox": "^0.0.30",
+		"@searchspring/snap-toolbox": "^0.0.31",
 		"classnames": "^2.3.1",
 		"mobx-react-lite": "^3.2.0",
 		"react-ranger": "^2.1.0"
@@ -35,14 +35,14 @@
 	},
 	"devDependencies": {
 		"@mdx-js/loader": "^1.6.22",
-		"@searchspring/snap-client-javascript": "^1.0.12",
-		"@searchspring/snap-controller": "^0.0.12",
-		"@searchspring/snap-event-manager": "^0.0.22",
-		"@searchspring/snap-logger": "^0.0.7",
-		"@searchspring/snap-profiler": "^0.0.18",
-		"@searchspring/snap-store-mobx": "^0.0.12",
+		"@searchspring/snap-client-javascript": "^1.0.13",
+		"@searchspring/snap-controller": "^0.0.13",
+		"@searchspring/snap-event-manager": "^0.0.23",
+		"@searchspring/snap-logger": "^0.0.8",
+		"@searchspring/snap-profiler": "^0.0.19",
+		"@searchspring/snap-store-mobx": "^0.0.13",
 		"@searchspring/snap-toolbox": "0.0.29",
-		"@searchspring/snap-url-manager": "^0.0.21",
+		"@searchspring/snap-url-manager": "^0.0.22",
 		"@storybook/addon-actions": "^6.2.8",
 		"@storybook/addon-controls": "^6.2.8",
 		"@storybook/addon-docs": "^6.2.8",

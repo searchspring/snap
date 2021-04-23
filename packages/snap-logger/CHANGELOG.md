@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.8 (2021-04-23)
+
+
+### Bug Fixes
+
+* **husky:** migrate v4 to v6 ([#15](https://github.com/searchspring/snap/issues/15)) ([1d15c8f](https://github.com/searchspring/snap/commit/1d15c8f24467bc91b28039db51c35c02199c0774))
+
+
+
+
+
 ## 0.0.7 (2021-04-22)
 
 **Note:** Version bump only for package @searchspring/snap-logger
