@@ -16,7 +16,8 @@
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
 		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"publish": "node_modules/.bin/lerna publish --yes"
+		"publish": "node_modules/.bin/lerna publish --yes",
+		"prepare": "husky install"
 	},
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
@@ -40,11 +41,6 @@
 		"standard-version": "^9.2.0",
 		"ts-jest": "^26.5.5",
 		"typescript": "^4.2.4"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx}": [
