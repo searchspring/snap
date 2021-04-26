@@ -34,7 +34,7 @@ export class SearchStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.merchandising = new MerchandisingStore(this.controller, data.merchandising);
+		this.merchandising = new MerchandisingStore(data.merchandising);
 		this.search = new QueryStore(this.controller, data.search);
 		this.facets = new FacetStore(this.controller, this.storage, data.facets, this.meta);
 		this.filters = new FilterStore(this.controller, data.filters, this.meta);

@@ -31,7 +31,7 @@ class Facet {
 	field: string;
 	filtered = false;
 	custom = {};
-	collapse = false;
+	collapsed = false;
 	display = '';
 	label = '';
 	storage: StorageStore;
@@ -47,16 +47,16 @@ class Facet {
 			field: observable,
 			filtered: observable,
 			custom: observable,
-			collapse: observable,
+			collapsed: observable,
 			display: observable,
 			label: observable,
 			clear: computed,
 			toggleCollapse: action,
 		});
 
-		const collapseData = this.storage.get(`${this.field}.collapse`);
-		this.collapse = collapseData ?? this.collapse;
-		if (this.filtered && this.collapse && typeof collapseData == 'undefined') {
+		const collapseData = this.storage.get(`${this.field}.collapsed`);
+		this.collapsed = collapseData ?? this.collapsed;
+		if (this.filtered && this.collapsed && typeof collapseData == 'undefined') {
 			this.toggleCollapse();
 		}
 	}
@@ -68,9 +68,9 @@ class Facet {
 	}
 
 	toggleCollapse() {
-		this.collapse = !this.collapse;
+		this.collapsed = !this.collapsed;
 
-		this.storage.set(`${this.field}.collapse`, this.collapse);
+		this.storage.set(`${this.field}.collapsed`, this.collapsed);
 	}
 }
 
@@ -112,8 +112,8 @@ class RangeFacet extends Facet {
 		// needed when API returns no active (only seems to be when range.low == range.high)
 		this.active = facet.active || facet.range;
 
-		this.formatSeparator = facetMeta.formatSeparator || '-';
-		this.formatValue = facetMeta.formatValue || '';
+		this.formatSeparator = facetMeta?.formatSeparator || '-';
+		this.formatValue = facetMeta?.formatValue || '%01.2f';
 
 		makeObservable(this, {
 			step: observable,
@@ -178,6 +178,8 @@ class ValueFacet extends Facet {
 
 	constructor(controller, storage, facet, facetMeta) {
 		super(controller, storage, facet, facetMeta);
+
+		this.multiple = this.multiple;
 
 		this.values =
 			(facet.values &&

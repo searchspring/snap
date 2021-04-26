@@ -11,6 +11,7 @@ describe('Search Store', () => {
 
 	it('returns correct initial state', () => {
 		const searchStore = new SearchStore();
+		searchStore.link(mockSearchController);
 
 		expect(searchStore.loading).toBe(true);
 
@@ -41,6 +42,7 @@ describe('Search Store', () => {
 
 	it('update function updates all of the stores', () => {
 		const searchStore = new SearchStore();
+		searchStore.link(mockSearchController);
 		searchStore.update(searchData);
 
 		expect(searchStore.meta).toBeDefined();
@@ -60,6 +62,6 @@ describe('Search Store', () => {
 
 		expect(searchStore.pagination.totalResults).toBe(searchData.pagination.totalResults);
 
-		expect(searchStore.sorting.options).toHaveLength(searchData.sorting.length);
+		expect(searchStore.sorting.options).toHaveLength(searchData.meta.sortOptions.length);
 	});
 });

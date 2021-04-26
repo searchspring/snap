@@ -1,167 +1,172 @@
 {
   "sortOptions": [
     {
+      "type": "relevance",
+      "field": "relevance",
+      "direction": "desc",
+      "label": "Best Match"
+    },
+    {
+      "type": "field",
       "field": "ga_unique_purchases",
-      "label": "Best Selling",
       "direction": "desc",
-      "type": "field"
+      "label": "Best Selling"
     },
     {
+      "type": "field",
       "field": "sortable_date_created",
-      "label": "Newest Items",
       "direction": "desc",
-      "type": "field"
+      "label": "Newest Items"
     },
     {
+      "type": "field",
       "field": "name",
-      "label": "Alphabetical: A to Z",
       "direction": "asc",
-      "type": "field"
+      "label": "Alphabetical: A to Z"
     },
     {
+      "type": "field",
       "field": "name",
-      "label": "Alphabetical: Z to A",
       "direction": "desc",
-      "type": "field"
+      "label": "Alphabetical: Z to A"
     },
     {
+      "type": "field",
       "field": "reviews_product_score",
-      "label": "Avg. Customer Review",
       "direction": "desc",
-      "type": "field"
+      "label": "Avg. Customer Review"
     },
     {
+      "type": "field",
       "field": "calculated_price",
-      "label": "Price: Low to High",
       "direction": "asc",
-      "type": "field"
+      "label": "Price: Low to High"
     },
     {
+      "type": "field",
       "field": "calculated_price",
-      "label": "Price: High to Low",
       "direction": "desc",
-      "type": "field"
+      "label": "Price: High to Low"
     }
   ],
   "facets": {
-    "custom_deal_type": {
-      "display": "list",
-      "label": "Current Deals!",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_accessory_type": {
-      "display": "list",
-      "label": "Product Type",
-      "multiple": "or",
-      "collapse": true
-    },
     "accessory_location": {
       "display": "list",
       "label": "Accessory Location",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_tire_size_1": {
-      "display": "grid",
-      "label": "Tire Size (1)",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_tire_size_2": {
-      "display": "grid",
-      "label": "Tire Size (2)",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_color": {
-      "display": "list",
-      "label": "Color / Finish",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_wheel_size": {
-      "display": "grid",
-      "label": "Wheel Size",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_tire_type": {
-      "display": "list",
-      "label": "Tread Type",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_wheel_width": {
-      "display": "list",
-      "label": "Wheel Width",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_wheel_bolt_pattern": {
-      "display": "list",
-      "label": "Wheel Bolt Pattern",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_wheel_offset": {
-      "display": "list",
-      "label": "Wheel Offset",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_product_brand": {
-      "display": "list",
-      "label": "Brand",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_lift_height": {
-      "display": "list",
-      "label": "Lift Height",
-      "multiple": "or",
-      "collapse": true
-    },
-    "custom_tire_load": {
-      "display": "list",
-      "label": "Tire Load",
-      "multiple": "or",
-      "collapse": true
+      "collapsed": true,
+      "multiple": "or"
     },
     "calculated_price": {
       "display": "slider",
       "label": "Price",
-      "multiple": "or",
-      "collapse": true,
+      "collapsed": true,
       "formatSeparator": "-",
       "formatValue": "$%01.2f"
     },
-    "ss_vehicle": {
-      "display": "hierarchy",
-      "label": "Wheels by Vehicle",
-      "multiple": "single",
-      "collapse": true,
-      "hierarchyDelimiter": ">"
+    "custom_accessory_type": {
+      "display": "list",
+      "label": "Product Type",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_color": {
+      "display": "list",
+      "label": "Color / Finish",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_deal_type": {
+      "display": "list",
+      "label": "Current Deals!",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_lift_height": {
+      "display": "list",
+      "label": "Lift Height",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_product_brand": {
+      "display": "list",
+      "label": "Brand",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_tire_load": {
+      "display": "list",
+      "label": "Tire Load",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_tire_size_1": {
+      "display": "grid",
+      "label": "Tire Size (1)",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_tire_size_2": {
+      "display": "grid",
+      "label": "Tire Size (2)",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_tire_type": {
+      "display": "list",
+      "label": "Tread Type",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_wheel_bolt_pattern": {
+      "display": "list",
+      "label": "Wheel Bolt Pattern",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "custom_wheel_offset": {
+      "display": "list",
+      "label": "Wheel Offset",
+      "collapsed": true,
+      "multiple": null
+    },
+    "custom_wheel_size": {
+      "display": "grid",
+      "label": "Wheel Size",
+      "collapsed": true,
+      "multiple": null
+    },
+    "custom_wheel_width": {
+      "display": "list",
+      "label": "Wheel Width",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "reviews_product_score": {
+      "display": "list",
+      "label": "Rating",
+      "collapsed": true,
+      "multiple": "or"
     },
     "ss_accessory": {
       "display": "hierarchy",
       "label": "Accessories by Vehicle",
+      "collapsed": true,
       "multiple": "single",
-      "collapse": true,
       "hierarchyDelimiter": ">"
     },
     "ss_tire": {
       "display": "hierarchy",
       "label": "Tires by Vehicle",
+      "collapsed": true,
       "multiple": "single",
-      "collapse": true,
       "hierarchyDelimiter": ">"
     },
-    "reviews_product_score": {
-      "display": "list",
-      "label": "Rating",
-      "multiple": "or",
-      "collapse": true
+    "ss_vehicle": {
+      "display": "hierarchy",
+      "label": "Wheels by Vehicle",
+      "collapsed": true,
+      "multiple": "single",
+      "hierarchyDelimiter": ">"
     }
   }
 }

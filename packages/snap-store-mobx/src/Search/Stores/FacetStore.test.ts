@@ -57,7 +57,7 @@ describe('Facet Store', () => {
 		facets.forEach((facet) => {
 			expect(facet.display).toBe(searchData.meta.facets[facet.field].display);
 			expect(facet.label).toBe(searchData.meta.facets[facet.field].label);
-			expect(facet.collapse).toBe(searchData.meta.facets[facet.field].collapse);
+			expect(facet.collapsed).toBe(searchData.meta.facets[facet.field].collapsed);
 		});
 	});
 
@@ -74,10 +74,10 @@ describe('Facet Store', () => {
 	it('it toggles the collapsed state', () => {
 		const facets = new FacetStore(mockSearchController, storageStore, searchData.facets, searchData.meta);
 
-		const collapsed = facets[0].collapse;
+		const collapsed = facets[0].collapsed;
 		expect(collapsed).toEqual(false);
 		facets[0].toggleCollapse();
-		expect(facets[0].collapse).toEqual(true);
+		expect(facets[0].collapsed).toEqual(true);
 	});
 
 	it('it clears the selected options', () => {
@@ -211,7 +211,7 @@ describe('Facet Store', () => {
 		it('has the correct facet properties', () => {
 			const facets = new FacetStore(mockSearchController, storageStore, searchData.facets, searchData.meta);
 
-			facets.forEach((facet, index) => {
+			facets.forEach((facet) => {
 				expect(facet.multiple).toBe(searchData.meta.facets[facet.field].multiple);
 			});
 		});

@@ -2572,7 +2572,7 @@
   "facets": [
     {
       "type": "range",
-      "field": "price_slider",
+      "field": "price",
       "filtered": false,
       "step": 5,
       "range": {
