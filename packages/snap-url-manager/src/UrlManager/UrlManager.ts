@@ -1,4 +1,4 @@
-import { UrlTranslator, UrlState, UrlStateRangeValue } from '../types';
+import { Translator, UrlState } from '../types';
 
 import Immutable from 'seamless-immutable';
 import { ImmutableObject } from 'seamless-immutable';
@@ -27,7 +27,7 @@ class WatcherPool {
 }
 
 export class UrlManager {
-	private translator: UrlTranslator;
+	private translator: Translator;
 
 	private urlState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private localState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
@@ -38,7 +38,7 @@ export class UrlManager {
 	private watcherPool: WatcherPool;
 
 	constructor(
-		translator: UrlTranslator,
+		translator: Translator,
 		public linker?: (urlManager: UrlManager) => Record<string, unknown>,
 		localState?: UrlState | ImmutableObject<UrlState>,
 		watcherPool?: WatcherPool,

@@ -125,6 +125,7 @@ Executes `npm run dev` across all packages sequentially. All packages will be li
 ```shell
 npm run dev
 ```
+
 Demo store: http://localhost:4444
 
 Webpack bundle analyzer: http://localhost:8888

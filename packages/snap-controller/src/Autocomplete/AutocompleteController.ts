@@ -217,6 +217,7 @@ export class AutocompleteController extends AbstractController {
 			const form = input.form;
 
 			// TODO: set urlManager translator root to match form/config action
+			let formActionUrl = this.config.action;
 
 			if (!form && this.config.action) {
 				input.removeEventListener('keyup', enterKeyEvent);
@@ -224,6 +225,8 @@ export class AutocompleteController extends AbstractController {
 			} else if (form) {
 				if (this.config.action) {
 					form.action = this.config.action;
+				} else {
+					formActionUrl = form.action;
 				}
 
 				const inputPasser = (e) => {
@@ -232,6 +235,18 @@ export class AutocompleteController extends AbstractController {
 
 				form.removeEventListener('submit', inputPasser);
 				form.addEventListener('submit', inputPasser);
+			}
+
+			// set the root URL on urlManager
+			if (formActionUrl) {
+				this.urlManager = this.urlManager.withConfig((translatorConfig) => {
+					return {
+						...translatorConfig,
+						urlRoot: formActionUrl,
+					};
+				});
+
+				this.store.state.link(this);
 			}
 		});
 

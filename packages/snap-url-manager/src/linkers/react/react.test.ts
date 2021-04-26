@@ -1,10 +1,10 @@
 import { UrlManager } from '../../UrlManager/UrlManager';
-import { UrlTranslator, UrlState } from '../../types';
+import { Translator, UrlState } from '../../types';
 import { reactLinker } from './react';
 
 let url = '#{ "foo": "bar" }';
 
-class MockTranslator implements UrlTranslator {
+class MockTranslator implements Translator {
 	getConfig() {
 		return {};
 	}
@@ -26,7 +26,7 @@ class MockTranslator implements UrlTranslator {
 	}
 }
 
-describe('ReactLinker', () => {
+describe('reactLinker', () => {
 	it('generates href and onClick', () => {
 		const urlManager = new UrlManager(new MockTranslator());
 

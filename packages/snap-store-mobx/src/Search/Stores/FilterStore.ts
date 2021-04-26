@@ -14,7 +14,7 @@ export class FilterStore extends Array {
 					return new RangeFilter(controller, {
 						facet: {
 							field: filter.field,
-							label: facetMeta.label,
+							label: facetMeta?.label || filter.field,
 						},
 						value: {
 							low: filter.value.low,
@@ -28,7 +28,7 @@ export class FilterStore extends Array {
 					return new Filter(controller, {
 						facet: {
 							field: filter.field,
-							label: facetMeta.label,
+							label: facetMeta?.label || filter.field,
 						},
 						value: {
 							value: filter.value,

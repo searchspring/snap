@@ -5,7 +5,7 @@ import { h, Fragment, render } from 'preact';
 import { SearchController } from '@searchspring/snap-controller';
 import SnapClient from '@searchspring/snap-client-javascript';
 import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, HybridTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -41,14 +41,14 @@ const cntrlrConfig = {
 	},
 };
 
-const cntrlr = (window.cntrlr = new SearchController(cntrlrConfig, {
+const cntrlr = new SearchController(cntrlrConfig, {
 	client: new SnapClient(globals, clientConfig),
 	store: new SearchStore(),
-	urlManager: new UrlManager(new HybridTranslator(), reactLinker),
+	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
-}));
+});
 
 /*
 	middlewares
@@ -121,7 +121,7 @@ cntrlr.on('afterStore', async ({ controller }, next) => {
 });
 
 // using plugins (groups of middleware)
-// cntrlr.use(afterStore);
+cntrlr.use(afterStore);
 
 // using a function
 cntrlr.on('afterStore', scrollToTop);
@@ -136,6 +136,14 @@ cntrlr.init();
 // run initial search
 // cntrlr.urlManager.set('query', 'blue').go();
 cntrlr.search();
+
+
+// for testing purposes
+window.sssnap = {
+	search: cntrlr
+};
+
+
 
 /*
 	render targets

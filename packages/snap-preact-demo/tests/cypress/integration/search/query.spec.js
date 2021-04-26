@@ -1,11 +1,11 @@
 describe('Query', () => {
 	it('runs the query', () => {
-		cy.visit('http://localhost:3333/?q=red');
+		cy.visit('http://localhost:4444/?q=dress');
 
-		// not a good test - but an example
-		cy.get('.ss-results-count-total').should('contain.text', 261);
-
-		// has some facets
-		cy.get('.ss-facets').should('have.lengthOf.at.least', 1);
+		cy.snapStore().then((store) => {
+			expect(store).to.haveOwnProperty('pagination');
+			expect(store.pagination.totalResults).to.be.greaterThan(0);
+			expect(store.pagination.page).to.equal(1);
+		});
 	});
 });

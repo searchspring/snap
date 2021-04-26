@@ -1,6 +1,5 @@
 import { UrlManager } from './UrlManager/UrlManager';
-import { QueryStringTranslator, HybridTranslator } from './translators';
-import { UrlState, UrlTranslator } from './types';
+import { QueryStringTranslator, UrlTranslator } from './Translators';
 
 let url = '';
 
@@ -14,7 +13,7 @@ class MockQueryStringTranslator extends QueryStringTranslator {
 	}
 }
 
-class MockHybridTranslator extends HybridTranslator {
+class MockUrlTranslator extends UrlTranslator {
 	getCurrentUrl() {
 		return url;
 	}
@@ -91,7 +90,7 @@ describe('UrlManager Integration Tests', () => {
 			url = 'https://somesite.com';
 
 			const urlManager = new UrlManager(new MockQueryStringTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
-			expect(urlManager.href).toBe('https://somesite.com/search/');
+			expect(urlManager.href).toBe('https://somesite.com/search');
 
 			const search = urlManager.set('query', 'the thing');
 			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
@@ -187,14 +186,76 @@ describe('UrlManager Integration Tests', () => {
 			expect(removeSorts.state).toStrictEqual({});
 			expect(removeSorts.href).toBe('/');
 		});
+
+		it('can be extended as mockTranslator', () => {
+			let url = '';
+			class MockTranslator extends QueryStringTranslator {
+				getCurrentUrl() {
+					return url;
+				}
+
+				go(_url) {
+					url = _url;
+				}
+
+				serialize(state) {
+					return '#' + JSON.stringify(state);
+				}
+
+				deserialize(url) {
+					return JSON.parse(url.replace(/^#/, '') || '{}');
+				}
+			}
+
+			const state = { query: 'string', page: 3 };
+			const mock = new MockTranslator();
+			const stateUrl = mock.serialize(state);
+
+			expect(stateUrl).toBe('#{"query":"string","page":3}');
+			expect(mock.deserialize(stateUrl)).toStrictEqual(state);
+
+			mock.go(stateUrl);
+			expect(url).toBe(stateUrl);
+		});
+
+		it('can be extended as described in the documentation', () => {
+			class HashTranslator extends QueryStringTranslator {
+				getCurrentUrl() {
+					return window.location.hash;
+				}
+
+				go(hash) {
+					window.location.hash = hash;
+				}
+
+				serialize(state) {
+					return '#' + super.serialize(state).split('?').pop();
+				}
+
+				deserialize(url) {
+					return super.deserialize('?' + url.replace(/^\#?\/*/, ''));
+				}
+			}
+
+			const hashy = new HashTranslator();
+			const emptyStateUrl = hashy.serialize({});
+			const emptyState = hashy.deserialize(emptyStateUrl);
+			expect(emptyStateUrl).toBe('#/');
+			expect(emptyState).toStrictEqual({});
+
+			const state = { query: 'thing', page: 3 };
+			const stateFullUrl = hashy.serialize(state);
+			const queryState = hashy.deserialize(stateFullUrl);
+			expect(stateFullUrl).toBe('#q=thing&page=3');
+			expect(queryState).toStrictEqual(state);
+		});
 	});
 
-	describe('Hybrid Translator', () => {
+	describe('Url Translator', () => {
 		it('starts with expected state from URL', () => {
-			url =
-				'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/other:thing/page:3/sort:name:desc/hashstuffs';
+			url = 'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:*:5/other:thing/page:3/sort:name:desc/hashstuffs';
 
-			const fullUrlManager = new UrlManager(new MockHybridTranslator());
+			const fullUrlManager = new UrlManager(new MockUrlTranslator());
 
 			expect(fullUrlManager.state).toStrictEqual({
 				query: 'test',
@@ -209,18 +270,18 @@ describe('UrlManager Integration Tests', () => {
 			});
 
 			url = 'https://somesite.com';
-			const emptyUrlManager = new UrlManager(new MockHybridTranslator());
+			const emptyUrlManager = new UrlManager(new MockUrlTranslator());
 			expect(emptyUrlManager.state).toStrictEqual({});
 
 			url = 'https://somesite.com?q=testing+with+plus+signs';
-			const queryWithSpaces = new UrlManager(new MockHybridTranslator());
+			const queryWithSpaces = new UrlManager(new MockUrlTranslator());
 			expect(queryWithSpaces.state).toStrictEqual({ query: 'testing with plus signs' });
 			expect(queryWithSpaces.href).toBe('?q=testing%20with%20plus%20signs');
 		});
 
 		it('can overwrite state that it started with', () => {
-			url = 'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/page:3/sort:name:desc/other:thing';
-			const urlManager = new UrlManager(new MockHybridTranslator());
+			url = 'https://somesite.com?q=test&page=3#/filter:color:red/filter:price:*:5/page:3/sort:name:desc/other:thing';
+			const urlManager = new UrlManager(new MockUrlTranslator());
 
 			expect(urlManager.state).toStrictEqual({
 				query: 'test',
@@ -232,7 +293,7 @@ describe('UrlManager Integration Tests', () => {
 				sort: [{ field: 'name', direction: 'desc' }],
 				other: ['thing'],
 			});
-			expect(urlManager.href).toBe('?q=test&page=3#/filter:color:red/filter:price:low:*/filter:price:high:5/sort:name:desc/other:thing');
+			expect(urlManager.href).toBe('?q=test&page=3#/filter:color:red/filter:price:*:5/sort:name:desc/other:thing');
 
 			const overwrite = urlManager
 				.set('query', 'overwritten')
@@ -253,15 +314,15 @@ describe('UrlManager Integration Tests', () => {
 		it('can be given a root URL and queryParameter via config', () => {
 			url = 'https://somesite.com';
 
-			const urlManager = new UrlManager(new MockHybridTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
-			expect(urlManager.href).toBe('https://somesite.com/search/');
+			const urlManager = new UrlManager(new MockUrlTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
+			expect(urlManager.href).toBe('https://somesite.com/search');
 
 			const search = urlManager.set('query', 'the thing');
 			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
 		});
 
 		it('supports typical value filter usage', () => {
-			const colorFilter = new UrlManager(new MockHybridTranslator()).set('filter.color', 'red');
+			const colorFilter = new UrlManager(new MockUrlTranslator()).set('filter.color', 'red');
 			expect(colorFilter.href).toBe('/#/filter:color:red');
 
 			const colorFilterMergeSame = colorFilter.merge('filter.color', 'red');
@@ -290,11 +351,11 @@ describe('UrlManager Integration Tests', () => {
 		});
 
 		it('supports typical range filter usage', () => {
-			const objectType = new UrlManager(new MockHybridTranslator()).set('filter.price', { low: 0, high: 10 });
+			const objectType = new UrlManager(new MockUrlTranslator()).set('filter.price', { low: 0, high: 10 });
 			expect(objectType.state).toStrictEqual({ filter: { price: { low: 0, high: 10 } } });
-			expect(objectType.href).toBe('/#/filter:price:low:0/filter:price:high:10');
+			expect(objectType.href).toBe('/#/filter:price:0:10');
 
-			const arrayOfObjects = new UrlManager(new MockHybridTranslator()).set('filter.price', [
+			const arrayOfObjects = new UrlManager(new MockUrlTranslator()).set('filter.price', [
 				{ low: null, high: 10 },
 				{ low: 10, high: 20 },
 				{ low: 20, high: null },
@@ -308,18 +369,16 @@ describe('UrlManager Integration Tests', () => {
 					],
 				},
 			});
-			expect(arrayOfObjects.href).toBe(
-				'/#/filter:price:low:*/filter:price:high:10/filter:price:low:10/filter:price:high:20/filter:price:low:20/filter:price:high:*'
-			);
+			expect(arrayOfObjects.href).toBe('/#/filter:price:*:10/filter:price:10:20/filter:price:20:*');
 			const arrayOfObjectsModified = arrayOfObjects.remove('filter.price', { low: 10, high: 20 });
-			expect(arrayOfObjectsModified.href).toBe('/#/filter:price:low:*/filter:price:high:10/filter:price:low:20/filter:price:high:*');
+			expect(arrayOfObjectsModified.href).toBe('/#/filter:price:*:10/filter:price:20:*');
 
-			const objectArrayType = new UrlManager(new MockHybridTranslator()).set('filter.boolean', [true, false]);
+			const objectArrayType = new UrlManager(new MockUrlTranslator()).set('filter.boolean', [true, false]);
 			expect(objectArrayType.state).toStrictEqual({ filter: { boolean: [true, false] } });
 		});
 
 		it('supports typical sort usage', () => {
-			const singleSort = new UrlManager(new MockHybridTranslator()).set('sort', { field: 'price', direction: 'asc' });
+			const singleSort = new UrlManager(new MockUrlTranslator()).set('sort', { field: 'price', direction: 'asc' });
 			expect(singleSort.state).toStrictEqual({
 				sort: { field: 'price', direction: 'asc' },
 			});
@@ -360,9 +419,9 @@ describe('UrlManager Integration Tests', () => {
 					search: ['view'],
 				},
 			};
-			const hybrid = new UrlManager(new MockHybridTranslator(config));
+			const translator = new UrlManager(new MockUrlTranslator(config));
 
-			const hashAndQuery = hybrid.set({
+			const hashAndQuery = translator.set({
 				query: 'the query',
 				sort: { field: 'price', direction: 'asc' },
 				store: ['products'],
@@ -378,7 +437,7 @@ describe('UrlManager Integration Tests', () => {
 
 		it('supports existing hash and query params and remembers which they are', () => {
 			url = 'https://somesite.com/search?view=spring&finder=wheels#/size:front:225/size:back:230';
-			const existingParams = new UrlManager(new MockHybridTranslator());
+			const existingParams = new UrlManager(new MockUrlTranslator());
 			const params = {
 				view: ['spring'],
 				finder: ['wheels'],
@@ -400,7 +459,7 @@ describe('UrlManager Integration Tests', () => {
 
 		it('implicitly sets unknown params as hash', () => {
 			url = 'https://somesite.com/';
-			const emptyState = new UrlManager(new MockHybridTranslator());
+			const emptyState = new UrlManager(new MockUrlTranslator());
 
 			expect(emptyState.state).toStrictEqual({});
 

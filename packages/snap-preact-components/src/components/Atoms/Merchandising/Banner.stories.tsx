@@ -4,10 +4,24 @@ import { Banner, BannerProps } from './Banner';
 
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Merchandising/readme.md';
 
 export default {
 	title: `Atoms/Banner`,
 	component: Banner,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		content: {
 			description: 'Banner content store reference',

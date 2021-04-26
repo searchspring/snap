@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-client-javascript",
-	"version": "1.0.9",
+	"version": "1.0.16",
 	"description": "Snap Javascript Client",
 	"license": "MIT",
 	"main": "dist/index.js",
@@ -10,9 +10,10 @@
 	"scripts": {
 		"build": "rm -rf dist && babel src -d dist",
 		"dev": "babel --watch src -d dist",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
-		"test:watch": "jest --watch",
-		"format": "prettier --write \"src/**/*.js\""
+		"test:watch": "jest --watch"
 	},
 	"browser": {
 		"fs": false

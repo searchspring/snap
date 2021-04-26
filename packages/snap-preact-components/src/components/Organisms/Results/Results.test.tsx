@@ -20,9 +20,9 @@ describe('Results Component', () => {
 		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
-		const results = rendered.container.querySelector('.ss-results');
+		const results = rendered.container.querySelector('.ss-result');
 		const styles = getComputedStyle(results);
-		expect(styles['flex-direction']).not.toBe('column');
+		expect(styles['flex-direction']).toBe('column');
 	});
 
 	it('renders list view', () => {
@@ -30,9 +30,9 @@ describe('Results Component', () => {
 		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
-		const results = rendered.container.querySelector('.ss-results');
+		const results = rendered.container.querySelector('.ss-result');
 		const styles = getComputedStyle(results);
-		expect(styles['flex-direction']).toBe('column');
+		expect(styles['flex-direction']).toBe('row');
 	});
 
 	it('renders all', () => {

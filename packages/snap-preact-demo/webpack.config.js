@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -47,13 +46,11 @@ module.exports = {
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
 			'react-dom': 'preact/compat',
-			// preact: path.resolve(__dirname, 'node_modules', 'preact'),
-			// 'preact/hooks': path.resolve(__dirname, 'node_modules', 'preact', 'hooks'),
 		},
 	},
 	devtool: 'source-map',
 	devServer: {
-		port: 3333,
+		port: 4444,
 		contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'dist')],
 		contentBasePublicPath: ['/', '/dist'],
 		publicPath: '/dev',

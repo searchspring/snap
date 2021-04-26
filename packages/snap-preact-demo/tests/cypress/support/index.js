@@ -16,5 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+beforeEach(() => {
+	// make references to requests available
+	cy.intercept('searchspring.io/api/v1/search').as('search');
+	cy.intercept('searchspring.io/api/v1/autocomplete').as('autocomplete');
+	cy.intercept('searchspring.io/api/v1/meta').as('meta');
+});

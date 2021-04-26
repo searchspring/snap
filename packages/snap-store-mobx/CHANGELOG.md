@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.16 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## 0.0.15 (2021-04-23)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+
+
+
+## 0.0.14 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## 0.0.13 (2021-04-23)
+
+
+### Bug Fixes
+
+* **husky:** migrate v4 to v6 ([#15](https://github.com/searchspring/snap/issues/15)) ([1d15c8f](https://github.com/searchspring/snap/commit/1d15c8f24467bc91b28039db51c35c02199c0774))
+
+
+
+
+
+## 0.0.12 (2021-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## 0.0.11 (2021-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+## 0.0.10 (2021-04-15)
+
+
+### Bug Fixes
+
+* **package-lock:** removing snapp stuff from package-lock... derp ([7a72eae](https://github.com/searchspring/snap/commit/7a72eae82a59e366aec813a7d374508be2165559))
+
+
+
+
+
 ## 0.0.9 (2021-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
