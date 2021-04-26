@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Docs</title>
+</head>
+<body>
+	<h1>Docs</h1>
+
+	<div id="docs"></div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+	<script>
+		const Documentation = {
+			template: `
+				<Navigation :selected="selected" :documents="documents" @select-doc="makeSelection($event)"></Navigation>
+				<Markdown :markdown="markdown"></Markdown>
+			`,
+			data() {
+				return {
+					markdown: `### Heading`,
+					selected: 0,
+					documents: [
+						{
+							label: 'Controller',
+							readme: './packages/snap-controller/README.md'
+						}, {
+							label: 'Store',
+							readme: './packages/snap-store-mobx/README.md'
+						}, {
+							label: 'Mono Repo',
+							readme: './README.md'
+						}, {
+							label: 'Preact Components',
+							url: './packages/snap-preact-components/docs/'
+						}
+					]
+				}
+			},
+			created() {
+				this.getMarkdown(this.documents[this.selected].readme);
+			},
+			methods: {
+				makeSelection(selection) {
+					this.selected = selection;
+					this.getMarkdown(this.documents[selection].readme);
+				},
+				async getMarkdown(file) {
+					const response = await fetch(file);
+
+					this.markdown = await response.text();
+
+					console.log('this.markdown', this.markdown);
+				}
+			},
+		}
+		
+		const app = Vue.createApp(Documentation);
+
+		app.component('Navigation', {
+			props: ['documents', 'selected'],
+			template: `
+			<div id="navigation">
+				<ul>
+					<li v-for="(doc, index) in documents" @click="navigate(doc, index)">
+						{{ doc.label }}
+					</li>
+				</ul>
+			</div>
+			`,
+			methods: {
+				navigate(doc, index) {
+					if (doc.readme) {
+						this.$emit('selectDoc', index);
+					} else if (doc.url) {
+						window.open(doc.url, '_blank');
+					}
+				}
+			}
+		});
+
+		app.component('Markdown', {
+			props: ['markdown'],
+			computed: {
+				markedHTML() {
+					return marked(this.markdown);
+				}
+			},
+			template: `
+			<div id="markdown" v-html="markedHTML"></div>
+			`
+		});
+		
+		app.mount('#docs');
+	</script>
+
+	<script>
+		
+	</script>
+</body>
+</html>
