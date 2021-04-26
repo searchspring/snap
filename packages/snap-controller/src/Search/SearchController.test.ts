@@ -163,7 +163,7 @@ describe('Search Controller', () => {
 				logger: new Logger(),
 			});
 
-			controller.on(event, () => false); // return false to stop middlewear
+			controller.on(event, () => false); // return false to stop middleware
 			const spy = jest.spyOn(console, 'log');
 
 			controller.init();
