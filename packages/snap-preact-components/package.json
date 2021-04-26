@@ -35,7 +35,7 @@
 	},
 	"devDependencies": {
 		"@mdx-js/loader": "^1.6.22",
-		"@searchspring/snap-client-javascript": "^1.0.16",
+		"@searchspring/snap-client-javascript": "^1.0.20",
 		"@searchspring/snap-controller": "^0.0.16",
 		"@searchspring/snap-event-manager": "^0.0.26",
 		"@searchspring/snap-logger": "^0.0.11",
