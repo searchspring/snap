@@ -1,0 +1,4302 @@
+{
+  "search": {
+    "query": "dress"
+  },
+  "filters": [],
+  "pagination": {
+    "totalResults": 1298,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "182146",
+      "mappings": {
+        "core": {
+          "uid": "182146",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-AD-W1-1869P",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4468_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg",
+          "name": "Stripe Out White Off-The-Shoulder Dress",
+          "sku": "C-AD-W1-1869P",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXTRDTfUNbQwswxgMARCYwMGQyNLc4b0oswUAAaECrg",
+        "intellisuggestSignature": "fcc8608e5ec4b8b0d490a923d7d5639ea8c48ac314ad9d184b0e322aa7a94f2a",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "70"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "off the shoulder",
+          "striped",
+          "stripes",
+          "stripe",
+          "open shoulder",
+          "open back",
+          "preppy",
+          "seersucker",
+          "white",
+          "white dress",
+          "white",
+          "summer",
+          "spring"
+        ],
+        "color": [
+          "White",
+          "Navy",
+          "Cream"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "yes"
+        ],
+        "pattern": [
+          "Stripe"
+        ],
+        "description": [
+          "Are you Stripe Out of ideas for what to wear this weekend on that trip you've got coming up with your friends? Afraid you'll be the odd one out and everyone else will be all cute and trendy and there you'll be ... not trendy and wearing the same old things you've been wearing on this annual getaway for years? Lucky for you, here's the dress you've been searching for. Doesn't matter what else you pack (it does, you'll want to continue to shop with us, we were just being nice) this is the piece that will set you apart from everyone else (that is absolutely true, you will be a Goddess among women). Take that, bad fashion moments of the past! Striped dress features 3/4 sleeve bell sleeves with a partially elastic/open back. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA"
+        ],
+        "title": [
+          "Stripe Out White Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "4141"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "4461"
+        ],
+        "ss_sale_price": "48",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "All Dresses&gt;Print Dresses",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Shop by Color&gt;White Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Casual Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "8"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "13"
+        ],
+        "popularity": "4461",
+        "product_type_unigram": "dress",
+        "id": "7790a0f692035da40c8504e8b7a9f31d"
+      }
+    },
+    {
+      "id": "181655",
+      "mappings": {
+        "core": {
+          "uid": "181655",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-VJ-P2-32007",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2507_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2507_copyright_reddressboutique_2017__large.jpg",
+          "name": "Take The Leap Pink Dress",
+          "sku": "C-VJ-P2-32007",
+          "brand": "Very J"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDfPSDTDSNTYyMDBnMGQwYjA2YDA0sjRnSC_KTAEABbIKog",
+        "intellisuggestSignature": "bbeaefe2d6e216d495e8acc9239a4326776753b0f3d928161ec85620c179a119",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "30"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "pink",
+          "pink dress",
+          "dress",
+          "shift",
+          "shift dress",
+          "scalloped dress",
+          "scallops",
+          "bride to be",
+          "bridal",
+          "bachelorette",
+          "wedding shower",
+          "spaghetti strap dress",
+          "sleeveless",
+          "spring",
+          "summer"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Sometimes the perfect outfit looks so good, it leaves your nerves all aflutter at the thought of how you’ll look. “Is it too sexy?” “Does it stand out too much?” “Will I have to wear Spanx?” But sometimes, to look like a goddess, one simply needs to Take a Leap of faith, and trust in the power of the dress. If it’s the right dress (like this one, for instance), your faith will be prove well placed, and be well rewarded. Sundress has a scalloped neckline with a racerback and invisible zipper with a hook and eye closure. Model is wearing a small. • 100% Polyester • Machine Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Take The Leap Pink Dress"
+        ],
+        "ss_clicks": [
+          "1678"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "4382"
+        ],
+        "ss_sale_price": "39",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "All Dresses&gt;Cocktail Dresses",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Sundresses",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Cocktail Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "22"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "3"
+        ],
+        "popularity": "4382",
+        "product_type_unigram": "dress",
+        "id": "eff2ffa27646f76ed4ee17e988e57c58"
+      }
+    },
+    {
+      "id": "181443",
+      "mappings": {
+        "core": {
+          "uid": "181443",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-PA-P3-0324A",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3288_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3288_copyright_reddressboutique_2017__large.jpg",
+          "name": "Fountain Of Youth Coral Dress",
+          "sku": "C-PA-P3-0324A",
+          "brand": "Paper Crane"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDXDUDTDWNTA2MnFkMGQwZjA2YDA0sjRnSC_KTAEABTgKow",
+        "intellisuggestSignature": "94ab05fde1497b1088c2d1bc86d97f4287cdd17185a0af093c67ade6e34042f6",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "71"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "coral dress",
+          "coral",
+          "dress",
+          "summer",
+          "spring",
+          "flowy dress",
+          "pink",
+          "pink dress",
+          "spaghetti strap",
+          "strappy dress",
+          "ruffles",
+          "ruffle dress"
+        ],
+        "color": [
+          "Coral"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Ponce de Leon, eat your heart out, because we’ve found the Fountain Of Youth, and we didn’t even have to brave leagues of swampland, gators, or mosquitos. In fact, it wasn’t even a fountain at all; it’s a dress. Sounds far-fetched you say? Just wait till you see how young and vibrant you look and feel while wearing it. And it’ll keep you feeling that way so long as you wear it. So might want to get two of them, you know, for wash day. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Fountain Of Youth Coral Dress"
+        ],
+        "ss_clicks": [
+          "2966"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "4257"
+        ],
+        "ss_sale_price": "46",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "All Dresses &gt; Shop by Color &gt; Coral/Orange Dresses",
+          "Shop By Trend &gt; At First Blush",
+          "Shop By Trend &gt; Think Pink",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "13"
+        ],
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;At First Blush",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Think Pink",
+          "Gifts for Her",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Shop by Color&gt;Coral/Orange Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "14"
+        ],
+        "popularity": "4257",
+        "product_type_unigram": "dress",
+        "id": "e568b0aea6e8cdebc86d70f5663d47a3"
+      }
+    },
+    {
+      "id": "177820",
+      "mappings": {
+        "core": {
+          "uid": "177820",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-FT-I4-16126",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_7035_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_7035_large.jpg",
+          "name": "My Kind Of Paradise Off-The-Shoulder Dress",
+          "sku": "C-FT-I4-16126",
+          "brand": "Flying Tomato"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdQvR9TTRNTQzNDJjMGQwYTA2YDA0sjRnSC_KTAEABO0KnQ",
+        "intellisuggestSignature": "4af8b8cab3ef2e0802ea6a9c9fd90440c96828dc07e830a498c77dc8a9bb108d",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "61"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "beach",
+          "spring",
+          "off the shoulder",
+          "open shoulder",
+          "striped dress",
+          "stripes",
+          "blue",
+          "white",
+          "blue and white",
+          "ruffle",
+          "embroidered",
+          "flowers"
+        ],
+        "color": [
+          "Blue",
+          "Red"
+        ],
+        "dress_length_name": "Above Knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Some people dream of tropical hideaways, or snow-capped mountains and rustic cabins. Others, luxury yachts for a life at sea, traveling from port to port, or a Mediterranean villa overlooking the cliffs. And then there are those of us who are more concerned with what we're going to wear than where we're going to escape to. A lovely over the shoulder dress for instance; now that's My Kind of Paradise. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Unlined • Imported"
+        ],
+        "title": [
+          "My Kind Of Paradise Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "1770"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3926"
+        ],
+        "ss_sale_price": "39",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "Style Influencer",
+          "Style Influencer&gt;Lauren Lefevre",
+          "All Dresses&gt;Print Dresses",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Shop By Trend&gt;So Seventies",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Classic Stripes"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Shop By Trend &gt; Classic Stripes",
+          "Shop By Trend &gt; So Seventies",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Spring Preview",
+          "Style Influencer &gt; Lauren Lefevre",
+          "All Dresses &gt; Print Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "19"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "12"
+        ],
+        "popularity": "3926",
+        "product_type_unigram": "dress",
+        "id": "9e62ca45e8321369ace8367a964067e4"
+      }
+    },
+    {
+      "id": "178492",
+      "mappings": {
+        "core": {
+          "uid": "178492",
+          "price": 34,
+          "msrp": 50,
+          "url": "/product/C-CES-I1-Y3800",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_reddressboutique_043_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_reddressboutique_043_large.jpg",
+          "name": "Sweet Spring Blue Dress",
+          "sku": "C-CES-I1-Y3800",
+          "brand": "Ces Femme"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXYN1vU01I00tjAwYDBkMGUwBlJGluYM6UWZKQAUKQsA",
+        "intellisuggestSignature": "c57ac2fe9747f468f06d2d0ae62f12110de1accf0632931afc8822cb9bbece8c",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "62"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "blue",
+          "light blue",
+          "blue stripe",
+          "blue striped dress",
+          "blue dress",
+          "dress with sleeves",
+          "half sleeves",
+          "preppy",
+          "cute",
+          "casual",
+          "blogger",
+          "fun",
+          "spring",
+          "summer"
+        ],
+        "color": [
+          "Blue",
+          "Coral"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Of all the seasons, it's Spring that seems to welcome love unlike the rest. It summons kisses on the front porch, and stargazing on a blanket in the backyard. There's something in the air perhaps, that reminds us how beautiful life can be and makes us want to share that beauty with someone else. So grab that special someone, pack that picnic basket, slip into this perfect Sweet Spring Blue Dress (because it was practically made for you), and go enjoy some spontaneous fun before the moment passes you by. Life's too short to be taken too seriously, and Spring's too short to be taken for granted. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Unlined, faintly sheer • Imported"
+        ],
+        "title": [
+          "Sweet Spring Blue Dress"
+        ],
+        "ss_clicks": [
+          "1355"
+        ],
+        "saturation": "med",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3789"
+        ],
+        "ss_sale_price": "34",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color&gt;Blue Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Style Influencer",
+          "All Dresses&gt;Print Dresses",
+          "Style Influencer&gt;Lauren Lefevre",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Classic Stripes"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Blue Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Classic Stripes",
+          "Style Influencer &gt; Lauren Lefevre",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "7"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "1"
+        ],
+        "popularity": "3789",
+        "product_type_unigram": "dress",
+        "id": "ae50d029289c3be2b267159b22269cce"
+      }
+    },
+    {
+      "id": "180624",
+      "mappings": {
+        "core": {
+          "uid": "180624",
+          "price": 32,
+          "msrp": 50,
+          "url": "/product/C-DZ-V3-7F549",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4264_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4264_copyright_reddressboutique_2017_large.jpg",
+          "name": "Fringe Weekend Escape Mauve Maxi Dress",
+          "sku": "C-DZ-V3-7F549",
+          "brand": "Fringe"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdYnSDTPWNXczNbFkMGQwYzA2YDA0sjRnSC_KTAEACSAKzg",
+        "intellisuggestSignature": "78f8e30d009a08fc6a3a37748631501913f44d3d52b54e18fef8ffb93c7f758b",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "44"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "maxi",
+          "casual maxi",
+          "casual",
+          "long",
+          "floor length",
+          "long dress",
+          "beach",
+          "spring",
+          "summer",
+          "mauve",
+          "pink",
+          "dusty pink",
+          "soft",
+          "pocket",
+          "pocket dress",
+          "pocket maxi",
+          "sleeveless"
+        ],
+        "color": [
+          "Pink",
+          "Coral"
+        ],
+        "dress_length_name": "Floor",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Planning a Weekend Escape? This maxi dress is quite possibly the only thing you'll need to pack. It's that comfortable. T Shirt dress features a front raw edge pocket, racer back and two side slits. Model is wearing a small. • 95% Rayon 5% Spandex • Hand Wash Cold • Unlined • Imported"
+        ],
+        "title": [
+          "Fringe Weekend Escape Mauve Maxi Dress"
+        ],
+        "ss_clicks": [
+          "3280"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "3589"
+        ],
+        "ss_sale_price": "32",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Dusty Pastels",
+          "Trending&gt;Maxi Madness",
+          "Shop By Trend&gt;Think Pink",
+          "Gifts for Her",
+          "Trending",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Trending &gt; Maxi Madness",
+          "Shop By Trend &gt; Think Pink",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Dusty Pastels",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Spandex"
+        ],
+        "days_since_published": [
+          "13"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "10"
+        ],
+        "popularity": "3589",
+        "product_type_unigram": "dress",
+        "id": "2d1a2c4f79ba1eb43e74111584b2353d"
+      }
+    },
+    {
+      "id": "182141",
+      "mappings": {
+        "core": {
+          "uid": "182141",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-SW-I3-D5120",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4104_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4104_copyright_reddressboutique_2017__large.jpg",
+          "name": "Story Meadow Fresh Light Blue Print Maxi Dress",
+          "sku": "C-SW-I3-D5120",
+          "brand": "Story"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDQ7X9TTWdTE1NDJgMGQwZzAGUkaW5gzpRZkpAAfdCrs",
+        "intellisuggestSignature": "46b5bd3d7824440aeeb62d73917ef97c9e77a4caee4909313519c00bda9e574a",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "36"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "blue",
+          "light blue",
+          "floral",
+          "floral print",
+          "print dress",
+          "floral dress",
+          "sleeveless dress",
+          "maxy",
+          "maxi",
+          "t-shirt",
+          "t shirt",
+          "tshirt",
+          "cute",
+          "fun",
+          "spring",
+          "comfy"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Print"
+        ],
+        "description": [
+          "When it comes to comfort, there's nothing better than wearing your pajamas all day. Problem is, we're not three years old anymore and that's generally frowned upon in public. Sometimes we get away with this by wearing yoga pants and t-shirts all. the. time. But that's pretty much giving up. We don't want to wave that white flag, now do we? So, here's a great compromise for those of us who love fashion but maybe don't have a whole lot of time to get dolled up, or have small children and can't tackle lots of complicated outfits, or even those who usually wear the really high fashion stuff but need a day off. Meet the best maxi dress ever. It's the melding of fashion and comfort. T-shirt maxi dress features a round neck with two functional pockets. model is wearing a small. • 95% Rayon 5% Spandex • Hand Wash Cold • Unlined • Made in the USA"
+        ],
+        "title": [
+          "Story Meadow Fresh Light Blue Print Maxi Dress"
+        ],
+        "ss_clicks": [
+          "950"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "3493"
+        ],
+        "ss_sale_price": "42",
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Story",
+          "All Dresses &gt; Casual Dresses",
+          "All Dresses &gt; Print Dresses",
+          "Brands We Love &gt; Red Dress Label",
+          "Shop By Trend &gt; Fresh Florals",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": [
+          "Spandex"
+        ],
+        "days_since_published": [
+          "14"
+        ],
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Shop By Trend&gt;Fresh Florals",
+          "Shop By Trend&gt;Spring Preview",
+          "Brands We Love&gt;Red Dress Label&gt;Story",
+          "All Dresses&gt;Print Dresses",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": [
+          "14"
+        ],
+        "popularity": "3493",
+        "product_type_unigram": "dress",
+        "id": "2f7a578bd440bc91048c9fee4e14d788"
+      }
+    },
+    {
+      "id": "182675",
+      "mappings": {
+        "core": {
+          "uid": "182675",
+          "price": 49,
+          "msrp": 50,
+          "url": "/product/C-LA-W2-20199",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4597_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4597_copyright_reddressboutique_2017__large.jpg",
+          "name": "Dreaming Out Loud White Maxi Dress",
+          "sku": "C-LA-W2-20199",
+          "brand": "Lunik"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XHUDTfSNTIwtLRkMGSwYDA2YDA0sjRnSC_KTAEABU0KpQ",
+        "intellisuggestSignature": "fa2772afb974b471605ae28275f2d4eed29c2d03cebe201a5f669ecb09e38bc9",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "37"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "dress",
+          "maxi dress",
+          "long dress",
+          "maxy dress",
+          "lace dress",
+          "trendy maxi",
+          "summer",
+          "spring",
+          "cute",
+          "beach",
+          "vacation",
+          "fun",
+          "event",
+          "occasion",
+          "lace -white",
+          "ivory"
+        ],
+        "color": [
+          "White",
+          "Grey"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Have you ever sat in your room, thinking about what the perfect dress would look like? Imagining everything about it, Dreaming Out Loud about its exact details, how it would look on you and where you would wear it? Maybe who you would wear it with (if they were lucky enough to escort you)? Well you can stop wondering because while our powers of mind reading leave a little to be desired still, we did manage to come up with as close to the perfect dress as we've ever come, and here it is! Enjoy!! Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "Dreaming Out Loud White Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2746"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "3366"
+        ],
+        "ss_sale_price": "49",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Trending&gt;White Party",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Trending",
+          "Trending&gt;Sun Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Trending &gt; White Party",
+          "Trending &gt; Sun Dresses",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "6"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "42"
+        ],
+        "popularity": "3366",
+        "product_type_unigram": "dress",
+        "id": "89a1b3b54c5cabe42b24e72ddac60644"
+      }
+    },
+    {
+      "id": "179986",
+      "mappings": {
+        "core": {
+          "uid": "179986",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-DB-I2-14107",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26644_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26644_large.jpg",
+          "name": "For The Romantic Light Blue Off-The-Shoulder Dress",
+          "sku": "C-DB-I2-14107",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXHS9TTSNTQxNDBnMGSwZDA2YDA0sjRnSC_KTAEAAqcKiQ",
+        "intellisuggestSignature": "cc9497bcd656a27ec499b737fdc0ba7bb9cd778456589b2ab75767b075531eee",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "72"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "blue",
+          "light blue",
+          "off the shoulder",
+          "blue dress",
+          "cinderella dress",
+          "cinderella",
+          "off-the-shoulder",
+          "skater dress",
+          "easter",
+          "spring",
+          "spring dress"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "When we look for clothes to share with you, we always keep our eyes open for something For the Romantic. Not just the romantic at heart, but women like you, who know deep down that even the princess stories we all grew up with pale in comparison to the wooing you know awaits you. It's not a matter of arrogance to feel that way (we believe wholeheartedly that you deserve it in fact); it's a hard-wiring of the soul to long to be loved back at least as much as you love. So when we came across this dress, and visions of whirlwind romance danced in our heads, we knew you'd feel the same. And when he sees you in it, and is so desperate for your undivided affections that he drops everything, buys a yacht, and whisks you away on an epic romance around the world in an effort to steal your heart, you'll want a dozen more of this gown (exact duplicates; you know, as backups for the next time you want to see that fire behind his eyes that burns for you alone). Fortunately, you won't need the"
+        ],
+        "title": [
+          "For The Romantic Light Blue Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "3192"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3310"
+        ],
+        "ss_sale_price": "48",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color&gt;Blue Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "Shop By Trend&gt;Pastels",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Blue Dresses",
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Pastels",
+          "All Dresses &gt; Shop by Color",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "26"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "30"
+        ],
+        "popularity": "3310",
+        "product_type_unigram": "dress",
+        "id": "104461789d3118385a4d0ea75498fbe9"
+      }
+    },
+    {
+      "id": "181833",
+      "mappings": {
+        "core": {
+          "uid": "181833",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-CR-W1-7856S",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2150_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2150_copyright_reddressboutique_2017__large.jpg",
+          "name": "Love And Sunshine White Maxi Dress",
+          "sku": "C-CR-W1-7856S",
+          "brand": "Caramela"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdQ7SDTfUNbcwNQtmMGQwNGAwNmAwNLI0Z0gvykwBABM0Cv0",
+        "intellisuggestSignature": "87c2950fa440a9a4d31ae7566d939d2ade9fdd930ed9efd3c90160f333b85377",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "46"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "dress",
+          "maxi dress",
+          "long dress",
+          "maxy dress",
+          "halter dress",
+          "halter maxi",
+          "summer",
+          "spring",
+          "cute",
+          "beach",
+          "vacation",
+          "fun",
+          "event",
+          "occasion",
+          "lace -white",
+          "ivory"
+        ],
+        "color": [
+          "White"
+        ],
+        "black_friday": "yes",
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "What do you think of when you think of Summer fun? Vacation? Quality time with family and friends? Maybe that annual beach trip with a big bonfire down at the shore with your best friend's family and your's, all the kids splashing in the water, everyone roasting marshmallows and telling stories after having enjoyed the Love And Sunshine during the day, a great dinner out at the old restaurant down by the peer, and more than a few raw oysters. If you ask us, this pretty little Maxi Dress is the perfect accompaniment to this wonderful family tradition. Or any other Summer tradition you might have! But you'll never know if you don't grab yours before we run out. Yup, you guessed it. It's a buy or cry! Maxi dress features a halter neckline with a tie neck and open back. Skirt has a tiered hemline and an invisible zipper at the back. Lace trim complete the dress. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Love And Sunshine White Maxi Dress"
+        ],
+        "ss_clicks": [
+          "601"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "3119"
+        ],
+        "ss_sale_price": "48",
+        "holiday_styles": "yes",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Style Influencer",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "Special Occasion",
+          "Style Influencer&gt;Laura Beverlin",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Sundresses",
+          "Special Occasion &gt; Graduation Dresses",
+          "Shop By Trend &gt; White Haute",
+          "Style Influencer &gt; Laura Beverlin",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "23"
+        ],
+        "dress_length": "56",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "31"
+        ],
+        "popularity": "3119",
+        "product_type_unigram": "dress",
+        "id": "98c95709d3316f860e0628856e77302c"
+      }
+    },
+    {
+      "id": "178583",
+      "mappings": {
+        "core": {
+          "uid": "178583",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-EV-P9-R7455",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_reddressboutique_048_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_reddressboutique_048_large.jpg",
+          "name": "Strike A Pose Pink Ruffle Midi Dress",
+          "sku": "C-EV-P9-R7455",
+          "brand": "Everly"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdQ3TDbDUDTI3MTVlMGQwNGQwNmAwNLI0Z0gvykwBABPyCv8",
+        "intellisuggestSignature": "38239bd4ae2c1608004fe81cd370fc62e0571a75fa58cadc39a0fd714f88837a",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "67"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "pink",
+          "pink dress",
+          "ruffles",
+          "ruffle dress",
+          "midi",
+          "midi dress",
+          "pink ruffle dress",
+          "summer",
+          "spring",
+          "vacation",
+          "spring break",
+          "sleeveless",
+          "sleeve less"
+        ],
+        "color": [
+          "Pink",
+          "Blue"
+        ],
+        "dress_length_name": "Knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Instead of thinking about a model posing when you read, 'Strike A Pose,' think more about your significant other being stopped in his tracks when he sees you in this midi dress. Because he will be. And so will any other red-blooded human being who could possibly be attracted to you. And possibly yourself when you finally look in the mirror while you're clad in this. The ruffles, the pink, the halo ... OK, maybe the halo is in your imagination, and in everyone else's, but it'll be there nonetheless. But OMG this dress is one of the few that you will remember well into your golden years. Totally worth the space in your brain. To your future, fabulously-aged self: you're welcome. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Made in the USA"
+        ],
+        "title": [
+          "Strike A Pose Pink Ruffle Midi Dress"
+        ],
+        "ss_clicks": [
+          "1769"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3082"
+        ],
+        "ss_sale_price": "42",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Brands We Love&gt;Everly",
+          "Shop By Trend&gt;Think Pink",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "Brands We Love &gt; Everly",
+          "Shop By Trend &gt; Think Pink",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Sundresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "1"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "9"
+        ],
+        "popularity": "3082",
+        "product_type_unigram": "dress",
+        "id": "d00096489b2b3cc5b30168cd20cd389d"
+      }
+    },
+    {
+      "id": "179155",
+      "mappings": {
+        "core": {
+          "uid": "179155",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-OS-G7-K4084",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0613__copyright_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0613__copyright_reddressboutique_large.jpg",
+          "name": "Best Dressed Ivory And Black Striped Tunic Dress",
+          "sku": "C-OS-G7-K4084",
+          "brand": "143 Story"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Q_WdTfX9TYxsDBhMGQwNGIwNgCSluYM6UWZKQASpArw",
+        "intellisuggestSignature": "1f2a75fce32e9550d482979fe618e226ff7056d4baae228aff3e6cc643d42173",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "69"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "black",
+          "white",
+          "stripes",
+          "stripe",
+          "peplum",
+          "ruffle",
+          "causal",
+          "striped",
+          "short dress",
+          "summer",
+          "spring",
+          "soft",
+          "long sleeve"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Stripe"
+        ],
+        "description": [
+          "While it might be fun to have someone roll out the red carpet everywhere you went, and someone giving out an award for the Best Dressed for say, every class you attended (mostly because you know that you'd always win), eventually it would get old and you'd long for the good old days of being anonymous. Since you're not in that conundrum and nobody is chasing you down the street with a camera (we assume, anyway) you can always wear this darling little dress and know that were you to be judged in just such a contest you would indeed win and garner all that flattering attention and fame for being so fabulous. It's like playing pretend for grownups. We've got a much bigger toy box and prettier dress-up clothes. Model is wearing a small. Super soft t-shirt style dress features a peplum drop waist and ruffle detail across the front. • 95% Rayon 5% Spandex • Dry Clean Only • Unlined • Made in the USA"
+        ],
+        "title": [
+          "Best Dressed Ivory And Black Striped Tunic Dress"
+        ],
+        "ss_clicks": [
+          "4361"
+        ],
+        "saturation": "low",
+        "sales_rank": [
+          "2720"
+        ],
+        "ss_sale_price": "42",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Gifts for Her",
+          "Athleisure",
+          "All Dresses&gt;Under $50.00 Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Classic Stripes",
+          "Athleisure&gt;Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Shop By Trend &gt; Classic Stripes",
+          "Athleisure &gt; Dresses",
+          "All Dresses &gt; Under $50.00 Dresses",
+          "All Dresses &gt; Casual Dresses",
+          "Athleisure",
+          "Shop By Trend",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Spandex"
+        ],
+        "days_since_published": [
+          "11"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "9"
+        ],
+        "popularity": "2720",
+        "product_type_unigram": "dress",
+        "id": "07b552df089907c469310c0ff0db494d"
+      }
+    },
+    {
+      "id": "180800",
+      "mappings": {
+        "core": {
+          "uid": "180800",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-LR-T4-41589",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3399_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3399_copyright_reddressboutique_2017_large.jpg",
+          "name": "Going Girly Floral Print One Shoulder Dress",
+          "sku": "C-LR-T4-41589",
+          "brand": "Love Riche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9QnSDTHRNTE0tbBkMGQwNGYwNmAwNLI0Z0gvykwBABG7Cuc",
+        "intellisuggestSignature": "e2e4561a81c6f09b9e2468202e7c09a2798a4f753c40346655b0f57077e5ddf3",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "65"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "floral print dress",
+          "floral print",
+          "dress",
+          "one shoulder",
+          "1 shoulder",
+          "flowers",
+          "spring",
+          "summer",
+          "tropical print",
+          "flowy dress",
+          "sundress",
+          "sun dress",
+          "shift",
+          "cute"
+        ],
+        "dress_length_name": "Above Knee",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "We’re all about girl-empowerment, but you know what? There are just times that call for Going Girly. Whether it’s Dirty Dancing on repeat with a quart of mint chocolate chip, or wearing flowery patterns like only a real woman can, sometimes we just want to feel feminine. Which works out well if we’re trying to land a hottie, since, you know, they’re attracted to women (traditionally speaking). So join us in Going Girly, and express your femininity. This gorgeous one shoulder dress features double ruffle detailing down the front, a slightly flared silhouette, functioning pockets on each side, and a fun floral print throughout. Model is wearing a small. • 80% Cotton 20% Linen • 100% Polyester Lining • Machine Wash Cold • Imported"
+        ],
+        "title": [
+          "Going Girly Floral Print One Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "1532"
+        ],
+        "sales_rank": [
+          "2679"
+        ],
+        "ss_sale_price": "39",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "Style Influencer&gt;Lynlee Poston",
+          "Style Influencer",
+          "All Dresses&gt;Print Dresses",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Memorial Day Sale",
+          "Shop By Trend&gt;Tropical Prints",
+          "Memorial Day Sale&gt;40% off sale"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Shop By Trend &gt; Tropical Prints",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Spring Preview",
+          "Style Influencer &gt; Lynlee Poston",
+          "Memorial Day Sale &gt; 40% off sale",
+          "All Dresses &gt; Sundresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "13"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "22"
+        ],
+        "popularity": "2679",
+        "product_type_unigram": "dress",
+        "id": "9115abca91f9d5dc00aba20c61c558e0"
+      }
+    },
+    {
+      "id": "181723",
+      "mappings": {
+        "core": {
+          "uid": "181723",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-LR-I2-41589",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1521_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1521_copyright_reddressboutique_2017__large.jpg",
+          "name": "Going Girly Blue And White Floral Print One Shoulder Dress",
+          "sku": "C-LR-I2-41589",
+          "brand": "Love Riche"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9QnS9TTSNTE0tbBkMGQwNGEwNmAwNLI0Z0gvykwBABB5Cts",
+        "intellisuggestSignature": "c75876e9ceafd866f89ed7057e56e997e0541f376eaaf080aacb49987b907d7c",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "63"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "floral print dress",
+          "floral print",
+          "dress",
+          "one shoulder",
+          "1 shoulder",
+          "flowers",
+          "spring",
+          "summer",
+          "floral print",
+          "flowy dress",
+          "sundress",
+          "sun dress",
+          "shift",
+          "cute",
+          "blue",
+          "white"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "We’re all about girl-empowerment, but you know what? There are just times that call for Going Girly. Whether it’s Dirty Dancing on repeat with a quart of mint chocolate chip, or wearing flowery patterns like only a real woman can, sometimes we just want to feel feminine. Which works out well if we’re trying to land a hottie, since, you know, they’re attracted to women (traditionally speaking). So join us in Going Girly, and express your femininity. This gorgeous one shoulder dress features double ruffle detailing down the front, a slightly flared silhouette, functioning pockets on each side, and a fun floral print throughout. Model is wearing a small. • 80% Cotton 20% Linen • 100% Polyester Lining • Machine Wash Cold • Imported"
+        ],
+        "title": [
+          "Going Girly Blue And White Floral Print One Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "1938"
+        ],
+        "sales_rank": [
+          "2673"
+        ],
+        "ss_sale_price": "39",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Style Influencer&gt;Courtney Inkpen",
+          "Shop By Trend&gt;Spring Preview",
+          "Style Influencer",
+          "All Dresses&gt;Print Dresses",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Memorial Day Sale",
+          "Shop By Trend&gt;Tropical Prints",
+          "Memorial Day Sale&gt;40% off sale"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Shop By Trend &gt; Tropical Prints",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Spring Preview",
+          "Style Influencer &gt; Courtney Inkpen",
+          "Memorial Day Sale &gt; 40% off sale",
+          "All Dresses &gt; Sundresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "29"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "37"
+        ],
+        "popularity": "2673",
+        "product_type_unigram": "dress",
+        "id": "3d6d9d62cb0b0b2e82121591b57b80a9"
+      }
+    },
+    {
+      "id": "183158",
+      "mappings": {
+        "core": {
+          "uid": "183158",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-PM-G1-D3446",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5612_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5612_copyright_reddressboutique_2017__large.jpg",
+          "name": "Suite Life White And Gray Striped Dress",
+          "sku": "C-PM-G1-D3446",
+          "brand": "Naked Zebra"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDfDVdTfUdTE2MTFjMGQwNGUwNmAwNLI0Z0gvykwBABEgCuI",
+        "intellisuggestSignature": "59844ac30d4f4688a384d70bd09b0d834c0e56ffb86cd815b4bda238110a758b",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "72"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "scallop dress",
+          "scalloped dress",
+          "nude",
+          "grey",
+          "white",
+          "stripes",
+          "striped dress",
+          "tie front",
+          "tie",
+          "sleeveless dress",
+          "sleeve less",
+          "summer",
+          "spring",
+          "preppy"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Stripe"
+        ],
+        "description": [
+          "Are the fashion haters at work getting to you again? Are you stuck with a relentless dress code that's ridiculous, but does indeed let up one blessed day a week when you're allowed to wear whatever you please (like this wonderful Striped Dress)? At least you can live the Suite Life while you're all dolled up in this work of wearable art (consider it an act of rebellion while you can)! T-shirt style short sleeve shift dress features scalloped hemlines and an exposed gold zipper at the back. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Suite Life White And Gray Striped Dress"
+        ],
+        "ss_clicks": [
+          "3901"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "2387"
+        ],
+        "ss_sale_price": "46",
+        "product_type": [
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Prep In Your Step",
+          "All Dresses &gt; Under $50.00 Dresses",
+          "Shop By Trend &gt; Classic Stripes",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Sundresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "7"
+        ],
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Prep In Your Step",
+          "All Dresses&gt;Print Dresses",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "All Dresses&gt;Under $50.00 Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Classic Stripes"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "3"
+        ],
+        "popularity": "2387",
+        "product_type_unigram": "dress",
+        "id": "c01c3b572fcc12e5251bb54dee9abb5b"
+      }
+    },
+    {
+      "id": "182133",
+      "mappings": {
+        "core": {
+          "uid": "182133",
+          "price": 56,
+          "msrp": 75,
+          "url": "/product/C-JM-W2-D7722",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4802_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4802_copyright_reddressboutique_2017__large.jpg",
+          "name": "Here Comes The Fun Embroidered Dress",
+          "sku": "C-JM-W2-D7722",
+          "brand": "Just Me"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9fLVDTfSdTE3NzJiMGQwNGMwNmAwNLI0Z0gvykwBABJcCu8",
+        "intellisuggestSignature": "bafae3bdb4fb79d6ddfdf562002909d85eb1d7528ef86cd23b3cb7dba65a402c",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "45"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "bodycon",
+          "body con",
+          "embroidered",
+          "embroidery",
+          "embroider",
+          "fun",
+          "cute",
+          "sexy",
+          "spring",
+          "summer"
+        ],
+        "dress_length_name": "Micro",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Embroidered"
+        ],
+        "description": [
+          "When the party is boring (and let's admit it, if it's thrown via a Pinterest idea, then it probably is) then it's probably time to break out the suit ... and not the giant red, gold, metallic, copyrighted, robotic one that's owned by a huge corporation that would likely sue us for merely mentioning it (though him crashing the party, with his glowing white heart and cool thrusters and ability to fly and party with the rich and famous would likely liven any party--sorry dude whose super hero name rhymes with frying pan, you'll just have to wait). No, we're talking about you and your fabulous self. It's time to break out your 'suit.' And by suit, we mean your Here Comes The Fun Embroidered Dress. It's the dress that will liven any and every party that you walk into.* We don't know why ... the test results have been inconclusive as to why, but every party you come into contact with will (assuming you're awesome) immediately become equally as awesome. It's amazing. Try it out and see what"
+        ],
+        "title": [
+          "Here Comes The Fun Embroidered Dress"
+        ],
+        "ss_clicks": [
+          "27"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "2374"
+        ],
+        "ss_sale_price": "56",
+        "product_type": [
+          "All Dresses &gt; Short Dresses",
+          "Shop By Trend &gt; Girl's Night Out",
+          "Shop By Trend &gt; Chasing Rainbows",
+          "Memorial Day Sale &gt; 40% off sale",
+          "All Dresses &gt; Cocktail Dresses",
+          "Shop By Trend &gt; After Hours",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "8"
+        ],
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Short Dresses",
+          "Shop By Trend&gt;Girl's Night Out",
+          "Shop By Trend&gt;After Hours",
+          "Gifts for Her",
+          "All Dresses&gt;Cocktail Dresses",
+          "Memorial Day Sale",
+          "Shop By Trend&gt;Chasing Rainbows",
+          "Memorial Day Sale&gt;40% off sale"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "23"
+        ],
+        "popularity": "2374",
+        "product_type_unigram": "dress",
+        "id": "5c1636cc59873c7496c934524ac14bc6"
+      }
+    },
+    {
+      "id": "181036",
+      "mappings": {
+        "core": {
+          "uid": "181036",
+          "price": 58,
+          "msrp": 75,
+          "url": "/product/C-MB-P2-16709",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1894_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1894_copyright_reddressboutique_2017__large.jpg",
+          "name": "One Dance Blush Pink Lace Dress",
+          "sku": "C-MB-P2-16709",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTDSNTQzN7BkMGQwNGcwNmAwNLI0Z0gvykwBAA9pCtI",
+        "intellisuggestSignature": "a0427bbe5e7ff1ad3aebcb2720cbdc494301ca239ce62c6c0d7f37b4568d8644",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "68"
+        ],
+        "ss_product_type": [
+          "Blush"
+        ],
+        "keywords": [
+          "formal",
+          "lace",
+          "wedding",
+          "graduation",
+          "nice",
+          "fancy",
+          "blush",
+          "pink",
+          "eyelet",
+          "short",
+          "bodycon",
+          "fitted",
+          "spring",
+          "occasion",
+          "special"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "All he asks is just one dance, just one chance to get to hold your hand and sweep you off of your feet to the sound of a beautiful song, to hold you in his arms. It's a game almost, this dance. You're nearly his, nearly held in a close embrace, but you're far enough away that the chase is still on. What a rush. Few things are more exhilarating. It reminds us of trying on clothes, frankly. But, to each their own frankly. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "One Dance Blush Pink Lace Dress"
+        ],
+        "ss_clicks": [
+          "4290"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "2257"
+        ],
+        "ss_sale_price": "58",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "All Dresses",
+          "Special Occasion&gt;Bridesmaid Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Special Occasion &gt; Graduation Dresses",
+          "Special Occasion &gt; Bridesmaid Dresses",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "28"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "19"
+        ],
+        "popularity": "2257",
+        "product_type_unigram": "dress",
+        "id": "e133b5f971f8f90dae5f10499a5a6f49"
+      }
+    },
+    {
+      "id": "180560",
+      "mappings": {
+        "core": {
+          "uid": "180560",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-SHE-O2-L4256",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4291_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4291_copyright_reddressboutique_2017_large.jpg",
+          "name": "Sacrifices Of Love Pink Lace Dress",
+          "sku": "C-SHE-O2-L4256",
+          "brand": "She + Sky"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDfZw1fU30vUxMTI1YzBkMLRgMDZgMDSyNGdIL8pMAQAfyAs5",
+        "intellisuggestSignature": "06bfdc54ab2b36e7f5e2e1a10023e0eae305d9777e685ae25a3477e13381f0bf",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "57"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "pink",
+          "pink lace",
+          "pink lace dress",
+          "long sleeves",
+          "long sleeve dress",
+          "bell sleeves",
+          "bell sleeve dress",
+          "lace",
+          "spring",
+          "easter",
+          "easter sunday",
+          "shift"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Throughout your life, you’ll make more than a few sacrifices of love. We’ve all gotta do it. But this, this is far from a sacrifice. This dress? It’s practically sacrificing itself to you, begging you to pick it! You can’t let it down, can you? I think not. This beautiful lace dress features a slip, flouncy sleeve hemline, and button clasp in back. Model is wearing a small. • 70% Cotton 30% Polyester • 100% Polyester lining • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Sacrifices Of Love Pink Lace Dress"
+        ],
+        "ss_clicks": [
+          "3015"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "1819"
+        ],
+        "ss_sale_price": "42",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;At First Blush",
+          "All Dresses",
+          "Shop By Trend&gt;Pastels",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Think Pink",
+          "Gifts for Her",
+          "All Dresses&gt;Shop by Color&gt;Peach Dresses",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Peach Dresses",
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "Shop By Trend &gt; At First Blush",
+          "Shop By Trend &gt; Think Pink",
+          "Shop By Trend &gt; Pastels",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "17"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "18"
+        ],
+        "popularity": "1819",
+        "product_type_unigram": "dress",
+        "id": "153923a8d3a775eaa2aa46daa760ed2c"
+      }
+    },
+    {
+      "id": "181797",
+      "mappings": {
+        "core": {
+          "uid": "181797",
+          "price": 54,
+          "msrp": 75,
+          "url": "/product/C-TC-W1-C6956",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4057_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4057_copyright_reddressboutique_2017__large.jpg",
+          "name": "Til I Found You White Lace Dress",
+          "sku": "C-TC-W1-C6956",
+          "brand": "Tea + Cup"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDXHWDTfUdTazNDVjMGQwtGQwNmAwNLI0Z0gvykwBABL8Cvg",
+        "intellisuggestSignature": "2a9bf6e83b3d6e9b35a74170d2b21014e60af13e0176e5dc0115bf26987b4591",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "33"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "White",
+          "lace",
+          "white lace",
+          "crochet",
+          "special occasion",
+          "formal",
+          "bridal",
+          "bride",
+          "wedding",
+          "rehearsal",
+          "shower",
+          "short dress",
+          "pretty",
+          "lovely",
+          "neutral",
+          "lacey",
+          "spring",
+          "summer",
+          "bodycon",
+          "body con",
+          "form fitting",
+          "tight",
+          "short"
+        ],
+        "color": [
+          "White"
+        ],
+        "black_friday": "yes",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Before, there was nothing but bad taste and even worse clothing options. I lost more money than I can account for. It was sad. I spent hours online, looking for just the right thing, hoping for the right look but of course, nothing ever came across as fashionable or trendy. Then, I found RDB and voila. It was like, overnight, I found clothes on a regular basis that were like my soulmates. Sure you're only supposed to have one, but you'd have to see these clothes to understand. At least, that's how I felt Till I Found You ... White Lace Dress. Then I knew I really had found 'the one.' For life ... At least until I found the next fashion find at RDB anyway. Bodycon style dress is fitted and features an invisible back zipper. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Til I Found You White Lace Dress"
+        ],
+        "ss_clicks": [
+          "1774"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "1783"
+        ],
+        "ss_sale_price": "54",
+        "holiday_styles": "yes",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Style Influencer",
+          "Special Occasion&gt;Party Dresses",
+          "Gifts for Her",
+          "Special Occasion",
+          "All Dresses&gt;Lace Dresses",
+          "Style Influencer&gt;Laura Beverlin",
+          "All Dresses&gt;Shop by Color&gt;White Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Special Occasion &gt; Party Dresses",
+          "Special Occasion &gt; Graduation Dresses",
+          "Style Influencer &gt; Laura Beverlin",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Lace Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "5"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "3"
+        ],
+        "popularity": "1783",
+        "product_type_unigram": "dress",
+        "id": "bf98700b2f35dbc75c0889f2c14e6fa6"
+      }
+    },
+    {
+      "id": "180178",
+      "mappings": {
+        "core": {
+          "uid": "180178",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-DB-W1-14107",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26619_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26619_large.jpg",
+          "name": "For The Romantic White Off-The-Shoulder Dress",
+          "sku": "C-DB-W1-14107",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXHSDTfUNTQxNDBnMGQwMmAwNmAwNLI0Z0gvykwBAA3eCr8",
+        "intellisuggestSignature": "177a8c8b588b59d7f9c65c3b26e4f7a464c50576ef3319d82b1c62902abb4a71",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "66"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "off the shoulder",
+          "white dress",
+          "cinderella dress",
+          "cinderella",
+          "off-the-shoulder",
+          "skater dress",
+          "easter",
+          "spring",
+          "spring dress",
+          "bride to be",
+          "bridal",
+          "bride"
+        ],
+        "color": [
+          "White"
+        ],
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "When we look for clothes to share with you, we always keep our eyes open for something For the Romantic. Not just the romantic at heart, but women like you, who know deep down that even the princess stories we all grew up with pale in comparison to the wooing you know awaits you. It's not a matter of arrogance to feel that way (we believe wholeheartedly that you deserve it in fact); it's a hard-wiring of the soul to long to be loved back at least as much as you love. So when we came across this dress, and visions of whirlwind romance danced in our heads, we knew you'd feel the same. And when he sees you in it, and is so desperate for your undivided affections that he drops everything, buys a yacht, and whisks you away on an epic romance around the world in an effort to steal your heart, you'll want a dozen more of this gown (exact duplicates; you know, as backups for the next time you want to see that fire behind his eyes that burns for you alone). Fortunately, you won't need the"
+        ],
+        "title": [
+          "For The Romantic White Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "2994"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "1404"
+        ],
+        "ss_sale_price": "48",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "Shop By Trend&gt;Pastels",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "Shop By Trend&gt;Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Pastels",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "16"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "22"
+        ],
+        "popularity": "1404",
+        "product_type_unigram": "dress",
+        "id": "37dc3c95a6a38d9cc1c17f31e299effa"
+      }
+    },
+    {
+      "id": "183341",
+      "mappings": {
+        "core": {
+          "uid": "183341",
+          "price": 49,
+          "msrp": 50,
+          "url": "/product/C-DM-P2-D2295",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6263_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6263_copyright_reddressboutique_2017__large.jpg",
+          "name": "Could Be Forever Pink Off-The-Shoulder Floral Print Dress",
+          "sku": "C-DM-P2-D2295",
+          "brand": "Dance &amp; Marvel"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdfHVDTDSdTEysjRlMGQwMmQwNmAwNLI0Z0gvykwBABCvCt4",
+        "intellisuggestSignature": "fc2ed6d5f2416916e5b17888fe314504e243d2d7fa930fdc38609175dd865369",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "75"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "pink",
+          "light pink",
+          "blush",
+          "floral",
+          "floral print",
+          "flowers",
+          "spring",
+          "summer",
+          "off shoulder",
+          "off the shoulder",
+          "off-shoulder",
+          "off-the-shoulder",
+          "sweet",
+          "pretty",
+          "fun",
+          "short",
+          "flirty",
+          "blogger",
+          "event",
+          "guest"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "Just started a new relationship. It Could Be Forever, or it could be for a day. Either way, it means that I'm going to treat myself to a new dress and that's the part that I'm going to celebrate for now. It's the dude's job to celebrate getting the opportunity to court me. Let him jump up and down at the chance to win my heart. The pressure is ALL on him. Me, I've even got my dress picked out already. Talk about someone who's got it together! Floral dress features short off the shoulder sleeves features an elastic neckline and has a loose flowing fit. Model is wearing a small. • 100% Polyester, Lining - 100% Rayon • Dry Clean Only • Lined • Imported"
+        ],
+        "title": [
+          "Could Be Forever Pink Off-The-Shoulder Floral Print Dress"
+        ],
+        "ss_clicks": [
+          "3478"
+        ],
+        "saturation": "med",
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "875"
+        ],
+        "ss_sale_price": "49",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "What's New",
+          "Gifts for Her",
+          "All Dresses&gt;Under $50.00 Dresses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Under $50.00 Dresses",
+          "What's New",
+          "All Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "29"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "22"
+        ],
+        "popularity": "875",
+        "product_type_unigram": "dress",
+        "id": "b429871bb05675a6dfc0245d2daecb23"
+      }
+    },
+    {
+      "id": "182363",
+      "mappings": {
+        "core": {
+          "uid": "182363",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-LA-P2-20264",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4840_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4840_copyright_reddressboutique_2017__large.jpg",
+          "name": "Sun And Stun Light Pink Dress",
+          "sku": "C-LA-P2-20264",
+          "brand": "Lunik"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XHUDTDSNTIwMjNhMGQwMmIwNmAwNLI0Z0gvykwBAA48CsM",
+        "intellisuggestSignature": "c973fd2458402f6ef8515419aa44ccfa5c718f763489112824363ce5cbf94504",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "39"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "pink",
+          "pink dress",
+          "halter",
+          "halter dress",
+          "pink lace",
+          "pink sundress",
+          "sundress",
+          "sun dress",
+          "girly",
+          "summer",
+          "spring"
+        ],
+        "color": [
+          "Pink",
+          "Blue"
+        ],
+        "dress_length_name": "Knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "You happen to be out in the sun, so while you're there, why not plan ahead of time and pack something to stun everyone around you with? Take their breath away! Make them gossip ... in a good way of course. Be the girl that everyone can't stop talking about and can't wait to have at their big soiree! Be the must have guest for every event. Why not, when it's this easy and affordable? Have you got better plans for your dresses? Halter style sundress features a drawstring neckline that ties at the neck and back. Full skirt features a raw hem. Model is wearing a small. • Drawstring measures 58\\&quot; long • 100% Cotton • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Sun And Stun Light Pink Dress"
+        ],
+        "ss_clicks": [
+          "774"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "843"
+        ],
+        "ss_sale_price": "46",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;At First Blush",
+          "All Dresses",
+          "All Dresses&gt;Short Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Think Pink",
+          "Gifts for Her",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Short Dresses",
+          "Shop By Trend &gt; At First Blush",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Think Pink",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "13"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "25"
+        ],
+        "popularity": "843",
+        "product_type_unigram": "dress",
+        "id": "82ee3df865bf3d54a7e03fa6582dd9b9"
+      }
+    },
+    {
+      "id": "181229",
+      "mappings": {
+        "core": {
+          "uid": "181229",
+          "price": 52,
+          "msrp": 75,
+          "url": "/product/C-LR-G7-41668",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0940_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0940_copyright_reddressboutique_2017__large.jpg",
+          "name": "Fringe Quiet Contemplation Black Print Maxi Dress",
+          "sku": "C-LR-G7-41668",
+          "brand": "Fringe"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9QnSdTfXNTE0M7NgMGQwMmYwNmAwNLI0Z0gvykwBABCdCtw",
+        "intellisuggestSignature": "38fc7e9ba9644ea0a9b85b6eda77eb50838f7f53e8b676fca0cc61fab8829d9a",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "64"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "maxi dress",
+          "long dress",
+          "maxy",
+          "maxy dress",
+          "maxie",
+          "black print dress",
+          "printed maxi",
+          "paisley",
+          "racer back",
+          "flowy dress",
+          "spring",
+          "summer"
+        ],
+        "dress_length_name": "Floor",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Print"
+        ],
+        "description": [
+          "There is no monastery of The Order of The Red Dress Boutique. But if there were, we imagine that the ‘robes’ might look something like this maxi dress. It reminds us of Quiet Contemplations, and days spent relaxing. This maxi dress features cut outs under bust and near calves, razor back, invisible zipper and fish hook along side. Also features full lining until knee and a slight ruffle at the bottom. Model is wearing a small. • 100% Rayon 100% Polyester • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "Fringe Quiet Contemplation Black Print Maxi Dress"
+        ],
+        "ss_clicks": [
+          "859"
+        ],
+        "sales_rank": [
+          "689"
+        ],
+        "ss_sale_price": "52",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "All Dresses&gt;Print Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Fringe",
+          "Gifts for Her",
+          "All Dresses&gt;Maxi Dresses",
+          "Shop By Trend&gt;So Seventies",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Fringe",
+          "Shop By Trend &gt; So Seventies",
+          "Brands We Love &gt; Red Dress Label",
+          "All Dresses &gt; Print Dresses",
+          "All Dresses &gt; Casual Dresses",
+          "All Dresses &gt; Maxi Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "12"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "6"
+        ],
+        "popularity": "689",
+        "product_type_unigram": "dress",
+        "id": "541259eb77ee80afd33fa0daab881774"
+      }
+    },
+    {
+      "id": "180550",
+      "mappings": {
+        "core": {
+          "uid": "180550",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-US-I2-94579",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4018_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4018_copyright_reddressboutique_2017_large.jpg",
+          "name": "Peep And Posy Floral Print Dress",
+          "sku": "C-US-I2-94579",
+          "brand": "Under Skies"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWDQ3W9TTStTQxNbdkMGQwMmEwNmAwNLI0Z0gvykwBABJKCu0",
+        "intellisuggestSignature": "ac67bfa11aba24bbef4b356df65f7e022d91a5338471cc3c957c613402921b5c",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "64"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "blue",
+          "pink",
+          "floral print dress",
+          "dress",
+          "floral",
+          "flowers",
+          "sunday best",
+          "easter",
+          "spring",
+          "sun dress- sundress",
+          "easter dress",
+          "sleeveless dress"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "Take a peep and see some posies… everywhere you look! This easy breezy floral print dress will have you in a garden party state-of-mind all day long. This dress features lace detailing, cinched waist, and button clasp in back. Model is wearing a x-small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Peep And Posy Floral Print Dress"
+        ],
+        "ss_clicks": [
+          "421"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "439"
+        ],
+        "ss_sale_price": "42",
+        "product_type": [
+          "Shop By Trend &gt; Fresh Florals",
+          "All Dresses &gt; Sundresses",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Under $50.00 Dresses",
+          "All Dresses &gt; Floral Dresses",
+          "All Dresses &gt; Print Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "15"
+        ],
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Fresh Florals",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Print Dresses",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "All Dresses&gt;Under $50.00 Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Floral Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "X-Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "11"
+        ],
+        "popularity": "439",
+        "product_type_unigram": "dress",
+        "id": "28b45938acce77b6674644bba7e53f06"
+      }
+    },
+    {
+      "id": "178933",
+      "mappings": {
+        "core": {
+          "uid": "178933",
+          "price": 49,
+          "msrp": 50,
+          "url": "/product/C-IL-W1-M3710",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0703__copyright_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0703__copyright_reddressboutique_large.jpg",
+          "name": "Isle Of Crete White Eyelet Midi Dress",
+          "sku": "C-IL-W1-M3710",
+          "brand": "Illa Illa"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9fTRDTfU9TU2NzRgMGQwMmUwBtJGluYM6UWZKQASSAru",
+        "intellisuggestSignature": "dddffd2023b1f410079cda293a85c0489308f03186fd24d50e62e0f054c82f27",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "73"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "midi",
+          "white dress",
+          "long dress",
+          "lace dress",
+          "lace",
+          "pretty",
+          "spring",
+          "summer",
+          "eyelet"
+        ],
+        "color": [
+          "White",
+          "Black"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Relaxation abounds in this White Eyelet Midi Dress, as does affordability, which is one of the key aspects of our lovely Red Dress Boutique. Unlike some of our outrageous competitors. So if you buy this dress, instead of an uber expensive one, you can take the savings and actually go spend a week in the Isle of Crete, drink in some of the culture, enjoy the wine, and soak in the sunshine ... life, just as it is intended to be. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Lined, faintly sheer • Imported"
+        ],
+        "title": [
+          "Isle Of Crete White Eyelet Midi Dress"
+        ],
+        "ss_clicks": [
+          "3849"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "400"
+        ],
+        "ss_sale_price": "49",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "All Dresses&gt;Under $50.00 Dresses",
+          "Shop By Trend&gt;Vacation Ready",
+          "All Dresses&gt;Midi Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Dresses&gt;Shop by Color&gt;White Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Vacation Ready",
+          "All Dresses &gt; Midi Dresses",
+          "All Dresses &gt; Under $50.00 Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "8"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "22"
+        ],
+        "popularity": "400",
+        "product_type_unigram": "dress",
+        "id": "3c16cf12d00f31d49c28548dd3bc31a7"
+      }
+    },
+    {
+      "id": "177714",
+      "mappings": {
+        "core": {
+          "uid": "177714",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-AD-I4-1910P",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_6434_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6434_large.jpg",
+          "name": "Remember The Name Blue Cold Shoulder Dress",
+          "sku": "C-AD-I4-1910P",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXTR9TTRNbQ0NAhgMGQwMmMwNmAwNLI0Z0gvykwBAA87Ctc",
+        "intellisuggestSignature": "b98e76db35ad099051e90cb3580ec548f5e1b299e694cf68f56978e2039024c6",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "38"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "blue",
+          "blue dress",
+          "cold shoulder dress",
+          "cold shoulder",
+          "open shoulder",
+          "blue cold shoulder dress",
+          "ruffles",
+          "ruffle dress",
+          "dress with pockets",
+          "girly",
+          "spring"
+        ],
+        "color": [
+          "Blue",
+          "Yellow",
+          "White"
+        ],
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Have you ever crushed on a guy immediately, but wondered if he felt the same way when he wandered off from meeting you? Well, upon shaking your hand and catching your eye, we can pretty much promise he'll walk off mumbling, \\&quot;Remember The Name, Remember The Name, Remember The Name.\\&quot; Yes, instead of your actual name. He'll be that smitten. Good news is, he'll have your name and number in his cell phone because he'll have brains and everything else (you wouldn't give your name and number to anything less than the whole package). Was the dress worth it? Why don't we wait and ask your great grandchildren how they feel about existing. Wanna guess what they'll say? Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA"
+        ],
+        "title": [
+          "Remember The Name Blue Cold Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "4213"
+        ],
+        "saturation": "med",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "374"
+        ],
+        "ss_sale_price": "48",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color&gt;Blue Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Prep In Your Step",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Blue Dresses",
+          "All Dresses &gt; Casual Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Shop By Trend &gt; Prep In Your Step",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Vacation Ready",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "17"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "50"
+        ],
+        "popularity": "374",
+        "product_type_unigram": "dress",
+        "id": "1959b842aa13513ca13c332c7606451b"
+      }
+    },
+    {
+      "id": "183529",
+      "mappings": {
+        "core": {
+          "uid": "183529",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-EN-R4-D7793",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7217_copyright_reddressboutique_2017_-2_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7217_copyright_reddressboutique_2017_-2_1_large.jpg",
+          "name": "Make Your Getaway Red Floral Print Maxi Dress",
+          "sku": "C-EN-R4-D7793"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdfXTDTLRdTE3tzRmMGQwMmcwNmAwNLI0Z0gvykwBABJTCvI",
+        "intellisuggestSignature": "8a606e35351b0142b1e8d1ff7e9b949a415b159f865e06f8d225ced88084e425",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "50"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "red",
+          "floral",
+          "floral print",
+          "long dress",
+          "maxi",
+          "maxy",
+          "maxey",
+          "fun",
+          "spring",
+          "event",
+          "guest"
+        ],
+        "color": [
+          "Red"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "Oh, there are so many incredible movie-esque scenarios that I contemplated setting this scene with. Great moments of tension and excitement, bravery and a dash of careless passion! But in the end, I trusted my gut and decided that ultimately, it's going to be better if you imagine it yourself--created from scratch. Your mind is going to come up with the absolute best situation possible, the perfect scene. So what's it going to be? What would it be like to Make Your Getaway? And what are you getting away from? The corporate world? The daily routine of seeing the same four walls of your house? Maybe seeing the same town you've seen for way too many years? It's all up to you ... and this darling maxi dress, of course. Maxi dress features a v-neckline with adjustable ruffle straps (up to 2.5\\&quot;). Skirt has an invisible back zipper and two slits. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Make Your Getaway Red Floral Print Maxi Dress"
+        ],
+        "ss_clicks": [
+          "297"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": [
+          "66"
+        ],
+        "ss_sale_price": "46",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Playsuits",
+          "Playsuits&gt;Rompers",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Playsuits &gt; Rompers",
+          "Playsuits",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "10"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "56"
+        ],
+        "popularity": "66",
+        "product_type_unigram": "dress",
+        "id": "ee724d2899d6231512aec7736a660b37"
+      }
+    },
+    {
+      "id": "175856",
+      "mappings": {
+        "core": {
+          "uid": "175856",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-LIN-W1-10049",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/12_14_reddress11531_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/12_14_reddress11531_large.jpg",
+          "name": "Elevated Classic White Shirt Dress",
+          "sku": "C-LIN-W1-10049",
+          "brand": "Love In"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9fH00w031DU0MDCxZDBkMLJgMDZgMDSyNGdIL8pMAQAeCwsl",
+        "intellisuggestSignature": "5ca433fbab3bbefb8a0fe24a33f71e42bc473a22bbc04841e29825d8cf8cdb94",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "75"
+        ],
+        "ss_product_type": [
+          "Shirt"
+        ],
+        "keywords": [
+          "white Shirt Dress",
+          "white Dress",
+          "White",
+          "Shirt Dress",
+          "Dress",
+          "Collared Dress",
+          "Classic",
+          "Business Casual",
+          "Button Down"
+        ],
+        "color": [
+          "White"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Classic styles often get relegated to historic figures and classy functions. But, much like art, classic fashion comes in varying degrees of beauty. So steer clear of the avante garde, and deck yourself in the elevated classic style embodied by this lovely skirt dress. On you, it’s simultaneously cutting edge, and elegant, transcending the lower art forms to become something akin to a true masterpiece. But the dress can only take some of the credit; after all, it’s what’s inside that counts. Model is wearing a small. • 95% Cotton 5% Spandex • Hand Wash Cold • Unlined • Imported"
+        ],
+        "title": [
+          "Elevated Classic White Shirt Dress"
+        ],
+        "ss_clicks": [
+          "3718"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "4374"
+        ],
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "21"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "11"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "21"
+        ],
+        "popularity": "4374",
+        "product_type_unigram": "dress",
+        "id": "d68bd8da07b9e98b3509412d3aa03feb"
+      }
+    },
+    {
+      "id": "181040",
+      "mappings": {
+        "core": {
+          "uid": "181040",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-P2-16389",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1872_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1872_copyright_reddressboutique_2017__large.jpg",
+          "name": "Beauty Transformed White And Pink Embroidered Maxi Dress",
+          "sku": "C-MB-P2-16389",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTDSNTQztrBkMGQwsmQwNmAwNLI0Z0gvykwBAA_gCtk",
+        "intellisuggestSignature": "6c4610f7ee6cf68b2920fe0aadb56d466769215a94e7580f63528e72803b3344",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "53"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white embroidered maxi dress",
+          "maxi",
+          "maxi dress",
+          "dress",
+          "embroidered",
+          "embroidery",
+          "embroidered dress",
+          "long dress",
+          "v neck",
+          "white dress",
+          "white maxi",
+          "white maxi dress"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Embroidered"
+        ],
+        "description": [
+          "You were beautiful to begin with, when you came back from the gym, or watching your kids, really, but let's just assume that the non-showered thing wasn't your norm. So when you emerged in this lovely maxi dress ... like a gown from Beauty and the Beast ... you appeared like Beauty Transformed. No, we're not comparing you to the Beast in this scenario. Not directly anyway. But seriously, any one of us can look pretty wicked after a couple days of neglect on the pampering front. Especially when it comes to taking case of others before ourselves. SO ... this is a good reward for just such a thing. Just saying. Model is wearing a small. • 100% Rayon 100% Polyester lining • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "Beauty Transformed White And Pink Embroidered Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2084"
+        ],
+        "saturation": "low",
+        "sales_rank": [
+          "4268"
+        ],
+        "ss_sale_price": "68",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Trending&gt;White Party",
+          "All Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Trending",
+          "All Dresses&gt;Maxi Dresses",
+          "Shop By Trend&gt;Vacation Ready",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Trending &gt; Maxi Madness",
+          "Trending &gt; White Party",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Vacation Ready",
+          "All Dresses &gt; Maxi Dresses",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "26"
+        ],
+        "dress_length": "56",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "15"
+        ],
+        "popularity": "4268",
+        "product_type_unigram": "dress",
+        "id": "27f029ef7ad27c4bb7e2e2ca8b6c9f59"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "value",
+      "field": "color_family",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 290
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 239
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 161
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 112
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 104
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 79
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 59
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 33
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 30
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Black, Grey",
+          "label": "Black, Grey",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Black, Orange",
+          "label": "Black, Orange",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 38
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "field": "price",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 17.5,
+        "high": 110
+      },
+      "active": {
+        "low": 17.5,
+        "high": 110
+      }
+    },
+    {
+      "type": "value",
+      "field": "ss_category_hierarchy",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 1297
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 404
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 400
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 165
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 116
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 80
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 57
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 37
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 34
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 33
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 24
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "White & Blue Looks",
+          "label": "White & Blue Looks",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Intimates",
+          "label": "All Intimates",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Outfit",
+          "label": "Shop By Outfit",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Top Rated",
+          "label": "Top Rated",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "material",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 669
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 272
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 210
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 115
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 434
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 864
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_dress",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "dress_length_name",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 192
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 50
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Below knee",
+          "label": "Below knee",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 109
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 55
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "season",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 210
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 182
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 81
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "pattern",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 177
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 84
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Camo",
+          "label": "Camo",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dot",
+          "label": "Dot",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Paisley",
+          "label": "Paisley",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "saturation",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 56
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "collection",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Addicted To Love",
+          "label": "Addicted To Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adore Me",
+          "label": "Adore Me",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adventure Ready",
+          "label": "Adventure Ready",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "After Midnight",
+          "label": "After Midnight",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Can't Stop The Feeling",
+          "label": "Can't Stop The Feeling",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chasing Daydreams",
+          "label": "Chasing Daydreams",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Mine To Keep",
+          "label": "Mine To Keep",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Set To Jet",
+          "label": "Set To Jet",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Stories Don't End",
+          "label": "Stories Don't End",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Sunny State Of Mind",
+          "label": "Sunny State Of Mind",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Take A Dip",
+          "label": "Take A Dip",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "The Story",
+          "label": "The Story",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "You've Got The Love",
+          "label": "You've Got The Love",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_footwear",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "config": {
+            "position": {
+              "index": 4
+            }
+          },
+          "value": "<script data-banner-type=\"image\" data-banner-html=\"\" data-image-url=\"https://simplysouthern.com/wp-content/uploads/FREESHIPPING-BANNER-430-01.jpg\" type=\"text/widget\"></script><img src=\"https://simplysouthern.com/wp-content/uploads/FREESHIPPING-BANNER-430-01.jpg\" style=\"width: 100%;\">"
+        }
+      ]
+    }
+  }
+}

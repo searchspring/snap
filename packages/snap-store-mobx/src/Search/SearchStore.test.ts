@@ -62,6 +62,6 @@ describe('Search Store', () => {
 
 		expect(searchStore.pagination.totalResults).toBe(searchData.pagination.totalResults);
 
-		expect(searchStore.sorting.options).toHaveLength(searchData.meta.sortOptions.length);
+		expect(searchStore.sorting.options).toHaveLength(searchData.meta.sortOptions.filter((option) => option.type == 'field').length);
 	});
 });

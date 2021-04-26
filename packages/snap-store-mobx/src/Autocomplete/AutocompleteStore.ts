@@ -71,6 +71,6 @@ export class AutocompleteStore extends AbstractStore {
 		}
 
 		this.pagination = new PaginationStore(this.controller, data.pagination);
-		this.sorting = new SortingStore(this.controller, data.sorting, this.meta);
+		this.sorting = new SortingStore(this.controller, data.sorting, data.search, this.meta);
 	}
 }

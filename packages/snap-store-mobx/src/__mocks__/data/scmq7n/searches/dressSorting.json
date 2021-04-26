@@ -1,0 +1,4138 @@
+{
+  "search": {
+    "query": "dress"
+  },
+  "filters": [],
+  "pagination": {
+    "totalResults": 1298,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30
+  },
+  "sorting": [
+    {
+      "field": "price",
+      "direction": "desc"
+    }
+  ],
+  "results": [
+    {
+      "id": "127532",
+      "mappings": {
+        "core": {
+          "uid": "127532",
+          "price": 108,
+          "msrp": 125,
+          "url": "/product/C-JTH-P6-058D4",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a3540_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a3540_large.jpg",
+          "name": "JUDITH MARCH: Miles From Nowhere Dress",
+          "sku": "C-JTH-P6-058D4",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0A0w0zUwtXAxYTAEQmMDBkMjS3OG9KLMFAAUxgsE",
+        "intellisuggestSignature": "4c16b49971b48ced0b20181046a3a1082d30357db8d0469c3c9d5f8efb3c4bf0",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "57"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "judithmarch",
+          "jm",
+          "judith",
+          "march",
+          "tier",
+          "tiered",
+          "tassel",
+          "tassle",
+          "tassel trim",
+          "criss cross",
+          "pom pom",
+          "pink dress",
+          "pink",
+          "spring break",
+          "springbreak",
+          "vacation"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "The car may be outta gas and you find yourself “Miles From Nowhere”, but with this dress, you will have a full tank in the style tank!! Go on a give a twirl in this pom-pom piece that no matter that setting is sure to be the center of attention that will never stop getting smiles and “Miles”!! Tiered dress features pom pom detail on the trim and a hook and eye closure at the left shoulder. • 100% Polyester • Dry Clean Only • Fully Lined • Made in the USA"
+        ],
+        "title": [
+          "JUDITH MARCH: Miles From Nowhere Dress"
+        ],
+        "ss_clicks": [
+          "4018"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "4404"
+        ],
+        "ss_sale_price": "108",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "75.6"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "17"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "4404",
+        "product_type_unigram": "dress",
+        "id": "8fc811262b16aef438d4b933bd62bc21"
+      }
+    },
+    {
+      "id": "153690",
+      "mappings": {
+        "core": {
+          "uid": "153690",
+          "price": 108,
+          "msrp": 125,
+          "url": "/product/C-JTH-E2-40D14",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4828_4_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4828_4_large.jpg",
+          "name": "Judith March Malibu Mint Jacquard Dress",
+          "sku": "C-JTH-E2-40D14",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0HU10jUxcDE0YTBkMGIwNmAwNLI0Z0gvykwBABLXCu4",
+        "intellisuggestSignature": "690595d23b5fc6d4c089b4dae7cbe115daead1c9084159523622a6bba3bccb78",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "65"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "judith march",
+          "judith march dress",
+          "mint",
+          "mint dress",
+          "embroidered dress",
+          "tassel dress",
+          "short sleeves",
+          "jacquard dress",
+          "aztec",
+          "flutter sleeves",
+          "tassels",
+          "tassles",
+          "embroidery",
+          "spring",
+          "summer",
+          "beach",
+          "vacation"
+        ],
+        "color": [
+          "Mint"
+        ],
+        "dress_length_name": "Micro",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "You’ll be looking for your dream house and your Ken when you’re in the Judith March Malibu Mint Jacquard Dress. It’ll have you feeling Barbie pretty! And a vacation getaway will be the next thing on your list (but when is not?! A girl can dream.) This A-line dress features flutter sleeves, a crew neckline with a tie closure that has tassels on the ends, a keyhole below the neckline, and an embroidered panel on the front. Model is wearing a small. • 100% Viscose • Dry Clean Only • Unlined • Imported"
+        ],
+        "title": [
+          "Judith March Malibu Mint Jacquard Dress"
+        ],
+        "ss_clicks": [
+          "1162"
+        ],
+        "color_family": [
+          "Green"
+        ],
+        "sales_rank": [
+          "1675"
+        ],
+        "ss_sale_price": "108",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "54"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "167"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "1675",
+        "product_type_unigram": "dress",
+        "id": "a90a61fbd8a7d2f4649c203d0153e431"
+      }
+    },
+    {
+      "id": "142527",
+      "mappings": {
+        "core": {
+          "uid": "142527",
+          "price": 108,
+          "msrp": 125,
+          "url": "/product/C-JTH-I6-033D3",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4695_3_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4695_3_large.jpg",
+          "name": "Judith March Pretty Surprise Blue Embroidered Dress",
+          "sku": "C-JTH-I6-033D3",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0PU00zUwNnYxZjBkMGYwNmAwNLI0Z0gvykwBABOTCvc",
+        "intellisuggestSignature": "930592f0c62e0036870623110d33b13378b4767048bd9888c17ec8c0554ee327",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "36"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "peasant",
+          "peasant dress",
+          "embroidered bodice",
+          "embroidery",
+          "sleeveless",
+          "tassel",
+          "tassle",
+          "fun dress",
+          "colorful",
+          "blue",
+          "summer dress",
+          "summer",
+          "judith",
+          "judithmarch",
+          "judith march summer dress",
+          "judith march brand"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Embroidered"
+        ],
+        "description": [
+          "Visit a loved one in this beautiful Blue Embroidered Dress and it'll be one Judith March Pretty Surprise! They're already excited to see you, but this dress will amp it up even more. This fun sleeveless dress features a peasant neckline with an embroidered bodice and tassel detail. Model is wearing a small. • 100% Viscose • Dry Clean Only • Unlined • Imported"
+        ],
+        "title": [
+          "Judith March Pretty Surprise Blue Embroidered Dress"
+        ],
+        "ss_clicks": [
+          "3932"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3973"
+        ],
+        "ss_sale_price": "108",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "42"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "3973",
+        "product_type_unigram": "dress",
+        "id": "48a5432415005f88f2884c67bbe89fe9"
+      }
+    },
+    {
+      "id": "138810",
+      "mappings": {
+        "core": {
+          "uid": "138810",
+          "price": 108,
+          "msrp": 125,
+          "url": "/product/C-JTH-I6-058D5",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1029_2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1029_2_large.jpg",
+          "name": "Judith March Miles From Nowhere Blue Tassel Dress",
+          "sku": "C-JTH-I6-058D5",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0PU00zUwtXAxZTBkMGEwNmAwNLI0Z0gvykwBABRTCwE",
+        "intellisuggestSignature": "86cf4a6bcb5a02939cf1ab60947604cc2cedf4e43e59e08158bcfafec27acbce",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "26"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "judithmarch",
+          "tassle dress",
+          "tassel trim",
+          "spring break",
+          "springbreak",
+          "vacation",
+          "blue dress",
+          "blue",
+          "royal"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "The car may be out of gas and you find yourself Judith March Miles From Nowhere, but with this Blue Tassel Dress, you will have a full tank in the style tank!! Go on a give a twirl in this pom-pom piece that no matter the setting, is sure to be the center of attention that will never stop getting smiles and Miles!! Tiered dress features pom pom detail on the trim and a hook and eye closure at the left shoulder. • 100% Polyester • Dry Clean Only • Fully Lined • Made in the USA"
+        ],
+        "title": [
+          "Judith March Miles From Nowhere Blue Tassel Dress"
+        ],
+        "ss_clicks": [
+          "2414"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3735"
+        ],
+        "ss_sale_price": "108",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "75.6"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "73"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "3735",
+        "product_type_unigram": "dress",
+        "id": "12d32d7b0f05045857be986d2534d5b0"
+      }
+    },
+    {
+      "id": "130271",
+      "mappings": {
+        "core": {
+          "uid": "130271",
+          "price": 108,
+          "msrp": 125,
+          "url": "/product/C-JTH-I4-105D6",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/ccj_0627_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/ccj_0627_large.jpg",
+          "name": "JUDITH MARCH: In To Details Dress",
+          "sku": "C-JTH-I4-105D6",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0PU00TU0MHUxYzBkMGUwNmAwNLI0Z0gvykwBABO0Cvo",
+        "intellisuggestSignature": "1f757fd98603236a0e1faacc8f5c789b8678b9f1ceb624e593be2db2b8ffe66f",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "45"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "judithmarch",
+          "jm",
+          "judith",
+          "march",
+          "tier",
+          "tiered",
+          "tassel",
+          "tassle",
+          "tassel trim",
+          "criss cross",
+          "tassel",
+          "pink dress",
+          "green",
+          "spring break",
+          "springbreak",
+          "vacation",
+          "snake print"
+        ],
+        "color": [
+          "Green"
+        ],
+        "dress_length_name": "Above Knee",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Sometimes you feel like you’re getting in too deep because you’re too “In To Details”. It can be overwhelming when you want to get everything right yet be sure to not overlook the big picture. Rest easy because you’ve got this! You’ve worked hard and it’s all coming together. Wear this captivating dress to debut your efforts and you’ll look as good as the outcome of your labor. Print shift dress features adjustable spaghetti straps and tassels on the hemline. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Made in the USA"
+        ],
+        "title": [
+          "JUDITH MARCH: In To Details Dress"
+        ],
+        "ss_clicks": [
+          "938"
+        ],
+        "color_family": [
+          "Green"
+        ],
+        "sales_rank": [
+          "1167"
+        ],
+        "ss_sale_price": "108",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "64.8"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "73"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "1167",
+        "product_type_unigram": "dress",
+        "id": "84d08fff48efe6c6f9fe7f895f44292f"
+      }
+    },
+    {
+      "id": "183687",
+      "mappings": {
+        "core": {
+          "uid": "183687",
+          "price": 94,
+          "msrp": 100,
+          "url": "/product/C-OTR-G7-163PR",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6186_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6186_copyright_reddressboutique_2017__large.jpg",
+          "name": "YFB On The Road Nile Black Maxi Dress",
+          "sku": "C-OTR-G7-163PR",
+          "brand": "On The Road"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Q8J0nU31zU0Mw4IYjBkMGMwNmAwNLI0Z0gvykwBABipCzc",
+        "intellisuggestSignature": "e890d8574e650a22dbd73eff84db28daf9428448f7e1202b08044b7c9d007ec7",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "28"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "black maxi dress",
+          "maxi dress",
+          "maxi",
+          "dress",
+          "black",
+          "on the road",
+          "YFB on the road",
+          "printed maxi",
+          "long dress",
+          "sleeveless",
+          "sleeveless dress",
+          "slits",
+          "tassel trim",
+          "tassels"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Oh you and your sassy self. You're ready to take the world by storm, but you've been through your wardrobe at least three times ... this morning ... and you need a new dress. ASAP. Something that makes a statement before it even walks into the room. Maybe with tassel trim and in the maxi dress family? Yeah, this will do nicely. Sleeveless maxi dress features high slide slits with tassel trim. Model is wearing an x-small. • 100% Rayon, Contast - 100% Polyester • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "YFB On The Road Nile Black Maxi Dress"
+        ],
+        "ss_clicks": [
+          "3427"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "4206"
+        ],
+        "ss_sale_price": "94",
+        "product_type": [
+          "Trending &gt; Maxi Madness",
+          "Trending &gt; Sexy Summer",
+          "Shop By Trend &gt; Worth The Tassel",
+          "All Dresses &gt; Casual Dresses",
+          "Shop By Trend &gt; Vacation Ready",
+          "All Dresses &gt; Maxi Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "162"
+        ],
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Trending",
+          "Trending&gt;Sexy Summer",
+          "All Dresses&gt;Maxi Dresses",
+          "Shop By Trend&gt;Vacation Ready",
+          "Shop By Trend&gt;Worth The Tassel"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "2"
+        ],
+        "popularity": "4206",
+        "product_type_unigram": "dress",
+        "id": "2855e0791539dfbccd6d976131e22f93"
+      }
+    },
+    {
+      "id": "183265",
+      "mappings": {
+        "core": {
+          "uid": "183265",
+          "price": 94,
+          "msrp": 100,
+          "url": "/product/C-OTR-Y4-63PR2",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6208_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6208_copyright_reddressboutique_2017__large.jpg",
+          "name": "YFB On The Road Nile Yellow Maxi Dress",
+          "sku": "C-OTR-Y4-63PR2",
+          "brand": "On The Road"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Q8J0o000TUzDggyYjBkMGcwNmAwNLI0Z0gvykwBABqKC0g",
+        "intellisuggestSignature": "a0cef45bb09ab2a63375f4ebfbff96f68aaf33eb0fddcd3049ffe19b66add3e2",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "41"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "color": [
+          "Yellow"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Oh you and your sassy self. You're ready to take the world by storm, but you've been through your wardrobe at least three times ... this morning ... and you need a new dress. ASAP. Something that makes a statement before it even walks into the room. Maybe with tassel trim and in the maxi dress family? Yeah, this will do nicely. Sleeveless maxi dress features high slide slits with tassel trim. Model is wearing an x-small. • 100% Rayon, Contast - 100% Polyester • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "YFB On The Road Nile Yellow Maxi Dress"
+        ],
+        "ss_clicks": [
+          "980"
+        ],
+        "color_family": [
+          "Yellow"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "2835"
+        ],
+        "ss_sale_price": "94",
+        "product_type": [
+          "All Dresses &gt; Maxi Dresses",
+          "Notify of Restock",
+          "What's New",
+          "All Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "166"
+        ],
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "What's New",
+          "Gifts for Her",
+          "All Dresses&gt;Maxi Dresses",
+          "Notify of Restock"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "2835",
+        "product_type_unigram": "dress",
+        "id": "489d699d89d42cbdec31d5f15b3045d8"
+      }
+    },
+    {
+      "id": "167917",
+      "mappings": {
+        "core": {
+          "uid": "167917",
+          "price": 92,
+          "msrp": 100,
+          "url": "/product/C-BB-V7-38837",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a9187_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a9187_large.jpg",
+          "name": "Cara High Neck Lace Dress",
+          "sku": "C-BB-V7-38837",
+          "brand": "BB Daktota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXLSDTPXNbawMDZnMGSwYDA2YDA0sjRnSC_KTAEABWMKqA",
+        "intellisuggestSignature": "94457fd615b73d10419ed9b78c42f6ac53089936365ac23501a9a7a3b3d7a9f8",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "27"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "bb dakota",
+          "bb dakota dress",
+          "bb dakota cara dress",
+          "cara high neck",
+          "high neck dress",
+          "mock neck",
+          "mock neck dress",
+          "lace dress",
+          "lace",
+          "burgundy",
+          "burgundy dress",
+          "wine",
+          "maroon dress",
+          "wedding",
+          "formal wear",
+          "fall dress",
+          "cocktail dress"
+        ],
+        "color": [
+          "Red"
+        ],
+        "dress_length_name": "Knee",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Beautiful in burgundy and lovely in lace, the BB Dakota Cara High Neck Lace Dress In Burgundy is of the most amazing combination! Get ready to blow them away with your breathtaking beauty! This dress features a lace overlay, high halter neck with lace trim, princess seams, large keyhole on back with double button loop closure, and a hidden zipper on the back. Model is wearing a size 0. • Self: 36% Cotton, 34% Nylon, 30% Rayon • Lining: 100% Polyester • Hand Wash Cold • Fully Lined • Imported"
+        ],
+        "title": [
+          "Cara High Neck Lace Dress"
+        ],
+        "ss_clicks": [
+          "2563"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": [
+          "2452"
+        ],
+        "ss_sale_price": "92",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "46"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "2",
+          "4",
+          "6",
+          "8"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "135"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "2452",
+        "product_type_unigram": "dress",
+        "id": "12c43058de39f2089db7bb9eca4c73e9"
+      }
+    },
+    {
+      "id": "177512",
+      "mappings": {
+        "core": {
+          "uid": "177512",
+          "price": 86,
+          "msrp": 100,
+          "url": "/product/C-LAT-W1-6340S",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_6499_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6499_large.jpg",
+          "name": "Catwalk Couture Nude Embroidered Maxi Dress",
+          "sku": "C-LAT-W1-6340S",
+          "brand": "L'Atiste"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XEM0Q031DUzNjEIZjBksGQwNmAwNLI0Z0gvykwBABWTCxQ",
+        "intellisuggestSignature": "b5e0c34b080a6ba3314c52ab0dadbccaf6fce77cb0565af72dee594ec6ab11e7",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "37"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "maxi",
+          "floral",
+          "embroidered",
+          "mesh",
+          "long dress",
+          "fancy",
+          "formal",
+          "boho",
+          "purple",
+          "red",
+          "green",
+          "tan",
+          "beige",
+          "nude"
+        ],
+        "color": [
+          "Ivory",
+          "Yellow"
+        ],
+        "black_friday": "yes",
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "yes"
+        ],
+        "pattern": [
+          "Embroidered"
+        ],
+        "description": [
+          "Admit it, you've held a high fashion magazine in your hand, glanced at those glossy pages, and desperately wanted to be one of those runway models (maybe minus the no-eating, hangry, most likely 'mean girls' for roommates thing). Well, barring the one chance in a million that an agent will hand you a card tomorrow (hey, it could happen) we have a solution that will make you feel like you're wearing Catwalk Couture like a professional model, and you'll absolutely LOVE it. As in, wear it until it falls apart at the seams because you've literally worn it to pieces. Model is wearing a small. • 95% Polyester 5% Spandex • 100% Polyester Lining • Dry Clean Only • Lined to mid-thigh, semi sheer • Imported"
+        ],
+        "title": [
+          "Catwalk Couture Nude Embroidered Maxi Dress"
+        ],
+        "ss_clicks": [
+          "1204"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "2773"
+        ],
+        "ss_sale_price": "86",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "Shop By Trend&gt;Spring Preview",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Trending",
+          "Special Occasion&gt;Formal Dresses",
+          "Special Occasion",
+          "Shop By Trend&gt;So Seventies"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Trending &gt; Maxi Madness",
+          "Shop By Trend &gt; So Seventies",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Shop By Trend &gt; Spring Preview",
+          "Special Occasion &gt; Formal Dresses",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "103"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "6"
+        ],
+        "popularity": "2773",
+        "product_type_unigram": "dress",
+        "id": "19c31d6d410ee3315e02e5c004af6469"
+      }
+    },
+    {
+      "id": "176669",
+      "mappings": {
+        "core": {
+          "uid": "176669",
+          "price": 84,
+          "msrp": 100,
+          "url": "/product/C-BB-O2-18896",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_4383_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4383_large.jpg",
+          "name": "City Escape Coral Lace Dress",
+          "sku": "C-BB-O2-18896",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXLS9TfSNbSwsDRjMGQwNGAwNmAwNLI0Z0gvykwBAA5qCsg",
+        "intellisuggestSignature": "c55243ae41e73a37bac2ca14b66104e0ede1bb086cc54d0822bdd00e4476d74a",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "34"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "bb dakota",
+          "bb dakota dress",
+          "coral",
+          "little pink dress",
+          "mini dress",
+          "mini",
+          "coral dress",
+          "lace dress"
+        ],
+        "color": [
+          "Coral"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Even if you're stuck in a more urban setting and unable to run off to some glorious exotic locale, you can still plan a City Escape and feel like you've been on a mini-vacay if you slip on this gorgeous lace dress and go out for a night of dinner and drinks! Or, if you're feeling particularly creative, you can decorate your den like it's the tropical location of your choice, and stay in for a truly awesome staycation! You've never packed lighter if you choose that last option. Model is wearing a x-small. • 65% Cotton 28% Nylon 7% Rayon • 100% Poly Lining • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "City Escape Coral Lace Dress"
+        ],
+        "ss_clicks": [
+          "2712"
+        ],
+        "saturation": "med",
+        "color_family": [
+          "Pink"
+        ],
+        "sales_rank": [
+          "1792"
+        ],
+        "ss_sale_price": "84",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Special Occasion&gt;Party Dresses",
+          "Shop By Trend&gt;Think Pink",
+          "Gifts for Her",
+          "Special Occasion",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota",
+          "All Dresses&gt;Shop by Color&gt;Coral/Orange Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Coral/Orange Dresses",
+          "Special Occasion &gt; Graduation Dresses",
+          "Special Occasion &gt; Party Dresses",
+          "Brands We Love &gt; BB Dakota",
+          "Shop By Trend &gt; Think Pink",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "69"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "2"
+        ],
+        "popularity": "1792",
+        "product_type_unigram": "dress",
+        "id": "dd48d5fa3d2cb6a8f876f36e807a504e"
+      }
+    },
+    {
+      "id": "183789",
+      "mappings": {
+        "core": {
+          "uid": "183789",
+          "price": 84,
+          "msrp": 100,
+          "url": "/product/C-OTR-G7-R7257",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6437_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6437_copyright_reddressboutique_2017__large.jpg",
+          "name": "YFB On The Road Jaylin Black Tunic Dress",
+          "sku": "C-OTR-G7-R7257",
+          "brand": "On The Road"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Q8J0nU31w0yNzI1ZzBkMDRkMDZgMDSyNGdIL8pMAQAiQgtO",
+        "intellisuggestSignature": "8d02ed2557cada0de507b7765bdddc72bb4755cc2f3d3ab5085546c0106748d2",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "47"
+        ],
+        "ss_product_type": [
+          "Tunic"
+        ],
+        "keywords": [
+          "on the road",
+          "black tunic dress",
+          "black",
+          "tunic",
+          "dress",
+          "black tunic",
+          "black and white",
+          "white",
+          "grey",
+          "OTR",
+          "YFB",
+          "summer",
+          "pool",
+          "flowy"
+        ],
+        "color": [
+          "Black"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "The Tunic Dress is a beautiful thing, free flowing and comfortable, yet refined and flirty. It's nearly a contradiction in terms. Great with flats, booties, sandals, and heels. In the Fall you can layer it with a cardigan, throw on some leggings, a scarf, and a great pair of boots. There's just no end to the wearability of this dress. For now, feel the freedom inherent in Summer and enjoy the tunic in all it's simple glory! Sundress features braided spaghetti straps with a ruffle hem. Model is wearing an x-small. • 100% Rayon • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "YFB On The Road Jaylin Black Tunic Dress"
+        ],
+        "ss_clicks": [
+          "2056"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "66"
+        ],
+        "ss_sale_price": "84",
+        "product_type": [
+          "All Dresses &gt; Casual Dresses",
+          "All Dresses &gt; Shift Dresses",
+          "What's New",
+          "All Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "59"
+        ],
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "All Dresses&gt;Shift Dresses",
+          "What's New",
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "4"
+        ],
+        "popularity": "66",
+        "product_type_unigram": "dress",
+        "id": "ec05bde7b29ed84f3f59922cd26314bd"
+      }
+    },
+    {
+      "id": "183631",
+      "mappings": {
+        "core": {
+          "uid": "183631",
+          "price": 82,
+          "msrp": 100,
+          "url": "/product/C-INA-W1-71908",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7711_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7711_copyright_reddressboutique_2017__large.jpg",
+          "name": "She Said Yes White Lace Maxi Dress",
+          "sku": "C-INA-W1-71908",
+          "brand": "INA Fashion"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9fRz1A031DU3tDSwYDBkMDRiMDYAkpbmDOlFmSkAHW0LHg",
+        "intellisuggestSignature": "48bc05eb0e41da4f689a88a03df923ce99b30b95b2558d785d051de6ac3b843f",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "34"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "white dress",
+          "dress",
+          "maxi",
+          "maxi dress",
+          "lace dress",
+          "overlay",
+          "bride to be",
+          "bridal",
+          "bachelorette",
+          "wedding shower",
+          "spaghetti strap dress",
+          "sleeveless",
+          "spring",
+          "summer"
+        ],
+        "color": [
+          "White",
+          "Purple"
+        ],
+        "black_friday": "yes",
+        "dress_length_name": "Floor",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "Whether you're looking for the perfect low key beach wedding dress, or you just love the look of lace like we do (and we SO do), then this is the best dress you could possibly find. It's positively captivating, expressing an old world sense of elegance yet keeping an edge of modern sensibility. Up to date with a timeless feel! What more could you ask for? Maxi dress has a v-neckline with double adjustable straps that criss cross an open back. Dress features princess seams, and an invisible back zipper with hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "She Said Yes White Lace Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2414"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "4307"
+        ],
+        "ss_sale_price": "82",
+        "holiday_styles": "yes",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Trending&gt;White Party",
+          "All Dresses&gt;Shop by Color",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Special Occasion&gt;Formal Dresses",
+          "Trending",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Special Occasion &gt; Formal Dresses",
+          "Trending &gt; Maxi Madness",
+          "Trending &gt; White Party",
+          "Shop By Trend &gt; White Haute",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "81"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "48"
+        ],
+        "popularity": "4307",
+        "product_type_unigram": "dress",
+        "id": "10a235f198ae33425d1f4320007abc40"
+      }
+    },
+    {
+      "id": "177552",
+      "mappings": {
+        "core": {
+          "uid": "177552",
+          "price": 82,
+          "msrp": 100,
+          "url": "/product/C-EF-I7-1D6FF",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_6313_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6313_large.jpg",
+          "name": "Weekend Getaway Off-The-Shoulder Maxi Dress",
+          "sku": "C-EF-I7-1D6FF",
+          "brand": "English Factory"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXXT9TTXNXQxc3NjMGQwNGYwNmAwNLI0Z0gvykwBABJOCvg",
+        "intellisuggestSignature": "877553cf5f7b9fef5c72a3ef380c468219f0508f0350bda25c6dd791cb26f6f2",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "45"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "white stripe",
+          "pinstripe",
+          "pin stripe",
+          "smock",
+          "smocking",
+          "off shoulder",
+          "off-shoulder",
+          "off-the-shoulder",
+          "off shoulder dress",
+          "off shoulder maxi",
+          "maxi",
+          "maxy",
+          "maxie",
+          "maxey",
+          "off-the-shoulder maxi dress"
+        ],
+        "color": [
+          "White"
+        ],
+        "dress_length_name": "Floor",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "You know that point you reach where it feels like it’s been a 46-day work week, and you’ve been on 80-hour a week shifts, and you don’t even get paid overtime? That point where you are painfully aware that if you don’t get a chance to recharge soon, they’ll have to move your office into one of those special “padded” rooms, which would be a shame because it’s really hard to type with your hands tucked tightly into the sleeves of your straight jacket? Yeah, it’s time for a Weekend Getaway, where you can channel all that mojo into a cute dress, and a nice break from the real world (preferably with someone special, or at least on the hunt). This dress is quite cathartic in that way. It’s your feel-good travel companion, whether you’re actually going out of town or not. It might just make you feel so good that you decide you don’t need that getaway after all (but you should take it anyway, just to show off the dress). Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined to"
+        ],
+        "title": [
+          "Weekend Getaway Off-The-Shoulder Maxi Dress"
+        ],
+        "ss_clicks": [
+          "572"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "3005"
+        ],
+        "ss_sale_price": "82",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Print Dresses",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Trending",
+          "Shop By Trend&gt;Classic Stripes"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Trending &gt; Maxi Madness",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Classic Stripes",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "146"
+        ],
+        "dress_length": "60",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Small"
+        ],
+        "quantity_available": [
+          "2"
+        ],
+        "popularity": "3005",
+        "product_type_unigram": "dress",
+        "id": "b0cb3230e3cc5d2a5f65dea8f98c3460"
+      }
+    },
+    {
+      "id": "176026",
+      "mappings": {
+        "core": {
+          "uid": "176026",
+          "price": 79,
+          "msrp": 100,
+          "url": "/product/C-BB-W1-18871",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_3646_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_3646_large.jpg",
+          "name": "Sheer To Stay White Off-The-Shoulder Dress",
+          "sku": "C-BB-W1-18871",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXLSDTfUNbSwMDdkAEITBmMDBkMjS3OG9KLMFAAO0grM",
+        "intellisuggestSignature": "82a1be0e935215093a1ae7780dad836237060f4539f13d1b01fa2dc619c3a8f4",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "33"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "bb dakota",
+          "bb",
+          "bb dakota dress",
+          "off shoulder",
+          "off shoulder dress",
+          "white",
+          "white off shoulder dress",
+          "lace",
+          "sheer",
+          "lace dress"
+        ],
+        "color": [
+          "White",
+          "Red"
+        ],
+        "black_friday": "yes",
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "You know how the old saying goes: Some clothes come into your life for only a moment, leaving footprints on your heart, but some are Sheer To Stay forever. What? Is that not how the saying goes? That's totally what my inspirational wall calendar says. Where have you been shopping? Model is wearing an x-small. • 70% Cotton 30% Nylong 100% Polyester Lining • Hand Wash Cold • Lined, faintly sheer • Imported"
+        ],
+        "title": [
+          "Sheer To Stay White Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "3124"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "1236"
+        ],
+        "ss_sale_price": "79",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "Shop By Trend",
+          "All Dresses",
+          "Style Influencer&gt;Cortney Dryden",
+          "All Dresses&gt;Shop by Color",
+          "Style Influencer",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Special Occasion &gt; Graduation Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Brands We Love &gt; BB Dakota",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Style Influencer &gt; Cortney Dryden",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "164"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "1"
+        ],
+        "popularity": "1236",
+        "product_type_unigram": "dress",
+        "id": "7c131b9427d68407d1bb44a1e63f1411"
+      }
+    },
+    {
+      "id": "138462",
+      "mappings": {
+        "core": {
+          "uid": "138462",
+          "price": 79,
+          "msrp": 100,
+          "url": "/product/C-ZL-W1-76407",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a9498_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a9498_1_large.jpg",
+          "name": "Sunny Side Up White Beach Cover-Up",
+          "sku": "C-ZL-W1-76407",
+          "brand": "Z&amp;L"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWjfLRDTfUNTczMTBnMGQwNGUwNmAwNLI0Z0gvykwBABKgCu4",
+        "intellisuggestSignature": "297c8cb52fc04afecab5ab4d287b55c669e8377f4722f8d35b41af54f069615e",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "48"
+        ],
+        "ss_product_type": [
+          "Cover-Up"
+        ],
+        "keywords": [
+          "Tunic",
+          "Cover-up",
+          "Beaded",
+          "Tunic Dress",
+          "Beach",
+          "White"
+        ],
+        "color": [
+          "White"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Just like your breakfast plate, you'll be feeling Sunny Side Up when you're in this wondrous White Beach Cover Up. They say that breakfast is the most important meal of the day. We say that the right outfit is the best start to the day. You gotta begin on a good note. This flawless flowy v-neck tunic has a gorgeous tribal beaded design and fringe detail that is sure to make you (and everyone) else feel refreshed. One Size length measures 34\\&quot; • 100% Viscose • Hand Wash Cold • Unlined • Faintly Sheer • Imported"
+        ],
+        "title": [
+          "Sunny Side Up White Beach Cover-Up"
+        ],
+        "sale_price": [
+          "20"
+        ],
+        "ss_clicks": [
+          "2280"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "4167"
+        ],
+        "ss_sale_price": "79",
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "days_since_published": [
+          "64"
+        ],
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "4167",
+        "product_type_unigram": "coverup",
+        "id": "0dbebc343b33bc331da248648ee0b5ec"
+      }
+    },
+    {
+      "id": "142308",
+      "mappings": {
+        "core": {
+          "uid": "142308",
+          "price": 76,
+          "msrp": 100,
+          "url": "/product/C-JTH-O3-40D10",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5029_2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5029_2_large.jpg",
+          "name": "Judith March Skin Deep Orange Print Dress",
+          "sku": "C-JTH-O3-40D10",
+          "brand": "Judith March"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9Qrx0PU31jUxcDE0YDBkMDRjMAbSRpbmDOlFmSkAHp8LKg",
+        "intellisuggestSignature": "ffe82d16181ee8b3cd573e84b16b9b9a73f673c614c2a67b77d2545b059fb60c",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "53"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "orange dress",
+          "skin",
+          "snakeskin",
+          "snake skin -print",
+          "printed",
+          "flutter sleeve",
+          "short dress",
+          "spring dress",
+          "summer dress",
+          "judith march",
+          "mumu",
+          "show me your mumu",
+          "flowy",
+          "v neck",
+          "vneck",
+          "v-neck",
+          "orange",
+          "white",
+          "a line",
+          "a-line dress"
+        ],
+        "color": [
+          "Orange"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Print"
+        ],
+        "description": [
+          "Show them that your beauty is more than Judith March Skin Deep in this impeccable Orange Print Dress. This show-stopping snakeskin print dress will have you looking just as beautiful on the outside as you are on the inside. Your love for it will only grow each time you wear it. This A-line print dress features a V-neckline and short flowy sleeves. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Made in the USA"
+        ],
+        "title": [
+          "Judith March Skin Deep Orange Print Dress"
+        ],
+        "ss_clicks": [
+          "1448"
+        ],
+        "color_family": [
+          "Orange"
+        ],
+        "sales_rank": [
+          "3580"
+        ],
+        "ss_sale_price": "76",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "34"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "3580",
+        "product_type_unigram": "dress",
+        "id": "b33911811fd7217eb59753f51ff05376"
+      }
+    },
+    {
+      "id": "182877",
+      "mappings": {
+        "core": {
+          "uid": "182877",
+          "price": 74,
+          "msrp": 75,
+          "url": "/product/C-EF-W1-7D7SF",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5076_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5076_copyright_reddressboutique_2017__large.jpg",
+          "name": "Forever Mine White Dress",
+          "sku": "C-EF-W1-7D7SF",
+          "brand": "English Factory"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXXTDTfUNXcxD3ZjMGQwNGcwNmAwNLI0Z0gvykwBABT_Cxg",
+        "intellisuggestSignature": "7bb7bf3780f9a35c99429bb77bcbaf5f827b998e5c6397a8fbdc4af9e27365d2",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "62"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "white dress",
+          "halter",
+          "halter dress",
+          "white lace",
+          "white sundress",
+          "short dress",
+          "sun dress",
+          "girly",
+          "summer",
+          "spring"
+        ],
+        "color": [
+          "White"
+        ],
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Every woman has an outfit in her wardrobe, whether it be a dress, a top and jeans, or a romper, that she loves more than anything else she owns. If the house catches on fire, after she's secured her loved ones, it will be the first item of clothing that she laments (if she hasn't taken to sleeping in it out of paranoia). If you have no idea what I'm talking about, then clearly, this dress is meant for you. Your first thoughts will be, \\&quot;You're Forever Mine,\\&quot; as you open the box and you get that first real glance at this radiant beauty. Trust us, every single time you see it, you will grin (and possibly feel an urge to check the batteries in your smoke detectors). Peasant style dress has a baby doll silhouette and features long bell sleeves and lace accents. Dress has an invisible back zipper with double hook and eye closures. Model is wearing a x-small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Forever Mine White Dress"
+        ],
+        "ss_clicks": [
+          "3508"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "White"
+        ],
+        "sales_rank": [
+          "3351"
+        ],
+        "ss_sale_price": "74",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Short Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Short Dresses",
+          "Shop By Trend &gt; Vacation Ready",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "98"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "28"
+        ],
+        "popularity": "3351",
+        "product_type_unigram": "dress",
+        "id": "e5f68d11f146caf782fd0e3a5f47c3ce"
+      }
+    },
+    {
+      "id": "179991",
+      "mappings": {
+        "core": {
+          "uid": "179991",
+          "price": 72,
+          "msrp": 75,
+          "url": "/product/C-ARK-O2-2072B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2805_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2805_copyright_reddressboutique_2017_large.jpg",
+          "name": "Spring Surprise White Floral Print Midi Dress",
+          "sku": "C-ARK-O2-2072B",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdQzy1vU30jUyMDdyYjBkMLRgMDZgMDSyNGdIL8pMAQAd2Qsn",
+        "intellisuggestSignature": "fbe9d34e34609774c5cfff9acca99938ad397079e6aeed9055788be706fb214c",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "75"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white",
+          "orange",
+          "floral print",
+          "flowers",
+          "midi",
+          "midi dress",
+          "spring dress",
+          "spring",
+          "easter",
+          "sleeveless dress",
+          "sleeve less",
+          "v neck",
+          "pleated skirt"
+        ],
+        "dress_length_name": "Calf",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "Spring is full of surprises. One day you're bundled in layers of thermals, sweaters, and coats, then you blink and suddenly the flowers are blooming, the birds are singing, and you are daydreaming about picnics in the park. Well we have our own little Spring Surprise for you; one might even say it's a surprise fit for a Spring (you know, as opposed to \\&quot;fit for a king.\\&quot;) And just like that unexpected day when you walk out to lush flora that blossomed overnight, glorious sunlight, and that absolutely perfect temperature, this dress is absolutely perfect, and equally as refreshing as a spring day. And now that you know what you're going to wear, you can focus on what to pack for your romantic picnic. This floral pleated skater dress features an exposed silver zipper in the back with a clasp at the top along with a triple lined white, sheer, tulle skirt. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported"
+        ],
+        "title": [
+          "Spring Surprise White Floral Print Midi Dress"
+        ],
+        "ss_clicks": [
+          "1059"
+        ],
+        "saturation": "high",
+        "sales_rank": [
+          "945"
+        ],
+        "ss_sale_price": "72",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Fresh Florals",
+          "All Dresses&gt;Print Dresses",
+          "Gifts for Her",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label",
+          "Memorial Day Sale",
+          "All Dresses&gt;Floral Dresses",
+          "Memorial Day Sale&gt;40% off sale"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Shop By Trend &gt; Spring Preview",
+          "Memorial Day Sale &gt; 40% off sale",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Fresh Florals",
+          "All Dresses &gt; Floral Dresses",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "40"
+        ],
+        "dress_length": "46",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "29"
+        ],
+        "popularity": "945",
+        "product_type_unigram": "dress",
+        "id": "334ce484177c933a7d695dd98bfc6c23"
+      }
+    },
+    {
+      "id": "146984",
+      "mappings": {
+        "core": {
+          "uid": "146984",
+          "price": 72,
+          "msrp": 75,
+          "url": "/product/C-ZL-T1-89009",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a9341_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a9341_large.jpg",
+          "name": "Sea Dreams Cream Maxi Dress",
+          "sku": "C-ZL-T1-89009",
+          "brand": "Z&amp;L"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWjfLRDTHUtbA0MLBkMGQwtGQwNmAwNLI0Z0gvykwBABK1CvE",
+        "intellisuggestSignature": "dc62948214e3495e9fb046e1e4d07fe707d9d1da1120adb4343b8edb66a1b8e7",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "34"
+        ],
+        "ss_product_type": [
+          "Cream"
+        ],
+        "keywords": [
+          "maxi dress",
+          "cream dress",
+          "multi",
+          "fun",
+          "triangle top",
+          "open back",
+          "frayed",
+          "embroidery",
+          "cute dress",
+          "summer dress",
+          "long dress"
+        ],
+        "color": [
+          "Tan"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "It’ll be all Sea Dreams and sightly realities when you’re wearing this unforgettable Cream Maxi Dress. Relaxing onboard or walking through the sand, this maxi will have you looking just as good as the time you’re having. This maxi features a triangle bodice, a tie at the back of the neck, an open back with an elastic back waist, and a frayed hemline. Model is wearing a small. • 100% Viscose • Hand Wash Cold • Unlined • Sheer • Imported"
+        ],
+        "title": [
+          "Sea Dreams Cream Maxi Dress"
+        ],
+        "ss_clicks": [
+          "1558"
+        ],
+        "color_family": [
+          "Beige"
+        ],
+        "sales_rank": [
+          "1526"
+        ],
+        "ss_sale_price": "72",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "20"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "days_since_published": [
+          "3"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "1526",
+        "product_type_unigram": "dress",
+        "id": "44439b3bbb46f5a24ef0a75d850b62af"
+      }
+    },
+    {
+      "id": "178882",
+      "mappings": {
+        "core": {
+          "uid": "178882",
+          "price": 69,
+          "msrp": 75,
+          "url": "/product/C-BB-I2-18884",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0362__copyright_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0362__copyright_reddressboutique_large.jpg",
+          "name": "Jack By Three Day Weekend Blue Plaid Shirt Dress",
+          "sku": "C-BB-I2-18884",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdXLS9TTSNbSwsDBhMGQwMmAwNmAwNLI0Z0gvykwBAA2jCsA",
+        "intellisuggestSignature": "dd284c3d6efe0b3d119ac6fe7483f2e67d1a088eef7548296fe3fd21d5c54464",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "25"
+        ],
+        "ss_product_type": [
+          "Shirt"
+        ],
+        "keywords": [
+          "jack by bb dakota",
+          "bb dakota",
+          "bb dakota dress",
+          "plaid",
+          "blue",
+          "blue plaid",
+          "blue plaid dress",
+          "shirt dress",
+          "plaid shirt dress",
+          "spring"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Plaid"
+        ],
+        "description": [
+          "Who doesn’t love a Three Day Weekend? Everyone longs for it, envies it, savors every moment of it, and deeply regrets not having it. And this dress is the wearable equivalent. Don’t be the one wishing it was you with the extra “S” day to look forward to. Be the one to revel in your good-fortune, and enjoy every minute of it. Because who knows when another perfect “weekend” will come along. Model is wearing an x-small. • 51% Cotton 49% Rayon • Hand Wash Cold • Unlined, faintly sheer • Imported"
+        ],
+        "title": [
+          "Jack By Three Day Weekend Blue Plaid Shirt Dress"
+        ],
+        "ss_clicks": [
+          "5"
+        ],
+        "saturation": "med",
+        "sales_rank": [
+          "3197"
+        ],
+        "ss_sale_price": "69",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color&gt;Blue Dresses",
+          "Brands We Love&gt;Jack By BB Dakota",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Pastels",
+          "All Dresses&gt;Shop by Color",
+          "Shop By Trend&gt;Dusty Pastels",
+          "Gifts for Her",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Blue Dresses",
+          "Shop By Trend &gt; Dusty Pastels",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Pastels",
+          "Brands We Love &gt; Jack By BB Dakota",
+          "Brands We Love &gt; BB Dakota",
+          "Gifts for Her"
+        ],
+        "brightness": "med",
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "160"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "9"
+        ],
+        "popularity": "3197",
+        "product_type_unigram": "dress",
+        "id": "41632b3bd9b8f4be52986dbdbdc8ee42"
+      }
+    },
+    {
+      "id": "143934",
+      "mappings": {
+        "core": {
+          "uid": "143934",
+          "price": 69,
+          "msrp": 75,
+          "url": "/product/C-ARK-I7-0994G",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4184_3_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4184_3_large.jpg",
+          "name": "Ark &amp; Co Brunching Betties Navy Stripe Dress",
+          "sku": "C-ARK-I7-0994G",
+          "brand": "Ark &amp; Co"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDWdQzy1vU01zWwtDRxZzBkMDJkMDZgMDSyNGdIL8pMAQAesAsw",
+        "intellisuggestSignature": "7297b3ebe4240c8f91f0b84b46e37de96fe7e7273591e9725bb81c875b2bfd9f",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "28"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "stripe",
+          "stripe dress",
+          "multi",
+          "blue",
+          "white",
+          "navy",
+          "scoop neck",
+          "full skirt"
+        ],
+        "color": [
+          "Blue"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Stripe"
+        ],
+        "description": [
+          "Get this darling Navy Stripe Dress so that you and your girls can be a bunch of beautiful Ark &amp; Co Brunching Betties when you go out for a bite to eat. Figure-hugging and downright adorable, we’re sure the waiter might even throw in a few extra rolls. This striped dress features a scoop neckline, a defined waist, and a full skirt created by shaping seams. it has a visible zipper on the back. Model is wearing a small. • Shell: 77% Cotton, 16% Rayon, 7% Viscose • Contrast: 100% Polyester • Dry Clean Only • Unlined • Imported"
+        ],
+        "title": [
+          "Ark &amp; Co Brunching Betties Navy Stripe Dress"
+        ],
+        "ss_clicks": [
+          "302"
+        ],
+        "color_family": [
+          "Blue"
+        ],
+        "sales_rank": [
+          "3190"
+        ],
+        "ss_sale_price": "69",
+        "ss_category_hierarchy": [
+          "Gifts for Her"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "48.3"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Cotton"
+        ],
+        "days_since_published": [
+          "40"
+        ],
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "0"
+        ],
+        "popularity": "3190",
+        "product_type_unigram": "dress",
+        "id": "e30b49f7e250f772dc5c2a49fb107708"
+      }
+    },
+    {
+      "id": "181040",
+      "mappings": {
+        "core": {
+          "uid": "181040",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-P2-16389",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1872_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1872_copyright_reddressboutique_2017__large.jpg",
+          "name": "Beauty Transformed White And Pink Embroidered Maxi Dress",
+          "sku": "C-MB-P2-16389",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTDSNTQztrBkMGQwMmIwNmAwNLI0Z0gvykwBAA9-CtI",
+        "intellisuggestSignature": "da2c90bbca49f6ce5f2e3d6dae53eaf4d9953dfe3b0b67c02a4324149c4c0ce0",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "53"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "white embroidered maxi dress",
+          "maxi",
+          "maxi dress",
+          "dress",
+          "embroidered",
+          "embroidery",
+          "embroidered dress",
+          "long dress",
+          "v neck",
+          "white dress",
+          "white maxi",
+          "white maxi dress"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Embroidered"
+        ],
+        "description": [
+          "You were beautiful to begin with, when you came back from the gym, or watching your kids, really, but let's just assume that the non-showered thing wasn't your norm. So when you emerged in this lovely maxi dress ... like a gown from Beauty and the Beast ... you appeared like Beauty Transformed. No, we're not comparing you to the Beast in this scenario. Not directly anyway. But seriously, any one of us can look pretty wicked after a couple days of neglect on the pampering front. Especially when it comes to taking case of others before ourselves. SO ... this is a good reward for just such a thing. Just saying. Model is wearing a small. • 100% Rayon 100% Polyester lining • Hand Wash Cold • Lined to mid-thigh • Imported"
+        ],
+        "title": [
+          "Beauty Transformed White And Pink Embroidered Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2084"
+        ],
+        "saturation": "low",
+        "sales_rank": [
+          "4268"
+        ],
+        "ss_sale_price": "68",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Trending&gt;White Party",
+          "All Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Trending",
+          "All Dresses&gt;Maxi Dresses",
+          "Shop By Trend&gt;Vacation Ready",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Trending &gt; Maxi Madness",
+          "Trending &gt; White Party",
+          "Shop By Trend &gt; White Haute",
+          "Shop By Trend &gt; Vacation Ready",
+          "All Dresses &gt; Maxi Dresses",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "26"
+        ],
+        "dress_length": "56",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "15"
+        ],
+        "popularity": "4268",
+        "product_type_unigram": "dress",
+        "id": "27f029ef7ad27c4bb7e2e2ca8b6c9f59"
+      }
+    },
+    {
+      "id": "183658",
+      "mappings": {
+        "core": {
+          "uid": "183658",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-G7-16700",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6306_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6306_copyright_reddressboutique_2017__large.jpg",
+          "name": "Enchanting Evening Black Lace Maxi Dress",
+          "sku": "C-MB-G7-16700",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSdTfXNTQzNzBgMGQwMmYwBtJGluYM6UWZKQAOKArC",
+        "intellisuggestSignature": "254b1b624e2da7f250505d371260c6bd24cdac0389814dfb9659e3764503fad7",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "72"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "lace dress",
+          "lace",
+          "maxi dress",
+          "lace maxi dress",
+          "lace maxi",
+          "maxi",
+          "black dress",
+          "black",
+          "black maxi",
+          "maxy",
+          "maxie",
+          "bridesmaid dress",
+          "formal dress",
+          "gown",
+          "long dress"
+        ],
+        "color": [
+          "Black"
+        ],
+        "black_friday": "yes",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "If you want an Enchanting Evening, you don't have to visit some otherworldly place, or walk through a magic mirror to a magical realm. You just need a new, wonderful, empowering dress. Like this Black Lace Maxi Dress! You'll feel like an Exotic Queen, or an Empress, with an adventure ahead of you that you can steer in any direction that you like! Now, if that's not an Enchanting Evening, I don't know what is. Dress features a v-neckline, 1/2 sleeves and an invisible back zipper with hook and eye closure. Sleeves and back of dress are unlined. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported"
+        ],
+        "title": [
+          "Enchanting Evening Black Lace Maxi Dress"
+        ],
+        "ss_clicks": [
+          "4135"
+        ],
+        "color_family": [
+          "Black"
+        ],
+        "sales_rank": [
+          "3961"
+        ],
+        "ss_sale_price": "68",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "Special Occasion&gt;Bridesmaid Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion&gt;Formal Dresses",
+          "Trending",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;Black Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Black Dresses",
+          "Special Occasion &gt; Formal Dresses",
+          "Trending &gt; Maxi Madness",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Special Occasion &gt; Bridesmaid Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "9"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "39"
+        ],
+        "popularity": "3961",
+        "product_type_unigram": "dress",
+        "id": "83be1aa6e7f026b352b20a61863cba01"
+      }
+    },
+    {
+      "id": "182457",
+      "mappings": {
+        "core": {
+          "uid": "182457",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-V3-16375",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5691_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5691_copyright_reddressboutique_2017__large.jpg",
+          "name": "All Eyes On Her Dusty Purple Maxi Dress",
+          "sku": "C-MB-V3-16375",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTPWNTQzNjdlMGQwMmEwNmAwNLI0Z0gvykwBAA_vCtY",
+        "intellisuggestSignature": "354a7c0110ef06ef3f49d36e3e750d34b9d326d42eb48a28c34d1d1b20deba80",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "50"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "charcoal grey",
+          "grey",
+          "gray",
+          "grey dress",
+          "charcoal",
+          "maxi dress",
+          "long dress",
+          "maxi",
+          "fall maxi",
+          "maxy",
+          "sleeveless dress",
+          "sleeve less maxi"
+        ],
+        "color": [
+          "Gray"
+        ],
+        "dress_length_name": "Floor",
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Strapless gown features a sweetheart neckline with a lace overlay bodice and pleated skirt. Dress has a hidden back zipper with hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "All Eyes On Her Dusty Purple Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2124"
+        ],
+        "saturation": "low",
+        "color_family": [
+          "Gray"
+        ],
+        "sales_rank": [
+          "2630"
+        ],
+        "ss_sale_price": "68",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Dresses&gt;Shop by Color&gt;Grey Dresses",
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "All Dresses&gt;Shop by Color",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Trending",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Grey Dresses",
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "Trending &gt; Maxi Madness",
+          "Brands We Love &gt; Red Dress Label",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "22"
+        ],
+        "dress_length": "60",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "57"
+        ],
+        "popularity": "2630",
+        "product_type_unigram": "dress",
+        "id": "214051902b59e4d2899ccd1c1a479757"
+      }
+    },
+    {
+      "id": "179521",
+      "mappings": {
+        "core": {
+          "uid": "179521",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-E2-16476",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_7370_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_7370_large.jpg",
+          "name": "Hello Hollywood Mint Maxi Dress",
+          "sku": "C-MB-E2-16476",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSdTXSNTQzMTdjMGQwMmUwNmAwNLI0Z0gvykwBAA5SCsc",
+        "intellisuggestSignature": "834b22e75d4dd21bc2ca0a06f3ec77d338817aa543b41618ee6c173d1f17a0ac",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "68"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "mint",
+          "mint maxi",
+          "maxi dress",
+          "formal dress",
+          "long dress",
+          "ruffles",
+          "ruffle dress",
+          "chiffon dress",
+          "bridesmaid dress",
+          "wedding",
+          "formal",
+          "spring",
+          "mint green"
+        ],
+        "color": [
+          "Mint"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "You may not have your name on the Hollywood Walk of Fame, but that doesn’t mean that you can’t walk yourself up to the mirror, dress yourself up, and say, “Hello Hollywood!” All you need is this stunning maxi dress that’ll make the Red Carpet look like your home away from home. Is it easy to put on? Yes ma’am! Is it easy to wear? You’d better believe it! Is it affordable? Well of course it is. All you have to do is put it on your online shopping cart and check out. Easy peasy! Floor length dress has a v neck silhouette with ruffle details and a criss cross back. Features an invisible zipper on the back with a hook and eye closure on top. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported"
+        ],
+        "title": [
+          "Hello Hollywood Mint Maxi Dress"
+        ],
+        "ss_clicks": [
+          "3545"
+        ],
+        "color_family": [
+          "Green"
+        ],
+        "sales_rank": [
+          "1588"
+        ],
+        "ss_sale_price": "68",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion&gt;Formal Dresses",
+          "All Dresses&gt;Maxi Dresses",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;Green Dresses"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Green Dresses",
+          "All Dresses &gt; Maxi Dresses",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Special Occasion &gt; Formal Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "150"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "1"
+        ],
+        "popularity": "1588",
+        "product_type_unigram": "dress",
+        "id": "9a32cb409aa806fe6c47f67fe43c3ead"
+      }
+    },
+    {
+      "id": "178038",
+      "mappings": {
+        "core": {
+          "uid": "178038",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-W1-16300",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_6574_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6574_large.jpg",
+          "name": "Premier Event Ivory Maxi Dress",
+          "sku": "C-MB-W1-16300",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTfUNTQzNjBgMGQwMmMwBtJGluYM6UWZKQAPCArL",
+        "intellisuggestSignature": "5501fa9b8de4ef6f8536572ecbcd398eed27c29d8e9d22f802213faaf3ed26d6",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "63"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "ivory",
+          "white",
+          "cream",
+          "off white",
+          "maxi",
+          "maxy- maxie",
+          "maxey",
+          "long dress",
+          "gown",
+          "event",
+          "formal",
+          "guest",
+          "dance"
+        ],
+        "color": [
+          "Ivory"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Every Premier Event needs a leading lady, and every leading lady needs an equally premier dress. But what if you can't afford designer prices? Or you haven't had the breaks in life that would allow you to cozy up to a designer to have one custom made? We hear you, therefore, we bring you the closest thing possible, and it comes with a price tag you can actually obtain without taking out a second mortgage on your house--imagine that! Now, if we can figure out a way to hook you up with a kicking role in a soon-to-be famous movie, you'll be all set. Just don't forget us little people. Especially when you're up there winning all of those awards. P.S. Save us some swag from that famous gift basket. I mean, who really needs pure gold flakes in their bubble bath, right? *cough, us, cough* Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Premier Event Ivory Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2777"
+        ],
+        "color_family": [
+          "White"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "4170"
+        ],
+        "ss_sale_price": "68",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; White Dresses",
+          "Trending &gt; Maxi Madness",
+          "Shop By Trend &gt; White Haute",
+          "All Dresses &gt; Shop by Color",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "All Dresses &gt; Maxi Dresses",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "86"
+        ],
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "All Dresses&gt;Shop by Color",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Trending",
+          "All Dresses&gt;Maxi Dresses",
+          "All Dresses&gt;Shop by Color&gt;White Dresses",
+          "Shop By Trend&gt;White Haute"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "12"
+        ],
+        "popularity": "4170",
+        "product_type_unigram": "dress",
+        "id": "20ecb569a2745a25e94782be14aaafc9"
+      }
+    },
+    {
+      "id": "178043",
+      "mappings": {
+        "core": {
+          "uid": "178043",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-E2-16512",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/06_0775_copyright_reddressboutique_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/06_0775_copyright_reddressboutique_2016_large.jpg",
+          "name": "Hollywood Starlet Mint Maxi Dress",
+          "sku": "C-MB-E2-16512",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSdTXSNTQzNTRiMGQwMmcwNmAwNLI0Z0gvykwBAA2_CsA",
+        "intellisuggestSignature": "2e79d50d1cab47a01751788f47ee9a1fb307bf281df7db59ca9317b60124b733",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "25"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "mint",
+          "green",
+          "light green",
+          "celadon",
+          "celery",
+          "maxi",
+          "maxy",
+          "maxey",
+          "maxie",
+          "long dress",
+          "gown",
+          "formal",
+          "dance",
+          "event",
+          "occasion",
+          "bridesmaid",
+          "bridal",
+          "wedding",
+          "guest",
+          "pretty",
+          "lovely",
+          "gorgeous"
+        ],
+        "color": [
+          "Mint"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Just because you haven't quite made your big break in Hollywood, doesn't mean you can't dress like you have. All you need is a little bit of confidence, a dash of panache and this Hollywood Starlet Maxi Dress. It's like being wrapped in glamour. Don't be shocked if you feel like you're walking down the red carpet the moment you put this baby on. Just don't actually pause and wave like people are taking your picture because in reality, they're probably not and that might actually make you look a little nuts. Unless, of course, they are ... in which case, rock on girl. Rock on. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported"
+        ],
+        "title": [
+          "Hollywood Starlet Mint Maxi Dress"
+        ],
+        "ss_clicks": [
+          "3090"
+        ],
+        "color_family": [
+          "Green"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "3226"
+        ],
+        "ss_sale_price": "68",
+        "product_type": [
+          "Trending &gt; Maxi Madness",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Special Occasion &gt; Bridesmaid Dresses",
+          "Shop By Trend &gt; Pastels",
+          "Special Occasion &gt; Formal Dresses",
+          "Shop By Trend &gt; Maximize the Maxi",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "84"
+        ],
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Special Occasion&gt;Bridesmaid Dresses",
+          "Shop By Trend&gt;Maximize the Maxi",
+          "Shop By Trend&gt;Pastels",
+          "Trending&gt;Maxi Madness",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Trending",
+          "Special Occasion&gt;Formal Dresses",
+          "Special Occasion"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "1"
+        ],
+        "popularity": "3226",
+        "product_type_unigram": "dress",
+        "id": "018264a22f5ef5810d4e0ea07fd971d5"
+      }
+    },
+    {
+      "id": "175710",
+      "mappings": {
+        "core": {
+          "uid": "175710",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-P3-16190",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_1_12_studio_set_1_043_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_1_12_studio_set_1_043_1_large.jpg",
+          "name": "One Last Night Light Blush Maxi Dress",
+          "sku": "C-MB-P3-16190",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSDTDWNTQztDRgMGQwsmAwBtJGluYM6UWZKQAPKgrP",
+        "intellisuggestSignature": "fa5db34608def6d6035093389e5e8b206ecda13629654590019a381e9a957d98",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "66"
+        ],
+        "ss_product_type": [
+          "Blush"
+        ],
+        "keywords": [
+          "blush",
+          "light pink",
+          "maxi",
+          "maxy",
+          "maxie",
+          "maxey",
+          "gown",
+          "formal",
+          "elegant",
+          "date",
+          "occasion",
+          "event",
+          "wedding guest",
+          "valentine",
+          "pretty",
+          "stunning",
+          "sexy"
+        ],
+        "color": [
+          "Pink"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "You have One Last Night left on your dream vacation and you've been saving up this stunning dress. And aren't you glad ... you're a vision for sure, as beautiful as you are elegant. Tonight will be a night to remember. Model is wearing a small. • 100% Polyester • Dry Clean Only • Partially lined, faintly sheer • Imported"
+        ],
+        "title": [
+          "One Last Night Light Blush Maxi Dress"
+        ],
+        "ss_clicks": [
+          "2772"
+        ],
+        "color_family": [
+          "Pink"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "2830"
+        ],
+        "ss_sale_price": "68",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Pink Dresses",
+          "Special Occasion &gt; Formal Dresses",
+          "Shop By Trend &gt; At First Blush",
+          "Special Occasion &gt; Bridesmaid Dresses",
+          "Valentine's Day &gt; Valentine's Day Dresses",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "43"
+        ],
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;At First Blush",
+          "All Dresses",
+          "Special Occasion&gt;Bridesmaid Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion&gt;Formal Dresses",
+          "Special Occasion",
+          "All Dresses&gt;Shop by Color&gt;Pink Dresses",
+          "Valentine's Day&gt;Valentine's Day Dresses",
+          "Valentine's Day"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "32"
+        ],
+        "popularity": "2830",
+        "product_type_unigram": "dress",
+        "id": "a2d605eb873fc9296c9cc24940b5be5e"
+      }
+    },
+    {
+      "id": "173959",
+      "mappings": {
+        "core": {
+          "uid": "173959",
+          "price": 68,
+          "msrp": 75,
+          "url": "/product/C-MB-Y8-15920",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_529_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_529_large.jpg",
+          "name": "The Award Goes To Gold Sequin Maxi Dress",
+          "sku": "C-MB-Y8-15920",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYEgpSi0uZnDW9XXSjbTQNTS1NDJgMGQwsmQwBtJGluYM6UWZKQAQpQre",
+        "intellisuggestSignature": "3a7696f135903601449b9291aee112534f4e69cdc4160f673377de9db10c3ccd",
+        "ss_insights_quadrant": [
+          "Poor Performer"
+        ],
+        "gross_margin": [
+          "43"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "Gold Sequin Dress",
+          "Gold Sequin",
+          "Gold",
+          "Sequin",
+          "Sparkle",
+          "Dress",
+          "Maxi",
+          "Maxi Dress",
+          "Holiday",
+          "Holiday Dress",
+          "Glitter Dress",
+          "Deep V",
+          "Side Slit",
+          "Slit",
+          "Sparkle Dress",
+          "NYE",
+          "New Years Eve",
+          "Fancy Dress",
+          "Halter Dress",
+          "Halter Top"
+        ],
+        "color": [
+          "Gold"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "It’s a crime that no one has rolled out the red carpet for you yet. You’re already modeling the finest fashions every day. And your performances? Oscar-worthy. Like that time you smiled at your ex’s new floozy, and said it was nice to meet her? Or when you reassured him that it happens to lots of guys (even though you don’t actually know of a single male who cries at the end of James Bond). Well at last, your time has come. All of your hard work and effort have paid off. And the Award Goes to ... you! This dress is your prize. And as good as it might look in a window box on your wall, the most gracious thing to do would be to wear it, so others can appreciate it on you, as much as you appreciate its don't-you-wish-this-was-yours-ness of it. Halter neckline maxi features full seaquins, elastic back, exposed gold zipper, half lined skirt, side slit. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported"
+        ],
+        "title": [
+          "The Award Goes To Gold Sequin Maxi Dress"
+        ],
+        "ss_clicks": [
+          "245"
+        ],
+        "color_family": [
+          "Yellow"
+        ],
+        "sales_rank": [
+          "2456"
+        ],
+        "ss_sale_price": "68",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "34"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "57"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "7"
+        ],
+        "popularity": "2456",
+        "product_type_unigram": "dress",
+        "id": "f3831fd041210a341896b34847babfa6"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "value",
+      "field": "color_family",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 290
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 239
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 161
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 112
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 104
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 79
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 59
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 33
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 30
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Black, Grey",
+          "label": "Black, Grey",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Black, Orange",
+          "label": "Black, Orange",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 38
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 1293
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "field": "price",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 17.5,
+        "high": 110
+      },
+      "active": {
+        "low": 17.5,
+        "high": 110
+      }
+    },
+    {
+      "type": "value",
+      "field": "ss_category_hierarchy",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 1297
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 404
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 400
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 165
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 116
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 80
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 57
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 37
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 34
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 33
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 24
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "White & Blue Looks",
+          "label": "White & Blue Looks",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Intimates",
+          "label": "All Intimates",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Outfit",
+          "label": "Shop By Outfit",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Top Rated",
+          "label": "Top Rated",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "material",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 669
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 272
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 210
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 115
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 434
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 864
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_dress",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 1292
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "dress_length_name",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 192
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 50
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Below knee",
+          "label": "Below knee",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 109
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 55
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "season",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 210
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 182
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 81
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "pattern",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 177
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 84
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Camo",
+          "label": "Camo",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dot",
+          "label": "Dot",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Paisley",
+          "label": "Paisley",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "saturation",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 56
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "collection",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Addicted To Love",
+          "label": "Addicted To Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adore Me",
+          "label": "Adore Me",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adventure Ready",
+          "label": "Adventure Ready",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "After Midnight",
+          "label": "After Midnight",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Can't Stop The Feeling",
+          "label": "Can't Stop The Feeling",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chasing Daydreams",
+          "label": "Chasing Daydreams",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Mine To Keep",
+          "label": "Mine To Keep",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Set To Jet",
+          "label": "Set To Jet",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Stories Don't End",
+          "label": "Stories Don't End",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Sunny State Of Mind",
+          "label": "Sunny State Of Mind",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Take A Dip",
+          "label": "Take A Dip",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "The Story",
+          "label": "The Story",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "You've Got The Love",
+          "label": "You've Got The Love",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_footwear",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "config": {
+            "position": {
+              "index": 4
+            }
+          },
+          "value": "<script data-banner-type=\"image\" data-banner-html=\"\" data-image-url=\"https://simplysouthern.com/wp-content/uploads/FREESHIPPING-BANNER-430-01.jpg\" type=\"text/widget\"></script><img src=\"https://simplysouthern.com/wp-content/uploads/FREESHIPPING-BANNER-430-01.jpg\" style=\"width: 100%;\">"
+        }
+      ]
+    }
+  }
+}
