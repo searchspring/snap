@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-preact-demo",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "",
 	"main": "index.js",
 	"publishConfig": {
@@ -20,14 +20,14 @@
 	"license": "MIT",
 	"dependencies": {
 		"@searchspring/snap-client-javascript": "^1.0.20",
-		"@searchspring/snap-controller": "^0.0.17",
-		"@searchspring/snap-event-manager": "^0.0.27",
-		"@searchspring/snap-logger": "^0.0.12",
-		"@searchspring/snap-preact-components": "^0.0.20",
-		"@searchspring/snap-profiler": "^0.0.23",
-		"@searchspring/snap-store-mobx": "^0.0.17",
-		"@searchspring/snap-toolbox": "^0.0.35",
-		"@searchspring/snap-url-manager": "^0.0.26",
+		"@searchspring/snap-controller": "^0.0.18",
+		"@searchspring/snap-event-manager": "^0.0.28",
+		"@searchspring/snap-logger": "^0.0.13",
+		"@searchspring/snap-preact-components": "^0.0.21",
+		"@searchspring/snap-profiler": "^0.0.24",
+		"@searchspring/snap-store-mobx": "^0.0.18",
+		"@searchspring/snap-toolbox": "^0.0.36",
+		"@searchspring/snap-url-manager": "^0.0.27",
 		"mobx": "^6.2.0",
 		"mobx-react": "^7.1.0",
 		"preact": "^10.5.13"
