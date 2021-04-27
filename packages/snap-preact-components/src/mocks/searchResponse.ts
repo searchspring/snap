@@ -5,7 +5,7 @@ export const gridFacetMock = {
 	display: 'grid',
 	type: 'value',
 	filtered: true,
-	collapse: false,
+	collapsed: false,
 	values: [
 		{
 			filtered: false,
@@ -80,7 +80,7 @@ export const listFacetMock = {
 	display: 'list',
 	multiple: 'and',
 	filtered: false,
-	collapse: false,
+	collapsed: false,
 	values: [
 		{
 			filtered: false,
@@ -116,7 +116,7 @@ export const paletteFacetMock = {
 	type: 'value',
 	display: 'palette',
 	filtered: true,
-	collapse: false,
+	collapsed: false,
 	values: [
 		{
 			filtered: true,
@@ -193,7 +193,7 @@ export const hierarchyFacetMock = {
 	filtered: false,
 	display: 'hierarchy',
 	label: 'Category',
-	collapse: false,
+	collapsed: false,
 	multiple: 'single',
 	hierarchyDelimiter: '>',
 	values: [
@@ -374,7 +374,7 @@ export const hierarchyFacetFilteredMock = {
 	filtered: true,
 	display: 'hierarchy',
 	label: 'Category',
-	collapse: false,
+	collapsed: false,
 	multiple: 'single',
 	hierarchyDelimiter: '>',
 	values: [
@@ -503,7 +503,7 @@ export const sliderFacetMock = {
 	type: 'range',
 	display: 'slider',
 	filtered: false,
-	collapse: false,
+	collapsed: false,
 	range: {
 		low: 0,
 		high: 120,

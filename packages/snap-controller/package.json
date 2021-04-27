@@ -21,7 +21,7 @@
 		"deepmerge": "^4.2.2"
 	},
 	"devDependencies": {
-		"@searchspring/snap-client-javascript": "^1.0.17",
+		"@searchspring/snap-client-javascript": "^1.0.20",
 		"@searchspring/snap-event-manager": "^0.0.27",
 		"@searchspring/snap-logger": "^0.0.12",
 		"@searchspring/snap-profiler": "^0.0.23",

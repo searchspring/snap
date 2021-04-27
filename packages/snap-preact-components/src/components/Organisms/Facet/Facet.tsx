@@ -84,7 +84,7 @@ export const Facet = observer(
 			optionsLimitCount,
 			iconColor,
 			color,
-			previewOnFocus, 
+			previewOnFocus,
 			valueProps,
 			disableStyles,
 			className,
@@ -180,14 +180,14 @@ export const Facet = observer(
 		return (
 			<div css={!disableStyles && CSS.facet({ disableCollapse, color, theme, style })} className={classnames('ss-facet', className)}>
 				<Dropdown
-					open={!facet?.collapse}
+					open={!facet?.collapsed}
 					onClick={(e) => {
 						!disableCollapse && facet?.toggleCollapse();
 					}}
 					button={
 						<div className={'ss-facet__header'}>
 							{facet?.label}
-							{!hideIcon && <Icon {...subProps.icon} icon={facet?.collapse ? iconExpand : iconCollapse} />}
+							{!hideIcon && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>

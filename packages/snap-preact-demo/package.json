@@ -19,7 +19,7 @@
 	"author": "",
 	"license": "MIT",
 	"dependencies": {
-		"@searchspring/snap-client-javascript": "^1.0.17",
+		"@searchspring/snap-client-javascript": "^1.0.20",
 		"@searchspring/snap-controller": "^0.0.17",
 		"@searchspring/snap-event-manager": "^0.0.27",
 		"@searchspring/snap-logger": "^0.0.12",

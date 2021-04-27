@@ -1,5 +1,5 @@
 /* searchspring imports */
-import SnapClient from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client-javascript';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -22,12 +22,12 @@ export class Snapify {
 		const profiler = new Profiler();
 		const logger = new Logger();
 
-		const searchControllerConfig:AutocompleteControllerConfig = {
+		const searchControllerConfig: AutocompleteControllerConfig = {
 			id: 'autocomplete',
 			selector: config.selector,
 			settings: {
-				initializeFromUrl: config && config.settings && config.settings.initializeFromUrl ?  config.settings.initializeFromUrl : false,
-       			syncInputs: config && config.settings && config.settings.syncInputs ? config.settings.syncInputs : false,
+				initializeFromUrl: config && config.settings && config.settings.initializeFromUrl ? config.settings.initializeFromUrl : false,
+				syncInputs: config && config.settings && config.settings.syncInputs ? config.settings.syncInputs : false,
 			},
 		};
 		const cntrlr = new AutocompleteController(searchControllerConfig, {
@@ -101,37 +101,36 @@ export interface SnapifyConfig {
 }
 
 export interface SnapifyACConfig {
-	selector: string,
-	id?: string,
+	selector: string;
+	id?: string;
 	action?: string;
 	globals: {
 		siteId: string;
-		filters?: string[],
+		filters?: string[];
 		[any: string]: any;
-	},
+	};
 	settings?: {
-        initializeFromUrl?: boolean;
-        syncInputs?: boolean;
-        facets?: {
-            trim?: boolean;
-        };
+		initializeFromUrl?: boolean;
+		syncInputs?: boolean;
+		facets?: {
+			trim?: boolean;
+		};
 		redirects?: {
-			enabled: boolean,
-		}
-    };
+			enabled: boolean;
+		};
+	};
 }
-
 
 type AutocompleteControllerConfig = {
-    id: string;
-    selector: string;
-    action?: string;
-    globals?: any;
-    settings: {
-        initializeFromUrl: boolean;
-        syncInputs: boolean;
-        facets?: {
-            trim?: boolean;
-        };
-    };
-}
+	id: string;
+	selector: string;
+	action?: string;
+	globals?: any;
+	settings: {
+		initializeFromUrl: boolean;
+		syncInputs: boolean;
+		facets?: {
+			trim?: boolean;
+		};
+	};
+};

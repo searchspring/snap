@@ -7,7 +7,7 @@
  * will use: /snap-controller/src/__mocks__/data/ga9kq2/searches/ac.query.blank.json
  *
  */
-import SnapClient from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client-javascript';
 import { SearchData } from './SearchData';
 
 export class MockSnapClient extends SnapClient {

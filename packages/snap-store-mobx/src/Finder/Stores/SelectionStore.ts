@@ -45,7 +45,7 @@ class SelectionBase {
 	type: string;
 	field: string;
 	filtered = false;
-	collapse = false;
+	collapsed = false;
 	display = '';
 	label: string;
 	multiple: string;
@@ -68,7 +68,7 @@ class SelectionBase {
 		this.type = facet.type;
 		this.field = facet.field;
 		this.filtered = facet.filtered;
-		this.collapse = facet.collapse;
+		this.collapsed = facet.collapsed;
 		this.display = facet.display;
 		this.label = facet.label;
 		this.multiple = facet.multiple;

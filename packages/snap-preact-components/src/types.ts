@@ -53,7 +53,7 @@ export enum Layout {
 	LIST = 'list',
 }
 
-export type LayoutType = Layout.GRID | Layout.LIST ;
+export type LayoutType = Layout.GRID | Layout.LIST;
 
 export interface Pagination {
 	page: number;
@@ -144,7 +144,7 @@ export interface BaseFacet {
 	display: FacetDisplay | any; //TODO: update mock data, 'any' to pass pagination tests
 	filtered: boolean;
 	label: string;
-	collapse: boolean;
+	collapsed: boolean;
 	toggleCollapse?: () => any; //TODO: update mock data, optional to pass pagination tests
 	controller?: any;
 }
