@@ -4,102 +4,185 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./assets/styles.css">
+	<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/default.min.css">
+	<script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
 	<title>Docs</title>
 </head>
 <body>
-	<h1>Docs</h1>
-
-	<div id="docs"></div>
+	<div id="app">
+		<Navigation :documents="documents" :links="links" ></Navigation>
+		<div id="markdown-wrapper">
+			<div id="markdown">
+				<router-view :documents="documents"></router-view>
+			</div>	
+		</div>
+	</div>
 
 	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/vue-router@4"></script>
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<script>
-		const Documentation = {
-			template: `
-				<Navigation :selected="selected" :documents="documents" @select-doc="makeSelection($event)"></Navigation>
-				<Markdown :markdown="markdown"></Markdown>
-			`,
+		const documents = [
+			{
+				label: 'Snap',
+				href: '/',
+				readme: './LANDING.md'
+			},
+			{
+				label: 'Snap Repository',
+				href: '/repository',
+				readme: './README.md'
+			},
+			{
+				label: 'Controller',
+				href: '/snap-controller',
+				readme: './packages/snap-controller/README.md'
+			}, 
+			{
+				label: 'Event Manager',
+				href: '/event-manager',
+				readme: './packages/snap-event-manager/README.md'
+			}, 
+			{
+				label: 'Client',
+				href: '/client',
+				readme: './packages/snap-client-javascript/README.md'
+			}, 
+			{
+				label: 'Logger',
+				href: '/logger',
+				readme: './packages/snap-logger/README.md'
+			}, 
+			{
+				label: 'Store',
+				href: '/store-mobx',
+				readme: './packages/snap-store-mobx/README.md'
+			}, 
+			{
+				label: 'Profiler',
+				href: '/profiler',
+				readme: './packages/snap-profiler/README.md'
+			}, 
+			{
+				label: 'Toolbox',
+				href: '/toolbox',
+				readme: './packages/snap-toolbox/README.md'
+			}, 
+			{
+				label: 'Url Manager',
+				href: '/url-manager',
+				readme: './packages/snap-url-manager/README.md'
+			},
+		];
+		const links = [
+			{
+				label: 'Demo',
+				url: 'https://try.searchspring.com'
+			}, 
+			{
+				label: 'Preact Components',
+				url: 'https://searchspring.github.io/snap/packages/snap-preact-components/docs/index.html'
+			}
+		]
+
+		const Markdown = { 
+			props: ['documents'],
+			template: `<div v-html="markedHTML"></div>`,
 			data() {
 				return {
-					markdown: `### Heading`,
-					selected: 0,
-					documents: [
-						{
-							label: 'Controller',
-							readme: './packages/snap-controller/README.md'
-						}, {
-							label: 'Store',
-							readme: './packages/snap-store-mobx/README.md'
-						}, {
-							label: 'Mono Repo',
-							readme: './README.md'
-						}, {
-							label: 'Preact Components',
-							url: './packages/snap-preact-components/docs/'
-						}
-					]
+					markdown: ``,
+					show: '',
 				}
 			},
-			created() {
-				this.getMarkdown(this.documents[this.selected].readme);
-			},
-			methods: {
-				makeSelection(selection) {
-					this.selected = selection;
-					this.getMarkdown(this.documents[selection].readme);
-				},
-				async getMarkdown(file) {
-					const response = await fetch(file);
-
-					this.markdown = await response.text();
-
-					console.log('this.markdown', this.markdown);
-				}
-			},
-		}
-		
-		const app = Vue.createApp(Documentation);
-
-		app.component('Navigation', {
-			props: ['documents', 'selected'],
-			template: `
-			<div id="navigation">
-				<ul>
-					<li v-for="(doc, index) in documents" @click="navigate(doc, index)">
-						{{ doc.label }}
-					</li>
-				</ul>
-			</div>
-			`,
-			methods: {
-				navigate(doc, index) {
-					if (doc.readme) {
-						this.$emit('selectDoc', index);
-					} else if (doc.url) {
-						window.open(doc.url, '_blank');
-					}
-				}
-			}
-		});
-
-		app.component('Markdown', {
-			props: ['markdown'],
 			computed: {
 				markedHTML() {
 					return marked(this.markdown);
 				}
 			},
-			template: `
-			<div id="markdown" v-html="markedHTML"></div>
-			`
+			watch:{
+				$route() {
+					this.initialize();
+				}
+			},
+			created() {
+				this.initialize();
+			},
+			methods: {
+				initialize() {
+					const currentRoute = this.$route.path;
+					if (currentRoute) {
+						const document = this.documents.filter(doc => doc.href === currentRoute).pop();
+						if(document && document.readme) {
+							this.getMarkdown(document.readme);
+						}
+					}	
+				},
+				async getMarkdown(file) {
+					const response = await fetch(file);
+					this.markdown = await response.text();
+				}
+			},
+			updated() {
+				window.highlight();
+			},
+		}
+
+		const App = {
+			data() {
+				return {
+					documents,
+					links
+				}
+			},
+		}
+
+		const routes = [
+			{ path: '/',      component: Markdown },
+			{ path: '/:path', component: Markdown },
+		]
+
+		const router = VueRouter.createRouter({
+			history: VueRouter.createWebHashHistory(),
+			routes,
 		});
+
+		const app = Vue.createApp(App);
+		app.use(router);
+
+		app.component('Navigation', {
+			props: ['documents', 'links'],
+			template: `
+			<div id="navigation">
+				<img src='./packages/snap-preact-components/src/assets/searchspring-logo.svg' />
+				<h3>Docs</h3>
+				<ul>
+					<li v-for="(doc, index) in documents">
+						<router-link :key="doc.href" :to="'' + doc.href">{{doc.label}}</router-link>
+					</li>
+				</ul>
+				<h3>Links</h3>
+				<ul>
+					<li v-for="(link, index) in links">
+						<a :href="link.url" target="_blank">{{link.label}}</a>
+					</li>
+				</ul>
+			</div>
+			`,
+		});
+
+	
+		app.mount('#app');
+
+		window.highlight = function() {
+			document.querySelectorAll('pre code').forEach((block) => {
+				hljs.highlightBlock(block);
+			});
+		}
 		
-		app.mount('#docs');
 	</script>
 
-	<script>
-		
-	</script>
 </body>
 </html>
