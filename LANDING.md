@@ -1,3 +1,0 @@
-
-
-Snap Landing Page

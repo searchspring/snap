@@ -15,7 +15,8 @@
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"docs": "typedoc --out docs src/index.ts"
 	},
 	"dependencies": {
 		"@searchspring/snap-toolbox": "^0.0.34",

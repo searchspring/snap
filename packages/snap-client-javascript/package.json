@@ -13,7 +13,8 @@
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"docs": "echo 'skipping docs for snap-client-javascript'"
 	},
 	"browser": {
 		"fs": false
