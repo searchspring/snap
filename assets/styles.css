@@ -1,0 +1,138 @@
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+}
+
+body {
+    margin: 0;
+    background: #f6f9fc;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr:nth-child(even) {
+    background-color: #ece9fc;
+}
+
+table th,
+table td {
+    padding: 5px 10px;
+}
+
+#navigation-wrapper {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 5px rgb(0 0 0 / 35%);
+}
+
+#navigation-wrapper .collapseNav {
+    display: none;
+}
+
+#navigation-wrapper img {
+    width: 100%;
+    padding: 20px;
+}
+
+#navigation ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+#navigation ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    font-size: 0.9em;
+}
+
+#navigation ul li a .fas {
+    color: #777;
+    float: right;
+}
+
+#navigation ul li a.active {
+    font-style: italic;
+    background: rgb(58, 35, 173);
+    background: linear-gradient(90deg, rgba(58, 35, 173, 1) 0%, rgba(76, 60, 226, 1) 100%);
+    color: white;
+    border-radius: 10px 0px 28px 0px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 35%);
+}
+
+#navigation h3 {
+    padding: 0px 20px 0px 20px;
+}
+
+#markdown-wrapper {
+    width: calc(100% - 250px);
+    height: 100vh;
+    float: right;
+}
+
+#markdown {
+    padding: 50px 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+#markdown-wrapper iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+@media only screen and (max-width: 600px) {
+    #navigation-wrapper {
+        width: 100%;
+        position: relative;
+        height: auto;
+        box-shadow: none;
+        padding: 10px 0;
+    }
+
+    #navigation-wrapper img {
+        width: 50%;
+        padding: 0.5em;
+    }
+
+    #navigation-wrapper .collapseNav {
+        display: unset;
+        color: rgb(58, 35, 173);
+        position: fixed;
+        right: 0;
+        top: 0;
+        padding: 1.5em;
+        padding-left: 50%;
+        cursor: pointer;
+    }
+
+    #markdown-wrapper {
+        width: 100%;
+        height: auto;
+        float: unset;
+    }
+
+    #markdown {
+        padding: 10px 30px;
+    }
+}

@@ -21,7 +21,8 @@
 		"storybook": "start-storybook -p 6006",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"storybook:build": "build-storybook -o ./docs"
+		"storybook:build": "build-storybook -o ./docs",
+		"docs": "build-storybook -o ./docs"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.1.5",

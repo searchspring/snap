@@ -14,7 +14,8 @@
 		"cypress": "cypress open --project tests",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
+		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))",
+		"docs": "echo 'skipping docs for snap-preact-demo'"
 	},
 	"author": "",
 	"license": "MIT",

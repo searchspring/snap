@@ -11,6 +11,7 @@
 	"scripts": {
 		"commit": "cz",
 		"build": "node_modules/.bin/lerna exec --stream 'npm run build'",
+		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run docs'",
 		"test": "npm run test --workspaces",
 		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
 		"lint": "npm run lint --workspaces",
