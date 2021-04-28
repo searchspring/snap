@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.15 (2021-04-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
 ## 1.0.14 (2021-04-28)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
