@@ -1,0 +1,1182 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@searchspring/snap-store-mobx</title>
+	<meta name="description" content="Documentation for @searchspring/snap-store-mobx">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@searchspring/snap-store-mobx</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@searchspring/snap-store-mobx</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#snap-mobx-store" id="snap-mobx-store" style="color: inherit; text-decoration: none;">
+					<h1>Snap MobX Store</h1>
+				</a>
+				<p><a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a></p>
+				<p>MobX state management</p>
+				<hr>
+				<a href="#dependency" id="dependency" style="color: inherit; text-decoration: none;">
+					<h1>Dependency</h1>
+				</a>
+				<p>Snap Store MobX is a dependency of <a href="../snap-controller">@searchspring/snap-controller</a> <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a></p>
+				<details>
+					<summary>Package dependencies hierarchy</summary>
+					<br/>
+					<img src="../../images/snap-dependencies.jpg" />
+				</details>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h1>Installation</h1>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-store-mobx</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h1>Usage</h1>
+				</a>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h2>Import</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchStore</span><span style="color: #000000">, </span><span style="color: #001080">AutocompleteStore</span><span style="color: #000000">, </span><span style="color: #001080">FinderStore</span><span style="color: #000000">, </span><span style="color: #001080">AbstractStore</span><span style="color: #000000">, </span><span style="color: #001080">StorageStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
+					<h2>Controller usage</h2>
+				</a>
+				<p>Snap Store MobX is a dependency of Snap Controller and it is recommended to use methods of the controller to access the store</p>
+				<p>See <a href="../../README.md#TypicalUsage">Typical Usage</a></p>
+				<a href="#standalone-usage" id="standalone-usage" style="color: inherit; text-decoration: none;">
+					<h2>Standalone usage</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">toJSON</span><span style="color: #000000">())</span>
+</code></pre>
+				<a href="#abstractstore" id="abstractstore" style="color: inherit; text-decoration: none;">
+					<h1>AbstractStore</h1>
+				</a>
+				<p><code>SearchStore</code>, <code>AutocompleteStore</code>, and <code>FinderStore</code> extend <code>AbstractStore</code>. Therefore, the following methods and properties are available in all Stores.</p>
+				<a href="#update-method" id="update-method" style="color: inherit; text-decoration: none;">
+					<h2><code>update</code> method</h2>
+				</a>
+				<p>Update the store&#39;s properties with <code>data</code> object that has been retrieved from Searchspring&#39;s Search API.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#link-method" id="link-method" style="color: inherit; text-decoration: none;">
+					<h2><code>link</code> method</h2>
+				</a>
+				<p>Links a controller to the Store</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AutocompleteStore</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">controller</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AutocompleteController</span><span style="color: #000000">(...)</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">link</span><span style="color: #000000">(</span><span style="color: #001080">controller</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#tojson-method" id="tojson-method" style="color: inherit; text-decoration: none;">
+					<h2><code>toJSON</code> method</h2>
+				</a>
+				<p>Converts store to JSON object</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">toJSON</span><span style="color: #000000">())</span>
+</code></pre>
+				<a href="#custom-property" id="custom-property" style="color: inherit; text-decoration: none;">
+					<h2><code>custom</code> property</h2>
+				</a>
+				<p>This is an empty object that is available for custom store manipulation using the <a href="../snap-event-manager">EventManager</a></p>
+				<a href="#loading-property" id="loading-property" style="color: inherit; text-decoration: none;">
+					<h2><code>loading</code> property</h2>
+				</a>
+				<p>Boolean that the controller will set to <code>true</code> before an API request is made. Value is updated to <code>false</code> after an API request has completed</p>
+				<a href="#loaded-property" id="loaded-property" style="color: inherit; text-decoration: none;">
+					<h2><code>loaded</code> property</h2>
+				</a>
+				<p>Boolean that is set to <code>true</code> if the Store <code>update</code> method has been called at least once</p>
+				<a href="#searchstore" id="searchstore" style="color: inherit; text-decoration: none;">
+					<h1>SearchStore</h1>
+				</a>
+				<a href="#meta-property" id="meta-property" style="color: inherit; text-decoration: none;">
+					<h2><code>meta</code> property</h2>
+				</a>
+				<p>The meta property is an object containing the meta data retrieved from the Searchspring <a href="http://snapi.kube.searchspring.io/api/v1/#tag/Meta">Meta API</a></p>
+				<h2 id="SearchStoreMerchandising">`merchandising` property</h2>
+				<p>Contains redirect and banner merchandising data that the Search API returned</p>
+				<p><code>merchandising.redirect</code> - merchandising redirect URL</p>
+				<p><code>merchandising.content</code> - merchandising banner object that has <code>ContentType</code> key and value containing an array of single or more banners</p>
+				<a href="#redirects" id="redirects" style="color: inherit; text-decoration: none;">
+					<h3>Redirects</h3>
+				</a>
+				<p>Redirects are configured in the Searchspring Management Console</p>
+				<p>An example of how to handle merchandising redirects:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">redirectURL</span><span style="color: #000000"> = </span><span style="color: #001080">store</span><span style="color: #000000">?.</span><span style="color: #001080">merchandising</span><span style="color: #000000">?.</span><span style="color: #001080">redirect</span><span style="color: #000000">;</span>
+
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">redirectURL</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #795E26">replace</span><span style="color: #000000">(</span><span style="color: #001080">redirectURL</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#banner-content" id="banner-content" style="color: inherit; text-decoration: none;">
+					<h3>Banner Content</h3>
+				</a>
+				<p>Banners are configured in the Searchspring Management Console</p>
+				<pre><code class="language-typescript"><span style="color: #000000">{</span>
+<span style="color: #000000">    [</span><span style="color: #001080">ContentType</span><span style="color: #000000">.</span><span style="color: #0070C1">HEADER</span><span style="color: #000000">]: [</span><span style="color: #A31515">&#039;&lt;p&gt;header banner&lt;/p&gt;&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;&lt;p&gt;header banner 2&lt;/p&gt;&#039;</span><span style="color: #000000">]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<pre><code class="language-typescript"><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99">ContentType</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">HEADER</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;header&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">BANNER</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;banner&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">FOOTER</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;footer&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">LEFT</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">INLINE</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;inline&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>An example of how to retrieve the combined content of all header banners:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">headerBannerContent</span><span style="color: #000000"> = </span><span style="color: #001080">store</span><span style="color: #000000">?.</span><span style="color: #001080">merchandising</span><span style="color: #000000">?.</span><span style="color: #001080">content</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;header&#039;</span><span style="color: #000000">].</span><span style="color: #795E26">join</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#inline-banners" id="inline-banners" style="color: inherit; text-decoration: none;">
+					<h3>Inline Banners</h3>
+				</a>
+				<p>Inline banners have a slightly different format:</p>
+				<pre><code class="language-typescript"><span style="color: #000000">{</span>
+<span style="color: #000000">    [</span><span style="color: #001080">ContentType</span><span style="color: #000000">.</span><span style="color: #0070C1">INLINE</span><span style="color: #000000">]: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                </span><span style="color: #001080">position:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                    </span><span style="color: #001080">index:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">            </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;p&gt;inline banner at position index 0&lt;/p&gt;&#039;</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                </span><span style="color: #001080">position:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                    </span><span style="color: #001080">index:</span><span style="color: #000000"> </span><span style="color: #098658">7</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">            </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;p&gt;inline banner at position index 7&lt;/p&gt;&#039;</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<!-- TODO: add more docs for inline banner -->
+				<a href="#search-property" id="search-property" style="color: inherit; text-decoration: none;">
+					<h2><code>search</code> property</h2>
+				</a>
+				<p>Contains information about the query that was requested from the Search API</p>
+				<p><code>search.query</code> - query that was searched</p>
+				<p><code>search.didYouMean</code> - AlternateQuery object - suggested query after spelling correction</p>
+				<p><code>search.originalQuery</code> - AlternateQuery object - original query if spell correction occurred</p>
+				<a href="#alternatequery-object" id="alternatequery-object" style="color: inherit; text-decoration: none;">
+					<h3>AlternateQuery object</h3>
+				</a>
+				<p>An AlternateQuery object contains the respective <code>query</code> and generated query <code>url</code></p>
+				<pre><code class="language-typescript"><span style="color: #000000">{</span>
+<span style="color: #000000">    query: </span><span style="color: #A31515">&#039;dress&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    url: </span><span style="color: #A31515">&#039;/?q=dress&#039;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>An example in JSX:</p>
+				<pre><code class="language-jsx"><span style="color: #000000">{</span>
+<span style="color: #000000">    search?.originalQuery &amp;&amp; </span>
+<span style="color: #000000">    &lt;div&gt;</span>
+<span style="color: #000000">        Search instead for &quot;&lt;a href={ search.originalQuery.url }&gt;{ search.originalQuery.value }&lt;/a&gt;&quot;</span>
+<span style="color: #000000">    &lt;/div&gt;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<h2 id="SearchFacets">`facets` property</h2>
+				<p>Contains an array of facet object for the query requested to the Search API</p>
+				<p>All facets will contain the following base properties:</p>
+				<pre><code class="language-typescript"><span style="color: #000000">{</span>
+<span style="color: #000000">    type: </span><span style="color: #A31515">&#039;range&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    field: </span><span style="color: #A31515">&#039;ss_price&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    filtered: </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">    custom: {},</span>
+<span style="color: #000000">    collapse: </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">    display: </span><span style="color: #A31515">&#039;slider&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    label: </span><span style="color: #A31515">&#039;Price&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    storage: {},</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<h3 id="SearchFacetsType">`type` property</h3>
+				<p>The type property will be one of three values:</p>
+				<a href="#value-type" id="value-type" style="color: inherit; text-decoration: none;">
+					<h4><code>value</code> type</h4>
+				</a>
+				<p>This is the default facet type.</p>
+				<a href="#range-type" id="range-type" style="color: inherit; text-decoration: none;">
+					<h4><code>range</code> type</h4>
+				</a>
+				<p>Range facets can only apply to a field that contains all numerical values. It is typically used for price sliders</p>
+				<p>In addition to the base properties, facets of type <code>range</code> will contain the following properties:</p>
+				<pre><code class="language-typescript"><span style="color: #000000">{</span>
+<span style="color: #000000">    step: </span><span style="color: #098658">5</span><span style="color: #000000">,</span>
+<span style="color: #000000">    range: {</span>
+<span style="color: #000000">        low: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
+<span style="color: #000000">        high: </span><span style="color: #098658">0</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    active: {</span>
+<span style="color: #000000">        low: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
+<span style="color: #000000">        high: </span><span style="color: #098658">0</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    formatSeparator: </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    formatValue: </span><span style="color: #A31515">&#039;&#039;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#range-buckets-type" id="range-buckets-type" style="color: inherit; text-decoration: none;">
+					<h4><code>range-buckets</code> type</h4>
+				</a>
+				<p>Similar to value facets, with the added ability to group values into &quot;buckets&quot; </p>
+				<p>For example, a price facet with a range-buckets type would typically be used to create the following groups:</p>
+				<pre><code><span style="color: #001080">Less</span><span style="color: #000000"> </span><span style="color: #001080">than</span><span style="color: #000000"> </span><span style="color: #001080">$10</span>
+<span style="color: #001080">$10</span><span style="color: #000000"> - </span><span style="color: #001080">$20</span>
+<span style="color: #001080">$20</span><span style="color: #000000"> - </span><span style="color: #001080">$50</span>
+<span style="color: #001080">$50</span><span style="color: #000000"> </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #001080">up</span>
+</code></pre>
+				<h3 id="SearchFacetsField">`field` property</h3>
+				<p>Contains the field name, ie. &#39;ss_price&#39;</p>
+				<h3 id="SearchFacetsFiltered">`filtered` property</h3>
+				<p>If any of the facet&#39;s values have been filtered, the facet <code>filtered</code> property will be <code>true</code></p>
+				<a href="#custom-property-1" id="custom-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>custom</code> property</h3>
+				</a>
+				<p>This is an empty object that is available for custom store manipulation using the <a href="../snap-event-manager">EventManager</a></p>
+				<p>A few examples:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">cntrlr</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;afterStore&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> ({ </span><span style="color: #001080">controller</span><span style="color: #000000"> }, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #001080">custom</span><span style="color: #000000">.</span><span style="color: #001080">onSaleFacet</span><span style="color: #000000"> = </span><span style="color: #001080">controller</span><span style="color: #000000">?.</span><span style="color: #001080">store</span><span style="color: #000000">?.</span><span style="color: #001080">facets</span><span style="color: #000000">.</span><span style="color: #795E26">filter</span><span style="color: #000000">((</span><span style="color: #001080">facet</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">field</span><span style="color: #000000"> == </span><span style="color: #A31515">&#039;on_sale&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">pop</span><span style="color: #000000">();</span>
+
+<span style="color: #000000">    </span><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #001080">facets</span><span style="color: #000000"> = </span><span style="color: #001080">controller</span><span style="color: #000000">?.</span><span style="color: #001080">store</span><span style="color: #000000">?.</span><span style="color: #001080">facets</span><span style="color: #000000">?.</span><span style="color: #795E26">filter</span><span style="color: #000000">((</span><span style="color: #001080">facet</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">field</span><span style="color: #000000"> != </span><span style="color: #A31515">&#039;on_sale&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">colorFacet</span><span style="color: #000000"> = </span><span style="color: #001080">controller</span><span style="color: #000000">?.</span><span style="color: #001080">store</span><span style="color: #000000">?.</span><span style="color: #001080">facets</span><span style="color: #000000">.</span><span style="color: #795E26">filter</span><span style="color: #000000">((</span><span style="color: #001080">facet</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">field</span><span style="color: #000000"> == </span><span style="color: #A31515">&#039;color_family&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">pop</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">colorFacet</span><span style="color: #000000">?.</span><span style="color: #001080">values</span><span style="color: #000000">.</span><span style="color: #795E26">forEach</span><span style="color: #000000">((</span><span style="color: #001080">value</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">value</span><span style="color: #000000">.</span><span style="color: #001080">custom</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">            </span><span style="color: #001080">colorImage:</span><span style="color: #000000"> </span><span style="color: #A31515">`www.storfront.com/images/swatches/</span><span style="color: #0000FF">${</span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">value</span><span style="color: #0000FF">}</span><span style="color: #A31515">.png`</span><span style="color: #000000">,</span>
+<span style="color: #000000">        };</span>
+<span style="color: #000000">    });</span>
+
+<span style="color: #000000">    </span><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #001080">results</span><span style="color: #000000">.</span><span style="color: #795E26">forEach</span><span style="color: #000000">((</span><span style="color: #001080">result</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #001080">mappings</span><span style="color: #000000">.</span><span style="color: #001080">core</span><span style="color: #000000">.</span><span style="color: #001080">url</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;http://try.searchspring.com&#039;</span><span style="color: #000000"> + </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #001080">mappings</span><span style="color: #000000">.</span><span style="color: #001080">core</span><span style="color: #000000">.</span><span style="color: #001080">url</span><span style="color: #000000">;</span>
+<span style="color: #000000">    });</span>
+
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<h3 id="SearchFacetsCollapse">`collapse` property</h3>
+				<p>Collapse state that will contain an initial state that can be defined in the Searchspring Management Console, or toggled programmatically</p>
+				<h3 id="SearchFacetsDisplay">`display` property</h3>
+				Contains the facet display type as configured in the Searchspring Management Console
+				<pre><code class="language-typescript"><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99">FacetDisplay</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">GRID</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;grid&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">PALETTE</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;palette&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">LIST</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;list&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">SLIDER</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;slider&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">HIERARCHY</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;hierarchy&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<h3 id="SearchFacetsLabel">`label` property</h3>
+				Contains the facet label as configured in the Searchspring Management Console
+				<a href="#storage-property" id="storage-property" style="color: inherit; text-decoration: none;">
+					<h3><code>storage</code> property</h3>
+				</a>
+				<p>Contains a reference to the <a href="#StorageStore">StorageStore</a></p>
+				<!-- TODO: update link -->
+				<a href="#step-property" id="step-property" style="color: inherit; text-decoration: none;">
+					<h3><code>step</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>range</code></p>
+				<p>The step value is calculated based on the min and max values of the range. It is typically set to the step attribute of an input element:</p>
+				<pre><code class="language-jsx"><span style="color: #000000">&lt;input type=&quot;range&quot; step={facet.step} min={facet.active.low} max={facet.active.high} /&gt;</span>
+</code></pre>
+				<a href="#range-property" id="range-property" style="color: inherit; text-decoration: none;">
+					<h3><code>range</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>range</code></p>
+				<p>Contains an object with <code>low</code> and <code>high</code> properties</p>
+				<a href="#active-property" id="active-property" style="color: inherit; text-decoration: none;">
+					<h3><code>active</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>range</code></p>
+				<p>Contains an object with <code>low</code> and <code>high</code> properties</p>
+				<!-- TODO: explain difference between range and active -->
+				<a href="#formatseparator-property" id="formatseparator-property" style="color: inherit; text-decoration: none;">
+					<h3><code>formatSeparator</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>range</code></p>
+				<p>The text to separate <code>min</code> and <code>max</code> values. Typically set to <code>-</code></p>
+				<p>Example:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">priceToDisplay</span><span style="color: #000000"> = </span><span style="color: #A31515">`$</span><span style="color: #0000FF">${</span><span style="color: #001080">facet</span><span style="color: #000000FF">.</span><span style="color: #001080">active</span><span style="color: #000000FF">.</span><span style="color: #001080">min</span><span style="color: #0000FF">}</span><span style="color: #A31515"> </span><span style="color: #0000FF">${</span><span style="color: #001080">facet</span><span style="color: #000000FF">.</span><span style="color: #001080">formatSeparator</span><span style="color: #0000FF">}</span><span style="color: #A31515"> $</span><span style="color: #0000FF">${</span><span style="color: #001080">facet</span><span style="color: #000000FF">.</span><span style="color: #001080">active</span><span style="color: #000000FF">.</span><span style="color: #001080">max</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000"> </span><span style="color: #008000">// $10 - $200</span>
+</code></pre>
+				<a href="#formatvalue-property" id="formatvalue-property" style="color: inherit; text-decoration: none;">
+					<h3><code>formatValue</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>range</code></p>
+				<p>A <a href="https://en.wikipedia.org/wiki/Printf_format_string">printf format string</a> for how to format numerical values</p>
+				<p>Configurable in the Searchspring Management Console and typically set to <code>$%01.2f</code> </p>
+				<p>For example, <code>9.99</code> with a formateValue of <code>$%01.2f</code> will be formatted to <code>$9.99</code></p>
+				<a href="#values-property" id="values-property" style="color: inherit; text-decoration: none;">
+					<h3><code>values</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>value</code> or <code>range-buckets</code></p>
+				<p>Contains an array of facet value objects for this facet</p>
+				<a href="#values-object-with-facet-type-value" id="values-object-with-facet-type-value" style="color: inherit; text-decoration: none;">
+					<h4><code>values</code> object with facet type <code>value</code></h4>
+				</a>
+				<p>If the facet <code>display</code> property is <code>hierarchy</code>, the object will contain the following properties:</p>
+				<p><code>level</code> - numerical hierarchy level, set to <code>0</code> if no hierarchy selections have been selected yet</p>
+				<p><code>history</code> - boolean set to true if the value&#39;s level is less than or equal to the filtered level</p>
+				<p>Otherwise, If the facet <code>display</code> property is <code>palette</code>, <code>list</code>, or <code>slider</code>, the object will contain the following properties:</p>
+				<p><code>label</code> - inherited from facet</p>
+				<p><code>count</code> - inherited from facet</p>
+				<p><code>filtered</code> - inherited from facet</p>
+				<p><code>value</code> - inherited from facet</p>
+				<p><code>custom</code> - inherited from facet</p>
+				<p><code>url</code> - generated URL for this value</p>
+				<a href="#values-object-for-type-range-buckets" id="values-object-for-type-range-buckets" style="color: inherit; text-decoration: none;">
+					<h4><code>values</code> object for type <code>range-buckets</code></h4>
+				</a>
+				<p><code>values</code> object will contain the following properties:</p>
+				<p><code>label</code> - inherited from facet</p>
+				<p><code>count</code> - inherited from facet</p>
+				<p><code>filtered</code> - inherited from facet</p>
+				<p><code>low</code> - inherited from facet</p>
+				<p><code>high</code> - inherited from facet</p>
+				<p><code>custom</code> - inherited from facet</p>
+				<p><code>url</code> - generated URL for this value</p>
+				<a href="#search-property-1" id="search-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>search</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>value</code> or <code>range-buckets</code></p>
+				<p>An object with a single key:</p>
+				<p><code>input</code> - search term to filter values</p>
+				<p>Typical usage is to use this with a search input for each facet, allowing a user to filter a large list of facet values.</p>
+				<h3 id="SearchFacetsMultiple">`multiple` property</h3>
+				<p>Only applicable to facets where <code>type</code> is <code>value</code> or <code>range-buckets</code></p>
+				<p>Facet <code>multiple</code> can be configured per facet in the Searchspring Management Console to the following values:</p>
+				<p><code>single</code> - a facet can only contain a single active selection at any given time</p>
+				<p><code>or</code> - a facet can have multiple active selections and the filtered results will contain a result set that matches any selections. For example, selecting a &#39;shoe size&#39; facet value of &#39;12&#39; and &#39;12.5&#39; will yield results containing any shoe size of &#39;12&#39; or &#39;12.5&#39;</p>
+				<p><code>and</code> - a facet can have multiple active selections and the filtered results will contain a result set that matches all selected values. For example, selecting a &#39;color&#39; facet value of &#39;red&#39; and &#39;pink&#39; will yield results that contain both a &#39;color&#39; of &#39;red&#39; and &#39;pink&#39; variants</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99">FacetMultiple</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">SINGLE</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;single&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">OR</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;or&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">AND</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;and&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#overflow-property" id="overflow-property" style="color: inherit; text-decoration: none;">
+					<h3><code>overflow</code> property</h3>
+				</a>
+				<p>Only applicable to facets where <code>type</code> is <code>value</code> or <code>range-buckets</code></p>
+				<p>Facet overflow state to handle the &#39;show more&#39; facet functionality. </p>
+				<a href="#enabled-property" id="enabled-property" style="color: inherit; text-decoration: none;">
+					<h4><code>enabled</code> property</h4>
+				</a>
+				<p>Boolean containing the overflow active state</p>
+				<a href="#limited-property" id="limited-property" style="color: inherit; text-decoration: none;">
+					<h4><code>limited</code> property</h4>
+				</a>
+				<p>Boolean containing the saved overflow active state from StorageStore. This allows the state to be remembered across page navigation via StorageStore.</p>
+				<a href="#limit-property" id="limit-property" style="color: inherit; text-decoration: none;">
+					<h4><code>limit</code> property</h4>
+				</a>
+				<p>Number of values to display before overflow occurs</p>
+				<a href="#remaining-property" id="remaining-property" style="color: inherit; text-decoration: none;">
+					<h4><code>remaining</code> property</h4>
+				</a>
+				<p>Number of values remaining in the overflow.  <code>remaining = values.length - overflow.limit</code></p>
+				<a href="#setlimit-function" id="setlimit-function" style="color: inherit; text-decoration: none;">
+					<h4><code>setLimit</code> function</h4>
+				</a>
+				<p>Set limit value. This is the number of values to display before the remaining values overflow</p>
+				<pre><code class="language-typescript"><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">overflow</span><span style="color: #000000">.</span><span style="color: #795E26">setLimit</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#toggle-function" id="toggle-function" style="color: inherit; text-decoration: none;">
+					<h4><code>toggle</code> function</h4>
+				</a>
+				<p>Toggles collapse state. </p>
+				<p>Typical usage would be to invoke <code>toggle</code> when the &#39;show more/less&#39; is clicked.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">overflow</span><span style="color: #000000">.</span><span style="color: #795E26">toggle</span><span style="color: #000000">()</span>
+</code></pre>
+				<a href="#calculate-function" id="calculate-function" style="color: inherit; text-decoration: none;">
+					<h4><code>calculate</code> function</h4>
+				</a>
+				<p>Recalculates overflow state. Is also invoked when <code>setLimit</code> or <code>toggle</code> has been invoked.</p>
+				<h2 id="SearchStoreFilters">`filters` property</h2>
+				<p>Contains an array of filter object for the refined query requested to the Search API</p>
+				<a href="#filter-type-range-object" id="filter-type-range-object" style="color: inherit; text-decoration: none;">
+					<h3><code>filter</code> type <code>range</code> object</h3>
+				</a>
+				<p>Filter objects that contain a filter <code>type</code> of <code>range</code>, will have the following properties:</p>
+				<p><code>facet</code> - an object containing the following properties: <code>field</code> - facet field name &amp; <code>label</code> - facet label</p>
+				<p><code>value</code> - an object containing the following properties: <code>low</code> - facet low value &amp; <code>high</code> - facet high value &amp; <code>label</code> - facet label</p>
+				<p><code>label</code> - value label is prepended with facet label, ie. <code>`${filter.facet.label}: ${filter.value.label}`</code></p>
+				<p><code>url</code> - generated URL for this value</p>
+				<a href="#filter-type-value-or-range-buckets-object" id="filter-type-value-or-range-buckets-object" style="color: inherit; text-decoration: none;">
+					<h3><code>filter</code> type <code>value</code> or <code>range-buckets</code> object</h3>
+				</a>
+				<p>Filter objects that contain a filter <code>type</code> of <code>value</code> or <code>range-buckets</code>, will have the following properties:</p>
+				<p><code>facet</code> - an object containing the following properties: <code>field</code> - facet field name &amp; <code>label</code> - facet label</p>
+				<p><code>value</code> - an object containing the following properties: <code>value</code> - facet value &amp; <code>label</code> - facet label</p>
+				<p><code>label</code> - value label is prepended with facet label, ie. <code>`${filter.facet.label}: ${filter.value.label}`</code></p>
+				<p><code>url</code> - generated URL for this value</p>
+				<h2 id="SearchStoreResults">`results` property</h2>
+				<p>Contains an array of products that matched the query to the Search API. This will also include any merchandising inline banners.</p>
+				<a href="#type-property" id="type-property" style="color: inherit; text-decoration: none;">
+					<h3><code>type</code> property</h3>
+				</a>
+				<p>The <code>type</code> property has two possible values:</p>
+				<ul>
+					<li><p><code>product</code> - a product entry</p>
+					</li>
+					<li><p><code>banner</code> - an inline banner entry</p>
+					</li>
+				</ul>
+				<a href="#id-property" id="id-property" style="color: inherit; text-decoration: none;">
+					<h3><code>id</code> property</h3>
+				</a>
+				<p>Internal product id.</p>
+				<p>If <code>type</code> is <code>banner</code>, id will be set to <code>`ssid-${banner.config.position.index}`</code></p>
+				<a href="#attributes-property" id="attributes-property" style="color: inherit; text-decoration: none;">
+					<h3><code>attributes</code> property</h3>
+				</a>
+				<p>Only applicable to results with <code>type</code> of <code>product</code>
+				Product attributes object. Will contain all attributes that have been indexed and enabled in the Searchspring Management Console</p>
+				<pre><code class="language-json"><span style="color: #A31515">&quot;attributes&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;intellisuggestData&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;eJwrTs4tNM9jYGBw1nV00Q031DW0MLMMYDAEQmMDBhMTMwOG9KLMFACyXAiS&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;intellisuggestSignature&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;25f3b12a880fa4342274c97a9c105f0736c026e71b12ca0a7b297e357b099b7d&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;ss_insights_quadrant&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Best Performer&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;gross_margin&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;70&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;ss_product_type&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Dress&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;keywords&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;off the shoulder&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;striped&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;stripes&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;stripe&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;open shoulder&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;open back&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;preppy&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;seersucker&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;white&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;white dress&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;white&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;summer&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;spring&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;color&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;White&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Navy&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Cream&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;dress_length_name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Mini&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;multi_colors&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;yes&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;pattern&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Stripe&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;description&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Are you Stripe Out of ideas for what to wear this weekend on that trip you&#039;ve got coming up with your friends? Afraid you&#039;ll be the odd one out and everyone else will be all cute and trendy and there you&#039;ll be ... not trendy and wearing the same old things you&#039;ve been wearing on this annual getaway for years? Lucky for you, here&#039;s the dress you&#039;ve been searching for. Doesn&#039;t matter what else you pack (it does, you&#039;ll want to continue to shop with us, we were just being nice) this is the piece that will set you apart from everyone else (that is absolutely true, you will be a Goddess among women). Take that, bad fashion moments of the past! Striped dress features 3/4 sleeve bell sleeves with a partially elastic/open back. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;title&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Stripe Out White Off-The-Shoulder Dress&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;ss_clicks&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;4141&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;saturation&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;low&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;color_family&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;White&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;sales_rank&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;4461&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;ss_sale_price&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;48&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;season&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Summer&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;ss_category_hierarchy&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Shop By Trend&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses&amp;gt;Casual Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Shop By Trend&amp;gt;Spring Preview&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses&amp;gt;Shop by Color&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses&amp;gt;Print Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Gifts for Her&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Shop By Trend&amp;gt;Off The Shoulder Trend&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Gifts for Her&amp;gt;Gifts Under $50&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses&amp;gt;Shop by Color&amp;gt;White Dresses&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;on_sale&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;No&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;condition&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;New&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;product_type&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses &amp;gt; Shop by Color &amp;gt; White Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses &amp;gt; Shop by Color&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses &amp;gt; Print Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Shop By Trend &amp;gt; Off The Shoulder Trend&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Shop By Trend &amp;gt; Spring Preview&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;All Dresses &amp;gt; Casual Dresses&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Gifts for Her&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Gifts for Her &amp;gt; Gifts Under $50&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;brightness&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;high&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;size&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Small&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Medium&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Large&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;material&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cotton&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;days_since_published&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;8&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;dress_length&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;34&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;size_dress&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Small&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Medium&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;Large&quot;</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;quantity_available&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;13&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;popularity&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;4461&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;product_type_unigram&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;dress&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;7790a0f692035da40c8504e8b7a9f31d&quot;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#mappingscore-property" id="mappingscore-property" style="color: inherit; text-decoration: none;">
+					<h3><code>mappings.core</code> property</h3>
+				</a>
+				<p>Only applicable to results with <code>type</code> of <code>product</code></p>
+				<p>Core product attributes object</p>
+				<pre><code class="language-json"><span style="color: #A31515">&quot;mappings&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;core&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;uid&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;182146&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">48</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;msrp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">50</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;url&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;/product/C-AD-W1-1869P&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;thumbnailImageUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4468_copyright_reddressboutique_2017__thumb_med.jpg&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;imageUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Stripe Out White Off-The-Shoulder Dress&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;sku&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;C-AD-W1-1869P&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;brand&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Adrienne&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">},</span>
+</code></pre>
+				<a href="#custom-property-2" id="custom-property-2" style="color: inherit; text-decoration: none;">
+					<h3><code>custom</code> property</h3>
+				</a>
+				<p>This is an empty object that is available for custom store manipulation using the <a href="../snap-event-manager">EventManager</a></p>
+				<a href="#config-property" id="config-property" style="color: inherit; text-decoration: none;">
+					<h3><code>config</code> property</h3>
+				</a>
+				<p>Only applicable to results with <code>type</code> of <code>banner</code></p>
+				<p>Banner config object inherited from merchandising inline banner <code>config</code> object</p>
+				<a href="#value-property" id="value-property" style="color: inherit; text-decoration: none;">
+					<h3><code>value</code> property</h3>
+				</a>
+				<p>Only applicable to results with <code>type</code> of <code>banner</code></p>
+				<p>Banner value inherited from merchandising inline banner <code>value</code> property</p>
+				<h2 id="SearchStorePagination">`pagination` property</h2>
+				<p>Contains pagination information for the query that was requested from the Search API</p>
+				<a href="#page-property" id="page-property" style="color: inherit; text-decoration: none;">
+					<h3><code>page</code> property</h3>
+				</a>
+				<p>The current page</p>
+				<a href="#pagesize-property" id="pagesize-property" style="color: inherit; text-decoration: none;">
+					<h3><code>pageSize</code> property</h3>
+				</a>
+				<p>The number of products displayed per page</p>
+				<a href="#page-property-1" id="page-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>page</code> property</h3>
+				</a>
+				<p>The current page</p>
+				<a href="#pagesizeoptions-property" id="pagesizeoptions-property" style="color: inherit; text-decoration: none;">
+					<h3><code>pageSizeOptions</code> property</h3>
+				</a>
+				<p>An array of objects containing results per page options. Typically used in a <code>&lt;select&gt;</code> dropdown to change the number of results displayed per page</p>
+				<p><code>label</code> - label text to display</p>
+				<p><code>value</code> - number of results for this selection</p>
+				<p>Default values:</p>
+				<pre><code class="language-typescript"><span style="color: #000000">[</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">        </span><span style="color: #001080">label:</span><span style="color: #000000"> </span><span style="color: #A31515">`Show </span><span style="color: #0000FF">${</span><span style="color: #0000FF">this</span><span style="color: #000000FF">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">        </span><span style="color: #001080">label:</span><span style="color: #000000"> </span><span style="color: #A31515">`Show </span><span style="color: #0000FF">${</span><span style="color: #0000FF">this</span><span style="color: #000000FF">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #000000FF"> </span><span style="color: #000000">*</span><span style="color: #000000FF"> </span><span style="color: #098658">2</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #000000"> * </span><span style="color: #098658">2</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">        </span><span style="color: #001080">label:</span><span style="color: #000000"> </span><span style="color: #A31515">`Show </span><span style="color: #0000FF">${</span><span style="color: #0000FF">this</span><span style="color: #000000FF">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #000000FF"> </span><span style="color: #000000">*</span><span style="color: #000000FF"> </span><span style="color: #098658">3</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">defaultPageSize</span><span style="color: #000000"> * </span><span style="color: #098658">3</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">]</span>
+</code></pre>
+				<a href="#defaultpagesize-property" id="defaultpagesize-property" style="color: inherit; text-decoration: none;">
+					<h3><code>defaultPageSize</code> property</h3>
+				</a>
+				<p>The default number of results per page. Default is <code>24</code></p>
+				<a href="#totalresults-property" id="totalresults-property" style="color: inherit; text-decoration: none;">
+					<h3><code>totalResults</code> property</h3>
+				</a>
+				<p>The total result count</p>
+				<a href="#begin-getter" id="begin-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>begin</code> getter</h3>
+				</a>
+				<p>The number of the first product position on the current page.
+				For example, if the <code>pageSize</code> is <code>24</code> and the current page is <code>2</code>, <code>pagination.begin</code> will return <code>25</code></p>
+				<p>Calculation: </p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">pageSize</span><span style="color: #000000"> * (</span><span style="color: #001080">page</span><span style="color: #000000"> - </span><span style="color: #098658">1</span><span style="color: #000000">) + </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#end-getter" id="end-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>end</code> getter</h3>
+				</a>
+				<p>The number of the last product position on the current page.
+				For example, if the <code>pageSize</code> is <code>24</code> and the current page is <code>2</code>, <code>pagination.begin</code> will return <code>48</code></p>
+				<p>Calculation: </p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">pageSize</span><span style="color: #000000"> * </span><span style="color: #001080">page</span><span style="color: #000000"> &gt; </span><span style="color: #001080">totalResults</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">totalResults</span><span style="color: #000000">;</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">pageSize</span><span style="color: #000000"> * </span><span style="color: #001080">page</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#totalpages-getter" id="totalpages-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>totalPages</code> getter</h3>
+				</a>
+				<p>The total number of pages</p>
+				<p>Calculation:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #267F99">Math</span><span style="color: #000000">.</span><span style="color: #795E26">ceil</span><span style="color: #000000">(</span><span style="color: #001080">totalResults</span><span style="color: #000000"> / </span><span style="color: #001080">pageSize</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#multiplepages-getter" id="multiplepages-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>multiplePages</code> getter</h3>
+				</a>
+				<p>Boolean if there is more than 1 page</p>
+				<a href="#current-getter" id="current-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>current</code> getter</h3>
+				</a>
+				<p>Returns a <code>Page</code> object of the current page</p>
+				<a href="#first-getter" id="first-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>first</code> getter</h3>
+				</a>
+				<p>Returns a <code>Page</code> object of the first page</p>
+				<a href="#last-getter" id="last-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>last</code> getter</h3>
+				</a>
+				<p>Returns a <code>Page</code> object of the last page</p>
+				<a href="#next-getter" id="next-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>next</code> getter</h3>
+				</a>
+				<p>Returns a <code>Page</code> object of the next page</p>
+				<a href="#previous-getter" id="previous-getter" style="color: inherit; text-decoration: none;">
+					<h3><code>previous</code> getter</h3>
+				</a>
+				<p>Returns a <code>Page</code> object of the previous page</p>
+				<a href="#getpages-method" id="getpages-method" style="color: inherit; text-decoration: none;">
+					<h3><code>getPages</code> method</h3>
+				</a>
+				<p>Returns an array of <code>Page</code> objects</p>
+				<p>Typical usage to retrieve 5 pages:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">pages</span><span style="color: #000000"> = </span><span style="color: #795E26">getPages</span><span style="color: #000000">(</span><span style="color: #098658">5</span><span style="color: #000000">) </span><span style="color: #008000">// 1, 2, *3*, 4, 5</span>
+</code></pre>
+				<p>Typical usage to retrieve 2 pages to the left, and 5 pages to the right of the active page</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">pages</span><span style="color: #000000"> = </span><span style="color: #795E26">getPages</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">) </span><span style="color: #008000">// 2, 3, *4*, 5, 6, 7, 8</span>
+</code></pre>
+				<!-- TODO: confim example is correct -->
+				<a href="#setpagesize-method" id="setpagesize-method" style="color: inherit; text-decoration: none;">
+					<h3><code>setPageSize</code> method</h3>
+				</a>
+				<p>Sets <code>pageSize</code> and performs a query. Typical usage would be to invoke <code>setPageSize</code> on the <code>onChange</code> event the results per page dropdown</p>
+				<pre><code class="language-jsx"><span style="color: #000000">onChange={(e) =&gt; {</span>
+<span style="color: #000000">    pagination.setPageSize(e.target.value);</span>
+<span style="color: #000000">}}</span>
+</code></pre>
+				<a href="#page-object" id="page-object" style="color: inherit; text-decoration: none;">
+					<h3><code>Page</code> object</h3>
+				</a>
+				<p>A page object is returned when invoking the following getters/methods: <code>current</code>, <code>first</code>, <code>last</code>, <code>next</code>, <code>previous</code>, <code>getPages</code></p>
+				<a href="#number-property" id="number-property" style="color: inherit; text-decoration: none;">
+					<h4><code>number</code> property</h4>
+				</a>
+				<p>The number of the page</p>
+				<a href="#active-property-1" id="active-property-1" style="color: inherit; text-decoration: none;">
+					<h4><code>active</code> property</h4>
+				</a>
+				<p>Boolean if this page is the current page</p>
+				<a href="#url-property" id="url-property" style="color: inherit; text-decoration: none;">
+					<h4><code>url</code> property</h4>
+				</a>
+				<p>Set to an instance of UrlManager for the page. Typical usage is to use the <code>url.href</code> value as the <code>href</code> of a pagination option</p>
+				<a href="#key-property" id="key-property" style="color: inherit; text-decoration: none;">
+					<h4><code>key</code> property</h4>
+				</a>
+				<p>A unique value (set to <code>url.href</code>) available to use as a <code>key</code> prop when rendering <a href="https://reactjs.org/docs/lists-and-keys.html">react keys</a></p>
+				<h2 id="SearchStoreSorting">`sorting` property</h2>
+				<p>Contains sorting information that was requested from the Meta API</p>
+				<p><code>options</code> - an array of sorting Option objects</p>
+				<a href="#current-getter-1" id="current-getter-1" style="color: inherit; text-decoration: none;">
+					<h3><code>current</code> getter</h3>
+				</a>
+				<p>Returns an <code>Option</code> object of the current selected sort option</p>
+				<a href="#option-object" id="option-object" style="color: inherit; text-decoration: none;">
+					<h3><code>Option</code> object</h3>
+				</a>
+				<a href="#active-property-2" id="active-property-2" style="color: inherit; text-decoration: none;">
+					<h4><code>active</code> property</h4>
+				</a>
+				<p>Boolean set <code>true</code> if this option is the current selection</p>
+				<a href="#default-property" id="default-property" style="color: inherit; text-decoration: none;">
+					<h4><code>default</code> property</h4>
+				</a>
+				<p>Boolean set <code>true</code> if this option is the first selection</p>
+				<a href="#field-property" id="field-property" style="color: inherit; text-decoration: none;">
+					<h4><code>field</code> property</h4>
+				</a>
+				<p>The field name of the sorting option ie. &#39;ss_price&#39;</p>
+				<a href="#label-property" id="label-property" style="color: inherit; text-decoration: none;">
+					<h4><code>label</code> property</h4>
+				</a>
+				<p>Label of this sorting, ie. &#39;Price&#39;</p>
+				<a href="#direction-property" id="direction-property" style="color: inherit; text-decoration: none;">
+					<h4><code>direction</code> property</h4>
+				</a>
+				<p>Sorting direction. It will be one of two possible values:</p>
+				<p><code>asc</code> - ascending</p>
+				<p><code>desc</code> - descending</p>
+				<a href="#type-property-1" id="type-property-1" style="color: inherit; text-decoration: none;">
+					<h4><code>type</code> property</h4>
+				</a>
+				<p>Sorting type. Will be one of two possible values:</p>
+				<p><code>field</code> - the Option is sorting using a field</p>
+				<p><code>relevance</code> - the Option is sorting by relevance</p>
+				<a href="#value-property-1" id="value-property-1" style="color: inherit; text-decoration: none;">
+					<h4><code>value</code> property</h4>
+				</a>
+				<p>The value of the sorting Option, set to <code>`${option.field}:${option.direction}`</code>, ie. &#39;ss_price:asc&#39;</p>
+				<a href="#url-property-1" id="url-property-1" style="color: inherit; text-decoration: none;">
+					<h4><code>url</code> property</h4>
+				</a>
+				<p>Set to an instance of UrlManager for the sorting Option. </p>
+				<a href="#autocompletestore" id="autocompletestore" style="color: inherit; text-decoration: none;">
+					<h1>AutocompleteStore</h1>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AutocompleteStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AutocompleteStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">store</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#reset-method" id="reset-method" style="color: inherit; text-decoration: none;">
+					<h2><code>reset</code> method</h2>
+				</a>
+				<p>Reset store to the initial state by clearing data and locks</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AutocompleteStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">()</span>
+</code></pre>
+				<a href="#meta-property-1" id="meta-property-1" style="color: inherit; text-decoration: none;">
+					<h2><code>meta</code> property</h2>
+				</a>
+				<p>The meta property is an object containing the meta data retrieved from the Searchspring <a href="http://snapi.kube.searchspring.io/api/v1/#tag/Meta">Meta API</a></p>
+				<a href="#state-property" id="state-property" style="color: inherit; text-decoration: none;">
+					<h2><code>state</code> property</h2>
+				</a>
+				<p>Contains autocomplete lock state</p>
+				<p>A &quot;lock&quot; refers to a locked state of a certain component of autocomplete. There are two lock components of autocomplete:</p>
+				<p><code>state.locks.terms</code> - this becomes locked when a term&#39;s <code>preview</code> method is called, resulting in the terms not changing while the user interacts with the facets and results for the locked term. Without locking, Autocomplete API requests from user interaction would cause the terms to change unexpectedly</p>
+				<p><code>state.locks.facets</code>, similar to the terms lock, this prevents facets from changing when interacting with other facets</p>
+				<!-- TODO: explain locks better? -->
+				<a href="#locks-property" id="locks-property" style="color: inherit; text-decoration: none;">
+					<h3><code>locks</code> property</h3>
+				</a>
+				<p>The <code>locks</code> object contains two properties:</p>
+				<ul>
+					<li><p><code>terms</code> property contains a Lock object</p>
+					</li>
+					<li><p><code>facets</code> property contains a Lock object</p>
+					</li>
+				</ul>
+				<a href="#lock-object" id="lock-object" style="color: inherit; text-decoration: none;">
+					<h3><code>Lock</code> object</h3>
+				</a>
+				<p>A <code>Lock</code> object contains a private boolean state. The initial state can be defined in the constructor, default is <code>false</code></p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">lock</span><span style="color: #000000">;</span>
+<span style="color: #001080">lock</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Lock</span><span style="color: #000000">()</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+
+<span style="color: #001080">lock</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Lock</span><span style="color: #000000">(</span><span style="color: #0000FF">false</span><span style="color: #000000">)</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+<span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #795E26">lock</span><span style="color: #000000">()</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+<span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">();</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+
+<span style="color: #001080">lock</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Lock</span><span style="color: #000000">(</span><span style="color: #0000FF">true</span><span style="color: #000000">)</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+<span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #795E26">unlock</span><span style="color: #000000">()</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+<span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">();</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">locked</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+</code></pre>
+				<p>The following methods/getter are available:</p>
+				<a href="#reset-method-1" id="reset-method-1" style="color: inherit; text-decoration: none;">
+					<h4><code>reset</code> method</h4>
+				</a>
+				<p>Sets lock state to the original starting state when the Lock was constructed</p>
+				<a href="#lock-method" id="lock-method" style="color: inherit; text-decoration: none;">
+					<h4><code>lock</code> method</h4>
+				</a>
+				<p>Sets lock state to <code>true</code></p>
+				<a href="#unlock-method" id="unlock-method" style="color: inherit; text-decoration: none;">
+					<h4><code>unlock</code> method</h4>
+				</a>
+				<p>Sets lock state to <code>false</code></p>
+				<a href="#locked-getter" id="locked-getter" style="color: inherit; text-decoration: none;">
+					<h4><code>locked</code> getter</h4>
+				</a>
+				<p>Boolean <code>true</code> if the Lock state is locked</p>
+				<a href="#focusedinput-property" id="focusedinput-property" style="color: inherit; text-decoration: none;">
+					<h3><code>focusedInput</code> property</h3>
+				</a>
+				<p>Contains a reference to the current focused <code>HTMLInputElement</code></p>
+				<a href="#input-property" id="input-property" style="color: inherit; text-decoration: none;">
+					<h3><code>input</code> property</h3>
+				</a>
+				<p>Contains the currently focused input value being searched</p>
+				<a href="#url-property-2" id="url-property-2" style="color: inherit; text-decoration: none;">
+					<h3><code>url</code> property</h3>
+				</a>
+				<p>Contains a reference to the <a href="../snap-url-manager">UrlManager</a> that was linked using the <code>link</code> method</p>
+				<a href="#storage-property-1" id="storage-property-1" style="color: inherit; text-decoration: none;">
+					<h2><code>storage</code> property</h2>
+				</a>
+				<p>Contains a reference to the <a href="#StorageStore">StorageStore</a></p>
+				<!-- TODO: update link -->
+				<a href="#merchandising-property" id="merchandising-property" style="color: inherit; text-decoration: none;">
+					<h2><code>merchandising</code> property</h2>
+				</a>
+				<p>Contains redirect and banner merchandising data that the Search API returned. See <a href="#SearchStoreMerchandising">SearchStore <code>merchandising</code> property</a></p>
+				<a href="#search-property-2" id="search-property-2" style="color: inherit; text-decoration: none;">
+					<h2><code>search</code> property</h2>
+				</a>
+				<p>Contains an object with the following properties:</p>
+				<p><code>query</code> - query that was searched</p>
+				<p><code>originalQuery</code> - Original query if spell correction occurred</p>
+				<a href="#terms-property" id="terms-property" style="color: inherit; text-decoration: none;">
+					<h2><code>terms</code> property</h2>
+				</a>
+				<p>An array of Term objects.</p>
+				<a href="#term-object" id="term-object" style="color: inherit; text-decoration: none;">
+					<h3><code>Term</code> object</h3>
+				</a>
+				<p>Each <code>Term</code> object corresponds to a term returned from the Autocomplete API and/or Suggest API</p>
+				<a href="#active-property-3" id="active-property-3" style="color: inherit; text-decoration: none;">
+					<h3><code>active</code> property</h3>
+				</a>
+				<p>Boolean set to <code>true</code> when the term is active, such when invoking the <code>preview</code> method</p>
+				<a href="#value-property-2" id="value-property-2" style="color: inherit; text-decoration: none;">
+					<h3><code>value</code> property</h3>
+				</a>
+				<p>Term text value</p>
+				<a href="#url-property-3" id="url-property-3" style="color: inherit; text-decoration: none;">
+					<h3><code>url</code> property</h3>
+				</a>
+				<p>Set to an instance of UrlManager for the term</p>
+				<h3 id="AutocompletePreview">`preview` method</h3>
+				<p>Query API for the term that was previewed and displays results.
+				This will also lock the term state, and unlock facets state. </p>
+				<a href="#facets-property" id="facets-property" style="color: inherit; text-decoration: none;">
+					<h2><code>facets</code> property</h2>
+				</a>
+				<p>An array of facets. See <a href="#SearchFacets">Search Facets</a></p>
+				<p>In addition to all the search facets functionally, the Autocomplete facets will have an added <code>preview</code> method</p>
+				<a href="#preview-method" id="preview-method" style="color: inherit; text-decoration: none;">
+					<h3><code>preview</code> method</h3>
+				</a>
+				<p>See <a href="#AutocompletePreview">terms.preview</a> for <code>facets.preview</code> usage</p>
+				<a href="#filters-property" id="filters-property" style="color: inherit; text-decoration: none;">
+					<h2><code>filters</code> property</h2>
+				</a>
+				<p>See <a href="#SearchStoreFilters">SearchStore Filters</a></p>
+				<a href="#results-property" id="results-property" style="color: inherit; text-decoration: none;">
+					<h2><code>results</code> property</h2>
+				</a>
+				<p>See <a href="#SearchStoreResults">SearchStore Results</a></p>
+				<a href="#pagination-property" id="pagination-property" style="color: inherit; text-decoration: none;">
+					<h2><code>pagination</code> property</h2>
+				</a>
+				<p>See <a href="#SearchStorePagination">SearchStore Pagination</a></p>
+				<a href="#sorting-property" id="sorting-property" style="color: inherit; text-decoration: none;">
+					<h2><code>sorting</code> property</h2>
+				</a>
+				<p>See <a href="#SearchStoreSorting">SearchStore Sorting</a></p>
+				<a href="#finderstore" id="finderstore" style="color: inherit; text-decoration: none;">
+					<h1>FinderStore</h1>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">FinderStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FinderStore</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">store</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#meta-property-2" id="meta-property-2" style="color: inherit; text-decoration: none;">
+					<h2><code>meta</code> property</h2>
+				</a>
+				<p>The meta property is an object containing the meta data retrieved from the Searchspring <a href="http://snapi.kube.searchspring.io/api/v1/#tag/Meta">Meta API</a></p>
+				<a href="#pagination-property-1" id="pagination-property-1" style="color: inherit; text-decoration: none;">
+					<h2><code>pagination</code> property</h2>
+				</a>
+				<p>See <a href="#SearchStorePagination">SearchStore Pagination</a></p>
+				<a href="#selections-property" id="selections-property" style="color: inherit; text-decoration: none;">
+					<h2><code>selections</code> property</h2>
+				</a>
+				<p>An array of <code>Selection</code> and <code>SelectionHierarchy</code> objects. Each object represents a finder dropdown selection.</p>
+				<p>Both object types will have the following properties:</p>
+				<a href="#select-method" id="select-method" style="color: inherit; text-decoration: none;">
+					<h3><code>select</code> method</h3>
+				</a>
+				<p>The <code>select</code> method should be invoked when a selection has been made, such as in the onChange event of a <code>&lt;select&gt;</code> element</p>
+				<pre><code class="language-jsx"><span style="color: #000000">{selections.map((selection) =&gt; {</span>
+<span style="color: #000000">    &lt;select onChange={(e) =&gt; {</span>
+<span style="color: #000000">        selection.select(e.target.value)</span>
+<span style="color: #000000">    }}&gt;</span>
+<span style="color: #000000">        {selection.values.map((value) =&gt; {</span>
+<span style="color: #000000">            &lt;option value={value}&gt;{value}&lt;/option&gt;</span>
+<span style="color: #000000">        })}</span>
+<span style="color: #000000">    &lt;/select&gt;</span>
+<span style="color: #000000">})}</span>
+</code></pre>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">value</span><span style="color: #000000"> = </span><span style="color: #001080">selections</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">].</span><span style="color: #001080">values</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]</span>
+<span style="color: #001080">selections</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">].</span><span style="color: #795E26">select</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">)</span>
+</code></pre>
+				<h3 id="FinderStoreSelectionsConfig">`config` property</h3>
+				<p>A reference to the selection config object that was provided to the <a href="../snap-controller/#FinderController">FinderController</a></p>
+				<a href="#data-property" id="data-property" style="color: inherit; text-decoration: none;">
+					<h3><code>data</code> property</h3>
+				</a>
+				<p>A reference to the data stored in the <a href="#StorageStore">StorageStore</a> for this selection</p>
+				<a href="#storage-property-2" id="storage-property-2" style="color: inherit; text-decoration: none;">
+					<h3><code>storage</code> property</h3>
+				</a>
+				<p>A reference to the <a href="#StorageStore">StorageStore</a></p>
+				<a href="#controller-property" id="controller-property" style="color: inherit; text-decoration: none;">
+					<h3><code>controller</code> property</h3>
+				</a>
+				<p>A reference to the <a href="../snap-controller/#FacetController">FacetController</a></p>
+				<a href="#type-property-2" id="type-property-2" style="color: inherit; text-decoration: none;">
+					<h3><code>type</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsType">facet.type</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#field-property-1" id="field-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>field</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsField">facet.field</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#filtered-property" id="filtered-property" style="color: inherit; text-decoration: none;">
+					<h3><code>filtered</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsFiltered">facet.filtered</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#collapse-property" id="collapse-property" style="color: inherit; text-decoration: none;">
+					<h3><code>collapse</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsCollapse">facet.collapse</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#display-property" id="display-property" style="color: inherit; text-decoration: none;">
+					<h3><code>display</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsDisplay">facet.display</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#label-property-1" id="label-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>label</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsLabel">facet.label</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#multiple-property" id="multiple-property" style="color: inherit; text-decoration: none;">
+					<h3><code>multiple</code> property</h3>
+				</a>
+				<p>Inherited from <a href="#SearchFacetsMultiple">facet.multiple</a> of the facet name that was provided in the <a href="#FinderStoreSelectionsConfig">config</a></p>
+				<a href="#id-property-1" id="id-property-1" style="color: inherit; text-decoration: none;">
+					<h3><code>id</code> property</h3>
+				</a>
+				<p>A reference to the <code>id</code> property on the config that was provided to the <a href="../snap-controller/#FinderController">FinderController</a></p>
+				<a href="#disabled-property" id="disabled-property" style="color: inherit; text-decoration: none;">
+					<h3><code>disabled</code> property</h3>
+				</a>
+				<p>Boolean set to <code>true</code> if this selection is disabled. A <code>Selection</code> object will be disabled if it does not contain any values. A <code>SelectionHierarchy</code> object will be disabled to enforce the user selects dropdowns in hierarchical order, or there are no further selections available</p>
+				<a href="#selected-property" id="selected-property" style="color: inherit; text-decoration: none;">
+					<h3><code>selected</code> property</h3>
+				</a>
+				<p>Contains the value of the selection that was made. </p>
+				<a href="#custom-property-3" id="custom-property-3" style="color: inherit; text-decoration: none;">
+					<h3><code>custom</code> property</h3>
+				</a>
+				<p>This is an empty object that is available for custom store manipulation using the <a href="../snap-event-manager">EventManager</a></p>
+				<a href="#storagestore" id="storagestore" style="color: inherit; text-decoration: none;">
+					<h1>StorageStore</h1>
+				</a>
+				<p>An interface for storing data in the browser session storage, local storage, cookies, or memory</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">StorageStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;session&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ss-storage&#039;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">storage</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">StorageStore</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;path&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sessionData</span><span style="color: #000000"> = </span><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">() </span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">sessionData</span><span style="color: #000000">) </span><span style="color: #008000">// { &#039;ss-storage&#039;: { &#039;path&#039;: &#039;value&#039; } }</span>
+
+<span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;path&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// &#039;value&#039;</span>
+</code></pre>
+				<a href="#config-object" id="config-object" style="color: inherit; text-decoration: none;">
+					<h2><code>config</code> object</h2>
+				</a>
+				<p>If <code>config</code> is not provided, storage will be saved to its internal <code>state</code> object</p>
+				<p><code>type</code> - the type of storage to use: <code>session</code>, <code>local</code>, or <code>cookie</code></p>
+				<p><code>key</code> - root level key prefix, default is &#39;ss-storage&#39;</p>
+				<p><code>cookie</code> - cookie config object, only required if type is <code>cookie</code></p>
+				<p><code>cookie.expiration</code> - cookie expiration in ms, default is 31536000000 (1 year)</p>
+				<p><code>cookie.sameSite</code> - cookie sameSite attribute, allows you to declare if cookies should be restricted to a first-party or same-site context, default is undefined</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;cookie&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ss-storage&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">cookie:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">expiration:</span><span style="color: #000000"> </span><span style="color: #098658">31536000000</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">sameSite:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">}    </span>
+</code></pre>
+				<a href="#set-method" id="set-method" style="color: inherit; text-decoration: none;">
+					<h2><code>set</code> method</h2>
+				</a>
+				<p>Accepts a path and value to save to storage</p>
+				<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">`facet.values`</span><span style="color: #000000">, </span><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">values</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#get-method" id="get-method" style="color: inherit; text-decoration: none;">
+					<h2><code>get</code> method</h2>
+				</a>
+				<p>Retrieves a value by path from storage</p>
+				<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">`facet.values`</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>It is also possible to retrieve the entire storage without providing a path:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">()</span>
+</code></pre>
+				<a href="#clear-method" id="clear-method" style="color: inherit; text-decoration: none;">
+					<h2><code>clear</code> method</h2>
+				</a>
+				<p>Clears all data from storage</p>
+				<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">clear</span><span style="color: #000000">()</span>
+</code></pre>
+				<a href="#state-property-1" id="state-property-1" style="color: inherit; text-decoration: none;">
+					<h2><code>state</code> property</h2>
+				</a>
+				<p>If a config has not been provided, the StorageStore will manage its <code>state</code> object instead of using session storage, local storage, or cookies. </p>
+				<p>This <code>state</code> object can be accessed directly:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #001080">state</span>
+</code></pre>
+				<a href="#type-property-3" id="type-property-3" style="color: inherit; text-decoration: none;">
+					<h2><code>type</code> property</h2>
+				</a>
+				<p>The type of storage that was provided in the <code>config.type</code> property</p>
+				<a href="#key-property-1" id="key-property-1" style="color: inherit; text-decoration: none;">
+					<h2><code>key</code> property</h2>
+				</a>
+				<p>The key prefix that was provided in the <code>config.key</code> property</p>
+				<a href="#expiration-property" id="expiration-property" style="color: inherit; text-decoration: none;">
+					<h2><code>expiration</code> property</h2>
+				</a>
+				<p>The cookie expiration that was provided in the <code>config.cookie.expiration</code> property</p>
+				<a href="#samesite-property" id="samesite-property" style="color: inherit; text-decoration: none;">
+					<h2><code>sameSite</code> property</h2>
+				</a>
+				<p>The cookie sameSite attribute that was provided in the <code>config.cookie.sameSite</code> property</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/abstractstore.html" class="tsd-kind-icon">Abstract<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/autocompletestore.html" class="tsd-kind-icon">Autocomplete<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/finderstore.html" class="tsd-kind-icon">Finder<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/searchstore.html" class="tsd-kind-icon">Search<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/storagestore.html" class="tsd-kind-icon">Storage<wbr>Store</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
