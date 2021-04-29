@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2021-04-29)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+### Features
+
+* hide control column of ArgsTable on docs tab using css ([#16](https://github.com/searchspring/snap/issues/16)) ([63f0194](https://github.com/searchspring/snap/commit/63f0194a8aa2aebc4cbb6af235e85dfb47ee7e68))
+
+
+### Reverts
+
+* revert removing version from each package.json ([a0471de](https://github.com/searchspring/snap/commit/a0471dee9794c7044bd0231d645de3a831983a52))
+
+
+
+
+
 ## 0.0.23 (2021-04-28)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
