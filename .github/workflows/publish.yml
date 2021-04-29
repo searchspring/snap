@@ -45,6 +45,9 @@ jobs:
 
       - name: Tests
         run: npm run test
+      
+      - name: Build Docs
+        run: npm run build:docs && git add -A packages/snap-*/docs/
 
       - name: Publish changed package(s) to Github using lerna
         run: npm run publish
