@@ -20,7 +20,7 @@ export class FacetStore extends Array {
 					return new ValueFacet(controller, storage, facet, facetMeta);
 			}
 		});
-
+		console.log('test');
 		super(...facets);
 	}
 }
