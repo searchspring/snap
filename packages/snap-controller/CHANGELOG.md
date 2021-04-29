@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/searchspring/snap/compare/v0.1.0...v0.1.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* remove test code ([e005ebd](https://github.com/searchspring/snap/commit/e005ebdf3395acca43469aa4ad8d18842b491f2f))
+
+
+
+
+
+# 0.1.0 (2021-04-29)
+
+
+### Bug Fixes
+
+* fix translator configs and hybrid range ([#9](https://github.com/searchspring/snap/issues/9)) ([ac43573](https://github.com/searchspring/snap/commit/ac43573266c63592d6f83ccb08f9860cd59c4cca))
+
+
+### Reverts
+
+* revert removing version from each package.json ([a0471de](https://github.com/searchspring/snap/commit/a0471dee9794c7044bd0231d645de3a831983a52))
+
+
+
+
+
 ## 0.0.20 (2021-04-28)
 
 **Note:** Version bump only for package @searchspring/snap-controller
