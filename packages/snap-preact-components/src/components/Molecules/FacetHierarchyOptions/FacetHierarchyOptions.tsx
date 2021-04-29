@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
-import { ComponentProps, ValueFacetHierarchyValue } from '../../../types';
+import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
 	list: ({ style }) =>
@@ -84,7 +84,7 @@ export const FacetHierarchyOptions = observer(
 
 		const { values, hideCount, onClick, disableStyles, className, style } = props;
 		const colorPalette = theme.colors ? theme.colors : defaultTheme.colors;
-
+		
 		return (
 			values?.length && (
 				<div css={!disableStyles && CSS.list({ style })} className={classnames('ss-hierarchy', className)}>
@@ -116,7 +116,7 @@ export const FacetHierarchyOptions = observer(
 	}
 );
 export interface FacetHierarchyOptionsProps extends ComponentProps {
-	values: ValueFacetHierarchyValue[];
+	values: HierarchyFacetValue[];
 	hideCount?: boolean;
 	onClick?: (e: Event) => void;
 }
