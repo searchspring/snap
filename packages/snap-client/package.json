@@ -1,0 +1,27 @@
+{
+	"name": "@searchspring/snap-client",
+	"version": "0.0.1",
+	"description": "Snap Client",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"author": "Searchspring",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/searchspring"
+	},
+	"scripts": {
+		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"dev": "tsc --watch",
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"devDependencies": {
+		"@searchspring/snapi-types": "^0.1.16"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist/**/*"
+	]
+}
