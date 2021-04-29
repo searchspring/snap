@@ -47,7 +47,10 @@ jobs:
         run: npm run test
       
       - name: Build Docs
-        run: npm run build:docs && git add -A packages/snap-*/docs/
+        run: |
+          npm run build:docs 
+          git add -A packages/snap-*/docs/ 
+          git commit -m "chore(docs):\ generation"
 
       - name: Publish changed package(s) to Github using lerna
         run: npm run publish
