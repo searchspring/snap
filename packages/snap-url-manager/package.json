@@ -1,6 +1,5 @@
 {
 	"name": "@searchspring/snap-url-manager",
-	"version": "0.0.29",
 	"description": "Snap URL Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",

@@ -1,6 +1,5 @@
 {
 	"name": "@searchspring/snap-preact-components",
-	"version": "0.0.23",
 	"description": "Snap Preact Component Library",
 	"author": "Searchspring",
 	"license": "ISC",

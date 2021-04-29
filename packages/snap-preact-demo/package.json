@@ -1,6 +1,5 @@
 {
 	"name": "@searchspring/snap-preact-demo",
-	"version": "1.0.15",
 	"description": "",
 	"main": "index.js",
 	"publishConfig": {
