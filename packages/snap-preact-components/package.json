@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-preact-components",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Snap Preact Component Library",
 	"author": "Searchspring",
 	"license": "ISC",
@@ -37,7 +37,7 @@
 	"devDependencies": {
 		"@mdx-js/loader": "^1.6.22",
 		"@searchspring/snap-client-javascript": "^1.0.20",
-		"@searchspring/snap-controller": "0.1.0",
+		"@searchspring/snap-controller": "^0.1.1",
 		"@searchspring/snap-event-manager": "0.1.0",
 		"@searchspring/snap-logger": "0.1.0",
 		"@searchspring/snap-profiler": "0.1.0",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/searchspring/snap/compare/v0.1.0...v0.1.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* remove test code ([e005ebd](https://github.com/searchspring/snap/commit/e005ebdf3395acca43469aa4ad8d18842b491f2f))
+
+
+
+
+
 # 0.1.0 (2021-04-29)
 
 
