@@ -96,18 +96,146 @@ import { ThemeProvider, Button } from '@searchspring/snap-preact-components'
 ```
 
 ### Component Theme
-The `theme` prop is available on all components and allows for theming of a single component. This will overwrite any global theme props.
+The `theme` prop is available on all components and allows for theming of a single component. 
+
+The component `theme` is merged with the global theme, therefore component theme props will overwrite any common props on the global theme object.
+
+In the following example, the `<Button />` component will contain `color={'green'}` from `propTheme` and `native={true}` from `globalTheme`
 
 ```typescript
-const propTheme = {
+const globalTheme = {
 	components: {
 		button: {
 			color: 'blue',
+			native: true
+		},
+	},
+};
+const propTheme = {
+	components: {
+		button: {
+			color: 'green',
 		},
 	},
 };
 ```
 
 ```jsx
-<Button content={'click me!'} theme={propTheme} />
+
+<ThemeProvider theme={globalTheme}>
+    <Button content={'click me!'} theme={propTheme} />
+</ThemeProvider>
+```
+
+
+### Component Style
+The `style` prop is available on all components and allows for styling of components at the global (via the `theme` prop) or at the component level (via the `style` prop)
+
+Styles are applied to the root element of the component and uses CSS object syntax.
+
+Standard CSS:
+```css
+{
+	background-color: red;
+	color: #cccccc;
+}
+```
+
+In CSS object syntax, properties are camel case and `'-'` are removed:
+```typescript
+{ 
+	backgroundColor: '#ffff00',
+	color: '#cccccc',
+}
+```
+
+<!-- TODO: once classnames are standardized, document how to target sub elements -->
+
+Global level styling via `theme` prop:
+
+```typescript
+const globalTheme = {
+	components: {
+		button: {
+			style: {
+				backgroundColor: '#ffff00',
+				color: '#cccccc'
+			}
+		},
+	},
+};
+```
+
+```jsx
+<ThemeProvider theme={globalTheme}>
+    <Button content={'click me!'} />
+</ThemeProvider>
+```
+
+Component level styling via `style` prop:
+
+```typescript
+const buttonStyles = {
+	backgroundColor: '#ffff00',
+	color: '#cccccc'
+};
+```
+
+```jsx
+<Button content={'click me!'} style={buttonStyles} />
+```
+
+### Disable Component Styles
+The `disableStyles` prop is available on all components and allows for disabling all styles of the component, including any styles being applied at the global or component level. 
+
+This can be done at the global level:
+
+```typescript
+const globalTheme = {
+	components: {
+		button: {
+			disableStyles: true,
+	},
+};
+```
+
+```jsx
+<ThemeProvider theme={globalTheme}>
+    <Button content={'click me!'} />
+</ThemeProvider>
+```
+
+Or at the component level:
+
+```jsx
+<Button content={'click me!'} disableStyles={true} />
+```
+
+
+### Component Class Names
+The `className` prop is available on all components and allows for adding a class to the root level class list of a component. 
+
+By default, all components will contain a class name of `ss-${componentname}`, for example `'ss-button'`
+
+This can be done at the global level:
+
+```typescript
+const globalTheme = {
+	components: {
+		button: {
+			className: 'my-btn-class',
+	},
+};
+```
+
+```jsx
+<ThemeProvider theme={globalTheme}>
+    <Button content={'click me!'} />
+</ThemeProvider>
+```
+
+Or at the component level:
+
+```jsx
+<Button content={'click me!'} className={'my-btn-class'} />
 ```

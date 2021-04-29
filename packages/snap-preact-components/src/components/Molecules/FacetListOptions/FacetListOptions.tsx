@@ -36,7 +36,7 @@ const CSS = {
 		css({
 			marginLeft: '8px',
 			'&$filtered': {
-				color: theme.colors.primary,
+				color: theme.colors?.primary,
 			},
 		}),
 	countLabel: ({ theme }) =>
@@ -44,7 +44,7 @@ const CSS = {
 			fontSize: '10px',
 			marginLeft: '2px',
 			'&$filtered': {
-				color: theme.colors.primary,
+				color: theme.colors?.primary,
 			},
 		}),
 };

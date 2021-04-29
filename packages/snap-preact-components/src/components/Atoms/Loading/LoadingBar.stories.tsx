@@ -34,24 +34,24 @@ export default {
 			control: { type: 'boolean' },
 		},
 		color: {
-			defaultValue: defaultTheme.colors.primary,
+			defaultValue: defaultTheme.colors?.primary,
 			description: 'Bar color',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: defaultTheme.colors.primary },
+				defaultValue: { summary: defaultTheme.colors?.primary },
 			},
 			control: { type: 'color' },
 		},
 		backgroundColor: {
-			defaultValue: defaultTheme.colors.secondary,
+			defaultValue: defaultTheme.colors?.secondary,
 			description: 'Background color',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: defaultTheme.colors.secondary },
+				defaultValue: { summary: defaultTheme.colors?.secondary },
 			},
 			control: { type: 'color' },
 		},
