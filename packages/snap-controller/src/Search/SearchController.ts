@@ -27,6 +27,7 @@ export class SearchController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		console.log('.');
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on(
