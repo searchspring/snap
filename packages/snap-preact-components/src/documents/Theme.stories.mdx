@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import searchspringLogo from '../assets/searchspring-logo.svg';
+
+<Meta title="Doumentation/Theme" />
+
+<style>{`
+	.header {
+		display: flex;
+		align-items: center;
+	}
+
+	.header .subtitle {
+		text-transform: uppercase;
+		color: #00cee1;
+	}
+
+	.header img {
+			width: 300px;
+			margin-right: 20px;
+		}
+`}</style>
+
+<div class="header">
+	<img src={searchspringLogo} />
+	<span class="subtitle">SNAP PREACT COMPONENETS</span>
+</div>
+
+---
+
+<br/>
+
+
+## Theme
+Snap components allows for theming at both the global and component level.
+
+### Theme object
+A theme object contains a `components` object with 1 or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.
+
+For example, this `globalTheme` theme object will apply the prop `color={'blue'}` for all `<Button />` components and `hideCount={false}` for all `<facetListOptions />` components.
+
+```typescript
+const globalTheme = {
+	components: {
+		button: {
+			color: 'blue',
+		},
+		facetListOptions: {
+			hideCount: false,
+		},
+	},
+};
+```
+
+If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:
+
+```typescript
+const globalTheme = {
+	components: {
+		facetListOptions: {
+			hideCount: false,
+			theme: {
+				components: {
+					checkbox: {
+						native: true
+					}
+				}
+			}
+		}
+	}
+};
+```
+
+The theme object also contains primary and secondary colors used throughout components:
+
+```typescript
+const globalTheme = {
+	colors: {
+		primary: '#3A23AD',
+		secondary: '#FFF',
+	},
+	components: {}
+}
+```
+
+### ThemeProvider
+Using a ThemeProvider applies a global theme to all its children components
+
+```typescript
+import { ThemeProvider, Button } from '@searchspring/snap-preact-components'
+```
+
+```jsx
+<ThemeProvider theme={globalTheme}>
+	<Button content={'click me!'} />
+</ThemeProvider>
+```
+
+### Component Theme
+The `theme` prop is available on all components and allows for theming of a single component. This will overwrite any global theme props.
+
+```typescript
+const propTheme = {
+	components: {
+		button: {
+			color: 'blue',
+		},
+	},
+};
+```
+
+```jsx
+<Button content={'click me!'} theme={propTheme} />
+```

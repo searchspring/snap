@@ -22,7 +22,7 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				color: color || theme.colorPrimary || '#333',
+				color: color || theme.colors.primary || '#333',
 			},
 			'& .ss-dropdown': {
 				'&.ss-open': {
@@ -48,7 +48,7 @@ const CSS = {
 		}),
 	showMore: ({ theme }) =>
 		css({
-			color: theme.colorPrimary,
+			color: theme.colors.primary,
 			display: 'block',
 			textAlign: 'right',
 			margin: '8px',
@@ -161,7 +161,7 @@ export const Facet = observer(
 				// default props
 				className: 'ss-facet__button-icon',
 				size: '12px',
-				color: iconColor || color || theme.colorPrimary || '#333',
+				color: iconColor || color || theme.colors.primary || '#333',
 				// global theme
 				...globalTheme?.components?.icon,
 				// inherited props
@@ -216,7 +216,7 @@ export const Facet = observer(
 						>
 							<Icon
 								icon={(facet as ValueFacet).overflow.remaining > 0 ? 'plus' : 'minus'}
-								color={defaultTheme.colorPrimary}
+								color={defaultTheme.colors.primary}
 								size="10px"
 								css={!disableStyles && CSS.icon()}
 							/>

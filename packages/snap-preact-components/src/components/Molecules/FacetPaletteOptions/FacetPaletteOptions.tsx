@@ -68,7 +68,7 @@ const CSS = {
 			whiteSpace: 'nowrap',
 
 			'&.filtered': {
-				color: theme.colorPrimary,
+				color: theme.colors.primary,
 			},
 		}),
 };
@@ -125,9 +125,9 @@ export const FacetPaletteOptions = observer(
 				>
 					{values.map((value) => {
 						return (
-							<a 
-								css={!disableStyles && CSS.optionWrapper()} 
-								onClick={onClick} 
+							<a
+								css={!disableStyles && CSS.optionWrapper()}
+								onClick={onClick}
 								onFocus={() => {
 									previewOnFocus && value.preview && value.preview();
 								}}
