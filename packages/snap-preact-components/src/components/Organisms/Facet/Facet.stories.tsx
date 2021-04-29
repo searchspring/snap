@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
+import { Title, Primary, ArgsTable, Stories, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Facet, FacetProps } from './Facet';
 import { iconPaths } from '../../Atoms/Icon';
@@ -7,9 +8,22 @@ import { FacetDisplay } from '../../../types';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
+// @ts-ignore
+import Readme from '../Facet/readme.md';
+
 export default {
 	title: `Organisms/Facet`,
 	component: Facet,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>
@@ -176,7 +190,7 @@ Grid.loaders = [
 
 const ObservableHierarchyFacet = observer(({ args, controller }) => {
 	const facet = controller?.store?.facets.filter((facet) => facet.display === FacetDisplay.HIERARCHY).shift();
-		return <Facet {...args} facet={facet} />;
+	return <Facet {...args} facet={facet} />;
 });
 
 const HierarchyTemplate = (args: FacetProps, { loaded: { controller } }) => <ObservableHierarchyFacet args={args} controller={controller} />;

@@ -8,7 +8,7 @@ import { ThemeProvider } from '../../../providers/theme';
 
 describe('Dropdown Component', () => {
 	it('renders', () => {
-		const rendered = render(<Dropdown />);
+		const rendered = render(<Dropdown button={'open me'} />);
 
 		const dropdownElement = rendered.container.querySelector('.ss-dropdown');
 		expect(dropdownElement).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Dropdown Component', () => {
 
 	it('renders with className prop', () => {
 		const className = 'classy';
-		const rendered = render(<Dropdown className={className} />);
+		const rendered = render(<Dropdown button={'open me'} className={className} />);
 
 		const dropdownElement = rendered.container.querySelector(`.ss-dropdown.${className}`);
 		expect(dropdownElement).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('Dropdown Component', () => {
 			padding: '20px',
 		};
 
-		const rendered = render(<Dropdown style={style} />);
+		const rendered = render(<Dropdown button={'open me'} style={style} />);
 		const dropdownElement = rendered.container.querySelector('.ss-dropdown');
 
 		const styles = getComputedStyle(dropdownElement);
@@ -46,7 +46,7 @@ describe('Dropdown Component', () => {
 
 	it('renders content prop', () => {
 		const contentText = 'this is the content';
-		const rendered = render(<Dropdown content={contentText} />);
+		const rendered = render(<Dropdown button={'open me'} content={contentText} />);
 
 		const buttonElement = rendered.getByText(contentText);
 		expect(buttonElement).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe('Dropdown Component', () => {
 
 	it('renders children prop', () => {
 		const child = 'this is the child';
-		const rendered = render(<Dropdown>{child}</Dropdown>);
+		const rendered = render(<Dropdown button={'open me'}>{child}</Dropdown>);
 
 		const buttonElement = rendered.getByText(child);
 		expect(buttonElement).toBeInTheDocument();
@@ -63,7 +63,11 @@ describe('Dropdown Component', () => {
 	it('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
-		const rendered = render(<Dropdown content={contentText}>{child}</Dropdown>);
+		const rendered = render(
+			<Dropdown button={'open me'} content={contentText}>
+				{child}
+			</Dropdown>
+		);
 
 		const buttonElement = rendered.getByText(contentText + child);
 		expect(buttonElement).toBeInTheDocument();
@@ -123,7 +127,7 @@ describe('Dropdown Component', () => {
 	it('fires onClick prop when clicked', () => {
 		const clickFn = jest.fn();
 
-		const rendered = render(<Dropdown onClick={clickFn} />);
+		const rendered = render(<Dropdown button={'open me'} onClick={clickFn} />);
 
 		const button = rendered.container.querySelector('.ss-dropdown__button');
 
@@ -134,7 +138,7 @@ describe('Dropdown Component', () => {
 	it('does not fire onClick prop when disabled', () => {
 		const clickFn = jest.fn();
 
-		const rendered = render(<Dropdown disabled onClick={clickFn} />);
+		const rendered = render(<Dropdown button={'open me'} disabled onClick={clickFn} />);
 
 		const button = rendered.container.querySelector('.ss-dropdown__button');
 
@@ -153,7 +157,7 @@ describe('Dropdown Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Dropdown />
+				<Dropdown button={'open me'} />
 			</ThemeProvider>
 		);
 
@@ -170,7 +174,7 @@ describe('Dropdown Component', () => {
 			},
 		};
 
-		const rendered = render(<Dropdown theme={propTheme} />);
+		const rendered = render(<Dropdown button={'open me'} theme={propTheme} />);
 
 		const dropdownElement = rendered.container.querySelector('.ss-dropdown');
 		expect(dropdownElement).toHaveClass(propTheme.components.dropdown.className);
@@ -195,7 +199,7 @@ describe('Dropdown Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Dropdown theme={propTheme} />
+				<Dropdown button={'open me'} theme={propTheme} />
 			</ThemeProvider>
 		);
 
@@ -208,7 +212,7 @@ describe('Dropdown Component', () => {
 		it('fires onToggle prop when clicked', () => {
 			const toggleFn = jest.fn();
 
-			const rendered = render(<Dropdown onToggle={toggleFn} />);
+			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} />);
 
 			const button = rendered.container.querySelector('.ss-dropdown__button');
 
@@ -219,7 +223,7 @@ describe('Dropdown Component', () => {
 		it('does not fire onToggle prop when disabled', () => {
 			const toggleFn = jest.fn();
 
-			const rendered = render(<Dropdown disabled onToggle={toggleFn} />);
+			const rendered = render(<Dropdown button={'open me'} disabled onToggle={toggleFn} />);
 
 			const button = rendered.container.querySelector('.ss-dropdown__button');
 
@@ -228,7 +232,7 @@ describe('Dropdown Component', () => {
 		});
 
 		it('starts closed', () => {
-			const rendered = render(<Dropdown />);
+			const rendered = render(<Dropdown button={'open me'} />);
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 
@@ -236,7 +240,7 @@ describe('Dropdown Component', () => {
 		});
 
 		it('can start open', () => {
-			const rendered = render(<Dropdown startOpen />);
+			const rendered = render(<Dropdown button={'open me'} startOpen />);
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 
@@ -246,7 +250,7 @@ describe('Dropdown Component', () => {
 		it('keeps its own internal state and passes it to onToggle', () => {
 			const toggleFn = jest.fn();
 
-			const rendered = render(<Dropdown onToggle={toggleFn} />);
+			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} />);
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 			const button = rendered.container.querySelector('.ss-dropdown__button');
@@ -265,7 +269,7 @@ describe('Dropdown Component', () => {
 		it('does not fire onToggle prop when clicked', () => {
 			const toggleFn = jest.fn();
 
-			const rendered = render(<Dropdown onToggle={toggleFn} open={true} />);
+			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} open={true} />);
 
 			const button = rendered.container.querySelector('.ss-dropdown__button');
 
@@ -274,12 +278,12 @@ describe('Dropdown Component', () => {
 		});
 
 		it('uses prop open for state', () => {
-			const rendered = render(<Dropdown open={true} />);
+			const rendered = render(<Dropdown button={'open me'} open={true} />);
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 			expect(dropdown).toHaveClass('ss-open');
 
-			rendered.rerender(<Dropdown open={false} />);
+			rendered.rerender(<Dropdown button={'open me'} open={false} />);
 			expect(dropdown).not.toHaveClass('ss-open');
 		});
 	});

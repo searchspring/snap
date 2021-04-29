@@ -1,27 +1,30 @@
-# Translators
+# UrlManager Translators
 
 This is general documentation for translators. Translator-specific documentation:
 
-- [Query string w/ pushState](query-string/README.md)
+- [UrlTranslator](Url/README.md)
+- [QueryStringTranslator](QueryString/README.md)
 
 ### Introduction
 
-UrlManager's are instantiated with a translator. Translators define the behavior of the UrlManager instance. They have a couple jobs:
+A `UrlManager` is instantiated with a translator. The `Translator` defines the behavior of the `UrlManager` instance. They have a couple jobs:
 
 1. get the current URL
 2. serialize and deserialize URL's
 3. provide configuration
 4. define `go` function behavior
 
-See the typescript interface:
+`Translator` typescript interface:
 
-```js
-interface UrlTranslator {
+```typescript
+interface Translator {
 	getCurrentUrl(): string;
-	getConfig(): Record<string, any>;
+	getConfig(): Record<string, unknown>;
 
-	serialize(state: UrlState): string;
+	serialize(state: UrlState | ImmutableObject<UrlState>): string;
 	deserialize(url: string): UrlState;
+
+	bindExternalEvents?(update: () => void): void;
 
 	go(url: string): void;
 }
@@ -29,15 +32,15 @@ interface UrlTranslator {
 
 ### Usage:
 
-Translators are passed in to UrlManager's during construction:
+A `Translator` is passed in to a `UrlManager` during construction:
 
 ```js
 import {
 	UrlManager,
-	QueryStringTranslator,
+	UrlTranslator,
 } from '@searchspring/snap-url-manager';
 
-const urlManager = new UrlManager(new QueryStringTranslator());
+const urlManager = new UrlManager(new UrlTranslator());
 ```
 
 ### Overriding default behavior
@@ -51,7 +54,6 @@ Consider this mock translator:
 
 let url = '';
 
-// Mocked for testing due to lack of `window` global
 class MockTranslator extends QueryStringTranslator {
 	getCurrentUrl() {
 		return url;
@@ -59,6 +61,14 @@ class MockTranslator extends QueryStringTranslator {
 
 	go(_url) {
 		url = _url;
+	}
+
+	serialize(state) {
+		return '#' + JSON.stringify(state);
+	}
+
+	deserialize(url) {
+		return JSON.parse(url.replace(/^#/, '') || '{}');
 	}
 }
 
@@ -78,8 +88,8 @@ class HashTranslator extends QueryStringTranslator {
 		return window.location.hash;
 	}
 
-	go(url) {
-		window.location.hash = url;
+	go(hash) {
+		window.location.hash = hash;
 	}
 
 	serialize(state) {
@@ -87,7 +97,7 @@ class HashTranslator extends QueryStringTranslator {
 	}
 
 	deserialize(url) {
-		return super.deserialize(url.split('#').pop());
+		return super.deserialize('?' + url.replace(/^\#?\/*/, ''));
 	}
 }
 ```
@@ -98,24 +108,36 @@ You may have noticed in the typescript interface, serialize takes a `UrlState` t
 
 This is to ensure a canonical internal state structure when performing transforms (`set`, `merge`, `remove`) on the UrlManager. The benefit of this is that implementation code knows what state format to expect, regardless of how an individual translator encodes the URLs.
 
-Typescript type for UrlState:
+Typescript type for `UrlState`:
 
-```js
-type UrlStateFilters = {
-	[fieldName: string]: Array<string>,
+```typescript
+enum RangeValueProperties {
+	LOW = 'low',
+	HIGH = 'high',
+}
+
+type UrlStateRangeValue = {
+	[RangeValueProperties.LOW]: number | null;
+	[RangeValueProperties.HIGH]: number | null;
+};
+
+type UrlStateFilterType = string | number | boolean | UrlStateRangeValue;
+
+type UrlStateFilter = {
+	[fieldName: string]: UrlStateFilterType | Array<UrlStateFilterType>;
 };
 
 type UrlStateSort = {
-	field: string,
-	direction: string,
+	field: string;
+	direction: string;
 };
 
 type UrlState = {
-	page?: number,
-	query?: string,
-	filter?: UrlStateFilters,
-	sort?: UrlStateSort | Array<UrlStateSort>,
-	[any: string]: any,
+	page?: number;
+	query?: string;
+	filter?: UrlStateFilter;
+	sort?: UrlStateSort | Array<UrlStateSort>;
+	[any: string]: unknown;
 };
 ```
 

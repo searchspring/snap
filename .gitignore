@@ -5,5 +5,4 @@ dist
 coverage
 packages/snap-preact-demo/tests/cypress/videos
 packages/snap-preact-demo/tests/cypress/screenshots
-packages/snap-preact-components/docs
 packages/snapps/*/

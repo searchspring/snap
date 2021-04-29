@@ -5,9 +5,24 @@ import { iconPaths } from '../../Atoms/Icon';
 
 import { componentArgs } from '../../../utilities';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Checkbox/readme.md';
+
 export default {
 	title: `Molecules/Checkbox`,
 	component: Checkbox,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		checked: {
 			description: 'Checkbox is checked (managed state)',

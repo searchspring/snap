@@ -26,7 +26,7 @@ class MockTranslator implements Translator {
 	}
 }
 
-describe('ReactLinker', () => {
+describe('reactLinker', () => {
 	it('generates href and onClick', () => {
 		const urlManager = new UrlManager(new MockTranslator());
 

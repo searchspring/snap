@@ -85,8 +85,8 @@ export const Facet = observer(
 			optionsLimitCount,
 			iconColor,
 			color,
-			previewOnFocus, 
-			mouseEvents,
+			previewOnFocus,
+			valueProps,
 			disableStyles,
 			className,
 			style,
@@ -114,7 +114,7 @@ export const Facet = observer(
 				...defined({
 					disableStyles,
 					previewOnFocus,
-					mouseEvents,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetHierarchyOptions,
@@ -128,7 +128,7 @@ export const Facet = observer(
 				...defined({
 					disableStyles,
 					previewOnFocus,
-					mouseEvents,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetListOptions,
@@ -142,7 +142,7 @@ export const Facet = observer(
 				...defined({
 					disableStyles,
 					previewOnFocus,
-					mouseEvents,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetGridOptions,
@@ -155,7 +155,7 @@ export const Facet = observer(
 				...defined({
 					disableStyles,
 					previewOnFocus,
-					mouseEvents,
+					valueProps,
 				}),
 				// component theme overrides
 				...props.theme?.components?.facetPaletteOptions,
@@ -195,14 +195,14 @@ export const Facet = observer(
 		return (
 			<div css={!disableStyles && CSS.facet({ disableCollapse, color, theme, style })} className={classnames('ss-facet', className)}>
 				<Dropdown
-					open={!facet?.collapse}
+					open={!facet?.collapsed}
 					onClick={(e) => {
 						!disableCollapse && facet?.toggleCollapse();
 					}}
 					button={
 						<div className={'ss-facet__header'}>
 							{facet?.label}
-							{!hideIcon && <Icon {...subProps.icon} icon={facet?.collapse ? iconExpand : iconCollapse} />}
+							{!hideIcon && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>
@@ -266,5 +266,5 @@ export interface FacetProps extends ComponentProps {
 	hideIcon?: boolean;
 	optionsLimitCount?: number;
 	previewOnFocus?: boolean;
-	mouseEvents?: any;
+	valueProps?: any;
 }

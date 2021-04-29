@@ -1,12 +1,24 @@
 import { h } from 'preact';
 
 import { Dropdown } from './Dropdown';
-
 import { componentArgs } from '../../../utilities';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+// @ts-ignore
+import Readme from '../Dropdown/readme.md';
 
 export default {
 	title: `Atoms/Dropdown`,
 	component: Dropdown,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		button: {
 			description: 'Button content to toggle the dropdown',

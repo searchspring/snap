@@ -4,11 +4,25 @@ import { iconPaths } from '../../Atoms/Icon';
 import { FilterSummary, FilterSummaryProps } from './FilterSummary';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../FilterSummary/readme.md';
 
 // TODO: cant seem to find a way to rerender the story component easily
 export default {
 	title: `Organisms/FilterSummary`,
 	component: FilterSummary,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		filters: {
 			description: 'Filters object',

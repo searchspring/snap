@@ -54,7 +54,7 @@ describe('Facet Component', () => {
 			const args = {
 				facet: searchResponse.facets.filter((facet) => facet.display === FacetDisplay.SLIDER).pop(),
 			};
-			args.facet.collapse = false;
+			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss-facet-options');
 			expect(facetElement).toBeInTheDocument();

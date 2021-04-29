@@ -18,13 +18,13 @@ describe('UrlTranslator', () => {
 
 	it('generates absolute URL if urlRoot provided', () => {
 		const url = 'http://example.com?bar=baz';
-		class CustomHybrid extends UrlTranslator {
+		class customTranslator extends UrlTranslator {
 			getCurrentUrl() {
 				return url;
 			}
 		}
 
-		const queryString = new CustomHybrid({ urlRoot: '//example2.com' });
+		const queryString = new customTranslator({ urlRoot: '//example2.com' });
 
 		const params = {
 			...queryString.deserialize(url),
@@ -45,13 +45,13 @@ describe('UrlTranslator', () => {
 		});
 
 		it('deserializes with query param override', () => {
-			const hybrid = new UrlTranslator({
+			const translator = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
 			const url = 'http://somesite.com?q=incorrect&search=correct&q=alsoincorrect#/filter:color:blue/filter:brand:nike/filter:brand:adidas';
 
-			const params: UrlState = hybrid.deserialize(url);
+			const params: UrlState = translator.deserialize(url);
 
 			expect(params.query).toBe('correct');
 
@@ -117,13 +117,13 @@ describe('UrlTranslator', () => {
 		});
 
 		it('deserializes with other hashParams', () => {
-			const hybrid = new UrlTranslator({
+			const translator = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
 			const url = 'http://somesite.com#/other:thing:3/thing';
 
-			const params: UrlState = hybrid.deserialize(url);
+			const params: UrlState = translator.deserialize(url);
 
 			expect(params.other).toEqual({ thing: ['3'] });
 			expect(params.thing).toEqual([]);
@@ -140,11 +140,11 @@ describe('UrlTranslator', () => {
 		});
 
 		it('serializes with query param override', () => {
-			const hybrid = new UrlTranslator({
+			const translator = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
-			const query = hybrid.serialize({
+			const query = translator.serialize({
 				query: 'the query',
 			});
 
@@ -168,15 +168,15 @@ describe('UrlTranslator', () => {
 				],
 			};
 
-			const hybrid = new UrlTranslator();
+			const translator = new UrlTranslator();
 
-			const query = hybrid.serialize(params);
+			const query = translator.serialize(params);
 
 			expect(query).toBe('?q=shoes&page=7#/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc');
 		});
 
 		it('serializes other state correctly (as hash params)', () => {
-			const hybrid = new UrlTranslator({
+			const translator = new UrlTranslator({
 				queryParameter: 'search',
 			});
 
@@ -191,7 +191,7 @@ describe('UrlTranslator', () => {
 				array: ['uno', 'dos', 'tres'],
 			};
 
-			expect(hybrid.serialize(params)).toBe('/#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
+			expect(translator.serialize(params)).toBe('/#/roots:trunk:branch:leaf:thing/array:uno/array:dos/array:tres');
 		});
 
 		it('serializes range filters correctly', () => {
@@ -237,9 +237,9 @@ describe('UrlTranslator', () => {
 					search: ['googs'],
 				},
 			};
-			const hybrid = new UrlTranslator(config);
+			const translator = new UrlTranslator(config);
 
-			const query = hybrid.serialize({
+			const query = translator.serialize({
 				query: 'the query',
 				sort: { field: 'price', direction: 'asc' },
 				ga: ['googs'],

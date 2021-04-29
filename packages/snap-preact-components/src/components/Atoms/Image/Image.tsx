@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRef, useEffect } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 
 import classnames from 'classnames';
 
@@ -61,18 +61,23 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const ImgRef = useRef(null);
 
-	useEffect(() => {
-		setVisibility(ImgRef, 'hidden');
-	}, [src]);
-
 	//this is mainly for storybook bug
 	if ((fallback && typeof fallback !== 'string') || !fallback) {
 		fallback = FALLBACK_IMAGE_URL;
 	}
 
+	//need to initially set the visibility to hidden whilst also keeping any styles passed in
+	let styling: any = !disableStyles && style;
+	//but what if there is no styling passed in?
+	if (styling) {
+		styling.visibility = 'hidden';
+	} else {
+		styling = { visibility: 'hidden' };
+	}
+
 	return (
 		<img
-			style={!disableStyles && style}
+			style={styling}
 			className={classnames('ss-image', className)}
 			src={src || fallback}
 			alt={alt}
@@ -80,7 +85,7 @@ export function Image(properties: ImageProps): JSX.Element {
 			ref={ImgRef}
 			loading="lazy"
 			onLoad={() => {
-				setVisibility(ImgRef);
+				setVisibility(ImgRef, 'visible');
 				onLoad && onLoad();
 			}}
 			onClick={onClick}

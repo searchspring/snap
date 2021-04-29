@@ -1,0 +1,18 @@
+/* hides 'control' column in ArgsTable on docs tab  */
+.docblock-argstable-head tr th:nth-child(1),
+.docblock-argstable-body tr td:nth-child(1) {
+    width: 20%!important;
+}
+.docblock-argstable-head tr th:nth-child(2),
+.docblock-argstable-body tr td:nth-child(2) {
+    width: 60%!important;
+}
+.docblock-argstable-head tr th:nth-child(3),
+.docblock-argstable-body tr td:nth-child(3) {
+    width: 20%!important;
+}
+.docblock-argstable-head tr th:nth-child(4),
+.docblock-argstable-body tr td:nth-child(4) {
+    display: none!important;
+    width: 0!important;
+}

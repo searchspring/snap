@@ -1,13 +1,26 @@
 import { h } from 'preact';
 
 import { Slider, SliderProps } from './Slider';
-
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Slider/readme.md';
 
 export default {
 	title: `Molecules/Slider`,
 	component: Slider,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div style={{ maxWidth: '300px' }}>

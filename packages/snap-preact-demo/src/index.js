@@ -3,7 +3,7 @@ import { h, Fragment, render } from 'preact';
 
 /* searchspring imports */
 import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client-javascript';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -137,13 +137,10 @@ cntrlr.init();
 // cntrlr.urlManager.set('query', 'blue').go();
 cntrlr.search();
 
-
 // for testing purposes
 window.sssnap = {
-	search: cntrlr
+	search: cntrlr,
 };
-
-
 
 /*
 	render targets

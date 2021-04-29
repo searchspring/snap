@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/searchspring/snap/compare/v0.1.0...v0.1.1) (2021-04-29)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# 0.1.0 (2021-04-29)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+### Features
+
+* hide control column of ArgsTable on docs tab using css ([#16](https://github.com/searchspring/snap/issues/16)) ([63f0194](https://github.com/searchspring/snap/commit/63f0194a8aa2aebc4cbb6af235e85dfb47ee7e68))
+
+
+### Reverts
+
+* revert removing version from each package.json ([a0471de](https://github.com/searchspring/snap/commit/a0471dee9794c7044bd0231d645de3a831983a52))
+
+
+
+
+
+## 0.0.23 (2021-04-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.22 (2021-04-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.21 (2021-04-27)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.20 (2021-04-26)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.19 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.18 (2021-04-23)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+
+
+
+## 0.0.17 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## 0.0.16 (2021-04-23)
+
+
+### Bug Fixes
+
+* **husky:** migrate v4 to v6 ([#15](https://github.com/searchspring/snap/issues/15)) ([1d15c8f](https://github.com/searchspring/snap/commit/1d15c8f24467bc91b28039db51c35c02199c0774))
+
+
+
+
+
+## 0.0.15 (2021-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
 ## 0.0.14 (2021-04-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

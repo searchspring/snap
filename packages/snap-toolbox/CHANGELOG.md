@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2021-04-29)
+
+
+### Reverts
+
+* revert removing version from each package.json ([a0471de](https://github.com/searchspring/snap/commit/a0471dee9794c7044bd0231d645de3a831983a52))
+
+
+
+
+
+## 0.0.38 (2021-04-28)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.37 (2021-04-28)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.36 (2021-04-27)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.35 (2021-04-26)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.34 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.33 (2021-04-23)
+
+
+### Bug Fixes
+
+* icon gallery hiding controls ([#19](https://github.com/searchspring/snap/issues/19)) ([20a9d24](https://github.com/searchspring/snap/commit/20a9d246408a404fcfe2ca7b27541a8215e60f79))
+
+
+
+
+
+## 0.0.32 (2021-04-23)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## 0.0.31 (2021-04-23)
+
+
+### Bug Fixes
+
+* **husky:** migrate v4 to v6 ([#15](https://github.com/searchspring/snap/issues/15)) ([1d15c8f](https://github.com/searchspring/snap/commit/1d15c8f24467bc91b28039db51c35c02199c0774))
+
+
+
+
+
+## 0.0.30 (2021-04-22)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
 ## 0.0.29 (2021-04-21)
 
 **Note:** Version bump only for package @searchspring/snap-toolbox

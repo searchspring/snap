@@ -4,10 +4,24 @@ import { observer } from 'mobx-react';
 import { Pagination, PaginationProps } from './Pagination';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+// @ts-ignore
+import Readme from '../Pagination/readme.md';
 
 export default {
 	title: `Molecules/Pagination`,
 	component: Pagination,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	argTypes: {
 		pagination: {
 			description: 'Pagination store reference',

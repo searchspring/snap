@@ -1,13 +1,28 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Facets, FacetsProps } from './Facets';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
+// @ts-ignore
+import Readme from '../Facets/readme.md';
+
 export default {
 	title: `Organisms/Facets`,
 	component: Facets,
+	parameters: {
+		docs: {
+			page: () => (
+				<div>
+					<Readme />
+					<ArgsTable story={PRIMARY_STORY} />
+				</div>
+			),
+		},
+	},
 	decorators: [
 		(Story) => (
 			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>

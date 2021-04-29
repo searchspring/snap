@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime.js'; // snap client expects regenerator-runtime to be available globally
 
-import SnapClient from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client-javascript';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -163,7 +163,7 @@ describe('Search Controller', () => {
 				logger: new Logger(),
 			});
 
-			controller.on(event, () => false); // return false to stop middlewear
+			controller.on(event, () => false); // return false to stop middleware
 			const spy = jest.spyOn(console, 'log');
 
 			controller.init();

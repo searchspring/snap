@@ -1,8 +1,7 @@
-# SNAP URL Manager
+# Snap URL Manager
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-The SNAP URL manager is a service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It's primary purpose is to provide a standard API to manage URL across SNAP products.
+The Snap URL manager is a service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It's primary purpose is to provide a standard API to manage URL across Snap products.
 
 ## Installation
 
@@ -13,19 +12,19 @@ npm install --save-dev @searchspring/url-manager
 ## Import
 
 ```js
-import { UrlManager, QueryStringTranslator } from '@searchspring/url-manager';
+import { UrlManager, UrlTranslator } from '@searchspring/url-manager';
 ```
 
 ## Usage
 
 ### Instantiation
 
-The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and pushState to modify the URL in the browser.
+The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.
 
-See [Translators](src/translators/README.md) for more info.
+See [Translators](src/Translators/README.md) for more info.
 
 ```js
-const urlManager = new UrlManager(new QueryStringTranslator());
+const urlManager = new UrlManager(new UrlTranslator());
 ```
 
 Depending on the translator, the instantiated url manager will automatically start tracking from the browser URL.
@@ -43,9 +42,9 @@ In this example, we first created a new url manager with internal state that ref
 We then updated the browser's address bar using `urlManager.go()` on the newly created url manager. Since the query string config translator is utilizing `location.pushState` behind the scenes,
 this is the mechanism behind which the browsers address bar is updated in this example.
 
-There are 3 functions to update one or more URL parameters: `merge`, `set`, and `remove` . These functions are called transforms.
+There are three functions to update one or more URL parameters: `set`, `merge` and `remove` . These functions are called transforms.
 
-When using `set`, other parameters will be clobbered and the URL will be set to exactly match the object passed in. `merge` and `set` both take an optional first parameter to specify a path.
+When using `set`, other parameters will be clobbered and the URL will be set to exactly match the object passed in. All transforms can specify a path as the first parameter.
 
 Paths can be expressed in either of these formats:
 `'some.longer.path'` or `['some', 'longer', 'path']`
@@ -89,14 +88,14 @@ urlManager.href;
 ### Many copies
 
 There may be cases where you want multiple URL states stored for various purposes. Since
-`set`, `merge`, and `remove` create modified copies, you can generate these as follows:
+`set`, `merge`, and `remove` create modified copies, instances can be created and utilized from multiple sources. Snap `stores` already handle the process of attaching `UrlManager' instances where needed, for example for pagination, facets, sorting, etc... Here is an example of how creating them for a facet's individual values might look:
 
 ```js
 const facetValuesWithUrls = (facet, facetValues) => {
 	return facetValues.map((facetValue) => {
 		return {
 			...facetValue,
-			url: urlManager.merge(['facet', facet.name], facetValue.value),
+			url: urlManager.merge(['facet', facet.field], facetValue.value),
 		};
 	});
 };
@@ -110,14 +109,14 @@ class FacetValue {
 		return (
 			<li>
 				<a
-					href="#"
+					href={ value.url.href }
 					onClick={(ev) => {
 						ev.preventDefault();
 
 						value.url.go();
 					}}
 				>
-					{value.value}
+					{value.label}
 				</a>
 			</li>
 		);
@@ -125,37 +124,44 @@ class FacetValue {
 }
 ```
 
-Using the query string translator, a macro is provided to make this cleaner to use with pushState:
+Since the `UrlTranslator` is utilizing `pushState` it is important to prevent the default behavior as shown in the `onClick` above. Each translator can be instantiated with a `Linker` to make this even easier:
+
+```js
+import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
+const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
+```
 
 ```js
 class FacetValue {
 	render({ facet, value }) {
 		return (
 			<li>
-				<a {...value.url.pushState}>{value.value}</a>
+				<a {...value.url.link}>{value.label}</a>
 			</li>
 		);
 	}
 }
 ```
 
+See [Linkers](src/linkers/README.md) for more info.
+
 ### Subscribe to URL changes:
 
 You can subscribe to URL changes like so:
 
 ```js
-urlManager.subscribe((new, old) => {
-	console.log({ new, old });
+urlManager.subscribe((prev, next) => {
+	console.log(prev, next);
 });
 ```
 
 This callback is executed any time one of the url manager's `go` function is called.
 
-The callback is passed 2 parameters: `new` and `old`.
+The callback is passed two parameters: `prev` and `next`.
 
-`new` is the new parameters from the browsers URL bar, as well as any transformations done to the `urlManager` instance after it was either instantiated or copied using another urlManager's `copy` function.
+`next` is the new state formed by a combination of the browsers URL, as well as any transformations done to the `urlManager` instance after it was either instantiated or copied using another urlManager's `copy` function.
 
-`old` is the previous parameters from this urlManager instance.
+`prev` is the previous state from this urlManager instance.
 
 ### Auto-synchronize with URL change
 
@@ -165,17 +171,17 @@ state. However, the internal state is always a modification on the _current_ URL
 Take the following example:
 
 ```js
-const urlManager = new UrlManager(new QueryStringTranslator());
+const urlManager = new UrlManager(new UrlTranslator());
 
-const urlManagerWithColor = urlManager.merge('filter.color', 'blue');
+const urlManagerWithColor = urlManager.merge('filter.color_family', 'blue');
 
-console.log(window.location.search); // ?foo.bar=baz&a_number=1
+console.log(window.location.href); // https://try.searchspring.com?q=dress
 
-console.log(urlManager.href); // ?foo.bar=baz&a_number=1
-console.log(urlManagerWithColor.href); // ?foo.bar=baz&a_number=1&filter.color=blue
+console.log(urlManager.href); // ?q=dress
+console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue
 ```
 
-You can see that the href of `urlManager` matches the page URL, while `urlManagerWithColor` has an additional parameter.
+You can see that the href of `urlManager` matches the parameters of the page URL, while `urlManagerWithColor` has an additional parameter.
 
 Now let's navigate to a new URL using the `go` function and check the href's again:
 
@@ -183,24 +189,24 @@ Now let's navigate to a new URL using the `go` function and check the href's aga
 const urlManagerWithNewParam = urlManager.merge({ newParam: 'newValue' });
 
 urlManagerWithNewParam.go();
+console.log(window.location.href); // https://try.searchspring.com?q=dress#/newParam:newValue
+console.log(urlManager.href); // ?q=dress#/newParam:newValue
+console.log(urlManagerWithNewParam.href); // ?q=dress#/newParam:newValue
 
-console.log(urlManager.href); // ?foo.bar=baz&a_number=1&newParam=newValue
-console.log(urlManagerWithNewParam.href); // ?foo.bar=baz&a_number=1&newParam=newValue
-
-console.log(urlManagerWithColor.href); // ?foo.bar=baz&a_number=1&newParam=newValue&filter.color=blue
+console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue/newParam:newValue
 ```
 
-As you can see, all the URL managers were updated and know about the new URL parameter `newParam`, while the internal
+As you can see, when calling `go()` all the URL managers were updated and know about the new URL parameter `newParam` while the internal
 state of `urlManagerWithColor` remains unmodified. This holds true for removals as well:
 
 ```js
-const urlManagerWithColorButWithoutFoo = urlManagerWithColor.remove('foo');
+const urlManagerWithColorButWithoutNewParam = urlManagerWithColor.remove('newParam');
 
-console.log(urlManager.href); // ?foo.bar=baz&a_number=1&newParam=newValue
-console.log(urlManagerWithNewParam.href); // ?foo.bar=baz&a_number=1&newParam=newValue
+console.log(urlManager.href); // ?q=dress#/newParam:newValue
+console.log(urlManagerWithNewParam.href); // ?q=dress#/newParam:newValue
 
-console.log(urlManagerWithColor.href); // ?foo.bar=baz&a_number=1&newParam=newValue&filter.color=blue
-console.log(urlManagerWithColorButWithoutFoo.href); // ?a_number=1&newParam=newValue&filter.color=blue
+console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue/newParam:newValuecolor=blue
+console.log(urlManagerWithColorButWithoutNewParam.href); // ?q=dress#/filter:color_family:Blue
 ```
 
 **Note:** UrlManagers with different instantiations will not notify each other about URL updates. For example:
@@ -216,13 +222,9 @@ originalUrlManager.set('example', '1').go();
 console.log(originalUrlManager.href); // ?example=1
 console.log(secondaryUrlManager.href); // ?example=1&foo=bar
 
-console.log(disconnectedUrlManager.href); // '' (empty string)
+console.log(disconnectedUrlManager.href); // / (empty)
 ```
 
-For performance reasons, the url managers do not contain watchers or otherwise poll for URL changes. Instead, they rely
-on the copy mechanism behind the transform functions to notify each other of changes.
+For performance reasons, the url managers do not contain watchers or otherwise poll for URL changes. Instead, they rely upon the copy mechanism behind the transform functions to notify each other of changes.
 
-For this reason, it's advised to only explicitly instantiate a URL manager via `new` once in your project, unless you have
-specific reasons for doing otherwise.
-
-Since a url manager`s internal state is immutable, you do not have to worry about unintended side effects. The only side effect is changes to the URL itself, which is intended!
+Since a `UrlManager` internal state is immutable, you do not have to worry about unintended side effects. The only side effect is changes to the URL itself, which is intended!

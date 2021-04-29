@@ -40,6 +40,6 @@ export class SearchStore extends AbstractStore {
 		this.filters = new FilterStore(this.controller, data.filters, this.meta);
 		this.results = new ResultStore(this.controller, data.results, data.pagination, data.merchandising);
 		this.pagination = new PaginationStore(this.controller, data.pagination);
-		this.sorting = new SortingStore(this.controller, data.sorting, this.meta);
+		this.sorting = new SortingStore(this.controller, data.sorting, data.search, this.meta);
 	}
 }

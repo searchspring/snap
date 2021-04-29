@@ -4,32 +4,39 @@ export class SortingStore {
 	private controller;
 	options: Option[] = [];
 
-	constructor(controller, sorting, meta) {
+	constructor(controller, sorting, search, meta) {
 		if (controller && meta) {
 			this.controller = controller;
 			const activeSort = sorting && sorting.length && sorting[0];
 
 			this.options =
-				meta &&
 				meta.sortOptions &&
-				meta.sortOptions.map((option, index) => {
-					option.active = false;
+				meta.sortOptions
+					.filter((option) => {
+						if (!search?.query) {
+							return option.type == 'field';
+						}
 
-					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
-						option.active = true;
-					} else if (index === 0) {
-						option.active = true;
-					}
+						return option;
+					})
+					.map((option, index) => {
+						option.active = false;
 
-					if (index === 0) {
-						// is the default sort
-						option.default = true;
-					}
+						if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
+							option.active = true;
+						} else if (index === 0) {
+							option.active = true;
+						}
 
-					const optionObj = new Option(controller, option);
+						if (index === 0) {
+							// is the default sort
+							option.default = true;
+						}
 
-					return optionObj;
-				});
+						const optionObj = new Option(controller, option);
+
+						return optionObj;
+					});
 
 			makeObservable(this, {
 				options: observable,
