@@ -95,6 +95,7 @@ export interface ButtonProps extends ComponentProps {
 	borderColor?: string;
 	color?: string;
 	content?: string | JSX.Element;
+	children?: any;
 	disabled?: boolean;
 	native?: boolean;
 	onClick?: (e: Event) => void;
