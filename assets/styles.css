@@ -28,6 +28,12 @@ table td {
     padding: 5px 10px;
 }
 
+code.hljs {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(0 0 0 / 35%);
+}
+
 #navigation-wrapper {
     width: 250px;
     height: 100vh;

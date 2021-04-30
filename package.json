@@ -14,6 +14,7 @@
 		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run docs'",
 		"test": "npm run test --workspaces",
 		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
+		"dev:docs": "npx serve ./ -l 2222",
 		"lint": "npm run lint --workspaces",
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
 		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",

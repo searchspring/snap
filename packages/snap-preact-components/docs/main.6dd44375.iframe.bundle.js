@@ -146,13 +146,16 @@
 					'M12.407 45.809c0-1.193-0.988-2.181-2.181-2.181s-2.181 0.988-2.181 2.181 0.988 2.181 2.181 2.181 2.181-0.988 2.181-2.181zM34.357 31.494l-23.245 23.245c-0.784 0.784-1.909 1.261-3.068 1.261s-2.284-0.477-3.102-1.261l-3.613-3.681c-0.818-0.784-1.295-1.909-1.295-3.068s0.477-2.284 1.295-3.102l23.211-23.211c1.772 4.465 5.351 8.044 9.816 9.816zM55.966 16.667c0 1.125-0.409 2.522-0.784 3.613-2.147 6.067-7.976 10.259-14.418 10.259-8.419 0-15.27-6.851-15.27-15.27s6.851-15.27 15.27-15.27c2.488 0 5.726 0.75 7.805 2.147 0.341 0.239 0.545 0.545 0.545 0.954 0 0.375-0.239 0.75-0.545 0.954l-9.987 5.76v7.635l6.578 3.647c1.125-0.648 9.032-5.624 9.714-5.624s1.091 0.511 1.091 1.193z',
 			};
 		},
-		160: function (module, __webpack_exports__, __webpack_require__) {
+		157: function (module, exports, __webpack_require__) {
+			module.exports = __webpack_require__.p + 'static/media/searchspring-logo.fb3e0170.svg';
+		},
+		161: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Price;
 			});
 			__webpack_require__(8);
-			var _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(188),
+			var _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(189),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
@@ -212,7 +215,7 @@
 				);
 			}
 		},
-		161: function (module, __webpack_exports__, __webpack_require__) {
+		162: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Facet;
@@ -242,7 +245,8 @@
 						}).apply(this, arguments);
 				},
 				CSS_facet = function facet(_a) {
-					var disableCollapse = _a.disableCollapse,
+					var _b,
+						disableCollapse = _a.disableCollapse,
 						color = _a.color,
 						theme = _a.theme,
 						style = _a.style;
@@ -253,7 +257,7 @@
 									display: 'flex',
 									justifyContent: 'space-between',
 									alignItems: 'center',
-									color: color || theme.colorPrimary || '#333',
+									color: color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
 								},
 								'& .ss-dropdown': {
 									'&.ss-open': { '& .ss-dropdown__content': { position: 'relative' } },
@@ -271,9 +275,10 @@
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.a)({ marginRight: '8px' });
 				},
 				CSS_showMore = function showMore(_a) {
-					var theme = _a.theme;
+					var _b,
+						theme = _a.theme;
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.a)({
-						color: theme.colorPrimary,
+						color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
 						display: 'block',
 						textAlign: 'right',
 						margin: '8px',
@@ -304,6 +309,8 @@
 						_w,
 						_x,
 						_y,
+						_z,
+						_0,
 						globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_12__.f)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -388,16 +395,20 @@
 							icon: __assign(
 								__assign(
 									__assign(
-										{ className: 'ss-facet__button-icon', size: '12px', color: iconColor || color || theme.colorPrimary || '#333' },
-										null === (_u = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _u ? void 0 : _u.icon
+										{
+											className: 'ss-facet__button-icon',
+											size: '12px',
+											color: iconColor || color || (null === (_u = theme.colors) || void 0 === _u ? void 0 : _u.primary) || '#333',
+										},
+										null === (_v = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _v ? void 0 : _v.icon
 									),
 									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({ disableStyles: disableStyles })
 								),
-								null === (_w = null === (_v = props.theme) || void 0 === _v ? void 0 : _v.components) || void 0 === _w ? void 0 : _w.icon
+								null === (_x = null === (_w = props.theme) || void 0 === _w ? void 0 : _w.components) || void 0 === _x ? void 0 : _x.icon
 							),
 						};
 					return (
-						(null === (_x = facet) || void 0 === _x ? void 0 : _x.overflow) && optionsLimitCount && facet.overflow.setLimit(optionsLimitCount),
+						(null === (_y = facet) || void 0 === _y ? void 0 : _y.overflow) && optionsLimitCount && facet.overflow.setLimit(optionsLimitCount),
 						Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'div',
 							{
@@ -454,7 +465,7 @@
 										}
 									})()
 								),
-								(null === (_y = facet) || void 0 === _y ? void 0 : _y.overflow) &&
+								(null === (_z = facet) || void 0 === _z ? void 0 : _z.overflow) &&
 									facet.overflow.enabled &&
 									Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 										'div',
@@ -466,7 +477,7 @@
 										},
 										Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__.a, {
 											icon: facet.overflow.remaining > 0 ? 'plus' : 'minus',
-											color: _providers_theme__WEBPACK_IMPORTED_MODULE_13__.a.colorPrimary,
+											color: null === (_0 = _providers_theme__WEBPACK_IMPORTED_MODULE_13__.a.colors) || void 0 === _0 ? void 0 : _0.primary,
 											size: '10px',
 											css: !disableStyles && CSS_icon(),
 										}),
@@ -477,7 +488,7 @@
 					);
 				});
 		},
-		192: function (module, __webpack_exports__, __webpack_require__) {
+		193: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return InlineBanner;
@@ -564,7 +575,7 @@
 				);
 			}
 		},
-		193: function (module, __webpack_exports__, __webpack_require__) {
+		194: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Checkbox;
@@ -697,7 +708,7 @@
 						  );
 				});
 		},
-		195: function (module, __webpack_exports__, __webpack_require__) {
+		196: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Badge;
@@ -755,7 +766,7 @@
 					);
 				});
 		},
-		196: function (module, __webpack_exports__, __webpack_require__) {
+		197: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FALLBACK_IMAGE_URL;
@@ -856,9 +867,6 @@
 					})
 				);
 			}
-		},
-		242: function (module, exports, __webpack_require__) {
-			module.exports = __webpack_require__.p + 'static/media/searchspring-logo.fb3e0170.svg';
 		},
 		243: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -1176,7 +1184,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(33),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(68),
-				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(193),
+				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(194),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -1204,15 +1212,20 @@
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_6__.a)({ display: 'inline-block' });
 				},
 				CSS_valueLabel = function valueLabel(_a) {
-					var theme = _a.theme;
-					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_6__.a)({ marginLeft: '8px', '&$filtered': { color: theme.colorPrimary } });
+					var _b,
+						theme = _a.theme;
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_6__.a)({
+						marginLeft: '8px',
+						'&$filtered': { color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary },
+					});
 				},
 				CSS_countLabel = function countLabel(_a) {
-					var theme = _a.theme;
+					var _b,
+						theme = _a.theme;
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_6__.a)({
 						fontSize: '10px',
 						marginLeft: '2px',
-						'&$filtered': { color: theme.colorPrimary },
+						'&$filtered': { color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary },
 					});
 				},
 				FacetListOptions = Object(mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.c)(function (properties) {
@@ -1402,7 +1415,8 @@
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_10__.a)({ zIndex: 1 });
 				},
 				CSS_content = function content(_a) {
-					var theme = _a.theme;
+					var _b,
+						theme = _a.theme;
 					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_10__.a)({
 						display: 'block',
 						textAlign: 'center',
@@ -1410,7 +1424,7 @@
 						overflow: 'hidden',
 						textOverflow: 'ellipsis',
 						whiteSpace: 'nowrap',
-						'&.filtered': { color: theme.colorPrimary },
+						'&.filtered': { color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary },
 					});
 				},
 				FacetPaletteOptions = Object(mobx_react_lite__WEBPACK_IMPORTED_MODULE_12__.c)(function (properties) {
@@ -1537,9 +1551,9 @@
 				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				_Atoms_Image__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(196),
-				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(195),
-				_Atoms_Price__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(160),
+				_Atoms_Image__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(197),
+				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(196),
+				_Atoms_Price__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(161),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(33),
 				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(68),
 				__makeTemplateObject = function (cooked, raw) {
@@ -1765,14 +1779,14 @@
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Results;
 			});
-			__webpack_require__(152), __webpack_require__(8), __webpack_require__(957), __webpack_require__(73), __webpack_require__(19);
+			__webpack_require__(152), __webpack_require__(8), __webpack_require__(958), __webpack_require__(73), __webpack_require__(19);
 			var templateObject_1,
 				preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13),
 				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
-				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(192),
+				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(193),
 				_Molecules_Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(253),
 				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(59),
 				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(68),
@@ -2065,8 +2079,8 @@
 				__webpack_require__(102),
 				__webpack_require__(471),
 				__webpack_require__(470),
-				__webpack_require__(952),
-				__webpack_require__(954),
+				__webpack_require__(953),
+				__webpack_require__(955),
 				__webpack_require__(31),
 				__webpack_require__(34),
 				__webpack_require__(49),
@@ -2428,7 +2442,7 @@
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return defaultTheme;
 			});
-			var defaultTheme = { colorPrimary: '#3A23AD', colorSecondary: '#FFF', colors: { primary: '#3A23AD', secondary: '#FFF' }, components: {} };
+			var defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1' }, components: {} };
 		},
 		338: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -2632,8 +2646,8 @@
 				__webpack_require__(37),
 				__webpack_require__(30),
 				__webpack_require__(32),
-				__webpack_require__(905),
 				__webpack_require__(906),
+				__webpack_require__(907),
 				__webpack_require__(57),
 				__webpack_require__(23);
 			var _searchspring_snap_client_javascript__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(337),
@@ -2643,10 +2657,10 @@
 				_searchspring_snap_event_manager__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(521),
 				_searchspring_snap_profiler__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(519),
 				_searchspring_snap_logger__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(520),
-				_searchspring_snap_controller__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(993),
-				_searchspring_snap_controller__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(991),
-				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(992),
-				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(994),
+				_searchspring_snap_controller__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(994),
+				_searchspring_snap_controller__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(992),
+				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(993),
+				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(995),
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -2869,13 +2883,13 @@
 			__webpack_require__(549),
 				__webpack_require__(703),
 				__webpack_require__(704),
-				__webpack_require__(959),
-				__webpack_require__(971),
+				__webpack_require__(960),
 				__webpack_require__(972),
-				__webpack_require__(961),
-				__webpack_require__(958),
 				__webpack_require__(973),
+				__webpack_require__(962),
+				__webpack_require__(959),
 				__webpack_require__(974),
+				__webpack_require__(975),
 				(module.exports = __webpack_require__(894));
 		},
 		59: function (module, __webpack_exports__, __webpack_require__) {
@@ -3031,11 +3045,11 @@
 		894: function (module, exports, __webpack_require__) {
 			'use strict';
 			(function (module) {
-				(0, __webpack_require__(389).configure)([__webpack_require__(895), __webpack_require__(898)], module, !1);
-			}.call(this, __webpack_require__(221)(module)));
+				(0, __webpack_require__(389).configure)([__webpack_require__(895), __webpack_require__(899)], module, !1);
+			}.call(this, __webpack_require__(222)(module)));
 		},
 		895: function (module, exports, __webpack_require__) {
-			var map = { './documents/About.stories.mdx': 896, './documents/Installation.stories.mdx': 897 };
+			var map = { './documents/About.stories.mdx': 896, './documents/Theme.stories.mdx': 897, './documents/Usage.stories.mdx': 898 };
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
 				return __webpack_require__(id);
@@ -3063,7 +3077,7 @@
 			__webpack_require__(0);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
-				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(242),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(157),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
 					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
 				);
@@ -3102,15 +3116,61 @@
 					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('hr', null),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('br', null),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h1', { id: 'about' }, 'About'),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('br', null),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'docs-todo' }, 'DOCS TODO'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h1', { id: 'snap-react-components' }, 'Snap React Components'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Welcome to the Snap React Component Library! '),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
-						'ol',
+						'p',
 						null,
-						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('li', { parentName: 'ol' }, 'Atomic Design'),
-						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('li', { parentName: 'ol' }, 'Themeability'),
-						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('li', { parentName: 'ol' }, 'Connecting to SNAP stores')
+						"This collection of ecommerce components allows you to quickly build and theme a layout for use with Searchspring's Snap SDK"
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'installation' }, 'Installation'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-sh' },
+							'npm install --save @searchspring/snap-preact-components\n'
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'atomic-design-methodology' }, 'Atomic Design Methodology'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Snap components follow the Atomic design methodology. Components are organized into three levels:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'atoms' }, 'Atoms'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Atom level components are the basic building blocks of an ecommerce layout. This includes components such as Badge, Button, and Icon.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'molecules' }, 'Molecules'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Molecule level components utilize 1 or more atom components to start building the contents of a layout. This includes components such as Pagination, Select, and Slider.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'organisms' }, 'Organisms'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Organisms level components utilize 1 or more molecule components to start building complex sections of a layout. This includes components such as Autocomplete, Facets, and Results.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.'
 					)
 				);
 			}
@@ -3142,7 +3202,7 @@
 			__webpack_require__(0);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
-				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(242),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(157),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
 					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
 				);
@@ -3163,7 +3223,7 @@
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__.c, {
-						title: 'Doumentation/Installation',
+						title: 'Doumentation/Theme',
 						mdxType: 'Meta',
 					}),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
@@ -3181,35 +3241,316 @@
 					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('hr', null),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('br', null),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h1', { id: 'installation' }, 'Installation'),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Install the package:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'theme' }, 'Theme'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Snap components allows for theming at both the global and component level.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'theme-object' }, 'Theme object'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'A theme object contains a ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'components'),
+						' object with 1 or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'For example, this ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'globalTheme'),
+						' theme object will apply the prop ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, "color={'blue'}"),
+						' for all ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '<Button />'),
+						' components and ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'hideCount={false}'),
+						' for all ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '<facetListOptions />'),
+						' components.'
+					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
-							{ parentName: 'pre', className: 'language-bash' },
-							'npm install @searchspring/snap-preact-components\n'
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n        },\n        facetListOptions: {\n            hideCount: false,\n        },\n    },\n};\n"
 						)
 					),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Import component:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:'
+					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"import { facet } from '@searchspring/snap-preact-components';\n"
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const globalTheme = {\n    components: {\n        facetListOptions: {\n            hideCount: false,\n            theme: {\n                components: {\n                    checkbox: {\n                        native: true\n                    }\n                }\n            }\n        }\n    }\n};\n'
 						)
 					),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Use component:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The theme object also contains primary and secondary colors used throughout components:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const globalTheme = {\n    colors: {\n        primary: '#3A23AD',\n        secondary: '#FFF',\n    },\n    components: {}\n}\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'themeprovider' }, 'ThemeProvider'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Using a ThemeProvider applies a global theme to all its children components'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"import { ThemeProvider, Button } from '@searchspring/snap-preact-components'\n"
+						)
+					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Facet facet={facet} optionsLimitCount={12} />\n'
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'component-theme' }, 'Component Theme'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'theme'),
+						' prop is available on all components and allows for theming of a single component. '
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The component ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'theme'),
+						' is merged with the global theme, therefore component theme props will overwrite any common props on the global theme object.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'In the following example, the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '<Button />'),
+						' component will contain ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, "color={'green'}"),
+						' from ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'propTheme'),
+						' and ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'native={true}'),
+						' from ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'globalTheme')
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n            native: true\n        },\n    },\n};\nconst propTheme = {\n    components: {\n        button: {\n            color: 'green',\n        },\n    },\n};\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"\n<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} theme={propTheme} />\n</ThemeProvider>\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'component-style' }, 'Component Style'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'style'),
+						' prop is available on all components and allows for styling of components at the global (via the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'theme'),
+						' prop) or at the component level (via the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'style'),
+						' prop)'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Styles are applied to the root element of the component and uses CSS object syntax.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Standard CSS:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-css' },
+							'{\n    background-color: red;\n    color: #cccccc;\n}\n'
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'In CSS object syntax, properties are camel case and ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, "'-'"),
+						' are removed:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"{ \n    backgroundColor: '#ffff00',\n    color: '#cccccc',\n}\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Global level styling via ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'theme'),
+						' prop:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const globalTheme = {\n    components: {\n        button: {\n            style: {\n                backgroundColor: '#ffff00',\n                color: '#cccccc'\n            }\n        },\n    },\n};\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Component level styling via ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'style'),
+						' prop:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const buttonStyles = {\n    backgroundColor: '#ffff00',\n    color: '#cccccc'\n};\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Button content={'click me!'} style={buttonStyles} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'disable-component-styles' }, 'Disable Component Styles'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'disableStyles'),
+						' prop is available on all components and allows for disabling all styles of the component, including any styles being applied at the global or component level. '
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'This can be done at the global level:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const globalTheme = {\n    components: {\n        button: {\n            disableStyles: true,\n    },\n};\n'
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Or at the component level:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Button content={'click me!'} disableStyles={true} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'component-class-names' }, 'Component Class Names'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'className'),
+						' prop is available on all components and allows for adding a class to the root level class list of a component. '
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'By default, all components will contain a class name of ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'ss-${componentname}'),
+						', for example ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, "'ss-button'")
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'This can be done at the global level:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const globalTheme = {\n    components: {\n        button: {\n            className: 'my-btn-class',\n    },\n};\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Or at the component level:'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Button content={'click me!'} className={'my-btn-class'} />\n"
 						)
 					)
 				);
@@ -3219,7 +3560,7 @@
 				throw new Error('Docs-only story');
 			};
 			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Doumentation/Installation', includeStories: ['__page'] },
+			const componentMeta = { title: 'Doumentation/Theme', includeStories: ['__page'] },
 				mdxStoryNameToKey = {};
 			(componentMeta.parameters = componentMeta.parameters || {}),
 				(componentMeta.parameters.docs = {
@@ -3233,36 +3574,191 @@
 				}),
 				(__webpack_exports__.default = componentMeta);
 		},
-		898: function (module, exports, __webpack_require__) {
+		898: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, '__page', function () {
+					return __page;
+				});
+			__webpack_require__(0);
+			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
+				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(157),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
+					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
+				);
+			function _extends() {
+				return (_extends =
+					Object.assign ||
+					function (target) {
+						for (var i = 1; i < arguments.length; i++) {
+							var source = arguments[i];
+							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+						}
+						return target;
+					}).apply(this, arguments);
+			}
+			const layoutProps = {};
+			function MDXContent({ components: components, ...props }) {
+				return Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__.c, {
+						title: 'Doumentation/Usage',
+						mdxType: 'Meta',
+					}),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'div',
+						{ class: 'header' },
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('img', {
+							src: _assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default.a,
+						}),
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('hr', null),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('br', null),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Snap components are designed to be used with the Snap MobX store package ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '@searchspring/snap-store-mobx'),
+						' '
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The store is also a dependancy of the all Snap controllers ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller')
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Snap controllers such as ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'SearchController'),
+						' contain a reference to the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'SearchStore'),
+						' that was provided in the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'ControllerServices'),
+						' object named ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'searchControllerServices'),
+						' below. See ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'a',
+							{ parentName: 'p', href: 'https://searchspring.github.io/snap/#/search', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Getting Started with Search'
+						),
+						' for how to get started using Snap.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Many component props are tied to the design of the store for ease of use:'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'In this example, the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'store.pagination'),
+						' property is provided to the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'pagination'),
+						' prop of the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '<Pagination />'),
+						' component.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"import { SearchController } from '@searchspring/snap-controller';\n\nconst searchController = new SearchController(searchConfig, searchControllerServices);\n\nconsole.log(searchController.store)\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"import { Pagination } from '@searchspring/snap-preact-components';\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={searchController.store.pagination} />\n'
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('br', null),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'strong',
+							{ parentName: 'p' },
+							"A full usage example for each component can be seen in the component's 'Docs' tab"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const __page = () => {
+				throw new Error('Docs-only story');
+			};
+			__page.parameters = { docsOnly: !0 };
+			const componentMeta = { title: 'Doumentation/Usage', includeStories: ['__page'] },
+				mdxStoryNameToKey = {};
+			(componentMeta.parameters = componentMeta.parameters || {}),
+				(componentMeta.parameters.docs = {
+					...(componentMeta.parameters.docs || {}),
+					page: () =>
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__.a,
+							{ mdxStoryNameToKey: mdxStoryNameToKey, mdxComponentMeta: componentMeta },
+							Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(MDXContent, null)
+						),
+				}),
+				(__webpack_exports__.default = componentMeta);
+		},
+		899: function (module, exports, __webpack_require__) {
 			var map = {
-				'./components/Atoms/Badge/Badge.stories.tsx': 975,
-				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': 962,
-				'./components/Atoms/Button/Button.stories.tsx': 976,
-				'./components/Atoms/Dropdown/Dropdown.stories.tsx': 977,
-				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': 963,
-				'./components/Atoms/Icon/Icon.stories.tsx': 978,
-				'./components/Atoms/Image/Image.stories.tsx': 979,
-				'./components/Atoms/Loading/LoadingBar.stories.tsx': 964,
-				'./components/Atoms/Merchandising/Banner.stories.tsx': 904,
-				'./components/Atoms/Merchandising/InlineBanner.stories.tsx': 950,
-				'./components/Atoms/Overlay/Overlay.stories.tsx': 980,
-				'./components/Atoms/Price/Price.stories.tsx': 981,
-				'./components/Molecules/Checkbox/Checkbox.stories.tsx': 982,
-				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx': 983,
-				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 965,
-				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 984,
-				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': 985,
-				'./components/Molecules/Filter/Filter.stories.tsx': 986,
-				'./components/Molecules/Pagination/Pagination.stories.tsx': 966,
-				'./components/Molecules/Result/Result.stories.tsx': 987,
-				'./components/Molecules/Select/Select.stories.tsx': 967,
-				'./components/Molecules/Slideout/Slideout.stories.tsx': 960,
-				'./components/Molecules/Slider/Slider.stories.tsx': 988,
-				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 968,
-				'./components/Organisms/Facet/Facet.stories.tsx': 989,
-				'./components/Organisms/Facets/Facets.stories.tsx': 969,
-				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': 970,
-				'./components/Organisms/Results/Results.stories.tsx': 990,
+				'./components/Atoms/Badge/Badge.stories.tsx': 976,
+				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': 963,
+				'./components/Atoms/Button/Button.stories.tsx': 977,
+				'./components/Atoms/Dropdown/Dropdown.stories.tsx': 978,
+				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': 964,
+				'./components/Atoms/Icon/Icon.stories.tsx': 979,
+				'./components/Atoms/Image/Image.stories.tsx': 980,
+				'./components/Atoms/Loading/LoadingBar.stories.tsx': 965,
+				'./components/Atoms/Merchandising/Banner.stories.tsx': 905,
+				'./components/Atoms/Merchandising/InlineBanner.stories.tsx': 951,
+				'./components/Atoms/Overlay/Overlay.stories.tsx': 981,
+				'./components/Atoms/Price/Price.stories.tsx': 982,
+				'./components/Molecules/Checkbox/Checkbox.stories.tsx': 983,
+				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx': 984,
+				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 966,
+				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 985,
+				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': 986,
+				'./components/Molecules/Filter/Filter.stories.tsx': 987,
+				'./components/Molecules/Pagination/Pagination.stories.tsx': 967,
+				'./components/Molecules/Result/Result.stories.tsx': 988,
+				'./components/Molecules/Select/Select.stories.tsx': 968,
+				'./components/Molecules/Slideout/Slideout.stories.tsx': 961,
+				'./components/Molecules/Slider/Slider.stories.tsx': 989,
+				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 969,
+				'./components/Organisms/Facet/Facet.stories.tsx': 990,
+				'./components/Organisms/Facets/Facets.stories.tsx': 970,
+				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': 971,
+				'./components/Organisms/Results/Results.stories.tsx': 991,
 			};
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
@@ -3280,9 +3776,9 @@
 			}),
 				(webpackContext.resolve = webpackContextResolve),
 				(module.exports = webpackContext),
-				(webpackContext.id = 898);
+				(webpackContext.id = 899);
 		},
-		904: function (module, __webpack_exports__, __webpack_require__) {
+		905: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Header', function () {
@@ -3563,8 +4059,8 @@
 					},
 				]);
 		},
-		917: function (module, exports) {},
-		950: function (module, __webpack_exports__, __webpack_require__) {
+		918: function (module, exports) {},
+		951: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -3583,7 +4079,7 @@
 				__webpack_require__(23),
 				__webpack_require__(43);
 			var preact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2),
-				_InlineBanner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(192),
+				_InlineBanner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(193),
 				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(516),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(39),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9),
@@ -3786,7 +4282,7 @@
 				},
 			];
 		},
-		960: function (module, __webpack_exports__, __webpack_require__) {
+		961: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -4080,7 +4576,7 @@
 					}.bind({}));
 			Default.args = { active: !0 };
 		},
-		962: function (module, __webpack_exports__, __webpack_require__) {
+		963: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'categoryPage', function () {
@@ -4245,7 +4741,7 @@
 			var SearchPage = Breadcrumbs_stories_Template.bind({});
 			SearchPage.args = { data: [{ url: '/', label: 'Home' }, { label: 'Search' }] };
 		},
-		963: function (module, __webpack_exports__, __webpack_require__) {
+		964: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -4259,7 +4755,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(43);
 			var preact_module = __webpack_require__(2),
-				esm = __webpack_require__(188),
+				esm = __webpack_require__(189),
 				classnames = __webpack_require__(13),
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_4fbd89c5_browser_esm = __webpack_require__(33),
@@ -4453,7 +4949,7 @@
 			var Length = FormattedNumber_stories_Template.bind({});
 			Length.args = { value: 100, symbol: ' mm', decimalPlaces: 2 };
 		},
-		964: function (module, __webpack_exports__, __webpack_require__) {
+		965: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Active', function () {
@@ -4477,7 +4973,9 @@
 				},
 				CSS = {
 					loadingBar: function loadingBar(_a) {
-						var color = _a.color,
+						var _b,
+							_c,
+							color = _a.color,
 							height = _a.height,
 							backgroundColor = _a.backgroundColor,
 							style = _a.style,
@@ -4496,13 +4994,13 @@
 									opacity: '1',
 									visibility: 'visible',
 									zIndex: '9999',
-									background: backgroundColor || theme.colors.secondary,
+									background: backgroundColor || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.secondary),
 									'& .ss-loadingbar-bar': {
 										position: 'absolute',
 										top: '0',
 										left: '-200px',
 										height: '100%',
-										background: '' + (color || theme.colors.primary),
+										background: '' + (color || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary)),
 										animation: animation + ' 2s linear infinite',
 									},
 								},
@@ -4523,6 +5021,8 @@
 				var _a,
 					_b,
 					_c,
+					_d,
+					_e,
 					globalTheme = Object(emotion_element_4fbd89c5_browser_esm.f)(),
 					theme = __assign(__assign({}, globalTheme), properties.theme),
 					props = __assign(
@@ -4531,15 +5031,15 @@
 								{
 									disableStyles: !1,
 									active: !1,
-									color: providers_theme.a.colors.primary,
-									backgroundColor: providers_theme.a.colors.secondary,
+									color: null === (_a = providers_theme.a.colors) || void 0 === _a ? void 0 : _a.primary,
+									backgroundColor: null === (_b = providers_theme.a.colors) || void 0 === _b ? void 0 : _b.secondary,
 									height: '5px',
 								},
-								null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.loadingbar
+								null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.loadingbar
 							),
 							properties
 						),
-						null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.loadingbar
+						null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.loadingbar
 					),
 					active = props.active,
 					color = props.color,
@@ -4595,7 +5095,11 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			var LoadingBar_stories_assign = function () {
+			var LoadingBar_stories_a,
+				LoadingBar_stories_b,
+				LoadingBar_stories_c,
+				LoadingBar_stories_d,
+				LoadingBar_stories_assign = function () {
 					return (LoadingBar_stories_assign =
 						Object.assign ||
 						function (t) {
@@ -4630,15 +5134,37 @@
 									control: { type: 'boolean' },
 								},
 								color: {
-									defaultValue: providers_theme.a.colorPrimary,
+									defaultValue:
+										null === (LoadingBar_stories_a = providers_theme.a.colors) || void 0 === LoadingBar_stories_a
+											? void 0
+											: LoadingBar_stories_a.primary,
 									description: 'Bar color',
-									table: { type: { summary: 'string' }, defaultValue: { summary: providers_theme.a.colorPrimary } },
+									table: {
+										type: { summary: 'string' },
+										defaultValue: {
+											summary:
+												null === (LoadingBar_stories_b = providers_theme.a.colors) || void 0 === LoadingBar_stories_b
+													? void 0
+													: LoadingBar_stories_b.primary,
+										},
+									},
 									control: { type: 'color' },
 								},
 								backgroundColor: {
-									defaultValue: providers_theme.a.colorSecondary,
+									defaultValue:
+										null === (LoadingBar_stories_c = providers_theme.a.colors) || void 0 === LoadingBar_stories_c
+											? void 0
+											: LoadingBar_stories_c.secondary,
 									description: 'Background color',
-									table: { type: { summary: 'string' }, defaultValue: { summary: providers_theme.a.colorSecondary } },
+									table: {
+										type: { summary: 'string' },
+										defaultValue: {
+											summary:
+												null === (LoadingBar_stories_d = providers_theme.a.colors) || void 0 === LoadingBar_stories_d
+													? void 0
+													: LoadingBar_stories_d.secondary,
+										},
+									},
 									control: { type: 'color' },
 								},
 								height: {
@@ -4656,7 +5182,7 @@
 					}.bind({}));
 			Active.args = { active: !0 };
 		},
-		965: function (module, __webpack_exports__, __webpack_require__) {
+		966: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -5034,7 +5560,7 @@
 				},
 			];
 		},
-		966: function (module, __webpack_exports__, __webpack_require__) {
+		967: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -5474,7 +6000,7 @@
 				},
 			];
 		},
-		967: function (module, __webpack_exports__, __webpack_require__) {
+		968: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -5498,7 +6024,7 @@
 				__webpack_require__(43);
 			var preact_module = __webpack_require__(2),
 				mobxreact_esm = __webpack_require__(52),
-				hooks_module = (__webpack_require__(951), __webpack_require__(46), __webpack_require__(19), __webpack_require__(28)),
+				hooks_module = (__webpack_require__(952), __webpack_require__(46), __webpack_require__(19), __webpack_require__(28)),
 				es = __webpack_require__(17),
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(13),
@@ -6159,7 +6685,7 @@
 			]),
 				(Native.args = { label: 'Sort By', native: !0 });
 		},
-		968: function (module, __webpack_exports__, __webpack_require__) {
+		969: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -6180,7 +6706,7 @@
 				hooks_module =
 					(__webpack_require__(57),
 					__webpack_require__(23),
-					__webpack_require__(956),
+					__webpack_require__(957),
 					__webpack_require__(19),
 					__webpack_require__(73),
 					__webpack_require__(46),
@@ -6192,7 +6718,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				Results = __webpack_require__(254),
 				Banner = __webpack_require__(122),
-				Facet = __webpack_require__(161),
+				Facet = __webpack_require__(162),
 				defined = __webpack_require__(68),
 				emotion_element_4fbd89c5_browser_esm = __webpack_require__(33),
 				__assign = function () {
@@ -6835,7 +7361,7 @@
 				},
 			];
 		},
-		969: function (module, __webpack_exports__, __webpack_require__) {
+		970: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -6859,7 +7385,7 @@
 				classnames = (__webpack_require__(19), __webpack_require__(13)),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(17),
-				Facet = __webpack_require__(161),
+				Facet = __webpack_require__(162),
 				emotion_element_4fbd89c5_browser_esm = __webpack_require__(33),
 				defined = __webpack_require__(68),
 				__assign = function () {
@@ -7131,7 +7657,7 @@
 				},
 			];
 		},
-		970: function (module, __webpack_exports__, __webpack_require__) {
+		971: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Regular', function () {
@@ -7580,7 +8106,7 @@
 			]),
 				(customTitle.args = { title: 'Selected Filters' });
 		},
-		974: function (module, __webpack_exports__, __webpack_require__) {
+		975: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__);
 			var preview_namespaceObject = {};
@@ -7600,7 +8126,7 @@
 				__webpack_require__(888),
 				__webpack_require__(889),
 				__webpack_require__(152);
-			var client_api = __webpack_require__(1022),
+			var client_api = __webpack_require__(1023),
 				esm = __webpack_require__(11),
 				preact_module = __webpack_require__(2),
 				emotion_element_4fbd89c5_browser_esm = __webpack_require__(33),
@@ -7676,7 +8202,7 @@
 				}
 			});
 		},
-		975: function (module, __webpack_exports__, __webpack_require__) {
+		976: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'BadgeWithContent', function () {
@@ -7689,7 +8215,7 @@
 			var preact_module = __webpack_require__(2),
 				blocks = __webpack_require__(9),
 				componentArgs = __webpack_require__(516),
-				Badge = __webpack_require__(195),
+				Badge = __webpack_require__(196),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
 				return (_extends =
@@ -7784,7 +8310,7 @@
 				);
 			};
 		},
-		976: function (module, __webpack_exports__, __webpack_require__) {
+		977: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -7911,7 +8437,7 @@
 			var Native = Button_stories_Template.bind({});
 			Native.args = { content: 'native', native: !0 };
 		},
-		977: function (module, __webpack_exports__, __webpack_require__) {
+		978: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8067,7 +8593,7 @@
 					}.bind({}));
 			Default.args = { button: 'button text', content: 'content text' };
 		},
-		978: function (module, __webpack_exports__, __webpack_require__) {
+		979: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8086,7 +8612,7 @@
 				__webpack_require__(22),
 				__webpack_require__(43),
 				__webpack_require__(19),
-				__webpack_require__(900),
+				__webpack_require__(901),
 				__webpack_require__(101),
 				__webpack_require__(23),
 				__webpack_require__(79),
@@ -8263,7 +8789,7 @@
 			}),
 				(Icon_stories_Gallery.parameters = { controls: { expanded: !1, disabled: !0 }, options: { showPanel: !1 } });
 		},
-		979: function (module, __webpack_exports__, __webpack_require__) {
+		980: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8280,7 +8806,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(43), __webpack_require__(24);
 			var preact_module = __webpack_require__(2),
-				Image = __webpack_require__(196),
+				Image = __webpack_require__(197),
 				componentArgs = __webpack_require__(516),
 				searchResponse = __webpack_require__(99),
 				blocks = __webpack_require__(9),
@@ -8413,7 +8939,7 @@
 				hoverSrc: searchResponse.a.results[6].mappings.core.imageUrl,
 			};
 		},
-		980: function (module, __webpack_exports__, __webpack_require__) {
+		981: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8519,7 +9045,7 @@
 					}.bind({}));
 			Default.args = { active: !0 };
 		},
-		981: function (module, __webpack_exports__, __webpack_require__) {
+		982: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8533,7 +9059,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(43);
 			var preact_module = __webpack_require__(2),
-				Price = __webpack_require__(160),
+				Price = __webpack_require__(161),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -8679,7 +9205,7 @@
 			var CustomCurrency = Price_stories_Template.bind({});
 			CustomCurrency.args = { value: 999.99, symbol: ' €', thousandsSeparator: '.', decimalSeparator: ',', symbolAfter: !0 };
 		},
-		982: function (module, __webpack_exports__, __webpack_require__) {
+		983: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -8693,7 +9219,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(22), __webpack_require__(43);
 			var preact_module = __webpack_require__(2),
-				Checkbox = __webpack_require__(193),
+				Checkbox = __webpack_require__(194),
 				paths = __webpack_require__(135),
 				componentArgs = __webpack_require__(516),
 				blocks = __webpack_require__(9),
@@ -8831,7 +9357,7 @@
 			var Native = Checkbox_stories_Template.bind({});
 			Native.args = { native: !0 };
 		},
-		983: function (module, __webpack_exports__, __webpack_require__) {
+		984: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -9101,7 +9627,7 @@
 				},
 			];
 		},
-		984: function (module, __webpack_exports__, __webpack_require__) {
+		985: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -9362,7 +9888,7 @@
 				},
 			];
 		},
-		985: function (module, __webpack_exports__, __webpack_require__) {
+		986: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -9650,7 +10176,7 @@
 				},
 			];
 		},
-		986: function (module, __webpack_exports__, __webpack_require__) {
+		987: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -9944,7 +10470,7 @@
 			]),
 				(NoFacetLabel.args = { hideFacetLabel: !0 });
 		},
-		987: function (module, __webpack_exports__, __webpack_require__) {
+		988: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -9967,7 +10493,7 @@
 				__webpack_require__(43);
 			var preact_module = __webpack_require__(2),
 				Result = __webpack_require__(253),
-				Image = __webpack_require__(196),
+				Image = __webpack_require__(197),
 				componentArgs = __webpack_require__(516),
 				snapify = __webpack_require__(39),
 				blocks = __webpack_require__(9),
@@ -10258,7 +10784,7 @@
 			]),
 				(hideSections.args = { hideBadge: !0, hideTitle: !0, hidePricing: !0 });
 		},
-		988: function (module, __webpack_exports__, __webpack_require__) {
+		989: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Price', function () {
@@ -10379,430 +10905,6 @@
 					function Template(args) {
 						return Object(preact_module.h)(Slider.a, __assign({}, args, { facet: searchResponse.b }));
 					}.bind({}));
-		},
-		989: function (module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, 'List', function () {
-					return List;
-				}),
-				__webpack_require__.d(__webpack_exports__, 'Slider', function () {
-					return Slider;
-				}),
-				__webpack_require__.d(__webpack_exports__, 'Palette', function () {
-					return Palette;
-				}),
-				__webpack_require__.d(__webpack_exports__, 'Grid', function () {
-					return Grid;
-				});
-			__webpack_require__(8),
-				__webpack_require__(42),
-				__webpack_require__(18),
-				__webpack_require__(31),
-				__webpack_require__(34),
-				__webpack_require__(49),
-				__webpack_require__(37),
-				__webpack_require__(30),
-				__webpack_require__(32),
-				__webpack_require__(22),
-				__webpack_require__(57),
-				__webpack_require__(23),
-				__webpack_require__(46),
-				__webpack_require__(43);
-			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(52),
-				blocks = __webpack_require__(9),
-				Facet = __webpack_require__(161),
-				paths = __webpack_require__(135),
-				types = __webpack_require__(59),
-				componentArgs = __webpack_require__(516),
-				snapify = __webpack_require__(39),
-				esm = (__webpack_require__(0), __webpack_require__(1));
-			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
-			}
-			const layoutProps = {};
-			function MDXContent({ components: components, ...props }) {
-				return Object(esm.b)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet' }, 'Facet'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Renders a single facet, using ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdownm />'),
-						'. Automatically renders proper facet option component based on display of props.facet. Props available to disableCollapse of ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdown/>'),
-						', customize or hide the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon/>'),
-						', limit the options rendered. Built in Show More/Show Less functionality. '
-					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)(
-						'ul',
-						null,
-						Object(esm.b)('li', { parentName: 'ul' }, 'Dropdown'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'FacetListOptions'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'FacetGridOptions'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'FacetPaletteOptions'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'Slider'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'Icon')
-					),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)(
-						'pre',
-						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller?.store?.facets[0]} />\n')
-					)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				__awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				__generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
-				},
-				snapInstance =
-					((__webpack_exports__.default = {
-						title: 'Organisms/Facet',
-						component: Facet.a,
-						parameters: {
-							docs: {
-								page: function page() {
-									return Object(preact_module.h)(
-										'div',
-										null,
-										Object(preact_module.h)(MDXContent, null),
-										Object(preact_module.h)(blocks.b, { story: blocks.d })
-									);
-								},
-							},
-						},
-						decorators: [
-							function (Story) {
-								return Object(preact_module.h)(
-									'div',
-									{ style: { maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' } },
-									Object(preact_module.h)(Story, null)
-								);
-							},
-						],
-						argTypes: __assign(
-							{
-								facet: {
-									description: 'Facet store reference',
-									type: { required: !0 },
-									table: { type: { summary: 'facet store object' } },
-									control: { type: 'none' },
-								},
-								optionsLimitCount: {
-									defaultValue: 12,
-									description: "Number of facet options to display before a 'show more' button appears",
-									table: { type: { summary: 'number' } },
-									control: { type: 'number' },
-								},
-								hideIcon: {
-									description: 'Hide facet header icons',
-									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-									control: { type: 'boolean' },
-								},
-								color: { description: 'Select color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-								iconColor: {
-									description: 'Select icon color',
-									table: { type: { summary: 'string' }, defaultValue: { summary: '#333' } },
-									control: { type: 'color' },
-								},
-								disableCollapse: {
-									description: 'Disable collapse - used with internal state only',
-									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-									control: { type: 'boolean' },
-								},
-								iconExpand: {
-									defaultValue: 'angle-down',
-									description: 'Icon for when facet is collapsed',
-									table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-down' } },
-									control: { type: 'select', options: __spreadArray([], Object.keys(paths.a)) },
-								},
-								iconCollapse: {
-									defaultValue: 'angle-up',
-									description: 'Icon for when facet is expanded',
-									table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-up' } },
-									control: { type: 'select', options: __spreadArray([], Object.keys(paths.a)) },
-								},
-							},
-							componentArgs.a
-						),
-					}),
-					snapify.a.search({ globals: { siteId: 'scmq7n' } })),
-				ObservableListFacet = Object(mobxreact_esm.a)(function (_a) {
-					var _b,
-						args = _a.args,
-						controller = _a.controller;
-					return Object(preact_module.h)(
-						Facet.a,
-						__assign({}, args, {
-							facet:
-								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
-									? void 0
-									: _b.facets
-											.filter(function (facet) {
-												return facet.display === types.b.LIST;
-											})
-											.shift(),
-						})
-					);
-				}),
-				List = function ListTemplate(args, _a) {
-					var controller = _a.loaded.controller;
-					return Object(preact_module.h)(ObservableListFacet, { args: args, controller: controller });
-				}.bind({});
-			List.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						var _a;
-						return __generator(this, function (_b) {
-							switch (_b.label) {
-								case 0:
-									return (_a = {}), [4, snapInstance.search()];
-								case 1:
-									return [2, ((_a.controller = _b.sent()), _a)];
-							}
-						});
-					});
-				},
-			];
-			var ObservableSliderFacet = Object(mobxreact_esm.a)(function (_a) {
-					var _b,
-						args = _a.args,
-						controller = _a.controller;
-					return Object(preact_module.h)(
-						Facet.a,
-						__assign({}, args, {
-							facet:
-								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
-									? void 0
-									: _b.facets
-											.filter(function (facet) {
-												return facet.display === types.b.SLIDER;
-											})
-											.shift(),
-						})
-					);
-				}),
-				Slider = function SliderTemplate(args, _a) {
-					var controller = _a.loaded.controller;
-					return Object(preact_module.h)(ObservableSliderFacet, { args: args, controller: controller });
-				}.bind({});
-			Slider.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						var _a;
-						return __generator(this, function (_b) {
-							switch (_b.label) {
-								case 0:
-									return (_a = {}), [4, snapInstance.search()];
-								case 1:
-									return [2, ((_a.controller = _b.sent()), _a)];
-							}
-						});
-					});
-				},
-			];
-			var ObservablePaletteFacet = Object(mobxreact_esm.a)(function (_a) {
-					var args = _a.args,
-						facet = _a.facet;
-					return Object(preact_module.h)(Facet.a, __assign({}, args, { facet: facet }));
-				}),
-				Palette = function PaletteTemplate(args, _a) {
-					var _b,
-						controller = _a.loaded.controller,
-						facet =
-							null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
-								? void 0
-								: _b.facets
-										.filter(function (facet) {
-											return facet.display === types.b.PALETTE;
-										})
-										.shift();
-					return Object(preact_module.h)(ObservablePaletteFacet, { args: args, facet: facet });
-				}.bind({});
-			Palette.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						var _a;
-						return __generator(this, function (_b) {
-							switch (_b.label) {
-								case 0:
-									return (_a = {}), [4, snapInstance.search()];
-								case 1:
-									return [2, ((_a.controller = _b.sent()), _a)];
-							}
-						});
-					});
-				},
-			];
-			var ObservableGridFacet = Object(mobxreact_esm.a)(function (_a) {
-					var _b,
-						args = _a.args,
-						controller = _a.controller;
-					return Object(preact_module.h)(
-						Facet.a,
-						__assign({}, args, {
-							facet:
-								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
-									? void 0
-									: _b.facets
-											.filter(function (facet) {
-												return 'size_dress' === facet.field;
-											})
-											.pop(),
-						})
-					);
-				}),
-				Grid = function GridTemplate(args, _a) {
-					var controller = _a.loaded.controller;
-					return Object(preact_module.h)(ObservableGridFacet, { args: args, controller: controller });
-				}.bind({});
-			Grid.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						var _a;
-						return __generator(this, function (_b) {
-							switch (_b.label) {
-								case 0:
-									return (_a = {}), [4, snapInstance.search()];
-								case 1:
-									return [2, ((_a.controller = _b.sent()), _a)];
-							}
-						});
-					});
-				},
-			];
 		},
 		99: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -13309,6 +13411,430 @@
 				};
 		},
 		990: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, 'List', function () {
+					return List;
+				}),
+				__webpack_require__.d(__webpack_exports__, 'Slider', function () {
+					return Slider;
+				}),
+				__webpack_require__.d(__webpack_exports__, 'Palette', function () {
+					return Palette;
+				}),
+				__webpack_require__.d(__webpack_exports__, 'Grid', function () {
+					return Grid;
+				});
+			__webpack_require__(8),
+				__webpack_require__(42),
+				__webpack_require__(18),
+				__webpack_require__(31),
+				__webpack_require__(34),
+				__webpack_require__(49),
+				__webpack_require__(37),
+				__webpack_require__(30),
+				__webpack_require__(32),
+				__webpack_require__(22),
+				__webpack_require__(57),
+				__webpack_require__(23),
+				__webpack_require__(46),
+				__webpack_require__(43);
+			var preact_module = __webpack_require__(2),
+				mobxreact_esm = __webpack_require__(52),
+				blocks = __webpack_require__(9),
+				Facet = __webpack_require__(162),
+				paths = __webpack_require__(135),
+				types = __webpack_require__(59),
+				componentArgs = __webpack_require__(516),
+				snapify = __webpack_require__(39),
+				esm = (__webpack_require__(0), __webpack_require__(1));
+			function _extends() {
+				return (_extends =
+					Object.assign ||
+					function (target) {
+						for (var i = 1; i < arguments.length; i++) {
+							var source = arguments[i];
+							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+						}
+						return target;
+					}).apply(this, arguments);
+			}
+			const layoutProps = {};
+			function MDXContent({ components: components, ...props }) {
+				return Object(esm.b)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
+					Object(esm.b)('h2', { id: 'facet' }, 'Facet'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Renders a single facet, using ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdownm />'),
+						'. Automatically renders proper facet option component based on display of props.facet. Props available to disableCollapse of ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdown/>'),
+						', customize or hide the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon/>'),
+						', limit the options rendered. Built in Show More/Show Less functionality. '
+					),
+					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)(
+						'ul',
+						null,
+						Object(esm.b)('li', { parentName: 'ul' }, 'Dropdown'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'FacetListOptions'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'FacetGridOptions'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'FacetPaletteOptions'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'Slider'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'Icon')
+					),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller?.store?.facets[0]} />\n')
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var __assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				__awaiter = function (thisArg, _arguments, P, generator) {
+					return new (P || (P = Promise))(function (resolve, reject) {
+						function fulfilled(value) {
+							try {
+								step(generator.next(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function rejected(value) {
+							try {
+								step(generator.throw(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function step(result) {
+							result.done
+								? resolve(result.value)
+								: (function adopt(value) {
+										return value instanceof P
+											? value
+											: new P(function (resolve) {
+													resolve(value);
+											  });
+								  })(result.value).then(fulfilled, rejected);
+						}
+						step((generator = generator.apply(thisArg, _arguments || [])).next());
+					});
+				},
+				__generator = function (thisArg, body) {
+					var f,
+						y,
+						t,
+						g,
+						_ = {
+							label: 0,
+							sent: function sent() {
+								if (1 & t[0]) throw t[1];
+								return t[1];
+							},
+							trys: [],
+							ops: [],
+						};
+					return (
+						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
+						'function' == typeof Symbol &&
+							(g[Symbol.iterator] = function () {
+								return this;
+							}),
+						g
+					);
+					function verb(n) {
+						return function (v) {
+							return (function step(op) {
+								if (f) throw new TypeError('Generator is already executing.');
+								for (; _; )
+									try {
+										if (
+											((f = 1),
+											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+										)
+											return t;
+										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
+											case 0:
+											case 1:
+												t = op;
+												break;
+											case 4:
+												return _.label++, { value: op[1], done: !1 };
+											case 5:
+												_.label++, (y = op[1]), (op = [0]);
+												continue;
+											case 7:
+												(op = _.ops.pop()), _.trys.pop();
+												continue;
+											default:
+												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
+													_ = 0;
+													continue;
+												}
+												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+													_.label = op[1];
+													break;
+												}
+												if (6 === op[0] && _.label < t[1]) {
+													(_.label = t[1]), (t = op);
+													break;
+												}
+												if (t && _.label < t[2]) {
+													(_.label = t[2]), _.ops.push(op);
+													break;
+												}
+												t[2] && _.ops.pop(), _.trys.pop();
+												continue;
+										}
+										op = body.call(thisArg, _);
+									} catch (e) {
+										(op = [6, e]), (y = 0);
+									} finally {
+										f = t = 0;
+									}
+								if (5 & op[0]) throw op[1];
+								return { value: op[0] ? op[1] : void 0, done: !0 };
+							})([n, v]);
+						};
+					}
+				},
+				__spreadArray = function (to, from) {
+					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
+					return to;
+				},
+				snapInstance =
+					((__webpack_exports__.default = {
+						title: 'Organisms/Facet',
+						component: Facet.a,
+						parameters: {
+							docs: {
+								page: function page() {
+									return Object(preact_module.h)(
+										'div',
+										null,
+										Object(preact_module.h)(MDXContent, null),
+										Object(preact_module.h)(blocks.b, { story: blocks.d })
+									);
+								},
+							},
+						},
+						decorators: [
+							function (Story) {
+								return Object(preact_module.h)(
+									'div',
+									{ style: { maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' } },
+									Object(preact_module.h)(Story, null)
+								);
+							},
+						],
+						argTypes: __assign(
+							{
+								facet: {
+									description: 'Facet store reference',
+									type: { required: !0 },
+									table: { type: { summary: 'facet store object' } },
+									control: { type: 'none' },
+								},
+								optionsLimitCount: {
+									defaultValue: 12,
+									description: "Number of facet options to display before a 'show more' button appears",
+									table: { type: { summary: 'number' } },
+									control: { type: 'number' },
+								},
+								hideIcon: {
+									description: 'Hide facet header icons',
+									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+									control: { type: 'boolean' },
+								},
+								color: { description: 'Select color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+								iconColor: {
+									description: 'Select icon color',
+									table: { type: { summary: 'string' }, defaultValue: { summary: '#333' } },
+									control: { type: 'color' },
+								},
+								disableCollapse: {
+									description: 'Disable collapse - used with internal state only',
+									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+									control: { type: 'boolean' },
+								},
+								iconExpand: {
+									defaultValue: 'angle-down',
+									description: 'Icon for when facet is collapsed',
+									table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-down' } },
+									control: { type: 'select', options: __spreadArray([], Object.keys(paths.a)) },
+								},
+								iconCollapse: {
+									defaultValue: 'angle-up',
+									description: 'Icon for when facet is expanded',
+									table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-up' } },
+									control: { type: 'select', options: __spreadArray([], Object.keys(paths.a)) },
+								},
+							},
+							componentArgs.a
+						),
+					}),
+					snapify.a.search({ globals: { siteId: 'scmq7n' } })),
+				ObservableListFacet = Object(mobxreact_esm.a)(function (_a) {
+					var _b,
+						args = _a.args,
+						controller = _a.controller;
+					return Object(preact_module.h)(
+						Facet.a,
+						__assign({}, args, {
+							facet:
+								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+									? void 0
+									: _b.facets
+											.filter(function (facet) {
+												return facet.display === types.b.LIST;
+											})
+											.shift(),
+						})
+					);
+				}),
+				List = function ListTemplate(args, _a) {
+					var controller = _a.loaded.controller;
+					return Object(preact_module.h)(ObservableListFacet, { args: args, controller: controller });
+				}.bind({});
+			List.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
+			var ObservableSliderFacet = Object(mobxreact_esm.a)(function (_a) {
+					var _b,
+						args = _a.args,
+						controller = _a.controller;
+					return Object(preact_module.h)(
+						Facet.a,
+						__assign({}, args, {
+							facet:
+								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+									? void 0
+									: _b.facets
+											.filter(function (facet) {
+												return facet.display === types.b.SLIDER;
+											})
+											.shift(),
+						})
+					);
+				}),
+				Slider = function SliderTemplate(args, _a) {
+					var controller = _a.loaded.controller;
+					return Object(preact_module.h)(ObservableSliderFacet, { args: args, controller: controller });
+				}.bind({});
+			Slider.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
+			var ObservablePaletteFacet = Object(mobxreact_esm.a)(function (_a) {
+					var args = _a.args,
+						facet = _a.facet;
+					return Object(preact_module.h)(Facet.a, __assign({}, args, { facet: facet }));
+				}),
+				Palette = function PaletteTemplate(args, _a) {
+					var _b,
+						controller = _a.loaded.controller,
+						facet =
+							null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+								? void 0
+								: _b.facets
+										.filter(function (facet) {
+											return facet.display === types.b.PALETTE;
+										})
+										.shift();
+					return Object(preact_module.h)(ObservablePaletteFacet, { args: args, facet: facet });
+				}.bind({});
+			Palette.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
+			var ObservableGridFacet = Object(mobxreact_esm.a)(function (_a) {
+					var _b,
+						args = _a.args,
+						controller = _a.controller;
+					return Object(preact_module.h)(
+						Facet.a,
+						__assign({}, args, {
+							facet:
+								null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+									? void 0
+									: _b.facets
+											.filter(function (facet) {
+												return 'size_dress' === facet.field;
+											})
+											.pop(),
+						})
+					);
+				}),
+				Grid = function GridTemplate(args, _a) {
+					var controller = _a.loaded.controller;
+					return Object(preact_module.h)(ObservableGridFacet, { args: args, controller: controller });
+				}.bind({});
+			Grid.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
+		},
+		991: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Grid', function () {

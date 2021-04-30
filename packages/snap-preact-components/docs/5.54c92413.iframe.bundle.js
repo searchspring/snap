@@ -1,8 +1,8 @@
 (window.webpackJsonp = window.webpackJsonp || []).push([
 	[5],
 	{
-		1037: function (module, exports, __webpack_require__) {
-			const cssKeywords = __webpack_require__(1094),
+		1038: function (module, exports, __webpack_require__) {
+			const cssKeywords = __webpack_require__(1095),
 				reverseKeywords = {};
 			for (const key of Object.keys(cssKeywords)) reverseKeywords[cssKeywords[key]] = key;
 			const convert = {
@@ -454,9 +454,9 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		1093: function (module, exports, __webpack_require__) {
-			const conversions = __webpack_require__(1037),
-				route = __webpack_require__(1095),
+		1094: function (module, exports, __webpack_require__) {
+			const conversions = __webpack_require__(1038),
+				route = __webpack_require__(1096),
 				convert = {};
 			Object.keys(conversions).forEach((fromModel) => {
 				(convert[fromModel] = {}),
@@ -487,7 +487,7 @@
 			}),
 				(module.exports = convert);
 		},
-		1094: function (module, exports, __webpack_require__) {
+		1095: function (module, exports, __webpack_require__) {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],
@@ -640,8 +640,8 @@
 				yellowgreen: [154, 205, 50],
 			};
 		},
-		1095: function (module, exports, __webpack_require__) {
-			const conversions = __webpack_require__(1037);
+		1096: function (module, exports, __webpack_require__) {
+			const conversions = __webpack_require__(1038);
 			function deriveBFS(fromModel) {
 				const graph = (function buildGraph() {
 						const graph = {},
@@ -684,8 +684,8 @@
 				return conversion;
 			};
 		},
-		1096: function (module, exports, __webpack_require__) {
-			var debounce = __webpack_require__(1097),
+		1097: function (module, exports, __webpack_require__) {
+			var debounce = __webpack_require__(1098),
 				isObject = __webpack_require__(124);
 			module.exports = function throttle(func, wait, options) {
 				var leading = !0,
@@ -698,10 +698,10 @@
 				);
 			};
 		},
-		1097: function (module, exports, __webpack_require__) {
+		1098: function (module, exports, __webpack_require__) {
 			var isObject = __webpack_require__(124),
-				now = __webpack_require__(1098),
-				toNumber = __webpack_require__(1099),
+				now = __webpack_require__(1099),
+				toNumber = __webpack_require__(1100),
 				nativeMax = Math.max,
 				nativeMin = Math.min;
 			module.exports = function debounce(func, wait, options) {
@@ -767,14 +767,14 @@
 				);
 			};
 		},
-		1098: function (module, exports, __webpack_require__) {
+		1099: function (module, exports, __webpack_require__) {
 			var root = __webpack_require__(91);
 			module.exports = function () {
 				return root.Date.now();
 			};
 		},
-		1099: function (module, exports, __webpack_require__) {
-			var baseTrim = __webpack_require__(1100),
+		1100: function (module, exports, __webpack_require__) {
+			var baseTrim = __webpack_require__(1101),
 				isObject = __webpack_require__(124),
 				isSymbol = __webpack_require__(258),
 				reIsBadHex = /^[-+]0x[0-9a-f]+$/i,
@@ -794,14 +794,14 @@
 				return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
 			};
 		},
-		1100: function (module, exports, __webpack_require__) {
-			var trimmedEndIndex = __webpack_require__(1101),
+		1101: function (module, exports, __webpack_require__) {
+			var trimmedEndIndex = __webpack_require__(1102),
 				reTrimStart = /^\s+/;
 			module.exports = function baseTrim(string) {
 				return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
 			};
 		},
-		1101: function (module, exports) {
+		1102: function (module, exports) {
 			var reWhitespace = /\s/;
 			module.exports = function trimmedEndIndex(string) {
 				for (var index = string.length; index-- && reWhitespace.test(string.charAt(index)); );
@@ -860,7 +860,7 @@
 				};
 			TooltipNote.displayName = 'TooltipNote';
 		},
-		998: function (module, __webpack_exports__, __webpack_require__) {
+		999: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'ColorControl', function () {
@@ -880,7 +880,7 @@
 				__webpack_require__(101),
 				__webpack_require__(79),
 				__webpack_require__(100),
-				__webpack_require__(197);
+				__webpack_require__(198);
 			var compat_module = __webpack_require__(0);
 			function index_module_l() {
 				return (index_module_l =
@@ -1296,13 +1296,13 @@
 					},
 					equal: A,
 				},
-				color_convert = __webpack_require__(1093),
+				color_convert = __webpack_require__(1094),
 				color_convert_default = __webpack_require__.n(color_convert),
-				throttle = __webpack_require__(1096),
+				throttle = __webpack_require__(1097),
 				throttle_default = __webpack_require__.n(throttle),
 				esm = __webpack_require__(4),
 				TooltipNote = __webpack_require__(523),
-				lazy_WithTooltip = __webpack_require__(180),
+				lazy_WithTooltip = __webpack_require__(181),
 				esm_form = __webpack_require__(77),
 				icon = __webpack_require__(51);
 			function _slicedToArray(arr, i) {
