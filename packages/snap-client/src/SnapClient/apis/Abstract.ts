@@ -1,5 +1,3 @@
-export const BASE_PATH = 'https://snapi.kube.searchspring.io/api/v1';
-
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
 export type Json = any;
@@ -16,8 +14,8 @@ export interface RequestOpts {
 	body?: HTTPBody;
 }
 
-export class AbstractApi {
-	constructor(protected configuration = new Configuration()) {
+export class API {
+	constructor(protected configuration = new ApiConfiguration()) {
 		// nothing else todo
 	}
 
@@ -59,18 +57,18 @@ export class AbstractApi {
 
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
-export interface ConfigurationParameters {
+export interface ApiConfigurationParameters {
 	basePath?: string; // override base path
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 }
 
-export class Configuration {
-	constructor(private configuration: ConfigurationParameters = {}) {}
+export class ApiConfiguration {
+	constructor(private configuration: ApiConfigurationParameters = {}) {}
 
 	get basePath(): string {
-		return this.configuration.basePath != null ? this.configuration.basePath : BASE_PATH;
+		return this.configuration.basePath;
 	}
 
 	get fetchApi(): FetchAPI {

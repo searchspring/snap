@@ -1,17 +1,28 @@
 export type SnapClientConfig = {
 	meta?: {
-		prefetch: boolean;
-		ttl: number;
-		apiHost: string;
+		prefetch?: boolean;
+		ttl?: number;
+		api?: SnapApiConfig;
 	};
 	search?: {
-		apiHost: string;
+		api?: SnapApiConfig;
 	};
 	autocomplete?: {
-		apiHost: string;
+		api?: SnapApiConfig;
+	};
+	trending?: {
+		prefetch?: boolean;
+		ttl?: number;
+		api?: SnapApiConfig;
 	};
 };
 
+export type SnapApiConfig = {
+	host?: string;
+	path?: string;
+};
+
 export type SnapClientGlobals = {
+	siteId: string;
 	[configurationPath: string]: any;
 };

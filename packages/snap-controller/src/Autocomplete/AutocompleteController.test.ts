@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime.js'; // snap client expects regenerator-runtime to be available globally
+import 'whatwg-fetch';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -37,7 +37,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: {},
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -45,7 +45,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: {},
 		eventManager: new EventManager(),
@@ -53,7 +53,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: { events: null, fire: null, on: null },
@@ -61,7 +61,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: {
@@ -75,7 +75,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -83,7 +83,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -96,7 +96,7 @@ const badArgs = [
 		logger: new Logger(),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -120,7 +120,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -143,7 +143,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -165,7 +165,7 @@ describe('Autocomplete Controller', () => {
 		// settings.initializeFromUrl is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -188,7 +188,7 @@ describe('Autocomplete Controller', () => {
 		// settings.facets.trim is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -220,7 +220,7 @@ describe('Autocomplete Controller', () => {
 		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),

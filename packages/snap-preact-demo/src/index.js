@@ -3,7 +3,7 @@ import { h, Fragment, render } from 'preact';
 
 /* searchspring imports */
 import { SearchController } from '@searchspring/snap-controller';
-import { SnapClient } from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';

@@ -15,10 +15,14 @@
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"docs": "typedoc --out docs src/index.ts"
+	},
+	"dependencies": {
+		"he": "^1.2.0"
 	},
 	"devDependencies": {
-		"@searchspring/snapi-types": "^0.1.16"
+		"@searchspring/snapi-types": "^0.1.17"
 	},
 	"sideEffects": false,
 	"files": [
