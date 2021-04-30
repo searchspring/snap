@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime.js'; // snap client expects regenerator-runtime to be available globally
+import 'whatwg-fetch';
 
 import { FinderStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -35,7 +35,7 @@ const finderNonhierarchyConfig = {
 describe('Finder Controller', () => {
 	it('Hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderHierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
@@ -71,7 +71,7 @@ describe('Finder Controller', () => {
 
 	it('Non-hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
@@ -104,7 +104,7 @@ describe('Finder Controller', () => {
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+				client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 				store: new FinderStore(),
 				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 				eventManager: new EventManager(),
@@ -125,7 +125,7 @@ describe('Finder Controller', () => {
 
 	it('can call reset method', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, {}),
+			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),

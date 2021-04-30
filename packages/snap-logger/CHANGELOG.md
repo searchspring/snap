@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.5 (2021-04-30)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
+
+
+
+
+## 0.1.4 (2021-04-30)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
+
+
+
+
+## 0.1.3 (2021-04-30)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
+
+
+
+
+## 0.1.2 (2021-04-29)
+
+
+### Bug Fixes
+
+* commit docs ([#29](https://github.com/searchspring/snap/issues/29)) ([dd69d05](https://github.com/searchspring/snap/commit/dd69d0548465672eb58ab720884ce2d8190a0677))
+
+
+
+
+
 # 0.1.0 (2021-04-29)
 
 

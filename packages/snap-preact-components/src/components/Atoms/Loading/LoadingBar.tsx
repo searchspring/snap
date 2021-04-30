@@ -20,14 +20,14 @@ const CSS = {
 			opacity: '1',
 			visibility: 'visible',
 			zIndex: '9999',
-			background: backgroundColor || theme.colors.secondary,
+			background: backgroundColor || theme.colors?.secondary,
 
 			'& .ss-loadingbar-bar': {
 				position: 'absolute',
 				top: '0',
 				left: '-200px',
 				height: '100%',
-				background: `${color || theme.colors.primary}`,
+				background: `${color || theme.colors?.primary}`,
 				animation: `${animation} 2s linear infinite`,
 			},
 			...style,
@@ -50,8 +50,8 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 		// default props
 		disableStyles: false,
 		active: false,
-		color: defaultTheme.colors.primary,
-		backgroundColor: defaultTheme.colors.secondary,
+		color: defaultTheme.colors?.primary,
+		backgroundColor: defaultTheme.colors?.secondary,
 		height: '5px',
 		// global theme
 		...globalTheme?.components?.loadingbar,

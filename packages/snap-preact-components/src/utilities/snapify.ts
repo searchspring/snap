@@ -1,5 +1,5 @@
 /* searchspring imports */
-import { SnapClient } from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';

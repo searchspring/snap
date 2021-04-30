@@ -5,20 +5,18 @@
 		"packages/*",
 		"packages/snapps/*"
 	],
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/searchspring"
-	},
 	"scripts": {
 		"commit": "cz",
 		"build": "node_modules/.bin/lerna exec --stream 'npm run build'",
-		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run docs'",
+		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run build:docs'",
 		"test": "npm run test --workspaces",
 		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
+		"dev:docs": "npx serve ./ -l 2222",
 		"lint": "npm run lint --workspaces",
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
 		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"publish": "node_modules/.bin/lerna publish --yes",
+		"publish": "node_modules/.bin/lerna publish --no-git-reset --yes",
 		"prepare": "husky install"
 	},
 	"prettier": "@searchspring/prettier",
@@ -39,11 +37,11 @@
 		"lerna": "^4.0.0",
 		"lint-staged": "^10.5.4",
 		"prettier": "^2.2.1",
-		"regenerator-runtime": "^0.13.7",
 		"standard-version": "^9.2.0",
 		"ts-jest": "^26.5.5",
 		"typedoc": "^0.20.36",
-		"typescript": "^4.2.4"
+		"typescript": "^4.2.4",
+		"whatwg-fetch": "^3.6.2"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx}": [

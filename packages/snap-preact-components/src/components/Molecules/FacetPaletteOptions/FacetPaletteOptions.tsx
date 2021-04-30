@@ -68,7 +68,7 @@ const CSS = {
 			whiteSpace: 'nowrap',
 
 			'&.filtered': {
-				color: theme.colorPrimary,
+				color: theme.colors?.primary,
 			},
 		}),
 };
