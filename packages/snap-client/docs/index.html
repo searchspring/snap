@@ -67,11 +67,11 @@
 					<h1>Quick Links</h1>
 				</a>
 				<p><a href="http://snapi.kube.searchspring.io/api/v1/">Snap API docs</a> - Search &amp; Autocomplete API documentation</p>
-				<p><a href="https://searchspring.github.io/snapi-explorer/">Snapi Explorer</a> - a tool for making requests to Searchspring&#39;s API (built with this client)</p>
+				<p><a href="https://searchspring.github.io/snapi-explorer/">Snapi Explorer</a> - a tool for making requests to Searchspring&#39;s API</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h1>Installation</h1>
 				</a>
-				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-client-javascript</span>
+				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-client</span>
 </code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h1>Usage</h1>
@@ -79,7 +79,7 @@
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h2>Import</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SnapClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client-javascript&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SnapClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client&#039;</span><span style="color: #000000">;</span>
 </code></pre>
 				<a href="#global-config" id="global-config" style="color: inherit; text-decoration: none;">
 					<h2>Global Config</h2>
@@ -88,14 +88,14 @@
 				<p>Globals are API parameters that will be applied to all searches requested by the client. This will typically contain just the <em>siteId</em>; but could also include global filters, background filters, sorts, or merchandising segments.</p>
 				<p><code>siteId</code> (required)</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">globals</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;scmq7n&#039;</span>
+<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;a1b2c3&#039;</span>
 <span style="color: #000000">};</span>
 </code></pre>
 				<p>Any other keys defined here will be passed to the API request</p>
 				<p>For a full list of parameters please see the <a href="http://snapi.kube.searchspring.io/api/v1/">Snap API docs</a></p>
 				<p>For example, with background filter:</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">globals</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;scmq7n&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;a1b2c3&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">filters:</span><span style="color: #000000"> [{</span>
 <span style="color: #000000">    </span><span style="color: #001080">field:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;stock_status&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;yes&#039;</span><span style="color: #000000">,</span>
@@ -108,10 +108,28 @@
 					<h2>Client Config</h2>
 				</a>
 				<p>Object required for all controllers</p>
-				<p><code>apiHost</code> (optional) - Specify local <a href="https://link.to.snapi">Snapi</a> endpoint for development</p>
-				<!-- TODO: snapi link -->
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clientConfig</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">apiHost:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://localhost:8080/api/v1&#039;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">SnapClientConfig</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">meta</span><span style="color: #000000">?: {</span>
+<span style="color: #000000">        </span><span style="color: #001080">prefetch</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">ttl</span><span style="color: #000000">?: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">api</span><span style="color: #000000">?: </span><span style="color: #267F99">SnapApiConfig</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">    </span><span style="color: #001080">search</span><span style="color: #000000">?: {</span>
+<span style="color: #000000">        </span><span style="color: #001080">api</span><span style="color: #000000">?: </span><span style="color: #267F99">SnapApiConfig</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">    </span><span style="color: #001080">autocomplete</span><span style="color: #000000">?: {</span>
+<span style="color: #000000">        </span><span style="color: #001080">api</span><span style="color: #000000">?: </span><span style="color: #267F99">SnapApiConfig</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">    </span><span style="color: #001080">trending</span><span style="color: #000000">?: {</span>
+<span style="color: #000000">        </span><span style="color: #001080">prefetch</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">ttl</span><span style="color: #000000">?: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">api</span><span style="color: #000000">?: </span><span style="color: #267F99">SnapApiConfig</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">SnapApiConfig</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">host</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">path</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
 <span style="color: #000000">};</span>
 </code></pre>
 				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
