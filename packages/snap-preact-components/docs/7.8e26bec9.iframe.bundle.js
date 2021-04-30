@@ -1,7 +1,7 @@
 (window.webpackJsonp = window.webpackJsonp || []).push([
 	[7],
 	{
-		996: function (module, __webpack_exports__, __webpack_require__) {
+		921: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'getScrollAreaStyles', function () {
@@ -9,7 +9,7 @@
 				});
 			var _templateObject,
 				react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0),
-				_storybook_theming__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(64);
+				_storybook_theming__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71);
 			var hsResizeObserverDummyAnimation = Object(_storybook_theming__WEBPACK_IMPORTED_MODULE_1__.d)(
 					_templateObject ||
 						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {
