@@ -5,13 +5,10 @@
 		"packages/*",
 		"packages/snapps/*"
 	],
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/searchspring"
-	},
 	"scripts": {
 		"commit": "cz",
 		"build": "node_modules/.bin/lerna exec --stream 'npm run build'",
-		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run docs'",
+		"build:docs": "node_modules/.bin/lerna exec --stream --parallel 'npm run build:docs'",
 		"test": "npm run test --workspaces",
 		"dev": "node_modules/.bin/lerna exec --parallel --stream 'npm run dev'",
 		"dev:docs": "npx serve ./ -l 2222",

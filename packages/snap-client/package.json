@@ -6,17 +6,18 @@
 	"module": "dist/esm/index.js",
 	"author": "Searchspring",
 	"license": "MIT",
+	"repository":"https://github.com/searchspring/snap",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/searchspring"
 	},
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"build:docs": "typedoc --out docs src/index.ts",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
-		"test:watch": "jest --watch",
-		"docs": "typedoc --out docs src/index.ts"
+		"test:watch": "jest --watch"
 	},
 	"dependencies": {
 		"he": "^1.2.0"

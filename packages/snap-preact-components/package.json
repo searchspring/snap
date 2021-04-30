@@ -3,26 +3,26 @@
 	"version": "0.1.3",
 	"description": "Snap Preact Component Library",
 	"author": "Searchspring",
-	"license": "ISC",
+	"license": "MIT",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
+	"repository":"https://github.com/searchspring/snap",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/searchspring"
 	},
 	"files": [
-		"dist",
+		"dist/**/*",
 		"README.md"
 	],
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
+		"build:docs": "build-storybook -o ./docs",
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/components/**/*.{js,jsx,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",
 		"test": "jest",
-		"test:watch": "jest --watch",
-		"storybook:build": "build-storybook -o ./docs",
-		"docs": "build-storybook -o ./docs"
+		"test:watch": "jest --watch"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.1.5",
