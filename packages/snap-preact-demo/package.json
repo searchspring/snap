@@ -1,24 +1,19 @@
 {
-	"name": "@searchspring/snap-preact-demo",
-	"version": "0.1.4",
-	"description": "",
-	"main": "index.js",
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/searchspring"
-	},
+	"private": true,
+	"author": "Searchspring",
+	"license": "MIT",
+	"description": "demo store for development and testing",
 	"scripts": {
 		"analyze": "webpack --analyze",
 		"build": "rm -fr ./dist && webpack --mode=production",
+		"build:docs": "echo 'no docs for snap-preact-demo'",
 		"build:watch": "rm -fr ./dist && webpack --watch --mode=production",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve",
 		"cypress": "cypress open --project tests",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))",
-		"docs": "echo 'skipping docs for snap-preact-demo'"
+		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
 	},
-	"author": "",
-	"license": "MIT",
 	"dependencies": {
 		"@searchspring/snap-client": "^0.1.4",
 		"@searchspring/snap-controller": "^0.1.4",
