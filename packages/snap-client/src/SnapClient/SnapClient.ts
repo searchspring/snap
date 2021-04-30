@@ -106,6 +106,10 @@ export class SnapClient {
 	}
 
 	async autocomplete(params: AutocompleteRequestModel = {}): Promise<AutocompleteResponseModel> {
+		if (!params.search?.query?.string) {
+			throw 'query string parameter is required';
+		}
+
 		params = deepmerge(this.globals, params);
 
 		!cache[this.globals.siteId].meta && this.fetchMeta();
