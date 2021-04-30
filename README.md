@@ -130,6 +130,15 @@ Demo store: http://localhost:4444
 
 Webpack bundle analyzer: http://localhost:8888
 
+## Docs
+Serves the contents of the root directory to allow you to view the docs
+
+Docs: http://localhost:2222/
+
+```shell
+npm run dev:docs
+```
+
 ## Commit
 Instead of using `git commit`, use `npm run commit` to utilize Commitizen
 ```shell
