@@ -11934,16 +11934,45 @@
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
 					Object(esm.b)('h2', { id: 'breadcrumbs' }, 'Breadcrumbs'),
-					Object(esm.b)('p', null, 'Renders a ul of anchor tags, can use an optional passed in separator.'),
+					Object(esm.b)('p', null, 'Renders a list of breadcrumbs. '),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'data' }, 'data'),
+					Object(esm.b)(
+						'p',
+						null,
+						'An array of crumbs. Each crumb contains a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'),
+						' and an optional ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'url')
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Breadcrumbs separator='/' data={[{url: '/',label: 'Home'},{url: '/',label: 'Collections'},{url: '/',label: 'Appliances'},{label: 'Fridge'}]} />\n"
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const breadcrumbs = [\n    {url: '/',label: 'Home'},\n    {url: '/',label: 'Collections'},\n    {url: '/',label: 'Appliances'},\n    {label: 'Fridge'}\n]\n"
 						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator='/' data={breadcrumbs} />\n")
+					),
+					Object(esm.b)('h3', { id: 'separator' }, 'separator'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Breadcrumbs can be separated by a custom separator using the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' prop. The default separator is ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'/'"),
+						'. This can be a string or a JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator='>' data={breadcrumbs} />\n")
 					)
 				);
 			}
@@ -15495,18 +15524,50 @@
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
 					Object(esm.b)('h2', { id: 'badge' }, 'Badge'),
-					Object(esm.b)('p', null, 'Renders an simple badge with with positioning built in, can render content or children. '),
+					Object(esm.b)(
+						'p',
+						null,
+						'Renders an absolute-positioned badge. It is expected that the parent element contains ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'position: relative')
+					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, ' Content prop'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Badge content="Sale"/>\n')),
-					Object(esm.b)('p', null, 'Children and position prop'),
+					Object(esm.b)('h3', { id: 'content' }, 'Content'),
+					Object(esm.b)('p', null, 'Badge contents can be provided in the ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'), ' prop'),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Badge position={{"top":0,"right":0}}>\n    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />\n</Badge>\n'
+							'<div style="position: relative;">\n    <Badge content="Sale"/>\n</div>\n'
+						)
+					),
+					Object(esm.b)('p', null, 'Or alternatively as children:'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Badge>\n    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />\n</Badge>\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'position' }, 'Position'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Badge position by default is top left. This can be changed using the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'position'),
+						' prop.'
+					),
+					Object(esm.b)('p', null, 'In this example, the badge will be 2px from the top and 2px from the right:'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Badge position={{ "top": 2, "right": 2 }}>\n    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />\n</Badge>\n'
 						)
 					)
 				);
@@ -15609,24 +15670,102 @@
 					Object(esm.b)(
 						'p',
 						null,
-						'Render as unstyled native button, or a div styled like a button based on the optional native prop. can take content or children, styling props available, has the ability to change the onClick functionality. '
+						'Render as unstyled native button, or a div styled like a button based on the optional ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
+						' prop. can take ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' or ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'children'),
+						', styling props available, has the ability to change the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' functionality. '
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Content prop'),
+					Object(esm.b)('h3', { id: 'content' }, 'Content'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Button contents can be provided in the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' prop. This can be a string or a JSX element.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} />\n')),
+					Object(esm.b)('p', null, 'Or alternatively as children:'),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button>click me!</Button>\n')),
+					Object(esm.b)('h3', { id: 'disabled' }, 'Disabled'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
+						' prop will disable a button from being clickable'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} onClick={() => somefunc}/>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} disabled={true}/>\n')
 					),
-					Object(esm.b)('p', null, 'Children'),
+					Object(esm.b)('h3', { id: 'native' }, 'Native'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
+						' prop will use a native html ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<button>'),
+						' element instead of the default custom styled button utilizing a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<div>'),
+						' element'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} native={true}/>\n')
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Button onClick={() => somefunc}>\n       click me!\n</Button>\n'
+							'<Button content={"click me!"} onClick={(e)=>{console.log(e)}} />\n'
 						)
+					),
+					Object(esm.b)('h2', { id: 'styling' }, 'Styling'),
+					Object(esm.b)(
+						'p',
+						null,
+						'In addition to global and component level styling available for all components (see Theme documentation), this component has the following props:'
+					),
+					Object(esm.b)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
+					Object(esm.b)('p', null, 'Button background color'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} backgroundColor={\'#eeeeee\'}/>\n')
+					),
+					Object(esm.b)('h3', { id: 'bordercolor' }, 'borderColor'),
+					Object(esm.b)('p', null, 'Button border color'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} borderColor={\'#cccccc\'}/>\n')
+					),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)('p', null, 'Button text color'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} color={\'#222222\'}/>\n')
 					)
 				);
 			}
@@ -15727,50 +15866,135 @@
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
 					Object(esm.b)('h2', { id: 'dropdown' }, 'Dropdown'),
-					Object(esm.b)('p', null, 'Renders a drop down and a button. '),
-					Object(esm.b)('h2', { id: 'specific-callouts' }, 'Specific Callouts'),
 					Object(esm.b)(
-						'ul',
+						'p',
 						null,
-						Object(esm.b)(
-							'li',
-							{ parentName: 'ul' },
-							Object(esm.b)(
-								'p',
-								{ parentName: 'li' },
-								'onToggle prop executes when the internal state changes, gets passed the event and the internal state - used with internal state only'
-							)
-						),
-						Object(esm.b)(
-							'li',
-							{ parentName: 'ul' },
-							Object(esm.b)(
-								'p',
-								{ parentName: 'li' },
-								"startOpen prop sets the dropdown open state on initial render - used with internal state only',"
-							)
-						),
-						Object(esm.b)(
-							'li',
-							{ parentName: 'ul' },
-							Object(esm.b)('p', { parentName: 'li' }, 'use the Open prop to pass a value to control the state externally')
-						)
+						'Renders a button and content. Clicking the button toggles content visibility. Typically used as an alternative to a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<select>'),
+						' dropdown or to collapse content.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Using content prop'),
+					Object(esm.b)('h3', { id: 'content' }, 'Content'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Dropdown contents can be provided in the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' prop. This can be a string or a JSX element.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Dropdown button='button text' content='content text' />\n")
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown content={"Hello World!"} />\n')
 					),
-					Object(esm.b)('p', null, 'Using children'),
+					Object(esm.b)('p', null, 'Or alternatively as children:'),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown>Hello World!</Dropdown>\n')),
+					Object(esm.b)('h3', { id: 'button' }, 'Button'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Dropdown will render a button to toggle to visibility of the content. The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'button'),
+						' prop allows for a string or a JSX Element'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Dropdown button={'click me!'}>Hello World!</Dropdown>\n")
+					),
+					Object(esm.b)('h3', { id: 'open' }, 'Open'),
+					Object(esm.b)(
+						'p',
+						null,
+						'If the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
+						" prop is provided, it is expected that you will be managing the state of the dropdown. Otherwise if not present, the component will use it's own state to toggle the visibility of the dropdown content."
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown open={true}>Hello World!</Dropdown>\n')
+					),
+					Object(esm.b)('h3', { id: 'startopen' }, 'startOpen'),
+					Object(esm.b)(
+						'p',
+						null,
+						'Sets the dropdowns initial internal state. Cannot be used with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown startOpen={true}>Hello World!</Dropdown>\n')
+					),
+					Object(esm.b)('h3', { id: 'disabled' }, 'Disabled'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
+						' prop prevents the button from toggling the visibility of the dropdown content, as well as preventing the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' callback from being invoked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disabled={true}>Hello World!</Dropdown>\n')
+					),
+					Object(esm.b)('h3', { id: 'disableclickoutside' }, 'disableClickOutside'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disableClickOutside'),
+						' prop by default is ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'false'),
+						'. Setting this to ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'true'),
+						' will not close the dropdown if a click event was registered outside the dropdown content.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disableClickOutside={true}>Hello World!</Dropdown>\n')
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when the dropdown button is clicked'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Dropdown button='button text'>\n       content text\n</Dropdown>\n"
+							'<Dropdown onClick={(e)=>{console.log(e)}} >Hello World!</Dropdown>\n'
+						)
+					),
+					Object(esm.b)('h4', { id: 'ontoggle' }, 'onToggle'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onToggle'),
+						' prop allows for a custom callback function for when the dropdown visibility is toggled. This only applies if using internal state. Cannot be used with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Dropdown onToggle={(e)=>{console.log(e)}} >Hello World!</Dropdown>\n'
 						)
 					)
 				);
