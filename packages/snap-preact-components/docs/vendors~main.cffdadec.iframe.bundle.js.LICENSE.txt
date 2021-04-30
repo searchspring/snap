@@ -40,6 +40,8 @@ object-assign
  * Released under the MIT License.
  */
 
+/*! https://mths.be/he v1.2.0 by @mathias | MIT license */
+
 /** @license React v16.13.1
  * react-is.production.min.js
  *
