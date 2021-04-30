@@ -18,7 +18,7 @@
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
 		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"publish": "node_modules/.bin/lerna publish --yes",
+		"publish": "node_modules/.bin/lerna publish --no-git-reset --yes",
 		"prepare": "husky install"
 	},
 	"prettier": "@searchspring/prettier",
@@ -41,6 +41,7 @@
 		"prettier": "^2.2.1",
 		"standard-version": "^9.2.0",
 		"ts-jest": "^26.5.5",
+		"typedoc": "^0.20.36",
 		"typescript": "^4.2.4",
 		"whatwg-fetch": "^3.6.2"
 	},

@@ -18,4 +18,4 @@ Please reference Searchspring's [Community Contribution Guidelines](https://gith
 
 ## Documentation
 
-For all Snap documentation, see [Snap Docs](https://searchspring.github.io/snap/docs/)
+For all Snap documentation, see [Snap Docs](https://searchspring.github.io/snap/)

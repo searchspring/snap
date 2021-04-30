@@ -1,8 +1,8 @@
 (window.webpackJsonp = window.webpackJsonp || []).push([
 	[5],
 	{
-		1028: function (module, exports, __webpack_require__) {
-			const cssKeywords = __webpack_require__(1085),
+		1037: function (module, exports, __webpack_require__) {
+			const cssKeywords = __webpack_require__(1094),
 				reverseKeywords = {};
 			for (const key of Object.keys(cssKeywords)) reverseKeywords[cssKeywords[key]] = key;
 			const convert = {
@@ -454,9 +454,9 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		1084: function (module, exports, __webpack_require__) {
-			const conversions = __webpack_require__(1028),
-				route = __webpack_require__(1086),
+		1093: function (module, exports, __webpack_require__) {
+			const conversions = __webpack_require__(1037),
+				route = __webpack_require__(1095),
 				convert = {};
 			Object.keys(conversions).forEach((fromModel) => {
 				(convert[fromModel] = {}),
@@ -487,7 +487,7 @@
 			}),
 				(module.exports = convert);
 		},
-		1085: function (module, exports, __webpack_require__) {
+		1094: function (module, exports, __webpack_require__) {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],
@@ -640,8 +640,8 @@
 				yellowgreen: [154, 205, 50],
 			};
 		},
-		1086: function (module, exports, __webpack_require__) {
-			const conversions = __webpack_require__(1028);
+		1095: function (module, exports, __webpack_require__) {
+			const conversions = __webpack_require__(1037);
 			function deriveBFS(fromModel) {
 				const graph = (function buildGraph() {
 						const graph = {},
@@ -684,9 +684,9 @@
 				return conversion;
 			};
 		},
-		1087: function (module, exports, __webpack_require__) {
-			var debounce = __webpack_require__(1088),
-				isObject = __webpack_require__(134);
+		1096: function (module, exports, __webpack_require__) {
+			var debounce = __webpack_require__(1097),
+				isObject = __webpack_require__(124);
 			module.exports = function throttle(func, wait, options) {
 				var leading = !0,
 					trailing = !0;
@@ -698,10 +698,10 @@
 				);
 			};
 		},
-		1088: function (module, exports, __webpack_require__) {
-			var isObject = __webpack_require__(134),
-				now = __webpack_require__(1089),
-				toNumber = __webpack_require__(1090),
+		1097: function (module, exports, __webpack_require__) {
+			var isObject = __webpack_require__(124),
+				now = __webpack_require__(1098),
+				toNumber = __webpack_require__(1099),
 				nativeMax = Math.max,
 				nativeMin = Math.min;
 			module.exports = function debounce(func, wait, options) {
@@ -767,16 +767,16 @@
 				);
 			};
 		},
-		1089: function (module, exports, __webpack_require__) {
-			var root = __webpack_require__(97);
+		1098: function (module, exports, __webpack_require__) {
+			var root = __webpack_require__(91);
 			module.exports = function () {
 				return root.Date.now();
 			};
 		},
-		1090: function (module, exports, __webpack_require__) {
-			var baseTrim = __webpack_require__(1091),
-				isObject = __webpack_require__(134),
-				isSymbol = __webpack_require__(264),
+		1099: function (module, exports, __webpack_require__) {
+			var baseTrim = __webpack_require__(1100),
+				isObject = __webpack_require__(124),
+				isSymbol = __webpack_require__(258),
 				reIsBadHex = /^[-+]0x[0-9a-f]+$/i,
 				reIsBinary = /^0b[01]+$/i,
 				reIsOctal = /^0o[0-7]+$/i,
@@ -794,26 +794,26 @@
 				return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
 			};
 		},
-		1091: function (module, exports, __webpack_require__) {
-			var trimmedEndIndex = __webpack_require__(1092),
+		1100: function (module, exports, __webpack_require__) {
+			var trimmedEndIndex = __webpack_require__(1101),
 				reTrimStart = /^\s+/;
 			module.exports = function baseTrim(string) {
 				return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
 			};
 		},
-		1092: function (module, exports) {
+		1101: function (module, exports) {
 			var reWhitespace = /\s/;
 			module.exports = function trimmedEndIndex(string) {
 				for (var index = string.length; index-- && reWhitespace.test(string.charAt(index)); );
 				return index;
 			};
 		},
-		526: function (module, __webpack_exports__, __webpack_require__) {
+		523: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return TooltipNote;
 			});
-			__webpack_require__(45), __webpack_require__(21), __webpack_require__(148);
+			__webpack_require__(44), __webpack_require__(22), __webpack_require__(140);
 			var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 			function _objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
@@ -860,27 +860,27 @@
 				};
 			TooltipNote.displayName = 'TooltipNote';
 		},
-		995: function (module, __webpack_exports__, __webpack_require__) {
+		998: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'ColorControl', function () {
 					return Color_ColorControl;
 				});
-			__webpack_require__(30),
-				__webpack_require__(37),
-				__webpack_require__(45),
-				__webpack_require__(18),
-				__webpack_require__(65),
-				__webpack_require__(265),
-				__webpack_require__(108),
+			__webpack_require__(26),
+				__webpack_require__(46),
+				__webpack_require__(44),
+				__webpack_require__(19),
+				__webpack_require__(73),
+				__webpack_require__(340),
+				__webpack_require__(139),
 				__webpack_require__(8),
-				__webpack_require__(21),
-				__webpack_require__(107),
-				__webpack_require__(16),
-				__webpack_require__(92),
-				__webpack_require__(62),
-				__webpack_require__(69),
-				__webpack_require__(205);
+				__webpack_require__(22),
+				__webpack_require__(138),
+				__webpack_require__(23),
+				__webpack_require__(101),
+				__webpack_require__(79),
+				__webpack_require__(100),
+				__webpack_require__(197);
 			var compat_module = __webpack_require__(0);
 			function index_module_l() {
 				return (index_module_l =
@@ -1296,15 +1296,15 @@
 					},
 					equal: A,
 				},
-				color_convert = __webpack_require__(1084),
+				color_convert = __webpack_require__(1093),
 				color_convert_default = __webpack_require__.n(color_convert),
-				throttle = __webpack_require__(1087),
+				throttle = __webpack_require__(1096),
 				throttle_default = __webpack_require__.n(throttle),
 				esm = __webpack_require__(4),
-				TooltipNote = __webpack_require__(526),
-				lazy_WithTooltip = __webpack_require__(188),
-				esm_form = __webpack_require__(83),
-				icon = __webpack_require__(54);
+				TooltipNote = __webpack_require__(523),
+				lazy_WithTooltip = __webpack_require__(180),
+				esm_form = __webpack_require__(77),
+				icon = __webpack_require__(51);
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
