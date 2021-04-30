@@ -8,18 +8,18 @@ Simple Javascript client for communicating with the Searchspring Snap API.
 
 [Snap API docs](http://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
 
-[Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API (built with this client)
+[Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API
 
 # Installation
 
 ```bash
-npm install --save @searchspring/snap-client-javascript
+npm install --save @searchspring/snap-client
 ```
 
 # Usage
 ## Import
 ```typescript
-import { SnapClient } from '@searchspring/snap-client-javascript';
+import { SnapClient } from '@searchspring/snap-client';
 ```
 
 ## Global Config
@@ -31,7 +31,7 @@ Globals are API parameters that will be applied to all searches requested by the
 
 ```typescript
 const globals = {
-	siteId: 'scmq7n'
+	siteId: 'a1b2c3'
 };
 ```
 
@@ -43,7 +43,7 @@ For example, with background filter:
 
 ```typescript
 const globals = {
-	siteId: 'scmq7n',
+	siteId: 'a1b2c3',
   filters: [{
     field: 'stock_status',
     value: 'yes',
@@ -56,12 +56,29 @@ const globals = {
 ## Client Config
 Object required for all controllers
 
-`apiHost` (optional) - Specify local [Snapi](https://link.to.snapi) endpoint for development
-<!-- TODO: snapi link -->
-
 ```typescript
-const clientConfig = {
-	apiHost: 'http://localhost:8080/api/v1'
+export type SnapClientConfig = {
+	meta?: {
+		prefetch?: boolean;
+		ttl?: number;
+		api?: SnapApiConfig;
+	};
+	search?: {
+		api?: SnapApiConfig;
+	};
+	autocomplete?: {
+		api?: SnapApiConfig;
+	};
+	trending?: {
+		prefetch?: boolean;
+		ttl?: number;
+		api?: SnapApiConfig;
+	};
+};
+
+export type SnapApiConfig = {
+	host?: string;
+	path?: string;
 };
 ```
 
