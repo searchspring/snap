@@ -10,7 +10,7 @@ The heart of controlling Search, Autocomplete, & Finder functionality. The Contr
 
 Snap Controller is a top-level package that requires the following dependencies as services:
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a> [@searchspring/snap-client-javascript](../snap-client-javascript)
+<a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a> [@searchspring/snap-client](../snap-client)
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a> [@searchspring/snap-store-mobx](../snap-store-mobx)
 
@@ -35,7 +35,7 @@ Snap Controller is a top-level package that requires the following dependencies 
 To install the `snap-controller` package and it's services:
 
 ```bash
-npm install --save @searchspring/snap-controller @searchspring/snap-client-javascript @searchspring/snap-store-mobx @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger
+npm install --save @searchspring/snap-controller @searchspring/snap-client @searchspring/snap-store-mobx @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger
 ```
 
 # Usage
@@ -47,7 +47,7 @@ The complete example below shows how a `SearchController` could be instatiated, 
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
+import SnapClient from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -189,7 +189,7 @@ const searchConfig = {
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
+import SnapClient from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -275,7 +275,7 @@ const autocompleteConfig = {
 
 ```typescript
 import { AutocompleteController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
+import SnapClient from '@searchspring/snap-client';
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -423,7 +423,7 @@ const finderConfig = {
 
 ```typescript
 import { FinderController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client-javascript';
+import SnapClient from '@searchspring/snap-client';
 import { FinderStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
