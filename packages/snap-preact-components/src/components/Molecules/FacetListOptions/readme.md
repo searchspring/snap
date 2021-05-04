@@ -8,7 +8,7 @@ Renders a list of facet options.
 ## Usage
 
 ### values
-The required `values` prop contains all facet values where the facet type is 'list'
+The required `values` prop specifies all facet values where the facet type is 'list'.
 
 ```jsx
 <FacetListOptions values={listFacet.values} />
@@ -22,7 +22,7 @@ The `hideCheckbox` prop will disable the facet checkbox. Typically used if the f
 ```
 
 ### hideCount
-The `hideCount` prop will disable the facet count values
+The `hideCount` prop will disable the facet count values.
 
 ```jsx
 <FacetListOptions values={listFacet.values} hideCount={true} />
@@ -61,13 +61,13 @@ const valueProps = {
 ```
 
 ### checkbox
-The `checkbox` prop contains an object with `Checkbox` component props. See `Checkbox` component documentation for further details.
+The `checkbox` prop specifiesan object with `Checkbox` component props. See `Checkbox` component documentation for further details.
 
 
 ### Events
 
 #### onClick
-Callback function for when a facet value is clicked.
+The `onClick` prop allows for a custom callback function for when a facet value is clicked.
 
 ```jsx
 <FacetListOptions values={listFacet.values} onClick={(e)=>{console.log(e)}} />

@@ -1,32 +1,31 @@
 ## Badge
 
-Renders an absolute-positioned badge. It is expected that the parent element contains `position: relative`
+Renders an absolute-positioned badge. It is expected that the parent element contains `position: relative`.
 
 ## Usage
 
-### Content
-Badge contents can be provided in the `content` prop
+### content
+The `content` prop specifies the badge.
+
 ```jsx
 <div style="position: relative;">
-    <Badge content="Sale"/>
+    <Badge content="Sale" />
 </div>
 ```
 
-Or alternatively as children:
+Or alternatively using children:
 
 ```jsx    
-<Badge>
-    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />
-</Badge>
+<div style="position: relative;">
+    <Badge>Sale</Badge>
+</div>
 ```
 
-### Position
-Badge position by default is top left. This can be changed using the `position` prop.
+### position
+The `position` prop specifies an object with CSS `top`, `bottom`, `left`, and `right` attributes. The default position is top left `{ top: 0, left: 0 }`.
 
 In this example, the badge will be 2px from the top and 2px from the right:
 
 ```jsx    
-<Badge position={{ "top": 2, "right": 2 }}>
-    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />
-</Badge>
+<Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>
 ```

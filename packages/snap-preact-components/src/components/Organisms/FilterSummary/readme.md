@@ -4,18 +4,17 @@ Renders all selected filters including a wrapper with a title and a 'clear all' 
 
 ## Components Used
 - Filter
-
 ## Usage
 
 ### filters
-The required `filters` prop contains a reference to the filters store array. 
+The required `filters` prop specifies a reference to the filters store array. 
 
 ```jsx
 <FilterSummary filters={controller.store.filters} />
 ```
 
 ### title
-The `title` prop contains the title of the filter summary wrapper. The default is `'Current Filters'`
+The `title` prop specifies the title of the filter summary wrapper. The default is `'Current Filters'`.
 
 ```jsx
 <FilterSummary filters={controller.store.filters} title={'Current Filters'} />
@@ -50,7 +49,7 @@ The `hideFacetLabel` prop prevents the filter label (selected facet name) from d
 ```
 
 ### clearAllLabel
-The `clearAllLabel` prop is the 'clear all' button text. This is passed to the `<Filter />` sub-component `valueLabel` prop. The default value is `'Clear All'`
+The `clearAllLabel` prop is the 'clear all' button text. This is passed to the `<Filter />` sub-component `valueLabel` prop. The default value is `'Clear All'`.
 
 ```jsx
 <FilterSummary filters={controller.store.filters} clearAllLabel={'Clear All'} />

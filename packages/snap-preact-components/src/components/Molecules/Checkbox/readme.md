@@ -56,13 +56,13 @@ The `iconColor` prop sets the icon color and overwrites the `color` prop. It wil
 <Checkbox iconColor={'#ffff00'} />
 ```
 ### icon
-The `icon` prop contains an object with `Icon` component props. This only applies if using a custom checkbox `native={false}`.
+The `icon` prop specifies an object with `Icon` component props. This only applies if using a custom checkbox `native={false}`.
 
 
 ### Events
 
 #### onClick
-Callback function when the checkbox is clicked.
+The `onClick` prop allows for a custom callback function for when the checkbox is clicked.
 
 ```jsx
 <Checkbox onClick={(e)=>{console.log(e)}} />

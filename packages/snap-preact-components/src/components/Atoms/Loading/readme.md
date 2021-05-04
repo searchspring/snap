@@ -1,6 +1,6 @@
 ## Loading Bar
 
-Renders a Loading Bar
+Renders a Loading Bar.
 
 ## Usage
 
@@ -12,23 +12,23 @@ The required `active` prop specifies when to render the component.
 ```
 
 ### color
-The optional `color` prop specifies the color of the loading bar.
+The `color` prop specifies the color of the loading bar.
 
 ``` jsx
-<LoadingBar active={true} color={'#ffff00'}/>
+<LoadingBar active={true} color={'#ffff00'} />
 ```
 
 ### backgroundColor
-The optional `backgroundColor` prop specifies the background color of the loading bar.
+The `backgroundColor` prop specifies the background color of the loading bar.
 
 ``` jsx
-<LoadingBar active={true} backgroundColor={'#eeeeee'}/>
+<LoadingBar active={true} backgroundColor={'#eeeeee'} />
 ```
 
 
 ### height
-The optional `height` prop specifies the height of the loading bar.
+The `height` prop specifies the height of the loading bar.
 
 ``` jsx
-<LoadingBar active={true} height={'10px'}/>
+<LoadingBar active={true} height={'10px'} />
 ```

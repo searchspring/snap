@@ -8,7 +8,7 @@ Renders all facets utilizing the `<Facet />` component.
 ## Usage
 
 ### facets
-The required `facets` prop contains a reference to the facets store array. 
+The required `facets` prop specifies a reference to the facets store array. 
 
 ```jsx
 <Facets facets={controller?.store?.facets} />

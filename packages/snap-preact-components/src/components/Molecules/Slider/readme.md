@@ -1,11 +1,11 @@
 ## Slider
 
-Renders a slider to be used with any slider facet. Built using [react-ranger](https://github.com/tannerlinsley/react-ranger) 
+Renders a slider to be used with any slider facet. Built using [react-ranger](https://github.com/tannerlinsley/react-ranger).
 
 ## Usage
 
 ### facet
-The required `facet` prop contains a reference to a facet within the facets store array. The facet must be a range facet (`display` type of `'slider'`)
+The required `facet` prop specifies a reference to a facet within the facets store array. The facet must be a range facet (`display` type of `'slider'`).
 
 ```jsx
 <Slider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />

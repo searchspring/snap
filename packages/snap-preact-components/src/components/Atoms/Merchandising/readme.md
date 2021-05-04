@@ -7,31 +7,31 @@ This `Banner` component does not support inline banners. See `InlineBanner` comp
 ## Usage
 
 ### content
-The required `content` prop contains an object of banners returned from the Searchspring API.
+The required `content` prop specifies an object of banners returned from the Searchspring API.
 
 ```jsx
-<Banner content={controller?.store?.merchandising?.content} type={'header'}/>
+<Banner content={controller?.store?.merchandising?.content} type={'header'} />
 ```
 
 ### type
-The required `type` prop contains the banner type to render from the `content` object
+The required `type` prop specifiesthe banner type to render from the `content` object.
 
 Banner Types include `header`, `footer`, `left`, and `banner`. 
 
 ```jsx
-<Banner content={controller?.store?.merchandising?.content} type={'header'}/>
+<Banner content={controller?.store?.merchandising?.content} type={'header'} />
 ```
 
 ```jsx
-<Banner content={controller?.store?.merchandising?.content} type={'footer'}/>
+<Banner content={controller?.store?.merchandising?.content} type={'footer'} />
 ```
 
 ```jsx
-<Banner content={controller?.store?.merchandising?.content} type={'left'}/>
+<Banner content={controller?.store?.merchandising?.content} type={'left'} />
 ```
 
 ```jsx
-<Banner content={controller?.store?.merchandising?.content} type={'banner'}/>
+<Banner content={controller?.store?.merchandising?.content} type={'banner'} />
 ```
 
 ## Inline Banner
@@ -39,21 +39,21 @@ Banner Types include `header`, `footer`, `left`, and `banner`.
 ## Usage
 
 ### banner
-The `banner` prop contains a reference to an inline banner object from the `content` object
+The `banner` prop specifies a reference to an inline banner object from the `content` object.
 
 ```jsx
-<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]}/>
+<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} />
 ```
 
 ### width
-The `width` prop specifies the width of the inline banner
+The `width` prop specifies the width of the inline banner.
 
 ```jsx
 <InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} width={'300px'} />
 ```
 
 ### layout
-The `layout` prop specifies if this banner will be rendered in a `grid` or `list` layout
+The `layout` prop specifies if this banner will be rendered in a `grid` or `list` layout.
 
 ```jsx
 <InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />

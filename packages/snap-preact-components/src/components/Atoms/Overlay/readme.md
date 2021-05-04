@@ -12,23 +12,23 @@ The required `active` prop specifies when to render the component.
 ```
 
 ### color
-The optional `color` prop specifies the color of the overlay
+The `color` prop specifies the color of the overlay.
 
 ```jsx
-<Overlay active={true} color={'rgba(0,0,0,0.8)'}/>
+<Overlay active={true} color={'rgba(0,0,0,0.8)'} />
 ```
 
 ### transitionSpeed
-The optional `transitionSpeed` prop specifies animation transition speed.
+The `transitionSpeed` prop specifies animation transition speed.
 
 ```jsx
-<Overlay active={true} transitionSpeed='0.5s'/>
+<Overlay active={true} transitionSpeed='0.5s' />
 ```
 
 ### Events
 
 #### onClick
-Callback function when the overlay is clicked.
+The `onClick` prop allows for a custom callback function for when the 'clear all' button is clicked.
 
 ```jsx
 <Overlay active={true} onClick={(e)=>{console.log(e)}} />

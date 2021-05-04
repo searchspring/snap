@@ -7,7 +7,7 @@ Utilizes `currency` from [@searchspring/snap-toolbox](https://searchspring.githu
 The `Price` component utilizes all props from the `FormattedNumber` component with the following additional prop:
 
 ### lineThrough
-The optional `lineThrough` prop will style the formatted number with a line-through
+The `lineThrough` prop will style the formatted number with a line-through.
 
 ```jsx
 <Price value={1099.99} symbol=' €' lineThrough={true} thousandsSeparator='.' decimalSeparator=',' symbolAfter={true} />

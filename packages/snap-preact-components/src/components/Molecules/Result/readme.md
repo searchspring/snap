@@ -10,7 +10,7 @@ Renders a single product card.
 ## Usage
 
 ### result
-The required `result` prop contains a reference to a product object from the `results` store array
+The required `result` prop specifies a reference to a product object from the `results` store array.
 
 ```jsx
 <Result result={controller.store.results[0]} />
@@ -56,7 +56,7 @@ const productDetails = (props) => {
 ```
 
 ```jsx
-<Result result={controller.store.results[0]} detailsSlot={<productDetails product={controller.store.results[0]}>} /> ///////////
+<Result result={controller.store.results[0]} detailsSlot={<productDetails product={controller.store.results[0]} />
 ```
 
 ### buttonSlot
@@ -71,7 +71,7 @@ const addToCartButton = (props) => {
 ```
 
 ```jsx
-<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid}/>} />
+<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid} />
 ```
 
 ### fallback
@@ -89,7 +89,7 @@ The `width` prop sets the width of this Result.
 ```
 
 ### layout
-The `layout` prop specifies if this Result will be contained in a `grid` or `list` layout
+The `layout` prop specifies if this Result will be contained in a `grid` or `list` layout.
 
 ```jsx
 <Result result={controller.store.results[0]} layout={'grid'} />

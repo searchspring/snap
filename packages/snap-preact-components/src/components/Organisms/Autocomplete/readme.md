@@ -23,7 +23,7 @@ The required `input` prop expects either:
 ```
 
 ### store
-The required `store` prop contains a reference to the store.
+The required `store` prop specifies a reference to the store.
 
 ```jsx
 <Autocomplete store={controller.store} input={'#searchInput'} />
@@ -44,7 +44,7 @@ The `hideTerms` prop specifies if the terms within autocomplete should be render
 ```
 
 ### responsive
-The `responsive` prop contains an object that is passed to the `<Results />` sub-component
+The `responsive` prop specifiesan object that is passed to the `<Results />` sub-component.
 
 See `<Results />` component documentation for further details.
 

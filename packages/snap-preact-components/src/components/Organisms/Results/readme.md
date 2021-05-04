@@ -1,22 +1,23 @@
 ## Results
 
-Renders a page of results utilizing `<Result />` components
+Renders a page of results utilizing `<Result />` components.
    
 ## Sub-components
 - Result
+
 - InlineBanner
 
 ## Usage
 
 ### results
-The required `results` prop contains a reference to the results store array. 
+The required `results` prop specifies a reference to the results store array. 
 
 ```jsx
 <Results results={controller.store.results} />
 ```
 
 ### layout
-The `layout` prop specifies if this result will be rendered in a `grid` or `list` layout
+The `layout` prop specifies if this result will be rendered in a `grid` or `list` layout.
 
 ```jsx
 <Results results={controller.store.results} layout={'grid'} />

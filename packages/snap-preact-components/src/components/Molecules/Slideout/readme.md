@@ -8,7 +8,7 @@ Renders a slideout with a background overlay. Typically used for a mobile menu s
 ## Usage
 
 ### active
-The required `active` prop contains the state of when the slideout is rendered.
+The required `active` prop specifies the state of when the slideout is rendered.
 
 ```jsx
 <Slideout active={true}>
@@ -46,7 +46,7 @@ The `width` prop is the width of the slideout.
 ```
 
 ### displayAt
-The `displayAt` prop contains a CSS media query for when the component will render. By default, the component will always render. 
+The `displayAt` prop specifies a CSS media query for when the component will render. By default, the component will always render. 
 
 ```jsx
 <Slideout active={true} displayAt={'(max-width: 600px)'}>

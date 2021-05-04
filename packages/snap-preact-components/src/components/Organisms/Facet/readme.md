@@ -13,7 +13,7 @@ Renders a single complete facet. This includes determining the correct options t
 ## Usage
 
 ### facet
-The required `facet` prop contains a reference to any single facet object within the facets store array. 
+The required `facet` prop specifies a reference to any single facet object within the facets store array. 
 
 ```jsx
 <Facet facet={controller.store.facets[0]} />

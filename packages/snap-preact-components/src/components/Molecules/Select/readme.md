@@ -10,7 +10,7 @@ Renders a native or custom select dropdown.
 ## Usage
 
 ### options
-The required `options` prop contains an array of Option Objects to be rendered.
+The required `options` prop specifiesan array of Option Objects to be rendered.
 
 ```jsx
 <Select options={controller.store.sorting.options} native={true} />
@@ -33,14 +33,14 @@ The `native` prop will use a native html `<select>` element.
 ```
 
 ### disabled
-The `disabled` prop will disable the select from being toggled or invoking the `onSelect` callback
+The `disabled` prop will disable the select from being toggled or invoking the `onSelect` callback.
 
 ```jsx
 <Select options={controller.store.sorting.options} disabled={true} />
 ```
 
 ### label
-The `label` prop contains the label for this select. This can be a string or JSX element.
+The `label` prop specifiesthe label for this select. This can be a string or JSX element.
 
 ```jsx
 <Select options={controller.store.sorting.options} label={'Sort By'} />
@@ -54,7 +54,7 @@ The `separator` prop is rendered between the `label` prop and the select dropdow
 ```
 
 ### selected
-The `selected` prop contains the currently selected Option object. Specifying this prop relies on external state management.
+The `selected` prop specifiesthe currently selected Option object. Specifying this prop relies on external state management.
 
 ```jsx
 <Select options={controller.store.sorting.options} selected={controller.store.sorting.options[0]} />
@@ -103,10 +103,10 @@ The `color` prop sets the dropdown border, text, button, and icon colors.
 ```
 
 ### borderColor
-The `borderColor` prop overwrites the `color` prop for the dropdown and button border color
+The `borderColor` prop overwrites the `color` prop for the dropdown and button border color.
 
 ```jsx
-<Select options={controller.store.sorting.options} color={'#222222'} borderColor={'#cccccc'}/>
+<Select options={controller.store.sorting.options} color={'#222222'} borderColor={'#cccccc'} />
 ```
 
 ### backgroundColor
@@ -117,7 +117,7 @@ The `backgroundColor` prop sets the background color of the dropdown and button.
 ```
 
 ### iconColor
-The `iconColor` prop sets the icon color and overwrites the `color` prop
+The `iconColor` prop sets the icon color and overwrites the `color` prop.
 
 ```jsx
 <Select options={controller.store.sorting.options} iconColor={'#222222'} />

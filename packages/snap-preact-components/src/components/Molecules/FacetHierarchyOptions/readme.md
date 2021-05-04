@@ -5,14 +5,14 @@ Renders a list of hierarchy options.
 ## Usage
 
 ### values
-The required `values` prop contains all facet values where the facet type is 'hierarchy'
+The required `values` prop specifies all facet values where the facet type is 'hierarchy'.
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} />
 ```
 
 ### hideCount
-The `hideCount` prop will disable the facet count values
+The `hideCount` prop will disable the facet count values.
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} hideCount={true} />
@@ -22,7 +22,7 @@ The `hideCount` prop will disable the facet count values
 ### Events
 
 #### onClick
-Callback function for when a facet value is clicked.
+The `onClick` prop allows for a custom callback function for when a facet value is clicked.
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} onClick={(e)=>{console.log(e)}} />

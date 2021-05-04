@@ -8,28 +8,28 @@ Renders pagination page links for the given search response.
 ## Usage
 
 ### pagination
-The required `pagination` prop contains a reference to the pagination store object.
+The required `pagination` prop specifies a reference to the pagination store object.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} />
 ```
 
 ### pages
-The `pages` prop contains the number of pages to retrieve. This value is passed to the `store.getPages()` method.
+The `pages` prop specifiesthe number of pages to retrieve. This value is passed to the `store.getPages()` method.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} pages={5} />
 ```
 
 ### pagesLeft
-The `pagesLeft` prop contains the number of pages to retrieve before the current page. This value is passed to the `store.getPages()` method along with `pagesRight`
+The `pagesLeft` prop specifiesthe number of pages to retrieve before the current page. This value is passed to the `store.getPages()` method along with `pagesRight`.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} pagesLeft={2} />
 ```
 
 ### pagesRight
-The `pagesLeft` prop contains the number of pages to retrieve after the current page. This value is passed to the `store.getPages()` method along with `pagesLeft`
+The `pagesLeft` prop specifiesthe number of pages to retrieve after the current page. This value is passed to the `store.getPages()` method along with `pagesLeft`.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} pagesRight={2} />
@@ -71,32 +71,32 @@ The `hidePrev` prop disables the previous page.
 ```
 
 ### nextButton
-The `nextButton` prop contains the next page button content. This can be a string or JSX element.
+The `nextButton` prop specifiesthe next page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} nextButton={'Next'} />
 ```
 
 ### prevButton
-The `prevButton` prop contains the previous page button content. This can be a string or JSX element.
+The `prevButton` prop specifiesthe previous page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} prevButton={'Prev'} />
 ```
 
 ### firstButton
-The `firstButton` prop contains the first page button content. This can be a string or JSX element.
+The `firstButton` prop specifiesthe first page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} firstButton={'First'} />
 ```
 
 ### lastButton
-The `lastButton` prop contains the last page button content. This can be a string or JSX element.
+The `lastButton` prop specifiesthe last page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} lastButton={'Prev'} />
 ```
 
 ### icon
-The `icon` prop contains an object with `Icon` component props. 
+The `icon` prop specifiesan object with `Icon` component props. 

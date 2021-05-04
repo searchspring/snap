@@ -8,7 +8,7 @@ Renders a grid of facet palette options.
 ## Usage
 
 ### values
-The required `values` prop contains all facet values where the facet type is 'palette'
+The required `values` prop specifiesall facet values where the facet type is 'palette'.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} />
@@ -22,21 +22,21 @@ The `hideLabel` prop will disable the facet label.
 ```
 
 ### columns
-The `columns` prop is the number of columns the grid should contain
+The `columns` prop is the number of columns the grid should contain.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} columns={3} />
 ```
 
 ### gapSize
-The `gapSize` prop is the gap size between rows and columns
+The `gapSize` prop is the gap size between rows and columns.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} gapSize={'10px'} />
 ```
 
 ### hideIcon
-The `hideIcon` prop will disable the facet icon from being rendered
+The `hideIcon` prop will disable the facet icon from being rendered.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} hideIcon={true} />
@@ -75,12 +75,12 @@ const valueProps = {
 ```
 
 ### icon
-The `icon` prop contains an object with `Icon` component props. 
+The `icon` prop specifiesan object with `Icon` component props. 
 
 ### Events
 
 #### onClick
-Callback function for when a facet value is clicked.
+The `onClick` prop allows for a custom callback function for when a facet value is clicked.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} onClick={(e)=>{console.log(e)}} />

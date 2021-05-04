@@ -5,21 +5,21 @@ Renders a grid of facet options.
 ## Usage
 
 ### values
-The required `values` prop contains all facet values where the facet type is 'grid'
+The required `values` prop specifies all facet values where the facet type is 'grid'.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} />
 ```
 
 ### columns
-The `columns` prop is the number of columns the grid should contain
+The `columns` prop is the number of columns the grid should contain.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} columns={3} />
 ```
 
 ### gapSize
-The `gapSize` prop is the gap size between rows and columns
+The `gapSize` prop is the gap size between rows and columns.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} gapSize={'10px'} />
@@ -60,7 +60,7 @@ const valueProps = {
 ### Events
 
 #### onClick
-Callback function for when a facet value is clicked.
+The `onClick` prop allows for a custom callback function for when when a facet value is clicked.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} onClick={(e)=>{console.log(e)}} />
