@@ -18,14 +18,14 @@ Or alternatively as children:
 ```
 
 ### Disabled
-The `disabled` prop will disable a button from being clickable
+The `disabled` prop will disable the button from being clickable
 
 ``` jsx
 <Button content={"click me!"} disabled={true}/>
 ```
 
 ### Native
-The `native` prop will use a native html `<button>` element instead of the default custom styled button utilizing a `<div>` element
+The `native` prop will use a native html `<button>` element.
 
 ``` jsx
 <Button content={"click me!"} native={true}/>

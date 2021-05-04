@@ -39,7 +39,7 @@ Sets the dropdowns initial internal state. Cannot be used with `open` prop.
 ```
 
 ### Disabled
-The `disabled` prop prevents the button from toggling the visibility of the dropdown content, as well as preventing the `onClick` callback from being invoked.
+The `disabled` prop will disabled the button from toggling the visibility of the dropdown content, as well as preventing the `onClick` callback from being invoked.
 
 ``` jsx
 <Dropdown disabled={true}>Hello World!</Dropdown>
