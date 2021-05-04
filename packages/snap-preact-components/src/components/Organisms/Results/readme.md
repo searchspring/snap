@@ -1,21 +1,8 @@
 ## Results
 
 Renders a page of results utilizing `<Result />` components
-
-## Additional Info
-The responsive prop can be used to adjust the layout and how many products are shown at any screensize. There is no limit to how many responsive settings you can pass in. The viewport prop is a number representing the screen size the breakpoint should be used at and below.  
-For example, if you had a viewport: 500, those specific resposive settings would be used from 500px wide and below.
-
-The types are as follows
-- responsive?: ResponsiveProps[];  
-    ResponsiveProps: 
-    - viewport: number;
-    - numAcross: number;
-    - numRows?: number;
-    - layout?: "grid" | "list";
-    
-
-## Sub Components
+   
+## Sub-components
 - Result
 - InlineBanner
 
@@ -29,14 +16,18 @@ The required `results` prop contains a reference to the results store array.
 ```
 
 ### layout
-The `layout` prop specifies the if this result will be rendered in a `grid` or `list` layout
+The `layout` prop specifies if this result will be rendered in a `grid` or `list` layout
 
 ```jsx
 <Results results={controller.store.results} layout={'grid'} />
 ```
 
 ### responsive
-An object that modifies the responsive behaviour of the `<Result />` sub components.
+An object that modifies the responsive behavior of the `<Result />` sub-components.
+
+The responsive prop can be used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in. The viewport prop is the number representing the screen size the breakpoint should be used at and below.
+
+For example, if you had `viewport: 500`, those specific responsive settings would be used from 500px wide and below.
 
 `viewport` - required, viewport width when this rule is active
 

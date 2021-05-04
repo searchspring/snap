@@ -2,7 +2,7 @@
 
 Renders pagination page links for the given search response. 
 
-## Sub Components
+## Sub-components
 - Icon
 
 ## Usage
@@ -71,28 +71,28 @@ The `hidePrev` prop disables the previous page.
 ```
 
 ### nextButton
-The `nextButton` prop contains the next page button text, or JSX element.
+The `nextButton` prop contains the next page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} nextButton={'Next'} />
 ```
 
 ### prevButton
-The `prevButton` prop contains the previous page button text, or JSX element.
+The `prevButton` prop contains the previous page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} prevButton={'Prev'} />
 ```
 
 ### firstButton
-The `firstButton` prop contains the first page button text, or JSX element.
+The `firstButton` prop contains the first page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} firstButton={'First'} />
 ```
 
 ### lastButton
-The `lastButton` prop contains the last page button text, or JSX element.
+The `lastButton` prop contains the last page button content. This can be a string or JSX element.
 
 ```jsx
 <Pagination pagination={controller.store.pagination} lastButton={'Prev'} />

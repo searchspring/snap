@@ -2,7 +2,7 @@
 
 Renders a slideout with a background overlay. Typically used for a mobile menu slideout. 
 
-## Sub Components
+## Sub-components
 - Overlay
 
 ## Usage
@@ -17,7 +17,7 @@ The required `active` prop contains the state of when the slideout is rendered.
 ```
 
 ### children
-The children provided to the component is what will be displayed within the slideout. 
+The children provided to the component will be displayed within the slideout. 
 
 ```jsx
 <Slideout active={true}>
@@ -46,7 +46,7 @@ The `width` prop is the width of the slideout.
 ```
 
 ### displayAt
-The `displayAt` prop contains a CSS media query for when the component will render. By default the component will always render. 
+The `displayAt` prop contains a CSS media query for when the component will render. By default, the component will always render. 
 
 ```jsx
 <Slideout active={true} displayAt={'(max-width: 600px)'}>

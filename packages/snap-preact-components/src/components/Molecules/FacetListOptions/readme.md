@@ -2,7 +2,7 @@
 
 Renders a list of facet options.
 
-## Sub Components
+## Sub-components
 - Checkbox
 
 ## Usage
@@ -61,13 +61,13 @@ const valueProps = {
 ```
 
 ### checkbox
-The `checkbox` prop contains an object with `Checkbox` component props. 
+The `checkbox` prop contains an object with `Checkbox` component props. See `Checkbox` component documentation for further details.
 
 
 ### Events
 
 #### onClick
-Callback function when facet value is clicked.
+Callback function for when a facet value is clicked.
 
 ```jsx
 <FacetListOptions values={listFacet.values} onClick={(e)=>{console.log(e)}} />

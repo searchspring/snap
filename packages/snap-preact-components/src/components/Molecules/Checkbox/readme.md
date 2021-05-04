@@ -2,12 +2,8 @@
 
 Renders a native or custom checkbox.
 
-Custom checkbox renders consists of a span with an `Icon` sub component to create a customizable checkbox.
-
-
-## Sub Components
-- Icon: only if `native={false}`
-
+## Sub-components
+- Icon
 
 ## Usage
 
@@ -19,21 +15,21 @@ The `native` prop will render an `<input type='checkbox'>` element.
 ```
 
 ### checked
-The `checked` prop allows for external state management. Otherwise if not provided, component will use its own internal state.
+The `checked` prop allows for external state management. Otherwise if not provided, the component will use its own internal state.
 
 ```jsx
 <Checkbox checked={true} />
 ```
 
 ### startChecked
-The `startChecked` prop will set checkbox to checked on initial render. Must use internal state by not using `checked` prop
+The `startChecked` prop sets the checkbox to be checked on the initial render. Must use internal state by not using the `checked` prop.
 
 ```jsx
 <Checkbox startChecked={true} />
 ```
 
 ### disabled
-The `disabled` prop will disable the checkbox from being toggled or invoking the `onClick` callback
+The `disabled` prop disables the checkbox from being toggled or invoking the `onClick` callback.
 
 ```jsx
 <Checkbox disabled={true} />
@@ -47,26 +43,26 @@ The `size` prop will set the custom checkbox size.
 ```
 
 ### color
-The `color` prop sets the checkbox border color and the icon color if `iconColor` is not set
+The `color` prop sets the checkbox border color and the icon color if the `iconColor` prop is not set.
 
 ```jsx
 <Checkbox color={'#ffff00'} />
 ```
 
 ### iconColor
-The `iconColor` prop sets the icon color and overwrites `color` prop. Will not affect checkbox border color.
+The `iconColor` prop sets the icon color and overwrites the `color` prop. It will not affect checkbox border color.
 
 ```jsx
 <Checkbox iconColor={'#ffff00'} />
 ```
 ### icon
-The `icon` prop contains an object with `Icon` component props. This only applies if using a custom checkbox `native={false}`
+The `icon` prop contains an object with `Icon` component props. This only applies if using a custom checkbox `native={false}`.
 
 
 ### Events
 
 #### onClick
-Callback function when checkbox is clicked.
+Callback function when the checkbox is clicked.
 
 ```jsx
 <Checkbox onClick={(e)=>{console.log(e)}} />

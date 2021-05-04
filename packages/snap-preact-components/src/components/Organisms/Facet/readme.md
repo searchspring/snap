@@ -2,7 +2,7 @@
 
 Renders a single complete facet. This includes determining the correct options type, a collapsable header, and overflow options. 
 
-## Sub Components
+## Sub-components
 - Dropdown
 - FacetListOptions
 - FacetGridOptions
@@ -13,7 +13,7 @@ Renders a single complete facet. This includes determining the correct options t
 ## Usage
 
 ### facet
-The required `facet` prop contains a reference to any single facet object within the the facets store array. 
+The required `facet` prop contains a reference to any single facet object within the facets store array. 
 
 ```jsx
 <Facet facet={controller.store.facets[0]} />

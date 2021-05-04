@@ -2,7 +2,7 @@
 
 Renders a native or custom select dropdown.
 
-## Sub Components
+## Sub-components
 - Button
 - Dropdown 
 - Icon
@@ -54,14 +54,14 @@ The `separator` prop is rendered between the `label` prop and the select dropdow
 ```
 
 ### selected
-The `selected` prop contains the current selected Option object. Specifying this prop relies on external state management.
+The `selected` prop contains the currently selected Option object. Specifying this prop relies on external state management.
 
 ```jsx
 <Select options={controller.store.sorting.options} selected={controller.store.sorting.options[0]} />
 ```
 
 ### startOpen
-The `startOpen` prop will render the dropdown in an open state upon initial render.
+The `startOpen` prop will render the dropdown in an open state on the initial render.
 
 ```jsx
 <Select options={controller.store.sorting.options} startOpen={true} />

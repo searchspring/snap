@@ -18,28 +18,28 @@ Or alternatively as children:
 ```
 
 ### Button
-Dropdown will render a button to toggle to visibility of the content. The `button` prop allows for a string or a JSX Element
+The dropdown will render a button to toggle the visibility of the content. The `button` prop allows for a string or a JSX Element
 
 ``` jsx
 <Dropdown button={'click me!'}>Hello World!</Dropdown>
 ```
 
 ### Open
-If the `open` prop is provided, it is expected that you will be managing the state of the dropdown. Otherwise if not present, the component will use it's own state to toggle the visibility of the dropdown content.
+If the `open` prop is provided, it is expected that you will be managing the state of the dropdown. Otherwise if not present, the component will use its own state to toggle the visibility of the dropdown content.
 
 ``` jsx
 <Dropdown open={true}>Hello World!</Dropdown>
 ```
 
 ### startOpen
-Sets the dropdowns initial internal state. Cannot be used with `open` prop.
+The `startOpen` prop sets the dropdown initial internal state. Cannot be used with the `open` prop.
 
 ``` jsx
 <Dropdown startOpen={true}>Hello World!</Dropdown>
 ```
 
 ### Disabled
-The `disabled` prop will disabled the button from toggling the visibility of the dropdown content, as well as preventing the `onClick` callback from being invoked.
+The `disabled` prop will disable the button from toggling the visibility of the dropdown content, as well as preventing the `onClick` callback from being invoked.
 
 ``` jsx
 <Dropdown disabled={true}>Hello World!</Dropdown>
@@ -61,7 +61,7 @@ The `onClick` prop allows for a custom callback function for when the dropdown b
 <Dropdown onClick={(e)=>{console.log(e)}} >Hello World!</Dropdown>
 ```
 #### onToggle
-The `onToggle` prop allows for a custom callback function for when the dropdown visibility is toggled. This only applies if using internal state. Cannot be used with `open` prop.
+The `onToggle` prop allows for a custom callback function for when the dropdown visibility is toggled. This only applies if using internal state. Cannot be used with the `open` prop.
 
 ``` jsx
 <Dropdown onToggle={(e)=>{console.log(e)}} >Hello World!</Dropdown>

@@ -2,7 +2,7 @@
 
 Renders a facet filter.
 
-## Sub Components
+## Sub-components
 - Icon
 - Button
 

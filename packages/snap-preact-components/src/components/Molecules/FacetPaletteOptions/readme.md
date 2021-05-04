@@ -2,7 +2,7 @@
 
 Renders a grid of facet palette options. 
 
-## Sub Components
+## Sub-components
 - Icon
 
 ## Usage
@@ -80,7 +80,7 @@ The `icon` prop contains an object with `Icon` component props.
 ### Events
 
 #### onClick
-Callback function when facet value is clicked.
+Callback function for when a facet value is clicked.
 
 ```jsx
 <FacetPaletteOptions values={paletteFacet.values} onClick={(e)=>{console.log(e)}} />

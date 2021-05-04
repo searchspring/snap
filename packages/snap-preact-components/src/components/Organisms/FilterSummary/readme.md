@@ -15,7 +15,7 @@ The required `filters` prop contains a reference to the filters store array.
 ```
 
 ### title
-The `title` prop contains the title of the filter summary wrapper. Default is `'Current Filters'`
+The `title` prop contains the title of the filter summary wrapper. The default is `'Current Filters'`
 
 ```jsx
 <FilterSummary filters={controller.store.filters} title={'Current Filters'} />
@@ -36,7 +36,7 @@ The `clearAllIcon` prop is the name of the icon to render for the 'clear all' bu
 ```
 
 ### separator
-The `separator` prop will specify the separator character between `facetLabel` and `valueLabel` (`clearAllLabel`) of the `<Facet />` sub component.
+The `separator` prop will specify the separator character between `facetLabel` and `valueLabel` (`clearAllLabel`) of the `<Facet />` sub-component.
 
 ```jsx
 <FilterSummary filters={controller.store.filters} separator={': '} />
@@ -50,7 +50,7 @@ The `hideFacetLabel` prop prevents the filter label (selected facet name) from d
 ```
 
 ### clearAllLabel
-The `clearAllLabel` prop is the 'clear all' button text. This is passed to the `<Filter />` sub component `valueLabel` prop. Default value is `'Clear All'`
+The `clearAllLabel` prop is the 'clear all' button text. This is passed to the `<Filter />` sub-component `valueLabel` prop. The default value is `'Clear All'`
 
 ```jsx
 <FilterSummary filters={controller.store.filters} clearAllLabel={'Clear All'} />

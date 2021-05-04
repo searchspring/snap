@@ -1,6 +1,6 @@
 ## Banner
 
-Renders an inline merchandising banner. Banner Types include `header`, `footer`, `left` and `banner`. 
+Renders an inline merchandising banner. Banner Types include `header`, `footer`, `left`, and `banner`. 
 
 This `Banner` component does not support inline banners. See `InlineBanner` component below.
 
@@ -16,7 +16,7 @@ The required `content` prop contains an object of banners returned from the Sear
 ### type
 The required `type` prop contains the banner type to render from the `content` object
 
-Banner Types include `header`, `footer`, `left` and `banner`. 
+Banner Types include `header`, `footer`, `left`, and `banner`. 
 
 ```jsx
 <Banner content={controller?.store?.merchandising?.content} type={'header'}/>
@@ -34,7 +34,7 @@ Banner Types include `header`, `footer`, `left` and `banner`.
 <Banner content={controller?.store?.merchandising?.content} type={'banner'}/>
 ```
 
-## InlineBanner
+## Inline Banner
 
 ## Usage
 
@@ -53,7 +53,7 @@ The `width` prop specifies the width of the inline banner
 ```
 
 ### layout
-The `layout` prop specifies the if this banner will be rendered in a `grid` or `list` layout
+The `layout` prop specifies if this banner will be rendered in a `grid` or `list` layout
 
 ```jsx
 <InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />

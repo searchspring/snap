@@ -5,14 +5,14 @@ Renders a slider to be used with any slider facet. Built using [react-ranger](ht
 ## Usage
 
 ### facet
-The required `facet` prop contains a reference to a facet within the the facets store array. The facet must be a range facet (`display` type of `'slider'`)
+The required `facet` prop contains a reference to a facet within the facets store array. The facet must be a range facet (`display` type of `'slider'`)
 
 ```jsx
 <Slider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />
 ```
 
 ### showTicks
-The `showTicks` props will render reference ticks below the slider track.
+The `showTicks` prop will render reference ticks below the slider track.
 
 ```jsx
 <Slider 
@@ -22,7 +22,7 @@ The `showTicks` props will render reference ticks below the slider track.
 ```
 
 ### tickSize
-The `tickSize` props specifies the unit number between ticks. Must be used with `showTicks` prop.
+The `tickSize` prop specifies the unit number between ticks. Must be used with `showTicks` prop.
 
 ```jsx
 <Slider 
@@ -33,7 +33,7 @@ The `tickSize` props specifies the unit number between ticks. Must be used with 
 ```
 
 ### textColor
-The `textColor` props specifies ticks color. Must be used with `showTicks` prop.
+The `textColor` prop specifies ticks color. Must be used with `showTicks` prop.
 
 ```jsx
 <Slider 

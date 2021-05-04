@@ -60,7 +60,7 @@ const valueProps = {
 ### Events
 
 #### onClick
-Callback function when facet value is clicked.
+Callback function for when a facet value is clicked.
 
 ```jsx
 <FacetGridOptions values={sizeFacet.values} onClick={(e)=>{console.log(e)}} />

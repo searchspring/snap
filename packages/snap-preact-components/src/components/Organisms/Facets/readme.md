@@ -2,7 +2,7 @@
 
 Renders all facets utilizing the `<Facet />` component.
 
-## Sub Components
+## Sub-components
 - Facet
 
 ## Usage

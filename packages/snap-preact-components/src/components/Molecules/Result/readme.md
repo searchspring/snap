@@ -2,7 +2,7 @@
 
 Renders a single product card. 
 
-## Sub Components
+## Sub-components
 - Badge
 - Price
 - Image
@@ -75,7 +75,7 @@ const addToCartButton = (props) => {
 ```
 
 ### fallback
-The `fallback` prop will be passed to the `<Image />` sub component. If the primary image does not display, this fallback image will be displayed instead. 
+The `fallback` prop will be passed to the `<Image />` sub-component. If the primary image does not display, this fallback image will be displayed instead. 
 
 ```jsx
 <Result result={controller.store.results[0]} fallback={'https://www.example.com/imgs/placeholder.jpg'} />

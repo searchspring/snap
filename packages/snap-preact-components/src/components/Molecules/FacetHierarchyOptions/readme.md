@@ -22,7 +22,7 @@ The `hideCount` prop will disable the facet count values
 ### Events
 
 #### onClick
-Callback function when facet value is clicked.
+Callback function for when a facet value is clicked.
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} onClick={(e)=>{console.log(e)}} />

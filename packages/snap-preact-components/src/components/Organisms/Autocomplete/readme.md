@@ -44,7 +44,7 @@ The `hideTerms` prop specifies if the terms within autocomplete should be render
 ```
 
 ### responsive
-The `responsive` prop contains an object that is passed to the `<Results />` sub component
+The `responsive` prop contains an object that is passed to the `<Results />` sub-component
 
 See `<Results />` component documentation for further details.
 
