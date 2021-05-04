@@ -54,20 +54,26 @@ export class Logger {
 
 	public image({ url, width, height }: { url: string; width: number; height: number }, ...params: any[]): void {
 		const styles = {
-			size: `font-size: 1px; padding: ${height} ${width};`,
+			size: `font-size: 1px; padding: ${height || width} ${width || height};`,
 			background: `background: url("${url}") no-repeat; background-size: contain;`,
 		};
 
 		this.dev(`%c...`, `${styles.size} ${styles.background}`, ...params);
 	}
 
-	public imageText({ url, text, style }: { url: string; text: string; style: string }, ...params: any[]): void {
+	public imageText({ url, text = '', style }: { url: string; text: string; style: string }, ...params: any[]): void {
 		const styles = {
 			background: `margin-left: 6px; background: url("${url}") no-repeat; background-size: contain;`,
 			custom: style,
 		};
 
-		this.dev(`%c ${'  ' + this.prefix}${text}`, `${styles.background} ${styles.custom}`, ...params);
+		let imgText = text;
+		let rest = params;
+		if (!imgText && params?.length) {
+			[imgText, ...rest] = params;
+		}
+
+		this.dev(`%c ${'  ' + this.prefix}${imgText}`, `${styles.background} ${styles.custom}`, ...rest);
 	}
 
 	public debug(...params: any[]): void {
@@ -85,7 +91,7 @@ export class Logger {
 		);
 	}
 
-	public profile(profile: any): void {
+	public profile(profile: any, ...params: any[]): void {
 		this.dev(
 			`%c ${emoji.gear} %c${this.prefix}%c${profile.type}  %c~  ${profile.name}  ::  %c${profile.status.toUpperCase()}${
 				profile.status == 'finished' ? '  ::  %c' + profile.time.run + 'ms' : ''
@@ -95,7 +101,8 @@ export class Logger {
 			`color: ${colors.orange}; font-style: italic;`,
 			`color: ${colors.orange};`,
 			`color: ${colors.orange}; font-weight: bold;`,
-			`color: ${colors.grey};`
+			`color: ${colors.grey};`,
+			...params
 		);
 	}
 
