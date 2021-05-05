@@ -1,18 +1,19 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
 export class QueryStore {
-	query: string;
-	originalQuery: string;
+	query: Query;
+	originalQuery: Query;
 
-	constructor(autocomplete, search) {
-		const observables: Observables = {
-			query: observable,
-		};
+	constructor(controller, autocomplete, search) {
+		const observables: Observables = {};
 
-		this.query = search?.query;
+		if (search?.query) {
+			this.query = new Query(controller, search.query);
+			observables.query = observable;
+		}
 
 		if (autocomplete?.correctedQuery) {
-			this.originalQuery = autocomplete.query;
+			this.originalQuery = new Query(controller, autocomplete.query);
 			observables.originalQuery = observable;
 		}
 
@@ -22,5 +23,19 @@ export class QueryStore {
 
 type Observables = {
 	originalQuery?: typeof observable;
-	query: typeof observable;
+	query?: typeof observable;
 };
+class Query {
+	string: string;
+	url;
+
+	constructor(controller, query) {
+		this.string = query;
+
+		this.url = controller.urlManager.set({ query: this.string });
+
+		makeObservable(this, {
+			string: observable,
+		});
+	}
+}

@@ -55,7 +55,7 @@ export class AutocompleteStore extends AbstractStore {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 		this.merchandising = new MerchandisingStore(this.controller, data.merchandising);
-		this.search = new QueryStore(data.autocomplete, data.search);
+		this.search = new QueryStore(this.controller, data.autocomplete, data.search);
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {

@@ -60,7 +60,8 @@ describe('Search Store', () => {
 		expect(autocompleteStore.meta).toStrictEqual(searchData.meta);
 
 		expect(autocompleteStore.search).toBeDefined();
-		expect(autocompleteStore.search.query).toEqual(searchData.autocomplete.query);
+		expect(autocompleteStore.search.query).toBeDefined();
+		expect(autocompleteStore.search.query.string).toEqual(searchData.autocomplete.query);
 		expect(autocompleteStore.search.originalQuery).toBeUndefined();
 
 		expect(autocompleteStore.merchandising).toBeDefined();
