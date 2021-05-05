@@ -11,221 +11,350 @@
 	<title>Docs</title>
 </head>
 <body>
-	<div id="app">
-		<Navigation :documents="documents" :links="links" :pages="pages" :storybooks="storybooks" :snap="snap"></Navigation>
-		<div id="markdown-wrapper">
-			<router-view :documents="documents" :pages="pages" :storybooks="storybooks" :snap="snap"></router-view>
-		</div>
-	</div>
+	<div id="app"></div>
 
 	<script src="https://unpkg.com/vue@next"></script>
 	<script src="https://unpkg.com/vue-router@4"></script>
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<script>
-		const snap = [
-			{
-				label: 'About Snap',
-				href: '/',
-				readme: './docs/GETTINGSTARTED.md'
-			},
-			{
-				label: 'Troubleshooting',
-				href: '/troubleshooting',
-				readme: './docs/TROUBLESHOOTING.md'
-			},
-			{
-				label: 'API Docs',
-				href: '/snap-api-docs',
-				iframe: 'https://searchspring.github.io/snapi-oas/'
-			}, 
-			{
-				label: 'Snapi Explorer',
-				href: '/snap-explorer',
-				iframe: 'https://searchspring.github.io/snapi-explorer/'
-			}, 
-		];
-		const pages = [
-			{
-				label: 'Setup',
-				href: '/setup',
-				readme: './docs/SETUP.md'
-			},
-			{
-				label: 'Installation',
-				href: '/usage',
-				readme: './docs/INSTALLATION.md',
-			},
-			{
-				label: 'Client',
-				href: '/client',
-				readme: './docs/CLIENT.md',
-			},
-			{
-				label: 'Search',
-				href: '/search',
-				readme: './docs/SEARCH.md',
-			},
-			{
-				label: 'Autocomplete',
-				href: '/autocomplete',
-				readme: './docs/AUTOCOMPLETE.md',
-			},
-			{
-				label: 'Finder',
-				href: '/finder',
-				readme: './docs/FINDER.md',
-			},
-			{
-				label: 'Integration',
-				href: '/integration',
-				readme: './docs/INTEGRATION.md',
-			},
-		]
-		const storybooks = [
-			{
-				label: 'React',
-				href: '/snap-preact-components',
-				iframe: './packages/snap-preact-components/docs/'
-			},
-		]
 		const documents = [
-		{
-				label: 'Controller',
-				href: '/snap-controller',
-				iframe: './packages/snap-controller/docs/'
-			},
 			{
-				label: 'Event Manager',
-				href: '/event-manager',
-				iframe: './packages/snap-event-manager/docs/'
-			}, 
-			// {
-			// 	label: 'Client',
-			// 	href: '/client',
-			// 	iframe: './packages/snap-client-javascript/docs/'
-			// }, 
-			{
-				label: 'Logger',
-				href: '/logger',
-				iframe: './packages/snap-logger/docs/'
-			}, 
-			{
-				label: 'Store',
-				href: '/store-mobx',
-				iframe: './packages/snap-store-mobx/docs/'
-			}, 
-			{
-				label: 'Profiler',
-				href: '/profiler',
-				iframe: './packages/snap-profiler/docs/'
-			}, 
-			{
-				label: 'Toolbox',
-				href: '/toolbox',
-				iframe: './packages/snap-toolbox/docs/'
-			}, 
-			{
-				label: 'Url Manager',
-				href: '/url-manager',
-				iframe: './packages/snap-url-manager/docs/'
-			},
+				categoryName: 'Snap',
+				links: [
+					{
+						label: 'About Snap',
+						route: '/',
+						type: 'readme',
+						url: './docs/GETTINGSTARTED.md'
+					}, {
+						label: 'Getting Started',
+						route: '/start',
+						sublinks: [
+							{
+								label: 'Setup',
+								route: '/start-setup',
+								type: 'readme',
+								url: './docs/SETUP.md'
+							}, {
+								label: 'Installation',
+								route: '/start-usage',
+								type: 'readme',
+								url: './docs/INSTALLATION.md',
+							}, {
+								label: 'Client',
+								route: '/start-client',
+								type: 'readme',
+								url: './docs/CLIENT.md',
+							}, {
+								label: 'Search',
+								route: '/start-search',
+								type: 'readme',
+								url: './docs/SEARCH.md',
+							}, {
+								label: 'Autocomplete',
+								route: '/start-autocomplete',
+								type: 'readme',
+								url: './docs/AUTOCOMPLETE.md',
+							}, {
+								label: 'Finder',
+								route: '/start-finder',
+								type: 'readme',
+								url: './docs/FINDER.md',
+							}, {
+								label: 'Integration',
+								route: '/start-integration',
+								type: 'readme',
+								url: './docs/INTEGRATION.md',
+							}
+						]
+					}, {
+						label: 'API Docs',
+						route: '/snap-api-docs',
+						type: 'iframe',
+						url: 'https://searchspring.github.io/snapi-oas/'
+					}, {
+						label: 'Snapi Explorer',
+						route: '/snap-explorer',
+						type: 'iframe',
+						url: 'https://searchspring.github.io/snapi-explorer/'
+					}
+				]
+			}, {
+				categoryName: 'Packages',
+				links: [
+					{
+						label: 'Controller',
+						route: '/controller',
+						type: 'readme',
+						url: './packages/snap-controller/README.md',
+						sublinks: [
+							{
+								label: 'Abstract',
+								route: '/controller-abstract',
+								type: 'readme',
+								url: './packages/snap-controller/src/Abstract/README.md',
+							},
+							{
+								label: 'Autocomplete',
+								route: '/controller-autocomplete',
+								type: 'readme',
+								url: './packages/snap-controller/src/Autocomplete/README.md',
+							},
+							{
+								label: 'Finder',
+								route: '/controller-finder',
+								type: 'readme',
+								url: './packages/snap-controller/src/Finder/README.md',
+							},
+							{
+								label: 'Search',
+								route: '/controller-search',
+								type: 'readme',
+								url: './packages/snap-controller/src/Search/README.md',
+							},
+							{
+								label: 'Typedocs',
+								type: 'external',
+								url: 'https://searchspring.github.io/snap/packages/snap-controller/docs/',
+								icon: 'fas fa-external-link-alt fa-1x'
+							}, 
+						]
+					}, {
+						label: 'Event Manager',
+						route: '/event-manager',
+						type: 'iframe',
+						url: './packages/snap-event-manager/docs/'
+					}, {
+						label: 'Client',
+						route: '/client',
+						type: 'readme',
+						url: './packages/snap-client/README.md',
+					}, {
+						label: 'Logger',
+						route: '/logger',
+						type: 'iframe',
+						url: './packages/snap-logger/docs/'
+					}, {
+						label: 'Store',
+						route: '/store-mobx',
+						type: 'iframe',
+						url: './packages/snap-store-mobx/docs/'
+					}, {
+						label: 'Profiler',
+						route: '/profiler',
+						type: 'iframe',
+						url: './packages/snap-profiler/docs/'
+					}, {
+						label: 'Toolbox',
+						route: '/toolbox',
+						type: 'iframe',
+						url: './packages/snap-toolbox/docs/'
+					}, {
+						label: 'Url Manager',
+						route: '/url-manager',
+						type: 'iframe',
+						url: './packages/snap-url-manager/docs/'
+					}
+				]
+			}, {
+				categoryName: 'Components',
+				links: [
+					{
+						label: 'React',
+						route: '/snap-preact-components',
+						type: 'iframe',
+						url: './packages/snap-preact-components/docs/'
+					}
+				]
+			}, {
+				categoryName: 'Links',
+				links: [
+					{
+						label: 'Demo',
+						type: 'external',
+						url: 'http://try.searchspring.com',
+						icon: 'fas fa-external-link-alt fa-1x'
+					}, 
+					{
+						label: 'Github Repository',
+						type: 'external',
+						url: 'https://github.com/searchspring/snap',
+						icon: 'fas fa-external-link-alt fa-1x'
+					},
+					{
+						label: 'Report an Issue',
+						type: 'external',
+						url: 'https://github.com/searchspring/snap/issues',
+						icon: 'fas fa-external-link-alt fa-1x'
+					}
+				]
+			}
 		];
-		const links = [
-			{
-				label: 'Demo',
-				url: 'http://try.searchspring.com',
-				icon: 'fas fa-external-link-alt fa-1x'
-			}, 
-			{
-				label: 'Github Repository',
-				url: 'https://github.com/searchspring/snap',
-				icon: 'fas fa-external-link-alt fa-1x'
-			},
-			{
-				label: 'Report an Issue',
-				url: 'https://github.com/searchspring/snap/issues',
-				icon: 'fas fa-external-link-alt fa-1x'
-			},
-		]
 
-		const Markdown = { 
-			props: ['documents', 'pages', 'storybooks', 'snap'],
-			template: `<div v-html="iframe ? iframe : markedHTML"></div>`,
+		const App = {
+			data() {
+				return {
+					documents
+				}
+			},
+			computed: {
+				routes() {
+					const routeMap = this.documents.reduce((acc, section) => {
+						section?.links?.forEach((link) => {
+							if (link.route) {
+								acc[link.route] = link;
+							}
+
+							link?.sublinks?.forEach((sublink) => {
+								if (sublink.route) {
+									acc[sublink.route] = sublink;
+								}
+							})
+						});
+
+						return acc;
+					}, {});
+
+					return routeMap;
+				},
+			},
+			template: `
+				<Navigation :documents="documents"></Navigation>
+
+				<div id="content">
+					<router-view :routes="routes"></router-view>
+				</div>
+			`
+		}
+
+		const app = Vue.createApp(App);
+
+		app.component('Content', { 
+			props: ['routes'],
+			template: `
+				<iframe v-if="routeData.type == 'iframe'" :src="routeData.url"></iframe>
+				<Markdown v-else-if="routeData.type == 'readme'" :src="routeData.url" />
+			`,
+			computed: {
+				currentRoute() {
+					return this.$route.path;
+				},
+				routeData() {
+					return this.routes[this.currentRoute]
+				}
+			}
+		});
+
+		app.component('Markdown', { 
+			props: ['src'],
+			template: `
+				<div id="markdown" v-html="markedHTML"></div>
+			`,
 			data() {
 				return {
 					markdown: '',
-					iframe: '',
+				}
+			},
+			watch: {
+				src() {
+					this.getMarkdown(this.src);
 				}
 			},
 			computed: {
 				markedHTML() {
-					return `<div id="markdown">${marked(this.markdown)}</div>`
-				},
-			},
-			watch: {
-				$route() {
-					this.initialize();
+					return marked(this.markdown);
 				}
 			},
 			created() {
-				this.initialize();
+				this.getMarkdown(this.src);
+			},
+			updated() {
+				window.highlight();
 			},
 			methods: {
-				initialize() {
-					const currentRoute = this.$route.path;
-					if (currentRoute) {
-						const document = this.documents.filter(doc => doc.href === currentRoute).pop();
-						const library = this.storybooks.filter(library => library.href === currentRoute).pop();
-						const page = this.pages.filter(page => page.href === currentRoute).pop();
-						const snap = this.snap.filter(page => page.href === currentRoute).pop();
-						
-						if(document && document.iframe) {
-							this.getiFrame(document.iframe)
-						} else if (page && page.iframe) {
-							this.getiFrame(page.iframe);
-						} else if (page && page.readme) {
-							this.getMarkdown(page.readme);
-						} else if (library && library.iframe) {
-							this.getiFrame(library.iframe)
-						} else if (snap && snap.readme) {
-							this.getMarkdown(snap.readme)
-						} else if (snap && snap.iframe) {
-							this.getiFrame(snap.iframe)
-						}
-					}
-				},
-				getiFrame(src) {
-					this.markdown = "";
-					this.iframe = `<iframe src="${src}"></iframe>`
-				},
 				async getMarkdown(file) {
+					this.markdown = '';
 					const response = await fetch(file);
 					let text = await response.text()
 					this.iframe = "";
 					this.markdown = text;
 				}
-			},
-			updated() {
-				window.highlight();
-			},
-		}
+			}
+		});
 
-		const App = {
+		app.component('Link', {
+			props: ['link'],
+			template: `
+				<router-link v-if="link.route" :key="link.route" :to="'' + link.route" :class="link.route === $route.path ? 'active' : ''">
+					{{link.label}}
+				</router-link>
+		
+				<a v-else-if="link.type == 'external'" :href="link.url" target="_blank">
+					{{link.label}}
+					<i v-if="link.icon" :class="link.icon"></i>
+				</a>
+			`,
+		});
+
+		app.component('Navigation', {
+			props: ['documents'],
+			components: ['Link'],
 			data() {
 				return {
-					documents,
-					links,
-					pages,
-					storybooks,
-					snap
+					navVisible: true,
 				}
 			},
-		}
+			computed: {
+				currentRoute() {
+					return this.$route.path;
+				}
+			},
+			methods: {
+				toggleNav() {
+					this.navVisible = !this.navVisible
+				},
+				inRoute(link) {
+					if (link?.route) {
+						const includedRoutes = [link.route];
+
+						link.sublinks?.forEach(sublink => includedRoutes.push(sublink.route));
+
+						return includedRoutes.includes(this.currentRoute);
+					}
+				}
+			},
+			template: `
+				<div id="navigation-wrapper">
+					<router-link :key="'/'" :to="'/'">
+						<img src='./packages/snap-preact-components/src/assets/searchspring-logo.svg' />
+					</router-link>
+
+					<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
+					
+					<div id="navigation" v-if="navVisible">
+						<div v-for="section in documents" class="section">
+							<h3>{{ section.categoryName }}</h3>
+							<ul class="links">
+								<li v-for="link in section.links">
+									<Link :link="link"/>
+
+									<ul v-if="link.sublinks && inRoute(link)" class="sublinks">
+										<li v-for="sublink in link.sublinks">
+											<Link :link="sublink"/>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			`,
+		});
 
 		const routes = [
-			{ path: '/',      component: Markdown },
-			{ path: '/:path', component: Markdown },
+			{ path: '/',      component: app.component('Content') },
+			{ path: '/:path', component: app.component('Content') },
 		]
 
 		const router = VueRouter.createRouter({
@@ -233,66 +362,7 @@
 			routes,
 		});
 
-		const app = Vue.createApp(App);
 		app.use(router);
-
-		app.component('Navigation', {
-			props: ['documents', 'links', 'pages', 'storybooks', 'snap'],
-			data() {
-				return {
-					navVisible: true,
-				}
-			},
-			methods: {
-				toggleNav() {
-					this.navVisible = !this.navVisible
-				}
-			},
-			template: `
-			<div id="navigation-wrapper">
-				<router-link :key="'/'" :to="'/'">
-					<img src='./packages/snap-preact-components/src/assets/searchspring-logo.svg' />
-				</router-link>
-				<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
-				
-				<div id="navigation" v-if="navVisible">
-					<h3>Snap</h3>
-					<ul>
-						<li v-for="(snapEntry, index) in snap">
-							<router-link :key="snapEntry.href" :to="'' + snapEntry.href" :class="snapEntry.href === $route.path ? 'active' : ''">{{snapEntry.label}}</router-link>
-						</li>
-					</ul>
-					<h3>Getting Started</h3>
-					<ul>
-						<li v-for="(page, index) in pages">
-							<router-link :key="page.href" :to="'' + page.href" :class="page.href === $route.path ? 'active' : ''">{{page.label}}</router-link>
-						</li>
-					</ul>
-					<h3>Packages</h3>
-					<ul>
-						<li v-for="(doc, index) in documents">
-							<router-link :key="doc.href" :to="'' + doc.href" :class="doc.href === $route.path ? 'active' : ''">{{doc.label}}</router-link>
-						</li>
-					</ul>
-					<h3>Components</h3>
-					<ul>
-						<li v-for="(storybook, index) in storybooks" :class="storybook.href === $route.path ? 'active' : ''">
-							<router-link :key="storybook.href" :to="'' + storybook.href" :class="storybook.href === $route.path ? 'active' : ''">{{storybook.label}}</router-link>
-						</li>
-					</ul>
-					<h3>Links</h3>
-					<ul>
-						<li v-for="(link, index) in links">
-							<a :href="link.url" target="_blank">
-								{{link.label}}
-								<i v-if="link.icon" :class="link.icon"></i>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			`,
-		});
 
 		app.mount('#app');
 
@@ -301,7 +371,6 @@
 				hljs.highlightBlock(block);
 			});
 		}
-		
 	</script>
 
 </body>
