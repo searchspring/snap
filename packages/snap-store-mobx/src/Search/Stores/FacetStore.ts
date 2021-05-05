@@ -54,7 +54,7 @@ class Facet {
 			toggleCollapse: action,
 		});
 
-		const collapseData = this.storage.get(`${this.field}.collapsed`);
+		const collapseData = this.storage.get(`facets.${this.field}.collapsed`);
 		this.collapsed = collapseData ?? this.collapsed;
 		if (this.filtered && this.collapsed && typeof collapseData == 'undefined') {
 			this.toggleCollapse();
@@ -70,7 +70,7 @@ class Facet {
 	toggleCollapse() {
 		this.collapsed = !this.collapsed;
 
-		this.storage.set(`${this.field}.collapsed`, this.collapsed);
+		this.storage.set(`facets.${this.field}.collapsed`, this.collapsed);
 	}
 }
 
@@ -92,17 +92,17 @@ class RangeFacet extends Facet {
 
 		this.step = facet.step;
 
-		const storedRange = this.storage.get(`${this.field}.range`);
+		const storedRange = this.storage.get(`facets.${this.field}.range`);
 		if (!storedRange || !facet.filtered) {
-			this.storage.set(`${this.field}.range`, facet.range);
+			this.storage.set(`facets.${this.field}.range`, facet.range);
 			this.range = facet.range;
 		} else if (facet.range.low > storedRange.low || facet.range.high < storedRange.high) {
 			// range from API has shrunk
-			this.range = this.storage.get(`${this.field}.range`);
+			this.range = this.storage.get(`facets.${this.field}.range`);
 		} else if (facet.range.low < storedRange.low || facet.range.high > storedRange.high) {
 			// range from API has grown
 			// store bigger range
-			this.storage.set(`${this.field}.range`, facet.range);
+			this.storage.set(`facets.${this.field}.range`, facet.range);
 			this.range = facet.range;
 		} else {
 			// range hasn't changed
@@ -153,7 +153,7 @@ class ValueFacet extends Facet {
 				this.overflow.limited = !this.overflow.limited;
 			}
 
-			this.storage.set(`${this.field}.overflow.limited`, this.overflow.limited);
+			this.storage.set(`facets.${this.field}.overflow.limited`, this.overflow.limited);
 
 			this.overflow.calculate();
 		},
@@ -198,7 +198,7 @@ class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		const overflowLimitedState = this.storage.get(`${this.field}.overflow.limited`);
+		const overflowLimitedState = this.storage.get(`facets.${this.field}.overflow.limited`);
 
 		if (typeof overflowLimitedState != 'undefined') {
 			this.overflow.toggle(overflowLimitedState);
