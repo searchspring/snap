@@ -2,7 +2,7 @@
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a>
 
-MobX state management
+Management of Snap state using Mobx.
 
 ---
 
@@ -11,10 +11,11 @@ MobX state management
 Snap Store MobX is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
-    <summary>Package dependencies hierarchy</summary>
-    <br/>
-    <img src="../../images/snap-dependencies.jpg" />
+	<summary>Package dependencies hierarchy</summary>
+	<br/>
+	<img src="../../images/snap-dependencies.jpg" />
 </details>
+<br>
 
 
 # Installation
@@ -32,9 +33,7 @@ import { SearchStore, AutocompleteStore, FinderStore, AbstractStore, StorageStor
 
 ## Controller usage
 
-Snap Store MobX is a dependency of Snap Controller and it is recommended to use methods of the controller to access the store
-
-See [Typical Usage](../../README.md#TypicalUsage)
+Snap Store MobX is a dependency of Snap Controller which will handle store changes as needed. As such, it is recommended to use methods of the controller to access and update the store.
 
 
 ## Standalone usage
@@ -44,9 +43,10 @@ import { SearchStore } from '@searchspring/snap-store-mobx'
 
 const store = new SearchStore();
 
-store.update(data)
+store.update(data);
 
-console.log(store.toJSON())
+// log the store
+console.log(store.toJSON());
 ```
 
 # AbstractStore
@@ -63,73 +63,44 @@ store.update(data)
 ```
 
 ## `link` method
-Links a controller to the Store
+Links a controller to the Store to allow the store access to the controllers services and configuration. Most commonly the `UrlManager` is utilized for generating the correct URLs.
 
 ```typescript
 const store = new AutocompleteStore();
-const controller = new AutocompleteController(...)
+const controller = new AutocompleteController(...);
 
-store.link(controller)
+store.link(controller);
 ```
 
 ## `toJSON` method
-Converts store to JSON object
+Converts store to JSON object for easier debugging.
 
 ```typescript
 console.log(store.toJSON())
 ```
 
 ## `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](../snap-event-manager)
-
-
-## `loading` property
-Boolean that the controller will set to `true` before an API request is made. Value is updated to `false` after an API request has completed
-
+This is an empty object that is automatically watched for reactivity. When used with a Snap Controller, the controller event system (middleware) is then used to modify the object.
 
 ## `loaded` property
-Boolean that is set to `true` if the Store `update` method has been called at least once
+Boolean that is set to `true` once the store has determined that something of importance has loaded (depends on the specific store).
 
+## `loading` property
+Boolean that the controller will set to `true` before an API request is made. Value is updated to `false` after an API request has completed.
 
 # SearchStore
+The search store is meant to hold the search API response and associated state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
 ## `meta` property
-The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://searchspring.github.io/snapi-oas/#tag/Meta). The majority of this data is used elsewhere in constructing other SearchStore data like 'sorting' and 'facets'.
 
+## `merchandising` property
 
-<h2 id="SearchStoreMerchandising">`merchandising` property</h2>
-
-Contains redirect and banner merchandising data that the Search API returned
+Contains redirect and banner merchandising data returned by the Search API.
 
 `merchandising.redirect` - merchandising redirect URL
 
-`merchandising.content` - merchandising banner object that has `ContentType` key and value containing an array of single or more banners
-
-### Redirects
-Redirects are configured in the Searchspring Management Console
-
-An example of how to handle merchandising redirects:
-
-```typescript
-const store = new SearchStore();
-
-store.update(data)
-
-const redirectURL = store?.merchandising?.redirect;
-
-if (redirectURL) {
-    window.location.replace(redirectURL);
-}
-```
-
-### Banner Content
-Banners are configured in the Searchspring Management Console
-
-```typescript
-{
-    [ContentType.HEADER]: ['<p>header banner</p>', '<p>header banner 2</p>']
-}
-```
+`merchandising.content` - merchandising banner object that has `ContentType` key and value containing an array of single or more banners.
 
 ```typescript
 enum ContentType {
@@ -141,55 +112,22 @@ enum ContentType {
 }
 ```
 
-An example of how to retrieve the combined content of all header banners:
-
-```typescript
-const headerBannerContent = store?.merchandising?.content['header'].join('');
-```
-
-### Inline Banners
-Inline banners have a slightly different format:
-
-```typescript
-{
-	[ContentType.INLINE]: [
-        {
-            config: {
-                position: {
-                    index: 0
-                }
-            },
-            value: '<p>inline banner at position index 0</p>'
-        },
-        {
-            config: {
-                position: {
-                    index: 7
-                }
-            },
-            value: '<p>inline banner at position index 7</p>'
-        }
-    ]
-}
-```
-<!-- TODO: add more docs for inline banner -->
-
 ## `search` property
-Contains information about the query that was requested from the Search API
+Contains information about the query that was requested from the Search API.
 
-`search.query` - query that was searched
+`search.query` - Query object - query that was searched
 
-`search.didYouMean` - AlternateQuery object - suggested query after spelling correction
+`search.didYouMean` - Query object - suggested query when no results are found
 
-`search.originalQuery` - AlternateQuery object - original query if spell correction occurred
+`search.originalQuery` - Query object - original query if spell correction occurred
 
-### AlternateQuery object
-An AlternateQuery object contains the respective `query` and generated query `url`
+### Query object
+An Query object contains the respective query `string` and generated query `url`.
 
 ```typescript
 {
-    query: 'dress',
-    url: '/?q=dress'
+	string: 'dress',
+	url: '/?q=dress'
 }
 ```
 
@@ -197,33 +135,33 @@ An example in JSX:
 
 ```jsx
 {
-    search?.originalQuery && 
-    <div>
-        Search instead for "<a href={ search.originalQuery.url }>{ search.originalQuery.value }</a>"
-    </div>
+	search?.originalQuery && 
+	<div>
+		Search instead for "<a href={ search.originalQuery.url }>{ search.originalQuery.string }</a>"
+	</div>
 }
 ```
 
-<h2 id="SearchFacets">`facets` property</h2>
+## `facets` property
 
-Contains an array of facet object for the query requested to the Search API
+Contains an array of facet objects pertaining to the current query. The facet objects will be a superset of the API response with several helper funcitons and properties added on.
 
-All facets will contain the following base properties:
+All facets contain the following base properties:
 
 ```typescript
 {
-    type: 'range',
-    field: 'ss_price',
-    filtered: false,
-    custom: {},
-    collapse: false,
-    display: 'slider',
-    label: 'Price',
-    storage: {},
+	type: 'range',
+	field: 'ss_price',
+	filtered: false,
+	custom: {},
+	collapse: false,
+	display: 'slider',
+	label: 'Price',
+	storage: {},
 }
 ```
 
-<h3 id="SearchFacetsType">`type` property</h3>
+### `type` property
 
 The type property will be one of three values:
 
@@ -231,28 +169,28 @@ The type property will be one of three values:
 This is the default facet type.
 
 #### `range` type
-Range facets can only apply to a field that contains all numerical values. It is typically used for price sliders
+Range facets can only apply to a field that contains all numerical values. It is typically seen in use for price sliders.
 
 In addition to the base properties, facets of type `range` will contain the following properties:
 
 ```typescript
 {
-    step: 5,
-    range: {
-        low: 0,
-        high: 0
-    },
-    active: {
-        low: 0,
-        high: 0
-    },
-    formatSeparator: '',
-    formatValue: ''
+	step: 5,
+	range: {
+		low: 0,
+		high: 0
+	},
+	active: {
+		low: 0,
+		high: 0
+	},
+	formatSeparator: '',
+	formatValue: ''
 }
 ```
 
 #### `range-buckets` type
-Similar to value facets, with the added ability to group values into "buckets" 
+Similar to value facets, with the added ability to group values into "buckets".
 
 For example, a price facet with a range-buckets type would typically be used to create the following groups:
 ```
@@ -262,24 +200,27 @@ $20 - $50
 $50 and up
 ```
 
-<h3 id="SearchFacetsField">`field` property</h3>
+### `field` property
 
-Contains the field name, ie. 'ss_price'
+Contains the field name, ie. 'ss_price'.
 
-<h3 id="SearchFacetsFiltered">`filtered` property</h3>
+### `filtered` property
 
-If any of the facet's values have been filtered, the facet `filtered` property will be `true`
+If any of the facet's values have been filtered, the facet `filtered` property will be `true`.
 
 ### `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](../snap-event-manager)
+This is an empty object that has automatically been marked as an observable by MobX. This is the preferred place to place custom facet state.
 
-A few examples:
+Example inside of a `SearchController` middleware:
 ```typescript
 cntrlr.on('afterStore', async ({ controller }, next) => {
-	controller.store.custom.onSaleFacet = controller?.store?.facets.filter((facet) => facet.field == 'on_sale').pop();
+	controller.store.facets.forEach(facet => {
+		facet.custom.description = `Choose a ${facet.label}...`;
+	})
+	await next();
+});
 
-	controller.store.facets = controller?.store?.facets?.filter((facet) => facet.field != 'on_sale');
-
+cntrlr.on('afterStore', async ({ controller }, next) => {
 	const colorFacet = controller?.store?.facets.filter((facet) => facet.field == 'color_family').pop();
 	colorFacet?.values.forEach((value) => {
 		value.custom = {
@@ -287,21 +228,17 @@ cntrlr.on('afterStore', async ({ controller }, next) => {
 		};
 	});
 
-	controller.store.results.forEach((result) => {
-		result.mappings.core.url = 'http://try.searchspring.com' + result.mappings.core.url;
-	});
-
 	await next();
 });
 ```
 
-<h3 id="SearchFacetsCollapse">`collapse` property</h3>
+### `collapse` property
 
-Collapse state that will contain an initial state that can be defined in the Searchspring Management Console, or toggled programmatically
+Collapse state that will contain an initial state that can be defined in the Searchspring Management Console, or toggled programmatically using `toggleCollapse()`.
 
 
-<h3 id="SearchFacetsDisplay">`display` property</h3>
-Contains the facet display type as configured in the Searchspring Management Console
+### `display` property
+Contains the facet display type as configured in the Searchspring Management Console.
 
 ```typescript
 enum FacetDisplay {
@@ -313,63 +250,50 @@ enum FacetDisplay {
 }
 ```
 
-<h3 id="SearchFacetsLabel">`label` property</h3>
-Contains the facet label as configured in the Searchspring Management Console
+### `label` property
+Contains the facet label as configured in the Searchspring Management Console.
 
 ### `storage` property
-Contains a reference to the [StorageStore](#StorageStore)
-
-<!-- TODO: update link -->
-
-
+This is a reference to the `StorageStore` instance that is used to store the current facet state for `collapse` and `overflow`; this preserves these states as additional API queries are made (think faceting, pagination, etc...). The `SearchStore` automatically manages this stored state.
 
 ### `step` property
-Only applicable to facets where `type` is `range`
+Only applicable to facets where `type` is `range`.
 
-The step value is calculated based on the min and max values of the range. It is typically set to the step attribute of an input element:
+The step value is calculated by the API based on the min and max values of the range. It is typically used to set the step attribute of an input element:
 
 ```jsx
 <input type="range" step={facet.step} min={facet.active.low} max={facet.active.high} />
 ```
 
 ### `range` property
-Only applicable to facets where `type` is `range`
+Only applicable to facets where `type` is `range`.
 
-Contains an object with `low` and `high` properties
+Contains an object with `low` and `high` properties. This represents the absolute low and high that are available.
 
 ### `active` property
-Only applicable to facets where `type` is `range`
+Only applicable to facets where `type` is `range`.
 
-Contains an object with `low` and `high` properties
-
-<!-- TODO: explain difference between range and active -->
-
+Contains an object with `low` and `high` properties. This represents the currently 'active' or filtered low and high values.
 
 ### `formatSeparator` property
-Only applicable to facets where `type` is `range`
+Only applicable to facets where `type` is `range`.
 
-The text to separate `min` and `max` values. Typically set to `-`
-
-Example:
-```typescript
-const priceToDisplay = `$${facet.active.min} ${facet.formatSeparator} $${facet.active.max}` // $10 - $200
-```
+The text to separate `min` and `max` values. Typically set to `-` and is configured in the Searchspring Management Console.
 
 
 ### `formatValue` property
-Only applicable to facets where `type` is `range`
+Only applicable to facets where `type` is `range`.
 
-A [printf format string](https://en.wikipedia.org/wiki/Printf_format_string) for how to format numerical values
+A [printf format string](https://en.wikipedia.org/wiki/Printf_format_string) for how to format numerical values.
 
-Configurable in the Searchspring Management Console and typically set to `$%01.2f` 
+Configurable in the Searchspring Management Console and typically set to `$%01.2f`.
 
-For example, `9.99` with a formateValue of `$%01.2f` will be formatted to `$9.99`
-
+For example, `9.99` with a formateValue of `$%01.2f` will be formatted to `$9.99`.
 
 ### `values` property
-Only applicable to facets where `type` is `value` or `range-buckets`
+Only applicable to facets where `type` is `value` or `range-buckets`.
 
-Contains an array of facet value objects for this facet
+Contains an array of facet value objects for this facet.
 
 #### `values` object with facet type `value`
 
@@ -394,8 +318,7 @@ Otherwise, If the facet `display` property is `palette`, `list`, or `slider`, th
 `url` - generated URL for this value
 
 #### `values` object for type `range-buckets`
-
-`values` object will contain the following properties:
+Object will contain the following properties:
 
 `label` - inherited from facet
 
@@ -529,86 +452,86 @@ Product attributes object. Will contain all attributes that have been indexed an
 
 ```json
 "attributes": {
-    "intellisuggestData": "eJwrTs4tNM9jYGBw1nV00Q031DW0MLMMYDAEQmMDBhMTMwOG9KLMFACyXAiS",
-    "intellisuggestSignature": "25f3b12a880fa4342274c97a9c105f0736c026e71b12ca0a7b297e357b099b7d",
-    "ss_insights_quadrant": "Best Performer",
-    "gross_margin": "70",
-    "ss_product_type": "Dress",
-    "keywords": [
-        "off the shoulder",
-        "striped",
-        "stripes",
-        "stripe",
-        "open shoulder",
-        "open back",
-        "preppy",
-        "seersucker",
-        "white",
-        "white dress",
-        "white",
-        "summer",
-        "spring"
-    ],
-    "color": [
-        "White",
-        "Navy",
-        "Cream"
-    ],
-    "dress_length_name": "Mini",
-    "multi_colors": "yes",
-    "pattern": "Stripe",
-    "description": "Are you Stripe Out of ideas for what to wear this weekend on that trip you've got coming up with your friends? Afraid you'll be the odd one out and everyone else will be all cute and trendy and there you'll be ... not trendy and wearing the same old things you've been wearing on this annual getaway for years? Lucky for you, here's the dress you've been searching for. Doesn't matter what else you pack (it does, you'll want to continue to shop with us, we were just being nice) this is the piece that will set you apart from everyone else (that is absolutely true, you will be a Goddess among women). Take that, bad fashion moments of the past! Striped dress features 3/4 sleeve bell sleeves with a partially elastic/open back. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA",
-    "title": "Stripe Out White Off-The-Shoulder Dress",
-    "ss_clicks": "4141",
-    "saturation": "low",
-    "color_family": [
-        "White"
-    ],
-    "sales_rank": "4461",
-    "ss_sale_price": "48",
-    "season": "Summer",
-    "ss_category_hierarchy": [
-        "Shop By Trend",
-        "All Dresses",
-        "All Dresses&gt;Casual Dresses",
-        "Shop By Trend&gt;Spring Preview",
-        "All Dresses&gt;Shop by Color",
-        "All Dresses&gt;Print Dresses",
-        "Gifts for Her",
-        "Shop By Trend&gt;Off The Shoulder Trend",
-        "Gifts for Her&gt;Gifts Under $50",
-        "All Dresses&gt;Shop by Color&gt;White Dresses"
-    ],
-    "on_sale": "No",
-    "condition": "New",
-    "product_type": [
-        "All Dresses &gt; Shop by Color &gt; White Dresses",
-        "All Dresses &gt; Shop by Color",
-        "All Dresses &gt; Print Dresses",
-        "Shop By Trend &gt; Off The Shoulder Trend",
-        "Shop By Trend &gt; Spring Preview",
-        "All Dresses &gt; Casual Dresses",
-        "Gifts for Her",
-        "Gifts for Her &gt; Gifts Under $50"
-    ],
-    "brightness": "high",
-    "size": [
-        "Small",
-        "Medium",
-        "Large"
-    ],
-    "material": "Cotton",
-    "days_since_published": "8",
-    "dress_length": "34",
-    "size_dress": [
-        "Small",
-        "Medium",
-        "Large"
-    ],
-    "quantity_available": "13",
-    "popularity": "4461",
-    "product_type_unigram": "dress",
-    "id": "7790a0f692035da40c8504e8b7a9f31d"
+	"intellisuggestData": "eJwrTs4tNM9jYGBw1nV00Q031DW0MLMMYDAEQmMDBhMTMwOG9KLMFACyXAiS",
+	"intellisuggestSignature": "25f3b12a880fa4342274c97a9c105f0736c026e71b12ca0a7b297e357b099b7d",
+	"ss_insights_quadrant": "Best Performer",
+	"gross_margin": "70",
+	"ss_product_type": "Dress",
+	"keywords": [
+		"off the shoulder",
+		"striped",
+		"stripes",
+		"stripe",
+		"open shoulder",
+		"open back",
+		"preppy",
+		"seersucker",
+		"white",
+		"white dress",
+		"white",
+		"summer",
+		"spring"
+	],
+	"color": [
+		"White",
+		"Navy",
+		"Cream"
+	],
+	"dress_length_name": "Mini",
+	"multi_colors": "yes",
+	"pattern": "Stripe",
+	"description": "Are you Stripe Out of ideas for what to wear this weekend on that trip you've got coming up with your friends? Afraid you'll be the odd one out and everyone else will be all cute and trendy and there you'll be ... not trendy and wearing the same old things you've been wearing on this annual getaway for years? Lucky for you, here's the dress you've been searching for. Doesn't matter what else you pack (it does, you'll want to continue to shop with us, we were just being nice) this is the piece that will set you apart from everyone else (that is absolutely true, you will be a Goddess among women). Take that, bad fashion moments of the past! Striped dress features 3/4 sleeve bell sleeves with a partially elastic/open back. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA",
+	"title": "Stripe Out White Off-The-Shoulder Dress",
+	"ss_clicks": "4141",
+	"saturation": "low",
+	"color_family": [
+		"White"
+	],
+	"sales_rank": "4461",
+	"ss_sale_price": "48",
+	"season": "Summer",
+	"ss_category_hierarchy": [
+		"Shop By Trend",
+		"All Dresses",
+		"All Dresses&gt;Casual Dresses",
+		"Shop By Trend&gt;Spring Preview",
+		"All Dresses&gt;Shop by Color",
+		"All Dresses&gt;Print Dresses",
+		"Gifts for Her",
+		"Shop By Trend&gt;Off The Shoulder Trend",
+		"Gifts for Her&gt;Gifts Under $50",
+		"All Dresses&gt;Shop by Color&gt;White Dresses"
+	],
+	"on_sale": "No",
+	"condition": "New",
+	"product_type": [
+		"All Dresses &gt; Shop by Color &gt; White Dresses",
+		"All Dresses &gt; Shop by Color",
+		"All Dresses &gt; Print Dresses",
+		"Shop By Trend &gt; Off The Shoulder Trend",
+		"Shop By Trend &gt; Spring Preview",
+		"All Dresses &gt; Casual Dresses",
+		"Gifts for Her",
+		"Gifts for Her &gt; Gifts Under $50"
+	],
+	"brightness": "high",
+	"size": [
+		"Small",
+		"Medium",
+		"Large"
+	],
+	"material": "Cotton",
+	"days_since_published": "8",
+	"dress_length": "34",
+	"size_dress": [
+		"Small",
+		"Medium",
+		"Large"
+	],
+	"quantity_available": "13",
+	"popularity": "4461",
+	"product_type_unigram": "dress",
+	"id": "7790a0f692035da40c8504e8b7a9f31d"
 }
 ```
 
@@ -619,17 +542,17 @@ Core product attributes object
 
 ```json
 "mappings": {
-    "core": {
-        "uid": "182146",
-        "price": 48,
-        "msrp": 50,
-        "url": "/product/C-AD-W1-1869P",
-        "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4468_copyright_reddressboutique_2017__thumb_med.jpg",
-        "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg",
-        "name": "Stripe Out White Off-The-Shoulder Dress",
-        "sku": "C-AD-W1-1869P",
-        "brand": "Adrienne"
-    }
+	"core": {
+		"uid": "182146",
+		"price": 48,
+		"msrp": 50,
+		"url": "/product/C-AD-W1-1869P",
+		"thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4468_copyright_reddressboutique_2017__thumb_med.jpg",
+		"imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg",
+		"name": "Stripe Out White Off-The-Shoulder Dress",
+		"sku": "C-AD-W1-1869P",
+		"brand": "Adrienne"
+	}
 },
 ```
 
@@ -650,7 +573,7 @@ Only applicable to results with `type` of `banner`
 Banner value inherited from merchandising inline banner `value` property
 
 
-<h2 id="SearchStorePagination">`pagination` property</h2>
+## `pagination` property
 
 Contains pagination information for the query that was requested from the Search API
 
@@ -660,11 +583,11 @@ The current page
 ### `pageSize` property
 The number of products displayed per page
 
-### `page` property
-The current page
+### `defaultPageSize` property
+The default number of results per page. Default is `24`.
 
 ### `pageSizeOptions` property
-An array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page
+An array of objects containing results per page options. Typically used in a `<select>` dropdown to change the number of results displayed per page.
 
 `label` - label text to display
 
@@ -673,78 +596,55 @@ An array of objects containing results per page options. Typically used in a `<s
 Default values:
 ```typescript
 [
-    {
-        label: `Show ${this.defaultPageSize}`,
-        value: this.defaultPageSize,
-    },
-    {
-        label: `Show ${this.defaultPageSize * 2}`,
-        value: this.defaultPageSize * 2,
-    },
-    {
-        label: `Show ${this.defaultPageSize * 3}`,
-        value: this.defaultPageSize * 3,
-    },
+	{
+		label: `Show ${this.defaultPageSize}`,
+		value: this.defaultPageSize,
+	},
+	{
+		label: `Show ${this.defaultPageSize * 2}`,
+		value: this.defaultPageSize * 2,
+	},
+	{
+		label: `Show ${this.defaultPageSize * 3}`,
+		value: this.defaultPageSize * 3,
+	},
 ]
 ```
 
-### `defaultPageSize` property
-The default number of results per page. Default is `24`
-
 ### `totalResults` property
-The total result count
+The total results for the current query.
 
 ### `begin` getter
 The number of the first product position on the current page.
-For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `25`
-
-Calculation: 
-```typescript
-return pageSize * (page - 1) + 1;
-```
+For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `25`.
 
 ### `end` getter
 The number of the last product position on the current page.
-For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `48`
-
-Calculation: 
-```typescript
-if (pageSize * page > totalResults) {
-    return totalResults;
-} else {
-    return pageSize * page;
-}
-```
+For example, if the `pageSize` is `24` and the current page is `2`, `pagination.begin` will return `48`.
 
 ### `totalPages` getter
-The total number of pages
-
-Calculation:
-```typescript
-return Math.ceil(totalResults / pageSize);
-```
+The total number of pages.
 
 ### `multiplePages` getter
-Boolean if there is more than 1 page
-
+Boolean returned showing if there is more than one page.
 
 ### `current` getter
-Returns a `Page` object of the current page
+Returns a `Page` object of the current page.
 
 ### `first` getter
-Returns a `Page` object of the first page
+Returns a `Page` object of the first page.
 
 ### `last` getter
-Returns a `Page` object of the last page
+Returns a `Page` object of the last page.
 
 ### `next` getter
-Returns a `Page` object of the next page
+Returns a `Page` object of the next page.
 
 ### `previous` getter
-Returns a `Page` object of the previous page
+Returns a `Page` object of the previous page.
 
 ### `getPages` method
-Returns an array of `Page` objects
+Returns an array of `Page` objects.
 
 Typical usage to retrieve 5 pages:
 ```typescript
@@ -759,35 +659,36 @@ const pages = getPages(2, 5) // 2, 3, *4*, 5, 6, 7, 8
 <!-- TODO: confim example is correct -->
 
 ### `setPageSize` method
-Sets `pageSize` and performs a query. Typical usage would be to invoke `setPageSize` on the `onChange` event the results per page dropdown
+Sets `pageSize` and performs a query. Typical usage would be to invoke `setPageSize` on the `onChange` event the results per page dropdown:
 
 ```jsx
 onChange={(e) => {
-    pagination.setPageSize(e.target.value);
+	pagination.setPageSize(e.target.value);
 }}
 ```
 
 ### `Page` object
-A page object is returned when invoking the following getters/methods: `current`, `first`, `last`, `next`, `previous`, `getPages`
+A page object is returned when invoking the following getters/methods: `current`, `first`, `last`, `next`, `previous`, `getPages`.
 
 #### `number` property
-The number of the page
+The number of the page.
 
 #### `active` property
-Boolean if this page is the current page
+Boolean showing if this page is the 'active' or current page.
 
 #### `url` property
-Set to an instance of UrlManager for the page. Typical usage is to use the `url.href` value as the `href` of a pagination option
+Set to an instance of UrlManager for the page. Typical usage would be to tie into the linker of the UrlManager and attach the `href` and `onclick` properties.
 
 #### `key` property
-A unique value (set to `url.href`) available to use as a `key` prop when rendering [react keys](https://reactjs.org/docs/lists-and-keys.html)
+A unique value (set to `url.href`) available to use as a `key` prop when rendering [react keys](https://reactjs.org/docs/lists-and-keys.html).
 
 
-<h2 id="SearchStoreSorting">`sorting` property</h2>
+## `sorting` property
 
-Contains sorting information that was requested from the Meta API
+Contains sorting information that was requested from the Meta API.
 
-`options` - an array of sorting Option objects
+### `options` property
+An array of sorting Option objects.
 
 ### `current` getter
 Returns an `Option` object of the current selected sort option
@@ -1002,13 +903,13 @@ The `select` method should be invoked when a selection has been made, such as in
 
 ```jsx
 {selections.map((selection) => {
-    <select onChange={(e) => {
-        selection.select(e.target.value)
-    }}>
-        {selection.values.map((value) => {
-            <option value={value}>{value}</option>
-        })}
-    </select>
+	<select onChange={(e) => {
+		selection.select(e.target.value)
+	}}>
+		{selection.values.map((value) => {
+			<option value={value}>{value}</option>
+		})}
+	</select>
 })}
 ```
 
@@ -1072,8 +973,8 @@ An interface for storing data in the browser session storage, local storage, coo
 import { StorageStore } from '@searchspring/snap-store-mobx';
 
 const config = {
-    type: 'session',
-    key: 'ss-storage'
+	type: 'session',
+	key: 'ss-storage'
 }
 
 const storage = new StorageStore(config)
@@ -1100,9 +1001,9 @@ If `config` is not provided, storage will be saved to its internal `state` objec
 
 ```typescript
 const config = {
-    type: 'cookie',
-    key: 'ss-storage',
-    cookie: {
+	type: 'cookie',
+	key: 'ss-storage',
+	cookie: {
 		expiration: 31536000000,
 		sameSite: '',
 	},
