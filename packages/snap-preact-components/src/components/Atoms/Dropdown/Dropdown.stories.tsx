@@ -119,4 +119,3 @@ Default.args = {
 	button: 'button text',
 	content: 'content text',
 };
-

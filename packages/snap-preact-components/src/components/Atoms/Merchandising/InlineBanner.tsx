@@ -10,30 +10,32 @@ import { ComponentProps } from '../../../types';
 import { LayoutType } from '../../../types';
 
 const CSS = {
-	inlineBanner: ({ width, style }) => css ({
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		maxWidth: width ? "initial" : '260px',
-		width: width || "auto",
+	inlineBanner: ({ width, style }) =>
+		css({
+			height: '100%',
+			display: 'flex',
+			flexDirection: 'column',
+			justifyContent: 'center',
+			maxWidth: width ? 'initial' : '260px',
+			width: width || 'auto',
 
-		'& iframe': {
-			maxWidth: '100%',
-		},
-		...style,
-	}),
-	
-	list: () => css({
-		flexDirection: 'row',
-		display:"block",
-		width: "100%",
-	}),
+			'& iframe': {
+				maxWidth: '100%',
+			},
+			...style,
+		}),
 
-	grid: () => css({
-		flexDirection: 'column',
-	}),
+	list: () =>
+		css({
+			flexDirection: 'row',
+			display: 'block',
+			width: '100%',
+		}),
 
+	grid: () =>
+		css({
+			flexDirection: 'column',
+		}),
 };
 
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
@@ -42,7 +44,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const props: InlineBannerProps = {
 		// default props
 		disableStyles: false,
-		layout: "grid",
+		layout: 'grid',
 		banner: {},
 		// global theme
 		...globalTheme?.components?.banner,
@@ -58,7 +60,12 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		banner.value && (
 			<div
 				className={classnames('ss-inlineBanner', className)}
-				css={!disableStyles && css`${CSS.inlineBanner({ width, style })} ${CSS[layout]()}`}
+				css={
+					!disableStyles &&
+					css`
+						${CSS.inlineBanner({ width, style })} ${CSS[layout]()}
+					`
+				}
 				dangerouslySetInnerHTML={{
 					__html: banner.value,
 				}}

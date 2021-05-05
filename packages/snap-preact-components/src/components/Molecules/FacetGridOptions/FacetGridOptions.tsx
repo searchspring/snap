@@ -77,10 +77,10 @@ export const FacetGridOptions = observer(
 			values?.length && (
 				<div css={!disableStyles && CSS.grid({ columns, gapSize, style })} className={classnames('ss-grid', className)}>
 					{values.map((value) => (
-						<a 
-							css={!disableStyles && CSS.optionWrapper()} 
-							className={'ss-grid-optionWrapper'} 
-							onClick={onClick} 
+						<a
+							css={!disableStyles && CSS.optionWrapper()}
+							className={'ss-grid-optionWrapper'}
+							onClick={onClick}
 							onFocus={() => {
 								previewOnFocus && value.preview && value.preview();
 							}}

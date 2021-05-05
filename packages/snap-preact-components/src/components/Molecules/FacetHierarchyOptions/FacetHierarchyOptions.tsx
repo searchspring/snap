@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
-import { ComponentProps, ValueFacetHierarchyValue } from '../../../types';
+import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
 	list: ({ style }) =>
@@ -91,7 +91,12 @@ export const FacetHierarchyOptions = observer(
 					{values.map((value) => (
 						<a
 							className={classnames('ss-hierarchy__link', { filtered: value.filtered }, { history: value.history && !value.filtered })}
-							css={!disableStyles && css`${CSS.listOption()} ${value.filtered && CSS.filtered()} ${value.history && !value.filtered && CSS.return()}`}
+							css={
+								!disableStyles &&
+								css`
+									${CSS.listOption()} ${value.filtered && CSS.filtered()} ${value.history && !value.filtered && CSS.return()}
+								`
+							}
 							onClick={onClick}
 							{...value.url?.link}
 						>
@@ -111,7 +116,7 @@ export const FacetHierarchyOptions = observer(
 	}
 );
 export interface FacetHierarchyOptionsProps extends ComponentProps {
-	values: ValueFacetHierarchyValue[];
+	values: HierarchyFacetValue[];
 	hideCount?: boolean;
 	onClick?: (e: Event) => void;
 }

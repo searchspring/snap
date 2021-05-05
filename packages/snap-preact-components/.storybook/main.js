@@ -8,11 +8,11 @@ module.exports = {
 				babelOptions: {},
 				transcludeMarkdown: true,
 				inlineStories: true,
-				sourceLoaderOptions: null
+				sourceLoaderOptions: null,
 			},
 		},
 		'@storybook/addon-controls',
-		'@storybook/addon-links', 
+		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 	],
 

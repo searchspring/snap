@@ -8,7 +8,6 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 // @ts-ignore
 import Readme from '../Slider/readme.md';
 
-
 export default {
 	title: `Molecules/Slider`,
 	component: Slider,

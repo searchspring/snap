@@ -68,7 +68,7 @@ export default {
 const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
 
 const Template = (args: InlineBannerProps, { loaded: { controller } }) => (
-	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args}/>
+	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args} />
 );
 
 export const Default = Template.bind({});

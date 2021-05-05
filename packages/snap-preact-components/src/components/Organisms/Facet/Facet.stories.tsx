@@ -185,3 +185,18 @@ Grid.loaders = [
 		controller: await snapInstance.search(),
 	}),
 ];
+
+// HIERARCHY Facet
+
+const ObservableHierarchyFacet = observer(({ args, controller }) => {
+	const facet = controller?.store?.facets.filter((facet) => facet.display === FacetDisplay.HIERARCHY).shift();
+	return <Facet {...args} facet={facet} />;
+});
+
+const HierarchyTemplate = (args: FacetProps, { loaded: { controller } }) => <ObservableHierarchyFacet args={args} controller={controller} />;
+export const Hierarchy = HierarchyTemplate.bind({});
+Hierarchy.loaders = [
+	async () => ({
+		controller: await snapInstance.search(),
+	}),
+];

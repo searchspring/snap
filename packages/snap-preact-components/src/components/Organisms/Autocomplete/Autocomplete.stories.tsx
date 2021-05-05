@@ -1,4 +1,4 @@
-import { h, Fragment} from 'preact';
+import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
 import { Autocomplete, AutocompleteProps } from './Autocomplete';
@@ -31,8 +31,8 @@ export default {
 					border: '1px solid lightgrey',
 				}}
 			>
-				<input type="text" id="searchInput" placeholder='try me!' autoComplete="off"/>
-				<Story/>
+				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" />
+				<Story />
 			</div>
 		),
 	],
@@ -77,24 +77,24 @@ const propTheme = {
 	components: {
 		facetpaletteoptions: {
 			columns: 3,
-			gapSize: "8px",
+			gapSize: '8px',
 		},
 	},
 };
 
-const snapInstance = Snapify.autocomplete({selector: "#searchInput", globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.autocomplete({ selector: '#searchInput', globals: { siteId: 'scmq7n' } });
 
 const ObservableAutoComplete = observer(({ args, controller }) => {
-	return <Autocomplete {...args} store={controller?.store} input={controller?.config.selector} theme={propTheme} style={{maxWidth:"900px"}}/>;
+	return <Autocomplete {...args} store={controller?.store} input={controller?.config.selector} theme={propTheme} style={{ maxWidth: '900px' }} />;
 });
 
-const Template = (args: AutocompleteProps, { loaded: { controller} }) => {
-	return <ObservableAutoComplete args={args} controller={controller} />; 
+const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
+	return <ObservableAutoComplete args={args} controller={controller} />;
 };
 
 export const Default = Template.bind({});
 Default.loaders = [
 	async () => ({
-		controller: await snapInstance
+		controller: await snapInstance,
 	}),
 ];
