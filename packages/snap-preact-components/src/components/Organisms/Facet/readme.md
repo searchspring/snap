@@ -1,11 +1,12 @@
-## Facet
+# Facet
 
 Renders a single complete facet. This includes determining the correct options type, a collapsable header, and overflow options. 
 
 ## Sub-components
 - Dropdown
-- FacetListOptions
+- FacetHierarchyOptions
 - FacetGridOptions
+- FacetListOptions
 - FacetPaletteOptions
 - Slider
 - Icon
@@ -33,11 +34,11 @@ The `color` prop sets the facet name and icon color.
 <Facet facet={controller.store.facets[0]} color={'#222222'} />
 ```
 
-### optionsLimitCount
-The `optionsLimitCount` prop sets the number of options to display before the remaining options overflow and a show more/less button is displayed. 
+### optionsLimit
+The `optionsLimit` prop sets the number of options to display before the remaining options overflow and a show more/less button is displayed. 
 
 ```jsx
-<Facet facet={controller.store.facets[0]} optionsLimitCount={10} />
+<Facet facet={controller.store.facets[0]} optionsLimit={10} />
 ```
 
 ### previewOnFocus
@@ -52,15 +53,15 @@ The `valueProps` prop will be spread onto each value's `<a>` element. Typical us
 
 ```typescript
 const valueProps = {
-    onMouseEnter: (e) => {
-        clearTimeout(delayTimeout);
-        delayTimeout = setTimeout(() => {
-            e.target.focus();
-        }, delayTime);
-    },
-    onMouseLeave: () => {
-        clearTimeout(delayTimeout);
-    },
+	onMouseEnter: (e) => {
+		clearTimeout(delayTimeout);
+		delayTimeout = setTimeout(() => {
+			e.target.focus();
+		}, delayTime);
+	},
+	onMouseLeave: () => {
+		clearTimeout(delayTimeout);
+	},
 }
 ```
 

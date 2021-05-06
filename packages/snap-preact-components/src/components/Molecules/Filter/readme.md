@@ -1,4 +1,4 @@
-## Filter
+# Filter
 
 Renders a facet filter.
 
@@ -9,14 +9,14 @@ Renders a facet filter.
 ## Usage
 
 ### facetLabel
-The `facetLabel` prop specifiesthe filter label. Typically set to the facet name.
+The `facetLabel` prop specifies the filter label. Typically set to the facet label.
 
 ```jsx
 <Filter facetLabel={'Brand'} />
 ```
 
 ### valueLabel
-The `valueLabel` prop specifiesthe filter value. Typically set to the facet value.
+The `valueLabel` prop specifies the filter value. Typically set to the facet value label.
 
 ```jsx
 <Filter valueLabel={'Nike'} />
@@ -43,7 +43,7 @@ The `separator` prop will specify the separator character between `facetLabel` a
 ```
 
 ### icon
-The `icon` prop specifiesan object with `Icon` component props. 
+The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery).
 
 ### Events
 

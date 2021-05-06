@@ -110,15 +110,15 @@ const CSS = {
 			display: 'inline-block',
 			height: '8px',
 			width: 'calc(100% - 25px)',
-			margin: '20px 5% 20px',
+			margin: '20px 5% 25px',
 			top: '10px',
 			...style,
 		}),
-	tickLabel: ({ textColor }) =>
+	tickLabel: ({ tickTextColor }) =>
 		css({
 			position: 'absolute',
 			fontSize: '0.6rem',
-			color: textColor,
+			color: tickTextColor,
 			top: '100%',
 			transform: 'translate(-50%, 1.2rem)',
 			whiteSpace: 'nowrap',
@@ -142,13 +142,13 @@ export const Slider = observer(
 		const props: SliderProps = {
 			// default props
 			disableStyles: false,
-			textColor: '#515151',
+			tickTextColor: '#515151',
 			showTicks: false,
 			trackColor: '#F8F8F8',
 			handleTextColor: '#515151',
 			handleColor: '#4C37B3',
 			railColor: '#4C37B3',
-			tickSize: 20,
+			tickSize: properties.facet?.step * 10 || 20,
 
 			// global theme
 			...globalTheme?.components?.slider,
@@ -158,7 +158,7 @@ export const Slider = observer(
 		};
 
 		const {
-			textColor,
+			tickTextColor,
 			trackColor,
 			handleTextColor,
 			railColor,
@@ -209,7 +209,7 @@ export const Slider = observer(
 					{showTicks &&
 						ticks.map(({ value, getTickProps }) => (
 							<div className={'ss-sliderTick'} {...getTickProps()} css={!disableStyles && CSS.tick()}>
-								<div className={'ss-sliderTickLabel'} css={!disableStyles && CSS.tickLabel({ textColor })}>
+								<div className={'ss-sliderTickLabel'} css={!disableStyles && CSS.tickLabel({ tickTextColor })}>
 									{value}
 								</div>
 							</div>
@@ -284,14 +284,14 @@ export function Handle(props: {
 }
 
 export interface SliderProps extends ComponentProps {
-	textColor?: string;
 	trackColor?: string;
-	handleTextColor?: string;
 	railColor?: string;
 	handleColor?: string;
 	handleDraggingColor?: string;
+	handleTextColor?: string;
 	showTicks?: boolean;
 	tickSize?: number;
+	tickTextColor?: string;
 	facet: RangeFacet;
 	onChange?: (values: number[]) => void;
 	onDrag?: (values: number[]) => void;

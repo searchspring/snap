@@ -1,4 +1,4 @@
-## Result
+# Result
 
 Renders a single product card. 
 
@@ -37,8 +37,8 @@ The `hidePricing` prop will prevent the pricing from rendering.
 <Result result={controller.store.results[0]} hidePricing={true} />
 ```
 
-### detailsSlot
-The `detailsSlot` prop can contain a string or JSX element to display in place of the title and pricing sections. This can be used to display any additional information.
+### detailSlot
+The `detailSlot` prop can contain a string or JSX element to display in place of the title and pricing sections. This can be used to display any additional information. Specifying this property will overwrite the default title and the pricing elements.
 
 ```typescript
 const productDetails = (props) => {
@@ -56,11 +56,11 @@ const productDetails = (props) => {
 ```
 
 ```jsx
-<Result result={controller.store.results[0]} detailsSlot={<productDetails product={controller.store.results[0]} />
+<Result result={controller.store.results[0]} detailSlot={<productDetails product={controller.store.results[0]/>} />
 ```
 
 ### buttonSlot
-The `buttonSlot` prop is a placeholder and renders before the `detailsSlot` section. It can contain a string or JSX element. Typically used to add a CTA button.
+The `buttonSlot` prop is a placeholder and renders before the `detailSlot` section. It can contain a string or JSX element. Typically used to add a CTA button.
 
 ```typescript
 const addToCartButton = (props) => {
@@ -71,7 +71,7 @@ const addToCartButton = (props) => {
 ```
 
 ```jsx
-<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid} />
+<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid}/>} />
 ```
 
 ### fallback

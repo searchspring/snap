@@ -5,7 +5,7 @@ import { Image, FALLBACK_IMAGE_URL } from './Image';
 import { componentArgs } from '../../../utilities';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-// @ts-ignore
+
 import Readme from '../Image/readme.md';
 
 export default {

@@ -13,35 +13,37 @@ import { defined } from '../../../utilities';
 import { ComponentProps, LayoutType, Result as ResultType } from '../../../types';
 
 const CSS = {
-	list: () => css({
-		flexDirection: 'row',
-		display:"block",
-		width: "100%",
+	list: () =>
+		css({
+			flexDirection: 'row',
+			display: 'block',
+			width: '100%',
 
-		'& .ss-result__wrapper':{
-			overflow:"hidden",
-			display:"flex"
-		},
-		'& .ss-result__image-wrapper': {
-			float:"left",
-			maxWidth:"35%",
-		},
-		'& .ss-result__details-wrapper': {
-			float:"right",
-			textAlign:"left",
-			verticalAlign:"top",
-			padding:"20px",
-		}
-	}),
-	grid: () => css({
-		flexDirection: 'column',
-	}),
+			'& .ss-result__wrapper': {
+				overflow: 'hidden',
+				display: 'flex',
+			},
+			'& .ss-result__image-wrapper': {
+				float: 'left',
+				maxWidth: '35%',
+			},
+			'& .ss-result__details-wrapper': {
+				float: 'right',
+				textAlign: 'left',
+				verticalAlign: 'top',
+				padding: '20px',
+			},
+		}),
+	grid: () =>
+		css({
+			flexDirection: 'column',
+		}),
 
 	result: ({ width, style }) =>
 		css({
 			display: 'inline-block',
-			maxWidth: width ? "initial" : '260px',
-			width: width || "auto",
+			maxWidth: width ? 'initial' : '260px',
+			width: width || 'auto',
 
 			'& .ss-result__wrapper': {
 				border: '1px solid #ccc',
@@ -51,21 +53,21 @@ const CSS = {
 			},
 
 			'& .ss-result__image-wrapper': {
-				position:"relative",
-				display:"flex",
-				justifyContent: "center",
+				position: 'relative',
+				display: 'flex',
+				justifyContent: 'center',
 
-				"& img": {
-					top: "0",
-					left: "0",
-					right: "0",
-					width: "auto",
-					bottom: "0",
-					margin: "auto",
-					height: "auto",
-					maxWidth:"100%",
+				'& img': {
+					top: '0',
+					left: '0',
+					right: '0',
+					width: 'auto',
+					bottom: '0',
+					margin: 'auto',
+					height: 'auto',
+					maxWidth: '100%',
 				},
-				
+
 				'& .ss-badge': {
 					background: 'rgba(255, 255, 255, 0.5)',
 					padding: '10px',
@@ -115,7 +117,7 @@ export const Result = observer(
 			hideTitle: false,
 			hidePricing: false,
 			disableStyles: false,
-			layout: "grid",
+			layout: 'grid',
 			// global theme
 			...globalTheme?.components?.result,
 			// props
@@ -123,7 +125,7 @@ export const Result = observer(
 			...properties.theme?.components?.result,
 		};
 
-		const { result, hideBadge, hideTitle, hidePricing, detailsSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
+		const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
 
 		const core = result?.mappings?.core;
 
@@ -170,8 +172,15 @@ export const Result = observer(
 
 		return (
 			core && (
-				
-				<article css={!disableStyles && css`${CSS.result({ width, style })} ${CSS[layout]()}`} className={classnames('ss-result', className)}>
+				<article
+					css={
+						!disableStyles &&
+						css`
+							${CSS.result({ width, style })} ${CSS[layout]()}
+						`
+					}
+					className={classnames('ss-result', className)}
+				>
 					<div className={'ss-result__wrapper'}>
 						<div className={'ss-result__image-wrapper'}>
 							<a href={core.url}>
@@ -180,7 +189,7 @@ export const Result = observer(
 							</a>
 						</div>
 						<div className={'ss-result__details-wrapper'}>
-							{!detailsSlot ? (
+							{!detailSlot ? (
 								<>
 									{!hideTitle && (
 										<div className={'ss-result__details-wrapper-name'}>
@@ -208,7 +217,7 @@ export const Result = observer(
 									)}
 								</>
 							) : (
-								<>{detailsSlot}</>
+								<>{detailSlot}</>
 							)}
 
 							{buttonSlot && <div className={'ss-result__button-wrapper'}>{buttonSlot}</div>}
@@ -231,7 +240,7 @@ export interface ResultProps extends ComponentProps {
 	hideBadge?: boolean;
 	hideTitle?: boolean;
 	hidePricing?: boolean;
-	detailsSlot?: string | JSX.Element;
+	detailSlot?: string | JSX.Element;
 	buttonSlot?: string | JSX.Element;
 	fallback?: string;
 	width?: string;

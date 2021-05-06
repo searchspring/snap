@@ -5,7 +5,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Result/readme.md';
 
 export default {
@@ -72,23 +71,23 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		detailsSlot: {
+		detailSlot: {
 			description: 'Slot just under product image',
 			table: {
 				type: {
-					summary: 'object',
+					summary: 'string',
 				},
 			},
-			control: { type: 'object' },
+			control: { type: 'text' },
 		},
 		buttonSlot: {
 			description: 'Slot just under details',
 			table: {
 				type: {
-					summary: 'object',
+					summary: 'string',
 				},
 			},
-			control: { type: 'object' },
+			control: { type: 'text' },
 		},
 		fallback: {
 			defaultValue: '',

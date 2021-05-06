@@ -5,9 +5,7 @@ import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Slider/readme.md';
-
 
 export default {
 	title: `Molecules/Slider`,
@@ -61,7 +59,7 @@ export default {
 			control: { type: 'number' },
 		},
 		textColor: {
-			description: 'Slider text color',
+			description: 'Slider tick text color',
 			table: {
 				type: {
 					summary: 'string',

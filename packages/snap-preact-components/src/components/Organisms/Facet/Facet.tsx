@@ -81,7 +81,7 @@ export const Facet = observer(
 			hideIcon,
 			iconCollapse,
 			iconExpand,
-			optionsLimitCount,
+			optionsLimit,
 			iconColor,
 			color,
 			previewOnFocus,
@@ -173,8 +173,8 @@ export const Facet = observer(
 			},
 		};
 
-		if ((facet as ValueFacet)?.overflow && optionsLimitCount) {
-			(facet as ValueFacet).overflow.setLimit(optionsLimitCount);
+		if ((facet as ValueFacet)?.overflow && optionsLimit) {
+			(facet as ValueFacet).overflow.setLimit(optionsLimit);
 		}
 
 		return (
@@ -246,7 +246,7 @@ export interface FacetProps extends ComponentProps {
 	iconColor?: string;
 	iconExpand?: IconType | string;
 	hideIcon?: boolean;
-	optionsLimitCount?: number;
+	optionsLimit?: number;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

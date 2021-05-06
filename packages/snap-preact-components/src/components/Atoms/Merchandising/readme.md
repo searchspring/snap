@@ -1,6 +1,6 @@
-## Banner
+# Banner
 
-Renders an inline merchandising banner. Banner Types include `header`, `footer`, `left`, and `banner`. 
+Renders a merchandising banner. Banner Types include `header`, `footer`, `left`, and `banner`. 
 
 This `Banner` component does not support inline banners. See `InlineBanner` component below.
 
@@ -14,7 +14,7 @@ The required `content` prop specifies an object of banners returned from the Sea
 ```
 
 ### type
-The required `type` prop specifiesthe banner type to render from the `content` object.
+The required `type` prop specifies the banner type to render from the `content` object.
 
 Banner Types include `header`, `footer`, `left`, and `banner`. 
 
@@ -34,7 +34,7 @@ Banner Types include `header`, `footer`, `left`, and `banner`.
 <Banner content={controller?.store?.merchandising?.content} type={'banner'} />
 ```
 
-## Inline Banner
+# Inline Banner
 
 ## Usage
 

@@ -1,4 +1,4 @@
-## Autocomplete
+# Autocomplete
 
 Renders an autocomplete popup that binds to an `<input>` element.
 
@@ -13,7 +13,7 @@ The autocomplete layout renders terms, facets, banners, and results.
 
 ### input
 The required `input` prop expects either:
-    
+
 - a string CSS selector that targets `<input>` element(s) to bind to
 
 - an `<input>` element to bind to

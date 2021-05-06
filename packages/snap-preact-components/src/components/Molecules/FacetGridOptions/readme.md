@@ -1,4 +1,4 @@
-## Facet Grid Options
+# Facet Grid Options
 
 Renders a grid of facet options.
 
@@ -30,9 +30,9 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 
 ```jsx
 <Autocomplete>
-    ...
-    <FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />
-    ...
+	...
+	<FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />
+	...
 </Autocomplete>
 ```
 
@@ -41,15 +41,15 @@ The `valueProps` prop will be spread onto each value's `<a>` element. Typical us
 
 ```typescript
 const valueProps = {
-    onMouseEnter: (e) => {
-        clearTimeout(delayTimeout);
-        delayTimeout = setTimeout(() => {
-            e.target.focus();
-        }, delayTime);
-    },
-    onMouseLeave: () => {
-        clearTimeout(delayTimeout);
-    },
+	onMouseEnter: (e) => {
+		clearTimeout(delayTimeout);
+		delayTimeout = setTimeout(() => {
+			e.target.focus();
+		}, delayTime);
+	},
+	onMouseLeave: () => {
+		clearTimeout(delayTimeout);
+	},
 }
 ```
 

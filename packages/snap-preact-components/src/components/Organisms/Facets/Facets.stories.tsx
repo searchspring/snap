@@ -1,13 +1,12 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import {ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Facets, FacetsProps } from './Facets';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
-// @ts-ignore
 import Readme from '../Facets/readme.md';
 
 export default {
@@ -51,7 +50,7 @@ const ObservableFacets = observer(({ args, controller }) => {
 	return <Facets {...args} facets={controller?.store?.facets} />;
 });
 
-const Template = (args: FacetsProps, { loaded: { controller } }) => {	
+const Template = (args: FacetsProps, { loaded: { controller } }) => {
 	return <ObservableFacets args={args} controller={controller} />;
 };
 

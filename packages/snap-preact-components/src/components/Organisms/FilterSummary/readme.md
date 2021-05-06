@@ -1,4 +1,4 @@
-## Filter Summary
+# Filter Summary
 
 Renders all selected filters including a wrapper with a title and a 'clear all' button. 
 
@@ -35,14 +35,14 @@ The `clearAllIcon` prop is the name of the icon to render for the 'clear all' bu
 ```
 
 ### separator
-The `separator` prop will specify the separator character between `facetLabel` and `valueLabel` (`clearAllLabel`) of the `<Facet />` sub-component.
+The `separator` prop will specify the separator character between `facetLabel` and `valueLabel` of the `<Filter />` sub-component.
 
 ```jsx
 <FilterSummary filters={controller.store.filters} separator={': '} />
 ```
 
 ### hideFacetLabel
-The `hideFacetLabel` prop prevents the filter label (selected facet name) from displaying. Only the value selected will be displayed.
+The `hideFacetLabel` prop prevents the filter label (selected facet name) from displaying. Only the value selected will be displayed. Use of this prop will nullify the `separator` prop.
 
 ```jsx
 <FilterSummary filters={controller.store.filters} hideFacetLabel={true} />

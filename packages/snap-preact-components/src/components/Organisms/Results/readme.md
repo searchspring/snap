@@ -1,7 +1,7 @@
-## Results
+# Results
 
 Renders a page of results utilizing `<Result />` components.
-   
+
 ## Sub-components
 - Result
 

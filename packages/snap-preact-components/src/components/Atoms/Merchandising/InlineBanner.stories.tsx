@@ -6,7 +6,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Merchandising/readme.md';
 
 export default {
@@ -68,7 +67,7 @@ export default {
 const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
 
 const Template = (args: InlineBannerProps, { loaded: { controller } }) => (
-	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args}/>
+	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args} />
 );
 
 export const Default = Template.bind({});

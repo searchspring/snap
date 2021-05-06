@@ -1,4 +1,4 @@
-## Facets
+# Facets
 
 Renders all facets utilizing the `<Facet />` component.
 

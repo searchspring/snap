@@ -1,4 +1,4 @@
-## Overlay
+# Overlay
 
 Renders an Overlay. Typically used to blur the background with a foreground element such as a modal or slideout menu.
 
@@ -28,7 +28,7 @@ The `transitionSpeed` prop specifies animation transition speed.
 ### Events
 
 #### onClick
-The `onClick` prop allows for a custom callback function for when the 'clear all' button is clicked.
+The `onClick` prop allows for a custom callback function.
 
 ```jsx
 <Overlay active={true} onClick={(e)=>{console.log(e)}} />

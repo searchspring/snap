@@ -1,4 +1,4 @@
-## Facet Palette Options
+# Facet Palette Options
 
 Renders a grid of facet palette options. 
 
@@ -18,7 +18,7 @@ The required `values` prop specifiesall facet values where the facet type is 'pa
 The `hideLabel` prop will disable the facet label.
 
 ```jsx
-<FacetPaletteOptions values={paletteFacet.values} hideCheckbox={true} />
+<FacetPaletteOptions values={paletteFacet.values} hideLabel={true} />
 ```
 
 ### columns
@@ -47,9 +47,9 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 
 ```jsx
 <Autocomplete>
-    ...
-    <FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />
-    ...
+	...
+	<FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />
+	...
 </Autocomplete>
 ```
 
@@ -58,15 +58,15 @@ The `valueProps` prop will be spread onto each value's `<a>` element. Typical us
 
 ```typescript
 const valueProps = {
-    onMouseEnter: (e) => {
-        clearTimeout(delayTimeout);
-        delayTimeout = setTimeout(() => {
-            e.target.focus();
-        }, delayTime);
-    },
-    onMouseLeave: () => {
-        clearTimeout(delayTimeout);
-    },
+	onMouseEnter: (e) => {
+		clearTimeout(delayTimeout);
+		delayTimeout = setTimeout(() => {
+			e.target.focus();
+		}, delayTime);
+	},
+	onMouseLeave: () => {
+		clearTimeout(delayTimeout);
+	},
 }
 ```
 

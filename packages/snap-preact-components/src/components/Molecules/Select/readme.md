@@ -1,4 +1,4 @@
-## Select
+# Select
 
 Renders a native or custom select dropdown.
 
@@ -10,18 +10,18 @@ Renders a native or custom select dropdown.
 ## Usage
 
 ### options
-The required `options` prop specifiesan array of Option Objects to be rendered.
+The required `options` prop specifies an array of Option Objects to be rendered.
 
 ```jsx
 <Select options={controller.store.sorting.options} native={true} />
 ```
 
-#### Option object
+#### Option Object
 
 ```typescript
 {
-    label: 'Price',
-    value: 'asc'
+	label: 'Price',
+	value: 'asc'
 }
 ```
 
@@ -29,18 +29,18 @@ The required `options` prop specifiesan array of Option Objects to be rendered.
 The `native` prop will use a native html `<select>` element.
 
 ```jsx
-<Select options={controller.store.sorting.options} native={true} />
+<Select options={controller.store.sorting.options} native />
 ```
 
 ### disabled
 The `disabled` prop will disable the select from being toggled or invoking the `onSelect` callback.
 
 ```jsx
-<Select options={controller.store.sorting.options} disabled={true} />
+<Select options={controller.store.sorting.options} disabled />
 ```
 
 ### label
-The `label` prop specifiesthe label for this select. This can be a string or JSX element.
+The `label` prop specifies the label for this select. This can be a string or JSX element.
 
 ```jsx
 <Select options={controller.store.sorting.options} label={'Sort By'} />
@@ -54,7 +54,7 @@ The `separator` prop is rendered between the `label` prop and the select dropdow
 ```
 
 ### selected
-The `selected` prop specifiesthe currently selected Option object. Specifying this prop relies on external state management.
+The `selected` prop specifies the currently selected Option object. Specifying this prop relies on external state management.
 
 ```jsx
 <Select options={controller.store.sorting.options} selected={controller.store.sorting.options[0]} />
@@ -127,14 +127,14 @@ The `iconColor` prop sets the icon color and overwrites the `color` prop.
 The `iconClose` prop is the name of the icon to render when the dropdown is in its open state.
 
 ```jsx
-<Select options={controller.store.sorting.options} iconClose={'angle-down'} />
+<Select options={controller.store.sorting.options} iconClose={'angle-up'} />
 ```
 
 ### iconOpen
 The `iconOpen` prop is the name of the icon to render when the dropdown is in its closed state.
 
 ```jsx
-<Select options={controller.store.sorting.options} iconOpen={'angle-up'} />
+<Select options={controller.store.sorting.options} iconOpen={'angle-down'} />
 ```
 
 ### Events

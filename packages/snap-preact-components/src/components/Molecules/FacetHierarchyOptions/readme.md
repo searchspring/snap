@@ -1,4 +1,4 @@
-## Facet Hierarchy Options
+# Facet Hierarchy Options
 
 Renders a list of hierarchy options.
 

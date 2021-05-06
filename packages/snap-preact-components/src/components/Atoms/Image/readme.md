@@ -1,4 +1,4 @@
-## Image
+# Image
 
 Renders an Image with fallback and rollover functionality. 
 
@@ -7,28 +7,28 @@ Renders an Image with fallback and rollover functionality.
 ### src
 The required `src` prop specifies the URL of the image to render.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' />
 ```
 
 ### alt
 The required `alt` prop is the image `alt` attribute.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' />
 ```
 
 ### fallback
-The `fallback` prop specifiesthe URL of the fallback image to render if the primary image fails to load.
+The `fallback` prop specifies the URL of the fallback image to render if the primary image fails to load.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} fallback='https://www.example.com/image.jpg' alt='image' />
 ```
 
 ### hoverSrc
 The `hoverSrc` prop specifiesthe URL of the alternative image to display on hover.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} hoverSrc={searchResponse.results.mappings.core.hoverImg} alt='image' />
 ```
 
@@ -37,27 +37,27 @@ The `hoverSrc` prop specifiesthe URL of the alternative image to display on hove
 #### onMouseOver
 The `onMouseOver` prop allows for a custom callback function when the mouse cursor enters the image.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOver={(e)=>{console.log(e)}} />
 ```
 
 #### onMouseOut
 The `onMouseOut` prop allows for a custom callback function when the mouse cursor leaves the image.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOut={(e)=>{console.log(e)}} />
 ```
 
 #### onLoad
 The `onLoad` prop allows for a custom callback function when the image has finished loading.
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={()=>{}} />
 ```
 
 #### onClick
 The `onClick` prop allows for a custom callback function when the image is clicked. 
 
-``` jsx
+```jsx
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onClick={(e)=>{console.log(e)}} />
 ```

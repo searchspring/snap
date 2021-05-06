@@ -1,4 +1,4 @@
-## Slideout
+# Slideout
 
 Renders a slideout with a background overlay. Typically used for a mobile menu slideout. 
 
@@ -7,21 +7,20 @@ Renders a slideout with a background overlay. Typically used for a mobile menu s
 
 ## Usage
 
-### active
-The required `active` prop specifies the state of when the slideout is rendered.
-
-```jsx
-<Slideout active={true}>
-    <div>Hello World</div>
-</Slideout>
-```
-
 ### children
 The children provided to the component will be displayed within the slideout. 
 
 ```jsx
 <Slideout active={true}>
-    <div>slideout content</div>
+	<span>slideout content (children)</span>
+</Slideout>
+```
+### active
+The required `active` prop specifies the state of when the slideout is rendered.
+
+```jsx
+<Slideout active={true}>
+	<div>Hello World</div>
 </Slideout>
 ```
 
@@ -32,7 +31,7 @@ When using the custom `buttonContent` prop, render the component where you want 
 
 ```jsx
 <Slideout active={true} buttonContent={'Show Filters'}>
-    <div>slideout content</div>
+	<div>slideout content</div>
 </Slideout>
 ```
 
@@ -41,7 +40,7 @@ The `width` prop is the width of the slideout.
 
 ```jsx
 <Slideout active={true} width={'300px'}>
-    <div>slideout content</div>
+	<div>slideout content</div>
 </Slideout>
 ```
 
@@ -50,7 +49,7 @@ The `displayAt` prop specifies a CSS media query for when the component will ren
 
 ```jsx
 <Slideout active={true} displayAt={'(max-width: 600px)'}>
-    <div>slideout content</div>
+	<div>slideout content</div>
 </Slideout>
 ```
 
@@ -59,7 +58,7 @@ The `transitionSpeed` prop changes the CSS transition speed animation for the sl
 
 ```jsx
 <Slideout active={true} transitionSpeed={'0.5s'}>
-    <div>slideout content</div>
+	<div>slideout content</div>
 </Slideout>
 ```
 
@@ -69,6 +68,6 @@ The `overlayColor` prop sets the overlay color.
 
 ```jsx
 <Slideout active={true} overlayColor={'rgba(0,0,0,0.7)'}>
-    <div>slideout content</div>
+	<div>slideout content</div>
 </Slideout>
 ```

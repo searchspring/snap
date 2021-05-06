@@ -1,4 +1,4 @@
-## Slider
+# Slider
 
 Renders a slider to be used with any slider facet. Built using [react-ranger](https://github.com/tannerlinsley/react-ranger).
 
@@ -16,8 +16,8 @@ The `showTicks` prop will render reference ticks below the slider track.
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    showTicks={true}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	showTicks={true}
 />
 ```
 
@@ -26,20 +26,20 @@ The `tickSize` prop specifies the unit number between ticks. Must be used with `
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    showTicks={true}
-    tickSize={20}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	showTicks={true}
+	tickSize={20}
 />
 ```
 
-### textColor
-The `textColor` prop specifies ticks color. Must be used with `showTicks` prop.
+### tickTextColor
+The `tickTextColor` prop specifies ticks text color. Must be used with `showTicks` prop.
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    showTicks={true}
-    textColor={'#cccccc'}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	showTicks={true}
+	tickTextColor={'#cccccc'}
 />
 ```
 
@@ -48,38 +48,8 @@ The `handleColor` prop specifies the handle color.
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    handleColor={'#0000ff'}
-/>
-```
-
-### handleTextColor
-The `handleTextColor` prop specifies the handle text color.
-
-```jsx
-<Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    handleColor={'#222222'}
-/>
-```
-
-### trackColor
-The `trackColor` prop specifies the slider track (background) color.
-
-```jsx
-<Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    handleColor={'#cccccc'}
-/>
-```
-
-### railColor
-The `railColor` prop specifies the slider rail (foreground) color.
-
-```jsx
-<Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    handleColor={'#0000ff'}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	handleColor={'#0000ff'}
 />
 ```
 
@@ -88,8 +58,38 @@ The `handleDraggingColor` prop specifies the handle color while dragging.
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    handleDraggingColor={'0000ff'}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	handleDraggingColor={'0000ff'}
+/>
+```
+
+### handleTextColor
+The `handleTextColor` prop specifies the handle text color.
+
+```jsx
+<Slider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	handleTextColor={'#222222'}
+/>
+```
+
+### trackColor
+The `trackColor` prop specifies the slider track (background) color.
+
+```jsx
+<Slider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	trackColor={'#cccccc'}
+/>
+```
+
+### railColor
+The `railColor` prop specifies the slider rail (foreground) color.
+
+```jsx
+<Slider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	railColor={'#0000ff'}
 />
 ```
 
@@ -100,8 +100,8 @@ The `onChange` prop allows for a custom callback function for when a slider hand
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
 />
 ```
 
@@ -110,7 +110,7 @@ The `onDrag` prop allows for a custom callback function for when a slider handle
 
 ```jsx
 <Slider 
-    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-    onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
 />
 ```

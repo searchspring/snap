@@ -1,4 +1,4 @@
-## Badge
+# Badge
 
 Renders an absolute-positioned badge. It is expected that the parent element contains `position: relative`.
 
@@ -9,15 +9,15 @@ The `content` prop specifies the badge.
 
 ```jsx
 <div style="position: relative;">
-    <Badge content="Sale" />
+	<Badge content="Sale" />
 </div>
 ```
 
 Or alternatively using children:
 
-```jsx    
+```jsx
 <div style="position: relative;">
-    <Badge>Sale</Badge>
+	<Badge>Sale</Badge>
 </div>
 ```
 
@@ -26,6 +26,6 @@ The `position` prop specifies an object with CSS `top`, `bottom`, `left`, and `r
 
 In this example, the badge will be 2px from the top and 2px from the right:
 
-```jsx    
+```jsx
 <Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>
 ```

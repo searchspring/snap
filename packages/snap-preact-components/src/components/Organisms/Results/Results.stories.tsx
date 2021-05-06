@@ -7,7 +7,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { LayoutType } from '../../../types';
 
-// @ts-ignore
 import Readme from '../Results/readme.md';
 
 export default {

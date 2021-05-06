@@ -1,4 +1,4 @@
-## Breadcrumbs
+# Breadcrumbs
 
 Renders a list of breadcrumbs. 
 
@@ -15,10 +15,10 @@ The `data` prop specifies an array of breadcrumb objects.
 
 ```typescript
 const breadcrumbs = [
-    { url: '/', label: 'Home' },
-    { url: '/', label: 'Collections' },
-    { url: '/', label: 'Appliances' },
-    { label: 'Fridge' }
+	{ url: '/', label: 'Home' },
+	{ url: '/', label: 'Collections' },
+	{ url: '/', label: 'Appliances' },
+	{ label: 'Fridge' }
 ]
 ```
 

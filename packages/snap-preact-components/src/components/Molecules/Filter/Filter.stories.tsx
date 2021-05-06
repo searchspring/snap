@@ -8,7 +8,6 @@ import { FacetType } from '../../../types';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Filter/readme.md';
 
 export default {

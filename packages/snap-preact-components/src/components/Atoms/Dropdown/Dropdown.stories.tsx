@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { Dropdown } from './Dropdown';
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-// @ts-ignore
+
 import Readme from '../Dropdown/readme.md';
 
 export default {
@@ -119,4 +119,3 @@ Default.args = {
 	button: 'button text',
 	content: 'content text',
 };
-

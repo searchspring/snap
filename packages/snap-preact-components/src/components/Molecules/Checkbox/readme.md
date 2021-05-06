@@ -1,4 +1,4 @@
-## Checkbox
+# Checkbox
 
 Renders a native or custom checkbox.
 
@@ -11,7 +11,7 @@ Renders a native or custom checkbox.
 The `native` prop will render an `<input type='checkbox'>` element.
 
 ```jsx
-<Checkbox native={true} />
+<Checkbox native />
 ```
 
 ### checked
@@ -32,7 +32,7 @@ The `startChecked` prop sets the checkbox to be checked on the initial render. M
 The `disabled` prop disables the checkbox from being toggled or invoking the `onClick` callback.
 
 ```jsx
-<Checkbox disabled={true} />
+<Checkbox disabled />
 ```
 
 ### size
@@ -56,7 +56,7 @@ The `iconColor` prop sets the icon color and overwrites the `color` prop. It wil
 <Checkbox iconColor={'#ffff00'} />
 ```
 ### icon
-The `icon` prop specifies an object with `Icon` component props. This only applies if using a custom checkbox `native={false}`.
+The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery). This only applies if using a custom checkbox `native={false}`.
 
 
 ### Events
