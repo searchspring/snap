@@ -203,6 +203,7 @@ export const hierarchyFacetMock = {
 			value: 'Gifts for Her',
 			label: 'Gifts for Her',
 			count: 1305,
+			level: 1,
 		},
 		{
 			history: false,
@@ -210,6 +211,7 @@ export const hierarchyFacetMock = {
 			value: 'Shop By Trend',
 			label: 'Shop By Trend',
 			count: 404,
+			level: 1,
 		},
 		{
 			history: false,
@@ -217,6 +219,7 @@ export const hierarchyFacetMock = {
 			value: 'All Dresses',
 			label: 'All Dresses',
 			count: 400,
+			level: 1,
 		},
 		{
 			history: false,
@@ -224,6 +227,7 @@ export const hierarchyFacetMock = {
 			value: 'Brands We Love',
 			label: 'Brands We Love',
 			count: 165,
+			level: 1,
 		},
 		{
 			history: false,
@@ -231,6 +235,7 @@ export const hierarchyFacetMock = {
 			value: 'Special Occasion',
 			label: 'Special Occasion',
 			count: 116,
+			level: 1,
 		},
 		{
 			history: false,
@@ -238,6 +243,7 @@ export const hierarchyFacetMock = {
 			value: 'Trending',
 			label: 'Trending',
 			count: 80,
+			level: 1,
 		},
 		{
 			history: false,
@@ -245,6 +251,7 @@ export const hierarchyFacetMock = {
 			value: 'All Sale',
 			label: 'All Sale',
 			count: 57,
+			level: 1,
 		},
 		{
 			history: false,
@@ -252,6 +259,7 @@ export const hierarchyFacetMock = {
 			value: 'Memorial Day Sale',
 			label: 'Memorial Day Sale',
 			count: 40,
+			level: 1,
 		},
 		{
 			history: false,
@@ -259,6 +267,7 @@ export const hierarchyFacetMock = {
 			value: 'Playsuits',
 			label: 'Playsuits',
 			count: 37,
+			level: 1,
 		},
 		{
 			history: false,
@@ -266,6 +275,7 @@ export const hierarchyFacetMock = {
 			value: "What's New",
 			label: "What's New",
 			count: 34,
+			level: 1,
 		},
 		{
 			history: false,
@@ -273,6 +283,7 @@ export const hierarchyFacetMock = {
 			value: 'Style Influencer',
 			label: 'Style Influencer',
 			count: 33,
+			level: 1,
 		},
 		{
 			history: false,
@@ -280,6 +291,7 @@ export const hierarchyFacetMock = {
 			value: 'All Tops',
 			label: 'All Tops',
 			count: 26,
+			level: 1,
 		},
 		{
 			history: false,
@@ -287,6 +299,7 @@ export const hierarchyFacetMock = {
 			value: "Valentine's Day",
 			label: "Valentine's Day",
 			count: 24,
+			level: 1,
 		},
 		{
 			history: false,
@@ -294,6 +307,7 @@ export const hierarchyFacetMock = {
 			value: 'Athleisure',
 			label: 'Athleisure',
 			count: 14,
+			level: 1,
 		},
 		{
 			history: false,
@@ -301,6 +315,7 @@ export const hierarchyFacetMock = {
 			value: 'Swimwear',
 			label: 'Swimwear',
 			count: 12,
+			level: 1,
 		},
 		{
 			history: false,
@@ -308,6 +323,7 @@ export const hierarchyFacetMock = {
 			value: 'Going Fast',
 			label: 'Going Fast',
 			count: 8,
+			level: 1,
 		},
 		{
 			history: false,
@@ -315,6 +331,7 @@ export const hierarchyFacetMock = {
 			value: 'White & Blue Looks',
 			label: 'White & Blue Looks',
 			count: 7,
+			level: 1,
 		},
 		{
 			history: false,
@@ -322,6 +339,7 @@ export const hierarchyFacetMock = {
 			value: 'Notify of Restock',
 			label: 'Notify of Restock',
 			count: 5,
+			level: 1,
 		},
 		{
 			history: false,
@@ -329,6 +347,7 @@ export const hierarchyFacetMock = {
 			value: 'All Bottoms',
 			label: 'All Bottoms',
 			count: 4,
+			level: 1,
 		},
 		{
 			history: false,
@@ -336,6 +355,7 @@ export const hierarchyFacetMock = {
 			value: 'All Intimates',
 			label: 'All Intimates',
 			count: 3,
+			level: 1,
 		},
 		{
 			history: false,
@@ -343,6 +363,7 @@ export const hierarchyFacetMock = {
 			value: 'Back in Stock',
 			label: 'Back in Stock',
 			count: 2,
+			level: 1,
 		},
 		{
 			history: false,
@@ -350,6 +371,7 @@ export const hierarchyFacetMock = {
 			value: 'Shop By Outfit',
 			label: 'Shop By Outfit',
 			count: 2,
+			level: 1,
 		},
 		{
 			history: false,
@@ -357,6 +379,7 @@ export const hierarchyFacetMock = {
 			value: 'All Shoes',
 			label: 'All Shoes',
 			count: 1,
+			level: 1,
 		},
 		{
 			history: false,
@@ -364,6 +387,7 @@ export const hierarchyFacetMock = {
 			value: 'Top Rated',
 			label: 'Top Rated',
 			count: 1,
+			level: 1,
 		},
 	],
 };
@@ -383,18 +407,21 @@ export const hierarchyFacetFilteredMock = {
 			value: null,
 			filtered: false,
 			label: 'View All',
+			level: 1,
 		},
 		{
 			history: true,
 			value: 'All Dresses',
 			filtered: false,
 			label: 'All Dresses',
+			level: 1,
 		},
 		{
 			history: true,
 			value: 'All Dresses>Shop by Color',
 			filtered: true,
 			label: 'Shop by Color',
+			level: 1,
 		},
 		{
 			history: false,
@@ -402,6 +429,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>White Dresses',
 			label: 'White Dresses',
 			count: 69,
+			level: 1,
 		},
 		{
 			history: false,
@@ -409,6 +437,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Blue Dresses',
 			label: 'Blue Dresses',
 			count: 48,
+			level: 1,
 		},
 		{
 			history: false,
@@ -416,6 +445,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Pink Dresses',
 			label: 'Pink Dresses',
 			count: 35,
+			level: 1,
 		},
 		{
 			history: false,
@@ -423,6 +453,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Coral/Orange Dresses',
 			label: 'Coral/Orange Dresses',
 			count: 28,
+			level: 1,
 		},
 		{
 			history: false,
@@ -430,6 +461,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Green Dresses',
 			label: 'Green Dresses',
 			count: 23,
+			level: 1,
 		},
 		{
 			history: false,
@@ -437,6 +469,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Black Dresses',
 			label: 'Black Dresses',
 			count: 15,
+			level: 1,
 		},
 		{
 			history: false,
@@ -444,6 +477,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Red Dresses',
 			label: 'Red Dresses',
 			count: 14,
+			level: 1,
 		},
 		{
 			history: false,
@@ -451,6 +485,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Grey Dresses',
 			label: 'Grey Dresses',
 			count: 13,
+			level: 1,
 		},
 		{
 			history: false,
@@ -458,6 +493,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Yellow Dresses',
 			label: 'Yellow Dresses',
 			count: 6,
+			level: 1,
 		},
 		{
 			history: false,
@@ -465,6 +501,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Purple Dresses',
 			label: 'Purple Dresses',
 			count: 4,
+			level: 1,
 		},
 		{
 			history: false,
@@ -472,6 +509,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Peach Dresses',
 			label: 'Peach Dresses',
 			count: 3,
+			level: 1,
 		},
 		{
 			history: false,
@@ -479,6 +517,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Aqua Dresses',
 			label: 'Aqua Dresses',
 			count: 2,
+			level: 1,
 		},
 		{
 			history: false,
@@ -486,6 +525,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Taupe Dresses',
 			label: 'Taupe Dresses',
 			count: 1,
+			level: 1,
 		},
 		{
 			history: false,
@@ -493,6 +533,7 @@ export const hierarchyFacetFilteredMock = {
 			value: 'All Dresses>Shop by Color>Teal Dresses',
 			label: 'Teal Dresses',
 			count: 1,
+			level: 1,
 		},
 	],
 };

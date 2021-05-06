@@ -160,6 +160,19 @@ export interface ValueFacet extends BaseFacet {
 		setLimit: (limit: number) => any;
 	};
 }
+
+export interface HierarchyFacet extends BaseFacet {
+	values: HierarchyFacetValue[];
+	refinedValues?: HierarchyFacetValue[];
+	overflow?: {
+		enabled: boolean;
+		remaining: number;
+		toggle: () => any;
+		limit: number;
+		setLimit: (limit: number) => any;
+	};
+}
+
 export interface RangeBucketFacet extends BaseFacet {
 	values: RangeBucketFacetValue[];
 	refinedValues: RangeBucketFacetValue[];
@@ -192,6 +205,8 @@ export interface BaseFacetValue {
 	label: string;
 	count?: number;
 	url?: any;
+	value?: any;
+	custom?: any;
 }
 
 export interface ValueFacetValue extends BaseFacetValue {
@@ -199,8 +214,9 @@ export interface ValueFacetValue extends BaseFacetValue {
 	preview?: () => void;
 }
 
-export interface ValueFacetHierarchyValue extends ValueFacetValue {
+export interface HierarchyFacetValue extends BaseFacetValue {
 	history: boolean;
+	level: number;
 }
 
 export interface RangeBucketFacetValue extends BaseFacetValue {

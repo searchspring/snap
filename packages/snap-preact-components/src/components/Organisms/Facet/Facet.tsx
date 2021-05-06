@@ -8,10 +8,11 @@ import { observer } from 'mobx-react-lite';
 import { FacetListOptions, FacetListOptionsProps } from '../../Molecules/FacetListOptions';
 import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGridOptions';
 import { FacetPaletteOptions, FacetPaletteOptionsProps } from '../../Molecules/FacetPaletteOptions';
+import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from '../../Molecules/FacetHierarchyOptions';
 import { Slider, SliderProps } from '../../Molecules/Slider';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet } from '../../../types';
+import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
 
@@ -103,6 +104,20 @@ export const Facet = observer(
 				}),
 				// component theme overrides
 				...props.theme?.components?.dropdown,
+			},
+			facetHierarchyOptions: {
+				// default props
+
+				// global theme
+				...globalTheme?.components?.facetHierarchyOptions,
+				// inherited props
+				...defined({
+					disableStyles,
+					previewOnFocus,
+					valueProps,
+				}),
+				// component theme overrides
+				...props.theme?.components?.facetHierarchyOptions,
 			},
 			facetListOptions: {
 				// default props
@@ -200,6 +215,8 @@ export const Facet = observer(
 									return <FacetGridOptions {...subProps.facetGridOptions} values={(facet as ValueFacet)?.refinedValues} />;
 								case FacetDisplay.PALETTE:
 									return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={(facet as ValueFacet)?.refinedValues} />;
+								case FacetDisplay.HIERARCHY:
+									return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(facet as HierarchyFacet)?.refinedValues} />;
 								default:
 									return <FacetListOptions {...subProps.facetListOptions} values={(facet as ValueFacet)?.refinedValues} />;
 							}
@@ -234,13 +251,14 @@ interface FacetSubProps {
 	facetListOptions?: FacetListOptionsProps;
 	facetGridOptions?: FacetGridOptionsProps;
 	facetPaletteOptions?: FacetPaletteOptionsProps;
+	facetHierarchyOptions?: FacetHierarchyOptionsProps;
 	slider?: SliderProps;
 	icon?: IconProps;
 }
 
 export interface FacetProps extends ComponentProps {
 	disableCollapse?: boolean;
-	facet: ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet;
+	facet: ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet | HierarchyFacet;
 	color?: string;
 	iconCollapse?: IconType | string;
 	iconColor?: string;

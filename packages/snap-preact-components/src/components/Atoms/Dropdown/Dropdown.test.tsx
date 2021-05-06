@@ -63,7 +63,11 @@ describe('Dropdown Component', () => {
 	it('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
-		const rendered = render(<Dropdown button={'open me'} content={contentText}>{child}</Dropdown>);
+		const rendered = render(
+			<Dropdown button={'open me'} content={contentText}>
+				{child}
+			</Dropdown>
+		);
 
 		const buttonElement = rendered.getByText(contentText + child);
 		expect(buttonElement).toBeInTheDocument();

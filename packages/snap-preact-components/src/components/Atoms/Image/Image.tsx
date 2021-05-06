@@ -56,7 +56,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style} = props;
+	const { alt, src, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
 	let { fallback } = props;
 
 	const ImgRef = useRef(null);
@@ -67,12 +67,12 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	//need to initially set the visibility to hidden whilst also keeping any styles passed in
-	let styling:any = !disableStyles && style;
-	//but what if there is no styling passed in? 
-	if (styling){
-		styling.visibility = "hidden";
-	}else {
-		styling = {visibility:"hidden"}
+	let styling: any = !disableStyles && style;
+	//but what if there is no styling passed in?
+	if (styling) {
+		styling.visibility = 'hidden';
+	} else {
+		styling = { visibility: 'hidden' };
 	}
 
 	return (
@@ -85,7 +85,7 @@ export function Image(properties: ImageProps): JSX.Element {
 			ref={ImgRef}
 			loading="lazy"
 			onLoad={() => {
-				setVisibility(ImgRef, "visible");
+				setVisibility(ImgRef, 'visible');
 				onLoad && onLoad();
 			}}
 			onClick={onClick}

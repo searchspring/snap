@@ -5,9 +5,9 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { InlineBanner, InlineBannerProps } from "../../Atoms/Merchandising/InlineBanner";
+import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent} from '../../../types';
+import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers/theme';
 
@@ -20,11 +20,10 @@ const CSS = {
 		}),
 };
 
-const defaultResponsiveSettings:ResponsiveProps[] = [
+const defaultResponsiveSettings: ResponsiveProps[] = [
 	{
 		viewport: 350,
 		numAcross: 1,
-			
 	},
 	{
 		viewport: 450,
@@ -41,8 +40,8 @@ const defaultResponsiveSettings:ResponsiveProps[] = [
 	{
 		viewport: 700,
 		numAcross: 5,
-	}
-]
+	},
+];
 
 export const Results = observer(
 	(properties: ResultsProp): JSX.Element => {
@@ -85,7 +84,7 @@ export const Results = observer(
 				}),
 				// component theme overrides
 				...props.theme?.components?.inlineBanner,
-			}
+			},
 		};
 
 		let resultsToShow = results;
@@ -104,65 +103,65 @@ export const Results = observer(
 				getDisplaySettings(responsive);
 			}
 			// Add event listener
-			window.addEventListener("resize", handleResize);
-			
+			window.addEventListener('resize', handleResize);
+
 			// Call handler right away so state gets updated with initial window size
 			handleResize();
-			
+
 			// Remove event listener on cleanup
-			return () => window.removeEventListener("resize", handleResize);
+			return () => window.removeEventListener('resize', handleResize);
 		}, []); // Empty array ensures that effect is only run on mount
-	
-		const getDisplaySettings = (responsive:ResponsiveProps[]) => {
-			let settings:ResponsiveProps | undefined;
-			let resultWidthPecent
-			let maxResultsShown 
-		
+
+		const getDisplaySettings = (responsive: ResponsiveProps[]) => {
+			let settings: ResponsiveProps | undefined;
+			let resultWidthPecent;
+			let maxResultsShown;
+
 			const currentScreenWidth = window.innerWidth;
-			let lowvp = 0
-		
+			let lowvp = 0;
+
 			if (responsive && responsive.length) {
-				const sortedList = responsive.sort((a, b) => (a.viewport > b.viewport) ? 1 : -1);
+				const sortedList = responsive.sort((a, b) => (a.viewport > b.viewport ? 1 : -1));
 				//loop through and find the desired responsive setting
 				for (let i = 0; i < sortedList.length; i++) {
-					let vpsettings = sortedList[i];  
+					let vpsettings = sortedList[i];
 					//if its in the bounds or the last option
-					if (vpsettings.viewport >= currentScreenWidth && lowvp <= currentScreenWidth || i + 1 === sortedList.length){
+					if ((vpsettings.viewport >= currentScreenWidth && lowvp <= currentScreenWidth) || i + 1 === sortedList.length) {
 						settings = vpsettings;
 						break;
-					}else {
+					} else {
 						lowvp = vpsettings.viewport;
-					}	
+					}
 				}
 				//once found, do the math to find the values we need
-				if (settings){
+				if (settings) {
 					//layout override
-					if (settings.layout){
+					if (settings.layout) {
 						layout = settings.layout;
-					}else {
+					} else {
 						//have this to reset it to default if user doesnt pass in layout
 						// for each and every responsive option
 						layout = props.layout;
 					}
-					if (settings.numAcross){
+					if (settings.numAcross) {
 						resultWidthPecent = Math.floor(100 / settings.numAcross);
 					}
-					if (settings.numRows){
-						if (layout === "list") {
+					if (settings.numRows) {
+						if (layout === 'list') {
 							maxResultsShown = settings.numRows;
-						}else {
+						} else {
 							maxResultsShown = settings.numAcross * settings.numRows;
 						}
 					}
 				}
 				//update the state
-				setDisplaySettings({resultWidthPecent,maxResultsShown, layout});
+				setDisplaySettings({ resultWidthPecent, maxResultsShown, layout });
 			}
-		}
+		};
 
 		if (displaySettings.maxResultsShown) {
 			resultsToShow = results.slice(0, displaySettings.maxResultsShown);
-		};
+		}
 
 		return (
 			resultsToShow?.length && (
@@ -176,21 +175,30 @@ export const Results = observer(
 					className={classnames('ss-results', className)}
 				>
 					{resultsToShow.map((result) => {
-
-						if (result.type === "banner"){
-							return <InlineBanner banner={result} width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined} layout={displaySettings.layout}/>
-						}else {
-							return <Result {...subProps.result} result={result} width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined} layout={displaySettings.layout}/>
+						if (result.type === 'banner') {
+							return (
+								<InlineBanner
+									banner={result}
+									width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
+									layout={displaySettings.layout}
+								/>
+							);
+						} else {
+							return (
+								<Result
+									{...subProps.result}
+									result={result}
+									width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
+									layout={displaySettings.layout}
+								/>
+							);
 						}
-				
 					})}
 				</div>
 			)
 		);
 	}
 );
-
-
 
 export interface ResultsProp extends ComponentProps {
 	results: ResultType[] | InlineBannerContent[];

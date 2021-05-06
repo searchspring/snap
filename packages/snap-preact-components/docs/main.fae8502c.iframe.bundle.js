@@ -2514,8 +2514,8 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
-				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37),
+				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(60),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -2650,76 +2650,7 @@
 					'M12.407 45.809c0-1.193-0.988-2.181-2.181-2.181s-2.181 0.988-2.181 2.181 0.988 2.181 2.181 2.181 2.181-0.988 2.181-2.181zM34.357 31.494l-23.245 23.245c-0.784 0.784-1.909 1.261-3.068 1.261s-2.284-0.477-3.102-1.261l-3.613-3.681c-0.818-0.784-1.295-1.909-1.295-3.068s0.477-2.284 1.295-3.102l23.211-23.211c1.772 4.465 5.351 8.044 9.816 9.816zM55.966 16.667c0 1.125-0.409 2.522-0.784 3.613-2.147 6.067-7.976 10.259-14.418 10.259-8.419 0-15.27-6.851-15.27-15.27s6.851-15.27 15.27-15.27c2.488 0 5.726 0.75 7.805 2.147 0.341 0.239 0.545 0.545 0.545 0.954 0 0.375-0.239 0.75-0.545 0.954l-9.987 5.76v7.635l6.578 3.647c1.125-0.648 9.032-5.624 9.714-5.624s1.091 0.511 1.091 1.193z',
 			};
 		},
-		162: function (module, exports, __webpack_require__) {
-			module.exports = __webpack_require__.p + 'static/media/searchspring-logo.fb3e0170.svg';
-		},
-		166: function (module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, 'a', function () {
-				return Price;
-			});
-			__webpack_require__(8);
-			var _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(196),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3),
-				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
-				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(37),
-				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				CSS_price = function price(_a) {
-					var style = _a.style;
-					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_2__.a)(__assign({ '&.ss-strike': { textDecoration: 'line-through' } }, style));
-				};
-			function Price(properties) {
-				var _a,
-					_b,
-					_c,
-					globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_4__.f)(),
-					props = __assign(
-						__assign(
-							__assign(
-								{ symbol: '$', decimalPlaces: 2, thousandsSeparator: ',', decimalSeparator: '.', symbolAfter: !1 },
-								null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.price
-							),
-							properties
-						),
-						null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.price
-					),
-					lineThrough = props.lineThrough,
-					value = props.value,
-					symbol = props.symbol,
-					decimalPlaces = props.decimalPlaces,
-					thousandsSeparator = props.thousandsSeparator,
-					decimalSeparator = props.decimalSeparator,
-					symbolAfter = props.symbolAfter,
-					disableStyles = props.disableStyles,
-					className = props.className,
-					style = props.style,
-					formattedPrice = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__.a.currency(value, {
-						symbol: symbol,
-						decimalPlaces: decimalPlaces,
-						thousandsSeparator: thousandsSeparator,
-						decimalSeparator: decimalSeparator,
-						symbolAfter: symbolAfter,
-					});
-				return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_2__.b)(
-					'span',
-					{
-						css: !disableStyles && CSS_price({ style: style }),
-						className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss-price', { 'ss-strike': lineThrough }, className),
-					},
-					formattedPrice
-				);
-			}
-		},
-		167: function (module, __webpack_exports__, __webpack_require__) {
+		149: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Facet;
@@ -2729,16 +2660,17 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(250),
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(251),
 				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(249),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(251),
-				_Molecules_Slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(255),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(93),
-				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(254),
-				_types__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(64),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(76),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(37),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(31),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(252),
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(250),
+				_Molecules_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(256),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93),
+				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(255),
+				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(60),
+				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(73),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(36),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -2815,7 +2747,10 @@
 						_y,
 						_z,
 						_0,
-						globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_12__.f)(),
+						_1,
+						_2,
+						_3,
+						globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_13__.f)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -2847,54 +2782,70 @@
 										{ disableClickOutside: !0 },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.dropdown
 									),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({ disableStyles: disableStyles })
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({ disableStyles: disableStyles })
 								),
 								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.dropdown
 							),
-							facetListOptions: __assign(
+							facetHierarchyOptions: __assign(
 								__assign(
-									__assign({}, null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.facetListOptions),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({
+									__assign(
+										{},
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.facetHierarchyOptions
+									),
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({
 										disableStyles: disableStyles,
 										previewOnFocus: previewOnFocus,
 										valueProps: valueProps,
 									})
 								),
-								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.facetListOptions
+								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j
+									? void 0
+									: _j.facetHierarchyOptions
+							),
+							facetListOptions: __assign(
+								__assign(
+									__assign({}, null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetListOptions),
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({
+										disableStyles: disableStyles,
+										previewOnFocus: previewOnFocus,
+										valueProps: valueProps,
+									})
+								),
+								null === (_m = null === (_l = props.theme) || void 0 === _l ? void 0 : _l.components) || void 0 === _m ? void 0 : _m.facetListOptions
 							),
 							facetGridOptions: __assign(
 								__assign(
-									__assign({}, null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetGridOptions),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({
+									__assign({}, null === (_o = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _o ? void 0 : _o.facetGridOptions),
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({
 										disableStyles: disableStyles,
 										previewOnFocus: previewOnFocus,
 										valueProps: valueProps,
 									})
 								),
-								null === (_m = null === (_l = props.theme) || void 0 === _l ? void 0 : _l.components) || void 0 === _m ? void 0 : _m.facetGridOptions
+								null === (_q = null === (_p = props.theme) || void 0 === _p ? void 0 : _p.components) || void 0 === _q ? void 0 : _q.facetGridOptions
 							),
 							facetPaletteOptions: __assign(
 								__assign(
 									__assign(
 										{},
-										null === (_o = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _o ? void 0 : _o.facetPaletteOptions
+										null === (_r = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _r ? void 0 : _r.facetPaletteOptions
 									),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({
 										disableStyles: disableStyles,
 										previewOnFocus: previewOnFocus,
 										valueProps: valueProps,
 									})
 								),
-								null === (_q = null === (_p = props.theme) || void 0 === _p ? void 0 : _p.components) || void 0 === _q
+								null === (_t = null === (_s = props.theme) || void 0 === _s ? void 0 : _s.components) || void 0 === _t
 									? void 0
-									: _q.facetPaletteOptions
+									: _t.facetPaletteOptions
 							),
 							slider: __assign(
 								__assign(
-									__assign({}, null === (_r = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _r ? void 0 : _r.slider),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({ disableStyles: disableStyles })
+									__assign({}, null === (_u = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _u ? void 0 : _u.slider),
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({ disableStyles: disableStyles })
 								),
-								null === (_t = null === (_s = props.theme) || void 0 === _s ? void 0 : _s.components) || void 0 === _t ? void 0 : _t.slider
+								null === (_w = null === (_v = props.theme) || void 0 === _v ? void 0 : _v.components) || void 0 === _w ? void 0 : _w.slider
 							),
 							icon: __assign(
 								__assign(
@@ -2902,17 +2853,17 @@
 										{
 											className: 'ss-facet__button-icon',
 											size: '12px',
-											color: iconColor || color || (null === (_u = theme.colors) || void 0 === _u ? void 0 : _u.primary) || '#333',
+											color: iconColor || color || (null === (_x = theme.colors) || void 0 === _x ? void 0 : _x.primary) || '#333',
 										},
-										null === (_v = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _v ? void 0 : _v.icon
+										null === (_y = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _y ? void 0 : _y.icon
 									),
-									Object(_utilities__WEBPACK_IMPORTED_MODULE_11__.a)({ disableStyles: disableStyles })
+									Object(_utilities__WEBPACK_IMPORTED_MODULE_12__.a)({ disableStyles: disableStyles })
 								),
-								null === (_x = null === (_w = props.theme) || void 0 === _w ? void 0 : _w.components) || void 0 === _x ? void 0 : _x.icon
+								null === (_0 = null === (_z = props.theme) || void 0 === _z ? void 0 : _z.components) || void 0 === _0 ? void 0 : _0.icon
 							),
 						};
 					return (
-						(null === (_y = facet) || void 0 === _y ? void 0 : _y.overflow) && optionsLimitCount && facet.overflow.setLimit(optionsLimitCount),
+						(null === (_1 = facet) || void 0 === _1 ? void 0 : _1.overflow) && optionsLimitCount && facet.overflow.setLimit(optionsLimitCount),
 						Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'div',
 							{
@@ -2920,7 +2871,7 @@
 								className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss-facet', className),
 							},
 							Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
-								_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_9__.a,
+								_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_10__.a,
 								{
 									open: !(null == facet ? void 0 : facet.collapsed),
 									onClick: function onClick(e) {
@@ -2932,7 +2883,7 @@
 										null == facet ? void 0 : facet.label,
 										!hideIcon &&
 											Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
-												_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__.a,
+												_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__.a,
 												__assign({}, subProps.icon, { icon: (null == facet ? void 0 : facet.collapsed) ? iconExpand : iconCollapse })
 											)
 									),
@@ -2944,32 +2895,37 @@
 										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss-facet-options', className),
 									},
 									(function () {
-										var _a, _b, _c;
+										var _a, _b, _c, _d;
 										switch (null == facet ? void 0 : facet.display) {
-											case _types__WEBPACK_IMPORTED_MODULE_10__.b.SLIDER:
+											case _types__WEBPACK_IMPORTED_MODULE_11__.b.SLIDER:
 												return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
-													_Molecules_Slider__WEBPACK_IMPORTED_MODULE_7__.a,
+													_Molecules_Slider__WEBPACK_IMPORTED_MODULE_8__.a,
 													__assign({}, subProps.slider, { facet: facet })
 												);
-											case _types__WEBPACK_IMPORTED_MODULE_10__.b.GRID:
+											case _types__WEBPACK_IMPORTED_MODULE_11__.b.GRID:
 												return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 													_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_5__.a,
 													__assign({}, subProps.facetGridOptions, { values: null === (_a = facet) || void 0 === _a ? void 0 : _a.refinedValues })
 												);
-											case _types__WEBPACK_IMPORTED_MODULE_10__.b.PALETTE:
+											case _types__WEBPACK_IMPORTED_MODULE_11__.b.PALETTE:
 												return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 													_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_6__.a,
 													__assign({}, subProps.facetPaletteOptions, { values: null === (_b = facet) || void 0 === _b ? void 0 : _b.refinedValues })
 												);
+											case _types__WEBPACK_IMPORTED_MODULE_11__.b.HIERARCHY:
+												return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+													_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_7__.a,
+													__assign({}, subProps.facetHierarchyOptions, { values: null === (_c = facet) || void 0 === _c ? void 0 : _c.refinedValues })
+												);
 											default:
 												return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 													_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_4__.a,
-													__assign({}, subProps.facetListOptions, { values: null === (_c = facet) || void 0 === _c ? void 0 : _c.refinedValues })
+													__assign({}, subProps.facetListOptions, { values: null === (_d = facet) || void 0 === _d ? void 0 : _d.refinedValues })
 												);
 										}
 									})()
 								),
-								(null === (_z = facet) || void 0 === _z ? void 0 : _z.overflow) &&
+								(null === (_2 = facet) || void 0 === _2 ? void 0 : _2.overflow) &&
 									facet.overflow.enabled &&
 									Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 										'div',
@@ -2979,9 +2935,9 @@
 												facet.overflow.toggle();
 											},
 										},
-										Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__.a, {
+										Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__.a, {
 											icon: facet.overflow.remaining > 0 ? 'plus' : 'minus',
-											color: null === (_0 = _providers_theme__WEBPACK_IMPORTED_MODULE_13__.a.colors) || void 0 === _0 ? void 0 : _0.primary,
+											color: null === (_3 = _providers_theme__WEBPACK_IMPORTED_MODULE_14__.a.colors) || void 0 === _3 ? void 0 : _3.primary,
 											size: '10px',
 											css: !disableStyles && CSS_icon(),
 										}),
@@ -2991,6 +2947,75 @@
 						)
 					);
 				});
+		},
+		163: function (module, exports, __webpack_require__) {
+			module.exports = __webpack_require__.p + 'static/media/searchspring-logo.fb3e0170.svg';
+		},
+		167: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, 'a', function () {
+				return Price;
+			});
+			__webpack_require__(8);
+			var _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(196),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3),
+				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
+				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(36),
+				__assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				CSS_price = function price(_a) {
+					var style = _a.style;
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_2__.a)(__assign({ '&.ss-strike': { textDecoration: 'line-through' } }, style));
+				};
+			function Price(properties) {
+				var _a,
+					_b,
+					_c,
+					globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_4__.f)(),
+					props = __assign(
+						__assign(
+							__assign(
+								{ symbol: '$', decimalPlaces: 2, thousandsSeparator: ',', decimalSeparator: '.', symbolAfter: !1 },
+								null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.price
+							),
+							properties
+						),
+						null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.price
+					),
+					lineThrough = props.lineThrough,
+					value = props.value,
+					symbol = props.symbol,
+					decimalPlaces = props.decimalPlaces,
+					thousandsSeparator = props.thousandsSeparator,
+					decimalSeparator = props.decimalSeparator,
+					symbolAfter = props.symbolAfter,
+					disableStyles = props.disableStyles,
+					className = props.className,
+					style = props.style,
+					formattedPrice = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_1__.a.currency(value, {
+						symbol: symbol,
+						decimalPlaces: decimalPlaces,
+						thousandsSeparator: thousandsSeparator,
+						decimalSeparator: decimalSeparator,
+						symbolAfter: symbolAfter,
+					});
+				return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_2__.b)(
+					'span',
+					{
+						css: !disableStyles && CSS_price({ style: style }),
+						className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss-price', { 'ss-strike': lineThrough }, className),
+					},
+					formattedPrice
+				);
+			}
 		},
 		196: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -3017,8 +3042,8 @@
 			__webpack_require__(8),
 				__webpack_require__(65),
 				__webpack_require__(13),
-				__webpack_require__(62),
-				__webpack_require__(870),
+				__webpack_require__(63),
+				__webpack_require__(871),
 				__webpack_require__(56),
 				__webpack_require__(11),
 				__webpack_require__(86),
@@ -3076,7 +3101,7 @@
 							.replace(/\s+/g, ' ')
 							.trim();
 			}
-			__webpack_require__(871);
+			__webpack_require__(872);
 			function truncate(input, limit, append) {
 				if ('string' != typeof input || input.length <= limit) return input;
 				var lastSpace = input.lastIndexOf(' ', limit),
@@ -3089,12 +3114,12 @@
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return InlineBanner;
 			});
-			__webpack_require__(53), __webpack_require__(8);
+			__webpack_require__(54), __webpack_require__(8);
 			var templateObject_1,
 				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(36),
 				__makeTemplateObject = function (cooked, raw) {
 					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
 				},
@@ -3162,7 +3187,8 @@
 						css:
 							!disableStyles &&
 							Object(_emotion_react__WEBPACK_IMPORTED_MODULE_2__.a)(
-								templateObject_1 || (templateObject_1 = __makeTemplateObject(['', ' ', ''], ['', ' ', ''])),
+								templateObject_1 ||
+									(templateObject_1 = __makeTemplateObject(['\n\t\t\t\t\t\t', ' ', '\n\t\t\t\t\t'], ['\n\t\t\t\t\t\t', ' ', '\n\t\t\t\t\t'])),
 								CSS.inlineBanner({ width: width, style: style }),
 								CSS[layout]()
 							),
@@ -3182,8 +3208,8 @@
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21),
-				_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(76),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(37),
+				_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(73),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(36),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(93),
 				__assign = function () {
 					return (__assign =
@@ -3314,7 +3340,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -3375,7 +3401,7 @@
 				preact_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32),
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -3545,7 +3571,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -3646,7 +3672,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(36),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(31),
 				__assign = function () {
 					return (__assign =
@@ -3766,6 +3792,159 @@
 		250: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
+				return FacetHierarchyOptions;
+			});
+			__webpack_require__(54),
+				__webpack_require__(8),
+				__webpack_require__(11),
+				__webpack_require__(22),
+				__webpack_require__(24),
+				__webpack_require__(16),
+				__webpack_require__(97);
+			var templateObject_1,
+				_emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3),
+				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(15),
+				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(21),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(36),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(31),
+				__makeTemplateObject = function (cooked, raw) {
+					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
+				},
+				__assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				CSS_list = function list(_a) {
+					var style = _a.style;
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)(__assign({}, style));
+				},
+				CSS_listOption = function listOption() {
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({
+						display: 'flex',
+						marginBottom: '12px',
+						textDecoration: 'none',
+						alignItems: 'center',
+						'&:last-child': { marginBottom: '0' },
+						'&:hover': { cursor: 'pointer' },
+					});
+				},
+				CSS_textWrapper = function textWrapper() {
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({ display: 'inline-block' });
+				},
+				CSS_valueLabel = function valueLabel(_a) {
+					var colorPalette = _a.colorPalette;
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({ marginLeft: '8px', '&$filtered': { color: colorPalette.primary } });
+				},
+				CSS_countLabel = function countLabel(_a) {
+					var colorPalette = _a.colorPalette;
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({
+						fontSize: '10px',
+						marginLeft: '2px',
+						'&$filtered': { color: colorPalette.primary },
+					});
+				},
+				CSS_filtered = function filtered() {
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({
+						fontWeight: 'bold',
+						'& ~ .ss-hierarchy__link:not(.filtered)': { paddingLeft: '20px' },
+					});
+				},
+				CSS_return = function _return() {
+					return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)({ '&:before': { content: "'\\0000ab'", padding: '0 2px 0 0' } });
+				},
+				FacetHierarchyOptions = Object(mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__.c)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						globalTheme = Object(_providers_theme__WEBPACK_IMPORTED_MODULE_10__.f)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
+							__assign(
+								__assign(
+									{ hideCheckbox: !1, hideCount: !1, disableStyles: !1 },
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.FacetHierarchyOptions
+								),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
+								? void 0
+								: _c.FacetHierarchyOptions
+						),
+						values = props.values,
+						hideCount = props.hideCount,
+						onClick = props.onClick,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						colorPalette = theme.colors ? theme.colors : _providers_theme__WEBPACK_IMPORTED_MODULE_11__.a.colors;
+					return (
+						(null == values ? void 0 : values.length) &&
+						Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.b)(
+							'div',
+							{
+								className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss-hierarchy', !disableStyles && CSS_list({ style: style }), className),
+							},
+							values.map(function (value) {
+								var _a;
+								return Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.b)(
+									'a',
+									__assign(
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(
+												'ss-hierarchy__link',
+												{ filtered: value.filtered },
+												{ history: value.history && !value.filtered }
+											),
+											css:
+												!disableStyles &&
+												Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.a)(
+													templateObject_1 ||
+														(templateObject_1 = __makeTemplateObject(
+															['\n\t\t\t\t\t\t\t\t\t', ' ', ' ', '\n\t\t\t\t\t\t\t\t'],
+															['\n\t\t\t\t\t\t\t\t\t', ' ', ' ', '\n\t\t\t\t\t\t\t\t']
+														)),
+													CSS_listOption(),
+													value.filtered && CSS_filtered(),
+													value.history && !value.filtered && CSS_return()
+												),
+											onClick: onClick,
+										},
+										null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
+									),
+									Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.b)(
+										'div',
+										{ css: !disableStyles && CSS_textWrapper() },
+										Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.b)(
+											'span',
+											{ css: !disableStyles && CSS_valueLabel({ colorPalette: colorPalette }) },
+											value.label
+										),
+										!hideCount &&
+											value.count > 0 &&
+											!value.filtered &&
+											Object(_emotion_react__WEBPACK_IMPORTED_MODULE_7__.b)(
+												'span',
+												{ css: !disableStyles && CSS_countLabel({ colorPalette: colorPalette }), className: 'ss-facetCount' },
+												'(',
+												value.count,
+												')'
+											)
+									)
+								);
+							})
+						)
+					);
+				});
+		},
+		251: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetListOptions;
 			});
 			__webpack_require__(8),
@@ -3778,8 +3957,8 @@
 				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(37),
-				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(76),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(36),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(73),
 				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(200),
 				__assign = function () {
 					return (__assign =
@@ -3923,12 +4102,12 @@
 					);
 				});
 		},
-		251: function (module, __webpack_exports__, __webpack_require__) {
+		252: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetPaletteOptions;
 			});
-			__webpack_require__(53),
+			__webpack_require__(54),
 				__webpack_require__(8),
 				__webpack_require__(94),
 				__webpack_require__(13),
@@ -3943,9 +4122,9 @@
 				classnames__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_11___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_11__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(21),
-				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(76),
+				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(73),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(93),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(36),
 				__makeTemplateObject = function (cooked, raw) {
 					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
 				},
@@ -4135,12 +4314,12 @@
 					);
 				});
 		},
-		252: function (module, __webpack_exports__, __webpack_require__) {
+		253: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Result;
 			});
-			__webpack_require__(53), __webpack_require__(8), __webpack_require__(26);
+			__webpack_require__(54), __webpack_require__(8), __webpack_require__(26);
 			var templateObject_1,
 				preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21),
@@ -4149,9 +4328,9 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				_Atoms_Image__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(203),
 				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(202),
-				_Atoms_Price__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(166),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(37),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(76),
+				_Atoms_Price__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(167),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(36),
+				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(73),
 				__makeTemplateObject = function (cooked, raw) {
 					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
 				},
@@ -4289,7 +4468,11 @@
 								css:
 									!disableStyles &&
 									Object(_emotion_react__WEBPACK_IMPORTED_MODULE_5__.a)(
-										templateObject_1 || (templateObject_1 = __makeTemplateObject(['', ' ', ''], ['', ' ', ''])),
+										templateObject_1 ||
+											(templateObject_1 = __makeTemplateObject(
+												['\n\t\t\t\t\t\t\t', ' ', '\n\t\t\t\t\t\t'],
+												['\n\t\t\t\t\t\t\t', ' ', '\n\t\t\t\t\t\t']
+											)),
 										CSS.result({ width: width, style: style }),
 										CSS[layout]()
 									),
@@ -4370,12 +4553,12 @@
 					);
 				});
 		},
-		253: function (module, __webpack_exports__, __webpack_require__) {
+		254: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Results;
 			});
-			__webpack_require__(53), __webpack_require__(8), __webpack_require__(191), __webpack_require__(63), __webpack_require__(16);
+			__webpack_require__(54), __webpack_require__(8), __webpack_require__(191), __webpack_require__(64), __webpack_require__(16);
 			var templateObject_1,
 				preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(32),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(21),
@@ -4383,10 +4566,10 @@
 				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
 				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(199),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(252),
-				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(64),
-				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(76),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(37),
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(253),
+				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(60),
+				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(73),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(36),
 				__makeTemplateObject = function (cooked, raw) {
 					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
 				},
@@ -4536,7 +4719,7 @@
 					);
 				});
 		},
-		254: function (module, __webpack_exports__, __webpack_require__) {
+		255: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Dropdown;
@@ -4547,7 +4730,7 @@
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(21),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37);
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36);
 			var __assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -4656,7 +4839,7 @@
 					);
 				});
 		},
-		255: function (module, __webpack_exports__, __webpack_require__) {
+		256: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Slider;
@@ -4667,16 +4850,16 @@
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				react_ranger = __webpack_require__(491),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37);
+				react_ranger = __webpack_require__(492),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36);
 			__webpack_require__(56),
 				__webpack_require__(13),
 				__webpack_require__(11),
 				__webpack_require__(86),
 				__webpack_require__(144),
-				__webpack_require__(465),
-				__webpack_require__(470),
-				__webpack_require__(886),
+				__webpack_require__(466),
+				__webpack_require__(471),
+				__webpack_require__(887),
 				__webpack_require__(19),
 				__webpack_require__(20),
 				__webpack_require__(35),
@@ -5040,7 +5223,7 @@
 			});
 			var defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1' }, components: {} };
 		},
-		335: function (module, __webpack_exports__, __webpack_require__) {
+		336: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Overlay;
@@ -5049,7 +5232,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -5110,18 +5293,18 @@
 				});
 			}
 		},
-		336: function (module, __webpack_exports__, __webpack_require__) {
+		337: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Filter;
 			});
-			__webpack_require__(8), __webpack_require__(36), __webpack_require__(97);
+			__webpack_require__(8), __webpack_require__(37), __webpack_require__(97);
 			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
-				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(76),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(37),
+				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(73),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(36),
 				_Atoms_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(248),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93),
 				__assign = function () {
@@ -5242,11 +5425,11 @@
 				__webpack_require__(28),
 				__webpack_require__(22),
 				__webpack_require__(24),
-				__webpack_require__(466),
 				__webpack_require__(467),
+				__webpack_require__(468),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(53),
+				__webpack_require__(54),
 				__webpack_require__(81),
 				__webpack_require__(82),
 				__webpack_require__(8),
@@ -5254,10 +5437,10 @@
 				__webpack_require__(185),
 				__webpack_require__(42),
 				__webpack_require__(56),
-				__webpack_require__(36),
+				__webpack_require__(37),
 				__webpack_require__(16),
 				__webpack_require__(144),
-				__webpack_require__(877);
+				__webpack_require__(878);
 			var __awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -5897,7 +6080,7 @@
 				__webpack_require__(120),
 				__webpack_require__(47),
 				__webpack_require__(48),
-				__webpack_require__(876);
+				__webpack_require__(877);
 			var __assign = function () {
 				return (__assign =
 					Object.assign ||
@@ -6020,8 +6203,8 @@
 						? { excludedFacets: facets.exclude }
 						: {};
 				});
-			__webpack_require__(45), __webpack_require__(114), __webpack_require__(65), __webpack_require__(63), __webpack_require__(190);
-			var he = __webpack_require__(334),
+			__webpack_require__(45), __webpack_require__(114), __webpack_require__(65), __webpack_require__(64), __webpack_require__(190);
+			var he = __webpack_require__(335),
 				he_default = __webpack_require__.n(he);
 			function _typeof(obj) {
 				return (_typeof =
@@ -6672,7 +6855,7 @@
 					);
 				})(),
 				seamless_immutable_development =
-					(__webpack_require__(258), __webpack_require__(96), __webpack_require__(68), __webpack_require__(191), __webpack_require__(134)),
+					(__webpack_require__(259), __webpack_require__(96), __webpack_require__(68), __webpack_require__(191), __webpack_require__(134)),
 				seamless_immutable_development_default = __webpack_require__.n(seamless_immutable_development);
 			function UrlManager_typeof(obj) {
 				return (UrlManager_typeof =
@@ -6951,7 +7134,7 @@
 				return !0;
 			}
 			var RangeValueProperties;
-			__webpack_require__(62), __webpack_require__(108), __webpack_require__(879), __webpack_require__(881), __webpack_require__(74);
+			__webpack_require__(63), __webpack_require__(108), __webpack_require__(880), __webpack_require__(882), __webpack_require__(75);
 			function QueryStringTranslator_typeof(obj) {
 				return (QueryStringTranslator_typeof =
 					'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
@@ -7584,8 +7767,8 @@
 				})(),
 				Profiler =
 					(__webpack_require__(26),
-					__webpack_require__(882),
-					__webpack_require__(470),
+					__webpack_require__(883),
+					__webpack_require__(471),
 					(function () {
 						function Profiler(namespace) {
 							(this.namespace = namespace), (this.profiles = []);
@@ -7657,7 +7840,7 @@
 						yellow: '#d1d432',
 					}),
 				emoji =
-					(__webpack_require__(884),
+					(__webpack_require__(885),
 					{
 						bang: String.fromCodePoint(8252),
 						bright: String.fromCodePoint(128262),
@@ -7789,7 +7972,7 @@
 			!(function (LogMode) {
 				(LogMode.PRODUCTION = 'production'), (LogMode.DEVELOPMENT = 'development');
 			})(LogMode || (LogMode = {}));
-			__webpack_require__(97), __webpack_require__(471), __webpack_require__(168);
+			__webpack_require__(97), __webpack_require__(472), __webpack_require__(168);
 			function AbstractController_typeof(obj) {
 				return (AbstractController_typeof =
 					'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
@@ -8828,7 +9011,7 @@
 				})(),
 				MerchandisingStore_extends =
 					(__webpack_require__(142),
-					__webpack_require__(159),
+					__webpack_require__(160),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
 							return (_extendStatics =
@@ -8964,7 +9147,7 @@
 						Object(mobx_esm.n)(this, { facet: mobx_esm.o, value: mobx_esm.o, label: mobx_esm.o });
 				},
 				ResultStore_extends =
-					(__webpack_require__(327),
+					(__webpack_require__(328),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
 							return (_extendStatics =
@@ -9073,7 +9256,7 @@
 					}, {});
 					Object(mobx_esm.n)(this.mappings.core, coreObservables);
 				};
-			__webpack_require__(301);
+			__webpack_require__(302);
 			var StorageType,
 				PaginationStore_PaginationStore = (function () {
 					function PaginationStore(controller, paginationData) {
@@ -9255,8 +9438,8 @@
 							: (this.url = controller.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }])),
 						Object(mobx_esm.n)(this, { field: mobx_esm.o, label: mobx_esm.o, direction: mobx_esm.o, type: mobx_esm.o, value: mobx_esm.o });
 				},
-				cookies = __webpack_require__(468),
-				featureFlags = __webpack_require__(469),
+				cookies = __webpack_require__(469),
+				featureFlags = __webpack_require__(470),
 				StorageStore_utils = { cookies: cookies.a },
 				StorageStore_StorageStore = (function () {
 					function StorageStore(config) {
@@ -9396,7 +9579,7 @@
 						Object(mobx_esm.n)(this, observables);
 				},
 				FacetStore_extends =
-					(__webpack_require__(337),
+					(__webpack_require__(338),
 					__webpack_require__(94),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
@@ -10131,7 +10314,7 @@
 					);
 				})();
 		},
-		468: function (module, __webpack_exports__, __webpack_require__) {
+		469: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return cookies;
@@ -10159,7 +10342,7 @@
 				},
 			};
 		},
-		469: function (module, __webpack_exports__, __webpack_require__) {
+		470: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return featureFlags;
@@ -10193,7 +10376,7 @@
 				})(),
 				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() };
 		},
-		493: function (module, __webpack_exports__, __webpack_require__) {
+		494: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return componentArgs;
@@ -10214,21 +10397,21 @@
 				theme: { description: 'Specify specific sub component props', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 			};
 		},
-		518: function (module, exports, __webpack_require__) {
-			__webpack_require__(519),
-				__webpack_require__(672),
+		519: function (module, exports, __webpack_require__) {
+			__webpack_require__(520),
 				__webpack_require__(673),
-				__webpack_require__(889),
+				__webpack_require__(674),
+				__webpack_require__(890),
 				__webpack_require__(901),
 				__webpack_require__(902),
-				__webpack_require__(891),
-				__webpack_require__(888),
+				__webpack_require__(892),
+				__webpack_require__(889),
 				__webpack_require__(903),
 				__webpack_require__(904),
-				(module.exports = __webpack_require__(863));
+				(module.exports = __webpack_require__(864));
 		},
-		586: function (module, exports) {},
-		64: function (module, __webpack_exports__, __webpack_require__) {
+		587: function (module, exports) {},
+		60: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			var BannerType, Layout, FacetMultiple, FacetType, FacetDisplay;
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
@@ -10267,12 +10450,12 @@
 						(FacetDisplay.HIERARCHY = 'hierarchy');
 				})(FacetDisplay || (FacetDisplay = {}));
 		},
-		673: function (module, __webpack_exports__, __webpack_require__) {
+		674: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__);
-			__webpack_require__(386);
+			__webpack_require__(387);
 		},
-		76: function (module, __webpack_exports__, __webpack_require__) {
+		73: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return defined;
@@ -10288,30 +10471,30 @@
 				);
 			}
 		},
-		859: function (module, exports, __webpack_require__) {
-			var api = __webpack_require__(860),
-				content = __webpack_require__(861);
+		860: function (module, exports, __webpack_require__) {
+			var api = __webpack_require__(861),
+				content = __webpack_require__(862);
 			'string' == typeof (content = content.__esModule ? content.default : content) && (content = [[module.i, content, '']]);
 			var options = { insert: 'head', singleton: !1 };
 			api(content, options);
 			module.exports = content.locals || {};
 		},
-		861: function (module, exports, __webpack_require__) {
-			(exports = __webpack_require__(862)(!1)).push([
+		862: function (module, exports, __webpack_require__) {
+			(exports = __webpack_require__(863)(!1)).push([
 				module.i,
 				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}",
 				'',
 			]),
 				(module.exports = exports);
 		},
-		863: function (module, exports, __webpack_require__) {
+		864: function (module, exports, __webpack_require__) {
 			'use strict';
 			(function (module) {
-				(0, __webpack_require__(386).configure)([__webpack_require__(864), __webpack_require__(868)], module, !1);
+				(0, __webpack_require__(387).configure)([__webpack_require__(865), __webpack_require__(869)], module, !1);
 			}.call(this, __webpack_require__(188)(module)));
 		},
-		864: function (module, exports, __webpack_require__) {
-			var map = { './documents/About.stories.mdx': 865, './documents/Theme.stories.mdx': 866, './documents/Usage.stories.mdx': 867 };
+		865: function (module, exports, __webpack_require__) {
+			var map = { './documents/About.stories.mdx': 866, './documents/Theme.stories.mdx': 867, './documents/Usage.stories.mdx': 868 };
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
 				return __webpack_require__(id);
@@ -10328,9 +10511,9 @@
 			}),
 				(webpackContext.resolve = webpackContextResolve),
 				(module.exports = webpackContext),
-				(webpackContext.id = 864);
+				(webpackContext.id = 865);
 		},
-		865: function (module, __webpack_exports__, __webpack_require__) {
+		866: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
@@ -10339,7 +10522,7 @@
 			__webpack_require__(0);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
-				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(162),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
 					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
 				);
@@ -10455,7 +10638,7 @@
 				}),
 				(__webpack_exports__.default = componentMeta);
 		},
-		866: function (module, __webpack_exports__, __webpack_require__) {
+		867: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
@@ -10464,7 +10647,7 @@
 			__webpack_require__(0);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
-				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(162),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
 					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
 				);
@@ -10836,7 +11019,7 @@
 				}),
 				(__webpack_exports__.default = componentMeta);
 		},
-		867: function (module, __webpack_exports__, __webpack_require__) {
+		868: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
@@ -10845,7 +11028,7 @@
 			__webpack_require__(0);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
-				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(162),
+				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
 					_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__
 				);
@@ -10991,36 +11174,36 @@
 				}),
 				(__webpack_exports__.default = componentMeta);
 		},
-		868: function (module, exports, __webpack_require__) {
+		869: function (module, exports, __webpack_require__) {
 			var map = {
 				'./components/Atoms/Badge/Badge.stories.tsx': 905,
-				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': 892,
+				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': 893,
 				'./components/Atoms/Button/Button.stories.tsx': 906,
 				'./components/Atoms/Dropdown/Dropdown.stories.tsx': 907,
-				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': 893,
+				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': 894,
 				'./components/Atoms/Icon/Icon.stories.tsx': 908,
 				'./components/Atoms/Image/Image.stories.tsx': 909,
-				'./components/Atoms/Loading/LoadingBar.stories.tsx': 894,
-				'./components/Atoms/Merchandising/Banner.stories.tsx': 875,
-				'./components/Atoms/Merchandising/InlineBanner.stories.tsx': 885,
+				'./components/Atoms/Loading/LoadingBar.stories.tsx': 895,
+				'./components/Atoms/Merchandising/Banner.stories.tsx': 876,
+				'./components/Atoms/Merchandising/InlineBanner.stories.tsx': 886,
 				'./components/Atoms/Overlay/Overlay.stories.tsx': 910,
 				'./components/Atoms/Price/Price.stories.tsx': 911,
 				'./components/Molecules/Checkbox/Checkbox.stories.tsx': 912,
 				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx': 913,
-				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 895,
-				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 914,
-				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': 915,
-				'./components/Molecules/Filter/Filter.stories.tsx': 916,
+				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 914,
+				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 915,
+				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': 916,
+				'./components/Molecules/Filter/Filter.stories.tsx': 917,
 				'./components/Molecules/Pagination/Pagination.stories.tsx': 896,
-				'./components/Molecules/Result/Result.stories.tsx': 917,
+				'./components/Molecules/Result/Result.stories.tsx': 918,
 				'./components/Molecules/Select/Select.stories.tsx': 897,
-				'./components/Molecules/Slideout/Slideout.stories.tsx': 890,
-				'./components/Molecules/Slider/Slider.stories.tsx': 918,
+				'./components/Molecules/Slideout/Slideout.stories.tsx': 891,
+				'./components/Molecules/Slider/Slider.stories.tsx': 919,
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 898,
-				'./components/Organisms/Facet/Facet.stories.tsx': 919,
+				'./components/Organisms/Facet/Facet.stories.tsx': 920,
 				'./components/Organisms/Facets/Facets.stories.tsx': 899,
 				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': 900,
-				'./components/Organisms/Results/Results.stories.tsx': 920,
+				'./components/Organisms/Results/Results.stories.tsx': 921,
 			};
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
@@ -11038,9 +11221,9 @@
 			}),
 				(webpackContext.resolve = webpackContextResolve),
 				(module.exports = webpackContext),
-				(webpackContext.id = 868);
+				(webpackContext.id = 869);
 		},
-		875: function (module, __webpack_exports__, __webpack_require__) {
+		876: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Header', function () {
@@ -11069,7 +11252,7 @@
 				__webpack_require__(42);
 			var preact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2),
 				_Banner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(133),
-				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(493),
+				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(494),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(43),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(246),
@@ -11321,7 +11504,7 @@
 					},
 				]);
 		},
-		885: function (module, __webpack_exports__, __webpack_require__) {
+		886: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -11341,7 +11524,7 @@
 				__webpack_require__(42);
 			var preact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(199),
-				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(493),
+				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(494),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(43),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(246),
@@ -11543,7 +11726,7 @@
 				},
 			];
 		},
-		890: function (module, __webpack_exports__, __webpack_require__) {
+		891: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -11555,9 +11738,9 @@
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				defined = __webpack_require__(76),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37);
-			var Overlay = __webpack_require__(335),
+				defined = __webpack_require__(73),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36);
+			var Overlay = __webpack_require__(336),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -11696,7 +11879,7 @@
 						)
 				);
 			}
-			var componentArgs = __webpack_require__(493),
+			var componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -11837,7 +12020,7 @@
 					}.bind({}));
 			Default.args = { active: !0 };
 		},
-		892: function (module, __webpack_exports__, __webpack_require__) {
+		893: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'categoryPage', function () {
@@ -11852,7 +12035,7 @@
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(21),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -11914,7 +12097,7 @@
 						)
 					);
 				}),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -12031,7 +12214,7 @@
 			var SearchPage = Breadcrumbs_stories_Template.bind({});
 			SearchPage.args = { data: [{ url: '/', label: 'Home' }, { label: 'Search' }] };
 		},
-		893: function (module, __webpack_exports__, __webpack_require__) {
+		894: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -12048,7 +12231,7 @@
 				esm = __webpack_require__(196),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -12239,7 +12422,7 @@
 			var Length = FormattedNumber_stories_Template.bind({});
 			Length.args = { value: 100, symbol: ' mm', decimalPlaces: 2 };
 		},
-		894: function (module, __webpack_exports__, __webpack_require__) {
+		895: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Active', function () {
@@ -12250,7 +12433,7 @@
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				providers_theme = __webpack_require__(31),
 				__assign = function () {
 					return (__assign =
@@ -12359,7 +12542,7 @@
 					)
 				);
 			}
-			var componentArgs = __webpack_require__(493),
+			var componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -12472,384 +12655,6 @@
 					}.bind({}));
 			Active.args = { active: !0 };
 		},
-		895: function (module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, 'Default', function () {
-					return Default;
-				});
-			__webpack_require__(8),
-				__webpack_require__(34),
-				__webpack_require__(11),
-				__webpack_require__(19),
-				__webpack_require__(20),
-				__webpack_require__(35),
-				__webpack_require__(28),
-				__webpack_require__(22),
-				__webpack_require__(24),
-				__webpack_require__(41),
-				__webpack_require__(13),
-				__webpack_require__(63),
-				__webpack_require__(36),
-				__webpack_require__(42);
-			var templateObject_1,
-				preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
-				emotion_react_browser_esm = (__webpack_require__(53), __webpack_require__(16), __webpack_require__(97), __webpack_require__(3)),
-				classnames = __webpack_require__(15),
-				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(21),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
-				providers_theme = __webpack_require__(31),
-				__makeTemplateObject = function (cooked, raw) {
-					return Object.defineProperty ? Object.defineProperty(cooked, 'raw', { value: raw }) : (cooked.raw = raw), cooked;
-				},
-				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				CSS_list = function list(_a) {
-					var style = _a.style;
-					return Object(emotion_react_browser_esm.a)(__assign({}, style));
-				},
-				CSS_listOption = function listOption() {
-					return Object(emotion_react_browser_esm.a)({
-						display: 'flex',
-						marginBottom: '12px',
-						textDecoration: 'none',
-						alignItems: 'center',
-						'&:last-child': { marginBottom: '0' },
-						'&:hover': { cursor: 'pointer' },
-					});
-				},
-				CSS_textWrapper = function textWrapper() {
-					return Object(emotion_react_browser_esm.a)({ display: 'inline-block' });
-				},
-				CSS_valueLabel = function valueLabel(_a) {
-					var colorPalette = _a.colorPalette;
-					return Object(emotion_react_browser_esm.a)({ marginLeft: '8px', '&$filtered': { color: colorPalette.primary } });
-				},
-				CSS_countLabel = function countLabel(_a) {
-					var colorPalette = _a.colorPalette;
-					return Object(emotion_react_browser_esm.a)({ fontSize: '10px', marginLeft: '2px', '&$filtered': { color: colorPalette.primary } });
-				},
-				CSS_filtered = function filtered() {
-					return Object(emotion_react_browser_esm.a)({ fontWeight: 'bold', '& ~ .ss-hierarchy__link:not(.filtered)': { paddingLeft: '20px' } });
-				},
-				CSS_return = function _return() {
-					return Object(emotion_react_browser_esm.a)({ '&:before': { content: "'\\0000ab'", padding: '0 2px 0 0' } });
-				},
-				FacetHierarchyOptions = Object(es.c)(function (properties) {
-					var _a,
-						_b,
-						_c,
-						globalTheme = Object(emotion_element_4fbd89c5_browser_esm.f)(),
-						theme = __assign(__assign({}, globalTheme), properties.theme),
-						props = __assign(
-							__assign(
-								__assign(
-									{ hideCheckbox: !1, hideCount: !1, disableStyles: !1 },
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.FacetHierarchyOptions
-								),
-								properties
-							),
-							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
-								? void 0
-								: _c.FacetHierarchyOptions
-						),
-						values = props.values,
-						hideCount = props.hideCount,
-						onClick = props.onClick,
-						disableStyles = props.disableStyles,
-						className = props.className,
-						style = props.style,
-						colorPalette = theme.colors ? theme.colors : providers_theme.a.colors;
-					return (
-						(null == values ? void 0 : values.length) &&
-						Object(emotion_react_browser_esm.b)(
-							'div',
-							{ className: classnames_default()('ss-hierarchy', !disableStyles && CSS_list({ style: style }), className) },
-							values.map(function (value) {
-								var _a;
-								return Object(emotion_react_browser_esm.b)(
-									'a',
-									__assign(
-										{
-											className: classnames_default()(
-												'ss-hierarchy__link',
-												{ filtered: value.filtered },
-												{ history: value.history && !value.filtered }
-											),
-											css:
-												!disableStyles &&
-												Object(emotion_react_browser_esm.a)(
-													templateObject_1 || (templateObject_1 = __makeTemplateObject(['', ' ', ' ', ''], ['', ' ', ' ', ''])),
-													CSS_listOption(),
-													value.filtered && CSS_filtered(),
-													value.history && !value.filtered && CSS_return()
-												),
-											onClick: onClick,
-										},
-										null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
-									),
-									Object(emotion_react_browser_esm.b)(
-										'div',
-										{ css: !disableStyles && CSS_textWrapper() },
-										Object(emotion_react_browser_esm.b)(
-											'span',
-											{ css: !disableStyles && CSS_valueLabel({ colorPalette: colorPalette }) },
-											value.label
-										),
-										!hideCount &&
-											value.count > 0 &&
-											!value.filtered &&
-											Object(emotion_react_browser_esm.b)(
-												'span',
-												{ css: !disableStyles && CSS_countLabel({ colorPalette: colorPalette }), className: 'ss-facetCount' },
-												'(',
-												value.count,
-												')'
-											)
-									)
-								);
-							})
-						)
-					);
-				}),
-				componentArgs = __webpack_require__(493),
-				snapify = __webpack_require__(43),
-				types = __webpack_require__(64),
-				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
-			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
-			}
-			const layoutProps = {};
-			function MDXContent({ components: components, ...props }) {
-				return Object(esm.b)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
-					Object(esm.b)('p', null, 'Renders a list of hierarchy links.'),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)(
-						'pre',
-						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetHierarchyOptions values={hierarchyValues} />;\n')
-					)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			var FacetHierarchyOptions_stories_assign = function () {
-					return (FacetHierarchyOptions_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				__awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				__generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				snapInstance =
-					((__webpack_exports__.default = {
-						title: 'Molecules/FacetHierarchyOptions',
-						component: FacetHierarchyOptions,
-						parameters: {
-							docs: {
-								page: function page() {
-									return Object(preact_module.h)(
-										'div',
-										null,
-										Object(preact_module.h)(MDXContent, null),
-										Object(preact_module.h)(blocks.b, { story: blocks.d })
-									);
-								},
-							},
-						},
-						decorators: [
-							function (Story) {
-								return Object(preact_module.h)(
-									'div',
-									{ style: { maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' } },
-									Object(preact_module.h)(Story, null)
-								);
-							},
-						],
-						argTypes: FacetHierarchyOptions_stories_assign(
-							{
-								values: {
-									description: 'Facet.values store reference',
-									type: { required: !0 },
-									table: { type: { summary: 'object' } },
-									control: { type: 'object' },
-								},
-								hideCount: {
-									defaultValue: !1,
-									description: 'Hide facet option count',
-									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-									control: { type: 'boolean' },
-								},
-								onClick: { description: 'Facet option click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
-							},
-							componentArgs.a
-						),
-					}),
-					snapify.a.search({ globals: { siteId: 'scmq7n' } })),
-				ObservableFacetHierarchyOptions = Object(mobxreact_esm.a)(function (_a) {
-					var _b,
-						args = _a.args,
-						controller = _a.controller,
-						hierarchyValues =
-							null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
-								? void 0
-								: _b.facets
-										.filter(function (facet) {
-											return facet.display === types.b.HIERARCHY;
-										})
-										.shift()
-										.values.slice(0, 12);
-					return Object(preact_module.h)(FacetHierarchyOptions, FacetHierarchyOptions_stories_assign({}, args, { values: hierarchyValues }));
-				}),
-				Default = function Template(args, _a) {
-					var controller = _a.loaded.controller;
-					return Object(preact_module.h)(ObservableFacetHierarchyOptions, { args: args, controller: controller });
-				}.bind({});
-			Default.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						var _a;
-						return __generator(this, function (_b) {
-							switch (_b.label) {
-								case 0:
-									return (_a = {}), [4, snapInstance.search()];
-								case 1:
-									return [2, ((_a.controller = _b.sent()), _a)];
-							}
-						});
-					});
-				},
-			];
-		},
 		896: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -12869,20 +12674,20 @@
 				__webpack_require__(13),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
+				mobxreact_esm = __webpack_require__(52),
 				es =
-					(__webpack_require__(301),
+					(__webpack_require__(302),
 					__webpack_require__(108),
 					__webpack_require__(16),
 					__webpack_require__(97),
 					__webpack_require__(68),
-					__webpack_require__(74),
+					__webpack_require__(75),
 					__webpack_require__(21)),
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
-				defined = __webpack_require__(76),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
+				defined = __webpack_require__(73),
 				Icon = __webpack_require__(93),
 				__assign = function () {
 					return (__assign =
@@ -13018,7 +12823,7 @@
 						)
 					);
 				}),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -13313,15 +13118,15 @@
 				__webpack_require__(13),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
-				hooks_module = (__webpack_require__(190), __webpack_require__(36), __webpack_require__(16), __webpack_require__(32)),
+				mobxreact_esm = __webpack_require__(52),
+				hooks_module = (__webpack_require__(190), __webpack_require__(37), __webpack_require__(16), __webpack_require__(32)),
 				es = __webpack_require__(21),
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
-				defined = __webpack_require__(76),
-				Dropdown = __webpack_require__(254),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
+				defined = __webpack_require__(73),
+				Dropdown = __webpack_require__(255),
 				Button = __webpack_require__(248),
 				Icon = __webpack_require__(93),
 				__assign = function () {
@@ -13620,7 +13425,7 @@
 						)
 					);
 				}),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				paths = __webpack_require__(147),
 				blocks = __webpack_require__(9),
@@ -13992,25 +13797,25 @@
 				__webpack_require__(24),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
+				mobxreact_esm = __webpack_require__(52),
 				hooks_module =
 					(__webpack_require__(41),
 					__webpack_require__(13),
-					__webpack_require__(471),
+					__webpack_require__(472),
 					__webpack_require__(16),
-					__webpack_require__(63),
-					__webpack_require__(36),
+					__webpack_require__(64),
+					__webpack_require__(37),
 					__webpack_require__(94),
 					__webpack_require__(32)),
 				es = __webpack_require__(21),
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				Results = __webpack_require__(253),
+				Results = __webpack_require__(254),
 				Banner = __webpack_require__(133),
-				Facet = __webpack_require__(167),
-				defined = __webpack_require__(76),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				Facet = __webpack_require__(149),
+				defined = __webpack_require__(73),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -14363,7 +14168,7 @@
 						)
 					);
 				},
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -14670,14 +14475,14 @@
 				__webpack_require__(13),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
+				mobxreact_esm = __webpack_require__(52),
 				blocks = __webpack_require__(9),
 				classnames = (__webpack_require__(16), __webpack_require__(15)),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(21),
-				Facet = __webpack_require__(167),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
-				defined = __webpack_require__(76),
+				Facet = __webpack_require__(149),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
+				defined = __webpack_require__(73),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -14729,7 +14534,7 @@
 						)
 					);
 				}),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -14974,13 +14779,13 @@
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				paths = __webpack_require__(147),
-				emotion_react_browser_esm = (__webpack_require__(36), __webpack_require__(16), __webpack_require__(3)),
+				emotion_react_browser_esm = (__webpack_require__(37), __webpack_require__(16), __webpack_require__(3)),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(21),
-				Filter = __webpack_require__(336),
-				defined = __webpack_require__(76),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				Filter = __webpack_require__(337),
+				defined = __webpack_require__(73),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -15076,7 +14881,7 @@
 						  )
 						: null;
 				}),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -15409,20 +15214,20 @@
 				});
 			__webpack_require__(23),
 				__webpack_require__(19),
-				__webpack_require__(36),
-				__webpack_require__(856),
+				__webpack_require__(37),
+				__webpack_require__(857),
 				__webpack_require__(47),
 				__webpack_require__(48),
-				__webpack_require__(857),
 				__webpack_require__(858),
-				__webpack_require__(53);
-			var client_api = __webpack_require__(945),
+				__webpack_require__(859),
+				__webpack_require__(54);
+			var client_api = __webpack_require__(947),
 				esm = __webpack_require__(12),
 				preact_module = __webpack_require__(2),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(37),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				theme = __webpack_require__(31),
 				decorators =
-					(__webpack_require__(859),
+					(__webpack_require__(860),
 					[
 						function (Story) {
 							return Object(preact_module.h)(emotion_element_4fbd89c5_browser_esm.c, { theme: theme.a }, Object(preact_module.h)(Story, null));
@@ -15504,7 +15309,7 @@
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				blocks = __webpack_require__(9),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				Badge = __webpack_require__(202),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -15648,7 +15453,7 @@
 			var preact_module = __webpack_require__(2),
 				Button = __webpack_require__(248),
 				blocks = __webpack_require__(9),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
 				return (_extends =
@@ -15845,8 +15650,8 @@
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Dropdown = __webpack_require__(254),
-				componentArgs = __webpack_require__(493),
+				Dropdown = __webpack_require__(255),
+				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -16097,18 +15902,18 @@
 				__webpack_require__(23),
 				__webpack_require__(42),
 				__webpack_require__(16),
-				__webpack_require__(873),
+				__webpack_require__(874),
 				__webpack_require__(94),
 				__webpack_require__(13),
-				__webpack_require__(62),
-				__webpack_require__(465),
+				__webpack_require__(63),
+				__webpack_require__(466),
 				__webpack_require__(11),
 				__webpack_require__(86),
 				__webpack_require__(144);
 			var preact_module = __webpack_require__(2),
 				Icon = __webpack_require__(93),
 				paths = __webpack_require__(147),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -16292,7 +16097,7 @@
 			__webpack_require__(8), __webpack_require__(42), __webpack_require__(26);
 			var preact_module = __webpack_require__(2),
 				Image = __webpack_require__(203),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				searchResponse = __webpack_require__(106),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -16432,8 +16237,8 @@
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Overlay = __webpack_require__(335),
-				componentArgs = __webpack_require__(493),
+				Overlay = __webpack_require__(336),
+				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -16544,7 +16349,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Price = __webpack_require__(166),
+				Price = __webpack_require__(167),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -16706,7 +16511,7 @@
 			var preact_module = __webpack_require__(2),
 				Checkbox = __webpack_require__(200),
 				paths = __webpack_require__(147),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -16859,12 +16664,12 @@
 				__webpack_require__(24),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(36),
+				__webpack_require__(37),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
+				mobxreact_esm = __webpack_require__(52),
 				FacetGridOptions = __webpack_require__(249),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -17129,12 +16934,264 @@
 				__webpack_require__(24),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(36),
+				__webpack_require__(64),
+				__webpack_require__(37),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
-				FacetListOptions = __webpack_require__(250),
-				componentArgs = __webpack_require__(493),
+				mobxreact_esm = __webpack_require__(52),
+				FacetHierarchyOptions = __webpack_require__(250),
+				componentArgs = __webpack_require__(494),
+				snapify = __webpack_require__(43),
+				types = __webpack_require__(60),
+				blocks = __webpack_require__(9),
+				esm = (__webpack_require__(0), __webpack_require__(1));
+			function _extends() {
+				return (_extends =
+					Object.assign ||
+					function (target) {
+						for (var i = 1; i < arguments.length; i++) {
+							var source = arguments[i];
+							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+						}
+						return target;
+					}).apply(this, arguments);
+			}
+			const layoutProps = {};
+			function MDXContent({ components: components, ...props }) {
+				return Object(esm.b)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
+					Object(esm.b)('h2', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
+					Object(esm.b)('p', null, 'Renders a list of hierarchy links.'),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetHierarchyOptions values={hierarchyValues} />;\n')
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var __assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				__awaiter = function (thisArg, _arguments, P, generator) {
+					return new (P || (P = Promise))(function (resolve, reject) {
+						function fulfilled(value) {
+							try {
+								step(generator.next(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function rejected(value) {
+							try {
+								step(generator.throw(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function step(result) {
+							result.done
+								? resolve(result.value)
+								: (function adopt(value) {
+										return value instanceof P
+											? value
+											: new P(function (resolve) {
+													resolve(value);
+											  });
+								  })(result.value).then(fulfilled, rejected);
+						}
+						step((generator = generator.apply(thisArg, _arguments || [])).next());
+					});
+				},
+				__generator = function (thisArg, body) {
+					var f,
+						y,
+						t,
+						g,
+						_ = {
+							label: 0,
+							sent: function sent() {
+								if (1 & t[0]) throw t[1];
+								return t[1];
+							},
+							trys: [],
+							ops: [],
+						};
+					return (
+						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
+						'function' == typeof Symbol &&
+							(g[Symbol.iterator] = function () {
+								return this;
+							}),
+						g
+					);
+					function verb(n) {
+						return function (v) {
+							return (function step(op) {
+								if (f) throw new TypeError('Generator is already executing.');
+								for (; _; )
+									try {
+										if (
+											((f = 1),
+											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+										)
+											return t;
+										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
+											case 0:
+											case 1:
+												t = op;
+												break;
+											case 4:
+												return _.label++, { value: op[1], done: !1 };
+											case 5:
+												_.label++, (y = op[1]), (op = [0]);
+												continue;
+											case 7:
+												(op = _.ops.pop()), _.trys.pop();
+												continue;
+											default:
+												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
+													_ = 0;
+													continue;
+												}
+												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+													_.label = op[1];
+													break;
+												}
+												if (6 === op[0] && _.label < t[1]) {
+													(_.label = t[1]), (t = op);
+													break;
+												}
+												if (t && _.label < t[2]) {
+													(_.label = t[2]), _.ops.push(op);
+													break;
+												}
+												t[2] && _.ops.pop(), _.trys.pop();
+												continue;
+										}
+										op = body.call(thisArg, _);
+									} catch (e) {
+										(op = [6, e]), (y = 0);
+									} finally {
+										f = t = 0;
+									}
+								if (5 & op[0]) throw op[1];
+								return { value: op[0] ? op[1] : void 0, done: !0 };
+							})([n, v]);
+						};
+					}
+				},
+				snapInstance =
+					((__webpack_exports__.default = {
+						title: 'Molecules/FacetHierarchyOptions',
+						component: FacetHierarchyOptions.a,
+						parameters: {
+							docs: {
+								page: function page() {
+									return Object(preact_module.h)(
+										'div',
+										null,
+										Object(preact_module.h)(MDXContent, null),
+										Object(preact_module.h)(blocks.b, { story: blocks.d })
+									);
+								},
+							},
+						},
+						decorators: [
+							function (Story) {
+								return Object(preact_module.h)(
+									'div',
+									{ style: { maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' } },
+									Object(preact_module.h)(Story, null)
+								);
+							},
+						],
+						argTypes: __assign(
+							{
+								values: {
+									description: 'Facet.values store reference',
+									type: { required: !0 },
+									table: { type: { summary: 'object' } },
+									control: { type: 'object' },
+								},
+								hideCount: {
+									defaultValue: !1,
+									description: 'Hide facet option count',
+									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+									control: { type: 'boolean' },
+								},
+								onClick: { description: 'Facet option click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
+							},
+							componentArgs.a
+						),
+					}),
+					snapify.a.search({ globals: { siteId: 'scmq7n' } })),
+				ObservableFacetHierarchyOptions = Object(mobxreact_esm.a)(function (_a) {
+					var _b,
+						args = _a.args,
+						controller = _a.controller,
+						hierarchyValues =
+							null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+								? void 0
+								: _b.facets
+										.filter(function (facet) {
+											return facet.display === types.b.HIERARCHY;
+										})
+										.shift()
+										.values.slice(0, 12);
+					return Object(preact_module.h)(FacetHierarchyOptions.a, __assign({}, args, { values: hierarchyValues }));
+				}),
+				Default = function Template(args, _a) {
+					var controller = _a.loaded.controller;
+					return Object(preact_module.h)(ObservableFacetHierarchyOptions, { args: args, controller: controller });
+				}.bind({});
+			Default.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
+		},
+		915: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, 'Default', function () {
+					return Default;
+				});
+			__webpack_require__(8),
+				__webpack_require__(34),
+				__webpack_require__(11),
+				__webpack_require__(19),
+				__webpack_require__(20),
+				__webpack_require__(35),
+				__webpack_require__(28),
+				__webpack_require__(22),
+				__webpack_require__(24),
+				__webpack_require__(41),
+				__webpack_require__(13),
+				__webpack_require__(37),
+				__webpack_require__(42);
+			var preact_module = __webpack_require__(2),
+				mobxreact_esm = __webpack_require__(52),
+				FacetListOptions = __webpack_require__(251),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -17373,7 +17430,7 @@
 				},
 			];
 		},
-		915: function (module, __webpack_exports__, __webpack_require__) {
+		916: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -17390,12 +17447,12 @@
 				__webpack_require__(24),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(36),
+				__webpack_require__(37),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
-				FacetPaletteOptions = __webpack_require__(251),
-				componentArgs = __webpack_require__(493),
+				mobxreact_esm = __webpack_require__(52),
+				FacetPaletteOptions = __webpack_require__(252),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -17661,7 +17718,7 @@
 				},
 			];
 		},
-		916: function (module, __webpack_exports__, __webpack_require__) {
+		917: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -17682,14 +17739,14 @@
 				__webpack_require__(23),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(36),
+				__webpack_require__(37),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Filter = __webpack_require__(336),
+				Filter = __webpack_require__(337),
 				paths = __webpack_require__(147),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
-				types = __webpack_require__(64),
+				types = __webpack_require__(60),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -17955,7 +18012,7 @@
 			]),
 				(NoFacetLabel.args = { hideFacetLabel: !0 });
 		},
-		917: function (module, __webpack_exports__, __webpack_require__) {
+		918: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
@@ -17977,9 +18034,9 @@
 				__webpack_require__(13),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Result = __webpack_require__(252),
+				Result = __webpack_require__(253),
 				Image = __webpack_require__(203),
-				componentArgs = __webpack_require__(493),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -18269,7 +18326,7 @@
 			]),
 				(hideSections.args = { hideBadge: !0, hideTitle: !0, hidePricing: !0 });
 		},
-		918: function (module, __webpack_exports__, __webpack_require__) {
+		919: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Price', function () {
@@ -18277,8 +18334,8 @@
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Slider = __webpack_require__(255),
-				componentArgs = __webpack_require__(493),
+				Slider = __webpack_require__(256),
+				componentArgs = __webpack_require__(494),
 				searchResponse = __webpack_require__(106),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(0), __webpack_require__(1));
@@ -18391,7 +18448,7 @@
 						return Object(preact_module.h)(Slider.a, __assign({}, args, { facet: searchResponse.b }));
 					}.bind({}));
 		},
-		919: function (module, __webpack_exports__, __webpack_require__) {
+		920: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'List', function () {
@@ -18405,6 +18462,9 @@
 				}),
 				__webpack_require__.d(__webpack_exports__, 'Grid', function () {
 					return Grid;
+				}),
+				__webpack_require__.d(__webpack_exports__, 'Hierarchy', function () {
+					return Hierarchy;
 				});
 			__webpack_require__(8),
 				__webpack_require__(34),
@@ -18418,15 +18478,15 @@
 				__webpack_require__(23),
 				__webpack_require__(41),
 				__webpack_require__(13),
-				__webpack_require__(36),
+				__webpack_require__(37),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				mobxreact_esm = __webpack_require__(55),
+				mobxreact_esm = __webpack_require__(52),
 				blocks = __webpack_require__(9),
-				Facet = __webpack_require__(167),
+				Facet = __webpack_require__(149),
 				paths = __webpack_require__(147),
-				types = __webpack_require__(64),
-				componentArgs = __webpack_require__(493),
+				types = __webpack_require__(60),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -18814,8 +18874,41 @@
 					});
 				},
 			];
+			var ObservableHierarchyFacet = Object(mobxreact_esm.a)(function (_a) {
+					var _b,
+						args = _a.args,
+						controller = _a.controller,
+						facet =
+							null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b
+								? void 0
+								: _b.facets
+										.filter(function (facet) {
+											return facet.display === types.b.HIERARCHY;
+										})
+										.shift();
+					return Object(preact_module.h)(Facet.a, __assign({}, args, { facet: facet }));
+				}),
+				Hierarchy = function HierarchyTemplate(args, _a) {
+					var controller = _a.loaded.controller;
+					return Object(preact_module.h)(ObservableHierarchyFacet, { args: args, controller: controller });
+				}.bind({});
+			Hierarchy.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						var _a;
+						return __generator(this, function (_b) {
+							switch (_b.label) {
+								case 0:
+									return (_a = {}), [4, snapInstance.search()];
+								case 1:
+									return [2, ((_a.controller = _b.sent()), _a)];
+							}
+						});
+					});
+				},
+			];
 		},
-		920: function (module, __webpack_exports__, __webpack_require__) {
+		921: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Grid', function () {
@@ -18837,8 +18930,8 @@
 				__webpack_require__(13);
 			var preact_module = __webpack_require__(2),
 				blocks = __webpack_require__(9),
-				Results = __webpack_require__(253),
-				componentArgs = __webpack_require__(493),
+				Results = __webpack_require__(254),
+				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				esm = (__webpack_require__(0), __webpack_require__(1));
 			function _extends() {
@@ -19172,7 +19265,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(37),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(36),
 				_paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(147),
 				__assign = function () {
 					return (__assign =
@@ -19237,5 +19330,5 @@
 			}
 		},
 	},
-	[[518, 2, 3]],
+	[[519, 2, 3]],
 ]);
