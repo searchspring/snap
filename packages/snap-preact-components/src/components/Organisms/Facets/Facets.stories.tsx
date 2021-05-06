@@ -7,7 +7,6 @@ import { Facets, FacetsProps } from './Facets';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
-// @ts-ignore
 import Readme from '../Facets/readme.md';
 
 export default {

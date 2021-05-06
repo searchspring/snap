@@ -1,15 +1,8 @@
-## Autocomplete
-Using the Autocomplete Controller,and the Autocomplete Store, returned by the Snapify.autocomplete function, renders a popup instant search, that attaches to the focus event of the input passed into the selector prop. Renders Terms, Facets, Banners, & Results components. HideFacets, hideTerms, & responsive props available for customizing. 
+# Autocomplete
 
+Renders an autocomplete popup that binds to an `<input>` element.
 
-## Additional Info
-
-Most of the actual functionality is handled by the Controller and Store. Note that the Autocomplete does not use the Search Controller or Store, it actually has its own versions. 
-Because it uses a different Controller and Store, and needs the input Selector passed in, it uses a different Snapify function as well. Use Snapify.autocomplete instead of Snapify.search in order to get the Autocomplete Controller/Store. 
-
-learn more...  
-Autocomplete Controller (https://github.com/searchspring/snap-controller/blob/main/src/Autocomplete/AutocompleteController.ts)  
-Autocomplete Store (https://github.com/searchspring/snap-store-mobx/blob/main/src/Autocomplete/AutocompleteStore.ts)
+The autocomplete layout renders terms, facets, banners, and results.
 
 ## Components Used
 - Facet
@@ -18,7 +11,43 @@ Autocomplete Store (https://github.com/searchspring/snap-store-mobx/blob/main/sr
 
 ## Usage
 
+### input
+The required `input` prop expects either:
+
+- a string CSS selector that targets `<input>` element(s) to bind to
+
+- an `<input>` element to bind to
+
 ```jsx
-const controller = Snapify.autocomplete({selector: "#searchInput", globals: { siteId: 'scmq7n' } });
-<Autocomplete {...args} store={controller?.store} input={controller?.config.selector}/>
+<Autocomplete store={controller.store} input={'#searchInput'} />
+```
+
+### store
+The required `store` prop specifies a reference to the store.
+
+```jsx
+<Autocomplete store={controller.store} input={'#searchInput'} />
+```
+
+### hideFacets
+The `hideFacets` prop specifies if the facets within autocomplete should be rendered.
+
+```jsx
+<Autocomplete store={controller.store} input={'#searchInput'} hideFacets={true} />
+```
+
+### hideTerms
+The `hideTerms` prop specifies if the terms within autocomplete should be rendered.
+
+```jsx
+<Autocomplete store={controller.store} input={'#searchInput'} hideTerms={true} />
+```
+
+### responsive
+The `responsive` prop specifiesan object that is passed to the `<Results />` sub-component.
+
+See `<Results />` component documentation for further details.
+
+```jsx
+<Autocomplete store={controller.store} input={'#searchInput'} responsive={responsive} />
 ```

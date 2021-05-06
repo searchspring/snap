@@ -1,20 +1,15 @@
-## Overlay
+# Price
 
-Renders an span with a formatted number. Essentially a pricing shortcut for the FormattedNumber Component.
-
-## Additional Info
-
-Uses the Currency function from the Snap ToolBox (https://github.com/searchspring/snap-toolbox/blob/main/filters/src/currency.ts) 
+Utilizes `currency` from [@searchspring/snap-toolbox](https://searchspring.github.io/snap/#/toolbox) to render a `<span>` containing a formatted number.
 
 ## Usage
 
-Default
-```jsx
-    <Price value={1099.99} />
-```
+The `Price` component utilizes all props from the `FormattedNumber` component with the following additional prop:
 
-Custom Pricing
-```jsx
-    <Price value={1099.99} symbol=' €' lineThrough={true} thousandsSeparator='.' decimalSeparator=',' symbolAfter={true}/>
-```
+### lineThrough
+The `lineThrough` prop will style the formatted number with a line-through.
 
+```jsx
+<Price value={1099.99} symbol=' €' lineThrough={true} thousandsSeparator='.' decimalSeparator=',' symbolAfter={true} />
+```
+Formatted output from above properties: ~~`1.099,99 €`~~

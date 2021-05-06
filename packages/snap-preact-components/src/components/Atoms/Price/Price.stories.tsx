@@ -3,7 +3,6 @@ import { h } from 'preact';
 import { Price } from './Price';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Price/readme.md';
 
 export default {

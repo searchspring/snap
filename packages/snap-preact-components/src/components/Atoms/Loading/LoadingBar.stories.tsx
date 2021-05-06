@@ -4,7 +4,7 @@ import { LoadingBar } from './LoadingBar';
 import { defaultTheme } from '../../../providers/theme';
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-// @ts-ignore
+
 import Readme from '../Loading/readme.md';
 
 export default {

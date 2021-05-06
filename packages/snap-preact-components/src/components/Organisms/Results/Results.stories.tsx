@@ -7,7 +7,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { LayoutType } from '../../../types';
 
-// @ts-ignore
 import Readme from '../Results/readme.md';
 
 export default {
@@ -58,6 +57,17 @@ export default {
 			control: {
 				type: 'select',
 				options: ['grid', 'list'],
+			},
+		},
+		responsive: {
+			description: 'Responsive options object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: {
+				type: 'object',
 			},
 		},
 		...componentArgs,

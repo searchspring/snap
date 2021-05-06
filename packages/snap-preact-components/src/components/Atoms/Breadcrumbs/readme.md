@@ -1,29 +1,34 @@
-## Breadcrumbs
+# Breadcrumbs
 
 Renders a list of breadcrumbs. 
 
 ## Usage
 
 ### data
-An array of crumbs. Each crumb contains a `label` and an optional `url`
+The `data` prop specifies an array of breadcrumb objects. 
+
+#### breadcrumb object 
+
+`label` - required, the breadcrumb label
+ 
+`url` - optional, the URL of this breadcrumb
 
 ```typescript
 const breadcrumbs = [
-    {url: '/',label: 'Home'},
-    {url: '/',label: 'Collections'},
-    {url: '/',label: 'Appliances'},
-    {label: 'Fridge'}
+	{ url: '/', label: 'Home' },
+	{ url: '/', label: 'Collections' },
+	{ url: '/', label: 'Appliances' },
+	{ label: 'Fridge' }
 ]
 ```
 
 ```jsx
-<Breadcrumbs separator='/' data={breadcrumbs} />
+<Breadcrumbs separator={'/'} data={breadcrumbs} />
 ```
 
 ### separator
-Breadcrumbs can be separated by a custom separator using the `separator` prop. The default separator is `'/'`. This can be a string or a JSX element.
+The `separator` prop spcifies a custom delimiter between each breadcrumb. The default separator is `'/'`. This can be a string or a JSX element.
 
 ```jsx
-<Breadcrumbs separator='>' data={breadcrumbs} />
+<Breadcrumbs separator={'>'} data={breadcrumbs} />
 ```
-

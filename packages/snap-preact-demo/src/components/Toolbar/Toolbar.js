@@ -15,7 +15,7 @@ export class Toolbar extends Component {
 
 		return (
 			<div class="ss-toolbar ss-toolbar-top">
-				<Slideout displayAtWidth={991}>
+				<Slideout displayAt={'(max-width: 991px)'}>
 					<SidebarContents />
 				</Slideout>
 

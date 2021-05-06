@@ -7,7 +7,6 @@ import { Snapify } from '../../../utilities/snapify';
 import { FacetDisplay } from '../../../types';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../FacetHierarchyOptions/readme.md';
 
 export default {

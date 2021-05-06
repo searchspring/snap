@@ -8,7 +8,6 @@ import { FacetDisplay } from '../../../types';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
-// @ts-ignore
 import Readme from '../Facet/readme.md';
 
 export default {
@@ -42,7 +41,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		optionsLimitCount: {
+		optionsLimit: {
 			defaultValue: 12,
 			description: "Number of facet options to display before a 'show more' button appears",
 			table: {

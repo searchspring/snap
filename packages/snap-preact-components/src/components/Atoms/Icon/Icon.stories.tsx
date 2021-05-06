@@ -6,7 +6,7 @@ import { iconPaths } from './paths';
 
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-// @ts-ignore
+
 import Readme from '../Icon/readme.md';
 
 export default {

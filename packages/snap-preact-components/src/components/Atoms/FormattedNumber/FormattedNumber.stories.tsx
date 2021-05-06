@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { FormattedNumber } from './FormattedNumber';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-// @ts-ignore
+
 import Readme from '../FormattedNumber/readme.md';
 
 export default {

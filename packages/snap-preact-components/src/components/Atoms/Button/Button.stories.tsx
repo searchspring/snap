@@ -4,7 +4,6 @@ import { Button } from './Button';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { componentArgs } from '../../../utilities';
 
-// @ts-ignore
 import Readme from '../Button/readme.md';
 
 export default {

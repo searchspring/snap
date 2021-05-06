@@ -125,7 +125,7 @@ export const Result = observer(
 			...properties.theme?.components?.result,
 		};
 
-		const { result, hideBadge, hideTitle, hidePricing, detailsSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
+		const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
 
 		const core = result?.mappings?.core;
 
@@ -189,7 +189,7 @@ export const Result = observer(
 							</a>
 						</div>
 						<div className={'ss-result__details-wrapper'}>
-							{!detailsSlot ? (
+							{!detailSlot ? (
 								<>
 									{!hideTitle && (
 										<div className={'ss-result__details-wrapper-name'}>
@@ -217,7 +217,7 @@ export const Result = observer(
 									)}
 								</>
 							) : (
-								<>{detailsSlot}</>
+								<>{detailSlot}</>
 							)}
 
 							{buttonSlot && <div className={'ss-result__button-wrapper'}>{buttonSlot}</div>}
@@ -240,7 +240,7 @@ export interface ResultProps extends ComponentProps {
 	hideBadge?: boolean;
 	hideTitle?: boolean;
 	hidePricing?: boolean;
-	detailsSlot?: string | JSX.Element;
+	detailSlot?: string | JSX.Element;
 	buttonSlot?: string | JSX.Element;
 	fallback?: string;
 	width?: string;

@@ -6,7 +6,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Autocomplete/readme.md';
 
 export default {
@@ -37,12 +36,12 @@ export default {
 		),
 	],
 	argTypes: {
-		results: {
-			description: 'Results store reference',
+		store: {
+			description: 'Autocomplete store reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'Results store object',
+					summary: 'Autocomplete store object',
 				},
 			},
 			control: { type: 'none' },
@@ -69,6 +68,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		responsive: {
+			description: 'Responsive options object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: {
+				type: 'object',
+			},
+		},
 		...componentArgs,
 	},
 };
@@ -82,7 +92,7 @@ const propTheme = {
 	},
 };
 
-const snapInstance = Snapify.autocomplete({ selector: '#searchInput', globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.autocomplete({ selector: '#searchInput', globals: { siteId: '8uyt2m' } });
 
 const ObservableAutoComplete = observer(({ args, controller }) => {
 	return <Autocomplete {...args} store={controller?.store} input={controller?.config.selector} theme={propTheme} style={{ maxWidth: '900px' }} />;

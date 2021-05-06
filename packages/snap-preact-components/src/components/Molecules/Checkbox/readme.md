@@ -1,25 +1,69 @@
-## Checkbox
+# Checkbox
 
-Renders an span and an `<Icon />` to create a customizable checkbox. checked, color, disabled, onClick, size and Icon (defaults to 'check-thin') props available. 
+Renders a native or custom checkbox.
 
-## Additional Info
-
-Using the native prop, you can bypass the span and Icon component and just render a native HTML input element with the type checkbox. 
-
-The Checked state can be handled both internally or externally, by using either the checked prop, or the startChecked prop. 
- 
-## Components Used
+## Sub-components
 - Icon
 
 ## Usage
 
-Default
+### native
+The `native` prop will render an `<input type='checkbox'>` element.
+
 ```jsx
-    <Checkbox checked={true} disabled={true} />
+<Checkbox native />
 ```
 
-Native
+### checked
+The `checked` prop allows for external state management. Otherwise if not provided, the component will use its own internal state.
+
 ```jsx
-    <Checkbox native={true} />
+<Checkbox checked={true} />
 ```
 
+### startChecked
+The `startChecked` prop sets the checkbox to be checked on the initial render. Must use internal state by not using the `checked` prop.
+
+```jsx
+<Checkbox startChecked={true} />
+```
+
+### disabled
+The `disabled` prop disables the checkbox from being toggled or invoking the `onClick` callback.
+
+```jsx
+<Checkbox disabled />
+```
+
+### size
+The `size` prop will set the custom checkbox size.
+
+```jsx
+<Checkbox size={'16px'} />
+```
+
+### color
+The `color` prop sets the checkbox border color and the icon color if the `iconColor` prop is not set.
+
+```jsx
+<Checkbox color={'#ffff00'} />
+```
+
+### iconColor
+The `iconColor` prop sets the icon color and overwrites the `color` prop. It will not affect checkbox border color.
+
+```jsx
+<Checkbox iconColor={'#ffff00'} />
+```
+### icon
+The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery). This only applies if using a custom checkbox `native={false}`.
+
+
+### Events
+
+#### onClick
+The `onClick` prop allows for a custom callback function for when the checkbox is clicked.
+
+```jsx
+<Checkbox onClick={(e)=>{console.log(e)}} />
+```

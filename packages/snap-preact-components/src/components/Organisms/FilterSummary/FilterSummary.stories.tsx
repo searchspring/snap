@@ -6,7 +6,6 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../FilterSummary/readme.md';
 
 // TODO: cant seem to find a way to rerender the story component easily

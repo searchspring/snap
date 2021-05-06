@@ -5,7 +5,6 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { componentArgs } from '../../../utilities';
 import { Badge } from './Badge';
 
-// @ts-ignore
 import Readme from '../Badge/readme.md';
 
 export default {

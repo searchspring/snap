@@ -4,7 +4,6 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-// @ts-ignore
 import Readme from '../Breadcrumbs/readme.md';
 
 export default {
