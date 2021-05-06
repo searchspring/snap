@@ -70,7 +70,7 @@
 					return WithTooltip_WithToolTipState;
 				});
 			__webpack_require__(47), __webpack_require__(168), __webpack_require__(28), __webpack_require__(48);
-			var compat_module = __webpack_require__(0),
+			var compat_module = __webpack_require__(1),
 				esm = __webpack_require__(4),
 				global_window = __webpack_require__(6),
 				objectWithoutPropertiesLoose = __webpack_require__(438),

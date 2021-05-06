@@ -361,7 +361,7 @@
 				return TooltipNote;
 			});
 			__webpack_require__(45), __webpack_require__(23), __webpack_require__(150);
-			var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+			var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
 			function _objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
 				var key,
@@ -428,7 +428,7 @@
 				__webpack_require__(63),
 				__webpack_require__(65),
 				__webpack_require__(204);
-			var compat_module = __webpack_require__(0);
+			var compat_module = __webpack_require__(1);
 			function index_module_l() {
 				return (index_module_l =
 					Object.assign ||

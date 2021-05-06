@@ -2767,7 +2767,7 @@
 						hideIcon = props.hideIcon,
 						iconCollapse = props.iconCollapse,
 						iconExpand = props.iconExpand,
-						optionsLimitCount = props.optionsLimitCount,
+						optionsLimit = props.optionsLimit,
 						iconColor = props.iconColor,
 						color = props.color,
 						previewOnFocus = props.previewOnFocus,
@@ -2863,7 +2863,7 @@
 							),
 						};
 					return (
-						(null === (_1 = facet) || void 0 === _1 ? void 0 : _1.overflow) && optionsLimitCount && facet.overflow.setLimit(optionsLimitCount),
+						(null === (_1 = facet) || void 0 === _1 ? void 0 : _1.overflow) && optionsLimit && facet.overflow.setLimit(optionsLimit),
 						Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'div',
 							{
@@ -3495,8 +3495,8 @@
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return MDXContent;
 			});
-			__webpack_require__(0);
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+			__webpack_require__(1);
+			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -3513,47 +3513,163 @@
 				return Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'banner' }, 'Banner'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h1', { id: 'banner' }, 'Banner'),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'p',
 						null,
-						'Renders a merchandising banner. Banner Types include header,footer,left & banner. '
+						'Renders a merchandising banner. Banner Types include ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'header'),
+						', ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'footer'),
+						', ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'banner'),
+						'. '
 					),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'additional-info' }, 'Additional Info'),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'p',
 						null,
-						'Inline banners actually use an entirely seperate component from the rest of the banners, and can be passed layout and width props, just like the results components in order to maintain the same styling. '
+						'This ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'Banner'),
+						' component does not support inline banners. See ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'InlineBanner'),
+						' component below.'
 					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Header'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'content' }, 'content'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The required ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' prop specifies an object of banners returned from the Searchspring API.'
+					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Banner content={controller?.store?.merchandising?.content} type={'header'}/>\n"
+							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
 						)
 					),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Footer'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'type' }, 'type'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The required ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'type'),
+						' prop specifies the banner type to render from the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' object.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'Banner Types include ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'header'),
+						', ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'footer'),
+						', ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'banner'),
+						'. '
+					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Banner content={controller?.store?.merchandising?.content} type={'footer'}/>\n"
+							"<Banner content={controller?.store?.merchandising?.content} type={'header'} />\n"
 						)
 					),
-					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('p', null, 'Inline '),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'pre',
 						null,
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'    <InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout="grid"/>\n'
+							"<Banner content={controller?.store?.merchandising?.content} type={'footer'} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'left'} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Banner content={controller?.store?.merchandising?.content} type={'banner'} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h1', { id: 'inline-banner' }, 'Inline Banner'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h2', { id: 'usage-1' }, 'Usage'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'banner-1' }, 'banner'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'banner'),
+						' prop specifies a reference to an inline banner object from the ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'content'),
+						' object.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} />\n'
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'width' }, 'width'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'width'),
+						' prop specifies the width of the inline banner.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} width={'300px'} />\n"
+						)
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('h3', { id: 'layout' }, 'layout'),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'p',
+						null,
+						'The ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'layout'),
+						' prop specifies if this banner will be rendered in a ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'grid'),
+						' or ',
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'list'),
+						' layout.'
+					),
+					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+						'pre',
+						null,
+						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />\n"
 						)
 					)
 				);
@@ -4419,7 +4535,7 @@
 						hideBadge = props.hideBadge,
 						hideTitle = props.hideTitle,
 						hidePricing = props.hidePricing,
-						detailsSlot = props.detailsSlot,
+						detailSlot = props.detailSlot,
 						buttonSlot = props.buttonSlot,
 						fallback = props.fallback,
 						disableStyles = props.disableStyles,
@@ -4499,8 +4615,8 @@
 								Object(_emotion_react__WEBPACK_IMPORTED_MODULE_5__.b)(
 									'div',
 									{ className: 'ss-result__details-wrapper' },
-									detailsSlot
-										? Object(_emotion_react__WEBPACK_IMPORTED_MODULE_5__.b)(preact__WEBPACK_IMPORTED_MODULE_3__.Fragment, null, detailsSlot)
+									detailSlot
+										? Object(_emotion_react__WEBPACK_IMPORTED_MODULE_5__.b)(preact__WEBPACK_IMPORTED_MODULE_3__.Fragment, null, detailSlot)
 										: Object(_emotion_react__WEBPACK_IMPORTED_MODULE_5__.b)(
 												preact__WEBPACK_IMPORTED_MODULE_3__.Fragment,
 												null,
@@ -4978,15 +5094,15 @@
 				CSS_track = function track(_a) {
 					var style = _a.style;
 					return Object(emotion_react_browser_esm.a)(
-						__assign({ display: 'inline-block', height: '8px', width: 'calc(100% - 25px)', margin: '20px 5% 20px', top: '10px' }, style)
+						__assign({ display: 'inline-block', height: '8px', width: 'calc(100% - 25px)', margin: '20px 5% 25px', top: '10px' }, style)
 					);
 				},
 				CSS_tickLabel = function tickLabel(_a) {
-					var textColor = _a.textColor;
+					var tickTextColor = _a.tickTextColor;
 					return Object(emotion_react_browser_esm.a)({
 						position: 'absolute',
 						fontSize: '0.6rem',
-						color: textColor,
+						color: tickTextColor,
 						top: '100%',
 						transform: 'translate(-50%, 1.2rem)',
 						whiteSpace: 'nowrap',
@@ -5004,27 +5120,28 @@
 					var _a,
 						_b,
 						_c,
+						_d,
 						globalTheme = Object(emotion_element_4fbd89c5_browser_esm.f)(),
 						props = __assign(
 							__assign(
 								__assign(
 									{
 										disableStyles: !1,
-										textColor: '#515151',
+										tickTextColor: '#515151',
 										showTicks: !1,
 										trackColor: '#F8F8F8',
 										handleTextColor: '#515151',
 										handleColor: '#4C37B3',
 										railColor: '#4C37B3',
-										tickSize: 20,
+										tickSize: 10 * (null === (_a = properties.facet) || void 0 === _a ? void 0 : _a.step) || 20,
 									},
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.slider
+									null === (_b = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _b ? void 0 : _b.slider
 								),
 								properties
 							),
-							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.slider
+							null === (_d = null === (_c = properties.theme) || void 0 === _c ? void 0 : _c.components) || void 0 === _d ? void 0 : _d.slider
 						),
-						textColor = props.textColor,
+						tickTextColor = props.tickTextColor,
 						trackColor = props.trackColor,
 						handleTextColor = props.handleTextColor,
 						railColor = props.railColor,
@@ -5038,15 +5155,15 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
-						_d = Object(hooks_module.useState)([facet.active.low, facet.active.high]),
-						values = _d[0],
-						setValues = _d[1],
 						_e = Object(hooks_module.useState)([facet.active.low, facet.active.high]),
-						active = _e[0],
-						setActive = _e[1];
+						values = _e[0],
+						setValues = _e[1],
+						_f = Object(hooks_module.useState)([facet.active.low, facet.active.high]),
+						active = _f[0],
+						setActive = _f[1];
 					(values[0] == facet.active.low && values[1] == facet.active.high) ||
 						(setActive([facet.active.low, facet.active.high]), setValues([facet.active.low, facet.active.high]));
-					var _f = Object(react_ranger.a)({
+					var _g = Object(react_ranger.a)({
 							values: active,
 							onChange: function onChange(val) {
 								setActive(val),
@@ -5065,10 +5182,10 @@
 							stepSize: facet.step,
 							tickSize: tickSize,
 						}),
-						getTrackProps = _f.getTrackProps,
-						ticks = _f.ticks,
-						segments = _f.segments,
-						handles = _f.handles;
+						getTrackProps = _g.getTrackProps,
+						ticks = _g.ticks,
+						segments = _g.segments,
+						handles = _g.handles;
 					return (
 						facet.range &&
 						facet.active &&
@@ -5087,7 +5204,7 @@
 										__assign({ className: 'ss-sliderTick' }, getTickProps(), { css: !disableStyles && CSS_tick() }),
 										Object(emotion_react_browser_esm.b)(
 											'div',
-											{ className: 'ss-sliderTickLabel', css: !disableStyles && CSS_tickLabel({ textColor: textColor }) },
+											{ className: 'ss-sliderTickLabel', css: !disableStyles && CSS_tickLabel({ tickTextColor: tickTextColor }) },
 											value
 										)
 									);
@@ -10519,8 +10636,8 @@
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
 					return __page;
 				});
-			__webpack_require__(0);
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
+			__webpack_require__(1);
+			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
@@ -10644,8 +10761,8 @@
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
 					return __page;
 				});
-			__webpack_require__(0);
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
+			__webpack_require__(1);
+			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
@@ -10831,7 +10948,7 @@
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'style'),
 						' prop is available on all components and allows for styling of components at the global (via the ',
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'theme'),
-						' prop) or at the component level (via the ',
+						' prop) or the component level (via the ',
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, 'style'),
 						' prop)'
 					),
@@ -11025,8 +11142,8 @@
 				__webpack_require__.d(__webpack_exports__, '__page', function () {
 					return __page;
 				});
-			__webpack_require__(0);
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1),
+			__webpack_require__(1);
+			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(163),
 				_assets_searchspring_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(
@@ -11078,7 +11195,7 @@
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 						'p',
 						null,
-						'The store is also a dependancy of the all Snap controllers ',
+						'The store is also a dependency of the all Snap controllers ',
 						Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller')
 					),
 					Object(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.b)(
@@ -11881,7 +11998,7 @@
 			}
 			var componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -11898,24 +12015,30 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'slideout' }, 'Slideout'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Designed for mobile menu slide outs, but could be used for anything. Pass your own buttonContent and children. Optional props for color & transition speed for the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Overlay>'),
-						' component, as well as displayAt and width to make this component flexible for most situations. '
-					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)(
-						'p',
-						null,
-						'When using the custom buttonContent prop, render the slideOut component where you want the button to render. The slide out menu position is fixed, so the location of the component is only for the render location of the open button. '
-					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h1', { id: 'slideout' }, 'Slideout'),
+					Object(esm.b)('p', null, 'Renders a slideout with a background overlay. Typically used for a mobile menu slideout. '),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Overlay')),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'children' }, 'children'),
+					Object(esm.b)('p', null, 'The children provided to the component will be displayed within the slideout. '),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Slideout active={true}>\n    <span>slideout content (children)</span>\n</Slideout>\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'active' }, 'active'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'active'),
+						' prop specifies the state of when the slideout is rendered.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
@@ -11925,14 +12048,84 @@
 							'<Slideout active={true}>\n    <div>Hello World</div>\n</Slideout>\n'
 						)
 					),
-					Object(esm.b)('p', null, 'Custom open button'),
+					Object(esm.b)('h3', { id: 'buttoncontent' }, 'buttonContent'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'buttonContent'),
+						' prop accepts a string or JSX element to render a clickable button that toggles the slideout visibility. '
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						'When using the custom ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'buttonContent'),
+						" prop, render the component where you want the button to render. The slideout menu's position is fixed, therefore the location of the component is only for the render location of the button. "
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slideout active={true} buttonContent={'click me'}>\n    <div>Hello World</div>\n</Slideout>\n"
+							"<Slideout active={true} buttonContent={'Show Filters'}>\n    <div>slideout content</div>\n</Slideout>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'width' }, 'width'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'width'), ' prop is the width of the slideout.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slideout active={true} width={'300px'}>\n    <div>slideout content</div>\n</Slideout>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'displayat' }, 'displayAt'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'displayAt'),
+						' prop specifies a CSS media query for when the component will render. By default, the component will always render. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slideout active={true} displayAt={'(max-width: 600px)'}>\n    <div>slideout content</div>\n</Slideout>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'transitionspeed' }, 'transitionSpeed'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'transitionSpeed'),
+						' prop changes the CSS transition speed animation for the slideout and overlay.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slideout active={true} transitionSpeed={'0.5s'}>\n    <div>slideout content</div>\n</Slideout>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'overlaycolor' }, 'overlayColor'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'overlayColor'), ' prop sets the overlay color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slideout active={true} overlayColor={'rgba(0,0,0,0.7)'}>\n    <div>slideout content</div>\n</Slideout>\n"
 						)
 					)
 				);
@@ -12099,7 +12292,7 @@
 				}),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -12116,46 +12309,48 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'breadcrumbs' }, 'Breadcrumbs'),
+					Object(esm.b)('h1', { id: 'breadcrumbs' }, 'Breadcrumbs'),
 					Object(esm.b)('p', null, 'Renders a list of breadcrumbs. '),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
 					Object(esm.b)('h3', { id: 'data' }, 'data'),
 					Object(esm.b)(
 						'p',
 						null,
-						'An array of crumbs. Each crumb contains a ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'),
-						' and an optional ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'url')
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'data'),
+						' prop specifies an array of breadcrumb objects. '
 					),
+					Object(esm.b)('h4', { id: 'breadcrumb-object' }, 'breadcrumb object'),
+					Object(esm.b)('p', null, Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'), ' - required, the breadcrumb label'),
+					Object(esm.b)('p', null, Object(esm.b)('inlineCode', { parentName: 'p' }, 'url'), ' - optional, the URL of this breadcrumb'),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							"const breadcrumbs = [\n    {url: '/',label: 'Home'},\n    {url: '/',label: 'Collections'},\n    {url: '/',label: 'Appliances'},\n    {label: 'Fridge'}\n]\n"
+							"const breadcrumbs = [\n    { url: '/', label: 'Home' },\n    { url: '/', label: 'Collections' },\n    { url: '/', label: 'Appliances' },\n    { label: 'Fridge' }\n]\n"
 						)
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator='/' data={breadcrumbs} />\n")
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator={'/'} data={breadcrumbs} />\n")
 					),
 					Object(esm.b)('h3', { id: 'separator' }, 'separator'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Breadcrumbs can be separated by a custom separator using the ',
+						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
-						' prop. The default separator is ',
+						' prop spcifies a custom delimiter between each breadcrumb. The default separator is ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, "'/'"),
 						'. This can be a string or a JSX element.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator='>' data={breadcrumbs} />\n")
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Breadcrumbs separator={'>'} data={breadcrumbs} />\n")
 					)
 				);
 			}
@@ -12280,7 +12475,7 @@
 				);
 			}
 			var blocks = __webpack_require__(9),
-				dist_esm = (__webpack_require__(0), __webpack_require__(1));
+				dist_esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -12297,45 +12492,170 @@
 				return Object(dist_esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(dist_esm.b)('h2', { id: 'formatted-number' }, 'Formatted Number'),
+					Object(dist_esm.b)('h1', { id: 'formatted-number' }, 'Formatted Number'),
 					Object(dist_esm.b)(
 						'p',
 						null,
-						'Renders a span that calls the formatNumber function in the Snap Toolbox. Has tons of props to allow you to format the number for all scenarios. price, strike price, Temperature, length, weight. '
-					),
-					Object(dist_esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(dist_esm.b)(
-						'p',
-						null,
-						'Uses the formatNumber function in the Snap Toolbox (',
+						'Utilizes ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'formatNumber'),
+						' from ',
 						Object(dist_esm.b)(
 							'a',
-							{
-								parentName: 'p',
-								href: 'https://github.com/searchspring/snap-toolbox/blob/main/filters/src/formatNumber.ts',
-								target: '_blank',
-								rel: 'nofollow noopener noreferrer',
-							},
-							'https://github.com/searchspring/snap-toolbox/blob/main/filters/src/formatNumber.ts'
+							{ parentName: 'p', href: 'https://searchspring.github.io/snap/#/toolbox', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'@searchspring/snap-toolbox'
 						),
-						')'
+						' to render a ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '<span>'),
+						' containing a formatted number.'
 					),
 					Object(dist_esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(dist_esm.b)('p', null, ' Default'),
+					Object(dist_esm.b)('h3', { id: 'value' }, 'value'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'value'),
+						' prop specifies the number to be formatted. '
+					),
 					Object(dist_esm.b)(
 						'pre',
 						null,
-						Object(dist_esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FormattedNumber value={1099.99} />\n')
+						Object(dist_esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FormattedNumber value={99.99} />\n')
 					),
-					Object(dist_esm.b)('p', null, ' Using custom symbol and setting decimal places'),
+					Object(dist_esm.b)('p', null, 'Formatted output from above properties: ', Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '99.990')),
+					Object(dist_esm.b)('h3', { id: 'symbol' }, 'symbol'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'symbol'),
+						' prop specifies an optional symbol to be included. Typically used when adding a unit of measure to a number.'
+					),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<FormattedNumber value={99} symbol={' °C'} /> \n")
+					),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'Formatted output from above properties: ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '99.000 °C')
+					),
+					Object(dist_esm.b)('h3', { id: 'decimalplaces' }, 'decimalPlaces'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'decimalPlaces'),
+						' prop specifies how many decimal places to format.'
+					),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FormattedNumber value={99} decimalPlaces={2} /> \n')
+					),
+					Object(dist_esm.b)('p', null, 'Formatted output from above properties: ', Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '99.00')),
+					Object(dist_esm.b)('h3', { id: 'paddecimalplaces' }, 'padDecimalPlaces'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'padDecimalPlaces'),
+						' prop pads excess decimal places with zeros.'
+					),
 					Object(dist_esm.b)(
 						'pre',
 						null,
 						Object(dist_esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<FormattedNumber value={100} symbol={' °C'} decimalPlaces={2} />\n"
+							'<FormattedNumber value={99.99} decimalPlaces={4} padDecimalPlaces={true} /> \n'
 						)
+					),
+					Object(dist_esm.b)('p', null, 'Formatted output from above properties: ', Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '99.9900')),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FormattedNumber value={99.99} decimalPlaces={4} padDecimalPlaces={false} /> \n'
+						)
+					),
+					Object(dist_esm.b)('p', null, 'Formatted output from above properties: ', Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '99.99')),
+					Object(dist_esm.b)('h3', { id: 'thousandsseparator' }, 'thousandsSeparator'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'thousandsSeparator'),
+						' prop specifies the thousands separator character.'
+					),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FormattedNumber value={10999.99} thousandsSeparator={','} /> \n"
+						)
+					),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'Formatted output from above properties: ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '10,999.990')
+					),
+					Object(dist_esm.b)('h3', { id: 'decimalseparator' }, 'decimalSeparator'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'decimalSeparator'),
+						' prop specifies the decimal separator character.'
+					),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FormattedNumber value={10999.99} decimalSeparator={','} decimalPlaces={2} /> \n"
+						)
+					),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'Formatted output from above properties: ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '10999,99')
+					),
+					Object(dist_esm.b)('h3', { id: 'symbolafter' }, 'symbolAfter'),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'symbolAfter'),
+						' prop specifies if the provided ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'symbol'),
+						' prop should be placed after the formatted ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, 'value'),
+						'.'
+					),
+					Object(dist_esm.b)(
+						'pre',
+						null,
+						Object(dist_esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FormattedNumber value={999.999} symbol={'km'} symbolAfter={true} /> \n"
+						)
+					),
+					Object(dist_esm.b)(
+						'p',
+						null,
+						'Formatted output from above properties: ',
+						Object(dist_esm.b)('inlineCode', { parentName: 'p' }, '999.999km')
 					)
 				);
 			}
@@ -12544,7 +12864,7 @@
 			}
 			var componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -12561,10 +12881,57 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'loading-bar' }, 'Loading Bar'),
-					Object(esm.b)('p', null, 'Renders a Loading Bar, with built in styling & active props'),
+					Object(esm.b)('h1', { id: 'loading-bar' }, 'Loading Bar'),
+					Object(esm.b)('p', null, 'Renders a Loading Bar.'),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<LoadingBar active={true} />\n'))
+					Object(esm.b)('h3', { id: 'active' }, 'active'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'active'),
+						' prop specifies when to render the component.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<LoadingBar active={true} />\n')),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop specifies the color of the loading bar.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<LoadingBar active={true} color={'#ffff00'} />\n")
+					),
+					Object(esm.b)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'backgroundColor'),
+						' prop specifies the background color of the loading bar.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<LoadingBar active={true} backgroundColor={'#eeeeee'} />\n")
+					),
+					Object(esm.b)('h3', { id: 'height' }, 'height'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'height'),
+						' prop specifies the height of the loading bar.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<LoadingBar active={true} height={'10px'} />\n")
+					)
 				);
 			}
 			MDXContent.isMDXComponent = !0;
@@ -12826,7 +13193,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -12843,22 +13210,212 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'pagination' }, 'Pagination'),
+					Object(esm.b)('h1', { id: 'pagination' }, 'Pagination'),
+					Object(esm.b)('p', null, 'Renders pagination page links for the given search response. '),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
+					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon')),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'pagination-1' }, 'pagination'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a set of page links for your search pagination based on what page you are on in the search. Automatically determines what other pages to show and whether to show prev/next buttons. Tons of customization props built in. '
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pagination'),
+						' prop specifies a reference to the pagination store object.'
 					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon')),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Pagination pagination={controller.store.pagination} />\n')
+					),
+					Object(esm.b)('h3', { id: 'pages' }, 'pages'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pages'),
+						' prop specifies the number of pages to retrieve. This value is passed to the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'store.pagination.getPages()'),
+						' method.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'    <Pagination {...args} pagination={controller?.store?.pagination} />\n'
+							'<Pagination pagination={controller.store.pagination} pages={5} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'pagesleft' }, 'pagesLeft'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pagesLeft'),
+						' prop specifies the number of pages to retrieve before the current page. This value is passed to the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'store.pagination.getPages()'),
+						' method along with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pagesRight'),
+						'.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} pagesLeft={2} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'pagesright' }, 'pagesRight'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pagesLeft'),
+						' prop specifies the number of pages to retrieve after the current page. This value is passed to the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'store.pagination.getPages()'),
+						' method along with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'pagesLeft'),
+						'.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} pagesRight={2} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidefirst' }, 'hideFirst'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideFirst'), ' prop disables the first page.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} hideFirst={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidelast' }, 'hideLast'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideLast'), ' prop disables the last page.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} hideLast={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideellipsis' }, 'hideEllipsis'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideEllipsis'),
+						' prop disables the hideEllipsis after the first page, or the last page when applicable. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} hideEllipsis={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidenext' }, 'hideNext'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideNext'), ' prop disables the next page.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} hideNext={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideprev' }, 'hidePrev'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'hidePrev'), ' prop disables the previous page.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Pagination pagination={controller.store.pagination} hidePrev={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'nextbutton' }, 'nextButton'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'nextButton'),
+						' prop specifies the next page button content. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Pagination pagination={controller.store.pagination} nextButton={'Next'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'prevbutton' }, 'prevButton'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'prevButton'),
+						' prop specifies the previous page button content. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Pagination pagination={controller.store.pagination} prevButton={'Prev'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'firstbutton' }, 'firstButton'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'firstButton'),
+						' prop specifies the first page button content. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Pagination pagination={controller.store.pagination} firstButton={'First'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'lastbutton' }, 'lastButton'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'lastButton'),
+						' prop specifies the last page button content. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Pagination pagination={controller.store.pagination} lastButton={'Prev'} />\n"
 						)
 					)
 				);
@@ -13429,7 +13986,7 @@
 				snapify = __webpack_require__(43),
 				paths = __webpack_require__(147),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -13446,24 +14003,9 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'select' }, 'Select'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Uses the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdown/>'),
-						', ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon/>'),
-						' & ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Button/>'),
-						' components to render a cutomizable Select dropdown, or use the native prop to render a native HTML ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<select></select>'),
-						' element.\nTons of props available to allow any styling or functionality needed. '
-					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)('p', null, 'Internal or extenal open state management via startOpen Prop, '),
-					Object(esm.b)('p', null, 'Internal or external initial selection state management via selected prop'),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h1', { id: 'select' }, 'Select'),
+					Object(esm.b)('p', null, 'Renders a native or custom select dropdown.'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)(
 						'ul',
 						null,
@@ -13472,24 +14014,331 @@
 						Object(esm.b)('li', { parentName: 'ul' }, 'Icon')
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'options' }, 'options'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'options'),
+						' prop specifies an array of Option Objects to be rendered.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Select\n    label='Sort By'\n    options={controller?.store?.sorting?.options}\n    selected={controller?.store?.sorting?.current}\n    onSelect={(e, selectedOption) => {\n        selectedOption && selectedOption.url.go();\n    }}\n/>\n"
+							'<Select options={controller.store.sorting.options} native={true} />\n'
 						)
 					),
-					Object(esm.b)('p', null, 'Native'),
+					Object(esm.b)('h4', { id: 'option-object' }, 'Option Object'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-typescript' }, "{\n    label: 'Price',\n    value: 'asc'\n}\n")
+					),
+					Object(esm.b)('h3', { id: 'native' }, 'native'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
+						' prop will use a native html ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<select>'),
+						' element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Select options={controller.store.sorting.options} native />\n')
+					),
+					Object(esm.b)('h3', { id: 'disabled' }, 'disabled'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
+						' prop will disable the select from being toggled or invoking the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onSelect'),
+						' callback.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Select\n    label='Sort By'\n    native={true}\n    options={controller?.store?.sorting?.options}\n    selected={controller?.store?.sorting?.current}\n    onSelect={(e, selectedOption) => {\n        selectedOption && selectedOption.url.go();\n    }}\n/>\n"
+							'<Select options={controller.store.sorting.options} disabled />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'label' }, 'label'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'),
+						' prop specifies the label for this select. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} label={'Sort By'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'separator' }, 'separator'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' prop is rendered between the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'),
+						' prop and the select dropdown. This can be a string or JSX element.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'selected' }, 'selected'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'selected'),
+						' prop specifies the currently selected Option object. Specifying this prop relies on external state management.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} selected={controller.store.sorting.options[0]} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'startopen' }, 'startOpen'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'startOpen'),
+						' prop will render the dropdown in an open state on the initial render.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} startOpen={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'stayopenonselection' }, 'stayOpenOnSelection'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'stayOpenOnSelection'),
+						' prop will not close the dropdown upon making a selection.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} stayOpenOnSelection={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidelabelonselection' }, 'hideLabelOnSelection'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideLabelOnSelection'),
+						' prop will prevent the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'label'),
+						' and ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' from being rendered upon making a selection.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} label={'Sort By'} separator={': '} hideLabelOnSelection={true} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'clearselection' }, 'clearSelection'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'clearSelection'),
+						' prop accepts a string value to display as the option that will clear the current selection.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} clearSelection={'clear'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'disableclickoutside' }, 'disableClickOutside'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disableClickOutside'),
+						' prop by default is ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'false'),
+						'. Setting this to ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'true'),
+						' will not close the dropdown if a click event was registered outside the dropdown content.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} disableClickOutside={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop sets the dropdown border, text, button, and icon colors.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} color={'#222222'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'bordercolor' }, 'borderColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'borderColor'),
+						' prop overwrites the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop for the dropdown and button border color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} color={'#222222'} borderColor={'#cccccc'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'backgroundColor'),
+						' prop sets the background color of the dropdown and button.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} backgroundColor={'#ffffff'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'iconcolor' }, 'iconColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconColor'),
+						' prop sets the icon color and overwrites the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} iconColor={'#222222'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'iconclose' }, 'iconClose'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconClose'),
+						' prop is the name of the icon to render when the dropdown is in its open state.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} iconClose={'angle-up'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'iconopen' }, 'iconOpen'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconOpen'),
+						' prop is the name of the icon to render when the dropdown is in its closed state.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Select options={controller.store.sorting.options} iconOpen={'angle-down'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onselect' }, 'onSelect'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onSelect'),
+						' prop allows for a custom callback function for when a selection has been made.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Select options={controller.store.sorting.options} onSelect={(e)=>{console.log(e)}} />\n'
 						)
 					)
 				);
@@ -14171,7 +15020,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -14188,51 +15037,15 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'autocomplete' }, 'Autocomplete'),
+					Object(esm.b)('h1', { id: 'autocomplete' }, 'Autocomplete'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Using the Autocomplete Controller,and the Autocomplete Store, returned by the Snapify.autocomplete function, renders a popup instant search, that attaches to the focus event of the input passed into the selector prop. Renders Terms, Facets, Banners, & Results components. HideFacets, hideTerms, & responsive props available for customizing. '
+						'Renders an autocomplete popup that binds to an ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<input>'),
+						' element.'
 					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Most of the actual functionality is handled by the Controller and Store. Note that the Autocomplete does not use the Search Controller or Store, it actually has its own versions.\nBecause it uses a different Controller and Store, and needs the input Selector passed in, it uses a different Snapify function as well. Use Snapify.autocomplete instead of Snapify.search in order to get the Autocomplete Controller/Store. '
-					),
-					Object(esm.b)(
-						'p',
-						null,
-						'learn more...',
-						Object(esm.b)('br', { parentName: 'p' }),
-						'\n',
-						'Autocomplete Controller (',
-						Object(esm.b)(
-							'a',
-							{
-								parentName: 'p',
-								href: 'https://github.com/searchspring/snap-controller/blob/main/src/Autocomplete/AutocompleteController.ts',
-								target: '_blank',
-								rel: 'nofollow noopener noreferrer',
-							},
-							'https://github.com/searchspring/snap-controller/blob/main/src/Autocomplete/AutocompleteController.ts'
-						),
-						')',
-						Object(esm.b)('br', { parentName: 'p' }),
-						'\n',
-						'Autocomplete Store (',
-						Object(esm.b)(
-							'a',
-							{
-								parentName: 'p',
-								href: 'https://github.com/searchspring/snap-store-mobx/blob/main/src/Autocomplete/AutocompleteStore.ts',
-								target: '_blank',
-								rel: 'nofollow noopener noreferrer',
-							},
-							'https://github.com/searchspring/snap-store-mobx/blob/main/src/Autocomplete/AutocompleteStore.ts'
-						),
-						')'
-					),
+					Object(esm.b)('p', null, 'The autocomplete layout renders terms, facets, banners, and results.'),
 					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
 					Object(esm.b)(
 						'ul',
@@ -14242,13 +15055,112 @@
 						Object(esm.b)('li', { parentName: 'ul' }, 'Results')
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'input' }, 'input'),
+					Object(esm.b)('p', null, 'The required ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'input'), ' prop expects either:'),
+					Object(esm.b)(
+						'ul',
+						null,
+						Object(esm.b)(
+							'li',
+							{ parentName: 'ul' },
+							Object(esm.b)(
+								'p',
+								{ parentName: 'li' },
+								'a string CSS selector that targets ',
+								Object(esm.b)('inlineCode', { parentName: 'p' }, '<input>'),
+								' element(s) to bind to'
+							)
+						),
+						Object(esm.b)(
+							'li',
+							{ parentName: 'ul' },
+							Object(esm.b)('p', { parentName: 'li' }, 'an ', Object(esm.b)('inlineCode', { parentName: 'p' }, '<input>'), ' element to bind to')
+						)
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'const controller = Snapify.autocomplete({selector: "#searchInput", globals: { siteId: \'scmq7n\' } });\n<Autocomplete {...args} store={controller?.store} input={controller?.config.selector}/>\n'
+							"<Autocomplete store={controller.store} input={'#searchInput'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'store' }, 'store'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'store'),
+						' prop specifies a reference to the store.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete store={controller.store} input={'#searchInput'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidefacets' }, 'hideFacets'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideFacets'),
+						' prop specifies if the facets within autocomplete should be rendered.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete store={controller.store} input={'#searchInput'} hideFacets={true} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideterms' }, 'hideTerms'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideTerms'),
+						' prop specifies if the terms within autocomplete should be rendered.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete store={controller.store} input={'#searchInput'} hideTerms={true} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'responsive' }, 'responsive'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'responsive'),
+						' prop specifiesan object that is passed to the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Results />'),
+						' sub-component.'
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						'See ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Results />'),
+						' component documentation for further details.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete store={controller.store} input={'#searchInput'} responsive={responsive} />\n"
 						)
 					)
 				);
@@ -14399,10 +15311,10 @@
 						],
 						argTypes: Autocomplete_stories_assign(
 							{
-								results: {
-									description: 'Results store reference',
+								store: {
+									description: 'Autocomplete store reference',
 									type: { required: !0 },
-									table: { type: { summary: 'Results store object' } },
+									table: { type: { summary: 'Autocomplete store object' } },
 									control: { type: 'none' },
 								},
 								hideFacets: {
@@ -14417,12 +15329,13 @@
 									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 									control: { type: 'boolean' },
 								},
+								responsive: { description: 'Responsive options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 							},
 							componentArgs.a
 						),
 					}),
 					{ components: { facetpaletteoptions: { columns: 3, gapSize: '8px' } } }),
-				snapInstance = snapify.a.autocomplete({ selector: '#searchInput', globals: { siteId: 'scmq7n' } }),
+				snapInstance = snapify.a.autocomplete({ selector: '#searchInput', globals: { siteId: '8uyt2m' } }),
 				ObservableAutoComplete = Object(mobxreact_esm.a)(function (_a) {
 					var args = _a.args,
 						controller = _a.controller;
@@ -14536,7 +15449,7 @@
 				}),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -14553,11 +15466,19 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facets' }, 'Facets'),
-					Object(esm.b)('p', null, 'Renders a group of ', Object(esm.b)('inlineCode', { parentName: 'p' }, '<Facet />'), 's. '),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h1', { id: 'facets' }, 'Facets'),
+					Object(esm.b)('p', null, 'Renders all facets utilizing the ', Object(esm.b)('inlineCode', { parentName: 'p' }, '<Facet />'), ' component.'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Facet')),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'facets-1' }, 'facets'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facets'),
+						' prop specifies a reference to the facets store array. '
+					),
 					Object(esm.b)(
 						'pre',
 						null,
@@ -14884,7 +15805,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -14901,39 +15822,192 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'filter-summary' }, 'Filter Summary'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Renders a list of selected filter, A title, and a clear all button. Lots of props to make this very customizable. '
-					),
+					Object(esm.b)('h1', { id: 'filter-summary' }, 'Filter Summary'),
+					Object(esm.b)('p', null, "Renders all selected filters including a wrapper with a title and a 'clear all' button. "),
 					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
 					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Filter')),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'filters' }, 'filters'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'filters'),
+						' prop specifies a reference to the filters store array. '
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FilterSummary  filters={controller?.store?.filters} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FilterSummary filters={controller.store.filters} />\n')
 					),
-					Object(esm.b)('p', null, 'Custom title'),
+					Object(esm.b)('h3', { id: 'title' }, 'title'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'title'),
+						' prop specifies the title of the filter summary wrapper. The default is ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'Current Filters'"),
+						'.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<FilterSummary title='Selected Filters' filters={controller?.store?.filters} />\n"
+							"<FilterSummary filters={controller.store.filters} title={'Current Filters'} />\n"
 						)
 					),
-					Object(esm.b)('p', null, 'No facet label'),
+					Object(esm.b)('h3', { id: 'filtericon' }, 'filterIcon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'filterIcon'),
+						' prop is the name of the icon to render for each filter. '
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<FilterSummary hideFacetLabel={true} filters={controller?.store?.filters} />\n'
+							"<FilterSummary filters={controller.store.filters} filterIcon={'close-thin'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'clearallicon' }, 'clearAllIcon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'clearAllIcon'),
+						" prop is the name of the icon to render for the 'clear all' button. "
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FilterSummary filters={controller.store.filters} clearAllIcon={'close-thin'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'separator' }, 'separator'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' prop will specify the separator character between ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facetLabel'),
+						' and ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueLabel'),
+						' of the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Filter />'),
+						' sub-component.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FilterSummary filters={controller.store.filters} separator={': '} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidefacetlabel' }, 'hideFacetLabel'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideFacetLabel'),
+						' prop prevents the filter label (selected facet name) from displaying. Only the value selected will be displayed. Use of this prop will nullify the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FilterSummary filters={controller.store.filters} hideFacetLabel={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'clearalllabel' }, 'clearAllLabel'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'clearAllLabel'),
+						" prop is the 'clear all' button text. This is passed to the ",
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Filter />'),
+						' sub-component ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueLabel'),
+						' prop. The default value is ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'Clear All'"),
+						'.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FilterSummary filters={controller.store.filters} clearAllLabel={'Clear All'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideclearall' }, 'hideClearAll'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideClearAll'),
+						" prop prevents the 'clear all' button from rendering."
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FilterSummary filters={controller.store.filters} hideClearAll={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when any of the selected filters are clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FilterSummary filters={controller.store.filters} onClick={(e, filter) => {console.log(e, filter)}} />\n'
+						)
+					),
+					Object(esm.b)('h4', { id: 'onclearallclick' }, 'onClearAllClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClearAllClick'),
+						" prop allows for a custom callback function for when the 'clear all' button is clicked."
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FilterSummary filters={controller.store.filters} onClearAllClick={(e) => {console.log(e)}} />\n'
 						)
 					)
 				);
@@ -15311,7 +16385,7 @@
 				blocks = __webpack_require__(9),
 				componentArgs = __webpack_require__(494),
 				Badge = __webpack_require__(202),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -15328,52 +16402,59 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'badge' }, 'Badge'),
+					Object(esm.b)('h1', { id: 'badge' }, 'Badge'),
 					Object(esm.b)(
 						'p',
 						null,
 						'Renders an absolute-positioned badge. It is expected that the parent element contains ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'position: relative')
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'position: relative'),
+						'.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('h3', { id: 'content' }, 'Content'),
-					Object(esm.b)('p', null, 'Badge contents can be provided in the ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'), ' prop'),
+					Object(esm.b)('h3', { id: 'content' }, 'content'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'), ' prop specifies the badge.'),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<div style="position: relative;">\n    <Badge content="Sale"/>\n</div>\n'
+							'<div style="position: relative;">\n    <Badge content="Sale" />\n</div>\n'
 						)
 					),
-					Object(esm.b)('p', null, 'Or alternatively as children:'),
+					Object(esm.b)('p', null, 'Or alternatively using children:'),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Badge>\n    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />\n</Badge>\n'
+							'<div style="position: relative;">\n    <Badge>Sale</Badge>\n</div>\n'
 						)
 					),
-					Object(esm.b)('h3', { id: 'position' }, 'Position'),
+					Object(esm.b)('h3', { id: 'position' }, 'position'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Badge position by default is top left. This can be changed using the ',
+						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'position'),
-						' prop.'
+						' prop specifies an object with CSS ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'top'),
+						', ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'bottom'),
+						', ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'right'),
+						' attributes. The default position is top left ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '{ top: 0, left: 0 }'),
+						'.'
 					),
 					Object(esm.b)('p', null, 'In this example, the badge will be 2px from the top and 2px from the right:'),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<Badge position={{ "top": 2, "right": 2 }}>\n    <img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />\n</Badge>\n'
-						)
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>\n')
 					)
 				);
 			}
@@ -15454,7 +16535,7 @@
 				Button = __webpack_require__(248),
 				blocks = __webpack_require__(9),
 				componentArgs = __webpack_require__(494),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -15471,46 +16552,34 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'button' }, 'Button'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Render as unstyled native button, or a div styled like a button based on the optional ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
-						' prop. can take ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
-						' or ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'children'),
-						', styling props available, has the ability to change the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
-						' functionality. '
-					),
+					Object(esm.b)('h1', { id: 'button' }, 'Button'),
+					Object(esm.b)('p', null, 'Renders a native or custom button.'),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('h3', { id: 'content' }, 'Content'),
+					Object(esm.b)('h3', { id: 'content' }, 'content'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Button contents can be provided in the ',
+						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
-						' prop. This can be a string or a JSX element.'
+						' prop specifies the button text. This can be a string or a JSX element.'
 					),
 					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} />\n')),
 					Object(esm.b)('p', null, 'Or alternatively as children:'),
 					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button>click me!</Button>\n')),
-					Object(esm.b)('h3', { id: 'disabled' }, 'Disabled'),
+					Object(esm.b)('h3', { id: 'disabled' }, 'disabled'),
 					Object(esm.b)(
 						'p',
 						null,
 						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
-						' prop will disable a button from being clickable'
+						' prop will disable the button from being clickable.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} disabled={true}/>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} disabled />\n')
 					),
-					Object(esm.b)('h3', { id: 'native' }, 'Native'),
+					Object(esm.b)('h3', { id: 'native' }, 'native'),
 					Object(esm.b)(
 						'p',
 						null,
@@ -15518,14 +16587,49 @@
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
 						' prop will use a native html ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, '<button>'),
-						' element instead of the default custom styled button utilizing a ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<div>'),
-						' element'
+						' element.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} native={true}/>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} native />\n')
+					),
+					Object(esm.b)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'backgroundColor'),
+						' prop specifies the button background color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Button content={"click me!"} backgroundColor={\'#eeeeee\'} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'bordercolor' }, 'borderColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'borderColor'),
+						' prop specifies the button border color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} borderColor={\'#cccccc\'} />\n')
+					),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the button text color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} color={\'#222222\'} />\n')
 					),
 					Object(esm.b)('h3', { id: 'events' }, 'Events'),
 					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
@@ -15534,7 +16638,7 @@
 						null,
 						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
-						' prop allows for a custom callback function'
+						' prop allows for a custom callback function for when the button is clicked.'
 					),
 					Object(esm.b)(
 						'pre',
@@ -15544,33 +16648,6 @@
 							{ parentName: 'pre', className: 'language-jsx' },
 							'<Button content={"click me!"} onClick={(e)=>{console.log(e)}} />\n'
 						)
-					),
-					Object(esm.b)('h2', { id: 'styling' }, 'Styling'),
-					Object(esm.b)(
-						'p',
-						null,
-						'In addition to global and component level styling available for all components (see Theme documentation), this component has the following props:'
-					),
-					Object(esm.b)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
-					Object(esm.b)('p', null, 'Button background color'),
-					Object(esm.b)(
-						'pre',
-						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} backgroundColor={\'#eeeeee\'}/>\n')
-					),
-					Object(esm.b)('h3', { id: 'bordercolor' }, 'borderColor'),
-					Object(esm.b)('p', null, 'Button border color'),
-					Object(esm.b)(
-						'pre',
-						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} borderColor={\'#cccccc\'}/>\n')
-					),
-					Object(esm.b)('h3', { id: 'color' }, 'color'),
-					Object(esm.b)('p', null, 'Button text color'),
-					Object(esm.b)(
-						'pre',
-						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Button content={"click me!"} color={\'#222222\'}/>\n')
 					)
 				);
 			}
@@ -15653,7 +16730,7 @@
 				Dropdown = __webpack_require__(255),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -15670,22 +16747,22 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'dropdown' }, 'Dropdown'),
+					Object(esm.b)('h1', { id: 'dropdown' }, 'Dropdown'),
 					Object(esm.b)(
 						'p',
 						null,
 						'Renders a button and content. Clicking the button toggles content visibility. Typically used as an alternative to a ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, '<select>'),
-						' dropdown or to collapse content.'
+						' dropdown or to collapse content. By default any clicks outside of the element will hide the content.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('h3', { id: 'content' }, 'Content'),
+					Object(esm.b)('h3', { id: 'content' }, 'content'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Dropdown contents can be provided in the ',
+						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'content'),
-						' prop. This can be a string or a JSX element.'
+						' prop specifies the dropdown contents. This can be a string or a JSX element.'
 					),
 					Object(esm.b)(
 						'pre',
@@ -15694,26 +16771,25 @@
 					),
 					Object(esm.b)('p', null, 'Or alternatively as children:'),
 					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown>Hello World!</Dropdown>\n')),
-					Object(esm.b)('h3', { id: 'button' }, 'Button'),
+					Object(esm.b)('h3', { id: 'button' }, 'button'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Dropdown will render a button to toggle to visibility of the content. The ',
+						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'button'),
-						' prop allows for a string or a JSX Element'
+						' prop specifies the dropdown button. This button toggles the visibility of the content when clicked. This can be a string or a JSX element.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Dropdown button={'click me!'}>Hello World!</Dropdown>\n")
 					),
-					Object(esm.b)('h3', { id: 'open' }, 'Open'),
+					Object(esm.b)('h3', { id: 'open' }, 'open'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'), ' prop sets the dropdown visibility state. '),
 					Object(esm.b)(
 						'p',
 						null,
-						'If the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
-						" prop is provided, it is expected that you will be managing the state of the dropdown. Otherwise if not present, the component will use it's own state to toggle the visibility of the dropdown content."
+						'If specified, external state management is expected. Otherwise if not specified, the component will use its own internal state to toggle the visibility.'
 					),
 					Object(esm.b)(
 						'pre',
@@ -15724,29 +16800,31 @@
 					Object(esm.b)(
 						'p',
 						null,
-						'Sets the dropdowns initial internal state. Cannot be used with ',
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'startOpen'),
+						' prop sets the dropdown initial internal state. Cannot be used with the ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
 						' prop.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown startOpen={true}>Hello World!</Dropdown>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown startOpen>Hello World!</Dropdown>\n')
 					),
-					Object(esm.b)('h3', { id: 'disabled' }, 'Disabled'),
+					Object(esm.b)('h3', { id: 'disabled' }, 'disabled'),
 					Object(esm.b)(
 						'p',
 						null,
 						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
-						' prop prevents the button from toggling the visibility of the dropdown content, as well as preventing the ',
+						' prop will disable the button from toggling the visibility of the dropdown content, as well as preventing the ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
 						' callback from being invoked.'
 					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disabled={true}>Hello World!</Dropdown>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disabled>Hello World!</Dropdown>\n')
 					),
 					Object(esm.b)('h3', { id: 'disableclickoutside' }, 'disableClickOutside'),
 					Object(esm.b)(
@@ -15763,7 +16841,7 @@
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disableClickOutside={true}>Hello World!</Dropdown>\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disableClickOutside>Hello World!</Dropdown>\n')
 					),
 					Object(esm.b)('h3', { id: 'events' }, 'Events'),
 					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
@@ -15772,7 +16850,7 @@
 						null,
 						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
-						' prop allows for a custom callback function for when the dropdown button is clicked'
+						' prop allows for a custom callback function for when the dropdown button is clicked.'
 					),
 					Object(esm.b)(
 						'pre',
@@ -15789,7 +16867,7 @@
 						null,
 						'The ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onToggle'),
-						' prop allows for a custom callback function for when the dropdown visibility is toggled. This only applies if using internal state. Cannot be used with ',
+						' prop allows for a custom callback function for when the dropdown visibility is toggled. This only applies if using internal state. Cannot be used with the ',
 						Object(esm.b)('inlineCode', { parentName: 'p' }, 'open'),
 						' prop.'
 					),
@@ -15915,7 +16993,7 @@
 				paths = __webpack_require__(147),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -15932,12 +17010,26 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'icon' }, 'Icon'),
-					Object(esm.b)('p', null, 'Renders a Icon either from our list of available icons or from a custom path. '),
+					Object(esm.b)('h1', { id: 'icon' }, 'Icon'),
+					Object(esm.b)('p', null, 'Renders an Icon either from our list of available icons or from a custom path. '),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, ' Default'),
+					Object(esm.b)('h3', { id: 'icon-1' }, 'icon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'icon'),
+						' prop specifies the name of the icon to display. '
+					),
 					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' />\n")),
-					Object(esm.b)('p', null, ' Custom Path'),
+					Object(esm.b)('h3', { id: 'path' }, 'path'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'path'),
+						' prop specifies the SVG path value for custom icons.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
@@ -15946,6 +17038,55 @@
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<Icon color='#3a23ad' size='120px' style='padding: 20px;' viewBox='0 0 70 70' path='M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z' />\n"
 						)
+					),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the icon color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Icon icon=\'cogs\' color="#ffff00" />\n')
+					),
+					Object(esm.b)('h3', { id: 'size' }, 'size'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'size'),
+						' prop specifies the custom icon size. This will be set to both the width and height.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' size={'20px'} />\n")),
+					Object(esm.b)('h3', { id: 'width--height' }, 'width & height'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'width'),
+						' and ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'height'),
+						' props specify custom icon dimensions and will overwrite the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'size'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' width={'20px'} height={'25px'} />\n")
+					),
+					Object(esm.b)('h3', { id: 'viewbox' }, 'viewBox'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewBox'),
+						' prop specifies the SVG ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewBox'),
+						' attribute. This defines the position and dimension, in user space, of an SVG viewport.'
+					),
+					Object(esm.b)('p', null, 'Format: ', Object(esm.b)('inlineCode', { parentName: 'p' }, '`${min-x} ${min-y} ${width} ${height}`')),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' viewBox={'0 0 20 20'} />\n")
 					)
 				);
 			}
@@ -16100,7 +17241,7 @@
 				componentArgs = __webpack_require__(494),
 				searchResponse = __webpack_require__(106),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16117,10 +17258,17 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'image' }, 'Image'),
-					Object(esm.b)('p', null, 'Renders a Image, with built in fallback and rollover functionality. '),
+					Object(esm.b)('h1', { id: 'image' }, 'Image'),
+					Object(esm.b)('p', null, 'Renders an Image with fallback and rollover functionality. '),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, ' Default'),
+					Object(esm.b)('h3', { id: 'src' }, 'src'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'src'),
+						' prop specifies the URL of the image to render.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
@@ -16130,17 +17278,50 @@
 							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' />\n"
 						)
 					),
-					Object(esm.b)('p', null, ' Custom fallback image'),
+					Object(esm.b)('h3', { id: 'alt' }, 'alt'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'alt'),
+						' prop is the image ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'alt'),
+						' attribute.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Image src={searchResponse.results.mappings.core.imageUrl} fallback='https://www.telegraph.co.uk/content/dam/Pets/spark/royal-canin/happy-puppy-xlarge.jpg?imwidth=1200' alt='image' />\n"
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' />\n"
 						)
 					),
-					Object(esm.b)('p', null, ' Rollover image'),
+					Object(esm.b)('h3', { id: 'fallback' }, 'fallback'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'fallback'),
+						' prop specifies the URL of the fallback image to render if the primary image fails to load.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} fallback='https://www.example.com/image.jpg' alt='image' />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hoversrc' }, 'hoverSrc'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hoverSrc'),
+						' prop specifiesthe URL of the alternative image to display on hover.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
@@ -16148,6 +17329,75 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<Image src={searchResponse.results.mappings.core.imageUrl} hoverSrc={searchResponse.results.mappings.core.hoverImg} alt='image' />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onmouseover' }, 'onMouseOver'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onMouseOver'),
+						' prop allows for a custom callback function when the mouse cursor enters the image.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOver={(e)=>{console.log(e)}} />\n"
+						)
+					),
+					Object(esm.b)('h4', { id: 'onmouseout' }, 'onMouseOut'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onMouseOut'),
+						' prop allows for a custom callback function when the mouse cursor leaves the image.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOut={(e)=>{console.log(e)}} />\n"
+						)
+					),
+					Object(esm.b)('h4', { id: 'onload' }, 'onLoad'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onLoad'),
+						' prop allows for a custom callback function when the image has finished loading.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={()=>{}} />\n"
+						)
+					),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function when the image is clicked. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onClick={(e)=>{console.log(e)}} />\n"
 						)
 					)
 				);
@@ -16240,7 +17490,7 @@
 				Overlay = __webpack_require__(336),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16257,24 +17507,55 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'price' }, 'Price'),
+					Object(esm.b)('h1', { id: 'overlay' }, 'Overlay'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders an Overlay with manual active prop for toggling visibility. Custom Color, transitionSpeed, & onClick props available. '
+						'Renders an Overlay. Typically used to blur the background with a foreground element such as a modal or slideout menu.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <Overlay active={true} />\n')),
-					Object(esm.b)('p', null, 'Custom Color & Transition Speed'),
+					Object(esm.b)('h3', { id: 'active' }, 'active'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'active'),
+						' prop specifies when to render the component.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Overlay active={true} />\n')),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the color of the overlay.'),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Overlay active={true} color='rgba(0,0,0,0.8)' transitionSpeed='0.5s'/>\n"
-						)
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Overlay active={true} color={'rgba(0,0,0,0.8)'} />\n")
+					),
+					Object(esm.b)('h3', { id: 'transitionspeed' }, 'transitionSpeed'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'transitionSpeed'),
+						' prop specifies animation transition speed.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Overlay active={true} transitionSpeed='0.5s' />\n")
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Overlay active={true} onClick={(e)=>{console.log(e)}} />\n')
 					)
 				);
 			}
@@ -16351,7 +17632,7 @@
 			var preact_module = __webpack_require__(2),
 				Price = __webpack_require__(167),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16368,37 +17649,54 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'overlay' }, 'Overlay'),
-					Object(esm.b)('p', null, 'Renders an span with a formatted number. Essentially a pricing shortcut for the FormattedNumber Component.'),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
+					Object(esm.b)('h1', { id: 'price' }, 'Price'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Uses the Currency function from the Snap ToolBox (',
+						'Utilizes ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'currency'),
+						' from ',
 						Object(esm.b)(
 							'a',
-							{
-								parentName: 'p',
-								href: 'https://github.com/searchspring/snap-toolbox/blob/main/filters/src/currency.ts',
-								target: '_blank',
-								rel: 'nofollow noopener noreferrer',
-							},
-							'https://github.com/searchspring/snap-toolbox/blob/main/filters/src/currency.ts'
+							{ parentName: 'p', href: 'https://searchspring.github.io/snap/#/toolbox', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'@searchspring/snap-toolbox'
 						),
-						') '
+						' to render a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<span>'),
+						' containing a formatted number.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <Price value={1099.99} />\n')),
-					Object(esm.b)('p', null, 'Custom Pricing'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Price'),
+						' component utilizes all props from the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'FormattedNumber'),
+						' component with the following additional prop:'
+					),
+					Object(esm.b)('h3', { id: 'linethrough' }, 'lineThrough'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'lineThrough'),
+						' prop will style the formatted number with a line-through.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Price value={1099.99} symbol=' €' lineThrough={true} thousandsSeparator='.' decimalSeparator=',' symbolAfter={true}/>\n"
+							"<Price value={1099.99} symbol=' €' lineThrough={true} thousandsSeparator='.' decimalSeparator=',' symbolAfter={true} />\n"
 						)
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						'Formatted output from above properties: ',
+						Object(esm.b)('del', { parentName: 'p' }, Object(esm.b)('inlineCode', { parentName: 'del' }, '1.099,99 €'))
 					)
 				);
 			}
@@ -16513,7 +17811,7 @@
 				paths = __webpack_require__(147),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16530,36 +17828,104 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'checkbox' }, 'Checkbox'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Renders an span and an ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon />'),
-						" to create a customizable checkbox. checked, color, disabled, onClick, size and Icon (defaults to 'check-thin') props available. "
-					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)(
-						'p',
-						null,
-						'Using the native prop, you can bypass the span and Icon component and just render a native HTML input element with the type checkbox. '
-					),
-					Object(esm.b)(
-						'p',
-						null,
-						'The Checked state can be handled both internally or externally, by using either the checked prop, or the startChecked prop. '
-					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h1', { id: 'checkbox' }, 'Checkbox'),
+					Object(esm.b)('p', null, 'Renders a native or custom checkbox.'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon')),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'native' }, 'native'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native'),
+						' prop will render an ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "<input type='checkbox'>"),
+						' element.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox native />\n')),
+					Object(esm.b)('h3', { id: 'checked' }, 'checked'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'checked'),
+						' prop allows for external state management. Otherwise if not provided, the component will use its own internal state.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox checked={true} />\n')),
+					Object(esm.b)('h3', { id: 'startchecked' }, 'startChecked'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'startChecked'),
+						' prop sets the checkbox to be checked on the initial render. Must use internal state by not using the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'checked'),
+						' prop.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox startChecked={true} />\n')),
+					Object(esm.b)('h3', { id: 'disabled' }, 'disabled'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disabled'),
+						' prop disables the checkbox from being toggled or invoking the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' callback.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox disabled />\n')),
+					Object(esm.b)('h3', { id: 'size' }, 'size'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'size'), ' prop will set the custom checkbox size.'),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Checkbox size={'16px'} />\n")),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop sets the checkbox border color and the icon color if the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconColor'),
+						' prop is not set.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Checkbox color={'#ffff00'} />\n")),
+					Object(esm.b)('h3', { id: 'iconcolor' }, 'iconColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconColor'),
+						' prop sets the icon color and overwrites the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'),
+						' prop. It will not affect checkbox border color.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Checkbox iconColor={'#ffff00'} />\n")),
+					Object(esm.b)('h3', { id: 'icon' }, 'icon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'icon'),
+						' prop specifies a path within the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Icon'),
+						' component paths (see Icon Gallery). This only applies if using a custom checkbox ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'native={false}'),
+						'.'
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when the checkbox is clicked.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <Checkbox checked={true} disabled={true} />\n')
-					),
-					Object(esm.b)('p', null, 'Native'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <Checkbox native={true} />\n'))
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Checkbox onClick={(e)=>{console.log(e)}} />\n')
+					)
 				);
 			}
 			MDXContent.isMDXComponent = !0;
@@ -16672,7 +18038,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16689,27 +18055,115 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet-grid-options' }, 'Facet Grid Options'),
+					Object(esm.b)('h1', { id: 'facet-grid-options' }, 'Facet Grid Options'),
+					Object(esm.b)('p', null, 'Renders a grid of facet options.'),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'values' }, 'values'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a grid of facet options. Customizable columns and gapSize. onClick and valueProps. previewOnFocus prop for use with AutoComplete.'
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'values'),
+						" prop specifies all facet values where the facet type is 'grid'."
 					),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetGridOptions values={sizeFacet.values} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetGridOptions values={sizeFacet.values} />\n')
 					),
-					Object(esm.b)('p', null, 'Manual Columns and Gap size'),
+					Object(esm.b)('h3', { id: 'columns' }, 'columns'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'columns'),
+						' prop is the number of columns the grid should contain.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetGridOptions values={sizeFacet.values} columns={3} />\n')
+					),
+					Object(esm.b)('h3', { id: 'gapsize' }, 'gapSize'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'gapSize'),
+						' prop is the gap size between rows and columns.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <FacetGridOptions values={sizeFacet.values} columns={4} gapSize='8px' />\n"
+							"<FacetGridOptions values={sizeFacet.values} gapSize={'10px'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'previewonfocus' }, 'previewOnFocus'),
+					Object(esm.b)(
+						'p',
+						null,
+						'If using within Autocomplete, the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
+						' prop will invoke the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'value.preview()'),
+						' method when the value is focused. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Autocomplete>\n    ...\n    <FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'valueprops' }, 'valueProps'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueProps'),
+						" prop will be spread onto each value's ",
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<a>'),
+						' element. Typical usage would be to provide custom callback functions when used within Autocomplete.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const valueProps = {\n    onMouseEnter: (e) => {\n        clearTimeout(delayTimeout);\n        delayTimeout = setTimeout(() => {\n            e.target.focus();\n        }, delayTime);\n    },\n    onMouseLeave: () => {\n        clearTimeout(delayTimeout);\n    },\n}\n'
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetGridOptions values={sizeFacet.values} valueProps={valueProps} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when when a facet value is clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetGridOptions values={sizeFacet.values} onClick={(e)=>{console.log(e)}} />\n'
 						)
 					)
 				);
@@ -16944,7 +18398,7 @@
 				snapify = __webpack_require__(43),
 				types = __webpack_require__(60),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -16961,13 +18415,56 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
-					Object(esm.b)('p', null, 'Renders a list of hierarchy links.'),
+					Object(esm.b)('h1', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
+					Object(esm.b)('p', null, 'Renders a list of hierarchy options.'),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'values' }, 'values'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'values'),
+						" prop specifies all facet values where the facet type is 'hierarchy'."
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetHierarchyOptions values={hierarchyValues} />;\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetHierarchyOptions values={hierarchyFacet.values} />\n')
+					),
+					Object(esm.b)('h3', { id: 'hidecount' }, 'hideCount'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideCount'),
+						' prop will disable the facet count values.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetHierarchyOptions values={hierarchyFacet.values} hideCount={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when a facet value is clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetHierarchyOptions values={hierarchyFacet.values} onClick={(e)=>{console.log(e)}} />\n'
+						)
 					)
 				);
 			}
@@ -17194,7 +18691,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -17211,19 +18708,134 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet-list-options' }, 'Facet List Options'),
+					Object(esm.b)('h1', { id: 'facet-list-options' }, 'Facet List Options'),
+					Object(esm.b)('p', null, 'Renders a list of facet options.'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
+					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Checkbox')),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'values' }, 'values'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a list of page links for facet options. HideCheckbox & hideCount props for customizing look and feel, onClick & mouseEvent props available. PreviewOnFocus for AutoComplete. '
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'values'),
+						" prop specifies all facet values where the facet type is 'list'."
 					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Checkbox')),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetListOptions values={brandFacet.values} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetListOptions values={listFacet.values} />\n')
+					),
+					Object(esm.b)('h3', { id: 'hidecheckbox' }, 'hideCheckbox'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideCheckbox'),
+						' prop will disable the facet checkbox. Typically used if the facet can only have 1 value selected at a time.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetListOptions values={listFacet.values} hideCheckbox={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidecount' }, 'hideCount'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideCount'),
+						' prop will disable the facet count values.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetListOptions values={listFacet.values} hideCount={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'previewonfocus' }, 'previewOnFocus'),
+					Object(esm.b)(
+						'p',
+						null,
+						'If using within Autocomplete, the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
+						' prop will invoke the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'value.preview()'),
+						' method when the value is focused. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Autocomplete>\n    ...\n    <FacetGridOptions values={sizeFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'valueprops' }, 'valueProps'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueProps'),
+						" prop will be spread onto each value's ",
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<a>'),
+						' element. Typical usage would be to provide custom callback functions when used within Autocomplete.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const valueProps = {\n    onMouseEnter: (e) => {\n        clearTimeout(delayTimeout);\n        delayTimeout = setTimeout(() => {\n            e.target.focus();\n        }, delayTime);\n    },\n    onMouseLeave: () => {\n        clearTimeout(delayTimeout);\n    },\n}\n'
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetListOptions values={listFacet.values} valueProps={valueProps} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'checkbox' }, 'checkbox'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'checkbox'),
+						' prop specifies an object with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Checkbox'),
+						' component props. See ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Checkbox'),
+						' component documentation for further details.'
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when a facet value is clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetListOptions values={listFacet.values} onClick={(e)=>{console.log(e)}} />\n'
+						)
 					)
 				);
 			}
@@ -17455,7 +19067,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -17472,33 +19084,159 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet-palette-options' }, 'Facet Palette Options'),
+					Object(esm.b)('h1', { id: 'facet-palette-options' }, 'Facet Palette Options'),
+					Object(esm.b)('p', null, 'Renders a grid of facet palette options. '),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
+					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon')),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'values' }, 'values'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a list of facet color Palette options. Simply renders a ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<div>'),
-						' with background color of the options value. Adjustable columns and gap size. Props to hideLabel or hideIcon. '
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'values'),
+						" prop specifiesall facet values where the facet type is 'palette'."
 					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)('p', null, 'Image support for color swatchs coming soon...'),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon')),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <FacetPaletteOptions values={sizeFacet.values} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<FacetPaletteOptions values={paletteFacet.values} />\n')
 					),
-					Object(esm.b)('p', null, 'Custom'),
+					Object(esm.b)('h3', { id: 'hidelabel' }, 'hideLabel'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideLabel'), ' prop will disable the facet label.'),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <FacetPaletteOptions values={sizeFacet.values} hideLabel={true} hideIcon={true} columns={6} gapSize='10px'/>\n"
+							'<FacetPaletteOptions values={paletteFacet.values} hideLabel={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'columns' }, 'columns'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'columns'),
+						' prop is the number of columns the grid should contain.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetPaletteOptions values={paletteFacet.values} columns={3} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'gapsize' }, 'gapSize'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'gapSize'),
+						' prop is the gap size between rows and columns.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetPaletteOptions values={paletteFacet.values} gapSize={'10px'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideicon' }, 'hideIcon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideIcon'),
+						' prop will disable the facet icon from being rendered.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetPaletteOptions values={paletteFacet.values} hideIcon={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'previewonfocus' }, 'previewOnFocus'),
+					Object(esm.b)(
+						'p',
+						null,
+						'If using within Autocomplete, the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
+						' prop will invoke the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'value.preview()'),
+						' method when the value is focused. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Autocomplete>\n    ...\n    <FacetPaletteOptions values={paletteFacet.values} previewOnFocus={true} />\n    ...\n</Autocomplete>\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'valueprops' }, 'valueProps'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueProps'),
+						" prop will be spread onto each value's ",
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<a>'),
+						' element. Typical usage would be to provide custom callback functions when used within Autocomplete.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const valueProps = {\n    onMouseEnter: (e) => {\n        clearTimeout(delayTimeout);\n        delayTimeout = setTimeout(() => {\n            e.target.focus();\n        }, delayTime);\n    },\n    onMouseLeave: () => {\n        clearTimeout(delayTimeout);\n    },\n}\n'
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetPaletteOptions values={paletteFacet.values} valueProps={valueProps} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'icon' }, 'icon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'icon'),
+						' prop specifiesan object with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Icon'),
+						' component props. '
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when a facet value is clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<FacetPaletteOptions values={paletteFacet.values} onClick={(e)=>{console.log(e)}} />\n'
 						)
 					)
 				);
@@ -17748,7 +19486,7 @@
 				snapify = __webpack_require__(43),
 				types = __webpack_require__(60),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -17765,27 +19503,107 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'filter' }, 'Filter'),
+					Object(esm.b)('h1', { id: 'filter' }, 'Filter'),
+					Object(esm.b)('p', null, 'Renders a facet filter.'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
+					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon'), Object(esm.b)('li', { parentName: 'ul' }, 'Button')),
+					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'facetlabel' }, 'facetLabel'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Uses ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Button/>'),
-						' & ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon />'),
-						' to create a Selected Filter Button.'
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facetLabel'),
+						' prop specifies the filter label. Typically set to the facet label.'
 					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Icon'), Object(esm.b)('li', { parentName: 'ul' }, 'Button')),
-					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Filter facetLabel={'Brand'} />\n")),
+					Object(esm.b)('h3', { id: 'valuelabel' }, 'valueLabel'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueLabel'),
+						' prop specifies the filter value. Typically set to the facet value label.'
+					),
+					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Filter valueLabel={'Nike'} />\n")),
+					Object(esm.b)('h3', { id: 'url' }, 'url'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'url'),
+						' prop specifies a link to clear the filter selection.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Filter\n    {...args}\n    facetLabel={controller?.store?.facets.filter((facet) => facet.type === FacetType.VALUE).shift().label}\n    valueLabel={\n        controller?.store?.facets\n            .filter((facet) => facet.type === FacetType.VALUE)\n            .shift()\n            .values.shift().value\n    }\n/>\n'
+							'<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} url={filter.url} />\n'
 						)
+					),
+					Object(esm.b)('h3', { id: 'hidefacetlabel' }, 'hideFacetLabel'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideFacetLabel'),
+						' prop will disable the filter facet label.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} hideFacetLabel={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'separator' }, 'separator'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'separator'),
+						' prop will specify the separator character between ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facetLabel'),
+						' and ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueLabel'),
+						'.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Filter facetLabel={filter.facet.label} valueLabel={filter.value.label} separator={': '} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'icon' }, 'icon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'icon'),
+						' prop specifies a path within the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'Icon'),
+						' component paths (see Icon Gallery).'
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onclick' }, 'onClick'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop allows for a custom callback function for when a filter is clicked.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Filter onClick={(e)=>{console.log(e)}}/>\n')
 					)
 				);
 			}
@@ -18039,7 +19857,7 @@
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -18056,9 +19874,9 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'result' }, 'Result'),
-					Object(esm.b)('p', null, 'Renders a single product card. Highly customizable between all the optional props, and sub components used.  '),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h1', { id: 'result' }, 'Result'),
+					Object(esm.b)('p', null, 'Renders a single product card. '),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)(
 						'ul',
 						null,
@@ -18067,30 +19885,173 @@
 						Object(esm.b)('li', { parentName: 'ul' }, 'Image')
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'result-1' }, 'result'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'result'),
+						' prop specifies a reference to a product object from the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'results'),
+						' store array.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '    <Result result={controller?.store?.results[0]}  />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Result result={controller.store.results[0]} />\n')
 					),
-					Object(esm.b)('p', null, 'List View'),
+					Object(esm.b)('h3', { id: 'hidebadge' }, 'hideBadge'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideBadge'),
+						' prop will prevent the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Badge />'),
+						' component from rendering.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"    <Result result={controller?.store?.results[0]} layout='list' />\n"
+							'<Result result={controller.store.results[0]} hideBadge={true} />\n'
 						)
 					),
-					Object(esm.b)('p', null, 'Hide Sections '),
+					Object(esm.b)('h3', { id: 'hidetitle' }, 'hideTitle'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideTitle'),
+						' prop will prevent to product title from rendering.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'    <Result result={controller?.store?.results[0]} hideBadge={true} hideTitle={true} hidePricing={true}/>\n'
+							'<Result result={controller.store.results[0]} hideTitle={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hidepricing' }, 'hidePricing'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hidePricing'),
+						' prop will prevent the pricing from rendering.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Result result={controller.store.results[0]} hidePricing={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'detailslot' }, 'detailSlot'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'detailSlot'),
+						' prop can contain a string or JSX element to display in place of the title and pricing sections. This can be used to display any additional information. Specifying this property will overwrite the default title and the pricing elements.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const productDetails = (props) => {\n    const listEntries = props?.product?.attributes?.descriptionList.split('|');\n    return (\n        listEntries && (\n            <ul>\n                {listEntries.map(entry => (\n                    <li>{entry}</li>\n                ))}\n            </ul>\n        )\n    )\n}\n"
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Result result={controller.store.results[0]} detailSlot={<productDetails product={controller.store.results[0]/>} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'buttonslot' }, 'buttonSlot'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'buttonSlot'),
+						' prop is a placeholder and renders before the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'detailSlot'),
+						' section. It can contain a string or JSX element. Typically used to add a CTA button.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const addToCartButton = (props) => {\n    return (\n        <button onClick={addToCartByID(props.id)}>Add to Cart</button>\n    )\n}\n'
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid}/>} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'fallback' }, 'fallback'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'fallback'),
+						' prop will be passed to the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Image />'),
+						' sub-component. If the primary image does not display, this fallback image will be displayed instead. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Result result={controller.store.results[0]} fallback={'https://www.example.com/imgs/placeholder.jpg'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'width' }, 'width'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'width'), ' prop sets the width of this Result.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, "<Result result={controller.store.results[0]} width={'25%'} />\n")
+					),
+					Object(esm.b)('h3', { id: 'layout' }, 'layout'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'layout'),
+						' prop specifies if this Result will be contained in a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'grid'),
+						' or ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'list'),
+						' layout.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Result result={controller.store.results[0]} layout={'grid'} />\n"
 						)
 					)
 				);
@@ -18260,8 +20221,8 @@
 									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 									control: { type: 'boolean' },
 								},
-								detailsSlot: { description: 'Slot just under product image', table: { type: { summary: 'object' } }, control: { type: 'object' } },
-								buttonSlot: { description: 'Slot just under details', table: { type: { summary: 'object' } }, control: { type: 'object' } },
+								detailSlot: { description: 'Slot just under product image', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+								buttonSlot: { description: 'Slot just under details', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 								fallback: {
 									defaultValue: '',
 									description: 'Fallback image url',
@@ -18338,7 +20299,7 @@
 				componentArgs = __webpack_require__(494),
 				searchResponse = __webpack_require__(106),
 				blocks = __webpack_require__(9),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -18355,20 +20316,209 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'slider' }, 'Slider'),
+					Object(esm.b)('h1', { id: 'slider' }, 'Slider'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Built using the react-ranger slider. (',
+						'Renders a slider to be used with any slider facet. Built using ',
 						Object(esm.b)(
 							'a',
 							{ parentName: 'p', href: 'https://github.com/tannerlinsley/react-ranger', target: '_blank', rel: 'nofollow noopener noreferrer' },
-							'https://github.com/tannerlinsley/react-ranger'
+							'react-ranger'
 						),
-						'). This component can be used with any slider facet. Fully customizable with colors and styles, adjustable ticksize, customizable onChange and onDrag Events. '
+						'.'
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('pre', null, Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Slider facet={sliderFacetMock} />\n'))
+					Object(esm.b)('h3', { id: 'facet' }, 'facet'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies a reference to a facet within the facets store array. The facet must be a range facet (',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'display'),
+						' type of ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'slider'"),
+						').'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'showticks' }, 'showTicks'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop will render reference ticks below the slider track.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'ticksize' }, 'tickSize'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'tickSize'),
+						' prop specifies the unit number between ticks. Must be used with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickSize={20}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'ticktextcolor' }, 'tickTextColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'tickTextColor'),
+						' prop specifies ticks text color. Must be used with ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickTextColor={'#cccccc'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'handlecolor' }, 'handleColor'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'handleColor'), ' prop specifies the handle color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleColor={'#0000ff'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'handledraggingcolor' }, 'handleDraggingColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'handleDraggingColor'),
+						' prop specifies the handle color while dragging.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleDraggingColor={'0000ff'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'handletextcolor' }, 'handleTextColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'handleTextColor'),
+						' prop specifies the handle text color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleTextColor={'#222222'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'trackcolor' }, 'trackColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'trackColor'),
+						' prop specifies the slider track (background) color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    trackColor={'#cccccc'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'railcolor' }, 'railColor'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'railColor'),
+						' prop specifies the slider rail (foreground) color.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    railColor={'#0000ff'}\n/>\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'events' }, 'Events'),
+					Object(esm.b)('h4', { id: 'onchange' }, 'onChange'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onChange'),
+						' prop allows for a custom callback function for when a slider handle has been changed.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
+						)
+					),
+					Object(esm.b)('h4', { id: 'ondrag' }, 'onDrag'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'onDrag'),
+						' prop allows for a custom callback function for when a slider handle is being dragged.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
+						)
+					)
 				);
 			}
 			MDXContent.isMDXComponent = !0;
@@ -18420,7 +20570,7 @@
 									table: { type: { summary: 'number' }, defaultValue: { summary: 20 } },
 									control: { type: 'number' },
 								},
-								textColor: { description: 'Slider text color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+								textColor: { description: 'Slider tick text color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 								trackColor: { description: 'Slider track color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 								railColor: { description: 'Slider rail Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 								handleTextColor: { description: 'Slider Handle Text Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
@@ -18488,7 +20638,7 @@
 				types = __webpack_require__(60),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -18505,34 +20655,187 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'facet' }, 'Facet'),
+					Object(esm.b)('h1', { id: 'facet' }, 'Facet'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a single facet, using ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdownm />'),
-						'. Automatically renders proper facet option component based on display of props.facet. Props available to disableCollapse of ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Dropdown/>'),
-						', customize or hide the ',
-						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Icon/>'),
-						', limit the options rendered. Built in Show More/Show Less functionality. '
+						'Renders a single complete facet. This includes determining the correct options type, a collapsable header, and overflow options. '
 					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)(
 						'ul',
 						null,
 						Object(esm.b)('li', { parentName: 'ul' }, 'Dropdown'),
-						Object(esm.b)('li', { parentName: 'ul' }, 'FacetListOptions'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'FacetHierarchyOptions'),
 						Object(esm.b)('li', { parentName: 'ul' }, 'FacetGridOptions'),
+						Object(esm.b)('li', { parentName: 'ul' }, 'FacetListOptions'),
 						Object(esm.b)('li', { parentName: 'ul' }, 'FacetPaletteOptions'),
 						Object(esm.b)('li', { parentName: 'ul' }, 'Slider'),
 						Object(esm.b)('li', { parentName: 'ul' }, 'Icon')
 					),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
+					Object(esm.b)('h3', { id: 'facet-1' }, 'facet'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies a reference to any single facet object within the facets store array. '
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller?.store?.facets[0]} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller.store.facets[0]} />\n')
+					),
+					Object(esm.b)('h3', { id: 'disablecollapse' }, 'disableCollapse'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'disableCollapse'),
+						' prop prevents the facet from toggling its collapse state. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} disableCollapse={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'color' }, 'color'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'color'), ' prop sets the facet name and icon color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Facet facet={controller.store.facets[0]} color={'#222222'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'optionslimit' }, 'optionsLimit'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'optionsLimit'),
+						' prop sets the number of options to display before the remaining options overflow and a show more/less button is displayed. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} optionsLimit={10} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'previewonfocus' }, 'previewOnFocus'),
+					Object(esm.b)(
+						'p',
+						null,
+						'If using within Autocomplete, the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'previewOnFocus'),
+						' prop will invoke the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'value.preview()'),
+						' method when the value is focused. '
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} previewOnFocus={true} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'valueprops' }, 'valueProps'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'valueProps'),
+						" prop will be spread onto each value's ",
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<a>'),
+						' element. Typical usage would be to provide custom callback functions when used within Autocomplete.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const valueProps = {\n    onMouseEnter: (e) => {\n        clearTimeout(delayTimeout);\n        delayTimeout = setTimeout(() => {\n            e.target.focus();\n        }, delayTime);\n    },\n    onMouseLeave: () => {\n        clearTimeout(delayTimeout);\n    },\n}\n'
+						)
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} valueProps={valueProps} />\n'
+						)
+					),
+					Object(esm.b)('h3', { id: 'hideicon' }, 'hideIcon'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'hideIcon'),
+						' prop prevents the facet collapse icon from rendering.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller.store.facets[0]} hideIcon={true} />\n')
+					),
+					Object(esm.b)('h3', { id: 'iconexpand' }, 'iconExpand'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconExpand'),
+						' prop is the name of the icon to render when the facet is in its collapsed state.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Facet facet={controller.store.facets[0]} iconExpand={'angle-down'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'iconcollapse' }, 'iconCollapse'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconCollapse'),
+						' prop is the name of the icon to render when the facet is in its open state.'
+					),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Facet facet={controller.store.facets[0]} iconCollapse={'angle-up'} />\n"
+						)
+					),
+					Object(esm.b)('h3', { id: 'iconcolor' }, 'iconColor'),
+					Object(esm.b)('p', null, 'The ', Object(esm.b)('inlineCode', { parentName: 'p' }, 'iconColor'), ' prop sets the facet icon color.'),
+					Object(esm.b)(
+						'pre',
+						null,
+						Object(esm.b)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Facet facet={controller.store.facets[0]} iconColor={'#222222'} />\n"
+						)
 					)
 				);
 			}
@@ -18691,7 +20994,7 @@
 									table: { type: { summary: 'facet store object' } },
 									control: { type: 'none' },
 								},
-								optionsLimitCount: {
+								optionsLimit: {
 									defaultValue: 12,
 									description: "Number of facet options to display before a 'show more' button appears",
 									table: { type: { summary: 'number' } },
@@ -18933,7 +21236,7 @@
 				Results = __webpack_require__(254),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
-				esm = (__webpack_require__(0), __webpack_require__(1));
+				esm = (__webpack_require__(1), __webpack_require__(0));
 			function _extends() {
 				return (_extends =
 					Object.assign ||
@@ -18950,78 +21253,123 @@
 				return Object(esm.b)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components: components, mdxType: 'MDXLayout' }),
-					Object(esm.b)('h2', { id: 'results' }, 'Results'),
+					Object(esm.b)('h1', { id: 'results' }, 'Results'),
 					Object(esm.b)(
 						'p',
 						null,
-						'Renders a group of results, in grid or list layout. with responsive props. Inline merchandising banner support built in. '
+						'Renders a page of results utilizing ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Result />'),
+						' components.'
 					),
-					Object(esm.b)('h2', { id: 'additional-info' }, 'Additional Info'),
-					Object(esm.b)(
-						'p',
-						null,
-						'The responsive prop can be used to adjust the layout and how many products are shown at any screensize. There is no limit to how many responsive settings you can pass in. The viewport prop is a number representing the screen size the breakpoint should be used at and below.',
-						Object(esm.b)('br', { parentName: 'p' }),
-						'\n',
-						'For example, if you had a viewport: 500, those specific resposive settings would be used from 500px wide and below.'
-					),
-					Object(esm.b)('p', null, 'The types are as follows'),
+					Object(esm.b)('h2', { id: 'sub-components' }, 'Sub-components'),
 					Object(esm.b)(
 						'ul',
 						null,
-						Object(esm.b)(
-							'li',
-							{ parentName: 'ul' },
-							'responsive?: ResponsiveProps[];',
-							Object(esm.b)('br', { parentName: 'li' }),
-							'ResponsiveProps: ',
-							Object(esm.b)(
-								'ul',
-								{ parentName: 'li' },
-								Object(esm.b)('li', { parentName: 'ul' }, 'viewport: number;'),
-								Object(esm.b)('li', { parentName: 'ul' }, 'numAcross: number;'),
-								Object(esm.b)('li', { parentName: 'ul' }, 'numRows?: number;'),
-								Object(esm.b)('li', { parentName: 'ul' }, 'layout?: "grid" | "list";')
-							)
-						)
+						Object(esm.b)('li', { parentName: 'ul' }, Object(esm.b)('p', { parentName: 'li' }, 'Result')),
+						Object(esm.b)('li', { parentName: 'ul' }, Object(esm.b)('p', { parentName: 'li' }, 'InlineBanner'))
 					),
-					Object(esm.b)('h2', { id: 'components-used' }, 'Components Used'),
-					Object(esm.b)('ul', null, Object(esm.b)('li', { parentName: 'ul' }, 'Result'), Object(esm.b)('li', { parentName: 'ul' }, 'inlineBanner')),
 					Object(esm.b)('h2', { id: 'usage' }, 'Usage'),
-					Object(esm.b)('p', null, 'Default'),
+					Object(esm.b)('h3', { id: 'results-1' }, 'results'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The required ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'results'),
+						' prop specifies a reference to the results store array. '
+					),
 					Object(esm.b)(
 						'pre',
 						null,
-						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Results results={controller?.store?.results} />\n')
+						Object(esm.b)('code', { parentName: 'pre', className: 'language-jsx' }, '<Results results={controller.store.results} />\n')
 					),
-					Object(esm.b)('p', null, 'List Layout'),
+					Object(esm.b)('h3', { id: 'layout' }, 'layout'),
+					Object(esm.b)(
+						'p',
+						null,
+						'The ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'layout'),
+						' prop specifies if this result will be rendered in a ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'grid'),
+						' or ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'list'),
+						' layout.'
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Results layout='list' results={controller?.store?.results} />\n"
+							"<Results results={controller.store.results} layout={'grid'} />\n"
 						)
 					),
-					Object(esm.b)('p', null, 'Grid Layout'),
+					Object(esm.b)('h3', { id: 'responsive' }, 'responsive'),
+					Object(esm.b)(
+						'p',
+						null,
+						'An object that modifies the responsive behavior of the ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, '<Result />'),
+						' sub-components.'
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						'The responsive prop can be used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in. The viewport prop is the number representing the screen size the breakpoint should be used at and below.'
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						'For example, if you had ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewport: 500'),
+						', those specific responsive settings would be used from 500px wide and below.'
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewport'),
+						' - required, viewport width when this rule is active'
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'numAcross'),
+						' - required, number of columns to display at the given ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewport')
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'numRows'),
+						' - optional, number of rows to display at the given ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewport')
+					),
+					Object(esm.b)(
+						'p',
+						null,
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'layout'),
+						' - optional, layout type ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'grid'"),
+						' or ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, "'list'"),
+						' at the given ',
+						Object(esm.b)('inlineCode', { parentName: 'p' }, 'viewport')
+					),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Results layout='grid' results={controller?.store?.results} />\n"
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const responsive = [\n    {\n        viewport: 350,\n        numAcross: 1,\n        numRows: 5, \n            \n    },\n    {\n        viewport: 450,\n        numAcross: 2,\n        numRows: 3, \n        layout: "list", \n    },\n    {\n        viewport: 500,\n        numAcross: 3,\n        numRows: 2, \n    },\n    {\n        viewport: 600,\n        numAcross: 5,\n        numRows: 4, \n    },\n    {\n        viewport: 700,\n        numAcross: 5,\n    }\n]\n'
 						)
 					),
-					Object(esm.b)('p', null, 'Custom Responsive Settings '),
 					Object(esm.b)(
 						'pre',
 						null,
 						Object(esm.b)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'const responsive = [\n    {\n        viewport: 350,\n        numAcross: 1,\n        numRows: 5, \n            \n    },\n    {\n        viewport: 450,\n        numAcross: 2,\n        numRows: 3, \n        layout: "list", \n    },\n    {\n        viewport: 500,\n        numAcross: 3,\n        numRows: 2, \n    },\n    {\n        viewport: 600,\n        numAcross: 5,\n        numRows: 4, \n    },\n    {\n        viewport: 700,\n        numAcross: 5,\n    }\n]\n<Results layout=\'list\' results={controller?.store?.results} responsive={responsive} />\n'
+							'<Results results={controller.store.results} responsive={responsive} />\n'
 						)
 					)
 				);
@@ -19183,6 +21531,7 @@
 									table: { type: { summary: 'string' } },
 									control: { type: 'select', options: ['grid', 'list'] },
 								},
+								responsive: { description: 'Responsive options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 							},
 							componentArgs.a
 						),

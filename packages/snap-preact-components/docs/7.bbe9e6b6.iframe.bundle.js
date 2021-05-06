@@ -8,7 +8,7 @@
 					return getScrollAreaStyles;
 				});
 			var _templateObject,
-				react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0),
+				react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1),
 				_storybook_theming__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71);
 			var hsResizeObserverDummyAnimation = Object(_storybook_theming__WEBPACK_IMPORTED_MODULE_1__.d)(
 					_templateObject ||

@@ -1,4 +1,4 @@
-/*! For license information please see 6.9ca2e8ba.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 6.0abd2075.iframe.bundle.js.LICENSE.txt */
 (window.webpackJsonp = window.webpackJsonp || []).push([
 	[6],
 	{
@@ -4245,7 +4245,7 @@
 				__webpack_require__(94),
 				__webpack_require__(63),
 				__webpack_require__(65);
-			var react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(0),
+			var react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1),
 				overlayscrollbars__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1027),
 				overlayscrollbars__WEBPACK_IMPORTED_MODULE_12___default = __webpack_require__.n(overlayscrollbars__WEBPACK_IMPORTED_MODULE_12__);
 			function _extends() {
@@ -4365,4 +4365,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=6.9ca2e8ba.iframe.bundle.js.map
+//# sourceMappingURL=6.0abd2075.iframe.bundle.js.map
