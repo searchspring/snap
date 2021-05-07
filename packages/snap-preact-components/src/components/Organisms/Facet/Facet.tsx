@@ -195,7 +195,7 @@ export const Facet = observer(
 		return (
 			<div css={!disableStyles && CSS.facet({ disableCollapse, color, theme, style })} className={classnames('ss-facet', className)}>
 				<Dropdown
-					open={!facet?.collapsed}
+					open={disableCollapse || !facet?.collapsed}
 					onClick={(e) => {
 						!disableCollapse && facet?.toggleCollapse();
 					}}
