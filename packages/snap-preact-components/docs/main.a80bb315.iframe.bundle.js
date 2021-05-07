@@ -8030,16 +8030,19 @@
 							for (var url = _a.url, width = _a.width, height = _a.height, params = [], _i = 1; _i < arguments.length; _i++)
 								params[_i - 1] = arguments[_i];
 							var styles = {
-								size: 'font-size: 1px; padding: ' + height + ' ' + width + ';',
+								size: 'font-size: 1px; padding: ' + (height || width) + ' ' + (width || height) + ';',
 								background: 'background: url("' + url + '") no-repeat; background-size: contain;',
 							};
 							this.dev.apply(this, Logger_spreadArray(['%c...', styles.size + ' ' + styles.background], params));
 						}),
 						(Logger.prototype.imageText = function (_a) {
-							for (var url = _a.url, text = _a.text, style = _a.style, params = [], _i = 1; _i < arguments.length; _i++)
+							for (var url = _a.url, _b = _a.text, text = void 0 === _b ? '' : _b, style = _a.style, params = [], _i = 1; _i < arguments.length; _i++)
 								params[_i - 1] = arguments[_i];
-							var styles = { background: 'margin-left: 6px; background: url("' + url + '") no-repeat; background-size: contain;', custom: style };
-							this.dev.apply(this, Logger_spreadArray(['%c   ' + this.prefix + text, styles.background + ' ' + styles.custom], params));
+							var styles = { background: 'margin-left: 6px; background: url("' + url + '") no-repeat; background-size: contain;', custom: style },
+								imgText = text,
+								rest = params;
+							!imgText && (null == params ? void 0 : params.length) && ((imgText = params[0]), (rest = params.slice(1))),
+								this.dev.apply(this, Logger_spreadArray(['%c   ' + this.prefix + imgText, styles.background + ' ' + styles.custom], rest));
 						}),
 						(Logger.prototype.debug = function () {
 							for (var params = [], _i = 0; _i < arguments.length; _i++) params[_i] = arguments[_i];
@@ -8059,24 +8062,31 @@
 								);
 						}),
 						(Logger.prototype.profile = function (profile) {
-							this.dev(
-								'%c ' +
-									emoji.gear +
-									' %c' +
-									this.prefix +
-									'%c' +
-									profile.type +
-									'  %c~  ' +
-									profile.name +
-									'  ::  %c' +
-									profile.status.toUpperCase() +
-									('finished' == profile.status ? '  ::  %c' + profile.time.run + 'ms' : ''),
-								'color: ' + colors.orange + '; font-size: 14px; line-height: 12px;',
-								'color: ' + colors.orange + ';',
-								'color: ' + colors.orange + '; font-style: italic;',
-								'color: ' + colors.orange + ';',
-								'color: ' + colors.orange + '; font-weight: bold;',
-								'color: ' + colors.grey + ';'
+							for (var params = [], _i = 1; _i < arguments.length; _i++) params[_i - 1] = arguments[_i];
+							this.dev.apply(
+								this,
+								Logger_spreadArray(
+									[
+										'%c ' +
+											emoji.gear +
+											' %c' +
+											this.prefix +
+											'%c' +
+											profile.type +
+											'  %c~  ' +
+											profile.name +
+											'  ::  %c' +
+											profile.status.toUpperCase() +
+											('finished' == profile.status ? '  ::  %c' + profile.time.run + 'ms' : ''),
+										'color: ' + colors.orange + '; font-size: 14px; line-height: 12px;',
+										'color: ' + colors.orange + ';',
+										'color: ' + colors.orange + '; font-style: italic;',
+										'color: ' + colors.orange + ';',
+										'color: ' + colors.orange + '; font-weight: bold;',
+										'color: ' + colors.grey + ';',
+									],
+									params
+								)
 							);
 						}),
 						(Logger.prototype.dev = function () {
@@ -9688,12 +9698,16 @@
 						Lock
 					);
 				})(),
-				QueryStore_QueryStore = function QueryStore(autocomplete, search) {
-					var observables = { query: mobx_esm.o };
-					(this.query = null == search ? void 0 : search.query),
+				QueryStore_QueryStore = function QueryStore(controller, autocomplete, search) {
+					var observables = {};
+					(null == search ? void 0 : search.query) &&
+						((this.query = new QueryStore_Query(controller, search.query)), (observables.query = mobx_esm.o)),
 						(null == autocomplete ? void 0 : autocomplete.correctedQuery) &&
-							((this.originalQuery = autocomplete.query), (observables.originalQuery = mobx_esm.o)),
+							((this.originalQuery = new QueryStore_Query(controller, autocomplete.query)), (observables.originalQuery = mobx_esm.o)),
 						Object(mobx_esm.n)(this, observables);
+				},
+				QueryStore_Query = function Query(controller, query) {
+					(this.string = query), (this.url = controller.urlManager.set({ query: this.string })), Object(mobx_esm.n)(this, { string: mobx_esm.o });
 				},
 				FacetStore_extends =
 					(__webpack_require__(338),
@@ -9769,7 +9783,7 @@
 								clear: mobx_esm.g,
 								toggleCollapse: mobx_esm.f,
 							});
-						var collapseData = this.storage.get(this.field + '.collapsed');
+						var collapseData = this.storage.get('facets.' + this.field + '.collapsed');
 						(this.collapsed = null != collapseData ? collapseData : this.collapsed),
 							this.filtered && this.collapsed && void 0 === collapseData && this.toggleCollapse();
 					}
@@ -9788,7 +9802,7 @@
 							configurable: !0,
 						}),
 						(Facet.prototype.toggleCollapse = function () {
-							(this.collapsed = !this.collapsed), this.storage.set(this.field + '.collapsed', this.collapsed);
+							(this.collapsed = !this.collapsed), this.storage.set('facets.' + this.field + '.collapsed', this.collapsed);
 						}),
 						Facet
 					);
@@ -9797,14 +9811,14 @@
 					function RangeFacet(controller, storage, facet, facetMeta) {
 						var _this = _super.call(this, controller, storage, facet, facetMeta) || this;
 						_this.step = facet.step;
-						var storedRange = _this.storage.get(_this.field + '.range');
+						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
 						return (
 							storedRange && facet.filtered
 								? facet.range.low > storedRange.low || facet.range.high < storedRange.high
-									? (_this.range = _this.storage.get(_this.field + '.range'))
+									? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
 									: (facet.range.low < storedRange.low || facet.range.high > storedRange.high) &&
-									  (_this.storage.set(_this.field + '.range', facet.range), (_this.range = facet.range))
-								: (_this.storage.set(_this.field + '.range', facet.range), (_this.range = facet.range)),
+									  (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range))
+								: (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range)),
 							(_this.active = facet.active || facet.range),
 							(_this.formatSeparator = (null == facetMeta ? void 0 : facetMeta.formatSeparator) || '-'),
 							(_this.formatValue = (null == facetMeta ? void 0 : facetMeta.formatValue) || '%01.2f'),
@@ -9835,7 +9849,7 @@
 								},
 								toggle: function toggle(val) {
 									(_this.overflow.limited = void 0 !== val ? val : !_this.overflow.limited),
-										_this.storage.set(_this.field + '.overflow.limited', _this.overflow.limited),
+										_this.storage.set('facets.' + _this.field + '.overflow.limited', _this.overflow.limited),
 										_this.overflow.calculate();
 								},
 								calculate: function calculate() {
@@ -9866,7 +9880,7 @@
 										}
 									})) ||
 								[]);
-						var overflowLimitedState = _this.storage.get(_this.field + '.overflow.limited');
+						var overflowLimitedState = _this.storage.get('facets.' + _this.field + '.overflow.limited');
 						return (
 							void 0 !== overflowLimitedState && _this.overflow.toggle(overflowLimitedState),
 							Object(mobx_esm.n)(_this, {
@@ -10158,7 +10172,7 @@
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
 								(this.merchandising = new MerchandisingStore(this.controller, data.merchandising)),
-								(this.search = new QueryStore_QueryStore(data.autocomplete, data.search)),
+								(this.search = new QueryStore_QueryStore(this.controller, data.autocomplete, data.search)),
 								this.state.locks.facets.locked ||
 									(this.facets = new Stores_FacetStore_FacetStore(this.controller, this.storage, data.facets, this.meta, this.state)),
 								(this.filters = new FilterStore(this.controller, data.filters, this.meta)),
@@ -10171,16 +10185,17 @@
 					);
 				})(AbstractStore_AbstractStore),
 				Stores_QueryStore_QueryStore = function QueryStore(controller, search) {
-					var observables = { query: mobx_esm.o };
-					(this.query = null == search ? void 0 : search.query),
+					var observables = {};
+					(null == search ? void 0 : search.query) &&
+						((this.query = new Stores_QueryStore_Query(controller, search.query)), (observables.query = mobx_esm.o)),
 						(null == search ? void 0 : search.didYouMean) &&
-							((this.didYouMean = new QueryStore_AlternateQuery(controller, search.didYouMean)), (observables.didYouMean = mobx_esm.o)),
+							((this.didYouMean = new Stores_QueryStore_Query(controller, search.didYouMean)), (observables.didYouMean = mobx_esm.o)),
 						(null == search ? void 0 : search.originalQuery) &&
-							((this.originalQuery = new QueryStore_AlternateQuery(controller, search.originalQuery)), (observables.originalQuery = mobx_esm.o)),
+							((this.originalQuery = new Stores_QueryStore_Query(controller, search.originalQuery)), (observables.originalQuery = mobx_esm.o)),
 						Object(mobx_esm.n)(this, observables);
 				},
-				QueryStore_AlternateQuery = function AlternateQuery(controller, query) {
-					(this.query = query), (this.url = controller.urlManager.set({ query: this.query })), Object(mobx_esm.n)(this, { query: mobx_esm.o });
+				Stores_QueryStore_Query = function Query(controller, query) {
+					(this.string = query), (this.url = controller.urlManager.set({ query: this.string })), Object(mobx_esm.n)(this, { string: mobx_esm.o });
 				},
 				SearchStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {

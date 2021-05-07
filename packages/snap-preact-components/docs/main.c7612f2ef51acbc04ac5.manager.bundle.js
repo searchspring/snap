@@ -29,8 +29,9 @@
 					base: 'light',
 					colorPrimary: '#3a23ad',
 					colorSecondary: '#00cee1',
+					appBg: '#fafafa',
 					barSelectedColor: '#3a23ad',
-					brandTitle: 'Searchspring SNAP Preact',
+					brandTitle: 'Searchspring Snap Preact',
 					brandImage: searchspring_logo,
 				});
 			esm.c.setConfig({ theme: searchspringTheme });

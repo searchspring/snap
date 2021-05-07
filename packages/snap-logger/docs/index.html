@@ -64,6 +64,31 @@
 				<p><a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a></p>
 				<p>Simple logger for debugging</p>
 				<img src="../../images/logger-example.png" />
+				<details>
+					<summary>Sample code</summary>
+					<br/>
+					<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">image</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">width:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;90px&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">height:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;30px&#039;</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warn&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">imageText</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}, </span><span style="color: #A31515">&#039;imageText&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;debug&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">dev</span><span style="color: #000000">(</span><span style="color: #A31515">`%c </span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">emoji</span><span style="color: #000000FF">.</span><span style="color: #001080">vortex</span><span style="color: #0000FF">}</span><span style="color: #A31515"> %c</span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">prefix</span><span style="color: #0000FF">}</span><span style="color: #A31515">%c</span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;magical text&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #A31515">`color: </span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">colors</span><span style="color: #000000FF">.</span><span style="color: #001080">blue</span><span style="color: #0000FF">}</span><span style="color: #A31515">; font-weight: bold; font-size: 10px; line-height: 12px;`</span><span style="color: #000000">,</span>
+<span style="color: #A31515">`color: </span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">colors</span><span style="color: #000000FF">.</span><span style="color: #001080">bluegreen</span><span style="color: #0000FF">}</span><span style="color: #A31515">; font-weight: normal;`</span><span style="color: #000000">,</span>
+<span style="color: #A31515">`color: </span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">colors</span><span style="color: #000000FF">.</span><span style="color: #001080">bluegreen</span><span style="color: #0000FF">}</span><span style="color: #A31515">; font-weight: bold;`</span><span style="color: #000000">);</span>
+</code></pre>
+				</details>
 				<hr>
 				<a href="#dependency" id="dependency" style="color: inherit; text-decoration: none;">
 					<h1>Dependency</h1>
@@ -74,6 +99,7 @@
 					<br/>
 					<img src="../../images/snap-dependencies.jpg" />
 				</details>
+				<br>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h1>Installation</h1>
 				</a>
@@ -90,14 +116,14 @@
 				<a href="#config" id="config" style="color: inherit; text-decoration: none;">
 					<h2>Config</h2>
 				</a>
-				<p>Snap Logger accepts an optional string prefix</p>
+				<p>Snap Logger accepts an optional string prefix which when set is prepended to all logs.</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">prefix</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;Log:&#039;</span><span style="color: #000000">;</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Logger</span><span style="color: #000000">(</span><span style="color: #001080">prefix</span><span style="color: #000000">)</span>
 </code></pre>
 				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
 					<h2>Controller usage</h2>
 				</a>
-				<p>Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller</p>
+				<p>Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller in place of <code>console</code> methods.</p>
 				<p>See <a href="../../README.md#TypicalUsage">Typical Usage</a></p>
 				<a href="#standalone-usage" id="standalone-usage" style="color: inherit; text-decoration: none;">
 					<h2>Standalone usage</h2>
@@ -112,24 +138,24 @@
 				<p>Sets prefix instead of defining a prefix in the constructor.</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Logger</span><span style="color: #000000">();</span>
 
-<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Hello&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Hello&#039;</span><span style="color: #000000">);</span>
 <span style="color: #008000">// &#039;Hello&#039;</span>
 
-<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">setGroup</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">setGroup</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">);</span>
 
-<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Hello&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Hello&#039;</span><span style="color: #000000">);</span>
 <span style="color: #008000">// &#039; [search] :: Hello&#039;</span>
 </code></pre>
 				<a href="#setmode-method" id="setmode-method" style="color: inherit; text-decoration: none;">
 					<h2><code>setMode</code> method</h2>
 				</a>
-				<p>Default logging mode is <code>production</code></p>
-				<p>When set to <code>development</code>, all logging methods will be visible</p>
-				<p>When set to production, logs using <code>dev</code> will not be visible. This also includes <!-- `image`, --> <code>imageText</code>, <code>debug</code>, and <code>profile</code></p>
+				<p>The default logging mode is <code>production</code>. </p>
+				<p>When set to production, logs using <code>dev</code> will not be visible. This also includes <code>image</code>, <code>imageText</code>, <code>debug</code>, and <code>profile</code>.</p>
+				<p>When set to <code>development</code>, all logging methods will be visible.</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Logger</span><span style="color: #000000">, </span><span style="color: #001080">LogMode</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-logger&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Logger</span><span style="color: #000000">();</span>
-<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">setMode</span><span style="color: #000000">(</span><span style="color: #001080">LogMode</span><span style="color: #000000">.</span><span style="color: #0070C1">DEVELOPMENT</span><span style="color: #000000">)</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">setMode</span><span style="color: #000000">(</span><span style="color: #001080">LogMode</span><span style="color: #000000">.</span><span style="color: #0070C1">DEVELOPMENT</span><span style="color: #000000">);</span>
 </code></pre>
 				<pre><code class="language-typescript"><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99">LogMode</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #0070C1">PRODUCTION</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;production&#039;</span><span style="color: #000000">,</span>
@@ -139,44 +165,53 @@
 				<a href="#error-method" id="error-method" style="color: inherit; text-decoration: none;">
 					<h2><code>error</code> method</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error&#039;</span><span style="color: #000000">)</span>
+				<p>This method takes any number of parameters and logs them to the console. It is best to use this method for error handling.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error!!!&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;text about the error&#039;</span><span style="color: #000000">, </span><span style="color: #001080">errorObject</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;more&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;text&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#warn-method" id="warn-method" style="color: inherit; text-decoration: none;">
 					<h2><code>warn</code> method</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warn&#039;</span><span style="color: #000000">)</span>
+				<p>This method takes any number of parameters and logs them to the console. It is best to use this method for displaying warnings.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warning!!!&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warning&#039;</span><span style="color: #000000">, </span><span style="color: #001080">warningObject</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;more text&#039;</span><span style="color: #000000">);</span>
 </code></pre>
-				<!-- TODO: image doesn't work? update screenshot above to include this  -->
-				<!-- ## `image` method
-Note: if mode is set to `LogMode.PRODUCTION`, `image` logs will not be displayed
-
-```typescript
-logger.image({ 
-    url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
-    width: 10, 
-    height: 10
-})
-``` -->
+				<a href="#dev-method" id="dev-method" style="color: inherit; text-decoration: none;">
+					<h2><code>dev</code> method</h2>
+				</a>
+				<p>This method takes any number of parameters and logs them to the console. If mode is set to <code>LogMode.PRODUCTION</code>, the <code>dev</code> logs will not be displayed.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">dev</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dev&#039;</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#debug-method" id="debug-method" style="color: inherit; text-decoration: none;">
+					<h2><code>debug</code> method</h2>
+				</a>
+				<p>This method takes any number of parameters and logs them to the console. If mode is set to <code>LogMode.PRODUCTION</code>, <code>debug</code> logs will not be displayed.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;debug&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#image-method" id="image-method" style="color: inherit; text-decoration: none;">
+					<h2><code>image</code> method</h2>
+				</a>
+				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to <code>LogMode.PRODUCTION</code>, <code>image</code> logs will not be displayed.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">image</span><span style="color: #000000">({ </span>
+<span style="color: #000000">        </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">width:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;30px&#039;</span><span style="color: #000000">, </span>
+<span style="color: #000000">        </span><span style="color: #001080">height:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;30px&#039;</span>
+<span style="color: #000000">});</span>
+</code></pre>
 				<a href="#imagetext-method" id="imagetext-method" style="color: inherit; text-decoration: none;">
 					<h2><code>imageText</code> method</h2>
 				</a>
-				<p>Note: if mode is set to <code>LogMode.PRODUCTION</code>, <code>imageText</code> logs will not be displayed</p>
+				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to <code>LogMode.PRODUCTION</code>, <code>imageText</code> logs will not be displayed.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">imageText</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">text:</span><span style="color: #000000"> </span><span style="color: #A31515">`imageText`</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">style:</span><span style="color: #000000"> </span><span style="color: #A31515">`color: #4c3ce2; font-weight: bold;`</span><span style="color: #000000">,</span>
 <span style="color: #000000">});</span>
 </code></pre>
-				<a href="#debug-method" id="debug-method" style="color: inherit; text-decoration: none;">
-					<h2><code>debug</code> method</h2>
-				</a>
-				<p>Note: if mode is set to <code>LogMode.PRODUCTION</code>, <code>debug</code> logs will not be displayed</p>
-				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;debug&#039;</span><span style="color: #000000">)</span>
-</code></pre>
 				<a href="#profile-method" id="profile-method" style="color: inherit; text-decoration: none;">
 					<h2><code>profile</code> method</h2>
 				</a>
-				<p>Note: if mode is set to <code>LogMode.PRODUCTION</code>, <code>profile</code> logs will not be displayed</p>
+				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes a Snap profile. If mode is set to <code>LogMode.PRODUCTION</code>, <code>profile</code> logs will not be displayed.</p>
 				<p>See <a href="../snap-profiler">@searchspring/snap-profiler</a> <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a></p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Profiler</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-profiler&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Logger</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-logger&#039;</span><span style="color: #000000">;</span>
@@ -198,14 +233,8 @@ logger.image({
 
 <span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">profile</span><span style="color: #000000">(</span><span style="color: #001080">searchProfile</span><span style="color: #000000">)</span>
 </code></pre>
-				<a href="#dev-method" id="dev-method" style="color: inherit; text-decoration: none;">
-					<h2><code>dev</code> method</h2>
-				</a>
-				<p>Note: if mode is set to <code>LogMode.PRODUCTION</code>, <code>dev</code> logs will not be displayed</p>
-				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">dev</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dev&#039;</span><span style="color: #000000">)</span>
-</code></pre>
-				<a href="#emojis-property" id="emojis-property" style="color: inherit; text-decoration: none;">
-					<h2><code>emojis</code> property</h2>
+				<a href="#emoji-property" id="emoji-property" style="color: inherit; text-decoration: none;">
+					<h2><code>emoji</code> property</h2>
 				</a>
 				<p>The <code>emoji</code> property contains various emojis that can be used</p>
 				<p>The following emojis are available:</p>

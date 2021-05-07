@@ -62,7 +62,7 @@
 					<h1>Snap Profiler</h1>
 				</a>
 				<p><a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a></p>
-				<p>A utility for profiling the performance of Snap features</p>
+				<p>A utility for recording how long something takes to complete. <code>Profiler</code> is used in finding API response, component rendering and Middleware execution times.</p>
 				<hr>
 				<a href="#dependency" id="dependency" style="color: inherit; text-decoration: none;">
 					<h1>Dependency</h1>
@@ -73,6 +73,7 @@
 					<br/>
 					<img src="../../images/snap-dependencies.jpg"/>
 				</details>
+				<br>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h1>Installation</h1>
 				</a>
@@ -87,7 +88,7 @@
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Profiler</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-profiler&#039;</span><span style="color: #000000">;</span>
 </code></pre>
 				<h2 id="Profiler">Profiler</h2>
-				<p>An optional <code>namespace</code> can be passed to the Profiler constructor</p>
+				An optional `namespace` can be passed to the Profiler constructor for profile organization.
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Profiler</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-profiler&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">profiler</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Profiler</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;namespace&#039;</span><span style="color: #000000">);</span>
@@ -95,7 +96,7 @@
 				<a href="#setnamespace-method" id="setnamespace-method" style="color: inherit; text-decoration: none;">
 					<h3><code>setNamespace</code> method</h3>
 				</a>
-				<p>Programatically set namespace</p>
+				<p>Programatically set the namespace after construction.</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Profiler</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-profiler&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">profiler</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Profiler</span><span style="color: #000000">();</span>
@@ -105,7 +106,7 @@
 				<a href="#create-method" id="create-method" style="color: inherit; text-decoration: none;">
 					<h3><code>create</code> method</h3>
 				</a>
-				<p>Create a new profile</p>
+				<p>Create a new profile.</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Profiler</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-profiler&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">profiler</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Profiler</span><span style="color: #000000">();</span>
@@ -114,7 +115,7 @@
 <span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;event&#039;</span><span style="color: #000000">, </span>
 <span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">, </span>
 <span style="color: #000000">    </span><span style="color: #001080">context:</span><span style="color: #000000"> </span><span style="color: #001080">params</span>
-<span style="color: #000000">}: </span><span style="color: #001080">ProfileDetails</span><span style="color: #000000">)</span>
+<span style="color: #000000">}: </span><span style="color: #001080">ProfileDetails</span><span style="color: #000000">);</span>
 </code></pre>
 				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ProfileDetails</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt; = { </span>
 <span style="color: #000000">    </span><span style="color: #001080">type</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">; </span>
@@ -122,75 +123,71 @@
 <span style="color: #000000">    </span><span style="color: #001080">context</span><span style="color: #000000">: </span><span style="color: #267F99">T</span><span style="color: #000000">;</span>
 <span style="color: #000000">}</span>
 </code></pre>
-				<p>Returns an instance of <code>Profile</code>. See <a href="#Profile">Profile</a> section below</p>
+				<p>Returns an instance of <code>Profile</code>. See <a href="#Profile">Profile</a> section below.</p>
 				<h2 id="Profile">Profile</h2>
-				<p><code>Profile</code> is not an exported member of the Snap Profiler package. It is only returned in the <a href="#Profiler">Profiler</a>&#39;s <code>create</code> method</p>
+				<p><code>Profile</code> is not an exported member of the Snap Profiler package. It is only returned in the <a href="#Profiler">Profiler&#39;s</a> <code>create</code> method.</p>
 				<a href="#start-method" id="start-method" style="color: inherit; text-decoration: none;">
 					<h3><code>start</code> method</h3>
 				</a>
-				<p>Can only be invoked on the return on the <code>create</code> method.
-				This will start the profiler timer.</p>
+				<p>This will start the profiler timer.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">searchProfile</span><span style="color: #000000">.</span><span style="color: #795E26">start</span><span style="color: #000000">();</span>
 </code></pre>
 				<a href="#stop-method" id="stop-method" style="color: inherit; text-decoration: none;">
 					<h3><code>stop</code> method</h3>
 				</a>
-				<p>Can only be invoked on the return on the <code>create</code> method.
-				This will stop the profiler timer.</p>
+				<p>This will stop the profiler timer.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">searchProfile</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">();</span>
 </code></pre>
 				<a href="#namespace-property" id="namespace-property" style="color: inherit; text-decoration: none;">
 					<h3><code>namespace</code> property</h3>
 				</a>
-				<p>Profile namespace that was set using the <code>Profiler</code> constructor or the <code>setNamespace</code> method</p>
-				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`namespace: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">namespace</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+				<p>Profile namespace that was set using the <code>Profiler</code> constructor or the <code>setNamespace</code> method.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`namespace: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">namespace</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#type-property" id="type-property" style="color: inherit; text-decoration: none;">
 					<h3><code>type</code> property</h3>
 				</a>
-				<p>Profile type that was set in the <code>create</code> method <code>ProfileDetails</code> parameters</p>
-				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`type: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">type</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+				<p>Profile type that was set in the <code>create</code> method <code>ProfileDetails</code> parameters.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`type: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">type</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#name-property" id="name-property" style="color: inherit; text-decoration: none;">
 					<h3><code>name</code> property</h3>
 				</a>
-				<p>Profile name that was set in the <code>create</code> method <code>ProfileDetails</code> parameters</p>
-				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`name: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+				<p>Profile name that was set in the <code>create</code> method <code>ProfileDetails</code> parameters.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`name: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#context-property" id="context-property" style="color: inherit; text-decoration: none;">
 					<h3><code>context</code> property</h3>
 				</a>
-				<p>Profile context that was set in the <code>create</code> method <code>ProfileDetails</code> parameters</p>
-				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`context: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">context</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+				<p>Profile context that was set in the <code>create</code> method <code>ProfileDetails</code> parameters. The context is used to provide additional details regarding the profile. A search profile would likely contain the request parameters amoung other things.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`context: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">context</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#status-property" id="status-property" style="color: inherit; text-decoration: none;">
 					<h3><code>status</code> property</h3>
 				</a>
-				<p>Profile status. The default value is <code>pending</code></p>
-				<p>The value will change to <code>started</code> when <code>start</code> method is invoked</p>
-				<p>The value will change to <code>finished</code> when <code>stop</code> method is invoked</p>
-				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`context: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">status</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+				<p>Profile status. The default value is <code>pending</code>.</p>
+				<p>The value will change to <code>started</code> when the <code>start</code> method is invoked and to <code>finished</code> when the <code>stop</code> method is invoked.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`context: </span><span style="color: #0000FF">${</span><span style="color: #001080">searchProfile</span><span style="color: #000000FF">.</span><span style="color: #001080">status</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#time-property" id="time-property" style="color: inherit; text-decoration: none;">
 					<h3><code>time</code> property</h3>
 				</a>
-				<p>Profile time object <code>ProfileTime</code></p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">time</span><span style="color: #000000">: </span><span style="color: #267F99">ProfileTime</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">date:</span><span style="color: #000000"> </span><span style="color: #001080">number</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">begin</span><span style="color: #000000">: </span><span style="color: #001080">number</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">end</span><span style="color: #000000">: </span><span style="color: #001080">number</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">run</span><span style="color: #000000">: </span><span style="color: #001080">number</span><span style="color: #000000">;</span>
+				<p>Profile time object is of type <code>ProfileTime</code>:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ProfileTime</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">date</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">begin</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">end</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">run</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
 <span style="color: #000000">};</span>
 </code></pre>
-				<p><code>ProfileTime.date</code> - set to <code>Date.now()</code> when <code>start</code> method is invoked</p>
-				<p><code>ProfileTime.begin</code> - set to <code>window.performance.now()</code> when <code>start</code> method is invoked</p>
-				<p><code>ProfileTime.end</code> - set to <code>window.performance.now()</code> when <code>stop</code> method is invoked</p>
-				<p><code>ProfileTime.run</code> - set to the total running time in milliseconds between when the <code>start</code> and <code>stop</code> methods have been invoked</p>
+				<p><code>ProfileTime.date</code> - set to <code>Date.now()</code> when <code>start</code> method is invoked.</p>
+				<p><code>ProfileTime.begin</code> - set to <code>window.performance.now()</code> when <code>start</code> method is invoked.</p>
+				<p><code>ProfileTime.end</code> - set to <code>window.performance.now()</code> when <code>stop</code> method is invoked.</p>
+				<p><code>ProfileTime.run</code> - set to the total running time in milliseconds between when the <code>start</code> and <code>stop</code> methods have been invoked.</p>
 				<a href="#logging-profiles" id="logging-profiles" style="color: inherit; text-decoration: none;">
 					<h2>Logging profiles</h2>
 				</a>
-				<p>It is recommended to using the Snap Logger&#39;s <code>profile</code> method to log Snap Profiles</p>
-				<p>For further use of Snap Logger, see <a href="../snap-logger">@searchspring/snap-logger</a> <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a></p>
+				<p>It is recommended to using the Snap Logger&#39;s <code>profile</code> method to log Snap Profiles as it provides a clean output for easy parsing.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
