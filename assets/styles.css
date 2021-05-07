@@ -108,6 +108,11 @@ table td {
 	padding: 20px;
 }
 
+#navigation {
+	overflow-y: auto;
+    max-height: calc(100% - 120px);
+}
+
 #navigation ul {
 	list-style: none;
 	padding-left: 20px;
@@ -213,8 +218,11 @@ code:not([class]) {
 	#navigation-wrapper .collapseNav {
 		display: unset;
 		color: rgb(58, 35, 173);
-		padding: 1.5em;
+		padding: 2em;
 		cursor: pointer;
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 
 	#content {
