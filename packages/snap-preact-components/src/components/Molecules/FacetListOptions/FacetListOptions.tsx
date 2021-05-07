@@ -15,37 +15,26 @@ const CSS = {
 		css({
 			...style,
 		}),
-	listOption: () =>
+	listOption: ({ theme }) =>
 		css({
 			display: 'flex',
-			marginBottom: '12px',
+			padding: '6px',
 			textDecoration: 'none',
 			alignItems: 'center',
-			'&:last-child': {
-				marginBottom: '0',
-			},
 			'&:hover': {
 				cursor: 'pointer',
+				background: theme.colors?.hover,
 			},
 		}),
 	textWrapper: () =>
 		css({
+			marginLeft: '8px',
 			display: 'inline-block',
 		}),
-	valueLabel: ({ theme }) =>
+	countLabel: () =>
 		css({
-			marginLeft: '8px',
-			'&$filtered': {
-				color: theme.colors?.primary,
-			},
-		}),
-	countLabel: ({ theme }) =>
-		css({
-			fontSize: '10px',
-			marginLeft: '2px',
-			'&$filtered': {
-				color: theme.colors?.primary,
-			},
+			fontSize: '0.8em',
+			marginLeft: '6px',
 		}),
 };
 
@@ -88,7 +77,7 @@ export const FacetListOptions = observer(
 				<div css={!disableStyles && CSS.style({ style })} className={classnames('ss-list', className)}>
 					{values.map((value) => (
 						<a
-							css={!disableStyles && CSS.listOption()}
+							css={!disableStyles && CSS.listOption({ theme })}
 							className={'ss-list__link'}
 							onFocus={() => {
 								previewOnFocus && value.preview && value.preview();
@@ -105,9 +94,9 @@ export const FacetListOptions = observer(
 						>
 							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
 							<div css={!disableStyles && CSS.textWrapper()}>
-								<span css={!disableStyles && CSS.valueLabel({ theme })}>{value.label}</span>
-								{!hideCount && (
-									<span css={!disableStyles && CSS.countLabel({ theme })} className={'ss-facetCount'}>
+								<span>{value.label}</span>
+								{!hideCount && value.count > 0 && (
+									<span css={!disableStyles && CSS.countLabel()} className={'ss-facetCount'}>
 										({value.count})
 									</span>
 								)}

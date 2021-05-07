@@ -708,3 +708,28 @@ input[type='text'] {
     display: block; }
   .ss-lite-footer .ss-lite-col, .ss-lite-footer .ss-lite-footer-information {
     width: auto; } }
+
+
+.ss-toolbar-row {
+  overflow: hidden;
+}
+
+.ss-toolbar-col {
+  display: inline-block;
+  margin: 10px;
+}
+
+.ss-toolbar-col.pagination,
+.ss-toolbar.ss-toolbar-bottom {
+  float: right;
+}
+
+.ss-slideout__button {
+  width: 100%; 
+  border: 1px solid #333; 
+  text-align: center; 
+  padding: 10px 0; 
+  margin: 10px 0; 
+  font-size: 1.2em; 
+  cursor: pointer;
+}

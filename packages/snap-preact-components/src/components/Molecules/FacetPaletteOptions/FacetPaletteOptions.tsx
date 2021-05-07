@@ -30,8 +30,10 @@ const CSS = {
 	paletteOption: ({ color }) =>
 		css({
 			paddingTop: '100%',
+			// background: TODO: add 'n/a' background image fallback for non-valid valid css colors
 			background: color,
-			border: String(color).match(WHITE) ? '1px solid #EBEBEB' : `1px solid ${color}`,
+			border: '1px solid #EBEBEB', //fallback for non-valid css colors
+			borderColor: `${String(color).match(WHITE) ? '#EBEBEB' : color}`,
 			webkitBorderRadius: '100%',
 			mozBorderRadius: '100%',
 			msBorderRadius: '100%',
@@ -51,25 +53,14 @@ const CSS = {
 			margin: 'auto',
 			bottom: 0,
 			textAlign: 'center',
-			fontSize: '12px',
-			zIndex: 2,
 		}),
-	iconBorder: () =>
-		css({
-			zIndex: 1,
-		}),
-	content: ({ theme }) =>
+	content: () =>
 		css({
 			display: 'block',
 			textAlign: 'center',
-			fontSize: '12px',
 			overflow: 'hidden',
 			textOverflow: 'ellipsis',
 			whiteSpace: 'nowrap',
-
-			'&.filtered': {
-				color: theme.colors?.primary,
-			},
 		}),
 };
 
@@ -139,25 +130,14 @@ export const FacetPaletteOptions = observer(
 									{!hideIcon && value.filtered && (
 										<>
 											{/* TODO look into subProps here - maybe change icon to support svg outlines? */}
-											<Icon icon={'close-thin'} color={'white'} {...subProps.icon} css={!disableStyles && CSS.icon()} />
-											<Icon
-												icon={'close'}
-												color={'black'}
-												size={'19px'}
-												{...subProps.icon}
-												css={
-													!disableStyles &&
-													css`
-														${CSS.icon()} ${CSS.iconBorder()}
-													`
-												}
-											/>
+											<Icon icon={'close'} size={'40%'} color={'black'} {...subProps.icon} css={!disableStyles && CSS.icon()} />
+											<Icon icon={'close-thin'} size={'30%'} color={'white'} {...subProps.icon} css={!disableStyles && CSS.icon()} />
 										</>
 									)}
 								</div>
 
 								{!hideLabel && (
-									<span css={!disableStyles && CSS.content({ theme })} className={classnames('ss-label', { filtered: value.filtered })}>
+									<span css={!disableStyles && CSS.content()} className={classnames('ss-label', { filtered: value.filtered })}>
 										{value.label}
 									</span>
 								)}

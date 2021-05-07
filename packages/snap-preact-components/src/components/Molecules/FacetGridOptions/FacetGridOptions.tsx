@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
 const CSS = {
@@ -16,38 +16,35 @@ const CSS = {
 			gap: gapSize,
 			...style,
 		}),
-	optionWrapper: () =>
+	optionWrapper: ({ theme }) =>
 		css({
 			position: 'relative',
-			'&:hover': {
-				cursor: 'pointer',
-			},
-		}),
-	gridOption: ({ colorPalette }) =>
-		css({
-			paddingTop: '100%',
-			position: 'relative',
-			background: '#F8F8F8',
-			border: '1px solid #EBEBEB',
-			fontSize: '12px',
+			border: `1px solid ${theme.colors.primary}`,
+			padding: '1em',
 			'&.filtered': {
-				background: colorPalette.primary,
+				background: theme.colors.primary,
+				color: theme.colors?.primaryBgText,
+			},
+			'&:hover:not(.filtered)': {
+				cursor: 'pointer',
+				background: theme.colors?.hover,
+			},
+			'::before': {
+				content: '""',
+				paddingBottom: '100%',
+				display: 'block',
 			},
 		}),
-	content: ({ colorPalette }) =>
+	gridOption: () =>
 		css({
 			position: 'absolute',
-			top: '50%',
-			right: 0,
-			left: 0,
-			bottom: 0,
+			maxWidth: '100%',
+			top: 'calc(50% - 0.5em)',
+			bottom: '0',
+			right: '0',
+			left: '0',
+			margin: 'auto',
 			textAlign: 'center',
-			lineHeight: 0,
-			fontSize: '12px',
-
-			'&.filtered': {
-				color: colorPalette.secondary,
-			},
 		}),
 };
 
@@ -70,16 +67,13 @@ export const FacetGridOptions = observer(
 
 		const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
 
-		// using props or theme if no props, if no theme using defaultTheme
-		const colorPalette = theme.colors ? theme.colors : defaultTheme.colors;
-
 		return (
 			values?.length && (
 				<div css={!disableStyles && CSS.grid({ columns, gapSize, style })} className={classnames('ss-grid', className)}>
 					{values.map((value) => (
 						<a
-							css={!disableStyles && CSS.optionWrapper()}
-							className={'ss-grid-optionWrapper'}
+							css={!disableStyles && CSS.optionWrapper({ theme })}
+							className={classnames('ss-grid-optionWrapper', { filtered: value.filtered })}
 							onClick={onClick}
 							onFocus={() => {
 								previewOnFocus && value.preview && value.preview();
@@ -87,10 +81,9 @@ export const FacetGridOptions = observer(
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div className={classnames('ss-grid-option', { filtered: value.filtered })} css={!disableStyles && CSS.gridOption({ colorPalette })} />
-							<span className={classnames({ filtered: value.filtered })} css={!disableStyles && CSS.content({ colorPalette })}>
+							<div className={classnames('ss-grid-option')} css={!disableStyles && CSS.gridOption()}>
 								{value.label}
-							</span>
+							</div>
 						</a>
 					))}
 				</div>

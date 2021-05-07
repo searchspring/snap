@@ -9,10 +9,12 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {
-	price: ({ style }) =>
+	price: ({ theme, style }) =>
 		css({
+			color: theme.colors.primary,
 			'&.ss-strike': {
 				textDecoration: 'line-through',
+				color: 'initial',
 			},
 			...style,
 		}),
@@ -20,14 +22,17 @@ const CSS = {
 
 export function Price(properties: PriceProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: PriceProps = {
 		// default props
 		symbol: '$',
 		decimalPlaces: 2,
+		padDecimalPlaces: true,
 		thousandsSeparator: ',',
 		decimalSeparator: '.',
 		symbolAfter: false,
+		lineThrough: false,
 		// global theme
 		...globalTheme?.components?.price,
 		// props
@@ -35,18 +40,31 @@ export function Price(properties: PriceProps): JSX.Element {
 		...properties.theme?.components?.price,
 	};
 
-	const { lineThrough, value, symbol, decimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style } = props;
+	const {
+		lineThrough,
+		value,
+		symbol,
+		decimalPlaces,
+		padDecimalPlaces,
+		thousandsSeparator,
+		decimalSeparator,
+		symbolAfter,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
 	const formattedPrice = filters.currency(value, {
 		symbol,
 		decimalPlaces,
+		padDecimalPlaces,
 		thousandsSeparator,
 		decimalSeparator,
 		symbolAfter,
 	});
 
 	return (
-		<span css={!disableStyles && CSS.price({ style })} className={classnames('ss-price', { 'ss-strike': lineThrough }, className)}>
+		<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss-price', { 'ss-strike': lineThrough }, className)}>
 			{formattedPrice}
 		</span>
 	);

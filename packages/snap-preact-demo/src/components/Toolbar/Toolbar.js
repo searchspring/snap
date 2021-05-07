@@ -5,7 +5,7 @@ import { SortBy } from './SortBy';
 import { PerPage } from './PerPage';
 import { SidebarContents } from '../Sidebar/Sidebar';
 
-import { Select, Pagination, Slideout } from '@searchspring/snap-preact-components';
+import { Pagination, Slideout } from '@searchspring/snap-preact-components';
 
 @withStore
 @observer
@@ -15,8 +15,11 @@ export class Toolbar extends Component {
 
 		return (
 			<div class="ss-toolbar ss-toolbar-top">
-				<Slideout displayAt={'(max-width: 991px)'}>
-					<SidebarContents />
+				<Slideout displayAt={'(max-width: 991px)'} buttonContent={'Show Filters'}>
+					<Fragment>
+						<h3>Filters</h3>
+						<SidebarContents />
+					</Fragment>
 				</Slideout>
 
 				<div class="ss-toolbar-row">
@@ -27,7 +30,7 @@ export class Toolbar extends Component {
 					<div class="ss-toolbar-col">
 						<PerPage />
 					</div>
-					<div class="ss-toolbar-col">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
+					<div class="ss-toolbar-col pagination">{pagination.totalPages > 1 && <Pagination pagination={pagination} spread={3} />}</div>
 				</div>
 			</div>
 		);

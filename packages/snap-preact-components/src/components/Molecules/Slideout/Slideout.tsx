@@ -23,8 +23,10 @@ const CSS = {
 			zIndex: '999999',
 			width: '90%',
 			maxWidth: width,
-			padding: '0px',
+			padding: '10px',
 			background: '#fff',
+			boxSizing: 'border-box',
+			overflowY: 'auto',
 			...style,
 		}),
 };
@@ -81,7 +83,11 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	return (
 		isVisible && (
 			<>
-				{buttonContent && <div onClick={() => toggleActive()}>{buttonContent}</div>}
+				{buttonContent && (
+					<div className={'ss-slideout__button'} onClick={() => toggleActive()}>
+						{buttonContent}
+					</div>
+				)}
 
 				<div className={classnames('ss-slideout', className)} css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, style })}>
 					{children && cloneElement(children, { toggleActive, active: isActive })}

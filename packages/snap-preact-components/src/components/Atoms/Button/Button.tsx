@@ -9,15 +9,15 @@ import { ComponentProps } from '../../../types';
 import { Theme, useTheme } from '../../../providers/theme';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, style }) =>
+	button: ({ color, backgroundColor, borderColor, theme, style }) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
-			color: color,
+			color: color || theme.colors.primary,
 			outline: 0,
-			backgroundColor: `${backgroundColor}`,
-			border: `1px solid ${borderColor || color || '#333'}`,
+			backgroundColor: backgroundColor || '#fff',
+			border: `1px solid ${borderColor || color || theme.colors.primary}`,
 			'&:hover': {
 				cursor: 'pointer',
 			},
@@ -38,9 +38,11 @@ const CSS = {
 export const Button = observer(
 	(properties: ButtonProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: ButtonProps = {
 			// default props
+			disabled: false,
 			native: false,
 			disableStyles: false,
 			// global theme
@@ -61,6 +63,7 @@ export const Button = observer(
 							color,
 							backgroundColor,
 							borderColor,
+							theme,
 							style,
 					  })),
 			className: classnames('ss-button', { 'ss-button__disabled': disabled }, className),

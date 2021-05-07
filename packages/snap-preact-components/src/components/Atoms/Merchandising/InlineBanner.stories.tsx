@@ -51,11 +51,9 @@ export default {
 		(Story) => (
 			<div
 				style={{
-					margin: '1em',
 					width: '220px',
 					height: '300px',
 					position: 'relative',
-					border: '1px solid lightgrey',
 				}}
 			>
 				<Story height="200px" />

@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
@@ -13,54 +13,55 @@ const CSS = {
 		css({
 			...style,
 		}),
-	listOption: () =>
+	listOption: ({ theme }) =>
 		css({
 			display: 'flex',
-			marginBottom: '12px',
+			padding: '6px 0',
 			textDecoration: 'none',
 			alignItems: 'center',
-
-			'&:last-child': {
-				marginBottom: '0',
-			},
-
 			'&:hover': {
 				cursor: 'pointer',
+				background: theme.colors?.hover,
 			},
 		}),
 	textWrapper: () =>
 		css({
 			display: 'inline-block',
 		}),
-	valueLabel: ({ colorPalette }) =>
+	valueLabel: ({ theme }) =>
 		css({
 			marginLeft: '8px',
 
 			'&$filtered': {
-				color: colorPalette.primary,
+				color: theme.colors.primary,
 			},
 		}),
-	countLabel: ({ colorPalette }) =>
+	countLabel: ({ theme }) =>
 		css({
-			fontSize: '10px',
-			marginLeft: '2px',
+			fontSize: '0.8em',
+			marginLeft: '6px',
 
 			'&$filtered': {
-				color: colorPalette.primary,
+				color: theme.colors.primary,
 			},
 		}),
 	filtered: () =>
 		css({
 			fontWeight: 'bold',
+			'&:hover': {
+				cursor: 'default',
+				background: 'unset',
+			},
 			'& ~ .ss-hierarchy__link:not(.filtered)': {
-				paddingLeft: '20px',
+				paddingLeft: '16px',
 			},
 		}),
-	return: () =>
+	return: ({ theme }) =>
 		css({
 			'&:before': {
 				content: `'\\0000ab'`,
 				padding: '0 2px 0 0',
+				color: theme.colors.primary,
 			},
 		}),
 };
@@ -83,7 +84,6 @@ export const FacetHierarchyOptions = observer(
 		};
 
 		const { values, hideCount, onClick, disableStyles, className, style } = props;
-		const colorPalette = theme.colors ? theme.colors : defaultTheme.colors;
 
 		return (
 			values?.length && (
@@ -94,16 +94,16 @@ export const FacetHierarchyOptions = observer(
 							css={
 								!disableStyles &&
 								css`
-									${CSS.listOption()} ${value.filtered && CSS.filtered()} ${value.history && !value.filtered && CSS.return()}
+									${CSS.listOption({ theme })} ${value.filtered && CSS.filtered()} ${value.history && !value.filtered && CSS.return({ theme })}
 								`
 							}
 							onClick={onClick}
 							{...value.url?.link}
 						>
 							<div css={!disableStyles && CSS.textWrapper()}>
-								<span css={!disableStyles && CSS.valueLabel({ colorPalette })}>{value.label}</span>
+								<span css={!disableStyles && CSS.valueLabel({ theme })}>{value.label}</span>
 								{!hideCount && value.count > 0 && !value.filtered && (
-									<span css={!disableStyles && CSS.countLabel({ colorPalette })} className={'ss-facetCount'}>
+									<span css={!disableStyles && CSS.countLabel({ theme })} className={'ss-facetCount'}>
 										({value.count})
 									</span>
 								)}

@@ -30,6 +30,7 @@ export class SidebarContents extends Component {
 		const {
 			filters,
 			custom: { onSaleFacet },
+			facets,
 		} = this.props.store;
 
 		return (
@@ -58,7 +59,7 @@ export class SidebarContents extends Component {
 					/>
 				)}
 
-				<Facets />
+				<Facets facets={facets} />
 			</div>
 		);
 	}

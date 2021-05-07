@@ -11,14 +11,24 @@ import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	pagination: ({ style }) =>
+	pagination: ({ theme, style }) =>
 		css({
-			margin: '0 -6px',
-			'@media (max-width: 767px)': {
-				margin: '0 -8px',
-			},
 			'& > .ss-page': {
 				padding: '5px',
+				margin: '0 5px',
+				border: `1px solid ${theme.colors.primary}`,
+				display: 'inline-block',
+				minHeight: '1em',
+				minWidth: '1em',
+				textAlign: 'center',
+				'&.ss-active': {
+					boxShadow: `inset 0px -2px ${theme.colors.primary}`,
+					fontWeight: 'bold',
+				},
+				'&:hover:not(.ss-active)': {
+					backgroundColor: theme.colors?.hover,
+					cursor: 'default',
+				},
 			},
 			'& div': {
 				display: 'inline-block',
@@ -33,6 +43,7 @@ const CSS = {
 export const Pagination = observer(
 	(properties: PaginationProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: PaginationProps = {
 			// default props
@@ -87,7 +98,7 @@ export const Pagination = observer(
 		return (
 			store?.totalResults && (
 				<div className={classnames('ss-pagination', className)}>
-					<div css={!disableStyles && CSS.pagination({ style })}>
+					<div css={!disableStyles && CSS.pagination({ theme, style })}>
 						{/* Prev */}
 						{store.previous && !hidePrev && (
 							<a {...store.previous.url.link} className={`ss-page ss-page-previous`}>
