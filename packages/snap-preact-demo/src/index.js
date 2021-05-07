@@ -55,10 +55,10 @@ const cntrlr = new SearchController(cntrlrConfig, {
  */
 
 cntrlr.on('init', async ({ controller }, next) => {
-	const versionText = 'SNAPreact 0.1.2';
+	const versionText = 'Snap Preact Demo Store 0.1.3';
 	controller.log.imageText({
 		url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-		text: `   ${versionText}`,
+		text: `${versionText}`,
 		style: `color: ${controller.log.colors.indigo}; font-weight: bold;`,
 	});
 
@@ -84,12 +84,14 @@ cntrlr.on('init', async ({ controller }, next) => {
 	await next();
 });
 
-cntrlr.on('init', async () => {
+cntrlr.on('init', async ({ controller }, next) => {
 	const loadingDiv = document.createElement('div');
 	loadingDiv.id = 'searchspring-loading';
 
 	const body = await until(() => document.body);
 	body.append(loadingDiv);
+
+	await next();
 });
 
 // delaying the search

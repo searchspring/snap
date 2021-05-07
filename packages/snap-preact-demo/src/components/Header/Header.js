@@ -16,19 +16,19 @@ export class Header extends Component {
 						{pagination.multiplePages && <span class="ss-results-count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
 						<span class="ss-results-count-total">{pagination.totalResults}</span>
 						{` result${pagination.totalResults == 1 ? '' : 's'}`}
-						{search && search.query && (
+						{search?.query && (
 							<span>
 								{` for `}
-								<span class="ss-results-query">"{search.query}"</span>
+								<span class="ss-results-query">"{search.query.string}"</span>
 							</span>
 						)}
 					</h3>
 				) : (
 					pagination.totalResults === 0 && (
 						<h3 class="ss-title ss-results-title ss-no-results-title">
-							{search && search.query ? (
+							{search?.query ? (
 								<span>
-									No results for <span class="ss-results-query">"{search.query}"</span> found.
+									No results for <span class="ss-results-query">"{search.query.string}"</span> found.
 								</span>
 							) : (
 								<span>No results found.</span>

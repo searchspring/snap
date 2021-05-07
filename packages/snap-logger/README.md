@@ -6,6 +6,34 @@ Simple logger for debugging
 
 <img src="../../images/logger-example.png" />
 
+<details>
+	<summary>Sample code</summary>
+	<br/>
+
+```typescript
+logger.image({
+	url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
+	width: '90px',
+	height: '30px'
+});
+
+logger.error('error');
+
+logger.warn('warn');
+
+logger.imageText({
+	url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
+}, 'imageText');
+
+logger.debug('debug');
+
+logger.dev(`%c ${logger.emoji.vortex} %c${logger.prefix}%c${'magical text'}`,
+`color: ${logger.colors.blue}; font-weight: bold; font-size: 10px; line-height: 12px;`,
+`color: ${logger.colors.bluegreen}; font-weight: normal;`,
+`color: ${logger.colors.bluegreen}; font-weight: bold;`);
+```
+</details>
+
 ---
 
 
@@ -14,11 +42,11 @@ Simple logger for debugging
 Snap Logger is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
-    <summary>Package dependencies hierarchy</summary>
-    <br/>
-    <img src="../../images/snap-dependencies.jpg" />
+	<summary>Package dependencies hierarchy</summary>
+	<br/>
+	<img src="../../images/snap-dependencies.jpg" />
 </details>
-
+<br>
 
 # Installation
 
@@ -35,7 +63,7 @@ import { Logger } from '@searchspring/snap-logger';
 ```
 
 ## Config
-Snap Logger accepts an optional string prefix
+Snap Logger accepts an optional string prefix which when set is prepended to all logs.
 
 ```typescript
 const prefix = 'Log:';
@@ -43,7 +71,7 @@ const logger = new Logger(prefix)
 ```
 
 ## Controller usage
-Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller
+Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller in place of `console` methods.
 
 See [Typical Usage](../../README.md#TypicalUsage)
 
@@ -59,21 +87,21 @@ Sets prefix instead of defining a prefix in the constructor.
 ```typescript
 const logger = new Logger();
 
-logger.warn('Hello')
+logger.warn('Hello');
 // 'Hello'
 
-logger.setGroup('search')
+logger.setGroup('search');
 
-logger.warn('Hello')
+logger.warn('Hello');
 // ' [search] :: Hello'
 ```
 
 ## `setMode` method
-Default logging mode is `production`
+The default logging mode is `production`. 
 
-When set to `development`, all logging methods will be visible
+When set to production, logs using `dev` will not be visible. This also includes `image`, `imageText`, `debug`, and `profile`.
 
-When set to production, logs using `dev` will not be visible. This also includes <!-- `image`, --> `imageText`, `debug`, and `profile`
+When set to `development`, all logging methods will be visible.
 
 
 
@@ -81,7 +109,7 @@ When set to production, logs using `dev` will not be visible. This also includes
 import { Logger, LogMode } from '@searchspring/snap-logger';
 
 const logger = new Logger();
-logger.setMode(LogMode.DEVELOPMENT)
+logger.setMode(LogMode.DEVELOPMENT);
 ```
 
 ```typescript
@@ -92,47 +120,56 @@ enum LogMode {
 ```
 
 ## `error` method
+This method takes any number of parameters and logs them to the console. It is best to use this method for error handling.
 ```typescript
-logger.error('error')
+logger.error('error!!!');
+logger.error('text about the error', errorObject, 'more', 'text');
 ```
 
 ## `warn` method
+This method takes any number of parameters and logs them to the console. It is best to use this method for displaying warnings.
 ```typescript
-logger.warn('warn')
+logger.warn('warning!!!');
+logger.warn('warning', warningObject, 'more text');
 ```
 
-<!-- TODO: image doesn't work? update screenshot above to include this  -->
-<!-- ## `image` method
-Note: if mode is set to `LogMode.PRODUCTION`, `image` logs will not be displayed
+## `dev` method
+This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, the `dev` logs will not be displayed.
 
 ```typescript
-logger.image({ 
-    url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
-    width: 10, 
-    height: 10
-})
-``` -->
-
-## `imageText` method
-Note: if mode is set to `LogMode.PRODUCTION`, `imageText` logs will not be displayed
-
-```typescript
-logger.imageText({
-    url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
-    text: `imageText`,
-    style: `color: #4c3ce2; font-weight: bold;`,
-});
+logger.dev('dev')
 ```
 
 ## `debug` method
-Note: if mode is set to `LogMode.PRODUCTION`, `debug` logs will not be displayed
+This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, `debug` logs will not be displayed.
 
 ```typescript
-logger.debug('debug')
+logger.debug('debug');
+```
+## `image` method
+This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `image` logs will not be displayed.
+
+```typescript
+logger.image({ 
+		url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
+		width: '30px', 
+		height: '30px'
+});
+```
+
+## `imageText` method
+This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `imageText` logs will not be displayed.
+
+```typescript
+logger.imageText({
+	url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
+	text: `imageText`,
+	style: `color: #4c3ce2; font-weight: bold;`,
+});
 ```
 
 ## `profile` method
-Note: if mode is set to `LogMode.PRODUCTION`, `profile` logs will not be displayed
+This method takes any number of parameters and logs them to the console. The first parameter is special and takes a Snap profile. If mode is set to `LogMode.PRODUCTION`, `profile` logs will not be displayed.
 
 See [@searchspring/snap-profiler](../snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
 
@@ -144,9 +181,9 @@ const logger = new Logger();
 const profiler = new Profiler();
 
 const searchProfile = profiler.create({ 
-    type: 'event', 
-    name: 'search', 
-    context: {} 
+	type: 'event', 
+	name: 'search', 
+	context: {} 
 });
 
 searchProfile.start();
@@ -158,15 +195,7 @@ searchProfile.stop();
 logger.profile(searchProfile)
 ```
 
-## `dev` method
-Note: if mode is set to `LogMode.PRODUCTION`, `dev` logs will not be displayed
-
-```typescript
-logger.dev('dev')
-```
-
-
-## `emojis` property
+## `emoji` property
 The `emoji` property contains various emojis that can be used
 
 The following emojis are available:

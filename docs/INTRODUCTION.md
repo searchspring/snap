@@ -1,4 +1,4 @@
-## Setup
+# Setup
 
 To follow the way of Snap - you must have strong Snap-fu.
 

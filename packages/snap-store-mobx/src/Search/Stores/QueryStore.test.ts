@@ -18,9 +18,10 @@ describe('QueryStore store', () => {
 		const queryStore = new QueryStore(mockSearchController, searchData.search);
 
 		expect(queryStore).toBeDefined();
-		expect(queryStore.query).toEqual(searchData.search.query);
+		expect(queryStore.query).toBeDefined();
+		expect(queryStore.query.string).toEqual(searchData.search.query);
 		expect(queryStore.didYouMean).toBeDefined();
-		expect(queryStore.didYouMean.query).toEqual(searchData.search.didYouMean);
+		expect(queryStore.didYouMean.string).toEqual(searchData.search.didYouMean);
 		expect(queryStore.didYouMean.url).toBeDefined();
 	});
 });

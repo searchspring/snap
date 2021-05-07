@@ -1,23 +1,25 @@
 import { observable, makeObservable } from 'mobx';
 
 export class QueryStore {
-	query: string;
-	didYouMean: AlternateQuery;
-	originalQuery: AlternateQuery;
+	query: Query;
+	didYouMean: Query;
+	originalQuery: Query;
 
 	constructor(controller, search) {
-		const observables: Observables = {
-			query: observable,
-		};
-		this.query = search?.query;
+		const observables: Observables = {};
+
+		if (search?.query) {
+			this.query = new Query(controller, search.query);
+			observables.query = observable;
+		}
 
 		if (search?.didYouMean) {
-			this.didYouMean = new AlternateQuery(controller, search.didYouMean);
+			this.didYouMean = new Query(controller, search.didYouMean);
 			observables.didYouMean = observable;
 		}
 
 		if (search?.originalQuery) {
-			this.originalQuery = new AlternateQuery(controller, search.originalQuery);
+			this.originalQuery = new Query(controller, search.originalQuery);
 			observables.originalQuery = observable;
 		}
 
@@ -26,22 +28,22 @@ export class QueryStore {
 }
 
 type Observables = {
-	query: typeof observable;
+	query?: typeof observable;
 	didYouMean?: typeof observable;
 	originalQuery?: typeof observable;
 };
 
-class AlternateQuery {
-	query: string;
+class Query {
+	string: string;
 	url;
 
 	constructor(controller, query) {
-		this.query = query;
+		this.string = query;
 
-		this.url = controller.urlManager.set({ query: this.query });
+		this.url = controller.urlManager.set({ query: this.string });
 
 		makeObservable(this, {
-			query: observable,
+			string: observable,
 		});
 	}
 }

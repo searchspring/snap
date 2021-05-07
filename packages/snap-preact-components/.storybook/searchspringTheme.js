@@ -8,9 +8,10 @@ export default create({
 	colorPrimary: '#3a23ad',
 	colorSecondary: '#00cee1',
 
+	appBg: '#fafafa',
 	// Toolbar default and active colors
 	barSelectedColor: '#3a23ad',
 
-	brandTitle: 'Searchspring SNAP Preact',
+	brandTitle: 'Searchspring Snap Preact',
 	brandImage: searchspringLogo,
 });

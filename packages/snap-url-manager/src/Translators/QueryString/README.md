@@ -61,7 +61,7 @@ The `serialize` and `deserialize` methods are abstracted away by the `UrlManager
 | option | description | default value |
 |---|---|:---:|
 | queryParameter | used to specify a different query parameter for 'query' | 'q' |
-| urlRoot | used to redirect to other URLs | :heavy_minus_sign: |
+| urlRoot | used to redirect to other URLs | ➖ |
 
 <br>
 
