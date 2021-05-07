@@ -9,7 +9,7 @@ Snap also supports integration with modern front end frameworks such as Preact, 
 
 ## Contributing
 
-Snap is open source! The repository can be found here [Github](https://github.com/searchspring/snap).
+Snap is open source! The repository can be found on [Github](https://github.com/searchspring/snap).
 
 We invite your participation through Github issues, discussions and pull requests! 
 

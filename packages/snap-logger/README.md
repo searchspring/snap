@@ -97,7 +97,7 @@ logger.warn('Hello');
 ```
 
 ## `setMode` method
-The efault logging mode is `production`. 
+The default logging mode is `production`. 
 
 When set to production, logs using `dev` will not be visible. This also includes `image`, `imageText`, `debug`, and `profile`.
 
