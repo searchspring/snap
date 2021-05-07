@@ -32,7 +32,6 @@ logger.dev(`%c ${logger.emoji.vortex} %c${logger.prefix}%c${'magical text'}`,
 `color: ${logger.colors.bluegreen}; font-weight: normal;`,
 `color: ${logger.colors.bluegreen}; font-weight: bold;`);
 ```
-
 </details>
 
 ---

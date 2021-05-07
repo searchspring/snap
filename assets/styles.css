@@ -1,12 +1,13 @@
 html {
 	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
 	color: #222;
 }
 
 body {
 	margin: 0;
 	background: #fafafa;
+	font-family: 'Ubuntu', sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
 *,
@@ -15,23 +16,77 @@ body {
 	box-sizing: inherit;
 }
 
+a {
+	text-decoration: none;
+	color: #4c3ce2;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p, table {
+	font-family: 'Roboto', sans-serif;
+}
+
 table {
 	border-collapse: collapse;
+	background-color: #ffffff;
+	border-radius: 3px;
+	width: 100%;
+	box-shadow: 0 0 1px rgb(0 0 0 / 35%);
+}
+
+table thead {
+	background-color: #00cee1;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
 }
 
 table tr:nth-child(even) {
-	background-color: #ece9fc;
+	background-color: #fafafa;
 }
 
-table th,
-table td {
+table th {
 	padding: 5px 10px;
+	text-align: left;
 }
 
-code.hljs {
-	background: white;
-	border-radius: 5px;
-	box-shadow: 0 0 2px rgb(0 0 0 / 35%);
+table td {
+	font-size: 0.7em;
+	padding: 10px;
+}
+
+#header {
+	display: flex;
+	margin: 20px 20px 40px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+}
+
+.logo-container .searchspring-svg-logo {
+	width: 40px;
+	transform: rotate(24deg);
+}
+
+.logo-container .logo-nap {
+	text-decoration: underline;
+	text-decoration-color: #4c3ce2;
+	color: #3a23ad;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Press Start 2P', cursive;
+}
+
+.logo-container .logo-nap .exc {
+	color: #00cee1;
 }
 
 #navigation-wrapper {
@@ -70,19 +125,24 @@ code.hljs {
 #navigation ul li a .fas {
 	color: #777;
 	float: right;
+	font-size: 10px;
 }
 
 #navigation ul li a.active {
-	font-style: italic;
-	background: rgb(58, 35, 173);
-	background: linear-gradient(90deg, rgba(58, 35, 173, 1) 0%, rgba(76, 60, 226, 1) 100%);
+	font-weight: bold;
+	background: #00a0ae;
 	color: white;
 	border-radius: 10px 0px 28px 0px;
-	box-shadow: 0 0 5px rgb(0 0 0 / 35%);
+}
+
+#navigation .sublinks li a.active {
+	background: #00cee1;
+	border-radius: 0px 28px 0px 10px;
 }
 
 #navigation h3 {
 	padding: 0px 20px 0px 20px;
+	margin: 0;
 }
 
 #content {
@@ -103,16 +163,45 @@ code.hljs {
 	border: none;
 }
 
-pre {
-	white-space: pre-wrap;
+.section .links {
+	margin: 5px 0 20px;
 }
 
-@media only screen and (max-width: 600px) {
+.section .links .sublinks {
+	font-size: 90%;
+	margin: 5px 0 10px;
+}
+
+pre {
+	font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	padding: 16px;
+	overflow: auto;
+	line-height: 1.2;
+	background-color: #ffffff;
+	border-radius: 3px;
+	box-shadow: 0 0 1px rgb(0 0 0 / 35%);
+}
+
+code:not([class]) {
+	padding: 0.2em 0.4em;
+	margin: 0;
+	background-color: rgba(27,31,35,0.05);
+	border-radius: 3px;
+}
+
+@media only screen and (max-width: 767px) {
+	#navigation {
+		display: none;
+	}
+
+	#navigation.visible {
+		display: unset;
+	}
+
 	#navigation-wrapper {
 		width: 100%;
 		position: relative;
 		height: auto;
-		box-shadow: none;
 		padding: 10px 0;
 	}
 
@@ -124,11 +213,7 @@ pre {
 	#navigation-wrapper .collapseNav {
 		display: unset;
 		color: rgb(58, 35, 173);
-		position: fixed;
-		right: 0;
-		top: 0;
 		padding: 1.5em;
-		padding-left: 50%;
 		cursor: pointer;
 	}
 

@@ -1,4 +1,4 @@
-# Snap Usage
+## Snap Usage
 
 This guide covers how you can quickly get started using Snap.
 

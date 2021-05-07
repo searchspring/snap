@@ -12,9 +12,9 @@ Snap Profiler is a dependency of [@searchspring/snap-controller](../snap-control
 
 
 <details>
-    <summary>Package dependencies hierarchy</summary>
-    <br/>
-    <img src="../../images/snap-dependencies.jpg"/>
+	<summary>Package dependencies hierarchy</summary>
+	<br/>
+	<img src="../../images/snap-dependencies.jpg"/>
 </details>
 <br>
 
@@ -62,17 +62,17 @@ import { Profiler } from '@searchspring/snap-profiler';
 const profiler = new Profiler();
 
 const searchProfile = profiler.create({ 
-    type: 'event', 
-    name: 'search', 
-    context: params
+	type: 'event', 
+	name: 'search', 
+	context: params
 }: ProfileDetails);
 ```
 
 ```typescript
 type ProfileDetails<T> = { 
-    type: string; 
-    name: string; 
-    context: T;
+	type: string; 
+	name: string; 
+	context: T;
 }
 ```
 
@@ -158,6 +158,3 @@ type ProfileTime = {
 
 ## Logging profiles
 It is recommended to using the Snap Logger's `profile` method to log Snap Profiles as it provides a clean output for easy parsing.
-
-For further use of Snap Logger, see [@searchspring/snap-logger](../snap-logger) <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
-
