@@ -118,4 +118,14 @@ export const Default = Template.bind({});
 Default.args = {
 	button: 'button text',
 	content: 'content text',
+	open: false,
+};
+
+const Template2 = (args) => <Dropdown {...args} />;
+
+export const Stateful = Template2.bind({});
+Stateful.args = {
+	button: 'button text',
+	content: 'content text',
+	open: undefined,
 };

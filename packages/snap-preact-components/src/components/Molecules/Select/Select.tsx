@@ -262,7 +262,7 @@ export const Select = observer(
 					) : (
 						<Dropdown
 							{...subProps.dropdown}
-							disableClickOutside
+							disableClickOutside={disableClickOutside}
 							open={open}
 							onToggle={(e, state) => {
 								setOpen((prev) => state ?? !prev);
