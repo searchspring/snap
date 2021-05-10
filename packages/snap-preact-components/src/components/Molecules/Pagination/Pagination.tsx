@@ -27,7 +27,6 @@ const CSS = {
 				},
 				'&:hover:not(.ss-active)': {
 					backgroundColor: theme.colors?.hover,
-					cursor: 'default',
 				},
 			},
 			'& div': {

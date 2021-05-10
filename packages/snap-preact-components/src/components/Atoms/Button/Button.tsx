@@ -20,6 +20,7 @@ const CSS = {
 			border: `1px solid ${borderColor || color || theme.colors?.primary}`,
 			'&:hover': {
 				cursor: 'pointer',
+				backgroundColor: theme.colors?.hover,
 			},
 			'&.ss-button__disabled': {
 				opacity: 0.3,

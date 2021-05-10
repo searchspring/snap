@@ -710,9 +710,6 @@ input[type='text'] {
     width: auto; } }
 
 
-.ss-toolbar-row {
-  overflow: hidden;
-}
 
 .ss-toolbar-col {
   display: inline-block;
@@ -732,4 +729,8 @@ input[type='text'] {
   margin: 10px 0; 
   font-size: 1.2em; 
   cursor: pointer;
+}
+
+.ss-slider button {
+  color: inherit;
 }

@@ -16,17 +16,9 @@ export class Results extends Component {
 		const resultsTheme = {
 			components: {
 				result: {
-					buttonSlot: <Button content="Add to Cart" id={controller.store.results[0].attributes.productid} />,
-					theme: {
-						components: {
-							badge: {
-								content: 'special',
-							},
-							price: {
-								symbol: '%',
-							},
-						},
-					},
+					buttonSlot: (
+						<Button content="Add to Cart" id={controller.store.results[0].attributes.productid} style={{ display: 'block', textAlign: 'center' }} />
+					),
 				},
 			},
 		};

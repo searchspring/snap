@@ -23,7 +23,7 @@ const CSS = {
 			padding: '1em',
 			'&.filtered': {
 				background: theme.colors?.primary,
-				color: theme.colors?.primaryBgText,
+				color: theme.colors?.text?.secondary,
 			},
 			'&:hover:not(.filtered)': {
 				cursor: 'pointer',

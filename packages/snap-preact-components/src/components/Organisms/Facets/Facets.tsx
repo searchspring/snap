@@ -40,7 +40,7 @@ export const Facets = observer(
 		};
 
 		return (
-			facets?.length && (
+			facets?.length > 0 && (
 				<div className={classnames('ss-facets', className)} style={!disableStyles && style}>
 					{facets.map((facet) => (
 						<Facet {...subProps.facet} facet={facet} />
