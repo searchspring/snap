@@ -11,7 +11,7 @@ import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 const CSS = {
 	price: ({ theme, style }) =>
 		css({
-			color: theme.colors.primary,
+			color: theme.colors?.primary,
 			'&.ss-strike': {
 				textDecoration: 'line-through',
 				color: 'initial',

@@ -18,7 +18,7 @@ const CSS = {
 			minHeight: size,
 			minWidth: size,
 			position: 'relative',
-			border: `1px solid ${color || theme.colors.primary}`,
+			border: `1px solid ${color || theme.colors?.primary}`,
 			'&.ss-checkbox__disabled': {
 				opacity: 0.3,
 			},
@@ -64,7 +64,7 @@ export const Checkbox = observer(
 				...globalTheme?.components?.icon,
 				// inherited props
 				...defined({
-					color: iconColor || color || theme.colors.primary,
+					color: iconColor || color || theme.colors?.primary,
 					disableStyles,
 					icon,
 					size: size && `calc(${size} - 30%)`,

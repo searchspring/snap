@@ -13,7 +13,7 @@ import { sprintf } from '../../../utilities';
 const CSS = {
 	handle: ({ handleColor, handleTextColor, theme }) =>
 		css({
-			background: handleColor || theme.colors.primary,
+			background: handleColor || theme.colors?.primary,
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -53,7 +53,7 @@ const CSS = {
 		}),
 	handleActive: ({ handleDraggingColor, handleColor, handleTextColor, theme }) =>
 		css({
-			background: handleDraggingColor || handleColor || theme.colors.primary,
+			background: handleDraggingColor || handleColor || theme.colors?.primary,
 
 			///need to find a way to spread the above styles here rather than repeat them
 			display: 'flex',
@@ -125,12 +125,12 @@ const CSS = {
 		}),
 	segment: ({ trackColor, theme }) =>
 		css({
-			background: trackColor || theme.colors.secondary,
+			background: trackColor || theme.colors?.secondary,
 			height: '100%',
 		}),
 	rail: ({ railColor, theme }) =>
 		css({
-			background: railColor || theme.colors.primary,
+			background: railColor || theme.colors?.primary,
 			height: '100%',
 		}),
 };

@@ -59,7 +59,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme.colors.primary}`,
+				border: `1px solid ${borderColor || color || theme.colors?.primary}`,
 				'& .ss-select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',

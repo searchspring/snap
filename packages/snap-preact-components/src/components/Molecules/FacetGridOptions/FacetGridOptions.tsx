@@ -19,10 +19,10 @@ const CSS = {
 	optionWrapper: ({ theme }) =>
 		css({
 			position: 'relative',
-			border: `1px solid ${theme.colors.primary}`,
+			border: `1px solid ${theme.colors?.primary}`,
 			padding: '1em',
 			'&.filtered': {
-				background: theme.colors.primary,
+				background: theme.colors?.primary,
 				color: theme.colors?.primaryBgText,
 			},
 			'&:hover:not(.filtered)': {

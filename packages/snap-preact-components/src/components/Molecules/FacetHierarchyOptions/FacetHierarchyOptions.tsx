@@ -33,7 +33,7 @@ const CSS = {
 			marginLeft: '8px',
 
 			'&$filtered': {
-				color: theme.colors.primary,
+				color: theme.colors?.primary,
 			},
 		}),
 	countLabel: ({ theme }) =>
@@ -42,7 +42,7 @@ const CSS = {
 			marginLeft: '6px',
 
 			'&$filtered': {
-				color: theme.colors.primary,
+				color: theme.colors?.primary,
 			},
 		}),
 	filtered: () =>
@@ -61,7 +61,7 @@ const CSS = {
 			'&:before': {
 				content: `'\\0000ab'`,
 				padding: '0 2px 0 0',
-				color: theme.colors.primary,
+				color: theme.colors?.primary,
 			},
 		}),
 };

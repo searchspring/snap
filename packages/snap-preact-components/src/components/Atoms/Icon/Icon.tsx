@@ -11,7 +11,7 @@ import { iconPaths, IconType } from './paths';
 const CSS = {
 	icon: ({ color, height, width, size, theme, style }) =>
 		css({
-			fill: color || theme.colors.primary,
+			fill: color || theme.colors?.primary,
 			width: width || size,
 			height: height || size,
 			...style,

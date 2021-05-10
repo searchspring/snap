@@ -16,13 +16,13 @@ const CSS = {
 			'& > .ss-page': {
 				padding: '5px',
 				margin: '0 5px',
-				border: `1px solid ${theme.colors.primary}`,
+				border: `1px solid ${theme.colors?.primary}`,
 				display: 'inline-block',
 				minHeight: '1em',
 				minWidth: '1em',
 				textAlign: 'center',
 				'&.ss-active': {
-					boxShadow: `inset 0px -2px ${theme.colors.primary}`,
+					boxShadow: `inset 0px -2px ${theme.colors?.primary}`,
 					fontWeight: 'bold',
 				},
 				'&:hover:not(.ss-active)': {

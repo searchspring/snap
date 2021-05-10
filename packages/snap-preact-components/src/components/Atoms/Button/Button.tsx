@@ -14,10 +14,10 @@ const CSS = {
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
-			color: color || theme.colors.primary,
+			color: color || theme.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme.colors.primary}`,
+			border: `1px solid ${borderColor || color || theme.colors?.primary}`,
 			'&:hover': {
 				cursor: 'pointer',
 			},

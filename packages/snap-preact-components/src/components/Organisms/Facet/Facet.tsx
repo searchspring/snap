@@ -25,7 +25,7 @@ const CSS = {
 				justifyContent: 'space-between',
 				alignItems: 'center',
 				color: color,
-				borderBottom: `2px solid ${theme.colors.primary}`,
+				borderBottom: `2px solid ${theme.colors?.primary}`,
 				padding: '6px 0',
 			},
 			'& .ss-dropdown': {
