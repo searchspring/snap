@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.12 (2021-05-11)
+
+
+### Bug Fixes
+
+* **select.tsx:** fixing disableclickoutside bug. Adding an additional… ([#39](https://github.com/searchspring/snap/issues/39)) ([5e51c5e](https://github.com/searchspring/snap/commit/5e51c5ef4eaab24b86f0c363f9c66424ba71cfd1))
+
+
+
+
+
 ## 0.1.11 (2021-05-11)
 
 
