@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.11 (2021-05-11)
+
+
+### Bug Fixes
+
+* **facet.tsx:** disableCollapse prop forces Dropdown to be open ([#37](https://github.com/searchspring/snap/issues/37)) ([d64b48b](https://github.com/searchspring/snap/commit/d64b48bddfe40017e2cf051325037b4743a1e002))
+
+
+
+
+
 ## 0.1.10 (2021-05-07)
 
 **Note:** Version bump only for package @searchspring/snap-logger
