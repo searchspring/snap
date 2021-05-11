@@ -2873,7 +2873,7 @@
 							Object(_emotion_react__WEBPACK_IMPORTED_MODULE_1__.b)(
 								_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_10__.a,
 								{
-									open: !(null == facet ? void 0 : facet.collapsed),
+									open: disableCollapse || !(null == facet ? void 0 : facet.collapsed),
 									onClick: function onClick(e) {
 										!disableCollapse && (null == facet || facet.toggleCollapse());
 									},
