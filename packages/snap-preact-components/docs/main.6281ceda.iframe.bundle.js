@@ -2660,13 +2660,13 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(251),
-				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(249),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(252),
-				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(250),
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(252),
+				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(250),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(253),
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(251),
 				_Molecules_Slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(256),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93),
-				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(255),
+				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(204),
 				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(60),
 				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(73),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(36),
@@ -3490,7 +3490,127 @@
 				);
 			}
 		},
-		246: function (module, __webpack_exports__, __webpack_require__) {
+		204: function (module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, 'a', function () {
+				return Dropdown;
+			});
+			__webpack_require__(8);
+			var hooks_module = __webpack_require__(32),
+				emotion_react_browser_esm = __webpack_require__(3),
+				classnames = __webpack_require__(15),
+				classnames_default = __webpack_require__.n(classnames),
+				es = __webpack_require__(21),
+				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36);
+			var __assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				CSS_dropdown = function dropdown(_a) {
+					var style = _a.style;
+					return Object(emotion_react_browser_esm.a)(
+						__assign(
+							{
+								position: 'relative',
+								'&.ss-open': { '& > .ss-dropdown__content': { visibility: 'visible !important', opacity: 1 } },
+								'.ss-dropdown__button': { cursor: 'pointer' },
+								'.ss-dropdown__content': { minWidth: '100%', visibility: 'hidden', opacity: 0, position: 'absolute', top: 'auto', left: 0 },
+							},
+							style
+						)
+					);
+				},
+				Dropdown = Object(es.c)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						_d,
+						showContent,
+						setShowContent,
+						globalTheme = Object(emotion_element_4fbd89c5_browser_esm.f)(),
+						props = __assign(
+							__assign(
+								__assign(
+									{ disableStyles: !1, disableClickOutside: !1, startOpen: !1 },
+									null === (_b = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _b ? void 0 : _b.dropdown
+								),
+								properties
+							),
+							null === (_d = null === (_c = properties.theme) || void 0 === _c ? void 0 : _c.components) || void 0 === _d ? void 0 : _d.dropdown
+						),
+						button = props.button,
+						content = props.content,
+						children = props.children,
+						disabled = props.disabled,
+						open = props.open,
+						_onClick = props.onClick,
+						onToggle = props.onToggle,
+						startOpen = props.startOpen,
+						disableClickOutside = props.disableClickOutside,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						stateful = void 0 === open;
+					stateful ? ((_a = Object(hooks_module.useState)(startOpen)), (showContent = _a[0]), (setShowContent = _a[1])) : (showContent = open);
+					var innerRef =
+						!disableClickOutside &&
+						(function useClickOutside(callback) {
+							var callbackRef = Object(hooks_module.useRef)(),
+								innerRef = Object(hooks_module.useRef)();
+							return (
+								Object(hooks_module.useEffect)(function () {
+									callbackRef.current = callback;
+								}),
+								Object(hooks_module.useEffect)(function () {
+									return (
+										document.addEventListener('click', handleClick),
+										function () {
+											return document.removeEventListener('click', handleClick);
+										}
+									);
+									function handleClick(e) {
+										innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
+									}
+								}, []),
+								innerRef
+							);
+						})(function (e) {
+							showContent && (disabled || (stateful && setShowContent(!1), onToggle && onToggle(e, !1)));
+						});
+					return Object(emotion_react_browser_esm.b)(
+						'div',
+						{
+							css: !disableStyles && CSS_dropdown({ style: style }),
+							className: classnames_default()('ss-dropdown', { 'ss-open': showContent }, className),
+							ref: innerRef,
+						},
+						Object(emotion_react_browser_esm.b)(
+							'div',
+							{
+								className: 'ss-dropdown__button',
+								onClick: function onClick(e) {
+									disabled ||
+										(!(function toggleShowContent(e) {
+											stateful &&
+												setShowContent(function (prev) {
+													return onToggle && onToggle(e, !prev), !prev;
+												});
+										})(e),
+										_onClick && _onClick(e));
+								},
+							},
+							button
+						),
+						Object(emotion_react_browser_esm.b)('div', { className: 'ss-dropdown__content' }, content, children)
+					);
+				});
+		},
+		247: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return MDXContent;
@@ -3676,7 +3796,7 @@
 			}
 			MDXContent.isMDXComponent = !0;
 		},
-		248: function (module, __webpack_exports__, __webpack_require__) {
+		249: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Button;
@@ -3773,7 +3893,7 @@
 					);
 				});
 		},
-		249: function (module, __webpack_exports__, __webpack_require__) {
+		250: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetGridOptions;
@@ -3905,7 +4025,7 @@
 					);
 				});
 		},
-		250: function (module, __webpack_exports__, __webpack_require__) {
+		251: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetHierarchyOptions;
@@ -4058,7 +4178,7 @@
 					);
 				});
 		},
-		251: function (module, __webpack_exports__, __webpack_require__) {
+		252: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetListOptions;
@@ -4218,7 +4338,7 @@
 					);
 				});
 		},
-		252: function (module, __webpack_exports__, __webpack_require__) {
+		253: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return FacetPaletteOptions;
@@ -4430,7 +4550,7 @@
 					);
 				});
 		},
-		253: function (module, __webpack_exports__, __webpack_require__) {
+		254: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Result;
@@ -4669,7 +4789,7 @@
 					);
 				});
 		},
-		254: function (module, __webpack_exports__, __webpack_require__) {
+		255: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, 'a', function () {
 				return Results;
@@ -4682,7 +4802,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(15),
 				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
 				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(199),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(253),
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(254),
 				_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(60),
 				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(73),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(36),
@@ -4832,126 +4952,6 @@
 										  );
 								})
 							)
-					);
-				});
-		},
-		255: function (module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, 'a', function () {
-				return Dropdown;
-			});
-			__webpack_require__(8);
-			var hooks_module = __webpack_require__(32),
-				emotion_react_browser_esm = __webpack_require__(3),
-				classnames = __webpack_require__(15),
-				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(21),
-				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36);
-			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				CSS_dropdown = function dropdown(_a) {
-					var style = _a.style;
-					return Object(emotion_react_browser_esm.a)(
-						__assign(
-							{
-								position: 'relative',
-								'&.ss-open': { '& > .ss-dropdown__content': { visibility: 'visible !important', opacity: 1 } },
-								'.ss-dropdown__button': { cursor: 'pointer' },
-								'.ss-dropdown__content': { minWidth: '100%', visibility: 'hidden', opacity: 0, position: 'absolute', top: 'auto', left: 0 },
-							},
-							style
-						)
-					);
-				},
-				Dropdown = Object(es.c)(function (properties) {
-					var _a,
-						_b,
-						_c,
-						_d,
-						showContent,
-						setShowContent,
-						globalTheme = Object(emotion_element_4fbd89c5_browser_esm.f)(),
-						props = __assign(
-							__assign(
-								__assign(
-									{ disableStyles: !1, disableClickOutside: !1, startOpen: !1 },
-									null === (_b = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _b ? void 0 : _b.dropdown
-								),
-								properties
-							),
-							null === (_d = null === (_c = properties.theme) || void 0 === _c ? void 0 : _c.components) || void 0 === _d ? void 0 : _d.dropdown
-						),
-						button = props.button,
-						content = props.content,
-						children = props.children,
-						disabled = props.disabled,
-						open = props.open,
-						_onClick = props.onClick,
-						onToggle = props.onToggle,
-						startOpen = props.startOpen,
-						disableClickOutside = props.disableClickOutside,
-						disableStyles = props.disableStyles,
-						className = props.className,
-						style = props.style,
-						stateful = void 0 === open;
-					stateful ? ((_a = Object(hooks_module.useState)(startOpen)), (showContent = _a[0]), (setShowContent = _a[1])) : (showContent = open);
-					var innerRef =
-						!disableClickOutside &&
-						(function useClickOutside(callback) {
-							var callbackRef = Object(hooks_module.useRef)(),
-								innerRef = Object(hooks_module.useRef)();
-							return (
-								Object(hooks_module.useEffect)(function () {
-									callbackRef.current = callback;
-								}),
-								Object(hooks_module.useEffect)(function () {
-									return (
-										document.addEventListener('click', handleClick),
-										function () {
-											return document.removeEventListener('click', handleClick);
-										}
-									);
-									function handleClick(e) {
-										innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
-									}
-								}, []),
-								innerRef
-							);
-						})(function (e) {
-							showContent && (disabled || (stateful && setShowContent(!1), onToggle && onToggle(e, !1)));
-						});
-					return Object(emotion_react_browser_esm.b)(
-						'div',
-						{
-							css: !disableStyles && CSS_dropdown({ style: style }),
-							className: classnames_default()('ss-dropdown', { 'ss-open': showContent }, className),
-							ref: innerRef,
-						},
-						Object(emotion_react_browser_esm.b)(
-							'div',
-							{
-								className: 'ss-dropdown__button',
-								onClick: function onClick(e) {
-									disabled ||
-										(!(function toggleShowContent(e) {
-											stateful &&
-												setShowContent(function (prev) {
-													return onToggle && onToggle(e, !prev), !prev;
-												});
-										})(e),
-										_onClick && _onClick(e));
-								},
-							},
-							button
-						),
-						Object(emotion_react_browser_esm.b)('div', { className: 'ss-dropdown__content' }, content, children)
 					);
 				});
 		},
@@ -5422,7 +5422,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
 				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(73),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(36),
-				_Atoms_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(248),
+				_Atoms_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(249),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93),
 				__assign = function () {
 					return (__assign =
@@ -11387,7 +11387,7 @@
 				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(494),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(43),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9),
-				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(246),
+				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(247),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -11659,7 +11659,7 @@
 				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(494),
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(43),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9),
-				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(246),
+				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(247),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -13698,8 +13698,8 @@
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_4fbd89c5_browser_esm = __webpack_require__(36),
 				defined = __webpack_require__(73),
-				Dropdown = __webpack_require__(255),
-				Button = __webpack_require__(248),
+				Dropdown = __webpack_require__(204),
+				Button = __webpack_require__(249),
 				Icon = __webpack_require__(93),
 				__assign = function () {
 					return (__assign =
@@ -13808,7 +13808,8 @@
 						borderColor = props.borderColor,
 						color = props.color,
 						clearSelection = props.clearSelection,
-						disabled = (props.disableClickOutside, props.disabled),
+						disableClickOutside = props.disableClickOutside,
+						disabled = props.disabled,
 						hideLabelOnSelection = props.hideLabelOnSelection,
 						iconColor = props.iconColor,
 						iconClose = props.iconClose,
@@ -13938,7 +13939,7 @@
 								: Object(emotion_react_browser_esm.b)(
 										Dropdown.a,
 										__assign({}, subProps.dropdown, {
-											disableClickOutside: !0,
+											disableClickOutside: disableClickOutside,
 											open: open,
 											onToggle: function onToggle(e, state) {
 												setOpen(function (prev) {
@@ -14675,7 +14676,7 @@
 				emotion_react_browser_esm = __webpack_require__(3),
 				classnames = __webpack_require__(15),
 				classnames_default = __webpack_require__.n(classnames),
-				Results = __webpack_require__(254),
+				Results = __webpack_require__(255),
 				Banner = __webpack_require__(133),
 				Facet = __webpack_require__(149),
 				defined = __webpack_require__(73),
@@ -16547,7 +16548,7 @@
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Button = __webpack_require__(248),
+				Button = __webpack_require__(249),
 				blocks = __webpack_require__(9),
 				componentArgs = __webpack_require__(494),
 				esm = (__webpack_require__(1), __webpack_require__(0));
@@ -16739,10 +16740,13 @@
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'Default', function () {
 					return Default;
+				}),
+				__webpack_require__.d(__webpack_exports__, 'ExternalState', function () {
+					return ExternalState;
 				});
 			__webpack_require__(8), __webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Dropdown = __webpack_require__(255),
+				Dropdown = __webpack_require__(204),
 				componentArgs = __webpack_require__(494),
 				blocks = __webpack_require__(9),
 				esm = (__webpack_require__(1), __webpack_require__(0));
@@ -16943,7 +16947,6 @@
 									control: { type: 'boolean' },
 								},
 								open: {
-									defaultValue: !1,
 									description: 'Pass a value here to control the state externally',
 									table: { type: { summary: 'boolean' } },
 									control: { type: 'boolean' },
@@ -16975,6 +16978,10 @@
 						return Object(preact_module.h)(Dropdown.a, __assign({}, args));
 					}.bind({}));
 			Default.args = { button: 'button text', content: 'content text' };
+			var ExternalState = function Template2(args) {
+				return Object(preact_module.h)(Dropdown.a, __assign({}, args));
+			}.bind({});
+			ExternalState.args = { button: 'button text', content: 'content text', open: !0 };
 		},
 		908: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -18049,7 +18056,7 @@
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				mobxreact_esm = __webpack_require__(52),
-				FacetGridOptions = __webpack_require__(249),
+				FacetGridOptions = __webpack_require__(250),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
@@ -18408,7 +18415,7 @@
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				mobxreact_esm = __webpack_require__(52),
-				FacetHierarchyOptions = __webpack_require__(250),
+				FacetHierarchyOptions = __webpack_require__(251),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				types = __webpack_require__(60),
@@ -18702,7 +18709,7 @@
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				mobxreact_esm = __webpack_require__(52),
-				FacetListOptions = __webpack_require__(251),
+				FacetListOptions = __webpack_require__(252),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
@@ -19078,7 +19085,7 @@
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
 				mobxreact_esm = __webpack_require__(52),
-				FacetPaletteOptions = __webpack_require__(252),
+				FacetPaletteOptions = __webpack_require__(253),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				blocks = __webpack_require__(9),
@@ -19867,7 +19874,7 @@
 				__webpack_require__(13),
 				__webpack_require__(42);
 			var preact_module = __webpack_require__(2),
-				Result = __webpack_require__(253),
+				Result = __webpack_require__(254),
 				Image = __webpack_require__(203),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
@@ -21248,7 +21255,7 @@
 				__webpack_require__(13);
 			var preact_module = __webpack_require__(2),
 				blocks = __webpack_require__(9),
-				Results = __webpack_require__(254),
+				Results = __webpack_require__(255),
 				componentArgs = __webpack_require__(494),
 				snapify = __webpack_require__(43),
 				esm = (__webpack_require__(1), __webpack_require__(0));

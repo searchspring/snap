@@ -75,7 +75,7 @@
 				global_window = __webpack_require__(6),
 				objectWithoutPropertiesLoose = __webpack_require__(438),
 				esm_extends = __webpack_require__(44),
-				inheritsLoose = __webpack_require__(237),
+				inheritsLoose = __webpack_require__(238),
 				ManagerReferenceNodeContext = compat_module.createContext(),
 				ManagerReferenceNodeSetterContext = compat_module.createContext();
 			function Manager(_ref) {
@@ -1815,7 +1815,7 @@
 					__webpack_require__(23),
 					__webpack_require__(13),
 					__webpack_require__(65),
-					__webpack_require__(204),
+					__webpack_require__(205),
 					__webpack_require__(169)),
 				memoizerific_default = __webpack_require__.n(memoizerific),
 				utils = __webpack_require__(117);
