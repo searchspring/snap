@@ -1,7 +1,7 @@
 export type Target = {
 	selector: string;
 	inject?: {
-		action: 'before' | 'after' | 'append' | 'prepend';
+		action?: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
 	};
 	[any: string]: unknown;
@@ -66,6 +66,10 @@ export class DomTargeter {
 			throw new Error('DomTargeter::inject: Provided element has no parent element');
 		}
 
+		if (!elem.parentElement) {
+			throw new Error('DomTargeter::inject: Provided element has no parent element');
+		}
+
 		switch (target?.inject?.action) {
 			case 'before':
 				elem.parentNode.insertBefore(injectedElem, elem);
@@ -87,6 +91,12 @@ export class DomTargeter {
 					elem.appendChild(injectedElem);
 				}
 				break;
+			case 'replace':
+				elem.parentElement!.replaceChild(injectedElem, elem);
+				break;
+			default:
+				//replace by default
+				elem.parentElement!.replaceChild(injectedElem, elem);
 		}
 
 		return injectedElem;

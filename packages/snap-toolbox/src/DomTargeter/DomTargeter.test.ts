@@ -92,6 +92,10 @@ describe('DomTargeter', () => {
 				</div>
 				<div class="f">
 				</div>
+				<div class="g">
+				</div>
+				<div class="h">
+				</div>
 			</div>
 		`);
 
@@ -188,6 +192,29 @@ describe('DomTargeter', () => {
 					},
 				},
 			},
+			{
+				selector: '#content .g',
+				inject: {
+					action: 'replace',
+					element: (target, element) => {
+						const div = document.createElement('div');
+						div.className = 'replaced';
+						expect(element.className).toBe('g');
+						return div;
+					},
+				},
+			},
+			{
+				selector: '#content .h',
+				inject: {
+					element: (target, element) => {
+						const div = document.createElement('div');
+						div.className = 'replacedByDefault';
+						expect(element.className).toBe('h');
+						return div;
+					},
+				},
+			},
 		];
 
 		const classNames: Array<string> = [];
@@ -206,7 +233,10 @@ describe('DomTargeter', () => {
 		expect(document.querySelector('.d')?.lastElementChild?.className).toBe('append-4');
 		expect(document.querySelector('.e')?.firstElementChild?.className).toBe('prepend-5');
 		expect(document.querySelector('.f')?.lastElementChild?.className).toBe('append-6');
-
-		expect(classNames).toEqual(['before-1', 'after-2', 'prepend-3', 'append-4', 'prepend-5', 'append-6']);
+		expect(document.querySelector('.g')).toBeNull();
+		expect(document.querySelector('.replaced')).not.toBeNull();
+		expect(document.querySelector('.h')).toBeNull();
+		expect(document.querySelector('.replacedByDefault')).not.toBeNull();
+		expect(classNames).toEqual(['before-1', 'after-2', 'prepend-3', 'append-4', 'prepend-5', 'append-6', 'replaced', 'replacedByDefault']);
 	});
 });
