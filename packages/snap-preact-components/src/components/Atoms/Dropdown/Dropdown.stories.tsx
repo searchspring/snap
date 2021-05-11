@@ -58,7 +58,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		open: {
-			defaultValue: false,
 			description: 'Pass a value here to control the state externally',
 			table: {
 				type: {
@@ -118,14 +117,13 @@ export const Default = Template.bind({});
 Default.args = {
 	button: 'button text',
 	content: 'content text',
-	open: false,
 };
 
 const Template2 = (args) => <Dropdown {...args} />;
 
-export const Stateful = Template2.bind({});
-Stateful.args = {
+export const ExternalState = Template2.bind({});
+ExternalState.args = {
 	button: 'button text',
 	content: 'content text',
-	open: undefined,
+	open: true,
 };
