@@ -414,7 +414,7 @@
 					return Color_ColorControl;
 				});
 			__webpack_require__(27),
-				__webpack_require__(37),
+				__webpack_require__(36),
 				__webpack_require__(45),
 				__webpack_require__(16),
 				__webpack_require__(64),
@@ -851,7 +851,7 @@
 				TooltipNote = __webpack_require__(495),
 				lazy_WithTooltip = __webpack_require__(189),
 				esm_form = __webpack_require__(84),
-				icon = __webpack_require__(55);
+				icon = __webpack_require__(54);
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
