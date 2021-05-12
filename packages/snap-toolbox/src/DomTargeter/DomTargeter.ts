@@ -1,7 +1,7 @@
 export type Target = {
 	selector: string;
 	inject?: {
-		action?: 'before' | 'after' | 'append' | 'prepend' | 'replace';
+		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
 	};
 	[any: string]: unknown;
@@ -42,6 +42,8 @@ export class DomTargeter {
 				const injectedElem = this.inject(elem, target);
 				this.onTarget(target, injectedElem, elem);
 			} else {
+				//empty target selector by default
+				while (elem.firstChild && elem.removeChild(elem.firstChild));
 				this.onTarget(target, elem);
 			}
 		});
@@ -90,9 +92,6 @@ export class DomTargeter {
 			case 'replace':
 				elem.parentNode!.replaceChild(injectedElem, elem);
 				break;
-			default:
-				//replace by default
-				elem.parentNode!.replaceChild(injectedElem, elem);
 		}
 
 		return injectedElem;
