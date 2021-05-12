@@ -29,13 +29,13 @@ describe('Slider Component', () => {
 
 	it('has both slide handles', () => {
 		const rendered = render(<Slider {...args} />);
-		const sliderHandles = rendered.container.querySelectorAll('.ss-sliderHandle');
+		const sliderHandles = rendered.container.querySelectorAll('.ss-slider__handle');
 		expect(sliderHandles.length).toBe(2);
 	});
 
 	it('both handles are where they should be and have proper text', () => {
 		const rendered = render(<Slider {...args} />);
-		const sliderMarks = rendered.container.querySelectorAll('.ss-sliderHandle label');
+		const sliderMarks = rendered.container.querySelectorAll('.ss-slider__handle label');
 
 		expect(sliderMarks[0].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active.low));
 		expect(sliderMarks[1].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active.high));
@@ -48,15 +48,15 @@ describe('Slider Component', () => {
 			handleColor: 'rgb(0, 0, 100)',
 		};
 		const rendered = render(<Slider {...args} {...colorArgs} />);
-		const trackElement = rendered.container.querySelector('.ss-sliderSegment');
+		const trackElement = rendered.container.querySelector('.ss-slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(colorArgs.trackColor);
 
-		const railElement = rendered.container.querySelector('.ss-slider .ss-sliderRail');
+		const railElement = rendered.container.querySelector('.ss-slider .ss-slider__rail');
 		styles = getComputedStyle(railElement);
 		expect(styles.backgroundColor).toBe(colorArgs.railColor);
 
-		const handleElement = rendered.container.querySelector('.ss-slider .ss-sliderHandle');
+		const handleElement = rendered.container.querySelector('.ss-slider .ss-slider__handle');
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(colorArgs.handleColor);
 	});
@@ -67,30 +67,30 @@ describe('Slider Component', () => {
 				<Slider {...args} />
 			</ThemeProvider>
 		);
-		const trackElement = rendered.container.querySelector('.ss-sliderSegment');
+		const trackElement = rendered.container.querySelector('.ss-slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.trackColor);
 
-		const railElement = rendered.container.querySelector('.ss-slider .ss-sliderRail');
+		const railElement = rendered.container.querySelector('.ss-slider .ss-slider__rail');
 		styles = getComputedStyle(railElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.railColor);
 
-		const handleElement = rendered.container.querySelector('.ss-slider .ss-sliderHandle');
+		const handleElement = rendered.container.querySelector('.ss-slider .ss-slider__handle');
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.handleColor);
 	});
 
 	it('is themeable with theme prop', () => {
 		const rendered = render(<Slider {...args} theme={theme} />);
-		const trackElement = rendered.container.querySelector('.ss-sliderSegment');
+		const trackElement = rendered.container.querySelector('.ss-slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.trackColor);
 
-		const railElement = rendered.container.querySelector('.ss-slider .ss-sliderRail');
+		const railElement = rendered.container.querySelector('.ss-slider .ss-slider__rail');
 		styles = getComputedStyle(railElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.railColor);
 
-		const handleElement = rendered.container.querySelector('.ss-slider .ss-sliderHandle');
+		const handleElement = rendered.container.querySelector('.ss-slider .ss-slider__handle');
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.handleColor);
 	});
@@ -110,15 +110,15 @@ describe('Slider Component', () => {
 				<Slider {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const trackElement = rendered.container.querySelector('.ss-sliderSegment');
+		const trackElement = rendered.container.querySelector('.ss-slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.slider.trackColor);
 
-		const railElement = rendered.container.querySelector('.ss-slider .ss-sliderRail');
+		const railElement = rendered.container.querySelector('.ss-slider .ss-slider__rail');
 		styles = getComputedStyle(railElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.slider.railColor);
 
-		const handleElement = rendered.container.querySelector('.ss-slider .ss-sliderHandle');
+		const handleElement = rendered.container.querySelector('.ss-slider .ss-slider__handle');
 		styles = getComputedStyle(handleElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.slider.handleColor);
 	});

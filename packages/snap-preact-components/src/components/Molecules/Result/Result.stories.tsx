@@ -1,11 +1,13 @@
 import { h } from 'preact';
+
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Result, ResultProps } from './Result';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Result/readme.md';
+import { Layout } from '../../../types';
 
 export default {
 	title: `Molecules/Result`,
@@ -22,7 +24,7 @@ export default {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ margin: '1em' }}>
+			<div>
 				<Story />
 			</div>
 		),
@@ -39,7 +41,6 @@ export default {
 			control: { type: 'none' },
 		},
 		hideBadge: {
-			defaultValue: false,
 			description: 'Hide badge',
 			table: {
 				type: {
@@ -50,7 +51,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideTitle: {
-			defaultValue: false,
 			description: 'Hide title',
 			table: {
 				type: {
@@ -61,7 +61,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hidePricing: {
-			defaultValue: false,
 			description: 'Hide pricing',
 			table: {
 				type: {
@@ -112,6 +111,7 @@ export default {
 		},
 		layout: {
 			description: 'Results layout',
+			defaultValue: Layout.GRID,
 			table: {
 				type: {
 					summary: 'string',
@@ -119,7 +119,7 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: ['grid', 'list'],
+				options: [Layout.GRID, Layout.LIST],
 			},
 		},
 		...componentArgs,

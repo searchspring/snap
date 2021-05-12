@@ -1,12 +1,12 @@
 import { h } from 'preact';
 
-import { InlineBanner, InlineBannerProps } from './InlineBanner';
-
-import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { InlineBanner, InlineBannerProps } from './InlineBanner';
+import { componentArgs } from '../../../utilities';
+import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Merchandising/readme.md';
+import { Layout } from '../../../types';
 
 export default {
 	title: `Atoms/InlineBanner`,
@@ -34,7 +34,7 @@ export default {
 		},
 		layout: {
 			description: 'Banner layout',
-			type: { required: true },
+			defaultValue: Layout.GRID,
 			table: {
 				type: {
 					summary: 'string',
@@ -42,8 +42,17 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: ['grid', 'list'],
+				options: [Layout.GRID, Layout.LIST],
 			},
+		},
+		width: {
+			description: 'InlineBanner width',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
 		},
 		...componentArgs,
 	},

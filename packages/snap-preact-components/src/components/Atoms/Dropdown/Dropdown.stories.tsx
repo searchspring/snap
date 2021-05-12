@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { Dropdown } from './Dropdown';
-import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Dropdown } from './Dropdown';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Dropdown/readme.md';
 
 export default {
@@ -22,6 +22,7 @@ export default {
 	argTypes: {
 		button: {
 			description: 'Button content to toggle the dropdown',
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'string, JSX',
@@ -47,8 +48,17 @@ export default {
 			},
 		},
 		disabled: {
-			defaultValue: false,
 			description: 'Disable dropdown - prevents all click events',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		disableOverlay: {
+			description: 'Disable dropdown overlay and renders as block',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -63,11 +73,11 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
+				defaultValue: { summary: 'undefined' },
 			},
 			control: { type: 'boolean' },
 		},
 		startOpen: {
-			defaultValue: false,
 			description: 'Dropdown state is open on initial render - used with internal state only',
 			table: {
 				type: {
@@ -78,7 +88,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		disableClickOutside: {
-			defaultValue: false,
 			description: 'Ignore clicks outside of element',
 			table: {
 				type: {

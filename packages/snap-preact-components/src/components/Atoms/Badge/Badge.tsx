@@ -24,7 +24,6 @@ export const Badge = observer(
 
 		const props: BadgeProps = {
 			// default props
-			disableStyles: false,
 			position: {
 				top: 0,
 				left: 0,

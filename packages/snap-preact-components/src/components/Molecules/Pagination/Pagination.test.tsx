@@ -18,33 +18,33 @@ describe('Pagination Component', () => {
 	});
 
 	it('doesnt render previous if first page', () => {
-		const previousElement = rendered.container.querySelector('.ss-page-previous');
+		const previousElement = rendered.container.querySelector('.ss-pagination__page-previous');
 		expect(previousElement).not.toBeInTheDocument();
 	});
 
 	it('renders the last page', () => {
-		const last = rendered.container.querySelector('.ss-page-last');
+		const last = rendered.container.querySelector('.ss-pagination__page-last');
 		expect(last).toBeInTheDocument();
 	});
 
 	it('last page has the correct number', () => {
-		const last = rendered.container.querySelector('.ss-page-last');
+		const last = rendered.container.querySelector('.ss-pagination__page-last');
 		expect(last.innerHTML).toBe(PaginStoreFirstMock.last.number.toString());
 	});
 
 	it('renders the next page button', () => {
-		const next = rendered.container.querySelector('.ss-page-next');
+		const next = rendered.container.querySelector('.ss-pagination__page-next');
 		expect(next).toBeInTheDocument();
 	});
 
 	it('sets the active page, & the active number matches what is passed in', () => {
-		const active = rendered.container.querySelector('.ss-active');
+		const active = rendered.container.querySelector('.ss-pagination__page-active');
 		expect(active).toBeInTheDocument();
 		expect(active.innerHTML).toBe(PaginStoreFirstMock.current.number.toString());
 	});
 
 	it('renders the correct number of page options', () => {
-		const pages = rendered.container.querySelectorAll('.ss-page');
+		const pages = rendered.container.querySelectorAll('.ss-pagination__page');
 		//pages 1 - 5, last, next
 		expect(pages).toHaveLength(7);
 	});
@@ -57,10 +57,10 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss-pagination');
 		expect(paginationElement).toBeInTheDocument();
 
-		const first = rendered.container.querySelector('.ss-page-first');
-		const last = rendered.container.querySelector('.ss-page-last');
-		const next = rendered.container.querySelector('.ss-page-next');
-		const prev = rendered.container.querySelector('.ss-page-previous');
+		const first = rendered.container.querySelector('.ss-pagination__page-first');
+		const last = rendered.container.querySelector('.ss-pagination__page-last');
+		const next = rendered.container.querySelector('.ss-pagination__page-next');
+		const prev = rendered.container.querySelector('.ss-pagination__page-previous');
 
 		expect(first).toBeInTheDocument();
 		expect(last).toBeInTheDocument();
@@ -74,8 +74,8 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss-pagination');
 		expect(paginationElement).toBeInTheDocument();
 
-		const first = rendered.container.querySelector('.ss-page-first');
-		const last = rendered.container.querySelector('.ss-page-last');
+		const first = rendered.container.querySelector('.ss-pagination__page-first');
+		const last = rendered.container.querySelector('.ss-pagination__page-last');
 		expect(first).not.toBeInTheDocument();
 		expect(last).not.toBeInTheDocument();
 	});
@@ -85,8 +85,8 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss-pagination');
 		expect(paginationElement).toBeInTheDocument();
 
-		const next = rendered.container.querySelector('.ss-page-next');
-		const prev = rendered.container.querySelector('.ss-page-previous');
+		const next = rendered.container.querySelector('.ss-pagination__page-next');
+		const prev = rendered.container.querySelector('.ss-pagination__page-previous');
 		expect(next).not.toBeInTheDocument();
 		expect(prev).not.toBeInTheDocument();
 	});
@@ -105,8 +105,8 @@ describe('Lets test the Pagination Component optional props', () => {
 		const paginationElement = rendered.container.querySelector('.ss-pagination');
 		expect(paginationElement).toBeInTheDocument();
 
-		const next = rendered.container.querySelector('.ss-page-next');
-		const prev = rendered.container.querySelector('.ss-page-previous');
+		const next = rendered.container.querySelector('.ss-pagination__page-next');
+		const prev = rendered.container.querySelector('.ss-pagination__page-previous');
 		expect(next).toHaveTextContent('NEXT');
 		expect(prev).toHaveTextContent('PREV');
 	});
@@ -128,7 +128,7 @@ describe('Pagination theming works', () => {
 		);
 		const pagination = rendered.container.querySelector('.ss-pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -142,7 +142,7 @@ describe('Pagination theming works', () => {
 		const rendered = render(<Pagination pagination={paginationMock} theme={propTheme} />);
 		const pagination = rendered.container.querySelector('.ss-pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -168,6 +168,6 @@ describe('Pagination theming works', () => {
 
 		const pagination = rendered.container.querySelector('.ss-pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 });

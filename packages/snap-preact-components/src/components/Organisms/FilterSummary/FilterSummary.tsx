@@ -13,8 +13,11 @@ import { ComponentProps, Filter as FilterType } from '../../../types';
 const CSS = {
 	filterSummary: ({ style }) =>
 		css({
-			'& .ss-filter': {
+			'& .ss-filtersummary__filter': {
 				margin: '5px 10px 5px 0',
+			},
+			'& .ss-filtersummary__title': {
+				fontSize: '1.2em',
 			},
 			...style,
 		}),
@@ -26,10 +29,11 @@ export const FilterSummary = observer(
 
 		const props: FilterSummaryProps = {
 			// default props
-			hideFacetLabel: false,
-			disableStyles: false,
 			title: 'Current Filters',
-			hideClearAll: false,
+			clearAllLabel: 'Clear All',
+			clearAllIcon: 'close-thin',
+			filterIcon: 'close-thin',
+			separator: ':',
 			// global theme
 			...globalTheme?.components?.filterSummary,
 			// props
@@ -56,7 +60,7 @@ export const FilterSummary = observer(
 		const subProps: FilterSummarySubProps = {
 			filter: {
 				// default props
-				separator: ':',
+				className: 'ss-filtersummary__filter',
 				// global theme
 				...globalTheme?.components?.filter,
 				// inherited props
@@ -72,35 +76,29 @@ export const FilterSummary = observer(
 		};
 
 		return filters?.length ? (
-			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss-filter-summary', className)}>
-				<div className={'ss-filter-summary__title'}>{title}</div>
+			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss-filtersummary', className)}>
+				<div className="ss-filtersummary__title">{title}</div>
 
-				<div>
-					{filters.map((filter) => (
-						<Filter
-							{...subProps.filter}
-							url={filter?.url}
-							facetLabel={filter?.facet?.label}
-							valueLabel={filter?.value?.label}
-							onClick={(e) => {
-								onClick && onClick(e, filter);
-							}}
-						/>
-					))}
+				{filters.map((filter) => (
+					<Filter
+						{...subProps.filter}
+						url={filter?.url}
+						facetLabel={filter?.facet?.label}
+						valueLabel={filter?.value?.label}
+						onClick={(e) => onClick && onClick(e, filter)}
+					/>
+				))}
 
-					{!hideClearAll && (
-						<Filter
-							{...subProps.filter}
-							icon={clearAllIcon}
-							className={'ss-filter-summary__clear'}
-							hideFacetLabel
-							valueLabel={clearAllLabel || 'Clear All'}
-							onClick={(e) => {
-								onClearAllClick && onClearAllClick(e);
-							}}
-						/>
-					)}
-				</div>
+				{!hideClearAll && (
+					<Filter
+						{...subProps.filter}
+						icon={clearAllIcon}
+						className={`${subProps?.filter?.className} ss-filtersummary__filter-clear`}
+						hideFacetLabel
+						valueLabel={clearAllLabel}
+						onClick={(e) => onClearAllClick && onClearAllClick(e)}
+					/>
+				)}
 			</div>
 		) : null;
 	}

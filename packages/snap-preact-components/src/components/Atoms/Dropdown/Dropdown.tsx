@@ -11,23 +11,24 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { useClickOutside } from '../../../hooks';
 
 const CSS = {
-	dropdown: ({ style }) =>
+	dropdown: ({ disableOverlay, style }) =>
 		css({
 			position: 'relative',
-			'&.ss-open': {
-				'& > .ss-dropdown__content': {
-					visibility: 'visible !important',
+			'&.ss-dropdown-open': {
+				'& .ss-dropdown__content': {
+					position: `${disableOverlay ? 'initial' : null}`,
+					visibility: 'visible',
 					opacity: 1,
 				},
 			},
 			'.ss-dropdown__button': {
-				cursor: 'pointer',
+				cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 			},
 			'.ss-dropdown__content': {
+				position: 'absolute',
 				minWidth: '100%',
 				visibility: 'hidden',
 				opacity: 0,
-				position: 'absolute',
 				top: 'auto',
 				left: 0,
 			},
@@ -41,8 +42,6 @@ export const Dropdown = observer(
 
 		const props: DropdownProps = {
 			// default props
-			disableStyles: false,
-			disableClickOutside: false,
 			startOpen: false,
 			// global theme
 			...globalTheme?.components?.dropdown,
@@ -51,7 +50,21 @@ export const Dropdown = observer(
 			...properties.theme?.components?.dropdown,
 		};
 
-		const { button, content, children, disabled, open, onClick, onToggle, startOpen, disableClickOutside, disableStyles, className, style } = props;
+		const {
+			button,
+			content,
+			children,
+			disabled,
+			open,
+			disableOverlay,
+			onClick,
+			onToggle,
+			startOpen,
+			disableClickOutside,
+			disableStyles,
+			className,
+			style,
+		} = props;
 
 		let showContent, setShowContent;
 
@@ -84,8 +97,8 @@ export const Dropdown = observer(
 
 		return (
 			<div
-				css={!disableStyles && CSS.dropdown({ style })}
-				className={classnames('ss-dropdown', { 'ss-open': showContent }, className)}
+				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
+				className={classnames('ss-dropdown', { 'ss-dropdown-open': showContent }, className)}
 				ref={innerRef}
 			>
 				<div
@@ -115,6 +128,7 @@ export interface DropdownProps extends ComponentProps {
 	children?: any;
 	disabled?: boolean;
 	open?: boolean;
+	disableOverlay?: string;
 	onClick?: (event: Event) => void;
 	onToggle?: (event: Event, showContent: boolean) => void;
 	startOpen?: boolean;

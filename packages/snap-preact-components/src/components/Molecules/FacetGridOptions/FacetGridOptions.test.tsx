@@ -21,12 +21,12 @@ describe('FacetGridOptions Component', () => {
 	});
 
 	it('has the correct number of options', () => {
-		const gridOptions = gridComponent.container.querySelectorAll('.ss-grid-option');
+		const gridOptions = gridComponent.container.querySelectorAll('.ss-grid__option');
 		expect(gridOptions).toHaveLength(gridFacetMock.values.length);
 	});
 
 	it('has the correct label', () => {
-		const gridOptions = gridComponent.container.querySelectorAll('.ss-grid-optionWrapper');
+		const gridOptions = gridComponent.container.querySelectorAll('.ss-grid__option__value');
 		for (let i = 0; i < gridOptions.length; i++) {
 			expect(gridOptions[i]).toHaveTextContent(gridFacetMock.values[i].label);
 		}
@@ -40,11 +40,11 @@ describe('FacetGridOptions Component', () => {
 	});
 
 	it('Grid option elements have correct classes', () => {
-		const gridOptionsElement = gridComponent.container.querySelectorAll('.ss-grid-optionWrapper');
+		const gridOptionsElement = gridComponent.container.querySelectorAll('.ss-grid__option__value');
 		const inactiveGridOption = gridOptionsElement[0];
 		const activeGridOption = gridOptionsElement[2];
-		expect(inactiveGridOption).toHaveClass('ss-grid-optionWrapper');
-		expect(activeGridOption.className).toMatch(/filtered/);
+		expect(inactiveGridOption).toHaveClass('ss-grid__option__value');
+		expect(activeGridOption.parentElement).toHaveClass('ss-grid__option-filtered');
 	});
 });
 

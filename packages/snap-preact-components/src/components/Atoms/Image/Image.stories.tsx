@@ -1,11 +1,10 @@
 import { h } from 'preact';
 
-import { Image, FALLBACK_IMAGE_URL } from './Image';
-
-import { componentArgs } from '../../../utilities';
-import { searchResponse } from '../../../mocks/searchResponse';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Image, FALLBACK_IMAGE_URL } from './Image';
+import { componentArgs } from '../../../utilities';
+import { searchResponse } from '../../../mocks/searchResponse';
 import Readme from '../Image/readme.md';
 
 export default {
@@ -25,9 +24,7 @@ export default {
 		(Story) => (
 			<div
 				style={{
-					margin: '1em',
-					width: '350px',
-					position: 'relative',
+					maxWidth: '300px',
 				}}
 			>
 				<Story />
@@ -57,11 +54,12 @@ export default {
 		},
 		fallback: {
 			description: 'Fallback image url',
+			defaultValue: FALLBACK_IMAGE_URL,
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: FALLBACK_IMAGE_URL },
+				defaultValue: { summary: 'string' },
 			},
 			control: { type: 'text' },
 		},
@@ -120,26 +118,24 @@ export const Default = Template.bind({});
 Default.args = {
 	src: searchResponse.results[6].mappings.core.imageUrl,
 	alt: searchResponse.results[6].mappings.core.name,
-	fallback: undefined,
 };
 
 export const BrokenImg = Template.bind({});
 BrokenImg.args = {
-	src: 'brokenurlgoeshere.comonviefocdns',
-	alt: searchResponse.results[0].mappings.core.name,
-	fallback: undefined,
+	src: 'intentionally_broken_image.jpg',
+	alt: searchResponse.results[6].mappings.core.name,
 };
 
 export const ManualFallBack = Template.bind({});
 ManualFallBack.args = {
-	src: 'brokenurlgoeshere.comonviefocdns',
-	alt: searchResponse.results[0].mappings.core.name,
-	fallback: 'https://www.telegraph.co.uk/content/dam/Pets/spark/royal-canin/happy-puppy-xlarge.jpg?imwidth=1200',
+	src: 'intentionally_broken_image.jpg',
+	alt: searchResponse.results[5].mappings.core.name,
+	fallback: searchResponse.results[5].mappings.core.imageUrl,
 };
 
 export const onhover = Template.bind({});
 onhover.args = {
-	src: searchResponse.results[7].mappings.core.imageUrl,
-	alt: searchResponse.results[7].mappings.core.name,
-	hoverSrc: searchResponse.results[6].mappings.core.imageUrl,
+	src: searchResponse.results[6].mappings.core.imageUrl,
+	alt: searchResponse.results[6].mappings.core.name,
+	hoverSrc: searchResponse.results[7].mappings.core.imageUrl,
 };

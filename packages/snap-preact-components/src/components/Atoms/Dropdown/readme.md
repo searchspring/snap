@@ -47,6 +47,13 @@ The `disabled` prop will disable the button from toggling the visibility of the 
 <Dropdown disabled>Hello World!</Dropdown>
 ```
 
+### disableOverlay
+The `disableOverlay` prop will disable the dropdown contents from being rendered as an overlay. If set to `true`, dropdown contents will instead be rendered as a block and affect the height of its parent element. Typically used if Dropdown is intended to act as a header (ie. Facet)
+
+```jsx
+<Dropdown disableOverlay>Hello World!</Dropdown>
+```
+
 ### disableClickOutside
 The `disableClickOutside` prop by default is `false`. Setting this to `true` will not close the dropdown if a click event was registered outside the dropdown content.
 

@@ -11,30 +11,30 @@ import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 
 const CSS = {
-	style: ({ style }) =>
+	list: ({ theme, style }) =>
 		css({
-			...style,
-		}),
-	listOption: ({ theme }) =>
-		css({
-			display: 'flex',
-			padding: '6px',
-			textDecoration: 'none',
-			alignItems: 'center',
-			'&:hover': {
-				cursor: 'pointer',
-				background: theme.colors?.hover,
+			'& .ss-list__option': {
+				display: 'flex',
+				padding: '6px',
+				textDecoration: 'none',
+				alignItems: 'center',
+				'&:hover': {
+					cursor: 'pointer',
+					background: theme.colors?.hover,
+				},
+				'&.ss-list__option-filtered': {
+					fontWeight: 'bold',
+					color: theme.colors?.primary,
+				},
+				'& .ss-list__option__value': {
+					marginLeft: '8px',
+					'& .ss-list__option__value__count': {
+						fontSize: '0.8em',
+						marginLeft: '6px',
+					},
+				},
 			},
-		}),
-	textWrapper: () =>
-		css({
-			marginLeft: '8px',
-			display: 'inline-block',
-		}),
-	countLabel: () =>
-		css({
-			fontSize: '0.8em',
-			marginLeft: '6px',
+			...style,
 		}),
 };
 
@@ -45,9 +45,6 @@ export const FacetListOptions = observer(
 
 		const props: FacetListOptionsProps = {
 			// default props
-			hideCheckbox: false,
-			hideCount: false,
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.facetListOptions,
 			//props
@@ -60,7 +57,7 @@ export const FacetListOptions = observer(
 		const subProps: FacetListOptionsSubProps = {
 			checkbox: {
 				// default props
-				className: 'ss-facetList-checkbox',
+				className: 'ss-list__checkbox',
 				// global theme
 				...globalTheme?.components?.checkbox,
 				// inherited props
@@ -74,33 +71,20 @@ export const FacetListOptions = observer(
 
 		return (
 			values?.length && (
-				<div css={!disableStyles && CSS.style({ style })} className={classnames('ss-list', className)}>
+				<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss-list', className)}>
 					{values.map((value) => (
 						<a
-							css={!disableStyles && CSS.listOption({ theme })}
-							className={'ss-list__link'}
-							onFocus={() => {
-								previewOnFocus && value.preview && value.preview();
-							}}
+							className={classnames('ss-list__option', { 'ss-list__option-filtered': value.filtered })}
+							onClick={onClick}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
 							{...value.url?.link}
-							onClick={(e) => {
-								if (typeof onClick == 'function') {
-									onClick(e);
-								}
-
-								value.url?.link?.onClick(e);
-							}}
 						>
 							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-							<div css={!disableStyles && CSS.textWrapper()}>
-								<span>{value.label}</span>
-								{!hideCount && value.count > 0 && (
-									<span css={!disableStyles && CSS.countLabel()} className={'ss-facetCount'}>
-										({value.count})
-									</span>
-								)}
-							</div>
+							<span className="ss-list__option__value">
+								{value.label}
+								{!hideCount && value.count > 0 && <span className="ss-list__option__value__count">({value.count})</span>}
+							</span>
 						</a>
 					))}
 				</div>

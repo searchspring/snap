@@ -236,7 +236,7 @@ describe('Dropdown Component', () => {
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 
-			expect(dropdown).not.toHaveClass('ss-open');
+			expect(dropdown).not.toHaveClass('ss-dropdown-open');
 		});
 
 		it('can start open', () => {
@@ -244,7 +244,7 @@ describe('Dropdown Component', () => {
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
 
-			expect(dropdown).toHaveClass('ss-open');
+			expect(dropdown).toHaveClass('ss-dropdown-open');
 		});
 
 		it('keeps its own internal state and passes it to onToggle', () => {
@@ -257,11 +257,11 @@ describe('Dropdown Component', () => {
 
 			userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), true);
-			expect(dropdown).toHaveClass('ss-open');
+			expect(dropdown).toHaveClass('ss-dropdown-open');
 
 			userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), false);
-			expect(dropdown).not.toHaveClass('ss-open');
+			expect(dropdown).not.toHaveClass('ss-dropdown-open');
 		});
 	});
 
@@ -281,10 +281,10 @@ describe('Dropdown Component', () => {
 			const rendered = render(<Dropdown button={'open me'} open={true} />);
 
 			const dropdown = rendered.container.querySelector('.ss-dropdown');
-			expect(dropdown).toHaveClass('ss-open');
+			expect(dropdown).toHaveClass('ss-dropdown-open');
 
 			rendered.rerender(<Dropdown button={'open me'} open={false} />);
-			expect(dropdown).not.toHaveClass('ss-open');
+			expect(dropdown).not.toHaveClass('ss-dropdown-open');
 		});
 	});
 });

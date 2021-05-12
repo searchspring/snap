@@ -24,7 +24,6 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props: IconProps = {
 		// default props
-		disableStyles: false,
 		size: '16px',
 		viewBox: '0 0 56 56',
 		// global theme
@@ -52,7 +51,7 @@ export function Icon(properties: IconProps): JSX.Element {
 						style,
 					})
 				}
-				className={classnames('ss-icon', `ss-icon-${icon}`, className)}
+				className={classnames('ss-icon', icon ? `ss-icon-${icon}` : null, className)}
 				viewBox={viewBox}
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles && (width || size)}

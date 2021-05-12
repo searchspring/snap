@@ -28,7 +28,7 @@ export const Breadcrumbs = observer(
 
 		const props: BreadcrumbProps = {
 			// default props
-			disableStyles: false,
+			separator: '>',
 			// global theme
 			...globalTheme?.components?.breadcrumbs,
 			// props
@@ -45,7 +45,7 @@ export const Breadcrumbs = observer(
 						.map<React.ReactNode>((crumb) => (
 							<li className="ss-breadcrumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
 						))
-						.reduce((prev, curr) => [prev, <li className="ss-breadcrumbs__separator">{separator || '>'}</li>, curr])}
+						.reduce((prev, curr) => [prev, <li className="ss-breadcrumbs__separator">{separator}</li>, curr])}
 				</ul>
 			</div>
 		);

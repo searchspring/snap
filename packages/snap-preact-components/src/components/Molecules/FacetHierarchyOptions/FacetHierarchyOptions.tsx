@@ -9,60 +9,44 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
-	list: ({ style }) =>
+	hierarchy: ({ theme, style }) =>
 		css({
+			'& .ss-hierarchy__option': {
+				display: 'flex',
+				padding: '6px 0',
+				textDecoration: 'none',
+				alignItems: 'center',
+				'&:hover': {
+					cursor: 'pointer',
+					background: theme.colors?.hover,
+				},
+				'&.ss-hierarchy__option-filtered': {
+					fontWeight: 'bold',
+					color: theme.colors?.primary,
+					'&:hover': {
+						cursor: 'default',
+						background: 'unset',
+					},
+					'& ~ .ss-hierarchy__option:not(.ss-hierarchy__option-filtered)': {
+						paddingLeft: '16px',
+					},
+				},
+				'&.ss-hierarchy__option-return': {
+					'&:before': {
+						content: `'\\0000ab'`,
+						padding: '0 2px 0 0',
+						color: theme.colors?.primary,
+					},
+				},
+				'& .ss-hierarchy__option__value': {
+					marginLeft: '8px',
+					'& .ss-hierarchy__option__value__count': {
+						fontSize: '0.8em',
+						marginLeft: '6px',
+					},
+				},
+			},
 			...style,
-		}),
-	listOption: ({ theme }) =>
-		css({
-			display: 'flex',
-			padding: '6px 0',
-			textDecoration: 'none',
-			alignItems: 'center',
-			'&:hover': {
-				cursor: 'pointer',
-				background: theme.colors?.hover,
-			},
-		}),
-	textWrapper: () =>
-		css({
-			display: 'inline-block',
-		}),
-	valueLabel: ({ theme }) =>
-		css({
-			marginLeft: '8px',
-
-			'&$filtered': {
-				color: theme.colors?.primary,
-			},
-		}),
-	countLabel: ({ theme }) =>
-		css({
-			fontSize: '0.8em',
-			marginLeft: '6px',
-
-			'&$filtered': {
-				color: theme.colors?.primary,
-			},
-		}),
-	filtered: () =>
-		css({
-			fontWeight: 'bold',
-			'&:hover': {
-				cursor: 'default',
-				background: 'unset',
-			},
-			'& ~ .ss-hierarchy__link:not(.filtered)': {
-				paddingLeft: '16px',
-			},
-		}),
-	return: ({ theme }) =>
-		css({
-			'&:before': {
-				content: `'\\0000ab'`,
-				padding: '0 2px 0 0',
-				color: theme.colors?.primary,
-			},
 		}),
 };
 
@@ -73,9 +57,6 @@ export const FacetHierarchyOptions = observer(
 
 		const props: FacetHierarchyOptionsProps = {
 			// default props
-			hideCheckbox: false,
-			hideCount: false,
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.FacetHierarchyOptions,
 			//props
@@ -87,27 +68,21 @@ export const FacetHierarchyOptions = observer(
 
 		return (
 			values?.length && (
-				<div className={classnames('ss-hierarchy', !disableStyles && CSS.list({ style }), className)}>
+				<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss-hierarchy', className)}>
 					{values.map((value) => (
 						<a
-							className={classnames('ss-hierarchy__link', { filtered: value.filtered }, { history: value.history && !value.filtered })}
-							css={
-								!disableStyles &&
-								css`
-									${CSS.listOption({ theme })} ${value.filtered && CSS.filtered()} ${value.history && !value.filtered && CSS.return({ theme })}
-								`
-							}
+							className={classnames(
+								'ss-hierarchy__option',
+								{ 'ss-hierarchy__option-filtered': value.filtered },
+								{ 'ss-hierarchy__option-return': value.history && !value.filtered }
+							)}
 							onClick={onClick}
 							{...value.url?.link}
 						>
-							<div css={!disableStyles && CSS.textWrapper()}>
-								<span css={!disableStyles && CSS.valueLabel({ theme })}>{value.label}</span>
-								{!hideCount && value.count > 0 && !value.filtered && (
-									<span css={!disableStyles && CSS.countLabel({ theme })} className={'ss-facetCount'}>
-										({value.count})
-									</span>
-								)}
-							</div>
+							<span className="ss-hierarchy__option__value">
+								{value.label}
+								{!hideCount && value.count > 0 && !value.filtered && <span className="ss-hierarchy__option__value__count">({value.count})</span>}
+							</span>
 						</a>
 					))}
 				</div>

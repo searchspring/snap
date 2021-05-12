@@ -1,12 +1,12 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from './FacetHierarchyOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetDisplay } from '../../../types';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../FacetHierarchyOptions/readme.md';
 
 export default {

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-
 import { useEffect } from 'preact/hooks';
+
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -9,10 +9,9 @@ import classnames from 'classnames';
 import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
-
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers/theme';
-import { BannerType, ComponentProps } from '../../../types';
+import { BannerType, ComponentProps, Layout } from '../../../types';
 
 const CSS = {
 	Autocomplete: ({ style }) =>
@@ -20,7 +19,7 @@ const CSS = {
 			'&.ss-autocomplete': {
 				position: 'absolute',
 				top: '50px',
-				zIndex: 999999,
+				zIndex: '10002',
 				left: '0',
 				right: '0',
 			},
@@ -298,9 +297,6 @@ export const Autocomplete = observer(
 
 		const props: AutocompleteProps = {
 			// default props
-			hideFacets: false,
-			hideTerms: false,
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.autocomplete,
 			// props
@@ -324,6 +320,7 @@ export const Autocomplete = observer(
 		const subProps: AutocompleteSubProps = {
 			facet: {
 				// default props
+				className: 'ss-autocomplete__facet',
 				// global theme
 				...globalTheme?.components?.facet,
 				// inherited props
@@ -335,6 +332,7 @@ export const Autocomplete = observer(
 			},
 			banner: {
 				// default props
+				className: 'ss-autocomplete__banner',
 				// global theme
 				...globalTheme?.components?.banner,
 				// inherited props
@@ -346,6 +344,7 @@ export const Autocomplete = observer(
 			},
 			results: {
 				// default props
+				className: 'ss-autocomplete__results',
 				responsive: responsive,
 				// global theme
 				...globalTheme?.components?.results,
@@ -390,13 +389,7 @@ export const Autocomplete = observer(
 
 		return (
 			visible && (
-				<div
-					css={CSS.Autocomplete({ style })}
-					className={classnames('ss-autocomplete', className)}
-					onClick={(e) => {
-						e.stopPropagation();
-					}}
-				>
+				<div css={CSS.Autocomplete({ style })} className={classnames('ss-autocomplete', className)} onClick={(e) => e.stopPropagation()}>
 					<div className="ss-ac-container">
 						{!hideTerms && <Terms terms={terms} search={search} valueProps={valueProps} />}
 
@@ -410,7 +403,7 @@ export const Autocomplete = observer(
 											return (
 												<div
 													className={`ss-ac-facet-container ss-ac-facet-container-${
-														facet.display && (facet.display != 'hierarchy' || facet.display != 'slider') ? facet.display : 'list'
+														facet.display && (facet.display != 'hierarchy' || facet.display != 'slider') ? facet.display : Layout.LIST
 													}`}
 												>
 													<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
@@ -486,14 +479,7 @@ const Terms = (props: { terms; search; valueProps }) => {
 			<ul className="ss-list">
 				{props.terms.map((term) => (
 					<li className={`ss-list-option ${term.active ? 'ss-active' : ''}`}>
-						<a
-							href={term.url.href}
-							className="ss-list-link"
-							{...props.valueProps}
-							onFocus={() => {
-								term.preview();
-							}}
-						>
+						<a href={term.url.href} className="ss-list-link" {...props.valueProps} onFocus={() => term.preview()}>
 							{emIfy(term.value, props.search)}
 						</a>
 					</li>

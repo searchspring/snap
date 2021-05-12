@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
+
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent } from '../../../types';
+import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers/theme';
 
@@ -20,26 +21,23 @@ const CSS = {
 		}),
 };
 
-const defaultResponsiveSettings: ResponsiveProps[] = [
+export const defaultResponsiveOptions: ResponsiveProps[] = [
 	{
-		viewport: 350,
+		viewport: 480,
 		numAcross: 1,
+		layout: Layout.LIST,
 	},
 	{
-		viewport: 450,
+		viewport: 768,
 		numAcross: 2,
 	},
 	{
-		viewport: 500,
+		viewport: 1024,
 		numAcross: 3,
 	},
 	{
-		viewport: 600,
-		numAcross: 5,
-	},
-	{
-		viewport: 700,
-		numAcross: 5,
+		viewport: 1200,
+		numAcross: 4,
 	},
 ];
 
@@ -49,10 +47,9 @@ export const Results = observer(
 
 		const props: ResultsProp = {
 			// default props
-			disableStyles: false,
 			results: [],
 			layout: Layout.GRID,
-			responsive: defaultResponsiveSettings,
+			responsive: defaultResponsiveOptions,
 			// global theme
 			...globalTheme?.components?.results,
 			// props
@@ -76,6 +73,7 @@ export const Results = observer(
 			},
 			inlineBanner: {
 				// default props
+				className: 'ss-results__inlinebanner',
 				// global theme
 				...globalTheme?.components?.inlineBanner,
 				// inherited props
@@ -147,7 +145,7 @@ export const Results = observer(
 						resultWidthPecent = Math.floor(100 / settings.numAcross);
 					}
 					if (settings.numRows) {
-						if (layout === 'list') {
+						if (layout === Layout.LIST) {
 							maxResultsShown = settings.numRows;
 						} else {
 							maxResultsShown = settings.numAcross * settings.numRows;
@@ -165,35 +163,31 @@ export const Results = observer(
 
 		return (
 			resultsToShow?.length && (
-				<div
-					css={
-						!disableStyles &&
-						css`
-							${CSS.results({ style })}
-						`
-					}
-					className={classnames('ss-results', className)}
-				>
-					{resultsToShow.map((result) => {
-						if (result.type === 'banner') {
-							return (
-								<InlineBanner
-									banner={result}
-									width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
-									layout={displaySettings.layout}
-								/>
-							);
-						} else {
-							return (
-								<Result
-									{...subProps.result}
-									result={result}
-									width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
-									layout={displaySettings.layout}
-								/>
-							);
-						}
-					})}
+				<div css={!disableStyles && CSS.results({ style })} className={classnames('ss-results', className)}>
+					{resultsToShow.map((result) =>
+						(() => {
+							switch (result.type) {
+								case BannerType.BANNER:
+									return (
+										<InlineBanner
+											{...subProps.inlineBanner}
+											banner={result}
+											width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
+											layout={displaySettings.layout}
+										/>
+									);
+								default:
+									return (
+										<Result
+											{...subProps.result}
+											result={result}
+											width={displaySettings.resultWidthPecent ? `${displaySettings.resultWidthPecent}%` : undefined}
+											layout={displaySettings.layout}
+										/>
+									);
+							}
+						})()
+					)}
 				</div>
 			)
 		);

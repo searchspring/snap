@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import { h } from 'preact';
 
+import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
@@ -8,13 +10,19 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 
+const CSS = {
+	facets: ({ style }) =>
+		css({
+			...style,
+		}),
+};
+
 export const Facets = observer(
 	(properties: FacetsProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
 
 		const props: FacetsProps = {
 			// default props
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.facets,
 			// props
@@ -27,7 +35,7 @@ export const Facets = observer(
 		const subProps: FacetsSubProps = {
 			facet: {
 				// default props
-
+				className: 'ss-facets__facet',
 				// global theme
 				...globalTheme?.components?.facetWrapper,
 				// inherited props
@@ -41,7 +49,7 @@ export const Facets = observer(
 
 		return (
 			facets?.length > 0 && (
-				<div className={classnames('ss-facets', className)} style={!disableStyles && style}>
+				<div className={classnames('ss-facets', className)} css={!disableStyles && CSS.facets({ style })}>
 					{facets.map((facet) => (
 						<Facet {...subProps.facet} facet={facet} />
 					))}

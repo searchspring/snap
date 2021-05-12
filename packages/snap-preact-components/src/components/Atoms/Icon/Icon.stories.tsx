@@ -1,12 +1,11 @@
 import { h } from 'preact';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Icon } from './Icon';
 import { IconProps } from '../../../types';
 import { iconPaths } from './paths';
-
 import { componentArgs } from '../../../utilities';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Icon/readme.md';
 
 export default {
@@ -58,6 +57,7 @@ export default {
 			control: { type: 'color' },
 		},
 		size: {
+			defaultValue: '16px',
 			description: 'Icon size',
 			table: {
 				type: {
@@ -87,6 +87,7 @@ export default {
 		},
 		viewBox: {
 			description: 'SVG view box',
+			defaultValue: '0 0 56 56',
 			table: {
 				type: {
 					summary: 'string',

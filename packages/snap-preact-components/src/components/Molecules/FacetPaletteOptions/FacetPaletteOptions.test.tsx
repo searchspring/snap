@@ -32,17 +32,17 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('maps through and renders the correct number of options', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const options = rendered.container.querySelectorAll('.ss-palette-option');
+		const options = rendered.container.querySelectorAll('.ss-palette__option');
 		expect(options).toHaveLength(paletteFacetMock.values.length);
 	});
 
 	it('Palette option label element has correct number of classes', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const paletteOptionsElement = rendered.container.querySelectorAll('.ss-label');
+		const paletteOptionsElement = rendered.container.querySelectorAll('.ss-palette__option__value');
 		const inactivePaletteOption = paletteOptionsElement[1];
 		const activePaletteOption = paletteOptionsElement[0];
-		expect(inactivePaletteOption).toHaveClass('ss-label');
-		expect(activePaletteOption.className).toMatch(/filtered/);
+		expect(inactivePaletteOption).toHaveClass('ss-palette__option__value');
+		expect(activePaletteOption.parentElement).toHaveClass('ss-palette__option-filtered');
 	});
 
 	it('has icons by default', () => {
@@ -53,7 +53,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('hideIcons and hideLabel works as expected', () => {
 		const rendered = render(<FacetPaletteOptions hideIcon={true} hideLabel={true} values={paletteFacetMock.values} />);
-		const paletteOptionsElement = rendered.container.querySelector('.ss-label');
+		const paletteOptionsElement = rendered.container.querySelector('.ss-palette__option__value');
 		const selectedIcons = rendered.container.querySelector('.ss-icon');
 
 		expect(paletteOptionsElement).not.toBeInTheDocument();

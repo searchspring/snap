@@ -12,18 +12,16 @@ const CSS = {
 		css({
 			transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,
 			position: 'fixed',
-			zIndex: 999998,
+			zIndex: '10003',
 			height: '100%',
 			width: '100%',
 			top: '0',
 			left: '-100%',
-
 			'&.ss-overlay-active': {
 				transition: `background ${transitionSpeed} ease, left 0s ease`,
 				background: color,
 				left: '0',
 			},
-
 			...style,
 		}),
 };
@@ -33,8 +31,6 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const props: OverlayProps = {
 		// default props
-		disableStyles: false,
-		active: false,
 		color: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		// global theme

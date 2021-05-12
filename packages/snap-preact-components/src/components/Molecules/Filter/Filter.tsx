@@ -16,13 +16,13 @@ const CSS = {
 		css({
 			textDecoration: 'none',
 			display: 'inline-flex',
-			'& .ss-button': {
+			'& .ss-filter__button': {
 				alignItems: 'center',
+				'& .ss-filter__button__icon': {
+					marginRight: '5px',
+				},
 			},
-			'& .ss-icon': {
-				marginRight: '5px',
-			},
-			'& .ss-filter__facet-label': {
+			'& .ss-filter__label': {
 				marginRight: '5px',
 				fontWeight: 'bold',
 			},
@@ -37,8 +37,6 @@ export const Filter = observer(
 
 		const props: FilterProps = {
 			// default props
-			hideFacetLabel: false,
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.filter,
 			//props
@@ -60,7 +58,7 @@ export const Filter = observer(
 			icon: {
 				// default props
 				icon: 'close-thin',
-				className: 'ss-filter__button-icon',
+				className: 'ss-filter__button__icon',
 				size: '10px',
 				// global theme
 				...globalTheme?.components?.icon,
@@ -79,20 +77,18 @@ export const Filter = observer(
 				<a
 					css={!disableStyles && CSS.filter({ style })}
 					className={classnames('ss-filter', className)}
-					onClick={(e) => {
-						onClick && onClick(e as any);
-					}}
+					onClick={(e) => onClick && onClick(e as any)}
 					{...url?.link}
 				>
 					<Button {...subProps.button}>
 						<Icon {...subProps.icon} />
 						{!hideFacetLabel && (
-							<span className={'ss-filter__facet-label'}>
+							<span className="ss-filter__label">
 								{facetLabel}
-								{separator && <span className={'ss-filter__separator'}>{separator}</span>}
+								{separator && <span className="ss-filter__label__separator">{separator}</span>}
 							</span>
 						)}
-						<span className={'ss-filter__value-label'}>{valueLabel}</span>
+						<span className="ss-filter__value">{valueLabel}</span>
 					</Button>
 				</a>
 			)

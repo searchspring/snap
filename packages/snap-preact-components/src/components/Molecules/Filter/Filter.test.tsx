@@ -27,10 +27,10 @@ describe('Filter Component', () => {
 		expect(filterElement.classList).toHaveLength(2);
 
 		expect(facetTextElement).toBeInTheDocument();
-		expect(facetTextElement).toHaveClass('ss-filter__facet-label');
+		expect(facetTextElement).toHaveClass('ss-filter__label');
 
 		expect(valueTextElement).toBeInTheDocument();
-		expect(valueTextElement).toHaveClass('ss-filter__value-label');
+		expect(valueTextElement).toHaveClass('ss-filter__value');
 
 		expect(iconElement).toBeInTheDocument();
 	});
@@ -61,7 +61,7 @@ describe('Filter Component', () => {
 	it('does not show facetLabel when told not to', () => {
 		const rendered = render(<Filter {...args} hideFacetLabel />);
 
-		const facetTextElement = rendered.container.querySelector('.ss-filter__facet-label');
+		const facetTextElement = rendered.container.querySelector('.ss-filter__label');
 
 		expect(facetTextElement).not.toBeInTheDocument();
 	});
@@ -70,7 +70,7 @@ describe('Filter Component', () => {
 		const separator = 'gottakeepemseperated';
 		const rendered = render(<Filter {...args} separator={separator} />);
 
-		const separatorTextElement = rendered.container.querySelector('.ss-filter__separator');
+		const separatorTextElement = rendered.container.querySelector('.ss-filter__label__separator');
 		const separatorText = rendered.getByText(separator);
 
 		expect(separatorTextElement).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('Filter Component', () => {
 		const separator = '';
 		const rendered = render(<Filter {...args} separator={separator} />);
 
-		const separatorTextElement = rendered.container.querySelector('.ss-filter__separator');
+		const separatorTextElement = rendered.container.querySelector('.ss-filter__label__separator');
 
 		expect(separatorTextElement).not.toBeInTheDocument();
 	});
@@ -126,7 +126,7 @@ describe('Filter theming works', () => {
 				<Filter {...args} />
 			</ThemeProvider>
 		);
-		const seperator = rendered.container.querySelector('.ss-filter__separator');
+		const seperator = rendered.container.querySelector('.ss-filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(globalTheme.components.filter.separator);
 	});
@@ -140,7 +140,7 @@ describe('Filter theming works', () => {
 			},
 		};
 		const rendered = render(<Filter {...args} theme={propTheme} />);
-		const seperator = rendered.container.querySelector('.ss-filter__separator');
+		const seperator = rendered.container.querySelector('.ss-filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(propTheme.components.filter.separator);
 	});
@@ -166,7 +166,7 @@ describe('Filter theming works', () => {
 			</ThemeProvider>
 		);
 
-		const seperator = rendered.container.querySelector('.ss-filter__separator');
+		const seperator = rendered.container.querySelector('.ss-filter__label__separator');
 		expect(seperator).toBeInTheDocument();
 		expect(seperator).toHaveTextContent(propTheme.components.filter.separator);
 	});

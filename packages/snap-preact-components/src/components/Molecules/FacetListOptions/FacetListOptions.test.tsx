@@ -17,7 +17,7 @@ describe('ListValue Component', () => {
 	});
 
 	it('renders label and count', () => {
-		const listOption = listValueComponent.container.querySelectorAll('.ss-list__link');
+		const listOption = listValueComponent.container.querySelectorAll('.ss-list__option');
 
 		expect(listOption).toHaveLength(listFacetMock.values.length);
 
@@ -48,7 +48,7 @@ describe('ListValue Component hiding checkbox and count', () => {
 	});
 
 	it('renders label but not count', () => {
-		const listOption = listValueComponent.container.querySelectorAll('.ss-list__link');
+		const listOption = listValueComponent.container.querySelectorAll('.ss-list__option');
 
 		expect(listOption).toHaveLength(listFacetMock.values.length);
 
@@ -116,7 +116,7 @@ describe('FacetListOptions theming works', () => {
 		);
 
 		const Element = rendered.container.querySelector('.ss-list');
-		const countElement = rendered.container.querySelector('.ss-facetCount');
+		const countElement = rendered.container.querySelector('.ss-list__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).toBeInTheDocument();
 	});

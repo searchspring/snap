@@ -22,15 +22,15 @@ const CSS = {
 				cursor: 'pointer',
 				backgroundColor: theme.colors?.hover,
 			},
-			'&.ss-button__disabled': {
-				opacity: 0.3,
+			'&.ss-button-disabled': {
+				opacity: 0.7,
 				'&:hover': {
 					cursor: 'default',
 				},
 			},
 			...style,
 		}),
-	style: ({ style }) =>
+	native: ({ style }) =>
 		css({
 			...style,
 		}),
@@ -43,9 +43,6 @@ export const Button = observer(
 
 		const props: ButtonProps = {
 			// default props
-			disabled: false,
-			native: false,
-			disableStyles: false,
 			// global theme
 			...globalTheme?.components?.button,
 			// props
@@ -59,7 +56,7 @@ export const Button = observer(
 			css:
 				!disableStyles &&
 				(native
-					? CSS.style({ style })
+					? CSS.native({ style })
 					: CSS.button({
 							color,
 							backgroundColor,
@@ -67,11 +64,9 @@ export const Button = observer(
 							theme,
 							style,
 					  })),
-			className: classnames('ss-button', { 'ss-button__disabled': disabled }, className),
+			className: classnames('ss-button', { 'ss-button-disabled': disabled }, className),
 			disabled,
-			onClick: (e) => {
-				!disabled && onClick && onClick(e);
-			},
+			onClick: (e) => !disabled && onClick && onClick(e),
 		};
 
 		return (

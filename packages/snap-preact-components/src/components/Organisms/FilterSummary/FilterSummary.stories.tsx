@@ -1,14 +1,13 @@
 import { h } from 'preact';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { iconPaths } from '../../Atoms/Icon';
 import { FilterSummary, FilterSummaryProps } from './FilterSummary';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../FilterSummary/readme.md';
 
-// TODO: cant seem to find a way to rerender the story component easily
 export default {
 	title: `Organisms/FilterSummary`,
 	component: FilterSummary,
@@ -45,7 +44,6 @@ export default {
 			control: { type: 'text' },
 		},
 		hideFacetLabel: {
-			defaultValue: false,
 			description: 'Hide filter facet label',
 			table: {
 				type: {
@@ -56,6 +54,7 @@ export default {
 			control: 'boolean',
 		},
 		separator: {
+			defaultValue: ':',
 			description: 'Filter delimiter',
 			table: {
 				type: {
@@ -65,7 +64,6 @@ export default {
 			control: { type: 'text' },
 		},
 		hideClearAll: {
-			defaultValue: false,
 			description: 'Hide filter clear all button',
 			table: {
 				type: {

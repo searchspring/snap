@@ -3,11 +3,8 @@ import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-
-import { InlineBannerContent } from '../../../types';
 import { Theme, useTheme } from '../../../providers/theme';
-import { ComponentProps } from '../../../types';
-import { LayoutType } from '../../../types';
+import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
 
 const CSS = {
 	inlineBanner: ({ width, style }) =>
@@ -18,23 +15,18 @@ const CSS = {
 			justifyContent: 'center',
 			maxWidth: width ? 'initial' : '260px',
 			width: width || 'auto',
-
+			'&.ss-inlinebanner-grid': {
+				flexDirection: 'column',
+			},
+			'&.ss-inlinebanner-list': {
+				flexDirection: 'row',
+				display: 'block',
+				width: '100%',
+			},
 			'& iframe': {
 				maxWidth: '100%',
 			},
 			...style,
-		}),
-
-	list: () =>
-		css({
-			flexDirection: 'row',
-			display: 'block',
-			width: '100%',
-		}),
-
-	grid: () =>
-		css({
-			flexDirection: 'column',
 		}),
 };
 
@@ -43,8 +35,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const props: InlineBannerProps = {
 		// default props
-		disableStyles: false,
-		layout: 'grid',
+		layout: Layout.GRID,
 		banner: {},
 		// global theme
 		...globalTheme?.components?.banner,
@@ -59,13 +50,8 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		banner &&
 		banner.value && (
 			<div
-				className={classnames('ss-inlineBanner', className)}
-				css={
-					!disableStyles &&
-					css`
-						${CSS.inlineBanner({ width, style })} ${CSS[layout]()}
-					`
-				}
+				className={classnames('ss-inlinebanner', `ss-inlinebanner-${layout}`, className)}
+				css={!disableStyles && CSS.inlineBanner({ width, style })}
 				dangerouslySetInnerHTML={{
 					__html: banner.value,
 				}}

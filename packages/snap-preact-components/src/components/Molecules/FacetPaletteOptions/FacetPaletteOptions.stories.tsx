@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { FacetPaletteOptions, FacetPaletteOptionsProps } from './FacetPaletteOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../FacetPaletteOptions/readme.md';
 
 export default {
@@ -62,7 +62,6 @@ export default {
 			control: { type: 'text' },
 		},
 		hideLabel: {
-			defaultValue: false,
 			description: 'Hide facet option label',
 			table: {
 				type: {
@@ -73,7 +72,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideIcon: {
-			defaultValue: false,
 			description: 'Hide facet option icon',
 			table: {
 				type: {
@@ -82,6 +80,26 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
+		},
+		previewOnFocus: {
+			description: 'Invoke facet value preview upon focus',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		valueProps: {
+			description: 'Object of facet value props',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '{}' },
+			},
+			control: { type: 'object' },
 		},
 		onClick: {
 			description: 'Facet option click event handler',

@@ -4,9 +4,8 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { BannerContent, BannerType } from '../../../types';
+import { BannerContent, BannerType, ComponentProps } from '../../../types';
 import { Theme, useTheme } from '../../../providers/theme';
-import { ComponentProps } from '../../../types';
 
 const CSS = {
 	banner: ({ style }) =>
@@ -23,7 +22,6 @@ export function Banner(properties: BannerProps): JSX.Element {
 
 	const props: BannerProps = {
 		// default props
-		disableStyles: false,
 		content: [],
 		type: '',
 		// global theme

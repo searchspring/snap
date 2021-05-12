@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { Slideout, SlideoutProps } from './Slideout';
-import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Slideout, SlideoutProps } from './Slideout';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Slideout/readme.md';
 
 export default {
@@ -21,7 +21,6 @@ export default {
 	},
 	argTypes: {
 		active: {
-			defaultValue: false,
 			description: 'Slideout is active',
 			type: { required: true },
 			table: {
@@ -61,17 +60,6 @@ export default {
 					summary: 'string, jsx',
 				},
 				defaultValue: { summary: 'click me' },
-			},
-			control: { type: 'text' },
-		},
-		scrollbarWidth: {
-			defaultValue: '8px',
-			description: 'Slideout scrollbar with',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: '8px' },
 			},
 			control: { type: 'text' },
 		},

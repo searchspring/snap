@@ -17,7 +17,7 @@ describe('hierarchyValue Component', () => {
 	});
 
 	it('renders label and count', () => {
-		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__link');
+		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
 
@@ -38,7 +38,7 @@ describe('hierarchyValue Component', () => {
 	});
 
 	it('renders label and count', () => {
-		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__link');
+		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetFilteredMock.values.length);
 
@@ -47,9 +47,9 @@ describe('hierarchyValue Component', () => {
 
 			if (hierarchyFacetFilteredMock.values[index].history) {
 				if (hierarchyFacetFilteredMock.values[index].filtered) {
-					expect(option).toHaveClass('filtered');
+					expect(option).toHaveClass('ss-hierarchy__option-filtered');
 				} else {
-					expect(option).toHaveClass('history');
+					expect(option).toHaveClass('ss-hierarchy__option-return');
 				}
 			}
 		});
@@ -73,7 +73,7 @@ describe('hierarchyValue Component hiding count', () => {
 	});
 
 	it('renders label but not count', () => {
-		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__link');
+		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss-hierarchy__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
 
@@ -141,7 +141,7 @@ describe('FacetHierarchyOptions theming works', () => {
 		);
 
 		const Element = rendered.container.querySelector('.ss-hierarchy');
-		const countElement = rendered.container.querySelector('.ss-facetCount');
+		const countElement = rendered.container.querySelector('.ss-hierarchy__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).toBeInTheDocument();
 	});

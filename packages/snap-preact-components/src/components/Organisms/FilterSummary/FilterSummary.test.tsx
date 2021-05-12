@@ -9,8 +9,8 @@ import { filters } from '../../../mocks/store';
 describe('FilterSummary Component', () => {
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
-		const FilterSummaryElement = rendered.container.querySelector('.ss-filter-summary');
-		const FilterElements = rendered.container.querySelectorAll('.ss-filter:not(.ss-filter-summary__clear)');
+		const FilterSummaryElement = rendered.container.querySelector('.ss-filtersummary');
+		const FilterElements = rendered.container.querySelectorAll('.ss-filter:not(.ss-filtersummary__filter-clear)');
 
 		expect(FilterSummaryElement).toBeInTheDocument();
 		expect(FilterElements.length).toBe(3);
@@ -18,7 +18,7 @@ describe('FilterSummary Component', () => {
 
 	it('renders clearAll Button', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
-		const clearAllButton = rendered.container.querySelector('.ss-filter-summary__clear');
+		const clearAllButton = rendered.container.querySelector('.ss-filtersummary__filter-clear');
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent('Clear All');
 	});
@@ -26,7 +26,7 @@ describe('FilterSummary Component', () => {
 	it('custom clearAll Button', () => {
 		const clearLabel = 'start over';
 		const rendered = render(<FilterSummary filters={filters} clearAllLabel={clearLabel} />);
-		const clearAllButton = rendered.container.querySelector('.ss-filter-summary__clear');
+		const clearAllButton = rendered.container.querySelector('.ss-filtersummary__filter-clear');
 
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent(clearLabel);
@@ -34,20 +34,20 @@ describe('FilterSummary Component', () => {
 
 	it('hides clearAll Button', () => {
 		const rendered = render(<FilterSummary filters={filters} hideClearAll />);
-		const clearAllButton = rendered.container.querySelector('.ss-filter-summary__clear');
+		const clearAllButton = rendered.container.querySelector('.ss-filtersummary__filter-clear');
 		expect(clearAllButton).not.toBeInTheDocument();
 	});
 
 	it('renders a default title', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
-		const title = rendered.container.querySelector('.ss-filter-summary__title');
+		const title = rendered.container.querySelector('.ss-filtersummary__title');
 		expect(title).toBeInTheDocument();
 		expect(title).toHaveTextContent('Current Filters');
 	});
 
 	it('renders a custom title', () => {
 		const rendered = render(<FilterSummary filters={filters} title={'you clicked these earlier'} />);
-		const title = rendered.container.querySelector('.ss-filter-summary__title');
+		const title = rendered.container.querySelector('.ss-filtersummary__title');
 		expect(title).toBeInTheDocument();
 		expect(title).toHaveTextContent('you clicked these earlier');
 	});
@@ -60,7 +60,7 @@ describe('FilterSummary Component', () => {
 
 	it('does not render if no filters', () => {
 		const rendered = render(<FilterSummary filters={[]} />);
-		const FilterElement = rendered.container.querySelector('.ss-filter-summary');
+		const FilterElement = rendered.container.querySelector('.ss-filtersummary');
 
 		expect(FilterElement).not.toBeInTheDocument();
 	});
@@ -80,7 +80,7 @@ describe('FilterSummary theming works', () => {
 				<FilterSummary filters={filters} />
 			</ThemeProvider>
 		);
-		const element = rendered.container.querySelector('.ss-filter-summary');
+		const element = rendered.container.querySelector('.ss-filtersummary');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(globalTheme.components.filterSummary.title);
 	});
@@ -94,7 +94,7 @@ describe('FilterSummary theming works', () => {
 			},
 		};
 		const rendered = render(<FilterSummary filters={filters} theme={propTheme} />);
-		const element = rendered.container.querySelector('.ss-filter-summary');
+		const element = rendered.container.querySelector('.ss-filtersummary');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(propTheme.components.filterSummary.title);
 	});
@@ -120,7 +120,7 @@ describe('FilterSummary theming works', () => {
 			</ThemeProvider>
 		);
 
-		const element = rendered.container.querySelector('.ss-filter-summary');
+		const element = rendered.container.querySelector('.ss-filtersummary');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(propTheme.components.filterSummary.title);
 		expect(element).not.toHaveTextContent(globalTheme.components.filterSummary.title);

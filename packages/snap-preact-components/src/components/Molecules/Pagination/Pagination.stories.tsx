@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Pagination, PaginationProps } from './Pagination';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Pagination/readme.md';
 
 export default {
@@ -98,7 +98,6 @@ export default {
 			control: { type: 'text' },
 		},
 		hideFirst: {
-			defaultValue: false,
 			description: 'Hide first button',
 			table: {
 				type: {
@@ -109,7 +108,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideLast: {
-			defaultValue: false,
 			description: 'Hide last button',
 			table: {
 				type: {
@@ -120,7 +118,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideEllipsis: {
-			defaultValue: false,
 			description: 'Hide ellipsis',
 			table: {
 				type: {
@@ -131,7 +128,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hideNext: {
-			defaultValue: false,
 			description: 'Hide next button',
 			table: {
 				type: {
@@ -142,7 +138,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		hidePrev: {
-			defaultValue: false,
 			description: 'Hide previous button',
 			table: {
 				type: {

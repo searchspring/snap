@@ -2,10 +2,10 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Results } from './Results';
+import { Results, defaultResponsiveOptions } from './Results';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { LayoutType } from '../../../types';
+import { Layout } from '../../../types';
 
 import Readme from '../Results/readme.md';
 
@@ -45,8 +45,8 @@ export default {
 			control: { type: 'none' },
 		},
 		layout: {
+			defaultValue: Layout.GRID,
 			description: 'Results layout',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'string',
@@ -54,10 +54,11 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: ['grid', 'list'],
+				options: [Layout.GRID, Layout.LIST],
 			},
 		},
 		responsive: {
+			defaultValue: defaultResponsiveOptions,
 			description: 'Responsive options object',
 			table: {
 				type: {
@@ -72,47 +73,15 @@ export default {
 	},
 };
 
-const responsive = [
-	{
-		viewport: 350,
-		numAcross: 1,
-		numRows: 5,
-	},
-	{
-		viewport: 450,
-		numAcross: 2,
-		numRows: 3,
-		layout: 'list' as LayoutType,
-	},
-	{
-		viewport: 500,
-		numAcross: 3,
-		numRows: 2,
-	},
-	{
-		viewport: 600,
-		numAcross: 5,
-		numRows: 4,
-	},
-	{
-		viewport: 700,
-		numAcross: 5,
-	},
-];
-
 const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
-export const Grid = (props, { loaded: { controller } }) => (
-	<Results layout="grid" results={controller?.store?.results} responsive={responsive} {...props} />
-);
+export const Grid = (props, { loaded: { controller } }) => <Results layout={Layout.GRID} results={controller?.store?.results} {...props} />;
 Grid.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),
 	}),
 ];
 
-export const List = (props, { loaded: { controller } }) => (
-	<Results layout="list" results={controller?.store?.results} responsive={responsive} {...props} />
-);
+export const List = (props, { loaded: { controller } }) => <Results layout={Layout.LIST} results={controller?.store?.results} {...props} />;
 List.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),

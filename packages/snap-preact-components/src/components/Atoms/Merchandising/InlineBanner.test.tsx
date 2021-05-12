@@ -10,7 +10,7 @@ import { ThemeProvider } from '../../../providers/theme';
 describe('Merchandising Inline Banner Component', () => {
 	it('renders type:inline banner', () => {
 		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} />);
-		const merchBannerElement = rendered.container.querySelector('.ss-inlineBanner');
+		const merchBannerElement = rendered.container.querySelector('.ss-inlinebanner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement.innerHTML).toBe(searchResponse.merchandising.content.inline[0].value);
 	});

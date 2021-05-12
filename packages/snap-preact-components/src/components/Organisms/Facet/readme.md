@@ -90,6 +90,34 @@ The `iconCollapse` prop is the name of the icon to render when the facet is in i
 <Facet facet={controller.store.facets[0]} iconCollapse={'angle-up'} />
 ```
 
+### showMoreText
+The `showMoreText` prop contains the text to display in the facet overflow button when collapsed. Default is `'Show More'`
+
+```jsx
+<Facet facet={controller.store.facets[0]} showMoreText={'Show More'} />
+```
+
+### showLessText
+The `showLessText` prop contains the text to display in the facet overflow button when expanded. Default is `'Show Less'`
+
+```jsx
+<Facet facet={controller.store.facets[0]} showLessText={'Show Less'} />
+```
+
+### iconshowMoreExpand
+The `iconshowMoreExpand` prop contains the icon name of the facet overflow button when collapsed. Default is `'plus'`
+
+```jsx
+<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'plus'} />
+```
+
+### iconshowMoreExpand
+The `iconshowMoreExpand` prop contains the icon name of the facet overflow button when expanded. Default is `'minus'`
+
+```jsx
+<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'minus'} />
+```
+
 ### iconColor
 The `iconColor` prop sets the facet icon color.
 

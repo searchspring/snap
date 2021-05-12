@@ -18,7 +18,7 @@ describe('image Component', () => {
 		expect(imageElement).toHaveAttribute('alt', result.name);
 		expect(imageElement).toHaveAttribute('title', result.name);
 
-		expect(imageElement.classList).toHaveLength(1);
+		expect(imageElement.classList).toHaveLength(2);
 	});
 
 	it('renders with classname', () => {
@@ -42,7 +42,7 @@ describe('image Component', () => {
 		const rendered = render(<Image disableStyles alt={result.name} src={result.thumbnailImageUrl} />);
 		const imageElement = rendered.container.querySelector('.ss-image');
 
-		expect(imageElement.classList).toHaveLength(1);
+		expect(imageElement.classList).toHaveLength(2);
 	});
 
 	describe('Working Image', () => {
@@ -88,7 +88,7 @@ describe('Image theming works', () => {
 		);
 		const pagination = rendered.container.querySelector('.ss-image');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -102,7 +102,7 @@ describe('Image theming works', () => {
 		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} theme={propTheme} />);
 		const pagination = rendered.container.querySelector('.ss-image');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -128,6 +128,6 @@ describe('Image theming works', () => {
 
 		const pagination = rendered.container.querySelector('.ss-image');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		expect(pagination.classList.length).toBe(2);
 	});
 });
