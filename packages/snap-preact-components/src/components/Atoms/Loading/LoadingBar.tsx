@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -50,8 +50,6 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 		// default props
 		disableStyles: false,
 		active: false,
-		color: defaultTheme.colors?.primary,
-		backgroundColor: defaultTheme.colors?.secondary,
 		height: '5px',
 		// global theme
 		...globalTheme?.components?.loadingbar,

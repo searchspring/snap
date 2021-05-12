@@ -14,7 +14,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, hideLabelOnSelection, style }) =>
+	select: ({ color, backgroundColor, borderColor, label, selection, hideLabelOnSelection, theme, style }) =>
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -57,17 +57,17 @@ const CSS = {
 			'& .ss-select__options': {
 				backgroundColor: backgroundColor || '#fff',
 				listStyle: 'none',
-				padding: '5px 10px',
+				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || '#333'}`,
+				border: `1px solid ${borderColor || color || theme.colors?.primary}`,
 				'& .ss-select__option': {
 					cursor: 'pointer',
-					margin: '0 0 5px 0',
-					'&:last-child': {
-						margin: 0,
-					},
+					padding: '6px 8px',
 					'&.ss-selected': {
 						fontWeight: 'bold',
+					},
+					'&:hover': {
+						backgroundColor: theme.colors?.hover,
 					},
 				},
 			},
@@ -82,6 +82,7 @@ const CSS = {
 export const Select = observer(
 	(properties: SelectProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: SelectProps = {
 			// default props
@@ -222,6 +223,7 @@ export const Select = observer(
 									label,
 									selection: selection || '',
 									hideLabelOnSelection,
+									theme,
 									style,
 							  })
 					}

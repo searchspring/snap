@@ -58,15 +58,6 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		textColor: {
-			description: 'Slider tick text color',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			control: { type: 'color' },
-		},
 		trackColor: {
 			description: 'Slider track color',
 			table: {

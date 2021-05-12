@@ -25,9 +25,7 @@ export default {
 		(Story) => (
 			<div
 				style={{
-					margin: '8px',
 					maxWidth: '900px',
-					border: '1px solid lightgrey',
 				}}
 			>
 				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" />

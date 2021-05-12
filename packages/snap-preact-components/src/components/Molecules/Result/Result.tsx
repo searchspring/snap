@@ -46,7 +46,6 @@ const CSS = {
 			width: width || 'auto',
 
 			'& .ss-result__wrapper': {
-				border: '1px solid #ccc',
 				borderRadius: '5px',
 				margin: '10px',
 				position: 'relative',
@@ -87,10 +86,6 @@ const CSS = {
 
 					'& .ss-result__details-wrapper-price-large': {
 						fontSize: '140%',
-					},
-
-					'& .ss-result__details-wrapper-price-linethrough': {
-						textDecoration: 'line-through',
 					},
 				},
 
@@ -205,7 +200,7 @@ export const Result = observer(
 													</span>
 													&nbsp;
 													<span className={'ss-result__details-wrapper-price-linethrough'}>
-														<Price {...subProps.price} value={core.msrp} />
+														<Price {...subProps.price} value={core.msrp} lineThrough={true} />
 													</span>
 												</>
 											) : (

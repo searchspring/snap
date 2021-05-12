@@ -14,16 +14,19 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 
 const CSS = {
 	facet: ({ disableCollapse, color, theme, style }) =>
 		css({
+			margin: '0 0 20px 0',
 			'& .ss-facet__header': {
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				color: color || theme.colors?.primary || '#333',
+				color: color,
+				borderBottom: `2px solid ${theme.colors?.primary}`,
+				padding: '6px 0',
 			},
 			'& .ss-dropdown': {
 				'&.ss-open': {
@@ -42,16 +45,15 @@ const CSS = {
 			marginTop: '8px',
 			maxHeight: '300px',
 			overflowY: 'auto',
+			overflowX: 'hidden',
 		}),
 	icon: () =>
 		css({
 			marginRight: '8px',
 		}),
-	showMore: ({ theme }) =>
+	showMore: () =>
 		css({
-			color: theme.colors?.primary,
 			display: 'block',
-			textAlign: 'right',
 			margin: '8px',
 			cursor: 'pointer',
 		}),
@@ -176,7 +178,7 @@ export const Facet = observer(
 				// default props
 				className: 'ss-facet__button-icon',
 				size: '12px',
-				color: iconColor || color || theme.colors?.primary || '#333',
+				color: iconColor || color,
 				// global theme
 				...globalTheme?.components?.icon,
 				// inherited props
@@ -226,17 +228,12 @@ export const Facet = observer(
 
 					{(facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
 						<div
-							css={!disableStyles && CSS.showMore({ theme })}
+							css={!disableStyles && CSS.showMore()}
 							onClick={() => {
 								(facet as ValueFacet).overflow.toggle();
 							}}
 						>
-							<Icon
-								icon={(facet as ValueFacet).overflow.remaining > 0 ? 'plus' : 'minus'}
-								color={defaultTheme.colors?.primary}
-								size="10px"
-								css={!disableStyles && CSS.icon()}
-							/>
+							<Icon icon={(facet as ValueFacet).overflow.remaining > 0 ? 'plus' : 'minus'} size="10px" css={!disableStyles && CSS.icon()} />
 							<span>{(facet as ValueFacet).overflow.remaining > 0 ? 'Show More' : 'Show Less'}</span>
 						</div>
 					)}

@@ -70,17 +70,30 @@ const globalTheme = {
 };
 ```
 
-The theme object also contains primary and secondary colors used throughout components:
+The theme object also contains colors used throughout components:
 
 ```typescript
 const globalTheme = {
 	colors: {
 		primary: '#3A23AD',
-		secondary: '#FFF',
+		secondary: '#00cee1',
+		hover: '#f8f6fd',
+		text: {
+			secondary: '#ffffff'  
+		}
 	},
 	components: {}
 }
 ```
+
+`theme.colors.primary` - primary color used throughout components
+
+`theme.colors.secondary` - secondary color used to accent components
+
+`theme.colors.hover` - background color for element hover state
+
+`theme.colors.text.secondary` - text color when element background is `theme.colors.primary`
+
 
 ### ThemeProvider
 Using a ThemeProvider applies a global theme to all its children components

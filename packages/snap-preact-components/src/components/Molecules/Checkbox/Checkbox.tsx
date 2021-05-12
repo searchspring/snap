@@ -12,13 +12,13 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	checkbox: ({ size, color, style }) =>
+	checkbox: ({ size, color, theme, style }) =>
 		css({
 			display: 'inline-flex',
-			height: size,
-			width: size,
+			minHeight: size,
+			minWidth: size,
 			position: 'relative',
-			border: `1px solid ${color || '#333'}`,
+			border: `1px solid ${color || theme.colors?.primary}`,
 			'&.ss-checkbox__disabled': {
 				opacity: 0.3,
 			},
@@ -45,6 +45,7 @@ export const Checkbox = observer(
 			disableStyles: false,
 			size: '12px',
 			startChecked: false,
+			native: false,
 			// global theme
 			...globalTheme?.components?.checkbox,
 			// props
@@ -63,7 +64,7 @@ export const Checkbox = observer(
 				...globalTheme?.components?.icon,
 				// inherited props
 				...defined({
-					color: iconColor || color,
+					color: iconColor || color || theme.colors?.primary,
 					disableStyles,
 					icon,
 					size: size && `calc(${size} - 30%)`,
@@ -105,7 +106,7 @@ export const Checkbox = observer(
 			/>
 		) : (
 			<span
-				css={!disableStyles && CSS.checkbox({ size, color, style })}
+				css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
 				className={classnames('ss-checkbox', { 'ss-checkbox__disabled': disabled }, className)}
 				onClick={(e) => clickFunc(e)}
 			>

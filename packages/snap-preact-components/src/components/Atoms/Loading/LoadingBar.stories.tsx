@@ -1,7 +1,6 @@
 import { h } from 'preact';
 
 import { LoadingBar } from './LoadingBar';
-import { defaultTheme } from '../../../providers/theme';
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -34,24 +33,22 @@ export default {
 			control: { type: 'boolean' },
 		},
 		color: {
-			defaultValue: defaultTheme.colors?.primary,
 			description: 'Bar color',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: defaultTheme.colors?.primary },
+				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
 		backgroundColor: {
-			defaultValue: defaultTheme.colors?.secondary,
 			description: 'Background color',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: defaultTheme.colors?.secondary },
+				defaultValue: { summary: 'theme.colors.secondary' },
 			},
 			control: { type: 'color' },
 		},

@@ -11,9 +11,9 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	handle: ({ handleColor, handleTextColor }) =>
+	handle: ({ handleColor, handleTextColor, theme }) =>
 		css({
-			background: handleColor,
+			background: handleColor || theme.colors?.primary,
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -51,9 +51,9 @@ const CSS = {
 				fontSize: '14px',
 			},
 		}),
-	handleActive: ({ handleDraggingColor, handleColor, handleTextColor }) =>
+	handleActive: ({ handleDraggingColor, handleColor, handleTextColor, theme }) =>
 		css({
-			background: handleDraggingColor || handleColor,
+			background: handleDraggingColor || handleColor || theme.colors?.primary,
 
 			///need to find a way to spread the above styles here rather than repeat them
 			display: 'flex',
@@ -109,7 +109,7 @@ const CSS = {
 		css({
 			display: 'inline-block',
 			height: '8px',
-			width: 'calc(100% - 25px)',
+			width: 'calc(100% - 38px)',
 			margin: '20px 5% 25px',
 			top: '10px',
 			...style,
@@ -123,14 +123,14 @@ const CSS = {
 			transform: 'translate(-50%, 1.2rem)',
 			whiteSpace: 'nowrap',
 		}),
-	segment: ({ trackColor }) =>
+	segment: ({ trackColor, theme }) =>
 		css({
-			background: trackColor,
+			background: trackColor || theme.colors?.secondary,
 			height: '100%',
 		}),
-	rail: ({ railColor }) =>
+	rail: ({ railColor, theme }) =>
 		css({
-			background: railColor,
+			background: railColor || theme.colors?.primary,
 			height: '100%',
 		}),
 };
@@ -138,16 +138,12 @@ const CSS = {
 export const Slider = observer(
 	(properties: SliderProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: SliderProps = {
 			// default props
 			disableStyles: false,
-			tickTextColor: '#515151',
 			showTicks: false,
-			trackColor: '#F8F8F8',
-			handleTextColor: '#515151',
-			handleColor: '#4C37B3',
-			railColor: '#4C37B3',
 			tickSize: properties.facet?.step * 10 || 20,
 
 			// global theme
@@ -216,7 +212,14 @@ export const Slider = observer(
 						))}
 
 					{segments.map(({ getSegmentProps }, i) => (
-						<Segment trackColor={trackColor} railColor={railColor} getSegmentProps={...getSegmentProps()} index={i} disableStyles={disableStyles} />
+						<Segment
+							trackColor={trackColor}
+							railColor={railColor}
+							theme={theme}
+							getSegmentProps={...getSegmentProps()}
+							index={i}
+							disableStyles={disableStyles}
+						/>
 					))}
 					{handles.map(({ value, active, getHandleProps }) => (
 						<button
@@ -237,6 +240,7 @@ export const Slider = observer(
 								handleTextColor={handleTextColor}
 								handleDraggingColor={handleDraggingColor}
 								disableStyles={disableStyles}
+								theme={theme}
 							/>
 						</button>
 					))}
@@ -246,12 +250,19 @@ export const Slider = observer(
 	}
 );
 
-export function Segment(props: { index: any; getSegmentProps: any; trackColor: any; railColor: any; disableStyles: boolean }): JSX.Element {
-	const { index, getSegmentProps, trackColor, railColor, disableStyles } = props;
+export function Segment(props: {
+	index: any;
+	getSegmentProps: any;
+	trackColor: any;
+	railColor: any;
+	disableStyles: boolean;
+	theme?: any;
+}): JSX.Element {
+	const { index, getSegmentProps, trackColor, railColor, theme, disableStyles } = props;
 
 	return (
 		<div
-			css={!disableStyles && (index === 1 ? CSS.rail({ railColor }) : CSS.segment({ trackColor }))}
+			css={!disableStyles && (index === 1 ? CSS.rail({ railColor, theme }) : CSS.segment({ trackColor, theme }))}
 			className={`${index === 1 ? 'ss-sliderRail' : 'ss-sliderSegment'}`}
 			{...getSegmentProps}
 			index={index}
@@ -267,14 +278,17 @@ export function Handle(props: {
 	handleTextColor: any;
 	handleDraggingColor: any;
 	disableStyles: boolean;
+	theme?: any;
 }): JSX.Element {
-	const { active, value, formatValue, handleColor, handleTextColor, handleDraggingColor, disableStyles } = props;
+	const { active, value, formatValue, handleColor, handleTextColor, handleDraggingColor, theme, disableStyles } = props;
 
 	return (
 		<div
 			css={
 				!disableStyles &&
-				(active ? CSS.handleActive({ handleDraggingColor, handleColor, handleTextColor }) : CSS.handle({ handleColor, handleTextColor }))
+				(active
+					? CSS.handleActive({ handleDraggingColor, handleColor, handleTextColor, theme })
+					: CSS.handle({ handleColor, handleTextColor, theme }))
 			}
 			className={'ss-sliderHandle'}
 		>

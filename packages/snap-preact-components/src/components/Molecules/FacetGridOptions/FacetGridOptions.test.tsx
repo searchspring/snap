@@ -40,10 +40,10 @@ describe('FacetGridOptions Component', () => {
 	});
 
 	it('Grid option elements have correct classes', () => {
-		const gridOptionsElement = gridComponent.container.querySelectorAll('.ss-grid-option');
+		const gridOptionsElement = gridComponent.container.querySelectorAll('.ss-grid-optionWrapper');
 		const inactiveGridOption = gridOptionsElement[0];
 		const activeGridOption = gridOptionsElement[2];
-		expect(inactiveGridOption).toHaveClass('ss-grid-option');
+		expect(inactiveGridOption).toHaveClass('ss-grid-optionWrapper');
 		expect(activeGridOption.className).toMatch(/filtered/);
 	});
 });
