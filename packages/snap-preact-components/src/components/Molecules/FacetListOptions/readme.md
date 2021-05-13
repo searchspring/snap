@@ -15,7 +15,7 @@ The required `values` prop specifies all facet values where the facet type is 'l
 ```
 
 ### hideCheckbox
-The `hideCheckbox` prop will disable the facet checkbox. Typically used if the facet can only have 1 value selected at a time.
+The `hideCheckbox` prop will disable the facet checkbox. Typically used if the facet can only have a single value selected at a time.
 
 ```jsx
 <FacetListOptions values={listFacet.values} hideCheckbox={true} />

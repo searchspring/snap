@@ -21,20 +21,15 @@ import searchspringLogo from '../assets/searchspring-logo.svg';
 `}</style>
 
 <div class="header">
-	<img src={searchspringLogo} />
 	<span class="subtitle">SNAP PREACT COMPONENETS</span>
 </div>
 
 ---
 
-<br/>
-
-
-## Theme
 Snap components allows for theming at both the global and component level.
 
 ### Theme object
-A theme object contains a `components` object with 1 or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.
+A theme object contains a `components` object with one or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.
 
 For example, this `globalTheme` theme object will apply the prop `color={'blue'}` for all `<Button />` components and `hideCount={false}` for all `<facetListOptions />` components.
 
