@@ -13,7 +13,7 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 const CSS = {
 	pagination: ({ theme, style }) =>
 		css({
-			'& .ss-pagination__page': {
+			'& .ss__pagination__page': {
 				padding: '5px',
 				margin: '0 5px',
 				border: `1px solid ${theme.colors?.primary}`,
@@ -21,11 +21,11 @@ const CSS = {
 				minHeight: '1em',
 				minWidth: '1em',
 				textAlign: 'center',
-				'&.ss-pagination__page-active': {
+				'&.ss__pagination__page--active': {
 					boxShadow: `inset 0px -2px ${theme.colors?.primary}`,
 					fontWeight: 'bold',
 				},
-				'&:hover:not(.ss-pagination__page-active)': {
+				'&:hover:not(.ss__pagination__page--active)': {
 					backgroundColor: theme.colors?.hover,
 				},
 			},
@@ -70,7 +70,7 @@ export const Pagination = observer(
 		const subProps: PaginationSubProps = {
 			icon: {
 				// default props
-				className: 'ss-pagination__icon',
+				className: 'ss__pagination__icon',
 				size: '10px',
 				// global theme
 				...globalTheme?.components?.icon,
@@ -90,11 +90,11 @@ export const Pagination = observer(
 
 		return (
 			store?.totalResults && (
-				<div css={!disableStyles && CSS.pagination({ theme, style })} className={classnames('ss-pagination', className)}>
+				<div css={!disableStyles && CSS.pagination({ theme, style })} className={classnames('ss__pagination', className)}>
 					<>
 						{/* Prev */}
 						{store.previous && !hidePrev && (
-							<a {...store.previous.url.link} className={classnames('ss-pagination__page', 'ss-pagination__page-previous')}>
+							<a {...store.previous.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}>
 								{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
 							</a>
 						)}
@@ -102,7 +102,7 @@ export const Pagination = observer(
 						{/* first */}
 						{!pageNumbers.includes(store.first.number) && !hideFirst && (
 							<>
-								<a {...store.first.url.link} className={classnames('ss-pagination__page', 'ss-pagination__page-first')}>
+								<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')}>
 									{firstButton ? firstButton : store.first.number}
 								</a>
 								{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
@@ -113,9 +113,9 @@ export const Pagination = observer(
 						{_pages &&
 							_pages.map((page) =>
 								page.active ? (
-									<span className={classnames('ss-pagination__page', 'ss-pagination__page-active')}>{page.number}</span>
+									<span className={classnames('ss__pagination__page', 'ss__pagination__page--active')}>{page.number}</span>
 								) : (
-									<a {...page.url.link} className="ss-pagination__page">
+									<a {...page.url.link} className="ss__pagination__page">
 										{page.number}
 									</a>
 								)
@@ -126,7 +126,7 @@ export const Pagination = observer(
 							<>
 								{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-								<a {...store.last.url.link} className={classnames('ss-pagination__page', 'ss-pagination__page-last')}>
+								<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')}>
 									{lastButton ? lastButton : store.last.number}
 								</a>
 							</>
@@ -134,7 +134,7 @@ export const Pagination = observer(
 
 						{/* next */}
 						{store.next && !hideNext && (
-							<a {...store.next.url.link} className={classnames('ss-pagination__page', 'ss-pagination__page-next')}>
+							<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')}>
 								{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
 							</a>
 						)}

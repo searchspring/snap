@@ -20,7 +20,7 @@ describe('Results Component', () => {
 		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
-		const results = rendered.container.querySelector('.ss-result');
+		const results = rendered.container.querySelector('.ss__result');
 		const styles = getComputedStyle(results);
 		expect(styles['flex-direction']).toBe('column');
 	});
@@ -30,14 +30,14 @@ describe('Results Component', () => {
 		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
-		const results = rendered.container.querySelector('.ss-result');
+		const results = rendered.container.querySelector('.ss__result');
 		const styles = getComputedStyle(results);
 		expect(styles['flex-direction']).toBe('row');
 	});
 
 	it('renders all', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} />);
-		const results = rendered.container.querySelectorAll('.ss-results__result');
+		const results = rendered.container.querySelectorAll('.ss__results__result');
 		expect(results.length).toBe(searchResponse.results.length);
 	});
 
@@ -51,7 +51,7 @@ describe('Results Component', () => {
 				<Results {...args} />
 			</ThemeProvider>
 		);
-		const resultsElement = rendered.container.querySelector('.ss-results');
+		const resultsElement = rendered.container.querySelector('.ss__results');
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
 	});
@@ -62,7 +62,7 @@ describe('Results Component', () => {
 			results: searchResponse.results,
 		};
 		const rendered = render(<Results {...args} theme={theme} />);
-		const resultsElement = rendered.container.querySelector('.ss-results');
+		const resultsElement = rendered.container.querySelector('.ss__results');
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
 	});
@@ -86,7 +86,7 @@ describe('Results Component', () => {
 				<Results {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const resultsElement = rendered.container.querySelector('.ss-results');
+		const resultsElement = rendered.container.querySelector('.ss__results');
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.results.style.backgroundColor);
 	});

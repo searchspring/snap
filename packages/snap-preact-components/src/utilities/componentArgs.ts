@@ -5,7 +5,7 @@ export const componentArgs = {
 			type: {
 				summary: 'string',
 			},
-			defaultValue: { summary: 'ss-${componentname}' },
+			defaultValue: { summary: 'ss__${component-name}' },
 		},
 		control: { type: 'text' },
 	},

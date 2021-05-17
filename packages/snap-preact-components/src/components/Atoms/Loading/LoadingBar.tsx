@@ -22,7 +22,7 @@ const CSS = {
 			zIndex: '10000',
 			background: backgroundColor || theme.colors?.secondary,
 
-			'& .ss-loadingbar__bar': {
+			'& .ss__loading-bar__bar': {
 				position: 'absolute',
 				top: '0',
 				left: '-200px',
@@ -72,9 +72,9 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 						animation: CSS.animation,
 					})
 				}
-				className={classnames('ss-loadingbar', className)}
+				className={classnames('ss__loading-bar', className)}
 			>
-				<div className="ss-loadingbar__bar"></div>
+				<div className="ss__loading-bar__bar"></div>
 			</div>
 		)
 	);

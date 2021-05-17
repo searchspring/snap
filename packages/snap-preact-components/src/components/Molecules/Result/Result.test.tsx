@@ -8,31 +8,31 @@ import { ThemeProvider } from '../../../providers/theme';
 describe('Result Component', () => {
 	it('renders', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const resultElement = rendered.container.querySelector('.ss-result');
+		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
 	});
 
 	it('renders image', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const imageElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__image .ss-image');
+		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image');
 		expect(imageElement).toBeInTheDocument();
 	});
 
 	it('renders badge', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const badgeElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__image .ss-badge');
+		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__badge');
 		expect(badgeElement).toBeInTheDocument();
 	});
 
 	it('renders title', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const title = rendered.container.querySelector('.ss-result .ss-result__wrapper__details .ss-result__wrapper__details__title').textContent;
+		const title = rendered.container.querySelector('.ss__result .ss__result__wrapper__details .ss__result__wrapper__details__title').textContent;
 		expect(title).toBe(searchResponse.results[0].mappings.core.name);
 	});
 
 	it('renders pricing', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const priceElement = rendered.container.querySelectorAll('.ss-result .ss-result__wrapper__details__pricing .ss-price');
+		const priceElement = rendered.container.querySelectorAll('.ss__result .ss__result__wrapper__details__pricing .ss__price');
 		expect(priceElement[0]).toBeInTheDocument();
 		expect(priceElement.length).toBe(2);
 	});
@@ -43,7 +43,7 @@ describe('Result Component', () => {
 			buttonSlot: <div>Add to cart'</div>,
 		};
 		const rendered = render(<Result {...args} />);
-		const buttonBlement = rendered.container.querySelector('.ss-result .ss-result__wrapper__details .ss-result__wrapper__details__button');
+		const buttonBlement = rendered.container.querySelector('.ss__result .ss__result__wrapper__details .ss__result__wrapper__details__button');
 		expect(buttonBlement).toBeInTheDocument();
 		expect(buttonBlement).toHaveTextContent('Add to cart');
 	});
@@ -56,9 +56,9 @@ describe('Result Component', () => {
 			hidePricing: true,
 		};
 		const rendered = render(<Result {...args} />);
-		const badgeElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__image .ss-badge');
-		const titleElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__details .ss-result__wrapper__details__title');
-		const priceElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__details__pricing .ss-price');
+		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__badge');
+		const titleElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__details .ss__result__wrapper__details__title');
+		const priceElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__details__pricing .ss__price');
 		expect(badgeElement).not.toBeInTheDocument();
 		expect(titleElement).not.toBeInTheDocument();
 		expect(priceElement).not.toBeInTheDocument();
@@ -66,7 +66,7 @@ describe('Result Component', () => {
 
 	it('should display a fallback image', () => {
 		const rendered = render(<Result result={searchResponse.results[1]} />);
-		const imageElement = rendered.container.querySelector('.ss-result .ss-result__wrapper__image .ss-image');
+		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 	});
 });
@@ -85,8 +85,8 @@ describe('Result theming works', () => {
 				<Result result={searchResponse.results[0]} />
 			</ThemeProvider>
 		);
-		const result = rendered.container.querySelector('.ss-result');
-		const title = rendered.container.querySelector('.ss-result__wrapper__details__title');
+		const result = rendered.container.querySelector('.ss__result');
+		const title = rendered.container.querySelector('.ss__result__wrapper__details__title');
 		expect(result).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
 	});
@@ -100,8 +100,8 @@ describe('Result theming works', () => {
 			},
 		};
 		const rendered = render(<Result result={searchResponse.results[0]} theme={propTheme} />);
-		const result = rendered.container.querySelector('.ss-result');
-		const title = rendered.container.querySelector('.ss-result__wrapper__details__title');
+		const result = rendered.container.querySelector('.ss__result');
+		const title = rendered.container.querySelector('.ss__result__wrapper__details__title');
 		expect(result).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
 	});
@@ -128,9 +128,9 @@ describe('Result theming works', () => {
 			</ThemeProvider>
 		);
 
-		const badge = rendered.container.querySelector('.ss-badge');
-		const result = rendered.container.querySelector('.ss-result');
-		const title = rendered.container.querySelector('.ss-result__wrapper__details__title');
+		const badge = rendered.container.querySelector('.ss__badge');
+		const result = rendered.container.querySelector('.ss__result');
+		const title = rendered.container.querySelector('.ss__result__wrapper__details__title');
 		expect(result).toBeInTheDocument();
 		expect(title).toBeInTheDocument();
 		expect(badge).not.toBeInTheDocument();

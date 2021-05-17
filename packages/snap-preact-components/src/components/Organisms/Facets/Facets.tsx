@@ -35,7 +35,7 @@ export const Facets = observer(
 		const subProps: FacetsSubProps = {
 			facet: {
 				// default props
-				className: 'ss-facets__facet',
+				className: 'ss__facets__facet',
 				// global theme
 				...globalTheme?.components?.facetWrapper,
 				// inherited props
@@ -49,7 +49,7 @@ export const Facets = observer(
 
 		return (
 			facets?.length > 0 && (
-				<div className={classnames('ss-facets', className)} css={!disableStyles && CSS.facets({ style })}>
+				<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
 					{facets.map((facet) => (
 						<Facet {...subProps.facet} facet={facet} />
 					))}

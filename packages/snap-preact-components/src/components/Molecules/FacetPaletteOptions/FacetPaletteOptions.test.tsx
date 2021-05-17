@@ -17,7 +17,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('renders', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const paletteElement = rendered.container.querySelector('.ss-palette');
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveTextContent(paletteFacetMock.values[0].label);
@@ -25,36 +25,36 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('Palette container element has correct number of classes', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const paletteElement = rendered.container.querySelector('.ss-palette');
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
-		expect(paletteElement).toHaveClass('ss-palette');
+		expect(paletteElement).toHaveClass('ss__facet-palette-options');
 	});
 
 	it('maps through and renders the correct number of options', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const options = rendered.container.querySelectorAll('.ss-palette__option');
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
 		expect(options).toHaveLength(paletteFacetMock.values.length);
 	});
 
 	it('Palette option label element has correct number of classes', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const paletteOptionsElement = rendered.container.querySelectorAll('.ss-palette__option__value');
+		const paletteOptionsElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option__value');
 		const inactivePaletteOption = paletteOptionsElement[1];
 		const activePaletteOption = paletteOptionsElement[0];
-		expect(inactivePaletteOption).toHaveClass('ss-palette__option__value');
-		expect(activePaletteOption.parentElement).toHaveClass('ss-palette__option-filtered');
+		expect(inactivePaletteOption).toHaveClass('ss__facet-palette-options__option__value');
+		expect(activePaletteOption.parentElement).toHaveClass('ss__facet-palette-options__option--filtered');
 	});
 
 	it('has icons by default', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
-		const selectedIcons = rendered.container.querySelector('.ss-icon');
+		const selectedIcons = rendered.container.querySelector('.ss__icon');
 		expect(selectedIcons).toBeInTheDocument();
 	});
 
 	it('hideIcons and hideLabel works as expected', () => {
 		const rendered = render(<FacetPaletteOptions hideIcon={true} hideLabel={true} values={paletteFacetMock.values} />);
-		const paletteOptionsElement = rendered.container.querySelector('.ss-palette__option__value');
-		const selectedIcons = rendered.container.querySelector('.ss-icon');
+		const paletteOptionsElement = rendered.container.querySelector('.ss__facet-palette-options__option__value');
+		const selectedIcons = rendered.container.querySelector('.ss__icon');
 
 		expect(paletteOptionsElement).not.toBeInTheDocument();
 		expect(selectedIcons).not.toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('FacetPaletteOptions Component', () => {
 				<FacetPaletteOptions {...args} />
 			</ThemeProvider>
 		);
-		const paletteElement = rendered.container.querySelector('.ss-palette');
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
 			`repeat(${theme.components.facetpaletteoptions.columns}, calc((100% - (${theme.components.facetpaletteoptions.columns - 1} * 8px))/ ${
@@ -83,7 +83,7 @@ describe('FacetPaletteOptions Component', () => {
 			values: paletteFacetMock.values,
 		};
 		const rendered = render(<FacetPaletteOptions {...args} theme={theme} />);
-		const paletteElement = rendered.container.querySelector('.ss-palette');
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
 			`repeat(${theme.components.facetpaletteoptions.columns}, calc((100% - (${theme.components.facetpaletteoptions.columns - 1} * 8px))/ ${
@@ -108,7 +108,7 @@ describe('FacetPaletteOptions Component', () => {
 				<FacetPaletteOptions {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const paletteElement = rendered.container.querySelector('.ss-palette');
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
 			`repeat(${themeOverride.components.facetpaletteoptions.columns}, calc((100% - (${

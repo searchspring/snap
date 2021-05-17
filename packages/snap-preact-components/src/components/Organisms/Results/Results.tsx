@@ -61,7 +61,7 @@ export const Results = observer(
 		const subProps: ResultsSubProps = {
 			result: {
 				// default props
-				className: 'ss-results__result',
+				className: 'ss__results__result',
 				// global theme
 				...globalTheme?.components?.result,
 				// inherited props
@@ -73,7 +73,7 @@ export const Results = observer(
 			},
 			inlineBanner: {
 				// default props
-				className: 'ss-results__inlinebanner',
+				className: 'ss__results__inlinebanner',
 				// global theme
 				...globalTheme?.components?.inlineBanner,
 				// inherited props
@@ -163,7 +163,7 @@ export const Results = observer(
 
 		return (
 			resultsToShow?.length && (
-				<div css={!disableStyles && CSS.results({ style })} className={classnames('ss-results', className)}>
+				<div css={!disableStyles && CSS.results({ style })} className={classnames('ss__results', className)}>
 					{resultsToShow.map((result) =>
 						(() => {
 							switch (result.type) {

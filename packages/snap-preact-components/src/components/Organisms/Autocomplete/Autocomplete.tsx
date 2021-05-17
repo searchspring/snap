@@ -16,7 +16,7 @@ import { BannerType, ComponentProps, Layout } from '../../../types';
 const CSS = {
 	Autocomplete: ({ style }) =>
 		css({
-			'&.ss-autocomplete': {
+			'&.ss__autocomplete': {
 				position: 'absolute',
 				top: '50px',
 				zIndex: '10002',
@@ -69,7 +69,7 @@ const CSS = {
 				padding: '20px',
 			},
 
-			'& .ss-ac-container .ss-ac-terms .ss-list .ss-focused, .ss-ac-container .ss-ac-facets .ss-ac-facet-container .ss-focused, .ss-ac-container .ss-ac-results .ss-ac-item-container .ss-ac-item .ss-focused .ss-ac-item-details .ss-ac-item-name': {
+			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-focused, .ss-ac-container .ss-ac-facets .ss-ac-facet-container .ss-focused, .ss-ac-container .ss-ac-results .ss-ac-item-container .ss-ac-item .ss-focused .ss-ac-item-details .ss-ac-item-name': {
 				fontWeight: 'bold',
 			},
 
@@ -85,7 +85,7 @@ const CSS = {
 				padding: '0px',
 			},
 
-			'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option .ss-list-link': {
+			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option .ss__facet-list-options-link': {
 				display: 'block',
 				padding: '10px 20px',
 				fontSize: '16px',
@@ -93,12 +93,12 @@ const CSS = {
 				wordWrap: 'break-word',
 			},
 
-			'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option .ss-list-link em': {
+			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option .ss__facet-list-options-link em': {
 				fontStyle: 'normal',
 				textDecoration: 'underline',
 			},
 
-			'& .ss-ac-container .ss-ac-terms .ss-list .ss-active': {
+			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-active': {
 				background: '#ffffff',
 			},
 
@@ -127,11 +127,11 @@ const CSS = {
 				textTransform: 'uppercase',
 			},
 
-			'& .ss-ac-container .ss-ac-facets .ss-list .ss-list-option': {
+			'& .ss-ac-container .ss-ac-facets .ss__facet-list-options .ss__facet-list-options-option': {
 				margin: '0 0 3px 0',
 			},
 
-			'& .ss-ac-container .ss-ac-facets .ss-list .ss-list-option:last-child': {
+			'& .ss-ac-container .ss-ac-facets .ss__facet-list-options .ss__facet-list-options-option:last-child': {
 				marginBottom: '0',
 			},
 
@@ -207,16 +207,16 @@ const CSS = {
 				'& .ss-ac-container .ss-ac-terms .ss-ac-terms-heading': {
 					padding: '20px',
 				},
-				'& .ss-ac-container .ss-ac-terms .ss-list': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options': {
 					display: 'flex',
 					flexFlow: 'row nowrap',
 				},
-				'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option': {
 					flex: '1 1 0%',
 					textAlign: 'center',
 					overflow: 'hidden',
 				},
-				'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option .ss-list-link': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option .ss__facet-list-options-link': {
 					overflow: 'hidden',
 					textOverflow: 'ellipsis',
 					whiteSpace: 'nowrap',
@@ -228,7 +228,7 @@ const CSS = {
 					borderLeft: '0',
 				},
 
-				'&.ss-autocomplete': {
+				'&.ss__autocomplete': {
 					left: '0',
 					right: '0',
 					margin: '0 auto',
@@ -263,21 +263,21 @@ const CSS = {
 					padding: '20px',
 				},
 
-				'& .ss-ac-container .ss-ac-terms .ss-list': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options': {
 					flexWrap: 'wrap',
 					margin: '0 -5px -10px -5px',
 				},
 
-				'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option': {
 					flex: '0 1 auto',
 					width: '50%',
 					textAlign: 'left',
 				},
-				'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option .ss-list-link': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option .ss__facet-list-options-link': {
 					fontSize: '14px',
 					padding: '0 5px 10px 5px',
 				},
-				'& .ss-ac-container .ss-ac-terms .ss-list .ss-active': {
+				'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-active': {
 					background: 'none',
 				},
 				'& .ss-ac-container .ss-ac-terms .ss-ac-terms-heading': {
@@ -321,7 +321,7 @@ export const Autocomplete = observer(
 		const subProps: AutocompleteSubProps = {
 			facet: {
 				// default props
-				className: 'ss-autocomplete__facet',
+				className: 'ss__autocomplete__facet',
 				// global theme
 				...globalTheme?.components?.facet,
 				// inherited props
@@ -333,7 +333,7 @@ export const Autocomplete = observer(
 			},
 			banner: {
 				// default props
-				className: 'ss-autocomplete__banner',
+				className: 'ss__autocomplete__banner',
 				// global theme
 				...globalTheme?.components?.banner,
 				// inherited props
@@ -345,7 +345,7 @@ export const Autocomplete = observer(
 			},
 			results: {
 				// default props
-				className: 'ss-autocomplete__results',
+				className: 'ss__autocomplete__results',
 				responsive: responsive,
 				// global theme
 				...globalTheme?.components?.results,
@@ -392,7 +392,7 @@ export const Autocomplete = observer(
 		console.log('terms.length', terms.length);
 		return (
 			visible && (
-				<div css={CSS.Autocomplete({ style })} className={classnames('ss-autocomplete', className)} onClick={(e) => e.stopPropagation()}>
+				<div css={CSS.Autocomplete({ style })} className={classnames('ss__autocomplete', className)} onClick={(e) => e.stopPropagation()}>
 					<div className="ss-ac-container">
 						{!hideTerms && <Terms terms={terms} state={state} valueProps={valueProps} />}
 
@@ -477,11 +477,11 @@ const emIfy = (term, state) => {
 const Terms = (props: { terms; state; valueProps }) => {
 	return (
 		<div className="ss-ac-terms">
-			<ul className="ss-list">
+			<ul className="ss__facet-list-options">
 				{props.terms.map((term) => (
-					<li className={`ss-list-option ${term.active ? 'ss-active' : ''}`}>
-						<a href={term.url.href} className="ss-list-link" {...props.valueProps} onFocus={() => term.preview()}>
-							{emIfy(term.value, props.state)}
+					<li className={`ss__facet-list-options-option ${term.active ? 'ss-active' : ''}`}>
+						<a href={term.url.href} className="ss__facet-list-options-link" {...props.valueProps} onFocus={() => term.preview()}>
+							{emIfy(term.value, props.search)}
 						</a>
 					</li>
 				))}

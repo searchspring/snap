@@ -14,17 +14,17 @@ const CSS = {
 	dropdown: ({ disableOverlay, style }) =>
 		css({
 			position: 'relative',
-			'&.ss-dropdown-open': {
-				'& .ss-dropdown__content': {
+			'&.ss__dropdown--open': {
+				'& .ss__dropdown__content': {
 					position: `${disableOverlay ? 'initial' : null}`,
 					visibility: 'visible',
 					opacity: 1,
 				},
 			},
-			'.ss-dropdown__button': {
+			'.ss__dropdown__button': {
 				cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 			},
-			'.ss-dropdown__content': {
+			'.ss__dropdown__content': {
 				position: 'absolute',
 				minWidth: '100%',
 				visibility: 'hidden',
@@ -98,11 +98,11 @@ export const Dropdown = observer(
 		return (
 			<div
 				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
-				className={classnames('ss-dropdown', { 'ss-dropdown-open': showContent }, className)}
+				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
 				ref={innerRef}
 			>
 				<div
-					className="ss-dropdown__button"
+					className="ss__dropdown__button"
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
@@ -113,7 +113,7 @@ export const Dropdown = observer(
 					{button}
 				</div>
 
-				<div className="ss-dropdown__content">
+				<div className="ss__dropdown__content">
 					{content}
 					{children}
 				</div>

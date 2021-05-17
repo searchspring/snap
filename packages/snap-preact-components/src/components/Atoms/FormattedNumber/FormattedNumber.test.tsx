@@ -7,7 +7,7 @@ import { ThemeProvider } from '../../../providers/theme';
 describe('FormattedNumber Component', () => {
 	it('renders', () => {
 		const rendered = render(<FormattedNumber value={1099.99} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toBeInTheDocument();
 	});
 
@@ -17,7 +17,7 @@ describe('FormattedNumber Component', () => {
 			symbol: 'mm',
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement.textContent;
 		expect(formattednumber).toBe('1099.999mm');
 	});
@@ -32,7 +32,7 @@ describe('FormattedNumber Component', () => {
 			symbolAfter: true,
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement.textContent;
 		expect(formattednumber).toBe('1.099,99 £');
 	});
@@ -42,7 +42,7 @@ describe('FormattedNumber Component', () => {
 			value: 1099,
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement.textContent;
 		expect(formattednumber).toBe('1099.000');
 	});
@@ -53,7 +53,7 @@ describe('FormattedNumber Component', () => {
 			padDecimalPlaces: false,
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const formattednumber = formattednumberElement.textContent;
 		expect(formattednumber).toBe('1099');
 	});
@@ -64,7 +64,7 @@ describe('FormattedNumber Component', () => {
 		};
 
 		const rendered = render(<FormattedNumber value={100} style={style} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		const styles = getComputedStyle(formattednumberElement);
 
 		expect(styles.padding).toBe(style.padding);
@@ -74,10 +74,14 @@ describe('FormattedNumber Component', () => {
 		const args = {
 			value: 1099.99,
 			disableStyles: true,
+			style: {
+				padding: '20px',
+			},
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
-		expect(formattednumberElement.className).not.toMatch(/formatted-/);
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
+		const styles = getComputedStyle(formattednumberElement);
+		expect(styles.background).not.toBe(args.style.padding);
 	});
 
 	it('uses custom className', () => {
@@ -86,7 +90,7 @@ describe('FormattedNumber Component', () => {
 			className: 'custom-class',
 		};
 		const rendered = render(<FormattedNumber {...args} />);
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement.classList).toContain(args.className);
 	});
 
@@ -105,7 +109,7 @@ describe('FormattedNumber Component', () => {
 			</ThemeProvider>
 		);
 
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(globalTheme.components.formattedNumber.className);
 	});
 
@@ -120,7 +124,7 @@ describe('FormattedNumber Component', () => {
 
 		const rendered = render(<FormattedNumber theme={propTheme} value={33.333} />);
 
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(propTheme.components.formattedNumber.className);
 	});
 
@@ -147,7 +151,7 @@ describe('FormattedNumber Component', () => {
 			</ThemeProvider>
 		);
 
-		const formattednumberElement = rendered.container.querySelector('.ss-formattednumber');
+		const formattednumberElement = rendered.container.querySelector('.ss__formatted-number');
 		expect(formattednumberElement).toHaveClass(propTheme.components.formattedNumber.className);
 		expect(formattednumberElement).not.toHaveClass(globalTheme.components.formattedNumber.className);
 	});

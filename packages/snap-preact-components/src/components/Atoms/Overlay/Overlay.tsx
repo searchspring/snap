@@ -17,7 +17,7 @@ const CSS = {
 			width: '100%',
 			top: '0',
 			left: '-100%',
-			'&.ss-overlay-active': {
+			'&.ss__overlay--active': {
 				transition: `background ${transitionSpeed} ease, left 0s ease`,
 				background: color,
 				left: '0',
@@ -45,7 +45,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 	return (
 		<div
 			onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
-			className={classnames('ss-overlay', { 'ss-overlay-active': active }, className)}
+			className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
 			css={!disableStyles && CSS.overlay({ color, transitionSpeed, style })}
 		/>
 	);

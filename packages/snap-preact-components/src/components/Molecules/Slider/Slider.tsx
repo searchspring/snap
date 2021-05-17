@@ -20,7 +20,7 @@ const CSS = {
 			margin: '20px 5% 25px',
 			top: '10px',
 
-			'& .ss-slider__tick': {
+			'& .ss__slider__tick': {
 				'&:before': {
 					content: "''",
 					position: 'absolute',
@@ -30,7 +30,7 @@ const CSS = {
 					width: '2px',
 					transform: 'translate(-50%, 0.7rem)',
 				},
-				'& .ss-slider__tick__label': {
+				'& .ss__slider__tick__label': {
 					position: 'absolute',
 					fontSize: '0.6rem',
 					color: tickTextColor,
@@ -39,15 +39,15 @@ const CSS = {
 					whiteSpace: 'nowrap',
 				},
 			},
-			'& .ss-slider__rail': {
+			'& .ss__slider__rail': {
 				background: railColor || theme.colors?.primary,
 				height: '100%',
 			},
-			'& .ss-slider__segment': {
+			'& .ss__slider__segment': {
 				background: trackColor || theme.colors?.secondary,
 				height: '100%',
 			},
-			'& .ss-slider__handle': {
+			'& .ss__slider__handle': {
 				background: handleColor || theme.colors?.primary,
 				display: 'flex',
 				alignItems: 'center',
@@ -86,7 +86,7 @@ const CSS = {
 					fontSize: '14px',
 				},
 
-				'&.ss-slider__handle-active': {
+				'&.ss__slider__handle--active': {
 					background: handleDraggingColor || handleColor || theme.colors?.primary,
 				},
 			},
@@ -158,7 +158,7 @@ export const Slider = observer(
 			facet.active &&
 			facet.step && (
 				<div
-					className={classnames('ss-slider', className)}
+					className={classnames('ss__slider', className)}
 					{...getTrackProps()}
 					css={
 						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
@@ -166,13 +166,13 @@ export const Slider = observer(
 				>
 					{showTicks &&
 						ticks.map(({ value, getTickProps }) => (
-							<div className="ss-slider__tick" {...getTickProps()}>
-								<div className="ss-slider__tick__label">{value}</div>
+							<div className="ss__slider__tick" {...getTickProps()}>
+								<div className="ss__slider__tick__label">{value}</div>
 							</div>
 						))}
 
 					{segments.map(({ getSegmentProps }, index) => (
-						<div className={`${index === 1 ? 'ss-slider__rail' : 'ss-slider__segment'}`} {...getSegmentProps()} index={index} />
+						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
 					))}
 
 					{handles.map(({ value, active, getHandleProps }) => (
@@ -186,7 +186,7 @@ export const Slider = observer(
 								},
 							})}
 						>
-							<div className={classnames('ss-slider__handle', { 'ss-slider__handle-active': active })}>
+							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
 								<label>{sprintf(facet.formatValue, value)}</label>
 							</div>
 						</button>

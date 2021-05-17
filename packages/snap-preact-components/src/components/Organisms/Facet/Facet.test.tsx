@@ -14,9 +14,9 @@ describe('Facet Component', () => {
 			};
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss-facet__options');
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement.querySelectorAll('.ss-list__option').length;
+			const count = facetElement.querySelectorAll('.ss__facet-list-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -28,9 +28,9 @@ describe('Facet Component', () => {
 			};
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss-facet__options');
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement.querySelectorAll('.ss-grid__option').length;
+			const count = facetElement.querySelectorAll('.ss__facet-grid-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -42,9 +42,9 @@ describe('Facet Component', () => {
 			};
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet facet={args.facet} />);
-			const facetElement = rendered.container.querySelector('.ss-facet__options');
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement.querySelectorAll('.ss-palette__option').length;
+			const count = facetElement.querySelectorAll('.ss__facet-palette-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -56,9 +56,9 @@ describe('Facet Component', () => {
 			};
 			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss-facet__options');
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const sliderElement = facetElement.querySelector('.ss-slider');
+			const sliderElement = facetElement.querySelector('.ss__slider');
 			expect(sliderElement).toBeInTheDocument();
 		});
 	});

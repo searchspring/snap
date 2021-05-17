@@ -14,15 +14,15 @@ const CSS = {
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 			gap: gapSize,
-			'& .ss-grid__option': {
+			'& .ss__facet-grid-options__option': {
 				position: 'relative',
 				border: `1px solid ${theme.colors?.primary}`,
 				padding: '1em',
-				'&.ss-grid__option-filtered': {
+				'&.ss__facet-grid-options__option--filtered': {
 					background: theme.colors?.primary,
 					color: theme.colors?.text?.secondary,
 				},
-				'&:hover:not(.ss-grid__option-filtered)': {
+				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
 					background: theme.colors?.hover,
 				},
@@ -31,7 +31,7 @@ const CSS = {
 					paddingBottom: '100%',
 					display: 'block',
 				},
-				'& .ss-grid__option__value': {
+				'& .ss__facet-grid-options__option__value': {
 					position: 'absolute',
 					maxWidth: '100%',
 					top: 'calc(50% - 0.5em)',
@@ -66,16 +66,16 @@ export const FacetGridOptions = observer(
 
 		return (
 			values?.length && (
-				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss-grid', className)}>
+				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
 					{values.map((value) => (
 						<a
-							className={classnames('ss-grid__option', { 'ss-grid__option-filtered': value.filtered })}
+							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
 							onClick={onClick}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<span className="ss-grid__option__value">{value.label}</span>
+							<span className="ss__facet-grid-options__option__value">{value.label}</span>
 						</a>
 					))}
 				</div>
