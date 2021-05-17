@@ -95,7 +95,6 @@ const CSS = {
 
 			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss__facet-list-options-option .ss__facet-list-options-link em': {
 				fontStyle: 'normal',
-				textDecoration: 'underline',
 			},
 
 			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-active': {
@@ -388,13 +387,11 @@ export const Autocomplete = observer(
 			},
 		};
 
-		console.log('inputFocused', inputFocused);
-		console.log('terms.length', terms.length);
 		return (
 			visible && (
 				<div css={CSS.Autocomplete({ style })} className={classnames('ss__autocomplete', className)} onClick={(e) => e.stopPropagation()}>
 					<div className="ss-ac-container">
-						{!hideTerms && <Terms terms={terms} state={state} valueProps={valueProps} />}
+						{!hideTerms && <Terms terms={terms} search={search} valueProps={valueProps} />}
 
 						<div className="ss-ac-content">
 							{facets.length > 0 && !hideFacets && (
@@ -454,27 +451,29 @@ export const Autocomplete = observer(
 	}
 );
 
-const emIfy = (term, state) => {
-	console.log('term', term);
-	console.log('search.query.string', state.input);
-	const match = term.match(state.input);
+const emIfy = (term, search) => {
+	const match = term.match(search.query);
 
 	if (match) {
-		const beforeMatch = term.slice(0, match.index);
-		const afterMatch = term.slice(match.index + state.input.length, term.length);
+		const beforeMatch = <em>{term.slice(0, match.index)}</em>;
+		const afterMatch = <em>{term.slice(match.index + search.query.length, term.length)}</em>;
 		return (
 			<>
-				{beforeMatch}
-				<em>{state.input}</em>
-				{afterMatch}
+				({beforeMatch}
+				{search.query}
+				{afterMatch})
 			</>
 		);
 	}
 
-	return <em>{term}</em>;
+	return (
+		<>
+			(<em>{term}</em>)
+		</>
+	);
 };
 
-const Terms = (props: { terms; state; valueProps }) => {
+const Terms = (props: { terms; search; valueProps }) => {
 	return (
 		<div className="ss-ac-terms">
 			<ul className="ss__facet-list-options">
