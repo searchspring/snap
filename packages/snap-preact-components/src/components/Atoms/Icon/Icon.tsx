@@ -51,7 +51,7 @@ export function Icon(properties: IconProps): JSX.Element {
 						style,
 					})
 				}
-				className={classnames('ss-icon', icon ? `ss-icon-${icon}` : null, className)}
+				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
 				viewBox={viewBox}
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles && (width || size)}

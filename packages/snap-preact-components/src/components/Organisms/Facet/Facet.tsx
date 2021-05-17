@@ -20,7 +20,7 @@ const CSS = {
 	facet: ({ color, theme, style }) =>
 		css({
 			margin: '0 0 20px 0',
-			'& .ss-facet__header': {
+			'& .ss__facet__header': {
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
@@ -29,17 +29,17 @@ const CSS = {
 				borderBottom: `2px solid ${theme.colors?.primary}`,
 				padding: '6px 0',
 			},
-			'& .ss-facet__options': {
+			'& .ss__facet__options': {
 				marginTop: '8px',
 				maxHeight: '300px',
 				overflowY: 'auto',
 				overflowX: 'hidden',
 			},
-			'& .ss-facet__showmore': {
+			'& .ss__facet__showmoreless': {
 				display: 'block',
 				margin: '8px',
 				cursor: 'pointer',
-				'& .ss-icon': {
+				'& .ss__icon': {
 					marginRight: '8px',
 				},
 			},
@@ -91,7 +91,7 @@ export const Facet = observer(
 		const subProps: FacetSubProps = {
 			dropdown: {
 				// default props
-				className: 'ss-facet__dropdown',
+				className: 'ss__facet__dropdown',
 				disableClickOutside: true,
 				disableOverlay: true,
 				// global theme
@@ -105,7 +105,7 @@ export const Facet = observer(
 			},
 			icon: {
 				// default props
-				className: 'ss-facet__dropdown__icon',
+				className: 'ss__facet__dropdown__icon',
 				size: '12px',
 				color: iconColor || color,
 				// global theme
@@ -119,7 +119,7 @@ export const Facet = observer(
 			},
 			showMoreLessIcon: {
 				// default props
-				className: 'ss-facet__showmore__icon',
+				className: 'ss__facet__showmoreless__icon',
 				size: '10px',
 				color: iconColor || color,
 				// global theme
@@ -133,7 +133,7 @@ export const Facet = observer(
 			},
 			facetHierarchyOptions: {
 				// default props
-				className: 'ss-facet__hierarchy',
+				className: 'ss__facet__facet-hierarchy-options',
 				// global theme
 				...globalTheme?.components?.facetHierarchyOptions,
 				// inherited props
@@ -147,7 +147,7 @@ export const Facet = observer(
 			},
 			facetListOptions: {
 				// default props
-				className: 'ss-facet__list',
+				className: 'ss__facet__facet-list-options',
 				// global theme
 				...globalTheme?.components?.facetListOptions,
 				// inherited props
@@ -161,7 +161,7 @@ export const Facet = observer(
 			},
 			facetGridOptions: {
 				// default props
-				className: 'ss-facet__grid',
+				className: 'ss__facet__facet-grid-options',
 				// global theme
 				...globalTheme?.components?.facetGridOptions,
 				// inherited props
@@ -175,7 +175,7 @@ export const Facet = observer(
 			},
 			facetPaletteOptions: {
 				// default props
-				className: 'ss-facet__palette',
+				className: 'ss__facet__facet-palette-options',
 				// global theme
 				...globalTheme?.components?.facetPaletteOptions,
 				// inherited props
@@ -189,7 +189,7 @@ export const Facet = observer(
 			},
 			slider: {
 				// default props
-				className: 'ss-facet__slider',
+				className: 'ss__facet__slider',
 				// global theme
 				...globalTheme?.components?.slider,
 				// inherited props
@@ -206,19 +206,19 @@ export const Facet = observer(
 		}
 
 		return (
-			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss-facet', className)}>
+			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
 				<Dropdown
 					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}
 					onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
 					button={
-						<div className="ss-facet__header">
+						<div className="ss__facet__header">
 							{facet?.label}
 							{!hideIcon && !disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>
-					<div className={classnames('ss-facet__options', `ss-facet__options-${facet.display}`, className)}>
+					<div className={classnames('ss__facet__options', `ss__facet__options--${facet.display}`, className)}>
 						{(() => {
 							switch (facet?.display) {
 								case FacetDisplay.SLIDER:
@@ -236,7 +236,7 @@ export const Facet = observer(
 					</div>
 
 					{(facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-						<div className="ss-facet__showmore" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+						<div className="ss__facet__showmoreless" onClick={() => (facet as ValueFacet).overflow.toggle()}>
 							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
 							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
 						</div>

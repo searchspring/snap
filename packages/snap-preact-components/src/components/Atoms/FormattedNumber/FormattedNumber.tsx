@@ -47,7 +47,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	} = props;
 
 	return (
-		<span className={classnames('ss-formattednumber', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
+		<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
 			{filters.formatNumber(value, {
 				symbol,
 				decimalPlaces,

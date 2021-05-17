@@ -12,7 +12,7 @@ describe('Button Component', () => {
 			const rendered = render(<Button />);
 			expect(rendered.container).toBeInTheDocument();
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).not.toBeInTheDocument();
 		});
 
@@ -20,7 +20,7 @@ describe('Button Component', () => {
 			const content = 'button1';
 			const rendered = render(<Button content={content} />);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
 			expect(buttonElement.classList.length).toBeGreaterThan(1);
@@ -33,7 +33,7 @@ describe('Button Component', () => {
 			const content = <h1 class="child">childbutton</h1>;
 			const rendered = render(<Button>{content}</Button>);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
 			const childElement = buttonElement.querySelector('.child');
@@ -89,19 +89,19 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button onClick={clickFn}>{content}</Button>);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
 		});
 
-		it('adds class "ss-button-disabled" and prevents onClick when disabled by prop', () => {
+		it('adds class "ss__button--disabled" and prevents onClick when disabled by prop', () => {
 			const clickFn = jest.fn();
 			const content = 'disabled button';
 
 			const rendered = render(<Button onClick={clickFn} disabled content={content} />);
 
-			const buttonElement = rendered.container.querySelector(`.ss-button.ss-button-disabled`);
+			const buttonElement = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(buttonElement).toBeInTheDocument();
 
 			userEvent.click(buttonElement);
@@ -115,7 +115,7 @@ describe('Button Component', () => {
 			};
 
 			const rendered = render(<Button style={style} content={content} />);
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			const styles = getComputedStyle(buttonElement);
 
 			expect(styles.padding).toBe(style.padding);
@@ -126,7 +126,7 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button disableStyles>{content}</Button>);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement.classList.length).toBe(2);
 			expect(buttonElement.classList[1]).toMatch(/^css-0/);
 			expect(buttonElement).toBeInTheDocument();
@@ -148,7 +148,7 @@ describe('Button Component', () => {
 				</ThemeProvider>
 			);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 
 			const styles = getComputedStyle(buttonElement);
 
@@ -168,7 +168,7 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button content={content} theme={propTheme} />);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 
 			const styles = getComputedStyle(buttonElement);
 
@@ -200,7 +200,7 @@ describe('Button Component', () => {
 				</ThemeProvider>
 			);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 
 			const styles = getComputedStyle(buttonElement);
 
@@ -214,7 +214,7 @@ describe('Button Component', () => {
 			const rendered = render(<Button native />);
 			expect(rendered.container).toBeInTheDocument();
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).not.toBeInTheDocument();
 		});
 
@@ -222,7 +222,7 @@ describe('Button Component', () => {
 			const content = 'button1';
 			const rendered = render(<Button native content={content} />);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
 			expect(buttonElement.classList.length).toBe(2);
@@ -235,7 +235,7 @@ describe('Button Component', () => {
 			const content = <h1 class="child">childbutton</h1>;
 			const rendered = render(<Button native>{content}</Button>);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
 			const childElement = buttonElement.querySelector('.child');
@@ -254,7 +254,7 @@ describe('Button Component', () => {
 				</Button>
 			);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
 			const childElementAltSelector = rendered.getByText(content + childrenContent);
@@ -306,19 +306,19 @@ describe('Button Component', () => {
 				</Button>
 			);
 
-			const buttonElement = rendered.container.querySelector('.ss-button');
+			const buttonElement = rendered.container.querySelector('.ss__button');
 			userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
 		});
 
-		it('adds class "ss-button-disabled" and prevents onClick when disabled by prop', () => {
+		it('adds class "ss__button--disabled" and prevents onClick when disabled by prop', () => {
 			const clickFn = jest.fn();
 			const content = 'disabled button';
 
 			const rendered = render(<Button native onClick={clickFn} disabled content={content} />);
 
-			const button = rendered.container.querySelector(`.ss-button.ss-button-disabled`);
+			const button = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(button).toBeInTheDocument();
 
 			userEvent.click(button);

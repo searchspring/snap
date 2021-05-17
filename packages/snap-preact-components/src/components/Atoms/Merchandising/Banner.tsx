@@ -42,7 +42,7 @@ export function Banner(properties: BannerProps): JSX.Element {
 		content &&
 		content[type]?.length && (
 			<div
-				className={classnames('ss-banner', `ss-banner-${type}`, className)}
+				className={classnames('ss__banner', `ss__banner--${type}`, className)}
 				css={!disableStyles && CSS.banner({ style })}
 				dangerouslySetInnerHTML={{
 					__html: content[props.type].join(''),

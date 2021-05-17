@@ -13,7 +13,7 @@ import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 const CSS = {
 	list: ({ theme, style }) =>
 		css({
-			'& .ss-list__option': {
+			'& .ss__facet-list-options__option': {
 				display: 'flex',
 				padding: '6px',
 				textDecoration: 'none',
@@ -22,13 +22,13 @@ const CSS = {
 					cursor: 'pointer',
 					background: theme.colors?.hover,
 				},
-				'&.ss-list__option-filtered': {
+				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',
 					color: theme.colors?.primary,
 				},
-				'& .ss-list__option__value': {
+				'& .ss__facet-list-options__option__value': {
 					marginLeft: '8px',
-					'& .ss-list__option__value__count': {
+					'& .ss__facet-list-options__option__value__count': {
 						fontSize: '0.8em',
 						marginLeft: '6px',
 					},
@@ -57,7 +57,7 @@ export const FacetListOptions = observer(
 		const subProps: FacetListOptionsSubProps = {
 			checkbox: {
 				// default props
-				className: 'ss-list__checkbox',
+				className: 'ss__facet-list-options__checkbox',
 				// global theme
 				...globalTheme?.components?.checkbox,
 				// inherited props
@@ -71,19 +71,19 @@ export const FacetListOptions = observer(
 
 		return (
 			values?.length && (
-				<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss-list', className)}>
+				<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss__facet-list-options', className)}>
 					{values.map((value) => (
 						<a
-							className={classnames('ss-list__option', { 'ss-list__option-filtered': value.filtered })}
+							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
 							onClick={onClick}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
 							{...value.url?.link}
 						>
 							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-							<span className="ss-list__option__value">
+							<span className="ss__facet-list-options__option__value">
 								{value.label}
-								{!hideCount && value.count > 0 && <span className="ss-list__option__value__count">({value.count})</span>}
+								{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
 							</span>
 						</a>
 					))}

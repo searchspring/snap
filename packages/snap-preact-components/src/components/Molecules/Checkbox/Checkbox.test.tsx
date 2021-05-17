@@ -33,7 +33,7 @@ describe('Checkbox Component', () => {
 	describe('styled', () => {
 		it('renders', () => {
 			const rendered = render(<Checkbox />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(checkboxElement).toBeInTheDocument();
 			expect(checkboxElement.classList.length).toBe(2);
@@ -59,7 +59,7 @@ describe('Checkbox Component', () => {
 
 			const rendered = render(<Checkbox onClick={clickFn} />);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			userEvent.click(checkboxElement);
 			expect(clickFn).toHaveBeenCalled();
@@ -71,7 +71,7 @@ describe('Checkbox Component', () => {
 			};
 
 			const rendered = render(<Checkbox style={style} />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
@@ -80,7 +80,7 @@ describe('Checkbox Component', () => {
 		it('respects the disabled prop', () => {
 			const clickFn = jest.fn();
 			const rendered = render(<Checkbox disabled onClick={clickFn} />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(checkboxElement.className.match(/disabled/)).toBeTruthy();
 
@@ -94,7 +94,7 @@ describe('Checkbox Component', () => {
 			const size = '12px';
 
 			const rendered = render(<Checkbox checked size={size} icon={icon} color={color} />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const svg = checkboxElement.querySelector('svg');
 			const path = svg.querySelector('path');
 
@@ -108,7 +108,7 @@ describe('Checkbox Component', () => {
 
 		it('can disableStyles', () => {
 			const rendered = render(<Checkbox disableStyles />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(rendered.container).toBeInTheDocument();
 			expect(checkboxElement.classList.length).toBe(2);
@@ -123,8 +123,8 @@ describe('Checkbox Component', () => {
 				</ThemeProvider>
 			);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
-			const iconElement = checkboxElement.querySelector('.ss-icon');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
+			const iconElement = checkboxElement.querySelector('.ss__icon');
 			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(globalTheme.components.checkbox.className);
@@ -134,8 +134,8 @@ describe('Checkbox Component', () => {
 		it('is themeable with theme prop', () => {
 			const rendered = render(<Checkbox checked theme={propTheme} />);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
-			const iconElement = checkboxElement.querySelector('.ss-icon');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
+			const iconElement = checkboxElement.querySelector('.ss__icon');
 			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
@@ -149,8 +149,8 @@ describe('Checkbox Component', () => {
 				</ThemeProvider>
 			);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
-			const iconElement = checkboxElement.querySelector('.ss-icon');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
+			const iconElement = checkboxElement.querySelector('.ss__icon');
 			const iconStyles = getComputedStyle(iconElement);
 
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
@@ -162,7 +162,7 @@ describe('Checkbox Component', () => {
 	describe('native', () => {
 		it('renders', () => {
 			const rendered = render(<Checkbox native />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const inputElement = rendered.container.querySelector('input');
 
 			expect(rendered.container).toBeInTheDocument();
@@ -195,7 +195,7 @@ describe('Checkbox Component', () => {
 
 			const rendered = render(<Checkbox native onClick={clickFn} />);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			userEvent.click(checkboxElement);
 			expect(clickFn).toHaveBeenCalled();
@@ -204,7 +204,7 @@ describe('Checkbox Component', () => {
 		it('respects the disabled prop', () => {
 			const clickFn = jest.fn();
 			const rendered = render(<Checkbox native disabled />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(checkboxElement.className.match(/disabled/)).toBeTruthy();
 			expect(checkboxElement).toHaveAttribute('disabled');
@@ -219,7 +219,7 @@ describe('Checkbox Component', () => {
 			};
 
 			const rendered = render(<Checkbox native style={style} />);
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			const styles = getComputedStyle(checkboxElement);
 
 			expect(styles.padding).toBe(style.padding);
@@ -232,14 +232,14 @@ describe('Checkbox Component', () => {
 				</ThemeProvider>
 			);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(globalTheme.components.checkbox.className);
 		});
 
 		it('is themeable with theme prop', () => {
 			const rendered = render(<Checkbox native theme={propTheme} />);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 		});
 
@@ -250,7 +250,7 @@ describe('Checkbox Component', () => {
 				</ThemeProvider>
 			);
 
-			const checkboxElement = rendered.container.querySelector('.ss-checkbox');
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 			expect(checkboxElement).toHaveClass(propTheme.components.checkbox.className);
 			expect(checkboxElement).not.toHaveClass(globalTheme.components.checkbox.className);
 		});

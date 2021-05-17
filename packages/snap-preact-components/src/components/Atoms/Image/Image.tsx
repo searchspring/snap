@@ -39,7 +39,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	return (
 		<img
 			css={!disableStyles && CSS.image({ visibility, style })}
-			className={classnames('ss-image', className)}
+			className={classnames('ss__image', className)}
 			src={(isHovering ? hoverSrc : src) || fallback}
 			alt={alt}
 			title={alt}

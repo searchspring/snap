@@ -13,10 +13,10 @@ import { ComponentProps, Filter as FilterType } from '../../../types';
 const CSS = {
 	filterSummary: ({ style }) =>
 		css({
-			'& .ss-filtersummary__filter': {
+			'& .ss__filter-summary__filter': {
 				margin: '5px 10px 5px 0',
 			},
-			'& .ss-filtersummary__title': {
+			'& .ss__filter-summary__title': {
 				fontSize: '1.2em',
 			},
 			...style,
@@ -60,7 +60,7 @@ export const FilterSummary = observer(
 		const subProps: FilterSummarySubProps = {
 			filter: {
 				// default props
-				className: 'ss-filtersummary__filter',
+				className: 'ss__filter-summary__filter',
 				// global theme
 				...globalTheme?.components?.filter,
 				// inherited props
@@ -76,8 +76,8 @@ export const FilterSummary = observer(
 		};
 
 		return filters?.length ? (
-			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss-filtersummary', className)}>
-				<div className="ss-filtersummary__title">{title}</div>
+			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
+				<div className="ss__filter-summary__title">{title}</div>
 
 				{filters.map((filter) => (
 					<Filter
@@ -93,7 +93,7 @@ export const FilterSummary = observer(
 					<Filter
 						{...subProps.filter}
 						icon={clearAllIcon}
-						className={`${subProps?.filter?.className} ss-filtersummary__filter-clear`}
+						className={`${subProps?.filter?.className} ss__filter-summary__filter-clearall`}
 						hideFacetLabel
 						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}

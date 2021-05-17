@@ -22,8 +22,10 @@ const CSS = {
 				cursor: 'pointer',
 				backgroundColor: theme.colors?.hover,
 			},
-			'&.ss-button-disabled': {
+			'&.ss__button--disabled': {
 				opacity: 0.7,
+				borderColor: 'rgba(51,51,51,0.7)',
+				backgroundColor: 'initial',
 				'&:hover': {
 					cursor: 'default',
 				},
@@ -64,7 +66,7 @@ export const Button = observer(
 							theme,
 							style,
 					  })),
-			className: classnames('ss-button', { 'ss-button-disabled': disabled }, className),
+			className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 			disabled,
 			onClick: (e) => !disabled && onClick && onClick(e),
 		};

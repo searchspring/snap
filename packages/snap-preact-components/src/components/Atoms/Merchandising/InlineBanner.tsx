@@ -15,10 +15,10 @@ const CSS = {
 			justifyContent: 'center',
 			maxWidth: width ? 'initial' : '260px',
 			width: width || 'auto',
-			'&.ss-inlinebanner-grid': {
+			'&.ss__inline-banner--grid': {
 				flexDirection: 'column',
 			},
-			'&.ss-inlinebanner-list': {
+			'&.ss__inline-banner--list': {
 				flexDirection: 'row',
 				display: 'block',
 				width: '100%',
@@ -50,7 +50,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		banner &&
 		banner.value && (
 			<div
-				className={classnames('ss-inlinebanner', `ss-inlinebanner-${layout}`, className)}
+				className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
 				css={!disableStyles && CSS.inlineBanner({ width, style })}
 				dangerouslySetInnerHTML={{
 					__html: banner.value,

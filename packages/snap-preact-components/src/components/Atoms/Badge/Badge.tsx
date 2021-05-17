@@ -37,7 +37,7 @@ export const Badge = observer(
 		const { content, children, position, disableStyles, className, style } = props;
 
 		return (
-			<div css={!disableStyles && CSS.badge({ position, style })} className={classnames('ss-badge', className)}>
+			<div css={!disableStyles && CSS.badge({ position, style })} className={classnames('ss__badge', className)}>
 				{content || children}
 			</div>
 		);

@@ -19,23 +19,23 @@ const CSS = {
 			maxWidth: width ? 'initial' : '260px',
 			width: width || 'auto',
 
-			'&.ss-result-grid': {
+			'&.ss__result--grid': {
 				flexDirection: 'column',
 			},
-			'&.ss-result-list': {
+			'&.ss__result--list': {
 				flexDirection: 'row',
 				display: 'block',
 				width: width || 'auto',
 				maxWidth: 'initial',
 
-				'& .ss-result__wrapper': {
+				'& .ss__result__wrapper': {
 					overflow: 'hidden',
 					display: 'flex',
-					'& .ss-result__wrapper__image': {
+					'& .ss__result__wrapper__image': {
 						float: 'left',
 						maxWidth: '35%',
 					},
-					'& .ss-result__wrapper__details': {
+					'& .ss__result__wrapper__details': {
 						float: 'right',
 						textAlign: 'left',
 						verticalAlign: 'top',
@@ -44,11 +44,11 @@ const CSS = {
 				},
 			},
 
-			'& .ss-result__wrapper': {
+			'& .ss__result__wrapper': {
 				borderRadius: '5px',
 				margin: '10px',
 				position: 'relative',
-				'& .ss-result__wrapper__image': {
+				'& .ss__result__wrapper__image': {
 					position: 'relative',
 					display: 'flex',
 					justifyContent: 'center',
@@ -64,28 +64,28 @@ const CSS = {
 						maxWidth: '100%',
 					},
 
-					'& .ss-result__badge': {
+					'& .ss__result__badge': {
 						background: 'rgba(255, 255, 255, 0.5)',
 						padding: '10px',
 					},
 				},
 
-				'& .ss-result__wrapper__details': {
+				'& .ss__result__wrapper__details': {
 					padding: '10px',
-					'& .ss-result__wrapper__details__title': {
+					'& .ss__result__wrapper__details__title': {
 						marginBottom: '10px',
 					},
-					'& .ss-result__wrapper__details__pricing': {
+					'& .ss__result__wrapper__details__pricing': {
 						marginBottom: '10px',
 
-						'& .ss-result__price': {
+						'& .ss__result__price': {
 							fontSize: '1.2em',
 						},
-						'& .ss-price-strike': {
+						'& .ss__price--strike': {
 							fontSize: '80%',
 						},
 					},
-					'& .ss-result__wrapper__details__button': {
+					'& .ss__result__wrapper__details__button': {
 						marginBottom: '10px',
 					},
 				},
@@ -115,7 +115,7 @@ export const Result = observer(
 		const subProps: ResultSubProps = {
 			price: {
 				// global theme
-				className: 'ss-result__price',
+				className: 'ss__result__price',
 				...globalTheme?.components?.price,
 				// inherited props
 				...defined({
@@ -126,7 +126,7 @@ export const Result = observer(
 			},
 			badge: {
 				// default props
-				className: 'ss-result__badge',
+				className: 'ss__result__badge',
 				content: 'Sale',
 				// global theme
 				...globalTheme?.components?.badge,
@@ -139,7 +139,7 @@ export const Result = observer(
 			},
 			image: {
 				// default props
-				className: 'ss-result__image',
+				className: 'ss__result__image',
 				alt: core?.name,
 				src: core?.thumbnailImageUrl,
 				// global theme
@@ -158,24 +158,24 @@ export const Result = observer(
 
 		return (
 			core && (
-				<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss-result', `ss-result-${layout}`, className)}>
-					<div className="ss-result__wrapper">
-						<div className="ss-result__wrapper__image">
+				<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+					<div className="ss__result__wrapper">
+						<div className="ss__result__wrapper__image">
 							<a href={core.url}>
 								{!hideBadge && onSale && <Badge {...subProps.badge} />}
 								<Image {...subProps.image} />
 							</a>
 						</div>
-						<div className="ss-result__wrapper__details">
+						<div className="ss__result__wrapper__details">
 							{!detailSlot ? (
 								<>
 									{!hideTitle && (
-										<div className="ss-result__wrapper__details__title">
+										<div className="ss__result__wrapper__details__title">
 											<a href={core.url}>{core.name}</a>
 										</div>
 									)}
 									{!hidePricing && (
-										<div className="ss-result__wrapper__details__pricing">
+										<div className="ss__result__wrapper__details__pricing">
 											{core.price < core.msrp ? (
 												<>
 													<Price {...subProps.price} value={core.price} />
@@ -192,7 +192,7 @@ export const Result = observer(
 								<>{detailSlot}</>
 							)}
 
-							{buttonSlot && <div className="ss-result__wrapper__details__button">{buttonSlot}</div>}
+							{buttonSlot && <div className="ss__result__wrapper__details__button">{buttonSlot}</div>}
 						</div>
 					</div>
 				</article>

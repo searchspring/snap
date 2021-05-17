@@ -30,7 +30,7 @@ describe('Icon Component', () => {
 		const icon = 'cog';
 		const rendered = render(<Icon icon={icon} />);
 
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 
 		expect(iconElement.classList.length).toBe(3);
 	});
@@ -40,7 +40,7 @@ describe('Icon Component', () => {
 		const className = 'classy';
 		const rendered = render(<Icon className={className} icon={icon} />);
 
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 
 		expect(iconElement).toHaveClass(className);
 		expect(iconElement.classList.length).toBe(4);
@@ -53,7 +53,7 @@ describe('Icon Component', () => {
 		};
 
 		const rendered = render(<Icon style={style} icon={icon} />);
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 		const styles = getComputedStyle(iconElement);
 
 		expect(styles.padding).toBe(style.padding);
@@ -66,7 +66,7 @@ describe('Icon Component', () => {
 		expect(rendered.container).toBeInTheDocument();
 
 		const svg = rendered.container.querySelector('svg');
-		expect(svg).toHaveClass('ss-icon');
+		expect(svg).toHaveClass('ss__icon');
 		expect(svg).toHaveAttribute('viewBox', defaultProps.viewBox);
 
 		const styles = getComputedStyle(svg);
@@ -89,7 +89,7 @@ describe('Icon Component', () => {
 		expect(rendered.container).toBeInTheDocument();
 
 		const svg = rendered.container.querySelector('svg');
-		expect(svg).toHaveClass('ss-icon');
+		expect(svg).toHaveClass('ss__icon');
 		expect(svg).toHaveClass(className);
 		expect(svg).toHaveAttribute('viewBox', viewBox);
 
@@ -110,7 +110,7 @@ describe('Icon Component', () => {
 		expect(rendered.container).toBeInTheDocument();
 
 		const svg = rendered.container.querySelector('svg');
-		expect(svg).toHaveClass('ss-icon');
+		expect(svg).toHaveClass('ss__icon');
 		expect(svg).toHaveAttribute('viewBox', defaultProps.viewBox);
 
 		const styles = getComputedStyle(svg);
@@ -134,7 +134,7 @@ describe('Icon Component', () => {
 		expect(rendered.container).toBeInTheDocument();
 
 		const svg = rendered.container.querySelector('svg');
-		expect(svg).toHaveClass('ss-icon');
+		expect(svg).toHaveClass('ss__icon');
 		expect(svg).toHaveClass(className);
 		expect(svg).toHaveAttribute('viewBox', viewBox);
 
@@ -156,7 +156,7 @@ describe('Icon Component', () => {
 		expect(rendered.container).toBeInTheDocument();
 
 		const svg = rendered.container.querySelector('svg');
-		expect(svg).toHaveClass('ss-icon');
+		expect(svg).toHaveClass('ss__icon');
 		expect(svg.classList[2]).toMatch(/^css-0/);
 
 		expect(svg).toHaveAttribute('width', size);
@@ -182,7 +182,7 @@ describe('Icon Component', () => {
 			</ThemeProvider>
 		);
 
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(globalTheme.components.icon.className);
 	});
 
@@ -197,7 +197,7 @@ describe('Icon Component', () => {
 
 		const rendered = render(<Icon icon="cog" theme={propTheme} />);
 
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(propTheme.components.icon.className);
 	});
 
@@ -224,7 +224,7 @@ describe('Icon Component', () => {
 			</ThemeProvider>
 		);
 
-		const iconElement = rendered.container.querySelector('.ss-icon');
+		const iconElement = rendered.container.querySelector('.ss__icon');
 		expect(iconElement).toHaveClass(propTheme.components.icon.className);
 		expect(iconElement).not.toHaveClass(globalTheme.components.icon.className);
 	});

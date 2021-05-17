@@ -19,10 +19,10 @@ const CSS = {
 			minWidth: size,
 			position: 'relative',
 			border: `1px solid ${color || theme.colors?.primary}`,
-			'&.ss-checkbox-disabled': {
+			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
-			'& .ss-checkbox__icon': {
+			'& .ss__checkbox__icon': {
 				position: 'absolute',
 				inset: '15%',
 			},
@@ -55,7 +55,7 @@ export const Checkbox = observer(
 		const subProps: CheckboxSubProps = {
 			icon: {
 				// default props
-				className: 'ss-checkbox__icon',
+				className: 'ss__checkbox__icon',
 				icon: 'check-thin',
 				// global theme
 				...globalTheme?.components?.icon,
@@ -95,7 +95,7 @@ export const Checkbox = observer(
 		return native ? (
 			<input
 				css={!disableStyles && CSS.native({ style })}
-				className={classnames('ss-checkbox', { 'ss-checkbox-disabled': disabled }, className)}
+				className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 				type="checkbox"
 				onClick={(e) => clickFunc(e)}
 				disabled={disabled}
@@ -104,7 +104,7 @@ export const Checkbox = observer(
 		) : (
 			<span
 				css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
-				className={classnames('ss-checkbox', { 'ss-checkbox-disabled': disabled }, className)}
+				className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 				onClick={(e) => clickFunc(e)}
 			>
 				{checkedState && <Icon {...subProps.icon} />}

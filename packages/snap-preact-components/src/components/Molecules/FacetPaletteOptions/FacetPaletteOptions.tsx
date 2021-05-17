@@ -16,12 +16,12 @@ const CSS = {
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
-			'& .ss-palette__option': {
+			'& .ss__facet-palette-options__option': {
 				position: 'relative',
 				'&:hover': {
 					cursor: 'pointer',
 				},
-				'& .ss-palette__option__palette': {
+				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: '100%',
 					border: '1px solid #EBEBEB',
 					borderRadius: '100%',
@@ -29,7 +29,7 @@ const CSS = {
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					'.ss-palette__icon': {
+					'.ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
 						right: 0,
@@ -39,7 +39,7 @@ const CSS = {
 						textAlign: 'center',
 					},
 				},
-				'& .ss-palette__option__value': {
+				'& .ss__facet-palette-options__option__value': {
 					display: 'block',
 					textAlign: 'center',
 					overflow: 'hidden',
@@ -73,7 +73,7 @@ export const FacetPaletteOptions = observer(
 		const subProps: FacetPaletteOptionsSubProps = {
 			icon: {
 				// default props
-				className: 'ss-palette__icon',
+				className: 'ss__facet-palette-options__icon',
 				// global theme
 				...globalTheme?.components?.icon,
 				// inherited props
@@ -97,16 +97,16 @@ export const FacetPaletteOptions = observer(
 
 		return (
 			values?.length && (
-				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss-palette', className)}>
+				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
 					{values.map((value) => (
 						<a
-							className={classnames('ss-palette__option', { 'ss-palette__option-filtered': value.filtered })}
+							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
 							onClick={onClick}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div className="ss-palette__option__palette" css={{ background: value.value }}>
+							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
 								{!hideIcon && value.filtered && (
 									<>
 										<Icon {...subProps.icon} {...subProps.icon_bg} />
@@ -114,7 +114,7 @@ export const FacetPaletteOptions = observer(
 									</>
 								)}
 							</div>
-							{!hideLabel && <span className="ss-palette__option__value">{value.label}</span>}
+							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
 						</a>
 					))}
 				</div>
