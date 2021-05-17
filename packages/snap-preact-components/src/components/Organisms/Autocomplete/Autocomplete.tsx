@@ -95,6 +95,7 @@ const CSS = {
 
 			'& .ss-ac-container .ss-ac-terms .ss-list .ss-list-option .ss-list-link em': {
 				fontStyle: 'normal',
+				textDecoration: 'underline',
 			},
 
 			'& .ss-ac-container .ss-ac-terms .ss-list .ss-active': {
@@ -387,11 +388,13 @@ export const Autocomplete = observer(
 			},
 		};
 
+		console.log('inputFocused', inputFocused);
+		console.log('terms.length', terms.length);
 		return (
 			visible && (
 				<div css={CSS.Autocomplete({ style })} className={classnames('ss-autocomplete', className)} onClick={(e) => e.stopPropagation()}>
 					<div className="ss-ac-container">
-						{!hideTerms && <Terms terms={terms} search={search} valueProps={valueProps} />}
+						{!hideTerms && <Terms terms={terms} state={state} valueProps={valueProps} />}
 
 						<div className="ss-ac-content">
 							{facets.length > 0 && !hideFacets && (
@@ -451,36 +454,34 @@ export const Autocomplete = observer(
 	}
 );
 
-const emIfy = (term, search) => {
-	const match = term.match(search.query);
+const emIfy = (term, state) => {
+	console.log('term', term);
+	console.log('search.query.string', state.input);
+	const match = term.match(state.input);
 
 	if (match) {
-		const beforeMatch = <em>{term.slice(0, match.index)}</em>;
-		const afterMatch = <em>{term.slice(match.index + search.query.length, term.length)}</em>;
+		const beforeMatch = term.slice(0, match.index);
+		const afterMatch = term.slice(match.index + state.input.length, term.length);
 		return (
 			<>
-				({beforeMatch}
-				{search.query}
-				{afterMatch})
+				{beforeMatch}
+				<em>{state.input}</em>
+				{afterMatch}
 			</>
 		);
 	}
 
-	return (
-		<>
-			(<em>{term}</em>)
-		</>
-	);
+	return <em>{term}</em>;
 };
 
-const Terms = (props: { terms; search; valueProps }) => {
+const Terms = (props: { terms; state; valueProps }) => {
 	return (
 		<div className="ss-ac-terms">
 			<ul className="ss-list">
 				{props.terms.map((term) => (
 					<li className={`ss-list-option ${term.active ? 'ss-active' : ''}`}>
 						<a href={term.url.href} className="ss-list-link" {...props.valueProps} onFocus={() => term.preview()}>
-							{emIfy(term.value, props.search)}
+							{emIfy(term.value, props.state)}
 						</a>
 					</li>
 				))}

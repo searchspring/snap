@@ -17,12 +17,12 @@ describe('SNAP Client', () => {
 		}).toThrow();
 
 		expect(() => {
-			new SnapClient({ siteId: 'scmq7n' }, { meta: { prefetch: false } });
+			new SnapClient({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
 		}).not.toThrow();
 	});
 
 	it('does not prefetch meta when option is not set', (done) => {
-		const client = new SnapClient({ siteId: 'scmq7n' }, { meta: { prefetch: false } });
+		const client = new SnapClient({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
 
 		setTimeout(() => {
 			try {

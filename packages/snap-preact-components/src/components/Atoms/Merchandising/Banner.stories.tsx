@@ -48,7 +48,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
 const Template = (args: BannerProps, { loaded: { controller } }) => <Banner {...args} content={controller?.store?.merchandising?.content} />;
 
@@ -72,13 +72,13 @@ Footer.args = {
 	type: 'footer',
 };
 
-export const Banner_ = Template.bind({});
-Banner_.loaders = [
+export const Secondary = Template.bind({});
+Secondary.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),
 	}),
 ];
-Banner_.args = {
+Secondary.args = {
 	type: 'banner',
 };
 

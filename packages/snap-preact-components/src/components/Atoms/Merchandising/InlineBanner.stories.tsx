@@ -71,11 +71,12 @@ export default {
 	],
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
-const Template = (args: InlineBannerProps, { loaded: { controller } }) => (
-	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args} />
-);
+const Template = (args: InlineBannerProps, { loaded: { controller } }) => {
+	const inlineBanners = controller?.store?.merchandising?.content?.inline;
+	return inlineBanners && <InlineBanner banner={inlineBanners[0]} {...args} />;
+};
 
 export const Default = Template.bind({});
 Default.loaders = [

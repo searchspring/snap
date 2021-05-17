@@ -100,7 +100,7 @@ export default {
 
 const snapInstance = Snapify.search({
 	globals: {
-		siteId: 'scmq7n',
+		siteId: '8uyt2m',
 		filters: [
 			{
 				type: 'value',

@@ -25,7 +25,7 @@ import './styles/custom.scss';
  */
 
 let globals = {
-	siteId: 'scmq7n',
+	siteId: '8uyt2m',
 };
 
 const clientConfig = {
