@@ -3,6 +3,7 @@ export type Target = {
 	inject?: {
 		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
+		hideTarget?: boolean;
 	};
 	[any: string]: unknown;
 };
@@ -26,6 +27,8 @@ export class DomTargeter {
 		this.onTarget = onTarget;
 
 		this.retarget();
+
+		document.addEventListener('DOMContentLoaded', () => this.retarget());
 	}
 
 	retarget(): void {
@@ -90,7 +93,27 @@ export class DomTargeter {
 				}
 				break;
 			case 'replace':
+				//occasionally, our scripts excute before the element exists, In these cases we rerun this code after document ready,
+				//however, this can cause a slight delay in our display being rendered, thus causing a 'flash' of the native display showing briefly
+				//followed by us emptying it. To prevent this, we add a style block that will visibly hide the native display before it ever gets a chance to show
+				const addStyle = (styles: string) => {
+					/* Create style document */
+					var css = document.createElement('style');
+					css.type = 'text/css';
+					css.appendChild(document.createTextNode(styles));
+					/* Append style to the tag name */
+					document.head.appendChild(css);
+				};
+
+				/* Set the style */
+				var styles = `${target.selector} { visibility: hidden }`;
+
+				if (target.inject.hideTarget) {
+					addStyle(styles);
+				}
+
 				elem.parentNode!.replaceChild(injectedElem, elem);
+
 				break;
 		}
 
