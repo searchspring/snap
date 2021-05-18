@@ -10,7 +10,7 @@ describe('FilterSummary Component', () => {
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
 		const FilterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
-		const FilterElements = rendered.container.querySelectorAll('.ss__filter:not(.ss__filter-summary__filter-clearall)');
+		const FilterElements = rendered.container.querySelectorAll('.ss__filter:not(.ss__filter-summary__clear-all)');
 
 		expect(FilterSummaryElement).toBeInTheDocument();
 		expect(FilterElements.length).toBe(3);
@@ -18,7 +18,7 @@ describe('FilterSummary Component', () => {
 
 	it('renders clearAll Button', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
-		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__filter-clearall');
+		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__clear-all');
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent('Clear All');
 	});
@@ -26,7 +26,7 @@ describe('FilterSummary Component', () => {
 	it('custom clearAll Button', () => {
 		const clearLabel = 'start over';
 		const rendered = render(<FilterSummary filters={filters} clearAllLabel={clearLabel} />);
-		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__filter-clearall');
+		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__clear-all');
 
 		expect(clearAllButton).toBeInTheDocument();
 		expect(clearAllButton).toHaveTextContent(clearLabel);
@@ -34,7 +34,7 @@ describe('FilterSummary Component', () => {
 
 	it('hides clearAll Button', () => {
 		const rendered = render(<FilterSummary filters={filters} hideClearAll />);
-		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__filter-clearall');
+		const clearAllButton = rendered.container.querySelector('.ss__filter-summary__clear-all');
 		expect(clearAllButton).not.toBeInTheDocument();
 	});
 
@@ -54,7 +54,7 @@ describe('FilterSummary Component', () => {
 
 	it('can hide the facet label', () => {
 		const rendered = render(<FilterSummary filters={filters} hideFacetLabel={true} />);
-		const facetLabel = rendered.container.querySelector('.ss__facet-label');
+		const facetLabel = rendered.container.querySelector('.ss__filter__label');
 		expect(facetLabel).not.toBeInTheDocument();
 	});
 

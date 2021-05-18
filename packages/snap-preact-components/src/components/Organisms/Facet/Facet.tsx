@@ -35,7 +35,7 @@ const CSS = {
 				overflowY: 'auto',
 				overflowX: 'hidden',
 			},
-			'& .ss__facet__showmoreless': {
+			'& .ss__facet__show-more-less': {
 				display: 'block',
 				margin: '8px',
 				cursor: 'pointer',
@@ -119,7 +119,7 @@ export const Facet = observer(
 			},
 			showMoreLessIcon: {
 				// default props
-				className: 'ss__facet__showmoreless__icon',
+				className: 'ss__facet__show-more-less__icon',
 				size: '10px',
 				color: iconColor || color,
 				// global theme
@@ -236,7 +236,7 @@ export const Facet = observer(
 					</div>
 
 					{(facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-						<div className="ss__facet__showmoreless" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
 							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
 							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
 						</div>

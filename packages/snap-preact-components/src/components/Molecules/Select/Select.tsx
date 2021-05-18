@@ -39,7 +39,7 @@ const CSS = {
 					cursor: 'pointer',
 					padding: '6px 8px',
 					color: 'initial',
-					'&.ss__selected': {
+					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',
 					},
 					'&:hover': {

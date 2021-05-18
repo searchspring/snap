@@ -73,7 +73,7 @@ export const Results = observer(
 			},
 			inlineBanner: {
 				// default props
-				className: 'ss__results__inlinebanner',
+				className: 'ss__results__inline-banner',
 				// global theme
 				...globalTheme?.components?.inlineBanner,
 				// inherited props

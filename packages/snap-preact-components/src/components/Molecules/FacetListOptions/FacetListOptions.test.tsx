@@ -22,7 +22,9 @@ describe('ListValue Component', () => {
 		expect(listOption).toHaveLength(listFacetMock.values.length);
 
 		expect(listOption[0]).toHaveTextContent(listFacetMock.values[0].label);
-		expect(listOption[0]).toHaveTextContent(listFacetMock.values[0].count.toString());
+
+		const optionCount = listOption[0].querySelector('.ss__facet-list-options__option__value__count');
+		expect(optionCount).toHaveTextContent(listFacetMock.values[0].count.toString());
 	});
 
 	it('renders checkboxs', () => {
@@ -72,7 +74,7 @@ describe('FacetListOptions theming works', () => {
 			</ThemeProvider>
 		);
 		const Element = rendered.container.querySelector('.ss__facet-list-options');
-		const countElement = rendered.container.querySelector('.ss__facetCount');
+		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
 	});
@@ -89,7 +91,7 @@ describe('FacetListOptions theming works', () => {
 		const rendered = render(<FacetListOptions values={listFacetMock.values} theme={propTheme} />);
 
 		const Element = rendered.container.querySelector('.ss__facet-list-options');
-		const countElement = rendered.container.querySelector('.ss__facetCount');
+		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
 	});

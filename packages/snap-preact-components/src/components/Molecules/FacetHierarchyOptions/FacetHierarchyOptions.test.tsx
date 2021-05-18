@@ -22,7 +22,9 @@ describe('hierarchyValue Component', () => {
 		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
 
 		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values[0].label);
-		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values[0].count.toString());
+
+		const optionCount = hierarchyOption[0].querySelector('.ss__facet-hierarchy-options__option__value__count');
+		expect(optionCount).toHaveTextContent(hierarchyFacetMock.values[0].count.toString());
 	});
 });
 
@@ -97,7 +99,7 @@ describe('FacetHierarchyOptions theming works', () => {
 			</ThemeProvider>
 		);
 		const Element = rendered.container.querySelector('.ss__facet-hierarchy-options');
-		const countElement = rendered.container.querySelector('.ss__facetCount');
+		const countElement = rendered.container.querySelector('.ss__facet-hierarchy-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
 	});
@@ -114,7 +116,7 @@ describe('FacetHierarchyOptions theming works', () => {
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} theme={propTheme} />);
 
 		const Element = rendered.container.querySelector('.ss__facet-hierarchy-options');
-		const countElement = rendered.container.querySelector('.ss__facetCount');
+		const countElement = rendered.container.querySelector('.ss__facet-hierarchy-options__option__value__count');
 		expect(Element).toBeInTheDocument();
 		expect(countElement).not.toBeInTheDocument();
 	});

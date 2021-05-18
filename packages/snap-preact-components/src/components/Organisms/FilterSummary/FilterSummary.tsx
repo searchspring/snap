@@ -93,7 +93,7 @@ export const FilterSummary = observer(
 					<Filter
 						{...subProps.filter}
 						icon={clearAllIcon}
-						className={`${subProps?.filter?.className} ss__filter-summary__filter-clearall`}
+						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel
 						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
