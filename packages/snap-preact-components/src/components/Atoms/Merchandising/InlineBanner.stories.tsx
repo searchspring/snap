@@ -1,12 +1,12 @@
 import { h } from 'preact';
 
-import { InlineBanner, InlineBannerProps } from './InlineBanner';
-
-import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { InlineBanner, InlineBannerProps } from './InlineBanner';
+import { componentArgs } from '../../../utilities';
+import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Merchandising/readme.md';
+import { Layout } from '../../../types';
 
 export default {
 	title: `Atoms/InlineBanner`,
@@ -34,7 +34,7 @@ export default {
 		},
 		layout: {
 			description: 'Banner layout',
-			type: { required: true },
+			defaultValue: Layout.GRID,
 			table: {
 				type: {
 					summary: 'string',
@@ -42,8 +42,17 @@ export default {
 			},
 			control: {
 				type: 'select',
-				options: ['grid', 'list'],
+				options: [Layout.GRID, Layout.LIST],
 			},
+		},
+		width: {
+			description: 'InlineBanner width',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
 		},
 		...componentArgs,
 	},
@@ -62,11 +71,12 @@ export default {
 	],
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
-const Template = (args: InlineBannerProps, { loaded: { controller } }) => (
-	<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} {...args} />
-);
+const Template = (args: InlineBannerProps, { loaded: { controller } }) => {
+	const inlineBanners = controller?.store?.merchandising?.content?.inline;
+	return inlineBanners && <InlineBanner banner={inlineBanners[0]} {...args} />;
+};
 
 export const Default = Template.bind({});
 Default.loaders = [

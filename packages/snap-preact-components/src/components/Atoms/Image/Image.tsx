@@ -1,6 +1,8 @@
+/** @jsx jsx */
 import { h } from 'preact';
-import { useRef } from 'preact/hooks';
 
+import { useState } from 'preact/hooks';
+import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme } from '../../../providers/theme';
@@ -8,46 +10,19 @@ import { ComponentProps } from '../../../types';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
-//if the product image link is bad, it will run this code
-function handleImageError(ImgRef: preact.RefObject<HTMLElement>, fallback?: string) {
-	const source = ImgRef.current as HTMLImageElement;
-	if (source) {
-		const imgSRC = source.src;
-		// if you pass in a relative fallback, we need to add the host url check against or it will loop forever
-		if (source.src === 'https://' + window.location.host + '/' + fallback || source.src === 'http://' + window.location.host + '/' + fallback) {
-			fallback = FALLBACK_IMAGE_URL;
-		}
-		if (fallback && imgSRC === fallback) {
-			source.src = FALLBACK_IMAGE_URL;
-		} else if (imgSRC === FALLBACK_IMAGE_URL) {
-			source.removeAttribute('onError');
-			source.src = '';
-		} else {
-			source.src = fallback ? fallback : FALLBACK_IMAGE_URL;
-		}
-	}
-}
-
-function swapImgUrl(ImgRef: preact.RefObject<HTMLElement>, newUrl?: string) {
-	const source = ImgRef.current as HTMLImageElement;
-	if (source && newUrl) {
-		source.src = newUrl;
-	}
-}
-
-function setVisibility(ImgRef: preact.RefObject<HTMLElement>, visibility: string = null) {
-	const source = ImgRef.current as HTMLImageElement;
-	if (source) {
-		source.style.visibility = visibility;
-	}
-}
+const CSS = {
+	image: ({ visibility, style }) =>
+		css({
+			visibility,
+			...style,
+		}),
+};
 
 export function Image(properties: ImageProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 
 	const props: ImageProps = {
 		// default props
-		disableStyles: false,
 		fallback: FALLBACK_IMAGE_URL,
 		// global theme
 		...globalTheme?.components?.image,
@@ -56,47 +31,32 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
-	let { fallback } = props;
+	const { alt, src, fallback, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
 
-	const ImgRef = useRef(null);
-
-	//this is mainly for storybook bug
-	if ((fallback && typeof fallback !== 'string') || !fallback) {
-		fallback = FALLBACK_IMAGE_URL;
-	}
-
-	//need to initially set the visibility to hidden whilst also keeping any styles passed in
-	let styling: any = !disableStyles && style;
-	//but what if there is no styling passed in?
-	if (styling) {
-		styling.visibility = 'hidden';
-	} else {
-		styling = { visibility: 'hidden' };
-	}
+	const [visibility, setVisibility] = useState('hidden');
+	const [isHovering, setHover] = useState(false);
 
 	return (
 		<img
-			style={styling}
-			className={classnames('ss-image', className)}
-			src={src || fallback}
+			css={!disableStyles && CSS.image({ visibility, style })}
+			className={classnames('ss__image', className)}
+			src={(isHovering ? hoverSrc : src) || fallback}
 			alt={alt}
 			title={alt}
-			ref={ImgRef}
 			loading="lazy"
 			onLoad={() => {
-				setVisibility(ImgRef, 'visible');
+				setVisibility('visible');
 				onLoad && onLoad();
 			}}
-			onClick={onClick}
-			onError={() => handleImageError(ImgRef, fallback)}
+			onClick={(e) => onClick && onClick(e as any)}
+			onError={(e) => ((e.target as HTMLImageElement).src = fallback)}
 			onMouseOver={(e) => {
-				onMouseOver && onMouseOver(e);
-				hoverSrc && swapImgUrl(ImgRef, hoverSrc);
+				hoverSrc && setHover(true);
+				onMouseOver && onMouseOver(e as any);
 			}}
 			onMouseOut={(e) => {
-				onMouseOut && onMouseOut(e);
-				hoverSrc && swapImgUrl(ImgRef, src);
+				hoverSrc && setHover(false);
+				onMouseOut && onMouseOut(e as any);
 			}}
 		/>
 	);
@@ -107,8 +67,8 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	onMouseOver?: (e: Event) => void;
-	onMouseOut?: (e: Event) => void;
+	onMouseOver?: (e: MouseEvent) => void;
+	onMouseOut?: (e: MouseEvent) => void;
 	onLoad?: () => void;
-	onClick?: (e: Event) => void;
+	onClick?: (e: MouseEvent) => void;
 }

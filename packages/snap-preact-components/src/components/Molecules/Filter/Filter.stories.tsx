@@ -1,13 +1,12 @@
 import { h } from 'preact';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Filter, FilterProps } from './Filter';
 import { iconPaths } from '../../Atoms/Icon/paths';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
-
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Filter/readme.md';
 
 export default {
@@ -35,6 +34,7 @@ export default {
 		},
 		valueLabel: {
 			description: 'Filter value',
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'string',
@@ -43,16 +43,15 @@ export default {
 			control: { type: 'text' },
 		},
 		url: {
-			description: 'Optional URL link',
+			description: 'URL translator object',
 			table: {
 				type: {
-					summary: 'string',
+					summary: 'object',
 				},
 			},
-			control: { type: 'text' },
+			control: { type: 'object' },
 		},
 		hideFacetLabel: {
-			defaultValue: false,
 			description: 'Hide facet label',
 			table: {
 				type: {
@@ -101,7 +100,7 @@ export default {
 
 const snapInstance = Snapify.search({
 	globals: {
-		siteId: 'scmq7n',
+		siteId: '8uyt2m',
 		filters: [
 			{
 				type: 'value',

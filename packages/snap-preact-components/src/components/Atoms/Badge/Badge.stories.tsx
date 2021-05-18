@@ -2,9 +2,9 @@
 import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { componentArgs } from '../../../utilities';
 import { Badge } from './Badge';
-
 import Readme from '../Badge/readme.md';
 
 export default {
@@ -24,11 +24,10 @@ export default {
 		(Story) => (
 			<div
 				style={{
-					margin: '1em',
-					width: '220px',
-					height: '300px',
+					width: '200px',
+					height: '200px',
 					position: 'relative',
-					border: '1px solid lightgrey',
+					border: '2px dotted lightgrey',
 				}}
 			>
 				<Story height="200px" />
@@ -55,6 +54,7 @@ export default {
 		},
 		position: {
 			description: 'Position of badge',
+			defaultValue: { top: 0, left: 0 },
 			table: {
 				type: {
 					summary: 'object',

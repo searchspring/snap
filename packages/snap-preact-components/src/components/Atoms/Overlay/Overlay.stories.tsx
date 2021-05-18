@@ -1,10 +1,9 @@
 import { h } from 'preact';
 
-import { Overlay } from './Overlay';
-
-import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Overlay } from './Overlay';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Overlay/readme.md';
 
 export default {
@@ -22,7 +21,6 @@ export default {
 	},
 	argTypes: {
 		active: {
-			defaultValue: false,
 			description: 'Overlay is displayed',
 			type: { required: true },
 			table: {

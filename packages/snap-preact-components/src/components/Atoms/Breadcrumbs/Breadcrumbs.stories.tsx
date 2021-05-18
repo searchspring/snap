@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { Breadcrumbs } from './Breadcrumbs';
-import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Breadcrumbs } from './Breadcrumbs';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Breadcrumbs/readme.md';
 
 export default {
@@ -31,7 +31,6 @@ export default {
 			control: { type: 'object' },
 		},
 		separator: {
-			defaultValue: '>',
 			description: 'Breadcrumb delimiter',
 			table: {
 				type: {

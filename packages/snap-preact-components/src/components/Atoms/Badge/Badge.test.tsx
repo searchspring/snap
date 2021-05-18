@@ -15,7 +15,7 @@ describe('Badge Component', () => {
 	it('positions badge based on prop', () => {
 		const position = { right: 0 };
 		const rendered = render(<Badge position={position}>{CHILDREN}</Badge>);
-		const badge = rendered.container.querySelector('.ss-badge');
+		const badge = rendered.container.querySelector('.ss__badge');
 		let styles = getComputedStyle(badge);
 
 		expect(styles.right).toEqual('0px');
@@ -40,10 +40,10 @@ describe('Badge Component', () => {
 		});
 
 		it('Badge has correct classes', () => {
-			const badge = rendered.container.querySelector('.ss-badge');
+			const badge = rendered.container.querySelector('.ss__badge');
 			expect(badge).toBeInTheDocument();
 			expect(badge.classList.length).toBe(3);
-			expect(badge.classList[0]).toMatch(/^ss-badge/);
+			expect(badge.classList[0]).toMatch(/^ss__badge/);
 			expect(badge).toHaveClass(CLASSNAME);
 		});
 	});
@@ -65,7 +65,7 @@ describe('Badge Component', () => {
 			const BadgeElement = badge.getByText(CONTENT).parentElement;
 
 			expect(BadgeElement.classList.length).toBe(2);
-			expect(BadgeElement.classList[0]).toMatch(/^ss-badge/);
+			expect(BadgeElement.classList[0]).toMatch(/^ss__badge/);
 		});
 	});
 
@@ -104,7 +104,7 @@ describe('Badge Component', () => {
 					<Badge position={position}>{CHILDREN}</Badge>
 				</ThemeProvider>
 			);
-			const element = rendered.container.querySelector('.ss-badge');
+			const element = rendered.container.querySelector('.ss__badge');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(globalTheme.components.badge.className);
 		});
@@ -123,7 +123,7 @@ describe('Badge Component', () => {
 					{CHILDREN}
 				</Badge>
 			);
-			const element = rendered.container.querySelector('.ss-badge');
+			const element = rendered.container.querySelector('.ss__badge');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.badge.className);
 		});
@@ -154,7 +154,7 @@ describe('Badge Component', () => {
 				</ThemeProvider>
 			);
 
-			const element = rendered.container.querySelector('.ss-badge');
+			const element = rendered.container.querySelector('.ss__badge');
 			expect(element).toBeInTheDocument();
 			expect(element).toHaveClass(propTheme.components.badge.className);
 			expect(element).not.toHaveClass(globalTheme.components.badge.className);

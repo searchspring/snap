@@ -18,7 +18,7 @@ export class SearchData {
 
 	constructor(settings?: Settings) {
 		const config = {
-			siteId: 'scmq7n',
+			siteId: '8uyt2m',
 			search: 'default',
 			...settings,
 		};

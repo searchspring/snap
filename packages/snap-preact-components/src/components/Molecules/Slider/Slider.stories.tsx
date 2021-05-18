@@ -1,10 +1,10 @@
 import { h } from 'preact';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Slider, SliderProps } from './Slider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Slider/readme.md';
 
 export default {

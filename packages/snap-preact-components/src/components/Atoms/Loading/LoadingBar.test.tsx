@@ -18,7 +18,7 @@ describe('LoadingBar Component', () => {
 			active: true,
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement).toBeInTheDocument();
 		expect(loadingbarElement.classList.length).toBe(2);
 	});
@@ -28,7 +28,7 @@ describe('LoadingBar Component', () => {
 			active: true,
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement).toBeInTheDocument();
 	});
 
@@ -37,7 +37,7 @@ describe('LoadingBar Component', () => {
 			active: false,
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement).not.toBeInTheDocument();
 	});
 
@@ -47,7 +47,7 @@ describe('LoadingBar Component', () => {
 			height: '10px',
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		const styles = getComputedStyle(loadingbarElement);
 		expect(styles.height).toBe(args.height);
 	});
@@ -59,11 +59,11 @@ describe('LoadingBar Component', () => {
 			backgroundColor: 'rgb(204, 204, 204)',
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		const loadingbarElementStyles = getComputedStyle(loadingbarElement);
 		expect(loadingbarElementStyles.background).toBe(args.backgroundColor);
 
-		const barElement = loadingbarElement.querySelector('.ss-loadingbar-bar');
+		const barElement = loadingbarElement.querySelector('.ss__loading-bar__bar');
 		const barElementStyles = getComputedStyle(barElement);
 		expect(barElementStyles.background).toBe(args.color);
 	});
@@ -74,7 +74,7 @@ describe('LoadingBar Component', () => {
 			disableStyles: true,
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement.classList.length).toBe(2);
 		expect(loadingbarElement.classList[1]).toMatch(/^css-0/);
 	});
@@ -85,7 +85,7 @@ describe('LoadingBar Component', () => {
 			className: 'custom-class',
 		};
 		const rendered = render(<LoadingBar {...args} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement.classList).toContain(args.className);
 	});
 
@@ -96,7 +96,7 @@ describe('LoadingBar Component', () => {
 				<LoadingBar {...args} />
 			</ThemeProvider>
 		);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar .ss-loadingbar-bar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar');
 		const styles = getComputedStyle(loadingbarElement);
 		expect(styles.backgroundColor).toBe(theme.components.loadingbar.color);
 	});
@@ -104,7 +104,7 @@ describe('LoadingBar Component', () => {
 	it('is themeable with theme prop', () => {
 		const args = { active: true };
 		const rendered = render(<LoadingBar {...args} theme={theme} />);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar .ss-loadingbar-bar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar');
 		const styles = getComputedStyle(loadingbarElement);
 		expect(styles.backgroundColor).toBe(theme.components.loadingbar.color);
 	});
@@ -123,7 +123,7 @@ describe('LoadingBar Component', () => {
 				<LoadingBar {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const loadingbarElement = rendered.container.querySelector('.ss-loadingbar .ss-loadingbar-bar');
+		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar .ss__loading-bar__bar');
 		const styles = getComputedStyle(loadingbarElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.loadingbar.color);
 	});

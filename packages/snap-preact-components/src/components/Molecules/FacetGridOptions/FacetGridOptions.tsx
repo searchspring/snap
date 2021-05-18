@@ -9,42 +9,40 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
 const CSS = {
-	grid: ({ columns, gapSize, style }) =>
+	grid: ({ columns, gapSize, theme, style }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 			gap: gapSize,
+			'& .ss__facet-grid-options__option': {
+				position: 'relative',
+				border: `1px solid ${theme.colors?.primary}`,
+				padding: '1em',
+				'&.ss__facet-grid-options__option--filtered': {
+					background: theme.colors?.primary,
+					color: theme.colors?.text?.secondary,
+				},
+				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
+					cursor: 'pointer',
+					background: theme.colors?.hover,
+				},
+				'::before': {
+					content: '""',
+					paddingBottom: '100%',
+					display: 'block',
+				},
+				'& .ss__facet-grid-options__option__value': {
+					position: 'absolute',
+					maxWidth: '100%',
+					top: 'calc(50% - 0.5em)',
+					bottom: '0',
+					right: '0',
+					left: '0',
+					margin: 'auto',
+					textAlign: 'center',
+				},
+			},
 			...style,
-		}),
-	optionWrapper: ({ theme }) =>
-		css({
-			position: 'relative',
-			border: `1px solid ${theme.colors?.primary}`,
-			padding: '1em',
-			'&.filtered': {
-				background: theme.colors?.primary,
-				color: theme.colors?.text?.secondary,
-			},
-			'&:hover:not(.filtered)': {
-				cursor: 'pointer',
-				background: theme.colors?.hover,
-			},
-			'::before': {
-				content: '""',
-				paddingBottom: '100%',
-				display: 'block',
-			},
-		}),
-	gridOption: () =>
-		css({
-			position: 'absolute',
-			maxWidth: '100%',
-			top: 'calc(50% - 0.5em)',
-			bottom: '0',
-			right: '0',
-			left: '0',
-			margin: 'auto',
-			textAlign: 'center',
 		}),
 };
 
@@ -55,7 +53,6 @@ export const FacetGridOptions = observer(
 
 		const props: FacetGridOptionsProps = {
 			// default props
-			disableStyles: false,
 			columns: 4,
 			gapSize: '8px',
 			// global theme
@@ -69,21 +66,16 @@ export const FacetGridOptions = observer(
 
 		return (
 			values?.length && (
-				<div css={!disableStyles && CSS.grid({ columns, gapSize, style })} className={classnames('ss-grid', className)}>
+				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
 					{values.map((value) => (
 						<a
-							css={!disableStyles && CSS.optionWrapper({ theme })}
-							className={classnames('ss-grid-optionWrapper', { filtered: value.filtered })}
+							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
 							onClick={onClick}
-							onFocus={() => {
-								previewOnFocus && value.preview && value.preview();
-							}}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div className={classnames('ss-grid-option')} css={!disableStyles && CSS.gridOption()}>
-								{value.label}
-							</div>
+							<span className="ss__facet-grid-options__option__value">{value.label}</span>
 						</a>
 					))}
 				</div>

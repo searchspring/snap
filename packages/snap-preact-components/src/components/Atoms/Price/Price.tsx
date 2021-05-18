@@ -12,7 +12,7 @@ const CSS = {
 	price: ({ theme, style }) =>
 		css({
 			color: theme.colors?.primary,
-			'&.ss-strike': {
+			'&.ss__price--strike': {
 				textDecoration: 'line-through',
 				color: 'initial',
 			},
@@ -64,7 +64,7 @@ export function Price(properties: PriceProps): JSX.Element {
 	});
 
 	return (
-		<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss-price', { 'ss-strike': lineThrough }, className)}>
+		<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
 			{formattedPrice}
 		</span>
 	);
