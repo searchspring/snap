@@ -114,7 +114,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 
 const ObservableFacetPaletteOptions = observer(({ args, controller }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'color_family').pop();

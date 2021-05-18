@@ -45,7 +45,6 @@ export default {
 			control: { type: 'none' },
 		},
 		layout: {
-			defaultValue: Layout.GRID,
 			description: 'Results layout',
 			table: {
 				type: {
@@ -73,7 +72,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 export const Grid = (props, { loaded: { controller } }) => <Results layout={Layout.GRID} results={controller?.store?.results} {...props} />;
 Grid.loaders = [
 	async () => ({
