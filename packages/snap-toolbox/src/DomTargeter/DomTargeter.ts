@@ -3,8 +3,8 @@ export type Target = {
 	inject?: {
 		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
-		hideTarget?: boolean;
 	};
+	hideTarget?: boolean;
 	[any: string]: unknown;
 };
 
@@ -18,6 +18,7 @@ export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
+	private styleBlockRefs = [];
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -28,7 +29,15 @@ export class DomTargeter {
 
 		this.retarget();
 
-		document.addEventListener('DOMContentLoaded', () => this.retarget());
+		document.addEventListener('DOMContentLoaded', () => {
+			this.retarget();
+			//clean up the style blocks we added earlier
+			if (this.styleBlockRefs.length) {
+				for (let i = 0; i < this.styleBlockRefs.length; i++) {
+					document.head.removeChild(this.styleBlockRefs[i]);
+				}
+			}
+		});
 	}
 
 	retarget(): void {
@@ -41,16 +50,37 @@ export class DomTargeter {
 		});
 
 		targetElemPairs.forEach(({ target, elem }) => {
-			if (target.inject) {
-				const injectedElem = this.inject(elem, target);
-				this.onTarget(target, injectedElem, elem);
-			} else {
+			if (!target.inject) {
+				if (target.hideTarget) {
+					this.addHideTargetStyle(target);
+				}
 				//empty target selector by default
 				while (elem.firstChild && elem.removeChild(elem.firstChild));
 				this.onTarget(target, elem);
+			} else {
+				if (target.inject.action == 'replace' && target.hideTarget) {
+					this.addHideTargetStyle(target);
+				}
+				const injectedElem = this.inject(elem, target);
+				this.onTarget(target, injectedElem, elem);
 			}
 		});
 	}
+
+	//occasionally, our scripts excute before the element exists, In these cases we rerun this code after document ready,
+	//however, this can cause a slight delay in our display being rendered, thus causing a 'flash' of the native display showing briefly
+	//followed by us emptying it. To prevent this, we add a style block that will visibly hide the native display before it ever gets a chance to show
+	addHideTargetStyle = (target: Target) => {
+		/* Set the style */
+		var styles = `${target.selector} { visibility: hidden }`;
+		/* Create style document */
+		var css = window.document.createElement('style');
+		css.type = 'text/css';
+		css.appendChild(window.document.createTextNode(styles));
+		/* Append style to the tag name */
+		window.document.head.appendChild(css);
+		this.styleBlockRefs.push(css);
+	};
 
 	private domQuery(selector: string) {
 		return Array.from(this.document.querySelectorAll(selector));
@@ -93,27 +123,7 @@ export class DomTargeter {
 				}
 				break;
 			case 'replace':
-				//occasionally, our scripts excute before the element exists, In these cases we rerun this code after document ready,
-				//however, this can cause a slight delay in our display being rendered, thus causing a 'flash' of the native display showing briefly
-				//followed by us emptying it. To prevent this, we add a style block that will visibly hide the native display before it ever gets a chance to show
-				const addStyle = (styles: string) => {
-					/* Create style document */
-					var css = document.createElement('style');
-					css.type = 'text/css';
-					css.appendChild(document.createTextNode(styles));
-					/* Append style to the tag name */
-					document.head.appendChild(css);
-				};
-
-				/* Set the style */
-				var styles = `${target.selector} { visibility: hidden }`;
-
-				if (target.inject.hideTarget) {
-					addStyle(styles);
-				}
-
 				elem.parentNode!.replaceChild(injectedElem, elem);
-
 				break;
 		}
 
