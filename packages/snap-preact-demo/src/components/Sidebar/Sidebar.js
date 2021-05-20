@@ -2,9 +2,7 @@ import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
 import { withStore } from '../../services/providers';
-import { Facets } from '../Facets/Facets';
-import { ThemeProvider, FilterSummary, Select } from '@searchspring/snap-preact-components';
-import { customTheme } from '../../theme.js';
+import { ThemeProvider, defaultTheme, FilterSummary, Select, Facets } from '@searchspring/snap-preact-components';
 
 import { StoreProvider } from '../../services/providers';
 
@@ -14,7 +12,7 @@ export class Sidebar extends Component {
 		const store = this.props.store;
 
 		return (
-			<ThemeProvider theme={customTheme}>
+			<ThemeProvider theme={defaultTheme}>
 				<StoreProvider store={store}>
 					<SidebarContents />
 				</StoreProvider>
@@ -30,6 +28,7 @@ export class SidebarContents extends Component {
 		const {
 			filters,
 			custom: { onSaleFacet },
+			facets,
 		} = this.props.store;
 
 		return (
@@ -58,7 +57,7 @@ export class SidebarContents extends Component {
 					/>
 				)}
 
-				<Facets />
+				<Facets facets={facets} />
 			</div>
 		);
 	}

@@ -20,11 +20,13 @@ const CSS = {
 			left: isActive ? '0' : `-${width}`,
 			top: '0',
 			height: '100%',
-			zIndex: '999999',
+			zIndex: '10004',
 			width: '90%',
 			maxWidth: width,
-			padding: '0px',
+			padding: '10px',
 			background: '#fff',
+			boxSizing: 'border-box',
+			overflowY: 'auto',
 			...style,
 		}),
 };
@@ -34,7 +36,6 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	const props: SlideoutProps = {
 		// default props
-		disableStyles: false,
 		active: false,
 		displayAt: '',
 		width: '300px',
@@ -53,7 +54,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	const subProps: SlideoutSubProps = {
 		overlay: {
 			// default props
-			className: 'ss-slideout__overlay',
+			className: 'ss__slideout__overlay',
 			// global theme
 			...globalTheme?.components?.overlay,
 			// inherited props
@@ -81,9 +82,13 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	return (
 		isVisible && (
 			<>
-				{buttonContent && <div onClick={() => toggleActive()}>{buttonContent}</div>}
+				{buttonContent && (
+					<div className="ss__slideout__button" onClick={() => toggleActive()}>
+						{buttonContent}
+					</div>
+				)}
 
-				<div className={classnames('ss-slideout', className)} css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, style })}>
+				<div className={classnames('ss__slideout', className)} css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, style })}>
 					{children && cloneElement(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />

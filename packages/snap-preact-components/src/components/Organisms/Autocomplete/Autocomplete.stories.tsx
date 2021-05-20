@@ -1,11 +1,11 @@
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { Autocomplete, AutocompleteProps } from './Autocomplete';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Autocomplete/readme.md';
 
 export default {
@@ -25,9 +25,7 @@ export default {
 		(Story) => (
 			<div
 				style={{
-					margin: '8px',
 					maxWidth: '900px',
-					border: '1px solid lightgrey',
 				}}
 			>
 				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" />

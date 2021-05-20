@@ -1,13 +1,13 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
-import { Title, Primary, ArgsTable, Stories, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Facet, FacetProps } from './Facet';
 import { iconPaths } from '../../Atoms/Icon';
 import { FacetDisplay } from '../../../types';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-
 import Readme from '../Facet/readme.md';
 
 export default {
@@ -25,7 +25,7 @@ export default {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>
+			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
 		),
@@ -48,6 +48,7 @@ export default {
 				type: {
 					summary: 'number',
 				},
+				defaultValue: { summary: 12 },
 			},
 			control: { type: 'number' },
 		},
@@ -118,11 +119,61 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
+		showMoreText: {
+			defaultValue: 'Show More',
+			description: "Change 'Show More' button text",
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Show More' },
+			},
+			control: { type: 'text' },
+		},
+		showLessText: {
+			defaultValue: 'Show Less',
+			description: "Change 'Show Less' button text",
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Show Less' },
+			},
+			control: { type: 'text' },
+		},
+		iconshowMoreExpand: {
+			defaultValue: 'plus',
+			description: 'Icon for when facet is collapsed',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'plus' },
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
+		iconshowLessExpand: {
+			defaultValue: 'minus',
+			description: 'Icon for when facet is expanded',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'minus' },
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
+		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 
 // List Facet
 

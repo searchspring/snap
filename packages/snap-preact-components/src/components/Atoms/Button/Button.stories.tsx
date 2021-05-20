@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-import { Button } from './Button';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import { componentArgs } from '../../../utilities';
 
+import { Button } from './Button';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Button/readme.md';
 
 export default {
@@ -38,7 +38,6 @@ export default {
 			},
 		},
 		disabled: {
-			defaultValue: false,
 			description: 'Disable button',
 			table: {
 				type: {
@@ -63,7 +62,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#333' },
+				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
@@ -73,6 +72,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: '#fff' },
 			},
 			control: { type: 'color' },
 		},
@@ -82,12 +82,11 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#333' },
+				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
 		native: {
-			defaultValue: false,
 			description: 'Render as unstyled native button',
 			table: {
 				type: {
@@ -105,17 +104,17 @@ const Template = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-	content: 'button',
+	content: 'Button',
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-	content: 'disabled',
+	content: 'Button',
 	disabled: true,
 };
 
 export const Native = Template.bind({});
 Native.args = {
-	content: 'native',
+	content: 'Button',
 	native: true,
 };

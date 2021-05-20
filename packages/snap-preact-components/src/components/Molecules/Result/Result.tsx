@@ -10,96 +10,83 @@ import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme } from '../../../providers/theme';
 import { defined } from '../../../utilities';
-import { ComponentProps, LayoutType, Result as ResultType } from '../../../types';
+import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 
 const CSS = {
-	list: () =>
-		css({
-			flexDirection: 'row',
-			display: 'block',
-			width: '100%',
-
-			'& .ss-result__wrapper': {
-				overflow: 'hidden',
-				display: 'flex',
-			},
-			'& .ss-result__image-wrapper': {
-				float: 'left',
-				maxWidth: '35%',
-			},
-			'& .ss-result__details-wrapper': {
-				float: 'right',
-				textAlign: 'left',
-				verticalAlign: 'top',
-				padding: '20px',
-			},
-		}),
-	grid: () =>
-		css({
-			flexDirection: 'column',
-		}),
-
 	result: ({ width, style }) =>
 		css({
 			display: 'inline-block',
 			maxWidth: width ? 'initial' : '260px',
 			width: width || 'auto',
 
-			'& .ss-result__wrapper': {
-				border: '1px solid #ccc',
+			'&.ss__result--grid': {
+				flexDirection: 'column',
+			},
+			'&.ss__result--list': {
+				flexDirection: 'row',
+				display: 'block',
+				width: width || 'auto',
+				maxWidth: 'initial',
+
+				'& .ss__result__wrapper': {
+					overflow: 'hidden',
+					display: 'flex',
+					'& .ss__result__wrapper__image': {
+						float: 'left',
+						maxWidth: '35%',
+					},
+					'& .ss__result__wrapper__details': {
+						float: 'right',
+						textAlign: 'left',
+						verticalAlign: 'top',
+						padding: '20px',
+					},
+				},
+			},
+
+			'& .ss__result__wrapper': {
 				borderRadius: '5px',
 				margin: '10px',
 				position: 'relative',
-			},
+				'& .ss__result__wrapper__image': {
+					position: 'relative',
+					display: 'flex',
+					justifyContent: 'center',
 
-			'& .ss-result__image-wrapper': {
-				position: 'relative',
-				display: 'flex',
-				justifyContent: 'center',
+					'& img': {
+						top: '0',
+						left: '0',
+						right: '0',
+						width: 'auto',
+						bottom: '0',
+						margin: 'auto',
+						height: 'auto',
+						maxWidth: '100%',
+					},
 
-				'& img': {
-					top: '0',
-					left: '0',
-					right: '0',
-					width: 'auto',
-					bottom: '0',
-					margin: 'auto',
-					height: 'auto',
-					maxWidth: '100%',
+					'& .ss__result__badge': {
+						background: 'rgba(255, 255, 255, 0.5)',
+						padding: '10px',
+					},
 				},
 
-				'& .ss-badge': {
-					background: 'rgba(255, 255, 255, 0.5)',
+				'& .ss__result__wrapper__details': {
 					padding: '10px',
-				},
-			},
-
-			'& .ss-result__details-wrapper': {
-				padding: '10px',
-
-				'& .ss-result__details-wrapper-name': {
-					fontSize: '120%',
-					marginBottom: '10px',
-				},
-
-				'& .ss-result__details-wrapper-price': {
-					marginBottom: '10px',
-
-					'& .ss-result__details-wrapper-price-large': {
-						fontSize: '140%',
+					'& .ss__result__wrapper__details__title': {
+						marginBottom: '10px',
 					},
+					'& .ss__result__wrapper__details__pricing': {
+						marginBottom: '10px',
 
-					'& .ss-result__details-wrapper-price-linethrough': {
-						textDecoration: 'line-through',
+						'& .ss__result__price': {
+							fontSize: '1.2em',
+						},
+						'& .ss__price--strike': {
+							fontSize: '80%',
+						},
 					},
-				},
-
-				'& .ss-result__details-wrapper-button': {
-					marginBottom: '10px',
-
-					'& button': {
-						display: 'block',
-						margin: '0 auto',
+					'& .ss__result__wrapper__details__button': {
+						marginBottom: '10px',
 					},
 				},
 			},
@@ -113,11 +100,7 @@ export const Result = observer(
 
 		const props: ResultProps = {
 			// default props
-			hideBadge: false,
-			hideTitle: false,
-			hidePricing: false,
-			disableStyles: false,
-			layout: 'grid',
+			layout: Layout.GRID,
 			// global theme
 			...globalTheme?.components?.result,
 			// props
@@ -132,6 +115,7 @@ export const Result = observer(
 		const subProps: ResultSubProps = {
 			price: {
 				// global theme
+				className: 'ss__result__price',
 				...globalTheme?.components?.price,
 				// inherited props
 				...defined({
@@ -142,6 +126,7 @@ export const Result = observer(
 			},
 			badge: {
 				// default props
+				className: 'ss__result__badge',
 				content: 'Sale',
 				// global theme
 				...globalTheme?.components?.badge,
@@ -154,6 +139,7 @@ export const Result = observer(
 			},
 			image: {
 				// default props
+				className: 'ss__result__image',
 				alt: core?.name,
 				src: core?.thumbnailImageUrl,
 				// global theme
@@ -172,46 +158,32 @@ export const Result = observer(
 
 		return (
 			core && (
-				<article
-					css={
-						!disableStyles &&
-						css`
-							${CSS.result({ width, style })} ${CSS[layout]()}
-						`
-					}
-					className={classnames('ss-result', className)}
-				>
-					<div className={'ss-result__wrapper'}>
-						<div className={'ss-result__image-wrapper'}>
+				<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+					<div className="ss__result__wrapper">
+						<div className="ss__result__wrapper__image">
 							<a href={core.url}>
 								{!hideBadge && onSale && <Badge {...subProps.badge} />}
 								<Image {...subProps.image} />
 							</a>
 						</div>
-						<div className={'ss-result__details-wrapper'}>
+						<div className="ss__result__wrapper__details">
 							{!detailSlot ? (
 								<>
 									{!hideTitle && (
-										<div className={'ss-result__details-wrapper-name'}>
+										<div className="ss__result__wrapper__details__title">
 											<a href={core.url}>{core.name}</a>
 										</div>
 									)}
 									{!hidePricing && (
-										<div className={'ss-result__details-wrapper-price'}>
+										<div className="ss__result__wrapper__details__pricing">
 											{core.price < core.msrp ? (
 												<>
-													<span className={'ss-result__details-wrapper-price-large'}>
-														<Price {...subProps.price} value={core.price} />
-													</span>
+													<Price {...subProps.price} value={core.price} />
 													&nbsp;
-													<span className={'ss-result__details-wrapper-price-linethrough'}>
-														<Price {...subProps.price} value={core.msrp} />
-													</span>
+													<Price {...subProps.price} value={core.msrp} lineThrough={true} />
 												</>
 											) : (
-												<span className={'ss-result__details-wrapper-price-large'}>
-													<Price {...subProps.price} value={core.price} />
-												</span>
+												<Price {...subProps.price} value={core.price} />
 											)}
 										</div>
 									)}
@@ -220,7 +192,7 @@ export const Result = observer(
 								<>{detailSlot}</>
 							)}
 
-							{buttonSlot && <div className={'ss-result__button-wrapper'}>{buttonSlot}</div>}
+							{buttonSlot && <div className="ss__result__wrapper__details__button">{buttonSlot}</div>}
 						</div>
 					</div>
 				</article>

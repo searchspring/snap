@@ -7,7 +7,7 @@ import { ThemeProvider } from '../../../providers/theme';
 describe('Price Component', () => {
 	it('renders', () => {
 		const rendered = render(<Price value={1099.99} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toBeInTheDocument();
 	});
 
@@ -17,7 +17,7 @@ describe('Price Component', () => {
 			lineThrough: true,
 		};
 		const rendered = render(<Price {...args} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		const styles = getComputedStyle(priceElement);
 		expect(styles.textDecoration).toBe('line-through');
 	});
@@ -27,7 +27,7 @@ describe('Price Component', () => {
 			value: 1099.99,
 		};
 		const rendered = render(<Price {...args} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		const priceText = priceElement.textContent;
 		expect(priceText).toBe('$1,099.99');
 	});
@@ -42,7 +42,7 @@ describe('Price Component', () => {
 			symbolAfter: true,
 		};
 		const rendered = render(<Price {...args} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		const priceText = priceElement.textContent;
 		expect(priceText).toBe('1.099.99 £');
 	});
@@ -53,7 +53,7 @@ describe('Price Component', () => {
 		};
 
 		const rendered = render(<Price value={100} style={style} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		const styles = getComputedStyle(priceElement);
 
 		expect(styles.padding).toBe(style.padding);
@@ -65,7 +65,7 @@ describe('Price Component', () => {
 			disableStyles: true,
 		};
 		const rendered = render(<Price {...args} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement.className).not.toMatch(/formatted-/);
 		expect(priceElement.classList[1]).toMatch(/^css-0/);
 	});
@@ -76,7 +76,7 @@ describe('Price Component', () => {
 			className: 'custom-class',
 		};
 		const rendered = render(<Price {...args} />);
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement.classList).toContain(args.className);
 	});
 
@@ -95,7 +95,7 @@ describe('Price Component', () => {
 			</ThemeProvider>
 		);
 
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(globalTheme.components.price.className);
 	});
 
@@ -110,7 +110,7 @@ describe('Price Component', () => {
 
 		const rendered = render(<Price value={1099.99} theme={propTheme} />);
 
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(propTheme.components.price.className);
 	});
 
@@ -137,7 +137,7 @@ describe('Price Component', () => {
 			</ThemeProvider>
 		);
 
-		const priceElement = rendered.container.querySelector('.ss-price');
+		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement).toHaveClass(propTheme.components.price.className);
 		expect(priceElement).not.toHaveClass(globalTheme.components.price.className);
 	});

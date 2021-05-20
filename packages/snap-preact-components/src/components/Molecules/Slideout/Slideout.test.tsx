@@ -36,7 +36,7 @@ describe('Slideout Component', () => {
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(slideoutElement).toBeInTheDocument();
 		expect(styles.left).toBe('0px');
@@ -47,7 +47,7 @@ describe('Slideout Component', () => {
 			active: false,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.left).toBe('-300px');
 		expect(styles.left).not.toBe('0px');
@@ -59,7 +59,7 @@ describe('Slideout Component', () => {
 			width: '400px',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(args.width);
 	});
@@ -71,7 +71,7 @@ describe('Slideout Component', () => {
 			displayAt: '(min-width: 600px)',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		expect(slideoutElement).toBeInTheDocument();
 	});
 
@@ -93,7 +93,7 @@ describe('Slideout Component', () => {
 			active: false,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		expect(slideoutElement).not.toBeInTheDocument();
 	});
 
@@ -102,7 +102,7 @@ describe('Slideout Component', () => {
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay.ss-overlay-active');
+		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		expect(overlayElement).toBeInTheDocument();
 	});
 
@@ -111,7 +111,7 @@ describe('Slideout Component', () => {
 			active: false,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay.ss-overlay-active');
+		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		expect(overlayElement).not.toBeInTheDocument();
 	});
 
@@ -121,7 +121,7 @@ describe('Slideout Component', () => {
 			overlayColor: 'rgba(0, 0, 0, 0.1)',
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay.ss-overlay-active');
+		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.background).toBe(args.overlayColor);
 	});
@@ -135,7 +135,7 @@ describe('Slideout Component', () => {
 				<Slideout {...args} />
 			</ThemeProvider>
 		);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
@@ -145,7 +145,7 @@ describe('Slideout Component', () => {
 			active: true,
 		};
 		const rendered = render(<Slideout {...args} theme={theme} />);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
@@ -166,7 +166,7 @@ describe('Slideout Component', () => {
 				<Slideout {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const slideoutElement = rendered.container.querySelector('.ss-slideout');
+		const slideoutElement = rendered.container.querySelector('.ss__slideout');
 		const styles = getComputedStyle(slideoutElement);
 		expect(styles.maxWidth).toBe(themeOverride.components.slideout.width);
 	});

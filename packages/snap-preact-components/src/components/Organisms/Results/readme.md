@@ -28,7 +28,7 @@ An object that modifies the responsive behavior of the `<Result />` sub-componen
 
 The responsive prop can be used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in. The viewport prop is the number representing the screen size the breakpoint should be used at and below.
 
-For example, if you had `viewport: 500`, those specific responsive settings would be used from 500px wide and below.
+For example, if you had `viewport: 480`, those specific responsive settings would be used from 480px wide and below.
 
 `viewport` - required, viewport width when this rule is active
 
@@ -38,35 +38,39 @@ For example, if you had `viewport: 500`, those specific responsive settings woul
 
 `layout` - optional, layout type `'grid'` or `'list'` at the given `viewport`
 
+```typescript
+const defaultResponsiveOptions = [
+	{
+		viewport: 480,
+		numAcross: 1,
+		layout: 'list',
+	},
+	{
+		viewport: 768,
+		numAcross: 2,
+	},
+	{
+		viewport: 1024,
+		numAcross: 3,
+	},
+	{
+		viewport: 1200,
+		numAcross: 4,
+	},
+]
+```
 
 ```typescript
 const responsive = [
 	{
-		viewport: 350,
+		viewport: 768,
 		numAcross: 1,
-		numRows: 5,	
-			
+		layout: 'list',
 	},
 	{
-		viewport: 450,
-		numAcross: 2,
-		numRows: 3,	
-		layout: "list",	
-	},
-	{
-		viewport: 500,
+		viewport: 1024,
 		numAcross: 3,
-		numRows: 2,	
 	},
-	{
-		viewport: 600,
-		numAcross: 5,
-		numRows: 4,	
-	},
-	{
-		viewport: 700,
-		numAcross: 5,
-	}
 ]
 ```
 

@@ -1,10 +1,19 @@
+/** @jsx jsx */
 import { h } from 'preact';
 
+import { jsx, css } from '@emotion/react';
 import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
 import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps } from '../../../types';
+
+const CSS = {
+	formattedNumber: ({ style }) =>
+		css({
+			...style,
+		}),
+};
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
@@ -38,7 +47,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	} = props;
 
 	return (
-		<span className={classnames('ss-formattednumber', className)} style={!disableStyles && style}>
+		<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
 			{filters.formatNumber(value, {
 				symbol,
 				decimalPlaces,

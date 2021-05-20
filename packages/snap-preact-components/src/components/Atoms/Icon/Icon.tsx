@@ -9,9 +9,9 @@ import { ComponentProps } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
 const CSS = {
-	icon: ({ color, height, width, size, style }) =>
+	icon: ({ color, height, width, size, theme, style }) =>
 		css({
-			fill: color,
+			fill: color || theme.colors?.primary,
 			width: width || size,
 			height: height || size,
 			...style,
@@ -20,12 +20,11 @@ const CSS = {
 
 export function Icon(properties: IconProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: IconProps = {
 		// default props
-		disableStyles: false,
 		size: '16px',
-		color: '#000',
 		viewBox: '0 0 56 56',
 		// global theme
 		...globalTheme?.components?.icon,
@@ -48,10 +47,11 @@ export function Icon(properties: IconProps): JSX.Element {
 						width,
 						height,
 						size,
+						theme,
 						style,
 					})
 				}
-				className={classnames('ss-icon', `ss-icon-${icon}`, className)}
+				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
 				viewBox={viewBox}
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles && (width || size)}

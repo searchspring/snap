@@ -1,13 +1,12 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Select, SelectProps } from './Select';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Select, SelectProps } from './Select';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { iconPaths } from '../../Atoms/Icon';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../Select/readme.md';
 
 export default {
@@ -44,7 +43,6 @@ export default {
 			control: { type: 'none' },
 		},
 		disabled: {
-			defaultValue: false,
 			description: 'Disable select',
 			table: {
 				type: {
@@ -73,7 +71,6 @@ export default {
 			control: { type: 'text' },
 		},
 		hideLabelOnSelection: {
-			defaultValue: false,
 			description: 'Hide label when selection has been made (non-native only)',
 			table: {
 				type: {
@@ -162,7 +159,6 @@ export default {
 			},
 		},
 		stayOpenOnSelection: {
-			defaultValue: false,
 			description: 'Keep dropdown open when an option is selected',
 			table: {
 				type: {
@@ -173,7 +169,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		startOpen: {
-			defaultValue: false,
 			description: 'Open on initial render',
 			table: {
 				type: {
@@ -184,8 +179,17 @@ export default {
 			control: { type: 'boolean' },
 		},
 		native: {
-			defaultValue: false,
 			description: 'Use native select element',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		disableClickOutside: {
+			description: 'Ignore clicks outside of element',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -238,7 +242,7 @@ const selectOptions = [
 	},
 ];
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 
 const ObservableSelect = observer(({ args, controller }) => {
 	return (

@@ -11,10 +11,10 @@ import { Theme, useTheme } from '../../../providers/theme';
 const CSS = {
 	breadcrumbs: ({ style }) =>
 		css({
-			'& .ss-breadcrumbs__crumbs': {
+			'& .ss__breadcrumbs__crumbs': {
 				padding: '0',
 			},
-			'& .ss-breadcrumbs__crumb, & .ss-breadcrumbs__separator': {
+			'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': {
 				padding: '0 5px',
 				display: 'inline-block',
 			},
@@ -28,7 +28,7 @@ export const Breadcrumbs = observer(
 
 		const props: BreadcrumbProps = {
 			// default props
-			disableStyles: false,
+			separator: '>',
 			// global theme
 			...globalTheme?.components?.breadcrumbs,
 			// props
@@ -39,13 +39,13 @@ export const Breadcrumbs = observer(
 		const { data, separator, disableStyles, className, style } = props;
 
 		return (
-			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss-breadcrumbs', className)}>
-				<ul className="ss-breadcrumbs__crumbs">
+			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
+				<ul className="ss__breadcrumbs__crumbs">
 					{data
 						.map<React.ReactNode>((crumb) => (
-							<li className="ss-breadcrumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
+							<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
 						))
-						.reduce((prev, curr) => [prev, <li className="ss-breadcrumbs__separator">{separator || '>'}</li>, curr])}
+						.reduce((prev, curr) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
 				</ul>
 			</div>
 		);

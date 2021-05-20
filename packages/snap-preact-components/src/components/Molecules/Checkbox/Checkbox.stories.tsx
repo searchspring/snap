@@ -1,12 +1,10 @@
 import { h } from 'preact';
 
-import { Checkbox, CheckboxProps } from './Checkbox';
-import { iconPaths } from '../../Atoms/Icon';
-
-import { componentArgs } from '../../../utilities';
-
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Checkbox, CheckboxProps } from './Checkbox';
+import { iconPaths } from '../../Atoms/Icon';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Checkbox/readme.md';
 
 export default {
@@ -34,7 +32,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		disabled: {
-			defaultValue: false,
 			description: 'Checkbox is disabled',
 			table: {
 				type: {
@@ -75,7 +72,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#333' },
+				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
@@ -85,12 +82,11 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#333' },
+				defaultValue: { summary: 'theme.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
 		native: {
-			defaultValue: false,
 			description: 'Render as unstyled native checkbox',
 			table: {
 				type: {

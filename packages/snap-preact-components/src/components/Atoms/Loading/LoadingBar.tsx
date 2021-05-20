@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -19,10 +19,10 @@ const CSS = {
 			transition: 'opacity 0.3s ease',
 			opacity: '1',
 			visibility: 'visible',
-			zIndex: '9999',
+			zIndex: '10000',
 			background: backgroundColor || theme.colors?.secondary,
 
-			'& .ss-loadingbar-bar': {
+			'& .ss__loading-bar__bar': {
 				position: 'absolute',
 				top: '0',
 				left: '-200px',
@@ -48,10 +48,6 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	const props: LoadingBarProps = {
 		// default props
-		disableStyles: false,
-		active: false,
-		color: defaultTheme.colors?.primary,
-		backgroundColor: defaultTheme.colors?.secondary,
 		height: '5px',
 		// global theme
 		...globalTheme?.components?.loadingbar,
@@ -76,9 +72,9 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 						animation: CSS.animation,
 					})
 				}
-				className={classnames('ss-loadingbar', className)}
+				className={classnames('ss__loading-bar', className)}
 			>
-				<div className="ss-loadingbar-bar"></div>
+				<div className="ss__loading-bar__bar"></div>
 			</div>
 		)
 	);

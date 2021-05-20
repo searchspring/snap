@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
 import { FacetListOptions, FacetListOptionsProps } from './FacetListOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-
 import Readme from '../FacetListOptions/readme.md';
 
 export default {
@@ -23,7 +23,7 @@ export default {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>
+			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
 		),
@@ -61,6 +61,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		previewOnFocus: {
+			description: 'Invoke facet value preview upon focus',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		valueProps: {
+			description: 'Object of facet value props',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '{}' },
+			},
+			control: { type: 'object' },
+		},
 		onClick: {
 			description: 'Facet option click event handler',
 			table: {
@@ -74,7 +94,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 
 const ObservableFacetListOptions = observer(({ args, controller }) => {
 	const brandFacet = controller?.store?.facets.filter((facet) => facet.field == 'brand').pop();

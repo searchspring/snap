@@ -1,8 +1,9 @@
 import { h } from 'preact';
 
-import { FormattedNumber } from './FormattedNumber';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { FormattedNumber } from './FormattedNumber';
+import { componentArgs } from '../../../utilities';
 import Readme from '../FormattedNumber/readme.md';
 
 export default {
@@ -30,6 +31,7 @@ export default {
 			control: { type: 'number' },
 		},
 		symbol: {
+			defaultValue: '',
 			description: 'Unit symbol',
 			table: {
 				type: {
@@ -39,8 +41,8 @@ export default {
 			control: { type: 'text' },
 		},
 		symbolAfter: {
-			description: 'Place unit symbol after the value',
 			defaultValue: true,
+			description: 'Place unit symbol after the value',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -50,6 +52,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		decimalPlaces: {
+			defaultValue: 3,
 			description: 'Number of decimal places',
 			table: {
 				type: {
@@ -60,8 +63,8 @@ export default {
 			control: { type: 'number' },
 		},
 		padDecimalPlaces: {
-			description: 'Pad decimal places with zeros',
 			defaultValue: true,
+			description: 'Pad decimal places with zeros',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -71,16 +74,18 @@ export default {
 			control: { type: 'boolean' },
 		},
 		thousandsSeparator: {
+			defaultValue: '',
 			description: 'Character used to separate thousands',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: ',' },
+				defaultValue: { summary: '' },
 			},
 			control: { type: 'text' },
 		},
 		decimalSeparator: {
+			defaultValue: '.',
 			description: 'Character used to separate decimal values',
 			table: {
 				type: {
@@ -90,28 +95,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		disableStyles: {
-			description: 'Disable all default styling',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: {
-				type: 'boolean',
-			},
-		},
-		className: {
-			description: 'Class name appended to root element of component',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'ss-formattednumber' },
-			},
-			control: { type: 'text' },
-		},
+		...componentArgs,
 	},
 };
 

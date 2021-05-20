@@ -9,7 +9,7 @@ describe('Facets Component', () => {
 			facets: searchResponse.facets,
 		};
 		const rendered = render(<Facets {...args} />);
-		const facetsElement = rendered.container.querySelector('.ss-facets');
+		const facetsElement = rendered.container.querySelector('.ss__facets');
 		expect(facetsElement).toBeInTheDocument();
 	});
 
@@ -18,8 +18,8 @@ describe('Facets Component', () => {
 			facets: searchResponse.facets,
 		};
 		const rendered = render(<Facets {...args} />);
-		const facetsElement = rendered.container.querySelector('.ss-facets');
-		const count = facetsElement.querySelectorAll('.ss-facet').length;
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		const count = facetsElement.querySelectorAll('.ss__facet').length;
 		expect(count).toBe(args.facets.length);
 	});
 });

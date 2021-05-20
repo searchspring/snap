@@ -1,8 +1,9 @@
 import { h } from 'preact';
 
-import { Price } from './Price';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Price } from './Price';
+import { componentArgs } from '../../../utilities';
 import Readme from '../Price/readme.md';
 
 export default {
@@ -31,6 +32,7 @@ export default {
 		},
 		symbol: {
 			description: 'Currency symbol',
+			defaultValue: '$',
 			table: {
 				type: {
 					summary: 'string',
@@ -52,6 +54,7 @@ export default {
 		},
 		decimalPlaces: {
 			description: 'Number of decimal places',
+			defaultValue: 2,
 			table: {
 				type: {
 					summary: 'number',
@@ -73,6 +76,7 @@ export default {
 		},
 		thousandsSeparator: {
 			description: 'Character used to separate thousands',
+			defaultValue: ',',
 			table: {
 				type: {
 					summary: 'string',
@@ -83,6 +87,7 @@ export default {
 		},
 		decimalSeparator: {
 			description: 'Character used to separate decimal values',
+			defaultValue: '.',
 			table: {
 				type: {
 					summary: 'string',
@@ -92,8 +97,8 @@ export default {
 			control: { type: 'text' },
 		},
 		lineThrough: {
-			defaultValue: false,
 			description: 'Add line through styling',
+			defaultValue: false,
 			table: {
 				type: {
 					summary: 'boolean',
@@ -104,28 +109,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		disableStyles: {
-			description: 'Disable all default styling',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: {
-				type: 'boolean',
-			},
-		},
-		className: {
-			description: 'Class name appended to root element of component',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'ss-price' },
-			},
-			control: { type: 'text' },
-		},
+		...componentArgs,
 	},
 };
 

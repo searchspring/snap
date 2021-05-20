@@ -1,9 +1,8 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ThemeProvider, LoadingBar } from '@searchspring/snap-preact-components';
+import { ThemeProvider, LoadingBar, defaultTheme } from '@searchspring/snap-preact-components';
 
-import { customTheme } from '../../theme.js';
 import { StoreProvider } from '../../services/providers';
 
 import { Header } from '../Header/Header';
@@ -15,7 +14,7 @@ export class Content extends Component {
 		const store = this.props.store;
 
 		return (
-			<ThemeProvider theme={customTheme}>
+			<ThemeProvider theme={defaultTheme}>
 				<StoreProvider store={store}>
 					<div>
 						<LoadingBar active={store.loading} />

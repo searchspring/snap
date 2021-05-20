@@ -1,11 +1,10 @@
 import { h } from 'preact';
 
-import { Banner, BannerProps } from './Banner';
-
-import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
+import { Banner, BannerProps } from './Banner';
+import { componentArgs } from '../../../utilities';
+import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Merchandising/readme.md';
 
 export default {
@@ -49,7 +48,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n', search: { query: { string: 'glasses' } } } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
 const Template = (args: BannerProps, { loaded: { controller } }) => <Banner {...args} content={controller?.store?.merchandising?.content} />;
 
@@ -61,7 +60,6 @@ Header.loaders = [
 ];
 Header.args = {
 	type: 'header',
-	// content: searchResponse.merchandising.content,
 };
 
 export const Footer = Template.bind({});
@@ -74,36 +72,13 @@ Footer.args = {
 	type: 'footer',
 };
 
-// TODO add inline banner story after SNAPI support
-// export const Inline = Template.bind({});
-// Inline.loaders = [
-// 	async () => ({
-// 		controller: await snapInstance.search(),
-// 	}),
-// ];
-// Inline.args = {
-// 	type: 'inline',
-// };
-// Inline.decorators = [
-// 	(Story) => (
-// 		<div
-// 			style={{
-// 				display: 'inline-block',
-// 				width: '250px',
-// 			}}
-// 		>
-// 			<Story />
-// 		</div>
-// 	),
-// ];
-
-export const Banner_ = Template.bind({});
-Banner_.loaders = [
+export const Secondary = Template.bind({});
+Secondary.loaders = [
 	async () => ({
 		controller: await snapInstance.search(),
 	}),
 ];
-Banner_.args = {
+Secondary.args = {
 	type: 'banner',
 };
 
@@ -116,15 +91,3 @@ Left.loaders = [
 Left.args = {
 	type: 'left',
 };
-Left.decorators = [
-	(Story) => (
-		<div
-			style={{
-				display: 'inline-block',
-				width: '150px',
-			}}
-		>
-			<Story />
-		</div>
-	),
-];

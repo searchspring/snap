@@ -1,6 +1,5 @@
 import { h } from 'preact';
-import { ThemeProvider } from '../src/providers/theme';
-import { defaultTheme } from '../src/providers/theme';
+import { ThemeProvider, defaultTheme } from '../src/providers/theme';
 import './styles.css';
 
 export const decorators = [

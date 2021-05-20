@@ -14,46 +14,36 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, defaultTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers/theme';
 
 const CSS = {
-	facet: ({ disableCollapse, color, theme, style }) =>
+	facet: ({ color, theme, style }) =>
 		css({
-			'& .ss-facet__header': {
+			margin: '0 0 20px 0',
+			'& .ss__facet__header': {
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				color: color || theme.colors?.primary || '#333',
+				color: color,
+				border: 'none',
+				borderBottom: `2px solid ${theme.colors?.primary}`,
+				padding: '6px 0',
 			},
-			'& .ss-dropdown': {
-				'&.ss-open': {
-					'& .ss-dropdown__content': {
-						position: 'relative',
-					},
-				},
-				'& .ss-dropdown__button': {
-					cursor: disableCollapse ? 'default' : 'pointer',
+			'& .ss__facet__options': {
+				marginTop: '8px',
+				maxHeight: '300px',
+				overflowY: 'auto',
+				overflowX: 'hidden',
+			},
+			'& .ss__facet__show-more-less': {
+				display: 'block',
+				margin: '8px',
+				cursor: 'pointer',
+				'& .ss__icon': {
+					marginRight: '8px',
 				},
 			},
 			...style,
-		}),
-	options: () =>
-		css({
-			marginTop: '8px',
-			maxHeight: '300px',
-			overflowY: 'auto',
-		}),
-	icon: () =>
-		css({
-			marginRight: '8px',
-		}),
-	showMore: ({ theme }) =>
-		css({
-			color: theme.colors?.primary,
-			display: 'block',
-			textAlign: 'right',
-			margin: '8px',
-			cursor: 'pointer',
 		}),
 };
 
@@ -64,11 +54,13 @@ export const Facet = observer(
 
 		const props: FacetProps = {
 			// default props
-			disableCollapse: false,
-			disableStyles: false,
-			hideIcon: false,
+			optionsLimit: 12,
 			iconCollapse: 'angle-up',
 			iconExpand: 'angle-down',
+			showMoreText: 'Show More',
+			showLessText: 'Show Less',
+			iconshowMoreExpand: 'plus',
+			iconshowLessExpand: 'minus',
 			// global theme
 			...globalTheme?.components?.facet,
 			// props
@@ -87,6 +79,10 @@ export const Facet = observer(
 			color,
 			previewOnFocus,
 			valueProps,
+			showMoreText,
+			showLessText,
+			iconshowMoreExpand,
+			iconshowLessExpand,
 			disableStyles,
 			className,
 			style,
@@ -95,7 +91,9 @@ export const Facet = observer(
 		const subProps: FacetSubProps = {
 			dropdown: {
 				// default props
+				className: 'ss__facet__dropdown',
 				disableClickOutside: true,
+				disableOverlay: true,
 				// global theme
 				...globalTheme?.components?.dropdown,
 				// inherited props
@@ -105,9 +103,37 @@ export const Facet = observer(
 				// component theme overrides
 				...props.theme?.components?.dropdown,
 			},
+			icon: {
+				// default props
+				className: 'ss__facet__dropdown__icon',
+				size: '12px',
+				color: iconColor || color,
+				// global theme
+				...globalTheme?.components?.icon,
+				// inherited props
+				...defined({
+					disableStyles,
+				}),
+				// component theme overrides
+				...props.theme?.components?.icon,
+			},
+			showMoreLessIcon: {
+				// default props
+				className: 'ss__facet__show-more-less__icon',
+				size: '10px',
+				color: iconColor || color,
+				// global theme
+				...globalTheme?.components?.icon,
+				// inherited props
+				...defined({
+					disableStyles,
+				}),
+				// component theme overrides
+				...props.theme?.components?.icon,
+			},
 			facetHierarchyOptions: {
 				// default props
-
+				className: 'ss__facet__facet-hierarchy-options',
 				// global theme
 				...globalTheme?.components?.facetHierarchyOptions,
 				// inherited props
@@ -121,7 +147,7 @@ export const Facet = observer(
 			},
 			facetListOptions: {
 				// default props
-
+				className: 'ss__facet__facet-list-options',
 				// global theme
 				...globalTheme?.components?.facetListOptions,
 				// inherited props
@@ -135,7 +161,7 @@ export const Facet = observer(
 			},
 			facetGridOptions: {
 				// default props
-
+				className: 'ss__facet__facet-grid-options',
 				// global theme
 				...globalTheme?.components?.facetGridOptions,
 				// inherited props
@@ -149,6 +175,7 @@ export const Facet = observer(
 			},
 			facetPaletteOptions: {
 				// default props
+				className: 'ss__facet__facet-palette-options',
 				// global theme
 				...globalTheme?.components?.facetPaletteOptions,
 				// inherited props
@@ -162,7 +189,7 @@ export const Facet = observer(
 			},
 			slider: {
 				// default props
-
+				className: 'ss__facet__slider',
 				// global theme
 				...globalTheme?.components?.slider,
 				// inherited props
@@ -172,20 +199,6 @@ export const Facet = observer(
 				// component theme overrides
 				...props.theme?.components?.slider,
 			},
-			icon: {
-				// default props
-				className: 'ss-facet__button-icon',
-				size: '12px',
-				color: iconColor || color || theme.colors?.primary || '#333',
-				// global theme
-				...globalTheme?.components?.icon,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.icon,
-			},
 		};
 
 		if ((facet as ValueFacet)?.overflow && optionsLimit) {
@@ -193,20 +206,19 @@ export const Facet = observer(
 		}
 
 		return (
-			<div css={!disableStyles && CSS.facet({ disableCollapse, color, theme, style })} className={classnames('ss-facet', className)}>
+			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
 				<Dropdown
+					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}
-					onClick={(e) => {
-						!disableCollapse && facet?.toggleCollapse();
-					}}
+					onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
 					button={
-						<div className={'ss-facet__header'}>
+						<div className="ss__facet__header">
 							{facet?.label}
-							{!hideIcon && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+							{!hideIcon && !disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>
-					<div css={!disableStyles && CSS.options()} className={classnames('ss-facet-options', className)}>
+					<div className={classnames('ss__facet__options', `ss__facet__options--${facet.display}`, className)}>
 						{(() => {
 							switch (facet?.display) {
 								case FacetDisplay.SLIDER:
@@ -222,22 +234,11 @@ export const Facet = observer(
 							}
 						})()}
 					</div>
-					{/* TODO: more configs for showmore showless */}
 
 					{(facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-						<div
-							css={!disableStyles && CSS.showMore({ theme })}
-							onClick={() => {
-								(facet as ValueFacet).overflow.toggle();
-							}}
-						>
-							<Icon
-								icon={(facet as ValueFacet).overflow.remaining > 0 ? 'plus' : 'minus'}
-								color={defaultTheme.colors?.primary}
-								size="10px"
-								css={!disableStyles && CSS.icon()}
-							/>
-							<span>{(facet as ValueFacet).overflow.remaining > 0 ? 'Show More' : 'Show Less'}</span>
+						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
+							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
 						</div>
 					)}
 				</Dropdown>
@@ -254,6 +255,7 @@ interface FacetSubProps {
 	facetHierarchyOptions?: FacetHierarchyOptionsProps;
 	slider?: SliderProps;
 	icon?: IconProps;
+	showMoreLessIcon?: IconProps;
 }
 
 export interface FacetProps extends ComponentProps {
@@ -267,4 +269,8 @@ export interface FacetProps extends ComponentProps {
 	optionsLimit?: number;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	showMoreText?: string;
+	showLessText?: string;
+	iconshowMoreExpand?: string;
+	iconshowLessExpand?: string;
 }

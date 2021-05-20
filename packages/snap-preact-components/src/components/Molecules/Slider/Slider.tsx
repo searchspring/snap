@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -11,145 +12,96 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	handle: ({ handleColor, handleTextColor }) =>
-		css({
-			background: handleColor,
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			width: '1.6rem',
-			height: '1.6rem',
-			borderRadius: '100%',
-			fontSize: '0.7rem',
-			whiteSpace: 'nowrap',
-			color: handleTextColor,
-			fontWeight: 'normal',
-			transform: 'translateY(0) scale(0.9)',
-			transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-			position: 'relative',
-			cursor: 'pointer',
-
-			'&:after': {
-				backgroundColor: '#ffffff',
-				width: '30%',
-				height: '30%',
-				top: '0',
-				bottom: '0',
-				left: '0',
-				content: '""',
-				position: 'absolute',
-				right: '0',
-				borderRadius: '12px',
-				margin: 'auto',
-				cursor: 'pointer',
-			},
-
-			'& label': {
-				position: 'absolute',
-				top: '-20px',
-				fontFamily: 'Roboto, Helvetica, Arial',
-				fontSize: '14px',
-			},
-		}),
-	handleActive: ({ handleDraggingColor, handleColor, handleTextColor }) =>
-		css({
-			background: handleDraggingColor || handleColor,
-
-			///need to find a way to spread the above styles here rather than repeat them
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			width: '1.6rem',
-			height: '1.6rem',
-			borderRadius: '100%',
-			fontSize: '0.7rem',
-			whiteSpace: 'nowrap',
-			color: handleTextColor,
-			fontWeight: 'normal',
-			transform: 'translateY(0) scale(0.9)',
-			transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-			position: 'relative',
-			cursor: 'pointer',
-
-			'&:after': {
-				backgroundColor: '#ffffff',
-				width: '30%',
-				height: '30%',
-				top: '0',
-				bottom: '0',
-				left: '0',
-				content: '""',
-				position: 'absolute',
-				right: '0',
-				borderRadius: '12px',
-				margin: 'auto',
-				cursor: 'pointer',
-			},
-
-			'& label': {
-				position: 'absolute',
-				top: '-20px',
-				fontFamily: 'Roboto, Helvetica, Arial',
-				fontSize: '14px',
-			},
-		}),
-	tick: () =>
-		css({
-			'&:before': {
-				content: "''",
-				position: 'absolute',
-				left: '0',
-				background: 'rgba(0, 0, 0, 0.2)',
-				height: '5px',
-				width: '2px',
-				transform: 'translate(-50%, 0.7rem)',
-			},
-		}),
-	track: ({ style }) =>
+	slider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style }) =>
 		css({
 			display: 'inline-block',
 			height: '8px',
-			width: 'calc(100% - 25px)',
+			width: 'calc(100% - 38px)',
 			margin: '20px 5% 25px',
 			top: '10px',
+
+			'& .ss__slider__tick': {
+				'&:before': {
+					content: "''",
+					position: 'absolute',
+					left: '0',
+					background: 'rgba(0, 0, 0, 0.2)',
+					height: '5px',
+					width: '2px',
+					transform: 'translate(-50%, 0.7rem)',
+				},
+				'& .ss__slider__tick__label': {
+					position: 'absolute',
+					fontSize: '0.6rem',
+					color: tickTextColor,
+					top: '100%',
+					transform: 'translate(-50%, 1.2rem)',
+					whiteSpace: 'nowrap',
+				},
+			},
+			'& .ss__slider__rail': {
+				background: railColor || theme.colors?.primary,
+				height: '100%',
+			},
+			'& .ss__slider__segment': {
+				background: trackColor || theme.colors?.secondary,
+				height: '100%',
+			},
+			'& .ss__slider__handle': {
+				background: handleColor || theme.colors?.primary,
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				width: '1.6rem',
+				height: '1.6rem',
+				borderRadius: '100%',
+				fontSize: '0.7rem',
+				whiteSpace: 'nowrap',
+				color: handleTextColor,
+				fontWeight: 'normal',
+				transform: 'translateY(0) scale(0.9)',
+				transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+				position: 'relative',
+				cursor: 'pointer',
+
+				'&:after': {
+					backgroundColor: '#ffffff',
+					width: '30%',
+					height: '30%',
+					top: '0',
+					bottom: '0',
+					left: '0',
+					content: '""',
+					position: 'absolute',
+					right: '0',
+					borderRadius: '12px',
+					margin: 'auto',
+					cursor: 'pointer',
+				},
+
+				'& label': {
+					position: 'absolute',
+					top: '-20px',
+					fontFamily: 'Roboto, Helvetica, Arial',
+					fontSize: '14px',
+				},
+
+				'&.ss__slider__handle--active': {
+					background: handleDraggingColor || handleColor || theme.colors?.primary,
+				},
+			},
 			...style,
-		}),
-	tickLabel: ({ tickTextColor }) =>
-		css({
-			position: 'absolute',
-			fontSize: '0.6rem',
-			color: tickTextColor,
-			top: '100%',
-			transform: 'translate(-50%, 1.2rem)',
-			whiteSpace: 'nowrap',
-		}),
-	segment: ({ trackColor }) =>
-		css({
-			background: trackColor,
-			height: '100%',
-		}),
-	rail: ({ railColor }) =>
-		css({
-			background: railColor,
-			height: '100%',
 		}),
 };
 
 export const Slider = observer(
 	(properties: SliderProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: SliderProps = {
 			// default props
-			disableStyles: false,
-			tickTextColor: '#515151',
-			showTicks: false,
-			trackColor: '#F8F8F8',
-			handleTextColor: '#515151',
-			handleColor: '#4C37B3',
-			railColor: '#4C37B3',
 			tickSize: properties.facet?.step * 10 || 20,
-
 			// global theme
 			...globalTheme?.components?.slider,
 			// props
@@ -205,19 +157,24 @@ export const Slider = observer(
 			facet.range &&
 			facet.active &&
 			facet.step && (
-				<div className={classnames('ss-slider', className)} {...getTrackProps()} css={!disableStyles && CSS.track({ style })}>
+				<div
+					className={classnames('ss__slider', className)}
+					{...getTrackProps()}
+					css={
+						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
+					}
+				>
 					{showTicks &&
 						ticks.map(({ value, getTickProps }) => (
-							<div className={'ss-sliderTick'} {...getTickProps()} css={!disableStyles && CSS.tick()}>
-								<div className={'ss-sliderTickLabel'} css={!disableStyles && CSS.tickLabel({ tickTextColor })}>
-									{value}
-								</div>
+							<div className="ss__slider__tick" {...getTickProps()}>
+								<div className="ss__slider__tick__label">{value}</div>
 							</div>
 						))}
 
-					{segments.map(({ getSegmentProps }, i) => (
-						<Segment trackColor={trackColor} railColor={railColor} getSegmentProps={...getSegmentProps()} index={i} disableStyles={disableStyles} />
+					{segments.map(({ getSegmentProps }, index) => (
+						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
 					))}
+
 					{handles.map(({ value, active, getHandleProps }) => (
 						<button
 							{...getHandleProps({
@@ -229,15 +186,9 @@ export const Slider = observer(
 								},
 							})}
 						>
-							<Handle
-								active={active}
-								value={value}
-								formatValue={facet.formatValue}
-								handleColor={handleColor}
-								handleTextColor={handleTextColor}
-								handleDraggingColor={handleDraggingColor}
-								disableStyles={disableStyles}
-							/>
+							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
+								<label>{sprintf(facet.formatValue, value)}</label>
+							</div>
 						</button>
 					))}
 				</div>
@@ -245,43 +196,6 @@ export const Slider = observer(
 		);
 	}
 );
-
-export function Segment(props: { index: any; getSegmentProps: any; trackColor: any; railColor: any; disableStyles: boolean }): JSX.Element {
-	const { index, getSegmentProps, trackColor, railColor, disableStyles } = props;
-
-	return (
-		<div
-			css={!disableStyles && (index === 1 ? CSS.rail({ railColor }) : CSS.segment({ trackColor }))}
-			className={`${index === 1 ? 'ss-sliderRail' : 'ss-sliderSegment'}`}
-			{...getSegmentProps}
-			index={index}
-		/>
-	);
-}
-
-export function Handle(props: {
-	active: any;
-	value: any;
-	formatValue: string;
-	handleColor: any;
-	handleTextColor: any;
-	handleDraggingColor: any;
-	disableStyles: boolean;
-}): JSX.Element {
-	const { active, value, formatValue, handleColor, handleTextColor, handleDraggingColor, disableStyles } = props;
-
-	return (
-		<div
-			css={
-				!disableStyles &&
-				(active ? CSS.handleActive({ handleDraggingColor, handleColor, handleTextColor }) : CSS.handle({ handleColor, handleTextColor }))
-			}
-			className={'ss-sliderHandle'}
-		>
-			<label>{sprintf(formatValue, value)}</label>
-		</div>
-	);
-}
 
 export interface SliderProps extends ComponentProps {
 	trackColor?: string;

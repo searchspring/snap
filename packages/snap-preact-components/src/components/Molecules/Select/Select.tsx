@@ -14,66 +14,42 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, hideLabelOnSelection, style }) =>
+	select: ({ color, backgroundColor, borderColor, label, selection, theme, style }) =>
 		css({
 			display: 'inline-flex',
 			color: color,
-			'&.ss-disabled': {
-				opacity: 0.3,
-				'& .ss-select__button': {
-					opacity: 1,
-				},
+			'&.ss__select--disabled': {
+				opacity: 0.7,
 			},
-			'& .ss-dropdown': {
-				flex: '1 0 auto',
-				'& .ss-dropdown__button': {
-					zIndex: 1,
-					position: 'relative',
-				},
-				'& .ss-dropdown__content': {
-					zIndex: 3,
-				},
+			'& .ss__select__dropdown__button__icon': {
+				margin: 'auto 0 auto 5px',
 			},
-			'& .ss-select__button': {
-				display: 'flex',
-				flex: '1 0 auto',
-				alignItems: 'center',
-				justifyContent: 'space-between',
-				'& .ss-select__button-icon': {
-					order: 3,
-					padding: '0 0 0 10px',
-				},
-				'& .ss-select__button-text': {
-					order: 1,
-				},
-				'& .ss-select__button-label': {
-					fontWeight: 'bold',
-				},
-				'& .ss-select__button-selected': {
-					paddingLeft: label && !(selection && hideLabelOnSelection) ? '5px' : 0,
-					fontWeight: label && !(selection && hideLabelOnSelection) ? 'normal' : 'bold',
-				},
+			'& .ss__select__label': {
+				marginRight: '5px',
 			},
-			'& .ss-select__options': {
+			'& .ss__select__select': {
+				position: 'relative',
+				zIndex: '10000',
 				backgroundColor: backgroundColor || '#fff',
 				listStyle: 'none',
-				padding: '5px 10px',
+				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || '#333'}`,
-				'& .ss-select__option': {
+				border: `1px solid ${borderColor || color || theme.colors?.primary}`,
+				'& .ss__select__select__option': {
 					cursor: 'pointer',
-					margin: '0 0 5px 0',
-					'&:last-child': {
-						margin: 0,
-					},
-					'&.ss-selected': {
+					padding: '6px 8px',
+					color: 'initial',
+					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',
+					},
+					'&:hover': {
+						backgroundColor: theme.colors?.hover,
 					},
 				},
 			},
 			...style,
 		}),
-	style: ({ style }) =>
+	native: ({ style }) =>
 		css({
 			...style,
 		}),
@@ -82,18 +58,14 @@ const CSS = {
 export const Select = observer(
 	(properties: SelectProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
+		const theme = { ...globalTheme, ...properties.theme };
 
 		const props: SelectProps = {
 			// default props
-			disableStyles: false,
-			disableClickOutside: false,
-			hideLabelOnSelection: false,
 			iconOpen: 'angle-down',
 			iconClose: 'angle-up',
-			native: false,
 			separator: ': ',
 			startOpen: false,
-			stayOpenOnSelection: false,
 			// global theme
 			...globalTheme?.components?.select,
 			// props
@@ -126,9 +98,21 @@ export const Select = observer(
 		let { options } = props;
 
 		const subProps: SelectSubProps = {
+			dropdown: {
+				className: 'ss__select__dropdown',
+				// global theme
+				...globalTheme?.components?.dropdown,
+				// inherited props
+				...defined({
+					disableStyles,
+					disabled,
+				}),
+				// component theme overrides
+				...props.theme?.components?.dropdown,
+			},
 			button: {
 				// default props
-				className: 'ss-select__button',
+				className: 'ss__select__dropdown__button',
 				// global theme
 				...globalTheme?.components?.button,
 				// inherited props
@@ -142,21 +126,9 @@ export const Select = observer(
 				// component theme overrides
 				...props.theme?.components?.button,
 			},
-			dropdown: {
-				// global theme
-				...globalTheme?.components?.dropdown,
-				// inherited props
-				...defined({
-					disableStyles,
-					disabled,
-				}),
-				// component theme overrides
-				...props.theme?.components?.dropdown,
-			},
 			icon: {
 				// default props
-				className: 'ss-select__button-icon',
-				size: '10px',
+				className: 'ss__select__dropdown__button__icon',
 				// global theme
 				...globalTheme?.components?.icon,
 				// inherited props
@@ -214,26 +186,30 @@ export const Select = observer(
 				<div
 					css={
 						!disableStyles && native
-							? CSS.style({ style })
+							? CSS.native({ style })
 							: CSS.select({
 									color,
 									backgroundColor,
 									borderColor,
 									label,
 									selection: selection || '',
-									hideLabelOnSelection,
+									theme,
 									style,
 							  })
 					}
-					className={classnames('ss-select', { 'ss-disabled': disabled }, className)}
+					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
 				>
 					{native ? (
 						<>
-							{label && <span className={'ss-select__label'}>{label}</span>}
-							{label && separator && <span className={'ss-select__separator'}>{separator}</span>}
+							{label && !hideLabelOnSelection && (
+								<span className="ss__select__label">
+									{label}
+									{separator && <span className="ss__select__label__separator">{separator}</span>}
+								</span>
+							)}
 
 							<select
-								className={'ss-select__options'}
+								className="ss__select__select"
 								disabled={disabled || undefined}
 								onChange={(e) => {
 									const selectElement = e.target;
@@ -243,17 +219,16 @@ export const Select = observer(
 											return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
 										})
 										.pop();
-
 									!disabled && makeSelection(e as any, selectedOption);
 								}}
 							>
 								{!selection && clearSelection && (
-									<option className={'ss-select__option'} selected value="">
+									<option className="ss__select__select__option" selected value="">
 										{clearSelection}
 									</option>
 								)}
 								{options.map((option, index) => (
-									<option className={'ss-select__option'} selected={selection?.value === option.value} value={option.value ?? index}>
+									<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
 										{option.label}
 									</option>
 								))}
@@ -264,34 +239,28 @@ export const Select = observer(
 							{...subProps.dropdown}
 							disableClickOutside={disableClickOutside}
 							open={open}
-							onToggle={(e, state) => {
-								setOpen((prev) => state ?? !prev);
-							}}
-							onClick={(e) => {
-								setOpen((prev) => !prev);
-							}}
+							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+							onClick={(e) => setOpen((prev) => !prev)}
 							button={
 								<Button {...subProps.button}>
-									<span className={'ss-select__button-text'}>
-										{!(selection && hideLabelOnSelection) && (
-											<>
-												{label && <span className={'ss-select__button-label'}>{label}</span>}
-												{label && selection && <span className={'ss-select__button-separator'}>{separator}</span>}
-											</>
-										)}
-										{selection && <span className={'ss-select__button-selected'}>{selection?.label}</span>}
-									</span>
+									{label && !hideLabelOnSelection && (
+										<span className="ss__select__label">
+											{label}
+											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+										</span>
+									)}
+									{selection && <span className="ss__select__selection">{selection?.label}</span>}
 									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
 								</Button>
 							}
 						>
-							<ul className={'ss-select__options'}>
+							<ul className="ss__select__select">
 								{options.map((option) => (
 									<li
-										className={classnames('ss-select__option', { 'ss-selected': selection?.value === option.value })}
-										onClick={(e) => {
-											!disabled && makeSelection(e as any, option);
-										}}
+										className={classnames('ss__select__select__option', {
+											'ss__select__select__option--selected': selection?.value === option.value,
+										})}
+										onClick={(e) => !disabled && makeSelection(e as any, option)}
 									>
 										<span>{option.label}</span>
 									</li>

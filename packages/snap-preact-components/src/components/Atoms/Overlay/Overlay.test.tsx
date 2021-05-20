@@ -18,14 +18,14 @@ describe('Overlay Component', () => {
 	it('renders', () => {
 		const args = { active: true };
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		expect(overlayElement).toBeInTheDocument();
 	});
 
 	it('is hidden when inactive', () => {
 		const args = { active: false };
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay.ss-overlay-active');
+		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
 		expect(overlayElement).not.toBeInTheDocument();
 	});
 
@@ -35,7 +35,7 @@ describe('Overlay Component', () => {
 			color: 'rgba(0, 0, 0, 0.3)',
 		};
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe(args.color);
 	});
@@ -46,7 +46,7 @@ describe('Overlay Component', () => {
 			disableStyles: true,
 		};
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe('');
 		expect(overlayElement.classList.length).toBe(3);
@@ -59,7 +59,7 @@ describe('Overlay Component', () => {
 			className: 'custom-class',
 		};
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		expect(overlayElement.classList).toContain(args.className);
 	});
 
@@ -69,7 +69,7 @@ describe('Overlay Component', () => {
 			onClick: jest.fn(),
 		};
 		const rendered = render(<Overlay {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		userEvent.click(overlayElement);
 		expect(args.onClick).toHaveBeenCalled();
 	});
@@ -81,7 +81,7 @@ describe('Overlay Component', () => {
 				<Overlay {...args} />
 			</ThemeProvider>
 		);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe(theme.components.overlay.color);
 	});
@@ -89,7 +89,7 @@ describe('Overlay Component', () => {
 	it('is themeable with theme prop', () => {
 		const args = { active: true };
 		const rendered = render(<Overlay {...args} theme={theme} />);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe(theme.components.overlay.color);
 	});
@@ -108,7 +108,7 @@ describe('Overlay Component', () => {
 				<Overlay {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const overlayElement = rendered.container.querySelector('.ss-overlay');
+		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.overlay.color);
 		expect(styles.backgroundColor).not.toBe(theme.components.overlay.color);

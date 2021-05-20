@@ -10,66 +10,44 @@ import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme } from '../../../providers/theme';
 
-const WHITE = /^(?:white|#fff(?:fff)?|rgba?\(\s*255\s*,\s*255\s*,\s*255\s*(?:,\s*1\s*)?\))$/i;
-
 const CSS = {
 	palette: ({ columns, gapSize, style }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
+			'& .ss__facet-palette-options__option': {
+				position: 'relative',
+				'&:hover': {
+					cursor: 'pointer',
+				},
+				'& .ss__facet-palette-options__option__palette': {
+					paddingTop: '100%',
+					border: '1px solid #EBEBEB',
+					borderRadius: '100%',
+					position: 'relative',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					'.ss__facet-palette-options__icon': {
+						position: 'absolute',
+						top: 0,
+						right: 0,
+						left: 0,
+						margin: 'auto',
+						bottom: 0,
+						textAlign: 'center',
+					},
+				},
+				'& .ss__facet-palette-options__option__value': {
+					display: 'block',
+					textAlign: 'center',
+					overflow: 'hidden',
+					textOverflow: 'ellipsis',
+					whiteSpace: 'nowrap',
+				},
+			},
 			...style,
-		}),
-	optionWrapper: () =>
-		css({
-			position: 'relative',
-			'&:hover': {
-				cursor: 'pointer',
-			},
-		}),
-	paletteOption: ({ color }) =>
-		css({
-			paddingTop: '100%',
-			background: color,
-			border: String(color).match(WHITE) ? '1px solid #EBEBEB' : `1px solid ${color}`,
-			webkitBorderRadius: '100%',
-			mozBorderRadius: '100%',
-			msBorderRadius: '100%',
-			oBorderRadius: '100%',
-			borderRadius: '100%',
-			position: 'relative',
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-		}),
-	icon: () =>
-		css({
-			position: 'absolute',
-			top: 0,
-			right: 0,
-			left: 0,
-			margin: 'auto',
-			bottom: 0,
-			textAlign: 'center',
-			fontSize: '12px',
-			zIndex: 2,
-		}),
-	iconBorder: () =>
-		css({
-			zIndex: 1,
-		}),
-	content: ({ theme }) =>
-		css({
-			display: 'block',
-			textAlign: 'center',
-			fontSize: '12px',
-			overflow: 'hidden',
-			textOverflow: 'ellipsis',
-			whiteSpace: 'nowrap',
-
-			'&.filtered': {
-				color: theme.colors?.primary,
-			},
 		}),
 };
 
@@ -80,12 +58,9 @@ export const FacetPaletteOptions = observer(
 
 		const props: FacetPaletteOptionsProps = {
 			// default props
-			disableStyles: false,
 			values: [],
-			hideLabel: false,
 			columns: 4,
 			gapSize: '8px',
-			hideIcon: false,
 			// global theme
 			...globalTheme?.components?.facetpaletteoptions,
 			// props
@@ -98,7 +73,7 @@ export const FacetPaletteOptions = observer(
 		const subProps: FacetPaletteOptionsSubProps = {
 			icon: {
 				// default props
-				className: 'ss-palette__icon',
+				className: 'ss__facet-palette-options__icon',
 				// global theme
 				...globalTheme?.components?.icon,
 				// inherited props
@@ -106,64 +81,42 @@ export const FacetPaletteOptions = observer(
 					disableStyles,
 				}),
 				// component theme overrides
-				...props.theme?.components?.icon, //TODO: should this be ...theme?.components?.icon
+				...props.theme?.components?.icon,
+			},
+			icon_bg: {
+				icon: 'close',
+				color: 'black',
+				size: '40%',
+			},
+			icon_fg: {
+				icon: 'close-thin',
+				color: 'white',
+				size: '30%',
 			},
 		};
 
 		return (
 			values?.length && (
-				<div
-					css={
-						!disableStyles &&
-						CSS.palette({
-							columns,
-							gapSize,
-							style,
-						})
-					}
-					className={classnames('ss-palette', className)}
-				>
-					{values.map((value) => {
-						return (
-							<a
-								css={!disableStyles && CSS.optionWrapper()}
-								onClick={onClick}
-								onFocus={() => {
-									previewOnFocus && value.preview && value.preview();
-								}}
-								{...valueProps}
-								{...value.url?.link}
-							>
-								<div css={!disableStyles && CSS.paletteOption({ color: value.value })} className={'ss-palette-option'}>
-									{/* TODO: fuuuuture add imageurl  */}
-									{!hideIcon && value.filtered && (
-										<>
-											{/* TODO look into subProps here - maybe change icon to support svg outlines? */}
-											<Icon icon={'close-thin'} color={'white'} {...subProps.icon} css={!disableStyles && CSS.icon()} />
-											<Icon
-												icon={'close'}
-												color={'black'}
-												size={'19px'}
-												{...subProps.icon}
-												css={
-													!disableStyles &&
-													css`
-														${CSS.icon()} ${CSS.iconBorder()}
-													`
-												}
-											/>
-										</>
-									)}
-								</div>
-
-								{!hideLabel && (
-									<span css={!disableStyles && CSS.content({ theme })} className={classnames('ss-label', { filtered: value.filtered })}>
-										{value.label}
-									</span>
+				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
+					{values.map((value) => (
+						<a
+							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+							onClick={onClick}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
+							{...valueProps}
+							{...value.url?.link}
+						>
+							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
+								{!hideIcon && value.filtered && (
+									<>
+										<Icon {...subProps.icon} {...subProps.icon_bg} />
+										<Icon {...subProps.icon} {...subProps.icon_fg} />
+									</>
 								)}
-							</a>
-						);
-					})}
+							</div>
+							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
+						</a>
+					))}
 				</div>
 			)
 		);
@@ -183,4 +136,6 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 
 interface FacetPaletteOptionsSubProps {
 	icon: IconProps;
+	icon_bg: IconProps;
+	icon_fg: IconProps;
 }

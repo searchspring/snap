@@ -24,7 +24,7 @@ export default {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ maxWidth: '300px', border: '1px solid lightgrey', padding: '8px' }}>
+			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
 		),
@@ -44,7 +44,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: 'scmq7n' } });
+const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
 
 const ObservableFacets = observer(({ args, controller }) => {
 	return <Facets {...args} facets={controller?.store?.facets} />;
