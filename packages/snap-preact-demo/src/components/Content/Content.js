@@ -1,7 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ThemeProvider } from '@searchspring/snap-preact-components';
+import { ThemeProvider, LoadingBar } from '@searchspring/snap-preact-components';
 
 import { customTheme } from '../../theme.js';
 import { StoreProvider } from '../../services/providers';
@@ -18,6 +18,8 @@ export class Content extends Component {
 			<ThemeProvider theme={customTheme}>
 				<StoreProvider store={store}>
 					<div>
+						<LoadingBar active={store.loading} />
+
 						<Header />
 
 						{this.props.store.pagination.totalResults ? <Results /> : this.props.store.pagination.totalResults === 0 && <NoResults />}
