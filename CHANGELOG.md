@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0 (2021-05-20)
+
+
+### Features
+
+* **domtargeter.ts:** default 'replace' action that replaces target elem ([#40](https://github.com/searchspring/snap/issues/40)) ([82f2435](https://github.com/searchspring/snap/commit/82f24359136cf92e5993f535f35593c344e65095))
+
+
+
+
+
 ## 0.1.14 (2021-05-18)
 
 **Note:** Version bump only for package @searchspring/snap
