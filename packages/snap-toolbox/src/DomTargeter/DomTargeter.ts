@@ -11,14 +11,11 @@ export type Target = {
 export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void;
 
 let targetedElems: Array<Element> = [];
-
-type DomQuery = (selector: string) => Array<Element>;
-
 export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
-	private styleBlockRefs = [];
+	private styleBlockRefs = {};
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -29,20 +26,22 @@ export class DomTargeter {
 
 		this.retarget();
 
-		document.addEventListener('DOMContentLoaded', () => {
+		this.document.addEventListener('DOMContentLoaded', () => {
 			this.retarget();
-			//clean up the style blocks we added earlier
-			if (this.styleBlockRefs.length) {
-				for (let i = 0; i < this.styleBlockRefs.length; i++) {
-					document.head.removeChild(this.styleBlockRefs[i]);
-				}
-			}
 		});
 	}
 
 	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
-			const elems = this.domQuery(target.selector).filter((elem) => !targetedElems.find((e) => e == elem));
+			const elems = this.domQuery(target.selector).filter((elem) => {
+				if (!targetedElems.find((e) => e == elem)) {
+					// only add style blocks to newly targeted elements
+					if (target.hideTarget) {
+						this.hideTarget(target.selector);
+					}
+					return true;
+				}
+			});
 
 			targetedElems = targetedElems.concat(elems);
 
@@ -50,36 +49,42 @@ export class DomTargeter {
 		});
 
 		targetElemPairs.forEach(({ target, elem }) => {
-			if (!target.inject) {
-				if (target.hideTarget) {
-					this.addHideTargetStyle(target);
-				}
-				//empty target selector by default
-				while (elem.firstChild && elem.removeChild(elem.firstChild));
-				this.onTarget(target, elem);
-			} else {
-				if (target.inject.action == 'replace' && target.hideTarget) {
-					this.addHideTargetStyle(target);
-				}
+			// remove style block we added earlier
+			if (target.hideTarget) {
+				this.unhideTarget(target.selector);
+			}
+
+			if (target.inject) {
 				const injectedElem = this.inject(elem, target);
 				this.onTarget(target, injectedElem, elem);
+			} else {
+				// empty target selector by default
+				while (elem.firstChild && elem.removeChild(elem.firstChild));
+				this.onTarget(target, elem);
 			}
 		});
 	}
 
-	//occasionally, our scripts excute before the element exists, In these cases we rerun this code after document ready,
-	//however, this can cause a slight delay in our display being rendered, thus causing a 'flash' of the native display showing briefly
-	//followed by us emptying it. To prevent this, we add a style block that will visibly hide the native display before it ever gets a chance to show
-	addHideTargetStyle = (target: Target) => {
-		/* Set the style */
-		var styles = `${target.selector} { visibility: hidden }`;
-		/* Create style document */
-		var css = window.document.createElement('style');
-		css.type = 'text/css';
-		css.appendChild(window.document.createTextNode(styles));
-		/* Append style to the tag name */
-		window.document.head.appendChild(css);
-		this.styleBlockRefs.push(css);
+	unhideTarget = (selector: string): void => {
+		if (this.styleBlockRefs[selector]) {
+			try {
+				this.document.head.removeChild(this.styleBlockRefs[selector]);
+				delete this.styleBlockRefs[selector];
+			} catch (err) {
+				// do nothing
+			}
+		}
+	};
+
+	hideTarget = (selector: string): void => {
+		if (this.styleBlockRefs[selector]) return;
+
+		const styles = `${selector} { visibility: hidden !important }`;
+		const styleBlock = this.document.createElement('style');
+		styleBlock.setAttribute('type', 'text/css');
+		styleBlock.appendChild(this.document.createTextNode(styles));
+		this.document.head.appendChild(styleBlock);
+		this.styleBlockRefs[selector] = styleBlock;
 	};
 
 	private domQuery(selector: string) {
@@ -123,7 +128,7 @@ export class DomTargeter {
 				}
 				break;
 			case 'replace':
-				elem.parentNode!.replaceChild(injectedElem, elem);
+				elem.parentNode.replaceChild(injectedElem, elem);
 				break;
 		}
 
