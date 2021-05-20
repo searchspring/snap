@@ -9,11 +9,11 @@ import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-m
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
+import { DomTargeter } from '@searchspring/snap-toolbox';
 
 /* local imports */
 import { Content } from './components/Content/Content';
 import { Sidebar } from './components/Sidebar/Sidebar';
-import { Loading } from './components/Loading/Loading';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { scrollToTop, timeout, ensure, until } from './middleware/functions';
@@ -62,41 +62,38 @@ cntrlr.on('init', async ({ controller }, next) => {
 		style: `color: ${controller.log.colors.indigo}; font-weight: bold;`,
 	});
 
-	controller.store.custom.version = versionText;
-
-	// add elements and inject when ready
-	const breadcrumbs = await until(() => {
-		return document.querySelector('.ss-lite-breadcrumbs ul');
-	});
-
-	const crumb = document.createElement('li');
-	crumb.className = 'snap-version';
-	breadcrumbs.append(crumb);
-
-	render(
-		<>
-			<i class="ss-lite-icon fas fa-chevron-right"></i>
-			<span style="font-size: 9px;">{` ${cntrlr.store.custom.version}`}</span>
-		</>,
-		document.querySelector('.snap-version')
-	);
-
 	await next();
 });
 
 cntrlr.on('init', async ({ controller }, next) => {
-	const loadingDiv = document.createElement('div');
-	loadingDiv.id = 'searchspring-loading';
+	new DomTargeter(
+		[
+			{
+				selector: '#searchspring-content',
+				component: <Content store={controller.store} />,
+				hideTarget: true,
+			},
+		],
+		(target, elem) => {
+			// run search after finding target
+			controller.search();
+			render(target.component, elem);
+		}
+	);
 
-	const body = await until(() => document.body);
-	body.append(loadingDiv);
+	new DomTargeter(
+		[
+			{
+				selector: '#searchspring-sidebar',
+				component: <Sidebar store={cntrlr.store} />,
+				hideTarget: true,
+			},
+		],
+		(target, elem) => {
+			render(target.component, elem);
+		}
+	);
 
-	await next();
-});
-
-// delaying the search
-cntrlr.on('afterSearch', async ({ controller, response }, next) => {
-	// await timeout(3333);
 	await next();
 });
 
@@ -135,18 +132,7 @@ cntrlr.on('afterStore', scrollToTop);
 // initialize controller
 cntrlr.init();
 
-// run initial search
-// cntrlr.urlManager.set('query', 'blue').go();
-cntrlr.search();
-
 // for testing purposes
 window.sssnap = {
 	search: cntrlr,
 };
-
-/*
-	render targets
- */
-
-render(<Sidebar store={cntrlr.store} />, document.getElementById('searchspring-sidebar'));
-render(<Content store={cntrlr.store} />, document.getElementById('searchspring-content'));

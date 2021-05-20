@@ -1,22 +1,21 @@
 export type Target = {
 	selector: string;
 	inject?: {
-		action: 'before' | 'after' | 'append' | 'prepend';
+		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
 	};
+	hideTarget?: boolean;
 	[any: string]: unknown;
 };
 
 export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void;
 
 let targetedElems: Array<Element> = [];
-
-type DomQuery = (selector: string) => Array<Element>;
-
 export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
+	private styleBlockRefs = {};
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -26,11 +25,23 @@ export class DomTargeter {
 		this.onTarget = onTarget;
 
 		this.retarget();
+
+		this.document.addEventListener('DOMContentLoaded', () => {
+			this.retarget();
+		});
 	}
 
 	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
-			const elems = this.domQuery(target.selector).filter((elem) => !targetedElems.find((e) => e == elem));
+			const elems = this.domQuery(target.selector).filter((elem) => {
+				if (!targetedElems.find((e) => e == elem)) {
+					// only add style blocks to newly targeted elements
+					if (target.hideTarget) {
+						this.hideTarget(target.selector);
+					}
+					return true;
+				}
+			});
 
 			targetedElems = targetedElems.concat(elems);
 
@@ -38,14 +49,43 @@ export class DomTargeter {
 		});
 
 		targetElemPairs.forEach(({ target, elem }) => {
+			// remove style block we added earlier
+			if (target.hideTarget) {
+				this.unhideTarget(target.selector);
+			}
+
 			if (target.inject) {
 				const injectedElem = this.inject(elem, target);
 				this.onTarget(target, injectedElem, elem);
 			} else {
+				// empty target selector by default
+				while (elem.firstChild && elem.removeChild(elem.firstChild));
 				this.onTarget(target, elem);
 			}
 		});
 	}
+
+	unhideTarget = (selector: string): void => {
+		if (this.styleBlockRefs[selector]) {
+			try {
+				this.document.head.removeChild(this.styleBlockRefs[selector]);
+				delete this.styleBlockRefs[selector];
+			} catch (err) {
+				// do nothing
+			}
+		}
+	};
+
+	hideTarget = (selector: string): void => {
+		if (this.styleBlockRefs[selector]) return;
+
+		const styles = `${selector} { visibility: hidden !important }`;
+		const styleBlock = this.document.createElement('style');
+		styleBlock.setAttribute('type', 'text/css');
+		styleBlock.appendChild(this.document.createTextNode(styles));
+		this.document.head.appendChild(styleBlock);
+		this.styleBlockRefs[selector] = styleBlock;
+	};
 
 	private domQuery(selector: string) {
 		return Array.from(this.document.querySelectorAll(selector));
@@ -86,6 +126,9 @@ export class DomTargeter {
 				} else {
 					elem.appendChild(injectedElem);
 				}
+				break;
+			case 'replace':
+				elem.parentNode.replaceChild(injectedElem, elem);
 				break;
 		}
 
