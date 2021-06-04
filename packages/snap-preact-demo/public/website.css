@@ -710,7 +710,9 @@ input[type='text'] {
     width: auto; } }
 
 
-
+.ss-toolbar-row {
+  overflow: hidden;
+}
 .ss-toolbar-col {
   display: inline-block;
   margin: 10px;

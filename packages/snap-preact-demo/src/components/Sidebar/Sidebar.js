@@ -1,10 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { withStore } from '../../services/providers';
-import { ThemeProvider, defaultTheme, FilterSummary, Select, Facets } from '@searchspring/snap-preact-components';
-
-import { StoreProvider } from '../../services/providers';
+import { ThemeProvider, defaultTheme, FilterSummary, Select, Facets, StoreProvider, withStore } from '@searchspring/snap-preact-components';
 
 @observer
 export class Sidebar extends Component {

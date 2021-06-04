@@ -1,7 +1,8 @@
 import deepmerge from 'deepmerge';
 
-import { AbstractController } from '../Abstract/AbstractController';
+import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
+import { AbstractController } from '../Abstract/AbstractController';
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 
@@ -22,48 +23,234 @@ const defaultConfig: SearchControllerConfig = {
 export class SearchController extends AbstractController {
 	config: SearchControllerConfig;
 
-	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger });
+	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on(
-			'beforeSearch',
-			async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-				search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			search.controller.store.loading = true;
 
-				await next();
-			}
-		);
+			await next();
+		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on(
-			'afterSearch',
-			async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-				await next();
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
 
-				const config = search.controller.config;
-				const redirectURL = search?.response?.merchandising?.redirect;
+			const config = search.controller.config;
+			const redirectURL = search?.response?.merchandising?.redirect;
 
-				if (redirectURL && config?.settings?.redirects?.merchandising) {
-					window.location.replace(redirectURL);
-					return false;
-				}
-
-				if (
-					config?.settings?.redirects?.singleResult &&
-					search?.response.search.query &&
-					search?.response?.pagination?.totalResults === 1 &&
-					!search?.response?.filters?.length
-				) {
-					window.location.replace(search?.response.results[0].mappings.core.url);
-					return false;
-				}
-				search.controller.store.loading = false;
+			if (redirectURL && config?.settings?.redirects?.merchandising) {
+				window.location.replace(redirectURL);
+				return false;
 			}
-		);
+
+			if (
+				config?.settings?.redirects?.singleResult &&
+				search?.response.search.query &&
+				search?.response?.pagination?.totalResults === 1 &&
+				!search?.response?.filters?.length
+			) {
+				window.location.replace(search?.response.results[0].mappings.core.url);
+				return false;
+			}
+			search.controller.store.loading = false;
+		});
+
+		const commonContext = {
+			context: {
+				website: {
+					trackingCode: this.client.globals.siteId,
+				},
+			},
+		};
+		this.tracker.track = {
+			...this.tracker?.track,
+			product: {
+				click: async (data) => {
+					if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
+						console.error(
+							`product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: product.click([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
+						);
+						return;
+					}
+					const payload = {
+						...commonContext,
+						type: BeaconType.CLICK,
+						category: BeaconCategory.INTERACTION,
+						event: {
+							intellisuggestData: data.intellisuggestData,
+							intellisuggestSignature: data.intellisuggestSignature,
+							href: data?.href ? `${data.href}` : undefined,
+						},
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+				view: async (data) => {
+					if (!data?.sku && !data?.childSku) {
+						console.error(
+							'product.view event: requires a valid sku and/or childSku. \nExample: product.view({ sku: "product123", childSku: "product123_a" })'
+						);
+						return;
+					}
+					const payload = {
+						...commonContext,
+						type: BeaconType.PRODUCT,
+						category: BeaconCategory.PAGEVIEW,
+						event: {
+							sku: data?.sku ? `${data.sku}` : undefined,
+							childSku: data?.childSku ? `${data.childSku}` : undefined,
+						},
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+			},
+			personalization: {
+				login: async (shopperId) => {
+					const payload = {
+						...commonContext,
+						type: BeaconType.LOGIN,
+						category: BeaconCategory.PERSONALIZATION,
+						event: {},
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: shopperId,
+					});
+					const event = await this.tracker.track.shopperLogin(shopperId);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: shopperId,
+						event: event,
+					});
+					return event;
+				},
+			},
+			cart: {
+				view: async (data) => {
+					if (!Array.isArray(data) || !data.length) {
+						console.error(
+							'cart.view event: parameter must be an array of cart items. \nExample: cart.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])'
+						);
+						return;
+					}
+					const eventPayload = data.map((item, index) => {
+						if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
+							console.error(
+								`cart.view event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: cart.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							);
+							return;
+						}
+						return {
+							sku: item?.sku ? `${item?.sku}` : undefined,
+							childSku: item?.childSku ? `${item.childSku}` : undefined,
+							qty: `${item.qty}`,
+							price: `${item.price}`,
+						};
+					});
+					const payload = {
+						...commonContext,
+						type: BeaconType.CART,
+						category: BeaconCategory.CARTVIEW,
+						event: eventPayload,
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+			},
+			order: {
+				transaction: async (data) => {
+					if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
+						console.error(
+							'order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], orderId: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
+						);
+						return;
+					}
+					const items = data.items.map((item, index) => {
+						if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
+							console.error(
+								`order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							);
+							return;
+						}
+						return {
+							sku: item?.sku ? `${item.sku}` : undefined,
+							childSku: item?.childSku ? `${item.childSku}` : undefined,
+							qty: `${item.qty}`,
+							price: `${item.price}`,
+						};
+					});
+					const eventPayload = {
+						items,
+						orderId: data?.orderId ? `${data.orderId}` : undefined,
+						total: data?.total ? `${data.total}` : undefined,
+						city: data?.city ? `${data.city}` : undefined,
+						state: data?.state ? `${data.state}` : undefined,
+						country: data?.country ? `${data.country}` : undefined,
+					};
+					const payload = {
+						...commonContext,
+						type: BeaconType.ORDER,
+						category: BeaconCategory.ORDERVIEW,
+						event: eventPayload,
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+			},
+		};
+		this.tracker.init();
 	}
 
 	get params(): Record<string, any> {

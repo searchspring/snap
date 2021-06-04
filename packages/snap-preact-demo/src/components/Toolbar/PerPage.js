@@ -1,9 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
-import { withStore } from '../../services/providers';
 
-import { Select } from '@searchspring/snap-preact-components';
-import { defaultTheme, ThemeProvider } from '@searchspring/snap-preact-components';
+import { Select, withStore } from '@searchspring/snap-preact-components';
 
 @withStore
 @observer

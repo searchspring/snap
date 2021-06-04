@@ -10,6 +10,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { DomTargeter } from '@searchspring/snap-toolbox';
+import { TrackingManager } from '@searchspring/snap-tracker';
 
 /* local imports */
 import { Content } from './components/Content/Content';
@@ -48,6 +49,7 @@ const cntrlr = new SearchController(cntrlrConfig, {
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
+	tracker: new TrackingManager(globals),
 });
 
 /*
@@ -133,6 +135,6 @@ cntrlr.on('afterStore', scrollToTop);
 cntrlr.init();
 
 // for testing purposes
-window.sssnap = {
+window.sssnap = window.sssnap || {
 	search: cntrlr,
 };

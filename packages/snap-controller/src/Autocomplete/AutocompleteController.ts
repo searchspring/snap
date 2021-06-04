@@ -1,7 +1,8 @@
 import deepmerge from 'deepmerge';
 
-import { AbstractController } from '../Abstract/AbstractController';
+import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
+import { AbstractController } from '../Abstract/AbstractController';
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
@@ -24,8 +25,8 @@ const defaultConfig: AutocompleteControllerConfig = {
 export class AutocompleteController extends AbstractController {
 	config: AutocompleteControllerConfig;
 
-	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger });
+	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
@@ -42,29 +43,98 @@ export class AutocompleteController extends AbstractController {
 		this.store.link(this);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on(
-			'beforeSearch',
-			async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-				search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			search.controller.store.loading = true;
 
-				await next();
-			}
-		);
+			await next();
+		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on(
-			'afterSearch',
-			async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-				await next();
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
 
-				search.controller.store.loading = false;
+			search.controller.store.loading = false;
 
-				// cancel search if no input or query doesn't match current urlState
-				if (search.response.autocomplete.query != search.controller.urlManager.state.query) {
-					return false;
-				}
+			// cancel search if no input or query doesn't match current urlState
+			if (search.response.autocomplete.query != search.controller.urlManager.state.query) {
+				return false;
 			}
-		);
+		});
+
+		const commonContext = {
+			context: {
+				website: {
+					trackingCode: this.client.globals.siteId,
+				},
+			},
+		};
+		this.tracker.track = {
+			...this.tracker?.track,
+			product: {
+				click: async (data) => {
+					if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
+						console.error(
+							`product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: product.click([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
+						);
+						return;
+					}
+					const payload = {
+						...commonContext,
+						type: BeaconType.CLICK,
+						category: BeaconCategory.INTERACTION,
+						event: {
+							intellisuggestData: data.intellisuggestData,
+							intellisuggestSignature: data.intellisuggestSignature,
+							href: data?.href ? `${data.href}` : undefined,
+						},
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+				view: async (data) => {
+					if (!data?.sku && !data?.childSku) {
+						console.error(
+							'product.view event: requires a valid sku and/or childSku. \nExample: product.view({ sku: "product123", childSku: "product123_a" })'
+						);
+						return;
+					}
+					const payload = {
+						...commonContext,
+						type: BeaconType.PRODUCT,
+						category: BeaconCategory.PAGEVIEW,
+						event: {
+							sku: data?.sku ? `${data.sku}` : undefined,
+							childSku: data?.childSku ? `${data.childSku}` : undefined,
+						},
+					};
+					await this.eventManager.fire('beforeBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+					});
+					const event = this.tracker.event(payload);
+					await this.eventManager.fire('afterBeaconEvent', {
+						controller: this,
+						payload: payload,
+						params: data,
+						event: event,
+					});
+					return event;
+				},
+			},
+		};
+		this.tracker.init();
 	}
 
 	get params(): Record<string, any> {

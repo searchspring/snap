@@ -1,3 +1,4 @@
+import { TrackingManager } from '@searchspring/snap-tracker';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
 import type { ControllerServices } from '../types';
@@ -18,9 +19,10 @@ export abstract class AbstractController {
 	public eventManager: EventManager;
 	public profiler;
 	public log;
+	public tracker: TrackingManager;
 	private _environment = ControllerEnvironment.PRODUCTION;
 
-	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
+	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		if (typeof config != 'object' || typeof config.id != 'string') {
 			throw new Error(`Invalid config passed to controller. The "id" attribute must be a string.`);
 		}
@@ -56,7 +58,10 @@ export abstract class AbstractController {
 		if (typeof logger != 'object' || typeof logger.dev != 'function') {
 			throw new Error(`Invalid service 'logger' passed to controller. Missing "dev" function.`);
 		}
-
+		//TODO: add when tracker is required in ControllerServices (currently optional as FinderController doesn't contain tracking)
+		// if (typeof tracker != 'object' || typeof tracker.track != 'object') {
+		// 	throw new Error(`Invalid service 'tracking' passed to controller. Missing "track" object.`);
+		// }
 		this.config = config;
 		this.client = client;
 		this.store = store;
@@ -64,6 +69,7 @@ export abstract class AbstractController {
 		this.eventManager = eventManager;
 		this.profiler = profiler;
 		this.log = logger;
+		this.tracker = tracker;
 
 		// configure the logger
 		this.log.setGroup(this.config.id);

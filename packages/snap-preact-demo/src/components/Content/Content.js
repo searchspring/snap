@@ -1,13 +1,9 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ThemeProvider, LoadingBar, defaultTheme } from '@searchspring/snap-preact-components';
-
-import { StoreProvider } from '../../services/providers';
-
+import { ThemeProvider, LoadingBar, defaultTheme, StoreProvider } from '@searchspring/snap-preact-components';
 import { Header } from '../Header/Header';
 import { Results, NoResults } from '../Results/Results';
-
 @observer
 export class Content extends Component {
 	render() {
