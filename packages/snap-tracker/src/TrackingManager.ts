@@ -20,7 +20,6 @@ import {
 	ProductViewEvent,
 	CartViewEvent,
 	OrderTransactionEvent,
-	RecommendationsEvent,
 } from './types';
 
 const SEND_BEACON_EVENTS_INTERVAL = 10000; // send beacon events from pool every 10 seconds
@@ -59,7 +58,7 @@ export class TrackingManager {
 		this.context = {
 			...this.getUserId(),
 			...this.getSessionId(),
-			...this.getShopperId,
+			...this.getShopperId(),
 			pageLoadId: uuidv4(),
 			website: {
 				trackingCode: this.globals?.siteId || undefined,
@@ -164,7 +163,6 @@ export class TrackingManager {
 	};
 
 	init = (): void => {
-		// this.exposeWindowFunctions();
 		setInterval(this.sendEvents, SEND_BEACON_EVENTS_INTERVAL);
 	};
 
@@ -273,19 +271,4 @@ export class TrackingManager {
 			});
 		}
 	};
-
-	// exposeWindowFunctions = (): void => {
-	// window.sssnap = window.sssnap || {};
-	// window.sssnap.track = window.sssnap.track || this.track;
-	// }
 }
-
-// TODO: move this elsewhere?
-// declare global {
-//     interface Window {
-//         sssnap?: {
-//             track?: SearchTrackMethods | AutocompleteTrackMethods | RecommendationsTrackMethods | GlobalTrackMethods;
-
-//         },
-//     }
-// }

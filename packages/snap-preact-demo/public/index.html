@@ -93,6 +93,7 @@
 					<li><a href="//searchspring.com/blog" target="_blank">Resources</a></li>
 					<li><a href="//searchspring.com/price-quote-request" target="_blank">Pricing</a></li>
 					<li><a href="//searchspring.zendesk.com/hc/en-us/requests/new" target="_blank">Support</a></li>
+					<li><a id="login" >Login</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -169,6 +170,28 @@
 			</div>
 		</div>
 	</footer>
+	<div id="login-modal" style="display: none;">
+		<h3>Login</h3>
+		<label>
+			Shopper ID: 
+			<input autofocus type="text"/>
+		</label>
+		
+		<button onClick="setShopperID()">Set Shopper ID</button>
+	</div>
+	<script>
+		document.getElementById("login").addEventListener("click", function(e) {
+			document.getElementById("login-modal").style.display = "block";
+			document.querySelector("#login-modal input").focus();
+		})
+		function setShopperID(){
+			var id = document.querySelector("#login-modal input").value;
+			if(id) {
+				window.sssnap.search.tracker.track.personalization.login(id);
+				document.getElementById("login-modal").style.display = "none";
+			}
+		}
+	</script>
 </body>
 
 </html>

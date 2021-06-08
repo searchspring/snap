@@ -35,6 +35,7 @@ import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-m
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
+import { TrackingManager } from '@searchspring/snap-tracker';
 
 const searchController = new SearchController(searchConfig, {
 	client: new SnapClient({ siteId: 'abc123' }),
@@ -42,7 +43,8 @@ const searchController = new SearchController(searchConfig, {
 	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
-	logger: new Logger()
+	logger: new Logger(),
+	tracker: new TrackingManager(),
 });
 ```
 

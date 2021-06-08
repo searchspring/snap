@@ -29,94 +29,20 @@ npm install --save @searchspring/snap-tracker
 import { TrackingManager } from '@searchspring/snap-tracker';
 ```
 ## Controller usage
-Snap Tracker is a dependency of Snap Controller and it is recommended to use methods of the controller to invoke events to the TrackingManager. Additionally, different events exist for the different controllers - see the Controller documentation for more details.
-
-## Standalone usage
-```typescript
-const tracker = new TrackingManager();
-
-tracker.setNamespace('namespace');
-tracker.init();
-const payload = {};
-tracker.event(payload);
-```
-
-## TrackingManager
-
-### `globals` property
-When constructing an instance of `TrackingManager`, an optional object can be provided to its constructor. This object contains a `siteId` key and value. This is required if TrackingManager will be utilized in standalone usage (not used as a service of any Snap Controller)
-
-This is not required if you will be using Snap Tracker as a service with any Snap Controller. Each controller will use the siteId provided in the Snap Client (`@searchspring/snap-client`) service instead. 
-
-```typescript
-const globals = { siteId: 'abc123' };
-const tracker = new TrackingManager(globals);
-console.log(tracker.globals === globals) // true
-```
-
-### `localStorage` property
-A reference to the StorageStore object for accessing local storage
-
-```typescript
-const tracker = new TrackingManager();
-tracker.localStorage.set('key', 'value')
-tracker.localStorage.get('key') // 'value'
-```
-
-### `sessionStorage` property
-A reference to the StorageStore object for accessing session storage
-
-```typescript
-const tracker = new TrackingManager();
-tracker.sessionStorage.set('key', 'value')
-tracker.sessionStorage.get('key') // 'value'
-```
-
-### `context` property
-The `context` property is generated at the time of instantiating TrackingManager. It is passed along to the Beacon endpoint and contains the following:
-
-`userId` - unique ID to identify the user, persisted in a cookie/local storage fallback
-
-`pageLoadId` - unique ID generated at the time of instantiating TrackingManager
-
-`sessionId` - unique ID generated at the start of a new browser session, persisted in session storage/cookie fallback
-
-`shopperId` - unique ID provided set via the SearchController `SearchController.tracker.track.personalization.login` event and then persisted in a cookie
-
-`website.trackingCode` - unique `siteId` found in the Searchspring Management Console (SMC). If TrackingManager is in standalone usage, the `siteId` is required to be provided in the `gloabls` object when instantiating TrackingManager. Otherwise, when used as a service with any Snap Controller, the siteId will be set by the controller. 
-
-```typescript
-context: {
-    userId: '0560d7e7-148a-4b1d-b12c-924f164d3d00',
-    pageLoadId: 'cfb75606-c15b-4f25-a711-9de2c5d22660',
-    sessionId: 'f4b25c96-9ca1-4ac6-ad04-f5ce933f8b61',
-    shopperId: 'shopper0001',
-    website: {
-        trackingCode: 'abc123',
-    },
-}
-```
-
-### `isSending` property
-The `isSending` property contains the return value from `setTimeout` and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and `isSending` is still defined, the incoming event will be added to the event queue. 
-
-### `namespace` property
-The `namespace` property contains the namespace for this TrackingManager. This should be set using the `setNamespace` method if a bundle contains multiple instances of TrackingManager. This is the namespace the event queue.
-
-### `track` property
-The `track` property contains various tracking events. If TrackingManager will be utilized in standalone usage, the `track` property will only contain a single function `track.shopperLogin`
-
-```typescript
-const tracker = new TrackingManager(),
-tracker.track.shopperLogin()
-```
-
-Additional functions are added to the `track` object from various Snap Controllers.
+Snap Tracker is a dependency of Snap Controller and it is recommended to use methods of the controller to invoke events to the TrackingManager. 
 
 ### SearchController `track` methods
 
 #### Product Click `track.product.click`
-Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track()` method - available on each `result` store object. If invoking directly, the `intellisuggestData` and `intellisuggestSignature` values are returned from SearchSpring's Search API on each `result.attributes` object. 
+Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track()` method - available on each `result` store object. 
+
+```jsx
+searchController.store.results.map(result)=>{(
+    <a href={core.url} onMouseDown={(e)=>{result.track(e)}}>
+)}
+```
+
+If invoking directly, the `intellisuggestData` and `intellisuggestSignature` values are returned from SearchSpring's Search API on each `result.attributes` object. An optional `href` value can also be provided. 
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
@@ -132,12 +58,6 @@ searchController.tracker.track.product.click({
     intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
     href: '/product123',
 })
-```
-
-```jsx
-SearchController.store.results.map(result)=>{(
-    <a href={core.url} onMouseDown={(e)=>{result.track(e)}}>
-)}
 ```
 
 #### Product View `track.product.view`
@@ -225,6 +145,88 @@ See SearchController Product Click
 #### Product View `track.product.view`
 See SearchControler Product View
 
+
+## Standalone usage
+```typescript
+const tracker = new TrackingManager();
+
+tracker.setNamespace('namespace');
+tracker.init();
+const payload = {};
+tracker.event(payload);
+```
+
+## TrackingManager
+
+### `globals` property
+When constructing an instance of `TrackingManager`, an optional object can be provided to its constructor. This object contains a `siteId` key and value. This is required if TrackingManager will be utilized in standalone usage (not used as a service of any Snap Controller)
+
+This is not required if you will be using Snap Tracker as a service with any Snap Controller. Each controller will use the siteId provided in the Snap Client (`@searchspring/snap-client`) service instead. 
+
+```typescript
+const globals = { siteId: 'abc123' };
+const tracker = new TrackingManager(globals);
+console.log(tracker.globals === globals) // true
+```
+
+### `localStorage` property
+A reference to the StorageStore object for accessing local storage
+
+```typescript
+const tracker = new TrackingManager();
+tracker.localStorage.set('key', 'value')
+tracker.localStorage.get('key') // 'value'
+```
+
+### `sessionStorage` property
+A reference to the StorageStore object for accessing session storage
+
+```typescript
+const tracker = new TrackingManager();
+tracker.sessionStorage.set('key', 'value')
+tracker.sessionStorage.get('key') // 'value'
+```
+
+### `context` property
+The `context` property is generated at the time of instantiating TrackingManager. It is passed along to the Beacon endpoint and contains the following:
+
+`userId` - unique ID to identify the user, persisted in a cookie/local storage fallback
+
+`pageLoadId` - unique ID generated at the time of instantiating TrackingManager
+
+`sessionId` - unique ID generated at the start of a new browser session, persisted in session storage/cookie fallback
+
+`shopperId` - unique ID provided set via the SearchController `SearchController.tracker.track.personalization.login` event and then persisted in a cookie
+
+`website.trackingCode` - unique `siteId` found in the Searchspring Management Console (SMC). If TrackingManager is in standalone usage, the `siteId` is required to be provided in the `gloabls` object when instantiating TrackingManager. Otherwise, when used as a service with any Snap Controller, the siteId will be set by the controller. 
+
+```typescript
+context: {
+    userId: '0560d7e7-148a-4b1d-b12c-924f164d3d00',
+    pageLoadId: 'cfb75606-c15b-4f25-a711-9de2c5d22660',
+    sessionId: 'f4b25c96-9ca1-4ac6-ad04-f5ce933f8b61',
+    shopperId: 'shopper0001',
+    website: {
+        trackingCode: 'abc123',
+    },
+}
+```
+
+### `isSending` property
+The `isSending` property contains the return value from `setTimeout` and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and `isSending` is still defined, the incoming event will be added to the event queue. 
+
+### `namespace` property
+The `namespace` property contains the namespace for this TrackingManager. This should be set using the `setNamespace` method if a bundle contains multiple instances of TrackingManager. This is the namespace the event queue.
+
+### `track` property
+The `track` property contains various tracking events. If TrackingManager will be utilized in standalone usage, the `track` property will only contain a single function `track.shopperLogin`
+
+```typescript
+const tracker = new TrackingManager(),
+tracker.track.shopperLogin()
+```
+
+Additional functions are added to the `track` object from various Snap Controllers.
 
 ### `setNamespace` method
 Programatically set the namespace after construction. 
@@ -341,3 +343,32 @@ const payload = {
 tracker.event(payload)
 ```
 
+#### Event Payload
+
+A beacon event payload object provided to the `event` method must contain the following:
+
+`type` - required BeaconType enum value
+
+`category` - required BeaconCategory enum value
+
+`event` - object containing event data
+
+`context.website.trackingCode` - object specifying a different siteId (required if TrackingManager was constructed without `globals.siteId`)
+
+```typescript
+const payload = {
+    type: BeaconType.CLICK,
+    category: BeaconCategory.INTERACTION,
+    event: {
+        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+        href: '/product123',
+    },
+    context: {
+        website: {
+            trackingCode: 'abc123',
+        },
+    },
+};
+
+```
