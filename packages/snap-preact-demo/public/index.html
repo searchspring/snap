@@ -187,7 +187,11 @@
 		function setShopperID(){
 			var id = document.querySelector("#login-modal input").value;
 			if(id) {
-				window.sssnap.search.tracker.track.personalization.login(id);
+				window.searchspring.track.shopper.login({
+					data: {
+						id: id
+					}
+				});
 				document.getElementById("login-modal").style.display = "none";
 			}
 		}

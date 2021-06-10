@@ -7,6 +7,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import { AutocompleteStore, SearchStore } from '@searchspring/snap-store-mobx';
+import { Tracker } from '@searchspring/snap-tracker';
 
 export class Snapify {
 	static autocomplete(config: SnapifyACConfig): AutocompleteController {
@@ -21,6 +22,7 @@ export class Snapify {
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
+		const tracker = new Tracker(config.globals);
 
 		const searchControllerConfig: AutocompleteControllerConfig = {
 			id: 'autocomplete',
@@ -37,6 +39,7 @@ export class Snapify {
 			eventManager,
 			profiler,
 			logger,
+			tracker,
 		});
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
@@ -61,6 +64,7 @@ export class Snapify {
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
+		const tracker = new Tracker(config.globals);
 
 		const searchControllerConfig = {
 			id: 'search',
@@ -78,6 +82,7 @@ export class Snapify {
 			eventManager,
 			profiler,
 			logger,
+			tracker,
 		});
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {

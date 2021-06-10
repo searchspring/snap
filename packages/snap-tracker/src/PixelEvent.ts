@@ -1,7 +1,7 @@
 import { featureFlags } from '@searchspring/snap-toolbox';
 import {
 	ProductViewEvent,
-	TrackClickEvent,
+	ProductClickEvent,
 	RecommendationsEvent,
 	OrderTransactionEvent,
 	BeaconPayload,
@@ -13,7 +13,7 @@ export class PixelEvent {
 	endpoint: string;
 	src: string;
 	img: HTMLImageElement;
-	event: ProductViewEvent | CartViewEvent[] | OrderTransactionEvent | RecommendationsEvent | TrackClickEvent | Record<string, never>;
+	event: ProductViewEvent | CartViewEvent | OrderTransactionEvent | RecommendationsEvent | ProductClickEvent | Record<string, never>;
 
 	constructor(payload: BeaconPayload) {
 		this.endpoint = `https://d3cgm8py10hi0z.cloudfront.net/is.gif`;
@@ -39,23 +39,23 @@ export class PixelEvent {
 				}
 				break;
 			case BeaconCategory.CARTVIEW:
-				this.event = this.event as CartViewEvent[];
+				this.event = this.event as CartViewEvent;
 				this.src += '&a=basket';
-				this.event.forEach((item) => {
+				this.event.items.forEach((item) => {
 					if (item.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}
 				});
 				break;
 			case BeaconCategory.ORDERVIEW:
-				this.event = this.event as OrderTransactionEvent;
+				const { orderId, total, city, state, country, items } = this.event as OrderTransactionEvent;
 				this.src += `&a=sale`;
-				if (this.event?.orderId) this.src += `&orderId=${encodeURIComponent(this.event.orderId)}`;
-				if (this.event?.total) this.src += `&total=${encodeURIComponent(this.event.total)}`;
-				if (this.event?.city) this.src += `&city=${encodeURIComponent(this.event.city)}`;
-				if (this.event?.state) this.src += `&state=${encodeURIComponent(this.event.state)}`;
-				if (this.event?.country) this.src += `&country=${encodeURIComponent(this.event.country)}`;
-				this.event.items.forEach((item) => {
+				if (orderId) this.src += `&orderId=${encodeURIComponent(orderId)}`;
+				if (total) this.src += `&total=${encodeURIComponent(total)}`;
+				if (city) this.src += `&city=${encodeURIComponent(city)}`;
+				if (state) this.src += `&state=${encodeURIComponent(state)}`;
+				if (country) this.src += `&country=${encodeURIComponent(country)}`;
+				items.forEach((item) => {
 					if (item.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}

@@ -1,6 +1,6 @@
 import { BeaconEvent } from './BeaconEvent';
 
-export type TrackingManagerGlobals = {
+export type TrackerGlobals = {
 	siteId: string;
 };
 
@@ -11,10 +11,10 @@ export interface BeaconPayload {
 	meta?: BeaconMeta;
 	event:
 		| ProductViewEvent
-		| CartViewEvent[]
+		| CartViewEvent
 		| OrderTransactionEvent
 		| RecommendationsEvent
-		| TrackClickEvent
+		| ProductClickEvent
 		| CustomBeaconEvent
 		| Record<string, never>;
 	id?: string;
@@ -67,11 +67,18 @@ export interface BeaconMeta {
 	};
 }
 
+export interface ShopperLoginEvent {
+	id: string;
+}
 export interface ProductViewEvent {
 	sku?: string;
 	childSku?: string;
 }
 export interface CartViewEvent {
+	items: Product[];
+}
+
+export interface Product {
 	sku: string;
 	childSku?: string;
 	qty: string | number;
@@ -85,7 +92,7 @@ export interface OrderTransactionEvent {
 	state?: string;
 	country?: string;
 
-	items: CartViewEvent[];
+	items: Product[];
 }
 
 export interface RecommendationsEvent {
@@ -114,8 +121,7 @@ export interface RecommendationsEvent {
 		placement?: string;
 	};
 }
-
-export interface TrackClickEvent {
+export interface ProductClickEvent {
 	intellisuggestData: string;
 	intellisuggestSignature: string;
 	href?: string;
@@ -125,34 +131,25 @@ export interface CustomBeaconEvent {
 	[key: string]: any;
 }
 
-export interface GlobalTrackMethods {
-	shopperLogin: (shopperId: string) => Promise<BeaconEvent>;
-}
-
-export interface SearchTrackMethods extends GlobalTrackMethods {
-	product: {
-		click: (data: TrackClickEvent) => Promise<BeaconEvent>;
-		view: (data: ProductViewEvent) => Promise<BeaconEvent>;
+export interface TrackMethods {
+	event: (payload: BeaconPayload) => BeaconEvent;
+	shopper: {
+		login: (details: { data: ShopperLoginEvent; siteId?: string }) => Promise<BeaconEvent>;
 	};
-	personalization: {
-		login: (shopperId: string) => Promise<BeaconEvent>;
+	product: {
+		view: (details: { data: ProductViewEvent; siteId?: string }) => Promise<BeaconEvent>;
+		click: (details: { data: ProductClickEvent; siteId?: string }) => Promise<BeaconEvent>;
 	};
 	cart: {
-		view: (data: CartViewEvent[]) => Promise<BeaconEvent>;
+		view: (details: { data: CartViewEvent; siteId?: string }) => Promise<BeaconEvent>;
 	};
 	order: {
-		transaction: (data: OrderTransactionEvent) => Promise<BeaconEvent>;
+		transaction: (details: { data: OrderTransactionEvent; siteId?: string }) => Promise<BeaconEvent>;
 	};
 }
 
-export interface AutocompleteTrackMethods extends GlobalTrackMethods {
-	product: {
-		click: (data: TrackClickEvent) => Promise<BeaconEvent>;
-		view: (data: ProductViewEvent) => Promise<BeaconEvent>;
-	};
-}
-
-export interface RecommendationsTrackMethods extends GlobalTrackMethods {
-	todo: string;
-	// TODO: this
+declare global {
+	interface Window {
+		searchspring?: any;
+	}
 }

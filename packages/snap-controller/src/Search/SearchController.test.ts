@@ -6,7 +6,7 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
-import { TrackingManager, BeaconCategory, BeaconType, SearchTrackMethods } from '@searchspring/snap-tracker';
+import { Tracker, BeaconCategory, BeaconType } from '@searchspring/snap-tracker';
 
 import { SearchController } from './SearchController';
 import { MockSnapClient } from '../__mocks__/MockSnapClient';
@@ -30,7 +30,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 		const searchfn = jest.spyOn(controller, 'search');
 		const initfn = jest.spyOn(controller, 'init');
@@ -66,7 +66,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -95,7 +95,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -131,7 +131,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		expect(controller.config.settings.redirects.merchandising).toBe(false);
@@ -166,7 +166,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 
 			controller.on(event, () => false); // return false to stop middleware
@@ -193,7 +193,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 		const landingPageCampaign = '35x12-50r20-mud-tires';
 		controller.urlManager = controller.urlManager.set('tag', landingPageCampaign);
@@ -208,7 +208,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		const page = 2;
@@ -224,7 +224,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		const pageSize = 72;
@@ -240,7 +240,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		const oq = 'wheel';
@@ -256,7 +256,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		const rq = 'wheel';
@@ -272,7 +272,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		const badsort = { price: 'ASC' };
@@ -292,7 +292,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.urlManager = controller.urlManager.set('filter', { color: 'blue' });
@@ -308,7 +308,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = {
 				intellisuggestData: 'abc',
@@ -331,7 +331,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = {
 				sku: 'abc123',
@@ -353,7 +353,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = 'abc123';
 			const event = await (controller.tracker.track as SearchTrackMethods).personalization.login(data);
@@ -372,7 +372,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = [
 				{
@@ -404,7 +404,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = {
 				orderId: '123456',
@@ -430,7 +430,7 @@ describe('Search Controller', () => {
 		});
 
 		it('init method was invoked', async () => {
-			const tracker = new TrackingManager(globals);
+			const tracker = new Tracker(globals);
 			const init = jest.spyOn(tracker, 'init');
 
 			expect(init).not.toHaveBeenCalled();

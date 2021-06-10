@@ -72,9 +72,11 @@ class Product {
 			const { intellisuggestData, intellisuggestSignature } = result.attributes;
 			const href = e?.target?.href || result.mappings.core?.url || undefined;
 			controller.tracker.track.product.click({
-				intellisuggestData,
-				intellisuggestSignature,
-				href,
+				data: {
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
+				},
 			});
 		};
 

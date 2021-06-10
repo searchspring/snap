@@ -1,3 +1,3 @@
-export { TrackingManager } from './TrackingManager';
+export { Tracker } from './Tracker';
 
 export * from './types';

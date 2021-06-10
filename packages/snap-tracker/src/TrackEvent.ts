@@ -1,4 +1,4 @@
-import { TrackClickEvent, BeaconPayload } from './types';
+import { ProductClickEvent, BeaconPayload } from './types';
 
 export class TrackEvent {
 	intellisuggestData: string;
@@ -10,13 +10,13 @@ export class TrackEvent {
 	img: HTMLImageElement;
 
 	constructor(payload: BeaconPayload) {
-		payload.event = payload.event as TrackClickEvent;
+		payload.event = payload.event as ProductClickEvent;
 
 		if (!payload.context || !payload.event) {
-			throw 'TrackEvent: object parameter required a valid `context` BeaconContext and `event` TrackClickEvent objects';
+			throw 'TrackEvent: object parameter required a valid `context` BeaconContext and `event` ProductClickEvent objects';
 		}
 		if (!payload.event?.intellisuggestData || !payload.event?.intellisuggestSignature) {
-			throw 'TrackEvent: object parameter `event` TrackClickEvent object requires valid intellisuggestData and intellisuggestSignature values. These are the corresponding attributes in the Searchspring API response.';
+			throw 'TrackEvent: object parameter `event` ProductClickEvent object requires valid intellisuggestData and intellisuggestSignature values. These are the corresponding attributes in the Searchspring API response.';
 		}
 
 		this.intellisuggestData = payload.event.intellisuggestData;

@@ -207,8 +207,9 @@
     </footer>
     <script>
         try {
-            window.sssnap.search.tracker.track.order.transaction({
-                items: [
+            window.searchspring.track.order.transaction({
+                data: {
+                    items: [
                     {
                         sku: "C-BP-G7-B1469",
                         qty: "1",
@@ -220,6 +221,7 @@
                         price: "39"
                     },
                 ]
+                }
             })
         } catch (e) { }
     </script>

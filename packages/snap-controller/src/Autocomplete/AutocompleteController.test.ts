@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { TrackingManager, BeaconCategory, BeaconType, AutocompleteTrackMethods } from '@searchspring/snap-tracker';
+import { Tracker, BeaconCategory, BeaconType } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -37,7 +37,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -46,7 +46,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -55,7 +55,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -64,7 +64,7 @@ const badArgs = [
 		eventManager: { events: null, fire: null, on: null },
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -79,7 +79,7 @@ const badArgs = [
 		},
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -88,7 +88,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: {},
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -102,7 +102,7 @@ const badArgs = [
 			create: null,
 		},
 		logger: new Logger(),
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 	{
 		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
@@ -111,7 +111,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: {},
-		tracker: new TrackingManager(globals),
+		tracker: new Tracker(globals),
 	},
 ];
 
@@ -136,7 +136,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -160,7 +160,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -183,7 +183,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -207,7 +207,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -240,7 +240,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new TrackingManager(globals),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -290,7 +290,7 @@ describe('Autocomplete Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = {
 				intellisuggestData: 'abc',
@@ -313,7 +313,7 @@ describe('Autocomplete Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new TrackingManager(globals),
+				tracker: new Tracker(globals),
 			});
 			const data = {
 				sku: 'abc123',

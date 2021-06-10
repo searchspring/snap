@@ -37,7 +37,7 @@ import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-m
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
-import { TrackingManager } from '@searchspring/snap-tracker';
+import { Tracker } from '@searchspring/snap-tracker';
 
 const autocompleteController = new AutocompleteController(autocompleteConfig, {
 		client: new SnapClient(globals, clientConfig),
@@ -46,7 +46,7 @@ const autocompleteController = new AutocompleteController(autocompleteConfig, {
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new TrackingManager(),
+		tracker: new Tracker(),
 	}
 ));
 ```

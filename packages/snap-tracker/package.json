@@ -20,14 +20,10 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.1.13",
-		"@searchspring/snap-store-mobx": "^0.1.13",
+		"@searchspring/snap-toolbox": "^0.2.0",
+		"@searchspring/snap-store-mobx": "^0.2.0",
 		"deepmerge": "^4.2.2",
 		"uuid": "^8.3.2"
-	},
-	"devDependencies": {
-		"@searchspring/snap-toolbox": "^0.1.13",
-		"@searchspring/snap-store-mobx": "^0.1.13"
 	},
 	"sideEffects": false,
 	"files": [

@@ -5,6 +5,7 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
 
 import { FinderController } from './FinderController';
 import { MockSnapClient } from '../__mocks__/MockSnapClient';
@@ -41,6 +42,7 @@ describe('Finder Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(),
 		});
 		controller.client.mockDataFile = 'finder.include.ss_accessory';
 		controller.init();
@@ -77,6 +79,7 @@ describe('Finder Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(),
 		});
 		controller.init();
 		await controller.search();
@@ -110,6 +113,7 @@ describe('Finder Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
+				tracker: new Tracker(),
 			});
 
 			controller.on(event, () => false); // return false to stop middleware
@@ -131,6 +135,7 @@ describe('Finder Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(),
 		});
 		controller.init();
 		await controller.search();

@@ -1,4 +1,4 @@
-import { TrackingManager } from './TrackingManager';
+import { Tracker } from './Tracker';
 import { BeaconCategory, BeaconType } from './types';
 
 const globals = {
@@ -7,7 +7,7 @@ const globals = {
 
 describe('Beacon Manager', () => {
 	it('can create instance', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		expect(beacon.globals).toStrictEqual(globals);
 		expect(beacon.localStorage).toBeDefined();
@@ -25,7 +25,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke setNamespace', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		expect(beacon.localStorage.key).toStrictEqual('ss-beacon-local');
 		expect(beacon.sessionStorage.key).toStrictEqual('ss-beacon-session');
@@ -38,7 +38,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke track.shopperLogin', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 		const shopperLogin = jest.spyOn(beacon.track, 'shopperLogin');
 
 		const shopperId = 'abc123';
@@ -49,7 +49,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke product.click event method', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -73,7 +73,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke product.view event method', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -96,7 +96,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke cart.view event method', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -129,7 +129,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke cart.view event method without item skus', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -160,7 +160,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke order.transaction event method', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -194,7 +194,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke order.transaction event method without item skus', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const eventFn = jest.spyOn(beacon, 'event');
 
@@ -227,7 +227,7 @@ describe('Beacon Manager', () => {
 	});
 
 	it('can invoke init method', async () => {
-		const beacon = new TrackingManager(globals);
+		const beacon = new Tracker(globals);
 
 		const initFn = jest.spyOn(beacon, 'init');
 		const setIntervalFn = jest.spyOn(global.window, 'setInterval');
