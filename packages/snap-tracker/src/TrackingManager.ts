@@ -190,16 +190,16 @@ export class TrackingManager {
 			try {
 				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
 				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
-				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
 			}
 		} else if (featureFlags.cookies) {
 			// use cookies if sessionStorage is not enabled and only reset cookie if new session to keep expiration
-			sessionId = cookies.get(SESSIONID_STORAGE_NAME) || uuidv4();
+			sessionId = cookies.get(SESSIONID_STORAGE_NAME);
 			if (!sessionId) {
 				sessionId = uuidv4();
-				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, COOKIE_EXPIRATION); // TODO: make expiration optional, no expiration = session cookie, research session cookie
+				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
 			}
 		}
 		return { sessionId };
@@ -240,10 +240,8 @@ export class TrackingManager {
 		let eventsFromQueue;
 
 		if (eventsToSend) {
-			console.log('sendEvents invoked');
 			events = eventsToSend.map((event) => event.payload);
 		} else {
-			console.log('sendEvents invoked from setTimeout');
 			// invoked from setTimeout
 			events = eventsFromQueue = this.getQueuedEvents();
 		}
