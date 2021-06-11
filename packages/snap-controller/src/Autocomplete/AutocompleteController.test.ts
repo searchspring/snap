@@ -1,8 +1,9 @@
 import 'whatwg-fetch';
+import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { Tracker, BeaconCategory, BeaconType } from '@searchspring/snap-tracker';
+import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -116,6 +117,9 @@ const badArgs = [
 ];
 
 describe('Autocomplete Controller', () => {
+	beforeEach(() => {
+		acConfig.id = uuidv4().split('-').join('');
+	});
 	badArgs.forEach((args, index) => {
 		it(`fails with bad constructor args ${index}`, () => {
 			let errorCaught = false;
@@ -279,52 +283,5 @@ describe('Autocomplete Controller', () => {
 		inputEl.dispatchEvent(new Event('focus'));
 		inputEl.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 })); // Enter key
 		expect(window.location.href).toBe(`${acConfig.action}?search_query=${inputEl.value}`);
-	});
-
-	describe('Tracking methods', () => {
-		it('can invoke tracker.track.product.click method', async () => {
-			const controller = new AutocompleteController(acConfig, {
-				client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-				store: new AutocompleteStore(),
-				urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = {
-				intellisuggestData: 'abc',
-				intellisuggestSignature: '123',
-				href: '/hello',
-			};
-			const event = await (controller.tracker.track as AutocompleteTrackMethods).product.click(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.CLICK);
-			expect(event.category).toStrictEqual(BeaconCategory.INTERACTION);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('can invoke tracker.track.product.view method', async () => {
-			const controller = new AutocompleteController(acConfig, {
-				client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-				store: new AutocompleteStore(),
-				urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = {
-				sku: 'abc123',
-				childSku: 'abc123_a',
-			};
-			const event = await (controller.tracker.track as AutocompleteTrackMethods).product.view(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.PRODUCT);
-			expect(event.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
 	});
 });

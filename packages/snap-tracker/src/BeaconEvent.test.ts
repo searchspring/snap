@@ -23,17 +23,9 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
-
 		expect(event.payload.id).toBeDefined();
 		expect(event.payload.pid).toStrictEqual(data.pid);
 	});
@@ -59,16 +51,9 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
 	});
 
 	it('can create cart view event', async () => {
@@ -102,16 +87,9 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
 	});
 
 	it('can create order view event', async () => {
@@ -152,16 +130,9 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
 	});
 
 	it('can create product click event', async () => {
@@ -186,16 +157,9 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
 	});
 
 	it('can create custom event object', async () => {
@@ -218,15 +182,8 @@ describe('BeaconEvent', () => {
 		const event = new BeaconEvent(data);
 
 		expect(event.payload.type).toStrictEqual(data.type);
-		expect(event.type).toStrictEqual(data.type);
-
 		expect(event.payload.category).toStrictEqual(data.category);
-		expect(event.category).toStrictEqual(data.category);
-
 		expect(event.payload.context).toStrictEqual(data.context);
-		expect(event.context).toStrictEqual(data.context);
-
 		expect(event.payload.event).toStrictEqual(data.event);
-		expect(event.event).toStrictEqual(data.event);
 	});
 });

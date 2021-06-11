@@ -43,29 +43,30 @@ describe('PixelEvent', () => {
 					trackingCode: '8uyt2m',
 				},
 			},
-			event: [
-				{
-					sku: 'product123',
-					childSku: 'product123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'product456',
-					childSku: 'product456_a',
-					qty: '3',
-					price: '10.99',
-				},
-			],
+			event: {
+				items: [
+					{
+						sku: 'product123',
+						childSku: 'product123_a',
+						qty: '1',
+						price: '9.99',
+					},
+					{
+						sku: 'product456',
+						childSku: 'product456_a',
+						qty: '3',
+						price: '10.99',
+					},
+				],
+			},
 		};
 		const event = new PixelEvent(data);
 
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.src).toContain('&a=basket');
 		expect(event.src).toContain(event.endpoint);
-		expect(event.event).toHaveLength(data.event.length);
 
-		data.event.forEach((cartItem) => {
+		data.event.items.forEach((cartItem) => {
 			expect(event.src).toContain(cartItem.sku);
 			expect(event.src).toContain(cartItem.qty);
 			expect(event.src).toContain(cartItem.price);

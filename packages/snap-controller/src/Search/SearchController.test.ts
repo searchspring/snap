@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import { v4 as uuidv4 } from 'uuid';
 
 import { SnapClient } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
@@ -6,7 +7,7 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
-import { Tracker, BeaconCategory, BeaconType } from '@searchspring/snap-tracker';
+import { Tracker } from '@searchspring/snap-tracker';
 
 import { SearchController } from './SearchController';
 import { MockSnapClient } from '../__mocks__/MockSnapClient';
@@ -22,6 +23,9 @@ let searchConfig = {
 };
 
 describe('Search Controller', () => {
+	beforeEach(() => {
+		searchConfig.id = uuidv4().split('-').join('');
+	});
 	it('has results after search method called', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockSnapClient(globals, {}),
@@ -297,155 +301,5 @@ describe('Search Controller', () => {
 
 		controller.urlManager = controller.urlManager.set('filter', { color: 'blue' });
 		expect(controller.params.filters).toEqual([{ type: 'value', field: 'color', value: 'blue' }]);
-	});
-
-	describe('Tracking methods', () => {
-		it('can invoke tracker.track.product.click method', async () => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = {
-				intellisuggestData: 'abc',
-				intellisuggestSignature: '123',
-				href: '/hello',
-			};
-			const event = await (controller.tracker.track as SearchTrackMethods).product.click(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.CLICK);
-			expect(event.category).toStrictEqual(BeaconCategory.INTERACTION);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('can invoke tracker.track.product.view method', async () => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = {
-				sku: 'abc123',
-				childSku: 'abc123_a',
-			};
-			const event = await (controller.tracker.track as SearchTrackMethods).product.view(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.PRODUCT);
-			expect(event.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('can invoke tracker.track.personalization.login method', async () => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = 'abc123';
-			const event = await (controller.tracker.track as SearchTrackMethods).personalization.login(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual({});
-			expect(event.type).toStrictEqual(BeaconType.LOGIN);
-			expect(event.category).toStrictEqual(BeaconCategory.PERSONALIZATION);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('can invoke tracker.track.cart.view method', async () => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = [
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'abc456',
-					childSku: 'abc456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			];
-			const event = await (controller.tracker.track as SearchTrackMethods).cart.view(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.CART);
-			expect(event.category).toStrictEqual(BeaconCategory.CARTVIEW);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('can invoke tracker.track.order.transaction method', async () => {
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			const data = {
-				orderId: '123456',
-				total: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
-				items: [
-					{
-						sku: 'abc123',
-						childSku: 'abc123_a',
-						qty: '1',
-						price: '9.99',
-					},
-				],
-			};
-			const event = await (controller.tracker.track as SearchTrackMethods).order.transaction(data);
-			expect(event).toBeDefined();
-			expect(event.event).toStrictEqual(data);
-			expect(event.type).toStrictEqual(BeaconType.ORDER);
-			expect(event.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-			expect(event.context.website.trackingCode).toStrictEqual(globals.siteId);
-		});
-
-		it('init method was invoked', async () => {
-			const tracker = new Tracker(globals);
-			const init = jest.spyOn(tracker, 'init');
-
-			expect(init).not.toHaveBeenCalled();
-
-			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker,
-			});
-			expect(init).toHaveBeenCalled();
-			expect(controller.tracker.init).toHaveBeenCalled();
-		});
 	});
 });

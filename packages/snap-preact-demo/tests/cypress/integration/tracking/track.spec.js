@@ -90,9 +90,9 @@ describe('Tracking', () => {
 			expect(interception.request.method).to.equal('POST');
 			expect(interception.request.body.category).to.equal(BeaconCategory.CARTVIEW);
 			expect(interception.request.body.type).to.equal(BeaconType.CART);
-			expect(interception.request.body.event).to.be.an('array').to.have.length(2); // 2 cart items hardcoded in /cart.html
-			expect(interception.request.body.event[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-			expect(interception.request.body.event[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+			expect(interception.request.body.event.items).to.be.an('array').to.have.length(2); // 2 cart items hardcoded in /cart.html
+			expect(interception.request.body.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+			expect(interception.request.body.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
 		});
 
 		cy.wait('@pixel').should((interception) => {

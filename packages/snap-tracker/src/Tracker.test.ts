@@ -21,75 +21,77 @@ describe('Beacon Manager', () => {
 		expect(beacon.context.website.trackingCode).toBeDefined();
 		expect(beacon.context.website.trackingCode).toStrictEqual(globals.siteId);
 		expect(beacon.track).toBeDefined();
-		expect(beacon.track.shopperLogin).toBeDefined();
+		expect(beacon.track.event).toBeDefined();
+		expect(beacon.track.shopper.login).toBeDefined();
+		expect(beacon.track.product.view).toBeDefined();
+		expect(beacon.track.product.click).toBeDefined();
+		expect(beacon.track.cart.view).toBeDefined();
+		expect(beacon.track.order.transaction).toBeDefined();
 	});
 
 	it('can invoke setNamespace', async () => {
 		const beacon = new Tracker(globals);
 
-		expect(beacon.localStorage.key).toStrictEqual('ss-beacon-local');
-		expect(beacon.sessionStorage.key).toStrictEqual('ss-beacon-session');
+		expect(beacon.localStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-local`);
+		expect(beacon.sessionStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-session`);
 
 		const namespace = 'hello';
 		beacon.setNamespace(namespace);
 
-		expect(beacon.localStorage.key).toStrictEqual(`ss-${namespace}-local`);
-		expect(beacon.sessionStorage.key).toStrictEqual(`ss-${namespace}-session`);
+		expect(beacon.localStorage.key).toStrictEqual(`ss-${namespace}-${globals.siteId}-local`);
+		expect(beacon.sessionStorage.key).toStrictEqual(`ss-${namespace}-${globals.siteId}-session`);
 	});
 
 	it('can invoke track.shopperLogin', async () => {
 		const beacon = new Tracker(globals);
-		const shopperLogin = jest.spyOn(beacon.track, 'shopperLogin');
+		const shopperLogin = jest.spyOn(beacon.track.shopper, 'login');
 
 		const shopperId = 'abc123';
-		await beacon.track.shopperLogin(shopperId);
+		const payload = { data: { id: shopperId } };
+		await beacon.track.shopper.login(payload);
 
 		expect(beacon.context.shopperId).toStrictEqual(shopperId);
-		expect(shopperLogin).toHaveBeenCalledWith(shopperId);
-	});
-
-	it('can invoke product.click event method', async () => {
-		const beacon = new Tracker(globals);
-
-		const eventFn = jest.spyOn(beacon, 'event');
-
-		const payload = {
-			type: BeaconType.CLICK,
-			category: BeaconCategory.INTERACTION,
-			event: {
-				intellisuggestData: 'abc',
-				intellisuggestSignature: '123',
-				href: '/hello',
-			},
-		};
-		const beaconEvent = beacon.event(payload);
-
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CLICK);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.INTERACTION);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
+		expect(shopperLogin).toHaveBeenCalledWith(payload);
 	});
 
 	it('can invoke product.view event method', async () => {
 		const beacon = new Tracker(globals);
 
-		const eventFn = jest.spyOn(beacon, 'event');
+		const eventFn = jest.spyOn(beacon.track.product, 'view');
 
 		const payload = {
-			type: BeaconType.PRODUCT,
-			category: BeaconCategory.PAGEVIEW,
-			event: {
+			data: {
 				sku: 'abc123',
 				childSku: 'abc123_a',
 			},
 		};
-		const beaconEvent = beacon.event(payload);
+		const beaconEvent = await beacon.track.product.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.PRODUCT);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.PRODUCT);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.PAGEVIEW);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
+	});
+
+	it('can invoke product.click event method', async () => {
+		const beacon = new Tracker(globals);
+
+		const eventFn = jest.spyOn(beacon.track.product, 'click');
+
+		const payload = {
+			data: {
+				intellisuggestData: 'abc123',
+				intellisuggestSignature: 'def456',
+				href: '/test',
+			},
+		};
+		const beaconEvent = await beacon.track.product.click(payload);
+
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CLICK);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.INTERACTION);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -98,31 +100,31 @@ describe('Beacon Manager', () => {
 	it('can invoke cart.view event method', async () => {
 		const beacon = new Tracker(globals);
 
-		const eventFn = jest.spyOn(beacon, 'event');
+		const eventFn = jest.spyOn(beacon.track.cart, 'view');
 
 		const payload = {
-			type: BeaconType.CART,
-			category: BeaconCategory.CARTVIEW,
-			event: [
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'abc456',
-					childSku: 'abc456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
+			data: {
+				items: [
+					{
+						sku: 'abc123',
+						childSku: 'abc123_a',
+						qty: '1',
+						price: '9.99',
+					},
+					{
+						sku: 'def456',
+						childSku: 'def456_a',
+						qty: '2',
+						price: '10.99',
+					},
+				],
+			},
 		};
-		const beaconEvent = beacon.event(payload);
+		const beaconEvent = await beacon.track.cart.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -131,29 +133,29 @@ describe('Beacon Manager', () => {
 	it('can invoke cart.view event method without item skus', async () => {
 		const beacon = new Tracker(globals);
 
-		const eventFn = jest.spyOn(beacon, 'event');
+		const eventFn = jest.spyOn(beacon.track.cart, 'view');
 
 		const payload = {
-			type: BeaconType.CART,
-			category: BeaconCategory.CARTVIEW,
-			event: [
-				{
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					childSku: 'abc456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
+			data: {
+				items: [
+					{
+						childSku: 'abc123_a',
+						qty: '1',
+						price: '9.99',
+					},
+					{
+						childSku: 'def456_a',
+						qty: '2',
+						price: '10.99',
+					},
+				],
+			},
 		};
-		const beaconEvent = beacon.event(payload);
+		const beaconEvent = await beacon.track.cart.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -162,12 +164,10 @@ describe('Beacon Manager', () => {
 	it('can invoke order.transaction event method', async () => {
 		const beacon = new Tracker(globals);
 
-		const eventFn = jest.spyOn(beacon, 'event');
+		const eventFn = jest.spyOn(beacon.track.order, 'transaction');
 
 		const payload = {
-			type: BeaconType.ORDER,
-			category: BeaconCategory.ORDERVIEW,
-			event: {
+			data: {
 				orderId: '123456',
 				total: '9.99',
 				city: 'Los Angeles',
@@ -183,11 +183,11 @@ describe('Beacon Manager', () => {
 				],
 			},
 		};
-		const beaconEvent = beacon.event(payload);
+		const beaconEvent = await beacon.track.order.transaction(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -196,12 +196,10 @@ describe('Beacon Manager', () => {
 	it('can invoke order.transaction event method without item skus', async () => {
 		const beacon = new Tracker(globals);
 
-		const eventFn = jest.spyOn(beacon, 'event');
+		const eventFn = jest.spyOn(beacon.track.order, 'transaction');
 
 		const payload = {
-			type: BeaconType.ORDER,
-			category: BeaconCategory.ORDERVIEW,
-			event: {
+			data: {
 				orderId: '123456',
 				total: '9.99',
 				city: 'Los Angeles',
@@ -209,6 +207,7 @@ describe('Beacon Manager', () => {
 				country: 'US',
 				items: [
 					{
+						sku: 'abc123',
 						childSku: 'abc123_a',
 						qty: '1',
 						price: '9.99',
@@ -216,25 +215,35 @@ describe('Beacon Manager', () => {
 				],
 			},
 		};
-		const beaconEvent = beacon.event(payload);
+		const beaconEvent = await beacon.track.order.transaction(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
 	});
 
-	it('can invoke init method', async () => {
+	it('can invoke custom event method', async () => {
 		const beacon = new Tracker(globals);
 
-		const initFn = jest.spyOn(beacon, 'init');
-		const setIntervalFn = jest.spyOn(global.window, 'setInterval');
+		const eventFn = jest.spyOn(beacon.track, 'event');
 
-		beacon.init();
+		const payload = {
+			type: BeaconType.CUSTOM,
+			category: BeaconCategory.CUSTOM,
+			event: {
+				custom: '123',
+			},
+		};
+		const beaconEvent = await beacon.track.event(payload);
 
-		expect(initFn).toHaveBeenCalledTimes(1);
-		expect(setIntervalFn).toHaveBeenCalledTimes(1);
+		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CUSTOM);
+		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CUSTOM);
+		expect(beaconEvent.payload.event).toStrictEqual(payload.event);
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
 	});
 });

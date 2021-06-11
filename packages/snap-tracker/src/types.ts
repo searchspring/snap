@@ -79,7 +79,7 @@ export interface CartViewEvent {
 }
 
 export interface Product {
-	sku: string;
+	sku?: string;
 	childSku?: string;
 	qty: string | number;
 	price: string | number;

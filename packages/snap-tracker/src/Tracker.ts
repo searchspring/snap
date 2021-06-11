@@ -20,6 +20,7 @@ import {
 	ProductClickEvent,
 	ShopperLoginEvent,
 	OrderTransactionEvent,
+	Product,
 } from './types';
 
 const USERID_COOKIE_NAME = 'ssUserId';
@@ -94,7 +95,7 @@ export class Tracker {
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
 				category: payload?.category || BeaconCategory.CUSTOM,
-				context: deepmerge(this.context, payload?.context),
+				context: payload?.context ? deepmerge(this.context, payload.context) : this.context,
 				event: payload.event,
 				pid: payload?.pid || undefined,
 			};
@@ -242,12 +243,17 @@ export class Tracker {
 						);
 						return;
 					}
-					return {
-						sku: item?.sku ? `${item?.sku}` : undefined,
-						childSku: item?.childSku ? `${item.childSku}` : undefined,
+					const product: Product = {
 						qty: `${item.qty}`,
 						price: `${item.price}`,
 					};
+					if (item?.sku) {
+						product.sku = `${item.sku}`;
+					}
+					if (item?.childSku) {
+						product.childSku = `${item.childSku}`;
+					}
+					return product;
 				});
 				const payload = {
 					type: BeaconType.CART,
@@ -287,12 +293,17 @@ export class Tracker {
 						);
 						return;
 					}
-					return {
-						sku: item?.sku ? `${item.sku}` : undefined,
-						childSku: item?.childSku ? `${item.childSku}` : undefined,
+					const product: Product = {
 						qty: `${item.qty}`,
 						price: `${item.price}`,
 					};
+					if (item?.sku) {
+						product.sku = `${item.sku}`;
+					}
+					if (item?.childSku) {
+						product.childSku = `${item.childSku}`;
+					}
+					return product;
 				});
 				const eventPayload = {
 					items,
@@ -376,11 +387,12 @@ export class Tracker {
 
 		clearTimeout(this.isSending);
 		this.isSending = window.setTimeout(() => {
-			fetch('https://beacon.searchspring.io/beacon', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(events.length == 1 ? events[0] : events),
-			});
+			events.length &&
+				fetch('https://beacon.searchspring.io/beacon', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(events.length == 1 ? events[0] : events),
+				});
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
 		});
 	};
