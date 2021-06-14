@@ -29,11 +29,118 @@ npm install --save @searchspring/snap-tracker
 import { Tracker } from '@searchspring/snap-tracker';
 ```
 ## Controller usage
-Snap Tracker is a dependency of Snap Controller and it is recommended to use methods of the controller to invoke events to the Tracker. 
+Snap Tracker is a dependency of Snap Controller and Tracker events can be invoked via the `tracker` reference of any Snap Controller. 
 
-### SearchController `track` methods
+```typescript
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
+const controller = new SearchController(config, {
+    ...
+    tracker,
+    ...
+});
 
-#### Product Click `track.product.click`
+console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
+console.log(tracker.track.product.click === window.track.product.click) // true
+```
+
+## Standalone usage
+Snap Tracker can also be used without a Snap Controller. Typically used to send events before an integration has gone live. 
+
+```typescript
+const tracker = new Tracker();
+const payload = {
+    type: BeaconType.CLICK,
+    category: BeaconCategory.INTERACTION, 
+    event: {
+        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+        href: '/product123'
+    }
+};
+window.searchspring.track.event(payload)
+```
+
+# Tracker 
+
+## `track` methods
+The Tracker contains various tracking methods available on the `track` object. This object is exposed to the browser's `window` via the first Snap Controller that has been instantiated. This will use the `siteId` that has been provided to the Snap Tracker instance of the respective Controller Services.
+
+```typescript
+window.searchspring.track
+```
+
+Each tracking method expects an object. This object must contain a `data` key and an object containing the tracking data. 
+
+```typescript
+window.searchspring.track.product.view({
+    data: {
+        sku: 'product123',
+        childSku: 'product123_a',
+    }
+})
+```
+
+If a bundle is using multiple Snap Controllers with different `siteId`, an optional `siteId` parameter can be specified to overwrite any event `siteId`
+
+```typescript
+window.searchspring.track.product.view({
+    data: {
+        sku: 'product123',
+        childSku: 'product123_a',
+    },
+    siteId: 'abc123'
+})
+```
+
+### Generic Event `track.event`
+Creates and sends a generic beacon event. Parameter expects an Event Payload object. 
+If a `type` or `category` is not provided, a value of `'custom'` will be used. 
+
+```typescript
+const payload = {
+    type: BeaconType.CLICK,
+    category: BeaconCategory.INTERACTION, 
+    event: {
+        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+        href: '/product123'
+    }
+};
+window.searchspring.track.event(payload)
+```
+
+#### Event Payload
+
+A beacon event payload object provided to the `track.event` method may contain the following:
+
+`type` -  BeaconType enum value or custom event type value. If not specified, `'custom'` will be used.
+
+`category` - BeaconCategory enum value or custom event type value. If not specified, `'custom'` will be used.
+
+`event` - object containing event data
+
+`context.website.trackingCode` - optional `context` object that will be merged with constructed context object. Can be used to specify a different `siteId` value.
+
+```typescript
+const payload = {
+    type: BeaconType.CLICK,
+    category: BeaconCategory.INTERACTION,
+    event: {
+        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+        href: '/product123',
+    },
+    context: {
+        website: {
+            trackingCode: 'abc123',
+        },
+    },
+};
+
+```
+
+### Product Click `track.product.click`
 Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track()` method - available on each `result` store object. 
 
 ```jsx
@@ -53,52 +160,64 @@ const searchController = new SearchController({
     ...
 }):
 
-searchController.tracker.track.product.click({
-    intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
-    intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
-    href: '/product123',
+window.searchspring.track.product.click({
+    data: {
+        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+        href: '/product123',
+    }
 })
 ```
 
-#### Product View `track.product.view`
+### Product View `track.product.view`
 Tracks product page views. Should be invoked from a product detail page. A `sku` and/or `childSku` are required.
 
 ```typescript
-searchController.tracker.track.product.click({
-    sku: 'product123',
-    childSku: 'product123_a',
+window.searchspring.track.product.view({
+    data: {
+        sku: 'product123',
+        childSku: 'product123_a',
+    }
 })
 ```
 
-#### Shopper Login `track.personalization.login`
+### Shopper Login `track.shopper.login`
 Tracks user login and sets `context.shopperId` value. Should be invoked when a user has logged into their account.
 
 ```typescript
 const shopperId = "123456"
-searchController.tracker.track.personalization.login(shopperId)
+window.searchspring.track.shopper.login({
+    data: {
+        id: shopperId
+    }
+})
 ```
 
-#### Cart View `track.cart.view`
-Tracks cart contents. Should be invoked from a cart page. An array of cart item objects is required. Each object must contain a `qty`, `price`, (`sku` and/or `childSku`)
+### Cart View `track.cart.view`
+Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
 
 ```typescript
-searchController.tracker.track.cart.view([
-    {
-        sku: 'product123',
-        childSku: 'product123_a',
-        qty: '1',
-        priice: `9.99`,
-    },
-    {
-        sku: 'product456',
-        childSku: 'product456_a',
-        qty: '2',
-        priice: `10.99`,
-    },
-])
+window.searchspring.track.cart.view({
+    data: {
+        items: [
+            {
+                sku: 'product123',
+                childSku: 'product123_a',
+                qty: '1',
+                priice: `9.99`,
+            },
+            {
+                sku: 'product456',
+                childSku: 'product456_a',
+                qty: '2',
+                priice: `10.99`,
+            },
+        ]
+    }
+})
 ```
 
-#### Cart View `track.order.transaction`
+### Order Transaction `track.order.transaction`
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
 `orderId` - (optional) order id
@@ -114,44 +233,35 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 `items` - required array of items - same object provided to `track.cart.view` event
 
 ```typescript
-searchController.tracker.track.order.transaction({
-    orderId: '123456',
-    total: '31.97',
-    city: 'Los Angeles',
-    state: 'CA',
-    country: 'US',
-    items: [
-    {
-        sku: 'product123',
-        childSku: 'product123_a',
-        qty: '1',
-        priice: `9.99`
-    },
-    {
-        sku: 'product456',
-        childSku: 'product456_a',
-        qty: '2',
-        priice: `10.99`
-    },
-]
+window.searchspring.track.order.transaction({
+    data: {
+        orderId: '123456',
+        total: '31.97',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'US',
+        items: [
+            {
+                sku: 'product123',
+                childSku: 'product123_a',
+                qty: '1',
+                priice: `9.99`
+            },
+            {
+                sku: 'product456',
+                childSku: 'product456_a',
+                qty: '2',
+                priice: `10.99`
+            },
+        ]
+    }
 })
 ```
 
-### AutocompleteController `track` methods
-
-#### Product Click `track.product.click`
-See SearchController Product Click
-
-#### Product View `track.product.view`
-See SearchControler Product View
-
-
-## Tracker
+## Tracker properties
 
 ### `globals` property
-When constructing an instance of `Tracker`, an optional object can be provided to its constructor. This object contains a `siteId` key and value. This is required if Tracker will be utilized in standalone usage (not used as a service of any Snap Controller)
-
-This is not required if you will be using Snap Tracker as a service with any Snap Controller. Each controller will use the siteId provided in the Snap Client (`@searchspring/snap-client`) service instead. 
+When constructing an instance of `Tracker`, a globals object is required to be constructed. This object contains a `siteId` key and value. 
 
 ```typescript
 const globals = { siteId: 'abc123' };
@@ -178,7 +288,7 @@ tracker.sessionStorage.get('key') // 'value'
 ```
 
 ### `context` property
-The `context` property is generated at the time of instantiating Tracker. It is passed along to the Beacon endpoint and contains the following:
+The `context` property is generated at the time of instantiating Tracker. It is part of each event payload and provides context of the event.
 
 `userId` - unique ID to identify the user, persisted in a cookie/local storage fallback
 
@@ -186,9 +296,9 @@ The `context` property is generated at the time of instantiating Tracker. It is 
 
 `sessionId` - unique ID generated at the start of a new browser session, persisted in session storage/cookie fallback
 
-`shopperId` - unique ID provided set via the SearchController `SearchController.tracker.track.personalization.login` event and then persisted in a cookie
+`shopperId` - unique ID provided set via the SearchController `SearchController.tracker.track.shopper.login` event and then persisted in a cookie
 
-`website.trackingCode` - unique `siteId` found in the Searchspring Management Console (SMC). If Tracker is in standalone usage, the `siteId` is required to be provided in the `gloabls` object when instantiating Tracker. Otherwise, when used as a service with any Snap Controller, the siteId will be set by the controller. 
+`website.trackingCode` - the `siteId` specified in the globals object
 
 ```typescript
 context: {
@@ -205,25 +315,11 @@ context: {
 ### `isSending` property
 The `isSending` property contains the return value from `setTimeout` and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and `isSending` is still defined, the incoming event will be added to the event queue. 
 
+### `namespace` property
+The `namespace` property contains the Tracker namespace. Invoking this method is only required if a bundle contains multiple Tracker instances. 
+
 ### `track` property
-The `track` property contains various tracking events. If Tracker will be utilized in standalone usage, the `track` property will only contain a single function `track.shopperLogin`
-
-```typescript
-const tracker = new Tracker(),
-tracker.track.shopperLogin()
-```
-
-Additional functions are added to the `track` object from various Snap Controllers.
-
-
-### `init` method
-The `init` method will start polling the event queue for beacon events that have yet to be sent to the beacon endpoint. Events are added to the queue if a previous event is still being sent to the beacon endpoint.
-
-```typescript
-const tracker = new Tracker();
-
-tracker.init();
-```
+The `track` property contains various tracking events. See `track` methods section above. 
 
 ### `getUserId` method
 Returns an object containing the `userId` stored in the `ssUserId` cookie (with a fallback to localstorage.) If key doesn't exist, a new ID will be generated, saved to cookie/localstorage, and returned. 
@@ -246,7 +342,7 @@ console.log(tracker.getSessionId())
 ```
 
 ### `getShopperId` method
-Returns an object containing the `shopperId` stored in the `ssShopperId` cookie. This value is set via the SearchController `SearchController.tracker.track.personalization.login` event
+Returns an object containing the `shopperId` stored in the `ssShopperId` cookie. This value is set via the SearchController `SearchController.tracker.track.shopper.login` event
 
 ```typescript
 const tracker = new Tracker();
@@ -255,45 +351,9 @@ console.log(tracker.getShopperId())
 // { shopperId: 'shopper0001' }
 ```
 
-### `addEventsToQueue` method
-Add multiple event payloads to existing events in the event queue. Invoked from the `sendEvents` method when a previous event is still sending. 
-
-```typescript
-const tracker = new Tracker();
-const event1 = new BeaconEvent();
-const event2 = new BeaconEvent();
-tracker.addEventsToQueue([event1.payload, event2.payload])
-```
-
-### `getQueuedEvents` method
-Returns an array of BeaconEvent payloads stored in event queue. 
-
-```typescript
-const tracker = new Tracker();
-
-tracker.getQueuedEvents()
-```
-
-### `setBeaconEvents` method
-Set multiple event payloads to event queue (overwrites any existing events in the queue.) Invoked from `sendEvents` and `clearEventQueue` methods.
-
-```typescript
-const tracker = new Tracker();
-const event1 = new BeaconEvent();
-const event2 = new BeaconEvent();
-tracker.setBeaconEvents([event1.payload, event2.payload])
-```
-
-### `clearEventQueue` method
-Clears all events from event queue. This is invoked from the `sendEvents` method when all events have successfully been sent to endpoint. Equivalent to `setBeaconEvents([])`
-
-```typescript
-const tracker = new Tracker();
-tracker.clearEventQueue()
-```
 
 ### `sendEvents` method
-Sends BeaconEvents to endpoint. If a request is in progress and `SendEvents` is invoked again, the events will be added to the event queue instead of being sent immediately. After invoking the `init` method, the queue is polled every 10 seconds for events to be sent. `sendEvents` is invoked from the `event` and Controller `track` methods.
+Sends event(s) to beacon (and various legacy) endpoint(s). 
 
 ```typescript
 const tracker = new Tracker();
@@ -302,50 +362,3 @@ const event2 = new BeaconEvent();
 tracker.sendEvents([event1, event2])
 ```
 
-
-### `event` method
-Given an event payload, a BeaconEvent is created and sent via the `sendEvents` method. Additionally, certain events are also sent to legacy endpoints.
-
-```typescript
-const tracker = new Tracker();
-const payload = {
-    type: BeaconType.CLICK,
-    category: BeaconCategory.INTERACTION, 
-    event: {
-        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
-        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
-        href: '/product123'
-    }
-};
-tracker.event(payload)
-```
-
-#### Event Payload
-
-A beacon event payload object provided to the `event` method must contain the following:
-
-`type` - required BeaconType enum value
-
-`category` - required BeaconCategory enum value
-
-`event` - object containing event data
-
-`context.website.trackingCode` - object specifying a different siteId (required if Tracker was constructed without `globals.siteId`)
-
-```typescript
-const payload = {
-    type: BeaconType.CLICK,
-    category: BeaconCategory.INTERACTION,
-    event: {
-        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
-        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
-        href: '/product123',
-    },
-    context: {
-        website: {
-            trackingCode: 'abc123',
-        },
-    },
-};
-
-```
