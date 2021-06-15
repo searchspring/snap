@@ -14,8 +14,8 @@ const defaultConfig: FinderControllerConfig = {
 export class FinderController extends AbstractController {
 	config: FinderControllerConfig;
 
-	constructor(config: FinderControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger });
+	constructor(config: FinderControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
@@ -33,24 +33,18 @@ export class FinderController extends AbstractController {
 		}
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on(
-			'beforeSearch',
-			async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-				search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			search.controller.store.loading = true;
 
-				await next();
-			}
-		);
+			await next();
+		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on(
-			'afterSearch',
-			async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-				await next();
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
 
-				search.controller.store.loading = false;
-			}
-		);
+			search.controller.store.loading = false;
+		});
 	}
 
 	get params(): Record<string, any> {

@@ -1,7 +1,5 @@
 import deepmerge from 'deepmerge';
-
 import { AbstractController } from '../Abstract/AbstractController';
-
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
@@ -24,8 +22,8 @@ const defaultConfig: AutocompleteControllerConfig = {
 export class AutocompleteController extends AbstractController {
 	config: AutocompleteControllerConfig;
 
-	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger });
+	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
@@ -42,29 +40,23 @@ export class AutocompleteController extends AbstractController {
 		this.store.link(this);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on(
-			'beforeSearch',
-			async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-				search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			search.controller.store.loading = true;
 
-				await next();
-			}
-		);
+			await next();
+		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on(
-			'afterSearch',
-			async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-				await next();
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
 
-				search.controller.store.loading = false;
+			search.controller.store.loading = false;
 
-				// cancel search if no input or query doesn't match current urlState
-				if (search.response.autocomplete.query != search.controller.urlManager.state.query) {
-					return false;
-				}
+			// cancel search if no input or query doesn't match current urlState
+			if (search.response.autocomplete.query != search.controller.urlManager.state.query) {
+				return false;
 			}
-		);
+		});
 	}
 
 	get params(): Record<string, any> {

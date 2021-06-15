@@ -15,6 +15,9 @@ export interface Result {
 	mappings: Mappings;
 	attributes: any;
 	type?: string;
+	track?: {
+		click: (e?: any) => void;
+	};
 }
 export enum BannerType {
 	HEADER = 'header',

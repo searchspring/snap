@@ -1,13 +1,16 @@
-import 'whatwg-fetch';
+import { v4 as uuidv4 } from 'uuid';
 
 import { FinderStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
 
 import { FinderController } from './FinderController';
 import { MockSnapClient } from '../__mocks__/MockSnapClient';
+
+const globals = { siteId: 'ga9kq2' };
 
 const finderHierarchyConfig = {
 	id: 'accessoriesFinder',
@@ -33,14 +36,19 @@ const finderNonhierarchyConfig = {
 };
 
 describe('Finder Controller', () => {
+	beforeEach(() => {
+		finderHierarchyConfig.id = uuidv4().split('-').join('');
+		finderNonhierarchyConfig.id = uuidv4().split('-').join('');
+	});
 	it('Hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderHierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 		controller.client.mockDataFile = 'finder.include.ss_accessory';
 		controller.init();
@@ -71,12 +79,13 @@ describe('Finder Controller', () => {
 
 	it('Non-hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 		controller.init();
 		await controller.search();
@@ -104,12 +113,13 @@ describe('Finder Controller', () => {
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+				client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 				store: new FinderStore(),
 				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
+				tracker: new Tracker(globals),
 			});
 
 			controller.on(event, () => false); // return false to stop middleware
@@ -125,12 +135,13 @@ describe('Finder Controller', () => {
 
 	it('can call reset method', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 		controller.init();
 		await controller.search();

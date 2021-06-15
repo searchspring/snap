@@ -87,6 +87,7 @@ import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-m
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
 
 const finderController = new FinderController(finderConfig, {
 		client: new SnapClient(globals, clientConfig),
@@ -94,7 +95,8 @@ const finderController = new FinderController(finderConfig, {
 		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
-		logger: new Logger()
+		logger: new Logger(),
+		tracker: new Tracker(),
 	}
 ));
 ```

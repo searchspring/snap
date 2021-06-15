@@ -1,5 +1,7 @@
 import type { EventManager, Next } from '@searchspring/snap-event-manager';
 
+import { Tracker } from '@searchspring/snap-tracker';
+
 export type NextEvent = Next;
 
 /** Search */
@@ -68,4 +70,11 @@ export type ControllerServices = {
 	eventManager: EventManager;
 	profiler: any;
 	logger: any;
+	tracker: Tracker;
 };
+
+declare global {
+	interface Window {
+		searchspring?: any;
+	}
+}

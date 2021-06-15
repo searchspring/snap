@@ -1,7 +1,8 @@
-import 'whatwg-fetch';
+import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -27,6 +28,7 @@ let acConfig = {
 	},
 };
 
+const globals = { siteId: 'ga9kq2' }; //TODO: change to 8uyt2m (snap.searchspring.io)
 const badArgs = [
 	{
 		client: {},
@@ -35,33 +37,37 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: {},
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: {},
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: { events: null, fire: null, on: null },
 		profiler: new Profiler(),
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: {
@@ -73,17 +79,19 @@ const badArgs = [
 		},
 		profiler: new Profiler(),
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
 		profiler: {},
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -94,18 +102,23 @@ const badArgs = [
 			create: null,
 		},
 		logger: new Logger(),
+		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: {},
+		tracker: new Tracker(globals),
 	},
 ];
 
 describe('Autocomplete Controller', () => {
+	beforeEach(() => {
+		acConfig.id = uuidv4().split('-').join('');
+	});
 	badArgs.forEach((args, index) => {
 		it(`fails with bad constructor args ${index}`, () => {
 			let errorCaught = false;
@@ -120,12 +133,13 @@ describe('Autocomplete Controller', () => {
 
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -143,12 +157,13 @@ describe('Autocomplete Controller', () => {
 
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -165,12 +180,13 @@ describe('Autocomplete Controller', () => {
 		// settings.initializeFromUrl is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -188,12 +204,13 @@ describe('Autocomplete Controller', () => {
 		// settings.facets.trim is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();
@@ -220,12 +237,13 @@ describe('Autocomplete Controller', () => {
 		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient({ siteId: 'ga9kq2' }, { meta: { prefetch: false } }),
+			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
 
 		controller.init();

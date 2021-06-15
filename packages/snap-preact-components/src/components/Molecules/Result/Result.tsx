@@ -94,112 +94,122 @@ const CSS = {
 		}),
 };
 
-export const Result = observer(
-	(properties: ResultProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Result = observer((properties: ResultProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: ResultProps = {
-			// default props
-			layout: Layout.GRID,
+	const props: ResultProps = {
+		// default props
+		layout: Layout.GRID,
+		// global theme
+		...globalTheme?.components?.result,
+		// props
+		...properties,
+		...properties.theme?.components?.result,
+	};
+
+	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
+
+	const core = result?.mappings?.core;
+
+	const subProps: ResultSubProps = {
+		price: {
 			// global theme
-			...globalTheme?.components?.result,
-			// props
-			...properties,
-			...properties.theme?.components?.result,
-		};
+			className: 'ss__result__price',
+			...globalTheme?.components?.price,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.price,
+		},
+		badge: {
+			// default props
+			className: 'ss__result__badge',
+			content: 'Sale',
+			// global theme
+			...globalTheme?.components?.badge,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.badge,
+		},
+		image: {
+			// default props
+			className: 'ss__result__image',
+			alt: core?.name,
+			src: core?.thumbnailImageUrl,
+			// global theme
+			...globalTheme?.components?.image,
+			// inherited props
+			...defined({
+				disableStyles,
+				fallback: fallback,
+			}),
+			// component theme overrides
+			...props.theme?.components?.image,
+		},
+	};
 
-		const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
+	const onSale = Boolean(core?.msrp && core?.msrp * 1 > core?.price * 1);
 
-		const core = result?.mappings?.core;
-
-		const subProps: ResultSubProps = {
-			price: {
-				// global theme
-				className: 'ss__result__price',
-				...globalTheme?.components?.price,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.price,
-			},
-			badge: {
-				// default props
-				className: 'ss__result__badge',
-				content: 'Sale',
-				// global theme
-				...globalTheme?.components?.badge,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.badge,
-			},
-			image: {
-				// default props
-				className: 'ss__result__image',
-				alt: core?.name,
-				src: core?.thumbnailImageUrl,
-				// global theme
-				...globalTheme?.components?.image,
-				// inherited props
-				...defined({
-					disableStyles,
-					fallback: fallback,
-				}),
-				// component theme overrides
-				...props.theme?.components?.image,
-			},
-		};
-
-		const onSale = Boolean(core?.msrp && core?.msrp * 1 > core?.price * 1);
-
-		return (
-			core && (
-				<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-					<div className="ss__result__wrapper">
-						<div className="ss__result__wrapper__image">
-							<a href={core.url}>
-								{!hideBadge && onSale && <Badge {...subProps.badge} />}
-								<Image {...subProps.image} />
-							</a>
-						</div>
-						<div className="ss__result__wrapper__details">
-							{!detailSlot ? (
-								<>
-									{!hideTitle && (
-										<div className="ss__result__wrapper__details__title">
-											<a href={core.url}>{core.name}</a>
-										</div>
-									)}
-									{!hidePricing && (
-										<div className="ss__result__wrapper__details__pricing">
-											{core.price < core.msrp ? (
-												<>
-													<Price {...subProps.price} value={core.price} />
-													&nbsp;
-													<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-												</>
-											) : (
-												<Price {...subProps.price} value={core.price} />
-											)}
-										</div>
-									)}
-								</>
-							) : (
-								<>{detailSlot}</>
-							)}
-
-							{buttonSlot && <div className="ss__result__wrapper__details__button">{buttonSlot}</div>}
-						</div>
+	return (
+		core && (
+			<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+				<div className="ss__result__wrapper">
+					<div className="ss__result__wrapper__image">
+						<a
+							href={core.url}
+							onMouseDown={(e) => {
+								result.track.click(e);
+							}}
+						>
+							{!hideBadge && onSale && <Badge {...subProps.badge} />}
+							<Image {...subProps.image} />
+						</a>
 					</div>
-				</article>
-			)
-		);
-	}
-);
+					<div className="ss__result__wrapper__details">
+						{!detailSlot ? (
+							<>
+								{!hideTitle && (
+									<div className="ss__result__wrapper__details__title">
+										<a
+											href={core.url}
+											onMouseDown={(e) => {
+												result.track.click(e);
+											}}
+										>
+											{core.name}
+										</a>
+									</div>
+								)}
+								{!hidePricing && (
+									<div className="ss__result__wrapper__details__pricing">
+										{core.price < core.msrp ? (
+											<>
+												<Price {...subProps.price} value={core.price} />
+												&nbsp;
+												<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+											</>
+										) : (
+											<Price {...subProps.price} value={core.price} />
+										)}
+									</div>
+								)}
+							</>
+						) : (
+							<>{detailSlot}</>
+						)}
+
+						{buttonSlot && <div className="ss__result__wrapper__details__button">{buttonSlot}</div>}
+					</div>
+				</div>
+			</article>
+		)
+	);
+});
 
 interface ResultSubProps {
 	badge?: BadgeProps;

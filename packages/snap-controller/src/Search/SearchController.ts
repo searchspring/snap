@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 
@@ -22,48 +21,42 @@ const defaultConfig: SearchControllerConfig = {
 export class SearchController extends AbstractController {
 	config: SearchControllerConfig;
 
-	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger });
+	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on(
-			'beforeSearch',
-			async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-				search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			search.controller.store.loading = true;
 
-				await next();
-			}
-		);
+			await next();
+		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on(
-			'afterSearch',
-			async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-				await next();
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
 
-				const config = search.controller.config;
-				const redirectURL = search?.response?.merchandising?.redirect;
+			const config = search.controller.config;
+			const redirectURL = search?.response?.merchandising?.redirect;
 
-				if (redirectURL && config?.settings?.redirects?.merchandising) {
-					window.location.replace(redirectURL);
-					return false;
-				}
-
-				if (
-					config?.settings?.redirects?.singleResult &&
-					search?.response.search.query &&
-					search?.response?.pagination?.totalResults === 1 &&
-					!search?.response?.filters?.length
-				) {
-					window.location.replace(search?.response.results[0].mappings.core.url);
-					return false;
-				}
-				search.controller.store.loading = false;
+			if (redirectURL && config?.settings?.redirects?.merchandising) {
+				window.location.replace(redirectURL);
+				return false;
 			}
-		);
+
+			if (
+				config?.settings?.redirects?.singleResult &&
+				search?.response.search.query &&
+				search?.response?.pagination?.totalResults === 1 &&
+				!search?.response?.filters?.length
+			) {
+				window.location.replace(search?.response.results[0].mappings.core.url);
+				return false;
+			}
+			search.controller.store.loading = false;
+		});
 	}
 
 	get params(): Record<string, any> {
