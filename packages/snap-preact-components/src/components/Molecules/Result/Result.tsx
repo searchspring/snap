@@ -163,7 +163,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						<a
 							href={core.url}
 							onMouseDown={(e) => {
-								result.track(e);
+								result.track.click(e);
 							}}
 						>
 							{!hideBadge && onSale && <Badge {...subProps.badge} />}
@@ -178,7 +178,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 										<a
 											href={core.url}
 											onMouseDown={(e) => {
-												result.track(e);
+												result.track.click(e);
 											}}
 										>
 											{core.name}

@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { SnapClient } from '@searchspring/snap-client';

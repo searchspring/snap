@@ -27,7 +27,7 @@
 Cypress.Commands.add('snapStore', (controller = 'search') => {
 	cy.window().then((window) => {
 		return new Cypress.Promise((resolve, reject) => {
-			const cntrlr = getByPath(window.sssnap, controller);
+			const cntrlr = getByPath(window.searchspring.controller, controller);
 
 			const after = function afterLoad({ controller }) {
 				controller.eventManager.events.afterStore.remove(afterLoad);

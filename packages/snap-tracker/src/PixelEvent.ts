@@ -1,19 +1,11 @@
 import { featureFlags } from '@searchspring/snap-toolbox';
-import {
-	ProductViewEvent,
-	ProductClickEvent,
-	RecommendationsEvent,
-	OrderTransactionEvent,
-	BeaconPayload,
-	CartViewEvent,
-	BeaconCategory,
-} from './types';
+import { ProductViewEvent, OrderTransactionEvent, BeaconPayload, CartViewEvent, BeaconCategory } from './types';
 
 export class PixelEvent {
 	endpoint: string;
 	src: string;
 	img: HTMLImageElement;
-	event: ProductViewEvent | CartViewEvent | OrderTransactionEvent | RecommendationsEvent | ProductClickEvent | Record<string, never>;
+	event: ProductViewEvent | CartViewEvent | OrderTransactionEvent;
 
 	constructor(payload: BeaconPayload) {
 		this.endpoint = `https://d3cgm8py10hi0z.cloudfront.net/is.gif`;
@@ -28,18 +20,16 @@ export class PixelEvent {
 			`&x=${Math.floor(Math.random() * 2147483647)}` +
 			`${window.document.referrer ? `&r=${encodeURIComponent(window.document.referrer)}` : ''}`;
 
-		this.event = payload.event;
-
 		switch (payload.category) {
 			case BeaconCategory.PAGEVIEW:
-				this.event = this.event as ProductViewEvent;
+				this.event = payload.event as ProductViewEvent;
 				this.src += '&a=viewItem';
 				if (this.event.sku) {
 					this.src += `&sku=${encodeURIComponent(this.event.sku)}`;
 				}
 				break;
 			case BeaconCategory.CARTVIEW:
-				this.event = this.event as CartViewEvent;
+				this.event = payload.event as CartViewEvent;
 				this.src += '&a=basket';
 				this.event.items.forEach((item) => {
 					if (item.sku) {
@@ -48,7 +38,7 @@ export class PixelEvent {
 				});
 				break;
 			case BeaconCategory.ORDERVIEW:
-				const { orderId, total, city, state, country, items } = this.event as OrderTransactionEvent;
+				const { orderId, total, city, state, country, items } = (this.event = payload.event as OrderTransactionEvent);
 				this.src += `&a=sale`;
 				if (orderId) this.src += `&orderId=${encodeURIComponent(orderId)}`;
 				if (total) this.src += `&total=${encodeURIComponent(total)}`;
@@ -62,8 +52,9 @@ export class PixelEvent {
 				});
 				break;
 		}
-
-		this.img = new Image(1, 1);
-		this.img.src = this.src; // setting src immediately invokes a request
+		if (this.src.includes('&a=')) {
+			this.img = new Image(1, 1);
+			this.img.src = this.src; // setting src immediately invokes a request
+		}
 	}
 }

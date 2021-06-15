@@ -141,11 +141,11 @@ const payload = {
 ```
 
 ### Product Click `track.product.click`
-Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track()` method - available on each `result` store object. 
+Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method - available on each `result` store object. 
 
 ```jsx
 searchController.store.results.map(result)=>{(
-    <a href={core.url} onMouseDown={(e)=>{result.track(e)}}>
+    <a href={core.url} onMouseDown={(e)=>{result.track.click(e)}}>
 )}
 ```
 

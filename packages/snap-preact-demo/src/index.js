@@ -133,8 +133,3 @@ cntrlr.on('afterStore', scrollToTop);
 
 // initialize controller
 cntrlr.init();
-
-// for testing purposes
-window.sssnap = window.sssnap || {
-	search: cntrlr,
-};

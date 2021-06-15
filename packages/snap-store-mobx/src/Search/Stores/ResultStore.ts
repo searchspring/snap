@@ -67,17 +67,19 @@ class Product {
 		this.id = result.id;
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
-		this.track = (e) => {
-			// product click tracking
-			const { intellisuggestData, intellisuggestSignature } = result.attributes;
-			const href = e?.target?.href || result.mappings.core?.url || undefined;
-			controller.tracker.track.product.click({
-				data: {
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				},
-			});
+		this.track = {
+			click: (e) => {
+				// product click tracking
+				const { intellisuggestData, intellisuggestSignature } = result.attributes;
+				const href = e?.target?.href || result.mappings.core?.url || undefined;
+				controller.tracker.track.product.click({
+					data: {
+						intellisuggestData,
+						intellisuggestSignature,
+						href,
+					},
+				});
+			},
 		};
 
 		makeObservable(this, {
