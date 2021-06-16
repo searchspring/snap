@@ -81,7 +81,7 @@ const finderConfig = {
 
 ```typescript
 import { FinderController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { FinderStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -90,7 +90,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const finderController = new FinderController(finderConfig, {
-		client: new SnapClient(globals, clientConfig),
+		client: new Client(globals, clientConfig),
 		store: new FinderStore(),
 		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 		eventManager: new EventManager(),

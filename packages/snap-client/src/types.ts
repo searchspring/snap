@@ -1,4 +1,4 @@
-export type SnapClientConfig = {
+export type ClientConfig = {
 	meta?: {
 		prefetch?: boolean;
 		ttl?: number;
@@ -8,6 +8,9 @@ export type SnapClientConfig = {
 		api?: SnapApiConfig;
 	};
 	autocomplete?: {
+		api?: SnapApiConfig;
+	};
+	recommend?: {
 		api?: SnapApiConfig;
 	};
 	trending?: {
@@ -22,7 +25,7 @@ export type SnapApiConfig = {
 	path?: string;
 };
 
-export type SnapClientGlobals = {
+export type ClientGlobals = {
 	siteId: string;
 	[configurationPath: string]: any;
 };

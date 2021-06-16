@@ -8,7 +8,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 
 import { AutocompleteController } from './AutocompleteController';
-import { MockSnapClient } from '../__mocks__/MockSnapClient';
+import { MockClient } from '../__mocks__/MockClient';
 
 let acConfig = {
 	id: 'ac',
@@ -40,7 +40,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: {},
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -49,7 +49,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: {},
 		eventManager: new EventManager(),
@@ -58,7 +58,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: { events: null, fire: null, on: null },
@@ -67,7 +67,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: {
@@ -82,7 +82,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -91,7 +91,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -105,7 +105,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: new AutocompleteStore(),
 		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 		eventManager: new EventManager(),
@@ -133,7 +133,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -157,7 +157,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -180,7 +180,7 @@ describe('Autocomplete Controller', () => {
 		// settings.initializeFromUrl is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -204,7 +204,7 @@ describe('Autocomplete Controller', () => {
 		// settings.facets.trim is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),
@@ -237,7 +237,7 @@ describe('Autocomplete Controller', () => {
 		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new AutocompleteStore(),
 			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
 			eventManager: new EventManager(),

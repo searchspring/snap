@@ -1,5 +1,5 @@
 /* searchspring imports */
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -15,7 +15,7 @@ export class Snapify {
 			// apiHost: 'http://localhost:8080/api/v1',
 		};
 
-		const client = new SnapClient(config.globals, clientConfig);
+		const client = new Client(config.globals, clientConfig);
 		const store = new AutocompleteStore();
 		const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
 
@@ -58,7 +58,7 @@ export class Snapify {
 			// apiHost: 'http://localhost:8080/api/v1',
 		};
 
-		const client = new SnapClient(config.globals, clientConfig);
+		const client = new Client(config.globals, clientConfig);
 		const store = new SearchStore();
 		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
 		const eventManager = new EventManager();

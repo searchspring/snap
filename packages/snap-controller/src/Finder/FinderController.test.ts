@@ -8,7 +8,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import { FinderController } from './FinderController';
-import { MockSnapClient } from '../__mocks__/MockSnapClient';
+import { MockClient } from '../__mocks__/MockClient';
 
 const globals = { siteId: 'ga9kq2' };
 
@@ -42,7 +42,7 @@ describe('Finder Controller', () => {
 	});
 	it('Hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderHierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
@@ -79,7 +79,7 @@ describe('Finder Controller', () => {
 
 	it('Non-hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),
@@ -113,7 +113,7 @@ describe('Finder Controller', () => {
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+				client: new MockClient(globals, { meta: { prefetch: false } }),
 				store: new FinderStore(),
 				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 				eventManager: new EventManager(),
@@ -135,7 +135,7 @@ describe('Finder Controller', () => {
 
 	it('can call reset method', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
 			store: new FinderStore(),
 			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
 			eventManager: new EventManager(),

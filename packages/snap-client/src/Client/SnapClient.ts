@@ -1,5 +1,5 @@
 import { LegacyAPI, SnapAPI, HybridAPI, SuggestAPI, TrendingRequestModel, TrendingResponseModel, ApiConfiguration } from './apis';
-import { SnapClientGlobals, SnapClientConfig } from '../types';
+import { ClientGlobals, ClientConfig } from '../types';
 
 import {
 	MetaRequestModel,
@@ -12,7 +12,7 @@ import {
 
 import deepmerge from 'deepmerge';
 
-const defaultConfig: SnapClientConfig = {
+const defaultConfig: ClientConfig = {
 	meta: {
 		prefetch: true,
 		ttl: 300000,
@@ -47,9 +47,9 @@ type Cache = {
 
 const cache: Cache = {};
 
-export class SnapClient {
-	private globals: SnapClientGlobals;
-	private config: SnapClientConfig;
+export class Client {
+	private globals: ClientGlobals;
+	private config: ClientConfig;
 	private requesters: {
 		autocomplete: HybridAPI;
 		meta: LegacyAPI;
@@ -57,7 +57,7 @@ export class SnapClient {
 		trending: SuggestAPI;
 	};
 
-	constructor(globals: SnapClientGlobals, config: SnapClientConfig = {}) {
+	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}

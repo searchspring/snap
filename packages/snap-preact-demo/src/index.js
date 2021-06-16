@@ -3,7 +3,7 @@ import { h, Fragment, render } from 'preact';
 
 /* searchspring imports */
 import { SearchController } from '@searchspring/snap-controller';
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -43,7 +43,7 @@ const cntrlrConfig = {
 };
 
 const cntrlr = new SearchController(cntrlrConfig, {
-	client: new SnapClient(globals, clientConfig),
+	client: new Client(globals, clientConfig),
 	store: new SearchStore(),
 	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),

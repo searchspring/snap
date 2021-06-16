@@ -1,6 +1,7 @@
 import type { EventManager, Next } from '@searchspring/snap-event-manager';
 
-import { Tracker } from '@searchspring/snap-tracker';
+import type { Client } from '@searchspring/snap-client';
+import type { Tracker } from '@searchspring/snap-tracker';
 
 export type NextEvent = Next;
 

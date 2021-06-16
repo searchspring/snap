@@ -19,7 +19,7 @@ npm install --save @searchspring/snap-client
 # Usage
 ## Import
 ```typescript
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 ```
 
 ## Global Config
@@ -57,7 +57,7 @@ const globals = {
 Object required for all controllers
 
 ```typescript
-export type SnapClientConfig = {
+export type ClientConfig = {
 	meta?: {
 		prefetch?: boolean;
 		ttl?: number;
@@ -90,7 +90,7 @@ See [Search Typical Usage](../../README.md#SearchTypicalUsage)
 
 ## Standalone usage
 ```typescript
-const client = new SnapClient(globals, clientConfig);
+const client = new Client(globals, clientConfig);
 
 const results = await client.search({
   search: {
@@ -105,7 +105,7 @@ const results = await client.search({
 Makes a request to the Searchspring Search API and returns a promise.  
 
 ```typescript
-const client = new SnapClient(globals, clientConfig);
+const client = new Client(globals, clientConfig);
 
 const results = await client.search({
   search: {
@@ -120,7 +120,7 @@ const results = await client.search({
 Makes a request to the Searchspring Autocomplete API and returns a promise.  
 
 ```typescript
-const client = new SnapClient(globals, clientConfig);
+const client = new Client(globals, clientConfig);
 
 const results = await client.autocomplete({
   suggestions: {
@@ -141,7 +141,7 @@ The meta property contains the metadata related to the siteId that the client wa
 Note that the `search` method sets the `meta` property, therefore it must be called before attempting to access the `meta` property.
 
 ```typescript
-const client = new SnapClient(globals, clientConfig);
+const client = new Client(globals, clientConfig);
 
 const results = await client.search({
   search: {
