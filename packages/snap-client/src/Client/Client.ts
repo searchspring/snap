@@ -1,4 +1,16 @@
-import { LegacyAPI, SnapAPI, HybridAPI, SuggestAPI, TrendingRequestModel, TrendingResponseModel, ApiConfiguration } from './apis';
+import {
+	LegacyAPI,
+	SnapAPI,
+	HybridAPI,
+	SuggestAPI,
+	RecommendAPI,
+	TrendingRequestModel,
+	TrendingResponseModel,
+	RecommendRequestModel,
+	RecommendCombinedRequestModel,
+	RecommendCombinedResponseModel,
+	ApiConfiguration,
+} from './apis';
 import { ClientGlobals, ClientConfig } from '../types';
 
 import {
@@ -29,6 +41,12 @@ const defaultConfig: ClientConfig = {
 			// path: '/api/v1/autocomplete',
 		},
 	},
+	recommend: {
+		api: {
+			// host: 'https://snapi.kube.searchspring.io',
+			// path: '/api/v1/autocomplete',
+		},
+	},
 	trending: {
 		prefetch: false,
 		ttl: 86400000,
@@ -54,6 +72,7 @@ export class Client {
 		autocomplete: HybridAPI;
 		meta: LegacyAPI;
 		search: HybridAPI;
+		recommend: RecommendAPI;
 		trending: SuggestAPI;
 	};
 
@@ -65,15 +84,39 @@ export class Client {
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
 
-		const apiHost = `https://${this.globals.siteId}.a.searchspring.io`;
-
 		cache[this.globals.siteId] = cache[this.globals.siteId] || {};
 
 		this.requesters = {
-			autocomplete: new HybridAPI(new ApiConfiguration({ basePath: this.config.autocomplete.api?.host || apiHost })),
-			meta: new LegacyAPI(new ApiConfiguration({ basePath: this.config.meta.api?.host || apiHost })),
-			search: new HybridAPI(new ApiConfiguration({ basePath: this.config.search.api?.host || apiHost })),
-			trending: new SuggestAPI(new ApiConfiguration({ basePath: this.config.trending.api?.host || apiHost })),
+			autocomplete: new HybridAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			meta: new LegacyAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			recommend: new RecommendAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			search: new HybridAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			trending: new SuggestAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
 		};
 
 		if (this.config.meta.prefetch && !cache[this.globals.siteId].meta) {
@@ -133,5 +176,32 @@ export class Client {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
 
 		return this.requesters.trending.getTrending(params);
+	}
+
+	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
+		// TODO
+		// await results and profile and return a mashup - figure out how to handle multiple tags
+		if (!params.tag && !params.tags) {
+			throw 'tag(s) parameter is required';
+		}
+
+		if (params.tag) {
+			params.tags = params.tags || [params.tag];
+		}
+
+		let method = 'getRecommendations';
+		if (params?.cart) {
+			method = 'postRecommendations';
+		}
+
+		const [profile, recommendations] = await Promise.all([
+			this.requesters.recommend.getProfile({ siteId: this.globals.siteId, tag: params.tag, branch: params.branch }),
+			this.requesters.recommend[method](params),
+		]);
+
+		return {
+			...profile,
+			results: recommendations[0].results,
+		};
 	}
 }

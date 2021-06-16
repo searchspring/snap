@@ -15,7 +15,7 @@ export interface RequestOpts {
 }
 
 export class API {
-	constructor(protected configuration = new ApiConfiguration()) {
+	constructor(protected configuration: ApiConfiguration) {
 		// nothing else todo
 	}
 
@@ -58,6 +58,7 @@ export class API {
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
+	siteId: string;
 	basePath?: string; // override base path
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
@@ -65,7 +66,14 @@ export interface ApiConfigurationParameters {
 }
 
 export class ApiConfiguration {
-	constructor(private configuration: ApiConfigurationParameters = {}) {}
+	constructor(private configuration: ApiConfigurationParameters) {
+		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
+		configuration.basePath = configuration.basePath || apiHost;
+	}
+
+	getSiteId(): string {
+		return this.configuration.siteId;
+	}
 
 	get basePath(): string {
 		return this.configuration.basePath;
