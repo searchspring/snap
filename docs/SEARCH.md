@@ -74,7 +74,7 @@ const searchControllerServices = {
 
 <h3 id="SearchMiddleware">Middleware</h3>
 
-Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various [events](/packages/snap-controller/#searchcontroller-event-lifecycle). There are two ways of doing this, using the Controller's `on` or `use` methods.
+Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various events. There are two ways of doing this, using the Controller's `on` or `use` methods.
 
 #### via `on` method:
 

@@ -10,22 +10,22 @@ The heart of controlling Search, Autocomplete, & Finder functionality. The Contr
 
 Snap Controller is a top-level package that requires the following dependencies as services:
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a> [@searchspring/snap-client](../snap-client)
+<a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a> [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client)
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a> [@searchspring/snap-store-mobx](../snap-store-mobx)
+<a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a> [@searchspring/snap-store-mobx](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> [@searchspring/snap-url-manager](../snap-url-manager)
+<a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a> [@searchspring/snap-event-manager](../snap-event-manager)
+<a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a> [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a> [@searchspring/snap-profiler](../snap-profiler)
+<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a> [@searchspring/snap-profiler](https://github.com/searchspring/snap/tree/main/packages/snap-profiler)
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](../snap-logger)
+<a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger)
 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg"/>
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
 </details>
 
 <br>

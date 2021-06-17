@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
 	<script src="https://kit.fontawesome.com/c1798fb82d.js" crossorigin="anonymous"></script>
+	<!-- <base href=""> -->
 	<title>Snap Documentation</title>
 </head>
 <body>
@@ -22,6 +23,68 @@
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<script>
+		function modifyLinks(file, markdown) {
+			console.log("modifyLinks file: " + file)
+			// replaces.push({ a: "", b: ""})
+			const replaces = [];
+			replaces.push({ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true", b: "../../images/snap-dependencies.jpg"})
+			replaces.push({ a: "https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true", b: "../../images/logger-example.png"})
+			replaces.push({ a: "https://github.com/searchspring/snap/blob/main/images/emojis.png?raw=true", b: "../../images/emojis.png"})
+			replaces.push({ a: "https://github.com/searchspring/snap/blob/main/images/colors.png?raw=true", b: "../../images/colors.png"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-client)", b: "(/#/package-client)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)", b: "(/#/package-storeMobx)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)", b: "(/#/package-urlManager)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)", b: "(/#/package-eventManager)"}) 
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-profiler)", b: "(/#/package-profiler)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-logger)", b: "(/#/package-logger)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller)", b: "(/#/package-controller)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)", b: "(/#/components-preact)"})
+			replaces.push({ a: "(https://snapi.kube.searchspring.io/api/v1/#tag/Meta)", b: "(/#/api-docs#Meta)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)", b: "(/#/package-storeMobx-storage)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)", b: "(/#/package-storeMobx-search)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)", b: "(/#/package-controller-finder)" })
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)", b: "(/#/package-urlManager-translators)" })
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers)", b: "(/#/package-urlManager-linkers)" })
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(/#/package-urlManager-translators-url)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(/#/package-urlManager-translators-queryString)"})
+			replaces.push({ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(/#/package-urlManager-linkers-react)"})
+			
+			
+			
+			
+			
+			switch (file) {
+				case "./docs/SEARCH.md":
+					replaces.push({ a: "../snap-toolbox/README.md#DomTargeter", b: "#/package-toolbox-domTargeter"})
+					break;
+				case "./docs/AUTOCOMPLETE.md":
+					replaces.push({ a: "../snap-toolbox/README.md#DomTargeter", b: "#/package-toolbox-domTargeter"})
+					break;
+				case "./docs/FINDER.md":
+					replaces.push({ a: "../snap-toolbox/README.md#DomTargeter", b: "#/package-toolbox-domTargeter"})
+					break;
+				case "./packages/snap-controller/README.md":
+					break;
+				case "./packages/snap-client/README.md":
+					replaces.push({ a: "(https://snapi.kube.searchspring.io/api/v1/)", b: "(#/api-docs)"})
+					replaces.push({ a: "(https://searchspring.github.io/snapi-explorer/)", b: "(#/api-explorer)"})
+
+					
+					break;
+				
+				
+					break;
+
+
+					
+				default:
+					break;
+			}
+			replaces.forEach(function(replace) {
+				markdown = markdown.replaceAll(replace.a, replace.b);
+			});
+			return markdown
+		}
 		const documents = [
 			{
 				categoryName: 'General',
@@ -425,7 +488,7 @@
 					const response = await fetch(file);
 					let text = await response.text()
 					this.iframe = "";
-					this.markdown = text;
+					this.markdown = modifyLinks(file, text);
 				}
 			}
 		});

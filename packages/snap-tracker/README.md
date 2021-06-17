@@ -13,7 +13,7 @@ Snap Tracker is a dependency of [@searchspring/snap-controller](../snap-controll
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg"/>
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
 </details>
 <br>
 
