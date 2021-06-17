@@ -12,13 +12,15 @@ import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, style }) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection, style }) =>
 		css({
 			display: 'block',
 			position: 'fixed',
-			transition: `left ${transitionSpeed}`,
-			left: isActive ? '0' : `-${width}`,
-			top: '0',
+			transition: `${slideDirection ? slideDirection : 'left'} ${transitionSpeed}`,
+			left: slideDirection == 'left' ? (isActive ? '0' : `-${width}`) : slideDirection != 'right' ? '0' : 'initial',
+			right: slideDirection == 'right' ? (isActive ? '0' : `-${width}`) : 'initial',
+			bottom: slideDirection == 'bottom' ? (isActive ? '0' : `-100vh`) : 'initial',
+			top: slideDirection == 'top' ? (isActive ? '0' : `-100vh`) : slideDirection == 'bottom' ? 'initial' : '0',
 			height: '100%',
 			zIndex: '10004',
 			width: '90%',
@@ -38,6 +40,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		// default props
 		active: false,
 		displayAt: '',
+		slideDirection: 'left',
 		width: '300px',
 		buttonContent: 'click me',
 		overlayColor: 'rgba(0,0,0,0.8)',
@@ -49,7 +52,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		...properties.theme?.components?.slideout,
 	};
 
-	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, disableStyles, className, style } = props;
+	const { children, active, buttonContent, width, displayAt, transitionSpeed, overlayColor, slideDirection, disableStyles, className, style } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -88,7 +91,10 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 					</div>
 				)}
 
-				<div className={classnames('ss__slideout', className)} css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, style })}>
+				<div
+					className={classnames('ss__slideout', className)}
+					css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, slideDirection, style })}
+				>
 					{children && cloneElement(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
@@ -105,8 +111,10 @@ export interface SlideoutProps extends ComponentProps {
 	displayAt?: string;
 	transitionSpeed?: string;
 	overlayColor?: string;
+	slideDirection?: SlideDirectionType;
 }
 
+type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';
 interface SlideoutSubProps {
 	overlay?: OverlayProps;
 }
