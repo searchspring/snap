@@ -9796,15 +9796,18 @@
 					var isActive = _a.isActive,
 						width = _a.width,
 						transitionSpeed = _a.transitionSpeed,
+						slideDirection = _a.slideDirection,
 						style = _a.style;
 					return Object(emotion_react_browser_esm.a)(
 						__assign(
 							{
 								display: 'block',
 								position: 'fixed',
-								transition: 'left ' + transitionSpeed,
-								left: isActive ? '0' : '-' + width,
-								top: '0',
+								transition: (slideDirection || 'left') + ' ' + transitionSpeed,
+								left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
+								right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
+								bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
+								top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
 								height: '100%',
 								zIndex: '10004',
 								width: '90%',
@@ -9829,7 +9832,15 @@
 					props = __assign(
 						__assign(
 							__assign(
-								{ active: !1, displayAt: '', width: '300px', buttonContent: 'click me', overlayColor: 'rgba(0,0,0,0.8)', transitionSpeed: '0.25s' },
+								{
+									active: !1,
+									displayAt: '',
+									slideDirection: 'left',
+									width: '300px',
+									buttonContent: 'click me',
+									overlayColor: 'rgba(0,0,0,0.8)',
+									transitionSpeed: '0.25s',
+								},
 								null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.slideout
 							),
 							properties
@@ -9843,6 +9854,7 @@
 					displayAt = props.displayAt,
 					transitionSpeed = props.transitionSpeed,
 					overlayColor = props.overlayColor,
+					slideDirection = props.slideDirection,
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
@@ -9908,7 +9920,15 @@
 								'div',
 								{
 									className: classnames_default()('ss__slideout', className),
-									css: !disableStyles && CSS_slideout({ isActive: isActive, width: width, transitionSpeed: transitionSpeed, style: style }),
+									css:
+										!disableStyles &&
+										CSS_slideout({
+											isActive: isActive,
+											width: width,
+											transitionSpeed: transitionSpeed,
+											slideDirection: slideDirection,
+											style: style,
+										}),
 								},
 								children && Object(preact_module.cloneElement)(children, { toggleActive: toggleActive, active: isActive })
 							),
@@ -10083,6 +10103,12 @@
 									table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 									control: { type: 'boolean' },
 								},
+								slideDirection: {
+									defaultValue: 'left',
+									description: 'Slideout slide direction',
+									table: { type: { summary: 'string' }, defaultValue: { summary: 'left' } },
+									control: { type: 'text' },
+								},
 								width: {
 									defaultValue: '300px',
 									description: 'Slideout width',
@@ -10096,6 +10122,7 @@
 									control: { type: 'text' },
 								},
 								buttonContent: {
+									defaultValue: 'click me',
 									description: 'Slideout button content (children), appended to buttonText',
 									table: { type: { summary: 'string, jsx' }, defaultValue: { summary: 'click me' } },
 									control: { type: 'text' },
