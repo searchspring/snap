@@ -9,13 +9,13 @@ A collection of utility tools such as DOM targetting, currency formatting & brow
 # Dependency
 
 Snap Toolbox is a dependency of:
-- [@searchspring/snap-store-mobx](../snap-store-mobx) <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a>
-- [@searchspring/snap-preact-components](../snap-preact-components) <a href="https://www.npmjs.com/package/@searchspring/snap-preact-components"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+- [@searchspring/snap-store-mobx](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx) <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a>
+- [@searchspring/snap-preact-components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components) <a href="https://www.npmjs.com/package/@searchspring/snap-preact-components"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg" />
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true" />
 </details>
 <br>
 

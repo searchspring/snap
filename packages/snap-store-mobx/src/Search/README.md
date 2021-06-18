@@ -2,7 +2,7 @@
 The search store is meant to hold the search API response and associated state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
 ## `meta` property
-The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://searchspring.github.io/snapi-oas/#tag/Meta). The majority of this data is used elsewhere in constructing other SearchStore data like 'sorting' and 'facets'.
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://snapi.kube.searchspring.io/api/v1/#tag/Meta). The majority of this data is used elsewhere in constructing other SearchStore data like 'sorting' and 'facets'.
 
 ## `merchandising` property
 
@@ -468,7 +468,7 @@ Core product attributes object
 
 
 ### `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](../snap-event-manager)
+This is an empty object that is available for custom store manipulation using the [EventManager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)
 
 
 

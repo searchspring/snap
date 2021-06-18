@@ -20,7 +20,7 @@ store.reset()
 ```
 
 ## `meta` property
-The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://snapi.kube.searchspring.io/api/v1/#tag/Meta)
 
 ## `state` property
 Contains autocomplete lock state
@@ -85,15 +85,15 @@ Contains a reference to the current focused `HTMLInputElement`
 Contains the currently focused input value being searched
 
 ### `url` property
-Contains a reference to the [UrlManager](../snap-url-manager) that was linked using the `link` method
+Contains a reference to the [UrlManager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) that was linked using the `link` method
 
 ## `storage` property
-Contains a reference to the [StorageStore](#StorageStore)
+Contains a reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
 
 <!-- TODO: update link -->
 
 ## `merchandising` property
-Contains redirect and banner merchandising data that the Search API returned. See [SearchStore `merchandising` property](#SearchStoreMerchandising)
+Contains redirect and banner merchandising data that the Search API returned. See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `merchandising` property
 
 ## `search` property
 Contains an object with the following properties:
@@ -124,7 +124,7 @@ This will also lock the term state, and unlock facets state.
 
 
 ## `facets` property
-An array of facets. See [Search Facets](#SearchFacets)
+An array of facets. See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `facets` property
 
 In addition to all the search facets functionally, the Autocomplete facets will have an added `preview` method
 
@@ -133,13 +133,13 @@ See [terms.preview](#AutocompletePreview) for `facets.preview` usage
 
 
 ## `filters` property
-See [SearchStore Filters](#SearchStoreFilters)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `filters` property
 
 ## `results` property
-See [SearchStore Results](#SearchStoreResults)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `results` property
 
 ## `pagination` property
-See [SearchStore Pagination](#SearchStorePagination)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `pagination` property
 
 ## `sorting` property
-See [SearchStore Sorting](#SearchStoreSorting)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `sorting` property

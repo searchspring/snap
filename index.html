@@ -22,6 +22,47 @@
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<script>
+		function modifyLinks(markdown) {
+			var replaces = [
+				{ a: "(https://snapi.kube.searchspring.io/api/v1/#tag/Meta)", b: "(/#/api-docs#Meta)"},
+				{ a: "(https://snapi.kube.searchspring.io/api/v1/)", b: "(#/api-docs)"},
+				{ a: "(https://searchspring.github.io/snapi-explorer/)", b: "(#/api-explorer)"},	
+				
+				{ a: "(https://github.com/searchspring/snap/blob/main/docs/SEARCH.md)", b: "(/#/start-search)"},
+
+				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true", b: "../../images/snap-dependencies.jpg"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true", b: "../../images/logger-example.png"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/emojis.png?raw=true", b: "../../images/emojis.png"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/colors.png?raw=true", b: "../../images/colors.png"},
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-client)", b: "(/#/package-client)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)", b: "(/#/package-storeMobx)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)", b: "(/#/package-urlManager)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)", b: "(/#/package-eventManager)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-profiler)", b: "(/#/package-profiler)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-logger)", b: "(/#/package-logger)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller)", b: "(/#/package-controller)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox)", b: "(/#/package-toolbox)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)", b: "(/#/components-preact)"},
+				
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)", b: "(/#/package-toolbox-domTargeter)"},
+				
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)", b: "(/#/package-storeMobx-storage)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)", b: "(/#/package-storeMobx-search)"},
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)", b: "(/#/package-controller-finder)" },
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)", b: "(/#/package-urlManager-translators)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers)", b: "(/#/package-urlManager-linkers)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(/#/package-urlManager-translators-url)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(/#/package-urlManager-translators-queryString)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(/#/package-urlManager-linkers-react)"},
+			];
+			replaces.forEach(function(replace) {
+				markdown = markdown.replaceAll(replace.a, replace.b);
+			});
+			return markdown
+		}
 		const documents = [
 			{
 				categoryName: 'General',
@@ -438,7 +479,7 @@
 					const response = await fetch(file);
 					let text = await response.text()
 					this.iframe = "";
-					this.markdown = text;
+					this.markdown = modifyLinks(text);
 				}
 			}
 		});

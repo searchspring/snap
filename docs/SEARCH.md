@@ -74,7 +74,7 @@ const searchControllerServices = {
 
 <h3 id="SearchMiddleware">Middleware</h3>
 
-Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various [events](/packages/snap-controller/#searchcontroller-event-lifecycle). There are two ways of doing this, using the Controller's `on` or `use` methods.
+Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various events. There are two ways of doing this, using the Controller's `on` or `use` methods.
 
 #### via `on` method:
 
@@ -112,7 +112,7 @@ searchController.use(middleware);
 
 `DomTargeter` is a utility for rending components in specified DOM targets. The following example shows how to use the DomTargeter inside of the 'init' middleware of the `SearchController`.
 
-For further usage and documentation, see [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter)
+For further usage and documentation, see [DomTargeter](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)
 
 ```typescript
 searchController.on('init', async ({ controller }, next) => {

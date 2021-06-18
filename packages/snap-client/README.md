@@ -6,7 +6,7 @@ Simple Javascript client for communicating with the Searchspring Snap API.
 
 # Quick Links
 
-[Snap API docs](http://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
+[Snap API docs](https://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
 
 [Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API
 
@@ -37,7 +37,7 @@ const globals = {
 
 Any other keys defined here will be passed to the API request
 
-For a full list of parameters please see the [Snap API docs](http://snapi.kube.searchspring.io/api/v1/)
+For a full list of parameters please see the [Snap API docs](https://snapi.kube.searchspring.io/api/v1/)
 
 For example, with background filter:
 
@@ -84,8 +84,6 @@ export type SnapApiConfig = {
 
 ## Controller usage
 Snap Client is a dependency of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
-
-See [Search Typical Usage](../../README.md#SearchTypicalUsage)
 
 
 ## Standalone usage

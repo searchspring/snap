@@ -8,12 +8,12 @@ The Snap Tracker service is responsible for sending beacon events.
 
 # Dependencies
 
-Snap Tracker is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Tracker is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg"/>
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
 </details>
 <br>
 
