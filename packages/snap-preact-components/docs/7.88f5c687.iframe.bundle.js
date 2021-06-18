@@ -1,7 +1,7 @@
 (window.webpackJsonp = window.webpackJsonp || []).push([
 	[7],
 	{
-		935: function (module, __webpack_exports__, __webpack_require__) {
+		933: function (module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, 'getScrollAreaStyles', function () {
