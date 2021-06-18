@@ -82,7 +82,7 @@ const logger = new Logger();
 logger.warn('this is a warning');
 ```
 
-## `getGroup` method
+## `setNamespace` method
 Sets prefix instead of defining a prefix in the constructor.
 ```typescript
 const logger = new Logger();
@@ -90,7 +90,7 @@ const logger = new Logger();
 logger.warn('Hello');
 // 'Hello'
 
-logger.setGroup('search');
+logger.setNamespace('search');
 
 logger.warn('Hello');
 // ' [search] :: Hello'

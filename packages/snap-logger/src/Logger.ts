@@ -11,7 +11,7 @@ export class Logger {
 		this.prefix = prefix;
 	}
 
-	public setGroup(group: string): void {
+	public setNamespace(group: string): void {
 		this.prefix = ` [${group}] :: `;
 	}
 

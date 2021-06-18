@@ -81,7 +81,7 @@ export abstract class AbstractController {
 		this.tracker = tracker;
 
 		// configure the logger
-		this.log.setGroup(this.config.id);
+		this.log.setNamespace(this.config.id);
 
 		// link the controller to the store
 		this.store.link(this);
