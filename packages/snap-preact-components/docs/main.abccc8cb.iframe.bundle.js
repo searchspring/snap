@@ -5373,7 +5373,7 @@
 						(this.mode = LogMode.PRODUCTION), (this.emoji = emoji), (this.colors = colors), (this.prefix = ''), (this.prefix = prefix);
 					}
 					return (
-						(Logger.prototype.setGroup = function (group) {
+						(Logger.prototype.setNamespace = function (group) {
 							this.prefix = ' [' + group + '] :: ';
 						}),
 						(Logger.prototype.setMode = function (mode) {
@@ -5661,7 +5661,7 @@
 						(this.profiler = profiler),
 						(this.log = logger),
 						(this.tracker = tracker),
-						this.log.setGroup(this.config.id),
+						this.log.setNamespace(this.config.id),
 						this.store.link(this),
 						this.profiler.setNamespace(this.config.id),
 						this.tracker.namespace || this.tracker.setNamespace(this.config.id),
