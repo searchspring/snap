@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
 export type Json = any;
@@ -21,7 +22,7 @@ export class API {
 
 	protected async request(context: RequestOpts): Promise<Response> {
 		const { url, init } = this.createFetchParams(context);
-		const response = await this.fetchApi(url, init);
+		const response = await fetch(url, init);
 		if (response.status >= 200 && response.status < 300) {
 			return response;
 		}
@@ -47,19 +48,10 @@ export class API {
 		};
 		return { url, init };
 	}
-
-	private fetchApi = async (url: string, init: RequestInit) => {
-		const response = await this.configuration.fetchApi(url, init);
-
-		return response;
-	};
 }
-
-export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
 	basePath?: string; // override base path
-	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 }
@@ -69,10 +61,6 @@ export class ApiConfiguration {
 
 	get basePath(): string {
 		return this.configuration.basePath;
-	}
-
-	get fetchApi(): FetchAPI {
-		return this.configuration.fetchApi || window.fetch.bind(window);
 	}
 
 	get queryParamsStringify(): (params: HTTPQuery) => string {
