@@ -58,7 +58,7 @@ A reference to the [FinderController](https://github.com/searchspring/snap/tree/
 Inherited from `facet.type` of the facet name that was provided in the config
 
 ### `field` property
-Inherited from `facet.field`) of the facet name that was provided in the config
+Inherited from `facet.field` of the facet name that was provided in the config
 
 ### `filtered` property
 Inherited from `facet.filtered` of the facet name that was provided in the config

@@ -112,7 +112,7 @@ searchController.use(middleware);
 
 `DomTargeter` is a utility for rending components in specified DOM targets. The following example shows how to use the DomTargeter inside of the 'init' middleware of the `SearchController`.
 
-For further usage and documentation, see [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter)
+For further usage and documentation, see [DomTargeter](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)
 
 ```typescript
 searchController.on('init', async ({ controller }, next) => {

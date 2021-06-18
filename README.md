@@ -23,7 +23,7 @@ Documentation for each package can be found in its respective README file.
 
 ## Client
 
-[@searchspring/snap-client-javascript](packages/snap-client-javascript) <a href="https://www.npmjs.com/package/@searchspring/snap-client-javascript"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client-javascript.svg?style=flat"></a>
+[@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) <a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a>
 
 Simple Javascript client for communicating with Searchspring's API
 
@@ -32,12 +32,12 @@ Simple Javascript client for communicating with Searchspring's API
 A collection of interface elements for front end libraries
 ### React / Preact
 
-[@searchspring/snap-preact-components](packages/snap-preact-components) <a href="https://www.npmjs.com/package/@searchspring/snap-preact-components"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-preact-components.svg?style=flat"></a>
+[@searchspring/snap-preact-components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components) <a href="https://www.npmjs.com/package/@searchspring/snap-preact-components"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-preact-components.svg?style=flat"></a>
 
 
 ## Controller
 
-[@searchspring/snap-controller](packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+[@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 The heart of controlling Search, Autocomplete, & Finder functionality
 
@@ -48,41 +48,41 @@ A demo store utilizing all Snap packages and components.
 Check it out at [try.searchspring.com](http://try.searchspring.com/) or use it as a reference
 <!-- TODO: Update try.searchspring.com to Snap deployed demostore -->
 
-[@searchspring/snap-preact-demo](packages/snap-preact-demo)
+[@searchspring/snap-preact-demo](https://github.com/searchspring/snap/tree/main/packages/snap-preact-demo)
 
 ## Event Manager
 
-[@searchspring/snap-event-manager](packages/snap-event-manager) <a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a>
+[@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) <a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a>
 
 Hook into custom events for modifying data
 
 ## Logger
 
-[@searchspring/snap-logger](packages/snap-logger) <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
+[@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger) <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a>
 
 Simple logger for debugging
 
 ## Profiler
 
-[@searchspring/snap-profiler](packages/snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
+[@searchspring/snap-profiler](https://github.com/searchspring/snap/tree/main/packages/snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
 
 A utility for profiling the performance of Snap features
 
 ## Store
 
-[@searchspring/snap-store-mobx](packages/snap-store-mobx) <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a>
+[@searchspring/snap-store-mobx](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx) <a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a>
 
 MobX state management
 
 ## Toolbox
 
-[@searchspring/snap-toolbox](packages/snap-toolbox) <a href="https://www.npmjs.com/package/@searchspring/snap-toolbox"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-toolbox.svg?style=flat"></a>
+[@searchspring/snap-toolbox](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox) <a href="https://www.npmjs.com/package/@searchspring/snap-toolbox"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-toolbox.svg?style=flat"></a>
 
 A collection of utility tools such as DOM targetting, currency formatting & browser feature flags
 
 ## URL Manager
 
-[@searchspring/snap-url-manager](packages/snap-url-manager) <a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a>
+[@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) <a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a>
 
 A standard API for URL management across all Snap products
 

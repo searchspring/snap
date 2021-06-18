@@ -48,13 +48,13 @@ const autocompleteControllerServices = {
 The translator type should be the same between Autocomplete and Search Controllers in order for compatible URLs to be generated.
 
 ### Middleware
-Autocomplete supports middleware to hook into various events using `use` and `on` methods. See [Search Middlewear](#/start-search#SearchMiddleware) for usage
+Autocomplete supports middleware to hook into various events using `use` and `on` methods. See [Search Middlewear](https://github.com/searchspring/snap/blob/main/docs/SEARCH.md) for usage
 
 
 ## DomTargeter
 Similar to Search DomTargeter, we'll use middleware to hook into AutocompleteController's init event to render autocomplete.
 
-For further usage and documentation, see [@searchspring/snap-toolbox DomTargeter](../snap-toolbox/README.md#DomTargeter)
+For further usage and documentation, see [DomTargeter](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)
 
 ```typescript
 autocompleteController.on('init', async ({ controller }) => {
