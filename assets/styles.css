@@ -61,7 +61,7 @@ table td {
 
 #header {
 	display: flex;
-	margin: 20px 20px 40px;
+	margin: 10px 0 20px 0;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -69,24 +69,6 @@ table td {
 .logo-container {
 	display: flex;
 	align-items: center;
-}
-
-.logo-container .searchspring-svg-logo {
-	width: 40px;
-	transform: rotate(24deg);
-}
-
-.logo-container .logo-nap {
-	text-decoration: underline;
-	text-decoration-color: #4c3ce2;
-	color: #3a23ad;
-	font-size: 40px;
-	font-weight: bold;
-	font-family: 'Press Start 2P', cursive;
-}
-
-.logo-container .logo-nap .exc {
-	color: #00cee1;
 }
 
 #navigation-wrapper {
@@ -105,7 +87,6 @@ table td {
 
 #navigation-wrapper img {
 	width: 100%;
-	padding: 20px;
 }
 
 #navigation {
@@ -195,6 +176,10 @@ code:not([class]) {
 }
 
 @media only screen and (max-width: 767px) {
+	#header {
+		margin: 0;
+	}
+
 	#navigation {
 		display: none;
 	}
@@ -211,8 +196,8 @@ code:not([class]) {
 	}
 
 	#navigation-wrapper img {
-		width: 50%;
-		padding: 0.5em;
+		width: 100%;
+		max-height: 80px;
 	}
 
 	#navigation-wrapper .collapseNav {
