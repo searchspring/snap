@@ -2935,6 +2935,7 @@
 				__webpack_require__(41),
 				__webpack_require__(14),
 				__webpack_require__(73),
+				__webpack_require__(883),
 				__webpack_require__(81),
 				__webpack_require__(82),
 				__webpack_require__(8),
@@ -2945,7 +2946,7 @@
 				__webpack_require__(37),
 				__webpack_require__(16),
 				__webpack_require__(145),
-				__webpack_require__(884);
+				__webpack_require__(885);
 			var __awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -3585,7 +3586,7 @@
 				__webpack_require__(120),
 				__webpack_require__(47),
 				__webpack_require__(48),
-				__webpack_require__(883);
+				__webpack_require__(884);
 			var __assign = function () {
 				return (__assign =
 					Object.assign ||
@@ -4639,7 +4640,7 @@
 				return !0;
 			}
 			var RangeValueProperties;
-			__webpack_require__(63), __webpack_require__(108), __webpack_require__(890), __webpack_require__(892), __webpack_require__(72);
+			__webpack_require__(63), __webpack_require__(108), __webpack_require__(891), __webpack_require__(893), __webpack_require__(72);
 			function QueryStringTranslator_typeof(obj) {
 				return (QueryStringTranslator_typeof =
 					'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
@@ -5272,7 +5273,7 @@
 				})(),
 				Profiler =
 					(__webpack_require__(27),
-					__webpack_require__(893),
+					__webpack_require__(894),
 					__webpack_require__(474),
 					(function () {
 						function Profiler(namespace) {
@@ -5345,7 +5346,7 @@
 						yellow: '#d1d432',
 					}),
 				emoji =
-					(__webpack_require__(895),
+					(__webpack_require__(896),
 					{
 						bang: String.fromCodePoint(8252),
 						bright: String.fromCodePoint(128262),
@@ -7676,7 +7677,7 @@
 						SearchStore
 					);
 				})(AbstractStore_AbstractStore),
-				v4 = (__webpack_require__(896), __webpack_require__(958)),
+				v4 = __webpack_require__(958),
 				TrackEvent = function TrackEvent(payload) {
 					var _a, _b, _c;
 					if (((payload.event = payload.event), !payload.context || !payload.event))
@@ -8184,13 +8185,13 @@
 								_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
 								clearTimeout(_this.isSending),
 								(_this.isSending = window.setTimeout(function () {
-									events.length &&
-										fetch('https://beacon.searchspring.io/beacon', {
-											method: 'POST',
-											headers: { 'Content-Type': 'application/json' },
-											body: JSON.stringify(1 == events.length ? events[0] : events),
-										}),
-										_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
+									if (events.length) {
+										var xhr = new XMLHttpRequest();
+										xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
+											xhr.setRequestHeader('Content-Type', 'application/json'),
+											xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
+									}
+									_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
 								}));
 						}),
 						'object' != Tracker_typeof(globals) || 'string' != typeof globals.siteId)
