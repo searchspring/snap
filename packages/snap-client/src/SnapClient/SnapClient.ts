@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { LegacyAPI, SnapAPI, HybridAPI, SuggestAPI, TrendingRequestModel, TrendingResponseModel, ApiConfiguration } from './apis';
 import { SnapClientGlobals, SnapClientConfig } from '../types';
 

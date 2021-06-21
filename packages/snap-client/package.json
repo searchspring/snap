@@ -20,7 +20,8 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"he": "^1.2.0"
+		"he": "^1.2.0",
+		"whatwg-fetch": "^3.6.2"
 	},
 	"devDependencies": {
 		"@searchspring/snapi-types": "^0.1.17"

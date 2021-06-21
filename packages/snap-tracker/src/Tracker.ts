@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -387,12 +386,12 @@ export class Tracker {
 
 		clearTimeout(this.isSending);
 		this.isSending = window.setTimeout(() => {
-			events.length &&
-				fetch('https://beacon.searchspring.io/beacon', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(events.length == 1 ? events[0] : events),
-				});
+			if (events.length) {
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', 'https://beacon.searchspring.io/beacon');
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.send(JSON.stringify(events.length == 1 ? events[0] : events));
+			}
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
 		});
 	};

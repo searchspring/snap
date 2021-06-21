@@ -17,7 +17,7 @@ const searchPageTarget = new DomTargeter(
 );
 ```
 
-Typical usage would be used with [snap-controller](../snap-controller) to render content and sidebar components in a two-column layout.
+Typical usage would be used with [snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) to render content and sidebar components in a two-column layout.
 
 ```typescript
 searchController.on('init', async ({ controller }, next) => {
