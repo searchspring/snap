@@ -121,13 +121,10 @@ describe('Autocomplete Controller', () => {
 	});
 	badArgs.forEach((args, index) => {
 		it(`fails with bad constructor args ${index}`, () => {
-			let errorCaught = false;
-			try {
+			expect(() => {
+				// @ts-ignore
 				new AutocompleteController(acConfig, args);
-			} catch (e) {
-				errorCaught = true;
-			}
-			expect(errorCaught).toBeTruthy();
+			}).toThrow();
 		});
 	});
 

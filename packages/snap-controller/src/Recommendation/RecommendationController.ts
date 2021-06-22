@@ -1,77 +1,60 @@
 import deepmerge from 'deepmerge';
-
 import { AbstractController } from '../Abstract/AbstractController';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
-import { getSearchParams } from '../utils/getParams';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import { ControllerEnvironment } from '../types';
 
-const defaultConfig: SearchControllerConfig = {
-	id: 'search',
+const defaultConfig: RecommendationControllerConfig = {
+	id: 'recommend',
+	tag: '',
 	globals: {},
-	settings: {
-		redirects: {
-			merchandising: true,
-			singleResult: true,
-		},
-		facets: {
-			trim: true,
-		},
-	},
 };
 
-export class SearchController extends AbstractController {
-	config: SearchControllerConfig;
+export class RecommendationController extends AbstractController {
+	config: RecommendationControllerConfig;
 
-	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+	constructor(config: RecommendationControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
+
+		if (!config.tag) {
+			throw new Error(`Invalid config passed to RecommendationController. The "tag" attribute is required.`);
+		}
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-			search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (recommend: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			recommend.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (recommend: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
-			const config = search.controller.config as SearchControllerConfig;
-			const redirectURL = search.response?.merchandising?.redirect;
-
-			if (redirectURL && config?.settings?.redirects?.merchandising) {
-				window.location.replace(redirectURL);
-				return false;
-			}
-
-			if (
-				config?.settings?.redirects?.singleResult &&
-				search?.response.search.query &&
-				search?.response?.pagination?.totalResults === 1 &&
-				!search?.response?.filters?.length
-			) {
-				window.location.replace(search?.response.results[0].mappings.core.url);
-				return false;
-			}
-			search.controller.store.loading = false;
+			recommend.controller.store.loading = false;
 		});
 	}
 
 	get params(): Record<string, any> {
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
+		// TODO: add cart, shopper, lastViewed
+		const params = {
+			tag: this.config.tag,
+			...this.config.globals,
+		};
 
-		// redirect setting
-		if (!this.config.settings?.redirects?.merchandising) {
-			params.search = params.search || {};
-			params.search.redirectResponse = 'full';
+		// TODO: use env branch variable (from webpack?)
+		params.branch = this.config.branch || 'production';
+
+		if (this.environment == ControllerEnvironment.DEVELOPMENT) {
+			params.test = true;
 		}
 
 		return params;
 	}
 
-	search = async (): Promise<SearchController> => {
+	search = async (): Promise<RecommendationController> => {
 		// TODO: call this.init() if it has never been called
 
 		const params = this.params;
@@ -98,31 +81,7 @@ export class SearchController extends AbstractController {
 			// provide a means to access the actual request parameters (params + globals)
 			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
-			const response = await this.client.search(params);
-			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				response.meta = this.client.meta;
-			}
-
-			// modify response
-			// TODO: move to store
-			if (this.config.settings.facets.trim) {
-				response.facets = response.facets.filter((facet) => {
-					if (!facet.filtered && facet.values?.length == 1) {
-						return facet.values[0].count != response.pagination.totalResults;
-					} else if (facet.values?.length == 0) {
-						return false;
-					} else if (facet.type == 'range' && facet.range.low == facet.range.high) {
-						return false;
-					}
-
-					return true;
-				});
-			}
-
+			const response = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 
@@ -149,7 +108,6 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// console.log("this.store:", this.store)
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();

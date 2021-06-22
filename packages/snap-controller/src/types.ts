@@ -1,7 +1,12 @@
+import type { AbstractController } from './Abstract/AbstractController';
 import type { EventManager, Next } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
+import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { Tracker } from '@searchspring/snap-tracker';
+import type { Profiler } from '@searchspring/snap-profiler';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { Logger } from '@searchspring/snap-logger';
 
 export type NextEvent = Next;
 
@@ -21,17 +26,17 @@ export type SearchControllerConfig = {
 };
 
 export type BeforeSearchObj = {
-	controller: any;
+	controller: AbstractController;
 	request: any;
 };
 
 export type AfterSearchObj = {
-	controller: any;
+	controller: AbstractController;
 	response: any;
 };
 
 export type AfterStoreObj = {
-	controller: any;
+	controller: AbstractController;
 };
 
 /** Finder */
@@ -63,16 +68,29 @@ export type AutocompleteControllerConfig = {
 	};
 };
 
+/** Recommend */
+export type RecommendationControllerConfig = {
+	id: string;
+	tag: string;
+	branch?: string;
+	globals?: any;
+};
+
 /** Abstract */
 export type ControllerServices = {
-	client: any;
-	store: any;
-	urlManager: any;
+	client: Client;
+	store: AbstractStore;
+	urlManager: UrlManager;
 	eventManager: EventManager;
-	profiler: any;
-	logger: any;
+	profiler: Profiler;
+	logger: Logger;
 	tracker: Tracker;
 };
+
+export enum ControllerEnvironment {
+	PRODUCTION = 'production',
+	DEVELOPMENT = 'development',
+}
 
 declare global {
 	interface Window {

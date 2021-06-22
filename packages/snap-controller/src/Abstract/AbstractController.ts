@@ -1,12 +1,7 @@
 import { Tracker } from '@searchspring/snap-tracker';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
-import type { ControllerServices } from '../types';
-
-enum ControllerEnvironment {
-	PRODUCTION = 'production',
-	DEVELOPMENT = 'development',
-}
+import { ControllerServices, ControllerEnvironment } from '../types';
 
 type ControllerConfig = {
 	id: string;
