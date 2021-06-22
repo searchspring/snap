@@ -36,3 +36,14 @@ export const mockAutocompleteController = {
 	urlManager: urlManager,
 	search: null,
 };
+
+export const mockRecommendationController = {
+	config: {
+		id: 'mockRecommendationController',
+	},
+	store: {
+		meta: {},
+	},
+	urlManager: urlManager,
+	search: null,
+};

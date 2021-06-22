@@ -5,7 +5,7 @@ export class ResultStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, resultData, paginationData, merchData) {
+	constructor(controller, resultData, paginationData?, merchData?) {
 		let results = (resultData || []).map((result) => {
 			return new Product(controller, result);
 		});
