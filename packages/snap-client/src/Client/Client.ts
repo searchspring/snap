@@ -1,6 +1,5 @@
 import {
 	LegacyAPI,
-	SnapAPI,
 	HybridAPI,
 	SuggestAPI,
 	RecommendAPI,
@@ -10,10 +9,13 @@ import {
 	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
 	ApiConfiguration,
+	ProfileRequestModel,
 } from './apis';
-import { ClientGlobals, ClientConfig } from '../types';
+import { charsParams } from './utils/charsParams';
 
-import {
+import type { ClientGlobals, ClientConfig } from '../types';
+
+import type {
 	MetaRequestModel,
 	MetaResponseModel,
 	SearchRequestModel,
@@ -44,12 +46,14 @@ const defaultConfig: ClientConfig = {
 	recommend: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
-			// path: '/api/v1/autocomplete',
+			// path: '/api/v1/recommend',
 		},
 	},
-	trending: {
-		prefetch: false,
-		ttl: 86400000,
+	suggest: {
+		api: {
+			// host: 'https://snapi.kube.searchspring.io',
+			// path: '/api/v1/recommend',
+		},
 	},
 };
 
@@ -63,6 +67,7 @@ type Cache = {
 	};
 };
 
+// TODO: expire meta data
 const cache: Cache = {};
 
 export class Client {
@@ -73,7 +78,7 @@ export class Client {
 		meta: LegacyAPI;
 		search: HybridAPI;
 		recommend: RecommendAPI;
-		trending: SuggestAPI;
+		suggest: SuggestAPI;
 	};
 
 	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
@@ -89,31 +94,31 @@ export class Client {
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete.api?.host,
+					basePath: this.config.autocomplete?.api?.host,
 					siteId: this.globals.siteId,
 				})
 			),
 			meta: new LegacyAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete.api?.host,
+					basePath: this.config.meta?.api?.host,
 					siteId: this.globals.siteId,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete.api?.host,
+					basePath: this.config.recommend?.api?.host,
 					siteId: this.globals.siteId,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete.api?.host,
+					basePath: this.config.search?.api?.host,
 					siteId: this.globals.siteId,
 				})
 			),
-			trending: new SuggestAPI(
+			suggest: new SuggestAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete.api?.host,
+					basePath: this.config.suggest?.api?.host,
 					siteId: this.globals.siteId,
 				})
 			),
@@ -139,6 +144,7 @@ export class Client {
 		metaCache.promise
 			.then((data) => {
 				metaCache.data = data;
+				metaCache.created = Date.now();
 			})
 			.catch((err) => {
 				console.error(`Failed to fetch meta data for '${this.globals.siteId}'.`);
@@ -175,28 +181,40 @@ export class Client {
 	async trending(params: TrendingRequestModel): Promise<TrendingResponseModel> {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
 
-		return this.requesters.trending.getTrending(params);
+		return this.requesters.suggest.getTrending(params);
 	}
 
 	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
-		// TODO
-		// await results and profile and return a mashup - figure out how to handle multiple tags
-		if (!params.tag && !params.tags) {
-			throw 'tag(s) parameter is required';
+		// TODO - batching
+
+		const { tag, ...otherParams } = params;
+		if (!tag) {
+			throw 'tag parameter is required';
 		}
 
-		if (params.tag) {
-			params.tags = params.tags || [params.tag];
+		const profileParams: ProfileRequestModel = {
+			tag,
+			siteId: params.siteId || this.globals.siteId,
+		};
+
+		if (otherParams.branch) {
+			profileParams.branch = otherParams.branch;
+			delete otherParams.branch;
 		}
+
+		const recommendParams: RecommendRequestModel = {
+			tags: [tag],
+			...otherParams,
+		};
 
 		let method = 'getRecommendations';
-		if (params?.cart) {
+		if (charsParams(recommendParams) > 1024) {
 			method = 'postRecommendations';
 		}
 
 		const [profile, recommendations] = await Promise.all([
-			this.requesters.recommend.getProfile({ siteId: this.globals.siteId, tag: params.tag, branch: params.branch }),
-			this.requesters.recommend[method](params),
+			this.requesters.recommend.getProfile(profileParams),
+			this.requesters.recommend[method](recommendParams),
 		]);
 
 		return {

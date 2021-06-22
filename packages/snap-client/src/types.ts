@@ -13,9 +13,7 @@ export type ClientConfig = {
 	recommend?: {
 		api?: SnapApiConfig;
 	};
-	trending?: {
-		prefetch?: boolean;
-		ttl?: number;
+	suggest?: {
 		api?: SnapApiConfig;
 	};
 };

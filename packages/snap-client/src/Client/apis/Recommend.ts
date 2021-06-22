@@ -8,7 +8,6 @@ export type RecommendRequestModel = {
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
-	limit?: number;
 	test?: boolean;
 	siteId?: string;
 };
@@ -48,7 +47,18 @@ export type ProfileResponseModel = {
 	};
 };
 
-export type RecommendCombinedRequestModel = RecommendRequestModel & ProfileRequestModel;
+export type RecommendCombinedRequestModel = {
+	tag: string;
+	product?: string;
+	shopper?: string;
+	categories?: string[];
+	cart?: string[];
+	lastViewed?: string[];
+	limit?: number;
+	test?: boolean;
+	siteId?: string;
+	branch?: string;
+};
 
 export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
 
@@ -56,7 +66,6 @@ export class RecommendAPI extends API {
 	// generic batched function?
 	// if cart items use POST otherwise use GET
 
-	// https://8uyt2m.a.searchspring.io/api/personalized-recommendations/profile.json?siteId=8uyt2m&tag=similar
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
@@ -70,12 +79,14 @@ export class RecommendAPI extends API {
 		return response.json();
 	}
 
-	// https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&product=C-AD-W1-1869P
 	async getRecommendations(queryParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
+		const siteId = queryParameters.siteId;
+		delete queryParameters.siteId;
+
 		const response = await this.request({
-			path: `/boost/${this.configuration.getSiteId()}/recommend`,
+			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
 			method: 'GET',
 			headers: headerParameters,
 			query: queryParameters,
@@ -88,8 +99,11 @@ export class RecommendAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
+		const siteId = requestParameters.siteId;
+		delete requestParameters.siteId;
+
 		const response = await this.request({
-			path: `/boost/${this.configuration.getSiteId()}/recommend`,
+			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
 			method: 'POST',
 			headers: headerParameters,
 			body: requestParameters,
