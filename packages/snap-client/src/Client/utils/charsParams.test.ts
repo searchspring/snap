@@ -3,14 +3,17 @@ import { charsParams } from './charsParams';
 describe('param character length', () => {
 	it('requires an object', () => {
 		expect(() => {
+			// @ts-ignore
 			charsParams();
 		}).toThrow();
 
 		expect(() => {
+			// @ts-ignore
 			charsParams(1);
 		}).toThrow();
 
 		expect(() => {
+			// @ts-ignore
 			charsParams('hi');
 		}).toThrow();
 

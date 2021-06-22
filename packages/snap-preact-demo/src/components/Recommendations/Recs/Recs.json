@@ -1,0 +1,21 @@
+{
+	"name": "default",
+	"label": "Default Template",
+	"description": "a decent template...",
+	"component": "Recommendation",
+	"orientation": "horizontal",
+	"parameters": [
+		{
+			"name": "title",
+			"label": "Title",
+			"description": "this shows the title",
+			"defaultValue": "Why not also buy?"
+		},
+		{
+			"name": "numResults",
+			"label": "Number of Results",
+			"description": "this limits how many results are displayed",
+			"defaultValue": 6
+		}
+	]
+}

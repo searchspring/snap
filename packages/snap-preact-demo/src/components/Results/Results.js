@@ -1,9 +1,11 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
+import { Pagination, Results as ResultsComponent, Button, withStore, withController } from '@searchspring/snap-preact-components';
+
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
-import { Pagination, Results as ResultsComponent, Button, withStore } from '@searchspring/snap-preact-components';
+import { Recs } from '../Recommendations';
 
 @withStore
 @observer
@@ -36,11 +38,26 @@ export class Results extends Component {
 	}
 }
 
+@withController
+@withStore
 @observer
 export class NoResults extends Component {
 	render() {
+		const store = this.props.store;
+		const dym = store.search.didYouMean;
+
 		return (
 			<div class="ss-no-results">
+				<Recs controller={this.props.controller.recommendations?.trending} />
+
+				<div class="ss-no-results-container">
+					{dym && (
+						<p class="ss-did-you-mean">
+							Did you mean <a href={dym.url.href}>{dym.string}</a>?
+						</p>
+					)}
+				</div>
+
 				<div class="ss-no-results-container">
 					<h4 class="ss-title">Suggestions</h4>
 
