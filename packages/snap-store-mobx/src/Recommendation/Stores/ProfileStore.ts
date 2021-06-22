@@ -1,4 +1,4 @@
-import { observable, action, computed, makeObservable } from 'mobx';
+import { observable, makeObservable } from 'mobx';
 
 export class ProfileStore {
 	tag: string;

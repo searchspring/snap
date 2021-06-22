@@ -1,0 +1,21 @@
+{
+    "profile": {
+        "tag": "trending",
+        "placement": "home-page",
+        "display": {
+            "threshold": 4,
+            "template": {
+                "name": "preactTest",
+                "uuid": "34fdf15e-7ee1-447f-94c5-ea91086062e1",
+                "markup": "RecsHorizontalComponent",
+                "styles": ".preact-header {\r\n  color: blue;\r\n}"
+            },
+            "templateParameters": {
+                "headerText": "Preact Recommended Products",
+                "count": 12,
+                "component": "Recs2",
+                "extraVar": ""
+            }
+        }
+    }
+}

@@ -26,9 +26,13 @@ import {
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
-const COOKIE_SAMESITE = undefined;
+const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
+const COOKIE_SAMESITE = 'Lax';
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
+const VIEWED_PRODUCTS = 'ss-viewed-products';
+const MAX_VIEWED_COUNT = 15;
+const CART_PRODUCTS = 'ss-cart-products';
 
 enum StorageType { // TODO: get export from store working
 	SESSION = 'session',
@@ -171,6 +175,13 @@ export class Tracker {
 					},
 				};
 
+				// save recently viewed products to cookie
+				if (details.data?.sku || details.data?.childSku) {
+					const products = cookies.get(VIEWED_PRODUCTS).split(',');
+					products.push(details.data.sku || details.data.childSku);
+					cookies.set(VIEWED_PRODUCTS, products.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+				}
+
 				// legacy tracking
 				if (details.data?.sku) {
 					// only send sku to pixel tracker if present (don't send childSku)
@@ -261,6 +272,13 @@ export class Tracker {
 					context,
 					event: { items },
 				};
+
+				// save cart items to cookie
+				if (items.length) {
+					const products = [];
+					items.map((item) => products.push(item.sku || item.childSku));
+					cookies.set(CART_PRODUCTS, products.join(','), COOKIE_SAMESITE, 0);
+				}
 
 				// legacy tracking
 				new PixelEvent(payload);

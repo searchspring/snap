@@ -15,6 +15,7 @@ export class SearchData {
 	merchandising;
 	search;
 	pagination;
+	profile;
 
 	constructor(settings?: Settings) {
 		const config = {
