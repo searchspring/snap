@@ -4,13 +4,27 @@ import { PaginationStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 import { SelectionStore } from './Stores';
 export class FinderStore extends AbstractStore {
+	services;
+	config;
 	meta = {};
 	storage: StorageStore;
 	pagination: PaginationStore;
 	selections: SelectionStore[];
 
-	constructor() {
+	constructor(config, services: { urlManager: any; tracker: any }) {
 		super();
+
+		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
+			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
+		}
+
+		if (typeof services != 'object' || typeof services.tracker?.track != 'object') {
+			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
+		}
+
+		this.config = config;
+		this.services = services;
+
 		this.storage = new StorageStore();
 		this.update({ meta: {}, selections: [] });
 
@@ -23,7 +37,7 @@ export class FinderStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore(this.controller, data.pagination);
-		this.selections = new SelectionStore(this.controller, data.facets, this.storage);
+		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage);
 	}
 }

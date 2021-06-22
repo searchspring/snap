@@ -1,12 +1,10 @@
 import { observable, computed, makeObservable } from 'mobx';
 
 export class SortingStore {
-	private controller;
 	options: Option[] = [];
 
-	constructor(controller, sorting, search, meta) {
-		if (controller && meta) {
-			this.controller = controller;
+	constructor(services, sorting, search, meta) {
+		if (services && meta) {
 			const activeSort = sorting && sorting.length && sorting[0];
 
 			this.options =
@@ -33,7 +31,7 @@ export class SortingStore {
 							option.default = true;
 						}
 
-						const optionObj = new Option(controller, option);
+						const optionObj = new Option(services, option);
 
 						return optionObj;
 					});
@@ -60,7 +58,7 @@ class Option {
 	value: string;
 	url;
 
-	constructor(controller, option) {
+	constructor(services, option) {
 		this.active = option.active;
 		this.default = option.default;
 		this.field = option.field;
@@ -70,9 +68,9 @@ class Option {
 		this.value = `${option.field}:${option.direction}`;
 
 		if (this.default) {
-			this.url = controller.urlManager.remove('page').remove('sort');
+			this.url = services.urlManager.remove('page').remove('sort');
 		} else {
-			this.url = controller.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }]);
+			this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }]);
 		}
 
 		makeObservable(this, {

@@ -1,7 +1,16 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { ThemeProvider, defaultTheme, FilterSummary, Select, Facets, StoreProvider, withStore } from '@searchspring/snap-preact-components';
+import {
+	ThemeProvider,
+	defaultTheme,
+	FilterSummary,
+	Select,
+	Facets,
+	StoreProvider,
+	withStore,
+	ControllerProvider,
+} from '@searchspring/snap-preact-components';
 
 @observer
 export class Sidebar extends Component {
@@ -10,9 +19,11 @@ export class Sidebar extends Component {
 
 		return (
 			<ThemeProvider theme={defaultTheme}>
-				<StoreProvider store={store}>
-					<SidebarContents />
-				</StoreProvider>
+				<ControllerProvider controller={this.props.controller}>
+					<StoreProvider store={store}>
+						<SidebarContents />
+					</StoreProvider>
+				</ControllerProvider>
 			</ThemeProvider>
 		);
 	}

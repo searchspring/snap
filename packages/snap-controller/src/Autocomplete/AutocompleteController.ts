@@ -34,10 +34,7 @@ export class AutocompleteController extends AbstractController {
 		}
 
 		// detach url manager
-		this.urlManager = this.urlManager.detach(true);
-
-		// re-link with new urlManager
-		this.store.link(this);
+		this.urlManager = this.urlManager;
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -237,8 +234,6 @@ export class AutocompleteController extends AbstractController {
 						urlRoot: formActionUrl,
 					};
 				});
-
-				this.store.state.link(this);
 			}
 		});
 

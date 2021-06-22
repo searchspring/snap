@@ -94,108 +94,104 @@ const CSS = {
 		}),
 };
 
-export const Slider = observer(
-	(properties: SliderProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const Slider = observer((properties: SliderProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: SliderProps = {
-			// default props
-			tickSize: properties.facet?.step * 10 || 20,
-			// global theme
-			...globalTheme?.components?.slider,
-			// props
-			...properties,
-			...properties.theme?.components?.slider,
-		};
+	const props: SliderProps = {
+		// default props
+		tickSize: properties.facet?.step * 10 || 20,
+		// global theme
+		...globalTheme?.components?.slider,
+		// props
+		...properties,
+		...properties.theme?.components?.slider,
+	};
 
-		const {
-			tickTextColor,
-			trackColor,
-			handleTextColor,
-			railColor,
-			handleColor,
-			handleDraggingColor,
-			showTicks,
-			tickSize,
-			facet,
-			onChange,
-			onDrag,
-			disableStyles,
-			className,
-			style,
-		} = props;
+	const {
+		tickTextColor,
+		trackColor,
+		handleTextColor,
+		railColor,
+		handleColor,
+		handleDraggingColor,
+		showTicks,
+		tickSize,
+		facet,
+		onChange,
+		onDrag,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
-		const [values, setValues] = useState([facet.active.low, facet.active.high]);
+	const [values, setValues] = useState([facet.active.low, facet.active.high]);
 
-		const [active, setActive] = useState([facet.active.low, facet.active.high]);
-		if (values[0] != facet.active.low || values[1] != facet.active.high) {
-			setActive([facet.active.low, facet.active.high]);
-			setValues([facet.active.low, facet.active.high]);
-		}
-
-		const { getTrackProps, ticks, segments, handles } = useRanger({
-			values: active,
-			onChange: (val) => {
-				setActive(val);
-				if (facet?.controller) {
-					facet.controller.urlManager.remove('page').set(`filter.${facet.field}`, { low: val[0], high: val[1] }).go();
-				}
-				onChange && onChange(val);
-			},
-			onDrag: (val) => {
-				setActive(val);
-				onDrag && onDrag(val);
-			},
-			min: facet.range.low,
-			max: facet.range.high,
-			stepSize: facet.step,
-			tickSize: tickSize,
-		});
-
-		return (
-			facet.range &&
-			facet.active &&
-			facet.step && (
-				<div
-					className={classnames('ss__slider', className)}
-					{...getTrackProps()}
-					css={
-						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
-					}
-				>
-					{showTicks &&
-						ticks.map(({ value, getTickProps }) => (
-							<div className="ss__slider__tick" {...getTickProps()}>
-								<div className="ss__slider__tick__label">{value}</div>
-							</div>
-						))}
-
-					{segments.map(({ getSegmentProps }, index) => (
-						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
-					))}
-
-					{handles.map(({ value, active, getHandleProps }) => (
-						<button
-							{...getHandleProps({
-								style: {
-									appearance: 'none',
-									border: 'none',
-									background: 'transparent',
-									outline: 'none',
-								},
-							})}
-						>
-							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
-								<label>{sprintf(facet.formatValue, value)}</label>
-							</div>
-						</button>
-					))}
-				</div>
-			)
-		);
+	const [active, setActive] = useState([facet.active.low, facet.active.high]);
+	if (values[0] != facet.active.low || values[1] != facet.active.high) {
+		setActive([facet.active.low, facet.active.high]);
+		setValues([facet.active.low, facet.active.high]);
 	}
-);
+
+	const { getTrackProps, ticks, segments, handles } = useRanger({
+		values: active,
+		onChange: (val) => {
+			setActive(val);
+			if (facet?.services?.urlManager) {
+				facet.services.urlManager.remove('page').set(`filter.${facet.field}`, { low: val[0], high: val[1] }).go();
+			}
+			onChange && onChange(val);
+		},
+		onDrag: (val) => {
+			setActive(val);
+			onDrag && onDrag(val);
+		},
+		min: facet.range.low,
+		max: facet.range.high,
+		stepSize: facet.step,
+		tickSize: tickSize,
+	});
+
+	return (
+		facet.range &&
+		facet.active &&
+		facet.step && (
+			<div
+				className={classnames('ss__slider', className)}
+				{...getTrackProps()}
+				css={!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })}
+			>
+				{showTicks &&
+					ticks.map(({ value, getTickProps }) => (
+						<div className="ss__slider__tick" {...getTickProps()}>
+							<div className="ss__slider__tick__label">{value}</div>
+						</div>
+					))}
+
+				{segments.map(({ getSegmentProps }, index) => (
+					<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
+				))}
+
+				{handles.map(({ value, active, getHandleProps }) => (
+					<button
+						{...getHandleProps({
+							style: {
+								appearance: 'none',
+								border: 'none',
+								background: 'transparent',
+								outline: 'none',
+							},
+						})}
+					>
+						<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
+							<label>{sprintf(facet.formatValue, value)}</label>
+						</div>
+					</button>
+				))}
+			</div>
+		)
+	);
+});
 
 export interface SliderProps extends ComponentProps {
 	trackColor?: string;

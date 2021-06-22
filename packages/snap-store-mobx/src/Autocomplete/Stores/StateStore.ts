@@ -9,11 +9,13 @@ export class StateStore {
 	input = '';
 	url: undefined;
 
-	constructor() {
+	constructor(services) {
 		this.locks = {
 			terms: new Lock(false),
 			facets: new Lock(false),
 		};
+
+		this.url = services.urlManager;
 
 		makeObservable(this, {
 			focusedInput: observable,
@@ -21,10 +23,6 @@ export class StateStore {
 			input: observable,
 			reset: action,
 		});
-	}
-
-	link(controller): void {
-		this.url = controller?.urlManager;
 	}
 
 	reset(): void {

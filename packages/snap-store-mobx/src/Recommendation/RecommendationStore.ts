@@ -4,13 +4,23 @@ import { ResultStore } from '../Search/Stores';
 import { ProfileStore } from './Stores';
 
 export class RecommendationStore extends AbstractStore {
-	controller;
+	services;
 	loaded = false;
 	profile: ProfileStore;
 	results: ResultStore;
 
-	constructor() {
+	constructor(config, services: { urlManager: any; tracker: any }) {
 		super();
+
+		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
+			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
+		}
+
+		if (typeof services != 'object' || typeof services.tracker?.track != 'object') {
+			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
+		}
+
+		this.services = services;
 
 		this.reset();
 
@@ -26,7 +36,7 @@ export class RecommendationStore extends AbstractStore {
 
 	update(data): void {
 		this.loaded = !!data.profile;
-		this.profile = new ProfileStore(this.controller, data.profile);
-		this.results = new ResultStore(this.controller, data.results);
+		this.profile = new ProfileStore(this.services, data.profile);
+		this.results = new ResultStore(this.services, data.results);
 	}
 }

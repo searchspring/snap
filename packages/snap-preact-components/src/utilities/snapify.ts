@@ -16,13 +16,13 @@ export class Snapify {
 		};
 
 		const client = new Client(config.globals, clientConfig);
-		const store = new AutocompleteStore();
 		const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
+		const tracker = new Tracker(config.globals);
+		const store = new AutocompleteStore({}, { urlManager, tracker });
 
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
-		const tracker = new Tracker(config.globals);
 
 		const searchControllerConfig: AutocompleteControllerConfig = {
 			id: 'autocomplete',
@@ -59,12 +59,12 @@ export class Snapify {
 		};
 
 		const client = new Client(config.globals, clientConfig);
-		const store = new SearchStore();
 		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
+		const tracker = new Tracker(config.globals);
+		const store = new SearchStore({}, { urlManager, tracker });
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
-		const tracker = new Tracker(config.globals);
 
 		const searchControllerConfig = {
 			id: 'search',
