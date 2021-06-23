@@ -134,17 +134,17 @@ export interface CustomBeaconEvent {
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
 	shopper: {
-		login: (details: { data: ShopperLoginEvent; siteId?: string }) => Promise<BeaconEvent>;
+		login: (details: { data: ShopperLoginEvent; siteId?: string }) => BeaconEvent;
 	};
 	product: {
-		view: (details: { data: ProductViewEvent; siteId?: string }) => Promise<BeaconEvent>;
-		click: (details: { data: ProductClickEvent; siteId?: string }) => Promise<BeaconEvent>;
+		view: (details: { data: ProductViewEvent; siteId?: string }) => BeaconEvent;
+		click: (details: { data: ProductClickEvent; siteId?: string }) => BeaconEvent;
 	};
 	cart: {
-		view: (details: { data: CartViewEvent; siteId?: string }) => Promise<BeaconEvent>;
+		view: (details: { data: CartViewEvent; siteId?: string }) => BeaconEvent;
 	};
 	order: {
-		transaction: (details: { data: OrderTransactionEvent; siteId?: string }) => Promise<BeaconEvent>;
+		transaction: (details: { data: OrderTransactionEvent; siteId?: string }) => BeaconEvent;
 	};
 }
 
