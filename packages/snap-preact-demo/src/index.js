@@ -59,7 +59,7 @@ const cntrlr = new SearchController(cntrlrConfig, {
 
 const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
 const recommendations = new RecommendationController(
-	{ id: 'noresults', tag: 'trending' },
+	{ id: 'noresults', tag: 'trending', branch: BRANCHNAME },
 	{
 		client,
 		store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
@@ -189,6 +189,7 @@ new DomTargeter(
 			{
 				id: `recommend_${tag + (profileCount[tag] - 1)}`,
 				tag,
+				branch: BRANCHNAME,
 			},
 			{
 				client,

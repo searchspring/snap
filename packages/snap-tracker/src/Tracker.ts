@@ -22,6 +22,7 @@ import {
 	OrderTransactionEvent,
 	Product,
 } from './types';
+import { PACKAGE_VERSION } from './version';
 
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
@@ -92,6 +93,7 @@ export class Tracker {
 	setGlobal = (): void => {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.track = this.track;
+		window.searchspring.version = PACKAGE_VERSION;
 	};
 
 	track: TrackMethods = {
