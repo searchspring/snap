@@ -106,7 +106,7 @@ cntrlr.on('init', async ({ controller }, next) => {
 		[
 			{
 				selector: '#searchspring-sidebar',
-				component: <Sidebar store={cntrlr.store} />,
+				component: <Sidebar controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
 				hideTarget: true,
 			},
 		],

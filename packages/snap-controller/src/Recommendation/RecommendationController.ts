@@ -224,10 +224,16 @@ export class RecommendationController extends AbstractController {
 		const params = {
 			tag: this.config.tag,
 			...this.config.globals,
-			cart: this.tracker.getCartItems(),
-			lastViewed: this.tracker.getLastViewedItems(),
 			branch: this.config.branch || 'production',
 		};
+		const cart = this.tracker.getCartItems();
+		const lastViewed = this.tracker.getLastViewedItems();
+		if (cart) {
+			params.cart = cart;
+		}
+		if (lastViewed) {
+			params.lastViewed = lastViewed;
+		}
 
 		if (this.environment == ControllerEnvironment.DEVELOPMENT) {
 			params.test = true;

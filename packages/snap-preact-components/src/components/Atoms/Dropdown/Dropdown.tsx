@@ -36,91 +36,89 @@ const CSS = {
 		}),
 };
 
-export const Dropdown = observer(
-	(properties: DropdownProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: DropdownProps = {
-			// default props
-			startOpen: false,
-			// global theme
-			...globalTheme?.components?.dropdown,
-			// props
-			...properties,
-			...properties.theme?.components?.dropdown,
-		};
+	const props: DropdownProps = {
+		// default props
+		startOpen: false,
+		// global theme
+		...globalTheme?.components?.dropdown,
+		// props
+		...properties,
+		...properties.theme?.components?.dropdown,
+	};
 
-		const {
-			button,
-			content,
-			children,
-			disabled,
-			open,
-			disableOverlay,
-			onClick,
-			onToggle,
-			startOpen,
-			disableClickOutside,
-			disableStyles,
-			className,
-			style,
-		} = props;
+	const {
+		button,
+		content,
+		children,
+		disabled,
+		open,
+		disableOverlay,
+		onClick,
+		onToggle,
+		startOpen,
+		disableClickOutside,
+		disableStyles,
+		className,
+		style,
+	} = props;
 
-		let showContent, setShowContent;
+	let showContent, setShowContent;
 
-		const stateful = open === undefined;
-		if (stateful) {
-			[showContent, setShowContent] = useState(startOpen);
-		} else {
-			showContent = open;
-		}
-
-		const innerRef =
-			!disableClickOutside &&
-			useClickOutside<HTMLDivElement>((e) => {
-				if (showContent) {
-					if (!disabled) {
-						stateful && setShowContent(false);
-						onToggle && onToggle(e, false);
-					}
-				}
-			});
-
-		const toggleShowContent = (e) => {
-			if (stateful) {
-				setShowContent((prev) => {
-					onToggle && onToggle(e, !prev);
-					return !prev;
-				});
-			}
-		};
-
-		return (
-			<div
-				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
-				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
-				ref={innerRef}
-			>
-				<div
-					className="ss__dropdown__button"
-					onClick={(e) => {
-						if (!disabled) {
-							toggleShowContent(e);
-							onClick && onClick(e as any);
-						}
-					}}
-				>
-					{button}
-				</div>
-
-				<div className="ss__dropdown__content">
-					{content}
-					{children}
-				</div>
-			</div>
-		);
+	const stateful = open === undefined;
+	if (stateful) {
+		[showContent, setShowContent] = useState(startOpen);
+	} else {
+		showContent = open;
 	}
-);
+
+	const innerRef =
+		!disableClickOutside &&
+		useClickOutside<HTMLDivElement>((e) => {
+			if (showContent) {
+				if (!disabled) {
+					stateful && setShowContent(false);
+					onToggle && onToggle(e, false);
+				}
+			}
+		});
+
+	const toggleShowContent = (e) => {
+		if (stateful) {
+			setShowContent((prev) => {
+				onToggle && onToggle(e, !prev);
+				return !prev;
+			});
+		}
+	};
+
+	return (
+		<div
+			css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
+			className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
+			ref={innerRef}
+		>
+			<div
+				className="ss__dropdown__button"
+				onClick={(e) => {
+					if (!disabled) {
+						toggleShowContent(e);
+						onClick && onClick(e as any);
+					}
+				}}
+			>
+				{button}
+			</div>
+
+			<div className="ss__dropdown__content">
+				{content}
+				{children}
+			</div>
+		</div>
+	);
+});
 
 export interface DropdownProps extends ComponentProps {
 	button: string | JSX.Element;

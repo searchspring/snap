@@ -18,7 +18,7 @@ export class Snapify {
 		const client = new Client(config.globals, clientConfig);
 		const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
 		const tracker = new Tracker(config.globals);
-		const store = new AutocompleteStore({}, { urlManager, tracker });
+		const store = new AutocompleteStore({}, { urlManager });
 
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
@@ -61,7 +61,7 @@ export class Snapify {
 		const client = new Client(config.globals, clientConfig);
 		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
 		const tracker = new Tracker(config.globals);
-		const store = new SearchStore({}, { urlManager, tracker });
+		const store = new SearchStore({}, { urlManager });
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();

@@ -1,7 +1,13 @@
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 import { FilterStore } from './FilterStore';
 
 import { SearchData } from '../../__mocks__/SearchData';
-import { mockSearchController } from '../../__mocks__/mockControllers';
+
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()),
+};
+
 describe('Filter Store', () => {
 	let searchData;
 	beforeEach(() => {
@@ -21,22 +27,14 @@ describe('Filter Store', () => {
 	});
 
 	it('returns an empty array when passed empty data', () => {
-		const filters = new FilterStore(mockSearchController, [], {});
+		const filters = new FilterStore(services, [], {});
 
 		expect(filters.length).toBe(0);
 	});
 
-	it('passes a reference of the controller to each filter', () => {
-		const filters = new FilterStore(mockSearchController, searchData.filters, searchData.meta);
-
-		for (const filter of filters) {
-			expect(filter.controller).toStrictEqual(mockSearchController);
-		}
-	});
-
 	it('will have filter data that matches what was passed in', () => {
 		const filtersInput = searchData.filters;
-		const filters = new FilterStore(mockSearchController, filtersInput, searchData.meta);
+		const filters = new FilterStore(services, filtersInput, searchData.meta);
 
 		// check filter values
 		filters.forEach((filter, index) => {
@@ -55,6 +53,16 @@ describe('Filter Store', () => {
 				expect(filter.value.label).toBe(filtersInput[index].label);
 				expect(filter.value.value).toBe(filtersInput[index].value);
 			}
+		});
+	});
+
+	it('uses the urlManager service to generate urls on the filters', () => {
+		const filtersInput = searchData.filters;
+		const filters = new FilterStore(services, filtersInput, searchData.meta);
+
+		// check filter values
+		filters.forEach((filter, index) => {
+			expect(filter.url.constructor.name).toStrictEqual(services.urlManager.constructor.name);
 		});
 	});
 });

@@ -21,6 +21,9 @@ let searchConfig = {
 	settings: {},
 };
 
+const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+const services = { urlManager };
+
 describe('Search Controller', () => {
 	beforeEach(() => {
 		searchConfig.id = uuidv4().split('-').join('');
@@ -28,8 +31,8 @@ describe('Search Controller', () => {
 	it('has results after search method called', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -64,8 +67,8 @@ describe('Search Controller', () => {
 
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -93,8 +96,8 @@ describe('Search Controller', () => {
 
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -129,8 +132,8 @@ describe('Search Controller', () => {
 
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -164,8 +167,8 @@ describe('Search Controller', () => {
 		it(`tests ${event} middleware err handled`, async function () {
 			const controller = new SearchController(searchConfig, {
 				client: new MockClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
@@ -191,8 +194,8 @@ describe('Search Controller', () => {
 	it('can set landingPage param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -206,8 +209,8 @@ describe('Search Controller', () => {
 	it('can set page param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -222,8 +225,8 @@ describe('Search Controller', () => {
 	it('can set pageSize param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -238,8 +241,8 @@ describe('Search Controller', () => {
 	it('can set oq param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -254,8 +257,8 @@ describe('Search Controller', () => {
 	it('can set rq param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -270,8 +273,8 @@ describe('Search Controller', () => {
 	it('can set sort param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -290,8 +293,8 @@ describe('Search Controller', () => {
 	it('can set filter param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),

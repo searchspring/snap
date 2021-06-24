@@ -18,6 +18,11 @@ const recommendConfig = {
 	tag: 'trending',
 };
 
+const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+const services = {
+	urlManager,
+};
+
 describe('Recommendation Controller', () => {
 	beforeEach(() => {
 		recommendConfig.id = uuidv4().split('-').join('');
@@ -32,8 +37,8 @@ describe('Recommendation Controller', () => {
 			// @ts-ignore
 			const controller = new RecommendationController(configWithoutTag, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				store: new RecommendationStore({}, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
@@ -45,8 +50,8 @@ describe('Recommendation Controller', () => {
 	it(`adds a test param when in development environment`, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
-			store: new RecommendationStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			store: new RecommendationStore({}, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -65,8 +70,8 @@ describe('Recommendation Controller', () => {
 		it(`tests ${event} middleware cancellation handled`, async function () {
 			const controller = new RecommendationController(recommendConfig, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				store: new RecommendationStore({}, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
@@ -93,8 +98,8 @@ describe('Recommendation Controller', () => {
 		it(`tests ${event} middleware error handled`, async function () {
 			const controller = new RecommendationController(recommendConfig, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				store: new RecommendationStore({}, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),

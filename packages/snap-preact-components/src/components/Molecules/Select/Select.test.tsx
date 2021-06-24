@@ -122,7 +122,7 @@ describe('Select Component', () => {
 			expect(optionsStyles.backgroundColor).toBe(props.backgroundColor);
 		});
 
-		it('has props to customize the icon', () => {
+		it('has props to customize the icon', async () => {
 			const props = {
 				iconOpen: 'angle-left',
 				iconClose: 'angle-right',
@@ -138,7 +138,7 @@ describe('Select Component', () => {
 
 			expect(iconStyles.fill).toBe(props.iconColor);
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconOpen}`);
-			userEvent.click(dropdownButton);
+			await userEvent.click(dropdownButton);
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconClose}`);
 		});
 
@@ -160,7 +160,7 @@ describe('Select Component', () => {
 		// 	expect(dropdownContainerStyles.visibility).toBe('visible');
 		// });
 
-		it('opens and closes on button click', () => {
+		it('opens and closes on button click', async () => {
 			const rendered = render(<Select options={options} />);
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const dropdownElement = selectElement.querySelector('.ss__dropdown');
@@ -169,13 +169,13 @@ describe('Select Component', () => {
 			expect(dropdownElement).not.toHaveClass('ss__dropdown--open');
 			// expect(dropdownContainerStyles.visibility).toBe('hidden');
 
-			userEvent.click(dropdownButton);
+			await userEvent.click(dropdownButton);
 
 			expect(dropdownElement).toHaveClass('ss__dropdown--open');
 			// expect(dropdownContainerStyles.visibility).toBe('visible');
 		});
 
-		it('it adds "selected" class on option selection and closes the dropdown', () => {
+		it('it adds "selected" class on option selection and closes the dropdown', async () => {
 			const selectFn = jest.fn();
 			const selectIndex = 1;
 
@@ -185,8 +185,8 @@ describe('Select Component', () => {
 			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 			const dropdownButton = selectElement.querySelector('.ss__dropdown__button');
 
-			userEvent.click(dropdownButton);
-			userEvent.click(optionElements[selectIndex]);
+			await userEvent.click(dropdownButton);
+			await userEvent.click(optionElements[selectIndex]);
 
 			// const dropdownContainerStyles = getComputedStyle(dropdownContainer);
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
@@ -220,13 +220,13 @@ describe('Select Component', () => {
 		// 	expect(dropdownContainerStyles.visibility).toBe('visible');
 		// });
 
-		it('it shows clearSelection label when a selection is made', () => {
+		it('it shows clearSelection label when a selection is made', async () => {
 			const clearSelectionLabel = 'clear selection';
 			const rendered = render(<Select clearSelection={clearSelectionLabel} options={options} />);
 			const selectElement = rendered.container.querySelector('.ss__select');
 			let optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 
-			userEvent.click(optionElements[2]);
+			await userEvent.click(optionElements[2]);
 
 			optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 
@@ -235,7 +235,7 @@ describe('Select Component', () => {
 			expect(optionElements[0]).toHaveTextContent(clearSelectionLabel);
 		});
 
-		it('it fires onSelect event on option selection', () => {
+		it('it fires onSelect event on option selection', async () => {
 			const selectFn = jest.fn();
 
 			const rendered = render(<Select options={options} onSelect={selectFn} />);
@@ -243,12 +243,12 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 
-			userEvent.click(optionElements[1]);
+			await userEvent.click(optionElements[1]);
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[1]);
 		});
 
-		it('it can be disabled', () => {
+		it('it can be disabled', async () => {
 			const selectFn = jest.fn();
 
 			const rendered = render(<Select disabled={true} options={options} onSelect={selectFn} />);
@@ -260,11 +260,11 @@ describe('Select Component', () => {
 			expect(selectElement).toHaveClass('ss__select--disabled');
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
 
-			userEvent.click(dropdownButton);
+			await userEvent.click(dropdownButton);
 
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
 
-			userEvent.click(optionElements[1]);
+			await userEvent.click(optionElements[1]);
 
 			expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
 		});
@@ -278,7 +278,7 @@ describe('Select Component', () => {
 			expect(buttonLabel).toHaveTextContent(label);
 		});
 
-		it('renders the "separator" prop in button when there is a label and a selection is made', () => {
+		it('renders the "separator" prop in button when there is a label and a selection is made', async () => {
 			const separator = ':::';
 			const label = 'color';
 			const rendered = render(<Select label={label} separator={separator} options={options} />);
@@ -286,21 +286,21 @@ describe('Select Component', () => {
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 
-			userEvent.click(optionElements[3]);
+			await userEvent.click(optionElements[3]);
 
 			const buttonSeparator = selectElement.querySelector('.ss__select__label__separator');
 
 			expect(buttonSeparator).toHaveTextContent(separator);
 		});
 
-		it('does not render the "separator" prop in button when there is no label and a selection is made', () => {
+		it('does not render the "separator" prop in button when there is no label and a selection is made', async () => {
 			const separator = ':::';
 			const rendered = render(<Select separator={separator} options={options} />);
 
 			const selectElement = rendered.container.querySelector('.ss__select');
 			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
 
-			userEvent.click(optionElements[3]);
+			await userEvent.click(optionElements[3]);
 
 			const buttonSeparator = selectElement.querySelector('.ss__select__label__separator');
 

@@ -28,7 +28,7 @@ export class Results extends Component {
 				<Toolbar />
 
 				<Profile name="results" controller={controller.search}>
-					<ResultsComponent results={results} theme={resultsTheme} />
+					<ResultsComponent controller={controller.search} results={results} theme={resultsTheme} />
 				</Profile>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>

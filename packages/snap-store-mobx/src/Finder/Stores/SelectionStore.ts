@@ -8,11 +8,11 @@ export class SelectionStore extends Array {
 			return;
 		}
 		const selections = [];
-		config?.fields?.forEach((finder_config) => {
-			let facet = facets?.filter((facet) => facet.field == finder_config.field).pop();
+		config?.fields?.forEach((fieldObj) => {
+			let facet = facets?.filter((facet) => facet.field == fieldObj.field).pop();
 
 			facet = {
-				...meta?.facets[finder_config.field],
+				...meta?.facets[fieldObj.field],
 				...facet,
 			};
 
@@ -29,14 +29,14 @@ export class SelectionStore extends Array {
 					});
 				}
 
-				const levels = finder_config?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
+				const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
 
 				levels?.map((level, index) => {
-					const levelConfig = { index, label: finder_config.levels ? level : '', key: `ss-${index}` };
-					selections.push(new SelectionHierarchy(services, finder_config.id, facet, levelConfig, loading, storage));
+					const levelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
+					selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
 				});
 			} else {
-				selections.push(new Selection(services, finder_config.id, facet, finder_config, loading, storage));
+				selections.push(new Selection(services, config.id, facet, fieldObj, loading, storage));
 			}
 		});
 
@@ -207,7 +207,7 @@ class SelectionHierarchy extends SelectionBase {
 
 				value = value || this.storage.get(`${key}.selected`);
 			});
-		console.log('this.services', this.services);
+
 		this.services.urlManager.set(`filter.${this.field}`, value).go();
 	}
 }

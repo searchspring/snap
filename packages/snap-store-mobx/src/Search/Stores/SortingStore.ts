@@ -4,37 +4,35 @@ export class SortingStore {
 	options: Option[] = [];
 
 	constructor(services, sorting, search, meta) {
-		if (services && meta) {
+		if (services && meta.sortOptions) {
 			const activeSort = sorting && sorting.length && sorting[0];
 
-			this.options =
-				meta.sortOptions &&
-				meta.sortOptions
-					.filter((option) => {
-						if (!search?.query) {
-							return option.type == 'field';
-						}
+			this.options = meta.sortOptions
+				.filter((option) => {
+					if (!search?.query) {
+						return option.type == 'field';
+					}
 
-						return option;
-					})
-					.map((option, index) => {
-						option.active = false;
+					return option;
+				})
+				.map((option, index) => {
+					option.active = false;
 
-						if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
-							option.active = true;
-						} else if (index === 0) {
-							option.active = true;
-						}
+					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
+						option.active = true;
+					} else if (index === 0) {
+						option.active = true;
+					}
 
-						if (index === 0) {
-							// is the default sort
-							option.default = true;
-						}
+					if (index === 0) {
+						// is the default sort
+						option.default = true;
+					}
 
-						const optionObj = new Option(services, option);
+					const optionObj = new Option(services, option);
 
-						return optionObj;
-					});
+					return optionObj;
+				});
 
 			makeObservable(this, {
 				options: observable,

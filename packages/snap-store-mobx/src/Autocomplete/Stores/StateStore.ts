@@ -7,7 +7,7 @@ export class StateStore {
 	};
 	focusedInput: HTMLInputElement = undefined;
 	input = '';
-	url: undefined;
+	url;
 
 	constructor(services) {
 		this.locks = {

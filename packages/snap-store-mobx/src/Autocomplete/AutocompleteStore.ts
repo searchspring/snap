@@ -20,15 +20,11 @@ export class AutocompleteStore extends AbstractStore {
 	state: StateStore;
 	storage: StorageStore;
 
-	constructor(config, services: { urlManager: any; tracker: any }) {
+	constructor(config, services: { urlManager: any }) {
 		super();
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
-		}
-
-		if (typeof services != 'object' || typeof services.tracker?.track != 'object') {
-			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
 		}
 
 		this.config = config;

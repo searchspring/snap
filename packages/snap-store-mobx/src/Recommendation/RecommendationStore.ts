@@ -9,15 +9,11 @@ export class RecommendationStore extends AbstractStore {
 	profile: ProfileStore;
 	results: ResultStore;
 
-	constructor(config, services: { urlManager: any; tracker: any }) {
+	constructor(config, services: { urlManager: any }) {
 		super();
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
-		}
-
-		if (typeof services != 'object' || typeof services.tracker?.track != 'object') {
-			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
 		}
 
 		this.services = services;
