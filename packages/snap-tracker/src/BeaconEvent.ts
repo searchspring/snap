@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { BeaconPayload } from './types';
-
-const VERSION = process.env.npm_package_version || 'dev';
+import { PACKAGE_VERSION } from './version';
 
 export class BeaconEvent {
 	payload: BeaconPayload;
@@ -13,7 +12,7 @@ export class BeaconEvent {
 			meta: {
 				initiator: {
 					lib: 'searchspring/snap',
-					'lib.version': VERSION,
+					'lib.version': PACKAGE_VERSION,
 				},
 			},
 			id: uuidv4(),

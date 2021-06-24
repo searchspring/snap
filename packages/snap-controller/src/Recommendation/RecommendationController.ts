@@ -1,7 +1,22 @@
 import deepmerge from 'deepmerge';
+
+import type { BeaconEvent } from '@searchspring/snap-tracker';
+import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
+
 import { AbstractController } from '../Abstract/AbstractController';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { ControllerEnvironment } from '../types';
+
+type RecommendationTrackMethods = {
+	product: {
+		click: (e, result) => BeaconEvent;
+		render: (result) => BeaconEvent;
+		impression: (result) => BeaconEvent;
+	};
+	click: (e, result) => BeaconEvent;
+	impression: () => BeaconEvent;
+	render: () => BeaconEvent;
+};
 
 const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
@@ -11,6 +26,11 @@ const defaultConfig: RecommendationControllerConfig = {
 
 export class RecommendationController extends AbstractController {
 	config: RecommendationControllerConfig;
+	events = {
+		click: null,
+		impression: null,
+		render: null,
+	};
 
 	constructor(config: RecommendationControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
@@ -37,15 +57,183 @@ export class RecommendationController extends AbstractController {
 		});
 	}
 
+	track: RecommendationTrackMethods = {
+		product: {
+			click: (e: MouseEvent, result): BeaconEvent => {
+				if (!this.store.profile.tag || !result || !this.events.click) return;
+
+				const payload = {
+					type: BeaconType.PROFILE_PRODUCT_CLICK,
+					category: BeaconCategory.RECOMMENDATIONS,
+					context: { website: { trackingCode: this.config.globals.siteId } },
+					event: {
+						context: {
+							action: 'navigate',
+							placement: this.store.profile.placement,
+							tag: this.store.profile.tag,
+							type: 'product-recommendation',
+						},
+						product: {
+							id: result.id,
+							mappings: {
+								core: result.mappings.core,
+							},
+							seed: this.config.globals.seed,
+						},
+					},
+					pid: this.events.click.id,
+				};
+
+				const event = this.tracker.track.event(payload);
+
+				return event;
+			},
+			impression: (result): BeaconEvent => {
+				if (!this.store.profile.tag || !result || !this.events.impression) return;
+
+				const payload = {
+					type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
+					category: BeaconCategory.RECOMMENDATIONS,
+					context: { website: { trackingCode: this.config.globals.siteId } },
+					event: {
+						context: {
+							placement: this.store.profile.placement,
+							tag: this.store.profile.tag,
+							type: 'product-recommendation',
+						},
+						product: {
+							id: result.id,
+							mappings: {
+								core: result.mappings.core,
+							},
+							seed: this.config.globals.seed,
+						},
+					},
+					pid: this.events.impression.id,
+				};
+
+				const event = this.tracker.track.event(payload);
+
+				return event;
+			},
+			render: (result): BeaconEvent => {
+				if (!this.store.profile.tag || !result || !this.events.render) return;
+
+				const payload = {
+					type: BeaconType.PROFILE_PRODUCT_RENDER,
+					category: BeaconCategory.RECOMMENDATIONS,
+					context: { website: { trackingCode: this.config.globals.siteId } },
+					event: {
+						context: {
+							placement: this.store.profile.placement,
+							tag: this.store.profile.tag,
+							type: 'product-recommendation',
+						},
+						product: {
+							id: result.id,
+							mappings: {
+								core: result.mappings.core,
+							},
+							seed: this.config.globals.seed,
+						},
+					},
+					pid: this.events.render.id,
+				};
+
+				const event = this.tracker.track.event(payload);
+
+				return event;
+			},
+		},
+		click: (e: MouseEvent): BeaconEvent => {
+			if (!this.store.profile.tag) return;
+			const event = this.tracker.track.event({
+				type: BeaconType.PROFILE_CLICK,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: { website: { trackingCode: this.config.globals.siteId } },
+				event: {
+					context: {
+						action: 'navigate',
+						placement: this.store.profile.placement,
+						tag: this.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					profile: {
+						tag: this.store.profile.tag,
+						placement: this.store.profile.placement,
+						threshold: this.store.profile.display.threshold,
+						templateId: this.store.profile.display.template.uuid,
+					},
+				},
+			});
+			this.events.click = event;
+
+			return event;
+		},
+		impression: (): BeaconEvent => {
+			if (!this.store.profile.tag) return;
+			const event = this.tracker.track.event({
+				type: BeaconType.PROFILE_IMPRESSION,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: { website: { trackingCode: this.config.globals.siteId } },
+				event: {
+					context: {
+						placement: this.store.profile.placement,
+						tag: this.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					profile: {
+						tag: this.store.profile.tag,
+						placement: this.store.profile.placement,
+						threshold: this.store.profile.display.threshold,
+						templateId: this.store.profile.display.template.uuid,
+					},
+				},
+			});
+			this.events.impression = event;
+
+			return event;
+		},
+		render: (): BeaconEvent => {
+			if (!this.store.profile.tag) return;
+			const event = this.tracker.track.event({
+				type: BeaconType.PROFILE_RENDER,
+				category: BeaconCategory.RECOMMENDATIONS,
+				context: { website: { trackingCode: this.config.globals.siteId } },
+				event: {
+					context: {
+						placement: this.store.profile.placement,
+						tag: this.store.profile.tag,
+						type: 'product-recommendation',
+					},
+					profile: {
+						tag: this.store.profile.tag,
+						placement: this.store.profile.placement,
+						threshold: this.store.profile.display.threshold,
+						templateId: this.store.profile.display.template.uuid,
+					},
+				},
+			});
+			this.events.render = event;
+
+			return event;
+		},
+	};
+
 	get params(): Record<string, any> {
-		// TODO: add cart, shopper, lastViewed
 		const params = {
 			tag: this.config.tag,
 			...this.config.globals,
+			branch: this.config.branch || 'production',
 		};
-
-		// TODO: use env branch variable (from webpack?)
-		params.branch = this.config.branch || 'production';
+		const cart = this.tracker.getCartItems();
+		const lastViewed = this.tracker.getLastViewedItems();
+		if (cart) {
+			params.cart = cart;
+		}
+		if (lastViewed) {
+			params.lastViewed = lastViewed;
+		}
 
 		if (this.environment == ControllerEnvironment.DEVELOPMENT) {
 			params.test = true;

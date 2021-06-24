@@ -122,6 +122,15 @@ export default {
 				options: [Layout.GRID, Layout.LIST],
 			},
 		},
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };

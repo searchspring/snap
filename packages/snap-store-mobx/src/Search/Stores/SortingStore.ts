@@ -1,42 +1,38 @@
 import { observable, computed, makeObservable } from 'mobx';
 
 export class SortingStore {
-	private controller;
 	options: Option[] = [];
 
-	constructor(controller, sorting, search, meta) {
-		if (controller && meta) {
-			this.controller = controller;
+	constructor(services, sorting, search, meta) {
+		if (services && meta.sortOptions) {
 			const activeSort = sorting && sorting.length && sorting[0];
 
-			this.options =
-				meta.sortOptions &&
-				meta.sortOptions
-					.filter((option) => {
-						if (!search?.query) {
-							return option.type == 'field';
-						}
+			this.options = meta.sortOptions
+				.filter((option) => {
+					if (!search?.query) {
+						return option.type == 'field';
+					}
 
-						return option;
-					})
-					.map((option, index) => {
-						option.active = false;
+					return option;
+				})
+				.map((option, index) => {
+					option.active = false;
 
-						if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
-							option.active = true;
-						} else if (index === 0) {
-							option.active = true;
-						}
+					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
+						option.active = true;
+					} else if (index === 0) {
+						option.active = true;
+					}
 
-						if (index === 0) {
-							// is the default sort
-							option.default = true;
-						}
+					if (index === 0) {
+						// is the default sort
+						option.default = true;
+					}
 
-						const optionObj = new Option(controller, option);
+					const optionObj = new Option(services, option);
 
-						return optionObj;
-					});
+					return optionObj;
+				});
 
 			makeObservable(this, {
 				options: observable,
@@ -60,7 +56,7 @@ class Option {
 	value: string;
 	url;
 
-	constructor(controller, option) {
+	constructor(services, option) {
 		this.active = option.active;
 		this.default = option.default;
 		this.field = option.field;
@@ -70,9 +66,9 @@ class Option {
 		this.value = `${option.field}:${option.direction}`;
 
 		if (this.default) {
-			this.url = controller.urlManager.remove('page').remove('sort');
+			this.url = services.urlManager.remove('page').remove('sort');
 		} else {
-			this.url = controller.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }]);
+			this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }]);
 		}
 
 		makeObservable(this, {

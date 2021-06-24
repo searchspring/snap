@@ -6,6 +6,8 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
+import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+
 import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
@@ -69,9 +71,10 @@ const CSS = {
 				padding: '20px',
 			},
 
-			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-focused, .ss-ac-container .ss-ac-facets .ss-ac-facet-container .ss-focused, .ss-ac-container .ss-ac-results .ss-ac-item-container .ss-ac-item .ss-focused .ss-ac-item-details .ss-ac-item-name': {
-				fontWeight: 'bold',
-			},
+			'& .ss-ac-container .ss-ac-terms .ss__facet-list-options .ss-focused, .ss-ac-container .ss-ac-facets .ss-ac-facet-container .ss-focused, .ss-ac-container .ss-ac-results .ss-ac-item-container .ss-ac-item .ss-focused .ss-ac-item-details .ss-ac-item-name':
+				{
+					fontWeight: 'bold',
+				},
 
 			/* AutoComplete - Terms */
 			'& .ss-ac-container .ss-ac-terms': {
@@ -291,165 +294,163 @@ const CSS = {
 		}),
 };
 
-export const Autocomplete = observer(
-	(properties: AutocompleteProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Autocomplete = observer((properties: AutocompleteProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: AutocompleteProps = {
+	const props: AutocompleteProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.autocomplete,
+		// props
+		...properties,
+		...properties.theme?.components?.autocomplete,
+	};
+
+	const { store, hideFacets, hideTerms, disableStyles, className, style, controller } = props;
+
+	let { input } = props;
+
+	//passed in or default responsive result props
+	const responsive = props.responsive || [
+		{
+			viewport: 1,
+			numAcross: 2,
+			numRows: 2,
+		},
+	];
+
+	const subProps: AutocompleteSubProps = {
+		facet: {
 			// default props
+			className: 'ss__autocomplete__facet',
 			// global theme
-			...globalTheme?.components?.autocomplete,
-			// props
-			...properties,
-			...properties.theme?.components?.autocomplete,
-		};
+			...globalTheme?.components?.facet,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.facet,
+		},
+		banner: {
+			// default props
+			className: 'ss__autocomplete__banner',
+			// global theme
+			...globalTheme?.components?.banner,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.banner,
+		},
+		results: {
+			// default props
+			className: 'ss__autocomplete__results',
+			responsive: responsive,
+			// global theme
+			...globalTheme?.components?.results,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.results,
+		},
+	};
 
-		const { store, hideFacets, hideTerms, disableStyles, className, style } = props;
+	const { search, terms, results, merchandising, pagination, filters, facets, state } = store;
 
-		let { input } = props;
+	//you can pass in a selector or the actual input element,
+	//if its the selector, we need to bind it to the controller here.
+	if (typeof input == 'string') {
+		input = document.querySelector(input);
+		//only bind on componentdidmount
+		useEffect(() => {
+			//run bind
+			store.controller.bind();
+		}, []);
+	}
 
-		//passed in or default responsive result props
-		const responsive = props.responsive || [
-			{
-				viewport: 1,
-				numAcross: 2,
-				numRows: 2,
-			},
-		];
+	const inputFocused = Boolean(input == state.focusedInput);
+	const visible = inputFocused && terms.length > 0;
 
-		const subProps: AutocompleteSubProps = {
-			facet: {
-				// default props
-				className: 'ss__autocomplete__facet',
-				// global theme
-				...globalTheme?.components?.facet,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.facet,
-			},
-			banner: {
-				// default props
-				className: 'ss__autocomplete__banner',
-				// global theme
-				...globalTheme?.components?.banner,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.banner,
-			},
-			results: {
-				// default props
-				className: 'ss__autocomplete__results',
-				responsive: responsive,
-				// global theme
-				...globalTheme?.components?.results,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.results,
-			},
-		};
+	let delayTimeout;
+	const delayTime = 200;
+	const valueProps = {
+		onMouseEnter: (e) => {
+			clearTimeout(delayTimeout);
+			delayTimeout = setTimeout(() => {
+				e.target.focus();
+			}, delayTime);
+		},
+		onMouseLeave: () => {
+			clearTimeout(delayTimeout);
+		},
+	};
 
-		const { search, terms, results, merchandising, pagination, filters, facets, state } = store;
+	return (
+		visible && (
+			<div css={CSS.Autocomplete({ style })} className={classnames('ss__autocomplete', className)} onClick={(e) => e.stopPropagation()}>
+				<div className="ss-ac-container">
+					{!hideTerms && <Terms terms={terms} search={search} valueProps={valueProps} />}
 
-		//you can pass in a selector or the actual input element,
-		//if its the selector, we need to bind it to the controller here.
-		if (typeof input == 'string') {
-			input = document.querySelector(input);
-			//only bind on componentdidmount
-			useEffect(() => {
-				//run bind
-				store.controller.bind();
-			}, []);
-		}
+					<div className="ss-ac-content">
+						{facets.length > 0 && !hideFacets && (
+							<div className="ss-ac-facets">
+								{facets
+									.filter((facet) => facet.display !== 'slider')
+									.slice(0, 3)
+									.map((facet) => {
+										return (
+											<div
+												className={`ss-ac-facet-container ss-ac-facet-container-${
+													facet.display && (facet.display != 'hierarchy' || facet.display != 'slider') ? facet.display : Layout.LIST
+												}`}
+											>
+												<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+											</div>
+										);
+									})}
+								<Banner content={merchandising.content} type={`left` as BannerType} class="ss-ac-merchandising" />
+							</div>
+						)}
 
-		const inputFocused = Boolean(input == state.focusedInput);
-		const visible = inputFocused && terms.length > 0;
+						<div className="ss-ac-results">
+							<div>
+								<h4 className="ss-title">Product Suggestions</h4>
+								<Banner content={merchandising.content} type={`header` as BannerType} class="ss-ac-merchandising" />
+								<Banner content={merchandising.content} type={`banner` as BannerType} class="ss-ac-merchandising" />
+								<ul className="ss-ac-item-container">
+									<Results results={results} {...subProps.results} className="ss-ac-item" controller={controller} />
+								</ul>
+								<Banner content={merchandising.content} type={`footer` as BannerType} class="ss-ac-merchandising" />
+							</div>
+							<div>
+								{/* no results */}
+								{results.length == 0 && (
+									<div className="ss-ac-no-results">
+										<p>No results found for "{search.query}". Please try another search.</p>
+									</div>
+								)}
 
-		let delayTimeout;
-		const delayTime = 200;
-		const valueProps = {
-			onMouseEnter: (e) => {
-				clearTimeout(delayTimeout);
-				delayTimeout = setTimeout(() => {
-					e.target.focus();
-				}, delayTime);
-			},
-			onMouseLeave: () => {
-				clearTimeout(delayTimeout);
-			},
-		};
-
-		return (
-			visible && (
-				<div css={CSS.Autocomplete({ style })} className={classnames('ss__autocomplete', className)} onClick={(e) => e.stopPropagation()}>
-					<div className="ss-ac-container">
-						{!hideTerms && <Terms terms={terms} search={search} valueProps={valueProps} />}
-
-						<div className="ss-ac-content">
-							{facets.length > 0 && !hideFacets && (
-								<div className="ss-ac-facets">
-									{facets
-										.filter((facet) => facet.display !== 'slider')
-										.slice(0, 3)
-										.map((facet) => {
-											return (
-												<div
-													className={`ss-ac-facet-container ss-ac-facet-container-${
-														facet.display && (facet.display != 'hierarchy' || facet.display != 'slider') ? facet.display : Layout.LIST
-													}`}
-												>
-													<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-												</div>
-											);
-										})}
-									<Banner content={merchandising.content} type={`left` as BannerType} class="ss-ac-merchandising" />
-								</div>
-							)}
-
-							<div className="ss-ac-results">
-								<div>
-									<h4 className="ss-title">Product Suggestions</h4>
-									<Banner content={merchandising.content} type={`header` as BannerType} class="ss-ac-merchandising" />
-									<Banner content={merchandising.content} type={`banner` as BannerType} class="ss-ac-merchandising" />
-									<ul className="ss-ac-item-container">
-										<Results results={results} {...subProps.results} className="ss-ac-item" />
-									</ul>
-									<Banner content={merchandising.content} type={`footer` as BannerType} class="ss-ac-merchandising" />
-								</div>
-								<div>
-									{/* no results */}
-									{results.length == 0 && (
-										<div className="ss-ac-no-results">
-											<p>No results found for "{search.query}". Please try another search.</p>
-										</div>
-									)}
-
-									{/* see more link */}
-									{results.length > 0 && (
-										<div id="ss-ac-see-more" className={`${facets.length ? 'ss-ac-see-more-padding' : ''}`}>
-											<a href={state.url.href} className="ss-ac-see-more-link">
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-												{search.query}"
-											</a>
-										</div>
-									)}
-								</div>
+								{/* see more link */}
+								{results.length > 0 && (
+									<div id="ss-ac-see-more" className={`${facets.length ? 'ss-ac-see-more-padding' : ''}`}>
+										<a href={state.url.href} className="ss-ac-see-more-link">
+											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+											{search.query}"
+										</a>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
 				</div>
-			)
-		);
-	}
-);
+			</div>
+		)
+	);
+});
 
 const emIfy = (term, search) => {
 	const match = term.match(search.query);
@@ -501,4 +502,5 @@ export interface AutocompleteProps extends ComponentProps {
 	hideFacets?: boolean;
 	hideTerms?: boolean;
 	responsive?: ResponsiveProps[];
+	controller?: SearchController | AutocompleteController | RecommendationController;
 }

@@ -5,9 +5,7 @@ export class TermStore extends Array {
 		return Array;
 	}
 
-	private controller;
-
-	constructor(controller, autocomplete, paginationData, rootState) {
+	constructor(services, autocomplete, paginationData, rootState) {
 		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)];
 
 		if (autocomplete?.suggested?.text) {
@@ -21,7 +19,7 @@ export class TermStore extends Array {
 		suggestions.map((term, index) =>
 			terms.push(
 				new Term(
-					controller,
+					services,
 					{
 						active: index === 0,
 						value: term,
@@ -42,11 +40,11 @@ class Term {
 	preview: () => void;
 	url;
 
-	constructor(controller, term, terms, rootState) {
+	constructor(services, term, terms, rootState) {
 		this.active = term.active;
 		this.value = term.value;
 
-		this.url = controller?.urlManager?.detach().set({ query: this.value });
+		this.url = services?.urlManager?.detach().set({ query: this.value });
 
 		this.preview = () => {
 			terms.map((term) => {
@@ -57,7 +55,7 @@ class Term {
 			rootState.locks.terms.lock();
 			rootState.locks.facets.unlock();
 
-			controller?.urlManager.set({ query: this.value }).go();
+			services?.urlManager.set({ query: this.value }).go();
 		};
 
 		makeObservable(this, {

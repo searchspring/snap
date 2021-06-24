@@ -1,10 +1,16 @@
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 import { RecommendationStore } from './RecommendationStore';
 
 import { SearchData } from '../__mocks__/SearchData';
 
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()),
+};
+
 describe('RecommendationStore store', () => {
 	it('can create empty RecommendationsStore', () => {
-		const store = new RecommendationStore();
+		const store = new RecommendationStore({}, services);
 		expect(store.loaded).toBe(false);
 		expect(store.profile).toEqual({ display: {} });
 		expect(store.results).toStrictEqual([]);
@@ -15,7 +21,7 @@ describe('RecommendationStore store', () => {
 		const results = new SearchData({ search: 'recommend' })[0].results;
 		const data = { profile, results };
 
-		const store = new RecommendationStore();
+		const store = new RecommendationStore({}, services);
 		store.update(data);
 
 		expect(store.loaded).toBe(true);

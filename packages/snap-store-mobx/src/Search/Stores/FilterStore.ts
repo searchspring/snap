@@ -5,13 +5,13 @@ export class FilterStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, filters = [], meta) {
+	constructor(services, filters = [], meta) {
 		filters = filters.map((filter) => {
 			const facetMeta = meta.facets[filter.field];
 
 			switch (filter.type) {
 				case 'range':
-					return new RangeFilter(controller, {
+					return new RangeFilter(services, {
 						facet: {
 							field: filter.field,
 							label: facetMeta?.label || filter.field,
@@ -25,7 +25,7 @@ export class FilterStore extends Array {
 
 				case 'value':
 				default:
-					return new Filter(controller, {
+					return new Filter(services, {
 						facet: {
 							field: filter.field,
 							label: facetMeta?.label || filter.field,
@@ -42,8 +42,6 @@ export class FilterStore extends Array {
 	}
 }
 class Filter {
-	private controller;
-
 	label: string;
 	facet: {
 		field: '';
@@ -56,14 +54,12 @@ class Filter {
 
 	url;
 
-	constructor(controller, filter) {
-		this.controller = controller;
-
+	constructor(services, filter) {
 		this.facet = filter.facet;
 		this.value = filter.value;
 		this.label = `${filter.facet.label}: ${filter.value.label}`;
 
-		this.url = this.controller?.urlManager?.remove('page').remove(`filter.${this.facet.field}`, this.value.value);
+		this.url = services?.urlManager?.remove('page').remove(`filter.${this.facet.field}`, this.value.value);
 
 		makeObservable(this, {
 			facet: observable,
@@ -74,8 +70,6 @@ class Filter {
 }
 
 class RangeFilter {
-	private controller;
-
 	label: string;
 	facet: {
 		field;
@@ -89,14 +83,12 @@ class RangeFilter {
 
 	url;
 
-	constructor(controller, filter) {
-		this.controller = controller;
-
+	constructor(services, filter) {
 		this.facet = filter.facet;
 		this.value = filter.value;
 		this.label = `${filter.facet.label}: ${filter.value.label}`;
 
-		this.url = this.controller?.urlManager?.remove('page').remove(`filter.${filter.facet.field}`, { low: filter.value.low, high: filter.value.high });
+		this.url = services?.urlManager?.remove('page').remove(`filter.${filter.facet.field}`, { low: filter.value.low, high: filter.value.high });
 
 		makeObservable(this, {
 			facet: observable,

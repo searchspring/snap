@@ -20,7 +20,7 @@ export class FinderController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
-		this.urlManager = this.urlManager.detach(true);
+		this.urlManager = this.urlManager;
 
 		// set the root URL on urlManager
 		if (this.config.url) {

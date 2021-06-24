@@ -21,4 +21,9 @@ export class MockClient extends Client {
 		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
 		return results;
 	}
+
+	async autocomplete() {
+		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
+		return results;
+	}
 }

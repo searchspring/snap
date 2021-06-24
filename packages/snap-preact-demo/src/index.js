@@ -46,22 +46,24 @@ const cntrlrConfig = {
 const client = new Client(globals, clientConfig);
 const tracker = new Tracker(globals);
 
+const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
 const cntrlr = new SearchController(cntrlrConfig, {
 	client,
-	store: new SearchStore(),
-	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+	store: new SearchStore({}, { urlManager, tracker }),
+	urlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
 	tracker,
 });
 
+const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
 const recommendations = new RecommendationController(
-	{ id: 'noresults', tag: 'trending' },
+	{ id: 'noresults', tag: 'trending', branch: BRANCHNAME },
 	{
 		client,
-		store: new RecommendationStore(),
-		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+		store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
+		urlManager: recsUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -104,7 +106,7 @@ cntrlr.on('init', async ({ controller }, next) => {
 		[
 			{
 				selector: '#searchspring-sidebar',
-				component: <Sidebar store={cntrlr.store} />,
+				component: <Sidebar controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
 				hideTarget: true,
 			},
 		],
@@ -182,14 +184,16 @@ new DomTargeter(
 		const tag = injectedElem.getAttribute('searchspring-recommend');
 		profileCount[tag] = profileCount[tag] + 1 || 1;
 
+		const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
 		const recs = new RecommendationController(
 			{
 				id: `recommend_${tag + (profileCount[tag] - 1)}`,
 				tag,
+				branch: BRANCHNAME,
 			},
 			{
 				client,
-				store: new RecommendationStore(),
+				store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
 				urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 				eventManager: new EventManager(),
 				profiler: new Profiler(),

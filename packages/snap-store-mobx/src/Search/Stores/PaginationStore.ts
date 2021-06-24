@@ -1,7 +1,7 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
 export class PaginationStore {
-	private controller;
+	private services;
 	page: number;
 	pageSize: number;
 	pageSizeOptions: {
@@ -11,8 +11,8 @@ export class PaginationStore {
 	defaultPageSize: number;
 	totalResults: number;
 
-	constructor(controller, paginationData = { page: undefined, pageSize: undefined, totalResults: undefined, defaultPageSize: 24 }) {
-		this.controller = controller;
+	constructor(services, paginationData = { page: undefined, pageSize: undefined, totalResults: undefined, defaultPageSize: 24 }) {
+		this.services = services;
 
 		this.page = paginationData.page;
 		this.pageSize = paginationData.pageSize;
@@ -73,21 +73,21 @@ export class PaginationStore {
 	}
 
 	get current(): Page {
-		return new Page(this.controller, {
+		return new Page(this.services, {
 			number: this.page,
 			active: true,
 		});
 	}
 
 	get first(): Page {
-		return new Page(this.controller, {
+		return new Page(this.services, {
 			number: 1,
 			active: this.page == 1,
 		});
 	}
 
 	get last(): Page {
-		return new Page(this.controller, {
+		return new Page(this.services, {
 			number: this.totalPages,
 			active: this.totalPages == this.page,
 		});
@@ -95,7 +95,7 @@ export class PaginationStore {
 
 	get next(): Page {
 		if (this.page < this.totalPages) {
-			return new Page(this.controller, {
+			return new Page(this.services, {
 				number: this.page + 1,
 			});
 		}
@@ -103,7 +103,7 @@ export class PaginationStore {
 
 	get previous(): Page {
 		if (this.page > 1) {
-			return new Page(this.controller, {
+			return new Page(this.services, {
 				number: this.page - 1,
 			});
 		}
@@ -149,7 +149,7 @@ export class PaginationStore {
 		for (let i = this.page + min; i <= this.page + max; i++) {
 			if (i > 0 && i <= this.totalPages) {
 				pages.push(
-					new Page(this.controller, {
+					new Page(this.services, {
 						number: i,
 						active: i == this.page,
 					})
@@ -162,29 +162,29 @@ export class PaginationStore {
 
 	setPageSize(num: number): void {
 		if (num) {
-			this.controller.urlManager.set('pageSize', num).go();
+			this.services.urlManager.set('pageSize', num).go();
 		}
 	}
 }
 
 export class Page {
-	controller;
+	services;
 	number: number;
 	active: boolean;
 	url;
 	key: string;
 
 	constructor(
-		controller,
+		services,
 		page: {
 			number: number;
 			active?: boolean;
 		}
 	) {
-		this.controller = controller;
+		this.services = services;
 		this.number = page.number;
 		this.active = page.active || false;
-		this.url = this.controller?.urlManager?.set('page', this.number);
+		this.url = this.services?.urlManager?.set('page', this.number);
 		this.key = this.url.href;
 	}
 }

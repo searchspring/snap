@@ -1,7 +1,11 @@
-import { SearchStore } from './SearchStore';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-import { mockSearchController } from '../__mocks__/mockControllers';
+import { SearchStore } from './SearchStore';
 import { SearchData } from '../__mocks__/SearchData';
+
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()),
+};
 
 describe('Search Store', () => {
 	let searchData;
@@ -10,8 +14,7 @@ describe('Search Store', () => {
 	});
 
 	it('returns correct initial state', () => {
-		const searchStore = new SearchStore();
-		searchStore.link(mockSearchController);
+		const searchStore = new SearchStore({}, services);
 
 		expect(searchStore.loading).toBe(true);
 
@@ -41,8 +44,7 @@ describe('Search Store', () => {
 	});
 
 	it('update function updates all of the stores', () => {
-		const searchStore = new SearchStore();
-		searchStore.link(mockSearchController);
+		const searchStore = new SearchStore({}, services);
 		searchStore.update(searchData);
 
 		expect(searchStore.meta).toBeDefined();

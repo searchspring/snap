@@ -7,17 +7,17 @@ export class FacetStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, storage: StorageStore, facets = [], meta) {
+	constructor(services, storage: StorageStore, facets = [], meta) {
 		facets = facets.map((facet) => {
 			const facetMeta = meta.facets[facet.field];
 
 			switch (facet.type) {
 				case 'range':
-					return new RangeFacet(controller, storage, facet, facetMeta);
+					return new RangeFacet(services, storage, facet, facetMeta);
 				case 'value':
 				case 'range-buckets':
 				default:
-					return new ValueFacet(controller, storage, facet, facetMeta);
+					return new ValueFacet(services, storage, facet, facetMeta);
 			}
 		});
 
@@ -26,7 +26,7 @@ export class FacetStore extends Array {
 }
 
 class Facet {
-	private controller;
+	private services;
 	type: string;
 	field: string;
 	filtered = false;
@@ -36,8 +36,8 @@ class Facet {
 	label = '';
 	storage: StorageStore;
 
-	constructor(controller, storage: StorageStore, facet, facetMeta) {
-		this.controller = controller;
+	constructor(services, storage: StorageStore, facet, facetMeta) {
+		this.services = services;
 		this.storage = storage;
 
 		Object.assign(this, facetMeta, facet);
@@ -63,7 +63,7 @@ class Facet {
 
 	get clear() {
 		return {
-			url: this.controller?.urlManager?.remove('page').remove(`filter.${this.field}`),
+			url: this.services?.urlManager?.remove('page').remove(`filter.${this.field}`),
 		};
 	}
 
@@ -87,8 +87,8 @@ class RangeFacet extends Facet {
 	formatSeparator: string;
 	formatValue: string;
 
-	constructor(controller, storage, facet, facetMeta) {
-		super(controller, storage, facet, facetMeta);
+	constructor(services, storage, facet, facetMeta) {
+		super(services, storage, facet, facetMeta);
 
 		this.step = facet.step;
 
@@ -176,8 +176,8 @@ class ValueFacet extends Facet {
 		},
 	};
 
-	constructor(controller, storage, facet, facetMeta) {
-		super(controller, storage, facet, facetMeta);
+	constructor(services, storage, facet, facetMeta) {
+		super(services, storage, facet, facetMeta);
 
 		this.multiple = this.multiple;
 
@@ -188,12 +188,12 @@ class ValueFacet extends Facet {
 						case 'value':
 							if (facetMeta.display === 'hierarchy') {
 								const filteredValues = facet.values.filter((value) => value.filtered);
-								return new HierarchyValue(controller, this, value, filteredValues);
+								return new HierarchyValue(services, this, value, filteredValues);
 							} else {
-								return new Value(controller, this, value);
+								return new Value(services, this, value);
 							}
 						case 'range-buckets':
-							return new RangeValue(controller, this, value);
+							return new RangeValue(services, this, value);
 					}
 				})) ||
 			[];
@@ -237,7 +237,6 @@ class ValueFacet extends Facet {
 }
 
 class Value {
-	private controller;
 	label;
 	count;
 	filtered;
@@ -245,14 +244,13 @@ class Value {
 	custom;
 	url;
 
-	constructor(controller, facet, value) {
-		this.controller = controller;
+	constructor(services, facet, value) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = this.controller?.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value);
+			this.url = services.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value);
 		} else {
-			let valueUrl = this.controller?.urlManager.remove('page');
+			let valueUrl = services.urlManager?.remove('page');
 			if (facet.multiple == 'single') {
 				valueUrl = valueUrl?.remove(`filter.${facet.field}`);
 			}
@@ -265,8 +263,8 @@ class HierarchyValue extends Value {
 	level = 0;
 	history = false;
 
-	constructor(controller, facet, value, filteredValues) {
-		super(controller, facet, value);
+	constructor(services, facet, value, filteredValues) {
+		super(services, facet, value);
 
 		if (value.value && facet.hierarchyDelimiter) {
 			this.level = value.value.split(facet.hierarchyDelimiter).length;
@@ -280,15 +278,14 @@ class HierarchyValue extends Value {
 		}
 
 		if (value.value) {
-			this.url = controller?.urlManager?.remove('page').set(`filter.${facet.field}`, value.value);
+			this.url = services?.urlManager?.remove('page').set(`filter.${facet.field}`, value.value);
 		} else {
-			this.url = controller?.urlManager?.remove('page').remove(`filter.${facet.field}`);
+			this.url = services?.urlManager?.remove('page').remove(`filter.${facet.field}`);
 		}
 	}
 }
 
 class RangeValue {
-	private controller;
 	label;
 	count;
 	filtered;
@@ -297,15 +294,13 @@ class RangeValue {
 	custom;
 	url;
 
-	constructor(controller, facet, value) {
-		this.controller = controller;
-
+	constructor(services, facet, value) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = this.controller?.urlManager.remove('page').remove(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
+			this.url = services?.urlManager.remove('page').remove(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
 		} else {
-			let valueUrl = this.controller?.urlManager.remove('page');
+			let valueUrl = services?.urlManager.remove('page');
 
 			if (facet.multiple == 'single') {
 				valueUrl = valueUrl?.remove(`filter.${facet.field}`);

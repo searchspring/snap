@@ -21,10 +21,6 @@ export abstract class AbstractStore {
 
 	abstract update(data): void;
 
-	link(controller): void {
-		this.controller = controller;
-	}
-
 	toJSON(thing = this) {
 		// TODO: make this work better
 		return toJS(thing);

@@ -18,7 +18,11 @@ const defaultConfig: AutocompleteControllerConfig = {
 		},
 	},
 };
-
+type AutocompleteTrackMethods = {
+	product: {
+		click: (e, result) => void;
+	};
+};
 export class AutocompleteController extends AbstractController {
 	config: AutocompleteControllerConfig;
 
@@ -34,10 +38,7 @@ export class AutocompleteController extends AbstractController {
 		}
 
 		// detach url manager
-		this.urlManager = this.urlManager.detach(true);
-
-		// re-link with new urlManager
-		this.store.link(this);
+		this.urlManager = this.urlManager;
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -58,6 +59,24 @@ export class AutocompleteController extends AbstractController {
 			}
 		});
 	}
+
+	track: AutocompleteTrackMethods = {
+		// TODO: add in future when autocomplete supports result click tracking
+		product: {
+			click: (e: MouseEvent, result): void => {
+				// const { intellisuggestData, intellisuggestSignature } = result.attributes;
+				// const target = e.target as HTMLAnchorElement;
+				// const href = target?.href || result.mappings.core?.url || undefined;
+				// this.tracker.track.product.click({
+				// 	data: {
+				// 		intellisuggestData,
+				// 		intellisuggestSignature,
+				// 		href,
+				// 	},
+				// });
+			},
+		},
+	};
 
 	get params(): Record<string, any> {
 		const urlState = this.urlManager.state;
@@ -237,8 +256,6 @@ export class AutocompleteController extends AbstractController {
 						urlRoot: formActionUrl,
 					};
 				});
-
-				this.store.state.link(this);
 			}
 		});
 

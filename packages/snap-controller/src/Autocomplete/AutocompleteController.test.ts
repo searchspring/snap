@@ -9,6 +9,7 @@ import { Logger } from '@searchspring/snap-logger';
 
 import { AutocompleteController } from './AutocompleteController';
 import { MockClient } from '../__mocks__/MockClient';
+import { SearchData } from '../__mocks__/SearchData';
 
 let acConfig = {
 	id: 'ac',
@@ -27,13 +28,14 @@ let acConfig = {
 		facets: { trim: true },
 	},
 };
-
+const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
+const services = { urlManager };
 const globals = { siteId: 'ga9kq2' }; //TODO: change to 8uyt2m (snap.searchspring.io)
 const badArgs = [
 	{
 		client: {},
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -42,7 +44,7 @@ const badArgs = [
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
 		store: {},
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		urlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -50,7 +52,7 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
+		store: new AutocompleteStore(acConfig, services),
 		urlManager: {},
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
@@ -59,8 +61,8 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: { events: null, fire: null, on: null },
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -68,8 +70,8 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: {
 			events: null,
 			fire: null,
@@ -83,8 +85,8 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: new EventManager(),
 		profiler: {},
 		logger: new Logger(),
@@ -92,8 +94,8 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: new EventManager(),
 		profiler: {
 			setNamespace: function () {
@@ -106,8 +108,8 @@ const badArgs = [
 	},
 	{
 		client: new MockClient(globals, { meta: { prefetch: false } }),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+		store: new AutocompleteStore(acConfig, services),
+		urlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: {},
@@ -131,8 +133,8 @@ describe('Autocomplete Controller', () => {
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, { meta: { prefetch: false } }),
-			store: new AutocompleteStore(),
-			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -155,8 +157,8 @@ describe('Autocomplete Controller', () => {
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, { meta: { prefetch: false } }),
-			store: new AutocompleteStore(),
-			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -178,8 +180,8 @@ describe('Autocomplete Controller', () => {
 
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, { meta: { prefetch: false } }),
-			store: new AutocompleteStore(),
-			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -202,8 +204,8 @@ describe('Autocomplete Controller', () => {
 
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, { meta: { prefetch: false } }),
-			store: new AutocompleteStore(),
-			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -235,8 +237,8 @@ describe('Autocomplete Controller', () => {
 
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, { meta: { prefetch: false } }),
-			store: new AutocompleteStore(),
-			urlManager: new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),

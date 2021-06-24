@@ -5,19 +5,18 @@ export class ResultStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, resultData, paginationData?, merchData?) {
+	constructor(services, resultData, paginationData?, merchData?) {
 		let results = (resultData || []).map((result) => {
-			return new Product(controller, result);
+			return new Product(services, result);
 		});
 
-		// TODO: use setting from controller
 		if (merchData?.content?.inline) {
 			const banners = merchData.content.inline
 				.sort(function (a, b) {
 					return a.config.position.index - b.config.position.index;
 				})
 				.map((banner) => {
-					return new Banner(controller, banner);
+					return new Banner(services, banner);
 				});
 
 			if (banners && paginationData?.totalResults) {
@@ -40,7 +39,7 @@ class Banner {
 	config = {};
 	value: string;
 
-	constructor(controller, banner) {
+	constructor(services, banner) {
 		this.id = 'ss-ib-' + banner.config.position.index;
 		this.config = banner.config;
 		this.value = banner.value;
@@ -63,24 +62,10 @@ class Product {
 	custom = {};
 	track;
 
-	constructor(controller, result) {
+	constructor(services, result) {
 		this.id = result.id;
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
-		this.track = {
-			click: (e) => {
-				// product click tracking
-				const { intellisuggestData, intellisuggestSignature } = result.attributes;
-				const href = e?.target?.href || result.mappings.core?.url || undefined;
-				controller.tracker.track.product.click({
-					data: {
-						intellisuggestData,
-						intellisuggestSignature,
-						href,
-					},
-				});
-			},
-		};
 
 		makeObservable(this, {
 			id: observable,

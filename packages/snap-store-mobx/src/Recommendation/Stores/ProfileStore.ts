@@ -5,7 +5,7 @@ export class ProfileStore {
 	placement: string;
 	display = {};
 
-	constructor(controller, profile) {
+	constructor(services, profile) {
 		if (!profile?.tag) {
 			return;
 		}
