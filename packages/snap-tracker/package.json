@@ -11,7 +11,7 @@
 		"registry": "https://npm.pkg.github.com/searchspring"
 	},
 	"scripts": {
-		"prebuild": "version=$(cat ../../lerna.json | jq .version); echo 'export const PACKAGE_VERSION = $version;' > ./src/version.ts",
+		"prebuild": "version=$(cat ../../lerna.json | jq .version); echo \"export const PACKAGE_VERSION = $version;\" > ./src/version.ts",
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"build:docs": "typedoc --out docs src/index.ts",
 		"dev": "tsc --watch",
