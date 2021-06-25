@@ -135,7 +135,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
 const Template = (args: ResultProps, { loaded: { controller } }) => <Result result={controller?.store?.results[0]} {...args} />;
 
 export const Default = Template.bind({});

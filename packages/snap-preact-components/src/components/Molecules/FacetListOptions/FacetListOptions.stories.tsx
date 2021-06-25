@@ -94,7 +94,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'FacetListOptions', globals: { siteId: '8uyt2m' } });
 
 const ObservableFacetListOptions = observer(({ args, controller }) => {
 	const brandFacet = controller?.store?.facets.filter((facet) => facet.field == 'brand').pop();

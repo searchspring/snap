@@ -7,7 +7,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
 
-import Readme from '../Results/readme.md';
+import Readme from './readme.md';
 
 export default {
 	title: `Organisms/Results`,
@@ -81,7 +81,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
 export const Grid = (props, { loaded: { controller } }) => <Results layout={Layout.GRID} results={controller?.store?.results} {...props} />;
 Grid.loaders = [
 	async () => ({

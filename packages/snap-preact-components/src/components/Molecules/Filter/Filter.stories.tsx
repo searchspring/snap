@@ -99,6 +99,7 @@ export default {
 };
 
 const snapInstance = Snapify.search({
+	id: 'Filter',
 	globals: {
 		siteId: '8uyt2m',
 		filters: [
