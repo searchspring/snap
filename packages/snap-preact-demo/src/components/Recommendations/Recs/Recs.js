@@ -1,7 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Result, Button } from '@searchspring/snap-preact-components';
+import { Recommendation, Result } from '@searchspring/snap-preact-components';
 
 @observer
 export class Recs extends Component {
@@ -17,17 +17,11 @@ export class Recs extends Component {
 		const store = controller?.store;
 
 		return (
-			<Fragment>
-				{store?.results?.length ? (
-					<div>
-						{store.results.slice(0, 4).map((result) => (
-							<Result result={result} />
-						))}
-					</div>
-				) : (
-					<Fragment />
-				)}
-			</Fragment>
+			<Recommendation>
+				{store.results.map((result) => (
+					<Result result={result}></Result>
+				))}
+			</Recommendation>
 		);
 	}
 }

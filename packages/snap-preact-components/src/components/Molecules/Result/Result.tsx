@@ -142,7 +142,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__image',
 			alt: core?.name,
-			src: core?.thumbnailImageUrl,
+			src: core?.imageUrl,
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props

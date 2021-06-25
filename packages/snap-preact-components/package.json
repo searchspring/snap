@@ -30,7 +30,8 @@
 		"@searchspring/snap-toolbox": "^0.2.0",
 		"classnames": "^2.3.1",
 		"mobx-react-lite": "^3.2.0",
-		"react-ranger": "^2.1.0"
+		"react-ranger": "^2.1.0",
+		"swiper": "^6.7.1"
 	},
 	"peerDependencies": {
 		"preact": "^10.5.13"

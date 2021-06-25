@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Recommendation } from './Recommendation';
+import { Recommendation, defaultRecommendationResponsive } from './Recommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
@@ -34,6 +34,15 @@ export default {
 		),
 	],
 	argTypes: {
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		results: {
 			description: 'Results store reference',
 			type: { required: true },
@@ -44,14 +53,67 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		controller: {
-			description: 'Controller reference',
+		loop: {
+			defaultValue: true,
+			description: 'Recommendation pagination loops',
 			table: {
 				type: {
-					summary: 'Controller',
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		title: {
+			defaultValue: '',
+			description: 'Recommendation title',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		pagination: {
+			defaultValue: false,
+			description: 'Display pagination dots',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		prevButton: {
+			description: 'Previous button',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
 				},
 			},
-			control: { type: 'none' },
+			control: { type: 'string' },
+		},
+		nextButton: {
+			description: 'Next button',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
+				},
+			},
+			control: { type: 'string' },
+		},
+		breakpoints: {
+			defaultValue: defaultRecommendationResponsive,
+			description: 'Recommendation title',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: 'Breakpoint object' },
+			},
+			control: { type: 'object' },
 		},
 		...componentArgs,
 	},
@@ -59,9 +121,6 @@ export default {
 
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
 export const Default = (props, { loaded: { controller } }) => {
-	console.log('controller', controller);
-	console.log('controller', controller.store);
-	console.log('controller', controller.store.results);
 	return <Recommendation {...props} results={controller?.store?.results} />;
 };
 Default.loaders = [

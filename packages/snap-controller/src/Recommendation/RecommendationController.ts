@@ -171,7 +171,7 @@ export class RecommendationController extends AbstractController {
 			return event;
 		},
 		impression: (): BeaconEvent => {
-			if (!this.store.profile.tag) return;
+			if (!this.store.profile.tag || this.events.impression) return;
 			const event = this.tracker.track.event({
 				type: BeaconType.PROFILE_IMPRESSION,
 				category: BeaconCategory.RECOMMENDATIONS,
@@ -195,7 +195,7 @@ export class RecommendationController extends AbstractController {
 			return event;
 		},
 		render: (): BeaconEvent => {
-			if (!this.store.profile.tag) return;
+			if (!this.store.profile.tag || this.events.render) return;
 			const event = this.tracker.track.event({
 				type: BeaconType.PROFILE_RENDER,
 				category: BeaconCategory.RECOMMENDATIONS,
