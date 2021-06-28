@@ -17,7 +17,7 @@ export class Recs extends Component {
 		const store = controller?.store;
 
 		return (
-			<Recommendation>
+			<Recommendation controller={controller}>
 				{store.results.map((result) => (
 					<Result result={result}></Result>
 				))}

@@ -24,6 +24,7 @@ import {
 } from './types';
 import { PACKAGE_VERSION } from './version';
 
+const BATCH_TIMEOUT = 150;
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
@@ -92,6 +93,7 @@ export class Tracker {
 
 	track: TrackMethods = {
 		event: (payload: BeaconPayload): BeaconEvent => {
+			console.log('payload context', payload.context);
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
 				category: payload?.category || BeaconCategory.CUSTOM,
@@ -411,7 +413,7 @@ export class Tracker {
 
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {
-				events.push(event.payload);
+				events.push({ ...event });
 			});
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(events));
 		}
@@ -425,6 +427,6 @@ export class Tracker {
 					body: JSON.stringify(events.length == 1 ? events[0] : events),
 				});
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
-		});
+		}, BATCH_TIMEOUT);
 	};
 }

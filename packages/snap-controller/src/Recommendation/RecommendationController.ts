@@ -30,6 +30,7 @@ export class RecommendationController extends AbstractController {
 		click: null,
 		impression: null,
 		render: null,
+		product: {},
 	};
 
 	constructor(config: RecommendationControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
@@ -65,7 +66,7 @@ export class RecommendationController extends AbstractController {
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_CLICK,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: { website: { trackingCode: this.config.globals.siteId } },
+					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 					event: {
 						context: {
 							action: 'navigate',
@@ -89,12 +90,12 @@ export class RecommendationController extends AbstractController {
 				return event;
 			},
 			impression: (result): BeaconEvent => {
-				if (!this.store.profile.tag || !result || !this.events.impression) return;
+				if (!this.store.profile.tag || !result || !this.events.impression || this.events.product[result.id]?.impression) return;
 
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: { website: { trackingCode: this.config.globals.siteId } },
+					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 					event: {
 						context: {
 							placement: this.store.profile.placement,
@@ -112,17 +113,18 @@ export class RecommendationController extends AbstractController {
 					pid: this.events.impression.id,
 				};
 
-				const event = this.tracker.track.event(payload);
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				const event = (this.events.product[result.id].impression = this.tracker.track.event(payload));
 
 				return event;
 			},
 			render: (result): BeaconEvent => {
-				if (!this.store.profile.tag || !result || !this.events.render) return;
+				if (!this.store.profile.tag || !result || !this.events.render || this.events.product[result.id]?.render) return;
 
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_RENDER,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: { website: { trackingCode: this.config.globals.siteId } },
+					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 					event: {
 						context: {
 							placement: this.store.profile.placement,
@@ -140,7 +142,8 @@ export class RecommendationController extends AbstractController {
 					pid: this.events.render.id,
 				};
 
-				const event = this.tracker.track.event(payload);
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				const event = (this.events.product[result.id].render = this.tracker.track.event(payload));
 
 				return event;
 			},
@@ -150,7 +153,7 @@ export class RecommendationController extends AbstractController {
 			const event = this.tracker.track.event({
 				type: BeaconType.PROFILE_CLICK,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: { website: { trackingCode: this.config.globals.siteId } },
+				context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 				event: {
 					context: {
 						action: 'navigate',
@@ -175,7 +178,7 @@ export class RecommendationController extends AbstractController {
 			const event = this.tracker.track.event({
 				type: BeaconType.PROFILE_IMPRESSION,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: { website: { trackingCode: this.config.globals.siteId } },
+				context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 				event: {
 					context: {
 						placement: this.store.profile.placement,
@@ -199,7 +202,7 @@ export class RecommendationController extends AbstractController {
 			const event = this.tracker.track.event({
 				type: BeaconType.PROFILE_RENDER,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: { website: { trackingCode: this.config.globals.siteId } },
+				context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : null,
 				event: {
 					context: {
 						placement: this.store.profile.placement,
@@ -214,7 +217,11 @@ export class RecommendationController extends AbstractController {
 					},
 				},
 			});
+
 			this.events.render = event;
+
+			// track results render
+			this.store.results.forEach((result) => this.track.product.render(result));
 
 			return event;
 		},

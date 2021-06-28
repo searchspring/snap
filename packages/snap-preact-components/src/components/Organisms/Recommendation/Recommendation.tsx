@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { h } from 'preact';
-import { useRef } from 'preact/hooks';
+import { h, Fragment } from 'preact';
+import { useEffect, useRef } from 'preact/hooks';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import 'swiper/swiper.min.css';
 import { jsx, css } from '@emotion/react';
@@ -103,6 +103,7 @@ export const defaultRecommendationResponsive = {
 		spaceBetween: 10,
 	},
 };
+
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
@@ -162,8 +163,10 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const inViewport = useIntersection(rootComponentRef, '0px', true);
 	if (inViewport) {
 		(controller as RecommendationController)?.track?.impression();
+		// figure out how many slides are showing and send impression for each
 	}
-	(controller as RecommendationController)?.track?.render();
+
+	(children || results.length) && (controller as RecommendationController)?.track?.render();
 
 	return (
 		(children || results?.length) && (
@@ -186,6 +189,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+					}}
+					onSlideChange={(swiper) => {
+						console.log('swiper', swiper);
 					}}
 					loop={loop}
 					breakpoints={breakpoints}
