@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
-import { StorageStore } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, featureFlags } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
@@ -31,15 +31,9 @@ const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
-const VIEWED_PRODUCTS = 'ss-viewed-products';
+const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
-const CART_PRODUCTS = 'ss-cart-products';
-
-enum StorageType { // TODO: get export from store working
-	SESSION = 'session',
-	LOCAL = 'local',
-	COOKIE = 'cookie',
-}
+const CART_PRODUCTS = 'ssCartProducts';
 
 export class Tracker {
 	globals: TrackerGlobals;
@@ -399,7 +393,7 @@ export class Tracker {
 	getCartItems = (): string[] => {
 		const items = cookies.get(CART_PRODUCTS);
 		if (!items) {
-			return;
+			return [];
 		}
 		return items.split(',');
 	};
@@ -407,7 +401,7 @@ export class Tracker {
 	getLastViewedItems = (): string[] => {
 		const items = cookies.get(VIEWED_PRODUCTS);
 		if (!items) {
-			return;
+			return [];
 		}
 		return items.split(',');
 	};

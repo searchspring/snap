@@ -161,9 +161,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const inViewport = useIntersection(rootComponentRef, '0px', true);
 	if (inViewport) {
-		controller?.track?.impression();
+		(controller as RecommendationController)?.track?.impression();
 	}
-	controller?.track?.render();
+	(controller as RecommendationController)?.track?.render();
 
 	return (
 		(children || results?.length) && (

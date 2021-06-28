@@ -115,14 +115,14 @@ export class StorageStore {
 	}
 }
 
-export interface StorageConfig {
+export type StorageConfig = {
 	type: StorageType;
 	cookie?: {
 		expiration?: number;
 		sameSite?: string;
 	};
 	key: string;
-}
+};
 
 export enum StorageType {
 	SESSION = 'session',

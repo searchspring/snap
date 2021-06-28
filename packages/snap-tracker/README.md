@@ -41,7 +41,7 @@ const controller = new SearchController(config, {
 });
 
 console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
-console.log(tracker.track.product.click === window.track.product.click) // true
+console.log(tracker.track.product.click === window.searchspring.track.product.click) // true
 ```
 
 ## Standalone usage
@@ -141,7 +141,7 @@ const payload = {
 ```
 
 ### Product Click `track.product.click`
-Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method - available on each `result` store object. 
+Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method. Various Snap controllers will expose these tracking events differently, see the controller documentation for details. 
 
 ```jsx
 searchController.store.results.map(result)=>{(
@@ -270,7 +270,7 @@ console.log(tracker.globals === globals) // true
 ```
 
 ### `localStorage` property
-A reference to the StorageStore object for accessing local storage
+A reference to the StorageStore object for accessing Tracker local storage.
 
 ```typescript
 const tracker = new Tracker();
@@ -279,7 +279,7 @@ tracker.localStorage.get('key') // 'value'
 ```
 
 ### `sessionStorage` property
-A reference to the StorageStore object for accessing session storage
+A reference to the StorageStore object for accessing Tracker session storage.
 
 ```typescript
 const tracker = new Tracker();
@@ -313,7 +313,7 @@ context: {
 ```
 
 ### `isSending` property
-The `isSending` property contains the return value from `setTimeout` and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and `isSending` is still defined, the incoming event will be added to the event queue. 
+The `isSending` property contains the return value from `setTimeout` and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and `isSending` is still defined, the incoming event will be added to the event queue to be sent at a later time. 
 
 ### `namespace` property
 The `namespace` property contains the Tracker namespace. Invoking this method is only required if a bundle contains multiple Tracker instances. 
@@ -351,6 +351,26 @@ console.log(tracker.getShopperId())
 // { shopperId: 'shopper0001' }
 ```
 
+### `getLastViewedItems` method
+Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.getViewedItems()) 
+// ['sku1', 'sku2']
+```
+
+
+### `getCartItems` method
+Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.getCartItems()) 
+// ['sku1', 'sku2']
+```
 
 ### `sendEvents` method
 Sends event(s) to beacon (and various legacy) endpoint(s). 

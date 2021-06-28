@@ -228,10 +228,10 @@ export class RecommendationController extends AbstractController {
 		};
 		const cart = this.tracker.getCartItems();
 		const lastViewed = this.tracker.getLastViewedItems();
-		if (cart) {
+		if (cart?.length) {
 			params.cart = cart;
 		}
-		if (lastViewed) {
+		if (lastViewed?.length) {
 			params.lastViewed = lastViewed;
 		}
 
