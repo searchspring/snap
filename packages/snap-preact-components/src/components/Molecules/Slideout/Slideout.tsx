@@ -108,5 +108,5 @@ export interface SlideoutProps extends ComponentProps {
 }
 
 interface SlideoutSubProps {
-	overlay?: OverlayProps;
+	overlay: OverlayProps;
 }

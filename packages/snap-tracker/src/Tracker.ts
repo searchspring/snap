@@ -93,7 +93,6 @@ export class Tracker {
 
 	track: TrackMethods = {
 		event: (payload: BeaconPayload): BeaconEvent => {
-			console.log('payload context', payload.context);
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
 				category: payload?.category || BeaconCategory.CUSTOM,

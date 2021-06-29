@@ -13,7 +13,7 @@ type RecommendationTrackMethods = {
 		render: (result) => BeaconEvent;
 		impression: (result) => BeaconEvent;
 	};
-	click: (e, result) => BeaconEvent;
+	click: (e) => BeaconEvent;
 	impression: () => BeaconEvent;
 	render: () => BeaconEvent;
 };
@@ -62,7 +62,6 @@ export class RecommendationController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent => {
 				if (!this.store.profile.tag || !result || !this.events.click) return;
-
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_CLICK,
 					category: BeaconCategory.RECOMMENDATIONS,
@@ -91,7 +90,6 @@ export class RecommendationController extends AbstractController {
 			},
 			impression: (result): BeaconEvent => {
 				if (!this.store.profile.tag || !result || !this.events.impression || this.events.product[result.id]?.impression) return;
-
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 					category: BeaconCategory.RECOMMENDATIONS,
@@ -120,7 +118,6 @@ export class RecommendationController extends AbstractController {
 			},
 			render: (result): BeaconEvent => {
 				if (!this.store.profile.tag || !result || !this.events.render || this.events.product[result.id]?.render) return;
-
 				const payload = {
 					type: BeaconType.PROFILE_PRODUCT_RENDER,
 					category: BeaconCategory.RECOMMENDATIONS,

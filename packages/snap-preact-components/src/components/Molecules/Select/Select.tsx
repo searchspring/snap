@@ -55,229 +55,227 @@ const CSS = {
 		}),
 };
 
-export const Select = observer(
-	(properties: SelectProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const Select = observer((properties: SelectProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: SelectProps = {
-			// default props
-			iconOpen: 'angle-down',
-			iconClose: 'angle-up',
-			separator: ': ',
-			startOpen: false,
+	const props: SelectProps = {
+		// default props
+		iconOpen: 'angle-down',
+		iconClose: 'angle-up',
+		separator: ': ',
+		startOpen: false,
+		// global theme
+		...globalTheme?.components?.select,
+		// props
+		...properties,
+		...properties.theme?.components?.select,
+	};
+
+	const {
+		backgroundColor,
+		borderColor,
+		color,
+		clearSelection,
+		disableClickOutside,
+		disabled,
+		hideLabelOnSelection,
+		iconColor,
+		iconClose,
+		iconOpen,
+		label,
+		native,
+		onSelect,
+		selected,
+		separator,
+		startOpen,
+		stayOpenOnSelection,
+		disableStyles,
+		className,
+		style,
+	} = props;
+	let { options } = props;
+
+	const subProps: SelectSubProps = {
+		dropdown: {
+			className: 'ss__select__dropdown',
 			// global theme
-			...globalTheme?.components?.select,
-			// props
-			...properties,
-			...properties.theme?.components?.select,
-		};
+			...globalTheme?.components?.dropdown,
+			// inherited props
+			...defined({
+				disableStyles,
+				disabled,
+			}),
+			// component theme overrides
+			...props.theme?.components?.dropdown,
+		},
+		button: {
+			// default props
+			className: 'ss__select__dropdown__button',
+			// global theme
+			...globalTheme?.components?.button,
+			// inherited props
+			...defined({
+				disableStyles,
+				disabled,
+				color,
+				backgroundColor,
+				borderColor,
+			}),
+			// component theme overrides
+			...props.theme?.components?.button,
+		},
+		icon: {
+			// default props
+			className: 'ss__select__dropdown__button__icon',
+			// global theme
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+				color: iconColor || color,
+			}),
+			// component theme overrides
+			...props.theme?.components?.icon,
+		},
+	};
 
-		const {
-			backgroundColor,
-			borderColor,
-			color,
-			clearSelection,
-			disableClickOutside,
-			disabled,
-			hideLabelOnSelection,
-			iconColor,
-			iconClose,
-			iconOpen,
-			label,
-			native,
-			onSelect,
-			selected,
-			separator,
-			startOpen,
-			stayOpenOnSelection,
-			disableStyles,
-			className,
-			style,
-		} = props;
-		let { options } = props;
+	// only single selection support for now
+	let selection = selected;
+	let setSelection;
 
-		const subProps: SelectSubProps = {
-			dropdown: {
-				className: 'ss__select__dropdown',
-				// global theme
-				...globalTheme?.components?.dropdown,
-				// inherited props
-				...defined({
-					disableStyles,
-					disabled,
-				}),
-				// component theme overrides
-				...props.theme?.components?.dropdown,
-			},
-			button: {
-				// default props
-				className: 'ss__select__dropdown__button',
-				// global theme
-				...globalTheme?.components?.button,
-				// inherited props
-				...defined({
-					disableStyles,
-					disabled,
-					color,
-					backgroundColor,
-					borderColor,
-				}),
-				// component theme overrides
-				...props.theme?.components?.button,
-			},
-			icon: {
-				// default props
-				className: 'ss__select__dropdown__button__icon',
-				// global theme
-				...globalTheme?.components?.icon,
-				// inherited props
-				...defined({
-					disableStyles,
-					color: iconColor || color,
-				}),
-				// component theme overrides
-				...props.theme?.components?.icon,
-			},
-		};
+	// open state
+	const [open, setOpen] = useState(startOpen);
 
-		// only single selection support for now
-		let selection = selected;
-		let setSelection;
-
-		// open state
-		const [open, setOpen] = useState(startOpen);
-
-		// selection state
-		const stateful = selection === undefined;
-		if (stateful) {
-			[selection, setSelection] = useState(undefined);
-		} else {
-			selection = Array.isArray(selected) ? selected[0] : selection;
-		}
-
-		if (selection && clearSelection) {
-			options = [
-				{
-					label: clearSelection,
-					value: '',
-				},
-				...options,
-			];
-		}
-
-		const makeSelection = (e: Event, option?: Option) => {
-			option = option.value ? option : undefined;
-
-			if (option != selection) {
-				onSelect && onSelect(e, option);
-			}
-
-			if (stateful) {
-				setSelection(option);
-			}
-
-			!stayOpenOnSelection && setOpen(false);
-		};
-		return (
-			options &&
-			Array.isArray(options) &&
-			options.length && (
-				<div
-					css={
-						!disableStyles && native
-							? CSS.native({ style })
-							: CSS.select({
-									color,
-									backgroundColor,
-									borderColor,
-									label,
-									selection: selection || '',
-									theme,
-									style,
-							  })
-					}
-					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
-				>
-					{native ? (
-						<>
-							{label && !hideLabelOnSelection && (
-								<span className="ss__select__label">
-									{label}
-									{separator && <span className="ss__select__label__separator">{separator}</span>}
-								</span>
-							)}
-
-							<select
-								className="ss__select__select"
-								disabled={disabled || undefined}
-								onChange={(e) => {
-									const selectElement = e.target;
-									const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
-									const selectedOption = options
-										.filter((option, index) => {
-											return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
-										})
-										.pop();
-									!disabled && makeSelection(e as any, selectedOption);
-								}}
-							>
-								{!selection && clearSelection && (
-									<option className="ss__select__select__option" selected value="">
-										{clearSelection}
-									</option>
-								)}
-								{options.map((option, index) => (
-									<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
-										{option.label}
-									</option>
-								))}
-							</select>
-						</>
-					) : (
-						<Dropdown
-							{...subProps.dropdown}
-							disableClickOutside={disableClickOutside}
-							open={open}
-							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-							onClick={(e) => setOpen((prev) => !prev)}
-							button={
-								<Button {...subProps.button}>
-									{label && !hideLabelOnSelection && (
-										<span className="ss__select__label">
-											{label}
-											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
-										</span>
-									)}
-									{selection && <span className="ss__select__selection">{selection?.label}</span>}
-									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
-								</Button>
-							}
-						>
-							<ul className="ss__select__select">
-								{options.map((option) => (
-									<li
-										className={classnames('ss__select__select__option', {
-											'ss__select__select__option--selected': selection?.value === option.value,
-										})}
-										onClick={(e) => !disabled && makeSelection(e as any, option)}
-									>
-										<span>{option.label}</span>
-									</li>
-								))}
-							</ul>
-						</Dropdown>
-					)}
-				</div>
-			)
-		);
+	// selection state
+	const stateful = selection === undefined;
+	if (stateful) {
+		[selection, setSelection] = useState(undefined);
+	} else {
+		selection = Array.isArray(selected) ? selected[0] : selection;
 	}
-);
+
+	if (selection && clearSelection) {
+		options = [
+			{
+				label: clearSelection,
+				value: '',
+			},
+			...options,
+		];
+	}
+
+	const makeSelection = (e: Event, option?: Option) => {
+		option = option.value ? option : undefined;
+
+		if (option != selection) {
+			onSelect && onSelect(e, option);
+		}
+
+		if (stateful) {
+			setSelection(option);
+		}
+
+		!stayOpenOnSelection && setOpen(false);
+	};
+	return (
+		options &&
+		Array.isArray(options) &&
+		options.length && (
+			<div
+				css={
+					!disableStyles && native
+						? CSS.native({ style })
+						: CSS.select({
+								color,
+								backgroundColor,
+								borderColor,
+								label,
+								selection: selection || '',
+								theme,
+								style,
+						  })
+				}
+				className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
+			>
+				{native ? (
+					<>
+						{label && !hideLabelOnSelection && (
+							<span className="ss__select__label">
+								{label}
+								{separator && <span className="ss__select__label__separator">{separator}</span>}
+							</span>
+						)}
+
+						<select
+							className="ss__select__select"
+							disabled={disabled || undefined}
+							onChange={(e) => {
+								const selectElement = e.target;
+								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
+								const selectedOption = options
+									.filter((option, index) => {
+										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
+									})
+									.pop();
+								!disabled && makeSelection(e as any, selectedOption);
+							}}
+						>
+							{!selection && clearSelection && (
+								<option className="ss__select__select__option" selected value="">
+									{clearSelection}
+								</option>
+							)}
+							{options.map((option, index) => (
+								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</>
+				) : (
+					<Dropdown
+						{...subProps.dropdown}
+						disableClickOutside={disableClickOutside}
+						open={open}
+						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+						onClick={(e) => setOpen((prev) => !prev)}
+						button={
+							<Button {...subProps.button}>
+								{label && !hideLabelOnSelection && (
+									<span className="ss__select__label">
+										{label}
+										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+									</span>
+								)}
+								{selection && <span className="ss__select__selection">{selection?.label}</span>}
+								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+							</Button>
+						}
+					>
+						<ul className="ss__select__select">
+							{options.map((option) => (
+								<li
+									className={classnames('ss__select__select__option', {
+										'ss__select__select__option--selected': selection?.value === option.value,
+									})}
+									onClick={(e) => !disabled && makeSelection(e as any, option)}
+								>
+									<span>{option.label}</span>
+								</li>
+							))}
+						</ul>
+					</Dropdown>
+				)}
+			</div>
+		)
+	);
+});
 
 interface SelectSubProps {
-	button?: ButtonProps;
-	dropdown?: DropdownProps;
-	icon?: IconProps;
+	button: ButtonProps;
+	dropdown: DropdownProps;
+	icon: IconProps;
 }
 
 export type Option = {

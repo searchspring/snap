@@ -5,9 +5,8 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { Recommendation, defaultRecommendationResponsive } from './Recommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { Layout } from '../../../types';
 
-// import Readme from './readme.md';
+import Readme from './readme.md';
 
 export default {
 	title: `Organisms/Recommendation`,
@@ -16,7 +15,7 @@ export default {
 		docs: {
 			page: () => (
 				<div>
-					{/* <Readme /> */}
+					<Readme />
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -36,19 +35,10 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'Controller reference',
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
-			control: { type: 'none' },
-		},
-		results: {
-			description: 'Results store reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'Results store object',
+					summary: 'Controller',
 				},
 			},
 			control: { type: 'none' },
@@ -65,7 +55,6 @@ export default {
 			control: { type: 'boolean' },
 		},
 		title: {
-			defaultValue: '',
 			description: 'Recommendation title',
 			table: {
 				type: {
@@ -93,7 +82,7 @@ export default {
 					summary: 'string | JSX Element',
 				},
 			},
-			control: { type: 'string' },
+			control: { type: 'text' },
 		},
 		nextButton: {
 			description: 'Next button',
@@ -102,7 +91,7 @@ export default {
 					summary: 'string | JSX Element',
 				},
 			},
-			control: { type: 'string' },
+			control: { type: 'text' },
 		},
 		breakpoints: {
 			defaultValue: defaultRecommendationResponsive,
@@ -121,7 +110,7 @@ export default {
 
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
 export const Default = (props, { loaded: { controller } }) => {
-	return <Recommendation {...props} results={controller?.store?.results} />;
+	return <Recommendation {...props} controller={controller} />;
 };
 Default.loaders = [
 	async () => ({

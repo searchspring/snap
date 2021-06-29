@@ -1,77 +1,104 @@
 # Recommendation
 
-Renders a basic recommendation component.
+Renders a carousel of product recommendations, built using [Swiper](https://swiperjs.com/)
+
+If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
+
+Any modification to the results are recommended to be made using an `afterSearch` or `afterStore` event via the Controller instead of making modifications in the component.
+
 
 ## Sub-components
-- Result
+- Result (default)
+- Icon
 
 ## Usage
 
-### results
-The required `results` prop specifies a reference to the results store array. 
+Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
+
+### controller
+The required `controller` prop specifies a reference to the RecommendationController
 
 ```jsx
-<Results results={controller.store.results} />
+<Results controller={controller} />
 ```
-
-### layout
-The `layout` prop specifies if this result will be rendered in a `grid` or `list` layout.
+### loop
+The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Results results={controller.store.results} layout={'grid'} />
+<Results controller={controller} layout={'grid'} />
 ```
 
-### responsive
-An object that modifies the responsive behavior of the `<Result />` sub-components.
+### title
+The `title` prop specifies the carousel title
 
-The responsive prop can be used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in. The viewport prop is the number representing the screen size the breakpoint should be used at and below.
+```jsx
+<Results controller={controller} title={'Recommended Products'} />
+```
 
-For example, if you had `viewport: 480`, those specific responsive settings would be used from 480px wide and below.
+### pagination
+The `pagination` prop specifies if the carousel should display pagination dots. 
 
-`viewport` - required, viewport width when this rule is active
+```jsx
+<Results controller={controller} pagination={true} />
+```
 
-`numAcross` - required, number of columns to display at the given `viewport`
+### prevButton
+The `prevButton` prop specifies the previous button element of the carousel. This can be a string or JSX element. 
 
-`numRows` - optional, number of rows to display at the given `viewport`
+```jsx
+<Results controller={controller} prevButton={'<'} />
+```
 
-`layout` - optional, layout type `'grid'` or `'list'` at the given `viewport`
+### nextButton
+The `nextButton` prop specifies the next button element of the carousel. This can be a string or JSX element. 
+
+```jsx
+<Results controller={controller} nextButton={'>'} />
+```
+
+### breakpoints
+An object that modifies the responsive behavior of the carousel at various viewports. 
+
+The object key specified the viewport for when the parameters will be applied. 
+
+The default configuration contains the following properties, however any (Swiper API parameters)[https://swiperjs.com/swiper-api#parameters] can also be specified. 
+
+`slidesPerView` - number of products to display per page
+
+`slidesPerGroup` - number of products to scroll by when next/previous button is clicked
+
+`spaceBetween` - spacing between each product
 
 ```typescript
-const defaultResponsiveOptions = [
-	{
-		viewport: 480,
-		numAcross: 1,
-		layout: 'list',
+const defaultRecommendationResponsive = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
 	},
-	{
-		viewport: 768,
-		numAcross: 2,
+	480: {
+		slidesPerView: 2,
+		slidesPerGroup: 2,
+		spaceBetween: 10,
 	},
-	{
-		viewport: 1024,
-		numAcross: 3,
+	768: {
+		slidesPerView: 3,
+		slidesPerGroup: 3,
+		spaceBetween: 10,
 	},
-	{
-		viewport: 1200,
-		numAcross: 4,
+	1024: {
+		slidesPerView: 4,
+		slidesPerGroup: 4,
+		spaceBetween: 10,
 	},
-]
-```
-
-```typescript
-const responsive = [
-	{
-		viewport: 768,
-		numAcross: 1,
-		layout: 'list',
+	1200: {
+		slidesPerView: 5,
+		slidesPerGroup: 5,
+		spaceBetween: 10,
 	},
-	{
-		viewport: 1024,
-		numAcross: 3,
-	},
-]
+};
 ```
 
 ```jsx
-<Recommendation results={controller.store.results} responsive={responsive} />
+<Recommendation controller={controller} breakpoints={defaultRecommendationResponsive} />
 ```

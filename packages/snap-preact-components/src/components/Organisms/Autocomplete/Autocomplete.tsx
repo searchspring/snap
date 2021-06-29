@@ -491,9 +491,9 @@ const Terms = (props: { terms; search; valueProps }) => {
 };
 
 interface AutocompleteSubProps {
-	facet?: FacetProps;
-	banner?: BannerProps;
-	results?: ResultsProp;
+	facet: FacetProps;
+	banner: BannerProps;
+	results: ResultsProp;
 }
 
 export interface AutocompleteProps extends ComponentProps {

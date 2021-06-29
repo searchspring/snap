@@ -34,87 +34,85 @@ const CSS = {
 		}),
 };
 
-export const Checkbox = observer(
-	(properties: CheckboxProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: CheckboxProps = {
+	const props: CheckboxProps = {
+		// default props
+		size: '12px',
+		startChecked: false,
+		// global theme
+		...globalTheme?.components?.checkbox,
+		// props
+		...properties,
+		...properties.theme?.components?.checkbox,
+	};
+
+	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableStyles, className, style } = props;
+
+	const subProps: CheckboxSubProps = {
+		icon: {
 			// default props
-			size: '12px',
-			startChecked: false,
+			className: 'ss__checkbox__icon',
+			icon: 'check-thin',
 			// global theme
-			...globalTheme?.components?.checkbox,
-			// props
-			...properties,
-			...properties.theme?.components?.checkbox,
-		};
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				color: iconColor || color || theme.colors?.primary,
+				disableStyles,
+				icon,
+				size: size && `calc(${size} - 30%)`,
+			}),
+			// component theme overrides
+			...theme?.components?.icon,
+		},
+	};
 
-		const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableStyles, className, style } = props;
+	let checkedState, setCheckedState;
 
-		const subProps: CheckboxSubProps = {
-			icon: {
-				// default props
-				className: 'ss__checkbox__icon',
-				icon: 'check-thin',
-				// global theme
-				...globalTheme?.components?.icon,
-				// inherited props
-				...defined({
-					color: iconColor || color || theme.colors?.primary,
-					disableStyles,
-					icon,
-					size: size && `calc(${size} - 30%)`,
-				}),
-				// component theme overrides
-				...theme?.components?.icon,
-			},
-		};
-
-		let checkedState, setCheckedState;
-
-		const stateful = checked === undefined;
-		if (stateful) {
-			[checkedState, setCheckedState] = useState(startChecked);
-		} else {
-			checkedState = checked;
-		}
-
-		const clickFunc = (e) => {
-			if (!disabled) {
-				if (stateful) {
-					setCheckedState((prev) => {
-						return !prev;
-					});
-				}
-
-				onClick && onClick(e);
-			}
-		};
-
-		return native ? (
-			<input
-				css={!disableStyles && CSS.native({ style })}
-				className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
-				type="checkbox"
-				onClick={(e) => clickFunc(e)}
-				disabled={disabled}
-				checked={checkedState}
-			/>
-		) : (
-			<span
-				css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
-				className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
-				onClick={(e) => clickFunc(e)}
-			>
-				{checkedState && <Icon {...subProps.icon} />}
-			</span>
-		);
+	const stateful = checked === undefined;
+	if (stateful) {
+		[checkedState, setCheckedState] = useState(startChecked);
+	} else {
+		checkedState = checked;
 	}
-);
+
+	const clickFunc = (e) => {
+		if (!disabled) {
+			if (stateful) {
+				setCheckedState((prev) => {
+					return !prev;
+				});
+			}
+
+			onClick && onClick(e);
+		}
+	};
+
+	return native ? (
+		<input
+			css={!disableStyles && CSS.native({ style })}
+			className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
+			type="checkbox"
+			onClick={(e) => clickFunc(e)}
+			disabled={disabled}
+			checked={checkedState}
+		/>
+	) : (
+		<span
+			css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
+			className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
+			onClick={(e) => clickFunc(e)}
+		>
+			{checkedState && <Icon {...subProps.icon} />}
+		</span>
+	);
+});
 
 interface CheckboxSubProps {
-	icon?: IconProps;
+	icon: IconProps;
 }
 export interface CheckboxProps extends ComponentProps {
 	checked?: boolean;

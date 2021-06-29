@@ -214,9 +214,9 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 });
 
 interface ResultSubProps {
-	badge?: BadgeProps;
-	price?: PriceProps;
-	image?: ImageProps;
+	badge: BadgeProps;
+	price: PriceProps;
+	image: ImageProps;
 }
 
 export interface ResultProps extends ComponentProps {

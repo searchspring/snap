@@ -1,20 +1,20 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { useState, useRef } from 'preact/hooks';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import 'swiper/swiper.min.css';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+import type { RecommendationController } from '@searchspring/snap-controller';
 
-import { Icon } from '../../Atoms/Icon/Icon';
+import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers/theme';
-import { ComponentProps, Result as ResultType } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
@@ -35,8 +35,10 @@ const CSS = {
 				bottom: 'calc(50% - 60px/2)',
 				zIndex: '2',
 				cursor: 'pointer',
-				'& .ss__icon': {
-					fill: theme?.colors?.primary || 'inherit',
+
+				'&.swiper-button-disabled': {
+					opacity: '0.3',
+					cursor: 'default',
 				},
 			},
 			'& .ss__recommendation__next': {
@@ -111,33 +113,26 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const props: RecommendationProps = {
 		// default props
 		breakpoints: defaultRecommendationResponsive,
-		results: [],
-		nextButton: <Icon icon="angle-right" />,
-		prevButton: <Icon icon="angle-left" />,
 		pagination: false,
 		loop: true,
 		// global theme
-		...globalTheme?.components?.recommendation,
-		// props
 		...properties,
 		...properties.theme?.components?.recommendation,
 	};
 
-	const {
-		title,
-		controller,
-		children,
-		results,
-		breakpoints,
-		loop,
-		pagination,
-		nextButton,
-		prevButton,
-		disableStyles,
-		style,
-		className,
-		additionalProps,
-	} = props;
+	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
+		props;
+
+	if (!controller || controller.constructor?.name !== 'RecommendationController') {
+		console.error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
+		return;
+	}
+	if (children && children.length !== controller.store.results.length) {
+		console.error(`<Recommendation> Component received invalid number of children`);
+		return;
+	}
+
+	const results = controller.store?.results;
 
 	const subProps: RecommendationSubProps = {
 		result: {
@@ -152,6 +147,18 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			// component theme overrides
 			...props.theme?.components?.result,
 		},
+		icon: {
+			// default props
+			className: 'ss__recommendation__icon',
+			// global theme
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...theme?.components?.icon,
+		},
 	};
 
 	SwiperCore.use([Pagination, Navigation]);
@@ -160,10 +167,31 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
 
+	const [initialIndexes, setInitialIndexes] = useState([0, 0]);
 	const inViewport = useIntersection(rootComponentRef, '0px', true);
+
+	const sendProductImpression = (index, count) => {
+		if (!inViewport) return;
+
+		let resultLoopCount = [index, index + count];
+		let resultLoopOverCount;
+		if (index + count > results.length - 1) {
+			resultLoopCount = [index];
+			resultLoopOverCount = [0, index + count - results.length];
+		}
+		let resultsImpressions = results.slice(...resultLoopCount);
+		if (resultLoopOverCount) {
+			resultsImpressions = resultsImpressions.concat(results.slice(...resultLoopOverCount));
+		}
+
+		resultsImpressions.map((result) => {
+			controller.track.product.impression(result);
+		});
+	};
+
 	if (inViewport) {
-		(controller as RecommendationController)?.track?.impression();
-		// figure out how many slides are showing and send impression for each
+		controller.track.impression();
+		sendProductImpression(initialIndexes[0], initialIndexes[1]);
 	}
 
 	(children || results.length) && (controller as RecommendationController)?.track?.render();
@@ -176,11 +204,11 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				className={classnames('ss__recommendation', className)}
 			>
 				{title && <h3 className="ss__recommendation__title">{title}</h3>}
-				<div className="ss__recommendation__prev" ref={navigationPrevRef}>
-					{prevButton}
+				<div className="ss__recommendation__prev" ref={navigationPrevRef} onClick={(e) => controller.track.click(e)}>
+					{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
 				</div>
-				<div className="ss__recommendation__next" ref={navigationNextRef}>
-					{nextButton}
+				<div className="ss__recommendation__next" ref={navigationNextRef} onClick={(e) => controller.track.click(e)}>
+					{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
 				</div>
 				<Swiper
 					centerInsufficientSlides={true}
@@ -189,9 +217,23 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+						//@ts-ignore
+						setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+					}}
+					onBreakpoint={(swiper) => {
+						//@ts-ignore
+						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
 					}}
 					onSlideChange={(swiper) => {
-						console.log('swiper', swiper);
+						//@ts-ignore
+						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+					}}
+					onClick={(swiper, e) => {
+						const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
+						controller.track.click(e);
+						if (!Number.isNaN(clickedIndex)) {
+							controller.track.product.click(e, results[clickedIndex]);
+						}
 					}}
 					loop={loop}
 					breakpoints={breakpoints}
@@ -219,16 +261,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 export interface RecommendationProps extends ComponentProps {
 	title?: JSX.Element | string;
-	results?: ResultType[];
 	breakpoints?: any;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	loop?: boolean;
 	pagination?: boolean;
-	controller?: SearchController | AutocompleteController | RecommendationController;
+	controller: RecommendationController;
 	children?: JSX.Element[];
 }
 
 interface RecommendationSubProps {
 	result: ResultProps;
+	icon: IconProps;
 }

@@ -38,60 +38,58 @@ const CSS = {
 		}),
 };
 
-export const FacetListOptions = observer(
-	(properties: FacetListOptionsProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: FacetListOptionsProps = {
+	const props: FacetListOptionsProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.facetListOptions,
+		//props
+		...properties,
+		...properties.theme?.components?.facetListOptions,
+	};
+
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+
+	const subProps: FacetListOptionsSubProps = {
+		checkbox: {
 			// default props
+			className: 'ss__facet-list-options__checkbox',
 			// global theme
-			...globalTheme?.components?.facetListOptions,
-			//props
-			...properties,
-			...properties.theme?.components?.facetListOptions,
-		};
+			...globalTheme?.components?.checkbox,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...theme?.components?.checkbox,
+		},
+	};
 
-		const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
-
-		const subProps: FacetListOptionsSubProps = {
-			checkbox: {
-				// default props
-				className: 'ss__facet-list-options__checkbox',
-				// global theme
-				...globalTheme?.components?.checkbox,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...theme?.components?.checkbox,
-			},
-		};
-
-		return (
-			values?.length && (
-				<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss__facet-list-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-							onClick={onClick}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							{...value.url?.link}
-						>
-							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-							<span className="ss__facet-list-options__option__value">
-								{value.label}
-								{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
-							</span>
-						</a>
-					))}
-				</div>
-			)
-		);
-	}
-);
+	return (
+		values?.length && (
+			<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss__facet-list-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
+						onClick={onClick}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						{...value.url?.link}
+					>
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
+						<span className="ss__facet-list-options__option__value">
+							{value.label}
+							{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+						</span>
+					</a>
+				))}
+			</div>
+		)
+	);
+});
 
 export interface FacetListOptionsProps extends ComponentProps {
 	values: ValueFacetValue[];
@@ -103,5 +101,5 @@ export interface FacetListOptionsProps extends ComponentProps {
 }
 
 interface FacetListOptionsSubProps {
-	checkbox?: CheckboxProps;
+	checkbox: CheckboxProps;
 }
