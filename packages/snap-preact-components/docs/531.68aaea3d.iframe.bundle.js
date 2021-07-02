@@ -1,16 +1,15 @@
-(window.webpackJsonp = window.webpackJsonp || []).push([
-	[7],
+(self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
+	[531],
 	{
-		933: function (module, __webpack_exports__, __webpack_require__) {
+		70531: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, 'getScrollAreaStyles', function () {
-					return getScrollAreaStyles;
-				});
+				__webpack_require__.d(__webpack_exports__, { getScrollAreaStyles: () => getScrollAreaStyles, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			__webpack_require__(32501), __webpack_require__(22144);
 			var _templateObject,
-				react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1),
-				_storybook_theming__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74);
-			var hsResizeObserverDummyAnimation = Object(_storybook_theming__WEBPACK_IMPORTED_MODULE_1__.d)(
+				react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(66741),
+				_storybook_theming__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43128);
+			var hsResizeObserverDummyAnimation = (0, _storybook_theming__WEBPACK_IMPORTED_MODULE_3__.F4)(
 					_templateObject ||
 						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {
 							return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
@@ -282,11 +281,13 @@
 					};
 				},
 				GlobalScrollAreaStyles = function GlobalScrollAreaStyles() {
-					return react__WEBPACK_IMPORTED_MODULE_0__.default.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_1__.a, {
+					return react__WEBPACK_IMPORTED_MODULE_2__.ZP.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_3__.xB, {
 						styles: getScrollAreaStyles,
 					});
 				};
-			(GlobalScrollAreaStyles.displayName = 'GlobalScrollAreaStyles'), (__webpack_exports__.default = GlobalScrollAreaStyles);
+			GlobalScrollAreaStyles.displayName = 'GlobalScrollAreaStyles';
+			const __WEBPACK_DEFAULT_EXPORT__ = GlobalScrollAreaStyles;
 		},
 	},
 ]);
+//# sourceMappingURL=531.68aaea3d.iframe.bundle.js.map

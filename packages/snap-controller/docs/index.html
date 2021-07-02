@@ -95,7 +95,7 @@
 				<p>Each <code>Controller</code> must be passed a configuration object as the first parameter to the constructor, and a services object (dependencies) as the second. The contents of these objects will depend on which type of <code>Controller</code> is being instantiated. For example, a <code>SearchController</code> would usually be paired with a <code>SearchStore</code> service, and would take a <code>SearchControllerConfig</code> configuration object.</p>
 				<p>The complete example below shows how a <code>SearchController</code> could be instatiated, initialized and searched:</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchController</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-controller&#039;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">SnapClient</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Client</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">UrlManager</span><span style="color: #000000">, </span><span style="color: #001080">UrlTranslator</span><span style="color: #000000">, </span><span style="color: #001080">reactLinker</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-url-manager&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">EventManager</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-event-manager&#039;</span><span style="color: #000000">;</span>
@@ -108,7 +108,7 @@
 <span style="color: #000000">};</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">services</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">client:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SnapClient</span><span style="color: #000000">({ </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">    </span><span style="color: #001080">client:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({ </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000"> }),</span>
 <span style="color: #000000">    </span><span style="color: #001080">store:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">(),</span>
 <span style="color: #000000">    </span><span style="color: #001080">urlManager:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlTranslator</span><span style="color: #000000">(), </span><span style="color: #001080">reactLinker</span><span style="color: #000000">),</span>
 <span style="color: #000000">    </span><span style="color: #001080">eventManager:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventManager</span><span style="color: #000000">(),</span>
@@ -235,6 +235,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/controllerenvironment.html" class="tsd-kind-icon">Controller<wbr>Environment</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/abstractcontroller.html" class="tsd-kind-icon">Abstract<wbr>Controller</a>
 					</li>
@@ -243,6 +246,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/findercontroller.html" class="tsd-kind-icon">Finder<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/recommendationcontroller.html" class="tsd-kind-icon">Recommendation<wbr>Controller</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/searchcontroller.html" class="tsd-kind-icon">Search<wbr>Controller</a>
@@ -270,6 +276,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#nextevent" class="tsd-kind-icon">Next<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#recommendationcontrollerconfig" class="tsd-kind-icon">Recommendation<wbr>Controller<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#searchcontrollerconfig" class="tsd-kind-icon">Search<wbr>Controller<wbr>Config</a>

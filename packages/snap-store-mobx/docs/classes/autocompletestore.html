@@ -91,7 +91,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="autocompletestore.html#controller" class="tsd-kind-icon">controller</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="autocompletestore.html#controller" class="tsd-kind-icon">controller</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="autocompletestore.html#custom" class="tsd-kind-icon">custom</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#facets" class="tsd-kind-icon">facets</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#filters" class="tsd-kind-icon">filters</a></li>
@@ -102,6 +103,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#pagination" class="tsd-kind-icon">pagination</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#results" class="tsd-kind-icon">results</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#search" class="tsd-kind-icon">search</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#services" class="tsd-kind-icon">services</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#sorting" class="tsd-kind-icon">sorting</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#state" class="tsd-kind-icon">state</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="autocompletestore.html#storage" class="tsd-kind-icon">storage</a></li>
@@ -111,7 +113,6 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="autocompletestore.html#link" class="tsd-kind-icon">link</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="autocompletestore.html#reset" class="tsd-kind-icon">reset</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="autocompletestore.html#tojson" class="tsd-kind-icon">toJSON</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="autocompletestore.html#update" class="tsd-kind-icon">update</a></li>
@@ -126,16 +127,30 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Autocomplete<wbr>Store<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="autocompletestore.html" class="tsd-signature-type" data-tsd-kind="Class">AutocompleteStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Autocomplete<wbr>Store<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, services<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>urlManager<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="autocompletestore.html" class="tsd-signature-type" data-tsd-kind="Class">AutocompleteStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L20">Autocomplete/AutocompleteStore.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L21">Autocomplete/AutocompleteStore.ts:21</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>services: <span class="tsd-signature-symbol">{ </span>urlManager<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>url<wbr>Manager<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="autocompletestore.html" class="tsd-signature-type" data-tsd-kind="Class">AutocompleteStore</a></h4>
 						</li>
 					</ul>
@@ -143,14 +158,24 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="config" class="tsd-anchor"></a>
+					<h3>config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L8">Autocomplete/AutocompleteStore.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="controller" class="tsd-anchor"></a>
-					<h3>controller</h3>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> controller</h3>
 					<div class="tsd-signature tsd-kind-icon">controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#controller">controller</a></p>
+						<p>Inherited from <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#controller">controller</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L8">Autocomplete/AutocompleteStore.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L9">Abstract/AbstractStore.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -161,7 +186,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#custom">custom</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -176,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">facets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FacetStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L14">Autocomplete/AutocompleteStore.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L15">Autocomplete/AutocompleteStore.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +211,7 @@
 					<div class="tsd-signature tsd-kind-icon">filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FilterStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L15">Autocomplete/AutocompleteStore.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L16">Autocomplete/AutocompleteStore.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -197,7 +222,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#loaded">loaded</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -208,7 +233,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#loading">loading</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -218,7 +243,7 @@
 					<div class="tsd-signature tsd-kind-icon">merchandising<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MerchandisingStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L11">Autocomplete/AutocompleteStore.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L12">Autocomplete/AutocompleteStore.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -228,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">meta<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L9">Autocomplete/AutocompleteStore.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L10">Autocomplete/AutocompleteStore.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -243,7 +268,7 @@
 					<div class="tsd-signature tsd-kind-icon">pagination<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PaginationStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L17">Autocomplete/AutocompleteStore.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L18">Autocomplete/AutocompleteStore.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -253,7 +278,7 @@
 					<div class="tsd-signature tsd-kind-icon">results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ResultStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L16">Autocomplete/AutocompleteStore.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L17">Autocomplete/AutocompleteStore.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -263,7 +288,17 @@
 					<div class="tsd-signature tsd-kind-icon">search<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L12">Autocomplete/AutocompleteStore.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L13">Autocomplete/AutocompleteStore.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="services" class="tsd-anchor"></a>
+					<h3>services</h3>
+					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L9">Autocomplete/AutocompleteStore.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +308,7 @@
 					<div class="tsd-signature tsd-kind-icon">sorting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SortingStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L18">Autocomplete/AutocompleteStore.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L19">Autocomplete/AutocompleteStore.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +318,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StateStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L19">Autocomplete/AutocompleteStore.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L20">Autocomplete/AutocompleteStore.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -293,7 +328,7 @@
 					<div class="tsd-signature tsd-kind-icon">storage<span class="tsd-signature-symbol">:</span> <a href="storagestore.html" class="tsd-signature-type" data-tsd-kind="Class">StorageStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L20">Autocomplete/AutocompleteStore.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L21">Autocomplete/AutocompleteStore.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -303,37 +338,13 @@
 					<div class="tsd-signature tsd-kind-icon">terms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TermStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L13">Autocomplete/AutocompleteStore.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L14">Autocomplete/AutocompleteStore.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-					<a name="link" class="tsd-anchor"></a>
-					<h3>link</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">link<span class="tsd-signature-symbol">(</span>controller<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Overrides <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#link">link</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L43">Autocomplete/AutocompleteStore.ts:43</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>controller: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="reset" class="tsd-anchor"></a>
 					<h3>reset</h3>
@@ -344,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L48">Autocomplete/AutocompleteStore.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L51">Autocomplete/AutocompleteStore.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -362,7 +373,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#tojson">toJSON</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L28">Abstract/AbstractStore.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L24">Abstract/AbstractStore.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -386,7 +397,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="abstractstore.html">AbstractStore</a>.<a href="abstractstore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/f146afc/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L54">Autocomplete/AutocompleteStore.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6b55eea/packages/snap-store-mobx/src/Autocomplete/AutocompleteStore.ts#L57">Autocomplete/AutocompleteStore.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -425,7 +436,10 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="autocompletestore.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="autocompletestore.html#config" class="tsd-kind-icon">config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="autocompletestore.html#controller" class="tsd-kind-icon">controller</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -459,6 +473,9 @@
 								<a href="autocompletestore.html#search" class="tsd-kind-icon">search</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="autocompletestore.html#services" class="tsd-kind-icon">services</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="autocompletestore.html#sorting" class="tsd-kind-icon">sorting</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -469,9 +486,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="autocompletestore.html#terms" class="tsd-kind-icon">terms</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="autocompletestore.html#link" class="tsd-kind-icon">link</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="autocompletestore.html#reset" class="tsd-kind-icon">reset</a>
@@ -490,13 +504,16 @@
 						<a href="finderstore.html" class="tsd-kind-icon">Finder<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="recommendationstore.html" class="tsd-kind-icon">Recommendation<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="searchstore.html" class="tsd-kind-icon">Search<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="storagestore.html" class="tsd-kind-icon">Storage<wbr>Store</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/storageconfig.html" class="tsd-kind-icon">Storage<wbr>Config</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#storageconfig" class="tsd-kind-icon">Storage<wbr>Config</a>
 					</li>
 				</ul>
 			</nav>
@@ -515,9 +532,6 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>

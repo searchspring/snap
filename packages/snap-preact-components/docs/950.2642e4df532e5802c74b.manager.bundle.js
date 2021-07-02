@@ -1,7 +1,7 @@
-(window.webpackJsonp = window.webpackJsonp || []).push([
-	[8],
+(self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
+	[950],
 	{
-		941: function (module, exports) {
+		52950: (module) => {
 			module.exports = function (e, n) {
 				return (
 					(n = n || {}),

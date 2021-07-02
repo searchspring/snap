@@ -79,7 +79,7 @@
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h2>Import</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SnapClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Client</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-client&#039;</span><span style="color: #000000">;</span>
 </code></pre>
 				<a href="#global-config" id="global-config" style="color: inherit; text-decoration: none;">
 					<h2>Global Config</h2>
@@ -108,7 +108,7 @@
 					<h2>Client Config</h2>
 				</a>
 				<p>Object required for all controllers</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">SnapClientConfig</span><span style="color: #000000"> = {</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ClientConfig</span><span style="color: #000000"> = {</span>
 <span style="color: #000000">    </span><span style="color: #001080">meta</span><span style="color: #000000">?: {</span>
 <span style="color: #000000">        </span><span style="color: #001080">prefetch</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
 <span style="color: #000000">        </span><span style="color: #001080">ttl</span><span style="color: #000000">?: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
@@ -139,7 +139,7 @@
 				<a href="#standalone-usage" id="standalone-usage" style="color: inherit; text-decoration: none;">
 					<h2>Standalone usage</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SnapClient</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">results</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">search</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">search:</span><span style="color: #000000"> {</span>
@@ -153,7 +153,7 @@
 					<h2><code>search</code> method</h2>
 				</a>
 				<p>Makes a request to the Searchspring Search API and returns a promise.  </p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SnapClient</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">results</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">search</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">search:</span><span style="color: #000000"> {</span>
@@ -167,7 +167,7 @@
 					<h2><code>autocomplete</code> method</h2>
 				</a>
 				<p>Makes a request to the Searchspring Autocomplete API and returns a promise.  </p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SnapClient</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">results</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">autocomplete</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">suggestions:</span><span style="color: #000000"> {</span>
@@ -186,7 +186,7 @@
 				</a>
 				<p>The meta property contains the metadata related to the siteId that the client was instantiated with. This data is to be used together with search results. Metadata contains site configuration like facet and sorting information.</p>
 				<p>Note that the <code>search</code> method sets the <code>meta</code> property, therefore it must be called before attempting to access the <code>meta</code> property.</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SnapClient</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">, </span><span style="color: #001080">clientConfig</span><span style="color: #000000">);</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">results</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">search</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">search:</span><span style="color: #000000"> {</span>
@@ -211,13 +211,13 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/snapclient.html" class="tsd-kind-icon">Snap<wbr>Client</a>
+						<a href="classes/client.html" class="tsd-kind-icon">Client</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#snapclientconfig" class="tsd-kind-icon">Snap<wbr>Client<wbr>Config</a>
+						<a href="modules.html#clientconfig" class="tsd-kind-icon">Client<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#snapclientglobals" class="tsd-kind-icon">Snap<wbr>Client<wbr>Globals</a>
+						<a href="modules.html#clientglobals" class="tsd-kind-icon">Client<wbr>Globals</a>
 					</li>
 				</ul>
 			</nav>
