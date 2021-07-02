@@ -22,6 +22,47 @@
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<script>
+		function modifyLinks(markdown) {
+			var replaces = [
+				{ a: "(https://snapi.kube.searchspring.io/api/v1/#tag/Meta)", b: "(#/api-docs#Meta)"},
+				{ a: "(https://snapi.kube.searchspring.io/api/v1/)", b: "(#/api-docs)"},
+				{ a: "(https://searchspring.github.io/snapi-explorer/)", b: "(#/api-explorer)"},	
+				
+				{ a: "(https://github.com/searchspring/snap/blob/main/docs/SEARCH.md)", b: "(#/start-search)"},
+
+				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true", b: "../../images/snap-dependencies.jpg"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true", b: "../../images/logger-example.png"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/emojis.png?raw=true", b: "../../images/emojis.png"},
+				{ a: "https://github.com/searchspring/snap/blob/main/images/colors.png?raw=true", b: "../../images/colors.png"},
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-client)", b: "(#/package-client)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)", b: "(#/package-storeMobx)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)", b: "(#/package-urlManager)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)", b: "(#/package-eventManager)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-profiler)", b: "(#/package-profiler)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-logger)", b: "(#/package-logger)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller)", b: "(#/package-controller)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox)", b: "(#/package-toolbox)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)", b: "(#/components-preact)"},
+				
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)", b: "(#/package-toolbox-domTargeter)"},
+				
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)", b: "(#/package-storeMobx-storage)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)", b: "(#/package-storeMobx-search)"},
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)", b: "(#/package-controller-finder)" },
+
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)", b: "(#/package-urlManager-translators)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers)", b: "(#/package-urlManager-linkers)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(#/package-urlManager-translators-url)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(#/package-urlManager-translators-queryString)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(#/package-urlManager-linkers-react)"},
+			];
+			replaces.forEach(function(replace) {
+				markdown = markdown.replaceAll(replace.a, replace.b);
+			});
+			return markdown
+		}
 		const documents = [
 			{
 				categoryName: 'General',
@@ -239,6 +280,19 @@
 							}, 
 						]
 					}, {
+						label: 'Tracker',
+						route: '/package-tracker',
+						type: 'markdown',
+						url: './packages/snap-tracker/README.md',
+						links: [
+							{
+								label: 'Typedocs',
+								type: 'external',
+								url: 'https://searchspring.github.io/snap/packages/snap-tracker/docs/',
+								icon: 'fas fa-external-link-alt fa-1x'
+							}, 
+						]
+					}, {
 						label: 'Toolbox',
 						route: '/package-toolbox',
 						type: 'markdown',
@@ -430,7 +484,7 @@
 					const response = await fetch(file);
 					let text = await response.text()
 					this.iframe = "";
-					this.markdown = text;
+					this.markdown = modifyLinks(text);
 				}
 			}
 		});
@@ -481,12 +535,7 @@
 					<router-link :key="'/'" :to="'/'">
 						<div id="header">
 							<div class="logo-container">
-								<svg class="searchspring-svg-logo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 52.9" fill="currentColor" focusable="false" role="img">
-									<title>Searchspring Logo</title>
-									<desc>The Searchspring Logo in SVG form</desc>
-									<g class="logo-mark" fill="#00cee1"><path d="M10.2 11c-.1.1-.2.1-.4.2-6.3 3-8.3 11.7-4.6 19.4l22.7-11c.1-.1.3-.1.4-.2 6.3-3 8.3-11.7 4.6-19.4L10.2 11zM6.8 33.4c-.1.1-.2.1-.4.2-6.3 3-8.3 11.7-4.6 19.4l22.7-11c.1-.1.3-.1.4-.2 6.3-3 8.3-11.7 4.6-19.4l-22.7 11z"></path></g>
-								</svg>
-								<span class="logo-nap">nap<span class="exc">!</span></span>
+								<img src="./images/logo-snap.svg"/>
 							</div>
 						</div>
 					</router-link>

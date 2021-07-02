@@ -199,15 +199,23 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	return (
 		(children || results?.length) && (
 			<div
-				ref={rootComponentRef}
+				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
 				css={!disableStyles && CSS.recommendation({ theme, style })}
 				className={classnames('ss__recommendation', className)}
 			>
 				{title && <h3 className="ss__recommendation__title">{title}</h3>}
-				<div className="ss__recommendation__prev" ref={navigationPrevRef} onClick={(e) => controller.track.click(e)}>
+				<div
+					className="ss__recommendation__prev"
+					ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+					onClick={(e) => controller.track.click(e)}
+				>
 					{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
 				</div>
-				<div className="ss__recommendation__next" ref={navigationNextRef} onClick={(e) => controller.track.click(e)}>
+				<div
+					className="ss__recommendation__next"
+					ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+					onClick={(e) => controller.track.click(e)}
+				>
 					{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
 				</div>
 				<Swiper

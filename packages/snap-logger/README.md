@@ -4,7 +4,7 @@
 
 Simple logger for debugging
 
-<img src="../../images/logger-example.png" />
+<img src="https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true" />
 
 <details>
 	<summary>Sample code</summary>
@@ -39,12 +39,12 @@ logger.dev(`%c ${logger.emoji.vortex} %c${logger.prefix}%c${'magical text'}`,
 
 # Dependency
 
-Snap Logger is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Logger is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg" />
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true" />
 </details>
 <br>
 
@@ -73,7 +73,6 @@ const logger = new Logger(prefix)
 ## Controller usage
 Snap Logger is a dependency of Snap Controller and it is recommended to use logging methods of the controller in place of `console` methods.
 
-See [Typical Usage](../../README.md#TypicalUsage)
 
 ## Standalone usage
 ```typescript
@@ -82,7 +81,7 @@ const logger = new Logger();
 logger.warn('this is a warning');
 ```
 
-## `getGroup` method
+## `setNamespace` method
 Sets prefix instead of defining a prefix in the constructor.
 ```typescript
 const logger = new Logger();
@@ -90,7 +89,7 @@ const logger = new Logger();
 logger.warn('Hello');
 // 'Hello'
 
-logger.setGroup('search');
+logger.setNamespace('search');
 
 logger.warn('Hello');
 // ' [search] :: Hello'
@@ -171,7 +170,7 @@ logger.imageText({
 ## `profile` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes a Snap profile. If mode is set to `LogMode.PRODUCTION`, `profile` logs will not be displayed.
 
-See [@searchspring/snap-profiler](../snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
+See [@searchspring/snap-profiler](https://github.com/searchspring/snap/tree/main/packages/snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
 
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';
@@ -200,7 +199,7 @@ The `emoji` property contains various emojis that can be used
 
 The following emojis are available:
 
-<img src="../../images/emojis.png" />
+<img src="https://github.com/searchspring/snap/blob/main/images/emojis.png?raw=true" />
 
 ```typescript
 const emoji = {
@@ -228,7 +227,7 @@ The `colors` property contains various colors that can be used
 
 The following colors are available:
 
-<img src="../../images/colors.png" />
+<img src="https://github.com/searchspring/snap/blob/main/images/colors.png?raw=true" />
 
 ```typescript
 const colors = {

@@ -1,0 +1,471 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@searchspring/snap-tracker</title>
+	<meta name="description" content="Documentation for @searchspring/snap-tracker">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@searchspring/snap-tracker</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@searchspring/snap-tracker</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#snap-tracker" id="snap-tracker" style="color: inherit; text-decoration: none;">
+					<h1>Snap Tracker</h1>
+				</a>
+				<p><a href="https://www.npmjs.com/package/@searchspring/snap-tracker"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-tracker.svg?style=flat"></a></p>
+				<p>The Snap Tracker service is responsible for sending beacon events. </p>
+				<hr>
+				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
+					<h1>Dependencies</h1>
+				</a>
+				<p>Snap Tracker is a dependency of <a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller">@searchspring/snap-controller</a> <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a></p>
+				<details>
+					<summary>Package dependencies hierarchy</summary>
+					<br/>
+					<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
+				</details>
+				<br>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h1>Installation</h1>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-tracker</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h1>Usage</h1>
+				</a>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h2>Import</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Tracker</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-tracker&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
+					<h2>Controller usage</h2>
+				</a>
+				<p>Snap Tracker is a dependency of Snap Controller and Tracker events can be invoked via the <code>tracker</code> reference of any Snap Controller. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">globals</span><span style="color: #000000"> = { </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000"> };</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">controller</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchController</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">, {</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #001080">tracker</span><span style="color: #000000">,</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #001080">click</span><span style="color: #000000"> === </span><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #001080">click</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #001080">click</span><span style="color: #000000"> === </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #001080">click</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+</code></pre>
+				<a href="#standalone-usage" id="standalone-usage" style="color: inherit; text-decoration: none;">
+					<h2>Standalone usage</h2>
+				</a>
+				<p>Snap Tracker can also be used without a Snap Controller. Typically used to send events before an integration has gone live. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">payload</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconType</span><span style="color: #000000">.</span><span style="color: #0070C1">CLICK</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">category:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconCategory</span><span style="color: #000000">.</span><span style="color: #0070C1">INTERACTION</span><span style="color: #000000">, </span>
+<span style="color: #000000">    </span><span style="color: #001080">event:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">};</span>
+<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#tracker" id="tracker" style="color: inherit; text-decoration: none;">
+					<h1>Tracker</h1>
+				</a>
+				<a href="#track-methods" id="track-methods" style="color: inherit; text-decoration: none;">
+					<h2><code>track</code> methods</h2>
+				</a>
+				<p>The Tracker contains various tracking methods available on the <code>track</code> object. This object is exposed to the browser&#39;s <code>window</code> via the first Snap Controller that has been instantiated. This will use the <code>siteId</code> that has been provided to the Snap Tracker instance of the respective Controller Services.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span>
+</code></pre>
+				<p>Each tracking method expects an object. This object must contain a <code>data</code> key and an object containing the tracking data. </p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<p>If a bundle is using multiple Snap Controllers with different <code>siteId</code>, an optional <code>siteId</code> parameter can be specified to overwrite any event <code>siteId</code></p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#generic-event-trackevent" id="generic-event-trackevent" style="color: inherit; text-decoration: none;">
+					<h3>Generic Event <code>track.event</code></h3>
+				</a>
+				<p>Creates and sends a generic beacon event. Parameter expects an Event Payload object.
+				If a <code>type</code> or <code>category</code> is not provided, a value of <code>&#39;custom&#39;</code> will be used. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">payload</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconType</span><span style="color: #000000">.</span><span style="color: #0070C1">CLICK</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">category:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconCategory</span><span style="color: #000000">.</span><span style="color: #0070C1">INTERACTION</span><span style="color: #000000">, </span>
+<span style="color: #000000">    </span><span style="color: #001080">event:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">};</span>
+<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#event-payload" id="event-payload" style="color: inherit; text-decoration: none;">
+					<h4>Event Payload</h4>
+				</a>
+				<p>A beacon event payload object provided to the <code>track.event</code> method may contain the following:</p>
+				<p><code>type</code> -  BeaconType enum value or custom event type value. If not specified, <code>&#39;custom&#39;</code> will be used.</p>
+				<p><code>category</code> - BeaconCategory enum value or custom event type value. If not specified, <code>&#39;custom&#39;</code> will be used.</p>
+				<p><code>event</code> - object containing event data</p>
+				<p><code>context.website.trackingCode</code> - optional <code>context</code> object that will be merged with constructed context object. Can be used to specify a different <code>siteId</code> value.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">payload</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconType</span><span style="color: #000000">.</span><span style="color: #0070C1">CLICK</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">category:</span><span style="color: #000000"> </span><span style="color: #001080">BeaconCategory</span><span style="color: #000000">.</span><span style="color: #0070C1">INTERACTION</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">event:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">context:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">website:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #001080">trackingCode:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">};</span>
+
+</code></pre>
+				<a href="#product-click-trackproductclick" id="product-click-trackproductclick" style="color: inherit; text-decoration: none;">
+					<h3>Product Click <code>track.product.click</code></h3>
+				</a>
+				<p>Tracks product click events. It is reccomended to invoke on each product <code>onmousedown</code> event via the <code>result.track.click()</code> method - available on each <code>result</code> store object. </p>
+				<pre><code class="language-jsx"><span style="color: #000000">searchController.store.results.map(result)=&gt;{(</span>
+<span style="color: #000000">    &lt;a href={core.url} onMouseDown={(e)=&gt;{result.track.click(e)}}&gt;</span>
+<span style="color: #000000">)}</span>
+</code></pre>
+				<p>If invoking directly, the <code>intellisuggestData</code> and <code>intellisuggestSignature</code> values are returned from SearchSpring&#39;s Search API on each <code>result.attributes</code> object. An optional <code>href</code> value can also be provided. </p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchController</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-controller&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Tracker</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-tracker&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">searchController</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchController</span><span style="color: #000000">({</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #001080">tracker</span><span style="color: #000000">: </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">(),</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">}):</span>
+
+<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">click</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#product-view-trackproductview" id="product-view-trackproductview" style="color: inherit; text-decoration: none;">
+					<h3>Product View <code>track.product.view</code></h3>
+				</a>
+				<p>Tracks product page views. Should be invoked from a product detail page. A <code>sku</code> and/or <code>childSku</code> are required.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#shopper-login-trackshopperlogin" id="shopper-login-trackshopperlogin" style="color: inherit; text-decoration: none;">
+					<h3>Shopper Login <code>track.shopper.login</code></h3>
+				</a>
+				<p>Tracks user login and sets <code>context.shopperId</code> value. Should be invoked when a user has logged into their account.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">shopperId</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;123456&quot;</span>
+<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">shopper</span><span style="color: #000000">.</span><span style="color: #795E26">login</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #001080">shopperId</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#cart-view-trackcartview" id="cart-view-trackcartview" style="color: inherit; text-decoration: none;">
+					<h3>Cart View <code>track.cart.view</code></h3>
+				</a>
+				<p>Tracks cart contents. Should be invoked from a cart page. Each item object must contain a <code>qty</code>, <code>price</code>, (<code>sku</code> and/or <code>childSku</code>)</p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">cart</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">priice:</span><span style="color: #000000"> </span><span style="color: #A31515">`9.99`</span><span style="color: #000000">,</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">priice:</span><span style="color: #000000"> </span><span style="color: #A31515">`10.99`</span><span style="color: #000000">,</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">        ]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#order-transaction-trackordertransaction" id="order-transaction-trackordertransaction" style="color: inherit; text-decoration: none;">
+					<h3>Order Transaction <code>track.order.transaction</code></h3>
+				</a>
+				<p>Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:</p>
+				<p><code>orderId</code> - (optional) order id</p>
+				<p><code>total</code> - (optional) sub total of all items</p>
+				<p><code>city</code> - (optional) city name</p>
+				<p><code>state</code> - (optional) 2 digit state abbreviation (US only)</p>
+				<p><code>country</code> - (optional) 2 digit country abbreviation    (ie. &#39;US&#39;, &#39;CA&#39;, &#39;MX&#39;, &#39;PL&#39;, &#39;JP&#39;)</p>
+				<p><code>items</code> - required array of items - same object provided to <code>track.cart.view</code> event</p>
+				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">order</span><span style="color: #000000">.</span><span style="color: #795E26">transaction</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">orderId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;123456&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">total:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;31.97&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">city:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Los Angeles&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">state:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;CA&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">country:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;US&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">priice:</span><span style="color: #000000"> </span><span style="color: #A31515">`9.99`</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #001080">priice:</span><span style="color: #000000"> </span><span style="color: #A31515">`10.99`</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">        ]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#tracker-properties" id="tracker-properties" style="color: inherit; text-decoration: none;">
+					<h2>Tracker properties</h2>
+				</a>
+				<a href="#globals-property" id="globals-property" style="color: inherit; text-decoration: none;">
+					<h3><code>globals</code> property</h3>
+				</a>
+				<p>When constructing an instance of <code>Tracker</code>, a globals object is required to be constructed. This object contains a <code>siteId</code> key and value. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">globals</span><span style="color: #000000"> = { </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000"> };</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">(</span><span style="color: #001080">globals</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">globals</span><span style="color: #000000"> === </span><span style="color: #001080">globals</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+</code></pre>
+				<a href="#localstorage-property" id="localstorage-property" style="color: inherit; text-decoration: none;">
+					<h3><code>localStorage</code> property</h3>
+				</a>
+				<p>A reference to the StorageStore object for accessing local storage</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;key&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;key&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// &#039;value&#039;</span>
+</code></pre>
+				<a href="#sessionstorage-property" id="sessionstorage-property" style="color: inherit; text-decoration: none;">
+					<h3><code>sessionStorage</code> property</h3>
+				</a>
+				<p>A reference to the StorageStore object for accessing session storage</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">sessionStorage</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;key&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">)</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">sessionStorage</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;key&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// &#039;value&#039;</span>
+</code></pre>
+				<a href="#context-property" id="context-property" style="color: inherit; text-decoration: none;">
+					<h3><code>context</code> property</h3>
+				</a>
+				<p>The <code>context</code> property is generated at the time of instantiating Tracker. It is part of each event payload and provides context of the event.</p>
+				<p><code>userId</code> - unique ID to identify the user, persisted in a cookie/local storage fallback</p>
+				<p><code>pageLoadId</code> - unique ID generated at the time of instantiating Tracker</p>
+				<p><code>sessionId</code> - unique ID generated at the start of a new browser session, persisted in session storage/cookie fallback</p>
+				<p><code>shopperId</code> - unique ID provided set via the SearchController <code>SearchController.tracker.track.shopper.login</code> event and then persisted in a cookie</p>
+				<p><code>website.trackingCode</code> - the <code>siteId</code> specified in the globals object</p>
+				<pre><code class="language-typescript"><span style="color: #000000">context: {</span>
+<span style="color: #000000">    userId: </span><span style="color: #A31515">&#039;0560d7e7-148a-4b1d-b12c-924f164d3d00&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    pageLoadId: </span><span style="color: #A31515">&#039;cfb75606-c15b-4f25-a711-9de2c5d22660&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    sessionId: </span><span style="color: #A31515">&#039;f4b25c96-9ca1-4ac6-ad04-f5ce933f8b61&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    shopperId: </span><span style="color: #A31515">&#039;shopper0001&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    website: {</span>
+<span style="color: #000000">        trackingCode: </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#issending-property" id="issending-property" style="color: inherit; text-decoration: none;">
+					<h3><code>isSending</code> property</h3>
+				</a>
+				<p>The <code>isSending</code> property contains the return value from <code>setTimeout</code> and when defined, signifys that an event is being sent to the beacon endpoint. If subsequent events are invoked and <code>isSending</code> is still defined, the incoming event will be added to the event queue. </p>
+				<a href="#namespace-property" id="namespace-property" style="color: inherit; text-decoration: none;">
+					<h3><code>namespace</code> property</h3>
+				</a>
+				<p>The <code>namespace</code> property contains the Tracker namespace. Invoking this method is only required if a bundle contains multiple Tracker instances. </p>
+				<a href="#track-property" id="track-property" style="color: inherit; text-decoration: none;">
+					<h3><code>track</code> property</h3>
+				</a>
+				<p>The <code>track</code> property contains various tracking events. See <code>track</code> methods section above. </p>
+				<a href="#getuserid-method" id="getuserid-method" style="color: inherit; text-decoration: none;">
+					<h3><code>getUserId</code> method</h3>
+				</a>
+				<p>Returns an object containing the <code>userId</code> stored in the <code>ssUserId</code> cookie (with a fallback to localstorage.) If key doesn&#39;t exist, a new ID will be generated, saved to cookie/localstorage, and returned. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #795E26">getUserId</span><span style="color: #000000">()) </span>
+<span style="color: #008000">// { userId: &#039;0560d7e7-148a-4b1d-b12c-924f164d3d00&#039; }</span>
+</code></pre>
+				<a href="#getsessionid-method" id="getsessionid-method" style="color: inherit; text-decoration: none;">
+					<h3><code>getSessionId</code> method</h3>
+				</a>
+				<p>Returns an object containing the <code>sessionId</code> stored in the <code>ssSessionIdNamespace</code> session storage (with a fallback to cookies.) If key doesn&#39;t exist, a new ID will be generated, saved to session storage/cookie, and returned. </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #795E26">getSessionId</span><span style="color: #000000">()) </span>
+<span style="color: #008000">// { sessionId: &#039;f4b25c96-9ca1-4ac6-ad04-f5ce933f8b61&#039; }</span>
+</code></pre>
+				<a href="#getshopperid-method" id="getshopperid-method" style="color: inherit; text-decoration: none;">
+					<h3><code>getShopperId</code> method</h3>
+				</a>
+				<p>Returns an object containing the <code>shopperId</code> stored in the <code>ssShopperId</code> cookie. This value is set via the SearchController <code>SearchController.tracker.track.shopper.login</code> event</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #795E26">getShopperId</span><span style="color: #000000">()) </span>
+<span style="color: #008000">// { shopperId: &#039;shopper0001&#039; }</span>
+</code></pre>
+				<a href="#sendevents-method" id="sendevents-method" style="color: inherit; text-decoration: none;">
+					<h3><code>sendEvents</code> method</h3>
+				</a>
+				<p>Sends event(s) to beacon (and various legacy) endpoint(s). </p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tracker</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Tracker</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event1</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BeaconEvent</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event2</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BeaconEvent</span><span style="color: #000000">();</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #795E26">sendEvents</span><span style="color: #000000">([</span><span style="color: #001080">event1</span><span style="color: #000000">, </span><span style="color: #001080">event2</span><span style="color: #000000">])</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/beaconcategory.html" class="tsd-kind-icon">Beacon<wbr>Category</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/beacontype.html" class="tsd-kind-icon">Beacon<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/tracker.html" class="tsd-kind-icon">Tracker</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beaconcontext.html" class="tsd-kind-icon">Beacon<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beaconmeta.html" class="tsd-kind-icon">Beacon<wbr>Meta</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beaconpayload.html" class="tsd-kind-icon">Beacon<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cartviewevent.html" class="tsd-kind-icon">Cart<wbr>View<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/custombeaconevent.html" class="tsd-kind-icon">Custom<wbr>Beacon<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ordertransactionevent.html" class="tsd-kind-icon">Order<wbr>Transaction<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/product.html" class="tsd-kind-icon">Product</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/productclickevent.html" class="tsd-kind-icon">Product<wbr>Click<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/productviewevent.html" class="tsd-kind-icon">Product<wbr>View<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/recommendationsevent.html" class="tsd-kind-icon">Recommendations<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/shopperloginevent.html" class="tsd-kind-icon">Shopper<wbr>Login<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackmethods.html" class="tsd-kind-icon">Track<wbr>Methods</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#trackerglobals" class="tsd-kind-icon">Tracker<wbr>Globals</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

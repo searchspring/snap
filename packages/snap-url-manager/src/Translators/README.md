@@ -2,8 +2,8 @@
 
 This is general documentation for translators. Translator-specific documentation:
 
-- [UrlTranslator](Url/README.md)
-- [QueryStringTranslator](QueryString/README.md)
+- [UrlTranslator](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)
+- [QueryStringTranslator](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)
 
 ### Introduction
 

@@ -11,10 +11,10 @@ console.log(store)
 ```
 
 ## `meta` property
-The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](http://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://snapi.kube.searchspring.io/api/v1/#tag/Meta)
 
 ## `pagination` property
-See [SearchStore Pagination](#SearchStorePagination)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `pagination` property
 
 ## `selections` property
 An array of `Selection` and `SelectionHierarchy` objects. Each object represents a finder dropdown selection.
@@ -43,40 +43,40 @@ selections[0].select(value)
 
 <h3 id="FinderStoreSelectionsConfig">`config` property</h3>
 
-A reference to the selection config object that was provided to the [FinderController](../snap-controller/#FinderController)
+A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
 
 ### `data` property
-A reference to the data stored in the [StorageStore](#StorageStore) for this selection
+A reference to the data stored in the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) for this selection
 
 ### `storage` property
-A reference to the [StorageStore](#StorageStore)
+A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
 
 ### `controller` property
-A reference to the [FacetController](../snap-controller/#FacetController)
+A reference to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
 
 ### `type` property
-Inherited from [facet.type](#SearchFacetsType) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.type` of the facet name that was provided in the config
 
 ### `field` property
-Inherited from [facet.field](#SearchFacetsField) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.field` of the facet name that was provided in the config
 
 ### `filtered` property
-Inherited from [facet.filtered](#SearchFacetsFiltered) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.filtered` of the facet name that was provided in the config
 
 ### `collapse` property
-Inherited from [facet.collapse](#SearchFacetsCollapse) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.collapse` of the facet name that was provided in the config
 
 ### `display` property
-Inherited from [facet.display](#SearchFacetsDisplay) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.display` of the facet name that was provided in the config
 
 ### `label` property
-Inherited from [facet.label](#SearchFacetsLabel) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.label` of the facet name that was provided in the config
 
 ### `multiple` property
-Inherited from [facet.multiple](#SearchFacetsMultiple) of the facet name that was provided in the [config](#FinderStoreSelectionsConfig)
+Inherited from `facet.multiple` of the facet name that was provided in the config
 
 ### `id` property
-A reference to the `id` property on the config that was provided to the [FinderController](../snap-controller/#FinderController)
+A reference to the `id` property on the config 
 
 ### `disabled` property
 Boolean set to `true` if this selection is disabled. A `Selection` object will be disabled if it does not contain any values. A `SelectionHierarchy` object will be disabled to enforce the user selects dropdowns in hierarchical order, or there are no further selections available
@@ -85,4 +85,4 @@ Boolean set to `true` if this selection is disabled. A `Selection` object will b
 Contains the value of the selection that was made. 
 
 ### `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](../snap-event-manager)
+This is an empty object that is available for custom store manipulation using the [EventManager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)

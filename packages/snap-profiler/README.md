@@ -8,13 +8,13 @@ A utility for recording how long something takes to complete. `Profiler` is used
 
 # Dependency
 
-Snap Profiler is a dependency of [@searchspring/snap-controller](../snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
+Snap Profiler is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="../../images/snap-dependencies.jpg"/>
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
 </details>
 <br>
 
@@ -76,12 +76,12 @@ type ProfileDetails<T> = {
 }
 ```
 
-Returns an instance of `Profile`. See [Profile](#Profile) section below.
+Returns an instance of `Profile`. 
 
 
 <h2 id="Profile">Profile</h2>
 
-`Profile` is not an exported member of the Snap Profiler package. It is only returned in the [Profiler's](#Profiler) `create` method.
+`Profile` is not an exported member of the Snap Profiler package. It is only returned in the Profiler `create` method.
 
 ### `start` method
 

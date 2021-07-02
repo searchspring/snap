@@ -31,6 +31,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		slideDirection: {
+			defaultValue: 'left',
+			description: 'Slideout slide direction',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'left' },
+			},
+			control: { type: 'text' },
+		},
 		width: {
 			defaultValue: '300px',
 			description: 'Slideout width',
@@ -54,6 +65,7 @@ export default {
 			control: { type: 'text' },
 		},
 		buttonContent: {
+			defaultValue: 'click me',
 			description: 'Slideout button content (children), appended to buttonText',
 			table: {
 				type: {

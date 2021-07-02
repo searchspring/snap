@@ -76,7 +76,7 @@ export abstract class AbstractController {
 		this.tracker = tracker;
 
 		// configure the logger
-		this.log.setGroup(this.config.id);
+		this.log.setNamespace(this.config.id);
 
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);

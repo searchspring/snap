@@ -21,7 +21,7 @@ import { UrlManager, UrlTranslator } from '@searchspring/url-manager';
 
 The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.
 
-See [Translators](src/Translators/README.md) for more info.
+See [Translators](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators) for more info.
 
 ```js
 const urlManager = new UrlManager(new UrlTranslator());
@@ -143,7 +143,7 @@ class FacetValue {
 }
 ```
 
-See [Linkers](src/linkers/README.md) for more info.
+See [Linkers](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers) for more info.
 
 ### Subscribe to URL changes:
 

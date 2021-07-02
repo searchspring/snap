@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 import {
 	LegacyAPI,
 	HybridAPI,
@@ -10,7 +12,6 @@ import {
 	RecommendCombinedResponseModel,
 	ApiConfiguration,
 	ProfileRequestModel,
-	RecommendResponseModel,
 } from './apis';
 
 import type { ClientGlobals, ClientConfig } from '../types';
