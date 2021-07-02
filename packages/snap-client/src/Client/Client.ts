@@ -1,8 +1,22 @@
 import 'whatwg-fetch';
-import { LegacyAPI, SnapAPI, HybridAPI, SuggestAPI, TrendingRequestModel, TrendingResponseModel, ApiConfiguration } from './apis';
-import { SnapClientGlobals, SnapClientConfig } from '../types';
 
 import {
+	LegacyAPI,
+	HybridAPI,
+	SuggestAPI,
+	RecommendAPI,
+	TrendingRequestModel,
+	TrendingResponseModel,
+	RecommendRequestModel,
+	RecommendCombinedRequestModel,
+	RecommendCombinedResponseModel,
+	ApiConfiguration,
+	ProfileRequestModel,
+} from './apis';
+
+import type { ClientGlobals, ClientConfig } from '../types';
+
+import type {
 	MetaRequestModel,
 	MetaResponseModel,
 	SearchRequestModel,
@@ -13,7 +27,7 @@ import {
 
 import deepmerge from 'deepmerge';
 
-const defaultConfig: SnapClientConfig = {
+const defaultConfig: ClientConfig = {
 	meta: {
 		prefetch: true,
 		ttl: 300000,
@@ -30,9 +44,17 @@ const defaultConfig: SnapClientConfig = {
 			// path: '/api/v1/autocomplete',
 		},
 	},
-	trending: {
-		prefetch: false,
-		ttl: 86400000,
+	recommend: {
+		api: {
+			// host: 'https://snapi.kube.searchspring.io',
+			// path: '/api/v1/recommend',
+		},
+	},
+	suggest: {
+		api: {
+			// host: 'https://snapi.kube.searchspring.io',
+			// path: '/api/v1/recommend',
+		},
 	},
 };
 
@@ -46,19 +68,21 @@ type Cache = {
 	};
 };
 
+// TODO: expire meta data
 const cache: Cache = {};
 
-export class SnapClient {
-	private globals: SnapClientGlobals;
-	private config: SnapClientConfig;
+export class Client {
+	private globals: ClientGlobals;
+	private config: ClientConfig;
 	private requesters: {
 		autocomplete: HybridAPI;
 		meta: LegacyAPI;
 		search: HybridAPI;
-		trending: SuggestAPI;
+		recommend: RecommendAPI;
+		suggest: SuggestAPI;
 	};
 
-	constructor(globals: SnapClientGlobals, config: SnapClientConfig = {}) {
+	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}
@@ -66,15 +90,39 @@ export class SnapClient {
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
 
-		const apiHost = `https://${this.globals.siteId}.a.searchspring.io`;
-
 		cache[this.globals.siteId] = cache[this.globals.siteId] || {};
 
 		this.requesters = {
-			autocomplete: new HybridAPI(new ApiConfiguration({ basePath: this.config.autocomplete.api?.host || apiHost })),
-			meta: new LegacyAPI(new ApiConfiguration({ basePath: this.config.meta.api?.host || apiHost })),
-			search: new HybridAPI(new ApiConfiguration({ basePath: this.config.search.api?.host || apiHost })),
-			trending: new SuggestAPI(new ApiConfiguration({ basePath: this.config.trending.api?.host || apiHost })),
+			autocomplete: new HybridAPI(
+				new ApiConfiguration({
+					basePath: this.config.autocomplete?.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			meta: new LegacyAPI(
+				new ApiConfiguration({
+					basePath: this.config.meta?.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			recommend: new RecommendAPI(
+				new ApiConfiguration({
+					basePath: this.config.recommend?.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			search: new HybridAPI(
+				new ApiConfiguration({
+					basePath: this.config.search?.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
+			suggest: new SuggestAPI(
+				new ApiConfiguration({
+					basePath: this.config.suggest?.api?.host,
+					siteId: this.globals.siteId,
+				})
+			),
 		};
 
 		if (this.config.meta.prefetch && !cache[this.globals.siteId].meta) {
@@ -97,6 +145,7 @@ export class SnapClient {
 		metaCache.promise
 			.then((data) => {
 				metaCache.data = data;
+				metaCache.created = Date.now();
 			})
 			.catch((err) => {
 				console.error(`Failed to fetch meta data for '${this.globals.siteId}'.`);
@@ -133,6 +182,40 @@ export class SnapClient {
 	async trending(params: TrendingRequestModel): Promise<TrendingResponseModel> {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
 
-		return this.requesters.trending.getTrending(params);
+		return this.requesters.suggest.getTrending(params);
+	}
+
+	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
+		// TODO - batching
+
+		const { tag, ...otherParams } = params;
+		if (!tag) {
+			throw 'tag parameter is required';
+		}
+
+		const profileParams: ProfileRequestModel = {
+			tag,
+			siteId: params.siteId || this.globals.siteId,
+		};
+
+		if (otherParams.branch) {
+			profileParams.branch = otherParams.branch;
+			delete otherParams.branch;
+		}
+
+		const recommendParams: RecommendRequestModel = {
+			tags: [tag],
+			...otherParams,
+		};
+
+		const [profile, recommendations] = await Promise.all([
+			this.requesters.recommend.getProfile(profileParams),
+			this.requesters.recommend.batchRecommendations(recommendParams),
+		]);
+
+		return {
+			...profile,
+			results: recommendations[0].results,
+		};
 	}
 }

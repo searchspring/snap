@@ -1,8 +1,8 @@
 export const cookies: Cookies = {
-	set: (name: string, val: string, sameSite: string, expires: number): void => {
+	set: (name: string, val: string, sameSite: string, expires?: number): void => {
 		sameSite = sameSite || 'Lax';
 
-		let cookie = name + '=' + val + ';' + 'SameSite=' + sameSite + ';path=/;';
+		let cookie = name + '=' + encodeURIComponent(val) + ';' + 'SameSite=' + sameSite + ';path=/;';
 
 		if (window.location.protocol == 'https:') {
 			cookie += 'Secure;';
@@ -28,7 +28,7 @@ export const cookies: Cookies = {
 			}
 
 			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
+				return decodeURIComponent(c.substring(name.length, c.length));
 			}
 		}
 

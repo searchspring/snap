@@ -5,21 +5,21 @@ export class QueryStore {
 	didYouMean: Query;
 	originalQuery: Query;
 
-	constructor(controller, search) {
+	constructor(services, search) {
 		const observables: Observables = {};
 
 		if (search?.query) {
-			this.query = new Query(controller, search.query);
+			this.query = new Query(services, search.query);
 			observables.query = observable;
 		}
 
 		if (search?.didYouMean) {
-			this.didYouMean = new Query(controller, search.didYouMean);
+			this.didYouMean = new Query(services, search.didYouMean);
 			observables.didYouMean = observable;
 		}
 
 		if (search?.originalQuery) {
-			this.originalQuery = new Query(controller, search.originalQuery);
+			this.originalQuery = new Query(services, search.originalQuery);
 			observables.originalQuery = observable;
 		}
 
@@ -37,10 +37,10 @@ class Query {
 	string: string;
 	url;
 
-	constructor(controller, query) {
+	constructor(services, query) {
 		this.string = query;
 
-		this.url = controller.urlManager.set({ query: this.string });
+		this.url = services.urlManager.set({ query: this.string });
 
 		makeObservable(this, {
 			string: observable,

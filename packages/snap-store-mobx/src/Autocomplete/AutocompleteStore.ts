@@ -5,7 +5,8 @@ import { StorageStore } from '../Storage/StorageStore';
 
 import { StateStore, TermStore, QueryStore, FacetStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
-	controller;
+	config;
+	services;
 	meta = {};
 
 	merchandising: MerchandisingStore;
@@ -19,10 +20,17 @@ export class AutocompleteStore extends AbstractStore {
 	state: StateStore;
 	storage: StorageStore;
 
-	constructor() {
+	constructor(config, services: { urlManager: any }) {
 		super();
 
-		this.state = new StateStore();
+		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
+			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
+		}
+
+		this.config = config;
+		this.services = services;
+
+		this.state = new StateStore(services);
 		this.storage = new StorageStore();
 
 		this.reset();
@@ -40,11 +48,6 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
-	link(controller): void {
-		this.controller = controller;
-		this.state.link(controller);
-	}
-
 	reset(): void {
 		this.state.locks.terms.reset();
 		this.state.locks.facets.reset();
@@ -54,23 +57,23 @@ export class AutocompleteStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.merchandising = new MerchandisingStore(this.controller, data.merchandising);
-		this.search = new QueryStore(this.controller, data.autocomplete, data.search);
+		this.merchandising = new MerchandisingStore(this.services, data.merchandising);
+		this.search = new QueryStore(this.services, data.autocomplete, data.search);
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {
-			this.facets = new FacetStore(this.controller, this.storage, data.facets, this.meta, this.state);
+			this.facets = new FacetStore(this.services, this.storage, data.facets, this.meta, this.state);
 		}
 
-		this.filters = new FilterStore(this.controller, data.filters, this.meta);
-		this.results = new ResultStore(this.controller, data.results, data.pagination, data.merchandising);
+		this.filters = new FilterStore(this.services, data.filters, this.meta);
+		this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising);
 
 		// only run if we want to update the terms (not locked)
 		if (!this.state.locks.terms.locked) {
-			this.terms = new TermStore(this.controller, data.autocomplete, data.pagination, this.state);
+			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);
 		}
 
-		this.pagination = new PaginationStore(this.controller, data.pagination);
-		this.sorting = new SortingStore(this.controller, data.sorting, data.search, this.meta);
+		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
 	}
 }

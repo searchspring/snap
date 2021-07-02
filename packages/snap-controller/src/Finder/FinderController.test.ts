@@ -8,7 +8,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import { FinderController } from './FinderController';
-import { MockSnapClient } from '../__mocks__/MockSnapClient';
+import { MockClient } from '../__mocks__/MockClient';
 
 const globals = { siteId: 'ga9kq2' };
 
@@ -35,16 +35,22 @@ const finderNonhierarchyConfig = {
 	fields: [{ field: 'custom_tire_size_1' }, { field: 'custom_tire_size_2' }, { field: 'custom_wheel_size' }],
 };
 
+let urlManager, services;
+
 describe('Finder Controller', () => {
 	beforeEach(() => {
+		urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
+		services = { urlManager };
+
 		finderHierarchyConfig.id = uuidv4().split('-').join('');
 		finderNonhierarchyConfig.id = uuidv4().split('-').join('');
 	});
+
 	it('Hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderHierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-			store: new FinderStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
+			store: new FinderStore(finderHierarchyConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -72,16 +78,16 @@ describe('Finder Controller', () => {
 		controller.store.selections[0].select(valueToSelect);
 		expect(controller.search).toHaveBeenCalled();
 
-		expect(controller.urlManager.state.filter).toEqual({ [field]: valueToSelect });
+		expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
 		expect(controller.store.selections[0].field).toBe(field);
 		expect(controller.store.selections[0].selected).toBe(valueToSelect);
 	});
 
 	it('Non-hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-			store: new FinderStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
+			store: new FinderStore(finderNonhierarchyConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -103,19 +109,18 @@ describe('Finder Controller', () => {
 		controller.store.selections[0].select(valueToSelect);
 		expect(controller.search).toHaveBeenCalled();
 
-		expect(controller.urlManager.state.filter).toEqual({ [field]: valueToSelect });
+		expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
 		expect(controller.store.selections[0].field).toBe(field);
 		expect(controller.store.selections[0].selected).toBe(valueToSelect);
 	});
 
-	// TODO: beforeStore is missing from Controller
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				client: new MockClient(globals, { meta: { prefetch: false } }),
+				store: new FinderStore(finderHierarchyConfig, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
@@ -135,9 +140,9 @@ describe('Finder Controller', () => {
 
 	it('can call reset method', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockSnapClient(globals, { meta: { prefetch: false } }),
-			store: new FinderStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, { meta: { prefetch: false } }),
+			store: new FinderStore(finderNonhierarchyConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -151,7 +156,7 @@ describe('Finder Controller', () => {
 		const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
 
 		controller.store.selections[0].select(valueToSelect);
-		expect(controller.urlManager.state.filter).toEqual({ [field]: valueToSelect });
+		expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
 		expect(controller.store.selections[0].field).toBe(field);
 		expect(controller.store.selections[0].selected).toBe(valueToSelect);
 

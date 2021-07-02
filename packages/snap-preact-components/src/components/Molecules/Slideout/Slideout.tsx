@@ -116,5 +116,5 @@ export interface SlideoutProps extends ComponentProps {
 
 type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';
 interface SlideoutSubProps {
-	overlay?: OverlayProps;
+	overlay: OverlayProps;
 }

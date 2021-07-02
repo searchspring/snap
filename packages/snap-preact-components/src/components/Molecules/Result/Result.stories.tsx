@@ -122,11 +122,20 @@ export default {
 				options: [Layout.GRID, Layout.LIST],
 			},
 		},
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
 const Template = (args: ResultProps, { loaded: { controller } }) => <Result result={controller?.store?.results[0]} {...args} />;
 
 export const Default = Template.bind({});

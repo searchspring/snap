@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
-import { StorageStore } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, featureFlags } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
@@ -21,19 +21,19 @@ import {
 	OrderTransactionEvent,
 	Product,
 } from './types';
+import { PACKAGE_VERSION } from './version';
 
+const BATCH_TIMEOUT = 150;
 const USERID_COOKIE_NAME = 'ssUserId';
 const SHOPPERID_COOKIE_NAME = 'ssShopperId';
 const COOKIE_EXPIRATION = 31536000000; // 1 year
-const COOKIE_SAMESITE = undefined;
+const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
+const COOKIE_SAMESITE = 'Lax';
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
-
-enum StorageType { // TODO: get export from store working
-	SESSION = 'session',
-	LOCAL = 'local',
-	COOKIE = 'cookie',
-}
+const VIEWED_PRODUCTS = 'ssViewedProducts';
+const MAX_VIEWED_COUNT = 15;
+const CART_PRODUCTS = 'ssCartProducts';
 
 export class Tracker {
 	globals: TrackerGlobals;
@@ -87,6 +87,7 @@ export class Tracker {
 	setGlobal = (): void => {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.track = this.track;
+		window.searchspring.version = PACKAGE_VERSION;
 	};
 
 	track: TrackMethods = {
@@ -106,7 +107,7 @@ export class Tracker {
 		},
 
 		shopper: {
-			login: async (details: { data: ShopperLoginEvent; siteId?: string }): Promise<BeaconEvent> => {
+			login: (details: { data: ShopperLoginEvent; siteId?: string }): BeaconEvent => {
 				// sets shopperid if logged in
 				if (!featureFlags.cookies) {
 					return;
@@ -143,7 +144,7 @@ export class Tracker {
 			},
 		},
 		product: {
-			view: async (details: { data: ProductViewEvent; siteId: string }) => {
+			view: (details: { data: ProductViewEvent; siteId: string }): BeaconEvent => {
 				if (!details?.data?.sku && !details?.data?.childSku) {
 					console.error(
 						'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
@@ -170,6 +171,14 @@ export class Tracker {
 					},
 				};
 
+				// save recently viewed products to cookie
+				if (details.data?.sku || details.data?.childSku) {
+					const viewedProducts = cookies.get(VIEWED_PRODUCTS);
+					const products = viewedProducts ? new Set(viewedProducts.split(',')) : new Set();
+					products.add(details.data?.sku || details.data.childSku);
+					cookies.set(VIEWED_PRODUCTS, Array.from(products).slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+				}
+
 				// legacy tracking
 				if (details.data?.sku) {
 					// only send sku to pixel tracker if present (don't send childSku)
@@ -183,7 +192,7 @@ export class Tracker {
 
 				return this.track.event(payload);
 			},
-			click: async (details: { data: ProductClickEvent; siteId?: string }) => {
+			click: (details: { data: ProductClickEvent; siteId?: string }): BeaconEvent => {
 				if (!details.data?.intellisuggestData || !details.data?.intellisuggestSignature) {
 					console.error(
 						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
@@ -218,7 +227,7 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: async (details: { data: CartViewEvent; siteId?: string }) => {
+			view: (details: { data: CartViewEvent; siteId?: string }): BeaconEvent => {
 				if (!Array.isArray(details?.data?.items) || !details?.data?.items.length) {
 					console.error(
 						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])'
@@ -261,6 +270,13 @@ export class Tracker {
 					event: { items },
 				};
 
+				// save cart items to cookie
+				if (items.length) {
+					const products = [];
+					items.map((item) => products.push(item.sku || item.childSku));
+					cookies.set(CART_PRODUCTS, products.join(','), COOKIE_SAMESITE, 0);
+				}
+
 				// legacy tracking
 				new PixelEvent(payload);
 
@@ -268,7 +284,7 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: async (details: { data: OrderTransactionEvent; siteId?: string }) => {
+			transaction: (details: { data: OrderTransactionEvent; siteId?: string }): BeaconEvent => {
 				if (!details.data?.items || !Array.isArray(details.data.items) || !details.data.items.length) {
 					console.error(
 						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], orderId: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
@@ -374,12 +390,28 @@ export class Tracker {
 		return { shopperId };
 	};
 
+	getCartItems = (): string[] => {
+		const items = cookies.get(CART_PRODUCTS);
+		if (!items) {
+			return [];
+		}
+		return items.split(',');
+	};
+
+	getLastViewedItems = (): string[] => {
+		const items = cookies.get(VIEWED_PRODUCTS);
+		if (!items) {
+			return [];
+		}
+		return items.split(',');
+	};
+
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
 		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
 
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {
-				events.push(event.payload);
+				events.push({ ...event });
 			});
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(events));
 		}
@@ -393,6 +425,6 @@ export class Tracker {
 				xhr.send(JSON.stringify(events.length == 1 ? events[0] : events));
 			}
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
-		});
+		}, BATCH_TIMEOUT);
 	};
 }

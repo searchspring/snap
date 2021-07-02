@@ -12,7 +12,7 @@ npm install --save @searchspring/snap-client-javascript @searchspring/snap-url-m
 ```
 
 ```typescript
-import { SnapClient } from '@searchspring/snap-client-javascript';
+import { Client } from '@searchspring/snap-client-javascript';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';

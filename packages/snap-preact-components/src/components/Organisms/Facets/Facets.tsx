@@ -17,50 +17,48 @@ const CSS = {
 		}),
 };
 
-export const Facets = observer(
-	(properties: FacetsProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Facets = observer((properties: FacetsProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: FacetsProps = {
+	const props: FacetsProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.facets,
+		// props
+		...properties,
+		...properties.theme?.components?.facets,
+	};
+
+	const { facets, disableStyles, className, style } = props;
+
+	const subProps: FacetsSubProps = {
+		facet: {
 			// default props
+			className: 'ss__facets__facet',
 			// global theme
-			...globalTheme?.components?.facets,
-			// props
-			...properties,
-			...properties.theme?.components?.facets,
-		};
+			...globalTheme?.components?.facetWrapper,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.facetWrapper,
+		},
+	};
 
-		const { facets, disableStyles, className, style } = props;
-
-		const subProps: FacetsSubProps = {
-			facet: {
-				// default props
-				className: 'ss__facets__facet',
-				// global theme
-				...globalTheme?.components?.facetWrapper,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.facetWrapper,
-			},
-		};
-
-		return (
-			facets?.length > 0 && (
-				<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
-					{facets.map((facet) => (
-						<Facet {...subProps.facet} facet={facet} />
-					))}
-				</div>
-			)
-		);
-	}
-);
+	return (
+		facets?.length > 0 && (
+			<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
+				{facets.map((facet) => (
+					<Facet {...subProps.facet} facet={facet} />
+				))}
+			</div>
+		)
+	);
+});
 
 interface FacetsSubProps {
-	facet?: FacetProps;
+	facet: FacetProps;
 }
 
 export interface FacetsProps extends ComponentProps {

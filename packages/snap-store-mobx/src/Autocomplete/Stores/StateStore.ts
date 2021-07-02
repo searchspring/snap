@@ -7,13 +7,15 @@ export class StateStore {
 	};
 	focusedInput: HTMLInputElement = undefined;
 	input = '';
-	url: undefined;
+	url;
 
-	constructor() {
+	constructor(services) {
 		this.locks = {
 			terms: new Lock(false),
 			facets: new Lock(false),
 		};
+
+		this.url = services.urlManager;
 
 		makeObservable(this, {
 			focusedInput: observable,
@@ -21,10 +23,6 @@ export class StateStore {
 			input: observable,
 			reset: action,
 		});
-	}
-
-	link(controller): void {
-		this.url = controller?.urlManager;
 	}
 
 	reset(): void {

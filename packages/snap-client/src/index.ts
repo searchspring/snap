@@ -1,3 +1,3 @@
-export * from './SnapClient/SnapClient';
+export * from './Client/Client';
 
-export { SnapClientGlobals, SnapClientConfig } from './types';
+export { ClientGlobals, ClientConfig } from './types';

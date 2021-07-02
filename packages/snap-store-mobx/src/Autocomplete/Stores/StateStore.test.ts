@@ -1,35 +1,37 @@
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 import { StateStore } from './StateStore';
 
-import { mockAutocompleteController } from '../../__mocks__/mockControllers';
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()).detach(),
+};
 
 describe('State store', () => {
 	it('does not require any constructor parameters', () => {
-		const stateStore = new StateStore();
+		const stateStore = new StateStore(services);
 
 		expect(stateStore).toBeDefined();
 	});
 
 	it('keeps state for various autocomplete purposes', () => {
-		const stateStore = new StateStore();
+		const stateStore = new StateStore(services);
 
 		expect(stateStore).toHaveProperty('focusedInput');
 		expect(stateStore).toHaveProperty('input');
 		expect(stateStore.locks).toBeDefined();
-		expect(stateStore.url).toBeUndefined();
+		expect(stateStore.url).toBeDefined();
 
 		expect(stateStore.input).toBe('');
 	});
 
 	it('links the controller urlManager', () => {
-		const stateStore = new StateStore();
+		const stateStore = new StateStore(services);
 
-		stateStore.link(mockAutocompleteController);
-		expect(stateStore.url).toStrictEqual(mockAutocompleteController.urlManager);
+		expect(stateStore.url).toStrictEqual(services.urlManager);
 	});
 
 	it('has locks that keep state and start unlocked', () => {
-		const stateStore = new StateStore();
-		stateStore.link(mockAutocompleteController);
+		const stateStore = new StateStore(services);
 
 		expect(stateStore.locks.terms).toBeDefined();
 		expect(stateStore.locks.facets).toBeDefined();
@@ -38,8 +40,7 @@ describe('State store', () => {
 	});
 
 	it('has locks that lock and unlock', () => {
-		const stateStore = new StateStore();
-		stateStore.link(mockAutocompleteController);
+		const stateStore = new StateStore(services);
 
 		expect(stateStore.locks.terms.locked).toBe(false);
 		expect(stateStore.locks.facets.locked).toBe(false);
@@ -59,8 +60,7 @@ describe('State store', () => {
 
 	it('has a reset function', () => {
 		const query = 'query';
-		const stateStore = new StateStore();
-		stateStore.link(mockAutocompleteController);
+		const stateStore = new StateStore(services);
 
 		stateStore.input = query;
 		stateStore.locks.terms.lock();

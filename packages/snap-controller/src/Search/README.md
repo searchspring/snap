@@ -29,7 +29,7 @@ const searchConfig = {
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -38,7 +38,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const searchController = new SearchController(searchConfig, {
-	client: new SnapClient({ siteId: 'abc123' }),
+	client: new Client({ siteId: 'abc123' }),
 	store: new SearchStore(),
 	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),

@@ -5,14 +5,14 @@ export class FacetStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, storage, facetsData, meta, rootState) {
-		// this.controller, this.storage, data.facets, this.meta
-		const facets = new SearchFacetStore(controller, storage, facetsData, meta);
+	constructor(services, storage, facetsData, meta, rootState) {
+		// this.services, this.storage, data.facets, this.meta
+		const facets = new SearchFacetStore(services, storage, facetsData, meta);
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {
 			facet.values?.forEach((value) => {
-				value.url = controller.urlManager.remove('filter').set(`filter.${facet.field}`, [value.value]);
+				value.url = services.urlManager.remove('filter').set(`filter.${facet.field}`, [value.value]);
 
 				value.preview = () => {
 					facets.map((facet) => {

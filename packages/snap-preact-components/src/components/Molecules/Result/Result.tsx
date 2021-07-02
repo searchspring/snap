@@ -11,6 +11,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme } from '../../../providers/theme';
 import { defined } from '../../../utilities';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
+import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 
 const CSS = {
 	result: ({ width, style }) =>
@@ -107,7 +108,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style } = props;
+	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style, controller } =
+		props;
 
 	const core = result?.mappings?.core;
 
@@ -140,7 +142,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__image',
 			alt: core?.name,
-			src: core?.thumbnailImageUrl,
+			src: core?.imageUrl,
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props
@@ -163,7 +165,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						<a
 							href={core.url}
 							onMouseDown={(e) => {
-								result.track.click(e);
+								controller?.track?.product?.click(e, result);
 							}}
 						>
 							{!hideBadge && onSale && <Badge {...subProps.badge} />}
@@ -178,7 +180,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 										<a
 											href={core.url}
 											onMouseDown={(e) => {
-												result.track.click(e);
+												controller?.track?.product?.click(e, result);
 											}}
 										>
 											{core.name}
@@ -212,9 +214,9 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 });
 
 interface ResultSubProps {
-	badge?: BadgeProps;
-	price?: PriceProps;
-	image?: ImageProps;
+	badge: BadgeProps;
+	price: PriceProps;
+	image: ImageProps;
 }
 
 export interface ResultProps extends ComponentProps {
@@ -227,4 +229,5 @@ export interface ResultProps extends ComponentProps {
 	fallback?: string;
 	width?: string;
 	layout?: LayoutType;
+	controller?: SearchController | AutocompleteController | RecommendationController;
 }

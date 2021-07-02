@@ -13,14 +13,14 @@ export class MerchandisingStore {
 		[ContentType.HEADER]?: Content;
 	} = {};
 
-	constructor(controller, merchData) {
-		if (controller && merchData) {
+	constructor(services, merchData) {
+		if (merchData) {
 			this.redirect = merchData.redirect || '';
 
 			if (merchData.content) {
 				Object.values(ContentType).forEach((type) => {
 					if (merchData.content[type]) {
-						this.content[type] = new Content(controller, merchData.content[type]);
+						this.content[type] = new Content(merchData.content[type]);
 					}
 				});
 			}
@@ -33,7 +33,7 @@ class Content extends Array {
 		return Array;
 	}
 
-	constructor(controller, content) {
+	constructor(content) {
 		super(...content);
 	}
 }

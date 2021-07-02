@@ -1,13 +1,15 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
-import { withStore } from '@searchspring/snap-preact-components';
+import { withStore, withController } from '@searchspring/snap-preact-components';
 
 @withStore
+@withController
 @observer
 export class FilterSummary extends Component {
 	render() {
-		const { facets, filters, slideOutTriggered, controller } = this.props.store;
-		const removeAll = controller.urlManager.remove('filter');
+		const { facets, filters, slideOutTriggered } = this.props.store;
+		const controller = this.props.controller;
+		const removeAll = controller?.urlManager.remove('filter');
 
 		return filters.length ? (
 			<div class="ss-summary">

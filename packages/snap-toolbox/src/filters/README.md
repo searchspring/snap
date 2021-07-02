@@ -1,6 +1,10 @@
 ## Filters
 Contains a collection of methods used to transform strings or numbers into common variations.
 
+```typescript
+import { filters } from '@searchspring/snap-toolbox';
+```
+
 ## `formatNumber` method
 Take a number and returns a string that has been formatted with the following format number options: 
 

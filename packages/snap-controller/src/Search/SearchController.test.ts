@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -9,7 +9,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import { SearchController } from './SearchController';
-import { MockSnapClient } from '../__mocks__/MockSnapClient';
+import { MockClient } from '../__mocks__/MockClient';
 
 const globals = { siteId: 'ga9kq2' }; // bbwheels
 
@@ -21,15 +21,18 @@ let searchConfig = {
 	settings: {},
 };
 
+const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+const services = { urlManager };
+
 describe('Search Controller', () => {
 	beforeEach(() => {
 		searchConfig.id = uuidv4().split('-').join('');
 	});
 	it('has results after search method called', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -43,7 +46,7 @@ describe('Search Controller', () => {
 		expect(initfn).toHaveBeenCalled();
 
 		expect(controller instanceof SearchController).toBeTruthy();
-		expect(controller.client instanceof SnapClient).toBeTruthy();
+		expect(controller.client instanceof Client).toBeTruthy();
 		expect(controller.store instanceof SearchStore).toBeTruthy();
 		expect(controller.urlManager instanceof UrlManager).toBeTruthy();
 		expect(controller.eventManager instanceof EventManager).toBeTruthy();
@@ -63,9 +66,9 @@ describe('Search Controller', () => {
 		// settings.redirects.merchandising is true by default
 
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -92,9 +95,9 @@ describe('Search Controller', () => {
 		// settings.redirects.merchandising is true by default
 
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -128,9 +131,9 @@ describe('Search Controller', () => {
 		};
 
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -163,9 +166,9 @@ describe('Search Controller', () => {
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async function () {
 			const controller = new SearchController(searchConfig, {
-				client: new MockSnapClient(globals, {}),
-				store: new SearchStore(),
-				urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+				client: new MockClient(globals, {}),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
@@ -190,9 +193,9 @@ describe('Search Controller', () => {
 
 	it('can set landingPage param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -205,9 +208,9 @@ describe('Search Controller', () => {
 
 	it('can set page param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -221,9 +224,9 @@ describe('Search Controller', () => {
 
 	it('can set pageSize param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -237,9 +240,9 @@ describe('Search Controller', () => {
 
 	it('can set oq param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -253,9 +256,9 @@ describe('Search Controller', () => {
 
 	it('can set rq param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -269,9 +272,9 @@ describe('Search Controller', () => {
 
 	it('can set sort param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
@@ -289,9 +292,9 @@ describe('Search Controller', () => {
 
 	it('can set filter param', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new MockSnapClient(globals, {}),
-			store: new SearchStore(),
-			urlManager: new UrlManager(new QueryStringTranslator(), reactLinker),
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),

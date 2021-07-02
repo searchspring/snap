@@ -149,7 +149,7 @@ export interface BaseFacet {
 	label: string;
 	collapsed: boolean;
 	toggleCollapse?: () => any; //TODO: update mock data, optional to pass pagination tests
-	controller?: any;
+	services?: any;
 }
 
 export interface ValueFacet extends BaseFacet {

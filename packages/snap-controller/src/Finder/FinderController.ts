@@ -20,7 +20,7 @@ export class FinderController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
-		this.urlManager = this.urlManager.detach(true);
+		this.urlManager = this.urlManager;
 
 		// set the root URL on urlManager
 		if (this.config.url) {
@@ -97,7 +97,7 @@ export class FinderController extends AbstractController {
 			const response = await this.client.search(params);
 			if (!response.meta) {
 				/**
-				 * MockSnapClient will overwrite the client search() method and use
+				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
 				response.meta = this.client.meta;

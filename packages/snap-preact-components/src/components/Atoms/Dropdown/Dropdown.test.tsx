@@ -247,19 +247,18 @@ describe('Dropdown Component', () => {
 			expect(dropdown).toHaveClass('ss__dropdown--open');
 		});
 
-		it('keeps its own internal state and passes it to onToggle', () => {
+		it('keeps its own internal state and passes it to onToggle', async () => {
 			const toggleFn = jest.fn();
 
 			const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} />);
-
 			const dropdown = rendered.container.querySelector('.ss__dropdown');
 			const button = rendered.container.querySelector('.ss__dropdown__button');
 
-			userEvent.click(button);
+			await userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), true);
 			expect(dropdown).toHaveClass('ss__dropdown--open');
 
-			userEvent.click(button);
+			await userEvent.click(button);
 			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), false);
 			expect(dropdown).not.toHaveClass('ss__dropdown--open');
 		});

@@ -1,6 +1,6 @@
 import { MetaRequestModel, MetaResponseModel } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, HTTPQuery } from '../apis';
+import { API, HTTPHeaders, HTTPQuery } from '.';
 
 export class LegacyAPI extends API {
 	private async getEndpoint(queryParameters: any, path = '/api/search/search.json') {
@@ -39,7 +39,7 @@ export class LegacyAPI extends API {
 			path: '/api/meta/meta.json',
 			method: 'GET',
 			headers: headerParameters,
-			query: (queryParameters as unknown) as HTTPQuery,
+			query: queryParameters as unknown as HTTPQuery,
 		});
 
 		return response.json();

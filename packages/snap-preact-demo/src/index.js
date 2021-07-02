@@ -2,19 +2,20 @@ import 'preact/debug';
 import { h, Fragment, render } from 'preact';
 
 /* searchspring imports */
-import { SearchController } from '@searchspring/snap-controller';
-import { SnapClient } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
+import { SearchController, RecommendationController } from '@searchspring/snap-controller';
+import { Client } from '@searchspring/snap-client';
+import { SearchStore, RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
-import { DomTargeter } from '@searchspring/snap-toolbox';
+import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
 import { Tracker } from '@searchspring/snap-tracker';
 
 /* local imports */
 import { Content } from './components/Content/Content';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { Recs } from './components/Recommendations/';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { scrollToTop, timeout, ensure, until } from './middleware/functions';
@@ -42,15 +43,33 @@ const cntrlrConfig = {
 	},
 };
 
+const client = new Client(globals, clientConfig);
+const tracker = new Tracker(globals);
+
+const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
 const cntrlr = new SearchController(cntrlrConfig, {
-	client: new SnapClient(globals, clientConfig),
-	store: new SearchStore(),
-	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+	client,
+	store: new SearchStore({}, { urlManager, tracker }),
+	urlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
-	tracker: new Tracker(globals),
+	tracker,
 });
+
+const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
+const recommendations = new RecommendationController(
+	{ id: 'noresults', tag: 'trending', branch: BRANCHNAME },
+	{
+		client,
+		store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
+		urlManager: recsUrlManager,
+		eventManager: new EventManager(),
+		profiler: new Profiler(),
+		logger: new Logger(),
+		tracker,
+	}
+);
 
 /*
 	middlewares
@@ -72,7 +91,7 @@ cntrlr.on('init', async ({ controller }, next) => {
 		[
 			{
 				selector: '#searchspring-content',
-				component: <Content store={controller.store} />,
+				component: <Content controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
 				hideTarget: true,
 			},
 		],
@@ -87,7 +106,7 @@ cntrlr.on('init', async ({ controller }, next) => {
 		[
 			{
 				selector: '#searchspring-sidebar',
-				component: <Sidebar store={cntrlr.store} />,
+				component: <Sidebar controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
 				hideTarget: true,
 			},
 		],
@@ -133,3 +152,103 @@ cntrlr.on('afterStore', scrollToTop);
 
 // initialize controller
 cntrlr.init();
+
+const recsComponents = {
+	Recs,
+	Recs2: Recs,
+};
+
+const profileCount = {};
+
+// snapify recs proto
+new DomTargeter(
+	[
+		{
+			selector: 'script[type="searchspring/recommend"]',
+			inject: {
+				action: 'before',
+				element: (target, origElement) => {
+					const profile = origElement.getAttribute('profile');
+
+					if (profile) {
+						const recsContainer = document.createElement('div');
+						recsContainer.setAttribute('searchspring-recommend', profile);
+						return recsContainer;
+					}
+					// todo DomTargeter - deal with no return
+				},
+			},
+		},
+	],
+	async (target, injectedElem, elem) => {
+		const globals = {};
+
+		const { shopper, shopperId, product, seed, branch, options } = getScriptContext(elem, [
+			'shopperId',
+			'shopper',
+			'product',
+			'seed',
+			'branch',
+			'options',
+		]);
+
+		if (shopper || shopperId) {
+			globals.shopper = shopper || shopperId;
+		}
+		if (product || seed) {
+			globals.product = product || seed;
+		}
+		if (branch) {
+			globals.branch = branch;
+		}
+		if (options && options.siteId) {
+			globals.siteId = options.siteId;
+		}
+		if (options && options.categories) {
+			globals.categories = options.categories;
+		}
+
+		const tag = injectedElem.getAttribute('searchspring-recommend');
+		profileCount[tag] = profileCount[tag] + 1 || 1;
+
+		const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
+		const recs = new RecommendationController(
+			{
+				id: `recommend_${tag + (profileCount[tag] - 1)}`,
+				tag,
+				branch: BRANCHNAME,
+				globals,
+			},
+			{
+				client,
+				store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
+				urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker,
+			}
+		);
+
+		await recs.init();
+		await recs.search();
+
+		const profileVars = recs.store.profile.display.templateParameters;
+
+		if (!profileVars) {
+			recs.log.error(`profile failed to load!`);
+			return;
+		}
+
+		if (!profileVars.component) {
+			recs.log.error(`template does not support components!`);
+		}
+
+		const RecommendationsComponent = recsComponents[profileVars.component];
+		if (!RecommendationsComponent) {
+			recs.log.error(`component '${profileVars.component}' not found!`);
+		}
+
+		render(<RecommendationsComponent controller={recs} />, injectedElem);
+	}
+);

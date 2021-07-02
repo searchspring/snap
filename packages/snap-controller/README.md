@@ -47,7 +47,7 @@ The complete example below shows how a `SearchController` could be instatiated, 
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
-import SnapClient from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -60,7 +60,7 @@ const configuration = {
 };
 
 const services = {
-	client: new SnapClient({ siteId: 'abc123' }),
+	client: new Client({ siteId: 'abc123' }),
 	store: new SearchStore(),
 	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
 	eventManager: new EventManager(),

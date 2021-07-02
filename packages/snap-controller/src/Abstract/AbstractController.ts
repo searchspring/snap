@@ -1,12 +1,7 @@
 import { Tracker } from '@searchspring/snap-tracker';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
-import type { ControllerServices } from '../types';
-
-enum ControllerEnvironment {
-	PRODUCTION = 'production',
-	DEVELOPMENT = 'development',
-}
+import { ControllerServices, ControllerEnvironment } from '../types';
 
 type ControllerConfig = {
 	id: string;
@@ -31,8 +26,8 @@ export abstract class AbstractController {
 			throw new Error(`Invalid service 'client' passed to controller. Missing "search" function.`);
 		}
 
-		if (typeof store != 'object' || typeof store.link != 'function') {
-			throw new Error(`Invalid service 'store' passed to controller. Missing "link" function.`);
+		if (typeof store != 'object' || typeof store.update != 'function') {
+			throw new Error(`Invalid service 'store' passed to controller. Missing "update" function.`);
 		}
 
 		if (typeof urlManager != 'object' || typeof urlManager.subscribe != 'function') {
@@ -59,7 +54,7 @@ export abstract class AbstractController {
 			throw new Error(`Invalid service 'logger' passed to controller. Missing "dev" function.`);
 		}
 		if (typeof tracker != 'object' || typeof tracker.track != 'object') {
-			throw new Error(`Invalid service 'tracking' passed to controller. Missing "track" object.`);
+			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
 		}
 
 		window.searchspring = window.searchspring || {};
@@ -82,9 +77,6 @@ export abstract class AbstractController {
 
 		// configure the logger
 		this.log.setNamespace(this.config.id);
-
-		// link the controller to the store
-		this.store.link(this);
 
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);

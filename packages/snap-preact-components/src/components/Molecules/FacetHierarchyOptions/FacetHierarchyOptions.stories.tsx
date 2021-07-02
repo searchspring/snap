@@ -64,7 +64,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'FacetHierarchyOptions', globals: { siteId: '8uyt2m' } });
 
 const ObservableFacetHierarchyOptions = observer(({ args, controller }) => {
 	const hierarchyValues = controller?.store?.facets

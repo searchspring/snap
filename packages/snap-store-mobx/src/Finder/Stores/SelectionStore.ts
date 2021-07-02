@@ -3,13 +3,16 @@ export class SelectionStore extends Array {
 		return Array;
 	}
 
-	constructor(controller, facets, storage) {
+	constructor(config, services, facets, meta, loading, storage) {
+		if (!facets || !meta) {
+			return;
+		}
 		const selections = [];
-		controller?.config?.fields?.forEach((config) => {
-			let facet = facets.filter((facet) => facet.field == config.field).pop();
+		config?.fields?.forEach((fieldObj) => {
+			let facet = facets?.filter((facet) => facet.field == fieldObj.field).pop();
 
 			facet = {
-				...controller.store.meta?.facets[config.field],
+				...meta?.facets[fieldObj.field],
 				...facet,
 			};
 
@@ -26,14 +29,14 @@ export class SelectionStore extends Array {
 					});
 				}
 
-				const levels = config?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
+				const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
 
 				levels?.map((level, index) => {
-					const levelConfig = { index, label: config.levels ? level : '', key: `ss-${index}` };
-					selections.push(new SelectionHierarchy(controller, facet, levelConfig, storage));
+					const levelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
+					selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
 				});
 			} else {
-				selections.push(new Selection(controller, facet, config, storage));
+				selections.push(new Selection(services, config.id, facet, fieldObj, loading, storage));
 			}
 		});
 
@@ -54,15 +57,18 @@ class SelectionBase {
 	selected = '';
 	custom = {};
 
+	services;
+	loading;
 	config;
 	data;
 	storage;
-	controller;
 
-	constructor(controller, facet, config, storageStore) {
-		this.controller = controller;
-		this.id = controller.config.id;
-		this.config = config;
+	constructor(services, id, facet, selectionConfig, loading, storageStore) {
+		this.services = services;
+		this.loading = loading;
+
+		this.id = id;
+		this.config = selectionConfig;
 
 		// inherit all standard facet properties
 		this.type = facet.type;
@@ -106,9 +112,10 @@ class Selection extends SelectionBase {
 		field: string;
 	};
 
-	constructor(controller, facet, config, storageStore) {
-		super(controller, facet, config, storageStore);
+	constructor(services, id, facet, config, loading, storageStore) {
+		super(services, id, facet, config, loading, storageStore);
 
+		this.loading = loading;
 		this.storage.set('values', facet.values);
 
 		const storageData = this.storage.get();
@@ -120,19 +127,17 @@ class Selection extends SelectionBase {
 	}
 
 	select(value) {
-		if (this.controller.store.loading) return;
+		if (this.loading) return;
 
 		if (!value) {
 			this.selected = '';
 			this.storage.set('selected', '');
-			this.controller.urlManager = this.controller.urlManager.remove(`filter.${this.field}`);
+			this.services.urlManager.remove(`filter.${this.field}`).go();
 		} else {
 			this.selected = value;
 			this.storage.set('selected', value);
-			this.controller.urlManager = this.controller.urlManager.set(`filter.${this.field}`, value);
+			this.services.urlManager.set(`filter.${this.field}`, value).go();
 		}
-
-		this.controller.search();
 	}
 }
 
@@ -144,8 +149,8 @@ class SelectionHierarchy extends SelectionBase {
 		key: string;
 	};
 
-	constructor(controller, facet, config, storageStore) {
-		super(controller, facet, config, storageStore);
+	constructor(services, id, facet, config, loading, storageStore) {
+		super(services, id, facet, config, loading, storageStore);
 
 		// inherit additional facet properties
 		this.hierarchyDelimiter = facet.hierarchyDelimiter;
@@ -182,7 +187,7 @@ class SelectionHierarchy extends SelectionBase {
 	}
 
 	select(value = '') {
-		if (this.controller.store.loading) return;
+		if (this.loading) return;
 
 		this.selected = value;
 
@@ -203,8 +208,6 @@ class SelectionHierarchy extends SelectionBase {
 				value = value || this.storage.get(`${key}.selected`);
 			});
 
-		this.controller.urlManager = this.controller.urlManager.set(`filter.${this.field}`, value);
-
-		this.controller.search();
+		this.services.urlManager.set(`filter.${this.field}`, value).go();
 	}
 }

@@ -1,8 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
+const childProcess = require('child_process');
+const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
 module.exports = {
 	mode: 'development',
 	entry: './src/index.js',
+	plugins: [
+		new webpack.DefinePlugin({
+			BRANCHNAME: `"${branchName}"`,
+		}),
+	],
 	module: {
 		rules: [
 			{

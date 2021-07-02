@@ -1,22 +1,27 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { BeaconPayload } from './types';
+import { PACKAGE_VERSION } from './version';
 
-const VERSION = process.env.npm_package_version || 'dev';
-
-export class BeaconEvent {
-	payload: BeaconPayload;
+export class BeaconEvent implements BeaconPayload {
+	type;
+	category;
+	context;
+	event;
+	meta;
+	id;
+	pid?;
 
 	constructor(payload: BeaconPayload) {
-		this.payload = {
-			...payload,
-			meta: {
-				initiator: {
-					lib: 'searchspring/snap',
-					'lib.version': VERSION,
-				},
+		Object.keys(payload).forEach((key) => {
+			this[key] = payload[key];
+		});
+		this.meta = {
+			initiator: {
+				lib: 'searchspring/snap',
+				'lib.version': PACKAGE_VERSION,
 			},
-			id: uuidv4(),
 		};
+		this.id = uuidv4();
 	}
 }

@@ -1,38 +1,41 @@
 /* searchspring imports */
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 
 import { Logger } from '@searchspring/snap-logger';
-import { SearchController, AutocompleteController } from '@searchspring/snap-controller';
-import { AutocompleteStore, SearchStore } from '@searchspring/snap-store-mobx';
+import { SearchController, AutocompleteController, RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
+import { AutocompleteStore, SearchStore, RecommendationStore } from '@searchspring/snap-store-mobx';
 import { Tracker } from '@searchspring/snap-tracker';
 
+const clientConfig = {
+	// apiHost: 'http://localhost:8080/api/v1',
+};
+
+const controllers = {};
+
 export class Snapify {
-	static autocomplete(config: SnapifyACConfig): AutocompleteController {
-		const clientConfig = {
-			// apiHost: 'http://localhost:8080/api/v1',
-		};
+	static recommendation(config: RecommendationControllerConfig): RecommendationController {
+		if (controllers[config.id]) {
+			return controllers[config.id];
+		}
 
-		const client = new SnapClient(config.globals, clientConfig);
-		const store = new AutocompleteStore();
-		const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
-
+		const client = new Client(config.globals, clientConfig);
+		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
+		const tracker = new Tracker(config.globals);
+		const store = new RecommendationStore({}, { urlManager });
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
-		const tracker = new Tracker(config.globals);
 
-		const searchControllerConfig: AutocompleteControllerConfig = {
-			id: 'autocomplete',
-			selector: config.selector,
-			settings: {
-				initializeFromUrl: config && config.settings && config.settings.initializeFromUrl ? config.settings.initializeFromUrl : false,
-				syncInputs: config && config.settings && config.settings.syncInputs ? config.settings.syncInputs : false,
-			},
+		const RecommendationConfig = {
+			id: config.id,
+			tag: config.tag,
+			globals: config.globals,
 		};
-		const cntrlr = new AutocompleteController(searchControllerConfig, {
+
+		const cntrlr = (controllers[config.id] = new RecommendationController(RecommendationConfig, {
 			client,
 			store,
 			urlManager,
@@ -40,7 +43,49 @@ export class Snapify {
 			profiler,
 			logger,
 			tracker,
+		}));
+
+		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
+			controller.log.debug('controller', controller);
+			controller.log.debug('store', controller.store.toJSON());
+			await next();
 		});
+
+		cntrlr.init();
+
+		return cntrlr;
+	}
+	static autocomplete(config: SnapifyACConfig): AutocompleteController {
+		if (controllers[config.id]) {
+			return controllers[config.id];
+		}
+
+		const client = new Client(config.globals, clientConfig);
+		const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
+		const tracker = new Tracker(config.globals);
+		const store = new AutocompleteStore({}, { urlManager });
+
+		const eventManager = new EventManager();
+		const profiler = new Profiler();
+		const logger = new Logger();
+
+		const searchControllerConfig: AutocompleteControllerConfig = {
+			id: config.id,
+			selector: config.selector,
+			settings: {
+				initializeFromUrl: config && config.settings && config.settings.initializeFromUrl ? config.settings.initializeFromUrl : false,
+				syncInputs: config && config.settings && config.settings.syncInputs ? config.settings.syncInputs : false,
+			},
+		};
+		const cntrlr = (controllers[config.id] = new AutocompleteController(searchControllerConfig, {
+			client,
+			store,
+			urlManager,
+			eventManager,
+			profiler,
+			logger,
+			tracker,
+		}));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
 			controller.log.debug('controller', controller);
@@ -54,20 +99,20 @@ export class Snapify {
 	}
 
 	static search(config: SnapifyConfig): SearchController {
-		const clientConfig = {
-			// apiHost: 'http://localhost:8080/api/v1',
-		};
+		if (controllers[config.id]) {
+			return controllers[config.id];
+		}
 
-		const client = new SnapClient(config.globals, clientConfig);
-		const store = new SearchStore();
+		const client = new Client(config.globals, clientConfig);
 		const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
+		const tracker = new Tracker(config.globals);
+		const store = new SearchStore({}, { urlManager });
 		const eventManager = new EventManager();
 		const profiler = new Profiler();
 		const logger = new Logger();
-		const tracker = new Tracker(config.globals);
 
 		const searchControllerConfig = {
-			id: 'search',
+			id: config.id,
 			settings: {
 				redirects: {
 					merchandising: false,
@@ -75,7 +120,7 @@ export class Snapify {
 			},
 		};
 
-		const cntrlr = new SearchController(searchControllerConfig, {
+		const cntrlr = (controllers[config.id] = new SearchController(searchControllerConfig, {
 			client,
 			store,
 			urlManager,
@@ -83,7 +128,7 @@ export class Snapify {
 			profiler,
 			logger,
 			tracker,
-		});
+		}));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);
@@ -99,6 +144,7 @@ export class Snapify {
 
 // TODO have gloals use client param typing
 export interface SnapifyConfig {
+	id: string;
 	globals: {
 		siteId: string;
 		[any: string]: any;
@@ -106,8 +152,8 @@ export interface SnapifyConfig {
 }
 
 export interface SnapifyACConfig {
+	id: string;
 	selector: string;
-	id?: string;
 	action?: string;
 	globals: {
 		siteId: string;

@@ -77,6 +77,15 @@ export default {
 				type: 'object',
 			},
 		},
+		controller: {
+			description: 'Controller reference',
+			table: {
+				type: {
+					summary: 'Controller',
+				},
+			},
+			control: { type: 'none' },
+		},
 		...componentArgs,
 	},
 };
@@ -90,7 +99,7 @@ const propTheme = {
 	},
 };
 
-const snapInstance = Snapify.autocomplete({ selector: '#searchInput', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.autocomplete({ id: 'Autocomplete', selector: '#searchInput', globals: { siteId: '8uyt2m' } });
 
 const ObservableAutoComplete = observer(({ args, controller }) => {
 	return <Autocomplete {...args} store={controller?.store} input={controller?.config.selector} theme={propTheme} style={{ maxWidth: '900px' }} />;

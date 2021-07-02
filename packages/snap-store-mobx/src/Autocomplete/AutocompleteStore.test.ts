@@ -1,24 +1,27 @@
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 import { AutocompleteStore } from './AutocompleteStore';
 
 import { SearchData } from '../__mocks__/SearchData';
-import { mockAutocompleteController } from '../__mocks__/mockControllers';
 
-describe('Search Store', () => {
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()).detach(),
+};
+
+describe('Autocomplete Store', () => {
 	let searchData;
 	beforeEach(() => {
 		searchData = new SearchData({ search: 'autocomplete' });
 	});
 
 	it('links the controller and controller urlManager to state', () => {
-		const autocompleteStore = new AutocompleteStore();
-		autocompleteStore.link(mockAutocompleteController);
+		const autocompleteStore = new AutocompleteStore({}, services);
 
-		expect(autocompleteStore.state.url).toStrictEqual(mockAutocompleteController.urlManager);
+		expect(autocompleteStore.state.url).toStrictEqual(services.urlManager);
 	});
 
 	it('returns correct initial state', () => {
-		const autocompleteStore = new AutocompleteStore();
-		autocompleteStore.link(mockAutocompleteController);
+		const autocompleteStore = new AutocompleteStore({}, services);
 
 		expect(autocompleteStore.loading).toBe(true);
 
@@ -51,8 +54,7 @@ describe('Search Store', () => {
 	});
 
 	it('update function updates all of the stores', () => {
-		const autocompleteStore = new AutocompleteStore();
-		autocompleteStore.link(mockAutocompleteController);
+		const autocompleteStore = new AutocompleteStore({}, services);
 
 		autocompleteStore.update(searchData);
 

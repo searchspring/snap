@@ -1,23 +1,24 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
+import { Pagination, Results as ResultsComponent, Button, withStore, withController } from '@searchspring/snap-preact-components';
+
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
-import { Pagination, Results as ResultsComponent, Button, withStore } from '@searchspring/snap-preact-components';
+import { Recs } from '../Recommendations';
 
 @withStore
+@withController
 @observer
 export class Results extends Component {
 	render() {
 		const results = this.props.store.results;
 		const pagination = this.props.store.pagination;
-		const controller = this.props.store.controller;
+		const controller = this.props.controller;
 		const resultsTheme = {
 			components: {
 				result: {
-					buttonSlot: (
-						<Button content="Add to Cart" id={controller.store.results[0].attributes.productid} style={{ display: 'block', textAlign: 'center' }} />
-					),
+					buttonSlot: <Button content="Add to Cart" style={{ display: 'block', textAlign: 'center' }} />,
 				},
 			},
 		};
@@ -26,8 +27,8 @@ export class Results extends Component {
 			<div class="ss-results">
 				<Toolbar />
 
-				<Profile name="results" controller={controller}>
-					<ResultsComponent results={results} theme={resultsTheme} />
+				<Profile name="results" controller={controller.search}>
+					<ResultsComponent controller={controller.search} results={results} theme={resultsTheme} />
 				</Profile>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
@@ -36,11 +37,26 @@ export class Results extends Component {
 	}
 }
 
+@withController
+@withStore
 @observer
 export class NoResults extends Component {
 	render() {
+		const store = this.props.store;
+		const dym = store.search.didYouMean;
+
 		return (
 			<div class="ss-no-results">
+				<Recs controller={this.props.controller.recommendations?.trending} />
+
+				<div class="ss-no-results-container">
+					{dym && (
+						<p class="ss-did-you-mean">
+							Did you mean <a href={dym.url.href}>{dym.string}</a>?
+						</p>
+					)}
+				</div>
+
 				<div class="ss-no-results-container">
 					<h4 class="ss-title">Suggestions</h4>
 

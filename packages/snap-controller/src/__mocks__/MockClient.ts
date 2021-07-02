@@ -7,10 +7,10 @@
  * will use: /snap-controller/src/__mocks__/data/ga9kq2/searches/ac.query.blank.json
  *
  */
-import { SnapClient } from '@searchspring/snap-client';
+import { Client } from '@searchspring/snap-client';
 import { SearchData } from './SearchData';
 
-export class MockSnapClient extends SnapClient {
+export class MockClient extends Client {
 	mockDataFile = 'defaultNoQuery';
 
 	constructor(global, config) {
@@ -18,6 +18,11 @@ export class MockSnapClient extends SnapClient {
 	}
 
 	async search() {
+		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
+		return results;
+	}
+
+	async autocomplete() {
 		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
 		return results;
 	}

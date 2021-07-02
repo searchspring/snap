@@ -4,6 +4,8 @@ import { AbstractController } from '../Abstract/AbstractController';
 import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 
+import type { BeaconEvent } from '@searchspring/snap-tracker';
+
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
 	globals: {},
@@ -16,6 +18,12 @@ const defaultConfig: SearchControllerConfig = {
 			trim: true,
 		},
 	},
+};
+
+type SearchTrackMethods = {
+	product: {
+		click: (e, result) => BeaconEvent;
+	};
 };
 
 export class SearchController extends AbstractController {
@@ -38,8 +46,8 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
-			const config = search.controller.config;
-			const redirectURL = search?.response?.merchandising?.redirect;
+			const config = search.controller.config as SearchControllerConfig;
+			const redirectURL = search.response?.merchandising?.redirect;
 
 			if (redirectURL && config?.settings?.redirects?.merchandising) {
 				window.location.replace(redirectURL);
@@ -58,6 +66,27 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = false;
 		});
 	}
+
+	track: SearchTrackMethods = {
+		product: {
+			click: (e: MouseEvent, result): BeaconEvent => {
+				const { intellisuggestData, intellisuggestSignature } = result.attributes;
+				const target = e.target as HTMLAnchorElement;
+				const href = target?.href || result.mappings.core?.url || undefined;
+
+				const event = this.tracker.track.product.click({
+					data: {
+						intellisuggestData,
+						intellisuggestSignature,
+						href,
+					},
+				});
+
+				this.eventManager.fire('track.product.click', { controller: this, e, result, event });
+				return event;
+			},
+		},
+	};
 
 	get params(): Record<string, any> {
 		const params: Record<string, any> = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
@@ -101,7 +130,7 @@ export class SearchController extends AbstractController {
 			const response = await this.client.search(params);
 			if (!response.meta) {
 				/**
-				 * MockSnapClient will overwrite the client search() method and use
+				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
 				response.meta = this.client.meta;

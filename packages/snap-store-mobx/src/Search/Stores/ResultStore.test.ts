@@ -1,7 +1,12 @@
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 import { ResultStore } from './ResultStore';
 
 import { SearchData } from '../../__mocks__/SearchData';
-import { mockSearchController } from '../../__mocks__/mockControllers';
+
+const services = {
+	urlManager: new UrlManager(new UrlTranslator()),
+};
 
 describe('ResultStore', () => {
 	beforeEach(() => {
@@ -19,21 +24,21 @@ describe('ResultStore', () => {
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new ResultStore(mockSearchController, [], undefined, undefined);
+		const results = new ResultStore(services, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
 
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = new SearchData();
-		const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results.length);
 	});
 
 	it('has result data that matches what was passed in', () => {
 		const searchData = new SearchData();
-		const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -54,7 +59,7 @@ describe('ResultStore', () => {
 	describe('with inline banners', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = new SearchData({ search: 'inlineBanners' });
-			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
 			expect(results[1].value).toBe(searchData.merchandising.content.inline[0].value);
@@ -62,7 +67,7 @@ describe('ResultStore', () => {
 
 		it('splices inline banners into the results array', () => {
 			const searchData = new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page1' });
-			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
 			expect(results[2].id).toBe(`ss-ib-${searchData.merchandising.content.inline[0].config.position.index}`);
@@ -73,7 +78,7 @@ describe('ResultStore', () => {
 
 		it('splices inline banners into the results array', () => {
 			const searchData = new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page2' });
-			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
@@ -119,7 +124,7 @@ describe('ResultStore', () => {
 					},
 				},
 			};
-			const results = new ResultStore(mockSearchController, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new ResultStore(services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);

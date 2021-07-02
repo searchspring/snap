@@ -2,7 +2,7 @@
 Next, let's define Snap Client as it is required for all Snap controller instances. Typically the Client is shared across all Snap controllers.
 
 ```typescript
-const client = new SnapClient(globals);
+const client = new Client(globals);
 ```
 
 The Snap Client requires `ClientGlobals` for instantiation.

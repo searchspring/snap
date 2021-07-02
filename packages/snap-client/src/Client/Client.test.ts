@@ -1,28 +1,28 @@
-import { SnapClient } from './SnapClient';
+import { Client } from './Client';
 
 describe('SNAP Client', () => {
 	it('requires a siteId during construction', () => {
 		expect(() => {
 			// @ts-ignore
-			new SnapClient();
+			new Client();
 		}).toThrow();
 
 		expect(() => {
 			// @ts-ignore
-			new SnapClient({});
+			new Client({});
 		}).toThrow();
 
 		expect(() => {
-			new SnapClient({ siteId: '' });
+			new Client({ siteId: '' });
 		}).toThrow();
 
 		expect(() => {
-			new SnapClient({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
+			new Client({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
 		}).not.toThrow();
 	});
 
 	it('does not prefetch meta when option is not set', (done) => {
-		const client = new SnapClient({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
+		const client = new Client({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
 
 		setTimeout(() => {
 			try {
