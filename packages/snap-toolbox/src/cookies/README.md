@@ -1,6 +1,10 @@
 ## Cookies
 An interface for setting and getting cookies.
 
+```typescript
+import { cookies } from '@searchspring/snap-toolbox';
+```
+
 ### `set` function
 Set a cookie.
 

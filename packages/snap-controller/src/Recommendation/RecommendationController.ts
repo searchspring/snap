@@ -230,8 +230,12 @@ export class RecommendationController extends AbstractController {
 			...this.config.globals,
 			branch: this.config.branch || 'production',
 		};
+		const shopperId = this.tracker.context.shopperId;
 		const cart = this.tracker.getCartItems();
 		const lastViewed = this.tracker.getLastViewedItems();
+		if (shopperId) {
+			params.shopper = shopperId;
+		}
 		if (cart?.length) {
 			params.cart = cart;
 		}
@@ -248,8 +252,7 @@ export class RecommendationController extends AbstractController {
 
 	search = async (): Promise<RecommendationController> => {
 		// TODO: call this.init() if it has never been called
-
-		const params = this.params;
+		const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
 
 		try {
 			try {

@@ -2,7 +2,7 @@
 This utility provides a way to check for browser feature support.
 
 ```typescript
-import { filters, DomTargeter, getFlags, featureFlags, cookies } from '@searchspring/snap-toolbox';
+import { getFlags, featureFlags } from '@searchspring/snap-toolbox';
 ```
 
 ### `getFlags` method

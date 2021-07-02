@@ -1,6 +1,10 @@
 ## DomTargeter
 `DomTargeter` is a utility used for rendering components in specified DOM targets. 
 
+```typescript
+import { DomTargeter } from '@searchspring/snap-toolbox';
+```
+
 The constructor accepts an array of targets, an onTarget callback function, and optionally the Document.
 
 ```typescript

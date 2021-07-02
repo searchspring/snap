@@ -57,7 +57,6 @@ export type RecommendCombinedRequestModel = {
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
-	limit?: number;
 	test?: boolean;
 	siteId?: string;
 	branch?: string;
