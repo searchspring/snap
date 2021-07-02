@@ -6,9 +6,11 @@ import { PACKAGE_VERSION } from './version';
 export class BeaconEvent implements BeaconPayload {
 	type;
 	category;
+	context;
 	event;
 	meta;
 	id;
+	pid?;
 
 	constructor(payload: BeaconPayload) {
 		Object.keys(payload).forEach((key) => {

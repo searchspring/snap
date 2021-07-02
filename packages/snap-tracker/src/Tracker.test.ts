@@ -67,9 +67,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.product.view(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.PRODUCT);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.PRODUCT);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.PAGEVIEW);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -89,9 +89,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.product.click(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CLICK);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.INTERACTION);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.CLICK);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.INTERACTION);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -122,9 +122,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -153,9 +153,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -185,9 +185,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -217,9 +217,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.data);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent.event).toStrictEqual(payload.data);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -239,9 +239,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.event(payload);
 
-		expect(beaconEvent.payload.type).toStrictEqual(BeaconType.CUSTOM);
-		expect(beaconEvent.payload.category).toStrictEqual(BeaconCategory.CUSTOM);
-		expect(beaconEvent.payload.event).toStrictEqual(payload.event);
+		expect(beaconEvent.type).toStrictEqual(BeaconType.CUSTOM);
+		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CUSTOM);
+		expect(beaconEvent.event).toStrictEqual(payload.event);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
