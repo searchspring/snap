@@ -9,8 +9,11 @@ export class Recs extends Component {
 		super();
 
 		const controller = props.controller;
-		controller.init();
-		controller.search();
+
+		if (!controller.store.profile) {
+			controller.init();
+			controller.search();
+		}
 	}
 	render() {
 		const controller = this.props.controller;

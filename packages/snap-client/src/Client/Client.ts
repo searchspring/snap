@@ -10,8 +10,8 @@ import {
 	RecommendCombinedResponseModel,
 	ApiConfiguration,
 	ProfileRequestModel,
+	RecommendResponseModel,
 } from './apis';
-import { charsParams } from './utils/charsParams';
 
 import type { ClientGlobals, ClientConfig } from '../types';
 
@@ -207,14 +207,9 @@ export class Client {
 			...otherParams,
 		};
 
-		let method = 'getRecommendations';
-		if (charsParams(recommendParams) > 1024) {
-			method = 'postRecommendations';
-		}
-
 		const [profile, recommendations] = await Promise.all([
 			this.requesters.recommend.getProfile(profileParams),
-			this.requesters.recommend[method](recommendParams),
+			this.requesters.recommend.batchRecommendations(recommendParams),
 		]);
 
 		return {

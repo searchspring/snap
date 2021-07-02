@@ -27,3 +27,5 @@ export type ClientGlobals = {
 	siteId: string;
 	[configurationPath: string]: any;
 };
+
+export type ParameterObject = Record<string, boolean | string | string[] | number | number[]>;

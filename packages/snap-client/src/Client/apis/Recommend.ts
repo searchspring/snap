@@ -1,4 +1,7 @@
-import { API, HTTPHeaders } from './Abstract';
+import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
+import { hashParams } from '../utils/hashParams';
+import { charsParams } from '../utils/charsParams';
+import type { ParameterObject } from '../../types';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
 export type RecommendRequestModel = {
@@ -60,11 +63,35 @@ export type RecommendCombinedRequestModel = {
 	branch?: string;
 };
 
+class Deferred {
+	promise: Promise<any>;
+	resolve;
+	reject;
+
+	constructor() {
+		this.promise = new Promise((resolve, reject) => {
+			this.reject = reject;
+			this.resolve = resolve;
+		});
+	}
+}
+
 export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
 
+const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
-	// generic batched function?
-	// if cart items use POST otherwise use GET
+	batches: {
+		[paramHash: string]: {
+			timeout: number;
+			request: any;
+			deferreds?: Deferred[];
+		};
+	};
+
+	constructor(config: ApiConfiguration) {
+		super(config);
+		this.batches = {};
+	}
 
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
@@ -77,6 +104,48 @@ export class RecommendAPI extends API {
 		});
 
 		return response.json();
+	}
+
+	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+		const { tags, ...otherParams } = parameters;
+		const [tag] = tags || [];
+
+		if (!tag) return;
+
+		const paramHash = hashParams(otherParams as ParameterObject);
+		this.batches[paramHash] = this.batches[paramHash] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		const paramBatch = this.batches[paramHash];
+
+		const deferred = new Deferred();
+
+		paramBatch.request.tags.push(tag);
+
+		paramBatch.deferreds.push(deferred);
+		window.clearTimeout(paramBatch.timeout);
+
+		paramBatch.timeout = window.setTimeout(async () => {
+			// TODO change to get as default
+			let requestMethod = 'postRecommendations';
+			if (charsParams(paramBatch.request) > 1024) {
+				requestMethod = 'postRecommendations';
+			}
+
+			try {
+				const response = await this[requestMethod](paramBatch.request);
+
+				paramBatch.deferreds.forEach((def, index) => {
+					def.resolve([response[index]]);
+				});
+			} catch (err) {
+				paramBatch.deferreds.forEach((def) => {
+					def.reject(err);
+				});
+			}
+
+			delete this.batches[paramHash];
+		}, BATCH_TIMEOUT);
+
+		return deferred.promise;
 	}
 
 	async getRecommendations(queryParameters: RecommendRequestModel): Promise<RecommendResponseModel> {

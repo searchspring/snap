@@ -1,4 +1,6 @@
-export function charsParams(params: Record<string, boolean | string | string[] | number | number[]>): number {
+import { ParameterObject } from '../../types';
+
+export function charsParams(params: ParameterObject): number {
 	if (typeof params != 'object') {
 		throw new Error('function requires an object');
 	}

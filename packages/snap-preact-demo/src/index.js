@@ -209,6 +209,7 @@ new DomTargeter(
 
 		if (!profileVars) {
 			recs.log.error(`profile failed to load!`);
+			return;
 		}
 
 		if (!profileVars.component) {
