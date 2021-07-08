@@ -49,6 +49,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		//props
 		...properties,
 		...properties.theme?.components?.facetListOptions,
+		...properties.facetListOptions,
 	};
 
 	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;

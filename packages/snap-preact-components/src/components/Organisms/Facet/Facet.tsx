@@ -84,6 +84,10 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconshowLessExpand,
 		disableStyles,
 		className,
+		facetPaletteOptions,
+		facetListOptions,
+		facetGridOptions,
+		facetHierarchyOptions,
 		style,
 	} = props;
 
@@ -141,6 +145,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				previewOnFocus,
 				valueProps,
 			}),
+			facetHierarchyOptions,
 			// component theme overrides
 			...props.theme?.components?.facetHierarchyOptions,
 		},
@@ -155,6 +160,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				previewOnFocus,
 				valueProps,
 			}),
+			facetListOptions,
 			// component theme overrides
 			...props.theme?.components?.facetListOptions,
 		},
@@ -169,6 +175,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				previewOnFocus,
 				valueProps,
 			}),
+			facetGridOptions,
 			// component theme overrides
 			...props.theme?.components?.facetGridOptions,
 		},
@@ -183,6 +190,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				previewOnFocus,
 				valueProps,
 			}),
+			facetPaletteOptions,
 			// component theme overrides
 			...props.theme?.components?.facetPaletteOptions,
 		},

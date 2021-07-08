@@ -28,7 +28,7 @@ export default {
 					maxWidth: '900px',
 				}}
 			>
-				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" />
+				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" style="width: 100%; padding: 10px;" />
 				<Story />
 			</div>
 		),
@@ -90,19 +90,10 @@ export default {
 	},
 };
 
-const propTheme = {
-	components: {
-		facetpaletteoptions: {
-			columns: 3,
-			gapSize: '8px',
-		},
-	},
-};
-
 const snapInstance = Snapify.autocomplete({ id: 'Autocomplete', selector: '#searchInput', globals: { siteId: '8uyt2m' } });
 
 const ObservableAutoComplete = observer(({ args, controller }) => {
-	return <Autocomplete {...args} store={controller?.store} input={controller?.config.selector} theme={propTheme} style={{ maxWidth: '900px' }} />;
+	return <Autocomplete {...args} controller={controller} input={controller?.config.selector} />;
 });
 
 const Template = (args: AutocompleteProps, { loaded: { controller } }) => {

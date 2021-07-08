@@ -3,7 +3,9 @@ import { AbstractController } from '../Abstract/AbstractController';
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 
+const TRENDING_TERMS_CACHE = 'ss-ac-trending-cache';
 const utils = { url: utilsURL };
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -25,6 +27,7 @@ type AutocompleteTrackMethods = {
 };
 export class AutocompleteController extends AbstractController {
 	config: AutocompleteControllerConfig;
+	storage: StorageStore;
 
 	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
@@ -36,6 +39,13 @@ export class AutocompleteController extends AbstractController {
 		if (this.config.settings.initializeFromUrl) {
 			this.store.state.input = this.urlManager.state.query;
 		}
+
+		// persist trending terms in local storage
+		this.storage = new StorageStore({
+			type: StorageType.SESSION,
+			key: TRENDING_TERMS_CACHE,
+		});
+		this.searchTrending(this.storage.get('terms'));
 
 		// detach url manager
 		this.urlManager = this.urlManager;
@@ -263,6 +273,22 @@ export class AutocompleteController extends AbstractController {
 		document.addEventListener('click', removeVisibleAC);
 	}
 
+	searchTrending = async (storedTerms: string): Promise<AutocompleteController> => {
+		let terms;
+		if (storedTerms) {
+			// terms exist in storage, update store
+			terms = JSON.parse(storedTerms);
+		} else {
+			// query for trending terms, save to storage, update store
+			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start();
+			terms = await this.client.trending();
+			trendingProfile.stop();
+			this.log.profile(trendingProfile);
+			this.storage.set('terms', JSON.stringify(terms));
+		}
+		this.store.updateTrendingTerms(terms);
+		return this;
+	};
 	search = async (): Promise<AutocompleteController> => {
 		const params = this.params;
 
