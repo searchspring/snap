@@ -29,7 +29,12 @@ Updates the store with latest API response
 
 
 ## `profile` property
-See [RecommendationStore profile](#SearchStoreFilters)
+Contains an object with the following properties:
 
+`tag` - the profile unique tag (set in SMC)
+
+`placement` - location of the profile on a site (set in SMC)
+
+`display` - object containing details regarding the template and any template parameters
 ## `results` property
-See [SearchStore Results](#SearchStoreResults)
+See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `results` property

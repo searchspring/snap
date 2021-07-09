@@ -11,16 +11,6 @@ const store = new SearchStore();
 store.update(data)
 ```
 
-## `link` method
-Links a controller to the Store to allow the store access to the controllers services and configuration. Most commonly the `UrlManager` is utilized for generating the correct URLs.
-
-```typescript
-const store = new AutocompleteStore();
-const controller = new AutocompleteController(...);
-
-store.link(controller);
-```
-
 ## `toJSON` method
 Converts store to JSON object for easier debugging.
 
