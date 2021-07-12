@@ -24,6 +24,7 @@
 		"@searchspring/snap-store-mobx": "^0.3.6",
 		"@searchspring/snap-toolbox": "^0.3.6",
 		"@searchspring/snap-url-manager": "^0.3.6",
+		"@searchspring/snap-preact": "^0.3.6",
 		"mobx": "^6.2.0",
 		"mobx-react": "^7.1.0",
 		"preact": "^10.5.13"
