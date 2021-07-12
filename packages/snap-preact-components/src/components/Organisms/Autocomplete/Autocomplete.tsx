@@ -270,9 +270,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && !terms.length;
 	const justTrending = showTrending && facets.length === 0 && terms.length === 0 && !(results.length === 0 && state.input.length);
-	console.log('visible', visible);
-	console.log('showTrending', showTrending);
-	console.log('justTrending', justTrending);
 	return (
 		visible && (
 			<div
