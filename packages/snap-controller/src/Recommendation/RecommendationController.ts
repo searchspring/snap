@@ -5,7 +5,7 @@ import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
-import { ControllerEnvironment } from '../types';
+import { LogMode } from '@searchspring/snap-logger';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -243,7 +243,7 @@ export class RecommendationController extends AbstractController {
 			params.lastViewed = lastViewed;
 		}
 
-		if (this.environment == ControllerEnvironment.DEVELOPMENT) {
+		if (this.environment == LogMode.DEVELOPMENT) {
 			params.test = true;
 		}
 

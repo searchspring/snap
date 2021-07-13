@@ -2,16 +2,9 @@ import 'preact/debug';
 import { h, Fragment, render } from 'preact';
 
 /* searchspring imports */
-import { SearchController, RecommendationController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { SearchStore, RecommendationStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
-import { Tracker } from '@searchspring/snap-tracker';
 
+import { Snap } from '@searchspring/snap-preact';
+import { Autocomplete } from '@searchspring/snap-preact-components';
 /* local imports */
 import { Content } from './components/Content/Content';
 import { Sidebar } from './components/Sidebar/Sidebar';
@@ -26,100 +19,60 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
-let globals = {
-	siteId: '8uyt2m',
-};
-
-const clientConfig = {
-	// apiHost: 'http://localhost:8080/api/v1',
-};
-
-const cntrlrConfig = {
-	id: 'search',
-	settings: {
-		redirects: {
-			merchandising: false,
+const config = {
+	client: {
+		globals: {
+			siteId: '8uyt2m',
 		},
+	},
+	controllers: {
+		search: [
+			{
+				config: {
+					id: 'search',
+					settings: {
+						redirects: {
+							merchandising: false,
+						},
+					},
+				},
+				targets: [
+					{
+						selector: '#searchspring-content',
+						component: Content,
+						hideTarget: true,
+					},
+					{
+						selector: '#searchspring-sidebar',
+						component: Sidebar,
+						hideTarget: true,
+					},
+				],
+			},
+		],
+		autocomplete: [
+			{
+				config: {
+					id: 'autocomplete',
+					selector: 'input.searchspring-ac',
+				},
+				targets: [
+					{
+						selector: '.ss-ac-target',
+						component: Autocomplete,
+						hideTarget: true,
+					},
+				],
+			},
+		],
 	},
 };
 
-const client = new Client(globals, clientConfig);
-const tracker = new Tracker(globals);
-
-const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
-const cntrlr = new SearchController(cntrlrConfig, {
-	client,
-	store: new SearchStore({}, { urlManager, tracker }),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker,
-});
-
-const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
-const recommendations = new RecommendationController(
-	{ id: 'noresults', tag: 'trending', branch: BRANCHNAME },
-	{
-		client,
-		store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
-		urlManager: recsUrlManager,
-		eventManager: new EventManager(),
-		profiler: new Profiler(),
-		logger: new Logger(),
-		tracker,
-	}
-);
-
-/*
-	middlewares
- */
-
-cntrlr.on('init', async ({ controller }, next) => {
-	const versionText = 'Snap Preact Demo Store 0.1.3';
-	controller.log.imageText({
-		url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-		text: `${versionText}`,
-		style: `color: ${controller.log.colors.indigo}; font-weight: bold;`,
-	});
-
-	await next();
-});
-
-cntrlr.on('init', async ({ controller }, next) => {
-	new DomTargeter(
-		[
-			{
-				selector: '#searchspring-content',
-				component: <Content controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
-				hideTarget: true,
-			},
-		],
-		(target, elem) => {
-			// run search after finding target
-			controller.search();
-			render(target.component, elem);
-		}
-	);
-
-	new DomTargeter(
-		[
-			{
-				selector: '#searchspring-sidebar',
-				component: <Sidebar controller={{ search: cntrlr, recommendations: { trending: recommendations } }} />,
-				hideTarget: true,
-			},
-		],
-		(target, elem) => {
-			render(target.component, elem);
-		}
-	);
-
-	await next();
-});
+const snap = new Snap(config);
+const { search, autocomplete } = snap.controllers;
 
 // custom store manipulation
-cntrlr.on('afterStore', async ({ controller }, next) => {
+search.on('afterStore', async ({ controller }, next) => {
 	controller.store.custom.onSaleFacet = controller?.store?.facets.filter((facet) => facet.field == 'on_sale').pop();
 
 	// filtering out certain facets...
@@ -141,17 +94,12 @@ cntrlr.on('afterStore', async ({ controller }, next) => {
 });
 
 // using plugins (groups of middleware)
-cntrlr.use(afterStore);
+search.use(afterStore);
 
 // using a function
-cntrlr.on('afterStore', scrollToTop);
+search.on('afterStore', scrollToTop);
 
 /*
-	initialization
- */
-
-// initialize controller
-cntrlr.init();
 
 const recsComponents = {
 	Recs,
@@ -252,3 +200,5 @@ new DomTargeter(
 		render(<RecommendationsComponent controller={recs} />, injectedElem);
 	}
 );
+
+*/

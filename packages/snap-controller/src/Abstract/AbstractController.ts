@@ -19,7 +19,7 @@ export abstract class AbstractController {
 	public tracker: Tracker;
 	public targets: {
 		[key: string]: DomTargeter;
-	};
+	} = {};
 	private _environment = LogMode.PRODUCTION;
 
 	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {

@@ -45,10 +45,6 @@ export class AutocompleteController extends AbstractController {
 			type: StorageType.SESSION,
 			key: TRENDING_TERMS_CACHE,
 		});
-		this.searchTrending(this.storage.get('terms'));
-
-		// detach url manager
-		this.urlManager = this.urlManager;
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -260,21 +256,25 @@ export class AutocompleteController extends AbstractController {
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
-				this.urlManager = this.urlManager.withConfig((translatorConfig) => {
-					return {
-						...translatorConfig,
-						urlRoot: formActionUrl,
-					};
-				});
+				// TODO:
+				// this.urlManager = this.urlManager.withConfig((translatorConfig) => {
+				// 	return {
+				// 		...translatorConfig,
+				// 		urlRoot: formActionUrl,
+				// 	};
+				// })
+				// this.store.setService('urlManager', this.urlManager)
 			}
 		});
+		this.searchTrending();
 
 		document.removeEventListener('click', removeVisibleAC);
 		document.addEventListener('click', removeVisibleAC);
 	}
 
-	searchTrending = async (storedTerms: string): Promise<AutocompleteController> => {
+	searchTrending = async (): Promise<AutocompleteController> => {
 		let terms;
+		const storedTerms = this.storage.get('terms');
 		if (storedTerms) {
 			// terms exist in storage, update store
 			terms = JSON.parse(storedTerms);
@@ -291,7 +291,6 @@ export class AutocompleteController extends AbstractController {
 	};
 	search = async (): Promise<AutocompleteController> => {
 		const params = this.params;
-
 		if (!params?.search?.query?.string) {
 			return;
 		}

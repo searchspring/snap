@@ -8,9 +8,9 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
-import { Tracker } from '@searchspring/snap-tracker';
+// TODO move PACKAGE_VERSION to snap-globals (or similar)
+import { Tracker, PACKAGE_VERSION } from '@searchspring/snap-tracker';
 
-const profileCount = {};
 export class Snap {
 	// const config = {
 	//     client: {
@@ -109,8 +109,14 @@ export class Snap {
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
 
+		// log version
+		this.logger.imageText({
+			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
+			text: `${PACKAGE_VERSION}`,
+			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
+		});
+
 		Object.keys(this.config.controllers)?.forEach((type) => {
-			// ['search', 'autocomplete']
 			switch (type) {
 				case 'search':
 					this.config.controllers[type].forEach((controller, index) => {
@@ -145,7 +151,8 @@ export class Snap {
 									},
 									(target, elem) => {
 										cntrlr.search();
-										render(<target.component controller={cntrlr} />, elem);
+										const Component = target.component as React.ElementType<{ controller: any }>;
+										render(<Component controller={cntrlr} />, elem);
 									}
 								);
 							});
@@ -157,7 +164,7 @@ export class Snap {
 				case 'autocomplete':
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(true);
+							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
 
 							const cntrlr = new AutocompleteController(controller.config, {
 								client: this.client,
@@ -184,7 +191,7 @@ export class Snap {
 											action: 'after', // before, after, append, prepend
 											element: (target, origElement) => {
 												const acContainer = document.createElement('div');
-												acContainer.id = 'ss-ac-target';
+												acContainer.className = 'ss-ac-target';
 												acContainer.addEventListener('click', (e) => {
 													e.stopPropagation();
 												});
@@ -194,8 +201,8 @@ export class Snap {
 									},
 									(target, injectedElem, inputElem) => {
 										cntrlr.bind();
-										const acComponent = <target.component store={cntrlr.store} controller={cntrlr} input={inputElem} />;
-										render(acComponent, injectedElem);
+										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
+										render(<Component controller={cntrlr} input={controller?.config?.selector} />, injectedElem);
 									}
 								);
 							});
@@ -231,13 +238,14 @@ export class Snap {
 								cntrlr.createTargeter(
 									{
 										selector: target.selector,
-										component: target.component,
+										component: target.component as any,
 										hideTarget: target.hideTarget,
 										inject: target.inject,
 									},
 									(target, elem) => {
 										cntrlr.search();
-										render(<target.component controller={cntrlr} />, elem);
+										const Component = target.component as React.ElementType<{ controller: any }>;
+										render(<Component controller={cntrlr} />, elem);
 									}
 								);
 							});
@@ -247,124 +255,47 @@ export class Snap {
 					});
 					break;
 				case 'recommendation':
-					new DomTargeter(
-						[
-							{
-								selector: 'script[type="searchspring/recommend"]',
-								inject: {
-									action: 'before',
-									element: (target, origElement) => {
-										const profile = origElement.getAttribute('profile');
-										if (profile) {
-											const recsContainer = document.createElement('div');
-											recsContainer.setAttribute('searchspring-recommend', profile);
-											return recsContainer;
-										}
-									},
-								},
-							},
-						],
-						async (target, injectedElem, elem) => {
-							const globals = {};
+					this.config.controllers[type].forEach((controller, index) => {
+						try {
+							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(true);
 
-							const { shopper, shopperId, product, seed, branch, options } = getScriptContext(elem, [
-								'shopperId',
-								'shopper',
-								'product',
-								'seed',
-								'branch',
-								'options',
-							]);
+							const cntrlr = new RecommendationController(controller.config, {
+								client: this.client,
+								store: new RecommendationStore({}, { urlManager }),
+								urlManager,
+								eventManager: new EventManager(),
+								profiler: new Profiler(),
+								logger: new Logger(),
+								tracker: this.tracker,
+							});
+							cntrlr.init();
+							this.controllers[cntrlr.config.id] = cntrlr;
 
-							if (shopper || shopperId) {
-								globals.shopper = shopper || shopperId;
-							}
-							if (product || seed) {
-								globals.product = product || seed;
-							}
-							if (branch) {
-								globals.branch = branch;
-							}
-							if (options && options.siteId) {
-								globals.siteId = options.siteId;
-							}
-							if (options && options.categories) {
-								globals.categories = options.categories;
-							}
-
-							const tag = injectedElem.getAttribute('searchspring-recommend');
-							profileCount[tag] = profileCount[tag] + 1 || 1;
-
-							const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
-
-							const cntrlr = new RecommendationController(
-								{
-									id: `recommend_${tag + (profileCount[tag] - 1)}`,
-									tag,
-									branch: BRANCHNAME,
-									globals,
-								},
-								{
-									client: this.client,
-									// store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker: this.tracker }),
-									store: new RecommendationStore({}, { urlManager: recsUrlManager }),
-									urlManager: new UrlManager(new UrlTranslator(), reactLinker),
-									eventManager: new EventManager(),
-									profiler: new Profiler(),
-									logger: new Logger(),
-									tracker: this.tracker,
+							controller?.targets?.forEach((target, target_index) => {
+								if (!target.selector) {
+									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-							);
-							await cntrlr.init();
-							await cntrlr.search();
-							const profileVars = cntrlr.store.profile.display.templateParameters;
-
-							if (!profileVars) {
-								cntrlr.log.error(`profile failed to load!`);
-								return;
-							}
-
-							if (!profileVars.component) {
-								cntrlr.log.error(`template does not support components!`);
-							}
-
-							const RecommendationsComponent = config.DomTargeterControllerCreator.recommendations.components[profileVars.component];
-							if (!RecommendationsComponent) {
-								cntrlr.log.error(`component '${profileVars.component}' not found!`);
-							}
-
-							render(<RecommendationsComponent controller={cntrlr} />, injectedElem);
+								if (!target.component) {
+									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
+								}
+								cntrlr.createTargeter(
+									{
+										selector: target.selector,
+										component: target.component,
+										hideTarget: target.hideTarget,
+										inject: target.inject,
+									},
+									(target, elem) => {
+										cntrlr.search();
+										const Component = target.component as React.ElementType<{ controller: any }>;
+										render(<Component controller={cntrlr} />, elem);
+									}
+								);
+							});
+						} catch (err) {
+							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
 						}
-					);
-
-					// this.config.controllers[type].forEach((controller, index) => {
-					//     const cntrlr = new RecommendationController(controller.config, {
-					//         client: this.client,
-					//         // store: new RecommendationStore({}, { urlManager: this.urlManager, tracker: this.tracker }),
-					//         store: new RecommendationStore({}, { urlManager: this.urlManager }),
-					//         urlManager: this.urlManager,
-					//         eventManager: new EventManager(),
-					//         profiler: new Profiler(),
-					//         logger: new Logger(),
-					//         tracker: this.tracker,
-					//     })
-					//     this.controllers[controller.config.id || `${type}${index}`] = cntrlr;
-
-					//     controller?.targets?.forEach(target => {
-					//         new DomTargeter(
-					//             [
-					//                 {
-					//                     selector: target.selector,
-					//                     component: <target.component controller={cntrlr}/>,
-					//                 },
-					//             ],
-					//             async (target, elem) => {
-					//                 await cntrlr.search();
-					//                 render(target, elem);
-					//             }
-					//         );
-					//     })
-					// });
+					});
 					break;
 			}
 		});

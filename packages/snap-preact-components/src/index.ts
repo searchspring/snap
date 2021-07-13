@@ -30,6 +30,7 @@ export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
+export * from './components/Organisms/Autocomplete';
 
 // HOOKS
 export * from './hooks';

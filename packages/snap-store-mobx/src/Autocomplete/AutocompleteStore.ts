@@ -64,6 +64,12 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
+	setService(name, service): void {
+		if (this.services[name] && service) {
+			this.services[name] = service;
+		}
+	}
+
 	updateTrendingTerms(data): void {
 		this.trending = new TrendingStore(this.services, data.trending, this.state);
 	}
