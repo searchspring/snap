@@ -28,7 +28,7 @@ const CSS = {
 				gridColumn: '1 / 1',
 			},
 			'& .ss__facet-grid-options__option': {
-				border: `1px solid ${theme.colors?.primary || '#ccc'}`,
+				border: `1px solid ${theme.colors?.primary || '#333'}`,
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
@@ -36,12 +36,12 @@ const CSS = {
 				wordBreak: 'break-all',
 
 				'&.ss__facet-grid-options__option--filtered': {
-					background: theme.colors?.primary,
+					background: theme.colors?.primary || '#ccc',
 					color: theme.colors?.text?.secondary,
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme.colors?.hover,
+					background: theme.colors?.hover || '#f8f8f8',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {
