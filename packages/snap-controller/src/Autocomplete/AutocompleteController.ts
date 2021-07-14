@@ -233,7 +233,6 @@ export class AutocompleteController extends AbstractController {
 
 			const form = input.form;
 
-			// TODO: set urlManager translator root to match form/config action
 			let formActionUrl = this.config.action;
 
 			if (!form && this.config.action) {
@@ -256,14 +255,15 @@ export class AutocompleteController extends AbstractController {
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
-				// TODO:
-				// this.urlManager = this.urlManager.withConfig((translatorConfig) => {
-				// 	return {
-				// 		...translatorConfig,
-				// 		urlRoot: formActionUrl,
-				// 	};
-				// })
-				// this.store.setService('urlManager', this.urlManager)
+				this.store.setService(
+					'urlManager',
+					this.urlManager.withConfig((translatorConfig) => {
+						return {
+							...translatorConfig,
+							urlRoot: formActionUrl,
+						};
+					})
+				);
 			}
 		});
 		this.searchTrending();
