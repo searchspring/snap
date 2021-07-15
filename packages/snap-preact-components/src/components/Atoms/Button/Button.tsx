@@ -17,10 +17,10 @@ const CSS = {
 			color: color || theme.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme.colors?.primary}`,
+			border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
 			'&:hover': {
 				cursor: 'pointer',
-				backgroundColor: theme.colors?.hover,
+				backgroundColor: theme.colors?.hover || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.7,
@@ -38,58 +38,56 @@ const CSS = {
 		}),
 };
 
-export const Button = observer(
-	(properties: ButtonProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const Button = observer((properties: ButtonProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: ButtonProps = {
-			// default props
-			// global theme
-			...globalTheme?.components?.button,
-			// props
-			...properties,
-			...properties.theme?.components?.button,
-		};
+	const props: ButtonProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.button,
+		// props
+		...properties,
+		...properties.theme?.components?.button,
+	};
 
-		const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableStyles, className, style } = props;
+	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableStyles, className, style } = props;
 
-		const elementProps = {
-			css:
-				!disableStyles &&
-				(native
-					? CSS.native({ style })
-					: CSS.button({
-							color,
-							backgroundColor,
-							borderColor,
-							theme,
-							style,
-					  })),
-			className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
-			disabled,
-			onClick: (e) => !disabled && onClick && onClick(e),
-		};
+	const elementProps = {
+		css:
+			!disableStyles &&
+			(native
+				? CSS.native({ style })
+				: CSS.button({
+						color,
+						backgroundColor,
+						borderColor,
+						theme,
+						style,
+				  })),
+		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
+		disabled,
+		onClick: (e) => !disabled && onClick && onClick(e),
+	};
 
-		return (
-			(content || children) && (
-				<>
-					{native ? (
-						<button {...elementProps}>
-							{content}
-							{children}
-						</button>
-					) : (
-						<div {...elementProps}>
-							{content}
-							{children}
-						</div>
-					)}
-				</>
-			)
-		);
-	}
-);
+	return (
+		(content || children) && (
+			<>
+				{native ? (
+					<button {...elementProps}>
+						{content}
+						{children}
+					</button>
+				) : (
+					<div {...elementProps}>
+						{content}
+						{children}
+					</div>
+				)}
+			</>
+		)
+	);
+});
 
 export interface ButtonProps extends ComponentProps {
 	backgroundColor?: string;
