@@ -113,7 +113,10 @@ export const Default = (props, { loaded: { controller } }) => {
 	return <Recommendation {...props} controller={controller} />;
 };
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

@@ -140,16 +140,22 @@ const Template = (args: ResultProps, { loaded: { controller } }) => <Result resu
 
 export const Default = Template.bind({});
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 export const hideSections = Template.bind({});
 hideSections.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 hideSections.args = {
 	hideBadge: true,

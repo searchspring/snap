@@ -272,7 +272,7 @@ export class AutocompleteController extends AbstractController {
 		document.addEventListener('click', removeVisibleAC);
 	}
 
-	searchTrending = async (): Promise<AutocompleteController> => {
+	searchTrending = async (): Promise<void> => {
 		let terms;
 		const storedTerms = this.storage.get('terms');
 		if (storedTerms) {
@@ -287,10 +287,15 @@ export class AutocompleteController extends AbstractController {
 			this.storage.set('terms', JSON.stringify(terms));
 		}
 		this.store.updateTrendingTerms(terms);
-		return this;
 	};
-	search = async (): Promise<AutocompleteController> => {
+
+	search = async (): Promise<void> => {
+		if (!this.initialized) {
+			await this.init();
+		}
+
 		const params = this.params;
+
 		if (!params?.search?.query?.string) {
 			return;
 		}
@@ -304,7 +309,7 @@ export class AutocompleteController extends AbstractController {
 			} catch (err) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
@@ -312,10 +317,6 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
-
-			// TODO (notsureif)
-			// provide a means to access the actual request parameters (params + globals)
-			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
 			const response = await this.client.autocomplete(params);
 			if (!response.meta) {
@@ -353,7 +354,7 @@ export class AutocompleteController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterSearch' middleware`);
 					throw err;
@@ -378,7 +379,7 @@ export class AutocompleteController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterStore' middleware`);
 					throw err;
@@ -392,7 +393,5 @@ export class AutocompleteController extends AbstractController {
 				console.error(err);
 			}
 		}
-
-		return this;
 	};
 }

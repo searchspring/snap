@@ -185,9 +185,12 @@ const ListTemplate = (args: FacetProps, { loaded: { controller } }) => <Observab
 
 export const List = ListTemplate.bind({});
 List.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 // Slider Facet
@@ -200,9 +203,12 @@ const SliderTemplate = (args: FacetProps, { loaded: { controller } }) => <Observ
 
 export const Slider = SliderTemplate.bind({});
 Slider.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 // Palette Facet
@@ -217,9 +223,12 @@ const PaletteTemplate = (args: FacetProps, { loaded: { controller } }) => {
 };
 export const Palette = PaletteTemplate.bind({});
 Palette.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 // Grid Facet
@@ -231,9 +240,12 @@ const ObservableGridFacet = observer(({ args, controller }) => {
 const GridTemplate = (args: FacetProps, { loaded: { controller } }) => <ObservableGridFacet args={args} controller={controller} />;
 export const Grid = GridTemplate.bind({});
 Grid.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 // HIERARCHY Facet
@@ -246,7 +258,10 @@ const ObservableHierarchyFacet = observer(({ args, controller }) => {
 const HierarchyTemplate = (args: FacetProps, { loaded: { controller } }) => <ObservableHierarchyFacet args={args} controller={controller} />;
 export const Hierarchy = HierarchyTemplate.bind({});
 Hierarchy.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

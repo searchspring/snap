@@ -163,7 +163,10 @@ const Template = (args: PaginationProps, { loaded: { controller } }) => {
 
 export const Default = Template.bind({});
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

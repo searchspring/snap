@@ -10,12 +10,15 @@ import { EventManager, Middleware } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 
+import { SnapControllerServices } from './types';
+
 export type RecommendationInstantiatorConfig = {
 	components: {
 		[name: string]: React.ElementType<{ controller: any }>;
 	};
 	selector?: string;
 	branch: string;
+	services?: SnapControllerServices;
 };
 
 type InstantiatorServices = {
@@ -72,7 +75,6 @@ export class RecommendationInstantiator {
 							} else {
 								this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, origElement);
 							}
-							// TODO DomTargeter - deal with no return
 						},
 					},
 				},
@@ -108,7 +110,7 @@ export class RecommendationInstantiator {
 				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
-				const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
+				const urlManager = this.config.services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach();
 				const recs = new RecommendationController(
 					{
 						id: `recommend_${tag + (profileCount[tag] - 1)}`,
@@ -117,13 +119,13 @@ export class RecommendationInstantiator {
 						globals,
 					},
 					{
-						client: this.client,
-						store: new RecommendationStore({}, { urlManager }),
+						client: this.config.services?.client || this.client,
+						store: this.config.services?.store || new RecommendationStore({}, { urlManager }),
 						urlManager,
-						eventManager: new EventManager(),
-						profiler: new Profiler(),
-						logger: new Logger(),
-						tracker: this.tracker,
+						eventManager: this.config.services?.eventManager || new EventManager(),
+						profiler: this.config.services?.profiler || new Profiler(),
+						logger: this.config.services?.logger || new Logger(),
+						tracker: this.config.services?.tracker || this.tracker,
 					}
 				);
 

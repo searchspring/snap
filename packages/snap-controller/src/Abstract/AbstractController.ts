@@ -20,7 +20,13 @@ export abstract class AbstractController {
 	public targets: {
 		[key: string]: DomTargeter;
 	} = {};
+
+	private _initialized = false;
 	private _environment = LogMode.PRODUCTION;
+
+	get initialized(): boolean {
+		return this._initialized;
+	}
 
 	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_]*$/)) {
@@ -112,6 +118,9 @@ export abstract class AbstractController {
 	}
 
 	public async init(): Promise<void> {
+		if (this._initialized) {
+			return;
+		}
 		const initProfile = this.profiler.create({ type: 'event', name: 'init', context: this.config }).start();
 
 		try {
@@ -149,6 +158,7 @@ export abstract class AbstractController {
 
 		initProfile.stop();
 		this.log.profile(initProfile);
+		this._initialized = true;
 	}
 
 	public retarget(): void {
@@ -157,7 +167,7 @@ export abstract class AbstractController {
 		});
 	}
 
-	public abstract search(): Promise<AbstractController>;
+	public abstract search(): Promise<void>;
 
 	public async use(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
 		await func(this);

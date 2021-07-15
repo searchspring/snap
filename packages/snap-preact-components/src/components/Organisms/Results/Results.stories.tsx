@@ -94,9 +94,12 @@ const GridTemplate = (args: ResultsProp, { loaded: { controller } }) => {
 
 export const Grid = GridTemplate.bind({});
 Grid.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 const ObservableListResults = observer(({ args, controller }) => {
@@ -109,9 +112,12 @@ const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
 
 export const List = ListTemplate.bind({});
 List.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 const responsive = {
@@ -143,7 +149,10 @@ const ResponsiveTemplate = (args: ResultsProp, { loaded: { controller } }) => {
 
 export const Responsive = ResponsiveTemplate.bind({});
 Responsive.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

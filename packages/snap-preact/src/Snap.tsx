@@ -1,15 +1,20 @@
 import { h, Fragment, render } from 'preact';
 
-import { SearchController, RecommendationController, AutocompleteController, FinderController } from '@searchspring/snap-controller';
+import {
+	SearchController,
+	RecommendationController,
+	AutocompleteController,
+	FinderController,
+	AbstractController,
+} from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
-import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore } from '@searchspring/snap-store-mobx';
+import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore, AbstractStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 // TODO move PACKAGE_VERSION to snap-globals (or similar)
 import { Tracker, PACKAGE_VERSION } from '@searchspring/snap-tracker';
-import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 
 import type {
 	SearchControllerConfig,
@@ -20,10 +25,13 @@ import type {
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target } from '@searchspring/snap-toolbox';
 
-type SnapConfig = {
+import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
+import type { SnapControllerServices } from './types';
+
+export type SnapConfig = {
 	client: {
 		globals: ClientGlobals;
-		config: ClientConfig;
+		config?: ClientConfig;
 	};
 	instantiators?: {
 		recommendation?: RecommendationInstantiatorConfig;
@@ -32,21 +40,27 @@ type SnapConfig = {
 		search?: {
 			config: SearchControllerConfig;
 			targets?: Target[];
+			services?: SnapControllerServices;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
 			targets: Target[];
+			services?: SnapControllerServices;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
 			targets?: Target[];
+			services?: SnapControllerServices;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
 			targets?: Target[];
+			services?: SnapControllerServices;
 		}[];
 	};
 };
+
+type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;
 export class Snap {
 	config: SnapConfig;
 	logger: Logger;
@@ -63,7 +77,7 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		this.client = new Client(this.config.client.globals, this.config?.client?.config);
+		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
 		this.logger = new Logger('Snap Preact');
 		this.controllers = {};
@@ -78,24 +92,12 @@ export class Snap {
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
 
-		Object.keys(this.config.controllers)?.forEach((type) => {
+		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
-				case 'search':
+				case 'search': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
-
-							const cntrlr = new SearchController(controller.config, {
-								client: this.client,
-								store: new SearchStore({}, { urlManager }),
-								urlManager,
-								eventManager: new EventManager(),
-								profiler: new Profiler(),
-								logger: new Logger(),
-								tracker: this.tracker,
-							});
-							cntrlr.init();
-							this.controllers[cntrlr.config.id] = cntrlr;
+							const cntrlr = this.createController(type, controller.config, controller.services) as SearchController;
 
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
@@ -122,23 +124,14 @@ export class Snap {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
 						}
 					});
+
 					break;
-				case 'autocomplete':
+				}
+
+				case 'autocomplete': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
-
-							const cntrlr = new AutocompleteController(controller.config, {
-								client: this.client,
-								store: new AutocompleteStore({}, { urlManager }),
-								urlManager,
-								eventManager: new EventManager(),
-								profiler: new Profiler(),
-								logger: new Logger(),
-								tracker: this.tracker,
-							});
-							cntrlr.init();
-							this.controllers[cntrlr.config.id] = cntrlr;
+							const cntrlr = this.createController(type, controller.config, controller.services) as AutocompleteController;
 
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.component) {
@@ -172,23 +165,14 @@ export class Snap {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
 						}
 					});
+
 					break;
-				case 'finder':
+				}
+
+				case 'finder': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(true);
-
-							const cntrlr = new FinderController(controller.config, {
-								client: this.client,
-								store: new FinderStore({}, { urlManager }),
-								urlManager,
-								eventManager: new EventManager(),
-								profiler: new Profiler(),
-								logger: new Logger(),
-								tracker: this.tracker,
-							});
-							cntrlr.init();
-							this.controllers[cntrlr.config.id] = cntrlr;
+							const cntrlr = this.createController(type, controller.config, controller.services) as FinderController;
 
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
@@ -215,23 +199,14 @@ export class Snap {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
 						}
 					});
+
 					break;
-				case 'recommendation':
+				}
+
+				case 'recommendation': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(true);
-
-							const cntrlr = new RecommendationController(controller.config, {
-								client: this.client,
-								store: new RecommendationStore({}, { urlManager }),
-								urlManager,
-								eventManager: new EventManager(),
-								profiler: new Profiler(),
-								logger: new Logger(),
-								tracker: this.tracker,
-							});
-							cntrlr.init();
-							this.controllers[cntrlr.config.id] = cntrlr;
+							const cntrlr = this.createController(type, controller.config, controller.services) as RecommendationController;
 
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
@@ -258,7 +233,9 @@ export class Snap {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
 						}
 					});
+
 					break;
+				}
 			}
 		});
 
@@ -271,6 +248,74 @@ export class Snap {
 				});
 			} catch (err) {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
+			}
+		}
+	}
+
+	public createController(type: string, config: ControllerConfigs, services?: SnapControllerServices): AbstractController {
+		switch (type) {
+			case 'search': {
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker);
+				const cntrlr = new SearchController(config as SearchControllerConfig, {
+					client: services?.client || this.client,
+					store: services?.store || new SearchStore({}, { urlManager }),
+					urlManager,
+					eventManager: services?.eventManager || new EventManager(),
+					profiler: services?.profiler || new Profiler(),
+					logger: services?.logger || new Logger(),
+					tracker: services?.tracker || this.tracker,
+				});
+				cntrlr.init();
+				this.controllers[cntrlr.config.id] = cntrlr;
+				return cntrlr;
+			}
+
+			case 'autocomplete': {
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach();
+				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
+					client: services?.client || this.client,
+					store: services?.store || new AutocompleteStore({}, { urlManager }),
+					urlManager,
+					eventManager: services?.eventManager || new EventManager(),
+					profiler: services?.profiler || new Profiler(),
+					logger: services?.logger || new Logger(),
+					tracker: services?.tracker || this.tracker,
+				});
+				cntrlr.init();
+				this.controllers[cntrlr.config.id] = cntrlr;
+				return cntrlr;
+			}
+
+			case 'finder': {
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach(true);
+				const cntrlr = new FinderController(config as FinderControllerConfig, {
+					client: services?.client || this.client,
+					store: services?.store || new FinderStore({}, { urlManager }),
+					urlManager,
+					eventManager: services?.eventManager || new EventManager(),
+					profiler: services?.profiler || new Profiler(),
+					logger: services?.logger || new Logger(),
+					tracker: services?.tracker || this.tracker,
+				});
+				cntrlr.init();
+				this.controllers[cntrlr.config.id] = cntrlr;
+				return cntrlr;
+			}
+
+			case 'recommendation': {
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach(true);
+				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
+					client: services?.client || this.client,
+					store: services?.store || new RecommendationStore({}, { urlManager }),
+					urlManager,
+					eventManager: services?.eventManager || new EventManager(),
+					profiler: services?.profiler || new Profiler(),
+					logger: services?.logger || new Logger(),
+					tracker: services?.tracker || this.tracker,
+				});
+				cntrlr.init();
+				this.controllers[cntrlr.config.id] = cntrlr;
+				return cntrlr;
 			}
 		}
 	}

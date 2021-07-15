@@ -263,9 +263,12 @@ const Template = (args: SelectProps, { loaded: { controller } }) => {
 
 export const Default = Template.bind({});
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Default.args = {
 	label: 'Sort By',
@@ -273,9 +276,12 @@ Default.args = {
 
 export const Native = Template.bind({});
 Native.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Native.args = {
 	label: 'Sort By',

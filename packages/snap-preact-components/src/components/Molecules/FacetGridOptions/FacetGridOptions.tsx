@@ -23,7 +23,7 @@ const CSS = {
 				gridRow: '1 / 1',
 				gridColumn: '1 / 1',
 			},
-			'&> *:first-child': {
+			'&> *:first-of-type': {
 				gridRow: '1 / 1',
 				gridColumn: '1 / 1',
 			},
