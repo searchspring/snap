@@ -48,6 +48,8 @@ export class DomTargeter {
 			return elems.map((elem) => ({ target, elem }));
 		});
 
+		const errors = [];
+
 		targetElemPairs.forEach(({ target, elem }) => {
 			// remove style block we added earlier
 			if (target.hideTarget) {
@@ -55,14 +57,22 @@ export class DomTargeter {
 			}
 
 			if (target.inject) {
-				const injectedElem = this.inject(elem, target);
-				this.onTarget(target, injectedElem, elem);
+				try {
+					const injectedElem = this.inject(elem, target);
+					this.onTarget(target, injectedElem, elem);
+				} catch (e) {
+					errors.push(e);
+				}
 			} else {
 				// empty target selector by default
 				while (elem.firstChild && elem.removeChild(elem.firstChild));
 				this.onTarget(target, elem);
 			}
 		});
+
+		if (errors.length) {
+			throw new Error(errors.reduce((acc, err) => (acc += err + '\n'), '\n'));
+		}
 	}
 
 	unhideTarget = (selector: string): void => {

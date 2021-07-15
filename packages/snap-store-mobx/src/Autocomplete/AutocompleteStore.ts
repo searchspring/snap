@@ -67,6 +67,9 @@ export class AutocompleteStore extends AbstractStore {
 	setService(name, service): void {
 		if (this.services[name] && service) {
 			this.services[name] = service;
+			if (name === 'urlManager') {
+				this.state.url = service;
+			}
 		}
 	}
 

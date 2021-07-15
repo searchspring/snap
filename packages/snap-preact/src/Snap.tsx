@@ -7,96 +7,57 @@ import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-m
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
-import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
 // TODO move PACKAGE_VERSION to snap-globals (or similar)
 import { Tracker, PACKAGE_VERSION } from '@searchspring/snap-tracker';
+import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 
+import type {
+	SearchControllerConfig,
+	AutocompleteControllerConfig,
+	FinderControllerConfig,
+	RecommendationControllerConfig,
+} from '@searchspring/snap-controller';
+import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
+import type { Target } from '@searchspring/snap-toolbox';
+
+type SnapConfig = {
+	client: {
+		globals: ClientGlobals;
+		config: ClientConfig;
+	};
+	instantiators?: {
+		recommendation?: RecommendationInstantiatorConfig;
+	};
+	controllers?: {
+		search?: {
+			config: SearchControllerConfig;
+			targets?: Target[];
+		}[];
+		autocomplete?: {
+			config: AutocompleteControllerConfig;
+			targets: Target[];
+		}[];
+		finder?: {
+			config: FinderControllerConfig;
+			targets?: Target[];
+		}[];
+		recommendation?: {
+			config: RecommendationControllerConfig;
+			targets?: Target[];
+		}[];
+	};
+};
 export class Snap {
-	// const config = {
-	//     client: {
-	//         globals,
-	//         config
-	//     },
-	//     DomTargeterControllerCreator: {
-	//         recommendations: {
-	//             components: {
-	//                 Name: Component
-	//             }
-	//         }
-	//     },
-	//     controllers: {
-	//         search: [
-	//             {
-	//                 config: {
-	//                     id: 'search',
-	//                     globals: {},
-	//                     settings: {},
-	//                 },
-	//                 targets: [
-	//                     {
-	//                         selector: '#searchspring-content',
-	//                         component: Content,
-	//                         hideTarget: true,
-	//                         inject?: {...},
-	//                     }, {
-	//                         selector: '#searchspring-sidebar',
-	//                         component: Sidebar,
-	//                         hideTarget: true,
-	//                     },
-	//                 ]
-	//             }
-	//         ],
-	//         autocomplete: [
-	//             {
-	//                 config: {
-	//                     id: 'autocomplete',
-	//                     globals: {},
-	//                     // selector: '',
-	//                     action: '',
-	//                     settings: {},
-	//                 },
-	//                 targets: [
-	//                     {
-	//                         selector: 'input[type=text].search',
-	//                         component: Autocomplete,
-	//                         hideTarget: true,
-	//                     }
-	//                 ]
-	//             }
-	//         ],
-	//         finder: [
-	//             {
-	//                 config: {
-	//                     id: 'finder',
-	//                     globals: {},
-	//                     url?: '',
-	//                     fields: [{}],
-	//                 },
-	//                 targets: [
-	//                     {
-	//                         selector: 'input[type=text].search',
-	//                         component: Autocomplete,
-	//                         hideTarget: true,
-	//                     }
-	//                 ]
-	//             }
-	//         ],
-	//         recommendation: []
-	//     }
-	// }
-	config?: any;
-	logger? = new Logger('Snap Preact');
-
+	config: SnapConfig;
+	logger: Logger;
 	client: Client;
 	tracker: Tracker;
 	controllers: {
-		[controllerConfigId: string]: SearchController | AutocompleteController | FinderController;
+		[controllerConfigId: string]: SearchController | AutocompleteController | FinderController | RecommendationController;
 	};
-	recommendations: {
-		[controllerConfigId: string]: RecommendationController;
-	};
+	recommendations: RecommendationInstantiator;
 
-	constructor(config) {
+	constructor(config: SnapConfig) {
 		this.config = config;
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
@@ -104,6 +65,7 @@ export class Snap {
 
 		this.client = new Client(this.config.client.globals, this.config?.client?.config);
 		this.tracker = new Tracker(this.config.client.globals);
+		this.logger = new Logger('Snap Preact');
 		this.controllers = {};
 
 		// TODO environment switch using URL?
@@ -300,11 +262,16 @@ export class Snap {
 			}
 		});
 
-		return {
-			client: this.client,
-			tracker: this.tracker,
-			controllers: this.controllers,
-			recommendations: this.recommendations,
-		};
+		if (this.config?.instantiators?.recommendation) {
+			try {
+				this.recommendations = new RecommendationInstantiator(config.instantiators.recommendation, {
+					client: this.client,
+					tracker: this.tracker,
+					logger: this.logger,
+				});
+			} catch (err) {
+				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
+			}
+		}
 	}
 }

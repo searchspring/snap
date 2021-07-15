@@ -25,6 +25,12 @@ const config = {
 			siteId: '8uyt2m',
 		},
 	},
+	instantiators: {
+		recommendation: {
+			branch: BRANCHNAME,
+			components: { Recs, Recs2: Recs },
+		},
+	},
 	controllers: {
 		search: [
 			{
@@ -98,107 +104,3 @@ search.use(afterStore);
 
 // using a function
 search.on('afterStore', scrollToTop);
-
-/*
-
-const recsComponents = {
-	Recs,
-	Recs2: Recs,
-};
-
-const profileCount = {};
-
-// snapify recs proto
-new DomTargeter(
-	[
-		{
-			selector: 'script[type="searchspring/recommend"]',
-			inject: {
-				action: 'before',
-				element: (target, origElement) => {
-					const profile = origElement.getAttribute('profile');
-
-					if (profile) {
-						const recsContainer = document.createElement('div');
-						recsContainer.setAttribute('searchspring-recommend', profile);
-						return recsContainer;
-					}
-					// todo DomTargeter - deal with no return
-				},
-			},
-		},
-	],
-	async (target, injectedElem, elem) => {
-		const globals = {};
-
-		const { shopper, shopperId, product, seed, branch, options } = getScriptContext(elem, [
-			'shopperId',
-			'shopper',
-			'product',
-			'seed',
-			'branch',
-			'options',
-		]);
-
-		if (shopper || shopperId) {
-			globals.shopper = shopper || shopperId;
-		}
-		if (product || seed) {
-			globals.product = product || seed;
-		}
-		if (branch) {
-			globals.branch = branch;
-		}
-		if (options && options.siteId) {
-			globals.siteId = options.siteId;
-		}
-		if (options && options.categories) {
-			globals.categories = options.categories;
-		}
-
-		const tag = injectedElem.getAttribute('searchspring-recommend');
-		profileCount[tag] = profileCount[tag] + 1 || 1;
-
-		const recsUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
-		const recs = new RecommendationController(
-			{
-				id: `recommend_${tag + (profileCount[tag] - 1)}`,
-				tag,
-				branch: BRANCHNAME,
-				globals,
-			},
-			{
-				client,
-				store: new RecommendationStore({}, { urlManager: recsUrlManager, tracker }),
-				urlManager: new UrlManager(new UrlTranslator(), reactLinker),
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker,
-			}
-		);
-
-		await recs.init();
-		await recs.search();
-
-		const profileVars = recs.store.profile.display.templateParameters;
-
-		if (!profileVars) {
-			recs.log.error(`profile failed to load!`);
-			return;
-		}
-
-		if (!profileVars.component) {
-			recs.log.error(`template does not support components!`);
-		}
-
-		const RecommendationsComponent = recsComponents[profileVars.component];
-		if (!RecommendationsComponent) {
-			recs.log.error(`component '${profileVars.component}' not found!`);
-		}
-
-		render(<RecommendationsComponent controller={recs} />, injectedElem);
-	}
-);
-
-*/

@@ -43,7 +43,7 @@ export class UrlManager {
 		localState?: UrlState | ImmutableObject<UrlState>,
 		watcherPool?: WatcherPool,
 		private omissions: Array<omission> = [],
-		private detached?: { url: string }
+		public detached?: { url: string }
 	) {
 		this.localState = Immutable(localState || {});
 
