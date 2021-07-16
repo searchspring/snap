@@ -24,13 +24,10 @@
 		"@searchspring/snap-controller": "^0.3.6",
 		"@searchspring/snap-event-manager": "^0.3.6",
 		"@searchspring/snap-logger": "^0.3.6",
-		"@searchspring/snap-preact-components": "^0.3.6",
 		"@searchspring/snap-profiler": "^0.3.6",
 		"@searchspring/snap-store-mobx": "^0.3.6",
 		"@searchspring/snap-toolbox": "^0.3.6",
-		"@searchspring/snap-url-manager": "^0.3.6",
-		"deepmerge": "^4.2.2",
-		"uuid": "^8.3.2"
+		"@searchspring/snap-url-manager": "^0.3.6"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.14"
