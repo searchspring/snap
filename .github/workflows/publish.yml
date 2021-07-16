@@ -40,11 +40,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
+      - name: Version
+        run: | 
+          npm run version
+
       - name: Build
         run: | 
           npm run build
           git add -A packages/snap-tracker/src/version.ts
-          git commit -m "chore(version): generation"
 
       - name: Tests
         run: npm run test
