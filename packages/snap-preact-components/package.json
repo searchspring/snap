@@ -41,6 +41,7 @@
 		"@searchspring/snap-controller": "^0.3.6",
 		"@searchspring/snap-event-manager": "^0.3.6",
 		"@searchspring/snap-logger": "^0.3.6",
+		"@searchspring/snap-preact": "^0.3.6",
 		"@searchspring/snap-profiler": "^0.3.6",
 		"@searchspring/snap-store-mobx": "^0.3.6",
 		"@searchspring/snap-toolbox": "0.0.29",
