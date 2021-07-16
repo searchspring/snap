@@ -35,6 +35,7 @@ export default {
 		pages: {
 			description:
 				'Number of pages shown - recommend using an odd number as it includes the current page with an even spread to the left and right (excluding first and last)',
+			defaultValue: 5,
 			table: {
 				type: {
 					summary: 'number',
@@ -163,7 +164,10 @@ const Template = (args: PaginationProps, { loaded: { controller } }) => {
 
 export const Default = Template.bind({});
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

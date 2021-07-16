@@ -31,6 +31,12 @@ export class FinderStore extends AbstractStore {
 		});
 	}
 
+	setService(name, service): void {
+		if (this.services[name] && service) {
+			this.services[name] = service;
+		}
+	}
+
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;

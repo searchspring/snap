@@ -34,7 +34,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme.colors?.primary}`,
+				border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
@@ -43,7 +43,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme.colors?.hover,
+						backgroundColor: theme.colors?.hover || '#f8f8f8',
 					},
 				},
 			},
@@ -134,6 +134,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				color: iconColor || color,
+				size: '14px',
 			}),
 			// component theme overrides
 			...props.theme?.components?.icon,

@@ -5,7 +5,6 @@ import { Pagination, Results as ResultsComponent, Button, withStore, withControl
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
-import { Recs } from '../Recommendations';
 
 @withStore
 @withController
@@ -27,8 +26,8 @@ export class Results extends Component {
 			<div class="ss-results">
 				<Toolbar />
 
-				<Profile name="results" controller={controller.search}>
-					<ResultsComponent controller={controller.search} results={results} theme={resultsTheme} />
+				<Profile name="results" controller={controller}>
+					<ResultsComponent controller={controller} results={results} theme={resultsTheme} />
 				</Profile>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
@@ -47,8 +46,6 @@ export class NoResults extends Component {
 
 		return (
 			<div class="ss-no-results">
-				<Recs controller={this.props.controller.recommendations?.trending} />
-
 				<div class="ss-no-results-container">
 					{dym && (
 						<p class="ss-did-you-mean">

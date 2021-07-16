@@ -3,7 +3,7 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { FilterStore, ResultStore, MerchandisingStore, PaginationStore, SortingStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 
-import { StateStore, TermStore, QueryStore, FacetStore } from './Stores';
+import { StateStore, TermStore, QueryStore, FacetStore, TrendingStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
 	config;
 	services;
@@ -19,6 +19,7 @@ export class AutocompleteStore extends AbstractStore {
 	sorting: SortingStore;
 	state: StateStore;
 	storage: StorageStore;
+	trending: TrendingStore;
 
 	constructor(config, services: { urlManager: any }) {
 		super();
@@ -52,6 +53,28 @@ export class AutocompleteStore extends AbstractStore {
 		this.state.locks.terms.reset();
 		this.state.locks.facets.reset();
 		this.update({ meta: this.meta });
+		this.resetTrending();
+	}
+
+	resetTrending(): void {
+		if (this.trending?.length) {
+			this.trending.forEach((term) => {
+				term.active = false;
+			});
+		}
+	}
+
+	setService(name, service): void {
+		if (this.services[name] && service) {
+			this.services[name] = service;
+			if (name === 'urlManager') {
+				this.state.url = service;
+			}
+		}
+	}
+
+	updateTrendingTerms(data): void {
+		this.trending = new TrendingStore(this.services, data.trending, this.state);
 	}
 
 	update(data): void {
@@ -67,7 +90,11 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.filters = new FilterStore(this.services, data.filters, this.meta);
 		this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising);
-
+		if (this.results.length === 0) {
+			// if a trending term was selected and then a subsequent search yields no results,
+			// reset trending terms to remove active state
+			this.resetTrending();
+		}
 		// only run if we want to update the terms (not locked)
 		if (!this.state.locks.terms.locked) {
 			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);

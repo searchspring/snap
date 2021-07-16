@@ -50,48 +50,46 @@ const CSS = {
 		}),
 };
 
-export const FacetHierarchyOptions = observer(
-	(properties: FacetHierarchyOptionsProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: FacetHierarchyOptionsProps = {
-			// default props
-			// global theme
-			...globalTheme?.components?.FacetHierarchyOptions,
-			//props
-			...properties,
-			...properties.theme?.components?.FacetHierarchyOptions,
-		};
+	const props: FacetHierarchyOptionsProps = {
+		// default props
+		// global theme
+		...globalTheme?.components?.FacetHierarchyOptions,
+		//props
+		...properties,
+		...properties.theme?.components?.FacetHierarchyOptions,
+	};
 
-		const { values, hideCount, onClick, disableStyles, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, className, style } = props;
 
-		return (
-			values?.length && (
-				<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss__facet-hierarchy-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames(
-								'ss__facet-hierarchy-options__option',
-								{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-								{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+	return (
+		values?.length && (
+			<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss__facet-hierarchy-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames(
+							'ss__facet-hierarchy-options__option',
+							{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+							{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+						)}
+						onClick={onClick}
+						{...value.url?.link}
+					>
+						<span className="ss__facet-hierarchy-options__option__value">
+							{value.label}
+							{!hideCount && value.count > 0 && !value.filtered && (
+								<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
 							)}
-							onClick={onClick}
-							{...value.url?.link}
-						>
-							<span className="ss__facet-hierarchy-options__option__value">
-								{value.label}
-								{!hideCount && value.count > 0 && !value.filtered && (
-									<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
-								)}
-							</span>
-						</a>
-					))}
-				</div>
-			)
-		);
-	}
-);
+						</span>
+					</a>
+				))}
+			</div>
+		)
+	);
+});
 export interface FacetHierarchyOptionsProps extends ComponentProps {
 	values: HierarchyFacetValue[];
 	hideCount?: boolean;

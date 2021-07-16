@@ -149,7 +149,7 @@ describe('UrlManager', () => {
 				original: { value: 5 },
 			});
 
-			const cb = jest.fn((next, prev) => {
+			const cb = jest.fn((prev, next) => {
 				expect(prev).toEqual({ original: { value: 5 } });
 				expect(next).toEqual({
 					foo: 'bar',

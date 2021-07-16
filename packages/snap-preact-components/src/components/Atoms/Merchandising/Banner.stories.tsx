@@ -54,9 +54,12 @@ const Template = (args: BannerProps, { loaded: { controller } }) => <Banner {...
 
 export const Header = Template.bind({});
 Header.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Header.args = {
 	type: 'header',
@@ -64,9 +67,12 @@ Header.args = {
 
 export const Footer = Template.bind({});
 Footer.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Footer.args = {
 	type: 'footer',
@@ -74,9 +80,12 @@ Footer.args = {
 
 export const Secondary = Template.bind({});
 Secondary.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Secondary.args = {
 	type: 'banner',
@@ -84,9 +93,12 @@ Secondary.args = {
 
 export const Left = Template.bind({});
 Left.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Left.args = {
 	type: 'left',

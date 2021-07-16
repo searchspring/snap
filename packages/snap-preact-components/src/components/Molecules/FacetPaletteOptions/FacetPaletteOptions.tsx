@@ -51,77 +51,75 @@ const CSS = {
 		}),
 };
 
-export const FacetPaletteOptions = observer(
-	(properties: FacetPaletteOptionsProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
-		const theme = { ...globalTheme, ...properties.theme };
+export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
+	const theme = { ...globalTheme, ...properties.theme };
 
-		const props: FacetPaletteOptionsProps = {
+	const props: FacetPaletteOptionsProps = {
+		// default props
+		values: [],
+		columns: 4,
+		gapSize: '8px',
+		// global theme
+		...globalTheme?.components?.facetpaletteoptions,
+		// props
+		...properties,
+		...properties.theme?.components?.facetpaletteoptions,
+	};
+
+	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
+
+	const subProps: FacetPaletteOptionsSubProps = {
+		icon: {
 			// default props
-			values: [],
-			columns: 4,
-			gapSize: '8px',
+			className: 'ss__facet-palette-options__icon',
 			// global theme
-			...globalTheme?.components?.facetpaletteoptions,
-			// props
-			...properties,
-			...properties.theme?.components?.facetpaletteoptions,
-		};
+			...globalTheme?.components?.icon,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			...props.theme?.components?.icon,
+		},
+		icon_bg: {
+			icon: 'close',
+			color: 'black',
+			size: '40%',
+		},
+		icon_fg: {
+			icon: 'close-thin',
+			color: 'white',
+			size: '30%',
+		},
+	};
 
-		const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
-
-		const subProps: FacetPaletteOptionsSubProps = {
-			icon: {
-				// default props
-				className: 'ss__facet-palette-options__icon',
-				// global theme
-				...globalTheme?.components?.icon,
-				// inherited props
-				...defined({
-					disableStyles,
-				}),
-				// component theme overrides
-				...props.theme?.components?.icon,
-			},
-			icon_bg: {
-				icon: 'close',
-				color: 'black',
-				size: '40%',
-			},
-			icon_fg: {
-				icon: 'close-thin',
-				color: 'white',
-				size: '30%',
-			},
-		};
-
-		return (
-			values?.length && (
-				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-							onClick={onClick}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							{...value.url?.link}
-						>
-							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
-								{!hideIcon && value.filtered && (
-									<>
-										<Icon {...subProps.icon} {...subProps.icon_bg} />
-										<Icon {...subProps.icon} {...subProps.icon_fg} />
-									</>
-								)}
-							</div>
-							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
-						</a>
-					))}
-				</div>
-			)
-		);
-	}
-);
+	return (
+		values?.length && (
+			<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+						onClick={onClick}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						{...value.url?.link}
+					>
+						<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
+							{!hideIcon && value.filtered && (
+								<>
+									<Icon {...subProps.icon} {...subProps.icon_bg} />
+									<Icon {...subProps.icon} {...subProps.icon_fg} />
+								</>
+							)}
+						</div>
+						{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
+					</a>
+				))}
+			</div>
+		)
+	);
+});
 
 export interface FacetPaletteOptionsProps extends ComponentProps {
 	values: ValueFacetValue[];

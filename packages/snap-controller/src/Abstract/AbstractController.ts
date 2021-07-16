@@ -1,7 +1,9 @@
 import { Tracker } from '@searchspring/snap-tracker';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
-
-import { ControllerServices, ControllerEnvironment } from '../types';
+import { LogMode } from '@searchspring/snap-logger';
+import { DomTargeter } from '@searchspring/snap-toolbox';
+import type { Target, OnTarget } from '@searchspring/snap-toolbox';
+import { ControllerServices } from '../types';
 
 type ControllerConfig = {
 	id: string;
@@ -15,7 +17,16 @@ export abstract class AbstractController {
 	public profiler;
 	public log;
 	public tracker: Tracker;
-	private _environment = ControllerEnvironment.PRODUCTION;
+	public targets: {
+		[key: string]: DomTargeter;
+	} = {};
+
+	private _initialized = false;
+	private _environment = LogMode.PRODUCTION;
+
+	get initialized(): boolean {
+		return this._initialized;
+	}
 
 	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_]*$/)) {
@@ -85,21 +96,31 @@ export abstract class AbstractController {
 			this.tracker.setNamespace(this.config.id);
 		}
 		// set environment
-		this.environment = process.env.NODE_ENV as ControllerEnvironment;
+		this.environment = process.env.NODE_ENV as LogMode;
 	}
 
-	public set environment(env: ControllerEnvironment) {
-		if (Object.values(ControllerEnvironment).includes(env)) {
+	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
+		const targeter = new DomTargeter([target], onTarget, document);
+		this.targets[target.selector] = targeter;
+
+		return targeter;
+	}
+
+	public set environment(env: LogMode) {
+		if (Object.values(LogMode).includes(env)) {
 			this._environment = env;
 			this.log.setMode(env);
 		}
 	}
 
-	public get environment(): ControllerEnvironment {
+	public get environment(): LogMode {
 		return this._environment;
 	}
 
 	public async init(): Promise<void> {
+		if (this._initialized) {
+			return;
+		}
 		const initProfile = this.profiler.create({ type: 'event', name: 'init', context: this.config }).start();
 
 		try {
@@ -137,9 +158,16 @@ export abstract class AbstractController {
 
 		initProfile.stop();
 		this.log.profile(initProfile);
+		this._initialized = true;
 	}
 
-	public abstract search(): Promise<AbstractController>;
+	public retarget(): void {
+		Object.keys(this.targets).forEach((target) => {
+			this.targets[target].retarget();
+		});
+	}
+
+	public abstract search(): Promise<void>;
 
 	public async use(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
 		await func(this);

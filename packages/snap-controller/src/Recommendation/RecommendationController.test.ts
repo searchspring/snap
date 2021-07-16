@@ -5,9 +5,7 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-
-import { ControllerEnvironment } from '../types';
+import { Logger, LogMode } from '@searchspring/snap-logger';
 import { RecommendationController } from './RecommendationController';
 import { MockClient } from '../__mocks__/MockClient';
 
@@ -58,7 +56,7 @@ describe('Recommendation Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		controller.environment = ControllerEnvironment.DEVELOPMENT;
+		controller.environment = LogMode.DEVELOPMENT;
 		expect(controller.environment).toBe('development');
 
 		const params = controller.params;

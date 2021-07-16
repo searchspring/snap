@@ -5,7 +5,7 @@
 	"description": "demo store for development and testing",
 	"scripts": {
 		"analyze": "webpack --analyze",
-		"build": "rm -fr ./dist && webpack --mode=production",
+		"build": "echo ''",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
 		"build:watch": "rm -fr ./dist && webpack --watch --mode=production",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve",
@@ -15,15 +15,8 @@
 		"test": "kill $(lsof -ti:4444,8888); webpack serve & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
 	},
 	"dependencies": {
-		"@searchspring/snap-client": "^0.3.6",
-		"@searchspring/snap-controller": "^0.3.6",
-		"@searchspring/snap-event-manager": "^0.3.6",
-		"@searchspring/snap-logger": "^0.3.6",
 		"@searchspring/snap-preact-components": "^0.3.6",
-		"@searchspring/snap-profiler": "^0.3.6",
-		"@searchspring/snap-store-mobx": "^0.3.6",
-		"@searchspring/snap-toolbox": "^0.3.6",
-		"@searchspring/snap-url-manager": "^0.3.6",
+		"@searchspring/snap-preact": "^0.3.6",
 		"mobx": "^6.2.0",
 		"mobx-react": "^7.1.0",
 		"preact": "^10.5.13"

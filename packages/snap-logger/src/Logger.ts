@@ -113,7 +113,7 @@ export class Logger {
 	}
 }
 
-enum LogMode {
+export enum LogMode {
 	PRODUCTION = 'production',
 	DEVELOPMENT = 'development',
 }

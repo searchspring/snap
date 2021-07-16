@@ -15,7 +15,7 @@ import {
 @observer
 export class Sidebar extends Component {
 	render() {
-		const store = this.props.controller.search.store;
+		const store = this.props.controller.store;
 
 		return (
 			<ThemeProvider theme={defaultTheme}>

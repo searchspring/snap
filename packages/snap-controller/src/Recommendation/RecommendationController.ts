@@ -5,7 +5,7 @@ import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
-import { ControllerEnvironment } from '../types';
+import { LogMode } from '@searchspring/snap-logger';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -243,15 +243,18 @@ export class RecommendationController extends AbstractController {
 			params.lastViewed = lastViewed;
 		}
 
-		if (this.environment == ControllerEnvironment.DEVELOPMENT) {
+		if (this.environment == LogMode.DEVELOPMENT) {
 			params.test = true;
 		}
 
 		return params;
 	}
 
-	search = async (): Promise<RecommendationController> => {
-		// TODO: call this.init() if it has never been called
+	search = async (): Promise<void> => {
+		if (!this.initialized) {
+			await this.init();
+		}
+
 		const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
 
 		try {
@@ -263,7 +266,7 @@ export class RecommendationController extends AbstractController {
 			} catch (err) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
@@ -271,10 +274,6 @@ export class RecommendationController extends AbstractController {
 			}
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
-
-			// TODO (notsureif)
-			// provide a means to access the actual request parameters (params + globals)
-			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
 			const response = await this.client.recommend(params);
 			searchProfile.stop();
@@ -292,7 +291,7 @@ export class RecommendationController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterSearch' middleware`);
 					throw err;
@@ -317,7 +316,7 @@ export class RecommendationController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterStore' middleware`);
 					throw err;
@@ -331,7 +330,5 @@ export class RecommendationController extends AbstractController {
 				console.error(err);
 			}
 		}
-
-		return this;
 	};
 }

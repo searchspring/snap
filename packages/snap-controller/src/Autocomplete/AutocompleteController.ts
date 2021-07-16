@@ -3,7 +3,9 @@ import { AbstractController } from '../Abstract/AbstractController';
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 
+const TRENDING_TERMS_CACHE = 'ss-ac-trending-cache';
 const utils = { url: utilsURL };
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -25,6 +27,7 @@ type AutocompleteTrackMethods = {
 };
 export class AutocompleteController extends AbstractController {
 	config: AutocompleteControllerConfig;
+	storage: StorageStore;
 
 	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
@@ -37,8 +40,11 @@ export class AutocompleteController extends AbstractController {
 			this.store.state.input = this.urlManager.state.query;
 		}
 
-		// detach url manager
-		this.urlManager = this.urlManager;
+		// persist trending terms in local storage
+		this.storage = new StorageStore({
+			type: StorageType.SESSION,
+			key: TRENDING_TERMS_CACHE,
+		});
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -227,7 +233,6 @@ export class AutocompleteController extends AbstractController {
 
 			const form = input.form;
 
-			// TODO: set urlManager translator root to match form/config action
 			let formActionUrl = this.config.action;
 
 			if (!form && this.config.action) {
@@ -250,20 +255,45 @@ export class AutocompleteController extends AbstractController {
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
-				this.urlManager = this.urlManager.withConfig((translatorConfig) => {
-					return {
-						...translatorConfig,
-						urlRoot: formActionUrl,
-					};
-				});
+				this.store.setService(
+					'urlManager',
+					this.urlManager.withConfig((translatorConfig) => {
+						return {
+							...translatorConfig,
+							urlRoot: formActionUrl,
+						};
+					})
+				);
 			}
 		});
+		this.searchTrending();
 
 		document.removeEventListener('click', removeVisibleAC);
 		document.addEventListener('click', removeVisibleAC);
 	}
 
-	search = async (): Promise<AutocompleteController> => {
+	searchTrending = async (): Promise<void> => {
+		let terms;
+		const storedTerms = this.storage.get('terms');
+		if (storedTerms) {
+			// terms exist in storage, update store
+			terms = JSON.parse(storedTerms);
+		} else {
+			// query for trending terms, save to storage, update store
+			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start();
+			terms = await this.client.trending();
+			trendingProfile.stop();
+			this.log.profile(trendingProfile);
+			this.storage.set('terms', JSON.stringify(terms));
+		}
+		this.store.updateTrendingTerms(terms);
+	};
+
+	search = async (): Promise<void> => {
+		if (!this.initialized) {
+			await this.init();
+		}
+
 		const params = this.params;
 
 		if (!params?.search?.query?.string) {
@@ -279,7 +309,7 @@ export class AutocompleteController extends AbstractController {
 			} catch (err) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
@@ -287,10 +317,6 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
-
-			// TODO (notsureif)
-			// provide a means to access the actual request parameters (params + globals)
-			// 				* add params(params) function to client that spits back the JSON request (takes params param) - incorporates globals + params param
 
 			const response = await this.client.autocomplete(params);
 			if (!response.meta) {
@@ -328,7 +354,7 @@ export class AutocompleteController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterSearch' middleware`);
 					throw err;
@@ -353,7 +379,7 @@ export class AutocompleteController extends AbstractController {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();
-					return this;
+					return;
 				} else {
 					this.log.error(`error in 'afterStore' middleware`);
 					throw err;
@@ -367,7 +393,5 @@ export class AutocompleteController extends AbstractController {
 				console.error(err);
 			}
 		}
-
-		return this;
 	};
 }

@@ -7,7 +7,7 @@ import { Results, NoResults } from '../Results/Results';
 @observer
 export class Content extends Component {
 	render() {
-		const store = this.props.controller.search.store;
+		const store = this.props.controller.store;
 
 		return (
 			<ControllerProvider controller={this.props.controller}>

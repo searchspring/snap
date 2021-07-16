@@ -40,15 +40,15 @@ const CSS = {
 				},
 			},
 			'& .ss__slider__rail': {
-				background: railColor || theme.colors?.primary,
+				background: railColor || theme.colors?.primary || '#333',
 				height: '100%',
 			},
 			'& .ss__slider__segment': {
-				background: trackColor || theme.colors?.secondary,
+				background: trackColor || theme.colors?.secondary || '#ccc',
 				height: '100%',
 			},
 			'& .ss__slider__handle': {
-				background: handleColor || theme.colors?.primary,
+				background: handleColor || theme.colors?.primary || '#333',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
@@ -87,7 +87,7 @@ const CSS = {
 				},
 
 				'&.ss__slider__handle--active': {
-					background: handleDraggingColor || handleColor || theme.colors?.primary,
+					background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
 				},
 			},
 			...style,

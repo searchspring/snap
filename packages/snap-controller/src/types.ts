@@ -87,11 +87,6 @@ export type ControllerServices = {
 	tracker: Tracker;
 };
 
-export enum ControllerEnvironment {
-	PRODUCTION = 'production',
-	DEVELOPMENT = 'development',
-}
-
 declare global {
 	interface Window {
 		searchspring?: any;

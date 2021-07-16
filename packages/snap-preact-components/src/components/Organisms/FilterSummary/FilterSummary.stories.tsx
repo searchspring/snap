@@ -156,16 +156,22 @@ const Template = (args: FilterSummaryProps, { loaded: { controller } }) => <Filt
 
 export const Regular = Template.bind({});
 Regular.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
 export const noFacetLabel = Template.bind({});
 noFacetLabel.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 noFacetLabel.args = {
 	hideFacetLabel: true,
@@ -173,9 +179,12 @@ noFacetLabel.args = {
 
 export const customTitle = Template.bind({});
 customTitle.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 customTitle.args = {
 	title: 'Selected Filters',

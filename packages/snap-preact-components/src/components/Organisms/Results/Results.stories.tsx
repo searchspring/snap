@@ -1,8 +1,9 @@
 import { h } from 'preact';
+import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Results, defaultResponsiveOptions } from './Results';
+import { Results, ResultsProp } from './Results';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
@@ -57,7 +58,7 @@ export default {
 			},
 		},
 		responsive: {
-			defaultValue: defaultResponsiveOptions,
+			defaultValue: {},
 			description: 'Responsive options object',
 			table: {
 				type: {
@@ -82,16 +83,76 @@ export default {
 };
 
 const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
-export const Grid = (props, { loaded: { controller } }) => <Results layout={Layout.GRID} results={controller?.store?.results} {...props} />;
+
+const ObservableGridResults = observer(({ args, controller }) => {
+	return <Results {...args} controller={controller} results={controller?.store?.results} />;
+});
+
+const GridTemplate = (args: ResultsProp, { loaded: { controller } }) => {
+	return <ObservableGridResults args={args} controller={controller} />;
+};
+
+export const Grid = GridTemplate.bind({});
 Grid.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 
-export const List = (props, { loaded: { controller } }) => <Results layout={Layout.LIST} results={controller?.store?.results} {...props} />;
+const ObservableListResults = observer(({ args, controller }) => {
+	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
+});
+
+const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
+	return <ObservableListResults args={args} controller={controller} />;
+};
+
+export const List = ListTemplate.bind({});
 List.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+
+const responsive = {
+	0: {
+		numAcross: 2,
+		numRows: 1,
+	},
+	540: {
+		numAcross: 3,
+		numRows: 1,
+	},
+	768: {
+		numAcross: 4,
+		numRows: 1,
+	},
+	991: {
+		numAcross: 2,
+		numRows: 2,
+	},
+};
+
+const ObservableResponsiveResults = observer(({ args, controller }) => {
+	return <Results {...args} controller={controller} results={controller?.store?.results} responsive={responsive} />;
+});
+
+const ResponsiveTemplate = (args: ResultsProp, { loaded: { controller } }) => {
+	return <ObservableResponsiveResults args={args} controller={controller} />;
+};
+
+export const Responsive = ResponsiveTemplate.bind({});
+Responsive.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];

@@ -34,7 +34,7 @@ export class TermStore extends Array {
 	}
 }
 
-class Term {
+export class Term {
 	active: boolean;
 	value: string;
 	preview: () => void;

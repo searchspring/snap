@@ -159,6 +159,7 @@ export default {
 			},
 		},
 		stayOpenOnSelection: {
+			defaultValue: false,
 			description: 'Keep dropdown open when an option is selected',
 			table: {
 				type: {
@@ -169,6 +170,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		startOpen: {
+			defaultValue: false,
 			description: 'Open on initial render',
 			table: {
 				type: {
@@ -179,6 +181,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		native: {
+			defaultValue: false,
 			description: 'Use native select element',
 			table: {
 				type: {
@@ -189,6 +192,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		disableClickOutside: {
+			defaultValue: false,
 			description: 'Ignore clicks outside of element',
 			table: {
 				type: {
@@ -211,37 +215,6 @@ export default {
 	},
 };
 
-const selectOptions = [
-	{
-		label: 'Red',
-		value: 'red',
-	},
-	{
-		label: 'Orange',
-		value: 'orange',
-	},
-	{
-		label: 'Yellow',
-		value: 'yellow',
-	},
-	{
-		label: 'Green',
-		value: 'green',
-	},
-	{
-		label: 'Blue',
-		value: 'blue',
-	},
-	{
-		label: 'Indigo',
-		value: 'indigo',
-	},
-	{
-		label: 'Violet',
-		value: 'violet',
-	},
-];
-
 const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
 
 const ObservableSelect = observer(({ args, controller }) => {
@@ -263,9 +236,12 @@ const Template = (args: SelectProps, { loaded: { controller } }) => {
 
 export const Default = Template.bind({});
 Default.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Default.args = {
 	label: 'Sort By',
@@ -273,9 +249,12 @@ Default.args = {
 
 export const Native = Template.bind({});
 Native.loaders = [
-	async () => ({
-		controller: await snapInstance.search(),
-	}),
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
 Native.args = {
 	label: 'Sort By',

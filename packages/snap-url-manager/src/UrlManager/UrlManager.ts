@@ -43,7 +43,7 @@ export class UrlManager {
 		localState?: UrlState | ImmutableObject<UrlState>,
 		watcherPool?: WatcherPool,
 		private omissions: Array<omission> = [],
-		private detached?: { url: string }
+		public detached?: { url: string }
 	) {
 		this.localState = Immutable(localState || {});
 
@@ -260,12 +260,12 @@ export class UrlManager {
 		return this.linker(this);
 	}
 
-	subscribe(cb: (next: ImmutableObject<UrlState>, prev?: ImmutableObject<UrlState>) => void): () => void {
+	subscribe(cb: (prev: ImmutableObject<UrlState>, next?: ImmutableObject<UrlState>) => void): () => void {
 		return this.watcherPool.subscribe(() => {
 			const prevState = this.prevState;
 			const state = this.mergedState;
 
-			cb(state, prevState);
+			cb(prevState, state);
 		});
 	}
 }
