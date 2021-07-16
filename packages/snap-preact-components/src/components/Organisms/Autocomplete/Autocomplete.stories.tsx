@@ -34,12 +34,12 @@ export default {
 		),
 	],
 	argTypes: {
-		store: {
-			description: 'Autocomplete store reference',
+		controller: {
+			description: 'Autocomplete controller reference',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'Autocomplete store object',
+					summary: 'Autocomplete controller object',
 				},
 			},
 			control: { type: 'none' },
@@ -76,15 +76,6 @@ export default {
 			control: {
 				type: 'object',
 			},
-		},
-		controller: {
-			description: 'Controller reference',
-			table: {
-				type: {
-					summary: 'Controller',
-				},
-			},
-			control: { type: 'none' },
 		},
 		...componentArgs,
 	},

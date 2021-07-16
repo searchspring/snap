@@ -35,6 +35,7 @@ export default {
 		pages: {
 			description:
 				'Number of pages shown - recommend using an odd number as it includes the current page with an even spread to the left and right (excluding first and last)',
+			defaultValue: 5,
 			table: {
 				type: {
 					summary: 'number',

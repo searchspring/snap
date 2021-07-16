@@ -15,14 +15,11 @@ const CSS = {
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
-				margin: '0 5px',
-				border: `1px solid ${theme.colors?.primary || '#333'}`,
 				display: 'inline-block',
 				minHeight: '1em',
 				minWidth: '1em',
 				textAlign: 'center',
 				'&.ss__pagination__page--active': {
-					boxShadow: `inset 0px -2px ${theme.colors?.primary || '#333'}`,
 					fontWeight: 'bold',
 				},
 				'&:hover:not(.ss__pagination__page--active)': {

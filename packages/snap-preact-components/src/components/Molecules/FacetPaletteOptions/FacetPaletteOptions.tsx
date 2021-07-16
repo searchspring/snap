@@ -65,7 +65,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		// props
 		...properties,
 		...properties.theme?.components?.facetpaletteoptions,
-		...properties.facetPaletteOptions,
 	};
 
 	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;

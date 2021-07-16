@@ -105,6 +105,9 @@ Contains an object with the following properties:
 ## `terms` property
 An array of Term objects.
 
+## `trending` property
+An array of trending Term objects.
+
 ### `Term` object
 Each `Term` object corresponds to a term returned from the Autocomplete API and/or Suggest API
 

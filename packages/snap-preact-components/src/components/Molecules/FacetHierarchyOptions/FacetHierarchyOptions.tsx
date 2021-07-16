@@ -61,7 +61,6 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		//props
 		...properties,
 		...properties.theme?.components?.FacetHierarchyOptions,
-		...properties.facetHierarchyOptions,
 	};
 
 	const { values, hideCount, onClick, disableStyles, className, style } = props;

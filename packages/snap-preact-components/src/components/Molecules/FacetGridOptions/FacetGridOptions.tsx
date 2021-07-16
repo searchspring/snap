@@ -66,7 +66,6 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		// props
 		...properties,
 		...properties.theme?.components?.facetGridOptions,
-		...properties.facetGridOptions,
 	};
 
 	const { values, columns, gapSize, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;

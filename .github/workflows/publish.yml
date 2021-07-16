@@ -41,7 +41,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
       - name: Build
-        run: npm run build
+        run: | 
+          npm run build
+          git add -A packages/snap-tracker/src/version.ts
+          git commit -m "chore(version): generation"
 
       - name: Tests
         run: npm run test

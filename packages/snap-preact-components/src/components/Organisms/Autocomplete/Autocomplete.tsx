@@ -17,13 +17,14 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 
 const CSS = {
-	Autocomplete: ({ inputViewportOffsetBottom, hideTerms, hideFacets, justTrending, style, theme }) =>
+	Autocomplete: ({ inputViewportOffsetBottom, hideTerms, hideFacets, inputWidth, resultCount, justTrending, style, theme }) =>
 		css({
 			position: 'absolute',
 			zIndex: '10002',
 			border: '1px solid #ebebeb',
 			background: '#ffffff',
 			maxWidth: '100vw',
+			width: !justTrending && inputWidth,
 			maxHeight: inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : '100vh',
 			display: justTrending ? 'inline-block' : 'flex',
 
@@ -56,7 +57,11 @@ const CSS = {
 							'& .ss__autocomplete__terms__option--underline': {
 								textDecoration: 'underline',
 							},
+							'& em': {
+								fontStyle: 'normal',
+							},
 						},
+
 						'&.ss__autocomplete__terms__option--active': {
 							background: '#fff',
 							fontWeight: 'bold',
@@ -77,7 +82,7 @@ const CSS = {
 					overflowY: 'auto',
 				},
 				'& .ss__autocomplete__content__results': {
-					width: hideFacets ? '100%' : 'calc(100% - 200px)',
+					width: hideFacets || resultCount === 0 ? '100%' : 'calc(100% - 200px)',
 					padding: '10px',
 
 					'& .ss__autocomplete__content__results__wrapper': {
@@ -184,15 +189,19 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 				disableCollapse: true,
 			}),
-			facetListOptions: {
-				hideCheckbox: true,
-				hideCount: true,
-			},
-			facetPaletteOptions: {
-				hideLabel: true,
-			},
-			facetHierarchyOptions: {
-				hideCount: true,
+			theme: {
+				components: {
+					facetListOptions: {
+						hideCheckbox: true,
+						hideCount: true,
+					},
+					facetPaletteOptions: {
+						hideLabel: true,
+					},
+					facetHierarchyOptions: {
+						hideCount: true,
+					},
+				},
 			},
 			// component theme overrides
 			...props.theme?.components?.facet,
@@ -238,13 +247,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const { search, terms, trending, results, merchandising, pagination, filters, facets, state } = controller.store;
 
-	//you can pass in a selector or the actual input element,
-	//if its the selector, we need to bind it to the controller here.
+	// you can pass in a selector or the actual input element,
+	// if its the selector, we need to bind it to the controller here.
 	if (controller && typeof input == 'string') {
 		input = document.querySelector(input);
-		//only bind on componentdidmount
+		// only bind on componentdidmount
 		useEffect(() => {
-			//run bind
 			controller.bind();
 		}, []);
 	}
@@ -264,8 +272,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	let inputViewportOffsetBottom;
+	let inputWidth;
 	if (input) {
-		inputViewportOffsetBottom = (input as Element).getBoundingClientRect().bottom;
+		const rect = (input as Element).getBoundingClientRect();
+		inputViewportOffsetBottom = rect.bottom;
+		inputWidth = rect.width;
 	}
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && !terms.length;
@@ -273,7 +284,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	return (
 		visible && (
 			<div
-				css={CSS.Autocomplete({ inputViewportOffsetBottom, justTrending, hideTerms, hideFacets, style, theme })}
+				css={CSS.Autocomplete({
+					inputViewportOffsetBottom,
+					justTrending,
+					hideTerms,
+					hideFacets,
+					inputWidth,
+					resultCount: results.length,
+					style,
+					theme,
+				})}
 				className={classnames('ss__autocomplete', className)}
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -284,7 +304,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							{(showTrending ? trending : terms).map((term) => (
 								<li className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
 									<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
-										{term.value}
+										{emIfy(term.value, state.input)}
 									</a>
 								</li>
 							))}
@@ -333,6 +353,27 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	);
 });
 
+const emIfy = (term, search) => {
+	const match = term.match(search);
+	if (search && term && match) {
+		const beforeMatch = term.slice(0, match.index);
+		const afterMatch = term.slice(match.index + search.length, term.length);
+		return (
+			<>
+				{beforeMatch ? <em>{beforeMatch}</em> : ''}
+				{search}
+				{afterMatch ? <em>{afterMatch}</em> : ''}
+			</>
+		);
+	}
+
+	return (
+		<>
+			<em>{term}</em>
+		</>
+	);
+};
+
 interface AutocompleteSubProps {
 	facet: FacetProps;
 	banner: BannerProps;
@@ -342,7 +383,6 @@ interface AutocompleteSubProps {
 
 export interface AutocompleteProps extends ComponentProps {
 	input: Element | string;
-	store: any;
 	hideFacets?: boolean;
 	hideTerms?: boolean;
 	responsive?: ResponsiveProps;
