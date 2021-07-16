@@ -16,7 +16,7 @@
 		"clean": "node_modules/.bin/lerna clean -y && rm -rf ./node_modules",
 		"format": "node_modules/.bin/lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"version": "node_modules/.bin/lerna version --yes",
+		"version": "node_modules/.bin/lerna version --no-git-reset --yes",
 		"publish": "node_modules/.bin/lerna publish --no-git-reset --yes",
 		"prepare": "husky install"
 	},
