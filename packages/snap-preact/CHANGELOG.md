@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.3.7 (2021-07-16)
+
+
+### Bug Fixes
+
+* update gh action to include version before publish ([2527f8f](https://github.com/searchspring/snap/commit/2527f8f42dc515e53639c6579c8c743ea3809eb6))
