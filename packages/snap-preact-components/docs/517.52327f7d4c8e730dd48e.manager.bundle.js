@@ -1,4 +1,4 @@
-/*! For license information please see 517.a9cb5baac11f2a7bcf3d.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 517.52327f7d4c8e730dd48e.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[517],
 	{
@@ -8825,7 +8825,7 @@
 						mode = _ref.mode,
 						fullAPI = _ref.fullAPI,
 						dismissedVersionNotification = store.getState().dismissedVersionNotification,
-						state = { versions: Object.assign({ current: { version: '6.3.2' } }, getVersionCheckData()), dismissedVersionNotification },
+						state = { versions: Object.assign({ current: { version: '6.3.4' } }, getVersionCheckData()), dismissedVersionNotification },
 						api = {
 							getCurrentVersion: function getCurrentVersion() {
 								return store.getState().versions.current;
@@ -51301,7 +51301,8 @@
 				)
 					throw new TypeError('option "maxStringLength", if provided, must be a positive integer, Infinity, or `null`');
 				var customInspect = !has(opts, 'customInspect') || opts.customInspect;
-				if ('boolean' != typeof customInspect) throw new TypeError('option "customInspect", if provided, must be `true` or `false`');
+				if ('boolean' != typeof customInspect && 'symbol' !== customInspect)
+					throw new TypeError('option "customInspect", if provided, must be `true`, `false`, or `\'symbol\'`');
 				if (has(opts, 'indent') && null !== opts.indent && '\t' !== opts.indent && !(parseInt(opts.indent, 10) === opts.indent && opts.indent > 0))
 					throw new TypeError('options "indent" must be "\\t", an integer > 0, or `null`');
 				if (void 0 === obj) return 'undefined';
@@ -51377,7 +51378,7 @@
 				}
 				if ('object' == typeof obj && customInspect) {
 					if (inspectSymbol && 'function' == typeof obj[inspectSymbol]) return obj[inspectSymbol]();
-					if ('function' == typeof obj.inspect) return obj.inspect();
+					if ('symbol' !== customInspect && 'function' == typeof obj.inspect) return obj.inspect();
 				}
 				if (
 					(function isMap(x) {

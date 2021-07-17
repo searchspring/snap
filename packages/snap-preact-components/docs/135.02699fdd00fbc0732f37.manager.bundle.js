@@ -85,8 +85,8 @@
 						b = p[0],
 						_ = p[1],
 						C = i(t),
-						E = i(s),
-						x = (0, react.useCallback)(
+						x = i(s),
+						E = (0, react.useCallback)(
 							function (e) {
 								h(e), (v(e) ? e.touches.length > 0 : e.buttons > 0) && m.current ? C(d(m.current, e)) : _(!1);
 							},
@@ -106,9 +106,9 @@
 								var r = e.which || e.keyCode;
 								r < 37 ||
 									r > 40 ||
-									(e.preventDefault(), E({ left: 39 === r ? 0.05 : 37 === r ? -0.05 : 0, top: 40 === r ? 0.05 : 38 === r ? -0.05 : 0 }));
+									(e.preventDefault(), x({ left: 39 === r ? 0.05 : 37 === r ? -0.05 : 0, top: 40 === r ? 0.05 : 38 === r ? -0.05 : 0 }));
 							},
-							[E]
+							[x]
 						),
 						N = (0, react.useCallback)(function () {
 							return _(!1);
@@ -116,9 +116,9 @@
 						w = (0, react.useCallback)(
 							function (e) {
 								var r = e ? window.addEventListener : window.removeEventListener;
-								r(g.current ? 'touchmove' : 'mousemove', x), r(g.current ? 'touchend' : 'mouseup', N);
+								r(g.current ? 'touchmove' : 'mousemove', E), r(g.current ? 'touchend' : 'mouseup', N);
 							},
-							[x, N]
+							[E, N]
 						);
 					return (
 						c(
@@ -173,15 +173,15 @@
 							: { r: parseInt(e.substr(0, 2), 16), g: parseInt(e.substr(2, 2), 16), b: parseInt(e.substr(4, 2), 16), a: 1 }
 					);
 				},
-				E = function (e, r) {
+				x = function (e, r) {
 					return void 0 === r && (r = 'deg'), Number(e) * (_[r] || 1);
 				},
-				x = function (e) {
+				E = function (e) {
 					var r = /hsla?\(?\s*(-?\d*\.?\d+)(deg|rad|grad|turn)?[,\s]+(-?\d*\.?\d+)%?[,\s]+(-?\d*\.?\d+)%?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(
 						e
 					);
 					return r
-						? M({ h: E(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
+						? M({ h: x(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
 						: { h: 0, s: 0, v: 0, a: 1 };
 				},
 				M = function (e) {
@@ -416,7 +416,7 @@
 						react.createElement(J, { hsva: f, onChange: v, className: 'react-colorful__last-control' })
 					);
 				},
-				W = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: x, fromHsva: y, equal: F },
+				W = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: E, fromHsva: y, equal: F },
 				he = {
 					defaultColor: 'rgba(0, 0, 0, 1)',
 					toHsva: I,
