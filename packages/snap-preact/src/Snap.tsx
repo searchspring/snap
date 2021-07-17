@@ -1,4 +1,4 @@
-import { h, Fragment, render } from 'preact';
+import { h, render } from 'preact';
 
 import {
 	SearchController,
@@ -8,13 +8,13 @@ import {
 	AbstractController,
 } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
-import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore, AbstractStore } from '@searchspring/snap-store-mobx';
+import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
-// TODO move PACKAGE_VERSION to snap-globals (or similar)
-import { Tracker, PACKAGE_VERSION } from '@searchspring/snap-tracker';
+import { Tracker } from '@searchspring/snap-tracker';
+import { version } from '@searchspring/snap-version';
 
 import type {
 	SearchControllerConfig,
@@ -88,7 +88,7 @@ export class Snap {
 		// log version
 		this.logger.imageText({
 			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-			text: `${PACKAGE_VERSION}`,
+			text: ` v${version}`,
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
 

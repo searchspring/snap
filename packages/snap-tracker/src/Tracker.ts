@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { version } from '@searchspring/snap-version';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -21,7 +22,6 @@ import {
 	OrderTransactionEvent,
 	Product,
 } from './types';
-import { PACKAGE_VERSION } from './version';
 
 const BATCH_TIMEOUT = 150;
 const USERID_COOKIE_NAME = 'ssUserId';
@@ -87,7 +87,7 @@ export class Tracker {
 	setGlobal = (): void => {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.track = this.track;
-		window.searchspring.version = PACKAGE_VERSION;
+		window.searchspring.version = version;
 	};
 
 	track: TrackMethods = {

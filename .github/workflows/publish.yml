@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repositiory
         uses: actions/checkout@v2
 
-      - name: Set Github Credentials
+      - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
           git config user.email machine@searchspring.com
@@ -40,25 +40,20 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
-      - name: Version
-        run: | 
-          npm run version
-
       - name: Build
         run: | 
           npm run build
-          git add -A packages/snap-tracker/src/version.ts
 
       - name: Tests
         run: npm run test
       
-      - name: Build Docs
+      - name: Build docs
         run: |
           npm run build:docs 
           git add -A packages/snap-*/docs/ 
           git commit -m "chore(docs): generation"
 
-      - name: Publish changed package(s) to Github using lerna
+      - name: Publish packages
         run: npm run publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
