@@ -1,15 +1,15 @@
 {
-  "version": "0.3.7",
-  "packages": [
-    "packages/*"
-  ],
-  "useWorkspaces": true,
-  "npmClient": "npm",
-  "command": {
-    "publish": {
-      "message": "chore(publish): %s",
-      "registry": "https://npm.pkg.github.com",
-      "conventionalCommits": true
-    }
-  }
+	"version": "0.3.7",
+	"packages": [
+		"packages/*"
+	],
+	"useWorkspaces": true,
+	"npmClient": "npm",
+	"command": {
+		"publish": {
+			"message": "chore(publish): %s",
+			"registry": "https://npm.pkg.github.com",
+			"conventionalCommits": true
+		}
+	}
 }
