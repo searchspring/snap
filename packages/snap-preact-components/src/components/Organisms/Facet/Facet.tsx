@@ -53,7 +53,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 
 	const props: FacetProps = {
 		// default props
-		optionsLimit: 12,
+		limit: 12,
+		disableOverflow: false,
 		iconCollapse: 'angle-up',
 		iconExpand: 'angle-down',
 		showMoreText: 'Show More',
@@ -73,7 +74,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		hideIcon,
 		iconCollapse,
 		iconExpand,
-		optionsLimit,
+		limit,
+		disableOverflow,
 		iconColor,
 		color,
 		previewOnFocus,
@@ -200,8 +202,12 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 	};
 
-	if ((facet as ValueFacet)?.overflow && optionsLimit) {
-		(facet as ValueFacet).overflow.setLimit(optionsLimit);
+	let limitedValues;
+	if ((facet as ValueFacet)?.overflow && limit && !disableOverflow) {
+		(facet as ValueFacet).overflow.setLimit(limit);
+		limitedValues = (facet as ValueFacet)?.refinedValues;
+	} else if ((facet as ValueFacet)?.overflow && limit) {
+		limitedValues = (facet as ValueFacet)?.values.slice(0, limit);
 	}
 
 	return (
@@ -223,18 +229,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							case FacetDisplay.SLIDER:
 								return <Slider {...subProps.slider} facet={facet as RangeFacet} />;
 							case FacetDisplay.GRID:
-								return <FacetGridOptions {...subProps.facetGridOptions} values={(facet as ValueFacet)?.refinedValues} />;
+								return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
 							case FacetDisplay.PALETTE:
-								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={(facet as ValueFacet)?.refinedValues} />;
+								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
 							case FacetDisplay.HIERARCHY:
-								return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(facet as HierarchyFacet)?.refinedValues} />;
+								return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
 							default:
-								return <FacetListOptions {...subProps.facetListOptions} values={(facet as ValueFacet)?.refinedValues} />;
+								return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
 						}
 					})()}
 				</div>
 
-				{(facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
+				{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
 					<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
 						<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
 						<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
@@ -264,7 +270,8 @@ export interface FacetProps extends ComponentProps {
 	iconColor?: string;
 	iconExpand?: IconType | string;
 	hideIcon?: boolean;
-	optionsLimit?: number;
+	limit?: number;
+	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 	showMoreText?: string;

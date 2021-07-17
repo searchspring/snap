@@ -17,22 +17,21 @@ import { Theme, useTheme } from '../../../providers/theme';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 
 const CSS = {
-	Autocomplete: ({ inputViewportOffsetBottom, hideTerms, hideFacets, inputWidth, resultCount, justTrending, style, theme }) =>
+	Autocomplete: ({ inputViewportOffsetBottom, justTrending, style, theme }) =>
 		css({
 			position: 'absolute',
 			zIndex: '10002',
 			border: '1px solid #ebebeb',
 			background: '#ffffff',
 			maxWidth: '100vw',
-			width: !justTrending && inputWidth,
 			maxHeight: inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : '100vh',
-			display: justTrending ? 'inline-block' : 'flex',
+			display: 'flex',
 
 			'& *': {
 				boxSizing: 'border-box',
 			},
 			'& .ss__autocomplete__terms': {
-				width: '150px',
+				flex: '1 0 150px',
 				background: '#f8f8f8',
 
 				'& h5': {
@@ -47,9 +46,6 @@ const CSS = {
 					color: '#515151',
 
 					'& li.ss__autocomplete__terms__option': {
-						'&:hover': {
-							background: '#f5f5f5',
-						},
 						'& a': {
 							display: 'block',
 							padding: '10px',
@@ -72,32 +68,29 @@ const CSS = {
 			},
 			'& .ss__autocomplete__content': {
 				display: justTrending ? 'none' : 'flex',
-				width: hideTerms ? '100%' : 'calc(100% - 150px)',
-
 				'& .ss__autocomplete__content__facets': {
-					width: '200px',
+					width: '150px',
 					padding: '10px',
 					display: 'flex',
+					flex: '0 0 150px',
 					flexDirection: 'column',
 					overflowY: 'auto',
 				},
 				'& .ss__autocomplete__content__results': {
-					width: hideFacets || resultCount === 0 ? '100%' : 'calc(100% - 200px)',
 					padding: '10px',
 
 					'& .ss__autocomplete__content__results__wrapper': {
-						maxHeight: 'calc(100% - 50px)',
 						overflowY: 'auto',
 					},
 					'& .ss__autocomplete__content__results__info': {
-						textAlign: 'right',
 						fontWeight: 'bold',
 						color: theme?.colors?.primary,
 
-						'& p': {
+						'& .ss__autocomplete__content__results__spacer': {},
+						'& .ss__autocomplete__content__results__link': {
+							textAlign: 'right',
 							'& a': {
 								'& .ss__icon': {
-									verticalAlign: 'bottom',
 									marginLeft: '5px',
 								},
 							},
@@ -119,7 +112,7 @@ const CSS = {
 					},
 				},
 				'& .ss__autocomplete__terms': {
-					width: '100%',
+					flexBasis: 'auto',
 					border: 'none',
 
 					'& ul.ss__autocomplete__terms__options': {
@@ -182,24 +175,30 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		facet: {
 			// default props
 			className: 'ss__autocomplete__facet',
+			limit: 6,
+			disableOverflow: true,
+			disableCollapse: true,
 			// global theme
 			...globalTheme?.components?.facet,
 			// inherited props
 			...defined({
 				disableStyles,
-				disableCollapse: true,
 			}),
 			theme: {
 				components: {
+					facetGridOptions: {
+						columns: 3,
+					},
+					facetHierarchyOptions: {
+						hideCount: true,
+					},
 					facetListOptions: {
 						hideCheckbox: true,
 						hideCount: true,
 					},
 					facetPaletteOptions: {
 						hideLabel: true,
-					},
-					facetHierarchyOptions: {
-						hideCount: true,
+						columns: 3,
 					},
 				},
 			},
@@ -234,6 +233,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		icon: {
 			// default props
 			className: 'ss__autocomplete__icon',
+			icon: 'angle-right',
+			size: '10px',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
@@ -258,7 +259,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	let delayTimeout;
-	const delayTime = 200;
+	const delayTime = 333;
 	const valueProps = {
 		onMouseEnter: (e) => {
 			clearTimeout(delayTimeout);
@@ -276,7 +277,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	if (input) {
 		const rect = (input as Element).getBoundingClientRect();
 		inputViewportOffsetBottom = rect.bottom;
-		inputWidth = rect.width;
 	}
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && !terms.length;
@@ -287,10 +287,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				css={CSS.Autocomplete({
 					inputViewportOffsetBottom,
 					justTrending,
-					hideTerms,
-					hideFacets,
-					inputWidth,
-					resultCount: results.length,
 					style,
 					theme,
 				})}
@@ -334,15 +330,21 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						{search?.query?.string ? (
 							<div className="ss__autocomplete__content__results__info">
 								{results.length === 0 ? (
-									<p>No results found for "{search.query.string}" Please try another search.</p>
+									<>
+										<p>No results found for "{search.query.string}".</p>
+										<p>Please try another search.</p>
+									</>
 								) : (
-									<p>
-										<a href={state.url.href}>
-											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-											{search.query.string}"
-											<Icon {...subProps.icon} icon={'angle-right'} />
-										</a>
-									</p>
+									<>
+										<div className="ss__autocomplete__content__results__spacer"></div>
+										<div className="ss__autocomplete__content__results__link">
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										</div>
+									</>
 								)}
 							</div>
 						) : null}

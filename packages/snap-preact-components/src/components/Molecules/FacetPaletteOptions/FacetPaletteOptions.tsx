@@ -22,7 +22,7 @@ const CSS = {
 					cursor: 'pointer',
 				},
 				'& .ss__facet-palette-options__option__palette': {
-					paddingTop: '100%',
+					paddingTop: 'calc(100% - 2px)',
 					border: '1px solid #EBEBEB',
 					borderRadius: '100%',
 					position: 'relative',

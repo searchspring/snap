@@ -41,9 +41,9 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		optionsLimit: {
+		limit: {
 			defaultValue: 12,
-			description: "Number of facet options to display before a 'show more' button appears",
+			description: 'Number of facet options to display',
 			table: {
 				type: {
 					summary: 'number',
@@ -51,6 +51,17 @@ export default {
 				defaultValue: { summary: 12 },
 			},
 			control: { type: 'number' },
+		},
+		disableOverflow: {
+			defaultValue: false,
+			description: 'Enable the use of an overflow (show more/less)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		hideIcon: {
 			description: 'Hide facet header icons',
