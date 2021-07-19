@@ -88,7 +88,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	};
 
 	const displaySettings = useDisplaySettings(responsive);
-	console.log('displaySettings', displaySettings);
+
 	let results;
 	if (displaySettings?.rows > 0) {
 		results = props.results.slice(0, displaySettings.columns * displaySettings.rows);
