@@ -22,7 +22,6 @@
 	"dependencies": {
 		"@searchspring/snap-store-mobx": "^0.3.8",
 		"@searchspring/snap-toolbox": "^0.3.8",
-		"@searchspring/snap-version": "^0.3.8",
 		"deepmerge": "^4.2.2",
 		"uuid": "^8.3.2"
 	},

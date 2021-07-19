@@ -2,8 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, featureFlags } from '@searchspring/snap-toolbox';
-import { version } from '@searchspring/snap-version';
+import { cookies, featureFlags, version } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';

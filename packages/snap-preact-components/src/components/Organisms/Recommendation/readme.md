@@ -61,7 +61,7 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however any (Swiper API parameters)[https://swiperjs.com/swiper-api#parameters] can also be specified. 
+The default configuration contains the following properties, however any [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can also be specified. 
 
 `slidesPerView` - number of products to display per page
 

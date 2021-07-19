@@ -76,17 +76,21 @@ const CSS = {
 					flexDirection: 'column',
 					overflowY: 'auto',
 				},
-				'& .ss__autocomplete__content__results': {
+				'& .ss__autocomplete__content__results__wrapper': {
 					padding: '10px',
+					display: 'flex',
+					flexDirection: 'column',
 
-					'& .ss__autocomplete__content__results__wrapper': {
+					'& .ss__autocomplete__content__results': {
 						overflowY: 'auto',
 					},
 					'& .ss__autocomplete__content__results__info': {
 						fontWeight: 'bold',
 						color: theme?.colors?.primary,
 
-						'& .ss__autocomplete__content__results__spacer': {},
+						'& .ss__autocomplete__content__results__spacer': {
+							height: '10px',
+						},
 						'& .ss__autocomplete__content__results__link': {
 							textAlign: 'right',
 							'& a': {
@@ -154,20 +158,20 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	//passed in or default responsive result props
 	const responsive = props.responsive || {
 		0: {
-			numAcross: 2,
-			numRows: 1,
+			columns: 2,
+			rows: 1,
 		},
 		540: {
-			numAcross: 3,
-			numRows: 1,
+			coumns: 3,
+			rows: 1,
 		},
 		768: {
-			numAcross: 4,
-			numRows: 1,
+			columns: 4,
+			rows: 1,
 		},
 		991: {
-			numAcross: 2,
-			numRows: 2,
+			columns: 2,
+			rows: 2,
 		},
 	};
 
@@ -320,8 +324,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							<Banner content={merchandising.content} type={BannerType.LEFT} />
 						</div>
 					) : null}
-					<div className="ss__autocomplete__content__results">
-						<div className="ss__autocomplete__content__results__wrapper">
+					<div className="ss__autocomplete__content__results__wrapper">
+						<div className="ss__autocomplete__content__results">
 							<Banner content={merchandising.content} type={BannerType.HEADER} />
 							<Banner content={merchandising.content} type={BannerType.BANNER} />
 							<Results results={results} {...subProps.results} controller={controller} />

@@ -14,7 +14,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version } from '@searchspring/snap-version';
+import { version } from '@searchspring/snap-toolbox';
 
 import type {
 	SearchControllerConfig,
