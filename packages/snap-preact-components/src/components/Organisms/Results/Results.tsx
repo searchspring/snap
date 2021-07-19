@@ -13,6 +13,7 @@ import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers/theme';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
 	results: ({ columns, gapSize, style }) =>
@@ -57,7 +58,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const { results, disableStyles, className, responsive, style, controller } = props;
+	const { disableStyles, className, responsive, style, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -86,58 +87,13 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		},
 	};
 
-	const settings: ResponsiveEntry = { columns: props.columns, gapSize: props.gapSize, layout: props.layout };
-
-	const [displaySettings, setDisplaySettings] = useState(settings);
-
-	if (responsive) {
-		const getDisplaySettings = (responsive: ResponsiveProps): ResponsiveEntry => {
-			let responsiveSettings: ResponsiveEntry;
-
-			const currentScreenWidth = window.innerWidth;
-			const sortedList = Object.keys(responsive)
-				?.sort((a, b) => parseInt(a) - parseInt(b))
-				.map((vp) => ({ [vp]: responsive[vp] }));
-			if (sortedList.length) {
-				//loop through and find the desired responsive setting
-				for (let i = 0; i < sortedList.length; i++) {
-					const entry = sortedList[i];
-					const breakpoint = parseInt(Object.keys(entry)[0]);
-					const isLastEntry = i + 1 === sortedList.length;
-					const isFirstEntry = i === 0;
-					if (isLastEntry || (isFirstEntry && currentScreenWidth < breakpoint)) {
-						// last entry or a '0' value breakpoint was not provided
-						responsiveSettings = sortedList[i][breakpoint];
-						break;
-					} else {
-						const nextBreakpoint = parseInt(Object.keys(sortedList[i + 1])[0]);
-						if (currentScreenWidth >= breakpoint && currentScreenWidth < nextBreakpoint) {
-							responsiveSettings = sortedList[i][breakpoint];
-							break;
-						}
-					}
-				}
-
-				return responsiveSettings;
-			}
-		};
-
-		useEffect(() => {
-			// Handler to call on window resize
-			function handleResize() {
-				// Set display settings to state
-				setDisplaySettings(getDisplaySettings(responsive));
-			}
-			// Add event listener
-			// TODO: debounce
-			window.addEventListener('resize', handleResize);
-
-			// Call handler right away so state gets updated with initial window size
-			handleResize();
-
-			// Remove event listener on cleanup
-			return () => window.removeEventListener('resize', handleResize);
-		}, []); // Empty array ensures that effect is only run on mount
+	const displaySettings = useDisplaySettings(responsive);
+	console.log('displaySettings', displaySettings);
+	let results;
+	if (displaySettings?.rows > 0) {
+		results = props.results.slice(0, displaySettings.columns * displaySettings.rows);
+	} else {
+		results = props.results;
 	}
 
 	return results?.length ? (
