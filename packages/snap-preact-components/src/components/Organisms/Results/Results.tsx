@@ -44,7 +44,7 @@ const defaultResponsiveProps = {
 export const Results = observer((properties: ResultsProp): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: ResultsProp = {
+	let props: ResultsProp = {
 		// default props
 		results: [],
 		columns: 4,
@@ -59,6 +59,14 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	};
 
 	const { disableStyles, className, responsive, style, controller } = props;
+
+	const displaySettings = useDisplaySettings(responsive);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		props = {
+			...props,
+			...displaySettings,
+		};
+	}
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -87,27 +95,25 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		},
 	};
 
-	const displaySettings = useDisplaySettings(responsive);
-
 	let results;
-	if (displaySettings?.rows > 0) {
-		results = props.results.slice(0, displaySettings.columns * displaySettings.rows);
+	if (props?.columns > 0 && props?.rows > 0) {
+		results = props.results.slice(0, props.columns * props.rows);
 	} else {
 		results = props.results;
 	}
 
 	return results?.length ? (
 		<div
-			css={!disableStyles && CSS.results({ columns: displaySettings.columns, gapSize: displaySettings.gapSize, style })}
+			css={!disableStyles && CSS.results({ columns: props.columns, gapSize: props.gapSize, style })}
 			className={classnames('ss__results', className)}
 		>
 			{results.map((result) =>
 				(() => {
 					switch (result.type) {
 						case BannerType.BANNER:
-							return <InlineBanner {...subProps.inlineBanner} banner={result} layout={displaySettings.layout || props.layout} />;
+							return <InlineBanner {...subProps.inlineBanner} banner={result} layout={props.layout} />;
 						default:
-							return <Result {...subProps.result} result={result} layout={displaySettings.layout || props.layout} controller={controller} />;
+							return <Result {...subProps.result} result={result} layout={props.layout} controller={controller} />;
 					}
 				})()
 			)}
@@ -117,7 +123,8 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 
 export interface ResultsProp extends ComponentProps {
 	results: ResultType[] | InlineBannerContent[];
-	columns: number;
+	columns?: number;
+	rows?: number;
 	gapSize?: string;
 	layout?: LayoutType;
 	responsive?: ResponsiveProps;
@@ -128,12 +135,9 @@ export type ResponsiveProps = {
 	[key: number]: ResponsiveEntry;
 };
 
-export interface ResponsiveEntry {
-	columns: number;
-	rows?: number;
-	gapSize?: string;
-	layout?: LayoutType;
-}
+export type ResponsiveEntry = {
+	[property: string]: any;
+};
 
 interface ResultsSubProps {
 	result: ResultProps;

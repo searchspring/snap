@@ -5,7 +5,8 @@ import { ResponsiveProps, ResponsiveEntry } from '../components/Organisms/Result
 export function useDisplaySettings(responsiveObj: ResponsiveProps): ResponsiveEntry {
 	if (!responsiveObj || !Object.keys(responsiveObj).length) return;
 
-	const [displaySettings, setDisplaySettings] = useState({ columns: 0 });
+	// Call getDisplaySettings right away to prevent flashing
+	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(responsiveObj));
 
 	useEffect(() => {
 		function handleResize() {
@@ -13,14 +14,11 @@ export function useDisplaySettings(responsiveObj: ResponsiveProps): ResponsiveEn
 			setDisplaySettings(getDisplaySettings(responsiveObj));
 		}
 		// Add event listener
-		// TODO: debounce
-		window.addEventListener('resize', handleResize);
-
-		// Call handler right away so state gets updated with initial window size
-		handleResize();
+		const debouncedHandleResize = debounce(() => handleResize());
+		window.addEventListener('resize', debouncedHandleResize);
 
 		// Remove event listener on cleanup
-		return () => window.removeEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', debouncedHandleResize);
 	}, []);
 
 	return displaySettings;
@@ -55,4 +53,14 @@ const getDisplaySettings = (responsive: ResponsiveProps): ResponsiveEntry => {
 
 		return responsiveSettings;
 	}
+};
+
+const debounce = (func, timeout = 200) => {
+	let timer;
+	return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			func.apply(this, args);
+		}, timeout);
+	};
 };

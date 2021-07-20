@@ -122,20 +122,16 @@ List.loaders = [
 
 const responsive = {
 	0: {
-		numAcross: 2,
-		numRows: 1,
+		columns: 1,
 	},
 	540: {
-		numAcross: 3,
-		numRows: 1,
+		columns: 2,
 	},
 	768: {
-		numAcross: 4,
-		numRows: 1,
+		columns: 3,
 	},
 	991: {
-		numAcross: 2,
-		numRows: 2,
+		columns: 4,
 	},
 };
 
