@@ -15,7 +15,7 @@ Snap Toolbox is a dependency of:
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true" />
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true" />
 </details>
 <br>
 

@@ -14,7 +14,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version } from '@searchspring/snap-version';
+import { version } from '@searchspring/snap-toolbox';
 
 import type {
 	SearchControllerConfig,
@@ -29,6 +29,12 @@ import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './
 import type { SnapControllerServices } from './types';
 
 export type SnapConfig = {
+	parameters?: {
+		[paramName: string]: {
+			name: string;
+			type?: string;
+		};
+	};
 	client: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
@@ -79,7 +85,7 @@ export class Snap {
 
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
-		this.logger = new Logger('Snap Preact');
+		this.logger = new Logger('Snap Preact ');
 		this.controllers = {};
 
 		// TODO environment switch using URL?
@@ -99,6 +105,14 @@ export class Snap {
 						try {
 							const cntrlr = this.createController(type, controller.config, controller.services) as SearchController;
 
+							let searched = false;
+							const runSearch = () => {
+								if (!searched) {
+									cntrlr.search();
+									searched = true;
+								}
+							};
+
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
@@ -106,6 +120,7 @@ export class Snap {
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
 								cntrlr.createTargeter(
 									{
 										selector: target.selector,
@@ -114,7 +129,7 @@ export class Snap {
 										inject: target.inject,
 									},
 									(target, elem) => {
-										cntrlr.search();
+										runSearch();
 										const Component = target.component as React.ElementType<{ controller: any }>;
 										render(<Component controller={cntrlr} />, elem);
 									}
@@ -253,9 +268,16 @@ export class Snap {
 	}
 
 	public createController(type: string, config: ControllerConfigs, services?: SnapControllerServices): AbstractController {
+		let translatorConfig;
+		if (this.config.parameters?.search?.name) {
+			translatorConfig = {
+				queryParameter: this.config.parameters?.search?.name,
+			};
+		}
+
 		switch (type) {
 			case 'search': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker);
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new SearchStore({}, { urlManager }),
@@ -265,13 +287,13 @@ export class Snap {
 					logger: services?.logger || new Logger(),
 					tracker: services?.tracker || this.tracker,
 				});
-				cntrlr.init();
+
 				this.controllers[cntrlr.config.id] = cntrlr;
 				return cntrlr;
 			}
 
 			case 'autocomplete': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach();
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach();
 				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new AutocompleteStore({}, { urlManager }),
@@ -281,29 +303,29 @@ export class Snap {
 					logger: services?.logger || new Logger(),
 					tracker: services?.tracker || this.tracker,
 				});
-				cntrlr.init();
+
 				this.controllers[cntrlr.config.id] = cntrlr;
 				return cntrlr;
 			}
 
 			case 'finder': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach(true);
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new FinderController(config as FinderControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new FinderStore({}, { urlManager }),
+					store: services?.store || new FinderStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
 					logger: services?.logger || new Logger(),
 					tracker: services?.tracker || this.tracker,
 				});
-				cntrlr.init();
+
 				this.controllers[cntrlr.config.id] = cntrlr;
 				return cntrlr;
 			}
 
 			case 'recommendation': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach(true);
+				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new RecommendationStore({}, { urlManager }),
@@ -313,7 +335,7 @@ export class Snap {
 					logger: services?.logger || new Logger(),
 					tracker: services?.tracker || this.tracker,
 				});
-				cntrlr.init();
+
 				this.controllers[cntrlr.config.id] = cntrlr;
 				return cntrlr;
 			}

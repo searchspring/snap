@@ -24,7 +24,7 @@ export default {
 	},
 	decorators: [
 		(Story) => (
-			<div>
+			<div style={{ maxWidth: '250px' }}>
 				<Story />
 			</div>
 		),
@@ -96,16 +96,6 @@ export default {
 					summary: 'string',
 				},
 				defaultValue: { summary: FALLBACK_IMAGE_URL },
-			},
-			control: { type: 'text' },
-		},
-		width: {
-			defaultValue: '',
-			description: 'result width, %, px, em',
-			table: {
-				type: {
-					summary: 'string',
-				},
 			},
 			control: { type: 'text' },
 		},

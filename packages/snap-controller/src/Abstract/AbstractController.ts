@@ -5,9 +5,16 @@ import { DomTargeter } from '@searchspring/snap-toolbox';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import { ControllerServices } from '../types';
 
+type PluginFunction = (func: (cntrlr: AbstractController) => Promise<void>) => Promise<void>;
+
 type ControllerConfig = {
 	id: string;
+	on?: {
+		[eventName: string]: Middleware<any> | Middleware<any>[];
+	};
+	use?: PluginFunction | PluginFunction[];
 };
+
 export abstract class AbstractController {
 	public config: ControllerConfig;
 	public client;
@@ -97,6 +104,36 @@ export abstract class AbstractController {
 		}
 		// set environment
 		this.environment = process.env.NODE_ENV as LogMode;
+
+		// TODO: ensure config middleware is proper type
+		// attach config middleware
+		if (this.config.on) {
+			Object.keys(this.config.on).forEach((eventName) => {
+				const events = this.config.on[eventName];
+				let middlewareArray;
+				if (Array.isArray(events)) {
+					middlewareArray = events;
+				} else {
+					middlewareArray = [events];
+				}
+				middlewareArray.forEach((middleware) => {
+					this.on(eventName, middleware);
+				});
+			});
+		}
+
+		if (this.config.use) {
+			let pluginArray;
+			if (Array.isArray(this.config.use)) {
+				pluginArray = this.config.use;
+			} else {
+				pluginArray = [this.config.use];
+			}
+
+			pluginArray.forEach((plugin) => {
+				this.use(plugin);
+			});
+		}
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {

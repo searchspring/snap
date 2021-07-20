@@ -14,11 +14,10 @@ import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 
 const CSS = {
-	result: ({ width, style }) =>
+	result: ({ style }) =>
 		css({
 			display: 'inline-block',
-			maxWidth: width ? 'initial' : '260px',
-			width: width || 'auto',
+			width: 'auto',
 
 			'&.ss__result--grid': {
 				flexDirection: 'column',
@@ -26,8 +25,7 @@ const CSS = {
 			'&.ss__result--list': {
 				flexDirection: 'row',
 				display: 'block',
-				width: width || 'auto',
-				maxWidth: 'initial',
+				width: 'auto',
 
 				'& .ss__result__wrapper': {
 					overflow: 'hidden',
@@ -108,8 +106,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, width, layout, style, controller } =
-		props;
+	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, layout, style, controller } = props;
 
 	const core = result?.mappings?.core;
 
@@ -159,7 +156,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return (
 		core && (
-			<article css={!disableStyles && CSS.result({ width, style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+			<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 				<div className="ss__result__wrapper">
 					<div className="ss__result__wrapper__image">
 						<a
@@ -227,7 +224,6 @@ export interface ResultProps extends ComponentProps {
 	detailSlot?: string | JSX.Element;
 	buttonSlot?: string | JSX.Element;
 	fallback?: string;
-	width?: string;
 	layout?: LayoutType;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }

@@ -25,7 +25,7 @@ Snap Controller is a top-level package that requires the following dependencies 
 <details>
 	<summary>Package dependencies hierarchy</summary>
 	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true"/>
+	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true"/>
 </details>
 
 <br>

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { version } from '@searchspring/snap-version';
+import { version } from '@searchspring/snap-toolbox';
 
 import { BeaconPayload } from './types';
 

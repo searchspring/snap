@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 
 const CSS = {
-	list: ({ theme, style }) =>
+	list: ({ theme, style, hideCheckbox }) =>
 		css({
 			'& .ss__facet-list-options__option': {
 				display: 'flex',
@@ -27,7 +27,7 @@ const CSS = {
 					color: theme.colors?.primary,
 				},
 				'& .ss__facet-list-options__option__value': {
-					marginLeft: '8px',
+					marginLeft: hideCheckbox ? '' : '8px',
 					'& .ss__facet-list-options__option__value__count': {
 						fontSize: '0.8em',
 						marginLeft: '6px',
@@ -70,7 +70,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	return (
 		values?.length && (
-			<div css={!disableStyles && CSS.list({ theme, style })} className={classnames('ss__facet-list-options', className)}>
+			<div css={!disableStyles && CSS.list({ theme, style, hideCheckbox })} className={classnames('ss__facet-list-options', className)}>
 				{values.map((value) => (
 					<a
 						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}

@@ -19,35 +19,58 @@ The required `input` prop expects either:
 - an `<input>` element to bind to
 
 ```jsx
-<Autocomplete store={controller.store} input={'#searchInput'} />
+<Autocomplete controller={controller} input={'#searchInput'} />
 ```
 
-### store
-The required `store` prop specifies a reference to the store.
+### controller
+The required `controller` prop specifies a reference to the autocomplete controller.
 
 ```jsx
-<Autocomplete store={controller.store} input={'#searchInput'} />
+<Autocomplete controller={controller} input={'#searchInput'} />
 ```
 
 ### hideFacets
 The `hideFacets` prop specifies if the facets within autocomplete should be rendered.
 
 ```jsx
-<Autocomplete store={controller.store} input={'#searchInput'} hideFacets={true} />
+<Autocomplete controller={controller} input={'#searchInput'} hideFacets={true} />
 ```
 
 ### hideTerms
 The `hideTerms` prop specifies if the terms within autocomplete should be rendered.
 
 ```jsx
-<Autocomplete store={controller.store} input={'#searchInput'} hideTerms={true} />
+<Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />
 ```
 
 ### responsive
-The `responsive` prop specifiesan object that is passed to the `<Results />` sub-component.
+The `responsive` prop contains a responsive object that is passed to the `<Results />` sub-component.
+
+Default Autocomplete `responsive` object:
+
+```typescript
+const responsive = {
+    0: {
+        columns: 2,
+        rows: 1,
+    },
+    540: {
+        columns: 3,
+        rows: 1,
+    },
+    768: {
+        columns: 4,
+        rows: 1,
+    },
+    991: {
+        columns: 2,
+        rows: 2,
+    },
+};
+```
 
 See `<Results />` component documentation for further details.
 
 ```jsx
-<Autocomplete store={controller.store} input={'#searchInput'} responsive={responsive} />
+<Autocomplete controller={controller} input={'#searchInput'} responsive={responsive} />
 ```

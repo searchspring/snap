@@ -27,8 +27,7 @@
 		"@searchspring/snap-profiler": "^0.3.8",
 		"@searchspring/snap-store-mobx": "^0.3.8",
 		"@searchspring/snap-toolbox": "^0.3.8",
-		"@searchspring/snap-url-manager": "^0.3.8",
-		"@searchspring/snap-version": "^0.3.8"
+		"@searchspring/snap-url-manager": "^0.3.8"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.14"

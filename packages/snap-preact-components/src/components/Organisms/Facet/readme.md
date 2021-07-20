@@ -34,11 +34,11 @@ The `color` prop sets the facet name and icon color.
 <Facet facet={controller.store.facets[0]} color={'#222222'} />
 ```
 
-### optionsLimit
-The `optionsLimit` prop sets the number of options to display before the remaining options overflow and a show more/less button is displayed. 
+### limit
+The `limit` prop sets the number of options to display before the remaining options overflow and a show more/less button is displayed. 
 
 ```jsx
-<Facet facet={controller.store.facets[0]} optionsLimit={10} />
+<Facet facet={controller.store.facets[0]} limit={10} />
 ```
 
 ### previewOnFocus

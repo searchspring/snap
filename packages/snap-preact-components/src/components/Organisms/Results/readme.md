@@ -23,55 +23,52 @@ The `layout` prop specifies if this result will be rendered in a `grid` or `list
 <Results results={controller.store.results} layout={'grid'} />
 ```
 
-### responsive
-An object that modifies the responsive behavior of the `<Result />` sub-components.
+### columns
+The `columns` prop specifies the number of columns to display in a grid layout.
 
-The responsive prop can be used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in. The viewport prop is the number representing the screen size the breakpoint should be used at and below.
-
-For example, if you had `viewport: 480`, those specific responsive settings would be used from 480px wide and below.
-
-`viewport` - required, viewport width when this rule is active
-
-`numAcross` - required, number of columns to display at the given `viewport`
-
-`numRows` - optional, number of rows to display at the given `viewport`
-
-`layout` - optional, layout type `'grid'` or `'list'` at the given `viewport`
-
-```typescript
-const defaultResponsiveOptions = [
-	{
-		viewport: 480,
-		numAcross: 1,
-		layout: 'list',
-	},
-	{
-		viewport: 768,
-		numAcross: 2,
-	},
-	{
-		viewport: 1024,
-		numAcross: 3,
-	},
-	{
-		viewport: 1200,
-		numAcross: 4,
-	},
-]
+```jsx
+<Results results={controller.store.results} columns={4} />
 ```
 
+### rows
+The `rows` prop specifies the number of rows to display in a grid layout.
+
+```jsx
+<Results results={controller.store.results} rows={2} />
+```
+
+### gapSize
+The `gapSize` prop specifies the gap size between each result within a grid layout.
+
+```jsx
+<Results results={controller.store.results} gapSize={'10px'} />
+```
+
+### responsive
+An object that modifies the responsive behavior of the `<Result />` component.
+
+Each entry within the responsive object contains a numeric key of the viewport when the sub-object of props will take effect. Any props listed above can be specified. (ie. columns, rows, layout, gapSize)
+
+Typically used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in.
+
+
+Default Results `responsive` object:
+
 ```typescript
-const responsive = [
-	{
-		viewport: 768,
-		numAcross: 1,
-		layout: 'list',
+const responsive = {
+	0: {
+		columns: 1,
 	},
-	{
-		viewport: 1024,
-		numAcross: 3,
+	540: {
+		columns: 2,
 	},
-]
+	768: {
+		columns: 3,
+	},
+	991: {
+		columns: 4,
+	},
+};
 ```
 
 ```jsx
