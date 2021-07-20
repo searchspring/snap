@@ -208,6 +208,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.refinedValues;
 	} else if ((facet as ValueFacet)?.overflow && limit) {
 		limitedValues = (facet as ValueFacet)?.values.slice(0, limit);
+	} else {
+		limitedValues = (facet as ValueFacet)?.values;
 	}
 
 	return (
