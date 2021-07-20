@@ -9,10 +9,10 @@ type PluginFunction = (func: (cntrlr: AbstractController) => Promise<void>) => P
 
 type ControllerConfig = {
 	id: string;
-	on: {
+	on?: {
 		[eventName: string]: Middleware<any> | Middleware<any>[];
 	};
-	use: PluginFunction | PluginFunction[];
+	use?: PluginFunction | PluginFunction[];
 };
 
 export abstract class AbstractController {
