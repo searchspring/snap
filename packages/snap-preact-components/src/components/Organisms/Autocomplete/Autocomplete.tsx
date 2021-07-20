@@ -162,7 +162,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			rows: 1,
 		},
 		540: {
-			coumns: 3,
+			columns: 3,
 			rows: 1,
 		},
 		768: {
@@ -277,7 +277,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	};
 
 	let inputViewportOffsetBottom;
-	let inputWidth;
 	if (input) {
 		const rect = (input as Element).getBoundingClientRect();
 		inputViewportOffsetBottom = rect.bottom;
