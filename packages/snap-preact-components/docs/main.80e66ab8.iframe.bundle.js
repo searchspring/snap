@@ -1068,7 +1068,7 @@
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
 				emotion_react_browser_esm = __webpack_require__(28165),
-				formatNumber = __webpack_require__(78407),
+				formatNumber = __webpack_require__(96006),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
@@ -2281,7 +2281,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(43469),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(78758),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (__assign =
@@ -2595,7 +2595,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(43469),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(78758),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -3070,7 +3070,7 @@
 			__webpack_require__(43105), __webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Price = __webpack_require__(91490),
+				Price = __webpack_require__(92246),
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -3224,11 +3224,11 @@
 			var CustomCurrency = Template.bind({});
 			CustomCurrency.args = { value: 999.99, symbol: ' €', thousandsSeparator: '.', decimalSeparator: ',', symbolAfter: !0 };
 		},
-		91490: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		92246: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { t: () => Price });
 			__webpack_require__(43105);
-			var formatNumber = __webpack_require__(78407),
+			var formatNumber = __webpack_require__(96006),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -3679,7 +3679,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -4162,7 +4162,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -4539,7 +4539,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -5044,7 +5044,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(40574),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -5626,7 +5626,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -6263,7 +6263,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -6725,7 +6725,7 @@
 				Result = __webpack_require__(48001),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -7149,7 +7149,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
 				_Atoms_Image__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(49680),
 				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93607),
-				_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(91490),
+				_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(92246),
 				_providers_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(32697),
 				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27193),
 				_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20874),
@@ -7666,7 +7666,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -9635,7 +9635,7 @@
 					return (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, (0, emotion_react_browser_esm.tZ)('em', null, term));
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -10011,7 +10011,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11055,7 +11055,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11394,7 +11394,7 @@
 						: null;
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12155,7 +12155,7 @@
 					} else console.error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12540,7 +12540,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(11881),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(43469),
+				snapify = __webpack_require__(78758),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -15660,7 +15660,7 @@
 				);
 			}
 		},
-		43469: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		78758: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -16935,19 +16935,30 @@
 							(_this.track = { product: { click: function click(e, result) {} } }),
 							(_this.searchTrending = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var terms, storedTerms, trendingProfile;
-									return AutocompleteController_generator(this, function (_a) {
-										switch (_a.label) {
+									var terms, storedTerms, trendingProfile, _a, _b;
+									return AutocompleteController_generator(this, function (_c) {
+										switch (_c.label) {
 											case 0:
 												return (storedTerms = this.storage.get('terms')) ? ((terms = JSON.parse(storedTerms)), [3, 3]) : [3, 1];
 											case 1:
-												return (trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start()), [4, this.client.trending()];
+												return (
+													(trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start()),
+													[
+														4,
+														this.client.trending({
+															limit:
+																(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
+																	? void 0
+																	: _b.limit) || 5,
+														}),
+													]
+												);
 											case 2:
-												(terms = _a.sent()),
+												(terms = _c.sent()),
 													trendingProfile.stop(),
 													this.log.profile(trendingProfile),
 													this.storage.set('terms', JSON.stringify(terms)),
-													(_a.label = 3);
+													(_c.label = 3);
 											case 3:
 												return this.store.updateTrendingTerms(terms), [2];
 										}
@@ -16960,10 +16971,6 @@
 									return AutocompleteController_generator(this, function (_c) {
 										switch (_c.label) {
 											case 0:
-												return this.initialized ? [3, 2] : [4, this.init()];
-											case 1:
-												_c.sent(), (_c.label = 2);
-											case 2:
 												if (
 													((params = this.params),
 													!(null === (_b = null === (_a = null == params ? void 0 : params.search) || void 0 === _a ? void 0 : _a.query) ||
@@ -16972,23 +16979,23 @@
 														: _b.string))
 												)
 													return [2];
-												_c.label = 3;
+												_c.label = 1;
+											case 1:
+												_c.trys.push([1, 15, , 16]), (_c.label = 2);
+											case 2:
+												return _c.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 3:
-												_c.trys.push([3, 17, , 18]), (_c.label = 4);
+												return _c.sent(), [3, 5];
 											case 4:
-												return _c.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
-											case 5:
-												return _c.sent(), [3, 7];
-											case 6:
 												if ('cancelled' == (null == (err_1 = _c.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
-											case 7:
+											case 5:
 												return (
 													(searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 													[4, this.client.autocomplete(params)]
 												);
-											case 8:
+											case 6:
 												(response = _c.sent()).meta || (response.meta = this.client.meta),
 													this.config.settings.facets.trim &&
 														(response.facets = response.facets.filter(function (facet) {
@@ -16998,38 +17005,38 @@
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_c.label = 9);
-											case 9:
+													(_c.label = 7);
+											case 7:
 												return (
-													_c.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_c.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
-											case 10:
-												return _c.sent(), [3, 12];
-											case 11:
+											case 8:
+												return _c.sent(), [3, 10];
+											case 9:
 												if ('cancelled' == (null == (err_2 = _c.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
-											case 12:
+											case 10:
 												afterSearchProfile.stop(),
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_c.label = 13);
-											case 13:
+													(_c.label = 11);
+											case 11:
 												return (
-													_c.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_c.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
-											case 14:
-												return _c.sent(), [3, 16];
-											case 15:
+											case 12:
+												return _c.sent(), [3, 14];
+											case 13:
 												if ('cancelled' == (null == (err_3 = _c.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
+											case 14:
+												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
+											case 15:
+												return (err_4 = _c.sent()) && console.error(err_4), [3, 16];
 											case 16:
-												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
-											case 17:
-												return (err_4 = _c.sent()) && console.error(err_4), [3, 18];
-											case 18:
 												return [2];
 										}
 									});
@@ -17110,84 +17117,109 @@
 							});
 						}),
 						(AutocompleteController.prototype.bind = function () {
-							var delayTimeout,
-								_this = this,
-								keyUpEvent = function keyUpEvent(e) {
-									e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
-									var value = e.target.value;
-									(_this.store.state.input = value),
-										_this.config.settings.syncInputs &&
-											inputs.forEach(function (input) {
-												input.value = value;
-											}),
-										clearTimeout(delayTimeout),
-										value
-											? (!e.isTrusted && _this.store.loaded) ||
-											  (delayTimeout = setTimeout(function () {
-													value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
-											  }, 200))
-											: (_this.store.reset(), _this.urlManager.reset().go());
-								},
-								focusEvent = function focusEvent(e) {
-									e.stopPropagation(), _this.setFocused(e.target);
-								},
-								removeVisibleAC = function removeVisibleAC(e) {
-									Array.from(inputs).includes(e.target) || _this.setFocused();
-								},
-								enterKeyEvent = function enterKeyEvent(e) {
-									if (13 == e.keyCode) {
-										var actionUrl = AutocompleteController_utils_url(_this.config.action),
-											input = e.target,
-											query = input.value;
-										!_this.store.loading &&
-											_this.store.search.originalQuery &&
-											((query = _this.store.search.query), actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery })),
-											actionUrl.params.query.push({ key: input.name || _this.urlManager.translator.config.queryParameter, value: query });
-										var newUrl = actionUrl.url();
-										window.location.href = newUrl;
+							var _a, _b;
+							return AutocompleteController_awaiter(this, void 0, void 0, function () {
+								var delayTimeout,
+									keyUpEvent,
+									focusEvent,
+									removeVisibleAC,
+									enterKeyEvent,
+									addHiddenFormInput,
+									formSubmitEvent,
+									inputs,
+									_this = this;
+								return AutocompleteController_generator(this, function (_c) {
+									switch (_c.label) {
+										case 0:
+											return this.initialized ? [3, 2] : [4, this.init()];
+										case 1:
+											_c.sent(), (_c.label = 2);
+										case 2:
+											return (
+												(keyUpEvent = function keyUpEvent(e) {
+													e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
+													var value = e.target.value;
+													(_this.store.state.input = value),
+														_this.config.settings.syncInputs &&
+															inputs.forEach(function (input) {
+																input.value = value;
+															}),
+														clearTimeout(delayTimeout),
+														value
+															? (!e.isTrusted && _this.store.loaded) ||
+															  (delayTimeout = setTimeout(function () {
+																	value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
+															  }, 200))
+															: (_this.store.reset(), _this.urlManager.reset().go());
+												}),
+												(focusEvent = function focusEvent(e) {
+													e.stopPropagation(), _this.setFocused(e.target);
+												}),
+												(removeVisibleAC = function removeVisibleAC(e) {
+													Array.from(inputs).includes(e.target) || _this.setFocused();
+												}),
+												(enterKeyEvent = function enterKeyEvent(e) {
+													if (13 == e.keyCode) {
+														var actionUrl = AutocompleteController_utils_url(_this.config.action),
+															input = e.target,
+															query = input.value;
+														!_this.store.loading &&
+															_this.store.search.originalQuery &&
+															((query = _this.store.search.query),
+															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery })),
+															actionUrl.params.query.push({ key: input.name || _this.urlManager.translator.config.queryParameter, value: query });
+														var newUrl = actionUrl.url();
+														window.location.href = newUrl;
+													}
+												}),
+												(addHiddenFormInput = function addHiddenFormInput(form, name, value) {
+													var inputElem = window.document.createElement('input');
+													(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
+												}),
+												(formSubmitEvent = function formSubmitEvent(e, input) {
+													var form = e.target,
+														query = input.value;
+													!_this.store.loading &&
+														_this.store.search.originalQuery &&
+														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery)),
+														(input.value = query);
+												}),
+												(inputs = document.querySelectorAll(this.config.selector)).forEach(function (input) {
+													input.removeEventListener('keyup', keyUpEvent),
+														input.addEventListener('keyup', keyUpEvent),
+														_this.config.settings.initializeFromUrl && (input.value = _this.store.state.input || ''),
+														document.activeElement === input && _this.setFocused(input),
+														input.removeEventListener('focus', focusEvent),
+														input.addEventListener('focus', focusEvent);
+													var form = input.form,
+														formActionUrl = _this.config.action;
+													if (!form && _this.config.action)
+														input.removeEventListener('keyup', enterKeyEvent), input.addEventListener('keyup', enterKeyEvent);
+													else if (form) {
+														_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action);
+														var inputPasser = function inputPasser(e) {
+															formSubmitEvent(e, input);
+														};
+														form.removeEventListener('submit', inputPasser), form.addEventListener('submit', inputPasser);
+													}
+													formActionUrl &&
+														_this.store.setService(
+															'urlManager',
+															_this.urlManager.withConfig(function (translatorConfig) {
+																return AutocompleteController_assign(AutocompleteController_assign({}, translatorConfig), { urlRoot: formActionUrl });
+															})
+														);
+												}),
+												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
+													? void 0
+													: _b.limit) > 0 && this.searchTrending(),
+												document.removeEventListener('click', removeVisibleAC),
+												document.addEventListener('click', removeVisibleAC),
+												[2]
+											);
 									}
-								},
-								formSubmitEvent = function formSubmitEvent(e, input) {
-									var form = e.target,
-										query = input.value;
-									!_this.store.loading &&
-										_this.store.search.originalQuery &&
-										((query = _this.store.search.query),
-										(function addHiddenFormInput(form, name, value) {
-											var inputElem = window.document.createElement('input');
-											(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
-										})(form, 'oq', _this.store.search.originalQuery)),
-										(input.value = query);
-								},
-								inputs = document.querySelectorAll(this.config.selector);
-							inputs.forEach(function (input) {
-								input.removeEventListener('keyup', keyUpEvent),
-									input.addEventListener('keyup', keyUpEvent),
-									_this.config.settings.initializeFromUrl && (input.value = _this.store.state.input || ''),
-									document.activeElement === input && _this.setFocused(input),
-									input.removeEventListener('focus', focusEvent),
-									input.addEventListener('focus', focusEvent);
-								var form = input.form,
-									formActionUrl = _this.config.action;
-								if (!form && _this.config.action) input.removeEventListener('keyup', enterKeyEvent), input.addEventListener('keyup', enterKeyEvent);
-								else if (form) {
-									_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action);
-									var inputPasser = function inputPasser(e) {
-										formSubmitEvent(e, input);
-									};
-									form.removeEventListener('submit', inputPasser), form.addEventListener('submit', inputPasser);
-								}
-								formActionUrl &&
-									_this.store.setService(
-										'urlManager',
-										_this.urlManager.withConfig(function (translatorConfig) {
-											return AutocompleteController_assign(AutocompleteController_assign({}, translatorConfig), { urlRoot: formActionUrl });
-										})
-									);
-							}),
-								this.searchTrending(),
-								document.removeEventListener('click', removeVisibleAC),
-								document.addEventListener('click', removeVisibleAC);
+								});
+							});
 						}),
 						AutocompleteController
 					);
@@ -22266,7 +22298,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.8' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.9' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22293,7 +22325,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.8');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.9');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22853,7 +22885,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: ' v0.3.8',
+								text: ' v0.3.9',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -22896,22 +22928,24 @@
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
 														cntrlr_2.createTargeter(
 															{
-																selector: cntrlr_2.config.selector,
+																selector: target.selector,
 																component: target.component,
 																hideTarget: target.hideTarget,
-																inject: target.inject || {
-																	action: 'after',
-																	element: function element(target, origElement) {
-																		var acContainer = document.createElement('div');
-																		return (
-																			(acContainer.className = 'ss-ac-target'),
-																			acContainer.addEventListener('click', function (e) {
-																				e.stopPropagation();
-																			}),
-																			acContainer
-																		);
-																	},
-																},
+																inject: target.hasOwnProperty('inject')
+																	? target.inject
+																	: {
+																			action: 'after',
+																			element: function element(target, origElement) {
+																				var acContainer = document.createElement('div');
+																				return (
+																					(acContainer.className = 'ss-ac-target'),
+																					acContainer.addEventListener('click', function (e) {
+																						e.stopPropagation();
+																					}),
+																					acContainer
+																				);
+																			},
+																	  },
 															},
 															function (target, injectedElem, inputElem) {
 																var _a;
@@ -23367,7 +23401,7 @@
 			'use strict';
 			__webpack_require__(44595);
 		},
-		78407: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		96006: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { u: () => formatNumber });
 			__webpack_require__(43105),
@@ -24321,4 +24355,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.6721a7aa.iframe.bundle.js.map
+//# sourceMappingURL=main.80e66ab8.iframe.bundle.js.map
