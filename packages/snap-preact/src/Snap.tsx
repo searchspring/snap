@@ -154,20 +154,22 @@ export class Snap {
 								}
 								cntrlr.createTargeter(
 									{
-										selector: cntrlr.config.selector,
+										selector: target.selector,
 										component: target.component,
 										hideTarget: target.hideTarget,
-										inject: target.inject || {
-											action: 'after', // before, after, append, prepend
-											element: (target, origElement) => {
-												const acContainer = document.createElement('div');
-												acContainer.className = 'ss-ac-target';
-												acContainer.addEventListener('click', (e) => {
-													e.stopPropagation();
-												});
-												return acContainer;
-											},
-										},
+										inject: target.hasOwnProperty('inject')
+											? target.inject
+											: {
+													action: 'after', // before, after, append, prepend
+													element: (target, origElement) => {
+														const acContainer = document.createElement('div');
+														acContainer.className = 'ss-ac-target';
+														acContainer.addEventListener('click', (e) => {
+															e.stopPropagation();
+														});
+														return acContainer;
+													},
+											  },
 									},
 									(target, injectedElem, inputElem) => {
 										cntrlr.bind();

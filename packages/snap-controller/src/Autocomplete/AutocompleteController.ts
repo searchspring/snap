@@ -123,7 +123,11 @@ export class AutocompleteController extends AbstractController {
 		}
 	}
 
-	bind(): void {
+	async bind(): Promise<void> {
+		if (!this.initialized) {
+			await this.init();
+		}
+
 		let delayTimeout;
 
 		const keyUpEvent = (e) => {
@@ -266,7 +270,10 @@ export class AutocompleteController extends AbstractController {
 				);
 			}
 		});
-		this.searchTrending();
+
+		if (this.config.settings?.trending?.limit > 0) {
+			this.searchTrending();
+		}
 
 		document.removeEventListener('click', removeVisibleAC);
 		document.addEventListener('click', removeVisibleAC);
@@ -281,7 +288,9 @@ export class AutocompleteController extends AbstractController {
 		} else {
 			// query for trending terms, save to storage, update store
 			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start();
-			terms = await this.client.trending();
+			terms = await this.client.trending({
+				limit: this.config.settings?.trending?.limit || 5,
+			});
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
 			this.storage.set('terms', JSON.stringify(terms));
@@ -290,10 +299,6 @@ export class AutocompleteController extends AbstractController {
 	};
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
-
 		const params = this.params;
 
 		if (!params?.search?.query?.string) {
