@@ -65,6 +65,9 @@ export type AutocompleteControllerConfig = {
 		facets?: {
 			trim?: boolean;
 		};
+		trending?: {
+			limit: number;
+		};
 	};
 };
 

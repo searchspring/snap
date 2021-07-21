@@ -245,8 +245,8 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		controller.init();
-		controller.bind();
+		await controller.init();
+		await controller.bind();
 		jest.spyOn(controller, 'setFocused');
 		jest.spyOn(controller.store, 'reset');
 		jest.spyOn(controller.urlManager, 'reset');

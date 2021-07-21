@@ -61,10 +61,15 @@ const config = {
 				config: {
 					id: 'autocomplete',
 					selector: 'input.searchspring-ac',
+					settings: {
+						trending: {
+							limit: 5,
+						},
+					},
 				},
 				targets: [
 					{
-						selector: '.ss-ac-target',
+						selector: 'input.searchspring-ac',
 						component: Autocomplete,
 						hideTarget: true,
 					},
