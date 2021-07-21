@@ -27,6 +27,7 @@
 		"@searchspring/snap-profiler": "^0.3.10",
 		"@searchspring/snap-store-mobx": "^0.3.10",
 		"@searchspring/snap-toolbox": "^0.3.10",
+		"@searchspring/snap-tracker": "^0.3.10",
 		"@searchspring/snap-url-manager": "^0.3.10"
 	},
 	"devDependencies": {
