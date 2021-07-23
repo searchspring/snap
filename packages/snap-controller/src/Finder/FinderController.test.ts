@@ -74,7 +74,7 @@ describe('Finder Controller', () => {
 		const field = firstSelection.field;
 		const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
 
-		spyOn(controller, 'search');
+		jest.spyOn(controller, 'search');
 		controller.store.selections[0].select(valueToSelect);
 		expect(controller.search).toHaveBeenCalled();
 
@@ -105,7 +105,7 @@ describe('Finder Controller', () => {
 		const field = firstSelection.field;
 		const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
 
-		spyOn(controller, 'search');
+		jest.spyOn(controller, 'search');
 		controller.store.selections[0].select(valueToSelect);
 		expect(controller.search).toHaveBeenCalled();
 
