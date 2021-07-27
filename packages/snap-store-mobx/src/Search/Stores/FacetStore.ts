@@ -225,7 +225,7 @@ class ValueFacet extends Facet {
 
 		if (this.search.input) {
 			const search = new RegExp(escapeRegExp(this.search.input), 'i');
-			values = this.values.filter((value) => value.label.match(search));
+			values = this.values.filter((value) => String(value.label).match(search));
 		}
 
 		if (this.overflow.enabled && this.overflow.limited) {
