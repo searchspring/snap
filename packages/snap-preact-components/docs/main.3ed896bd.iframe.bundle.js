@@ -15675,6 +15675,7 @@
 				__webpack_require__(85371),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
+				__webpack_require__(43105),
 				__webpack_require__(38695),
 				__webpack_require__(1939),
 				__webpack_require__(34769),
@@ -15686,7 +15687,6 @@
 				cjs =
 					(__webpack_require__(52506),
 					__webpack_require__(47256),
-					__webpack_require__(43105),
 					__webpack_require__(45794),
 					__webpack_require__(95342),
 					__webpack_require__(85940),
@@ -22298,7 +22298,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.11' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.12' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22325,7 +22325,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.11');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.12');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22859,6 +22859,15 @@
 						RecommendationInstantiator
 					);
 				})(),
+				Snap_assign = function () {
+					return (Snap_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
 				Snap = (function () {
 					function Snap(config) {
 						var _a,
@@ -22885,7 +22894,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: ' v0.3.11',
+								text: ' v0.3.12',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -22902,13 +22911,26 @@
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
 														cntrlr_1.createTargeter(
-															{ selector: target.selector, component: target.component, hideTarget: target.hideTarget, inject: target.inject },
-															function (target, elem) {
-																!(function runSearch_1() {
-																	searched_1 || (cntrlr_1.search(), (searched_1 = !0));
-																})();
+															{
+																selector: target.selector,
+																component: target.component,
+																props: target.props,
+																controller: cntrlr_1,
+																hideTarget: target.hideTarget,
+																inject: target.inject,
+																onTarget: target.onTarget,
+															},
+															function (target, elem, originalElem) {
+																var onTarget = target.onTarget;
+																onTarget && onTarget(target, elem, originalElem),
+																	(function runSearch_1() {
+																		searched_1 || (cntrlr_1.search(), (searched_1 = !0));
+																	})();
 																var Component = target.component;
-																(0, preact_module.sY)((0, jsxRuntime_module.tZ)(Component, { controller: cntrlr_1 }, void 0), elem);
+																(0, preact_module.sY)(
+																	(0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0),
+																	elem
+																);
 															}
 														);
 													});
@@ -22930,6 +22952,8 @@
 															{
 																selector: target.selector,
 																component: target.component,
+																props: target.props,
+																controller: cntrlr_2,
 																hideTarget: target.hideTarget,
 																inject: target.hasOwnProperty('inject')
 																	? target.inject
@@ -22938,7 +22962,7 @@
 																			element: function element(target, origElement) {
 																				var acContainer = document.createElement('div');
 																				return (
-																					(acContainer.className = 'ss-ac-target'),
+																					(acContainer.className = 'ss__autocomplete--target'),
 																					acContainer.addEventListener('click', function (e) {
 																						e.stopPropagation();
 																					}),
@@ -22946,21 +22970,27 @@
 																				);
 																			},
 																	  },
+																onTarget: target.onTarget,
 															},
-															function (target, injectedElem, inputElem) {
-																var _a;
-																cntrlr_2.bind();
+															function (target, elem, originalElem) {
+																var _a,
+																	onTarget = target.onTarget;
+																onTarget && onTarget(target, elem, originalElem), cntrlr_2.bind();
 																var Component = target.component;
 																(0, preact_module.sY)(
 																	(0, jsxRuntime_module.tZ)(
 																		Component,
-																		{
-																			controller: cntrlr_2,
-																			input: null === (_a = null == controller ? void 0 : controller.config) || void 0 === _a ? void 0 : _a.selector,
-																		},
+																		Snap_assign(
+																			{
+																				controller: cntrlr_2,
+																				input:
+																					null === (_a = null == controller ? void 0 : controller.config) || void 0 === _a ? void 0 : _a.selector,
+																			},
+																			target.props
+																		),
 																		void 0
 																	),
-																	injectedElem
+																	elem
 																);
 															}
 														);
@@ -22974,18 +23004,34 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_3 = _this.createController(type, controller.config, controller.services);
+												var cntrlr_3 = _this.createController(type, controller.config, controller.services),
+													searched_2 = !1;
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
 														cntrlr_3.createTargeter(
-															{ selector: target.selector, component: target.component, hideTarget: target.hideTarget, inject: target.inject },
-															function (target, elem) {
-																cntrlr_3.search();
+															{
+																selector: target.selector,
+																component: target.component,
+																props: target.props,
+																controller: cntrlr_3,
+																hideTarget: target.hideTarget,
+																inject: target.inject,
+																onTarget: target.onTarget,
+															},
+															function (target, elem, originalElem) {
+																var onTarget = target.onTarget;
+																onTarget && onTarget(target, elem, originalElem),
+																	(function runSearch_2() {
+																		searched_2 || (cntrlr_3.search(), (searched_2 = !0));
+																	})();
 																var Component = target.component;
-																(0, preact_module.sY)((0, jsxRuntime_module.tZ)(Component, { controller: cntrlr_3 }, void 0), elem);
+																(0, preact_module.sY)(
+																	(0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0),
+																	elem
+																);
 															}
 														);
 													});
@@ -22998,18 +23044,34 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_4 = _this.createController(type, controller.config, controller.services);
+												var cntrlr_4 = _this.createController(type, controller.config, controller.services),
+													searched_3 = !1;
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
 														cntrlr_4.createTargeter(
-															{ selector: target.selector, component: target.component, hideTarget: target.hideTarget, inject: target.inject },
-															function (target, elem) {
-																cntrlr_4.search();
+															{
+																selector: target.selector,
+																component: target.component,
+																props: target.props,
+																controller: cntrlr_4,
+																hideTarget: target.hideTarget,
+																inject: target.inject,
+																onTarget: target.onTarget,
+															},
+															function (target, elem, originalElem) {
+																var onTarget = target.onTarget;
+																onTarget && onTarget(target, elem, originalElem),
+																	(function runSearch_3() {
+																		searched_3 || (cntrlr_4.search(), (searched_3 = !0));
+																	})();
 																var Component = target.component;
-																(0, preact_module.sY)((0, jsxRuntime_module.tZ)(Component, { controller: cntrlr_4 }, void 0), elem);
+																(0, preact_module.sY)(
+																	(0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0),
+																	elem
+																);
 															}
 														);
 													});
@@ -24355,4 +24417,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.13f39fd9.iframe.bundle.js.map
+//# sourceMappingURL=main.3ed896bd.iframe.bundle.js.map
