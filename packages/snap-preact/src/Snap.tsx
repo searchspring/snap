@@ -23,7 +23,7 @@ import type {
 	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
-import type { Target } from '@searchspring/snap-toolbox';
+import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { SnapControllerServices } from './types';
@@ -125,13 +125,20 @@ export class Snap {
 									{
 										selector: target.selector,
 										component: target.component,
+										props: target.props,
+										controller: cntrlr,
 										hideTarget: target.hideTarget,
 										inject: target.inject,
+										onTarget: target.onTarget,
 									},
-									(target, elem) => {
+									(target, elem, originalElem) => {
+										const onTarget = target.onTarget as OnTarget;
+										onTarget && onTarget(target, elem, originalElem);
+
 										runSearch();
+
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} />, elem);
+										render(<Component controller={cntrlr} {...target.props} />, elem);
 									}
 								);
 							});
@@ -156,6 +163,8 @@ export class Snap {
 									{
 										selector: target.selector,
 										component: target.component,
+										props: target.props,
+										controller: cntrlr,
 										hideTarget: target.hideTarget,
 										inject: target.hasOwnProperty('inject')
 											? target.inject
@@ -163,18 +172,23 @@ export class Snap {
 													action: 'after', // before, after, append, prepend
 													element: (target, origElement) => {
 														const acContainer = document.createElement('div');
-														acContainer.className = 'ss-ac-target';
+														acContainer.className = 'ss__autocomplete--target';
 														acContainer.addEventListener('click', (e) => {
 															e.stopPropagation();
 														});
 														return acContainer;
 													},
 											  },
+										onTarget: target.onTarget,
 									},
-									(target, injectedElem, inputElem) => {
+									(target, elem, originalElem) => {
+										const onTarget = target.onTarget as OnTarget;
+										onTarget && onTarget(target, elem, originalElem);
+
 										cntrlr.bind();
+
 										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
-										render(<Component controller={cntrlr} input={controller?.config?.selector} />, injectedElem);
+										render(<Component controller={cntrlr} input={controller?.config?.selector} {...target.props} />, elem);
 									}
 								);
 							});
@@ -191,6 +205,14 @@ export class Snap {
 						try {
 							const cntrlr = this.createController(type, controller.config, controller.services) as FinderController;
 
+							let searched = false;
+							const runSearch = () => {
+								if (!searched) {
+									cntrlr.search();
+									searched = true;
+								}
+							};
+
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
@@ -202,13 +224,20 @@ export class Snap {
 									{
 										selector: target.selector,
 										component: target.component as any,
+										props: target.props,
+										controller: cntrlr,
 										hideTarget: target.hideTarget,
 										inject: target.inject,
+										onTarget: target.onTarget,
 									},
-									(target, elem) => {
-										cntrlr.search();
+									(target, elem, originalElem) => {
+										const onTarget = target.onTarget as OnTarget;
+										onTarget && onTarget(target, elem, originalElem);
+
+										runSearch();
+
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} />, elem);
+										render(<Component controller={cntrlr} {...target.props} />, elem);
 									}
 								);
 							});
@@ -225,6 +254,14 @@ export class Snap {
 						try {
 							const cntrlr = this.createController(type, controller.config, controller.services) as RecommendationController;
 
+							let searched = false;
+							const runSearch = () => {
+								if (!searched) {
+									cntrlr.search();
+									searched = true;
+								}
+							};
+
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
@@ -236,13 +273,20 @@ export class Snap {
 									{
 										selector: target.selector,
 										component: target.component,
+										props: target.props,
+										controller: cntrlr,
 										hideTarget: target.hideTarget,
 										inject: target.inject,
+										onTarget: target.onTarget,
 									},
-									(target, elem) => {
-										cntrlr.search();
+									(target, elem, originalElem) => {
+										const onTarget = target.onTarget as OnTarget;
+										onTarget && onTarget(target, elem, originalElem);
+
+										runSearch();
+
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} />, elem);
+										render(<Component controller={cntrlr} {...target.props} />, elem);
 									}
 								);
 							});
