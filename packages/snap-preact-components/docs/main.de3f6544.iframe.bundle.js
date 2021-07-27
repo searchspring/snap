@@ -20026,7 +20026,7 @@
 										'i'
 									);
 									values = this.values.filter(function (value) {
-										return value.label.match(search_1);
+										return String(value.label).match(search_1);
 									});
 								}
 								return this.overflow.enabled && this.overflow.limited && (values = values.slice(0, this.overflow.limit)), values;
@@ -22298,7 +22298,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.12' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.13' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22325,7 +22325,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.12');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.13');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22894,7 +22894,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: ' v0.3.12',
+								text: ' v0.3.13',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24417,4 +24417,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.3ed896bd.iframe.bundle.js.map
+//# sourceMappingURL=main.de3f6544.iframe.bundle.js.map
