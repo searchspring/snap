@@ -55,7 +55,7 @@ transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
 		return {
 			...coreFields,
-			[key]: rawResult[key],
+			[key]: decodeProperty(rawResult[key]),
 		};
 	}, {});
 
