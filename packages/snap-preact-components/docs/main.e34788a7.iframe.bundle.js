@@ -18758,6 +18758,13 @@
 					transformSearchResponse.search(response, request)
 				);
 			}
+			function decodeProperty(encoded) {
+				return Array.isArray(encoded)
+					? encoded.map(function (item) {
+							return he_default().decode(String(item));
+					  })
+					: he_default().decode(String(encoded));
+			}
 			(transformSearchResponse.pagination = function (response) {
 				var pagination = (response || {}).pagination || {};
 				return {
@@ -18775,7 +18782,7 @@
 				(transformSearchResponse.result = function (rawResult) {
 					var coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
 						var _a;
-						return searchResponse_assign(searchResponse_assign({}, coreFields), (((_a = {})[key] = rawResult[key]), _a));
+						return searchResponse_assign(searchResponse_assign({}, coreFields), (((_a = {})[key] = decodeProperty(rawResult[key])), _a));
 					}, {});
 					(coreFieldValues.price = +coreFieldValues.price), (coreFieldValues.msrp = +coreFieldValues.msrp);
 					var attributes = Object.keys(rawResult)
@@ -18784,17 +18791,7 @@
 						})
 						.reduce(function (attributes, key) {
 							var _a;
-							return searchResponse_assign(
-								searchResponse_assign({}, attributes),
-								(((_a = {})[key] = (function decodeProperty(encoded) {
-									return Array.isArray(encoded)
-										? encoded.map(function (item) {
-												return he_default().decode(String(item));
-										  })
-										: he_default().decode(String(encoded));
-								})(rawResult[key])),
-								_a)
-							);
+							return searchResponse_assign(searchResponse_assign({}, attributes), (((_a = {})[key] = decodeProperty(rawResult[key])), _a));
 						}, {});
 					return new Result({ id: rawResult.uid, mappings: { core: coreFieldValues }, attributes });
 				}),
@@ -22300,7 +22297,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.14' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.15' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22327,7 +22324,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.14');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.15');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22896,7 +22893,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: ' v0.3.14',
+								text: '[0.3.15]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24419,4 +24416,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.bfe23e45.iframe.bundle.js.map
+//# sourceMappingURL=main.e34788a7.iframe.bundle.js.map
