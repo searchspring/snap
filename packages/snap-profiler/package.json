@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-profiler",
-	"version": "0.3.15",
+	"version": "0.3.16",
 	"description": "Snap Profiler",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
