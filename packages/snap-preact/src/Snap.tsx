@@ -94,7 +94,7 @@ export class Snap {
 		// log version
 		this.logger.imageText({
 			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-			text: ` v${version}`,
+			text: `[${version}]`,
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
 
