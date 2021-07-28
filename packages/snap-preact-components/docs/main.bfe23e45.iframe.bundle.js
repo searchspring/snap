@@ -20414,8 +20414,10 @@
 								.map(function (option, index) {
 									return (
 										(option.active = !1),
-										((activeSort_1 && activeSort_1.field == option.field && activeSort_1.direction == option.direction) || 0 === index) &&
-											(option.active = !0),
+										activeSort_1 && activeSort_1.field == option.field && activeSort_1.direction == option.direction
+											? (option.active = !0)
+											: activeSort_1 || 0 !== index || (option.active = !0),
+										(option.default = !1),
 										0 === index && (option.default = !0),
 										new Option(services, option)
 									);
@@ -22298,7 +22300,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.13' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.14' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22325,7 +22327,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.13');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.14');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22894,7 +22896,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: ' v0.3.13',
+								text: ' v0.3.14',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24417,4 +24419,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.de3f6544.iframe.bundle.js.map
+//# sourceMappingURL=main.bfe23e45.iframe.bundle.js.map
