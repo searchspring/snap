@@ -1,8 +1,4 @@
 import { makeObservable, observable, toJS, configure } from 'mobx';
-import { AutocompleteStore } from '../Autocomplete/AutocompleteStore';
-import { FinderStore } from '../Finder/FinderStore';
-import { RecommendationStore } from '../Recommendation/RecommendationStore';
-import { SearchStore } from '../Search/SearchStore';
 
 configure({
 	// useProxies: "never",  // for IE 11 (es5) support
