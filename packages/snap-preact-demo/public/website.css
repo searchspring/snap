@@ -709,10 +709,6 @@ input[type='text'] {
   .ss-lite-footer .ss-lite-col, .ss-lite-footer .ss-lite-footer-information {
     width: auto; } }
 
-
-.ss-toolbar-row {
-  overflow: hidden;
-}
 .ss-toolbar-col {
   display: inline-block;
   margin: 10px;
