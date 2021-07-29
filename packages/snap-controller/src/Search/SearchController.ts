@@ -75,8 +75,8 @@ export class SearchController extends AbstractController {
 
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
 			const stringyParams = JSON.stringify(search.request);
-			this.storage.set('lastStringyParams', stringyParams);
 			const scrollMap = this.storage.get('scrollMap') || {};
+			this.storage.set('lastStringyParams', stringyParams);
 
 			if (scrollMap[stringyParams]) {
 				setTimeout(() => {
@@ -93,9 +93,9 @@ export class SearchController extends AbstractController {
 			click: (e: MouseEvent, result): BeaconEvent => {
 				// store scroll position
 				const stringyParams = this.storage.get('lastStringyParams');
-				const scrollMap = this.storage.get('ssScrollMap') || {};
+				const scrollMap = this.storage.get('scrollMap') || {};
 				scrollMap[stringyParams] = window.scrollY.toString();
-				this.storage.set('ssScrollMap', scrollMap);
+				this.storage.set('scrollMap', scrollMap);
 
 				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
