@@ -22,6 +22,9 @@ export type SearchControllerConfig = {
 		facets?: {
 			trim?: boolean;
 		};
+		infinite?: {
+			backfill: boolean;
+		};
 	};
 };
 
@@ -37,6 +40,8 @@ export type AfterSearchObj = {
 
 export type AfterStoreObj = {
 	controller: AbstractController;
+	request: any;
+	response: any;
 };
 
 /** Finder */

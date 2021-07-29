@@ -27,5 +27,6 @@ function mutateFacets(facets) {
 function mutateResults(results) {
 	for (let result of results) {
 		result.mappings.core.name += '++';
+		result.mappings.core.url = '/product.html';
 	}
 }

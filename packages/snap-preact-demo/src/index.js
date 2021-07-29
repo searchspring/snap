@@ -40,6 +40,9 @@ const config = {
 						redirects: {
 							merchandising: false,
 						},
+						infinite: {
+							backfill: true,
+						},
 					},
 				},
 				targets: [
@@ -108,4 +111,4 @@ search.on('afterStore', async ({ controller }, next) => {
 search.use(afterStore);
 
 // using a function
-search.on('afterStore', scrollToTop);
+// search.on('afterStore', scrollToTop);

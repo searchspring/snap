@@ -6,6 +6,7 @@ import { StorageStore } from '../Storage/StorageStore';
 export class SearchStore extends AbstractStore {
 	config;
 	services;
+	public data: any;
 	public meta = {};
 	public merchandising: MerchandisingStore;
 	public search: QueryStore;
@@ -41,6 +42,7 @@ export class SearchStore extends AbstractStore {
 	}
 
 	update(data): void {
+		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 		this.merchandising = new MerchandisingStore(this.services, data.merchandising);

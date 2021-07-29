@@ -111,9 +111,9 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 				(() => {
 					switch (result.type) {
 						case BannerType.BANNER:
-							return <InlineBanner {...subProps.inlineBanner} banner={result} layout={props.layout} />;
+							return <InlineBanner key={result.uid} {...subProps.inlineBanner} banner={result} layout={props.layout} />;
 						default:
-							return <Result {...subProps.result} result={result} layout={props.layout} controller={controller} />;
+							return <Result key={result.uid} {...subProps.result} result={result} layout={props.layout} controller={controller} />;
 					}
 				})()
 			)}

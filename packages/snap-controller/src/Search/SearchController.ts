@@ -1,10 +1,11 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -28,12 +29,18 @@ type SearchTrackMethods = {
 
 export class SearchController extends AbstractController {
 	config: SearchControllerConfig;
+	storage: StorageStore;
 
 	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+
+		this.storage = new StorageStore({
+			type: StorageType.SESSION,
+			key: `ss-controller-${this.config.id}`,
+		});
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -65,11 +72,32 @@ export class SearchController extends AbstractController {
 			}
 			search.controller.store.loading = false;
 		});
+
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+			const stringyParams = JSON.stringify(search.request);
+			this.storage.set('lastStringyParams', stringyParams);
+			const scrollMap = this.storage.get('scrollMap') || {};
+
+			if (scrollMap[stringyParams]) {
+				setTimeout(() => {
+					window.scrollTo(0, scrollMap[stringyParams]);
+				});
+			}
+
+			next();
+		});
 	}
 
 	track: SearchTrackMethods = {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent => {
+				// store scroll position
+				const stringyParams = this.storage.get('lastStringyParams');
+				const scrollMap = this.storage.get('ssScrollMap') || {};
+				scrollMap[stringyParams] = window.scrollY.toString();
+				this.storage.set('ssScrollMap', scrollMap);
+
+				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
 				const target = e.target as HTMLAnchorElement;
 				const href = target?.href || result.mappings.core?.url || undefined;
@@ -148,6 +176,29 @@ export class SearchController extends AbstractController {
 
 					return true;
 				});
+			}
+
+			// infinite functionality
+			// if params.page > 1 and infinite setting exists we should append results
+			if (params.pagination?.page > 1 && this.config.settings.infinite) {
+				// if no results fetch results...
+				let previousResults = this.store.data?.results || [];
+				if (this.config.settings.infinite.backfill && !previousResults.length) {
+					// figure out how many pages of results to backfill and wait on all responses
+					const backfills = [];
+					for (let page = 0; page < params.pagination.page; page++) {
+						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
+						backfills.push(this.client.search(backfillParams));
+					}
+
+					const backfillResponses = await Promise.all(backfills);
+					backfillResponses.map((data) => {
+						previousResults = previousResults.concat(data.results);
+					});
+				}
+
+				response.results = [...previousResults, ...(response.results || [])];
+				console.log('results:', response.results);
 			}
 
 			searchProfile.stop();
