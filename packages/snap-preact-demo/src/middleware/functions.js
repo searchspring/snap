@@ -1,5 +1,8 @@
 export async function scrollToTop(search, next) {
-	window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+	if (!search.controller.config.settings?.infinite || search.controller.store.pagination?.page == 1) {
+		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+	}
+
 	await next();
 }
 

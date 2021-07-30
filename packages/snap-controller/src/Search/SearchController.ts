@@ -7,6 +7,33 @@ import { getSearchParams } from '../utils/getParams';
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 
+const HEIGHT_CHECK_INTERVAL = 50;
+
+const buildQuerySelector = (elem) => {
+	const path = [];
+	let parent;
+	while ((parent = elem.parentNode)) {
+		const tag = elem.tagName;
+		let siblings;
+		const classes = Array.from(elem.classList.values());
+		const classStr = classes.length ? `.${classes.join('.')}` : '';
+		path.unshift(
+			elem.id
+				? `#${elem.id}`
+				: ((siblings = parent.children),
+				  [].filter.call(
+						siblings,
+						(sibling) => sibling.tagName === tag && JSON.stringify(classes.sort()) === JSON.stringify(Array.from(sibling.classList.values()).sort())
+				  ).length === 1
+						? `${tag}${classStr}`
+						: `${tag}${classStr}:nth-child(${1 + [].indexOf.call(siblings, elem)})`)
+		);
+		if (elem.tagName == 'BODY') break;
+		elem = parent;
+	}
+	return `${path.join(' > ')}`;
+};
+
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
 	globals: {},
@@ -46,13 +73,20 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
 			search.controller.store.loading = true;
 
+			const stringyParams = JSON.stringify(search.request);
+			const scrollMap = this.storage.get('scrollMap') || {};
+			this.storage.set('lastStringyParams', stringyParams);
+			// interval we ony need to keep checking until the page height > than our stored value
+			const scrollToPosition = scrollMap[stringyParams];
+			if (scrollToPosition) {
+				window.history.scrollRestoration = 'manual';
+			}
+
 			await next();
 		});
 
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-			await next();
-
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
 
@@ -70,21 +104,48 @@ export class SearchController extends AbstractController {
 				window.location.replace(search?.response.results[0].mappings.core.url);
 				return false;
 			}
-			search.controller.store.loading = false;
+
+			await next();
 		});
 
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
+
 			const stringyParams = JSON.stringify(search.request);
 			const scrollMap = this.storage.get('scrollMap') || {};
-			this.storage.set('lastStringyParams', stringyParams);
 
-			if (scrollMap[stringyParams]) {
-				setTimeout(() => {
-					window.scrollTo(0, scrollMap[stringyParams]);
-				});
+			// if (scrollMap[stringyParams]) {
+			// 	setTimeout(() => {
+			// 		window.scrollTo(0, scrollMap[stringyParams]);
+			// 		this.log.debug('scrolling to: ', scrollMap[stringyParams]);
+			// 	});
+			// }
+
+			// interval we ony need to keep checking until the page height > than our stored value
+			const scrollToPosition = scrollMap[stringyParams];
+			if (scrollToPosition) {
+				const heightCheck = window.setInterval(() => {
+					if (document.documentElement.scrollHeight >= scrollToPosition) {
+						window.scrollTo(0, scrollToPosition);
+						this.log.debug('scrolling to: ', scrollMap[stringyParams]);
+						window.clearInterval(heightCheck);
+					}
+				}, HEIGHT_CHECK_INTERVAL);
 			}
 
-			next();
+			// scroll into view by path
+			// const scrollToPath = scrollMap[stringyParams];
+			// this.log.debug('restore path: ', scrollToPath);
+			// if (scrollToPath) {
+			// 	window.history.scrollRestoration = 'manual';
+			// 	setTimeout(() => {
+			// 		const scrollToElement = document.querySelector(scrollToPath);
+			// 		this.log.debug('restore path element: ', scrollToElement);
+			// 		scrollToElement && scrollToElement.scrollIntoView();
+			// 	});
+			// }
+
+			search.controller.store.loading = false;
 		});
 	}
 
@@ -92,9 +153,17 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent => {
 				// store scroll position
+				console.log('e:', e);
+				console.log('height at click: ', window.scrollY);
+
+				// const path = buildQuerySelector(e.target.parentElement);
+				// console.log('path:', path);
+
 				const stringyParams = this.storage.get('lastStringyParams');
-				const scrollMap = this.storage.get('scrollMap') || {};
-				scrollMap[stringyParams] = window.scrollY.toString();
+				const scrollMap = {};
+				// scrollMap[stringyParams] = path;
+				scrollMap[stringyParams] = window.scrollY;
+
 				this.storage.set('scrollMap', scrollMap);
 
 				// track

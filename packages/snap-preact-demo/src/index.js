@@ -111,4 +111,4 @@ search.on('afterStore', async ({ controller }, next) => {
 search.use(afterStore);
 
 // using a function
-// search.on('afterStore', scrollToTop);
+search.on('afterStore', scrollToTop);
