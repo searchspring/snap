@@ -38,7 +38,7 @@ The `hidePricing` prop will prevent the pricing from rendering.
 ```
 
 ### detailSlot
-The `detailSlot` prop can contain a string or JSX element to display in place of the title and pricing sections. This can be used to display any additional information. Specifying this property will overwrite the default title and the pricing elements.
+The `detailSlot` prop is a JSX element to used display additional content below the title and pricing sections.
 
 ```typescript
 const productDetails = (props) => {
@@ -57,21 +57,6 @@ const productDetails = (props) => {
 
 ```jsx
 <Result result={controller.store.results[0]} detailSlot={<productDetails product={controller.store.results[0]/>} />
-```
-
-### buttonSlot
-The `buttonSlot` prop is a placeholder and renders before the `detailSlot` section. It can contain a string or JSX element. Typically used to add a CTA button.
-
-```typescript
-const addToCartButton = (props) => {
-	return (
-		<button onClick={addToCartByID(props.id)}>Add to Cart</button>
-	)
-}
-```
-
-```jsx
-<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid}/>} />
 ```
 
 ### fallback
