@@ -100,7 +100,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);
 		}
 
-		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.pagination = new PaginationStore({}, this.services, data.pagination);
 		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
 	}
 }

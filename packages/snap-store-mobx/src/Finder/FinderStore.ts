@@ -40,7 +40,7 @@ export class FinderStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.pagination = new PaginationStore({}, this.services, data.pagination);
 		this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage);
 	}
 }

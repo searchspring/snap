@@ -50,7 +50,7 @@ export class SearchStore extends AbstractStore {
 		this.facets = new FacetStore(this.services, this.storage, data.facets, this.meta);
 		this.filters = new FilterStore(this.services, data.filters, this.meta);
 		this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising);
-		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
 		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
 	}
 }

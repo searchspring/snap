@@ -23,7 +23,7 @@ export type SearchControllerConfig = {
 			trim?: boolean;
 		};
 		infinite?: {
-			backfill: boolean;
+			backfill: number;
 		};
 	};
 };
@@ -100,3 +100,5 @@ declare global {
 		searchspring?: any;
 	}
 }
+
+export type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;

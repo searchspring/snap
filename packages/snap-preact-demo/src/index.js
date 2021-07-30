@@ -41,7 +41,7 @@ const config = {
 							merchandising: false,
 						},
 						infinite: {
-							backfill: true,
+							backfill: 5,
 						},
 					},
 				},

@@ -6,33 +6,34 @@ import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { check } from 'prettier';
 
 const HEIGHT_CHECK_INTERVAL = 50;
 
-const buildQuerySelector = (elem) => {
-	const path = [];
-	let parent;
-	while ((parent = elem.parentNode)) {
-		const tag = elem.tagName;
-		let siblings;
-		const classes = Array.from(elem.classList.values());
-		const classStr = classes.length ? `.${classes.join('.')}` : '';
-		path.unshift(
-			elem.id
-				? `#${elem.id}`
-				: ((siblings = parent.children),
-				  [].filter.call(
-						siblings,
-						(sibling) => sibling.tagName === tag && JSON.stringify(classes.sort()) === JSON.stringify(Array.from(sibling.classList.values()).sort())
-				  ).length === 1
-						? `${tag}${classStr}`
-						: `${tag}${classStr}:nth-child(${1 + [].indexOf.call(siblings, elem)})`)
-		);
-		if (elem.tagName == 'BODY') break;
-		elem = parent;
-	}
-	return `${path.join(' > ')}`;
-};
+// const buildQuerySelector = (elem) => {
+// 	const path = [];
+// 	let parent;
+// 	while ((parent = elem.parentNode)) {
+// 		const tag = elem.tagName;
+// 		let siblings;
+// 		const classes = Array.from(elem.classList.values());
+// 		const classStr = classes.length ? `.${classes.join('.')}` : '';
+// 		path.unshift(
+// 			elem.id
+// 				? `#${elem.id}`
+// 				: ((siblings = parent.children),
+// 				  [].filter.call(
+// 						siblings,
+// 						(sibling) => sibling.tagName === tag && JSON.stringify(classes.sort()) === JSON.stringify(Array.from(sibling.classList.values()).sort())
+// 				  ).length === 1
+// 						? `${tag}${classStr}`
+// 						: `${tag}${classStr}:nth-child(${1 + [].indexOf.call(siblings, elem)})`)
+// 		);
+// 		if (elem.tagName == 'BODY') break;
+// 		elem = parent;
+// 	}
+// 	return `${path.join(' > ')}`;
+// };
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -74,13 +75,8 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = true;
 
 			const stringyParams = JSON.stringify(search.request);
-			const scrollMap = this.storage.get('scrollMap') || {};
+			// const scrollMap = this.storage.get('scrollMap') || {};
 			this.storage.set('lastStringyParams', stringyParams);
-			// interval we ony need to keep checking until the page height > than our stored value
-			const scrollToPosition = scrollMap[stringyParams];
-			if (scrollToPosition) {
-				window.history.scrollRestoration = 'manual';
-			}
 
 			await next();
 		});
@@ -111,41 +107,29 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
-			const stringyParams = JSON.stringify(search.request);
-			const scrollMap = this.storage.get('scrollMap') || {};
-
-			// if (scrollMap[stringyParams]) {
-			// 	setTimeout(() => {
-			// 		window.scrollTo(0, scrollMap[stringyParams]);
-			// 		this.log.debug('scrolling to: ', scrollMap[stringyParams]);
-			// 	});
-			// }
-
-			// interval we ony need to keep checking until the page height > than our stored value
-			const scrollToPosition = scrollMap[stringyParams];
-			if (scrollToPosition) {
-				const heightCheck = window.setInterval(() => {
-					if (document.documentElement.scrollHeight >= scrollToPosition) {
-						window.scrollTo(0, scrollToPosition);
-						this.log.debug('scrolling to: ', scrollMap[stringyParams]);
-						window.clearInterval(heightCheck);
-					}
-				}, HEIGHT_CHECK_INTERVAL);
-			}
-
-			// scroll into view by path
-			// const scrollToPath = scrollMap[stringyParams];
-			// this.log.debug('restore path: ', scrollToPath);
-			// if (scrollToPath) {
-			// 	window.history.scrollRestoration = 'manual';
-			// 	setTimeout(() => {
-			// 		const scrollToElement = document.querySelector(scrollToPath);
-			// 		this.log.debug('restore path element: ', scrollToElement);
-			// 		scrollToElement && scrollToElement.scrollIntoView();
-			// 	});
-			// }
-
 			search.controller.store.loading = false;
+
+			if (this.config.settings?.infinite?.backfill && window.scrollY === 0) {
+				// browser didn't jump
+				const stringyParams = JSON.stringify(search.request);
+				const scrollMap = this.storage.get('scrollMap') || {};
+
+				// interval we ony need to keep checking until the page height > than our stored value
+				const scrollToPosition = scrollMap[stringyParams];
+				if (scrollToPosition) {
+					let checkCount = 0;
+					const heightCheck = window.setInterval(() => {
+						if (document.documentElement.scrollHeight >= scrollToPosition) {
+							window.scrollTo(0, scrollToPosition);
+							this.log.debug('scrolling to: ', scrollMap[stringyParams]);
+							window.clearInterval(heightCheck);
+						}
+						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
+							window.clearInterval(heightCheck);
+						}
+					}, HEIGHT_CHECK_INTERVAL);
+				}
+			}
 		});
 	}
 
@@ -153,18 +137,12 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent => {
 				// store scroll position
-				console.log('e:', e);
-				console.log('height at click: ', window.scrollY);
-
-				// const path = buildQuerySelector(e.target.parentElement);
-				// console.log('path:', path);
-
-				const stringyParams = this.storage.get('lastStringyParams');
-				const scrollMap = {};
-				// scrollMap[stringyParams] = path;
-				scrollMap[stringyParams] = window.scrollY;
-
-				this.storage.set('scrollMap', scrollMap);
+				if (this.config.settings?.infinite?.backfill) {
+					const stringyParams = this.storage.get('lastStringyParams');
+					const scrollMap = {};
+					scrollMap[stringyParams] = window.scrollY;
+					this.storage.set('scrollMap', scrollMap);
+				}
 
 				// track
 				const { intellisuggestData, intellisuggestSignature } = result.attributes;
@@ -203,6 +181,12 @@ export class SearchController extends AbstractController {
 		}
 
 		const params = this.params;
+		if (this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill) {
+			const stringyParams = this.storage.get('lastStringyParams');
+			this.storage.set('scrollMap', { [stringyParams]: 0 });
+			this.urlManager.set('page', 1).go();
+			return;
+		}
 
 		try {
 			try {
@@ -249,10 +233,10 @@ export class SearchController extends AbstractController {
 
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
-			if (params.pagination?.page > 1 && this.config.settings.infinite) {
+			if (this.config.settings?.infinite?.backfill && params.pagination?.page > 1) {
 				// if no results fetch results...
 				let previousResults = this.store.data?.results || [];
-				if (this.config.settings.infinite.backfill && !previousResults.length) {
+				if (!previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];
 					for (let page = 0; page < params.pagination.page; page++) {
@@ -267,7 +251,6 @@ export class SearchController extends AbstractController {
 				}
 
 				response.results = [...previousResults, ...(response.results || [])];
-				console.log('results:', response.results);
 			}
 
 			searchProfile.stop();
@@ -296,7 +279,6 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// console.log("this.store:", this.store)
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
