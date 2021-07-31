@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';

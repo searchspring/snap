@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Button } from './Button';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Button Component', () => {
 	describe('styled', () => {

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Facet, FacetProps } from '../Facet';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 

@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -18,31 +18,29 @@ const CSS = {
 		}),
 };
 
-export const Badge = observer(
-	(properties: BadgeProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Badge = observer((properties: BadgeProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: BadgeProps = {
-			// default props
-			position: {
-				top: 0,
-				left: 0,
-			},
-			// global theme
-			...globalTheme?.components?.badge,
-			// props
-			...properties,
-			...properties.theme?.components?.badge,
-		};
-		const { content, children, position, disableStyles, className, style } = props;
+	const props: BadgeProps = {
+		// default props
+		position: {
+			top: 0,
+			left: 0,
+		},
+		// global theme
+		...globalTheme?.components?.badge,
+		// props
+		...properties,
+		...properties.theme?.components?.badge,
+	};
+	const { content, children, position, disableStyles, className, style } = props;
 
-		return (
-			<div css={!disableStyles && CSS.badge({ position, style })} className={classnames('ss__badge', className)}>
-				{content || children}
-			</div>
-		);
-	}
-);
+	return (
+		<div css={!disableStyles && CSS.badge({ position, style })} className={classnames('ss__badge', className)}>
+			{content || children}
+		</div>
+	);
+});
 
 export interface BadgeProps extends ComponentProps {
 	content?: any;

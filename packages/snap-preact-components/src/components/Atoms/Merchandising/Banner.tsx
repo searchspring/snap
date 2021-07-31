@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { BannerContent, BannerType, ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 
 const CSS = {
 	banner: ({ style }) =>

@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 
 const CSS = {

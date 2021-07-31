@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 

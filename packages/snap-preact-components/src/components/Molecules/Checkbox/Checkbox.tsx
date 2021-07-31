@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {

@@ -5,7 +5,7 @@ import { render } from '@testing-library/preact';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { InlineBanner } from './InlineBanner';
 import { BannerType } from '../../../types';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Merchandising Inline Banner Component', () => {
 	it('renders type:inline banner', () => {

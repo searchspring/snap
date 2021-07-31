@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';

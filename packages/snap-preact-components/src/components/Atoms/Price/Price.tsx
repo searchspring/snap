@@ -5,7 +5,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {

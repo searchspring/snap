@@ -13,7 +13,7 @@ import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 
 const CSS = {

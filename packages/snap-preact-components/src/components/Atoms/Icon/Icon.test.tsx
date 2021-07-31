@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 
 import { Icon } from './Icon';
 import { iconPaths } from './paths';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 const defaultProps = {
 	className: '',

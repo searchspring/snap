@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 
 const CSS = {
 	breadcrumbs: ({ style }) =>
@@ -22,35 +22,33 @@ const CSS = {
 		}),
 };
 
-export const Breadcrumbs = observer(
-	(properties: BreadcrumbProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: BreadcrumbProps = {
-			// default props
-			separator: '>',
-			// global theme
-			...globalTheme?.components?.breadcrumbs,
-			// props
-			...properties,
-			...properties.theme?.components?.breadcrumbs,
-		};
+	const props: BreadcrumbProps = {
+		// default props
+		separator: '>',
+		// global theme
+		...globalTheme?.components?.breadcrumbs,
+		// props
+		...properties,
+		...properties.theme?.components?.breadcrumbs,
+	};
 
-		const { data, separator, disableStyles, className, style } = props;
+	const { data, separator, disableStyles, className, style } = props;
 
-		return (
-			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
-				<ul className="ss__breadcrumbs__crumbs">
-					{data
-						.map<React.ReactNode>((crumb) => (
-							<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
-						))
-						.reduce((prev, curr) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
-				</ul>
-			</div>
-		);
-	}
-);
+	return (
+		<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
+			<ul className="ss__breadcrumbs__crumbs">
+				{data
+					.map<React.ReactNode>((crumb) => (
+						<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
+					))
+					.reduce((prev, curr) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
+			</ul>
+		</div>
+	);
+});
 
 export interface BreadcrumbProps extends ComponentProps {
 	data: {

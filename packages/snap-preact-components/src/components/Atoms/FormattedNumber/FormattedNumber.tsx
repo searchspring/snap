@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -33,18 +33,8 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		...properties.theme?.components?.formattedNumber,
 	};
 
-	const {
-		value,
-		symbol,
-		decimalPlaces,
-		padDecimalPlaces,
-		thousandsSeparator,
-		decimalSeparator,
-		symbolAfter,
-		disableStyles,
-		className,
-		style,
-	} = props;
+	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style } =
+		props;
 
 	return (
 		<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>

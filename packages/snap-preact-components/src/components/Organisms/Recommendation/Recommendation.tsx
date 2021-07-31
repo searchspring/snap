@@ -13,7 +13,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 

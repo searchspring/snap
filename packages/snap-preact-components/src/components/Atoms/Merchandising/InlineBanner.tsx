@@ -3,7 +3,7 @@ import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
 
 const CSS = {

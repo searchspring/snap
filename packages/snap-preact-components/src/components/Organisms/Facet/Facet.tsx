@@ -14,7 +14,7 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 
 const CSS = {
 	facet: ({ color, theme, style }) =>

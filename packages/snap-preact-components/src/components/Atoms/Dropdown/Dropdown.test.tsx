@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Dropdown Component', () => {
 	it('renders', () => {

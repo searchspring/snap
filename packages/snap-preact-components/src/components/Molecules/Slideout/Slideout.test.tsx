@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { Slideout } from './Slideout';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 import { iconPaths } from '../../Atoms/Icon';
 
 describe('Slideout Component', () => {

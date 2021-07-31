@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Checkbox } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 const globalTheme = {
 	components: {

@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { defined } from '../../../utilities';
 import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 
 const CSS = {
 	palette: ({ columns, gapSize, style }) =>

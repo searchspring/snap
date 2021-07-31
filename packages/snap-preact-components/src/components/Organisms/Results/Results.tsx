@@ -12,7 +12,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {

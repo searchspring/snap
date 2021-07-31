@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { LoadingBar } from './LoadingBar';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('LoadingBar Component', () => {
 	const theme = {

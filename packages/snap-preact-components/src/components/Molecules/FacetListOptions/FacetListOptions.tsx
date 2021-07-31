@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';

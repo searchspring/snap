@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
