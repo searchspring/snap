@@ -15661,10 +15661,10 @@
 				cjs_default = __webpack_require__.n(cjs),
 				colors =
 					(__webpack_require__(74069),
-					__webpack_require__(18145),
 					__webpack_require__(39529),
 					__webpack_require__(31235),
 					__webpack_require__(67890),
+					__webpack_require__(18145),
 					__webpack_require__(32501),
 					{
 						blue: '#3379c1',
@@ -16052,8 +16052,7 @@
 				},
 				AbstractController = (function () {
 					function AbstractController(config, _a) {
-						var _this = this,
-							client = _a.client,
+						var client = _a.client,
 							store = _a.store,
 							urlManager = _a.urlManager,
 							eventManager = _a.eventManager,
@@ -16091,8 +16090,7 @@
 							window.searchspring.controller[config.id])
 						)
 							throw new Error("Controller with id '" + config.id + "' is already defined");
-						if (
-							((window.searchspring.controller[config.id] = this),
+						(window.searchspring.controller[config.id] = this),
 							(this.config = config),
 							(this.client = client),
 							(this.store = store),
@@ -16104,20 +16102,7 @@
 							this.log.setNamespace(this.config.id),
 							this.profiler.setNamespace(this.config.id),
 							this.tracker.namespace || this.tracker.setNamespace(this.config.id),
-							(this.environment = 'production'),
-							this.config.on &&
-								Object.keys(this.config.on).forEach(function (eventName) {
-									var events = _this.config.on[eventName];
-									(Array.isArray(events) ? events : [events]).forEach(function (middleware) {
-										_this.on(eventName, middleware);
-									});
-								}),
-							this.config.use)
-						) {
-							(Array.isArray(this.config.use) ? this.config.use : [this.config.use]).forEach(function (plugin) {
-								_this.use(plugin);
-							});
-						}
+							(this.environment = 'production');
 					}
 					return (
 						Object.defineProperty(AbstractController.prototype, 'initialized', {
@@ -16150,8 +16135,9 @@
 								return __generator(this, function (_a) {
 									switch (_a.label) {
 										case 0:
-											if (this._initialized) return [2];
-											(initProfile = this.profiler.create({ type: 'event', name: 'init', context: this.config }).start()), (_a.label = 1);
+											this._initialized && this.log.warn("'init' middleware recalled"),
+												(initProfile = this.profiler.create({ type: 'event', name: 'init', context: this.config }).start()),
+												(_a.label = 1);
 										case 1:
 											_a.trys.push([1, 6, , 7]), (_a.label = 2);
 										case 2:
@@ -16168,16 +16154,17 @@
 											return (err_2 = _a.sent()) && console.error(err_2), [3, 7];
 										case 7:
 											return (
-												this.urlManager.subscribe(function (prev, next) {
-													try {
-														JSON.stringify(prev) !== JSON.stringify(next) && _this.search();
-													} catch (err) {
-														_this.log.error('URL state is invalid', err);
-													}
-												}),
+												this._initialized ||
+													(this.urlManager.subscribe(function (prev, next) {
+														try {
+															JSON.stringify(prev) !== JSON.stringify(next) && _this.search();
+														} catch (err) {
+															_this.log.error('URL state is invalid', err);
+														}
+													}),
+													(this._initialized = !0)),
 												initProfile.stop(),
 												this.log.profile(initProfile),
-												(this._initialized = !0),
 												[2]
 											);
 									}
@@ -16190,7 +16177,7 @@
 								_this.targets[target].retarget();
 							});
 						}),
-						(AbstractController.prototype.use = function (func) {
+						(AbstractController.prototype.plugin = function (func) {
 							return __awaiter(this, void 0, void 0, function () {
 								return __generator(this, function (_a) {
 									switch (_a.label) {
@@ -16205,6 +16192,21 @@
 						(AbstractController.prototype.on = function (event) {
 							for (var _a, func = [], _i = 1; _i < arguments.length; _i++) func[_i - 1] = arguments[_i];
 							(_a = this.eventManager).on.apply(_a, AbstractController_spreadArray([event], func));
+						}),
+						(AbstractController.prototype.use = function (attachments) {
+							var _this = this;
+							if (null == attachments ? void 0 : attachments.plugin) {
+								(Array.isArray(attachments.plugin) ? attachments.plugin : [attachments.plugin]).forEach(function (plugin) {
+									_this.plugin(plugin);
+								});
+							}
+							(null == attachments ? void 0 : attachments.on) &&
+								Object.keys(attachments.on).forEach(function (eventName) {
+									var eventMiddleware = attachments.on[eventName];
+									(Array.isArray(eventMiddleware) ? eventMiddleware : [eventMiddleware]).forEach(function (middleware) {
+										_this.on(eventName, middleware);
+									});
+								});
 						}),
 						AbstractController
 					);
@@ -16541,6 +16543,7 @@
 									});
 								});
 							}),
+							_this.use(_this.config),
 							_this
 						);
 					}
@@ -16567,7 +16570,6 @@
 				cookies =
 					(__webpack_require__(54226),
 					__webpack_require__(48319),
-					__webpack_require__(16781),
 					__webpack_require__(99120),
 					__webpack_require__(74083),
 					{
@@ -16711,6 +16713,7 @@
 			!(function (StorageType) {
 				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
 			})(StorageType || (StorageType = {}));
+			__webpack_require__(16781);
 			var BeaconType,
 				BeaconCategory,
 				AutocompleteController_extends = (function () {
@@ -16901,23 +16904,21 @@
 							(_this.track = { product: { click: function click(e, result) {} } }),
 							(_this.searchTrending = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var terms, storedTerms, trendingProfile, _a, _b;
+									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
 									return AutocompleteController_generator(this, function (_c) {
 										switch (_c.label) {
 											case 0:
 												return (storedTerms = this.storage.get('terms')) ? ((terms = JSON.parse(storedTerms)), [3, 3]) : [3, 1];
 											case 1:
 												return (
-													(trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start()),
-													[
-														4,
-														this.client.trending({
-															limit:
-																(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
-																	? void 0
-																	: _b.limit) || 5,
-														}),
-													]
+													(trendingParams = {
+														limit:
+															(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
+																? void 0
+																: _b.limit) || 5,
+													}),
+													(trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
+													[4, this.client.trending(trendingParams)]
 												);
 											case 2:
 												(terms = _c.sent()),
@@ -17039,6 +17040,7 @@
 									});
 								});
 							}),
+							_this.use(_this.config),
 							_this
 						);
 					}
@@ -17131,9 +17133,9 @@
 															query = input.value;
 														!_this.store.loading &&
 															_this.store.search.originalQuery &&
-															((query = _this.store.search.query),
-															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery })),
-															actionUrl.params.query.push({ key: input.name || _this.urlManager.translator.config.queryParameter, value: query });
+															((query = _this.store.search.query.string),
+															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
+															actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
 														var newUrl = actionUrl.url();
 														window.location.href = newUrl;
 													}
@@ -17147,7 +17149,7 @@
 														query = input.value;
 													!_this.store.loading &&
 														_this.store.search.originalQuery &&
-														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery)),
+														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string)),
 														(input.value = query);
 												}),
 												(inputs = document.querySelectorAll(this.config.selector)).forEach(function (input) {
@@ -17458,6 +17460,7 @@
 									});
 								});
 							}),
+							_this.use(_this.config),
 							_this
 						);
 					}
@@ -17892,6 +17895,7 @@
 									});
 								});
 							}),
+							_this.use(_this.config),
 							_this
 						);
 					}
@@ -22263,7 +22267,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.16' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.17' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22290,7 +22294,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.16');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.17');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22545,7 +22549,16 @@
 						(null === (_a = window.searchspring) || void 0 === _a ? void 0 : _a.track) || this.setGlobal(),
 						this.sendEvents();
 				};
-			var RecommendationInstantiator_awaiter = function (thisArg, _arguments, P, generator) {
+			var RecommendationInstantiator_assign = function () {
+					return (RecommendationInstantiator_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				RecommendationInstantiator_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
 							try {
@@ -22659,12 +22672,14 @@
 				},
 				RecommendationInstantiator = (function () {
 					function RecommendationInstantiator(config, _a) {
-						var _this = this,
+						var _b,
+							_this = this,
 							client = _a.client,
 							logger = _a.logger,
 							tracker = _a.tracker;
 						if (
 							((this.controllers = {}),
+							(this.uses = []),
 							(this.plugins = []),
 							(this.middleware = []),
 							(this.targets = {}),
@@ -22673,11 +22688,13 @@
 							(this.eventManager = new EventManager()),
 							(this.config = config),
 							(this.logger = logger),
-							!this.config.branch)
+							!this.config)
 						)
-							throw new Error("Instantiator config must contain 'branch' property");
+							throw new Error('Recommendation Instantiator config is required');
+						if (!(null === (_b = this.config.config) || void 0 === _b ? void 0 : _b.branch))
+							throw new Error("Recommendation Instantiator config must contain 'branch' property");
 						if (!this.config.components || 'object' != typeof this.config.components)
-							throw new Error("Instantiator config must contain 'components' mapping property");
+							throw new Error("Recommendation Instantiator config must contain 'components' mapping property");
 						var profileCount = {};
 						new DomTargeter(
 							[
@@ -22768,7 +22785,10 @@
 														(null === (_b = this.config.services) || void 0 === _b ? void 0 : _b.urlManager) ||
 														new UrlManager(new UrlTranslator(), reactLinker).detach()),
 													(recs = new RecommendationController(
-														{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, branch: this.config.branch, globals },
+														RecommendationInstantiator_assign(
+															{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, globals },
+															this.config.config
+														),
 														{
 															client: (null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.client) || this.client,
 															store:
@@ -22781,17 +22801,18 @@
 															tracker: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.tracker) || this.tracker,
 														}
 													)),
+													this.uses.forEach(function (attachements) {
+														return recs.use(attachements);
+													}),
 													this.plugins.forEach(function (plugin) {
-														return recs.use(plugin);
+														return recs.plugin(plugin);
 													}),
 													this.middleware.forEach(function (middleware) {
 														return recs.on.apply(recs, RecommendationInstantiator_spreadArray([middleware.event], middleware.func));
 													}),
-													[4, recs.init()]
+													[4, recs.search()]
 												);
 											case 1:
-												return _j.sent(), [4, recs.search()];
-											case 2:
 												return (
 													_j.sent(),
 													(this.controllers[recs.config.id] = recs),
@@ -22810,16 +22831,15 @@
 						);
 					}
 					return (
-						(RecommendationInstantiator.prototype.use = function (func) {
-							return RecommendationInstantiator_awaiter(this, void 0, void 0, function () {
-								return RecommendationInstantiator_generator(this, function (_a) {
-									return this.plugins.push(func), [2];
-								});
-							});
+						(RecommendationInstantiator.prototype.plugin = function (func) {
+							this.plugins.push(func);
 						}),
 						(RecommendationInstantiator.prototype.on = function (event) {
 							for (var func = [], _i = 1; _i < arguments.length; _i++) func[_i - 1] = arguments[_i];
 							this.middleware.push({ event, func });
+						}),
+						(RecommendationInstantiator.prototype.use = function (attachments) {
+							this.uses.push(attachments);
 						}),
 						RecommendationInstantiator
 					);
@@ -22859,7 +22879,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.16]',
+								text: '[0.3.17]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24382,4 +24402,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.2ea890b0.iframe.bundle.js.map
+//# sourceMappingURL=main.2489e7c2.iframe.bundle.js.map

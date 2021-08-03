@@ -158,7 +158,7 @@
 				<a href="#initialization" id="initialization" style="color: inherit; text-decoration: none;">
 					<h2>Initialization</h2>
 				</a>
-				<p>Invoking the <code>init</code> method is required to subscribe to changes that occur in the UrlManager. It also fires the <code>init</code> event which executes attached middleware. This should happen prior to any calls to the controller <code>search</code> method.</p>
+				<p>Invoking the <code>init</code> method is required to subscribe to changes that occur in the UrlManager. It also fires the <code>init</code> event which executes attached middleware. This can be fired manually as needed; if it was not manually fired it will happen automatically on the first call to the controller <code>search</code> method.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #795E26">init</span><span style="color: #000000">();</span>
 </code></pre>
 				<a href="#searching" id="searching" style="color: inherit; text-decoration: none;">
@@ -184,8 +184,8 @@
 <span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
 <span style="color: #000000">});</span>
 </code></pre>
-				<p>Note: Groups of middleware (plugins) can be attached using the <code>use</code> method.</p>
-				<p>The data available within a middleware (first parameter) is determined by what gets passed into the <code>fire</code> method. For existing events on the controller, the <code>fire</code> method is already being called when appropriate to the event, and the <code>eventData</code> will typically be an object containing a reference to the controller and any other details that may be of importance to the particular event. Custom events can be created as needed; but keep in mind that any middleware tied to the event should be bound (using <code>on</code> or <code>use</code>) prior to executing the <code>fire</code> method.</p>
+				<p>Note: Groups of middleware (plugins) can be attached using the <code>plugin</code> method.</p>
+				<p>The data available within a middleware (first parameter) is determined by what gets passed into the <code>fire</code> method. For existing events on the controller, the <code>fire</code> method is already being called when appropriate to the event, and the <code>eventData</code> will typically be an object containing a reference to the controller and any other details that may be of importance to the particular event. Custom events can be created as needed; but keep in mind that any middleware tied to the event should be bound (using <code>on</code> or <code>plugin</code>) prior to the execution of the <code>fire</code> method.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">controller</span><span style="color: #000000">.</span><span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">fire</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;customEventName&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">thing1:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;one&#039;</span><span style="color: #000000">, </span><span style="color: #001080">thing2:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> });</span>
 </code></pre>
 				<p>See the EventManager documentation for more details.</p>
@@ -250,11 +250,17 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/SearchController.html" class="tsd-kind-icon">Search<wbr>Controller</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ControllerConfig.html" class="tsd-kind-icon">Controller<wbr>Config</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#AfterSearchObj" class="tsd-kind-icon">After<wbr>Search<wbr>Obj</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#AfterStoreObj" class="tsd-kind-icon">After<wbr>Store<wbr>Obj</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#Attachments" class="tsd-kind-icon">Attachments</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#AutocompleteControllerConfig" class="tsd-kind-icon">Autocomplete<wbr>Controller<wbr>Config</a>
@@ -273,6 +279,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#NextEvent" class="tsd-kind-icon">Next<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#PluginFunction" class="tsd-kind-icon">Plugin<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#RecommendationControllerConfig" class="tsd-kind-icon">Recommendation<wbr>Controller<wbr>Config</a>
@@ -299,6 +308,9 @@
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
