@@ -1,4 +1,8 @@
 export function afterStore(controller) {
+	controller.on('init', async ({ controller }, next) => {
+		controller.log.debug('initialization...');
+		await next();
+	});
 	controller.on('afterStore', async ({ controller: { store } }, next) => {
 		mutateFacets(store.facets);
 		mutateResults(store.results);
@@ -11,6 +15,8 @@ export function afterStore(controller) {
 		controller.log.debug('store', controller.store.toJSON());
 		await next();
 	});
+
+	controller.on('afterStore', scrollToTop);
 }
 
 function mutateFacets(facets) {
@@ -28,4 +34,9 @@ function mutateResults(results) {
 	for (let result of results) {
 		result.mappings.core.name += '++';
 	}
+}
+
+export async function scrollToTop(search, next) {
+	window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+	await next();
 }

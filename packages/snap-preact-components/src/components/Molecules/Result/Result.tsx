@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h } from 'preact';
+import { Fragment, h, cloneElement } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -170,39 +170,32 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						</a>
 					</div>
 					<div className="ss__result__wrapper__details">
-						{!detailSlot ? (
-							<>
-								{!hideTitle && (
-									<div className="ss__result__wrapper__details__title">
-										<a
-											href={core.url}
-											onMouseDown={(e) => {
-												controller?.track?.product?.click(e, result);
-											}}
-										>
-											{core.name}
-										</a>
-									</div>
-								)}
-								{!hidePricing && (
-									<div className="ss__result__wrapper__details__pricing">
-										{core.price < core.msrp ? (
-											<>
-												<Price {...subProps.price} value={core.price} />
-												&nbsp;
-												<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-											</>
-										) : (
-											<Price {...subProps.price} value={core.price} />
-										)}
-									</div>
-								)}
-							</>
-						) : (
-							<>{detailSlot}</>
+						{!hideTitle && (
+							<div className="ss__result__wrapper__details__title">
+								<a
+									href={core.url}
+									onMouseDown={(e) => {
+										controller?.track?.product?.click(e, result);
+									}}
+								>
+									{core.name}
+								</a>
+							</div>
 						)}
-
-						{buttonSlot && <div className="ss__result__wrapper__details__button">{buttonSlot}</div>}
+						{!hidePricing && (
+							<div className="ss__result__wrapper__details__pricing">
+								{core.price < core.msrp ? (
+									<>
+										<Price {...subProps.price} value={core.price} />
+										&nbsp;
+										<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+									</>
+								) : (
+									<Price {...subProps.price} value={core.price} />
+								)}
+							</div>
+						)}
+						{detailSlot && cloneElement(detailSlot, { result })}
 					</div>
 				</div>
 			</article>
@@ -221,8 +214,7 @@ export interface ResultProps extends ComponentProps {
 	hideBadge?: boolean;
 	hideTitle?: boolean;
 	hidePricing?: boolean;
-	detailSlot?: string | JSX.Element;
-	buttonSlot?: string | JSX.Element;
+	detailSlot?: JSX.Element;
 	fallback?: string;
 	layout?: LayoutType;
 	controller?: SearchController | AutocompleteController | RecommendationController;

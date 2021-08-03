@@ -1,12 +1,18 @@
 import deepmerge from 'deepmerge';
+
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
-import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
-import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+
+import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
+import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const TRENDING_TERMS_CACHE = 'ss-ac-trending-cache';
+
 const utils = { url: utilsURL };
+
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
 	selector: '',
@@ -20,12 +26,15 @@ const defaultConfig: AutocompleteControllerConfig = {
 		},
 	},
 };
+
 type AutocompleteTrackMethods = {
 	product: {
 		click: (e, result) => void;
 	};
 };
+
 export class AutocompleteController extends AbstractController {
+	public store: AutocompleteStore;
 	config: AutocompleteControllerConfig;
 	storage: StorageStore;
 
@@ -65,6 +74,9 @@ export class AutocompleteController extends AbstractController {
 				return false;
 			}
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	track: AutocompleteTrackMethods = {
@@ -85,9 +97,9 @@ export class AutocompleteController extends AbstractController {
 		},
 	};
 
-	get params(): Record<string, any> {
+	get params(): AutocompleteRequestModel {
 		const urlState = this.urlManager.state;
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
+		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
 
 		return params;
 	}
@@ -179,15 +191,15 @@ export class AutocompleteController extends AbstractController {
 
 				let query = input.value;
 				if (!this.store.loading && this.store.search.originalQuery) {
-					query = this.store.search.query;
+					query = this.store.search.query.string;
 					actionUrl.params.query.push({
 						key: 'oq',
-						value: this.store.search.originalQuery,
+						value: this.store.search.originalQuery.string,
 					});
 				}
 
 				actionUrl.params.query.push({
-					key: input.name || this.urlManager.translator.config.queryParameter,
+					key: input.name || (this.urlManager.getTranslatorConfig().queryParameter as string),
 					value: query,
 				});
 
@@ -212,7 +224,7 @@ export class AutocompleteController extends AbstractController {
 			let query = input.value;
 			if (!this.store.loading && this.store.search.originalQuery) {
 				query = this.store.search.query;
-				addHiddenFormInput(form, 'oq', this.store.search.originalQuery);
+				addHiddenFormInput(form, 'oq', this.store.search.originalQuery.string);
 			}
 
 			// TODO expected spell correct behavior queryAssumption
@@ -288,12 +300,17 @@ export class AutocompleteController extends AbstractController {
 			terms = JSON.parse(storedTerms);
 		} else {
 			// query for trending terms, save to storage, update store
-			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending' }).start();
-			terms = await this.client.trending({
+			const trendingParams = {
 				limit: this.config.settings?.trending?.limit || 5,
-			});
+			};
+
+			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start();
+
+			terms = await this.client.trending(trendingParams);
+
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
+
 			this.storage.set('terms', JSON.stringify(terms));
 		}
 		this.store.updateTrendingTerms(terms);

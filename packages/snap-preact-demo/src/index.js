@@ -11,7 +11,6 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Recs } from './components/Recommendations/';
 
 import { afterStore } from './middleware/plugins/afterStore';
-import { scrollToTop, timeout, ensure, until } from './middleware/functions';
 
 import './styles/custom.scss';
 
@@ -27,8 +26,10 @@ const config = {
 	},
 	instantiators: {
 		recommendation: {
-			branch: BRANCHNAME,
 			components: { Recs, Recs2: Recs },
+			config: {
+				branch: BRANCHNAME,
+			},
 		},
 	},
 	controllers: {
@@ -85,30 +86,5 @@ const config = {
 const snap = new Snap(config);
 const { search, autocomplete } = snap.controllers;
 
-// custom store manipulation
-search.on('afterStore', async ({ controller }, next) => {
-	controller.store.custom.onSaleFacet = controller?.store?.facets.filter((facet) => facet.field == 'on_sale').pop();
-
-	// filtering out certain facets...
-	controller.store.facets = controller?.store?.facets?.filter((facet) => facet.field != 'on_sale');
-
-	const colorFacet = controller?.store?.facets.filter((facet) => facet.field == 'color_family').pop();
-	colorFacet?.values.forEach((value) => {
-		value.custom = {
-			colorImage: `www.storfront.com/images/swatches/${value.value}.png`,
-		};
-	});
-
-	// adding domain to URLs
-	controller.store.results.forEach((result) => {
-		result.mappings.core.url = 'http://try.searchspring.com' + result.mappings.core.url;
-	});
-
-	await next();
-});
-
 // using plugins (groups of middleware)
-search.use(afterStore);
-
-// using a function
-search.on('afterStore', scrollToTop);
+search.plugin(afterStore);

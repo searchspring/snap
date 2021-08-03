@@ -6828,7 +6828,7 @@
 						null,
 						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'detailSlot'),
-						' prop can contain a string or JSX element to display in place of the title and pricing sections. This can be used to display any additional information. Specifying this property will overwrite the default title and the pricing elements.'
+						' prop is a JSX element to used display additional content below the title and pricing sections.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -6846,34 +6846,6 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							'<Result result={controller.store.results[0]} detailSlot={<productDetails product={controller.store.results[0]/>} />\n'
-						)
-					),
-					(0, esm.kt)('h3', { id: 'buttonslot' }, 'buttonSlot'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'buttonSlot'),
-						' prop is a placeholder and renders before the ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'detailSlot'),
-						' section. It can contain a string or JSX element. Typically used to add a CTA button.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-typescript' },
-							'const addToCartButton = (props) => {\n    return (\n        <button onClick={addToCartByID(props.id)}>Add to Cart</button>\n    )\n}\n'
-						)
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<Result result={controller.store.results[0]} buttonSlot={<addToCartButton id={controller.store.results[0].attributes.productid}/>} />\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'fallback' }, 'fallback'),
@@ -7078,8 +7050,11 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
-						detailSlot: { description: 'Slot just under product image', table: { type: { summary: 'string' } }, control: { type: 'text' } },
-						buttonSlot: { description: 'Slot just under details', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						detailSlot: {
+							description: 'Slot for more product details (under price)',
+							table: { type: { summary: 'string' } },
+							control: { type: 'text' },
+						},
 						fallback: {
 							defaultValue: '',
 							description: 'Fallback image url',
@@ -7238,8 +7213,7 @@
 						hideTitle = props.hideTitle,
 						hidePricing = props.hidePricing,
 						detailSlot = props.detailSlot,
-						buttonSlot = props.buttonSlot,
-						fallback = props.fallback,
+						fallback = (props.buttonSlot, props.fallback),
 						disableStyles = props.disableStyles,
 						className = props.className,
 						layout = props.layout,
@@ -7315,56 +7289,48 @@
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 									'div',
 									{ className: 'ss__result__wrapper__details' },
-									detailSlot
-										? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(preact__WEBPACK_IMPORTED_MODULE_2__.HY, null, detailSlot)
-										: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-												preact__WEBPACK_IMPORTED_MODULE_2__.HY,
-												null,
-												!hideTitle &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-														'div',
-														{ className: 'ss__result__wrapper__details__title' },
+									!hideTitle &&
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+											'div',
+											{ className: 'ss__result__wrapper__details__title' },
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+												'a',
+												{
+													href: core.url,
+													onMouseDown: function onMouseDown(e) {
+														var _a, _b;
+														null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+															void 0 === _b ||
+															_b.click(e, result);
+													},
+												},
+												core.name
+											)
+										),
+									!hidePricing &&
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+											'div',
+											{ className: 'ss__result__wrapper__details__pricing' },
+											core.price < core.msrp
+												? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+														preact__WEBPACK_IMPORTED_MODULE_2__.HY,
+														null,
 														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-															'a',
-															{
-																href: core.url,
-																onMouseDown: function onMouseDown(e) {
-																	var _a, _b;
-																	null ===
-																		(_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-																		void 0 === _b ||
-																		_b.click(e, result);
-																},
-															},
-															core.name
+															_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
+															__assign({}, subProps.price, { value: core.price })
+														),
+														' ',
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+															_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
+															__assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })
 														)
-													),
-												!hidePricing &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-														'div',
-														{ className: 'ss__result__wrapper__details__pricing' },
-														core.price < core.msrp
-															? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																	preact__WEBPACK_IMPORTED_MODULE_2__.HY,
-																	null,
-																	(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																		_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
-																		__assign({}, subProps.price, { value: core.price })
-																	),
-																	' ',
-																	(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																		_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
-																		__assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })
-																	)
-															  )
-															: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																	_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
-																	__assign({}, subProps.price, { value: core.price })
-															  )
-													)
-										  ),
-									buttonSlot &&
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('div', { className: 'ss__result__wrapper__details__button' }, buttonSlot)
+												  )
+												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+														_Atoms_Price__WEBPACK_IMPORTED_MODULE_11__.t,
+														__assign({}, subProps.price, { value: core.price })
+												  )
+										),
+									detailSlot && (0, preact__WEBPACK_IMPORTED_MODULE_2__.Tm)(detailSlot, { result })
 								)
 							)
 						)
@@ -22297,7 +22263,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.15' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.16' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22324,7 +22290,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.15');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.16');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22893,7 +22859,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.15]',
+								text: '[0.3.16]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24416,4 +24382,4 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.e34788a7.iframe.bundle.js.map
+//# sourceMappingURL=main.2ea890b0.iframe.bundle.js.map

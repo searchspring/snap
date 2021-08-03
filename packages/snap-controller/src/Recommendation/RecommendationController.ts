@@ -2,10 +2,11 @@ import deepmerge from 'deepmerge';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
-
-import { AbstractController } from '../Abstract/AbstractController';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { LogMode } from '@searchspring/snap-logger';
+import { AbstractController } from '../Abstract/AbstractController';
+
+import type { RecommendationStore } from '@searchspring/snap-store-mobx';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -25,6 +26,7 @@ const defaultConfig: RecommendationControllerConfig = {
 };
 
 export class RecommendationController extends AbstractController {
+	public store: RecommendationStore;
 	config: RecommendationControllerConfig;
 	events = {
 		click: null,
@@ -57,6 +59,9 @@ export class RecommendationController extends AbstractController {
 
 			recommend.controller.store.loading = false;
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	track: RecommendationTrackMethods = {

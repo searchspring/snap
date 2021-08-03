@@ -9,9 +9,7 @@ enum ContentType {
 }
 export class MerchandisingStore {
 	redirect = '';
-	content: {
-		[ContentType.HEADER]?: Content;
-	} = {};
+	content: Partial<Record<ContentType, Content[]>> = {};
 
 	constructor(services, merchData) {
 		if (merchData) {

@@ -1,11 +1,13 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
-import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import type { SearchStore } from '@searchspring/snap-store-mobx';
+import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
 
@@ -30,6 +32,7 @@ type SearchTrackMethods = {
 };
 
 export class SearchController extends AbstractController {
+	public store: SearchStore;
 	config: SearchControllerConfig;
 	storage: StorageStore;
 
@@ -106,6 +109,9 @@ export class SearchController extends AbstractController {
 				}
 			}
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	track: SearchTrackMethods = {
@@ -138,13 +144,13 @@ export class SearchController extends AbstractController {
 		},
 	};
 
-	get params(): Record<string, any> {
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
+	get params(): SearchRequestModel {
+		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
 		if (!this.config.settings?.redirects?.merchandising) {
 			params.search = params.search || {};
-			params.search.redirectResponse = 'full';
+			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
 
 		return params;

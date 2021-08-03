@@ -71,16 +71,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		detailSlot: {
-			description: 'Slot just under product image',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			control: { type: 'text' },
-		},
-		buttonSlot: {
-			description: 'Slot just under details',
+			description: 'Slot for more product details (under price)',
 			table: {
 				type: {
 					summary: 'string',
