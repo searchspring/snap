@@ -1,5 +1,4 @@
 import { makeObservable, observable, toJS, configure } from 'mobx';
-import { ControllerConfigs } from '@searchspring/snap-controller';
 
 configure({
 	// useProxies: "never",  // for IE 11 (es5) support
@@ -11,9 +10,9 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = true;
 	public loaded = false;
-	public config: ControllerConfigs;
+	public config: any;
 
-	constructor(config: ControllerConfigs) {
+	constructor(config: any) {
 		this.config = config;
 
 		makeObservable(this, {
@@ -23,7 +22,7 @@ export abstract class AbstractStore {
 		});
 	}
 
-	setConfig(newConfig: ControllerConfigs): void {
+	setConfig(newConfig: any): void {
 		this.config = newConfig;
 	}
 
