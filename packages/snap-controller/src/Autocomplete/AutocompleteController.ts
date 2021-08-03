@@ -34,6 +34,7 @@ export class AutocompleteController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		this.store.setConfig(this.config);
 
 		// get current search from url before detaching
 		if (this.config.settings.initializeFromUrl) {

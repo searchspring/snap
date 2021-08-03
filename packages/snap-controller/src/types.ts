@@ -23,7 +23,7 @@ export type SearchControllerConfig = {
 			trim?: boolean;
 		};
 		infinite?: {
-			backfill: number;
+			backfill?: number;
 		};
 	};
 };

@@ -19,6 +19,7 @@ export class FinderController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		this.store.setConfig(this.config);
 
 		this.urlManager = this.urlManager;
 
@@ -73,6 +74,7 @@ export class FinderController extends AbstractController {
 		if (!this.initialized) {
 			await this.init();
 		}
+
 		const params = this.params;
 
 		try {

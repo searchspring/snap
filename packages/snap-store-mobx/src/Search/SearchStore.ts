@@ -18,13 +18,12 @@ export class SearchStore extends AbstractStore {
 	public storage: StorageStore;
 
 	constructor(config, services: { urlManager: any }) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to SearchStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.storage = new StorageStore();

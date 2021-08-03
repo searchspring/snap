@@ -6,34 +6,8 @@ import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { check } from 'prettier';
 
 const HEIGHT_CHECK_INTERVAL = 50;
-
-// const buildQuerySelector = (elem) => {
-// 	const path = [];
-// 	let parent;
-// 	while ((parent = elem.parentNode)) {
-// 		const tag = elem.tagName;
-// 		let siblings;
-// 		const classes = Array.from(elem.classList.values());
-// 		const classStr = classes.length ? `.${classes.join('.')}` : '';
-// 		path.unshift(
-// 			elem.id
-// 				? `#${elem.id}`
-// 				: ((siblings = parent.children),
-// 				  [].filter.call(
-// 						siblings,
-// 						(sibling) => sibling.tagName === tag && JSON.stringify(classes.sort()) === JSON.stringify(Array.from(sibling.classList.values()).sort())
-// 				  ).length === 1
-// 						? `${tag}${classStr}`
-// 						: `${tag}${classStr}:nth-child(${1 + [].indexOf.call(siblings, elem)})`)
-// 		);
-// 		if (elem.tagName == 'BODY') break;
-// 		elem = parent;
-// 	}
-// 	return `${path.join(' > ')}`;
-// };
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -64,6 +38,7 @@ export class SearchController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		this.store.setConfig(this.config);
 
 		this.storage = new StorageStore({
 			type: StorageType.SESSION,
@@ -75,7 +50,6 @@ export class SearchController extends AbstractController {
 			search.controller.store.loading = true;
 
 			const stringyParams = JSON.stringify(search.request);
-			// const scrollMap = this.storage.get('scrollMap') || {};
 			this.storage.set('lastStringyParams', stringyParams);
 
 			await next();
@@ -158,7 +132,7 @@ export class SearchController extends AbstractController {
 					},
 				});
 
-				this.eventManager.fire('track.product.click', { controller: this, e, result, event });
+				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
 				return event;
 			},
 		},
@@ -182,18 +156,6 @@ export class SearchController extends AbstractController {
 		}
 
 		const params = this.params;
-		if (this.config.settings.infinite) {
-			// TODO: refactor this
-			const preventBackfill =
-				this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
-			const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
-
-			if (preventBackfill || dontBackfill) {
-				this.storage.set('scrollMap', {});
-				this.urlManager.set('page', 1).go();
-				return;
-			}
-		}
 
 		try {
 			try {
@@ -208,6 +170,19 @@ export class SearchController extends AbstractController {
 				} else {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
+				}
+			}
+
+			if (this.config.settings.infinite) {
+				// TODO: refactor this
+				const preventBackfill =
+					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
+				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
+
+				if (preventBackfill || dontBackfill) {
+					this.storage.set('scrollMap', {});
+					this.urlManager.set('page', 1).go();
+					return;
 				}
 			}
 

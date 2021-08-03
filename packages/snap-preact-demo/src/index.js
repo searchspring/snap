@@ -40,9 +40,9 @@ const config = {
 						redirects: {
 							merchandising: false,
 						},
-						infinite: {
-							backfill: 5,
-						},
+						// infinite: {
+						// 	backfill: 5,
+						// },
 					},
 				},
 				targets: [
