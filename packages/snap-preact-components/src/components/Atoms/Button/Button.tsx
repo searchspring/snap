@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme, style }) =>
@@ -72,7 +72,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	return (
 		(content || children) && (
-			<>
+			<CacheProvider value={cache}>
 				{native ? (
 					<button {...elementProps}>
 						{content}
@@ -84,7 +84,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 						{children}
 					</div>
 				)}
-			</>
+			</CacheProvider>
 		)
 	);
 });

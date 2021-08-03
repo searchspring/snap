@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
@@ -156,39 +156,43 @@ export const Slider = observer((properties: SliderProps): JSX.Element => {
 		facet.range &&
 		facet.active &&
 		facet.step && (
-			<div
-				className={classnames('ss__slider', className)}
-				{...getTrackProps()}
-				css={!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })}
-			>
-				{showTicks &&
-					ticks.map(({ value, getTickProps }) => (
-						<div className="ss__slider__tick" {...getTickProps()}>
-							<div className="ss__slider__tick__label">{value}</div>
-						</div>
+			<CacheProvider value={cache}>
+				<div
+					className={classnames('ss__slider', className)}
+					{...getTrackProps()}
+					css={
+						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
+					}
+				>
+					{showTicks &&
+						ticks.map(({ value, getTickProps }) => (
+							<div className="ss__slider__tick" {...getTickProps()}>
+								<div className="ss__slider__tick__label">{value}</div>
+							</div>
+						))}
+
+					{segments.map(({ getSegmentProps }, index) => (
+						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
 					))}
 
-				{segments.map(({ getSegmentProps }, index) => (
-					<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
-				))}
-
-				{handles.map(({ value, active, getHandleProps }) => (
-					<button
-						{...getHandleProps({
-							style: {
-								appearance: 'none',
-								border: 'none',
-								background: 'transparent',
-								outline: 'none',
-							},
-						})}
-					>
-						<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
-							<label>{sprintf(facet.formatValue, value)}</label>
-						</div>
-					</button>
-				))}
-			</div>
+					{handles.map(({ value, active, getHandleProps }) => (
+						<button
+							{...getHandleProps({
+								style: {
+									appearance: 'none',
+									border: 'none',
+									background: 'transparent',
+									outline: 'none',
+								},
+							})}
+						>
+							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
+								<label>{sprintf(facet.formatValue, value)}</label>
+							</div>
+						</button>
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

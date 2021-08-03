@@ -80,7 +80,7 @@ describe('Dropdown Component', () => {
 
 		const dropdown = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdown.classList).toHaveLength(2);
-		expect(dropdown.classList[1]).toMatch(/^css-0/);
+		expect(dropdown.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {

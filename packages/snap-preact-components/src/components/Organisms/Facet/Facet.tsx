@@ -14,7 +14,7 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 
 const CSS = {
 	facet: ({ color, theme, style }) =>
@@ -213,43 +213,45 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	}
 
 	return (
-		<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
-			<Dropdown
-				{...subProps.dropdown}
-				open={disableCollapse || !facet?.collapsed}
-				onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
-				button={
-					<div className="ss__facet__header">
-						{facet?.label}
-						{!hideIcon && !disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+		<CacheProvider value={cache}>
+			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
+				<Dropdown
+					{...subProps.dropdown}
+					open={disableCollapse || !facet?.collapsed}
+					onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
+					button={
+						<div className="ss__facet__header">
+							{facet?.label}
+							{!hideIcon && !disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+						</div>
+					}
+				>
+					<div className={classnames('ss__facet__options', `ss__facet__options--${facet.display}`, className)}>
+						{(() => {
+							switch (facet?.display) {
+								case FacetDisplay.SLIDER:
+									return <Slider {...subProps.slider} facet={facet as RangeFacet} />;
+								case FacetDisplay.GRID:
+									return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
+								case FacetDisplay.PALETTE:
+									return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
+								case FacetDisplay.HIERARCHY:
+									return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
+								default:
+									return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+							}
+						})()}
 					</div>
-				}
-			>
-				<div className={classnames('ss__facet__options', `ss__facet__options--${facet.display}`, className)}>
-					{(() => {
-						switch (facet?.display) {
-							case FacetDisplay.SLIDER:
-								return <Slider {...subProps.slider} facet={facet as RangeFacet} />;
-							case FacetDisplay.GRID:
-								return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
-							case FacetDisplay.PALETTE:
-								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
-							case FacetDisplay.HIERARCHY:
-								return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
-							default:
-								return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
-						}
-					})()}
-				</div>
 
-				{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-					<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
-						<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
-						<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
-					</div>
-				)}
-			</Dropdown>
-		</div>
+					{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
+						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
+							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
+						</div>
+					)}
+				</Dropdown>
+			</div>
+		</CacheProvider>
 	);
 });
 

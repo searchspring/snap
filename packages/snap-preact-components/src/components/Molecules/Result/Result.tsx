@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -106,7 +106,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, detailSlot, buttonSlot, fallback, disableStyles, className, layout, style, controller } = props;
+	const { result, hideBadge, hideTitle, hidePricing, detailSlot, fallback, disableStyles, className, layout, style, controller } = props;
 
 	const core = result?.mappings?.core;
 
@@ -156,49 +156,51 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return (
 		core && (
-			<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-				<div className="ss__result__wrapper">
-					<div className="ss__result__wrapper__image">
-						<a
-							href={core.url}
-							onMouseDown={(e) => {
-								controller?.track?.product?.click(e, result);
-							}}
-						>
-							{!hideBadge && onSale && <Badge {...subProps.badge} />}
-							<Image {...subProps.image} />
-						</a>
-					</div>
-					<div className="ss__result__wrapper__details">
-						{!hideTitle && (
-							<div className="ss__result__wrapper__details__title">
-								<a
-									href={core.url}
-									onMouseDown={(e) => {
-										controller?.track?.product?.click(e, result);
-									}}
-								>
-									{core.name}
-								</a>
-							</div>
-						)}
-						{!hidePricing && (
-							<div className="ss__result__wrapper__details__pricing">
-								{core.price < core.msrp ? (
-									<>
+			<CacheProvider value={cache}>
+				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+					<div className="ss__result__wrapper">
+						<div className="ss__result__wrapper__image">
+							<a
+								href={core.url}
+								onMouseDown={(e) => {
+									controller?.track?.product?.click(e, result);
+								}}
+							>
+								{!hideBadge && onSale && <Badge {...subProps.badge} />}
+								<Image {...subProps.image} />
+							</a>
+						</div>
+						<div className="ss__result__wrapper__details">
+							{!hideTitle && (
+								<div className="ss__result__wrapper__details__title">
+									<a
+										href={core.url}
+										onMouseDown={(e) => {
+											controller?.track?.product?.click(e, result);
+										}}
+									>
+										{core.name}
+									</a>
+								</div>
+							)}
+							{!hidePricing && (
+								<div className="ss__result__wrapper__details__pricing">
+									{core.price < core.msrp ? (
+										<>
+											<Price {...subProps.price} value={core.price} />
+											&nbsp;
+											<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+										</>
+									) : (
 										<Price {...subProps.price} value={core.price} />
-										&nbsp;
-										<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-									</>
-								) : (
-									<Price {...subProps.price} value={core.price} />
-								)}
-							</div>
-						)}
-						{detailSlot && cloneElement(detailSlot, { result })}
+									)}
+								</div>
+							)}
+							{detailSlot && cloneElement(detailSlot, { result })}
+						</div>
 					</div>
-				</div>
-			</article>
+				</article>
+			</CacheProvider>
 		)
 	);
 });

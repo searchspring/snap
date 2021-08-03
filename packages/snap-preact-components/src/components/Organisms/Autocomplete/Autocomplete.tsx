@@ -13,7 +13,7 @@ import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 
 const CSS = {
@@ -286,74 +286,79 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const justTrending = showTrending && facets.length === 0 && terms.length === 0 && !(results.length === 0 && state.input?.length);
 	return (
 		visible && (
-			<div
-				css={CSS.Autocomplete({
-					inputViewportOffsetBottom,
-					justTrending,
-					style,
-					theme,
-				})}
-				className={classnames('ss__autocomplete', className)}
-				onClick={(e) => e.stopPropagation()}
-			>
-				{!hideTerms && (
-					<div className="ss__autocomplete__terms">
-						{showTrending && <h5>Popular Searches</h5>}
-						<ul className="ss__autocomplete__terms__options">
-							{(showTrending ? trending : terms).map((term) => (
-								<li className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
-									<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
-										{emIfy(term.value, state.input)}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				)}
-
-				<div className="ss__autocomplete__content">
-					{!hideFacets && facets.length ? (
-						<div className="ss__autocomplete__content__facets">
-							{facets
-								.filter((facet) => facet.display !== FacetDisplay.SLIDER)
-								.slice(0, 3)
-								.map((facet) => (
-									<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+			<CacheProvider value={cache}>
+				<div
+					css={
+						!disableStyles &&
+						CSS.Autocomplete({
+							inputViewportOffsetBottom,
+							justTrending,
+							style,
+							theme,
+						})
+					}
+					className={classnames('ss__autocomplete', className)}
+					onClick={(e) => e.stopPropagation()}
+				>
+					{!hideTerms && (
+						<div className="ss__autocomplete__terms">
+							{showTrending && <h5>Popular Searches</h5>}
+							<ul className="ss__autocomplete__terms__options">
+								{(showTrending ? trending : terms).map((term) => (
+									<li className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
+										<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+											{emIfy(term.value, state.input)}
+										</a>
+									</li>
 								))}
-							<Banner content={merchandising.content} type={BannerType.LEFT} />
+							</ul>
 						</div>
-					) : null}
-					<div className="ss__autocomplete__content__results__wrapper">
-						<div className="ss__autocomplete__content__results">
-							<Banner content={merchandising.content} type={BannerType.HEADER} />
-							<Banner content={merchandising.content} type={BannerType.BANNER} />
-							<Results results={results} {...subProps.results} controller={controller} />
-							<Banner content={merchandising.content} type={BannerType.FOOTER} />
-						</div>
-						{search?.query?.string ? (
-							<div className="ss__autocomplete__content__results__info">
-								{results.length === 0 ? (
-									<>
-										<p>No results found for "{search.query.string}".</p>
-										<p>Please try another search.</p>
-									</>
-								) : (
-									<>
-										<div className="ss__autocomplete__content__results__spacer"></div>
-										<div className="ss__autocomplete__content__results__link">
-											<a href={state.url.href}>
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-												{search.query.string}"
-												<Icon {...subProps.icon} />
-											</a>
-										</div>
-									</>
-								)}
+					)}
+
+					<div className="ss__autocomplete__content">
+						{!hideFacets && facets.length ? (
+							<div className="ss__autocomplete__content__facets">
+								{facets
+									.filter((facet) => facet.display !== FacetDisplay.SLIDER)
+									.slice(0, 3)
+									.map((facet) => (
+										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+									))}
+								<Banner content={merchandising.content} type={BannerType.LEFT} />
 							</div>
 						) : null}
+						<div className="ss__autocomplete__content__results__wrapper">
+							<div className="ss__autocomplete__content__results">
+								<Banner content={merchandising.content} type={BannerType.HEADER} />
+								<Banner content={merchandising.content} type={BannerType.BANNER} />
+								<Results results={results} {...subProps.results} controller={controller} />
+								<Banner content={merchandising.content} type={BannerType.FOOTER} />
+							</div>
+							{search?.query?.string ? (
+								<div className="ss__autocomplete__content__results__info">
+									{results.length === 0 ? (
+										<>
+											<p>No results found for "{search.query.string}".</p>
+											<p>Please try another search.</p>
+										</>
+									) : (
+										<>
+											<div className="ss__autocomplete__content__results__spacer"></div>
+											<div className="ss__autocomplete__content__results__link">
+												<a href={state.url.href}>
+													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+													{search.query.string}"
+													<Icon {...subProps.icon} />
+												</a>
+											</div>
+										</>
+									)}
+								</div>
+							) : null}
+						</div>
 					</div>
 				</div>
-			</div>
+			</CacheProvider>
 		)
 	);
 });

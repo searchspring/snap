@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { defined } from '../../../utilities';
 import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 
 const CSS = {
 	palette: ({ columns, gapSize, style }) =>
@@ -96,27 +96,29 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	return (
 		values?.length && (
-			<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
-				{values.map((value) => (
-					<a
-						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-						onClick={onClick}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
-						{...valueProps}
-						{...value.url?.link}
-					>
-						<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
-							{!hideIcon && value.filtered && (
-								<>
-									<Icon {...subProps.icon} {...subProps.icon_bg} />
-									<Icon {...subProps.icon} {...subProps.icon_fg} />
-								</>
-							)}
-						</div>
-						{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
-					</a>
-				))}
-			</div>
+			<CacheProvider value={cache}>
+				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
+					{values.map((value) => (
+						<a
+							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+							onClick={onClick}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
+							{...valueProps}
+							{...value.url?.link}
+						>
+							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
+								{!hideIcon && value.filtered && (
+									<>
+										<Icon {...subProps.icon} {...subProps.icon_bg} />
+										<Icon {...subProps.icon} {...subProps.icon_fg} />
+									</>
+								)}
+							</div>
+							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
+						</a>
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

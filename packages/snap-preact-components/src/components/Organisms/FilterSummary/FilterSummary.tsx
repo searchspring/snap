@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, Filter as FilterType } from '../../../types';
 
 const CSS = {
@@ -75,30 +75,32 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	};
 
 	return filters?.length ? (
-		<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
-			<div className="ss__filter-summary__title">{title}</div>
+		<CacheProvider value={cache}>
+			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
+				<div className="ss__filter-summary__title">{title}</div>
 
-			{filters.map((filter) => (
-				<Filter
-					{...subProps.filter}
-					url={filter?.url}
-					facetLabel={filter?.facet?.label}
-					valueLabel={filter?.value?.label}
-					onClick={(e) => onClick && onClick(e, filter)}
-				/>
-			))}
+				{filters.map((filter) => (
+					<Filter
+						{...subProps.filter}
+						url={filter?.url}
+						facetLabel={filter?.facet?.label}
+						valueLabel={filter?.value?.label}
+						onClick={(e) => onClick && onClick(e, filter)}
+					/>
+				))}
 
-			{!hideClearAll && (
-				<Filter
-					{...subProps.filter}
-					icon={clearAllIcon}
-					className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
-					hideFacetLabel
-					valueLabel={clearAllLabel}
-					onClick={(e) => onClearAllClick && onClearAllClick(e)}
-				/>
-			)}
-		</div>
+				{!hideClearAll && (
+					<Filter
+						{...subProps.filter}
+						icon={clearAllIcon}
+						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
+						hideFacetLabel
+						valueLabel={clearAllLabel}
+						onClick={(e) => onClearAllClick && onClearAllClick(e)}
+					/>
+				)}
+			</div>
+		</CacheProvider>
 	) : null;
 });
 

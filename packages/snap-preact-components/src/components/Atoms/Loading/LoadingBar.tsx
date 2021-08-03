@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -60,22 +60,24 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	return (
 		active && (
-			<div
-				css={
-					!disableStyles &&
-					CSS.loadingBar({
-						height,
-						color,
-						backgroundColor,
-						style,
-						theme,
-						animation: CSS.animation,
-					})
-				}
-				className={classnames('ss__loading-bar', className)}
-			>
-				<div className="ss__loading-bar__bar"></div>
-			</div>
+			<CacheProvider value={cache}>
+				<div
+					css={
+						!disableStyles &&
+						CSS.loadingBar({
+							height,
+							color,
+							backgroundColor,
+							style,
+							theme,
+							animation: CSS.animation,
+						})
+					}
+					className={classnames('ss__loading-bar', className)}
+				>
+					<div className="ss__loading-bar__bar"></div>
+				</div>
+			</CacheProvider>
 		)
 	);
 }

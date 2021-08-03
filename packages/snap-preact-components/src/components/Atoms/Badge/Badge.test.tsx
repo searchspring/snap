@@ -85,7 +85,7 @@ describe('Badge Component', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
 			expect(BadgeElement.classList.length).toBe(2);
-			expect(BadgeElement.classList[1]).toMatch(/^css-0/);
+			expect(BadgeElement.classList[1]).toMatch(/^ss-0/);
 		});
 	});
 

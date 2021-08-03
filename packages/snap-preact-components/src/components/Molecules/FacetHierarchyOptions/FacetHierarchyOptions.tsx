@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
@@ -67,26 +67,28 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	return (
 		values?.length && (
-			<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss__facet-hierarchy-options', className)}>
-				{values.map((value) => (
-					<a
-						className={classnames(
-							'ss__facet-hierarchy-options__option',
-							{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-							{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
-						)}
-						onClick={onClick}
-						{...value.url?.link}
-					>
-						<span className="ss__facet-hierarchy-options__option__value">
-							{value.label}
-							{!hideCount && value.count > 0 && !value.filtered && (
-								<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
+			<CacheProvider value={cache}>
+				<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss__facet-hierarchy-options', className)}>
+					{values.map((value) => (
+						<a
+							className={classnames(
+								'ss__facet-hierarchy-options__option',
+								{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+								{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
 							)}
-						</span>
-					</a>
-				))}
-			</div>
+							onClick={onClick}
+							{...value.url?.link}
+						>
+							<span className="ss__facet-hierarchy-options__option__value">
+								{value.label}
+								{!hideCount && value.count > 0 && !value.filtered && (
+									<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
+								)}
+							</span>
+						</a>
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

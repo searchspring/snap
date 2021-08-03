@@ -50,7 +50,7 @@ describe('Overlay Component', () => {
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe('');
 		expect(overlayElement.classList.length).toBe(3);
-		expect(overlayElement.classList).toContain('css-0');
+		expect(overlayElement.classList).toContain('ss-0');
 	});
 
 	it('can custom className', () => {

@@ -101,7 +101,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 
 		expect(breadcrumbElement.classList.length).toBe(2);
-		expect(breadcrumbElement.classList[1]).toMatch(/^css-0/);
+		expect(breadcrumbElement.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('is themeable with ThemeProvider', () => {

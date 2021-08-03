@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Facet, FacetProps } from '../Facet';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 
@@ -48,11 +48,13 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	return (
 		facets?.length > 0 && (
-			<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
-				{facets.map((facet) => (
-					<Facet {...subProps.facet} facet={facet} />
-				))}
-			</div>
+			<CacheProvider value={cache}>
+				<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
+					{facets.map((facet) => (
+						<Facet {...subProps.facet} facet={facet} />
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

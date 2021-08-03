@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -43,11 +43,13 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 	const { active, color, transitionSpeed, onClick, disableStyles, className, style } = props;
 
 	return (
-		<div
-			onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
-			className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
-			css={!disableStyles && CSS.overlay({ color, transitionSpeed, style })}
-		/>
+		<CacheProvider value={cache}>
+			<div
+				onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
+				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
+				css={!disableStyles && CSS.overlay({ color, transitionSpeed, style })}
+			/>
+		</CacheProvider>
 	);
 }
 

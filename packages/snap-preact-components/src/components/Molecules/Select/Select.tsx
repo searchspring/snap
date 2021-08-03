@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
@@ -183,92 +183,94 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		options &&
 		Array.isArray(options) &&
 		options.length && (
-			<div
-				css={
-					!disableStyles && native
-						? CSS.native({ style })
-						: CSS.select({
-								color,
-								backgroundColor,
-								borderColor,
-								label,
-								selection: selection || '',
-								theme,
-								style,
-						  })
-				}
-				className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
-			>
-				{native ? (
-					<>
-						{label && !hideLabelOnSelection && (
-							<span className="ss__select__label">
-								{label}
-								{separator && <span className="ss__select__label__separator">{separator}</span>}
-							</span>
-						)}
-
-						<select
-							className="ss__select__select"
-							disabled={disabled || undefined}
-							onChange={(e) => {
-								const selectElement = e.target;
-								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
-								const selectedOption = options
-									.filter((option, index) => {
-										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
-									})
-									.pop();
-								!disabled && makeSelection(e as any, selectedOption);
-							}}
-						>
-							{!selection && clearSelection && (
-								<option className="ss__select__select__option" selected value="">
-									{clearSelection}
-								</option>
+			<CacheProvider value={cache}>
+				<div
+					css={
+						!disableStyles && native
+							? CSS.native({ style })
+							: CSS.select({
+									color,
+									backgroundColor,
+									borderColor,
+									label,
+									selection: selection || '',
+									theme,
+									style,
+							  })
+					}
+					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
+				>
+					{native ? (
+						<>
+							{label && !hideLabelOnSelection && (
+								<span className="ss__select__label">
+									{label}
+									{separator && <span className="ss__select__label__separator">{separator}</span>}
+								</span>
 							)}
-							{options.map((option, index) => (
-								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
-									{option.label}
-								</option>
-							))}
-						</select>
-					</>
-				) : (
-					<Dropdown
-						{...subProps.dropdown}
-						disableClickOutside={disableClickOutside}
-						open={open}
-						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-						onClick={(e) => setOpen((prev) => !prev)}
-						button={
-							<Button {...subProps.button}>
-								{label && !hideLabelOnSelection && (
-									<span className="ss__select__label">
-										{label}
-										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
-									</span>
+
+							<select
+								className="ss__select__select"
+								disabled={disabled || undefined}
+								onChange={(e) => {
+									const selectElement = e.target;
+									const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
+									const selectedOption = options
+										.filter((option, index) => {
+											return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
+										})
+										.pop();
+									!disabled && makeSelection(e as any, selectedOption);
+								}}
+							>
+								{!selection && clearSelection && (
+									<option className="ss__select__select__option" selected value="">
+										{clearSelection}
+									</option>
 								)}
-								{selection && <span className="ss__select__selection">{selection?.label}</span>}
-								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
-							</Button>
-						}
-					>
-						<ul className="ss__select__select">
-							{options.map((option) => (
-								<li
-									className={classnames('ss__select__select__option', {
-										'ss__select__select__option--selected': selection?.value === option.value,
-									})}
-									onClick={(e) => !disabled && makeSelection(e as any, option)}
-								>
-									<span>{option.label}</span>
-								</li>
-							))}
-						</ul>
-					</Dropdown>
-				)}
-			</div>
+								{options.map((option, index) => (
+									<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
+										{option.label}
+									</option>
+								))}
+							</select>
+						</>
+					) : (
+						<Dropdown
+							{...subProps.dropdown}
+							disableClickOutside={disableClickOutside}
+							open={open}
+							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+							onClick={(e) => setOpen((prev) => !prev)}
+							button={
+								<Button {...subProps.button}>
+									{label && !hideLabelOnSelection && (
+										<span className="ss__select__label">
+											{label}
+											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+										</span>
+									)}
+									{selection && <span className="ss__select__selection">{selection?.label}</span>}
+									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+								</Button>
+							}
+						>
+							<ul className="ss__select__select">
+								{options.map((option) => (
+									<li
+										className={classnames('ss__select__select__option', {
+											'ss__select__select__option--selected': selection?.value === option.value,
+										})}
+										onClick={(e) => !disabled && makeSelection(e as any, option)}
+									>
+										<span>{option.label}</span>
+									</li>
+								))}
+							</ul>
+						</Dropdown>
+					)}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

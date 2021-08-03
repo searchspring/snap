@@ -37,6 +37,3 @@ export * from './hooks';
 
 // PROVIDERS
 export * from './providers';
-
-// 3RD PARTY
-export { default as classnames } from 'classnames';

@@ -157,7 +157,7 @@ describe('Icon Component', () => {
 
 		const svg = rendered.container.querySelector('svg');
 		expect(svg).toHaveClass('ss__icon');
-		expect(svg.classList[2]).toMatch(/^css-0/);
+		expect(svg.classList[2]).toMatch(/^ss-0/);
 
 		expect(svg).toHaveAttribute('width', size);
 		expect(svg).toHaveAttribute('height', size);

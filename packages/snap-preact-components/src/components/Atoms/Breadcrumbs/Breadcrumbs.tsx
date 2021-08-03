@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 
 const CSS = {
 	breadcrumbs: ({ style }) =>
@@ -38,15 +38,17 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 	const { data, separator, disableStyles, className, style } = props;
 
 	return (
-		<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
-			<ul className="ss__breadcrumbs__crumbs">
-				{data
-					.map<React.ReactNode>((crumb) => (
-						<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
-					))
-					.reduce((prev, curr) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
-			</ul>
-		</div>
+		<CacheProvider value={cache}>
+			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
+				<ul className="ss__breadcrumbs__crumbs">
+					{data
+						.map<React.ReactNode>((crumb) => (
+							<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
+						))
+						.reduce((prev, curr) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
+				</ul>
+			</div>
+		</CacheProvider>
 	);
 });
 
