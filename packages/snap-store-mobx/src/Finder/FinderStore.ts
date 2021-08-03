@@ -12,13 +12,12 @@ export class FinderStore extends AbstractStore {
 	selections: SelectionStore[];
 
 	constructor(config, services: { urlManager: any }) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.storage = new StorageStore();
@@ -40,7 +39,7 @@ export class FinderStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.pagination = new PaginationStore({}, this.services, data.pagination);
 		this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage);
 	}
 }

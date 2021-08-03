@@ -33,6 +33,8 @@ export type AfterSearchObj = {
 
 export type AfterStoreObj = {
 	controller: AbstractController;
+	request: any;
+	response: any;
 };
 
 // Abstract
@@ -70,6 +72,9 @@ export type SearchControllerConfig = ControllerConfig &
 			facets?: {
 				trim?: boolean;
 			};
+      infinite?: {
+		  	backfill?: number;
+  		};
 		};
 	};
 
@@ -112,3 +117,5 @@ export type RecommendationControllerConfig = ControllerConfig &
 		tag: string;
 		branch?: string;
 	};
+
+export type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;

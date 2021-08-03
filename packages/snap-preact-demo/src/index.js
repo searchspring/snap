@@ -41,6 +41,9 @@ const config = {
 						redirects: {
 							merchandising: false,
 						},
+						// infinite: {
+						// 	backfill: 5,
+						// },
 					},
 				},
 				targets: [

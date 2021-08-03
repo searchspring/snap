@@ -24,13 +24,30 @@ export class Results extends Component {
 
 		return (
 			<div class="ss-results">
-				<Toolbar />
+				{pagination.previous && (
+					<button
+						onClick={() => {
+							pagination.previous.url.go();
+						}}
+					>
+						Load More
+					</button>
+				)}
 
 				<Profile name="results" controller={controller}>
 					<ResultsComponent controller={controller} results={results} theme={resultsTheme} />
 				</Profile>
 
-				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
+				{pagination.next && (
+					<button
+						onClick={() => {
+							pagination.next.url.go();
+						}}
+					>
+						Load More
+					</button>
+				)}
+				{/* <div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div> */}
 			</div>
 		);
 	}
