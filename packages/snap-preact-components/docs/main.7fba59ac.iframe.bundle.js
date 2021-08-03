@@ -13055,10 +13055,10 @@
 										switch (result.type) {
 											case types.$.BANNER:
 												return (0,
-												emotion_react_browser_esm.tZ)(InlineBanner.f, __assign({}, subProps.inlineBanner, { banner: result, layout: props.layout }));
+												emotion_react_browser_esm.tZ)(InlineBanner.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
 											default:
 												return (0,
-												emotion_react_browser_esm.tZ)(Result.x, __assign({}, subProps.result, { result, layout: props.layout, controller }));
+												emotion_react_browser_esm.tZ)(Result.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
 										}
 									})();
 								})
@@ -15655,7 +15655,10 @@
 					__webpack_require__(47256),
 					__webpack_require__(45794),
 					__webpack_require__(95342),
+					__webpack_require__(43450),
+					__webpack_require__(18178),
 					__webpack_require__(85940),
+					__webpack_require__(54226),
 					__webpack_require__(95094),
 					__webpack_require__(39714)),
 				cjs_default = __webpack_require__.n(cjs),
@@ -15827,13 +15830,7 @@
 			!(function (LogMode) {
 				(LogMode.PRODUCTION = 'production'), (LogMode.DEVELOPMENT = 'development');
 			})(LogMode || (LogMode = {}));
-			__webpack_require__(84870),
-				__webpack_require__(53985),
-				__webpack_require__(49228),
-				__webpack_require__(18178),
-				__webpack_require__(43450),
-				__webpack_require__(43108),
-				__webpack_require__(27233);
+			__webpack_require__(84870), __webpack_require__(53985), __webpack_require__(49228), __webpack_require__(43108), __webpack_require__(27233);
 			var targetedElems = [],
 				DomTargeter = (function () {
 					function DomTargeter(targets, onTarget, document) {
@@ -16210,7 +16207,161 @@
 						}),
 						AbstractController
 					);
+				})(),
+				cookies =
+					(__webpack_require__(48319),
+					__webpack_require__(99120),
+					__webpack_require__(74083),
+					{
+						set: function set(name, val, sameSite, expires) {
+							sameSite = sameSite || 'Lax';
+							var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
+							if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
+								var d = new Date();
+								d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
+							}
+							window.document.cookie = cookie;
+						},
+						get: function get(name) {
+							name += '=';
+							for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
+								for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
+								if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
+							}
+							return '';
+						},
+						unset: function unset(name) {
+							window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+						},
+					});
+			__webpack_require__(71245);
+			var StorageType,
+				flags = (function getFlags(userAgent) {
+					void 0 === userAgent && (userAgent = ''), (userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase());
+					var ieVersion,
+						isIE = function isIE() {
+							if (void 0 === ieVersion) {
+								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
+								ieVersion = !!version && Number(version);
+							}
+							return ieVersion;
+						};
+					return {
+						cors: function cors() {
+							return !isIE() || isIE() >= 10;
+						},
+						cookies: function cookies() {
+							return window.navigator && window.navigator.cookieEnabled && !window.navigator.doNotTrack;
+						},
+						storage: function storage() {
+							try {
+								return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
+							} catch (e) {
+								return !1;
+							}
+						},
+					};
+				})(),
+				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() },
+				utils_cookies = cookies,
+				StorageStore = (function () {
+					function StorageStore(config) {
+						var _a, _b;
+						if (((this.type = null), (this.expiration = 31536e6), (this.sameSite = void 0), (this.key = 'ss-storage'), (this.state = {}), config))
+							switch (
+								('' !== config.key.trim() && (this.key = config.key.trim()),
+								(null === (_a = null == config ? void 0 : config.cookie) || void 0 === _a ? void 0 : _a.expiration) &&
+									(this.expiration = config.cookie.expiration),
+								(null === (_b = null == config ? void 0 : config.cookie) || void 0 === _b ? void 0 : _b.sameSite) &&
+									(this.sameSite = config.cookie.sameSite),
+								config.type)
+							) {
+								case StorageType.SESSION:
+									(this.type = featureFlags.storage ? config.type : null),
+										this.type &&
+											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
+											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.LOCAL:
+									(this.type = featureFlags.storage ? config.type : null),
+										this.type &&
+											!window.localStorage.getItem(this.key) &&
+											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
+											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.COOKIE:
+									if (featureFlags.cookies) {
+										this.type = config.type;
+										var data = utils_cookies.get(this.key);
+										data && (this.state = JSON.parse(data));
+									}
+							}
+					}
+					return (
+						(StorageStore.prototype.set = function (path, value) {
+							var paths = null == path ? void 0 : path.split('.'),
+								location = this.state;
+							switch (
+								(null == paths ||
+									paths.forEach(function (p, i) {
+										i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
+									}),
+								this.type)
+							) {
+								case StorageType.SESSION:
+									window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+									break;
+								case StorageType.LOCAL:
+									window.localStorage.setItem(this.key, JSON.stringify(this.state));
+									break;
+								case StorageType.COOKIE:
+									utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+							}
+						}),
+						(StorageStore.prototype.get = function (path) {
+							switch (this.type) {
+								case StorageType.SESSION:
+									this.state = JSON.parse(window.sessionStorage.getItem(this.key));
+									break;
+								case StorageType.LOCAL:
+									this.state = JSON.parse(window.localStorage.getItem(this.key));
+									break;
+								case StorageType.COOKIE:
+									var data = utils_cookies.get(this.key);
+									data && (this.state = JSON.parse(data));
+							}
+							var paths = null == path ? void 0 : path.split('.');
+							if (null == paths ? void 0 : paths.length) {
+								for (var value = this.state, _i = 0, paths_1 = paths; _i < paths_1.length; _i++) {
+									var p = paths_1[_i];
+									if (!value || void 0 === value[p]) {
+										value = void 0;
+										break;
+									}
+									value = value[p];
+								}
+								return value;
+							}
+						}),
+						(StorageStore.prototype.clear = function () {
+							switch (this.type) {
+								case StorageType.SESSION:
+									window.sessionStorage.removeItem(this.key);
+									break;
+								case StorageType.LOCAL:
+									window.localStorage.removeItem(this.key);
+									break;
+								case StorageType.COOKIE:
+									utils_cookies.unset(this.key);
+							}
+							this.state = {};
+						}),
+						StorageStore
+					);
 				})();
+			!(function (StorageType) {
+				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
+			})(StorageType || (StorageType = {}));
 			__webpack_require__(43430);
 			function getSearchParams(state) {
 				var params = {};
@@ -16245,6 +16396,8 @@
 				);
 			}
 			var _extendStatics,
+				BeaconType,
+				BeaconCategory,
 				__extends =
 					((_extendStatics = function extendStatics(d, b) {
 						return (_extendStatics =
@@ -16381,6 +16534,10 @@
 						};
 					}
 				},
+				SearchController_spreadArray = function (to, from) {
+					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
+					return to;
+				},
 				defaultConfig = { id: 'search', globals: {}, settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0 } } },
 				SearchController = (function (_super) {
 					function SearchController(config, _a) {
@@ -16396,8 +16553,12 @@
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
-										var _a,
-											_b = result.attributes,
+										var _a;
+										if (_this.config.settings.infinite) {
+											var scrollMap = {};
+											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
+										}
+										var _b = result.attributes,
 											intellisuggestData = _b.intellisuggestData,
 											intellisuggestSignature = _b.intellisuggestSignature,
 											target = e.target,
@@ -16406,38 +16567,69 @@
 												(null === (_a = result.mappings.core) || void 0 === _a ? void 0 : _a.url) ||
 												void 0,
 											event = _this.tracker.track.product.click({ data: { intellisuggestData, intellisuggestSignature, href } });
-										return _this.eventManager.fire('track.product.click', { controller: _this, e, result, event }), event;
+										return _this.eventManager.fire('track.product.click', { controller: _this, event: e, result, trackEvent: event }), event;
 									},
 								},
 							}),
 							(_this.search = function () {
 								return SearchController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, response_1, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
-									return SearchController_generator(this, function (_a) {
-										switch (_a.label) {
+									var params,
+										err_1,
+										preventBackfill,
+										dontBackfill,
+										searchProfile,
+										response_1,
+										previousResults_1,
+										backfills,
+										page,
+										backfillParams,
+										afterSearchProfile,
+										err_2,
+										afterStoreProfile,
+										err_3,
+										err_4,
+										_a,
+										_b,
+										_c,
+										_d,
+										_e,
+										_f,
+										_g;
+									return SearchController_generator(this, function (_h) {
+										switch (_h.label) {
 											case 0:
 												return this.initialized ? [3, 2] : [4, this.init()];
 											case 1:
-												_a.sent(), (_a.label = 2);
+												_h.sent(), (_h.label = 2);
 											case 2:
-												(params = this.params), (_a.label = 3);
+												(params = this.params), (_h.label = 3);
 											case 3:
-												_a.trys.push([3, 17, , 18]), (_a.label = 4);
+												_h.trys.push([3, 20, , 21]), (_h.label = 4);
 											case 4:
-												return _a.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _h.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 5:
-												return _a.sent(), [3, 7];
+												return _h.sent(), [3, 7];
 											case 6:
-												if ('cancelled' == (null == (err_1 = _a.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _h.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 7:
-												return (
-													(searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-													[4, this.client.search(params)]
-												);
+												return this.config.settings.infinite &&
+													((preventBackfill =
+														(null === (_a = this.config.settings.infinite) || void 0 === _a ? void 0 : _a.backfill) &&
+														!this.store.results.length &&
+														(null === (_b = params.pagination) || void 0 === _b ? void 0 : _b.page) > this.config.settings.infinite.backfill),
+													(dontBackfill =
+														!(null === (_c = this.config.settings.infinite) || void 0 === _c ? void 0 : _c.backfill) &&
+														!this.store.results.length &&
+														(null === (_d = params.pagination) || void 0 === _d ? void 0 : _d.page) > 1),
+													preventBackfill || dontBackfill)
+													? (this.storage.set('scrollMap', {}), this.urlManager.set('page', 1).go(), [2])
+													: ((searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+													  [4, this.client.search(params)]);
 											case 8:
-												(response_1 = _a.sent()).meta || (response_1.meta = this.client.meta),
+												if (
+													((response_1 = _h.sent()).meta || (response_1.meta = this.client.meta),
 													this.config.settings.facets.trim &&
 														(response_1.facets = response_1.facets.filter(function (facet) {
 															var _a, _b;
@@ -16446,55 +16638,87 @@
 																		('range' != facet.type || facet.range.low != facet.range.high)
 																: facet.values[0].count != response_1.pagination.totalResults;
 														})),
-													searchProfile.stop(),
+													!(this.config.settings.infinite && (null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1))
+												)
+													return [3, 11];
+												if (
+													((previousResults_1 = (null === (_f = this.store.data) || void 0 === _f ? void 0 : _f.results) || []),
+													!(null === (_g = this.config.settings) || void 0 === _g ? void 0 : _g.infinite.backfill) || previousResults_1.length)
+												)
+													return [3, 10];
+												for (backfills = [], page = 1; page < params.pagination.page; page++)
+													(backfillParams = cjs_default()(__assign({}, params), { pagination: { page } })),
+														backfills.push(this.client.search(backfillParams));
+												return [4, Promise.all(backfills)];
+											case 9:
+												_h.sent().map(function (data) {
+													previousResults_1 = previousResults_1.concat(data.results);
+												}),
+													(_h.label = 10);
+											case 10:
+												(response_1.results = SearchController_spreadArray(
+													SearchController_spreadArray([], previousResults_1),
+													response_1.results || []
+												)),
+													(_h.label = 11);
+											case 11:
+												searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_a.label = 9);
-											case 9:
+													(_h.label = 12);
+											case 12:
 												return (
-													_a.trys.push([9, 11, , 12]),
+													_h.trys.push([12, 14, , 15]),
 													[4, this.eventManager.fire('afterSearch', { controller: this, request: params, response: response_1 })]
 												);
-											case 10:
-												return _a.sent(), [3, 12];
-											case 11:
-												if ('cancelled' == (null == (err_2 = _a.sent()) ? void 0 : err_2.message))
+											case 13:
+												return _h.sent(), [3, 15];
+											case 14:
+												if ('cancelled' == (null == (err_2 = _h.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
-											case 12:
+											case 15:
 												afterSearchProfile.stop(),
 													this.log.profile(afterSearchProfile),
 													this.store.update(response_1),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_a.label = 13);
-											case 13:
+													(_h.label = 16);
+											case 16:
 												return (
-													_a.trys.push([13, 15, , 16]),
+													_h.trys.push([16, 18, , 19]),
 													[4, this.eventManager.fire('afterStore', { controller: this, request: params, response: response_1 })]
 												);
-											case 14:
-												return _a.sent(), [3, 16];
-											case 15:
-												if ('cancelled' == (null == (err_3 = _a.sent()) ? void 0 : err_3.message))
+											case 17:
+												return _h.sent(), [3, 19];
+											case 18:
+												if ('cancelled' == (null == (err_3 = _h.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
-											case 16:
-												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
-											case 17:
-												return (err_4 = _a.sent()) && console.error(err_4), [3, 18];
-											case 18:
+											case 19:
+												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
+											case 20:
+												return (err_4 = _h.sent()) && console.error(err_4), [3, 21];
+											case 21:
 												return [2];
 										}
 									});
 								});
 							}),
 							(_this.config = cjs_default()(defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
+							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on('beforeSearch', function (search, next) {
 								return SearchController_awaiter(_this, void 0, void 0, function () {
+									var stringyParams;
 									return SearchController_generator(this, function (_a) {
 										switch (_a.label) {
 											case 0:
-												return (search.controller.store.loading = !0), [4, next()];
+												return (
+													(search.controller.store.loading = !0),
+													(stringyParams = JSON.stringify(search.request)),
+													this.storage.set('lastStringyParams', stringyParams),
+													[4, next()]
+												);
 											case 1:
 												return _a.sent(), [2];
 										}
@@ -16507,10 +16731,7 @@
 									return SearchController_generator(this, function (_l) {
 										switch (_l.label) {
 											case 0:
-												return [4, next()];
-											case 1:
 												return (
-													_l.sent(),
 													(config = search.controller.config),
 													(redirectURL =
 														null === (_b = null === (_a = search.response) || void 0 === _a ? void 0 : _a.merchandising) || void 0 === _b
@@ -16537,7 +16758,46 @@
 																? void 0
 																: _k.length)
 														? (window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url), [2, !1])
-														: ((search.controller.store.loading = !1), [2])
+														: [4, next()]
+												);
+											case 1:
+												return _l.sent(), [2];
+										}
+									});
+								});
+							}),
+							_this.eventManager.on('afterStore', function (search, next) {
+								return SearchController_awaiter(_this, void 0, void 0, function () {
+									var stringyParams_1,
+										scrollMap_1,
+										scrollToPosition_1,
+										checkCount_1,
+										heightCheck_1,
+										_a,
+										_this = this;
+									return SearchController_generator(this, function (_b) {
+										switch (_b.label) {
+											case 0:
+												return [4, next()];
+											case 1:
+												return (
+													_b.sent(),
+													(search.controller.store.loading = !1),
+													(null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.infinite) &&
+														0 === window.scrollY &&
+														((stringyParams_1 = JSON.stringify(search.request)),
+														(scrollMap_1 = this.storage.get('scrollMap') || {}),
+														(scrollToPosition_1 = scrollMap_1[stringyParams_1]) &&
+															((checkCount_1 = 0),
+															(heightCheck_1 = window.setInterval(function () {
+																document.documentElement.scrollHeight >= scrollToPosition_1 &&
+																	(window.scrollTo(0, scrollToPosition_1),
+																	_this.log.debug('scrolling to: ', scrollMap_1[stringyParams_1]),
+																	window.clearInterval(heightCheck_1)),
+																	checkCount_1 > 40 && window.clearInterval(heightCheck_1),
+																	checkCount_1++;
+															}, 50)))),
+													[2]
 												);
 										}
 									});
@@ -16567,175 +16827,28 @@
 						SearchController
 					);
 				})(AbstractController),
-				cookies =
-					(__webpack_require__(54226),
-					__webpack_require__(48319),
-					__webpack_require__(99120),
-					__webpack_require__(74083),
-					{
-						set: function set(name, val, sameSite, expires) {
-							sameSite = sameSite || 'Lax';
-							var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
-							if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
-								var d = new Date();
-								d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
-							}
-							window.document.cookie = cookie;
-						},
-						get: function get(name) {
-							name += '=';
-							for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
-								for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
-								if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
-							}
-							return '';
-						},
-						unset: function unset(name) {
-							window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
-						},
-					});
-			__webpack_require__(71245);
-			var StorageType,
-				flags = (function getFlags(userAgent) {
-					void 0 === userAgent && (userAgent = ''), (userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase());
-					var ieVersion,
-						isIE = function isIE() {
-							if (void 0 === ieVersion) {
-								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
-								ieVersion = !!version && Number(version);
-							}
-							return ieVersion;
-						};
-					return {
-						cors: function cors() {
-							return !isIE() || isIE() >= 10;
-						},
-						cookies: function cookies() {
-							return window.navigator && window.navigator.cookieEnabled && !window.navigator.doNotTrack;
-						},
-						storage: function storage() {
-							try {
-								return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
-							} catch (e) {
-								return !1;
-							}
-						},
-					};
-				})(),
-				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() },
-				utils_cookies = cookies,
-				StorageStore = (function () {
-					function StorageStore(config) {
-						var _a, _b;
-						if (((this.type = null), (this.expiration = 31536e6), (this.sameSite = void 0), (this.key = 'ss-storage'), (this.state = {}), config))
-							switch (
-								('' !== config.key.trim() && (this.key = config.key.trim()),
-								(null === (_a = null == config ? void 0 : config.cookie) || void 0 === _a ? void 0 : _a.expiration) &&
-									(this.expiration = config.cookie.expiration),
-								(null === (_b = null == config ? void 0 : config.cookie) || void 0 === _b ? void 0 : _b.sameSite) &&
-									(this.sameSite = config.cookie.sameSite),
-								config.type)
-							) {
-								case StorageType.SESSION:
-									(this.type = featureFlags.storage ? config.type : null),
-										this.type && !window.sessionStorage.getItem(this.key) && window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.LOCAL:
-									(this.type = featureFlags.storage ? config.type : null),
-										this.type && !window.localStorage.getItem(this.key) && window.localStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.COOKIE:
-									this.type = featureFlags.cookies ? config.type : null;
-							}
-					}
-					return (
-						(StorageStore.prototype.set = function (path, value) {
-							var paths = null == path ? void 0 : path.split('.'),
-								location = this.state;
-							switch (
-								(null == paths ||
-									paths.forEach(function (p, i) {
-										i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
-									}),
-								this.type)
-							) {
-								case StorageType.SESSION:
-									window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.LOCAL:
-									window.localStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.COOKIE:
-									utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
-							}
-						}),
-						(StorageStore.prototype.get = function (path) {
-							switch (this.type) {
-								case StorageType.SESSION:
-									this.state = JSON.parse(window.sessionStorage.getItem(this.key));
-									break;
-								case StorageType.LOCAL:
-									this.state = JSON.parse(window.localStorage.getItem(this.key));
-									break;
-								case StorageType.COOKIE:
-									var data = utils_cookies.get(this.key);
-									data && (this.state = JSON.parse(data));
-							}
-							var paths = null == path ? void 0 : path.split('.');
-							if (null == paths ? void 0 : paths.length) {
-								for (var value = this.state, _i = 0, paths_1 = paths; _i < paths_1.length; _i++) {
-									var p = paths_1[_i];
-									if (!value || void 0 === value[p]) {
-										value = void 0;
-										break;
-									}
-									value = value[p];
-								}
-								return value;
-							}
-						}),
-						(StorageStore.prototype.clear = function () {
-							switch (this.type) {
-								case StorageType.SESSION:
-									window.sessionStorage.clear();
-									break;
-								case StorageType.LOCAL:
-									window.localStorage.clear();
-									break;
-								case StorageType.COOKIE:
-									utils_cookies.unset(this.key);
-							}
-							this.state = {};
-						}),
-						StorageStore
-					);
-				})();
-			!(function (StorageType) {
-				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
-			})(StorageType || (StorageType = {}));
-			__webpack_require__(16781);
-			var BeaconType,
-				BeaconCategory,
-				AutocompleteController_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+				AutocompleteController_extends =
+					(__webpack_require__(16781),
+					(function () {
+						var _extendStatics = function extendStatics(d, b) {
+							return (_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								})(d, b);
+						};
+						return function (d, b) {
+							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+							function __() {
+								this.constructor = d;
+							}
+							_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+						};
+					})()),
 				AutocompleteController_assign = function () {
 					return (AutocompleteController_assign =
 						Object.assign ||
@@ -17010,6 +17123,7 @@
 								});
 							}),
 							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
 							_this.config.settings.initializeFromUrl && (_this.store.state.input = _this.urlManager.state.query),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-ac-trending-cache' })),
 							_this.eventManager.on('beforeSearch', function (search, next) {
@@ -17431,6 +17545,7 @@
 								});
 							}),
 							(_this.config = cjs_default()(FinderController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
 							(_this.urlManager = _this.urlManager),
 							_this.config.url &&
 								(_this.urlManager = _this.urlManager.withConfig(function (translatorConfig) {
@@ -17663,21 +17778,22 @@
 									click: function click(e, result) {
 										if (_this.store.profile.tag && result && _this.events.click) {
 											var payload = {
-												type: BeaconType.PROFILE_PRODUCT_CLICK,
-												category: BeaconCategory.RECOMMENDATIONS,
-												context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-												event: {
-													context: {
-														action: 'navigate',
-														placement: _this.store.profile.placement,
-														tag: _this.store.profile.tag,
-														type: 'product-recommendation',
+													type: BeaconType.PROFILE_PRODUCT_CLICK,
+													category: BeaconCategory.RECOMMENDATIONS,
+													context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+													event: {
+														context: {
+															action: 'navigate',
+															placement: _this.store.profile.placement,
+															tag: _this.store.profile.tag,
+															type: 'product-recommendation',
+														},
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
 													},
-													product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
+													pid: _this.events.click.id,
 												},
-												pid: _this.events.click.id,
-											};
-											return _this.tracker.track.event(payload);
+												event = _this.tracker.track.event(payload);
+											return _this.eventManager.fire('track.product.click', { controller: _this, event: e, result, trackEvent: event }), event;
 										}
 									},
 									impression: function impression(result) {
@@ -17698,10 +17814,9 @@
 												},
 												pid: _this.events.impression.id,
 											};
-											return (
-												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].impression = _this.tracker.track.event(payload))
-											);
+											_this.events.product[result.id] = _this.events.product[result.id] || {};
+											var event = (_this.events.product[result.id].impression = _this.tracker.track.event(payload));
+											return _this.eventManager.fire('track.product.impression', { controller: _this, result, trackEvent: event }), event;
 										}
 									},
 									render: function render(result) {
@@ -17722,10 +17837,9 @@
 												},
 												pid: _this.events.render.id,
 											};
-											return (
-												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].render = _this.tracker.track.event(payload))
-											);
+											_this.events.product[result.id] = _this.events.product[result.id] || {};
+											var event = (_this.events.product[result.id].render = _this.tracker.track.event(payload));
+											return _this.eventManager.fire('track.product.render', { controller: _this, result, trackEvent: event }), event;
 										}
 									},
 								},
@@ -17750,7 +17864,9 @@
 												},
 											},
 										});
-										return (_this.events.click = event), event;
+										return (
+											(_this.events.click = event), _this.eventManager.fire('track.click', { controller: _this, event: e, trackEvent: event }), event
+										);
 									}
 								},
 								impression: function impression() {
@@ -17769,7 +17885,9 @@
 												},
 											},
 										});
-										return (_this.events.impression = event), event;
+										return (
+											(_this.events.impression = event), _this.eventManager.fire('track.impression', { controller: _this, trackEvent: event }), event
+										);
 									}
 								},
 								render: function render() {
@@ -17793,6 +17911,7 @@
 											_this.store.results.forEach(function (result) {
 												return _this.track.product.render(result);
 											}),
+											_this.eventManager.fire('track.render', { controller: _this, trackEvent: event }),
 											event
 										);
 									}
@@ -17871,6 +17990,7 @@
 							throw new Error('Invalid config passed to RecommendationController. The "tag" attribute is required.');
 						return (
 							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
 							_this.eventManager.on('beforeSearch', function (recommend, next) {
 								return RecommendationController_awaiter(_this, void 0, void 0, function () {
 									return RecommendationController_generator(this, function (_a) {
@@ -20242,9 +20362,10 @@
 				};
 			__webpack_require__(33132);
 			var PaginationStore = (function () {
-					function PaginationStore(services, paginationData) {
+					function PaginationStore(config, services, paginationData) {
 						void 0 === paginationData && (paginationData = { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24 }),
 							(this.services = services),
+							(this.controllerConfig = config),
 							(this.page = paginationData.page),
 							(this.pageSize = paginationData.pageSize),
 							(this.totalResults = paginationData.totalResults),
@@ -20274,7 +20395,10 @@
 					return (
 						Object.defineProperty(PaginationStore.prototype, 'begin', {
 							get: function get() {
-								return this.pageSize * (this.page - 1) + 1;
+								var _a;
+								return (null === (_a = this.controllerConfig.settings) || void 0 === _a ? void 0 : _a.infinite)
+									? 1
+									: this.pageSize * (this.page - 1) + 1;
 							},
 							enumerable: !1,
 							configurable: !0,
@@ -20423,13 +20547,17 @@
 			(0, mobx_esm.jQ)({ enforceActions: 'never' });
 			var RangeValueProperties,
 				AbstractStore = (function () {
-					function AbstractStore() {
+					function AbstractStore(config) {
 						(this.custom = {}),
 							(this.loading = !0),
 							(this.loaded = !1),
+							(this.config = config),
 							(0, mobx_esm.rC)(this, { custom: mobx_esm.LO, loading: mobx_esm.LO, loaded: mobx_esm.LO });
 					}
 					return (
+						(AbstractStore.prototype.setConfig = function (newConfig) {
+							this.config = newConfig;
+						}),
 						(AbstractStore.prototype.toJSON = function (thing) {
 							return void 0 === thing && (thing = this), (0, mobx_esm.ZN)(thing);
 						}),
@@ -20459,14 +20587,13 @@
 				SearchStore = (function (_super) {
 					function SearchStore(config, services) {
 						var _a,
-							_this = _super.call(this) || this;
+							_this = _super.call(this, config) || this;
 						if (
 							((_this.meta = {}),
 							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
 						)
 							throw new Error('Invalid service \'urlManager\' passed to SearchStore. Missing "subscribe" function.');
 						return (
-							(_this.config = config),
 							(_this.services = services),
 							(_this.storage = new StorageStore()),
 							_this.update({ meta: _this.meta }),
@@ -20485,14 +20612,15 @@
 					return (
 						SearchStore_extends(SearchStore, _super),
 						(SearchStore.prototype.update = function (data) {
-							(this.loaded = !!data.pagination),
+							(this.data = JSON.parse(JSON.stringify(data))),
+								(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
 								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
 								(this.search = new QueryStore(this.services, data.search)),
 								(this.facets = new FacetStore_FacetStore(this.services, this.storage, data.facets, this.meta)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
-								(this.pagination = new PaginationStore(this.services, data.pagination)),
+								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
 						SearchStore
@@ -20754,14 +20882,13 @@
 				AutocompleteStore = (function (_super) {
 					function AutocompleteStore(config, services) {
 						var _a,
-							_this = _super.call(this) || this;
+							_this = _super.call(this, config) || this;
 						if (
 							((_this.meta = {}),
 							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
 						)
 							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
 						return (
-							(_this.config = config),
 							(_this.services = services),
 							(_this.state = new StateStore(services)),
 							(_this.storage = new StorageStore()),
@@ -20808,7 +20935,7 @@
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
 								0 === this.results.length && this.resetTrending(),
 								this.state.locks.terms.locked || (this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state)),
-								(this.pagination = new PaginationStore(this.services, data.pagination)),
+								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
 						AutocompleteStore
@@ -21053,14 +21180,13 @@
 				FinderStore = (function (_super) {
 					function FinderStore(config, services) {
 						var _a,
-							_this = _super.call(this) || this;
+							_this = _super.call(this, config) || this;
 						if (
 							((_this.meta = {}),
 							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
 						)
 							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
 						return (
-							(_this.config = config),
 							(_this.services = services),
 							(_this.storage = new StorageStore()),
 							_this.update({ meta: {}, selections: [] }),
@@ -21076,7 +21202,7 @@
 						(FinderStore.prototype.update = function (data) {
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
-								(this.pagination = new PaginationStore(this.services, data.pagination)),
+								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
 								(this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage));
 						}),
 						FinderStore
@@ -21113,7 +21239,7 @@
 				RecommendationStore = (function (_super) {
 					function RecommendationStore(config, services) {
 						var _a,
-							_this = _super.call(this) || this;
+							_this = _super.call(this, config) || this;
 						if (
 							((_this.loaded = !1),
 							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
@@ -22267,7 +22393,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.17' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.18' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22294,7 +22420,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.17');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.18');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22879,7 +23005,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.17]',
+								text: '[0.3.18]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -23096,7 +23222,7 @@
 											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker),
 										cntrlr = new SearchController(config, {
 											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new SearchStore({}, { urlManager }),
+											store: (null == services ? void 0 : services.store) || new SearchStore(config, { urlManager }),
 											urlManager,
 											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
 											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
@@ -23109,7 +23235,7 @@
 										(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach()),
 										(cntrlr = new AutocompleteController(config, {
 											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new AutocompleteStore({}, { urlManager }),
+											store: (null == services ? void 0 : services.store) || new AutocompleteStore(config, { urlManager }),
 											urlManager,
 											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
 											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
@@ -23135,7 +23261,7 @@
 										(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(!0)),
 										(cntrlr = new RecommendationController(config, {
 											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new RecommendationStore({}, { urlManager }),
+											store: (null == services ? void 0 : services.store) || new RecommendationStore(config, { urlManager }),
 											urlManager,
 											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
 											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
@@ -23360,7 +23486,6 @@
 				__webpack_require__(76555),
 				__webpack_require__(95094);
 			var client_api = __webpack_require__(14419),
-				types = __webpack_require__(75458),
 				esm = __webpack_require__(87537),
 				preact_module = __webpack_require__(33847),
 				defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1', hover: '#f8f6fd', text: { secondary: '#ffffff' } }, components: {} },
@@ -23434,7 +23559,7 @@
 							return (0, client_api._C)(enhancer);
 						});
 					case 'render':
-						return (0, types.setGlobalRender)(value);
+						return (0, client_api.$P)(value);
 					case 'globals':
 					case 'globalTypes':
 						var v = {};
@@ -24378,7 +24503,6 @@
 		53260: () => {},
 	},
 	(__webpack_require__) => {
-		'use strict';
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
@@ -24402,4 +24526,3 @@
 		__webpack_require__.O();
 	},
 ]);
-//# sourceMappingURL=main.2489e7c2.iframe.bundle.js.map

@@ -85,6 +85,7 @@
 								<li class="tsd-kind-type-alias"><a href="modules.html#Attachments" class="tsd-kind-icon">Attachments</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#AutocompleteControllerConfig" class="tsd-kind-icon">Autocomplete<wbr>Controller<wbr>Config</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#BeforeSearchObj" class="tsd-kind-icon">Before<wbr>Search<wbr>Obj</a></li>
+								<li class="tsd-kind-type-alias"><a href="modules.html#ControllerConfigs" class="tsd-kind-icon">Controller<wbr>Configs</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#ControllerServices" class="tsd-kind-icon">Controller<wbr>Services</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#FinderControllerConfig" class="tsd-kind-icon">Finder<wbr>Controller<wbr>Config</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#FinderFieldConfig" class="tsd-kind-icon">Finder<wbr>Field<wbr>Config</a></li>
@@ -105,7 +106,7 @@
 					<div class="tsd-signature tsd-kind-icon">After<wbr>Search<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>controller<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L29">types.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L29">types.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -123,10 +124,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="AfterStoreObj" class="tsd-anchor"></a>
 					<h3>After<wbr>Store<wbr>Obj</h3>
-					<div class="tsd-signature tsd-kind-icon">After<wbr>Store<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>controller<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">After<wbr>Store<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>controller<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a><span class="tsd-signature-symbol">; </span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L34">types.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L34">types.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -134,6 +135,12 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
 								<h5>controller<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -144,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">Attachments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>on<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>plugin<span class="tsd-signature-symbol">?: </span><a href="modules.html#PluginFunction" class="tsd-signature-type" data-tsd-kind="Type alias">PluginFunction</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#PluginFunction" class="tsd-signature-type" data-tsd-kind="Type alias">PluginFunction</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L53">types.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L55">types.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -173,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">Autocomplete<wbr>Controller<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="interfaces/ControllerConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ControllerConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="modules.html#Attachments" class="tsd-signature-type" data-tsd-kind="Type alias">Attachments</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>action<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>globals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>settings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>facets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>trim<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>initializeFromUrl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>syncInputs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>trending<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L91">types.ts:91</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L96">types.ts:96</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -183,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">Before<wbr>Search<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>controller<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a><span class="tsd-signature-symbol">; </span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L24">types.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L24">types.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -199,12 +206,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="ControllerConfigs" class="tsd-anchor"></a>
+					<h3>Controller<wbr>Configs</h3>
+					<div class="tsd-signature tsd-kind-icon">Controller<wbr>Configs<span class="tsd-signature-symbol">:</span> <a href="modules.html#SearchControllerConfig" class="tsd-signature-type" data-tsd-kind="Type alias">SearchControllerConfig</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#AutocompleteControllerConfig" class="tsd-signature-type" data-tsd-kind="Type alias">AutocompleteControllerConfig</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#FinderControllerConfig" class="tsd-signature-type" data-tsd-kind="Type alias">FinderControllerConfig</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#RecommendationControllerConfig" class="tsd-signature-type" data-tsd-kind="Type alias">RecommendationControllerConfig</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L121">types.ts:121</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="ControllerServices" class="tsd-anchor"></a>
 					<h3>Controller<wbr>Services</h3>
 					<div class="tsd-signature tsd-kind-icon">Controller<wbr>Services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Client</span><span class="tsd-signature-symbol">; </span>eventManager<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventManager</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>profiler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Profiler</span><span class="tsd-signature-symbol">; </span>store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbstractStore</span><span class="tsd-signature-symbol">; </span>tracker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Tracker</span><span class="tsd-signature-symbol">; </span>urlManager<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UrlManager</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L43">types.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L45">types.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -240,7 +257,7 @@
 					<div class="tsd-signature tsd-kind-icon">Finder<wbr>Controller<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="interfaces/ControllerConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ControllerConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="modules.html#Attachments" class="tsd-signature-type" data-tsd-kind="Type alias">Attachments</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>fields<span class="tsd-signature-symbol">: </span><a href="modules.html#FinderFieldConfig" class="tsd-signature-type" data-tsd-kind="Type alias">FinderFieldConfig</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>globals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L77">types.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L82">types.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -250,7 +267,7 @@
 					<div class="tsd-signature tsd-kind-icon">Finder<wbr>Field<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>label<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>levels<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L84">types.ts:84</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L89">types.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -274,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">Next<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Next</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L20">types.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L20">types.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -284,7 +301,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plugin<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>cntrlr<span class="tsd-signature-symbol">: </span><a href="classes/AbstractController.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractController</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L22">types.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L22">types.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -333,17 +350,17 @@
 					<div class="tsd-signature tsd-kind-icon">Recommendation<wbr>Controller<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="interfaces/ControllerConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ControllerConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="modules.html#Attachments" class="tsd-signature-type" data-tsd-kind="Type alias">Attachments</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>branch<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>globals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>tag<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L109">types.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L114">types.ts:114</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="SearchControllerConfig" class="tsd-anchor"></a>
 					<h3>Search<wbr>Controller<wbr>Config</h3>
-					<div class="tsd-signature tsd-kind-icon">Search<wbr>Controller<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="interfaces/ControllerConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ControllerConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="modules.html#Attachments" class="tsd-signature-type" data-tsd-kind="Type alias">Attachments</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>globals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>settings<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>facets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>trim<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>redirects<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>merchandising<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>singleResult<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Search<wbr>Controller<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="interfaces/ControllerConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ControllerConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="modules.html#Attachments" class="tsd-signature-type" data-tsd-kind="Type alias">Attachments</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>globals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>settings<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>facets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>trim<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>infinite<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>backfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>redirects<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>merchandising<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>singleResult<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/8d50174/packages/snap-controller/src/types.ts#L62">types.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-controller/src/types.ts#L64">types.ts:64</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -391,6 +408,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#BeforeSearchObj" class="tsd-kind-icon">Before<wbr>Search<wbr>Obj</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#ControllerConfigs" class="tsd-kind-icon">Controller<wbr>Configs</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#ControllerServices" class="tsd-kind-icon">Controller<wbr>Services</a>
