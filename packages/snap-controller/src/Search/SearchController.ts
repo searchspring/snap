@@ -109,7 +109,7 @@ export class SearchController extends AbstractController {
 
 			search.controller.store.loading = false;
 
-			if (this.config.settings?.infinite?.backfill && window.scrollY === 0) {
+			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
 				const stringyParams = JSON.stringify(search.request);
 				const scrollMap = this.storage.get('scrollMap') || {};
@@ -127,6 +127,7 @@ export class SearchController extends AbstractController {
 						if (checkCount > 2000 / HEIGHT_CHECK_INTERVAL) {
 							window.clearInterval(heightCheck);
 						}
+						checkCount++;
 					}, HEIGHT_CHECK_INTERVAL);
 				}
 			}
@@ -137,7 +138,7 @@ export class SearchController extends AbstractController {
 		product: {
 			click: (e: MouseEvent, result): BeaconEvent => {
 				// store scroll position
-				if (this.config.settings?.infinite?.backfill) {
+				if (this.config.settings.infinite) {
 					const stringyParams = this.storage.get('lastStringyParams');
 					const scrollMap = {};
 					scrollMap[stringyParams] = window.scrollY;
@@ -181,11 +182,17 @@ export class SearchController extends AbstractController {
 		}
 
 		const params = this.params;
-		if (this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill) {
-			const stringyParams = this.storage.get('lastStringyParams');
-			this.storage.set('scrollMap', { [stringyParams]: 0 });
-			this.urlManager.set('page', 1).go();
-			return;
+		if (this.config.settings.infinite) {
+			// TODO: refactor this
+			const preventBackfill =
+				this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
+			const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
+
+			if (preventBackfill || dontBackfill) {
+				this.storage.set('scrollMap', {});
+				this.urlManager.set('page', 1).go();
+				return;
+			}
 		}
 
 		try {
@@ -233,13 +240,13 @@ export class SearchController extends AbstractController {
 
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
-			if (this.config.settings?.infinite?.backfill && params.pagination?.page > 1) {
+			if (this.config.settings.infinite && params.pagination?.page > 1) {
 				// if no results fetch results...
 				let previousResults = this.store.data?.results || [];
-				if (!previousResults.length) {
+				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];
-					for (let page = 0; page < params.pagination.page; page++) {
+					for (let page = 1; page < params.pagination.page; page++) {
 						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
 						backfills.push(this.client.search(backfillParams));
 					}

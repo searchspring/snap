@@ -56,7 +56,7 @@ export class PaginationStore {
 	}
 
 	get begin(): number {
-		if (this.controllerConfig.settings?.infinite?.backfill) {
+		if (this.controllerConfig.settings?.infinite) {
 			return 1;
 		}
 		return this.pageSize * (this.page - 1) + 1;
