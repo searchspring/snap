@@ -36,7 +36,7 @@ export type InlineBannerContent = {
 	};
 };
 
-export type BannerContent = Record<BannerType, any[]>;
+export type BannerContent = Partial<Record<BannerType, any[]>>;
 export interface Mappings {
 	core: {
 		uid: string;

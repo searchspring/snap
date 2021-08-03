@@ -1,23 +1,27 @@
 import { render } from 'preact';
 
-import type { Client } from '@searchspring/snap-client';
-import type { Tracker } from '@searchspring/snap-tracker';
 import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
-import { AbstractController, RecommendationController } from '@searchspring/snap-controller';
+import { RecommendationController } from '@searchspring/snap-controller';
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager, Middleware } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 
-import { SnapControllerServices } from './types';
+import type { Client } from '@searchspring/snap-client';
+import type { Tracker } from '@searchspring/snap-tracker';
+import type { AbstractController, Attachments } from '@searchspring/snap-controller';
+
+import type { SnapControllerServices } from './types';
 
 export type RecommendationInstantiatorConfig = {
 	components: {
-		[name: string]: React.ElementType<{ controller: any }>;
+		[name: string]: React.ElementType<{ controller: RecommendationController }>;
+	};
+	config: {
+		branch: string;
 	};
 	selector?: string;
-	branch: string;
 	services?: SnapControllerServices;
 };
 
@@ -36,8 +40,9 @@ export class RecommendationInstantiator {
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
 	eventManager: EventManager;
+	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
-	middleware: { event: string; func: Middleware<any>[] }[] = [];
+	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
 	public targets: {
 		[key: string]: DomTargeter;
 	} = {};
@@ -49,12 +54,16 @@ export class RecommendationInstantiator {
 		this.config = config;
 		this.logger = logger;
 
-		if (!this.config.branch) {
-			throw new Error(`Instantiator config must contain 'branch' property`);
+		if (!this.config) {
+			throw new Error(`Recommendation Instantiator config is required`);
+		}
+
+		if (!this.config.config?.branch) {
+			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
 		}
 
 		if (!this.config.components || typeof this.config.components != 'object') {
-			throw new Error(`Instantiator config must contain 'components' mapping property`);
+			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
 
 		const profileCount = {};
@@ -115,8 +124,8 @@ export class RecommendationInstantiator {
 					{
 						id: `recommend_${tag + (profileCount[tag] - 1)}`,
 						tag,
-						branch: this.config.branch,
 						globals,
+						...this.config.config,
 					},
 					{
 						client: this.config.services?.client || this.client,
@@ -129,10 +138,10 @@ export class RecommendationInstantiator {
 					}
 				);
 
-				this.plugins.forEach((plugin) => recs.use(plugin));
+				this.uses.forEach((attachements) => recs.use(attachements));
+				this.plugins.forEach((plugin) => recs.plugin(plugin));
 				this.middleware.forEach((middleware) => recs.on(middleware.event, ...middleware.func));
 
-				await recs.init();
 				await recs.search();
 
 				this.controllers[recs.config.id] = recs;
@@ -158,11 +167,15 @@ export class RecommendationInstantiator {
 		);
 	}
 
-	public async use(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
+	public plugin(func: (cntrlr: AbstractController) => Promise<void>): void {
 		this.plugins.push(func);
 	}
 
 	public on<T>(event: string, ...func: Middleware<T>[]): void {
 		this.middleware.push({ event, func });
+	}
+
+	public use(attachments: Attachments): void {
+		this.uses.push(attachments);
 	}
 }
