@@ -1,10 +1,12 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
+import type { SearchStore } from '@searchspring/snap-store-mobx';
+import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -27,6 +29,7 @@ type SearchTrackMethods = {
 };
 
 export class SearchController extends AbstractController {
+	public store: SearchStore;
 	config: SearchControllerConfig;
 
 	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
@@ -65,6 +68,9 @@ export class SearchController extends AbstractController {
 			}
 			search.controller.store.loading = false;
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	track: SearchTrackMethods = {
@@ -88,13 +94,13 @@ export class SearchController extends AbstractController {
 		},
 	};
 
-	get params(): Record<string, any> {
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
+	get params(): SearchRequestModel {
+		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
 		if (!this.config.settings?.redirects?.merchandising) {
 			params.search = params.search || {};
-			params.search.redirectResponse = 'full';
+			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
 
 		return params;
@@ -176,7 +182,6 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// console.log("this.store:", this.store)
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();

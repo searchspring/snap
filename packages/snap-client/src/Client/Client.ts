@@ -179,10 +179,10 @@ export class Client {
 		return results;
 	}
 
-	async trending(params: TrendingRequestModel): Promise<TrendingResponseModel> {
+	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
 
-		return this.requesters.suggest.getTrending(params);
+		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
 	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
