@@ -188,7 +188,7 @@ export class Snap {
 										cntrlr.bind();
 
 										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
-										render(<Component controller={cntrlr} input={controller?.config?.selector} {...target.props} />, elem);
+										render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
 									}
 								);
 							});

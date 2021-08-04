@@ -20,7 +20,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 	globals: {},
 	settings: {
 		initializeFromUrl: true,
-		syncInputs: false,
+		syncInputs: true,
 		facets: {
 			trim: true,
 		},
