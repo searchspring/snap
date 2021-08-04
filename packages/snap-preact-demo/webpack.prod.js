@@ -4,10 +4,11 @@ const path = require('path');
 
 module.exports = merge(common, {
 	mode: 'production',
-	target: 'browserslist',
 	devServer: {
-		https: true,
-		port: 3333,
+		https: false,
+		port: 4444,
+		contentBase: [path.join(__dirname, 'public')],
+		contentBasePublicPath: ['/'],
 		hot: false,
 		publicPath: '/dist/',
 		disableHostCheck: true,

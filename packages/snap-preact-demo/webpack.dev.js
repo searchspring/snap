@@ -9,7 +9,7 @@ module.exports = merge(common, {
 	target: 'web',
 	devtool: 'source-map',
 	devServer: {
-		https: true,
+		https: false,
 		port: 4444,
 		contentBase: [path.join(__dirname, 'public')],
 		contentBasePublicPath: ['/'],
