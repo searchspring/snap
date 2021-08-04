@@ -13,6 +13,7 @@ const defaultConfig: FinderControllerConfig = {
 };
 
 export class FinderController extends AbstractController {
+	public type = 'finder';
 	public store: any;
 	config: FinderControllerConfig;
 

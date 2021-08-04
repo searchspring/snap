@@ -123,12 +123,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
 		props;
 
-	if (!controller || controller.constructor?.name !== 'RecommendationController') {
-		console.error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
-		return;
+	if (!controller || controller.type !== 'recommendation') {
+		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
+
 	if (children && children.length !== controller.store.results.length) {
-		console.error(`<Recommendation> Component received invalid number of children`);
+		controller.log.error(`<Recommendation> Component received invalid number of children`);
 		return;
 	}
 

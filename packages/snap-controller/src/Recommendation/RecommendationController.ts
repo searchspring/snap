@@ -26,6 +26,7 @@ const defaultConfig: RecommendationControllerConfig = {
 };
 
 export class RecommendationController extends AbstractController {
+	public type = 'recommendation';
 	public store: RecommendationStore;
 	config: RecommendationControllerConfig;
 	events = {

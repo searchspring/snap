@@ -34,6 +34,7 @@ type AutocompleteTrackMethods = {
 };
 
 export class AutocompleteController extends AbstractController {
+	public type = 'autocomplete';
 	public store: AutocompleteStore;
 	config: AutocompleteControllerConfig;
 	storage: StorageStore;

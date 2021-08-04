@@ -12,6 +12,7 @@ import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
 export abstract class AbstractController {
+	public type = 'abstract';
 	public config: ControllerConfig;
 	public client;
 	public store: AbstractStore;

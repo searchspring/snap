@@ -32,6 +32,7 @@ type SearchTrackMethods = {
 };
 
 export class SearchController extends AbstractController {
+	public type = 'search';
 	public store: SearchStore;
 	config: SearchControllerConfig;
 	storage: StorageStore;
