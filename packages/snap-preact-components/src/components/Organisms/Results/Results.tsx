@@ -14,7 +14,6 @@ import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerC
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { Typeset } from '@storybook/components';
 
 const CSS = {
 	results: ({ columns, gapSize, style }) =>
