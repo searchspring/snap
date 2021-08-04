@@ -124,6 +124,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
 		props;
 
+	//@ts-ignore
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
