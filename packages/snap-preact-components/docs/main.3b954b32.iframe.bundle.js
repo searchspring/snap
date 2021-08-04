@@ -17166,7 +17166,7 @@
 					selector: '',
 					action: '',
 					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !1, facets: { trim: !0 } },
+					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0 } },
 				},
 				AutocompleteController = (function (_super) {
 					function AutocompleteController(config, _a) {
@@ -22561,7 +22561,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.19' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.20' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22588,7 +22588,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.19');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.20');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23173,7 +23173,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.19]',
+								text: '[0.3.20]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -23252,21 +23252,13 @@
 																onTarget: target.onTarget,
 															},
 															function (target, elem, originalElem) {
-																var _a,
-																	onTarget = target.onTarget;
+																var onTarget = target.onTarget;
 																onTarget && onTarget(target, elem, originalElem), cntrlr_2.bind();
 																var Component = target.component;
 																(0, preact_module.sY)(
 																	(0, jsxRuntime_module.tZ)(
 																		Component,
-																		Snap_assign(
-																			{
-																				controller: cntrlr_2,
-																				input:
-																					null === (_a = null == controller ? void 0 : controller.config) || void 0 === _a ? void 0 : _a.selector,
-																			},
-																			target.props
-																		),
+																		Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props),
 																		void 0
 																	),
 																	elem
