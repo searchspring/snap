@@ -5,7 +5,7 @@ import { render } from '@testing-library/preact';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { Banner } from './Banner';
 import { BannerType } from '../../../types';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Merchandising Banner Component', () => {
 	const theme = {

@@ -3,7 +3,7 @@ import { render } from '@testing-library/preact';
 import { Results } from './Results';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Results Component', () => {
 	const theme = {

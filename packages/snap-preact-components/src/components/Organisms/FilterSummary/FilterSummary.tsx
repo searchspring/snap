@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, Filter as FilterType } from '../../../types';
 
 const CSS = {
@@ -23,59 +23,59 @@ const CSS = {
 		}),
 };
 
-export const FilterSummary = observer(
-	(properties: FilterSummaryProps): JSX.Element => {
-		const globalTheme: Theme = useTheme();
+export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Element => {
+	const globalTheme: Theme = useTheme();
 
-		const props: FilterSummaryProps = {
+	const props: FilterSummaryProps = {
+		// default props
+		title: 'Current Filters',
+		clearAllLabel: 'Clear All',
+		clearAllIcon: 'close-thin',
+		filterIcon: 'close-thin',
+		separator: ':',
+		// global theme
+		...globalTheme?.components?.filterSummary,
+		// props
+		...properties,
+		...properties.theme?.components?.filterSummary,
+	};
+
+	const {
+		filters,
+		title,
+		filterIcon,
+		clearAllIcon,
+		separator,
+		hideFacetLabel,
+		clearAllLabel,
+		hideClearAll,
+		onClick,
+		onClearAllClick,
+		disableStyles,
+		className,
+		style,
+	} = props;
+
+	const subProps: FilterSummarySubProps = {
+		filter: {
 			// default props
-			title: 'Current Filters',
-			clearAllLabel: 'Clear All',
-			clearAllIcon: 'close-thin',
-			filterIcon: 'close-thin',
-			separator: ':',
+			className: 'ss__filter-summary__filter',
 			// global theme
-			...globalTheme?.components?.filterSummary,
-			// props
-			...properties,
-			...properties.theme?.components?.filterSummary,
-		};
+			...globalTheme?.components?.filter,
+			// inherited props
+			...defined({
+				disableStyles,
+				separator,
+				hideFacetLabel,
+				icon: filterIcon,
+			}),
+			// component theme overrides
+			...props.theme?.components?.filter,
+		},
+	};
 
-		const {
-			filters,
-			title,
-			filterIcon,
-			clearAllIcon,
-			separator,
-			hideFacetLabel,
-			clearAllLabel,
-			hideClearAll,
-			onClick,
-			onClearAllClick,
-			disableStyles,
-			className,
-			style,
-		} = props;
-
-		const subProps: FilterSummarySubProps = {
-			filter: {
-				// default props
-				className: 'ss__filter-summary__filter',
-				// global theme
-				...globalTheme?.components?.filter,
-				// inherited props
-				...defined({
-					disableStyles,
-					separator,
-					hideFacetLabel,
-					icon: filterIcon,
-				}),
-				// component theme overrides
-				...props.theme?.components?.filter,
-			},
-		};
-
-		return filters?.length ? (
+	return filters?.length ? (
+		<CacheProvider value={cache}>
 			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
 				<div className="ss__filter-summary__title">{title}</div>
 
@@ -100,9 +100,9 @@ export const FilterSummary = observer(
 					/>
 				)}
 			</div>
-		) : null;
-	}
-);
+		</CacheProvider>
+	) : null;
+});
 
 export interface FilterSummaryProps extends ComponentProps {
 	filters: FilterType[];

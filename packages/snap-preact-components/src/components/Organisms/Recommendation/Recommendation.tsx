@@ -13,7 +13,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
@@ -123,12 +123,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
 		props;
 
-	if (!controller || controller.constructor?.name !== 'RecommendationController') {
-		console.error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
-		return;
+	if (!controller || controller.type !== 'recommendation') {
+		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
+
 	if (children && children.length !== controller.store.results.length) {
-		console.error(`<Recommendation> Component received invalid number of children`);
+		controller.log.error(`<Recommendation> Component received invalid number of children`);
 		return;
 	}
 
@@ -198,71 +198,73 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (
 		(children || results?.length) && (
-			<div
-				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-				css={!disableStyles && CSS.recommendation({ theme, style })}
-				className={classnames('ss__recommendation', className)}
-			>
-				{title && <h3 className="ss__recommendation__title">{title}</h3>}
+			<CacheProvider value={cache}>
 				<div
-					className="ss__recommendation__prev"
-					ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-					onClick={(e) => controller.track.click(e)}
+					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+					css={!disableStyles && CSS.recommendation({ theme, style })}
+					className={classnames('ss__recommendation', className)}
 				>
-					{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
-				</div>
-				<div
-					className="ss__recommendation__next"
-					ref={navigationNextRef as React.RefObject<HTMLDivElement>}
-					onClick={(e) => controller.track.click(e)}
-				>
-					{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
-				</div>
-				<Swiper
-					centerInsufficientSlides={true}
-					onInit={(swiper) => {
-						//@ts-ignore
-						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-						//@ts-ignore
-						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
-						//@ts-ignore
-						setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
-					}}
-					onBreakpoint={(swiper) => {
-						//@ts-ignore
-						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
-					}}
-					onSlideChange={(swiper) => {
-						//@ts-ignore
-						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
-					}}
-					onClick={(swiper, e) => {
-						const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-						controller.track.click(e);
-						if (!Number.isNaN(clickedIndex)) {
-							controller.track.product.click(e, results[clickedIndex]);
+					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					<div
+						className="ss__recommendation__prev"
+						ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+						onClick={(e) => controller.track.click(e)}
+					>
+						{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
+					</div>
+					<div
+						className="ss__recommendation__next"
+						ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+						onClick={(e) => controller.track.click(e)}
+					>
+						{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
+					</div>
+					<Swiper
+						centerInsufficientSlides={true}
+						onInit={(swiper) => {
+							//@ts-ignore
+							swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
+							//@ts-ignore
+							swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+							//@ts-ignore
+							setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+						}}
+						onBreakpoint={(swiper) => {
+							//@ts-ignore
+							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						}}
+						onSlideChange={(swiper) => {
+							//@ts-ignore
+							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						}}
+						onClick={(swiper, e) => {
+							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
+							controller.track.click(e);
+							if (!Number.isNaN(clickedIndex)) {
+								controller.track.product.click(e, results[clickedIndex]);
+							}
+						}}
+						loop={loop}
+						breakpoints={breakpoints}
+						pagination={
+							pagination
+								? {
+										clickable: true,
+								  }
+								: false
 						}
-					}}
-					loop={loop}
-					breakpoints={breakpoints}
-					pagination={
-						pagination
-							? {
-									clickable: true,
-							  }
-							: false
-					}
-					{...additionalProps}
-				>
-					{children
-						? children.map((child) => <SwiperSlide>{child}</SwiperSlide>)
-						: results.map((result) => (
-								<SwiperSlide>
-									<Result controller={controller} result={result} {...subProps.result} />
-								</SwiperSlide>
-						  ))}
-				</Swiper>
-			</div>
+						{...additionalProps}
+					>
+						{children
+							? children.map((child) => <SwiperSlide>{child}</SwiperSlide>)
+							: results.map((result) => (
+									<SwiperSlide>
+										<Result controller={controller} result={result} {...subProps.result} />
+									</SwiperSlide>
+							  ))}
+					</Swiper>
+				</div>
+			</CacheProvider>
 		)
 	);
 });

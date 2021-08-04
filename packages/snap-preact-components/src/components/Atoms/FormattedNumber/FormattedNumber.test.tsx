@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { FormattedNumber } from './FormattedNumber';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('FormattedNumber Component', () => {
 	it('renders', () => {

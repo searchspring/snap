@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 
 const CSS = {
@@ -95,28 +95,30 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	};
 
 	return (
-		<div
-			css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
-			className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
-			ref={innerRef}
-		>
+		<CacheProvider value={cache}>
 			<div
-				className="ss__dropdown__button"
-				onClick={(e) => {
-					if (!disabled) {
-						toggleShowContent(e);
-						onClick && onClick(e as any);
-					}
-				}}
+				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
+				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
+				ref={innerRef}
 			>
-				{button}
-			</div>
+				<div
+					className="ss__dropdown__button"
+					onClick={(e) => {
+						if (!disabled) {
+							toggleShowContent(e);
+							onClick && onClick(e as any);
+						}
+					}}
+				>
+					{button}
+				</div>
 
-			<div className="ss__dropdown__content">
-				{content}
-				{children}
+				<div className="ss__dropdown__content">
+					{content}
+					{children}
+				</div>
 			</div>
-		</div>
+		</CacheProvider>
 	);
 });
 

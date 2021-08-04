@@ -3,7 +3,7 @@ import { render } from '@testing-library/preact';
 import { Result } from './Result';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Result Component', () => {
 	it('renders', () => {

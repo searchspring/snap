@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
 const CSS = {
@@ -72,25 +72,27 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	return (
 		values?.length && (
-			<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
-				{values.map((value) => (
-					<a
-						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-						onClick={onClick}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
-						{...valueProps}
-						{...value.url?.link}
-					>
-						<span
-							className={classnames('ss__facet-grid-options__option__value', {
-								'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-							})}
+			<CacheProvider value={cache}>
+				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
+					{values.map((value) => (
+						<a
+							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
+							onClick={onClick}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
+							{...valueProps}
+							{...value.url?.link}
 						>
-							{value.label}
-						</span>
-					</a>
-				))}
-			</div>
+							<span
+								className={classnames('ss__facet-grid-options__option__value', {
+									'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+								})}
+							>
+								{value.label}
+							</span>
+						</a>
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

@@ -72,9 +72,9 @@ export type SearchControllerConfig = ControllerConfig &
 			facets?: {
 				trim?: boolean;
 			};
-      infinite?: {
-		  	backfill?: number;
-  		};
+			infinite?: {
+				backfill?: number;
+			};
 		};
 	};
 

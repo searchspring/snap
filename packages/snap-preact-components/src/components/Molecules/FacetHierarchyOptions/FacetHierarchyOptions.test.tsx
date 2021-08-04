@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
 import { hierarchyFacetMock, hierarchyFacetFilteredMock } from '../../../mocks/searchResponse';

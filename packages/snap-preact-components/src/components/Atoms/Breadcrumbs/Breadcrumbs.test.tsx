@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { Breadcrumbs } from './Breadcrumbs';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Breadcrumbs Component', () => {
 	const args = {
@@ -101,7 +101,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 
 		expect(breadcrumbElement.classList.length).toBe(2);
-		expect(breadcrumbElement.classList[1]).toMatch(/^css-0/);
+		expect(breadcrumbElement.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('is themeable with ThemeProvider', () => {

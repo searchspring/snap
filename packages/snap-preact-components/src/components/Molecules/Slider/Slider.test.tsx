@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { render } from '@testing-library/preact';
 
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import { Slider } from './Slider';
 import { sprintf } from '../../../utilities';

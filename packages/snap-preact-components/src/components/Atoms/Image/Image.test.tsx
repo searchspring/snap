@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 import { render } from '@testing-library/preact';
 
 import { Image, FALLBACK_IMAGE_URL } from './Image';

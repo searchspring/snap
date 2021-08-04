@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -73,23 +73,25 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	return (
 		valueLabel && (
-			<a
-				css={!disableStyles && CSS.filter({ style })}
-				className={classnames('ss__filter', className)}
-				onClick={(e) => onClick && onClick(e as any)}
-				{...url?.link}
-			>
-				<Button {...subProps.button}>
-					<Icon {...subProps.icon} />
-					{!hideFacetLabel && (
-						<span className="ss__filter__label">
-							{facetLabel}
-							{separator && <span className="ss__filter__label__separator">{separator}</span>}
-						</span>
-					)}
-					<span className="ss__filter__value">{valueLabel}</span>
-				</Button>
-			</a>
+			<CacheProvider value={cache}>
+				<a
+					css={!disableStyles && CSS.filter({ style })}
+					className={classnames('ss__filter', className)}
+					onClick={(e) => onClick && onClick(e as any)}
+					{...url?.link}
+				>
+					<Button {...subProps.button}>
+						<Icon {...subProps.icon} />
+						{!hideFacetLabel && (
+							<span className="ss__filter__label">
+								{facetLabel}
+								{separator && <span className="ss__filter__label__separator">{separator}</span>}
+							</span>
+						)}
+						<span className="ss__filter__value">{valueLabel}</span>
+					</Button>
+				</a>
+			</CacheProvider>
 		)
 	);
 });

@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 
 import { filters } from '@searchspring/snap-toolbox';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {
@@ -49,6 +49,7 @@ export function Price(properties: PriceProps): JSX.Element {
 		thousandsSeparator,
 		decimalSeparator,
 		symbolAfter,
+		raw,
 		disableStyles,
 		className,
 		style,
@@ -63,10 +64,14 @@ export function Price(properties: PriceProps): JSX.Element {
 		symbolAfter,
 	});
 
-	return (
-		<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
-			{formattedPrice}
-		</span>
+	return raw ? (
+		<>{formattedPrice}</>
+	) : (
+		<CacheProvider value={cache}>
+			<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
+				{formattedPrice}
+			</span>
+		</CacheProvider>
 	);
 }
 

@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
@@ -39,26 +39,28 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	return (
 		iconPath && (
-			<svg
-				css={
-					!disableStyles &&
-					CSS.icon({
-						color,
-						width,
-						height,
-						size,
-						theme,
-						style,
-					})
-				}
-				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
-				viewBox={viewBox}
-				xmlns="http://www.w3.org/2000/svg"
-				width={disableStyles && (width || size)}
-				height={disableStyles && (height || size)}
-			>
-				<path fill={disableStyles && color} d={iconPath} />
-			</svg>
+			<CacheProvider value={cache}>
+				<svg
+					css={
+						!disableStyles &&
+						CSS.icon({
+							color,
+							width,
+							height,
+							size,
+							theme,
+							style,
+						})
+					}
+					className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
+					viewBox={viewBox}
+					xmlns="http://www.w3.org/2000/svg"
+					width={disableStyles && (width || size)}
+					height={disableStyles && (height || size)}
+				>
+					<path fill={disableStyles && color} d={iconPath} />
+				</svg>
+			</CacheProvider>
 		)
 	);
 }

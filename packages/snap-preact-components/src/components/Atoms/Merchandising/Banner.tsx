@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { BannerContent, BannerType, ComponentProps } from '../../../types';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 
 const CSS = {
 	banner: ({ style }) =>
@@ -41,13 +41,15 @@ export function Banner(properties: BannerProps): JSX.Element {
 	return (
 		content &&
 		content[type]?.length && (
-			<div
-				className={classnames('ss__banner', `ss__banner--${type}`, className)}
-				css={!disableStyles && CSS.banner({ style })}
-				dangerouslySetInnerHTML={{
-					__html: content[props.type].join(''),
-				}}
-			/>
+			<CacheProvider value={cache}>
+				<div
+					className={classnames('ss__banner', `ss__banner--${type}`, className)}
+					css={!disableStyles && CSS.banner({ style })}
+					dangerouslySetInnerHTML={{
+						__html: content[props.type].join(''),
+					}}
+				/>
+			</CacheProvider>
 		)
 	);
 }
