@@ -14,6 +14,7 @@ import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerC
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { Typeset } from '@storybook/components';
 
 const CSS = {
 	results: ({ columns, gapSize, style }) =>
@@ -58,7 +59,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const { disableStyles, className, responsive, style, controller } = props;
+	const { disableStyles, className, responsive, layout, style, controller } = props;
 
 	const displaySettings = useDisplaySettings(responsive);
 	if (displaySettings && Object.keys(displaySettings).length) {
@@ -105,7 +106,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider value={cache}>
 			<div
-				css={!disableStyles && CSS.results({ columns: props.columns, gapSize: props.gapSize, style })}
+				css={!disableStyles && CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize, style })}
 				className={classnames('ss__results', className)}
 			>
 				{results.map((result) =>
