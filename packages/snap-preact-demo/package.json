@@ -14,7 +14,7 @@
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & (cypress run --project tests; kill $(lsof -ti:4444,8888))"
+		"test": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & (cypress run --project tests || kill $(lsof -ti:4444,8888))"
 	},
 	"dependencies": {
 		"@searchspring/snap-preact": "^0.3.19",
@@ -36,7 +36,7 @@
 		"babel-loader": "^8.2.2",
 		"core-js": "^3.15.2",
 		"css-loader": "^6.2.0",
-		"cypress": "^8.0.0",
+		"cypress": "^8.1.0",
 		"file-loader": "^6.2.0",
 		"lighthouse": "^8.1.0",
 		"node-sass": "^6.0.1",
