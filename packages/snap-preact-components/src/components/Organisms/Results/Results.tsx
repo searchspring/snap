@@ -12,7 +12,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -103,21 +103,23 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	}
 
 	return results?.length ? (
-		<div
-			css={!disableStyles && CSS.results({ columns: props.columns, gapSize: props.gapSize, style })}
-			className={classnames('ss__results', className)}
-		>
-			{results.map((result) =>
-				(() => {
-					switch (result.type) {
-						case BannerType.BANNER:
-							return <InlineBanner {...subProps.inlineBanner} banner={result} layout={props.layout} />;
-						default:
-							return <Result {...subProps.result} result={result} layout={props.layout} controller={controller} />;
-					}
-				})()
-			)}
-		</div>
+		<CacheProvider value={cache}>
+			<div
+				css={!disableStyles && CSS.results({ columns: props.columns, gapSize: props.gapSize, style })}
+				className={classnames('ss__results', className)}
+			>
+				{results.map((result) =>
+					(() => {
+						switch (result.type) {
+							case BannerType.BANNER:
+								return <InlineBanner key={result.uid} {...subProps.inlineBanner} banner={result} layout={props.layout} />;
+							default:
+								return <Result key={result.uid} {...subProps.result} result={result} layout={props.layout} controller={controller} />;
+						}
+					})()
+				)}
+			</div>
+		</CacheProvider>
 	) : null;
 });
 

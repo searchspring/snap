@@ -94,7 +94,7 @@ export class Snap {
 		// log version
 		this.logger.imageText({
 			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-			text: ` v${version}`,
+			text: `[${version}]`,
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
 
@@ -188,7 +188,7 @@ export class Snap {
 										cntrlr.bind();
 
 										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
-										render(<Component controller={cntrlr} input={controller?.config?.selector} {...target.props} />, elem);
+										render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
 									}
 								);
 							});
@@ -327,7 +327,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new SearchStore({}, { urlManager }),
+					store: services?.store || new SearchStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -343,7 +343,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach();
 				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new AutocompleteStore({}, { urlManager }),
+					store: services?.store || new AutocompleteStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -375,7 +375,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new RecommendationStore({}, { urlManager }),
+					store: services?.store || new RecommendationStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),

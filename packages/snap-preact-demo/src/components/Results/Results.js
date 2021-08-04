@@ -1,7 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Pagination, Results as ResultsComponent, Button, withStore, withController } from '@searchspring/snap-preact-components';
+import { Pagination, Results as ResultsComponent, withStore, withController } from '@searchspring/snap-preact-components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
@@ -14,20 +14,13 @@ export class Results extends Component {
 		const results = this.props.store.results;
 		const pagination = this.props.store.pagination;
 		const controller = this.props.controller;
-		const resultsTheme = {
-			components: {
-				result: {
-					buttonSlot: <Button content="Add to Cart" style={{ display: 'block', textAlign: 'center' }} />,
-				},
-			},
-		};
 
 		return (
 			<div class="ss-results">
 				<Toolbar />
 
 				<Profile name="results" controller={controller}>
-					<ResultsComponent controller={controller} results={results} theme={resultsTheme} />
+					<ResultsComponent controller={controller} results={results} />
 				</Profile>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>

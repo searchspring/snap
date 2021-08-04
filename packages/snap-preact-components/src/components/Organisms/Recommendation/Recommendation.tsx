@@ -14,7 +14,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
@@ -124,12 +124,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
 		props;
 
-	if (!controller || controller.constructor?.name !== 'RecommendationController') {
-		console.error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
-		return;
+	if (!controller || controller.type !== 'recommendation') {
+		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
+
 	if (children && children.length !== controller.store.results.length) {
-		console.error(`<Recommendation> Component received invalid number of children`);
+		controller.log.error(`<Recommendation> Component received invalid number of children`);
 		return;
 	}
 
@@ -207,34 +207,36 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (
 		(children || results?.length) && (
-			<div
-				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-				css={!disableStyles && CSS.recommendation({ theme, style })}
-				className={classnames('ss__recommendation', className)}
-			>
-				{title && <h3 className="ss__recommendation__title">{title}</h3>}
-				<Carousel
-					onNextButtonClick={(e) => controller.track.click(e)}
-					onPrevButtonClick={(e) => controller.track.click(e)}
-					// @ts-ignore
-					onBreakpoint={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-					//@ts-ignore
-					onSlideChange={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-					onCarouselClick={(e, clickedIndex) => {
-						controller.track.click(e);
-						controller.track.product.click(e, results[clickedIndex]);
-					}}
-					onInit={(realIndex, loopedSlides) => setInitialIndexes([realIndex, loopedSlides])}
-					loop={loop}
-					breakpoints={breakpoints}
-					pagination={pagination}
-					{...subProps.carousel}
+			<CacheProvider value={cache}>
+				<div
+					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+					css={!disableStyles && CSS.recommendation({ theme, style })}
+					className={classnames('ss__recommendation', className)}
 				>
-					{children
-						? children.map((child) => child)
-						: results.map((result) => <Result controller={controller} result={result} {...subProps.result} />)}
-				</Carousel>
-			</div>
+					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					<Carousel
+						onNextButtonClick={(e) => controller.track.click(e)}
+						onPrevButtonClick={(e) => controller.track.click(e)}
+						// @ts-ignore
+						onBreakpoint={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
+						//@ts-ignore
+						onSlideChange={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
+						onCarouselClick={(e, clickedIndex) => {
+							controller.track.click(e);
+							controller.track.product.click(e, results[clickedIndex]);
+						}}
+						onInit={(realIndex, loopedSlides) => setInitialIndexes([realIndex, loopedSlides])}
+						loop={loop}
+						breakpoints={breakpoints}
+						pagination={pagination}
+						{...subProps.carousel}
+					>
+						{children
+							? children.map((child) => child)
+							: results.map((result) => <Result controller={controller} result={result} {...subProps.result} />)}
+					</Carousel>
+				</div>
+			</CacheProvider>
 		)
 	);
 });

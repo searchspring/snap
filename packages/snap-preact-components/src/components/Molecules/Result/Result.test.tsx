@@ -3,7 +3,7 @@ import { render } from '@testing-library/preact';
 import { Result } from './Result';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -37,15 +37,15 @@ describe('Result Component', () => {
 		expect(priceElement.length).toBe(2);
 	});
 
-	it('renders button', () => {
+	it('renders details', () => {
 		const args = {
 			result: searchResponse.results[0],
-			buttonSlot: <div>Add to cart'</div>,
+			detailSlot: <div className="details">Add to cart'</div>,
 		};
 		const rendered = render(<Result {...args} />);
-		const buttonBlement = rendered.container.querySelector('.ss__result .ss__result__wrapper__details .ss__result__wrapper__details__button');
-		expect(buttonBlement).toBeInTheDocument();
-		expect(buttonBlement).toHaveTextContent('Add to cart');
+		const detailsElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__details .details');
+		expect(detailsElement).toBeInTheDocument();
+		expect(detailsElement).toHaveTextContent('Add to cart');
 	});
 
 	it('hides various sections', () => {

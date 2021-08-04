@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 
 import { FacetPaletteOptions } from './FacetPaletteOptions';
 import { paletteFacetMock } from '../../../mocks/searchResponse';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('FacetPaletteOptions Component', () => {
 	const theme = {

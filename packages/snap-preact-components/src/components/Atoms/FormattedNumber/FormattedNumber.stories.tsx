@@ -95,6 +95,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		raw: {
+			description: 'Returns raw value without wrapping DOM node',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

@@ -1,9 +1,10 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-
-import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { getSearchParams } from '../utils/getParams';
+
+import type { FinderStore } from '@searchspring/snap-store-mobx';
+import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
@@ -12,6 +13,8 @@ const defaultConfig: FinderControllerConfig = {
 };
 
 export class FinderController extends AbstractController {
+	public type = 'finder';
+	public store: any;
 	config: FinderControllerConfig;
 
 	constructor(config: FinderControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
@@ -19,6 +22,7 @@ export class FinderController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		this.store.setConfig(this.config);
 
 		this.urlManager = this.urlManager;
 
@@ -45,6 +49,9 @@ export class FinderController extends AbstractController {
 
 			search.controller.store.loading = false;
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	get params(): Record<string, any> {
@@ -73,6 +80,7 @@ export class FinderController extends AbstractController {
 		if (!this.initialized) {
 			await this.init();
 		}
+
 		const params = this.params;
 
 		try {

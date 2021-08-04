@@ -22,13 +22,12 @@ export class AutocompleteStore extends AbstractStore {
 	trending: TrendingStore;
 
 	constructor(config, services: { urlManager: any }) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);
 		}
 
-		this.config = config;
 		this.services = services;
 
 		this.state = new StateStore(services);
@@ -100,7 +99,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);
 		}
 
-		this.pagination = new PaginationStore(this.services, data.pagination);
+		this.pagination = new PaginationStore({}, this.services, data.pagination);
 		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
 	}
 }

@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
@@ -70,23 +70,25 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	return (
 		values?.length && (
-			<div css={!disableStyles && CSS.list({ theme, style, hideCheckbox })} className={classnames('ss__facet-list-options', className)}>
-				{values.map((value) => (
-					<a
-						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-						onClick={onClick}
-						onFocus={() => previewOnFocus && value.preview && value.preview()}
-						{...valueProps}
-						{...value.url?.link}
-					>
-						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-						<span className="ss__facet-list-options__option__value">
-							{value.label}
-							{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
-						</span>
-					</a>
-				))}
-			</div>
+			<CacheProvider value={cache}>
+				<div css={!disableStyles && CSS.list({ theme, style, hideCheckbox })} className={classnames('ss__facet-list-options', className)}>
+					{values.map((value) => (
+						<a
+							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
+							onClick={onClick}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
+							{...valueProps}
+							{...value.url?.link}
+						>
+							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
+							<span className="ss__facet-list-options__option__value">
+								{value.label}
+								{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+							</span>
+						</a>
+					))}
+				</div>
+			</CacheProvider>
 		)
 	);
 });

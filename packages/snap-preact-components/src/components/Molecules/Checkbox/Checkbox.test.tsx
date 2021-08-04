@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Checkbox } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 const globalTheme = {
 	components: {
@@ -112,7 +112,7 @@ describe('Checkbox Component', () => {
 
 			expect(rendered.container).toBeInTheDocument();
 			expect(checkboxElement.classList.length).toBe(2);
-			expect(checkboxElement.classList[1]).toMatch(/^css-0/);
+			expect(checkboxElement.classList[1]).toMatch(/^ss-0/);
 			expect(checkboxElement.className.match(/disabled/)).toBeFalsy();
 		});
 

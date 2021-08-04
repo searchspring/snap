@@ -197,7 +197,7 @@ export const Swatches = (props, { loaded: { controller } }) => {
 					<div style={{ maxWidth: '250px' }}>
 						<Result
 							result={result}
-							buttonSlot={
+							detailSlot={
 								<Carousel {...props} onCarouselClick={(e) => (result.mappings.core.imageUrl = e.target.src)}>
 									{puppyImgs.map((img) => (
 										<div style={{ position: 'relative', height: '25px', width: '25px' }}>

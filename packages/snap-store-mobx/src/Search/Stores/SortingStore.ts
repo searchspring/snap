@@ -17,13 +17,13 @@ export class SortingStore {
 				})
 				.map((option, index) => {
 					option.active = false;
-
 					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
 						option.active = true;
-					} else if (index === 0) {
+					} else if (!activeSort && index === 0) {
 						option.active = true;
 					}
 
+					option.default = false;
 					if (index === 0) {
 						// is the default sort
 						option.default = true;

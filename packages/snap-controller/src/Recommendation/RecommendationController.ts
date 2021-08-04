@@ -2,10 +2,11 @@ import deepmerge from 'deepmerge';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
-
-import { AbstractController } from '../Abstract/AbstractController';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 import { LogMode } from '@searchspring/snap-logger';
+import { AbstractController } from '../Abstract/AbstractController';
+
+import type { RecommendationStore } from '@searchspring/snap-store-mobx';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -25,6 +26,8 @@ const defaultConfig: RecommendationControllerConfig = {
 };
 
 export class RecommendationController extends AbstractController {
+	public type = 'recommendation';
+	public store: RecommendationStore;
 	config: RecommendationControllerConfig;
 	events = {
 		click: null,
@@ -42,6 +45,7 @@ export class RecommendationController extends AbstractController {
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
+		this.store.setConfig(this.config);
 
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (recommend: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
@@ -56,6 +60,9 @@ export class RecommendationController extends AbstractController {
 
 			recommend.controller.store.loading = false;
 		});
+
+		// attach config plugins and event middleware
+		this.use(this.config);
 	}
 
 	track: RecommendationTrackMethods = {
@@ -85,7 +92,7 @@ export class RecommendationController extends AbstractController {
 				};
 
 				const event = this.tracker.track.event(payload);
-
+				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
 				return event;
 			},
 			impression: (result): BeaconEvent => {
@@ -113,7 +120,7 @@ export class RecommendationController extends AbstractController {
 
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				const event = (this.events.product[result.id].impression = this.tracker.track.event(payload));
-
+				this.eventManager.fire('track.product.impression', { controller: this, result, trackEvent: event });
 				return event;
 			},
 			render: (result): BeaconEvent => {
@@ -141,7 +148,7 @@ export class RecommendationController extends AbstractController {
 
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				const event = (this.events.product[result.id].render = this.tracker.track.event(payload));
-
+				this.eventManager.fire('track.product.render', { controller: this, result, trackEvent: event });
 				return event;
 			},
 		},
@@ -167,7 +174,7 @@ export class RecommendationController extends AbstractController {
 				},
 			});
 			this.events.click = event;
-
+			this.eventManager.fire('track.click', { controller: this, event: e, trackEvent: event });
 			return event;
 		},
 		impression: (): BeaconEvent => {
@@ -191,7 +198,7 @@ export class RecommendationController extends AbstractController {
 				},
 			});
 			this.events.impression = event;
-
+			this.eventManager.fire('track.impression', { controller: this, trackEvent: event });
 			return event;
 		},
 		render: (): BeaconEvent => {
@@ -219,7 +226,7 @@ export class RecommendationController extends AbstractController {
 
 			// track results render
 			this.store.results.forEach((result) => this.track.product.render(result));
-
+			this.eventManager.fire('track.render', { controller: this, trackEvent: event });
 			return event;
 		},
 	};

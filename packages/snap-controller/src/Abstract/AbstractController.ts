@@ -1,28 +1,25 @@
-import { Tracker } from '@searchspring/snap-tracker';
-import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 import { LogMode } from '@searchspring/snap-logger';
 import { DomTargeter } from '@searchspring/snap-toolbox';
+
+import type { ControllerServices, ControllerConfig, Attachments } from '../types';
+import type { Client } from '@searchspring/snap-client';
+import type { AbstractStore } from '@searchspring/snap-store-mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
+import type { Profiler } from '@searchspring/snap-profiler';
+import type { Logger } from '@searchspring/snap-logger';
+import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
-import { ControllerServices } from '../types';
-
-type PluginFunction = (func: (cntrlr: AbstractController) => Promise<void>) => Promise<void>;
-
-type ControllerConfig = {
-	id: string;
-	on?: {
-		[eventName: string]: Middleware<any> | Middleware<any>[];
-	};
-	use?: PluginFunction | PluginFunction[];
-};
 
 export abstract class AbstractController {
+	public type = 'abstract';
 	public config: ControllerConfig;
 	public client;
-	public store;
-	public urlManager;
+	public store: AbstractStore;
+	public urlManager: UrlManager;
 	public eventManager: EventManager;
-	public profiler;
-	public log;
+	public profiler: Profiler;
+	public log: Logger;
 	public tracker: Tracker;
 	public targets: {
 		[key: string]: DomTargeter;
@@ -104,36 +101,6 @@ export abstract class AbstractController {
 		}
 		// set environment
 		this.environment = process.env.NODE_ENV as LogMode;
-
-		// TODO: ensure config middleware is proper type
-		// attach config middleware
-		if (this.config.on) {
-			Object.keys(this.config.on).forEach((eventName) => {
-				const events = this.config.on[eventName];
-				let middlewareArray;
-				if (Array.isArray(events)) {
-					middlewareArray = events;
-				} else {
-					middlewareArray = [events];
-				}
-				middlewareArray.forEach((middleware) => {
-					this.on(eventName, middleware);
-				});
-			});
-		}
-
-		if (this.config.use) {
-			let pluginArray;
-			if (Array.isArray(this.config.use)) {
-				pluginArray = this.config.use;
-			} else {
-				pluginArray = [this.config.use];
-			}
-
-			pluginArray.forEach((plugin) => {
-				this.use(plugin);
-			});
-		}
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
@@ -156,7 +123,7 @@ export abstract class AbstractController {
 
 	public async init(): Promise<void> {
 		if (this._initialized) {
-			return;
+			this.log.warn(`'init' middleware recalled`);
 		}
 		const initProfile = this.profiler.create({ type: 'event', name: 'init', context: this.config }).start();
 
@@ -179,23 +146,26 @@ export abstract class AbstractController {
 			}
 		}
 
-		// subscribe to urlManager changes
-		this.urlManager.subscribe((prev, next) => {
-			try {
-				const prevString = JSON.stringify(prev);
-				const nextString = JSON.stringify(next);
+		if (!this._initialized) {
+			// subscribe to urlManager changes
+			this.urlManager.subscribe((prev, next) => {
+				try {
+					const prevString = JSON.stringify(prev);
+					const nextString = JSON.stringify(next);
 
-				if (prevString !== nextString) {
-					this.search();
+					if (prevString !== nextString) {
+						this.search();
+					}
+				} catch (err) {
+					this.log.error('URL state is invalid', err);
 				}
-			} catch (err) {
-				this.log.error('URL state is invalid', err);
-			}
-		});
+			});
+
+			this._initialized = true;
+		}
 
 		initProfile.stop();
 		this.log.profile(initProfile);
-		this._initialized = true;
 	}
 
 	public retarget(): void {
@@ -206,11 +176,43 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async use(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
+	public async plugin(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
 		await func(this);
 	}
 
 	public on<T>(event: string, ...func: Middleware<T>[]): void {
 		this.eventManager.on(event, ...func);
+	}
+
+	public use(attachments: Attachments): void {
+		// TODO: ensure config middleware is proper type
+		// attach middleware
+		if (attachments?.plugin) {
+			let pluginArray;
+			if (Array.isArray(attachments.plugin)) {
+				pluginArray = attachments.plugin;
+			} else {
+				pluginArray = [attachments.plugin];
+			}
+
+			pluginArray.forEach((plugin) => {
+				this.plugin(plugin);
+			});
+		}
+
+		if (attachments?.on) {
+			Object.keys(attachments.on).forEach((eventName) => {
+				const eventMiddleware = attachments.on[eventName];
+				let middlewareArray;
+				if (Array.isArray(eventMiddleware)) {
+					middlewareArray = eventMiddleware;
+				} else {
+					middlewareArray = [eventMiddleware];
+				}
+				middlewareArray.forEach((middleware) => {
+					this.on(eventName, middleware);
+				});
+			});
+		}
 	}
 }

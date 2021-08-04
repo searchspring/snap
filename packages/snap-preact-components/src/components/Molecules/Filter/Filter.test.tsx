@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
@@ -103,7 +103,7 @@ describe('Filter Component', () => {
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
 		expect(filterElement.classList).toHaveLength(2);
-		expect(filterElement.classList[1]).toMatch(/^css-0/);
+		expect(filterElement.classList[1]).toMatch(/^ss-0/);
 	});
 });
 

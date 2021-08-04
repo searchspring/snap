@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
@@ -91,23 +91,27 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
-	return native ? (
-		<input
-			css={!disableStyles && CSS.native({ style })}
-			className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
-			type="checkbox"
-			onClick={(e) => clickFunc(e)}
-			disabled={disabled}
-			checked={checkedState}
-		/>
-	) : (
-		<span
-			css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
-			className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
-			onClick={(e) => clickFunc(e)}
-		>
-			{checkedState && <Icon {...subProps.icon} />}
-		</span>
+	return (
+		<CacheProvider value={cache}>
+			{native ? (
+				<input
+					css={!disableStyles && CSS.native({ style })}
+					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
+					type="checkbox"
+					onClick={(e) => clickFunc(e)}
+					disabled={disabled}
+					checked={checkedState}
+				/>
+			) : (
+				<span
+					css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
+					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
+					onClick={(e) => clickFunc(e)}
+				>
+					{checkedState && <Icon {...subProps.icon} />}
+				</span>
+			)}
+		</CacheProvider>
 	);
 });
 

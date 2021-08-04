@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { LoadingBar } from './LoadingBar';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('LoadingBar Component', () => {
 	const theme = {
@@ -76,7 +76,7 @@ describe('LoadingBar Component', () => {
 		const rendered = render(<LoadingBar {...args} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
 		expect(loadingbarElement.classList.length).toBe(2);
-		expect(loadingbarElement.classList[1]).toMatch(/^css-0/);
+		expect(loadingbarElement.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('can custom className', () => {

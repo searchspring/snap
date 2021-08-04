@@ -1,8 +1,8 @@
+'use strict';
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[531],
 	{
 		70531: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { getScrollAreaStyles: () => getScrollAreaStyles, default: () => __WEBPACK_DEFAULT_EXPORT__ });
 			__webpack_require__(32501), __webpack_require__(22144);

@@ -1,8 +1,8 @@
-/*! For license information please see 645.5966ff814475251675a0.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 908.de813040a2ad32fe4338.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[645],
+	[908],
 	{
-		38645: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		49908: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -55,8 +55,8 @@
 			const prism_tsx = __webpack_require__.n(tsx)();
 			var typescript = __webpack_require__(97288);
 			const prism_typescript = __webpack_require__.n(typescript)();
-			var objectWithoutPropertiesLoose = __webpack_require__(98283);
-			var defineProperty = __webpack_require__(51119);
+			var objectWithoutPropertiesLoose = __webpack_require__(31461);
+			var defineProperty = __webpack_require__(56666);
 			function _objectSpread(target) {
 				for (var i = 1; i < arguments.length; i++) {
 					var source = null != arguments[i] ? Object(arguments[i]) : {},
@@ -73,7 +73,7 @@
 				}
 				return target;
 			}
-			var esm_extends = __webpack_require__(7560);
+			var esm_extends = __webpack_require__(7896);
 			function createStyleObject(classNames) {
 				var elementStyle = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
 					stylesheet = arguments.length > 2 ? arguments[2] : void 0;
@@ -450,9 +450,9 @@
 			const prism_light = SyntaxHighlighter;
 			var ActionBar = __webpack_require__(97408),
 				ScrollArea = __webpack_require__(54214),
-				dist = __webpack_require__(36404),
+				ts_dedent_esm = __webpack_require__(51893),
 				formatter = memoizerific_default()(2)(function (code) {
-					return (0, dist.ZP)(code);
+					return (0, ts_dedent_esm.C)(code);
 				});
 			function _extends() {
 				return (_extends =
@@ -727,18 +727,6 @@
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';
 			const syntaxhighlighter = syntaxhighlighter_SyntaxHighlighter;
 		},
-		42333: (module) => {
-			'use strict';
-			module.exports = JSON.parse(
-				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
-			);
-		},
-		90460: (module) => {
-			'use strict';
-			module.exports = JSON.parse(
-				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
-			);
-		},
 		97327: (__unused_webpack_module, exports) => {
 			'use strict';
 			exports.Q = function parse(value) {
@@ -934,8 +922,8 @@
 		},
 		18309: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var legacy = __webpack_require__(42333),
-				invalid = __webpack_require__(90460),
+			var legacy = __webpack_require__(93562),
+				invalid = __webpack_require__(71216),
 				decimal = __webpack_require__(61278),
 				hexadecimal = __webpack_require__(48833),
 				alphanumerical = __webpack_require__(65279),
@@ -3136,6 +3124,18 @@
 				return target;
 			};
 			var hasOwnProperty = Object.prototype.hasOwnProperty;
+		},
+		93562: (module) => {
+			'use strict';
+			module.exports = JSON.parse(
+				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
+			);
+		},
+		71216: (module) => {
+			'use strict';
+			module.exports = JSON.parse(
+				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
+			);
 		},
 	},
 ]);

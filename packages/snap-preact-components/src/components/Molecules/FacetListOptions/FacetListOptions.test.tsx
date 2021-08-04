@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
 import { listFacetMock } from '../../../mocks/searchResponse';

@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Dropdown Component', () => {
 	it('renders', () => {
@@ -80,7 +80,7 @@ describe('Dropdown Component', () => {
 
 		const dropdown = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdown.classList).toHaveLength(2);
-		expect(dropdown.classList[1]).toMatch(/^css-0/);
+		expect(dropdown.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {

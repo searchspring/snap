@@ -70,3 +70,28 @@ recommendationController.init();
 ### afterStore
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
+
+### track.product.click
+- Called with `eventData` = { controller, event, result, trackEvent } 
+- Always invoked after `track.product.click()` method has been invoked
+- Allows for adding custom product click events (ie. Google Analytics)
+
+### track.product.impression
+- Called with `eventData` = { controller, result, trackEvent } 
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.product.render
+- Called with `eventData` = { controller, result, trackEvent } 
+- Always invoked after `track.product.render()` method has been invoked
+
+### track.click
+- Called with `eventData` = { controller, event, trackEvent } 
+- Always invoked after `track.click()` method has been invoked
+
+### track.impression
+- Called with `eventData` = { controller, trackEvent } 
+- Always invoked after `track.impression()` method has been invoked
+
+### track.render
+- Called with `eventData` = { controller, trackEvent } 
+- Always invoked after `track.render()` method has been invoked

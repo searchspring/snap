@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -33,30 +33,26 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		...properties.theme?.components?.formattedNumber,
 	};
 
-	const {
-		value,
+	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, disableStyles, className, style, raw } =
+		props;
+
+	const formattedNumber = filters.formatNumber(value, {
 		symbol,
 		decimalPlaces,
 		padDecimalPlaces,
 		thousandsSeparator,
 		decimalSeparator,
 		symbolAfter,
-		disableStyles,
-		className,
-		style,
-	} = props;
+	});
 
-	return (
-		<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
-			{filters.formatNumber(value, {
-				symbol,
-				decimalPlaces,
-				padDecimalPlaces,
-				thousandsSeparator,
-				decimalSeparator,
-				symbolAfter,
-			})}
-		</span>
+	return raw ? (
+		<>{formattedNumber}</>
+	) : (
+		<CacheProvider value={cache}>
+			<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
+				{formattedNumber}
+			</span>
+		</CacheProvider>
 	);
 }
 export interface FormattedNumberProps extends ComponentProps {
@@ -67,4 +63,5 @@ export interface FormattedNumberProps extends ComponentProps {
 	thousandsSeparator?: string;
 	decimalSeparator?: string;
 	symbolAfter?: boolean;
+	raw?: boolean;
 }

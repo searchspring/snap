@@ -10,7 +10,7 @@ export class RecommendationStore extends AbstractStore {
 	results: ResultStore;
 
 	constructor(config, services: { urlManager: any }) {
-		super();
+		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
 			throw new Error(`Invalid service 'urlManager' passed to AutocompleteStore. Missing "subscribe" function.`);

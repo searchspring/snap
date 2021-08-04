@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Overlay } from './Overlay';
-import { ThemeProvider } from '../../../providers/theme';
+import { ThemeProvider } from '../../../providers';
 
 describe('Overlay Component', () => {
 	const theme = {
@@ -50,7 +50,7 @@ describe('Overlay Component', () => {
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe('');
 		expect(overlayElement.classList.length).toBe(3);
-		expect(overlayElement.classList).toContain('css-0');
+		expect(overlayElement.classList).toContain('ss-0');
 	});
 
 	it('can custom className', () => {

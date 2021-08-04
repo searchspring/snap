@@ -238,6 +238,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual({});
 					expect(storage.get(path)).toBeUndefined();
+					storage.clear();
 				});
 
 				it('does nothing when you pass undefined for path', () => {
@@ -248,6 +249,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual({});
 					expect(storage.get(path)).toBeUndefined();
+					storage.clear();
 				});
 
 				it('stores undefined if you pass undefined for value', () => {
@@ -260,6 +262,7 @@ describe('Storage Store', () => {
 						undefined: undefined,
 					});
 					expect(storage.get(path)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('does something when you pass an empty path', () => {
@@ -272,6 +275,7 @@ describe('Storage Store', () => {
 						'': value,
 					});
 					expect(storage.get(path)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('can store an object', () => {
@@ -301,6 +305,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual(storedStuff);
 					expect(storage.get(key)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('can set a state using a path', () => {
@@ -318,6 +323,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual(storedStuff);
 					expect(storage.get(path)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('can set a state using a deep path', () => {
@@ -339,6 +345,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual(storedStuff);
 					expect(storage.get(path)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('can set storage on existing paths', () => {
@@ -378,6 +385,7 @@ describe('Storage Store', () => {
 
 					expect(storage.state).toStrictEqual(storedStuffAgain);
 					expect(storage.get(secondPath)).toStrictEqual(secondValue);
+					storage.clear();
 				});
 			});
 
@@ -388,6 +396,7 @@ describe('Storage Store', () => {
 					const value = 'value';
 					storage.set(path, value);
 					expect(storage.get(path)).toStrictEqual(value);
+					storage.clear();
 				});
 
 				it('can get a deeply set state', () => {
@@ -403,6 +412,7 @@ describe('Storage Store', () => {
 							},
 						},
 					});
+					storage.clear();
 				});
 
 				it('returns undefined when specifying an undefined path', () => {
@@ -413,6 +423,7 @@ describe('Storage Store', () => {
 					expect(storage.get(path)).toStrictEqual(value);
 
 					expect(storage.get('storageKey.level1.dne')).toBeUndefined();
+					storage.clear();
 				});
 			});
 
@@ -427,6 +438,7 @@ describe('Storage Store', () => {
 					storage.clear();
 					expect(storage.state).toStrictEqual({});
 					expect(storage.get(path)).toBeUndefined();
+					storage.clear();
 				});
 			});
 		});
