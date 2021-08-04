@@ -99,7 +99,7 @@ Controllers may need to know how long a certain event took, the `profiler` servi
 The `logger` service provides logging functionality to a controller. Each controller logs when errors in middleware and when controller events occur. The logger is responsible for sending this information to the developer console. In addition the logger may provide additional emoji or colors to use. This service is exposed as `controller.log`.
 
 ## Initialization
-Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. It also fires the `init` event which executes attached middleware. This should happen prior to any calls to the controller `search` method.
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. It also fires the `init` event which executes attached middleware. This can be fired manually as needed; if it was not manually fired it will happen automatically on the first call to the controller `search` method.
 
 ```typescript
 controller.init();
@@ -130,9 +130,9 @@ controller.on('init', async (eventData, next) => {
 });
 ```
 
-Note: Groups of middleware (plugins) can be attached using the `use` method.
+Note: Groups of middleware (plugins) can be attached using the `plugin` method.
 
-The data available within a middleware (first parameter) is determined by what gets passed into the `fire` method. For existing events on the controller, the `fire` method is already being called when appropriate to the event, and the `eventData` will typically be an object containing a reference to the controller and any other details that may be of importance to the particular event. Custom events can be created as needed; but keep in mind that any middleware tied to the event should be bound (using `on` or `use`) prior to executing the `fire` method.
+The data available within a middleware (first parameter) is determined by what gets passed into the `fire` method. For existing events on the controller, the `fire` method is already being called when appropriate to the event, and the `eventData` will typically be an object containing a reference to the controller and any other details that may be of importance to the particular event. Custom events can be created as needed; but keep in mind that any middleware tied to the event should be bound (using `on` or `plugin`) prior to the execution of the `fire` method.
 
 ```typescript
 controller.eventManager.fire('customEventName', { thing1: 'one', thing2: 2 });

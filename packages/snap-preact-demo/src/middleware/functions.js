@@ -1,8 +1,3 @@
-export async function scrollToTop(search, next) {
-	window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-	await next();
-}
-
 export async function timeout(microSeconds) {
 	console.log(`...waiting ${microSeconds} μsecs...`);
 

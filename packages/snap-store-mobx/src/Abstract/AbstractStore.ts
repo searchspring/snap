@@ -10,13 +10,20 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = true;
 	public loaded = false;
+	public config: any;
 
-	constructor() {
+	constructor(config: any) {
+		this.config = config;
+
 		makeObservable(this, {
 			custom: observable,
 			loading: observable,
 			loaded: observable,
 		});
+	}
+
+	setConfig(newConfig: any): void {
+		this.config = newConfig;
 	}
 
 	abstract update(data): void;

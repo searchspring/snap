@@ -1,4 +1,4 @@
-/*! For license information please see 517.47621f43e427a135b12e.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 517.3fe6fe1664c1c1d0d16d.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[517],
 	{
@@ -8829,7 +8829,7 @@
 						mode = _ref.mode,
 						fullAPI = _ref.fullAPI,
 						dismissedVersionNotification = store.getState().dismissedVersionNotification,
-						state = { versions: Object.assign({ current: { version: '6.3.5' } }, getVersionCheckData()), dismissedVersionNotification },
+						state = { versions: Object.assign({ current: { version: '6.3.6' } }, getVersionCheckData()), dismissedVersionNotification },
 						api = {
 							getCurrentVersion: function getCurrentVersion() {
 								return store.getState().versions.current;
@@ -33909,7 +33909,7 @@
 						IS_SOME = 3 == TYPE,
 						IS_EVERY = 4 == TYPE,
 						IS_FIND_INDEX = 6 == TYPE,
-						IS_FILTER_OUT = 7 == TYPE,
+						IS_FILTER_REJECT = 7 == TYPE,
 						NO_HOLES = 5 == TYPE || IS_FIND_INDEX;
 					return function ($this, callbackfn, that, specificCreate) {
 						for (
@@ -33921,7 +33921,7 @@
 								length = toLength(self.length),
 								index = 0,
 								create = specificCreate || arraySpeciesCreate,
-								target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_OUT ? create($this, 0) : void 0;
+								target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_REJECT ? create($this, 0) : void 0;
 							length > index;
 							index++
 						)
@@ -33956,7 +33956,7 @@
 				every: createMethod(4),
 				find: createMethod(5),
 				findIndex: createMethod(6),
-				filterOut: createMethod(7),
+				filterReject: createMethod(7),
 			};
 		},
 		31460: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -34051,19 +34051,25 @@
 				};
 			module.exports = mergeSort;
 		},
-		87501: (module, __unused_webpack_exports, __webpack_require__) => {
+		18760: (module, __unused_webpack_exports, __webpack_require__) => {
 			var isObject = __webpack_require__(85052),
 				isArray = __webpack_require__(33718),
 				SPECIES = __webpack_require__(70095)('species');
-			module.exports = function (originalArray, length) {
+			module.exports = function (originalArray) {
 				var C;
 				return (
 					isArray(originalArray) &&
 						('function' != typeof (C = originalArray.constructor) || (C !== Array && !isArray(C.prototype))
 							? isObject(C) && null === (C = C[SPECIES]) && (C = void 0)
 							: (C = void 0)),
-					new (void 0 === C ? Array : C)(0 === length ? 0 : length)
+					void 0 === C ? Array : C
 				);
+			};
+		},
+		87501: (module, __unused_webpack_exports, __webpack_require__) => {
+			var arraySpeciesConstructor = __webpack_require__(18760);
+			module.exports = function (originalArray, length) {
+				return new (arraySpeciesConstructor(originalArray))(0 === length ? 0 : length);
 			};
 		},
 		64960: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -34456,7 +34462,7 @@
 							)
 					)
 				)
-					(Constructor = common.getConstructor(wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER)), (InternalMetadataModule.REQUIRED = !0);
+					(Constructor = common.getConstructor(wrapper, CONSTRUCTOR_NAME, IS_MAP, ADDER)), InternalMetadataModule.enable();
 				else if (isForced(CONSTRUCTOR_NAME, !0)) {
 					var instance = new Constructor(),
 						HASNT_CHAINING = instance[ADDER](IS_WEAK ? {} : -0, 1) != instance,
@@ -34531,11 +34537,12 @@
 		},
 		81720: (module, __unused_webpack_exports, __webpack_require__) => {
 			var requireObjectCoercible = __webpack_require__(58885),
+				toString = __webpack_require__(83326),
 				quot = /"/g;
 			module.exports = function (string, tag, attribute, value) {
-				var S = String(requireObjectCoercible(string)),
+				var S = toString(requireObjectCoercible(string)),
 					p1 = '<' + tag;
-				return '' !== attribute && (p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"'), p1 + '>' + S + '</' + tag + '>';
+				return '' !== attribute && (p1 += ' ' + attribute + '="' + toString(value).replace(quot, '&quot;') + '"'), p1 + '>' + S + '</' + tag + '>';
 			};
 		},
 		93723: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -34577,21 +34584,22 @@
 		},
 		62324: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var toPrimitive = __webpack_require__(92066),
+			var toPropertyKey = __webpack_require__(39310),
 				definePropertyModule = __webpack_require__(31787),
 				createPropertyDescriptor = __webpack_require__(65358);
 			module.exports = function (object, key, value) {
-				var propertyKey = toPrimitive(key);
+				var propertyKey = toPropertyKey(key);
 				propertyKey in object ? definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value)) : (object[propertyKey] = value);
 			};
 		},
 		19778: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var anObject = __webpack_require__(21176),
-				toPrimitive = __webpack_require__(92066);
+				ordinaryToPrimitive = __webpack_require__(32914);
 			module.exports = function (hint) {
-				if ('string' !== hint && 'number' !== hint && 'default' !== hint) throw TypeError('Incorrect hint');
-				return toPrimitive(anObject(this), 'number' !== hint);
+				if ((anObject(this), 'string' === hint || 'default' === hint)) hint = 'string';
+				else if ('number' !== hint) throw TypeError('Incorrect hint');
+				return ordinaryToPrimitive(this, hint);
 			};
 		},
 		67675: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -34786,7 +34794,8 @@
 				global = __webpack_require__(9859),
 				userAgent = __webpack_require__(80598),
 				process = global.process,
-				versions = process && process.versions,
+				Deno = global.Deno,
+				versions = (process && process.versions) || (Deno && Deno.version),
 				v8 = versions && versions.v8;
 			v8
 				? (version = (match = v8.split('.'))[0] < 4 ? 1 : match[0] + match[1])
@@ -34959,15 +34968,12 @@
 				};
 		},
 		31333: (module, __unused_webpack_exports, __webpack_require__) => {
-			var path = __webpack_require__(49276),
-				global = __webpack_require__(9859),
+			var global = __webpack_require__(9859),
 				aFunction = function (variable) {
 					return 'function' == typeof variable ? variable : void 0;
 				};
 			module.exports = function (namespace, method) {
-				return arguments.length < 2
-					? aFunction(path[namespace]) || aFunction(global[namespace])
-					: (path[namespace] && path[namespace][method]) || (global[namespace] && global[namespace][method]);
+				return arguments.length < 2 ? aFunction(global[namespace]) : global[namespace] && global[namespace][method];
 			};
 		},
 		78830: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -35119,12 +35125,16 @@
 				(module.exports = store.inspectSource);
 		},
 		95926: (module, __unused_webpack_exports, __webpack_require__) => {
-			var hiddenKeys = __webpack_require__(95977),
+			var $ = __webpack_require__(23103),
+				hiddenKeys = __webpack_require__(95977),
 				isObject = __webpack_require__(85052),
 				has = __webpack_require__(50816),
 				defineProperty = __webpack_require__(31787).f,
+				getOwnPropertyNamesModule = __webpack_require__(78151),
+				getOwnPropertyNamesExternalModule = __webpack_require__(10166),
 				uid = __webpack_require__(81441),
 				FREEZING = __webpack_require__(68476),
+				REQUIRED = !1,
 				METADATA = uid('meta'),
 				id = 0,
 				isExtensible =
@@ -35136,7 +35146,23 @@
 					defineProperty(it, METADATA, { value: { objectID: 'O' + id++, weakData: {} } });
 				},
 				meta = (module.exports = {
-					REQUIRED: !1,
+					enable: function () {
+						(meta.enable = function () {}), (REQUIRED = !0);
+						var getOwnPropertyNames = getOwnPropertyNamesModule.f,
+							splice = [].splice,
+							test = {};
+						(test[METADATA] = 1),
+							getOwnPropertyNames(test).length &&
+								((getOwnPropertyNamesModule.f = function (it) {
+									for (var result = getOwnPropertyNames(it), i = 0, length = result.length; i < length; i++)
+										if (result[i] === METADATA) {
+											splice.call(result, i, 1);
+											break;
+										}
+									return result;
+								}),
+								$({ target: 'Object', stat: !0, forced: !0 }, { getOwnPropertyNames: getOwnPropertyNamesExternalModule.f }));
+					},
 					fastKey: function (it, create) {
 						if (!isObject(it)) return 'symbol' == typeof it ? it : ('string' == typeof it ? 'S' : 'P') + it;
 						if (!has(it, METADATA)) {
@@ -35155,7 +35181,7 @@
 						return it[METADATA].weakData;
 					},
 					onFreeze: function (it) {
-						return FREEZING && meta.REQUIRED && isExtensible(it) && !has(it, METADATA) && setMetadata(it), it;
+						return FREEZING && REQUIRED && isExtensible(it) && !has(it, METADATA) && setMetadata(it), it;
 					},
 				});
 			hiddenKeys[METADATA] = !0;
@@ -35273,6 +35299,18 @@
 				var isRegExp;
 				return isObject(it) && (void 0 !== (isRegExp = it[MATCH]) ? !!isRegExp : 'RegExp' == classof(it));
 			};
+		},
+		49395: (module, __unused_webpack_exports, __webpack_require__) => {
+			var getBuiltIn = __webpack_require__(31333),
+				USE_SYMBOL_AS_UID = __webpack_require__(66969);
+			module.exports = USE_SYMBOL_AS_UID
+				? function (it) {
+						return 'symbol' == typeof it;
+				  }
+				: function (it) {
+						var $Symbol = getBuiltIn('Symbol');
+						return 'function' == typeof $Symbol && Object(it) instanceof $Symbol;
+				  };
 		},
 		89003: (module, __unused_webpack_exports, __webpack_require__) => {
 			var anObject = __webpack_require__(21176),
@@ -35583,24 +35621,32 @@
 				scriptTag = function (content) {
 					return '<script>' + content + '</script>';
 				},
+				NullProtoObjectViaActiveX = function (activeXDocument) {
+					activeXDocument.write(scriptTag('')), activeXDocument.close();
+					var temp = activeXDocument.parentWindow.Object;
+					return (activeXDocument = null), temp;
+				},
 				NullProtoObject = function () {
 					try {
-						activeXDocument = document.domain && new ActiveXObject('htmlfile');
+						activeXDocument = new ActiveXObject('htmlfile');
 					} catch (error) {}
-					var iframeDocument, iframe;
-					NullProtoObject = activeXDocument
-						? (function (activeXDocument) {
-								activeXDocument.write(scriptTag('')), activeXDocument.close();
-								var temp = activeXDocument.parentWindow.Object;
-								return (activeXDocument = null), temp;
-						  })(activeXDocument)
-						: (((iframe = documentCreateElement('iframe')).style.display = 'none'),
-						  html.appendChild(iframe),
-						  (iframe.src = String('javascript:')),
-						  (iframeDocument = iframe.contentWindow.document).open(),
-						  iframeDocument.write(scriptTag('document.F=Object')),
-						  iframeDocument.close(),
-						  iframeDocument.F);
+					NullProtoObject =
+						document.domain && activeXDocument
+							? NullProtoObjectViaActiveX(activeXDocument)
+							: (function () {
+									var iframeDocument,
+										iframe = documentCreateElement('iframe');
+									if (iframe.style)
+										return (
+											(iframe.style.display = 'none'),
+											html.appendChild(iframe),
+											(iframe.src = String('javascript:')),
+											(iframeDocument = iframe.contentWindow.document).open(),
+											iframeDocument.write(scriptTag('document.F=Object')),
+											iframeDocument.close(),
+											iframeDocument.F
+										);
+							  })() || NullProtoObjectViaActiveX(activeXDocument);
 					for (var length = enumBugKeys.length; length--; ) delete NullProtoObject.prototype[enumBugKeys[length]];
 					return NullProtoObject();
 				};
@@ -35638,12 +35684,12 @@
 			var DESCRIPTORS = __webpack_require__(7400),
 				IE8_DOM_DEFINE = __webpack_require__(64394),
 				anObject = __webpack_require__(21176),
-				toPrimitive = __webpack_require__(92066),
+				toPropertyKey = __webpack_require__(39310),
 				$defineProperty = Object.defineProperty;
 			exports.f = DESCRIPTORS
 				? $defineProperty
 				: function defineProperty(O, P, Attributes) {
-						if ((anObject(O), (P = toPrimitive(P, !0)), anObject(Attributes), IE8_DOM_DEFINE))
+						if ((anObject(O), (P = toPropertyKey(P)), anObject(Attributes), IE8_DOM_DEFINE))
 							try {
 								return $defineProperty(O, P, Attributes);
 							} catch (error) {}
@@ -35656,14 +35702,14 @@
 				propertyIsEnumerableModule = __webpack_require__(19195),
 				createPropertyDescriptor = __webpack_require__(65358),
 				toIndexedObject = __webpack_require__(10905),
-				toPrimitive = __webpack_require__(92066),
+				toPropertyKey = __webpack_require__(39310),
 				has = __webpack_require__(50816),
 				IE8_DOM_DEFINE = __webpack_require__(64394),
 				$getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 			exports.f = DESCRIPTORS
 				? $getOwnPropertyDescriptor
 				: function getOwnPropertyDescriptor(O, P) {
-						if (((O = toIndexedObject(O)), (P = toPrimitive(P, !0)), IE8_DOM_DEFINE))
+						if (((O = toIndexedObject(O)), (P = toPropertyKey(P)), IE8_DOM_DEFINE))
 							try {
 								return $getOwnPropertyDescriptor(O, P);
 							} catch (error) {}
@@ -35801,6 +35847,16 @@
 						return '[object ' + classof(this) + ']';
 				  };
 		},
+		32914: (module, __unused_webpack_exports, __webpack_require__) => {
+			var isObject = __webpack_require__(85052);
+			module.exports = function (input, pref) {
+				var fn, val;
+				if ('string' === pref && 'function' == typeof (fn = input.toString) && !isObject((val = fn.call(input)))) return val;
+				if ('function' == typeof (fn = input.valueOf) && !isObject((val = fn.call(input)))) return val;
+				if ('string' !== pref && 'function' == typeof (fn = input.toString) && !isObject((val = fn.call(input)))) return val;
+				throw TypeError("Can't convert object to primitive value");
+			};
+		},
 		4826: (module, __unused_webpack_exports, __webpack_require__) => {
 			var getBuiltIn = __webpack_require__(31333),
 				getOwnPropertyNamesModule = __webpack_require__(78151),
@@ -35890,6 +35946,7 @@
 			'use strict';
 			var re1,
 				re2,
+				toString = __webpack_require__(83326),
 				regexpFlags = __webpack_require__(30895),
 				stickyHelpers = __webpack_require__(25650),
 				shared = __webpack_require__(33036),
@@ -35905,7 +35962,7 @@
 				UNSUPPORTED_Y = stickyHelpers.UNSUPPORTED_Y || stickyHelpers.BROKEN_CARET,
 				NPCG_INCLUDED = void 0 !== /()??/.exec('')[1];
 			(UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y || UNSUPPORTED_DOT_ALL || UNSUPPORTED_NCG) &&
-				(patchedExec = function exec(str) {
+				(patchedExec = function exec(string) {
 					var result,
 						reCopy,
 						lastIndex,
@@ -35915,6 +35972,7 @@
 						group,
 						re = this,
 						state = getInternalState(re),
+						str = toString(string),
 						raw = state.raw;
 					if (raw) return (raw.lastIndex = re.lastIndex), (result = patchedExec.call(raw, str)), (re.lastIndex = raw.lastIndex), result;
 					var groups = state.groups,
@@ -35926,9 +35984,9 @@
 					if (
 						(sticky &&
 							(-1 === (flags = flags.replace('y', '')).indexOf('g') && (flags += 'g'),
-							(strCopy = String(str).slice(re.lastIndex)),
+							(strCopy = str.slice(re.lastIndex)),
 							re.lastIndex > 0 &&
-								(!re.multiline || (re.multiline && '\n' !== str[re.lastIndex - 1])) &&
+								(!re.multiline || (re.multiline && '\n' !== str.charAt(re.lastIndex - 1))) &&
 								((source = '(?: ' + source + ')'), (strCopy = ' ' + strCopy), charsAdded++),
 							(reCopy = new RegExp('^(?:' + source + ')', flags))),
 						NPCG_INCLUDED && (reCopy = new RegExp('^' + source + '$(?!\\s)', flags)),
@@ -36014,11 +36072,10 @@
 				};
 		},
 		12079: (module, __unused_webpack_exports, __webpack_require__) => {
-			var global = __webpack_require__(9859),
-				createNonEnumerableProperty = __webpack_require__(75762);
+			var global = __webpack_require__(9859);
 			module.exports = function (key, value) {
 				try {
-					createNonEnumerableProperty(global, key, value);
+					Object.defineProperty(global, key, { value, configurable: !0, writable: !0 });
 				} catch (error) {
 					global[key] = value;
 				}
@@ -36073,7 +36130,7 @@
 				store = __webpack_require__(85353);
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
-			})('versions', []).push({ version: '3.15.2', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
+			})('versions', []).push({ version: '3.16.0', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
 		},
 		37942: (module, __unused_webpack_exports, __webpack_require__) => {
 			var anObject = __webpack_require__(21176),
@@ -36096,12 +36153,13 @@
 		},
 		30966: (module, __unused_webpack_exports, __webpack_require__) => {
 			var toInteger = __webpack_require__(16051),
+				toString = __webpack_require__(83326),
 				requireObjectCoercible = __webpack_require__(58885),
 				createMethod = function (CONVERT_TO_STRING) {
 					return function ($this, pos) {
 						var first,
 							second,
-							S = String(requireObjectCoercible($this)),
+							S = toString(requireObjectCoercible($this)),
 							position = toInteger(pos),
 							size = S.length;
 						return position < 0 || position >= size
@@ -36196,9 +36254,10 @@
 		93124: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var toInteger = __webpack_require__(16051),
+				toString = __webpack_require__(83326),
 				requireObjectCoercible = __webpack_require__(58885);
 			module.exports = function repeat(count) {
-				var str = String(requireObjectCoercible(this)),
+				var str = toString(requireObjectCoercible(this)),
 					result = '',
 					n = toInteger(count);
 				if (n < 0 || n == 1 / 0) throw RangeError('Wrong number of repetitions');
@@ -36217,19 +36276,21 @@
 		},
 		1017: (module, __unused_webpack_exports, __webpack_require__) => {
 			var requireObjectCoercible = __webpack_require__(58885),
+				toString = __webpack_require__(83326),
 				whitespace = '[' + __webpack_require__(41647) + ']',
 				ltrim = RegExp('^' + whitespace + whitespace + '*'),
 				rtrim = RegExp(whitespace + whitespace + '*$'),
 				createMethod = function (TYPE) {
 					return function ($this) {
-						var string = String(requireObjectCoercible($this));
+						var string = toString(requireObjectCoercible($this));
 						return 1 & TYPE && (string = string.replace(ltrim, '')), 2 & TYPE && (string = string.replace(rtrim, '')), string;
 					};
 				};
 			module.exports = { start: createMethod(1), end: createMethod(2), trim: createMethod(3) };
 		},
 		55795: (module, __unused_webpack_exports, __webpack_require__) => {
-			var defer,
+			var location,
+				defer,
 				channel,
 				port,
 				global = __webpack_require__(9859),
@@ -36239,15 +36300,17 @@
 				createElement = __webpack_require__(22635),
 				IS_IOS = __webpack_require__(32023),
 				IS_NODE = __webpack_require__(28801),
-				location = global.location,
 				set = global.setImmediate,
 				clear = global.clearImmediate,
 				process = global.process,
 				MessageChannel = global.MessageChannel,
 				Dispatch = global.Dispatch,
 				counter = 0,
-				queue = {},
-				run = function (id) {
+				queue = {};
+			try {
+				location = global.location;
+			} catch (error) {}
+			var run = function (id) {
 					if (queue.hasOwnProperty(id)) {
 						var fn = queue[id];
 						delete queue[id], fn();
@@ -36262,11 +36325,11 @@
 					run(event.data);
 				},
 				post = function (id) {
-					global.postMessage(id + '', location.protocol + '//' + location.host);
+					global.postMessage(String(id), location.protocol + '//' + location.host);
 				};
 			(set && clear) ||
 				((set = function setImmediate(fn) {
-					for (var args = [], i = 1; arguments.length > i; ) args.push(arguments[i++]);
+					for (var args = [], argumentsLength = arguments.length, i = 1; argumentsLength > i; ) args.push(arguments[i++]);
 					return (
 						(queue[++counter] = function () {
 							('function' == typeof fn ? fn : Function(fn)).apply(void 0, args);
@@ -36351,19 +36414,40 @@
 			};
 		},
 		92066: (module, __unused_webpack_exports, __webpack_require__) => {
-			var isObject = __webpack_require__(85052);
-			module.exports = function (input, PREFERRED_STRING) {
-				if (!isObject(input)) return input;
-				var fn, val;
-				if (PREFERRED_STRING && 'function' == typeof (fn = input.toString) && !isObject((val = fn.call(input)))) return val;
-				if ('function' == typeof (fn = input.valueOf) && !isObject((val = fn.call(input)))) return val;
-				if (!PREFERRED_STRING && 'function' == typeof (fn = input.toString) && !isObject((val = fn.call(input)))) return val;
-				throw TypeError("Can't convert object to primitive value");
+			var isObject = __webpack_require__(85052),
+				isSymbol = __webpack_require__(49395),
+				ordinaryToPrimitive = __webpack_require__(32914),
+				TO_PRIMITIVE = __webpack_require__(70095)('toPrimitive');
+			module.exports = function (input, pref) {
+				if (!isObject(input) || isSymbol(input)) return input;
+				var result,
+					exoticToPrim = input[TO_PRIMITIVE];
+				if (void 0 !== exoticToPrim) {
+					if ((void 0 === pref && (pref = 'default'), (result = exoticToPrim.call(input, pref)), !isObject(result) || isSymbol(result)))
+						return result;
+					throw TypeError("Can't convert object to primitive value");
+				}
+				return void 0 === pref && (pref = 'number'), ordinaryToPrimitive(input, pref);
+			};
+		},
+		39310: (module, __unused_webpack_exports, __webpack_require__) => {
+			var toPrimitive = __webpack_require__(92066),
+				isSymbol = __webpack_require__(49395);
+			module.exports = function (argument) {
+				var key = toPrimitive(argument, 'string');
+				return isSymbol(key) ? key : String(key);
 			};
 		},
 		71601: (module, __unused_webpack_exports, __webpack_require__) => {
 			var test = {};
 			(test[__webpack_require__(70095)('toStringTag')] = 'z'), (module.exports = '[object z]' === String(test));
+		},
+		83326: (module, __unused_webpack_exports, __webpack_require__) => {
+			var isSymbol = __webpack_require__(49395);
+			module.exports = function (argument) {
+				if (isSymbol(argument)) throw TypeError('Cannot convert a Symbol value to a string');
+				return String(argument);
+			};
 		},
 		81441: (module) => {
 			var id = 0,
@@ -36721,6 +36805,7 @@
 				aFunction = __webpack_require__(93819),
 				toObject = __webpack_require__(92991),
 				toLength = __webpack_require__(34237),
+				toString = __webpack_require__(83326),
 				fails = __webpack_require__(24229),
 				internalSort = __webpack_require__(33867),
 				arrayMethodIsStrict = __webpack_require__(96038),
@@ -36793,7 +36878,7 @@
 								items,
 								(function (comparefn) {
 									return function (x, y) {
-										return void 0 === y ? -1 : void 0 === x ? 1 : void 0 !== comparefn ? +comparefn(x, y) || 0 : String(x) > String(y) ? 1 : -1;
+										return void 0 === y ? -1 : void 0 === x ? 1 : void 0 !== comparefn ? +comparefn(x, y) || 0 : toString(x) > toString(y) ? 1 : -1;
 									};
 								})(comparefn)
 							)).length,
@@ -36870,7 +36955,7 @@
 				DatePrototype = Date.prototype,
 				nativeDateToString = DatePrototype.toString,
 				getTime = DatePrototype.getTime;
-			new Date(NaN) + '' != 'Invalid Date' &&
+			'Invalid Date' != String(new Date(NaN)) &&
 				redefine(DatePrototype, 'toString', function toString() {
 					var value = getTime.call(this);
 					return value == value ? nativeDateToString.call(this) : 'Invalid Date';
@@ -36925,6 +37010,7 @@
 				has = __webpack_require__(50816),
 				classof = __webpack_require__(27079),
 				inheritIfRequired = __webpack_require__(20835),
+				isSymbol = __webpack_require__(49395),
 				toPrimitive = __webpack_require__(92066),
 				fails = __webpack_require__(24229),
 				create = __webpack_require__(22391),
@@ -36936,6 +37022,7 @@
 				NumberPrototype = NativeNumber.prototype,
 				BROKEN_CLASSOF = 'Number' == classof(create(NumberPrototype)),
 				toNumber = function (argument) {
+					if (isSymbol(argument)) throw TypeError('Cannot convert a Symbol value to a number');
 					var first,
 						third,
 						radix,
@@ -36944,7 +37031,7 @@
 						length,
 						index,
 						code,
-						it = toPrimitive(argument, !1);
+						it = toPrimitive(argument, 'number');
 					if ('string' == typeof it && it.length > 2)
 						if (43 === (first = (it = trim(it)).charCodeAt(0)) || 45 === first) {
 							if (88 === (third = it.charCodeAt(2)) || 120 === third) return NaN;
@@ -37588,6 +37675,7 @@
 				defineProperty = __webpack_require__(31787).f,
 				getOwnPropertyNames = __webpack_require__(78151).f,
 				isRegExp = __webpack_require__(48311),
+				toString = __webpack_require__(83326),
 				getFlags = __webpack_require__(30895),
 				stickyHelpers = __webpack_require__(25650),
 				redefine = __webpack_require__(27487),
@@ -37633,8 +37721,8 @@
 							if (
 								((patternIsRegExp || pattern instanceof RegExpWrapper) &&
 									((pattern = pattern.source), flagsAreUndefined && (flags = ('flags' in rawPattern) ? rawPattern.flags : getFlags.call(rawPattern))),
-								(pattern = void 0 === pattern ? '' : String(pattern)),
-								(flags = void 0 === flags ? '' : String(flags)),
+								(pattern = void 0 === pattern ? '' : toString(pattern)),
+								(flags = void 0 === flags ? '' : toString(flags)),
 								(rawPattern = pattern),
 								UNSUPPORTED_DOT_ALL && ('dotAll' in re1) && (dotAll = !!flags && flags.indexOf('s') > -1) && (flags = flags.replace(/s/g, '')),
 								(rawFlags = flags),
@@ -37733,6 +37821,7 @@
 			'use strict';
 			var redefine = __webpack_require__(27487),
 				anObject = __webpack_require__(21176),
+				$toString = __webpack_require__(83326),
 				fails = __webpack_require__(24229),
 				flags = __webpack_require__(30895),
 				RegExpPrototype = RegExp.prototype,
@@ -37747,9 +37836,9 @@
 					'toString',
 					function toString() {
 						var R = anObject(this),
-							p = String(R.source),
+							p = $toString(R.source),
 							rf = R.flags;
-						return '/' + p + '/' + String(void 0 === rf && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+						return '/' + p + '/' + $toString(void 0 === rf && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
 					},
 					{ unsafe: !0 }
 				);
@@ -37785,12 +37874,16 @@
 			'use strict';
 			var $ = __webpack_require__(23103),
 				notARegExp = __webpack_require__(47272),
-				requireObjectCoercible = __webpack_require__(58885);
+				requireObjectCoercible = __webpack_require__(58885),
+				toString = __webpack_require__(83326);
 			$(
 				{ target: 'String', proto: !0, forced: !__webpack_require__(48127)('includes') },
 				{
 					includes: function includes(searchString) {
-						return !!~String(requireObjectCoercible(this)).indexOf(notARegExp(searchString), arguments.length > 1 ? arguments[1] : void 0);
+						return !!~toString(requireObjectCoercible(this)).indexOf(
+							toString(notARegExp(searchString)),
+							arguments.length > 1 ? arguments[1] : void 0
+						);
 					},
 				}
 			);
@@ -37798,6 +37891,7 @@
 		28673: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var charAt = __webpack_require__(30966).charAt,
+				toString = __webpack_require__(83326),
 				InternalStateModule = __webpack_require__(56407),
 				defineIterator = __webpack_require__(67675),
 				setInternalState = InternalStateModule.set,
@@ -37806,7 +37900,7 @@
 				String,
 				'String',
 				function (iterated) {
-					setInternalState(this, { type: 'String Iterator', string: String(iterated), index: 0 });
+					setInternalState(this, { type: 'String Iterator', string: toString(iterated), index: 0 });
 				},
 				function next() {
 					var point,
@@ -37837,6 +37931,7 @@
 			var fixRegExpWellKnownSymbolLogic = __webpack_require__(94954),
 				anObject = __webpack_require__(21176),
 				toLength = __webpack_require__(34237),
+				toString = __webpack_require__(83326),
 				requireObjectCoercible = __webpack_require__(58885),
 				advanceStringIndex = __webpack_require__(36637),
 				regExpExec = __webpack_require__(98115);
@@ -37845,18 +37940,18 @@
 					function match(regexp) {
 						var O = requireObjectCoercible(this),
 							matcher = null == regexp ? void 0 : regexp[MATCH];
-						return void 0 !== matcher ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
+						return void 0 !== matcher ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](toString(O));
 					},
 					function (string) {
-						var res = maybeCallNative(nativeMatch, this, string);
-						if (res.done) return res.value;
 						var rx = anObject(this),
-							S = String(string);
+							S = toString(string),
+							res = maybeCallNative(nativeMatch, rx, S);
+						if (res.done) return res.value;
 						if (!rx.global) return regExpExec(rx, S);
 						var fullUnicode = rx.unicode;
 						rx.lastIndex = 0;
 						for (var result, A = [], n = 0; null !== (result = regExpExec(rx, S)); ) {
-							var matchStr = String(result[0]);
+							var matchStr = toString(result[0]);
 							(A[n] = matchStr), '' === matchStr && (rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode)), n++;
 						}
 						return 0 === n ? null : A;
@@ -37872,8 +37967,9 @@
 			var fixRegExpWellKnownSymbolLogic = __webpack_require__(94954),
 				fails = __webpack_require__(24229),
 				anObject = __webpack_require__(21176),
-				toLength = __webpack_require__(34237),
 				toInteger = __webpack_require__(16051),
+				toLength = __webpack_require__(34237),
+				toString = __webpack_require__(83326),
 				requireObjectCoercible = __webpack_require__(58885),
 				advanceStringIndex = __webpack_require__(36637),
 				getSubstitution = __webpack_require__(70017),
@@ -37891,17 +37987,17 @@
 						function replace(searchValue, replaceValue) {
 							var O = requireObjectCoercible(this),
 								replacer = null == searchValue ? void 0 : searchValue[REPLACE];
-							return void 0 !== replacer ? replacer.call(searchValue, O, replaceValue) : nativeReplace.call(String(O), searchValue, replaceValue);
+							return void 0 !== replacer ? replacer.call(searchValue, O, replaceValue) : nativeReplace.call(toString(O), searchValue, replaceValue);
 						},
 						function (string, replaceValue) {
+							var rx = anObject(this),
+								S = toString(string);
 							if ('string' == typeof replaceValue && -1 === replaceValue.indexOf(UNSAFE_SUBSTITUTE) && -1 === replaceValue.indexOf('$<')) {
-								var res = maybeCallNative(nativeReplace, this, string, replaceValue);
+								var res = maybeCallNative(nativeReplace, rx, S, replaceValue);
 								if (res.done) return res.value;
 							}
-							var rx = anObject(this),
-								S = String(string),
-								functionalReplace = 'function' == typeof replaceValue;
-							functionalReplace || (replaceValue = String(replaceValue));
+							var functionalReplace = 'function' == typeof replaceValue;
+							functionalReplace || (replaceValue = toString(replaceValue));
 							var global = rx.global;
 							if (global) {
 								var fullUnicode = rx.unicode;
@@ -37911,12 +38007,12 @@
 								var result = regExpExec(rx, S);
 								if (null === result) break;
 								if ((results.push(result), !global)) break;
-								'' === String(result[0]) && (rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode));
+								'' === toString(result[0]) && (rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode));
 							}
 							for (var it, accumulatedResult = '', nextSourcePosition = 0, i = 0; i < results.length; i++) {
 								result = results[i];
 								for (
-									var matched = String(result[0]), position = max(min(toInteger(result.index), S.length), 0), captures = [], j = 1;
+									var matched = toString(result[0]), position = max(min(toInteger(result.index), S.length), 0), captures = [], j = 1;
 									j < result.length;
 									j++
 								)
@@ -37925,7 +38021,7 @@
 								if (functionalReplace) {
 									var replacerArgs = [matched].concat(captures, position, S);
 									void 0 !== namedCaptures && replacerArgs.push(namedCaptures);
-									var replacement = String(replaceValue.apply(void 0, replacerArgs));
+									var replacement = toString(replaceValue.apply(void 0, replacerArgs));
 								} else replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
 								position >= nextSourcePosition &&
 									((accumulatedResult += S.slice(nextSourcePosition, position) + replacement), (nextSourcePosition = position + matched.length));
@@ -37954,20 +38050,21 @@
 				anObject = __webpack_require__(21176),
 				requireObjectCoercible = __webpack_require__(58885),
 				sameValue = __webpack_require__(72101),
+				toString = __webpack_require__(83326),
 				regExpExec = __webpack_require__(98115);
 			fixRegExpWellKnownSymbolLogic('search', function (SEARCH, nativeSearch, maybeCallNative) {
 				return [
 					function search(regexp) {
 						var O = requireObjectCoercible(this),
 							searcher = null == regexp ? void 0 : regexp[SEARCH];
-						return void 0 !== searcher ? searcher.call(regexp, O) : new RegExp(regexp)[SEARCH](String(O));
+						return void 0 !== searcher ? searcher.call(regexp, O) : new RegExp(regexp)[SEARCH](toString(O));
 					},
 					function (string) {
-						var res = maybeCallNative(nativeSearch, this, string);
-						if (res.done) return res.value;
 						var rx = anObject(this),
-							S = String(string),
-							previousLastIndex = rx.lastIndex;
+							S = toString(string),
+							res = maybeCallNative(nativeSearch, rx, S);
+						if (res.done) return res.value;
+						var previousLastIndex = rx.lastIndex;
 						sameValue(previousLastIndex, 0) || (rx.lastIndex = 0);
 						var result = regExpExec(rx, S);
 						return sameValue(rx.lastIndex, previousLastIndex) || (rx.lastIndex = previousLastIndex), null === result ? -1 : result.index;
@@ -37997,6 +38094,7 @@
 				speciesConstructor = __webpack_require__(37942),
 				advanceStringIndex = __webpack_require__(36637),
 				toLength = __webpack_require__(34237),
+				toString = __webpack_require__(83326),
 				callRegExpExec = __webpack_require__(98115),
 				regexpExec = __webpack_require__(63466),
 				stickyHelpers = __webpack_require__(25650),
@@ -38017,7 +38115,7 @@
 							'.'.split(/()()/).length > 1 ||
 							''.split(/.?/).length
 								? function (separator, limit) {
-										var string = String(requireObjectCoercible(this)),
+										var string = toString(requireObjectCoercible(this)),
 											lim = void 0 === limit ? 4294967295 : limit >>> 0;
 										if (0 === lim) return [];
 										if (void 0 === separator) return [string];
@@ -38062,14 +38160,14 @@
 							function split(separator, limit) {
 								var O = requireObjectCoercible(this),
 									splitter = null == separator ? void 0 : separator[SPLIT];
-								return void 0 !== splitter ? splitter.call(separator, O, limit) : internalSplit.call(String(O), separator, limit);
+								return void 0 !== splitter ? splitter.call(separator, O, limit) : internalSplit.call(toString(O), separator, limit);
 							},
 							function (string, limit) {
-								var res = maybeCallNative(internalSplit, this, string, limit, internalSplit !== nativeSplit);
-								if (res.done) return res.value;
 								var rx = anObject(this),
-									S = String(string),
-									C = speciesConstructor(rx, RegExp),
+									S = toString(string),
+									res = maybeCallNative(internalSplit, rx, S, limit, internalSplit !== nativeSplit);
+								if (res.done) return res.value;
+								var C = speciesConstructor(rx, RegExp),
 									unicodeMatching = rx.unicode,
 									flags = (rx.ignoreCase ? 'i' : '') + (rx.multiline ? 'm' : '') + (rx.unicode ? 'u' : '') + (UNSUPPORTED_Y ? 'g' : 'y'),
 									splitter = new C(UNSUPPORTED_Y ? '^(?:' + rx.source + ')' : rx, flags),
@@ -38111,6 +38209,7 @@
 				$ = __webpack_require__(23103),
 				getOwnPropertyDescriptor = __webpack_require__(97933).f,
 				toLength = __webpack_require__(34237),
+				toString = __webpack_require__(83326),
 				notARegExp = __webpack_require__(47272),
 				requireObjectCoercible = __webpack_require__(58885),
 				correctIsRegExpLogic = __webpack_require__(48127),
@@ -38131,10 +38230,10 @@
 				},
 				{
 					startsWith: function startsWith(searchString) {
-						var that = String(requireObjectCoercible(this));
+						var that = toString(requireObjectCoercible(this));
 						notARegExp(searchString);
 						var index = toLength(min(arguments.length > 1 ? arguments[1] : void 0, that.length)),
-							search = String(searchString);
+							search = toString(searchString);
 						return $startsWith ? $startsWith.call(that, search, index) : that.slice(index, index + search.length) === search;
 					},
 				}
@@ -38210,15 +38309,16 @@
 				IS_PURE = __webpack_require__(24231),
 				DESCRIPTORS = __webpack_require__(7400),
 				NATIVE_SYMBOL = __webpack_require__(63839),
-				USE_SYMBOL_AS_UID = __webpack_require__(66969),
 				fails = __webpack_require__(24229),
 				has = __webpack_require__(50816),
 				isArray = __webpack_require__(33718),
 				isObject = __webpack_require__(85052),
+				isSymbol = __webpack_require__(49395),
 				anObject = __webpack_require__(21176),
 				toObject = __webpack_require__(92991),
 				toIndexedObject = __webpack_require__(10905),
-				toPrimitive = __webpack_require__(92066),
+				toPropertyKey = __webpack_require__(39310),
+				$toString = __webpack_require__(83326),
 				createPropertyDescriptor = __webpack_require__(65358),
 				nativeObjectCreate = __webpack_require__(22391),
 				objectKeys = __webpack_require__(65632),
@@ -38283,16 +38383,9 @@
 					var symbol = (AllSymbols[tag] = nativeObjectCreate($Symbol.prototype));
 					return setInternalState(symbol, { type: 'Symbol', tag, description }), DESCRIPTORS || (symbol.description = description), symbol;
 				},
-				isSymbol = USE_SYMBOL_AS_UID
-					? function (it) {
-							return 'symbol' == typeof it;
-					  }
-					: function (it) {
-							return Object(it) instanceof $Symbol;
-					  },
 				$defineProperty = function defineProperty(O, P, Attributes) {
 					O === ObjectPrototype && $defineProperty(ObjectPrototypeSymbols, P, Attributes), anObject(O);
-					var key = toPrimitive(P, !0);
+					var key = toPropertyKey(P);
 					return (
 						anObject(Attributes),
 						has(AllSymbols, key)
@@ -38316,7 +38409,7 @@
 					);
 				},
 				$propertyIsEnumerable = function propertyIsEnumerable(V) {
-					var P = toPrimitive(V, !0),
+					var P = toPropertyKey(V),
 						enumerable = nativePropertyIsEnumerable.call(this, P);
 					return (
 						!(this === ObjectPrototype && has(AllSymbols, P) && !has(ObjectPrototypeSymbols, P)) &&
@@ -38325,7 +38418,7 @@
 				},
 				$getOwnPropertyDescriptor = function getOwnPropertyDescriptor(O, P) {
 					var it = toIndexedObject(O),
-						key = toPrimitive(P, !0);
+						key = toPropertyKey(P);
 					if (it !== ObjectPrototype || !has(AllSymbols, key) || has(ObjectPrototypeSymbols, key)) {
 						var descriptor = nativeGetOwnPropertyDescriptor(it, key);
 						return !descriptor || !has(AllSymbols, key) || (has(it, HIDDEN) && it[HIDDEN][key]) || (descriptor.enumerable = !0), descriptor;
@@ -38356,7 +38449,7 @@
 				(redefine(
 					($Symbol = function Symbol() {
 						if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor');
-						var description = arguments.length && void 0 !== arguments[0] ? String(arguments[0]) : void 0,
+						var description = arguments.length && void 0 !== arguments[0] ? $toString(arguments[0]) : void 0,
 							tag = uid(description),
 							setter = function (value) {
 								this === ObjectPrototype && setter.call(ObjectPrototypeSymbols, value),
@@ -38397,7 +38490,7 @@
 				{ target: 'Symbol', stat: !0, forced: !NATIVE_SYMBOL },
 				{
 					for: function (key) {
-						var string = String(key);
+						var string = $toString(key);
 						if (has(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
 						var symbol = $Symbol(string);
 						return (StringToSymbolRegistry[string] = symbol), (SymbolToStringRegistry[symbol] = string), symbol;
@@ -38521,7 +38614,7 @@
 				},
 				$WeakMap = (module.exports = collection('WeakMap', wrapper, collectionWeak));
 			if (NATIVE_WEAK_MAP && IS_IE11) {
-				(InternalWeakMap = collectionWeak.getConstructor(wrapper, 'WeakMap', !0)), (InternalMetadataModule.REQUIRED = !0);
+				(InternalWeakMap = collectionWeak.getConstructor(wrapper, 'WeakMap', !0)), InternalMetadataModule.enable();
 				var WeakMapPrototype = $WeakMap.prototype,
 					nativeDelete = WeakMapPrototype.delete,
 					nativeHas = WeakMapPrototype.has,
@@ -38658,12 +38751,15 @@
 				classof = __webpack_require__(81589),
 				anObject = __webpack_require__(21176),
 				isObject = __webpack_require__(85052),
+				$toString = __webpack_require__(83326),
 				create = __webpack_require__(22391),
 				createPropertyDescriptor = __webpack_require__(65358),
 				getIterator = __webpack_require__(28403),
 				getIteratorMethod = __webpack_require__(78830),
 				wellKnownSymbol = __webpack_require__(70095),
-				$fetch = getBuiltIn('fetch'),
+				nativeFetch = getBuiltIn('fetch'),
+				NativeRequest = getBuiltIn('Request'),
+				RequestPrototype = NativeRequest && NativeRequest.prototype,
 				Headers = getBuiltIn('Headers'),
 				ITERATOR = wellKnownSymbol('iterator'),
 				setInternalState = InternalStateModule.set,
@@ -38748,94 +38844,101 @@
 										!entryNext.call(entryIterator).done
 									)
 										throw TypeError('Expected sequence with length 2');
-									entries.push({ key: first.value + '', value: second.value + '' });
+									entries.push({ key: $toString(first.value), value: $toString(second.value) });
 								}
-							else for (key in init) hasOwn(init, key) && entries.push({ key, value: init[key] + '' });
-						else parseSearchParams(entries, 'string' == typeof init ? ('?' === init.charAt(0) ? init.slice(1) : init) : init + '');
+							else for (key in init) hasOwn(init, key) && entries.push({ key, value: $toString(init[key]) });
+						else parseSearchParams(entries, 'string' == typeof init ? ('?' === init.charAt(0) ? init.slice(1) : init) : $toString(init));
 				},
 				URLSearchParamsPrototype = URLSearchParamsConstructor.prototype;
-			redefineAll(
-				URLSearchParamsPrototype,
-				{
-					append: function append(name, value) {
-						validateArgumentsLength(arguments.length, 2);
-						var state = getInternalParamsState(this);
-						state.entries.push({ key: name + '', value: value + '' }), state.updateURL();
-					},
-					delete: function (name) {
-						validateArgumentsLength(arguments.length, 1);
-						for (var state = getInternalParamsState(this), entries = state.entries, key = name + '', index = 0; index < entries.length; )
-							entries[index].key === key ? entries.splice(index, 1) : index++;
-						state.updateURL();
-					},
-					get: function get(name) {
-						validateArgumentsLength(arguments.length, 1);
-						for (var entries = getInternalParamsState(this).entries, key = name + '', index = 0; index < entries.length; index++)
-							if (entries[index].key === key) return entries[index].value;
-						return null;
-					},
-					getAll: function getAll(name) {
-						validateArgumentsLength(arguments.length, 1);
-						for (var entries = getInternalParamsState(this).entries, key = name + '', result = [], index = 0; index < entries.length; index++)
-							entries[index].key === key && result.push(entries[index].value);
-						return result;
-					},
-					has: function has(name) {
-						validateArgumentsLength(arguments.length, 1);
-						for (var entries = getInternalParamsState(this).entries, key = name + '', index = 0; index < entries.length; )
-							if (entries[index++].key === key) return !0;
-						return !1;
-					},
-					set: function set(name, value) {
-						validateArgumentsLength(arguments.length, 1);
-						for (
-							var entry, state = getInternalParamsState(this), entries = state.entries, found = !1, key = name + '', val = value + '', index = 0;
-							index < entries.length;
-							index++
-						)
-							(entry = entries[index]).key === key && (found ? entries.splice(index--, 1) : ((found = !0), (entry.value = val)));
-						found || entries.push({ key, value: val }), state.updateURL();
-					},
-					sort: function sort() {
-						var entry,
-							entriesIndex,
-							sliceIndex,
-							state = getInternalParamsState(this),
-							entries = state.entries,
-							slice = entries.slice();
-						for (entries.length = 0, sliceIndex = 0; sliceIndex < slice.length; sliceIndex++) {
-							for (entry = slice[sliceIndex], entriesIndex = 0; entriesIndex < sliceIndex; entriesIndex++)
-								if (entries[entriesIndex].key > entry.key) {
-									entries.splice(entriesIndex, 0, entry);
-									break;
-								}
-							entriesIndex === sliceIndex && entries.push(entry);
-						}
-						state.updateURL();
-					},
-					forEach: function forEach(callback) {
-						for (
+			if (
+				(redefineAll(
+					URLSearchParamsPrototype,
+					{
+						append: function append(name, value) {
+							validateArgumentsLength(arguments.length, 2);
+							var state = getInternalParamsState(this);
+							state.entries.push({ key: $toString(name), value: $toString(value) }), state.updateURL();
+						},
+						delete: function (name) {
+							validateArgumentsLength(arguments.length, 1);
+							for (var state = getInternalParamsState(this), entries = state.entries, key = $toString(name), index = 0; index < entries.length; )
+								entries[index].key === key ? entries.splice(index, 1) : index++;
+							state.updateURL();
+						},
+						get: function get(name) {
+							validateArgumentsLength(arguments.length, 1);
+							for (var entries = getInternalParamsState(this).entries, key = $toString(name), index = 0; index < entries.length; index++)
+								if (entries[index].key === key) return entries[index].value;
+							return null;
+						},
+						getAll: function getAll(name) {
+							validateArgumentsLength(arguments.length, 1);
+							for (var entries = getInternalParamsState(this).entries, key = $toString(name), result = [], index = 0; index < entries.length; index++)
+								entries[index].key === key && result.push(entries[index].value);
+							return result;
+						},
+						has: function has(name) {
+							validateArgumentsLength(arguments.length, 1);
+							for (var entries = getInternalParamsState(this).entries, key = $toString(name), index = 0; index < entries.length; )
+								if (entries[index++].key === key) return !0;
+							return !1;
+						},
+						set: function set(name, value) {
+							validateArgumentsLength(arguments.length, 1);
+							for (
+								var entry,
+									state = getInternalParamsState(this),
+									entries = state.entries,
+									found = !1,
+									key = $toString(name),
+									val = $toString(value),
+									index = 0;
+								index < entries.length;
+								index++
+							)
+								(entry = entries[index]).key === key && (found ? entries.splice(index--, 1) : ((found = !0), (entry.value = val)));
+							found || entries.push({ key, value: val }), state.updateURL();
+						},
+						sort: function sort() {
 							var entry,
-								entries = getInternalParamsState(this).entries,
-								boundFunction = bind(callback, arguments.length > 1 ? arguments[1] : void 0, 3),
-								index = 0;
-							index < entries.length;
+								entriesIndex,
+								sliceIndex,
+								state = getInternalParamsState(this),
+								entries = state.entries,
+								slice = entries.slice();
+							for (entries.length = 0, sliceIndex = 0; sliceIndex < slice.length; sliceIndex++) {
+								for (entry = slice[sliceIndex], entriesIndex = 0; entriesIndex < sliceIndex; entriesIndex++)
+									if (entries[entriesIndex].key > entry.key) {
+										entries.splice(entriesIndex, 0, entry);
+										break;
+									}
+								entriesIndex === sliceIndex && entries.push(entry);
+							}
+							state.updateURL();
+						},
+						forEach: function forEach(callback) {
+							for (
+								var entry,
+									entries = getInternalParamsState(this).entries,
+									boundFunction = bind(callback, arguments.length > 1 ? arguments[1] : void 0, 3),
+									index = 0;
+								index < entries.length;
 
-						)
-							boundFunction((entry = entries[index++]).value, entry.key, this);
+							)
+								boundFunction((entry = entries[index++]).value, entry.key, this);
+						},
+						keys: function keys() {
+							return new URLSearchParamsIterator(this, 'keys');
+						},
+						values: function values() {
+							return new URLSearchParamsIterator(this, 'values');
+						},
+						entries: function entries() {
+							return new URLSearchParamsIterator(this, 'entries');
+						},
 					},
-					keys: function keys() {
-						return new URLSearchParamsIterator(this, 'keys');
-					},
-					values: function values() {
-						return new URLSearchParamsIterator(this, 'values');
-					},
-					entries: function entries() {
-						return new URLSearchParamsIterator(this, 'entries');
-					},
-				},
-				{ enumerable: !0 }
-			),
+					{ enumerable: !0 }
+				),
 				redefine(URLSearchParamsPrototype, ITERATOR, URLSearchParamsPrototype.entries),
 				redefine(
 					URLSearchParamsPrototype,
@@ -38849,32 +38952,44 @@
 				),
 				setToStringTag(URLSearchParamsConstructor, 'URLSearchParams'),
 				$({ global: !0, forced: !USE_NATIVE_URL }, { URLSearchParams: URLSearchParamsConstructor }),
-				USE_NATIVE_URL ||
-					'function' != typeof $fetch ||
-					'function' != typeof Headers ||
-					$(
-						{ global: !0, enumerable: !0, forced: !0 },
-						{
-							fetch: function fetch(input) {
-								var init,
-									body,
-									headers,
-									args = [input];
-								return (
-									arguments.length > 1 &&
-										(isObject((init = arguments[1])) &&
-											((body = init.body),
-											'URLSearchParams' === classof(body) &&
-												((headers = init.headers ? new Headers(init.headers) : new Headers()).has('content-type') ||
-													headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8'),
-												(init = create(init, { body: createPropertyDescriptor(0, String(body)), headers: createPropertyDescriptor(0, headers) })))),
-										args.push(init)),
-									$fetch.apply(this, args)
-								);
-							},
-						}
-					),
-				(module.exports = { URLSearchParams: URLSearchParamsConstructor, getState: getInternalParamsState });
+				!USE_NATIVE_URL && 'function' == typeof Headers)
+			) {
+				var wrapRequestOptions = function (init) {
+					if (isObject(init)) {
+						var headers,
+							body = init.body;
+						if ('URLSearchParams' === classof(body))
+							return (
+								(headers = init.headers ? new Headers(init.headers) : new Headers()).has('content-type') ||
+									headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8'),
+								create(init, { body: createPropertyDescriptor(0, String(body)), headers: createPropertyDescriptor(0, headers) })
+							);
+					}
+					return init;
+				};
+				if (
+					('function' == typeof nativeFetch &&
+						$(
+							{ global: !0, enumerable: !0, forced: !0 },
+							{
+								fetch: function fetch(input) {
+									return nativeFetch(input, arguments.length > 1 ? wrapRequestOptions(arguments[1]) : {});
+								},
+							}
+						),
+					'function' == typeof NativeRequest)
+				) {
+					var RequestConstructor = function Request(input) {
+						return (
+							anInstance(this, RequestConstructor, 'Request'), new NativeRequest(input, arguments.length > 1 ? wrapRequestOptions(arguments[1]) : {})
+						);
+					};
+					(RequestPrototype.constructor = RequestConstructor),
+						(RequestConstructor.prototype = RequestPrototype),
+						$({ global: !0, forced: !0 }, { Request: RequestConstructor });
+				}
+			}
+			module.exports = { URLSearchParams: URLSearchParamsConstructor, getState: getInternalParamsState };
 		},
 		14121: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
@@ -38892,6 +39007,7 @@
 				arrayFrom = __webpack_require__(10507),
 				codeAt = __webpack_require__(30966).codeAt,
 				toASCII = __webpack_require__(77321),
+				$toString = __webpack_require__(83326),
 				setToStringTag = __webpack_require__(54555),
 				URLSearchParamsModule = __webpack_require__(60523),
 				InternalStateModule = __webpack_require__(56407),
@@ -38911,7 +39027,7 @@
 				HEX = /^[\dA-Fa-f]+$/,
 				FORBIDDEN_HOST_CODE_POINT = /[\0\t\n\r #%/:<>?@[\\\]^|]/,
 				FORBIDDEN_HOST_CODE_POINT_EXCLUDING_PERCENT = /[\0\t\n\r #/:<>?@[\\\]^|]/,
-				LEADING_AND_TRAILING_C0_CONTROL_OR_SPACE = /^[\u0000-\u001F ]+|[\u0000-\u001F ]+$/g,
+				LEADING_AND_TRAILING_C0_CONTROL_OR_SPACE = /^[\u0000-\u0020]+|[\u0000-\u0020]+$/g,
 				TAB_AND_NEW_LINE = /[\t\n\r]/g,
 				parseHost = function (url, input) {
 					var result, codePoints, index;
@@ -39425,11 +39541,11 @@
 						failure,
 						that = anInstance(this, URLConstructor, 'URL'),
 						base = arguments.length > 1 ? arguments[1] : void 0,
-						urlString = String(url),
+						urlString = $toString(url),
 						state = setInternalState(that, { type: 'URL' });
 					if (void 0 !== base)
 						if (base instanceof URLConstructor) baseState = getInternalURLState(base);
-						else if ((failure = parseURL((baseState = {}), String(base)))) throw TypeError(failure);
+						else if ((failure = parseURL((baseState = {}), $toString(base)))) throw TypeError(failure);
 					if ((failure = parseURL(state, urlString, null, baseState))) throw TypeError(failure);
 					var searchParams = (state.searchParams = new URLSearchParams()),
 						searchParamsState = getInternalSearchParamsState(searchParams);
@@ -39535,7 +39651,7 @@
 					defineProperties(URLPrototype, {
 						href: accessorDescriptor(serializeURL, function (href) {
 							var url = getInternalURLState(this),
-								urlString = String(href),
+								urlString = $toString(href),
 								failure = parseURL(url, urlString);
 							if (failure) throw TypeError(failure);
 							getInternalSearchParamsState(url.searchParams).updateSearchParams(url.query);
@@ -39543,11 +39659,11 @@
 						origin: accessorDescriptor(getOrigin),
 						protocol: accessorDescriptor(getProtocol, function (protocol) {
 							var url = getInternalURLState(this);
-							parseURL(url, String(protocol) + ':', SCHEME_START);
+							parseURL(url, $toString(protocol) + ':', SCHEME_START);
 						}),
 						username: accessorDescriptor(getUsername, function (username) {
 							var url = getInternalURLState(this),
-								codePoints = arrayFrom(String(username));
+								codePoints = arrayFrom($toString(username));
 							if (!cannotHaveUsernamePasswordPort(url)) {
 								url.username = '';
 								for (var i = 0; i < codePoints.length; i++) url.username += percentEncode(codePoints[i], userinfoPercentEncodeSet);
@@ -39555,7 +39671,7 @@
 						}),
 						password: accessorDescriptor(getPassword, function (password) {
 							var url = getInternalURLState(this),
-								codePoints = arrayFrom(String(password));
+								codePoints = arrayFrom($toString(password));
 							if (!cannotHaveUsernamePasswordPort(url)) {
 								url.password = '';
 								for (var i = 0; i < codePoints.length; i++) url.password += percentEncode(codePoints[i], userinfoPercentEncodeSet);
@@ -39563,23 +39679,23 @@
 						}),
 						host: accessorDescriptor(getHost, function (host) {
 							var url = getInternalURLState(this);
-							url.cannotBeABaseURL || parseURL(url, String(host), HOST);
+							url.cannotBeABaseURL || parseURL(url, $toString(host), HOST);
 						}),
 						hostname: accessorDescriptor(getHostname, function (hostname) {
 							var url = getInternalURLState(this);
-							url.cannotBeABaseURL || parseURL(url, String(hostname), HOSTNAME);
+							url.cannotBeABaseURL || parseURL(url, $toString(hostname), HOSTNAME);
 						}),
 						port: accessorDescriptor(getPort, function (port) {
 							var url = getInternalURLState(this);
-							cannotHaveUsernamePasswordPort(url) || ('' == (port = String(port)) ? (url.port = null) : parseURL(url, port, PORT));
+							cannotHaveUsernamePasswordPort(url) || ('' == (port = $toString(port)) ? (url.port = null) : parseURL(url, port, PORT));
 						}),
 						pathname: accessorDescriptor(getPathname, function (pathname) {
 							var url = getInternalURLState(this);
-							url.cannotBeABaseURL || ((url.path = []), parseURL(url, pathname + '', PATH_START));
+							url.cannotBeABaseURL || ((url.path = []), parseURL(url, $toString(pathname), PATH_START));
 						}),
 						search: accessorDescriptor(getSearch, function (search) {
 							var url = getInternalURLState(this);
-							'' == (search = String(search))
+							'' == (search = $toString(search))
 								? (url.query = null)
 								: ('?' == search.charAt(0) && (search = search.slice(1)), (url.query = ''), parseURL(url, search, QUERY)),
 								getInternalSearchParamsState(url.searchParams).updateSearchParams(url.query);
@@ -39587,7 +39703,7 @@
 						searchParams: accessorDescriptor(getSearchParams),
 						hash: accessorDescriptor(getHash, function (hash) {
 							var url = getInternalURLState(this);
-							'' != (hash = String(hash))
+							'' != (hash = $toString(hash))
 								? ('#' == hash.charAt(0) && (hash = hash.slice(1)), (url.fragment = ''), parseURL(url, hash, FRAGMENT))
 								: (url.fragment = null);
 						}),

@@ -10,9 +10,12 @@ export class PaginationStore {
 	}[];
 	defaultPageSize: number;
 	totalResults: number;
+	infinite: boolean;
+	controllerConfig: any;
 
-	constructor(services, paginationData = { page: undefined, pageSize: undefined, totalResults: undefined, defaultPageSize: 24 }) {
+	constructor(config, services, paginationData = { page: undefined, pageSize: undefined, totalResults: undefined, defaultPageSize: 24 }) {
 		this.services = services;
+		this.controllerConfig = config;
 
 		this.page = paginationData.page;
 		this.pageSize = paginationData.pageSize;
@@ -53,6 +56,9 @@ export class PaginationStore {
 	}
 
 	get begin(): number {
+		if (this.controllerConfig.settings?.infinite) {
+			return 1;
+		}
 		return this.pageSize * (this.page - 1) + 1;
 	}
 

@@ -100,6 +100,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="AbstractStore.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="AbstractStore.html#controller" class="tsd-kind-icon">controller</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="AbstractStore.html#custom" class="tsd-kind-icon">custom</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="AbstractStore.html#loaded" class="tsd-kind-icon">loaded</a></li>
@@ -109,6 +110,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="AbstractStore.html#setConfig" class="tsd-kind-icon">set<wbr>Config</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="AbstractStore.html#toJSON" class="tsd-kind-icon">toJSON</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="AbstractStore.html#update" class="tsd-kind-icon">update</a></li>
 							</ul>
@@ -122,15 +124,21 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Abstract<wbr>Store<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="AbstractStore.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Abstract<wbr>Store<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="AbstractStore.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L14">Abstract/AbstractStore.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L15">Abstract/AbstractStore.ts:15</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="AbstractStore.html" class="tsd-signature-type" data-tsd-kind="Class">AbstractStore</a></h4>
 						</li>
 					</ul>
@@ -138,13 +146,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="config" class="tsd-anchor"></a>
+					<h3>config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L13">Abstract/AbstractStore.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="controller" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> controller</h3>
 					<div class="tsd-signature tsd-kind-icon">controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L9">Abstract/AbstractStore.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L9">Abstract/AbstractStore.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">custom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -169,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">loaded<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,13 +197,36 @@
 					<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setConfig" class="tsd-anchor"></a>
+					<h3>set<wbr>Config</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Config<span class="tsd-signature-symbol">(</span>newConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L25">Abstract/AbstractStore.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newConfig: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="toJSON" class="tsd-anchor"></a>
 					<h3>toJSON</h3>
@@ -196,7 +237,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L24">Abstract/AbstractStore.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L31">Abstract/AbstractStore.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -219,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/51538d3/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L22">Abstract/AbstractStore.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/2be9f0d/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L29">Abstract/AbstractStore.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -255,6 +296,9 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="AbstractStore.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="AbstractStore.html#config" class="tsd-kind-icon">config</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="AbstractStore.html#controller" class="tsd-kind-icon">controller</a>
 							</li>
@@ -266,6 +310,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="AbstractStore.html#loading" class="tsd-kind-icon">loading</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="AbstractStore.html#setConfig" class="tsd-kind-icon">set<wbr>Config</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="AbstractStore.html#toJSON" class="tsd-kind-icon">toJSON</a>

@@ -326,7 +326,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new SearchStore({}, { urlManager }),
+					store: services?.store || new SearchStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -342,7 +342,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach();
 				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new AutocompleteStore({}, { urlManager }),
+					store: services?.store || new AutocompleteStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -374,7 +374,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new RecommendationStore({}, { urlManager }),
+					store: services?.store || new RecommendationStore(config, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),

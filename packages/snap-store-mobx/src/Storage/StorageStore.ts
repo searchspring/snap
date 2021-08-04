@@ -26,18 +26,26 @@ export class StorageStore {
 			switch (config.type) {
 				case StorageType.SESSION:
 					this.type = featureFlags.storage ? config.type : null;
-					if (this.type && !window.sessionStorage.getItem(this.key)) {
+					if (this.type) {
+						this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
 						window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				case StorageType.LOCAL:
 					this.type = featureFlags.storage ? config.type : null;
 					if (this.type && !window.localStorage.getItem(this.key)) {
+						this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
 						window.localStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
 				case StorageType.COOKIE:
-					this.type = featureFlags.cookies ? config.type : null;
+					if (featureFlags.cookies) {
+						this.type = config.type;
+						const data = utils.cookies.get(this.key);
+						if (data) {
+							this.state = JSON.parse(data);
+						}
+					}
 					break;
 			}
 		}
@@ -102,10 +110,10 @@ export class StorageStore {
 	clear(): void {
 		switch (this.type) {
 			case StorageType.SESSION:
-				window.sessionStorage.clear();
+				window.sessionStorage.removeItem(this.key);
 				break;
 			case StorageType.LOCAL:
-				window.localStorage.clear();
+				window.localStorage.removeItem(this.key);
 				break;
 			case StorageType.COOKIE:
 				utils.cookies.unset(this.key);

@@ -1,5 +1,5 @@
 import type { AbstractController } from './Abstract/AbstractController';
-import type { EventManager, Next } from '@searchspring/snap-event-manager';
+import type { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
@@ -8,22 +8,18 @@ import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
 
+// Global
+declare global {
+	interface Window {
+		searchspring?: any;
+	}
+}
+
+// Middleware
+
 export type NextEvent = Next;
 
-/** Search */
-export type SearchControllerConfig = {
-	id: string;
-	globals?: any;
-	settings?: {
-		redirects?: {
-			merchandising?: boolean;
-			singleResult?: boolean;
-		};
-		facets?: {
-			trim?: boolean;
-		};
-	};
-};
+export type PluginFunction = (func: (cntrlr: AbstractController) => Promise<void>) => Promise<void>;
 
 export type BeforeSearchObj = {
 	controller: AbstractController;
@@ -37,49 +33,15 @@ export type AfterSearchObj = {
 
 export type AfterStoreObj = {
 	controller: AbstractController;
+	request: any;
+	response: any;
 };
 
-/** Finder */
-export type FinderControllerConfig = {
+// Abstract
+export interface ControllerConfig {
 	id: string;
-	url?: string;
-	globals?: any;
-	fields: FinderFieldConfig[];
-};
+}
 
-export type FinderFieldConfig = {
-	field: string;
-	label?: string;
-	levels?: string[];
-};
-
-/** Autocomplete */
-export type AutocompleteControllerConfig = {
-	id: string;
-	selector: string;
-	action?: string;
-	globals?: any;
-	settings: {
-		initializeFromUrl: boolean;
-		syncInputs: boolean;
-		facets?: {
-			trim?: boolean;
-		};
-		trending?: {
-			limit: number;
-		};
-	};
-};
-
-/** Recommend */
-export type RecommendationControllerConfig = {
-	id: string;
-	tag: string;
-	branch?: string;
-	globals?: any;
-};
-
-/** Abstract */
 export type ControllerServices = {
 	client: Client;
 	store: AbstractStore;
@@ -90,8 +52,70 @@ export type ControllerServices = {
 	tracker: Tracker;
 };
 
-declare global {
-	interface Window {
-		searchspring?: any;
-	}
-}
+export type Attachments = {
+	on?: {
+		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+	};
+	plugin?: PluginFunction | PluginFunction[];
+	[any: string]: unknown;
+};
+
+// Search Config
+export type SearchControllerConfig = ControllerConfig &
+	Attachments & {
+		globals?: any;
+		settings?: {
+			redirects?: {
+				merchandising?: boolean;
+				singleResult?: boolean;
+			};
+			facets?: {
+				trim?: boolean;
+			};
+			infinite?: {
+				backfill?: number;
+			};
+		};
+	};
+
+// Finder Config
+export type FinderControllerConfig = ControllerConfig &
+	Attachments & {
+		globals?: any;
+		url?: string;
+		fields: FinderFieldConfig[];
+	};
+
+export type FinderFieldConfig = {
+	field: string;
+	label?: string;
+	levels?: string[];
+};
+
+// Autocomplete config
+export type AutocompleteControllerConfig = ControllerConfig &
+	Attachments & {
+		globals?: any;
+		selector: string;
+		action?: string;
+		settings: {
+			initializeFromUrl: boolean;
+			syncInputs: boolean;
+			facets?: {
+				trim?: boolean;
+			};
+			trending?: {
+				limit: number;
+			};
+		};
+	};
+
+// Recommendation config
+export type RecommendationControllerConfig = ControllerConfig &
+	Attachments & {
+		globals?: any;
+		tag: string;
+		branch?: string;
+	};
+
+export type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;

@@ -83,3 +83,8 @@ searchController.search();
 ### afterStore
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
+
+### track.product.click
+- Called with `eventData` = { controller, event, result, trackEvent } 
+- Always invoked after `track.product.click()` method has been invoked
+- Allows for adding custom product click events (ie. Google Analytics)

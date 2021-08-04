@@ -3,7 +3,7 @@ import { observable, makeObservable } from 'mobx';
 export class ProfileStore {
 	tag: string;
 	placement: string;
-	display = {};
+	display: Record<string, any> = {};
 
 	constructor(services, profile) {
 		if (!profile?.tag) {
