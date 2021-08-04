@@ -27,9 +27,9 @@
 				esm = __webpack_require__(28493),
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
-				objectWithoutPropertiesLoose = __webpack_require__(98283),
-				esm_extends = __webpack_require__(7560),
-				inheritsLoose = __webpack_require__(35307),
+				objectWithoutPropertiesLoose = __webpack_require__(31461),
+				esm_extends = __webpack_require__(7896),
+				inheritsLoose = __webpack_require__(81665),
 				ManagerReferenceNodeContext = compat_module.kr(),
 				ManagerReferenceNodeSetterContext = compat_module.kr();
 			function Manager(_ref) {
@@ -75,19 +75,6 @@
 				},
 				useIsomorphicLayoutEffect =
 					'undefined' != typeof window && window.document && window.document.createElement ? compat_module.bt : compat_module.d4;
-			function getBoundingClientRect(element) {
-				var rect = element.getBoundingClientRect();
-				return {
-					width: rect.width,
-					height: rect.height,
-					top: rect.top,
-					right: rect.right,
-					bottom: rect.bottom,
-					left: rect.left,
-					x: rect.left,
-					y: rect.top,
-				};
-			}
 			function getWindow(node) {
 				if (null == node) return window;
 				if ('[object Window]' !== node.toString()) {
@@ -95,10 +82,6 @@
 					return (ownerDocument && ownerDocument.defaultView) || window;
 				}
 				return node;
-			}
-			function getWindowScroll(node) {
-				var win = getWindow(node);
-				return { scrollLeft: win.pageXOffset, scrollTop: win.pageYOffset };
 			}
 			function isElement(node) {
 				return node instanceof getWindow(node).Element || node instanceof Element;
@@ -108,6 +91,32 @@
 			}
 			function isShadowRoot(node) {
 				return 'undefined' != typeof ShadowRoot && (node instanceof getWindow(node).ShadowRoot || node instanceof ShadowRoot);
+			}
+			var round = Math.round;
+			function getBoundingClientRect(element, includeScale) {
+				void 0 === includeScale && (includeScale = !1);
+				var rect = element.getBoundingClientRect(),
+					scaleX = 1,
+					scaleY = 1;
+				return (
+					isHTMLElement(element) &&
+						includeScale &&
+						((scaleX = rect.width / element.offsetWidth || 1), (scaleY = rect.height / element.offsetHeight || 1)),
+					{
+						width: round(rect.width / scaleX),
+						height: round(rect.height / scaleY),
+						top: round(rect.top / scaleY),
+						right: round(rect.right / scaleX),
+						bottom: round(rect.bottom / scaleY),
+						left: round(rect.left / scaleX),
+						x: round(rect.left / scaleX),
+						y: round(rect.top / scaleY),
+					}
+				);
+			}
+			function getWindowScroll(node) {
+				var win = getWindow(node);
+				return { scrollLeft: win.pageXOffset, scrollTop: win.pageYOffset };
 			}
 			function getNodeName(element) {
 				return element ? (element.nodeName || '').toLowerCase() : null;
@@ -130,9 +139,17 @@
 			}
 			function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
 				void 0 === isFixed && (isFixed = !1);
-				var documentElement = getDocumentElement(offsetParent),
-					rect = getBoundingClientRect(elementOrVirtualElement),
-					isOffsetParentAnElement = isHTMLElement(offsetParent),
+				var isOffsetParentAnElement = isHTMLElement(offsetParent),
+					offsetParentIsScaled =
+						isHTMLElement(offsetParent) &&
+						(function isElementScaled(element) {
+							var rect = element.getBoundingClientRect(),
+								scaleX = rect.width / element.offsetWidth || 1,
+								scaleY = rect.height / element.offsetHeight || 1;
+							return 1 !== scaleX || 1 !== scaleY;
+						})(offsetParent),
+					documentElement = getDocumentElement(offsetParent),
+					rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled),
 					scroll = { scrollLeft: 0, scrollTop: 0 },
 					offsets = { x: 0, y: 0 };
 				return (
@@ -146,7 +163,7 @@
 									: getWindowScroll(node);
 							})(offsetParent)),
 						isHTMLElement(offsetParent)
-							? (((offsets = getBoundingClientRect(offsetParent)).x += offsetParent.clientLeft), (offsets.y += offsetParent.clientTop))
+							? (((offsets = getBoundingClientRect(offsetParent, !0)).x += offsetParent.clientLeft), (offsets.y += offsetParent.clientTop))
 							: documentElement && (offsets.x = getWindowScrollBarX(documentElement))),
 					{ x: rect.left + scroll.scrollLeft - offsets.x, y: rect.top + scroll.scrollTop - offsets.y, width: rect.width, height: rect.height }
 				);
@@ -512,7 +529,7 @@
 			};
 			var math_max = Math.max,
 				math_min = Math.min,
-				round = Math.round,
+				math_round = Math.round,
 				unsetSides = { top: 'auto', right: 'auto', bottom: 'auto', left: 'auto' };
 			function mapToStyles(_ref2) {
 				var _Object$assign2,
@@ -530,7 +547,7 @@
 									var x = _ref.x,
 										y = _ref.y,
 										dpr = window.devicePixelRatio || 1;
-									return { x: round(round(x * dpr) / dpr) || 0, y: round(round(y * dpr) / dpr) || 0 };
+									return { x: math_round(math_round(x * dpr) / dpr) || 0, y: math_round(math_round(y * dpr) / dpr) || 0 };
 							  })(offsets)
 							: 'function' == typeof roundOffsets
 							? roundOffsets(offsets)
