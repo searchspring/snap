@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -146,7 +146,7 @@ export default {
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
 export const Products = (props, { loaded: { controller } }) => {
 	return (
-		<Carousel title={'Recommended For You'} {...props}>
+		<Carousel {...props}>
 			{controller.store?.results.map((result) => (
 				<Result result={result} />
 			))}
@@ -156,17 +156,13 @@ export const Products = (props, { loaded: { controller } }) => {
 
 const people = ['Chris', 'Kevin', 'Dennis', 'John', 'Kelly', 'Jessy', 'Phil', 'Kyle'];
 export const Names = (props) => {
-	return (
-		<Carousel title={'Names'} {...props}>
-			{people}
-		</Carousel>
-	);
+	return <Carousel {...props}>{people}</Carousel>;
 };
 
 const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'black', 'white'];
 export const Colors = (props) => {
 	return (
-		<Carousel title={'Colors'} {...props}>
+		<Carousel {...props}>
 			{colors.map((color) => (
 				<div style={{ height: '100px', width: '100px', background: color }}></div>
 			))}
@@ -185,7 +181,7 @@ const puppyImgs = [
 ];
 export const Puppys = (props) => {
 	return (
-		<Carousel title={'Puppys'} {...props}>
+		<Carousel {...props}>
 			{puppyImgs.map((pup) => (
 				<img style={{ width: '150px' }} src={pup} />
 			))}
@@ -193,7 +189,59 @@ export const Puppys = (props) => {
 	);
 };
 
+export const Swatches = (props, { loaded: { controller } }) => {
+	return (
+		<Carousel {...props}>
+			{controller.store?.results.map((result) => {
+				return (
+					<div style={{ maxWidth: '250px' }}>
+						<Result
+							result={result}
+							buttonSlot={
+								<Carousel {...props} onCarouselClick={(e) => (result.mappings.core.imageUrl = e.target.src)}>
+									{puppyImgs.map((img) => (
+										<div style={{ position: 'relative', height: '25px', width: '25px' }}>
+											<img
+												src={img}
+												style={{
+													top: '0',
+													left: '0',
+													right: '0',
+													width: 'auto',
+													border: '2px solid white',
+													bottom: '0',
+													height: 'auto',
+													margin: 'auto',
+													display: 'inline',
+													opacity: '1',
+													padding: '2px',
+													position: 'absolute',
+													maxWidth: '100%',
+													maxHeight: '100%',
+												}}
+											/>
+										</div>
+									))}
+								</Carousel>
+							}
+						/>
+					</div>
+				);
+			})}
+		</Carousel>
+	);
+};
+
 Products.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+
+Swatches.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {

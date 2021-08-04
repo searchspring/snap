@@ -21,11 +21,10 @@ const CSS = {
 			'& .swiper-pagination-bullet-active': {
 				background: theme?.colors?.primary || 'inherit',
 			},
-			'& .ss__carousel__title': {},
 			'& .ss__carousel__next, .ss__carousel__prev': {
 				position: 'absolute',
 				padding: '5px',
-				bottom: 'calc(50% - 60px/2)',
+				bottom: 'calc(50% - 18px)',
 				zIndex: '2',
 				cursor: 'pointer',
 
@@ -114,7 +113,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	};
 
 	const {
-		title,
 		children,
 		breakpoints,
 		loop,
@@ -126,6 +124,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		onCarouselClick,
 		onBreakpoint,
 		onSlideChange,
+		onInit,
 		disableStyles,
 		style,
 		className,
@@ -151,9 +150,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
-
-	const [initialIndexes, setInitialIndexes] = useState([0, 0]);
-
 	return (
 		children && (
 			<div
@@ -161,7 +157,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				css={!disableStyles && CSS.carousel({ theme, style })}
 				className={classnames('ss__carousel', className)}
 			>
-				{title && <h3 className="ss__carousel__title">{title}</h3>}
 				<div
 					className="ss__carousel__prev"
 					ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
@@ -184,7 +179,10 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						//@ts-ignore
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
 						//@ts-ignore
-						setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+						if (onInit) {
+							//@ts-ignore
+							onInit(swiper.realIndex, swiper.loopedSlides);
+						}
 					}}
 					onBreakpoint={
 						onBreakpoint &&
@@ -229,7 +227,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 });
 
 export interface CarouselProps extends ComponentProps {
-	title?: JSX.Element | string;
 	breakpoints?: any;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
@@ -240,6 +237,7 @@ export interface CarouselProps extends ComponentProps {
 	onCarouselClick?: (e, idx) => void;
 	onSlideChange?: (idx, loopedSlides) => void;
 	onBreakpoint?: (idx, loopedSlides) => void;
+	onInit?: (idx, loopedSlides) => void;
 	children?: JSX.Element[];
 }
 

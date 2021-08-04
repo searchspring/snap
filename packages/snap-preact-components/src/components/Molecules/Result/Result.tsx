@@ -16,8 +16,8 @@ import type { SearchController, AutocompleteController, RecommendationController
 const CSS = {
 	result: ({ style }) =>
 		css({
-			display: 'inline-block',
-			width: 'auto',
+			// display: 'inline-block',
+			// width: 'auto',
 
 			'&.ss__result--grid': {
 				flexDirection: 'column',

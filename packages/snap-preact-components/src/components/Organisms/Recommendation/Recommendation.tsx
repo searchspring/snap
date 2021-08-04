@@ -212,15 +212,19 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				css={!disableStyles && CSS.recommendation({ theme, style })}
 				className={classnames('ss__recommendation', className)}
 			>
+				{title && <h3 className="ss__recommendation__title">{title}</h3>}
 				<Carousel
-					title={title}
 					onNextButtonClick={(e) => controller.track.click(e)}
 					onPrevButtonClick={(e) => controller.track.click(e)}
 					// @ts-ignore
 					onBreakpoint={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
 					//@ts-ignore
 					onSlideChange={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-					onCarouselClick={(e, clickedIndex) => controller.track.product.click(e, results[clickedIndex])}
+					onCarouselClick={(e, clickedIndex) => {
+						controller.track.click(e);
+						controller.track.product.click(e, results[clickedIndex]);
+					}}
+					onInit={(realIndex, loopedSlides) => setInitialIndexes([realIndex, loopedSlides])}
 					loop={loop}
 					breakpoints={breakpoints}
 					pagination={pagination}

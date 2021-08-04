@@ -301,6 +301,7 @@ export class Snap {
 		});
 
 		if (this.config?.instantiators?.recommendation) {
+			console.log('here');
 			try {
 				this.recommendations = new RecommendationInstantiator(config.instantiators.recommendation, {
 					client: this.client,
