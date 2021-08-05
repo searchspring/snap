@@ -44,9 +44,6 @@ const CSS = {
 			},
 
 			'& .ss__result__wrapper': {
-				borderRadius: '5px',
-				margin: '10px',
-				position: 'relative',
 				'& .ss__result__wrapper__image': {
 					position: 'relative',
 					display: 'flex',

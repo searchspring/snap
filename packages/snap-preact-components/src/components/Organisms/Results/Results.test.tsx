@@ -30,9 +30,13 @@ describe('Results Component', () => {
 		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
-		const results = rendered.container.querySelector('.ss__result');
-		const styles = getComputedStyle(results);
-		expect(styles['flex-direction']).toBe('row');
+		const result = rendered.container.querySelector('.ss__result');
+		const resultStyles = getComputedStyle(result);
+		expect(resultStyles['flex-direction']).toBe('row');
+
+		const results = rendered.container.querySelector('.ss__results');
+		const resultsStyles = getComputedStyle(results);
+		expect(resultsStyles['grid-template-columns']).toBe('repeat(1, 1fr)');
 	});
 
 	it('renders all', () => {

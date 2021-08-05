@@ -48,7 +48,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		// default props
 		results: [],
 		columns: 4,
-		gapSize: '10px',
+		gapSize: '20px',
 		layout: Layout.GRID,
 		responsive: defaultResponsiveProps,
 		// global theme
@@ -58,15 +58,15 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const { disableStyles, className, responsive, style, controller } = props;
-
-	const displaySettings = useDisplaySettings(responsive);
+	const displaySettings = useDisplaySettings(props.responsive);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		props = {
 			...props,
 			...displaySettings,
 		};
 	}
+
+	const { disableStyles, className, layout, style, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -105,7 +105,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider value={cache}>
 			<div
-				css={!disableStyles && CSS.results({ columns: props.columns, gapSize: props.gapSize, style })}
+				css={!disableStyles && CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize, style })}
 				className={classnames('ss__results', className)}
 			>
 				{results.map((result) =>
