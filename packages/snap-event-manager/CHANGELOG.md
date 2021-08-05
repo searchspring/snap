@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.22 (2021-08-05)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+
+
+
+
 ## 0.3.21 (2021-08-04)
 
 **Note:** Version bump only for package @searchspring/snap-event-manager
