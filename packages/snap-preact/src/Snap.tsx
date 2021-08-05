@@ -132,7 +132,6 @@ export class Snap {
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
-										selector: target.selector,
 										...target,
 									},
 									(target, elem, originalElem) => {
@@ -167,10 +166,9 @@ export class Snap {
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
-										selector: target.selector,
 										inject: {
 											action: 'after', // before, after, append, prepend
-											element: (target, origElement) => {
+											element: () => {
 												const acContainer = document.createElement('div');
 												acContainer.className = 'ss__autocomplete--target';
 												acContainer.addEventListener('click', (e) => {
@@ -223,7 +221,6 @@ export class Snap {
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
-										selector: target.selector,
 										...target,
 									},
 									(target, elem, originalElem) => {
@@ -268,7 +265,6 @@ export class Snap {
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
-										selector: target.selector,
 										...target,
 									},
 									(target, elem, originalElem) => {
