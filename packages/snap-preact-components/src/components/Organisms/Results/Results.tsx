@@ -58,15 +58,15 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const { disableStyles, className, responsive, layout, style, controller } = props;
-
-	const displaySettings = useDisplaySettings(responsive);
+	const displaySettings = useDisplaySettings(props.responsive);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		props = {
 			...props,
 			...displaySettings,
 		};
 	}
+
+	const { disableStyles, className, layout, style, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
