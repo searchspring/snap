@@ -488,8 +488,8 @@ describe('search response filterSummary transformer', () => {
 
 			if (typeof mockFilter.value == 'object') {
 				expect(filter.type).toBe('range');
-				expect(filter.value.low).toBe(mockFilter.value.rangeLow);
-				expect(filter.value.high).toBe(mockFilter.value.rangeHigh);
+				expect(filter.value.low).toBe(Number(mockFilter.value.rangeLow));
+				expect(filter.value.high).toBe(Number(mockFilter.value.rangeHigh));
 			} else {
 				expect(filter.value).toBe(mockFilter.value);
 				expect(filter.type).toBe('value');
