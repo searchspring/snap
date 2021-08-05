@@ -28,6 +28,14 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { SnapControllerServices } from './types';
 
+type ExtendedTarget = Target & {
+	name?: string;
+	controller?: AbstractController;
+	component?: React.Component;
+	props?: unknown;
+	onTarget?: OnTarget;
+};
+
 export type SnapConfig = {
 	parameters?: {
 		[paramName: string]: {
@@ -45,22 +53,22 @@ export type SnapConfig = {
 	controllers?: {
 		search?: {
 			config: SearchControllerConfig;
-			targets?: Target[];
+			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
-			targets: Target[];
+			targets: ExtendedTarget[];
 			services?: SnapControllerServices;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
-			targets?: Target[];
+			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
-			targets?: Target[];
+			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
 		}[];
 	};
@@ -123,13 +131,8 @@ export class Snap {
 
 								cntrlr.createTargeter(
 									{
-										selector: target.selector,
-										component: target.component,
-										props: target.props,
 										controller: cntrlr,
-										hideTarget: target.hideTarget,
-										inject: target.inject,
-										onTarget: target.onTarget,
+										...target,
 									},
 									(target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
@@ -159,27 +162,22 @@ export class Snap {
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
 								cntrlr.createTargeter(
 									{
-										selector: target.selector,
-										component: target.component,
-										props: target.props,
 										controller: cntrlr,
-										hideTarget: target.hideTarget,
-										inject: target.hasOwnProperty('inject')
-											? target.inject
-											: {
-													action: 'after', // before, after, append, prepend
-													element: (target, origElement) => {
-														const acContainer = document.createElement('div');
-														acContainer.className = 'ss__autocomplete--target';
-														acContainer.addEventListener('click', (e) => {
-															e.stopPropagation();
-														});
-														return acContainer;
-													},
-											  },
-										onTarget: target.onTarget,
+										inject: {
+											action: 'after', // before, after, append, prepend
+											element: () => {
+												const acContainer = document.createElement('div');
+												acContainer.className = 'ss__autocomplete--target';
+												acContainer.addEventListener('click', (e) => {
+													e.stopPropagation();
+												});
+												return acContainer;
+											},
+										},
+										...target,
 									},
 									(target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
@@ -222,13 +220,8 @@ export class Snap {
 								}
 								cntrlr.createTargeter(
 									{
-										selector: target.selector,
-										component: target.component as any,
-										props: target.props,
 										controller: cntrlr,
-										hideTarget: target.hideTarget,
-										inject: target.inject,
-										onTarget: target.onTarget,
+										...target,
 									},
 									(target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
@@ -271,13 +264,8 @@ export class Snap {
 								}
 								cntrlr.createTargeter(
 									{
-										selector: target.selector,
-										component: target.component,
-										props: target.props,
 										controller: cntrlr,
-										hideTarget: target.hideTarget,
-										inject: target.inject,
-										onTarget: target.onTarget,
+										...target,
 									},
 									(target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;

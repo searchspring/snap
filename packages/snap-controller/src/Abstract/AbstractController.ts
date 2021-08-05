@@ -104,10 +104,16 @@ export abstract class AbstractController {
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
-		const targeter = new DomTargeter([target], onTarget, document);
-		this.targets[target.selector] = targeter;
+		const targetName = (target.name as string) ?? target.selector;
 
-		return targeter;
+		if (!this.targets[targetName]) {
+			const targeter = new DomTargeter([target], onTarget, document);
+			this.targets[targetName] = targeter;
+			return targeter;
+		}
+
+		this.log.warn(`duplicate targeter for '${targetName}' - targeter was not created`);
+		return;
 	}
 
 	public set environment(env: LogMode) {

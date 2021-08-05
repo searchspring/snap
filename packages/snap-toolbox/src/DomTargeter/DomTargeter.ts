@@ -4,6 +4,7 @@ export type Target = {
 		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
 	};
+	emptyTarget?: boolean;
 	hideTarget?: boolean;
 	[any: string]: unknown;
 };
@@ -26,20 +27,32 @@ export class DomTargeter {
 
 		this.retarget();
 
-		this.document.addEventListener('DOMContentLoaded', () => {
-			this.retarget();
-		});
+		if (/complete|interactive|loaded/.test(this.document.readyState)) {
+			// DOMContent has loaded - unhide targets
+			this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
+		} else {
+			// attempt retarget on DOMContentLoaded
+			this.document.addEventListener('DOMContentLoaded', () => {
+				this.retarget();
+				// unhide targets after re-target attempt in DOMContentLoaded
+				this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
+			});
+		}
 	}
 
 	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
+			// hide targets before found
+			if (target.hideTarget) {
+				this.hideTarget(target.selector);
+			}
+
 			const elems = this.domQuery(target.selector).filter((elem) => {
 				if (!targetedElems.find((e) => e == elem)) {
-					// only add style blocks to newly targeted elements
-					if (target.hideTarget) {
-						this.hideTarget(target.selector);
-					}
 					return true;
+				} else {
+					// unhide retarget attempts
+					this.unhideTarget(target.selector);
 				}
 			});
 
@@ -51,11 +64,6 @@ export class DomTargeter {
 		const errors = [];
 
 		targetElemPairs.forEach(({ target, elem }) => {
-			// remove style block we added earlier
-			if (target.hideTarget) {
-				this.unhideTarget(target.selector);
-			}
-
 			if (target.inject) {
 				try {
 					const injectedElem = this.inject(elem, target);
@@ -65,9 +73,14 @@ export class DomTargeter {
 				}
 			} else {
 				// empty target selector by default
-				while (elem.firstChild && elem.removeChild(elem.firstChild));
+				target.emptyTarget = target.emptyTarget ?? true;
+				if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
+
 				this.onTarget(target, elem);
 			}
+
+			// unhide target
+			this.unhideTarget(target.selector);
 		});
 
 		if (errors.length) {
