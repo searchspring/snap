@@ -19,9 +19,13 @@ export class Results extends Component {
 			<div class="ss-results">
 				<Toolbar />
 
+				<div class="clear"></div>
+
 				<Profile name="results" controller={controller}>
 					<ResultsComponent controller={controller} results={results} />
 				</Profile>
+
+				<div class="clear"></div>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
 			</div>
