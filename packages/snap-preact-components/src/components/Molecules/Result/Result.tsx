@@ -10,6 +10,7 @@ import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
 import { defined } from '../../../utilities';
+import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 
@@ -150,7 +151,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	};
 
 	const onSale = Boolean(core?.msrp && core?.msrp * 1 > core?.price * 1);
-
+	let displayName = core.name;
+	if (props.truncateTitle) {
+		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append ? props.truncateTitle.append : undefined);
+	}
 	return (
 		core && (
 			<CacheProvider value={cache}>
@@ -176,7 +180,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 											controller?.track?.product?.click(e, result);
 										}}
 									>
-										{core.name}
+										{displayName}
 									</a>
 								</div>
 							)}
@@ -207,6 +211,10 @@ interface ResultSubProps {
 	price: PriceProps;
 	image: ImageProps;
 }
+interface TruncateTitleProps {
+	limit: number;
+	append?: string;
+}
 
 export interface ResultProps extends ComponentProps {
 	result: ResultType;
@@ -216,5 +224,6 @@ export interface ResultProps extends ComponentProps {
 	detailSlot?: JSX.Element;
 	fallback?: string;
 	layout?: LayoutType;
+	truncateTitle?: TruncateTitleProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }
