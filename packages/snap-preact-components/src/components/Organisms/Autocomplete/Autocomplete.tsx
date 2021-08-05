@@ -284,6 +284,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && !terms.length;
 	const justTrending = showTrending && facets.length === 0 && terms.length === 0 && !(results.length === 0 && state.input?.length);
+	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER).slice(0, 3);
+
 	return (
 		visible && (
 			<CacheProvider value={cache}>
@@ -316,14 +318,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					)}
 
 					<div className="ss__autocomplete__content">
-						{!hideFacets && facets.length ? (
+						{!hideFacets && facetsToShow.length ? (
 							<div className="ss__autocomplete__content__facets">
-								{facets
-									.filter((facet) => facet.display !== FacetDisplay.SLIDER)
-									.slice(0, 3)
-									.map((facet) => (
-										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-									))}
+								{facetsToShow.map((facet) => (
+									<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+								))}
 								<Banner content={merchandising.content} type={BannerType.LEFT} />
 							</div>
 						) : null}
