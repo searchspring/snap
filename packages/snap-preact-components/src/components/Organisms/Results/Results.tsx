@@ -48,7 +48,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		// default props
 		results: [],
 		columns: 4,
-		gapSize: '10px',
+		gapSize: '20px',
 		layout: Layout.GRID,
 		responsive: defaultResponsiveProps,
 		// global theme

@@ -57,6 +57,37 @@ export default {
 				options: [Layout.GRID, Layout.LIST],
 			},
 		},
+		columns: {
+			defaultValue: 4,
+			description: 'Number of columns in results grid',
+			table: {
+				type: {
+					summary: 'number',
+				},
+				defaultValue: { summary: 4 },
+			},
+			control: { type: 'number' },
+		},
+		rows: {
+			description: 'Number of rows in results grid - adding this will put a hard limit on the results',
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
+		gapSize: {
+			defaultValue: '20px',
+			description: 'Gap size between rows and columns',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '20px' },
+			},
+			control: { type: 'text' },
+		},
 		responsive: {
 			defaultValue: {},
 			description: 'Responsive options object',
@@ -112,39 +143,6 @@ const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
 
 export const List = ListTemplate.bind({});
 List.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
-
-const responsive = {
-	0: {
-		columns: 1,
-	},
-	540: {
-		columns: 2,
-	},
-	768: {
-		columns: 3,
-	},
-	991: {
-		columns: 4,
-	},
-};
-
-const ObservableResponsiveResults = observer(({ args, controller }) => {
-	return <Results {...args} controller={controller} results={controller?.store?.results} responsive={responsive} />;
-});
-
-const ResponsiveTemplate = (args: ResultsProp, { loaded: { controller } }) => {
-	return <ObservableResponsiveResults args={args} controller={controller} />;
-};
-
-export const Responsive = ResponsiveTemplate.bind({});
-Responsive.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {
