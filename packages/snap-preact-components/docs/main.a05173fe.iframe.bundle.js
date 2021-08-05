@@ -9357,9 +9357,9 @@
 					(__webpack_require__(94908),
 					__webpack_require__(77950),
 					__webpack_require__(54226),
-					__webpack_require__(43450),
 					__webpack_require__(32501),
 					__webpack_require__(95342),
+					__webpack_require__(43450),
 					__webpack_require__(74069),
 					__webpack_require__(34619)),
 				es = __webpack_require__(98095),
@@ -9601,7 +9601,14 @@
 							showTrending &&
 							0 === facets.length &&
 							0 === terms.length &&
-							!(0 === results.length && (null === (_r = state.input) || void 0 === _r ? void 0 : _r.length));
+							!(0 === results.length && (null === (_r = state.input) || void 0 === _r ? void 0 : _r.length)),
+						facetsToShow =
+							facets.length &&
+							facets
+								.filter(function (facet) {
+									return facet.display !== types.uw.SLIDER;
+								})
+								.slice(0, 3);
 					return (
 						visible &&
 						(0, emotion_react_browser_esm.tZ)(
@@ -9648,19 +9655,13 @@
 								(0, emotion_react_browser_esm.tZ)(
 									'div',
 									{ className: 'ss__autocomplete__content' },
-									!hideFacets && facets.length
+									!hideFacets && facetsToShow.length
 										? (0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__autocomplete__content__facets' },
-												facets
-													.filter(function (facet) {
-														return facet.display !== types.uw.SLIDER;
-													})
-													.slice(0, 3)
-													.map(function (facet) {
-														return (0,
-														emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
-													}),
+												facetsToShow.map(function (facet) {
+													return (0, emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
+												}),
 												(0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
 										  )
 										: null,
@@ -22561,7 +22562,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.21' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.22' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22588,7 +22589,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.21');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.22');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23173,7 +23174,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.21]',
+								text: '[0.3.22]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
