@@ -143,3 +143,16 @@ hideSections.args = {
 	hideTitle: true,
 	hidePricing: true,
 };
+
+export const truncateTitle = Template.bind({});
+truncateTitle.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+truncateTitle.args = {
+	truncateTitle: { limit: 5, append: '...' },
+};
