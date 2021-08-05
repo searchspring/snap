@@ -47,6 +47,7 @@
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-logger)", b: "(#/package-logger)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller)", b: "(#/package-controller)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox)", b: "(#/package-toolbox)"},
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-tracker)", b: "(#/package-tracker)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)", b: "(#/components-preact)"},
 				
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)", b: "(#/package-toolbox-domTargeter)"},
@@ -54,6 +55,9 @@
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)", b: "(#/package-storeMobx-storage)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)", b: "(#/package-storeMobx-search)"},
 
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search)", b: "(#/package-controller-search)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete)", b: "(#/package-controller-autocomplete)" },
+				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)", b: "(#/package-controller-recommendation)" },
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)", b: "(#/package-controller-finder)" },
 
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)", b: "(#/package-urlManager-translators)" },
@@ -69,57 +73,148 @@
 		}
 		const documents = [
 			{
-				categoryName: 'General',
+				categoryName: 'Welcome',
 				links: [
 					{
 						label: 'About Snap',
 						route: '/',
 						type: 'markdown',
 						url: './docs/ABOUT.md'
-					}, {
-						label: 'Getting Started',
+					}, 
+				]
+			},
+			{
+				categoryName: 'Getting Started',
+				links: [
+					{
+						label: 'Setup',
 						route: '/start-setup',
+						type: 'markdown',
+						url: './docs/SETUP.md'
+					}, 
+					{
+						label: 'Preact',
+						route: '/start-preact',
+						type: 'markdown',
+						url: './docs/PREACT.md',
 						links: [
 							{
-								label: 'Setup',
-								route: '/start-setup',
+								label: 'Configuration',
+								route: '/start-preact',
 								type: 'markdown',
-								url: './docs/SETUP.md'
-							}, {
+								url: './docs/PREACT_CONFIG.md'
+							},
+							{
+								label: 'Controller Props',
+								route: '/start-controller-prop',
+								type: 'markdown',
+								url: './docs/PREACT_CONTROLLER_PROPS.md'
+							},
+							{
+								label: 'Displaying Data',
+								route: '/start-displaying-data',
+								type: 'markdown',
+								url: './docs/PREACT_DISPLAYING_DATA.md'
+							},
+							{
+								label: 'Events',
+								route: '/start-events',
+								type: 'markdown',
+								url: './docs/PREACT_EVENTS.md'
+							},
+						]
+					}, 
+					{
+						label: 'Advanced',
+						route: '/advanced-installation',
+						type: 'markdown',
+						url: './docs/ADVANCED.md',
+						links: [
+							{
 								label: 'Installation',
-								route: '/start-usage',
+								route: '/advanced-installation',
 								type: 'markdown',
-								url: './docs/INSTALLATION.md',
+								url: './docs/ADVANCED.md',
 							}, {
 								label: 'Client',
-								route: '/start-client',
+								route: '/advanced-client',
 								type: 'markdown',
 								url: './docs/CLIENT.md',
 							}, {
 								label: 'Search',
-								route: '/start-search',
+								route: '/advanced-search',
 								type: 'markdown',
 								url: './docs/SEARCH.md',
 							}, {
 								label: 'Autocomplete',
-								route: '/start-autocomplete',
+								route: '/advanced-autocomplete',
 								type: 'markdown',
 								url: './docs/AUTOCOMPLETE.md',
 							}, {
 								label: 'Finder',
-								route: '/start-finder',
+								route: '/advanced-finder',
 								type: 'markdown',
 								url: './docs/FINDER.md',
-							}, {
-								label: 'Integration',
-								route: '/start-integration',
-								type: 'markdown',
-								url: './docs/INTEGRATION.md',
-							}
+							}, 
 						]
+					}, 
+					{
+						label: 'Integration',
+						route: '/advanced-integration',
+						type: 'markdown',
+						url: './docs/INTEGRATION.md',
 					}
+					// {
+					// 	label: 'Getting Started (Preact)',
+					// 	route: '/start-setup',
+					// 	links: [
+					// 		{
+					// 			label: 'Setup',
+					// 			route: '/start-setup',
+					// 			type: 'markdown',
+					// 			url: './docs/SETUP.md'
+					// 		}, {
+					// 			label: 'Snap using Preact',
+					// 			route: '/start-snap-preact',
+					// 			type: 'markdown',
+					// 			url: './docs/SNAP.md',
+					// 		},
+					// 		{
+					// 			label: 'Installation',
+					// 			route: '/start-usage',
+					// 			type: 'markdown',
+					// 			url: './docs/INSTALLATION.md',
+					// 		}, {
+					// 			label: 'Client',
+					// 			route: '/start-client',
+					// 			type: 'markdown',
+					// 			url: './docs/CLIENT.md',
+					// 		}, {
+					// 			label: 'Search',
+					// 			route: '/start-search',
+					// 			type: 'markdown',
+					// 			url: './docs/SEARCH.md',
+					// 		}, {
+					// 			label: 'Autocomplete',
+					// 			route: '/start-autocomplete',
+					// 			type: 'markdown',
+					// 			url: './docs/AUTOCOMPLETE.md',
+					// 		}, {
+					// 			label: 'Finder',
+					// 			route: '/start-finder',
+					// 			type: 'markdown',
+					// 			url: './docs/FINDER.md',
+					// 		}, {
+					// 			label: 'Integration',
+					// 			route: '/start-integration',
+					// 			type: 'markdown',
+					// 			url: './docs/INTEGRATION.md',
+					// 		}
+					// 	]
+					// }
 				]
-			}, {
+			},
+			 {
 				categoryName: 'Packages',
 				links: [
 					{

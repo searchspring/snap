@@ -60,7 +60,6 @@ class Product {
 		core: {},
 	};
 	custom = {};
-	track;
 
 	constructor(services, result) {
 		this.id = result.id;

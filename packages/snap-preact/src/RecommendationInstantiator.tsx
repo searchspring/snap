@@ -39,7 +39,6 @@ export class RecommendationInstantiator {
 	tracker: Tracker;
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
-	eventManager: EventManager;
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
@@ -50,7 +49,6 @@ export class RecommendationInstantiator {
 	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: InstantiatorServices) {
 		this.client = client;
 		this.tracker = tracker;
-		this.eventManager = new EventManager();
 		this.config = config;
 		this.logger = logger;
 

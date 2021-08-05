@@ -138,7 +138,25 @@ table td {
 #markdown {
 	padding: 50px 100px;
 	max-width: 1500px;
-	margin: 0 auto;
+	margin: 50px auto;
+	line-height: 1.5;
+	background: white;
+    border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+    border: 1px solid #eee;
+}
+
+#markdown h2 {
+	color: #4937d7;
+	font-size: 1.5em;
+	margin-top: 2em;
+}
+
+#markdown h2:first-of-type {
+	border-bottom: 3px solid #4937d7;
+    padding-bottom: 5px;
+	font-size: 2em;
+	margin-top: 0px;
 }
 
 #content iframe {
@@ -161,9 +179,9 @@ pre {
 	padding: 16px;
 	overflow: auto;
 	line-height: 1.2;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow: 0 0 1px rgb(0 0 0 / 35%);
+	background-color: #fafafa;
+	border-radius: 0px;
+	border: 1px solid #eee;
 }
 
 code:not([class]) {

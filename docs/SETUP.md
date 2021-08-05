@@ -2,13 +2,19 @@
 
 To follow the way of Snap - you must have strong Snap-fu.
 
+## Prerequisites
+
+- npm v7
+
+- node v14+
+
 ## Snapfu
 
 Snapfu is a cli interface for creating a Snap project from a template.
 
 ```sh
-$ npm install -g snapfu
-$ snapfu login
+npm install -g snapfu
+snapfu login
 
 ```
 
@@ -17,9 +23,8 @@ $ snapfu login
 Initialize a new project using Snapfu:
 
 ```sh
-$ mkdir [projectname]
-$ cd [projectname]
-$ snapfu init
+snapfu init [projectname]
+cd [projectname]
 ```
 
 You will be asked for your Site ID, which you find in the [Searchspring Management Console](https://manage.searchspring.net)
@@ -31,7 +36,7 @@ This will create a new project with git repo.
 Next install the packages:
 
 ```sh
-npm install # or yarn install
+npm install
 ```
 
 ## Development
@@ -66,8 +71,8 @@ A local `.html` file can be placed into the `/public` directory with the bundle 
 ## Publishing
 
 ```sh
-$ git commit -am "Hello, snapfu"
-$ git push
+git commit -am "Hello, snapfu"
+git push
 ```
 
 The bundle will automatically be built from the `production` branch and deployed to this URL:
