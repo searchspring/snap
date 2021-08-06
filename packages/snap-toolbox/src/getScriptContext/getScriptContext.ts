@@ -8,12 +8,12 @@ export function getScriptContext(script: Element, evaluate?: string[]): ContextV
 	}
 
 	// check script type
-	if (!script.getAttribute('type').match(/^searchspring/)) {
-		throw new Error('script type attribute must start with "searchspring"');
+	if (!script.getAttribute('type')?.match(/^searchspring/) && !script.id?.match(/^searchspring/)) {
+		throw new Error('script type or id attribute must start with "searchspring"');
 	}
 
 	if ((evaluate && !Array.isArray(evaluate)) || (evaluate && !evaluate.reduce((accu, name) => accu && typeof name === 'string', true))) {
-		throw new Error('scriptContext second parameter must be an array of strings');
+		throw new Error('getScriptContext second parameter must be an array of strings');
 	}
 
 	const variables = {};
