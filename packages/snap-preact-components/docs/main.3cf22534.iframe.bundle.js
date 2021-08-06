@@ -22562,7 +22562,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.22' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.23' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22589,7 +22589,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.22');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.23');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23036,10 +23036,14 @@
 												return (
 													(globals = {}),
 													(_a = (function getScriptContext(script, evaluate) {
+														var _a, _b;
 														if (!script || 'object' != typeof script || 'HTMLScriptElement' != script.constructor.name)
 															throw new Error('script tag must be provided');
-														if (!script.getAttribute('type').match(/^searchspring/))
-															throw new Error('script type attribute must start with "searchspring"');
+														if (
+															!(null === (_a = script.getAttribute('type')) || void 0 === _a ? void 0 : _a.match(/^searchspring/)) &&
+															!(null === (_b = script.id) || void 0 === _b ? void 0 : _b.match(/^searchspring/))
+														)
+															throw new Error('script type or id attribute must start with "searchspring"');
 														if (
 															(evaluate && !Array.isArray(evaluate)) ||
 															(evaluate &&
@@ -23047,7 +23051,7 @@
 																	return accu && 'string' == typeof name;
 																}, !0))
 														)
-															throw new Error('scriptContext second parameter must be an array of strings');
+															throw new Error('getScriptContext second parameter must be an array of strings');
 														var variables = {};
 														return (
 															script.getAttributeNames().map(function (attr) {
@@ -23174,7 +23178,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.22]',
+								text: '[0.3.23]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
