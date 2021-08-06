@@ -91,8 +91,8 @@ transformSearchResponse.filters = (response) => {
 			if (typeof filter.value == 'object') {
 				(type = 'range'),
 					(value = {
-						low: filter.value.rangeLow,
-						high: filter.value.rangeHigh,
+						low: +filter.value.rangeLow,
+						high: +filter.value.rangeHigh,
 					});
 			}
 
