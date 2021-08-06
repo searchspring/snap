@@ -33,12 +33,33 @@ describe('getScriptContext', () => {
 		}).not.toThrow();
 	});
 
-	it('expects the script to have "searchspring" prefix in the type attribute', () => {
+	it('expects the script to have "searchspring" prefix in the id or type attribute', () => {
 		expect(() => {
 			const scriptTag = document.createElement('script');
 
 			getScriptContext(scriptTag);
 		}).toThrow();
+
+		expect(() => {
+			const scriptTag = document.createElement('script');
+			scriptTag.id = 'search';
+
+			getScriptContext(scriptTag);
+		}).toThrow();
+
+		expect(() => {
+			const scriptTag = document.createElement('script');
+			scriptTag.id = 'searchspring';
+
+			getScriptContext(scriptTag);
+		}).not.toThrow();
+
+		expect(() => {
+			const scriptTag = document.createElement('script');
+			scriptTag.id = 'searchspring-context';
+
+			getScriptContext(scriptTag);
+		}).not.toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
@@ -64,12 +85,12 @@ describe('getScriptContext', () => {
 
 	it('returns an object of variables containing all attributes', () => {
 		const scriptTag = document.createElement('script');
-		scriptTag.setAttribute('type', 'searchspring/recommend');
+		scriptTag.id = 'searchspring-context';
 		scriptTag.setAttribute('profile', 'trending');
 
 		const vars = getScriptContext(scriptTag);
 
-		expect(vars).toHaveProperty('type', 'searchspring/recommend');
+		expect(vars).toHaveProperty('id', 'searchspring-context');
 		expect(vars).toHaveProperty('profile', 'trending');
 	});
 
