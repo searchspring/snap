@@ -5,8 +5,6 @@ This is general documentation for translators. Translator-specific documentation
 - [UrlTranslator](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)
 - [QueryStringTranslator](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)
 
-### Introduction
-
 A `UrlManager` is instantiated with a translator. The `Translator` defines the behavior of the `UrlManager` instance. They have a couple jobs:
 
 1. get the current URL
@@ -30,7 +28,7 @@ interface Translator {
 }
 ```
 
-### Usage:
+## Instantiation
 
 A `Translator` is passed in to a `UrlManager` during construction:
 
@@ -43,7 +41,7 @@ import {
 const urlManager = new UrlManager(new UrlTranslator());
 ```
 
-### Overriding default behavior
+## Overriding default behavior
 
 Default behavior of an existing translator can be overridden by extending the class.
 
@@ -102,7 +100,7 @@ class HashTranslator extends QueryStringTranslator {
 }
 ```
 
-### Consistent internal state
+## Consistent internal state
 
 You may have noticed in the typescript interface, serialize takes a `UrlState` type, while deserialize returns a `UrlState` type.
 

@@ -65,6 +65,8 @@
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(#/package-urlManager-translators-url)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(#/package-urlManager-translators-queryString)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(#/package-urlManager-linkers-react)"},
+
+				{ a: "## Documentation\n\nFor all Snap documentation, see the [Snap Docs](https://searchspring.github.io/snap/).", b: ""},
 			];
 			replaces.forEach(function(replace) {
 				markdown = markdown.replaceAll(replace.a, replace.b);
@@ -163,55 +165,13 @@
 						route: '/advanced-integration',
 						type: 'markdown',
 						url: './docs/INTEGRATION.md',
-					}
-					// {
-					// 	label: 'Getting Started (Preact)',
-					// 	route: '/start-setup',
-					// 	links: [
-					// 		{
-					// 			label: 'Setup',
-					// 			route: '/start-setup',
-					// 			type: 'markdown',
-					// 			url: './docs/SETUP.md'
-					// 		}, {
-					// 			label: 'Snap using Preact',
-					// 			route: '/start-snap-preact',
-					// 			type: 'markdown',
-					// 			url: './docs/SNAP.md',
-					// 		},
-					// 		{
-					// 			label: 'Installation',
-					// 			route: '/start-usage',
-					// 			type: 'markdown',
-					// 			url: './docs/INSTALLATION.md',
-					// 		}, {
-					// 			label: 'Client',
-					// 			route: '/start-client',
-					// 			type: 'markdown',
-					// 			url: './docs/CLIENT.md',
-					// 		}, {
-					// 			label: 'Search',
-					// 			route: '/start-search',
-					// 			type: 'markdown',
-					// 			url: './docs/SEARCH.md',
-					// 		}, {
-					// 			label: 'Autocomplete',
-					// 			route: '/start-autocomplete',
-					// 			type: 'markdown',
-					// 			url: './docs/AUTOCOMPLETE.md',
-					// 		}, {
-					// 			label: 'Finder',
-					// 			route: '/start-finder',
-					// 			type: 'markdown',
-					// 			url: './docs/FINDER.md',
-					// 		}, {
-					// 			label: 'Integration',
-					// 			route: '/start-integration',
-					// 			type: 'markdown',
-					// 			url: './docs/INTEGRATION.md',
-					// 		}
-					// 	]
-					// }
+					},
+					{
+						label: 'Troubleshooting',
+						route: '/troubleshooting',
+						type: 'markdown',
+						url: './docs/TROUBLESHOOTING.md',
+					},
 				]
 			},
 			 {
@@ -223,6 +183,12 @@
 						type: 'markdown',
 						url: './packages/snap-preact/README.md',
 						links: [
+							{
+								label: 'Instantiators',
+								route: '/package-snap-preact-instantiator',
+								type: 'markdown',
+								url: './packages/snap-preact/src/Instantiators/README.md',
+							}, 	
 							{
 								label: 'Typedocs',
 								type: 'external',

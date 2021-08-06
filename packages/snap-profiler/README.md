@@ -4,9 +4,8 @@
 
 A utility for recording how long something takes to complete. `Profiler` is used in finding API response, component rendering and Middleware execution times.
 
----
 
-# Dependency
+## Dependency
 
 Snap Profiler is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
@@ -19,14 +18,12 @@ Snap Profiler is a dependency of [@searchspring/snap-controller](https://github.
 <br>
 
 
-# Installation
+## Installation
 
 ```bash
 npm install --save @searchspring/snap-profiler
 ```
 
-
-# Usage
 ## Import
 ```typescript
 import { Profiler } from '@searchspring/snap-profiler';

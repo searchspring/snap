@@ -4,9 +4,7 @@
 
 Management of Snap state using Mobx.
 
----
-
-# Dependency
+## Dependency
 
 Snap Store MobX is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
@@ -18,14 +16,12 @@ Snap Store MobX is a dependency of [@searchspring/snap-controller](https://githu
 <br>
 
 
-# Installation
+## Installation
 
 ```bash
 npm install --save @searchspring/snap-store-mobx
 ```
 
-
-# Usage
 ## Import
 ```typescript
 import { SearchStore, AutocompleteStore, FinderStore, AbstractStore, StorageStore } from '@searchspring/snap-store-mobx';

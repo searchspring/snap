@@ -1,6 +1,5 @@
 ## Setup
 
-To follow the way of Snap - you must have strong Snap-fu.
 
 ## Prerequisites
 
@@ -10,12 +9,23 @@ To follow the way of Snap - you must have strong Snap-fu.
 
 ## Snapfu
 
+_To follow the way of Snap - you must have strong Snap-fu._
+
 Snapfu is a cli interface for creating a Snap project from a template.
+
+### Install
 
 ```sh
 npm install -g snapfu
-snapfu login
+```
 
+
+### Login
+
+Snapfu will prompt you to authenticate with Github.
+
+```sh
+snapfu login
 ```
 
 ### Initialize new project
@@ -33,7 +43,7 @@ Then select your desired framework, such as Preact.
 
 This will create a new project with git repo.
 
-Next install the packages:
+### Install project dependencies
 
 ```sh
 npm install
@@ -41,31 +51,47 @@ npm install
 
 ## Development
 
-After initializing a snapfu project, it will contain a template ready for you to use. 
+After initializing a Snapfu project, it will contain a template ready for you to use. 
 
 ```sh
 npm run dev
 ```
 
-The local server will run at [https://localhost:3333](https://localhost:3333)
+The local server will run at [https://localhost:3333](https://localhost:3333) and serves the contents of the `/public` directory
 
-You can use one of the following to display the bundle onto a page:
+The development bundle will be served from [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js)
+
+There are two ways we can develop and integration using the bundle:
 
 ### Snapfu extension 
 
 [Snapfu extension](https://github.com/searchspring/snapfu-extension-chrome)
 
-Visit the website you are developing for. Pull down the extension set the mode to `local`. 
-The snapfu extension will load the local bundle [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) onto the website you are developing for. 
+Visit the website you are developing for. Click the extension to enable it and set the mode to `local`, then press `Save`.
 
-The page should automatically update using live reload with your changes.
+The page will reload and will load the local development bundle [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) onto the current website.
+
+The page will automatically reload upon saving any code modifications while `npm run dev` is running.
 
 ### Local mockup
 
-A local `.html` file can be placed into the `/public` directory with the bundle linked:
+Alternatively, you can create a local mockup `index.html` file within the `/public` directory that includes the bundle linked. The mockup can then be viewed at [https://localhost:3333](https://localhost:3333)
 
 ```html
-<script src="https://localhost:3333/dist/bundle.js"></script>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Snap</title>
+	</head>
+	<body>
+		<div id="searchspring-header"></div>
+		<div id="searchspring-content"></div>
+		<div id="searchspring-sidebar"></div>
+	</body>
+
+	<script src="dist/bundle.js"></script>
+</html>
 ```
 
 ## Publishing

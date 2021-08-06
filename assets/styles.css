@@ -152,7 +152,9 @@ table td {
 	margin-top: 2em;
 }
 
-#markdown h2:first-of-type {
+#markdown h2:first-of-type:not(h1 ~ h2),
+#markdown h1 {
+	color: #4937d7;
 	border-bottom: 3px solid #4937d7;
     padding-bottom: 5px;
 	font-size: 2em;
@@ -199,6 +201,13 @@ code:not([class]) {
 .fullscreen-content .img-404 {
 	width: 100%;
 	height: 100%;
+}
+
+@media only screen and (max-width: 1750px) {
+	#markdown {
+		margin: 0px auto;
+		border-radius: 0px;
+	}
 }
 
 @media only screen and (max-width: 767px) {

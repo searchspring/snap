@@ -63,7 +63,7 @@ export class Results extends Component {
 ```
 
 
-### Reactivity 
+## Reactivity 
 
 Each controller has a `store` property. This is a MobX store created from the core [@searchspring/snap-store-mobx](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx) package and we will be rendering its data in our components. 
 

@@ -74,7 +74,7 @@ const searchControllerServices = {
 
 <h3 id="SearchMiddleware">Middleware</h3>
 
-Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various events. There are two ways of doing this, using the Controller's `on` or `use` methods.
+Now that our `SearchController` is defined (using `search` variable), we can optionally attach middleware to hook into various events. There are two ways of doing this, using the Controller's `on` or `plugin` methods.
 
 #### via `on` method:
 
@@ -85,7 +85,7 @@ searchController.on('afterStore', async ({ controller }, next) => {
 })
 ```
 
-#### via `use` method (to attach groups of middleware):
+#### via `plugin` method (to attach groups of middleware):
 
 ```typescript
 const middleware = (controller) => {
@@ -105,7 +105,7 @@ const middleware = (controller) => {
 	});
 };
 
-searchController.use(middleware);
+searchController.plugin(middleware);
 ```
 
 <h3 id="SearchDomTargeter">DomTargeter</h3>

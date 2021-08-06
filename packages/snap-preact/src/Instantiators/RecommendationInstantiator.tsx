@@ -12,7 +12,7 @@ import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { AbstractController, Attachments } from '@searchspring/snap-controller';
 
-import type { SnapControllerServices } from './types';
+import type { SnapControllerServices } from '../types';
 
 export type RecommendationInstantiatorConfig = {
 	components: {

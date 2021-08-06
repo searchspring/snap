@@ -4,9 +4,8 @@
 
 The heart of controlling Search, Autocomplete, & Finder functionality. The Controller is responsible for tying various Snap services together.
 
----
 
-# Dependencies
+## Dependencies
 
 Snap Controller is a top-level package that requires the following dependencies as services:
 
@@ -30,7 +29,7 @@ Snap Controller is a top-level package that requires the following dependencies 
 
 <br>
 
-# Installation
+## Installation
 
 To install the `snap-controller` package and it's services:
 
@@ -38,7 +37,6 @@ To install the `snap-controller` package and it's services:
 npm install --save @searchspring/snap-controller @searchspring/snap-client @searchspring/snap-store-mobx @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger
 ```
 
-# Usage
 
 ## Instantiation
 Each `Controller` must be passed a configuration object as the first parameter to the constructor, and a services object (dependencies) as the second. The contents of these objects will depend on which type of `Controller` is being instantiated. For example, a `SearchController` would usually be paired with a `SearchStore` service, and would take a `SearchControllerConfig` configuration object.
@@ -157,17 +155,20 @@ controller.log.warn('THIS IS A WARNING!');
 
 Many logs are supressed depending on a development `environment` of the controller instance. The Logger documentation provides more details about the various methods, colors and emoji available.
 
-# Controller Types
+## Controller Types
 Each `Controller` has a unique configuration and set of default events; it may also provide additional methods for specific functionality.
 
-## `Abstract`
+### Abstract
 The base class for all controllers.
 
-## `Autocomplete`
+### Autocomplete
 Used for autocomplete searches.
 
-## `Finder`
+### Finder
 A specialized controller used for building custom product finders.
 
-## `Search`
+### Recommendation
+The standard controller used for recommendation profiles.
+
+### Search
 The standard controller used on search pages and PLPs.

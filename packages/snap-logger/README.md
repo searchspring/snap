@@ -5,7 +5,7 @@
 Simple logger for debugging
 
 <img src="https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true" />
-
+<br/><br/>
 <details>
 	<summary>Sample code</summary>
 	<br/>
@@ -34,10 +34,10 @@ logger.dev(`%c ${logger.emoji.vortex} %c${logger.prefix}%c${'magical text'}`,
 ```
 </details>
 
----
 
 
-# Dependency
+
+## Dependency
 
 Snap Logger is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
@@ -46,16 +46,14 @@ Snap Logger is a dependency of [@searchspring/snap-controller](https://github.co
 	<br/>
 	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true" />
 </details>
-<br>
 
-# Installation
+## Installation
 
 ```bash
 npm install --save @searchspring/snap-logger
 ```
 
 
-# Usage
 
 ## Import
 ```typescript
@@ -81,7 +79,7 @@ const logger = new Logger();
 logger.warn('this is a warning');
 ```
 
-## `setNamespace` method
+### `setNamespace` method
 Sets prefix instead of defining a prefix in the constructor.
 ```typescript
 const logger = new Logger();
@@ -95,7 +93,7 @@ logger.warn('Hello');
 // ' [search] :: Hello'
 ```
 
-## `setMode` method
+### `setMode` method
 The default logging mode is `production`. 
 
 When set to production, logs using `dev` will not be visible. This also includes `image`, `imageText`, `debug`, and `profile`.
@@ -118,34 +116,34 @@ enum LogMode {
 }
 ```
 
-## `error` method
+### `error` method
 This method takes any number of parameters and logs them to the console. It is best to use this method for error handling.
 ```typescript
 logger.error('error!!!');
 logger.error('text about the error', errorObject, 'more', 'text');
 ```
 
-## `warn` method
+### `warn` method
 This method takes any number of parameters and logs them to the console. It is best to use this method for displaying warnings.
 ```typescript
 logger.warn('warning!!!');
 logger.warn('warning', warningObject, 'more text');
 ```
 
-## `dev` method
+### `dev` method
 This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, the `dev` logs will not be displayed.
 
 ```typescript
 logger.dev('dev')
 ```
 
-## `debug` method
+### `debug` method
 This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, `debug` logs will not be displayed.
 
 ```typescript
 logger.debug('debug');
 ```
-## `image` method
+### `image` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `image` logs will not be displayed.
 
 ```typescript
@@ -156,7 +154,7 @@ logger.image({
 });
 ```
 
-## `imageText` method
+### `imageText` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `imageText` logs will not be displayed.
 
 ```typescript
@@ -167,7 +165,7 @@ logger.imageText({
 });
 ```
 
-## `profile` method
+### `profile` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes a Snap profile. If mode is set to `LogMode.PRODUCTION`, `profile` logs will not be displayed.
 
 See [@searchspring/snap-profiler](https://github.com/searchspring/snap/tree/main/packages/snap-profiler) <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
@@ -194,7 +192,7 @@ searchProfile.stop();
 logger.profile(searchProfile)
 ```
 
-## `emoji` property
+### `emoji` property
 The `emoji` property contains various emojis that can be used
 
 The following emojis are available:
@@ -222,7 +220,7 @@ const emoji = {
 };
 ```
 
-## `colors` property
+### `colors` property
 The `colors` property contains various colors that can be used
 
 The following colors are available:

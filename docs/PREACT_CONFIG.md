@@ -13,7 +13,7 @@ import { Snap } from '@searchspring/snap-preact';
 ```
 
 
-### Configuration
+## Configuration
 
 Lets define our config. The config that is provided to Snap will create and return all services that are specified in the config. In this example, we will be creating a Search and Autocomplete service.
 
@@ -74,7 +74,7 @@ Lets go over a few things.
 
 `config.controllers` specifies all of the controllers that we wish to create. In this this example we are creating a Search and Autocomplete controller. In addition, Finder and Recommendation services can also be specified.
 
-#### Search
+### Search
 
 Lets look at the Search controller that we are creating.
 
@@ -98,7 +98,7 @@ We also have a `targets` array of Target objects. A Target object defines an ent
 In our example, we are rendering a `<Content>` component into `<div id="searchspring-content">` and the `<Sidebar>` component into `<div id="searchspring-sidebar">`
 
 
-#### Autocomplete
+### Autocomplete
 
 We're also creating an Autocomplete controller in a similar function.
 

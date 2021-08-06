@@ -5,15 +5,13 @@
 Snap Preact is an abstraction layer that provides a config based interface for creating a Searchspring integration quickly.
 
 
-# Installation
+## Installation
 
 To install the `snap-preact` package and it's dependencies:
 
 ```bash
 npm install --save @searchspring/snap-preact
 ```
-
-# Usage
 
 ## Instantiation
 
@@ -259,36 +257,3 @@ An object containing all controllers that have been created.
 ### recommendations
 A reference to `RecommendationInstantiator` instance if creating recommendation instances.
 
-
-## RecommendationInstantiator
-The `RecommendationInstantiator` class handles the targetting and creation of recommendation controllers from querying the DOM.
-
-
-### controllers property
-
-The `controllers` property contains an object of all recommendation instance that has been found on the page. Each instance will have its own `RecommendationController` instance created and added to the `controllers` object. 
-
-All controllers can be accessed via the `controllers` object where the key is the id of the controller that was created. The controller id is generated based on the `profile` attribute and it's occurance count (starting at 0.) It follows the following format: 
-
-```typescript
-id: `recommend_${tag + (profileCount[tag] - 1)}`,
-```
-
-For example, if the page contains the following single recommendation instance:
-
-```html
-<script type="searchspring/personalized-recommendations" profile="trending"></script>
-```
-
-The controller id would be `recommend_trending0` and can be accesed as follows:
-
-```typescript
-import { Snap } from '@searchspring/snap-preact';
-
-const snap = new Snap(config);
-const recommendations = snap.recommendations;
-const controllers = recommendations.controllers;
-const { recommend_trending0 } = controllers;
-
-console.log("recommend_trending0", recommend_trending0)
-```

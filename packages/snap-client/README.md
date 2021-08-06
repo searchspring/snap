@@ -2,21 +2,18 @@
 
 Simple Javascript client for communicating with the Searchspring Snap API.
 
----
-
-# Quick Links
+## Quick Links
 
 [Snap API docs](https://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
 
 [Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API
 
-# Installation
+## Installation
 
 ```bash
 npm install --save @searchspring/snap-client
 ```
 
-# Usage
 ## Import
 ```typescript
 import { Client } from '@searchspring/snap-client';

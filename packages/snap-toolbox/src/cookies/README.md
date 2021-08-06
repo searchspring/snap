@@ -5,7 +5,7 @@ An interface for setting and getting cookies.
 import { cookies } from '@searchspring/snap-toolbox';
 ```
 
-### `set` function
+## `set` function
 Set a cookie.
 
 ```typescript
@@ -17,7 +17,7 @@ const expires = 31536000000; // 1 year
 cookies.set(name, value, sameSite, expires)
 ```
 
-### `get` function
+## `get` function
 Get a cookie.
 
 ```typescript
@@ -26,7 +26,7 @@ const name = 'myCookie';
 cookies.get(name)
 ```
 
-### `unset` function
+## `unset` function
 Remove a cookie.
 
 ```typescript
