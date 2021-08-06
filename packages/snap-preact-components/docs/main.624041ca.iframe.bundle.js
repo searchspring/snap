@@ -19060,7 +19060,7 @@
 							var value = filter.value,
 								type = 'value';
 							return (
-								'object' == typeof filter.value && ((type = 'range'), (value = { low: filter.value.rangeLow, high: filter.value.rangeHigh })),
+								'object' == typeof filter.value && ((type = 'range'), (value = { low: +filter.value.rangeLow, high: +filter.value.rangeHigh })),
 								{ type, field: filter.field, label: filter.filterValue, value }
 							);
 						}),
@@ -22562,7 +22562,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.23' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.24' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22589,7 +22589,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.23');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.24');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23178,7 +23178,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.23]',
+								text: '[0.3.24]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
