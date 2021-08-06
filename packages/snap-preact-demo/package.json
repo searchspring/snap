@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.3.25",
+	"version": "0.3.26",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -17,8 +17,8 @@
 		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.3.25",
-		"@searchspring/snap-preact-components": "^0.3.25",
+		"@searchspring/snap-preact": "^0.3.26",
+		"@searchspring/snap-preact-components": "^0.3.26",
 		"mobx": "^6.3.2",
 		"mobx-react": "^7.2.0",
 		"preact": "^10.5.14"
