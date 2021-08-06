@@ -90,6 +90,18 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		truncateTitle: {
+			defaultValue: {},
+			description: 'truncate title options object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: {
+				type: 'object',
+			},
+		},
 		layout: {
 			description: 'Results layout',
 			defaultValue: Layout.GRID,

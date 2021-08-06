@@ -79,3 +79,10 @@ The `layout` prop specifies if this Result will be contained in a `grid` or `lis
 ```jsx
 <Result result={controller.store.results[0]} layout={'grid'} />
 ```
+
+### truncateTitle
+The `truncateTitle` prop utililizes the truncate filter from the snap-toolbox to allow you truncate the product title at a certain character length, and optionally append an additional string such as "..."
+
+```jsx
+<Result result={controller.store.results[0]} truncateTitle={ limit: 5, append: '...' } />
+```
