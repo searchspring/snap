@@ -64,7 +64,7 @@ describe('Tracking', () => {
 
 	it('tracked product view', () => {
 		cy.visit('http://localhost:4444/product.html');
-
+		cy.wait(500);
 		cy.wait(`@${BeaconType.PRODUCT}`).should((interception) => {
 			expect(interception.state).to.equal('Complete');
 			expect(interception.response.body).to.have.property('success').to.equal(true);
@@ -94,7 +94,7 @@ describe('Tracking', () => {
 
 	it('tracked cart view', () => {
 		cy.visit('http://localhost:4444/cart.html');
-
+		cy.wait(500);
 		cy.wait(`@${BeaconType.CART}`).should((interception) => {
 			expect(interception.state).to.equal('Complete');
 			expect(interception.response.body).to.have.property('success').to.equal(true);
@@ -131,7 +131,7 @@ describe('Tracking', () => {
 
 	it('tracked order transaction', () => {
 		cy.visit('http://localhost:4444/order.html');
-
+		cy.wait(500);
 		cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
 			expect(interception.state).to.equal('Complete');
 			expect(interception.response.body).to.have.property('success').to.equal(true);
