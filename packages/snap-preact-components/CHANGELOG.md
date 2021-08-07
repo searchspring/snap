@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.28 (2021-08-07)
+
+
+### Bug Fixes
+
+* **github-pages:** disable jekyll ([8976091](https://github.com/searchspring/snap/commit/8976091670f96f31ac4ba9c980c134ef39b79361))
+
+
+
+
+
 ## 0.3.27 (2021-08-07)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
