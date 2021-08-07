@@ -65,7 +65,7 @@ searchController.on('init', async ({ controller }, next) => {
 })
 ```
 
-### `retarget` method
+## `retarget` method
 If the DOM is loaded asynchronously and the target element is not present at the time of when an instance of DomTargeter is created, it is recommended to retarget when the DOMContentLoaded event has been invoked.
 
 ```typescript

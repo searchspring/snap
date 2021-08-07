@@ -15,9 +15,7 @@ npm install --save-dev @searchspring/url-manager
 import { UrlManager, UrlTranslator } from '@searchspring/url-manager';
 ```
 
-## Usage
-
-### Instantiation
+## Instantiation
 
 The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.
 
@@ -29,7 +27,7 @@ const urlManager = new UrlManager(new UrlTranslator());
 
 Depending on the translator, the instantiated url manager will automatically start tracking from the browser URL.
 
-### Navigate to another location using transforms.
+## Navigate to another location using transforms.
 
 Let's add a new parameter, `page=2`, to the browser's address bar.
 
@@ -77,15 +75,15 @@ const newManager = urlManager
 	.merge('facets.color', 'red');
 ```
 
-### Href
+## `href` property
 
-You can access a url manager's href at any time with
+You can access a url manager's href property at any time with
 
 ```js
 urlManager.href;
 ```
 
-### Many copies
+## Many copies
 
 There may be cases where you want multiple URL states stored for various purposes. Since
 `set`, `merge`, and `remove` create modified copies, instances can be created and utilized from multiple sources. Snap `stores` already handle the process of attaching `UrlManager' instances where needed, for example for pagination, facets, sorting, etc... Here is an example of how creating them for a facet's individual values might look:
@@ -145,7 +143,7 @@ class FacetValue {
 
 See [Linkers](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers) for more info.
 
-### Subscribe to URL changes:
+## Subscribe to URL changes
 
 You can subscribe to URL changes like so:
 
@@ -163,7 +161,7 @@ The callback is passed two parameters: `prev` and `next`.
 
 `prev` is the previous state from this urlManager instance.
 
-### Auto-synchronize with URL change
+## Auto-synchronize with URL change
 
 Remember that url manager's internal state is never directly mutated, but instead, transforms return a fresh copy with a new
 state. However, the internal state is always a modification on the _current_ URL.

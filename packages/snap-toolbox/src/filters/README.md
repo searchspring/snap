@@ -39,7 +39,7 @@ const formattedPrice = filters.formatNumber(value, {
 // '12,999,99 kr'
 ```
 
-### `currency` method
+## `currency` method
 The `currency` method is a wrapper for the `formatNumber` method with the following altered default options:
 
 ```typescript
@@ -65,7 +65,7 @@ const formattedPrice = filters.currency(value, {
 ```
 
 
-### `handleize` method
+## `handleize` method
 Given a string, returns a string that has been converted to lower case, without any symbols and special characters, and spaces - these are replaced with with `'-'`.
 
 Typical usage would be for generating URL-safe parameters.
@@ -76,7 +76,7 @@ const handled = filters.handleize(value);
 // 'hello-world'
 ```
 
-### `stripHTML` method
+## `stripHTML` method
 Given a string containing HTML, returns a string that does not contain any HTML tags.
 
 ```typescript
@@ -85,7 +85,7 @@ const handled = filters.stripHTML(value);
 // 'Hello World!!'
 ```
 
-### `truncate` method
+## `truncate` method
 Truncate a string to a specific length and optionally append additional string to the end. The function will not break words, but will always ensure the limit is smaller than the value length.
 
 ```typescript

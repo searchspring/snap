@@ -25,7 +25,7 @@ import type {
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
-import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
+import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices } from './types';
 
 type ExtendedTarget = Target & {

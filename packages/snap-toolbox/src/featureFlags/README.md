@@ -5,10 +5,10 @@ This utility provides a way to check for browser feature support.
 import { getFlags, featureFlags } from '@searchspring/snap-toolbox';
 ```
 
-### `getFlags` method
+## `getFlags` method
 Returns an object with the following functions:
 
-#### `cors` function
+### `cors` function
 Tests if the browser supports cross origin (>=IE10).
 
 When using `cors`, the `getFlags` function accepts a `userAgent` to test.
@@ -20,7 +20,7 @@ if (flags.cors()) {
 }
 ```
 
-#### `cookies` function
+### `cookies` function
 Tests if the browser supports cookies.
 
 ```typescript
@@ -30,7 +30,7 @@ if (flags.cookies()) {
 }
 ```
 
-#### `storage` function
+### `storage` function
 Tests if the browser supports LocalStorage and SessionStorage.
 
 ```typescript
@@ -40,7 +40,7 @@ if (flags.storage()) {
 }
 ```
 
-### `featureFlags` property
+## `featureFlags` property
 `featureFlags` utilizes `getFlags` to check all flags and return an object containing feature flags eligibility.
 
 ```typescript

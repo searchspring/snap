@@ -6,9 +6,8 @@ The Snap Event Manager is used to create events and attach middleware to them.
 
 When used as a service of a controller it allows you to hook into controller events at critical times in the life cycle. It also allows for custom events to be used throughout your implementation.
 
----
 
-# Dependency
+## Dependency
 
 Snap Event Manager is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
 
@@ -20,13 +19,12 @@ Snap Event Manager is a dependency of [@searchspring/snap-controller](https://gi
 </details>
 <br>
 
-# Installation
+## Installation
 
 ```bash
 npm install --save @searchspring/snap-event-manager
 ```
 
-# Usage
 ## Import
 ```typescript
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -92,7 +90,7 @@ eventManager.fire('interestingEvent', { data: { some: 'string' } } );
 ```
 
 After firing the `interestingEvent` event, the following would be displayed in the console:
-```
+```text
 first middleware start
 second middleware start
 third middleware start

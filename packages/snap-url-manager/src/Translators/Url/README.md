@@ -1,7 +1,6 @@
 # UrlTranslator
-### Introduction
 
-This translator uses query strings and hash fragments in combination with pushState (via History API) during navigation. `UrlState` is read in and output via query parameters and hash fragments in the URL. This is accomplished via the `serialize` and `deserialize` methods.
+The `UrlTranslator` translator uses query strings and hash fragments in combination with pushState (via History API) during navigation. `UrlState` is read in and output via query parameters and hash fragments in the URL. This is accomplished via the `serialize` and `deserialize` methods.
 
 ```js
 const urlTranslator = new UrlTranslator();
@@ -56,7 +55,7 @@ console.log(state);
 
 The `serialize` and `deserialize` methods are abstracted away by the `UrlManager` and will typically never be used in this way, but have been included in here for insight.
 
-### Configuration
+## Configuration
 
 | option | description | default value |
 |---|---|:---:|
