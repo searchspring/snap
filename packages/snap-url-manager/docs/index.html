@@ -72,11 +72,8 @@
 				</a>
 				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">UrlManager</span><span style="color: #000000">, </span><span style="color: #001080">UrlTranslator</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/url-manager&#039;</span><span style="color: #000000">;</span>
 </code></pre>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
 				<a href="#instantiation" id="instantiation" style="color: inherit; text-decoration: none;">
-					<h3>Instantiation</h3>
+					<h2>Instantiation</h2>
 				</a>
 				<p>The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we&#39;ll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.</p>
 				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators">Translators</a> for more info.</p>
@@ -84,7 +81,7 @@
 </code></pre>
 				<p>Depending on the translator, the instantiated url manager will automatically start tracking from the browser URL.</p>
 				<a href="#navigate-to-another-location-using-transforms" id="navigate-to-another-location-using-transforms" style="color: inherit; text-decoration: none;">
-					<h3>Navigate to another location using transforms.</h3>
+					<h2>Navigate to another location using transforms.</h2>
 				</a>
 				<p>Let&#39;s add a new parameter, <code>page=2</code>, to the browser&#39;s address bar.</p>
 				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">merge</span><span style="color: #000000">({ </span><span style="color: #001080">page:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> }).</span><span style="color: #795E26">go</span><span style="color: #000000">();</span>
@@ -111,14 +108,14 @@
 <span style="color: #000000">    .</span><span style="color: #795E26">merge</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;facets.color&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;blue&#039;</span><span style="color: #000000">)</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">merge</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;facets.color&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #000000">);</span>
 </code></pre>
-				<a href="#href" id="href" style="color: inherit; text-decoration: none;">
-					<h3>Href</h3>
+				<a href="#href-property" id="href-property" style="color: inherit; text-decoration: none;">
+					<h2><code>href</code> property</h2>
 				</a>
-				<p>You can access a url manager&#39;s href at any time with</p>
+				<p>You can access a url manager&#39;s href property at any time with</p>
 				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">;</span>
 </code></pre>
 				<a href="#many-copies" id="many-copies" style="color: inherit; text-decoration: none;">
-					<h3>Many copies</h3>
+					<h2>Many copies</h2>
 				</a>
 				<p>There may be cases where you want multiple URL states stored for various purposes. Since
 				<code>set</code>, <code>merge</code>, and <code>remove</code> create modified copies, instances can be created and utilized from multiple sources. Snap <code>stores</code> already handle the process of attaching `UrlManager&#39; instances where needed, for example for pagination, facets, sorting, etc... Here is an example of how creating them for a facet&#39;s individual values might look:</p>
@@ -167,7 +164,7 @@
 </code></pre>
 				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers">Linkers</a> for more info.</p>
 				<a href="#subscribe-to-url-changes" id="subscribe-to-url-changes" style="color: inherit; text-decoration: none;">
-					<h3>Subscribe to URL changes:</h3>
+					<h2>Subscribe to URL changes</h2>
 				</a>
 				<p>You can subscribe to URL changes like so:</p>
 				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">((</span><span style="color: #001080">prev</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
@@ -179,7 +176,7 @@
 				<p><code>next</code> is the new state formed by a combination of the browsers URL, as well as any transformations done to the <code>urlManager</code> instance after it was either instantiated or copied using another urlManager&#39;s <code>copy</code> function.</p>
 				<p><code>prev</code> is the previous state from this urlManager instance.</p>
 				<a href="#auto-synchronize-with-url-change" id="auto-synchronize-with-url-change" style="color: inherit; text-decoration: none;">
-					<h3>Auto-synchronize with URL change</h3>
+					<h2>Auto-synchronize with URL change</h2>
 				</a>
 				<p>Remember that url manager&#39;s internal state is never directly mutated, but instead, transforms return a fresh copy with a new
 				state. However, the internal state is always a modification on the <em>current</em> URL.</p>

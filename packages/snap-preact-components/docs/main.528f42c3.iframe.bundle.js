@@ -2322,7 +2322,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(41748),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(63399),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (__assign =
@@ -2641,7 +2641,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(41748),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(63399),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -3755,7 +3755,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -4243,7 +4243,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -4625,7 +4625,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -5135,7 +5135,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(40574),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -5722,7 +5722,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -6372,7 +6372,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -6834,7 +6834,7 @@
 				Result = __webpack_require__(48001),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -7752,7 +7752,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -9734,7 +9734,7 @@
 					return (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, (0, emotion_react_browser_esm.tZ)('em', null, term));
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -10110,7 +10110,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11164,7 +11164,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11508,7 +11508,7 @@
 						: null;
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12272,7 +12272,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12652,7 +12652,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(11881),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(41748),
+				snapify = __webpack_require__(63399),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -15773,7 +15773,7 @@
 				);
 			}
 		},
-		41748: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		63399: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -22562,7 +22562,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.25' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.26' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22589,7 +22589,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.25');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.26');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22980,7 +22980,6 @@
 							(this.targets = {}),
 							(this.client = client),
 							(this.tracker = tracker),
-							(this.eventManager = new EventManager()),
 							(this.config = config),
 							(this.logger = logger),
 							!this.config)
@@ -23178,7 +23177,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.25]',
+								text: '[0.3.26]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {

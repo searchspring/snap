@@ -64,6 +64,7 @@
 				<p><a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a></p>
 				<p>Simple logger for debugging</p>
 				<img src="https://github.com/searchspring/snap/blob/main/images/logger-example.png?raw=true" />
+				<br/><br/>
 				<details>
 					<summary>Sample code</summary>
 					<br/>
@@ -89,9 +90,8 @@
 <span style="color: #A31515">`color: </span><span style="color: #0000FF">${</span><span style="color: #001080">logger</span><span style="color: #000000FF">.</span><span style="color: #001080">colors</span><span style="color: #000000FF">.</span><span style="color: #001080">bluegreen</span><span style="color: #0000FF">}</span><span style="color: #A31515">; font-weight: bold;`</span><span style="color: #000000">);</span>
 </code></pre>
 				</details>
-				<hr>
 				<a href="#dependency" id="dependency" style="color: inherit; text-decoration: none;">
-					<h1>Dependency</h1>
+					<h2>Dependency</h2>
 				</a>
 				<p>Snap Logger is a dependency of <a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller">@searchspring/snap-controller</a> <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a></p>
 				<details>
@@ -99,15 +99,11 @@
 					<br/>
 					<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true" />
 				</details>
-				<br>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h1>Installation</h1>
+					<h2>Installation</h2>
 				</a>
 				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-logger</span>
 </code></pre>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h1>Usage</h1>
-				</a>
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h2>Import</h2>
 				</a>
@@ -132,7 +128,7 @@
 <span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;this is a warning&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#setnamespace-method" id="setnamespace-method" style="color: inherit; text-decoration: none;">
-					<h2><code>setNamespace</code> method</h2>
+					<h3><code>setNamespace</code> method</h3>
 				</a>
 				<p>Sets prefix instead of defining a prefix in the constructor.</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Logger</span><span style="color: #000000">();</span>
@@ -146,7 +142,7 @@
 <span style="color: #008000">// &#039; [search] :: Hello&#039;</span>
 </code></pre>
 				<a href="#setmode-method" id="setmode-method" style="color: inherit; text-decoration: none;">
-					<h2><code>setMode</code> method</h2>
+					<h3><code>setMode</code> method</h3>
 				</a>
 				<p>The default logging mode is <code>production</code>. </p>
 				<p>When set to production, logs using <code>dev</code> will not be visible. This also includes <code>image</code>, <code>imageText</code>, <code>debug</code>, and <code>profile</code>.</p>
@@ -162,33 +158,33 @@
 <span style="color: #000000">}</span>
 </code></pre>
 				<a href="#error-method" id="error-method" style="color: inherit; text-decoration: none;">
-					<h2><code>error</code> method</h2>
+					<h3><code>error</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. It is best to use this method for error handling.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error!!!&#039;</span><span style="color: #000000">);</span>
 <span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;text about the error&#039;</span><span style="color: #000000">, </span><span style="color: #001080">errorObject</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;more&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;text&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#warn-method" id="warn-method" style="color: inherit; text-decoration: none;">
-					<h2><code>warn</code> method</h2>
+					<h3><code>warn</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. It is best to use this method for displaying warnings.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warning!!!&#039;</span><span style="color: #000000">);</span>
 <span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">warn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;warning&#039;</span><span style="color: #000000">, </span><span style="color: #001080">warningObject</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;more text&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#dev-method" id="dev-method" style="color: inherit; text-decoration: none;">
-					<h2><code>dev</code> method</h2>
+					<h3><code>dev</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. If mode is set to <code>LogMode.PRODUCTION</code>, the <code>dev</code> logs will not be displayed.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">dev</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dev&#039;</span><span style="color: #000000">)</span>
 </code></pre>
 				<a href="#debug-method" id="debug-method" style="color: inherit; text-decoration: none;">
-					<h2><code>debug</code> method</h2>
+					<h3><code>debug</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. If mode is set to <code>LogMode.PRODUCTION</code>, <code>debug</code> logs will not be displayed.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;debug&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#image-method" id="image-method" style="color: inherit; text-decoration: none;">
-					<h2><code>image</code> method</h2>
+					<h3><code>image</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to <code>LogMode.PRODUCTION</code>, <code>image</code> logs will not be displayed.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">image</span><span style="color: #000000">({ </span>
@@ -198,7 +194,7 @@
 <span style="color: #000000">});</span>
 </code></pre>
 				<a href="#imagetext-method" id="imagetext-method" style="color: inherit; text-decoration: none;">
-					<h2><code>imageText</code> method</h2>
+					<h3><code>imageText</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to <code>LogMode.PRODUCTION</code>, <code>imageText</code> logs will not be displayed.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">imageText</span><span style="color: #000000">({</span>
@@ -208,7 +204,7 @@
 <span style="color: #000000">});</span>
 </code></pre>
 				<a href="#profile-method" id="profile-method" style="color: inherit; text-decoration: none;">
-					<h2><code>profile</code> method</h2>
+					<h3><code>profile</code> method</h3>
 				</a>
 				<p>This method takes any number of parameters and logs them to the console. The first parameter is special and takes a Snap profile. If mode is set to <code>LogMode.PRODUCTION</code>, <code>profile</code> logs will not be displayed.</p>
 				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-profiler">@searchspring/snap-profiler</a> <a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a></p>
@@ -233,7 +229,7 @@
 <span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">profile</span><span style="color: #000000">(</span><span style="color: #001080">searchProfile</span><span style="color: #000000">)</span>
 </code></pre>
 				<a href="#emoji-property" id="emoji-property" style="color: inherit; text-decoration: none;">
-					<h2><code>emoji</code> property</h2>
+					<h3><code>emoji</code> property</h3>
 				</a>
 				<p>The <code>emoji</code> property contains various emojis that can be used</p>
 				<p>The following emojis are available:</p>
@@ -258,7 +254,7 @@
 <span style="color: #000000">};</span>
 </code></pre>
 				<a href="#colors-property" id="colors-property" style="color: inherit; text-decoration: none;">
-					<h2><code>colors</code> property</h2>
+					<h3><code>colors</code> property</h3>
 				</a>
 				<p>The <code>colors</code> property contains various colors that can be used</p>
 				<p>The following colors are available:</p>
