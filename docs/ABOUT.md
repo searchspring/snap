@@ -4,7 +4,7 @@ Snap is not an acronym! Snap is Searchspring's open source SDK for integrating i
 
 Snap supports Searchspring's latest features and API release for lightning fast performance.
 
-Snap also supports integration with modern front end frameworks such as React and Vue. In addition, we've also released a full [React component library](/#/components-preact) to get you up and running quickly. 
+Snap also supports integration with modern front end frameworks such as React and Vue. In addition, we've also released a full [React component library](https://searchspring.github.io/snap/#/components-preact) to get you up and running quickly. 
 
 
 ## Getting Started
