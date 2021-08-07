@@ -11,7 +11,7 @@
 
 _To follow the way of Snap - you must have strong Snap-fu._
 
-Snapfu is a cli interface for creating a Snap project from a template.
+Snapfu is a CLI interface for creating a Snap project from a template. You do not need to utilize Snapfu to develop using Snap packages, but it does simplify the process.
 
 ### Install
 

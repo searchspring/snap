@@ -25,11 +25,12 @@
 	<script>
 		function modifyLinks(markdown) {
 			var replaces = [
+				{ a: "(https://searchspring.github.io/snap/#/start-setup)", b: "(#/start-setup)"},
 				{ a: "(https://snapi.kube.searchspring.io/api/v1/#tag/Meta)", b: "(#/api-docs#Meta)"},
 				{ a: "(https://snapi.kube.searchspring.io/api/v1/)", b: "(#/api-docs)"},
 				{ a: "(https://searchspring.github.io/snapi-explorer/)", b: "(#/api-explorer)"},	
 				
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/SEARCH.md)", b: "(#/start-search)"},
+				{ a: "(https://github.com/searchspring/snap/blob/main/docs/SEARCH.md)", b: "(#/advanced-search)"},
 
 				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true", b: "../../images/snap-dependencies.jpg"},
 				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true", b: "../../images/snap-dependencies.png"},
@@ -66,7 +67,7 @@
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(#/package-urlManager-translators-queryString)"},
 				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(#/package-urlManager-linkers-react)"},
 
-				{ a: "## Documentation\n\nFor all Snap documentation, see the [Snap Docs](https://searchspring.github.io/snap/).", b: ""},
+				{ a: "(https://searchspring.github.io/snap/)", b: "(#/)"},
 			];
 			replaces.forEach(function(replace) {
 				markdown = markdown.replaceAll(replace.a, replace.b);
@@ -102,25 +103,25 @@
 						links: [
 							{
 								label: 'Configuration',
-								route: '/start-preact',
+								route: '/start-preact-config',
 								type: 'markdown',
 								url: './docs/PREACT_CONFIG.md'
 							},
 							{
 								label: 'Controller Props',
-								route: '/start-controller-prop',
+								route: '/start-preact-controller-props',
 								type: 'markdown',
 								url: './docs/PREACT_CONTROLLER_PROPS.md'
 							},
 							{
 								label: 'Displaying Data',
-								route: '/start-displaying-data',
+								route: '/start-preact-displaying-data',
 								type: 'markdown',
 								url: './docs/PREACT_DISPLAYING_DATA.md'
 							},
 							{
 								label: 'Events',
-								route: '/start-events',
+								route: '/start-preact-events',
 								type: 'markdown',
 								url: './docs/PREACT_EVENTS.md'
 							},
@@ -178,14 +179,14 @@
 				categoryName: 'Packages',
 				links: [
 					{
-						label: 'Snap Preact',
-						route: '/package-snap-preact',
+						label: 'Preact',
+						route: '/package-preact',
 						type: 'markdown',
 						url: './packages/snap-preact/README.md',
 						links: [
 							{
 								label: 'Instantiators',
-								route: '/package-snap-preact-instantiator',
+								route: '/package-preact-instantiator',
 								type: 'markdown',
 								url: './packages/snap-preact/src/Instantiators/README.md',
 							}, 	

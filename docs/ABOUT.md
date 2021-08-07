@@ -9,7 +9,7 @@ Snap also supports integration with modern front end frameworks such as React an
 
 ## Getting Started
 
-Check out the [Getting Started](/#/start-setup) guide to jump right in!
+Check out the [Getting Started](https://searchspring.github.io/snap/#/start-setup) guide to jump right in!
 
 ## Contributing
 

@@ -7,15 +7,15 @@ The Snap instance that we create will return a `controllers` object with all of 
 There are two ways we can attach events to our controllers. Using the config, or directly on the controller. 
 
 
-## Config Attachments
+## Config Middleware
 
-On the config we can specify the `use` object to include Attachments using `on` or `plugin`
+On the config we can specify middleware via `plugin` or `on`.
 
-### use.on
+### on
 
 The `on` property is an object that has event name(s) as the key and the middleware function as the value.
 
-The value can also be an array of functions is attaching multiple middleware to a single event. 
+The value can also be an array of functions if attaching multiple middleware to a single event. 
 
 ```typescript
 const config = {
@@ -29,21 +29,22 @@ const config = {
 			{
 				config: {
 					id: 'search',
-                    use: {
-                        on: {
-                            'init': (eventData) => {
-                                console.log("runs on init", eventData)
-                            }
-                        }
-                    }
+					on: {
+						init: async(eventData, next) => {
+							console.log("runs on init", eventData);
+							await next();
+						}
+					}
 				},
 				targets: [
 					{
+						name: 'content',
 						selector: '#searchspring-content',
 						component: Content,
 						hideTarget: true,
 					},
 					{
+						name: 'sidebar',
 						selector: '#searchspring-sidebar',
 						component: Sidebar,
 						hideTarget: true,
@@ -56,9 +57,9 @@ const config = {
 ```
 
 
-### use.plugin
+### plugin
 
-The `plugin` property is a function (or array of functions) that returns the controller to then attach multiple middleware events.
+The `plugin` property is a function (or array of functions) that returns the controller to then access or attach middleware events.
 
 ```typescript
 const config = {
@@ -72,13 +73,12 @@ const config = {
 			{
 				config: {
 					id: 'search',
-                    use: {
-                        plugin: (controller) => {
-                            controller.on('init', (eventData) => {
-                                console.log("runs on init", eventData)
-                            })
-                        }
-                    }
+					plugin: (controller) => {
+						controller.on('init', async(eventData, next) => {
+							console.log("runs on init", eventData);
+							await next();
+						});
+					}
 				},
 				targets: [
 					{
@@ -105,10 +105,10 @@ Alternatively we can also attach events to our controllers after they have been 
 Lets use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
 
 ```typescript
-const snap = new Snap(config)
+const snap = new Snap(config);
 const { search } = snap.controllers;
 
-console.log("Search Controller: ", search)
+console.log("Search Controller: ", search);
 ```
 
 We can now attach middleware events in the following methods:
@@ -116,21 +116,33 @@ We can now attach middleware events in the following methods:
 ### controller.on
 
 ```typescript
-search.on('init', (eventData) => {
-    console.log("runs on init", eventData);
-})
+search.on('afterSearch', async(eventData, next) => {
+	console.log("runs on afterSearch", eventData);
+	await next();
+});
 ```
 
 ### controller.plugin
 
 ```typescript
 search.plugin((controller) => {
-    controller.on('init', (eventData) => {
-        console.log("runs on init", eventData);
-    })
-})
+	controller.on('afterStore', async(eventData, next) => {
+		console.log("runs on afterStore", eventData);
+		await next();
+	});
+});
 ```
+Note: It is possible that the init event has already fired by this time (should a target be found immediately by a search controller). For this reason it is recommended to just use a plugin to access the controller directly after creation.
 
+```typescript
+search.plugin((controller) => {
+	controller.store.custom.variables = {
+		currency: {
+			symbol: '$'
+		}
+	}
+});
+```
 
 ## Available Events
 
@@ -138,7 +150,7 @@ search.plugin((controller) => {
 
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -154,7 +166,7 @@ search.plugin((controller) => {
 
 ### afterStore
 - Called with `eventData` = { controller, request, response }
-- Always invoked after data has been stored in mobx store
+- Always invoked after data has been stored in Mobx store
 
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 
@@ -166,7 +178,7 @@ search.plugin((controller) => {
 
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -181,18 +193,18 @@ search.plugin((controller) => {
 
 ### afterStore
 - Called with `eventData` = { controller, request, response }
-- Always invoked after data has been stored in mobx store
+- Always invoked after data has been stored in Mobx store
 
 ### focusChange
 - Called with `eventData` = { controller }
-- Invoked when an input has been focused
+- Invoked when a new input element has been focused
 
 
 ## Finder Events
 
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -206,14 +218,14 @@ search.plugin((controller) => {
 
 ### afterStore
 - Called with `eventData` = { controller, request, response }
-- Always invoked after data has been stored in mobx store
+- Always invoked after data has been stored in Mobx store
 - no operation
 
 ## Recommendation Events
 
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -228,7 +240,7 @@ search.plugin((controller) => {
 
 ### afterStore
 - Called with `eventData` = { controller, request, response }
-- Always invoked after data has been stored in mobx store
+- Always invoked after data has been stored in Mobx store
 
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 

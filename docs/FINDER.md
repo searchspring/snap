@@ -68,7 +68,7 @@ const finderControllerServices = {
 ```
 
 ### Middleware
-Finders support middleware to hook into various events using `use` and `on` methods. See [Search Middlewear](https://github.com/searchspring/snap/blob/main/docs/SEARCH.md) for usage.
+Finders support middleware to hook into various events using `plugin` and `on` methods. See [Search Middlewear](https://github.com/searchspring/snap/blob/main/docs/SEARCH.md) for usage.
 
 
 ### DomTargeter

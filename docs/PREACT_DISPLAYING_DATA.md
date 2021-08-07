@@ -18,7 +18,7 @@ The `loading` property will be true is a network request is in progress. This pr
 
 The `custom` property is an empty object that is not utilized by any core Snap functionallity however is available for you to use as a store. It is suggested to be used for any custom functionallity that Snap does not handle natively (ie. keeping track of a list/grid view state)
 
-You will likely be utlizing various [Snap Events](#Events) to modify the `custom` object. 
+You will likely be utlizing various [Snap Events](/#/start-preact-events) to modify the `custom` object. 
 
 
 
@@ -69,7 +69,7 @@ export class Content extends Component {
 
 ### SearchController.store.search
 
-The `search` property contains information about the current query, typically displayed above results and used in combination with the `store.pagination` data
+The `search` property contains information about the current query, typically displayed above results and used in combination with the `store.pagination` data.
 
 ```jsx
 @withController
@@ -125,7 +125,7 @@ export class SearchHeader extends Component {
 
 ### SearchController.store.pagination
 
-The `pagination` property is not only used for information about the current query, but also contains everything needed to handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified amount of pages. 
+The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller docs](#/package-controller-search).
 
 ```jsx
 @withController
@@ -221,7 +221,7 @@ Each result object contains the following notable properties:
 
 `result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered.
 
-Note: if you will be creating a custom Result component, ensure to include intellisuggest product click tracking. Available via `controller.track.product.click()` as seen in the example below. This should be invoked `onClick` or `onMouseDown` on each Result.
+Note: if you will be creating a custom Result component, be sure to include intellisuggest product click tracking. Available via `controller.track.product.click()` as seen in the example below. This should be invoked `onClick` or `onMouseDown` on each Result.
 
 ```jsx
 @withController
@@ -279,7 +279,7 @@ Each result object contains the following notable properties:
 
 `facet.collapsed` facet collapse state. Facets can be configured to start collapsed by default in the [Searchspring Management Console](https://manage.searchspring.net/)
 
-`facet.toggleCollapse` a method that toggles the collapse state for this facet.
+`facet.toggleCollapse` a method that toggles the collapse state for this facet
 
 `facet.clear` a method to remove the facet if it is currently active
 
@@ -299,15 +299,15 @@ Facets that contain a `type` value of `range` will not contain any `values` as t
 
 Facets with a `type` value of `value` or `range-buckets` will contain the following properties:
 
-`facet.search.input` facet search within. Setting this will dynamically filter the facet `values` array to only include values that match the `facet.search.input` substring.
+`facet.search.input` facet search within - setting this will dynamically filter the facet `values` array to only include values that match the `facet.search.input` substring
 
 `facet.overflow.setLimit` method to set the number of values to display before overflow occurs
 
 `facet.overflow.toggle` method to toggle overflow of a facet, typically invoked `onClick` event of a facet 'show more' button
 
-`facet.refinedValues` facet values that have been limitied if any overflow or search within is active. This should be used to render facet values from components.
+`facet.refinedValues` facet values that have been limitied if any overflow or search within is active; this should be used to render facet values from components
 
-`facet.values` original facet values. It is not recommended to directly render facet values using this in your components - `facet.refinedValues` should be used instead. However, if you are using an `afterStore` event to reference facet values, `facet.values` should be used.
+`facet.values` original facet values - it is not recommended to directly render facet values using this in your components - `facet.refinedValues` should be used instead - however, if you are using an `afterStore` event to reference facet values, `facet.values` should be used
 
 ```jsx
 @withController
@@ -431,7 +431,7 @@ See `SearchController.store.merchandising` section above.
 
 ### AutocompleteController.store.search
 
-The `search` property contains information about the current query. However unlink SearchController.store.search, AutocompleteController.store.search does not contain a `didYouMean` query. 
+The `search` property contains information about the current query. However unlike SearchController.store.search, AutocompleteController.store.search does not contain a `didYouMean` query. 
 
 
 ### AutocompleteController.store.facets
@@ -454,7 +454,7 @@ The `terms` property contains an array of autocomplete terms that are relevant t
 
 ### AutocompleteController.store.trending
 
-The `trending` property contains an array of trending `terms`. Trending terms are not relevant to the current query and are generated from collected reporting data. It is recommended to display trending terms as a starting point when the `<input/>` is focused and does not yet contain a value. 
+The `trending` property contains an array of trending `terms`. Trending terms are not relevant to the current query and are generated from collected reporting data. It is recommended to display trending terms as a starting point when the `<input/>` is focused and does not yet contain a value. Trending terms must be enabled via settings in the AutocompleteController config.
 
 
 ### AutocompleteController.store.pagination

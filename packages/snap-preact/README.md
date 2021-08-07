@@ -120,7 +120,7 @@ const config = {
 
 `recommendation.components` - required mapping of recommendation components.
 
-`recommendation.config.branch` - required current git branch name. Defined via webpack:
+`recommendation.config.branch` - required current git branch name. Defined via webpack during bundle build:
 
 ```typescript
 const webpack = require('webpack');
@@ -184,13 +184,14 @@ Each array entry contains an object with the following properties:
 
 ```typescript
 const target = {
-    selector: string;
+	selector: string;
 	inject?: {
 		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
 		element: Element | ((target: Target, element: Element) => Element);
 	};
 	hideTarget?: boolean;
-    [any: string]: unknown;
+	emptyTarget?: boolean;
+	[any: string]: unknown;
 }
 ```
 

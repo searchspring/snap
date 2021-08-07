@@ -11,8 +11,9 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | action | optional way to override the form action or provide one when it does not exist | ➖ |   |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
 | settings.initializeFromUrl | initialize the controller with query parameter from URL (pre-fill input with current search) | true |   |
-| settings.syncInputs | if the selector targets multiple inputs, the value of those inputs will be synced | false |   |
+| settings.syncInputs | if the selector targets multiple inputs, the value of those inputs will be synced | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
+| settings.trending.limit | when set, trending (popular) queries will be fetched and made available in the trending store | ➖ |   |
 
 <br>
 
