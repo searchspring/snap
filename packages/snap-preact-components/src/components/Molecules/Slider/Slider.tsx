@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
@@ -156,7 +156,7 @@ export const Slider = observer((properties: SliderProps): JSX.Element => {
 		facet.range &&
 		facet.active &&
 		facet.step && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					className={classnames('ss__slider', className)}
 					{...getTrackProps()}

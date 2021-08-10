@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
 const CSS = {
@@ -72,7 +72,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	return (
 		values?.length && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
 					{values.map((value) => (
 						<a

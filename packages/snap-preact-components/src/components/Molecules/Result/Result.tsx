@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -153,7 +153,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return (
 		core && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 					<div className="ss__result__wrapper">
 						<div className="ss__result__wrapper__image">

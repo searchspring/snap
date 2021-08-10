@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
@@ -37,7 +37,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	const [isHovering, setHover] = useState(false);
 
 	return (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<img
 				css={!disableStyles && CSS.image({ visibility, style })}
 				className={classnames('ss__image', className)}

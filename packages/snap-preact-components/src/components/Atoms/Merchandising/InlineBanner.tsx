@@ -3,7 +3,7 @@ import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
 
 const CSS = {
@@ -49,7 +49,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	return (
 		banner &&
 		banner.value && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
 					css={!disableStyles && CSS.inlineBanner({ width, style })}

@@ -5,7 +5,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {
@@ -67,7 +67,7 @@ export function Price(properties: PriceProps): JSX.Element {
 	return raw ? (
 		<>{formattedPrice}</>
 	) : (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
 				{formattedPrice}
 			</span>

@@ -12,7 +12,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -103,7 +103,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	}
 
 	return results?.length ? (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div
 				css={!disableStyles && CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize, style })}
 				className={classnames('ss__results', className)}

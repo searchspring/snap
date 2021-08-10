@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -73,7 +73,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	return (
 		valueLabel && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<a
 					css={!disableStyles && CSS.filter({ style })}
 					className={classnames('ss__filter', className)}

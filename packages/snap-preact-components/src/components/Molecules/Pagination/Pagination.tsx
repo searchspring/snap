@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -86,7 +86,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 	return (
 		store?.totalResults && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div css={!disableStyles && CSS.pagination({ theme, style })} className={classnames('ss__pagination', className)}>
 					<>
 						{/* Prev */}

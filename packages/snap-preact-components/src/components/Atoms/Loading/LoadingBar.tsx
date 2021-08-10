@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -60,7 +60,7 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	return (
 		active && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					css={
 						!disableStyles &&

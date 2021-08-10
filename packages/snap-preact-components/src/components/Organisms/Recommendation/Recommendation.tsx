@@ -13,7 +13,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
@@ -198,7 +198,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (
 		(children || results?.length) && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
 					css={!disableStyles && CSS.recommendation({ theme, style })}

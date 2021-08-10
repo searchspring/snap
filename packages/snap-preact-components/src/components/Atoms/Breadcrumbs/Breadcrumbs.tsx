@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
 	breadcrumbs: ({ style }) =>
@@ -38,7 +38,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 	const { data, separator, disableStyles, className, style } = props;
 
 	return (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
 				<ul className="ss__breadcrumbs__crumbs">
 					{data

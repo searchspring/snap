@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { defined } from '../../../utilities';
 import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
 	palette: ({ columns, gapSize, style }) =>
@@ -96,7 +96,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	return (
 		values?.length && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
 					{values.map((value) => (
 						<a

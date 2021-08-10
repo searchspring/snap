@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -36,7 +36,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	const { content, children, position, disableStyles, className, style } = props;
 
 	return (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div css={!disableStyles && CSS.badge({ position, style })} className={classnames('ss__badge', className)}>
 				{content || children}
 			</div>

@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
@@ -183,7 +183,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		options &&
 		Array.isArray(options) &&
 		options.length && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					css={
 						!disableStyles && native

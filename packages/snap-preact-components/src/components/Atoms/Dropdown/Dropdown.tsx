@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 
 const CSS = {
@@ -95,7 +95,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	};
 
 	return (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div
 				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
 				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}

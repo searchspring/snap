@@ -13,7 +13,7 @@ import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 
 const CSS = {
@@ -288,7 +288,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	return (
 		visible && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div
 					css={
 						!disableStyles &&

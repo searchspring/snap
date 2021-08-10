@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
@@ -39,7 +39,7 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	return (
 		iconPath && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<svg
 					css={
 						!disableStyles &&
