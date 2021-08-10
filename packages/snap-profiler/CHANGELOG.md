@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.30 (2021-08-10)
+
+**Note:** Version bump only for package @searchspring/snap-profiler
+
+
+
+
+
 ## 0.3.29 (2021-08-07)
 
 **Note:** Version bump only for package @searchspring/snap-profiler
