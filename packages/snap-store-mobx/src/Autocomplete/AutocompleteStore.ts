@@ -49,8 +49,7 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	reset(): void {
-		this.state.locks.terms.reset();
-		this.state.locks.facets.reset();
+		this.state.reset();
 		this.update({ meta: this.meta });
 		this.resetTrending();
 	}

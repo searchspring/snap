@@ -137,6 +137,15 @@ export class AutocompleteController extends AbstractController {
 		}
 	}
 
+	reset(): void {
+		// reset input values and state
+		const inputs = document.querySelectorAll(this.config.selector);
+		inputs.forEach((input: HTMLInputElement) => {
+			input.value = '';
+		});
+		this.store.reset();
+	}
+
 	async bind(): Promise<void> {
 		if (!this.initialized) {
 			await this.init();
