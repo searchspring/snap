@@ -108,6 +108,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		pagination: false,
 		loop: true,
 		// global theme
+		...globalTheme?.components?.carousel,
+		//props
 		...properties,
 		...properties.theme?.components?.carousel,
 	};
