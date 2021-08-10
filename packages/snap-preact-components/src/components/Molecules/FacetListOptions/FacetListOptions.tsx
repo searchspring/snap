@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
@@ -70,7 +70,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	return (
 		values?.length && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				<div css={!disableStyles && CSS.list({ theme, style, hideCheckbox })} className={classnames('ss__facet-list-options', className)}>
 					{values.map((value) => (
 						<a

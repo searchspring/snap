@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, Filter as FilterType } from '../../../types';
 
 const CSS = {
@@ -75,7 +75,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	};
 
 	return filters?.length ? (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
 				<div className="ss__filter-summary__title">{title}</div>
 

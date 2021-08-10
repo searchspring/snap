@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
@@ -48,7 +48,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	return raw ? (
 		<>{formattedNumber}</>
 	) : (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
 				{formattedNumber}
 			</span>

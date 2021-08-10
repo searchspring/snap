@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
@@ -84,7 +84,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	return (
 		isVisible && (
-			<CacheProvider value={cache}>
+			<CacheProvider>
 				{buttonContent && (
 					<div className="ss__slideout__button" onClick={() => toggleActive()}>
 						{buttonContent}

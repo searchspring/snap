@@ -14,7 +14,7 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, cache } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
 	facet: ({ color, theme, style }) =>
@@ -213,7 +213,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	}
 
 	return (
-		<CacheProvider value={cache}>
+		<CacheProvider>
 			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
 				<Dropdown
 					{...subProps.dropdown}
