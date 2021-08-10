@@ -19,7 +19,7 @@ export class FilterStore extends Array {
 						value: {
 							low: filter.value.low,
 							high: filter.value.high,
-							label: filter.label,
+							label: filter.label || `${filter.value.low} - ${filter.value.high}`,
 						},
 					});
 
