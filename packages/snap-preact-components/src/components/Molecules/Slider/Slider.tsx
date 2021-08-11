@@ -16,8 +16,8 @@ const CSS = {
 		css({
 			display: 'inline-block',
 			height: '8px',
-			width: 'calc(100% - 38px)',
-			margin: '20px 5% 25px',
+			width: 'calc(100% - 2.5rem)',
+			margin: '1rem',
 			top: '10px',
 
 			'& .ss__slider__tick': {
@@ -57,7 +57,7 @@ const CSS = {
 				borderRadius: '100%',
 				fontSize: '0.7rem',
 				whiteSpace: 'nowrap',
-				color: handleTextColor,
+				color: handleTextColor || 'initial',
 				fontWeight: 'normal',
 				transform: 'translateY(0) scale(0.9)',
 				transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
