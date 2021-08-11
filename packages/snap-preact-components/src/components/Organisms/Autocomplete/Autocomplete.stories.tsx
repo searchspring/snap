@@ -66,6 +66,28 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		horizontalTerms: {
+			defaultValue: false,
+			description: 'display terms horizontally, (not required if vertical prop is true)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		vertical: {
+			defaultValue: false,
+			description: 'use a vertical (single column) layout',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		responsive: {
 			description: 'Responsive options object',
 			table: {
