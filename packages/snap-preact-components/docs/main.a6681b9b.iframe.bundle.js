@@ -9107,8 +9107,8 @@
 							{
 								display: 'inline-block',
 								height: '8px',
-								width: 'calc(100% - 38px)',
-								margin: '20px 5% 25px',
+								width: 'calc(100% - 2.5rem)',
+								margin: '1rem',
 								top: '10px',
 								'& .ss__slider__tick': {
 									'&:before': {
@@ -9147,7 +9147,7 @@
 									borderRadius: '100%',
 									fontSize: '0.7rem',
 									whiteSpace: 'nowrap',
-									color: handleTextColor,
+									color: handleTextColor || 'initial',
 									fontWeight: 'normal',
 									transform: 'translateY(0) scale(0.9)',
 									transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -22579,7 +22579,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.29' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.30' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22606,7 +22606,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.29');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.30');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23194,7 +23194,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.29]',
+								text: '[0.3.30]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
