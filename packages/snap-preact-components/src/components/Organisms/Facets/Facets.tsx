@@ -66,5 +66,5 @@ interface FacetsSubProps {
 
 export interface FacetsProps extends ComponentProps {
 	facets?: any;
-	controller: SearchController | AutocompleteController;
+	controller?: SearchController | AutocompleteController;
 }
