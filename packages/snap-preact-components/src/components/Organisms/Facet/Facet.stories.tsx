@@ -166,6 +166,16 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
+		filteredOptionsToTop: {
+			description: 'option to force filtered facet options to the top of the list. ',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		iconshowLessExpand: {
 			defaultValue: 'minus',
 			description: 'Icon for when facet is expanded',
@@ -269,6 +279,28 @@ const ObservableHierarchyFacet = observer(({ args, controller }) => {
 const HierarchyTemplate = (args: FacetProps, { loaded: { controller } }) => <ObservableHierarchyFacet args={args} controller={controller} />;
 export const Hierarchy = HierarchyTemplate.bind({});
 Hierarchy.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+
+// List Facet
+
+const ObservableFilteredOptionsToTop = observer(({ args, controller }) => {
+	return (
+		<Facet {...args} filteredOptionsToTop={true} facet={controller?.store?.facets.filter((facet) => facet.display === FacetDisplay.LIST).shift()} />
+	);
+});
+
+const filteredOptionsToTopTemplate = (args: FacetProps, { loaded: { controller } }) => (
+	<ObservableFilteredOptionsToTop args={args} controller={controller} />
+);
+
+export const filteredOptionsToTop = filteredOptionsToTopTemplate.bind({});
+filteredOptionsToTop.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {

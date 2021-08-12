@@ -84,6 +84,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText,
 		iconshowMoreExpand,
 		iconshowLessExpand,
+		filteredOptionsToTop,
 		disableStyles,
 		className,
 		style,
@@ -212,6 +213,15 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
+	let sortedOptionList = new Array();
+	if (filteredOptionsToTop && facet.display == 'list') {
+		let filteredValues = (facet as ValueFacet)?.values.filter((value) => value.filtered);
+		let rest = (facet as ValueFacet)?.values.filter((value) => !value.filtered);
+
+		filteredValues.map((value) => sortedOptionList.push(value));
+		rest.map((value) => sortedOptionList.push(value));
+	}
+
 	return (
 		<CacheProvider>
 			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
@@ -238,7 +248,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 								case FacetDisplay.HIERARCHY:
 									return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
 								default:
-									return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+									return <FacetListOptions {...subProps.facetListOptions} values={filteredOptionsToTop ? sortedOptionList : limitedValues} />;
 							}
 						})()}
 					</div>
@@ -282,4 +292,5 @@ export interface FacetProps extends ComponentProps {
 	showLessText?: string;
 	iconshowMoreExpand?: string;
 	iconshowLessExpand?: string;
+	filteredOptionsToTop?: boolean;
 }
