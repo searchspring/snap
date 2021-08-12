@@ -77,7 +77,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideBanner: {
+		hideBanners: {
 			defaultValue: false,
 			description: 'prevent merchandising banners from rendering (inline banners not affected)',
 			table: {
@@ -156,7 +156,7 @@ export default {
 		},
 		viewportMaxHeight: {
 			defaultValue: false,
-			description: 'applies a max height to autocomplete such that it is always visible in the viewport',
+			description: 'Autocomplete fully visible in viewport',
 			table: {
 				type: {
 					summary: 'boolean',

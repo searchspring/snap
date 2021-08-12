@@ -200,7 +200,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideTerms,
 		hideFacets,
 		hideContent,
-		hideBanner,
+		hideBanners,
 		horizontalTerms,
 		vertical,
 		termsTitle,
@@ -395,7 +395,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									{facetsToShow.map((facet) => (
 										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
 									))}
-									{!hideBanner ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
+									{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
 								</div>
 							</>
 						))}
@@ -407,13 +407,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							<div className="ss__autocomplete__content">
 								{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
 									<div className="ss__autocomplete__content__results">
-										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
-										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
 
 										{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
 										<Results results={results} {...subProps.results} controller={controller} />
 
-										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
 									</div>
 								) : null}
 
@@ -475,7 +475,7 @@ export interface AutocompleteProps extends ComponentProps {
 	hideTerms?: boolean;
 	hideFacets?: boolean;
 	hideContent?: boolean;
-	hideBanner?: boolean;
+	hideBanners?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
 	termsTitle?: string;
