@@ -53,7 +53,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('search', { id }));
+		const cntrlr = (controllers[id] = snap.createController('search', config));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);
