@@ -18,7 +18,18 @@ import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	Autocomplete: ({ inputViewportOffsetBottom, hideFacets, hideTerms, horizontalTerms, noResults, vertical, style, theme }) =>
+	Autocomplete: ({
+		inputViewportOffsetBottom,
+		hideTerms,
+		hideFacets,
+		horizontalTerms,
+		noResults,
+		showTrending,
+		viewportMaxHeight,
+		vertical,
+		style,
+		theme,
+	}) =>
 		css({
 			'& *': {
 				boxSizing: 'border-box',
@@ -32,29 +43,32 @@ const CSS = {
 			border: '1px solid #ebebeb',
 			background: '#ffffff',
 			maxWidth: '100vw',
-			maxHeight: inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : '100vh',
-			overflowY: horizontalTerms && !vertical ? 'auto' : null,
+			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : null,
+			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : null,
+
+			'& h5': {
+				margin: '0',
+				paddingBottom: '10px',
+				fontSize: '1em',
+				fontWeight: 'bold',
+			},
 
 			'& .ss__autocomplete__terms': {
-				flex: `0 1 ${vertical || horizontalTerms ? 'auto' : '150px'}`,
+				flex: `0 1 ${vertical || horizontalTerms || showTrending ? 'auto' : '150px'}`,
 				order: 1,
 				background: '#f8f8f8',
 				width: horizontalTerms && !vertical ? '100%' : null,
 
 				'& h5': {
-					margin: '0',
 					padding: '10px',
 				},
 
-				'& ul.ss__autocomplete__terms__options': {
+				'& .ss__autocomplete__terms__options': {
 					display: vertical || horizontalTerms ? 'flex' : null,
 					justifyContent: 'space-evenly',
 					flexWrap: 'wrap',
-					listStyle: 'none',
-					padding: '0',
-					margin: '0',
 
-					'& li.ss__autocomplete__terms__option': {
+					'& .ss__autocomplete__terms__option': {
 						flexGrow: vertical || horizontalTerms ? '1' : null,
 						textAlign: vertical || horizontalTerms ? 'center' : null,
 						wordBreak: 'break-all',
@@ -73,9 +87,9 @@ const CSS = {
 
 						'&.ss__autocomplete__terms__option--active': {
 							background: '#fff',
-							fontWeight: 'bold',
 
 							'& a': {
+								fontWeight: 'bold',
 								color: theme?.colors?.primary,
 							},
 						},
@@ -83,6 +97,12 @@ const CSS = {
 				},
 			},
 
+			'& .ss__autocomplete__title': {
+				'&.ss__autocomplete__title--facets': {
+					order: 2,
+					padding: '10px 10px 0px 10px',
+				},
+			},
 			'& .ss__autocomplete__facets': {
 				display: 'flex',
 				flex: `0 0 ${horizontalTerms && !vertical && !hideTerms ? '200px' : 'auto'}`,
@@ -101,13 +121,21 @@ const CSS = {
 				order: 3,
 				overflowY: 'auto',
 				margin: noResults ? '0 auto' : null,
+				padding: vertical ? '10px 20px' : '10px',
+
+				'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+					marginBottom: '10px',
+				},
+				'& .ss__banner.ss__banner--footer': {
+					margin: '10px 0',
+				},
 
 				'& .ss__autocomplete__content__info': {
-					fontWeight: 'bold',
 					padding: '10px',
-					textAlign: 'right',
+					textAlign: noResults ? 'center' : 'right',
 
 					'& a': {
+						fontWeight: 'bold',
 						color: theme?.colors?.primary,
 
 						'& .ss__icon': {
@@ -127,6 +155,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	let props: AutocompleteProps = {
 		// default props
+		termsTitle: '',
+		trendingTitle: 'Popular Searches',
+		facetsTitle: '',
+		contentTitle: '',
 		// global theme
 		...globalTheme?.components?.autocomplete,
 		// props
@@ -164,7 +196,26 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			...displaySettings,
 		};
 	}
-	const { hideFacets, hideTerms, horizontalTerms, vertical, termsSlot, facetsSlot, contentSlot, disableStyles, className, style, controller } = props;
+	const {
+		hideTerms,
+		hideFacets,
+		hideContent,
+		hideBanner,
+		horizontalTerms,
+		vertical,
+		termsTitle,
+		trendingTitle,
+		facetsTitle,
+		contentTitle,
+		viewportMaxHeight,
+		termsSlot,
+		facetsSlot,
+		contentSlot,
+		disableStyles,
+		className,
+		style,
+		controller,
+	} = props;
 	let { input } = props;
 	let inputViewportOffsetBottom;
 	if (input) {
@@ -231,6 +282,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// inherited props
 			...defined({
 				disableStyles,
+				theme: {
+					components: {
+						result: {
+							hideBadge: true,
+						},
+					},
+				},
 			}),
 			// component theme overrides
 			...props.theme?.components?.results,
@@ -293,6 +351,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							horizontalTerms,
 							hideTerms,
 							noResults: search?.query?.string && results.length === 0,
+							showTrending,
+							viewportMaxHeight,
 							vertical,
 							style,
 							theme,
@@ -306,16 +366,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							cloneElement(termsSlot, { terms, trending })
 						) : (
 							<div className="ss__autocomplete__terms">
-								{showTrending && <h5>Popular Searches</h5>}
-								<ul className="ss__autocomplete__terms__options">
+								{showTrending ? <h5>{trendingTitle}</h5> : termsTitle ? <h5>{termsTitle}</h5> : null}
+								<div className="ss__autocomplete__terms__options">
 									{(showTrending ? trending : terms).map((term) => (
-										<li className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
+										<div className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
 											<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
 												{emIfy(term.value, state.input)}
 											</a>
-										</li>
+										</div>
 									))}
-								</ul>
+								</div>
 							</div>
 						))}
 
@@ -324,43 +384,58 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						(facetsSlot ? (
 							cloneElement(facetsSlot, { facets: facetsToShow, merchandising, controller })
 						) : (
-							<div className="ss__autocomplete__facets">
-								{facetsToShow.map((facet) => (
-									<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-								))}
-								<Banner content={merchandising.content} type={BannerType.LEFT} />
-							</div>
+							<>
+								{facetsTitle && vertical ? (
+									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+										<h5>{facetsTitle}</h5>
+									</div>
+								) : null}
+								<div className="ss__autocomplete__facets">
+									{facetsTitle && !vertical ? <h5>{facetsTitle}</h5> : null}
+									{facetsToShow.map((facet) => (
+										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+									))}
+									{!hideBanner ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
+								</div>
+							</>
 						))}
-					{contentSlot ? (
-						cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })
-					) : (
-						<div className="ss__autocomplete__content">
-							{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
-								<div className="ss__autocomplete__content__results">
-									<Banner content={merchandising.content} type={BannerType.HEADER} />
-									<Banner content={merchandising.content} type={BannerType.BANNER} />
-									<Results results={results} {...subProps.results} controller={controller} />
-									<Banner content={merchandising.content} type={BannerType.FOOTER} />
-								</div>
-							) : null}
-							{search?.query?.string ? (
-								<div className="ss__autocomplete__content__info">
-									{results.length === 0 ? (
-										<>
-											<p>No results found for "{search.query.string}".</p>
-											<p>Please try another search.</p>
-										</>
-									) : (
-										<a href={state.url.href}>
-											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-											{search.query.string}"
-											<Icon {...subProps.icon} />
-										</a>
-									)}
-								</div>
-							) : null}
-						</div>
-					)}
+
+					{!hideContent ? (
+						contentSlot ? (
+							cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })
+						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+							<div className="ss__autocomplete__content">
+								{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
+									<div className="ss__autocomplete__content__results">
+										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+
+										{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
+										<Results results={results} {...subProps.results} controller={controller} />
+
+										{!hideBanner ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+									</div>
+								) : null}
+
+								{search?.query?.string ? (
+									<div className="ss__autocomplete__content__info">
+										{results.length === 0 ? (
+											<>
+												<p>No results found for "{search.query.string}".</p>
+												<p>Please try another search.</p>
+											</>
+										) : (
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										)}
+									</div>
+								) : null}
+							</div>
+						) : null
+					) : null}
 				</div>
 			</CacheProvider>
 		)
@@ -397,10 +472,17 @@ interface AutocompleteSubProps {
 
 export interface AutocompleteProps extends ComponentProps {
 	input: Element | string;
-	hideFacets?: boolean;
 	hideTerms?: boolean;
+	hideFacets?: boolean;
+	hideContent?: boolean;
+	hideBanner?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
+	termsTitle?: string;
+	trendingTitle?: string;
+	facetsTitle?: string;
+	contentTitle?: string;
+	viewportMaxHeight?: boolean;
 	termsSlot?: JSX.Element;
 	facetsSlot?: JSX.Element;
 	contentSlot?: JSX.Element;

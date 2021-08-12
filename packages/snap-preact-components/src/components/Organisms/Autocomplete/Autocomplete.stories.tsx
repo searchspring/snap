@@ -44,9 +44,9 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		hideFacets: {
+		hideTerms: {
 			defaultValue: false,
-			description: 'toggle facets display',
+			description: 'prevent terms from rendering (also applicable to trending terms)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -55,9 +55,31 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideTerms: {
+		hideFacets: {
 			defaultValue: false,
-			description: 'toggle terms display',
+			description: 'prevent facets from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideContent: {
+			defaultValue: false,
+			description: 'prevent content area from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideBanner: {
+			defaultValue: false,
+			description: 'prevent merchandising banners from rendering (inline banners not affected)',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -80,6 +102,61 @@ export default {
 		vertical: {
 			defaultValue: false,
 			description: 'use a vertical (single column) layout',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		termsTitle: {
+			defaultValue: '',
+			description: 'Change terms header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		trendingTitle: {
+			defaultValue: 'Popular Searches',
+			description: 'Change trending terms header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Popular Searches' },
+			},
+			control: { type: 'text' },
+		},
+		facetsTitle: {
+			defaultValue: '',
+			description: 'Change facets header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		contentTitle: {
+			defaultValue: '',
+			description: 'Change content header title',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		viewportMaxHeight: {
+			defaultValue: false,
+			description: 'applies a max height to autocomplete such that it is always visible in the viewport',
 			table: {
 				type: {
 					summary: 'boolean',
