@@ -88,6 +88,30 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		termsSlot: {
+			description: 'Slot for custom terms component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		facetsSlot: {
+			description: 'Slot for custom facets component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		contentSlot: {
+			description: 'Slot for custom content component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		responsive: {
 			description: 'Responsive options object',
 			table: {

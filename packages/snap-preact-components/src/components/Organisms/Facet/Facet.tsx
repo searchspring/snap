@@ -19,6 +19,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 const CSS = {
 	facet: ({ color, theme, style }) =>
 		css({
+			width: '100%',
 			margin: '0 0 20px 0',
 			'& .ss__facet__header': {
 				display: 'flex',
