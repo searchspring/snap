@@ -102,7 +102,7 @@ export abstract class AbstractController {
 			this.tracker.setNamespace(this.config.id);
 		}
 		// set environment
-		if (URL(window.location.href).params.query.filter((param) => param.key === 'dev').length > 0) {
+		if (URL(window.location.href)?.params.query.filter((param) => param.key === 'dev').length > 0) {
 			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
 		}
 		const dev = cookies.get(SS_DEV_COOKIE);
