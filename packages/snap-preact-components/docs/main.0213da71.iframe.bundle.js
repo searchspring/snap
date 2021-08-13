@@ -16505,8 +16505,6 @@
 				cjs =
 					(__webpack_require__(52506),
 					__webpack_require__(47256),
-					__webpack_require__(45794),
-					__webpack_require__(95342),
 					__webpack_require__(43450),
 					__webpack_require__(18178),
 					__webpack_require__(85940),
@@ -16516,6 +16514,7 @@
 				cjs_default = __webpack_require__.n(cjs),
 				colors =
 					(__webpack_require__(74069),
+					__webpack_require__(95342),
 					__webpack_require__(39529),
 					__webpack_require__(31235),
 					__webpack_require__(67890),
@@ -16682,8 +16681,36 @@
 			!(function (LogMode) {
 				(LogMode.PRODUCTION = 'production'), (LogMode.DEVELOPMENT = 'development');
 			})(LogMode || (LogMode = {}));
-			__webpack_require__(84870), __webpack_require__(53985), __webpack_require__(49228), __webpack_require__(43108), __webpack_require__(27233);
-			var targetedElems = [],
+			__webpack_require__(99120), __webpack_require__(48319), __webpack_require__(74083);
+			var cookies = {
+					set: function set(name, val, sameSite, expires) {
+						sameSite = sameSite || 'Lax';
+						var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
+						if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
+							var d = new Date();
+							d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
+						}
+						window.document.cookie = cookie;
+					},
+					get: function get(name) {
+						name += '=';
+						for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
+							for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
+							if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
+						}
+						return '';
+					},
+					unset: function unset(name) {
+						window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+					},
+				},
+				targetedElems =
+					(__webpack_require__(84870),
+					__webpack_require__(53985),
+					__webpack_require__(49228),
+					__webpack_require__(43108),
+					__webpack_require__(27233),
+					[]),
 				DomTargeter = (function () {
 					function DomTargeter(targets, onTarget, document) {
 						var _this = this;
@@ -16799,6 +16826,40 @@
 						DomTargeter
 					);
 				})(),
+				URL =
+					(__webpack_require__(16781),
+					function URL(url) {
+						if (url) {
+							var _a = url.split('#'),
+								urlWithoutHash = _a[0],
+								hash = _a[1],
+								_b = urlWithoutHash.split('?'),
+								base = _b[0],
+								queryParams = _b[1],
+								params = {
+									query:
+										(null == queryParams
+											? void 0
+											: queryParams.split('&').map(function (entry) {
+													var _a = entry.split('=');
+													return { key: _a[0], value: _a[1] };
+											  })) || [],
+									hash,
+								};
+							return {
+								base,
+								params,
+								url: function urlfunction() {
+									var queryString = params.query
+										.map(function (param) {
+											return param.key + '=' + param.value;
+										})
+										.join('&');
+									return base + (queryString ? '?' + queryString : '') + (params.hash ? '#' + params.hash : '');
+								},
+							};
+						}
+					}),
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -16913,7 +16974,8 @@
 				},
 				AbstractController = (function () {
 					function AbstractController(config, _a) {
-						var client = _a.client,
+						var _b,
+							client = _a.client,
 							store = _a.store,
 							urlManager = _a.urlManager,
 							eventManager = _a.eventManager,
@@ -16964,7 +17026,13 @@
 							this.log.setNamespace(this.config.id),
 							this.profiler.setNamespace(this.config.id),
 							this.tracker.namespace || this.tracker.setNamespace(this.config.id),
-							(this.environment = 'production');
+							(null === (_b = URL(window.location.href)) || void 0 === _b
+								? void 0
+								: _b.params.query.filter(function (param) {
+										return 'dev' === param.key;
+								  }).length) > 0 && cookies.set('ssdev', '1', 'Lax', 0);
+						var dev = cookies.get('ssdev');
+						this.environment = '1' === dev ? 'development' : 'production';
 					}
 					return (
 						Object.defineProperty(AbstractController.prototype, 'initialized', {
@@ -17077,34 +17145,8 @@
 						}),
 						AbstractController
 					);
-				})(),
-				cookies =
-					(__webpack_require__(48319),
-					__webpack_require__(99120),
-					__webpack_require__(74083),
-					{
-						set: function set(name, val, sameSite, expires) {
-							sameSite = sameSite || 'Lax';
-							var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
-							if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
-								var d = new Date();
-								d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
-							}
-							window.document.cookie = cookie;
-						},
-						get: function get(name) {
-							name += '=';
-							for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
-								for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
-								if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
-							}
-							return '';
-						},
-						unset: function unset(name) {
-							window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
-						},
-					});
-			__webpack_require__(71245);
+				})();
+			__webpack_require__(45794), __webpack_require__(71245);
 			var StorageType,
 				flags = (function getFlags(userAgent) {
 					void 0 === userAgent && (userAgent = ''), (userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase());
@@ -17408,7 +17450,11 @@
 					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
 					return to;
 				},
-				defaultConfig = { id: 'search', globals: {}, settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0 } } },
+				defaultConfig = {
+					id: 'search',
+					globals: {},
+					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0 } },
+				},
 				SearchController = (function (_super) {
 					function SearchController(config, _a) {
 						var client = _a.client,
@@ -17449,7 +17495,7 @@
 										preventBackfill,
 										dontBackfill,
 										searchProfile,
-										response_1,
+										response,
 										previousResults_1,
 										backfills,
 										page,
@@ -17500,15 +17546,7 @@
 													  [4, this.client.search(params)]);
 											case 8:
 												if (
-													((response_1 = _h.sent()).meta || (response_1.meta = this.client.meta),
-													this.config.settings.facets.trim &&
-														(response_1.facets = response_1.facets.filter(function (facet) {
-															var _a, _b;
-															return facet.filtered || 1 != (null === (_a = facet.values) || void 0 === _a ? void 0 : _a.length)
-																? 0 != (null === (_b = facet.values) || void 0 === _b ? void 0 : _b.length) &&
-																		('range' != facet.type || facet.range.low != facet.range.high)
-																: facet.values[0].count != response_1.pagination.totalResults;
-														})),
+													((response = _h.sent()).meta || (response.meta = this.client.meta),
 													!(this.config.settings.infinite && (null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1))
 												)
 													return [3, 11];
@@ -17527,9 +17565,9 @@
 												}),
 													(_h.label = 10);
 											case 10:
-												(response_1.results = SearchController_spreadArray(
+												(response.results = SearchController_spreadArray(
 													SearchController_spreadArray([], previousResults_1),
-													response_1.results || []
+													response.results || []
 												)),
 													(_h.label = 11);
 											case 11:
@@ -17539,8 +17577,7 @@
 													(_h.label = 12);
 											case 12:
 												return (
-													_h.trys.push([12, 14, , 15]),
-													[4, this.eventManager.fire('afterSearch', { controller: this, request: params, response: response_1 })]
+													_h.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 13:
 												return _h.sent(), [3, 15];
@@ -17551,13 +17588,12 @@
 											case 15:
 												afterSearchProfile.stop(),
 													this.log.profile(afterSearchProfile),
-													this.store.update(response_1),
+													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 													(_h.label = 16);
 											case 16:
 												return (
-													_h.trys.push([16, 18, , 19]),
-													[4, this.eventManager.fire('afterStore', { controller: this, request: params, response: response_1 })]
+													_h.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 17:
 												return _h.sent(), [3, 19];
@@ -17698,28 +17734,26 @@
 						SearchController
 					);
 				})(AbstractController),
-				AutocompleteController_extends =
-					(__webpack_require__(16781),
-					(function () {
-						var _extendStatics = function extendStatics(d, b) {
-							return (_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
+				AutocompleteController_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (_extendStatics =
+							Object.setPrototypeOf ||
+							({ __proto__: [] } instanceof Array &&
 								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								})(d, b);
-						};
-						return function (d, b) {
-							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-							function __() {
-								this.constructor = d;
-							}
-							_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-						};
-					})()),
+									d.__proto__ = b;
+								}) ||
+							function (d, b) {
+								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+							})(d, b);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
 				AutocompleteController_assign = function () {
 					return (AutocompleteController_assign =
 						Object.assign ||
@@ -17837,42 +17871,13 @@
 						};
 					}
 				},
-				AutocompleteController_utils_url = function URL(url) {
-					var _a = url.split('#'),
-						urlWithoutHash = _a[0],
-						hash = _a[1],
-						_b = urlWithoutHash.split('?'),
-						base = _b[0],
-						queryParams = _b[1],
-						params = {
-							query:
-								(null == queryParams
-									? void 0
-									: queryParams.split('&').map(function (entry) {
-											var _a = entry.split('=');
-											return { key: _a[0], value: _a[1] };
-									  })) || [],
-							hash,
-						};
-					return {
-						base,
-						params,
-						url: function urlfunction() {
-							var queryString = params.query
-								.map(function (param) {
-									return param.key + '=' + param.value;
-								})
-								.join('&');
-							return base + (queryString ? '?' + queryString : '') + (params.hash ? '#' + params.hash : '');
-						},
-					};
-				},
+				AutocompleteController_utils_url = URL,
 				AutocompleteController_defaultConfig = {
 					id: 'autocomplete',
 					selector: '',
 					action: '',
 					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0 } },
+					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
 				},
 				AutocompleteController = (function (_super) {
 					function AutocompleteController(config, _a) {
@@ -17949,11 +17954,6 @@
 												);
 											case 6:
 												(response = _c.sent()).meta || (response.meta = this.client.meta),
-													this.config.settings.facets.trim &&
-														(response.facets = response.facets.filter(function (facet) {
-															var _a;
-															return 0 != (null === (_a = facet.values) || void 0 === _a ? void 0 : _a.length);
-														})),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
@@ -18342,16 +18342,7 @@
 							}),
 							(_this.search = function () {
 								return FinderController_awaiter(_this, void 0, void 0, function () {
-									var params,
-										err_1,
-										searchProfile,
-										response,
-										afterSearchProfile,
-										err_2,
-										afterStoreProfile,
-										err_3,
-										err_4,
-										_this = this;
+									var params, err_1, searchProfile, response, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
 									return FinderController_generator(this, function (_a) {
 										switch (_a.label) {
 											case 0:
@@ -18379,12 +18370,6 @@
 												(response = _a.sent()).meta || (response.meta = this.client.meta),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
-													response.facets.sort(function (a, b) {
-														var fields = _this.config.fields.map(function (fieldConfig) {
-															return fieldConfig.field;
-														});
-														return fields.indexOf(a.field) - fields.indexOf(b.field);
-													}),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
 													(_a.label = 9);
 											case 9:
@@ -20812,20 +20797,31 @@
 						};
 					})()),
 				FacetStore_FacetStore = (function (_super) {
-					function FacetStore(services, storage, facets, meta) {
+					function FacetStore(config, services, storage, facets, pagination, meta) {
 						void 0 === facets && (facets = []);
 						return (
-							(facets = facets.map(function (facet) {
-								var facetMeta = meta.facets[facet.field];
-								switch (facet.type) {
-									case 'range':
-										return new RangeFacet(services, storage, facet, facetMeta);
-									case 'value':
-									case 'range-buckets':
-									default:
-										return new ValueFacet(services, storage, facet, facetMeta);
-								}
-							})),
+							(facets = facets
+								.filter(function (facet) {
+									var _a, _b, _c, _d;
+									if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
+										if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
+										if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
+										if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
+											return facet.values[0].count != pagination.totalResults;
+									}
+									return !0;
+								})
+								.map(function (facet) {
+									var facetMeta = meta.facets[facet.field];
+									switch (facet.type) {
+										case 'range':
+											return new RangeFacet(services, storage, facet, facetMeta);
+										case 'value':
+										case 'range-buckets':
+										default:
+											return new ValueFacet(config, services, storage, facet, facetMeta);
+									}
+								})),
 							_super.apply(this, facets) || this
 						);
 					}
@@ -20914,8 +20910,10 @@
 					return FacetStore_extends(RangeFacet, _super), RangeFacet;
 				})(Facet),
 				ValueFacet = (function (_super) {
-					function ValueFacet(services, storage, facet, facetMeta) {
-						var _this = _super.call(this, services, storage, facet, facetMeta) || this;
+					function ValueFacet(config, services, storage, facet, facetMeta) {
+						var _a,
+							_b,
+							_this = _super.call(this, services, storage, facet, facetMeta) || this;
 						(_this.values = []),
 							(_this.search = { input: '' }),
 							(_this.overflow = {
@@ -20958,7 +20956,12 @@
 												return new RangeValue(services, _this, value);
 										}
 									})) ||
-								[]);
+								[]),
+							(null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.pinFiltered) &&
+								'hierarchy' !== facetMeta.display &&
+								_this.values.sort(function (a, b) {
+									return b.filtered - a.filtered;
+								});
 						var overflowLimitedState = _this.storage.get('facets.' + _this.field + '.overflow.limited');
 						return (
 							void 0 !== overflowLimitedState && _this.overflow.toggle(overflowLimitedState),
@@ -21497,7 +21500,7 @@
 								(this.meta = data.meta),
 								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
 								(this.search = new QueryStore(this.services, data.search)),
-								(this.facets = new FacetStore_FacetStore(this.services, this.storage, data.facets, this.meta)),
+								(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
 								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
@@ -21698,8 +21701,8 @@
 					};
 				})(),
 				FacetStore = (function (_super) {
-					function FacetStore(services, storage, facetsData, meta, rootState) {
-						var facets = new FacetStore_FacetStore(services, storage, facetsData, meta);
+					function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
+						var facets = new FacetStore_FacetStore(config, services, storage, facetsData, paginationData, meta);
 						return (
 							facets.forEach(function (facet) {
 								var _a;
@@ -21810,7 +21813,8 @@
 								(this.meta = data.meta),
 								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
 								(this.search = new QueryStore_QueryStore(this.services, data.autocomplete, data.search)),
-								this.state.locks.facets.locked || (this.facets = new FacetStore(this.services, this.storage, data.facets, this.meta, this.state)),
+								this.state.locks.facets.locked ||
+									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
 								0 === this.results.length && this.resetTrending(),
@@ -21858,6 +21862,13 @@
 					function SelectionStore(config, services, facets, meta, loading, storage) {
 						var _a;
 						if (facets && meta) {
+							(null == config ? void 0 : config.fields) &&
+								facets.sort(function (a, b) {
+									var fields = config.fields.map(function (fieldConfig) {
+										return fieldConfig.field;
+									});
+									return fields.indexOf(a.field) - fields.indexOf(b.field);
+								});
 							var selections = [];
 							return (
 								null === (_a = null == config ? void 0 : config.fields) ||
@@ -23273,7 +23284,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.32' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.33' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23300,7 +23311,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.32');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.33');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23888,7 +23899,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.32]',
+								text: '[0.3.33]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
