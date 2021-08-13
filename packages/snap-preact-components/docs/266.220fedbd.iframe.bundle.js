@@ -1,6 +1,6 @@
-/*! For license information please see 557.790b4909.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 266.220fedbd.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[557],
+	[266],
 	{
 		99622: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -18417,6 +18417,29 @@
 				filterReject: createMethod(7),
 			};
 		},
+		86462: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var toIndexedObject = __webpack_require__(10905),
+				toInteger = __webpack_require__(16051),
+				toLength = __webpack_require__(34237),
+				arrayMethodIsStrict = __webpack_require__(96038),
+				min = Math.min,
+				$lastIndexOf = [].lastIndexOf,
+				NEGATIVE_ZERO = !!$lastIndexOf && 1 / [1].lastIndexOf(1, -0) < 0,
+				STRICT_METHOD = arrayMethodIsStrict('lastIndexOf'),
+				FORCED = NEGATIVE_ZERO || !STRICT_METHOD;
+			module.exports = FORCED
+				? function lastIndexOf(searchElement) {
+						if (NEGATIVE_ZERO) return $lastIndexOf.apply(this, arguments) || 0;
+						var O = toIndexedObject(this),
+							length = toLength(O.length),
+							index = length - 1;
+						for (arguments.length > 1 && (index = min(index, toInteger(arguments[1]))), index < 0 && (index = length + index); index >= 0; index--)
+							if (index in O && O[index] === searchElement) return index || 0;
+						return -1;
+				  }
+				: $lastIndexOf;
+		},
 		31460: (module, __unused_webpack_exports, __webpack_require__) => {
 			var fails = __webpack_require__(24229),
 				wellKnownSymbol = __webpack_require__(70095),
@@ -21301,6 +21324,11 @@
 					},
 				}
 			);
+		},
+		74660: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+			var $ = __webpack_require__(23103),
+				lastIndexOf = __webpack_require__(86462);
+			$({ target: 'Array', proto: !0, forced: lastIndexOf !== [].lastIndexOf }, { lastIndexOf });
 		},
 		43450: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
@@ -57148,4 +57176,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=557.790b4909.iframe.bundle.js.map
+//# sourceMappingURL=266.220fedbd.iframe.bundle.js.map

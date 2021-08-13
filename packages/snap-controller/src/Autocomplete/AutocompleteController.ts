@@ -23,6 +23,7 @@ const defaultConfig: AutocompleteControllerConfig = {
 		syncInputs: true,
 		facets: {
 			trim: true,
+			pinFiltered: true,
 		},
 	},
 };
@@ -358,18 +359,6 @@ export class AutocompleteController extends AbstractController {
 				 * SearchData to return mock data which already contains meta data
 				 */
 				response.meta = this.client.meta;
-			}
-
-			// modify response
-			// TODO: move to store
-			if (this.config.settings.facets.trim) {
-				response.facets = response.facets.filter((facet) => {
-					if (facet.values?.length == 0) {
-						return false;
-					}
-
-					return true;
-				});
 			}
 
 			searchProfile.stop();

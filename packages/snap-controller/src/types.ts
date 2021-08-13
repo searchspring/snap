@@ -71,6 +71,7 @@ export type SearchControllerConfig = ControllerConfig &
 			};
 			facets?: {
 				trim?: boolean;
+				pinFiltered?: boolean;
 			};
 			infinite?: {
 				backfill?: number;
@@ -103,6 +104,7 @@ export type AutocompleteControllerConfig = ControllerConfig &
 			syncInputs: boolean;
 			facets?: {
 				trim?: boolean;
+				pinFiltered?: boolean;
 			};
 			trending?: {
 				limit: number;

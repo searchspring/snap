@@ -6,20 +6,32 @@ export class FacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
+	constructor(config, services, storage: StorageStore, facets = [], pagination, meta) {
+		facets = facets
+			.filter((facet) => {
+				if (config.settings?.facets?.trim) {
+					if (facet.type === 'range' && facet.range.low == facet.range.high) {
+						return false;
+					} else if (facet.values?.length == 0) {
+						return false;
+					} else if (!facet.filtered && facet.values?.length == 1) {
+						return facet.values[0].count != pagination.totalResults;
+					}
+				}
+				return true;
+			})
+			.map((facet) => {
+				const facetMeta = meta.facets[facet.field];
 
-	constructor(services, storage: StorageStore, facets = [], meta) {
-		facets = facets.map((facet) => {
-			const facetMeta = meta.facets[facet.field];
-
-			switch (facet.type) {
-				case 'range':
-					return new RangeFacet(services, storage, facet, facetMeta);
-				case 'value':
-				case 'range-buckets':
-				default:
-					return new ValueFacet(services, storage, facet, facetMeta);
-			}
-		});
+				switch (facet.type) {
+					case 'range':
+						return new RangeFacet(services, storage, facet, facetMeta);
+					case 'value':
+					case 'range-buckets':
+					default:
+						return new ValueFacet(config, services, storage, facet, facetMeta);
+				}
+			});
 
 		super(...facets);
 	}
@@ -176,7 +188,7 @@ class ValueFacet extends Facet {
 		},
 	};
 
-	constructor(services, storage, facet, facetMeta) {
+	constructor(config, services, storage, facet, facetMeta) {
 		super(services, storage, facet, facetMeta);
 
 		this.multiple = this.multiple;
@@ -197,6 +209,10 @@ class ValueFacet extends Facet {
 					}
 				})) ||
 			[];
+
+		if (config.settings?.facets?.pinFiltered && facetMeta.display !== 'hierarchy') {
+			this.values.sort((a, b) => b.filtered - a.filtered);
+		}
 
 		const overflowLimitedState = this.storage.get(`facets.${this.field}.overflow.limited`);
 

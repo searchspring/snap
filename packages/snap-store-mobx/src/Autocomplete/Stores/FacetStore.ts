@@ -5,9 +5,9 @@ export class FacetStore extends Array {
 		return Array;
 	}
 
-	constructor(services, storage, facetsData, meta, rootState) {
+	constructor(config, services, storage, facetsData, paginationData, meta, rootState) {
 		// this.services, this.storage, data.facets, this.meta
-		const facets = new SearchFacetStore(services, storage, facetsData, meta);
+		const facets = new SearchFacetStore(config, services, storage, facetsData, paginationData, meta);
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {

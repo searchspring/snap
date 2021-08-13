@@ -90,6 +90,18 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		truncateTitle: {
+			defaultValue: {},
+			description: 'truncate title options object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: {
+				type: 'object',
+			},
+		},
 		layout: {
 			description: 'Results layout',
 			defaultValue: Layout.GRID,
@@ -142,4 +154,17 @@ hideSections.args = {
 	hideBadge: true,
 	hideTitle: true,
 	hidePricing: true,
+};
+
+export const truncateTitle = Template.bind({});
+truncateTitle.loaders = [
+	async () => {
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
+];
+truncateTitle.args = {
+	truncateTitle: { limit: 5, append: '...' },
 };

@@ -1,14 +1,8 @@
-# Recommendation
+# Carousel
 
-Renders a carousel of product recommendations, built using the Carousel Component.
-
-If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
-
-Any modification to the results are recommended to be made using an `afterSearch` or `afterStore` event via the Controller instead of making modifications in the component.
-
+Renders a carousel of children, built using [Swiper](https://swiperjs.com/)
 
 ## Sub-components
-- Carousel
 - Result (default)
 - Icon
 
@@ -16,45 +10,42 @@ Any modification to the results are recommended to be made using an `afterSearch
 
 Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
 
-### controller
-The required `controller` prop specifies a reference to the RecommendationController
-
 ```jsx
-<Recommendation controller={controller} />
+<Carousel>{children}<Carousel/>
 ```
 ### loop
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Recommendation controller={controller} loop={true} />
+<Carousel loop={true}>{children}<Carousel/>
 ```
 
 ### title
 The `title` prop specifies the carousel title
 
 ```jsx
-<Recommendation controller={controller} title={'Recommended Products'} />
+<Carousel title={'Recommended Products'}>{children}<Carousel/>
 ```
 
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 
 ```jsx
-<Recommendation controller={controller} pagination={true} />
+<Carousel pagination={true}>{children}<Carousel/>
 ```
 
 ### prevButton
 The `prevButton` prop specifies the previous button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Recommendation controller={controller} prevButton={'<'} />
+<Carousel prevButton={'<'}>{children}<Carousel/>
 ```
 
 ### nextButton
 The `nextButton` prop specifies the next button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Recommendation controller={controller} nextButton={'>'} />
+<Carousel nextButton={'>'}>{children}<Carousel/>
 ```
 
 ### breakpoints
@@ -101,5 +92,5 @@ const defaultRecommendationResponsive = {
 ```
 
 ```jsx
-<Recommendation controller={controller} breakpoints={defaultRecommendationResponsive} />
+<Carousel  breakpoints={defaultRecommendationResponsive}>{children}<Carousel/>
 ```

@@ -7,6 +7,12 @@ export class SelectionStore extends Array {
 		if (!facets || !meta) {
 			return;
 		}
+		// re-order facets to match our config
+		config?.fields &&
+			facets.sort((a, b) => {
+				const fields = config.fields.map((fieldConfig) => fieldConfig.field);
+				return fields.indexOf(a.field) - fields.indexOf(b.field);
+			});
 		const selections = [];
 		config?.fields?.forEach((fieldObj) => {
 			let facet = facets?.filter((facet) => facet.field == fieldObj.field).pop();

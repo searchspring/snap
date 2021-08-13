@@ -113,13 +113,6 @@ export class FinderController extends AbstractController {
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 
-			// TODO: move to store
-			// re-order facets to match our config
-			response.facets.sort((a, b) => {
-				const fields = this.config.fields.map((fieldConfig) => fieldConfig.field);
-				return fields.indexOf(a.field) - fields.indexOf(b.field);
-			});
-
 			const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
 
 			try {

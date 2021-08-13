@@ -1,5 +1,8 @@
 // TODO: move to toolbox
 export const URL = (url: string): URLParserResponse => {
+	if (!url) {
+		return;
+	}
 	const [urlWithoutHash, hash] = url.split('#');
 	const [base, queryParams] = urlWithoutHash.split('?');
 	const params = {
