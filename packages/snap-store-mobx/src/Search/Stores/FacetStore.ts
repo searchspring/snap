@@ -9,7 +9,7 @@ export class FacetStore extends Array {
 	constructor(config, services, storage: StorageStore, facets = [], pagination, meta) {
 		facets = facets
 			.filter((facet) => {
-				if (config.settings.facets.trim) {
+				if (config.settings?.facets?.trim) {
 					if (facet.type === 'range' && facet.range.low == facet.range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
@@ -210,7 +210,7 @@ class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		if (config.settings.facets.pinFiltered && facetMeta.display !== 'hierarchy') {
+		if (config.settings?.facets?.pinFiltered && facetMeta.display !== 'hierarchy') {
 			this.values.sort((a, b) => b.filtered - a.filtered);
 		}
 
