@@ -1,5 +1,5 @@
 import { LogMode } from '@searchspring/snap-logger';
-import { DomTargeter } from '@searchspring/snap-toolbox';
+import { DomTargeter, cookies } from '@searchspring/snap-toolbox';
 
 import type { ControllerServices, ControllerConfig, Attachments } from '../types';
 import type { Client } from '@searchspring/snap-client';
@@ -10,11 +10,13 @@ import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
+import { URL } from '../utils/URL';
 
+const SS_DEV_COOKIE = 'ssdev';
 export abstract class AbstractController {
 	public type = 'abstract';
 	public config: ControllerConfig;
-	public client;
+	public client; //todo: add typing
 	public store: AbstractStore;
 	public urlManager: UrlManager;
 	public eventManager: EventManager;
@@ -100,7 +102,11 @@ export abstract class AbstractController {
 			this.tracker.setNamespace(this.config.id);
 		}
 		// set environment
-		this.environment = process.env.NODE_ENV as LogMode;
+		if (URL(window.location.href).params.query.filter((param) => param.key === 'dev').length > 0) {
+			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
+		}
+		const dev = cookies.get(SS_DEV_COOKIE);
+		this.environment = (dev === '1' ? 'development' : process.env.NODE_ENV) as LogMode;
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
