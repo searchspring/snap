@@ -6818,7 +6818,12 @@
 		46253: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Result_stories, hideSections: () => hideSections });
+				__webpack_require__.d(__webpack_exports__, {
+					Default: () => Default,
+					default: () => Result_stories,
+					hideSections: () => hideSections,
+					truncateTitle: () => truncateTitle,
+				});
 			__webpack_require__(43105),
 				__webpack_require__(73439),
 				__webpack_require__(58188),
@@ -6833,7 +6838,7 @@
 				__webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(63399),
@@ -7001,6 +7006,23 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Result result={controller.store.results[0]} layout={'grid'} />\n")
+					),
+					(0, esm.kt)('h3', { id: 'truncatetitle' }, 'truncateTitle'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'truncateTitle'),
+						' prop utililizes the truncate filter from the snap-toolbox to allow you truncate the product title at a certain character length, and optionally append an additional string such as "..."'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Result result={controller.store.results[0]} truncateTitle={ limit: 5, append: '...' } />\n"
+						)
 					)
 				);
 			}
@@ -7172,6 +7194,12 @@
 							table: { type: { summary: 'string' }, defaultValue: { summary: Image.a } },
 							control: { type: 'text' },
 						},
+						truncateTitle: {
+							defaultValue: {},
+							description: 'truncate title options object',
+							table: { type: { summary: 'object' } },
+							control: { type: 'object' },
+						},
 						layout: {
 							description: 'Results layout',
 							defaultValue: types.Ar.GRID,
@@ -7223,23 +7251,40 @@
 				},
 			]),
 				(hideSections.args = { hideBadge: !0, hideTitle: !0, hidePricing: !0 });
+			var truncateTitle = Template.bind({});
+			(truncateTitle.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						return __generator(this, function (_a) {
+							switch (_a.label) {
+								case 0:
+									return [4, snapInstance.search()];
+								case 1:
+									return _a.sent(), [2, { controller: snapInstance }];
+							}
+						});
+					});
+				},
+			]),
+				(truncateTitle.args = { truncateTitle: { limit: 5, append: '...' } });
 		},
-		48001: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		23267: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { x: () => Result });
 			__webpack_require__(43105), __webpack_require__(26936);
-			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33847),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98095),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
-				_Atoms_Image__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(49680),
-				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(93607),
-				_Atoms_Price__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(92246),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(32697),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(79367),
-				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27193),
-				_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20874),
+			var preact_module = __webpack_require__(33847),
+				es = __webpack_require__(98095),
+				emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				Image = __webpack_require__(49680),
+				Badge = __webpack_require__(93607),
+				Price = __webpack_require__(92246),
+				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				cache = __webpack_require__(79367),
+				defined = __webpack_require__(27193);
+			__webpack_require__(74660);
+			var types = __webpack_require__(20874),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -7251,7 +7296,7 @@
 				},
 				CSS_result = function result(_a) {
 					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)(
+					return (0, emotion_react_browser_esm.iv)(
 						__assign(
 							{
 								'&.ss__result--grid': { flexDirection: 'column' },
@@ -7290,7 +7335,7 @@
 						)
 					);
 				},
-				Result = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
+				Result = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
@@ -7304,11 +7349,11 @@
 						_l,
 						_m,
 						_o,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
+						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
-									{ layout: _types__WEBPACK_IMPORTED_MODULE_7__.Ar.GRID },
+									{ layout: types.Ar.GRID },
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.result
 								),
 								properties
@@ -7334,7 +7379,7 @@
 										{ className: 'ss__result__price' },
 										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.price
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
+									(0, defined.r)({ disableStyles })
 								),
 								null === (_g = null === (_f = props.theme) || void 0 === _f ? void 0 : _f.components) || void 0 === _g ? void 0 : _g.price
 							),
@@ -7344,7 +7389,7 @@
 										{ className: 'ss__result__badge', content: 'Sale' },
 										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.badge
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
+									(0, defined.r)({ disableStyles })
 								),
 								null === (_k = null === (_j = props.theme) || void 0 === _j ? void 0 : _j.components) || void 0 === _k ? void 0 : _k.badge
 							),
@@ -7354,100 +7399,92 @@
 										{ className: 'ss__result__image', alt: null == core ? void 0 : core.name, src: null == core ? void 0 : core.imageUrl },
 										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.image
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles, fallback })
+									(0, defined.r)({ disableStyles, fallback })
 								),
 								null === (_o = null === (_m = props.theme) || void 0 === _m ? void 0 : _m.components) || void 0 === _o ? void 0 : _o.image
 							),
 						},
 						onSale = Boolean(
 							(null == core ? void 0 : core.msrp) && 1 * (null == core ? void 0 : core.msrp) > 1 * (null == core ? void 0 : core.price)
-						);
+						),
+						displayName = core.name;
 					return (
+						props.truncateTitle &&
+							(displayName = (function truncate(input, limit, append) {
+								if ('string' != typeof input || input.length <= limit) return input;
+								var lastSpace = input.lastIndexOf(' ', limit),
+									trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
+								return input.substr(0, trimIndex) + (append || '');
+							})(core.name, props.truncateTitle.limit, props.truncateTitle.append)),
 						core &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_9__.n,
-							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-								'article',
-								{
-									css: !disableStyles && CSS_result({ style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__result', 'ss__result--' + layout, className),
-								},
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-									'div',
-									{ className: 'ss__result__wrapper' },
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'article',
+									{ css: !disableStyles && CSS_result({ style }), className: classnames_default()('ss__result', 'ss__result--' + layout, className) },
+									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{ className: 'ss__result__wrapper__image' },
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-											'a',
-											{
-												href: core.url,
-												onMouseDown: function onMouseDown(e) {
-													var _a, _b;
-													null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-														void 0 === _b ||
-														_b.click(e, result);
-												},
-											},
-											!hideBadge &&
-												onSale &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-													_Atoms_Badge__WEBPACK_IMPORTED_MODULE_10__.C,
-													__assign({}, subProps.badge)
-												),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Atoms_Image__WEBPACK_IMPORTED_MODULE_11__.E, __assign({}, subProps.image))
-										)
-									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-										'div',
-										{ className: 'ss__result__wrapper__details' },
-										!hideTitle &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-												'div',
-												{ className: 'ss__result__wrapper__details__title' },
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-													'a',
-													{
-														href: core.url,
-														onMouseDown: function onMouseDown(e) {
-															var _a, _b;
-															null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-																void 0 === _b ||
-																_b.click(e, result);
-														},
+										{ className: 'ss__result__wrapper' },
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__result__wrapper__image' },
+											(0, emotion_react_browser_esm.tZ)(
+												'a',
+												{
+													href: core.url,
+													onMouseDown: function onMouseDown(e) {
+														var _a, _b;
+														null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+															void 0 === _b ||
+															_b.click(e, result);
 													},
-													core.name
-												)
-											),
-										!hidePricing &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-												'div',
-												{ className: 'ss__result__wrapper__details__pricing' },
-												core.price < core.msrp
-													? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-															preact__WEBPACK_IMPORTED_MODULE_2__.HY,
-															null,
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																_Atoms_Price__WEBPACK_IMPORTED_MODULE_12__.t,
-																__assign({}, subProps.price, { value: core.price })
-															),
-															' ',
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																_Atoms_Price__WEBPACK_IMPORTED_MODULE_12__.t,
-																__assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })
-															)
-													  )
-													: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-															_Atoms_Price__WEBPACK_IMPORTED_MODULE_12__.t,
-															__assign({}, subProps.price, { value: core.price })
-													  )
-											),
-										detailSlot && (0, preact__WEBPACK_IMPORTED_MODULE_2__.Tm)(detailSlot, { result })
+												},
+												!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, __assign({}, subProps.badge)),
+												(0, emotion_react_browser_esm.tZ)(Image.E, __assign({}, subProps.image))
+											)
+										),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__result__wrapper__details' },
+											!hideTitle &&
+												(0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__result__wrapper__details__title' },
+													(0, emotion_react_browser_esm.tZ)(
+														'a',
+														{
+															href: core.url,
+															onMouseDown: function onMouseDown(e) {
+																var _a, _b;
+																null ===
+																	(_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+																	void 0 === _b ||
+																	_b.click(e, result);
+															},
+														},
+														displayName
+													)
+												),
+											!hidePricing &&
+												(0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__result__wrapper__details__pricing' },
+													core.price < core.msrp
+														? (0, emotion_react_browser_esm.tZ)(
+																preact_module.HY,
+																null,
+																(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price })),
+																' ',
+																(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.msrp, lineThrough: !0 }))
+														  )
+														: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
+												),
+											detailSlot && (0, preact_module.Tm)(detailSlot, { result })
+										)
 									)
 								)
 							)
-						)
 					);
 				});
 		},
@@ -10106,7 +10143,7 @@
 				Carousel = __webpack_require__(61001),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(63399),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12662,7 +12699,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(98095),
 				Carousel = __webpack_require__(61001),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				defined = __webpack_require__(27193),
 				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
 				cache = __webpack_require__(79367),
@@ -13689,7 +13726,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				InlineBanner = __webpack_require__(31340),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				types = __webpack_require__(20874),
 				defined = __webpack_require__(27193),
 				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
@@ -23236,7 +23273,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.31' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.32' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23263,7 +23300,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.31');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.32');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23851,7 +23888,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.31]',
+								text: '[0.3.32]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -25302,7 +25339,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[557],
+			[266],
 			() => (
 				__webpack_exec__(47513),
 				__webpack_exec__(68260),
