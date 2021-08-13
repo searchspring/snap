@@ -12,7 +12,26 @@ import {
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
-const CORE_FIELDS = ['name', 'sku', 'imageUrl', 'thumbnailImageUrl', 'price', 'msrp', 'brand', 'url', 'uid'];
+const CORE_FIELDS = [
+	'uid',
+	'sku',
+	'name',
+	'url',
+	'addToCartUrl',
+	'price',
+	'msrp',
+	'imageUrl',
+	'secureImageUrl',
+	'thumbnailImageUrl',
+	'secureThumbnailImageUrl',
+	'rating',
+	'ratingCount',
+	'description',
+	'stockMessage',
+	'brand',
+	'popularity',
+	'caption',
+];
 
 class Result {
 	constructor(result) {
@@ -53,10 +72,13 @@ transformSearchResponse.results = (response) => {
 
 transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
-		return {
-			...coreFields,
-			[key]: decodeProperty(rawResult[key]),
-		};
+		if (typeof rawResult[key] != 'undefined') {
+			return {
+				...coreFields,
+				[key]: decodeProperty(rawResult[key]),
+			};
+		}
+		return coreFields;
 	}, {});
 
 	coreFieldValues.price = +coreFieldValues.price;
