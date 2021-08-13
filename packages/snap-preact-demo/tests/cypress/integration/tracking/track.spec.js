@@ -188,7 +188,6 @@ describe('Tracking', () => {
 				const productRenderBeacons = interception.request.body.filter((event) => event.type === BeaconType.PROFILE_PRODUCT_RENDER);
 				expect(productRenderBeacons).to.have.length(store.results.length);
 				productRenderBeacons.forEach((productRenderBeacon) => {
-					console.log('beacon', productRenderBeacon.event.product.mappings.core);
 					expect(productRenderBeacon.category).to.equal(BeaconCategory.RECOMMENDATIONS);
 					expect(productRenderBeacon.type).to.equal(BeaconType.PROFILE_PRODUCT_RENDER);
 
@@ -251,7 +250,7 @@ describe('Tracking', () => {
 				});
 
 				// click next button and assert new profile product impressions
-				cy.get('.ss__recommendation:first .ss__recommendation__next').should('exist').trigger('click');
+				cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
 				cy.wait(`@${BeaconType.PROFILE_CLICK}`).should((interception) => {
 					expect(interception.state).to.equal('Complete');
 					expect(interception.response.body).to.have.property('success').to.equal(true);
