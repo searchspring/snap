@@ -7254,8 +7254,6 @@
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)(
 						__assign(
 							{
-								display: 'inline-block',
-								width: 'auto',
 								'&.ss__result--grid': { flexDirection: 'column' },
 								'&.ss__result--list': {
 									flexDirection: 'row',
@@ -10080,6 +10078,680 @@
 				},
 			];
 		},
+		13039: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, {
+					Colors: () => Colors,
+					Names: () => Names,
+					Products: () => Products,
+					Puppys: () => Puppys,
+					Swatches: () => Swatches,
+					default: () => Carousel_stories,
+				});
+			__webpack_require__(43105),
+				__webpack_require__(73439),
+				__webpack_require__(58188),
+				__webpack_require__(34115),
+				__webpack_require__(634),
+				__webpack_require__(20796),
+				__webpack_require__(28673),
+				__webpack_require__(15735),
+				__webpack_require__(6886),
+				__webpack_require__(43450),
+				__webpack_require__(94908),
+				__webpack_require__(77950);
+			var preact_module = __webpack_require__(33847),
+				blocks = __webpack_require__(63255),
+				Carousel = __webpack_require__(61001),
+				componentArgs = __webpack_require__(55625),
+				snapify = __webpack_require__(63399),
+				Result = __webpack_require__(48001),
+				esm = (__webpack_require__(66741), __webpack_require__(30876));
+			function _extends() {
+				return (_extends =
+					Object.assign ||
+					function (target) {
+						for (var i = 1; i < arguments.length; i++) {
+							var source = arguments[i];
+							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+						}
+						return target;
+					}).apply(this, arguments);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'carousel' }, 'Carousel'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Renders a carousel of children, built using ',
+						(0, esm.kt)('a', { parentName: 'p', href: 'https://swiperjs.com/', target: '_blank', rel: 'nofollow noopener noreferrer' }, 'Swiper')
+					),
+					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
+					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Result (default)'), (0, esm.kt)('li', { parentName: 'ul' }, 'Icon')),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Additional ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper API parameters'
+						),
+						' can be specified as props, but may need to be camelCased where appropriate.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel>{children}<Carousel/>\n')),
+					(0, esm.kt)('h3', { id: 'loop' }, 'loop'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'loop'),
+						" prop enables 'infinite' looping through the result set when swiping or using the arrow buttons."
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel loop={true}>{children}<Carousel/>\n')
+					),
+					(0, esm.kt)('h3', { id: 'title' }, 'title'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'title'), ' prop specifies the carousel title'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel title={'Recommended Products'}>{children}<Carousel/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'pagination' }, 'pagination'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
+						' prop specifies if the carousel should display pagination dots. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination={true}>{children}<Carousel/>\n')
+					),
+					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'prevButton'),
+						' prop specifies the previous button element of the carousel. This can be a string or JSX element. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel prevButton={'<'}>{children}<Carousel/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'nextbutton' }, 'nextButton'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'nextButton'),
+						' prop specifies the next button element of the carousel. This can be a string or JSX element. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Carousel nextButton={'>'}>{children}<Carousel/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
+					(0, esm.kt)('p', null, 'An object that modifies the responsive behavior of the carousel at various viewports. '),
+					(0, esm.kt)('p', null, 'The object key specified the viewport for when the parameters will be applied. '),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The default configuration contains the following properties, however any ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'Swiper API parameters'
+						),
+						' can also be specified. '
+					),
+					(0, esm.kt)('p', null, (0, esm.kt)('inlineCode', { parentName: 'p' }, 'slidesPerView'), ' - number of products to display per page'),
+					(0, esm.kt)(
+						'p',
+						null,
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'slidesPerGroup'),
+						' - number of products to scroll by when next/previous button is clicked'
+					),
+					(0, esm.kt)('p', null, (0, esm.kt)('inlineCode', { parentName: 'p' }, 'spaceBetween'), ' - spacing between each product'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const defaultRecommendationResponsive = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Carousel  breakpoints={defaultRecommendationResponsive}>{children}<Carousel/>\n'
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var __assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				__awaiter = function (thisArg, _arguments, P, generator) {
+					return new (P || (P = Promise))(function (resolve, reject) {
+						function fulfilled(value) {
+							try {
+								step(generator.next(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function rejected(value) {
+							try {
+								step(generator.throw(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function step(result) {
+							result.done
+								? resolve(result.value)
+								: (function adopt(value) {
+										return value instanceof P
+											? value
+											: new P(function (resolve) {
+													resolve(value);
+											  });
+								  })(result.value).then(fulfilled, rejected);
+						}
+						step((generator = generator.apply(thisArg, _arguments || [])).next());
+					});
+				},
+				__generator = function (thisArg, body) {
+					var f,
+						y,
+						t,
+						g,
+						_ = {
+							label: 0,
+							sent: function sent() {
+								if (1 & t[0]) throw t[1];
+								return t[1];
+							},
+							trys: [],
+							ops: [],
+						};
+					return (
+						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
+						'function' == typeof Symbol &&
+							(g[Symbol.iterator] = function () {
+								return this;
+							}),
+						g
+					);
+					function verb(n) {
+						return function (v) {
+							return (function step(op) {
+								if (f) throw new TypeError('Generator is already executing.');
+								for (; _; )
+									try {
+										if (
+											((f = 1),
+											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+										)
+											return t;
+										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
+											case 0:
+											case 1:
+												t = op;
+												break;
+											case 4:
+												return _.label++, { value: op[1], done: !1 };
+											case 5:
+												_.label++, (y = op[1]), (op = [0]);
+												continue;
+											case 7:
+												(op = _.ops.pop()), _.trys.pop();
+												continue;
+											default:
+												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
+													_ = 0;
+													continue;
+												}
+												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+													_.label = op[1];
+													break;
+												}
+												if (6 === op[0] && _.label < t[1]) {
+													(_.label = t[1]), (t = op);
+													break;
+												}
+												if (t && _.label < t[2]) {
+													(_.label = t[2]), _.ops.push(op);
+													break;
+												}
+												t[2] && _.ops.pop(), _.trys.pop();
+												continue;
+										}
+										op = body.call(thisArg, _);
+									} catch (e) {
+										(op = [6, e]), (y = 0);
+									} finally {
+										f = t = 0;
+									}
+								if (5 & op[0]) throw op[1];
+								return { value: op[0] ? op[1] : void 0, done: !0 };
+							})([n, v]);
+						};
+					}
+				};
+			const Carousel_stories = {
+				title: 'Organisms/Carousel',
+				component: Carousel.l,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: __assign(
+					{
+						loop: {
+							defaultValue: !0,
+							description: 'Recommendation pagination loops',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
+							control: { type: 'boolean' },
+						},
+						title: {
+							description: 'Recommendation title',
+							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						pagination: {
+							defaultValue: !1,
+							description: 'Display pagination dots',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						prevButton: { description: 'Previous button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
+						nextButton: { description: 'Next button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
+						breakpoints: {
+							defaultValue: Carousel.M,
+							description: 'Recommendation title',
+							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
+							control: { type: 'object' },
+						},
+						onNextButtonClick: {
+							description: 'Carousel next button click event handler',
+							table: { type: { summary: 'function' } },
+							action: 'onClick',
+						},
+						onPrevButtonClick: {
+							description: 'Carousel prev button click event handler',
+							table: { type: { summary: 'function' } },
+							action: 'onClick',
+						},
+						onCarouselClick: { description: 'Carousel Child click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
+						onSlideChange: { description: 'On slide change event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
+						onBreakpoint: {
+							description: 'Window resize breakpoint event handler',
+							table: { type: { summary: 'function' } },
+							action: 'window resize',
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var snapInstance = snapify.K.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } }),
+				Products = function Products(props, _a) {
+					var _b,
+						controller = _a.loaded.controller;
+					return (0, preact_module.h)(
+						Carousel.l,
+						__assign({}, props),
+						null === (_b = controller.store) || void 0 === _b
+							? void 0
+							: _b.results.map(function (result) {
+									return (0, preact_module.h)(Result.x, { result });
+							  })
+					);
+				},
+				people = ['Chris', 'Kevin', 'Dennis', 'John', 'Kelly', 'Jessy', 'Phil', 'Kyle'],
+				Names = function Names(props) {
+					return (0, preact_module.h)(Carousel.l, __assign({}, props), people);
+				},
+				colors = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'black', 'white'],
+				Colors = function Colors(props) {
+					return (0, preact_module.h)(
+						Carousel.l,
+						__assign({}, props),
+						colors.map(function (color) {
+							return (0, preact_module.h)('div', { style: { height: '100px', width: '100px', background: color } });
+						})
+					);
+				},
+				puppyImgs = [
+					'https://www.thesprucepets.com/thmb/EBp990AJt94XwAp7oOAzUtdg9Xg=/2121x1193/smart/filters:no_upscale()/golden-retriever-puppy-in-grass-923135452-5c887d4146e0fb00013365ba.jpg',
+					'https://media.4-paws.org/1/e/d/6/1ed6da75afe37d82757142dc7c6633a532f53a7d/VIER%20PFOTEN_2019-03-15_001-2886x1999-1920x1330.jpg',
+					'https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg',
+					'https://www.forbes.com/uk/advisor/wp-content/uploads/2021/05/short-coated-tan-puppy-stockpack-unsplash-scaled.jpg',
+					'https://www.rcinet.ca/en/wp-content/uploads/sites/3/2020/11/dog-cute-puppy-spca.jpg',
+					'https://www.petmd.com/sites/default/files/styles/article_image/public/puppy-laying-down-outside.jpg?itok=ClNNCi52',
+					'https://gardneranimalcarecenter.com/wp-content/uploads/2019/10/puppy-1082141_1280-min-1080x675.jpg',
+				],
+				Puppys = function Puppys(props) {
+					return (0, preact_module.h)(
+						Carousel.l,
+						__assign({}, props),
+						puppyImgs.map(function (pup) {
+							return (0, preact_module.h)('img', { style: { width: '150px' }, src: pup });
+						})
+					);
+				},
+				Swatches = function Swatches(props, _a) {
+					var _b,
+						controller = _a.loaded.controller;
+					return (0, preact_module.h)(
+						Carousel.l,
+						__assign({}, props),
+						null === (_b = controller.store) || void 0 === _b
+							? void 0
+							: _b.results.map(function (result) {
+									return (0, preact_module.h)(
+										'div',
+										{ style: { maxWidth: '250px' } },
+										(0, preact_module.h)(Result.x, {
+											result,
+											detailSlot: (0, preact_module.h)(
+												Carousel.l,
+												__assign({}, props, {
+													onCarouselClick: function onCarouselClick(e) {
+														return (result.mappings.core.imageUrl = e.target.src);
+													},
+												}),
+												puppyImgs.map(function (img) {
+													return (0,
+													preact_module.h)('div', { style: { position: 'relative', height: '25px', width: '25px' } }, (0, preact_module.h)('img', { src: img, style: { top: '0', left: '0', right: '0', width: 'auto', border: '2px solid white', bottom: '0', height: 'auto', margin: 'auto', display: 'inline', opacity: '1', padding: '2px', position: 'absolute', maxWidth: '100%', maxHeight: '100%' } }));
+												})
+											),
+										})
+									);
+							  })
+					);
+				};
+			(Products.loaders = [
+				function () {
+					return __awaiter(void 0, void 0, void 0, function () {
+						return __generator(this, function (_a) {
+							switch (_a.label) {
+								case 0:
+									return [4, snapInstance.search()];
+								case 1:
+									return _a.sent(), [2, { controller: snapInstance }];
+							}
+						});
+					});
+				},
+			]),
+				(Swatches.loaders = [
+					function () {
+						return __awaiter(void 0, void 0, void 0, function () {
+							return __generator(this, function (_a) {
+								switch (_a.label) {
+									case 0:
+										return [4, snapInstance.search()];
+									case 1:
+										return _a.sent(), [2, { controller: snapInstance }];
+								}
+							});
+						});
+					},
+				]);
+		},
+		61001: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { M: () => defaultCarouselResponsive, l: () => Carousel });
+			__webpack_require__(43105), __webpack_require__(14586), __webpack_require__(71245), __webpack_require__(43450);
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34619),
+				swiper_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(18491),
+				swiper_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(92718),
+				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(13701),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_require__(26242), __webpack_require__(28165)),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(6572),
+				swiper_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(83028),
+				swiper_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(98395),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(32697),
+				__assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				CSS_carousel = function carousel(_a) {
+					var _b,
+						_c,
+						theme = _a.theme,
+						style = _a.style;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
+						__assign(
+							{
+								position: 'relative',
+								padding: '0 20px',
+								overflow: 'hidden',
+								'& .swiper-pagination-bullet-active': {
+									background: (null === (_b = null == theme ? void 0 : theme.colors) || void 0 === _b ? void 0 : _b.primary) || 'inherit',
+								},
+								'& .ss__carousel__next, .ss__carousel__prev': {
+									position: 'absolute',
+									padding: '5px',
+									bottom: 'calc(50% - 18px)',
+									zIndex: '2',
+									cursor: 'pointer',
+									'&.swiper-button-disabled': { opacity: '0.3', cursor: 'default' },
+								},
+								'& .ss__carousel__next': { right: '0' },
+								'& .ss__carousel__prev': { left: '0' },
+								'& .swiper-pagination': {
+									margin: '0',
+									position: 'absolute',
+									textAlign: 'center',
+									transition: '.3s opacity',
+									transform: 'translate3d(0, 0, 0)',
+									zIndex: '10',
+								},
+								'& .swiper-container-horizontal>.swiper-pagination-bullets,.swiper-pagination-custom, .swiper-pagination-fraction': {
+									bottom: '10px',
+									left: '0',
+									width: '100%',
+								},
+								'& .swiper-pagination-bullet': {
+									width: '8px',
+									height: '8px',
+									display: 'inline-block',
+									borderRadius: '50%',
+									background: '#000',
+									opacity: '.2',
+									cursor: 'pointer',
+									margin: '0 4px',
+									'&.swiper-pagination-bullet-active': {
+										opacity: '0.8',
+										background: (null === (_c = null == theme ? void 0 : theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#000',
+									},
+								},
+							},
+							style
+						)
+					);
+				},
+				defaultCarouselResponsive = {
+					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
+					480: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10 },
+					768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10 },
+					1024: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 10 },
+					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
+				},
+				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						_d,
+						_e,
+						globalTheme = (0, _providers_theme__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
+							__assign(
+								__assign(
+									{ breakpoints: defaultCarouselResponsive, pagination: !1, loop: !0 },
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.carousel
+								),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.carousel
+						),
+						children = props.children,
+						breakpoints = props.breakpoints,
+						loop = props.loop,
+						pagination = props.pagination,
+						nextButton = props.nextButton,
+						prevButton = props.prevButton,
+						onNextButtonClick = props.onNextButtonClick,
+						onPrevButtonClick = props.onPrevButtonClick,
+						onCarouselClick = props.onCarouselClick,
+						onBreakpoint = props.onBreakpoint,
+						onSlideChange = props.onSlideChange,
+						_onInit = props.onInit,
+						disableStyles = props.disableStyles,
+						style = props.style,
+						className = props.className,
+						subProps = {
+							icon: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__carousel__icon' },
+										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
+									),
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
+								),
+								null === (_e = null == theme ? void 0 : theme.components) || void 0 === _e ? void 0 : _e.icon
+							),
+						};
+					swiper_core__WEBPACK_IMPORTED_MODULE_11__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_12__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_13__.Z]);
+					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null),
+						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null),
+						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null);
+					return (
+						children &&
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+							'div',
+							{
+								ref: rootComponentRef,
+								css: !disableStyles && CSS_carousel({ theme, style }),
+								className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel', className),
+							},
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								'div',
+								{
+									className: 'ss__carousel__prev',
+									ref: navigationPrevRef,
+									onClick:
+										onPrevButtonClick &&
+										function (e) {
+											return onPrevButtonClick(e);
+										},
+								},
+								prevButton ||
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+										_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_14__.J,
+										__assign({ icon: 'angle-left' }, subProps.icon)
+									)
+							),
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								'div',
+								{
+									className: 'ss__carousel__next',
+									ref: navigationNextRef,
+									onClick:
+										onNextButtonClick &&
+										function (e) {
+											return onNextButtonClick(e);
+										},
+								},
+								nextButton ||
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+										_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_14__.J,
+										__assign({ icon: 'angle-right' }, subProps.icon)
+									)
+							),
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								swiper_react__WEBPACK_IMPORTED_MODULE_15__.t,
+								{
+									centerInsufficientSlides: !0,
+									onInit: function onInit(swiper) {
+										(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
+											(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
+											_onInit && _onInit(swiper.realIndex, swiper.loopedSlides);
+									},
+									onBreakpoint:
+										onBreakpoint &&
+										function (swiper) {
+											onBreakpoint(swiper.realIndex, swiper.loopedSlides);
+										},
+									onSlideChange:
+										onSlideChange &&
+										function (swiper) {
+											onSlideChange(swiper.realIndex, swiper.loopedSlides);
+										},
+									onClick:
+										onCarouselClick &&
+										function (swiper, e) {
+											var clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
+											Number.isNaN(clickedIndex) || onCarouselClick(e, clickedIndex);
+										},
+									loop,
+									breakpoints,
+									pagination: !!pagination && { clickable: !0 },
+								},
+								children.map(function (child) {
+									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_16__.o, null, child);
+								})
+							)
+						)
+					);
+				});
+		},
 		42289: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -11984,19 +12656,12 @@
 					__webpack_require__(32501),
 					__webpack_require__(18178),
 					__webpack_require__(43450),
-					__webpack_require__(14586),
-					__webpack_require__(71245),
 					__webpack_require__(34619)),
-				core_class = __webpack_require__(18491),
-				pagination_pagination = __webpack_require__(92718),
-				navigation = __webpack_require__(13701),
 				emotion_react_browser_esm = (__webpack_require__(26242), __webpack_require__(28165)),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(98095),
-				Icon = __webpack_require__(6572),
-				swiper = __webpack_require__(83028),
-				swiper_slide = __webpack_require__(98395),
+				Carousel = __webpack_require__(61001),
 				Result = __webpack_require__(48001),
 				defined = __webpack_require__(27193),
 				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
@@ -12095,6 +12760,9 @@
 						_h,
 						_j,
 						_k,
+						_l,
+						_m,
+						_o,
 						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -12107,57 +12775,62 @@
 						breakpoints = props.breakpoints,
 						loop = props.loop,
 						pagination = props.pagination,
-						nextButton = props.nextButton,
-						prevButton = props.prevButton,
-						disableStyles = props.disableStyles,
+						disableStyles = (props.nextButton, props.prevButton, props.disableStyles),
 						style = props.style,
-						className = props.className,
-						additionalProps = __rest(props, [
-							'title',
-							'controller',
-							'children',
-							'breakpoints',
-							'loop',
-							'pagination',
-							'nextButton',
-							'prevButton',
-							'disableStyles',
-							'style',
-							'className',
-						]);
+						className = props.className;
+					__rest(props, [
+						'title',
+						'controller',
+						'children',
+						'breakpoints',
+						'loop',
+						'pagination',
+						'nextButton',
+						'prevButton',
+						'disableStyles',
+						'style',
+						'className',
+					]);
 					if (!controller || 'recommendation' !== controller.type)
 						throw new Error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
 					if (!children || children.length === controller.store.results.length) {
 						var results = null === (_c = controller.store) || void 0 === _c ? void 0 : _c.results,
 							subProps = {
+								carousel: __assign(
+									__assign(
+										__assign(
+											{ className: 'ss__recommendation__Carousel' },
+											null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.carousel
+										),
+										(0, defined.r)({ disableStyles })
+									),
+									null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.carousel
+								),
 								result: __assign(
 									__assign(
 										__assign(
 											{ className: 'ss__recommendation__result' },
-											null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.result
+											null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.result
 										),
 										(0, defined.r)({ disableStyles })
 									),
-									null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.result
+									null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.result
 								),
 								icon: __assign(
 									__assign(
 										__assign(
 											{ className: 'ss__recommendation__icon' },
-											null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
+											null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.icon
 										),
 										(0, defined.r)({ disableStyles })
 									),
-									null === (_h = null == theme ? void 0 : theme.components) || void 0 === _h ? void 0 : _h.icon
+									null === (_l = null == theme ? void 0 : theme.components) || void 0 === _l ? void 0 : _l.icon
 								),
-							};
-						core_class.Z.use([pagination_pagination.Z, navigation.Z]);
-						var navigationPrevRef = (0, hooks_module.sO)(null),
-							navigationNextRef = (0, hooks_module.sO)(null),
+							},
 							rootComponentRef = (0, hooks_module.sO)(null),
-							_l = (0, hooks_module.eJ)([0, 0]),
-							initialIndexes = _l[0],
-							setInitialIndexes = _l[1],
+							_p = (0, hooks_module.eJ)([0, 0]),
+							initialIndexes = _p[0],
+							setInitialIndexes = _p[1],
 							inViewport = (function useIntersection(ref, rootMargin, fireOnce) {
 								void 0 === rootMargin && (rootMargin = '0px'), void 0 === fireOnce && (fireOnce = !1);
 								var _a = (0, hooks_module.eJ)(!1),
@@ -12197,7 +12870,7 @@
 						return (
 							inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
 							(children || results.length) &&
-								(null === (_k = null === (_j = controller) || void 0 === _j ? void 0 : _j.track) || void 0 === _k || _k.render()),
+								(null === (_o = null === (_m = controller) || void 0 === _m ? void 0 : _m.track) || void 0 === _o || _o.render()),
 							(children || (null == results ? void 0 : results.length)) &&
 								(0, emotion_react_browser_esm.tZ)(
 									cache.n,
@@ -12211,60 +12884,39 @@
 										},
 										title && (0, emotion_react_browser_esm.tZ)('h3', { className: 'ss__recommendation__title' }, title),
 										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{
-												className: 'ss__recommendation__prev',
-												ref: navigationPrevRef,
-												onClick: function onClick(e) {
-													return controller.track.click(e);
-												},
-											},
-											prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({ icon: 'angle-left' }, subProps.icon))
-										),
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{
-												className: 'ss__recommendation__next',
-												ref: navigationNextRef,
-												onClick: function onClick(e) {
-													return controller.track.click(e);
-												},
-											},
-											nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({ icon: 'angle-right' }, subProps.icon))
-										),
-										(0, emotion_react_browser_esm.tZ)(
-											swiper.t,
+											Carousel.l,
 											__assign(
 												{
-													centerInsufficientSlides: !0,
-													onInit: function onInit(swiper) {
-														(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
-															(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
-															setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+													onNextButtonClick: function onNextButtonClick(e) {
+														return controller.track.click(e);
 													},
-													onBreakpoint: function onBreakpoint(swiper) {
-														sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+													onPrevButtonClick: function onPrevButtonClick(e) {
+														return controller.track.click(e);
 													},
-													onSlideChange: function onSlideChange(swiper) {
-														sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+													onBreakpoint: function onBreakpoint(realIndex, loopedSlides) {
+														return sendProductImpression(realIndex, loopedSlides);
 													},
-													onClick: function onClick(swiper, e) {
-														var clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-														controller.track.click(e), Number.isNaN(clickedIndex) || controller.track.product.click(e, results[clickedIndex]);
+													onSlideChange: function onSlideChange(realIndex, loopedSlides) {
+														return sendProductImpression(realIndex, loopedSlides);
+													},
+													onCarouselClick: function onCarouselClick(e, clickedIndex) {
+														controller.track.click(e), controller.track.product.click(e, results[clickedIndex]);
+													},
+													onInit: function onInit(realIndex, loopedSlides) {
+														return setInitialIndexes([realIndex, loopedSlides]);
 													},
 													loop,
 													breakpoints,
-													pagination: !!pagination && { clickable: !0 },
+													pagination,
 												},
-												additionalProps
+												subProps.carousel
 											),
 											children
 												? children.map(function (child) {
-														return (0, emotion_react_browser_esm.tZ)(swiper_slide.o, null, child);
+														return child;
 												  })
 												: results.map(function (result) {
-														return (0,
-														emotion_react_browser_esm.tZ)(swiper_slide.o, null, (0, emotion_react_browser_esm.tZ)(Result.x, __assign({ controller, result }, subProps.result)));
+														return (0, emotion_react_browser_esm.tZ)(Result.x, __assign({ controller, result }, subProps.result));
 												  })
 										)
 									)
@@ -12293,12 +12945,7 @@
 					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.kt)('h1', { id: 'recommendation' }, 'Recommendation'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'Renders a carousel of product recommendations, built using ',
-						(0, esm.kt)('a', { parentName: 'p', href: 'https://swiperjs.com/', target: '_blank', rel: 'nofollow noopener noreferrer' }, 'Swiper')
-					),
+					(0, esm.kt)('p', null, 'Renders a carousel of product recommendations, built using the Carousel Component.'),
 					(0, esm.kt)(
 						'p',
 						null,
@@ -12316,7 +12963,13 @@
 						' event via the Controller instead of making modifications in the component.'
 					),
 					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
-					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Result (default)'), (0, esm.kt)('li', { parentName: 'ul' }, 'Icon')),
+					(0, esm.kt)(
+						'ul',
+						null,
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Carousel'),
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Result (default)'),
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Icon')
+					),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
 					(0, esm.kt)(
 						'p',
@@ -12337,7 +12990,11 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
 						' prop specifies a reference to the RecommendationController'
 					),
-					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Results controller={controller} />\n')),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation controller={controller} />\n')
+					),
 					(0, esm.kt)('h3', { id: 'loop' }, 'loop'),
 					(0, esm.kt)(
 						'p',
@@ -12349,7 +13006,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Results controller={controller} layout={'grid'} />\n")
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation controller={controller} loop={true} />\n')
 					),
 					(0, esm.kt)('h3', { id: 'title' }, 'title'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'title'), ' prop specifies the carousel title'),
@@ -12359,7 +13016,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Results controller={controller} title={'Recommended Products'} />\n"
+							"<Recommendation controller={controller} title={'Recommended Products'} />\n"
 						)
 					),
 					(0, esm.kt)('h3', { id: 'pagination' }, 'pagination'),
@@ -12373,7 +13030,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Results controller={controller} pagination={true} />\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation controller={controller} pagination={true} />\n')
 					),
 					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
 					(0, esm.kt)(
@@ -12386,7 +13043,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Results controller={controller} prevButton={'<'} />\n")
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Recommendation controller={controller} prevButton={'<'} />\n")
 					),
 					(0, esm.kt)('h3', { id: 'nextbutton' }, 'nextButton'),
 					(0, esm.kt)(
@@ -12399,7 +13056,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Results controller={controller} nextButton={'>'} />\n")
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Recommendation controller={controller} nextButton={'>'} />\n")
 					),
 					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)('p', null, 'An object that modifies the responsive behavior of the carousel at various viewports. '),
@@ -22579,7 +23236,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.30' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.31' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22606,7 +23263,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.30');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.31');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23194,7 +23851,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.30]',
+								text: '[0.3.31]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24594,6 +25251,7 @@
 				'./components/Molecules/Slideout/Slideout.stories.tsx': 48265,
 				'./components/Molecules/Slider/Slider.stories.tsx': 99004,
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 3661,
+				'./components/Organisms/Carousel/Carousel.stories.tsx': 13039,
 				'./components/Organisms/Facet/Facet.stories.tsx': 42289,
 				'./components/Organisms/Facets/Facets.stories.tsx': 52609,
 				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': 53726,
