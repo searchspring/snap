@@ -150,7 +150,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const onSale = Boolean(core?.msrp && core?.msrp * 1 > core?.price * 1);
 	let displayName = core.name;
 	if (props.truncateTitle) {
-		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append ? props.truncateTitle.append : undefined);
+		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append);
 	}
 	return (
 		core && (
