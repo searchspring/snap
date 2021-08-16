@@ -184,7 +184,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98095),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -242,7 +242,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(98095),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -269,7 +269,7 @@
 					var _a,
 						_b,
 						_c,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -603,7 +603,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98095),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -948,7 +948,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(98095),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
 			var __assign = function () {
 					return (__assign =
@@ -983,7 +983,7 @@
 						_d,
 						showContent,
 						setShowContent,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -1082,7 +1082,7 @@
 				formatNumber = __webpack_require__(96006),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -1101,7 +1101,7 @@
 				var _a,
 					_b,
 					_c,
-					globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 					props = __assign(
 						__assign(
 							__assign(
@@ -1597,7 +1597,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				_paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(86285),
 				__assign = function () {
@@ -1999,7 +1999,7 @@
 				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -2086,7 +2086,7 @@
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -2147,7 +2147,7 @@
 				var _a,
 					_b,
 					_c,
-					globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 					theme = __assign(__assign({}, globalTheme), properties.theme),
 					props = __assign(
 						__assign(
@@ -2568,7 +2568,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(20874),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -2851,7 +2851,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20874),
 				__assign = function () {
@@ -3048,7 +3048,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -3304,7 +3304,7 @@
 			var emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				Price_assign = function () {
 					return (Price_assign =
@@ -3333,7 +3333,7 @@
 				var _a,
 					_b,
 					_c,
-					globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 					theme = Price_assign(Price_assign({}, globalTheme), properties.theme),
 					props = Price_assign(
 						Price_assign(
@@ -3604,7 +3604,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98095),
 				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(27193),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(79367),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(6572),
 				__assign = function () {
@@ -4099,7 +4099,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -4511,7 +4511,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -4981,7 +4981,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(95064),
@@ -5540,7 +5540,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98095),
 				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(27193),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6572),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -6073,7 +6073,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
 				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(27193),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(79367),
 				_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(60295),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6572),
@@ -6213,7 +6213,7 @@
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				defined = __webpack_require__(27193),
 				Icon = __webpack_require__(6572),
@@ -6256,7 +6256,7 @@
 						_d,
 						_e,
 						_f,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -7280,7 +7280,7 @@
 				Image = __webpack_require__(49680),
 				Badge = __webpack_require__(93607),
 				Price = __webpack_require__(92246),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				defined = __webpack_require__(27193);
 			__webpack_require__(74660);
@@ -7349,7 +7349,7 @@
 						_l,
 						_m,
 						_o,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -7513,7 +7513,7 @@
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				defined = __webpack_require__(27193),
 				Dropdown = __webpack_require__(30766),
@@ -7588,7 +7588,7 @@
 						_m,
 						_o,
 						setSelection,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -8438,7 +8438,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				defined = __webpack_require__(27193),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
 			var Overlay = __webpack_require__(82480),
 				__assign = function () {
@@ -8486,7 +8486,7 @@
 					_d,
 					_e,
 					_f,
-					globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 					props = __assign(
 						__assign(
 							__assign(
@@ -9101,7 +9101,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				react_ranger = __webpack_require__(61511),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
 			__webpack_require__(16781),
 				__webpack_require__(77950),
@@ -9217,7 +9217,7 @@
 						_b,
 						_c,
 						_d,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -9408,7 +9408,7 @@
 				Banner = __webpack_require__(39358),
 				Facet = __webpack_require__(30650),
 				defined = __webpack_require__(27193),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				types = __webpack_require__(20874),
 				__assign = function () {
@@ -9527,7 +9527,7 @@
 						_r,
 						_s,
 						delayTimeout,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -10587,7 +10587,7 @@
 				swiper_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(83028),
 				swiper_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(98395),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
-				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(32697),
+				_providers_theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -11491,7 +11491,7 @@
 				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(30766),
 				_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(20874),
 				_utilities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(27193),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(32697),
+				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -11812,7 +11812,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(98095),
 				Facet = __webpack_require__(30650),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				defined = __webpack_require__(27193),
 				__assign = function () {
@@ -11835,7 +11835,7 @@
 						_d,
 						_e,
 						_f,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign({}, null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facets),
@@ -12116,7 +12116,7 @@
 				es = __webpack_require__(98095),
 				Filter = __webpack_require__(70768),
 				defined = __webpack_require__(27193),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -12141,7 +12141,7 @@
 						_e,
 						_f,
 						_g,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -12701,7 +12701,7 @@
 				Carousel = __webpack_require__(61001),
 				Result = __webpack_require__(23267),
 				defined = __webpack_require__(27193),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
@@ -12800,7 +12800,7 @@
 						_l,
 						_m,
 						_o,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign({ breakpoints: defaultRecommendationResponsive, pagination: !1, loop: !0 }, properties),
@@ -13729,7 +13729,7 @@
 				Result = __webpack_require__(23267),
 				types = __webpack_require__(20874),
 				defined = __webpack_require__(27193),
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				hooks_module = (__webpack_require__(43430), __webpack_require__(68995), __webpack_require__(54226), __webpack_require__(34619));
 			function useDisplaySettings(responsiveObj) {
@@ -13828,7 +13828,7 @@
 						_g,
 						_h,
 						_j,
-						globalTheme = (0, emotion_element_a8309070_browser_esm.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -16407,7 +16407,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { n: () => CacheProvider });
 			var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33847),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32697),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64189),
 				emotionCache = (0, __webpack_require__(99622).Z)({ key: 'ss', prepend: !0 }),
 				CacheProvider = function CacheProvider(props) {
 					return (0, preact__WEBPACK_IMPORTED_MODULE_0__.h)(
@@ -19688,7 +19688,26 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CORE_FIELDS = ['name', 'sku', 'imageUrl', 'thumbnailImageUrl', 'price', 'msrp', 'brand', 'url', 'uid'],
+				CORE_FIELDS = [
+					'uid',
+					'sku',
+					'name',
+					'url',
+					'addToCartUrl',
+					'price',
+					'msrp',
+					'imageUrl',
+					'secureImageUrl',
+					'thumbnailImageUrl',
+					'secureThumbnailImageUrl',
+					'rating',
+					'ratingCount',
+					'description',
+					'stockMessage',
+					'brand',
+					'popularity',
+					'caption',
+				],
 				Result = function Result(result) {
 					Object.assign(this, result);
 				};
@@ -19737,7 +19756,9 @@
 				(transformSearchResponse.result = function (rawResult) {
 					var coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
 						var _a;
-						return searchResponse_assign(searchResponse_assign({}, coreFields), (((_a = {})[key] = decodeProperty(rawResult[key])), _a));
+						return void 0 !== rawResult[key]
+							? searchResponse_assign(searchResponse_assign({}, coreFields), (((_a = {})[key] = decodeProperty(rawResult[key])), _a))
+							: coreFields;
 					}, {});
 					(coreFieldValues.price = +coreFieldValues.price), (coreFieldValues.msrp = +coreFieldValues.msrp);
 					var attributes = Object.keys(rawResult)
@@ -23284,7 +23305,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.33' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.34' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23311,7 +23332,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.33');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.34');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23899,7 +23920,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.33]',
+								text: '[0.3.34]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24332,7 +24353,7 @@
 				esm = __webpack_require__(87537),
 				preact_module = __webpack_require__(33847),
 				defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1', hover: '#f8f6fd', text: { secondary: '#ffffff' } }, components: {} },
-				emotion_element_a8309070_browser_esm = __webpack_require__(32697),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				injectStylesIntoStyleTag = __webpack_require__(67851),
 				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
 				styles = __webpack_require__(535),
@@ -24341,7 +24362,7 @@
 			styles.Z.locals;
 			var decorators = [
 					function (Story) {
-						return (0, preact_module.h)(emotion_element_a8309070_browser_esm.a, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+						return (0, preact_module.h)(emotion_element_99289b21_browser_esm.a, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
 					},
 				],
 				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
