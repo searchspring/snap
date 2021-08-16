@@ -181,7 +181,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	};
 	return (
 		options &&
-		typeof options == 'object' &&
+		(typeof options == 'object' || Array.isArray(options)) &&
 		options.length && (
 			<CacheProvider>
 				<div
