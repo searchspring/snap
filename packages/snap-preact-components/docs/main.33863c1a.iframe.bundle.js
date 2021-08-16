@@ -11835,13 +11835,23 @@
 						_d,
 						_e,
 						_f,
+						_g,
+						_h,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
-								__assign({}, null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facets),
+								__assign(
+									{
+										facets:
+											null === (_b = null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.store) || void 0 === _b
+												? void 0
+												: _b.facets,
+									},
+									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.facets
+								),
 								properties
 							),
-							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.facets
+							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.facets
 						),
 						facets = props.facets,
 						disableStyles = props.disableStyles,
@@ -11852,11 +11862,11 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facets__facet' },
-										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.facetWrapper
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.facetWrapper
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.facetWrapper
+								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.facetWrapper
 							),
 						};
 					return (
@@ -11898,18 +11908,27 @@
 					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Facet')),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to the search controller.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facets controller={controller} />\n')),
 					(0, esm.kt)('h3', { id: 'facets-1' }, 'facets'),
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The optional',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facets'),
-						' prop specifies a reference to the facets store array. '
+						' prop specifies a reference to the facets store array. If no facets prop is passed in, the component will default to using the facets in controller.store. '
 					),
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facets facets={controller?.store?.facets} />\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facets controller={controller} facets={facets} />\n')
 					)
 				);
 			}
@@ -12050,7 +12069,7 @@
 					{
 						facets: {
 							description: 'Facets store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'Facets store object' } },
 							control: { type: 'none' },
 						},
@@ -12060,11 +12079,9 @@
 			};
 			var snapInstance = snapify.K.search({ id: 'Facets', globals: { siteId: '8uyt2m' } }),
 				ObservableFacets = (0, mobxreact_esm.Pi)(function (_a) {
-					var _b,
-						args = _a.args,
+					var args = _a.args,
 						controller = _a.controller;
-					return (0,
-					preact_module.h)(Facets, Facets_stories_assign({}, args, { facets: null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b ? void 0 : _b.facets }));
+					return (0, preact_module.h)(Facets, Facets_stories_assign({}, args, { controller }));
 				}),
 				Default = function Template(args, _a) {
 					var controller = _a.loaded.controller;
@@ -12141,16 +12158,32 @@
 						_e,
 						_f,
 						_g,
+						_h,
+						_j,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
-									{ title: 'Current Filters', clearAllLabel: 'Clear All', clearAllIcon: 'close-thin', filterIcon: 'close-thin', separator: ':' },
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.filterSummary
+									{
+										title: 'Current Filters',
+										clearAllLabel: 'Clear All',
+										clearAllIcon: 'close-thin',
+										filterIcon: 'close-thin',
+										filters:
+											null === (_b = null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.store) || void 0 === _b
+												? void 0
+												: _b.filters,
+										onClearAllClick: function onClearAllClick() {
+											var _a;
+											return null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.urlManager.remove('filter').go();
+										},
+										separator: ':',
+									},
+									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.filterSummary
 								),
 								properties
 							),
-							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.filterSummary
+							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.filterSummary
 						),
 						filters = props.filters,
 						title = props.title,
@@ -12170,11 +12203,11 @@
 								__assign(
 									__assign(
 										{ className: 'ss__filter-summary__filter' },
-										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.filter
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.filter
 									),
 									(0, defined.r)({ disableStyles, separator, hideFacetLabel, icon: filterIcon })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.filter
+								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.filter
 							),
 						};
 					return (null == filters ? void 0 : filters.length)
@@ -12205,7 +12238,7 @@
 											__assign({}, subProps.filter, {
 												icon: clearAllIcon,
 												className:
-													(null === (_g = null == subProps ? void 0 : subProps.filter) || void 0 === _g ? void 0 : _g.className) +
+													(null === (_j = null == subProps ? void 0 : subProps.filter) || void 0 === _j ? void 0 : _j.className) +
 													' ss__filter-summary__clear-all',
 												hideFacetLabel: !0,
 												valueLabel: clearAllLabel,
@@ -12242,13 +12275,26 @@
 					(0, esm.kt)('h2', { id: 'components-used' }, 'Components Used'),
 					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Filter')),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to the search controller.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<FilterSummary controller={controller} />\n')
+					),
 					(0, esm.kt)('h3', { id: 'filters' }, 'filters'),
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'filters'),
-						' prop specifies a reference to the filters store array. '
+						' prop specifies a reference to the filters store array. If no filters prop is passed in, the component will default to using the filters in controller.store. '
 					),
 					(0, esm.kt)(
 						'pre',
@@ -12561,7 +12607,7 @@
 				},
 				argTypes: FilterSummary_stories_assign(
 					{
-						filters: { description: 'Filters object', type: { required: !0 }, table: { type: { summary: 'object' } }, control: { type: 'object' } },
+						filters: { description: 'Filters object', type: { required: !1 }, table: { type: { summary: 'object' } }, control: { type: 'object' } },
 						title: {
 							defaultValue: 'Current Filters',
 							description: 'Filters object',
@@ -12614,14 +12660,8 @@
 					},
 				}),
 				Template = function Template(args, _a) {
-					var _b,
-						controller = _a.loaded.controller;
-					return (0, preact_module.h)(
-						FilterSummary,
-						FilterSummary_stories_assign({}, args, {
-							filters: null === (_b = null == controller ? void 0 : controller.store) || void 0 === _b ? void 0 : _b.filters,
-						})
-					);
+					var controller = _a.loaded.controller;
+					return (0, preact_module.h)(FilterSummary, FilterSummary_stories_assign({}, args, { controller }));
 				},
 				Regular = Template.bind({});
 			Regular.loaders = [
@@ -13383,13 +13423,26 @@
 						(0, esm.kt)('li', { parentName: 'ul' }, (0, esm.kt)('p', { parentName: 'li' }, 'InlineBanner'))
 					),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to the search controller.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Results controller={controller.store.results} />\n')
+					),
 					(0, esm.kt)('h3', { id: 'results-1' }, 'results'),
 					(0, esm.kt)(
 						'p',
 						null,
-						'The required ',
+						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
-						' prop specifies a reference to the results store array. '
+						' prop specifies a reference to the results store array. If no results prop is passed in, the component will default to using the results in controller.store. '
 					),
 					(0, esm.kt)(
 						'pre',
@@ -13628,7 +13681,7 @@
 					{
 						results: {
 							description: 'Results store reference',
-							type: { required: !0 },
+							type: { required: !1 },
 							table: { type: { summary: 'Results store object' } },
 							control: { type: 'none' },
 						},
@@ -13828,16 +13881,27 @@
 						_g,
 						_h,
 						_j,
+						_k,
+						_l,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
-									{ results: [], columns: 4, gapSize: '20px', layout: types.Ar.GRID, responsive: defaultResponsiveProps },
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.results
+									{
+										results:
+											null === (_b = null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.store) || void 0 === _b
+												? void 0
+												: _b.results,
+										columns: 4,
+										gapSize: '20px',
+										layout: types.Ar.GRID,
+										responsive: defaultResponsiveProps,
+									},
+									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.results
 								),
 								properties
 							),
-							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.results
+							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.results
 						),
 						displaySettings = useDisplaySettings(props.responsive);
 					displaySettings && Object.keys(displaySettings).length && (props = __assign(__assign({}, props), displaySettings));
@@ -13852,21 +13916,21 @@
 								__assign(
 									__assign(
 										{ className: 'ss__results__result' },
-										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.result
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.result
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.result
+								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.result
 							),
 							inlineBanner: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__results__inline-banner' },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.inlineBanner
+										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.inlineBanner
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.inlineBanner
+								null === (_l = null === (_k = props.theme) || void 0 === _k ? void 0 : _k.components) || void 0 === _l ? void 0 : _l.inlineBanner
 							),
 						};
 					return (
@@ -23305,7 +23369,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.35' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.36' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23332,7 +23396,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.35');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.36');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23920,7 +23984,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.35]',
+								text: '[0.3.36]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24305,7 +24369,7 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('search', { id }));
+							var cntrlr = (controllers[id] = snap.createController('search', config));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
