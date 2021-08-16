@@ -54,7 +54,7 @@ const CSS = {
 			},
 
 			'& .ss__autocomplete__terms': {
-				flex: `0 1 ${vertical || horizontalTerms || showTrending ? 'auto' : '150px'}`,
+				flex: `0 0 ${vertical || horizontalTerms || showTrending ? 'auto' : '150px'}`,
 				order: 1,
 				background: '#f8f8f8',
 				width: horizontalTerms && !vertical ? '100%' : null,
@@ -105,7 +105,7 @@ const CSS = {
 			},
 			'& .ss__autocomplete__facets': {
 				display: 'flex',
-				flex: `0 0 ${horizontalTerms && !vertical && !hideTerms ? '200px' : 'auto'}`,
+				flex: `0 0 ${horizontalTerms && !vertical && !hideTerms ? '150px' : 'auto'}`,
 				flexDirection: vertical ? 'row' : 'column',
 				justifyContent: vertical ? 'space-between' : null,
 				columnGap: '20px',
@@ -219,13 +219,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	let { input } = props;
 	let inputViewportOffsetBottom;
 	if (input) {
-		let rect;
 		if (typeof input === 'string') {
-			rect = document.querySelector(input)?.getBoundingClientRect();
-		} else {
-			rect = (input as Element)?.getBoundingClientRect();
+			input = document.querySelector(input) as Element;
 		}
+		const rect = input?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
+		input?.setAttribute('spellcheck', 'false');
+		input?.setAttribute('autocomplete', 'off');
 	}
 	const subProps: AutocompleteSubProps = {
 		facet: {
@@ -361,28 +361,31 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					className={classnames('ss__autocomplete', className)}
 					onClick={(e) => e.stopPropagation()}
 				>
-					{!hideTerms &&
-						(termsSlot ? (
-							cloneElement(termsSlot, { terms, trending })
-						) : (
-							<div className="ss__autocomplete__terms">
-								{showTrending ? <h5>{trendingTitle}</h5> : termsTitle ? <h5>{termsTitle}</h5> : null}
-								<div className="ss__autocomplete__terms__options">
-									{(showTrending ? trending : terms).map((term) => (
-										<div className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
-											<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
-												{emIfy(term.value, state.input)}
-											</a>
-										</div>
-									))}
-								</div>
-							</div>
-						))}
+					{!hideTerms && (
+						<div className="ss__autocomplete__terms">
+							{termsSlot ? (
+								cloneElement(termsSlot, { terms, trending })
+							) : (
+								<>
+									{showTrending ? <h5>{trendingTitle}</h5> : termsTitle ? <h5>{termsTitle}</h5> : null}
+									<div className="ss__autocomplete__terms__options">
+										{(showTrending ? trending : terms).map((term) => (
+											<div className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
+												<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+													{emIfy(term.value, state.input)}
+												</a>
+											</div>
+										))}
+									</div>
+								</>
+							)}
+						</div>
+					)}
 
 					{!hideFacets &&
 						facetsToShow.length &&
 						(facetsSlot ? (
-							cloneElement(facetsSlot, { facets: facetsToShow, merchandising, controller })
+							<div className="ss__autocomplete__facets">{cloneElement(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
 						) : (
 							<>
 								{facetsTitle && vertical ? (
@@ -401,40 +404,42 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						))}
 
 					{!hideContent ? (
-						contentSlot ? (
-							cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })
-						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
-							<div className="ss__autocomplete__content">
-								{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
-									<div className="ss__autocomplete__content__results">
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+						<div className="ss__autocomplete__content">
+							{contentSlot ? (
+								cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })
+							) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+								<>
+									{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
+										<div className="ss__autocomplete__content__results">
+											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
 
-										{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
-										<Results results={results} {...subProps.results} controller={controller} />
+											{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
+											<Results results={results} {...subProps.results} controller={controller} />
 
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
-									</div>
-								) : null}
+											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+										</div>
+									) : null}
 
-								{search?.query?.string ? (
-									<div className="ss__autocomplete__content__info">
-										{results.length === 0 ? (
-											<>
-												<p>No results found for "{search.query.string}".</p>
-												<p>Please try another search.</p>
-											</>
-										) : (
-											<a href={state.url.href}>
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-												{search.query.string}"
-												<Icon {...subProps.icon} />
-											</a>
-										)}
-									</div>
-								) : null}
-							</div>
-						) : null
+									{search?.query?.string ? (
+										<div className="ss__autocomplete__content__info">
+											{results.length === 0 ? (
+												<>
+													<p>No results found for "{search.query.string}".</p>
+													<p>Please try another search.</p>
+												</>
+											) : (
+												<a href={state.url.href}>
+													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+													{search.query.string}"
+													<Icon {...subProps.icon} />
+												</a>
+											)}
+										</div>
+									) : null}
+								</>
+							) : null}
+						</div>
 					) : null}
 				</div>
 			</CacheProvider>
