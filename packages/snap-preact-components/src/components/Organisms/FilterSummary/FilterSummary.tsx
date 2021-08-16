@@ -34,7 +34,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		clearAllIcon: 'close-thin',
 		filterIcon: 'close-thin',
 		filters: properties.controller?.store?.filters,
-		onClearAllClick: properties.controller?.urlManager.remove('filter'),
+		onClearAllClick: () => properties.controller?.urlManager.remove('filter').go(),
 		separator: ':',
 		// global theme
 		...globalTheme?.components?.filterSummary,
