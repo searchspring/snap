@@ -185,6 +185,7 @@ export const Slider = observer((properties: SliderProps): JSX.Element => {
 									outline: 'none',
 								},
 							})}
+							aria-label={'slider__handle'}
 						>
 							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
 								<label>{sprintf(facet.formatValue, value)}</label>
