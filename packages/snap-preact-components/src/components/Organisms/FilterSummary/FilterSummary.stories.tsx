@@ -24,7 +24,7 @@ export default {
 	argTypes: {
 		filters: {
 			description: 'Filters object',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'object',
