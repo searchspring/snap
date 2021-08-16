@@ -37,7 +37,7 @@ export default {
 	argTypes: {
 		results: {
 			description: 'Results store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'Results store object',

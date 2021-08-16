@@ -9,6 +9,7 @@ import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
+import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 const CSS = {
 	facets: ({ style }) =>
@@ -22,6 +23,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	const props: FacetsProps = {
 		// default props
+		facets: properties.controller?.store?.facets,
 		// global theme
 		...globalTheme?.components?.facets,
 		// props
@@ -45,7 +47,6 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 			...props.theme?.components?.facetWrapper,
 		},
 	};
-
 	return (
 		facets?.length > 0 && (
 			<CacheProvider>
@@ -64,5 +65,6 @@ interface FacetsSubProps {
 }
 
 export interface FacetsProps extends ComponentProps {
-	facets: any;
+	facets?: any;
+	controller?: SearchController | AutocompleteController;
 }

@@ -7,9 +7,16 @@ Renders all facets utilizing the `<Facet />` component.
 
 ## Usage
 
-### facets
-The required `facets` prop specifies a reference to the facets store array. 
+### controller
+The `controller` prop specifies a reference to the search controller.
 
 ```jsx
-<Facets facets={controller?.store?.facets} />
+<Facets controller={controller} />
+```
+
+### facets
+The optional`facets` prop specifies a reference to the facets store array. If no facets prop is passed in, the component will default to using the facets in controller.store. 
+
+```jsx
+<Facets controller={controller} facets={facets} />
 ```

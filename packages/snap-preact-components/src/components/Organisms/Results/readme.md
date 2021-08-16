@@ -9,8 +9,15 @@ Renders a page of results utilizing `<Result />` components.
 
 ## Usage
 
+### controller
+The `controller` prop specifies a reference to the search controller.
+
+```jsx
+<Results controller={controller.store.results} />
+```
+
 ### results
-The required `results` prop specifies a reference to the results store array. 
+The `results` prop specifies a reference to the results store array. If no results prop is passed in, the component will default to using the results in controller.store. 
 
 ```jsx
 <Results results={controller.store.results} />

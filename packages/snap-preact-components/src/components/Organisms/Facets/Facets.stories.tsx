@@ -32,7 +32,7 @@ export default {
 	argTypes: {
 		facets: {
 			description: 'Facets store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'Facets store object',
@@ -47,7 +47,7 @@ export default {
 const snapInstance = Snapify.search({ id: 'Facets', globals: { siteId: '8uyt2m' } });
 
 const ObservableFacets = observer(({ args, controller }) => {
-	return <Facets {...args} facets={controller?.store?.facets} />;
+	return <Facets {...args} controller={controller} />;
 });
 
 const Template = (args: FacetsProps, { loaded: { controller } }) => {

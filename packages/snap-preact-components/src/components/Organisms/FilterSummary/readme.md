@@ -6,8 +6,16 @@ Renders all selected filters including a wrapper with a title and a 'clear all' 
 - Filter
 ## Usage
 
+
+### controller
+The `controller` prop specifies a reference to the search controller.
+
+```jsx
+<FilterSummary controller={controller} />
+```
+
 ### filters
-The required `filters` prop specifies a reference to the filters store array. 
+The `filters` prop specifies a reference to the filters store array. If no filters prop is passed in, the component will default to using the filters in controller.store. 
 
 ```jsx
 <FilterSummary filters={controller.store.filters} />

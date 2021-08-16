@@ -24,7 +24,7 @@ export default {
 	argTypes: {
 		filters: {
 			description: 'Filters object',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'object',
@@ -152,7 +152,7 @@ const snapInstance = Snapify.search({
 		],
 	},
 });
-const Template = (args: FilterSummaryProps, { loaded: { controller } }) => <FilterSummary {...args} filters={controller?.store?.filters} />;
+const Template = (args: FilterSummaryProps, { loaded: { controller } }) => <FilterSummary {...args} controller={controller} />;
 
 export const Regular = Template.bind({});
 Regular.loaders = [
