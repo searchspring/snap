@@ -2,14 +2,14 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Slider, SliderProps } from './Slider';
+import { FacetSlider, SliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
-import Readme from '../Slider/readme.md';
+import Readme from '../FacetSlider/readme.md';
 
 export default {
-	title: `Molecules/Slider`,
-	component: Slider,
+	title: `Molecules/FacetSlider`,
+	component: FacetSlider,
 	parameters: {
 		docs: {
 			page: () => (
@@ -125,6 +125,6 @@ export default {
 	},
 };
 
-const Template = (args: SliderProps) => <Slider {...args} facet={sliderFacetMock} />;
+const Template = (args: SliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
 
 export const Price = Template.bind({});

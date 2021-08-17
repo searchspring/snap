@@ -94,7 +94,7 @@ const CSS = {
 		}),
 };
 
-export const Slider = observer((properties: SliderProps): JSX.Element => {
+export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 

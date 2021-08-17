@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
-import { Slider } from './Slider';
+import { FacetSlider } from './FacetSlider';
 import { sprintf } from '../../../utilities';
 
 describe('Slider Component', () => {
@@ -22,19 +22,19 @@ describe('Slider Component', () => {
 	};
 
 	it('renders', () => {
-		const rendered = render(<Slider {...args} />);
+		const rendered = render(<FacetSlider {...args} />);
 		const sliderElement = rendered.container.querySelector('.ss__slider');
 		expect(sliderElement).toBeInTheDocument();
 	});
 
 	it('has both slide handles', () => {
-		const rendered = render(<Slider {...args} />);
+		const rendered = render(<FacetSlider {...args} />);
 		const sliderHandles = rendered.container.querySelectorAll('.ss__slider__handle');
 		expect(sliderHandles.length).toBe(2);
 	});
 
 	it('both handles are where they should be and have proper text', () => {
-		const rendered = render(<Slider {...args} />);
+		const rendered = render(<FacetSlider {...args} />);
 		const sliderMarks = rendered.container.querySelectorAll('.ss__slider__handle label');
 
 		expect(sliderMarks[0].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active.low));
@@ -47,7 +47,7 @@ describe('Slider Component', () => {
 			railColor: 'rgb(0, 100, 0)',
 			handleColor: 'rgb(0, 0, 100)',
 		};
-		const rendered = render(<Slider {...args} {...colorArgs} />);
+		const rendered = render(<FacetSlider {...args} {...colorArgs} />);
 		const trackElement = rendered.container.querySelector('.ss__slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(colorArgs.trackColor);
@@ -64,7 +64,7 @@ describe('Slider Component', () => {
 	it('is themeable with ThemeProvider', () => {
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<Slider {...args} />
+				<FacetSlider {...args} />
 			</ThemeProvider>
 		);
 		const trackElement = rendered.container.querySelector('.ss__slider__segment');
@@ -81,7 +81,7 @@ describe('Slider Component', () => {
 	});
 
 	it('is themeable with theme prop', () => {
-		const rendered = render(<Slider {...args} theme={theme} />);
+		const rendered = render(<FacetSlider {...args} theme={theme} />);
 		const trackElement = rendered.container.querySelector('.ss__slider__segment');
 		let styles = getComputedStyle(trackElement);
 		expect(styles.backgroundColor).toBe(theme.components.slider.trackColor);
@@ -107,7 +107,7 @@ describe('Slider Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<Slider {...args} theme={themeOverride} />
+				<FacetSlider {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
 		const trackElement = rendered.container.querySelector('.ss__slider__segment');
