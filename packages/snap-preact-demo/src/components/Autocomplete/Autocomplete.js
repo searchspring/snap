@@ -12,15 +12,6 @@ export class Autocomplete extends Component {
 				facet: {
 					limit: 5,
 				},
-				results: {
-					theme: {
-						components: {
-							result: {
-								hideBadge: true,
-							},
-						},
-					},
-				},
 			},
 		};
 

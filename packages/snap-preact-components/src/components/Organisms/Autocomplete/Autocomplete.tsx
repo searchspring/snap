@@ -18,18 +18,7 @@ import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	Autocomplete: ({
-		inputViewportOffsetBottom,
-		hideTerms,
-		hideFacets,
-		horizontalTerms,
-		noResults,
-		showTrending,
-		viewportMaxHeight,
-		vertical,
-		style,
-		theme,
-	}) =>
+	Autocomplete: ({ inputViewportOffsetBottom, hideFacets, horizontalTerms, noResults, showTrending, viewportMaxHeight, vertical, style, theme }) =>
 		css({
 			'& *': {
 				boxSizing: 'border-box',
@@ -105,7 +94,7 @@ const CSS = {
 			},
 			'& .ss__autocomplete__facets': {
 				display: 'flex',
-				flex: `0 0 ${horizontalTerms && !vertical && !hideTerms ? '150px' : 'auto'}`,
+				flex: `0 0 150px`,
 				flexDirection: vertical ? 'row' : 'column',
 				justifyContent: vertical ? 'space-between' : null,
 				columnGap: '20px',
@@ -356,7 +345,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							inputViewportOffsetBottom,
 							hideFacets,
 							horizontalTerms,
-							hideTerms,
 							noResults: search?.query?.string && results.length === 0,
 							showTrending,
 							viewportMaxHeight,
