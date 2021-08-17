@@ -37,6 +37,9 @@ const CSS = {
 						margin: 'auto',
 						bottom: 0,
 						textAlign: 'center',
+						stroke: 'black',
+						strokeWidth: '2px',
+						strokeLinejoin: 'round',
 					},
 				},
 				'& .ss__facet-palette-options__option__value': {
@@ -78,19 +81,12 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			// inherited props
 			...defined({
 				disableStyles,
+				icon: 'close-thin',
+				color: 'white',
+				size: '30%',
 			}),
 			// component theme overrides
 			...props.theme?.components?.icon,
-		},
-		icon_bg: {
-			icon: 'close',
-			color: 'black',
-			size: '40%',
-		},
-		icon_fg: {
-			icon: 'close-thin',
-			color: 'white',
-			size: '30%',
 		},
 	};
 
@@ -106,13 +102,11 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
-								{!hideIcon && value.filtered && (
-									<>
-										<Icon {...subProps.icon} {...subProps.icon_bg} />
-										<Icon {...subProps.icon} {...subProps.icon_fg} />
-									</>
-								)}
+							<div
+								className={classnames('ss__facet-palette-options__option__palette', `ss__facet-palette-options__option__palette--${value.value}`)}
+								css={{ background: value.value }}
+							>
+								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
 							</div>
 							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
 						</a>
@@ -136,6 +130,4 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 
 interface FacetPaletteOptionsSubProps {
 	icon: IconProps;
-	icon_bg: IconProps;
-	icon_fg: IconProps;
 }
