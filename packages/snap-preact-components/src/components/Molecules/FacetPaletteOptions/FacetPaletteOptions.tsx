@@ -20,6 +20,21 @@ const CSS = {
 				position: 'relative',
 				'&:hover': {
 					cursor: 'pointer',
+					'& .ss__facet-palette-options__option__palette': {
+						'& .ss__facet-palette-options__icon': {
+							opacity: 1,
+						},
+					},
+				},
+				'& .ss__facet-palette-options__option__wrapper': {
+					border: `2px solid transparent`,
+					borderRadius: '100%',
+					padding: '4px',
+				},
+				'&.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__wrapper': {
+						borderColor: 'black',
+					},
 				},
 				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
@@ -29,7 +44,7 @@ const CSS = {
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					'.ss__facet-palette-options__icon': {
+					'& .ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
 						right: 0,
@@ -40,6 +55,7 @@ const CSS = {
 						stroke: 'black',
 						strokeWidth: '2px',
 						strokeLinejoin: 'round',
+						opacity: 0,
 					},
 				},
 				'& .ss__facet-palette-options__option__value': {
@@ -102,11 +118,13 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div
-								className={classnames('ss__facet-palette-options__option__palette', `ss__facet-palette-options__option__palette--${value.value}`)}
-								css={{ background: value.value }}
-							>
-								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
+							<div className="ss__facet-palette-options__option__wrapper">
+								<div
+									className={classnames('ss__facet-palette-options__option__palette', `ss__facet-palette-options__option__palette--${value.value}`)}
+									css={{ background: value.value }}
+								>
+									{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
+								</div>
 							</div>
 							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
 						</a>
