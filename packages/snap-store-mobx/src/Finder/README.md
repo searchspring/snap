@@ -85,4 +85,5 @@ Boolean set to `true` if this selection is disabled. A `Selection` object will b
 Contains the value of the selection that was made. 
 
 ### `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)
+
+See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
