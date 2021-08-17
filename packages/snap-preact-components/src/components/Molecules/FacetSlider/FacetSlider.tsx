@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
@@ -47,6 +47,23 @@ const CSS = {
 				background: trackColor || theme.colors?.secondary || '#ccc',
 				height: '100%',
 			},
+
+			'& .ss__slider__handleWrapper': {
+				textAlign: 'center',
+			},
+
+			'& label.ss__slider__handle__label': {
+				display: 'inline-block',
+				marginTop: '20px',
+			},
+
+			'& label.ss__slider__handle__label.handleLabel-0': {
+				'&:after': {
+					content: '"-"',
+					padding: '5px',
+				},
+			},
+
 			'& .ss__slider__handle': {
 				background: handleColor || theme.colors?.primary || '#333',
 				display: 'flex',
@@ -79,13 +96,19 @@ const CSS = {
 					cursor: 'pointer',
 				},
 
-				'& label': {
+				'& label.handle__label-sticky': {
 					position: 'absolute',
 					top: '-20px',
 					fontFamily: 'Roboto, Helvetica, Arial',
 					fontSize: '14px',
+					marginTop: '0px',
 				},
 
+				'& label.handle__label-sticky.handleLabel-0': {
+					'&:after': {
+						content: '""',
+					},
+				},
 				'&.ss__slider__handle--active': {
 					background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
 				},
@@ -118,6 +141,7 @@ export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 		showTicks,
 		tickSize,
 		facet,
+		stickyHandleLabel,
 		onChange,
 		onDrag,
 		disableStyles,
@@ -174,23 +198,34 @@ export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 					{segments.map(({ getSegmentProps }, index) => (
 						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
 					))}
+					<div className={'ss__slider__handleWrapper'}>
+						{handles.map(({ value, active, getHandleProps }, idx) => (
+							<>
+								<button
+									{...getHandleProps({
+										style: {
+											appearance: 'none',
+											border: 'none',
+											background: 'transparent',
+											outline: 'none',
+										},
+									})}
+								>
+									<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
+										{stickyHandleLabel && (
+											<label className={classnames('ss__slider__handle__label', 'handle__label-sticky', `handleLabel-${idx}`)}>
+												{sprintf(facet.formatValue, value)}
+											</label>
+										)}
+									</div>
+								</button>
 
-					{handles.map(({ value, active, getHandleProps }) => (
-						<button
-							{...getHandleProps({
-								style: {
-									appearance: 'none',
-									border: 'none',
-									background: 'transparent',
-									outline: 'none',
-								},
-							})}
-						>
-							<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
-								<label>{sprintf(facet.formatValue, value)}</label>
-							</div>
-						</button>
-					))}
+								{!stickyHandleLabel && (
+									<label className={classnames('ss__slider__handle__label', `handleLabel-${idx}`)}>{sprintf(facet.formatValue, value)}</label>
+								)}
+							</>
+						))}
+					</div>
 				</div>
 			</CacheProvider>
 		)
@@ -206,6 +241,7 @@ export interface SliderProps extends ComponentProps {
 	showTicks?: boolean;
 	tickSize?: number;
 	tickTextColor?: string;
+	stickyHandleLabel?: boolean;
 	facet: RangeFacet;
 	onChange?: (values: number[]) => void;
 	onDrag?: (values: number[]) => void;

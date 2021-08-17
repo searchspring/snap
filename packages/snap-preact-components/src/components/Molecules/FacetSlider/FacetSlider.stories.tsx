@@ -94,6 +94,16 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		stickyHandleLabel: {
+			description: 'enables/disables sticky handle labels',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		handleDraggingColor: {
 			description: 'Slider handle color when dragging',
 			table: {
