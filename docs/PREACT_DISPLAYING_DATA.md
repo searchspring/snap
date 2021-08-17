@@ -16,11 +16,7 @@ The `loading` property will be true is a network request is in progress. This pr
 
 ### controller.store.custom
 
-The `custom` property is an empty object that is not utilized by any core Snap functionallity however is available for you to use as a store. It is suggested to be used for any custom functionallity that Snap does not handle natively (ie. keeping track of a list/grid view state)
-
-You will likely be utlizing various [Snap Events](/#/start-preact-events) to modify the `custom` object. 
-
-
+See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
 ## Search Store
 
@@ -219,7 +215,7 @@ Each result object contains the following notable properties:
 
 `result.attributes` remaining attributes
 
-`result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered.
+`result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered. See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
 Note: if you will be creating a custom Result component, be sure to include intellisuggest product click tracking. Available via `controller.track.product.click()` as seen in the example below. This should be invoked `onClick` or `onMouseDown` on each Result.
 
