@@ -44,7 +44,7 @@ export class Term {
 		this.active = term.active;
 		this.value = term.value;
 
-		this.url = services?.urlManager?.detach().set({ query: this.value });
+		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
 			terms.map((term) => {
@@ -54,6 +54,8 @@ export class Term {
 			this.active = true;
 			rootState.locks.terms.lock();
 			rootState.locks.facets.unlock();
+			rootState.term = this.value;
+			rootState.url = rootState.url.set('query', this.value);
 
 			services?.urlManager.set({ query: this.value }).go();
 		};
