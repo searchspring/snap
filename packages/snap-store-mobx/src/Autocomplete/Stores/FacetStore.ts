@@ -7,9 +7,8 @@ export class FacetStore extends Array {
 
 	constructor(config, services, storage, facetsData, paginationData, meta, rootState) {
 		// allow for only a singular facet option selection at a time
-		services.urlManager = services.urlManager.remove('filter');
-
-		const facets = new SearchFacetStore(config, services, storage, facetsData, paginationData, meta);
+		const alteredServices = { ...services, urlManager: services.urlManager.remove('filter') };
+		const facets = new SearchFacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {

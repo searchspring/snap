@@ -39,7 +39,7 @@ describe('Term Store', () => {
 	});
 
 	it('builds terms with the correct properties', () => {
-		const fn = jest.spyOn(services.urlManager, 'detach');
+		const fn = jest.spyOn(services.urlManager, 'set');
 		const searchData = new SearchData({ search: 'autocomplete' });
 		const autocomplete = searchData.autocomplete;
 		const termStore = new TermStore(services, autocomplete, searchData.pagination, rootState);
