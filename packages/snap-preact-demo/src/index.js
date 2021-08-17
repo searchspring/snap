@@ -4,8 +4,9 @@ import { h, Fragment, render } from 'preact';
 /* searchspring imports */
 
 import { Snap } from '@searchspring/snap-preact';
-import { Autocomplete } from '@searchspring/snap-preact-components';
+
 /* local imports */
+import { Autocomplete } from './components/Autocomplete/Autocomplete';
 import { Content } from './components/Content/Content';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { Recs } from './components/Recommendations/';
