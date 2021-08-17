@@ -46,7 +46,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 
 	let props: ResultsProp = {
 		// default props
-		results: [],
+		results: properties.controller?.store?.results,
 		columns: 4,
 		gapSize: '20px',
 		layout: Layout.GRID,
@@ -124,7 +124,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 });
 
 export interface ResultsProp extends ComponentProps {
-	results: ResultType[] | InlineBannerContent[];
+	results?: ResultType[] | InlineBannerContent[];
 	columns?: number;
 	rows?: number;
 	gapSize?: string;

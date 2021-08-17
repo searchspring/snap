@@ -181,7 +181,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	};
 	return (
 		options &&
-		Array.isArray(options) &&
+		(typeof options == 'object' || Array.isArray(options)) &&
 		options.length && (
 			<CacheProvider>
 				<div
@@ -287,6 +287,7 @@ export type Option = {
 	[otherOptions: string]: any;
 };
 export interface SelectProps extends ComponentProps {
+	options: Option[];
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
@@ -300,7 +301,6 @@ export interface SelectProps extends ComponentProps {
 	label?: string | JSX.Element;
 	native?: boolean;
 	onSelect?: (e: Event, option: Option) => void;
-	options: Option[];
 	selected?: Option;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;

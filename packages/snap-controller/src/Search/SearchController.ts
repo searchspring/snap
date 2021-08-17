@@ -21,6 +21,7 @@ const defaultConfig: SearchControllerConfig = {
 		},
 		facets: {
 			trim: true,
+			pinFiltered: true,
 		},
 	},
 };
@@ -202,22 +203,6 @@ export class SearchController extends AbstractController {
 				 * SearchData to return mock data which already contains meta data
 				 */
 				response.meta = this.client.meta;
-			}
-
-			// modify response
-			// TODO: move to store
-			if (this.config.settings.facets.trim) {
-				response.facets = response.facets.filter((facet) => {
-					if (!facet.filtered && facet.values?.length == 1) {
-						return facet.values[0].count != response.pagination.totalResults;
-					} else if (facet.values?.length == 0) {
-						return false;
-					} else if (facet.type == 'range' && facet.range.low == facet.range.high) {
-						return false;
-					}
-
-					return true;
-				});
 			}
 
 			// infinite functionality

@@ -136,9 +136,11 @@ Note: It is possible that the init event has already fired by this time (should 
 
 ```typescript
 search.plugin((controller) => {
-	controller.store.custom.variables = {
-		currency: {
-			symbol: '$'
+	controller.store.custom = {
+		variables: {
+			currency: {
+				symbol: '$'
+			}
 		}
 	}
 });

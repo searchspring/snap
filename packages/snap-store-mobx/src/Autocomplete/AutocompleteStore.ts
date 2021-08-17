@@ -78,24 +78,34 @@ export class AutocompleteStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
+
+		// only run if we want to update the terms (not locked)
+		if (!this.state.locks.terms.locked) {
+			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);
+		}
+
+		// set state url to match active term (used for setting from input text)
+		const activeTerm = this.terms?.filter((term) => term.active)[0];
+		if (activeTerm && this.state.term != activeTerm.value) {
+			this.state.term = activeTerm.value;
+			this.state.url = this.state.url.set('query', activeTerm.value);
+		}
+
 		this.merchandising = new MerchandisingStore(this.services, data.merchandising);
 		this.search = new QueryStore(this.services, data.autocomplete, data.search);
 
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {
-			this.facets = new FacetStore(this.services, this.storage, data.facets, this.meta, this.state);
+			this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state);
 		}
 
 		this.filters = new FilterStore(this.services, data.filters, this.meta);
 		this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising);
+
 		if (this.results.length === 0) {
 			// if a trending term was selected and then a subsequent search yields no results,
 			// reset trending terms to remove active state
 			this.resetTrending();
-		}
-		// only run if we want to update the terms (not locked)
-		if (!this.state.locks.terms.locked) {
-			this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state);
 		}
 
 		this.pagination = new PaginationStore({}, this.services, data.pagination);

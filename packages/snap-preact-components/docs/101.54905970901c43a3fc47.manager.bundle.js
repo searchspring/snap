@@ -1,6 +1,6 @@
-/*! For license information please see 900.8be76b7f9e6db29ef4a1.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 101.54905970901c43a3fc47.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[900],
+	[101],
 	{
 		43128: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -8765,7 +8765,7 @@
 						mode = _ref.mode,
 						fullAPI = _ref.fullAPI,
 						dismissedVersionNotification = store.getState().dismissedVersionNotification,
-						state = { versions: Object.assign({ current: { version: '6.3.6' } }, getVersionCheckData()), dismissedVersionNotification },
+						state = { versions: Object.assign({ current: { version: '6.3.7' } }, getVersionCheckData()), dismissedVersionNotification },
 						api = {
 							getCurrentVersion: function getCurrentVersion() {
 								return store.getState().versions.current;
@@ -17562,7 +17562,7 @@
 			'use strict';
 			__webpack_require__(25047), __webpack_require__(83206), __webpack_require__(57406);
 		},
-		71014: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		2186: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var _templateObject,
 				global_window = __webpack_require__(35048),
@@ -21819,6 +21819,8 @@
 						return t;
 					}).apply(this, arguments);
 			};
+			Object.create;
+			Object.create;
 			var idCounter = 0;
 			function cbToCb(cb) {
 				return 'function' == typeof cb ? cb : downshift_esm_noop;
@@ -33710,7 +33712,7 @@
 			module.exports = path.Symbol;
 		},
 		57406: (module, __unused_webpack_exports, __webpack_require__) => {
-			var parent = __webpack_require__(53407);
+			var parent = __webpack_require__(23805);
 			__webpack_require__(28982),
 				__webpack_require__(89995),
 				__webpack_require__(95033),
@@ -34723,6 +34725,11 @@
 			var UA = __webpack_require__(80598);
 			module.exports = /MSIE|Trident/.test(UA);
 		},
+		8983: (module, __unused_webpack_exports, __webpack_require__) => {
+			var userAgent = __webpack_require__(80598),
+				global = __webpack_require__(9859);
+			module.exports = /iphone|ipod|ipad/i.test(userAgent) && void 0 !== global.Pebble;
+		},
 		32023: (module, __unused_webpack_exports, __webpack_require__) => {
 			var userAgent = __webpack_require__(80598);
 			module.exports = /(?:iphone|ipod|ipad).*applewebkit/i.test(userAgent);
@@ -35373,6 +35380,7 @@
 				getOwnPropertyDescriptor = __webpack_require__(97933).f,
 				macrotask = __webpack_require__(55795).set,
 				IS_IOS = __webpack_require__(32023),
+				IS_IOS_PEBBLE = __webpack_require__(8983),
 				IS_WEBOS_WEBKIT = __webpack_require__(10263),
 				IS_NODE = __webpack_require__(28801),
 				MutationObserver = global.MutationObserver || global.WebKitMutationObserver,
@@ -35395,7 +35403,7 @@
 					(last = void 0), parent && parent.enter();
 				}),
 				IS_IOS || IS_NODE || IS_WEBOS_WEBKIT || !MutationObserver || !document
-					? Promise && Promise.resolve
+					? !IS_IOS_PEBBLE && Promise && Promise.resolve
 						? (((promise = Promise.resolve(void 0)).constructor = Promise),
 						  (then = promise.then),
 						  (notify = function () {
@@ -36082,7 +36090,7 @@
 				store = __webpack_require__(85353);
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
-			})('versions', []).push({ version: '3.16.0', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
+			})('versions', []).push({ version: '3.16.1', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
 		},
 		37942: (module, __unused_webpack_exports, __webpack_require__) => {
 			var anObject = __webpack_require__(21176),
@@ -39690,6 +39698,10 @@
 						});
 			}
 			setToStringTag(URLConstructor, 'URL'), $({ global: !0, forced: !USE_NATIVE_URL, sham: !DESCRIPTORS }, { URL: URLConstructor });
+		},
+		23805: (module, __unused_webpack_exports, __webpack_require__) => {
+			var parent = __webpack_require__(53407);
+			__webpack_require__(6886), (module.exports = parent);
 		},
 		29693: (module, exports, __webpack_require__) => {
 			'use strict';
@@ -46541,6 +46553,13 @@
 				return !0;
 			};
 		},
+		67226: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var hasSymbols = __webpack_require__(66679);
+			module.exports = function hasToStringTagShams() {
+				return hasSymbols() && !!Symbol.toStringTag;
+			};
+		},
 		23198: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var bind = __webpack_require__(4090);
@@ -46789,7 +46808,7 @@
 		},
 		52635: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var hasToStringTag = 'function' == typeof Symbol && 'symbol' == typeof Symbol.toStringTag,
+			var hasToStringTag = __webpack_require__(67226)(),
 				$toString = __webpack_require__(62680)('Object.prototype.toString'),
 				isStandardArguments = function isArguments(value) {
 					return !(hasToStringTag && value && 'object' == typeof value && Symbol.toStringTag in value) && '[object Arguments]' === $toString(value);
@@ -46846,7 +46865,7 @@
 					}
 				},
 				toStr = Object.prototype.toString,
-				hasToStringTag = 'function' == typeof Symbol && 'symbol' == typeof Symbol.toStringTag,
+				hasToStringTag = 'function' == typeof Symbol && !!Symbol.toStringTag,
 				documentDotAll = 'object' == typeof document && void 0 === document.all && void 0 !== document.all ? document.all : {};
 			module.exports = reflectApply
 				? function isCallable(value) {
@@ -46879,11 +46898,11 @@
 						return '[object Function]' === strClass || '[object GeneratorFunction]' === strClass;
 				  };
 		},
-		54277: (module) => {
+		54277: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var getDay = Date.prototype.getDay,
 				toStr = Object.prototype.toString,
-				hasToStringTag = 'function' == typeof Symbol && !!Symbol.toStringTag;
+				hasToStringTag = __webpack_require__(67226)();
 			module.exports = function isDateObject(value) {
 				return (
 					'object' == typeof value &&
@@ -46968,7 +46987,7 @@
 				isRegexMarker,
 				badStringifier,
 				callBound = __webpack_require__(62680),
-				hasToStringTag = __webpack_require__(66679)() && !!Symbol.toStringTag;
+				hasToStringTag = __webpack_require__(67226)();
 			if (hasToStringTag) {
 				(has = callBound('Object.prototype.hasOwnProperty')), ($exec = callBound('RegExp.prototype.exec')), (isRegexMarker = {});
 				var throwRegexMarker = function () {
@@ -47026,11 +47045,11 @@
 						return !1;
 					});
 		},
-		26302: (module) => {
+		26302: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var strValue = String.prototype.valueOf,
 				toStr = Object.prototype.toString,
-				hasToStringTag = 'function' == typeof Symbol && !!Symbol.toStringTag;
+				hasToStringTag = __webpack_require__(67226)();
 			module.exports = function isString(value) {
 				return (
 					'string' == typeof value ||

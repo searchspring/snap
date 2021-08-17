@@ -9,6 +9,7 @@ import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, Filter as FilterType } from '../../../types';
+import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 const CSS = {
 	filterSummary: ({ style }) =>
@@ -32,6 +33,8 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		clearAllLabel: 'Clear All',
 		clearAllIcon: 'close-thin',
 		filterIcon: 'close-thin',
+		filters: properties.controller?.store?.filters,
+		onClearAllClick: () => properties.controller?.urlManager.remove('filter').go(),
 		separator: ':',
 		// global theme
 		...globalTheme?.components?.filterSummary,
@@ -105,7 +108,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 });
 
 export interface FilterSummaryProps extends ComponentProps {
-	filters: FilterType[];
+	filters?: FilterType[];
 	title?: string;
 	filterIcon?: string;
 	clearAllIcon?: string;
@@ -115,6 +118,7 @@ export interface FilterSummaryProps extends ComponentProps {
 	hideClearAll?: boolean;
 	onClick?: (e: Event, filterFilter) => void;
 	onClearAllClick?: (e: Event) => void;
+	controller?: SearchController | AutocompleteController;
 }
 
 interface FilterSummarySubProps {

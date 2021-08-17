@@ -119,13 +119,14 @@ Contains the field name, ie. 'ss_price'.
 If any of the facet's values have been filtered, the facet `filtered` property will be `true`.
 
 ### `custom` property
-This is an empty object that has automatically been marked as an observable by MobX. This is the preferred place to place custom facet state.
+See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
 Example inside of a `SearchController` middleware:
+
 ```typescript
 cntrlr.on('afterStore', async ({ controller }, next) => {
 	controller.store.facets.forEach(facet => {
-		facet.custom.description = `Choose a ${facet.label}...`;
+		facet.custom = { description: `Choose a ${facet.label}...`}
 	})
 	await next();
 });
@@ -468,7 +469,7 @@ Core product attributes object
 
 
 ### `custom` property
-This is an empty object that is available for custom store manipulation using the [EventManager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)
+See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
 
 

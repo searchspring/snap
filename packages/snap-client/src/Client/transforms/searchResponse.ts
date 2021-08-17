@@ -12,7 +12,26 @@ import {
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
-const CORE_FIELDS = ['name', 'sku', 'imageUrl', 'thumbnailImageUrl', 'price', 'msrp', 'brand', 'url', 'uid'];
+const CORE_FIELDS = [
+	'uid',
+	'sku',
+	'name',
+	'url',
+	'addToCartUrl',
+	'price',
+	'msrp',
+	'imageUrl',
+	'secureImageUrl',
+	'thumbnailImageUrl',
+	'secureThumbnailImageUrl',
+	'rating',
+	'ratingCount',
+	'description',
+	'stockMessage',
+	'brand',
+	'popularity',
+	'caption',
+];
 
 class Result {
 	constructor(result) {
@@ -53,10 +72,13 @@ transformSearchResponse.results = (response) => {
 
 transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
-		return {
-			...coreFields,
-			[key]: decodeProperty(rawResult[key]),
-		};
+		if (typeof rawResult[key] != 'undefined') {
+			return {
+				...coreFields,
+				[key]: decodeProperty(rawResult[key]),
+			};
+		}
+		return coreFields;
 	}, {});
 
 	coreFieldValues.price = +coreFieldValues.price;
@@ -124,15 +146,15 @@ transformSearchResponse.facets = (response, request: SearchRequestModel = {}) =>
 					type: 'range',
 					step: facet.step,
 					range: {
-						low: facet.range[0],
-						high: facet.range[1],
+						low: facet.range[0] == '*' ? null : +facet.range[0],
+						high: facet.range[1] == '*' ? null : +facet.range[1],
 					},
 				};
 
 				if (facet.active && facet.active.length > 1) {
 					transformedFacet.active = {
-						low: facet.active[0],
-						high: facet.active[1],
+						low: facet.active[0] == '*' ? null : +facet.active[0],
+						high: facet.active[1] == '*' ? null : +facet.active[1],
 					};
 				}
 			} else if (facet.values instanceof Array) {
@@ -187,8 +209,8 @@ transformSearchResponse.facets = (response, request: SearchRequestModel = {}) =>
 					(transformedFacet as SearchResponseModelFacetValue).values = facet.values.map((value) => {
 						return {
 							filtered: value.active,
-							low: value.low,
-							high: value.high,
+							low: value.low == '*' ? null : +value.low,
+							high: value.high == '*' ? null : +value.high,
 							label: value.label,
 							count: value.count,
 						};
