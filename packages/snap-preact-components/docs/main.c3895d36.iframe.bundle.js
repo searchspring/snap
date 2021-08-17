@@ -19857,9 +19857,14 @@
 								(transformedFacet = searchResponse_assign(searchResponse_assign({}, transformedFacet), {
 									type: 'range',
 									step: facet.step,
-									range: { low: facet.range[0], high: facet.range[1] },
+									range: { low: '*' == facet.range[0] ? null : +facet.range[0], high: '*' == facet.range[1] ? null : +facet.range[1] },
 								})),
-									facet.active && facet.active.length > 1 && (transformedFacet.active = { low: facet.active[0], high: facet.active[1] });
+									facet.active &&
+										facet.active.length > 1 &&
+										(transformedFacet.active = {
+											low: '*' == facet.active[0] ? null : +facet.active[0],
+											high: '*' == facet.active[1] ? null : +facet.active[1],
+										});
 							else if (facet.values instanceof Array)
 								if ('hierarchy' == facet.type) {
 									(transformedFacet.type = 'value'),
@@ -19888,7 +19893,13 @@
 										: 'range' == facet.values[0].type &&
 										  ((transformedFacet.type = 'range-buckets'),
 										  (transformedFacet.values = facet.values.map(function (value) {
-												return { filtered: value.active, low: value.low, high: value.high, label: value.label, count: value.count };
+												return {
+													filtered: value.active,
+													low: '*' == value.low ? null : +value.low,
+													high: '*' == value.high ? null : +value.high,
+													label: value.label,
+													count: value.count,
+												};
 										  })));
 							return transformedFacet;
 						}),
@@ -21598,13 +21609,14 @@
 					function StateStore(services) {
 						(this.focusedInput = void 0),
 							(this.input = ''),
+							(this.term = ''),
 							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
 							(this.url = services.urlManager),
-							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
+							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, term: mobx_esm.LO, reset: mobx_esm.aD });
 					}
 					return (
 						(StateStore.prototype.reset = function () {
-							(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
+							(this.input = ''), (this.term = ''), this.locks.terms.reset(), this.locks.facets.reset();
 						}),
 						StateStore
 					);
@@ -21696,8 +21708,7 @@
 						_this = this;
 					(this.active = term.active),
 						(this.value = term.value),
-						(this.url =
-							null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.detach().set({ query: this.value })),
+						(this.url = null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.set({ query: this.value })),
 						(this.preview = function () {
 							terms.map(function (term) {
 								term.active = !1;
@@ -21705,6 +21716,8 @@
 								(_this.active = !0),
 								rootState.locks.terms.lock(),
 								rootState.locks.facets.unlock(),
+								(rootState.term = _this.value),
+								(rootState.url = rootState.url.set('query', _this.value)),
 								null == services || services.urlManager.set({ query: _this.value }).go();
 						}),
 						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
@@ -21785,31 +21798,40 @@
 						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
 					};
 				})(),
+				FacetStore_assign = function () {
+					return (FacetStore_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
 				FacetStore = (function (_super) {
 					function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
-						var facets = new FacetStore_FacetStore(config, services, storage, facetsData, paginationData, meta);
+						var alteredServices = FacetStore_assign(FacetStore_assign({}, services), { urlManager: services.urlManager.remove('filter') }),
+							facets = new FacetStore_FacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
 						return (
 							facets.forEach(function (facet) {
 								var _a;
 								null === (_a = facet.values) ||
 									void 0 === _a ||
 									_a.forEach(function (value) {
-										(value.url = services.urlManager.remove('filter').set('filter.' + facet.field, [value.value])),
-											(value.preview = function () {
-												facets.map(function (facet) {
-													var _a;
-													(facet.filtered = !1),
-														null === (_a = facet.values) ||
-															void 0 === _a ||
-															_a.map(function (value) {
-																value.filtered = !1;
-															});
-												}),
-													(facet.filtered = !0),
-													(value.filtered = !0),
-													rootState.locks.facets.lock(),
-													value.url.go();
-											});
+										value.preview = function () {
+											facets.map(function (facet) {
+												var _a;
+												(facet.filtered = !1),
+													null === (_a = facet.values) ||
+														void 0 === _a ||
+														_a.map(function (value) {
+															value.filtered = !1;
+														});
+											}),
+												(facet.filtered = !0),
+												(value.filtered = !0),
+												rootState.locks.facets.lock(),
+												value.url.go();
+										};
 									});
 							}),
 							_super.apply(this, facets) || this
@@ -21894,8 +21916,19 @@
 							this.trending = new TrendingStore(this.services, data.trending, this.state);
 						}),
 						(AutocompleteStore.prototype.update = function (data) {
+							var _a;
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
+								this.state.locks.terms.locked || (this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state));
+							var activeTerm =
+								null === (_a = this.terms) || void 0 === _a
+									? void 0
+									: _a.filter(function (term) {
+											return term.active;
+									  })[0];
+							activeTerm &&
+								this.state.term != activeTerm.value &&
+								((this.state.term = activeTerm.value), (this.state.url = this.state.url.set('query', activeTerm.value))),
 								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
 								(this.search = new QueryStore_QueryStore(this.services, data.autocomplete, data.search)),
 								this.state.locks.facets.locked ||
@@ -21903,7 +21936,6 @@
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
 								0 === this.results.length && this.resetTrending(),
-								this.state.locks.terms.locked || (this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state)),
 								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
@@ -23369,7 +23401,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.37' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.38' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23396,7 +23428,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.37');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.38');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23984,7 +24016,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.37]',
+								text: '[0.3.38]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
