@@ -6,14 +6,14 @@ export class FacetStore extends Array {
 	}
 
 	constructor(config, services, storage, facetsData, paginationData, meta, rootState) {
-		// this.services, this.storage, data.facets, this.meta
+		// allow for only a singular facet option selection at a time
+		services.urlManager = services.urlManager.remove('filter');
+
 		const facets = new SearchFacetStore(config, services, storage, facetsData, paginationData, meta);
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {
 			facet.values?.forEach((value) => {
-				value.url = services.urlManager.remove('filter').set(`filter.${facet.field}`, [value.value]);
-
 				value.preview = () => {
 					facets.map((facet) => {
 						facet.filtered = false;
