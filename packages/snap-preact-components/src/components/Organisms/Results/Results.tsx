@@ -20,7 +20,7 @@ const CSS = {
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
-			gridAutoRows: `1fr`,
+			gridTemplateRows: 'auto',
 			gap: gapSize,
 			...style,
 		}),

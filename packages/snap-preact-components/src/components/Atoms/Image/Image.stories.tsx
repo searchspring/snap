@@ -72,6 +72,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		maxHeight: {
+			description: 'Image max height',
+			defaultValue: '320px',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		onLoad: {
 			description: 'Image loaded event handler',
 			table: {

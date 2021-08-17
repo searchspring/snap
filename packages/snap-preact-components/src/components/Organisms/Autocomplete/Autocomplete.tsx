@@ -286,6 +286,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					components: {
 						result: {
 							hideBadge: true,
+							theme: {
+								components: {
+									image: {
+										maxHeight: '200px',
+									},
+								},
+							},
 						},
 					},
 				},

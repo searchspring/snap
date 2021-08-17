@@ -14,7 +14,7 @@ describe('Result Component', () => {
 
 	it('renders image', () => {
 		const rendered = render(<Result result={searchResponse.results[0]} />);
-		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image');
+		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image img');
 		expect(imageElement).toBeInTheDocument();
 	});
 
@@ -66,7 +66,7 @@ describe('Result Component', () => {
 
 	it('should display a fallback image', () => {
 		const rendered = render(<Result result={searchResponse.results[1]} />);
-		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image');
+		const imageElement = rendered.container.querySelector('.ss__result .ss__result__wrapper__image .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 	});
 });

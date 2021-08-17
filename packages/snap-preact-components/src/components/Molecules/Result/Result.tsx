@@ -46,19 +46,6 @@ const CSS = {
 			'& .ss__result__wrapper': {
 				'& .ss__result__wrapper__image': {
 					position: 'relative',
-					display: 'flex',
-					justifyContent: 'center',
-
-					'& img': {
-						top: '0',
-						left: '0',
-						right: '0',
-						width: 'auto',
-						bottom: '0',
-						margin: 'auto',
-						height: 'auto',
-						maxWidth: '100%',
-					},
 
 					'& .ss__result__badge': {
 						background: 'rgba(255, 255, 255, 0.5)',
@@ -68,6 +55,8 @@ const CSS = {
 
 				'& .ss__result__wrapper__details': {
 					padding: '10px',
+					textAlign: 'center',
+
 					'& .ss__result__wrapper__details__title': {
 						marginBottom: '10px',
 					},
