@@ -96,6 +96,14 @@ const CSS = {
 					cursor: 'pointer',
 				},
 
+				'& .leftJustify': {
+					left: '0px',
+				},
+
+				'& .rightJustify': {
+					right: '0px',
+				},
+
 				'& label.handle__label-sticky': {
 					position: 'absolute',
 					top: '-20px',
@@ -213,7 +221,14 @@ export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 								>
 									<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
 										{stickyHandleLabel && (
-											<label className={classnames('ss__slider__handle__label', 'handle__label-sticky', `handleLabel-${idx}`)}>
+											<label
+												className={classnames(
+													'ss__slider__handle__label',
+													'handle__label-sticky',
+													`handleLabel-${idx}`,
+													idx == 0 && value == facet.range.low ? 'leftJustify' : idx == 1 && value == facet.range.high ? 'rightJustify' : ''
+												)}
+											>
 												{sprintf(facet.formatValue, value)}
 											</label>
 										)}
