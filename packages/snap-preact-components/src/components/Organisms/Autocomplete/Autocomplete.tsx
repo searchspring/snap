@@ -404,42 +404,42 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						))}
 
 					{!hideContent ? (
-						<div className="ss__autocomplete__content">
-							{contentSlot ? (
-								cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })
-							) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
-								<>
-									{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
-										<div className="ss__autocomplete__content__results">
-											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
-											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+						contentSlot ? (
+							<div className="ss__autocomplete__content">
+								{cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+							</div>
+						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+							<div className="ss__autocomplete__content">
+								{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
+									<div className="ss__autocomplete__content__results">
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
 
-											{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
-											<Results results={results} {...subProps.results} controller={controller} />
+										{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
+										<Results results={results} {...subProps.results} controller={controller} />
 
-											{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
-										</div>
-									) : null}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+									</div>
+								) : null}
 
-									{search?.query?.string ? (
-										<div className="ss__autocomplete__content__info">
-											{results.length === 0 ? (
-												<>
-													<p>No results found for "{search.query.string}".</p>
-													<p>Please try another search.</p>
-												</>
-											) : (
-												<a href={state.url.href}>
-													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-													{search.query.string}"
-													<Icon {...subProps.icon} />
-												</a>
-											)}
-										</div>
-									) : null}
-								</>
-							) : null}
-						</div>
+								{search?.query?.string ? (
+									<div className="ss__autocomplete__content__info">
+										{results.length === 0 ? (
+											<>
+												<p>No results found for "{search.query.string}".</p>
+												<p>Please try another search.</p>
+											</>
+										) : (
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										)}
+									</div>
+								) : null}
+							</div>
+						) : null
 					) : null}
 				</div>
 			</CacheProvider>
