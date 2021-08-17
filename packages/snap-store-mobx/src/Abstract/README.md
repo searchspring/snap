@@ -19,7 +19,7 @@ console.log(store.toJSON())
 ```
 
 ## `custom` property
-The `custom` property is an empty object that is not utilized by any core Snap functionallity however is available for you to use as a store with data created in [Snap Events](https://github.com/searchspring/snap/blob/main/docs/PREACT_DISPLAYING_DATA.md). It is suggested to be used for any custom functionallity that Snap does not handle natively (ie. keeping track of a list/grid view state)
+The `custom` property is an empty object that is not utilized by any core Snap functionallity however is available for you to use as a store with data created in [Snap Events](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager). It is suggested to be used for any custom functionallity that Snap does not handle natively (ie. keeping track of a list/grid view state)
 
 The `custom` object is an observable property that can be accessed in your components to be rendered, however setting properties directly on the object will not retain its reactivity.
 
