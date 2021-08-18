@@ -163,7 +163,7 @@ export class Client {
 
 		params = deepmerge(this.globals, params);
 
-		!cache[this.globals.siteId].meta && this.fetchMeta();
+		!cache[params.siteId]?.meta && this.fetchMeta({ siteId: params.siteId });
 
 		return Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise]);
 	}
