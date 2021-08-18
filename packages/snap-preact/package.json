@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-preact",
-	"version": "0.3.40",
+	"version": "0.3.41",
 	"description": "Snap Preact",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,15 +20,15 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-client": "^0.3.40",
-		"@searchspring/snap-controller": "^0.3.40",
-		"@searchspring/snap-event-manager": "^0.3.40",
-		"@searchspring/snap-logger": "^0.3.40",
-		"@searchspring/snap-profiler": "^0.3.40",
-		"@searchspring/snap-store-mobx": "^0.3.40",
-		"@searchspring/snap-toolbox": "^0.3.40",
-		"@searchspring/snap-tracker": "^0.3.40",
-		"@searchspring/snap-url-manager": "^0.3.40"
+		"@searchspring/snap-client": "^0.3.41",
+		"@searchspring/snap-controller": "^0.3.41",
+		"@searchspring/snap-event-manager": "^0.3.41",
+		"@searchspring/snap-logger": "^0.3.41",
+		"@searchspring/snap-profiler": "^0.3.41",
+		"@searchspring/snap-store-mobx": "^0.3.41",
+		"@searchspring/snap-toolbox": "^0.3.41",
+		"@searchspring/snap-tracker": "^0.3.41",
+		"@searchspring/snap-url-manager": "^0.3.41"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.14"
