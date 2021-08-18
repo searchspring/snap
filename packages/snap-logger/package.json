@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-logger",
-	"version": "0.3.39",
+	"version": "0.3.40",
 	"description": "Snap Logger",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
