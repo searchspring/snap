@@ -17955,7 +17955,51 @@
 							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
 						return (
 							(_this.type = 'autocomplete'),
+							(_this.listeners = {}),
 							(_this.track = { product: { click: function click(e, result) {} } }),
+							(_this.handlers = {
+								input: {
+									enterKey: function enterKey(e) {
+										if (13 == e.keyCode) {
+											var actionUrl = AutocompleteController_utils_url(_this.config.action),
+												input = e.target,
+												query = input.value;
+											!_this.store.loading &&
+												_this.store.search.originalQuery &&
+												((query = _this.store.search.query.string),
+												actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
+												actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
+											var newUrl = actionUrl.url();
+											window.location.href = newUrl;
+										}
+									},
+									focus: function focus(e) {
+										e.stopPropagation(), _this.setFocused(e.target);
+									},
+									keyUp: function keyUp(e) {
+										e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
+										var value = e.target.value;
+										((_this.store.state.input = value), _this.config.settings.syncInputs) &&
+											document.querySelectorAll(_this.config.selector).forEach(function (input) {
+												input.value = value;
+											});
+										clearTimeout(_this.handlers.input.timeoutDelay),
+											value
+												? (!e.isTrusted && _this.store.loaded) ||
+												  (_this.handlers.input.timeoutDelay = setTimeout(function () {
+														value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
+												  }, 200))
+												: (_this.store.reset(), _this.urlManager.reset().go());
+									},
+									timeoutDelay: void 0,
+								},
+								document: {
+									click: function click(e) {
+										var inputs = document.querySelectorAll(_this.config.selector);
+										Array.from(inputs).includes(e.target) ? _this.setFocused(e.target) : _this.setFocused();
+									},
+								},
+							}),
 							(_this.searchTrending = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
 									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
@@ -18143,14 +18187,8 @@
 						(AutocompleteController.prototype.bind = function () {
 							var _a, _b;
 							return AutocompleteController_awaiter(this, void 0, void 0, function () {
-								var delayTimeout,
-									keyUpEvent,
-									focusEvent,
-									removeVisibleAC,
-									enterKeyEvent,
-									addHiddenFormInput,
+								var addHiddenFormInput,
 									formSubmitEvent,
-									inputs,
 									_this = this;
 								return AutocompleteController_generator(this, function (_c) {
 									switch (_c.label) {
@@ -18160,44 +18198,8 @@
 											_c.sent(), (_c.label = 2);
 										case 2:
 											return (
-												(keyUpEvent = function keyUpEvent(e) {
-													e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
-													var value = e.target.value;
-													(_this.store.state.input = value),
-														_this.config.settings.syncInputs &&
-															inputs.forEach(function (input) {
-																input.value = value;
-															}),
-														clearTimeout(delayTimeout),
-														value
-															? (!e.isTrusted && _this.store.loaded) ||
-															  (delayTimeout = setTimeout(function () {
-																	value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
-															  }, 200))
-															: (_this.store.reset(), _this.urlManager.reset().go());
-												}),
-												(focusEvent = function focusEvent(e) {
-													e.stopPropagation(), _this.setFocused(e.target);
-												}),
-												(removeVisibleAC = function removeVisibleAC(e) {
-													Array.from(inputs).includes(e.target) || _this.setFocused();
-												}),
-												(enterKeyEvent = function enterKeyEvent(e) {
-													if (13 == e.keyCode) {
-														var actionUrl = AutocompleteController_utils_url(_this.config.action),
-															input = e.target,
-															query = input.value;
-														!_this.store.loading &&
-															_this.store.search.originalQuery &&
-															((query = _this.store.search.query.string),
-															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
-															actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
-														var newUrl = actionUrl.url();
-														window.location.href = newUrl;
-													}
-												}),
 												(addHiddenFormInput = function addHiddenFormInput(form, name, value) {
-													var inputElem = window.document.createElement('input');
+													var inputElem = document.createElement('input');
 													(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
 												}),
 												(formSubmitEvent = function formSubmitEvent(e, input) {
@@ -18208,17 +18210,18 @@
 														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string)),
 														(input.value = query);
 												}),
-												(inputs = document.querySelectorAll(this.config.selector)).forEach(function (input) {
-													input.removeEventListener('keyup', keyUpEvent),
-														input.addEventListener('keyup', keyUpEvent),
+												document.querySelectorAll(this.config.selector).forEach(function (input) {
+													input.removeEventListener('keyup', _this.handlers.input.keyUp),
+														input.addEventListener('keyup', _this.handlers.input.keyUp),
 														_this.config.settings.initializeFromUrl && (input.value = _this.store.state.input || ''),
 														document.activeElement === input && _this.setFocused(input),
-														input.removeEventListener('focus', focusEvent),
-														input.addEventListener('focus', focusEvent);
+														input.removeEventListener('focus', _this.handlers.input.focus),
+														input.addEventListener('focus', _this.handlers.input.focus);
 													var form = input.form,
 														formActionUrl = _this.config.action;
 													if (!form && _this.config.action)
-														input.removeEventListener('keyup', enterKeyEvent), input.addEventListener('keyup', enterKeyEvent);
+														input.removeEventListener('keyup', _this.handlers.input.enterKey),
+															input.addEventListener('keyup', _this.handlers.input.enterKey);
 													else if (form) {
 														_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action);
 														var inputPasser = function inputPasser(e) {
@@ -18237,8 +18240,8 @@
 												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
 													? void 0
 													: _b.limit) > 0 && this.searchTrending(),
-												document.removeEventListener('click', removeVisibleAC),
-												document.addEventListener('click', removeVisibleAC),
+												document.removeEventListener('click', this.handlers.document.click),
+												document.addEventListener('click', this.handlers.document.click),
 												[2]
 											);
 									}
@@ -23401,7 +23404,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.38' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.39' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23428,7 +23431,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.38');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.39');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23891,19 +23894,27 @@
 														)
 															throw new Error('getScriptContext second parameter must be an array of strings');
 														var variables = {};
-														return (
-															script.getAttributeNames().map(function (attr) {
-																variables[attr] = script.getAttribute(attr);
-															}),
+														script.getAttributeNames().map(function (attr) {
+															variables[attr] = script.getAttribute(attr);
+														});
+														try {
 															null == evaluate ||
 																evaluate.forEach(function (name) {
 																	var fn = new Function(
-																		'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + script.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+																		'\n\t\t\t\tvar ' +
+																			evaluate.join(', ') +
+																			';\n\t\t\t\t' +
+																			script.innerHTML +
+																			'\n\t\t\t\treturn ' +
+																			name +
+																			';\n\t\t\t'
 																	);
 																	variables[name] = fn();
-																}),
-															variables
-														);
+																});
+														} catch (err) {
+															console.error('getScriptContext: failed to parse variables - error in context'), console.error(err);
+														}
+														return variables;
 													})(elem, ['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'])),
 													(shopper = _a.shopper),
 													(shopperId = _a.shopperId),
@@ -24016,7 +24027,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.38]',
+								text: '[0.3.39]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
