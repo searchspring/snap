@@ -60,7 +60,8 @@ describe('Dropdown Component', () => {
 		expect(buttonElement).toBeInTheDocument();
 	});
 
-	it('renders content and children props', () => {
+	//This was changed, defaults to content prop now.
+	it.skip('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
 		const rendered = render(
@@ -70,6 +71,19 @@ describe('Dropdown Component', () => {
 		);
 
 		const buttonElement = rendered.getByText(contentText + child);
+		expect(buttonElement).toBeInTheDocument();
+	});
+
+	it('renders content over children props', () => {
+		const contentText = 'this is the content';
+		const child = 'this is the child';
+		const rendered = render(
+			<Dropdown button={'open me'} content={contentText}>
+				{child}
+			</Dropdown>
+		);
+
+		const buttonElement = rendered.getByText(contentText);
 		expect(buttonElement).toBeInTheDocument();
 	});
 
@@ -91,7 +105,7 @@ describe('Dropdown Component', () => {
 
 		const rendered = render(
 			<div>
-				<span class="outside">outside</span>
+				<span className="outside">outside</span>
 				<Dropdown content={contentText} onClick={clickFn} button={buttonText} onToggle={toggleFn} />
 			</div>
 		);
@@ -113,7 +127,7 @@ describe('Dropdown Component', () => {
 
 		const rendered = render(
 			<div>
-				<span class="outside">outside</span>
+				<span className="outside">outside</span>
 				<Dropdown disableClickOutside startOpen content={contentText} button={buttonText} onToggle={toggleFn} />
 			</div>
 		);

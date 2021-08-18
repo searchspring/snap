@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, cloneElement } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -94,6 +94,8 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
+	let contentToShow = content || children;
+
 	return (
 		<CacheProvider>
 			<div
@@ -114,8 +116,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				</div>
 
 				<div className="ss__dropdown__content">
-					{content}
-					{children}
+					{contentToShow && typeof contentToShow !== 'string' ? cloneElement(contentToShow, { showContent }) : contentToShow && contentToShow}
 				</div>
 			</div>
 		</CacheProvider>
