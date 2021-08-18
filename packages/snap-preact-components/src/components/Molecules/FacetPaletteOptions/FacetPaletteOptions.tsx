@@ -11,7 +11,7 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	palette: ({ columns, gapSize, style }) =>
+	palette: ({ columns, gapSize, theme, style }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
@@ -20,6 +20,26 @@ const CSS = {
 				position: 'relative',
 				'&:hover': {
 					cursor: 'pointer',
+					'.ss__facet-palette-options__option__wrapper': {
+						borderColor: '#EBEBEB',
+					},
+					'& .ss__facet-palette-options__option__palette': {
+						'& .ss__facet-palette-options__icon': {
+							opacity: 1,
+						},
+					},
+				},
+				'& .ss__facet-palette-options__option__wrapper': {
+					border: `2px solid transparent`,
+					borderRadius: '100%',
+					padding: '2px',
+				},
+				'&.ss__facet-palette-options__option--filtered': {
+					'& .ss__facet-palette-options__option__wrapper': {
+						borderColor: theme.colors?.primary || '#333',
+						padding: '0px',
+						borderWidth: '4px',
+					},
 				},
 				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
@@ -29,7 +49,7 @@ const CSS = {
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					'.ss__facet-palette-options__icon': {
+					'& .ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
 						right: 0,
@@ -37,6 +57,10 @@ const CSS = {
 						margin: 'auto',
 						bottom: 0,
 						textAlign: 'center',
+						stroke: 'black',
+						strokeWidth: '3px',
+						strokeLinejoin: 'round',
+						opacity: 0,
 					},
 				},
 				'& .ss__facet-palette-options__option__value': {
@@ -78,26 +102,19 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			// inherited props
 			...defined({
 				disableStyles,
+				icon: 'close-thin',
+				color: 'white',
+				size: '40%',
 			}),
 			// component theme overrides
 			...props.theme?.components?.icon,
-		},
-		icon_bg: {
-			icon: 'close',
-			color: 'black',
-			size: '40%',
-		},
-		icon_fg: {
-			icon: 'close-thin',
-			color: 'white',
-			size: '30%',
 		},
 	};
 
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
+				<div css={!disableStyles && CSS.palette({ columns, gapSize, theme, style })} className={classnames('ss__facet-palette-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
@@ -106,13 +123,13 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							{...valueProps}
 							{...value.url?.link}
 						>
-							<div className="ss__facet-palette-options__option__palette" css={{ background: value.value }}>
-								{!hideIcon && value.filtered && (
-									<>
-										<Icon {...subProps.icon} {...subProps.icon_bg} />
-										<Icon {...subProps.icon} {...subProps.icon_fg} />
-									</>
-								)}
+							<div className="ss__facet-palette-options__option__wrapper">
+								<div
+									className={classnames('ss__facet-palette-options__option__palette', `ss__facet-palette-options__option__palette--${value.value}`)}
+									css={{ background: value.value }}
+								>
+									{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
+								</div>
 							</div>
 							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
 						</a>
@@ -136,6 +153,4 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 
 interface FacetPaletteOptionsSubProps {
 	icon: IconProps;
-	icon_bg: IconProps;
-	icon_fg: IconProps;
 }
