@@ -352,13 +352,13 @@ export class AutocompleteController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.autocomplete(params);
+			const [response, meta] = await this.client.autocomplete(params);
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
-				response.meta = this.client.meta;
+				response.meta = meta;
 			}
 
 			searchProfile.stop();

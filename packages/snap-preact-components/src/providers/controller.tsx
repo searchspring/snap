@@ -10,5 +10,5 @@ export const ControllerProvider = ({ children, controller }) => {
 export const useController = () => useContext(ControllerContext);
 
 export const withController = (Component) => (props) => {
-	return <Component {...props} controller={useController()} />;
+	return <Component controller={useController()} {...props} />;
 };

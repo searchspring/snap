@@ -136,9 +136,10 @@ export class Client {
 
 	fetchMeta(params?: MetaRequestModel): Promise<MetaResponseModel> {
 		const defaultParams: MetaRequestModel = { siteId: this.globals.siteId };
-		cache[this.globals.siteId].meta = {};
-		const metaCache = cache[this.globals.siteId].meta;
-		params = deepmerge(params || {}, defaultParams);
+		params = deepmerge(defaultParams, params || {});
+		cache[params.siteId] = cache[params.siteId] || {};
+		cache[params.siteId].meta = {};
+		const metaCache = cache[params.siteId].meta;
 
 		metaCache.promise = this.requesters.meta.getMeta(params);
 
@@ -148,14 +149,14 @@ export class Client {
 				metaCache.created = Date.now();
 			})
 			.catch((err) => {
-				console.error(`Failed to fetch meta data for '${this.globals.siteId}'.`);
+				console.error(`Failed to fetch meta data for '${params.siteId}'.`);
 				console.error(err);
 			});
 
 		return metaCache.promise;
 	}
 
-	async autocomplete(params: AutocompleteRequestModel = {}): Promise<AutocompleteResponseModel> {
+	async autocomplete(params: AutocompleteRequestModel = {}): Promise<[AutocompleteResponseModel, MetaResponseModel]> {
 		if (!params.search?.query?.string) {
 			throw 'query string parameter is required';
 		}
@@ -164,19 +165,15 @@ export class Client {
 
 		!cache[this.globals.siteId].meta && this.fetchMeta();
 
-		const [results] = await Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise]);
-
-		return results;
+		return Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise]);
 	}
 
-	async search(params: SearchRequestModel = {}): Promise<SearchResponseModel> {
+	async search(params: SearchRequestModel = {}): Promise<[SearchResponseModel, MetaResponseModel]> {
 		params = deepmerge(this.globals, params);
 
-		!cache[this.globals.siteId].meta && this.fetchMeta();
+		!cache[params.siteId]?.meta && this.fetchMeta({ siteId: params.siteId });
 
-		const [results] = await Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise]);
-
-		return results;
+		return Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise]);
 	}
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
