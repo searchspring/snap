@@ -23,16 +23,21 @@ export function getScriptContext(script: Element, evaluate?: string[]): ContextV
 		variables[attr] = script.getAttribute(attr);
 	});
 
-	// evaluate text and put into variables
-	evaluate?.forEach((name) => {
-		const fn = new Function(`
-			var ${evaluate.join(', ')};
-			${script.innerHTML}
-			return ${name};
-		`);
+	try {
+		// evaluate text and put into variables
+		evaluate?.forEach((name) => {
+			const fn = new Function(`
+				var ${evaluate.join(', ')};
+				${script.innerHTML}
+				return ${name};
+			`);
 
-		variables[name] = fn();
-	});
+			variables[name] = fn();
+		});
+	} catch (err) {
+		console.error('getScriptContext: failed to parse variables - error in context');
+		console.error(err);
+	}
 
 	return variables;
 }
