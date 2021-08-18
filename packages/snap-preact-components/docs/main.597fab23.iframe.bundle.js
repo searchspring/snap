@@ -5533,15 +5533,14 @@
 				__webpack_require__(6886),
 				__webpack_require__(43450),
 				__webpack_require__(72508);
-			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(33847),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98095),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(27193),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6572),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(79367),
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -5552,10 +5551,12 @@
 						}).apply(this, arguments);
 				},
 				CSS_palette = function palette(_a) {
-					var columns = _a.columns,
+					var _b,
+						columns = _a.columns,
 						gapSize = _a.gapSize,
+						theme = _a.theme,
 						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)(
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
 						__assign(
 							{
 								display: 'grid',
@@ -5563,7 +5564,19 @@
 								gap: gapSize,
 								'& .ss__facet-palette-options__option': {
 									position: 'relative',
-									'&:hover': { cursor: 'pointer' },
+									'&:hover': {
+										cursor: 'pointer',
+										'.ss__facet-palette-options__option__wrapper': { borderColor: '#EBEBEB' },
+										'& .ss__facet-palette-options__option__palette': { '& .ss__facet-palette-options__icon': { opacity: 1 } },
+									},
+									'& .ss__facet-palette-options__option__wrapper': { border: '2px solid transparent', borderRadius: '100%', padding: '2px' },
+									'&.ss__facet-palette-options__option--filtered': {
+										'& .ss__facet-palette-options__option__wrapper': {
+											borderColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
+											padding: '0px',
+											borderWidth: '4px',
+										},
+									},
 									'& .ss__facet-palette-options__option__palette': {
 										paddingTop: 'calc(100% - 2px)',
 										border: '1px solid #EBEBEB',
@@ -5572,7 +5585,7 @@
 										display: 'flex',
 										justifyContent: 'center',
 										alignItems: 'center',
-										'.ss__facet-palette-options__icon': {
+										'& .ss__facet-palette-options__icon': {
 											position: 'absolute',
 											top: 0,
 											right: 0,
@@ -5580,6 +5593,10 @@
 											margin: 'auto',
 											bottom: 0,
 											textAlign: 'center',
+											stroke: 'black',
+											strokeWidth: '3px',
+											strokeLinejoin: 'round',
+											opacity: 0,
 										},
 									},
 									'& .ss__facet-palette-options__option__value': {
@@ -5595,28 +5612,27 @@
 						)
 					);
 				},
-				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
+				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
 						_e,
 						_f,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.u)(),
-						props =
-							(__assign(__assign({}, globalTheme), properties.theme),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
 							__assign(
 								__assign(
-									__assign(
-										{ values: [], columns: 4, gapSize: '8px' },
-										null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetpaletteoptions
-									),
-									properties
+									{ values: [], columns: 4, gapSize: '8px' },
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetpaletteoptions
 								),
-								null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
-									? void 0
-									: _c.facetpaletteoptions
-							)),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
+								? void 0
+								: _c.facetpaletteoptions
+						),
 						values = props.values,
 						hideLabel = props.hideLabel,
 						columns = props.columns,
@@ -5635,34 +5651,33 @@
 										{ className: 'ss__facet-palette-options__icon' },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
 								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.icon
 							),
-							icon_bg: { icon: 'close', color: 'black', size: '40%' },
-							icon_fg: { icon: 'close-thin', color: 'white', size: '30%' },
 						};
 					return (
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_12__.n,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_11__.n,
 							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 								'div',
 								{
-									css: !disableStyles && CSS_palette({ columns, gapSize, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-palette-options', className),
+									css: !disableStyles && CSS_palette({ columns, gapSize, theme, style }),
+									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className),
 								},
 								values.map(function (value) {
 									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 										'a',
 										__assign(
 											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-palette-options__option', {
+												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
 													'ss__facet-palette-options__option--filtered': value.filtered,
 												}),
 												onClick,
+												'aria-label': value.value,
 												onFocus: function onFocus() {
 													return previewOnFocus && value.preview && value.preview();
 												},
@@ -5670,26 +5685,28 @@
 											valueProps,
 											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'div',
-											{ className: 'ss__facet-palette-options__option__palette', css: { background: value.value } },
-											!hideIcon &&
-												value.filtered &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													preact__WEBPACK_IMPORTED_MODULE_6__.HY,
-													null,
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
-														__assign({}, subProps.icon, subProps.icon_bg)
+											{ className: 'ss__facet-palette-options__option__wrapper' },
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'div',
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+														'ss__facet-palette-options__option__palette',
+														'ss__facet-palette-options__option__palette--' + value.value
 													),
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
-														__assign({}, subProps.icon, subProps.icon_fg)
+													css: { background: value.value },
+												},
+												!hideIcon &&
+													value.filtered &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
+														__assign({}, subProps.icon)
 													)
-												)
+											)
 										),
 										!hideLabel &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 												'span',
 												{ className: 'ss__facet-palette-options__option__value' },
 												value.label
@@ -6322,6 +6339,7 @@
 											'a',
 											__assign({}, store.previous.url.link, {
 												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
+												'aria-label': 'previous page',
 											}),
 											prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-left' }))
 										),
@@ -6334,6 +6352,7 @@
 												'a',
 												__assign({}, store.first.url.link, {
 													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
+													'aria-label': 'first page',
 												}),
 												firstButton || store.first.number
 											),
@@ -6347,7 +6366,11 @@
 														{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
 														page.number
 												  )
-												: (0, emotion_react_browser_esm.tZ)('a', __assign({}, page.url.link, { className: 'ss__pagination__page' }), page.number);
+												: (0, emotion_react_browser_esm.tZ)(
+														'a',
+														__assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+														page.number
+												  );
 										}),
 									!pageNumbers.includes(store.last.number) &&
 										!hideLast &&
@@ -6357,7 +6380,10 @@
 											!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
 											(0, emotion_react_browser_esm.tZ)(
 												'a',
-												__assign({}, store.last.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last') }),
+												__assign({}, store.last.url.link, {
+													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
+													'aria-label': 'last page',
+												}),
 												lastButton || store.last.number
 											)
 										),
@@ -6365,7 +6391,10 @@
 										!hideNext &&
 										(0, emotion_react_browser_esm.tZ)(
 											'a',
-											__assign({}, store.next.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next') }),
+											__assign({}, store.next.url.link, {
+												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
+												'aria-label': 'next page',
+											}),
 											nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-right' }))
 										)
 								)
@@ -9307,7 +9336,9 @@
 										getHandleProps = _a.getHandleProps;
 									return (0, emotion_react_browser_esm.tZ)(
 										'button',
-										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })),
+										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } }), {
+											'aria-label': 'slider__handle',
+										}),
 										(0, emotion_react_browser_esm.tZ)(
 											'div',
 											{ className: classnames_default()('ss__slider__handle', { 'ss__slider__handle--active': active }) },
@@ -17955,7 +17986,51 @@
 							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
 						return (
 							(_this.type = 'autocomplete'),
+							(_this.listeners = {}),
 							(_this.track = { product: { click: function click(e, result) {} } }),
+							(_this.handlers = {
+								input: {
+									enterKey: function enterKey(e) {
+										if (13 == e.keyCode) {
+											var actionUrl = AutocompleteController_utils_url(_this.config.action),
+												input = e.target,
+												query = input.value;
+											!_this.store.loading &&
+												_this.store.search.originalQuery &&
+												((query = _this.store.search.query.string),
+												actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
+												actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
+											var newUrl = actionUrl.url();
+											window.location.href = newUrl;
+										}
+									},
+									focus: function focus(e) {
+										e.stopPropagation(), _this.setFocused(e.target);
+									},
+									keyUp: function keyUp(e) {
+										e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
+										var value = e.target.value;
+										((_this.store.state.input = value), _this.config.settings.syncInputs) &&
+											document.querySelectorAll(_this.config.selector).forEach(function (input) {
+												input.value = value;
+											});
+										clearTimeout(_this.handlers.input.timeoutDelay),
+											value
+												? (!e.isTrusted && _this.store.loaded) ||
+												  (_this.handlers.input.timeoutDelay = setTimeout(function () {
+														value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
+												  }, 200))
+												: (_this.store.reset(), _this.urlManager.reset().go());
+									},
+									timeoutDelay: void 0,
+								},
+								document: {
+									click: function click(e) {
+										var inputs = document.querySelectorAll(_this.config.selector);
+										Array.from(inputs).includes(e.target) ? _this.setFocused(e.target) : _this.setFocused();
+									},
+								},
+							}),
 							(_this.searchTrending = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
 									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
@@ -18143,14 +18218,8 @@
 						(AutocompleteController.prototype.bind = function () {
 							var _a, _b;
 							return AutocompleteController_awaiter(this, void 0, void 0, function () {
-								var delayTimeout,
-									keyUpEvent,
-									focusEvent,
-									removeVisibleAC,
-									enterKeyEvent,
-									addHiddenFormInput,
+								var addHiddenFormInput,
 									formSubmitEvent,
-									inputs,
 									_this = this;
 								return AutocompleteController_generator(this, function (_c) {
 									switch (_c.label) {
@@ -18160,44 +18229,8 @@
 											_c.sent(), (_c.label = 2);
 										case 2:
 											return (
-												(keyUpEvent = function keyUpEvent(e) {
-													e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
-													var value = e.target.value;
-													(_this.store.state.input = value),
-														_this.config.settings.syncInputs &&
-															inputs.forEach(function (input) {
-																input.value = value;
-															}),
-														clearTimeout(delayTimeout),
-														value
-															? (!e.isTrusted && _this.store.loaded) ||
-															  (delayTimeout = setTimeout(function () {
-																	value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
-															  }, 200))
-															: (_this.store.reset(), _this.urlManager.reset().go());
-												}),
-												(focusEvent = function focusEvent(e) {
-													e.stopPropagation(), _this.setFocused(e.target);
-												}),
-												(removeVisibleAC = function removeVisibleAC(e) {
-													Array.from(inputs).includes(e.target) || _this.setFocused();
-												}),
-												(enterKeyEvent = function enterKeyEvent(e) {
-													if (13 == e.keyCode) {
-														var actionUrl = AutocompleteController_utils_url(_this.config.action),
-															input = e.target,
-															query = input.value;
-														!_this.store.loading &&
-															_this.store.search.originalQuery &&
-															((query = _this.store.search.query.string),
-															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
-															actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
-														var newUrl = actionUrl.url();
-														window.location.href = newUrl;
-													}
-												}),
 												(addHiddenFormInput = function addHiddenFormInput(form, name, value) {
-													var inputElem = window.document.createElement('input');
+													var inputElem = document.createElement('input');
 													(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
 												}),
 												(formSubmitEvent = function formSubmitEvent(e, input) {
@@ -18208,17 +18241,18 @@
 														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string)),
 														(input.value = query);
 												}),
-												(inputs = document.querySelectorAll(this.config.selector)).forEach(function (input) {
-													input.removeEventListener('keyup', keyUpEvent),
-														input.addEventListener('keyup', keyUpEvent),
+												document.querySelectorAll(this.config.selector).forEach(function (input) {
+													input.removeEventListener('keyup', _this.handlers.input.keyUp),
+														input.addEventListener('keyup', _this.handlers.input.keyUp),
 														_this.config.settings.initializeFromUrl && (input.value = _this.store.state.input || ''),
 														document.activeElement === input && _this.setFocused(input),
-														input.removeEventListener('focus', focusEvent),
-														input.addEventListener('focus', focusEvent);
+														input.removeEventListener('focus', _this.handlers.input.focus),
+														input.addEventListener('focus', _this.handlers.input.focus);
 													var form = input.form,
 														formActionUrl = _this.config.action;
 													if (!form && _this.config.action)
-														input.removeEventListener('keyup', enterKeyEvent), input.addEventListener('keyup', enterKeyEvent);
+														input.removeEventListener('keyup', _this.handlers.input.enterKey),
+															input.addEventListener('keyup', _this.handlers.input.enterKey);
 													else if (form) {
 														_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action);
 														var inputPasser = function inputPasser(e) {
@@ -18237,8 +18271,8 @@
 												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
 													? void 0
 													: _b.limit) > 0 && this.searchTrending(),
-												document.removeEventListener('click', removeVisibleAC),
-												document.addEventListener('click', removeVisibleAC),
+												document.removeEventListener('click', this.handlers.document.click),
+												document.addEventListener('click', this.handlers.document.click),
 												[2]
 											);
 									}
@@ -23401,7 +23435,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.38' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.41' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23428,7 +23462,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.38');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.41');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23891,19 +23925,27 @@
 														)
 															throw new Error('getScriptContext second parameter must be an array of strings');
 														var variables = {};
-														return (
-															script.getAttributeNames().map(function (attr) {
-																variables[attr] = script.getAttribute(attr);
-															}),
+														script.getAttributeNames().map(function (attr) {
+															variables[attr] = script.getAttribute(attr);
+														});
+														try {
 															null == evaluate ||
 																evaluate.forEach(function (name) {
 																	var fn = new Function(
-																		'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + script.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+																		'\n\t\t\t\tvar ' +
+																			evaluate.join(', ') +
+																			';\n\t\t\t\t' +
+																			script.innerHTML +
+																			'\n\t\t\t\treturn ' +
+																			name +
+																			';\n\t\t\t'
 																	);
 																	variables[name] = fn();
-																}),
-															variables
-														);
+																});
+														} catch (err) {
+															console.error('getScriptContext: failed to parse variables - error in context'), console.error(err);
+														}
+														return variables;
 													})(elem, ['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'])),
 													(shopper = _a.shopper),
 													(shopperId = _a.shopperId),
@@ -24016,7 +24058,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.38]',
+								text: '[0.3.41]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
