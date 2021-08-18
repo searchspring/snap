@@ -11,7 +11,7 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	palette: ({ columns, gapSize, style }) =>
+	palette: ({ columns, gapSize, theme, style }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
@@ -20,6 +20,9 @@ const CSS = {
 				position: 'relative',
 				'&:hover': {
 					cursor: 'pointer',
+					'.ss__facet-palette-options__option__wrapper': {
+						borderColor: '#EBEBEB',
+					},
 					'& .ss__facet-palette-options__option__palette': {
 						'& .ss__facet-palette-options__icon': {
 							opacity: 1,
@@ -29,11 +32,13 @@ const CSS = {
 				'& .ss__facet-palette-options__option__wrapper': {
 					border: `2px solid transparent`,
 					borderRadius: '100%',
-					padding: '4px',
+					padding: '2px',
 				},
 				'&.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: 'black',
+						borderColor: theme.colors?.primary || '#333',
+						padding: '0px',
+						borderWidth: '4px',
 					},
 				},
 				'& .ss__facet-palette-options__option__palette': {
@@ -53,7 +58,7 @@ const CSS = {
 						bottom: 0,
 						textAlign: 'center',
 						stroke: 'black',
-						strokeWidth: '2px',
+						strokeWidth: '3px',
 						strokeLinejoin: 'round',
 						opacity: 0,
 					},
@@ -99,7 +104,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 				disableStyles,
 				icon: 'close-thin',
 				color: 'white',
-				size: '30%',
+				size: '40%',
 			}),
 			// component theme overrides
 			...props.theme?.components?.icon,
@@ -109,7 +114,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.palette({ columns, gapSize, style })} className={classnames('ss__facet-palette-options', className)}>
+				<div css={!disableStyles && CSS.palette({ columns, gapSize, theme, style })} className={classnames('ss__facet-palette-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
