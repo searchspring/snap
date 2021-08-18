@@ -5677,6 +5677,7 @@
 													'ss__facet-palette-options__option--filtered': value.filtered,
 												}),
 												onClick,
+												'aria-label': value.value,
 												onFocus: function onFocus() {
 													return previewOnFocus && value.preview && value.preview();
 												},
@@ -6338,6 +6339,7 @@
 											'a',
 											__assign({}, store.previous.url.link, {
 												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
+												'aria-label': 'previous page',
 											}),
 											prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-left' }))
 										),
@@ -6350,6 +6352,7 @@
 												'a',
 												__assign({}, store.first.url.link, {
 													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
+													'aria-label': 'first page',
 												}),
 												firstButton || store.first.number
 											),
@@ -6363,7 +6366,11 @@
 														{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
 														page.number
 												  )
-												: (0, emotion_react_browser_esm.tZ)('a', __assign({}, page.url.link, { className: 'ss__pagination__page' }), page.number);
+												: (0, emotion_react_browser_esm.tZ)(
+														'a',
+														__assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+														page.number
+												  );
 										}),
 									!pageNumbers.includes(store.last.number) &&
 										!hideLast &&
@@ -6373,7 +6380,10 @@
 											!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
 											(0, emotion_react_browser_esm.tZ)(
 												'a',
-												__assign({}, store.last.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last') }),
+												__assign({}, store.last.url.link, {
+													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
+													'aria-label': 'last page',
+												}),
 												lastButton || store.last.number
 											)
 										),
@@ -6381,7 +6391,10 @@
 										!hideNext &&
 										(0, emotion_react_browser_esm.tZ)(
 											'a',
-											__assign({}, store.next.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next') }),
+											__assign({}, store.next.url.link, {
+												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
+												'aria-label': 'next page',
+											}),
 											nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-right' }))
 										)
 								)
@@ -9323,7 +9336,9 @@
 										getHandleProps = _a.getHandleProps;
 									return (0, emotion_react_browser_esm.tZ)(
 										'button',
-										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })),
+										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } }), {
+											'aria-label': 'slider__handle',
+										}),
 										(0, emotion_react_browser_esm.tZ)(
 											'div',
 											{ className: classnames_default()('ss__slider__handle', { 'ss__slider__handle--active': active }) },
@@ -23420,7 +23435,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.40' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.41' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23447,7 +23462,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.40');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.41');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24043,7 +24058,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.40]',
+								text: '[0.3.41]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
