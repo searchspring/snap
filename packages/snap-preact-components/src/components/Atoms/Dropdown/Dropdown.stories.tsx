@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY, Props } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Dropdown } from './Dropdown';
 import { componentArgs } from '../../../utilities';
