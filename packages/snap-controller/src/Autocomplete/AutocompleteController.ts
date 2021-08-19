@@ -63,6 +63,16 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
 			search.controller.store.loading = true;
 
+			if ((search.controller.store as any)?.tabs.length) {
+				const activeTabConfig = (search.controller.store as any).tabs.filter((tab) => tab.id === (search.controller.store as any).activeTab)[0]
+					?.config;
+				if (activeTabConfig && Object.keys(activeTabConfig).length > 0) {
+					Object.keys(activeTabConfig).map((key) => {
+						search.request[key] = activeTabConfig[key];
+					});
+				}
+			}
+
 			await next();
 		});
 

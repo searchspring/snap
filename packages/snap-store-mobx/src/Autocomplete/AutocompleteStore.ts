@@ -21,6 +21,9 @@ export class AutocompleteStore extends AbstractStore {
 	storage: StorageStore;
 	trending: TrendingStore;
 
+	tabs: any = [];
+	activeTab: string;
+
 	constructor(config, services: { urlManager: any }) {
 		super(config);
 
@@ -32,6 +35,11 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.state = new StateStore(services);
 		this.storage = new StorageStore();
+
+		if (config.tabs?.length) {
+			this.tabs = config.tabs;
+			this.activeTab = this.tabs.filter((tab) => tab?.default)[0]?.id || this.tabs[0]?.id;
+		}
 
 		this.reset();
 
@@ -45,7 +53,14 @@ export class AutocompleteStore extends AbstractStore {
 			results: observable,
 			pagination: observable,
 			sorting: observable,
+			tabs: observable,
+			activeTab: observable,
 		});
+	}
+
+	switchTabs(tab): void {
+		this.activeTab = tab.id;
+		// this.services.urlManager.set({ view: this.activeTab })
 	}
 
 	reset(): void {
