@@ -94,6 +94,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
+	//there can be only one. content prop takes priority.
 	let contentToShow = content || children;
 
 	return (
@@ -116,7 +117,14 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				</div>
 
 				<div className="ss__dropdown__content">
-					{contentToShow && typeof contentToShow !== 'string' ? cloneElement(contentToShow, { showContent }) : contentToShow && contentToShow}
+					{contentToShow &&
+					//this is needed so we dont cloneElement on just a plain string
+					typeof contentToShow !== 'string' &&
+					//this is needed in case the content is an observable array of multiple elements (used in facet)
+					!Array.isArray(contentToShow)
+						? //this is used to pass the current showContent state to the component rendered.
+						  cloneElement(contentToShow, { showContent })
+						: contentToShow && contentToShow}
 				</div>
 			</div>
 		</CacheProvider>
