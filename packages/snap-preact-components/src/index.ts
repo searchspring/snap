@@ -31,6 +31,7 @@ export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
 export * from './components/Organisms/Autocomplete';
+export * from './components/Organisms/Carousel';
 
 // HOOKS
 export * from './hooks';
