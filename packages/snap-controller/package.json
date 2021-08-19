@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-controller",
-	"version": "0.3.42",
+	"version": "0.3.43",
 	"description": "Snap Controllers",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -23,13 +23,13 @@
 		"deepmerge": "^4.2.2"
 	},
 	"devDependencies": {
-		"@searchspring/snap-client": "^0.3.42",
-		"@searchspring/snap-event-manager": "^0.3.42",
-		"@searchspring/snap-logger": "^0.3.42",
-		"@searchspring/snap-profiler": "^0.3.42",
-		"@searchspring/snap-store-mobx": "^0.3.42",
-		"@searchspring/snap-tracker": "^0.3.42",
-		"@searchspring/snap-url-manager": "^0.3.42"
+		"@searchspring/snap-client": "^0.3.43",
+		"@searchspring/snap-event-manager": "^0.3.43",
+		"@searchspring/snap-logger": "^0.3.43",
+		"@searchspring/snap-profiler": "^0.3.43",
+		"@searchspring/snap-store-mobx": "^0.3.43",
+		"@searchspring/snap-tracker": "^0.3.43",
+		"@searchspring/snap-url-manager": "^0.3.43"
 	},
 	"sideEffects": false,
 	"files": [
