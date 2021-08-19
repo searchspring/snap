@@ -52,12 +52,12 @@ const CSS = {
 					padding: '10px',
 				},
 
-				'& .ss__autocomplete__terms__options': {
+				'& .ss__autocomplete__terms__terms__options, .ss__autocomplete__terms__trending__options': {
 					display: vertical || horizontalTerms ? 'flex' : null,
 					justifyContent: 'space-evenly',
 					flexWrap: 'wrap',
 
-					'& .ss__autocomplete__terms__option': {
+					'& .ss__autocomplete__terms__terms__option, .ss__autocomplete__terms__trending__option': {
 						flexGrow: vertical || horizontalTerms ? '1' : null,
 						textAlign: vertical || horizontalTerms ? 'center' : null,
 						wordBreak: 'break-all',
@@ -66,15 +66,12 @@ const CSS = {
 							display: 'block',
 							padding: vertical || horizontalTerms ? '10px 30px' : '10px',
 
-							'& .ss__autocomplete__terms__option--underline': {
-								textDecoration: 'underline',
-							},
 							'& em': {
 								fontStyle: 'normal',
 							},
 						},
 
-						'&.ss__autocomplete__terms__option--active': {
+						'&.ss__autocomplete__terms__terms__option--active,&.ss__autocomplete__terms__trending__option--active': {
 							background: '#fff',
 
 							'& a': {
@@ -362,16 +359,43 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								cloneElement(termsSlot, { terms, trending })
 							) : (
 								<>
-									{showTrending ? <h5>{trendingTitle}</h5> : termsTitle ? <h5>{termsTitle}</h5> : null}
-									<div className="ss__autocomplete__terms__options">
-										{(showTrending ? trending : terms).map((term) => (
-											<div className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
-												<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
-													{emIfy(term.value, state.input)}
-												</a>
+									{terms.length > 0 ? (
+										<div className="ss__autocomplete__terms__terms">
+											{termsTitle ? <h5>{termsTitle}</h5> : null}
+											<div className="ss__autocomplete__terms__terms__options">
+												{terms.map((term) => (
+													<div
+														className={classnames('ss__autocomplete__terms__terms__option', {
+															'ss__autocomplete__terms__terms__option--active': term.active,
+														})}
+													>
+														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+															{emIfy(term.value, state.input)}
+														</a>
+													</div>
+												))}
 											</div>
-										))}
-									</div>
+										</div>
+									) : null}
+
+									{showTrending && trending.length > 0 ? (
+										<div className="ss__autocomplete__terms__trending">
+											{trendingTitle ? <h5>{trendingTitle}</h5> : null}
+											<div className="ss__autocomplete__terms__trending__options">
+												{trending.map((term) => (
+													<div
+														className={classnames('ss__autocomplete__terms__trending__option', {
+															'ss__autocomplete__terms__trending__option--active': term.active,
+														})}
+													>
+														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+															{emIfy(term.value, state.input)}
+														</a>
+													</div>
+												))}
+											</div>
+										</div>
+									) : null}
 								</>
 							)}
 						</div>
@@ -405,32 +429,29 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							</div>
 						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
 							<div className="ss__autocomplete__content">
-								{results.length > 0 || Object.keys(merchandising.content).length > 0 ? (
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
-
 										{contentTitle && results.length > 0 ? <h5>{contentTitle}</h5> : null}
 										<Results results={results} {...subProps.results} controller={controller} />
-
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
 									</div>
-								) : null}
+								) : (
+									<div className="ss__autocomplete__content__no-results">
+										<p>No results found for "{search.query.string}".</p>
+										<p>Please try another search.</p>
+									</div>
+								)}
+
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
 
 								{search?.query?.string ? (
 									<div className="ss__autocomplete__content__info">
-										{results.length === 0 ? (
-											<>
-												<p>No results found for "{search.query.string}".</p>
-												<p>Please try another search.</p>
-											</>
-										) : (
-											<a href={state.url.href}>
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-												{search.query.string}"
-												<Icon {...subProps.icon} />
-											</a>
-										)}
+										<a href={state.url.href}>
+											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
+											{search.query.string}"
+											<Icon {...subProps.icon} />
+										</a>
 									</div>
 								) : null}
 							</div>
