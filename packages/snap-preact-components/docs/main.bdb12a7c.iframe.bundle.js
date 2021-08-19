@@ -17590,7 +17590,9 @@
 										preventBackfill,
 										dontBackfill,
 										searchProfile,
+										_a,
 										response,
+										meta,
 										previousResults_1,
 										backfills,
 										page,
@@ -17600,54 +17602,57 @@
 										afterStoreProfile,
 										err_3,
 										err_4,
-										_a,
 										_b,
 										_c,
 										_d,
 										_e,
 										_f,
-										_g;
-									return SearchController_generator(this, function (_h) {
-										switch (_h.label) {
+										_g,
+										_h;
+									return SearchController_generator(this, function (_j) {
+										switch (_j.label) {
 											case 0:
 												return this.initialized ? [3, 2] : [4, this.init()];
 											case 1:
-												_h.sent(), (_h.label = 2);
+												_j.sent(), (_j.label = 2);
 											case 2:
-												(params = this.params), (_h.label = 3);
+												(params = this.params), (_j.label = 3);
 											case 3:
-												_h.trys.push([3, 20, , 21]), (_h.label = 4);
+												_j.trys.push([3, 20, , 21]), (_j.label = 4);
 											case 4:
-												return _h.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _j.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 5:
-												return _h.sent(), [3, 7];
+												return _j.sent(), [3, 7];
 											case 6:
-												if ('cancelled' == (null == (err_1 = _h.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _j.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 7:
 												return this.config.settings.infinite &&
 													((preventBackfill =
-														(null === (_a = this.config.settings.infinite) || void 0 === _a ? void 0 : _a.backfill) &&
+														(null === (_b = this.config.settings.infinite) || void 0 === _b ? void 0 : _b.backfill) &&
 														!this.store.results.length &&
-														(null === (_b = params.pagination) || void 0 === _b ? void 0 : _b.page) > this.config.settings.infinite.backfill),
+														(null === (_c = params.pagination) || void 0 === _c ? void 0 : _c.page) > this.config.settings.infinite.backfill),
 													(dontBackfill =
-														!(null === (_c = this.config.settings.infinite) || void 0 === _c ? void 0 : _c.backfill) &&
+														!(null === (_d = this.config.settings.infinite) || void 0 === _d ? void 0 : _d.backfill) &&
 														!this.store.results.length &&
-														(null === (_d = params.pagination) || void 0 === _d ? void 0 : _d.page) > 1),
+														(null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1),
 													preventBackfill || dontBackfill)
 													? (this.storage.set('scrollMap', {}), this.urlManager.set('page', 1).go(), [2])
 													: ((searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 													  [4, this.client.search(params)]);
 											case 8:
 												if (
-													((response = _h.sent()).meta || (response.meta = this.client.meta),
-													!(this.config.settings.infinite && (null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1))
+													((_a = _j.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
+													!(this.config.settings.infinite && (null === (_f = params.pagination) || void 0 === _f ? void 0 : _f.page) > 1))
 												)
 													return [3, 11];
 												if (
-													((previousResults_1 = (null === (_f = this.store.data) || void 0 === _f ? void 0 : _f.results) || []),
-													!(null === (_g = this.config.settings) || void 0 === _g ? void 0 : _g.infinite.backfill) || previousResults_1.length)
+													((previousResults_1 = (null === (_g = this.store.data) || void 0 === _g ? void 0 : _g.results) || []),
+													!(null === (_h = this.config.settings) || void 0 === _h ? void 0 : _h.infinite.backfill) || previousResults_1.length)
 												)
 													return [3, 10];
 												for (backfills = [], page = 1; page < params.pagination.page; page++)
@@ -17655,29 +17660,29 @@
 														backfills.push(this.client.search(backfillParams));
 												return [4, Promise.all(backfills)];
 											case 9:
-												_h.sent().map(function (data) {
+												_j.sent().map(function (data) {
 													previousResults_1 = previousResults_1.concat(data.results);
 												}),
-													(_h.label = 10);
+													(_j.label = 10);
 											case 10:
 												(response.results = SearchController_spreadArray(
 													SearchController_spreadArray([], previousResults_1),
 													response.results || []
 												)),
-													(_h.label = 11);
+													(_j.label = 11);
 											case 11:
 												searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_h.label = 12);
+													(_j.label = 12);
 											case 12:
 												return (
-													_h.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_j.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 13:
-												return _h.sent(), [3, 15];
+												return _j.sent(), [3, 15];
 											case 14:
-												if ('cancelled' == (null == (err_2 = _h.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _j.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 15:
@@ -17685,21 +17690,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_h.label = 16);
+													(_j.label = 16);
 											case 16:
 												return (
-													_h.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_j.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 17:
-												return _h.sent(), [3, 19];
+												return _j.sent(), [3, 19];
 											case 18:
-												if ('cancelled' == (null == (err_3 = _h.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _j.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 19:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
 											case 20:
-												return (err_4 = _h.sent()) && console.error(err_4), [3, 21];
+												return (err_4 = _j.sent()) && console.error(err_4), [3, 21];
 											case 21:
 												return [2];
 										}
@@ -18063,27 +18068,27 @@
 							}),
 							(_this.search = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, response, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4, _a, _b;
-									return AutocompleteController_generator(this, function (_c) {
-										switch (_c.label) {
+									var params, err_1, searchProfile, _a, response, meta, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4, _b, _c;
+									return AutocompleteController_generator(this, function (_d) {
+										switch (_d.label) {
 											case 0:
 												if (
 													((params = this.params),
-													!(null === (_b = null === (_a = null == params ? void 0 : params.search) || void 0 === _a ? void 0 : _a.query) ||
-													void 0 === _b
+													!(null === (_c = null === (_b = null == params ? void 0 : params.search) || void 0 === _b ? void 0 : _b.query) ||
+													void 0 === _c
 														? void 0
-														: _b.string))
+														: _c.string))
 												)
 													return [2];
-												_c.label = 1;
+												_d.label = 1;
 											case 1:
-												_c.trys.push([1, 15, , 16]), (_c.label = 2);
+												_d.trys.push([1, 15, , 16]), (_d.label = 2);
 											case 2:
-												return _c.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _d.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 3:
-												return _c.sent(), [3, 5];
+												return _d.sent(), [3, 5];
 											case 4:
-												if ('cancelled' == (null == (err_1 = _c.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _d.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 5:
@@ -18092,19 +18097,22 @@
 													[4, this.client.autocomplete(params)]
 												);
 											case 6:
-												(response = _c.sent()).meta || (response.meta = this.client.meta),
+												(_a = _d.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_c.label = 7);
+													(_d.label = 7);
 											case 7:
 												return (
-													_c.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_d.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 8:
-												return _c.sent(), [3, 10];
+												return _d.sent(), [3, 10];
 											case 9:
-												if ('cancelled' == (null == (err_2 = _c.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _d.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 10:
@@ -18112,21 +18120,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_c.label = 11);
+													(_d.label = 11);
 											case 11:
 												return (
-													_c.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_d.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 12:
-												return _c.sent(), [3, 14];
+												return _d.sent(), [3, 14];
 											case 13:
-												if ('cancelled' == (null == (err_3 = _c.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _d.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 14:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
 											case 15:
-												return (err_4 = _c.sent()) && console.error(err_4), [3, 16];
+												return (err_4 = _d.sent()) && console.error(err_4), [3, 16];
 											case 16:
 												return [2];
 										}
@@ -18440,23 +18448,23 @@
 							}),
 							(_this.search = function () {
 								return FinderController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, response, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
-									return FinderController_generator(this, function (_a) {
-										switch (_a.label) {
+									var params, err_1, searchProfile, _a, response, meta, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
+									return FinderController_generator(this, function (_b) {
+										switch (_b.label) {
 											case 0:
 												return this.initialized ? [3, 2] : [4, this.init()];
 											case 1:
-												_a.sent(), (_a.label = 2);
+												_b.sent(), (_b.label = 2);
 											case 2:
-												(params = this.params), (_a.label = 3);
+												(params = this.params), (_b.label = 3);
 											case 3:
-												_a.trys.push([3, 17, , 18]), (_a.label = 4);
+												_b.trys.push([3, 17, , 18]), (_b.label = 4);
 											case 4:
-												return _a.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _b.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 5:
-												return _a.sent(), [3, 7];
+												return _b.sent(), [3, 7];
 											case 6:
-												if ('cancelled' == (null == (err_1 = _a.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _b.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 7:
@@ -18465,19 +18473,22 @@
 													[4, this.client.search(params)]
 												);
 											case 8:
-												(response = _a.sent()).meta || (response.meta = this.client.meta),
+												(_a = _b.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_a.label = 9);
+													(_b.label = 9);
 											case 9:
 												return (
-													_a.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_b.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 10:
-												return _a.sent(), [3, 12];
+												return _b.sent(), [3, 12];
 											case 11:
-												if ('cancelled' == (null == (err_2 = _a.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _b.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 12:
@@ -18485,21 +18496,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_a.label = 13);
+													(_b.label = 13);
 											case 13:
 												return (
-													_a.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_b.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 14:
-												return _a.sent(), [3, 16];
+												return _b.sent(), [3, 16];
 											case 15:
-												if ('cancelled' == (null == (err_3 = _a.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _b.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 16:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
 											case 17:
-												return (err_4 = _a.sent()) && console.error(err_4), [3, 18];
+												return (err_4 = _b.sent()) && console.error(err_4), [3, 18];
 											case 18:
 												return [2];
 										}
@@ -20733,62 +20744,51 @@
 							configurable: !0,
 						}),
 						(Client.prototype.fetchMeta = function (params) {
-							var _this = this,
-								defaultParams = { siteId: this.globals.siteId };
-							cache[this.globals.siteId].meta = {};
-							var metaCache = cache[this.globals.siteId].meta;
+							var defaultParams = { siteId: this.globals.siteId };
+							(params = cjs_default()(defaultParams, params || {})),
+								(cache[params.siteId] = cache[params.siteId] || {}),
+								(cache[params.siteId].meta = {});
+							var metaCache = cache[params.siteId].meta;
 							return (
-								(params = cjs_default()(params || {}, defaultParams)),
 								(metaCache.promise = this.requesters.meta.getMeta(params)),
 								metaCache.promise
 									.then(function (data) {
 										(metaCache.data = data), (metaCache.created = Date.now());
 									})
 									.catch(function (err) {
-										console.error("Failed to fetch meta data for '" + _this.globals.siteId + "'."), console.error(err);
+										console.error("Failed to fetch meta data for '" + params.siteId + "'."), console.error(err);
 									}),
 								metaCache.promise
 							);
 						}),
 						(Client.prototype.autocomplete = function (params) {
-							var _a, _b;
+							var _a, _b, _c;
 							return (
 								void 0 === params && (params = {}),
 								Client_awaiter(this, void 0, void 0, function () {
-									return Client_generator(this, function (_c) {
-										switch (_c.label) {
-											case 0:
-												if (
-													!(null === (_b = null === (_a = params.search) || void 0 === _a ? void 0 : _a.query) || void 0 === _b ? void 0 : _b.string)
-												)
-													throw 'query string parameter is required';
-												return (
-													(params = cjs_default()(this.globals, params)),
-													!cache[this.globals.siteId].meta && this.fetchMeta(),
-													[4, Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise])]
-												);
-											case 1:
-												return [2, _c.sent()[0]];
-										}
+									return Client_generator(this, function (_d) {
+										if (!(null === (_b = null === (_a = params.search) || void 0 === _a ? void 0 : _a.query) || void 0 === _b ? void 0 : _b.string))
+											throw 'query string parameter is required';
+										return (
+											(params = cjs_default()(this.globals, params)),
+											!(null === (_c = cache[params.siteId]) || void 0 === _c ? void 0 : _c.meta) && this.fetchMeta({ siteId: params.siteId }),
+											[2, Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise])]
+										);
 									});
 								})
 							);
 						}),
 						(Client.prototype.search = function (params) {
+							var _a;
 							return (
 								void 0 === params && (params = {}),
 								Client_awaiter(this, void 0, void 0, function () {
-									return Client_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return (
-													(params = cjs_default()(this.globals, params)),
-													!cache[this.globals.siteId].meta && this.fetchMeta(),
-													[4, Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise])]
-												);
-											case 1:
-												return [2, _a.sent()[0]];
-										}
+									return Client_generator(this, function (_b) {
+										return (
+											(params = cjs_default()(this.globals, params)),
+											!(null === (_a = cache[params.siteId]) || void 0 === _a ? void 0 : _a.meta) && this.fetchMeta({ siteId: params.siteId }),
+											[2, Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise])]
+										);
 									});
 								})
 							);
@@ -23435,7 +23435,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.42' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.43' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23462,7 +23462,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.42');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.43');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24058,7 +24058,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.42]',
+								text: '[0.3.43]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
