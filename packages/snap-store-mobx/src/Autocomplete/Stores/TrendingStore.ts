@@ -5,7 +5,7 @@ export class TrendingStore extends Array {
 		return Array;
 	}
 
-	constructor(services, trendingData, rootState) {
+	constructor(services, trendingData, resetTerms, rootState) {
 		const terms = [];
 
 		trendingData?.queries?.map((term) => {
@@ -17,6 +17,7 @@ export class TrendingStore extends Array {
 						value: term.searchQuery,
 					},
 					terms,
+					resetTerms,
 					rootState
 				)
 			);
