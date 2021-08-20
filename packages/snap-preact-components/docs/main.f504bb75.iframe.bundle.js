@@ -16592,6 +16592,7 @@
 				__webpack_require__(38695),
 				__webpack_require__(1939),
 				__webpack_require__(34769),
+				__webpack_require__(54226),
 				__webpack_require__(65584),
 				__webpack_require__(26936);
 			var LogMode,
@@ -16603,7 +16604,6 @@
 					__webpack_require__(43450),
 					__webpack_require__(18178),
 					__webpack_require__(85940),
-					__webpack_require__(54226),
 					__webpack_require__(95094),
 					__webpack_require__(39714)),
 				cjs_default = __webpack_require__.n(cjs),
@@ -23435,7 +23435,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.43' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.44' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23462,7 +23462,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.43');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.44');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23999,7 +23999,10 @@
 														? (profileVars.component || recs.log.error('template does not support components!'),
 														  (RecommendationsComponent = this.config.components[profileVars.component]) ||
 																recs.log.error("component '" + profileVars.component + "' not found!"),
-														  (0, preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem),
+														  setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem);
+														  }),
 														  [2])
 														: (recs.log.error('profile failed to load!'), [2])
 												);
@@ -24058,7 +24061,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.43]',
+								text: '[0.3.44]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24081,8 +24084,10 @@
 																	searched_1 || (cntrlr_1.search(), (searched_1 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {
@@ -24123,14 +24128,10 @@
 																var onTarget = target.onTarget;
 																onTarget && onTarget(target, elem, originalElem), cntrlr_2.bind();
 																var Component = target.component;
-																(0, preact_module.sY)(
-																	(0, jsxRuntime_module.tZ)(
-																		Component,
-																		Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props),
-																		void 0
-																	),
-																	elem
-																);
+																setTimeout(function () {
+																	(0,
+																	preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props), void 0), elem);
+																});
 															}
 														);
 													});
@@ -24157,8 +24158,10 @@
 																	searched_2 || (cntrlr_3.search(), (searched_2 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {
@@ -24184,8 +24187,10 @@
 																	searched_3 || (cntrlr_4.search(), (searched_3 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {
