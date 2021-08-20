@@ -141,7 +141,9 @@ export class Snap {
 										runSearch();
 
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} {...target.props} />, elem);
+										setTimeout(() => {
+											render(<Component controller={cntrlr} {...target.props} />, elem);
+										});
 									}
 								);
 							});
@@ -186,7 +188,9 @@ export class Snap {
 										cntrlr.bind();
 
 										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
-										render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
+										setTimeout(() => {
+											render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
+										});
 									}
 								);
 							});
@@ -230,7 +234,9 @@ export class Snap {
 										runSearch();
 
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} {...target.props} />, elem);
+										setTimeout(() => {
+											render(<Component controller={cntrlr} {...target.props} />, elem);
+										});
 									}
 								);
 							});
@@ -274,7 +280,9 @@ export class Snap {
 										runSearch();
 
 										const Component = target.component as React.ElementType<{ controller: any }>;
-										render(<Component controller={cntrlr} {...target.props} />, elem);
+										setTimeout(() => {
+											render(<Component controller={cntrlr} {...target.props} />, elem);
+										});
 									}
 								);
 							});
