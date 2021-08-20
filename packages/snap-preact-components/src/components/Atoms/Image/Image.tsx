@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h } from 'preact';
 
-import { useState } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -11,21 +11,17 @@ import { ComponentProps } from '../../../types';
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility, maxHeight, style }) =>
+	image: ({ visibility, style }) =>
 		css({
-			height: maxHeight,
+			display: 'flex',
+			flexDirection: 'column',
+			justifyContent: 'center',
+			height: '100%',
 			'& img': {
 				visibility,
+				objectFit: 'contain',
 				maxWidth: '100%',
 				maxHeight: '100%',
-				width: 'auto',
-				height: 'auto',
-				position: 'absolute',
-				left: '50%',
-				right: '50%',
-				top: '50%',
-				bottom: '50%',
-				transform: 'translate(-50%, -50%)',
 			},
 			...style,
 		}),
@@ -37,7 +33,6 @@ export function Image(properties: ImageProps): JSX.Element {
 	const props: ImageProps = {
 		// default props
 		fallback: FALLBACK_IMAGE_URL,
-		maxHeight: '320px',
 		// global theme
 		...globalTheme?.components?.image,
 		// props
@@ -45,14 +40,22 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, fallback, hoverSrc, maxHeight, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
 
+	const prevSrcRef = useRef();
+	useEffect(() => {
+		prevSrcRef.current = src;
+	});
+	if (prevSrcRef.current && prevSrcRef.current != src) {
+		setVisibility('hidden');
+	}
+
 	return (
 		<CacheProvider>
-			<div css={!disableStyles && CSS.image({ visibility, maxHeight, style })} className={classnames('ss__image', className)}>
+			<div css={!disableStyles && CSS.image({ visibility, style })} className={classnames('ss__image', className)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}
@@ -83,7 +86,6 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	maxHeight?: string;
 	onMouseOver?: (e: MouseEvent) => void;
 	onMouseOut?: (e: MouseEvent) => void;
 	onLoad?: () => void;

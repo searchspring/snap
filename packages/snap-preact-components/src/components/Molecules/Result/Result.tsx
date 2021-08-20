@@ -18,59 +18,54 @@ const CSS = {
 	result: ({ style }) =>
 		css({
 			'&.ss__result--grid': {
+				display: 'flex',
 				flexDirection: 'column',
+				height: '100%',
+				'& .ss__result__image-wrapper': {
+					flex: '1 0 auto',
+				},
 			},
 			'&.ss__result--list': {
+				display: 'flex',
 				flexDirection: 'row',
-				display: 'block',
-				width: 'auto',
-
-				'& .ss__result__wrapper': {
-					overflow: 'hidden',
-					display: 'flex',
-					'& .ss__result__wrapper__image': {
-						float: 'left',
-						maxWidth: '35%',
-					},
-					'& .ss__result__wrapper__details': {
-						float: 'right',
-						textAlign: 'left',
-						verticalAlign: 'top',
-						padding: '20px',
-					},
+				'& .ss__result__image-wrapper': {
+					flex: '0 0 33%',
+				},
+				'& .ss__result__details': {
+					flex: '1 1 auto',
+					textAlign: 'left',
+					marginLeft: '20px',
+					padding: 0,
 				},
 			},
 
-			'& .ss__result__wrapper': {
-				'& .ss__result__wrapper__image': {
-					position: 'relative',
+			'& .ss__result__image-wrapper': {
+				position: 'relative',
+				'& .ss__result__badge': {
+					background: 'rgba(255, 255, 255, 0.5)',
+					padding: '10px',
+				},
+			},
 
-					'& .ss__result__badge': {
-						background: 'rgba(255, 255, 255, 0.5)',
-						padding: '10px',
+			'& .ss__result__details': {
+				padding: '10px',
+				textAlign: 'center',
+
+				'& .ss__result__details__title': {
+					marginBottom: '10px',
+				},
+				'& .ss__result__details__pricing': {
+					marginBottom: '10px',
+
+					'& .ss__result__price': {
+						fontSize: '1.2em',
+					},
+					'& .ss__price--strike': {
+						fontSize: '80%',
 					},
 				},
-
-				'& .ss__result__wrapper__details': {
-					padding: '10px',
-					textAlign: 'center',
-
-					'& .ss__result__wrapper__details__title': {
-						marginBottom: '10px',
-					},
-					'& .ss__result__wrapper__details__pricing': {
-						marginBottom: '10px',
-
-						'& .ss__result__price': {
-							fontSize: '1.2em',
-						},
-						'& .ss__price--strike': {
-							fontSize: '80%',
-						},
-					},
-					'& .ss__result__wrapper__details__button': {
-						marginBottom: '10px',
-					},
+				'& .ss__result__details__button': {
+					marginBottom: '10px',
 				},
 			},
 			...style,
@@ -145,46 +140,44 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		core && (
 			<CacheProvider>
 				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-					<div className="ss__result__wrapper">
-						<div className="ss__result__wrapper__image">
-							<a
-								href={core.url}
-								onMouseDown={(e) => {
-									controller?.track?.product?.click(e, result);
-								}}
-							>
-								{!hideBadge && onSale && <Badge {...subProps.badge} />}
-								<Image {...subProps.image} />
-							</a>
-						</div>
-						<div className="ss__result__wrapper__details">
-							{!hideTitle && (
-								<div className="ss__result__wrapper__details__title">
-									<a
-										href={core.url}
-										onMouseDown={(e) => {
-											controller?.track?.product?.click(e, result);
-										}}
-									>
-										{displayName}
-									</a>
-								</div>
-							)}
-							{!hidePricing && (
-								<div className="ss__result__wrapper__details__pricing">
-									{core.price < core.msrp ? (
-										<>
-											<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-											&nbsp;
-											<Price {...subProps.price} value={core.price} />
-										</>
-									) : (
+					<div className="ss__result__image-wrapper">
+						<a
+							href={core.url}
+							onMouseDown={(e) => {
+								controller?.track?.product?.click(e, result);
+							}}
+						>
+							{!hideBadge && onSale && <Badge {...subProps.badge} />}
+							<Image {...subProps.image} />
+						</a>
+					</div>
+					<div className="ss__result__details">
+						{!hideTitle && (
+							<div className="ss__result__details__title">
+								<a
+									href={core.url}
+									onMouseDown={(e) => {
+										controller?.track?.product?.click(e, result);
+									}}
+								>
+									{displayName}
+								</a>
+							</div>
+						)}
+						{!hidePricing && (
+							<div className="ss__result__details__pricing">
+								{core.price < core.msrp ? (
+									<>
+										<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+										&nbsp;
 										<Price {...subProps.price} value={core.price} />
-									)}
-								</div>
-							)}
-							{detailSlot && cloneElement(detailSlot, { result })}
-						</div>
+									</>
+								) : (
+									<Price {...subProps.price} value={core.price} />
+								)}
+							</div>
+						)}
+						{detailSlot && cloneElement(detailSlot, { result })}
 					</div>
 				</article>
 			</CacheProvider>

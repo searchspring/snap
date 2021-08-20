@@ -26,9 +26,21 @@ export default {
 			<div
 				style={{
 					maxWidth: '900px',
+					position: 'relative',
 				}}
 			>
-				<input type="text" id="searchInput" placeholder="try me!" autoComplete="off" style="width: 100%; padding: 10px;" />
+				<input
+					type="text"
+					id="searchInput"
+					placeholder="try me!"
+					autoComplete="off"
+					style={{
+						width: '100%',
+						padding: '10px',
+						boxSizing: 'border-box',
+						border: '1px solid #3a23ad',
+					}}
+				/>
 				<Story />
 			</div>
 		),
@@ -43,6 +55,17 @@ export default {
 				},
 			},
 			control: { type: 'none' },
+		},
+		width: {
+			defaultValue: '100%',
+			description: 'Change width of the component',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '100%' },
+			},
+			control: { type: 'text' },
 		},
 		hideTerms: {
 			defaultValue: false,
@@ -189,8 +212,8 @@ export default {
 				},
 			},
 		},
-		responsive: {
-			description: 'Responsive options object',
+		breakpoints: {
+			description: 'Breakpoints options object',
 			table: {
 				type: {
 					summary: 'object',
@@ -204,14 +227,25 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.autocomplete({ id: 'Autocomplete', selector: '#searchInput', globals: { siteId: '8uyt2m' } });
-
-const ObservableAutoComplete = observer(({ args, controller }) => {
-	return <Autocomplete {...args} controller={controller} input={controller?.config.selector} />;
+const snapInstance = Snapify.autocomplete({
+	id: 'Autocomplete',
+	selector: '#searchInput',
+	globals: {
+		siteId: '8uyt2m',
+	},
+	settings: {
+		trending: {
+			limit: 5,
+		},
+	},
 });
 
 const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
-	return <ObservableAutoComplete args={args} controller={controller} />;
+	// bind after input exists
+	setTimeout(() => {
+		controller.bind();
+	});
+	return <Autocomplete {...args} controller={controller} input={controller?.config.selector} />;
 };
 
 export const Default = Template.bind({});
@@ -220,3 +254,21 @@ Default.loaders = [
 		controller: await snapInstance,
 	}),
 ];
+Default.args = {
+	breakpoints: {
+		0: {
+			columns: 1,
+			rows: 1,
+		},
+		320: {
+			columns: 2,
+			rows: 1,
+			hideFacets: true,
+			vertical: true,
+		},
+		768: {
+			columns: 3,
+			rows: 1,
+		},
+	},
+};

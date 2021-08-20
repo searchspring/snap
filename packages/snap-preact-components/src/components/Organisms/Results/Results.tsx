@@ -26,7 +26,7 @@ const CSS = {
 		}),
 };
 
-const defaultResponsiveProps = {
+const defaultBreakpointsProps = {
 	0: {
 		columns: 1,
 	},
@@ -50,7 +50,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		columns: 4,
 		gapSize: '20px',
 		layout: Layout.GRID,
-		responsive: defaultResponsiveProps,
+		breakpoints: defaultBreakpointsProps,
 		// global theme
 		...globalTheme?.components?.results,
 		// props
@@ -58,7 +58,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const displaySettings = useDisplaySettings(props.responsive);
+	const displaySettings = useDisplaySettings(props.breakpoints);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		props = {
 			...props,
@@ -129,18 +129,17 @@ export interface ResultsProp extends ComponentProps {
 	rows?: number;
 	gapSize?: string;
 	layout?: LayoutType;
-	responsive?: ResponsiveProps;
+	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }
 
-export type ResponsiveProps = {
-	[key: number]: ResponsiveEntry;
+export type BreakpointsProps = {
+	[key: number]: BreakpointsEntry;
 };
 
-export type ResponsiveEntry = {
+export type BreakpointsEntry = {
 	[property: string]: any;
 };
-
 interface ResultsSubProps {
 	result: ResultProps;
 	inlineBanner: InlineBannerProps;

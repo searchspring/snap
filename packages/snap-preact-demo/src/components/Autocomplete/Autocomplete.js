@@ -15,7 +15,7 @@ export class Autocomplete extends Component {
 			},
 		};
 
-		const responsive = {
+		const breakpoints = {
 			0: {
 				columns: 1,
 				rows: 1,
@@ -23,17 +23,21 @@ export class Autocomplete extends Component {
 			320: {
 				columns: 2,
 				rows: 1,
+				hideFacets: true,
+				vertical: true,
 			},
 			768: {
 				columns: 3,
 				rows: 1,
+				layout: 'list',
 			},
 			1200: {
+				width: 'auto',
 				columns: 2,
 				rows: 2,
 			},
 		};
 
-		return <LibraryAutocomplete controller={controller} input={controller.config.selector} theme={theme} responsive={responsive} />;
+		return <LibraryAutocomplete controller={controller} input={controller.config.selector} theme={theme} />;
 	}
 }

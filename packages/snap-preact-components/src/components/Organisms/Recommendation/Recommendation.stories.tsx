@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Recommendation, defaultRecommendationResponsive } from './Recommendation';
+import { Recommendation, defaultRecommendationBreakpoints } from './Recommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -94,7 +94,7 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: defaultRecommendationResponsive,
+			defaultValue: defaultRecommendationBreakpoints,
 			description: 'Recommendation title',
 			table: {
 				type: {

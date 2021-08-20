@@ -1,17 +1,17 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { ResponsiveProps, ResponsiveEntry } from '../components/Organisms/Results/Results';
+import { BreakpointsProps, BreakpointsEntry } from '../components/Organisms/Results/Results';
 
-export function useDisplaySettings(responsiveObj: ResponsiveProps): ResponsiveEntry {
-	if (!responsiveObj || !Object.keys(responsiveObj).length) return;
+export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry {
+	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
 
 	// Call getDisplaySettings right away to prevent flashing
-	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(responsiveObj));
+	const [displaySettings, setDisplaySettings] = useState(getDisplaySettings(breakpointsObj));
 
 	useEffect(() => {
 		function handleResize() {
 			// Set display settings to state
-			setDisplaySettings(getDisplaySettings(responsiveObj));
+			setDisplaySettings(getDisplaySettings(breakpointsObj));
 		}
 		// Add event listener
 		const debouncedHandleResize = debounce(() => handleResize());
@@ -24,15 +24,15 @@ export function useDisplaySettings(responsiveObj: ResponsiveProps): ResponsiveEn
 	return displaySettings;
 }
 
-const getDisplaySettings = (responsive: ResponsiveProps): ResponsiveEntry => {
-	let responsiveSettings;
+const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry => {
+	let breakpointsSettings;
 
 	const currentScreenWidth = window.innerWidth;
-	const sortedList = Object.keys(responsive)
+	const sortedList = Object.keys(breakpoints)
 		?.sort((a, b) => parseInt(a) - parseInt(b))
-		.map((vp) => ({ [vp]: responsive[vp] }));
+		.map((vp) => ({ [vp]: breakpoints[vp] }));
 	if (sortedList.length) {
-		//loop through and find the desired responsive setting
+		//loop through and find the desired breakpoints setting
 		for (let i = 0; i < sortedList.length; i++) {
 			const entry = sortedList[i];
 			const breakpoint = parseInt(Object.keys(entry)[0]);
@@ -40,18 +40,18 @@ const getDisplaySettings = (responsive: ResponsiveProps): ResponsiveEntry => {
 			const isFirstEntry = i === 0;
 			if (isLastEntry || (isFirstEntry && currentScreenWidth < breakpoint)) {
 				// last entry or a '0' value breakpoint was not provided
-				responsiveSettings = sortedList[i][breakpoint];
+				breakpointsSettings = sortedList[i][breakpoint];
 				break;
 			} else {
 				const nextBreakpoint = parseInt(Object.keys(sortedList[i + 1])[0]);
 				if (currentScreenWidth >= breakpoint && currentScreenWidth < nextBreakpoint) {
-					responsiveSettings = sortedList[i][breakpoint];
+					breakpointsSettings = sortedList[i][breakpoint];
 					break;
 				}
 			}
 		}
 
-		return responsiveSettings;
+		return breakpointsSettings;
 	}
 };
 
