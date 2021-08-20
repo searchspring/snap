@@ -5,12 +5,17 @@ describe('Autocomplete', () => {
 	it('does not render if input not focused', () => {
 		cy.get('.ss__autocomplete').should('not.exist');
 	});
-	it('renders when input focused', () => {
-		cy.get('.searchspring-ac').focus();
-		cy.get('.ss__autocomplete').should('exist');
+	it('renders trending terms when input focused', function () {
+		cy.window().then((window) => {
+			if (!window?.searchspring?.controller?.autocomplete?.config?.settings?.trending) {
+				this.skip();
+			}
+			cy.get('.searchspring-ac').focus();
+			cy.get('.ss__autocomplete').should('exist');
+		});
 	});
 	it('has trending terms', function () {
-		cy.window({ timeout: 10000 }).then((window) => {
+		cy.window().then((window) => {
 			if (!window?.searchspring?.controller?.autocomplete?.config?.settings?.trending) {
 				this.skip();
 			}
@@ -19,17 +24,8 @@ describe('Autocomplete', () => {
 			cy.get('.ss__autocomplete__terms__trending__option').should('have.length', trendingTerms.length);
 		});
 	});
-	it('has terms, facets, content when query is performed', function () {
-		cy.get('.searchspring-ac').focus().type('r');
-
-		cy.snapStore('autocomplete').then((store) => {
-			cy.get('.ss__autocomplete__terms__terms__option').should('have.length', store.terms.length);
-			cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
-			cy.get('.ss__autocomplete__content .ss__result ').should('have.length.lte', store.results.length);
-		});
-	});
 	it('can focus a trending term', function () {
-		cy.window({ timeout: 10000 }).then((window) => {
+		cy.window().then((window) => {
 			if (!window?.searchspring?.controller?.autocomplete?.config?.settings?.trending) {
 				this.skip();
 			}
@@ -41,6 +37,32 @@ describe('Autocomplete', () => {
 				cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
 				cy.get('.ss__autocomplete__content .ss__result ').should('have.length.lte', store.results.length);
 			});
+		});
+	});
+	it('can focus a facet value', function () {
+		cy.window().then((window) => {
+			if (!window?.searchspring?.controller?.autocomplete?.config?.settings?.trending) {
+				this.skip();
+			}
+			cy.get('.searchspring-ac').focus();
+
+			cy.get('.ss__autocomplete__terms__trending__option:first a').should('exist').trigger('focus');
+			cy.snapStore('autocomplete').then((store) => {
+				cy.get('.ss__autocomplete__facets .ss__facet a').first().should('exist').trigger('focus');
+				cy.snapStore('autocomplete').then((store) => {
+					const facet = store.facets.filter((facet) => facet.filtered);
+					expect(facet.length).to.equal(1);
+				});
+			});
+		});
+	});
+	it('has terms, facets, content when query is performed', function () {
+		cy.get('.searchspring-ac').focus().type('r');
+
+		cy.snapStore('autocomplete').then((store) => {
+			cy.get('.ss__autocomplete__terms__terms__option').should('have.length', store.terms.length);
+			cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
+			cy.get('.ss__autocomplete__content .ss__result ').should('have.length.lte', store.results.length);
 		});
 	});
 });
