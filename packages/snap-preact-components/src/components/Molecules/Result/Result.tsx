@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h, cloneElement } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -9,7 +9,7 @@ import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -194,7 +194,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									)}
 								</div>
 							)}
-							{detailSlot && cloneElement(detailSlot, { result })}
+							{cloneWithProps(detailSlot, { result })}
 						</div>
 					</div>
 				</article>
