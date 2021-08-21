@@ -21704,7 +21704,7 @@
 					return to;
 				},
 				TermStore = (function (_super) {
-					function TermStore(services, autocomplete, paginationData, rootState) {
+					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
 						var _a,
 							suggestions = TermStore_spreadArray(
 								[],
@@ -21720,7 +21720,7 @@
 						var terms = [];
 						return (
 							suggestions.map(function (term, index) {
-								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, rootState));
+								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
 							}),
 							_super.apply(this, terms) || this
 						);
@@ -21737,16 +21737,17 @@
 						TermStore
 					);
 				})(Array),
-				Term = function Term(services, term, terms, rootState) {
+				Term = function Term(services, term, terms, resetTerms, rootState) {
 					var _a,
 						_this = this;
 					(this.active = term.active),
 						(this.value = term.value),
 						(this.url = null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.set({ query: this.value })),
 						(this.preview = function () {
-							terms.map(function (term) {
-								term.active = !1;
-							}),
+							resetTerms(),
+								terms.map(function (term) {
+									term.active = !1;
+								}),
 								(_this.active = !0),
 								rootState.locks.terms.lock(),
 								rootState.locks.facets.unlock(),
@@ -21777,14 +21778,14 @@
 					};
 				})(),
 				TrendingStore = (function (_super) {
-					function TrendingStore(services, trendingData, rootState) {
+					function TrendingStore(services, trendingData, resetTerms, rootState) {
 						var _a,
 							terms = [];
 						return (
 							null === (_a = null == trendingData ? void 0 : trendingData.queries) ||
 								void 0 === _a ||
 								_a.map(function (term) {
-									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, rootState));
+									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
 								}),
 							_super.apply(this, terms) || this
 						);
@@ -21943,17 +21944,42 @@
 									term.active = !1;
 								});
 						}),
+						(AutocompleteStore.prototype.resetTerms = function () {
+							var _a;
+							(null === (_a = this.terms) || void 0 === _a ? void 0 : _a.length) > 0 &&
+								this.terms.forEach(function (term) {
+									term.active = !1;
+								});
+						}),
 						(AutocompleteStore.prototype.setService = function (name, service) {
 							this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
 						}),
 						(AutocompleteStore.prototype.updateTrendingTerms = function (data) {
-							this.trending = new TrendingStore(this.services, data.trending, this.state);
+							var _this = this;
+							this.trending = new TrendingStore(
+								this.services,
+								data.trending,
+								function () {
+									_this.resetTerms();
+								},
+								this.state
+							);
 						}),
 						(AutocompleteStore.prototype.update = function (data) {
-							var _a;
+							var _a,
+								_this = this;
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
-								this.state.locks.terms.locked || (this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state));
+								this.state.locks.terms.locked ||
+									(this.terms = new TermStore(
+										this.services,
+										data.autocomplete,
+										data.pagination,
+										function () {
+											_this.resetTrending();
+										},
+										this.state
+									));
 							var activeTerm =
 								null === (_a = this.terms) || void 0 === _a
 									? void 0
@@ -21969,7 +21995,11 @@
 									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
-								0 === this.results.length && this.resetTrending(),
+								(0 === this.results.length ||
+									this.terms.filter(function (term) {
+										return term.active;
+									}).length) &&
+									this.resetTrending(),
 								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
@@ -23435,7 +23465,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.44' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.45' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23462,7 +23492,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.44');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.45');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24061,7 +24091,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.44]',
+								text: '[0.3.45]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
