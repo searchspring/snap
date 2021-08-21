@@ -48,20 +48,19 @@ describe('Dropdown Component', () => {
 		const contentText = 'this is the content';
 		const rendered = render(<Dropdown button={'open me'} content={contentText} />);
 
-		const buttonElement = rendered.getByText(contentText);
-		expect(buttonElement).toBeInTheDocument();
+		const contentElement = rendered.getByText(contentText);
+		expect(contentElement).toBeInTheDocument();
 	});
 
 	it('renders children prop', () => {
 		const child = 'this is the child';
 		const rendered = render(<Dropdown button={'open me'}>{child}</Dropdown>);
 
-		const buttonElement = rendered.getByText(child);
-		expect(buttonElement).toBeInTheDocument();
+		const childElement = rendered.getByText(child);
+		expect(childElement).toBeInTheDocument();
 	});
 
-	//This was changed, defaults to content prop now.
-	it.skip('renders content and children props', () => {
+	it('renders content and children props', () => {
 		const contentText = 'this is the content';
 		const child = 'this is the child';
 		const rendered = render(
@@ -74,17 +73,80 @@ describe('Dropdown Component', () => {
 		expect(buttonElement).toBeInTheDocument();
 	});
 
-	it('renders content over children props', () => {
-		const contentText = 'this is the content';
-		const child = 'this is the child';
+	it('renders button prop with props', async () => {
+		const Button = ({ open }: { open?: boolean }) => {
+			return <div className="button-with-props">{open ? 'close' : 'open'} me</div>;
+		};
+		const rendered = render(<Dropdown button={<Button />}></Dropdown>);
+
+		const buttonElement = rendered.container.querySelector('.button-with-props');
+		expect(buttonElement).toBeInTheDocument();
+		expect(buttonElement.innerHTML).toBe('open me');
+
+		await (buttonElement as HTMLElement).click();
+		expect(buttonElement.innerHTML).toBe('close me');
+	});
+
+	it('renders children prop with props', async () => {
+		const Child = ({ open, toggleOpen }: { open?: boolean; toggleOpen?: () => void }) => {
+			return (
+				<div
+					className="child-with-props"
+					onClick={() => {
+						toggleOpen();
+					}}
+				>
+					im {open ? 'open' : 'closed'}
+				</div>
+			);
+		};
 		const rendered = render(
-			<Dropdown button={'open me'} content={contentText}>
-				{child}
+			<Dropdown button={'open me'}>
+				<Child />
 			</Dropdown>
 		);
 
-		const buttonElement = rendered.getByText(contentText);
+		const buttonElement = rendered.getByText('open me');
 		expect(buttonElement).toBeInTheDocument();
+
+		const childElement = rendered.container.querySelector('.child-with-props');
+		expect(childElement).toBeInTheDocument();
+		expect(childElement.innerHTML).toBe('im closed');
+
+		await buttonElement.click();
+		expect(childElement.innerHTML).toBe('im open');
+
+		await (childElement as HTMLElement).click();
+		expect(childElement.innerHTML).toBe('im closed');
+	});
+
+	it('renders content prop with props', async () => {
+		const Content = ({ open, toggleOpen }: { open?: boolean; toggleOpen?: () => void }) => {
+			return (
+				<div
+					className="content-with-props"
+					onClick={() => {
+						toggleOpen();
+					}}
+				>
+					im {open ? 'open' : 'closed'}
+				</div>
+			);
+		};
+		const rendered = render(<Dropdown button={'open me'} content={<Content />}></Dropdown>);
+
+		const buttonElement = rendered.getByText('open me');
+		expect(buttonElement).toBeInTheDocument();
+
+		const contentElement = rendered.container.querySelector('.content-with-props');
+		expect(contentElement).toBeInTheDocument();
+		expect(contentElement.innerHTML).toBe('im closed');
+
+		await buttonElement.click();
+		expect(contentElement.innerHTML).toBe('im open');
+
+		await (contentElement as HTMLElement).click();
+		expect(contentElement.innerHTML).toBe('im closed');
 	});
 
 	it('disables styles', () => {

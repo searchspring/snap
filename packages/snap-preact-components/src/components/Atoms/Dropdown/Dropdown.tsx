@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, cloneElement } from 'preact';
+import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
+import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
 	dropdown: ({ disableOverlay, style }) =>
@@ -94,9 +95,6 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
-	//there can be only one. content prop takes priority.
-	let contentToShow = content || children;
-
 	return (
 		<CacheProvider>
 			<div
@@ -113,18 +111,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 						}
 					}}
 				>
-					{button}
+					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 
 				<div className="ss__dropdown__content">
-					{contentToShow &&
-					//this is needed so we dont cloneElement on just a plain string
-					typeof contentToShow !== 'string' &&
-					//this is needed in case the content is an observable array of multiple elements (used in facet)
-					!Array.isArray(contentToShow)
-						? //this is used to pass the current showContent state to the component rendered.
-						  cloneElement(contentToShow, { showContent })
-						: contentToShow && contentToShow}
+					{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
+					{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 			</div>
 		</CacheProvider>
@@ -137,7 +129,7 @@ export interface DropdownProps extends ComponentProps {
 	children?: any;
 	disabled?: boolean;
 	open?: boolean;
-	disableOverlay?: string;
+	disableOverlay?: boolean;
 	onClick?: (event: Event) => void;
 	onToggle?: (event: Event, showContent: boolean) => void;
 	startOpen?: boolean;
