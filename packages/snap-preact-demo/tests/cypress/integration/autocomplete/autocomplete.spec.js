@@ -21,7 +21,7 @@ describe('Autocomplete', () => {
 			}
 			cy.get('.searchspring-ac').focus();
 			const trendingTerms = window.searchspring.controller.autocomplete.store.trending;
-			cy.get('.ss__autocomplete__terms__trending__option').should('have.length', trendingTerms.length);
+			cy.get('.ss__autocomplete__terms__option').should('have.length', trendingTerms.length);
 		});
 	});
 	it('can focus a trending term', function () {
@@ -31,9 +31,9 @@ describe('Autocomplete', () => {
 			}
 			cy.get('.searchspring-ac').focus();
 
-			cy.get('.ss__autocomplete__terms__trending__option:first a').should('exist').trigger('focus');
+			cy.get('.ss__autocomplete__terms__option:first a').should('exist').trigger('focus');
 			cy.snapStore('autocomplete').then((store) => {
-				cy.get('.ss__autocomplete__terms__terms__option').should('have.length', store.terms.length);
+				cy.get('.ss__autocomplete__terms__option').should('have.length', store.trending.length);
 				cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
 				cy.get('.ss__autocomplete__content .ss__result ').should('have.length.lte', store.results.length);
 			});
@@ -46,7 +46,7 @@ describe('Autocomplete', () => {
 			}
 			cy.get('.searchspring-ac').focus();
 
-			cy.get('.ss__autocomplete__terms__trending__option:first a').should('exist').trigger('focus');
+			cy.get('.ss__autocomplete__terms__option:first a').should('exist').trigger('focus');
 			cy.snapStore('autocomplete').then((store) => {
 				cy.get('.ss__autocomplete__facets .ss__facet a').first().should('exist').trigger('focus');
 				cy.snapStore('autocomplete').then((store) => {
@@ -60,7 +60,7 @@ describe('Autocomplete', () => {
 		cy.get('.searchspring-ac').focus().type('r');
 
 		cy.snapStore('autocomplete').then((store) => {
-			cy.get('.ss__autocomplete__terms__terms__option').should('have.length', store.terms.length);
+			cy.get('.ss__autocomplete__terms__option').should('have.length', store.terms.length);
 			cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
 			cy.get('.ss__autocomplete__content .ss__result ').should('have.length.lte', store.results.length);
 		});
