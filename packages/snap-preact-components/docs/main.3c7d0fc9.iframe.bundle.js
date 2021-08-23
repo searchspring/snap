@@ -2050,7 +2050,18 @@
 				CSS_image = function image(_a) {
 					var visibility = _a.visibility,
 						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({ visibility }, style));
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(
+						__assign(
+							{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+								height: '100%',
+								'& img': { visibility, objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
+							},
+							style
+						)
+					);
 				};
 			function Image(properties) {
 				var _a,
@@ -2083,33 +2094,45 @@
 					setVisibility = _d[1],
 					_e = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.eJ)(!1),
 					isHovering = _e[0],
-					setHover = _e[1];
-				return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-					_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-					null,
-					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('img', {
-						css: !disableStyles && CSS_image({ visibility, style }),
-						className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__image', className),
-						src: (isHovering ? hoverSrc : src) || fallback,
-						alt,
-						title: alt,
-						loading: 'lazy',
-						onLoad: function onLoad() {
-							setVisibility('visible'), _onLoad && _onLoad();
-						},
-						onClick: function onClick(e) {
-							return _onClick && _onClick(e);
-						},
-						onError: function onError(e) {
-							return (e.target.src = fallback);
-						},
-						onMouseOver: function onMouseOver(e) {
-							hoverSrc && setHover(!0), _onMouseOver && _onMouseOver(e);
-						},
-						onMouseOut: function onMouseOut(e) {
-							hoverSrc && setHover(!1), _onMouseOut && _onMouseOut(e);
-						},
-					})
+					setHover = _e[1],
+					prevSrcRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.sO)();
+				return (
+					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.d4)(function () {
+						prevSrcRef.current = src;
+					}),
+					prevSrcRef.current && prevSrcRef.current != src && setVisibility('hidden'),
+					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+						_providers__WEBPACK_IMPORTED_MODULE_5__.n,
+						null,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+							'div',
+							{
+								css: !disableStyles && CSS_image({ visibility, style }),
+								className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__image', className),
+							},
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('img', {
+								src: (isHovering ? hoverSrc : src) || fallback,
+								alt,
+								title: alt,
+								loading: 'lazy',
+								onLoad: function onLoad() {
+									setVisibility('visible'), _onLoad && _onLoad();
+								},
+								onClick: function onClick(e) {
+									return _onClick && _onClick(e);
+								},
+								onError: function onError(e) {
+									return (e.target.src = fallback);
+								},
+								onMouseOver: function onMouseOver(e) {
+									hoverSrc && setHover(!0), _onMouseOver && _onMouseOver(e);
+								},
+								onMouseOut: function onMouseOut(e) {
+									hoverSrc && setHover(!1), _onMouseOut && _onMouseOut(e);
+								},
+							})
+						)
+					)
 				);
 			}
 		},
@@ -2617,7 +2640,7 @@
 				},
 				CSS_banner = function banner(_a) {
 					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({ '& iframe': { maxWidth: '100%' } }, style));
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({ '& iframe, img': { maxWidth: '100%', height: 'auto' } }, style));
 				};
 			function Banner(properties) {
 				var _a,
@@ -7365,36 +7388,32 @@
 					return (0, emotion_react_browser_esm.iv)(
 						__assign(
 							{
-								'&.ss__result--grid': { flexDirection: 'column' },
-								'&.ss__result--list': {
-									flexDirection: 'row',
-									display: 'block',
-									width: 'auto',
-									'& .ss__result__wrapper': {
-										overflow: 'hidden',
-										display: 'flex',
-										'& .ss__result__wrapper__image': { float: 'left', maxWidth: '35%' },
-										'& .ss__result__wrapper__details': { float: 'right', textAlign: 'left', verticalAlign: 'top', padding: '20px' },
-									},
+								'&.ss__result--grid': {
+									display: 'flex',
+									flexDirection: 'column',
+									height: '100%',
+									'& .ss__result__image-wrapper': { flex: '1 0 auto' },
 								},
-								'& .ss__result__wrapper': {
-									'& .ss__result__wrapper__image': {
-										position: 'relative',
-										display: 'flex',
-										justifyContent: 'center',
-										'& img': { top: '0', left: '0', right: '0', width: 'auto', bottom: '0', margin: 'auto', height: 'auto', maxWidth: '100%' },
-										'& .ss__result__badge': { background: 'rgba(255, 255, 255, 0.5)', padding: '10px' },
+								'&.ss__result--list': {
+									display: 'flex',
+									flexDirection: 'row',
+									'& .ss__result__image-wrapper': { flex: '0 0 33%' },
+									'& .ss__result__details': { flex: '1 1 auto', textAlign: 'left', marginLeft: '20px', padding: 0 },
+								},
+								'& .ss__result__image-wrapper': {
+									position: 'relative',
+									'& .ss__result__badge': { background: 'rgba(255, 255, 255, 0.5)', padding: '10px' },
+								},
+								'& .ss__result__details': {
+									padding: '10px',
+									textAlign: 'center',
+									'& .ss__result__details__title': { marginBottom: '10px' },
+									'& .ss__result__details__pricing': {
+										marginBottom: '10px',
+										'& .ss__result__price': { fontSize: '1.2em' },
+										'& .ss__price--strike': { fontSize: '80%' },
 									},
-									'& .ss__result__wrapper__details': {
-										padding: '10px',
-										'& .ss__result__wrapper__details__title': { marginBottom: '10px' },
-										'& .ss__result__wrapper__details__pricing': {
-											marginBottom: '10px',
-											'& .ss__result__price': { fontSize: '1.2em' },
-											'& .ss__price--strike': { fontSize: '80%' },
-										},
-										'& .ss__result__wrapper__details__button': { marginBottom: '10px' },
-									},
+									'& .ss__result__details__button': { marginBottom: '10px' },
 								},
 							},
 							style
@@ -7491,63 +7510,58 @@
 									{ css: !disableStyles && CSS_result({ style }), className: classnames_default()('ss__result', 'ss__result--' + layout, className) },
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{ className: 'ss__result__wrapper' },
+										{ className: 'ss__result__image-wrapper' },
 										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__result__wrapper__image' },
-											(0, emotion_react_browser_esm.tZ)(
-												'a',
-												{
-													href: core.url,
-													onMouseDown: function onMouseDown(e) {
-														var _a, _b;
-														null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-															void 0 === _b ||
-															_b.click(e, result);
-													},
+											'a',
+											{
+												href: core.url,
+												onMouseDown: function onMouseDown(e) {
+													var _a, _b;
+													null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+														void 0 === _b ||
+														_b.click(e, result);
 												},
-												!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, __assign({}, subProps.badge)),
-												(0, emotion_react_browser_esm.tZ)(Image.E, __assign({}, subProps.image))
-											)
-										),
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__result__wrapper__details' },
-											!hideTitle &&
-												(0, emotion_react_browser_esm.tZ)(
-													'div',
-													{ className: 'ss__result__wrapper__details__title' },
-													(0, emotion_react_browser_esm.tZ)(
-														'a',
-														{
-															href: core.url,
-															onMouseDown: function onMouseDown(e) {
-																var _a, _b;
-																null ===
-																	(_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-																	void 0 === _b ||
-																	_b.click(e, result);
-															},
-														},
-														displayName
-													)
-												),
-											!hidePricing &&
-												(0, emotion_react_browser_esm.tZ)(
-													'div',
-													{ className: 'ss__result__wrapper__details__pricing' },
-													core.price < core.msrp
-														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price })),
-																' ',
-																(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.msrp, lineThrough: !0 }))
-														  )
-														: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
-												),
-											(0, cloneWithProps.d)(detailSlot, { result })
+											},
+											!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, __assign({}, subProps.badge)),
+											(0, emotion_react_browser_esm.tZ)(Image.E, __assign({}, subProps.image))
 										)
+									),
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{ className: 'ss__result__details' },
+										!hideTitle &&
+											(0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__result__details__title' },
+												(0, emotion_react_browser_esm.tZ)(
+													'a',
+													{
+														href: core.url,
+														onMouseDown: function onMouseDown(e) {
+															var _a, _b;
+															null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+																void 0 === _b ||
+																_b.click(e, result);
+														},
+													},
+													displayName
+												)
+											),
+										!hidePricing &&
+											(0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__result__details__pricing' },
+												core.price < core.msrp
+													? (0, emotion_react_browser_esm.tZ)(
+															preact_module.HY,
+															null,
+															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })),
+															' ',
+															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
+													  )
+													: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
+											),
+										(0, cloneWithProps.d)(detailSlot, { result })
 									)
 								)
 							)
@@ -9455,14 +9469,14 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
+				__webpack_require__(54226),
 				__webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
-				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
 				hooks_module =
-					(__webpack_require__(94908),
+					(__webpack_require__(34769),
+					__webpack_require__(94908),
 					__webpack_require__(77950),
-					__webpack_require__(54226),
 					__webpack_require__(32501),
 					__webpack_require__(95342),
 					__webpack_require__(43450),
@@ -9473,13 +9487,14 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				Icon = __webpack_require__(6572),
-				Results = __webpack_require__(11881),
+				Results = __webpack_require__(69159),
 				Banner = __webpack_require__(39358),
 				Facet = __webpack_require__(30650),
 				defined = __webpack_require__(27193),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				types = __webpack_require__(20874),
+				useDisplaySettings = __webpack_require__(6222),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -9493,82 +9508,92 @@
 					var _b,
 						_c,
 						inputViewportOffsetBottom = _a.inputViewportOffsetBottom,
-						justTrending = _a.justTrending,
+						hideFacets = _a.hideFacets,
+						horizontalTerms = _a.horizontalTerms,
+						noResults = _a.noResults,
+						contentSlotExists = _a.contentSlotExists,
+						viewportMaxHeight = _a.viewportMaxHeight,
+						vertical = _a.vertical,
+						width = _a.width,
 						style = _a.style,
 						theme = _a.theme;
 					return (0, emotion_react_browser_esm.iv)(
 						__assign(
 							{
+								'&, & *, & *:before, & *:after': { boxSizing: 'border-box' },
+								display: 'flex',
+								flexDirection: vertical ? 'column' : 'row',
+								flexWrap: horizontalTerms && !vertical ? 'wrap' : null,
 								position: 'absolute',
 								zIndex: '10002',
 								border: '1px solid #ebebeb',
 								background: '#ffffff',
+								width,
 								maxWidth: '100vw',
-								maxHeight: inputViewportOffsetBottom ? 'calc(100vh - ' + (inputViewportOffsetBottom + 10) + 'px)' : '100vh',
-								display: 'flex',
-								'& *': { boxSizing: 'border-box' },
+								maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? 'calc(100vh - ' + (inputViewportOffsetBottom + 10) + 'px)' : null,
+								overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : null,
+								'&.ss__autocomplete--only-terms': { width: '' + (vertical || horizontalTerms || contentSlotExists ? width : '150px') },
+								'.ss__autocomplete__title--trending': {
+									fontWeight: 'normal',
+									margin: 0,
+									color: '#c5c5c5',
+									textTransform: 'uppercase',
+									padding: '10px',
+									'& h5': { fontSize: '.8em', margin: 0 },
+								},
+								'.ss__autocomplete__title--facets': { order: vertical ? 2 : null },
 								'& .ss__autocomplete__terms': {
-									flex: '1 0 150px',
+									flex: '1 1 auto',
+									maxWidth: vertical || horizontalTerms ? 'auto' : '150px',
+									order: 1,
 									background: '#f8f8f8',
-									'& h5': { margin: '0', padding: '10px' },
-									'& ul.ss__autocomplete__terms__options': {
-										listStyle: 'none',
-										padding: '0',
-										margin: '0',
+									'& .ss__autocomplete__terms__options': {
+										display: vertical || horizontalTerms ? 'flex' : null,
+										justifyContent: 'space-evenly',
 										flexWrap: 'wrap',
-										color: '#515151',
-										'& li.ss__autocomplete__terms__option': {
-											'& a': {
-												display: 'block',
-												padding: '10px',
-												'& .ss__autocomplete__terms__option--underline': { textDecoration: 'underline' },
-												'& em': { fontStyle: 'normal' },
-											},
+										'& .ss__autocomplete__terms__option': {
+											flexGrow: vertical || horizontalTerms ? '1' : null,
+											textAlign: vertical || horizontalTerms ? 'center' : null,
+											wordBreak: 'break-all',
+											'& a': { display: 'block', padding: vertical || horizontalTerms ? '10px 30px' : '10px', '& em': { fontStyle: 'normal' } },
 											'&.ss__autocomplete__terms__option--active': {
 												background: '#fff',
-												fontWeight: 'bold',
-												color: null === (_b = null == theme ? void 0 : theme.colors) || void 0 === _b ? void 0 : _b.primary,
+												'& a': {
+													fontWeight: 'bold',
+													color: null === (_b = null == theme ? void 0 : theme.colors) || void 0 === _b ? void 0 : _b.primary,
+												},
 											},
 										},
 									},
 								},
+								'& .ss__autocomplete__facets': {
+									display: 'flex',
+									flex: '0 0 150px',
+									flexDirection: vertical ? 'row' : 'column',
+									columnGap: '20px',
+									order: 2,
+									padding: vertical ? '10px 20px' : '10px',
+									overflowY: vertical ? null : 'auto',
+									'& .ss__autocomplete__facet': { flex: vertical ? '0 1 150px' : null },
+								},
 								'& .ss__autocomplete__content': {
-									display: justTrending ? 'none' : 'flex',
-									'& .ss__autocomplete__content__facets': {
-										width: '150px',
+									display: 'flex',
+									flex: '1 1 ' + (hideFacets ? 'auto' : '0%'),
+									flexDirection: 'column',
+									justifyContent: 'space-between',
+									order: 3,
+									overflowY: 'auto',
+									margin: noResults ? '0 auto' : null,
+									padding: vertical ? '10px 20px' : '10px',
+									'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': { marginBottom: '10px' },
+									'& .ss__banner.ss__banner--footer': { margin: '10px 0' },
+									'& .ss__autocomplete__content__info': {
 										padding: '10px',
-										display: 'flex',
-										flex: '0 0 150px',
-										flexDirection: 'column',
-										overflowY: 'auto',
-									},
-									'& .ss__autocomplete__content__results__wrapper': {
-										padding: '10px',
-										display: 'flex',
-										flexDirection: 'column',
-										'& .ss__autocomplete__content__results': { overflowY: 'auto' },
-										'& .ss__autocomplete__content__results__info': {
+										textAlign: noResults ? 'center' : 'right',
+										'& a': {
 											fontWeight: 'bold',
 											color: null === (_c = null == theme ? void 0 : theme.colors) || void 0 === _c ? void 0 : _c.primary,
-											'& .ss__autocomplete__content__results__spacer': { height: '10px' },
-											'& .ss__autocomplete__content__results__link': { textAlign: 'right', '& a': { '& .ss__icon': { marginLeft: '5px' } } },
-										},
-									},
-								},
-								'@media (max-width: 991px)': {
-									flexDirection: 'column',
-									'& .ss__autocomplete__content': {
-										width: '100%',
-										'& .ss__autocomplete__content__facets': { display: 'none' },
-										'& .ss__autocomplete__content__results': { width: '100%' },
-									},
-									'& .ss__autocomplete__terms': {
-										flexBasis: 'auto',
-										border: 'none',
-										'& ul.ss__autocomplete__terms__options': {
-											display: 'flex',
-											justifyContent: 'space-evenly',
-											'& li.ss__autocomplete__terms__option': { flexGrow: '1', textAlign: 'center', '& a': { padding: '10px 30px' } },
+											'& .ss__icon': { marginLeft: '5px' },
 										},
 									},
 								},
@@ -9595,29 +9620,55 @@
 						_q,
 						_r,
 						_s,
-						delayTimeout,
+						_t,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
-								__assign({}, null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.autocomplete),
+								__assign(
+									{ termsTitle: '', trendingTitle: 'Popular Searches', facetsTitle: '', contentTitle: '', width: '100%' },
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.autocomplete
+								),
 								properties
 							),
 							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.autocomplete
 						),
-						hideFacets = props.hideFacets,
+						breakpoints = props.breakpoints || {
+							0: { columns: 2, rows: 1, hideFacets: !0, vertical: !0 },
+							540: { columns: 3, rows: 1, vertical: !0 },
+							768: { columns: 2, rows: 2 },
+						},
+						displaySettings = (0, useDisplaySettings.o)(breakpoints);
+					displaySettings && Object.keys(displaySettings).length && (props = __assign(__assign({}, props), displaySettings));
+					var inputViewportOffsetBottom,
 						hideTerms = props.hideTerms,
+						hideFacets = props.hideFacets,
+						hideContent = props.hideContent,
+						hideBanners = props.hideBanners,
+						horizontalTerms = props.horizontalTerms,
+						vertical = props.vertical,
+						termsTitle = props.termsTitle,
+						trendingTitle = props.trendingTitle,
+						facetsTitle = props.facetsTitle,
+						contentTitle = props.contentTitle,
+						viewportMaxHeight = props.viewportMaxHeight,
+						termsSlot = props.termsSlot,
+						facetsSlot = props.facetsSlot,
+						contentSlot = props.contentSlot,
 						disableStyles = props.disableStyles,
 						className = props.className,
+						width = props.width,
 						style = props.style,
 						controller = props.controller,
-						input = props.input,
-						responsive = props.responsive || {
-							0: { columns: 2, rows: 1 },
-							540: { columns: 3, rows: 1 },
-							768: { columns: 4, rows: 1 },
-							991: { columns: 2, rows: 2 },
-						},
+						input = props.input;
+					if (input) {
+						'string' == typeof input && (input = document.querySelector(input));
+						var rect = null == input ? void 0 : input.getBoundingClientRect();
+						(inputViewportOffsetBottom = (null == rect ? void 0 : rect.bottom) || 0),
+							null == input || input.setAttribute('spellcheck', 'false'),
+							null == input || input.setAttribute('autocomplete', 'off');
+					}
+					var delayTimeout,
 						subProps = {
 							facet: __assign(
 								__assign(
@@ -9654,10 +9705,10 @@
 							results: __assign(
 								__assign(
 									__assign(
-										{ className: 'ss__autocomplete__results', responsive },
+										{ className: 'ss__autocomplete__results', breakpoints },
 										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.results
 									),
-									(0, defined.r)({ disableStyles })
+									(0, defined.r)({ disableStyles, theme: { components: { result: { hideBadge: !0 } } } })
 								),
 								null === (_m = null === (_l = props.theme) || void 0 === _l ? void 0 : _l.components) || void 0 === _m ? void 0 : _m.results
 							),
@@ -9672,24 +9723,24 @@
 								null === (_q = null === (_p = props.theme) || void 0 === _p ? void 0 : _p.components) || void 0 === _q ? void 0 : _q.icon
 							),
 						},
-						_t = controller.store,
-						search = _t.search,
-						terms = _t.terms,
-						trending = _t.trending,
-						results = _t.results,
-						merchandising = _t.merchandising,
-						pagination = _t.pagination,
-						filters = _t.filters,
-						facets = _t.facets,
-						state = _t.state;
+						_u = controller.store,
+						search = _u.search,
+						terms = _u.terms,
+						trending = _u.trending,
+						results = _u.results,
+						merchandising = _u.merchandising,
+						pagination = _u.pagination,
+						loaded = _u.loaded,
+						filters = _u.filters,
+						facets = _u.facets,
+						state = _u.state;
 					controller &&
 						'string' == typeof input &&
 						((input = document.querySelector(input)),
 						(0, hooks_module.d4)(function () {
 							controller.bind();
 						}, []));
-					var inputViewportOffsetBottom,
-						valueProps = {
+					var valueProps = {
 							onMouseEnter: function onMouseEnter(e) {
 								clearTimeout(delayTimeout),
 									(delayTimeout = setTimeout(function () {
@@ -9699,22 +9750,17 @@
 							onMouseLeave: function onMouseLeave() {
 								clearTimeout(delayTimeout);
 							},
-						};
-					input && (inputViewportOffsetBottom = input.getBoundingClientRect().bottom);
-					var visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
-						showTrending = (null == trending ? void 0 : trending.length) && !terms.length,
-						justTrending =
-							showTrending &&
-							0 === facets.length &&
-							0 === terms.length &&
-							!(0 === results.length && (null === (_r = state.input) || void 0 === _r ? void 0 : _r.length)),
+						},
+						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
+						showTrending = (null == trending ? void 0 : trending.length) && 0 === terms.length,
 						facetsToShow =
 							facets.length &&
 							facets
 								.filter(function (facet) {
 									return facet.display !== types.uw.SLIDER;
 								})
-								.slice(0, 3);
+								.slice(0, 3),
+						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded;
 					return (
 						visible &&
 						(0, emotion_react_browser_esm.tZ)(
@@ -9723,8 +9769,22 @@
 							(0, emotion_react_browser_esm.tZ)(
 								'div',
 								{
-									css: !disableStyles && CSS_Autocomplete({ inputViewportOffsetBottom, justTrending, style, theme }),
-									className: classnames_default()('ss__autocomplete', className),
+									css:
+										!disableStyles &&
+										CSS_Autocomplete({
+											inputViewportOffsetBottom,
+											hideFacets,
+											horizontalTerms,
+											noResults:
+												(null === (_r = null == search ? void 0 : search.query) || void 0 === _r ? void 0 : _r.string) && 0 === results.length,
+											contentSlotExists: !!contentSlot,
+											viewportMaxHeight,
+											vertical,
+											width,
+											style,
+											theme,
+										}),
+									className: classnames_default()('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms }),
 									onClick: function onClick(e) {
 										return e.stopPropagation();
 									},
@@ -9733,93 +9793,178 @@
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
 										{ className: 'ss__autocomplete__terms' },
-										showTrending && (0, emotion_react_browser_esm.tZ)('h5', null, 'Popular Searches'),
-										(0, emotion_react_browser_esm.tZ)(
-											'ul',
-											{ className: 'ss__autocomplete__terms__options' },
-											(showTrending ? trending : terms).map(function (term) {
-												return (0, emotion_react_browser_esm.tZ)(
-													'li',
-													{
-														className: classnames_default()('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														}),
-													},
-													(0, emotion_react_browser_esm.tZ)(
-														'a',
-														__assign({ href: term.url.href }, valueProps, {
-															onFocus: function onFocus() {
-																return term.preview();
-															},
-														}),
-														emIfy(term.value, state.input)
-													)
-												);
-											})
-										)
-									),
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									{ className: 'ss__autocomplete__content' },
-									!hideFacets && facetsToShow.length
-										? (0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__autocomplete__content__facets' },
-												facetsToShow.map(function (facet) {
-													return (0, emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
-												}),
-												(0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
-										  )
-										: null,
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: 'ss__autocomplete__content__results__wrapper' },
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__autocomplete__content__results' },
-											(0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.HEADER }),
-											(0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.BANNER }),
-											(0, emotion_react_browser_esm.tZ)(Results.u, __assign({ results }, subProps.results, { controller })),
-											(0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.FOOTER })
-										),
-										(null === (_s = null == search ? void 0 : search.query) || void 0 === _s ? void 0 : _s.string)
-											? (0, emotion_react_browser_esm.tZ)(
-													'div',
-													{ className: 'ss__autocomplete__content__results__info' },
-													0 === results.length
+										termsSlot
+											? (0, preact_module.Tm)(termsSlot, { terms, trending, controller })
+											: (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													terms.length > 0
 														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																(0, emotion_react_browser_esm.tZ)('p', null, 'No results found for "', search.query.string, '".'),
-																(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
-														  )
-														: (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__autocomplete__content__results__spacer' }),
+																'div',
+																{ className: 'ss__autocomplete__terms' },
+																termsTitle
+																	? (0, emotion_react_browser_esm.tZ)(
+																			'div',
+																			{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--terms') },
+																			(0, emotion_react_browser_esm.tZ)('h5', null, termsTitle)
+																	  )
+																	: null,
 																(0, emotion_react_browser_esm.tZ)(
 																	'div',
-																	{ className: 'ss__autocomplete__content__results__link' },
-																	(0, emotion_react_browser_esm.tZ)(
-																		'a',
-																		{ href: state.url.href },
-																		'See ',
-																		pagination.totalResults,
-																		' ',
-																		filters.length > 0 ? 'filtered' : '',
-																		' result',
-																		pagination.totalResults > 1 ? 's' : '',
-																		' for "',
-																		search.query.string,
-																		'"',
-																		(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
-																	)
+																	{ className: 'ss__autocomplete__terms__options' },
+																	terms.map(function (term) {
+																		return (0, emotion_react_browser_esm.tZ)(
+																			'div',
+																			{
+																				className: classnames_default()('ss__autocomplete__terms__option', {
+																					'ss__autocomplete__terms__option--active': term.active,
+																				}),
+																			},
+																			(0, emotion_react_browser_esm.tZ)(
+																				'a',
+																				__assign({ href: term.url.href }, valueProps, {
+																					onFocus: function onFocus() {
+																						return term.preview();
+																					},
+																				}),
+																				emIfy(term.value, state.input)
+																			)
+																		);
+																	})
 																)
 														  )
+														: null,
+													showTrending
+														? (0, emotion_react_browser_esm.tZ)(
+																'div',
+																{ className: 'ss__autocomplete__terms ss__autocomplete__terms-trending' },
+																trendingTitle
+																	? (0, emotion_react_browser_esm.tZ)(
+																			'div',
+																			{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--trending') },
+																			(0, emotion_react_browser_esm.tZ)('h5', null, trendingTitle)
+																	  )
+																	: null,
+																(0, emotion_react_browser_esm.tZ)(
+																	'div',
+																	{ className: 'ss__autocomplete__terms__options' },
+																	trending.map(function (term) {
+																		return (0, emotion_react_browser_esm.tZ)(
+																			'div',
+																			{
+																				className: classnames_default()('ss__autocomplete__terms__option', {
+																					'ss__autocomplete__terms__option--active': term.active,
+																				}),
+																			},
+																			(0, emotion_react_browser_esm.tZ)(
+																				'a',
+																				__assign({ href: term.url.href }, valueProps, {
+																					onFocus: function onFocus() {
+																						return term.preview();
+																					},
+																				}),
+																				emIfy(term.value, state.input)
+																			)
+																		);
+																	})
+																)
+														  )
+														: null
 											  )
-											: null
-									)
-								)
+									),
+								!hideFacets &&
+									facetsToShow.length > 0 &&
+									(facetsSlot
+										? (0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__autocomplete__facets' },
+												(0, preact_module.Tm)(facetsSlot, { facets: facetsToShow, merchandising, controller })
+										  )
+										: (0, emotion_react_browser_esm.tZ)(
+												preact_module.HY,
+												null,
+												facetsTitle && vertical
+													? (0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
+															(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
+													  )
+													: null,
+												(0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__autocomplete__facets' },
+													facetsTitle && !vertical
+														? (0, emotion_react_browser_esm.tZ)(
+																'div',
+																{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
+																(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
+														  )
+														: null,
+													facetsToShow.map(function (facet) {
+														return (0,
+														emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
+													}),
+													hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
+												)
+										  )),
+								hideContent
+									? null
+									: contentSlot
+									? (0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__autocomplete__content' },
+											(0, preact_module.Tm)(contentSlot, { results, merchandising, search, pagination, filters, controller })
+									  )
+									: results.length > 0 ||
+									  Object.keys(merchandising.content).length > 0 ||
+									  (null === (_s = null == search ? void 0 : search.query) || void 0 === _s ? void 0 : _s.string)
+									? (0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__autocomplete__content' },
+											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.HEADER }),
+											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.BANNER }),
+											results.length > 0
+												? (0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__autocomplete__content__results' },
+														contentTitle && results.length > 0
+															? (0, emotion_react_browser_esm.tZ)(
+																	'div',
+																	{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--content') },
+																	(0, emotion_react_browser_esm.tZ)('h5', null, contentTitle)
+															  )
+															: null,
+														(0, emotion_react_browser_esm.tZ)(Results.u, __assign({ results }, subProps.results, { controller }))
+												  )
+												: (0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__autocomplete__content__no-results' },
+														(0, emotion_react_browser_esm.tZ)('p', null, 'No results found for "', search.query.string, '".'),
+														(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
+												  ),
+											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.FOOTER }),
+											(null === (_t = null == search ? void 0 : search.query) || void 0 === _t ? void 0 : _t.string) && results.length > 0
+												? (0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__autocomplete__content__info' },
+														(0, emotion_react_browser_esm.tZ)(
+															'a',
+															{ href: state.url.href },
+															'See ',
+															pagination.totalResults,
+															' ',
+															filters.length > 0 ? 'filtered' : '',
+															' result',
+															1 == pagination.totalResults ? '' : 's',
+															' for "',
+															search.query.string,
+															'"',
+															(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
+														)
+												  )
+												: null
+									  )
+									: null
 							)
 						)
 					);
@@ -9916,6 +10061,23 @@
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Autocomplete controller={controller} input={'#searchInput'} />\n")
 					),
+					(0, esm.kt)('h3', { id: 'width' }, 'width'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'width'),
+						" prop specifies a width for the overall component. The default value is '100%'."
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Autocomplete controller={controller} input={\'#searchInput\'} width="800px" />\n'
+						)
+					),
 					(0, esm.kt)('h3', { id: 'hidefacets' }, 'hideFacets'),
 					(0, esm.kt)(
 						'p',
@@ -9950,24 +10112,24 @@
 							"<Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />\n"
 						)
 					),
-					(0, esm.kt)('h3', { id: 'responsive' }, 'responsive'),
+					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'responsive'),
-						' prop contains a responsive object that is passed to the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'breakpoints'),
+						' prop contains a breakpoints object that is passed to the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<Results />'),
 						' sub-component.'
 					),
-					(0, esm.kt)('p', null, 'Default Autocomplete ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'responsive'), ' object:'),
+					(0, esm.kt)('p', null, 'Default Autocomplete ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'breakpoints'), ' object:'),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const responsive = {\n    0: {\n        columns: 2,\n        rows: 1,\n    },\n    540: {\n        columns: 3,\n        rows: 1,\n    },\n    768: {\n        columns: 4,\n        rows: 1,\n    },\n    991: {\n        columns: 2,\n        rows: 2,\n    },\n};\n'
+							'const breakpoints = {\n    0: {\n        columns: 2,\n        rows: 1,\n    },\n    540: {\n        columns: 3,\n        rows: 1,\n    },\n    768: {\n        columns: 4,\n        rows: 1,\n    },\n    991: {\n        columns: 2,\n        rows: 2,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -9983,7 +10145,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Autocomplete controller={controller} input={'#searchInput'} responsive={responsive} />\n"
+							"<Autocomplete controller={controller} input={'#searchInput'} breakpoints={breakpoints} />\n"
 						)
 					)
 				);
@@ -10120,13 +10282,13 @@
 					function (Story) {
 						return (0, preact_module.h)(
 							'div',
-							{ style: { maxWidth: '900px' } },
+							{ style: { maxWidth: '900px', position: 'relative' } },
 							(0, preact_module.h)('input', {
 								type: 'text',
 								id: 'searchInput',
 								placeholder: 'try me!',
 								autoComplete: 'off',
-								style: 'width: 100%; padding: 10px;',
+								style: { width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #3a23ad' },
 							}),
 							(0, preact_module.h)(Story, null)
 						);
@@ -10140,35 +10302,105 @@
 							table: { type: { summary: 'Autocomplete controller object' } },
 							control: { type: 'none' },
 						},
-						hideFacets: {
-							defaultValue: !1,
-							description: 'toggle facets display',
-							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-							control: { type: 'boolean' },
+						width: {
+							defaultValue: '100%',
+							description: 'Change width of the component',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '100%' } },
+							control: { type: 'text' },
 						},
 						hideTerms: {
 							defaultValue: !1,
-							description: 'toggle terms display',
+							description: 'prevent terms from rendering (also applicable to trending terms)',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
-						responsive: { description: 'Responsive options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
+						hideFacets: {
+							defaultValue: !1,
+							description: 'prevent facets from rendering',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						hideContent: {
+							defaultValue: !1,
+							description: 'prevent content area from rendering',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						hideBanners: {
+							defaultValue: !1,
+							description: 'prevent merchandising banners from rendering (inline banners not affected)',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						horizontalTerms: {
+							defaultValue: !1,
+							description: 'display terms horizontally, (not required if vertical prop is true)',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						vertical: {
+							defaultValue: !1,
+							description: 'use a vertical (single column) layout',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						termsTitle: {
+							defaultValue: '',
+							description: 'Change terms header title',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						trendingTitle: {
+							defaultValue: 'Popular Searches',
+							description: 'Change trending terms header title',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'Popular Searches' } },
+							control: { type: 'text' },
+						},
+						facetsTitle: {
+							defaultValue: '',
+							description: 'Change facets header title',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						contentTitle: {
+							defaultValue: '',
+							description: 'Change content header title',
+							table: { type: { summary: 'string' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						viewportMaxHeight: {
+							defaultValue: !1,
+							description: 'Autocomplete fully visible in viewport',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						termsSlot: { description: 'Slot for custom terms component', table: { type: { summary: 'component' } } },
+						facetsSlot: { description: 'Slot for custom facets component', table: { type: { summary: 'component' } } },
+						contentSlot: { description: 'Slot for custom content component', table: { type: { summary: 'component' } } },
+						breakpoints: { description: 'Breakpoints options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 					},
 					componentArgs.p
 				),
 			};
-			var snapInstance = snapify.K.autocomplete({ id: 'Autocomplete', selector: '#searchInput', globals: { siteId: '8uyt2m' } }),
-				ObservableAutoComplete = (0, mobxreact_esm.Pi)(function (_a) {
-					var args = _a.args,
-						controller = _a.controller;
-					return (0,
-					preact_module.h)(Autocomplete, Autocomplete_stories_assign({}, args, { controller, input: null == controller ? void 0 : controller.config.selector }));
+			var snapInstance = snapify.K.autocomplete({
+					id: 'Autocomplete',
+					selector: '#searchInput',
+					globals: { siteId: '8uyt2m' },
+					settings: { trending: { limit: 5 } },
 				}),
 				Default = function Template(args, _a) {
 					var controller = _a.loaded.controller;
-					return (0, preact_module.h)(ObservableAutoComplete, { args, controller });
+					return (
+						setTimeout(function () {
+							controller.bind();
+						}),
+						(0, preact_module.h)(
+							Autocomplete,
+							Autocomplete_stories_assign({}, args, { controller, input: null == controller ? void 0 : controller.config.selector })
+						)
+					);
 				}.bind({});
-			Default.loaders = [
+			(Default.loaders = [
 				function () {
 					return __awaiter(void 0, void 0, void 0, function () {
 						var _a;
@@ -10182,7 +10414,10 @@
 						});
 					});
 				},
-			];
+			]),
+				(Default.args = {
+					breakpoints: { 0: { columns: 1, rows: 1 }, 320: { columns: 2, rows: 1, hideFacets: !0, vertical: !0 }, 768: { columns: 3, rows: 1 } },
+				});
 		},
 		13039: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -10339,7 +10574,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const defaultRecommendationResponsive = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
+							'const defaultRecommendationBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -10348,7 +10583,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Carousel  breakpoints={defaultRecommendationResponsive}>{children}<Carousel/>\n'
+							'<Carousel breakpoints={defaultRecommendationBreakpoints}>{children}<Carousel/>\n'
 						)
 					)
 				);
@@ -10508,7 +10743,7 @@
 						prevButton: { description: 'Previous button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						nextButton: { description: 'Next button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						breakpoints: {
-							defaultValue: Carousel.M,
+							defaultValue: Carousel.i,
 							description: 'Recommendation title',
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
 							control: { type: 'object' },
@@ -10642,7 +10877,7 @@
 		},
 		61001: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { M: () => defaultCarouselResponsive, l: () => Carousel });
+			__webpack_require__.d(__webpack_exports__, { i: () => defaultCarouselBreakpoints, l: () => Carousel });
 			__webpack_require__(43105), __webpack_require__(14586), __webpack_require__(71245), __webpack_require__(43450);
 			var preact_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34619),
 				swiper_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(18491),
@@ -10722,7 +10957,7 @@
 						)
 					);
 				},
-				defaultCarouselResponsive = {
+				defaultCarouselBreakpoints = {
 					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
 					480: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10 },
 					768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10 },
@@ -10740,7 +10975,7 @@
 						props = __assign(
 							__assign(
 								__assign(
-									{ breakpoints: defaultCarouselResponsive, pagination: !1, loop: !0 },
+									{ breakpoints: defaultCarouselBreakpoints, pagination: !1, loop: !0 },
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.carousel
 								),
 								properties
@@ -11579,6 +11814,7 @@
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.iv)(
 						__assign(
 							{
+								width: '100%',
 								margin: '0 0 20px 0',
 								'& .ss__facet__header': {
 									display: 'flex',
@@ -11774,7 +12010,12 @@
 								'div',
 								{
 									css: !disableStyles && CSS_facet({ color, theme, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__facet', className),
+									className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(
+										'ss__facet',
+										'ss__facet--' + facet.display,
+										'ss__facet--' + facet.field,
+										className
+									),
 								},
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__.L,
@@ -11797,13 +12038,7 @@
 									}),
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 										'div',
-										{
-											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(
-												'ss__facet__options',
-												'ss__facet__options--' + facet.display,
-												className
-											),
-										},
+										{ className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__facet__options', className) },
 										(function () {
 											switch (null == facet ? void 0 : facet.display) {
 												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.SLIDER:
@@ -11931,11 +12166,11 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facets__facet' },
-										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.facetWrapper
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.facet
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.facetWrapper
+								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.facet
 							),
 						};
 					return (
@@ -12888,7 +13123,7 @@
 						)
 					);
 				},
-				defaultRecommendationResponsive = {
+				defaultRecommendationBreakpoints = {
 					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
 					480: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10 },
 					768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10 },
@@ -12912,7 +13147,7 @@
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
-							__assign({ breakpoints: defaultRecommendationResponsive, pagination: !1, loop: !0 }, properties),
+							__assign({ breakpoints: defaultRecommendationBreakpoints, pagination: !1, loop: !0 }, properties),
 							null === (_b = null === (_a = properties.theme) || void 0 === _a ? void 0 : _a.components) || void 0 === _b ? void 0 : _b.recommendation
 						),
 						title = props.title,
@@ -13232,7 +13467,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const defaultRecommendationResponsive = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
+							'const defaultRecommendationBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -13241,7 +13476,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Recommendation controller={controller} breakpoints={defaultRecommendationResponsive} />\n'
+							'<Recommendation controller={controller} breakpoints={defaultRecommendationBreakpoints} />\n'
 						)
 					)
 				);
@@ -13407,7 +13642,7 @@
 						prevButton: { description: 'Previous button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						nextButton: { description: 'Next button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						breakpoints: {
-							defaultValue: defaultRecommendationResponsive,
+							defaultValue: defaultRecommendationBreakpoints,
 							description: 'Recommendation title',
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
 							control: { type: 'object' },
@@ -13455,7 +13690,7 @@
 			var preact_module = __webpack_require__(33847),
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
-				Results = __webpack_require__(11881),
+				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(63399),
 				types = __webpack_require__(20874),
@@ -13574,7 +13809,7 @@
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Results results={controller.store.results} gapSize={'10px'} />\n")
 					),
-					(0, esm.kt)('h3', { id: 'responsive' }, 'responsive'),
+					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)(
 						'p',
 						null,
@@ -13585,21 +13820,21 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'Each entry within the responsive object contains a numeric key of the viewport when the sub-object of props will take effect. Any props listed above can be specified. (ie. columns, rows, layout, gapSize)'
+						'Each entry within the breakpoints object contains a numeric key of the viewport when the sub-object of props will take effect. Any props listed above can be specified. (ie. columns, rows, layout, gapSize)'
 					),
 					(0, esm.kt)(
 						'p',
 						null,
-						'Typically used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in.'
+						'Typically used to adjust the layout and how many products are shown at any screen size. There is no limit to how many breakpoints settings you can pass in.'
 					),
-					(0, esm.kt)('p', null, 'Default Results ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'responsive'), ' object:'),
+					(0, esm.kt)('p', null, 'Default Results ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'breakpoints'), ' object:'),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const responsive = {\n    0: {\n        columns: 1,\n    },\n    540: {\n        columns: 2,\n    },\n    768: {\n        columns: 3,\n    },\n    991: {\n        columns: 4,\n    },\n};\n'
+							'const breakpoints = {\n    0: {\n        columns: 1,\n    },\n    540: {\n        columns: 2,\n    },\n    768: {\n        columns: 3,\n    },\n    991: {\n        columns: 4,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -13608,7 +13843,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							'<Results results={controller.store.results} responsive={responsive} />\n'
+							'<Results results={controller.store.results} breakpoints={breakpoints} />\n'
 						)
 					)
 				);
@@ -13776,9 +14011,9 @@
 							table: { type: { summary: 'string' }, defaultValue: { summary: '20px' } },
 							control: { type: 'text' },
 						},
-						responsive: {
+						breakpoints: {
 							defaultValue: {},
-							description: 'Responsive options object',
+							description: 'Breakpoints options object',
 							table: { type: { summary: 'object' } },
 							control: { type: 'object' },
 						},
@@ -13839,89 +14074,21 @@
 				},
 			];
 		},
-		11881: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		69159: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { u: () => Results });
 			__webpack_require__(43105), __webpack_require__(34769), __webpack_require__(32501), __webpack_require__(43450);
-			var es = __webpack_require__(98095),
-				emotion_react_browser_esm = __webpack_require__(28165),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				InlineBanner = __webpack_require__(31340),
-				Result = __webpack_require__(23267),
-				types = __webpack_require__(20874),
-				defined = __webpack_require__(27193),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367),
-				hooks_module = (__webpack_require__(43430), __webpack_require__(68995), __webpack_require__(54226), __webpack_require__(34619));
-			function useDisplaySettings(responsiveObj) {
-				if (responsiveObj && Object.keys(responsiveObj).length) {
-					var _a = (0, hooks_module.eJ)(getDisplaySettings(responsiveObj)),
-						displaySettings = _a[0],
-						setDisplaySettings = _a[1];
-					return (
-						(0, hooks_module.d4)(function () {
-							var debouncedHandleResize = debounce(function () {
-								return (function handleResize() {
-									setDisplaySettings(getDisplaySettings(responsiveObj));
-								})();
-							});
-							return (
-								window.addEventListener('resize', debouncedHandleResize),
-								function () {
-									return window.removeEventListener('resize', debouncedHandleResize);
-								}
-							);
-						}, []),
-						displaySettings
-					);
-				}
-			}
-			var getDisplaySettings = function getDisplaySettings(responsive) {
-					var _a,
-						responsiveSettings,
-						currentScreenWidth = window.innerWidth,
-						sortedList =
-							null === (_a = Object.keys(responsive)) || void 0 === _a
-								? void 0
-								: _a
-										.sort(function (a, b) {
-											return parseInt(a) - parseInt(b);
-										})
-										.map(function (vp) {
-											var _a;
-											return ((_a = {})[vp] = responsive[vp]), _a;
-										});
-					if (sortedList.length) {
-						for (var i = 0; i < sortedList.length; i++) {
-							var entry = sortedList[i],
-								breakpoint = parseInt(Object.keys(entry)[0]);
-							if (i + 1 === sortedList.length || (0 === i && currentScreenWidth < breakpoint)) {
-								responsiveSettings = sortedList[i][breakpoint];
-								break;
-							}
-							var nextBreakpoint = parseInt(Object.keys(sortedList[i + 1])[0]);
-							if (currentScreenWidth >= breakpoint && currentScreenWidth < nextBreakpoint) {
-								responsiveSettings = sortedList[i][breakpoint];
-								break;
-							}
-						}
-						return responsiveSettings;
-					}
-				},
-				debounce = function debounce(func, timeout) {
-					var timer;
-					return (
-						void 0 === timeout && (timeout = 200),
-						function () {
-							for (var args = [], _i = 0; _i < arguments.length; _i++) args[_i] = arguments[_i];
-							clearTimeout(timer),
-								(timer = setTimeout(function () {
-									func.apply(undefined, args);
-								}, timeout));
-						}
-					);
-				},
+			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98095),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
+				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(31340),
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23267),
+				_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20874),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(6222),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -13935,12 +14102,12 @@
 					var columns = _a.columns,
 						gapSize = _a.gapSize,
 						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign({ display: 'grid', gridTemplateColumns: 'repeat(' + columns + ', 1fr)', gridAutoRows: '1fr', gap: gapSize }, style)
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)(
+						__assign({ display: 'grid', gridTemplateColumns: 'repeat(' + columns + ', 1fr)', gridTemplateRows: 'auto', gap: gapSize }, style)
 					);
 				},
-				defaultResponsiveProps = { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
-				Results = (0, es.Pi)(function (properties) {
+				defaultBreakpointsProps = { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
+				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
@@ -13952,7 +14119,7 @@
 						_j,
 						_k,
 						_l,
-						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.u)(),
 						props = __assign(
 							__assign(
 								__assign(
@@ -13963,8 +14130,8 @@
 												: _b.results,
 										columns: 4,
 										gapSize: '20px',
-										layout: types.Ar.GRID,
-										responsive: defaultResponsiveProps,
+										layout: _types__WEBPACK_IMPORTED_MODULE_8__.Ar.GRID,
+										breakpoints: defaultBreakpointsProps,
 									},
 									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.results
 								),
@@ -13972,7 +14139,7 @@
 							),
 							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.results
 						),
-						displaySettings = useDisplaySettings(props.responsive);
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__.o)(props.breakpoints);
 					displaySettings && Object.keys(displaySettings).length && (props = __assign(__assign({}, props), displaySettings));
 					var results,
 						disableStyles = props.disableStyles,
@@ -13987,7 +14154,7 @@
 										{ className: 'ss__results__result' },
 										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.result
 									),
-									(0, defined.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
 								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.result
 							),
@@ -13997,7 +14164,7 @@
 										{ className: 'ss__results__inline-banner' },
 										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.inlineBanner
 									),
-									(0, defined.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
 								null === (_l = null === (_k = props.theme) || void 0 === _k ? void 0 : _k.components) || void 0 === _l ? void 0 : _l.inlineBanner
 							),
@@ -14011,24 +14178,30 @@
 							? void 0
 							: results.length
 					)
-						? (0, emotion_react_browser_esm.tZ)(
-								cache.n,
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
 								null,
-								(0, emotion_react_browser_esm.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
 									'div',
 									{
-										css: !disableStyles && CSS_results({ columns: layout == types.Ar.LIST ? 1 : props.columns, gapSize: props.gapSize, style }),
-										className: classnames_default()('ss__results', className),
+										css:
+											!disableStyles &&
+											CSS_results({
+												columns: layout == _types__WEBPACK_IMPORTED_MODULE_8__.Ar.LIST ? 1 : props.columns,
+												gapSize: props.gapSize,
+												style,
+											}),
+										className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', className),
 									},
 									results.map(function (result) {
 										return (function () {
 											switch (result.type) {
-												case types.$.BANNER:
+												case _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER:
 													return (0,
-													emotion_react_browser_esm.tZ)(InlineBanner.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
+													_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
 												default:
 													return (0,
-													emotion_react_browser_esm.tZ)(Result.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
+													_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
 											}
 										})();
 									})
@@ -14036,6 +14209,80 @@
 						  )
 						: null;
 				});
+		},
+		6222: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { o: () => useDisplaySettings });
+			__webpack_require__(34769), __webpack_require__(43450), __webpack_require__(43430), __webpack_require__(68995), __webpack_require__(54226);
+			var preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(34619);
+			function useDisplaySettings(breakpointsObj) {
+				if (breakpointsObj && Object.keys(breakpointsObj).length) {
+					var _a = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.eJ)(getDisplaySettings(breakpointsObj)),
+						displaySettings = _a[0],
+						setDisplaySettings = _a[1];
+					return (
+						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.d4)(function () {
+							var debouncedHandleResize = debounce(function () {
+								return (function handleResize() {
+									setDisplaySettings(getDisplaySettings(breakpointsObj));
+								})();
+							});
+							return (
+								window.addEventListener('resize', debouncedHandleResize),
+								function () {
+									return window.removeEventListener('resize', debouncedHandleResize);
+								}
+							);
+						}, []),
+						displaySettings
+					);
+				}
+			}
+			var getDisplaySettings = function getDisplaySettings(breakpoints) {
+					var _a,
+						breakpointsSettings,
+						currentScreenWidth = window.innerWidth,
+						sortedList =
+							null === (_a = Object.keys(breakpoints)) || void 0 === _a
+								? void 0
+								: _a
+										.sort(function (a, b) {
+											return parseInt(a) - parseInt(b);
+										})
+										.map(function (vp) {
+											var _a;
+											return ((_a = {})[vp] = breakpoints[vp]), _a;
+										});
+					if (sortedList.length) {
+						for (var i = 0; i < sortedList.length; i++) {
+							var entry = sortedList[i],
+								breakpoint = parseInt(Object.keys(entry)[0]);
+							if (i + 1 === sortedList.length || (0 === i && currentScreenWidth < breakpoint)) {
+								breakpointsSettings = sortedList[i][breakpoint];
+								break;
+							}
+							var nextBreakpoint = parseInt(Object.keys(sortedList[i + 1])[0]);
+							if (currentScreenWidth >= breakpoint && currentScreenWidth < nextBreakpoint) {
+								breakpointsSettings = sortedList[i][breakpoint];
+								break;
+							}
+						}
+						return breakpointsSettings;
+					}
+				},
+				debounce = function debounce(func, timeout) {
+					var timer;
+					return (
+						void 0 === timeout && (timeout = 200),
+						function () {
+							for (var args = [], _i = 0; _i < arguments.length; _i++) args[_i] = arguments[_i];
+							clearTimeout(timer),
+								(timer = setTimeout(function () {
+									func.apply(undefined, args);
+								}, timeout));
+						}
+					);
+				};
 		},
 		53083: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -23519,7 +23766,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.47' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.4.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23546,7 +23793,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.47');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.4.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24145,7 +24392,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.47]',
+								text: '[0.4.0]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24482,7 +24729,7 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('recommendation', { id, tag: config.tag }));
+							var cntrlr = (controllers[id] = snap.createController('recommendation', config));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
@@ -24507,7 +24754,7 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('autocomplete', { id, selector: config.selector }));
+							var cntrlr = (controllers[id] = snap.createController('autocomplete', config));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
