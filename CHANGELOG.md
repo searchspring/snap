@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/searchspring/snap/compare/v0.3.47...v0.4.0) (2021-08-23)
+
+
+### Bug Fixes
+
+* **dropdown.tsx:** bugfix for dropdowns passing multiple children ([3c5cbdc](https://github.com/searchspring/snap/commit/3c5cbdc15735538911dd37557ffdbb8089147b20))
+
+
+### Features
+
+* **dropdown.tsx:** 'open' prop should be passed into dropdown content and button slots ([9b44559](https://github.com/searchspring/snap/commit/9b445590b37c3ac3f6d62a803fba70905061b15e))
+
+
+
+
+
 ## [0.3.47](https://github.com/searchspring/snap/compare/v0.3.46...v0.3.47) (2021-08-23)
 
 
