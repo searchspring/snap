@@ -88,9 +88,9 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		responsive: {
+		breakpoints: {
 			defaultValue: {},
-			description: 'Responsive options object',
+			description: 'Breakpoints options object',
 			table: {
 				type: {
 					summary: 'object',

@@ -288,7 +288,7 @@ describe('Tracking', () => {
 				cy.get('.ss__recommendation:first .ss__result')
 					.filter(':visible:first')
 					.should('exist')
-					.find('.ss__result__wrapper__details__pricing')
+					.find('.ss__result__details__pricing')
 					.should('exist')
 					.click();
 				cy.wait(`@${BeaconType.PROFILE_PRODUCT_CLICK}`).should((interception) => {

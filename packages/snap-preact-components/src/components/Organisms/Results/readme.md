@@ -51,18 +51,18 @@ The `gapSize` prop specifies the gap size between each result within a grid layo
 <Results results={controller.store.results} gapSize={'10px'} />
 ```
 
-### responsive
+### breakpoints
 An object that modifies the responsive behavior of the `<Result />` component.
 
-Each entry within the responsive object contains a numeric key of the viewport when the sub-object of props will take effect. Any props listed above can be specified. (ie. columns, rows, layout, gapSize)
+Each entry within the breakpoints object contains a numeric key of the viewport when the sub-object of props will take effect. Any props listed above can be specified. (ie. columns, rows, layout, gapSize)
 
-Typically used to adjust the layout and how many products are shown at any screen size. There is no limit to how many responsive settings you can pass in.
+Typically used to adjust the layout and how many products are shown at any screen size. There is no limit to how many breakpoints settings you can pass in.
 
 
-Default Results `responsive` object:
+Default Results `breakpoints` object:
 
 ```typescript
-const responsive = {
+const breakpoints = {
 	0: {
 		columns: 1,
 	},
@@ -79,5 +79,5 @@ const responsive = {
 ```
 
 ```jsx
-<Results results={controller.store.results} responsive={responsive} />
+<Results results={controller.store.results} breakpoints={breakpoints} />
 ```

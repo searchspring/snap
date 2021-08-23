@@ -2,7 +2,7 @@ import { Fragment, h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Carousel, defaultCarouselResponsive } from './Carousel';
+import { Carousel, defaultCarouselBreakpoints } from './Carousel';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { Result } from '../../Molecules/Result';
@@ -84,7 +84,7 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: defaultCarouselResponsive,
+			defaultValue: defaultCarouselBreakpoints,
 			description: 'Recommendation title',
 			table: {
 				type: {

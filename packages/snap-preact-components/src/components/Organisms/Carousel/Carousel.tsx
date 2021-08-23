@@ -70,7 +70,7 @@ const CSS = {
 		}),
 };
 
-export const defaultCarouselResponsive = {
+export const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -104,7 +104,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const props: CarouselProps = {
 		// default props
-		breakpoints: defaultCarouselResponsive,
+		breakpoints: defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
