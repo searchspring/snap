@@ -696,7 +696,14 @@
 		90734: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { Default: () => Default, ExternalState: () => ExternalState, default: () => Dropdown_stories });
+				__webpack_require__.d(__webpack_exports__, {
+					Default: () => Default,
+					ExternalState: () => ExternalState,
+					JSXChildren: () => JSXChildren,
+					JSXContent: () => JSXContent,
+					StringChildren: () => StringChildren,
+					default: () => Dropdown_stories,
+				});
 			__webpack_require__(43105), __webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
@@ -734,11 +741,16 @@
 						null,
 						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'content'),
-						' prop specifies the dropdown contents. This can be a string or a JSX element.'
+						' prop specifies the dropdown contents. This can be a string or a JSX element. The Dropdown component also passes the current open state to the JSX component under the prop showContent: boolean. '
 					),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown content={"Hello World!"} />\n')),
 					(0, esm.kt)('p', null, 'Or alternatively as children:'),
 					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown>Hello World!</Dropdown>\n')),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Note you can only render either the content, or the children, if both are passed in, it will default to the content prop. '
+					),
 					(0, esm.kt)('h3', { id: 'button' }, 'button'),
 					(0, esm.kt)(
 						'p',
@@ -866,15 +878,16 @@
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
-			};
+			var Badge = __webpack_require__(93607),
+				__assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				};
 			const Dropdown_stories = {
 				title: 'Atoms/Dropdown',
 				component: Dropdown.L,
@@ -938,6 +951,24 @@
 				return (0, preact_module.h)(Dropdown.L, __assign({}, args));
 			}.bind({});
 			ExternalState.args = { button: 'button text', content: 'content text', open: !0 };
+			var JSXContent = function Template3(args) {
+				return (0, preact_module.h)(Dropdown.L, __assign({}, args));
+			}.bind({});
+			JSXContent.args = {
+				button: 'button text',
+				content: (0, preact_module.h)(Badge.C, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
+			};
+			var JSXChildren = function Template4(args) {
+				return (0, preact_module.h)(Dropdown.L, { button: args.button }, args.content);
+			}.bind({});
+			JSXChildren.args = {
+				button: 'button text',
+				content: (0, preact_module.h)(Badge.C, { content: 'jsx content - (note this component receieved the open state as a prop)' }),
+			};
+			var StringChildren = function Template5(args) {
+				return (0, preact_module.h)(Dropdown.L, { button: args.button }, args.content);
+			}.bind({});
+			StringChildren.args = { button: 'button text', content: 'string content - (note this component receieved the open state as a prop)' };
 		},
 		30766: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -950,7 +981,8 @@
 				es = __webpack_require__(98095),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
-			var __assign = function () {
+			var cloneWithProps = __webpack_require__(64170),
+				__assign = function () {
 					return (__assign =
 						Object.assign ||
 						function (t) {
@@ -1010,30 +1042,36 @@
 						stateful = void 0 === open;
 					stateful ? ((_a = (0, hooks_module.eJ)(startOpen)), (showContent = _a[0]), (setShowContent = _a[1])) : (showContent = open);
 					var innerRef =
-						!disableClickOutside &&
-						(function useClickOutside(callback) {
-							var callbackRef = (0, hooks_module.sO)(),
-								innerRef = (0, hooks_module.sO)();
-							return (
-								(0, hooks_module.d4)(function () {
-									callbackRef.current = callback;
-								}),
-								(0, hooks_module.d4)(function () {
-									return (
-										document.addEventListener('click', handleClick),
-										function () {
-											return document.removeEventListener('click', handleClick);
+							!disableClickOutside &&
+							(function useClickOutside(callback) {
+								var callbackRef = (0, hooks_module.sO)(),
+									innerRef = (0, hooks_module.sO)();
+								return (
+									(0, hooks_module.d4)(function () {
+										callbackRef.current = callback;
+									}),
+									(0, hooks_module.d4)(function () {
+										return (
+											document.addEventListener('click', handleClick),
+											function () {
+												return document.removeEventListener('click', handleClick);
+											}
+										);
+										function handleClick(e) {
+											innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
 										}
-									);
-									function handleClick(e) {
-										innerRef.current && callbackRef.current && !innerRef.current.contains(e.target) && callbackRef.current(e);
-									}
-								}, []),
-								innerRef
-							);
-						})(function (e) {
-							showContent && (disabled || (stateful && setShowContent(!1), onToggle && onToggle(e, !1)));
-						});
+									}, []),
+									innerRef
+								);
+							})(function (e) {
+								showContent && (disabled || (stateful && setShowContent(!1), onToggle && onToggle(e, !1)));
+							}),
+						toggleShowContent = function toggleShowContent(e) {
+							stateful &&
+								setShowContent(function (prev) {
+									return onToggle && onToggle(e, !prev), !prev;
+								});
+						};
 					return (0, emotion_react_browser_esm.tZ)(
 						cache.n,
 						null,
@@ -1049,19 +1087,17 @@
 								{
 									className: 'ss__dropdown__button',
 									onClick: function onClick(e) {
-										disabled ||
-											(!(function toggleShowContent(e) {
-												stateful &&
-													setShowContent(function (prev) {
-														return onToggle && onToggle(e, !prev), !prev;
-													});
-											})(e),
-											_onClick && _onClick(e));
+										disabled || (toggleShowContent(e), _onClick && _onClick(e));
 									},
 								},
-								button
+								(0, cloneWithProps.d)(button, { open: showContent, toggleOpen: toggleShowContent })
 							),
-							(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__dropdown__content' }, content, children)
+							(0, emotion_react_browser_esm.tZ)(
+								'div',
+								{ className: 'ss__dropdown__content' },
+								(0, cloneWithProps.d)(content, { open: showContent, toggleOpen: toggleShowContent }),
+								(0, cloneWithProps.d)(children, { open: showContent, toggleOpen: toggleShowContent })
+							)
 						)
 					);
 				});
@@ -7311,7 +7347,8 @@
 				Price = __webpack_require__(92246),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
-				defined = __webpack_require__(27193);
+				defined = __webpack_require__(27193),
+				cloneWithProps = __webpack_require__(64170);
 			__webpack_require__(74660);
 			var types = __webpack_require__(20874),
 				__assign = function () {
@@ -7509,7 +7546,7 @@
 														  )
 														: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
 												),
-											detailSlot && (0, preact_module.Tm)(detailSlot, { result })
+											(0, cloneWithProps.d)(detailSlot, { result })
 										)
 									)
 								)
@@ -8467,6 +8504,7 @@
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				defined = __webpack_require__(27193),
+				cloneWithProps = __webpack_require__(64170),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
 			var Overlay = __webpack_require__(82480),
@@ -8609,7 +8647,7 @@
 									className: classnames_default()('ss__slideout', className),
 									css: !disableStyles && CSS_slideout({ isActive, width, transitionSpeed, slideDirection, style }),
 								},
-								children && (0, preact_module.Tm)(children, { toggleActive, active: isActive })
+								(0, cloneWithProps.d)(children, { toggleActive, active: isActive })
 							),
 							(0, emotion_react_browser_esm.tZ)(Overlay.a, __assign({}, subProps.overlay, { active: isActive, onClick: toggleActive }))
 						)
@@ -16540,6 +16578,22 @@
 						(FacetDisplay.HIERARCHY = 'hierarchy');
 				})(FacetDisplay || (FacetDisplay = {}));
 		},
+		64170: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { d: () => cloneWithProps });
+			__webpack_require__(18145), __webpack_require__(43450);
+			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33847),
+				cloneWithProps = function cloneWithProps(input, props) {
+					if (input)
+						return 'string' == typeof input || 'number' == typeof input || 'boolean' == typeof input
+							? input
+							: Array.isArray(input)
+							? input.map(function (entry) {
+									return cloneWithProps(entry, props);
+							  })
+							: (0, preact__WEBPACK_IMPORTED_MODULE_2__.Tm)(input, props);
+				};
+		},
 		55625: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { p: () => componentArgs });
@@ -23465,7 +23519,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.46' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.47' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23492,7 +23546,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.46');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.47');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24091,7 +24145,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.46]',
+								text: '[0.3.47]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
