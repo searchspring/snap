@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.47](https://github.com/searchspring/snap/compare/v0.3.46...v0.3.47) (2021-08-23)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+
+
+
+
 ## 0.3.46 (2021-08-21)
 
 **Note:** Version bump only for package @searchspring/snap-client
