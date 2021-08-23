@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/searchspring/snap/compare/v0.4.0...v0.5.0) (2021-08-23)
+
+
+### Bug Fixes
+
+* **autocomplete:** add flex basis to facets, remove demo store autocomplete theme.results duplicate ([0b79a73](https://github.com/searchspring/snap/commit/0b79a739f1cdf86dda7e871ca3bd0f2881569c0f))
+* **autocomplete:** additional styling improvements, disable badges, hide section props, title props ([c8392d2](https://github.com/searchspring/snap/commit/c8392d21187ea0b77dfba6b062cc8f6346c68aca))
+* **autocomplete:** terms flex shrink, set input spellcheck and autocomplete attrs, slot wrappers ([949887f](https://github.com/searchspring/snap/commit/949887ffaba666864cf9e9a325ac29210044cafa))
+* **autocomplete:** wrapper should not exist if empty div ([aa60b2e](https://github.com/searchspring/snap/commit/aa60b2e871472fea95e184132fc6fb0209da935f))
+* **banner:** add additional styles to images within banner component ([568366a](https://github.com/searchspring/snap/commit/568366a33c74749ae458f8b13d84cea2396da318))
+* **facet:** adjust classnames of facet component to include display on root ([4cef5ce](https://github.com/searchspring/snap/commit/4cef5ced72b244abcc04a2cdf311188563ff957e))
+* **facets.tsx:** fixing facet subprop theme ([5a32e6a](https://github.com/searchspring/snap/commit/5a32e6a107f1bf03dbf2a92bf495cc151ccf45e3))
+* **result:** swap msrp and reg price in price component ([f47cede](https://github.com/searchspring/snap/commit/f47cedee21b667c2623cab06a8afa04e6c33e295))
+
+
+### Features
+
+* **autocomplete:** add horizontalTerms, vertical props, improve autocomplete styling and dom ([6fcd661](https://github.com/searchspring/snap/commit/6fcd66105287af8a75bf46ab511a1b17b3bca467))
+* **autocomplete:** further styling improvements & add termsSlot, facetsSlot, contentSlot ([9043447](https://github.com/searchspring/snap/commit/90434470287ce6b0ded940241cdc671b76104b23))
+* **image:** add maxHeight prop to Image component, update tests ([e6d742a](https://github.com/searchspring/snap/commit/e6d742a54d06a8748084a058bb54e0603264ca35))
+
+
+
+
+
 # [0.4.0](https://github.com/searchspring/snap/compare/v0.3.47...v0.4.0) (2021-08-23)
 
 
