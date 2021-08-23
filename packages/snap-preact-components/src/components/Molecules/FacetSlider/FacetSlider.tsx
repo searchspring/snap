@@ -12,7 +12,7 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	slider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style }) =>
+	slider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, showTicks, stickyHandleLabel, tickTextColor, theme, style }) =>
 		css({
 			display: 'inline-block',
 			height: '8px',
@@ -54,7 +54,7 @@ const CSS = {
 
 			'& label.ss__slider__handle__label': {
 				display: 'inline-block',
-				marginTop: '20px',
+				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 			},
 
 			'& label.ss__slider__handle__label.handleLabel-0': {
@@ -193,7 +193,19 @@ export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 					className={classnames('ss__slider', className)}
 					{...getTrackProps()}
 					css={
-						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
+						!disableStyles &&
+						CSS.slider({
+							railColor,
+							trackColor,
+							handleColor,
+							handleTextColor,
+							handleDraggingColor,
+							showTicks,
+							stickyHandleLabel,
+							tickTextColor,
+							theme,
+							style,
+						})
 					}
 				>
 					{showTicks &&
