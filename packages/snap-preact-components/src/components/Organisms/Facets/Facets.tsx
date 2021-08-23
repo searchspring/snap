@@ -38,13 +38,13 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 			// default props
 			className: 'ss__facets__facet',
 			// global theme
-			...globalTheme?.components?.facetWrapper,
+			...globalTheme?.components?.facet,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facetWrapper,
+			...props.theme?.components?.facet,
 		},
 	};
 	return (

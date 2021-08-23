@@ -29,6 +29,13 @@ The required `controller` prop specifies a reference to the autocomplete control
 <Autocomplete controller={controller} input={'#searchInput'} />
 ```
 
+### width
+The `width` prop specifies a width for the overall component. The default value is '100%'.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} width="800px" />
+```
+
 ### hideFacets
 The `hideFacets` prop specifies if the facets within autocomplete should be rendered.
 
@@ -43,13 +50,13 @@ The `hideTerms` prop specifies if the terms within autocomplete should be render
 <Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />
 ```
 
-### responsive
-The `responsive` prop contains a responsive object that is passed to the `<Results />` sub-component.
+### breakpoints
+The `breakpoints` prop contains a breakpoints object that is passed to the `<Results />` sub-component.
 
-Default Autocomplete `responsive` object:
+Default Autocomplete `breakpoints` object:
 
 ```typescript
-const responsive = {
+const breakpoints = {
     0: {
         columns: 2,
         rows: 1,
@@ -72,5 +79,5 @@ const responsive = {
 See `<Results />` component documentation for further details.
 
 ```jsx
-<Autocomplete controller={controller} input={'#searchInput'} responsive={responsive} />
+<Autocomplete controller={controller} input={'#searchInput'} breakpoints={breakpoints} />
 ```

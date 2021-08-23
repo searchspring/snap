@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h, cloneElement } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -9,7 +9,7 @@ import { Image, ImageProps } from '../../Atoms/Image';
 import { Badge, BadgeProps } from '../../Atoms/Badge';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -18,70 +18,54 @@ const CSS = {
 	result: ({ style }) =>
 		css({
 			'&.ss__result--grid': {
+				display: 'flex',
 				flexDirection: 'column',
+				height: '100%',
+				'& .ss__result__image-wrapper': {
+					flex: '1 0 auto',
+				},
 			},
 			'&.ss__result--list': {
+				display: 'flex',
 				flexDirection: 'row',
-				display: 'block',
-				width: 'auto',
-
-				'& .ss__result__wrapper': {
-					overflow: 'hidden',
-					display: 'flex',
-					'& .ss__result__wrapper__image': {
-						float: 'left',
-						maxWidth: '35%',
-					},
-					'& .ss__result__wrapper__details': {
-						float: 'right',
-						textAlign: 'left',
-						verticalAlign: 'top',
-						padding: '20px',
-					},
+				'& .ss__result__image-wrapper': {
+					flex: '0 0 33%',
+				},
+				'& .ss__result__details': {
+					flex: '1 1 auto',
+					textAlign: 'left',
+					marginLeft: '20px',
+					padding: 0,
 				},
 			},
 
-			'& .ss__result__wrapper': {
-				'& .ss__result__wrapper__image': {
-					position: 'relative',
-					display: 'flex',
-					justifyContent: 'center',
+			'& .ss__result__image-wrapper': {
+				position: 'relative',
+				'& .ss__result__badge': {
+					background: 'rgba(255, 255, 255, 0.5)',
+					padding: '10px',
+				},
+			},
 
-					'& img': {
-						top: '0',
-						left: '0',
-						right: '0',
-						width: 'auto',
-						bottom: '0',
-						margin: 'auto',
-						height: 'auto',
-						maxWidth: '100%',
+			'& .ss__result__details': {
+				padding: '10px',
+				textAlign: 'center',
+
+				'& .ss__result__details__title': {
+					marginBottom: '10px',
+				},
+				'& .ss__result__details__pricing': {
+					marginBottom: '10px',
+
+					'& .ss__result__price': {
+						fontSize: '1.2em',
 					},
-
-					'& .ss__result__badge': {
-						background: 'rgba(255, 255, 255, 0.5)',
-						padding: '10px',
+					'& .ss__price--strike': {
+						fontSize: '80%',
 					},
 				},
-
-				'& .ss__result__wrapper__details': {
-					padding: '10px',
-					'& .ss__result__wrapper__details__title': {
-						marginBottom: '10px',
-					},
-					'& .ss__result__wrapper__details__pricing': {
-						marginBottom: '10px',
-
-						'& .ss__result__price': {
-							fontSize: '1.2em',
-						},
-						'& .ss__price--strike': {
-							fontSize: '80%',
-						},
-					},
-					'& .ss__result__wrapper__details__button': {
-						marginBottom: '10px',
-					},
+				'& .ss__result__details__button': {
+					marginBottom: '10px',
 				},
 			},
 			...style,
@@ -156,46 +140,44 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		core && (
 			<CacheProvider>
 				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-					<div className="ss__result__wrapper">
-						<div className="ss__result__wrapper__image">
-							<a
-								href={core.url}
-								onMouseDown={(e) => {
-									controller?.track?.product?.click(e, result);
-								}}
-							>
-								{!hideBadge && onSale && <Badge {...subProps.badge} />}
-								<Image {...subProps.image} />
-							</a>
-						</div>
-						<div className="ss__result__wrapper__details">
-							{!hideTitle && (
-								<div className="ss__result__wrapper__details__title">
-									<a
-										href={core.url}
-										onMouseDown={(e) => {
-											controller?.track?.product?.click(e, result);
-										}}
-									>
-										{displayName}
-									</a>
-								</div>
-							)}
-							{!hidePricing && (
-								<div className="ss__result__wrapper__details__pricing">
-									{core.price < core.msrp ? (
-										<>
-											<Price {...subProps.price} value={core.price} />
-											&nbsp;
-											<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-										</>
-									) : (
+					<div className="ss__result__image-wrapper">
+						<a
+							href={core.url}
+							onMouseDown={(e) => {
+								controller?.track?.product?.click(e, result);
+							}}
+						>
+							{!hideBadge && onSale && <Badge {...subProps.badge} />}
+							<Image {...subProps.image} />
+						</a>
+					</div>
+					<div className="ss__result__details">
+						{!hideTitle && (
+							<div className="ss__result__details__title">
+								<a
+									href={core.url}
+									onMouseDown={(e) => {
+										controller?.track?.product?.click(e, result);
+									}}
+								>
+									{displayName}
+								</a>
+							</div>
+						)}
+						{!hidePricing && (
+							<div className="ss__result__details__pricing">
+								{core.price < core.msrp ? (
+									<>
+										<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+										&nbsp;
 										<Price {...subProps.price} value={core.price} />
-									)}
-								</div>
-							)}
-							{detailSlot && cloneElement(detailSlot, { result })}
-						</div>
+									</>
+								) : (
+									<Price {...subProps.price} value={core.price} />
+								)}
+							</div>
+						)}
+						{cloneWithProps(detailSlot, { result })}
 					</div>
 				</article>
 			</CacheProvider>

@@ -79,7 +79,7 @@ const CSS = {
 		}),
 };
 
-export const defaultRecommendationResponsive = {
+export const defaultRecommendationBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -113,7 +113,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const props: RecommendationProps = {
 		// default props
-		breakpoints: defaultRecommendationResponsive,
+		breakpoints: defaultRecommendationBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme

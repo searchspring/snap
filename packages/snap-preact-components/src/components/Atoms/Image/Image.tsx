@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h } from 'preact';
 
-import { useState } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -13,7 +13,16 @@ export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/defaul
 const CSS = {
 	image: ({ visibility, style }) =>
 		css({
-			visibility,
+			display: 'flex',
+			flexDirection: 'column',
+			justifyContent: 'center',
+			height: '100%',
+			'& img': {
+				visibility,
+				objectFit: 'contain',
+				maxWidth: '100%',
+				maxHeight: '100%',
+			},
 			...style,
 		}),
 };
@@ -36,30 +45,38 @@ export function Image(properties: ImageProps): JSX.Element {
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
 
+	const prevSrcRef = useRef();
+	useEffect(() => {
+		prevSrcRef.current = src;
+	});
+	if (prevSrcRef.current && prevSrcRef.current != src) {
+		setVisibility('hidden');
+	}
+
 	return (
 		<CacheProvider>
-			<img
-				css={!disableStyles && CSS.image({ visibility, style })}
-				className={classnames('ss__image', className)}
-				src={(isHovering ? hoverSrc : src) || fallback}
-				alt={alt}
-				title={alt}
-				loading="lazy"
-				onLoad={() => {
-					setVisibility('visible');
-					onLoad && onLoad();
-				}}
-				onClick={(e) => onClick && onClick(e as any)}
-				onError={(e) => ((e.target as HTMLImageElement).src = fallback)}
-				onMouseOver={(e) => {
-					hoverSrc && setHover(true);
-					onMouseOver && onMouseOver(e as any);
-				}}
-				onMouseOut={(e) => {
-					hoverSrc && setHover(false);
-					onMouseOut && onMouseOut(e as any);
-				}}
-			/>
+			<div css={!disableStyles && CSS.image({ visibility, style })} className={classnames('ss__image', className)}>
+				<img
+					src={(isHovering ? hoverSrc : src) || fallback}
+					alt={alt}
+					title={alt}
+					loading="lazy"
+					onLoad={() => {
+						setVisibility('visible');
+						onLoad && onLoad();
+					}}
+					onClick={(e) => onClick && onClick(e as any)}
+					onError={(e) => ((e.target as HTMLImageElement).src = fallback)}
+					onMouseOver={(e) => {
+						hoverSrc && setHover(true);
+						onMouseOver && onMouseOver(e as any);
+					}}
+					onMouseOut={(e) => {
+						hoverSrc && setHover(false);
+						onMouseOut && onMouseOut(e as any);
+					}}
+				/>
+			</div>
 		</CacheProvider>
 	);
 }
