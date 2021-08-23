@@ -5533,15 +5533,14 @@
 				__webpack_require__(6886),
 				__webpack_require__(43450),
 				__webpack_require__(72508);
-			var preact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(33847),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_7___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98095),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(27193),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6572),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(79367),
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -5552,10 +5551,12 @@
 						}).apply(this, arguments);
 				},
 				CSS_palette = function palette(_a) {
-					var columns = _a.columns,
+					var _b,
+						columns = _a.columns,
 						gapSize = _a.gapSize,
+						theme = _a.theme,
 						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)(
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
 						__assign(
 							{
 								display: 'grid',
@@ -5563,7 +5564,19 @@
 								gap: gapSize,
 								'& .ss__facet-palette-options__option': {
 									position: 'relative',
-									'&:hover': { cursor: 'pointer' },
+									'&:hover': {
+										cursor: 'pointer',
+										'.ss__facet-palette-options__option__wrapper': { borderColor: '#EBEBEB' },
+										'& .ss__facet-palette-options__option__palette': { '& .ss__facet-palette-options__icon': { opacity: 1 } },
+									},
+									'& .ss__facet-palette-options__option__wrapper': { border: '2px solid transparent', borderRadius: '100%', padding: '2px' },
+									'&.ss__facet-palette-options__option--filtered': {
+										'& .ss__facet-palette-options__option__wrapper': {
+											borderColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
+											padding: '0px',
+											borderWidth: '4px',
+										},
+									},
 									'& .ss__facet-palette-options__option__palette': {
 										paddingTop: 'calc(100% - 2px)',
 										border: '1px solid #EBEBEB',
@@ -5572,7 +5585,7 @@
 										display: 'flex',
 										justifyContent: 'center',
 										alignItems: 'center',
-										'.ss__facet-palette-options__icon': {
+										'& .ss__facet-palette-options__icon': {
 											position: 'absolute',
 											top: 0,
 											right: 0,
@@ -5580,6 +5593,10 @@
 											margin: 'auto',
 											bottom: 0,
 											textAlign: 'center',
+											stroke: 'black',
+											strokeWidth: '3px',
+											strokeLinejoin: 'round',
+											opacity: 0,
 										},
 									},
 									'& .ss__facet-palette-options__option__value': {
@@ -5595,28 +5612,27 @@
 						)
 					);
 				},
-				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_8__.Pi)(function (properties) {
+				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
 						_e,
 						_f,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.u)(),
-						props =
-							(__assign(__assign({}, globalTheme), properties.theme),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
 							__assign(
 								__assign(
-									__assign(
-										{ values: [], columns: 4, gapSize: '8px' },
-										null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetpaletteoptions
-									),
-									properties
+									{ values: [], columns: 4, gapSize: '8px' },
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetpaletteoptions
 								),
-								null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
-									? void 0
-									: _c.facetpaletteoptions
-							)),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
+								? void 0
+								: _c.facetpaletteoptions
+						),
 						values = props.values,
 						hideLabel = props.hideLabel,
 						columns = props.columns,
@@ -5635,34 +5651,33 @@
 										{ className: 'ss__facet-palette-options__icon' },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
 								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.icon
 							),
-							icon_bg: { icon: 'close', color: 'black', size: '40%' },
-							icon_fg: { icon: 'close-thin', color: 'white', size: '30%' },
 						};
 					return (
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_12__.n,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_11__.n,
 							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 								'div',
 								{
-									css: !disableStyles && CSS_palette({ columns, gapSize, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-palette-options', className),
+									css: !disableStyles && CSS_palette({ columns, gapSize, theme, style }),
+									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className),
 								},
 								values.map(function (value) {
 									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 										'a',
 										__assign(
 											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_7___default()('ss__facet-palette-options__option', {
+												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
 													'ss__facet-palette-options__option--filtered': value.filtered,
 												}),
 												onClick,
+												'aria-label': value.value,
 												onFocus: function onFocus() {
 													return previewOnFocus && value.preview && value.preview();
 												},
@@ -5670,26 +5685,28 @@
 											valueProps,
 											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'div',
-											{ className: 'ss__facet-palette-options__option__palette', css: { background: value.value } },
-											!hideIcon &&
-												value.filtered &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-													preact__WEBPACK_IMPORTED_MODULE_6__.HY,
-													null,
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
-														__assign({}, subProps.icon, subProps.icon_bg)
+											{ className: 'ss__facet-palette-options__option__wrapper' },
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'div',
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+														'ss__facet-palette-options__option__palette',
+														'ss__facet-palette-options__option__palette--' + value.value
 													),
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
-														__assign({}, subProps.icon, subProps.icon_fg)
+													css: { background: value.value },
+												},
+												!hideIcon &&
+													value.filtered &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
+														__assign({}, subProps.icon)
 													)
-												)
+											)
 										),
 										!hideLabel &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 												'span',
 												{ className: 'ss__facet-palette-options__option__value' },
 												value.label
@@ -6322,6 +6339,7 @@
 											'a',
 											__assign({}, store.previous.url.link, {
 												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
+												'aria-label': 'previous page',
 											}),
 											prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-left' }))
 										),
@@ -6334,6 +6352,7 @@
 												'a',
 												__assign({}, store.first.url.link, {
 													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
+													'aria-label': 'first page',
 												}),
 												firstButton || store.first.number
 											),
@@ -6347,7 +6366,11 @@
 														{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
 														page.number
 												  )
-												: (0, emotion_react_browser_esm.tZ)('a', __assign({}, page.url.link, { className: 'ss__pagination__page' }), page.number);
+												: (0, emotion_react_browser_esm.tZ)(
+														'a',
+														__assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+														page.number
+												  );
 										}),
 									!pageNumbers.includes(store.last.number) &&
 										!hideLast &&
@@ -6357,7 +6380,10 @@
 											!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
 											(0, emotion_react_browser_esm.tZ)(
 												'a',
-												__assign({}, store.last.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last') }),
+												__assign({}, store.last.url.link, {
+													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
+													'aria-label': 'last page',
+												}),
 												lastButton || store.last.number
 											)
 										),
@@ -6365,7 +6391,10 @@
 										!hideNext &&
 										(0, emotion_react_browser_esm.tZ)(
 											'a',
-											__assign({}, store.next.url.link, { className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next') }),
+											__assign({}, store.next.url.link, {
+												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
+												'aria-label': 'next page',
+											}),
 											nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-right' }))
 										)
 								)
@@ -9307,7 +9336,9 @@
 										getHandleProps = _a.getHandleProps;
 									return (0, emotion_react_browser_esm.tZ)(
 										'button',
-										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })),
+										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } }), {
+											'aria-label': 'slider__handle',
+										}),
 										(0, emotion_react_browser_esm.tZ)(
 											'div',
 											{ className: classnames_default()('ss__slider__handle', { 'ss__slider__handle--active': active }) },
@@ -16561,6 +16592,7 @@
 				__webpack_require__(38695),
 				__webpack_require__(1939),
 				__webpack_require__(34769),
+				__webpack_require__(54226),
 				__webpack_require__(65584),
 				__webpack_require__(26936);
 			var LogMode,
@@ -16572,7 +16604,6 @@
 					__webpack_require__(43450),
 					__webpack_require__(18178),
 					__webpack_require__(85940),
-					__webpack_require__(54226),
 					__webpack_require__(95094),
 					__webpack_require__(39714)),
 				cjs_default = __webpack_require__.n(cjs),
@@ -17559,7 +17590,9 @@
 										preventBackfill,
 										dontBackfill,
 										searchProfile,
+										_a,
 										response,
+										meta,
 										previousResults_1,
 										backfills,
 										page,
@@ -17569,54 +17602,57 @@
 										afterStoreProfile,
 										err_3,
 										err_4,
-										_a,
 										_b,
 										_c,
 										_d,
 										_e,
 										_f,
-										_g;
-									return SearchController_generator(this, function (_h) {
-										switch (_h.label) {
+										_g,
+										_h;
+									return SearchController_generator(this, function (_j) {
+										switch (_j.label) {
 											case 0:
 												return this.initialized ? [3, 2] : [4, this.init()];
 											case 1:
-												_h.sent(), (_h.label = 2);
+												_j.sent(), (_j.label = 2);
 											case 2:
-												(params = this.params), (_h.label = 3);
+												(params = this.params), (_j.label = 3);
 											case 3:
-												_h.trys.push([3, 20, , 21]), (_h.label = 4);
+												_j.trys.push([3, 20, , 21]), (_j.label = 4);
 											case 4:
-												return _h.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _j.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 5:
-												return _h.sent(), [3, 7];
+												return _j.sent(), [3, 7];
 											case 6:
-												if ('cancelled' == (null == (err_1 = _h.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _j.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 7:
 												return this.config.settings.infinite &&
 													((preventBackfill =
-														(null === (_a = this.config.settings.infinite) || void 0 === _a ? void 0 : _a.backfill) &&
+														(null === (_b = this.config.settings.infinite) || void 0 === _b ? void 0 : _b.backfill) &&
 														!this.store.results.length &&
-														(null === (_b = params.pagination) || void 0 === _b ? void 0 : _b.page) > this.config.settings.infinite.backfill),
+														(null === (_c = params.pagination) || void 0 === _c ? void 0 : _c.page) > this.config.settings.infinite.backfill),
 													(dontBackfill =
-														!(null === (_c = this.config.settings.infinite) || void 0 === _c ? void 0 : _c.backfill) &&
+														!(null === (_d = this.config.settings.infinite) || void 0 === _d ? void 0 : _d.backfill) &&
 														!this.store.results.length &&
-														(null === (_d = params.pagination) || void 0 === _d ? void 0 : _d.page) > 1),
+														(null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1),
 													preventBackfill || dontBackfill)
 													? (this.storage.set('scrollMap', {}), this.urlManager.set('page', 1).go(), [2])
 													: ((searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 													  [4, this.client.search(params)]);
 											case 8:
 												if (
-													((response = _h.sent()).meta || (response.meta = this.client.meta),
-													!(this.config.settings.infinite && (null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1))
+													((_a = _j.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
+													!(this.config.settings.infinite && (null === (_f = params.pagination) || void 0 === _f ? void 0 : _f.page) > 1))
 												)
 													return [3, 11];
 												if (
-													((previousResults_1 = (null === (_f = this.store.data) || void 0 === _f ? void 0 : _f.results) || []),
-													!(null === (_g = this.config.settings) || void 0 === _g ? void 0 : _g.infinite.backfill) || previousResults_1.length)
+													((previousResults_1 = (null === (_g = this.store.data) || void 0 === _g ? void 0 : _g.results) || []),
+													!(null === (_h = this.config.settings) || void 0 === _h ? void 0 : _h.infinite.backfill) || previousResults_1.length)
 												)
 													return [3, 10];
 												for (backfills = [], page = 1; page < params.pagination.page; page++)
@@ -17624,29 +17660,29 @@
 														backfills.push(this.client.search(backfillParams));
 												return [4, Promise.all(backfills)];
 											case 9:
-												_h.sent().map(function (data) {
+												_j.sent().map(function (data) {
 													previousResults_1 = previousResults_1.concat(data.results);
 												}),
-													(_h.label = 10);
+													(_j.label = 10);
 											case 10:
 												(response.results = SearchController_spreadArray(
 													SearchController_spreadArray([], previousResults_1),
 													response.results || []
 												)),
-													(_h.label = 11);
+													(_j.label = 11);
 											case 11:
 												searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_h.label = 12);
+													(_j.label = 12);
 											case 12:
 												return (
-													_h.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_j.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 13:
-												return _h.sent(), [3, 15];
+												return _j.sent(), [3, 15];
 											case 14:
-												if ('cancelled' == (null == (err_2 = _h.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _j.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 15:
@@ -17654,21 +17690,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_h.label = 16);
+													(_j.label = 16);
 											case 16:
 												return (
-													_h.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_j.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 17:
-												return _h.sent(), [3, 19];
+												return _j.sent(), [3, 19];
 											case 18:
-												if ('cancelled' == (null == (err_3 = _h.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _j.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 19:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
 											case 20:
-												return (err_4 = _h.sent()) && console.error(err_4), [3, 21];
+												return (err_4 = _j.sent()) && console.error(err_4), [3, 21];
 											case 21:
 												return [2];
 										}
@@ -17955,7 +17991,51 @@
 							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
 						return (
 							(_this.type = 'autocomplete'),
+							(_this.listeners = {}),
 							(_this.track = { product: { click: function click(e, result) {} } }),
+							(_this.handlers = {
+								input: {
+									enterKey: function enterKey(e) {
+										if (13 == e.keyCode) {
+											var actionUrl = AutocompleteController_utils_url(_this.config.action),
+												input = e.target,
+												query = input.value;
+											!_this.store.loading &&
+												_this.store.search.originalQuery &&
+												((query = _this.store.search.query.string),
+												actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
+												actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
+											var newUrl = actionUrl.url();
+											window.location.href = newUrl;
+										}
+									},
+									focus: function focus(e) {
+										e.stopPropagation(), _this.setFocused(e.target);
+									},
+									keyUp: function keyUp(e) {
+										e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
+										var value = e.target.value;
+										((_this.store.state.input = value), _this.config.settings.syncInputs) &&
+											document.querySelectorAll(_this.config.selector).forEach(function (input) {
+												input.value = value;
+											});
+										clearTimeout(_this.handlers.input.timeoutDelay),
+											value
+												? (!e.isTrusted && _this.store.loaded) ||
+												  (_this.handlers.input.timeoutDelay = setTimeout(function () {
+														value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
+												  }, 200))
+												: (_this.store.reset(), _this.urlManager.reset().go());
+									},
+									timeoutDelay: void 0,
+								},
+								document: {
+									click: function click(e) {
+										var inputs = document.querySelectorAll(_this.config.selector);
+										Array.from(inputs).includes(e.target) ? _this.setFocused(e.target) : _this.setFocused();
+									},
+								},
+							}),
 							(_this.searchTrending = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
 									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
@@ -17988,27 +18068,27 @@
 							}),
 							(_this.search = function () {
 								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, response, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4, _a, _b;
-									return AutocompleteController_generator(this, function (_c) {
-										switch (_c.label) {
+									var params, err_1, searchProfile, _a, response, meta, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4, _b, _c;
+									return AutocompleteController_generator(this, function (_d) {
+										switch (_d.label) {
 											case 0:
 												if (
 													((params = this.params),
-													!(null === (_b = null === (_a = null == params ? void 0 : params.search) || void 0 === _a ? void 0 : _a.query) ||
-													void 0 === _b
+													!(null === (_c = null === (_b = null == params ? void 0 : params.search) || void 0 === _b ? void 0 : _b.query) ||
+													void 0 === _c
 														? void 0
-														: _b.string))
+														: _c.string))
 												)
 													return [2];
-												_c.label = 1;
+												_d.label = 1;
 											case 1:
-												_c.trys.push([1, 15, , 16]), (_c.label = 2);
+												_d.trys.push([1, 15, , 16]), (_d.label = 2);
 											case 2:
-												return _c.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _d.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 3:
-												return _c.sent(), [3, 5];
+												return _d.sent(), [3, 5];
 											case 4:
-												if ('cancelled' == (null == (err_1 = _c.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _d.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 5:
@@ -18017,19 +18097,22 @@
 													[4, this.client.autocomplete(params)]
 												);
 											case 6:
-												(response = _c.sent()).meta || (response.meta = this.client.meta),
+												(_a = _d.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_c.label = 7);
+													(_d.label = 7);
 											case 7:
 												return (
-													_c.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_d.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 8:
-												return _c.sent(), [3, 10];
+												return _d.sent(), [3, 10];
 											case 9:
-												if ('cancelled' == (null == (err_2 = _c.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _d.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 10:
@@ -18037,21 +18120,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_c.label = 11);
+													(_d.label = 11);
 											case 11:
 												return (
-													_c.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_d.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 12:
-												return _c.sent(), [3, 14];
+												return _d.sent(), [3, 14];
 											case 13:
-												if ('cancelled' == (null == (err_3 = _c.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _d.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 14:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
 											case 15:
-												return (err_4 = _c.sent()) && console.error(err_4), [3, 16];
+												return (err_4 = _d.sent()) && console.error(err_4), [3, 16];
 											case 16:
 												return [2];
 										}
@@ -18143,14 +18226,8 @@
 						(AutocompleteController.prototype.bind = function () {
 							var _a, _b;
 							return AutocompleteController_awaiter(this, void 0, void 0, function () {
-								var delayTimeout,
-									keyUpEvent,
-									focusEvent,
-									removeVisibleAC,
-									enterKeyEvent,
-									addHiddenFormInput,
+								var addHiddenFormInput,
 									formSubmitEvent,
-									inputs,
 									_this = this;
 								return AutocompleteController_generator(this, function (_c) {
 									switch (_c.label) {
@@ -18160,44 +18237,8 @@
 											_c.sent(), (_c.label = 2);
 										case 2:
 											return (
-												(keyUpEvent = function keyUpEvent(e) {
-													e.isTrusted && (_this.store.state.locks.terms.unlock(), _this.store.state.locks.facets.unlock());
-													var value = e.target.value;
-													(_this.store.state.input = value),
-														_this.config.settings.syncInputs &&
-															inputs.forEach(function (input) {
-																input.value = value;
-															}),
-														clearTimeout(delayTimeout),
-														value
-															? (!e.isTrusted && _this.store.loaded) ||
-															  (delayTimeout = setTimeout(function () {
-																	value && _this.store.state.input && _this.urlManager.set({ query: _this.store.state.input }).go();
-															  }, 200))
-															: (_this.store.reset(), _this.urlManager.reset().go());
-												}),
-												(focusEvent = function focusEvent(e) {
-													e.stopPropagation(), _this.setFocused(e.target);
-												}),
-												(removeVisibleAC = function removeVisibleAC(e) {
-													Array.from(inputs).includes(e.target) || _this.setFocused();
-												}),
-												(enterKeyEvent = function enterKeyEvent(e) {
-													if (13 == e.keyCode) {
-														var actionUrl = AutocompleteController_utils_url(_this.config.action),
-															input = e.target,
-															query = input.value;
-														!_this.store.loading &&
-															_this.store.search.originalQuery &&
-															((query = _this.store.search.query.string),
-															actionUrl.params.query.push({ key: 'oq', value: _this.store.search.originalQuery.string })),
-															actionUrl.params.query.push({ key: input.name || _this.urlManager.getTranslatorConfig().queryParameter, value: query });
-														var newUrl = actionUrl.url();
-														window.location.href = newUrl;
-													}
-												}),
 												(addHiddenFormInput = function addHiddenFormInput(form, name, value) {
-													var inputElem = window.document.createElement('input');
+													var inputElem = document.createElement('input');
 													(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
 												}),
 												(formSubmitEvent = function formSubmitEvent(e, input) {
@@ -18208,17 +18249,18 @@
 														((query = _this.store.search.query), addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string)),
 														(input.value = query);
 												}),
-												(inputs = document.querySelectorAll(this.config.selector)).forEach(function (input) {
-													input.removeEventListener('keyup', keyUpEvent),
-														input.addEventListener('keyup', keyUpEvent),
+												document.querySelectorAll(this.config.selector).forEach(function (input) {
+													input.removeEventListener('keyup', _this.handlers.input.keyUp),
+														input.addEventListener('keyup', _this.handlers.input.keyUp),
 														_this.config.settings.initializeFromUrl && (input.value = _this.store.state.input || ''),
 														document.activeElement === input && _this.setFocused(input),
-														input.removeEventListener('focus', focusEvent),
-														input.addEventListener('focus', focusEvent);
+														input.removeEventListener('focus', _this.handlers.input.focus),
+														input.addEventListener('focus', _this.handlers.input.focus);
 													var form = input.form,
 														formActionUrl = _this.config.action;
 													if (!form && _this.config.action)
-														input.removeEventListener('keyup', enterKeyEvent), input.addEventListener('keyup', enterKeyEvent);
+														input.removeEventListener('keyup', _this.handlers.input.enterKey),
+															input.addEventListener('keyup', _this.handlers.input.enterKey);
 													else if (form) {
 														_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action);
 														var inputPasser = function inputPasser(e) {
@@ -18237,8 +18279,8 @@
 												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
 													? void 0
 													: _b.limit) > 0 && this.searchTrending(),
-												document.removeEventListener('click', removeVisibleAC),
-												document.addEventListener('click', removeVisibleAC),
+												document.removeEventListener('click', this.handlers.document.click),
+												document.addEventListener('click', this.handlers.document.click),
 												[2]
 											);
 									}
@@ -18406,23 +18448,23 @@
 							}),
 							(_this.search = function () {
 								return FinderController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, response, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
-									return FinderController_generator(this, function (_a) {
-										switch (_a.label) {
+									var params, err_1, searchProfile, _a, response, meta, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
+									return FinderController_generator(this, function (_b) {
+										switch (_b.label) {
 											case 0:
 												return this.initialized ? [3, 2] : [4, this.init()];
 											case 1:
-												_a.sent(), (_a.label = 2);
+												_b.sent(), (_b.label = 2);
 											case 2:
-												(params = this.params), (_a.label = 3);
+												(params = this.params), (_b.label = 3);
 											case 3:
-												_a.trys.push([3, 17, , 18]), (_a.label = 4);
+												_b.trys.push([3, 17, , 18]), (_b.label = 4);
 											case 4:
-												return _a.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+												return _b.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
 											case 5:
-												return _a.sent(), [3, 7];
+												return _b.sent(), [3, 7];
 											case 6:
-												if ('cancelled' == (null == (err_1 = _a.sent()) ? void 0 : err_1.message))
+												if ('cancelled' == (null == (err_1 = _b.sent()) ? void 0 : err_1.message))
 													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
 												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
 											case 7:
@@ -18431,19 +18473,22 @@
 													[4, this.client.search(params)]
 												);
 											case 8:
-												(response = _a.sent()).meta || (response.meta = this.client.meta),
+												(_a = _b.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
 													searchProfile.stop(),
 													this.log.profile(searchProfile),
 													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_a.label = 9);
+													(_b.label = 9);
 											case 9:
 												return (
-													_a.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+													_b.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
 												);
 											case 10:
-												return _a.sent(), [3, 12];
+												return _b.sent(), [3, 12];
 											case 11:
-												if ('cancelled' == (null == (err_2 = _a.sent()) ? void 0 : err_2.message))
+												if ('cancelled' == (null == (err_2 = _b.sent()) ? void 0 : err_2.message))
 													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
 												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
 											case 12:
@@ -18451,21 +18496,21 @@
 													this.log.profile(afterSearchProfile),
 													this.store.update(response),
 													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_a.label = 13);
+													(_b.label = 13);
 											case 13:
 												return (
-													_a.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+													_b.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
 												);
 											case 14:
-												return _a.sent(), [3, 16];
+												return _b.sent(), [3, 16];
 											case 15:
-												if ('cancelled' == (null == (err_3 = _a.sent()) ? void 0 : err_3.message))
+												if ('cancelled' == (null == (err_3 = _b.sent()) ? void 0 : err_3.message))
 													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
 												throw (this.log.error("error in 'afterStore' middleware"), err_3);
 											case 16:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
 											case 17:
-												return (err_4 = _a.sent()) && console.error(err_4), [3, 18];
+												return (err_4 = _b.sent()) && console.error(err_4), [3, 18];
 											case 18:
 												return [2];
 										}
@@ -20699,62 +20744,51 @@
 							configurable: !0,
 						}),
 						(Client.prototype.fetchMeta = function (params) {
-							var _this = this,
-								defaultParams = { siteId: this.globals.siteId };
-							cache[this.globals.siteId].meta = {};
-							var metaCache = cache[this.globals.siteId].meta;
+							var defaultParams = { siteId: this.globals.siteId };
+							(params = cjs_default()(defaultParams, params || {})),
+								(cache[params.siteId] = cache[params.siteId] || {}),
+								(cache[params.siteId].meta = {});
+							var metaCache = cache[params.siteId].meta;
 							return (
-								(params = cjs_default()(params || {}, defaultParams)),
 								(metaCache.promise = this.requesters.meta.getMeta(params)),
 								metaCache.promise
 									.then(function (data) {
 										(metaCache.data = data), (metaCache.created = Date.now());
 									})
 									.catch(function (err) {
-										console.error("Failed to fetch meta data for '" + _this.globals.siteId + "'."), console.error(err);
+										console.error("Failed to fetch meta data for '" + params.siteId + "'."), console.error(err);
 									}),
 								metaCache.promise
 							);
 						}),
 						(Client.prototype.autocomplete = function (params) {
-							var _a, _b;
+							var _a, _b, _c;
 							return (
 								void 0 === params && (params = {}),
 								Client_awaiter(this, void 0, void 0, function () {
-									return Client_generator(this, function (_c) {
-										switch (_c.label) {
-											case 0:
-												if (
-													!(null === (_b = null === (_a = params.search) || void 0 === _a ? void 0 : _a.query) || void 0 === _b ? void 0 : _b.string)
-												)
-													throw 'query string parameter is required';
-												return (
-													(params = cjs_default()(this.globals, params)),
-													!cache[this.globals.siteId].meta && this.fetchMeta(),
-													[4, Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise])]
-												);
-											case 1:
-												return [2, _c.sent()[0]];
-										}
+									return Client_generator(this, function (_d) {
+										if (!(null === (_b = null === (_a = params.search) || void 0 === _a ? void 0 : _a.query) || void 0 === _b ? void 0 : _b.string))
+											throw 'query string parameter is required';
+										return (
+											(params = cjs_default()(this.globals, params)),
+											!(null === (_c = cache[params.siteId]) || void 0 === _c ? void 0 : _c.meta) && this.fetchMeta({ siteId: params.siteId }),
+											[2, Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise])]
+										);
 									});
 								})
 							);
 						}),
 						(Client.prototype.search = function (params) {
+							var _a;
 							return (
 								void 0 === params && (params = {}),
 								Client_awaiter(this, void 0, void 0, function () {
-									return Client_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return (
-													(params = cjs_default()(this.globals, params)),
-													!cache[this.globals.siteId].meta && this.fetchMeta(),
-													[4, Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise])]
-												);
-											case 1:
-												return [2, _a.sent()[0]];
-										}
+									return Client_generator(this, function (_b) {
+										return (
+											(params = cjs_default()(this.globals, params)),
+											!(null === (_a = cache[params.siteId]) || void 0 === _a ? void 0 : _a.meta) && this.fetchMeta({ siteId: params.siteId }),
+											[2, Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise])]
+										);
 									});
 								})
 							);
@@ -21670,7 +21704,7 @@
 					return to;
 				},
 				TermStore = (function (_super) {
-					function TermStore(services, autocomplete, paginationData, rootState) {
+					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
 						var _a,
 							suggestions = TermStore_spreadArray(
 								[],
@@ -21686,7 +21720,7 @@
 						var terms = [];
 						return (
 							suggestions.map(function (term, index) {
-								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, rootState));
+								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
 							}),
 							_super.apply(this, terms) || this
 						);
@@ -21703,16 +21737,17 @@
 						TermStore
 					);
 				})(Array),
-				Term = function Term(services, term, terms, rootState) {
+				Term = function Term(services, term, terms, resetTerms, rootState) {
 					var _a,
 						_this = this;
 					(this.active = term.active),
 						(this.value = term.value),
 						(this.url = null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.set({ query: this.value })),
 						(this.preview = function () {
-							terms.map(function (term) {
-								term.active = !1;
-							}),
+							resetTerms(),
+								terms.map(function (term) {
+									term.active = !1;
+								}),
 								(_this.active = !0),
 								rootState.locks.terms.lock(),
 								rootState.locks.facets.unlock(),
@@ -21743,14 +21778,14 @@
 					};
 				})(),
 				TrendingStore = (function (_super) {
-					function TrendingStore(services, trendingData, rootState) {
+					function TrendingStore(services, trendingData, resetTerms, rootState) {
 						var _a,
 							terms = [];
 						return (
 							null === (_a = null == trendingData ? void 0 : trendingData.queries) ||
 								void 0 === _a ||
 								_a.map(function (term) {
-									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, rootState));
+									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
 								}),
 							_super.apply(this, terms) || this
 						);
@@ -21909,17 +21944,42 @@
 									term.active = !1;
 								});
 						}),
+						(AutocompleteStore.prototype.resetTerms = function () {
+							var _a;
+							(null === (_a = this.terms) || void 0 === _a ? void 0 : _a.length) > 0 &&
+								this.terms.forEach(function (term) {
+									term.active = !1;
+								});
+						}),
 						(AutocompleteStore.prototype.setService = function (name, service) {
 							this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
 						}),
 						(AutocompleteStore.prototype.updateTrendingTerms = function (data) {
-							this.trending = new TrendingStore(this.services, data.trending, this.state);
+							var _this = this;
+							this.trending = new TrendingStore(
+								this.services,
+								data.trending,
+								function () {
+									_this.resetTerms();
+								},
+								this.state
+							);
 						}),
 						(AutocompleteStore.prototype.update = function (data) {
-							var _a;
+							var _a,
+								_this = this;
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
-								this.state.locks.terms.locked || (this.terms = new TermStore(this.services, data.autocomplete, data.pagination, this.state));
+								this.state.locks.terms.locked ||
+									(this.terms = new TermStore(
+										this.services,
+										data.autocomplete,
+										data.pagination,
+										function () {
+											_this.resetTrending();
+										},
+										this.state
+									));
 							var activeTerm =
 								null === (_a = this.terms) || void 0 === _a
 									? void 0
@@ -21935,7 +21995,11 @@
 									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
 								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
-								0 === this.results.length && this.resetTrending(),
+								(0 === this.results.length ||
+									this.terms.filter(function (term) {
+										return term.active;
+									}).length) &&
+									this.resetTrending(),
 								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
@@ -23401,7 +23465,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.38' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.3.46' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23428,7 +23492,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.38');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.3.46');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23891,19 +23955,27 @@
 														)
 															throw new Error('getScriptContext second parameter must be an array of strings');
 														var variables = {};
-														return (
-															script.getAttributeNames().map(function (attr) {
-																variables[attr] = script.getAttribute(attr);
-															}),
+														script.getAttributeNames().map(function (attr) {
+															variables[attr] = script.getAttribute(attr);
+														});
+														try {
 															null == evaluate ||
 																evaluate.forEach(function (name) {
 																	var fn = new Function(
-																		'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + script.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+																		'\n\t\t\t\tvar ' +
+																			evaluate.join(', ') +
+																			';\n\t\t\t\t' +
+																			script.innerHTML +
+																			'\n\t\t\t\treturn ' +
+																			name +
+																			';\n\t\t\t'
 																	);
 																	variables[name] = fn();
-																}),
-															variables
-														);
+																});
+														} catch (err) {
+															console.error('getScriptContext: failed to parse variables - error in context'), console.error(err);
+														}
+														return variables;
 													})(elem, ['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'])),
 													(shopper = _a.shopper),
 													(shopperId = _a.shopperId),
@@ -23957,7 +24029,10 @@
 														? (profileVars.component || recs.log.error('template does not support components!'),
 														  (RecommendationsComponent = this.config.components[profileVars.component]) ||
 																recs.log.error("component '" + profileVars.component + "' not found!"),
-														  (0, preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem),
+														  setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem);
+														  }),
 														  [2])
 														: (recs.log.error('profile failed to load!'), [2])
 												);
@@ -24016,7 +24091,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.3.38]',
+								text: '[0.3.46]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24039,8 +24114,10 @@
 																	searched_1 || (cntrlr_1.search(), (searched_1 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {
@@ -24081,14 +24158,10 @@
 																var onTarget = target.onTarget;
 																onTarget && onTarget(target, elem, originalElem), cntrlr_2.bind();
 																var Component = target.component;
-																(0, preact_module.sY)(
-																	(0, jsxRuntime_module.tZ)(
-																		Component,
-																		Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props),
-																		void 0
-																	),
-																	elem
-																);
+																setTimeout(function () {
+																	(0,
+																	preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props), void 0), elem);
+																});
 															}
 														);
 													});
@@ -24115,8 +24188,10 @@
 																	searched_2 || (cntrlr_3.search(), (searched_2 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {
@@ -24142,8 +24217,10 @@
 																	searched_3 || (cntrlr_4.search(), (searched_3 = !0));
 																})();
 															var Component = target.component;
-															(0,
-															preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+															setTimeout(function () {
+																(0,
+																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+															});
 														});
 													});
 											} catch (err) {

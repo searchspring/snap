@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.47](https://github.com/searchspring/snap/compare/v0.3.46...v0.3.47) (2021-08-23)
+
+
+### Bug Fixes
+
+* fix github action to checkout all tags ([e9e2f73](https://github.com/searchspring/snap/commit/e9e2f7393e1b765c26882715f7ffaa8a50b7fb6f))
+
+
+
+
+
+## 0.3.46 (2021-08-21)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.45 (2021-08-20)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.44 (2021-08-19)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.43 (2021-08-19)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.42 (2021-08-18)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.41 (2021-08-18)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## 0.3.40 (2021-08-18)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
 ## 0.3.39 (2021-08-17)
 
 **Note:** Version bump only for package @searchspring/snap

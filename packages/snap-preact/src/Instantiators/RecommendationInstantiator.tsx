@@ -160,7 +160,9 @@ export class RecommendationInstantiator {
 					recs.log.error(`component '${profileVars.component}' not found!`);
 				}
 
-				render(<RecommendationsComponent controller={recs} />, injectedElem);
+				setTimeout(() => {
+					render(<RecommendationsComponent controller={recs} />, injectedElem);
+				});
 			}
 		);
 	}

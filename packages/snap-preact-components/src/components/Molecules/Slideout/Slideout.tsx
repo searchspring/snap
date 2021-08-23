@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { h, Fragment, cloneElement } from 'preact';
+import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { defined } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
@@ -95,7 +95,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 					className={classnames('ss__slideout', className)}
 					css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, slideDirection, style })}
 				>
-					{children && cloneElement(children, { toggleActive, active: isActive })}
+					{cloneWithProps(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
 			</CacheProvider>

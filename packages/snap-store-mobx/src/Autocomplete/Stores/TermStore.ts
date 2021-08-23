@@ -5,7 +5,7 @@ export class TermStore extends Array {
 		return Array;
 	}
 
-	constructor(services, autocomplete, paginationData, rootState) {
+	constructor(services, autocomplete, paginationData, resetTerms, rootState) {
 		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)];
 
 		if (autocomplete?.suggested?.text) {
@@ -25,6 +25,7 @@ export class TermStore extends Array {
 						value: term,
 					},
 					terms,
+					resetTerms,
 					rootState
 				)
 			)
@@ -40,13 +41,14 @@ export class Term {
 	preview: () => void;
 	url;
 
-	constructor(services, term, terms, rootState) {
+	constructor(services, term, terms, resetTerms, rootState) {
 		this.active = term.active;
 		this.value = term.value;
 
 		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
+			resetTerms();
 			terms.map((term) => {
 				term.active = false;
 			});
