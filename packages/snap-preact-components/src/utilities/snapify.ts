@@ -1,3 +1,4 @@
+import { h, render } from 'preact';
 /* searchspring imports */
 import { Snap } from '@searchspring/snap-preact';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -16,7 +17,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('recommendation', { id, tag: config.tag }));
+		const cntrlr = (controllers[id] = snap.createController('recommendation', config)) as RecommendationController;
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.log.debug('controller', controller);
@@ -26,7 +27,7 @@ export class Snapify {
 
 		cntrlr.init();
 
-		return cntrlr as RecommendationController;
+		return cntrlr;
 	}
 	static autocomplete(config): AutocompleteController {
 		const id = config.id;
@@ -34,7 +35,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('autocomplete', { id, selector: config.selector }));
+		const cntrlr = (controllers[id] = snap.createController('autocomplete', config)) as AutocompleteController;
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
 			controller.log.debug('controller', controller);
@@ -44,7 +45,7 @@ export class Snapify {
 
 		cntrlr.init();
 
-		return cntrlr as AutocompleteController;
+		return cntrlr;
 	}
 
 	static search(config): SearchController {
@@ -53,7 +54,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('search', config));
+		const cntrlr = (controllers[id] = snap.createController('search', config)) as SearchController;
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);
@@ -63,6 +64,6 @@ export class Snapify {
 
 		cntrlr.init();
 
-		return cntrlr as SearchController;
+		return cntrlr;
 	}
 }

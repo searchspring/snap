@@ -1,4 +1,4 @@
-/*! For license information please see 266.32610267.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 266.be54d306.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[266],
 	{
@@ -19281,11 +19281,11 @@
 		8983: (module, __unused_webpack_exports, __webpack_require__) => {
 			var userAgent = __webpack_require__(80598),
 				global = __webpack_require__(9859);
-			module.exports = /iphone|ipod|ipad/i.test(userAgent) && void 0 !== global.Pebble;
+			module.exports = /ipad|iphone|ipod/i.test(userAgent) && void 0 !== global.Pebble;
 		},
 		32023: (module, __unused_webpack_exports, __webpack_require__) => {
 			var userAgent = __webpack_require__(80598);
-			module.exports = /(?:iphone|ipod|ipad).*applewebkit/i.test(userAgent);
+			module.exports = /(?:ipad|iphone|ipod).*applewebkit/i.test(userAgent);
 		},
 		28801: (module, __unused_webpack_exports, __webpack_require__) => {
 			var classof = __webpack_require__(27079),
@@ -20195,23 +20195,19 @@
 					try {
 						activeXDocument = new ActiveXObject('htmlfile');
 					} catch (error) {}
+					var iframeDocument, iframe;
 					NullProtoObject =
-						document.domain && activeXDocument
-							? NullProtoObjectViaActiveX(activeXDocument)
-							: (function () {
-									var iframeDocument,
-										iframe = documentCreateElement('iframe');
-									if (iframe.style)
-										return (
-											(iframe.style.display = 'none'),
-											html.appendChild(iframe),
-											(iframe.src = String('javascript:')),
-											(iframeDocument = iframe.contentWindow.document).open(),
-											iframeDocument.write(scriptTag('document.F=Object')),
-											iframeDocument.close(),
-											iframeDocument.F
-										);
-							  })() || NullProtoObjectViaActiveX(activeXDocument);
+						'undefined' != typeof document
+							? document.domain && activeXDocument
+								? NullProtoObjectViaActiveX(activeXDocument)
+								: (((iframe = documentCreateElement('iframe')).style.display = 'none'),
+								  html.appendChild(iframe),
+								  (iframe.src = String('javascript:')),
+								  (iframeDocument = iframe.contentWindow.document).open(),
+								  iframeDocument.write(scriptTag('document.F=Object')),
+								  iframeDocument.close(),
+								  iframeDocument.F)
+							: NullProtoObjectViaActiveX(activeXDocument);
 					for (var length = enumBugKeys.length; length--; ) delete NullProtoObject.prototype[enumBugKeys[length]];
 					return NullProtoObject();
 				};
@@ -20597,29 +20593,29 @@
 		},
 		25650: (__unused_webpack_module, exports, __webpack_require__) => {
 			var fails = __webpack_require__(24229),
-				RE = function (s, f) {
-					return RegExp(s, f);
-				};
+				$RegExp = __webpack_require__(9859).RegExp;
 			(exports.UNSUPPORTED_Y = fails(function () {
-				var re = RE('a', 'y');
+				var re = $RegExp('a', 'y');
 				return (re.lastIndex = 2), null != re.exec('abcd');
 			})),
 				(exports.BROKEN_CARET = fails(function () {
-					var re = RE('^r', 'gy');
+					var re = $RegExp('^r', 'gy');
 					return (re.lastIndex = 2), null != re.exec('str');
 				}));
 		},
 		42926: (module, __unused_webpack_exports, __webpack_require__) => {
-			var fails = __webpack_require__(24229);
+			var fails = __webpack_require__(24229),
+				$RegExp = __webpack_require__(9859).RegExp;
 			module.exports = fails(function () {
-				var re = RegExp('.', 'string'.charAt(0));
+				var re = $RegExp('.', 's');
 				return !(re.dotAll && re.exec('\n') && 's' === re.flags);
 			});
 		},
 		10461: (module, __unused_webpack_exports, __webpack_require__) => {
-			var fails = __webpack_require__(24229);
+			var fails = __webpack_require__(24229),
+				$RegExp = __webpack_require__(9859).RegExp;
 			module.exports = fails(function () {
-				var re = RegExp('(?<a>b)', 'string'.charAt(5));
+				var re = $RegExp('(?<a>b)', 'g');
 				return 'b' !== re.exec('b').groups.a || 'bc' !== 'b'.replace(re, '$<a>c');
 			});
 		},
@@ -20695,7 +20691,7 @@
 				store = __webpack_require__(85353);
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
-			})('versions', []).push({ version: '3.16.1', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
+			})('versions', []).push({ version: '3.16.2', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
 		},
 		37942: (module, __unused_webpack_exports, __webpack_require__) => {
 			var anObject = __webpack_require__(21176),
@@ -57189,4 +57185,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=266.32610267.iframe.bundle.js.map
+//# sourceMappingURL=266.be54d306.iframe.bundle.js.map

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, cloneElement } from 'preact';
 import { useEffect } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
@@ -9,50 +9,89 @@ import classnames from 'classnames';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProp, ResponsiveProps } from '../../Organisms/Results';
+import { Results, ResultsProp, BreakpointsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	Autocomplete: ({ inputViewportOffsetBottom, justTrending, style, theme }) =>
+	Autocomplete: ({
+		inputViewportOffsetBottom,
+		hideFacets,
+		horizontalTerms,
+		noResults,
+		contentSlotExists,
+		viewportMaxHeight,
+		vertical,
+		width,
+		style,
+		theme,
+	}) =>
 		css({
+			'&, & *, & *:before, & *:after': {
+				boxSizing: 'border-box',
+			},
+
+			display: 'flex',
+			flexDirection: vertical ? 'column' : 'row',
+			flexWrap: horizontalTerms && !vertical ? 'wrap' : null,
 			position: 'absolute',
 			zIndex: '10002',
 			border: '1px solid #ebebeb',
 			background: '#ffffff',
+			width: width,
 			maxWidth: '100vw',
-			maxHeight: inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : '100vh',
-			display: 'flex',
+			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : null,
+			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : null,
 
-			'& *': {
-				boxSizing: 'border-box',
+			'&.ss__autocomplete--only-terms': {
+				width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
 			},
-			'& .ss__autocomplete__terms': {
-				flex: '1 0 150px',
-				background: '#f8f8f8',
 
+			'.ss__autocomplete__title--trending': {
+				fontWeight: 'normal',
+				margin: 0,
+				color: '#c5c5c5',
+				textTransform: 'uppercase',
+				padding: '10px',
 				'& h5': {
-					margin: '0',
-					padding: '10px',
+					fontSize: '.8em',
+					margin: 0,
 				},
-				'& ul.ss__autocomplete__terms__options': {
-					listStyle: 'none',
-					padding: '0',
-					margin: '0',
-					flexWrap: 'wrap',
-					color: '#515151',
+			},
 
-					'& li.ss__autocomplete__terms__option': {
+			'.ss__autocomplete__title--facets': {
+				order: vertical ? 2 : null,
+			},
+
+			'& .ss__autocomplete__terms': {
+				// flex: `0 0 ${vertical || horizontalTerms || showTrending ? 'auto' : '150px'}`,
+				// order: 1,
+				// background: '#f8f8f8',
+				// width: horizontalTerms && !vertical ? '100%' : null,
+				flex: `1 1 auto`,
+				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
+				order: 1,
+				background: '#f8f8f8',
+				// width: horizontalTerms && !vertical ? '100%' : null,
+
+				'& .ss__autocomplete__terms__options': {
+					display: vertical || horizontalTerms ? 'flex' : null,
+					justifyContent: 'space-evenly',
+					flexWrap: 'wrap',
+
+					'& .ss__autocomplete__terms__option': {
+						flexGrow: vertical || horizontalTerms ? '1' : null,
+						textAlign: vertical || horizontalTerms ? 'center' : null,
+						wordBreak: 'break-all',
+
 						'& a': {
 							display: 'block',
-							padding: '10px',
+							padding: vertical || horizontalTerms ? '10px 30px' : '10px',
 
-							'& .ss__autocomplete__terms__option--underline': {
-								textDecoration: 'underline',
-							},
 							'& em': {
 								fontStyle: 'normal',
 							},
@@ -60,80 +99,60 @@ const CSS = {
 
 						'&.ss__autocomplete__terms__option--active': {
 							background: '#fff',
-							fontWeight: 'bold',
-							color: theme?.colors?.primary,
+
+							'& a': {
+								fontWeight: 'bold',
+								color: theme?.colors?.primary,
+							},
 						},
 					},
+				},
+			},
+
+			'& .ss__autocomplete__facets': {
+				display: 'flex',
+				flex: `0 0 150px`,
+				flexDirection: vertical ? 'row' : 'column',
+				columnGap: '20px',
+				order: 2,
+				padding: vertical ? '10px 20px' : '10px',
+				overflowY: vertical ? null : 'auto',
+				'& .ss__autocomplete__facet': {
+					flex: vertical ? '0 1 150px' : null,
 				},
 			},
 			'& .ss__autocomplete__content': {
-				display: justTrending ? 'none' : 'flex',
-				'& .ss__autocomplete__content__facets': {
-					width: '150px',
-					padding: '10px',
-					display: 'flex',
-					flex: '0 0 150px',
-					flexDirection: 'column',
-					overflowY: 'auto',
-				},
-				'& .ss__autocomplete__content__results__wrapper': {
-					padding: '10px',
-					display: 'flex',
-					flexDirection: 'column',
+				display: 'flex',
+				flex: `1 1 ${hideFacets ? 'auto' : '0%'}`,
+				flexDirection: 'column',
+				justifyContent: 'space-between',
+				order: 3,
+				overflowY: 'auto',
+				margin: noResults ? '0 auto' : null,
+				padding: vertical ? '10px 20px' : '10px',
 
-					'& .ss__autocomplete__content__results': {
-						overflowY: 'auto',
-					},
-					'& .ss__autocomplete__content__results__info': {
+				'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+					marginBottom: '10px',
+				},
+				'& .ss__banner.ss__banner--footer': {
+					margin: '10px 0',
+				},
+
+				'& .ss__autocomplete__content__info': {
+					padding: '10px',
+					textAlign: noResults ? 'center' : 'right',
+
+					'& a': {
 						fontWeight: 'bold',
 						color: theme?.colors?.primary,
 
-						'& .ss__autocomplete__content__results__spacer': {
-							height: '10px',
-						},
-						'& .ss__autocomplete__content__results__link': {
-							textAlign: 'right',
-							'& a': {
-								'& .ss__icon': {
-									marginLeft: '5px',
-								},
-							},
+						'& .ss__icon': {
+							marginLeft: '5px',
 						},
 					},
 				},
 			},
-			'@media (max-width: 991px)': {
-				flexDirection: 'column',
 
-				'& .ss__autocomplete__content': {
-					width: '100%',
-
-					'& .ss__autocomplete__content__facets': {
-						display: 'none',
-					},
-					'& .ss__autocomplete__content__results': {
-						width: '100%',
-					},
-				},
-				'& .ss__autocomplete__terms': {
-					flexBasis: 'auto',
-					border: 'none',
-
-					'& ul.ss__autocomplete__terms__options': {
-						display: 'flex',
-						justifyContent: 'space-evenly',
-
-						'& li.ss__autocomplete__terms__option': {
-							flexGrow: '1',
-							textAlign: 'center',
-
-							'& a': {
-								padding: '10px 30px',
-							},
-						},
-					},
-				},
-			},
 			...style,
 		}),
 };
@@ -142,8 +161,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: AutocompleteProps = {
+	let props: AutocompleteProps = {
 		// default props
+		termsTitle: '',
+		trendingTitle: 'Popular Searches',
+		facetsTitle: '',
+		contentTitle: '',
+		width: '100%',
 		// global theme
 		...globalTheme?.components?.autocomplete,
 		// props
@@ -151,30 +175,63 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		...properties.theme?.components?.autocomplete,
 	};
 
-	const { hideFacets, hideTerms, disableStyles, className, style, controller } = props;
-
-	let { input } = props;
-
-	//passed in or default responsive result props
-	const responsive = props.responsive || {
+	//passed in or default breakpoints result props
+	const breakpoints = props.breakpoints || {
 		0: {
 			columns: 2,
 			rows: 1,
+			hideFacets: true,
+			vertical: true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
+			vertical: true,
 		},
 		768: {
-			columns: 4,
-			rows: 1,
-		},
-		991: {
 			columns: 2,
 			rows: 2,
 		},
 	};
-
+	const displaySettings = useDisplaySettings(breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		props = {
+			...props,
+			...displaySettings,
+		};
+	}
+	const {
+		hideTerms,
+		hideFacets,
+		hideContent,
+		hideBanners,
+		horizontalTerms,
+		vertical,
+		termsTitle,
+		trendingTitle,
+		facetsTitle,
+		contentTitle,
+		viewportMaxHeight,
+		termsSlot,
+		facetsSlot,
+		contentSlot,
+		disableStyles,
+		className,
+		width,
+		style,
+		controller,
+	} = props;
+	let { input } = props;
+	let inputViewportOffsetBottom;
+	if (input) {
+		if (typeof input === 'string') {
+			input = document.querySelector(input) as Element;
+		}
+		const rect = input?.getBoundingClientRect();
+		inputViewportOffsetBottom = rect?.bottom || 0;
+		input?.setAttribute('spellcheck', 'false');
+		input?.setAttribute('autocomplete', 'off');
+	}
 	const subProps: AutocompleteSubProps = {
 		facet: {
 			// default props
@@ -224,12 +281,19 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		results: {
 			// default props
 			className: 'ss__autocomplete__results',
-			responsive: responsive,
+			breakpoints: breakpoints,
 			// global theme
 			...globalTheme?.components?.results,
 			// inherited props
 			...defined({
 				disableStyles,
+				theme: {
+					components: {
+						result: {
+							hideBadge: true,
+						},
+					},
+				},
 			}),
 			// component theme overrides
 			...props.theme?.components?.results,
@@ -250,7 +314,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const { search, terms, trending, results, merchandising, pagination, filters, facets, state } = controller.store;
+	const { search, terms, trending, results, merchandising, pagination, loaded, filters, facets, state } = controller.store;
 
 	// you can pass in a selector or the actual input element,
 	// if its the selector, we need to bind it to the controller here.
@@ -276,15 +340,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	let inputViewportOffsetBottom;
-	if (input) {
-		const rect = (input as Element).getBoundingClientRect();
-		inputViewportOffsetBottom = rect.bottom;
-	}
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
-	const showTrending = trending?.length && !terms.length;
-	const justTrending = showTrending && facets.length === 0 && terms.length === 0 && !(results.length === 0 && state.input?.length);
+	const showTrending = trending?.length && terms.length === 0;
 	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER).slice(0, 3);
+	const onlyTerms = trending?.length && !loaded;
 
 	return (
 		visible && (
@@ -294,68 +353,140 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						!disableStyles &&
 						CSS.Autocomplete({
 							inputViewportOffsetBottom,
-							justTrending,
+							hideFacets,
+							horizontalTerms,
+							noResults: search?.query?.string && results.length === 0,
+							contentSlotExists: contentSlot ? true : false,
+							viewportMaxHeight,
+							vertical,
+							width,
 							style,
 							theme,
 						})
 					}
-					className={classnames('ss__autocomplete', className)}
+					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}
 				>
 					{!hideTerms && (
 						<div className="ss__autocomplete__terms">
-							{showTrending && <h5>Popular Searches</h5>}
-							<ul className="ss__autocomplete__terms__options">
-								{(showTrending ? trending : terms).map((term) => (
-									<li className={classnames('ss__autocomplete__terms__option', { 'ss__autocomplete__terms__option--active': term.active })}>
-										<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
-											{emIfy(term.value, state.input)}
-										</a>
-									</li>
-								))}
-							</ul>
+							{termsSlot ? (
+								cloneElement(termsSlot, { terms, trending, controller })
+							) : (
+								<>
+									{terms.length > 0 ? (
+										<div className="ss__autocomplete__terms">
+											{termsTitle ? (
+												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--terms')}>
+													<h5>{termsTitle}</h5>
+												</div>
+											) : null}
+											<div className="ss__autocomplete__terms__options">
+												{terms.map((term) => (
+													<div
+														className={classnames('ss__autocomplete__terms__option', {
+															'ss__autocomplete__terms__option--active': term.active,
+														})}
+													>
+														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+															{emIfy(term.value, state.input)}
+														</a>
+													</div>
+												))}
+											</div>
+										</div>
+									) : null}
+
+									{showTrending ? (
+										<div className="ss__autocomplete__terms ss__autocomplete__terms-trending">
+											{trendingTitle ? (
+												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--trending')}>
+													<h5>{trendingTitle}</h5>
+												</div>
+											) : null}
+											<div className="ss__autocomplete__terms__options">
+												{trending.map((term) => (
+													<div
+														className={classnames('ss__autocomplete__terms__option', {
+															'ss__autocomplete__terms__option--active': term.active,
+														})}
+													>
+														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+															{emIfy(term.value, state.input)}
+														</a>
+													</div>
+												))}
+											</div>
+										</div>
+									) : null}
+								</>
+							)}
 						</div>
 					)}
 
-					<div className="ss__autocomplete__content">
-						{!hideFacets && facetsToShow.length ? (
-							<div className="ss__autocomplete__content__facets">
-								{facetsToShow.map((facet) => (
-									<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-								))}
-								<Banner content={merchandising.content} type={BannerType.LEFT} />
-							</div>
-						) : null}
-						<div className="ss__autocomplete__content__results__wrapper">
-							<div className="ss__autocomplete__content__results">
-								<Banner content={merchandising.content} type={BannerType.HEADER} />
-								<Banner content={merchandising.content} type={BannerType.BANNER} />
-								<Results results={results} {...subProps.results} controller={controller} />
-								<Banner content={merchandising.content} type={BannerType.FOOTER} />
-							</div>
-							{search?.query?.string ? (
-								<div className="ss__autocomplete__content__results__info">
-									{results.length === 0 ? (
-										<>
-											<p>No results found for "{search.query.string}".</p>
-											<p>Please try another search.</p>
-										</>
-									) : (
-										<>
-											<div className="ss__autocomplete__content__results__spacer"></div>
-											<div className="ss__autocomplete__content__results__link">
-												<a href={state.url.href}>
-													See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults > 1 ? 's' : ''} for "
-													{search.query.string}"
-													<Icon {...subProps.icon} />
-												</a>
-											</div>
-										</>
-									)}
+					{!hideFacets &&
+						facetsToShow.length > 0 &&
+						(facetsSlot ? (
+							<div className="ss__autocomplete__facets">{cloneElement(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
+						) : (
+							<>
+								{facetsTitle && vertical ? (
+									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+										<h5>{facetsTitle}</h5>
+									</div>
+								) : null}
+								<div className="ss__autocomplete__facets">
+									{facetsTitle && !vertical ? (
+										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+											<h5>{facetsTitle}</h5>
+										</div>
+									) : null}
+									{facetsToShow.map((facet) => (
+										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+									))}
+									{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
 								</div>
-							) : null}
-						</div>
-					</div>
+							</>
+						))}
+
+					{!hideContent ? (
+						contentSlot ? (
+							<div className="ss__autocomplete__content">
+								{cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+							</div>
+						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+							<div className="ss__autocomplete__content">
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+								{results.length > 0 ? (
+									<div className="ss__autocomplete__content__results">
+										{contentTitle && results.length > 0 ? (
+											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+												<h5>{contentTitle}</h5>
+											</div>
+										) : null}
+										<Results results={results} {...subProps.results} controller={controller} />
+									</div>
+								) : (
+									<div className="ss__autocomplete__content__no-results">
+										<p>No results found for "{search.query.string}".</p>
+										<p>Please try another search.</p>
+									</div>
+								)}
+
+								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+
+								{search?.query?.string && results.length > 0 ? (
+									<div className="ss__autocomplete__content__info">
+										<a href={state.url.href}>
+											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+											{search.query.string}"
+											<Icon {...subProps.icon} />
+										</a>
+									</div>
+								) : null}
+							</div>
+						) : null
+					) : null}
 				</div>
 			</CacheProvider>
 		)
@@ -392,8 +523,21 @@ interface AutocompleteSubProps {
 
 export interface AutocompleteProps extends ComponentProps {
 	input: Element | string;
-	hideFacets?: boolean;
 	hideTerms?: boolean;
-	responsive?: ResponsiveProps;
+	hideFacets?: boolean;
+	hideContent?: boolean;
+	hideBanners?: boolean;
+	horizontalTerms?: boolean;
+	vertical?: boolean;
+	termsTitle?: string;
+	trendingTitle?: string;
+	facetsTitle?: string;
+	contentTitle?: string;
+	viewportMaxHeight?: boolean;
+	termsSlot?: JSX.Element;
+	facetsSlot?: JSX.Element;
+	contentSlot?: JSX.Element;
+	breakpoints?: BreakpointsProps;
 	controller?: AutocompleteController;
+	width?: string;
 }

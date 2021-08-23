@@ -62,7 +62,7 @@ The default configuration contains the following properties, however any [Swiper
 `spaceBetween` - spacing between each product
 
 ```typescript
-const defaultRecommendationResponsive = {
+const defaultRecommendationBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -92,5 +92,5 @@ const defaultRecommendationResponsive = {
 ```
 
 ```jsx
-<Carousel  breakpoints={defaultRecommendationResponsive}>{children}<Carousel/>
+<Carousel breakpoints={defaultRecommendationBreakpoints}>{children}<Carousel/>
 ```

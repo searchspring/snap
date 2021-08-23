@@ -5,6 +5,8 @@ import { StateStore } from './StateStore';
 
 import { SearchData } from '../../__mocks__/SearchData';
 
+const mockResetTerms = jest.fn();
+
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
@@ -17,13 +19,13 @@ describe('Trending Store', () => {
 	});
 
 	it('is empty when it is passed undefined', () => {
-		const termStore = new TrendingStore(services, undefined, rootState);
+		const termStore = new TrendingStore(services, undefined, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
 	});
 
 	it('is empty when it is passed no data', () => {
-		const termStore = new TrendingStore(services, {}, rootState);
+		const termStore = new TrendingStore(services, {}, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
 	});
@@ -31,7 +33,7 @@ describe('Trending Store', () => {
 	it('contains the correct terms', () => {
 		const searchData = new SearchData({ search: 'trending' });
 		const trendingData = searchData.trending;
-		const trendingStore = new TrendingStore(services, trendingData, rootState);
+		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 		expect(trendingStore).toHaveLength(trendingData.queries.length);
 
 		trendingStore.forEach((term, index) => {
@@ -49,7 +51,7 @@ describe('Trending Store', () => {
 	it('has terms with undefined url properties when no controller is present', () => {
 		const searchData = new SearchData({ search: 'trending' });
 		const trendingData = searchData.trending;
-		const trendingStore = new TrendingStore(undefined, trendingData, rootState);
+		const trendingStore = new TrendingStore(undefined, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -63,7 +65,7 @@ describe('Trending Store', () => {
 
 		const searchData = new SearchData({ search: 'trending' });
 		const trendingData = searchData.trending;
-		const trendingStore = new TrendingStore(services, trendingData, rootState);
+		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -73,7 +75,7 @@ describe('Trending Store', () => {
 	it('has a preview function on terms', () => {
 		const searchData = new SearchData({ search: 'trending' });
 		const trendingData = searchData.trending;
-		const trendingStore = new TrendingStore(services, trendingData, rootState);
+		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		expect(rootState.locks.terms.locked).toBe(false);
 
@@ -82,6 +84,8 @@ describe('Trending Store', () => {
 		});
 
 		trendingStore[0].preview();
+
+		expect(mockResetTerms).toHaveBeenCalled();
 
 		trendingStore.forEach((term, index) => {
 			expect(term.active).toBe(index === 0 ? true : false);

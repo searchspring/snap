@@ -10,8 +10,9 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 const CSS = {
 	banner: ({ style }) =>
 		css({
-			'& iframe': {
+			'& iframe, img': {
 				maxWidth: '100%',
+				height: 'auto',
 			},
 			...style,
 		}),

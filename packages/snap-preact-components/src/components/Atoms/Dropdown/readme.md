@@ -5,7 +5,7 @@ Renders a button and content. Clicking the button toggles content visibility. Ty
 ## Usage
 
 ### content
-The `content` prop specifies the dropdown contents. This can be a string or a JSX element.
+The `content` prop specifies the dropdown contents. This can be a string or a JSX element. The Dropdown component also passes the current open state to the JSX component under the prop showContent: boolean. 
 
 ```jsx
 <Dropdown content={"Hello World!"} />
@@ -16,6 +16,9 @@ Or alternatively as children:
 ```jsx
 <Dropdown>Hello World!</Dropdown>
 ```
+
+Note you can only render either the content, or the children, if both are passed in, it will default to the content prop. 
+
 
 ### button
 The `button` prop specifies the dropdown button. This button toggles the visibility of the content when clicked. This can be a string or a JSX element.

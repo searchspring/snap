@@ -7,6 +7,7 @@
  * will use: /snap-controller/src/__mocks__/data/ga9kq2/searches/ac.query.blank.json
  *
  */
+import type { MetaResponseModel, SearchResponseModel, AutocompleteResponseModel } from '@searchspring/snapi-types';
 import { Client } from '@searchspring/snap-client';
 import { SearchData } from './SearchData';
 
@@ -18,12 +19,12 @@ export class MockClient extends Client {
 	}
 
 	async search() {
-		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
-		return results;
+		const searchData = new SearchData({ search: this.mockDataFile });
+		return Promise.all([searchData as SearchResponseModel, searchData.meta as MetaResponseModel]);
 	}
 
 	async autocomplete() {
-		const [results] = await Promise.all([new SearchData({ search: this.mockDataFile })]);
-		return results;
+		const searchData = new SearchData({ search: this.mockDataFile });
+		return Promise.all([searchData as SearchResponseModel, searchData.meta as MetaResponseModel]);
 	}
 }

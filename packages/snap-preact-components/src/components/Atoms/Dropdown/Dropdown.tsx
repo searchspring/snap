@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
+import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
 	dropdown: ({ disableOverlay, style }) =>
@@ -110,12 +111,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 						}
 					}}
 				>
-					{button}
+					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 
 				<div className="ss__dropdown__content">
-					{content}
-					{children}
+					{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
+					{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
 				</div>
 			</div>
 		</CacheProvider>
@@ -128,7 +129,7 @@ export interface DropdownProps extends ComponentProps {
 	children?: any;
 	disabled?: boolean;
 	open?: boolean;
-	disableOverlay?: string;
+	disableOverlay?: boolean;
 	onClick?: (event: Event) => void;
 	onToggle?: (event: Event, showContent: boolean) => void;
 	startOpen?: boolean;

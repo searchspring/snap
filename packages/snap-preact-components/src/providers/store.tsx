@@ -10,5 +10,5 @@ export const StoreProvider = ({ children, store }) => {
 export const useStore = () => useContext(StoreContext);
 
 export const withStore = (Component) => (props) => {
-	return <Component {...props} store={useStore()} />;
+	return <Component store={useStore()} {...props} />;
 };

@@ -19,6 +19,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 const CSS = {
 	facet: ({ color, theme, style }) =>
 		css({
+			width: '100%',
 			margin: '0 0 20px 0',
 			'& .ss__facet__header': {
 				display: 'flex',
@@ -214,7 +215,10 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div css={!disableStyles && CSS.facet({ color, theme, style })} className={classnames('ss__facet', className)}>
+			<div
+				css={!disableStyles && CSS.facet({ color, theme, style })}
+				className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}
+			>
 				<Dropdown
 					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}
@@ -226,7 +230,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						</div>
 					}
 				>
-					<div className={classnames('ss__facet__options', `ss__facet__options--${facet.display}`, className)}>
+					<div className={classnames('ss__facet__options', className)}>
 						{(() => {
 							switch (facet?.display) {
 								case FacetDisplay.SLIDER:
