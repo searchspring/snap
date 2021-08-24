@@ -220,6 +220,7 @@ export interface ValueFacetValue extends BaseFacetValue {
 export interface HierarchyFacetValue extends BaseFacetValue {
 	history: boolean;
 	level: number;
+	preview?: () => void;
 }
 
 export interface RangeBucketFacetValue extends BaseFacetValue {
