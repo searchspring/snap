@@ -28,6 +28,7 @@ const defaultConfig: RecommendationControllerConfig = {
 export class RecommendationController extends AbstractController {
 	public type = 'recommendation';
 	public store: RecommendationStore;
+	public searched;
 	config: RecommendationControllerConfig;
 	events = {
 		click: null,
@@ -258,84 +259,90 @@ export class RecommendationController extends AbstractController {
 	}
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
-
-		const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
-
-		try {
-			try {
-				await this.eventManager.fire('beforeSearch', {
-					controller: this,
-					request: params,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'beforeSearch' middleware cancelled`);
-					return;
-				} else {
-					this.log.error(`error in 'beforeSearch' middleware`);
-					throw err;
-				}
+		this.searched = new Promise(async (resolve, reject): Promise<void> => {
+			if (!this.initialized) {
+				await this.init();
 			}
 
-			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
-
-			const response = await this.client.recommend(params);
-			searchProfile.stop();
-			this.log.profile(searchProfile);
-
-			const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
+			const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
 
 			try {
-				await this.eventManager.fire('afterSearch', {
-					controller: this,
-					request: params,
-					response,
-				});
+				try {
+					await this.eventManager.fire('beforeSearch', {
+						controller: this,
+						request: params,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'beforeSearch' middleware cancelled`);
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'beforeSearch' middleware`);
+						throw err;
+					}
+				}
+
+				const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
+
+				const response = await this.client.recommend(params);
+				searchProfile.stop();
+				this.log.profile(searchProfile);
+
+				const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
+
+				try {
+					await this.eventManager.fire('afterSearch', {
+						controller: this,
+						request: params,
+						response,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'afterSearch' middleware cancelled`);
+						afterSearchProfile.stop();
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'afterSearch' middleware`);
+						throw err;
+					}
+				}
+
+				afterSearchProfile.stop();
+				this.log.profile(afterSearchProfile);
+
+				// update the store
+				this.store.update(response);
+
+				const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
+
+				try {
+					await this.eventManager.fire('afterStore', {
+						controller: this,
+						request: params,
+						response,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'afterStore' middleware cancelled`);
+						afterStoreProfile.stop();
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'afterStore' middleware`);
+						throw err;
+					}
+				}
+
+				afterStoreProfile.stop();
+				this.log.profile(afterStoreProfile);
 			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'afterSearch' middleware cancelled`);
-					afterSearchProfile.stop();
-					return;
-				} else {
-					this.log.error(`error in 'afterSearch' middleware`);
-					throw err;
+				reject(err);
+				if (err) {
+					console.error(err);
 				}
 			}
-
-			afterSearchProfile.stop();
-			this.log.profile(afterSearchProfile);
-
-			// update the store
-			this.store.update(response);
-
-			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
-
-			try {
-				await this.eventManager.fire('afterStore', {
-					controller: this,
-					request: params,
-					response,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'afterStore' middleware cancelled`);
-					afterStoreProfile.stop();
-					return;
-				} else {
-					this.log.error(`error in 'afterStore' middleware`);
-					throw err;
-				}
-			}
-
-			afterStoreProfile.stop();
-			this.log.profile(afterStoreProfile);
-		} catch (err) {
-			if (err) {
-				console.error(err);
-			}
-		}
+		});
 	};
 }

@@ -35,6 +35,7 @@ type SearchTrackMethods = {
 export class SearchController extends AbstractController {
 	public type = 'search';
 	public store: SearchStore;
+	public searched;
 	config: SearchControllerConfig;
 	storage: StorageStore;
 
@@ -159,127 +160,133 @@ export class SearchController extends AbstractController {
 	}
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
+		this.searched = new Promise(async (resolve, reject): Promise<void> => {
+			if (!this.initialized) {
+				await this.init();
+			}
 
-		const params = this.params;
+			const params = this.params;
 
-		try {
 			try {
-				await this.eventManager.fire('beforeSearch', {
-					controller: this,
-					request: params,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'beforeSearch' middleware cancelled`);
-					return;
-				} else {
-					this.log.error(`error in 'beforeSearch' middleware`);
-					throw err;
+				try {
+					await this.eventManager.fire('beforeSearch', {
+						controller: this,
+						request: params,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'beforeSearch' middleware cancelled`);
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'beforeSearch' middleware`);
+						throw err;
+					}
 				}
-			}
 
-			if (this.config.settings.infinite) {
-				// TODO: refactor this
-				const preventBackfill =
-					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
-				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
+				if (this.config.settings.infinite) {
+					// TODO: refactor this
+					const preventBackfill =
+						this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
+					const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
 
-				if (preventBackfill || dontBackfill) {
-					this.storage.set('scrollMap', {});
-					this.urlManager.set('page', 1).go();
-					return;
+					if (preventBackfill || dontBackfill) {
+						this.storage.set('scrollMap', {});
+						this.urlManager.set('page', 1).go();
+						return;
+					}
 				}
-			}
 
-			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
+				const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [response, meta] = await this.client.search(params);
-			if (!response.meta) {
-				/**
-				 * MockClient will overwrite the client search() method and use
-				 * SearchData to return mock data which already contains meta data
-				 */
-				response.meta = meta;
-			}
+				const [response, meta] = await this.client.search(params);
+				if (!response.meta) {
+					/**
+					 * MockClient will overwrite the client search() method and use
+					 * SearchData to return mock data which already contains meta data
+					 */
+					response.meta = meta;
+				}
 
-			// infinite functionality
-			// if params.page > 1 and infinite setting exists we should append results
-			if (this.config.settings.infinite && params.pagination?.page > 1) {
-				// if no results fetch results...
-				let previousResults = this.store.data?.results || [];
-				if (this.config.settings?.infinite.backfill && !previousResults.length) {
-					// figure out how many pages of results to backfill and wait on all responses
-					const backfills = [];
-					for (let page = 1; page < params.pagination.page; page++) {
-						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
-						backfills.push(this.client.search(backfillParams));
+				// infinite functionality
+				// if params.page > 1 and infinite setting exists we should append results
+				if (this.config.settings.infinite && params.pagination?.page > 1) {
+					// if no results fetch results...
+					let previousResults = this.store.data?.results || [];
+					if (this.config.settings?.infinite.backfill && !previousResults.length) {
+						// figure out how many pages of results to backfill and wait on all responses
+						const backfills = [];
+						for (let page = 1; page < params.pagination.page; page++) {
+							const backfillParams = deepmerge({ ...params }, { pagination: { page } });
+							backfills.push(this.client.search(backfillParams));
+						}
+
+						const backfillResponses = await Promise.all(backfills);
+						backfillResponses.map((data) => {
+							previousResults = previousResults.concat(data.results);
+						});
 					}
 
-					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map((data) => {
-						previousResults = previousResults.concat(data.results);
+					response.results = [...previousResults, ...(response.results || [])];
+				}
+
+				searchProfile.stop();
+				this.log.profile(searchProfile);
+
+				const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
+
+				try {
+					await this.eventManager.fire('afterSearch', {
+						controller: this,
+						request: params,
+						response,
 					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'afterSearch' middleware cancelled`);
+						afterSearchProfile.stop();
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'afterSearch' middleware`);
+						throw err;
+					}
 				}
 
-				response.results = [...previousResults, ...(response.results || [])];
-			}
+				afterSearchProfile.stop();
+				this.log.profile(afterSearchProfile);
 
-			searchProfile.stop();
-			this.log.profile(searchProfile);
+				// update the store
+				this.store.update(response);
 
-			const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
+				const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
-			try {
-				await this.eventManager.fire('afterSearch', {
-					controller: this,
-					request: params,
-					response,
-				});
+				try {
+					await this.eventManager.fire('afterStore', {
+						controller: this,
+						request: params,
+						response,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'afterStore' middleware cancelled`);
+						afterStoreProfile.stop();
+						resolve(err.message);
+						return;
+					} else {
+						this.log.error(`error in 'afterStore' middleware`);
+						throw err;
+					}
+				}
+
+				afterStoreProfile.stop();
+				this.log.profile(afterStoreProfile);
 			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'afterSearch' middleware cancelled`);
-					afterSearchProfile.stop();
-					return;
-				} else {
-					this.log.error(`error in 'afterSearch' middleware`);
-					throw err;
+				reject(err);
+				if (err) {
+					console.error(err);
 				}
 			}
-
-			afterSearchProfile.stop();
-			this.log.profile(afterSearchProfile);
-
-			// update the store
-			this.store.update(response);
-
-			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
-
-			try {
-				await this.eventManager.fire('afterStore', {
-					controller: this,
-					request: params,
-					response,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'afterStore' middleware cancelled`);
-					afterStoreProfile.stop();
-					return;
-				} else {
-					this.log.error(`error in 'afterStore' middleware`);
-					throw err;
-				}
-			}
-
-			afterStoreProfile.stop();
-			this.log.profile(afterStoreProfile);
-		} catch (err) {
-			if (err) {
-				console.error(err);
-			}
-		}
+		});
 	};
 }
