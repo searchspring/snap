@@ -130,6 +130,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		disableStyles,
 		style,
 		className,
+		...additionalProps
 	} = props;
 
 	const subProps: CarouselSubProps = {
@@ -180,23 +181,19 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 						//@ts-ignore
 						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
-						//@ts-ignore
 						if (onInit) {
-							//@ts-ignore
 							onInit(swiper.realIndex, swiper.loopedSlides);
 						}
 					}}
 					onBreakpoint={
 						onBreakpoint &&
 						((swiper) => {
-							//@ts-ignore
 							onBreakpoint(swiper.realIndex, swiper.loopedSlides);
 						})
 					}
 					onSlideChange={
 						onSlideChange &&
 						((swiper) => {
-							//@ts-ignore
 							onSlideChange(swiper.realIndex, swiper.loopedSlides);
 						})
 					}
@@ -218,6 +215,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 							  }
 							: false
 					}
+					{...additionalProps}
 				>
 					{children.map((child) => {
 						return <SwiperSlide>{child}</SwiperSlide>;

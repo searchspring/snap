@@ -124,8 +124,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
 		props;
 
-	//controller.type does not exist on type 'RecommendationController' but it does? and this works.
-	//@ts-ignore
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
@@ -219,9 +217,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					<Carousel
 						onNextButtonClick={(e) => controller.track.click(e)}
 						onPrevButtonClick={(e) => controller.track.click(e)}
-						// @ts-ignore
 						onBreakpoint={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-						//@ts-ignore
 						onSlideChange={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
 						onCarouselClick={(e, clickedIndex) => {
 							controller.track.click(e);
@@ -232,6 +228,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						breakpoints={breakpoints}
 						pagination={pagination}
 						{...subProps.carousel}
+						{...additionalProps}
 					>
 						{children
 							? children.map((child) => child)
