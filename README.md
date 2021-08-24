@@ -25,7 +25,7 @@ Documentation for each package can be found in its respective README file.
 
 [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) <a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a>
 
-Simple Javascript client for communicating with Searchspring's API
+Simple Javascript client for communicating with Searchspring's API.
 
 ## Component Libraries
 
