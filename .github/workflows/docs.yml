@@ -16,6 +16,10 @@ jobs:
           fetch-depth: "0"
           ref: "docs"
 
+      - name: Merge main into docs branch
+        run: |
+          git merge origin/main
+
       - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
@@ -46,6 +50,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
       
+      - name: Build
+        run: | 
+          npm run build
+
       - name: Build docs
         run: |
           npm run build:docs 

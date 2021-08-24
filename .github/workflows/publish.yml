@@ -50,12 +50,6 @@ jobs:
 
       - name: Tests
         run: npm run test
-      
-      - name: Update docs branch
-        run: |
-          git checkout docs --
-          git merge main
-          git push
 
       - name: Publish packages
         run: npm run publish
