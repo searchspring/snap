@@ -243,7 +243,7 @@ export class AutocompleteController extends AbstractController {
 
 			let query = input.value;
 			if (!this.store.loading && this.store.search.originalQuery) {
-				query = this.store.search.query;
+				query = this.store.search.query.string;
 				addHiddenFormInput(form, 'oq', this.store.search.originalQuery.string);
 			}
 
