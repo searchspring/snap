@@ -16,14 +16,14 @@ jobs:
           fetch-depth: "0"
           ref: "docs"
 
-      - name: Merge main into docs branch
-        run: |
-          git merge origin/main
-
       - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
           git config user.email machine@searchspring.com
+
+      - name: Merge main into docs branch
+        run: |
+          git merge origin/main
 
       - name: Setup Node
         uses: actions/setup-node@v2
