@@ -51,7 +51,7 @@ jobs:
       
       - name: Update docs branch
         run: |
-          git checkout docs
+          git checkout docs --
           git merge main
           git push
 
