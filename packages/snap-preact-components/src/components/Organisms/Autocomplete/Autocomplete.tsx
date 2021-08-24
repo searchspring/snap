@@ -120,6 +120,13 @@ const CSS = {
 				'& .ss__autocomplete__facet': {
 					flex: vertical ? '0 1 150px' : null,
 				},
+				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
+					{
+						paddingLeft: 0,
+					},
+				'.ss__facet-palette-options__icon': {
+					display: 'none',
+				},
 			},
 			'& .ss__autocomplete__content': {
 				display: 'flex',
