@@ -63,7 +63,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 		...properties.theme?.components?.FacetHierarchyOptions,
 	};
 
-	const { values, hideCount, onClick, disableStyles, className, style } = props;
+	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, className, style } = props;
 
 	return (
 		values?.length && (
@@ -78,6 +78,8 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							)}
 							onClick={onClick}
 							{...value.url?.link}
+							onFocus={() => previewOnFocus && value.preview && value.preview()}
+							{...valueProps}
 						>
 							<span className="ss__facet-hierarchy-options__option__value">
 								{value.label}
@@ -96,4 +98,6 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 	values: HierarchyFacetValue[];
 	hideCount?: boolean;
 	onClick?: (e: Event) => void;
+	previewOnFocus?: boolean;
+	valueProps?: any;
 }
