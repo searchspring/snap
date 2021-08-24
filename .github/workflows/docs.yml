@@ -23,7 +23,7 @@ jobs:
 
       - name: Merge main into docs branch
         run: |
-          git merge origin/main
+          git merge -X theirs origin/main
 
       - name: Setup Node
         uses: actions/setup-node@v2
