@@ -32,6 +32,7 @@ const CSS = {
 			},
 			'& .ss__facet__options': {
 				marginTop: '8px',
+				minHeight: '70px',
 				maxHeight: '300px',
 				overflowY: 'auto',
 				overflowX: 'hidden',

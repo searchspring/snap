@@ -47,78 +47,76 @@ const CSS = {
 				background: trackColor || theme.colors?.secondary || '#ccc',
 				height: '100%',
 			},
-
-			'& .ss__slider__handleWrapper': {
+			'& .ss__slider__handles': {
 				textAlign: 'center',
-			},
+				'& button': {
+					'& .ss__slider__handles__handle': {
+						background: handleColor || theme.colors?.primary || '#333',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						width: '1.6rem',
+						height: '1.6rem',
+						borderRadius: '100%',
+						fontSize: '0.7rem',
+						whiteSpace: 'nowrap',
+						color: handleTextColor || 'initial',
+						fontWeight: 'normal',
+						transform: 'translateY(0) scale(0.9)',
+						transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+						position: 'relative',
+						cursor: 'pointer',
 
-			'& label.ss__slider__handle__label': {
-				display: 'inline-block',
-				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
-			},
+						'&:after': {
+							backgroundColor: '#ffffff',
+							width: '30%',
+							height: '30%',
+							top: '0',
+							bottom: '0',
+							left: '0',
+							content: '""',
+							position: 'absolute',
+							right: '0',
+							borderRadius: '12px',
+							margin: 'auto',
+							cursor: 'pointer',
+						},
 
-			'& label.ss__slider__handle__label.handleLabel-0': {
-				'&:after': {
-					content: '"-"',
-					padding: '5px',
-				},
-			},
+						'&.ss__slider__handles__handle--active': {
+							background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
+						},
 
-			'& .ss__slider__handle': {
-				background: handleColor || theme.colors?.primary || '#333',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				width: '1.6rem',
-				height: '1.6rem',
-				borderRadius: '100%',
-				fontSize: '0.7rem',
-				whiteSpace: 'nowrap',
-				color: handleTextColor || 'initial',
-				fontWeight: 'normal',
-				transform: 'translateY(0) scale(0.9)',
-				transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-				position: 'relative',
-				cursor: 'pointer',
+						'& label.ss__slider__handles__handle__label': {
+							display: 'inline-block',
+							marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 
-				'&:after': {
-					backgroundColor: '#ffffff',
-					width: '30%',
-					height: '30%',
-					top: '0',
-					bottom: '0',
-					left: '0',
-					content: '""',
-					position: 'absolute',
-					right: '0',
-					borderRadius: '12px',
-					margin: 'auto',
-					cursor: 'pointer',
-				},
-
-				'& .leftJustify': {
-					left: '0px',
-				},
-
-				'& .rightJustify': {
-					right: '0px',
-				},
-
-				'& label.handle__label-sticky': {
-					position: 'absolute',
-					top: '-20px',
-					fontFamily: 'Roboto, Helvetica, Arial',
-					fontSize: '14px',
-					marginTop: '0px',
-				},
-
-				'& label.handle__label-sticky.handleLabel-0': {
-					'&:after': {
-						content: '""',
+							'&.ss__slider__handles__handle__label--pinleft': {
+								left: '0px',
+							},
+							'&.ss__slider__handles__handle__label--pinright': {
+								right: '0px',
+							},
+							'&.ss__slider__handles__handle__label--sticky': {
+								position: 'absolute',
+								top: '-20px',
+								fontFamily: 'Roboto, Helvetica, Arial',
+								fontSize: '14px',
+								marginTop: '0px',
+							},
+						},
 					},
 				},
-				'&.ss__slider__handle--active': {
-					background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
+			},
+
+			'& .ss__slider__labels': {
+				textAlign: 'center',
+				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
+
+				'& .ss__slider__labels__label--0': {
+					'&:after': {
+						content: '"-"',
+						padding: '5px',
+					},
 				},
 			},
 			...style,
@@ -218,41 +216,45 @@ export const FacetSlider = observer((properties: SliderProps): JSX.Element => {
 					{segments.map(({ getSegmentProps }, index) => (
 						<div className={`${index === 1 ? 'ss__slider__rail' : 'ss__slider__segment'}`} {...getSegmentProps()} index={index} />
 					))}
-					<div className={'ss__slider__handleWrapper'}>
+					<div className={'ss__slider__handles'}>
 						{handles.map(({ value, active, getHandleProps }, idx) => (
-							<>
-								<button
-									{...getHandleProps({
-										style: {
-											appearance: 'none',
-											border: 'none',
-											background: 'transparent',
-											outline: 'none',
-										},
-									})}
-								>
-									<div className={classnames('ss__slider__handle', { 'ss__slider__handle--active': active })}>
-										{stickyHandleLabel && (
-											<label
-												className={classnames(
-													'ss__slider__handle__label',
-													'handle__label-sticky',
-													`handleLabel-${idx}`,
-													idx == 0 && value == facet.range.low ? 'leftJustify' : idx == 1 && value == facet.range.high ? 'rightJustify' : ''
-												)}
-											>
-												{sprintf(facet.formatValue, value)}
-											</label>
-										)}
-									</div>
-								</button>
-
-								{!stickyHandleLabel && (
-									<label className={classnames('ss__slider__handle__label', `handleLabel-${idx}`)}>{sprintf(facet.formatValue, value)}</label>
-								)}
-							</>
+							<button
+								{...getHandleProps({
+									style: {
+										appearance: 'none',
+										border: 'none',
+										background: 'transparent',
+										outline: 'none',
+									},
+								})}
+							>
+								<div className={classnames('ss__slider__handles__handle', { 'ss__slider__handles__handle--active': active })}>
+									{stickyHandleLabel && (
+										<label
+											className={classnames(
+												'ss__slider__handles__handle__label',
+												'ss__slider__handles__handle__label--sticky',
+												`ss__slider__handles__handle__label--${idx}`,
+												{ 'ss__slider__handles__handle__label--pinleft': idx == 0 && value == facet.range.low },
+												{ 'ss__slider__handles__handle__label--pinright': idx == 1 && value == facet.range.high }
+											)}
+										>
+											{sprintf(facet.formatValue, value)}
+										</label>
+									)}
+								</div>
+							</button>
 						))}
 					</div>
+					{!stickyHandleLabel && (
+						<div className={'ss__slider__labels'}>
+							{handles.map(({ value }, idx) => (
+								<label className={classnames('ss__slider__labels__label', `ss__slider__labels__label--${idx}`)}>
+									{sprintf(facet.formatValue, value)}
+								</label>
+							))}
+						</div>
+					)}
 				</div>
 			</CacheProvider>
 		)
