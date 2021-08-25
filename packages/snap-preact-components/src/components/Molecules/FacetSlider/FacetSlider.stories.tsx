@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { FacetSlider, SliderProps } from './FacetSlider';
+import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
@@ -57,6 +57,15 @@ export default {
 				defaultValue: { summary: 20 },
 			},
 			control: { type: 'number' },
+		},
+		tickTextColor: {
+			description: 'ticks color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'color' },
 		},
 		trackColor: {
 			description: 'Slider track color',
@@ -135,6 +144,6 @@ export default {
 	},
 };
 
-const Template = (args: SliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
+const Template = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
 
 export const Price = Template.bind({});

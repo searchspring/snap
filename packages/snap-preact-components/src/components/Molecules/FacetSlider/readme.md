@@ -53,6 +53,16 @@ The `handleColor` prop specifies the handle color.
 />
 ```
 
+### stickyHandleLabel
+The `stickyHandleLabel` prop specifies if the handle value text should display above each handle.
+
+```jsx
+<FacetSlider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	stickyHandleLabel={true}
+/>
+```
+
 ### handleDraggingColor
 The `handleDraggingColor` prop specifies the handle color while dragging.
 
