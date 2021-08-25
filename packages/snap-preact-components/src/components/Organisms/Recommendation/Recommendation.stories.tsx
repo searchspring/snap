@@ -43,6 +43,16 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		title: {
+			description: 'Recommendation title',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		loop: {
 			defaultValue: true,
 			description: 'Recommendation pagination loops',
@@ -54,19 +64,20 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		title: {
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'string | JSX Element',
-				},
-				defaultValue: { summary: '' },
-			},
-			control: { type: 'text' },
-		},
 		pagination: {
 			defaultValue: false,
 			description: 'Display pagination dots',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideButtons: {
+			defaultValue: false,
+			description: 'Hide prev/next buttons',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -114,6 +125,10 @@ export const Default = (props, { loaded: { controller } }) => {
 };
 Default.loaders = [
 	async () => {
+		snapInstance.on('afterStore', async ({ controller }, next) => {
+			controller.store.results.forEach((result) => (result.mappings.core.url = 'javascript:void(0);'));
+			await next();
+		});
 		await snapInstance.search();
 		return {
 			controller: snapInstance,

@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
 
-import { Carousel, CarouselProps } from '../Carousel';
+import { Carousel, CarouselProps } from '../../Molecules/Carousel';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -21,60 +21,6 @@ import { useIntersection } from '../../../hooks';
 const CSS = {
 	recommendation: ({ theme, style }) =>
 		css({
-			position: 'relative',
-			padding: '0 20px',
-			overflow: 'hidden',
-			'& .swiper-pagination-bullet-active': {
-				background: theme?.colors?.primary || 'inherit',
-			},
-			'& .ss__recommendation__title': {
-				textAlign: 'center',
-			},
-			'& .ss__recommendation__next, .ss__recommendation__prev': {
-				position: 'absolute',
-				padding: '5px',
-				bottom: 'calc(50% - 60px/2)',
-				zIndex: '2',
-				cursor: 'pointer',
-
-				'&.swiper-button-disabled': {
-					opacity: '0.3',
-					cursor: 'default',
-				},
-			},
-			'& .ss__recommendation__next': {
-				right: '0',
-			},
-			'& .ss__recommendation__prev': {
-				left: '0',
-			},
-			'& .swiper-pagination': {
-				margin: '0',
-				position: 'absolute',
-				textAlign: 'center',
-				transition: '.3s opacity',
-				transform: 'translate3d(0, 0, 0)',
-				zIndex: '10',
-			},
-			'& .swiper-container-horizontal>.swiper-pagination-bullets,.swiper-pagination-custom, .swiper-pagination-fraction': {
-				bottom: '10px',
-				left: '0',
-				width: '100%',
-			},
-			'& .swiper-pagination-bullet': {
-				width: '8px',
-				height: '8px',
-				display: 'inline-block',
-				borderRadius: '50%',
-				background: '#000',
-				opacity: '.2',
-				cursor: 'pointer',
-				margin: '0 4px',
-				'&.swiper-pagination-bullet-active': {
-					opacity: '0.8',
-					background: theme?.colors?.primary || '#000',
-				},
-			},
 			...style,
 		}),
 };
@@ -121,11 +67,22 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		...properties.theme?.components?.recommendation,
 	};
 
-	const { title, controller, children, breakpoints, loop, pagination, nextButton, prevButton, disableStyles, style, className, ...additionalProps } =
-		props;
+	const {
+		title,
+		controller,
+		children,
+		breakpoints,
+		loop,
+		pagination,
+		nextButton,
+		prevButton,
+		hideButtons,
+		disableStyles,
+		style,
+		className,
+		...additionalProps
+	} = props;
 
-	//controller.type does not exist on type 'RecommendationController' but it does? and this works.
-	//@ts-ignore
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
@@ -217,21 +174,34 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
 					<Carousel
+						onInit={(swiper) => {
+							//@ts-ignore
+							setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+						}}
+						onBreakpoint={(swiper) => {
+							//@ts-ignore
+							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						}}
+						onSlideChange={(swiper) => {
+							//@ts-ignore
+							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+						}}
+						prevButton={prevButton}
+						nextButton={nextButton}
+						hideButtons={hideButtons}
 						onNextButtonClick={(e) => controller.track.click(e)}
 						onPrevButtonClick={(e) => controller.track.click(e)}
-						// @ts-ignore
-						onBreakpoint={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-						//@ts-ignore
-						onSlideChange={(realIndex, loopedSlides) => sendProductImpression(realIndex, loopedSlides)}
-						onCarouselClick={(e, clickedIndex) => {
+						onClick={(swiper, e) => {
+							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
 							controller.track.click(e);
-							controller.track.product.click(e, results[clickedIndex]);
+							if (!Number.isNaN(clickedIndex)) {
+								controller.track.product.click(e, results[clickedIndex]);
+							}
 						}}
-						onInit={(realIndex, loopedSlides) => setInitialIndexes([realIndex, loopedSlides])}
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={pagination}
-						{...subProps.carousel}
+						{...additionalProps}
 					>
 						{children
 							? children.map((child) => child)
@@ -248,6 +218,7 @@ export interface RecommendationProps extends ComponentProps {
 	breakpoints?: any;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
+	hideButtons?: boolean;
 	loop?: boolean;
 	pagination?: boolean;
 	controller: RecommendationController;
