@@ -1,6 +1,6 @@
 ## Snap Events
 
-Lets look at how to integrate into various Snap events utilizing the internal core [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) package. 
+Lets look at how to tie into various Snap events by utilizing middleware and plugins. To learn more details about middleware, and execution order of it, checkout the core [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager) package.
 
 The Snap instance that we create will return a `controllers` object with all of the requested controllers specified in the config. 
 
@@ -9,15 +9,30 @@ There are two ways we can attach events to our controllers. Using the config, or
 
 ## Config Middleware
 
-On the config we can specify middleware via `plugin` or `on`.
+On the config we can specify middleware via `on` or `plugins` attributes.
 
 ### on
 
-The `on` property is an object that has event name(s) as the key and the middleware function as the value.
+The `on` property is an object that has event name(s) as the key and and array of the middleware functions as the values.
 
-The value can also be an array of functions if attaching multiple middleware to a single event. 
+The value can be a single function or an array of functions if attaching multiple middleware to a single event. 
 
 ```typescript
+const initMiddleware = async(eventData, next) => {
+	console.log("runs on init", eventData);
+	await next();
+}
+
+const afterSearchMiddlewareOne = async(eventData, next) => {
+	console.log("runs on afterSearch", eventData);
+	await next();
+}
+
+const afterSearchMiddlewareTwo = async(eventData, next) => {
+	console.log("runs on afterSearch, after afterSearchMiddlewareOne", eventData);
+	await next();
+}
+
 const config = {
 	client: {
 		globals: {
@@ -30,26 +45,13 @@ const config = {
 				config: {
 					id: 'search',
 					on: {
-						init: async(eventData, next) => {
-							console.log("runs on init", eventData);
-							await next();
-						}
+						init: initMiddleware,
+						afterSearch: [
+							afterSearchMiddlewareOne,
+							afterSearchMiddlewareTwo
+						]
 					}
 				},
-				targets: [
-					{
-						name: 'content',
-						selector: '#searchspring-content',
-						component: Content,
-						hideTarget: true,
-					},
-					{
-						name: 'sidebar',
-						selector: '#searchspring-sidebar',
-						component: Sidebar,
-						hideTarget: true,
-					},
-				],
 			},
 		],
 	},
@@ -57,11 +59,25 @@ const config = {
 ```
 
 
-### plugin
+### plugins
 
-The `plugin` property is a function (or array of functions) that returns the controller to then access or attach middleware events.
+The `plugins` property is an array of arrays of functions and optional function parameters that are used to attach functionality to controllers. Parameters can optionally be passed to the functions as shown with the `paramPlugin` below:
 
 ```typescript
+const plugin = (controller) => {
+	controller.on('init', async(eventData, next) => {
+		console.log("runs on init", eventData);
+		await next();
+	});
+}
+
+const paramPlugin = (controller, ...params) => {
+	controller.on('afterStore', async(eventData, next) => {
+		console.log("runs on afterStore", eventData, params);
+		await next();
+	});
+}
+
 const config = {
 	client: {
 		globals: {
@@ -73,25 +89,11 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					plugin: (controller) => {
-						controller.on('init', async(eventData, next) => {
-							console.log("runs on init", eventData);
-							await next();
-						});
-					}
+					plugins: [
+						[ plugin ],
+						[ paramPlugin, 'param1', 'param2' ]
+					]
 				},
-				targets: [
-					{
-						selector: '#searchspring-content',
-						component: Content,
-						hideTarget: true,
-					},
-					{
-						selector: '#searchspring-sidebar',
-						component: Sidebar,
-						hideTarget: true,
-					},
-				],
 			},
 		],
 	},
@@ -100,7 +102,9 @@ const config = {
 
 ## Controller Events
 
-Alternatively we can also attach events to our controllers after they have been returned from creating a Snap instance via the `controllers` property that contains an object of all the controllers that have been specified in the config.
+On the controller we can attach middleware via `on` or `plugin` methods.
+
+We can attach events to our controllers after they have been created by a Snap instance via the `controllers` property that contains an object of all the controllers that have been specified in the config.
 
 Lets use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
 
@@ -132,18 +136,19 @@ search.plugin((controller) => {
 	});
 });
 ```
-Note: It is possible that the init event has already fired by this time (should a target be found immediately by a search controller). For this reason it is recommended to just use a plugin to access the controller directly after creation.
+
+Next we will attach a plugin that takes additional parameters. This could be useful for sending contextual data into your plugin.
 
 ```typescript
-search.plugin((controller) => {
-	controller.store.custom = {
-		variables: {
-			currency: {
-				symbol: '$'
-			}
-		}
-	}
-});
+const paramPlugin = (controller, ...params) => {
+	// params = [ 'param1', 'param2' ]
+	controller.on('afterStore', async(eventData, next) => {
+		console.log("runs on afterStore", eventData);
+		await next();
+	});
+}
+
+search.plugin(paramPlugin, 'param1', 'param2');
 ```
 
 ## Available Events

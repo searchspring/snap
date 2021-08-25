@@ -19,8 +19,68 @@ const abstractConfig = {
 ## Instantiate
 `AbstractController` cannot be instantiated and must be extended by a subclass.
 
-## Search
+## search
 This is an abstract method that must be defined in the subclass.
+
+## on
+This method is used to attach event middleware. Each controller defines it's own events, this method provides a means to attach to them.
+
+```typescript
+controller.on('init', async(eventData, next) => {
+	eventData.controller.log.debug('initialized!');
+	await next();
+});
+```
+
+## plugin
+Modification or extension of functionality as well as attaching groups of event middleware can be done using the `plugin` method. Plugin functions can be passed additional parameters if needed.
+
+```typescript
+const paramPlugin = (controller, ...params) => {
+	// params = [ 'param1', 'param2' ]
+	controller.on('init', async({ controller }, next) => {
+		controller.log.debug('initialized!');
+		await next();
+	});
+}
+
+controller.plugin(paramPlugin, 'param1', 'param2');
+```
+
+## use
+The `use` method is a convenient way of attaching both middleware and plugins via a config.
+
+```
+const initMiddleware = async(eventData, next) => {
+	eventData.controller.log.debug('initialized!');
+	await next();
+}
+
+const plugin = (controller) => {
+	controller.on('init', async({ controller }, next) => {
+		controller.log.debug('initialized!');
+		await next();
+	});
+}
+
+const paramPlugin = (controller, ...params) => {
+	// params = [ 'param1', 'param2' ]
+	controller.on('init', async({ controller }, next) => {
+		controller.log.debug('initialized!');
+		await next();
+	});
+}
+
+controller.use({
+	on: {
+		init: [ initMiddleware ]
+	},
+	plugins: [
+		[ plugin ],
+		[ paramPlugin, 'param1', 'param2' ]
+	]
+});
+```
 
 ## Events
 
