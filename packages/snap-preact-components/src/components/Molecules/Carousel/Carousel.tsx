@@ -1,31 +1,37 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { useState, useRef } from 'preact/hooks';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-import 'swiper/swiper.min.css';
+
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+import 'swiper/swiper.min.css';
+
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers/theme';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
 	carousel: ({ theme, style }) =>
 		css({
-			position: 'relative',
-			padding: '0 20px',
+			display: 'flex',
+			maxWidth: '100%',
+			margin: 0,
+			padding: 0,
 			overflow: 'hidden',
 			'& .swiper-pagination-bullet-active': {
 				background: theme?.colors?.primary || 'inherit',
 			},
+			'& .ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			},
 			'& .ss__carousel__next, .ss__carousel__prev': {
-				position: 'absolute',
 				padding: '5px',
-				bottom: 'calc(50% - 18px)',
-				zIndex: '2',
 				cursor: 'pointer',
 
 				'&.swiper-button-disabled': {
@@ -33,24 +39,19 @@ const CSS = {
 					cursor: 'default',
 				},
 			},
-			'& .ss__carousel__next': {
-				right: '0',
+			'& .swiper-container': {
+				display: 'flex',
+				flexDirection: 'column',
 			},
-			'& .ss__carousel__prev': {
-				left: '0',
+			'& .swiper-wrapper': {
+				order: 0,
 			},
 			'& .swiper-pagination': {
-				margin: '0',
-				position: 'absolute',
+				marginTop: '10px',
+				width: '100%',
+				order: 1,
 				textAlign: 'center',
 				transition: '.3s opacity',
-				transform: 'translate3d(0, 0, 0)',
-				zIndex: '10',
-			},
-			'& .swiper-container-horizontal>.swiper-pagination-bullets,.swiper-pagination-custom, .swiper-pagination-fraction': {
-				bottom: '10px',
-				left: '0',
-				width: '100%',
 			},
 			'& .swiper-pagination-bullet': {
 				width: '8px',
@@ -121,15 +122,15 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		pagination,
 		nextButton,
 		prevButton,
+		hideButtons,
+		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
-		onCarouselClick,
-		onBreakpoint,
-		onSlideChange,
-		onInit,
+		onClick,
 		disableStyles,
 		style,
 		className,
+		...additionalProps
 	} = props;
 
 	const subProps: CarouselSubProps = {
@@ -154,76 +155,67 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const rootComponentRef = useRef(null);
 	return (
 		children && (
-			<div
-				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-				css={!disableStyles && CSS.carousel({ theme, style })}
-				className={classnames('ss__carousel', className)}
-			>
+			<CacheProvider>
 				<div
-					className="ss__carousel__prev"
-					ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-					onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
+					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+					css={!disableStyles && CSS.carousel({ theme, style })}
+					className={classnames('ss__carousel', className)}
 				>
-					{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
-				</div>
-				<div
-					className="ss__carousel__next"
-					ref={navigationNextRef as React.RefObject<HTMLDivElement>}
-					onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
-				>
-					{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
-				</div>
-				<Swiper
-					centerInsufficientSlides={true}
-					onInit={(swiper) => {
-						//@ts-ignore
-						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
-						//@ts-ignore
-						swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
-						//@ts-ignore
-						if (onInit) {
+					{!hideButtons && (
+						<div className="ss__carousel__prev-wrapper">
+							<div
+								className="ss__carousel__prev"
+								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
+							>
+								{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
+							</div>
+						</div>
+					)}
+
+					<Swiper
+						centerInsufficientSlides={true}
+						onInit={(swiper) => {
 							//@ts-ignore
-							onInit(swiper.realIndex, swiper.loopedSlides);
-						}
-					}}
-					onBreakpoint={
-						onBreakpoint &&
-						((swiper) => {
+							swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 							//@ts-ignore
-							onBreakpoint(swiper.realIndex, swiper.loopedSlides);
-						})
-					}
-					onSlideChange={
-						onSlideChange &&
-						((swiper) => {
-							//@ts-ignore
-							onSlideChange(swiper.realIndex, swiper.loopedSlides);
-						})
-					}
-					onClick={
-						onCarouselClick &&
-						((swiper, e) => {
-							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-							if (!Number.isNaN(clickedIndex)) {
-								onCarouselClick(e, clickedIndex);
+							swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : undefined;
+							if (onInit) {
+								onInit(swiper);
 							}
-						})
-					}
-					loop={loop}
-					breakpoints={breakpoints}
-					pagination={
-						pagination
-							? {
-									clickable: true,
-							  }
-							: false
-					}
-				>
-					{children.map((child) => {
-						return <SwiperSlide>{child}</SwiperSlide>;
-					})}
-				</Swiper>
-			</div>
+						}}
+						onClick={(swiper, e) => {
+							onClick && onClick(swiper, e);
+						}}
+						loop={loop}
+						breakpoints={breakpoints}
+						pagination={
+							pagination
+								? {
+										clickable: true,
+								  }
+								: false
+						}
+						{...additionalProps}
+					>
+						{children.map((child) => {
+							return <SwiperSlide>{child}</SwiperSlide>;
+						})}
+					</Swiper>
+
+					{!hideButtons && (
+						<div className="ss__carousel__next-wrapper">
+							<div
+								className="ss__carousel__next"
+								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
+							>
+								{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
+							</div>
+						</div>
+					)}
+				</div>
+			</CacheProvider>
 		)
 	);
 });
@@ -232,14 +224,13 @@ export interface CarouselProps extends ComponentProps {
 	breakpoints?: any;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
+	hideButtons?: boolean;
 	loop?: boolean;
 	pagination?: boolean;
+	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;
 	onPrevButtonClick?: (e) => void;
-	onCarouselClick?: (e, idx) => void;
-	onSlideChange?: (idx, loopedSlides) => void;
-	onBreakpoint?: (idx, loopedSlides) => void;
-	onInit?: (idx, loopedSlides) => void;
+	onInit?: (swiper) => void;
 	children?: JSX.Element[];
 }
 

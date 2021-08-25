@@ -12,6 +12,7 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { Recs } from './components/Recommendations/';
 
 import { afterStore } from './middleware/plugins/afterStore';
+import { configurable } from './middleware/plugins/configurable';
 
 import './styles/custom.scss';
 
@@ -20,6 +21,7 @@ import './styles/custom.scss';
  */
 
 const config = {
+	plugin: configurable,
 	client: {
 		globals: {
 			siteId: '8uyt2m',
@@ -38,6 +40,8 @@ const config = {
 			{
 				config: {
 					id: 'search',
+					// new plugins format to allow for parameters
+					plugins: [[afterStore], [configurable, 'param1', 'param2']],
 					settings: {
 						redirects: {
 							merchandising: false,
@@ -87,5 +91,6 @@ const config = {
 const snap = new Snap(config);
 const { search, autocomplete } = snap.controllers;
 
-// using plugins (groups of middleware)
-search.plugin(afterStore);
+// attaching plugins
+// search.plugin(afterStore);
+// search.plugin(configurable, 'param1', 'param2');

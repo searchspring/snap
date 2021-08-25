@@ -4,7 +4,7 @@ Renders a carousel of product recommendations, built using the Carousel Componen
 
 If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
 
-Any modification to the results are recommended to be made using an `afterSearch` or `afterStore` event via the Controller instead of making modifications in the component.
+Any modification to the results array and data are recommended to be made using an `afterSearch` and/or `afterStore` event via the Controller instead of making modifications in the component.
 
 
 ## Sub-components
@@ -41,6 +41,13 @@ The `pagination` prop specifies if the carousel should display pagination dots.
 
 ```jsx
 <Recommendation controller={controller} pagination={true} />
+```
+
+### hideButtons
+The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
+
+```jsx
+<Carousel hideButtons>{children}<Carousel/>
 ```
 
 ### prevButton

@@ -1,9 +1,8 @@
 # Carousel
 
-Renders a carousel of children, built using [Swiper](https://swiperjs.com/)
+Renders a carousel of slides using children, built with [Swiper](https://swiperjs.com/)
 
 ## Sub-components
-- Result (default)
 - Icon
 
 ## Usage
@@ -17,21 +16,21 @@ Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) c
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Carousel loop={true}>{children}<Carousel/>
-```
-
-### title
-The `title` prop specifies the carousel title
-
-```jsx
-<Carousel title={'Recommended Products'}>{children}<Carousel/>
+<Carousel loop>{children}<Carousel/>
 ```
 
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 
 ```jsx
-<Carousel pagination={true}>{children}<Carousel/>
+<Carousel pagination>{children}<Carousel/>
+```
+
+### hideButtons
+The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
+
+```jsx
+<Carousel hideButtons>{children}<Carousel/>
 ```
 
 ### prevButton
@@ -48,6 +47,34 @@ The `nextButton` prop specifies the next button element of the carousel. This ca
 <Carousel nextButton={'>'}>{children}<Carousel/>
 ```
 
+### onPrevButtonClick
+The `onPrevButtonClick` prop can be used to handle click events on the prevButton.
+
+```jsx
+<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onNextButtonClick
+The `onNextButtonClick` prop can be used to handle click events on the prevButton.
+
+```jsx
+<Carousel onNextButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onClick
+The `onClick` prop can be used to handle click events on the swiper component.
+
+```jsx
+<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onInit
+The `onInit` prop can be used to tie into the initialization event for swiper.
+
+```jsx
+<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
+```
+
 ### breakpoints
 An object that modifies the responsive behavior of the carousel at various viewports. 
 
@@ -62,7 +89,7 @@ The default configuration contains the following properties, however any [Swiper
 `spaceBetween` - spacing between each product
 
 ```typescript
-const defaultRecommendationBreakpoints = {
+const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -92,5 +119,5 @@ const defaultRecommendationBreakpoints = {
 ```
 
 ```jsx
-<Carousel breakpoints={defaultRecommendationBreakpoints}>{children}<Carousel/>
+<Carousel breakpoints={defaultCarouselBreakpoints}>{children}<Carousel/>
 ```
