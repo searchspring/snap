@@ -46,7 +46,7 @@ describe('Carousel Component', () => {
 		expect(results.textContent).toContain(searchResponse.results[0].mappings.core.name);
 	});
 
-	it.skip('renders the correct amount of children', () => {
+	it('renders the correct amount of children', () => {
 		const rendered = render(
 			<Carousel>
 				{searchResponse.results.map((result, idx) => (
@@ -56,7 +56,8 @@ describe('Carousel Component', () => {
 				))}
 			</Carousel>
 		);
-		const results = rendered.container.querySelectorAll('.findMe');
+
+		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .findMe');
 		expect(results.length).toBe(searchResponse.results.length);
 	});
 
@@ -100,10 +101,10 @@ describe('Carousel Component', () => {
 	it('has custom onClick functions', () => {
 		const onNextFunc = jest.fn();
 		const onPrevFunc = jest.fn();
-		const onCarouselFunc = jest.fn();
+		const onClickFunc = jest.fn();
 
 		const rendered = render(
-			<Carousel onNextButtonClick={onNextFunc} onPrevButtonClick={onPrevFunc} onCarouselClick={onCarouselFunc}>
+			<Carousel pagination onNextButtonClick={onNextFunc} onPrevButtonClick={onPrevFunc} onClick={onClickFunc}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<Result result={result} />
@@ -123,10 +124,8 @@ describe('Carousel Component', () => {
 		userEvent.click(next);
 		expect(onNextFunc).toHaveBeenCalled();
 
-		expect(onCarouselFunc).not.toHaveBeenCalled();
 		userEvent.click(slide[0]);
-		//todo this doesnt work in the tests for some reason..
-		// expect(onCarouselFunc).toHaveBeenCalled();
+		expect(onClickFunc).toHaveBeenCalled();
 	});
 
 	it('is themeable with ThemeProvider', () => {

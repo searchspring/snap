@@ -3,13 +3,14 @@ import { Fragment, h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { Carousel, defaultCarouselBreakpoints } from './Carousel';
+import { Icon, iconPaths } from '../../Atoms/Icon';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import { Result } from '../../Molecules/Result';
+import { Result } from '../Result';
 import Readme from './readme.md';
 
 export default {
-	title: `Organisms/Carousel`,
+	title: `Molecules/Carousel`,
 	component: Carousel,
 	parameters: {
 		docs: {
@@ -35,7 +36,7 @@ export default {
 	argTypes: {
 		loop: {
 			defaultValue: true,
-			description: 'Recommendation pagination loops',
+			description: 'Carousel slides loop',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -44,19 +45,20 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		title: {
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'string | JSX Element',
-				},
-				defaultValue: { summary: '' },
-			},
-			control: { type: 'text' },
-		},
 		pagination: {
 			defaultValue: false,
 			description: 'Display pagination dots',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideButtons: {
+			defaultValue: false,
+			description: 'Hide prev/next buttons',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -85,7 +87,7 @@ export default {
 		},
 		breakpoints: {
 			defaultValue: defaultCarouselBreakpoints,
-			description: 'Recommendation title',
+			description: 'Carousel breakpoints',
 			table: {
 				type: {
 					summary: 'object',
@@ -101,7 +103,7 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
+			action: 'onNextButtonClick',
 		},
 		onPrevButtonClick: {
 			description: 'Carousel prev button click event handler',
@@ -110,10 +112,10 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
+			action: 'onPrevButtonClick',
 		},
-		onCarouselClick: {
-			description: 'Carousel Child click event handler',
+		onClick: {
+			description: 'Carousel onClick event handler (Swiper)',
 			table: {
 				type: {
 					summary: 'function',
@@ -121,23 +123,14 @@ export default {
 			},
 			action: 'onClick',
 		},
-		onSlideChange: {
-			description: 'On slide change event handler',
+		onInit: {
+			description: 'Carousel onInit event handler (Swiper)',
 			table: {
 				type: {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
-		},
-		onBreakpoint: {
-			description: 'Window resize breakpoint event handler',
-			table: {
-				type: {
-					summary: 'function',
-				},
-			},
-			action: 'window resize',
+			action: 'onInit',
 		},
 		...componentArgs,
 	},
@@ -153,78 +146,28 @@ export const Products = (props, { loaded: { controller } }) => {
 		</Carousel>
 	);
 };
-
-const people = ['Chris', 'Kevin', 'Dennis', 'John', 'Kelly', 'Jessy', 'Phil', 'Kyle'];
-export const Names = (props) => {
-	return <Carousel {...props}>{people}</Carousel>;
-};
-
-const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'black', 'white'];
-export const Colors = (props) => {
-	return (
-		<Carousel {...props}>
-			{colors.map((color) => (
-				<div style={{ height: '100px', width: '100px', background: color }}></div>
-			))}
-		</Carousel>
-	);
-};
-
-const puppyImgs = [
-	'https://www.thesprucepets.com/thmb/EBp990AJt94XwAp7oOAzUtdg9Xg=/2121x1193/smart/filters:no_upscale()/golden-retriever-puppy-in-grass-923135452-5c887d4146e0fb00013365ba.jpg',
-	'https://media.4-paws.org/1/e/d/6/1ed6da75afe37d82757142dc7c6633a532f53a7d/VIER%20PFOTEN_2019-03-15_001-2886x1999-1920x1330.jpg',
-	'https://dogtime.com/assets/uploads/2011/03/puppy-development.jpg',
-	'https://www.forbes.com/uk/advisor/wp-content/uploads/2021/05/short-coated-tan-puppy-stockpack-unsplash-scaled.jpg',
-	'https://www.rcinet.ca/en/wp-content/uploads/sites/3/2020/11/dog-cute-puppy-spca.jpg',
-	'https://www.petmd.com/sites/default/files/styles/article_image/public/puppy-laying-down-outside.jpg?itok=ClNNCi52',
-	'https://gardneranimalcarecenter.com/wp-content/uploads/2019/10/puppy-1082141_1280-min-1080x675.jpg',
+Products.loaders = [
+	async () => {
+		snapInstance.on('afterStore', async ({ controller }, next) => {
+			controller.store.results.forEach((result) => (result.mappings.core.url = 'javascript:void(0);'));
+			await next();
+		});
+		await snapInstance.search();
+		return {
+			controller: snapInstance,
+		};
+	},
 ];
-export const Puppys = (props) => {
-	return (
-		<Carousel {...props}>
-			{puppyImgs.map((pup) => (
-				<img style={{ width: '150px' }} src={pup} />
-			))}
-		</Carousel>
-	);
-};
 
-export const Swatches = (props, { loaded: { controller } }) => {
+const icons = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'black', 'white'];
+export const Icons = (props) => {
 	return (
 		<Carousel {...props}>
-			{controller.store?.results.map((result) => {
+			{Object.keys(iconPaths).map((icon, index) => {
 				return (
-					<div style={{ maxWidth: '250px' }}>
-						<Result
-							result={result}
-							detailSlot={
-								<Carousel {...props} onCarouselClick={(e) => (result.mappings.core.imageUrl = e.target.src)}>
-									{puppyImgs.map((img) => (
-										<div style={{ position: 'relative', height: '25px', width: '25px' }}>
-											<img
-												src={img}
-												style={{
-													top: '0',
-													left: '0',
-													right: '0',
-													width: 'auto',
-													border: '2px solid white',
-													bottom: '0',
-													height: 'auto',
-													margin: 'auto',
-													display: 'inline',
-													opacity: '1',
-													padding: '2px',
-													position: 'absolute',
-													maxWidth: '100%',
-													maxHeight: '100%',
-												}}
-											/>
-										</div>
-									))}
-								</Carousel>
-							}
-						/>
+					<div style={{ margin: '0 auto', textAlign: 'center' }}>
+						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
+						<div style="text-align: center">{icon}</div>
 					</div>
 				);
 			})}
@@ -232,20 +175,50 @@ export const Swatches = (props, { loaded: { controller } }) => {
 	);
 };
 
-Products.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
+const colors = Array.from(Array(9).keys());
+export const Colors = (props) => {
+	return (
+		<Carousel {...props}>
+			{colors.map((number, index) => (
+				<div style={{ height: '100px', width: '100px', background: shiftColor('#3a23ad', (index + `111`).padStart(6, '0')), margin: '0 auto' }}></div>
+			))}
+		</Carousel>
+	);
+};
+Colors.args = {
+	pagination: true,
+	hideButtons: true,
+	loop: false,
+};
 
-Swatches.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
+function shiftColor(base, change) {
+	const colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
+
+	if (!base || !change) {
+		return '#000000';
+	}
+
+	if (!base.match(colorRegEx) || !change.match(colorRegEx)) {
+		return '#000000';
+	}
+
+	// remove '#'s
+	base = base.replace(/\#/g, '');
+	change = change.replace(/\#/g, '');
+
+	let newColor = '';
+	for (let i = 0; i < 3; i++) {
+		const basePiece = parseInt(base.substring(i * 2, i * 2 + 2), 16);
+		const changePiece = parseInt(change.substring(i * 2, i * 2 + 2), 16);
+		let newPiece: string | number;
+
+		newPiece = basePiece + changePiece;
+		newPiece = newPiece > 255 ? 255 : newPiece;
+
+		newPiece = newPiece.toString(16);
+		newPiece = newPiece.length < 2 ? '0' + newPiece : newPiece;
+		newColor += newPiece;
+	}
+
+	return `#${newColor}`;
+}
