@@ -8,7 +8,7 @@ configure({
 export abstract class AbstractStore {
 	protected controller;
 	public custom = {};
-	public loading = true;
+	public loading = false;
 	public loaded = false;
 	public config: any;
 

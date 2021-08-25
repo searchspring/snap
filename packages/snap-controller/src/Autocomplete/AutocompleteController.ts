@@ -10,6 +10,8 @@ import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, Con
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const TRENDING_TERMS_CACHE = 'ss-ac-trending-cache';
+const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
+const INPUT_DELAY = 200;
 
 const utils = { url: utilsURL };
 
@@ -37,9 +39,8 @@ type AutocompleteTrackMethods = {
 export class AutocompleteController extends AbstractController {
 	public type = 'autocomplete';
 	public store: AutocompleteStore;
-	config: AutocompleteControllerConfig;
-	storage: StorageStore;
-	listeners = {};
+	public config: AutocompleteControllerConfig;
+	public storage: StorageStore;
 
 	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
@@ -108,34 +109,33 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	async setFocused(inputElement?: HTMLInputElement): Promise<void> {
-		if (this.store.state.focusedInput === inputElement) {
-			return;
+		if (this.store.state.focusedInput !== inputElement) {
+			// fire focusChange event
+			try {
+				try {
+					await this.eventManager.fire('focusChange', {
+						controller: this,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'focusChange' middleware cancelled`);
+					} else {
+						this.log.error(`error in 'focusChange' middleware`);
+						throw err;
+					}
+				}
+			} catch (err) {
+				if (err) {
+					console.error(err);
+				}
+			}
 		}
 
 		this.store.state.focusedInput = inputElement;
 
-		if (inputElement?.value) {
-			inputElement.dispatchEvent(new Event('keyup'));
-		}
-
-		// fire visibilityChange event
-		try {
-			try {
-				await this.eventManager.fire('focusChange', {
-					controller: this,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'focusChange' middleware cancelled`);
-				} else {
-					this.log.error(`error in 'focusChange' middleware`);
-					throw err;
-				}
-			}
-		} catch (err) {
-			if (err) {
-				console.error(err);
-			}
+		if (inputElement && inputElement.value != this.store.state.input) {
+			console.log('changing url state');
+			this.urlManager.set('query', inputElement?.value).go();
 		}
 	}
 
@@ -179,9 +179,21 @@ export class AutocompleteController extends AbstractController {
 				e.stopPropagation();
 				this.setFocused(e.target as HTMLInputElement);
 			},
-			keyUp: (e: KeyboardEvent): void => {
-				const inputDelay = 200;
+			formSubmit: (e): void => {
+				const form = e.target;
+				const input = form.querySelector(`input[${INPUT_ATTRIBUTE}]`);
 
+				let query = input.value;
+				if (this.store.search.originalQuery) {
+					query = this.store.search.query.string;
+					addHiddenFormInput(form, 'oq', this.store.search.originalQuery.string);
+				}
+
+				// TODO expected spell correct behavior queryAssumption
+
+				input.value = query;
+			},
+			keyUp: (e: KeyboardEvent): void => {
 				if (e.isTrusted) {
 					this.store.state.locks.terms.unlock();
 					this.store.state.locks.facets.unlock();
@@ -208,7 +220,7 @@ export class AutocompleteController extends AbstractController {
 						if (value && this.store.state.input) {
 							this.urlManager.set({ query: this.store.state.input }).go();
 						}
-					}, inputDelay);
+					}, INPUT_DELAY);
 				}
 			},
 			timeoutDelay: undefined,
@@ -225,47 +237,38 @@ export class AutocompleteController extends AbstractController {
 		},
 	};
 
+	unbind(): void {
+		const inputs = document.querySelectorAll(`input[${INPUT_ATTRIBUTE}]`);
+		inputs?.forEach((input: HTMLInputElement) => {
+			input.removeEventListener('keyup', this.handlers.input.keyUp);
+			input.removeEventListener('keyup', this.handlers.input.enterKey);
+			input.removeEventListener('focus', this.handlers.input.focus);
+			input.form?.removeEventListener('submit', this.handlers.input.formSubmit);
+			document.removeEventListener('click', this.handlers.document.click);
+		});
+	}
+
 	async bind(): Promise<void> {
 		if (!this.initialized) {
 			await this.init();
 		}
 
-		const addHiddenFormInput = (form: HTMLFormElement, name: string, value: string) => {
-			const inputElem = document.createElement('input');
-			inputElem.type = 'hidden';
-			inputElem.name = name;
-			inputElem.value = value;
-			form.append(inputElem);
-		};
+		if (this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
+			this.searchTrending();
+		}
 
-		const formSubmitEvent = (e, input): void => {
-			const form = e.target;
-
-			let query = input.value;
-			if (!this.store.loading && this.store.search.originalQuery) {
-				query = this.store.search.query.string;
-				addHiddenFormInput(form, 'oq', this.store.search.originalQuery.string);
-			}
-
-			// TODO expected spell correct behavior queryAssumption
-
-			input.value = query;
-		};
+		this.unbind();
 
 		const inputs = document.querySelectorAll(this.config.selector);
 		inputs.forEach((input: HTMLInputElement) => {
-			input.removeEventListener('keyup', this.handlers.input.keyUp);
+			input.setAttribute(INPUT_ATTRIBUTE, '');
+
 			input.addEventListener('keyup', this.handlers.input.keyUp);
 
-			if (this.config.settings.initializeFromUrl) {
-				input.value = this.store.state.input || '';
+			if (this.config.settings.initializeFromUrl && !input.value && this.store.state.input) {
+				input.value = this.store.state.input;
 			}
 
-			if (document.activeElement === input) {
-				this.setFocused(input);
-			}
-
-			input.removeEventListener('focus', this.handlers.input.focus);
 			input.addEventListener('focus', this.handlers.input.focus);
 
 			const form = input.form;
@@ -273,7 +276,6 @@ export class AutocompleteController extends AbstractController {
 			let formActionUrl = this.config.action;
 
 			if (!form && this.config.action) {
-				input.removeEventListener('keyup', this.handlers.input.enterKey);
 				input.addEventListener('keyup', this.handlers.input.enterKey);
 			} else if (form) {
 				if (this.config.action) {
@@ -282,12 +284,7 @@ export class AutocompleteController extends AbstractController {
 					formActionUrl = form.action;
 				}
 
-				const inputPasser = (e) => {
-					formSubmitEvent(e, input);
-				};
-
-				form.removeEventListener('submit', inputPasser);
-				form.addEventListener('submit', inputPasser);
+				form.addEventListener('submit', this.handlers.input.formSubmit);
 			}
 
 			// set the root URL on urlManager
@@ -302,13 +299,12 @@ export class AutocompleteController extends AbstractController {
 					})
 				);
 			}
+
+			if (document.activeElement === input) {
+				this.setFocused(input);
+			}
 		});
 
-		if (this.config.settings?.trending?.limit > 0) {
-			this.searchTrending();
-		}
-
-		document.removeEventListener('click', this.handlers.document.click);
 		document.addEventListener('click', this.handlers.document.click);
 	}
 
@@ -425,4 +421,12 @@ export class AutocompleteController extends AbstractController {
 			}
 		}
 	};
+}
+
+function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) {
+	const inputElem = document.createElement('input');
+	inputElem.type = 'hidden';
+	inputElem.name = name;
+	inputElem.value = value;
+	form.append(inputElem);
 }
