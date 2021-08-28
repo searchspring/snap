@@ -7,7 +7,6 @@ export class StateStore {
 	};
 	focusedInput: HTMLInputElement = undefined;
 	input = '';
-	term = '';
 	url;
 
 	constructor(services) {
@@ -22,14 +21,12 @@ export class StateStore {
 			focusedInput: observable,
 			locks: observable,
 			input: observable,
-			term: observable,
 			reset: action,
 		});
 	}
 
 	reset(): void {
 		this.input = '';
-		this.term = '';
 		this.locks.terms.reset();
 		this.locks.facets.reset();
 	}
