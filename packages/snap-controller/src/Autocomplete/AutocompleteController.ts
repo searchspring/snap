@@ -6,10 +6,9 @@ import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
 
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
-const TRENDING_TERMS_CACHE = 'ss-ac-trending-cache';
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 const INPUT_DELAY = 200;
 
@@ -52,31 +51,40 @@ export class AutocompleteController extends AbstractController {
 		// get current search from url before detaching
 		if (this.config.settings.initializeFromUrl) {
 			this.store.state.input = this.urlManager.state.query;
+
+			// reset to force search on focus
+			// TODO: make a config setting for this
+			this.urlManager.reset().go();
 		}
 
 		// persist trending terms in local storage
 		this.storage = new StorageStore({
 			type: StorageType.SESSION,
-			key: TRENDING_TERMS_CACHE,
+			key: `ss-controller-${this.config.id}`,
 		});
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
-			search.controller.store.loading = true;
+		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+			ac.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
-			search.controller.store.loading = false;
-
 			// cancel search if no input or query doesn't match current urlState
-			if (search.response.autocomplete.query != search.controller.urlManager.state.query) {
+			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
 				return false;
 			}
+		});
+
+		// add 'afterStore' middleware
+		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+			await next();
+
+			ac.controller.store.loading = false;
 		});
 
 		// attach config plugins and event middleware
@@ -110,6 +118,7 @@ export class AutocompleteController extends AbstractController {
 
 	async setFocused(inputElement?: HTMLInputElement): Promise<void> {
 		if (this.store.state.focusedInput !== inputElement) {
+			this.store.state.focusedInput = inputElement;
 			// fire focusChange event
 			try {
 				try {
@@ -131,12 +140,7 @@ export class AutocompleteController extends AbstractController {
 			}
 		}
 
-		this.store.state.focusedInput = inputElement;
-
-		if (inputElement && inputElement.value != this.store.state.input) {
-			console.log('changing url state');
-			this.urlManager.set('query', inputElement?.value).go();
-		}
+		inputElement?.dispatchEvent(new Event('keyup'));
 	}
 
 	reset(): void {
@@ -175,6 +179,12 @@ export class AutocompleteController extends AbstractController {
 					window.location.href = newUrl;
 				}
 			},
+			escKey: (e: KeyboardEvent): void => {
+				if (e.keyCode == 27) {
+					(e.target as HTMLInputElement).blur();
+					this.setFocused();
+				}
+			},
 			focus: (e: FocusEvent): void => {
 				e.stopPropagation();
 				this.setFocused(e.target as HTMLInputElement);
@@ -194,12 +204,18 @@ export class AutocompleteController extends AbstractController {
 				input.value = query;
 			},
 			keyUp: (e: KeyboardEvent): void => {
-				if (e.isTrusted) {
-					this.store.state.locks.terms.unlock();
-					this.store.state.locks.facets.unlock();
+				// return focus on keyup if it was lost
+				if (e.isTrusted && this.store.state.focusedInput !== (e.target as HTMLInputElement)) {
+					this.setFocused(e.target as HTMLInputElement);
 				}
 
 				const value = (e.target as HTMLInputElement).value;
+
+				// prevent search when value is unchanged
+				if (this.store.state.input == value && this.store.loaded) {
+					return;
+				}
+
 				this.store.state.input = value;
 
 				if (this.config.settings.syncInputs) {
@@ -215,11 +231,11 @@ export class AutocompleteController extends AbstractController {
 					// TODO cancel any current requests?
 					this.store.reset();
 					this.urlManager.reset().go();
-				} else if (e.isTrusted || !this.store.loaded) {
+				} else {
 					this.handlers.input.timeoutDelay = setTimeout(() => {
-						if (value && this.store.state.input) {
-							this.urlManager.set({ query: this.store.state.input }).go();
-						}
+						this.store.state.locks.terms.unlock();
+						this.store.state.locks.facets.unlock();
+						this.urlManager.set({ query: this.store.state.input }).go();
 					}, INPUT_DELAY);
 				}
 			},
@@ -229,7 +245,7 @@ export class AutocompleteController extends AbstractController {
 			click: (e: MouseEvent): void => {
 				const inputs = document.querySelectorAll(this.config.selector);
 				if (Array.from(inputs).includes(e.target as Element)) {
-					this.setFocused(e.target as HTMLInputElement);
+					e.stopPropagation();
 				} else {
 					this.setFocused();
 				}
@@ -242,19 +258,16 @@ export class AutocompleteController extends AbstractController {
 		inputs?.forEach((input: HTMLInputElement) => {
 			input.removeEventListener('keyup', this.handlers.input.keyUp);
 			input.removeEventListener('keyup', this.handlers.input.enterKey);
+			input.removeEventListener('keyup', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
 			input.form?.removeEventListener('submit', this.handlers.input.formSubmit);
-			document.removeEventListener('click', this.handlers.document.click);
 		});
+		document.removeEventListener('click', this.handlers.document.click);
 	}
 
 	async bind(): Promise<void> {
 		if (!this.initialized) {
 			await this.init();
-		}
-
-		if (this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
-			this.searchTrending();
 		}
 
 		this.unbind();
@@ -270,6 +283,7 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			input.addEventListener('focus', this.handlers.input.focus);
+			input.addEventListener('keyup', this.handlers.input.escKey);
 
 			const form = input.form;
 
@@ -304,6 +318,10 @@ export class AutocompleteController extends AbstractController {
 				this.setFocused(input);
 			}
 		});
+
+		if (this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
+			this.searchTrending();
+		}
 
 		document.addEventListener('click', this.handlers.document.click);
 	}
