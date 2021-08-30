@@ -436,28 +436,29 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					)}
 
 					{!hideFacets &&
-						facetsToShow.length > 0 &&
 						(facetsSlot ? (
 							<div className="ss__autocomplete__facets">{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
 						) : (
-							<>
-								{facetsTitle && vertical ? (
-									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-										<h5>{facetsTitle}</h5>
-									</div>
-								) : null}
-								<div className="ss__autocomplete__facets">
-									{facetsTitle && !vertical ? (
+							facetsToShow.length > 0 && (
+								<>
+									{facetsTitle && vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 											<h5>{facetsTitle}</h5>
 										</div>
 									) : null}
-									{facetsToShow.map((facet) => (
-										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-									))}
-									{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
-								</div>
-							</>
+									<div className="ss__autocomplete__facets">
+										{facetsTitle && !vertical ? (
+											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+												<h5>{facetsTitle}</h5>
+											</div>
+										) : null}
+										{facetsToShow.map((facet) => (
+											<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+										))}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
+									</div>
+								</>
+							)
 						))}
 
 					{!hideContent ? (
