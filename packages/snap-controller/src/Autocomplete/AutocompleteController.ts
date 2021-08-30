@@ -154,7 +154,7 @@ export class AutocompleteController extends AbstractController {
 
 	handlers = {
 		input: {
-			enterKey: (e: KeyboardEvent): void => {
+			enterKey: async (e: KeyboardEvent): Promise<void> => {
 				if (e.keyCode == 13) {
 					const actionUrl = utils.url(this.config.action);
 					const input = e.target as HTMLInputElement;
@@ -175,6 +175,21 @@ export class AutocompleteController extends AbstractController {
 
 					// TODO expected spell correct behavior queryAssumption
 
+					try {
+						await this.eventManager.fire('beforeSubmit', {
+							controller: this,
+							input,
+						});
+					} catch (err) {
+						if (err?.message == 'cancelled') {
+							this.log.warn(`'beforeSubmit' middleware cancelled`);
+							return;
+						} else {
+							this.log.error(`error in 'beforeSubmit' middleware`);
+							console.error(err);
+						}
+					}
+
 					const newUrl = actionUrl.url();
 					window.location.href = newUrl;
 				}
@@ -189,9 +204,11 @@ export class AutocompleteController extends AbstractController {
 				e.stopPropagation();
 				this.setFocused(e.target as HTMLInputElement);
 			},
-			formSubmit: (e): void => {
+			formSubmit: async (e): Promise<void> => {
 				const form = e.target;
 				const input = form.querySelector(`input[${INPUT_ATTRIBUTE}]`);
+
+				e.preventDefault();
 
 				let query = input.value;
 				if (this.store.search.originalQuery) {
@@ -202,6 +219,23 @@ export class AutocompleteController extends AbstractController {
 				// TODO expected spell correct behavior queryAssumption
 
 				input.value = query;
+
+				try {
+					await this.eventManager.fire('beforeSubmit', {
+						controller: this,
+						input,
+					});
+				} catch (err) {
+					if (err?.message == 'cancelled') {
+						this.log.warn(`'beforeSubmit' middleware cancelled`);
+						return;
+					} else {
+						this.log.error(`error in 'beforeSubmit' middleware`);
+						console.error(err);
+					}
+				}
+
+				form.submit();
 			},
 			keyUp: (e: KeyboardEvent): void => {
 				// return focus on keyup if it was lost
