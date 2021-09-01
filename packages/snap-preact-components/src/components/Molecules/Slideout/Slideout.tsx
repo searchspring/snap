@@ -92,7 +92,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				)}
 
 				<div
-					className={classnames('ss__slideout', className)}
+					className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })}
 					css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, slideDirection, style })}
 				>
 					{cloneWithProps(children, { toggleActive, active: isActive })}
