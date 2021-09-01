@@ -56,10 +56,8 @@ export class Term {
 			this.active = true;
 			rootState.locks.terms.lock();
 			rootState.locks.facets.unlock();
-			rootState.term = this.value;
-			rootState.url = rootState.url.set('query', this.value);
 
-			services?.urlManager.set({ query: this.value }).go();
+			this.url?.set({ query: this.value }).go();
 		};
 
 		makeObservable(this, {

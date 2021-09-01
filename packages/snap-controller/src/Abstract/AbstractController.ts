@@ -16,6 +16,7 @@ import type { ControllerServices, ControllerConfig, Attachments } from '../types
 
 const SS_DEV_COOKIE = 'ssdev';
 export abstract class AbstractController {
+	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
 	public client; //todo: add typing
@@ -85,6 +86,7 @@ export abstract class AbstractController {
 
 		window.searchspring.controller[config.id] = this;
 
+		this.id = config.id;
 		this.config = config;
 		this.client = client;
 		this.store = store;
@@ -219,9 +221,9 @@ export abstract class AbstractController {
 		}
 
 		// attach event middleware
-		if (attachments?.on) {
-			Object.keys(attachments.on).forEach((eventName) => {
-				const eventMiddleware = attachments.on[eventName];
+		if (attachments?.middleware) {
+			Object.keys(attachments.middleware).forEach((eventName) => {
+				const eventMiddleware = attachments.middleware[eventName];
 				let middlewareArray;
 				if (Array.isArray(eventMiddleware)) {
 					middlewareArray = eventMiddleware;

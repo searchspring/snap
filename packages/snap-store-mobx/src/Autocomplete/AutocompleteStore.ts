@@ -32,6 +32,7 @@ export class AutocompleteStore extends AbstractStore {
 
 		this.state = new StateStore(services);
 		this.storage = new StorageStore();
+		this.trending = [];
 
 		this.reset();
 
@@ -94,6 +95,11 @@ export class AutocompleteStore extends AbstractStore {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 
+		// set the query to match the actual queried term and not the input query
+		if (data.search) {
+			this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query);
+		}
+
 		// only run if we want to update the terms (not locked)
 		if (!this.state.locks.terms.locked) {
 			this.terms = new TermStore(
@@ -105,13 +111,9 @@ export class AutocompleteStore extends AbstractStore {
 				},
 				this.state
 			);
-		}
 
-		// set state url to match active term (used for setting from input text)
-		const activeTerm = this.terms?.filter((term) => term.active)[0];
-		if (activeTerm && this.state.term != activeTerm.value) {
-			this.state.term = activeTerm.value;
-			this.state.url = this.state.url.set('query', activeTerm.value);
+			// only lock if there was data
+			data.autocomplete && this.state.locks.terms.lock();
 		}
 
 		this.merchandising = new MerchandisingStore(this.services, data.merchandising);
@@ -125,7 +127,7 @@ export class AutocompleteStore extends AbstractStore {
 		this.filters = new FilterStore(this.services, data.filters, this.meta);
 		this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising);
 
-		if (this.results.length === 0 || this.terms.filter((term) => term.active).length) {
+		if ((this.results.length === 0 && !this.trending.filter((term) => term.active).length) || this.terms.filter((term) => term.active).length) {
 			// if a trending term was selected and then a subsequent search yields no results, reset trending terms to remove active state
 			// OR if any terms are active, also reset to ensure only a single term or trending term is active
 			this.resetTrending();

@@ -19,6 +19,12 @@ const abstractConfig = {
 ## Instantiate
 `AbstractController` cannot be instantiated and must be extended by a subclass.
 
+## id
+Attribute set by the controller config.
+
+## type
+Attribute set by the extending class.
+
 ## search
 This is an abstract method that must be defined in the subclass.
 
@@ -72,7 +78,7 @@ const paramPlugin = (controller, ...params) => {
 }
 
 controller.use({
-	on: {
+	middleware: {
 		init: [ initMiddleware ]
 	},
 	plugins: [

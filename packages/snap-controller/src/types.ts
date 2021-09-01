@@ -41,6 +41,10 @@ export type AfterStoreObj = {
 // Abstract
 export interface ControllerConfig {
 	id: string;
+	middleware?: {
+		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+	};
+	plugins?: PluginGrouping[];
 }
 
 export type ControllerServices = {
