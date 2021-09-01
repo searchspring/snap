@@ -19,7 +19,8 @@ declare global {
 
 export type NextEvent = Next;
 
-export type PluginFunction = (func: (cntrlr: AbstractController) => Promise<void>) => Promise<void>;
+export type PluginFunction = (cntrlr: AbstractController, ...args) => Promise<void>;
+export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
 
 export type BeforeSearchObj = {
 	controller: AbstractController;
@@ -40,6 +41,10 @@ export type AfterStoreObj = {
 // Abstract
 export interface ControllerConfig {
 	id: string;
+	middleware?: {
+		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+	};
+	plugins?: PluginGrouping[];
 }
 
 export type ControllerServices = {
@@ -56,7 +61,7 @@ export type Attachments = {
 	on?: {
 		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
 	};
-	plugin?: PluginFunction | PluginFunction[];
+	plugins?: PluginGrouping[];
 	[any: string]: unknown;
 };
 

@@ -23,9 +23,13 @@ export type UrlStateSort = {
 
 export type UrlState = {
 	page?: number;
+	// pageSize?: number;
 	query?: string;
+	// rq?: string;
+	// oq?: string;
 	filter?: UrlStateFilter;
 	sort?: UrlStateSort | Array<UrlStateSort>;
+	// tag?: string;
 	[any: string]: unknown;
 };
 
@@ -38,10 +42,15 @@ export interface Translator {
 
 	bindExternalEvents?(update: () => void): void;
 
-	go(url: string): void;
+	go(url: string, config?: { [any: string]: unknown }): void;
 }
 
 export interface TranslatorConfig {
 	queryParameter?: string;
 	urlRoot?: string;
+}
+
+export enum ParamLocationType {
+	HASH = 'hash',
+	QUERY = 'query',
 }

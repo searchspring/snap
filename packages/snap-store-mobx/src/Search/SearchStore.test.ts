@@ -16,7 +16,7 @@ describe('Search Store', () => {
 	it('returns correct initial state', () => {
 		const searchStore = new SearchStore({}, services);
 
-		expect(searchStore.loading).toBe(true);
+		expect(searchStore.loading).toBe(false);
 
 		expect(searchStore.meta).toBeDefined();
 		expect(searchStore.meta).toStrictEqual({});

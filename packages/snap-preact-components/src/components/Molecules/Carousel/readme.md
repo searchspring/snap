@@ -1,46 +1,29 @@
-# Recommendation
+# Carousel
 
-Renders a carousel of product recommendations, built using the Carousel Component.
-
-If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
-
-Any modification to the results array and data are recommended to be made using an `afterSearch` and/or `afterStore` event via the Controller instead of making modifications in the component.
-
+Renders a carousel of slides using children, built with [Swiper](https://swiperjs.com/)
 
 ## Sub-components
-- Carousel
-- Result (default)
 - Icon
 
 ## Usage
 
 Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
 
-### controller
-The required `controller` prop specifies a reference to the RecommendationController
-
 ```jsx
-<Recommendation controller={controller} />
+<Carousel>{children}<Carousel/>
 ```
 ### loop
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Recommendation controller={controller} loop={true} />
-```
-
-### title
-The `title` prop specifies the carousel title
-
-```jsx
-<Recommendation controller={controller} title={'Recommended Products'} />
+<Carousel loop>{children}<Carousel/>
 ```
 
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 
 ```jsx
-<Recommendation controller={controller} pagination={true} />
+<Carousel pagination>{children}<Carousel/>
 ```
 
 ### hideButtons
@@ -54,14 +37,42 @@ The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
 The `prevButton` prop specifies the previous button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Recommendation controller={controller} prevButton={'<'} />
+<Carousel prevButton={'<'}>{children}<Carousel/>
 ```
 
 ### nextButton
 The `nextButton` prop specifies the next button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Recommendation controller={controller} nextButton={'>'} />
+<Carousel nextButton={'>'}>{children}<Carousel/>
+```
+
+### onPrevButtonClick
+The `onPrevButtonClick` prop can be used to handle click events on the prevButton.
+
+```jsx
+<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onNextButtonClick
+The `onNextButtonClick` prop can be used to handle click events on the prevButton.
+
+```jsx
+<Carousel onNextButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onClick
+The `onClick` prop can be used to handle click events on the swiper component.
+
+```jsx
+<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
+```
+
+### onInit
+The `onInit` prop can be used to tie into the initialization event for swiper.
+
+```jsx
+<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
 ```
 
 ### breakpoints
@@ -78,7 +89,7 @@ The default configuration contains the following properties, however any [Swiper
 `spaceBetween` - spacing between each product
 
 ```typescript
-const defaultRecommendationBreakpoints = {
+const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -108,5 +119,5 @@ const defaultRecommendationBreakpoints = {
 ```
 
 ```jsx
-<Recommendation controller={controller} breakpoints={defaultRecommendationBreakpoints} />
+<Carousel breakpoints={defaultCarouselBreakpoints}>{children}<Carousel/>
 ```

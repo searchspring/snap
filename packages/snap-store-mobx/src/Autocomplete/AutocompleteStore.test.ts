@@ -23,7 +23,7 @@ describe('Autocomplete Store', () => {
 	it('returns correct initial state', () => {
 		const autocompleteStore = new AutocompleteStore({}, services);
 
-		expect(autocompleteStore.loading).toBe(true);
+		expect(autocompleteStore.loading).toBe(false);
 
 		expect(autocompleteStore.meta).toBeDefined();
 		expect(autocompleteStore.meta).toStrictEqual({});

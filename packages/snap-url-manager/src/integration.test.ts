@@ -1,5 +1,6 @@
 import { UrlManager } from './UrlManager/UrlManager';
 import { QueryStringTranslator, UrlTranslator } from './Translators';
+import { ParamLocationType } from './types';
 
 let url = '';
 
@@ -313,8 +314,16 @@ describe('UrlManager Integration Tests', () => {
 
 		it('can be given a root URL and queryParameter via config', () => {
 			url = 'https://somesite.com';
+			const translatorConfig = {
+				urlRoot: 'https://somesite.com/search',
+				parameters: {
+					core: {
+						query: { name: 'query' },
+					},
+				},
+			};
 
-			const urlManager = new UrlManager(new MockUrlTranslator({ urlRoot: 'https://somesite.com/search', queryParameter: 'query' }));
+			const urlManager = new UrlManager(new MockUrlTranslator(translatorConfig));
 			expect(urlManager.href).toBe('https://somesite.com/search');
 
 			const search = urlManager.set('query', 'the thing');
@@ -411,15 +420,20 @@ describe('UrlManager Integration Tests', () => {
 		});
 
 		it('supports customization of parameters', () => {
-			const config = {
-				queryParameter: 'search',
+			const translatorConfig = {
 				urlRoot: 'https://www.website.com/search.html',
 				parameters: {
-					hash: ['store'],
-					search: ['view'],
+					core: {
+						query: { name: 'search' },
+					},
+					custom: {
+						store: { type: ParamLocationType.HASH },
+						view: { type: ParamLocationType.QUERY },
+					},
 				},
 			};
-			const translator = new UrlManager(new MockUrlTranslator(config));
+
+			const translator = new UrlManager(new MockUrlTranslator(translatorConfig));
 
 			const hashAndQuery = translator.set({
 				query: 'the query',
@@ -428,11 +442,13 @@ describe('UrlManager Integration Tests', () => {
 				view: ['search'],
 			});
 
-			expect(hashAndQuery.href).toBe(config.urlRoot + '?search=the%20query&view=search#/sort:price:asc/store:products');
+			expect(hashAndQuery.href).toBe(translatorConfig.urlRoot + '?search=the%20query&view=search#/sort:price:asc/store:products');
 
 			const hashAndQueryModifications = hashAndQuery.merge('store', 'articles').set('view', 'spring');
 
-			expect(hashAndQueryModifications.href).toBe(config.urlRoot + '?search=the%20query&view=spring#/sort:price:asc/store:products/store:articles');
+			expect(hashAndQueryModifications.href).toBe(
+				translatorConfig.urlRoot + '?search=the%20query&view=spring#/sort:price:asc/store:products/store:articles'
+			);
 		});
 
 		it('supports existing hash and query params and remembers which they are', () => {

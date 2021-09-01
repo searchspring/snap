@@ -1,7 +1,7 @@
 import { Translator, UrlState } from '../types';
 
 import Immutable from 'seamless-immutable';
-import { ImmutableObject } from 'seamless-immutable';
+import type { ImmutableObject } from 'seamless-immutable';
 
 type omission = {
 	path: Array<string>;
@@ -30,6 +30,7 @@ export class UrlManager {
 	private translator: Translator;
 
 	private urlState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
+	private globalState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private localState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 	private mergedState: ImmutableObject<UrlState> = Immutable({}) as ImmutableObject<UrlState>;
 
@@ -40,12 +41,14 @@ export class UrlManager {
 	constructor(
 		translator: Translator,
 		public linker?: (urlManager: UrlManager) => Record<string, unknown>,
+		globalState?: UrlState | ImmutableObject<UrlState>,
 		localState?: UrlState | ImmutableObject<UrlState>,
 		watcherPool?: WatcherPool,
 		private omissions: Array<omission> = [],
 		public detached?: { url: string }
 	) {
 		this.localState = Immutable(localState || {});
+		this.globalState = Immutable(globalState || {});
 
 		this.translator = translator;
 
@@ -131,7 +134,11 @@ export class UrlManager {
 			return this.without(state, om.path, om.values);
 		}, Immutable(this.translator.deserialize(this.getTranslatorUrl())));
 
-		this.mergedState = this.urlState.merge(this.localState, {
+		this.mergedState = this.globalState.merge(this.urlState, {
+			deep: true,
+			merger: arrayConcatMerger,
+		});
+		this.mergedState = this.mergedState.merge(this.localState, {
 			deep: true,
 			merger: arrayConcatMerger,
 		});
@@ -157,7 +164,7 @@ export class UrlManager {
 			this.omissions.concat(path.length ? { path } : Object.keys(this.urlState).map((key) => ({ path: [key] })))
 		);
 
-		return new UrlManager(this.translator, this.linker, newState, this.watcherPool, omissions, this.detached);
+		return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, omissions, this.detached);
 	}
 
 	merge(...args: Array<unknown>): UrlManager {
@@ -189,7 +196,7 @@ export class UrlManager {
 			  })
 			: this.localState.merge(state, { deep: true, merger: arrayConcatMerger });
 
-		return new UrlManager(this.translator, this.linker, newState, this.watcherPool, this.omissions, this.detached);
+		return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, this.omissions, this.detached);
 	}
 
 	remove(_path: Array<string> | string, values?: Array<any> | any): UrlManager {
@@ -199,13 +206,14 @@ export class UrlManager {
 		const without = this.without(this.localState, path, values);
 		const omissions = removeArrayDuplicates(this.omissions.concat({ path, values: values as Array<any> }));
 
-		return new UrlManager(this.translator, this.linker, without, this.watcherPool, omissions, this.detached);
+		return new UrlManager(this.translator, this.linker, this.globalState, without, this.watcherPool, omissions, this.detached);
 	}
 
 	reset(): UrlManager {
 		return new UrlManager(
 			this.translator,
 			this.linker,
+			this.globalState,
 			{},
 			this.watcherPool,
 			Object.keys(this.urlState).map((k) => ({ path: [k] })),
@@ -221,11 +229,16 @@ export class UrlManager {
 		return new UrlManager(
 			new (Object.getPrototypeOf(this.translator).constructor)(config),
 			this.linker,
+			this.globalState,
 			this.localState,
 			this.watcherPool,
 			this.omissions,
 			this.detached
 		);
+	}
+
+	withGlobals(globals: UrlState | ImmutableObject<UrlState>): UrlManager {
+		return new UrlManager(this.translator, this.linker, globals, this.localState, this.watcherPool, this.omissions, this.detached);
 	}
 
 	getTranslatorConfig(): Record<string, unknown> {
@@ -236,18 +249,18 @@ export class UrlManager {
 		return this.translator.serialize(this.state);
 	}
 
-	go(): void {
+	go(config?: { [any: string]: unknown }): void {
 		if (this.detached) {
 			this.detached.url = this.href;
 		} else {
-			this.translator.go(this.href);
+			this.translator.go(this.href, config);
 		}
 
 		this.watcherPool.notify();
 	}
 
 	detach(reset = false): UrlManager {
-		return new UrlManager(this.translator, this.linker, this.localState, new WatcherPool(), this.omissions, {
+		return new UrlManager(this.translator, this.linker, this.globalState, this.localState, new WatcherPool(), this.omissions, {
 			url: reset ? '' : this.getTranslatorUrl(),
 		});
 	}

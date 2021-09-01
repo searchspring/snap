@@ -1,7 +1,8 @@
 import { LogMode } from '@searchspring/snap-logger';
 import { DomTargeter, cookies } from '@searchspring/snap-toolbox';
 
-import type { ControllerServices, ControllerConfig, Attachments } from '../types';
+import { URL } from '../utils/URL';
+
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
@@ -10,10 +11,12 @@ import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
-import { URL } from '../utils/URL';
+
+import type { ControllerServices, ControllerConfig, Attachments } from '../types';
 
 const SS_DEV_COOKIE = 'ssdev';
 export abstract class AbstractController {
+	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
 	public client; //todo: add typing
@@ -83,6 +86,7 @@ export abstract class AbstractController {
 
 		window.searchspring.controller[config.id] = this;
 
+		this.id = config.id;
 		this.config = config;
 		this.client = client;
 		this.store = store;
@@ -188,8 +192,8 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async plugin(func: (cntrlr: AbstractController) => Promise<void>): Promise<void> {
-		await func(this);
+	public async plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): Promise<void> {
+		await func(this, ...args);
 	}
 
 	public on<T>(event: string, ...func: Middleware<T>[]): void {
@@ -197,24 +201,29 @@ export abstract class AbstractController {
 	}
 
 	public use(attachments: Attachments): void {
-		// TODO: ensure config middleware is proper type
-		// attach middleware
-		if (attachments?.plugin) {
-			let pluginArray;
-			if (Array.isArray(attachments.plugin)) {
-				pluginArray = attachments.plugin;
-			} else {
-				pluginArray = [attachments.plugin];
-			}
+		// attach plugins
+		if (attachments?.plugins) {
+			try {
+				if (!Array.isArray(attachments?.plugins)) {
+					throw 'invalid format';
+				}
 
-			pluginArray.forEach((plugin) => {
-				this.plugin(plugin);
-			});
+				attachments?.plugins.forEach((plugin) => {
+					if (!Array.isArray(plugin)) {
+						throw 'invalid format';
+					}
+					const [func, ...args] = plugin;
+					this.plugin(func, ...args);
+				});
+			} catch (err) {
+				this.log.warn('plugins not attached - use format [func, ...args?][]');
+			}
 		}
 
-		if (attachments?.on) {
-			Object.keys(attachments.on).forEach((eventName) => {
-				const eventMiddleware = attachments.on[eventName];
+		// attach event middleware
+		if (attachments?.middleware) {
+			Object.keys(attachments.middleware).forEach((eventName) => {
+				const eventMiddleware = attachments.middleware[eventName];
 				let middlewareArray;
 				if (Array.isArray(eventMiddleware)) {
 					middlewareArray = eventMiddleware;
