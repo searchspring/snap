@@ -9,14 +9,13 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {
-	price: ({ theme, style }) =>
+	price: ({ theme }) =>
 		css({
 			color: theme.colors?.primary,
 			'&.ss__price--strike': {
 				textDecoration: 'line-through',
 				color: 'initial',
 			},
-			...style,
 		}),
 };
 
@@ -68,7 +67,10 @@ export function Price(properties: PriceProps): JSX.Element {
 		<>{formattedPrice}</>
 	) : (
 		<CacheProvider>
-			<span css={!disableStyles && CSS.price({ theme, style })} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
+			<span
+				css={!disableStyles ? [CSS.price({ theme }), style] : [style]}
+				className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}
+			>
 				{formattedPrice}
 			</span>
 		</CacheProvider>

@@ -15,7 +15,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	carousel: ({ theme, style }) =>
+	carousel: ({ theme }) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
@@ -67,7 +67,6 @@ const CSS = {
 					background: theme?.colors?.primary || '#000',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -158,7 +157,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			<CacheProvider>
 				<div
 					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.carousel({ theme, style })}
+					css={!disableStyles ? [CSS.carousel({ theme }), style] : [style]}
 					className={classnames('ss__carousel', className)}
 				>
 					{!hideButtons && (

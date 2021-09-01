@@ -12,7 +12,7 @@ import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection, style }) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -22,14 +22,13 @@ const CSS = {
 			bottom: slideDirection == 'bottom' ? (isActive ? '0' : `-100vh`) : 'initial',
 			top: slideDirection == 'top' ? (isActive ? '0' : `-100vh`) : slideDirection == 'bottom' ? 'initial' : '0',
 			height: '100%',
-			zIndex: '10004',
+			ZIndex: '10004',
 			width: '90%',
 			maxWidth: width,
 			padding: '10px',
 			background: '#fff',
 			boxSizing: 'border-box',
 			overflowY: 'auto',
-			...style,
 		}),
 };
 
@@ -93,7 +92,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 				<div
 					className={classnames('ss__slideout', className)}
-					css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, slideDirection, style })}
+					css={!disableStyles ? [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style] : [style]}
 				>
 					{cloneWithProps(children, { toggleActive, active: isActive })}
 				</div>

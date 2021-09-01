@@ -14,7 +14,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, theme, style }) =>
+	select: ({ color, backgroundColor, borderColor, label, selection, theme }) =>
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -29,7 +29,7 @@ const CSS = {
 			},
 			'& .ss__select__select': {
 				position: 'relative',
-				zIndex: '10000',
+				ZIndex: '10000',
 				backgroundColor: backgroundColor || '#fff',
 				listStyle: 'none',
 				padding: '0',
@@ -47,12 +47,8 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
-	native: ({ style }) =>
-		css({
-			...style,
-		}),
+	native: () => css({}),
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
@@ -186,17 +182,19 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			<CacheProvider>
 				<div
 					css={
-						!disableStyles && native
-							? CSS.native({ style })
-							: CSS.select({
-									color,
-									backgroundColor,
-									borderColor,
-									label,
-									selection: selection || '',
-									theme,
+						!disableStyles && !native
+							? [
+									CSS.select({
+										color,
+										backgroundColor,
+										borderColor,
+										label,
+										selection: selection || '',
+										theme,
+									}),
 									style,
-							  })
+							  ]
+							: [style]
 					}
 					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
 				>

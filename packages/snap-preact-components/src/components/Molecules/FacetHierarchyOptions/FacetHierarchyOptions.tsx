@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, HierarchyFacetValue } from '../../../types';
 
 const CSS = {
-	hierarchy: ({ theme, style }) =>
+	hierarchy: ({ theme }) =>
 		css({
 			'& .ss__facet-hierarchy-options__option': {
 				display: 'flex',
@@ -46,7 +46,6 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
 };
 
@@ -68,7 +67,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.hierarchy({ theme, style })} className={classnames('ss__facet-hierarchy-options', className)}>
+				<div css={!disableStyles ? [CSS.hierarchy({ theme }), style] : [style]} className={classnames('ss__facet-hierarchy-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames(

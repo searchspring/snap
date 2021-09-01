@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 
 const CSS = {
-	list: ({ theme, style, hideCheckbox }) =>
+	list: ({ theme, hideCheckbox }) =>
 		css({
 			'& .ss__facet-list-options__option': {
 				display: 'flex',
@@ -34,7 +34,6 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
 };
 
@@ -71,7 +70,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.list({ theme, style, hideCheckbox })} className={classnames('ss__facet-list-options', className)}>
+				<div css={!disableStyles ? [CSS.list({ theme, hideCheckbox }), style] : [style]} className={classnames('ss__facet-list-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}

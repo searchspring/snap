@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
 const CSS = {
-	grid: ({ columns, gapSize, theme, style }) =>
+	grid: ({ columns, gapSize, theme }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -49,7 +49,6 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
 };
 
@@ -73,7 +72,10 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.grid({ columns, gapSize, theme, style })} className={classnames('ss__facet-grid-options', className)}>
+				<div
+					css={!disableStyles ? [CSS.grid({ columns, gapSize, theme }), style] : [style]}
+					className={classnames('ss__facet-grid-options', className)}
+				>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}

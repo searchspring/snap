@@ -12,15 +12,16 @@ import { ComponentProps, Filter as FilterType } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 const CSS = {
-	filterSummary: ({ style }) =>
+	filterSummary: () =>
 		css({
+			'&:hover': { color: 'white' },
+
 			'& .ss__filter-summary__filter': {
 				margin: '5px 10px 5px 0',
 			},
 			'& .ss__filter-summary__title': {
 				fontSize: '1.2em',
 			},
-			...style,
 		}),
 };
 
@@ -79,7 +80,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 
 	return filters?.length ? (
 		<CacheProvider>
-			<div css={!disableStyles && CSS.filterSummary({ style })} className={classnames('ss__filter-summary', className)}>
+			<div css={!disableStyles ? [CSS.filterSummary(), style] : [style]} className={classnames('ss__filter-summary', className)}>
 				<div className="ss__filter-summary__title">{title}</div>
 
 				{filters.map((filter) => (

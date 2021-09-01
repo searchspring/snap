@@ -17,7 +17,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	facet: ({ color, theme, style }) =>
+	facet: ({ color, theme }) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
@@ -44,7 +44,6 @@ const CSS = {
 					marginRight: '8px',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -216,7 +215,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div
-				css={!disableStyles && CSS.facet({ color, theme, style })}
+				css={!disableStyles ? [CSS.facet({ color, theme }), style] : [style]}
 				className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}
 			>
 				<Dropdown

@@ -128,7 +128,6 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement.classList.length).toBe(2);
-			expect(buttonElement.classList[1]).toMatch(/^ss-0/);
 			expect(buttonElement).toBeInTheDocument();
 		});
 

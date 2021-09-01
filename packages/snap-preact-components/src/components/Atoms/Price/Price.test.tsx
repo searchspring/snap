@@ -67,7 +67,6 @@ describe('Price Component', () => {
 		const rendered = render(<Price {...args} />);
 		const priceElement = rendered.container.querySelector('.ss__price');
 		expect(priceElement.className).not.toMatch(/formatted-/);
-		expect(priceElement.classList[1]).toMatch(/^ss-0/);
 	});
 
 	it('can custom className', () => {

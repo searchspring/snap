@@ -12,12 +12,12 @@ import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
-	dropdown: ({ disableOverlay, style }) =>
+	dropdown: ({ disableOverlay }) =>
 		css({
 			position: 'relative',
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__content': {
-					position: `${disableOverlay ? 'initial' : null}`,
+					position: `${disableOverlay ? 'initial' : null}` as 'initial',
 					visibility: 'visible',
 					opacity: 1,
 				},
@@ -33,7 +33,6 @@ const CSS = {
 				top: 'auto',
 				left: 0,
 			},
-			...style,
 		}),
 };
 
@@ -98,7 +97,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div
-				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
+				css={!disableStyles ? [CSS.dropdown({ disableOverlay }), style] : [style]}
 				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
 				ref={innerRef}
 			>

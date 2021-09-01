@@ -12,10 +12,7 @@ import { ComponentProps } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 const CSS = {
-	facets: ({ style }) =>
-		css({
-			...style,
-		}),
+	facets: () => css({}),
 };
 
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
@@ -50,7 +47,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	return (
 		facets?.length > 0 && (
 			<CacheProvider>
-				<div className={classnames('ss__facets', className)} css={!disableStyles && CSS.facets({ style })}>
+				<div className={classnames('ss__facets', className)} css={!disableStyles ? [CSS.facets(), style] : [style]}>
 					{facets.map((facet) => (
 						<Facet {...subProps.facet} facet={facet} />
 					))}

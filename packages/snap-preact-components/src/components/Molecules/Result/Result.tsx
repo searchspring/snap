@@ -15,7 +15,7 @@ import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 
 const CSS = {
-	result: ({ style }) =>
+	result: () =>
 		css({
 			'&.ss__result--grid': {
 				display: 'flex',
@@ -68,7 +68,6 @@ const CSS = {
 					marginBottom: '10px',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -139,7 +138,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	return (
 		core && (
 			<CacheProvider>
-				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+				<article css={!disableStyles ? [CSS.result(), style] : [style]} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 					<div className="ss__result__image-wrapper">
 						<a
 							href={core.url}

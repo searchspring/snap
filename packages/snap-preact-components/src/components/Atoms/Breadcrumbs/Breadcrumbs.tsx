@@ -9,7 +9,7 @@ import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	breadcrumbs: ({ style }) =>
+	breadcrumbs: () =>
 		css({
 			'& .ss__breadcrumbs__crumbs': {
 				padding: '0',
@@ -18,7 +18,6 @@ const CSS = {
 				padding: '0 5px',
 				display: 'inline-block',
 			},
-			...style,
 		}),
 };
 
@@ -39,7 +38,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 
 	return (
 		<CacheProvider>
-			<div css={!disableStyles && CSS.breadcrumbs({ style })} className={classnames('ss__breadcrumbs', className)}>
+			<div css={!disableStyles ? [CSS.breadcrumbs(), style] : [style]} className={classnames('ss__breadcrumbs', className)}>
 				<ul className="ss__breadcrumbs__crumbs">
 					{data
 						.map<React.ReactNode>((crumb) => (

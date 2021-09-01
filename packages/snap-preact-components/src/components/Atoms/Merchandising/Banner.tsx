@@ -8,13 +8,12 @@ import { BannerContent, BannerType, ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	banner: ({ style }) =>
+	banner: () =>
 		css({
 			'& iframe, img': {
 				maxWidth: '100%',
 				height: 'auto',
 			},
-			...style,
 		}),
 };
 
@@ -45,7 +44,7 @@ export function Banner(properties: BannerProps): JSX.Element {
 			<CacheProvider>
 				<div
 					className={classnames('ss__banner', `ss__banner--${type}`, className)}
-					css={!disableStyles && CSS.banner({ style })}
+					css={!disableStyles ? [CSS.banner(), style] : [style]}
 					dangerouslySetInnerHTML={{
 						__html: content[props.type].join(''),
 					}}

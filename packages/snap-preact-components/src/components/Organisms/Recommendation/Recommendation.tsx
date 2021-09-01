@@ -19,10 +19,7 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: ({ theme, style }) =>
-		css({
-			...style,
-		}),
+	recommendation: ({ theme }) => css({}),
 };
 
 export const defaultRecommendationBreakpoints = {
@@ -169,7 +166,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			<CacheProvider>
 				<div
 					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.recommendation({ theme, style })}
+					css={!disableStyles ? [CSS.recommendation({ theme }), style] : [style]}
 					className={classnames('ss__recommendation', className)}
 				>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}

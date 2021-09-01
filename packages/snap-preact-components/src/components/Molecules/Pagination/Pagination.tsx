@@ -11,7 +11,7 @@ import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	pagination: ({ theme, style }) =>
+	pagination: ({ theme }) =>
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
@@ -26,7 +26,6 @@ const CSS = {
 					backgroundColor: theme.colors?.hover || '#f8f8f8',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -87,7 +86,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	return (
 		store?.totalResults && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.pagination({ theme, style })} className={classnames('ss__pagination', className)}>
+				<div css={!disableStyles ? [CSS.pagination({ theme }), style] : [style]} className={classnames('ss__pagination', className)}>
 					<>
 						{/* Prev */}
 						{store.previous && !hidePrev && (

@@ -9,12 +9,11 @@ import { ComponentProps } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
 const CSS = {
-	icon: ({ color, height, width, size, theme, style }) =>
+	icon: ({ color, height, width, size, theme }) =>
 		css({
 			fill: color || theme.colors?.primary,
 			width: width || size,
 			height: height || size,
-			...style,
 		}),
 };
 
@@ -42,15 +41,18 @@ export function Icon(properties: IconProps): JSX.Element {
 			<CacheProvider>
 				<svg
 					css={
-						!disableStyles &&
-						CSS.icon({
-							color,
-							width,
-							height,
-							size,
-							theme,
-							style,
-						})
+						!disableStyles
+							? [
+									CSS.icon({
+										color,
+										width,
+										height,
+										size,
+										theme,
+									}),
+									style,
+							  ]
+							: [style]
 					}
 					className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
 					viewBox={viewBox}

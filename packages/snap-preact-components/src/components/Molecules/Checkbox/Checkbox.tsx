@@ -12,7 +12,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	checkbox: ({ size, color, theme, style }) =>
+	checkbox: ({ size, color, theme }) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -28,12 +28,8 @@ const CSS = {
 				width: `calc(${size} - 30%)`,
 				height: `calc(${size} - 30%)`,
 			},
-			...style,
 		}),
-	native: ({ style }) =>
-		css({
-			...style,
-		}),
+	native: () => css({}),
 };
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
@@ -97,7 +93,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		<CacheProvider>
 			{native ? (
 				<input
-					css={!disableStyles && CSS.native({ style })}
+					css={!disableStyles ? [CSS.native(), style] : [style]}
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					type="checkbox"
 					onClick={(e) => clickFunc(e)}
@@ -106,7 +102,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 				/>
 			) : (
 				<span
-					css={!disableStyles && CSS.checkbox({ size, color, theme, style })}
+					css={!disableStyles ? [CSS.checkbox({ size, color, theme }), style] : [style]}
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 				>

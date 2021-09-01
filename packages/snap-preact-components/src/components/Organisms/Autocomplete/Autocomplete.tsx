@@ -357,19 +357,23 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			<CacheProvider>
 				<div
 					css={
-						!disableStyles &&
-						CSS.Autocomplete({
-							inputViewportOffsetBottom,
-							hideFacets,
-							horizontalTerms,
-							noResults: search?.query?.string && results.length === 0,
-							contentSlotExists: contentSlot ? true : false,
-							viewportMaxHeight,
-							vertical,
-							width,
-							style,
-							theme,
-						})
+						!disableStyles
+							? [
+									CSS.Autocomplete({
+										inputViewportOffsetBottom,
+										hideFacets,
+										horizontalTerms,
+										noResults: search?.query?.string && results.length === 0,
+										contentSlotExists: contentSlot ? true : false,
+										viewportMaxHeight,
+										vertical,
+										width,
+										style,
+										theme,
+									}),
+									style,
+							  ]
+							: [style]
 					}
 					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}

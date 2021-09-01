@@ -12,7 +12,7 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	slider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style }) =>
+	slider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme }) =>
 		css({
 			display: 'inline-block',
 			height: '8px',
@@ -90,7 +90,6 @@ const CSS = {
 					background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -161,7 +160,9 @@ export const Slider = observer((properties: SliderProps): JSX.Element => {
 					className={classnames('ss__slider', className)}
 					{...getTrackProps()}
 					css={
-						!disableStyles && CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style })
+						!disableStyles
+							? [CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme }), style]
+							: [style]
 					}
 				>
 					{showTicks &&

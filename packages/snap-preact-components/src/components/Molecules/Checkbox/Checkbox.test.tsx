@@ -112,7 +112,6 @@ describe('Checkbox Component', () => {
 
 			expect(rendered.container).toBeInTheDocument();
 			expect(checkboxElement.classList.length).toBe(2);
-			expect(checkboxElement.classList[1]).toMatch(/^ss-0/);
 			expect(checkboxElement.className.match(/disabled/)).toBeFalsy();
 		});
 

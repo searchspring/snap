@@ -16,13 +16,12 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	results: ({ columns, gapSize, style }) =>
+	results: ({ columns, gapSize }) =>
 		css({
 			display: 'grid',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 			gridTemplateRows: 'auto',
 			gap: gapSize,
-			...style,
 		}),
 };
 
@@ -105,7 +104,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div
-				css={!disableStyles && CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize, style })}
+				css={!disableStyles ? [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style] : [style]}
 				className={classnames('ss__results', className)}
 			>
 				{results.map((result) =>
