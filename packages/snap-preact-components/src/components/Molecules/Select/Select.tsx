@@ -15,6 +15,7 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, label, selection, theme }) =>
+		//@ts-ignore
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -29,7 +30,7 @@ const CSS = {
 			},
 			'& .ss__select__select': {
 				position: 'relative',
-				ZIndex: '10000',
+				zIndex: '10000',
 				backgroundColor: backgroundColor || '#fff',
 				listStyle: 'none',
 				padding: '0',

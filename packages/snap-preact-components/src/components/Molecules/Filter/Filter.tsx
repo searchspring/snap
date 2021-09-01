@@ -10,7 +10,6 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { CSSProperties } from 'react';
 
 const CSS = {
 	filter: () =>

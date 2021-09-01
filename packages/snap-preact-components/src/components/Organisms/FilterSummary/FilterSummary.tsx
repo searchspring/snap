@@ -14,8 +14,6 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 const CSS = {
 	filterSummary: () =>
 		css({
-			'&:hover': { color: 'white' },
-
 			'& .ss__filter-summary__filter': {
 				margin: '5px 10px 5px 0',
 			},

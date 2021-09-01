@@ -51,7 +51,6 @@ export function Image(properties: ImageProps): JSX.Element {
 	if (prevSrcRef.current && prevSrcRef.current != src) {
 		setVisibility('hidden');
 	}
-	console.log(style);
 	return (
 		<CacheProvider>
 			<div css={!disableStyles ? [CSS.image({ visibility }), style] : [style]} className={classnames('ss__image', className)}>

@@ -13,6 +13,7 @@ import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
+		//@ts-ignore
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -22,7 +23,7 @@ const CSS = {
 			bottom: slideDirection == 'bottom' ? (isActive ? '0' : `-100vh`) : 'initial',
 			top: slideDirection == 'top' ? (isActive ? '0' : `-100vh`) : slideDirection == 'bottom' ? 'initial' : '0',
 			height: '100%',
-			ZIndex: '10004',
+			zIndex: '10004',
 			width: '90%',
 			maxWidth: width,
 			padding: '10px',

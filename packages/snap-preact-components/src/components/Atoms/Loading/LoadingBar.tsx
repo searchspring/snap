@@ -9,6 +9,7 @@ import { ComponentProps } from '../../../types';
 
 const CSS = {
 	loadingBar: ({ color, height, backgroundColor, theme, animation }) =>
+		//@ts-ignore
 		css({
 			height: height,
 			position: 'fixed',
@@ -19,7 +20,7 @@ const CSS = {
 			transition: 'opacity 0.3s ease',
 			opacity: '1',
 			visibility: 'visible',
-			ZIndex: '10000',
+			zIndex: '10000',
 			background: backgroundColor || theme.colors?.secondary || '#f8f8f8',
 
 			'& .ss__loading-bar__bar': {

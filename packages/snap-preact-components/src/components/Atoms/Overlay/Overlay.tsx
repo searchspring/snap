@@ -9,10 +9,11 @@ import { ComponentProps } from '../../../types';
 
 const CSS = {
 	overlay: ({ color, transitionSpeed }) =>
+		//@ts-ignore
 		css({
 			transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,
 			position: 'fixed',
-			ZIndex: '10003',
+			zIndex: '10003',
 			height: '100%',
 			width: '100%',
 			top: '0',
