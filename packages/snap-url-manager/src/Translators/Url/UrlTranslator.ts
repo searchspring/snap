@@ -493,7 +493,6 @@ export class UrlTranslator implements Translator {
 	go(url: string, config?: { history: string }): void {
 		const currentUrl = window.location.search + window.location.hash;
 		if (url != currentUrl) {
-			console.log('!!!!!!!!!!going!', url, config);
 			if (config?.history == 'replace') {
 				history.replaceState(null, '', url);
 			} else {
