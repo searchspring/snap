@@ -45,7 +45,7 @@ export class Term {
 		this.active = term.active;
 		this.value = term.value;
 
-		this.url = services.urlManager.set({ query: this.value });
+		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
 			resetTerms();
@@ -57,7 +57,7 @@ export class Term {
 			rootState.locks.terms.lock();
 			rootState.locks.facets.unlock();
 
-			this.url.set({ query: this.value }).go();
+			this.url?.set({ query: this.value }).go();
 		};
 
 		makeObservable(this, {
