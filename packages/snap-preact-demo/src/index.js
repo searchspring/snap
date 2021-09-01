@@ -21,7 +21,6 @@ import './styles/custom.scss';
  */
 
 const config = {
-	plugin: configurable,
 	client: {
 		globals: {
 			siteId: '8uyt2m',
