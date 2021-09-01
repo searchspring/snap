@@ -112,7 +112,8 @@ export class AutocompleteStore extends AbstractStore {
 				this.state
 			);
 
-			this.state.locks.terms.lock();
+			// only lock if there was data
+			data.autocomplete && this.state.locks.terms.lock();
 		}
 
 		this.merchandising = new MerchandisingStore(this.services, data.merchandising);

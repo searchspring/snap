@@ -4,7 +4,7 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 
 import type { FinderStore } from '@searchspring/snap-store-mobx';
-import type { FinderControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { FinderControllerConfig, BeforeSearchObj, AfterStoreObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
@@ -43,8 +43,9 @@ export class FinderController extends AbstractController {
 			await next();
 		});
 
-		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (finder: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+		// TODO: move this to afterStore
+		// add 'afterSearch' middleware
+		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
 			finder.controller.store.loading = false;
