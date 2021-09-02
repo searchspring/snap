@@ -270,7 +270,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						hideLabel: true,
 						columns: 3,
 					},
-					...props.theme.components,
+					...props.theme?.components,
 				},
 			},
 		},
@@ -302,7 +302,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					result: {
 						hideBadge: true,
 					},
-					...props.theme.components,
+					...props.theme?.components,
 				},
 			},
 		},
