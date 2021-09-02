@@ -111,7 +111,7 @@ describe('Checkbox Component', () => {
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
 			expect(rendered.container).toBeInTheDocument();
-			expect(checkboxElement.classList.length).toBe(2);
+			expect(checkboxElement.classList.length).toBe(1);
 			expect(checkboxElement.className.match(/disabled/)).toBeFalsy();
 		});
 

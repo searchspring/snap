@@ -49,7 +49,7 @@ describe('Overlay Component', () => {
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe('');
-		expect(overlayElement.classList.length).toBe(3);
+		expect(overlayElement.classList.length).toBe(2);
 	});
 
 	it('can custom className', () => {

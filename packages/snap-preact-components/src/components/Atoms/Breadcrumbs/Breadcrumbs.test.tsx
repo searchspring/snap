@@ -100,7 +100,7 @@ describe('Breadcrumbs Component', () => {
 		const rendered = render(<Breadcrumbs {...args} disableStyles />);
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 
-		expect(breadcrumbElement.classList.length).toBe(2);
+		expect(breadcrumbElement.classList.length).toBe(1);
 	});
 
 	it('is themeable with ThemeProvider', () => {

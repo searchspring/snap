@@ -102,7 +102,7 @@ describe('Filter Component', () => {
 
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
-		expect(filterElement.classList).toHaveLength(2);
+		expect(filterElement.classList).toHaveLength(1);
 	});
 });
 
