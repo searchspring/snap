@@ -31,29 +31,22 @@ export function Icon(properties: IconProps): JSX.Element {
 		...properties,
 		...properties.theme?.components?.icon,
 	};
-
 	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
 
 	const iconPath = iconPaths[icon] || path;
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.icon({ color, width, height, size, theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 
 	return (
 		iconPath && (
 			<CacheProvider>
 				<svg
-					css={
-						!disableStyles
-							? [
-									CSS.icon({
-										color,
-										width,
-										height,
-										size,
-										theme,
-									}),
-									style,
-							  ]
-							: [style]
-					}
+					{...styling}
 					className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
 					viewBox={viewBox}
 					xmlns="http://www.w3.org/2000/svg"

@@ -58,26 +58,16 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.loadingBar({ height, color, backgroundColor, theme, animation: CSS.animation }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		active && (
 			<CacheProvider>
-				<div
-					css={
-						!disableStyles
-							? [
-									CSS.loadingBar({
-										height,
-										color,
-										backgroundColor,
-										theme,
-										animation: CSS.animation,
-									}),
-									style,
-							  ]
-							: [style]
-					}
-					className={classnames('ss__loading-bar', className)}
-				>
+				<div {...styling} className={classnames('ss__loading-bar', className)}>
 					<div className="ss__loading-bar__bar"></div>
 				</div>
 			</CacheProvider>

@@ -135,10 +135,18 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	if (props.truncateTitle) {
 		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append);
 	}
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.result(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		core && (
 			<CacheProvider>
-				<article css={!disableStyles ? [CSS.result(), style] : [style]} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+				<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 					<div className="ss__result__image-wrapper">
 						<a
 							href={core.url}

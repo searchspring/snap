@@ -176,29 +176,20 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 		!stayOpenOnSelection && setOpen(false);
 	};
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		options &&
 		(typeof options == 'object' || Array.isArray(options)) &&
 		options.length && (
 			<CacheProvider>
-				<div
-					css={
-						!disableStyles && !native
-							? [
-									CSS.select({
-										color,
-										backgroundColor,
-										borderColor,
-										label,
-										selection: selection || '',
-										theme,
-									}),
-									style,
-							  ]
-							: [style]
-					}
-					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
-				>
+				<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 					{native ? (
 						<>
 							{label && !hideLabelOnSelection && (

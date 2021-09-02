@@ -110,13 +110,17 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		},
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.palette({ columns, gapSize, theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div
-					css={!disableStyles ? [CSS.palette({ columns, gapSize, theme }), style] : [style]}
-					className={classnames('ss__facet-palette-options', className)}
-				>
+				<div {...styling} className={classnames('ss__facet-palette-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}

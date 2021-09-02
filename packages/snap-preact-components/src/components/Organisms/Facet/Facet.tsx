@@ -212,12 +212,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.facet({ color, theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		<CacheProvider>
-			<div
-				css={!disableStyles ? [CSS.facet({ color, theme }), style] : [style]}
-				className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}
-			>
+			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
 				<Dropdown
 					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}

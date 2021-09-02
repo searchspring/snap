@@ -44,10 +44,17 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 			...props.theme?.components?.facet,
 		},
 	};
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.facets(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		facets?.length > 0 && (
 			<CacheProvider>
-				<div className={classnames('ss__facets', className)} css={!disableStyles ? [CSS.facets(), style] : [style]}>
+				<div className={classnames('ss__facets', className)} {...styling}>
 					{facets.map((facet) => (
 						<Facet {...subProps.facet} facet={facet} />
 					))}

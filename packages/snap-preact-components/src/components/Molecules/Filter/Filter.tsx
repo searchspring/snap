@@ -74,15 +74,16 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		},
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.filter(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		valueLabel && (
 			<CacheProvider>
-				<a
-					css={!disableStyles ? [CSS.filter(), style] : [style]}
-					className={classnames('ss__filter', className)}
-					onClick={(e) => onClick && onClick(e as any)}
-					{...url?.link}
-				>
+				<a {...styling} className={classnames('ss__filter', className)} onClick={(e) => onClick && onClick(e as any)} {...url?.link}>
 					<Button {...subProps.button}>
 						<Icon {...subProps.icon} />
 						{!hideFacetLabel && (

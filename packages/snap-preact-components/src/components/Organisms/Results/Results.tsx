@@ -101,12 +101,16 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		results = props.results;
 	}
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return results?.length ? (
 		<CacheProvider>
-			<div
-				css={!disableStyles ? [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style] : [style]}
-				className={classnames('ss__results', className)}
-			>
+			<div {...styling} className={classnames('ss__results', className)}>
 				{results.map((result) =>
 					(() => {
 						switch (result.type) {

@@ -89,11 +89,21 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		if (native) {
+			styling.css = [CSS.native(), style];
+		} else {
+			styling.css = [CSS.checkbox({ size, color, theme }), style];
+		}
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
 			{native ? (
 				<input
-					css={!disableStyles ? [CSS.native(), style] : [style]}
+					{...styling}
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					type="checkbox"
 					onClick={(e) => clickFunc(e)}
@@ -101,11 +111,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					checked={checkedState}
 				/>
 			) : (
-				<span
-					css={!disableStyles ? [CSS.checkbox({ size, color, theme }), style] : [style]}
-					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
-					onClick={(e) => clickFunc(e)}
-				>
+				<span {...styling} className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)} onClick={(e) => clickFunc(e)}>
 					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
 				</span>
 			)}

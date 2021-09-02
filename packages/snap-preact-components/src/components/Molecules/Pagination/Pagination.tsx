@@ -83,10 +83,16 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const _pages = store?.getPages(...getPagesParams);
 	const pageNumbers = _pages?.map((page) => page.number);
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.pagination({ theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		store?.totalResults && (
 			<CacheProvider>
-				<div css={!disableStyles ? [CSS.pagination({ theme }), style] : [style]} className={classnames('ss__pagination', className)}>
+				<div {...styling} className={classnames('ss__pagination', className)}>
 					<>
 						{/* Prev */}
 						{store.previous && !hidePrev && (

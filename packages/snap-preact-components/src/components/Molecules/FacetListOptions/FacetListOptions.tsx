@@ -67,10 +67,16 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		},
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.list({ theme, hideCheckbox }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		values?.length && (
 			<CacheProvider>
-				<div css={!disableStyles ? [CSS.list({ theme, hideCheckbox }), style] : [style]} className={classnames('ss__facet-list-options', className)}>
+				<div {...styling} className={classnames('ss__facet-list-options', className)}>
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}

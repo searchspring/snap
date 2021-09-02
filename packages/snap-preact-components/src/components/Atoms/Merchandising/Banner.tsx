@@ -37,14 +37,19 @@ export function Banner(properties: BannerProps): JSX.Element {
 		console.warn(`BannerType '${BannerType.INLINE}' is not supported in <Banner /> component`);
 		return;
 	}
-
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.banner(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		content &&
 		content[type]?.length && (
 			<CacheProvider>
 				<div
 					className={classnames('ss__banner', `ss__banner--${type}`, className)}
-					css={!disableStyles ? [CSS.banner(), style] : [style]}
+					{...styling}
 					dangerouslySetInnerHTML={{
 						__html: content[props.type].join(''),
 					}}

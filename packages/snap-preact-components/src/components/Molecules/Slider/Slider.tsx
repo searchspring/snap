@@ -151,20 +151,19 @@ export const Slider = observer((properties: SliderProps): JSX.Element => {
 		tickSize: tickSize,
 	});
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		facet.range &&
 		facet.active &&
 		facet.step && (
 			<CacheProvider>
-				<div
-					className={classnames('ss__slider', className)}
-					{...getTrackProps()}
-					css={
-						!disableStyles
-							? [CSS.slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme }), style]
-							: [style]
-					}
-				>
+				<div className={classnames('ss__slider', className)} {...getTrackProps()} {...styling}>
 					{showTicks &&
 						ticks.map(({ value, getTickProps }) => (
 							<div className="ss__slider__tick" {...getTickProps()}>

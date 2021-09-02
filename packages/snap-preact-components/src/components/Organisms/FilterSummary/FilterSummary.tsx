@@ -76,9 +76,16 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		},
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.filterSummary(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return filters?.length ? (
 		<CacheProvider>
-			<div css={!disableStyles ? [CSS.filterSummary(), style] : [style]} className={classnames('ss__filter-summary', className)}>
+			<div {...styling} className={classnames('ss__filter-summary', className)}>
 				<div className="ss__filter-summary__title">{title}</div>
 
 				{filters.map((filter) => (

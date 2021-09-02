@@ -94,13 +94,15 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.dropdown({ disableOverlay }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
-			<div
-				css={!disableStyles ? [CSS.dropdown({ disableOverlay }), style] : [style]}
-				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
-				ref={innerRef}
-			>
+			<div {...styling} className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)} ref={innerRef}>
 				<div
 					className="ss__dropdown__button"
 					onClick={(e) => {

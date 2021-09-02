@@ -152,14 +152,17 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.carousel({ theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		children && (
 			<CacheProvider>
-				<div
-					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles ? [CSS.carousel({ theme }), style] : [style]}
-					className={classnames('ss__carousel', className)}
-				>
+				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__carousel', className)}>
 					{!hideButtons && (
 						<div className="ss__carousel__prev-wrapper">
 							<div

@@ -51,9 +51,16 @@ export function Image(properties: ImageProps): JSX.Element {
 	if (prevSrcRef.current && prevSrcRef.current != src) {
 		setVisibility('hidden');
 	}
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.image({ visibility }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
-			<div css={!disableStyles ? [CSS.image({ visibility }), style] : [style]} className={classnames('ss__image', className)}>
+			<div {...styling} className={classnames('ss__image', className)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}

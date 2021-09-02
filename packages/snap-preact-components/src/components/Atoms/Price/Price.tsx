@@ -63,14 +63,18 @@ export function Price(properties: PriceProps): JSX.Element {
 		symbolAfter,
 	});
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.price({ theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return raw ? (
 		<>{formattedPrice}</>
 	) : (
 		<CacheProvider>
-			<span
-				css={!disableStyles ? [CSS.price({ theme }), style] : [style]}
-				className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}
-			>
+			<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
 				{formattedPrice}
 			</span>
 		</CacheProvider>

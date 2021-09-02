@@ -36,9 +36,16 @@ export const Breadcrumbs = observer((properties: BreadcrumbProps): JSX.Element =
 
 	const { data, separator, disableStyles, className, style } = props;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.breadcrumbs(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		<CacheProvider>
-			<div css={!disableStyles ? [CSS.breadcrumbs(), style] : [style]} className={classnames('ss__breadcrumbs', className)}>
+			<div {...styling} className={classnames('ss__breadcrumbs', className)}>
 				<ul className="ss__breadcrumbs__crumbs">
 					{data
 						.map<React.ReactNode>((crumb) => (

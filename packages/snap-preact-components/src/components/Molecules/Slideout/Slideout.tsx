@@ -82,6 +82,12 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	});
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		isVisible && (
 			<CacheProvider>
@@ -91,10 +97,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 					</div>
 				)}
 
-				<div
-					className={classnames('ss__slideout', className)}
-					css={!disableStyles ? [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style] : [style]}
-				>
+				<div className={classnames('ss__slideout', className)} {...styling}>
 					{cloneWithProps(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
