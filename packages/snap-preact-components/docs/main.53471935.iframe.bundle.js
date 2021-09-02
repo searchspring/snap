@@ -18220,7 +18220,7 @@
 							}),
 							_this.eventManager.on('afterStore', function (search, next) {
 								return SearchController_awaiter(_this, void 0, void 0, function () {
-									var stringyParams_1,
+									var stringyParams,
 										scrollMap_1,
 										scrollToPosition_1,
 										checkCount_1,
@@ -18235,17 +18235,17 @@
 												return (
 													_b.sent(),
 													(search.controller.store.loading = !1),
+													(stringyParams = JSON.stringify(search.request)),
+													this.storage.set('lastStringyParams', stringyParams),
 													(null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.infinite) &&
 														0 === window.scrollY &&
-														((stringyParams_1 = JSON.stringify(search.request)),
-														this.storage.set('lastStringyParams', stringyParams_1),
-														(scrollMap_1 = this.storage.get('scrollMap') || {}),
-														(scrollToPosition_1 = scrollMap_1[stringyParams_1]) &&
+														((scrollMap_1 = this.storage.get('scrollMap') || {}),
+														(scrollToPosition_1 = scrollMap_1[stringyParams]) &&
 															((checkCount_1 = 0),
 															(heightCheck_1 = window.setInterval(function () {
 																document.documentElement.scrollHeight >= scrollToPosition_1 &&
 																	(window.scrollTo(0, scrollToPosition_1),
-																	_this.log.debug('scrolling to: ', scrollMap_1[stringyParams_1]),
+																	_this.log.debug('scrolling to: ', scrollMap_1[stringyParams]),
 																	window.clearInterval(heightCheck_1)),
 																	checkCount_1 > 40 && window.clearInterval(heightCheck_1),
 																	checkCount_1++;
@@ -24005,7 +24005,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.6.0' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.6.1' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24032,7 +24032,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.6.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.6.1');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24631,7 +24631,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.6.0]',
+								text: '[0.6.1]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
