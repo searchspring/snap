@@ -68,7 +68,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 				size: size && `calc(${size} - 30%)`,
 			}),
 			// component theme overrides
-			...theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

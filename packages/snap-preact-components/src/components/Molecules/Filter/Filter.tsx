@@ -52,7 +52,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			// global theme
 			...globalTheme?.components?.button,
 			// component theme overrides
-			...props.theme?.components?.button,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -67,7 +67,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				icon,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

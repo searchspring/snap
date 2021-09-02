@@ -79,7 +79,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.result,
+			theme: props.theme,
 		},
 		inlineBanner: {
 			// default props
@@ -91,7 +91,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.inlineBanner,
+			theme: props.theme,
 		},
 	};
 

@@ -252,6 +252,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			...defined({
 				disableStyles,
 			}),
+
+			// component theme overrides
 			theme: {
 				components: {
 					facetGridOptions: {
@@ -268,10 +270,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						hideLabel: true,
 						columns: 3,
 					},
+					...props.theme.components,
 				},
 			},
-			// component theme overrides
-			...props.theme?.components?.facet,
 		},
 		banner: {
 			// default props
@@ -283,7 +284,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.banner,
+			theme: props.theme,
 		},
 		results: {
 			// default props
@@ -294,16 +295,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// inherited props
 			...defined({
 				disableStyles,
-				theme: {
-					components: {
-						result: {
-							hideBadge: true,
-						},
-					},
-				},
 			}),
 			// component theme overrides
-			...props.theme?.components?.results,
+			theme: {
+				components: {
+					result: {
+						hideBadge: true,
+					},
+					...props.theme.components,
+				},
+			},
 		},
 		icon: {
 			// default props
@@ -317,7 +318,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

@@ -75,7 +75,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
