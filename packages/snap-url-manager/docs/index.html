@@ -1,0 +1,301 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@searchspring/snap-url-manager</title>
+	<meta name="description" content="Documentation for @searchspring/snap-url-manager">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@searchspring/snap-url-manager</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@searchspring/snap-url-manager</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#snap-url-manager" id="snap-url-manager" style="color: inherit; text-decoration: none;">
+					<h1>Snap URL Manager</h1>
+				</a>
+				<p>The Snap URL manager is a service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It&#39;s primary purpose is to provide a standard API to manage URL across Snap products.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">npm install --save-dev @searchspring/url-manager</span>
+</code></pre>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h2>Import</h2>
+				</a>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">UrlManager</span><span style="color: #000000">, </span><span style="color: #001080">UrlTranslator</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/url-manager&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#instantiation" id="instantiation" style="color: inherit; text-decoration: none;">
+					<h2>Instantiation</h2>
+				</a>
+				<p>The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we&#39;ll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.</p>
+				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators">Translators</a> for more info.</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlTranslator</span><span style="color: #000000">());</span>
+</code></pre>
+				<p>Depending on the translator, the instantiated url manager will automatically start tracking from the browser URL.</p>
+				<a href="#navigate-to-another-location-using-transforms" id="navigate-to-another-location-using-transforms" style="color: inherit; text-decoration: none;">
+					<h2>Navigate to another location using transforms.</h2>
+				</a>
+				<p>Let&#39;s add a new parameter, <code>page=2</code>, to the browser&#39;s address bar.</p>
+				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">merge</span><span style="color: #000000">({ </span><span style="color: #001080">page:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> }).</span><span style="color: #795E26">go</span><span style="color: #000000">();</span>
+</code></pre>
+				<p>In this example, we first created a new url manager with internal state that reflects <code>page=2</code> . Url managers are never directly modified, but when merging or setting parameters, a new url manager is created with a new state.</p>
+				<p>We then updated the browser&#39;s address bar using <code>urlManager.go()</code> on the newly created url manager. Since the query string config translator is utilizing <code>location.pushState</code> behind the scenes,
+				this is the mechanism behind which the browsers address bar is updated in this example.</p>
+				<p>There are three functions to update one or more URL parameters: <code>set</code>, <code>merge</code> and <code>remove</code> . These functions are called transforms.</p>
+				<p>When using <code>set</code>, other parameters will be clobbered and the URL will be set to exactly match the object passed in. All transforms can specify a path as the first parameter.</p>
+				<p>Paths can be expressed in either of these formats:
+				<code>&#39;some.longer.path&#39;</code> or <code>[&#39;some&#39;, &#39;longer&#39;, &#39;path&#39;]</code></p>
+				<p>Therefore, you can also accomplish this same transformation with the following:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">newManager</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;page&#039;</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>The page parameter can be removed with the following:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">newManager</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">remove</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;page&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>Setting a value in a longer, nested path would look like this:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">newManager</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;facets.color&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;blue&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>This will produce 1 value for <code>facets.color</code> and remove any others.</p>
+				<p>For multiple values:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">newManager</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">merge</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;facets.color&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;blue&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">merge</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;facets.color&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#href-property" id="href-property" style="color: inherit; text-decoration: none;">
+					<h2><code>href</code> property</h2>
+				</a>
+				<p>You can access a url manager&#39;s href property at any time with</p>
+				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#many-copies" id="many-copies" style="color: inherit; text-decoration: none;">
+					<h2>Many copies</h2>
+				</a>
+				<p>There may be cases where you want multiple URL states stored for various purposes. Since
+				<code>set</code>, <code>merge</code>, and <code>remove</code> create modified copies, instances can be created and utilized from multiple sources. Snap <code>stores</code> already handle the process of attaching `UrlManager&#39; instances where needed, for example for pagination, facets, sorting, etc... Here is an example of how creating them for a facet&#39;s individual values might look:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">facetValuesWithUrls</span><span style="color: #000000"> = (</span><span style="color: #001080">facet</span><span style="color: #000000">, </span><span style="color: #001080">facetValues</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">facetValues</span><span style="color: #000000">.</span><span style="color: #795E26">map</span><span style="color: #000000">((</span><span style="color: #001080">facetValue</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            ...</span><span style="color: #001080">facetValue</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">merge</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;facet&#039;</span><span style="color: #000000">, </span><span style="color: #001080">facet</span><span style="color: #000000">.</span><span style="color: #001080">field</span><span style="color: #000000">], </span><span style="color: #001080">facetValue</span><span style="color: #000000">.</span><span style="color: #001080">value</span><span style="color: #000000">),</span>
+<span style="color: #000000">        };</span>
+<span style="color: #000000">    });</span>
+<span style="color: #000000">};</span>
+</code></pre>
+				<p>Now, you can pass these as props to a Preact component:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">FacetValue</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">render</span><span style="color: #000000">({ </span><span style="color: #001080">facet</span><span style="color: #000000">, </span><span style="color: #001080">value</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
+<span style="color: #000000">            </span><span style="color: #800000">&lt;li&gt;</span>
+<span style="color: #000000">                </span><span style="color: #800000">&lt;a</span>
+<span style="color: #000000">                    </span><span style="color: #FF0000">href</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF"> </span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">url</span><span style="color: #000000FF">.</span><span style="color: #001080">href</span><span style="color: #000000FF"> </span><span style="color: #0000FF">}</span>
+<span style="color: #000000">                    </span><span style="color: #FF0000">onClick</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF">(</span><span style="color: #001080">ev</span><span style="color: #000000FF">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> {</span>
+<span style="color: #000000FF">                        </span><span style="color: #001080">ev</span><span style="color: #000000FF">.</span><span style="color: #795E26">preventDefault</span><span style="color: #000000FF">();</span>
+
+<span style="color: #000000FF">                        </span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">url</span><span style="color: #000000FF">.</span><span style="color: #795E26">go</span><span style="color: #000000FF">();</span>
+<span style="color: #000000FF">                    }</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">                </span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">                    </span><span style="color: #0000FF">{</span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">label</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">                </span><span style="color: #800000">&lt;/a&gt;</span>
+<span style="color: #000000">            </span><span style="color: #800000">&lt;/li&gt;</span>
+<span style="color: #000000">        );</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Since the <code>UrlTranslator</code> is utilizing <code>pushState</code> it is important to prevent the default behavior as shown in the <code>onClick</code> above. Each translator can be instantiated with a <code>Linker</code> to make this even easier:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">UrlManager</span><span style="color: #000000">, </span><span style="color: #001080">UrlTranslator</span><span style="color: #000000">, </span><span style="color: #001080">reactLinker</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-url-manager&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlTranslator</span><span style="color: #000000">(), </span><span style="color: #001080">reactLinker</span><span style="color: #000000">);</span>
+</code></pre>
+				<pre><code class="language-js"><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">FacetValue</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">render</span><span style="color: #000000">({ </span><span style="color: #001080">facet</span><span style="color: #000000">, </span><span style="color: #001080">value</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
+<span style="color: #000000">            </span><span style="color: #800000">&lt;li&gt;</span>
+<span style="color: #000000">                </span><span style="color: #800000">&lt;a</span><span style="color: #000000"> </span><span style="color: #0000FF">{</span><span style="color: #000000">...</span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">url</span><span style="color: #000000FF">.</span><span style="color: #001080">link</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">value</span><span style="color: #000000FF">.</span><span style="color: #001080">label</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/a&gt;</span>
+<span style="color: #000000">            </span><span style="color: #800000">&lt;/li&gt;</span>
+<span style="color: #000000">        );</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers">Linkers</a> for more info.</p>
+				<a href="#subscribe-to-url-changes" id="subscribe-to-url-changes" style="color: inherit; text-decoration: none;">
+					<h2>Subscribe to URL changes</h2>
+				</a>
+				<p>You can subscribe to URL changes like so:</p>
+				<pre><code class="language-js"><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">((</span><span style="color: #001080">prev</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">prev</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>This callback is executed any time one of the url manager&#39;s <code>go</code> function is called.</p>
+				<p>The callback is passed two parameters: <code>prev</code> and <code>next</code>.</p>
+				<p><code>next</code> is the new state formed by a combination of the browsers URL, as well as any transformations done to the <code>urlManager</code> instance after it was either instantiated or copied using another urlManager&#39;s <code>copy</code> function.</p>
+				<p><code>prev</code> is the previous state from this urlManager instance.</p>
+				<a href="#auto-synchronize-with-url-change" id="auto-synchronize-with-url-change" style="color: inherit; text-decoration: none;">
+					<h2>Auto-synchronize with URL change</h2>
+				</a>
+				<p>Remember that url manager&#39;s internal state is never directly mutated, but instead, transforms return a fresh copy with a new
+				state. However, the internal state is always a modification on the <em>current</em> URL.</p>
+				<p>Take the following example:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlTranslator</span><span style="color: #000000">());</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManagerWithColor</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">merge</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;filter.color_family&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;blue&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// https://try.searchspring.com?q=dress</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithColor</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/filter:color_family:Blue</span>
+</code></pre>
+				<p>You can see that the href of <code>urlManager</code> matches the parameters of the page URL, while <code>urlManagerWithColor</code> has an additional parameter.</p>
+				<p>Now let&#39;s navigate to a new URL using the <code>go</code> function and check the href&#39;s again:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManagerWithNewParam</span><span style="color: #000000"> = </span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #795E26">merge</span><span style="color: #000000">({ </span><span style="color: #001080">newParam:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;newValue&#039;</span><span style="color: #000000"> });</span>
+
+<span style="color: #001080">urlManagerWithNewParam</span><span style="color: #000000">.</span><span style="color: #795E26">go</span><span style="color: #000000">();</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// https://try.searchspring.com?q=dress#/newParam:newValue</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/newParam:newValue</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithNewParam</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/newParam:newValue</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithColor</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/filter:color_family:Blue/newParam:newValue</span>
+</code></pre>
+				<p>As you can see, when calling <code>go()</code> all the URL managers were updated and know about the new URL parameter <code>newParam</code> while the internal
+				state of <code>urlManagerWithColor</code> remains unmodified. This holds true for removals as well:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">urlManagerWithColorButWithoutNewParam</span><span style="color: #000000"> = </span><span style="color: #001080">urlManagerWithColor</span><span style="color: #000000">.</span><span style="color: #795E26">remove</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;newParam&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/newParam:newValue</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithNewParam</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/newParam:newValue</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithColor</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/filter:color_family:Blue/newParam:newValuecolor=blue</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">urlManagerWithColorButWithoutNewParam</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?q=dress#/filter:color_family:Blue</span>
+</code></pre>
+				<p><strong>Note:</strong> UrlManagers with different instantiations will not notify each other about URL updates. For example:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">originalUrlManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">QueryStringTranslator</span><span style="color: #000000">());</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">secondaryUrlManager</span><span style="color: #000000"> = </span><span style="color: #001080">originalUrlManager</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">disconnectedUrlManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">QueryStringTranslator</span><span style="color: #000000">());</span>
+
+<span style="color: #001080">originalUrlManager</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">go</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">originalUrlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?example=1</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">secondaryUrlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// ?example=1&amp;foo=bar</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">disconnectedUrlManager</span><span style="color: #000000">.</span><span style="color: #001080">href</span><span style="color: #000000">); </span><span style="color: #008000">// / (empty)</span>
+</code></pre>
+				<p>For performance reasons, the url managers do not contain watchers or otherwise poll for URL changes. Instead, they rely upon the copy mechanism behind the transform functions to notify each other of changes.</p>
+				<p>Since a <code>UrlManager</code> internal state is immutable, you do not have to worry about unintended side effects. The only side effect is changes to the URL itself, which is intended!</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/NoopTranslator.html" class="tsd-kind-icon">Noop<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/QueryStringTranslator.html" class="tsd-kind-icon">Query<wbr>String<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/UrlManager.html" class="tsd-kind-icon">Url<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/UrlTranslator.html" class="tsd-kind-icon">Url<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/Translator.html" class="tsd-kind-icon">Translator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#UrlState" class="tsd-kind-icon">Url<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#UrlTranslatorConfig" class="tsd-kind-icon">Url<wbr>Translator<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#UrlTranslatorParametersConfig" class="tsd-kind-icon">Url<wbr>Translator<wbr>Parameters<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#reactLinker" class="tsd-kind-icon">react<wbr>Linker</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

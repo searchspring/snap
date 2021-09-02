@@ -1,0 +1,202 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@searchspring/snap-event-manager</title>
+	<meta name="description" content="Documentation for @searchspring/snap-event-manager">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@searchspring/snap-event-manager</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@searchspring/snap-event-manager</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#snap-event-manager" id="snap-event-manager" style="color: inherit; text-decoration: none;">
+					<h1>Snap Event Manager</h1>
+				</a>
+				<p><a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a></p>
+				<p>The Snap Event Manager is used to create events and attach middleware to them.</p>
+				<p>When used as a service of a controller it allows you to hook into controller events at critical times in the life cycle. It also allows for custom events to be used throughout your implementation.</p>
+				<a href="#dependency" id="dependency" style="color: inherit; text-decoration: none;">
+					<h2>Dependency</h2>
+				</a>
+				<p>Snap Event Manager is a dependency of <a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller">@searchspring/snap-controller</a> <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a></p>
+				<details>
+					<summary>Package dependencies hierarchy</summary>
+					<br/>
+					<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true"/>
+				</details>
+				<br>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-event-manager</span>
+</code></pre>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h2>Import</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">EventManager</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-event-manager&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
+					<h2>Controller usage</h2>
+				</a>
+				<p>Snap Event Manager is a dependency of Snap Controller and it is recommended to use methods of the controller to attach events to the EventManager. Additionally, different events exist for the different controllers - see the Controller documentation for more details.</p>
+				<a href="#standalone-usage" id="standalone-usage" style="color: inherit; text-decoration: none;">
+					<h2>Standalone usage</h2>
+				</a>
+				<a href="#on-method" id="on-method" style="color: inherit; text-decoration: none;">
+					<h3><code>on</code> method</h3>
+				</a>
+				<p>Used to attach middleware to an event. If the event name previously had middleware attached, it will add to the middleware stack.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventManager</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventManager</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">eventData</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// do something with the eventData</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// pass control to the next middleware attached to the event</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// do something after other middleware has fired</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>If a middleware returns <code>false</code> the entire middleware flow is interrupted and any remaining middleware is not executed.</p>
+				<a href="#fire-method" id="fire-method" style="color: inherit; text-decoration: none;">
+					<h3><code>fire</code> method</h3>
+				</a>
+				<p>Invoke custom event. Data passed into the second parameter gets handed off to the middleware attached with the <code>on</code> method.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">fire</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">data:</span><span style="color: #000000"> { </span><span style="color: #001080">some:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;string&#039;</span><span style="color: #000000"> } });</span>
+</code></pre>
+				<a href="#middleware" id="middleware" style="color: inherit; text-decoration: none;">
+					<h2>Middleware</h2>
+				</a>
+				<p>Middleware provide a way for mutating or modifying the data passed in during the <code>fire</code> method.</p>
+				<a href="#execution-order" id="execution-order" style="color: inherit; text-decoration: none;">
+					<h3>Execution order</h3>
+				</a>
+				<p>The first middleware attached with the <code>on</code> method is the first to execute. When calling <code>await next()</code>, control flows to the next attached middleware. This happens until the final middleware has been called after which control flows back up to the first middleware attached. The first middleware gets the first, and last opportunity to modify the data.</p>
+				<a href="#order-flow-example" id="order-flow-example" style="color: inherit; text-decoration: none;">
+					<h3>Order Flow Example</h3>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;first middleware start&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;first middleware end&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;second middleware start&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;second middleware end&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;third middleware start&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;third middleware end&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">eventManager</span><span style="color: #000000">.</span><span style="color: #795E26">fire</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interestingEvent&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">data:</span><span style="color: #000000"> { </span><span style="color: #001080">some:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;string&#039;</span><span style="color: #000000"> } } );</span>
+
+</code></pre>
+				<p>After firing the <code>interestingEvent</code> event, the following would be displayed in the console:</p>
+				<pre><code class="language-text">first middleware start
+second middleware start
+third middleware start
+third middleware end
+second middleware end
+first middleware end
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/EventManager.html" class="tsd-kind-icon">Event<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#Callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#Middleware" class="tsd-kind-icon">Middleware</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#Next" class="tsd-kind-icon">Next</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
