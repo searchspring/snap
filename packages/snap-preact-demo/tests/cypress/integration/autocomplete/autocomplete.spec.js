@@ -60,7 +60,7 @@ describe('Autocomplete', () => {
 		cy.get('.searchspring-ac').focus().type('r');
 
 		// have to wait for search to start
-		cy.wait(300);
+		cy.wait(500);
 
 		cy.snapStore('autocomplete').then((store) => {
 			cy.get('.ss__autocomplete__terms__option').should('have.length', store.terms.length);

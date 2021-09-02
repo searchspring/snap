@@ -88,11 +88,12 @@ export class SearchController extends AbstractController {
 
 			search.controller.store.loading = false;
 
+			// save last params
+			const stringyParams = JSON.stringify(search.request);
+			this.storage.set('lastStringyParams', stringyParams);
+
 			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
-				const stringyParams = JSON.stringify(search.request);
-				this.storage.set('lastStringyParams', stringyParams);
-
 				const scrollMap = this.storage.get('scrollMap') || {};
 
 				// interval we ony need to keep checking until the page height > than our stored value
