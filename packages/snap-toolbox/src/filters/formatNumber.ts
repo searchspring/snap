@@ -18,8 +18,8 @@ export function formatNumber(input: number, opts?: formatNumberOptions): string 
 		...opts,
 	};
 
-	if (typeof input != 'number') {
-		return input;
+	if (typeof input != 'number' || Number.isNaN(input)) {
+		return;
 	}
 
 	// format based on options
