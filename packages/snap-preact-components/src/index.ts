@@ -12,6 +12,7 @@ export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 
 // MOLECULES
+export * from './components/Molecules/Carousel';
 export * from './components/Molecules/Checkbox';
 export * from './components/Molecules/FacetGridOptions';
 export * from './components/Molecules/FacetHierarchyOptions';
@@ -25,13 +26,12 @@ export * from './components/Molecules/Slideout';
 export * from './components/Molecules/Slider';
 
 // ORGANISMS
+export * from './components/Organisms/Autocomplete';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/Results';
-export * from './components/Organisms/Autocomplete';
-export * from './components/Organisms/Carousel';
 
 // HOOKS
 export * from './hooks';

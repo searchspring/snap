@@ -1,5 +1,5 @@
 import { UrlTranslator } from './UrlTranslator';
-import { UrlState } from '../../types';
+import { UrlState, ParamLocationType } from '../../types';
 
 describe('UrlTranslator', () => {
 	it('generates relative URL by default', () => {
@@ -46,7 +46,11 @@ describe('UrlTranslator', () => {
 
 		it('deserializes with query param override', () => {
 			const translator = new UrlTranslator({
-				queryParameter: 'search',
+				parameters: {
+					core: {
+						query: { name: 'search' },
+					},
+				},
 			});
 
 			const url = 'http://somesite.com?q=incorrect&search=correct&q=alsoincorrect#/filter:color:blue/filter:brand:nike/filter:brand:adidas';
@@ -118,7 +122,11 @@ describe('UrlTranslator', () => {
 
 		it('deserializes with other hashParams', () => {
 			const translator = new UrlTranslator({
-				queryParameter: 'search',
+				parameters: {
+					core: {
+						query: { name: 'search' },
+					},
+				},
 			});
 
 			const url = 'http://somesite.com#/other:thing:3/thing';
@@ -141,7 +149,11 @@ describe('UrlTranslator', () => {
 
 		it('serializes with query param override', () => {
 			const translator = new UrlTranslator({
-				queryParameter: 'search',
+				parameters: {
+					core: {
+						query: { name: 'search' },
+					},
+				},
 			});
 
 			const query = translator.serialize({
@@ -177,7 +189,11 @@ describe('UrlTranslator', () => {
 
 		it('serializes other state correctly (as hash params)', () => {
 			const translator = new UrlTranslator({
-				queryParameter: 'search',
+				parameters: {
+					core: {
+						query: { name: 'search' },
+					},
+				},
 			});
 
 			const params: UrlState = {
@@ -230,11 +246,15 @@ describe('UrlTranslator', () => {
 	describe('custom parameters', () => {
 		it('supports customization of parameters', () => {
 			const config = {
-				queryParameter: 'search',
 				urlRoot: 'https://www.website.com/search.html',
 				parameters: {
-					hash: ['ga'],
-					search: ['googs'],
+					core: {
+						query: { name: 'search' },
+					},
+					custom: {
+						ga: { type: ParamLocationType.HASH },
+						googs: { type: ParamLocationType.QUERY },
+					},
 				},
 			};
 			const translator = new UrlTranslator(config);

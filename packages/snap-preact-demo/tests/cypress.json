@@ -1,4 +1,5 @@
 {
+	"defaultCommandTimeout": 7000,
 	"viewportWidth": 1000,
 	"viewportHeight": 660,
 	"chromeWebSecurity": false,

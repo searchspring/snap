@@ -1,12 +1,12 @@
 import deepmerge from 'deepmerge';
 
-import type { BeaconEvent } from '@searchspring/snap-tracker';
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 import { LogMode } from '@searchspring/snap-logger';
 import { AbstractController } from '../Abstract/AbstractController';
 
+import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -54,8 +54,8 @@ export class RecommendationController extends AbstractController {
 			await next();
 		});
 
-		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (recommend: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		// add 'afterStore' middleware
+		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
 			recommend.controller.store.loading = false;
