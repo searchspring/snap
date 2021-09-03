@@ -28,7 +28,7 @@ const CSS = {
 			display: 'inline-block',
 			height: '8px',
 			width: 'calc(100% - 2rem)',
-			margin: '1rem',
+			margin: stickyHandleLabel ? '1rem' : '0 1rem',
 			top: '10px',
 
 			'& .ss__facet-slider__tick': {
@@ -61,7 +61,7 @@ const CSS = {
 			'& .ss__facet-slider__handles': {
 				textAlign: 'center',
 				'& button': {
-					'& .ss__facet-slider__handles__handle': {
+					'& .ss__facet-slider__handle': {
 						background: handleColor || theme.colors?.primary || '#333',
 						display: 'flex',
 						alignItems: 'center',
@@ -93,25 +93,25 @@ const CSS = {
 							cursor: 'pointer',
 						},
 
-						'&.ss__facet-slider__handles__handle--active': {
+						'&.ss__facet-slider__handle--active': {
 							background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
-							'& label.ss__facet-slider__handles__handle__label': {
+							'& label.ss__facet-slider__handle__label': {
 								background: '#fff',
 								padding: '0 5px',
 							},
 						},
 
-						'& label.ss__facet-slider__handles__handle__label': {
+						'& label.ss__facet-slider__handle__label': {
 							display: 'inline-block',
 							marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 
-							'&.ss__facet-slider__handles__handle__label--pinleft': {
+							'&.ss__facet-slider__handle__label--pinleft': {
 								left: '0px',
 							},
-							'&.ss__facet-slider__handles__handle__label--pinright': {
+							'&.ss__facet-slider__handle__label--pinright': {
 								right: '0px',
 							},
-							'&.ss__facet-slider__handles__handle__label--sticky': {
+							'&.ss__facet-slider__handle__label--sticky': {
 								position: 'absolute',
 								top: '-20px',
 								fontFamily: 'Roboto, Helvetica, Arial',
@@ -127,7 +127,7 @@ const CSS = {
 				textAlign: 'center',
 				marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
 
-				'& .ss__facet-slider__labels__label--0': {
+				'& .ss__facet-slider__label--0': {
 					'&:after': {
 						content: '"-"',
 						padding: '5px',
@@ -243,15 +243,15 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 									},
 								})}
 							>
-								<div className={classnames('ss__facet-slider__handles__handle', { 'ss__facet-slider__handles__handle--active': active })}>
+								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
 									{stickyHandleLabel && (
 										<label
 											className={classnames(
-												'ss__facet-slider__handles__handle__label',
-												'ss__facet-slider__handles__handle__label--sticky',
-												`ss__facet-slider__handles__handle__label--${idx}`,
-												{ 'ss__facet-slider__handles__handle__label--pinleft': idx == 0 && value == facet.range.low },
-												{ 'ss__facet-slider__handles__handle__label--pinright': idx == 1 && value == facet.range.high }
+												'ss__facet-slider__handle__label',
+												'ss__facet-slider__handle__label--sticky',
+												`ss__facet-slider__handle__label--${idx}`,
+												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
+												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
 											)}
 										>
 											{sprintf(facet.formatValue, value)}
@@ -264,7 +264,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 					{!stickyHandleLabel && (
 						<div className={'ss__facet-slider__labels'}>
 							{handles.map(({ value }, idx) => (
-								<label className={classnames('ss__facet-slider__labels__label', `ss__facet-slider__labels__label--${idx}`)}>
+								<label className={classnames('ss__facet-slider__label', `ss__facet-slider__label--${idx}`)}>
 									{sprintf(facet.formatValue, value)}
 								</label>
 							))}
