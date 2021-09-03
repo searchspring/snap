@@ -3,6 +3,19 @@ import { formatNumber } from './formatNumber';
 const input = 1199.999999;
 
 describe('formatNumber', () => {
+	it('returns nothing when a non number is provided', () => {
+		//@ts-ignore
+		let output = formatNumber('');
+		expect(output).toBe(undefined);
+
+		//@ts-ignore
+		let output = formatNumber('7');
+		expect(output).toBe(undefined);
+
+		output = formatNumber(Number.NaN);
+		expect(output).toBe(undefined);
+	});
+
 	it('has default functionality', () => {
 		const output = formatNumber(input);
 

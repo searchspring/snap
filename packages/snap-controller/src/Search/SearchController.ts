@@ -229,7 +229,7 @@ export class SearchController extends AbstractController {
 					}
 
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map((data) => {
+					backfillResponses.map(([data]) => {
 						previousResults = previousResults.concat(data.results);
 					});
 				}
