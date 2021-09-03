@@ -1,15 +1,9 @@
-import { UrlState, Translator, TranslatorConfig, UrlStateSort, RangeValueProperties, UrlStateFilterType } from '../../types';
+import deepmerge from 'deepmerge';
 
-import Immutable from 'seamless-immutable';
-import { ImmutableObject, ImmutableArray } from 'seamless-immutable';
-
-export enum LocationType {
-	HASH = 'hash',
-	SEARCH = 'search',
-}
+import { UrlState, Translator, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
 
 type LocationLookup = {
-	[LocationType: string]: Array<string>;
+	[ParamLocationType: string]: Array<string>;
 };
 
 type QueryParameter = {
@@ -19,42 +13,73 @@ type QueryParameter = {
 
 type HashParameter = Array<string>;
 
-type Config = {
-	queryParameter: string;
-	urlRoot: string;
-	parameters: {
-		hash: ImmutableArray<string>;
-		search: ImmutableArray<string>;
-		implicit: LocationType;
+type MapOptions = {
+	name?: string;
+	type?: ParamLocationType;
+};
+
+type CoreMap = {
+	query?: MapOptions;
+	// oq?: MapOptions;
+	// rq?: MapOptions;
+	// tag?: MapOptions;
+	page?: MapOptions;
+	// pageSize?: MapOptions;
+	sort?: MapOptions;
+	filter?: MapOptions;
+};
+
+type CustomMap = {
+	[param: string]: {
+		type?: ParamLocationType;
 	};
 };
 
-interface UrlTranslatorConfig extends TranslatorConfig {
-	parameters?: {
-		hash?: Array<string>;
-		search?: Array<string>;
+export type UrlTranslatorParametersConfig = {
+	settings?: {
+		prefix?: string;
+		implicit?: ParamLocationType;
 	};
-}
+	core?: CoreMap;
+	custom?: CustomMap;
+};
+
+export type UrlTranslatorConfig = {
+	urlRoot?: string;
+	parameters?: UrlTranslatorParametersConfig;
+};
+
+const defaultConfig: UrlTranslatorConfig = {
+	urlRoot: '',
+	parameters: {
+		settings: {
+			prefix: '',
+			implicit: ParamLocationType.HASH,
+		},
+		core: {
+			query: { name: 'q', type: ParamLocationType.QUERY },
+			// oq: { name: 'oq', type: ParamLocationType.QUERY },
+			// rq: { name: 'rq', type: ParamLocationType.QUERY },
+			// tag: { name: 'tag', type: ParamLocationType.QUERY },
+			page: { name: 'page', type: ParamLocationType.QUERY },
+			// pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
+			sort: { name: 'sort', type: ParamLocationType.HASH },
+			filter: { name: 'filter', type: ParamLocationType.HASH },
+		},
+		custom: {},
+	},
+};
 
 export class UrlTranslator implements Translator {
-	private config: ImmutableObject<Config>;
-	private lookup: LocationLookup = {};
+	private config: UrlTranslatorConfig;
 
 	constructor(config: UrlTranslatorConfig = {}) {
-		this.config = Immutable({
-			urlRoot: typeof config.urlRoot == 'string' ? config.urlRoot.replace(/\/$/, '') : '',
-			queryParameter: typeof config.queryParameter == 'string' ? config.queryParameter : 'q',
-			parameters: {
-				hash: Immutable(config.parameters?.hash || []),
-				search: Immutable(config.parameters?.search || []),
-				implicit: LocationType.HASH,
-			},
-		});
-
-		this.lookup = {
-			search: this.config.parameters.search.asMutable(),
-			hash: this.config.parameters.hash.asMutable(),
-		};
+		this.config = deepmerge(defaultConfig, config);
+		if (this.config.parameters.settings.prefix) {
+			Object.keys(this.config.parameters.core).forEach((param) => {
+				this.config.parameters.core[param].name = this.config.parameters.settings.prefix + this.config.parameters.core[param].name;
+			});
+		}
 	}
 
 	bindExternalEvents(update: () => void): void {
@@ -65,8 +90,8 @@ export class UrlTranslator implements Translator {
 		return location.search + location.hash;
 	}
 
-	getConfig(): Config {
-		return this.config.asMutable();
+	getConfig(): UrlTranslatorConfig {
+		return deepmerge({}, this.config);
 	}
 
 	protected parseQueryString(queryString: string): Array<QueryParameter> {
@@ -117,15 +142,13 @@ export class UrlTranslator implements Translator {
 	}
 
 	protected parseQuery(queryParams: Array<QueryParameter>): UrlState {
-		const qParamKey: string = this.getConfig().queryParameter;
-
-		const qParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == qParamKey);
+		const qParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == this.config.parameters.core.query.name);
 
 		return qParam ? { query: qParam.value } : {};
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
-		const pageParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == 'page');
+		const pageParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == this.config.parameters.core.page.name);
 
 		if (!pageParam) {
 			return {};
@@ -145,8 +168,10 @@ export class UrlTranslator implements Translator {
 				const path = param.key;
 				const value = param.value;
 
-				if (!this.lookup.search.includes(path[0])) {
-					this.lookup.search.push(path[0]);
+				if (!this.config.parameters.custom[path[0]]) {
+					this.config.parameters.custom[path[0]] = {
+						type: ParamLocationType.QUERY,
+					};
 				}
 
 				// eslint-disable-next-line prefer-const
@@ -177,8 +202,10 @@ export class UrlTranslator implements Translator {
 				const path = param.length > 1 ? param.slice(0, -1) : param;
 				const value = param.length > 1 ? param[param.length - 1] : undefined;
 
-				if (!this.lookup.hash.includes(path[0])) {
-					this.lookup.hash.push(path[0]);
+				if (!this.config.parameters.custom[path[0]]) {
+					this.config.parameters.custom[path[0]] = {
+						type: ParamLocationType.HASH,
+					};
 				}
 
 				// eslint-disable-next-line prefer-const
@@ -203,7 +230,7 @@ export class UrlTranslator implements Translator {
 	}
 
 	protected parseHashFilter(hashParameters: Array<HashParameter>): UrlState {
-		const filters = hashParameters.filter((p) => p[0] == 'filter');
+		const filters = hashParameters.filter((p) => p[0] == this.config.parameters.core.filter.name);
 		const valueFilterParams = filters.filter((p) => p.length == 3);
 		const rangeFilterParams = filters.filter((p) => p.length == 4);
 
@@ -254,7 +281,7 @@ export class UrlTranslator implements Translator {
 	}
 
 	protected parseHashSort(hashParameters: Array<HashParameter>): UrlState {
-		const sort = hashParameters.filter((p) => p[0] == 'sort');
+		const sort = hashParameters.filter((p) => p[0] == this.config.parameters.core.sort.name);
 
 		return sort.reduce((state: UrlState, param: HashParameter): UrlState => {
 			const [type, field, direction] = param;
@@ -272,7 +299,7 @@ export class UrlTranslator implements Translator {
 			return [];
 		}
 
-		return [{ key: ['page'], value: '' + state.page }];
+		return [{ key: [this.config.parameters.core.page.name], value: '' + state.page }];
 	}
 
 	protected encodeQuery(state: UrlState): Array<QueryParameter> {
@@ -282,7 +309,7 @@ export class UrlTranslator implements Translator {
 
 		return [
 			{
-				key: [this.getConfig().queryParameter],
+				key: [this.config.parameters.core.query.name],
 				value: state.query,
 			},
 		];
@@ -329,21 +356,26 @@ export class UrlTranslator implements Translator {
 
 			const filter = state.filter[key];
 
-			return (filter instanceof Array ? filter : [filter]).flatMap(
-				(value: UrlStateFilterType): Array<HashParameter> => {
-					if (typeof value == 'string' || typeof value == 'number' || typeof value == 'boolean') {
-						return [['filter', key, '' + value]];
-					} else if (
-						typeof value == 'object' &&
-						typeof value[RangeValueProperties.LOW] != 'undefined' &&
-						typeof value[RangeValueProperties.HIGH] != 'undefined'
-					) {
-						return [['filter', key, '' + (value[RangeValueProperties.LOW] ?? '*'), '' + (value[RangeValueProperties.HIGH] ?? '*')]];
-					}
-
-					return [];
+			return (filter instanceof Array ? filter : [filter]).flatMap((value: UrlStateFilterType): Array<HashParameter> => {
+				if (typeof value == 'string' || typeof value == 'number' || typeof value == 'boolean') {
+					return [[this.config.parameters.core.filter.name, key, '' + value]];
+				} else if (
+					typeof value == 'object' &&
+					typeof value[RangeValueProperties.LOW] != 'undefined' &&
+					typeof value[RangeValueProperties.HIGH] != 'undefined'
+				) {
+					return [
+						[
+							this.config.parameters.core.filter.name,
+							key,
+							'' + (value[RangeValueProperties.LOW] ?? '*'),
+							'' + (value[RangeValueProperties.HIGH] ?? '*'),
+						],
+					];
 				}
-			);
+
+				return [];
+			});
 		});
 	}
 
@@ -353,7 +385,7 @@ export class UrlTranslator implements Translator {
 		}
 
 		return (state.sort instanceof Array ? state.sort : [state.sort]).map((sort: UrlStateSort) => {
-			return ['sort', sort.field, sort.direction];
+			return [this.config.parameters.core.sort.name, sort.field, sort.direction];
 		});
 	}
 
@@ -393,29 +425,48 @@ export class UrlTranslator implements Translator {
 		return {
 			...this.parseQuery(queryParams),
 			...this.parsePage(queryParams),
-			...this.parseOther(queryParams, ['page', this.getConfig().queryParameter]),
+			...this.parseOther(queryParams, [this.config.parameters.core.query.name, this.config.parameters.core.page.name]),
 		};
 	}
 
 	protected hashParamsToState(hashParameters: Array<HashParameter>): UrlState {
+		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
+			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
+		});
+
+		// ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]
 		return {
-			...this.parseHashOther(hashParameters, ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]),
+			...this.parseHashOther(hashParameters, [
+				'page',
+				'query',
+				'filter',
+				'sort',
+				this.config.parameters.core.filter.name,
+				this.config.parameters.core.sort.name,
+				...customQueryParams,
+			]),
 			...this.parseHashFilter(hashParameters),
 			...this.parseHashSort(hashParameters),
 		};
 	}
 
 	protected stateToQueryParams(state: UrlState = {}): Array<QueryParameter> {
-		const whitelist = this.lookup.search;
+		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
+			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
+		});
 
-		return [...this.encodeQuery(state), ...this.encodePage(state), ...this.encodeOther(state, whitelist)];
+		return [...this.encodeQuery(state), ...this.encodePage(state), ...this.encodeOther(state, customQueryParams)];
 	}
 
 	protected stateToHashParams(state: UrlState = {}): Array<HashParameter> {
+		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
+			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
+		});
+
 		return [
 			...this.encodeHashFilter(state),
 			...this.encodeHashSort(state),
-			...this.encodeHashOther(state, ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]),
+			...this.encodeHashOther(state, ['page', 'query', this.config.parameters.core.query.name, 'filter', 'sort', ...customQueryParams]),
 		];
 	}
 
@@ -439,8 +490,15 @@ export class UrlTranslator implements Translator {
 		return { ...queryState, ...hashState };
 	}
 
-	go(url: string): void {
-		history.pushState(null, '', url);
+	go(url: string, config?: { history: string }): void {
+		const currentUrl = window.location.search + window.location.hash;
+		if (url != currentUrl) {
+			if (config?.history == 'replace') {
+				history.replaceState(null, '', url);
+			} else {
+				history.pushState(null, '', url);
+			}
+		}
 	}
 }
 

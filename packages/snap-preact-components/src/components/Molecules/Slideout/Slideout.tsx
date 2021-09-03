@@ -97,7 +97,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 					</div>
 				)}
 
-				<div className={classnames('ss__slideout', className)} {...styling}>
+				<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
 					{cloneWithProps(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />

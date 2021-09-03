@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
+
+**Note:** Version bump only for package @searchspring/snap-profiler
+
+
+
+
+
 ## [0.5.5](https://github.com/searchspring/snap/compare/v0.5.4...v0.5.5) (2021-08-25)
 
 **Note:** Version bump only for package @searchspring/snap-profiler

@@ -11,9 +11,9 @@ There are two ways we can attach events to our controllers. Using the config, or
 
 On the config we can specify middleware via `on` or `plugins` attributes.
 
-### on
+### middleware
 
-The `on` property is an object that has event name(s) as the key and and array of the middleware functions as the values.
+The `middleware` property is an object that has event name(s) as the key and and array of the middleware functions as the values.
 
 The value can be a single function or an array of functions if attaching multiple middleware to a single event. 
 
@@ -44,7 +44,7 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					on: {
+					middleware: {
 						init: initMiddleware,
 						afterSearch: [
 							afterSearchMiddlewareOne,

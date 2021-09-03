@@ -5,7 +5,7 @@ export class ResultStore extends Array {
 		return Array;
 	}
 
-	constructor(services, resultData, paginationData?, merchData?) {
+	constructor(config, services, resultData, paginationData?, merchData?) {
 		let results = (resultData || []).map((result) => {
 			return new Product(services, result);
 		});
@@ -20,7 +20,7 @@ export class ResultStore extends Array {
 				});
 
 			if (banners && paginationData?.totalResults) {
-				results = addBannersToResults(results, banners, paginationData);
+				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
 
@@ -84,10 +84,14 @@ class Product {
 	}
 }
 
-function addBannersToResults(results, banners, paginationData) {
+function addBannersToResults(config, results, banners, paginationData) {
 	const productCount = results.length;
-	const minIndex = paginationData.pageSize * (paginationData.page - 1);
+	let minIndex = paginationData.pageSize * (paginationData.page - 1);
 	const maxIndex = minIndex + paginationData.pageSize;
+
+	if (config?.settings?.infinite) {
+		minIndex = 0;
+	}
 
 	banners
 		.reduce((adding, banner) => {

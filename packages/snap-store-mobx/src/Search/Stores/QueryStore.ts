@@ -40,7 +40,7 @@ class Query {
 	constructor(services, query) {
 		this.string = query;
 
-		this.url = services.urlManager.set({ query: this.string });
+		this.url = services.urlManager.remove('page').remove('filter').set('query', this.string);
 
 		makeObservable(this, {
 			string: observable,

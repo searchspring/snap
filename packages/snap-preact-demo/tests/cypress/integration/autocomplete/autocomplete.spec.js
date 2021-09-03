@@ -59,6 +59,9 @@ describe('Autocomplete', () => {
 	it('has terms, facets, content when query is performed', function () {
 		cy.get('.searchspring-ac').focus().type('r');
 
+		// have to wait for search to start
+		cy.wait(500);
+
 		cy.snapStore('autocomplete').then((store) => {
 			cy.get('.ss__autocomplete__terms__option').should('have.length', store.terms.length);
 			cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);

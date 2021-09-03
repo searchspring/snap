@@ -13,7 +13,7 @@ const CSS = {
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
-			maxWidth: width ? 'initial' : '260px',
+			alignItems: 'center',
 			width: width || 'auto',
 			'&.ss__inline-banner--grid': {
 				flexDirection: 'column',
