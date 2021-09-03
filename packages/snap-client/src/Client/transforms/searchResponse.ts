@@ -81,8 +81,8 @@ transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 		return coreFields;
 	}, {});
 
-	coreFieldValues.price = +coreFieldValues.price;
-	coreFieldValues.msrp = +coreFieldValues.msrp;
+	if (coreFieldValues.price) coreFieldValues.price = +coreFieldValues.price;
+	if (coreFieldValues.msrp) coreFieldValues.msrp = +coreFieldValues.msrp;
 
 	const attributes = Object.keys(rawResult)
 		.filter((k) => CORE_FIELDS.indexOf(k) == -1)
