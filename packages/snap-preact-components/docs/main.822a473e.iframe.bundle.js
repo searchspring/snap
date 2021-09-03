@@ -2932,7 +2932,7 @@
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'center',
-								maxWidth: width ? 'initial' : '260px',
+								alignItems: 'center',
 								width: width || 'auto',
 								'&.ss__inline-banner--grid': { flexDirection: 'column' },
 								'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
@@ -18110,7 +18110,8 @@
 														backfills.push(this.client.search(backfillParams));
 												return [4, Promise.all(backfills)];
 											case 9:
-												_j.sent().map(function (data) {
+												_j.sent().map(function (_a) {
+													var data = _a[0];
 													previousResults_1 = previousResults_1.concat(data.results);
 												}),
 													(_j.label = 10);
@@ -20380,7 +20381,8 @@
 							? searchResponse_assign(searchResponse_assign({}, coreFields), (((_a = {})[key] = decodeProperty(rawResult[key])), _a))
 							: coreFields;
 					}, {});
-					(coreFieldValues.price = +coreFieldValues.price), (coreFieldValues.msrp = +coreFieldValues.msrp);
+					coreFieldValues.price && (coreFieldValues.price = +coreFieldValues.price),
+						coreFieldValues.msrp && (coreFieldValues.msrp = +coreFieldValues.msrp);
 					var attributes = Object.keys(rawResult)
 						.filter(function (k) {
 							return -1 == CORE_FIELDS.indexOf(k);
@@ -21808,7 +21810,7 @@
 						}).apply(this, arguments);
 				},
 				ResultStore = (function (_super) {
-					function ResultStore(services, resultData, paginationData, merchData) {
+					function ResultStore(config, services, resultData, paginationData, merchData) {
 						var _a,
 							results = (resultData || []).map(function (result) {
 								return new Product(services, result);
@@ -21823,10 +21825,12 @@
 								});
 							banners &&
 								(null == paginationData ? void 0 : paginationData.totalResults) &&
-								(results = (function addBannersToResults(results, banners, paginationData) {
-									var productCount = results.length,
+								(results = (function addBannersToResults(config, results, banners, paginationData) {
+									var _a,
+										productCount = results.length,
 										minIndex = paginationData.pageSize * (paginationData.page - 1),
 										maxIndex = minIndex + paginationData.pageSize;
+									(null === (_a = null == config ? void 0 : config.settings) || void 0 === _a ? void 0 : _a.infinite) && (minIndex = 0);
 									return (
 										banners
 											.reduce(function (adding, banner) {
@@ -21844,7 +21848,7 @@
 											}),
 										results
 									);
-								})(results, banners, paginationData));
+								})(config, results, banners, paginationData));
 						}
 						return _super.apply(this, results) || this;
 					}
@@ -22146,7 +22150,7 @@
 								(this.search = new QueryStore(this.services, data.search)),
 								(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
+								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
 								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
@@ -22499,7 +22503,7 @@
 								this.state.locks.facets.locked ||
 									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
 								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-								(this.results = new ResultStore(this.services, data.results, data.pagination, data.merchandising)),
+								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
 								((0 === this.results.length &&
 									!this.trending.filter(function (term) {
 										return term.active;
@@ -22835,7 +22839,7 @@
 						(RecommendationStore.prototype.update = function (data) {
 							(this.loaded = !!data.profile),
 								(this.profile = new ProfileStore(this.services, data.profile)),
-								(this.results = new ResultStore(this.services, data.results));
+								(this.results = new ResultStore(this.config, this.services, data.results));
 						}),
 						RecommendationStore
 					);
@@ -24005,7 +24009,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.6.1' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.6.2' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24032,7 +24036,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.6.1');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.6.2');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24631,7 +24635,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.6.1]',
+								text: '[0.6.2]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -25146,6 +25150,8 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { u: () => formatNumber });
 			__webpack_require__(43105),
+				__webpack_require__(14586),
+				__webpack_require__(71245),
 				__webpack_require__(48319),
 				__webpack_require__(77950),
 				__webpack_require__(85940),
@@ -25169,17 +25175,18 @@
 					{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !1 },
 					opts
 				);
-				if ('number' != typeof input) return input;
-				var split = (function truncateDecimals(input, digits) {
-					var numString = input.toString(),
-						decimalPosition = numString.indexOf('.'),
-						substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
-					return numString.substr(0, substrLength);
-				})(input, options.decimalPlaces).split('.');
-				(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
-					options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
-				var output = split.join(options.decimalSeparator);
-				return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
+				if ('number' == typeof input && !Number.isNaN(input)) {
+					var split = (function truncateDecimals(input, digits) {
+						var numString = input.toString(),
+							decimalPosition = numString.indexOf('.'),
+							substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
+						return numString.substr(0, substrLength);
+					})(input, options.decimalPlaces).split('.');
+					(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
+						options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
+					var output = split.join(options.decimalSeparator);
+					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
+				}
 			}
 		},
 		74886: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
