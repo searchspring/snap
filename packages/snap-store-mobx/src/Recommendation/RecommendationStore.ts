@@ -33,6 +33,6 @@ export class RecommendationStore extends AbstractStore {
 	update(data): void {
 		this.loaded = !!data.profile;
 		this.profile = new ProfileStore(this.services, data.profile);
-		this.results = new ResultStore(this.services, data.results);
+		this.results = new ResultStore(this.config, this.services, data.results);
 	}
 }
