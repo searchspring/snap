@@ -157,7 +157,7 @@ transformSearchRequest.facets = (request: SearchRequestModel = {}) => {
 transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	const reqTracking = request.tracking || {};
 
-	if (reqTracking?.userId) {
+	if (reqTracking.userId) {
 		return { userId: reqTracking.userId };
 	}
 
