@@ -27,7 +27,8 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexDirection: 'column',
-			margin: '5px 0',
+			marginTop: '5px',
+			marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
 
 			'& .ss__facet-slider__slider': {
 				position: 'relative',
