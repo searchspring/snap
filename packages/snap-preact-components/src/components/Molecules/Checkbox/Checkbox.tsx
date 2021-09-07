@@ -62,13 +62,13 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: iconColor || color || theme.colors?.primary || '#333',
+				color: iconColor || color || theme.colors?.primary,
 				disableStyles,
 				icon,
 				size: size && `calc(${size} - 30%)`,
 			}),
 			// component theme overrides
-			...theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

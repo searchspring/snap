@@ -67,7 +67,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				transitionSpeed,
 			}),
 			// component theme overrides
-			...props.theme?.components?.overlay,
+			theme: props.theme,
 		},
 	};
 

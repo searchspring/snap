@@ -9,7 +9,7 @@ import { ThemeProvider } from '../../../providers';
 describe('FacetPaletteOptions Component', () => {
 	const theme = {
 		components: {
-			facetpaletteoptions: {
+			facetPaletteOptions: {
 				columns: 6,
 			},
 		},
@@ -72,8 +72,8 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
-			`repeat(${theme.components.facetpaletteoptions.columns}, calc((100% - (${theme.components.facetpaletteoptions.columns - 1} * 8px))/ ${
-				theme.components.facetpaletteoptions.columns
+			`repeat(${theme.components.facetPaletteOptions.columns}, calc((100% - (${theme.components.facetPaletteOptions.columns - 1} * 8px))/ ${
+				theme.components.facetPaletteOptions.columns
 			}))`
 		);
 	});
@@ -86,8 +86,8 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
-			`repeat(${theme.components.facetpaletteoptions.columns}, calc((100% - (${theme.components.facetpaletteoptions.columns - 1} * 8px))/ ${
-				theme.components.facetpaletteoptions.columns
+			`repeat(${theme.components.facetPaletteOptions.columns}, calc((100% - (${theme.components.facetPaletteOptions.columns - 1} * 8px))/ ${
+				theme.components.facetPaletteOptions.columns
 			}))`
 		);
 	});
@@ -98,7 +98,7 @@ describe('FacetPaletteOptions Component', () => {
 		};
 		const themeOverride = {
 			components: {
-				facetpaletteoptions: {
+				facetPaletteOptions: {
 					columns: 3,
 				},
 			},
@@ -111,9 +111,9 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement);
 		expect(styles['grid-template-columns']).toBe(
-			`repeat(${themeOverride.components.facetpaletteoptions.columns}, calc((100% - (${
-				themeOverride.components.facetpaletteoptions.columns - 1
-			} * 8px))/ ${themeOverride.components.facetpaletteoptions.columns}))`
+			`repeat(${themeOverride.components.facetPaletteOptions.columns}, calc((100% - (${
+				themeOverride.components.facetPaletteOptions.columns - 1
+			} * 8px))/ ${themeOverride.components.facetPaletteOptions.columns}))`
 		);
 	});
 });

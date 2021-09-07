@@ -103,7 +103,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.dropdown,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -117,7 +117,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 		showMoreLessIcon: {
 			// default props
@@ -131,7 +131,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 		facetHierarchyOptions: {
 			// default props
@@ -145,7 +145,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facetHierarchyOptions,
+			theme: props.theme,
 		},
 		facetListOptions: {
 			// default props
@@ -159,7 +159,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facetListOptions,
+			theme: props.theme,
 		},
 		facetGridOptions: {
 			// default props
@@ -173,7 +173,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facetGridOptions,
+			theme: props.theme,
 		},
 		facetPaletteOptions: {
 			// default props
@@ -187,7 +187,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facetPaletteOptions,
+			theme: props.theme,
 		},
 		slider: {
 			// default props
@@ -199,7 +199,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.slider,
+			theme: props.theme,
 		},
 	};
 

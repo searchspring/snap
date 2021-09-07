@@ -105,7 +105,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.carousel,
+			theme: props.theme,
 		},
 		result: {
 			// default props
@@ -117,7 +117,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.result,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -129,7 +129,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			...theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

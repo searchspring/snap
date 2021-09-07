@@ -73,7 +73,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				icon: filterIcon,
 			}),
 			// component theme overrides
-			...props.theme?.components?.filter,
+			theme: props.theme,
 		},
 	};
 
