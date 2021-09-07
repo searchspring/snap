@@ -2,14 +2,14 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Slider, SliderProps } from './Slider';
+import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
-import Readme from '../Slider/readme.md';
+import Readme from '../FacetSlider/readme.md';
 
 export default {
-	title: `Molecules/Slider`,
-	component: Slider,
+	title: `Molecules/FacetSlider`,
+	component: FacetSlider,
 	parameters: {
 		docs: {
 			page: () => (
@@ -58,6 +58,15 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		tickTextColor: {
+			description: 'ticks color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'color' },
+		},
 		trackColor: {
 			description: 'Slider track color',
 			table: {
@@ -94,6 +103,16 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		stickyHandleLabel: {
+			description: 'enables/disables sticky handle labels',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		handleDraggingColor: {
 			description: 'Slider handle color when dragging',
 			table: {
@@ -125,6 +144,6 @@ export default {
 	},
 };
 
-const Template = (args: SliderProps) => <Slider {...args} facet={sliderFacetMock} />;
+const Template = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
 
 export const Price = Template.bind({});

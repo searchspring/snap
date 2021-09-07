@@ -9,7 +9,7 @@ import { FacetListOptions, FacetListOptionsProps } from '../../Molecules/FacetLi
 import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGridOptions';
 import { FacetPaletteOptions, FacetPaletteOptionsProps } from '../../Molecules/FacetPaletteOptions';
 import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from '../../Molecules/FacetHierarchyOptions';
-import { Slider, SliderProps } from '../../Molecules/Slider';
+import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
@@ -189,11 +189,11 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			// component theme overrides
 			theme: props.theme,
 		},
-		slider: {
+		facetSlider: {
 			// default props
-			className: 'ss__facet__slider',
+			className: 'ss__facet__facet-slider',
 			// global theme
-			...globalTheme?.components?.slider,
+			...globalTheme?.components?.facetSlider,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -234,7 +234,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						{(() => {
 							switch (facet?.display) {
 								case FacetDisplay.SLIDER:
-									return <Slider {...subProps.slider} facet={facet as RangeFacet} />;
+									return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 								case FacetDisplay.GRID:
 									return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
 								case FacetDisplay.PALETTE:
@@ -265,7 +265,7 @@ interface FacetSubProps {
 	facetGridOptions: FacetGridOptionsProps;
 	facetPaletteOptions: FacetPaletteOptionsProps;
 	facetHierarchyOptions: FacetHierarchyOptionsProps;
-	slider: SliderProps;
+	facetSlider: FacetSliderProps;
 	icon: IconProps;
 	showMoreLessIcon: IconProps;
 }

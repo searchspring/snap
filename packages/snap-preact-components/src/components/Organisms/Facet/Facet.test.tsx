@@ -58,7 +58,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const sliderElement = facetElement.querySelector('.ss__slider');
+			const sliderElement = facetElement.querySelector('.ss__facet-slider');
 			expect(sliderElement).toBeInTheDocument();
 		});
 	});

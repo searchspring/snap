@@ -287,7 +287,7 @@ Each result object contains the following notable properties:
 
 The example below displays a custom `FacetOptionsList` component for facets with a display type of `list`.
 
-The `@searchspring/snap-preact-components` component library includes the following components that can be imported or used as a reference: `FacetListOptions`, `FacetGridOptions`, `FacetPaletteOptions`, `FacetHierarchyOptions`, `Slider`
+The `@searchspring/snap-preact-components` component library includes the following components that can be imported or used as a reference: `FacetListOptions`, `FacetGridOptions`, `FacetPaletteOptions`, `FacetHierarchyOptions`, `FacetSlider`
 
 `facet.type` the facet type - Available facet types: `range`, `value`, `range-buckets`. 
 
@@ -347,7 +347,7 @@ export class Facet extends Component {
 								grid: <div>grid component</div>,
 								palette: <div>palette component</div>,
 								hierarchy: <div>hierarchy component</div>,
-								slider: <Slider facet={facet} />,
+								slider: <FacetSlider facet={facet} />,
 							}[facet.display] || <FacetOptionsList facet={facet} />}
 						</div>
 					</div>
