@@ -21,7 +21,6 @@ const CSS = {
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
-			minHeight: '70px',
 			'& .ss__facet__header': {
 				display: 'flex',
 				justifyContent: 'space-between',
@@ -33,7 +32,6 @@ const CSS = {
 			},
 			'& .ss__facet__options': {
 				marginTop: '8px',
-				minHeight: '70px',
 				maxHeight: '300px',
 				overflowY: 'auto',
 				overflowX: 'hidden',
