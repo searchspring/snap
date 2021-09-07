@@ -1,23 +1,29 @@
-name: Publish
+name: Docs
 
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_run:
+    workflows: ["Publish"]
+    types: [completed]
 
 jobs:
-  Publish:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
+          ref: "docs"
 
       - name: Set Github credentials
         run: |
           git config user.name searchspring-machine
           git config user.email machine@searchspring.com
+
+      - name: Merge main into docs branch
+        run: |
+          git merge -X theirs origin/main
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -43,15 +49,14 @@ jobs:
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
-
+      
       - name: Build
         run: | 
           npm run build
 
-      - name: Tests
-        run: npm run test
-
-      - name: Publish packages
-        run: npm run publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
+      - name: Build docs
+        run: |
+          npm run build:docs 
+          git add -A packages/snap-*/docs/ 
+          git commit -m "chore(docs): generation"
+          git push

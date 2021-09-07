@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
+
+
+### Bug Fixes
+
+* **slideout-component:** adding --active modifier class to ss__slideout when active ([b2bb8fa](https://github.com/searchspring/snap/commit/b2bb8fa184c25335752d97deaa7a6b91e056e754))
+
+
+
+
+
+## [0.5.5](https://github.com/searchspring/snap/compare/v0.5.4...v0.5.5) (2021-08-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.5.4](https://github.com/searchspring/snap/compare/v0.5.3...v0.5.4) (2021-08-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.5.3](https://github.com/searchspring/snap/compare/v0.5.2...v0.5.3) (2021-08-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.5.2](https://github.com/searchspring/snap/compare/v0.5.1...v0.5.2) (2021-08-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.5.1](https://github.com/searchspring/snap/compare/v0.5.0...v0.5.1) (2021-08-24)
+
+
+### Bug Fixes
+
+* **autocompletecomponent:** styling changes to make facets appear correctly in ac component ([7dcb600](https://github.com/searchspring/snap/commit/7dcb600de8a4353f6acd545b866d767cf789831c))
+* **facetheirarchyoptions:** adding ability to preview this type of facet for autocomplete component ([ec9014b](https://github.com/searchspring/snap/commit/ec9014befb22a16c7e05a89c6ce7c6e7fded16f6))
+
+
+
+
+
 # [0.5.0](https://github.com/searchspring/snap/compare/v0.4.0...v0.5.0) (2021-08-23)
 
 

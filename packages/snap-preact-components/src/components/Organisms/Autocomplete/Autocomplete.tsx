@@ -12,7 +12,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProp, BreakpointsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facet, FacetProps } from '../../Organisms/Facet';
-import { defined } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -120,6 +120,16 @@ const CSS = {
 				'& .ss__autocomplete__facet': {
 					flex: vertical ? '0 1 150px' : null,
 				},
+				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
+					{
+						paddingLeft: 0,
+					},
+				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover': {
+					cursor: 'pointer',
+				},
+				'.ss__facet-palette-options__icon': {
+					display: 'none',
+				},
 			},
 			'& .ss__autocomplete__content': {
 				display: 'flex',
@@ -215,6 +225,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		termsSlot,
 		facetsSlot,
 		contentSlot,
+		resultsSlot,
+		noResultsSlot,
 		disableStyles,
 		className,
 		width,
@@ -245,6 +257,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			...defined({
 				disableStyles,
 			}),
+
+			// component theme overrides
 			theme: {
 				components: {
 					facetGridOptions: {
@@ -261,10 +275,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						hideLabel: true,
 						columns: 3,
 					},
+					...props.theme?.components,
 				},
 			},
-			// component theme overrides
-			...props.theme?.components?.facet,
 		},
 		banner: {
 			// default props
@@ -276,7 +289,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.banner,
+			theme: props.theme,
 		},
 		results: {
 			// default props
@@ -287,16 +300,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// inherited props
 			...defined({
 				disableStyles,
-				theme: {
-					components: {
-						result: {
-							hideBadge: true,
-						},
-					},
-				},
 			}),
 			// component theme overrides
-			...props.theme?.components?.results,
+			theme: {
+				components: {
+					result: {
+						hideBadge: true,
+					},
+					...props.theme?.components,
+				},
+			},
 		},
 		icon: {
 			// default props
@@ -310,7 +323,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
@@ -368,15 +381,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					onClick={(e) => e.stopPropagation()}
 				>
 					{!hideTerms && (
-						<div className="ss__autocomplete__terms">
+						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneElement(termsSlot, { terms, trending, controller })
+								cloneWithProps(termsSlot, { terms, trending, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (
-										<div className="ss__autocomplete__terms">
+										<>
 											{termsTitle ? (
-												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--terms')}>
+												<div className="ss__autocomplete__title ss__autocomplete__title--terms">
 													<h5>{termsTitle}</h5>
 												</div>
 											) : null}
@@ -393,13 +406,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													</div>
 												))}
 											</div>
-										</div>
+										</>
 									) : null}
 
 									{showTrending ? (
-										<div className="ss__autocomplete__terms ss__autocomplete__terms-trending">
+										<>
 											{trendingTitle ? (
-												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--trending')}>
+												<div className="ss__autocomplete__title ss__autocomplete__title--trending">
 													<h5>{trendingTitle}</h5>
 												</div>
 											) : null}
@@ -416,7 +429,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 													</div>
 												))}
 											</div>
-										</div>
+										</>
 									) : null}
 								</>
 							)}
@@ -424,28 +437,29 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					)}
 
 					{!hideFacets &&
-						facetsToShow.length > 0 &&
 						(facetsSlot ? (
-							<div className="ss__autocomplete__facets">{cloneElement(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
+							<div className="ss__autocomplete__facets">{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
 						) : (
-							<>
-								{facetsTitle && vertical ? (
-									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-										<h5>{facetsTitle}</h5>
-									</div>
-								) : null}
-								<div className="ss__autocomplete__facets">
-									{facetsTitle && !vertical ? (
+							facetsToShow.length > 0 && (
+								<>
+									{facetsTitle && vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 											<h5>{facetsTitle}</h5>
 										</div>
 									) : null}
-									{facetsToShow.map((facet) => (
-										<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-									))}
-									{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
-								</div>
-							</>
+									<div className="ss__autocomplete__facets">
+										{facetsTitle && !vertical ? (
+											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+												<h5>{facetsTitle}</h5>
+											</div>
+										) : null}
+										{facetsToShow.map((facet) => (
+											<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
+										))}
+										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
+									</div>
+								</>
+							)
 						))}
 
 					{!hideContent ? (
@@ -459,17 +473,29 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
 								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
-										{contentTitle && results.length > 0 ? (
-											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-												<h5>{contentTitle}</h5>
-											</div>
-										) : null}
-										<Results results={results} {...subProps.results} controller={controller} />
+										{resultsSlot ? (
+											cloneElement(resultsSlot, { results, contentTitle, controller })
+										) : (
+											<>
+												{contentTitle && results.length > 0 ? (
+													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+														<h5>{contentTitle}</h5>
+													</div>
+												) : null}
+												<Results results={results} {...subProps.results} controller={controller} />
+											</>
+										)}
 									</div>
 								) : (
 									<div className="ss__autocomplete__content__no-results">
-										<p>No results found for "{search.query.string}".</p>
-										<p>Please try another search.</p>
+										{noResultsSlot ? (
+											cloneElement(noResultsSlot, { search, pagination, controller })
+										) : (
+											<>
+												<p>No results found for "{search.query.string}".</p>
+												<p>Please try another search.</p>
+											</>
+										)}
 									</div>
 								)}
 
@@ -494,7 +520,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 });
 
 const emIfy = (term, search) => {
-	const match = term.match(search);
+	const match = term.match(escapeRegExp(search));
 	if (search && term && match) {
 		const beforeMatch = term.slice(0, match.index);
 		const afterMatch = term.slice(match.index + search.length, term.length);
@@ -512,6 +538,10 @@ const emIfy = (term, search) => {
 			<em>{term}</em>
 		</>
 	);
+};
+
+const escapeRegExp = (string: string): string => {
+	return string?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
 
 interface AutocompleteSubProps {
@@ -537,6 +567,8 @@ export interface AutocompleteProps extends ComponentProps {
 	termsSlot?: JSX.Element;
 	facetsSlot?: JSX.Element;
 	contentSlot?: JSX.Element;
+	resultsSlot?: JSX.Element;
+	noResultsSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
 	controller?: AutocompleteController;
 	width?: string;

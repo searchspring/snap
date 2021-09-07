@@ -280,6 +280,9 @@ describe('Autocomplete Controller', () => {
 		inputEl.value = 'wh';
 		inputEl.dispatchEvent(new Event('focus'));
 		inputEl.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 })); // Enter key
+
+		// timeout needed due to beforeSubmit event
+		await new Promise((resolve) => setTimeout(resolve));
 		expect(window.location.href).toBe(`${acConfig.action}?search_query=${inputEl.value}`);
 	});
 });

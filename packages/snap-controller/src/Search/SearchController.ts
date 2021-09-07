@@ -50,12 +50,12 @@ export class SearchController extends AbstractController {
 			key: `ss-controller-${this.config.id}`,
 		});
 
+		// set last params to undefined for compare in search
+		this.storage.set('lastStringyParams', undefined);
+
 		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
 			search.controller.store.loading = true;
-
-			const stringyParams = JSON.stringify(search.request);
-			this.storage.set('lastStringyParams', stringyParams);
 
 			await next();
 		});
@@ -88,9 +88,12 @@ export class SearchController extends AbstractController {
 
 			search.controller.store.loading = false;
 
+			// save last params
+			const stringyParams = JSON.stringify(search.request);
+			this.storage.set('lastStringyParams', stringyParams);
+
 			if (this.config.settings?.infinite && window.scrollY === 0) {
 				// browser didn't jump
-				const stringyParams = JSON.stringify(search.request);
 				const scrollMap = this.storage.get('scrollMap') || {};
 
 				// interval we ony need to keep checking until the page height > than our stored value
@@ -155,6 +158,12 @@ export class SearchController extends AbstractController {
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
 
+		const { userId } = this.tracker.getUserId();
+		if (userId) {
+			params.tracking = params.tracking || {};
+			params.tracking.userId = userId;
+		}
+
 		return params;
 	}
 
@@ -166,6 +175,13 @@ export class SearchController extends AbstractController {
 		const params = this.params;
 
 		try {
+			const stringyParams = JSON.stringify(params);
+			const prevStringyParams = this.storage.get('lastStringyParams');
+			if (stringyParams == prevStringyParams) {
+				// no param change - not searching
+				return;
+			}
+
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -219,7 +235,7 @@ export class SearchController extends AbstractController {
 					}
 
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map((data) => {
+					backfillResponses.map(([data]) => {
 						previousResults = previousResults.concat(data.results);
 					});
 				}
