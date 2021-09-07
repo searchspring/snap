@@ -27,6 +27,7 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexDirection: 'column',
+			margin: '5px 0',
 
 			'& .ss__facet-slider__slider': {
 				position: 'relative',
