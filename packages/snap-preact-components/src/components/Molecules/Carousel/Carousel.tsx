@@ -143,7 +143,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

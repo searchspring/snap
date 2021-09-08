@@ -41,7 +41,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.facet,
+			theme: props.theme,
 		},
 	};
 

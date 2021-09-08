@@ -84,10 +84,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		columns: 4,
 		gapSize: '8px',
 		// global theme
-		...globalTheme?.components?.facetpaletteoptions,
+		...globalTheme?.components?.facetPaletteOptions,
 		// props
 		...properties,
-		...properties.theme?.components?.facetpaletteoptions,
+		...properties.theme?.components?.facetPaletteOptions,
 	};
 
 	const { values, hideLabel, columns, gapSize, hideIcon, onClick, previewOnFocus, valueProps, disableStyles, className, style } = props;
@@ -106,7 +106,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 				size: '40%',
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

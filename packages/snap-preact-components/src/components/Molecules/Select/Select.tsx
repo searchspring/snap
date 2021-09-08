@@ -104,7 +104,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				disabled,
 			}),
 			// component theme overrides
-			...props.theme?.components?.dropdown,
+			theme: props.theme,
 		},
 		button: {
 			// default props
@@ -120,7 +120,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				borderColor,
 			}),
 			// component theme overrides
-			...props.theme?.components?.button,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -134,7 +134,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				size: '14px',
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 

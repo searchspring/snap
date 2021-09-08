@@ -63,7 +63,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 				disableStyles,
 			}),
 			// component theme overrides
-			...theme?.components?.checkbox,
+			theme: props.theme,
 		},
 	};
 

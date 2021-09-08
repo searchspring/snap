@@ -98,7 +98,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.price,
+			theme: props.theme,
 		},
 		badge: {
 			// default props
@@ -111,7 +111,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.badge,
+			theme: props.theme,
 		},
 		image: {
 			// default props
@@ -126,7 +126,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			...props.theme?.components?.image,
+			theme: props.theme,
 		},
 	};
 
