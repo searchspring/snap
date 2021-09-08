@@ -63,8 +63,8 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		loop: true,
 		// global theme
 		...globalTheme?.components?.recommendation,
-		// global theme
 		...properties,
+		// props
 		...properties.theme?.components?.recommendation,
 	};
 
