@@ -132,9 +132,13 @@ type UrlStateSort = {
 
 type UrlState = {
 	page?: number;
+	pageSize?: number;
 	query?: string;
+	rq?: string;
+	oq?: string;
 	filter?: UrlStateFilter;
 	sort?: UrlStateSort | Array<UrlStateSort>;
+	tag?: string;
 	[any: string]: unknown;
 };
 ```
