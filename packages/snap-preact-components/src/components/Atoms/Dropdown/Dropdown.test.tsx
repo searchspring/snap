@@ -155,8 +155,7 @@ describe('Dropdown Component', () => {
 		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
 
 		const dropdown = rendered.container.querySelector('.ss__dropdown');
-		expect(dropdown.classList).toHaveLength(2);
-		expect(dropdown.classList[1]).toMatch(/^ss-0/);
+		expect(dropdown.classList).toHaveLength(1);
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {

@@ -19,10 +19,7 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: ({ theme, style }) =>
-		css({
-			...style,
-		}),
+	recommendation: ({ theme }) => css({}),
 };
 
 export const defaultRecommendationBreakpoints = {
@@ -164,14 +161,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	(children || results.length) && (controller as RecommendationController)?.track?.render();
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.recommendation({ theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		(children || results?.length) && (
 			<CacheProvider>
-				<div
-					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.recommendation({ theme, style })}
-					className={classnames('ss__recommendation', className)}
-				>
+				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__recommendation', className)}>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
 					<Carousel
 						onInit={(swiper) => {

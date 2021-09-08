@@ -12,7 +12,8 @@ import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection, style }) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
+		//@ts-ignore
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -29,7 +30,6 @@ const CSS = {
 			background: '#fff',
 			boxSizing: 'border-box',
 			overflowY: 'auto',
-			...style,
 		}),
 };
 
@@ -82,6 +82,12 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	});
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		isVisible && (
 			<CacheProvider>
@@ -91,10 +97,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 					</div>
 				)}
 
-				<div
-					className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })}
-					css={!disableStyles && CSS.slideout({ isActive, width, transitionSpeed, slideDirection, style })}
-				>
+				<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
 					{cloneWithProps(children, { toggleActive, active: isActive })}
 				</div>
 				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />

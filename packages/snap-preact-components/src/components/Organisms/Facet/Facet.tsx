@@ -17,7 +17,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	facet: ({ color, theme, style }) =>
+	facet: ({ color, theme }) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
@@ -44,7 +44,6 @@ const CSS = {
 					marginRight: '8px',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -213,12 +212,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.facet({ color, theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		<CacheProvider>
-			<div
-				css={!disableStyles && CSS.facet({ color, theme, style })}
-				className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}
-			>
+			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
 				<Dropdown
 					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}

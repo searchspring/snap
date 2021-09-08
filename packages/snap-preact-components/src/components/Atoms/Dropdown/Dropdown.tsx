@@ -12,12 +12,12 @@ import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
-	dropdown: ({ disableOverlay, style }) =>
+	dropdown: ({ disableOverlay }) =>
 		css({
 			position: 'relative',
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__content': {
-					position: `${disableOverlay ? 'initial' : null}`,
+					position: `${disableOverlay ? 'initial' : null}` as 'initial',
 					visibility: 'visible',
 					opacity: 1,
 				},
@@ -33,7 +33,6 @@ const CSS = {
 				top: 'auto',
 				left: 0,
 			},
-			...style,
 		}),
 };
 
@@ -95,13 +94,15 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.dropdown({ disableOverlay }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
-			<div
-				css={!disableStyles && CSS.dropdown({ disableOverlay, style })}
-				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
-				ref={innerRef}
-			>
+			<div {...styling} className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)} ref={innerRef}>
 				<div
 					className="ss__dropdown__button"
 					onClick={(e) => {

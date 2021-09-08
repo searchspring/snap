@@ -8,7 +8,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	loadingBar: ({ color, height, backgroundColor, style, theme, animation }) =>
+	loadingBar: ({ color, height, backgroundColor, theme, animation }) =>
+		//@ts-ignore
 		css({
 			height: height,
 			position: 'fixed',
@@ -30,7 +31,6 @@ const CSS = {
 				background: `${color || theme.colors?.primary || '#ccc'}`,
 				animation: `${animation} 2s linear infinite`,
 			},
-			...style,
 		}),
 	animation: keyframes({
 		from: { left: '-200px', width: '30%' },
@@ -58,23 +58,16 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.loadingBar({ height, color, backgroundColor, theme, animation: CSS.animation }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		active && (
 			<CacheProvider>
-				<div
-					css={
-						!disableStyles &&
-						CSS.loadingBar({
-							height,
-							color,
-							backgroundColor,
-							style,
-							theme,
-							animation: CSS.animation,
-						})
-					}
-					className={classnames('ss__loading-bar', className)}
-				>
+				<div {...styling} className={classnames('ss__loading-bar', className)}>
 					<div className="ss__loading-bar__bar"></div>
 				</div>
 			</CacheProvider>
