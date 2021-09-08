@@ -15,13 +15,27 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	carousel: ({ theme, style }) =>
+	carousel: ({ theme, style, verticalSlide }) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
+			maxHeight: verticalSlide ? '100%' : null,
 			margin: 0,
 			padding: 0,
 			overflow: 'hidden',
+
+			'& .swiper-container-vertical': {
+				'& .swiper-slide': {
+					textAlign: 'center',
+					fontSize: '18px',
+					background: '#fff',
+
+					/* Center slide text vertically */
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+				},
+			},
 			'& .swiper-pagination-bullet-active': {
 				background: theme?.colors?.primary || 'inherit',
 			},
@@ -99,13 +113,21 @@ export const defaultCarouselBreakpoints = {
 	},
 };
 
+const defaultVerticalCarouselBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 40,
+	},
+};
+
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: CarouselProps = {
 		// default props
-		breakpoints: defaultCarouselBreakpoints,
+		breakpoints: properties.verticalSlide ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
@@ -123,6 +145,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		nextButton,
 		prevButton,
 		hideButtons,
+		verticalSlide,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -158,7 +181,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			<CacheProvider>
 				<div
 					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.carousel({ theme, style })}
+					css={!disableStyles && CSS.carousel({ theme, style, verticalSlide })}
 					className={classnames('ss__carousel', className)}
 				>
 					{!hideButtons && (
@@ -187,6 +210,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
+						direction={verticalSlide ? 'vertical' : 'horizontal'}
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={
@@ -226,6 +250,7 @@ export interface CarouselProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
+	verticalSlide?: boolean;
 	pagination?: boolean;
 	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;

@@ -27,6 +27,7 @@ export default {
 			<div
 				style={{
 					maxWidth: '900px',
+					height: '500px',
 				}}
 			>
 				<Story />
@@ -42,6 +43,17 @@ export default {
 					summary: 'boolean',
 				},
 				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		verticalSlide: {
+			defaultValue: false,
+			description: 'Carousel vertical slide direction',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -86,7 +98,7 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: defaultCarouselBreakpoints,
+			defaultValue: undefined,
 			description: 'Carousel breakpoints',
 			table: {
 				type: {
