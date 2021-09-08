@@ -19,7 +19,7 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: ({ theme, style }) =>
+	recommendation: ({ style }) =>
 		css({
 			...style,
 		}),
@@ -55,13 +55,14 @@ export const defaultRecommendationBreakpoints = {
 
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: RecommendationProps = {
 		// default props
 		breakpoints: defaultRecommendationBreakpoints,
 		pagination: false,
 		loop: true,
+		// global theme
+		...globalTheme?.components?.recommendation,
 		// global theme
 		...properties,
 		...properties.theme?.components?.recommendation,
@@ -169,7 +170,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			<CacheProvider>
 				<div
 					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.recommendation({ theme, style })}
+					css={!disableStyles && CSS.recommendation({ style })}
 					className={classnames('ss__recommendation', className)}
 				>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
@@ -201,6 +202,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={pagination}
+						{...subProps.carousel}
 						{...additionalProps}
 					>
 						{children
