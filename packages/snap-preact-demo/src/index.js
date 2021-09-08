@@ -21,6 +21,11 @@ import './styles/custom.scss';
  */
 
 const config = {
+	parameters: {
+		core: {
+			query: { name: 'q' },
+		},
+	},
 	client: {
 		globals: {
 			siteId: '8uyt2m',

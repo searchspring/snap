@@ -2,16 +2,11 @@ import deepmerge from 'deepmerge';
 
 import { UrlState, Translator, UrlStateSort, RangeValueProperties, UrlStateFilterType, ParamLocationType } from '../../types';
 
-type LocationLookup = {
-	[ParamLocationType: string]: Array<string>;
-};
-
-type QueryParameter = {
+type UrlParameter = {
 	key: Array<string>;
 	value: string;
+	type: ParamLocationType;
 };
-
-type HashParameter = Array<string>;
 
 type MapOptions = {
 	name?: string;
@@ -20,11 +15,11 @@ type MapOptions = {
 
 type CoreMap = {
 	query?: MapOptions;
-	// oq?: MapOptions;
-	// rq?: MapOptions;
-	// tag?: MapOptions;
+	oq?: MapOptions;
+	rq?: MapOptions;
+	tag?: MapOptions;
 	page?: MapOptions;
-	// pageSize?: MapOptions;
+	pageSize?: MapOptions;
 	sort?: MapOptions;
 	filter?: MapOptions;
 };
@@ -39,6 +34,7 @@ export type UrlTranslatorParametersConfig = {
 	settings?: {
 		prefix?: string;
 		implicit?: ParamLocationType;
+		type?: ParamLocationType;
 	};
 	core?: CoreMap;
 	custom?: CustomMap;
@@ -58,11 +54,11 @@ const defaultConfig: UrlTranslatorConfig = {
 		},
 		core: {
 			query: { name: 'q', type: ParamLocationType.QUERY },
-			// oq: { name: 'oq', type: ParamLocationType.QUERY },
-			// rq: { name: 'rq', type: ParamLocationType.QUERY },
-			// tag: { name: 'tag', type: ParamLocationType.QUERY },
+			oq: { name: 'oq', type: ParamLocationType.QUERY },
+			rq: { name: 'rq', type: ParamLocationType.QUERY },
+			tag: { name: 'tag', type: ParamLocationType.QUERY },
 			page: { name: 'page', type: ParamLocationType.QUERY },
-			// pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
+			pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
 			sort: { name: 'sort', type: ParamLocationType.HASH },
 			filter: { name: 'filter', type: ParamLocationType.HASH },
 		},
@@ -70,15 +66,35 @@ const defaultConfig: UrlTranslatorConfig = {
 	},
 };
 
+const CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
+
 export class UrlTranslator implements Translator {
 	private config: UrlTranslatorConfig;
+	private reverseMapping: Record<string, string> = {};
 
 	constructor(config: UrlTranslatorConfig = {}) {
 		this.config = deepmerge(defaultConfig, config);
-		if (this.config.parameters.settings.prefix) {
-			Object.keys(this.config.parameters.core).forEach((param) => {
+
+		Object.keys(this.config.parameters.core).forEach((param) => {
+			// param prefix
+			if (this.config.parameters.settings.prefix) {
 				this.config.parameters.core[param].name = this.config.parameters.settings.prefix + this.config.parameters.core[param].name;
-			});
+			}
+
+			// global type override
+			const paramType = this.config.parameters.settings.type;
+			if (paramType && Object.values(ParamLocationType).includes(paramType)) {
+				this.config.parameters.core[param].type = (config?.parameters?.core && config?.parameters?.core[param]?.type) || paramType;
+			}
+
+			// create reverse mapping for quick lookup later
+			this.reverseMapping[this.config.parameters.core[param].name] = param;
+		});
+
+		const implicit = this.config.parameters.settings.implicit;
+		if (implicit && !Object.values(ParamLocationType).includes(implicit)) {
+			// invalid type specified - falling back to hash as implicit type
+			this.config.parameters.settings.implicit = ParamLocationType.HASH;
 		}
 	}
 
@@ -87,14 +103,23 @@ export class UrlTranslator implements Translator {
 	}
 
 	getCurrentUrl(): string {
-		return location.search + location.hash;
+		return window.location.search + window.location.hash;
 	}
 
 	getConfig(): UrlTranslatorConfig {
 		return deepmerge({}, this.config);
 	}
 
-	protected parseQueryString(queryString: string): Array<QueryParameter> {
+	deserialize(url: string): UrlState {
+		const queryString = url.includes('?') ? (url.split('?').pop() || '').split('#').shift() || '' : '';
+		const hashString = url.includes('#') ? url.substring(url.indexOf('#') + 1) || '' : '';
+
+		const params = [...this.parseHashString(hashString), ...this.parseQueryString(queryString)];
+
+		return this.paramsToState(params);
+	}
+
+	protected parseQueryString(queryString: string): Array<UrlParameter> {
 		const justQueryString = queryString.split('?').pop() || '';
 
 		return justQueryString
@@ -102,170 +127,158 @@ export class UrlTranslator implements Translator {
 			.filter((v) => v)
 			.map((kvPair) => {
 				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
-				return { key: key.split('.'), value };
+				return { key: key.split('.'), value, type: ParamLocationType.QUERY };
 			});
 	}
 
-	protected generateQueryString(queryParams: Array<QueryParameter>, hashParams: Array<HashParameter>): string {
-		const paramString =
-			(queryParams.length
-				? '?' +
-				  queryParams
-						.map((param) => {
-							return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
-						})
-						.join('&')
-				: this.config.urlRoot
-				? ''
-				: location.pathname) +
-			(hashParams.length
-				? '#/' +
-				  hashParams
-						.map((param) => {
-							return param.map((v) => encodeHashComponent(v)).join(':');
-						})
-						.join('/')
-				: '');
-
-		return `${this.config.urlRoot}${paramString}`;
-	}
-
-	protected parseHashString(hashString: string): Array<HashParameter> {
+	protected parseHashString(hashString: string): Array<UrlParameter> {
+		const params = [];
 		const justHashString = hashString.split('#').join('/') || '';
 
-		return justHashString
+		justHashString
 			.split('/')
 			.filter((v) => v)
 			.map((hashEntries) => {
 				return hashEntries.split(':').map((v) => decodeHashComponent(v));
+			})
+			.forEach((decodedHashEntries) => {
+				if (decodedHashEntries.length == 1) {
+					params.push({ key: [decodedHashEntries[0]], value: undefined, type: ParamLocationType.HASH });
+				} else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
+					const [value, ...keys] = decodedHashEntries.reverse();
+					params.push({ key: keys.reverse(), value, type: ParamLocationType.HASH });
+				} else if (decodedHashEntries.length && decodedHashEntries.length == 4) {
+					// range filter
+					const [path0, path1, low, high] = decodedHashEntries;
+					params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.HASH });
+					params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.HASH });
+				}
 			});
+
+		return params;
 	}
 
-	protected parseQuery(queryParams: Array<QueryParameter>): UrlState {
-		const qParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == this.config.parameters.core.query.name);
+	// parse params into state
 
-		return qParam ? { query: qParam.value } : {};
+	protected paramsToState(params: Array<UrlParameter>): UrlState {
+		const coreOtherParams = [],
+			coreFilterParams = [],
+			coreSortParams = [],
+			otherParams = [];
+
+		params?.forEach((param) => {
+			const coreStateKey = this.reverseMapping[param.key[0]];
+			const coreConfig: MapOptions = this.config.parameters.core[coreStateKey];
+			const customStateKey: MapOptions = this.config.parameters.custom[param.key[0]];
+
+			if (coreStateKey) {
+				// core state
+				switch (coreStateKey) {
+					case 'filter': {
+						if (coreConfig.type == param.type) coreFilterParams.push(param);
+						break;
+					}
+					case 'sort': {
+						if (coreConfig.type == param.type) coreSortParams.push(param);
+						break;
+					}
+					default: {
+						if (coreConfig.type == param.type) coreOtherParams.push(param);
+						break;
+					}
+				}
+			} else if (!CORE_FIELDS.includes(param.key[0])) {
+				// custom state
+				if (!customStateKey) {
+					// unrecognized state - store in custom config map (as implicit type)
+					this.config.parameters.custom[param.key[0]] = {
+						type: param.type || this.config.parameters.settings.implicit,
+					};
+				}
+
+				otherParams.push(param);
+			}
+		});
+
+		return {
+			...this.parseCoreOther(coreOtherParams),
+			...this.parseCoreFilter(coreFilterParams),
+			...this.parseCoreSort(coreSortParams),
+			...this.parseOther(otherParams),
+		};
 	}
 
-	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
-		const pageParam = queryParams.find((param) => param.key.length == 1 && param.key[0] == this.config.parameters.core.page.name);
+	protected parseCoreOther(otherParams: Array<UrlParameter>): UrlState {
+		const state: UrlState = {};
+		const numberTypeParams = ['page', 'pageSize'];
 
-		if (!pageParam) {
+		if (!otherParams) {
 			return {};
 		}
 
-		const page = Number(pageParam.value);
+		otherParams.forEach((param) => {
+			const coreKey = this.reverseMapping[param.key[0]];
 
-		return !isNaN(page) && page > 1 ? { page } : {};
-	}
-
-	protected parseOther(queryParams: Array<QueryParameter>, except: Array<string> = []): UrlState {
-		const state: UrlState = {};
-
-		queryParams
-			.filter((param) => except.indexOf(param.key[0]) == -1)
-			.forEach((param) => {
-				const path = param.key;
-				const value = param.value;
-
-				if (!this.config.parameters.custom[path[0]]) {
-					this.config.parameters.custom[path[0]] = {
-						type: ParamLocationType.QUERY,
-					};
+			if (numberTypeParams.includes(coreKey)) {
+				const numValue = Number(param.value);
+				if (coreKey == 'page' && numValue > 1) {
+					state[coreKey] = numValue;
+				} else if (coreKey != 'page') {
+					state[coreKey] = numValue;
 				}
-
-				// eslint-disable-next-line prefer-const
-				let node = state;
-
-				path.forEach((key, i) => {
-					const isLast = i == path.length - 1;
-
-					if (isLast) {
-						node[key] = node[key] || [];
-						(node[key] as any[]).push(value);
-					} else {
-						node[key] = node[key] || {};
-						(node as unknown) = node[key];
-					}
-				});
-			});
+			} else {
+				state[coreKey] = param.value;
+			}
+		});
 
 		return state;
 	}
 
-	protected parseHashOther(hashParameters: Array<HashParameter>, except: Array<string> = []): UrlState {
-		const state: UrlState = {};
+	protected parseCoreFilter(filterParams: Array<UrlParameter>): UrlState {
+		const valueFilterParams = filterParams.filter((p) => p.key.length == 2);
+		const rangeFilterParams = filterParams.filter((p) => p.key.length == 3);
 
-		hashParameters
-			.filter((param) => except.indexOf(param[0]) == -1) // sort, filter
-			.forEach((param) => {
-				const path = param.length > 1 ? param.slice(0, -1) : param;
-				const value = param.length > 1 ? param[param.length - 1] : undefined;
-
-				if (!this.config.parameters.custom[path[0]]) {
-					this.config.parameters.custom[path[0]] = {
-						type: ParamLocationType.HASH,
-					};
-				}
-
-				// eslint-disable-next-line prefer-const
-				let node = state;
-
-				path.forEach((key, i) => {
-					const isLast = i == path.length - 1;
-
-					if (isLast) {
-						node[key] = node[key] || [];
-						if (value) {
-							(node[key] as any[]).push(value);
-						}
-					} else {
-						node[key] = node[key] || {};
-						(node as unknown) = node[key];
-					}
-				});
-			});
-
-		return state;
-	}
-
-	protected parseHashFilter(hashParameters: Array<HashParameter>): UrlState {
-		const filters = hashParameters.filter((p) => p[0] == this.config.parameters.core.filter.name);
-		const valueFilterParams = filters.filter((p) => p.length == 3);
-		const rangeFilterParams = filters.filter((p) => p.length == 4);
-
-		const valueFilters = valueFilterParams.reduce((state: UrlState, param: HashParameter): UrlState => {
-			const [type, field, value] = param;
-			const currentValue = (state.filter || {})[field] || [];
-
+		const valueFilters = valueFilterParams.reduce((state: UrlState, param: UrlParameter): UrlState => {
+			const currentValue = (state.filter || {})[param.key[1]] || [];
 			return {
 				filter: {
 					...state.filter,
-					[field]: [...(Array.isArray(currentValue) ? currentValue : [currentValue]), value],
+					[param.key[1]]: [...(Array.isArray(currentValue) ? currentValue : [currentValue]), param.value],
 				},
 			};
 		}, {});
 
-		const rangeFilters = rangeFilterParams.reduce((state: UrlState, param: HashParameter): UrlState => {
-			// ranges should come as single param
+		const rangeFilters = rangeFilterParams.reduce((state: UrlState, param: UrlParameter, index: number): UrlState => {
+			// ranges should come in pairs!
 			// use index to build pairs, ignore non pairs
 			// build set as encountered - only return full sets (low + high)
 
-			const [type, field, low, high] = param;
-			const currentState = (state.filter || {})[field] || [];
+			let newState = state;
+			const nextRangeParam = rangeFilterParams[index + 1];
+			if (
+				index % 2 == 0 &&
+				nextRangeParam &&
+				nextRangeParam.key[1] == param.key[1] &&
+				param.key[2] == RangeValueProperties.LOW &&
+				nextRangeParam.key[2] == RangeValueProperties.HIGH
+			) {
+				const currentValue = (state.filter || {})[param.key[1]] || [];
 
-			return {
-				filter: {
-					...state.filter,
-					[field]: [
-						...(Array.isArray(currentState) ? currentState : [currentState]),
-						{
-							[RangeValueProperties.LOW]: +low || null,
-							[RangeValueProperties.HIGH]: +high || null,
-						},
-					],
-				},
-			};
+				newState = {
+					filter: {
+						...state.filter,
+						[param.key[1]]: [
+							...(Array.isArray(currentValue) ? currentValue : [currentValue]),
+							{
+								[RangeValueProperties.LOW]: +param.value || null,
+								[RangeValueProperties.HIGH]: +nextRangeParam.value || null,
+							},
+						],
+					},
+				};
+			}
+
+			return newState;
 		}, {});
 
 		return {
@@ -280,72 +293,88 @@ export class UrlTranslator implements Translator {
 		};
 	}
 
-	protected parseHashSort(hashParameters: Array<HashParameter>): UrlState {
-		const sort = hashParameters.filter((p) => p[0] == this.config.parameters.core.sort.name);
-
-		return sort.reduce((state: UrlState, param: HashParameter): UrlState => {
-			const [type, field, direction] = param;
-
-			const sortArray = state.sort ? (Array.isArray(state.sort) ? state.sort : [state.sort]) : [];
-
-			return {
-				sort: [...sortArray, { field, direction } as UrlStateSort],
-			};
-		}, {});
-	}
-
-	protected encodePage(state: UrlState): Array<QueryParameter> {
-		if (!state.page || state.page === 1) {
-			return [];
+	protected parseCoreSort(sortParams: Array<UrlParameter>): UrlState {
+		if (!sortParams.length) {
+			return {};
 		}
 
-		return [{ key: [this.config.parameters.core.page.name], value: '' + state.page }];
+		return {
+			sort: sortParams.map((param) => ({
+				field: param.key[1],
+				direction: param.value,
+			})),
+		};
 	}
 
-	protected encodeQuery(state: UrlState): Array<QueryParameter> {
-		if (!state.query) {
-			return [];
-		}
+	protected parseOther(otherParams: Array<UrlParameter>): UrlState {
+		const state: UrlState = {};
 
+		otherParams.forEach((param) => {
+			let node = state;
+
+			param.key.forEach((key, i) => {
+				const isLast = i == param.key.length - 1;
+
+				if (isLast) {
+					node[key] = node[key] || [];
+					param.value && (node[key] as unknown[]).push(param.value);
+				} else {
+					node[key] = node[key] || {};
+					(node as unknown) = node[key];
+				}
+			});
+		});
+
+		return state;
+	}
+
+	serialize(state: UrlState): string {
+		const params = this.stateToParams(state);
+		const queryParams = params.filter((p) => p.type == ParamLocationType.QUERY);
+		const hashParams = params.filter((p) => p.type == ParamLocationType.HASH);
+
+		const paramString =
+			(queryParams.length
+				? '?' +
+				  queryParams
+						.map((param) => {
+							const keyString = encodeURIComponent(param.key.join('.'));
+							const valueString = param.value ? '=' + encodeURIComponent(param.value) : '';
+							return keyString + valueString;
+						})
+						.join('&')
+				: this.config.urlRoot
+				? ''
+				: window.location.pathname) +
+			(hashParams.length
+				? '#/' +
+				  hashParams
+						.map((param) => {
+							const keyString = param.key.map((k) => encodeHashComponent(k)).join(':');
+							const valueString = param.value ? ':' + encodeHashComponent(param.value) : '';
+							return keyString + valueString;
+						})
+						.join('/')
+				: '');
+
+		return `${this.config.urlRoot}${paramString}`;
+	}
+
+	// encode state into params
+
+	protected stateToParams(state: UrlState): Array<UrlParameter> {
 		return [
-			{
-				key: [this.config.parameters.core.query.name],
-				value: state.query,
-			},
+			...this.encodeCoreOther(state, ['filter', 'sort']),
+			...this.encodeCoreFilters(state),
+			...this.encodeCoreSorts(state),
+			...this.encodeOther(state),
 		];
 	}
 
-	protected encodeOther(state: UrlState, whitelist: Array<string> = []): Array<QueryParameter> {
-		let params: Array<QueryParameter> = [];
+	protected encodeCoreFilters(state: UrlState): Array<UrlParameter> {
+		const filterConfig = this.config.parameters.core.filter;
 
-		const addRecursive = (obj: Record<string, any>, currentPath: Array<string>) => {
-			Object.keys(obj).forEach((key) => {
-				if (currentPath.length == 0 && whitelist.indexOf(key) == -1) {
-					return;
-				}
-				const value = obj[key];
-
-				if (value instanceof Array) {
-					params = params.concat(
-						value.map((v) => {
-							return { key: [...currentPath, key], value: v };
-						})
-					);
-				} else if (typeof value == 'object') {
-					addRecursive(value, [...currentPath, key]);
-				} else if (typeof value != 'undefined') {
-					params = params.concat([{ key: [...currentPath, key], value }]);
-				}
-			});
-		};
-
-		addRecursive(state, []);
-
-		return params;
-	}
-
-	protected encodeHashFilter(state: UrlState): Array<HashParameter> {
-		if (!state.filter) {
+		if (!state.filter || !filterConfig) {
 			return [];
 		}
 
@@ -356,22 +385,42 @@ export class UrlTranslator implements Translator {
 
 			const filter = state.filter[key];
 
-			return (filter instanceof Array ? filter : [filter]).flatMap((value: UrlStateFilterType): Array<HashParameter> => {
+			return (filter instanceof Array ? filter : [filter]).flatMap((value: UrlStateFilterType) => {
 				if (typeof value == 'string' || typeof value == 'number' || typeof value == 'boolean') {
-					return [[this.config.parameters.core.filter.name, key, '' + value]];
+					return [
+						{
+							key: [filterConfig.name, key],
+							value: '' + value,
+							type: filterConfig.type,
+						},
+					];
 				} else if (
 					typeof value == 'object' &&
 					typeof value[RangeValueProperties.LOW] != 'undefined' &&
 					typeof value[RangeValueProperties.HIGH] != 'undefined'
 				) {
-					return [
-						[
-							this.config.parameters.core.filter.name,
-							key,
-							'' + (value[RangeValueProperties.LOW] ?? '*'),
-							'' + (value[RangeValueProperties.HIGH] ?? '*'),
-						],
-					];
+					if (filterConfig.type == ParamLocationType.QUERY) {
+						return [
+							{
+								key: [filterConfig.name, key, RangeValueProperties.LOW],
+								value: '' + (value[RangeValueProperties.LOW] ?? '*'),
+								type: filterConfig.type,
+							},
+							{
+								key: [filterConfig.name, key, RangeValueProperties.HIGH],
+								value: '' + (value[RangeValueProperties.HIGH] ?? '*'),
+								type: filterConfig.type,
+							},
+						];
+					} else if (filterConfig.type == ParamLocationType.HASH) {
+						return [
+							{
+								key: [filterConfig.name, key, '' + (value[RangeValueProperties.LOW] ?? '*')],
+								value: '' + (value[RangeValueProperties.HIGH] ?? '*'),
+								type: filterConfig.type,
+							},
+						];
+					}
 				}
 
 				return [];
@@ -379,39 +428,69 @@ export class UrlTranslator implements Translator {
 		});
 	}
 
-	protected encodeHashSort(state: UrlState): Array<HashParameter> {
-		if (!state.sort) {
+	protected encodeCoreSorts(state: UrlState): Array<UrlParameter> {
+		const sortConfig = this.config.parameters.core.sort;
+
+		if (!state.sort || !sortConfig) {
 			return [];
 		}
 
-		return (state.sort instanceof Array ? state.sort : [state.sort]).map((sort: UrlStateSort) => {
-			return [this.config.parameters.core.sort.name, sort.field, sort.direction];
+		return (state.sort instanceof Array ? state.sort : [state.sort]).map((sort) => {
+			return {
+				key: [sortConfig.name, sort.field],
+				value: sort.direction,
+				type: sortConfig.type,
+			};
 		});
 	}
 
-	protected encodeHashOther(state: UrlState, blacklist: Array<string> = []): Array<HashParameter> {
-		let params: Array<HashParameter> = [];
+	protected encodeCoreOther(state: UrlState, except: string[]): Array<UrlParameter> {
+		const params: Array<UrlParameter> = [];
 
-		const addRecursive = (obj: Record<string, any>, currentPath: Array<string>) => {
+		Object.keys(state)
+			// sorting to determine order of params in URL
+			.sort(function (a, b) {
+				return CORE_FIELDS.indexOf(a) - CORE_FIELDS.indexOf(b);
+			})
+			.map((param) => {
+				if (CORE_FIELDS.includes(param) && !except.includes(param)) {
+					const paramConfig = this.config.parameters.core[param];
+					if (param == 'page' && state[param] == 1) {
+						// do not include page 1
+					} else {
+						params.push({ key: [paramConfig.name], value: '' + state[param], type: paramConfig.type });
+					}
+				}
+			});
+
+		return params;
+	}
+
+	protected encodeOther(state: UrlState): Array<UrlParameter> {
+		let params: Array<UrlParameter> = [];
+
+		const addRecursive = (obj: Record<string, unknown>, currentPath: Array<string>) => {
 			Object.keys(obj).forEach((key) => {
-				if (currentPath.length == 0 && blacklist.indexOf(key) != -1) {
+				if (currentPath.length == 0 && CORE_FIELDS.includes(key)) {
 					return;
 				}
 
-				const value = obj[key];
+				const value = obj[key] as Record<string, unknown>;
 
-				if (value instanceof Array && value.length) {
+				if (value instanceof Array) {
 					params = params.concat(
 						value.map((v) => {
-							return [...currentPath, key, v];
+							const customConfig = this.config.parameters.custom[currentPath[0] || key];
+							const type = customConfig?.type || this.config.parameters.settings.implicit;
+							return { key: [...currentPath, key], value: v, type };
 						})
 					);
-				} else if (typeof value == 'object' && !Array.isArray(value)) {
+				} else if (typeof value == 'object') {
 					addRecursive(value, [...currentPath, key]);
-				} else if (typeof value != 'undefined' && !Array.isArray(value)) {
-					params.push([...currentPath, key, value]);
 				} else {
-					params.push([...currentPath, key]);
+					const customConfig = this.config.parameters.custom[currentPath[0] || key];
+					const type = customConfig?.type || this.config.parameters.settings.implicit;
+					params = params.concat([{ key: [...currentPath, key], value, type }]);
 				}
 			});
 		};
@@ -421,77 +500,8 @@ export class UrlTranslator implements Translator {
 		return params;
 	}
 
-	protected queryParamsToState(queryParams: Array<QueryParameter>): UrlState {
-		return {
-			...this.parseQuery(queryParams),
-			...this.parsePage(queryParams),
-			...this.parseOther(queryParams, [this.config.parameters.core.query.name, this.config.parameters.core.page.name]),
-		};
-	}
-
-	protected hashParamsToState(hashParameters: Array<HashParameter>): UrlState {
-		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
-			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-		});
-
-		// ['page', 'query', this.config.queryParameter, 'filter', 'sort', ...this.lookup.search]
-		return {
-			...this.parseHashOther(hashParameters, [
-				'page',
-				'query',
-				'filter',
-				'sort',
-				this.config.parameters.core.filter.name,
-				this.config.parameters.core.sort.name,
-				...customQueryParams,
-			]),
-			...this.parseHashFilter(hashParameters),
-			...this.parseHashSort(hashParameters),
-		};
-	}
-
-	protected stateToQueryParams(state: UrlState = {}): Array<QueryParameter> {
-		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
-			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-		});
-
-		return [...this.encodeQuery(state), ...this.encodePage(state), ...this.encodeOther(state, customQueryParams)];
-	}
-
-	protected stateToHashParams(state: UrlState = {}): Array<HashParameter> {
-		const customQueryParams = Object.keys(this.config.parameters.custom).filter((key) => {
-			return this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-		});
-
-		return [
-			...this.encodeHashFilter(state),
-			...this.encodeHashSort(state),
-			...this.encodeHashOther(state, ['page', 'query', this.config.parameters.core.query.name, 'filter', 'sort', ...customQueryParams]),
-		];
-	}
-
-	serialize(state: UrlState): string {
-		const queryParams = this.stateToQueryParams(state);
-		const hashParams = this.stateToHashParams(state);
-
-		return this.generateQueryString(queryParams, hashParams);
-	}
-
-	deserialize(url: string): UrlState {
-		const queryString = url.includes('?') ? (url.split('?').pop() || '').split('#').shift() || '' : '';
-		const hashString = url.includes('#') ? url.substring(url.indexOf('#') + 1) || '' : '';
-
-		const queryParams = this.parseQueryString(queryString);
-		const hashParams = this.parseHashString(hashString);
-
-		const queryState = this.queryParamsToState(queryParams);
-		const hashState = this.hashParamsToState(hashParams);
-
-		return { ...queryState, ...hashState };
-	}
-
 	go(url: string, config?: { history: string }): void {
-		const currentUrl = window.location.search + window.location.hash;
+		const currentUrl = this.getCurrentUrl();
 		if (url != currentUrl) {
 			if (config?.history == 'replace') {
 				history.replaceState(null, '', url);
