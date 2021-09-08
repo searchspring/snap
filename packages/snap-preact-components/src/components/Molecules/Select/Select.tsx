@@ -179,7 +179,11 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+		if (native) {
+			styling.css = [CSS.native(), style];
+		} else {
+			styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+		}
 	} else if (style) {
 		styling.css = [style];
 	}
