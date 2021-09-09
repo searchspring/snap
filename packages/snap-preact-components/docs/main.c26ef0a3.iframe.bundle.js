@@ -183,7 +183,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(69038),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
@@ -196,11 +196,8 @@
 						}).apply(this, arguments);
 				},
 				CSS_badge = function badge(_a) {
-					var position = _a.position,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(
-						__assign(__assign({ display: 'inline-block', position: 'absolute' }, position), style)
-					);
+					var position = _a.position;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({ display: 'inline-block', position: 'absolute' }, position));
 				},
 				Badge = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__.Pi)(function (properties) {
 					var _a,
@@ -222,9 +219,20 @@
 						position = props.position,
 						disableStyles = props.disableStyles,
 						className = props.className,
-						style = props.style;
-					return (0,
-					_emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(_providers__WEBPACK_IMPORTED_MODULE_5__.n, null, (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('div', { css: !disableStyles && CSS_badge({ position, style }), className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__badge', className) }, content || children));
+						style = props.style,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_badge({ position }), style]),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
+							null,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								'div',
+								__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__badge', className) }),
+								content || children
+							)
+						)
+					);
 				});
 		},
 		28945: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -241,7 +249,7 @@
 				emotion_react_browser_esm = (__webpack_require__(43108), __webpack_require__(43450), __webpack_require__(28165)),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
@@ -253,17 +261,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_breadcrumbs = function breadcrumbs(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								'& .ss__breadcrumbs__crumbs': { padding: '0' },
-								'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': { padding: '0 5px', display: 'inline-block' },
-							},
-							style
-						)
-					);
+				CSS_breadcrumbs = function breadcrumbs() {
+					return (0, emotion_react_browser_esm.iv)({
+						'& .ss__breadcrumbs__crumbs': { padding: '0' },
+						'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': { padding: '0 5px', display: 'inline-block' },
+					});
 				},
 				Breadcrumbs = (0, es.Pi)(function (properties) {
 					var _a,
@@ -284,24 +286,28 @@
 						separator = props.separator,
 						disableStyles = props.disableStyles,
 						className = props.className,
-						style = props.style;
-					return (0, emotion_react_browser_esm.tZ)(
-						cache.n,
-						null,
+						style = props.style,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_breadcrumbs(), style]),
 						(0, emotion_react_browser_esm.tZ)(
-							'div',
-							{ css: !disableStyles && CSS_breadcrumbs({ style }), className: classnames_default()('ss__breadcrumbs', className) },
+							cache.n,
+							null,
 							(0, emotion_react_browser_esm.tZ)(
-								'ul',
-								{ className: 'ss__breadcrumbs__crumbs' },
-								data
-									.map(function (crumb) {
-										return (0,
-										emotion_react_browser_esm.tZ)('li', { className: 'ss__breadcrumbs__crumbs__crumb' }, crumb.url ? (0, emotion_react_browser_esm.tZ)('a', { href: crumb.url }, crumb.label) : crumb.label);
-									})
-									.reduce(function (prev, curr) {
-										return [prev, (0, emotion_react_browser_esm.tZ)('li', { className: 'ss__breadcrumbs__crumbs__separator' }, separator), curr];
-									})
+								'div',
+								__assign({}, styling, { className: classnames_default()('ss__breadcrumbs', className) }),
+								(0, emotion_react_browser_esm.tZ)(
+									'ul',
+									{ className: 'ss__breadcrumbs__crumbs' },
+									data
+										.map(function (crumb) {
+											return (0,
+											emotion_react_browser_esm.tZ)('li', { className: 'ss__breadcrumbs__crumbs__crumb' }, crumb.url ? (0, emotion_react_browser_esm.tZ)('a', { href: crumb.url }, crumb.label) : crumb.label);
+										})
+										.reduce(function (prev, curr) {
+											return [prev, (0, emotion_react_browser_esm.tZ)('li', { className: 'ss__breadcrumbs__crumbs__separator' }, separator), curr];
+										})
+								)
 							)
 						)
 					);
@@ -602,7 +608,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(69038),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
@@ -621,33 +627,26 @@
 						color = _a.color,
 						backgroundColor = _a.backgroundColor,
 						borderColor = _a.borderColor,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(
-						__assign(
-							{
-								display: 'inline-flex',
-								padding: '5px 10px',
-								position: 'relative',
-								color: color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary),
-								outline: 0,
-								backgroundColor: backgroundColor || '#fff',
-								border: '1px solid ' + (borderColor || color || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#333'),
-								'&:hover': { cursor: 'pointer', backgroundColor: (null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.hover) || '#f8f8f8' },
-								'&.ss__button--disabled': {
-									opacity: 0.7,
-									borderColor: 'rgba(51,51,51,0.7)',
-									backgroundColor: 'initial',
-									'&:hover': { cursor: 'default' },
-								},
-							},
-							style
-						)
-					);
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+						display: 'inline-flex',
+						padding: '5px 10px',
+						position: 'relative',
+						color: color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary),
+						outline: 0,
+						backgroundColor: backgroundColor || '#fff',
+						border: '1px solid ' + (borderColor || color || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#333'),
+						'&:hover': { cursor: 'pointer', backgroundColor: (null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.hover) || '#f8f8f8' },
+						'&.ss__button--disabled': {
+							opacity: 0.7,
+							borderColor: 'rgba(51,51,51,0.7)',
+							backgroundColor: 'initial',
+							'&:hover': { cursor: 'default' },
+						},
+					});
 				},
-				CSS_native = function native(_a) {
-					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({}, style));
+				CSS_native = function native() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({});
 				},
 				Button = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__.Pi)(function (properties) {
 					var _a,
@@ -674,7 +673,7 @@
 						className = props.className,
 						style = props.style,
 						elementProps = {
-							css: !disableStyles && (_native ? CSS_native({ style }) : CSS_button({ color, backgroundColor, borderColor, theme, style })),
+							css: disableStyles ? [style] : _native ? [CSS_native(), style] : [CSS_button({ color, backgroundColor, borderColor, theme }), style],
 							className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__button', { 'ss__button--disabled': disabled }, className),
 							disabled,
 							onClick: function onClick(e) {
@@ -978,7 +977,7 @@
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367);
 			var cloneWithProps = __webpack_require__(64170),
@@ -992,21 +991,15 @@
 						}).apply(this, arguments);
 				},
 				CSS_dropdown = function dropdown(_a) {
-					var disableOverlay = _a.disableOverlay,
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								position: 'relative',
-								'&.ss__dropdown--open': {
-									'& .ss__dropdown__content': { position: '' + (disableOverlay ? 'initial' : null), visibility: 'visible', opacity: 1 },
-								},
-								'.ss__dropdown__button': { cursor: disableOverlay ? 'default' : 'pointer' },
-								'.ss__dropdown__content': { position: 'absolute', minWidth: '100%', visibility: 'hidden', opacity: 0, top: 'auto', left: 0 },
-							},
-							style
-						)
-					);
+					var disableOverlay = _a.disableOverlay;
+					return (0, emotion_react_browser_esm.iv)({
+						position: 'relative',
+						'&.ss__dropdown--open': {
+							'& .ss__dropdown__content': { position: '' + (disableOverlay ? 'initial' : null), visibility: 'visible', opacity: 1 },
+						},
+						'.ss__dropdown__button': { cursor: disableOverlay ? 'default' : 'pointer' },
+						'.ss__dropdown__content': { position: 'absolute', minWidth: '100%', visibility: 'hidden', opacity: 0, top: 'auto', left: 0 },
+					});
 				},
 				Dropdown = (0, es.Pi)(function (properties) {
 					var _a,
@@ -1071,32 +1064,35 @@
 								setShowContent(function (prev) {
 									return onToggle && onToggle(e, !prev), !prev;
 								});
-						};
-					return (0, emotion_react_browser_esm.tZ)(
-						cache.n,
-						null,
+						},
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_dropdown({ disableOverlay }), style]),
 						(0, emotion_react_browser_esm.tZ)(
-							'div',
-							{
-								css: !disableStyles && CSS_dropdown({ disableOverlay, style }),
-								className: classnames_default()('ss__dropdown', { 'ss__dropdown--open': showContent }, className),
-								ref: innerRef,
-							},
+							cache.n,
+							null,
 							(0, emotion_react_browser_esm.tZ)(
 								'div',
-								{
-									className: 'ss__dropdown__button',
-									onClick: function onClick(e) {
-										disabled || (toggleShowContent(e), _onClick && _onClick(e));
+								__assign({}, styling, {
+									className: classnames_default()('ss__dropdown', { 'ss__dropdown--open': showContent }, className),
+									ref: innerRef,
+								}),
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									{
+										className: 'ss__dropdown__button',
+										onClick: function onClick(e) {
+											disabled || (toggleShowContent(e), _onClick && _onClick(e));
+										},
 									},
-								},
-								(0, cloneWithProps.d)(button, { open: showContent, toggleOpen: toggleShowContent })
-							),
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								{ className: 'ss__dropdown__content' },
-								(0, cloneWithProps.d)(content, { open: showContent, toggleOpen: toggleShowContent }),
-								(0, cloneWithProps.d)(children, { open: showContent, toggleOpen: toggleShowContent })
+									(0, cloneWithProps.d)(button, { open: showContent, toggleOpen: toggleShowContent })
+								),
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									{ className: 'ss__dropdown__content' },
+									(0, cloneWithProps.d)(content, { open: showContent, toggleOpen: toggleShowContent }),
+									(0, cloneWithProps.d)(children, { open: showContent, toggleOpen: toggleShowContent })
+								)
 							)
 						)
 					);
@@ -1129,9 +1125,8 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_formattedNumber = function formattedNumber(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(__assign({}, style));
+				CSS_formattedNumber = function formattedNumber() {
+					return (0, emotion_react_browser_esm.iv)({});
 				};
 			function FormattedNumber(properties) {
 				var _a,
@@ -1159,18 +1154,22 @@
 					className = props.className,
 					style = props.style,
 					raw = props.raw,
-					formattedNumber = formatNumber.u(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter });
-				return raw
-					? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedNumber)
-					: (0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							(0, emotion_react_browser_esm.tZ)(
-								'span',
-								{ className: classnames_default()('ss__formatted-number', className), css: !disableStyles && CSS_formattedNumber({ style }) },
-								formattedNumber
-							)
-					  );
+					formattedNumber = formatNumber.u(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
+					styling = {};
+				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_formattedNumber(), style]),
+					raw
+						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedNumber)
+						: (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'span',
+									__assign({ className: classnames_default()('ss__formatted-number', className) }, styling),
+									formattedNumber
+								)
+						  )
+				);
 			}
 			var componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
@@ -1419,6 +1418,8 @@
 					default: () => Icon_stories,
 				});
 			__webpack_require__(43105),
+				__webpack_require__(32501),
+				__webpack_require__(18178),
 				__webpack_require__(34769),
 				__webpack_require__(65584),
 				__webpack_require__(43450),
@@ -1532,9 +1533,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const Icon_stories = {
 				title: 'Atoms/Icon',
@@ -1552,7 +1555,7 @@
 						icon: {
 							description: 'Icon name',
 							table: { type: { summary: 'string' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						path: { description: 'SVG path', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 						color: {
@@ -1651,14 +1654,12 @@
 						height = _a.height,
 						width = _a.width,
 						size = _a.size,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)(
-						__assign(
-							{ fill: color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary), width: width || size, height: height || size },
-							style
-						)
-					);
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
+						fill: color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary),
+						width: width || size,
+						height: height || size,
+					});
 				};
 			function Icon(properties) {
 				var _a,
@@ -1686,25 +1687,26 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
-					iconPath = _paths__WEBPACK_IMPORTED_MODULE_4__.N[icon] || path;
+					iconPath = _paths__WEBPACK_IMPORTED_MODULE_4__.N[icon] || path,
+					styling = {};
 				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_icon({ color, width, height, size, theme }), style]),
 					iconPath &&
-					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-						_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-						null,
 						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-							'svg',
-							{
-								css: !disableStyles && CSS_icon({ color, width, height, size, theme, style }),
-								className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
-								viewBox,
-								xmlns: 'http://www.w3.org/2000/svg',
-								width: disableStyles && (width || size),
-								height: disableStyles && (height || size),
-							},
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)('path', { fill: disableStyles && color, d: iconPath })
+							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
+							null,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
+								'svg',
+								__assign({}, styling, {
+									className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__icon', icon ? 'ss__icon--' + icon : null, className),
+									viewBox,
+									xmlns: 'http://www.w3.org/2000/svg',
+									width: disableStyles && (width || size),
+									height: disableStyles && (height || size),
+								}),
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)('path', { fill: disableStyles && color, d: iconPath })
+							)
 						)
-					)
 				);
 			}
 		},
@@ -2048,20 +2050,14 @@
 				},
 				FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png',
 				CSS_image = function image(_a) {
-					var visibility = _a.visibility,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(
-						__assign(
-							{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								height: '100%',
-								'& img': { visibility, objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
-							},
-							style
-						)
-					);
+					var visibility = _a.visibility;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						height: '100%',
+						'& img': { visibility, objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
+					});
 				};
 			function Image(properties) {
 				var _a,
@@ -2096,20 +2092,19 @@
 					isHovering = _e[0],
 					setHover = _e[1],
 					prevSrcRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.sO)();
+				(0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.d4)(function () {
+					prevSrcRef.current = src;
+				}),
+					prevSrcRef.current && prevSrcRef.current != src && setVisibility('hidden');
+				var styling = {};
 				return (
-					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.d4)(function () {
-						prevSrcRef.current = src;
-					}),
-					prevSrcRef.current && prevSrcRef.current != src && setVisibility('hidden'),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_image({ visibility }), style]),
 					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 						_providers__WEBPACK_IMPORTED_MODULE_5__.n,
 						null,
 						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 							'div',
-							{
-								css: !disableStyles && CSS_image({ visibility, style }),
-								className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__image', className),
-							},
+							__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__image', className) }),
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('img', {
 								src: (isHovering ? hoverSrc : src) || fallback,
 								alt,
@@ -2163,35 +2158,29 @@
 							color = _a.color,
 							height = _a.height,
 							backgroundColor = _a.backgroundColor,
-							style = _a.style,
 							theme = _a.theme,
 							animation = _a.animation;
-						return (0, emotion_react_browser_esm.iv)(
-							__assign(
-								{
-									height,
-									position: 'fixed',
-									top: '0',
-									left: '0',
-									right: '0',
-									margin: 'auto',
-									transition: 'opacity 0.3s ease',
-									opacity: '1',
-									visibility: 'visible',
-									zIndex: '10000',
-									background: backgroundColor || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.secondary) || '#f8f8f8',
-									'& .ss__loading-bar__bar': {
-										position: 'absolute',
-										top: '0',
-										left: '-200px',
-										height: '100%',
-										background: '' + (color || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#ccc'),
-										animation: animation + ' 2s linear infinite',
-									},
-								},
-								style
-							)
-						);
+						return (0, emotion_react_browser_esm.iv)({
+							height,
+							position: 'fixed',
+							top: '0',
+							left: '0',
+							right: '0',
+							margin: 'auto',
+							transition: 'opacity 0.3s ease',
+							opacity: '1',
+							visibility: 'visible',
+							zIndex: '10000',
+							background: backgroundColor || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.secondary) || '#f8f8f8',
+							'& .ss__loading-bar__bar': {
+								position: 'absolute',
+								top: '0',
+								left: '-200px',
+								height: '100%',
+								background: '' + (color || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#ccc'),
+								animation: animation + ' 2s linear infinite',
+							},
+						});
 					},
 					animation: (0, emotion_react_browser_esm.F4)({
 						from: { left: '-200px', width: '30%' },
@@ -2224,21 +2213,22 @@
 					height = props.height,
 					disableStyles = props.disableStyles,
 					className = props.className,
-					style = props.style;
+					style = props.style,
+					styling = {};
 				return (
+					disableStyles
+						? style && (styling.css = [style])
+						: (styling.css = [CSS.loadingBar({ height, color, backgroundColor, theme, animation: CSS.animation }), style]),
 					active &&
-					(0, emotion_react_browser_esm.tZ)(
-						cache.n,
-						null,
 						(0, emotion_react_browser_esm.tZ)(
-							'div',
-							{
-								css: !disableStyles && CSS.loadingBar({ height, color, backgroundColor, style, theme, animation: CSS.animation }),
-								className: classnames_default()('ss__loading-bar', className),
-							},
-							(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__loading-bar__bar' })
+							cache.n,
+							null,
+							(0, emotion_react_browser_esm.tZ)(
+								'div',
+								__assign({}, styling, { className: classnames_default()('ss__loading-bar', className) }),
+								(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__loading-bar__bar' })
+							)
 						)
-					)
 				);
 			}
 			var componentArgs = __webpack_require__(55625),
@@ -2381,7 +2371,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(63399),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(37990),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (__assign =
@@ -2638,9 +2628,8 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_banner = function banner(_a) {
-					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)(__assign({ '& iframe, img': { maxWidth: '100%', height: 'auto' } }, style));
+				CSS_banner = function banner() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
 				};
 			function Banner(properties) {
 				var _a,
@@ -2663,20 +2652,26 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style;
-				if (type !== _types__WEBPACK_IMPORTED_MODULE_5__.$.INLINE)
+				if (type !== _types__WEBPACK_IMPORTED_MODULE_5__.$.INLINE) {
+					var styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_banner(), style]),
 						content &&
-						(null === (_d = content[type]) || void 0 === _d ? void 0 : _d.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_6__.n,
-							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('div', {
-								className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__banner', 'ss__banner--' + type, className),
-								css: !disableStyles && CSS_banner({ style }),
-								dangerouslySetInnerHTML: { __html: content[props.type].join('') },
-							})
-						)
+							(null === (_d = content[type]) || void 0 === _d ? void 0 : _d.length) &&
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+									'div',
+									__assign(
+										{ className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__banner', 'ss__banner--' + type, className) },
+										styling,
+										{ dangerouslySetInnerHTML: { __html: content[props.type].join('') } }
+									)
+								)
+							)
 					);
+				}
 				console.warn("BannerType '" + _types__WEBPACK_IMPORTED_MODULE_5__.$.INLINE + "' is not supported in <Banner /> component");
 			}
 		},
@@ -2700,7 +2695,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(63399),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(37990),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -2923,24 +2918,18 @@
 						}).apply(this, arguments);
 				},
 				CSS_inlineBanner = function inlineBanner(_a) {
-					var width = _a.width,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)(
-						__assign(
-							{
-								height: '100%',
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: width || 'auto',
-								'&.ss__inline-banner--grid': { flexDirection: 'column' },
-								'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
-								'& iframe': { maxWidth: '100%' },
-							},
-							style
-						)
-					);
+					var width = _a.width;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
+						height: '100%',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+						width: width || 'auto',
+						'&.ss__inline-banner--grid': { flexDirection: 'column' },
+						'&.ss__inline-banner--list': { flexDirection: 'row', display: 'block', width: '100%' },
+						'& iframe': { maxWidth: '100%' },
+					});
 				};
 			function InlineBanner(properties) {
 				var _a,
@@ -2962,19 +2951,24 @@
 					className = props.className,
 					width = props.width,
 					layout = props.layout,
-					style = props.style;
+					style = props.style,
+					styling = {};
 				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_inlineBanner({ width }), style]),
 					banner &&
-					banner.value &&
-					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-						_providers__WEBPACK_IMPORTED_MODULE_5__.n,
-						null,
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)('div', {
-							className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className),
-							css: !disableStyles && CSS_inlineBanner({ width, style }),
-							dangerouslySetInnerHTML: { __html: banner.value },
-						})
-					)
+						banner.value &&
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_5__.n,
+							null,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
+								'div',
+								__assign(
+									{ className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className) },
+									styling,
+									{ dangerouslySetInnerHTML: { __html: banner.value } }
+								)
+							)
+						)
 				);
 			}
 		},
@@ -3120,23 +3114,17 @@
 				},
 				CSS_overlay = function overlay(_a) {
 					var color = _a.color,
-						transitionSpeed = _a.transitionSpeed,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)(
-						__assign(
-							{
-								transition: 'background ' + transitionSpeed + ' ease 0s, left 0s ease ' + transitionSpeed,
-								position: 'fixed',
-								zIndex: '10003',
-								height: '100%',
-								width: '100%',
-								top: '0',
-								left: '-100%',
-								'&.ss__overlay--active': { transition: 'background ' + transitionSpeed + ' ease, left 0s ease', background: color, left: '0' },
-							},
-							style
-						)
-					);
+						transitionSpeed = _a.transitionSpeed;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.iv)({
+						transition: 'background ' + transitionSpeed + ' ease 0s, left 0s ease ' + transitionSpeed,
+						position: 'fixed',
+						zIndex: '10003',
+						height: '100%',
+						width: '100%',
+						top: '0',
+						left: '-100%',
+						'&.ss__overlay--active': { transition: 'background ' + transitionSpeed + ' ease, left 0s ease', background: color, left: '0' },
+					});
 				};
 			function Overlay(properties) {
 				var _a,
@@ -3159,17 +3147,26 @@
 					_onClick = props.onClick,
 					disableStyles = props.disableStyles,
 					className = props.className,
-					style = props.style;
-				return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
-					_providers__WEBPACK_IMPORTED_MODULE_4__.n,
-					null,
-					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)('div', {
-						onClick: function onClick(e) {
-							return _onClick && active && _onClick(e);
-						},
-						className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__overlay', { 'ss__overlay--active': active }, className),
-						css: !disableStyles && CSS_overlay({ color, transitionSpeed, style }),
-					})
+					style = props.style,
+					styling = {};
+				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_overlay({ color, transitionSpeed }), style]),
+					(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
+						_providers__WEBPACK_IMPORTED_MODULE_4__.n,
+						null,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
+							'div',
+							__assign(
+								{
+									onClick: function onClick(e) {
+										return _onClick && active && _onClick(e);
+									},
+									className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__overlay', { 'ss__overlay--active': active }, className),
+								},
+								styling
+							)
+						)
+					)
 				);
 			}
 		},
@@ -3376,17 +3373,11 @@
 				},
 				CSS_price = function price(_a) {
 					var _b,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						Price_assign(
-							{
-								color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
-								'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
-							},
-							style
-						)
-					);
+						theme = _a.theme;
+					return (0, emotion_react_browser_esm.iv)({
+						color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
+						'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
+					});
 				};
 			function Price(properties) {
 				var _a,
@@ -3427,50 +3418,39 @@
 					formattedPrice = (function currency(input, opts) {
 						var defaultOptions = __assign({ symbol: '$', thousandsSeparator: ',', decimalPlaces: 2 }, opts);
 						return (0, formatNumber.u)(input, defaultOptions);
-					})(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter });
-				return raw
-					? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedPrice)
-					: (0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							(0, emotion_react_browser_esm.tZ)(
-								'span',
-								{
-									css: !disableStyles && CSS_price({ theme, style }),
-									className: classnames_default()('ss__price', { 'ss__price--strike': lineThrough }, className),
-								},
-								formattedPrice
-							)
-					  );
+					})(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
+					styling = {};
+				return (
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_price({ theme }), style]),
+					raw
+						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedPrice)
+						: (0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'span',
+									Price_assign({}, styling, { className: classnames_default()('ss__price', { 'ss__price--strike': lineThrough }, className) }),
+									formattedPrice
+								)
+						  )
+				);
 			}
 		},
 		13147: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, {
-					Colors: () => Colors,
-					Icons: () => Icons,
-					Products: () => Products,
-					default: () => Carousel_stories,
-				});
+				__webpack_require__.d(__webpack_exports__, { Colors: () => Colors, Icons: () => Icons, default: () => Carousel_stories });
 			__webpack_require__(43105),
-				__webpack_require__(73439),
-				__webpack_require__(58188),
-				__webpack_require__(34115),
-				__webpack_require__(634),
-				__webpack_require__(20796),
+				__webpack_require__(27233),
 				__webpack_require__(28673),
+				__webpack_require__(58188),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
 				__webpack_require__(43450),
-				__webpack_require__(38695),
-				__webpack_require__(1939),
-				__webpack_require__(94908),
-				__webpack_require__(77950),
-				__webpack_require__(34769),
 				__webpack_require__(35734),
-				__webpack_require__(27233),
+				__webpack_require__(34769),
 				__webpack_require__(74069),
+				__webpack_require__(77950),
 				__webpack_require__(85940),
 				__webpack_require__(68995),
 				__webpack_require__(88233),
@@ -3481,8 +3461,6 @@
 				paths = __webpack_require__(86285),
 				Icon = __webpack_require__(6572),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
-				Result = __webpack_require__(23267),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -3543,6 +3521,19 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel pagination>{children}<Carousel/>\n')
+					),
+					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'vertical'),
+						' prop changes the carousel slide direction from horizontal, to vertical. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel vertical>{children}<Carousel/>\n')
 					),
 					(0, esm.kt)('h3', { id: 'hidebuttons' }, 'hideButtons'),
 					(0, esm.kt)(
@@ -3695,122 +3686,14 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				__awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				__generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				};
+				return (__assign =
+					Object.assign ||
+					function (t) {
+						for (var s, i = 1, n = arguments.length; i < n; i++)
+							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+						return t;
+					}).apply(this, arguments);
+			};
 			const Carousel_stories = {
 				title: 'Molecules/Carousel',
 				component: Carousel.l,
@@ -3823,7 +3706,7 @@
 				},
 				decorators: [
 					function (Story) {
-						return (0, preact_module.h)('div', { style: { maxWidth: '900px' } }, (0, preact_module.h)(Story, null));
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px', height: '300px' } }, (0, preact_module.h)(Story, null));
 					},
 				],
 				argTypes: __assign(
@@ -3840,6 +3723,12 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						vertical: {
+							defaultValue: !1,
+							description: 'Carousel vertical slide direction',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						hideButtons: {
 							defaultValue: !1,
 							description: 'Hide prev/next buttons',
@@ -3849,7 +3738,7 @@
 						prevButton: { description: 'Previous button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						nextButton: { description: 'Next button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						breakpoints: {
-							defaultValue: Carousel.i,
+							defaultValue: void 0,
 							description: 'Carousel breakpoints',
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
 							control: { type: 'object' },
@@ -3870,65 +3759,7 @@
 					componentArgs.p
 				),
 			};
-			var snapInstance = snapify.K.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } }),
-				Products = function Products(props, _a) {
-					var _b,
-						controller = _a.loaded.controller;
-					return (0, preact_module.h)(
-						Carousel.l,
-						__assign({}, props),
-						null === (_b = controller.store) || void 0 === _b
-							? void 0
-							: _b.results.map(function (result) {
-									return (0, preact_module.h)(Result.x, { result });
-							  })
-					);
-				};
-			Products.loaders = [
-				function () {
-					return __awaiter(void 0, void 0, void 0, function () {
-						return __generator(this, function (_a) {
-							switch (_a.label) {
-								case 0:
-									return (
-										snapInstance.on('afterStore', function (_a, next) {
-											var controller = _a.controller;
-											return __awaiter(void 0, void 0, void 0, function () {
-												return __generator(this, function (_b) {
-													switch (_b.label) {
-														case 0:
-															return (
-																controller.store.results.forEach(function (result) {
-																	return (result.mappings.core.url = 'javascript:void(0);');
-																}),
-																[4, next()]
-															);
-														case 1:
-															return _b.sent(), [2];
-													}
-												});
-											});
-										}),
-										[4, snapInstance.search()]
-									);
-								case 1:
-									return _a.sent(), [2, { controller: snapInstance }];
-							}
-						});
-					});
-				},
-			];
-			var Icons = function Icons(props) {
-					return (0, preact_module.h)(
-						Carousel.l,
-						__assign({}, props),
-						Object.keys(paths.N).map(function (icon, index) {
-							return (0,
-							preact_module.h)('div', { style: { margin: '0 auto', textAlign: 'center' } }, (0, preact_module.h)(Icon.J, { icon, color: shiftColor('#3a23ad', (index + '111').padStart(6, '1')), size: '80px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
-						})
-					);
-				},
-				colors = Array.from(Array(9).keys()),
+			var colors = Array.from(Array(9).keys()),
 				Colors = function Colors(props) {
 					return (0, preact_module.h)(
 						Carousel.l,
@@ -3939,6 +3770,17 @@
 						})
 					);
 				};
+			Colors.args = { pagination: !0, hideButtons: !0, loop: !1 };
+			var Icons = function Icons(props) {
+				return (0, preact_module.h)(
+					Carousel.l,
+					__assign({}, props),
+					Object.keys(paths.N).map(function (icon, index) {
+						return (0,
+						preact_module.h)('div', { style: { margin: '0 auto', textAlign: 'center' } }, (0, preact_module.h)(Icon.J, { icon, color: shiftColor('#3a23ad', (index + '111').padStart(6, '1')), size: '80px', style: { padding: '20px' } }), (0, preact_module.h)('div', { style: 'text-align: center' }, icon));
+					})
+				);
+			};
 			function shiftColor(base, change) {
 				var colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
 				if (!base || !change) return '#000000';
@@ -3956,17 +3798,16 @@
 				}
 				return '#' + newColor;
 			}
-			Colors.args = { pagination: !0, hideButtons: !0, loop: !1 };
 		},
 		77592: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { i: () => defaultCarouselBreakpoints, l: () => Carousel });
+			__webpack_require__.d(__webpack_exports__, { l: () => Carousel });
 			__webpack_require__(43105), __webpack_require__(74083), __webpack_require__(34115), __webpack_require__(43450);
 			var preact_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34619),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
 				swiper_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(18491),
 				swiper_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(92718),
 				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(13701),
@@ -3999,45 +3840,56 @@
 					var _b,
 						_c,
 						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
-						__assign(
-							{
-								display: 'flex',
-								maxWidth: '100%',
-								margin: 0,
-								padding: 0,
-								overflow: 'hidden',
-								'& .swiper-pagination-bullet-active': {
-									background: (null === (_b = null == theme ? void 0 : theme.colors) || void 0 === _b ? void 0 : _b.primary) || 'inherit',
-								},
-								'& .ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': { display: 'flex', justifyContent: 'center', alignItems: 'center' },
-								'& .ss__carousel__next, .ss__carousel__prev': {
-									padding: '5px',
-									cursor: 'pointer',
-									'&.swiper-button-disabled': { opacity: '0.3', cursor: 'default' },
-								},
-								'& .swiper-container': { display: 'flex', flexDirection: 'column' },
-								'& .swiper-wrapper': { order: 0 },
-								'& .swiper-pagination': { marginTop: '10px', width: '100%', order: 1, textAlign: 'center', transition: '.3s opacity' },
-								'& .swiper-pagination-bullet': {
-									width: '8px',
-									height: '8px',
-									display: 'inline-block',
-									borderRadius: '50%',
-									background: '#000',
-									opacity: '.2',
-									cursor: 'pointer',
-									margin: '0 4px',
-									'&.swiper-pagination-bullet-active': {
-										opacity: '0.8',
-										background: (null === (_c = null == theme ? void 0 : theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#000',
-									},
-								},
+						vertical = _a.vertical;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+						display: 'flex',
+						maxWidth: '100%',
+						maxHeight: vertical ? '100%' : null,
+						margin: 0,
+						padding: 0,
+						overflow: 'hidden',
+						'&.ss__carousel-vertical': {
+							flexDirection: 'column',
+							'.swiper-slide': { display: 'flex', justifyContent: 'center', alignItems: 'center' },
+							'.swiper-container': { flexDirection: 'row' },
+							'.swiper-pagination': { width: 'auto', order: 0, flexDirection: 'column', margin: 0, padding: '10px' },
+							'.swiper-pagination-bullet': { margin: '4px' },
+						},
+						'.swiper-pagination-bullet-active': {
+							background: (null === (_b = null == theme ? void 0 : theme.colors) || void 0 === _b ? void 0 : _b.primary) || 'inherit',
+						},
+						'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': { display: 'flex', justifyContent: 'center', alignItems: 'center' },
+						'.ss__carousel__next, .ss__carousel__prev': {
+							padding: '5px',
+							cursor: 'pointer',
+							lineHeight: 0,
+							'&.swiper-button-disabled': { opacity: '0.3', cursor: 'default' },
+						},
+						'.swiper-container': { display: 'flex', flexDirection: 'column' },
+						'.swiper-wrapper': { order: 0 },
+						'.swiper-pagination': {
+							display: 'flex',
+							justifyContent: 'center',
+							marginTop: '10px',
+							width: '100%',
+							order: 1,
+							transition: '.3s opacity',
+						},
+						'.swiper-pagination-bullet': {
+							width: '8px',
+							height: '8px',
+							display: 'inline-block',
+							borderRadius: '50%',
+							background: '#000',
+							opacity: '.2',
+							cursor: 'pointer',
+							margin: '0 4px',
+							'&.swiper-pagination-bullet-active': {
+								opacity: '0.8',
+								background: (null === (_c = null == theme ? void 0 : theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#000',
 							},
-							style
-						)
-					);
+						},
+					});
 				},
 				defaultCarouselBreakpoints = {
 					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
@@ -4046,18 +3898,18 @@
 					1024: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 10 },
 					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
 				},
+				defaultVerticalCarouselBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
 				Carousel = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						_e,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
 								__assign(
-									{ breakpoints: defaultCarouselBreakpoints, pagination: !1, loop: !0 },
+									{ breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints, pagination: !1, loop: !0 },
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.carousel
 								),
 								properties
@@ -4071,6 +3923,7 @@
 						nextButton = props.nextButton,
 						prevButton = props.prevButton,
 						hideButtons = props.hideButtons,
+						vertical = props.vertical,
 						_onInit = props.onInit,
 						onNextButtonClick = props.onNextButtonClick,
 						onPrevButtonClick = props.onPrevButtonClick,
@@ -4086,6 +3939,7 @@
 							'nextButton',
 							'prevButton',
 							'hideButtons',
+							'vertical',
 							'onInit',
 							'onNextButtonClick',
 							'onPrevButtonClick',
@@ -4103,94 +3957,95 @@
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
-								null === (_e = null == theme ? void 0 : theme.components) || void 0 === _e ? void 0 : _e.icon
+								{ theme: props.theme }
 							),
 						};
 					swiper_core__WEBPACK_IMPORTED_MODULE_11__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_12__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_13__.Z]);
 					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null),
 						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null),
-						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null);
+						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_4__.sO)(null),
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
 						children &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_14__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								'div',
-								{
-									ref: rootComponentRef,
-									css: !disableStyles && CSS_carousel({ theme, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__carousel', className),
-								},
-								!hideButtons &&
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'div',
-										{ className: 'ss__carousel__prev-wrapper' },
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'div',
-											{
-												className: 'ss__carousel__prev',
-												ref: navigationPrevRef,
-												onClick:
-													onPrevButtonClick &&
-													function (e) {
-														return onPrevButtonClick(e);
-													},
-											},
-											prevButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-													__assign({ icon: 'angle-left' }, subProps.icon)
-												)
-										)
-									),
+								_providers__WEBPACK_IMPORTED_MODULE_14__.n,
+								null,
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-									swiper_react__WEBPACK_IMPORTED_MODULE_16__.t,
-									__assign(
-										{
-											centerInsufficientSlides: !0,
-											onInit: function onInit(swiper) {
-												(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
-													(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
-													_onInit && _onInit(swiper);
-											},
-											onClick: function onClick(swiper, e) {
-												_onClick && _onClick(swiper, e);
-											},
-											loop,
-											breakpoints,
-											pagination: !!pagination && { clickable: !0 },
-										},
-										additionalProps
-									),
-									children.map(function (child) {
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_17__.o, null, child);
-									})
-								),
-								!hideButtons &&
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'div',
-										{ className: 'ss__carousel__next-wrapper' },
+									'div',
+									__assign({ ref: rootComponentRef }, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
+									}),
+									!hideButtons &&
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'div',
+											{ className: 'ss__carousel__prev-wrapper' },
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'div',
+												{
+													className: 'ss__carousel__prev',
+													ref: navigationPrevRef,
+													onClick:
+														onPrevButtonClick &&
+														function (e) {
+															return onPrevButtonClick(e);
+														},
+												},
+												prevButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
+														__assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
+													)
+											)
+										),
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+										swiper_react__WEBPACK_IMPORTED_MODULE_16__.t,
+										__assign(
 											{
-												className: 'ss__carousel__next',
-												ref: navigationNextRef,
-												onClick:
-													onNextButtonClick &&
-													function (e) {
-														return onNextButtonClick(e);
-													},
+												centerInsufficientSlides: !0,
+												onInit: function onInit(swiper) {
+													(swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : void 0),
+														(swiper.params.navigation.nextEl = navigationNextRef.current ? navigationNextRef.current : void 0),
+														_onInit && _onInit(swiper);
+												},
+												onClick: function onClick(swiper, e) {
+													_onClick && _onClick(swiper, e);
+												},
+												direction: vertical ? 'vertical' : 'horizontal',
+												loop,
+												breakpoints,
+												pagination: !!pagination && { clickable: !0 },
 											},
-											nextButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-													__assign({ icon: 'angle-right' }, subProps.icon)
-												)
+											additionalProps
+										),
+										children.map(function (child) {
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_17__.o, null, child);
+										})
+									),
+									!hideButtons &&
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											'div',
+											{ className: 'ss__carousel__next-wrapper' },
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'div',
+												{
+													className: 'ss__carousel__next',
+													ref: navigationNextRef,
+													onClick:
+														onNextButtonClick &&
+														function (e) {
+															return onNextButtonClick(e);
+														},
+												},
+												nextButton ||
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
+														__assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
+													)
+											)
 										)
-									)
+								)
 							)
-						)
 					);
 				});
 		},
@@ -4203,7 +4058,7 @@
 					Native: () => Native,
 					default: () => Checkbox_stories,
 				});
-			__webpack_require__(43105), __webpack_require__(34769), __webpack_require__(65584);
+			__webpack_require__(43105), __webpack_require__(32501), __webpack_require__(18178), __webpack_require__(34769), __webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
 				Checkbox = __webpack_require__(95064),
@@ -4336,9 +4191,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const Checkbox_stories = {
 				title: 'Molecules/Checkbox',
@@ -4372,7 +4229,7 @@
 							defaultValue: 'check-thin',
 							description: 'Icon name',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'check-thin' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						color: {
 							description: 'Checkbox color',
@@ -4411,7 +4268,7 @@
 				_emotion_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(69038),
 				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(27193),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(79367),
@@ -4429,27 +4286,20 @@
 					var _b,
 						size = _a.size,
 						color = _a.color,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)(
-						__assign(
-							{
-								display: 'inline-flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								height: size,
-								width: size,
-								border: '1px solid ' + (color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
-								'&.ss__checkbox--disabled': { opacity: 0.7 },
-								'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + size + ' - 30%)', height: 'calc(' + size + ' - 30%)' },
-							},
-							style
-						)
-					);
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({
+						display: 'inline-flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						height: size,
+						width: size,
+						border: '1px solid ' + (color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
+						'&.ss__checkbox--disabled': { opacity: 0.7 },
+						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + size + ' - 30%)', height: 'calc(' + size + ' - 30%)' },
+					});
 				},
-				CSS_native = function native(_a) {
-					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)(__assign({}, style));
+				CSS_native = function native() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.iv)({});
 				},
 				Checkbox = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
 					var _a,
@@ -4458,7 +4308,6 @@
 						_d,
 						_e,
 						_f,
-						_g,
 						checkedState,
 						setCheckedState,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.u)(),
@@ -4493,13 +4342,13 @@
 										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_6__.r)({
-										color: iconColor || color || (null === (_f = theme.colors) || void 0 === _f ? void 0 : _f.primary) || '#333',
+										color: iconColor || color || (null === (_f = theme.colors) || void 0 === _f ? void 0 : _f.primary),
 										disableStyles,
 										icon,
 										size: size && 'calc(' + size + ' - 30%)',
 									})
 								),
-								null === (_g = null == theme ? void 0 : theme.components) || void 0 === _g ? void 0 : _g.icon
+								{ theme: props.theme }
 							),
 						},
 						stateful = void 0 === checked;
@@ -4507,40 +4356,47 @@
 						? ((checkedState = (_a = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.eJ)(startChecked))[0]), (setCheckedState = _a[1]))
 						: (checkedState = checked);
 					var clickFunc = function clickFunc(e) {
-						disabled ||
-							(stateful &&
-								setCheckedState(function (prev) {
-									return !prev;
-								}),
-							onClick && onClick(e));
-					};
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
-						_providers__WEBPACK_IMPORTED_MODULE_7__.n,
-						null,
-						_native
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('input', {
-									css: !disableStyles && CSS_native({ style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className),
-									type: 'checkbox',
-									onClick: function onClick(e) {
-										return clickFunc(e);
-									},
-									disabled,
-									checked: checkedState,
-							  })
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
-									'span',
-									{
-										css: !disableStyles && CSS_checkbox({ size, color, theme, style }),
-										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className),
-										onClick: function onClick(e) {
-											return clickFunc(e);
-										},
-									},
-									checkedState
-										? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__.J, __assign({}, subProps.icon))
-										: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('span', { className: 'ss__checkbox__empty' })
-							  )
+							disabled ||
+								(stateful &&
+									setCheckedState(function (prev) {
+										return !prev;
+									}),
+								onClick && onClick(e));
+						},
+						styling = {};
+					return (
+						disableStyles
+							? style && (styling.css = [style])
+							: (styling.css = _native ? [CSS_native(), style] : [CSS_checkbox({ size, color, theme }), style]),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_7__.n,
+							null,
+							_native
+								? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+										'input',
+										__assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className),
+											type: 'checkbox',
+											onClick: function onClick(e) {
+												return clickFunc(e);
+											},
+											disabled,
+											checked: checkedState,
+										})
+								  )
+								: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(
+										'span',
+										__assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className),
+											onClick: function onClick(e) {
+												return clickFunc(e);
+											},
+										}),
+										checkedState
+											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__.J, __assign({}, subProps.icon))
+											: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_4__.tZ)('span', { className: 'ss__checkbox__empty' })
+								  )
+						)
 					);
 				});
 		},
@@ -4566,7 +4422,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -4907,7 +4763,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
@@ -4927,38 +4783,32 @@
 						_f,
 						columns = _a.columns,
 						gapSize = _a.gapSize,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
-						__assign(
-							{
-								display: 'grid',
-								gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
-								gridAutoRows: '1fr',
-								gap: gapSize,
-								'&::before': { content: '""', width: 0, paddingBottom: '100%', gridRow: '1 / 1', gridColumn: '1 / 1' },
-								'&> *:first-of-type': { gridRow: '1 / 1', gridColumn: '1 / 1' },
-								'& .ss__facet-grid-options__option': {
-									border: '1px solid ' + ((null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									textAlign: 'center',
-									wordBreak: 'break-all',
-									'&.ss__facet-grid-options__option--filtered': {
-										background: (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#ccc',
-										color: null === (_e = null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.text) || void 0 === _e ? void 0 : _e.secondary,
-									},
-									'&:hover:not(.ss__facet-grid-options__option--filtered)': {
-										cursor: 'pointer',
-										background: (null === (_f = theme.colors) || void 0 === _f ? void 0 : _f.hover) || '#f8f8f8',
-									},
-									'& .ss__facet-grid-options__option__value': { '&.ss__facet-grid-options__option__value--smaller': { fontSize: '70%' } },
-								},
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+						display: 'grid',
+						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
+						gridAutoRows: '1fr',
+						gap: gapSize,
+						'&::before': { content: '""', width: 0, paddingBottom: '100%', gridRow: '1 / 1', gridColumn: '1 / 1' },
+						'&> *:first-of-type': { gridRow: '1 / 1', gridColumn: '1 / 1' },
+						'& .ss__facet-grid-options__option': {
+							border: '1px solid ' + ((null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							textAlign: 'center',
+							wordBreak: 'break-all',
+							'&.ss__facet-grid-options__option--filtered': {
+								background: (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary) || '#ccc',
+								color: null === (_e = null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.text) || void 0 === _e ? void 0 : _e.secondary,
 							},
-							style
-						)
-					);
+							'&:hover:not(.ss__facet-grid-options__option--filtered)': {
+								cursor: 'pointer',
+								background: (null === (_f = theme.colors) || void 0 === _f ? void 0 : _f.hover) || '#f8f8f8',
+							},
+							'& .ss__facet-grid-options__option__value': { '&.ss__facet-grid-options__option__value--smaller': { fontSize: '70%' } },
+						},
+					});
 				},
 				FacetGridOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
@@ -4986,48 +4836,47 @@
 						valueProps = props.valueProps,
 						disableStyles = props.disableStyles,
 						className = props.className,
-						style = props.style;
+						style = props.style,
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_grid({ columns, gapSize, theme }), style]),
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_10__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								'div',
-								{
-									css: !disableStyles && CSS_grid({ columns, gapSize, theme, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options', className),
-								},
-								values.map(function (value) {
-									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'a',
-										__assign(
-											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option', {
-													'ss__facet-grid-options__option--filtered': value.filtered,
-												}),
-												onClick,
-												onFocus: function onFocus() {
-													return previewOnFocus && value.preview && value.preview();
+								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+									'div',
+									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options', className) }),
+									values.map(function (value) {
+										var _a;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											'a',
+											__assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option', {
+														'ss__facet-grid-options__option--filtered': value.filtered,
+													}),
+													onClick,
+													onFocus: function onFocus() {
+														return previewOnFocus && value.preview && value.preview();
+													},
 												},
-											},
-											valueProps,
-											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
-										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'span',
-											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option__value', {
-													'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-												}),
-											},
-											value.label
-										)
-									);
-								})
+												valueProps,
+												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
+											),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'span',
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option__value', {
+														'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+													}),
+												},
+												value.label
+											)
+										);
+									})
+								)
 							)
-						)
 					);
 				});
 		},
@@ -5054,7 +4903,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -5319,7 +5168,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
@@ -5335,39 +5184,33 @@
 					var _b,
 						_c,
 						_d,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
-						__assign(
-							{
-								'& .ss__facet-hierarchy-options__option': {
-									display: 'flex',
-									padding: '6px 0',
-									textDecoration: 'none',
-									alignItems: 'center',
-									'&:hover': { cursor: 'pointer', background: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover },
-									'&.ss__facet-hierarchy-options__option--filtered': {
-										fontWeight: 'bold',
-										color: null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary,
-										'&:hover': { cursor: 'default', background: 'unset' },
-										'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': { paddingLeft: '16px' },
-									},
-									'&.ss__facet-hierarchy-options__option--return': {
-										'&:before': {
-											content: "'\\0000ab'",
-											padding: '0 2px 0 0',
-											color: null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.primary,
-										},
-									},
-									'& .ss__facet-hierarchy-options__option__value': {
-										marginLeft: '8px',
-										'& .ss__facet-hierarchy-options__option__value__count': { fontSize: '0.8em', marginLeft: '6px' },
-									},
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+						'& .ss__facet-hierarchy-options__option': {
+							display: 'flex',
+							padding: '6px 0',
+							textDecoration: 'none',
+							alignItems: 'center',
+							'&:hover': { cursor: 'pointer', background: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover },
+							'&.ss__facet-hierarchy-options__option--filtered': {
+								fontWeight: 'bold',
+								color: null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary,
+								'&:hover': { cursor: 'default', background: 'unset' },
+								'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': { paddingLeft: '16px' },
+							},
+							'&.ss__facet-hierarchy-options__option--return': {
+								'&:before': {
+									content: "'\\0000ab'",
+									padding: '0 2px 0 0',
+									color: null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.primary,
 								},
 							},
-							style
-						)
-					);
+							'& .ss__facet-hierarchy-options__option__value': {
+								marginLeft: '8px',
+								'& .ss__facet-hierarchy-options__option__value__count': { fontSize: '0.8em', marginLeft: '6px' },
+							},
+						},
+					});
 				},
 				FacetHierarchyOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
@@ -5394,58 +5237,57 @@
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
 						className = props.className,
-						style = props.style;
+						style = props.style,
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_hierarchy({ theme }), style]),
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_10__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								'div',
-								{
-									css: !disableStyles && CSS_hierarchy({ theme, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-hierarchy-options', className),
-								},
-								values.map(function (value) {
-									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'a',
-										__assign(
-											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
-													'ss__facet-hierarchy-options__option',
-													{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-													{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
-												),
-												onClick,
-											},
-											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link,
-											{
-												onFocus: function onFocus() {
-													return previewOnFocus && value.preview && value.preview();
+								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+									'div',
+									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-hierarchy-options', className) }),
+									values.map(function (value) {
+										var _a;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											'a',
+											__assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+														'ss__facet-hierarchy-options__option',
+														{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+														{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+													),
+													onClick,
 												},
-											},
-											valueProps
-										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'span',
-											{ className: 'ss__facet-hierarchy-options__option__value' },
-											value.label,
-											!hideCount &&
-												value.count > 0 &&
-												!value.filtered &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													'span',
-													{ className: 'ss__facet-hierarchy-options__option__value__count' },
-													'(',
-													value.count,
-													')'
-												)
-										)
-									);
-								})
+												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link,
+												{
+													onFocus: function onFocus() {
+														return previewOnFocus && value.preview && value.preview();
+													},
+												},
+												valueProps
+											),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'span',
+												{ className: 'ss__facet-hierarchy-options__option__value' },
+												value.label,
+												!hideCount &&
+													value.count > 0 &&
+													!value.filtered &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														'span',
+														{ className: 'ss__facet-hierarchy-options__option__value__count' },
+														'(',
+														value.count,
+														')'
+													)
+											)
+										);
+									})
+								)
 							)
-						)
 					);
 				});
 		},
@@ -5471,7 +5313,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -5824,7 +5666,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
@@ -5842,37 +5684,30 @@
 					var _b,
 						_c,
 						theme = _a.theme,
-						style = _a.style,
 						hideCheckbox = _a.hideCheckbox;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
-						__assign(
-							{
-								'& .ss__facet-list-options__option': {
-									display: 'flex',
-									padding: '6px',
-									textDecoration: 'none',
-									alignItems: 'center',
-									'&:hover': { cursor: 'pointer', background: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover },
-									'&.ss__facet-list-options__option--filtered': {
-										fontWeight: 'bold',
-										color: null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary,
-									},
-									'& .ss__facet-list-options__option__value': {
-										marginLeft: hideCheckbox ? '' : '8px',
-										'& .ss__facet-list-options__option__value__count': { fontSize: '0.8em', marginLeft: '6px' },
-									},
-								},
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+						'& .ss__facet-list-options__option': {
+							display: 'flex',
+							padding: '6px',
+							textDecoration: 'none',
+							alignItems: 'center',
+							'&:hover': { cursor: 'pointer', background: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover },
+							'&.ss__facet-list-options__option--filtered': {
+								fontWeight: 'bold',
+								color: null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.primary,
 							},
-							style
-						)
-					);
+							'& .ss__facet-list-options__option__value': {
+								marginLeft: hideCheckbox ? '' : '8px',
+								'& .ss__facet-list-options__option__value__count': { fontSize: '0.8em', marginLeft: '6px' },
+							},
+						},
+					});
 				},
 				FacetListOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						_e,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -5902,60 +5737,59 @@
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
-								null === (_e = null == theme ? void 0 : theme.components) || void 0 === _e ? void 0 : _e.checkbox
+								{ theme: props.theme }
 							),
-						};
+						},
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_list({ theme, hideCheckbox }), style]),
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								'div',
-								{
-									css: !disableStyles && CSS_list({ theme, style, hideCheckbox }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options', className),
-								},
-								values.map(function (value) {
-									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'a',
-										__assign(
-											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options__option', {
-													'ss__facet-list-options__option--filtered': value.filtered,
-												}),
-												onClick,
-												onFocus: function onFocus() {
-													return previewOnFocus && value.preview && value.preview();
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+									'div',
+									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options', className) }),
+									values.map(function (value) {
+										var _a;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											'a',
+											__assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options__option', {
+														'ss__facet-list-options__option--filtered': value.filtered,
+													}),
+													onClick,
+													onFocus: function onFocus() {
+														return previewOnFocus && value.preview && value.preview();
+													},
 												},
-											},
-											valueProps,
-											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
-										),
-										!hideCheckbox &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-												_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__.X,
-												__assign({}, subProps.checkbox, { checked: value.filtered })
+												valueProps,
+												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 											),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'span',
-											{ className: 'ss__facet-list-options__option__value' },
-											value.label,
-											!hideCount &&
-												value.count > 0 &&
+											!hideCheckbox &&
 												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													'span',
-													{ className: 'ss__facet-list-options__option__value__count' },
-													'(',
-													value.count,
-													')'
-												)
-										)
-									);
-								})
+													_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__.X,
+													__assign({}, subProps.checkbox, { checked: value.filtered })
+												),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												'span',
+												{ className: 'ss__facet-list-options__option__value' },
+												value.label,
+												!hideCount &&
+													value.count > 0 &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+														'span',
+														{ className: 'ss__facet-list-options__option__value__count' },
+														'(',
+														value.count,
+														')'
+													)
+											)
+										);
+									})
+								)
 							)
-						)
 					);
 				});
 		},
@@ -5981,7 +5815,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(40574),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -6380,7 +6214,7 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
@@ -6398,84 +6232,76 @@
 					var _b,
 						columns = _a.columns,
 						gapSize = _a.gapSize,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)(
-						__assign(
-							{
-								display: 'grid',
-								gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
-								gap: gapSize,
-								'& .ss__facet-palette-options__option': {
-									position: 'relative',
-									'&:hover': {
-										cursor: 'pointer',
-										'.ss__facet-palette-options__option__wrapper': { borderColor: '#EBEBEB' },
-										'& .ss__facet-palette-options__option__palette': { '& .ss__facet-palette-options__icon': { opacity: 1 } },
-									},
-									'& .ss__facet-palette-options__option__wrapper': { border: '2px solid transparent', borderRadius: '100%', padding: '2px' },
-									'&.ss__facet-palette-options__option--filtered': {
-										'& .ss__facet-palette-options__option__wrapper': {
-											borderColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
-											padding: '0px',
-											borderWidth: '4px',
-										},
-									},
-									'& .ss__facet-palette-options__option__palette': {
-										paddingTop: 'calc(100% - 2px)',
-										border: '1px solid #EBEBEB',
-										borderRadius: '100%',
-										position: 'relative',
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										'& .ss__facet-palette-options__icon': {
-											position: 'absolute',
-											top: 0,
-											right: 0,
-											left: 0,
-											margin: 'auto',
-											bottom: 0,
-											textAlign: 'center',
-											stroke: 'black',
-											strokeWidth: '3px',
-											strokeLinejoin: 'round',
-											opacity: 0,
-										},
-									},
-									'& .ss__facet-palette-options__option__value': {
-										display: 'block',
-										textAlign: 'center',
-										overflow: 'hidden',
-										textOverflow: 'ellipsis',
-										whiteSpace: 'nowrap',
-									},
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+						display: 'grid',
+						gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
+						gap: gapSize,
+						'& .ss__facet-palette-options__option': {
+							position: 'relative',
+							'&:hover': {
+								cursor: 'pointer',
+								'.ss__facet-palette-options__option__wrapper': { borderColor: '#EBEBEB' },
+								'& .ss__facet-palette-options__option__palette': { '& .ss__facet-palette-options__icon': { opacity: 1 } },
+							},
+							'& .ss__facet-palette-options__option__wrapper': { border: '2px solid transparent', borderRadius: '100%', padding: '2px' },
+							'&.ss__facet-palette-options__option--filtered': {
+								'& .ss__facet-palette-options__option__wrapper': {
+									borderColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
+									padding: '0px',
+									borderWidth: '4px',
 								},
 							},
-							style
-						)
-					);
+							'& .ss__facet-palette-options__option__palette': {
+								paddingTop: 'calc(100% - 2px)',
+								border: '1px solid #EBEBEB',
+								borderRadius: '100%',
+								position: 'relative',
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								'& .ss__facet-palette-options__icon': {
+									position: 'absolute',
+									top: 0,
+									right: 0,
+									left: 0,
+									margin: 'auto',
+									bottom: 0,
+									textAlign: 'center',
+									stroke: 'black',
+									strokeWidth: '3px',
+									strokeLinejoin: 'round',
+									opacity: 0,
+								},
+							},
+							'& .ss__facet-palette-options__option__value': {
+								display: 'block',
+								textAlign: 'center',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								whiteSpace: 'nowrap',
+							},
+						},
+					});
 				},
 				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						_e,
-						_f,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
 								__assign(
 									{ values: [], columns: 4, gapSize: '8px' },
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetpaletteoptions
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetPaletteOptions
 								),
 								properties
 							),
 							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
 								? void 0
-								: _c.facetpaletteoptions
+								: _c.facetPaletteOptions
 						),
 						values = props.values,
 						hideLabel = props.hideLabel,
@@ -6497,68 +6323,716 @@
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.icon
+								{ theme: props.theme }
 							),
-						};
+						},
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
 						(null == values ? void 0 : values.length) &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								'div',
-								{
-									css: !disableStyles && CSS_palette({ columns, gapSize, theme, style }),
-									className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className),
-								},
-								values.map(function (value) {
-									var _a;
-									return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-										'a',
-										__assign(
-											{
-												className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
-													'ss__facet-palette-options__option--filtered': value.filtered,
-												}),
-												onClick,
-												'aria-label': value.value,
-												onFocus: function onFocus() {
-													return previewOnFocus && value.preview && value.preview();
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+									'div',
+									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className) }),
+									values.map(function (value) {
+										var _a;
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											'a',
+											__assign(
+												{
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
+														'ss__facet-palette-options__option--filtered': value.filtered,
+													}),
+													onClick,
+													'aria-label': value.value,
+													onFocus: function onFocus() {
+														return previewOnFocus && value.preview && value.preview();
+													},
 												},
-											},
-											valueProps,
-											null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
-										),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-											'div',
-											{ className: 'ss__facet-palette-options__option__wrapper' },
+												valueProps,
+												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
+											),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 												'div',
-												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
-														'ss__facet-palette-options__option__palette',
-														'ss__facet-palette-options__option__palette--' + value.value
-													),
-													css: { background: value.value },
-												},
-												!hideIcon &&
-													value.filtered &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
-														__assign({}, subProps.icon)
-													)
-											)
-										),
-										!hideLabel &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-												'span',
-												{ className: 'ss__facet-palette-options__option__value' },
-												value.label
-											)
-									);
-								})
+												{ className: 'ss__facet-palette-options__option__wrapper' },
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+													'div',
+													{
+														className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+															'ss__facet-palette-options__option__palette',
+															'ss__facet-palette-options__option__palette--' + value.value
+														),
+														css: { background: value.value },
+													},
+													!hideIcon &&
+														value.filtered &&
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
+															__assign({}, subProps.icon)
+														)
+												)
+											),
+											!hideLabel &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+													'span',
+													{ className: 'ss__facet-palette-options__option__value' },
+													value.label
+												)
+										);
+									})
+								)
 							)
+					);
+				});
+		},
+		95811: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => FacetSlider_stories });
+			__webpack_require__(43105), __webpack_require__(65584);
+			var preact_module = __webpack_require__(33847),
+				blocks = __webpack_require__(63255),
+				FacetSlider = __webpack_require__(20682),
+				componentArgs = __webpack_require__(55625),
+				searchResponse = __webpack_require__(53083),
+				esm = (__webpack_require__(66741), __webpack_require__(30876));
+			function _extends() {
+				return (_extends =
+					Object.assign ||
+					function (target) {
+						for (var i = 1; i < arguments.length; i++) {
+							var source = arguments[i];
+							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+						}
+						return target;
+					}).apply(this, arguments);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'facet-slider' }, 'Facet Slider'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Renders a slider to be used with any slider facet. Built using ',
+						(0, esm.kt)(
+							'a',
+							{ parentName: 'p', href: 'https://github.com/tannerlinsley/react-ranger', target: '_blank', rel: 'nofollow noopener noreferrer' },
+							'react-ranger'
+						),
+						'.'
+					),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
+						' prop specifies a reference to a facet within the facets store array. The facet must be a range facet (',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'display'),
+						' type of ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'slider'"),
+						').'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />\n"
 						)
+					),
+					(0, esm.kt)('h3', { id: 'showticks' }, 'showTicks'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop will render reference ticks below the slider track.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'ticksize' }, 'tickSize'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'tickSize'),
+						' prop specifies the unit number between ticks. Must be used with ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickSize={20}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'ticktextcolor' }, 'tickTextColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'tickTextColor'),
+						' prop specifies ticks text color. Must be used with ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
+						' prop.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickTextColor={'#cccccc'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'handlecolor' }, 'handleColor'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleColor'), ' prop specifies the handle color.'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleColor={'#0000ff'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'stickyhandlelabel' }, 'stickyHandleLabel'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'stickyHandleLabel'),
+						' prop specifies if the handle value text should display above each handle.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    stickyHandleLabel={true}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'handledraggingcolor' }, 'handleDraggingColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleDraggingColor'),
+						' prop specifies the handle color while dragging.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleDraggingColor={'0000ff'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'handletextcolor' }, 'handleTextColor'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleTextColor'), ' prop specifies the handle text color.'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleTextColor={'#222222'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'trackcolor' }, 'trackColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trackColor'),
+						' prop specifies the slider track (background) color.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    trackColor={'#cccccc'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'railcolor' }, 'railColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'railColor'),
+						' prop specifies the slider rail (foreground) color.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    railColor={'#0000ff'}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'events' }, 'Events'),
+					(0, esm.kt)('h4', { id: 'onchange' }, 'onChange'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onChange'),
+						' prop allows for a custom callback function for when a slider handle has been changed.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
+						)
+					),
+					(0, esm.kt)('h4', { id: 'ondrag' }, 'onDrag'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onDrag'),
+						' prop allows for a custom callback function for when a slider handle is being dragged.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var __assign = function () {
+				return (__assign =
+					Object.assign ||
+					function (t) {
+						for (var s, i = 1, n = arguments.length; i < n; i++)
+							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+						return t;
+					}).apply(this, arguments);
+			};
+			const FacetSlider_stories = {
+				title: 'Molecules/FacetSlider',
+				component: FacetSlider.C,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '300px' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: __assign(
+					{
+						facet: {
+							description: 'Facet store reference',
+							type: { required: !0 },
+							table: { type: { summary: 'facet store object' } },
+							control: { type: 'none' },
+						},
+						showTicks: {
+							description: 'enables/disables ticks',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						tickSize: {
+							description: 'distance between ticks',
+							table: { type: { summary: 'number' }, defaultValue: { summary: 20 } },
+							control: { type: 'number' },
+						},
+						tickTextColor: { description: 'ticks color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						trackColor: { description: 'Slider track color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						railColor: { description: 'Slider rail Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						handleTextColor: { description: 'Slider Handle Text Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						handleColor: { description: 'Slider handle color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						stickyHandleLabel: {
+							description: 'enables/disables sticky handle labels',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						handleDraggingColor: {
+							description: 'Slider handle color when dragging',
+							table: { type: { summary: 'string' } },
+							control: { type: 'color' },
+						},
+						onDrag: {
+							description: 'Slider onDrag event handler - fires as the slider is dragged (should not be used to trigger searches)',
+							table: { type: { summary: 'function' } },
+							action: 'onDrag',
+						},
+						onChange: {
+							description: 'Slider onChange event handler - fires after touchEnd (used to trigger search)',
+							table: { type: { summary: 'function' } },
+							action: 'onChange',
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var Price = function Template(args) {
+				return (0, preact_module.h)(FacetSlider.C, __assign({}, args, { facet: searchResponse.v1 }));
+			}.bind({});
+		},
+		20682: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { C: () => FacetSlider });
+			__webpack_require__(43105), __webpack_require__(43450);
+			var hooks_module = __webpack_require__(34619),
+				es = __webpack_require__(69038),
+				emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				react_ranger = __webpack_require__(61511),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367);
+			__webpack_require__(16781),
+				__webpack_require__(77950),
+				__webpack_require__(58188),
+				__webpack_require__(88233),
+				__webpack_require__(99120),
+				__webpack_require__(68995),
+				__webpack_require__(91321),
+				__webpack_require__(13489);
+			function str_repeat(i, m) {
+				for (var o = []; m > 0; o[--m] = i);
+				return o.join('');
+			}
+			function sprintf() {
+				for (var args = [], _i = 0; _i < arguments.length; _i++) args[_i] = arguments[_i];
+				for (var a, m, p, c, x, i = 0, f = args[i++], o = []; f; ) {
+					if ((m = /^[^\x25]+/.exec(f))) o.push(m[0]);
+					else if ((m = /^\x25{2}/.exec(f))) o.push('%');
+					else {
+						if (!(m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f))) throw 'Huh ?!';
+						if (null == (a = args[m[1] || i++]) || null == a) throw 'Too few arguments.';
+						if (/[^s]/.test(m[7]) && 'number' != typeof a) throw 'Expecting number but found ' + typeof a;
+						switch (m[7]) {
+							case 'b':
+								a = a.toString(2);
+								break;
+							case 'c':
+								a = String.fromCharCode(a);
+								break;
+							case 'd':
+								a = parseInt(a);
+								break;
+							case 'e':
+								a = m[6] ? a.toExponential(m[6]) : a.toExponential();
+								break;
+							case 'f':
+								a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a);
+								break;
+							case 'o':
+								a = a.toString(8);
+								break;
+							case 's':
+								a = (a = String(a)) && m[6] ? a.substring(0, m[6]) : a;
+								break;
+							case 'u':
+								a = Math.abs(a);
+								break;
+							case 'x':
+								a = a.toString(16);
+								break;
+							case 'X':
+								a = a.toString(16).toUpperCase();
+						}
+						(a = /[def]/.test(m[7]) && m[2] && a > 0 ? '+' + a : a),
+							(c = m[3] ? ('0' == m[3] ? '0' : m[3].charAt(1)) : ' '),
+							(x = m[5] - String(a).length),
+							(p = m[5] ? str_repeat(c, x) : ''),
+							o.push(m[4] ? a + p : p + a);
+					}
+					f = f.substring(m[0].length);
+				}
+				return o.join('');
+			}
+			var __assign = function () {
+					return (__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}).apply(this, arguments);
+				},
+				CSS_facetSlider = function facetSlider(_a) {
+					var _b,
+						_c,
+						_d,
+						_e,
+						railColor = _a.railColor,
+						trackColor = _a.trackColor,
+						handleColor = _a.handleColor,
+						handleTextColor = _a.handleTextColor,
+						handleDraggingColor = _a.handleDraggingColor,
+						showTicks = _a.showTicks,
+						stickyHandleLabel = _a.stickyHandleLabel,
+						tickTextColor = _a.tickTextColor,
+						theme = _a.theme;
+					return (0, emotion_react_browser_esm.iv)({
+						display: 'flex',
+						flexDirection: 'column',
+						marginTop: '5px',
+						marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
+						'& .ss__facet-slider__slider': {
+							position: 'relative',
+							display: 'inline-block',
+							height: '8px',
+							width: 'calc(100% - 2rem)',
+							margin: stickyHandleLabel ? '1rem' : '0 1rem',
+							top: '10px',
+						},
+						'& .ss__facet-slider__tick': {
+							'&:before': {
+								content: "''",
+								position: 'absolute',
+								left: '0',
+								background: 'rgba(0, 0, 0, 0.2)',
+								height: '5px',
+								width: '2px',
+								transform: 'translate(-50%, 0.7rem)',
+							},
+							'& .ss__facet-slider__tick__label': {
+								position: 'absolute',
+								fontSize: '0.6rem',
+								color: tickTextColor,
+								top: '100%',
+								transform: 'translate(-50%, 1.2rem)',
+								whiteSpace: 'nowrap',
+							},
+						},
+						'& .ss__facet-slider__rail': {
+							background: railColor || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
+							height: '100%',
+						},
+						'& .ss__facet-slider__segment': {
+							background: trackColor || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.secondary) || '#ccc',
+							height: '100%',
+						},
+						'& .ss__facet-slider__handles': {
+							textAlign: 'center',
+							'& button': {
+								'& .ss__facet-slider__handle': {
+									background: handleColor || (null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.primary) || '#333',
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									width: '1.6rem',
+									height: '1.6rem',
+									borderRadius: '100%',
+									fontSize: '0.7rem',
+									whiteSpace: 'nowrap',
+									color: handleTextColor || 'initial',
+									fontWeight: 'normal',
+									transform: 'translateY(0) scale(0.9)',
+									transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+									position: 'relative',
+									cursor: 'pointer',
+									'&:after': {
+										backgroundColor: '#ffffff',
+										width: '30%',
+										height: '30%',
+										top: '0',
+										bottom: '0',
+										left: '0',
+										content: '""',
+										position: 'absolute',
+										right: '0',
+										borderRadius: '12px',
+										margin: 'auto',
+										cursor: 'pointer',
+									},
+									'&.ss__facet-slider__handle--active': {
+										background: handleDraggingColor || handleColor || (null === (_e = theme.colors) || void 0 === _e ? void 0 : _e.primary) || '#000',
+										'& label.ss__facet-slider__handle__label': { background: '#fff', padding: '0 5px' },
+									},
+									'& label.ss__facet-slider__handle__label': {
+										display: 'inline-block',
+										marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
+										'&.ss__facet-slider__handle__label--pinleft': { left: '0px' },
+										'&.ss__facet-slider__handle__label--pinright': { right: '0px' },
+										'&.ss__facet-slider__handle__label--sticky': {
+											position: 'absolute',
+											top: '-20px',
+											fontFamily: 'Roboto, Helvetica, Arial',
+											fontSize: '14px',
+											marginTop: '0px',
+										},
+									},
+								},
+							},
+						},
+						'& .ss__facet-slider__labels': {
+							textAlign: 'center',
+							marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
+							'& .ss__facet-slider__label--0': { '&:after': { content: '"-"', padding: '5px' } },
+						},
+					});
+				},
+				FacetSlider = (0, es.Pi)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						_d,
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
+							__assign(
+								__assign(
+									{ tickSize: 10 * (null === (_a = properties.facet) || void 0 === _a ? void 0 : _a.step) || 20 },
+									null === (_b = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _b ? void 0 : _b.facetSlider
+								),
+								properties
+							),
+							null === (_d = null === (_c = properties.theme) || void 0 === _c ? void 0 : _c.components) || void 0 === _d ? void 0 : _d.facetSlider
+						),
+						tickTextColor = props.tickTextColor,
+						trackColor = props.trackColor,
+						handleTextColor = props.handleTextColor,
+						railColor = props.railColor,
+						handleColor = props.handleColor,
+						handleDraggingColor = props.handleDraggingColor,
+						showTicks = props.showTicks,
+						tickSize = props.tickSize,
+						facet = props.facet,
+						stickyHandleLabel = props.stickyHandleLabel,
+						_onChange = props.onChange,
+						_onDrag = props.onDrag,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						_e = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
+						values = _e[0],
+						setValues = _e[1],
+						_f = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
+						active = _f[0],
+						setActive = _f[1];
+					(values[0] == facet.active.low && values[1] == facet.active.high) ||
+						(setActive([facet.active.low, facet.active.high]), setValues([facet.active.low, facet.active.high]));
+					var _g = (0, react_ranger.S)({
+							values: active,
+							onChange: function onChange(val) {
+								var _a;
+								setActive(val),
+									(null === (_a = null == facet ? void 0 : facet.services) || void 0 === _a ? void 0 : _a.urlManager) &&
+										facet.services.urlManager
+											.remove('page')
+											.set('filter.' + facet.field, { low: val[0], high: val[1] })
+											.go(),
+									_onChange && _onChange(val);
+							},
+							onDrag: function onDrag(val) {
+								setActive(val), _onDrag && _onDrag(val);
+							},
+							min: facet.range.low,
+							max: facet.range.high,
+							stepSize: facet.step,
+							tickSize,
+						}),
+						getTrackProps = _g.getTrackProps,
+						ticks = _g.ticks,
+						segments = _g.segments,
+						handles = _g.handles,
+						styling = {};
+					return (
+						disableStyles
+							? style && (styling.css = [style])
+							: (styling.css = [
+									CSS_facetSlider({
+										railColor,
+										trackColor,
+										handleColor,
+										handleTextColor,
+										handleDraggingColor,
+										showTicks,
+										stickyHandleLabel,
+										tickTextColor,
+										theme,
+									}),
+									style,
+							  ]),
+						facet.range &&
+							facet.active &&
+							facet.step &&
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									__assign({ className: classnames_default()('ss__facet-slider', className) }, getTrackProps(), styling),
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{ className: 'ss__facet-slider__slider' },
+										showTicks &&
+											ticks.map(function (_a) {
+												var value = _a.value,
+													getTickProps = _a.getTickProps;
+												return (0,
+												emotion_react_browser_esm.tZ)('div', __assign({ className: 'ss__facet-slider__tick' }, getTickProps()), (0, emotion_react_browser_esm.tZ)('div', { className: 'ss__facet-slider__tick__label' }, value));
+											}),
+										segments.map(function (_a, index) {
+											var getSegmentProps = _a.getSegmentProps;
+											return (0,
+											emotion_react_browser_esm.tZ)('div', __assign({ className: 1 === index ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment' }, getSegmentProps(), { index }));
+										}),
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__facet-slider__handles' },
+											handles.map(function (_a, idx) {
+												var value = _a.value,
+													active = _a.active,
+													getHandleProps = _a.getHandleProps;
+												return (0,
+												emotion_react_browser_esm.tZ)('button', __assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } })), (0, emotion_react_browser_esm.tZ)('div', { className: classnames_default()('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active }) }, stickyHandleLabel && (0, emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__handle__label', 'ss__facet-slider__handle__label--sticky', 'ss__facet-slider__handle__label--' + idx, { 'ss__facet-slider__handle__label--pinleft': 0 == idx && value == facet.range.low }, { 'ss__facet-slider__handle__label--pinright': 1 == idx && value == facet.range.high }) }, sprintf(facet.formatValue, value))));
+											})
+										)
+									),
+									!stickyHandleLabel &&
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: 'ss__facet-slider__labels' },
+											handles.map(function (_a, idx) {
+												var value = _a.value;
+												return (0,
+												emotion_react_browser_esm.tZ)('label', { className: classnames_default()('ss__facet-slider__label', 'ss__facet-slider__label--' + idx) }, sprintf(facet.formatValue, value));
+											})
+										)
+								)
+							)
 					);
 				});
 		},
@@ -6575,6 +7049,8 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
+				__webpack_require__(32501),
+				__webpack_require__(18178),
 				__webpack_require__(34769),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
@@ -6585,7 +7061,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -6826,9 +7302,11 @@
 						};
 					}
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const Filter_stories = {
 				title: 'Molecules/Filter',
@@ -6855,7 +7333,7 @@
 							defaultValue: 'close-thin',
 							description: 'Icon name',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'close-thin' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						onClick: { description: 'Facet option click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 					},
@@ -6929,7 +7407,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { w: () => Filter });
 			__webpack_require__(43105), __webpack_require__(95342), __webpack_require__(72508);
-			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98095),
+			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(69038),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
@@ -6947,19 +7425,13 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_filter = function filter(_a) {
-					var style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)(
-						__assign(
-							{
-								textDecoration: 'none',
-								display: 'inline-flex',
-								'& .ss__filter__button': { alignItems: 'center', '& .ss__filter__button__icon': { marginRight: '5px' } },
-								'& .ss__filter__label': { marginRight: '5px', fontWeight: 'bold' },
-							},
-							style
-						)
-					);
+				CSS_filter = function filter() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({
+						textDecoration: 'none',
+						display: 'inline-flex',
+						'& .ss__filter__button': { alignItems: 'center', '& .ss__filter__button__icon': { marginRight: '5px' } },
+						'& .ss__filter__label': { marginRight: '5px', fontWeight: 'bold' },
+					});
 				},
 				Filter = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
 					var _a,
@@ -6967,10 +7439,6 @@
 						_c,
 						_d,
 						_e,
-						_f,
-						_g,
-						_h,
-						_j,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
 						props = __assign(
 							__assign(
@@ -6992,55 +7460,61 @@
 						subProps = {
 							button: __assign(
 								__assign(
-									{ className: 'ss__filter__button' },
-									null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.button
+									__assign(
+										{ className: 'ss__filter__button' },
+										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.button
+									),
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.button
+								{ theme: props.theme }
 							),
 							icon: __assign(
 								__assign(
 									__assign(
 										{ icon: 'close-thin', className: 'ss__filter__button__icon', size: '10px' },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
+										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles, icon })
 								),
-								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.icon
+								{ theme: props.theme }
 							),
-						};
+						},
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_filter(), style]),
 						valueLabel &&
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_8__.n,
-							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-								'a',
-								__assign(
-									{
-										css: !disableStyles && CSS_filter({ style }),
-										className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__filter', className),
-										onClick: function onClick(e) {
-											return _onClick && _onClick(e);
-										},
-									},
-									null == url ? void 0 : url.link
-								),
+								_providers__WEBPACK_IMPORTED_MODULE_8__.n,
+								null,
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-									_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__.z,
-									__assign({}, subProps.button),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__.J, __assign({}, subProps.icon)),
-									!hideFacetLabel &&
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-											'span',
-											{ className: 'ss__filter__label' },
-											facetLabel,
-											separator &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__label__separator' }, separator)
-										),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__value' }, valueLabel)
+									'a',
+									__assign(
+										{},
+										styling,
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__filter', className),
+											onClick: function onClick(e) {
+												return _onClick && _onClick(e);
+											},
+										},
+										null == url ? void 0 : url.link
+									),
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+										_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__.z,
+										__assign({}, subProps.button),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__.J, __assign({}, subProps.icon)),
+										!hideFacetLabel &&
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+												'span',
+												{ className: 'ss__filter__label' },
+												facetLabel,
+												separator &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__label__separator' }, separator)
+											),
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)('span', { className: 'ss__filter__value' }, valueLabel)
+									)
 								)
 							)
-						)
 					);
 				});
 		},
@@ -7070,7 +7544,7 @@
 					__webpack_require__(72508),
 					__webpack_require__(39529),
 					__webpack_require__(31235),
-					__webpack_require__(98095)),
+					__webpack_require__(69038)),
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
@@ -7089,34 +7563,26 @@
 				},
 				CSS_pagination = function pagination(_a) {
 					var _b,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								'& .ss__pagination__page': {
-									padding: '5px',
-									display: 'inline-block',
-									minHeight: '1em',
-									minWidth: '1em',
-									textAlign: 'center',
-									'&.ss__pagination__page--active': { fontWeight: 'bold' },
-									'&:hover:not(.ss__pagination__page--active)': {
-										backgroundColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover) || '#f8f8f8',
-									},
-								},
+						theme = _a.theme;
+					return (0, emotion_react_browser_esm.iv)({
+						'& .ss__pagination__page': {
+							padding: '5px',
+							display: 'inline-block',
+							minHeight: '1em',
+							minWidth: '1em',
+							textAlign: 'center',
+							'&.ss__pagination__page--active': { fontWeight: 'bold' },
+							'&:hover:not(.ss__pagination__page--active)': {
+								backgroundColor: (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.hover) || '#f8f8f8',
 							},
-							style
-						)
-					);
+						},
+					});
 				},
 				Pagination = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						_e,
-						_f,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -7154,7 +7620,7 @@
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.icon
+								{ theme: props.theme }
 							),
 						},
 						store = pagination,
@@ -7165,89 +7631,91 @@
 								? void 0
 								: _pages.map(function (page) {
 										return page.number;
-								  });
+								  }),
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_pagination({ theme }), style]),
 						(null == store ? void 0 : store.totalResults) &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
 							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								{ css: !disableStyles && CSS_pagination({ theme, style }), className: classnames_default()('ss__pagination', className) },
+								cache.n,
+								null,
 								(0, emotion_react_browser_esm.tZ)(
-									preact_module.HY,
-									null,
-									store.previous &&
-										!hidePrev &&
-										(0, emotion_react_browser_esm.tZ)(
-											'a',
-											__assign({}, store.previous.url.link, {
-												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
-												'aria-label': 'previous page',
-											}),
-											prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-left' }))
-										),
-									!pageNumbers.includes(store.first.number) &&
-										!hideFirst &&
-										(0, emotion_react_browser_esm.tZ)(
-											preact_module.HY,
-											null,
+									'div',
+									__assign({}, styling, { className: classnames_default()('ss__pagination', className) }),
+									(0, emotion_react_browser_esm.tZ)(
+										preact_module.HY,
+										null,
+										store.previous &&
+											!hidePrev &&
 											(0, emotion_react_browser_esm.tZ)(
 												'a',
-												__assign({}, store.first.url.link, {
-													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
-													'aria-label': 'first page',
+												__assign({}, store.previous.url.link, {
+													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--previous'),
+													'aria-label': 'previous page',
 												}),
-												firstButton || store.first.number
+												prevButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-left' }))
 											),
-											!pageNumbers.includes(2) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…')
-										),
-									_pages &&
-										_pages.map(function (page) {
-											return page.active
-												? (0, emotion_react_browser_esm.tZ)(
-														'span',
-														{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
-														page.number
-												  )
-												: (0, emotion_react_browser_esm.tZ)(
-														'a',
-														__assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
-														page.number
-												  );
-										}),
-									!pageNumbers.includes(store.last.number) &&
-										!hideLast &&
-										(0, emotion_react_browser_esm.tZ)(
-											preact_module.HY,
-											null,
-											!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
+										!pageNumbers.includes(store.first.number) &&
+											!hideFirst &&
+											(0, emotion_react_browser_esm.tZ)(
+												preact_module.HY,
+												null,
+												(0, emotion_react_browser_esm.tZ)(
+													'a',
+													__assign({}, store.first.url.link, {
+														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--first'),
+														'aria-label': 'first page',
+													}),
+													firstButton || store.first.number
+												),
+												!pageNumbers.includes(2) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…')
+											),
+										_pages &&
+											_pages.map(function (page) {
+												return page.active
+													? (0, emotion_react_browser_esm.tZ)(
+															'span',
+															{ className: classnames_default()('ss__pagination__page', 'ss__pagination__page--active') },
+															page.number
+													  )
+													: (0, emotion_react_browser_esm.tZ)(
+															'a',
+															__assign({}, page.url.link, { className: 'ss__pagination__page', 'aria-label': 'page ' + page.number }),
+															page.number
+													  );
+											}),
+										!pageNumbers.includes(store.last.number) &&
+											!hideLast &&
+											(0, emotion_react_browser_esm.tZ)(
+												preact_module.HY,
+												null,
+												!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && (0, emotion_react_browser_esm.tZ)('span', null, '…'),
+												(0, emotion_react_browser_esm.tZ)(
+													'a',
+													__assign({}, store.last.url.link, {
+														className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
+														'aria-label': 'last page',
+													}),
+													lastButton || store.last.number
+												)
+											),
+										store.next &&
+											!hideNext &&
 											(0, emotion_react_browser_esm.tZ)(
 												'a',
-												__assign({}, store.last.url.link, {
-													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--last'),
-													'aria-label': 'last page',
+												__assign({}, store.next.url.link, {
+													className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
+													'aria-label': 'next page',
 												}),
-												lastButton || store.last.number
+												nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-right' }))
 											)
-										),
-									store.next &&
-										!hideNext &&
-										(0, emotion_react_browser_esm.tZ)(
-											'a',
-											__assign({}, store.next.url.link, {
-												className: classnames_default()('ss__pagination__page', 'ss__pagination__page--next'),
-												'aria-label': 'next page',
-											}),
-											nextButton || (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'angle-right' }))
-										)
+									)
 								)
 							)
-						)
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -7714,7 +8182,7 @@
 				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -8146,7 +8614,7 @@
 			__webpack_require__.d(__webpack_exports__, { x: () => Result });
 			__webpack_require__(43105), __webpack_require__(26936);
 			var preact_module = __webpack_require__(33847),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
@@ -8168,42 +8636,31 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_result = function result(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								'&.ss__result--grid': {
-									display: 'flex',
-									flexDirection: 'column',
-									height: '100%',
-									'& .ss__result__image-wrapper': { flex: '1 0 auto' },
-								},
-								'&.ss__result--list': {
-									display: 'flex',
-									flexDirection: 'row',
-									'& .ss__result__image-wrapper': { flex: '0 0 33%' },
-									'& .ss__result__details': { flex: '1 1 auto', textAlign: 'left', marginLeft: '20px', padding: 0 },
-								},
-								'& .ss__result__image-wrapper': {
-									position: 'relative',
-									'& .ss__result__badge': { background: 'rgba(255, 255, 255, 0.5)', padding: '10px' },
-								},
-								'& .ss__result__details': {
-									padding: '10px',
-									textAlign: 'center',
-									'& .ss__result__details__title': { marginBottom: '10px' },
-									'& .ss__result__details__pricing': {
-										marginBottom: '10px',
-										'& .ss__result__price': { fontSize: '1.2em' },
-										'& .ss__price--strike': { fontSize: '80%' },
-									},
-									'& .ss__result__details__button': { marginBottom: '10px' },
-								},
+				CSS_result = function result() {
+					return (0, emotion_react_browser_esm.iv)({
+						'&.ss__result--grid': { display: 'flex', flexDirection: 'column', height: '100%', '& .ss__result__image-wrapper': { flex: '1 0 auto' } },
+						'&.ss__result--list': {
+							display: 'flex',
+							flexDirection: 'row',
+							'& .ss__result__image-wrapper': { flex: '0 0 33%' },
+							'& .ss__result__details': { flex: '1 1 auto', textAlign: 'left', marginLeft: '20px', padding: 0 },
+						},
+						'& .ss__result__image-wrapper': {
+							position: 'relative',
+							'& .ss__result__badge': { background: 'rgba(255, 255, 255, 0.5)', padding: '10px' },
+						},
+						'& .ss__result__details': {
+							padding: '10px',
+							textAlign: 'center',
+							'& .ss__result__details__title': { marginBottom: '10px' },
+							'& .ss__result__details__pricing': {
+								marginBottom: '10px',
+								'& .ss__result__price': { fontSize: '1.2em' },
+								'& .ss__price--strike': { fontSize: '80%' },
 							},
-							style
-						)
-					);
+							'& .ss__result__details__button': { marginBottom: '10px' },
+						},
+					});
 				},
 				Result = (0, es.Pi)(function (properties) {
 					var _a,
@@ -8213,12 +8670,6 @@
 						_e,
 						_f,
 						_g,
-						_h,
-						_j,
-						_k,
-						_l,
-						_m,
-						_o,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
@@ -8251,48 +8702,50 @@
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_g = null === (_f = props.theme) || void 0 === _f ? void 0 : _f.components) || void 0 === _g ? void 0 : _g.price
+								{ theme: props.theme }
 							),
 							badge: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__result__badge', content: 'Sale' },
-										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.badge
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.badge
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_k = null === (_j = props.theme) || void 0 === _j ? void 0 : _j.components) || void 0 === _k ? void 0 : _k.badge
+								{ theme: props.theme }
 							),
 							image: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__result__image', alt: null == core ? void 0 : core.name, src: null == core ? void 0 : core.imageUrl },
-										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.image
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.image
 									),
 									(0, defined.r)({ disableStyles, fallback })
 								),
-								null === (_o = null === (_m = props.theme) || void 0 === _m ? void 0 : _m.components) || void 0 === _o ? void 0 : _o.image
+								{ theme: props.theme }
 							),
 						},
 						onSale = Boolean(
 							(null == core ? void 0 : core.msrp) && 1 * (null == core ? void 0 : core.msrp) > 1 * (null == core ? void 0 : core.price)
 						),
 						displayName = core.name;
+					props.truncateTitle &&
+						(displayName = (function truncate(input, limit, append) {
+							if ('string' != typeof input || input.length <= limit) return input;
+							var lastSpace = input.lastIndexOf(' ', limit),
+								trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
+							return input.substr(0, trimIndex) + (append || '');
+						})(core.name, props.truncateTitle.limit, props.truncateTitle.append));
+					var styling = {};
 					return (
-						props.truncateTitle &&
-							(displayName = (function truncate(input, limit, append) {
-								if ('string' != typeof input || input.length <= limit) return input;
-								var lastSpace = input.lastIndexOf(' ', limit),
-									trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
-								return input.substr(0, trimIndex) + (append || '');
-							})(core.name, props.truncateTitle.limit, props.truncateTitle.append)),
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_result(), style]),
 						core &&
 							(0, emotion_react_browser_esm.tZ)(
 								cache.n,
 								null,
 								(0, emotion_react_browser_esm.tZ)(
 									'article',
-									{ css: !disableStyles && CSS_result({ style }), className: classnames_default()('ss__result', 'ss__result--' + layout, className) },
+									__assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
 										{ className: 'ss__result__image-wrapper' },
@@ -8366,6 +8819,8 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
+				__webpack_require__(32501),
+				__webpack_require__(18178),
 				__webpack_require__(34769),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
@@ -8374,7 +8829,7 @@
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
 				hooks_module = (__webpack_require__(18145), __webpack_require__(95342), __webpack_require__(43450), __webpack_require__(34619)),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
@@ -8393,9 +8848,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				CSS_select = function select(_a) {
 					var _b,
@@ -8403,40 +8860,33 @@
 						color = _a.color,
 						backgroundColor = _a.backgroundColor,
 						borderColor = _a.borderColor,
-						theme = (_a.label, _a.selection, _a.theme),
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								display: 'inline-flex',
-								color,
-								'&.ss__select--disabled': { opacity: 0.7 },
-								'& .ss__select__dropdown__button__icon': { margin: 'auto 0 auto 5px' },
-								'& .ss__select__label': { marginRight: '5px' },
-								'& .ss__select__select': {
-									position: 'relative',
-									zIndex: '10000',
-									backgroundColor: backgroundColor || '#fff',
-									listStyle: 'none',
-									padding: '0',
-									marginTop: '-1px',
-									border: '1px solid ' + (borderColor || color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
-									'& .ss__select__select__option': {
-										cursor: 'pointer',
-										padding: '6px 8px',
-										color: 'initial',
-										'&.ss__select__select__option--selected': { fontWeight: 'bold' },
-										'&:hover': { backgroundColor: (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.hover) || '#f8f8f8' },
-									},
-								},
+						theme = (_a.label, _a.selection, _a.theme);
+					return (0, emotion_react_browser_esm.iv)({
+						display: 'inline-flex',
+						color,
+						'&.ss__select--disabled': { opacity: 0.7 },
+						'& .ss__select__dropdown__button__icon': { margin: 'auto 0 auto 5px' },
+						'& .ss__select__label': { marginRight: '5px' },
+						'& .ss__select__select': {
+							position: 'relative',
+							zIndex: '10000',
+							backgroundColor: backgroundColor || '#fff',
+							listStyle: 'none',
+							padding: '0',
+							marginTop: '-1px',
+							border: '1px solid ' + (borderColor || color || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333'),
+							'& .ss__select__select__option': {
+								cursor: 'pointer',
+								padding: '6px 8px',
+								color: 'initial',
+								'&.ss__select__select__option--selected': { fontWeight: 'bold' },
+								'&:hover': { backgroundColor: (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.hover) || '#f8f8f8' },
 							},
-							style
-						)
-					);
+						},
+					});
 				},
-				CSS_native = function native(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(__assign({}, style));
+				CSS_native = function native() {
+					return (0, emotion_react_browser_esm.iv)({});
 				},
 				Select = (0, es.Pi)(function (properties) {
 					var _a,
@@ -8446,12 +8896,6 @@
 						_e,
 						_f,
 						_g,
-						_h,
-						_j,
-						_k,
-						_l,
-						_m,
-						_o,
 						setSelection,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
@@ -8495,166 +8939,166 @@
 									),
 									(0, defined.r)({ disableStyles, disabled })
 								),
-								null === (_g = null === (_f = props.theme) || void 0 === _f ? void 0 : _f.components) || void 0 === _g ? void 0 : _g.dropdown
+								{ theme: props.theme }
 							),
 							button: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__select__dropdown__button' },
-										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.button
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.button
 									),
 									(0, defined.r)({ disableStyles, disabled, color, backgroundColor, borderColor })
 								),
-								null === (_k = null === (_j = props.theme) || void 0 === _j ? void 0 : _j.components) || void 0 === _k ? void 0 : _k.button
+								{ theme: props.theme }
 							),
 							icon: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__select__dropdown__button__icon' },
-										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.icon
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
 									),
 									(0, defined.r)({ disableStyles, color: iconColor || color, size: '14px' })
 								),
-								null === (_o = null === (_m = props.theme) || void 0 === _m ? void 0 : _m.components) || void 0 === _o ? void 0 : _o.icon
+								{ theme: props.theme }
 							),
 						},
 						selection = selected,
-						_p = (0, hooks_module.eJ)(startOpen),
-						open = _p[0],
-						setOpen = _p[1],
+						_h = (0, hooks_module.eJ)(startOpen),
+						open = _h[0],
+						setOpen = _h[1],
 						stateful = void 0 === selection;
 					stateful
 						? ((_a = (0, hooks_module.eJ)(void 0)), (selection = _a[0]), (setSelection = _a[1]))
 						: (selection = Array.isArray(selected) ? selected[0] : selection),
-						selection && clearSelection && (options = __spreadArray([{ label: clearSelection, value: '' }], options));
+						selection && clearSelection && (options = __spreadArray([{ label: clearSelection, value: '' }], options, !0));
 					var makeSelection = function makeSelection(e, option) {
-						(option = option.value ? option : void 0) != selection && onSelect && onSelect(e, option),
-							stateful && setSelection(option),
-							!stayOpenOnSelection && setOpen(!1);
-					};
+							(option = option.value ? option : void 0) != selection && onSelect && onSelect(e, option),
+								stateful && setSelection(option),
+								!stayOpenOnSelection && setOpen(!1);
+						},
+						styling = {};
 					return (
+						disableStyles
+							? style && (styling.css = [style])
+							: (styling.css = _native
+									? [CSS_native(), style]
+									: [CSS_select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style]),
 						options &&
-						('object' == typeof options || Array.isArray(options)) &&
-						options.length &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
+							('object' == typeof options || Array.isArray(options)) &&
+							options.length &&
 							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								{
-									css:
-										!disableStyles && _native
-											? CSS_native({ style })
-											: CSS_select({ color, backgroundColor, borderColor, label, selection: selection || '', theme, style }),
-									className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className),
-								},
-								_native
-									? (0, emotion_react_browser_esm.tZ)(
-											preact_module.HY,
-											null,
-											label &&
-												!hideLabelOnSelection &&
-												(0, emotion_react_browser_esm.tZ)(
-													'span',
-													{ className: 'ss__select__label' },
-													label,
-													separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
-												),
-											(0, emotion_react_browser_esm.tZ)(
-												'select',
-												{
-													className: 'ss__select__select',
-													disabled: disabled || void 0,
-													onChange: function onChange(e) {
-														var selectElement = e.target,
-															selectedOptionElement = selectElement.options[selectElement.selectedIndex],
-															selectedOption = options
-																.filter(function (option, index) {
-																	return (
-																		option.label == selectedOptionElement.text &&
-																		(option.value == selectedOptionElement.value || option.value == index)
-																	);
-																})
-																.pop();
-														!disabled && makeSelection(e, selectedOption);
-													},
-												},
-												!selection &&
-													clearSelection &&
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									__assign({}, styling, { className: classnames_default()('ss__select', { 'ss__select--disabled': disabled }, className) }),
+									_native
+										? (0, emotion_react_browser_esm.tZ)(
+												preact_module.HY,
+												null,
+												label &&
+													!hideLabelOnSelection &&
 													(0, emotion_react_browser_esm.tZ)(
-														'option',
-														{ className: 'ss__select__select__option', selected: !0, value: '' },
-														clearSelection
+														'span',
+														{ className: 'ss__select__label' },
+														label,
+														separator && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
 													),
-												options.map(function (option, index) {
-													var _a;
-													return (0,
-													emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null == selection ? void 0 : selection.value) === option.value, value: null !== (_a = option.value) && void 0 !== _a ? _a : index }, option.label);
-												})
-											)
-									  )
-									: (0, emotion_react_browser_esm.tZ)(
-											Dropdown.L,
-											__assign({}, subProps.dropdown, {
-												disableClickOutside,
-												open,
-												onToggle: function onToggle(e, state) {
-													return setOpen(function (prev) {
-														return null != state ? state : !prev;
-													});
-												},
-												onClick: function onClick(e) {
-													return setOpen(function (prev) {
-														return !prev;
-													});
-												},
-												button: (0, emotion_react_browser_esm.tZ)(
-													Button.z,
-													__assign({}, subProps.button),
-													label &&
-														!hideLabelOnSelection &&
-														(0, emotion_react_browser_esm.tZ)(
-															'span',
-															{ className: 'ss__select__label' },
-															label,
-															separator &&
-																selection &&
-																(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
-														),
-													selection &&
-														(0, emotion_react_browser_esm.tZ)(
-															'span',
-															{ className: 'ss__select__selection' },
-															null == selection ? void 0 : selection.label
-														),
-													(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
-												),
-											}),
-											(0, emotion_react_browser_esm.tZ)(
-												'ul',
-												{ className: 'ss__select__select' },
-												options.map(function (option) {
-													return (0, emotion_react_browser_esm.tZ)(
-														'li',
-														{
-															className: classnames_default()('ss__select__select__option', {
-																'ss__select__select__option--selected': (null == selection ? void 0 : selection.value) === option.value,
-															}),
-															onClick: function onClick(e) {
-																return !disabled && makeSelection(e, option);
-															},
+												(0, emotion_react_browser_esm.tZ)(
+													'select',
+													{
+														className: 'ss__select__select',
+														disabled: disabled || void 0,
+														onChange: function onChange(e) {
+															var selectElement = e.target,
+																selectedOptionElement = selectElement.options[selectElement.selectedIndex],
+																selectedOption = options
+																	.filter(function (option, index) {
+																		return (
+																			option.label == selectedOptionElement.text &&
+																			(option.value == selectedOptionElement.value || option.value == index)
+																		);
+																	})
+																	.pop();
+															!disabled && makeSelection(e, selectedOption);
 														},
-														(0, emotion_react_browser_esm.tZ)('span', null, option.label)
-													);
-												})
-											)
-									  )
+													},
+													!selection &&
+														clearSelection &&
+														(0, emotion_react_browser_esm.tZ)(
+															'option',
+															{ className: 'ss__select__select__option', selected: !0, value: '' },
+															clearSelection
+														),
+													options.map(function (option, index) {
+														var _a;
+														return (0,
+														emotion_react_browser_esm.tZ)('option', { className: 'ss__select__select__option', selected: (null == selection ? void 0 : selection.value) === option.value, value: null !== (_a = option.value) && void 0 !== _a ? _a : index }, option.label);
+													})
+												)
+										  )
+										: (0, emotion_react_browser_esm.tZ)(
+												Dropdown.L,
+												__assign({}, subProps.dropdown, {
+													disableClickOutside,
+													open,
+													onToggle: function onToggle(e, state) {
+														return setOpen(function (prev) {
+															return null != state ? state : !prev;
+														});
+													},
+													onClick: function onClick(e) {
+														return setOpen(function (prev) {
+															return !prev;
+														});
+													},
+													button: (0, emotion_react_browser_esm.tZ)(
+														Button.z,
+														__assign({}, subProps.button),
+														label &&
+															!hideLabelOnSelection &&
+															(0, emotion_react_browser_esm.tZ)(
+																'span',
+																{ className: 'ss__select__label' },
+																label,
+																separator &&
+																	selection &&
+																	(0, emotion_react_browser_esm.tZ)('span', { className: 'ss__select__label__separator' }, separator)
+															),
+														selection &&
+															(0, emotion_react_browser_esm.tZ)(
+																'span',
+																{ className: 'ss__select__selection' },
+																null == selection ? void 0 : selection.label
+															),
+														(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: open ? iconClose : iconOpen }))
+													),
+												}),
+												(0, emotion_react_browser_esm.tZ)(
+													'ul',
+													{ className: 'ss__select__select' },
+													options.map(function (option) {
+														return (0, emotion_react_browser_esm.tZ)(
+															'li',
+															{
+																className: classnames_default()('ss__select__select__option', {
+																	'ss__select__select__option--selected': (null == selection ? void 0 : selection.value) === option.value,
+																}),
+																onClick: function onClick(e) {
+																	return !disabled && makeSelection(e, option);
+																},
+															},
+															(0, emotion_react_browser_esm.tZ)('span', null, option.label)
+														);
+													})
+												)
+										  )
+								)
 							)
-						)
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -9127,9 +9571,11 @@
 						};
 					}
 				},
-				Select_stories_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				Select_stories_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const Select_stories = {
 				title: 'Molecules/Select',
@@ -9192,13 +9638,13 @@
 							defaultValue: 'angle-down',
 							description: 'Icon for when select is closed',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-down' } },
-							control: { type: 'select', options: Select_stories_spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: Select_stories_spreadArray([], Object.keys(paths.N), !0) },
 						},
 						iconClose: {
 							defaultValue: 'angle-up',
 							description: 'Icon for when select is open',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-up' } },
-							control: { type: 'select', options: Select_stories_spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: Select_stories_spreadArray([], Object.keys(paths.N), !0) },
 						},
 						stayOpenOnSelection: {
 							defaultValue: !1,
@@ -9320,38 +9766,30 @@
 					var isActive = _a.isActive,
 						width = _a.width,
 						transitionSpeed = _a.transitionSpeed,
-						slideDirection = _a.slideDirection,
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								display: 'block',
-								position: 'fixed',
-								transition: (slideDirection || 'left') + ' ' + transitionSpeed,
-								left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
-								right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
-								bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
-								top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
-								height: '100%',
-								zIndex: '10004',
-								width: '90%',
-								maxWidth: width,
-								padding: '10px',
-								background: '#fff',
-								boxSizing: 'border-box',
-								overflowY: 'auto',
-							},
-							style
-						)
-					);
+						slideDirection = _a.slideDirection;
+					return (0, emotion_react_browser_esm.iv)({
+						display: 'block',
+						position: 'fixed',
+						transition: (slideDirection || 'left') + ' ' + transitionSpeed,
+						left: 'left' == slideDirection ? (isActive ? '0' : '-' + width) : 'right' != slideDirection ? '0' : 'initial',
+						right: 'right' == slideDirection ? (isActive ? '0' : '-' + width) : 'initial',
+						bottom: 'bottom' == slideDirection ? (isActive ? '0' : '-100vh') : 'initial',
+						top: 'top' == slideDirection ? (isActive ? '0' : '-100vh') : 'bottom' == slideDirection ? 'initial' : '0',
+						height: '100%',
+						zIndex: '10004',
+						width: '90%',
+						maxWidth: width,
+						padding: '10px',
+						background: '#fff',
+						boxSizing: 'border-box',
+						overflowY: 'auto',
+					});
 				};
 			function Slideout(properties) {
 				var _a,
 					_b,
 					_c,
 					_d,
-					_e,
-					_f,
 					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 					props = __assign(
 						__assign(
@@ -9391,12 +9829,12 @@
 								),
 								(0, defined.r)({ disableStyles, color: overlayColor, transitionSpeed })
 							),
-							null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.overlay
+							{ theme: props.theme }
 						),
 					},
-					_g = (0, hooks_module.eJ)(active),
-					isActive = _g[0],
-					setActive = _g[1],
+					_e = (0, hooks_module.eJ)(active),
+					isActive = _e[0],
+					setActive = _e[1],
 					toggleActive = function toggleActive() {
 						setActive(!isActive), (document.body.style.overflow = isActive ? 'hidden' : '');
 					},
@@ -9423,8 +9861,12 @@
 					})(displayAt, function () {
 						document.body.style.overflow = '';
 					});
+				document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
+				var styling = {};
 				return (
-					(document.body.style.overflow = isVisible && isActive ? 'hidden' : ''),
+					disableStyles
+						? style && (styling.css = [style])
+						: (styling.css = [CSS_slideout({ isActive, width, transitionSpeed, slideDirection }), style]),
 					isVisible &&
 						(0, emotion_react_browser_esm.tZ)(
 							cache.n,
@@ -9442,10 +9884,7 @@
 								),
 							(0, emotion_react_browser_esm.tZ)(
 								'div',
-								{
-									className: classnames_default()('ss__slideout', className, { 'ss__slideout--active': isActive }),
-									css: !disableStyles && CSS_slideout({ isActive, width, transitionSpeed, slideDirection, style }),
-								},
+								__assign({ className: classnames_default()('ss__slideout', className, { 'ss__slideout--active': isActive }) }, styling),
 								(0, cloneWithProps.d)(children, { toggleActive, active: isActive })
 							),
 							(0, emotion_react_browser_esm.tZ)(Overlay.a, __assign({}, subProps.overlay, { active: isActive, onClick: toggleActive }))
@@ -9662,585 +10101,6 @@
 			}.bind({});
 			Default.args = { active: !0 };
 		},
-		99004: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { Price: () => Price, default: () => Slider_stories });
-			__webpack_require__(43105), __webpack_require__(65584);
-			var preact_module = __webpack_require__(33847),
-				blocks = __webpack_require__(63255),
-				Slider = __webpack_require__(5351),
-				componentArgs = __webpack_require__(55625),
-				searchResponse = __webpack_require__(53083),
-				esm = (__webpack_require__(66741), __webpack_require__(30876));
-			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, esm.kt)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.kt)('h1', { id: 'slider' }, 'Slider'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'Renders a slider to be used with any slider facet. Built using ',
-						(0, esm.kt)(
-							'a',
-							{ parentName: 'p', href: 'https://github.com/tannerlinsley/react-ranger', target: '_blank', rel: 'nofollow noopener noreferrer' },
-							'react-ranger'
-						),
-						'.'
-					),
-					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
-					(0, esm.kt)('h3', { id: 'facet' }, 'facet'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The required ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facet'),
-						' prop specifies a reference to a facet within the facets store array. The facet must be a range facet (',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'display'),
-						' type of ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'slider'"),
-						').'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'showticks' }, 'showTicks'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
-						' prop will render reference ticks below the slider track.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'ticksize' }, 'tickSize'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'tickSize'),
-						' prop specifies the unit number between ticks. Must be used with ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
-						' prop.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickSize={20}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'ticktextcolor' }, 'tickTextColor'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'tickTextColor'),
-						' prop specifies ticks text color. Must be used with ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTicks'),
-						' prop.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    showTicks={true}\n    tickTextColor={'#cccccc'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'handlecolor' }, 'handleColor'),
-					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleColor'), ' prop specifies the handle color.'),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleColor={'#0000ff'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'handledraggingcolor' }, 'handleDraggingColor'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleDraggingColor'),
-						' prop specifies the handle color while dragging.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleDraggingColor={'0000ff'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'handletextcolor' }, 'handleTextColor'),
-					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleTextColor'), ' prop specifies the handle text color.'),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleTextColor={'#222222'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'trackcolor' }, 'trackColor'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trackColor'),
-						' prop specifies the slider track (background) color.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    trackColor={'#cccccc'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'railcolor' }, 'railColor'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'railColor'),
-						' prop specifies the slider rail (foreground) color.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    railColor={'#0000ff'}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h3', { id: 'events' }, 'Events'),
-					(0, esm.kt)('h4', { id: 'onchange' }, 'onChange'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onChange'),
-						' prop allows for a custom callback function for when a slider handle has been changed.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
-						)
-					),
-					(0, esm.kt)('h4', { id: 'ondrag' }, 'onDrag'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onDrag'),
-						' prop allows for a custom callback function for when a slider handle is being dragged.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Slider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}\n/>\n"
-						)
-					)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
-			};
-			const Slider_stories = {
-				title: 'Molecules/Slider',
-				component: Slider.i,
-				parameters: {
-					docs: {
-						page: function page() {
-							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
-						},
-					},
-				},
-				decorators: [
-					function (Story) {
-						return (0, preact_module.h)('div', { style: { maxWidth: '300px' } }, (0, preact_module.h)(Story, null));
-					},
-				],
-				argTypes: __assign(
-					{
-						facet: {
-							description: 'Facet store reference',
-							type: { required: !0 },
-							table: { type: { summary: 'facet store object' } },
-							control: { type: 'none' },
-						},
-						showTicks: {
-							description: 'enables/disables ticks',
-							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-							control: { type: 'boolean' },
-						},
-						tickSize: {
-							description: 'distance between ticks',
-							table: { type: { summary: 'number' }, defaultValue: { summary: 20 } },
-							control: { type: 'number' },
-						},
-						trackColor: { description: 'Slider track color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-						railColor: { description: 'Slider rail Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-						handleTextColor: { description: 'Slider Handle Text Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-						handleColor: { description: 'Slider handle color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-						handleDraggingColor: {
-							description: 'Slider handle color when dragging',
-							table: { type: { summary: 'string' } },
-							control: { type: 'color' },
-						},
-						onDrag: {
-							description: 'Slider onDrag event handler - fires as the slider is dragged (should not be used to trigger searches)',
-							table: { type: { summary: 'function' } },
-							action: 'onDrag',
-						},
-						onChange: {
-							description: 'Slider onChange event handler - fires after touchEnd (used to trigger search)',
-							table: { type: { summary: 'function' } },
-							action: 'onChange',
-						},
-					},
-					componentArgs.p
-				),
-			};
-			var Price = function Template(args) {
-				return (0, preact_module.h)(Slider.i, __assign({}, args, { facet: searchResponse.v1 }));
-			}.bind({});
-		},
-		5351: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { i: () => Slider });
-			__webpack_require__(43105), __webpack_require__(43450);
-			var hooks_module = __webpack_require__(34619),
-				es = __webpack_require__(98095),
-				emotion_react_browser_esm = __webpack_require__(28165),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				react_ranger = __webpack_require__(61511),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367);
-			__webpack_require__(16781),
-				__webpack_require__(77950),
-				__webpack_require__(58188),
-				__webpack_require__(88233),
-				__webpack_require__(99120),
-				__webpack_require__(68995),
-				__webpack_require__(91321),
-				__webpack_require__(13489);
-			function str_repeat(i, m) {
-				for (var o = []; m > 0; o[--m] = i);
-				return o.join('');
-			}
-			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				},
-				CSS_slider = function slider(_a) {
-					var _b,
-						_c,
-						_d,
-						_e,
-						railColor = _a.railColor,
-						trackColor = _a.trackColor,
-						handleColor = _a.handleColor,
-						handleTextColor = _a.handleTextColor,
-						handleDraggingColor = _a.handleDraggingColor,
-						tickTextColor = _a.tickTextColor,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign(
-							{
-								display: 'inline-block',
-								height: '8px',
-								width: 'calc(100% - 2.5rem)',
-								margin: '1rem',
-								top: '10px',
-								'& .ss__slider__tick': {
-									'&:before': {
-										content: "''",
-										position: 'absolute',
-										left: '0',
-										background: 'rgba(0, 0, 0, 0.2)',
-										height: '5px',
-										width: '2px',
-										transform: 'translate(-50%, 0.7rem)',
-									},
-									'& .ss__slider__tick__label': {
-										position: 'absolute',
-										fontSize: '0.6rem',
-										color: tickTextColor,
-										top: '100%',
-										transform: 'translate(-50%, 1.2rem)',
-										whiteSpace: 'nowrap',
-									},
-								},
-								'& .ss__slider__rail': {
-									background: railColor || (null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#333',
-									height: '100%',
-								},
-								'& .ss__slider__segment': {
-									background: trackColor || (null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.secondary) || '#ccc',
-									height: '100%',
-								},
-								'& .ss__slider__handle': {
-									background: handleColor || (null === (_d = theme.colors) || void 0 === _d ? void 0 : _d.primary) || '#333',
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									width: '1.6rem',
-									height: '1.6rem',
-									borderRadius: '100%',
-									fontSize: '0.7rem',
-									whiteSpace: 'nowrap',
-									color: handleTextColor || 'initial',
-									fontWeight: 'normal',
-									transform: 'translateY(0) scale(0.9)',
-									transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-									position: 'relative',
-									cursor: 'pointer',
-									'&:after': {
-										backgroundColor: '#ffffff',
-										width: '30%',
-										height: '30%',
-										top: '0',
-										bottom: '0',
-										left: '0',
-										content: '""',
-										position: 'absolute',
-										right: '0',
-										borderRadius: '12px',
-										margin: 'auto',
-										cursor: 'pointer',
-									},
-									'& label': { position: 'absolute', top: '-20px', fontFamily: 'Roboto, Helvetica, Arial', fontSize: '14px' },
-									'&.ss__slider__handle--active': {
-										background: handleDraggingColor || handleColor || (null === (_e = theme.colors) || void 0 === _e ? void 0 : _e.primary) || '#000',
-									},
-								},
-							},
-							style
-						)
-					);
-				},
-				Slider = (0, es.Pi)(function (properties) {
-					var _a,
-						_b,
-						_c,
-						_d,
-						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
-						theme = __assign(__assign({}, globalTheme), properties.theme),
-						props = __assign(
-							__assign(
-								__assign(
-									{ tickSize: 10 * (null === (_a = properties.facet) || void 0 === _a ? void 0 : _a.step) || 20 },
-									null === (_b = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _b ? void 0 : _b.slider
-								),
-								properties
-							),
-							null === (_d = null === (_c = properties.theme) || void 0 === _c ? void 0 : _c.components) || void 0 === _d ? void 0 : _d.slider
-						),
-						tickTextColor = props.tickTextColor,
-						trackColor = props.trackColor,
-						handleTextColor = props.handleTextColor,
-						railColor = props.railColor,
-						handleColor = props.handleColor,
-						handleDraggingColor = props.handleDraggingColor,
-						showTicks = props.showTicks,
-						tickSize = props.tickSize,
-						facet = props.facet,
-						_onChange = props.onChange,
-						_onDrag = props.onDrag,
-						disableStyles = props.disableStyles,
-						className = props.className,
-						style = props.style,
-						_e = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
-						values = _e[0],
-						setValues = _e[1],
-						_f = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
-						active = _f[0],
-						setActive = _f[1];
-					(values[0] == facet.active.low && values[1] == facet.active.high) ||
-						(setActive([facet.active.low, facet.active.high]), setValues([facet.active.low, facet.active.high]));
-					var _g = (0, react_ranger.S)({
-							values: active,
-							onChange: function onChange(val) {
-								var _a;
-								setActive(val),
-									(null === (_a = null == facet ? void 0 : facet.services) || void 0 === _a ? void 0 : _a.urlManager) &&
-										facet.services.urlManager
-											.remove('page')
-											.set('filter.' + facet.field, { low: val[0], high: val[1] })
-											.go(),
-									_onChange && _onChange(val);
-							},
-							onDrag: function onDrag(val) {
-								setActive(val), _onDrag && _onDrag(val);
-							},
-							min: facet.range.low,
-							max: facet.range.high,
-							stepSize: facet.step,
-							tickSize,
-						}),
-						getTrackProps = _g.getTrackProps,
-						ticks = _g.ticks,
-						segments = _g.segments,
-						handles = _g.handles;
-					return (
-						facet.range &&
-						facet.active &&
-						facet.step &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
-							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								__assign({ className: classnames_default()('ss__slider', className) }, getTrackProps(), {
-									css:
-										!disableStyles &&
-										CSS_slider({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, tickTextColor, theme, style }),
-								}),
-								showTicks &&
-									ticks.map(function (_a) {
-										var value = _a.value,
-											getTickProps = _a.getTickProps;
-										return (0,
-										emotion_react_browser_esm.tZ)('div', __assign({ className: 'ss__slider__tick' }, getTickProps()), (0, emotion_react_browser_esm.tZ)('div', { className: 'ss__slider__tick__label' }, value));
-									}),
-								segments.map(function (_a, index) {
-									var getSegmentProps = _a.getSegmentProps;
-									return (0,
-									emotion_react_browser_esm.tZ)('div', __assign({ className: 1 === index ? 'ss__slider__rail' : 'ss__slider__segment' }, getSegmentProps(), { index }));
-								}),
-								handles.map(function (_a) {
-									var value = _a.value,
-										active = _a.active,
-										getHandleProps = _a.getHandleProps;
-									return (0, emotion_react_browser_esm.tZ)(
-										'button',
-										__assign({}, getHandleProps({ style: { appearance: 'none', border: 'none', background: 'transparent', outline: 'none' } }), {
-											'aria-label': 'slider__handle',
-										}),
-										(0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: classnames_default()('ss__slider__handle', { 'ss__slider__handle--active': active }) },
-											(0, emotion_react_browser_esm.tZ)(
-												'label',
-												null,
-												(function sprintf() {
-													for (var args = [], _i = 0; _i < arguments.length; _i++) args[_i] = arguments[_i];
-													for (var a, m, p, c, x, i = 0, f = args[i++], o = []; f; ) {
-														if ((m = /^[^\x25]+/.exec(f))) o.push(m[0]);
-														else if ((m = /^\x25{2}/.exec(f))) o.push('%');
-														else {
-															if (!(m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f))) throw 'Huh ?!';
-															if (null == (a = args[m[1] || i++]) || null == a) throw 'Too few arguments.';
-															if (/[^s]/.test(m[7]) && 'number' != typeof a) throw 'Expecting number but found ' + typeof a;
-															switch (m[7]) {
-																case 'b':
-																	a = a.toString(2);
-																	break;
-																case 'c':
-																	a = String.fromCharCode(a);
-																	break;
-																case 'd':
-																	a = parseInt(a);
-																	break;
-																case 'e':
-																	a = m[6] ? a.toExponential(m[6]) : a.toExponential();
-																	break;
-																case 'f':
-																	a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a);
-																	break;
-																case 'o':
-																	a = a.toString(8);
-																	break;
-																case 's':
-																	a = (a = String(a)) && m[6] ? a.substring(0, m[6]) : a;
-																	break;
-																case 'u':
-																	a = Math.abs(a);
-																	break;
-																case 'x':
-																	a = a.toString(16);
-																	break;
-																case 'X':
-																	a = a.toString(16).toUpperCase();
-															}
-															(a = /[def]/.test(m[7]) && m[2] && a > 0 ? '+' + a : a),
-																(c = m[3] ? ('0' == m[3] ? '0' : m[3].charAt(1)) : ' '),
-																(x = m[5] - String(a).length),
-																(p = m[5] ? str_repeat(c, x) : ''),
-																o.push(m[4] ? a + p : p + a);
-														}
-														f = f.substring(m[0].length);
-													}
-													return o.join('');
-												})(facet.formatValue, value)
-											)
-										)
-									);
-								})
-							)
-						)
-					);
-				});
-		},
 		3661: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -10268,7 +10128,7 @@
 					__webpack_require__(74069),
 					__webpack_require__(85940),
 					__webpack_require__(34619)),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
@@ -10406,12 +10266,6 @@
 						_k,
 						_l,
 						_m,
-						_o,
-						_p,
-						_q,
-						_r,
-						_s,
-						_t,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -10466,67 +10320,71 @@
 							facet: __assign(
 								__assign(
 									__assign(
-										__assign(
-											{ className: 'ss__autocomplete__facet', limit: 6, disableOverflow: !0, disableCollapse: !0 },
-											null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.facet
-										),
-										(0, defined.r)({ disableStyles })
+										{ className: 'ss__autocomplete__facet', limit: 6, disableOverflow: !0, disableCollapse: !0 },
+										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.facet
 									),
-									{
-										theme: {
-											components: {
+									(0, defined.r)({ disableStyles })
+								),
+								{
+									theme: {
+										components: __assign(
+											{
 												facetGridOptions: { columns: 3 },
 												facetHierarchyOptions: { hideCount: !0 },
 												facetListOptions: { hideCheckbox: !0, hideCount: !0 },
 												facetPaletteOptions: { hideLabel: !0, columns: 3 },
 											},
-										},
-									}
-								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.facet
+											null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components
+										),
+									},
+								}
 							),
 							banner: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__autocomplete__banner' },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.banner
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.banner
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.banner
+								{ theme: props.theme }
 							),
 							results: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__autocomplete__results', breakpoints },
-										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.results
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.results
 									),
-									(0, defined.r)({ disableStyles, theme: { components: { result: { hideBadge: !0 } } } })
+									(0, defined.r)({ disableStyles })
 								),
-								null === (_m = null === (_l = props.theme) || void 0 === _l ? void 0 : _l.components) || void 0 === _m ? void 0 : _m.results
+								{
+									theme: {
+										components: __assign({ result: { hideBadge: !0 } }, null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components),
+									},
+								}
 							),
 							icon: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__autocomplete__icon', icon: 'angle-right', size: '10px' },
-										null === (_o = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _o ? void 0 : _o.icon
+										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.icon
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_q = null === (_p = props.theme) || void 0 === _p ? void 0 : _p.components) || void 0 === _q ? void 0 : _q.icon
+								{ theme: props.theme }
 							),
 						},
-						_u = controller.store,
-						search = _u.search,
-						terms = _u.terms,
-						trending = _u.trending,
-						results = _u.results,
-						merchandising = _u.merchandising,
-						pagination = _u.pagination,
-						loaded = _u.loaded,
-						filters = _u.filters,
-						facets = _u.facets,
-						state = _u.state;
+						_o = controller.store,
+						search = _o.search,
+						terms = _o.terms,
+						trending = _o.trending,
+						results = _o.results,
+						merchandising = _o.merchandising,
+						pagination = _o.pagination,
+						loaded = _o.loaded,
+						filters = _o.filters,
+						facets = _o.facets,
+						state = _o.state;
 					controller &&
 						'string' == typeof input &&
 						((input = document.querySelector(input)),
@@ -10553,225 +10411,228 @@
 									return facet.display !== types.uw.SLIDER;
 								})
 								.slice(0, 3),
-						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded;
+						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded,
+						styling = {};
 					return (
+						disableStyles
+							? style && (styling.css = [style])
+							: (styling.css = [
+									CSS_Autocomplete({
+										inputViewportOffsetBottom,
+										hideFacets,
+										horizontalTerms,
+										noResults: (null === (_k = null == search ? void 0 : search.query) || void 0 === _k ? void 0 : _k.string) && 0 === results.length,
+										contentSlotExists: !!contentSlot,
+										viewportMaxHeight,
+										vertical,
+										width,
+										style,
+										theme,
+									}),
+									style,
+							  ]),
 						visible &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
 							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								{
-									css:
-										!disableStyles &&
-										CSS_Autocomplete({
-											inputViewportOffsetBottom,
-											hideFacets,
-											horizontalTerms,
-											noResults:
-												(null === (_r = null == search ? void 0 : search.query) || void 0 === _r ? void 0 : _r.string) && 0 === results.length,
-											contentSlotExists: !!contentSlot,
-											viewportMaxHeight,
-											vertical,
-											width,
-											style,
-											theme,
-										}),
-									className: classnames_default()('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms }),
-									onClick: function onClick(e) {
-										return e.stopPropagation();
-									},
-								},
-								!hideTerms &&
-									(0, emotion_react_browser_esm.tZ)(
-										'div',
-										{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
-										termsSlot
-											? (0, cloneWithProps.d)(termsSlot, { terms, trending, controller })
-											: (0, emotion_react_browser_esm.tZ)(
-													preact_module.HY,
-													null,
-													terms.length > 0
-														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																termsTitle
-																	? (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{ className: 'ss__autocomplete__title ss__autocomplete__title--terms' },
-																			(0, emotion_react_browser_esm.tZ)('h5', null, termsTitle)
-																	  )
-																	: null,
-																(0, emotion_react_browser_esm.tZ)(
-																	'div',
-																	{ className: 'ss__autocomplete__terms__options' },
-																	terms.map(function (term) {
-																		return (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{
-																				className: classnames_default()('ss__autocomplete__terms__option', {
-																					'ss__autocomplete__terms__option--active': term.active,
-																				}),
-																			},
-																			(0, emotion_react_browser_esm.tZ)(
-																				'a',
-																				__assign({ href: term.url.href }, valueProps, {
-																					onFocus: function onFocus() {
-																						return term.preview();
-																					},
-																				}),
-																				emIfy(term.value, state.input)
-																			)
-																		);
-																	})
-																)
-														  )
-														: null,
-													showTrending
-														? (0, emotion_react_browser_esm.tZ)(
-																preact_module.HY,
-																null,
-																trendingTitle
-																	? (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{ className: 'ss__autocomplete__title ss__autocomplete__title--trending' },
-																			(0, emotion_react_browser_esm.tZ)('h5', null, trendingTitle)
-																	  )
-																	: null,
-																(0, emotion_react_browser_esm.tZ)(
-																	'div',
-																	{ className: 'ss__autocomplete__terms__options' },
-																	trending.map(function (term) {
-																		return (0, emotion_react_browser_esm.tZ)(
-																			'div',
-																			{
-																				className: classnames_default()('ss__autocomplete__terms__option', {
-																					'ss__autocomplete__terms__option--active': term.active,
-																				}),
-																			},
-																			(0, emotion_react_browser_esm.tZ)(
-																				'a',
-																				__assign({ href: term.url.href }, valueProps, {
-																					onFocus: function onFocus() {
-																						return term.preview();
-																					},
-																				}),
-																				emIfy(term.value, state.input)
-																			)
-																		);
-																	})
-																)
-														  )
-														: null
-											  )
-									),
-								!hideFacets &&
-									(facetsSlot
-										? (0, emotion_react_browser_esm.tZ)(
-												'div',
-												{ className: 'ss__autocomplete__facets' },
-												(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, controller })
-										  )
-										: facetsToShow.length > 0 &&
-										  (0, emotion_react_browser_esm.tZ)(
-												preact_module.HY,
-												null,
-												facetsTitle && vertical
-													? (0, emotion_react_browser_esm.tZ)(
-															'div',
-															{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
-															(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
-													  )
-													: null,
-												(0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									__assign({}, styling, {
+										className: classnames_default()('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms }),
+										onClick: function onClick(e) {
+											return e.stopPropagation();
+										},
+									}),
+									!hideTerms &&
+										(0, emotion_react_browser_esm.tZ)(
+											'div',
+											{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
+											termsSlot
+												? (0, cloneWithProps.d)(termsSlot, { terms, trending, controller })
+												: (0, emotion_react_browser_esm.tZ)(
+														preact_module.HY,
+														null,
+														terms.length > 0
+															? (0, emotion_react_browser_esm.tZ)(
+																	preact_module.HY,
+																	null,
+																	termsTitle
+																		? (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{ className: 'ss__autocomplete__title ss__autocomplete__title--terms' },
+																				(0, emotion_react_browser_esm.tZ)('h5', null, termsTitle)
+																		  )
+																		: null,
+																	(0, emotion_react_browser_esm.tZ)(
+																		'div',
+																		{ className: 'ss__autocomplete__terms__options' },
+																		terms.map(function (term) {
+																			return (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{
+																					className: classnames_default()('ss__autocomplete__terms__option', {
+																						'ss__autocomplete__terms__option--active': term.active,
+																					}),
+																				},
+																				(0, emotion_react_browser_esm.tZ)(
+																					'a',
+																					__assign({ href: term.url.href }, valueProps, {
+																						onFocus: function onFocus() {
+																							return term.preview();
+																						},
+																					}),
+																					emIfy(term.value, state.input)
+																				)
+																			);
+																		})
+																	)
+															  )
+															: null,
+														showTrending
+															? (0, emotion_react_browser_esm.tZ)(
+																	preact_module.HY,
+																	null,
+																	trendingTitle
+																		? (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{ className: 'ss__autocomplete__title ss__autocomplete__title--trending' },
+																				(0, emotion_react_browser_esm.tZ)('h5', null, trendingTitle)
+																		  )
+																		: null,
+																	(0, emotion_react_browser_esm.tZ)(
+																		'div',
+																		{ className: 'ss__autocomplete__terms__options' },
+																		trending.map(function (term) {
+																			return (0, emotion_react_browser_esm.tZ)(
+																				'div',
+																				{
+																					className: classnames_default()('ss__autocomplete__terms__option', {
+																						'ss__autocomplete__terms__option--active': term.active,
+																					}),
+																				},
+																				(0, emotion_react_browser_esm.tZ)(
+																					'a',
+																					__assign({ href: term.url.href }, valueProps, {
+																						onFocus: function onFocus() {
+																							return term.preview();
+																						},
+																					}),
+																					emIfy(term.value, state.input)
+																				)
+																			);
+																		})
+																	)
+															  )
+															: null
+												  )
+										),
+									!hideFacets &&
+										(facetsSlot
+											? (0, emotion_react_browser_esm.tZ)(
 													'div',
 													{ className: 'ss__autocomplete__facets' },
-													facetsTitle && !vertical
+													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, controller })
+											  )
+											: facetsToShow.length > 0 &&
+											  (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													facetsTitle && vertical
 														? (0, emotion_react_browser_esm.tZ)(
 																'div',
 																{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
 																(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
 														  )
 														: null,
-													facetsToShow.map(function (facet) {
-														return (0,
-														emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
-													}),
-													hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
-												)
-										  )),
-								hideContent
-									? null
-									: contentSlot
-									? (0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__autocomplete__content' },
-											(0, preact_module.Tm)(contentSlot, { results, merchandising, search, pagination, filters, controller })
-									  )
-									: results.length > 0 ||
-									  Object.keys(merchandising.content).length > 0 ||
-									  (null === (_s = null == search ? void 0 : search.query) || void 0 === _s ? void 0 : _s.string)
-									? (0, emotion_react_browser_esm.tZ)(
-											'div',
-											{ className: 'ss__autocomplete__content' },
-											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.HEADER }),
-											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.BANNER }),
-											results.length > 0
-												? (0, emotion_react_browser_esm.tZ)(
+													(0, emotion_react_browser_esm.tZ)(
 														'div',
-														{ className: 'ss__autocomplete__content__results' },
-														resultsSlot
-															? (0, preact_module.Tm)(resultsSlot, { results, contentTitle, controller })
-															: (0, emotion_react_browser_esm.tZ)(
-																	preact_module.HY,
-																	null,
-																	contentTitle && results.length > 0
-																		? (0, emotion_react_browser_esm.tZ)(
-																				'div',
-																				{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--content') },
-																				(0, emotion_react_browser_esm.tZ)('h5', null, contentTitle)
-																		  )
-																		: null,
-																	(0, emotion_react_browser_esm.tZ)(Results.u, __assign({ results }, subProps.results, { controller }))
+														{ className: 'ss__autocomplete__facets' },
+														facetsTitle && !vertical
+															? (0, emotion_react_browser_esm.tZ)(
+																	'div',
+																	{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--facets') },
+																	(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
 															  )
-												  )
-												: (0, emotion_react_browser_esm.tZ)(
-														'div',
-														{ className: 'ss__autocomplete__content__no-results' },
-														noResultsSlot
-															? (0, preact_module.Tm)(noResultsSlot, { search, pagination, controller })
-															: (0, emotion_react_browser_esm.tZ)(
-																	preact_module.HY,
-																	null,
-																	(0, emotion_react_browser_esm.tZ)('p', null, 'No results found for "', search.query.string, '".'),
-																	(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
-															  )
-												  ),
-											hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.FOOTER }),
-											(null === (_t = null == search ? void 0 : search.query) || void 0 === _t ? void 0 : _t.string) && results.length > 0
-												? (0, emotion_react_browser_esm.tZ)(
-														'div',
-														{ className: 'ss__autocomplete__content__info' },
-														(0, emotion_react_browser_esm.tZ)(
-															'a',
-															{ href: state.url.href },
-															'See ',
-															pagination.totalResults,
-															' ',
-															filters.length > 0 ? 'filtered' : '',
-															' result',
-															1 == pagination.totalResults ? '' : 's',
-															' for "',
-															search.query.string,
-															'"',
-															(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
-														)
-												  )
-												: null
-									  )
-									: null
+															: null,
+														facetsToShow.map(function (facet) {
+															return (0,
+															emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
+														}),
+														hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
+													)
+											  )),
+									hideContent
+										? null
+										: contentSlot
+										? (0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__autocomplete__content' },
+												(0, preact_module.Tm)(contentSlot, { results, merchandising, search, pagination, filters, controller })
+										  )
+										: results.length > 0 ||
+										  Object.keys(merchandising.content).length > 0 ||
+										  (null === (_l = null == search ? void 0 : search.query) || void 0 === _l ? void 0 : _l.string)
+										? (0, emotion_react_browser_esm.tZ)(
+												'div',
+												{ className: 'ss__autocomplete__content' },
+												hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.HEADER }),
+												hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.BANNER }),
+												results.length > 0
+													? (0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: 'ss__autocomplete__content__results' },
+															resultsSlot
+																? (0, preact_module.Tm)(resultsSlot, { results, contentTitle, controller })
+																: (0, emotion_react_browser_esm.tZ)(
+																		preact_module.HY,
+																		null,
+																		contentTitle && results.length > 0
+																			? (0, emotion_react_browser_esm.tZ)(
+																					'div',
+																					{ className: classnames_default()('ss__autocomplete__title', 'ss__autocomplete__title--content') },
+																					(0, emotion_react_browser_esm.tZ)('h5', null, contentTitle)
+																			  )
+																			: null,
+																		(0, emotion_react_browser_esm.tZ)(Results.u, __assign({ results }, subProps.results, { controller }))
+																  )
+													  )
+													: (0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: 'ss__autocomplete__content__no-results' },
+															noResultsSlot
+																? (0, preact_module.Tm)(noResultsSlot, { search, pagination, controller })
+																: (0, emotion_react_browser_esm.tZ)(
+																		preact_module.HY,
+																		null,
+																		(0, emotion_react_browser_esm.tZ)('p', null, 'No results found for "', search.query.string, '".'),
+																		(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
+																  )
+													  ),
+												hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.FOOTER }),
+												(null === (_m = null == search ? void 0 : search.query) || void 0 === _m ? void 0 : _m.string) && results.length > 0
+													? (0, emotion_react_browser_esm.tZ)(
+															'div',
+															{ className: 'ss__autocomplete__content__info' },
+															(0, emotion_react_browser_esm.tZ)(
+																'a',
+																{ href: state.url.href },
+																'See ',
+																pagination.totalResults,
+																' ',
+																filters.length > 0 ? 'filtered' : '',
+																' result',
+																1 == pagination.totalResults ? '' : 's',
+																' for "',
+																search.query.string,
+																'"',
+																(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
+															)
+													  )
+													: null
+										  )
+										: null
+								)
 							)
-						)
 					);
 				}),
 				emIfy = function emIfy(term, search) {
@@ -10793,7 +10654,7 @@
 					return null == string ? void 0 : string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11247,6 +11108,8 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
+				__webpack_require__(32501),
+				__webpack_require__(18178),
 				__webpack_require__(34769),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
@@ -11259,7 +11122,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -11643,9 +11506,11 @@
 						};
 					}
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const Facet_stories = {
 				title: 'Organisms/Facet',
@@ -11702,13 +11567,13 @@
 							defaultValue: 'angle-down',
 							description: 'Icon for when facet is collapsed',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-down' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						iconCollapse: {
 							defaultValue: 'angle-up',
 							description: 'Icon for when facet is expanded',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'angle-up' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						showMoreText: {
 							defaultValue: 'Show More',
@@ -11726,13 +11591,13 @@
 							defaultValue: 'plus',
 							description: 'Icon for when facet is collapsed',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'plus' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						iconshowLessExpand: {
 							defaultValue: 'minus',
 							description: 'Icon for when facet is expanded',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'minus' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 					},
 					componentArgs.p
@@ -11919,12 +11784,12 @@
 			var _emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(98095),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
 				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1492),
 				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(75999),
 				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(40574),
 				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(68978),
-				_Molecules_Slider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5351),
+				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(20682),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
 				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(30766),
 				_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(20874),
@@ -11943,28 +11808,22 @@
 				CSS_facet = function facet(_a) {
 					var _b,
 						color = _a.color,
-						theme = _a.theme,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.iv)(
-						__assign(
-							{
-								width: '100%',
-								margin: '0 0 20px 0',
-								'& .ss__facet__header': {
-									display: 'flex',
-									justifyContent: 'space-between',
-									alignItems: 'center',
-									color,
-									border: 'none',
-									borderBottom: '2px solid ' + ((null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#ccc'),
-									padding: '6px 0',
-								},
-								'& .ss__facet__options': { marginTop: '8px', maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' },
-								'& .ss__facet__show-more-less': { display: 'block', margin: '8px', cursor: 'pointer', '& .ss__icon': { marginRight: '8px' } },
-							},
-							style
-						)
-					);
+						theme = _a.theme;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.iv)({
+						width: '100%',
+						margin: '0 0 20px 0',
+						'& .ss__facet__header': {
+							display: 'flex',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							color,
+							border: 'none',
+							borderBottom: '2px solid ' + ((null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary) || '#ccc'),
+							padding: '6px 0',
+						},
+						'& .ss__facet__options': { marginTop: '8px', maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' },
+						'& .ss__facet__show-more-less': { display: 'block', margin: '8px', cursor: 'pointer', '& .ss__icon': { marginRight: '8px' } },
+					});
 				},
 				Facet = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__.Pi)(function (properties) {
 					var _a,
@@ -11984,22 +11843,6 @@
 						_q,
 						_r,
 						_s,
-						_t,
-						_u,
-						_v,
-						_w,
-						_x,
-						_y,
-						_z,
-						_0,
-						_1,
-						_2,
-						_3,
-						_4,
-						_5,
-						_6,
-						_7,
-						_8,
 						limitedValues,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
@@ -12049,108 +11892,105 @@
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
 								),
-								null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.dropdown
+								{ theme: props.theme }
 							),
 							icon: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__dropdown__icon', size: '12px', color: iconColor || color },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
+										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
 								),
-								null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.icon
+								{ theme: props.theme }
 							),
 							showMoreLessIcon: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__show-more-less__icon', size: '10px', color: iconColor || color },
-										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.icon
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
 								),
-								null === (_m = null === (_l = props.theme) || void 0 === _l ? void 0 : _l.components) || void 0 === _m ? void 0 : _m.icon
+								{ theme: props.theme }
 							),
 							facetHierarchyOptions: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-hierarchy-options' },
-										null === (_o = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _o ? void 0 : _o.facetHierarchyOptions
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.facetHierarchyOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
-								null === (_q = null === (_p = props.theme) || void 0 === _p ? void 0 : _p.components) || void 0 === _q
-									? void 0
-									: _q.facetHierarchyOptions
+								{ theme: props.theme }
 							),
 							facetListOptions: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-list-options' },
-										null === (_r = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _r ? void 0 : _r.facetListOptions
+										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.facetListOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
-								null === (_t = null === (_s = props.theme) || void 0 === _s ? void 0 : _s.components) || void 0 === _t ? void 0 : _t.facetListOptions
+								{ theme: props.theme }
 							),
 							facetGridOptions: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-grid-options' },
-										null === (_u = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _u ? void 0 : _u.facetGridOptions
+										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.facetGridOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
-								null === (_w = null === (_v = props.theme) || void 0 === _v ? void 0 : _v.components) || void 0 === _w ? void 0 : _w.facetGridOptions
+								{ theme: props.theme }
 							),
 							facetPaletteOptions: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-palette-options' },
-										null === (_x = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _x ? void 0 : _x.facetPaletteOptions
+										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetPaletteOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
-								null === (_z = null === (_y = props.theme) || void 0 === _y ? void 0 : _y.components) || void 0 === _z
-									? void 0
-									: _z.facetPaletteOptions
+								{ theme: props.theme }
 							),
-							slider: __assign(
+							facetSlider: __assign(
 								__assign(
 									__assign(
-										{ className: 'ss__facet__slider' },
-										null === (_0 = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _0 ? void 0 : _0.slider
+										{ className: 'ss__facet__facet-slider' },
+										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.facetSlider
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
 								),
-								null === (_2 = null === (_1 = props.theme) || void 0 === _1 ? void 0 : _1.components) || void 0 === _2 ? void 0 : _2.slider
+								{ theme: props.theme }
 							),
 						};
-					return (
-						(null === (_3 = facet) || void 0 === _3 ? void 0 : _3.overflow) && limit && !disableOverflow
-							? (facet.overflow.setLimit(limit), (limitedValues = null === (_4 = facet) || void 0 === _4 ? void 0 : _4.refinedValues))
-							: (limitedValues =
-									(null === (_5 = facet) || void 0 === _5 ? void 0 : _5.overflow) && limit
-										? null === (_6 = facet) || void 0 === _6
-											? void 0
-											: _6.values.slice(0, limit)
-										: null === (_7 = facet) || void 0 === _7
+					(null === (_m = facet) || void 0 === _m ? void 0 : _m.overflow) && limit && !disableOverflow
+						? (facet.overflow.setLimit(limit), (limitedValues = null === (_o = facet) || void 0 === _o ? void 0 : _o.refinedValues))
+						: (limitedValues =
+								(null === (_p = facet) || void 0 === _p ? void 0 : _p.overflow) && limit
+									? null === (_q = facet) || void 0 === _q
 										? void 0
-										: _7.values),
+										: _q.values.slice(0, limit)
+									: null === (_r = facet) || void 0 === _r
+									? void 0
+									: _r.values);
+					var styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facet({ color, theme }), style]),
 						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 							_providers__WEBPACK_IMPORTED_MODULE_10__.n,
 							null,
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 								'div',
-								{
-									css: !disableStyles && CSS_facet({ color, theme, style }),
+								__assign({}, styling, {
 									className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(
 										'ss__facet',
 										'ss__facet--' + facet.display,
 										'ss__facet--' + facet.field,
 										className
 									),
-								},
+								}),
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__.L,
 									__assign({}, subProps.dropdown, {
@@ -12177,8 +12017,8 @@
 											switch (null == facet ? void 0 : facet.display) {
 												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.SLIDER:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_Slider__WEBPACK_IMPORTED_MODULE_14__.i,
-														__assign({}, subProps.slider, { facet })
+														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__.C,
+														__assign({}, subProps.facetSlider, { facet })
 													);
 												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.GRID:
 													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
@@ -12204,7 +12044,7 @@
 										})()
 									),
 									!disableOverflow &&
-										(null === (_8 = facet) || void 0 === _8 ? void 0 : _8.overflow) &&
+										(null === (_s = facet) || void 0 === _s ? void 0 : _s.overflow) &&
 										facet.overflow.enabled &&
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
 											'div',
@@ -12248,7 +12088,7 @@
 				emotion_react_browser_esm = (__webpack_require__(43450), __webpack_require__(28165)),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				Facet = __webpack_require__(30650),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
@@ -12262,9 +12102,8 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_facets = function facets(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(__assign({}, style));
+				CSS_facets = function facets() {
+					return (0, emotion_react_browser_esm.iv)({});
 				},
 				Facets = (0, es.Pi)(function (properties) {
 					var _a,
@@ -12273,8 +12112,6 @@
 						_d,
 						_e,
 						_f,
-						_g,
-						_h,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
@@ -12304,26 +12141,28 @@
 									),
 									(0, defined.r)({ disableStyles })
 								),
-								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.facet
+								{ theme: props.theme }
 							),
-						};
+						},
+						styling = {};
 					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facets(), style]),
 						(null == facets ? void 0 : facets.length) > 0 &&
-						(0, emotion_react_browser_esm.tZ)(
-							cache.n,
-							null,
 							(0, emotion_react_browser_esm.tZ)(
-								'div',
-								{ className: classnames_default()('ss__facets', className), css: !disableStyles && CSS_facets({ style }) },
-								facets.map(function (facet) {
-									return (0, emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet }));
-								})
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									__assign({ className: classnames_default()('ss__facets', className) }, styling),
+									facets.map(function (facet) {
+										return (0, emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet }));
+									})
+								)
 							)
-						)
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -12558,6 +12397,8 @@
 				__webpack_require__(28673),
 				__webpack_require__(15735),
 				__webpack_require__(6886),
+				__webpack_require__(32501),
+				__webpack_require__(18178),
 				__webpack_require__(34769),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
@@ -12568,7 +12409,7 @@
 				emotion_react_browser_esm = (__webpack_require__(95342), __webpack_require__(43450), __webpack_require__(28165)),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				Filter = __webpack_require__(70768),
 				defined = __webpack_require__(27193),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
@@ -12582,11 +12423,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				CSS_filterSummary = function filterSummary(_a) {
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(
-						__assign({ '& .ss__filter-summary__filter': { margin: '5px 10px 5px 0' }, '& .ss__filter-summary__title': { fontSize: '1.2em' } }, style)
-					);
+				CSS_filterSummary = function filterSummary() {
+					return (0, emotion_react_browser_esm.iv)({
+						'& .ss__filter-summary__filter': { margin: '5px 10px 5px 0' },
+						'& .ss__filter-summary__title': { fontSize: '1.2em' },
+					});
 				},
 				FilterSummary = (0, es.Pi)(function (properties) {
 					var _a,
@@ -12596,8 +12437,6 @@
 						_e,
 						_f,
 						_g,
-						_h,
-						_j,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
@@ -12645,52 +12484,56 @@
 									),
 									(0, defined.r)({ disableStyles, separator, hideFacetLabel, icon: filterIcon })
 								),
-								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.filter
+								{ theme: props.theme }
 							),
-						};
-					return (null == filters ? void 0 : filters.length)
-						? (0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									{ css: !disableStyles && CSS_filterSummary({ style }), className: classnames_default()('ss__filter-summary', className) },
-									(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__filter-summary__title' }, title),
-									filters.map(function (filter) {
-										var _a, _b;
-										return (0, emotion_react_browser_esm.tZ)(
-											Filter.w,
-											__assign({}, subProps.filter, {
-												url: null == filter ? void 0 : filter.url,
-												facetLabel: null === (_a = null == filter ? void 0 : filter.facet) || void 0 === _a ? void 0 : _a.label,
-												valueLabel: null === (_b = null == filter ? void 0 : filter.value) || void 0 === _b ? void 0 : _b.label,
-												onClick: function onClick(e) {
-													return _onClick && _onClick(e, filter);
-												},
-											})
-										);
-									}),
-									!hideClearAll &&
-										(0, emotion_react_browser_esm.tZ)(
-											Filter.w,
-											__assign({}, subProps.filter, {
-												icon: clearAllIcon,
-												className:
-													(null === (_j = null == subProps ? void 0 : subProps.filter) || void 0 === _j ? void 0 : _j.className) +
-													' ss__filter-summary__clear-all',
-												hideFacetLabel: !0,
-												valueLabel: clearAllLabel,
-												onClick: function onClick(e) {
-													return onClearAllClick && onClearAllClick(e);
-												},
-											})
-										)
-								)
-						  )
-						: null;
+						},
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_filterSummary(), style]),
+						(null == filters ? void 0 : filters.length)
+							? (0, emotion_react_browser_esm.tZ)(
+									cache.n,
+									null,
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										__assign({}, styling, { className: classnames_default()('ss__filter-summary', className) }),
+										(0, emotion_react_browser_esm.tZ)('div', { className: 'ss__filter-summary__title' }, title),
+										filters.map(function (filter) {
+											var _a, _b;
+											return (0, emotion_react_browser_esm.tZ)(
+												Filter.w,
+												__assign({}, subProps.filter, {
+													url: null == filter ? void 0 : filter.url,
+													facetLabel: null === (_a = null == filter ? void 0 : filter.facet) || void 0 === _a ? void 0 : _a.label,
+													valueLabel: null === (_b = null == filter ? void 0 : filter.value) || void 0 === _b ? void 0 : _b.label,
+													onClick: function onClick(e) {
+														return _onClick && _onClick(e, filter);
+													},
+												})
+											);
+										}),
+										!hideClearAll &&
+											(0, emotion_react_browser_esm.tZ)(
+												Filter.w,
+												__assign({}, subProps.filter, {
+													icon: clearAllIcon,
+													className:
+														(null === (_g = null == subProps ? void 0 : subProps.filter) || void 0 === _g ? void 0 : _g.className) +
+														' ss__filter-summary__clear-all',
+													hideFacetLabel: !0,
+													valueLabel: clearAllLabel,
+													onClick: function onClick(e) {
+														return onClearAllClick && onClearAllClick(e);
+													},
+												})
+											)
+									)
+							  )
+							: null
+					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -13029,9 +12872,11 @@
 						};
 					}
 				},
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				};
 			const FilterSummary_stories = {
 				title: 'Organisms/FilterSummary',
@@ -13073,13 +12918,13 @@
 							defaultValue: 'close-thin',
 							description: 'Icon name',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'close-thin' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						filterIcon: {
 							defaultValue: 'close-thin',
 							description: 'Icon name',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'close-thin' } },
-							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N)) },
+							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						onClick: { description: 'Filter click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 						onClearAllClick: { description: 'Filter clear click event handler', table: { type: { summary: 'function' } }, action: 'onClearAllClick' },
@@ -13179,7 +13024,7 @@
 				emotion_react_browser_esm = (__webpack_require__(26242), __webpack_require__(28165)),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(98095),
+				es = __webpack_require__(69038),
 				Carousel = __webpack_require__(77592),
 				Result = __webpack_require__(23267),
 				defined = __webpack_require__(27193),
@@ -13205,9 +13050,11 @@
 					return t;
 				},
 				CSS_recommendation = function recommendation(_a) {
-					_a.theme;
-					var style = _a.style;
-					return (0, emotion_react_browser_esm.iv)(__assign({}, style));
+					var vertical = _a.vertical;
+					return (0, emotion_react_browser_esm.iv)({
+						height: vertical ? '100%' : null,
+						'.ss__result__image-wrapper': { height: vertical ? '85%' : null },
+					});
 				},
 				defaultRecommendationBreakpoints = {
 					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
@@ -13216,6 +13063,7 @@
 					1024: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 10 },
 					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
 				},
+				defaultVerticalRecommendationBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
 				Recommendation = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
@@ -13226,15 +13074,20 @@
 						_g,
 						_h,
 						_j,
-						_k,
-						_l,
-						_m,
-						_o,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
-						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
-							__assign({ breakpoints: defaultRecommendationBreakpoints, pagination: !1, loop: !0 }, properties),
-							null === (_b = null === (_a = properties.theme) || void 0 === _a ? void 0 : _a.components) || void 0 === _b ? void 0 : _b.recommendation
+							__assign(
+								__assign(
+									{
+										breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
+										pagination: !1,
+										loop: !0,
+									},
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.recommendation
+								),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.recommendation
 						),
 						title = props.title,
 						controller = props.controller,
@@ -13248,6 +13101,7 @@
 						disableStyles = props.disableStyles,
 						style = props.style,
 						className = props.className,
+						vertical = props.vertical,
 						additionalProps = __rest(props, [
 							'title',
 							'controller',
@@ -13261,47 +13115,48 @@
 							'disableStyles',
 							'style',
 							'className',
+							'vertical',
 						]);
 					if (!controller || 'recommendation' !== controller.type)
 						throw new Error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
 					if (!children || children.length === controller.store.results.length) {
-						var results = null === (_c = controller.store) || void 0 === _c ? void 0 : _c.results,
+						var results = null === (_d = controller.store) || void 0 === _d ? void 0 : _d.results,
 							subProps = {
 								carousel: __assign(
 									__assign(
 										__assign(
 											{ className: 'ss__recommendation__Carousel' },
-											null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.carousel
+											null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.carousel
 										),
-										(0, defined.r)({ disableStyles })
+										(0, defined.r)({ disableStyles, vertical })
 									),
-									null === (_f = null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components) || void 0 === _f ? void 0 : _f.carousel
+									{ theme: props.theme }
 								),
 								result: __assign(
 									__assign(
 										__assign(
 											{ className: 'ss__recommendation__result' },
-											null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.result
+											null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.result
 										),
 										(0, defined.r)({ disableStyles })
 									),
-									null === (_j = null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components) || void 0 === _j ? void 0 : _j.result
+									{ theme: props.theme }
 								),
 								icon: __assign(
 									__assign(
 										__assign(
 											{ className: 'ss__recommendation__icon' },
-											null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.icon
+											null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
 										),
 										(0, defined.r)({ disableStyles })
 									),
-									null === (_l = null == theme ? void 0 : theme.components) || void 0 === _l ? void 0 : _l.icon
+									{ theme: props.theme }
 								),
 							},
 							rootComponentRef = (0, hooks_module.sO)(null),
-							_p = (0, hooks_module.eJ)([0, 0]),
-							initialIndexes = _p[0],
-							setInitialIndexes = _p[1],
+							_k = (0, hooks_module.eJ)([0, 0]),
+							initialIndexes = _k[0],
+							setInitialIndexes = _k[1],
 							inViewport = (function useIntersection(ref, rootMargin, fireOnce) {
 								void 0 === rootMargin && (rootMargin = '0px'), void 0 === fireOnce && (fireOnce = !1);
 								var _a = (0, hooks_module.eJ)(!1),
@@ -13338,21 +13193,19 @@
 										});
 								}
 							};
-						return (
-							inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
+						inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
 							(children || results.length) &&
-								(null === (_o = null === (_m = controller) || void 0 === _m ? void 0 : _m.track) || void 0 === _o || _o.render()),
+								(null === (_j = null === (_h = controller) || void 0 === _h ? void 0 : _h.track) || void 0 === _j || _j.render());
+						var styling = {};
+						return (
+							disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
 							(children || (null == results ? void 0 : results.length)) &&
 								(0, emotion_react_browser_esm.tZ)(
 									cache.n,
 									null,
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
-										{
-											ref: rootComponentRef,
-											css: !disableStyles && CSS_recommendation({ theme, style }),
-											className: classnames_default()('ss__recommendation', className),
-										},
+										__assign({ ref: rootComponentRef }, styling, { className: classnames_default()('ss__recommendation', className) }),
 										title && (0, emotion_react_browser_esm.tZ)('h3', { className: 'ss__recommendation__title' }, title),
 										(0, emotion_react_browser_esm.tZ)(
 											Carousel.l,
@@ -13384,6 +13237,7 @@
 													breakpoints,
 													pagination,
 												},
+												subProps.carousel,
 												additionalProps
 											),
 											children
@@ -13401,7 +13255,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (_extends =
@@ -13507,6 +13361,19 @@
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation controller={controller} pagination={true} />\n')
 					),
+					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'vertical'),
+						' prop sets the carousel scroll direction to vertical.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation vertical>{children}<Recommendation/>\n')
+					),
 					(0, esm.kt)('h3', { id: 'hidebuttons' }, 'hideButtons'),
 					(0, esm.kt)(
 						'p',
@@ -13518,7 +13385,7 @@
 					(0, esm.kt)(
 						'pre',
 						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Carousel hideButtons>{children}<Carousel/>\n')
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation hideButtons>{children}<Recommendation/>\n')
 					),
 					(0, esm.kt)('h3', { id: 'prevbutton' }, 'prevButton'),
 					(0, esm.kt)(
@@ -13718,7 +13585,7 @@
 				},
 				decorators: [
 					function (Story) {
-						return (0, preact_module.h)('div', { style: { maxWidth: '900px' } }, (0, preact_module.h)(Story, null));
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px', height: '500px' } }, (0, preact_module.h)(Story, null));
 					},
 				],
 				argTypes: Recommendation_stories_assign(
@@ -13746,6 +13613,12 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						vertical: {
+							defaultValue: !1,
+							description: 'Recommendation carousel direction',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						hideButtons: {
 							defaultValue: !1,
 							description: 'Hide prev/next buttons',
@@ -13755,7 +13628,7 @@
 						prevButton: { description: 'Previous button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						nextButton: { description: 'Next button', table: { type: { summary: 'string | JSX Element' } }, control: { type: 'text' } },
 						breakpoints: {
-							defaultValue: defaultRecommendationBreakpoints,
+							defaultValue: void 0,
 							description: 'Recommendation title',
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
 							control: { type: 'object' },
@@ -13825,7 +13698,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(63399),
+				snapify = __webpack_require__(37990),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -14211,7 +14084,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { u: () => Results });
 			__webpack_require__(43105), __webpack_require__(34769), __webpack_require__(32501), __webpack_require__(43450);
-			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98095),
+			var mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(69038),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(28165),
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
@@ -14233,11 +14106,13 @@
 				},
 				CSS_results = function results(_a) {
 					var columns = _a.columns,
-						gapSize = _a.gapSize,
-						style = _a.style;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)(
-						__assign({ display: 'grid', gridTemplateColumns: 'repeat(' + columns + ', 1fr)', gridTemplateRows: 'auto', gap: gapSize }, style)
-					);
+						gapSize = _a.gapSize;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)({
+						display: 'grid',
+						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
+						gridTemplateRows: 'auto',
+						gap: gapSize,
+					});
 				},
 				defaultBreakpointsProps = { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
 				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
@@ -14248,10 +14123,6 @@
 						_e,
 						_f,
 						_g,
-						_h,
-						_j,
-						_k,
-						_l,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.u)(),
 						props = __assign(
 							__assign(
@@ -14289,58 +14160,54 @@
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
-								null === (_h = null === (_g = props.theme) || void 0 === _g ? void 0 : _g.components) || void 0 === _h ? void 0 : _h.result
+								{ theme: props.theme }
 							),
 							inlineBanner: __assign(
 								__assign(
 									__assign(
 										{ className: 'ss__results__inline-banner' },
-										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.inlineBanner
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.inlineBanner
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles })
 								),
-								null === (_l = null === (_k = props.theme) || void 0 === _k ? void 0 : _k.components) || void 0 === _l ? void 0 : _l.inlineBanner
+								{ theme: props.theme }
 							),
 						};
+					results =
+						(null == props ? void 0 : props.columns) > 0 && (null == props ? void 0 : props.rows) > 0
+							? props.results.slice(0, props.columns * props.rows)
+							: props.results;
+					var styling = {};
 					return (
-						null ==
-						(results =
-							(null == props ? void 0 : props.columns) > 0 && (null == props ? void 0 : props.rows) > 0
-								? props.results.slice(0, props.columns * props.rows)
-								: props.results)
-							? void 0
-							: results.length
-					)
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
-									'div',
-									{
-										css:
-											!disableStyles &&
-											CSS_results({
-												columns: layout == _types__WEBPACK_IMPORTED_MODULE_8__.Ar.LIST ? 1 : props.columns,
-												gapSize: props.gapSize,
-												style,
-											}),
-										className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', className),
-									},
-									results.map(function (result) {
-										return (function () {
-											switch (result.type) {
-												case _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER:
-													return (0,
-													_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
-												default:
-													return (0,
-													_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
-											}
-										})();
-									})
-								)
-						  )
-						: null;
+						disableStyles
+							? style && (styling.css = [style])
+							: (styling.css = [
+									CSS_results({ columns: layout == _types__WEBPACK_IMPORTED_MODULE_8__.Ar.LIST ? 1 : props.columns, gapSize: props.gapSize }),
+									style,
+							  ]),
+						(null == results ? void 0 : results.length)
+							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+									_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+									null,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+										'div',
+										__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', className) }),
+										results.map(function (result) {
+											return (function () {
+												switch (result.type) {
+													case _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER:
+														return (0,
+														_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
+													default:
+														return (0,
+														_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
+												}
+											})();
+										})
+									)
+							  )
+							: null
+					);
 				});
 		},
 		6222: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -16921,7 +16788,7 @@
 			__webpack_require__.d(__webpack_exports__, { n: () => CacheProvider });
 			var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33847),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64189),
-				emotionCache = (0, __webpack_require__(99622).Z)({ key: 'ss', prepend: !0 }),
+				emotionCache = (0, __webpack_require__(10003).Z)({ key: 'ss', prepend: !0 }),
 				CacheProvider = function CacheProvider(props) {
 					return (0, preact__WEBPACK_IMPORTED_MODULE_0__.h)(
 						_emotion_react__WEBPACK_IMPORTED_MODULE_2__.C,
@@ -17007,7 +16874,7 @@
 				);
 			}
 		},
-		63399: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		37990: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -17036,8 +16903,9 @@
 				colors =
 					(__webpack_require__(52506),
 					__webpack_require__(47256),
-					__webpack_require__(43450),
+					__webpack_require__(32501),
 					__webpack_require__(18178),
+					__webpack_require__(43450),
 					__webpack_require__(85940),
 					__webpack_require__(95094),
 					__webpack_require__(74069),
@@ -17047,7 +16915,6 @@
 					__webpack_require__(31235),
 					__webpack_require__(67890),
 					__webpack_require__(18145),
-					__webpack_require__(32501),
 					{
 						blue: '#3379c1',
 						bluelight: '#688BA3',
@@ -17086,9 +16953,11 @@
 						vortex: String.fromCodePoint(127744),
 						warning: String.fromCodePoint(9888),
 					}),
-				__spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				__spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				Logger = (function () {
 					function Logger(prefix) {
@@ -17114,7 +16983,8 @@
 											'color: ' + colors.red + '; font-weight: bold; font-size: 14px; line-height: 12px;',
 											'color: ' + colors.red + '; font-weight: bold;',
 										],
-										rest
+										rest,
+										!1
 									)
 								);
 						}),
@@ -17132,7 +17002,8 @@
 											'color: ' + colors.yellow + '; font-weight: normal;',
 											'color: ' + colors.yellow + '; font-weight: bold;',
 										],
-										rest
+										rest,
+										!1
 									)
 								);
 						}),
@@ -17143,7 +17014,7 @@
 								size: 'font-size: 1px; padding: ' + (height || width) + ' ' + (width || height) + ';',
 								background: 'background: url("' + url + '") no-repeat; background-size: contain;',
 							};
-							this.dev.apply(this, __spreadArray(['%c...', styles.size + ' ' + styles.background], params));
+							this.dev.apply(this, __spreadArray(['%c...', styles.size + ' ' + styles.background], params, !1));
 						}),
 						(Logger.prototype.imageText = function (_a) {
 							for (var url = _a.url, _b = _a.text, text = void 0 === _b ? '' : _b, style = _a.style, params = [], _i = 1; _i < arguments.length; _i++)
@@ -17152,7 +17023,7 @@
 								imgText = text,
 								rest = params;
 							!imgText && (null == params ? void 0 : params.length) && ((imgText = params[0]), (rest = params.slice(1))),
-								this.dev.apply(this, __spreadArray(['%c   ' + this.prefix + imgText, styles.background + ' ' + styles.custom], rest));
+								this.dev.apply(this, __spreadArray(['%c   ' + this.prefix + imgText, styles.background + ' ' + styles.custom], rest, !1));
 						}),
 						(Logger.prototype.debug = function () {
 							for (var params = [], _i = 0; _i < arguments.length; _i++) params[_i] = arguments[_i];
@@ -17167,7 +17038,8 @@
 											'color: ' + colors.orangelight + '; font-weight: bold; font-size: 14px; line-height: 12px;',
 											'color: ' + colors.orangelight + '; font-weight: bold;',
 										],
-										rest
+										rest,
+										!1
 									)
 								);
 						}),
@@ -17195,7 +17067,8 @@
 										'color: ' + colors.orange + '; font-weight: bold;',
 										'color: ' + colors.grey + ';',
 									],
-									params
+									params,
+									!1
 								)
 							);
 						}),
@@ -17496,9 +17369,11 @@
 						};
 					}
 				},
-				AbstractController_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				AbstractController_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				AbstractController = (function () {
 					function AbstractController(config, _a) {
@@ -17647,7 +17522,7 @@
 								return __generator(this, function (_a) {
 									switch (_a.label) {
 										case 0:
-											return [4, func.apply(void 0, AbstractController_spreadArray([this], args))];
+											return [4, func.apply(void 0, AbstractController_spreadArray([this], args, !1))];
 										case 1:
 											return _a.sent(), [2];
 									}
@@ -17656,7 +17531,7 @@
 						}),
 						(AbstractController.prototype.on = function (event) {
 							for (var _a, func = [], _i = 1; _i < arguments.length; _i++) func[_i - 1] = arguments[_i];
-							(_a = this.eventManager).on.apply(_a, AbstractController_spreadArray([event], func));
+							(_a = this.eventManager).on.apply(_a, AbstractController_spreadArray([event], func, !1));
 						}),
 						(AbstractController.prototype.use = function (attachments) {
 							var _this = this;
@@ -17668,7 +17543,7 @@
 											if (!Array.isArray(plugin)) throw 'invalid format';
 											var func = plugin[0],
 												args = plugin.slice(1);
-											_this.plugin.apply(_this, AbstractController_spreadArray([func], args));
+											_this.plugin.apply(_this, AbstractController_spreadArray([func], args, !1));
 										});
 								} catch (err) {
 									this.log.warn('plugins not attached - use format [func, ...args?][]');
@@ -17982,9 +17857,11 @@
 						};
 					}
 				},
-				SearchController_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				SearchController_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				defaultConfig = {
 					id: 'search',
@@ -18117,8 +17994,9 @@
 													(_j.label = 10);
 											case 10:
 												(response.results = SearchController_spreadArray(
-													SearchController_spreadArray([], previousResults_1),
-													response.results || []
+													SearchController_spreadArray([], previousResults_1, !0),
+													response.results || [],
+													!0
 												)),
 													(_j.label = 11);
 											case 11:
@@ -18268,12 +18146,11 @@
 								var _a,
 									_b,
 									params = cjs_default()(__assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
-								return (
-									(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.redirects) || void 0 === _b
-										? void 0
-										: _b.merchandising) || ((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
-									params
-								);
+								(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.redirects) || void 0 === _b
+									? void 0
+									: _b.merchandising) || ((params.search = params.search || {}), (params.search.redirectResponse = 'full'));
+								var userId = this.tracker.getUserId().userId;
+								return userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)), params;
 							},
 							enumerable: !1,
 							configurable: !0,
@@ -20202,7 +20079,8 @@
 					transformSearchRequest.merchandising(request),
 					transformSearchRequest.pagination(request),
 					transformSearchRequest.siteId(request),
-					transformSearchRequest.facets(request)
+					transformSearchRequest.facets(request),
+					transformSearchRequest.tracking(request)
 				);
 			}
 			(transformSearchRequest.sorts = function (request) {
@@ -20297,6 +20175,11 @@
 						: (null === (_b = facets.exclude) || void 0 === _b ? void 0 : _b.length)
 						? { excludedFacets: facets.exclude }
 						: {};
+				}),
+				(transformSearchRequest.tracking = function (request) {
+					void 0 === request && (request = {});
+					var reqTracking = request.tracking || {};
+					return reqTracking.userId ? { userId: reqTracking.userId } : {};
 				});
 			var he = __webpack_require__(30361),
 				he_default = __webpack_require__.n(he),
@@ -22008,7 +21891,7 @@
 							return pages;
 						}),
 						(PaginationStore.prototype.setPageSize = function (num) {
-							num && this.services.urlManager.set('pageSize', num).go();
+							num && this.services.urlManager.remove('page').set('pageSize', num).go();
 						}),
 						PaginationStore
 					);
@@ -22216,9 +22099,11 @@
 						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
 					};
 				})(),
-				TermStore_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				TermStore_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				TermStore = (function (_super) {
 					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
@@ -22227,7 +22112,8 @@
 								[],
 								((null == autocomplete ? void 0 : autocomplete.alternatives) ? autocomplete.alternatives : []).map(function (term) {
 									return term.text;
-								})
+								}),
+								!0
 							);
 						(null === (_a = null == autocomplete ? void 0 : autocomplete.suggested) || void 0 === _a ? void 0 : _a.text)
 							? suggestions.unshift(autocomplete.suggested.text)
@@ -22547,9 +22433,11 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				SelectionStore_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				SelectionStore_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				SelectionStore = (function (_super) {
 					function SelectionStore(config, services, facets, meta, loading, storage) {
@@ -22657,7 +22545,7 @@
 					return (
 						Object.defineProperty(SelectionBase.prototype, 'values', {
 							get: function get() {
-								var values = SelectionStore_spreadArray([], this.data || []);
+								var values = SelectionStore_spreadArray([], this.data || [], !0);
 								return values.unshift({ filtered: !1, value: '', label: this.config.label || this.label }), values;
 							},
 							enumerable: !1,
@@ -22846,9 +22734,11 @@
 				})(AbstractStore),
 				seamless_immutable_development = (__webpack_require__(67321), __webpack_require__(96928), __webpack_require__(1958)),
 				seamless_immutable_development_default = __webpack_require__.n(seamless_immutable_development),
-				UrlManager_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				UrlManager_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				WatcherPool = (function () {
 					function WatcherPool() {
@@ -23097,7 +22987,7 @@
 			}
 			function arrayConcatMerger(current, other) {
 				if (current instanceof Array && other instanceof Array)
-					return removeArrayDuplicates(UrlManager_spreadArray(UrlManager_spreadArray([], current), other));
+					return removeArrayDuplicates(UrlManager_spreadArray(UrlManager_spreadArray([], current, !0), other, !0));
 			}
 			function compareObjects(obj1, obj2) {
 				if (!obj1 && !obj2) return !0;
@@ -23136,42 +23026,77 @@
 							return t;
 						}).apply(this, arguments);
 				},
-				UrlTranslator_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				UrlTranslator_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				UrlTranslator_defaultConfig = {
 					urlRoot: '',
+					settings: { corePrefix: '', customType: ParamLocationType.HASH, rootParams: !0 },
 					parameters: {
-						settings: { prefix: '', implicit: ParamLocationType.HASH },
 						core: {
 							query: { name: 'q', type: ParamLocationType.QUERY },
+							oq: { name: 'oq', type: ParamLocationType.QUERY },
+							rq: { name: 'rq', type: ParamLocationType.QUERY },
+							tag: { name: 'tag', type: ParamLocationType.QUERY },
 							page: { name: 'page', type: ParamLocationType.QUERY },
+							pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
 							sort: { name: 'sort', type: ParamLocationType.HASH },
 							filter: { name: 'filter', type: ParamLocationType.HASH },
 						},
 						custom: {},
 					},
 				},
+				UrlTranslator_CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'],
 				UrlTranslator = (function () {
 					function UrlTranslator(config) {
 						var _this = this;
 						void 0 === config && (config = {}),
+							(this.reverseMapping = {}),
 							(this.config = cjs_default()(UrlTranslator_defaultConfig, config)),
-							this.config.parameters.settings.prefix &&
-								Object.keys(this.config.parameters.core).forEach(function (param) {
-									_this.config.parameters.core[param].name = _this.config.parameters.settings.prefix + _this.config.parameters.core[param].name;
-								});
+							Object.keys(this.config.parameters.core).forEach(function (param) {
+								var _a, _b, _c;
+								_this.config.settings.corePrefix &&
+									(_this.config.parameters.core[param].name = _this.config.settings.corePrefix + _this.config.parameters.core[param].name);
+								var paramType = _this.config.settings.coreType;
+								paramType &&
+									Object.values(ParamLocationType).includes(paramType) &&
+									(_this.config.parameters.core[param].type =
+										((null === (_a = null == config ? void 0 : config.parameters) || void 0 === _a ? void 0 : _a.core) &&
+											(null === (_c = null === (_b = null == config ? void 0 : config.parameters) || void 0 === _b ? void 0 : _b.core[param]) ||
+											void 0 === _c
+												? void 0
+												: _c.type)) ||
+										paramType),
+									(_this.reverseMapping[_this.config.parameters.core[param].name] = param);
+							});
+						var implicit = this.config.settings.customType;
+						implicit && !Object.values(ParamLocationType).includes(implicit) && (this.config.settings.customType = ParamLocationType.HASH);
 					}
 					return (
 						(UrlTranslator.prototype.bindExternalEvents = function (update) {
 							window.addEventListener('popstate', update);
 						}),
 						(UrlTranslator.prototype.getCurrentUrl = function () {
-							return location.search + location.hash;
+							return window.location.search + window.location.hash;
 						}),
 						(UrlTranslator.prototype.getConfig = function () {
 							return cjs_default()({}, this.config);
+						}),
+						(UrlTranslator.prototype.deserialize = function (url) {
+							var params = this.parseUrlParams(url);
+							return this.paramsToState(params);
+						}),
+						(UrlTranslator.prototype.parseUrlParams = function (url) {
+							var queryString = (url.includes('?') && (url.split('?').pop() || '').split('#').shift()) || '',
+								hashString = (url.includes('#') && url.substring(url.indexOf('#') + 1)) || '';
+							return UrlTranslator_spreadArray(
+								UrlTranslator_spreadArray([], this.parseHashString(hashString), !0),
+								this.parseQueryString(queryString),
+								!0
+							);
 						}),
 						(UrlTranslator.prototype.parseQueryString = function (queryString) {
 							return (queryString.split('?').pop() || '')
@@ -23185,164 +23110,152 @@
 										}),
 										key = _a[0],
 										value = _a[1];
-									return { key: key.split('.'), value };
+									return { key: key.split('.'), value, type: ParamLocationType.QUERY };
 								});
-						}),
-						(UrlTranslator.prototype.generateQueryString = function (queryParams, hashParams) {
-							var paramString =
-								(queryParams.length
-									? '?' +
-									  queryParams
-											.map(function (param) {
-												return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
-											})
-											.join('&')
-									: this.config.urlRoot
-									? ''
-									: location.pathname) +
-								(hashParams.length
-									? '#/' +
-									  hashParams
-											.map(function (param) {
-												return param
-													.map(function (v) {
-														return (function encodeHashComponent(string) {
-															'string' == typeof string && (string = (string = encodeURIComponent(string)).replace(/%/g, '$$25'));
-															return string;
-														})(v);
-													})
-													.join(':');
-											})
-											.join('/')
-									: '');
-							return '' + this.config.urlRoot + paramString;
 						}),
 						(UrlTranslator.prototype.parseHashString = function (hashString) {
-							return (hashString.split('#').join('/') || '')
-								.split('/')
-								.filter(function (v) {
-									return v;
-								})
-								.map(function (hashEntries) {
-									return hashEntries.split(':').map(function (v) {
-										return (function decodeHashComponent(string) {
-											'string' == typeof string &&
-												((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
-											return string;
-										})(v);
-									});
-								});
-						}),
-						(UrlTranslator.prototype.parseQuery = function (queryParams) {
-							var _this = this,
-								qParam = queryParams.find(function (param) {
-									return 1 == param.key.length && param.key[0] == _this.config.parameters.core.query.name;
-								});
-							return qParam ? { query: qParam.value } : {};
-						}),
-						(UrlTranslator.prototype.parsePage = function (queryParams) {
-							var _this = this,
-								pageParam = queryParams.find(function (param) {
-									return 1 == param.key.length && param.key[0] == _this.config.parameters.core.page.name;
-								});
-							if (!pageParam) return {};
-							var page = Number(pageParam.value);
-							return !isNaN(page) && page > 1 ? { page } : {};
-						}),
-						(UrlTranslator.prototype.parseOther = function (queryParams, except) {
-							var _this = this;
-							void 0 === except && (except = []);
-							var state = {};
+							var params = [];
 							return (
-								queryParams
-									.filter(function (param) {
-										return -1 == except.indexOf(param.key[0]);
+								(hashString.split('#').join('/') || '')
+									.split('/')
+									.filter(function (v) {
+										return v;
 									})
-									.forEach(function (param) {
-										var path = param.key,
-											value = param.value;
-										_this.config.parameters.custom[path[0]] || (_this.config.parameters.custom[path[0]] = { type: ParamLocationType.QUERY });
-										var node = state;
-										path.forEach(function (key, i) {
-											i == path.length - 1
-												? ((node[key] = node[key] || []), node[key].push(value))
-												: ((node[key] = node[key] || {}), (node = node[key]));
+									.map(function (hashEntries) {
+										return hashEntries.split(':').map(function (v) {
+											return (function decodeHashComponent(string) {
+												'string' == typeof string &&
+													((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
+												return string;
+											})(v);
 										});
+									})
+									.forEach(function (decodedHashEntries) {
+										if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: void 0, type: ParamLocationType.HASH });
+										else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
+											var _a = decodedHashEntries.reverse(),
+												value = _a[0],
+												keys = _a.slice(1);
+											params.push({ key: keys.reverse(), value, type: ParamLocationType.HASH });
+										} else if (decodedHashEntries.length && 4 == decodedHashEntries.length) {
+											var path0 = decodedHashEntries[0],
+												path1 = decodedHashEntries[1],
+												low = decodedHashEntries[2],
+												high = decodedHashEntries[3];
+											params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.HASH }),
+												params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.HASH });
+										}
 									}),
-								state
+								params
 							);
 						}),
-						(UrlTranslator.prototype.parseHashOther = function (hashParameters, except) {
-							var _this = this;
-							void 0 === except && (except = []);
-							var state = {};
+						(UrlTranslator.prototype.paramsToState = function (params) {
+							var _this = this,
+								coreOtherParams = [],
+								coreFilterParams = [],
+								coreSortParams = [],
+								otherParams = [];
 							return (
-								hashParameters
-									.filter(function (param) {
-										return -1 == except.indexOf(param[0]);
-									})
-									.forEach(function (param) {
-										var path = param.length > 1 ? param.slice(0, -1) : param,
-											value = param.length > 1 ? param[param.length - 1] : void 0;
-										_this.config.parameters.custom[path[0]] || (_this.config.parameters.custom[path[0]] = { type: ParamLocationType.HASH });
-										var node = state;
-										path.forEach(function (key, i) {
-											i == path.length - 1
-												? ((node[key] = node[key] || []), value && node[key].push(value))
-												: ((node[key] = node[key] || {}), (node = node[key]));
-										});
+								null == params ||
+									params.forEach(function (param) {
+										var coreStateKey = _this.reverseMapping[param.key[0]],
+											coreConfig = _this.config.parameters.core[coreStateKey],
+											customStateKey = _this.config.parameters.custom[param.key[0]];
+										if (coreStateKey)
+											switch (coreStateKey) {
+												case 'filter':
+													coreConfig.type == param.type && coreFilterParams.push(param);
+													break;
+												case 'sort':
+													coreConfig.type == param.type && coreSortParams.push(param);
+													break;
+												default:
+													coreConfig.type == param.type && coreOtherParams.push(param);
+											}
+										else
+											UrlTranslator_CORE_FIELDS.includes(param.key[0]) ||
+												(customStateKey || (_this.config.parameters.custom[param.key[0]] = { type: param.type || _this.config.settings.customType }),
+												otherParams.push(param));
 									}),
-								state
+								UrlTranslator_assign(
+									UrlTranslator_assign(
+										UrlTranslator_assign(UrlTranslator_assign({}, this.parseCoreOther(coreOtherParams)), this.parseCoreFilter(coreFilterParams)),
+										this.parseCoreSort(coreSortParams)
+									),
+									this.parseOther(otherParams)
+								)
 							);
 						}),
-						(UrlTranslator.prototype.parseHashFilter = function (hashParameters) {
+						(UrlTranslator.prototype.parseCoreOther = function (otherParams) {
 							var _this = this,
-								filters = hashParameters.filter(function (p) {
-									return p[0] == _this.config.parameters.core.filter.name;
+								state = {},
+								numberTypeParams = ['page', 'pageSize'];
+							return otherParams
+								? (otherParams.forEach(function (param) {
+										var coreKey = _this.reverseMapping[param.key[0]];
+										if (numberTypeParams.includes(coreKey)) {
+											var numValue = Number(param.value);
+											(('page' == coreKey && numValue > 1) || 'page' != coreKey) && (state[coreKey] = numValue);
+										} else state[coreKey] = param.value;
+								  }),
+								  state)
+								: {};
+						}),
+						(UrlTranslator.prototype.parseCoreFilter = function (filterParams) {
+							var valueFilterParams = filterParams.filter(function (p) {
+									return 2 == p.key.length;
 								}),
-								valueFilterParams = filters.filter(function (p) {
-									return 3 == p.length;
-								}),
-								rangeFilterParams = filters.filter(function (p) {
-									return 4 == p.length;
+								rangeFilterParams = filterParams.filter(function (p) {
+									return 3 == p.key.length;
 								}),
 								valueFilters = valueFilterParams.reduce(function (state, param) {
-									param[0];
 									var _a,
-										field = param[1],
-										value = param[2],
-										currentValue = (state.filter || {})[field] || [];
+										currentValue = (state.filter || {})[param.key[1]] || [];
 									return {
 										filter: UrlTranslator_assign(
 											UrlTranslator_assign({}, state.filter),
 											((_a = {}),
-											(_a[field] = UrlTranslator_spreadArray(
-												UrlTranslator_spreadArray([], Array.isArray(currentValue) ? currentValue : [currentValue]),
-												[value]
+											(_a[param.key[1]] = UrlTranslator_spreadArray(
+												UrlTranslator_spreadArray([], Array.isArray(currentValue) ? currentValue : [currentValue], !0),
+												[param.value],
+												!1
 											)),
 											_a)
 										),
 									};
 								}, {}),
-								rangeFilters = rangeFilterParams.reduce(function (state, param) {
-									param[0];
+								rangeFilters = rangeFilterParams.reduce(function (state, param, index) {
 									var _a,
 										_b,
-										field = param[1],
-										low = param[2],
-										high = param[3],
-										currentState = (state.filter || {})[field] || [];
-									return {
-										filter: UrlTranslator_assign(
-											UrlTranslator_assign({}, state.filter),
-											((_a = {}),
-											(_a[field] = UrlTranslator_spreadArray(
-												UrlTranslator_spreadArray([], Array.isArray(currentState) ? currentState : [currentState]),
-												[((_b = {}), (_b[RangeValueProperties.LOW] = +low || null), (_b[RangeValueProperties.HIGH] = +high || null), _b)]
-											)),
-											_a)
-										),
-									};
+										newState = state,
+										nextRangeParam = rangeFilterParams[index + 1];
+									if (
+										index % 2 == 0 &&
+										nextRangeParam &&
+										nextRangeParam.key[1] == param.key[1] &&
+										param.key[2] == RangeValueProperties.LOW &&
+										nextRangeParam.key[2] == RangeValueProperties.HIGH
+									) {
+										var currentValue = (state.filter || {})[param.key[1]] || [];
+										newState = {
+											filter: UrlTranslator_assign(
+												UrlTranslator_assign({}, state.filter),
+												((_a = {}),
+												(_a[param.key[1]] = UrlTranslator_spreadArray(
+													UrlTranslator_spreadArray([], Array.isArray(currentValue) ? currentValue : [currentValue], !0),
+													[
+														((_b = {}),
+														(_b[RangeValueProperties.LOW] = +param.value || null),
+														(_b[RangeValueProperties.HIGH] = +nextRangeParam.value || null),
+														_b),
+													],
+													!1
+												)),
+												_a)
+											),
+										};
+									}
+									return newState;
 								}, {});
 							return UrlTranslator_assign(
 								{},
@@ -23351,181 +23264,207 @@
 									: {}
 							);
 						}),
-						(UrlTranslator.prototype.parseHashSort = function (hashParameters) {
-							var _this = this;
-							return hashParameters
-								.filter(function (p) {
-									return p[0] == _this.config.parameters.core.sort.name;
-								})
-								.reduce(function (state, param) {
-									param[0];
-									var field = param[1],
-										direction = param[2],
-										sortArray = state.sort ? (Array.isArray(state.sort) ? state.sort : [state.sort]) : [];
-									return { sort: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], sortArray), [{ field, direction }]) };
-								}, {});
+						(UrlTranslator.prototype.parseCoreSort = function (sortParams) {
+							return sortParams.length
+								? {
+										sort: sortParams.map(function (param) {
+											return { field: param.key[1], direction: param.value };
+										}),
+								  }
+								: {};
 						}),
-						(UrlTranslator.prototype.encodePage = function (state) {
-							return state.page && 1 !== state.page ? [{ key: [this.config.parameters.core.page.name], value: '' + state.page }] : [];
-						}),
-						(UrlTranslator.prototype.encodeQuery = function (state) {
-							return state.query ? [{ key: [this.config.parameters.core.query.name], value: state.query }] : [];
-						}),
-						(UrlTranslator.prototype.encodeOther = function (state, whitelist) {
-							void 0 === whitelist && (whitelist = []);
-							var params = [];
+						(UrlTranslator.prototype.parseOther = function (otherParams) {
+							var state = {};
 							return (
-								(function addRecursive(obj, currentPath) {
-									Object.keys(obj).forEach(function (key) {
-										if (0 != currentPath.length || -1 != whitelist.indexOf(key)) {
-											var value = obj[key];
-											value instanceof Array
-												? (params = params.concat(
-														value.map(function (v) {
-															return { key: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key]), value: v };
-														})
-												  ))
-												: 'object' == typeof value
-												? addRecursive(value, UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key]))
-												: void 0 !== value &&
-												  (params = params.concat([{ key: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key]), value }]));
-										}
+								otherParams.forEach(function (param) {
+									var node = state;
+									param.key.forEach(function (key, i) {
+										i == param.key.length - 1
+											? ((node[key] = node[key] || []), param.value && node[key].push(param.value))
+											: ((node[key] = node[key] || {}), (node = node[key]));
 									});
-								})(state, []),
-								params
+								}),
+								state
 							);
 						}),
-						(UrlTranslator.prototype.encodeHashFilter = function (state) {
-							var _this = this;
-							return state.filter
+						(UrlTranslator.prototype.serialize = function (state) {
+							var root = this.config.urlRoot.includes('?')
+									? this.config.urlRoot.split('?')[0]
+									: this.config.urlRoot.includes('#')
+									? this.config.urlRoot.split('#')[0]
+									: this.config.urlRoot,
+								rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [],
+								stateParams = this.stateToParams(state),
+								params = UrlTranslator_spreadArray(UrlTranslator_spreadArray([], rootUrlParams, !0), stateParams, !0),
+								queryParams = params.filter(function (p) {
+									return p.type == ParamLocationType.QUERY;
+								}),
+								hashParams = params.filter(function (p) {
+									return p.type == ParamLocationType.HASH;
+								});
+							return (
+								'' +
+								root +
+								((queryParams.length
+									? '?' +
+									  queryParams
+											.map(function (param) {
+												return encodeURIComponent(param.key.join('.')) + (param.value ? '=' + encodeURIComponent(param.value) : '');
+											})
+											.join('&')
+									: this.config.urlRoot
+									? ''
+									: window.location.pathname) +
+									(hashParams.length
+										? '#/' +
+										  hashParams
+												.map(function (param) {
+													return (
+														param.key
+															.map(function (k) {
+																return encodeHashComponent(k);
+															})
+															.join(':') + (param.value ? ':' + encodeHashComponent(param.value) : '')
+													);
+												})
+												.join('/')
+										: ''))
+							);
+						}),
+						(UrlTranslator.prototype.stateToParams = function (state) {
+							return UrlTranslator_spreadArray(
+								UrlTranslator_spreadArray(
+									UrlTranslator_spreadArray(
+										UrlTranslator_spreadArray([], this.encodeCoreOther(state, ['filter', 'sort']), !0),
+										this.encodeCoreFilters(state),
+										!0
+									),
+									this.encodeCoreSorts(state),
+									!0
+								),
+								this.encodeOther(state),
+								!0
+							);
+						}),
+						(UrlTranslator.prototype.encodeCoreFilters = function (state) {
+							var filterConfig = this.config.parameters.core.filter;
+							return state.filter && filterConfig
 								? Object.keys(state.filter).flatMap(function (key) {
 										if (!state.filter || !state.filter[key]) return [];
 										var filter = state.filter[key];
 										return (filter instanceof Array ? filter : [filter]).flatMap(function (value) {
-											var _a, _b;
-											return 'string' == typeof value || 'number' == typeof value || 'boolean' == typeof value
-												? [[_this.config.parameters.core.filter.name, key, '' + value]]
-												: 'object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]
-												? [
-														[
-															_this.config.parameters.core.filter.name,
-															key,
-															'' + (null !== (_a = value[RangeValueProperties.LOW]) && void 0 !== _a ? _a : '*'),
-															'' + (null !== (_b = value[RangeValueProperties.HIGH]) && void 0 !== _b ? _b : '*'),
-														],
-												  ]
-												: [];
+											var _a, _b, _c, _d;
+											if ('string' == typeof value || 'number' == typeof value || 'boolean' == typeof value)
+												return [{ key: [filterConfig.name, key], value: '' + value, type: filterConfig.type }];
+											if ('object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]) {
+												if (filterConfig.type == ParamLocationType.QUERY)
+													return [
+														{
+															key: [filterConfig.name, key, RangeValueProperties.LOW],
+															value: '' + (null !== (_a = value[RangeValueProperties.LOW]) && void 0 !== _a ? _a : '*'),
+															type: filterConfig.type,
+														},
+														{
+															key: [filterConfig.name, key, RangeValueProperties.HIGH],
+															value: '' + (null !== (_b = value[RangeValueProperties.HIGH]) && void 0 !== _b ? _b : '*'),
+															type: filterConfig.type,
+														},
+													];
+												if (filterConfig.type == ParamLocationType.HASH)
+													return [
+														{
+															key: [filterConfig.name, key, '' + (null !== (_c = value[RangeValueProperties.LOW]) && void 0 !== _c ? _c : '*')],
+															value: '' + (null !== (_d = value[RangeValueProperties.HIGH]) && void 0 !== _d ? _d : '*'),
+															type: filterConfig.type,
+														},
+													];
+											}
+											return [];
 										});
 								  })
 								: [];
 						}),
-						(UrlTranslator.prototype.encodeHashSort = function (state) {
-							var _this = this;
-							return state.sort
+						(UrlTranslator.prototype.encodeCoreSorts = function (state) {
+							var sortConfig = this.config.parameters.core.sort;
+							return state.sort && sortConfig
 								? (state.sort instanceof Array ? state.sort : [state.sort]).map(function (sort) {
-										return [_this.config.parameters.core.sort.name, sort.field, sort.direction];
+										return { key: [sortConfig.name, sort.field], value: sort.direction, type: sortConfig.type };
 								  })
 								: [];
 						}),
-						(UrlTranslator.prototype.encodeHashOther = function (state, blacklist) {
-							void 0 === blacklist && (blacklist = []);
-							var params = [];
+						(UrlTranslator.prototype.encodeCoreOther = function (state, except) {
+							var _this = this,
+								params = [];
+							return (
+								Object.keys(state)
+									.sort(function (a, b) {
+										return UrlTranslator_CORE_FIELDS.indexOf(a) - UrlTranslator_CORE_FIELDS.indexOf(b);
+									})
+									.map(function (param) {
+										if (UrlTranslator_CORE_FIELDS.includes(param) && !except.includes(param)) {
+											var paramConfig = _this.config.parameters.core[param];
+											('page' == param && 1 == state[param]) ||
+												params.push({ key: [paramConfig.name], value: '' + state[param], type: paramConfig.type });
+										}
+									}),
+								params
+							);
+						}),
+						(UrlTranslator.prototype.encodeOther = function (state) {
+							var _this = this,
+								params = [];
 							return (
 								(function addRecursive(obj, currentPath) {
 									Object.keys(obj).forEach(function (key) {
-										if (0 != currentPath.length || -1 == blacklist.indexOf(key)) {
+										if (0 != currentPath.length || !UrlTranslator_CORE_FIELDS.includes(key)) {
 											var value = obj[key];
-											value instanceof Array && value.length
-												? (params = params.concat(
-														value.map(function (v) {
-															return UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key, v]);
-														})
-												  ))
-												: 'object' != typeof value || Array.isArray(value)
-												? void 0 === value || Array.isArray(value)
-													? params.push(UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key]))
-													: params.push(UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key, value]))
-												: addRecursive(value, UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath), [key]));
+											if (value instanceof Array) {
+												var type_1 =
+													(null == (customConfig = _this.config.parameters.custom[currentPath[0] || key]) ? void 0 : customConfig.type) ||
+													_this.config.settings.customType;
+												params = value.length
+													? params.concat(
+															value.map(function (v) {
+																return {
+																	key: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath, !0), [key], !1),
+																	value: v,
+																	type: type_1,
+																};
+															})
+													  )
+													: params.concat({
+															key: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath, !0), [key], !1),
+															value: void 0,
+															type: type_1,
+													  });
+											} else if ('object' == typeof value && Object.keys(value).length)
+												addRecursive(value, UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath, !0), [key], !1));
+											else {
+												var customConfig,
+													type =
+														(null == (customConfig = _this.config.parameters.custom[currentPath[0] || key]) ? void 0 : customConfig.type) ||
+														_this.config.settings.customType,
+													stringValue = 'object' == typeof value ? void 0 : value;
+												params = params.concat([
+													{ key: UrlTranslator_spreadArray(UrlTranslator_spreadArray([], currentPath, !0), [key], !1), value: stringValue, type },
+												]);
+											}
 										}
 									});
 								})(state, []),
 								params
 							);
 						}),
-						(UrlTranslator.prototype.queryParamsToState = function (queryParams) {
-							return UrlTranslator_assign(
-								UrlTranslator_assign(UrlTranslator_assign({}, this.parseQuery(queryParams)), this.parsePage(queryParams)),
-								this.parseOther(queryParams, [this.config.parameters.core.query.name, this.config.parameters.core.page.name])
-							);
-						}),
-						(UrlTranslator.prototype.hashParamsToState = function (hashParameters) {
-							var _this = this,
-								customQueryParams = Object.keys(this.config.parameters.custom).filter(function (key) {
-									return _this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-								});
-							return UrlTranslator_assign(
-								UrlTranslator_assign(
-									UrlTranslator_assign(
-										{},
-										this.parseHashOther(
-											hashParameters,
-											UrlTranslator_spreadArray(
-												['page', 'query', 'filter', 'sort', this.config.parameters.core.filter.name, this.config.parameters.core.sort.name],
-												customQueryParams
-											)
-										)
-									),
-									this.parseHashFilter(hashParameters)
-								),
-								this.parseHashSort(hashParameters)
-							);
-						}),
-						(UrlTranslator.prototype.stateToQueryParams = function (state) {
-							var _this = this;
-							void 0 === state && (state = {});
-							var customQueryParams = Object.keys(this.config.parameters.custom).filter(function (key) {
-								return _this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-							});
-							return UrlTranslator_spreadArray(
-								UrlTranslator_spreadArray(UrlTranslator_spreadArray([], this.encodeQuery(state)), this.encodePage(state)),
-								this.encodeOther(state, customQueryParams)
-							);
-						}),
-						(UrlTranslator.prototype.stateToHashParams = function (state) {
-							var _this = this;
-							void 0 === state && (state = {});
-							var customQueryParams = Object.keys(this.config.parameters.custom).filter(function (key) {
-								return _this.config.parameters.custom[key].type == ParamLocationType.QUERY;
-							});
-							return UrlTranslator_spreadArray(
-								UrlTranslator_spreadArray(UrlTranslator_spreadArray([], this.encodeHashFilter(state)), this.encodeHashSort(state)),
-								this.encodeHashOther(
-									state,
-									UrlTranslator_spreadArray(['page', 'query', this.config.parameters.core.query.name, 'filter', 'sort'], customQueryParams)
-								)
-							);
-						}),
-						(UrlTranslator.prototype.serialize = function (state) {
-							var queryParams = this.stateToQueryParams(state),
-								hashParams = this.stateToHashParams(state);
-							return this.generateQueryString(queryParams, hashParams);
-						}),
-						(UrlTranslator.prototype.deserialize = function (url) {
-							var queryString = (url.includes('?') && (url.split('?').pop() || '').split('#').shift()) || '',
-								hashString = (url.includes('#') && url.substring(url.indexOf('#') + 1)) || '',
-								queryParams = this.parseQueryString(queryString),
-								hashParams = this.parseHashString(hashString),
-								queryState = this.queryParamsToState(queryParams),
-								hashState = this.hashParamsToState(hashParams);
-							return UrlTranslator_assign(UrlTranslator_assign({}, queryState), hashState);
-						}),
 						(UrlTranslator.prototype.go = function (url, config) {
-							url != window.location.search + window.location.hash &&
+							url != this.getCurrentUrl() &&
 								('replace' == (null == config ? void 0 : config.history) ? history.replaceState(null, '', url) : history.pushState(null, '', url));
 						}),
 						UrlTranslator
 					);
 				})();
+			function encodeHashComponent(string) {
+				return 'string' == typeof string && (string = (string = encodeURIComponent(string)).replace(/%/g, '$$25')), string;
+			}
 			function reactLinker(urlManager) {
 				return {
 					href: urlManager.href,
@@ -24009,7 +23948,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.6.2' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24036,7 +23975,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.6.2');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24408,9 +24347,11 @@
 						};
 					}
 				},
-				RecommendationInstantiator_spreadArray = function (to, from) {
-					for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
-					return to;
+				RecommendationInstantiator_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
 				},
 				RecommendationInstantiator = (function () {
 					function RecommendationInstantiator(config, _a) {
@@ -24561,7 +24502,7 @@
 														return recs.plugin(plugin);
 													}),
 													this.middleware.forEach(function (middleware) {
-														return recs.on.apply(recs, RecommendationInstantiator_spreadArray([middleware.event], middleware.func));
+														return recs.on.apply(recs, RecommendationInstantiator_spreadArray([middleware.event], middleware.func, !1));
 													}),
 													[4, recs.search()]
 												);
@@ -24635,7 +24576,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.6.2]',
+								text: '[0.7.0]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24644,7 +24585,7 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_1 = _this.createController(type, controller.config, controller.services, controller.parameters),
+												var cntrlr_1 = _this.createController(type, controller.config, controller.services, controller.url),
 													searched_1 = !1;
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
@@ -24673,7 +24614,7 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_2 = _this.createController(type, controller.config, controller.services, controller.parameters);
+												var cntrlr_2 = _this.createController(type, controller.config, controller.services, controller.url);
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
@@ -24718,7 +24659,7 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_3 = _this.createController(type, controller.config, controller.services, controller.parameters),
+												var cntrlr_3 = _this.createController(type, controller.config, controller.services, controller.url),
 													searched_2 = !1;
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
@@ -24747,7 +24688,7 @@
 										_this.config.controllers[type].forEach(function (controller, index) {
 											var _a;
 											try {
-												var cntrlr_4 = _this.createController(type, controller.config, controller.services, controller.parameters),
+												var cntrlr_4 = _this.createController(type, controller.config, controller.services, controller.url),
 													searched_3 = !1;
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
@@ -24786,9 +24727,8 @@
 							}
 					}
 					return (
-						(Snap.prototype.createController = function (type, config, services, parametersConfig) {
-							void 0 === parametersConfig && (parametersConfig = {});
-							var translatorConfig = { parameters: cjs_default()(this.config.parameters || {}, parametersConfig) };
+						(Snap.prototype.createController = function (type, config, services, url) {
+							var translatorConfig = cjs_default()(this.config.url || {}, url || {});
 							switch (type) {
 								case 'search':
 									var urlManager =
@@ -26026,12 +25966,12 @@
 				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 923,
 				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 44784,
 				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx': 86359,
+				'./components/Molecules/FacetSlider/FacetSlider.stories.tsx': 95811,
 				'./components/Molecules/Filter/Filter.stories.tsx': 94010,
 				'./components/Molecules/Pagination/Pagination.stories.tsx': 42738,
 				'./components/Molecules/Result/Result.stories.tsx': 46253,
 				'./components/Molecules/Select/Select.stories.tsx': 34231,
 				'./components/Molecules/Slideout/Slideout.stories.tsx': 48265,
-				'./components/Molecules/Slider/Slider.stories.tsx': 99004,
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 3661,
 				'./components/Organisms/Facet/Facet.stories.tsx': 42289,
 				'./components/Organisms/Facets/Facets.stories.tsx': 52609,

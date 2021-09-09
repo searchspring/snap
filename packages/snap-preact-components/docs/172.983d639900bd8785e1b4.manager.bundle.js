@@ -1,8 +1,8 @@
-/*! For license information please see 908.de813040a2ad32fe4338.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 172.983d639900bd8785e1b4.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[908],
+	[172],
 	{
-		49908: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		68172: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -62,11 +62,12 @@
 					var source = null != arguments[i] ? Object(arguments[i]) : {},
 						ownKeys = Object.keys(source);
 					'function' == typeof Object.getOwnPropertySymbols &&
-						(ownKeys = ownKeys.concat(
+						ownKeys.push.apply(
+							ownKeys,
 							Object.getOwnPropertySymbols(source).filter(function (sym) {
 								return Object.getOwnPropertyDescriptor(source, sym).enumerable;
 							})
-						)),
+						),
 						ownKeys.forEach(function (key) {
 							(0, defineProperty.Z)(target, key, source[key]);
 						});

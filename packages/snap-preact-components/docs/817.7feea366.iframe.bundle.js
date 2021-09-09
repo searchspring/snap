@@ -1,8 +1,8 @@
-'use strict';
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[817],
 	{
 		67817: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
 					WithToolTipState: () => WithToolTipState,
@@ -23,34 +23,33 @@
 				__webpack_require__(27233),
 				__webpack_require__(28673),
 				__webpack_require__(1939);
-			var react = __webpack_require__(2784),
+			var compat_module = __webpack_require__(66741),
 				esm = __webpack_require__(28493),
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				objectWithoutPropertiesLoose = __webpack_require__(31461),
 				esm_extends = __webpack_require__(7896),
 				inheritsLoose = __webpack_require__(81665),
-				react_dom = __webpack_require__(28316),
-				ManagerReferenceNodeContext = react.createContext(),
-				ManagerReferenceNodeSetterContext = react.createContext();
+				ManagerReferenceNodeContext = compat_module.kr(),
+				ManagerReferenceNodeSetterContext = compat_module.kr();
 			function Manager(_ref) {
 				var children = _ref.children,
-					_React$useState = react.useState(null),
+					_React$useState = compat_module.eJ(null),
 					referenceNode = _React$useState[0],
 					setReferenceNode = _React$useState[1],
-					hasUnmounted = react.useRef(!1);
-				react.useEffect(function () {
+					hasUnmounted = compat_module.sO(!1);
+				compat_module.d4(function () {
 					return function () {
 						hasUnmounted.current = !0;
 					};
 				}, []);
-				var handleSetReferenceNode = react.useCallback(function (node) {
+				var handleSetReferenceNode = compat_module.I4(function (node) {
 					hasUnmounted.current || setReferenceNode(node);
 				}, []);
-				return react.createElement(
+				return compat_module.az(
 					ManagerReferenceNodeContext.Provider,
 					{ value: referenceNode },
-					react.createElement(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
+					compat_module.az(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
 				);
 			}
 			var unwrapArray = function unwrapArray(arg) {
@@ -75,7 +74,7 @@
 					}, {});
 				},
 				useIsomorphicLayoutEffect =
-					'undefined' != typeof window && window.document && window.document.createElement ? react.useLayoutEffect : react.useEffect;
+					'undefined' != typeof window && window.document && window.document.createElement ? compat_module.bt : compat_module.d4;
 			function getWindow(node) {
 				if (null == node) return window;
 				if ('[object Window]' !== node.toString()) {
@@ -99,21 +98,21 @@
 				var rect = element.getBoundingClientRect(),
 					scaleX = 1,
 					scaleY = 1;
-				return (
-					isHTMLElement(element) &&
-						includeScale &&
-						((scaleX = rect.width / element.offsetWidth || 1), (scaleY = rect.height / element.offsetHeight || 1)),
-					{
-						width: round(rect.width / scaleX),
-						height: round(rect.height / scaleY),
-						top: round(rect.top / scaleY),
-						right: round(rect.right / scaleX),
-						bottom: round(rect.bottom / scaleY),
-						left: round(rect.left / scaleX),
-						x: round(rect.left / scaleX),
-						y: round(rect.top / scaleY),
-					}
-				);
+				if (isHTMLElement(element) && includeScale) {
+					var offsetHeight = element.offsetHeight,
+						offsetWidth = element.offsetWidth;
+					offsetWidth > 0 && (scaleX = rect.width / offsetWidth || 1), offsetHeight > 0 && (scaleY = rect.height / offsetHeight || 1);
+				}
+				return {
+					width: round(rect.width / scaleX),
+					height: round(rect.height / scaleY),
+					top: round(rect.top / scaleY),
+					right: round(rect.right / scaleX),
+					bottom: round(rect.bottom / scaleY),
+					left: round(rect.left / scaleX),
+					x: round(rect.left / scaleX),
+					y: round(rect.top / scaleY),
+				};
 			}
 			function getWindowScroll(node) {
 				var win = getWindow(node);
@@ -310,7 +309,8 @@
 						isDestroyed = !1,
 						instance = {
 							state,
-							setOptions: function setOptions(options) {
+							setOptions: function setOptions(setOptionsAction) {
+								var options = 'function' == typeof setOptionsAction ? setOptionsAction(state.options) : setOptionsAction;
 								cleanupModifierEffects(),
 									(state.options = Object.assign({}, defaultOptions, state.options, options)),
 									(state.scrollParents = {
@@ -537,6 +537,7 @@
 					popper = _ref2.popper,
 					popperRect = _ref2.popperRect,
 					placement = _ref2.placement,
+					variation = _ref2.variation,
 					offsets = _ref2.offsets,
 					position = _ref2.position,
 					gpuAcceleration = _ref2.gpuAcceleration,
@@ -568,10 +569,13 @@
 						widthProp = 'clientWidth';
 					offsetParent === getWindow(popper) &&
 						'static' !== getComputedStyle((offsetParent = getDocumentElement(popper))).position &&
+						'absolute' === position &&
 						((heightProp = 'scrollHeight'), (widthProp = 'scrollWidth')),
 						(offsetParent = offsetParent),
-						placement === enums_top && ((sideY = bottom), (y -= offsetParent[heightProp] - popperRect.height), (y *= gpuAcceleration ? 1 : -1)),
-						placement === left && ((sideX = right), (x -= offsetParent[widthProp] - popperRect.width), (x *= gpuAcceleration ? 1 : -1));
+						(placement !== enums_top && ((placement !== left && placement !== right) || 'end' !== variation)) ||
+							((sideY = bottom), (y -= offsetParent[heightProp] - popperRect.height), (y *= gpuAcceleration ? 1 : -1)),
+						(placement !== left && ((placement !== enums_top && placement !== bottom) || 'end' !== variation)) ||
+							((sideX = right), (x -= offsetParent[widthProp] - popperRect.width), (x *= gpuAcceleration ? 1 : -1));
 				}
 				var _Object$assign,
 					commonStyles = Object.assign({ position }, adaptive && unsetSides);
@@ -582,7 +586,7 @@
 							(((_Object$assign = {})[sideY] = hasY ? '0' : ''),
 							(_Object$assign[sideX] = hasX ? '0' : ''),
 							(_Object$assign.transform =
-								(win.devicePixelRatio || 1) < 2 ? 'translate(' + x + 'px, ' + y + 'px)' : 'translate3d(' + x + 'px, ' + y + 'px, 0)'),
+								(win.devicePixelRatio || 1) <= 1 ? 'translate(' + x + 'px, ' + y + 'px)' : 'translate3d(' + x + 'px, ' + y + 'px, 0)'),
 							_Object$assign)
 					  )
 					: Object.assign(
@@ -734,7 +738,6 @@
 					padding = void 0 === _options$padding ? 0 : _options$padding,
 					paddingObject = mergePaddingObject('number' != typeof padding ? padding : expandToHashMap(padding, basePlacements)),
 					altContext = 'popper' === elementContext ? 'reference' : 'popper',
-					referenceElement = state.elements.reference,
 					popperRect = state.rects.popper,
 					element = state.elements[altBoundary ? altContext : elementContext],
 					clippingClientRect = getClippingRect(
@@ -742,7 +745,7 @@
 						boundary,
 						rootBoundary
 					),
-					referenceClientRect = getBoundingClientRect(referenceElement),
+					referenceClientRect = getBoundingClientRect(state.elements.reference),
 					popperOffsets = computeOffsets({ reference: referenceClientRect, element: popperRect, strategy: 'absolute', placement }),
 					popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets)),
 					elementClientRect = 'popper' === elementContext ? popperClientRect : referenceClientRect,
@@ -801,6 +804,7 @@
 									roundOffsets = void 0 === _options$roundOffsets || _options$roundOffsets,
 									commonStyles = {
 										placement: getBasePlacement(state.placement),
+										variation: getVariation(state.placement),
 										popper: state.elements.popper,
 										popperRect: state.rects.popper,
 										gpuAcceleration,
@@ -1234,20 +1238,20 @@
 					onFirstUpdate = _ref.onFirstUpdate,
 					innerRef = _ref.innerRef,
 					children = _ref.children,
-					referenceNode = react.useContext(ManagerReferenceNodeContext),
-					_React$useState = react.useState(null),
+					referenceNode = compat_module.qp(ManagerReferenceNodeContext),
+					_React$useState = compat_module.eJ(null),
 					popperElement = _React$useState[0],
 					setPopperElement = _React$useState[1],
-					_React$useState2 = react.useState(null),
+					_React$useState2 = compat_module.eJ(null),
 					arrowElement = _React$useState2[0],
 					setArrowElement = _React$useState2[1];
-				react.useEffect(
+				compat_module.d4(
 					function () {
 						setRef(innerRef, popperElement);
 					},
 					[innerRef, popperElement]
 				);
-				var options = react.useMemo(
+				var options = compat_module.Ye(
 						function () {
 							return {
 								placement,
@@ -1260,20 +1264,20 @@
 					),
 					_usePopper = (function usePopper(referenceElement, popperElement, options) {
 						void 0 === options && (options = {});
-						var prevOptions = react.useRef(null),
+						var prevOptions = compat_module.sO(null),
 							optionsWithDefaults = {
 								onFirstUpdate: options.onFirstUpdate,
 								placement: options.placement || 'bottom',
 								strategy: options.strategy || 'absolute',
 								modifiers: options.modifiers || EMPTY_MODIFIERS,
 							},
-							_React$useState = react.useState({
+							_React$useState = compat_module.eJ({
 								styles: { popper: { position: optionsWithDefaults.strategy, left: '0', top: '0' }, arrow: { position: 'absolute' } },
 								attributes: {},
 							}),
 							state = _React$useState[0],
 							setState = _React$useState[1],
-							updateStateModifier = react.useMemo(function () {
+							updateStateModifier = compat_module.Ye(function () {
 								return {
 									name: 'updateState',
 									enabled: !0,
@@ -1297,7 +1301,7 @@
 									requires: ['computeStyles'],
 								};
 							}, []),
-							popperOptions = react.useMemo(
+							popperOptions = compat_module.Ye(
 								function () {
 									var newOptions = {
 										onFirstUpdate: optionsWithDefaults.onFirstUpdate,
@@ -1317,7 +1321,7 @@
 									updateStateModifier,
 								]
 							),
-							popperInstanceRef = react.useRef();
+							popperInstanceRef = compat_module.sO();
 						return (
 							useIsomorphicLayoutEffect(
 								function () {
@@ -1352,7 +1356,7 @@
 					styles = _usePopper.styles,
 					forceUpdate = _usePopper.forceUpdate,
 					update = _usePopper.update,
-					childrenProps = react.useMemo(
+					childrenProps = compat_module.Ye(
 						function () {
 							return {
 								ref: setPopperElement,
@@ -1374,20 +1378,20 @@
 			function Reference(_ref) {
 				var children = _ref.children,
 					innerRef = _ref.innerRef,
-					setReferenceNode = react.useContext(ManagerReferenceNodeSetterContext),
-					refHandler = react.useCallback(
+					setReferenceNode = compat_module.qp(ManagerReferenceNodeSetterContext),
+					refHandler = compat_module.I4(
 						function (node) {
 							setRef(innerRef, node), safeInvoke(setReferenceNode, node);
 						},
 						[innerRef, setReferenceNode]
 					);
 				return (
-					react.useEffect(function () {
+					compat_module.d4(function () {
 						return function () {
 							return setRef(innerRef, null);
 						};
 					}),
-					react.useEffect(
+					compat_module.d4(
 						function () {
 							warning_default()(Boolean(setReferenceNode), '`Reference` should not be used outside of a `Manager` component.');
 						},
@@ -1396,7 +1400,7 @@
 					unwrapArray(children)({ ref: refHandler })
 				);
 			}
-			var TooltipContext = react.createContext({}),
+			var TooltipContext = compat_module.ZP.createContext({}),
 				callAll = function callAll() {
 					for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) fns[_key] = arguments[_key];
 					return function () {
@@ -1529,7 +1533,7 @@
 								arrowProps = _this$props3.arrowProps,
 								placement = _this$props3.placement,
 								tooltip = _this$props3.tooltip;
-							return react.createElement(
+							return compat_module.ZP.createElement(
 								TooltipContext.Provider,
 								{ value: this.contextValue },
 								tooltip({
@@ -1547,7 +1551,7 @@
 						}),
 						Tooltip
 					);
-				})(react.Component);
+				})(compat_module.wA);
 			Tooltip.contextType = TooltipContext;
 			var TooltipTrigger = (function (_Component) {
 				function TooltipTrigger() {
@@ -1663,7 +1667,7 @@
 								'getTooltipRef',
 								'mutationObserverOptions',
 							]),
-							popper = react.createElement(
+							popper = compat_module.ZP.createElement(
 								Popper,
 								(0, esm_extends.Z)(
 									{
@@ -1700,7 +1704,7 @@
 											y = pageY + height > window.pageYOffset + document.body.offsetHeight ? pageY - height : pageY;
 										style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0';
 									}
-									return react.createElement(
+									return compat_module.ZP.createElement(
 										Tooltip,
 										(0, esm_extends.Z)(
 											{ arrowProps, closeOnReferenceHidden, isReferenceHidden, placement, update, style, tooltip, trigger, mutationObserverOptions },
@@ -1709,14 +1713,14 @@
 									);
 								}
 							);
-						return react.createElement(
+						return compat_module.ZP.createElement(
 							Manager,
 							null,
-							react.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
+							compat_module.ZP.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
 								var ref = _ref4.ref;
 								return children({ getTriggerProps: _this2.getTriggerProps, triggerRef: ref });
 							}),
-							this.getState() && (usePortal ? (0, react_dom.createPortal)(popper, portalContainer) : popper)
+							this.getState() && (usePortal ? (0, compat_module.jz)(popper, portalContainer) : popper)
 						);
 					}),
 					(_proto.isControlled = function isControlled() {
@@ -1731,7 +1735,7 @@
 					}),
 					TooltipTrigger
 				);
-			})(react.Component);
+			})(compat_module.wA);
 			TooltipTrigger.defaultProps = {
 				closeOnReferenceHidden: !0,
 				defaultTooltipShown: !1,
@@ -1871,10 +1875,10 @@
 						arrowRef = _ref5.arrowRef,
 						color = _ref5.color,
 						props = _objectWithoutProperties(_ref5, ['placement', 'hasChrome', 'children', 'arrowProps', 'tooltipRef', 'arrowRef', 'color']);
-					return react.createElement(
+					return compat_module.ZP.createElement(
 						Wrapper,
 						_extends({ hasChrome, placement, ref: tooltipRef }, props, { color }),
-						hasChrome && react.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
+						hasChrome && compat_module.ZP.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
 						children
 					);
 				};
@@ -1992,7 +1996,7 @@
 							'onVisibilityChange',
 						]),
 						Container = svg ? TargetSvgContainer : TargetContainer;
-					return react.createElement(
+					return compat_module.ZP.createElement(
 						react_popper_tooltip,
 						{
 							placement,
@@ -2006,7 +2010,7 @@
 									tooltipRef = _ref2.tooltipRef,
 									arrowRef = _ref2.arrowRef,
 									tooltipPlacement = _ref2.placement;
-								return react.createElement(
+								return compat_module.ZP.createElement(
 									Tooltip_Tooltip,
 									WithTooltip_extends(
 										{ hasChrome, placement: tooltipPlacement, tooltipRef, arrowRef, arrowProps: getArrowProps() },
@@ -2025,7 +2029,7 @@
 						function (_ref3) {
 							var getTriggerProps = _ref3.getTriggerProps,
 								triggerRef = _ref3.triggerRef;
-							return react.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
+							return compat_module.ZP.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
 						}
 					);
 				};
@@ -2047,17 +2051,17 @@
 				var startOpen = _ref4.startOpen,
 					onChange = _ref4.onVisibilityChange,
 					rest = WithTooltip_objectWithoutProperties(_ref4, ['startOpen', 'onVisibilityChange']),
-					_useState2 = _slicedToArray((0, react.useState)(startOpen || !1), 2),
+					_useState2 = _slicedToArray((0, compat_module.eJ)(startOpen || !1), 2),
 					tooltipShown = _useState2[0],
 					setTooltipShown = _useState2[1],
-					onVisibilityChange = (0, react.useCallback)(
+					onVisibilityChange = (0, compat_module.I4)(
 						function (visibility) {
 							(onChange && !1 === onChange(visibility)) || setTooltipShown(visibility);
 						},
 						[onChange]
 					);
 				return (
-					(0, react.useEffect)(function () {
+					(0, compat_module.d4)(function () {
 						var hide = function hide() {
 							return onVisibilityChange(!1);
 						};
@@ -2091,10 +2095,67 @@
 							}
 						);
 					}),
-					react.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
+					compat_module.ZP.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
 				);
 			};
 			WithToolTipState.displayName = 'WithToolTipState';
+		},
+		78435: (module) => {
+			var hasElementType = 'undefined' != typeof Element,
+				hasMap = 'function' == typeof Map,
+				hasSet = 'function' == typeof Set,
+				hasArrayBuffer = 'function' == typeof ArrayBuffer && !!ArrayBuffer.isView;
+			function equal(a, b) {
+				if (a === b) return !0;
+				if (a && b && 'object' == typeof a && 'object' == typeof b) {
+					if (a.constructor !== b.constructor) return !1;
+					var length, i, keys, it;
+					if (Array.isArray(a)) {
+						if ((length = a.length) != b.length) return !1;
+						for (i = length; 0 != i--; ) if (!equal(a[i], b[i])) return !1;
+						return !0;
+					}
+					if (hasMap && a instanceof Map && b instanceof Map) {
+						if (a.size !== b.size) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!equal(i.value[1], b.get(i.value[0]))) return !1;
+						return !0;
+					}
+					if (hasSet && a instanceof Set && b instanceof Set) {
+						if (a.size !== b.size) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
+						return !0;
+					}
+					if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+						if ((length = a.length) != b.length) return !1;
+						for (i = length; 0 != i--; ) if (a[i] !== b[i]) return !1;
+						return !0;
+					}
+					if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+					if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+					if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+					if ((length = (keys = Object.keys(a)).length) !== Object.keys(b).length) return !1;
+					for (i = length; 0 != i--; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return !1;
+					if (hasElementType && a instanceof Element) return !1;
+					for (i = length; 0 != i--; )
+						if ((('_owner' !== keys[i] && '__v' !== keys[i] && '__o' !== keys[i]) || !a.$$typeof) && !equal(a[keys[i]], b[keys[i]])) return !1;
+					return !0;
+				}
+				return a != a && b != b;
+			}
+			module.exports = function isEqual(a, b) {
+				try {
+					return equal(a, b);
+				} catch (error) {
+					if ((error.message || '').match(/stack|recursion/i)) return console.warn('react-fast-compare cannot handle circular refs'), !1;
+					throw error;
+				}
+			};
+		},
+		45982: (module) => {
+			'use strict';
+			var warning = function () {};
+			module.exports = warning;
 		},
 	},
 ]);
