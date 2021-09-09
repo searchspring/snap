@@ -27,6 +27,7 @@ export default {
 			<div
 				style={{
 					maxWidth: '900px',
+					height: '300px',
 				}}
 			>
 				<Story />
@@ -48,6 +49,17 @@ export default {
 		pagination: {
 			defaultValue: false,
 			description: 'Display pagination dots',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		vertical: {
+			defaultValue: false,
+			description: 'Carousel vertical slide direction',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -86,7 +98,7 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: defaultCarouselBreakpoints,
+			defaultValue: undefined,
 			description: 'Carousel breakpoints',
 			table: {
 				type: {
@@ -136,45 +148,6 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
-export const Products = (props, { loaded: { controller } }) => {
-	return (
-		<Carousel {...props}>
-			{controller.store?.results.map((result) => (
-				<Result result={result} />
-			))}
-		</Carousel>
-	);
-};
-Products.loaders = [
-	async () => {
-		snapInstance.on('afterStore', async ({ controller }, next) => {
-			controller.store.results.forEach((result) => (result.mappings.core.url = 'javascript:void(0);'));
-			await next();
-		});
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
-
-const icons = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'black', 'white'];
-export const Icons = (props) => {
-	return (
-		<Carousel {...props}>
-			{Object.keys(iconPaths).map((icon, index) => {
-				return (
-					<div style={{ margin: '0 auto', textAlign: 'center' }}>
-						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
-						<div style="text-align: center">{icon}</div>
-					</div>
-				);
-			})}
-		</Carousel>
-	);
-};
-
 const colors = Array.from(Array(9).keys());
 export const Colors = (props) => {
 	return (
@@ -189,6 +162,21 @@ Colors.args = {
 	pagination: true,
 	hideButtons: true,
 	loop: false,
+};
+
+export const Icons = (props) => {
+	return (
+		<Carousel {...props}>
+			{Object.keys(iconPaths).map((icon, index) => {
+				return (
+					<div style={{ margin: '0 auto', textAlign: 'center' }}>
+						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
+						<div style="text-align: center">{icon}</div>
+					</div>
+				);
+			})}
+		</Carousel>
+	);
 };
 
 function shiftColor(base, change) {

@@ -77,6 +77,20 @@ describe('Carousel Component', () => {
 		expect(next).toBeInTheDocument();
 	});
 
+	it('vertical prop works', () => {
+		const rendered = render(
+			<Carousel vertical={true}>
+				{searchResponse.results.map((result, idx) => (
+					<div className={'findMe'} key={idx}>
+						<Result result={result} />
+					</div>
+				))}
+			</Carousel>
+		);
+		const verticalCarouselWrapper = rendered.container.querySelector('.swiper-container-vertical');
+		expect(verticalCarouselWrapper).toBeInTheDocument();
+	});
+
 	it('renders custom next & prev buttons', () => {
 		const prevButtonText = 'Prev Button Yo';
 		const nextButtonText = 'Next Button Yo';
