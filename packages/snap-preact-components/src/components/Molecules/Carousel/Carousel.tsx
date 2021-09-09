@@ -26,57 +26,63 @@ const CSS = {
 
 			'&.ss__carousel-vertical': {
 				flexDirection: 'column',
-				'& .swiper-slide': {
-					textAlign: 'center',
-					fontSize: '18px',
-					background: '#fff',
-
-					/* Center slide text vertically */
+				'.swiper-slide': {
+					/* Center slides vertically */
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
 				},
 
-				'& .ss__carousel__next-wrapper': {
+				'.swiper-container': {
 					flexDirection: 'row',
 				},
 
-				'& .ss__carousel__prev-wrapper': {
-					flexDirection: 'row',
+				'.swiper-pagination': {
+					width: 'auto',
+					order: 0,
+					flexDirection: 'column',
+					margin: 0,
+					padding: '10px',
+				},
+
+				'.swiper-pagination-bullet': {
+					margin: '4px',
 				},
 			},
-			'& .swiper-pagination-bullet-active': {
+			'.swiper-pagination-bullet-active': {
 				background: theme?.colors?.primary || 'inherit',
 			},
-			'& .ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 			},
-			'& .ss__carousel__next, .ss__carousel__prev': {
+			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
 				cursor: 'pointer',
+				lineHeight: 0,
 
 				'&.swiper-button-disabled': {
 					opacity: '0.3',
 					cursor: 'default',
 				},
 			},
-			'& .swiper-container': {
+			'.swiper-container': {
 				display: 'flex',
 				flexDirection: 'column',
 			},
-			'& .swiper-wrapper': {
+			'.swiper-wrapper': {
 				order: 0,
 			},
-			'& .swiper-pagination': {
+			'.swiper-pagination': {
+				display: 'flex',
+				justifyContent: 'center',
 				marginTop: '10px',
 				width: '100%',
 				order: 1,
-				textAlign: 'center',
 				transition: '.3s opacity',
 			},
-			'& .swiper-pagination-bullet': {
+			'.swiper-pagination-bullet': {
 				width: '8px',
 				height: '8px',
 				display: 'inline-block',
@@ -125,7 +131,7 @@ const defaultVerticalCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
-		spaceBetween: 40,
+		spaceBetween: 0,
 	},
 };
 
