@@ -4,9 +4,11 @@ Lets define our config. The config that is provided to Snap will create and retu
 
 ```typescript
 const config = {
-	parameters: {
-		core: {
-			query: { name: 'query' }
+	url: {
+		parameters: {
+			core: {
+				query: { name: 'query' }
+			}
 		}
 	},
 	client: {
@@ -60,7 +62,7 @@ const config = {
 
 Lets go over a few things.
 
-`config.parameters` is optional and contains a `UrlTranslator` parameter config object that is passed to the core [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller as needed.
+`config.url` is optional and contains a [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) object that is passed to the core [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
 
 `config.client` is required and contains a config object that is passed to the core [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) package. This service handles the network requests to our APIs to retrieve data to be displayed.
 

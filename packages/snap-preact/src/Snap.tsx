@@ -25,7 +25,7 @@ import type {
 } from '@searchspring/snap-controller';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
-import type { UrlTranslatorParametersConfig } from '@searchspring/snap-url-manager';
+import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices } from './types';
@@ -39,7 +39,7 @@ type ExtendedTarget = Target & {
 };
 
 export type SnapConfig = {
-	parameters?: UrlTranslatorParametersConfig;
+	url?: UrlTranslatorConfig;
 	client: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
@@ -52,25 +52,25 @@ export type SnapConfig = {
 			config: SearchControllerConfig;
 			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
-			parameters?: UrlTranslatorParametersConfig;
+			url?: UrlTranslatorConfig;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
 			targets: ExtendedTarget[];
 			services?: SnapControllerServices;
-			parameters?: UrlTranslatorParametersConfig;
+			url?: UrlTranslatorConfig;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
 			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
-			parameters?: UrlTranslatorParametersConfig;
+			url?: UrlTranslatorConfig;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
 			targets?: ExtendedTarget[];
 			services?: SnapControllerServices;
-			parameters?: UrlTranslatorParametersConfig;
+			url?: UrlTranslatorConfig;
 		}[];
 	};
 };
@@ -112,7 +112,7 @@ export class Snap {
 				case 'search': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.parameters) as SearchController;
+							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as SearchController;
 
 							let searched = false;
 							const runSearch = () => {
@@ -159,7 +159,7 @@ export class Snap {
 				case 'autocomplete': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.parameters) as AutocompleteController;
+							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as AutocompleteController;
 
 							controller?.targets?.forEach((target, target_index) => {
 								if (!target.component) {
@@ -206,7 +206,7 @@ export class Snap {
 				case 'finder': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.parameters) as FinderController;
+							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as FinderController;
 
 							let searched = false;
 							const runSearch = () => {
@@ -252,7 +252,7 @@ export class Snap {
 				case 'recommendation': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.parameters) as RecommendationController;
+							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as RecommendationController;
 
 							let searched = false;
 							const runSearch = () => {
@@ -310,16 +310,8 @@ export class Snap {
 		}
 	}
 
-	public createController(
-		type: string,
-		config: ControllerConfigs,
-		services?: SnapControllerServices,
-		parametersConfig: UrlTranslatorParametersConfig = {}
-	): AbstractController {
-		const translatorParametersConfig = deepmerge(this.config.parameters || {}, parametersConfig);
-		const translatorConfig = {
-			parameters: translatorParametersConfig,
-		};
+	public createController(type: string, config: ControllerConfigs, services?: SnapControllerServices, url?: UrlTranslatorConfig): AbstractController {
+		const translatorConfig = deepmerge(this.config.url || {}, url || {});
 
 		switch (type) {
 			case 'search': {
