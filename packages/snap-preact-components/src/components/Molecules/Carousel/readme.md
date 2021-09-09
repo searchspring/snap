@@ -26,11 +26,11 @@ The `pagination` prop specifies if the carousel should display pagination dots.
 <Carousel pagination>{children}<Carousel/>
 ```
 
-### verticalSlide 
-The `verticalSlide` prop changes the carousel slide direction from horizontal, to vertical. 
+### vertical 
+The `vertical` prop changes the carousel slide direction from horizontal, to vertical. 
 
 ```jsx
-<Carousel verticalSlide>{children}<Carousel/>
+<Carousel vertical>{children}<Carousel/>
 ```
 
 ### hideButtons

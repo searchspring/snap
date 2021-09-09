@@ -53,6 +53,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		vertical: {
+			defaultValue: false,
+			description: 'Recommendation carousel direction',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		loop: {
 			defaultValue: true,
 			description: 'Recommendation pagination loops',

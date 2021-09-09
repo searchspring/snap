@@ -49,7 +49,6 @@ export const defaultRecommendationBreakpoints = {
 		spaceBetween: 10,
 	},
 };
-
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
@@ -78,6 +77,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		disableStyles,
 		style,
 		className,
+		vertical,
 		...additionalProps
 	} = props;
 
@@ -101,6 +101,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			// inherited props
 			...defined({
 				disableStyles,
+				vertical,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -168,6 +169,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		(children || results?.length) && (
 			<CacheProvider>
@@ -224,6 +226,7 @@ export interface RecommendationProps extends ComponentProps {
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: JSX.Element[];
+	vertical?: boolean;
 }
 
 interface RecommendationSubProps {

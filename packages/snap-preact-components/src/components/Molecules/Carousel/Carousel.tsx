@@ -15,16 +15,17 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	carousel: ({ theme, verticalSlide }) =>
+	carousel: ({ theme, vertical }) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
-			maxHeight: verticalSlide ? '100%' : null,
+			maxHeight: vertical ? '100%' : null,
 			margin: 0,
 			padding: 0,
 			overflow: 'hidden',
 
-			'& .swiper-container-vertical': {
+			'&.ss__carousel-vertical': {
+				flexDirection: 'column',
 				'& .swiper-slide': {
 					textAlign: 'center',
 					fontSize: '18px',
@@ -34,6 +35,14 @@ const CSS = {
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
+				},
+
+				'& .ss__carousel__next-wrapper': {
+					flexDirection: 'row',
+				},
+
+				'& .ss__carousel__prev-wrapper': {
+					flexDirection: 'row',
 				},
 			},
 			'& .swiper-pagination-bullet-active': {
@@ -126,7 +135,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const props: CarouselProps = {
 		// default props
-		breakpoints: properties.verticalSlide ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
@@ -144,7 +153,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		nextButton,
 		prevButton,
 		hideButtons,
-		verticalSlide,
+		vertical,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -178,14 +187,18 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.carousel({ theme, verticalSlide }), style];
+		styling.css = [CSS.carousel({ theme, vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 	return (
 		children && (
 			<CacheProvider>
-				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__carousel', className)}>
+				<div
+					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+					{...styling}
+					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
+				>
 					{!hideButtons && (
 						<div className="ss__carousel__prev-wrapper">
 							<div
@@ -193,7 +206,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 							>
-								{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
+								{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
 							</div>
 						</div>
 					)}
@@ -212,7 +225,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
-						direction={verticalSlide ? 'vertical' : 'horizontal'}
+						direction={vertical ? 'vertical' : 'horizontal'}
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={
@@ -236,7 +249,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
 								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
 							>
-								{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
+								{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
 							</div>
 						</div>
 					)}
@@ -252,7 +265,7 @@ export interface CarouselProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
-	verticalSlide?: boolean;
+	vertical?: boolean;
 	pagination?: boolean;
 	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;

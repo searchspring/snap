@@ -46,7 +46,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		verticalSlide: {
+		vertical: {
 			defaultValue: false,
 			description: 'Carousel vertical slide direction',
 			table: {

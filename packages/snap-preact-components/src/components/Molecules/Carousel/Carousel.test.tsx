@@ -79,7 +79,7 @@ describe('Carousel Component', () => {
 
 	it('vertical prop works', () => {
 		const rendered = render(
-			<Carousel verticalSlide={true}>
+			<Carousel vertical={true}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<Result result={result} />
