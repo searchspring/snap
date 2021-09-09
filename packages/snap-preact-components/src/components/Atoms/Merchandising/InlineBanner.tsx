@@ -7,7 +7,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
 
 const CSS = {
-	inlineBanner: ({ width, style }) =>
+	inlineBanner: ({ width }) =>
 		css({
 			height: '100%',
 			display: 'flex',
@@ -26,7 +26,6 @@ const CSS = {
 			'& iframe': {
 				maxWidth: '100%',
 			},
-			...style,
 		}),
 };
 
@@ -46,13 +45,19 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const { banner, disableStyles, className, width, layout, style } = props;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.inlineBanner({ width }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		banner &&
 		banner.value && (
 			<CacheProvider>
 				<div
 					className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
-					css={!disableStyles && CSS.inlineBanner({ width, style })}
+					{...styling}
 					dangerouslySetInnerHTML={{
 						__html: banner.value,
 					}}

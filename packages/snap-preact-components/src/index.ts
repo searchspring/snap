@@ -23,7 +23,7 @@ export * from './components/Molecules/Pagination';
 export * from './components/Molecules/Result';
 export * from './components/Molecules/Select';
 export * from './components/Molecules/Slideout';
-export * from './components/Molecules/Slider';
+export * from './components/Molecules/FacetSlider';
 
 // ORGANISMS
 export * from './components/Organisms/Autocomplete';

@@ -23,13 +23,13 @@ export type UrlStateSort = {
 
 export type UrlState = {
 	page?: number;
-	// pageSize?: number;
+	pageSize?: number;
 	query?: string;
-	// rq?: string;
-	// oq?: string;
+	rq?: string;
+	oq?: string;
 	filter?: UrlStateFilter;
 	sort?: UrlStateSort | Array<UrlStateSort>;
-	// tag?: string;
+	tag?: string;
 	[any: string]: unknown;
 };
 

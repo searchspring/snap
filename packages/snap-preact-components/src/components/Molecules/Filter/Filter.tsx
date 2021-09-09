@@ -12,7 +12,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	filter: ({ style }) =>
+	filter: () =>
 		css({
 			textDecoration: 'none',
 			display: 'inline-flex',
@@ -26,7 +26,6 @@ const CSS = {
 				marginRight: '5px',
 				fontWeight: 'bold',
 			},
-			...style,
 		}),
 };
 
@@ -51,8 +50,12 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			className: 'ss__filter__button',
 			// global theme
 			...globalTheme?.components?.button,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
 			// component theme overrides
-			...props.theme?.components?.button,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -67,19 +70,20 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				icon,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.filter(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		valueLabel && (
 			<CacheProvider>
-				<a
-					css={!disableStyles && CSS.filter({ style })}
-					className={classnames('ss__filter', className)}
-					onClick={(e) => onClick && onClick(e as any)}
-					{...url?.link}
-				>
+				<a {...styling} className={classnames('ss__filter', className)} onClick={(e) => onClick && onClick(e as any)} {...url?.link}>
 					<Button {...subProps.button}>
 						<Icon {...subProps.icon} />
 						{!hideFacetLabel && (

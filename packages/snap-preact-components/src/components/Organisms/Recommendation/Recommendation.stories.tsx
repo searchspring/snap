@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Recommendation, defaultRecommendationBreakpoints } from './Recommendation';
+import { Recommendation } from './Recommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -26,6 +26,7 @@ export default {
 			<div
 				style={{
 					maxWidth: '900px',
+					height: '500px',
 				}}
 			>
 				<Story />
@@ -75,6 +76,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		vertical: {
+			defaultValue: false,
+			description: 'Recommendation carousel direction',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideButtons: {
 			defaultValue: false,
 			description: 'Hide prev/next buttons',
@@ -105,7 +117,7 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: defaultRecommendationBreakpoints,
+			defaultValue: undefined,
 			description: 'Recommendation title',
 			table: {
 				type: {

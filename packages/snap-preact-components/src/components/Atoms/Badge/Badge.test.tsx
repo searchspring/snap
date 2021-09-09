@@ -84,8 +84,7 @@ describe('Badge Component', () => {
 		it('Badge has correct number of classes', () => {
 			const BadgeElement = badge.getByText(CONTENT);
 
-			expect(BadgeElement.classList.length).toBe(2);
-			expect(BadgeElement.classList[1]).toMatch(/^ss-0/);
+			expect(BadgeElement.classList.length).toBe(1);
 		});
 	});
 

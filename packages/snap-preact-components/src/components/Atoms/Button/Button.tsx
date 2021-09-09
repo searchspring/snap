@@ -9,7 +9,7 @@ import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme, style }) =>
+	button: ({ color, backgroundColor, borderColor, theme }) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
@@ -30,12 +30,8 @@ const CSS = {
 					cursor: 'default',
 				},
 			},
-			...style,
 		}),
-	native: ({ style }) =>
-		css({
-			...style,
-		}),
+	native: () => css({}),
 };
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
@@ -54,22 +50,23 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const { backgroundColor, borderColor, color, content, children, disabled, native, onClick, disableStyles, className, style } = props;
 
 	const elementProps = {
-		css:
-			!disableStyles &&
-			(native
-				? CSS.native({ style })
-				: CSS.button({
+		css: disableStyles
+			? [style]
+			: native
+			? [CSS.native(), style]
+			: [
+					CSS.button({
 						color,
 						backgroundColor,
 						borderColor,
 						theme,
-						style,
-				  })),
+					}),
+					style,
+			  ],
 		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 		disabled,
 		onClick: (e) => !disabled && onClick && onClick(e),
 	};
-
 	return (
 		(content || children) && (
 			<CacheProvider>

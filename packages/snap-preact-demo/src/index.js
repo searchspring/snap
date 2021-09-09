@@ -21,6 +21,18 @@ import './styles/custom.scss';
  */
 
 const config = {
+	url: {
+		settings: {
+			coreType: 'query',
+			customType: 'query',
+		},
+		parameters: {
+			core: {
+				query: { name: 'q' },
+				page: { name: 'p' },
+			},
+		},
+	},
 	client: {
 		globals: {
 			siteId: '8uyt2m',

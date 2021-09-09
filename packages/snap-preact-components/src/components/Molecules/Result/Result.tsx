@@ -15,7 +15,7 @@ import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 
 const CSS = {
-	result: ({ style }) =>
+	result: () =>
 		css({
 			'&.ss__result--grid': {
 				display: 'flex',
@@ -68,7 +68,6 @@ const CSS = {
 					marginBottom: '10px',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -99,7 +98,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.price,
+			theme: props.theme,
 		},
 		badge: {
 			// default props
@@ -112,7 +111,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.badge,
+			theme: props.theme,
 		},
 		image: {
 			// default props
@@ -127,7 +126,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			...props.theme?.components?.image,
+			theme: props.theme,
 		},
 	};
 
@@ -136,10 +135,18 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	if (props.truncateTitle) {
 		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append);
 	}
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.result(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		core && (
 			<CacheProvider>
-				<article css={!disableStyles && CSS.result({ style })} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+				<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 					<div className="ss__result__image-wrapper">
 						<a
 							href={core.url}

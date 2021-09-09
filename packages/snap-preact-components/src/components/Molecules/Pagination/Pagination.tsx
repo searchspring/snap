@@ -11,7 +11,7 @@ import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	pagination: ({ theme, style }) =>
+	pagination: ({ theme }) =>
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
@@ -26,7 +26,6 @@ const CSS = {
 					backgroundColor: theme.colors?.hover || '#f8f8f8',
 				},
 			},
-			...style,
 		}),
 };
 
@@ -75,7 +74,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
@@ -84,10 +83,16 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const _pages = store?.getPages(...getPagesParams);
 	const pageNumbers = _pages?.map((page) => page.number);
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.pagination({ theme }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		store?.totalResults && (
 			<CacheProvider>
-				<div css={!disableStyles && CSS.pagination({ theme, style })} className={classnames('ss__pagination', className)}>
+				<div {...styling} className={classnames('ss__pagination', className)}>
 					<>
 						{/* Prev */}
 						{store.previous && !hidePrev && (

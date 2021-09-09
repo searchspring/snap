@@ -14,7 +14,8 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, theme, style }) =>
+	select: ({ color, backgroundColor, borderColor, label, selection, theme }) =>
+		//@ts-ignore
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -47,12 +48,8 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
-	native: ({ style }) =>
-		css({
-			...style,
-		}),
+	native: () => css({}),
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
@@ -107,7 +104,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				disabled,
 			}),
 			// component theme overrides
-			...props.theme?.components?.dropdown,
+			theme: props.theme,
 		},
 		button: {
 			// default props
@@ -123,7 +120,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				borderColor,
 			}),
 			// component theme overrides
-			...props.theme?.components?.button,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -137,7 +134,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				size: '14px',
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
@@ -179,27 +176,24 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 		!stayOpenOnSelection && setOpen(false);
 	};
+
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		if (native) {
+			styling.css = [CSS.native(), style];
+		} else {
+			styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+		}
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		options &&
 		(typeof options == 'object' || Array.isArray(options)) &&
 		options.length && (
 			<CacheProvider>
-				<div
-					css={
-						!disableStyles && native
-							? CSS.native({ style })
-							: CSS.select({
-									color,
-									backgroundColor,
-									borderColor,
-									label,
-									selection: selection || '',
-									theme,
-									style,
-							  })
-					}
-					className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}
-				>
+				<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 					{native ? (
 						<>
 							{label && !hideLabelOnSelection && (
