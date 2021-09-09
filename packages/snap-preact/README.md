@@ -28,6 +28,13 @@ Full example:
 
 ```typescript
 const config = {
+	url: {
+		parameters: {
+			core: {
+				query: { name: 'search' },
+			},
+		},
+	},
 	client: {
 		globals: {
 			siteId: 'xxxxxx',
@@ -142,16 +149,19 @@ module.exports = {
 
 
 
-### config.parameters
-The `parameters` object contains the config provided to each UrlTranslator
+### config.url
+The `url` object contains the config provided to each [`UrlTranslator`](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) created by Snap Preact.
 
 ```typescript
 const config = {
-    parameters: {
-        search: {
-            name: 'q'
-        }
-    }
+	url: {
+		parameters: {
+			core: {
+				query: { name: 'search' },
+				page: { name: 'p' }
+			},
+		},
+	},
 }
 ```
 
@@ -195,7 +205,9 @@ const target = {
 }
 ```
 
-`services` - optional object of `ControllerServices` to be used for this controller
+`services` - optional object of `ControllerServices` to be used for this controller in place of the default services
+
+`url` - optional `UrlTranslator` config object to be used with the `UrlManager` for this controller
 
 
 An example creating a SearchController:

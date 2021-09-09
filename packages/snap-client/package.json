@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-client",
-	"version": "0.6.2",
+	"version": "0.7.0",
 	"description": "Snap Client",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -24,7 +24,7 @@
 		"whatwg-fetch": "^3.6.2"
 	},
 	"devDependencies": {
-		"@searchspring/snapi-types": "^0.1.18"
+		"@searchspring/snapi-types": "^0.1.19"
 	},
 	"sideEffects": false,
 	"files": [

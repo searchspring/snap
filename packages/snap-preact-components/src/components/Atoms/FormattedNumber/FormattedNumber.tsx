@@ -9,10 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	formattedNumber: ({ style }) =>
-		css({
-			...style,
-		}),
+	formattedNumber: () => css({}),
 };
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
@@ -45,11 +42,17 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		symbolAfter,
 	});
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.formattedNumber(), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return raw ? (
 		<>{formattedNumber}</>
 	) : (
 		<CacheProvider>
-			<span className={classnames('ss__formatted-number', className)} css={!disableStyles && CSS.formattedNumber({ style })}>
+			<span className={classnames('ss__formatted-number', className)} {...styling}>
 				{formattedNumber}
 			</span>
 		</CacheProvider>

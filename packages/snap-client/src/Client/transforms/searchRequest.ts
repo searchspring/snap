@@ -9,7 +9,8 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 		transformSearchRequest.merchandising(request),
 		transformSearchRequest.pagination(request),
 		transformSearchRequest.siteId(request),
-		transformSearchRequest.facets(request)
+		transformSearchRequest.facets(request),
+		transformSearchRequest.tracking(request)
 	);
 }
 
@@ -148,6 +149,16 @@ transformSearchRequest.facets = (request: SearchRequestModel = {}) => {
 
 	if (facets.exclude?.length) {
 		return { excludedFacets: facets.exclude };
+	}
+
+	return {};
+};
+
+transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
+	const reqTracking = request.tracking || {};
+
+	if (reqTracking.userId) {
+		return { userId: reqTracking.userId };
 	}
 
 	return {};

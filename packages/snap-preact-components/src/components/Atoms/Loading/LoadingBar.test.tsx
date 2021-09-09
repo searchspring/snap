@@ -75,8 +75,7 @@ describe('LoadingBar Component', () => {
 		};
 		const rendered = render(<LoadingBar {...args} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__loading-bar');
-		expect(loadingbarElement.classList.length).toBe(2);
-		expect(loadingbarElement.classList[1]).toMatch(/^ss-0/);
+		expect(loadingbarElement.classList.length).toBe(1);
 	});
 
 	it('can custom className', () => {

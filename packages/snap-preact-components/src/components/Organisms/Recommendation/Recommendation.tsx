@@ -19,9 +19,12 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: ({ theme, style }) =>
+	recommendation: ({ vertical }) =>
 		css({
-			...style,
+			height: vertical ? '100%' : null,
+			'.ss__result__image-wrapper': {
+				height: vertical ? '85%' : null,
+			},
 		}),
 };
 
@@ -53,17 +56,26 @@ export const defaultRecommendationBreakpoints = {
 	},
 };
 
+const defaultVerticalRecommendationBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
+	},
+};
+
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: RecommendationProps = {
 		// default props
-		breakpoints: defaultRecommendationBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
+		...globalTheme?.components?.recommendation,
 		...properties,
+		// props
 		...properties.theme?.components?.recommendation,
 	};
 
@@ -80,6 +92,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		disableStyles,
 		style,
 		className,
+		vertical,
 		...additionalProps
 	} = props;
 
@@ -103,9 +116,10 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			// inherited props
 			...defined({
 				disableStyles,
+				vertical,
 			}),
 			// component theme overrides
-			...props.theme?.components?.carousel,
+			theme: props.theme,
 		},
 		result: {
 			// default props
@@ -117,7 +131,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.result,
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -129,7 +143,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			...theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
@@ -164,14 +178,17 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	(children || results.length) && (controller as RecommendationController)?.track?.render();
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.recommendation({ vertical }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		(children || results?.length) && (
 			<CacheProvider>
-				<div
-					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
-					css={!disableStyles && CSS.recommendation({ theme, style })}
-					className={classnames('ss__recommendation', className)}
-				>
+				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__recommendation', className)}>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
 					<Carousel
 						onInit={(swiper) => {
@@ -201,6 +218,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={pagination}
+						{...subProps.carousel}
 						{...additionalProps}
 					>
 						{children
@@ -223,6 +241,7 @@ export interface RecommendationProps extends ComponentProps {
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: JSX.Element[];
+	vertical?: boolean;
 }
 
 interface RecommendationSubProps {

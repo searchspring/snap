@@ -257,6 +257,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			...defined({
 				disableStyles,
 			}),
+
+			// component theme overrides
 			theme: {
 				components: {
 					facetGridOptions: {
@@ -273,10 +275,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 						hideLabel: true,
 						columns: 3,
 					},
+					...props.theme?.components,
 				},
 			},
-			// component theme overrides
-			...props.theme?.components?.facet,
 		},
 		banner: {
 			// default props
@@ -288,7 +289,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.banner,
+			theme: props.theme,
 		},
 		results: {
 			// default props
@@ -299,16 +300,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// inherited props
 			...defined({
 				disableStyles,
-				theme: {
-					components: {
-						result: {
-							hideBadge: true,
-						},
-					},
-				},
 			}),
 			// component theme overrides
-			...props.theme?.components?.results,
+			theme: {
+				components: {
+					result: {
+						hideBadge: true,
+					},
+					...props.theme?.components,
+				},
+			},
 		},
 		icon: {
 			// default props
@@ -322,7 +323,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			...props.theme?.components?.icon,
+			theme: props.theme,
 		},
 	};
 
@@ -357,25 +358,32 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER).slice(0, 3);
 	const onlyTerms = trending?.length && !loaded;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [
+			CSS.Autocomplete({
+				inputViewportOffsetBottom,
+				hideFacets,
+				horizontalTerms,
+				noResults: search?.query?.string && results.length === 0,
+				contentSlotExists: contentSlot ? true : false,
+				viewportMaxHeight,
+				vertical,
+				width,
+				style,
+				theme,
+			}),
+			style,
+		];
+	} else if (style) {
+		styling.css = [style];
+	}
+
 	return (
 		visible && (
 			<CacheProvider>
 				<div
-					css={
-						!disableStyles &&
-						CSS.Autocomplete({
-							inputViewportOffsetBottom,
-							hideFacets,
-							horizontalTerms,
-							noResults: search?.query?.string && results.length === 0,
-							contentSlotExists: contentSlot ? true : false,
-							viewportMaxHeight,
-							vertical,
-							width,
-							style,
-							theme,
-						})
-					}
+					{...styling}
 					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 					onClick={(e) => e.stopPropagation()}
 				>

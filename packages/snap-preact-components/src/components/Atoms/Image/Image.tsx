@@ -11,7 +11,7 @@ import { ComponentProps } from '../../../types';
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility, style }) =>
+	image: ({ visibility }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -23,7 +23,6 @@ const CSS = {
 				maxWidth: '100%',
 				maxHeight: '100%',
 			},
-			...style,
 		}),
 };
 
@@ -53,9 +52,15 @@ export function Image(properties: ImageProps): JSX.Element {
 		setVisibility('hidden');
 	}
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.image({ visibility }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
-			<div css={!disableStyles && CSS.image({ visibility, style })} className={classnames('ss__image', className)}>
+			<div {...styling} className={classnames('ss__image', className)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}

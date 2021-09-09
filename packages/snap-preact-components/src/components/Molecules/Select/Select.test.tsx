@@ -340,7 +340,7 @@ describe('Select Component', () => {
 
 			const selectElement = rendered.container.querySelector('.ss__select');
 
-			expect(selectElement.classList).toHaveLength(2);
+			expect(selectElement.classList).toHaveLength(1);
 		});
 
 		it('is themeable with ThemeProvider', () => {

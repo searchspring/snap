@@ -1,4 +1,4 @@
-# Slider
+# Facet Slider
 
 Renders a slider to be used with any slider facet. Built using [react-ranger](https://github.com/tannerlinsley/react-ranger).
 
@@ -8,14 +8,14 @@ Renders a slider to be used with any slider facet. Built using [react-ranger](ht
 The required `facet` prop specifies a reference to a facet within the facets store array. The facet must be a range facet (`display` type of `'slider'`).
 
 ```jsx
-<Slider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />
+<FacetSlider facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} />
 ```
 
 ### showTicks
 The `showTicks` prop will render reference ticks below the slider track.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	showTicks={true}
 />
@@ -25,7 +25,7 @@ The `showTicks` prop will render reference ticks below the slider track.
 The `tickSize` prop specifies the unit number between ticks. Must be used with `showTicks` prop.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	showTicks={true}
 	tickSize={20}
@@ -36,7 +36,7 @@ The `tickSize` prop specifies the unit number between ticks. Must be used with `
 The `tickTextColor` prop specifies ticks text color. Must be used with `showTicks` prop.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	showTicks={true}
 	tickTextColor={'#cccccc'}
@@ -47,9 +47,19 @@ The `tickTextColor` prop specifies ticks text color. Must be used with `showTick
 The `handleColor` prop specifies the handle color.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	handleColor={'#0000ff'}
+/>
+```
+
+### stickyHandleLabel
+The `stickyHandleLabel` prop specifies if the handle value text should display above each handle.
+
+```jsx
+<FacetSlider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	stickyHandleLabel={true}
 />
 ```
 
@@ -57,7 +67,7 @@ The `handleColor` prop specifies the handle color.
 The `handleDraggingColor` prop specifies the handle color while dragging.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	handleDraggingColor={'0000ff'}
 />
@@ -67,7 +77,7 @@ The `handleDraggingColor` prop specifies the handle color while dragging.
 The `handleTextColor` prop specifies the handle text color.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	handleTextColor={'#222222'}
 />
@@ -77,7 +87,7 @@ The `handleTextColor` prop specifies the handle text color.
 The `trackColor` prop specifies the slider track (background) color.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	trackColor={'#cccccc'}
 />
@@ -87,7 +97,7 @@ The `trackColor` prop specifies the slider track (background) color.
 The `railColor` prop specifies the slider rail (foreground) color.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	railColor={'#0000ff'}
 />
@@ -99,7 +109,7 @@ The `railColor` prop specifies the slider rail (foreground) color.
 The `onChange` prop allows for a custom callback function for when a slider handle has been changed.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	onChange={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
 />
@@ -109,7 +119,7 @@ The `onChange` prop allows for a custom callback function for when a slider hand
 The `onDrag` prop allows for a custom callback function for when a slider handle is being dragged.
 
 ```jsx
-<Slider 
+<FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
 	onDrag={(values)=>{ console.log(`low: ${values[0]} high: ${values[1]}`) }}
 />

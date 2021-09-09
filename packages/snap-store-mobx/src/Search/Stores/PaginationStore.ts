@@ -168,7 +168,7 @@ export class PaginationStore {
 
 	setPageSize(num: number): void {
 		if (num) {
-			this.services.urlManager.set('pageSize', num).go();
+			this.services.urlManager.remove('page').set('pageSize', num).go();
 		}
 	}
 }
