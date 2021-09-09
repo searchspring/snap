@@ -187,12 +187,13 @@ describe('Pagination Store', () => {
 	it('can set page size', () => {
 		const paginationData = searchData.pagination;
 
-		const fn = jest.spyOn(services.urlManager, 'set');
+		const removeFn = jest.spyOn(services.urlManager, 'remove');
 
 		const pagination = new PaginationStore({}, services, paginationData);
 		pagination.setPageSize(30);
 
-		expect(fn).toHaveBeenCalledWith('pageSize', 30);
+		expect(removeFn).toHaveBeenCalledWith('page');
+		expect(services.urlManager.state.pageSize).toBe(30);
 	});
 
 	it('returns an empty array if min and max pages arent passed into getPages', () => {
