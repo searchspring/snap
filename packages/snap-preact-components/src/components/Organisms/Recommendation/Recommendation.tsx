@@ -19,7 +19,13 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: () => css({}),
+	recommendation: ({ vertical }) =>
+		css({
+			height: vertical ? '100%' : null,
+			'.ss__result__image-wrapper': {
+				height: vertical ? '85%' : null,
+			},
+		}),
 };
 
 export const defaultRecommendationBreakpoints = {
@@ -49,12 +55,21 @@ export const defaultRecommendationBreakpoints = {
 		spaceBetween: 10,
 	},
 };
+
+const defaultVerticalRecommendationBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
+	},
+};
+
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const props: RecommendationProps = {
 		// default props
-		breakpoints: defaultRecommendationBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
@@ -165,7 +180,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.recommendation(), style];
+		styling.css = [CSS.recommendation({ vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
