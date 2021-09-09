@@ -1,9 +1,26 @@
-import { AutocompleteRequestModel, AutocompleteResponseModel, SearchRequestModel, SearchResponseModel } from '@searchspring/snapi-types';
+import {
+	AutocompleteRequestModel,
+	AutocompleteResponseModel,
+	MetaRequestModel,
+	MetaResponseModel,
+	SearchRequestModel,
+	SearchResponseModel,
+} from '@searchspring/snapi-types';
 
 import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 
 export class HybridAPI extends API {
+	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {
+		const legacyRequestParameters = requestParameters;
+
+		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
+		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
+
+		const legacyData = await legacyRequester.getMeta(legacyRequestParameters);
+		return legacyData;
+	}
+
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
