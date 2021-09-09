@@ -54,6 +54,10 @@ table th {
 	text-align: left;
 }
 
+table th[align='center'] {
+	text-align: center;
+}
+
 table td {
 	font-size: 0.7em;
 	padding: 10px;

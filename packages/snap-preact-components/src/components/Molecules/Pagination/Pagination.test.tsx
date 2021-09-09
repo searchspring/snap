@@ -128,7 +128,7 @@ describe('Pagination theming works', () => {
 		);
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(2);
+		expect(pagination.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -142,7 +142,7 @@ describe('Pagination theming works', () => {
 		const rendered = render(<Pagination pagination={paginationMock} theme={propTheme} />);
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(2);
+		expect(pagination.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -168,6 +168,6 @@ describe('Pagination theming works', () => {
 
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(2);
+		expect(pagination.classList.length).toBe(1);
 	});
 });

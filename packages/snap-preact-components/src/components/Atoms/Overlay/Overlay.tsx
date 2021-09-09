@@ -8,7 +8,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	overlay: ({ color, transitionSpeed, style }) =>
+	overlay: ({ color, transitionSpeed }) =>
+		//@ts-ignore
 		css({
 			transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,
 			position: 'fixed',
@@ -22,7 +23,6 @@ const CSS = {
 				background: color,
 				left: '0',
 			},
-			...style,
 		}),
 };
 
@@ -42,12 +42,18 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const { active, color, transitionSpeed, onClick, disableStyles, className, style } = props;
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [CSS.overlay({ color, transitionSpeed }), style];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		<CacheProvider>
 			<div
 				onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
 				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
-				css={!disableStyles && CSS.overlay({ color, transitionSpeed, style })}
+				{...styling}
 			/>
 		</CacheProvider>
 	);

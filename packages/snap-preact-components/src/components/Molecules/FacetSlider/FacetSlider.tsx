@@ -12,18 +12,7 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	facetSlider: ({
-		railColor,
-		trackColor,
-		handleColor,
-		handleTextColor,
-		handleDraggingColor,
-		showTicks,
-		stickyHandleLabel,
-		tickTextColor,
-		theme,
-		style,
-	}) =>
+	facetSlider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, showTicks, stickyHandleLabel, tickTextColor, theme }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -142,7 +131,6 @@ const CSS = {
 					},
 				},
 			},
-			...style,
 		}),
 };
 
@@ -205,30 +193,31 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize: tickSize,
 	});
 
+	const styling: { css?: any } = {};
+	if (!disableStyles) {
+		styling.css = [
+			CSS.facetSlider({
+				railColor,
+				trackColor,
+				handleColor,
+				handleTextColor,
+				handleDraggingColor,
+				showTicks,
+				stickyHandleLabel,
+				tickTextColor,
+				theme,
+			}),
+			style,
+		];
+	} else if (style) {
+		styling.css = [style];
+	}
 	return (
 		facet.range &&
 		facet.active &&
 		facet.step && (
 			<CacheProvider>
-				<div
-					className={classnames('ss__facet-slider', className)}
-					{...getTrackProps()}
-					css={
-						!disableStyles &&
-						CSS.facetSlider({
-							railColor,
-							trackColor,
-							handleColor,
-							handleTextColor,
-							handleDraggingColor,
-							showTicks,
-							stickyHandleLabel,
-							tickTextColor,
-							theme,
-							style,
-						})
-					}
-				>
+				<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
 					<div className="ss__facet-slider__slider">
 						{showTicks &&
 							ticks.map(({ value, getTickProps }) => (
