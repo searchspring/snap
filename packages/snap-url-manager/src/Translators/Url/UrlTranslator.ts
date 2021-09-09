@@ -31,27 +31,29 @@ type CustomMap = {
 };
 
 export type UrlTranslatorParametersConfig = {
-	settings?: {
-		prefix?: string;
-		implicit?: ParamLocationType;
-		type?: ParamLocationType;
-	};
 	core?: CoreMap;
 	custom?: CustomMap;
 };
 
 export type UrlTranslatorConfig = {
 	urlRoot?: string;
+	settings?: {
+		corePrefix?: string;
+		coreType?: ParamLocationType;
+		customType?: ParamLocationType;
+		rootParams?: boolean;
+	};
 	parameters?: UrlTranslatorParametersConfig;
 };
 
 const defaultConfig: UrlTranslatorConfig = {
 	urlRoot: '',
+	settings: {
+		corePrefix: '',
+		customType: ParamLocationType.HASH,
+		rootParams: true,
+	},
 	parameters: {
-		settings: {
-			prefix: '',
-			implicit: ParamLocationType.HASH,
-		},
 		core: {
 			query: { name: 'q', type: ParamLocationType.QUERY },
 			oq: { name: 'oq', type: ParamLocationType.QUERY },
@@ -77,12 +79,12 @@ export class UrlTranslator implements Translator {
 
 		Object.keys(this.config.parameters.core).forEach((param) => {
 			// param prefix
-			if (this.config.parameters.settings.prefix) {
-				this.config.parameters.core[param].name = this.config.parameters.settings.prefix + this.config.parameters.core[param].name;
+			if (this.config.settings.corePrefix) {
+				this.config.parameters.core[param].name = this.config.settings.corePrefix + this.config.parameters.core[param].name;
 			}
 
 			// global type override
-			const paramType = this.config.parameters.settings.type;
+			const paramType = this.config.settings.coreType;
 			if (paramType && Object.values(ParamLocationType).includes(paramType)) {
 				this.config.parameters.core[param].type = (config?.parameters?.core && config?.parameters?.core[param]?.type) || paramType;
 			}
@@ -91,10 +93,10 @@ export class UrlTranslator implements Translator {
 			this.reverseMapping[this.config.parameters.core[param].name] = param;
 		});
 
-		const implicit = this.config.parameters.settings.implicit;
+		const implicit = this.config.settings.customType;
 		if (implicit && !Object.values(ParamLocationType).includes(implicit)) {
 			// invalid type specified - falling back to hash as implicit type
-			this.config.parameters.settings.implicit = ParamLocationType.HASH;
+			this.config.settings.customType = ParamLocationType.HASH;
 		}
 	}
 
@@ -111,12 +113,16 @@ export class UrlTranslator implements Translator {
 	}
 
 	deserialize(url: string): UrlState {
+		const params = this.parseUrlParams(url);
+
+		return this.paramsToState(params);
+	}
+
+	protected parseUrlParams(url: string): Array<UrlParameter> {
 		const queryString = url.includes('?') ? (url.split('?').pop() || '').split('#').shift() || '' : '';
 		const hashString = url.includes('#') ? url.substring(url.indexOf('#') + 1) || '' : '';
 
-		const params = [...this.parseHashString(hashString), ...this.parseQueryString(queryString)];
-
-		return this.paramsToState(params);
+		return [...this.parseHashString(hashString), ...this.parseQueryString(queryString)];
 	}
 
 	protected parseQueryString(queryString: string): Array<UrlParameter> {
@@ -192,7 +198,7 @@ export class UrlTranslator implements Translator {
 				if (!customStateKey) {
 					// unrecognized state - store in custom config map (as implicit type)
 					this.config.parameters.custom[param.key[0]] = {
-						type: param.type || this.config.parameters.settings.implicit,
+						type: param.type || this.config.settings.customType,
 					};
 				}
 
@@ -329,7 +335,15 @@ export class UrlTranslator implements Translator {
 	}
 
 	serialize(state: UrlState): string {
-		const params = this.stateToParams(state);
+		const root = this.config.urlRoot.includes('?')
+			? this.config.urlRoot.split('?')[0]
+			: this.config.urlRoot.includes('#')
+			? this.config.urlRoot.split('#')[0]
+			: this.config.urlRoot;
+
+		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
+		const stateParams = this.stateToParams(state);
+		const params = [...rootUrlParams, ...stateParams];
 		const queryParams = params.filter((p) => p.type == ParamLocationType.QUERY);
 		const hashParams = params.filter((p) => p.type == ParamLocationType.HASH);
 
@@ -357,7 +371,7 @@ export class UrlTranslator implements Translator {
 						.join('/')
 				: '');
 
-		return `${this.config.urlRoot}${paramString}`;
+		return `${root}${paramString}`;
 	}
 
 	// encode state into params
@@ -475,22 +489,28 @@ export class UrlTranslator implements Translator {
 					return;
 				}
 
-				const value = obj[key] as Record<string, unknown>;
+				const value = obj[key];
 
 				if (value instanceof Array) {
-					params = params.concat(
-						value.map((v) => {
-							const customConfig = this.config.parameters.custom[currentPath[0] || key];
-							const type = customConfig?.type || this.config.parameters.settings.implicit;
-							return { key: [...currentPath, key], value: v, type };
-						})
-					);
-				} else if (typeof value == 'object') {
-					addRecursive(value, [...currentPath, key]);
+					const customConfig = this.config.parameters.custom[currentPath[0] || key];
+					const type = customConfig?.type || this.config.settings.customType;
+
+					if (value.length) {
+						params = params.concat(
+							value.map((v) => {
+								return { key: [...currentPath, key], value: v, type };
+							})
+						);
+					} else {
+						params = params.concat({ key: [...currentPath, key], value: undefined, type });
+					}
+				} else if (typeof value == 'object' && Object.keys(value).length) {
+					addRecursive(value as Record<string, unknown>, [...currentPath, key]);
 				} else {
 					const customConfig = this.config.parameters.custom[currentPath[0] || key];
-					const type = customConfig?.type || this.config.parameters.settings.implicit;
-					params = params.concat([{ key: [...currentPath, key], value, type }]);
+					const type = customConfig?.type || this.config.settings.customType;
+					const stringValue = (typeof value == 'object' ? undefined : value) as string;
+					params = params.concat([{ key: [...currentPath, key], value: stringValue, type }]);
 				}
 			});
 		};

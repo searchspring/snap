@@ -330,6 +330,35 @@ describe('UrlManager Integration Tests', () => {
 			expect(search.href).toBe('https://somesite.com/search?query=the%20thing');
 		});
 
+		it('can be given a root URL with params that it appends to the state params', () => {
+			url = 'https://somesite.com?dev#/development';
+			const translatorConfig = {
+				urlRoot: 'https://somesite.com/search',
+				parameters: {
+					core: {
+						query: { name: 'query' },
+					},
+				},
+			};
+
+			const urlManager = new UrlManager(new MockUrlTranslator(translatorConfig));
+			expect(urlManager.href).toBe('https://somesite.com/search?dev#/development');
+
+			const search = urlManager.set('query', 'the thing');
+			expect(search.href).toBe('https://somesite.com/search?query=the%20thing&dev#/development');
+		});
+
+		it('supports setting and merging params with no value', () => {
+			const devMode = new UrlManager(new MockUrlTranslator()).set('dev');
+			expect(devMode.href).toBe('/#/dev');
+
+			const noDevMode = devMode.remove('dev');
+			expect(noDevMode.href).toBe('/');
+
+			const infiniteMode = noDevMode.merge('infinite');
+			expect(infiniteMode.href).toBe('/#/infinite');
+		});
+
 		it('supports typical value filter usage', () => {
 			const colorFilter = new UrlManager(new MockUrlTranslator()).set('filter.color', 'red');
 			expect(colorFilter.href).toBe('/#/filter:color:red');
