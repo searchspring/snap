@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **(carousel/recommendation)-component:** adding support for vertical pagination ([eb24284](https://github.com/searchspring/snap/commit/eb24284a0ea79a1bd9fa325f6a054e05f26eaefb))
+* **facet-slider-component:** adjust margin to prevent overflow scroll ([d6a89dd](https://github.com/searchspring/snap/commit/d6a89dd1ff4d4329818bd33284349b6034e1a929))
+* **facet-slider-component:** handling overflow with all prop options ([952b261](https://github.com/searchspring/snap/commit/952b2610bff32bde966214f8b69ebc95396ded68))
+* **facet-slider-component:** small change to remove min-height ([2fe3ed8](https://github.com/searchspring/snap/commit/2fe3ed81435240d625345218babb9aa32ae16383))
+* **facetslider.tsx:** bugfix for slider handle labels overflowing when handle is at the ends of rail ([3c43b4c](https://github.com/searchspring/snap/commit/3c43b4c94d4497b27eb10428d3bccc01924947b5))
+* **facetslider:** increase label spacing if showTicks enabled ([ef0be4f](https://github.com/searchspring/snap/commit/ef0be4f42f3958f5f22a644ee44a01ffeab328d0))
+* **pagination-store:** fix to setPageSize method to remove the current page ([4996d66](https://github.com/searchspring/snap/commit/4996d6657f31cda1102de2c1df7edde19d4e1b5c))
+* **recommendation.tsx:** recommendation component was not using the global theme ([ce5da93](https://github.com/searchspring/snap/commit/ce5da938d4f112909e7947c69ced024f51aedcf8))
+* **search-request:** add siteId to search request params ([af68f5a](https://github.com/searchspring/snap/commit/af68f5a61bd259bf1ee5244573edc55f710462b7))
+* **select.tsx:** add support for native styling ([81228fb](https://github.com/searchspring/snap/commit/81228fbd8aae41485b7a445531ce4c8b5019d46d))
+
+
+### Features
+
+* **carousel.tsx:** new feature to support vertical carousels ([466d211](https://github.com/searchspring/snap/commit/466d21147b4ded1d5c4061e12305f6f326b590fe))
+* **facetslider.tsx:** prop for sticky handle labels ([c6974f0](https://github.com/searchspring/snap/commit/c6974f0446d177a39e8586c74a99e6ac1232ee0a))
+* **theme prop:** theme prop refactor ([641fc44](https://github.com/searchspring/snap/commit/641fc44d2df1efd8353e541bb880b08cb21c2a2e))
+* **url-translator:** changes to translator - urlRoot params, value-less params and settings changes ([0022ff0](https://github.com/searchspring/snap/commit/0022ff03b0ce3f64b7971c559fb0020e17b6a891))
+* **url-translator:** making urlTranslator fully customizable via name and type for all parameters ([f5194f5](https://github.com/searchspring/snap/commit/f5194f53b6d678ef4df1300ff5dab93fda206634))
+
+
+
+
+
 ## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
 
 

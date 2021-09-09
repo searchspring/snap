@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **pagination-store:** fix to setPageSize method to remove the current page ([4996d66](https://github.com/searchspring/snap/commit/4996d6657f31cda1102de2c1df7edde19d4e1b5c))
+
+
+
+
+
 ## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
 
 
