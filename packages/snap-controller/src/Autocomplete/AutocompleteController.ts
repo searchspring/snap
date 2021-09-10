@@ -5,8 +5,8 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
 
-import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { AutocompleteStore, AutocompleteControllerConfig } from '@searchspring/snap-store-mobx';
+import type { BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';

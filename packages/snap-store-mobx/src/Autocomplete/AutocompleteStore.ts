@@ -1,13 +1,16 @@
 import { makeObservable, observable } from 'mobx';
+
+import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { FilterStore, ResultStore, MerchandisingStore, PaginationStore, SortingStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
+import type { AutocompleteControllerConfig, StoreServices } from '../types';
 
 import { StateStore, TermStore, QueryStore, FacetStore, TrendingStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
-	config;
-	services;
-	meta = {};
+	config: AutocompleteControllerConfig;
+	services: StoreServices;
+	meta: MetaResponseModel = {};
 
 	merchandising: MerchandisingStore;
 	search: QueryStore;
@@ -21,7 +24,7 @@ export class AutocompleteStore extends AbstractStore {
 	storage: StorageStore;
 	trending: TrendingStore;
 
-	constructor(config, services: { urlManager: any }) {
+	constructor(config: AutocompleteControllerConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
@@ -91,7 +94,7 @@ export class AutocompleteStore extends AbstractStore {
 		);
 	}
 
-	update(data): void {
+	update(data: AutocompleteResponseModel & { meta: MetaResponseModel }): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 

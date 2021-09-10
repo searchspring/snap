@@ -2,14 +2,15 @@ import { makeObservable, observable } from 'mobx';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { ResultStore } from '../Search/Stores';
 import { ProfileStore } from './Stores';
+import type { RecommendationControllerConfig, StoreServices } from '../types';
 
 export class RecommendationStore extends AbstractStore {
-	services;
+	services: StoreServices;
 	loaded = false;
 	profile: ProfileStore;
 	results: ResultStore;
 
-	constructor(config, services: { urlManager: any }) {
+	constructor(config: RecommendationControllerConfig | Record<string, never>, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {

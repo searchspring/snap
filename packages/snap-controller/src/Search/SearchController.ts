@@ -5,8 +5,8 @@ import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
-import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { SearchStore, SearchControllerConfig } from '@searchspring/snap-store-mobx';
 import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;

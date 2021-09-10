@@ -16,7 +16,7 @@ export function getScriptContext(script: Element, evaluate?: string[]): ContextV
 		throw new Error('getScriptContext second parameter must be an array of strings');
 	}
 
-	const variables = {};
+	const variables: Record<string, unknown> = {};
 
 	// grab all element attributes and put into variables
 	script.getAttributeNames().map((attr) => {

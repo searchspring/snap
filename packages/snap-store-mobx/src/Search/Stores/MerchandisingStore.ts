@@ -1,5 +1,8 @@
 import { observable, makeObservable } from 'mobx';
 
+import type { StoreServices } from '../../types';
+import type { SearchResponseModelMerchandising } from '@searchspring/snapi-types';
+
 enum ContentType {
 	HEADER = 'header',
 	BANNER = 'banner',
@@ -11,7 +14,7 @@ export class MerchandisingStore {
 	redirect = '';
 	content: Partial<Record<ContentType, Content[]>> = {};
 
-	constructor(services, merchData) {
+	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
 		if (merchData) {
 			this.redirect = merchData.redirect || '';
 

@@ -1,23 +1,39 @@
 import { observable, computed, makeObservable } from 'mobx';
 
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { StoreServices } from '../../types';
+import type {
+	MetaResponseModel,
+	MetaResponseModelSortOption,
+	MetaResponseModelSortOptionDirectionEnum,
+	SearchResponseModelSearch,
+	SearchResponseModelSorting,
+} from '@searchspring/snapi-types';
+import { MetaResponseModelSortOptionTypeEnum } from '@searchspring/snapi-types';
+
+interface MetaResponseModelSortOptionMutated extends MetaResponseModelSortOption {
+	active?: boolean;
+	default?: boolean;
+}
+
 export class SortingStore {
 	options: Option[] = [];
 
-	constructor(services, sorting, search, meta) {
+	constructor(services: StoreServices, sorting: SearchResponseModelSorting[], search: SearchResponseModelSearch, meta: MetaResponseModel) {
 		if (services && meta.sortOptions) {
 			const activeSort = sorting && sorting.length && sorting[0];
 
 			this.options = meta.sortOptions
-				.filter((option) => {
+				.filter((option: MetaResponseModelSortOptionMutated) => {
 					if (!search?.query) {
-						return option.type == 'field';
+						return option.type == MetaResponseModelSortOptionTypeEnum.Field;
 					}
 
 					return option;
 				})
-				.map((option, index) => {
+				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
-					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
+					if (activeSort && activeSort.field == option.field) {
 						option.active = true;
 					} else if (!activeSort && index === 0) {
 						option.active = true;
@@ -48,15 +64,15 @@ export class SortingStore {
 
 class Option {
 	active: boolean;
-	default: false;
+	default: boolean;
 	field: string;
 	label: string;
-	direction: string;
-	type: string;
+	direction: MetaResponseModelSortOptionDirectionEnum;
+	type: MetaResponseModelSortOptionTypeEnum;
 	value: string;
-	url;
+	url: UrlManager;
 
-	constructor(services, option) {
+	constructor(services: StoreServices, option) {
 		this.active = option.active;
 		this.default = option.default;
 		this.field = option.field;
