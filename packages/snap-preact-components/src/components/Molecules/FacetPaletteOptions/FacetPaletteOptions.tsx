@@ -5,6 +5,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
+import { filters } from '@searchspring/snap-toolbox';
+
 import { defined } from '../../../utilities';
 import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -132,7 +134,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 						>
 							<div className="ss__facet-palette-options__option__wrapper">
 								<div
-									className={classnames('ss__facet-palette-options__option__palette', `ss__facet-palette-options__option__palette--${value.value}`)}
+									className={classnames(
+										'ss__facet-palette-options__option__palette',
+										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
+									)}
 									css={{ background: value.value }}
 								>
 									{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
