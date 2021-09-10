@@ -17,8 +17,7 @@ export class HybridAPI extends API {
 		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
 		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
 
-		const legacyData = await legacyRequester.getMeta(legacyRequestParameters);
-		return legacyData;
+		return legacyRequester.getMeta(legacyRequestParameters);
 	}
 
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
