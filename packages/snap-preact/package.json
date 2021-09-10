@@ -32,7 +32,7 @@
 		"deepmerge": "^4.2.2"
 	},
 	"devDependencies": {
-		"@types/react": "^17.0.14"
+		"@types/react": "^17.0.20"
 	},
 	"sideEffects": false,
 	"files": [

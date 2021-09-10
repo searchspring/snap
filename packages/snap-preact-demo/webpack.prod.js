@@ -5,15 +5,20 @@ const path = require('path');
 module.exports = merge(common, {
 	mode: 'production',
 	devServer: {
-		https: false,
+		https: true,
 		port: 4444,
-		contentBase: [path.join(__dirname, 'public')],
-		contentBasePublicPath: ['/'],
 		hot: false,
-		publicPath: '/dist/',
-		disableHostCheck: true,
+		allowedHosts: 'all',
 		headers: {
 			'Access-Control-Allow-Origin': '*',
+		},
+		static: {
+			directory: path.join(__dirname, 'public'),
+			publicPath: ['/'],
+			watch: true,
+		},
+		devMiddleware: {
+			publicPath: '/dist/',
 		},
 	},
 });
