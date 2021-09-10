@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **search-request:** add siteId to search request params ([af68f5a](https://github.com/searchspring/snap/commit/af68f5a61bd259bf1ee5244573edc55f710462b7))
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **infinite:** fixing inline banner support of infinite scroll in search controller and store ([62dc80b](https://github.com/searchspring/snap/commit/62dc80b0e36a3c65165a41c48035e87f9f211bc8))
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **search-controller:** fixing lastParam not being set all the time ([84476a2](https://github.com/searchspring/snap/commit/84476a246f74e9a7c6ebf45653f196e1a48798b7))
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **controller:** controller package.json was missing toolbox dependency ([82047bc](https://github.com/searchspring/snap/commit/82047bcc697b53191292ffcfbdc3148a93f4f91b))
+* moving loading completion to 'afterStore' ([c062dfc](https://github.com/searchspring/snap/commit/c062dfc8288445ffe4a1c6923dcf5b552c963595))
+* **search-controller:** preventing search when no params changed since last search ([7f7c606](https://github.com/searchspring/snap/commit/7f7c60610a68941056066da91b46e1f3e28ac22e))
+
+
+### Features
+
+* **abstract-controller:** adding ability to pass parameters to plugins ([6411ece](https://github.com/searchspring/snap/commit/6411ece8b0f3261a4dc2945d9cb2db3b67809ba8))
+* **abstract:** adding id to abstract controller and renaming attachment 'on' -> 'middleware' ([8ff6134](https://github.com/searchspring/snap/commit/8ff613429719ca60d966e752a9c958b463a0a865))
+* **autocomplete-controller:** adding 'beforeSubmit' event ([697b474](https://github.com/searchspring/snap/commit/697b474c2bf7cc555fafbb948377d8a9f23dd9b8))
+* **autocomplete-controller:** adding escKey event handler and refactoring for tabbing support ([23771a7](https://github.com/searchspring/snap/commit/23771a7f505a166a307efeb8f6f6d6af44c0856b))
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 **Note:** Version bump only for package @searchspring/snap-controller

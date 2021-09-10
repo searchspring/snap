@@ -43,11 +43,18 @@ The `pagination` prop specifies if the carousel should display pagination dots.
 <Recommendation controller={controller} pagination={true} />
 ```
 
+### vertical
+The `vertical` prop sets the carousel scroll direction to vertical.
+
+```jsx
+<Recommendation vertical>{children}<Recommendation/>
+```
+
 ### hideButtons
 The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
 
 ```jsx
-<Carousel hideButtons>{children}<Carousel/>
+<Recommendation hideButtons>{children}<Recommendation/>
 ```
 
 ### prevButton

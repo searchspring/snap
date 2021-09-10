@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **pagination-store:** fix to setPageSize method to remove the current page ([4996d66](https://github.com/searchspring/snap/commit/4996d6657f31cda1102de2c1df7edde19d4e1b5c))
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **infinite:** fixing inline banner support of infinite scroll in search controller and store ([62dc80b](https://github.com/searchspring/snap/commit/62dc80b0e36a3c65165a41c48035e87f9f211bc8))
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **querystore:** change to make QueryStore Query url preserve non result limiting urls ([3266bcb](https://github.com/searchspring/snap/commit/3266bcbea9e6b8389249a69b0f3b20c2a964d748))
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

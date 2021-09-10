@@ -19,7 +19,13 @@ import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendation: ({ theme }) => css({}),
+	recommendation: ({ vertical }) =>
+		css({
+			height: vertical ? '100%' : null,
+			'.ss__result__image-wrapper': {
+				height: vertical ? '85%' : null,
+			},
+		}),
 };
 
 export const defaultRecommendationBreakpoints = {
@@ -50,17 +56,26 @@ export const defaultRecommendationBreakpoints = {
 	},
 };
 
+const defaultVerticalRecommendationBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
+	},
+};
+
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: RecommendationProps = {
 		// default props
-		breakpoints: defaultRecommendationBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
+		...globalTheme?.components?.recommendation,
 		...properties,
+		// props
 		...properties.theme?.components?.recommendation,
 	};
 
@@ -77,6 +92,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		disableStyles,
 		style,
 		className,
+		vertical,
 		...additionalProps
 	} = props;
 
@@ -100,6 +116,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			// inherited props
 			...defined({
 				disableStyles,
+				vertical,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -163,10 +180,11 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.recommendation({ theme }), style];
+		styling.css = [CSS.recommendation({ vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		(children || results?.length) && (
 			<CacheProvider>
@@ -200,6 +218,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={pagination}
+						{...subProps.carousel}
 						{...additionalProps}
 					>
 						{children
@@ -222,6 +241,7 @@ export interface RecommendationProps extends ComponentProps {
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: JSX.Element[];
+	vertical?: boolean;
 }
 
 interface RecommendationSubProps {

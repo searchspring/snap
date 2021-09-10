@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **(carousel/recommendation)-component:** adding support for vertical pagination ([eb24284](https://github.com/searchspring/snap/commit/eb24284a0ea79a1bd9fa325f6a054e05f26eaefb))
+* **facet-slider-component:** adjust margin to prevent overflow scroll ([d6a89dd](https://github.com/searchspring/snap/commit/d6a89dd1ff4d4329818bd33284349b6034e1a929))
+* **facet-slider-component:** handling overflow with all prop options ([952b261](https://github.com/searchspring/snap/commit/952b2610bff32bde966214f8b69ebc95396ded68))
+* **facet-slider-component:** small change to remove min-height ([2fe3ed8](https://github.com/searchspring/snap/commit/2fe3ed81435240d625345218babb9aa32ae16383))
+* **facetslider.tsx:** bugfix for slider handle labels overflowing when handle is at the ends of rail ([3c43b4c](https://github.com/searchspring/snap/commit/3c43b4c94d4497b27eb10428d3bccc01924947b5))
+* **facetslider:** increase label spacing if showTicks enabled ([ef0be4f](https://github.com/searchspring/snap/commit/ef0be4f42f3958f5f22a644ee44a01ffeab328d0))
+* **recommendation.tsx:** recommendation component was not using the global theme ([ce5da93](https://github.com/searchspring/snap/commit/ce5da938d4f112909e7947c69ced024f51aedcf8))
+* **select.tsx:** add support for native styling ([81228fb](https://github.com/searchspring/snap/commit/81228fbd8aae41485b7a445531ce4c8b5019d46d))
+
+
+### Features
+
+* **carousel.tsx:** new feature to support vertical carousels ([466d211](https://github.com/searchspring/snap/commit/466d21147b4ded1d5c4061e12305f6f326b590fe))
+* **facetslider.tsx:** prop for sticky handle labels ([c6974f0](https://github.com/searchspring/snap/commit/c6974f0446d177a39e8586c74a99e6ac1232ee0a))
+* **theme prop:** theme prop refactor ([641fc44](https://github.com/searchspring/snap/commit/641fc44d2df1efd8353e541bb880b08cb21c2a2e))
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **inlinebanner:** removing unnecessary max-width from styles ([d23e81d](https://github.com/searchspring/snap/commit/d23e81d761c734ff9cfacbe8744115dc4318dcc6))
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **autocomplete-component:** moving facetSlot out of facetsToShow logic ([27ce891](https://github.com/searchspring/snap/commit/27ce891d00af2c971d0934d215937b2bae167443))
+* **carousel-component:** restoring 'additionalProps' that was removed previously for swiper props ([2d25032](https://github.com/searchspring/snap/commit/2d2503263ce7ec575d91a52d00bb9998dc35e036))
+
+
+### Features
+
+* **autocomplete-component:** adding resultsSlot and noResultsSlot - fixing bug with dupe terms elem ([47aff58](https://github.com/searchspring/snap/commit/47aff58aa75f8c27db9c8ab38dde55c3159885c6))
+* **carousel:** refactor of carousel and recommendations components with test and doc updates ([2718f57](https://github.com/searchspring/snap/commit/2718f572a109339e36d59b2bea8ce233e09c2abb))
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 

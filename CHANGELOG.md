@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* **(carousel/recommendation)-component:** adding support for vertical pagination ([eb24284](https://github.com/searchspring/snap/commit/eb24284a0ea79a1bd9fa325f6a054e05f26eaefb))
+* **facet-slider-component:** adjust margin to prevent overflow scroll ([d6a89dd](https://github.com/searchspring/snap/commit/d6a89dd1ff4d4329818bd33284349b6034e1a929))
+* **facet-slider-component:** handling overflow with all prop options ([952b261](https://github.com/searchspring/snap/commit/952b2610bff32bde966214f8b69ebc95396ded68))
+* **facet-slider-component:** small change to remove min-height ([2fe3ed8](https://github.com/searchspring/snap/commit/2fe3ed81435240d625345218babb9aa32ae16383))
+* **facetslider.tsx:** bugfix for slider handle labels overflowing when handle is at the ends of rail ([3c43b4c](https://github.com/searchspring/snap/commit/3c43b4c94d4497b27eb10428d3bccc01924947b5))
+* **facetslider:** increase label spacing if showTicks enabled ([ef0be4f](https://github.com/searchspring/snap/commit/ef0be4f42f3958f5f22a644ee44a01ffeab328d0))
+* **pagination-store:** fix to setPageSize method to remove the current page ([4996d66](https://github.com/searchspring/snap/commit/4996d6657f31cda1102de2c1df7edde19d4e1b5c))
+* **recommendation.tsx:** recommendation component was not using the global theme ([ce5da93](https://github.com/searchspring/snap/commit/ce5da938d4f112909e7947c69ced024f51aedcf8))
+* **search-request:** add siteId to search request params ([af68f5a](https://github.com/searchspring/snap/commit/af68f5a61bd259bf1ee5244573edc55f710462b7))
+* **select.tsx:** add support for native styling ([81228fb](https://github.com/searchspring/snap/commit/81228fbd8aae41485b7a445531ce4c8b5019d46d))
+
+
+### Features
+
+* **carousel.tsx:** new feature to support vertical carousels ([466d211](https://github.com/searchspring/snap/commit/466d21147b4ded1d5c4061e12305f6f326b590fe))
+* **facetslider.tsx:** prop for sticky handle labels ([c6974f0](https://github.com/searchspring/snap/commit/c6974f0446d177a39e8586c74a99e6ac1232ee0a))
+* **theme prop:** theme prop refactor ([641fc44](https://github.com/searchspring/snap/commit/641fc44d2df1efd8353e541bb880b08cb21c2a2e))
+* **url-translator:** changes to translator - urlRoot params, value-less params and settings changes ([0022ff0](https://github.com/searchspring/snap/commit/0022ff03b0ce3f64b7971c559fb0020e17b6a891))
+* **url-translator:** making urlTranslator fully customizable via name and type for all parameters ([f5194f5](https://github.com/searchspring/snap/commit/f5194f53b6d678ef4df1300ff5dab93fda206634))
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **client-translator:** preventing NaN on price core fields when undefined ([f5ece91](https://github.com/searchspring/snap/commit/f5ece9195affedf565452f46ee3b0e9660a646f3))
+* **formatnumber:** fixing case of NaN and no longer returning input when not a number ([9e68eff](https://github.com/searchspring/snap/commit/9e68eff2af7e7e393f11c02556d0a1f0bd0b42ee))
+* **infinite:** fixing inline banner support of infinite scroll in search controller and store ([62dc80b](https://github.com/searchspring/snap/commit/62dc80b0e36a3c65165a41c48035e87f9f211bc8))
+* **inlinebanner:** removing unnecessary max-width from styles ([d23e81d](https://github.com/searchspring/snap/commit/d23e81d761c734ff9cfacbe8744115dc4318dcc6))
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **search-controller:** fixing lastParam not being set all the time ([84476a2](https://github.com/searchspring/snap/commit/84476a246f74e9a7c6ebf45653f196e1a48798b7))
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **autocomplete-component:** moving facetSlot out of facetsToShow logic ([27ce891](https://github.com/searchspring/snap/commit/27ce891d00af2c971d0934d215937b2bae167443))
+* **carousel-component:** restoring 'additionalProps' that was removed previously for swiper props ([2d25032](https://github.com/searchspring/snap/commit/2d2503263ce7ec575d91a52d00bb9998dc35e036))
+* **controller:** controller package.json was missing toolbox dependency ([82047bc](https://github.com/searchspring/snap/commit/82047bcc697b53191292ffcfbdc3148a93f4f91b))
+* moving loading completion to 'afterStore' ([c062dfc](https://github.com/searchspring/snap/commit/c062dfc8288445ffe4a1c6923dcf5b552c963595))
+* **querystore:** change to make QueryStore Query url preserve non result limiting urls ([3266bcb](https://github.com/searchspring/snap/commit/3266bcbea9e6b8389249a69b0f3b20c2a964d748))
+* **search-controller:** preventing search when no params changed since last search ([7f7c606](https://github.com/searchspring/snap/commit/7f7c60610a68941056066da91b46e1f3e28ac22e))
+* **urltranslator:** removing console.log ([90e22f4](https://github.com/searchspring/snap/commit/90e22f413ae56e3c3f26a12e9dc2971a84f9d425))
+
+
+### Features
+
+* **abstract-controller:** adding ability to pass parameters to plugins ([6411ece](https://github.com/searchspring/snap/commit/6411ece8b0f3261a4dc2945d9cb2db3b67809ba8))
+* **abstract:** adding id to abstract controller and renaming attachment 'on' -> 'middleware' ([8ff6134](https://github.com/searchspring/snap/commit/8ff613429719ca60d966e752a9c958b463a0a865))
+* **autocomplete-component:** adding resultsSlot and noResultsSlot - fixing bug with dupe terms elem ([47aff58](https://github.com/searchspring/snap/commit/47aff58aa75f8c27db9c8ab38dde55c3159885c6))
+* **autocomplete-controller:** adding 'beforeSubmit' event ([697b474](https://github.com/searchspring/snap/commit/697b474c2bf7cc555fafbb948377d8a9f23dd9b8))
+* **autocomplete-controller:** adding escKey event handler and refactoring for tabbing support ([23771a7](https://github.com/searchspring/snap/commit/23771a7f505a166a307efeb8f6f6d6af44c0856b))
+* **carousel:** refactor of carousel and recommendations components with test and doc updates ([2718f57](https://github.com/searchspring/snap/commit/2718f572a109339e36d59b2bea8ce233e09c2abb))
+* **urlmanager:** adding global state to allow parameters to always be generated ([e5067e2](https://github.com/searchspring/snap/commit/e5067e29a9bb5e3c9edad5867d20e14373c6e7bc))
+* **urltranslator:** adding to snap-preact and urlTranslator the ability to customize parameters ([028929c](https://github.com/searchspring/snap/commit/028929c136ca95e0c55c03319cde64199a97788f))
+
+
+### Reverts
+
+* **gitignore:** removing the ignore of package docs to ensure docs branch has files ([13fa1aa](https://github.com/searchspring/snap/commit/13fa1aa9adc6ae18777c2c058d97223603fb493b))
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 

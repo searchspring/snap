@@ -15,45 +15,74 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	carousel: ({ theme }) =>
+	carousel: ({ theme, vertical }) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
+			maxHeight: vertical ? '100%' : null,
 			margin: 0,
 			padding: 0,
 			overflow: 'hidden',
-			'& .swiper-pagination-bullet-active': {
+
+			'&.ss__carousel-vertical': {
+				flexDirection: 'column',
+				'.swiper-slide': {
+					/* Center slides vertically */
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+				},
+
+				'.swiper-container': {
+					flexDirection: 'row',
+				},
+
+				'.swiper-pagination': {
+					width: 'auto',
+					order: 0,
+					flexDirection: 'column',
+					margin: 0,
+					padding: '10px',
+				},
+
+				'.swiper-pagination-bullet': {
+					margin: '4px',
+				},
+			},
+			'.swiper-pagination-bullet-active': {
 				background: theme?.colors?.primary || 'inherit',
 			},
-			'& .ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 			},
-			'& .ss__carousel__next, .ss__carousel__prev': {
+			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
 				cursor: 'pointer',
+				lineHeight: 0,
 
 				'&.swiper-button-disabled': {
 					opacity: '0.3',
 					cursor: 'default',
 				},
 			},
-			'& .swiper-container': {
+			'.swiper-container': {
 				display: 'flex',
 				flexDirection: 'column',
 			},
-			'& .swiper-wrapper': {
+			'.swiper-wrapper': {
 				order: 0,
 			},
-			'& .swiper-pagination': {
+			'.swiper-pagination': {
+				display: 'flex',
+				justifyContent: 'center',
 				marginTop: '10px',
 				width: '100%',
 				order: 1,
-				textAlign: 'center',
 				transition: '.3s opacity',
 			},
-			'& .swiper-pagination-bullet': {
+			'.swiper-pagination-bullet': {
 				width: '8px',
 				height: '8px',
 				display: 'inline-block',
@@ -98,13 +127,21 @@ export const defaultCarouselBreakpoints = {
 	},
 };
 
+const defaultVerticalCarouselBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
+	},
+};
+
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
 	const props: CarouselProps = {
 		// default props
-		breakpoints: defaultCarouselBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
@@ -122,6 +159,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		nextButton,
 		prevButton,
 		hideButtons,
+		vertical,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -155,14 +193,18 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.carousel({ theme }), style];
+		styling.css = [CSS.carousel({ theme, vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 	return (
 		children && (
 			<CacheProvider>
-				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__carousel', className)}>
+				<div
+					ref={rootComponentRef as React.RefObject<HTMLDivElement>}
+					{...styling}
+					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
+				>
 					{!hideButtons && (
 						<div className="ss__carousel__prev-wrapper">
 							<div
@@ -170,7 +212,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
 								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
 							>
-								{prevButton || <Icon icon="angle-left" {...subProps.icon} />}
+								{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
 							</div>
 						</div>
 					)}
@@ -189,6 +231,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
+						direction={vertical ? 'vertical' : 'horizontal'}
 						loop={loop}
 						breakpoints={breakpoints}
 						pagination={
@@ -212,7 +255,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
 								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
 							>
-								{nextButton || <Icon icon="angle-right" {...subProps.icon} />}
+								{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
 							</div>
 						</div>
 					)}
@@ -228,6 +271,7 @@ export interface CarouselProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
+	vertical?: boolean;
 	pagination?: boolean;
 	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;

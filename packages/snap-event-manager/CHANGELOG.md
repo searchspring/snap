@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+**Note:** Version bump only for package @searchspring/snap-event-manager
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 **Note:** Version bump only for package @searchspring/snap-event-manager

@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+## [0.6.2](https://github.com/searchspring/snap/compare/v0.6.1...v0.6.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **formatnumber:** fixing case of NaN and no longer returning input when not a number ([9e68eff](https://github.com/searchspring/snap/commit/9e68eff2af7e7e393f11c02556d0a1f0bd0b42ee))
+
+
+
+
+
+## [0.6.1](https://github.com/searchspring/snap/compare/v0.6.0...v0.6.1) (2021-09-02)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
+# [0.6.0](https://github.com/searchspring/snap/compare/v0.5.6...v0.6.0) (2021-09-01)
+
+**Note:** Version bump only for package @searchspring/snap-toolbox
+
+
+
+
+
 ## [0.5.6](https://github.com/searchspring/snap/compare/v0.5.5...v0.5.6) (2021-08-31)
 
 **Note:** Version bump only for package @searchspring/snap-toolbox
