@@ -5813,7 +5813,7 @@
 			var preact_module = __webpack_require__(33847),
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
-				FacetPaletteOptions = __webpack_require__(40574),
+				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
@@ -6202,7 +6202,7 @@
 				},
 			];
 		},
-		40574: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		25774: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { m: () => FacetPaletteOptions });
 			__webpack_require__(43105),
@@ -6211,14 +6211,20 @@
 				__webpack_require__(6886),
 				__webpack_require__(43450),
 				__webpack_require__(72508);
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
-				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
+			var emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				es = __webpack_require__(69038);
+			__webpack_require__(45794), __webpack_require__(85940), __webpack_require__(77950);
+			function handleize(input) {
+				if ('string' != typeof input) return input;
+				var handleized = input.toLowerCase();
+				return (handleized = (handleized = handleized.replace(/[^\w\s]/g, '').trim()).replace(/\s/g, '-'));
+			}
+			var defined = __webpack_require__(27193),
+				Icon = __webpack_require__(6572),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (__assign =
 						Object.assign ||
@@ -6233,7 +6239,7 @@
 						columns = _a.columns,
 						gapSize = _a.gapSize,
 						theme = _a.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+					return (0, emotion_react_browser_esm.iv)({
 						display: 'grid',
 						gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
 						gap: gapSize,
@@ -6284,12 +6290,12 @@
 						},
 					});
 				},
-				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				FacetPaletteOptions = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -6321,7 +6327,7 @@
 										{ className: 'ss__facet-palette-options__icon' },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
+									(0, defined.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
 								{ theme: props.theme }
 							),
@@ -6330,19 +6336,19 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
 						(null == values ? void 0 : values.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								(0, emotion_react_browser_esm.tZ)(
 									'div',
-									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className) }),
+									__assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
 									values.map(function (value) {
 										var _a;
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+										return (0, emotion_react_browser_esm.tZ)(
 											'a',
 											__assign(
 												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
+													className: classnames_default()('ss__facet-palette-options__option', {
 														'ss__facet-palette-options__option--filtered': value.filtered,
 													}),
 													onClick,
@@ -6354,32 +6360,22 @@
 												valueProps,
 												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 											),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											(0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__facet-palette-options__option__wrapper' },
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												(0, emotion_react_browser_esm.tZ)(
 													'div',
 													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+														className: classnames_default()(
 															'ss__facet-palette-options__option__palette',
-															'ss__facet-palette-options__option__palette--' + value.value
+															'ss__facet-palette-options__option__palette--' + handleize(value.value)
 														),
 														css: { background: value.value },
 													},
-													!hideIcon &&
-														value.filtered &&
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
-															__assign({}, subProps.icon)
-														)
+													!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
 												)
 											),
-											!hideLabel &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													'span',
-													{ className: 'ss__facet-palette-options__option__value' },
-													value.label
-												)
+											!hideLabel && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
 										);
 									})
 								)
@@ -11787,7 +11783,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
 				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1492),
 				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(75999),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(40574),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(25774),
 				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(68978),
 				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(20682),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
@@ -20558,6 +20554,22 @@
 					}
 					return (
 						Hybrid_extends(HybridAPI, _super),
+						(HybridAPI.prototype.getMeta = function (requestParameters) {
+							return Hybrid_awaiter(this, void 0, void 0, function () {
+								var legacyRequestParameters, apiHost;
+								return Hybrid_generator(this, function (_a) {
+									return (
+										(apiHost = 'https://' + (legacyRequestParameters = requestParameters).siteId + '.a.searchspring.io'),
+										[
+											2,
+											new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() })).getMeta(
+												legacyRequestParameters
+											),
+										]
+									);
+								});
+							});
+						}),
 						(HybridAPI.prototype.getSearch = function (requestParameters) {
 							return Hybrid_awaiter(this, void 0, void 0, function () {
 								var legacyRequestParameters, apiHost;
@@ -21100,7 +21112,7 @@
 										siteId: this.globals.siteId,
 									})
 								),
-								meta: new LegacyAPI(
+								meta: new HybridAPI(
 									new ApiConfiguration({
 										basePath: null === (_d = null === (_c = this.config.meta) || void 0 === _c ? void 0 : _c.api) || void 0 === _d ? void 0 : _d.host,
 										siteId: this.globals.siteId,
@@ -23948,7 +23960,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.0' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.1' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -23975,7 +23987,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.1');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24576,7 +24588,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.7.0]',
+								text: '[0.7.1]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
