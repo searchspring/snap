@@ -1,4 +1,4 @@
-/*! For license information please see 172.590ed309.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 172.6e5c822a039ef17ef6fd.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -26,7 +26,7 @@
 				__webpack_require__(27233),
 				__webpack_require__(73439),
 				__webpack_require__(34769);
-			var compat_module = __webpack_require__(66741),
+			var react = __webpack_require__(2784),
 				esm = __webpack_require__(87537),
 				dist_esm = __webpack_require__(28493),
 				global_window = __webpack_require__(35048),
@@ -125,7 +125,7 @@
 							  )
 							: _objectSpread({}, properties, { className: createClassNameString(properties.className) }),
 						children = childrenCreator(node.children);
-					return compat_module.ZP.createElement(TagName, (0, esm_extends.Z)({ key }, props), children);
+					return react.createElement(TagName, (0, esm_extends.Z)({ key }, props), children);
 				}
 			}
 			var newLineRegex = /\n/g;
@@ -137,7 +137,7 @@
 					_ref2$numberStyle = _ref2.numberStyle,
 					numberStyle = void 0 === _ref2$numberStyle ? {} : _ref2$numberStyle,
 					startingLineNumber = _ref2.startingLineNumber;
-				return compat_module.ZP.createElement(
+				return react.createElement(
 					'code',
 					{ style: Object.assign({}, codeStyle, containerStyle) },
 					(function getAllLineNumbers(_ref) {
@@ -146,7 +146,7 @@
 							style = _ref.style;
 						return lines.map(function (_, i) {
 							var number = i + startingLineNumber;
-							return compat_module.ZP.createElement(
+							return react.createElement(
 								'span',
 								{
 									key: 'line-'.concat(i),
@@ -382,7 +382,7 @@
 							]);
 						astGenerator = astGenerator || defaultAstGenerator;
 						var allLineNumbers = showLineNumbers
-								? compat_module.ZP.createElement(AllLineNumbers, {
+								? react.createElement(AllLineNumbers, {
 										containerStyle: lineNumberContainerStyle,
 										codeStyle: codeTagProps.style || {},
 										numberStyle: lineNumberStyle,
@@ -398,8 +398,7 @@
 										className: rest.className ? ''.concat(generatorClassName, ' ').concat(rest.className) : generatorClassName,
 										style: Object.assign({}, customStyle),
 								  });
-						if (!astGenerator)
-							return compat_module.ZP.createElement(PreTag, preProps, allLineNumbers, compat_module.ZP.createElement(CodeTag, codeTagProps, code));
+						if (!astGenerator) return react.createElement(PreTag, preProps, allLineNumbers, react.createElement(CodeTag, codeTagProps, code));
 						(wrapLines = !(!renderer || void 0 !== wrapLines) || wrapLines), (renderer = renderer || defaultRenderer);
 						var defaultCodeValue = [{ type: 'text', value: code }],
 							codeTree = (function getCodeTree(_ref6) {
@@ -434,10 +433,10 @@
 							codeTree.value.length + startingLineNumber,
 							lineNumberStyle
 						);
-						return compat_module.ZP.createElement(
+						return react.createElement(
 							PreTag,
 							preProps,
-							compat_module.ZP.createElement(
+							react.createElement(
 								CodeTag,
 								codeTagProps,
 								!showInlineLineNumbers && allLineNumbers,
@@ -457,15 +456,18 @@
 					return (0, ts_dedent_esm.C)(code);
 				});
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			function syntaxhighlighter_objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
@@ -633,7 +635,7 @@
 				Scroller = (0, dist_esm.zo)(function (_ref6) {
 					var children = _ref6.children,
 						className = _ref6.className;
-					return compat_module.ZP.createElement(ScrollArea.x, { horizontal: !0, vertical: !0, className }, children);
+					return react.createElement(ScrollArea.x, { horizontal: !0, vertical: !0, className }, children);
 				})(
 					{ position: 'relative' },
 					function (_ref7) {
@@ -677,16 +679,16 @@
 						]);
 					if ('string' != typeof children || !children.trim()) return null;
 					var highlightableCode = format ? formatter(children) : children.trim(),
-						_useState2 = _slicedToArray((0, compat_module.eJ)(!1), 2),
+						_useState2 = _slicedToArray((0, react.useState)(!1), 2),
 						copied = _useState2[0],
 						setCopied = _useState2[1];
-					return compat_module.ZP.createElement(
+					return react.createElement(
 						Wrapper,
 						{ bordered, padded, className },
-						compat_module.ZP.createElement(
+						react.createElement(
 							Scroller,
 							null,
-							compat_module.ZP.createElement(
+							react.createElement(
 								prism_light,
 								_extends(
 									{
@@ -705,7 +707,7 @@
 							)
 						),
 						copyable
-							? compat_module.ZP.createElement(ActionBar.o, {
+							? react.createElement(ActionBar.o, {
 									actionItems: [
 										{
 											title: copied ? 'Copied' : 'Copy',
@@ -718,7 +720,7 @@
 																	return setCopied(!1);
 																}, 1500);
 														})
-														.catch(esm.kg.error);
+														.catch(esm.logger.error);
 											},
 										},
 									],
@@ -1463,7 +1465,7 @@
 		70521: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var normalize = __webpack_require__(2939),
-				DefinedInfo = __webpack_require__(54688),
+				DefinedInfo = __webpack_require__(80441),
 				Info = __webpack_require__(9975);
 			module.exports = function find(schema, value) {
 				var normal = normalize(value),
@@ -1885,7 +1887,7 @@
 			'use strict';
 			var normalize = __webpack_require__(2939),
 				Schema = __webpack_require__(74362),
-				DefinedInfo = __webpack_require__(54688);
+				DefinedInfo = __webpack_require__(80441);
 			module.exports = function create(definition) {
 				var prop,
 					info,
@@ -1905,7 +1907,7 @@
 				return new Schema(property, normal, space);
 			};
 		},
-		54688: (module, __unused_webpack_exports, __webpack_require__) => {
+		80441: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var Info = __webpack_require__(9975),
 				types = __webpack_require__(87311);

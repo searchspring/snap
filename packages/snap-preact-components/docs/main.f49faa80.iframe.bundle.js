@@ -1,40 +1,6 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
-		535: (module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Z: () => __WEBPACK_DEFAULT_EXPORT__ });
-			var _node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ =
-					__webpack_require__(20184),
-				_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default =
-					__webpack_require__.n(
-						_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__
-					),
-				_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ =
-					__webpack_require__(81969),
-				___CSS_LOADER_EXPORT___ = __webpack_require__.n(
-					_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__
-				)()(
-					_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()
-				);
-			___CSS_LOADER_EXPORT___.push([
-				module.id,
-				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
-				'',
-				{
-					version: 3,
-					sources: ['webpack://./.storybook/styles.css'],
-					names: [],
-					mappings:
-						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE',
-					sourcesContent: [
-						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
-					],
-					sourceRoot: '',
-				},
-			]);
-			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
-		},
 		74442: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -50,15 +16,18 @@
 				Badge = __webpack_require__(93607),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -123,13 +92,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Badge_stories = {
 				title: 'Atoms/Badge',
@@ -187,13 +159,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_badge = function badge(_a) {
 					var position = _a.position;
@@ -253,13 +228,16 @@
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_breadcrumbs = function breadcrumbs() {
 					return (0, emotion_react_browser_esm.iv)({
@@ -315,15 +293,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -371,13 +352,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Breadcrumbs_stories_assign = function () {
-				return (Breadcrumbs_stories_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(Breadcrumbs_stories_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					Breadcrumbs_stories_assign.apply(this, arguments)
+				);
 			};
 			const Breadcrumbs_stories = {
 				title: 'Atoms/Breadcrumbs',
@@ -433,15 +417,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -539,13 +526,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Button_stories = {
 				title: 'Atoms/Button',
@@ -612,13 +602,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_button = function button(_a) {
 					var _b,
@@ -710,15 +703,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -879,13 +875,16 @@
 			MDXContent.isMDXComponent = !0;
 			var Badge = __webpack_require__(93607),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				};
 			const Dropdown_stories = {
 				title: 'Atoms/Dropdown',
@@ -982,13 +981,16 @@
 				cache = __webpack_require__(79367);
 			var cloneWithProps = __webpack_require__(64170),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_dropdown = function dropdown(_a) {
 					var disableOverlay = _a.disableOverlay;
@@ -1111,19 +1113,22 @@
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
 				emotion_react_browser_esm = __webpack_require__(28165),
-				formatNumber = __webpack_require__(96006),
+				formatNumber = __webpack_require__(49807),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_formattedNumber = function formattedNumber() {
 					return (0, emotion_react_browser_esm.iv)({});
@@ -1174,15 +1179,18 @@
 			var componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -1330,13 +1338,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var FormattedNumber_stories_assign = function () {
-				return (FormattedNumber_stories_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(FormattedNumber_stories_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					FormattedNumber_stories_assign.apply(this, arguments)
+				);
 			};
 			const FormattedNumber_stories = {
 				title: 'Atoms/FormattedNumber',
@@ -1438,15 +1449,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -1525,13 +1539,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
@@ -1640,13 +1657,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				_paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(86285),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_icon = function icon(_a) {
 					var _b,
@@ -1806,15 +1826,18 @@
 				searchResponse = __webpack_require__(53083),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -1967,13 +1990,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Image_stories = {
 				title: 'Atoms/Image',
@@ -2040,13 +2066,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png',
 				CSS_image = function image(_a) {
@@ -2143,13 +2172,16 @@
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS = {
 					loadingBar: function loadingBar(_a) {
@@ -2235,15 +2267,18 @@
 				blocks = __webpack_require__(63255),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -2293,13 +2328,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var LoadingBar_stories_assign = function () {
-				return (LoadingBar_stories_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(LoadingBar_stories_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					LoadingBar_stories_assign.apply(this, arguments)
+				);
 			};
 			const LoadingBar_stories = {
 				title: 'Atoms/LoadingBar',
@@ -2374,13 +2412,16 @@
 				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(37990),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -2620,13 +2661,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_banner = function banner() {
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
@@ -2699,13 +2743,16 @@
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -2909,13 +2956,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79367),
 				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20874),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_inlineBanner = function inlineBanner(_a) {
 					var width = _a.width;
@@ -2983,15 +3033,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -3046,13 +3099,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Overlay_stories = {
 				title: 'Atoms/Overlay',
@@ -3104,13 +3160,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_overlay = function overlay(_a) {
 					var color = _a.color,
@@ -3182,19 +3241,22 @@
 			__webpack_require__(43105), __webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Price = __webpack_require__(92246),
+				Price = __webpack_require__(99457),
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -3254,13 +3316,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Price_stories = {
 				title: 'Atoms/Price',
@@ -3342,39 +3407,33 @@
 			var CustomCurrency = Template.bind({});
 			CustomCurrency.args = { value: 999.99, symbol: ' €', thousandsSeparator: '.', decimalSeparator: ',', symbolAfter: !0 };
 		},
-		92246: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		99457: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { t: () => Price });
 			__webpack_require__(43105);
-			var preact_module = __webpack_require__(33847),
-				formatNumber = __webpack_require__(96006),
+			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33847),
+				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(55858),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
-				};
-			var emotion_react_browser_esm = __webpack_require__(28165),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367),
-				Price_assign = function () {
-					return (Price_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_price = function price(_a) {
 					var _b,
 						theme = _a.theme;
-					return (0, emotion_react_browser_esm.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
 						color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
 						'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
 					});
@@ -3383,11 +3442,11 @@
 				var _a,
 					_b,
 					_c,
-					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
-					theme = Price_assign(Price_assign({}, globalTheme), properties.theme),
-					props = Price_assign(
-						Price_assign(
-							Price_assign(
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.u)(),
+					theme = __assign(__assign({}, globalTheme), properties.theme),
+					props = __assign(
+						__assign(
+							__assign(
 								{
 									symbol: '$',
 									decimalPlaces: 2,
@@ -3415,21 +3474,27 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
-					formattedPrice = (function currency(input, opts) {
-						var defaultOptions = __assign({ symbol: '$', thousandsSeparator: ',', decimalPlaces: 2 }, opts);
-						return (0, formatNumber.u)(input, defaultOptions);
-					})(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
+					formattedPrice = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_5__.A(value, {
+						symbol,
+						decimalPlaces,
+						padDecimalPlaces,
+						thousandsSeparator,
+						decimalSeparator,
+						symbolAfter,
+					}),
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_price({ theme }), style]),
 					raw
-						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedPrice)
-						: (0, emotion_react_browser_esm.tZ)(
-								cache.n,
+						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null, formattedPrice)
+						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
 								null,
-								(0, emotion_react_browser_esm.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
 									'span',
-									Price_assign({}, styling, { className: classnames_default()('ss__price', { 'ss__price--strike': lineThrough }, className) }),
+									__assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__price', { 'ss__price--strike': lineThrough }, className),
+									}),
 									formattedPrice
 								)
 						  )
@@ -3463,15 +3528,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -3686,13 +3754,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const Carousel_stories = {
 				title: 'Molecules/Carousel',
@@ -3811,20 +3882,23 @@
 				swiper_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(18491),
 				swiper_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(92718),
 				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(13701),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__ = (__webpack_require__(26242), __webpack_require__(6572)),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__ = (__webpack_require__(21547), __webpack_require__(6572)),
 				swiper_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(83028),
 				swiper_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(98395),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__rest = function (s, e) {
 					var t = {};
@@ -4066,15 +4140,18 @@
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -4183,13 +4260,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
@@ -4274,13 +4354,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(79367),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(6572),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_checkbox = function checkbox(_a) {
 					var _b,
@@ -4425,15 +4508,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -4551,13 +4637,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -4767,13 +4856,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_grid = function grid(_a) {
 					var _b,
@@ -4907,15 +4999,18 @@
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -4971,13 +5066,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -5172,13 +5270,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_hierarchy = function hierarchy(_a) {
 					var _b,
@@ -5316,15 +5417,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -5454,13 +5558,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -5672,13 +5779,16 @@
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_Molecules_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(95064),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_list = function list(_a) {
 					var _b,
@@ -5813,20 +5923,23 @@
 			var preact_module = __webpack_require__(33847),
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
-				FacetPaletteOptions = __webpack_require__(25774),
+				FacetPaletteOptions = __webpack_require__(40574),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -5992,13 +6105,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -6202,7 +6318,7 @@
 				},
 			];
 		},
-		25774: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		40574: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { m: () => FacetPaletteOptions });
 			__webpack_require__(43105),
@@ -6211,35 +6327,33 @@
 				__webpack_require__(6886),
 				__webpack_require__(43450),
 				__webpack_require__(72508);
-			var emotion_react_browser_esm = __webpack_require__(28165),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(69038);
-			__webpack_require__(45794), __webpack_require__(85940), __webpack_require__(77950);
-			function handleize(input) {
-				if ('string' != typeof input) return input;
-				var handleized = input.toLowerCase();
-				return (handleized = (handleized = handleized.replace(/[^\w\s]/g, '').trim()).replace(/\s/g, '-'));
-			}
-			var defined = __webpack_require__(27193),
-				Icon = __webpack_require__(6572),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367),
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
+				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(34831),
+				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6572),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_palette = function palette(_a) {
 					var _b,
 						columns = _a.columns,
 						gapSize = _a.gapSize,
 						theme = _a.theme;
-					return (0, emotion_react_browser_esm.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
 						display: 'grid',
 						gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
 						gap: gapSize,
@@ -6290,12 +6404,12 @@
 						},
 					});
 				},
-				FacetPaletteOptions = (0, es.Pi)(function (properties) {
+				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -6327,7 +6441,7 @@
 										{ className: 'ss__facet-palette-options__icon' },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
 									),
-									(0, defined.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
 								{ theme: props.theme }
 							),
@@ -6336,19 +6450,19 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
 						(null == values ? void 0 : values.length) &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
 								null,
-								(0, emotion_react_browser_esm.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 									'div',
-									__assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
+									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className) }),
 									values.map(function (value) {
 										var _a;
-										return (0, emotion_react_browser_esm.tZ)(
+										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'a',
 											__assign(
 												{
-													className: classnames_default()('ss__facet-palette-options__option', {
+													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
 														'ss__facet-palette-options__option--filtered': value.filtered,
 													}),
 													onClick,
@@ -6360,22 +6474,32 @@
 												valueProps,
 												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 											),
-											(0, emotion_react_browser_esm.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 												'div',
 												{ className: 'ss__facet-palette-options__option__wrapper' },
-												(0, emotion_react_browser_esm.tZ)(
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 													'div',
 													{
-														className: classnames_default()(
+														className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
 															'ss__facet-palette-options__option__palette',
-															'ss__facet-palette-options__option__palette--' + handleize(value.value)
+															'ss__facet-palette-options__option__palette--' + _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_12__.v(value.value)
 														),
 														css: { background: value.value },
 													},
-													!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
+													!hideIcon &&
+														value.filtered &&
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
+															__assign({}, subProps.icon)
+														)
 												)
 											),
-											!hideLabel && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
+											!hideLabel &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+													'span',
+													{ className: 'ss__facet-palette-options__option__value' },
+													value.label
+												)
 										);
 									})
 								)
@@ -6395,15 +6519,18 @@
 				searchResponse = __webpack_require__(53083),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -6628,13 +6755,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
 			};
 			const FacetSlider_stories = {
 				title: 'Molecules/FacetSlider',
@@ -6777,13 +6907,16 @@
 				return o.join('');
 			}
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_facetSlider = function facetSlider(_a) {
 					var _b,
@@ -7061,15 +7194,18 @@
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -7182,13 +7318,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -7413,13 +7552,16 @@
 				_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(60295),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6572),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_filter = function filter() {
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({
@@ -7549,13 +7691,16 @@
 				defined = __webpack_require__(27193),
 				Icon = __webpack_require__(6572),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_pagination = function pagination(_a) {
 					var _b,
@@ -7714,15 +7859,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -7941,13 +8089,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Pagination_stories_assign = function () {
-					return (Pagination_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Pagination_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Pagination_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -8175,21 +8326,24 @@
 				__webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Result = __webpack_require__(23267),
+				Result = __webpack_require__(48001),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -8366,13 +8520,16 @@
 			MDXContent.isMDXComponent = !0;
 			var types = __webpack_require__(20874),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -8605,35 +8762,38 @@
 			]),
 				(truncateTitle.args = { truncateTitle: { limit: 5, append: '...' } });
 		},
-		23267: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		48001: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { x: () => Result });
 			__webpack_require__(43105), __webpack_require__(26936);
-			var preact_module = __webpack_require__(33847),
-				es = __webpack_require__(69038),
-				emotion_react_browser_esm = __webpack_require__(28165),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				Image = __webpack_require__(49680),
-				Badge = __webpack_require__(93607),
-				Price = __webpack_require__(92246),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367),
-				defined = __webpack_require__(27193),
-				cloneWithProps = __webpack_require__(64170);
-			__webpack_require__(74660);
-			var types = __webpack_require__(20874),
+			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33847),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(69038),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
+				_Atoms_Image__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(49680),
+				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(93607),
+				_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(99457),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
+				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27193),
+				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(64170),
+				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(99651),
+				_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20874),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_result = function result() {
-					return (0, emotion_react_browser_esm.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({
 						'&.ss__result--grid': { display: 'flex', flexDirection: 'column', height: '100%', '& .ss__result__image-wrapper': { flex: '1 0 auto' } },
 						'&.ss__result--list': {
 							display: 'flex',
@@ -8658,7 +8818,7 @@
 						},
 					});
 				},
-				Result = (0, es.Pi)(function (properties) {
+				Result = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
@@ -8666,11 +8826,11 @@
 						_e,
 						_f,
 						_g,
-						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
 						props = __assign(
 							__assign(
 								__assign(
-									{ layout: types.Ar.GRID },
+									{ layout: _types__WEBPACK_IMPORTED_MODULE_7__.Ar.GRID },
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.result
 								),
 								properties
@@ -8696,7 +8856,7 @@
 										{ className: 'ss__result__price' },
 										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.price
 									),
-									(0, defined.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -8706,7 +8866,7 @@
 										{ className: 'ss__result__badge', content: 'Sale' },
 										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.badge
 									),
-									(0, defined.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -8716,7 +8876,7 @@
 										{ className: 'ss__result__image', alt: null == core ? void 0 : core.name, src: null == core ? void 0 : core.imageUrl },
 										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.image
 									),
-									(0, defined.r)({ disableStyles, fallback })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles, fallback })
 								),
 								{ theme: props.theme }
 							),
@@ -8726,26 +8886,27 @@
 						),
 						displayName = core.name;
 					props.truncateTitle &&
-						(displayName = (function truncate(input, limit, append) {
-							if ('string' != typeof input || input.length <= limit) return input;
-							var lastSpace = input.lastIndexOf(' ', limit),
-								trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
-							return input.substr(0, trimIndex) + (append || '');
-						})(core.name, props.truncateTitle.limit, props.truncateTitle.append));
+						(displayName = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_9__.$(
+							core.name,
+							props.truncateTitle.limit,
+							props.truncateTitle.append
+						));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_result(), style]),
 						core &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
 								null,
-								(0, emotion_react_browser_esm.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 									'article',
-									__assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
-									(0, emotion_react_browser_esm.tZ)(
+									__assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__result', 'ss__result--' + layout, className),
+									}),
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 										'div',
 										{ className: 'ss__result__image-wrapper' },
-										(0, emotion_react_browser_esm.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 											'a',
 											{
 												href: core.url,
@@ -8756,18 +8917,23 @@
 														_b.click(e, result);
 												},
 											},
-											!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, __assign({}, subProps.badge)),
-											(0, emotion_react_browser_esm.tZ)(Image.E, __assign({}, subProps.image))
+											!hideBadge &&
+												onSale &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+													_Atoms_Badge__WEBPACK_IMPORTED_MODULE_11__.C,
+													__assign({}, subProps.badge)
+												),
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Atoms_Image__WEBPACK_IMPORTED_MODULE_12__.E, __assign({}, subProps.image))
 										)
 									),
-									(0, emotion_react_browser_esm.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 										'div',
 										{ className: 'ss__result__details' },
 										!hideTitle &&
-											(0, emotion_react_browser_esm.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 												'div',
 												{ className: 'ss__result__details__title' },
-												(0, emotion_react_browser_esm.tZ)(
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 													'a',
 													{
 														href: core.url,
@@ -8782,20 +8948,29 @@
 												)
 											),
 										!hidePricing &&
-											(0, emotion_react_browser_esm.tZ)(
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
 												'div',
 												{ className: 'ss__result__details__pricing' },
 												core.price < core.msrp
-													? (0, emotion_react_browser_esm.tZ)(
-															preact_module.HY,
+													? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+															preact__WEBPACK_IMPORTED_MODULE_2__.HY,
 															null,
-															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })),
+															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+																_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
+																__assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })
+															),
 															' ',
-															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
+															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+																_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
+																__assign({}, subProps.price, { value: core.price })
+															)
 													  )
-													: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
+													: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+															_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
+															__assign({}, subProps.price, { value: core.price })
+													  )
 											),
-										(0, cloneWithProps.d)(detailSlot, { result })
+										(0, _utilities__WEBPACK_IMPORTED_MODULE_14__.d)(detailSlot, { result })
 									)
 								)
 							)
@@ -8836,13 +9011,16 @@
 				Button = __webpack_require__(60295),
 				Icon = __webpack_require__(6572),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
@@ -9098,15 +9276,18 @@
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -9451,13 +9632,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Select_stories_assign = function () {
-					return (Select_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Select_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Select_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -9750,13 +9934,16 @@
 				cache = __webpack_require__(79367);
 			var Overlay = __webpack_require__(82480),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_slideout = function slideout(_a) {
 					var isActive = _a.isActive,
@@ -9890,15 +10077,18 @@
 			var componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -10022,13 +10212,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Slideout_stories_assign = function () {
-				return (Slideout_stories_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(Slideout_stories_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					Slideout_stories_assign.apply(this, arguments)
+				);
 			};
 			const Slideout_stories = {
 				title: 'Molecules/Slideout',
@@ -10139,13 +10332,16 @@
 				types = __webpack_require__(20874),
 				useDisplaySettings = __webpack_require__(6222),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_Autocomplete = function Autocomplete(_a) {
 					var _b,
@@ -10653,15 +10849,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -10817,13 +11016,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Autocomplete_stories_assign = function () {
-					return (Autocomplete_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Autocomplete_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Autocomplete_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -11121,15 +11323,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -11386,13 +11591,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -11783,7 +11991,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
 				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1492),
 				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(75999),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(25774),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(40574),
 				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(68978),
 				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(20682),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
@@ -11793,13 +12001,16 @@
 				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_facet = function facet(_a) {
 					var _b,
@@ -12090,13 +12301,16 @@
 				cache = __webpack_require__(79367),
 				defined = __webpack_require__(27193),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_facets = function facets() {
 					return (0, emotion_react_browser_esm.iv)({});
@@ -12161,15 +12375,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -12207,13 +12424,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Facets_stories_assign = function () {
-					return (Facets_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Facets_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Facets_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -12411,13 +12631,16 @@
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_filterSummary = function filterSummary() {
 					return (0, emotion_react_browser_esm.iv)({
@@ -12532,15 +12755,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -12752,13 +12978,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var FilterSummary_stories_assign = function () {
-					return (FilterSummary_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(FilterSummary_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						FilterSummary_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -13017,23 +13246,26 @@
 					__webpack_require__(14586),
 					__webpack_require__(71245),
 					__webpack_require__(34619)),
-				emotion_react_browser_esm = (__webpack_require__(26242), __webpack_require__(28165)),
+				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(69038),
 				Carousel = __webpack_require__(77592),
-				Result = __webpack_require__(23267),
+				Result = __webpack_require__(48001),
 				defined = __webpack_require__(27193),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__rest = function (s, e) {
 					var t = {};
@@ -13069,7 +13301,6 @@
 						_f,
 						_g,
 						_h,
-						_j,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
@@ -13138,21 +13369,11 @@
 									),
 									{ theme: props.theme }
 								),
-								icon: __assign(
-									__assign(
-										__assign(
-											{ className: 'ss__recommendation__icon' },
-											null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
-										),
-										(0, defined.r)({ disableStyles })
-									),
-									{ theme: props.theme }
-								),
 							},
 							rootComponentRef = (0, hooks_module.sO)(null),
-							_k = (0, hooks_module.eJ)([0, 0]),
-							initialIndexes = _k[0],
-							setInitialIndexes = _k[1],
+							_j = (0, hooks_module.eJ)([0, 0]),
+							initialIndexes = _j[0],
+							setInitialIndexes = _j[1],
 							inViewport = (function useIntersection(ref, rootMargin, fireOnce) {
 								void 0 === rootMargin && (rootMargin = '0px'), void 0 === fireOnce && (fireOnce = !1);
 								var _a = (0, hooks_module.eJ)(!1),
@@ -13191,7 +13412,7 @@
 							};
 						inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
 							(children || results.length) &&
-								(null === (_j = null === (_h = controller) || void 0 === _h ? void 0 : _h.track) || void 0 === _j || _j.render());
+								(null === (_h = null === (_g = controller) || void 0 === _g ? void 0 : _g.track) || void 0 === _h || _h.render());
 						var styling = {};
 						return (
 							disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
@@ -13254,15 +13475,18 @@
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -13453,13 +13677,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var Recommendation_stories_assign = function () {
-					return (Recommendation_stories_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Recommendation_stories_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Recommendation_stories_assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -13698,15 +13925,18 @@
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -13852,13 +14082,16 @@
 			}
 			MDXContent.isMDXComponent = !0;
 			var __assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -14085,20 +14318,23 @@
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
 				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(31340),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23267),
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(48001),
 				_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20874),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
 				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(6222),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				CSS_results = function results(_a) {
 					var columns = _a.columns,
@@ -14189,16 +14425,15 @@
 										'div',
 										__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', className) }),
 										results.map(function (result) {
-											return (function () {
-												switch (result.type) {
-													case _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER:
-														return (0,
-														_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f, __assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout }));
-													default:
-														return (0,
-														_emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x, __assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller }));
-												}
-											})();
+											return result.type === _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER
+												? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+														_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__.f,
+														__assign({ key: result.uid }, subProps.inlineBanner, { banner: result, layout: props.layout })
+												  )
+												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
+														_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__.x,
+														__assign({ key: result.uid }, subProps.result, { result, layout: props.layout, controller })
+												  );
 										})
 									)
 							  )
@@ -17719,15 +17954,18 @@
 			var _extendStatics,
 				__extends =
 					((_extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					}),
 					function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -17737,13 +17975,16 @@
 						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
 					}),
 				__assign = function () {
-					return (__assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
 				},
 				SearchController_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -18156,15 +18397,18 @@
 				})(AbstractController),
 				AutocompleteController_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -18175,13 +18419,16 @@
 					};
 				})(),
 				AutocompleteController_assign = function () {
-					return (AutocompleteController_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(AutocompleteController_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						AutocompleteController_assign.apply(this, arguments)
+					);
 				},
 				AutocompleteController_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -18677,15 +18924,18 @@
 				BeaconCategory,
 				FinderController_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -18696,13 +18946,16 @@
 					};
 				})(),
 				FinderController_assign = function () {
-					return (FinderController_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(FinderController_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						FinderController_assign.apply(this, arguments)
+					);
 				},
 				FinderController_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -18983,15 +19236,18 @@
 				})(BeaconCategory || (BeaconCategory = {}));
 			var RecommendationController_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -19002,13 +19258,16 @@
 					};
 				})(),
 				RecommendationController_assign = function () {
-					return (RecommendationController_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(RecommendationController_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						RecommendationController_assign.apply(this, arguments)
+					);
 				},
 				RecommendationController_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -19636,15 +19895,18 @@
 			}
 			var Legacy_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -19846,15 +20108,18 @@
 				})(API),
 				Suggest_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -20047,13 +20312,16 @@
 				})(API);
 			__webpack_require__(49992);
 			var searchRequest_assign = function () {
-				return (searchRequest_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(searchRequest_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					searchRequest_assign.apply(this, arguments)
+				);
 			};
 			function transformSearchRequest(request) {
 				return (function mergeParams() {
@@ -20180,13 +20448,16 @@
 			var he = __webpack_require__(30361),
 				he_default = __webpack_require__.n(he),
 				searchResponse_assign = function () {
-					return (searchResponse_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(searchResponse_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						searchResponse_assign.apply(this, arguments)
+					);
 				},
 				CORE_FIELDS = [
 					'uid',
@@ -20366,13 +20637,16 @@
 					return { search: { query: (((request || {}).search || {}).query || {}).string, didYouMean, originalQuery } };
 				});
 			var suggestResponse_assign = function () {
-				return (suggestResponse_assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
+				return (
+					(suggestResponse_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					suggestResponse_assign.apply(this, arguments)
+				);
 			};
 			function transformSuggestResponse(response) {
 				return suggestResponse_assign(
@@ -20413,15 +20687,18 @@
 				});
 			var Hybrid_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -20432,13 +20709,16 @@
 					};
 				})(),
 				Hybrid_assign = function () {
-					return (Hybrid_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Hybrid_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Hybrid_assign.apply(this, arguments)
+					);
 				},
 				Hybrid_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -20646,15 +20926,18 @@
 			var ContentType,
 				Recommend_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -20665,13 +20948,16 @@
 					};
 				})(),
 				Recommend_assign = function () {
-					return (Recommend_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Recommend_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Recommend_assign.apply(this, arguments)
+					);
 				},
 				Recommend_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -20963,13 +21249,16 @@
 					);
 				})(API),
 				Client_assign = function () {
-					return (Client_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Client_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Client_assign.apply(this, arguments)
+					);
 				},
 				Client_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -21247,15 +21536,18 @@
 					__webpack_require__(50747),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
-							return (_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
+							return (
+								(_extendStatics =
+									Object.setPrototypeOf ||
+									({ __proto__: [] } instanceof Array &&
+										function (d, b) {
+											d.__proto__ = b;
+										}) ||
 									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								})(d, b);
+										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+									}),
+								_extendStatics(d, b)
+							);
 						};
 						return function (d, b) {
 							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -21318,15 +21610,18 @@
 					__webpack_require__(88233),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
-							return (_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
+							return (
+								(_extendStatics =
+									Object.setPrototypeOf ||
+									({ __proto__: [] } instanceof Array &&
+										function (d, b) {
+											d.__proto__ = b;
+										}) ||
 									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								})(d, b);
+										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+									}),
+								_extendStatics(d, b)
+							);
 						};
 						return function (d, b) {
 							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -21353,14 +21648,9 @@
 								})
 								.map(function (facet) {
 									var facetMeta = meta.facets[facet.field];
-									switch (facet.type) {
-										case 'range':
-											return new RangeFacet(services, storage, facet, facetMeta);
-										case 'value':
-										case 'range-buckets':
-										default:
-											return new ValueFacet(config, services, storage, facet, facetMeta);
-									}
+									return 'range' === facet.type
+										? new RangeFacet(services, storage, facet, facetMeta)
+										: new ValueFacet(config, services, storage, facet, facetMeta);
 								})),
 							_super.apply(this, facets) || this
 						);
@@ -21598,15 +21888,18 @@
 				};
 			var FilterStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -21622,19 +21915,15 @@
 						return (
 							(filters = filters.map(function (filter) {
 								var facetMeta = meta.facets[filter.field];
-								switch (filter.type) {
-									case 'range':
-										return new RangeFilter(services, {
+								return 'range' === filter.type
+									? new RangeFilter(services, {
 											facet: { field: filter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || filter.field },
 											value: { low: filter.value.low, high: filter.value.high, label: filter.label || filter.value.low + ' - ' + filter.value.high },
-										});
-									case 'value':
-									default:
-										return new Filter(services, {
+									  })
+									: new Filter(services, {
 											facet: { field: filter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || filter.field },
 											value: { value: filter.value, label: filter.label },
-										});
-								}
+									  });
 							})),
 							_super.apply(this, filters) || this
 						);
@@ -21677,15 +21966,18 @@
 					(__webpack_require__(99805),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
-							return (_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
+							return (
+								(_extendStatics =
+									Object.setPrototypeOf ||
+									({ __proto__: [] } instanceof Array &&
+										function (d, b) {
+											d.__proto__ = b;
+										}) ||
 									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								})(d, b);
+										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+									}),
+								_extendStatics(d, b)
+							);
 						};
 						return function (d, b) {
 							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -21696,13 +21988,16 @@
 						};
 					})()),
 				ResultStore_assign = function () {
-					return (ResultStore_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(ResultStore_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						ResultStore_assign.apply(this, arguments)
+					);
 				},
 				ResultStore = (function (_super) {
 					function ResultStore(config, services, resultData, paginationData, merchData) {
@@ -21992,15 +22287,18 @@
 				})(),
 				SearchStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22093,15 +22391,18 @@
 				})(),
 				TermStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22173,15 +22474,18 @@
 				},
 				TrendingStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22229,15 +22533,18 @@
 				},
 				Stores_FacetStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22248,13 +22555,16 @@
 					};
 				})(),
 				FacetStore_assign = function () {
-					return (FacetStore_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(FacetStore_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						FacetStore_assign.apply(this, arguments)
+					);
 				},
 				FacetStore = (function (_super) {
 					function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
@@ -22300,15 +22610,18 @@
 				})(Array),
 				AutocompleteStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22418,15 +22731,18 @@
 				})(AbstractStore),
 				SelectionStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22437,13 +22753,16 @@
 					};
 				})(),
 				SelectionStore_assign = function () {
-					return (SelectionStore_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(SelectionStore_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						SelectionStore_assign.apply(this, arguments)
+					);
 				},
 				SelectionStore_spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
@@ -22643,15 +22962,18 @@
 				})(SelectionBase),
 				FinderStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -22702,15 +23024,18 @@
 				},
 				RecommendationStore_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
-						return (_extendStatics =
-							Object.setPrototypeOf ||
-							({ __proto__: [] } instanceof Array &&
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
 								function (d, b) {
-									d.__proto__ = b;
-								}) ||
-							function (d, b) {
-								for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-							})(d, b);
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
 					};
 					return function (d, b) {
 						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
@@ -23030,13 +23355,16 @@
 					(ParamLocationType.HASH = 'hash'), (ParamLocationType.QUERY = 'query');
 				})(ParamLocationType || (ParamLocationType = {}));
 			var UrlTranslator_assign = function () {
-					return (UrlTranslator_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(UrlTranslator_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						UrlTranslator_assign.apply(this, arguments)
+					);
 				},
 				UrlTranslator_spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
@@ -23864,7 +24192,7 @@
 						Profile
 					);
 				})(),
-				v4 = (__webpack_require__(93244), __webpack_require__(36746));
+				v4 = (__webpack_require__(93244), __webpack_require__(9571));
 			var TrackEvent = function TrackEvent(payload) {
 					var _a, _b, _c;
 					if (((payload.event = payload.event), !payload.context || !payload.event))
@@ -23960,17 +24288,20 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.1' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.2' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
-					return (Tracker_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Tracker_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Tracker_assign.apply(this, arguments)
+					);
 				},
 				Tracker = function Tracker(globals) {
 					var _a,
@@ -23987,7 +24318,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.1');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.2');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24243,13 +24574,16 @@
 						this.sendEvents();
 				};
 			var RecommendationInstantiator_assign = function () {
-					return (RecommendationInstantiator_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(RecommendationInstantiator_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						RecommendationInstantiator_assign.apply(this, arguments)
+					);
 				},
 				RecommendationInstantiator_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
@@ -24554,13 +24888,16 @@
 					);
 				})(),
 				Snap_assign = function () {
-					return (Snap_assign =
-						Object.assign ||
-						function (t) {
-							for (var s, i = 1, n = arguments.length; i < n; i++)
-								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-							return t;
-						}).apply(this, arguments);
+					return (
+						(Snap_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Snap_assign.apply(this, arguments)
+					);
 				},
 				Snap = (function () {
 					function Snap(config) {
@@ -24588,7 +24925,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.7.1]',
+								text: '[0.7.2]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24996,7 +25333,7 @@
 			(module = __webpack_require__.nmd(module)),
 				(0, __webpack_require__(44595).configure)([__webpack_require__(68751), __webpack_require__(83625)], module, !1);
 		},
-		14967: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		63148: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var preview_namespaceObject = {};
 			__webpack_require__.r(preview_namespaceObject),
@@ -25015,9 +25352,9 @@
 				preact_module = __webpack_require__(33847),
 				defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1', hover: '#f8f6fd', text: { secondary: '#ffffff' } }, components: {} },
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				injectStylesIntoStyleTag = __webpack_require__(67851),
+				injectStylesIntoStyleTag = __webpack_require__(46062),
 				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(535),
+				styles = __webpack_require__(33505),
 				options = { insert: 'head', singleton: !1 };
 			injectStylesIntoStyleTag_default()(styles.Z, options);
 			styles.Z.locals;
@@ -25098,64 +25435,24 @@
 			'use strict';
 			__webpack_require__(44595);
 		},
-		96006: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { u: () => formatNumber });
-			__webpack_require__(43105),
-				__webpack_require__(14586),
-				__webpack_require__(71245),
-				__webpack_require__(48319),
-				__webpack_require__(77950),
-				__webpack_require__(85940),
-				__webpack_require__(90977),
-				__webpack_require__(16781),
-				__webpack_require__(58188),
-				__webpack_require__(88233),
-				__webpack_require__(99120),
-				__webpack_require__(74083);
-			var __assign = function () {
-				return (__assign =
-					Object.assign ||
-					function (t) {
-						for (var s, i = 1, n = arguments.length; i < n; i++)
-							for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-						return t;
-					}).apply(this, arguments);
-			};
-			function formatNumber(input, opts) {
-				var options = __assign(
-					{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !1 },
-					opts
-				);
-				if ('number' == typeof input && !Number.isNaN(input)) {
-					var split = (function truncateDecimals(input, digits) {
-						var numString = input.toString(),
-							decimalPosition = numString.indexOf('.'),
-							substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
-						return numString.substr(0, substrLength);
-					})(input, options.decimalPlaces).split('.');
-					(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
-						options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
-					var output = split.join(options.decimalSeparator);
-					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
-				}
-			}
-		},
 		74886: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { Z: () => MDXContent });
 			__webpack_require__(66741);
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30876);
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -25334,15 +25631,18 @@
 				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85737),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63255);
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -25448,15 +25748,18 @@
 				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85737),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63255);
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -25836,15 +26139,18 @@
 				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85737),
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63255);
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
@@ -25958,6 +26264,35 @@
 				});
 			const __WEBPACK_DEFAULT_EXPORT__ = componentMeta;
 		},
+		33505: (module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Z: () => __WEBPACK_DEFAULT_EXPORT__ });
+			var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1799),
+				_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(
+					_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__
+				),
+				_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82609),
+				___CSS_LOADER_EXPORT___ = __webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__)()(
+					_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()
+				);
+			___CSS_LOADER_EXPORT___.push([
+				module.id,
+				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+				'',
+				{
+					version: 3,
+					sources: ['webpack://./.storybook/styles.css'],
+					names: [],
+					mappings:
+						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE',
+					sourcesContent: [
+						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+					],
+					sourceRoot: '',
+				},
+			]);
+			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
+		},
 		83625: (module, __unused_webpack_exports, __webpack_require__) => {
 			var map = {
 				'./components/Atoms/Badge/Badge.stories.tsx': 74442,
@@ -26035,7 +26370,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[266],
+			[990],
 			() => (
 				__webpack_exec__(47513),
 				__webpack_exec__(68260),
@@ -26048,7 +26383,7 @@
 				__webpack_exec__(3233),
 				__webpack_exec__(92752),
 				__webpack_exec__(35315),
-				__webpack_exec__(14967),
+				__webpack_exec__(63148),
 				__webpack_exec__(29180)
 			)
 		);

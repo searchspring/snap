@@ -419,7 +419,7 @@
 					},
 					equal: D,
 				},
-				color_convert = __webpack_require__(11137),
+				color_convert = __webpack_require__(50841),
 				color_convert_default = __webpack_require__.n(color_convert),
 				throttle = __webpack_require__(12436),
 				throttle_default = __webpack_require__.n(throttle),
@@ -523,15 +523,18 @@
 				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
 			}
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			function Color_objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
@@ -910,8 +913,8 @@
 			ColorControl.displayName = 'ColorControl';
 			const Color = ColorControl;
 		},
-		78876: (module, __unused_webpack_exports, __webpack_require__) => {
-			const cssKeywords = __webpack_require__(56525),
+		44959: (module, __unused_webpack_exports, __webpack_require__) => {
+			const cssKeywords = __webpack_require__(11103),
 				reverseKeywords = {};
 			for (const key of Object.keys(cssKeywords)) reverseKeywords[cssKeywords[key]] = key;
 			const convert = {
@@ -1109,8 +1112,6 @@
 					let r, g, b;
 					switch (i) {
 						default:
-						case 6:
-						case 0:
 							(r = v), (g = n), (b = wh);
 							break;
 						case 1:
@@ -1363,9 +1364,9 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		11137: (module, __unused_webpack_exports, __webpack_require__) => {
-			const conversions = __webpack_require__(78876),
-				route = __webpack_require__(96744),
+		50841: (module, __unused_webpack_exports, __webpack_require__) => {
+			const conversions = __webpack_require__(44959),
+				route = __webpack_require__(19325),
 				convert = {};
 			Object.keys(conversions).forEach((fromModel) => {
 				(convert[fromModel] = {}),
@@ -1396,8 +1397,8 @@
 			}),
 				(module.exports = convert);
 		},
-		96744: (module, __unused_webpack_exports, __webpack_require__) => {
-			const conversions = __webpack_require__(78876);
+		19325: (module, __unused_webpack_exports, __webpack_require__) => {
+			const conversions = __webpack_require__(44959);
 			function deriveBFS(fromModel) {
 				const graph = (function buildGraph() {
 						const graph = {},
@@ -1440,7 +1441,7 @@
 				return conversion;
 			};
 		},
-		56525: (module) => {
+		11103: (module) => {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],

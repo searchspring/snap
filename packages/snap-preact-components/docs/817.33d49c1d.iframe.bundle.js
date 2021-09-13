@@ -1,8 +1,8 @@
-'use strict';
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[817],
 	{
 		67817: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
 					WithToolTipState: () => WithToolTipState,
@@ -23,34 +23,33 @@
 				__webpack_require__(27233),
 				__webpack_require__(28673),
 				__webpack_require__(1939);
-			var react = __webpack_require__(2784),
+			var compat_module = __webpack_require__(66741),
 				esm = __webpack_require__(28493),
 				global_window = __webpack_require__(35048),
 				window_default = __webpack_require__.n(global_window),
 				objectWithoutPropertiesLoose = __webpack_require__(31461),
 				esm_extends = __webpack_require__(7896),
 				inheritsLoose = __webpack_require__(81665),
-				react_dom = __webpack_require__(28316),
-				ManagerReferenceNodeContext = react.createContext(),
-				ManagerReferenceNodeSetterContext = react.createContext();
+				ManagerReferenceNodeContext = compat_module.kr(),
+				ManagerReferenceNodeSetterContext = compat_module.kr();
 			function Manager(_ref) {
 				var children = _ref.children,
-					_React$useState = react.useState(null),
+					_React$useState = compat_module.eJ(null),
 					referenceNode = _React$useState[0],
 					setReferenceNode = _React$useState[1],
-					hasUnmounted = react.useRef(!1);
-				react.useEffect(function () {
+					hasUnmounted = compat_module.sO(!1);
+				compat_module.d4(function () {
 					return function () {
 						hasUnmounted.current = !0;
 					};
 				}, []);
-				var handleSetReferenceNode = react.useCallback(function (node) {
+				var handleSetReferenceNode = compat_module.I4(function (node) {
 					hasUnmounted.current || setReferenceNode(node);
 				}, []);
-				return react.createElement(
+				return compat_module.az(
 					ManagerReferenceNodeContext.Provider,
 					{ value: referenceNode },
-					react.createElement(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
+					compat_module.az(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
 				);
 			}
 			var unwrapArray = function unwrapArray(arg) {
@@ -75,7 +74,7 @@
 					}, {});
 				},
 				useIsomorphicLayoutEffect =
-					'undefined' != typeof window && window.document && window.document.createElement ? react.useLayoutEffect : react.useEffect;
+					'undefined' != typeof window && window.document && window.document.createElement ? compat_module.bt : compat_module.d4;
 			function getWindow(node) {
 				if (null == node) return window;
 				if ('[object Window]' !== node.toString()) {
@@ -599,6 +598,41 @@
 							_Object$assign2)
 					  );
 			}
+			const modifiers_offset = {
+				name: 'offset',
+				enabled: !0,
+				phase: 'main',
+				requires: ['popperOffsets'],
+				fn: function offset(_ref2) {
+					var state = _ref2.state,
+						options = _ref2.options,
+						name = _ref2.name,
+						_options$offset = options.offset,
+						offset = void 0 === _options$offset ? [0, 0] : _options$offset,
+						data = enums_placements.reduce(function (acc, placement) {
+							return (
+								(acc[placement] = (function distanceAndSkiddingToXY(placement, rects, offset) {
+									var basePlacement = getBasePlacement(placement),
+										invertDistance = [left, enums_top].indexOf(basePlacement) >= 0 ? -1 : 1,
+										_ref = 'function' == typeof offset ? offset(Object.assign({}, rects, { placement })) : offset,
+										skidding = _ref[0],
+										distance = _ref[1];
+									return (
+										(skidding = skidding || 0),
+										(distance = (distance || 0) * invertDistance),
+										[left, right].indexOf(basePlacement) >= 0 ? { x: distance, y: skidding } : { x: skidding, y: distance }
+									);
+								})(placement, state.rects, offset)),
+								acc
+							);
+						}, {}),
+						_data$state$placement = data[state.placement],
+						x = _data$state$placement.x,
+						y = _data$state$placement.y;
+					null != state.modifiersData.popperOffsets && ((state.modifiersData.popperOffsets.x += x), (state.modifiersData.popperOffsets.y += y)),
+						(state.modifiersData[name] = data);
+				},
+			};
 			var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
 			function getOppositePlacement(placement) {
 				return placement.replace(/left|right|bottom|top/g, function (matched) {
@@ -770,6 +804,142 @@
 			function within(min, value, max) {
 				return math_max(min, math_min(value, max));
 			}
+			const modifiers_preventOverflow = {
+				name: 'preventOverflow',
+				enabled: !0,
+				phase: 'main',
+				fn: function preventOverflow(_ref) {
+					var state = _ref.state,
+						options = _ref.options,
+						name = _ref.name,
+						_options$mainAxis = options.mainAxis,
+						checkMainAxis = void 0 === _options$mainAxis || _options$mainAxis,
+						_options$altAxis = options.altAxis,
+						checkAltAxis = void 0 !== _options$altAxis && _options$altAxis,
+						boundary = options.boundary,
+						rootBoundary = options.rootBoundary,
+						altBoundary = options.altBoundary,
+						padding = options.padding,
+						_options$tether = options.tether,
+						tether = void 0 === _options$tether || _options$tether,
+						_options$tetherOffset = options.tetherOffset,
+						tetherOffset = void 0 === _options$tetherOffset ? 0 : _options$tetherOffset,
+						overflow = detectOverflow(state, { boundary, rootBoundary, padding, altBoundary }),
+						basePlacement = getBasePlacement(state.placement),
+						variation = getVariation(state.placement),
+						isBasePlacement = !variation,
+						mainAxis = getMainAxisFromPlacement(basePlacement),
+						altAxis = (function getAltAxis(axis) {
+							return 'x' === axis ? 'y' : 'x';
+						})(mainAxis),
+						popperOffsets = state.modifiersData.popperOffsets,
+						referenceRect = state.rects.reference,
+						popperRect = state.rects.popper,
+						tetherOffsetValue =
+							'function' == typeof tetherOffset ? tetherOffset(Object.assign({}, state.rects, { placement: state.placement })) : tetherOffset,
+						data = { x: 0, y: 0 };
+					if (popperOffsets) {
+						if (checkMainAxis || checkAltAxis) {
+							var mainSide = 'y' === mainAxis ? enums_top : left,
+								altSide = 'y' === mainAxis ? bottom : right,
+								len = 'y' === mainAxis ? 'height' : 'width',
+								offset = popperOffsets[mainAxis],
+								min = popperOffsets[mainAxis] + overflow[mainSide],
+								max = popperOffsets[mainAxis] - overflow[altSide],
+								additive = tether ? -popperRect[len] / 2 : 0,
+								minLen = 'start' === variation ? referenceRect[len] : popperRect[len],
+								maxLen = 'start' === variation ? -popperRect[len] : -referenceRect[len],
+								arrowElement = state.elements.arrow,
+								arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : { width: 0, height: 0 },
+								arrowPaddingObject = state.modifiersData['arrow#persistent']
+									? state.modifiersData['arrow#persistent'].padding
+									: { top: 0, right: 0, bottom: 0, left: 0 },
+								arrowPaddingMin = arrowPaddingObject[mainSide],
+								arrowPaddingMax = arrowPaddingObject[altSide],
+								arrowLen = within(0, referenceRect[len], arrowRect[len]),
+								minOffset = isBasePlacement
+									? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue
+									: minLen - arrowLen - arrowPaddingMin - tetherOffsetValue,
+								maxOffset = isBasePlacement
+									? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + tetherOffsetValue
+									: maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue,
+								arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow),
+								clientOffset = arrowOffsetParent ? ('y' === mainAxis ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0) : 0,
+								offsetModifierValue = state.modifiersData.offset ? state.modifiersData.offset[state.placement][mainAxis] : 0,
+								tetherMin = popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset,
+								tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue;
+							if (checkMainAxis) {
+								var preventedOffset = within(tether ? math_min(min, tetherMin) : min, offset, tether ? math_max(max, tetherMax) : max);
+								(popperOffsets[mainAxis] = preventedOffset), (data[mainAxis] = preventedOffset - offset);
+							}
+							if (checkAltAxis) {
+								var _mainSide = 'x' === mainAxis ? enums_top : left,
+									_altSide = 'x' === mainAxis ? bottom : right,
+									_offset = popperOffsets[altAxis],
+									_min = _offset + overflow[_mainSide],
+									_max = _offset - overflow[_altSide],
+									_preventedOffset = within(tether ? math_min(_min, tetherMin) : _min, _offset, tether ? math_max(_max, tetherMax) : _max);
+								(popperOffsets[altAxis] = _preventedOffset), (data[altAxis] = _preventedOffset - _offset);
+							}
+						}
+						state.modifiersData[name] = data;
+					}
+				},
+				requiresIfExists: ['offset'],
+			};
+			const modifiers_arrow = {
+				name: 'arrow',
+				enabled: !0,
+				phase: 'main',
+				fn: function arrow(_ref) {
+					var _state$modifiersData$,
+						state = _ref.state,
+						name = _ref.name,
+						options = _ref.options,
+						arrowElement = state.elements.arrow,
+						popperOffsets = state.modifiersData.popperOffsets,
+						basePlacement = getBasePlacement(state.placement),
+						axis = getMainAxisFromPlacement(basePlacement),
+						len = [left, right].indexOf(basePlacement) >= 0 ? 'height' : 'width';
+					if (arrowElement && popperOffsets) {
+						var paddingObject = (function toPaddingObject(padding, state) {
+								return mergePaddingObject(
+									'number' !=
+										typeof (padding =
+											'function' == typeof padding ? padding(Object.assign({}, state.rects, { placement: state.placement })) : padding)
+										? padding
+										: expandToHashMap(padding, basePlacements)
+								);
+							})(options.padding, state),
+							arrowRect = getLayoutRect(arrowElement),
+							minProp = 'y' === axis ? enums_top : left,
+							maxProp = 'y' === axis ? bottom : right,
+							endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len],
+							startDiff = popperOffsets[axis] - state.rects.reference[axis],
+							arrowOffsetParent = getOffsetParent(arrowElement),
+							clientSize = arrowOffsetParent ? ('y' === axis ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0) : 0,
+							centerToReference = endDiff / 2 - startDiff / 2,
+							min = paddingObject[minProp],
+							max = clientSize - arrowRect[len] - paddingObject[maxProp],
+							center = clientSize / 2 - arrowRect[len] / 2 + centerToReference,
+							offset = within(min, center, max),
+							axisProp = axis;
+						state.modifiersData[name] =
+							(((_state$modifiersData$ = {})[axisProp] = offset), (_state$modifiersData$.centerOffset = offset - center), _state$modifiersData$);
+					}
+				},
+				effect: function arrow_effect(_ref2) {
+					var state = _ref2.state,
+						_options$element = _ref2.options.element,
+						arrowElement = void 0 === _options$element ? '[data-popper-arrow]' : _options$element;
+					null != arrowElement &&
+						('string' != typeof arrowElement || (arrowElement = state.elements.popper.querySelector(arrowElement))) &&
+						contains(state.elements.popper, arrowElement) &&
+						(state.elements.arrow = arrowElement);
+				},
+				requires: ['popperOffsets'],
+				requiresIfExists: ['preventOverflow'],
+			};
 			function getSideOffsets(overflow, rect, preventedOffsets) {
 				return (
 					void 0 === preventedOffsets && (preventedOffsets = { x: 0, y: 0 }),
@@ -888,41 +1058,7 @@
 							},
 							requires: ['computeStyles'],
 						},
-						{
-							name: 'offset',
-							enabled: !0,
-							phase: 'main',
-							requires: ['popperOffsets'],
-							fn: function offset(_ref2) {
-								var state = _ref2.state,
-									options = _ref2.options,
-									name = _ref2.name,
-									_options$offset = options.offset,
-									offset = void 0 === _options$offset ? [0, 0] : _options$offset,
-									data = enums_placements.reduce(function (acc, placement) {
-										return (
-											(acc[placement] = (function distanceAndSkiddingToXY(placement, rects, offset) {
-												var basePlacement = getBasePlacement(placement),
-													invertDistance = [left, enums_top].indexOf(basePlacement) >= 0 ? -1 : 1,
-													_ref = 'function' == typeof offset ? offset(Object.assign({}, rects, { placement })) : offset,
-													skidding = _ref[0],
-													distance = _ref[1];
-												return (
-													(skidding = skidding || 0),
-													(distance = (distance || 0) * invertDistance),
-													[left, right].indexOf(basePlacement) >= 0 ? { x: distance, y: skidding } : { x: skidding, y: distance }
-												);
-											})(placement, state.rects, offset)),
-											acc
-										);
-									}, {}),
-									_data$state$placement = data[state.placement],
-									x = _data$state$placement.x,
-									y = _data$state$placement.y;
-								null != state.modifiersData.popperOffsets && ((state.modifiersData.popperOffsets.x += x), (state.modifiersData.popperOffsets.y += y)),
-									(state.modifiersData[name] = data);
-							},
-						},
+						modifiers_offset,
 						{
 							name: 'flip',
 							enabled: !0,
@@ -1052,148 +1188,8 @@
 							requiresIfExists: ['offset'],
 							data: { _skip: !1 },
 						},
-						{
-							name: 'preventOverflow',
-							enabled: !0,
-							phase: 'main',
-							fn: function preventOverflow(_ref) {
-								var state = _ref.state,
-									options = _ref.options,
-									name = _ref.name,
-									_options$mainAxis = options.mainAxis,
-									checkMainAxis = void 0 === _options$mainAxis || _options$mainAxis,
-									_options$altAxis = options.altAxis,
-									checkAltAxis = void 0 !== _options$altAxis && _options$altAxis,
-									boundary = options.boundary,
-									rootBoundary = options.rootBoundary,
-									altBoundary = options.altBoundary,
-									padding = options.padding,
-									_options$tether = options.tether,
-									tether = void 0 === _options$tether || _options$tether,
-									_options$tetherOffset = options.tetherOffset,
-									tetherOffset = void 0 === _options$tetherOffset ? 0 : _options$tetherOffset,
-									overflow = detectOverflow(state, { boundary, rootBoundary, padding, altBoundary }),
-									basePlacement = getBasePlacement(state.placement),
-									variation = getVariation(state.placement),
-									isBasePlacement = !variation,
-									mainAxis = getMainAxisFromPlacement(basePlacement),
-									altAxis = (function getAltAxis(axis) {
-										return 'x' === axis ? 'y' : 'x';
-									})(mainAxis),
-									popperOffsets = state.modifiersData.popperOffsets,
-									referenceRect = state.rects.reference,
-									popperRect = state.rects.popper,
-									tetherOffsetValue =
-										'function' == typeof tetherOffset ? tetherOffset(Object.assign({}, state.rects, { placement: state.placement })) : tetherOffset,
-									data = { x: 0, y: 0 };
-								if (popperOffsets) {
-									if (checkMainAxis || checkAltAxis) {
-										var mainSide = 'y' === mainAxis ? enums_top : left,
-											altSide = 'y' === mainAxis ? bottom : right,
-											len = 'y' === mainAxis ? 'height' : 'width',
-											offset = popperOffsets[mainAxis],
-											min = popperOffsets[mainAxis] + overflow[mainSide],
-											max = popperOffsets[mainAxis] - overflow[altSide],
-											additive = tether ? -popperRect[len] / 2 : 0,
-											minLen = 'start' === variation ? referenceRect[len] : popperRect[len],
-											maxLen = 'start' === variation ? -popperRect[len] : -referenceRect[len],
-											arrowElement = state.elements.arrow,
-											arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : { width: 0, height: 0 },
-											arrowPaddingObject = state.modifiersData['arrow#persistent']
-												? state.modifiersData['arrow#persistent'].padding
-												: { top: 0, right: 0, bottom: 0, left: 0 },
-											arrowPaddingMin = arrowPaddingObject[mainSide],
-											arrowPaddingMax = arrowPaddingObject[altSide],
-											arrowLen = within(0, referenceRect[len], arrowRect[len]),
-											minOffset = isBasePlacement
-												? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue
-												: minLen - arrowLen - arrowPaddingMin - tetherOffsetValue,
-											maxOffset = isBasePlacement
-												? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + tetherOffsetValue
-												: maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue,
-											arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow),
-											clientOffset = arrowOffsetParent
-												? 'y' === mainAxis
-													? arrowOffsetParent.clientTop || 0
-													: arrowOffsetParent.clientLeft || 0
-												: 0,
-											offsetModifierValue = state.modifiersData.offset ? state.modifiersData.offset[state.placement][mainAxis] : 0,
-											tetherMin = popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset,
-											tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue;
-										if (checkMainAxis) {
-											var preventedOffset = within(tether ? math_min(min, tetherMin) : min, offset, tether ? math_max(max, tetherMax) : max);
-											(popperOffsets[mainAxis] = preventedOffset), (data[mainAxis] = preventedOffset - offset);
-										}
-										if (checkAltAxis) {
-											var _mainSide = 'x' === mainAxis ? enums_top : left,
-												_altSide = 'x' === mainAxis ? bottom : right,
-												_offset = popperOffsets[altAxis],
-												_min = _offset + overflow[_mainSide],
-												_max = _offset - overflow[_altSide],
-												_preventedOffset = within(tether ? math_min(_min, tetherMin) : _min, _offset, tether ? math_max(_max, tetherMax) : _max);
-											(popperOffsets[altAxis] = _preventedOffset), (data[altAxis] = _preventedOffset - _offset);
-										}
-									}
-									state.modifiersData[name] = data;
-								}
-							},
-							requiresIfExists: ['offset'],
-						},
-						{
-							name: 'arrow',
-							enabled: !0,
-							phase: 'main',
-							fn: function arrow(_ref) {
-								var _state$modifiersData$,
-									state = _ref.state,
-									name = _ref.name,
-									options = _ref.options,
-									arrowElement = state.elements.arrow,
-									popperOffsets = state.modifiersData.popperOffsets,
-									basePlacement = getBasePlacement(state.placement),
-									axis = getMainAxisFromPlacement(basePlacement),
-									len = [left, right].indexOf(basePlacement) >= 0 ? 'height' : 'width';
-								if (arrowElement && popperOffsets) {
-									var paddingObject = (function toPaddingObject(padding, state) {
-											return mergePaddingObject(
-												'number' !=
-													typeof (padding =
-														'function' == typeof padding ? padding(Object.assign({}, state.rects, { placement: state.placement })) : padding)
-													? padding
-													: expandToHashMap(padding, basePlacements)
-											);
-										})(options.padding, state),
-										arrowRect = getLayoutRect(arrowElement),
-										minProp = 'y' === axis ? enums_top : left,
-										maxProp = 'y' === axis ? bottom : right,
-										endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len],
-										startDiff = popperOffsets[axis] - state.rects.reference[axis],
-										arrowOffsetParent = getOffsetParent(arrowElement),
-										clientSize = arrowOffsetParent ? ('y' === axis ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0) : 0,
-										centerToReference = endDiff / 2 - startDiff / 2,
-										min = paddingObject[minProp],
-										max = clientSize - arrowRect[len] - paddingObject[maxProp],
-										center = clientSize / 2 - arrowRect[len] / 2 + centerToReference,
-										offset = within(min, center, max),
-										axisProp = axis;
-									state.modifiersData[name] =
-										(((_state$modifiersData$ = {})[axisProp] = offset),
-										(_state$modifiersData$.centerOffset = offset - center),
-										_state$modifiersData$);
-								}
-							},
-							effect: function arrow_effect(_ref2) {
-								var state = _ref2.state,
-									_options$element = _ref2.options.element,
-									arrowElement = void 0 === _options$element ? '[data-popper-arrow]' : _options$element;
-								null != arrowElement &&
-									('string' != typeof arrowElement || (arrowElement = state.elements.popper.querySelector(arrowElement))) &&
-									contains(state.elements.popper, arrowElement) &&
-									(state.elements.arrow = arrowElement);
-							},
-							requires: ['popperOffsets'],
-							requiresIfExists: ['preventOverflow'],
-						},
+						modifiers_preventOverflow,
+						modifiers_arrow,
 						{
 							name: 'hide',
 							enabled: !0,
@@ -1239,20 +1235,20 @@
 					onFirstUpdate = _ref.onFirstUpdate,
 					innerRef = _ref.innerRef,
 					children = _ref.children,
-					referenceNode = react.useContext(ManagerReferenceNodeContext),
-					_React$useState = react.useState(null),
+					referenceNode = compat_module.qp(ManagerReferenceNodeContext),
+					_React$useState = compat_module.eJ(null),
 					popperElement = _React$useState[0],
 					setPopperElement = _React$useState[1],
-					_React$useState2 = react.useState(null),
+					_React$useState2 = compat_module.eJ(null),
 					arrowElement = _React$useState2[0],
 					setArrowElement = _React$useState2[1];
-				react.useEffect(
+				compat_module.d4(
 					function () {
 						setRef(innerRef, popperElement);
 					},
 					[innerRef, popperElement]
 				);
-				var options = react.useMemo(
+				var options = compat_module.Ye(
 						function () {
 							return {
 								placement,
@@ -1265,20 +1261,20 @@
 					),
 					_usePopper = (function usePopper(referenceElement, popperElement, options) {
 						void 0 === options && (options = {});
-						var prevOptions = react.useRef(null),
+						var prevOptions = compat_module.sO(null),
 							optionsWithDefaults = {
 								onFirstUpdate: options.onFirstUpdate,
 								placement: options.placement || 'bottom',
 								strategy: options.strategy || 'absolute',
 								modifiers: options.modifiers || EMPTY_MODIFIERS,
 							},
-							_React$useState = react.useState({
+							_React$useState = compat_module.eJ({
 								styles: { popper: { position: optionsWithDefaults.strategy, left: '0', top: '0' }, arrow: { position: 'absolute' } },
 								attributes: {},
 							}),
 							state = _React$useState[0],
 							setState = _React$useState[1],
-							updateStateModifier = react.useMemo(function () {
+							updateStateModifier = compat_module.Ye(function () {
 								return {
 									name: 'updateState',
 									enabled: !0,
@@ -1302,7 +1298,7 @@
 									requires: ['computeStyles'],
 								};
 							}, []),
-							popperOptions = react.useMemo(
+							popperOptions = compat_module.Ye(
 								function () {
 									var newOptions = {
 										onFirstUpdate: optionsWithDefaults.onFirstUpdate,
@@ -1322,7 +1318,7 @@
 									updateStateModifier,
 								]
 							),
-							popperInstanceRef = react.useRef();
+							popperInstanceRef = compat_module.sO();
 						return (
 							useIsomorphicLayoutEffect(
 								function () {
@@ -1357,7 +1353,7 @@
 					styles = _usePopper.styles,
 					forceUpdate = _usePopper.forceUpdate,
 					update = _usePopper.update,
-					childrenProps = react.useMemo(
+					childrenProps = compat_module.Ye(
 						function () {
 							return {
 								ref: setPopperElement,
@@ -1379,20 +1375,20 @@
 			function Reference(_ref) {
 				var children = _ref.children,
 					innerRef = _ref.innerRef,
-					setReferenceNode = react.useContext(ManagerReferenceNodeSetterContext),
-					refHandler = react.useCallback(
+					setReferenceNode = compat_module.qp(ManagerReferenceNodeSetterContext),
+					refHandler = compat_module.I4(
 						function (node) {
 							setRef(innerRef, node), safeInvoke(setReferenceNode, node);
 						},
 						[innerRef, setReferenceNode]
 					);
 				return (
-					react.useEffect(function () {
+					compat_module.d4(function () {
 						return function () {
 							return setRef(innerRef, null);
 						};
 					}),
-					react.useEffect(
+					compat_module.d4(
 						function () {
 							warning_default()(Boolean(setReferenceNode), '`Reference` should not be used outside of a `Manager` component.');
 						},
@@ -1401,7 +1397,7 @@
 					unwrapArray(children)({ ref: refHandler })
 				);
 			}
-			var TooltipContext = react.createContext({}),
+			var TooltipContext = compat_module.ZP.createContext({}),
 				callAll = function callAll() {
 					for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) fns[_key] = arguments[_key];
 					return function () {
@@ -1534,7 +1530,7 @@
 								arrowProps = _this$props3.arrowProps,
 								placement = _this$props3.placement,
 								tooltip = _this$props3.tooltip;
-							return react.createElement(
+							return compat_module.ZP.createElement(
 								TooltipContext.Provider,
 								{ value: this.contextValue },
 								tooltip({
@@ -1552,7 +1548,7 @@
 						}),
 						Tooltip
 					);
-				})(react.Component);
+				})(compat_module.wA);
 			Tooltip.contextType = TooltipContext;
 			var TooltipTrigger = (function (_Component) {
 				function TooltipTrigger() {
@@ -1668,7 +1664,7 @@
 								'getTooltipRef',
 								'mutationObserverOptions',
 							]),
-							popper = react.createElement(
+							popper = compat_module.ZP.createElement(
 								Popper,
 								(0, esm_extends.Z)(
 									{
@@ -1705,7 +1701,7 @@
 											y = pageY + height > window.pageYOffset + document.body.offsetHeight ? pageY - height : pageY;
 										style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0';
 									}
-									return react.createElement(
+									return compat_module.ZP.createElement(
 										Tooltip,
 										(0, esm_extends.Z)(
 											{ arrowProps, closeOnReferenceHidden, isReferenceHidden, placement, update, style, tooltip, trigger, mutationObserverOptions },
@@ -1714,14 +1710,14 @@
 									);
 								}
 							);
-						return react.createElement(
+						return compat_module.ZP.createElement(
 							Manager,
 							null,
-							react.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
+							compat_module.ZP.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
 								var ref = _ref4.ref;
 								return children({ getTriggerProps: _this2.getTriggerProps, triggerRef: ref });
 							}),
-							this.getState() && (usePortal ? (0, react_dom.createPortal)(popper, portalContainer) : popper)
+							this.getState() && (usePortal ? (0, compat_module.jz)(popper, portalContainer) : popper)
 						);
 					}),
 					(_proto.isControlled = function isControlled() {
@@ -1736,7 +1732,7 @@
 					}),
 					TooltipTrigger
 				);
-			})(react.Component);
+			})(compat_module.wA);
 			TooltipTrigger.defaultProps = {
 				closeOnReferenceHidden: !0,
 				defaultTooltipShown: !1,
@@ -1757,15 +1753,18 @@
 				memoizerific_default = __webpack_require__.n(memoizerific),
 				utils = __webpack_require__(30457);
 			function _extends() {
-				return (_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
 			}
 			function _objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
@@ -1876,10 +1875,10 @@
 						arrowRef = _ref5.arrowRef,
 						color = _ref5.color,
 						props = _objectWithoutProperties(_ref5, ['placement', 'hasChrome', 'children', 'arrowProps', 'tooltipRef', 'arrowRef', 'color']);
-					return react.createElement(
+					return compat_module.ZP.createElement(
 						Wrapper,
 						_extends({ hasChrome, placement, ref: tooltipRef }, props, { color }),
-						hasChrome && react.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
+						hasChrome && compat_module.ZP.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
 						children
 					);
 				};
@@ -1928,15 +1927,18 @@
 				return arr2;
 			}
 			function WithTooltip_extends() {
-				return (WithTooltip_extends =
-					Object.assign ||
-					function (target) {
-						for (var i = 1; i < arguments.length; i++) {
-							var source = arguments[i];
-							for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-						}
-						return target;
-					}).apply(this, arguments);
+				return (
+					(WithTooltip_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					WithTooltip_extends.apply(this, arguments)
+				);
 			}
 			function WithTooltip_objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
@@ -1997,7 +1999,7 @@
 							'onVisibilityChange',
 						]),
 						Container = svg ? TargetSvgContainer : TargetContainer;
-					return react.createElement(
+					return compat_module.ZP.createElement(
 						react_popper_tooltip,
 						{
 							placement,
@@ -2011,7 +2013,7 @@
 									tooltipRef = _ref2.tooltipRef,
 									arrowRef = _ref2.arrowRef,
 									tooltipPlacement = _ref2.placement;
-								return react.createElement(
+								return compat_module.ZP.createElement(
 									Tooltip_Tooltip,
 									WithTooltip_extends(
 										{ hasChrome, placement: tooltipPlacement, tooltipRef, arrowRef, arrowProps: getArrowProps() },
@@ -2030,7 +2032,7 @@
 						function (_ref3) {
 							var getTriggerProps = _ref3.getTriggerProps,
 								triggerRef = _ref3.triggerRef;
-							return react.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
+							return compat_module.ZP.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
 						}
 					);
 				};
@@ -2052,17 +2054,17 @@
 				var startOpen = _ref4.startOpen,
 					onChange = _ref4.onVisibilityChange,
 					rest = WithTooltip_objectWithoutProperties(_ref4, ['startOpen', 'onVisibilityChange']),
-					_useState2 = _slicedToArray((0, react.useState)(startOpen || !1), 2),
+					_useState2 = _slicedToArray((0, compat_module.eJ)(startOpen || !1), 2),
 					tooltipShown = _useState2[0],
 					setTooltipShown = _useState2[1],
-					onVisibilityChange = (0, react.useCallback)(
+					onVisibilityChange = (0, compat_module.I4)(
 						function (visibility) {
 							(onChange && !1 === onChange(visibility)) || setTooltipShown(visibility);
 						},
 						[onChange]
 					);
 				return (
-					(0, react.useEffect)(function () {
+					(0, compat_module.d4)(function () {
 						var hide = function hide() {
 							return onVisibilityChange(!1);
 						};
@@ -2096,10 +2098,67 @@
 							}
 						);
 					}),
-					react.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
+					compat_module.ZP.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
 				);
 			};
 			WithToolTipState.displayName = 'WithToolTipState';
+		},
+		78435: (module) => {
+			var hasElementType = 'undefined' != typeof Element,
+				hasMap = 'function' == typeof Map,
+				hasSet = 'function' == typeof Set,
+				hasArrayBuffer = 'function' == typeof ArrayBuffer && !!ArrayBuffer.isView;
+			function equal(a, b) {
+				if (a === b) return !0;
+				if (a && b && 'object' == typeof a && 'object' == typeof b) {
+					if (a.constructor !== b.constructor) return !1;
+					var length, i, keys, it;
+					if (Array.isArray(a)) {
+						if ((length = a.length) != b.length) return !1;
+						for (i = length; 0 != i--; ) if (!equal(a[i], b[i])) return !1;
+						return !0;
+					}
+					if (hasMap && a instanceof Map && b instanceof Map) {
+						if (a.size !== b.size) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!equal(i.value[1], b.get(i.value[0]))) return !1;
+						return !0;
+					}
+					if (hasSet && a instanceof Set && b instanceof Set) {
+						if (a.size !== b.size) return !1;
+						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
+						return !0;
+					}
+					if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+						if ((length = a.length) != b.length) return !1;
+						for (i = length; 0 != i--; ) if (a[i] !== b[i]) return !1;
+						return !0;
+					}
+					if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+					if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+					if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+					if ((length = (keys = Object.keys(a)).length) !== Object.keys(b).length) return !1;
+					for (i = length; 0 != i--; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return !1;
+					if (hasElementType && a instanceof Element) return !1;
+					for (i = length; 0 != i--; )
+						if ((('_owner' !== keys[i] && '__v' !== keys[i] && '__o' !== keys[i]) || !a.$$typeof) && !equal(a[keys[i]], b[keys[i]])) return !1;
+					return !0;
+				}
+				return a != a && b != b;
+			}
+			module.exports = function isEqual(a, b) {
+				try {
+					return equal(a, b);
+				} catch (error) {
+					if ((error.message || '').match(/stack|recursion/i)) return console.warn('react-fast-compare cannot handle circular refs'), !1;
+					throw error;
+				}
+			};
+		},
+		45982: (module) => {
+			'use strict';
+			var warning = function () {};
+			module.exports = warning;
 		},
 	},
 ]);
