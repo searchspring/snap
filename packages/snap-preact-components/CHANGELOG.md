@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/searchspring/snap/compare/v0.7.1...v0.7.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* **package-lock.json:** fixing some tests and errors related to package updates ([55ade00](https://github.com/searchspring/snap/commit/55ade000ac02e0a712b1d34486f885b975de7ba8))
+
+
+
+
+
 ## [0.7.1](https://github.com/searchspring/snap/compare/v0.7.0...v0.7.1) (2021-09-10)
 
 

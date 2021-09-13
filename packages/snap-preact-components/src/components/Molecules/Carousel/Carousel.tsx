@@ -99,7 +99,7 @@ const CSS = {
 		}),
 };
 
-export const defaultCarouselBreakpoints = {
+const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
