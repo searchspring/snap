@@ -1,7 +1,7 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Recommendation, Result } from '@searchspring/snap-preact-components';
+import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
 
 @observer
 export class Recs extends Component {
@@ -18,13 +18,24 @@ export class Recs extends Component {
 	render() {
 		const controller = this.props.controller;
 		const store = controller?.store;
+		const arr = [...Array(9).keys()];
 
 		return (
-			<Recommendation controller={controller} pagination={true}>
-				{store.results.map((result) => (
-					<Result result={result}></Result>
-				))}
-			</Recommendation>
+			<div>
+				<Carousel>
+					{arr.map((num) => (
+						<div>{num}!!!</div>
+					))}
+				</Carousel>
+
+				<hr style={{ margin: '20px 0' }} />
+
+				<Recommendation controller={controller}>
+					{store.results.map((result) => (
+						<Result result={result}></Result>
+					))}
+				</Recommendation>
+			</div>
 		);
 	}
 }

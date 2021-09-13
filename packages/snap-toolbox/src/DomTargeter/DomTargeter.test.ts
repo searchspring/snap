@@ -1,6 +1,11 @@
 import { Target } from './DomTargeter';
 import { DomTargeter } from './DomTargeter';
 
+import { TextEncoder, TextDecoder } from 'util';
+
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
 import { JSDOM } from 'jsdom';
 
 let document: Document;

@@ -2,7 +2,7 @@ import { Fragment, h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Carousel, defaultCarouselBreakpoints } from './Carousel';
+import { Carousel } from './Carousel';
 import { Icon, iconPaths } from '../../Atoms/Icon';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
