@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@searchspring/snap-toolbox": "^0.7.1",
-		"mobx": "^6.3.2"
+		"mobx": "^6.3.3"
 	},
 	"devDependencies": {
 		"@searchspring/snap-url-manager": "^0.7.1"
