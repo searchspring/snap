@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/searchspring/snap/compare/v0.7.1...v0.7.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* **package-lock.json:** fixing some tests and errors related to package updates ([55ade00](https://github.com/searchspring/snap/commit/55ade000ac02e0a712b1d34486f885b975de7ba8))
+
+
+
+
+
+## [0.7.1](https://github.com/searchspring/snap/compare/v0.7.0...v0.7.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **facet-component:** using handleize filter for classname of palette option ([b694cf9](https://github.com/searchspring/snap/commit/b694cf9cc85d4e86f1eb2ca0ee24319c438710d1))
+* **snap-client:** client support for siteId swap (using proper subdomain) for meta ([7607072](https://github.com/searchspring/snap/commit/7607072f4d0fc4f4d4c9b4bc102628ae2338aa3e))
+
+
+
+
+
 # [0.7.0](https://github.com/searchspring/snap/compare/v0.6.2...v0.7.0) (2021-09-09)
 
 

@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
 import { useState, useRef } from 'preact/hooks';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-import 'swiper/swiper.min.css';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -10,8 +8,6 @@ import { observer } from 'mobx-react-lite';
 import type { RecommendationController } from '@searchspring/snap-controller';
 
 import { Carousel, CarouselProps } from '../../Molecules/Carousel';
-import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -28,7 +24,7 @@ const CSS = {
 		}),
 };
 
-export const defaultRecommendationBreakpoints = {
+const defaultRecommendationBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -126,18 +122,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			className: 'ss__recommendation__result',
 			// global theme
 			...globalTheme?.components?.result,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props.theme,
-		},
-		icon: {
-			// default props
-			className: 'ss__recommendation__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -247,5 +231,4 @@ export interface RecommendationProps extends ComponentProps {
 interface RecommendationSubProps {
 	result: ResultProps;
 	carousel: CarouselProps;
-	icon: IconProps;
 }
