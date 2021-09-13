@@ -8,7 +8,7 @@ import type { AutocompleteControllerConfig, StoreServices } from '../types';
 
 import { StateStore, TermStore, QueryStore, FacetStore, TrendingStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
-	config: AutocompleteControllerConfig;
+	config: AutocompleteControllerConfig | Record<string, never>;
 	services: StoreServices;
 	meta: MetaResponseModel = {};
 
@@ -24,7 +24,7 @@ export class AutocompleteStore extends AbstractStore {
 	storage: StorageStore;
 	trending: TrendingStore;
 
-	constructor(config: AutocompleteControllerConfig, services: StoreServices) {
+	constructor(config: AutocompleteControllerConfig | Record<string, never>, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {

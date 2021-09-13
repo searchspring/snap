@@ -1,7 +1,6 @@
 import type { FinderControllerConfig, FinderFieldConfig, StoreServices } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { MetaResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
-import { MetaResponseModelFacetValueMultipleEnum } from '@searchspring/snapi-types';
 
 export class SelectionStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
@@ -69,7 +68,7 @@ class SelectionBase {
 	collapsed = false;
 	display = '';
 	label: string;
-	multiple: MetaResponseModelFacetValueMultipleEnum;
+	multiple: string;
 	id: string;
 	disabled = false;
 	selected = '';

@@ -7,7 +7,7 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 
 export class SearchStore extends AbstractStore {
-	config: SearchControllerConfig;
+	config: SearchControllerConfig | Record<string, never>;
 	services: StoreServices;
 	public data: SearchResponseModel & { meta: MetaResponseModel };
 	public meta: MetaResponseModel = {};
@@ -20,7 +20,7 @@ export class SearchStore extends AbstractStore {
 	public sorting: SortingStore;
 	public storage: StorageStore;
 
-	constructor(config: SearchControllerConfig, services: StoreServices) {
+	constructor(config: SearchControllerConfig | Record<string, never>, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {

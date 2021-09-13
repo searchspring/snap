@@ -10,7 +10,7 @@ export class FacetStore extends Array {
 	}
 
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig,
+		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
 		services: StoreServices,
 		storage: StorageStore,
 		facetsData: SearchResponseModelFacet[],

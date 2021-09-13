@@ -68,9 +68,7 @@ describe('Term Store', () => {
 	});
 
 	it('has terms with undefined url properties when no urlManager is present', () => {
-		const services = {
-			config: {},
-		};
+		const services = {};
 
 		const searchData = new SearchData({ search: 'autocomplete' });
 		const autocomplete = searchData.autocomplete;

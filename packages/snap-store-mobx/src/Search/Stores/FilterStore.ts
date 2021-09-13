@@ -10,7 +10,6 @@ import type {
 	MetaResponseModelFacetDefaults,
 	MetaResponseModelFacet,
 } from '@searchspring/snapi-types';
-import { SearchResponseModelFilterTypeEnum } from '@searchspring/snapi-types';
 
 export class FilterStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
@@ -22,7 +21,7 @@ export class FilterStore extends Array {
 			const facetMeta = meta.facets[filter.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
 
 			switch (filter.type) {
-				case SearchResponseModelFilterTypeEnum.Range:
+				case 'range':
 					const rangeFilter = filter as SearchResponseModelFilterRange;
 					return new RangeFilter(services, {
 						facet: {
@@ -36,7 +35,7 @@ export class FilterStore extends Array {
 						},
 					});
 
-				case SearchResponseModelFilterTypeEnum.Value:
+				case 'value':
 				default:
 					const valueFilter = filter as SearchResponseModelFilterValue;
 					return new Filter(services, {

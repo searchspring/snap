@@ -13,7 +13,7 @@ export class FinderStore extends AbstractStore {
 	meta: MetaResponseModel = {};
 	storage: StorageStore;
 	pagination: PaginationStore;
-	selections: SelectionStore[];
+	selections: SelectionStore;
 
 	constructor(config: FinderControllerConfig, services: StoreServices) {
 		super(config);

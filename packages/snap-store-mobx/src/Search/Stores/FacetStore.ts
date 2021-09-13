@@ -24,7 +24,7 @@ export class FacetStore extends Array {
 		return Array;
 	}
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig,
+		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
 		services: StoreServices,
 		storage: StorageStore,
 		facetsData: SearchResponseModelFacet[] = [],
@@ -220,7 +220,7 @@ class ValueFacet extends Facet {
 	};
 
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig,
+		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
 		services: StoreServices,
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue,

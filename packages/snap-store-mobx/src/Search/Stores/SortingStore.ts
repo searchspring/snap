@@ -6,10 +6,10 @@ import type {
 	MetaResponseModel,
 	MetaResponseModelSortOption,
 	MetaResponseModelSortOptionDirectionEnum,
+	SearchResponseModelFacetRangeBucketsAllOfValues,
 	SearchResponseModelSearch,
 	SearchResponseModelSorting,
 } from '@searchspring/snapi-types';
-import { MetaResponseModelSortOptionTypeEnum } from '@searchspring/snapi-types';
 
 interface MetaResponseModelSortOptionMutated extends MetaResponseModelSortOption {
 	active?: boolean;
@@ -26,14 +26,16 @@ export class SortingStore {
 			this.options = meta.sortOptions
 				.filter((option: MetaResponseModelSortOptionMutated) => {
 					if (!search?.query) {
-						return option.type == MetaResponseModelSortOptionTypeEnum.Field;
+						return option.type == 'field';
 					}
 
 					return option;
 				})
 				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
-					if (activeSort && activeSort.field == option.field) {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
 						option.active = true;
 					} else if (!activeSort && index === 0) {
 						option.active = true;
@@ -67,8 +69,8 @@ class Option {
 	default: boolean;
 	field: string;
 	label: string;
-	direction: MetaResponseModelSortOptionDirectionEnum;
-	type: MetaResponseModelSortOptionTypeEnum;
+	direction: string;
+	type: string;
 	value: string;
 	url: UrlManager;
 
