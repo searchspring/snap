@@ -76,7 +76,7 @@ export class Client {
 	private config: ClientConfig;
 	private requesters: {
 		autocomplete: HybridAPI;
-		meta: LegacyAPI;
+		meta: HybridAPI;
 		search: HybridAPI;
 		recommend: RecommendAPI;
 		suggest: SuggestAPI;
@@ -99,7 +99,7 @@ export class Client {
 					siteId: this.globals.siteId,
 				})
 			),
-			meta: new LegacyAPI(
+			meta: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.meta?.api?.host,
 					siteId: this.globals.siteId,
