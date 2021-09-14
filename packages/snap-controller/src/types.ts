@@ -63,19 +63,15 @@ export type Attachments = {
 	[any: string]: unknown;
 };
 
-export interface ControllerConfig extends StoreConfig {
-	middleware?: {
-		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
-	};
-}
+export type ControllerConfig = StoreConfig & Attachments;
 
 // Search Config
-export type SearchControllerConfig = ControllerConfig & Attachments & SearchStoreConfig;
+export type SearchControllerConfig = ControllerConfig & SearchStoreConfig;
 // Finder Config
-export type FinderControllerConfig = ControllerConfig & Attachments & FinderStoreConfig;
+export type FinderControllerConfig = ControllerConfig & FinderStoreConfig;
 // Autocomplete config
-export type AutocompleteControllerConfig = ControllerConfig & Attachments & AutocompleteStoreConfig;
+export type AutocompleteControllerConfig = ControllerConfig & AutocompleteStoreConfig;
 // Recommendation config
-export type RecommendationControllerConfig = ControllerConfig & Attachments & RecommendationStoreConfig;
+export type RecommendationControllerConfig = ControllerConfig & RecommendationStoreConfig;
 
 export type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;
