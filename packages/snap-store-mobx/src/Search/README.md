@@ -14,11 +14,11 @@ Contains redirect and banner merchandising data returned by the Search API.
 
 ```typescript
 enum ContentType {
-    HEADER = 'header',
-    BANNER = 'banner',
-    FOOTER = 'footer',
-    LEFT = 'left',
-    INLINE = 'inline',
+	HEADER = 'header',
+	BANNER = 'banner',
+	FOOTER = 'footer',
+	LEFT = 'left',
+	INLINE = 'inline',
 }
 ```
 

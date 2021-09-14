@@ -8,7 +8,7 @@ const tracker = new Tracker(globals);
 The Snap Tracker requires `TrackerGlobals` for instantiation.
 
 ### Global Config
-The `globals` object requires only a `siteId`.
+The `TrackerGlobals` object requires only a `siteId`.
 
 You can find your Searchspring `siteId` in the [Searchspring Management Console](https://manage.searchspring.net) and define it directly:
 
