@@ -5,7 +5,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 ## SearchControllerConfig
 
 | option | description | default value | required | 
-|---|---|---|---|
+|---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
 | settings.redirects.merchandising | enable merchandising redirects | true |   |

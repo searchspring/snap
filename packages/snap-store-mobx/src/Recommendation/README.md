@@ -27,15 +27,6 @@ const store = new RecommendationStore();
 store.reset()
 ```
 
-The following methods/getter are available:
-
-#### `reset` method
-Sets lock state to the original starting state when the Lock was constructed
-
-#### `update` method
-Updates the store with latest API response
-
-
 ## `profile` property
 Contains an object with the following properties:
 

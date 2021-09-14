@@ -256,7 +256,7 @@ An object with a single key:
 Typical usage is to use this with a search input for each facet, allowing a user to filter a large list of facet values.
 
 
-<h3 id="SearchFacetsMultiple">`multiple` property</h3>
+### `multiple` property
 
 Only applicable to facets where `type` is `value` or `range-buckets`
 
@@ -314,7 +314,7 @@ facet.overflow.toggle()
 Recalculates overflow state. Is also invoked when `setLimit` or `toggle` has been invoked.
 
 
-<h2 id="SearchStoreFilters">`filters` property</h2>
+## `filters` property
 
 Contains an array of filter object for the refined query requested to the Search API
 
@@ -341,7 +341,7 @@ Filter objects that contain a filter `type` of `value` or `range-buckets`, will 
 `url` - generated URL for this value
 
 
-<h2 id="SearchStoreResults">`results` property</h2>
+## `results` property
 
 Contains an array of products that matched the query to the Search API. This will also include any merchandising inline banners.
 

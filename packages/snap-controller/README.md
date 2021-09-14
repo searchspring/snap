@@ -44,23 +44,24 @@ Each `Controller` must be passed a configuration object as the first parameter t
 The complete example below shows how a `SearchController` could be instatiated, initialized and searched:
 
 ```typescript
-import { SearchController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
+import { SearchController } from '@searchspring/snap-controller';
 
 const configuration = {
 	id: 'search'
 };
 
+const urlManager = new UrlManager(new UrlTranslator());
 const services = {
 	client: new Client({ siteId: 'abc123' }),
-	store: new SearchStore(),
-	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+	store: new SearchStore(configuration, { urlManager }),
+	urlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
@@ -75,7 +76,7 @@ controller.search();
 ## Configuration
 The configuration object provided during instantiation provides a way of configuring the controller for different behavior. Each controller type (`SearchController`, `AutocompleteController`, `FinderController`, etc...) has default configurations that can be modified with the instantiation configuration object. At minimum an `id` attribute is required for identifying controllers. The `id` should be unique to each *instance* of a controller.
 ## Services
-Along with a configuration, each controller is passed a collection of services during instantiation. These services are then used by the controller and made available via controller methods. Sometimes controllers might share a reference to a service (the `client` service for example), but in most cases a controller will have it's own instance of a service.
+Along with a configuration, each controller is passed a collection of services during instantiation. These services are then used by the controller and made available via controller methods. Sometimes controllers might share a reference to a service (the `client` service for example), but in most cases a controller will have it's own instance of a service. Some services (like the `SearchStore`) share services with the controller (in the example above, the `UrlManager` is shared).
 
 ```typescript
 { client, store, urlManager, eventManager, profiler, logger }
