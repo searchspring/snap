@@ -10,10 +10,11 @@ import { Tracker } from '@searchspring/snap-tracker';
 
 import { SearchController } from './SearchController';
 import { MockClient } from '../__mocks__/MockClient';
+import type { SearchControllerConfig } from '../types';
 
 const globals = { siteId: 'ga9kq2' }; // bbwheels
 
-let searchConfig = {
+let searchConfig: SearchControllerConfig = {
 	id: 'search',
 	globals: {
 		filters: [],
@@ -158,6 +159,32 @@ describe('Search Controller', () => {
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/wheel.redirectResponse.full.json
 		// should not redirect whem redirectResponse='full'
 		expect(window.location.replace).not.toHaveBeenCalled();
+		expect(controller.store.results.length).toBeGreaterThan(0);
+	});
+
+	it('tests infinite setting', async () => {
+		searchConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {
+					backfill: 5,
+				},
+			},
+		};
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		expect(controller.config.settings.infinite.backfill).toBe(searchConfig.settings.infinite.backfill);
+
+		await controller.search();
 		expect(controller.store.results.length).toBeGreaterThan(0);
 	});
 
