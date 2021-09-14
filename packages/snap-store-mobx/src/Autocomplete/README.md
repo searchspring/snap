@@ -1,23 +1,44 @@
 # AutocompleteStore
+The autocomplete store is meant to hold the suggest and search API response and associated state. It extends the AbstractStore and the recommend response by adding several additional properties and methods to make working with the data easier.
 
 ```typescript
 import { AutocompleteStore } from '@searchspring/snap-store-mobx'
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-const store = new AutocompleteStore();
+const autocompleteConfig = {
+	id: 'autocomplete',
+	selector: '#searchInput',
+	settings: {
+		syncInputs: true
+	},
+};
 
-store.update(data)
+const autocompleteUrlManager = new UrlManager(new UrlTranslator()).detach();
+const store = new AutocompleteStore(autocompleteConfig, { urlManager: autocompleteUrlManager });
 
-console.log(store)
+store.update(data);
+
+console.log(store.toJSON());
 ```
+
+## `updateTrendingTerms` method
+Used to update the store with trending terms data
+
+## `setService` method
+Used to update any services on the store
 
 ## `reset` method
 Reset store to the initial state by clearing data and locks
 
 ```typescript
-const store = new AutocompleteStore();
-
 store.reset()
 ```
+
+## `resetTerms` method
+Sets all term suggestions to inactive
+
+## `resetTrending` method
+Sets all trending term suggestions to inactive
 
 ## `meta` property
 The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://snapi.kube.searchspring.io/api/v1/#tag/Meta)

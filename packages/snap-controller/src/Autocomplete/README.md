@@ -28,7 +28,7 @@ const autocompleteConfig = {
 ```
 
 ## Instantiate
-`AutocompleteController` requires an `AutocompleteControllerConfig` and `ControllerServices` object and is usually paired with an `AutocompleteStore`.
+`AutocompleteController` requires an `AutocompleteControllerConfig` and `ControllerServices` object and is paired with an `AutocompleteStore`. The `AutocompleteStore` takes the same config, and shares the `UrlManager` service with the controller.
 
 ```typescript
 import { AutocompleteController } from '@searchspring/snap-controller';
@@ -40,10 +40,11 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+const autocompleteUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
 const autocompleteController = new AutocompleteController(autocompleteConfig, {
 		client: new Client(globals, clientConfig),
-		store: new AutocompleteStore(),
-		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+		store: new AutocompleteStore(autocompleteConfig, { urlManager: autocompleteUrlManager }),
+		urlManager: autocompleteUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -53,7 +54,7 @@ const autocompleteController = new AutocompleteController(autocompleteConfig, {
 ```
 
 ## Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the UrlManager.
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
 ```typescript
 autocompleteController.init();
@@ -67,6 +68,14 @@ Invoking the `bind` method is required to attach event listeners to each input s
 autocompleteController.bind();
 ```
 
+## Unbind
+<!-- TODO: set/test link to DomTargeter -->
+Invoking the `unbind` method will remove attached event listeners previously attached by the `bind` method.
+
+```typescript
+autocompleteController.unbind();
+```
+
 ## Search
 This will invoke a search request to Searchspring's search API and populate the store with the response. This should be automatically called by the DOM event binding that occurs when the `bind` method (see above) is invoked.
 
@@ -77,7 +86,7 @@ autocompleteController.search();
 ## Events
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Done once automatically before the first search - or manually invoked by calling `init`
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -97,3 +106,7 @@ autocompleteController.search();
 ### focusChange
 - Called with `eventData` = { controller }
 - Invoked when an input has been focused
+
+### beforeSubmit
+- Called with `eventData` = { controller, input }
+- Invoked prior to submission of autocomplete search

@@ -27,7 +27,7 @@ const searchConfig = {
 };
 ```
 ## Instantiate
-`SearchController` requires a `SearchControllerConfig` and `ControllerServices` object and is usually paired with a `SearchStore`.
+`SearchController` requires a `SearchControllerConfig` and `ControllerServices` object and is paired with a `SearchStore`. The `SearchStore` takes the same config, and shares the `UrlManager` service with the controller.
 
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
@@ -39,10 +39,11 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+const searchUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
 const searchController = new SearchController(searchConfig, {
 	client: new Client({ siteId: 'abc123' }),
-	store: new SearchStore(),
-	urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+	store: new SearchStore(searchConfig, { urlManager: searchUrlManager }),
+	urlManager: searchUrlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
@@ -51,7 +52,7 @@ const searchController = new SearchController(searchConfig, {
 ```
 
 ## Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the UrlManager.
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
 ```typescript
 searchController.init();
@@ -144,7 +145,7 @@ export class Content extends Component {
 
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Done once automatically before the first search - or manually invoked by calling `init`
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
