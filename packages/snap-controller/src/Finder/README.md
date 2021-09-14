@@ -77,7 +77,7 @@ const finderConfig = {
 ```
 
 ## Instantiate
-`FinderController` requires a `FinderControllerConfig` and `ControllerServices` object and is usually paired with a `FinderStore`.
+`FinderController` requires a `FinderControllerConfig` and `ControllerServices` object and is paired with a `FinderStore`. The `FinderStore` takes the same config, and shares the `UrlManager` service with the controller.
 
 ```typescript
 import { FinderController } from '@searchspring/snap-controller';
@@ -89,10 +89,11 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+const finderUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
 const finderController = new FinderController(finderConfig, {
 		client: new Client(globals, clientConfig),
-		store: new FinderStore(),
-		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+		store: new FinderStore(finderConfig, { urlManager: finderUrlManager }),
+		urlManager: finderUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -101,7 +102,7 @@ const finderController = new FinderController(finderConfig, {
 ));
 ```
 ## Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the UrlManager.
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
 ```typescript
 finderController.init();
@@ -131,7 +132,7 @@ finderController.reset();
 ## Events
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Done once automatically before the first search - or manually invoked by calling `init`
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
