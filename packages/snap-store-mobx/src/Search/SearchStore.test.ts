@@ -7,6 +7,10 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
 
+const searchConfig = {
+	id: 'search',
+};
+
 describe('Search Store', () => {
 	let searchData;
 	beforeEach(() => {
@@ -14,7 +18,7 @@ describe('Search Store', () => {
 	});
 
 	it('returns correct initial state', () => {
-		const searchStore = new SearchStore({}, services);
+		const searchStore = new SearchStore(searchConfig, services);
 
 		expect(searchStore.loading).toBe(false);
 
@@ -44,7 +48,7 @@ describe('Search Store', () => {
 	});
 
 	it('update function updates all of the stores', () => {
-		const searchStore = new SearchStore({}, services);
+		const searchStore = new SearchStore(searchConfig, services);
 		searchStore.update(searchData);
 
 		expect(searchStore.meta).toBeDefined();

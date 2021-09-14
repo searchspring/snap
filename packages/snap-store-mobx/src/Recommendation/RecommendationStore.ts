@@ -2,7 +2,7 @@ import { makeObservable, observable } from 'mobx';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { ResultStore } from '../Search/Stores';
 import { ProfileStore } from './Stores';
-import type { RecommendationControllerConfig, StoreServices } from '../types';
+import type { RecommendationStoreConfig, StoreServices } from '../types';
 
 export class RecommendationStore extends AbstractStore {
 	services: StoreServices;
@@ -10,7 +10,7 @@ export class RecommendationStore extends AbstractStore {
 	profile: ProfileStore;
 	results: ResultStore;
 
-	constructor(config: RecommendationControllerConfig | Record<string, never>, services: StoreServices) {
+	constructor(config: RecommendationStoreConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {

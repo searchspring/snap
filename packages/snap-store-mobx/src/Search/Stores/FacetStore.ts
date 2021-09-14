@@ -2,7 +2,7 @@ import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteControllerConfig, SearchControllerConfig, StoreServices } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelFacet,
@@ -24,7 +24,7 @@ export class FacetStore extends Array {
 		return Array;
 	}
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
+		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
 		storage: StorageStore,
 		facetsData: SearchResponseModelFacet[] = [],
@@ -220,7 +220,7 @@ class ValueFacet extends Facet {
 	};
 
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
+		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
 		storage: StorageStore,
 		facet: SearchResponseModelFacetValue,

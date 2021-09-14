@@ -3,8 +3,8 @@ import deepmerge from 'deepmerge';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 
-import type { FinderStore, FinderControllerConfig } from '@searchspring/snap-store-mobx';
-import type { BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { FinderStore } from '@searchspring/snap-store-mobx';
+import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',

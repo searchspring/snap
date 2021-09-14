@@ -1,7 +1,7 @@
 import { FacetStore as SearchFacetStore } from '../../Search/Stores';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { StateStore } from './StateStore';
-import type { AutocompleteControllerConfig, SearchControllerConfig, StoreServices } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
 import type { SearchResponseModelFacet, SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
 
 export class FacetStore extends Array {
@@ -10,7 +10,7 @@ export class FacetStore extends Array {
 	}
 
 	constructor(
-		config: SearchControllerConfig | AutocompleteControllerConfig | Record<string, never>,
+		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
 		storage: StorageStore,
 		facetsData: SearchResponseModelFacet[],

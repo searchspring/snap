@@ -5,17 +5,17 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { PaginationStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 import { SelectionStore } from './Stores';
-import type { FinderControllerConfig, StoreServices } from '../types';
+import type { FinderStoreConfig, StoreServices } from '../types';
 
 export class FinderStore extends AbstractStore {
 	services: StoreServices;
-	config: FinderControllerConfig;
+	config: FinderStoreConfig;
 	meta: MetaResponseModel = {};
 	storage: StorageStore;
 	pagination: PaginationStore;
 	selections: SelectionStore;
 
-	constructor(config: FinderControllerConfig, services: StoreServices) {
+	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
@@ -43,7 +43,7 @@ export class FinderStore extends AbstractStore {
 	update(data: SearchResponseModel & { meta: MetaResponseModel; selections: SelectionStore[] }): void {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
-		this.pagination = new PaginationStore({}, this.services, data.pagination);
+		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
 		this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage);
 	}
 }

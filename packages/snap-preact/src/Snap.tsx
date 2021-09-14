@@ -7,6 +7,10 @@ import {
 	AutocompleteController,
 	FinderController,
 	AbstractController,
+	SearchControllerConfig,
+	AutocompleteControllerConfig,
+	FinderControllerConfig,
+	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore } from '@searchspring/snap-store-mobx';
@@ -17,12 +21,6 @@ import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { version } from '@searchspring/snap-toolbox';
 
-import type {
-	SearchControllerConfig,
-	AutocompleteControllerConfig,
-	FinderControllerConfig,
-	RecommendationControllerConfig,
-} from '@searchspring/snap-store-mobx';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';

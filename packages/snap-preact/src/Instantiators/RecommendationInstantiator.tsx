@@ -118,23 +118,21 @@ export class RecommendationInstantiator {
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
 				const urlManager = this.config.services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach();
-				const recs = new RecommendationController(
-					{
-						id: `recommend_${tag + (profileCount[tag] - 1)}`,
-						tag,
-						globals,
-						...this.config.config,
-					},
-					{
-						client: this.config.services?.client || this.client,
-						store: this.config.services?.store || new RecommendationStore({}, { urlManager }),
-						urlManager,
-						eventManager: this.config.services?.eventManager || new EventManager(),
-						profiler: this.config.services?.profiler || new Profiler(),
-						logger: this.config.services?.logger || new Logger(),
-						tracker: this.config.services?.tracker || this.tracker,
-					}
-				);
+				const controllerConfig = {
+					id: `recommend_${tag + (profileCount[tag] - 1)}`,
+					tag,
+					globals,
+					...this.config.config,
+				};
+				const recs = new RecommendationController(controllerConfig, {
+					client: this.config.services?.client || this.client,
+					store: this.config.services?.store || new RecommendationStore(controllerConfig, { urlManager }),
+					urlManager,
+					eventManager: this.config.services?.eventManager || new EventManager(),
+					profiler: this.config.services?.profiler || new Profiler(),
+					logger: this.config.services?.logger || new Logger(),
+					tracker: this.config.services?.tracker || this.tracker,
+				});
 
 				this.uses.forEach((attachements) => recs.use(attachements));
 				this.plugins.forEach((plugin) => recs.plugin(plugin));

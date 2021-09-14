@@ -1,13 +1,13 @@
 import { makeObservable, observable } from 'mobx';
 
 import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
-import type { SearchControllerConfig, StoreServices } from '../types';
+import type { SearchStoreConfig, StoreServices } from '../types';
 import { MerchandisingStore, FacetStore, FilterStore, ResultStore, PaginationStore, SortingStore, QueryStore } from './Stores';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 
 export class SearchStore extends AbstractStore {
-	config: SearchControllerConfig | Record<string, never>;
+	config: SearchStoreConfig;
 	services: StoreServices;
 	public data: SearchResponseModel & { meta: MetaResponseModel };
 	public meta: MetaResponseModel = {};
@@ -20,7 +20,7 @@ export class SearchStore extends AbstractStore {
 	public sorting: SortingStore;
 	public storage: StorageStore;
 
-	constructor(config: SearchControllerConfig | Record<string, never>, services: StoreServices) {
+	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {

@@ -4,11 +4,11 @@ import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { FilterStore, ResultStore, MerchandisingStore, PaginationStore, SortingStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
-import type { AutocompleteControllerConfig, StoreServices } from '../types';
+import type { AutocompleteStoreConfig, StoreServices } from '../types';
 
 import { StateStore, TermStore, QueryStore, FacetStore, TrendingStore } from './Stores';
 export class AutocompleteStore extends AbstractStore {
-	config: AutocompleteControllerConfig | Record<string, never>;
+	config: AutocompleteStoreConfig;
 	services: StoreServices;
 	meta: MetaResponseModel = {};
 
@@ -24,7 +24,7 @@ export class AutocompleteStore extends AbstractStore {
 	storage: StorageStore;
 	trending: TrendingStore;
 
-	constructor(config: AutocompleteControllerConfig | Record<string, never>, services: StoreServices) {
+	constructor(config: AutocompleteStoreConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
@@ -136,7 +136,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.resetTrending();
 		}
 
-		this.pagination = new PaginationStore({}, this.services, data.pagination);
+		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
 		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
 	}
 }

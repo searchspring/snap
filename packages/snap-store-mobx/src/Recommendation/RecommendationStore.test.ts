@@ -10,7 +10,11 @@ const services = {
 
 describe('RecommendationStore store', () => {
 	it('can create empty RecommendationsStore', () => {
-		const store = new RecommendationStore({}, services);
+		const recommendationConfig = {
+			id: 'rec',
+			tag: 'trending',
+		};
+		const store = new RecommendationStore(recommendationConfig, services);
 		expect(store.loaded).toBe(false);
 		expect(store.profile).toEqual({ display: {} });
 		expect(store.results).toStrictEqual([]);
@@ -21,7 +25,12 @@ describe('RecommendationStore store', () => {
 		const results = new SearchData({ search: 'recommend' })[0].results;
 		const data = { profile, results };
 
-		const store = new RecommendationStore({}, services);
+		const recommendationConfig = {
+			id: 'rec',
+			tag: data.profile.tag,
+		};
+
+		const store = new RecommendationStore(recommendationConfig, services);
 		store.update(data);
 
 		expect(store.loaded).toBe(true);

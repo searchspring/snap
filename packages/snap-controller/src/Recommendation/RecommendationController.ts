@@ -5,8 +5,8 @@ import { LogMode } from '@searchspring/snap-logger';
 import { AbstractController } from '../Abstract/AbstractController';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
-import type { RecommendationStore, RecommendationControllerConfig } from '@searchspring/snap-store-mobx';
-import type { BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { RecommendationStore } from '@searchspring/snap-store-mobx';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {

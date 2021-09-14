@@ -1,5 +1,5 @@
 import { makeObservable, observable, toJS, configure } from 'mobx';
-import type { ControllerConfigs } from '../types';
+import type { StoreConfigs } from '../types';
 
 configure({
 	// useProxies: "never",  // for IE 11 (es5) support
@@ -11,9 +11,9 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = false;
 	public loaded = false;
-	public config: ControllerConfigs;
+	public config: StoreConfigs;
 
-	constructor(config: ControllerConfigs) {
+	constructor(config: StoreConfigs) {
 		this.config = config;
 
 		makeObservable(this, {
@@ -23,7 +23,7 @@ export abstract class AbstractStore {
 		});
 	}
 
-	setConfig(newConfig: ControllerConfigs): void {
+	setConfig(newConfig: StoreConfigs): void {
 		this.config = newConfig;
 	}
 

@@ -1,4 +1,4 @@
-import type { FinderControllerConfig, FinderFieldConfig, StoreServices } from '../../types';
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { MetaResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
 
@@ -8,7 +8,7 @@ export class SelectionStore extends Array {
 	}
 
 	constructor(
-		config: FinderControllerConfig,
+		config: FinderStoreConfig,
 		services: StoreServices,
 		facets: SearchResponseModelFacet[],
 		meta: MetaResponseModel,
