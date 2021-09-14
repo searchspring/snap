@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@searchspring/snap-preact": "^0.7.2",
 		"@searchspring/snap-preact-components": "^0.7.2",
+		"deepmerge": "^4.2.2",
 		"mobx": "^6.3.3",
 		"mobx-react": "^7.2.0",
 		"preact": "^10.5.14"
