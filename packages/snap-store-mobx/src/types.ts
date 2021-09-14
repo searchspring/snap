@@ -1,10 +1,10 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
 // Abstract
-export interface StoreConfig {
+export type StoreConfig = {
 	id: string;
 	[any: string]: unknown;
-}
+};
 
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
