@@ -1,9 +1,20 @@
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices } from '../../types';
+import type { StorageStore } from '../../Storage/StorageStore';
+import type { MetaResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
+
 export class SelectionStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(config, services, facets, meta, loading, storage) {
+	constructor(
+		config: FinderStoreConfig,
+		services: StoreServices,
+		facets: SearchResponseModelFacet[],
+		meta: MetaResponseModel,
+		loading: boolean,
+		storage: StorageStore
+	) {
 		if (!facets || !meta) {
 			return;
 		}
@@ -15,7 +26,7 @@ export class SelectionStore extends Array {
 			});
 		const selections = [];
 		config?.fields?.forEach((fieldObj) => {
-			let facet = facets?.filter((facet) => facet.field == fieldObj.field).pop();
+			let facet: any = facets?.filter((facet) => facet.field == fieldObj.field).pop();
 
 			facet = {
 				...meta?.facets[fieldObj.field],
@@ -38,7 +49,7 @@ export class SelectionStore extends Array {
 				const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
 
 				levels?.map((level, index) => {
-					const levelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
+					const levelConfig: LevelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
 					selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
 				});
 			} else {
@@ -63,13 +74,20 @@ class SelectionBase {
 	selected = '';
 	custom = {};
 
-	services;
-	loading;
-	config;
-	data;
+	services: StoreServices;
+	loading: boolean;
+	config: FinderFieldConfig | LevelConfig;
+	data: SearchResponseModelFacetValueAllOfValues[];
 	storage;
 
-	constructor(services, id, facet, selectionConfig, loading, storageStore) {
+	constructor(
+		services: StoreServices,
+		id: string,
+		facet,
+		selectionConfig: FinderFieldConfig | LevelConfig,
+		loading: boolean,
+		storageStore: StorageStore
+	) {
 		this.services = services;
 		this.loading = loading;
 
@@ -118,7 +136,7 @@ class Selection extends SelectionBase {
 		field: string;
 	};
 
-	constructor(services, id, facet, config, loading, storageStore) {
+	constructor(services: StoreServices, id: string, facet, config: FinderFieldConfig, loading: boolean, storageStore: StorageStore) {
 		super(services, id, facet, config, loading, storageStore);
 
 		this.loading = loading;
@@ -149,13 +167,9 @@ class Selection extends SelectionBase {
 
 class SelectionHierarchy extends SelectionBase {
 	hierarchyDelimiter: string;
-	config: {
-		index: number;
-		label?: string;
-		key: string;
-	};
+	config: LevelConfig;
 
-	constructor(services, id, facet, config, loading, storageStore) {
+	constructor(services: StoreServices, id: string, facet, config: LevelConfig, loading: boolean, storageStore: StorageStore) {
 		super(services, id, facet, config, loading, storageStore);
 
 		// inherit additional facet properties
@@ -217,3 +231,9 @@ class SelectionHierarchy extends SelectionBase {
 		this.services.urlManager.set(`filter.${this.field}`, value).go();
 	}
 }
+
+type LevelConfig = {
+	index: number;
+	label?: string;
+	key: string;
+};

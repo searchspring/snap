@@ -2,7 +2,14 @@ import type { AbstractController } from './Abstract/AbstractController';
 import type { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
-import type { AbstractStore } from '@searchspring/snap-store-mobx';
+import type {
+	AbstractStore,
+	StoreConfig,
+	SearchStoreConfig,
+	FinderStoreConfig,
+	AutocompleteStoreConfig,
+	RecommendationStoreConfig,
+} from '@searchspring/snap-store-mobx';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
@@ -38,15 +45,6 @@ export type AfterStoreObj = {
 	response: any;
 };
 
-// Abstract
-export interface ControllerConfig {
-	id: string;
-	middleware?: {
-		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
-	};
-	plugins?: PluginGrouping[];
-}
-
 export type ControllerServices = {
 	client: Client;
 	store: AbstractStore;
@@ -58,71 +56,22 @@ export type ControllerServices = {
 };
 
 export type Attachments = {
-	on?: {
+	middleware?: {
 		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
 	};
 	plugins?: PluginGrouping[];
 	[any: string]: unknown;
 };
 
+export type ControllerConfig = StoreConfig & Attachments;
+
 // Search Config
-export type SearchControllerConfig = ControllerConfig &
-	Attachments & {
-		globals?: any;
-		settings?: {
-			redirects?: {
-				merchandising?: boolean;
-				singleResult?: boolean;
-			};
-			facets?: {
-				trim?: boolean;
-				pinFiltered?: boolean;
-			};
-			infinite?: {
-				backfill?: number;
-			};
-		};
-	};
-
+export type SearchControllerConfig = ControllerConfig & SearchStoreConfig;
 // Finder Config
-export type FinderControllerConfig = ControllerConfig &
-	Attachments & {
-		globals?: any;
-		url?: string;
-		fields: FinderFieldConfig[];
-	};
-
-export type FinderFieldConfig = {
-	field: string;
-	label?: string;
-	levels?: string[];
-};
-
+export type FinderControllerConfig = ControllerConfig & FinderStoreConfig;
 // Autocomplete config
-export type AutocompleteControllerConfig = ControllerConfig &
-	Attachments & {
-		globals?: any;
-		selector: string;
-		action?: string;
-		settings: {
-			initializeFromUrl: boolean;
-			syncInputs: boolean;
-			facets?: {
-				trim?: boolean;
-				pinFiltered?: boolean;
-			};
-			trending?: {
-				limit: number;
-			};
-		};
-	};
-
+export type AutocompleteControllerConfig = ControllerConfig & AutocompleteStoreConfig;
 // Recommendation config
-export type RecommendationControllerConfig = ControllerConfig &
-	Attachments & {
-		globals?: any;
-		tag: string;
-		branch?: string;
-	};
+export type RecommendationControllerConfig = ControllerConfig & RecommendationStoreConfig;
 
 export type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;

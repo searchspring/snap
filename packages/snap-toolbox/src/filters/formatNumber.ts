@@ -7,7 +7,7 @@ export type formatNumberOptions = {
 	symbolAfter?: boolean;
 };
 
-export function formatNumber(input: number, opts?: formatNumberOptions): string {
+export function formatNumber(input: number, opts?: formatNumberOptions): string | undefined {
 	const options = {
 		symbol: '',
 		decimalPlaces: 3,

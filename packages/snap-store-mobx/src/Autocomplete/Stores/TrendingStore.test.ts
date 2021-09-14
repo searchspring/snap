@@ -59,9 +59,7 @@ describe('Trending Store', () => {
 	});
 
 	it('has terms with undefined url properties when no urlManager is present', () => {
-		const services = {
-			config: {},
-		};
+		const services = {};
 
 		const searchData = new SearchData({ search: 'trending' });
 		const trendingData = searchData.trending;

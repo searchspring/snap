@@ -1,16 +1,40 @@
 import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
-import { StorageStore } from '../../Storage/StorageStore';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { StorageStore } from '../../Storage/StorageStore';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
+import type {
+	MetaResponseModel,
+	MetaResponseModelFacet,
+	MetaResponseModelFacetDefaults,
+	MetaResponseModelFacetSlider,
+	MetaResponseModelFacetValueMultipleEnum,
+	MetaResponseModelFacetHierarchyAllOf,
+	SearchResponseModelPagination,
+	SearchResponseModelFacet,
+	SearchResponseModelFacetRange,
+	SearchResponseModelFacetValue,
+	SearchResponseModelFacetValueAllOf,
+	SearchResponseModelFacetValueAllOfValues,
+	SearchRequestModelFilterRangeAllOfValue,
+} from '@searchspring/snapi-types';
 
 export class FacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
-	constructor(config, services, storage: StorageStore, facets = [], pagination, meta) {
-		facets = facets
-			.filter((facet) => {
+	constructor(
+		config: SearchStoreConfig | AutocompleteStoreConfig,
+		services: StoreServices,
+		storage: StorageStore,
+		facetsData: SearchResponseModelFacet[] = [],
+		pagination: SearchResponseModelPagination,
+		meta: MetaResponseModel
+	) {
+		const facets = facetsData
+			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
 				if (config.settings?.facets?.trim) {
-					if (facet.type === 'range' && facet.range.low == facet.range.high) {
+					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
 						return false;
@@ -21,7 +45,7 @@ export class FacetStore extends Array {
 				return true;
 			})
 			.map((facet) => {
-				const facetMeta = meta.facets[facet.field];
+				const facetMeta = meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
 
 				switch (facet.type) {
 					case 'range':
@@ -33,12 +57,14 @@ export class FacetStore extends Array {
 				}
 			});
 
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		super(...facets);
 	}
 }
 
 class Facet {
-	private services;
+	private services: StoreServices;
 	type: string;
 	field: string;
 	filtered = false;
@@ -48,7 +74,12 @@ class Facet {
 	label = '';
 	storage: StorageStore;
 
-	constructor(services, storage: StorageStore, facet, facetMeta) {
+	constructor(
+		services: StoreServices,
+		storage: StorageStore,
+		facet: SearchResponseModelFacetValue | SearchResponseModelFacetRange,
+		facetMeta: MetaResponseModelFacet
+	) {
 		this.services = services;
 		this.storage = storage;
 
@@ -88,18 +119,18 @@ class Facet {
 
 class RangeFacet extends Facet {
 	step: number;
-	range: {
-		low: 0;
-		high: 0;
+	range: SearchRequestModelFilterRangeAllOfValue = {
+		low: 0,
+		high: 0,
 	};
-	active: {
-		low: 0;
-		high: 0;
+	active: SearchRequestModelFilterRangeAllOfValue = {
+		low: 0,
+		high: 0,
 	};
 	formatSeparator: string;
 	formatValue: string;
 
-	constructor(services, storage, facet, facetMeta) {
+	constructor(services: StoreServices, storage: StorageStore, facet: SearchResponseModelFacetRange, facetMeta: MetaResponseModelFacetSlider) {
 		super(services, storage, facet, facetMeta);
 
 		this.step = facet.step;
@@ -138,13 +169,13 @@ class RangeFacet extends Facet {
 }
 
 class ValueFacet extends Facet {
-	values = [];
+	values: SearchResponseModelFacetValueAllOfValues[] = [];
 
 	search = {
 		input: '',
 	};
 
-	multiple: string;
+	multiple: MetaResponseModelFacetValueMultipleEnum;
 
 	overflow = {
 		enabled: false,
@@ -188,7 +219,13 @@ class ValueFacet extends Facet {
 		},
 	};
 
-	constructor(config, services, storage, facet, facetMeta) {
+	constructor(
+		config: SearchStoreConfig | AutocompleteStoreConfig,
+		services: StoreServices,
+		storage: StorageStore,
+		facet: SearchResponseModelFacetValue,
+		facetMeta: MetaResponseModelFacet
+	) {
 		super(services, storage, facet, facetMeta);
 
 		this.multiple = this.multiple;
@@ -211,7 +248,7 @@ class ValueFacet extends Facet {
 			[];
 
 		if (config.settings?.facets?.pinFiltered && facetMeta.display !== 'hierarchy') {
-			this.values.sort((a, b) => b.filtered - a.filtered);
+			this.values.sort((a, b) => Number(b.filtered) - Number(a.filtered));
 		}
 
 		const overflowLimitedState = this.storage.get(`facets.${this.field}.overflow.limited`);
@@ -253,14 +290,14 @@ class ValueFacet extends Facet {
 }
 
 class Value {
-	label;
-	count;
-	filtered;
-	value;
+	label: string;
+	count: number;
+	filtered: boolean;
+	value: string;
 	custom;
-	url;
+	url: UrlManager;
 
-	constructor(services, facet, value) {
+	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
@@ -279,7 +316,12 @@ class HierarchyValue extends Value {
 	level = 0;
 	history = false;
 
-	constructor(services, facet, value, filteredValues) {
+	constructor(
+		services: StoreServices,
+		facet: ValueFacet & MetaResponseModelFacetHierarchyAllOf,
+		value: SearchResponseModelFacetValueAllOfValues,
+		filteredValues: SearchResponseModelFacetValueAllOfValues[]
+	) {
 		super(services, facet, value);
 
 		if (value.value && facet.hierarchyDelimiter) {
@@ -302,15 +344,15 @@ class HierarchyValue extends Value {
 }
 
 class RangeValue {
-	label;
-	count;
-	filtered;
-	low;
-	high;
+	label: string;
+	count: number;
+	filtered: boolean;
+	low: number;
+	high: number;
 	custom;
-	url;
+	url: UrlManager;
 
-	constructor(services, facet, value) {
+	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
@@ -327,6 +369,6 @@ class RangeValue {
 	}
 }
 
-function escapeRegExp(string) {
+function escapeRegExp(string: string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }

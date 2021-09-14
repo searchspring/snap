@@ -16,7 +16,7 @@ export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
-	private styleBlockRefs = {};
+	private styleBlockRefs: Record<string, Node> = {};
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -61,7 +61,7 @@ export class DomTargeter {
 			return elems.map((elem) => ({ target, elem }));
 		});
 
-		const errors = [];
+		const errors: string[] = [];
 
 		targetElemPairs.forEach(({ target, elem }) => {
 			if (target.inject) {
@@ -69,7 +69,7 @@ export class DomTargeter {
 					const injectedElem = this.inject(elem, target);
 					this.onTarget(target, injectedElem, elem);
 				} catch (e) {
-					errors.push(e);
+					errors.push(String(e));
 				}
 			} else {
 				// empty target selector by default
