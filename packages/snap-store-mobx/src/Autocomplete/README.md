@@ -62,8 +62,29 @@ The `locks` object contains two properties:
 
 - `facets` property contains a Lock object
 
-### `Lock` object
+### `focusedInput` property
+Contains a reference to the current focused `HTMLInputElement`
+
+### `input` property
+Contains the currently focused input value being searched
+
+### `url` property
+Contains a reference to the [UrlManager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) that was linked using the `link` method
+
+## `Lock` object
 A `Lock` object contains a private boolean state. The initial state can be defined in the constructor, default is `false`
+
+### `reset` method
+Sets lock state to the original starting state when the Lock was constructed
+
+### `lock` method
+Sets lock state to `true`
+
+### `unlock` method
+Sets lock state to `false`
+
+### `locked` getter
+Boolean `true` if the Lock state is locked
 
 ```typescript
 let lock;
@@ -85,29 +106,6 @@ lock.reset();
 console.log(lock.locked) // true
 ```
 
-The following methods/getter are available:
-
-#### `reset` method
-Sets lock state to the original starting state when the Lock was constructed
-
-#### `lock` method
-Sets lock state to `true`
-
-#### `unlock` method
-Sets lock state to `false`
-
-#### `locked` getter
-Boolean `true` if the Lock state is locked
-
-### `focusedInput` property
-Contains a reference to the current focused `HTMLInputElement`
-
-### `input` property
-Contains the currently focused input value being searched
-
-### `url` property
-Contains a reference to the [UrlManager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) that was linked using the `link` method
-
 ## `storage` property
 Contains a reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
 
@@ -124,12 +122,12 @@ Contains an object with the following properties:
 `originalQuery` - Original query if spell correction occurred
 
 ## `terms` property
-An array of Term objects.
+An array of `Term` objects.
 
 ## `trending` property
-An array of trending Term objects.
+An array of trending `Term` objects.
 
-### `Term` object
+## `Term` object
 Each `Term` object corresponds to a term returned from the Autocomplete API and/or Suggest API
 
 ### `active` property
@@ -141,8 +139,7 @@ Term text value
 ### `url` property
 Set to an instance of UrlManager for the term
 
-<h3 id="AutocompletePreview">`preview` method</h3>
-
+### `preview` method
 Query API for the term that was previewed and displays results.
 This will also lock the term state, and unlock facets state. 
 

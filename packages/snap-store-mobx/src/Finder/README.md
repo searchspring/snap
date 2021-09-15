@@ -56,7 +56,7 @@ const value = selections[0].values[0]
 selections[0].select(value)
 ```
 
-<h3 id="FinderStoreSelectionsConfig">`config` property</h3>
+### `config` property
 
 A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
 

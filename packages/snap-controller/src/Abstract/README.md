@@ -6,7 +6,7 @@ The `AbstractController` is used as the base class for all Snap controllers. As 
 The required configuration for all controllers is an `id`. This identifier should be unique to identify various instantiated controllers from each other.
 
 | option | description | default value | required | 
-|---|---|---|---|
+|---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 
 <br>
