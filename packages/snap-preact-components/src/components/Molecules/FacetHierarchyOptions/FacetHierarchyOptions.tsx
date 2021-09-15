@@ -56,10 +56,10 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	const props: FacetHierarchyOptionsProps = {
 		// default props
 		// global theme
-		...globalTheme?.components?.FacetHierarchyOptions,
+		...globalTheme?.components?.facetHierarchyOptions,
 		//props
 		...properties,
-		...properties.theme?.components?.FacetHierarchyOptions,
+		...properties.theme?.components?.facetHierarchyOptions,
 	};
 
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, className, style } = props;

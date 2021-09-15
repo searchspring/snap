@@ -1,6 +1,6 @@
 import 'preact/debug';
 import { h, Fragment, render } from 'preact';
-
+import deepmerge from 'deepmerge';
 /* searchspring imports */
 
 import { Snap } from '@searchspring/snap-preact';
@@ -13,6 +13,7 @@ import { Recs } from './components/Recommendations/';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
+import { combineMerge } from './middleware/functions';
 
 import './styles/custom.scss';
 
@@ -20,7 +21,7 @@ import './styles/custom.scss';
 	configuration and instantiation
  */
 
-const config = {
+let config = {
 	url: {
 		settings: {
 			coreType: 'query',
@@ -98,6 +99,11 @@ const config = {
 		],
 	},
 };
+
+// used to add config settings from cypress e2e tests
+if (window?.mergeSnapConfig) {
+	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
+}
 
 const snap = new Snap(config);
 const { search, autocomplete } = snap.controllers;

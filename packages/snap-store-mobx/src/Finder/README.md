@@ -1,13 +1,28 @@
 # FinderStore
+The finder store is meant to hold the API response and associated selection state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
 ```typescript
 import { FinderStore } from '@searchspring/snap-store-mobx'
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-const store = new FinderStore();
+const finderConfig = {
+	id: 'finder',
+	url: '/search',
+	fields: [
+		{
+			field: 'ss_tire',
+			label: 'Wheel Finder',
+			levels: ['Year', 'Make', 'Model', 'Wheel Size']
+		},
+	]
+};
 
-store.update(data)
+const finderUrlManager = new UrlManager(new UrlTranslator()).detach(0);
+const store = new FinderStore(finderConfig, { urlManager: finderUrlManager });
 
-console.log(store)
+store.update(data);
+
+console.log(store.toJSON());
 ```
 
 ## `meta` property
@@ -41,7 +56,7 @@ const value = selections[0].values[0]
 selections[0].select(value)
 ```
 
-<h3 id="FinderStoreSelectionsConfig">`config` property</h3>
+### `config` property
 
 A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
 

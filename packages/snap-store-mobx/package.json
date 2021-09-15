@@ -24,7 +24,8 @@
 		"mobx": "^6.3.3"
 	},
 	"devDependencies": {
-		"@searchspring/snap-url-manager": "^0.7.2"
+		"@searchspring/snap-url-manager": "^0.7.2",
+		"@searchspring/snapi-types": "^0.1.19"
 	},
 	"sideEffects": false,
 	"files": [

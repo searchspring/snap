@@ -5,7 +5,7 @@ const utils = {
 };
 
 export class StorageStore {
-	type = null;
+	type: StorageType | null = null;
 	expiration = 31536000000; // one year (ms)
 	sameSite = undefined;
 	key = 'ss-storage';

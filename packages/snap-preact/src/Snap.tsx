@@ -7,6 +7,10 @@ import {
 	AutocompleteController,
 	FinderController,
 	AbstractController,
+	SearchControllerConfig,
+	AutocompleteControllerConfig,
+	FinderControllerConfig,
+	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore } from '@searchspring/snap-store-mobx';
@@ -17,12 +21,6 @@ import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { version } from '@searchspring/snap-toolbox';
 
-import type {
-	SearchControllerConfig,
-	AutocompleteControllerConfig,
-	FinderControllerConfig,
-	RecommendationControllerConfig,
-} from '@searchspring/snap-controller';
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
@@ -318,7 +316,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new SearchStore(config, { urlManager }),
+					store: services?.store || new SearchStore(config as SearchControllerConfig, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -334,7 +332,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach();
 				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new AutocompleteStore(config, { urlManager }),
+					store: services?.store || new AutocompleteStore(config as AutocompleteControllerConfig, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -350,7 +348,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new FinderController(config as FinderControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new FinderStore(config, { urlManager }),
+					store: services?.store || new FinderStore(config as FinderControllerConfig, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),
@@ -366,7 +364,7 @@ export class Snap {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
 				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
 					client: services?.client || this.client,
-					store: services?.store || new RecommendationStore(config, { urlManager }),
+					store: services?.store || new RecommendationStore(config as RecommendationControllerConfig, { urlManager }),
 					urlManager,
 					eventManager: services?.eventManager || new EventManager(),
 					profiler: services?.profiler || new Profiler(),

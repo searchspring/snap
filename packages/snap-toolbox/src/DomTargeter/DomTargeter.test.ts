@@ -74,7 +74,7 @@ describe('DomTargeter', () => {
 		calledTargets.forEach((ct) => {
 			expect(ct.class).toBe(ct.target.selector.slice(-1));
 		});
-		expect(document.querySelector('.b').firstChild).toBeNull();
+		expect(document.querySelector('.b')?.firstChild).toBeNull();
 		expect(document.querySelector('.d')).toBeNull();
 	});
 

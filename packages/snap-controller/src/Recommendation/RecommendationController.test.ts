@@ -30,12 +30,13 @@ describe('Recommendation Controller', () => {
 		expect(() => {
 			const configWithoutTag = {
 				id: recommendConfig.id,
+				tag: undefined,
 			};
 
 			// @ts-ignore
 			const controller = new RecommendationController(configWithoutTag, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore({}, services),
+				store: new RecommendationStore(configWithoutTag, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
@@ -48,7 +49,7 @@ describe('Recommendation Controller', () => {
 	it(`adds a test param when in development environment`, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
-			store: new RecommendationStore({}, services),
+			store: new RecommendationStore(recommendConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
@@ -68,7 +69,7 @@ describe('Recommendation Controller', () => {
 		it(`tests ${event} middleware cancellation handled`, async function () {
 			const controller = new RecommendationController(recommendConfig, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore({}, services),
+				store: new RecommendationStore(recommendConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
@@ -96,7 +97,7 @@ describe('Recommendation Controller', () => {
 		it(`tests ${event} middleware error handled`, async function () {
 			const controller = new RecommendationController(recommendConfig, {
 				client: new MockClient(globals, {}),
-				store: new RecommendationStore({}, services),
+				store: new RecommendationStore(recommendConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),

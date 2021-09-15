@@ -1,11 +1,15 @@
 import { observable, makeObservable } from 'mobx';
 
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { StoreServices } from '../../types';
+import type { SearchResponseModelSearch } from '@searchspring/snapi-types';
+
 export class QueryStore {
 	query: Query;
 	didYouMean: Query;
 	originalQuery: Query;
 
-	constructor(services, search) {
+	constructor(services: StoreServices, search: SearchResponseModelSearch) {
 		const observables: Observables = {};
 
 		if (search?.query) {
@@ -35,9 +39,9 @@ type Observables = {
 
 class Query {
 	string: string;
-	url;
+	url: UrlManager;
 
-	constructor(services, query) {
+	constructor(services: StoreServices, query: string) {
 		this.string = query;
 
 		this.url = services.urlManager.remove('page').remove('filter').set('query', this.string);

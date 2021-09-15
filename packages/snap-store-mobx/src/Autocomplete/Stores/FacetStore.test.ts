@@ -10,6 +10,15 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
+const autocompleteConfig = {
+	id: 'autocomplete',
+	selector: undefined,
+	settings: {
+		initializeFromUrl: false,
+		syncInputs: false,
+	},
+};
+
 describe('Facet store', () => {
 	it('has a symbol species of Array', () => {
 		expect(FacetStore[Symbol.species]).toBe(Array);
@@ -19,7 +28,15 @@ describe('Facet store', () => {
 		const searchData = new SearchData({ search: 'autocomplete' });
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
-		const facetStore = new FacetStore({}, services, storageStore, searchData.facets, searchData.pagination, searchData.meta, rootState);
+		const facetStore = new FacetStore(
+			autocompleteConfig,
+			services,
+			storageStore,
+			searchData.facets,
+			searchData.pagination,
+			searchData.meta,
+			rootState
+		);
 
 		expect(facetStore).toHaveLength(searchData.facets.length);
 	});
@@ -29,7 +46,15 @@ describe('Facet store', () => {
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
 
-		const facetStore = new FacetStore({}, services, storageStore, searchData.facets, searchData.pagination, searchData.meta, rootState);
+		const facetStore = new FacetStore(
+			autocompleteConfig,
+			services,
+			storageStore,
+			searchData.facets,
+			searchData.pagination,
+			searchData.meta,
+			rootState
+		);
 
 		expect(rootState.locks.terms.locked).toBe(false);
 
