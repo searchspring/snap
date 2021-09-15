@@ -1,11 +1,21 @@
 import { observable, makeObservable } from 'mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { StateStore } from './StateStore';
+import type { StoreServices } from '../../types';
+import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination } from '@searchspring/snapi-types';
 
 export class TermStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(services, autocomplete, paginationData, resetTerms, rootState) {
+	constructor(
+		services: StoreServices,
+		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
+		paginationData: SearchResponseModelPagination,
+		resetTerms: () => void,
+		rootState: StateStore
+	) {
 		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)];
 
 		if (autocomplete?.suggested?.text) {
@@ -39,9 +49,9 @@ export class Term {
 	active: boolean;
 	value: string;
 	preview: () => void;
-	url;
+	url: UrlManager;
 
-	constructor(services, term, terms, resetTerms, rootState) {
+	constructor(services: StoreServices, term: { active: boolean; value: string }, terms: Term[], resetTerms: () => void, rootState: StateStore) {
 		this.active = term.active;
 		this.value = term.value;
 

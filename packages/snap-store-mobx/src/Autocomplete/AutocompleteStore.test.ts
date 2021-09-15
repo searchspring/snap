@@ -7,6 +7,14 @@ import { SearchData } from '../__mocks__/SearchData';
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
+const autocompleteConfig = {
+	id: 'autocomplete',
+	selector: undefined,
+	settings: {
+		initializeFromUrl: false,
+		syncInputs: false,
+	},
+};
 
 describe('Autocomplete Store', () => {
 	let searchData;
@@ -15,13 +23,13 @@ describe('Autocomplete Store', () => {
 	});
 
 	it('links the controller and controller urlManager to state', () => {
-		const autocompleteStore = new AutocompleteStore({}, services);
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
 
 		expect(autocompleteStore.state.url).toStrictEqual(services.urlManager);
 	});
 
 	it('returns correct initial state', () => {
-		const autocompleteStore = new AutocompleteStore({}, services);
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
 
 		expect(autocompleteStore.loading).toBe(false);
 
@@ -54,7 +62,7 @@ describe('Autocomplete Store', () => {
 	});
 
 	it('update function updates all of the stores', () => {
-		const autocompleteStore = new AutocompleteStore({}, services);
+		const autocompleteStore = new AutocompleteStore(autocompleteConfig, services);
 
 		autocompleteStore.update(searchData);
 

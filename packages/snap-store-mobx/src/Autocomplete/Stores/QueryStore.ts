@@ -1,10 +1,13 @@
 import { observable, makeObservable } from 'mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { SearchResponseModelSearch, AutocompleteResponseModelAllOfAutocomplete } from '@searchspring/snapi-types';
+import type { StoreServices } from '../../types';
 
 export class QueryStore {
 	query: Query;
 	originalQuery: Query;
 
-	constructor(services, autocomplete, search) {
+	constructor(services: StoreServices, autocomplete: AutocompleteResponseModelAllOfAutocomplete, search: SearchResponseModelSearch) {
 		const observables: Observables = {};
 
 		if (search?.query) {
@@ -27,7 +30,7 @@ type Observables = {
 };
 class Query {
 	string: string;
-	url;
+	url: UrlManager;
 
 	constructor(urlManager, query) {
 		this.string = query;

@@ -1,11 +1,27 @@
 import { makeObservable, observable } from 'mobx';
 
+import type { SearchStoreConfig, AutocompleteStoreConfig, StoreServices } from '../../types';
+import type {
+	SearchResponseModelResult,
+	SearchResponseModelPagination,
+	SearchResponseModelMerchandising,
+	SearchResponseModelResultMappings,
+	SearchResponseModelMerchandisingContentInline,
+	SearchResponseModelMerchandisingContentConfig,
+} from '@searchspring/snapi-types';
+
 export class ResultStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(config, services, resultData, paginationData?, merchData?) {
+	constructor(
+		config: SearchStoreConfig | AutocompleteStoreConfig,
+		services: StoreServices,
+		resultData: SearchResponseModelResult[],
+		paginationData?: SearchResponseModelPagination,
+		merchData?: SearchResponseModelMerchandising
+	) {
 		let results = (resultData || []).map((result) => {
 			return new Product(services, result);
 		});
@@ -23,7 +39,8 @@ export class ResultStore extends Array {
 				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
-
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		super(...results);
 	}
 }
@@ -31,15 +48,15 @@ export class ResultStore extends Array {
 class Banner {
 	type = 'banner';
 	id: string;
-	attributes = {};
-	mappings = {
+	attributes: Record<string, unknown> = {};
+	mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
 	custom = {};
-	config = {};
+	config: SearchResponseModelMerchandisingContentConfig;
 	value: string;
 
-	constructor(services, banner) {
+	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config.position.index;
 		this.config = banner.config;
 		this.value = banner.value;
@@ -55,13 +72,13 @@ class Banner {
 class Product {
 	type = 'product';
 	id: string;
-	attributes = {};
-	mappings = {
+	attributes: Record<string, unknown> = {};
+	mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
 	custom = {};
 
-	constructor(services, result) {
+	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id;
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
@@ -84,7 +101,7 @@ class Product {
 	}
 }
 
-function addBannersToResults(config, results, banners, paginationData) {
+function addBannersToResults(config: SearchStoreConfig, results: Product[], banners: Banner[], paginationData: SearchResponseModelPagination) {
 	const productCount = results.length;
 	let minIndex = paginationData.pageSize * (paginationData.page - 1);
 	const maxIndex = minIndex + paginationData.pageSize;
@@ -102,7 +119,7 @@ function addBannersToResults(config, results, banners, paginationData) {
 			}
 
 			return adding;
-		}, [])
+		}, [] as Banner[])
 		.forEach((banner, index) => {
 			let adjustedIndex = banner.config.position.index - minIndex;
 			if (adjustedIndex > productCount - 1) {

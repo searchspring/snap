@@ -16,6 +16,8 @@ The bundle should be included in the `<head>` tag, ideally near the top of the n
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+
+	<meta name="referrer" content="no-referrer-when-downgrade">
 	<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js"></script>
 </head>
 <body>
@@ -23,4 +25,9 @@ The bundle should be included in the `<head>` tag, ideally near the top of the n
 </body>
 </html>
 
+```
+
+The "referrer" `meta` tag is necessary for enabling branch overrides in the URL (?branch=branchname). This functionality is only currently possible with Searchspring maintained Snap repositories.
+```
+<meta name="referrer" content="no-referrer-when-downgrade">
 ```

@@ -1,4 +1,6 @@
-import { observable, action, computed, makeObservable } from 'mobx';
+import { observable, action, makeObservable } from 'mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { StoreServices } from '../../types';
 
 export class StateStore {
 	locks: {
@@ -7,9 +9,9 @@ export class StateStore {
 	};
 	focusedInput: HTMLInputElement = undefined;
 	input = '';
-	url;
+	url: UrlManager;
 
-	constructor(services) {
+	constructor(services: StoreServices) {
 		this.locks = {
 			terms: new Lock(false),
 			facets: new Lock(false),

@@ -1,13 +1,16 @@
 import { makeObservable, observable } from 'mobx';
 
+import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
+import type { SearchStoreConfig, StoreServices } from '../types';
 import { MerchandisingStore, FacetStore, FilterStore, ResultStore, PaginationStore, SortingStore, QueryStore } from './Stores';
 import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
+
 export class SearchStore extends AbstractStore {
-	config;
-	services;
-	public data: any;
-	public meta = {};
+	config: SearchStoreConfig;
+	services: StoreServices;
+	public data: SearchResponseModel & { meta: MetaResponseModel };
+	public meta: MetaResponseModel = {};
 	public merchandising: MerchandisingStore;
 	public search: QueryStore;
 	public facets: FacetStore;
@@ -17,7 +20,7 @@ export class SearchStore extends AbstractStore {
 	public sorting: SortingStore;
 	public storage: StorageStore;
 
-	constructor(config, services: { urlManager: any }) {
+	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
 
 		if (typeof services != 'object' || typeof services.urlManager?.subscribe != 'function') {
@@ -40,7 +43,7 @@ export class SearchStore extends AbstractStore {
 		});
 	}
 
-	update(data): void {
+	update(data: SearchResponseModel & { meta: MetaResponseModel }): void {
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;

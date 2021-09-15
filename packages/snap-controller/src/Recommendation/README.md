@@ -20,7 +20,7 @@ const recommendationConfig = {
 ```
 
 ## Instantiate
-`RecommendationController` requires an `RecommendationControllerConfig` and `ControllerServices` object and is usually paired with an `RecommendationStore`.
+`RecommendationController` requires an `RecommendationControllerConfig` and `ControllerServices` object and is paired with an `RecommendationStore`. The `RecommendationStore` takes the same config, and shares the `UrlManager` service with the controller.
 
 ```typescript
 import { RecommendationController } from '@searchspring/snap-controller';
@@ -32,10 +32,11 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
+const recommendationUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
 const recommendationController = new RecommendationController(recommendationConfig, {
 		client: new Client(globals, clientConfig),
-		store: new RecommendationsStore(),
-		urlManager: new UrlManager(new UrlTranslator(), reactLinker),
+		store: new RecommendationsStore(recommendationConfig, { urlManager: recommendationUrlManager }),
+		urlManager: recommendationUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
@@ -45,7 +46,7 @@ const recommendationController = new RecommendationController(recommendationConf
 ```
 
 ## Initialize
-Invoking the `init` method is required to subscribe to changes that occur in the UrlManager.
+Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
 ```typescript
 recommendationController.init();
@@ -54,7 +55,7 @@ recommendationController.init();
 ## Events
 ### init
 - Called with `eventData` = { controller }
-- Always invoked by a call to the `init` controller method
+- Done once automatically before the first search - or manually invoked by calling `init`
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }

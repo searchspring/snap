@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/searchspring/snap/compare/v0.7.2...v0.7.3) (2021-09-15)
+
+
+### Bug Fixes
+
+* **facet-hierarchy-options-component:** fixing typo with theme props ([fae326c](https://github.com/searchspring/snap/commit/fae326cf370381af60dd90ce9af43ba45b787a22))
+
+
+
+
+
 ## [0.7.2](https://github.com/searchspring/snap/compare/v0.7.1...v0.7.2) (2021-09-13)
 
 

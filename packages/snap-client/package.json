@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-client",
-	"version": "0.7.2",
+	"version": "0.7.3",
 	"description": "Snap Client",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
