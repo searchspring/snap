@@ -88,7 +88,7 @@ describe('FacetHierarchyOptions theming works', () => {
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {
-				FacetHierarchyOptions: {
+				facetHierarchyOptions: {
 					hideCount: true,
 				},
 			},
@@ -107,7 +107,7 @@ describe('FacetHierarchyOptions theming works', () => {
 	it('is themeable with theme prop', () => {
 		const propTheme = {
 			components: {
-				FacetHierarchyOptions: {
+				facetHierarchyOptions: {
 					hideCount: true,
 				},
 			},
@@ -124,14 +124,14 @@ describe('FacetHierarchyOptions theming works', () => {
 	it('is theme prop overrides ThemeProvider', () => {
 		const globalTheme = {
 			components: {
-				FacetHierarchyOptions: {
+				facetHierarchyOptions: {
 					hideCount: true,
 				},
 			},
 		};
 		const propTheme = {
 			components: {
-				FacetHierarchyOptions: {
+				facetHierarchyOptions: {
 					hideCount: false,
 				},
 			},
