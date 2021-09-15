@@ -1,6 +1,40 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
+		535: (module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Z: () => __WEBPACK_DEFAULT_EXPORT__ });
+			var _node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ =
+					__webpack_require__(20184),
+				_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default =
+					__webpack_require__.n(
+						_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__
+					),
+				_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ =
+					__webpack_require__(81969),
+				___CSS_LOADER_EXPORT___ = __webpack_require__.n(
+					_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__
+				)()(
+					_node_modules_storybook_builder_webpack5_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()
+				);
+			___CSS_LOADER_EXPORT___.push([
+				module.id,
+				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+				'',
+				{
+					version: 3,
+					sources: ['webpack://./.storybook/styles.css'],
+					names: [],
+					mappings:
+						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE',
+					sourcesContent: [
+						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
+					],
+					sourceRoot: '',
+				},
+			]);
+			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
+		},
 		74442: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -1113,7 +1147,7 @@
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
 				emotion_react_browser_esm = __webpack_require__(28165),
-				formatNumber = __webpack_require__(49807),
+				formatNumber = __webpack_require__(96006),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
@@ -3241,7 +3275,7 @@
 			__webpack_require__(43105), __webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Price = __webpack_require__(99457),
+				Price = __webpack_require__(92246),
 				componentArgs = __webpack_require__(55625),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -3407,17 +3441,12 @@
 			var CustomCurrency = Template.bind({});
 			CustomCurrency.args = { value: 999.99, symbol: ' €', thousandsSeparator: '.', decimalSeparator: ',', symbolAfter: !0 };
 		},
-		99457: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		92246: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { t: () => Price });
 			__webpack_require__(43105);
-			var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33847),
-				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(55858),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
-				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(79367),
+			var preact_module = __webpack_require__(33847),
+				formatNumber = __webpack_require__(96006),
 				__assign = function () {
 					return (
 						(__assign =
@@ -3429,11 +3458,28 @@
 							}),
 						__assign.apply(this, arguments)
 					);
+				};
+			var emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367),
+				Price_assign = function () {
+					return (
+						(Price_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						Price_assign.apply(this, arguments)
+					);
 				},
 				CSS_price = function price(_a) {
 					var _b,
 						theme = _a.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+					return (0, emotion_react_browser_esm.iv)({
 						color: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
 						'&.ss__price--strike': { textDecoration: 'line-through', color: 'initial' },
 					});
@@ -3442,11 +3488,11 @@
 				var _a,
 					_b,
 					_c,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.u)(),
-					theme = __assign(__assign({}, globalTheme), properties.theme),
-					props = __assign(
-						__assign(
-							__assign(
+					globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+					theme = Price_assign(Price_assign({}, globalTheme), properties.theme),
+					props = Price_assign(
+						Price_assign(
+							Price_assign(
 								{
 									symbol: '$',
 									decimalPlaces: 2,
@@ -3474,27 +3520,21 @@
 					disableStyles = props.disableStyles,
 					className = props.className,
 					style = props.style,
-					formattedPrice = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_5__.A(value, {
-						symbol,
-						decimalPlaces,
-						padDecimalPlaces,
-						thousandsSeparator,
-						decimalSeparator,
-						symbolAfter,
-					}),
+					formattedPrice = (function currency(input, opts) {
+						var defaultOptions = __assign({ symbol: '$', thousandsSeparator: ',', decimalPlaces: 2 }, opts);
+						return (0, formatNumber.u)(input, defaultOptions);
+					})(value, { symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter }),
 					styling = {};
 				return (
 					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_price({ theme }), style]),
 					raw
-						? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(preact__WEBPACK_IMPORTED_MODULE_1__.HY, null, formattedPrice)
-						: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+						? (0, emotion_react_browser_esm.tZ)(preact_module.HY, null, formattedPrice)
+						: (0, emotion_react_browser_esm.tZ)(
+								cache.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								(0, emotion_react_browser_esm.tZ)(
 									'span',
-									__assign({}, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ss__price', { 'ss__price--strike': lineThrough }, className),
-									}),
+									Price_assign({}, styling, { className: classnames_default()('ss__price', { 'ss__price--strike': lineThrough }, className) }),
 									formattedPrice
 								)
 						  )
@@ -3882,7 +3922,7 @@
 				swiper_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(18491),
 				swiper_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(92718),
 				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(13701),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__ = (__webpack_require__(21547), __webpack_require__(6572)),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_15__ = (__webpack_require__(26242), __webpack_require__(6572)),
 				swiper_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(83028),
 				swiper_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(98395),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
@@ -5323,13 +5363,13 @@
 							__assign(
 								__assign(
 									{},
-									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.FacetHierarchyOptions
+									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facetHierarchyOptions
 								),
 								properties
 							),
 							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c
 								? void 0
-								: _c.FacetHierarchyOptions
+								: _c.facetHierarchyOptions
 						),
 						values = props.values,
 						hideCount = props.hideCount,
@@ -5923,7 +5963,7 @@
 			var preact_module = __webpack_require__(33847),
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
-				FacetPaletteOptions = __webpack_require__(40574),
+				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(37990),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
@@ -6318,7 +6358,7 @@
 				},
 			];
 		},
-		40574: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		25774: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { m: () => FacetPaletteOptions });
 			__webpack_require__(43105),
@@ -6327,15 +6367,20 @@
 				__webpack_require__(6886),
 				__webpack_require__(43450),
 				__webpack_require__(72508);
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69038),
-				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(34831),
-				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6572),
-				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79367),
+			var emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				es = __webpack_require__(69038);
+			__webpack_require__(45794), __webpack_require__(85940), __webpack_require__(77950);
+			function handleize(input) {
+				if ('string' != typeof input) return input;
+				var handleized = input.toLowerCase();
+				return (handleized = (handleized = handleized.replace(/[^\w\s]/g, '').trim()).replace(/\s/g, '-'));
+			}
+			var defined = __webpack_require__(27193),
+				Icon = __webpack_require__(6572),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367),
 				__assign = function () {
 					return (
 						(__assign =
@@ -6353,7 +6398,7 @@
 						columns = _a.columns,
 						gapSize = _a.gapSize,
 						theme = _a.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
+					return (0, emotion_react_browser_esm.iv)({
 						display: 'grid',
 						gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
 						gap: gapSize,
@@ -6404,12 +6449,12 @@
 						},
 					});
 				},
-				FacetPaletteOptions = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__.Pi)(function (properties) {
+				FacetPaletteOptions = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
 						_d,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -6441,7 +6486,7 @@
 										{ className: 'ss__facet-palette-options__icon' },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_10__.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
+									(0, defined.r)({ disableStyles, icon: 'close-thin', color: 'white', size: '40%' })
 								),
 								{ theme: props.theme }
 							),
@@ -6450,19 +6495,19 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_palette({ columns, gapSize, theme }), style]),
 						(null == values ? void 0 : values.length) &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_11__.n,
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+								(0, emotion_react_browser_esm.tZ)(
 									'div',
-									__assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options', className) }),
+									__assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
 									values.map(function (value) {
 										var _a;
-										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+										return (0, emotion_react_browser_esm.tZ)(
 											'a',
 											__assign(
 												{
-													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-palette-options__option', {
+													className: classnames_default()('ss__facet-palette-options__option', {
 														'ss__facet-palette-options__option--filtered': value.filtered,
 													}),
 													onClick,
@@ -6474,32 +6519,22 @@
 												valueProps,
 												null === (_a = value.url) || void 0 === _a ? void 0 : _a.link
 											),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+											(0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__facet-palette-options__option__wrapper' },
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
+												(0, emotion_react_browser_esm.tZ)(
 													'div',
 													{
-														className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(
+														className: classnames_default()(
 															'ss__facet-palette-options__option__palette',
-															'ss__facet-palette-options__option__palette--' + _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_12__.v(value.value)
+															'ss__facet-palette-options__option__palette--' + handleize(value.value)
 														),
 														css: { background: value.value },
 													},
-													!hideIcon &&
-														value.filtered &&
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_13__.J,
-															__assign({}, subProps.icon)
-														)
+													!hideIcon && value.filtered && (0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon))
 												)
 											),
-											!hideLabel &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
-													'span',
-													{ className: 'ss__facet-palette-options__option__value' },
-													value.label
-												)
+											!hideLabel && (0, emotion_react_browser_esm.tZ)('span', { className: 'ss__facet-palette-options__option__value' }, value.label)
 										);
 									})
 								)
@@ -8326,7 +8361,7 @@
 				__webpack_require__(65584);
 			var preact_module = __webpack_require__(33847),
 				blocks = __webpack_require__(63255),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
 				snapify = __webpack_require__(37990),
@@ -8762,24 +8797,24 @@
 			]),
 				(truncateTitle.args = { truncateTitle: { limit: 5, append: '...' } });
 		},
-		48001: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		23267: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { x: () => Result });
 			__webpack_require__(43105), __webpack_require__(26936);
-			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33847),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(69038),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
-				_Atoms_Image__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(49680),
-				_Atoms_Badge__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(93607),
-				_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(99457),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
-				_utilities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27193),
-				_utilities__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(64170),
-				_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(99651),
-				_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20874),
+			var preact_module = __webpack_require__(33847),
+				es = __webpack_require__(69038),
+				emotion_react_browser_esm = __webpack_require__(28165),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				Image = __webpack_require__(49680),
+				Badge = __webpack_require__(93607),
+				Price = __webpack_require__(92246),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367),
+				defined = __webpack_require__(27193),
+				cloneWithProps = __webpack_require__(64170);
+			__webpack_require__(74660);
+			var types = __webpack_require__(20874),
 				__assign = function () {
 					return (
 						(__assign =
@@ -8793,7 +8828,7 @@
 					);
 				},
 				CSS_result = function result() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({
+					return (0, emotion_react_browser_esm.iv)({
 						'&.ss__result--grid': { display: 'flex', flexDirection: 'column', height: '100%', '& .ss__result__image-wrapper': { flex: '1 0 auto' } },
 						'&.ss__result--list': {
 							display: 'flex',
@@ -8818,7 +8853,7 @@
 						},
 					});
 				},
-				Result = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.Pi)(function (properties) {
+				Result = (0, es.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
@@ -8826,11 +8861,11 @@
 						_e,
 						_f,
 						_g,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						props = __assign(
 							__assign(
 								__assign(
-									{ layout: _types__WEBPACK_IMPORTED_MODULE_7__.Ar.GRID },
+									{ layout: types.Ar.GRID },
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.result
 								),
 								properties
@@ -8856,7 +8891,7 @@
 										{ className: 'ss__result__price' },
 										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.price
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
+									(0, defined.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -8866,7 +8901,7 @@
 										{ className: 'ss__result__badge', content: 'Sale' },
 										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.badge
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles })
+									(0, defined.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -8876,7 +8911,7 @@
 										{ className: 'ss__result__image', alt: null == core ? void 0 : core.name, src: null == core ? void 0 : core.imageUrl },
 										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.image
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_8__.r)({ disableStyles, fallback })
+									(0, defined.r)({ disableStyles, fallback })
 								),
 								{ theme: props.theme }
 							),
@@ -8886,27 +8921,26 @@
 						),
 						displayName = core.name;
 					props.truncateTitle &&
-						(displayName = _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_9__.$(
-							core.name,
-							props.truncateTitle.limit,
-							props.truncateTitle.append
-						));
+						(displayName = (function truncate(input, limit, append) {
+							if ('string' != typeof input || input.length <= limit) return input;
+							var lastSpace = input.lastIndexOf(' ', limit),
+								trimIndex = -1 != lastSpace ? lastSpace : limit - 1;
+							return input.substr(0, trimIndex) + (append || '');
+						})(core.name, props.truncateTitle.limit, props.truncateTitle.append));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_result(), style]),
 						core &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_10__.n,
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+								(0, emotion_react_browser_esm.tZ)(
 									'article',
-									__assign({}, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__result', 'ss__result--' + layout, className),
-									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+									__assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
+									(0, emotion_react_browser_esm.tZ)(
 										'div',
 										{ className: 'ss__result__image-wrapper' },
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+										(0, emotion_react_browser_esm.tZ)(
 											'a',
 											{
 												href: core.url,
@@ -8917,23 +8951,18 @@
 														_b.click(e, result);
 												},
 											},
-											!hideBadge &&
-												onSale &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-													_Atoms_Badge__WEBPACK_IMPORTED_MODULE_11__.C,
-													__assign({}, subProps.badge)
-												),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Atoms_Image__WEBPACK_IMPORTED_MODULE_12__.E, __assign({}, subProps.image))
+											!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, __assign({}, subProps.badge)),
+											(0, emotion_react_browser_esm.tZ)(Image.E, __assign({}, subProps.image))
 										)
 									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+									(0, emotion_react_browser_esm.tZ)(
 										'div',
 										{ className: 'ss__result__details' },
 										!hideTitle &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+											(0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__result__details__title' },
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+												(0, emotion_react_browser_esm.tZ)(
 													'a',
 													{
 														href: core.url,
@@ -8948,29 +8977,20 @@
 												)
 											),
 										!hidePricing &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+											(0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__result__details__pricing' },
 												core.price < core.msrp
-													? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-															preact__WEBPACK_IMPORTED_MODULE_2__.HY,
+													? (0, emotion_react_browser_esm.tZ)(
+															preact_module.HY,
 															null,
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
-																__assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })
-															),
+															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.msrp, lineThrough: !0 })),
 															' ',
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-																_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
-																__assign({}, subProps.price, { value: core.price })
-															)
+															(0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
 													  )
-													: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
-															_Atoms_Price__WEBPACK_IMPORTED_MODULE_13__.t,
-															__assign({}, subProps.price, { value: core.price })
-													  )
+													: (0, emotion_react_browser_esm.tZ)(Price.t, __assign({}, subProps.price, { value: core.price }))
 											),
-										(0, _utilities__WEBPACK_IMPORTED_MODULE_14__.d)(detailSlot, { result })
+										(0, cloneWithProps.d)(detailSlot, { result })
 									)
 								)
 							)
@@ -11991,7 +12011,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
 				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1492),
 				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(75999),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(40574),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(25774),
 				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(68978),
 				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(20682),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
@@ -13251,7 +13271,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__(69038),
 				Carousel = __webpack_require__(77592),
-				Result = __webpack_require__(48001),
+				Result = __webpack_require__(23267),
 				defined = __webpack_require__(27193),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				cache = __webpack_require__(79367),
@@ -14318,7 +14338,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
 				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(31340),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(48001),
+				_Molecules_Result__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23267),
 				_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20874),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27193),
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(64189),
@@ -17411,7 +17431,7 @@
 											var injectedElem = _this.inject(elem, target);
 											_this.onTarget(target, injectedElem, elem);
 										} catch (e) {
-											errors.push(e);
+											errors.push(String(e));
 										}
 									else {
 										if (((target.emptyTarget = null === (_b = target.emptyTarget) || void 0 === _b || _b), target.emptyTarget))
@@ -21632,28 +21652,26 @@
 						};
 					})()),
 				FacetStore_FacetStore = (function (_super) {
-					function FacetStore(config, services, storage, facets, pagination, meta) {
-						void 0 === facets && (facets = []);
-						return (
-							(facets = facets
-								.filter(function (facet) {
-									var _a, _b, _c, _d;
-									if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
-										if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
-										if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
-										if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
-											return facet.values[0].count != pagination.totalResults;
-									}
-									return !0;
-								})
-								.map(function (facet) {
-									var facetMeta = meta.facets[facet.field];
-									return 'range' === facet.type
-										? new RangeFacet(services, storage, facet, facetMeta)
-										: new ValueFacet(config, services, storage, facet, facetMeta);
-								})),
-							_super.apply(this, facets) || this
-						);
+					function FacetStore(config, services, storage, facetsData, pagination, meta) {
+						void 0 === facetsData && (facetsData = []);
+						var facets = facetsData
+							.filter(function (facet) {
+								var _a, _b, _c, _d;
+								if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
+									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
+									if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
+									if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
+										return facet.values[0].count != pagination.totalResults;
+								}
+								return !0;
+							})
+							.map(function (facet) {
+								var facetMeta = meta.facets[facet.field];
+								return 'range' === facet.type
+									? new RangeFacet(services, storage, facet, facetMeta)
+									: new ValueFacet(config, services, storage, facet, facetMeta);
+							});
+						return _super.apply(this, facets) || this;
 					}
 					return (
 						FacetStore_extends(FacetStore, _super),
@@ -21715,7 +21733,7 @@
 				RangeFacet = (function (_super) {
 					function RangeFacet(services, storage, facet, facetMeta) {
 						var _this = _super.call(this, services, storage, facet, facetMeta) || this;
-						_this.step = facet.step;
+						(_this.range = { low: 0, high: 0 }), (_this.active = { low: 0, high: 0 }), (_this.step = facet.step);
 						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
 						return (
 							storedRange && facet.filtered
@@ -21790,7 +21808,7 @@
 							(null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.pinFiltered) &&
 								'hierarchy' !== facetMeta.display &&
 								_this.values.sort(function (a, b) {
-									return b.filtered - a.filtered;
+									return Number(b.filtered) - Number(a.filtered);
 								});
 						var overflowLimitedState = _this.storage.get('facets.' + _this.field + '.overflow.limited');
 						return (
@@ -21910,23 +21928,28 @@
 					};
 				})(),
 				FilterStore = (function (_super) {
-					function FilterStore(services, filters, meta) {
-						void 0 === filters && (filters = []);
-						return (
-							(filters = filters.map(function (filter) {
-								var facetMeta = meta.facets[filter.field];
-								return 'range' === filter.type
-									? new RangeFilter(services, {
-											facet: { field: filter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || filter.field },
-											value: { low: filter.value.low, high: filter.value.high, label: filter.label || filter.value.low + ' - ' + filter.value.high },
-									  })
-									: new Filter(services, {
-											facet: { field: filter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || filter.field },
-											value: { value: filter.value, label: filter.label },
-									  });
-							})),
-							_super.apply(this, filters) || this
-						);
+					function FilterStore(services, filtersData, meta) {
+						void 0 === filtersData && (filtersData = []);
+						var filters = filtersData.map(function (filter) {
+							var facetMeta = meta.facets[filter.field];
+							if ('range' === filter.type) {
+								var rangeFilter = filter;
+								return new RangeFilter(services, {
+									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
+									value: {
+										low: rangeFilter.value.low,
+										high: rangeFilter.value.high,
+										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
+									},
+								});
+							}
+							var valueFilter = filter;
+							return new Filter(services, {
+								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
+								value: { value: valueFilter.value, label: valueFilter.label },
+							});
+						});
+						return _super.apply(this, filters) || this;
 					}
 					return (
 						FilterStore_extends(FilterStore, _super),
@@ -22059,7 +22082,6 @@
 						(this.attributes = {}),
 						(this.mappings = { core: {} }),
 						(this.custom = {}),
-						(this.config = {}),
 						(this.id = 'ss-ib-' + banner.config.position.index),
 						(this.config = banner.config),
 						(this.value = banner.value),
@@ -22723,7 +22745,7 @@
 										return term.active;
 									}).length) &&
 									this.resetTrending(),
-								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
+								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
 								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
 						}),
 						AutocompleteStore
@@ -23008,7 +23030,7 @@
 						(FinderStore.prototype.update = function (data) {
 							(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
-								(this.pagination = new PaginationStore({}, this.services, data.pagination)),
+								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
 								(this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage));
 						}),
 						FinderStore
@@ -24192,7 +24214,7 @@
 						Profile
 					);
 				})(),
-				v4 = (__webpack_require__(93244), __webpack_require__(9571));
+				v4 = (__webpack_require__(93244), __webpack_require__(36746));
 			var TrackEvent = function TrackEvent(payload) {
 					var _a, _b, _c;
 					if (((payload.event = payload.event), !payload.context || !payload.event))
@@ -24288,7 +24310,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.2' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.3' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24318,7 +24340,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.2');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.3');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24753,6 +24775,7 @@
 										options,
 										tag,
 										urlManager,
+										controllerConfig,
 										recs,
 										profileVars,
 										RecommendationsComponent,
@@ -24824,23 +24847,21 @@
 													(urlManager =
 														(null === (_b = this.config.services) || void 0 === _b ? void 0 : _b.urlManager) ||
 														new UrlManager(new UrlTranslator(), reactLinker).detach()),
-													(recs = new RecommendationController(
-														RecommendationInstantiator_assign(
-															{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, globals },
-															this.config.config
-														),
-														{
-															client: (null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.client) || this.client,
-															store:
-																(null === (_d = this.config.services) || void 0 === _d ? void 0 : _d.store) ||
-																new RecommendationStore({}, { urlManager }),
-															urlManager,
-															eventManager: (null === (_e = this.config.services) || void 0 === _e ? void 0 : _e.eventManager) || new EventManager(),
-															profiler: (null === (_f = this.config.services) || void 0 === _f ? void 0 : _f.profiler) || new Profiler(),
-															logger: (null === (_g = this.config.services) || void 0 === _g ? void 0 : _g.logger) || new Logger(),
-															tracker: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.tracker) || this.tracker,
-														}
+													(controllerConfig = RecommendationInstantiator_assign(
+														{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, globals },
+														this.config.config
 													)),
+													(recs = new RecommendationController(controllerConfig, {
+														client: (null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.client) || this.client,
+														store:
+															(null === (_d = this.config.services) || void 0 === _d ? void 0 : _d.store) ||
+															new RecommendationStore(controllerConfig, { urlManager }),
+														urlManager,
+														eventManager: (null === (_e = this.config.services) || void 0 === _e ? void 0 : _e.eventManager) || new EventManager(),
+														profiler: (null === (_f = this.config.services) || void 0 === _f ? void 0 : _f.profiler) || new Profiler(),
+														logger: (null === (_g = this.config.services) || void 0 === _g ? void 0 : _g.logger) || new Logger(),
+														tracker: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.tracker) || this.tracker,
+													})),
 													this.uses.forEach(function (attachements) {
 														return recs.use(attachements);
 													}),
@@ -24925,7 +24946,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.7.2]',
+								text: '[0.7.3]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -25333,7 +25354,7 @@
 			(module = __webpack_require__.nmd(module)),
 				(0, __webpack_require__(44595).configure)([__webpack_require__(68751), __webpack_require__(83625)], module, !1);
 		},
-		63148: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		14967: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var preview_namespaceObject = {};
 			__webpack_require__.r(preview_namespaceObject),
@@ -25352,9 +25373,9 @@
 				preact_module = __webpack_require__(33847),
 				defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1', hover: '#f8f6fd', text: { secondary: '#ffffff' } }, components: {} },
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				injectStylesIntoStyleTag = __webpack_require__(46062),
+				injectStylesIntoStyleTag = __webpack_require__(67851),
 				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(33505),
+				styles = __webpack_require__(535),
 				options = { insert: 'head', singleton: !1 };
 			injectStylesIntoStyleTag_default()(styles.Z, options);
 			styles.Z.locals;
@@ -25434,6 +25455,52 @@
 		30808: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__(44595);
+		},
+		96006: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { u: () => formatNumber });
+			__webpack_require__(43105),
+				__webpack_require__(14586),
+				__webpack_require__(71245),
+				__webpack_require__(48319),
+				__webpack_require__(77950),
+				__webpack_require__(85940),
+				__webpack_require__(90977),
+				__webpack_require__(16781),
+				__webpack_require__(58188),
+				__webpack_require__(88233),
+				__webpack_require__(99120),
+				__webpack_require__(74083);
+			var __assign = function () {
+				return (
+					(__assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					__assign.apply(this, arguments)
+				);
+			};
+			function formatNumber(input, opts) {
+				var options = __assign(
+					{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !1 },
+					opts
+				);
+				if ('number' == typeof input && !Number.isNaN(input)) {
+					var split = (function truncateDecimals(input, digits) {
+						var numString = input.toString(),
+							decimalPosition = numString.indexOf('.'),
+							substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
+						return numString.substr(0, substrLength);
+					})(input, options.decimalPlaces).split('.');
+					(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
+						options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
+					var output = split.join(options.decimalSeparator);
+					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
+				}
+			}
 		},
 		74886: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -26264,35 +26331,6 @@
 				});
 			const __WEBPACK_DEFAULT_EXPORT__ = componentMeta;
 		},
-		33505: (module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Z: () => __WEBPACK_DEFAULT_EXPORT__ });
-			var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1799),
-				_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(
-					_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__
-				),
-				_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82609),
-				___CSS_LOADER_EXPORT___ = __webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__)()(
-					_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()
-				);
-			___CSS_LOADER_EXPORT___.push([
-				module.id,
-				"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
-				'',
-				{
-					version: 3,
-					sources: ['webpack://./.storybook/styles.css'],
-					names: [],
-					mappings:
-						'AAAA,qDAAqD;AACrD;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,uBAAuB;IACvB,kBAAkB;AACtB;;AAEA,IAAI,cAAc,EAAE,qBAAqB,EAAE',
-					sourcesContent: [
-						"/* hides 'control' column in ArgsTable on docs tab  */\n.docblock-argstable-head tr th:nth-child(1),\n.docblock-argstable-body tr td:nth-child(1) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(2),\n.docblock-argstable-body tr td:nth-child(2) {\n    width: 60%!important;\n}\n.docblock-argstable-head tr th:nth-child(3),\n.docblock-argstable-body tr td:nth-child(3) {\n    width: 20%!important;\n}\n.docblock-argstable-head tr th:nth-child(4),\n.docblock-argstable-body tr td:nth-child(4) {\n    display: none!important;\n    width: 0!important;\n}\n\na { color: inherit; text-decoration: none; }",
-					],
-					sourceRoot: '',
-				},
-			]);
-			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
-		},
 		83625: (module, __unused_webpack_exports, __webpack_require__) => {
 			var map = {
 				'./components/Atoms/Badge/Badge.stories.tsx': 74442,
@@ -26370,7 +26408,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[990],
+			[266],
 			() => (
 				__webpack_exec__(47513),
 				__webpack_exec__(68260),
@@ -26383,7 +26421,7 @@
 				__webpack_exec__(3233),
 				__webpack_exec__(92752),
 				__webpack_exec__(35315),
-				__webpack_exec__(63148),
+				__webpack_exec__(14967),
 				__webpack_exec__(29180)
 			)
 		);

@@ -67,6 +67,11 @@
 					<h2>Dependency</h2>
 				</a>
 				<p>Snap Store MobX is a dependency of <a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller">@searchspring/snap-controller</a> <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a></p>
+				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
+					<h2>Dependencies</h2>
+				</a>
+				<p>Snap Store MobX requires the following dependencies as services:</p>
+				<p><a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager">@searchspring/snap-url-manager</a></p>
 				<details>
 					<summary>Package dependencies hierarchy</summary>
 					<br/>
@@ -81,7 +86,7 @@
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h2>Import</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchStore</span><span style="color: #000000">, </span><span style="color: #001080">AutocompleteStore</span><span style="color: #000000">, </span><span style="color: #001080">FinderStore</span><span style="color: #000000">, </span><span style="color: #001080">AbstractStore</span><span style="color: #000000">, </span><span style="color: #001080">StorageStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AbstractStore</span><span style="color: #000000">, </span><span style="color: #001080">SearchStore</span><span style="color: #000000">, </span><span style="color: #001080">AutocompleteStore</span><span style="color: #000000">, </span><span style="color: #001080">FinderStore</span><span style="color: #000000">, </span><span style="color: #001080">RecommendationStore</span><span style="color: #000000">, </span><span style="color: #001080">StorageStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span><span style="color: #000000">;</span>
 </code></pre>
 				<a href="#controller-usage" id="controller-usage" style="color: inherit; text-decoration: none;">
 					<h2>Controller usage</h2>
@@ -91,8 +96,18 @@
 					<h2>Standalone usage</h2>
 				</a>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">SearchStore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-store-mobx&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">UrlManager</span><span style="color: #000000">, </span><span style="color: #001080">UrlTranslator</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-url-manager&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">searchConfig</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">globals:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">pagination:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #001080">pageSize:</span><span style="color: #000000"> </span><span style="color: #098658">12</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SearchStore</span><span style="color: #000000">(</span><span style="color: #001080">searchConfig</span><span style="color: #000000">, { </span><span style="color: #001080">urlManager:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlManager</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UrlTranslator</span><span style="color: #000000">()) });</span>
 
 <span style="color: #001080">store</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">);</span>
 
@@ -133,7 +148,31 @@
 						<a href="classes/StorageStore.html" class="tsd-kind-icon">Storage<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#AutocompleteStoreConfig" class="tsd-kind-icon">Autocomplete<wbr>Store<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#FinderFieldConfig" class="tsd-kind-icon">Finder<wbr>Field<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#FinderStoreConfig" class="tsd-kind-icon">Finder<wbr>Store<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#RecommendationStoreConfig" class="tsd-kind-icon">Recommendation<wbr>Store<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#SearchStoreConfig" class="tsd-kind-icon">Search<wbr>Store<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#StorageConfig" class="tsd-kind-icon">Storage<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#StoreConfig" class="tsd-kind-icon">Store<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#StoreConfigs" class="tsd-kind-icon">Store<wbr>Configs</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#StoreServices" class="tsd-kind-icon">Store<wbr>Services</a>
 					</li>
 				</ul>
 			</nav>
