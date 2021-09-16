@@ -34,6 +34,7 @@ type ExtendedTarget = Target & {
 	component?: React.Component;
 	props?: unknown;
 	onTarget?: OnTarget;
+	importedComponent?: () => Promise<any>;
 };
 
 export type SnapConfig = {
@@ -124,7 +125,7 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component) {
+								if (!target.component && !target.importedComponent) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
@@ -133,13 +134,18 @@ export class Snap {
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										let Component = target.component as React.ElementType<{ controller: any }>;
+										if (!Component && target.importedComponent) {
+											const componentImport = await (target as ExtendedTarget).importedComponent();
+											Component = componentImport;
+										}
+
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -160,7 +166,7 @@ export class Snap {
 							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as AutocompleteController;
 
 							controller?.targets?.forEach((target, target_index) => {
-								if (!target.component) {
+								if (!target.component && !target.importedComponent) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
@@ -180,13 +186,19 @@ export class Snap {
 										},
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										cntrlr.bind();
 
-										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
+										let Component = target.component as React.ElementType<{ controller: any }>;
+										if (!Component && target.importedComponent) {
+											const componentImport = await (target as ExtendedTarget).importedComponent();
+											Component = componentImport as React.ElementType<{ controller: any; input: any }>;
+										}
+
+										// const Component = target.component as React.ElementType<{ controller: any; input: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
 										});
@@ -218,7 +230,7 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component) {
+								if (!target.component && !target.importedComponent) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 								cntrlr.createTargeter(
@@ -226,13 +238,19 @@ export class Snap {
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										let Component = target.component as React.ElementType<{ controller: any }>;
+										if (!Component && target.importedComponent) {
+											const componentImport = await (target as ExtendedTarget).importedComponent();
+											Component = componentImport;
+										}
+
+										// const Component = target.component as React.ElementType<{ controller: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -264,7 +282,7 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component) {
+								if (!target.component && !target.importedComponent) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 								cntrlr.createTargeter(
@@ -272,13 +290,19 @@ export class Snap {
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										let Component = target.component as React.ElementType<{ controller: any }>;
+										if (!Component && target.importedComponent) {
+											const componentImport = await (target as ExtendedTarget).importedComponent();
+											Component = componentImport;
+										}
+
+										// const Component = target.component as React.ElementType<{ controller: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -314,6 +338,7 @@ export class Snap {
 		switch (type) {
 			case 'search': {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
+				// const SearchController = (await import('@searchspring/snap-controller')).SearchController;
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new SearchStore(config as SearchControllerConfig, { urlManager }),

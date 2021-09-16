@@ -18,6 +18,9 @@ export type RecommendationInstantiatorConfig = {
 	components: {
 		[name: string]: React.ElementType<{ controller: RecommendationController }>;
 	};
+	importedComponents: {
+		[name: string]: () => Promise<any>;
+	};
 	config: {
 		branch: string;
 	};
@@ -60,9 +63,9 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
 		}
 
-		if (!this.config.components || typeof this.config.components != 'object') {
-			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
-		}
+		// if (!this.config.components || typeof this.config.components != 'object') {
+		// 	throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
+		// }
 
 		const profileCount = {};
 
@@ -153,7 +156,19 @@ export class RecommendationInstantiator {
 					recs.log.error(`template does not support components!`);
 				}
 
-				const RecommendationsComponent = this.config.components[profileVars.component];
+				let RecommendationsComponent = this.config.components && this.config.components[profileVars.component];
+
+				if (!RecommendationsComponent && this.config.importedComponents && this.config.importedComponents[profileVars.component]) {
+					RecommendationsComponent = await this.config.importedComponents[profileVars.component]();
+				}
+
+				// console.log("typeof", typeof RecommendationsComponent)
+				// console.log("RecommendationsComponent", {...RecommendationsComponent})
+				// if (typeof RecommendationsComponent) {
+				// 	const componentImport = await (target as ExtendedTarget).importedComponent();
+				// 	RecommendationsComponent = componentImport;
+				// }
+
 				if (!RecommendationsComponent) {
 					recs.log.error(`component '${profileVars.component}' not found!`);
 				}
