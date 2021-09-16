@@ -1,4 +1,4 @@
-import he from 'he';
+import { htmlUnescape } from 'escape-goat';
 
 import {
 	SearchRequestModel,
@@ -267,8 +267,8 @@ transformSearchResponse.search = (response, request) => {
 // used for HTML entities decoding
 function decodeProperty(encoded) {
 	if (Array.isArray(encoded)) {
-		return encoded.map((item) => he.decode(String(item)));
+		return encoded.map((item) => htmlUnescape(String(item)));
 	} else {
-		return he.decode(String(encoded));
+		return htmlUnescape(String(encoded));
 	}
 }
