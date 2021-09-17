@@ -12,11 +12,11 @@ import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { AbstractController, Attachments } from '@searchspring/snap-controller';
 
-import type { SnapControllerServices } from '../types';
+import type { SnapControllerServices, RootComponent } from '../types';
 
 export type RecommendationInstantiatorConfig = {
 	components: {
-		[name: string]: React.ElementType<{ controller: RecommendationController }>;
+		[name: string]: () => Promise<RootComponent> | RootComponent;
 	};
 	config: {
 		branch: string;
@@ -153,7 +153,8 @@ export class RecommendationInstantiator {
 					recs.log.error(`template does not support components!`);
 				}
 
-				const RecommendationsComponent = this.config.components[profileVars.component];
+				const RecommendationsComponent = this.config.components && (await this.config.components[profileVars.component]());
+
 				if (!RecommendationsComponent) {
 					recs.log.error(`component '${profileVars.component}' not found!`);
 				}

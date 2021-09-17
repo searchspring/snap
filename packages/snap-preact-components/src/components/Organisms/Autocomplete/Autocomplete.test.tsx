@@ -34,7 +34,7 @@ describe('Autocomplete Component', () => {
 						targets: [
 							{
 								selector: '#target',
-								component: Autocomplete,
+								component: () => Autocomplete,
 								hideTarget: true,
 							},
 						],

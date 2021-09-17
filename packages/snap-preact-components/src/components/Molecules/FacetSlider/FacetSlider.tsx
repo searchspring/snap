@@ -12,7 +12,7 @@ import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
 const CSS = {
-	facetSlider: ({ railColor, trackColor, handleColor, handleTextColor, handleDraggingColor, showTicks, stickyHandleLabel, tickTextColor, theme }) =>
+	facetSlider: ({ railColor, trackColor, handleColor, valueTextColor, handleDraggingColor, showTicks, stickyHandleLabel, tickTextColor, theme }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -68,7 +68,7 @@ const CSS = {
 						borderRadius: '100%',
 						fontSize: '0.7rem',
 						whiteSpace: 'nowrap',
-						color: handleTextColor || 'initial',
+						color: valueTextColor || 'initial',
 						fontWeight: 'normal',
 						transform: 'translateY(0) scale(0.9)',
 						transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -123,6 +123,7 @@ const CSS = {
 			'& .ss__facet-slider__labels': {
 				textAlign: 'center',
 				marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
+				color: valueTextColor,
 
 				'& .ss__facet-slider__label--0': {
 					'&:after': {
@@ -151,7 +152,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	const {
 		tickTextColor,
 		trackColor,
-		handleTextColor,
+		valueTextColor,
 		railColor,
 		handleColor,
 		handleDraggingColor,
@@ -200,7 +201,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 				railColor,
 				trackColor,
 				handleColor,
-				handleTextColor,
+				valueTextColor,
 				handleDraggingColor,
 				showTicks,
 				stickyHandleLabel,
@@ -280,7 +281,7 @@ export interface FacetSliderProps extends ComponentProps {
 	railColor?: string;
 	handleColor?: string;
 	handleDraggingColor?: string;
-	handleTextColor?: string;
+	valueTextColor?: string;
 	showTicks?: boolean;
 	tickSize?: number;
 	tickTextColor?: string;

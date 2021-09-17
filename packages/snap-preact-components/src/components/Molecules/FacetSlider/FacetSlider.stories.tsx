@@ -85,8 +85,8 @@ export default {
 			},
 			control: { type: 'color' },
 		},
-		handleTextColor: {
-			description: 'Slider Handle Text Color',
+		valueTextColor: {
+			description: 'Slider value Text Color',
 			table: {
 				type: {
 					summary: 'string',
