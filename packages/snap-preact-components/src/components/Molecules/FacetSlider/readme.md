@@ -73,13 +73,13 @@ The `handleDraggingColor` prop specifies the handle color while dragging.
 />
 ```
 
-### handleTextColor
-The `handleTextColor` prop specifies the handle text color.
+### valueTextColor
+The `valueTextColor` prop specifies the value text color.
 
 ```jsx
 <FacetSlider 
 	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
-	handleTextColor={'#222222'}
+	valueTextColor={'#222222'}
 />
 ```
 
