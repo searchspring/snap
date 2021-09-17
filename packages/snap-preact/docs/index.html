@@ -108,12 +108,12 @@
 <span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">                    {</span>
 <span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-content&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">component:</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
+<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
 <span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">                    },</span>
 <span style="color: #000000">                    {</span>
 <span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-sidebar&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">component:</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
+<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
 <span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">                    },</span>
 <span style="color: #000000">                ],</span>
@@ -133,7 +133,7 @@
 <span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">                    {</span>
 <span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input.searchspring-ac&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">component:</span><span style="color: #000000"> </span><span style="color: #001080">Autocomplete</span><span style="color: #000000">,</span>
+<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Autocomplete</span><span style="color: #000000">,</span>
 <span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">                    },</span>
 <span style="color: #000000">                ],</span>
@@ -162,7 +162,9 @@
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
 <span style="color: #000000">    </span><span style="color: #001080">instantiators:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">        </span><span style="color: #001080">recommendation:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">components:</span><span style="color: #000000"> {},</span>
+<span style="color: #000000">            </span><span style="color: #001080">components:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                </span><span style="color: #795E26">Standard</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Standard</span>
+<span style="color: #000000">            },</span>
 <span style="color: #000000">            </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">                </span><span style="color: #001080">branch:</span><span style="color: #000000"> </span><span style="color: #0070C1">BRANCHNAME</span>
 <span style="color: #000000">            },</span>
@@ -229,15 +231,19 @@
 				<p>Each array entry contains an object with the following properties:</p>
 				<p><code>config</code> - required controller config for the corresponding controller. See Controller specific documentation for all available configuration options.</p>
 				<p><code>targets</code> - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component <code>controller</code> prop and the controller&#39;s <code>search</code> method invoked.</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExtendedTarget</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">selector</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
 <span style="color: #000000">    </span><span style="color: #001080">inject</span><span style="color: #000000">?: {</span>
-<span style="color: #000000">        </span><span style="color: #001080">action:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;before&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;after&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;append&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;prepend&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;replace&#039;</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #001080">Element</span><span style="color: #000000"> | ((</span><span style="color: #001080">target</span><span style="color: #000000">: </span><span style="color: #267F99">Target</span><span style="color: #000000">, </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #267F99">Element</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Element</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #001080">action</span><span style="color: #000000">: </span><span style="color: #A31515">&#039;before&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;after&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;append&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;prepend&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;replace&#039;</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #267F99">Element</span><span style="color: #000000"> | ((</span><span style="color: #001080">target</span><span style="color: #000000">: </span><span style="color: #267F99">Target</span><span style="color: #000000">, </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #267F99">Element</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">Element</span><span style="color: #000000">);</span>
 <span style="color: #000000">    };</span>
-<span style="color: #000000">    </span><span style="color: #001080">hideTarget</span><span style="color: #000000">?: </span><span style="color: #001080">boolean</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">emptyTarget</span><span style="color: #000000">?: </span><span style="color: #001080">boolean</span><span style="color: #000000">;</span>
-<span style="color: #000000">    [</span><span style="color: #001080">any</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">]: </span><span style="color: #001080">unknown</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">hideTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">emptyTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">name</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #795E26">component</span><span style="color: #000000">?: () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">RootComponent</span><span style="color: #000000">&gt; | </span><span style="color: #267F99">RootComponent</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">props</span><span style="color: #000000">?: </span><span style="color: #267F99">unknown</span><span style="color: #000000">;  </span><span style="color: #008000">// additional props to pass to the component</span>
+<span style="color: #000000">    </span><span style="color: #001080">onTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">OnTarget</span><span style="color: #000000">;  </span><span style="color: #008000">// additional scripts to execute when target is found</span>
+<span style="color: #000000">    </span><span style="color: #001080">prefetch</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;  </span><span style="color: #008000">// run controller search before finding targets</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<p><code>services</code> - optional object of <code>ControllerServices</code> to be used for this controller in place of the default services</p>
@@ -253,12 +259,12 @@
 <span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">                    {</span>
 <span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-content&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">component:</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
+<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
 <span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">                    },</span>
 <span style="color: #000000">                    {</span>
 <span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-sidebar&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">component:</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
+<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
 <span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">                    },</span>
 <span style="color: #000000">                ],</span>

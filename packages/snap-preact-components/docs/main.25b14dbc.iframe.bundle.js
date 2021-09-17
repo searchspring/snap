@@ -2443,7 +2443,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(37990),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(38524),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (
@@ -2773,7 +2773,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(37990),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(38524),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -4545,7 +4545,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5035,7 +5035,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -5454,7 +5454,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5965,7 +5965,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -6706,15 +6706,15 @@
 							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleDraggingColor={'0000ff'}\n/>\n"
 						)
 					),
-					(0, esm.kt)('h3', { id: 'handletextcolor' }, 'handleTextColor'),
-					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'handleTextColor'), ' prop specifies the handle text color.'),
+					(0, esm.kt)('h3', { id: 'valuetextcolor' }, 'valueTextColor'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'valueTextColor'), ' prop specifies the value text color.'),
 					(0, esm.kt)(
 						'pre',
 						null,
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    handleTextColor={'#222222'}\n/>\n"
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    valueTextColor={'#222222'}\n/>\n"
 						)
 					),
 					(0, esm.kt)('h3', { id: 'trackcolor' }, 'trackColor'),
@@ -6837,7 +6837,7 @@
 						tickTextColor: { description: 'ticks color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						trackColor: { description: 'Slider track color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						railColor: { description: 'Slider rail Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
-						handleTextColor: { description: 'Slider Handle Text Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
+						valueTextColor: { description: 'Slider value Text Color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						handleColor: { description: 'Slider handle color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						stickyHandleLabel: {
 							description: 'enables/disables sticky handle labels',
@@ -6961,7 +6961,7 @@
 						railColor = _a.railColor,
 						trackColor = _a.trackColor,
 						handleColor = _a.handleColor,
-						handleTextColor = _a.handleTextColor,
+						valueTextColor = _a.valueTextColor,
 						handleDraggingColor = _a.handleDraggingColor,
 						showTicks = _a.showTicks,
 						stickyHandleLabel = _a.stickyHandleLabel,
@@ -7020,7 +7020,7 @@
 									borderRadius: '100%',
 									fontSize: '0.7rem',
 									whiteSpace: 'nowrap',
-									color: handleTextColor || 'initial',
+									color: valueTextColor || 'initial',
 									fontWeight: 'normal',
 									transform: 'translateY(0) scale(0.9)',
 									transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -7063,6 +7063,7 @@
 						'& .ss__facet-slider__labels': {
 							textAlign: 'center',
 							marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
+							color: valueTextColor,
 							'& .ss__facet-slider__label--0': { '&:after': { content: '"-"', padding: '5px' } },
 						},
 					});
@@ -7086,7 +7087,7 @@
 						),
 						tickTextColor = props.tickTextColor,
 						trackColor = props.trackColor,
-						handleTextColor = props.handleTextColor,
+						valueTextColor = props.valueTextColor,
 						railColor = props.railColor,
 						handleColor = props.handleColor,
 						handleDraggingColor = props.handleDraggingColor,
@@ -7140,7 +7141,7 @@
 										railColor,
 										trackColor,
 										handleColor,
-										handleTextColor,
+										valueTextColor,
 										handleDraggingColor,
 										showTicks,
 										stickyHandleLabel,
@@ -7225,7 +7226,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -7891,7 +7892,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -8364,7 +8365,7 @@
 				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -8962,19 +8963,16 @@
 											(0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__result__details__title' },
-												(0, emotion_react_browser_esm.tZ)(
-													'a',
-													{
-														href: core.url,
-														onMouseDown: function onMouseDown(e) {
-															var _a, _b;
-															null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
-																void 0 === _b ||
-																_b.click(e, result);
-														},
+												(0, emotion_react_browser_esm.tZ)('a', {
+													href: core.url,
+													onMouseDown: function onMouseDown(e) {
+														var _a, _b;
+														null === (_b = null === (_a = null == controller ? void 0 : controller.track) || void 0 === _a ? void 0 : _a.product) ||
+															void 0 === _b ||
+															_b.click(e, result);
 													},
-													displayName
-												)
+													dangerouslySetInnerHTML: { __html: displayName },
+												})
 											),
 										!hidePricing &&
 											(0, emotion_react_browser_esm.tZ)(
@@ -9292,7 +9290,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -10866,7 +10864,7 @@
 					return null == string ? void 0 : string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -11340,7 +11338,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12392,7 +12390,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12772,7 +12770,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13492,7 +13490,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13941,7 +13939,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(37990),
+				snapify = __webpack_require__(38524),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -17125,7 +17123,7 @@
 				);
 			}
 		},
-		37990: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		38524: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -20367,6 +20365,14 @@
 					transformSearchRequest.tracking(request)
 				);
 			}
+			function htmlUnescape(value) {
+				return value
+					.replace(/&gt;/g, '>')
+					.replace(/&lt;/g, '<')
+					.replace(/&#0?39;/g, "'")
+					.replace(/&quot;/g, '"')
+					.replace(/&amp;/g, '&');
+			}
 			(transformSearchRequest.sorts = function (request) {
 				return (
 					void 0 === request && (request = {}),
@@ -20465,9 +20471,7 @@
 					var reqTracking = request.tracking || {};
 					return reqTracking.userId ? { userId: reqTracking.userId } : {};
 				});
-			var he = __webpack_require__(30361),
-				he_default = __webpack_require__.n(he),
-				searchResponse_assign = function () {
+			var searchResponse_assign = function () {
 					return (
 						(searchResponse_assign =
 							Object.assign ||
@@ -20526,9 +20530,9 @@
 			function decodeProperty(encoded) {
 				return Array.isArray(encoded)
 					? encoded.map(function (item) {
-							return he_default().decode(String(item));
+							return htmlUnescape(String(item));
 					  })
-					: he_default().decode(String(encoded));
+					: htmlUnescape(String(encoded));
 			}
 			(transformSearchResponse.pagination = function (response) {
 				var pagination = (response || {}).pagination || {};
@@ -24310,7 +24314,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.7.3' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.8.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24340,7 +24344,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.7.3');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.8.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24785,9 +24789,10 @@
 										_e,
 										_f,
 										_g,
-										_h;
-									return RecommendationInstantiator_generator(this, function (_j) {
-										switch (_j.label) {
+										_h,
+										_j;
+									return RecommendationInstantiator_generator(this, function (_k) {
+										switch (_k.label) {
 											case 0:
 												return (
 													(globals = {}),
@@ -24845,22 +24850,22 @@
 													(tag = injectedElem.getAttribute('searchspring-recommend')),
 													(profileCount[tag] = profileCount[tag] + 1 || 1),
 													(urlManager =
-														(null === (_b = this.config.services) || void 0 === _b ? void 0 : _b.urlManager) ||
+														(null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.urlManager) ||
 														new UrlManager(new UrlTranslator(), reactLinker).detach()),
 													(controllerConfig = RecommendationInstantiator_assign(
 														{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, globals },
 														this.config.config
 													)),
 													(recs = new RecommendationController(controllerConfig, {
-														client: (null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.client) || this.client,
+														client: (null === (_d = this.config.services) || void 0 === _d ? void 0 : _d.client) || this.client,
 														store:
-															(null === (_d = this.config.services) || void 0 === _d ? void 0 : _d.store) ||
+															(null === (_e = this.config.services) || void 0 === _e ? void 0 : _e.store) ||
 															new RecommendationStore(controllerConfig, { urlManager }),
 														urlManager,
-														eventManager: (null === (_e = this.config.services) || void 0 === _e ? void 0 : _e.eventManager) || new EventManager(),
-														profiler: (null === (_f = this.config.services) || void 0 === _f ? void 0 : _f.profiler) || new Profiler(),
-														logger: (null === (_g = this.config.services) || void 0 === _g ? void 0 : _g.logger) || new Logger(),
-														tracker: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.tracker) || this.tracker,
+														eventManager: (null === (_f = this.config.services) || void 0 === _f ? void 0 : _f.eventManager) || new EventManager(),
+														profiler: (null === (_g = this.config.services) || void 0 === _g ? void 0 : _g.profiler) || new Profiler(),
+														logger: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.logger) || new Logger(),
+														tracker: (null === (_j = this.config.services) || void 0 === _j ? void 0 : _j.tracker) || this.tracker,
 													})),
 													this.uses.forEach(function (attachements) {
 														return recs.use(attachements);
@@ -24875,18 +24880,22 @@
 												);
 											case 1:
 												return (
-													_j.sent(),
+													_k.sent(),
 													(this.controllers[recs.config.id] = recs),
 													(profileVars = recs.store.profile.display.templateParameters)
 														? (profileVars.component || recs.log.error('template does not support components!'),
-														  (RecommendationsComponent = this.config.components[profileVars.component]) ||
-																recs.log.error("component '" + profileVars.component + "' not found!"),
-														  setTimeout(function () {
-																(0,
-																preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem);
-														  }),
-														  [2])
+														  (_b = this.config.components) ? [4, this.config.components[profileVars.component]()] : [3, 3])
 														: (recs.log.error('profile failed to load!'), [2])
+												);
+											case 2:
+												(_b = _k.sent()), (_k.label = 3);
+											case 3:
+												return (
+													(RecommendationsComponent = _b) || recs.log.error("component '" + profileVars.component + "' not found!"),
+													setTimeout(function () {
+														(0, preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem);
+													}),
+													[2]
 												);
 										}
 									});
@@ -24920,6 +24929,114 @@
 						Snap_assign.apply(this, arguments)
 					);
 				},
+				Snap_awaiter = function (thisArg, _arguments, P, generator) {
+					return new (P || (P = Promise))(function (resolve, reject) {
+						function fulfilled(value) {
+							try {
+								step(generator.next(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function rejected(value) {
+							try {
+								step(generator.throw(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function step(result) {
+							result.done
+								? resolve(result.value)
+								: (function adopt(value) {
+										return value instanceof P
+											? value
+											: new P(function (resolve) {
+													resolve(value);
+											  });
+								  })(result.value).then(fulfilled, rejected);
+						}
+						step((generator = generator.apply(thisArg, _arguments || [])).next());
+					});
+				},
+				Snap_generator = function (thisArg, body) {
+					var f,
+						y,
+						t,
+						g,
+						_ = {
+							label: 0,
+							sent: function sent() {
+								if (1 & t[0]) throw t[1];
+								return t[1];
+							},
+							trys: [],
+							ops: [],
+						};
+					return (
+						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
+						'function' == typeof Symbol &&
+							(g[Symbol.iterator] = function () {
+								return this;
+							}),
+						g
+					);
+					function verb(n) {
+						return function (v) {
+							return (function step(op) {
+								if (f) throw new TypeError('Generator is already executing.');
+								for (; _; )
+									try {
+										if (
+											((f = 1),
+											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+										)
+											return t;
+										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
+											case 0:
+											case 1:
+												t = op;
+												break;
+											case 4:
+												return _.label++, { value: op[1], done: !1 };
+											case 5:
+												_.label++, (y = op[1]), (op = [0]);
+												continue;
+											case 7:
+												(op = _.ops.pop()), _.trys.pop();
+												continue;
+											default:
+												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
+													_ = 0;
+													continue;
+												}
+												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+													_.label = op[1];
+													break;
+												}
+												if (6 === op[0] && _.label < t[1]) {
+													(_.label = t[1]), (t = op);
+													break;
+												}
+												if (t && _.label < t[2]) {
+													(_.label = t[2]), _.ops.push(op);
+													break;
+												}
+												t[2] && _.ops.pop(), _.trys.pop();
+												continue;
+										}
+										op = body.call(thisArg, _);
+									} catch (e) {
+										(op = [6, e]), (y = 0);
+									} finally {
+										f = t = 0;
+									}
+								if (5 & op[0]) throw op[1];
+								return { value: op[0] ? op[1] : void 0, done: !0 };
+							})([n, v]);
+						};
+					}
+				},
 				Snap = (function () {
 					function Snap(config) {
 						var _a,
@@ -24946,7 +25063,7 @@
 							this.logger.setMode('production'),
 							this.logger.imageText({
 								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.7.3]',
+								text: '[0.8.0]',
 								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
 							}),
 							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
@@ -24956,24 +25073,38 @@
 											var _a;
 											try {
 												var cntrlr_1 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_1 = !1;
+													searched_1 = !1,
+													runSearch_1 = function runSearch_1() {
+														searched_1 || (cntrlr_1.search(), (searched_1 = !0));
+													};
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														cntrlr_1.createTargeter(Snap_assign({ controller: cntrlr_1 }, target), function (target, elem, originalElem) {
-															var onTarget = target.onTarget;
-															onTarget && onTarget(target, elem, originalElem),
-																(function runSearch_1() {
-																	searched_1 || (cntrlr_1.search(), (searched_1 = !0));
-																})();
-															var Component = target.component;
-															setTimeout(function () {
-																(0,
-																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+														target.prefetch && runSearch_1(),
+															cntrlr_1.createTargeter(Snap_assign({ controller: cntrlr_1 }, target), function (target, elem, originalElem) {
+																return Snap_awaiter(_this, void 0, void 0, function () {
+																	var onTarget, Component;
+																	return Snap_generator(this, function (_a) {
+																		switch (_a.label) {
+																			case 0:
+																				return (
+																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_1(), [4, target.component()]
+																				);
+																			case 1:
+																				return (
+																					(Component = _a.sent()),
+																					setTimeout(function () {
+																						(0,
+																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
+																					}),
+																					[2]
+																				);
+																		}
+																	});
+																});
 															});
-														});
 													});
 											} catch (err) {
 												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
@@ -25010,12 +25141,27 @@
 																target
 															),
 															function (target, elem, originalElem) {
-																var onTarget = target.onTarget;
-																onTarget && onTarget(target, elem, originalElem), cntrlr_2.bind();
-																var Component = target.component;
-																setTimeout(function () {
-																	(0,
-																	preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props), void 0), elem);
+																return Snap_awaiter(_this, void 0, void 0, function () {
+																	var onTarget, Component;
+																	return Snap_generator(this, function (_a) {
+																		switch (_a.label) {
+																			case 0:
+																				return (
+																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem),
+																					cntrlr_2.bind(),
+																					[4, target.component()]
+																				);
+																			case 1:
+																				return (
+																					(Component = _a.sent()),
+																					setTimeout(function () {
+																						(0,
+																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props), void 0), elem);
+																					}),
+																					[2]
+																				);
+																		}
+																	});
 																});
 															}
 														);
@@ -25030,24 +25176,38 @@
 											var _a;
 											try {
 												var cntrlr_3 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_2 = !1;
+													searched_2 = !1,
+													runSearch_2 = function runSearch_2() {
+														searched_2 || (cntrlr_3.search(), (searched_2 = !0));
+													};
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														cntrlr_3.createTargeter(Snap_assign({ controller: cntrlr_3 }, target), function (target, elem, originalElem) {
-															var onTarget = target.onTarget;
-															onTarget && onTarget(target, elem, originalElem),
-																(function runSearch_2() {
-																	searched_2 || (cntrlr_3.search(), (searched_2 = !0));
-																})();
-															var Component = target.component;
-															setTimeout(function () {
-																(0,
-																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+														target.prefetch && runSearch_2(),
+															cntrlr_3.createTargeter(Snap_assign({ controller: cntrlr_3 }, target), function (target, elem, originalElem) {
+																return Snap_awaiter(_this, void 0, void 0, function () {
+																	var onTarget, Component;
+																	return Snap_generator(this, function (_a) {
+																		switch (_a.label) {
+																			case 0:
+																				return (
+																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_2(), [4, target.component()]
+																				);
+																			case 1:
+																				return (
+																					(Component = _a.sent()),
+																					setTimeout(function () {
+																						(0,
+																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
+																					}),
+																					[2]
+																				);
+																		}
+																	});
+																});
 															});
-														});
 													});
 											} catch (err) {
 												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
@@ -25059,24 +25219,38 @@
 											var _a;
 											try {
 												var cntrlr_4 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_3 = !1;
+													searched_3 = !1,
+													runSearch_3 = function runSearch_3() {
+														searched_3 || (cntrlr_4.search(), (searched_3 = !0));
+													};
 												null === (_a = null == controller ? void 0 : controller.targets) ||
 													void 0 === _a ||
 													_a.forEach(function (target, target_index) {
 														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
 														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														cntrlr_4.createTargeter(Snap_assign({ controller: cntrlr_4 }, target), function (target, elem, originalElem) {
-															var onTarget = target.onTarget;
-															onTarget && onTarget(target, elem, originalElem),
-																(function runSearch_3() {
-																	searched_3 || (cntrlr_4.search(), (searched_3 = !0));
-																})();
-															var Component = target.component;
-															setTimeout(function () {
-																(0,
-																preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+														target.prefetch && runSearch_3(),
+															cntrlr_4.createTargeter(Snap_assign({ controller: cntrlr_4 }, target), function (target, elem, originalElem) {
+																return Snap_awaiter(_this, void 0, void 0, function () {
+																	var onTarget, Component;
+																	return Snap_generator(this, function (_a) {
+																		switch (_a.label) {
+																			case 0:
+																				return (
+																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_3(), [4, target.component()]
+																				);
+																			case 1:
+																				return (
+																					(Component = _a.sent()),
+																					setTimeout(function () {
+																						(0,
+																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
+																					}),
+																					[2]
+																				);
+																		}
+																	});
+																});
 															});
-														});
 													});
 											} catch (err) {
 												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
@@ -26408,7 +26582,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[266],
+			[326],
 			() => (
 				__webpack_exec__(47513),
 				__webpack_exec__(68260),
