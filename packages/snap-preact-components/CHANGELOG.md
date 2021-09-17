@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/searchspring/snap/compare/v0.7.3...v0.8.0) (2021-09-17)
+
+
+### Bug Fixes
+
+* rename handleTextColor to valueTextColor and apply to non-sticky handles also ([33d3370](https://github.com/searchspring/snap/commit/33d3370a81ff2aaca0c81e51b410bf959111bfd4))
+
+
+### Features
+
+* **dynamic-import:** change to snap config for components utilizing return from function ([83929ee](https://github.com/searchspring/snap/commit/83929eea52324e5ca197dbf9ac6bac208d06fc59))
+
+
+
+
+
 ## [0.7.3](https://github.com/searchspring/snap/compare/v0.7.2...v0.7.3) (2021-09-15)
 
 

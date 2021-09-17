@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/searchspring/snap/compare/v0.7.3...v0.8.0) (2021-09-17)
+
+
+### Features
+
+* **dynamic-import:** change to snap config for components utilizing return from function ([83929ee](https://github.com/searchspring/snap/commit/83929eea52324e5ca197dbf9ac6bac208d06fc59))
+
+
+### Performance Improvements
+
+* work in progress for getting dynamic importing ([93d095b](https://github.com/searchspring/snap/commit/93d095b5e56bb72438b73ac1a4b8087c3da6e46c))
+
+
+
+
+
 ## [0.7.3](https://github.com/searchspring/snap/compare/v0.7.2...v0.7.3) (2021-09-15)
 
 **Note:** Version bump only for package @searchspring/snap-preact
