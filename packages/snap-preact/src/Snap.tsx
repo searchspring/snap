@@ -26,15 +26,15 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices } from './types';
+import type { SnapControllerServices, RootComponent } from './types';
 
 type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
-	component?: React.Component;
+	component?: () => Promise<RootComponent> | RootComponent;
 	props?: unknown;
 	onTarget?: OnTarget;
-	importedComponent?: () => Promise<any>;
+	prefetch: boolean;
 };
 
 export type SnapConfig = {
@@ -125,9 +125,12 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component && !target.importedComponent) {
+								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
+								// run the search right away
+								target.prefetch && runSearch();
 
 								cntrlr.createTargeter(
 									{
@@ -140,11 +143,7 @@ export class Snap {
 
 										runSearch();
 
-										let Component = target.component as React.ElementType<{ controller: any }>;
-										if (!Component && target.importedComponent) {
-											const componentImport = await (target as ExtendedTarget).importedComponent();
-											Component = componentImport;
-										}
+										const Component = await (target as ExtendedTarget).component();
 
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
@@ -166,7 +165,7 @@ export class Snap {
 							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as AutocompleteController;
 
 							controller?.targets?.forEach((target, target_index) => {
-								if (!target.component && !target.importedComponent) {
+								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
@@ -192,13 +191,11 @@ export class Snap {
 
 										cntrlr.bind();
 
-										let Component = target.component as React.ElementType<{ controller: any }>;
-										if (!Component && target.importedComponent) {
-											const componentImport = await (target as ExtendedTarget).importedComponent();
-											Component = componentImport as React.ElementType<{ controller: any; input: any }>;
-										}
+										const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
+											controller: AutocompleteController;
+											input: HTMLInputElement | string | Element;
+										}>;
 
-										// const Component = target.component as React.ElementType<{ controller: any; input: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
 										});
@@ -230,9 +227,13 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component && !target.importedComponent) {
+								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
+								// run the search right away
+								target.prefetch && runSearch();
+
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
@@ -244,13 +245,8 @@ export class Snap {
 
 										runSearch();
 
-										let Component = target.component as React.ElementType<{ controller: any }>;
-										if (!Component && target.importedComponent) {
-											const componentImport = await (target as ExtendedTarget).importedComponent();
-											Component = componentImport;
-										}
+										const Component = await (target as ExtendedTarget).component();
 
-										// const Component = target.component as React.ElementType<{ controller: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -282,9 +278,13 @@ export class Snap {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
-								if (!target.component && !target.importedComponent) {
+								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
+								// run the search right away
+								target.prefetch && runSearch();
+
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
@@ -296,13 +296,8 @@ export class Snap {
 
 										runSearch();
 
-										let Component = target.component as React.ElementType<{ controller: any }>;
-										if (!Component && target.importedComponent) {
-											const componentImport = await (target as ExtendedTarget).importedComponent();
-											Component = componentImport;
-										}
+										const Component = await (target as ExtendedTarget).component();
 
-										// const Component = target.component as React.ElementType<{ controller: any }>;
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});

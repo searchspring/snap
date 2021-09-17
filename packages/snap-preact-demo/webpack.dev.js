@@ -22,10 +22,6 @@ module.exports = merge(common, {
 		},
 		devMiddleware: {
 			publicPath: '/dist/',
-			writeToDisk: (filePath) => {
-				// return /bundle\.js.*/.test(filePath);
-				return true;
-			},
 		},
 	},
 	plugins: [new PreactRefreshPlugin()],

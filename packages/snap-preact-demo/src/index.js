@@ -5,12 +5,6 @@ import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
 
-/* local imports */
-// import { Autocomplete } from './components/Autocomplete/Autocomplete';
-// import { Content } from './components/Content/Content';
-// import { Sidebar } from './components/Sidebar/Sidebar';
-// import { Recs } from './components/Recommendations/';
-
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
 import { combineMerge } from './middleware/functions';
@@ -41,18 +35,11 @@ let config = {
 	},
 	instantiators: {
 		recommendation: {
-			// components: { Recs, Recs2: Recs },
-			// importedComponents: {},
-
-			importedComponents: {
+			components: {
 				Recs: async () => {
 					return (await import('./components/Recommendations/')).Recs;
 				},
 			},
-
-			// components: {
-			// Recs2: Recs
-			// },
 
 			config: {
 				branch: BRANCHNAME,
@@ -78,22 +65,9 @@ let config = {
 				targets: [
 					{
 						selector: '#searchspring-content',
-						// component: Content,
 						hideTarget: true,
-						/*
-
-						component: async() => {
-							return await import('./components/Content/Content');
-						}
-
-						component: {
-							name:
-							path:
-						}
-
-						*/
-
-						importedComponent: async () => {
+						prefetch: true,
+						component: async () => {
 							return (await import('./components/Content/Content')).Content;
 						},
 					},
@@ -101,7 +75,8 @@ let config = {
 						selector: '#searchspring-sidebar',
 						// component: Sidebar,
 						hideTarget: true,
-						importedComponent: async () => {
+						prefetch: true,
+						component: async () => {
 							return (await import('./components/Sidebar/Sidebar')).Sidebar;
 						},
 					},
@@ -124,7 +99,7 @@ let config = {
 						selector: 'input.searchspring-ac',
 						// component: Autocomplete,
 						hideTarget: true,
-						importedComponent: async () => {
+						component: async () => {
 							return (await import('./components/Autocomplete/Autocomplete')).Autocomplete;
 						},
 					},
