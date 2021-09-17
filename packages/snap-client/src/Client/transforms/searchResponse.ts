@@ -1,4 +1,4 @@
-import { htmlUnescape } from 'escape-goat';
+import { htmlUnescape } from '../utils/htmlUnescape';
 
 import {
 	SearchRequestModel,
