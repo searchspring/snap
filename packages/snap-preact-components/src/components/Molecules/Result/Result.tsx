@@ -166,9 +166,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									onMouseDown={(e) => {
 										controller?.track?.product?.click(e, result);
 									}}
-								>
-									{displayName}
-								</a>
+									dangerouslySetInnerHTML={{
+										__html: displayName,
+									}}
+								/>
 							</div>
 						)}
 						{!hidePricing && (
