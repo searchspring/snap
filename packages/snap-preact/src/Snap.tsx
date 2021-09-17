@@ -34,7 +34,7 @@ type ExtendedTarget = Target & {
 	component?: () => Promise<RootComponent> | RootComponent;
 	props?: unknown;
 	onTarget?: OnTarget;
-	prefetch: boolean;
+	prefetch?: boolean;
 };
 
 export type SnapConfig = {
@@ -333,7 +333,7 @@ export class Snap {
 		switch (type) {
 			case 'search': {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
-				// const SearchController = (await import('@searchspring/snap-controller')).SearchController;
+
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new SearchStore(config as SearchControllerConfig, { urlManager }),

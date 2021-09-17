@@ -25,12 +25,12 @@ const config = {
 				targets: [
 					{
 						selector: '#searchspring-content',
-						component: Content,
+						component: () => Content,
 						hideTarget: true,
 					},
 					{
 						selector: '#searchspring-sidebar',
-						component: Sidebar,
+						component: () => Sidebar,
 						hideTarget: true,
 					},
 				],
@@ -50,7 +50,7 @@ const config = {
 				targets: [
 					{
 						selector: 'input.searchspring-ac',
-						component: Autocomplete,
+						component: () => Autocomplete,
 						hideTarget: true,
 					},
 				],
@@ -87,7 +87,7 @@ We also have a `targets` array of Target objects. A Target object defines an ent
 
 `target.selector` specifies the DOM selector to target
 
-`target.component` specifies a reference to the component to render at the target selector. 
+`target.component` specifies a function that returns a reference to the component to render at the target selector. 
 
 `target.hideTarget` boolean that specifies if the target node should be hidden before the component is mounted and rendered. It is recommended to enable this to prevent flashy behaviour. 
 

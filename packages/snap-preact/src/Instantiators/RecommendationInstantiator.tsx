@@ -60,9 +60,9 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
 		}
 
-		// if (!this.config.components || typeof this.config.components != 'object') {
-		// 	throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
-		// }
+		if (!this.config.components || typeof this.config.components != 'object') {
+			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
+		}
 
 		const profileCount = {};
 
