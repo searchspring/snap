@@ -26,14 +26,15 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices } from './types';
+import type { SnapControllerServices, RootComponent } from './types';
 
 type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
-	component?: React.Component;
+	component?: () => Promise<RootComponent> | RootComponent;
 	props?: unknown;
 	onTarget?: OnTarget;
+	prefetch?: boolean;
 };
 
 export type SnapConfig = {
@@ -128,18 +129,22 @@ export class Snap {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
+								// run the search right away
+								target.prefetch && runSearch();
+
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										const Component = await (target as ExtendedTarget).component();
+
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -180,13 +185,17 @@ export class Snap {
 										},
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										cntrlr.bind();
 
-										const Component = target.component as React.ElementType<{ controller: any; input: any }>;
+										const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
+											controller: AutocompleteController;
+											input: HTMLInputElement | string | Element;
+										}>;
+
 										setTimeout(() => {
 											render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
 										});
@@ -221,18 +230,23 @@ export class Snap {
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
+								// run the search right away
+								target.prefetch && runSearch();
+
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										const Component = await (target as ExtendedTarget).component();
+
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -267,18 +281,23 @@ export class Snap {
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+
+								// run the search right away
+								target.prefetch && runSearch();
+
 								cntrlr.createTargeter(
 									{
 										controller: cntrlr,
 										...target,
 									},
-									(target, elem, originalElem) => {
+									async (target, elem, originalElem) => {
 										const onTarget = target.onTarget as OnTarget;
 										onTarget && onTarget(target, elem, originalElem);
 
 										runSearch();
 
-										const Component = target.component as React.ElementType<{ controller: any }>;
+										const Component = await (target as ExtendedTarget).component();
+
 										setTimeout(() => {
 											render(<Component controller={cntrlr} {...target.props} />, elem);
 										});
@@ -314,6 +333,7 @@ export class Snap {
 		switch (type) {
 			case 'search': {
 				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
+
 				const cntrlr = new SearchController(config as SearchControllerConfig, {
 					client: services?.client || this.client,
 					store: services?.store || new SearchStore(config as SearchControllerConfig, { urlManager }),

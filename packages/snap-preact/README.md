@@ -54,12 +54,12 @@ const config = {
 				targets: [
 					{
 						selector: '#searchspring-content',
-						component: Content,
+						component: () => Content,
 						hideTarget: true,
 					},
 					{
 						selector: '#searchspring-sidebar',
-						component: Sidebar,
+						component: () => Sidebar,
 						hideTarget: true,
 					},
 				],
@@ -79,7 +79,7 @@ const config = {
 				targets: [
 					{
 						selector: 'input.searchspring-ac',
-						component: Autocomplete,
+						component: () => Autocomplete,
 						hideTarget: true,
 					},
 				],
@@ -96,11 +96,11 @@ See [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/p
 
 ```typescript
 const config = {
-    client: {
-        globals: {
-            siteId: 'xxxxxx'
-        }
-    }
+	client: {
+		globals: {
+			siteId: 'xxxxxx'
+		}
+	}
 }
 ```
 
@@ -109,19 +109,21 @@ The `instantiators` object must be defined if any Recommendation controllers hav
 
 ```typescript
 const config = {
-    instantiators: {
-        recommendation: {
-            components: {},
-            config: {
-                branch: BRANCHNAME
-            },
-            selector: '',
-            services: {}
-        }
-    },
-    controllers: {
-        recommendation: []
-    }
+	instantiators: {
+		recommendation: {
+			components: {
+				Standard: () => Standard
+			},
+			config: {
+				branch: BRANCHNAME
+			},
+			selector: '',
+			services: {}
+		}
+	},
+	controllers: {
+		recommendation: []
+	}
 }
 ```
 
@@ -177,12 +179,12 @@ Available controllers:
 
 ```typescript
 const config = {
-    controllers: {
-        search: [],
-        autocomplete: [],
-        finder: [],
-        recommendation: [],
-    }
+	controllers: {
+		search: [],
+		autocomplete: [],
+		finder: [],
+		recommendation: [],
+	}
 }
 ```
 
@@ -193,7 +195,7 @@ Each array entry contains an object with the following properties:
 `targets` - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
 
 ```typescript
-const target = {
+type ExtendedTarget = {
 	selector: string;
 	inject?: {
 		action: 'before' | 'after' | 'append' | 'prepend' | 'replace';
@@ -201,7 +203,11 @@ const target = {
 	};
 	hideTarget?: boolean;
 	emptyTarget?: boolean;
-	[any: string]: unknown;
+	name?: string;
+	component?: () => Promise<RootComponent> | RootComponent;
+	props?: unknown;  // additional props to pass to the component
+	onTarget?: OnTarget;  // additional scripts to execute when target is found
+	prefetch?: boolean;  // run controller search before finding targets
 }
 ```
 
@@ -214,28 +220,28 @@ An example creating a SearchController:
 
 ```typescript
 const config = {
-    controllers: {
-        search: [
-            {
-                config: {
-                    id: 'search',
-                },
-                targets: [
+	controllers: {
+		search: [
+			{
+				config: {
+					id: 'search',
+				},
+				targets: [
 					{
 						selector: '#searchspring-content',
-						component: Content,
+						component: () => Content,
 						hideTarget: true,
 					},
 					{
 						selector: '#searchspring-sidebar',
-						component: Sidebar,
+						component: () => Sidebar,
 						hideTarget: true,
 					},
 				],
-                services: {}
-            }
-        ]
-    }
+				services: {}
+			}
+		]
+	}
 }
 ```
 The controller config `id` will be the name of the controller that you will then interface from the return of creating the `new Snap()` instance via the `controllers` object. 

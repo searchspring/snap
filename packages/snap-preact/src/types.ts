@@ -1,4 +1,5 @@
 import type { Client } from '@searchspring/snap-client';
+import type { AbstractController } from '@searchspring/snap-controller';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { EventManager } from '@searchspring/snap-event-manager';
@@ -15,3 +16,5 @@ export type SnapControllerServices = {
 	logger?: Logger;
 	tracker?: Tracker;
 };
+
+export type RootComponent = React.ElementType<{ controller: AbstractController }>;
