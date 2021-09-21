@@ -1,17 +1,13 @@
 import { render } from 'preact';
 
 import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
-import { RecommendationController } from '@searchspring/snap-controller';
-import { RecommendationStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager, Middleware } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
 
+import type { Logger } from '@searchspring/snap-logger';
+import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, Attachments } from '@searchspring/snap-controller';
-
+import type { AbstractController, RecommendationController, RecommendationControllerConfig, Attachments } from '@searchspring/snap-controller';
+import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
 export type RecommendationInstantiatorConfig = {
@@ -20,12 +16,13 @@ export type RecommendationInstantiatorConfig = {
 	};
 	config: {
 		branch: string;
-	};
+	} & Attachments;
 	selector?: string;
 	services?: SnapControllerServices;
+	url?: UrlTranslatorConfig;
 };
 
-type InstantiatorServices = {
+export type RecommendationInstantiatorServices = {
 	client: Client;
 	logger: Logger;
 	tracker: Tracker;
@@ -33,7 +30,7 @@ type InstantiatorServices = {
 
 export class RecommendationInstantiator {
 	controllers: {
-		[key: string]: AbstractController;
+		[key: string]: RecommendationController;
 	} = {};
 	client: Client;
 	tracker: Tracker;
@@ -46,11 +43,8 @@ export class RecommendationInstantiator {
 		[key: string]: DomTargeter;
 	} = {};
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: InstantiatorServices) {
-		this.client = client;
-		this.tracker = tracker;
+	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
 		this.config = config;
-		this.logger = logger;
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -63,6 +57,10 @@ export class RecommendationInstantiator {
 		if (!this.config.components || typeof this.config.components != 'object') {
 			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
+
+		this.client = client;
+		this.tracker = tracker;
+		this.logger = logger;
 
 		const profileCount = {};
 
@@ -117,22 +115,22 @@ export class RecommendationInstantiator {
 				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
-				const urlManager = this.config.services?.urlManager || new UrlManager(new UrlTranslator(), reactLinker).detach();
 				const controllerConfig = {
 					id: `recommend_${tag + (profileCount[tag] - 1)}`,
 					tag,
 					globals,
 					...this.config.config,
 				};
-				const recs = new RecommendationController(controllerConfig, {
-					client: this.config.services?.client || this.client,
-					store: this.config.services?.store || new RecommendationStore(controllerConfig, { urlManager }),
-					urlManager,
-					eventManager: this.config.services?.eventManager || new EventManager(),
-					profiler: this.config.services?.profiler || new Profiler(),
-					logger: this.config.services?.logger || new Logger(),
-					tracker: this.config.services?.tracker || this.tracker,
-				});
+				const createRecommendationController = (await import('../create/recommendationController')).createRecommendationController;
+				const client = this.config.services?.client || this.client;
+				const tracker = this.config.services?.tracker || this.tracker;
+				const recs = createRecommendationController(
+					{
+						url: this.config.url || {},
+						controller: controllerConfig,
+					},
+					{ client, tracker }
+				);
 
 				this.uses.forEach((attachements) => recs.use(attachements));
 				this.plugins.forEach((plugin) => recs.plugin(plugin));

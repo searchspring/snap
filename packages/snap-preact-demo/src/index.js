@@ -3,14 +3,13 @@ import { h, Fragment, render } from 'preact';
 import deepmerge from 'deepmerge';
 /* searchspring imports */
 
-import { Snap } from '@searchspring/snap-preact';
-
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
 import { combineMerge } from './middleware/functions';
 
 import './styles/custom.scss';
 
+import { Snap } from '@searchspring/snap-preact';
 /*
 	configuration and instantiation
  */
@@ -52,21 +51,27 @@ let config = {
 				config: {
 					id: 'search',
 					// new plugins format to allow for parameters
-					plugins: [[afterStore], [configurable, 'param1', 'param2']],
+					// plugins: [[afterStore], [configurable, 'param1', 'param2']],
+					middleware: {
+						init: ({ controller }, next) => {
+							console.log('in config init...', controller);
+							next();
+						},
+					},
 					settings: {
 						redirects: {
 							merchandising: false,
 						},
-						// infinite: {
-						// 	backfill: 5,
-						// },
+						infinite: {
+							backfill: 5,
+						},
 					},
 				},
 				targets: [
 					{
 						selector: '#searchspring-content',
 						hideTarget: true,
-						prefetch: true,
+						// prefetch: true,
 						component: async () => {
 							return (await import('./components/Content/Content')).Content;
 						},
@@ -75,9 +80,25 @@ let config = {
 						selector: '#searchspring-sidebar',
 						// component: Sidebar,
 						hideTarget: true,
-						prefetch: true,
+						// prefetch: true,
 						component: async () => {
 							return (await import('./components/Sidebar/Sidebar')).Sidebar;
+						},
+					},
+				],
+			},
+			{
+				config: {
+					id: 'another',
+					// new plugins format to allow for parameters
+					// plugins: [[afterStore], [configurable, 'param1', 'param2']],
+				},
+				targets: [
+					{
+						selector: '#searchspring-contentz',
+						hideTarget: true,
+						component: async () => {
+							return (await import('./components/Content/Content')).Content;
 						},
 					},
 				],
@@ -106,6 +127,36 @@ let config = {
 				],
 			},
 		],
+		finder: [
+			{
+				config: {
+					id: 'finder',
+					url: '/',
+					fields: [
+						{
+							field: 'size_footwear',
+							label: 'Size',
+						},
+						{
+							field: 'color_family',
+							label: 'Color',
+						},
+						{
+							field: 'brand',
+							label: 'Brand',
+						},
+					],
+				},
+				targets: [
+					{
+						selector: '#finderz',
+						component: async () => {
+							return (await import('./components/Finder/Finder')).Finder;
+						},
+					},
+				],
+			},
+		],
 	},
 };
 
@@ -114,9 +165,54 @@ if (window?.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-const snap = new Snap(config);
-const { search, autocomplete } = snap.controllers;
+// const snap = new Snap(config);
+// const { search, autocomplete } = snap.controllers;
+// const finder = snap.createController('');
 
-// attaching plugins
-// search.plugin(afterStore);
-// search.plugin(configurable, 'param1', 'param2');
+const searchspring = new Snap(config);
+
+// fetch
+(async () => {
+	const another = await searchspring.getController('another');
+	console.log('another', another);
+	const search = await searchspring.getController('search');
+	console.log('search', search);
+	// searchspring.getController('searchs').then(c => {
+	// 	c.plugin(afterStore);
+	// 	c.plugin(configurable, 'param1', 'param2');
+	// })
+	// const search = searchspring.controller('search')
+	// console.log(search)
+
+	// forever waiting situation on the home page...
+	// LOADING...
+	// const autocomplete = await searchspring.getController('autocomplete');
+	// autocomplete.unbind();
+	search.on('init', ({ controller }, next) => {
+		console.log('initing', controller);
+		next();
+	});
+
+	search.on('beforeSearch', ({ controller }) => {
+		console.log('beforeSearch', controller);
+	});
+	// attaching plugins
+	search.plugin(afterStore);
+	search.plugin(configurable, 'param1', 'param2');
+})();
+
+/*
+const snap = new Snap(config);
+
+
+const { search, autocomplete } = await snap.controllers;
+
+OR
+
+const { search, autocomplete } = await snap.getControllers('search', 'autocomplete');
+OR
+const [search, autocomplete] = await snap.getControllers('search', 'autocomplete');
+WITH
+const search = await snap.getController('search');
+
+*/

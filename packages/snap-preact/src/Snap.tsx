@@ -1,27 +1,23 @@
 import deepmerge from 'deepmerge';
 import { h, render } from 'preact';
 
-import {
+import { Client } from '@searchspring/snap-client';
+import { Logger, LogMode } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
+import { version, DomTargeter } from '@searchspring/snap-toolbox';
+
+import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
+import type {
+	AbstractController,
 	SearchController,
-	RecommendationController,
 	AutocompleteController,
 	FinderController,
-	AbstractController,
+	RecommendationController,
 	SearchControllerConfig,
 	AutocompleteControllerConfig,
 	FinderControllerConfig,
 	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { SearchStore, RecommendationStore, AutocompleteStore, FinderStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger, LogMode } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-import { version } from '@searchspring/snap-toolbox';
-
-import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -74,16 +70,36 @@ export type SnapConfig = {
 	};
 };
 
-type ControllerConfigs = SearchControllerConfig | AutocompleteControllerConfig | FinderControllerConfig | RecommendationControllerConfig;
+type ControllerTypes = SearchController | AutocompleteController | FinderController | RecommendationController;
 export class Snap {
 	config: SnapConfig;
 	logger: Logger;
 	client: Client;
 	tracker: Tracker;
 	controllers: {
-		[controllerConfigId: string]: SearchController | AutocompleteController | FinderController | RecommendationController;
+		[controllerConfigId: string]: ControllerTypes;
 	};
 	recommendations: RecommendationInstantiator;
+	promises: any;
+
+	public getController = (id: string): Promise<ControllerTypes> => {
+		return this.promises[id];
+		// return new Promise((resolve, reject) => {
+		//     let count = 0;
+		//     const MAX_TIMEOUT = 500;
+		//     const DELAY = 4; // 4ms is browser minimum
+		//     const interval = setInterval(() => {
+		//         if(this.controllers[id]) {
+		//             clearInterval(interval)
+		//             resolve(this.controllers[id])
+		//         } else if(count > MAX_TIMEOUT / DELAY) {
+		//             clearInterval(interval)
+		//             reject(`getController could not find a controller with id: '${id}'`)
+		//         }
+		//         count = count + 1;
+		//     })
+		// })
+	};
 
 	constructor(config: SnapConfig) {
 		this.config = config;
@@ -95,6 +111,7 @@ export class Snap {
 		this.tracker = new Tracker(this.config.client.globals);
 		this.logger = new Logger('Snap Preact ');
 		this.controllers = {};
+		this.promises = {};
 
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
@@ -111,45 +128,87 @@ export class Snap {
 				case 'search': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as SearchController;
-
-							let searched = false;
-							const runSearch = () => {
-								if (!searched) {
-									cntrlr.search();
-									searched = true;
-								}
-							};
-
-							controller?.targets?.forEach((target, target_index) => {
-								if (!target.selector) {
-									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
-								}
-								if (!target.component) {
-									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
-								}
-
-								// run the search right away
-								target.prefetch && runSearch();
-
-								cntrlr.createTargeter(
-									{
-										controller: cntrlr,
-										...target,
-									},
-									async (target, elem, originalElem) => {
-										const onTarget = target.onTarget as OnTarget;
-										onTarget && onTarget(target, elem, originalElem);
-
-										runSearch();
-
-										const Component = await (target as ExtendedTarget).component();
-
+							this.promises[controller.config.id] = new Promise((resolve, reject) => {
+								let searched = false;
+								const runSearch = () => {
+									if (!searched) {
+										searched = true;
 										setTimeout(() => {
-											render(<Component controller={cntrlr} {...target.props} />, elem);
+											this.controllers[controller.config.id].search();
 										});
 									}
-								);
+								};
+								const targetFunction = async (target, elem, originalElem) => {
+									const onTarget = target.onTarget as OnTarget;
+									onTarget && onTarget(target, elem, originalElem);
+
+									const Component = await (target as ExtendedTarget).component();
+
+									setTimeout(() => {
+										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+									});
+								};
+								if (!controller?.targets || controller?.targets.length === 0) {
+									import('./create/searchController').then(({ createSearchController }) => {
+										this.controllers[controller.config.id] =
+											this.controllers[controller.config.id] ||
+											createSearchController(
+												{
+													url: deepmerge(config.url || {}, controller.url || {}),
+													controller: controller.config,
+												},
+												{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+											);
+										resolve(this.controllers[controller.config.id]);
+									});
+								}
+
+								controller?.targets?.forEach(async (target, target_index) => {
+									if (!target.selector) {
+										throw new Error(`Targets at index ${target_index} missing selector value (string).`);
+									}
+									if (!target.component) {
+										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
+									}
+									if (target.prefetch) {
+										import('./create/searchController').then(({ createSearchController }) => {
+											this.controllers[controller.config.id] =
+												this.controllers[controller.config.id] ||
+												createSearchController(
+													{
+														url: deepmerge(config.url || {}, controller.url || {}),
+														controller: controller.config,
+													},
+													{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+												);
+
+											// promise resolve AND be sure middleware attached in index.js is executed BEFORE searching
+											console.log('before resolving...');
+											resolve(this.controllers[controller.config.id]);
+											console.log('after resolving...');
+											runSearch();
+
+											this.controllers[controller.config.id].createTargeter({ ...target }, targetFunction);
+										});
+									} else {
+										new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+											const createSearchController = (await import('./create/searchController')).createSearchController;
+											this.controllers[controller.config.id] =
+												this.controllers[controller.config.id] ||
+												createSearchController(
+													{
+														url: deepmerge(config.url || {}, controller.url || {}),
+														controller: controller.config,
+													},
+													{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+												);
+											resolve(this.controllers[controller.config.id]);
+											runSearch();
+
+											targetFunction(target, elem, originalElem);
+										});
+									}
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
@@ -162,43 +221,59 @@ export class Snap {
 				case 'autocomplete': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as AutocompleteController;
+							const targetFunction = async (target, elem, originalElem) => {
+								const onTarget = target.onTarget as OnTarget;
+								onTarget && onTarget(target, elem, originalElem);
 
-							controller?.targets?.forEach((target, target_index) => {
+								const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
+									controller: AutocompleteController;
+									input: HTMLInputElement | string | Element;
+								}>;
+
+								setTimeout(() => {
+									render(<Component controller={this.controllers[controller.config.id]} input={originalElem} {...target.props} />, elem);
+								});
+							};
+
+							controller?.targets?.forEach(async (target, target_index) => {
+								if (!target.selector) {
+									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
+								}
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
-
-								cntrlr.createTargeter(
-									{
-										controller: cntrlr,
-										inject: {
-											action: 'after', // before, after, append, prepend
-											element: () => {
-												const acContainer = document.createElement('div');
-												acContainer.className = 'ss__autocomplete--target';
-												acContainer.addEventListener('click', (e) => {
-													e.stopPropagation();
-												});
-												return acContainer;
+								new DomTargeter(
+									[
+										{
+											inject: {
+												action: 'after', // before, after, append, prepend
+												element: () => {
+													const acContainer = document.createElement('div');
+													acContainer.className = 'ss__autocomplete--target';
+													acContainer.addEventListener('click', (e) => {
+														e.stopPropagation();
+													});
+													return acContainer;
+												},
 											},
+											...target,
 										},
-										...target,
-									},
+									],
 									async (target, elem, originalElem) => {
-										const onTarget = target.onTarget as OnTarget;
-										onTarget && onTarget(target, elem, originalElem);
+										const createAutocompleteController = (await import('./create/autocompleteController')).createAutocompleteController;
+										this.controllers[controller.config.id] =
+											this.controllers[controller.config.id] ||
+											createAutocompleteController(
+												{
+													url: deepmerge(config.url || {}, controller.url || {}),
+													controller: controller.config,
+												},
+												{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+											);
 
-										cntrlr.bind();
+										(this.controllers[controller.config.id] as AutocompleteController).bind();
 
-										const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
-											controller: AutocompleteController;
-											input: HTMLInputElement | string | Element;
-										}>;
-
-										setTimeout(() => {
-											render(<Component controller={cntrlr} input={originalElem} {...target.props} />, elem);
-										});
+										targetFunction(target, elem, originalElem);
 									}
 								);
 							});
@@ -213,45 +288,46 @@ export class Snap {
 				case 'finder': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as FinderController;
-
 							let searched = false;
 							const runSearch = () => {
 								if (!searched) {
-									cntrlr.search();
+									this.controllers[controller.config.id].search();
 									searched = true;
 								}
 							};
+							const targetFunction = async (target, elem, originalElem) => {
+								const onTarget = target.onTarget as OnTarget;
+								onTarget && onTarget(target, elem, originalElem);
 
-							controller?.targets?.forEach((target, target_index) => {
+								const Component = await (target as ExtendedTarget).component();
+
+								setTimeout(() => {
+									render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+								});
+							};
+
+							controller?.targets?.forEach(async (target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+								new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const createFinderController = (await import('./create/finderController')).createFinderController;
+									this.controllers[controller.config.id] =
+										this.controllers[controller.config.id] ||
+										createFinderController(
+											{
+												url: deepmerge(config.url || {}, controller.url || {}),
+												controller: controller.config,
+											},
+											{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+										);
+									runSearch();
 
-								// run the search right away
-								target.prefetch && runSearch();
-
-								cntrlr.createTargeter(
-									{
-										controller: cntrlr,
-										...target,
-									},
-									async (target, elem, originalElem) => {
-										const onTarget = target.onTarget as OnTarget;
-										onTarget && onTarget(target, elem, originalElem);
-
-										runSearch();
-
-										const Component = await (target as ExtendedTarget).component();
-
-										setTimeout(() => {
-											render(<Component controller={cntrlr} {...target.props} />, elem);
-										});
-									}
-								);
+									targetFunction(target, elem, originalElem);
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
@@ -264,45 +340,46 @@ export class Snap {
 				case 'recommendation': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
-							const cntrlr = this.createController(type, controller.config, controller.services, controller.url) as RecommendationController;
-
 							let searched = false;
 							const runSearch = () => {
 								if (!searched) {
-									cntrlr.search();
+									this.controllers[controller.config.id].search();
 									searched = true;
 								}
 							};
+							const targetFunction = async (target, elem, originalElem) => {
+								const onTarget = target.onTarget as OnTarget;
+								onTarget && onTarget(target, elem, originalElem);
 
-							controller?.targets?.forEach((target, target_index) => {
+								const Component = await (target as ExtendedTarget).component();
+
+								setTimeout(() => {
+									render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+								});
+							};
+
+							controller?.targets?.forEach(async (target, target_index) => {
 								if (!target.selector) {
 									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
 								}
 								if (!target.component) {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
+								new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const createRecommendationController = (await import('./create/recommendationController')).createRecommendationController;
+									this.controllers[controller.config.id] =
+										this.controllers[controller.config.id] ||
+										createRecommendationController(
+											{
+												url: deepmerge(config.url || {}, controller.url || {}),
+												controller: controller.config,
+											},
+											{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+										);
+									runSearch();
 
-								// run the search right away
-								target.prefetch && runSearch();
-
-								cntrlr.createTargeter(
-									{
-										controller: cntrlr,
-										...target,
-									},
-									async (target, elem, originalElem) => {
-										const onTarget = target.onTarget as OnTarget;
-										onTarget && onTarget(target, elem, originalElem);
-
-										runSearch();
-
-										const Component = await (target as ExtendedTarget).component();
-
-										setTimeout(() => {
-											render(<Component controller={cntrlr} {...target.props} />, elem);
-										});
-									}
-								);
+									targetFunction(target, elem, originalElem);
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
@@ -314,86 +391,17 @@ export class Snap {
 			}
 		});
 
-		if (this.config?.instantiators?.recommendation) {
+		if (config?.instantiators?.recommendation) {
 			try {
-				this.recommendations = new RecommendationInstantiator(config.instantiators.recommendation, {
-					client: this.client,
-					tracker: this.tracker,
-					logger: this.logger,
+				import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
+					this.recommendations = new RecommendationInstantiator(config.instantiators.recommendation, {
+						client: this.client,
+						tracker: this.tracker,
+						logger: this.logger,
+					});
 				});
 			} catch (err) {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
-			}
-		}
-	}
-
-	public createController(type: string, config: ControllerConfigs, services?: SnapControllerServices, url?: UrlTranslatorConfig): AbstractController {
-		const translatorConfig = deepmerge(this.config.url || {}, url || {});
-
-		switch (type) {
-			case 'search': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker);
-
-				const cntrlr = new SearchController(config as SearchControllerConfig, {
-					client: services?.client || this.client,
-					store: services?.store || new SearchStore(config as SearchControllerConfig, { urlManager }),
-					urlManager,
-					eventManager: services?.eventManager || new EventManager(),
-					profiler: services?.profiler || new Profiler(),
-					logger: services?.logger || new Logger(),
-					tracker: services?.tracker || this.tracker,
-				});
-
-				this.controllers[cntrlr.config.id] = cntrlr;
-				return cntrlr;
-			}
-
-			case 'autocomplete': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach();
-				const cntrlr = new AutocompleteController(config as AutocompleteControllerConfig, {
-					client: services?.client || this.client,
-					store: services?.store || new AutocompleteStore(config as AutocompleteControllerConfig, { urlManager }),
-					urlManager,
-					eventManager: services?.eventManager || new EventManager(),
-					profiler: services?.profiler || new Profiler(),
-					logger: services?.logger || new Logger(),
-					tracker: services?.tracker || this.tracker,
-				});
-
-				this.controllers[cntrlr.config.id] = cntrlr;
-				return cntrlr;
-			}
-
-			case 'finder': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
-				const cntrlr = new FinderController(config as FinderControllerConfig, {
-					client: services?.client || this.client,
-					store: services?.store || new FinderStore(config as FinderControllerConfig, { urlManager }),
-					urlManager,
-					eventManager: services?.eventManager || new EventManager(),
-					profiler: services?.profiler || new Profiler(),
-					logger: services?.logger || new Logger(),
-					tracker: services?.tracker || this.tracker,
-				});
-
-				this.controllers[cntrlr.config.id] = cntrlr;
-				return cntrlr;
-			}
-
-			case 'recommendation': {
-				const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(true);
-				const cntrlr = new RecommendationController(config as RecommendationControllerConfig, {
-					client: services?.client || this.client,
-					store: services?.store || new RecommendationStore(config as RecommendationControllerConfig, { urlManager }),
-					urlManager,
-					eventManager: services?.eventManager || new EventManager(),
-					profiler: services?.profiler || new Profiler(),
-					logger: services?.logger || new Logger(),
-					tracker: services?.tracker || this.tracker,
-				});
-
-				this.controllers[cntrlr.config.id] = cntrlr;
-				return cntrlr;
 			}
 		}
 	}

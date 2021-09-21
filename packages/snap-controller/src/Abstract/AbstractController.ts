@@ -123,7 +123,6 @@ export abstract class AbstractController {
 		}
 
 		this.log.warn(`duplicate targeter for '${targetName}' - targeter was not created`);
-		return;
 	}
 
 	public set environment(env: LogMode) {
