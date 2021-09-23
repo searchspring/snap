@@ -6,7 +6,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, RecommendationController, RecommendationControllerConfig, Attachments } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
@@ -39,9 +39,7 @@ export class RecommendationInstantiator {
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
-	public targets: {
-		[key: string]: DomTargeter;
-	} = {};
+	public targeter: DomTargeter;
 
 	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
 		this.config = config;
@@ -63,8 +61,7 @@ export class RecommendationInstantiator {
 		this.logger = logger;
 
 		const profileCount = {};
-
-		new DomTargeter(
+		this.targeter = new DomTargeter(
 			[
 				{
 					selector: `script[type="searchspring/recommend"]${this.config.selector ? ` , ${this.config.selector}` : ''}`,
@@ -121,7 +118,7 @@ export class RecommendationInstantiator {
 					globals,
 					...this.config.config,
 				};
-				const createRecommendationController = (await import('../create/recommendationController')).createRecommendationController;
+				const createRecommendationController = (await import('../create/recommendationController')).default;
 				const client = this.config.services?.client || this.client;
 				const tracker = this.config.services?.tracker || this.tracker;
 				const recs = createRecommendationController(
@@ -137,6 +134,8 @@ export class RecommendationInstantiator {
 				this.middleware.forEach((middleware) => recs.on(middleware.event, ...middleware.func));
 
 				await recs.search();
+
+				recs.addTargeter(this.targeter);
 
 				this.controllers[recs.config.id] = recs;
 

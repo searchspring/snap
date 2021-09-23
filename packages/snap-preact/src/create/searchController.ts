@@ -1,4 +1,4 @@
-import { SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
+import { SearchController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -7,21 +7,9 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
-import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
-import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { SnapControllerServices, SnapSearchControllerConfig } from '../types';
 
-import type { SnapControllerServices } from '../types';
-
-export type SnapSearchControllerConfig = {
-	url?: UrlTranslatorConfig;
-	client?: {
-		globals: ClientGlobals;
-		config?: ClientConfig;
-	};
-	controller: SearchControllerConfig;
-};
-
-export const createSearchController = (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
+export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
 
 	const cntrlr = new SearchController(config.controller, {

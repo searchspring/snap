@@ -64,7 +64,4 @@ module.exports = {
 			'react-dom': 'preact/compat',
 		},
 	},
-	experiments: {
-		topLevelAwait: true,
-	},
 };

@@ -67,7 +67,7 @@ let config = {
 						},
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						selector: '#searchspring-content',
 						hideTarget: true,
@@ -87,22 +87,6 @@ let config = {
 					},
 				],
 			},
-			{
-				config: {
-					id: 'another',
-					// new plugins format to allow for parameters
-					// plugins: [[afterStore], [configurable, 'param1', 'param2']],
-				},
-				targets: [
-					{
-						selector: '#searchspring-contentz',
-						hideTarget: true,
-						component: async () => {
-							return (await import('./components/Content/Content')).Content;
-						},
-					},
-				],
-			},
 		],
 		autocomplete: [
 			{
@@ -115,7 +99,7 @@ let config = {
 						},
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						selector: 'input.searchspring-ac',
 						// component: Autocomplete,
@@ -147,9 +131,10 @@ let config = {
 						},
 					],
 				},
-				targets: [
+				targeters: [
 					{
-						selector: '#finderz',
+						name: 'finder',
+						selector: '#finder',
 						component: async () => {
 							return (await import('./components/Finder/Finder')).Finder;
 						},
@@ -165,54 +150,38 @@ if (window?.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-// const snap = new Snap(config);
-// const { search, autocomplete } = snap.controllers;
-// const finder = snap.createController('');
-
 const searchspring = new Snap(config);
 
-// fetch
-(async () => {
-	const another = await searchspring.getController('another');
-	console.log('another', another);
-	const search = await searchspring.getController('search');
-	console.log('search', search);
-	// searchspring.getController('searchs').then(c => {
-	// 	c.plugin(afterStore);
-	// 	c.plugin(configurable, 'param1', 'param2');
-	// })
-	// const search = searchspring.controller('search')
-	// console.log(search)
-
-	// forever waiting situation on the home page...
-	// LOADING...
-	// const autocomplete = await searchspring.getController('autocomplete');
-	// autocomplete.unbind();
-	search.on('init', ({ controller }, next) => {
-		console.log('initing', controller);
-		next();
-	});
-
-	search.on('beforeSearch', ({ controller }) => {
-		console.log('beforeSearch', controller);
-	});
+searchspring.getController('search').then((search) => {
 	// attaching plugins
 	search.plugin(afterStore);
 	search.plugin(configurable, 'param1', 'param2');
-})();
+});
 
-/*
-const snap = new Snap(config);
+// this thing...
+searchspring.getRecommendations.then((recommendations) => {
+	recommendations.on('init', ({ controller }, next) => {
+		console.log('initing recs', controller);
+		next();
+	});
 
+	recommendations.plugin((controller) => {
+		console.log('plugin to recs', controller);
+	});
 
-const { search, autocomplete } = await snap.controllers;
-
-OR
-
-const { search, autocomplete } = await snap.getControllers('search', 'autocomplete');
-OR
-const [search, autocomplete] = await snap.getControllers('search', 'autocomplete');
-WITH
-const search = await snap.getController('search');
-
-*/
+	recommendations.use({
+		plugins: [
+			[
+				(controller) => {
+					console.log('plugin to recs with use', controller);
+				},
+			],
+		],
+		middleware: {
+			init: ({ controller }, next) => {
+				console.log('initing recs with use', controller);
+				next();
+			},
+		},
+	});
+});

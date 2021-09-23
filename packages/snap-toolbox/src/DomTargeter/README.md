@@ -7,69 +7,32 @@ import { DomTargeter } from '@searchspring/snap-toolbox';
 
 The constructor accepts an array of targets, an onTarget callback function, and optionally the Document.
 
+When the DomTargeter is constructed it will immediately look for elements in the document that match each target selector. When found the `onTarget` functions will be executed. DomTargeters will additionally look for targets when the `DOMContentLoaded` document event fires. Should targets be added after, the `retarget` method can be utilized.
+
+Typical usage would be to render a component into the DOM.
+
 ```typescript
-const searchPageTarget = new DomTargeter(
+const contentTarget = new DomTargeter(
 	[
 		{
-			selector: '.searchspring-container',
-			component: <SearchPage />,
+			selector: '#searchspring-content',
+			component: <Content />,
 		},
 	],
 	(target, elem) => {
+		// onTarget function
 		render(target.component, elem);
 	}
 );
 ```
 
-Typical usage would be used with [snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) to render content and sidebar components in a two-column layout.
-
-```typescript
-searchController.on('init', async ({ controller }, next) => {
-	const contentTarget = new DomTargeter(
-		[
-			{
-				selector: '#searchspring-content',
-				component: <Content store={controller.store} />,
-			},
-		],
-		(target, elem) => {
-			// run search after finding target
-			controller.search();
-
-			// empty element
-			while (elem.firstChild) elem.removeChild(elem.firstChild);
-			render(target.component, elem);
-		}
-	);
-
-	const sidebarTarget = new DomTargeter(
-		[
-			{
-				selector: '#searchspring-sidebar',
-				component: <Sidebar store={controller.store} />,
-			},
-		],
-		(target, elem) => {
-			// empty element
-			while (elem.firstChild) elem.removeChild(elem.firstChild);
-			render(target.component, elem);
-		}
-	);
-
-	window.addEventListener('DOMContentLoaded', () => {
-		contentTarget.retarget();
-		sidebarTarget.retarget();
-	});
-
-	await next();
-})
-```
-
 ## `retarget` method
-If the DOM is loaded asynchronously and the target element is not present at the time of when an instance of DomTargeter is created, it is recommended to retarget when the DOMContentLoaded event has been invoked.
+If the targets are created after the DomTargeter and `DOMContentLoaded` event has fired, the `retarget` method can be used to check for target existence.
 
 ```typescript
-window.addEventListener('DOMContentLoaded', () => {
-	searchPageTarget.retarget();
-});
+// manually retarget
+searchPageTarget.retarget();
 ```
+
+## `getTargets` method
+Return the array of targets specified during construction.

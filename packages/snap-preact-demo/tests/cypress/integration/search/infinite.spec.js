@@ -1,5 +1,6 @@
 describe('Infinite Setting Test', () => {
 	it('has infinite functionality', () => {
+		const backfill = 0;
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				controllers: {
@@ -7,7 +8,9 @@ describe('Infinite Setting Test', () => {
 						{
 							config: {
 								settings: {
-									infinite: {},
+									infinite: {
+										backfill,
+									},
 								},
 							},
 						},
@@ -18,7 +21,7 @@ describe('Infinite Setting Test', () => {
 		cy.visit('http://localhost:4444/');
 
 		cy.snapStore().then((store) => {
-			expect(store.config.settings.infinite).to.deep.equal({});
+			expect(store.config.settings.infinite).to.deep.equal({ backfill });
 
 			// initial page
 			const resultsPerPage = store.results.length;
