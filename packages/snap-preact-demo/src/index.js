@@ -50,20 +50,16 @@ let config = {
 			{
 				config: {
 					id: 'search',
-					// new plugins format to allow for parameters
-					// plugins: [[afterStore], [configurable, 'param1', 'param2']],
 					middleware: {
 						init: ({ controller }, next) => {
-							console.log('in config init...', controller);
+							controller.log.debug('in config init...', controller);
 							next();
 						},
 					},
+					plugins: [[afterStore], [configurable, 'thing1', 'thing2']],
 					settings: {
 						redirects: {
 							merchandising: false,
-						},
-						infinite: {
-							backfill: 5,
 						},
 					},
 				},
@@ -78,7 +74,6 @@ let config = {
 					},
 					{
 						selector: '#searchspring-sidebar',
-						// component: Sidebar,
 						hideTarget: true,
 						// prefetch: true,
 						component: async () => {
@@ -102,7 +97,6 @@ let config = {
 				targeters: [
 					{
 						selector: 'input.searchspring-ac',
-						// component: Autocomplete,
 						hideTarget: true,
 						component: async () => {
 							return (await import('./components/Autocomplete/Autocomplete')).Autocomplete;
@@ -150,38 +144,4 @@ if (window?.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-const searchspring = new Snap(config);
-
-searchspring.getController('search').then((search) => {
-	// attaching plugins
-	search.plugin(afterStore);
-	search.plugin(configurable, 'param1', 'param2');
-});
-
-// this thing...
-searchspring.getRecommendations.then((recommendations) => {
-	recommendations.on('init', ({ controller }, next) => {
-		console.log('initing recs', controller);
-		next();
-	});
-
-	recommendations.plugin((controller) => {
-		console.log('plugin to recs', controller);
-	});
-
-	recommendations.use({
-		plugins: [
-			[
-				(controller) => {
-					console.log('plugin to recs with use', controller);
-				},
-			],
-		],
-		middleware: {
-			init: ({ controller }, next) => {
-				console.log('initing recs with use', controller);
-				next();
-			},
-		},
-	});
-});
+const snap = new Snap(config);
