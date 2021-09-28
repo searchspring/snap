@@ -13,6 +13,10 @@ module.exports = {
 		new webpack.DefinePlugin({
 			BRANCHNAME: `"${branchName}"`,
 		}),
+		// to disable code splitting, include the following:
+		// new webpack.optimize.LimitChunkCountPlugin({
+		// 	maxChunks: 1,
+		// }),
 	],
 	module: {
 		rules: [
@@ -50,7 +54,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
-		chunkFilename: '[name].js',
+		chunkFilename: 'snap_[name].js',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx'],

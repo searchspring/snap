@@ -42,9 +42,9 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	globals?: any;
 	selector: string;
 	action?: string;
-	settings: {
-		initializeFromUrl: boolean;
-		syncInputs: boolean;
+	settings?: {
+		initializeFromUrl?: boolean;
+		syncInputs?: boolean;
 		facets?: {
 			trim?: boolean;
 			pinFiltered?: boolean;

@@ -26,7 +26,7 @@ export abstract class AbstractController {
 	public profiler: Profiler;
 	public log: Logger;
 	public tracker: Tracker;
-	public targets: {
+	public targeters: {
 		[key: string]: DomTargeter;
 	} = {};
 
@@ -114,16 +114,16 @@ export abstract class AbstractController {
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
-		const targetName = (target.name as string) ?? target.selector;
+		return this.addTargeter(new DomTargeter([target], onTarget, document));
+	}
 
-		if (!this.targets[targetName]) {
-			const targeter = new DomTargeter([target], onTarget, document);
-			this.targets[targetName] = targeter;
-			return targeter;
+	public addTargeter(target: DomTargeter): DomTargeter {
+		const firstTarget = target.getTargets()[0];
+		const targetName: string = (firstTarget?.name as string) ?? firstTarget?.selector;
+		if (targetName && !this.targeters[targetName]) {
+			this.targeters[targetName] = target;
+			return target;
 		}
-
-		this.log.warn(`duplicate targeter for '${targetName}' - targeter was not created`);
-		return;
 	}
 
 	public set environment(env: LogMode) {
@@ -185,8 +185,8 @@ export abstract class AbstractController {
 	}
 
 	public retarget(): void {
-		Object.keys(this.targets).forEach((target) => {
-			this.targets[target].retarget();
+		Object.keys(this.targeters).forEach((target) => {
+			this.targeters[target].retarget();
 		});
 	}
 

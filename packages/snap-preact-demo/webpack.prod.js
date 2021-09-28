@@ -4,6 +4,7 @@ const path = require('path');
 
 module.exports = merge(common, {
 	mode: 'production',
+	target: 'browserslist',
 	devServer: {
 		client: false,
 		https: false,

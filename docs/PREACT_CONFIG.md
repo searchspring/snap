@@ -22,7 +22,7 @@ const config = {
 				config: {
 					id: 'search',
 				},
-				targets: [
+				targeters: [
 					{
 						selector: '#searchspring-content',
 						component: () => Content,
@@ -47,7 +47,7 @@ const config = {
 						},
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						selector: 'input.searchspring-ac',
 						component: () => Autocomplete,
@@ -83,19 +83,19 @@ const snap = new Snap(config)
 const { search } = snap.controllers;
 ```
 
-We also have a `targets` array of Target objects. A Target object defines an entry point on the page where a component will be rendered. 
+We also have a `targeters` array of DomTargeter `targeter` configuration objects. Each object defines an entry point on the page where a component will be rendered. 
 
-`target.selector` specifies the DOM selector to target
+`targeter.selector` specifies the DOM selector to target
 
-`target.component` specifies a function that returns a reference to the component to render at the target selector. 
+`targeter.component` specifies a function that returns a reference to the component to render at the target selector. 
 
-`target.hideTarget` boolean that specifies if the target node should be hidden before the component is mounted and rendered. It is recommended to enable this to prevent flashy behaviour. 
+`targeter.hideTarget` boolean that specifies if the target node should be hidden before the component is mounted and rendered. It is recommended to enable this to prevent flashy behaviour. 
 
-`target.props` (optional) convenient way of passing additional props to the component, by default we pass `controller`
+`targeter.props` (optional) convenient way of passing additional props to the component, by default we pass `controller`
 
-`target.onTarget` (optional) callback that fires after a target is found
+`targeter.onTarget` (optional) callback that fires after a target is found
 
-`target.name` (optional) name to give the targeter for later reference using `controller.targets`
+`targeter.name` (optional) name to give the targeter for later reference using `controller.targeters`
 
 In our example, we are rendering a `<Content>` component into `<div id="searchspring-content">` and the `<Sidebar>` component into `<div id="searchspring-sidebar">`
 
@@ -105,11 +105,11 @@ In our example, we are rendering a `<Content>` component into `<div id="searchsp
 
 We're also creating an Autocomplete controller in a similar function.
 
-One notable thing to mention as you may see a duplicate `selector` property in both the `config` and `target`.
+One notable thing to mention as you may see a duplicate `selector` property in both the `config` and `targeter`.
 
 The `config.selector` specifies the `<input/>` element(s) to attach events to that respond to Autocomplete actions. This supports a selector that targets many elements. 
 
-The `target.selector` specifies the DOM node where the `target.component` will be rendered into.
+The `targeter.selector` specifies the DOM node where the `targeter.component` will be rendered into.
 
 However in our example, since they are both the same value, the Autocomplete component will rendered as a child DOM node below the `<input/>` element that is currently focused. 
 
