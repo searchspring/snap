@@ -2443,7 +2443,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(38524),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55974),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (
@@ -2773,7 +2773,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(38524),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(55974),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -4545,7 +4545,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5035,7 +5035,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -5454,7 +5454,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5965,7 +5965,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -7226,7 +7226,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -7892,7 +7892,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -8365,7 +8365,7 @@
 				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -9290,7 +9290,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -10864,7 +10864,7 @@
 					return null == string ? void 0 : string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -11338,7 +11338,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12390,7 +12390,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12770,7 +12770,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13490,7 +13490,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13939,7 +13939,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(38524),
+				snapify = __webpack_require__(55974),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -17123,7 +17123,7 @@
 				);
 			}
 		},
-		38524: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		55974: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -17138,50 +17138,64 @@
 				__webpack_require__(85371),
 				__webpack_require__(94908),
 				__webpack_require__(77950),
+				__webpack_require__(52506),
+				__webpack_require__(47256),
 				__webpack_require__(43105),
 				__webpack_require__(38695),
 				__webpack_require__(1939),
-				__webpack_require__(34769),
-				__webpack_require__(54226),
-				__webpack_require__(65584);
-			var LogMode,
-				jsxRuntime_module = __webpack_require__(10348),
+				__webpack_require__(95094);
+			var BeaconType,
+				BeaconCategory,
 				cjs = __webpack_require__(39714),
-				cjs_default = __webpack_require__.n(cjs),
-				preact_module = __webpack_require__(33847),
-				colors =
-					(__webpack_require__(52506),
-					__webpack_require__(47256),
-					__webpack_require__(32501),
-					__webpack_require__(18178),
-					__webpack_require__(43450),
-					__webpack_require__(85940),
-					__webpack_require__(95094),
-					__webpack_require__(74069),
-					__webpack_require__(95342),
-					__webpack_require__(26936),
-					__webpack_require__(39529),
-					__webpack_require__(31235),
-					__webpack_require__(67890),
-					__webpack_require__(18145),
-					{
-						blue: '#3379c1',
-						bluelight: '#688BA3',
-						bluedark: '#1B3141',
-						bluegreen: '#318495',
-						grey: '#61717B',
-						green: '#507B43',
-						greendark: '#63715F',
-						greenblue: '#46927D',
-						indigo: '#4c3ce2',
-						orange: '#ecaa15',
-						orangelight: '#ff6600',
-						orangedark: '#c59600',
-						red: '#cc1212',
-						redlight: '#f30707',
-						reddark: '#8E111C',
-						yellow: '#d1d432',
-					}),
+				cjs_default = __webpack_require__.n(cjs);
+			!(function (BeaconType) {
+				(BeaconType.PRODUCT = 'product'),
+					(BeaconType.CART = 'cart'),
+					(BeaconType.ORDER = 'transaction'),
+					(BeaconType.LOGIN = 'login'),
+					(BeaconType.CLICK = 'click'),
+					(BeaconType.CUSTOM = 'custom'),
+					(BeaconType.PROFILE_RENDER = 'profile.render'),
+					(BeaconType.PROFILE_IMPRESSION = 'profile.impression'),
+					(BeaconType.PROFILE_CLICK = 'profile.click'),
+					(BeaconType.PROFILE_PRODUCT_RENDER = 'profile.product.render'),
+					(BeaconType.PROFILE_PRODUCT_IMPRESSION = 'profile.product.impression'),
+					(BeaconType.PROFILE_PRODUCT_CLICK = 'profile.product.click');
+			})(BeaconType || (BeaconType = {})),
+				(function (BeaconCategory) {
+					(BeaconCategory.PAGEVIEW = 'searchspring.page.view'),
+						(BeaconCategory.CARTVIEW = 'searchspring.shop.cart'),
+						(BeaconCategory.ORDERVIEW = 'searchspring.shop.transaction'),
+						(BeaconCategory.PERSONALIZATION = 'searchspring.personalization'),
+						(BeaconCategory.RECOMMENDATIONS = 'searchspring.recommendations.user-interactions'),
+						(BeaconCategory.INTERACTION = 'searchspring.user-interactions'),
+						(BeaconCategory.CUSTOM = 'custom');
+				})(BeaconCategory || (BeaconCategory = {}));
+			__webpack_require__(32501),
+				__webpack_require__(18178),
+				__webpack_require__(39529),
+				__webpack_require__(31235),
+				__webpack_require__(67890),
+				__webpack_require__(26936);
+			var LogMode,
+				colors = {
+					blue: '#3379c1',
+					bluelight: '#688BA3',
+					bluedark: '#1B3141',
+					bluegreen: '#318495',
+					grey: '#61717B',
+					green: '#507B43',
+					greendark: '#63715F',
+					greenblue: '#46927D',
+					indigo: '#4c3ce2',
+					orange: '#ecaa15',
+					orangelight: '#ff6600',
+					orangedark: '#c59600',
+					red: '#cc1212',
+					redlight: '#f30707',
+					reddark: '#8E111C',
+					yellow: '#d1d432',
+				},
 				emoji =
 					(__webpack_require__(84605),
 					{
@@ -17331,8 +17345,15 @@
 			!(function (LogMode) {
 				(LogMode.PRODUCTION = 'production'), (LogMode.DEVELOPMENT = 'development');
 			})(LogMode || (LogMode = {}));
-			__webpack_require__(99120), __webpack_require__(48319), __webpack_require__(74083);
-			var cookies = {
+			__webpack_require__(74069),
+				__webpack_require__(95342),
+				__webpack_require__(34769),
+				__webpack_require__(18145),
+				__webpack_require__(99120),
+				__webpack_require__(48319),
+				__webpack_require__(74083);
+			var _extendStatics,
+				cookies = {
 					set: function set(name, val, sameSite, expires) {
 						sameSite = sameSite || 'Lax';
 						var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
@@ -17358,6 +17379,7 @@
 					(__webpack_require__(84870),
 					__webpack_require__(53985),
 					__webpack_require__(49228),
+					__webpack_require__(43450),
 					__webpack_require__(43108),
 					__webpack_require__(27233),
 					[]),
@@ -17398,6 +17420,9 @@
 								  });
 					}
 					return (
+						(DomTargeter.prototype.getTargets = function () {
+							return this.targets;
+						}),
 						(DomTargeter.prototype.retarget = function () {
 							var _this = this,
 								targetElemPairs = this.targets.flatMap(function (target) {
@@ -17636,7 +17661,7 @@
 							tracker = _a.tracker;
 						if (
 							((this.type = 'abstract'),
-							(this.targets = {}),
+							(this.targeters = {}),
 							(this._initialized = !1),
 							(this._environment = LogMode.PRODUCTION),
 							'object' != typeof config || 'string' != typeof config.id || !config.id.match(/^[a-zA-Z0-9_]*$/))
@@ -17696,13 +17721,18 @@
 							configurable: !0,
 						}),
 						(AbstractController.prototype.createTargeter = function (target, onTarget, document) {
+							return this.addTargeter(new DomTargeter([target], onTarget, document));
+						}),
+						(AbstractController.prototype.addTargeter = function (target) {
 							var _a,
-								targetName = null !== (_a = target.name) && void 0 !== _a ? _a : target.selector;
-							if (!this.targets[targetName]) {
-								var targeter = new DomTargeter([target], onTarget, document);
-								return (this.targets[targetName] = targeter), targeter;
-							}
-							this.log.warn("duplicate targeter for '" + targetName + "' - targeter was not created");
+								firstTarget = target.getTargets()[0],
+								targetName =
+									null !== (_a = null == firstTarget ? void 0 : firstTarget.name) && void 0 !== _a
+										? _a
+										: null == firstTarget
+										? void 0
+										: firstTarget.selector;
+							if (targetName && !this.targeters[targetName]) return (this.targeters[targetName] = target), target;
 						}),
 						Object.defineProperty(AbstractController.prototype, 'environment', {
 							get: function get() {
@@ -17761,8 +17791,8 @@
 						}),
 						(AbstractController.prototype.retarget = function () {
 							var _this = this;
-							Object.keys(this.targets).forEach(function (target) {
-								_this.targets[target].retarget();
+							Object.keys(this.targeters).forEach(function (target) {
+								_this.targeters[target].retarget();
 							});
 						}),
 						(AbstractController.prototype.plugin = function (func) {
@@ -17807,169 +17837,7 @@
 						}),
 						AbstractController
 					);
-				})();
-			__webpack_require__(45794), __webpack_require__(71245);
-			var StorageType,
-				flags = (function getFlags(userAgent) {
-					void 0 === userAgent && (userAgent = ''), (userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase());
-					var ieVersion,
-						isIE = function isIE() {
-							if (void 0 === ieVersion) {
-								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
-								ieVersion = !!version && Number(version);
-							}
-							return ieVersion;
-						};
-					return {
-						cors: function cors() {
-							return !isIE() || isIE() >= 10;
-						},
-						cookies: function cookies() {
-							return window.navigator && window.navigator.cookieEnabled && !window.navigator.doNotTrack;
-						},
-						storage: function storage() {
-							try {
-								return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
-							} catch (e) {
-								return !1;
-							}
-						},
-					};
 				})(),
-				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() },
-				utils_cookies = cookies,
-				StorageStore = (function () {
-					function StorageStore(config) {
-						var _a, _b;
-						if (((this.type = null), (this.expiration = 31536e6), (this.sameSite = void 0), (this.key = 'ss-storage'), (this.state = {}), config))
-							switch (
-								('' !== config.key.trim() && (this.key = config.key.trim()),
-								(null === (_a = null == config ? void 0 : config.cookie) || void 0 === _a ? void 0 : _a.expiration) &&
-									(this.expiration = config.cookie.expiration),
-								(null === (_b = null == config ? void 0 : config.cookie) || void 0 === _b ? void 0 : _b.sameSite) &&
-									(this.sameSite = config.cookie.sameSite),
-								config.type)
-							) {
-								case StorageType.SESSION:
-									(this.type = featureFlags.storage ? config.type : null),
-										this.type &&
-											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
-											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
-									break;
-								case StorageType.LOCAL:
-									(this.type = featureFlags.storage ? config.type : null),
-										this.type &&
-											!window.localStorage.getItem(this.key) &&
-											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
-											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
-									break;
-								case StorageType.COOKIE:
-									if (featureFlags.cookies) {
-										this.type = config.type;
-										var data = utils_cookies.get(this.key);
-										data && (this.state = JSON.parse(data));
-									}
-							}
-					}
-					return (
-						(StorageStore.prototype.set = function (path, value) {
-							var paths = null == path ? void 0 : path.split('.'),
-								location = this.state;
-							switch (
-								(null == paths ||
-									paths.forEach(function (p, i) {
-										i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
-									}),
-								this.type)
-							) {
-								case StorageType.SESSION:
-									window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.LOCAL:
-									window.localStorage.setItem(this.key, JSON.stringify(this.state));
-									break;
-								case StorageType.COOKIE:
-									utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
-							}
-						}),
-						(StorageStore.prototype.get = function (path) {
-							switch (this.type) {
-								case StorageType.SESSION:
-									this.state = JSON.parse(window.sessionStorage.getItem(this.key));
-									break;
-								case StorageType.LOCAL:
-									this.state = JSON.parse(window.localStorage.getItem(this.key));
-									break;
-								case StorageType.COOKIE:
-									var data = utils_cookies.get(this.key);
-									data && (this.state = JSON.parse(data));
-							}
-							var paths = null == path ? void 0 : path.split('.');
-							if (null == paths ? void 0 : paths.length) {
-								for (var value = this.state, _i = 0, paths_1 = paths; _i < paths_1.length; _i++) {
-									var p = paths_1[_i];
-									if (!value || void 0 === value[p]) {
-										value = void 0;
-										break;
-									}
-									value = value[p];
-								}
-								return value;
-							}
-						}),
-						(StorageStore.prototype.clear = function () {
-							switch (this.type) {
-								case StorageType.SESSION:
-									window.sessionStorage.removeItem(this.key);
-									break;
-								case StorageType.LOCAL:
-									window.localStorage.removeItem(this.key);
-									break;
-								case StorageType.COOKIE:
-									utils_cookies.unset(this.key);
-							}
-							this.state = {};
-						}),
-						StorageStore
-					);
-				})();
-			!(function (StorageType) {
-				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
-			})(StorageType || (StorageType = {}));
-			__webpack_require__(43430);
-			function getSearchParams(state) {
-				var params = {};
-				if (
-					(state.tag && ((params.merchandising = params.merchandising || {}), (params.merchandising.landingPage = state.tag)),
-					state.query &&
-						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
-					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq[0])),
-					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq[0])),
-					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
-					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
-					state.sort)
-				) {
-					params.sorts = params.sorts || [];
-					var sort = (Array.isArray(state.sort) ? state.sort : [state.sort])[0];
-					sort && sort.field && sort.direction && params.sorts.push({ field: sort.field, direction: sort.direction });
-				}
-				return (
-					state.filter &&
-						((params.filters = params.filters || []),
-						Object.keys(state.filter).forEach(function (field) {
-							if ('string' == typeof field) {
-								var filter = state.filter[field];
-								(Array.isArray(filter) ? filter : [filter]).forEach(function (value) {
-									'object' != typeof value
-										? params.filters.push({ type: 'value', field, value })
-										: void 0 !== value.low && void 0 !== value.high && params.filters.push({ type: 'range', field, value });
-								});
-							}
-						})),
-					params
-				);
-			}
-			var _extendStatics,
 				__extends =
 					((_extendStatics = function extendStatics(d, b) {
 						return (
@@ -18002,1289 +17870,6 @@
 								return t;
 							}),
 						__assign.apply(this, arguments)
-					);
-				},
-				SearchController_awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				SearchController_generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				SearchController_spreadArray = function (to, from, pack) {
-					if (pack || 2 === arguments.length)
-						for (var ar, i = 0, l = from.length; i < l; i++)
-							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
-					return to.concat(ar || Array.prototype.slice.call(from));
-				},
-				defaultConfig = {
-					id: 'search',
-					globals: {},
-					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0 } },
-				},
-				SearchController = (function (_super) {
-					function SearchController(config, _a) {
-						var client = _a.client,
-							store = _a.store,
-							urlManager = _a.urlManager,
-							eventManager = _a.eventManager,
-							profiler = _a.profiler,
-							logger = _a.logger,
-							tracker = _a.tracker,
-							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
-						return (
-							(_this.type = 'search'),
-							(_this.track = {
-								product: {
-									click: function click(e, result) {
-										var _a;
-										if (_this.config.settings.infinite) {
-											var scrollMap = {};
-											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
-										}
-										var _b = result.attributes,
-											intellisuggestData = _b.intellisuggestData,
-											intellisuggestSignature = _b.intellisuggestSignature,
-											target = e.target,
-											href =
-												(null == target ? void 0 : target.href) ||
-												(null === (_a = result.mappings.core) || void 0 === _a ? void 0 : _a.url) ||
-												void 0,
-											event = _this.tracker.track.product.click({ data: { intellisuggestData, intellisuggestSignature, href } });
-										return _this.eventManager.fire('track.product.click', { controller: _this, event: e, result, trackEvent: event }), event;
-									},
-								},
-							}),
-							(_this.search = function () {
-								return SearchController_awaiter(_this, void 0, void 0, function () {
-									var params,
-										stringyParams,
-										prevStringyParams,
-										err_1,
-										preventBackfill,
-										dontBackfill,
-										searchProfile,
-										_a,
-										response,
-										meta,
-										previousResults_1,
-										backfills,
-										page,
-										backfillParams,
-										afterSearchProfile,
-										err_2,
-										afterStoreProfile,
-										err_3,
-										err_4,
-										_b,
-										_c,
-										_d,
-										_e,
-										_f,
-										_g,
-										_h;
-									return SearchController_generator(this, function (_j) {
-										switch (_j.label) {
-											case 0:
-												return this.initialized ? [3, 2] : [4, this.init()];
-											case 1:
-												_j.sent(), (_j.label = 2);
-											case 2:
-												(params = this.params), (_j.label = 3);
-											case 3:
-												if (
-													(_j.trys.push([3, 20, , 21]),
-													(stringyParams = JSON.stringify(params)),
-													(prevStringyParams = this.storage.get('lastStringyParams')),
-													stringyParams == prevStringyParams)
-												)
-													return [2];
-												_j.label = 4;
-											case 4:
-												return _j.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
-											case 5:
-												return _j.sent(), [3, 7];
-											case 6:
-												if ('cancelled' == (null == (err_1 = _j.sent()) ? void 0 : err_1.message))
-													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
-												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
-											case 7:
-												return this.config.settings.infinite &&
-													((preventBackfill =
-														(null === (_b = this.config.settings.infinite) || void 0 === _b ? void 0 : _b.backfill) &&
-														!this.store.results.length &&
-														(null === (_c = params.pagination) || void 0 === _c ? void 0 : _c.page) > this.config.settings.infinite.backfill),
-													(dontBackfill =
-														!(null === (_d = this.config.settings.infinite) || void 0 === _d ? void 0 : _d.backfill) &&
-														!this.store.results.length &&
-														(null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1),
-													preventBackfill || dontBackfill)
-													? (this.storage.set('scrollMap', {}), this.urlManager.set('page', 1).go(), [2])
-													: ((searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-													  [4, this.client.search(params)]);
-											case 8:
-												if (
-													((_a = _j.sent()),
-													(response = _a[0]),
-													(meta = _a[1]),
-													response.meta || (response.meta = meta),
-													!(this.config.settings.infinite && (null === (_f = params.pagination) || void 0 === _f ? void 0 : _f.page) > 1))
-												)
-													return [3, 11];
-												if (
-													((previousResults_1 = (null === (_g = this.store.data) || void 0 === _g ? void 0 : _g.results) || []),
-													!(null === (_h = this.config.settings) || void 0 === _h ? void 0 : _h.infinite.backfill) || previousResults_1.length)
-												)
-													return [3, 10];
-												for (backfills = [], page = 1; page < params.pagination.page; page++)
-													(backfillParams = cjs_default()(__assign({}, params), { pagination: { page } })),
-														backfills.push(this.client.search(backfillParams));
-												return [4, Promise.all(backfills)];
-											case 9:
-												_j.sent().map(function (_a) {
-													var data = _a[0];
-													previousResults_1 = previousResults_1.concat(data.results);
-												}),
-													(_j.label = 10);
-											case 10:
-												(response.results = SearchController_spreadArray(
-													SearchController_spreadArray([], previousResults_1, !0),
-													response.results || [],
-													!0
-												)),
-													(_j.label = 11);
-											case 11:
-												searchProfile.stop(),
-													this.log.profile(searchProfile),
-													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_j.label = 12);
-											case 12:
-												return (
-													_j.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
-												);
-											case 13:
-												return _j.sent(), [3, 15];
-											case 14:
-												if ('cancelled' == (null == (err_2 = _j.sent()) ? void 0 : err_2.message))
-													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
-												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
-											case 15:
-												afterSearchProfile.stop(),
-													this.log.profile(afterSearchProfile),
-													this.store.update(response),
-													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_j.label = 16);
-											case 16:
-												return (
-													_j.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
-												);
-											case 17:
-												return _j.sent(), [3, 19];
-											case 18:
-												if ('cancelled' == (null == (err_3 = _j.sent()) ? void 0 : err_3.message))
-													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
-												throw (this.log.error("error in 'afterStore' middleware"), err_3);
-											case 19:
-												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
-											case 20:
-												return (err_4 = _j.sent()) && console.error(err_4), [3, 21];
-											case 21:
-												return [2];
-										}
-									});
-								});
-							}),
-							(_this.config = cjs_default()(defaultConfig, _this.config)),
-							_this.store.setConfig(_this.config),
-							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
-							_this.storage.set('lastStringyParams', void 0),
-							_this.eventManager.on('beforeSearch', function (search, next) {
-								return SearchController_awaiter(_this, void 0, void 0, function () {
-									return SearchController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return (search.controller.store.loading = !0), [4, next()];
-											case 1:
-												return _a.sent(), [2];
-										}
-									});
-								});
-							}),
-							_this.eventManager.on('afterSearch', function (search, next) {
-								return SearchController_awaiter(_this, void 0, void 0, function () {
-									var config, redirectURL, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-									return SearchController_generator(this, function (_l) {
-										switch (_l.label) {
-											case 0:
-												return (
-													(config = search.controller.config),
-													(redirectURL =
-														null === (_b = null === (_a = search.response) || void 0 === _a ? void 0 : _a.merchandising) || void 0 === _b
-															? void 0
-															: _b.redirect) &&
-													(null === (_d = null === (_c = null == config ? void 0 : config.settings) || void 0 === _c ? void 0 : _c.redirects) ||
-													void 0 === _d
-														? void 0
-														: _d.merchandising)
-														? (window.location.replace(redirectURL), [2, !1])
-														: (null === (_f = null === (_e = null == config ? void 0 : config.settings) || void 0 === _e ? void 0 : _e.redirects) ||
-														  void 0 === _f
-																? void 0
-																: _f.singleResult) &&
-														  (null == search ? void 0 : search.response.search.query) &&
-														  1 ===
-																(null ===
-																	(_h = null === (_g = null == search ? void 0 : search.response) || void 0 === _g ? void 0 : _g.pagination) ||
-																void 0 === _h
-																	? void 0
-																	: _h.totalResults) &&
-														  !(null === (_k = null === (_j = null == search ? void 0 : search.response) || void 0 === _j ? void 0 : _j.filters) ||
-														  void 0 === _k
-																? void 0
-																: _k.length)
-														? (window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url), [2, !1])
-														: [4, next()]
-												);
-											case 1:
-												return _l.sent(), [2];
-										}
-									});
-								});
-							}),
-							_this.eventManager.on('afterStore', function (search, next) {
-								return SearchController_awaiter(_this, void 0, void 0, function () {
-									var stringyParams,
-										scrollMap_1,
-										scrollToPosition_1,
-										checkCount_1,
-										heightCheck_1,
-										_a,
-										_this = this;
-									return SearchController_generator(this, function (_b) {
-										switch (_b.label) {
-											case 0:
-												return [4, next()];
-											case 1:
-												return (
-													_b.sent(),
-													(search.controller.store.loading = !1),
-													(stringyParams = JSON.stringify(search.request)),
-													this.storage.set('lastStringyParams', stringyParams),
-													(null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.infinite) &&
-														0 === window.scrollY &&
-														((scrollMap_1 = this.storage.get('scrollMap') || {}),
-														(scrollToPosition_1 = scrollMap_1[stringyParams]) &&
-															((checkCount_1 = 0),
-															(heightCheck_1 = window.setInterval(function () {
-																document.documentElement.scrollHeight >= scrollToPosition_1 &&
-																	(window.scrollTo(0, scrollToPosition_1),
-																	_this.log.debug('scrolling to: ', scrollMap_1[stringyParams]),
-																	window.clearInterval(heightCheck_1)),
-																	checkCount_1 > 40 && window.clearInterval(heightCheck_1),
-																	checkCount_1++;
-															}, 50)))),
-													[2]
-												);
-										}
-									});
-								});
-							}),
-							_this.use(_this.config),
-							_this
-						);
-					}
-					return (
-						__extends(SearchController, _super),
-						Object.defineProperty(SearchController.prototype, 'params', {
-							get: function get() {
-								var _a,
-									_b,
-									params = cjs_default()(__assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
-								(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.redirects) || void 0 === _b
-									? void 0
-									: _b.merchandising) || ((params.search = params.search || {}), (params.search.redirectResponse = 'full'));
-								var userId = this.tracker.getUserId().userId;
-								return userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)), params;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						SearchController
-					);
-				})(AbstractController),
-				AutocompleteController_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				AutocompleteController_assign = function () {
-					return (
-						(AutocompleteController_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						AutocompleteController_assign.apply(this, arguments)
-					);
-				},
-				AutocompleteController_awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				AutocompleteController_generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				AutocompleteController_utils_url = URL,
-				AutocompleteController_defaultConfig = {
-					id: 'autocomplete',
-					selector: '',
-					action: '',
-					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
-				},
-				AutocompleteController = (function (_super) {
-					function AutocompleteController(config, _a) {
-						var client = _a.client,
-							store = _a.store,
-							urlManager = _a.urlManager,
-							eventManager = _a.eventManager,
-							profiler = _a.profiler,
-							logger = _a.logger,
-							tracker = _a.tracker,
-							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
-						return (
-							(_this.type = 'autocomplete'),
-							(_this.track = { product: { click: function click(e, result) {} } }),
-							(_this.handlers = {
-								input: {
-									enterKey: function enterKey(e) {
-										return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-											var actionUrl, input, query, err_1, newUrl;
-											return AutocompleteController_generator(this, function (_a) {
-												switch (_a.label) {
-													case 0:
-														if (13 != e.keyCode) return [3, 5];
-														(actionUrl = AutocompleteController_utils_url(this.config.action)),
-															(input = e.target),
-															(query = input.value),
-															!this.store.loading &&
-																this.store.search.originalQuery &&
-																((query = this.store.search.query.string),
-																actionUrl.params.query.push({ key: 'oq', value: this.store.search.originalQuery.string })),
-															actionUrl.params.query.push({ key: input.name || this.urlManager.getTranslatorConfig().queryParameter, value: query }),
-															(_a.label = 1);
-													case 1:
-														return _a.trys.push([1, 3, , 4]), [4, this.eventManager.fire('beforeSubmit', { controller: this, input })];
-													case 2:
-														return _a.sent(), [3, 4];
-													case 3:
-														return 'cancelled' == (null == (err_1 = _a.sent()) ? void 0 : err_1.message)
-															? (this.log.warn("'beforeSubmit' middleware cancelled"), [2])
-															: (this.log.error("error in 'beforeSubmit' middleware"), console.error(err_1), [3, 4]);
-													case 4:
-														(newUrl = actionUrl.url()), (window.location.href = newUrl), (_a.label = 5);
-													case 5:
-														return [2];
-												}
-											});
-										});
-									},
-									escKey: function escKey(e) {
-										27 == e.keyCode && (e.target.blur(), _this.setFocused());
-									},
-									focus: function focus(e) {
-										e.stopPropagation(), _this.setFocused(e.target);
-									},
-									formSubmit: function formSubmit(e) {
-										return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-											var form, input, query, err_2;
-											return AutocompleteController_generator(this, function (_a) {
-												switch (_a.label) {
-													case 0:
-														(form = e.target),
-															(input = form.querySelector('input[ss-autocomplete-input]')),
-															e.preventDefault(),
-															(query = input.value),
-															this.store.search.originalQuery &&
-																((query = this.store.search.query.string),
-																(function addHiddenFormInput(form, name, value) {
-																	var inputElem = document.createElement('input');
-																	(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
-																})(form, 'oq', this.store.search.originalQuery.string)),
-															(input.value = query),
-															(_a.label = 1);
-													case 1:
-														return _a.trys.push([1, 3, , 4]), [4, this.eventManager.fire('beforeSubmit', { controller: this, input })];
-													case 2:
-														return _a.sent(), [3, 4];
-													case 3:
-														return 'cancelled' == (null == (err_2 = _a.sent()) ? void 0 : err_2.message)
-															? (this.log.warn("'beforeSubmit' middleware cancelled"), [2])
-															: (this.log.error("error in 'beforeSubmit' middleware"), console.error(err_2), [3, 4]);
-													case 4:
-														return form.submit(), [2];
-												}
-											});
-										});
-									},
-									keyUp: function keyUp(e) {
-										e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
-										var value = e.target.value;
-										if (_this.store.state.input != value || !_this.store.loaded) {
-											if (((_this.store.state.input = value), _this.config.settings.syncInputs))
-												document.querySelectorAll(_this.config.selector).forEach(function (input) {
-													input.value = value;
-												});
-											clearTimeout(_this.handlers.input.timeoutDelay),
-												value
-													? (_this.handlers.input.timeoutDelay = setTimeout(function () {
-															_this.store.state.locks.terms.unlock(),
-																_this.store.state.locks.facets.unlock(),
-																_this.urlManager.set({ query: _this.store.state.input }).go();
-													  }, 200))
-													: (_this.store.reset(), _this.urlManager.reset().go());
-										}
-									},
-									timeoutDelay: void 0,
-								},
-								document: {
-									click: function click(e) {
-										var inputs = document.querySelectorAll(_this.config.selector);
-										Array.from(inputs).includes(e.target) ? e.stopPropagation() : _this.setFocused();
-									},
-								},
-							}),
-							(_this.searchTrending = function () {
-								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
-									return AutocompleteController_generator(this, function (_c) {
-										switch (_c.label) {
-											case 0:
-												return (storedTerms = this.storage.get('terms')) ? ((terms = JSON.parse(storedTerms)), [3, 3]) : [3, 1];
-											case 1:
-												return (
-													(trendingParams = {
-														limit:
-															(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
-																? void 0
-																: _b.limit) || 5,
-													}),
-													(trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
-													[4, this.client.trending(trendingParams)]
-												);
-											case 2:
-												(terms = _c.sent()),
-													trendingProfile.stop(),
-													this.log.profile(trendingProfile),
-													this.storage.set('terms', JSON.stringify(terms)),
-													(_c.label = 3);
-											case 3:
-												return this.store.updateTrendingTerms(terms), [2];
-										}
-									});
-								});
-							}),
-							(_this.search = function () {
-								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									var params, err_3, searchProfile, _a, response, meta, afterSearchProfile, err_4, afterStoreProfile, err_5, err_6, _b, _c;
-									return AutocompleteController_generator(this, function (_d) {
-										switch (_d.label) {
-											case 0:
-												if (
-													((params = this.params),
-													!(null === (_c = null === (_b = null == params ? void 0 : params.search) || void 0 === _b ? void 0 : _b.query) ||
-													void 0 === _c
-														? void 0
-														: _c.string))
-												)
-													return [2];
-												_d.label = 1;
-											case 1:
-												_d.trys.push([1, 15, , 16]), (_d.label = 2);
-											case 2:
-												return _d.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
-											case 3:
-												return _d.sent(), [3, 5];
-											case 4:
-												if ('cancelled' == (null == (err_3 = _d.sent()) ? void 0 : err_3.message))
-													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
-												throw (this.log.error("error in 'beforeSearch' middleware"), err_3);
-											case 5:
-												return (
-													(searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-													[4, this.client.autocomplete(params)]
-												);
-											case 6:
-												(_a = _d.sent()),
-													(response = _a[0]),
-													(meta = _a[1]),
-													response.meta || (response.meta = meta),
-													searchProfile.stop(),
-													this.log.profile(searchProfile),
-													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_d.label = 7);
-											case 7:
-												return (
-													_d.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
-												);
-											case 8:
-												return _d.sent(), [3, 10];
-											case 9:
-												if ('cancelled' == (null == (err_4 = _d.sent()) ? void 0 : err_4.message))
-													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
-												throw (this.log.error("error in 'afterSearch' middleware"), err_4);
-											case 10:
-												afterSearchProfile.stop(),
-													this.log.profile(afterSearchProfile),
-													this.store.update(response),
-													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_d.label = 11);
-											case 11:
-												return (
-													_d.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
-												);
-											case 12:
-												return _d.sent(), [3, 14];
-											case 13:
-												if ('cancelled' == (null == (err_5 = _d.sent()) ? void 0 : err_5.message))
-													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
-												throw (this.log.error("error in 'afterStore' middleware"), err_5);
-											case 14:
-												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
-											case 15:
-												return (err_6 = _d.sent()) && console.error(err_6), [3, 16];
-											case 16:
-												return [2];
-										}
-									});
-								});
-							}),
-							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
-							_this.store.setConfig(_this.config),
-							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
-							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
-							_this.eventManager.on('beforeSearch', function (ac, next) {
-								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									return AutocompleteController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return (ac.controller.store.loading = !0), [4, next()];
-											case 1:
-												return _a.sent(), [2];
-										}
-									});
-								});
-							}),
-							_this.eventManager.on('afterSearch', function (ac, next) {
-								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									return AutocompleteController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return [4, next()];
-											case 1:
-												return _a.sent(), ac.response.autocomplete.query != ac.controller.urlManager.state.query ? [2, !1] : [2];
-										}
-									});
-								});
-							}),
-							_this.eventManager.on('afterStore', function (ac, next) {
-								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
-									return AutocompleteController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return [4, next()];
-											case 1:
-												return _a.sent(), (ac.controller.store.loading = !1), [2];
-										}
-									});
-								});
-							}),
-							_this.use(_this.config),
-							_this
-						);
-					}
-					return (
-						AutocompleteController_extends(AutocompleteController, _super),
-						Object.defineProperty(AutocompleteController.prototype, 'params', {
-							get: function get() {
-								var urlState = this.urlManager.state;
-								return cjs_default()(AutocompleteController_assign({}, getSearchParams(urlState)), this.config.globals);
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						(AutocompleteController.prototype.setFocused = function (inputElement) {
-							return AutocompleteController_awaiter(this, void 0, void 0, function () {
-								var err_7, err_8;
-								return AutocompleteController_generator(this, function (_a) {
-									switch (_a.label) {
-										case 0:
-											if (this.store.state.focusedInput === inputElement) return [3, 7];
-											(this.store.state.focusedInput = inputElement), (_a.label = 1);
-										case 1:
-											_a.trys.push([1, 6, , 7]), (_a.label = 2);
-										case 2:
-											return _a.trys.push([2, 4, , 5]), [4, this.eventManager.fire('focusChange', { controller: this })];
-										case 3:
-											return _a.sent(), [3, 5];
-										case 4:
-											if ('cancelled' != (null == (err_7 = _a.sent()) ? void 0 : err_7.message))
-												throw (this.log.error("error in 'focusChange' middleware"), err_7);
-											return this.log.warn("'focusChange' middleware cancelled"), [3, 5];
-										case 5:
-											return [3, 7];
-										case 6:
-											return (err_8 = _a.sent()) && console.error(err_8), [3, 7];
-										case 7:
-											return null == inputElement || inputElement.dispatchEvent(new Event('keyup')), [2];
-									}
-								});
-							});
-						}),
-						(AutocompleteController.prototype.reset = function () {
-							document.querySelectorAll(this.config.selector).forEach(function (input) {
-								input.value = '';
-							}),
-								this.store.reset();
-						}),
-						(AutocompleteController.prototype.unbind = function () {
-							var _this = this,
-								inputs = document.querySelectorAll('input[ss-autocomplete-input]');
-							null == inputs ||
-								inputs.forEach(function (input) {
-									var _a;
-									input.removeEventListener('keyup', _this.handlers.input.keyUp),
-										input.removeEventListener('keyup', _this.handlers.input.enterKey),
-										input.removeEventListener('keyup', _this.handlers.input.escKey),
-										input.removeEventListener('focus', _this.handlers.input.focus),
-										null === (_a = input.form) || void 0 === _a || _a.removeEventListener('submit', _this.handlers.input.formSubmit);
-								}),
-								document.removeEventListener('click', this.handlers.document.click);
-						}),
-						(AutocompleteController.prototype.bind = function () {
-							var _a, _b, _c;
-							return AutocompleteController_awaiter(this, void 0, void 0, function () {
-								var _this = this;
-								return AutocompleteController_generator(this, function (_d) {
-									switch (_d.label) {
-										case 0:
-											return this.initialized ? [3, 2] : [4, this.init()];
-										case 1:
-											_d.sent(), (_d.label = 2);
-										case 2:
-											return (
-												this.unbind(),
-												document.querySelectorAll(this.config.selector).forEach(function (input) {
-													input.setAttribute('ss-autocomplete-input', ''),
-														input.addEventListener('keyup', _this.handlers.input.keyUp),
-														_this.config.settings.initializeFromUrl &&
-															!input.value &&
-															_this.store.state.input &&
-															(input.value = _this.store.state.input),
-														input.addEventListener('focus', _this.handlers.input.focus),
-														input.addEventListener('keyup', _this.handlers.input.escKey);
-													var form = input.form,
-														formActionUrl = _this.config.action;
-													!form && _this.config.action
-														? input.addEventListener('keyup', _this.handlers.input.enterKey)
-														: form &&
-														  (_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action),
-														  form.addEventListener('submit', _this.handlers.input.formSubmit)),
-														formActionUrl &&
-															_this.store.setService(
-																'urlManager',
-																_this.urlManager.withConfig(function (translatorConfig) {
-																	return AutocompleteController_assign(AutocompleteController_assign({}, translatorConfig), {
-																		urlRoot: formActionUrl,
-																	});
-																})
-															),
-														document.activeElement === input && _this.setFocused(input);
-												}),
-												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
-													? void 0
-													: _b.limit) > 0 &&
-													!(null === (_c = this.store.trending) || void 0 === _c ? void 0 : _c.length) &&
-													this.searchTrending(),
-												document.addEventListener('click', this.handlers.document.click),
-												[2]
-											);
-									}
-								});
-							});
-						}),
-						AutocompleteController
-					);
-				})(AbstractController);
-			var BeaconType,
-				BeaconCategory,
-				FinderController_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				FinderController_assign = function () {
-					return (
-						(FinderController_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						FinderController_assign.apply(this, arguments)
-					);
-				},
-				FinderController_awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				FinderController_generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
-							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				FinderController_defaultConfig = { id: 'finder', globals: {}, fields: [] },
-				FinderController = (function (_super) {
-					function FinderController(config, _a) {
-						var client = _a.client,
-							store = _a.store,
-							urlManager = _a.urlManager,
-							eventManager = _a.eventManager,
-							profiler = _a.profiler,
-							logger = _a.logger,
-							tracker = _a.tracker,
-							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
-						return (
-							(_this.type = 'finder'),
-							(_this.find = function () {
-								window.location.href = _this.urlManager.href;
-							}),
-							(_this.reset = function () {
-								(_this.urlManager = _this.urlManager.remove('filter')), _this.store.storage.clear(), _this.search();
-							}),
-							(_this.search = function () {
-								return FinderController_awaiter(_this, void 0, void 0, function () {
-									var params, err_1, searchProfile, _a, response, meta, afterSearchProfile, err_2, afterStoreProfile, err_3, err_4;
-									return FinderController_generator(this, function (_b) {
-										switch (_b.label) {
-											case 0:
-												return this.initialized ? [3, 2] : [4, this.init()];
-											case 1:
-												_b.sent(), (_b.label = 2);
-											case 2:
-												(params = this.params), (_b.label = 3);
-											case 3:
-												_b.trys.push([3, 17, , 18]), (_b.label = 4);
-											case 4:
-												return _b.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
-											case 5:
-												return _b.sent(), [3, 7];
-											case 6:
-												if ('cancelled' == (null == (err_1 = _b.sent()) ? void 0 : err_1.message))
-													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
-												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
-											case 7:
-												return (
-													(searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-													[4, this.client.search(params)]
-												);
-											case 8:
-												(_a = _b.sent()),
-													(response = _a[0]),
-													(meta = _a[1]),
-													response.meta || (response.meta = meta),
-													searchProfile.stop(),
-													this.log.profile(searchProfile),
-													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-													(_b.label = 9);
-											case 9:
-												return (
-													_b.trys.push([9, 11, , 12]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
-												);
-											case 10:
-												return _b.sent(), [3, 12];
-											case 11:
-												if ('cancelled' == (null == (err_2 = _b.sent()) ? void 0 : err_2.message))
-													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
-												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
-											case 12:
-												afterSearchProfile.stop(),
-													this.log.profile(afterSearchProfile),
-													this.store.update(response),
-													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-													(_b.label = 13);
-											case 13:
-												return (
-													_b.trys.push([13, 15, , 16]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
-												);
-											case 14:
-												return _b.sent(), [3, 16];
-											case 15:
-												if ('cancelled' == (null == (err_3 = _b.sent()) ? void 0 : err_3.message))
-													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
-												throw (this.log.error("error in 'afterStore' middleware"), err_3);
-											case 16:
-												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
-											case 17:
-												return (err_4 = _b.sent()) && console.error(err_4), [3, 18];
-											case 18:
-												return [2];
-										}
-									});
-								});
-							}),
-							(_this.config = cjs_default()(FinderController_defaultConfig, _this.config)),
-							_this.store.setConfig(_this.config),
-							(_this.urlManager = _this.urlManager),
-							_this.config.url &&
-								(_this.urlManager = _this.urlManager.withConfig(function (translatorConfig) {
-									return FinderController_assign(FinderController_assign({}, translatorConfig), { urlRoot: _this.config.url });
-								})),
-							_this.eventManager.on('beforeSearch', function (finder, next) {
-								return FinderController_awaiter(_this, void 0, void 0, function () {
-									return FinderController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return (finder.controller.store.loading = !0), [4, next()];
-											case 1:
-												return _a.sent(), [2];
-										}
-									});
-								});
-							}),
-							_this.eventManager.on('afterSearch', function (finder, next) {
-								return FinderController_awaiter(_this, void 0, void 0, function () {
-									return FinderController_generator(this, function (_a) {
-										switch (_a.label) {
-											case 0:
-												return [4, next()];
-											case 1:
-												return _a.sent(), (finder.controller.store.loading = !1), [2];
-										}
-									});
-								});
-							}),
-							_this.use(_this.config),
-							_this
-						);
-					}
-					return (
-						FinderController_extends(FinderController, _super),
-						Object.defineProperty(FinderController.prototype, 'params', {
-							get: function get() {
-								var urlState = this.urlManager.state,
-									params = cjs_default()(FinderController_assign({}, getSearchParams(urlState)), this.config.globals);
-								return (
-									(params.facets = {
-										include: this.config.fields.map(function (fieldConfig) {
-											return fieldConfig.field;
-										}),
-									}),
-									params
-								);
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						FinderController
-					);
-				})(AbstractController);
-			!(function (BeaconType) {
-				(BeaconType.PRODUCT = 'product'),
-					(BeaconType.CART = 'cart'),
-					(BeaconType.ORDER = 'transaction'),
-					(BeaconType.LOGIN = 'login'),
-					(BeaconType.CLICK = 'click'),
-					(BeaconType.CUSTOM = 'custom'),
-					(BeaconType.PROFILE_RENDER = 'profile.render'),
-					(BeaconType.PROFILE_IMPRESSION = 'profile.impression'),
-					(BeaconType.PROFILE_CLICK = 'profile.click'),
-					(BeaconType.PROFILE_PRODUCT_RENDER = 'profile.product.render'),
-					(BeaconType.PROFILE_PRODUCT_IMPRESSION = 'profile.product.impression'),
-					(BeaconType.PROFILE_PRODUCT_CLICK = 'profile.product.click');
-			})(BeaconType || (BeaconType = {})),
-				(function (BeaconCategory) {
-					(BeaconCategory.PAGEVIEW = 'searchspring.page.view'),
-						(BeaconCategory.CARTVIEW = 'searchspring.shop.cart'),
-						(BeaconCategory.ORDERVIEW = 'searchspring.shop.transaction'),
-						(BeaconCategory.PERSONALIZATION = 'searchspring.personalization'),
-						(BeaconCategory.RECOMMENDATIONS = 'searchspring.recommendations.user-interactions'),
-						(BeaconCategory.INTERACTION = 'searchspring.user-interactions'),
-						(BeaconCategory.CUSTOM = 'custom');
-				})(BeaconCategory || (BeaconCategory = {}));
-			var RecommendationController_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				RecommendationController_assign = function () {
-					return (
-						(RecommendationController_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						RecommendationController_assign.apply(this, arguments)
 					);
 				},
 				RecommendationController_awaiter = function (thisArg, _arguments, P, generator) {
@@ -19395,7 +17980,7 @@
 						};
 					}
 				},
-				RecommendationController_defaultConfig = { id: 'recommend', tag: '', globals: {} },
+				defaultConfig = { id: 'recommend', tag: '', globals: {} },
 				RecommendationController = (function (_super) {
 					function RecommendationController(config, _a) {
 						var client = _a.client,
@@ -19563,7 +18148,7 @@
 											case 1:
 												_a.sent(), (_a.label = 2);
 											case 2:
-												(params = cjs_default()(RecommendationController_assign({}, this.params), this.config.globals)), (_a.label = 3);
+												(params = cjs_default()(__assign({}, this.params), this.config.globals)), (_a.label = 3);
 											case 3:
 												_a.trys.push([3, 17, , 18]), (_a.label = 4);
 											case 4:
@@ -19625,7 +18210,7 @@
 						)
 							throw new Error('Invalid config passed to RecommendationController. The "tag" attribute is required.');
 						return (
-							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
+							(_this.config = cjs_default()(defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
 							_this.eventManager.on('beforeSearch', function (recommend, next) {
 								return RecommendationController_awaiter(_this, void 0, void 0, function () {
@@ -19656,12 +18241,10 @@
 						);
 					}
 					return (
-						RecommendationController_extends(RecommendationController, _super),
+						__extends(RecommendationController, _super),
 						Object.defineProperty(RecommendationController.prototype, 'params', {
 							get: function get() {
-								var params = RecommendationController_assign(RecommendationController_assign({ tag: this.config.tag }, this.config.globals), {
-										branch: this.config.branch || 'production',
-									}),
+								var params = __assign(__assign({ tag: this.config.tag }, this.config.globals), { branch: this.config.branch || 'production' }),
 									shopperId = this.tracker.context.shopperId,
 									cart = this.tracker.getCartItems(),
 									lastViewed = this.tracker.getLastViewedItems();
@@ -19683,6 +18266,7 @@
 					(__webpack_require__(24895),
 					__webpack_require__(46168),
 					__webpack_require__(14121),
+					__webpack_require__(65584),
 					__webpack_require__(85713),
 					function (thisArg, _arguments, P, generator) {
 						return new (P || (P = Promise))(function (resolve, reject) {
@@ -20328,7 +18912,7 @@
 						SuggestAPI
 					);
 				})(API);
-			__webpack_require__(49992);
+			__webpack_require__(45794), __webpack_require__(49992);
 			var searchRequest_assign = function () {
 				return (
 					(searchRequest_assign =
@@ -20364,14 +18948,6 @@
 					transformSearchRequest.facets(request),
 					transformSearchRequest.tracking(request)
 				);
-			}
-			function htmlUnescape(value) {
-				return value
-					.replace(/&gt;/g, '>')
-					.replace(/&lt;/g, '<')
-					.replace(/&#0?39;/g, "'")
-					.replace(/&quot;/g, '"')
-					.replace(/&amp;/g, '&');
 			}
 			(transformSearchRequest.sorts = function (request) {
 				return (
@@ -20471,6 +19047,15 @@
 					var reqTracking = request.tracking || {};
 					return reqTracking.userId ? { userId: reqTracking.userId } : {};
 				});
+			__webpack_require__(85940);
+			function htmlUnescape(value) {
+				return value
+					.replace(/&gt;/g, '>')
+					.replace(/&lt;/g, '<')
+					.replace(/&#0?39;/g, "'")
+					.replace(/&quot;/g, '"')
+					.replace(/&amp;/g, '&');
+			}
 			var searchResponse_assign = function () {
 					return (
 						(searchResponse_assign =
@@ -20947,8 +19532,8 @@
 						HybridAPI
 					);
 				})(API);
-			var ContentType,
-				Recommend_extends = (function () {
+			__webpack_require__(54226);
+			var Recommend_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
 						return (
 							(_extendStatics =
@@ -21554,443 +20139,31 @@
 						Client
 					);
 				})(),
-				mobx_esm = __webpack_require__(80075),
-				MerchandisingStore_extends =
-					(__webpack_require__(75605),
-					__webpack_require__(50747),
-					(function () {
-						var _extendStatics = function extendStatics(d, b) {
-							return (
-								(_extendStatics =
-									Object.setPrototypeOf ||
-									({ __proto__: [] } instanceof Array &&
-										function (d, b) {
-											d.__proto__ = b;
-										}) ||
-									function (d, b) {
-										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-									}),
-								_extendStatics(d, b)
-							);
-						};
-						return function (d, b) {
-							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-							function __() {
-								this.constructor = d;
-							}
-							_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-						};
-					})());
-			!(function (ContentType) {
-				(ContentType.HEADER = 'header'),
-					(ContentType.BANNER = 'banner'),
-					(ContentType.FOOTER = 'footer'),
-					(ContentType.LEFT = 'left'),
-					(ContentType.INLINE = 'inline');
-			})(ContentType || (ContentType = {}));
-			var MerchandisingStore = function MerchandisingStore(services, merchData) {
-					var _this = this;
-					(this.redirect = ''),
-						(this.content = {}),
-						merchData &&
-							((this.redirect = merchData.redirect || ''),
-							merchData.content &&
-								Object.values(ContentType).forEach(function (type) {
-									merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
-								}));
-				},
-				Content = (function (_super) {
-					function Content(content) {
-						return _super.apply(this, content) || this;
+				mobx_esm = __webpack_require__(80075);
+			(0, mobx_esm.jQ)({ enforceActions: 'never' });
+			var AbstractStore = (function () {
+					function AbstractStore(config) {
+						(this.custom = {}),
+							(this.loading = !1),
+							(this.loaded = !1),
+							(this.config = config),
+							(0, mobx_esm.rC)(this, { custom: mobx_esm.LO, loading: mobx_esm.LO, loaded: mobx_esm.LO });
 					}
 					return (
-						MerchandisingStore_extends(Content, _super),
-						Object.defineProperty(Content, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
+						(AbstractStore.prototype.setConfig = function (newConfig) {
+							this.config = newConfig;
 						}),
-						Content
-					);
-				})(Array),
-				QueryStore = function QueryStore(services, search) {
-					var observables = {};
-					(null == search ? void 0 : search.query) && ((this.query = new Query(services, search.query)), (observables.query = mobx_esm.LO)),
-						(null == search ? void 0 : search.didYouMean) &&
-							((this.didYouMean = new Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
-						(null == search ? void 0 : search.originalQuery) &&
-							((this.originalQuery = new Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
-						(0, mobx_esm.rC)(this, observables);
-				},
-				Query = function Query(services, query) {
-					(this.string = query),
-						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
-						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
-				},
-				FacetStore_extends =
-					(__webpack_require__(17368),
-					__webpack_require__(88233),
-					(function () {
-						var _extendStatics = function extendStatics(d, b) {
-							return (
-								(_extendStatics =
-									Object.setPrototypeOf ||
-									({ __proto__: [] } instanceof Array &&
-										function (d, b) {
-											d.__proto__ = b;
-										}) ||
-									function (d, b) {
-										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-									}),
-								_extendStatics(d, b)
-							);
-						};
-						return function (d, b) {
-							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-							function __() {
-								this.constructor = d;
-							}
-							_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-						};
-					})()),
-				FacetStore_FacetStore = (function (_super) {
-					function FacetStore(config, services, storage, facetsData, pagination, meta) {
-						void 0 === facetsData && (facetsData = []);
-						var facets = facetsData
-							.filter(function (facet) {
-								var _a, _b, _c, _d;
-								if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
-									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
-									if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
-									if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
-										return facet.values[0].count != pagination.totalResults;
-								}
-								return !0;
-							})
-							.map(function (facet) {
-								var facetMeta = meta.facets[facet.field];
-								return 'range' === facet.type
-									? new RangeFacet(services, storage, facet, facetMeta)
-									: new ValueFacet(config, services, storage, facet, facetMeta);
-							});
-						return _super.apply(this, facets) || this;
-					}
-					return (
-						FacetStore_extends(FacetStore, _super),
-						Object.defineProperty(FacetStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
+						(AbstractStore.prototype.toJSON = function (thing) {
+							return void 0 === thing && (thing = this), (0, mobx_esm.ZN)(thing);
 						}),
-						FacetStore
-					);
-				})(Array),
-				Facet = (function () {
-					function Facet(services, storage, facet, facetMeta) {
-						(this.filtered = !1),
-							(this.custom = {}),
-							(this.collapsed = !1),
-							(this.display = ''),
-							(this.label = ''),
-							(this.services = services),
-							(this.storage = storage),
-							Object.assign(this, facetMeta, facet),
-							(0, mobx_esm.rC)(this, {
-								type: mobx_esm.LO,
-								field: mobx_esm.LO,
-								filtered: mobx_esm.LO,
-								custom: mobx_esm.LO,
-								collapsed: mobx_esm.LO,
-								display: mobx_esm.LO,
-								label: mobx_esm.LO,
-								clear: mobx_esm.Fl,
-								toggleCollapse: mobx_esm.aD,
-							});
-						var collapseData = this.storage.get('facets.' + this.field + '.collapsed');
-						(this.collapsed = null != collapseData ? collapseData : this.collapsed),
-							this.filtered && this.collapsed && void 0 === collapseData && this.toggleCollapse();
-					}
-					return (
-						Object.defineProperty(Facet.prototype, 'clear', {
-							get: function get() {
-								var _a, _b;
-								return {
-									url:
-										null === (_b = null === (_a = this.services) || void 0 === _a ? void 0 : _a.urlManager) || void 0 === _b
-											? void 0
-											: _b.remove('page').remove('filter.' + this.field),
-								};
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						(Facet.prototype.toggleCollapse = function () {
-							(this.collapsed = !this.collapsed), this.storage.set('facets.' + this.field + '.collapsed', this.collapsed);
-						}),
-						Facet
+						AbstractStore
 					);
 				})(),
-				RangeFacet = (function (_super) {
-					function RangeFacet(services, storage, facet, facetMeta) {
-						var _this = _super.call(this, services, storage, facet, facetMeta) || this;
-						(_this.range = { low: 0, high: 0 }), (_this.active = { low: 0, high: 0 }), (_this.step = facet.step);
-						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
-						return (
-							storedRange && facet.filtered
-								? facet.range.low > storedRange.low || facet.range.high < storedRange.high
-									? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
-									: (facet.range.low < storedRange.low || facet.range.high > storedRange.high) &&
-									  (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range))
-								: (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range)),
-							(_this.active = facet.active || facet.range),
-							(_this.formatSeparator = (null == facetMeta ? void 0 : facetMeta.formatSeparator) || '-'),
-							(_this.formatValue = (null == facetMeta ? void 0 : facetMeta.formatValue) || '%01.2f'),
-							(0, mobx_esm.rC)(_this, {
-								step: mobx_esm.LO,
-								range: mobx_esm.LO,
-								active: mobx_esm.LO,
-								formatSeparator: mobx_esm.LO,
-								formatValue: mobx_esm.LO,
-							}),
-							_this
-						);
-					}
-					return FacetStore_extends(RangeFacet, _super), RangeFacet;
-				})(Facet),
-				ValueFacet = (function (_super) {
-					function ValueFacet(config, services, storage, facet, facetMeta) {
-						var _a,
-							_b,
-							_this = _super.call(this, services, storage, facet, facetMeta) || this;
-						(_this.values = []),
-							(_this.search = { input: '' }),
-							(_this.overflow = {
-								enabled: !1,
-								limited: !0,
-								limit: 0,
-								remaining: void 0,
-								setLimit: function setLimit(limit) {
-									limit != this.limit && ((this.enabled = !0), (this.limit = limit), this.calculate());
-								},
-								toggle: function toggle(val) {
-									(_this.overflow.limited = void 0 !== val ? val : !_this.overflow.limited),
-										_this.storage.set('facets.' + _this.field + '.overflow.limited', _this.overflow.limited),
-										_this.overflow.calculate();
-								},
-								calculate: function calculate() {
-									if (_this.overflow.limit > 0) {
-										var remaining = _this.values.length - _this.overflow.limit;
-										remaining > 0 && !_this.search.input
-											? ((_this.overflow.enabled = !0),
-											  _this.overflow.limited ? (_this.overflow.remaining = remaining) : (_this.overflow.remaining = 0))
-											: (_this.overflow.enabled = !1);
-									}
-								},
-							}),
-							(_this.multiple = _this.multiple),
-							(_this.values =
-								(facet.values &&
-									facet.values.map(function (value) {
-										switch (facet.type) {
-											case 'value':
-												if ('hierarchy' === facetMeta.display) {
-													var filteredValues = facet.values.filter(function (value) {
-														return value.filtered;
-													});
-													return new HierarchyValue(services, _this, value, filteredValues);
-												}
-												return new Value(services, _this, value);
-											case 'range-buckets':
-												return new RangeValue(services, _this, value);
-										}
-									})) ||
-								[]),
-							(null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.pinFiltered) &&
-								'hierarchy' !== facetMeta.display &&
-								_this.values.sort(function (a, b) {
-									return Number(b.filtered) - Number(a.filtered);
-								});
-						var overflowLimitedState = _this.storage.get('facets.' + _this.field + '.overflow.limited');
-						return (
-							void 0 !== overflowLimitedState && _this.overflow.toggle(overflowLimitedState),
-							(0, mobx_esm.rC)(_this, {
-								values: mobx_esm.LO,
-								search: mobx_esm.LO,
-								multiple: mobx_esm.LO,
-								overflow: mobx_esm.LO,
-								refinedValues: mobx_esm.Fl,
-							}),
-							(0, mobx_esm.U5)(
-								function () {
-									return _this.search.input;
-								},
-								function () {
-									_this.overflow.calculate();
-								}
-							),
-							_this
-						);
-					}
-					return (
-						FacetStore_extends(ValueFacet, _super),
-						Object.defineProperty(ValueFacet.prototype, 'refinedValues', {
-							get: function get() {
-								var values = this.values || [];
-								if (this.search.input) {
-									var search_1 = new RegExp(
-										(function escapeRegExp(string) {
-											return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-										})(this.search.input),
-										'i'
-									);
-									values = this.values.filter(function (value) {
-										return String(value.label).match(search_1);
-									});
-								}
-								return this.overflow.enabled && this.overflow.limited && (values = values.slice(0, this.overflow.limit)), values;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						ValueFacet
-					);
-				})(Facet),
-				Value = function Value(services, facet, value) {
-					var _a, _b;
-					if ((Object.assign(this, value), this.filtered))
-						this.url = null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.remove('page').remove('filter.' + facet.field, value.value);
-					else {
-						var valueUrl = null === (_b = services.urlManager) || void 0 === _b ? void 0 : _b.remove('page');
-						'single' == facet.multiple && (valueUrl = null == valueUrl ? void 0 : valueUrl.remove('filter.' + facet.field)),
-							(this.url = null == valueUrl ? void 0 : valueUrl.merge('filter.' + facet.field, value.value));
-					}
-				},
-				HierarchyValue = (function (_super) {
-					function HierarchyValue(services, facet, value, filteredValues) {
-						var _a,
-							_b,
-							_this = _super.call(this, services, facet, value) || this;
-						if (
-							((_this.level = 0),
-							(_this.history = !1),
-							value.value && facet.hierarchyDelimiter && (_this.level = value.value.split(facet.hierarchyDelimiter).length),
-							facet.filtered && (null == filteredValues ? void 0 : filteredValues.length))
-						) {
-							var filteredLevel = filteredValues[0].value.split(facet.hierarchyDelimiter).length;
-							_this.level <= filteredLevel && (_this.history = !0);
-						}
-						return (
-							value.value
-								? (_this.url =
-										null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
-											? void 0
-											: _a.remove('page').set('filter.' + facet.field, value.value))
-								: (_this.url =
-										null === (_b = null == services ? void 0 : services.urlManager) || void 0 === _b
-											? void 0
-											: _b.remove('page').remove('filter.' + facet.field)),
-							_this
-						);
-					}
-					return FacetStore_extends(HierarchyValue, _super), HierarchyValue;
-				})(Value),
-				RangeValue = function RangeValue(services, facet, value) {
-					if ((Object.assign(this, value), this.filtered))
-						this.url =
-							null == services ? void 0 : services.urlManager.remove('page').remove('filter.' + facet.field, [{ low: this.low, high: this.high }]);
-					else {
-						var valueUrl = null == services ? void 0 : services.urlManager.remove('page');
-						'single' == facet.multiple && (valueUrl = null == valueUrl ? void 0 : valueUrl.remove('filter.' + facet.field)),
-							(this.url = null == valueUrl ? void 0 : valueUrl.merge('filter.' + facet.field, [{ low: this.low, high: this.high }]));
-					}
-				};
-			var FilterStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				FilterStore = (function (_super) {
-					function FilterStore(services, filtersData, meta) {
-						void 0 === filtersData && (filtersData = []);
-						var filters = filtersData.map(function (filter) {
-							var facetMeta = meta.facets[filter.field];
-							if ('range' === filter.type) {
-								var rangeFilter = filter;
-								return new RangeFilter(services, {
-									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
-									value: {
-										low: rangeFilter.value.low,
-										high: rangeFilter.value.high,
-										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
-									},
-								});
-							}
-							var valueFilter = filter;
-							return new Filter(services, {
-								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
-								value: { value: valueFilter.value, label: valueFilter.label },
-							});
-						});
-						return _super.apply(this, filters) || this;
-					}
-					return (
-						FilterStore_extends(FilterStore, _super),
-						Object.defineProperty(FilterStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						FilterStore
-					);
-				})(Array),
-				Filter = function Filter(services, filter) {
-					var _a;
-					(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
-						(this.url =
-							null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
-								? void 0
-								: _a.remove('page').remove('filter.' + this.facet.field, this.value.value)),
-						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
-				},
-				RangeFilter = function RangeFilter(services, filter) {
-					var _a;
-					(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
-						(this.url =
-							null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
-								? void 0
-								: _a.remove('page').remove('filter.' + filter.facet.field, { low: filter.value.low, high: filter.value.high })),
-						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
-				},
 				ResultStore_extends =
-					(__webpack_require__(99805),
+					(__webpack_require__(43430),
+					__webpack_require__(75605),
+					__webpack_require__(50747),
+					__webpack_require__(99805),
 					(function () {
 						var _extendStatics = function extendStatics(d, b) {
 							return (
@@ -22106,941 +20279,7 @@
 					}, {});
 					(0, mobx_esm.rC)(this.mappings.core, coreObservables);
 				};
-			__webpack_require__(33132);
-			var PaginationStore = (function () {
-					function PaginationStore(config, services, paginationData) {
-						void 0 === paginationData && (paginationData = { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24 }),
-							(this.services = services),
-							(this.controllerConfig = config),
-							(this.page = paginationData.page),
-							(this.pageSize = paginationData.pageSize),
-							(this.totalResults = paginationData.totalResults),
-							(this.defaultPageSize = paginationData.defaultPageSize),
-							(this.pageSizeOptions = [
-								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
-								{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
-								{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
-							]),
-							(0, mobx_esm.rC)(this, {
-								page: mobx_esm.LO,
-								pageSize: mobx_esm.LO,
-								totalResults: mobx_esm.LO,
-								begin: mobx_esm.Fl,
-								end: mobx_esm.Fl,
-								totalPages: mobx_esm.Fl,
-								multiplePages: mobx_esm.Fl,
-								current: mobx_esm.Fl,
-								first: mobx_esm.Fl,
-								last: mobx_esm.Fl,
-								next: mobx_esm.Fl,
-								previous: mobx_esm.Fl,
-								getPages: mobx_esm.aD,
-								setPageSize: mobx_esm.aD,
-							});
-					}
-					return (
-						Object.defineProperty(PaginationStore.prototype, 'begin', {
-							get: function get() {
-								var _a;
-								return (null === (_a = this.controllerConfig.settings) || void 0 === _a ? void 0 : _a.infinite)
-									? 1
-									: this.pageSize * (this.page - 1) + 1;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'end', {
-							get: function get() {
-								return this.pageSize * this.page > this.totalResults ? this.totalResults : this.pageSize * this.page;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'totalPages', {
-							get: function get() {
-								return Math.ceil(this.totalResults / this.pageSize);
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'multiplePages', {
-							get: function get() {
-								return this.pageSize < this.totalResults;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'current', {
-							get: function get() {
-								return new Page(this.services, { number: this.page, active: !0 });
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'first', {
-							get: function get() {
-								return new Page(this.services, { number: 1, active: 1 == this.page });
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'last', {
-							get: function get() {
-								return new Page(this.services, { number: this.totalPages, active: this.totalPages == this.page });
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'next', {
-							get: function get() {
-								if (this.page < this.totalPages) return new Page(this.services, { number: this.page + 1 });
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						Object.defineProperty(PaginationStore.prototype, 'previous', {
-							get: function get() {
-								if (this.page > 1) return new Page(this.services, { number: this.page - 1 });
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						(PaginationStore.prototype.getPages = function (min, max) {
-							if (!Number.isInteger(min)) return [];
-							if (Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
-							else {
-								var surrounding = min - 1,
-									from = this.page,
-									to = this.page,
-									last = to - from;
-								do {
-									if (((last = to - from), to < this.totalPages && to++, to - from >= surrounding)) break;
-									from > 1 && from--;
-								} while (last != to - from && to - from < surrounding);
-								(min = from - this.page), (max = to - this.page);
-							}
-							for (var pages = [], i = this.page + min; i <= this.page + max; i++)
-								i > 0 && i <= this.totalPages && pages.push(new Page(this.services, { number: i, active: i == this.page }));
-							return pages;
-						}),
-						(PaginationStore.prototype.setPageSize = function (num) {
-							num && this.services.urlManager.remove('page').set('pageSize', num).go();
-						}),
-						PaginationStore
-					);
-				})(),
-				Page = function Page(services, page) {
-					var _a, _b;
-					(this.services = services),
-						(this.number = page.number),
-						(this.active = page.active || !1),
-						(this.url =
-							null === (_b = null === (_a = this.services) || void 0 === _a ? void 0 : _a.urlManager) || void 0 === _b
-								? void 0
-								: _b.set('page', this.number)),
-						(this.key = this.url.href);
-				},
-				SortingStore = (function () {
-					function SortingStore(services, sorting, search, meta) {
-						if (((this.options = []), services && meta.sortOptions)) {
-							var activeSort_1 = sorting && sorting.length && sorting[0];
-							(this.options = meta.sortOptions
-								.filter(function (option) {
-									return (null == search ? void 0 : search.query) ? option : 'field' == option.type;
-								})
-								.map(function (option, index) {
-									return (
-										(option.active = !1),
-										activeSort_1 && activeSort_1.field == option.field && activeSort_1.direction == option.direction
-											? (option.active = !0)
-											: activeSort_1 || 0 !== index || (option.active = !0),
-										(option.default = !1),
-										0 === index && (option.default = !0),
-										new Option(services, option)
-									);
-								})),
-								(0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
-						}
-					}
-					return (
-						Object.defineProperty(SortingStore.prototype, 'current', {
-							get: function get() {
-								return this.options
-									.filter(function (option) {
-										return option.active;
-									})
-									.pop();
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						SortingStore
-					);
-				})(),
-				Option = function Option(services, option) {
-					(this.active = option.active),
-						(this.default = option.default),
-						(this.field = option.field),
-						(this.label = option.label),
-						(this.direction = option.direction),
-						(this.type = option.type),
-						(this.value = option.field + ':' + option.direction),
-						this.default
-							? (this.url = services.urlManager.remove('page').remove('sort'))
-							: (this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }])),
-						(0, mobx_esm.rC)(this, { field: mobx_esm.LO, label: mobx_esm.LO, direction: mobx_esm.LO, type: mobx_esm.LO, value: mobx_esm.LO });
-				};
-			(0, mobx_esm.jQ)({ enforceActions: 'never' });
-			var RangeValueProperties,
-				ParamLocationType,
-				AbstractStore = (function () {
-					function AbstractStore(config) {
-						(this.custom = {}),
-							(this.loading = !1),
-							(this.loaded = !1),
-							(this.config = config),
-							(0, mobx_esm.rC)(this, { custom: mobx_esm.LO, loading: mobx_esm.LO, loaded: mobx_esm.LO });
-					}
-					return (
-						(AbstractStore.prototype.setConfig = function (newConfig) {
-							this.config = newConfig;
-						}),
-						(AbstractStore.prototype.toJSON = function (thing) {
-							return void 0 === thing && (thing = this), (0, mobx_esm.ZN)(thing);
-						}),
-						AbstractStore
-					);
-				})(),
-				SearchStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				SearchStore = (function (_super) {
-					function SearchStore(config, services) {
-						var _a,
-							_this = _super.call(this, config) || this;
-						if (
-							((_this.meta = {}),
-							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
-						)
-							throw new Error('Invalid service \'urlManager\' passed to SearchStore. Missing "subscribe" function.');
-						return (
-							(_this.services = services),
-							(_this.storage = new StorageStore()),
-							_this.update({ meta: _this.meta }),
-							(0, mobx_esm.rC)(_this, {
-								search: mobx_esm.LO,
-								merchandising: mobx_esm.LO,
-								facets: mobx_esm.LO,
-								filters: mobx_esm.LO,
-								results: mobx_esm.LO,
-								pagination: mobx_esm.LO,
-								sorting: mobx_esm.LO,
-							}),
-							_this
-						);
-					}
-					return (
-						SearchStore_extends(SearchStore, _super),
-						(SearchStore.prototype.update = function (data) {
-							(this.data = JSON.parse(JSON.stringify(data))),
-								(this.loaded = !!data.pagination),
-								(this.meta = data.meta),
-								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-								(this.search = new QueryStore(this.services, data.search)),
-								(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
-								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
-								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
-						}),
-						SearchStore
-					);
-				})(AbstractStore),
-				StateStore = (function () {
-					function StateStore(services) {
-						(this.focusedInput = void 0),
-							(this.input = ''),
-							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
-							(this.url = services.urlManager),
-							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
-					}
-					return (
-						(StateStore.prototype.reset = function () {
-							(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
-						}),
-						StateStore
-					);
-				})(),
-				Lock = (function () {
-					function Lock(state) {
-						void 0 === state && (state = !1), (this.state = this.startState = state);
-					}
-					return (
-						(Lock.prototype.reset = function () {
-							this.state = this.startState;
-						}),
-						Object.defineProperty(Lock.prototype, 'locked', {
-							get: function get() {
-								return this.state;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						(Lock.prototype.lock = function () {
-							this.state = !0;
-						}),
-						(Lock.prototype.unlock = function () {
-							this.state = !1;
-						}),
-						Lock
-					);
-				})(),
-				TermStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				TermStore_spreadArray = function (to, from, pack) {
-					if (pack || 2 === arguments.length)
-						for (var ar, i = 0, l = from.length; i < l; i++)
-							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
-					return to.concat(ar || Array.prototype.slice.call(from));
-				},
-				TermStore = (function (_super) {
-					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
-						var _a,
-							suggestions = TermStore_spreadArray(
-								[],
-								((null == autocomplete ? void 0 : autocomplete.alternatives) ? autocomplete.alternatives : []).map(function (term) {
-									return term.text;
-								}),
-								!0
-							);
-						(null === (_a = null == autocomplete ? void 0 : autocomplete.suggested) || void 0 === _a ? void 0 : _a.text)
-							? suggestions.unshift(autocomplete.suggested.text)
-							: (null == autocomplete ? void 0 : autocomplete.query) &&
-							  paginationData.totalResults &&
-							  suggestions.unshift(null == autocomplete ? void 0 : autocomplete.query);
-						var terms = [];
-						return (
-							suggestions.map(function (term, index) {
-								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
-							}),
-							_super.apply(this, terms) || this
-						);
-					}
-					return (
-						TermStore_extends(TermStore, _super),
-						Object.defineProperty(TermStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						TermStore
-					);
-				})(Array),
-				Term = function Term(services, term, terms, resetTerms, rootState) {
-					var _a,
-						_this = this;
-					(this.active = term.active),
-						(this.value = term.value),
-						(this.url = null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.set({ query: this.value })),
-						(this.preview = function () {
-							var _a;
-							resetTerms(),
-								terms.map(function (term) {
-									term.active = !1;
-								}),
-								(_this.active = !0),
-								rootState.locks.terms.lock(),
-								rootState.locks.facets.unlock(),
-								null === (_a = _this.url) || void 0 === _a || _a.set({ query: _this.value }).go();
-						}),
-						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
-				},
-				TrendingStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				TrendingStore = (function (_super) {
-					function TrendingStore(services, trendingData, resetTerms, rootState) {
-						var _a,
-							terms = [];
-						return (
-							null === (_a = null == trendingData ? void 0 : trendingData.queries) ||
-								void 0 === _a ||
-								_a.map(function (term) {
-									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
-								}),
-							_super.apply(this, terms) || this
-						);
-					}
-					return (
-						TrendingStore_extends(TrendingStore, _super),
-						Object.defineProperty(TrendingStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						TrendingStore
-					);
-				})(Array),
-				QueryStore_QueryStore = function QueryStore(services, autocomplete, search) {
-					var observables = {};
-					(null == search ? void 0 : search.query) &&
-						((this.query = new QueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
-						(null == autocomplete ? void 0 : autocomplete.correctedQuery) &&
-							((this.originalQuery = new QueryStore_Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
-						(0, mobx_esm.rC)(this, observables);
-				},
-				QueryStore_Query = function Query(urlManager, query) {
-					(this.string = query), (this.url = urlManager.set({ query: this.string })), (0, mobx_esm.rC)(this, { string: mobx_esm.LO });
-				},
-				Stores_FacetStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				FacetStore_assign = function () {
-					return (
-						(FacetStore_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						FacetStore_assign.apply(this, arguments)
-					);
-				},
-				FacetStore = (function (_super) {
-					function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
-						var alteredServices = FacetStore_assign(FacetStore_assign({}, services), { urlManager: services.urlManager.remove('filter') }),
-							facets = new FacetStore_FacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
-						return (
-							facets.forEach(function (facet) {
-								var _a;
-								null === (_a = facet.values) ||
-									void 0 === _a ||
-									_a.forEach(function (value) {
-										value.preview = function () {
-											facets.map(function (facet) {
-												var _a;
-												(facet.filtered = !1),
-													null === (_a = facet.values) ||
-														void 0 === _a ||
-														_a.map(function (value) {
-															value.filtered = !1;
-														});
-											}),
-												(facet.filtered = !0),
-												(value.filtered = !0),
-												rootState.locks.facets.lock(),
-												value.url.go();
-										};
-									});
-							}),
-							_super.apply(this, facets) || this
-						);
-					}
-					return (
-						Stores_FacetStore_extends(FacetStore, _super),
-						Object.defineProperty(FacetStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						FacetStore
-					);
-				})(Array),
-				AutocompleteStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				AutocompleteStore = (function (_super) {
-					function AutocompleteStore(config, services) {
-						var _a,
-							_this = _super.call(this, config) || this;
-						if (
-							((_this.meta = {}),
-							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
-						)
-							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
-						return (
-							(_this.services = services),
-							(_this.state = new StateStore(services)),
-							(_this.storage = new StorageStore()),
-							(_this.trending = []),
-							_this.reset(),
-							(0, mobx_esm.rC)(_this, {
-								state: mobx_esm.LO,
-								search: mobx_esm.LO,
-								terms: mobx_esm.LO,
-								facets: mobx_esm.LO,
-								filters: mobx_esm.LO,
-								merchandising: mobx_esm.LO,
-								results: mobx_esm.LO,
-								pagination: mobx_esm.LO,
-								sorting: mobx_esm.LO,
-							}),
-							_this
-						);
-					}
-					return (
-						AutocompleteStore_extends(AutocompleteStore, _super),
-						(AutocompleteStore.prototype.reset = function () {
-							this.state.reset(), this.update({ meta: this.meta }), this.resetTrending();
-						}),
-						(AutocompleteStore.prototype.resetTrending = function () {
-							var _a;
-							(null === (_a = this.trending) || void 0 === _a ? void 0 : _a.length) &&
-								this.trending.forEach(function (term) {
-									term.active = !1;
-								});
-						}),
-						(AutocompleteStore.prototype.resetTerms = function () {
-							var _a;
-							(null === (_a = this.terms) || void 0 === _a ? void 0 : _a.length) > 0 &&
-								this.terms.forEach(function (term) {
-									term.active = !1;
-								});
-						}),
-						(AutocompleteStore.prototype.setService = function (name, service) {
-							this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
-						}),
-						(AutocompleteStore.prototype.updateTrendingTerms = function (data) {
-							var _this = this;
-							this.trending = new TrendingStore(
-								this.services,
-								data.trending,
-								function () {
-									_this.resetTerms();
-								},
-								this.state
-							);
-						}),
-						(AutocompleteStore.prototype.update = function (data) {
-							var _this = this;
-							(this.loaded = !!data.pagination),
-								(this.meta = data.meta),
-								data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
-								this.state.locks.terms.locked ||
-									((this.terms = new TermStore(
-										this.services,
-										data.autocomplete,
-										data.pagination,
-										function () {
-											_this.resetTrending();
-										},
-										this.state
-									)),
-									data.autocomplete && this.state.locks.terms.lock()),
-								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-								(this.search = new QueryStore_QueryStore(this.services, data.autocomplete, data.search)),
-								this.state.locks.facets.locked ||
-									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
-								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
-								((0 === this.results.length &&
-									!this.trending.filter(function (term) {
-										return term.active;
-									}).length) ||
-									this.terms.filter(function (term) {
-										return term.active;
-									}).length) &&
-									this.resetTrending(),
-								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
-						}),
-						AutocompleteStore
-					);
-				})(AbstractStore),
-				SelectionStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				SelectionStore_assign = function () {
-					return (
-						(SelectionStore_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						SelectionStore_assign.apply(this, arguments)
-					);
-				},
-				SelectionStore_spreadArray = function (to, from, pack) {
-					if (pack || 2 === arguments.length)
-						for (var ar, i = 0, l = from.length; i < l; i++)
-							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
-					return to.concat(ar || Array.prototype.slice.call(from));
-				},
-				SelectionStore = (function (_super) {
-					function SelectionStore(config, services, facets, meta, loading, storage) {
-						var _a;
-						if (facets && meta) {
-							(null == config ? void 0 : config.fields) &&
-								facets.sort(function (a, b) {
-									var fields = config.fields.map(function (fieldConfig) {
-										return fieldConfig.field;
-									});
-									return fields.indexOf(a.field) - fields.indexOf(b.field);
-								});
-							var selections = [];
-							return (
-								null === (_a = null == config ? void 0 : config.fields) ||
-									void 0 === _a ||
-									_a.forEach(function (fieldObj) {
-										var _a,
-											facet =
-												null == facets
-													? void 0
-													: facets
-															.filter(function (facet) {
-																return facet.field == fieldObj.field;
-															})
-															.pop();
-										if (
-											'hierarchy' ===
-											(facet = SelectionStore_assign(SelectionStore_assign({}, null == meta ? void 0 : meta.facets[fieldObj.field]), facet)).display
-										) {
-											var filtered =
-												facet.filtered &&
-												facet.values
-													.filter(function (value) {
-														return value.filtered;
-													})
-													.pop();
-											if (filtered) {
-												var filteredLevel_1 = filtered.value.split(facet.hierarchyDelimiter).length;
-												facet.values = facet.values.filter(function (value, index) {
-													return (
-														(value.value && value.value.split(facet.hierarchyDelimiter).length > filteredLevel_1) || index == facet.values.length - 1
-													);
-												});
-											}
-											var levels =
-												(null == fieldObj ? void 0 : fieldObj.levels) ||
-												(null === (_a = null == facet ? void 0 : facet.values[(null == facet ? void 0 : facet.values.length) - 1]) || void 0 === _a
-													? void 0
-													: _a.value.split(facet.hierarchyDelimiter));
-											null == levels ||
-												levels.map(function (level, index) {
-													var levelConfig = { index, label: fieldObj.levels ? level : '', key: 'ss-' + index };
-													selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
-												});
-										} else selections.push(new Selection(services, config.id, facet, fieldObj, loading, storage));
-									}),
-								_super.apply(this, selections) || this
-							);
-						}
-					}
-					return (
-						SelectionStore_extends(SelectionStore, _super),
-						Object.defineProperty(SelectionStore, Symbol.species, {
-							get: function get() {
-								return Array;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						SelectionStore
-					);
-				})(Array),
-				SelectionBase = (function () {
-					function SelectionBase(services, id, facet, selectionConfig, loading, storageStore) {
-						(this.filtered = !1),
-							(this.collapsed = !1),
-							(this.display = ''),
-							(this.disabled = !1),
-							(this.selected = ''),
-							(this.custom = {}),
-							(this.services = services),
-							(this.loading = loading),
-							(this.id = id),
-							(this.config = selectionConfig),
-							(this.type = facet.type),
-							(this.field = facet.field),
-							(this.filtered = facet.filtered),
-							(this.collapsed = facet.collapsed),
-							(this.display = facet.display),
-							(this.label = facet.label),
-							(this.multiple = facet.multiple),
-							(this.storage = {
-								key: 'ss-finder-' + this.id + '.' + this.field,
-								get: function get(key) {
-									var path = this.key + (key ? '.' + key : '');
-									return storageStore.get(path);
-								},
-								set: function set(key, value) {
-									var path = this.key + (key ? '.' + key : '');
-									return storageStore.set(path, value);
-								},
-							});
-					}
-					return (
-						Object.defineProperty(SelectionBase.prototype, 'values', {
-							get: function get() {
-								var values = SelectionStore_spreadArray([], this.data || [], !0);
-								return values.unshift({ filtered: !1, value: '', label: this.config.label || this.label }), values;
-							},
-							enumerable: !1,
-							configurable: !0,
-						}),
-						SelectionBase
-					);
-				})(),
-				Selection = (function (_super) {
-					function Selection(services, id, facet, config, loading, storageStore) {
-						var _this = _super.call(this, services, id, facet, config, loading, storageStore) || this;
-						(_this.loading = loading), _this.storage.set('values', facet.values);
-						var storageData = _this.storage.get();
-						return (
-							(_this.data = storageData.values),
-							(_this.disabled = !_this.values.length),
-							(_this.selected = _this.disabled ? '' : storageData.selected || ''),
-							_this
-						);
-					}
-					return (
-						SelectionStore_extends(Selection, _super),
-						(Selection.prototype.select = function (value) {
-							this.loading ||
-								(value
-									? ((this.selected = value), this.storage.set('selected', value), this.services.urlManager.set('filter.' + this.field, value).go())
-									: ((this.selected = ''), this.storage.set('selected', ''), this.services.urlManager.remove('filter.' + this.field).go()));
-						}),
-						Selection
-					);
-				})(SelectionBase),
-				SelectionHierarchy = (function (_super) {
-					function SelectionHierarchy(services, id, facet, config, loading, storageStore) {
-						var _a,
-							_b,
-							_this = _super.call(this, services, id, facet, config, loading, storageStore) || this;
-						_this.hierarchyDelimiter = facet.hierarchyDelimiter;
-						var storageData = _this.storage.get();
-						if (storageData)
-							if (null === (_a = storageData[_this.config.key]) || void 0 === _a ? void 0 : _a.values)
-								_this.selected = storageData[_this.config.key].selected;
-							else {
-								var storedLevels_1 = _this.storage.get(),
-									levels = Object.keys(storedLevels_1).map(function (a, index) {
-										return 'ss-' + index;
-									});
-								!levels.includes(_this.config.key) && levels.push(_this.config.key);
-								var selectedLevels = Object.keys(storedLevels_1).filter(function (key) {
-										return storedLevels_1[key].selected;
-									}),
-									lastSelected = selectedLevels[selectedLevels.length - 1],
-									labelindex = levels.indexOf(_this.config.key),
-									lastselectedindex = levels.indexOf(lastSelected);
-								-1 != lastselectedindex && labelindex == lastselectedindex + 1
-									? _this.storage.set(_this.config.key + '.values', facet.values)
-									: (_this.disabled = !0);
-							}
-						else _this.storage.set(_this.config.key + '.values', facet.values), (storageData = _this.storage.get());
-						return (_this.data = (null === (_b = storageData[_this.config.key]) || void 0 === _b ? void 0 : _b.values) || []), _this;
-					}
-					return (
-						SelectionStore_extends(SelectionHierarchy, _super),
-						(SelectionHierarchy.prototype.select = function (value) {
-							var _this = this;
-							if ((void 0 === value && (value = ''), !this.loading)) {
-								this.selected = value;
-								var selectedLevel = this.config.index,
-									storedLevels = this.storage.get(),
-									keysToRemove = Object.keys(storedLevels).slice(selectedLevel);
-								Object.keys(storedLevels)
-									.reverse()
-									.forEach(function (key) {
-										key == _this.config.key
-											? _this.storage.set(key + '.selected', value)
-											: keysToRemove.includes(key) && _this.storage.set('' + key, {}),
-											(value = value || _this.storage.get(key + '.selected'));
-									}),
-									this.services.urlManager.set('filter.' + this.field, value).go();
-							}
-						}),
-						SelectionHierarchy
-					);
-				})(SelectionBase),
-				FinderStore_extends = (function () {
-					var _extendStatics = function extendStatics(d, b) {
-						return (
-							(_extendStatics =
-								Object.setPrototypeOf ||
-								({ __proto__: [] } instanceof Array &&
-									function (d, b) {
-										d.__proto__ = b;
-									}) ||
-								function (d, b) {
-									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
-								}),
-							_extendStatics(d, b)
-						);
-					};
-					return function (d, b) {
-						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
-						function __() {
-							this.constructor = d;
-						}
-						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
-					};
-				})(),
-				FinderStore = (function (_super) {
-					function FinderStore(config, services) {
-						var _a,
-							_this = _super.call(this, config) || this;
-						if (
-							((_this.meta = {}),
-							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
-						)
-							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
-						return (
-							(_this.services = services),
-							(_this.storage = new StorageStore()),
-							_this.update({ meta: {}, selections: [] }),
-							(0, mobx_esm.rC)(_this, { selections: mobx_esm.LO, pagination: mobx_esm.LO }),
-							_this
-						);
-					}
-					return (
-						FinderStore_extends(FinderStore, _super),
-						(FinderStore.prototype.setService = function (name, service) {
-							this.services[name] && service && (this.services[name] = service);
-						}),
-						(FinderStore.prototype.update = function (data) {
-							(this.loaded = !!data.pagination),
-								(this.meta = data.meta),
-								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-								(this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage));
-						}),
-						FinderStore
-					);
-				})(AbstractStore),
-				ProfileStore = function ProfileStore(services, profile) {
+			var ProfileStore = function ProfileStore(services, profile) {
 					(this.display = {}),
 						(null == profile ? void 0 : profile.tag) &&
 							((this.tag = profile.tag),
@@ -23374,6 +20613,8 @@
 				for (var i = 0; i < obj1.length; i++) if (!compareObjects(obj1[i], obj2[i])) return !1;
 				return !0;
 			}
+			var RangeValueProperties, ParamLocationType;
+			__webpack_require__(71245);
 			!(function (RangeValueProperties) {
 				(RangeValueProperties.LOW = 'low'), (RangeValueProperties.HIGH = 'high');
 			})(RangeValueProperties || (RangeValueProperties = {})),
@@ -23839,6 +21080,7 @@
 					},
 				};
 			}
+			__webpack_require__(88233);
 			var MiddlewareManager_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -24219,6 +21461,133 @@
 					);
 				})(),
 				v4 = (__webpack_require__(93244), __webpack_require__(36746));
+			var StorageType,
+				flags = (function getFlags(userAgent) {
+					void 0 === userAgent && (userAgent = ''), (userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase());
+					var ieVersion,
+						isIE = function isIE() {
+							if (void 0 === ieVersion) {
+								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
+								ieVersion = !!version && Number(version);
+							}
+							return ieVersion;
+						};
+					return {
+						cors: function cors() {
+							return !isIE() || isIE() >= 10;
+						},
+						cookies: function cookies() {
+							return window.navigator && window.navigator.cookieEnabled && !window.navigator.doNotTrack;
+						},
+						storage: function storage() {
+							try {
+								return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
+							} catch (e) {
+								return !1;
+							}
+						},
+					};
+				})(),
+				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() },
+				utils_cookies = cookies,
+				StorageStore = (function () {
+					function StorageStore(config) {
+						var _a, _b;
+						if (((this.type = null), (this.expiration = 31536e6), (this.sameSite = void 0), (this.key = 'ss-storage'), (this.state = {}), config))
+							switch (
+								('' !== config.key.trim() && (this.key = config.key.trim()),
+								(null === (_a = null == config ? void 0 : config.cookie) || void 0 === _a ? void 0 : _a.expiration) &&
+									(this.expiration = config.cookie.expiration),
+								(null === (_b = null == config ? void 0 : config.cookie) || void 0 === _b ? void 0 : _b.sameSite) &&
+									(this.sameSite = config.cookie.sameSite),
+								config.type)
+							) {
+								case StorageType.SESSION:
+									(this.type = featureFlags.storage ? config.type : null),
+										this.type &&
+											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
+											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.LOCAL:
+									(this.type = featureFlags.storage ? config.type : null),
+										this.type &&
+											!window.localStorage.getItem(this.key) &&
+											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
+											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.COOKIE:
+									if (featureFlags.cookies) {
+										this.type = config.type;
+										var data = utils_cookies.get(this.key);
+										data && (this.state = JSON.parse(data));
+									}
+							}
+					}
+					return (
+						(StorageStore.prototype.set = function (path, value) {
+							var paths = null == path ? void 0 : path.split('.'),
+								location = this.state;
+							switch (
+								(null == paths ||
+									paths.forEach(function (p, i) {
+										i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
+									}),
+								this.type)
+							) {
+								case StorageType.SESSION:
+									window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+									break;
+								case StorageType.LOCAL:
+									window.localStorage.setItem(this.key, JSON.stringify(this.state));
+									break;
+								case StorageType.COOKIE:
+									utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+							}
+						}),
+						(StorageStore.prototype.get = function (path) {
+							switch (this.type) {
+								case StorageType.SESSION:
+									this.state = JSON.parse(window.sessionStorage.getItem(this.key));
+									break;
+								case StorageType.LOCAL:
+									this.state = JSON.parse(window.localStorage.getItem(this.key));
+									break;
+								case StorageType.COOKIE:
+									var data = utils_cookies.get(this.key);
+									data && (this.state = JSON.parse(data));
+							}
+							var paths = null == path ? void 0 : path.split('.');
+							if (null == paths ? void 0 : paths.length) {
+								for (var value = this.state, _i = 0, paths_1 = paths; _i < paths_1.length; _i++) {
+									var p = paths_1[_i];
+									if (!value || void 0 === value[p]) {
+										value = void 0;
+										break;
+									}
+									value = value[p];
+								}
+								return value;
+							}
+						}),
+						(StorageStore.prototype.clear = function () {
+							switch (this.type) {
+								case StorageType.SESSION:
+									window.sessionStorage.removeItem(this.key);
+									break;
+								case StorageType.LOCAL:
+									window.localStorage.removeItem(this.key);
+									break;
+								case StorageType.COOKIE:
+									utils_cookies.unset(this.key);
+							}
+							this.state = {};
+						}),
+						StorageStore
+					);
+				})();
+			!(function (StorageType) {
+				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
+			})(StorageType || (StorageType = {}));
 			var TrackEvent = function TrackEvent(payload) {
 					var _a, _b, _c;
 					if (((payload.event = payload.event), !payload.context || !payload.event))
@@ -24314,7 +21683,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.8.0' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -24344,7 +21713,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.8.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -24599,19 +21968,74 @@
 						(null === (_a = window.searchspring) || void 0 === _a ? void 0 : _a.track) || this.setGlobal(),
 						this.sendEvents();
 				};
-			var RecommendationInstantiator_assign = function () {
+			function getSearchParams(state) {
+				var params = {};
+				if (
+					(state.tag && ((params.merchandising = params.merchandising || {}), (params.merchandising.landingPage = state.tag)),
+					state.query &&
+						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
+					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq[0])),
+					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq[0])),
+					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
+					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
+					state.sort)
+				) {
+					params.sorts = params.sorts || [];
+					var sort = (Array.isArray(state.sort) ? state.sort : [state.sort])[0];
+					sort && sort.field && sort.direction && params.sorts.push({ field: sort.field, direction: sort.direction });
+				}
+				return (
+					state.filter &&
+						((params.filters = params.filters || []),
+						Object.keys(state.filter).forEach(function (field) {
+							if ('string' == typeof field) {
+								var filter = state.filter[field];
+								(Array.isArray(filter) ? filter : [filter]).forEach(function (value) {
+									'object' != typeof value
+										? params.filters.push({ type: 'value', field, value })
+										: void 0 !== value.low && void 0 !== value.high && params.filters.push({ type: 'range', field, value });
+								});
+							}
+						})),
+					params
+				);
+			}
+			var AutocompleteController_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				AutocompleteController_assign = function () {
 					return (
-						(RecommendationInstantiator_assign =
+						(AutocompleteController_assign =
 							Object.assign ||
 							function (t) {
 								for (var s, i = 1, n = arguments.length; i < n; i++)
 									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
 								return t;
 							}),
-						RecommendationInstantiator_assign.apply(this, arguments)
+						AutocompleteController_assign.apply(this, arguments)
 					);
 				},
-				RecommendationInstantiator_awaiter = function (thisArg, _arguments, P, generator) {
+				AutocompleteController_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
 							try {
@@ -24641,7 +22065,7 @@
 						step((generator = generator.apply(thisArg, _arguments || [])).next());
 					});
 				},
-				RecommendationInstantiator_generator = function (thisArg, body) {
+				AutocompleteController_generator = function (thisArg, body) {
 					var f,
 						y,
 						t,
@@ -24719,619 +22143,1894 @@
 						};
 					}
 				},
-				RecommendationInstantiator_spreadArray = function (to, from, pack) {
+				AutocompleteController_utils_url = URL,
+				AutocompleteController_defaultConfig = {
+					id: 'autocomplete',
+					selector: '',
+					action: '',
+					globals: {},
+					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
+				},
+				AutocompleteController = (function (_super) {
+					function AutocompleteController(config, _a) {
+						var client = _a.client,
+							store = _a.store,
+							urlManager = _a.urlManager,
+							eventManager = _a.eventManager,
+							profiler = _a.profiler,
+							logger = _a.logger,
+							tracker = _a.tracker,
+							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
+						return (
+							(_this.type = 'autocomplete'),
+							(_this.track = { product: { click: function click(e, result) {} } }),
+							(_this.handlers = {
+								input: {
+									enterKey: function enterKey(e) {
+										return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+											var actionUrl, input, query, err_1, newUrl;
+											return AutocompleteController_generator(this, function (_a) {
+												switch (_a.label) {
+													case 0:
+														if (13 != e.keyCode) return [3, 5];
+														(actionUrl = AutocompleteController_utils_url(this.config.action)),
+															(input = e.target),
+															(query = input.value),
+															!this.store.loading &&
+																this.store.search.originalQuery &&
+																((query = this.store.search.query.string),
+																actionUrl.params.query.push({ key: 'oq', value: this.store.search.originalQuery.string })),
+															actionUrl.params.query.push({ key: input.name || this.urlManager.getTranslatorConfig().queryParameter, value: query }),
+															(_a.label = 1);
+													case 1:
+														return _a.trys.push([1, 3, , 4]), [4, this.eventManager.fire('beforeSubmit', { controller: this, input })];
+													case 2:
+														return _a.sent(), [3, 4];
+													case 3:
+														return 'cancelled' == (null == (err_1 = _a.sent()) ? void 0 : err_1.message)
+															? (this.log.warn("'beforeSubmit' middleware cancelled"), [2])
+															: (this.log.error("error in 'beforeSubmit' middleware"), console.error(err_1), [3, 4]);
+													case 4:
+														(newUrl = actionUrl.url()), (window.location.href = newUrl), (_a.label = 5);
+													case 5:
+														return [2];
+												}
+											});
+										});
+									},
+									escKey: function escKey(e) {
+										27 == e.keyCode && (e.target.blur(), _this.setFocused());
+									},
+									focus: function focus(e) {
+										e.stopPropagation(), _this.setFocused(e.target);
+									},
+									formSubmit: function formSubmit(e) {
+										return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+											var form, input, query, err_2;
+											return AutocompleteController_generator(this, function (_a) {
+												switch (_a.label) {
+													case 0:
+														(form = e.target),
+															(input = form.querySelector('input[ss-autocomplete-input]')),
+															e.preventDefault(),
+															(query = input.value),
+															this.store.search.originalQuery &&
+																((query = this.store.search.query.string),
+																(function addHiddenFormInput(form, name, value) {
+																	var inputElem = document.createElement('input');
+																	(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
+																})(form, 'oq', this.store.search.originalQuery.string)),
+															(input.value = query),
+															(_a.label = 1);
+													case 1:
+														return _a.trys.push([1, 3, , 4]), [4, this.eventManager.fire('beforeSubmit', { controller: this, input })];
+													case 2:
+														return _a.sent(), [3, 4];
+													case 3:
+														return 'cancelled' == (null == (err_2 = _a.sent()) ? void 0 : err_2.message)
+															? (this.log.warn("'beforeSubmit' middleware cancelled"), [2])
+															: (this.log.error("error in 'beforeSubmit' middleware"), console.error(err_2), [3, 4]);
+													case 4:
+														return form.submit(), [2];
+												}
+											});
+										});
+									},
+									keyUp: function keyUp(e) {
+										e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
+										var value = e.target.value;
+										if (_this.store.state.input != value || !_this.store.loaded) {
+											if (((_this.store.state.input = value), _this.config.settings.syncInputs))
+												document.querySelectorAll(_this.config.selector).forEach(function (input) {
+													input.value = value;
+												});
+											clearTimeout(_this.handlers.input.timeoutDelay),
+												value
+													? (_this.handlers.input.timeoutDelay = setTimeout(function () {
+															_this.store.state.locks.terms.unlock(),
+																_this.store.state.locks.facets.unlock(),
+																_this.urlManager.set({ query: _this.store.state.input }).go();
+													  }, 200))
+													: (_this.store.reset(), _this.urlManager.reset().go());
+										}
+									},
+									timeoutDelay: void 0,
+								},
+								document: {
+									click: function click(e) {
+										var inputs = document.querySelectorAll(_this.config.selector);
+										Array.from(inputs).includes(e.target) ? e.stopPropagation() : _this.setFocused();
+									},
+								},
+							}),
+							(_this.searchTrending = function () {
+								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+									var terms, storedTerms, trendingParams, trendingProfile, _a, _b;
+									return AutocompleteController_generator(this, function (_c) {
+										switch (_c.label) {
+											case 0:
+												return (storedTerms = this.storage.get('terms')) ? ((terms = JSON.parse(storedTerms)), [3, 3]) : [3, 1];
+											case 1:
+												return (
+													(trendingParams = {
+														limit:
+															(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
+																? void 0
+																: _b.limit) || 5,
+													}),
+													(trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
+													[4, this.client.trending(trendingParams)]
+												);
+											case 2:
+												(terms = _c.sent()),
+													trendingProfile.stop(),
+													this.log.profile(trendingProfile),
+													this.storage.set('terms', JSON.stringify(terms)),
+													(_c.label = 3);
+											case 3:
+												return this.store.updateTrendingTerms(terms), [2];
+										}
+									});
+								});
+							}),
+							(_this.search = function () {
+								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+									var params, err_3, searchProfile, _a, response, meta, afterSearchProfile, err_4, afterStoreProfile, err_5, err_6, _b, _c;
+									return AutocompleteController_generator(this, function (_d) {
+										switch (_d.label) {
+											case 0:
+												if (
+													((params = this.params),
+													!(null === (_c = null === (_b = null == params ? void 0 : params.search) || void 0 === _b ? void 0 : _b.query) ||
+													void 0 === _c
+														? void 0
+														: _c.string))
+												)
+													return [2];
+												_d.label = 1;
+											case 1:
+												_d.trys.push([1, 15, , 16]), (_d.label = 2);
+											case 2:
+												return _d.trys.push([2, 4, , 5]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+											case 3:
+												return _d.sent(), [3, 5];
+											case 4:
+												if ('cancelled' == (null == (err_3 = _d.sent()) ? void 0 : err_3.message))
+													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
+												throw (this.log.error("error in 'beforeSearch' middleware"), err_3);
+											case 5:
+												return (
+													(searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+													[4, this.client.autocomplete(params)]
+												);
+											case 6:
+												(_a = _d.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
+													searchProfile.stop(),
+													this.log.profile(searchProfile),
+													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
+													(_d.label = 7);
+											case 7:
+												return (
+													_d.trys.push([7, 9, , 10]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+												);
+											case 8:
+												return _d.sent(), [3, 10];
+											case 9:
+												if ('cancelled' == (null == (err_4 = _d.sent()) ? void 0 : err_4.message))
+													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
+												throw (this.log.error("error in 'afterSearch' middleware"), err_4);
+											case 10:
+												afterSearchProfile.stop(),
+													this.log.profile(afterSearchProfile),
+													this.store.update(response),
+													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
+													(_d.label = 11);
+											case 11:
+												return (
+													_d.trys.push([11, 13, , 14]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+												);
+											case 12:
+												return _d.sent(), [3, 14];
+											case 13:
+												if ('cancelled' == (null == (err_5 = _d.sent()) ? void 0 : err_5.message))
+													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
+												throw (this.log.error("error in 'afterStore' middleware"), err_5);
+											case 14:
+												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
+											case 15:
+												return (err_6 = _d.sent()) && console.error(err_6), [3, 16];
+											case 16:
+												return [2];
+										}
+									});
+								});
+							}),
+							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
+							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
+							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+							_this.eventManager.on('beforeSearch', function (ac, next) {
+								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+									return AutocompleteController_generator(this, function (_a) {
+										switch (_a.label) {
+											case 0:
+												return (ac.controller.store.loading = !0), [4, next()];
+											case 1:
+												return _a.sent(), [2];
+										}
+									});
+								});
+							}),
+							_this.eventManager.on('afterSearch', function (ac, next) {
+								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+									return AutocompleteController_generator(this, function (_a) {
+										switch (_a.label) {
+											case 0:
+												return [4, next()];
+											case 1:
+												return _a.sent(), ac.response.autocomplete.query != ac.controller.urlManager.state.query ? [2, !1] : [2];
+										}
+									});
+								});
+							}),
+							_this.eventManager.on('afterStore', function (ac, next) {
+								return AutocompleteController_awaiter(_this, void 0, void 0, function () {
+									return AutocompleteController_generator(this, function (_a) {
+										switch (_a.label) {
+											case 0:
+												return [4, next()];
+											case 1:
+												return _a.sent(), (ac.controller.store.loading = !1), [2];
+										}
+									});
+								});
+							}),
+							_this.use(_this.config),
+							_this
+						);
+					}
+					return (
+						AutocompleteController_extends(AutocompleteController, _super),
+						Object.defineProperty(AutocompleteController.prototype, 'params', {
+							get: function get() {
+								var urlState = this.urlManager.state;
+								return cjs_default()(AutocompleteController_assign({}, getSearchParams(urlState)), this.config.globals);
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						(AutocompleteController.prototype.setFocused = function (inputElement) {
+							return AutocompleteController_awaiter(this, void 0, void 0, function () {
+								var err_7, err_8;
+								return AutocompleteController_generator(this, function (_a) {
+									switch (_a.label) {
+										case 0:
+											if (this.store.state.focusedInput === inputElement) return [3, 7];
+											(this.store.state.focusedInput = inputElement), (_a.label = 1);
+										case 1:
+											_a.trys.push([1, 6, , 7]), (_a.label = 2);
+										case 2:
+											return _a.trys.push([2, 4, , 5]), [4, this.eventManager.fire('focusChange', { controller: this })];
+										case 3:
+											return _a.sent(), [3, 5];
+										case 4:
+											if ('cancelled' != (null == (err_7 = _a.sent()) ? void 0 : err_7.message))
+												throw (this.log.error("error in 'focusChange' middleware"), err_7);
+											return this.log.warn("'focusChange' middleware cancelled"), [3, 5];
+										case 5:
+											return [3, 7];
+										case 6:
+											return (err_8 = _a.sent()) && console.error(err_8), [3, 7];
+										case 7:
+											return null == inputElement || inputElement.dispatchEvent(new Event('keyup')), [2];
+									}
+								});
+							});
+						}),
+						(AutocompleteController.prototype.reset = function () {
+							document.querySelectorAll(this.config.selector).forEach(function (input) {
+								input.value = '';
+							}),
+								this.store.reset();
+						}),
+						(AutocompleteController.prototype.unbind = function () {
+							var _this = this,
+								inputs = document.querySelectorAll('input[ss-autocomplete-input]');
+							null == inputs ||
+								inputs.forEach(function (input) {
+									var _a;
+									input.removeEventListener('keyup', _this.handlers.input.keyUp),
+										input.removeEventListener('keyup', _this.handlers.input.enterKey),
+										input.removeEventListener('keyup', _this.handlers.input.escKey),
+										input.removeEventListener('focus', _this.handlers.input.focus),
+										null === (_a = input.form) || void 0 === _a || _a.removeEventListener('submit', _this.handlers.input.formSubmit);
+								}),
+								document.removeEventListener('click', this.handlers.document.click);
+						}),
+						(AutocompleteController.prototype.bind = function () {
+							var _a, _b, _c;
+							return AutocompleteController_awaiter(this, void 0, void 0, function () {
+								var _this = this;
+								return AutocompleteController_generator(this, function (_d) {
+									switch (_d.label) {
+										case 0:
+											return this.initialized ? [3, 2] : [4, this.init()];
+										case 1:
+											_d.sent(), (_d.label = 2);
+										case 2:
+											return (
+												this.unbind(),
+												document.querySelectorAll(this.config.selector).forEach(function (input) {
+													input.setAttribute('ss-autocomplete-input', ''),
+														input.addEventListener('keyup', _this.handlers.input.keyUp),
+														_this.config.settings.initializeFromUrl &&
+															!input.value &&
+															_this.store.state.input &&
+															(input.value = _this.store.state.input),
+														input.addEventListener('focus', _this.handlers.input.focus),
+														input.addEventListener('keyup', _this.handlers.input.escKey);
+													var form = input.form,
+														formActionUrl = _this.config.action;
+													!form && _this.config.action
+														? input.addEventListener('keyup', _this.handlers.input.enterKey)
+														: form &&
+														  (_this.config.action ? (form.action = _this.config.action) : (formActionUrl = form.action),
+														  form.addEventListener('submit', _this.handlers.input.formSubmit)),
+														formActionUrl &&
+															_this.store.setService(
+																'urlManager',
+																_this.urlManager.withConfig(function (translatorConfig) {
+																	return AutocompleteController_assign(AutocompleteController_assign({}, translatorConfig), {
+																		urlRoot: formActionUrl,
+																	});
+																})
+															),
+														document.activeElement === input && _this.setFocused(input);
+												}),
+												(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.trending) || void 0 === _b
+													? void 0
+													: _b.limit) > 0 &&
+													!(null === (_c = this.store.trending) || void 0 === _c ? void 0 : _c.length) &&
+													this.searchTrending(),
+												document.addEventListener('click', this.handlers.document.click),
+												[2]
+											);
+									}
+								});
+							});
+						}),
+						AutocompleteController
+					);
+				})(AbstractController);
+			var ContentType,
+				MerchandisingStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})();
+			!(function (ContentType) {
+				(ContentType.HEADER = 'header'),
+					(ContentType.BANNER = 'banner'),
+					(ContentType.FOOTER = 'footer'),
+					(ContentType.LEFT = 'left'),
+					(ContentType.INLINE = 'inline');
+			})(ContentType || (ContentType = {}));
+			var MerchandisingStore = function MerchandisingStore(services, merchData) {
+					var _this = this;
+					(this.redirect = ''),
+						(this.content = {}),
+						merchData &&
+							((this.redirect = merchData.redirect || ''),
+							merchData.content &&
+								Object.values(ContentType).forEach(function (type) {
+									merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
+								}));
+				},
+				Content = (function (_super) {
+					function Content(content) {
+						return _super.apply(this, content) || this;
+					}
+					return (
+						MerchandisingStore_extends(Content, _super),
+						Object.defineProperty(Content, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						Content
+					);
+				})(Array),
+				FilterStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				FilterStore = (function (_super) {
+					function FilterStore(services, filtersData, meta) {
+						void 0 === filtersData && (filtersData = []);
+						var filters = filtersData.map(function (filter) {
+							var facetMeta = meta.facets[filter.field];
+							if ('range' === filter.type) {
+								var rangeFilter = filter;
+								return new RangeFilter(services, {
+									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
+									value: {
+										low: rangeFilter.value.low,
+										high: rangeFilter.value.high,
+										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
+									},
+								});
+							}
+							var valueFilter = filter;
+							return new Filter(services, {
+								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
+								value: { value: valueFilter.value, label: valueFilter.label },
+							});
+						});
+						return _super.apply(this, filters) || this;
+					}
+					return (
+						FilterStore_extends(FilterStore, _super),
+						Object.defineProperty(FilterStore, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						FilterStore
+					);
+				})(Array),
+				Filter = function Filter(services, filter) {
+					var _a;
+					(this.facet = filter.facet),
+						(this.value = filter.value),
+						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.url =
+							null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
+								? void 0
+								: _a.remove('page').remove('filter.' + this.facet.field, this.value.value)),
+						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
+				},
+				RangeFilter = function RangeFilter(services, filter) {
+					var _a;
+					(this.facet = filter.facet),
+						(this.value = filter.value),
+						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.url =
+							null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
+								? void 0
+								: _a.remove('page').remove('filter.' + filter.facet.field, { low: filter.value.low, high: filter.value.high })),
+						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
+				},
+				PaginationStore =
+					(__webpack_require__(33132),
+					(function () {
+						function PaginationStore(config, services, paginationData) {
+							void 0 === paginationData && (paginationData = { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24 }),
+								(this.services = services),
+								(this.controllerConfig = config),
+								(this.page = paginationData.page),
+								(this.pageSize = paginationData.pageSize),
+								(this.totalResults = paginationData.totalResults),
+								(this.defaultPageSize = paginationData.defaultPageSize),
+								(this.pageSizeOptions = [
+									{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
+									{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
+									{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
+								]),
+								(0, mobx_esm.rC)(this, {
+									page: mobx_esm.LO,
+									pageSize: mobx_esm.LO,
+									totalResults: mobx_esm.LO,
+									begin: mobx_esm.Fl,
+									end: mobx_esm.Fl,
+									totalPages: mobx_esm.Fl,
+									multiplePages: mobx_esm.Fl,
+									current: mobx_esm.Fl,
+									first: mobx_esm.Fl,
+									last: mobx_esm.Fl,
+									next: mobx_esm.Fl,
+									previous: mobx_esm.Fl,
+									getPages: mobx_esm.aD,
+									setPageSize: mobx_esm.aD,
+								});
+						}
+						return (
+							Object.defineProperty(PaginationStore.prototype, 'begin', {
+								get: function get() {
+									var _a;
+									return (null === (_a = this.controllerConfig.settings) || void 0 === _a ? void 0 : _a.infinite)
+										? 1
+										: this.pageSize * (this.page - 1) + 1;
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'end', {
+								get: function get() {
+									return this.pageSize * this.page > this.totalResults ? this.totalResults : this.pageSize * this.page;
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'totalPages', {
+								get: function get() {
+									return Math.ceil(this.totalResults / this.pageSize);
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'multiplePages', {
+								get: function get() {
+									return this.pageSize < this.totalResults;
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'current', {
+								get: function get() {
+									return new Page(this.services, { number: this.page, active: !0 });
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'first', {
+								get: function get() {
+									return new Page(this.services, { number: 1, active: 1 == this.page });
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'last', {
+								get: function get() {
+									return new Page(this.services, { number: this.totalPages, active: this.totalPages == this.page });
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'next', {
+								get: function get() {
+									if (this.page < this.totalPages) return new Page(this.services, { number: this.page + 1 });
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							Object.defineProperty(PaginationStore.prototype, 'previous', {
+								get: function get() {
+									if (this.page > 1) return new Page(this.services, { number: this.page - 1 });
+								},
+								enumerable: !1,
+								configurable: !0,
+							}),
+							(PaginationStore.prototype.getPages = function (min, max) {
+								if (!Number.isInteger(min)) return [];
+								if (Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
+								else {
+									var surrounding = min - 1,
+										from = this.page,
+										to = this.page,
+										last = to - from;
+									do {
+										if (((last = to - from), to < this.totalPages && to++, to - from >= surrounding)) break;
+										from > 1 && from--;
+									} while (last != to - from && to - from < surrounding);
+									(min = from - this.page), (max = to - this.page);
+								}
+								for (var pages = [], i = this.page + min; i <= this.page + max; i++)
+									i > 0 && i <= this.totalPages && pages.push(new Page(this.services, { number: i, active: i == this.page }));
+								return pages;
+							}),
+							(PaginationStore.prototype.setPageSize = function (num) {
+								num && this.services.urlManager.remove('page').set('pageSize', num).go();
+							}),
+							PaginationStore
+						);
+					})()),
+				Page = function Page(services, page) {
+					var _a, _b;
+					(this.services = services),
+						(this.number = page.number),
+						(this.active = page.active || !1),
+						(this.url =
+							null === (_b = null === (_a = this.services) || void 0 === _a ? void 0 : _a.urlManager) || void 0 === _b
+								? void 0
+								: _b.set('page', this.number)),
+						(this.key = this.url.href);
+				},
+				SortingStore = (function () {
+					function SortingStore(services, sorting, search, meta) {
+						if (((this.options = []), services && meta.sortOptions)) {
+							var activeSort_1 = sorting && sorting.length && sorting[0];
+							(this.options = meta.sortOptions
+								.filter(function (option) {
+									return (null == search ? void 0 : search.query) ? option : 'field' == option.type;
+								})
+								.map(function (option, index) {
+									return (
+										(option.active = !1),
+										activeSort_1 && activeSort_1.field == option.field && activeSort_1.direction == option.direction
+											? (option.active = !0)
+											: activeSort_1 || 0 !== index || (option.active = !0),
+										(option.default = !1),
+										0 === index && (option.default = !0),
+										new Option(services, option)
+									);
+								})),
+								(0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
+						}
+					}
+					return (
+						Object.defineProperty(SortingStore.prototype, 'current', {
+							get: function get() {
+								return this.options
+									.filter(function (option) {
+										return option.active;
+									})
+									.pop();
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						SortingStore
+					);
+				})(),
+				Option = function Option(services, option) {
+					(this.active = option.active),
+						(this.default = option.default),
+						(this.field = option.field),
+						(this.label = option.label),
+						(this.direction = option.direction),
+						(this.type = option.type),
+						(this.value = option.field + ':' + option.direction),
+						this.default
+							? (this.url = services.urlManager.remove('page').remove('sort'))
+							: (this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }])),
+						(0, mobx_esm.rC)(this, { field: mobx_esm.LO, label: mobx_esm.LO, direction: mobx_esm.LO, type: mobx_esm.LO, value: mobx_esm.LO });
+				},
+				StateStore = (function () {
+					function StateStore(services) {
+						(this.focusedInput = void 0),
+							(this.input = ''),
+							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
+							(this.url = services.urlManager),
+							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
+					}
+					return (
+						(StateStore.prototype.reset = function () {
+							(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
+						}),
+						StateStore
+					);
+				})(),
+				Lock = (function () {
+					function Lock(state) {
+						void 0 === state && (state = !1), (this.state = this.startState = state);
+					}
+					return (
+						(Lock.prototype.reset = function () {
+							this.state = this.startState;
+						}),
+						Object.defineProperty(Lock.prototype, 'locked', {
+							get: function get() {
+								return this.state;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						(Lock.prototype.lock = function () {
+							this.state = !0;
+						}),
+						(Lock.prototype.unlock = function () {
+							this.state = !1;
+						}),
+						Lock
+					);
+				})(),
+				TermStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				TermStore_spreadArray = function (to, from, pack) {
 					if (pack || 2 === arguments.length)
 						for (var ar, i = 0, l = from.length; i < l; i++)
 							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
 					return to.concat(ar || Array.prototype.slice.call(from));
 				},
-				RecommendationInstantiator = (function () {
-					function RecommendationInstantiator(config, _a) {
-						var _b,
-							_this = this,
-							client = _a.client,
-							logger = _a.logger,
-							tracker = _a.tracker;
+				TermStore = (function (_super) {
+					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
+						var _a,
+							suggestions = TermStore_spreadArray(
+								[],
+								((null == autocomplete ? void 0 : autocomplete.alternatives) ? autocomplete.alternatives : []).map(function (term) {
+									return term.text;
+								}),
+								!0
+							);
+						(null === (_a = null == autocomplete ? void 0 : autocomplete.suggested) || void 0 === _a ? void 0 : _a.text)
+							? suggestions.unshift(autocomplete.suggested.text)
+							: (null == autocomplete ? void 0 : autocomplete.query) &&
+							  paginationData.totalResults &&
+							  suggestions.unshift(null == autocomplete ? void 0 : autocomplete.query);
+						var terms = [];
+						return (
+							suggestions.map(function (term, index) {
+								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
+							}),
+							_super.apply(this, terms) || this
+						);
+					}
+					return (
+						TermStore_extends(TermStore, _super),
+						Object.defineProperty(TermStore, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						TermStore
+					);
+				})(Array),
+				Term = function Term(services, term, terms, resetTerms, rootState) {
+					var _a,
+						_this = this;
+					(this.active = term.active),
+						(this.value = term.value),
+						(this.url = null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a ? void 0 : _a.set({ query: this.value })),
+						(this.preview = function () {
+							var _a;
+							resetTerms(),
+								terms.map(function (term) {
+									term.active = !1;
+								}),
+								(_this.active = !0),
+								rootState.locks.terms.lock(),
+								rootState.locks.facets.unlock(),
+								null === (_a = _this.url) || void 0 === _a || _a.set({ query: _this.value }).go();
+						}),
+						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
+				},
+				TrendingStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				TrendingStore = (function (_super) {
+					function TrendingStore(services, trendingData, resetTerms, rootState) {
+						var _a,
+							terms = [];
+						return (
+							null === (_a = null == trendingData ? void 0 : trendingData.queries) ||
+								void 0 === _a ||
+								_a.map(function (term) {
+									terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
+								}),
+							_super.apply(this, terms) || this
+						);
+					}
+					return (
+						TrendingStore_extends(TrendingStore, _super),
+						Object.defineProperty(TrendingStore, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						TrendingStore
+					);
+				})(Array),
+				QueryStore = function QueryStore(services, autocomplete, search) {
+					var observables = {};
+					(null == search ? void 0 : search.query) &&
+						((this.query = new Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
+						(null == autocomplete ? void 0 : autocomplete.correctedQuery) &&
+							((this.originalQuery = new Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
+						(0, mobx_esm.rC)(this, observables);
+				},
+				Query = function Query(urlManager, query) {
+					(this.string = query), (this.url = urlManager.set({ query: this.string })), (0, mobx_esm.rC)(this, { string: mobx_esm.LO });
+				},
+				FacetStore_extends =
+					(__webpack_require__(17368),
+					(function () {
+						var _extendStatics = function extendStatics(d, b) {
+							return (
+								(_extendStatics =
+									Object.setPrototypeOf ||
+									({ __proto__: [] } instanceof Array &&
+										function (d, b) {
+											d.__proto__ = b;
+										}) ||
+									function (d, b) {
+										for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+									}),
+								_extendStatics(d, b)
+							);
+						};
+						return function (d, b) {
+							if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+							function __() {
+								this.constructor = d;
+							}
+							_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+						};
+					})()),
+				FacetStore_FacetStore = (function (_super) {
+					function FacetStore(config, services, storage, facetsData, pagination, meta) {
+						void 0 === facetsData && (facetsData = []);
+						var facets = facetsData
+							.filter(function (facet) {
+								var _a, _b, _c, _d;
+								if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
+									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
+									if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
+									if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
+										return facet.values[0].count != pagination.totalResults;
+								}
+								return !0;
+							})
+							.map(function (facet) {
+								var facetMeta = meta.facets[facet.field];
+								return 'range' === facet.type
+									? new RangeFacet(services, storage, facet, facetMeta)
+									: new ValueFacet(config, services, storage, facet, facetMeta);
+							});
+						return _super.apply(this, facets) || this;
+					}
+					return (
+						FacetStore_extends(FacetStore, _super),
+						Object.defineProperty(FacetStore, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						FacetStore
+					);
+				})(Array),
+				Facet = (function () {
+					function Facet(services, storage, facet, facetMeta) {
+						(this.filtered = !1),
+							(this.custom = {}),
+							(this.collapsed = !1),
+							(this.display = ''),
+							(this.label = ''),
+							(this.services = services),
+							(this.storage = storage),
+							Object.assign(this, facetMeta, facet),
+							(0, mobx_esm.rC)(this, {
+								type: mobx_esm.LO,
+								field: mobx_esm.LO,
+								filtered: mobx_esm.LO,
+								custom: mobx_esm.LO,
+								collapsed: mobx_esm.LO,
+								display: mobx_esm.LO,
+								label: mobx_esm.LO,
+								clear: mobx_esm.Fl,
+								toggleCollapse: mobx_esm.aD,
+							});
+						var collapseData = this.storage.get('facets.' + this.field + '.collapsed');
+						(this.collapsed = null != collapseData ? collapseData : this.collapsed),
+							this.filtered && this.collapsed && void 0 === collapseData && this.toggleCollapse();
+					}
+					return (
+						Object.defineProperty(Facet.prototype, 'clear', {
+							get: function get() {
+								var _a, _b;
+								return {
+									url:
+										null === (_b = null === (_a = this.services) || void 0 === _a ? void 0 : _a.urlManager) || void 0 === _b
+											? void 0
+											: _b.remove('page').remove('filter.' + this.field),
+								};
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						(Facet.prototype.toggleCollapse = function () {
+							(this.collapsed = !this.collapsed), this.storage.set('facets.' + this.field + '.collapsed', this.collapsed);
+						}),
+						Facet
+					);
+				})(),
+				RangeFacet = (function (_super) {
+					function RangeFacet(services, storage, facet, facetMeta) {
+						var _this = _super.call(this, services, storage, facet, facetMeta) || this;
+						(_this.range = { low: 0, high: 0 }), (_this.active = { low: 0, high: 0 }), (_this.step = facet.step);
+						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
+						return (
+							storedRange && facet.filtered
+								? facet.range.low > storedRange.low || facet.range.high < storedRange.high
+									? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
+									: (facet.range.low < storedRange.low || facet.range.high > storedRange.high) &&
+									  (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range))
+								: (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range)),
+							(_this.active = facet.active || facet.range),
+							(_this.formatSeparator = (null == facetMeta ? void 0 : facetMeta.formatSeparator) || '-'),
+							(_this.formatValue = (null == facetMeta ? void 0 : facetMeta.formatValue) || '%01.2f'),
+							(0, mobx_esm.rC)(_this, {
+								step: mobx_esm.LO,
+								range: mobx_esm.LO,
+								active: mobx_esm.LO,
+								formatSeparator: mobx_esm.LO,
+								formatValue: mobx_esm.LO,
+							}),
+							_this
+						);
+					}
+					return FacetStore_extends(RangeFacet, _super), RangeFacet;
+				})(Facet),
+				ValueFacet = (function (_super) {
+					function ValueFacet(config, services, storage, facet, facetMeta) {
+						var _a,
+							_b,
+							_this = _super.call(this, services, storage, facet, facetMeta) || this;
+						(_this.values = []),
+							(_this.search = { input: '' }),
+							(_this.overflow = {
+								enabled: !1,
+								limited: !0,
+								limit: 0,
+								remaining: void 0,
+								setLimit: function setLimit(limit) {
+									limit != this.limit && ((this.enabled = !0), (this.limit = limit), this.calculate());
+								},
+								toggle: function toggle(val) {
+									(_this.overflow.limited = void 0 !== val ? val : !_this.overflow.limited),
+										_this.storage.set('facets.' + _this.field + '.overflow.limited', _this.overflow.limited),
+										_this.overflow.calculate();
+								},
+								calculate: function calculate() {
+									if (_this.overflow.limit > 0) {
+										var remaining = _this.values.length - _this.overflow.limit;
+										remaining > 0 && !_this.search.input
+											? ((_this.overflow.enabled = !0),
+											  _this.overflow.limited ? (_this.overflow.remaining = remaining) : (_this.overflow.remaining = 0))
+											: (_this.overflow.enabled = !1);
+									}
+								},
+							}),
+							(_this.multiple = _this.multiple),
+							(_this.values =
+								(facet.values &&
+									facet.values.map(function (value) {
+										switch (facet.type) {
+											case 'value':
+												if ('hierarchy' === facetMeta.display) {
+													var filteredValues = facet.values.filter(function (value) {
+														return value.filtered;
+													});
+													return new HierarchyValue(services, _this, value, filteredValues);
+												}
+												return new Value(services, _this, value);
+											case 'range-buckets':
+												return new RangeValue(services, _this, value);
+										}
+									})) ||
+								[]),
+							(null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.pinFiltered) &&
+								'hierarchy' !== facetMeta.display &&
+								_this.values.sort(function (a, b) {
+									return Number(b.filtered) - Number(a.filtered);
+								});
+						var overflowLimitedState = _this.storage.get('facets.' + _this.field + '.overflow.limited');
+						return (
+							void 0 !== overflowLimitedState && _this.overflow.toggle(overflowLimitedState),
+							(0, mobx_esm.rC)(_this, {
+								values: mobx_esm.LO,
+								search: mobx_esm.LO,
+								multiple: mobx_esm.LO,
+								overflow: mobx_esm.LO,
+								refinedValues: mobx_esm.Fl,
+							}),
+							(0, mobx_esm.U5)(
+								function () {
+									return _this.search.input;
+								},
+								function () {
+									_this.overflow.calculate();
+								}
+							),
+							_this
+						);
+					}
+					return (
+						FacetStore_extends(ValueFacet, _super),
+						Object.defineProperty(ValueFacet.prototype, 'refinedValues', {
+							get: function get() {
+								var values = this.values || [];
+								if (this.search.input) {
+									var search_1 = new RegExp(
+										(function escapeRegExp(string) {
+											return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+										})(this.search.input),
+										'i'
+									);
+									values = this.values.filter(function (value) {
+										return String(value.label).match(search_1);
+									});
+								}
+								return this.overflow.enabled && this.overflow.limited && (values = values.slice(0, this.overflow.limit)), values;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						ValueFacet
+					);
+				})(Facet),
+				Value = function Value(services, facet, value) {
+					var _a, _b;
+					if ((Object.assign(this, value), this.filtered))
+						this.url = null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.remove('page').remove('filter.' + facet.field, value.value);
+					else {
+						var valueUrl = null === (_b = services.urlManager) || void 0 === _b ? void 0 : _b.remove('page');
+						'single' == facet.multiple && (valueUrl = null == valueUrl ? void 0 : valueUrl.remove('filter.' + facet.field)),
+							(this.url = null == valueUrl ? void 0 : valueUrl.merge('filter.' + facet.field, value.value));
+					}
+				},
+				HierarchyValue = (function (_super) {
+					function HierarchyValue(services, facet, value, filteredValues) {
+						var _a,
+							_b,
+							_this = _super.call(this, services, facet, value) || this;
 						if (
-							((this.controllers = {}),
-							(this.uses = []),
-							(this.plugins = []),
-							(this.middleware = []),
-							(this.targets = {}),
-							(this.client = client),
-							(this.tracker = tracker),
-							(this.config = config),
-							(this.logger = logger),
-							!this.config)
+							((_this.level = 0),
+							(_this.history = !1),
+							value.value && facet.hierarchyDelimiter && (_this.level = value.value.split(facet.hierarchyDelimiter).length),
+							facet.filtered && (null == filteredValues ? void 0 : filteredValues.length))
+						) {
+							var filteredLevel = filteredValues[0].value.split(facet.hierarchyDelimiter).length;
+							_this.level <= filteredLevel && (_this.history = !0);
+						}
+						return (
+							value.value
+								? (_this.url =
+										null === (_a = null == services ? void 0 : services.urlManager) || void 0 === _a
+											? void 0
+											: _a.remove('page').set('filter.' + facet.field, value.value))
+								: (_this.url =
+										null === (_b = null == services ? void 0 : services.urlManager) || void 0 === _b
+											? void 0
+											: _b.remove('page').remove('filter.' + facet.field)),
+							_this
+						);
+					}
+					return FacetStore_extends(HierarchyValue, _super), HierarchyValue;
+				})(Value),
+				RangeValue = function RangeValue(services, facet, value) {
+					if ((Object.assign(this, value), this.filtered))
+						this.url =
+							null == services ? void 0 : services.urlManager.remove('page').remove('filter.' + facet.field, [{ low: this.low, high: this.high }]);
+					else {
+						var valueUrl = null == services ? void 0 : services.urlManager.remove('page');
+						'single' == facet.multiple && (valueUrl = null == valueUrl ? void 0 : valueUrl.remove('filter.' + facet.field)),
+							(this.url = null == valueUrl ? void 0 : valueUrl.merge('filter.' + facet.field, [{ low: this.low, high: this.high }]));
+					}
+				};
+			var Stores_FacetStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				FacetStore_assign = function () {
+					return (
+						(FacetStore_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						FacetStore_assign.apply(this, arguments)
+					);
+				},
+				FacetStore = (function (_super) {
+					function FacetStore(config, services, storage, facetsData, paginationData, meta, rootState) {
+						var alteredServices = FacetStore_assign(FacetStore_assign({}, services), { urlManager: services.urlManager.remove('filter') }),
+							facets = new FacetStore_FacetStore(config, alteredServices, storage, facetsData, paginationData, meta);
+						return (
+							facets.forEach(function (facet) {
+								var _a;
+								null === (_a = facet.values) ||
+									void 0 === _a ||
+									_a.forEach(function (value) {
+										value.preview = function () {
+											facets.map(function (facet) {
+												var _a;
+												(facet.filtered = !1),
+													null === (_a = facet.values) ||
+														void 0 === _a ||
+														_a.map(function (value) {
+															value.filtered = !1;
+														});
+											}),
+												(facet.filtered = !0),
+												(value.filtered = !0),
+												rootState.locks.facets.lock(),
+												value.url.go();
+										};
+									});
+							}),
+							_super.apply(this, facets) || this
+						);
+					}
+					return (
+						Stores_FacetStore_extends(FacetStore, _super),
+						Object.defineProperty(FacetStore, Symbol.species, {
+							get: function get() {
+								return Array;
+							},
+							enumerable: !1,
+							configurable: !0,
+						}),
+						FacetStore
+					);
+				})(Array),
+				AutocompleteStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				AutocompleteStore = (function (_super) {
+					function AutocompleteStore(config, services) {
+						var _a,
+							_this = _super.call(this, config) || this;
+						if (
+							((_this.meta = {}),
+							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
 						)
-							throw new Error('Recommendation Instantiator config is required');
-						if (!(null === (_b = this.config.config) || void 0 === _b ? void 0 : _b.branch))
-							throw new Error("Recommendation Instantiator config must contain 'branch' property");
-						if (!this.config.components || 'object' != typeof this.config.components)
-							throw new Error("Recommendation Instantiator config must contain 'components' mapping property");
-						var profileCount = {};
-						new DomTargeter(
-							[
-								{
-									selector: 'script[type="searchspring/recommend"]' + (this.config.selector ? ' , ' + this.config.selector : ''),
-									inject: {
-										action: 'before',
-										element: function element(target, origElement) {
-											var profile = origElement.getAttribute('profile');
-											if (profile) {
-												var recsContainer = document.createElement('div');
-												return recsContainer.setAttribute('searchspring-recommend', profile), recsContainer;
-											}
-											_this.logger.warn("'profile' attribute is missing from <script> tag, skipping this profile", origElement);
+							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
+						return (
+							(_this.services = services),
+							(_this.state = new StateStore(services)),
+							(_this.storage = new StorageStore()),
+							(_this.trending = []),
+							_this.reset(),
+							(0, mobx_esm.rC)(_this, {
+								state: mobx_esm.LO,
+								search: mobx_esm.LO,
+								terms: mobx_esm.LO,
+								facets: mobx_esm.LO,
+								filters: mobx_esm.LO,
+								merchandising: mobx_esm.LO,
+								results: mobx_esm.LO,
+								pagination: mobx_esm.LO,
+								sorting: mobx_esm.LO,
+							}),
+							_this
+						);
+					}
+					return (
+						AutocompleteStore_extends(AutocompleteStore, _super),
+						(AutocompleteStore.prototype.reset = function () {
+							this.state.reset(), this.update({ meta: this.meta }), this.resetTrending();
+						}),
+						(AutocompleteStore.prototype.resetTrending = function () {
+							var _a;
+							(null === (_a = this.trending) || void 0 === _a ? void 0 : _a.length) &&
+								this.trending.forEach(function (term) {
+									term.active = !1;
+								});
+						}),
+						(AutocompleteStore.prototype.resetTerms = function () {
+							var _a;
+							(null === (_a = this.terms) || void 0 === _a ? void 0 : _a.length) > 0 &&
+								this.terms.forEach(function (term) {
+									term.active = !1;
+								});
+						}),
+						(AutocompleteStore.prototype.setService = function (name, service) {
+							this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
+						}),
+						(AutocompleteStore.prototype.updateTrendingTerms = function (data) {
+							var _this = this;
+							this.trending = new TrendingStore(
+								this.services,
+								data.trending,
+								function () {
+									_this.resetTerms();
+								},
+								this.state
+							);
+						}),
+						(AutocompleteStore.prototype.update = function (data) {
+							var _this = this;
+							(this.loaded = !!data.pagination),
+								(this.meta = data.meta),
+								data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
+								this.state.locks.terms.locked ||
+									((this.terms = new TermStore(
+										this.services,
+										data.autocomplete,
+										data.pagination,
+										function () {
+											_this.resetTrending();
 										},
+										this.state
+									)),
+									data.autocomplete && this.state.locks.terms.lock()),
+								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
+								(this.search = new QueryStore(this.services, data.autocomplete, data.search)),
+								this.state.locks.facets.locked ||
+									(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
+								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
+								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+								((0 === this.results.length &&
+									!this.trending.filter(function (term) {
+										return term.active;
+									}).length) ||
+									this.terms.filter(function (term) {
+										return term.active;
+									}).length) &&
+									this.resetTrending(),
+								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
+								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+						}),
+						AutocompleteStore
+					);
+				})(AbstractStore);
+			var SearchController_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
+				})(),
+				SearchController_assign = function () {
+					return (
+						(SearchController_assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						SearchController_assign.apply(this, arguments)
+					);
+				},
+				SearchController_awaiter = function (thisArg, _arguments, P, generator) {
+					return new (P || (P = Promise))(function (resolve, reject) {
+						function fulfilled(value) {
+							try {
+								step(generator.next(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function rejected(value) {
+							try {
+								step(generator.throw(value));
+							} catch (e) {
+								reject(e);
+							}
+						}
+						function step(result) {
+							result.done
+								? resolve(result.value)
+								: (function adopt(value) {
+										return value instanceof P
+											? value
+											: new P(function (resolve) {
+													resolve(value);
+											  });
+								  })(result.value).then(fulfilled, rejected);
+						}
+						step((generator = generator.apply(thisArg, _arguments || [])).next());
+					});
+				},
+				SearchController_generator = function (thisArg, body) {
+					var f,
+						y,
+						t,
+						g,
+						_ = {
+							label: 0,
+							sent: function sent() {
+								if (1 & t[0]) throw t[1];
+								return t[1];
+							},
+							trys: [],
+							ops: [],
+						};
+					return (
+						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
+						'function' == typeof Symbol &&
+							(g[Symbol.iterator] = function () {
+								return this;
+							}),
+						g
+					);
+					function verb(n) {
+						return function (v) {
+							return (function step(op) {
+								if (f) throw new TypeError('Generator is already executing.');
+								for (; _; )
+									try {
+										if (
+											((f = 1),
+											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+										)
+											return t;
+										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
+											case 0:
+											case 1:
+												t = op;
+												break;
+											case 4:
+												return _.label++, { value: op[1], done: !1 };
+											case 5:
+												_.label++, (y = op[1]), (op = [0]);
+												continue;
+											case 7:
+												(op = _.ops.pop()), _.trys.pop();
+												continue;
+											default:
+												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
+													_ = 0;
+													continue;
+												}
+												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+													_.label = op[1];
+													break;
+												}
+												if (6 === op[0] && _.label < t[1]) {
+													(_.label = t[1]), (t = op);
+													break;
+												}
+												if (t && _.label < t[2]) {
+													(_.label = t[2]), _.ops.push(op);
+													break;
+												}
+												t[2] && _.ops.pop(), _.trys.pop();
+												continue;
+										}
+										op = body.call(thisArg, _);
+									} catch (e) {
+										(op = [6, e]), (y = 0);
+									} finally {
+										f = t = 0;
+									}
+								if (5 & op[0]) throw op[1];
+								return { value: op[0] ? op[1] : void 0, done: !0 };
+							})([n, v]);
+						};
+					}
+				},
+				SearchController_spreadArray = function (to, from, pack) {
+					if (pack || 2 === arguments.length)
+						for (var ar, i = 0, l = from.length; i < l; i++)
+							(!ar && i in from) || (ar || (ar = Array.prototype.slice.call(from, 0, i)), (ar[i] = from[i]));
+					return to.concat(ar || Array.prototype.slice.call(from));
+				},
+				SearchController_defaultConfig = {
+					id: 'search',
+					globals: {},
+					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0 } },
+				},
+				SearchController = (function (_super) {
+					function SearchController(config, _a) {
+						var client = _a.client,
+							store = _a.store,
+							urlManager = _a.urlManager,
+							eventManager = _a.eventManager,
+							profiler = _a.profiler,
+							logger = _a.logger,
+							tracker = _a.tracker,
+							_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }) || this;
+						return (
+							(_this.type = 'search'),
+							(_this.track = {
+								product: {
+									click: function click(e, result) {
+										var _a;
+										if (_this.config.settings.infinite) {
+											var scrollMap = {};
+											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
+										}
+										var _b = result.attributes,
+											intellisuggestData = _b.intellisuggestData,
+											intellisuggestSignature = _b.intellisuggestSignature,
+											target = e.target,
+											href =
+												(null == target ? void 0 : target.href) ||
+												(null === (_a = result.mappings.core) || void 0 === _a ? void 0 : _a.url) ||
+												void 0,
+											event = _this.tracker.track.product.click({ data: { intellisuggestData, intellisuggestSignature, href } });
+										return _this.eventManager.fire('track.product.click', { controller: _this, event: e, result, trackEvent: event }), event;
 									},
 								},
-							],
-							function (target, injectedElem, elem) {
-								return RecommendationInstantiator_awaiter(_this, void 0, void 0, function () {
-									var globals,
+							}),
+							(_this.search = function () {
+								return SearchController_awaiter(_this, void 0, void 0, function () {
+									var params,
+										stringyParams,
+										prevStringyParams,
+										err_1,
+										preventBackfill,
+										dontBackfill,
+										searchProfile,
 										_a,
-										shopper,
-										shopperId,
-										product,
-										seed,
-										branch,
-										options,
-										tag,
-										urlManager,
-										controllerConfig,
-										recs,
-										profileVars,
-										RecommendationsComponent,
+										response,
+										meta,
+										previousResults_1,
+										backfills,
+										page,
+										backfillParams,
+										afterSearchProfile,
+										err_2,
+										afterStoreProfile,
+										err_3,
+										err_4,
 										_b,
 										_c,
 										_d,
 										_e,
 										_f,
 										_g,
-										_h,
-										_j;
-									return RecommendationInstantiator_generator(this, function (_k) {
-										switch (_k.label) {
+										_h;
+									return SearchController_generator(this, function (_j) {
+										switch (_j.label) {
+											case 0:
+												return this.initialized ? [3, 2] : [4, this.init()];
+											case 1:
+												_j.sent(), (_j.label = 2);
+											case 2:
+												(params = this.params), (_j.label = 3);
+											case 3:
+												if (
+													(_j.trys.push([3, 20, , 21]),
+													(stringyParams = JSON.stringify(params)),
+													(prevStringyParams = this.storage.get('lastStringyParams')),
+													stringyParams == prevStringyParams)
+												)
+													return [2];
+												_j.label = 4;
+											case 4:
+												return _j.trys.push([4, 6, , 7]), [4, this.eventManager.fire('beforeSearch', { controller: this, request: params })];
+											case 5:
+												return _j.sent(), [3, 7];
+											case 6:
+												if ('cancelled' == (null == (err_1 = _j.sent()) ? void 0 : err_1.message))
+													return this.log.warn("'beforeSearch' middleware cancelled"), [2];
+												throw (this.log.error("error in 'beforeSearch' middleware"), err_1);
+											case 7:
+												return this.config.settings.infinite &&
+													((preventBackfill =
+														(null === (_b = this.config.settings.infinite) || void 0 === _b ? void 0 : _b.backfill) &&
+														!this.store.results.length &&
+														(null === (_c = params.pagination) || void 0 === _c ? void 0 : _c.page) > this.config.settings.infinite.backfill),
+													(dontBackfill =
+														!(null === (_d = this.config.settings.infinite) || void 0 === _d ? void 0 : _d.backfill) &&
+														!this.store.results.length &&
+														(null === (_e = params.pagination) || void 0 === _e ? void 0 : _e.page) > 1),
+													preventBackfill || dontBackfill)
+													? (this.storage.set('scrollMap', {}), this.urlManager.set('page', 1).go(), [2])
+													: ((searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+													  [4, this.client.search(params)]);
+											case 8:
+												if (
+													((_a = _j.sent()),
+													(response = _a[0]),
+													(meta = _a[1]),
+													response.meta || (response.meta = meta),
+													!(this.config.settings.infinite && (null === (_f = params.pagination) || void 0 === _f ? void 0 : _f.page) > 1))
+												)
+													return [3, 11];
+												if (
+													((previousResults_1 = (null === (_g = this.store.data) || void 0 === _g ? void 0 : _g.results) || []),
+													!(null === (_h = this.config.settings) || void 0 === _h ? void 0 : _h.infinite.backfill) || previousResults_1.length)
+												)
+													return [3, 10];
+												for (backfills = [], page = 1; page < params.pagination.page; page++)
+													(backfillParams = cjs_default()(SearchController_assign({}, params), { pagination: { page } })),
+														backfills.push(this.client.search(backfillParams));
+												return [4, Promise.all(backfills)];
+											case 9:
+												_j.sent().map(function (_a) {
+													var data = _a[0];
+													previousResults_1 = previousResults_1.concat(data.results);
+												}),
+													(_j.label = 10);
+											case 10:
+												(response.results = SearchController_spreadArray(
+													SearchController_spreadArray([], previousResults_1, !0),
+													response.results || [],
+													!0
+												)),
+													(_j.label = 11);
+											case 11:
+												searchProfile.stop(),
+													this.log.profile(searchProfile),
+													(afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
+													(_j.label = 12);
+											case 12:
+												return (
+													_j.trys.push([12, 14, , 15]), [4, this.eventManager.fire('afterSearch', { controller: this, request: params, response })]
+												);
+											case 13:
+												return _j.sent(), [3, 15];
+											case 14:
+												if ('cancelled' == (null == (err_2 = _j.sent()) ? void 0 : err_2.message))
+													return this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), [2];
+												throw (this.log.error("error in 'afterSearch' middleware"), err_2);
+											case 15:
+												afterSearchProfile.stop(),
+													this.log.profile(afterSearchProfile),
+													this.store.update(response),
+													(afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
+													(_j.label = 16);
+											case 16:
+												return (
+													_j.trys.push([16, 18, , 19]), [4, this.eventManager.fire('afterStore', { controller: this, request: params, response })]
+												);
+											case 17:
+												return _j.sent(), [3, 19];
+											case 18:
+												if ('cancelled' == (null == (err_3 = _j.sent()) ? void 0 : err_3.message))
+													return this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), [2];
+												throw (this.log.error("error in 'afterStore' middleware"), err_3);
+											case 19:
+												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
+											case 20:
+												return (err_4 = _j.sent()) && console.error(err_4), [3, 21];
+											case 21:
+												return [2];
+										}
+									});
+								});
+							}),
+							(_this.config = cjs_default()(SearchController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
+							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+							_this.storage.set('lastStringyParams', void 0),
+							_this.eventManager.on('beforeSearch', function (search, next) {
+								return SearchController_awaiter(_this, void 0, void 0, function () {
+									return SearchController_generator(this, function (_a) {
+										switch (_a.label) {
+											case 0:
+												return (search.controller.store.loading = !0), [4, next()];
+											case 1:
+												return _a.sent(), [2];
+										}
+									});
+								});
+							}),
+							_this.eventManager.on('afterSearch', function (search, next) {
+								return SearchController_awaiter(_this, void 0, void 0, function () {
+									var config, redirectURL, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+									return SearchController_generator(this, function (_l) {
+										switch (_l.label) {
 											case 0:
 												return (
-													(globals = {}),
-													(_a = (function getScriptContext(script, evaluate) {
-														var _a, _b;
-														if (!script || 'object' != typeof script || 'HTMLScriptElement' != script.constructor.name)
-															throw new Error('script tag must be provided');
-														if (
-															!(null === (_a = script.getAttribute('type')) || void 0 === _a ? void 0 : _a.match(/^searchspring/)) &&
-															!(null === (_b = script.id) || void 0 === _b ? void 0 : _b.match(/^searchspring/))
-														)
-															throw new Error('script type or id attribute must start with "searchspring"');
-														if (
-															(evaluate && !Array.isArray(evaluate)) ||
-															(evaluate &&
-																!evaluate.reduce(function (accu, name) {
-																	return accu && 'string' == typeof name;
-																}, !0))
-														)
-															throw new Error('getScriptContext second parameter must be an array of strings');
-														var variables = {};
-														script.getAttributeNames().map(function (attr) {
-															variables[attr] = script.getAttribute(attr);
-														});
-														try {
-															null == evaluate ||
-																evaluate.forEach(function (name) {
-																	var fn = new Function(
-																		'\n\t\t\t\tvar ' +
-																			evaluate.join(', ') +
-																			';\n\t\t\t\t' +
-																			script.innerHTML +
-																			'\n\t\t\t\treturn ' +
-																			name +
-																			';\n\t\t\t'
-																	);
-																	variables[name] = fn();
-																});
-														} catch (err) {
-															console.error('getScriptContext: failed to parse variables - error in context'), console.error(err);
-														}
-														return variables;
-													})(elem, ['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'])),
-													(shopper = _a.shopper),
-													(shopperId = _a.shopperId),
-													(product = _a.product),
-													(seed = _a.seed),
-													(branch = _a.branch),
-													(options = _a.options),
-													(shopper || shopperId) && (globals.shopper = shopper || shopperId),
-													(product || seed) && (globals.product = product || seed),
-													branch && (globals.branch = branch),
-													options && options.siteId && (globals.siteId = options.siteId),
-													options && options.categories && (globals.categories = options.categories),
-													(tag = injectedElem.getAttribute('searchspring-recommend')),
-													(profileCount[tag] = profileCount[tag] + 1 || 1),
-													(urlManager =
-														(null === (_c = this.config.services) || void 0 === _c ? void 0 : _c.urlManager) ||
-														new UrlManager(new UrlTranslator(), reactLinker).detach()),
-													(controllerConfig = RecommendationInstantiator_assign(
-														{ id: 'recommend_' + (tag + (profileCount[tag] - 1)), tag, globals },
-														this.config.config
-													)),
-													(recs = new RecommendationController(controllerConfig, {
-														client: (null === (_d = this.config.services) || void 0 === _d ? void 0 : _d.client) || this.client,
-														store:
-															(null === (_e = this.config.services) || void 0 === _e ? void 0 : _e.store) ||
-															new RecommendationStore(controllerConfig, { urlManager }),
-														urlManager,
-														eventManager: (null === (_f = this.config.services) || void 0 === _f ? void 0 : _f.eventManager) || new EventManager(),
-														profiler: (null === (_g = this.config.services) || void 0 === _g ? void 0 : _g.profiler) || new Profiler(),
-														logger: (null === (_h = this.config.services) || void 0 === _h ? void 0 : _h.logger) || new Logger(),
-														tracker: (null === (_j = this.config.services) || void 0 === _j ? void 0 : _j.tracker) || this.tracker,
-													})),
-													this.uses.forEach(function (attachements) {
-														return recs.use(attachements);
-													}),
-													this.plugins.forEach(function (plugin) {
-														return recs.plugin(plugin);
-													}),
-													this.middleware.forEach(function (middleware) {
-														return recs.on.apply(recs, RecommendationInstantiator_spreadArray([middleware.event], middleware.func, !1));
-													}),
-													[4, recs.search()]
+													(config = search.controller.config),
+													(redirectURL =
+														null === (_b = null === (_a = search.response) || void 0 === _a ? void 0 : _a.merchandising) || void 0 === _b
+															? void 0
+															: _b.redirect) &&
+													(null === (_d = null === (_c = null == config ? void 0 : config.settings) || void 0 === _c ? void 0 : _c.redirects) ||
+													void 0 === _d
+														? void 0
+														: _d.merchandising)
+														? (window.location.replace(redirectURL), [2, !1])
+														: (null === (_f = null === (_e = null == config ? void 0 : config.settings) || void 0 === _e ? void 0 : _e.redirects) ||
+														  void 0 === _f
+																? void 0
+																: _f.singleResult) &&
+														  (null == search ? void 0 : search.response.search.query) &&
+														  1 ===
+																(null ===
+																	(_h = null === (_g = null == search ? void 0 : search.response) || void 0 === _g ? void 0 : _g.pagination) ||
+																void 0 === _h
+																	? void 0
+																	: _h.totalResults) &&
+														  !(null === (_k = null === (_j = null == search ? void 0 : search.response) || void 0 === _j ? void 0 : _j.filters) ||
+														  void 0 === _k
+																? void 0
+																: _k.length)
+														? (window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url), [2, !1])
+														: [4, next()]
 												);
 											case 1:
+												return _l.sent(), [2];
+										}
+									});
+								});
+							}),
+							_this.eventManager.on('afterStore', function (search, next) {
+								return SearchController_awaiter(_this, void 0, void 0, function () {
+									var stringyParams,
+										scrollMap_1,
+										scrollToPosition_1,
+										checkCount_1,
+										heightCheck_1,
+										_a,
+										_this = this;
+									return SearchController_generator(this, function (_b) {
+										switch (_b.label) {
+											case 0:
+												return [4, next()];
+											case 1:
 												return (
-													_k.sent(),
-													(this.controllers[recs.config.id] = recs),
-													(profileVars = recs.store.profile.display.templateParameters)
-														? (profileVars.component || recs.log.error('template does not support components!'),
-														  (_b = this.config.components) ? [4, this.config.components[profileVars.component]()] : [3, 3])
-														: (recs.log.error('profile failed to load!'), [2])
-												);
-											case 2:
-												(_b = _k.sent()), (_k.label = 3);
-											case 3:
-												return (
-													(RecommendationsComponent = _b) || recs.log.error("component '" + profileVars.component + "' not found!"),
-													setTimeout(function () {
-														(0, preact_module.sY)((0, jsxRuntime_module.tZ)(RecommendationsComponent, { controller: recs }, void 0), injectedElem);
-													}),
+													_b.sent(),
+													(search.controller.store.loading = !1),
+													(stringyParams = JSON.stringify(search.request)),
+													this.storage.set('lastStringyParams', stringyParams),
+													(null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.infinite) &&
+														0 === window.scrollY &&
+														((scrollMap_1 = this.storage.get('scrollMap') || {}),
+														(scrollToPosition_1 = scrollMap_1[stringyParams]) &&
+															((checkCount_1 = 0),
+															(heightCheck_1 = window.setInterval(function () {
+																document.documentElement.scrollHeight >= scrollToPosition_1 &&
+																	(window.scrollTo(0, scrollToPosition_1),
+																	_this.log.debug('scrolling to: ', scrollMap_1[stringyParams]),
+																	window.clearInterval(heightCheck_1)),
+																	checkCount_1 > 40 && window.clearInterval(heightCheck_1),
+																	checkCount_1++;
+															}, 50)))),
 													[2]
 												);
 										}
 									});
 								});
-							}
+							}),
+							_this.use(_this.config),
+							_this
 						);
 					}
 					return (
-						(RecommendationInstantiator.prototype.plugin = function (func) {
-							this.plugins.push(func);
-						}),
-						(RecommendationInstantiator.prototype.on = function (event) {
-							for (var func = [], _i = 1; _i < arguments.length; _i++) func[_i - 1] = arguments[_i];
-							this.middleware.push({ event, func });
-						}),
-						(RecommendationInstantiator.prototype.use = function (attachments) {
-							this.uses.push(attachments);
-						}),
-						RecommendationInstantiator
-					);
-				})(),
-				Snap_assign = function () {
-					return (
-						(Snap_assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						Snap_assign.apply(this, arguments)
-					);
-				},
-				Snap_awaiter = function (thisArg, _arguments, P, generator) {
-					return new (P || (P = Promise))(function (resolve, reject) {
-						function fulfilled(value) {
-							try {
-								step(generator.next(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function rejected(value) {
-							try {
-								step(generator.throw(value));
-							} catch (e) {
-								reject(e);
-							}
-						}
-						function step(result) {
-							result.done
-								? resolve(result.value)
-								: (function adopt(value) {
-										return value instanceof P
-											? value
-											: new P(function (resolve) {
-													resolve(value);
-											  });
-								  })(result.value).then(fulfilled, rejected);
-						}
-						step((generator = generator.apply(thisArg, _arguments || [])).next());
-					});
-				},
-				Snap_generator = function (thisArg, body) {
-					var f,
-						y,
-						t,
-						g,
-						_ = {
-							label: 0,
-							sent: function sent() {
-								if (1 & t[0]) throw t[1];
-								return t[1];
+						SearchController_extends(SearchController, _super),
+						Object.defineProperty(SearchController.prototype, 'params', {
+							get: function get() {
+								var _a,
+									_b,
+									params = cjs_default()(SearchController_assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
+								(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.redirects) || void 0 === _b
+									? void 0
+									: _b.merchandising) || ((params.search = params.search || {}), (params.search.redirectResponse = 'full'));
+								var userId = this.tracker.getUserId().userId;
+								return userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)), params;
 							},
-							trys: [],
-							ops: [],
-						};
-					return (
-						(g = { next: verb(0), throw: verb(1), return: verb(2) }),
-						'function' == typeof Symbol &&
-							(g[Symbol.iterator] = function () {
-								return this;
-							}),
-						g
-					);
-					function verb(n) {
-						return function (v) {
-							return (function step(op) {
-								if (f) throw new TypeError('Generator is already executing.');
-								for (; _; )
-									try {
-										if (
-											((f = 1),
-											y && (t = 2 & op[0] ? y.return : op[0] ? y.throw || ((t = y.return) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-										)
-											return t;
-										switch (((y = 0), t && (op = [2 & op[0], t.value]), op[0])) {
-											case 0:
-											case 1:
-												t = op;
-												break;
-											case 4:
-												return _.label++, { value: op[1], done: !1 };
-											case 5:
-												_.label++, (y = op[1]), (op = [0]);
-												continue;
-											case 7:
-												(op = _.ops.pop()), _.trys.pop();
-												continue;
-											default:
-												if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1]) || (6 !== op[0] && 2 !== op[0]))) {
-													_ = 0;
-													continue;
-												}
-												if (3 === op[0] && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-													_.label = op[1];
-													break;
-												}
-												if (6 === op[0] && _.label < t[1]) {
-													(_.label = t[1]), (t = op);
-													break;
-												}
-												if (t && _.label < t[2]) {
-													(_.label = t[2]), _.ops.push(op);
-													break;
-												}
-												t[2] && _.ops.pop(), _.trys.pop();
-												continue;
-										}
-										op = body.call(thisArg, _);
-									} catch (e) {
-										(op = [6, e]), (y = 0);
-									} finally {
-										f = t = 0;
-									}
-								if (5 & op[0]) throw op[1];
-								return { value: op[0] ? op[1] : void 0, done: !0 };
-							})([n, v]);
-						};
-					}
-				},
-				Snap = (function () {
-					function Snap(config) {
-						var _a,
-							_b,
-							_c,
-							_d,
-							_e,
-							_f,
-							_this = this;
-						if (
-							((this.config = config),
-							!(null ===
-								(_c = null === (_b = null === (_a = this.config) || void 0 === _a ? void 0 : _a.client) || void 0 === _b ? void 0 : _b.globals) ||
-							void 0 === _c
-								? void 0
-								: _c.siteId))
-						)
-							throw new Error('Snap: config provided must contain a valid config.client.globals.siteId value');
-						if (
-							((this.client = new Client(this.config.client.globals, this.config.client.config)),
-							(this.tracker = new Tracker(this.config.client.globals)),
-							(this.logger = new Logger('Snap Preact ')),
-							(this.controllers = {}),
-							this.logger.setMode('production'),
-							this.logger.imageText({
-								url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
-								text: '[0.8.0]',
-								style: 'color: ' + this.logger.colors.indigo + '; font-weight: bold;',
-							}),
-							Object.keys((null === (_d = this.config) || void 0 === _d ? void 0 : _d.controllers) || {}).forEach(function (type) {
-								switch (type) {
-									case 'search':
-										_this.config.controllers[type].forEach(function (controller, index) {
-											var _a;
-											try {
-												var cntrlr_1 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_1 = !1,
-													runSearch_1 = function runSearch_1() {
-														searched_1 || (cntrlr_1.search(), (searched_1 = !0));
-													};
-												null === (_a = null == controller ? void 0 : controller.targets) ||
-													void 0 === _a ||
-													_a.forEach(function (target, target_index) {
-														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
-														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														target.prefetch && runSearch_1(),
-															cntrlr_1.createTargeter(Snap_assign({ controller: cntrlr_1 }, target), function (target, elem, originalElem) {
-																return Snap_awaiter(_this, void 0, void 0, function () {
-																	var onTarget, Component;
-																	return Snap_generator(this, function (_a) {
-																		switch (_a.label) {
-																			case 0:
-																				return (
-																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_1(), [4, target.component()]
-																				);
-																			case 1:
-																				return (
-																					(Component = _a.sent()),
-																					setTimeout(function () {
-																						(0,
-																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_1 }, target.props), void 0), elem);
-																					}),
-																					[2]
-																				);
-																		}
-																	});
-																});
-															});
-													});
-											} catch (err) {
-												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
-											}
-										});
-										break;
-									case 'autocomplete':
-										_this.config.controllers[type].forEach(function (controller, index) {
-											var _a;
-											try {
-												var cntrlr_2 = _this.createController(type, controller.config, controller.services, controller.url);
-												null === (_a = null == controller ? void 0 : controller.targets) ||
-													void 0 === _a ||
-													_a.forEach(function (target, target_index) {
-														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														cntrlr_2.createTargeter(
-															Snap_assign(
-																{
-																	controller: cntrlr_2,
-																	inject: {
-																		action: 'after',
-																		element: function element() {
-																			var acContainer = document.createElement('div');
-																			return (
-																				(acContainer.className = 'ss__autocomplete--target'),
-																				acContainer.addEventListener('click', function (e) {
-																					e.stopPropagation();
-																				}),
-																				acContainer
-																			);
-																		},
-																	},
-																},
-																target
-															),
-															function (target, elem, originalElem) {
-																return Snap_awaiter(_this, void 0, void 0, function () {
-																	var onTarget, Component;
-																	return Snap_generator(this, function (_a) {
-																		switch (_a.label) {
-																			case 0:
-																				return (
-																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem),
-																					cntrlr_2.bind(),
-																					[4, target.component()]
-																				);
-																			case 1:
-																				return (
-																					(Component = _a.sent()),
-																					setTimeout(function () {
-																						(0,
-																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_2, input: originalElem }, target.props), void 0), elem);
-																					}),
-																					[2]
-																				);
-																		}
-																	});
-																});
-															}
-														);
-													});
-											} catch (err) {
-												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
-											}
-										});
-										break;
-									case 'finder':
-										_this.config.controllers[type].forEach(function (controller, index) {
-											var _a;
-											try {
-												var cntrlr_3 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_2 = !1,
-													runSearch_2 = function runSearch_2() {
-														searched_2 || (cntrlr_3.search(), (searched_2 = !0));
-													};
-												null === (_a = null == controller ? void 0 : controller.targets) ||
-													void 0 === _a ||
-													_a.forEach(function (target, target_index) {
-														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
-														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														target.prefetch && runSearch_2(),
-															cntrlr_3.createTargeter(Snap_assign({ controller: cntrlr_3 }, target), function (target, elem, originalElem) {
-																return Snap_awaiter(_this, void 0, void 0, function () {
-																	var onTarget, Component;
-																	return Snap_generator(this, function (_a) {
-																		switch (_a.label) {
-																			case 0:
-																				return (
-																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_2(), [4, target.component()]
-																				);
-																			case 1:
-																				return (
-																					(Component = _a.sent()),
-																					setTimeout(function () {
-																						(0,
-																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_3 }, target.props), void 0), elem);
-																					}),
-																					[2]
-																				);
-																		}
-																	});
-																});
-															});
-													});
-											} catch (err) {
-												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
-											}
-										});
-										break;
-									case 'recommendation':
-										_this.config.controllers[type].forEach(function (controller, index) {
-											var _a;
-											try {
-												var cntrlr_4 = _this.createController(type, controller.config, controller.services, controller.url),
-													searched_3 = !1,
-													runSearch_3 = function runSearch_3() {
-														searched_3 || (cntrlr_4.search(), (searched_3 = !0));
-													};
-												null === (_a = null == controller ? void 0 : controller.targets) ||
-													void 0 === _a ||
-													_a.forEach(function (target, target_index) {
-														if (!target.selector) throw new Error('Targets at index ' + target_index + ' missing selector value (string).');
-														if (!target.component) throw new Error('Targets at index ' + target_index + ' missing component value (Component).');
-														target.prefetch && runSearch_3(),
-															cntrlr_4.createTargeter(Snap_assign({ controller: cntrlr_4 }, target), function (target, elem, originalElem) {
-																return Snap_awaiter(_this, void 0, void 0, function () {
-																	var onTarget, Component;
-																	return Snap_generator(this, function (_a) {
-																		switch (_a.label) {
-																			case 0:
-																				return (
-																					(onTarget = target.onTarget) && onTarget(target, elem, originalElem), runSearch_3(), [4, target.component()]
-																				);
-																			case 1:
-																				return (
-																					(Component = _a.sent()),
-																					setTimeout(function () {
-																						(0,
-																						preact_module.sY)((0, jsxRuntime_module.tZ)(Component, Snap_assign({ controller: cntrlr_4 }, target.props), void 0), elem);
-																					}),
-																					[2]
-																				);
-																		}
-																	});
-																});
-															});
-													});
-											} catch (err) {
-												_this.logger.error('Failed to instantiate ' + type + ' controller at index ' + index + '.', err);
-											}
-										});
-								}
-							}),
-							null === (_f = null === (_e = this.config) || void 0 === _e ? void 0 : _e.instantiators) || void 0 === _f ? void 0 : _f.recommendation)
-						)
-							try {
-								this.recommendations = new RecommendationInstantiator(config.instantiators.recommendation, {
-									client: this.client,
-									tracker: this.tracker,
-									logger: this.logger,
-								});
-							} catch (err) {
-								this.logger.error('Failed to create Recommendations Instantiator.', err);
-							}
-					}
-					return (
-						(Snap.prototype.createController = function (type, config, services, url) {
-							var translatorConfig = cjs_default()(this.config.url || {}, url || {});
-							switch (type) {
-								case 'search':
-									var urlManager =
-											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker),
-										cntrlr = new SearchController(config, {
-											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new SearchStore(config, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || this.tracker,
-										});
-									return (this.controllers[cntrlr.config.id] = cntrlr), cntrlr;
-								case 'autocomplete':
-									(urlManager =
-										(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach()),
-										(cntrlr = new AutocompleteController(config, {
-											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new AutocompleteStore(config, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || this.tracker,
-										}));
-									return (this.controllers[cntrlr.config.id] = cntrlr), cntrlr;
-								case 'finder':
-									(urlManager =
-										(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(!0)),
-										(cntrlr = new FinderController(config, {
-											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new FinderStore(config, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || this.tracker,
-										}));
-									return (this.controllers[cntrlr.config.id] = cntrlr), cntrlr;
-								case 'recommendation':
-									(urlManager =
-										(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(translatorConfig), reactLinker).detach(!0)),
-										(cntrlr = new RecommendationController(config, {
-											client: (null == services ? void 0 : services.client) || this.client,
-											store: (null == services ? void 0 : services.store) || new RecommendationStore(config, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || this.tracker,
-										}));
-									return (this.controllers[cntrlr.config.id] = cntrlr), cntrlr;
-							}
+							enumerable: !1,
+							configurable: !0,
 						}),
-						Snap
+						SearchController
 					);
+				})(AbstractController),
+				QueryStore_QueryStore = function QueryStore(services, search) {
+					var observables = {};
+					(null == search ? void 0 : search.query) &&
+						((this.query = new QueryStore_Query(services, search.query)), (observables.query = mobx_esm.LO)),
+						(null == search ? void 0 : search.didYouMean) &&
+							((this.didYouMean = new QueryStore_Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
+						(null == search ? void 0 : search.originalQuery) &&
+							((this.originalQuery = new QueryStore_Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
+						(0, mobx_esm.rC)(this, observables);
+				},
+				QueryStore_Query = function Query(services, query) {
+					(this.string = query),
+						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
+						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
+				},
+				SearchStore_extends = (function () {
+					var _extendStatics = function extendStatics(d, b) {
+						return (
+							(_extendStatics =
+								Object.setPrototypeOf ||
+								({ __proto__: [] } instanceof Array &&
+									function (d, b) {
+										d.__proto__ = b;
+									}) ||
+								function (d, b) {
+									for (var p in b) Object.prototype.hasOwnProperty.call(b, p) && (d[p] = b[p]);
+								}),
+							_extendStatics(d, b)
+						);
+					};
+					return function (d, b) {
+						if ('function' != typeof b && null !== b) throw new TypeError('Class extends value ' + String(b) + ' is not a constructor or null');
+						function __() {
+							this.constructor = d;
+						}
+						_extendStatics(d, b), (d.prototype = null === b ? Object.create(b) : ((__.prototype = b.prototype), new __()));
+					};
 				})(),
-				snapify_awaiter = function (thisArg, _arguments, P, generator) {
+				SearchStore = (function (_super) {
+					function SearchStore(config, services) {
+						var _a,
+							_this = _super.call(this, config) || this;
+						if (
+							((_this.meta = {}),
+							'object' != typeof services || 'function' != typeof (null === (_a = services.urlManager) || void 0 === _a ? void 0 : _a.subscribe))
+						)
+							throw new Error('Invalid service \'urlManager\' passed to SearchStore. Missing "subscribe" function.');
+						return (
+							(_this.services = services),
+							(_this.storage = new StorageStore()),
+							_this.update({ meta: _this.meta }),
+							(0, mobx_esm.rC)(_this, {
+								search: mobx_esm.LO,
+								merchandising: mobx_esm.LO,
+								facets: mobx_esm.LO,
+								filters: mobx_esm.LO,
+								results: mobx_esm.LO,
+								pagination: mobx_esm.LO,
+								sorting: mobx_esm.LO,
+							}),
+							_this
+						);
+					}
+					return (
+						SearchStore_extends(SearchStore, _super),
+						(SearchStore.prototype.update = function (data) {
+							(this.data = JSON.parse(JSON.stringify(data))),
+								(this.loaded = !!data.pagination),
+								(this.meta = data.meta),
+								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
+								(this.search = new QueryStore_QueryStore(this.services, data.search)),
+								(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
+								(this.filters = new FilterStore(this.services, data.filters, this.meta)),
+								(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+								(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
+								(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+						}),
+						SearchStore
+					);
+				})(AbstractStore);
+			var snapify_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
 							try {
@@ -25440,7 +24139,7 @@
 					}
 				},
 				controllers = {},
-				snap = new Snap({ client: { globals: { siteId: '8uyt2m' } }, controllers: {} }),
+				client = { globals: { siteId: '8uyt2m' } },
 				Snapify = (function () {
 					function Snapify() {}
 					return (
@@ -25448,7 +24147,19 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('recommendation', config));
+							var cntrlr = (controllers[id] = (function (config, services) {
+								var urlManager =
+									(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach(!0);
+								return new RecommendationController(config.controller, {
+									client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+									store: (null == services ? void 0 : services.store) || new RecommendationStore(config.controller, { urlManager }),
+									urlManager,
+									eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+									profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+									logger: (null == services ? void 0 : services.logger) || new Logger(),
+									tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+								});
+							})({ client, controller: config }));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
@@ -25473,7 +24184,19 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('autocomplete', config));
+							var cntrlr = (controllers[id] = (function (config, services) {
+								var urlManager =
+									(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();
+								return new AutocompleteController(config.controller, {
+									client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+									store: (null == services ? void 0 : services.store) || new AutocompleteStore(config.controller, { urlManager }),
+									urlManager,
+									eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+									profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+									logger: (null == services ? void 0 : services.logger) || new Logger(),
+									tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+								});
+							})({ client, controller: config }));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
@@ -25498,7 +24221,18 @@
 							var _this = this,
 								id = config.id;
 							if (controllers[id]) return controllers[id];
-							var cntrlr = (controllers[id] = snap.createController('search', config));
+							var cntrlr = (controllers[id] = (function (config, services) {
+								var urlManager = (null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker);
+								return new SearchController(config.controller, {
+									client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+									store: (null == services ? void 0 : services.store) || new SearchStore(config.controller, { urlManager }),
+									urlManager,
+									eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+									profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+									logger: (null == services ? void 0 : services.logger) || new Logger(),
+									tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+								});
+							})({ client, controller: config }));
 							return (
 								cntrlr.on('afterStore', function (_a, next) {
 									var controller = _a.controller;
@@ -26582,7 +25316,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[326],
+			[87],
 			() => (
 				__webpack_exec__(47513),
 				__webpack_exec__(68260),

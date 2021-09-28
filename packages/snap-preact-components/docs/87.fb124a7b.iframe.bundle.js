@@ -1,6 +1,6 @@
-/*! For license information please see 326.6b0c0931.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 87.fb124a7b.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[326],
+	[87],
 	{
 		10003: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -41353,37 +41353,6 @@
 				return 'function' == typeof t ? t(n) : t;
 			}
 		},
-		10348: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { tZ: () => e });
-			var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33847),
-				o = 0;
-			function e(_, e, n, t, f) {
-				var l,
-					s,
-					u = {};
-				for (s in e) 'ref' == s ? (l = e[s]) : (u[s] = e[s]);
-				var a = {
-					type: _,
-					props: u,
-					key: n,
-					ref: l,
-					__k: null,
-					__: null,
-					__b: 0,
-					__e: null,
-					__d: void 0,
-					__c: null,
-					__h: null,
-					constructor: void 0,
-					__v: --o,
-					__source: t,
-					__self: f,
-				};
-				if ('function' == typeof _ && (l = _.defaultProps)) for (s in l) void 0 === u[s] && (u[s] = l[s]);
-				return preact__WEBPACK_IMPORTED_MODULE_0__.YM.vnode && preact__WEBPACK_IMPORTED_MODULE_0__.YM.vnode(a), a;
-			}
-		},
 		93821: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			__webpack_require__(64087)();
@@ -53514,4 +53483,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=326.6b0c0931.iframe.bundle.js.map
+//# sourceMappingURL=87.fb124a7b.iframe.bundle.js.map

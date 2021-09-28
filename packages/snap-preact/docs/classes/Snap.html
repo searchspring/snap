@@ -86,11 +86,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#_controllerPromises" class="tsd-kind-icon">_controller<wbr>Promises</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#client" class="tsd-kind-icon">client</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#controllers" class="tsd-kind-icon">controllers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#getRecommendations" class="tsd-kind-icon">get<wbr>Recommendations</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#logger" class="tsd-kind-icon">logger</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#recommendations" class="tsd-kind-icon">recommendations</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Snap.html#tracker" class="tsd-kind-icon">tracker</a></li>
 							</ul>
 						</section>
@@ -98,6 +99,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Snap.html#createController" class="tsd-kind-icon">create<wbr>Controller</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Snap.html#getController" class="tsd-kind-icon">get<wbr>Controller</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Snap.html#getControllers" class="tsd-kind-icon">get<wbr>Controllers</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L88">Snap.tsx:88</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L145">Snap.tsx:145</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -132,12 +135,30 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_controllerPromises" class="tsd-anchor"></a>
+					<h3>_controller<wbr>Promises</h3>
+					<div class="tsd-signature tsd-kind-icon">_controller<wbr>Promises<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L87">Snap.tsx:87</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>controllerConfigId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="client" class="tsd-anchor"></a>
 					<h3>client</h3>
 					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Client</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L81">Snap.tsx:81</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L85">Snap.tsx:85</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../modules.html#SnapConfig" class="tsd-signature-type" data-tsd-kind="Type alias">SnapConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L79">Snap.tsx:79</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L83">Snap.tsx:83</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,17 +178,27 @@
 					<div class="tsd-signature tsd-kind-icon">controllers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L83">Snap.tsx:83</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L91">Snap.tsx:91</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>controllerConfigId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">SearchController</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AutocompleteController</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FinderController</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RecommendationController</span></h5>
+								<h5><span class="tsd-signature-symbol">[</span>controllerConfigId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">ControllerTypes</span></h5>
 							</li>
 						</ul>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="getRecommendations" class="tsd-anchor"></a>
+					<h3>get<wbr>Recommendations</h3>
+					<div class="tsd-signature tsd-kind-icon">get<wbr>Recommendations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RecommendationInstantiator</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L95">Snap.tsx:95</a></li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="logger" class="tsd-anchor"></a>
@@ -175,17 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Logger</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L80">Snap.tsx:80</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="recommendations" class="tsd-anchor"></a>
-					<h3>recommendations</h3>
-					<div class="tsd-signature tsd-kind-icon">recommendations<span class="tsd-signature-symbol">:</span> <a href="RecommendationInstantiator.html" class="tsd-signature-type" data-tsd-kind="Class">RecommendationInstantiator</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L86">Snap.tsx:86</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L84">Snap.tsx:84</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -195,7 +216,7 @@
 					<div class="tsd-signature tsd-kind-icon">tracker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Tracker</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L82">Snap.tsx:82</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L86">Snap.tsx:86</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -206,31 +227,95 @@
 					<a name="createController" class="tsd-anchor"></a>
 					<h3>create<wbr>Controller</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Controller<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControllerConfigs</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span>, url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbstractController</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Controller<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicImportNames</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControllerConfigs</span>, services<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapControllerServices</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L330">Snap.tsx:330</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L107">Snap.tsx:107</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>type: <span class="tsd-signature-type">string</span></h5>
+									<h5>type: <span class="tsd-signature-type">DynamicImportNames</span></h5>
 								</li>
 								<li>
 									<h5>config: <span class="tsd-signature-type">ControllerConfigs</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
+									<h5>services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> url: <span class="tsd-signature-type">UrlTranslatorConfig</span></h5>
+									<h5>resolve: <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AbstractController</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getController" class="tsd-anchor"></a>
+					<h3>get<wbr>Controller</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Controller<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L97">Snap.tsx:97</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getControllers" class="tsd-anchor"></a>
+					<h3>get<wbr>Controllers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Controllers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>controllerIds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L101">Snap.tsx:101</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>controllerIds: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ControllerTypes</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -246,9 +331,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="RecommendationInstantiator.html" class="tsd-kind-icon">Recommendation<wbr>Instantiator</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -256,6 +338,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="Snap.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="Snap.html#_controllerPromises" class="tsd-kind-icon">_controller<wbr>Promises</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="Snap.html#client" class="tsd-kind-icon">client</a>
@@ -267,10 +352,10 @@
 								<a href="Snap.html#controllers" class="tsd-kind-icon">controllers</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="Snap.html#logger" class="tsd-kind-icon">logger</a>
+								<a href="Snap.html#getRecommendations" class="tsd-kind-icon">get<wbr>Recommendations</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="Snap.html#recommendations" class="tsd-kind-icon">recommendations</a>
+								<a href="Snap.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="Snap.html#tracker" class="tsd-kind-icon">tracker</a>
@@ -278,12 +363,30 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Snap.html#createController" class="tsd-kind-icon">create<wbr>Controller</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Snap.html#getController" class="tsd-kind-icon">get<wbr>Controller</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Snap.html#getControllers" class="tsd-kind-icon">get<wbr>Controllers</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#SnapConfig" class="tsd-kind-icon">Snap<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="../modules.html#createAutocompleteController" class="tsd-kind-icon">create<wbr>Autocomplete<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="../modules.html#createFinderController" class="tsd-kind-icon">create<wbr>Finder<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="../modules.html#createRecommendationsController" class="tsd-kind-icon">create<wbr>Recommendations<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="../modules.html#createSearchController" class="tsd-kind-icon">create<wbr>Search<wbr>Controller</a>
 					</li>
 				</ul>
 			</nav>

@@ -64,7 +64,6 @@
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class"><a href="classes/RecommendationInstantiator.html" class="tsd-kind-icon">Recommendation<wbr>Instantiator</a></li>
 								<li class="tsd-kind-class"><a href="classes/Snap.html" class="tsd-kind-icon">Snap</a></li>
 							</ul>
 						</section>
@@ -72,6 +71,15 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias"><a href="modules.html#SnapConfig" class="tsd-kind-icon">Snap<wbr>Config</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property"><a href="modules.html#createAutocompleteController" class="tsd-kind-icon">create<wbr>Autocomplete<wbr>Controller</a></li>
+								<li class="tsd-kind-property"><a href="modules.html#createFinderController" class="tsd-kind-icon">create<wbr>Finder<wbr>Controller</a></li>
+								<li class="tsd-kind-property"><a href="modules.html#createRecommendationsController" class="tsd-kind-icon">create<wbr>Recommendations<wbr>Controller</a></li>
+								<li class="tsd-kind-property"><a href="modules.html#createSearchController" class="tsd-kind-icon">create<wbr>Search<wbr>Controller</a></li>
 							</ul>
 						</section>
 					</div>
@@ -82,10 +90,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="SnapConfig" class="tsd-anchor"></a>
 					<h3>Snap<wbr>Config</h3>
-					<div class="tsd-signature tsd-kind-icon">Snap<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ClientConfig</span><span class="tsd-signature-symbol">; </span>globals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClientGlobals</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>controllers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>instantiators<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RecommendationInstantiatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Snap<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ClientConfig</span><span class="tsd-signature-symbol">; </span>globals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClientGlobals</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>controllers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>instantiators<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RecommendationInstantiatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/6fa2660e/packages/snap-preact/src/Snap.tsx#L40">Snap.tsx:40</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/27020180/packages/snap-preact/src/Snap.tsx#L37">Snap.tsx:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -103,19 +111,19 @@
 								</ul>
 							</li>
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> controllers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> controllers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter">
-										<h5><span class="tsd-flag ts-flagOptional">Optional</span> autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> autocomplete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 									<li class="tsd-parameter">
-										<h5><span class="tsd-flag ts-flagOptional">Optional</span> finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> finder<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 									<li class="tsd-parameter">
-										<h5><span class="tsd-flag ts-flagOptional">Optional</span> recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> recommendation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 									<li class="tsd-parameter">
-										<h5><span class="tsd-flag ts-flagOptional">Optional</span> search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targets<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> search<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchControllerConfig</span><span class="tsd-signature-symbol">; </span>services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">; </span>targeters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ExtendedTarget</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UrlTranslatorConfig</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 								</ul>
 							</li>
@@ -134,6 +142,133 @@
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property">
+					<a name="createAutocompleteController" class="tsd-anchor"></a>
+					<h3>create<wbr>Autocomplete<wbr>Controller</h3>
+					<div class="tsd-signature tsd-kind-icon">create<wbr>Autocomplete<wbr>Controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapAutocompleteControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">AutocompleteController</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapAutocompleteControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AutocompleteController</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>config: <span class="tsd-signature-type">SnapAutocompleteControllerConfig</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AutocompleteController</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property">
+					<a name="createFinderController" class="tsd-anchor"></a>
+					<h3>create<wbr>Finder<wbr>Controller</h3>
+					<div class="tsd-signature tsd-kind-icon">create<wbr>Finder<wbr>Controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapFinderControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">FinderController</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapFinderControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FinderController</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>config: <span class="tsd-signature-type">SnapFinderControllerConfig</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FinderController</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property">
+					<a name="createRecommendationsController" class="tsd-anchor"></a>
+					<h3>create<wbr>Recommendations<wbr>Controller</h3>
+					<div class="tsd-signature tsd-kind-icon">create<wbr>Recommendations<wbr>Controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapRecommendationControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">RecommendationController</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapRecommendationControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendationController</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>config: <span class="tsd-signature-type">SnapRecommendationControllerConfig</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RecommendationController</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property">
+					<a name="createSearchController" class="tsd-anchor"></a>
+					<h3>create<wbr>Search<wbr>Controller</h3>
+					<div class="tsd-signature tsd-kind-icon">create<wbr>Search<wbr>Controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapSearchControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">SearchController</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SnapSearchControllerConfig</span>, services<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SnapControllerServices</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchController</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>config: <span class="tsd-signature-type">SnapSearchControllerConfig</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> services: <span class="tsd-signature-type">SnapControllerServices</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SearchController</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
@@ -146,13 +281,22 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/RecommendationInstantiator.html" class="tsd-kind-icon">Recommendation<wbr>Instantiator</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/Snap.html" class="tsd-kind-icon">Snap</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#SnapConfig" class="tsd-kind-icon">Snap<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#createAutocompleteController" class="tsd-kind-icon">create<wbr>Autocomplete<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#createFinderController" class="tsd-kind-icon">create<wbr>Finder<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#createRecommendationsController" class="tsd-kind-icon">create<wbr>Recommendations<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#createSearchController" class="tsd-kind-icon">create<wbr>Search<wbr>Controller</a>
 					</li>
 				</ul>
 			</nav>
