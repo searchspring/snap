@@ -64,7 +64,9 @@ export class RecommendationInstantiator {
 		this.targeter = new DomTargeter(
 			[
 				{
-					selector: `script[type="searchspring/recommend"]${this.config.selector ? ` , ${this.config.selector}` : ''}`,
+					selector: `script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]${
+						this.config.selector ? ` , ${this.config.selector}` : ''
+					}`,
 					inject: {
 						action: 'before',
 						element: (target, origElement) => {
@@ -140,20 +142,23 @@ export class RecommendationInstantiator {
 				this.controllers[recs.config.id] = recs;
 
 				const profileVars = recs.store.profile.display.templateParameters;
+				const component = recs.store.profile.display.template?.component;
 
 				if (!profileVars) {
 					recs.log.error(`profile failed to load!`);
 					return;
 				}
 
-				if (!profileVars.component) {
+				if (!component) {
 					recs.log.error(`template does not support components!`);
+					return;
 				}
 
-				const RecommendationsComponent = this.config.components && (await this.config.components[profileVars.component]());
+				const RecommendationsComponent = this.config.components && (await this.config.components[component]());
 
 				if (!RecommendationsComponent) {
 					recs.log.error(`component '${profileVars.component}' not found!`);
+					return;
 				}
 
 				setTimeout(() => {
