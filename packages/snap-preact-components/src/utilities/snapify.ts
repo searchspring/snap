@@ -1,23 +1,27 @@
 import { h, render } from 'preact';
 /* searchspring imports */
-import { Snap } from '@searchspring/snap-preact';
-import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+import { createSearchController, createAutocompleteController, createRecommendationsController } from '@searchspring/snap-preact';
+import type {
+	SearchController,
+	AutocompleteController,
+	RecommendationController,
+	SearchControllerConfig,
+	AutocompleteControllerConfig,
+	RecommendationControllerConfig,
+} from '@searchspring/snap-controller';
 
 const controllers = {};
-const snap = new Snap({
-	client: {
-		globals: { siteId: '8uyt2m' },
-	},
-	controllers: {},
-});
+const client = {
+	globals: { siteId: '8uyt2m' },
+};
 export class Snapify {
-	static recommendation(config): RecommendationController {
+	static recommendation(config: RecommendationControllerConfig): RecommendationController {
 		const id = config.id;
 		if (controllers[id]) {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('recommendation', config)) as RecommendationController;
+		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController({ client, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.log.debug('controller', controller);
@@ -29,13 +33,13 @@ export class Snapify {
 
 		return cntrlr;
 	}
-	static autocomplete(config): AutocompleteController {
+	static autocomplete(config: AutocompleteControllerConfig): AutocompleteController {
 		const id = config.id;
 		if (controllers[id]) {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('autocomplete', config)) as AutocompleteController;
+		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
 			controller.log.debug('controller', controller);
@@ -48,13 +52,13 @@ export class Snapify {
 		return cntrlr;
 	}
 
-	static search(config): SearchController {
+	static search(config: SearchControllerConfig): SearchController {
 		const id = config.id;
 		if (controllers[id]) {
 			return controllers[id];
 		}
 
-		const cntrlr = (controllers[id] = snap.createController('search', config)) as SearchController;
+		const cntrlr: SearchController = (controllers[id] = createSearchController({ client, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);

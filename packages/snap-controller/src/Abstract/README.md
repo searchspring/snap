@@ -25,6 +25,24 @@ Attribute set by the controller config.
 ## type
 Attribute set by the extending class.
 
+## environment
+This is both a getter and a setter. Allows for setting an environment level which is used internally to hide certain logs. Possible values: `production` or `development` (LogMode enum)
+
+## initialized
+This is a getter that will return a boolean to determine if the `init` method has been invoked.
+
+## targeters
+An object containing all of the DomTargeter objects that are linked to this controller. Targeters can be added via the `addTargeter` method, or created via the `createTargeter` method. Targets are keyed by the first target's `name` or `selector`
+
+## retarget
+This method is used to invoke the `retarget` method each of the `targeters` entries.
+
+## addTargeter
+This method will add a given target (DomTargeter instance) to the `targeters` object if it does not already exist. 
+
+## createTargeter
+This method given the same parameters as DomTargeter, will create a new target (DomTargeter instance) and also invoke `addTargeter` to add the target to the `targeters` object.
+
 ## search
 This is an abstract method that must be defined in the subclass.
 

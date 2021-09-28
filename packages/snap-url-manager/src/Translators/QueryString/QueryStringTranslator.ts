@@ -1,7 +1,7 @@
 import { UrlState, Translator, TranslatorConfig, RangeValueProperties, UrlStateFilterType } from '../../types';
 
 import Immutable from 'seamless-immutable';
-import { ImmutableObject } from 'seamless-immutable';
+import type { ImmutableObject } from 'seamless-immutable';
 
 type QueryParameter = {
 	key: Array<string>;
