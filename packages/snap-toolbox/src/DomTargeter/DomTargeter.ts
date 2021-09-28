@@ -40,6 +40,10 @@ export class DomTargeter {
 		}
 	}
 
+	getTargets(): Array<Target> {
+		return this.targets;
+	}
+
 	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
 			// hide targets before found
