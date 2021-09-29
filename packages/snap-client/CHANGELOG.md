@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/searchspring/snap/compare/v0.9.0...v0.9.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **client-recs-api:** enabling POST/GET change based on payload size ([0126736](https://github.com/searchspring/snap/commit/0126736c0b8121d5edd5a3a2e3145ae0eeb5c9c3))
+
+
+
+
+
 # [0.9.0](https://github.com/searchspring/snap/compare/v0.8.0...v0.9.0) (2021-09-28)
 
 **Note:** Version bump only for package @searchspring/snap-client
