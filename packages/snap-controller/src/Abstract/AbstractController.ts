@@ -38,7 +38,7 @@ export abstract class AbstractController {
 	}
 
 	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
-		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_]*$/)) {
+		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_-]*$/)) {
 			throw new Error(`Invalid config passed to controller. The "id" attribute must be an alphanumeric string.`);
 		}
 
