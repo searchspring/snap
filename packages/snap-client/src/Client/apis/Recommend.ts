@@ -123,8 +123,7 @@ export class RecommendAPI extends API {
 		window.clearTimeout(paramBatch.timeout);
 
 		paramBatch.timeout = window.setTimeout(async () => {
-			// TODO change to get as default
-			let requestMethod = 'postRecommendations';
+			let requestMethod = 'getRecommendations';
 			if (charsParams(paramBatch.request) > 1024) {
 				requestMethod = 'postRecommendations';
 			}
