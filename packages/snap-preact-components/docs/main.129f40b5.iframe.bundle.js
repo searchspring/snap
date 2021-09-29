@@ -17664,7 +17664,7 @@
 							(this.targeters = {}),
 							(this._initialized = !1),
 							(this._environment = LogMode.PRODUCTION),
-							'object' != typeof config || 'string' != typeof config.id || !config.id.match(/^[a-zA-Z0-9_]*$/))
+							'object' != typeof config || 'string' != typeof config.id || !config.id.match(/^[a-zA-Z0-9_-]*$/))
 						)
 							throw new Error('Invalid config passed to controller. The "id" attribute must be an alphanumeric string.');
 						if ('object' != typeof client || 'function' != typeof client.search)
@@ -19757,7 +19757,7 @@
 														return Recommend_generator(this, function (_a) {
 															switch (_a.label) {
 																case 0:
-																	(requestMethod = 'postRecommendations'),
+																	(requestMethod = 'getRecommendations'),
 																		(function charsParams(params) {
 																			if ('object' != typeof params) throw new Error('function requires an object');
 																			return Object.keys(params).reduce(function (count, key) {
@@ -21683,7 +21683,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.0' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.1' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -21713,7 +21713,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.1');
 						}),
 						(this.track = {
 							event: function event(payload) {
