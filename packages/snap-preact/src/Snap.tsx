@@ -108,6 +108,7 @@ export class Snap {
 		type: DynamicImportNames,
 		config: ControllerConfigs,
 		services: SnapControllerServices,
+		urlConfig: UrlTranslatorConfig,
 		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void
 	): Promise<ControllerTypes> => {
 		let importPromise;
@@ -130,7 +131,7 @@ export class Snap {
 			if (!this.controllers[config.id]) {
 				this.controllers[config.id] = _.default(
 					{
-						url: deepmerge(this.config.url || {}, config.url || {}),
+						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
 					},
 					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
@@ -192,7 +193,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.SEARCH, controller.config, controller.services, resolve);
+									this.createController(DynamicImportNames.SEARCH, controller.config, controller.services, controller.url, resolve);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -203,14 +204,26 @@ export class Snap {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
 									if (target.prefetch) {
-										const cntrlr = await this.createController(DynamicImportNames.SEARCH, controller.config, controller.services, resolve);
+										const cntrlr = await this.createController(
+											DynamicImportNames.SEARCH,
+											controller.config,
+											controller.services,
+											controller.url,
+											resolve
+										);
 										runSearch();
-										cntrlr.createTargeter({ ...target }, targetFunction);
+										cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
 									} else {
 										const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-											const cntrlr = await this.createController(DynamicImportNames.SEARCH, controller.config, controller.services, resolve);
+											const cntrlr = await this.createController(
+												DynamicImportNames.SEARCH,
+												controller.config,
+												controller.services,
+												controller.url,
+												resolve
+											);
 											runSearch();
-											targetFunction(target, elem, originalElem);
+											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
 											cntrlr.addTargeter(targeter);
 										});
 									}
@@ -242,7 +255,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, resolve);
+									this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, controller.url, resolve);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -270,9 +283,15 @@ export class Snap {
 											},
 										],
 										async (target, elem, originalElem) => {
-											const cntrlr = await this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, resolve);
+											const cntrlr = await this.createController(
+												DynamicImportNames.AUTOCOMPLETE,
+												controller.config,
+												controller.services,
+												controller.url,
+												resolve
+											);
 											(cntrlr as AutocompleteController).bind();
-											targetFunction(target, elem, originalElem);
+											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
 											cntrlr.addTargeter(targeter);
 										}
 									);
@@ -308,7 +327,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.FINDER, controller.config, controller.services, resolve);
+									this.createController(DynamicImportNames.FINDER, controller.config, controller.services, controller.url, resolve);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -319,9 +338,15 @@ export class Snap {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
 									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(DynamicImportNames.FINDER, controller.config, controller.services, resolve);
+										const cntrlr = await this.createController(
+											DynamicImportNames.FINDER,
+											controller.config,
+											controller.services,
+											controller.url,
+											resolve
+										);
 										runSearch();
-										targetFunction(target, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -356,7 +381,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, resolve);
+									this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, controller.url, resolve);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -367,9 +392,15 @@ export class Snap {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
 									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, resolve);
+										const cntrlr = await this.createController(
+											DynamicImportNames.RECOMMENDATION,
+											controller.config,
+											controller.services,
+											controller.url,
+											resolve
+										);
 										runSearch();
-										targetFunction(target, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
 										cntrlr.addTargeter(targeter);
 									});
 								});
