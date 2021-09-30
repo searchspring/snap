@@ -60,6 +60,7 @@ transformSearchResponse.pagination = (response): { pagination: SearchResponseMod
 			page: pagination.currentPage,
 			pageSize: pagination.perPage,
 			defaultPageSize: pagination.defaultPerPage,
+			totalPages: pagination.totalPages,
 		},
 	};
 };

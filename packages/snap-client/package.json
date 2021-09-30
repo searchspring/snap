@@ -22,9 +22,6 @@
 	"dependencies": {
 		"whatwg-fetch": "^3.6.2"
 	},
-	"devDependencies": {
-		"@searchspring/snapi-types": "^0.1.19"
-	},
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
