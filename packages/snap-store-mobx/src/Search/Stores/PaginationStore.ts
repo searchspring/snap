@@ -14,13 +14,20 @@ export class PaginationStore {
 	}[];
 	defaultPageSize: number;
 	totalResults: number;
+	totalPages: number;
 	infinite: boolean;
 	controllerConfig: SearchStoreConfig;
 
 	constructor(
 		config: SearchStoreConfig,
 		services: StoreServices,
-		paginationData: SearchResponseModelPagination = { page: undefined, pageSize: undefined, totalResults: undefined, defaultPageSize: 24 }
+		paginationData: SearchResponseModelPagination = {
+			page: undefined,
+			pageSize: undefined,
+			totalResults: undefined,
+			defaultPageSize: 24,
+			totalPages: undefined,
+		}
 	) {
 		this.services = services;
 		this.controllerConfig = config;
@@ -29,6 +36,7 @@ export class PaginationStore {
 		this.pageSize = paginationData.pageSize;
 		this.totalResults = paginationData.totalResults;
 		this.defaultPageSize = paginationData.defaultPageSize;
+		this.totalPages = paginationData.totalPages;
 
 		this.pageSizeOptions = [
 			{
@@ -49,9 +57,9 @@ export class PaginationStore {
 			page: observable,
 			pageSize: observable,
 			totalResults: observable,
+			totalPages: observable,
 			begin: computed,
 			end: computed,
-			totalPages: computed,
 			multiplePages: computed,
 			current: computed,
 			first: computed,
@@ -76,10 +84,6 @@ export class PaginationStore {
 		}
 
 		return this.pageSize * this.page;
-	}
-
-	get totalPages(): number {
-		return Math.ceil(this.totalResults / this.pageSize);
 	}
 
 	get multiplePages(): boolean {

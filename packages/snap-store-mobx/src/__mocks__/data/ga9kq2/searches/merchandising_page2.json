@@ -7,7 +7,8 @@
     "totalResults": 31,
     "page": 2,
     "defaultPageSize": 30,
-    "pageSize": 30
+    "pageSize": 30,
+    "totalPages":2
   },
   "sorting": [],
   "results": [],

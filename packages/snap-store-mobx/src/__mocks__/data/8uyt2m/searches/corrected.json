@@ -29,7 +29,9 @@
     "totalResults": 1306,
     "page": 1,
     "defaultPageSize": 24,
-    "pageSize": 30
+    "pageSize": 30,
+    "totalPages":44
+
   },
   "sorting": [],
   "results": [
