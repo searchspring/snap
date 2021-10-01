@@ -92,7 +92,13 @@ export class Snap {
 		[controllerConfigId: string]: ControllerTypes;
 	};
 
-	getRecommendations: Promise<RecommendationInstantiator>;
+	_instantiatorPromises: {
+		[instantiatorId: string]: Promise<RecommendationInstantiator>;
+	};
+
+	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
+		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
+	};
 
 	public getController = (id: string): Promise<ControllerTypes> => {
 		return this._controllerPromises[id] || Promise.reject(`getController could not find controller with id: ${id}`);
@@ -153,6 +159,7 @@ export class Snap {
 		this.tracker = new Tracker(this.config.client.globals);
 		this.logger = new Logger('Snap Preact ');
 		this._controllerPromises = {};
+		this._instantiatorPromises = {};
 		this.controllers = {};
 
 		// TODO environment switch using URL?
@@ -416,7 +423,7 @@ export class Snap {
 
 		if (config?.instantiators?.recommendation) {
 			try {
-				this.getRecommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
+				this._instantiatorPromises.recommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
 					return new RecommendationInstantiator(config.instantiators.recommendation, {
 						client: config.instantiators.recommendation?.services?.client || this.client,
 						tracker: config.instantiators.recommendation?.services?.tracker || this.tracker,
