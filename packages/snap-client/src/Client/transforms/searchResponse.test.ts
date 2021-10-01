@@ -309,11 +309,11 @@ describe('search response transformer pagination', () => {
 			pagination: mockPagination,
 		});
 
-		expect(response.pagination.totalResults).toEqual(2138);
-		expect(response.pagination.defaultPageSize).toEqual(42);
-		expect(response.pagination.pageSize).toEqual(24);
-
-		expect(response.pagination.page).toEqual(2);
+		expect(response.pagination.totalResults).toEqual(mockPagination.totalResults);
+		expect(response.pagination.defaultPageSize).toEqual(mockPagination.defaultPerPage);
+		expect(response.pagination.pageSize).toEqual(mockPagination.perPage);
+		expect(response.pagination.totalPages).toEqual(mockPagination.totalPages);
+		expect(response.pagination.page).toEqual(mockPagination.currentPage);
 	});
 
 	it('still returns object if passed undefined', () => {

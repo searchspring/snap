@@ -197,7 +197,7 @@ describe('Pagination Store', () => {
 		pagination.setPageSize(30);
 
 		expect(removeFn).toHaveBeenCalledWith('page');
-		expect(services.urlManager.state.pageSize).toBe(30);
+		expect(services.urlManager.state.pageSize).toEqual(30);
 	});
 
 	it('returns an empty array if min and max pages arent passed into getPages', () => {

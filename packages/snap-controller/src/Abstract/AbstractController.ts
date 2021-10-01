@@ -14,7 +14,7 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
 import type { ControllerServices, ControllerConfig, Attachments } from '../types';
 
-const SS_DEV_COOKIE = 'ssdev';
+const SS_DEV_COOKIE = 'ssDev';
 export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';

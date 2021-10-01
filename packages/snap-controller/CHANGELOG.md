@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/searchspring/snap/compare/v0.9.2...v0.9.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* **dev-cookie:** dev cookie name did not conform to other cookie names 'ssXxx' ([0addc52](https://github.com/searchspring/snap/commit/0addc52b2c72c09a017e573d5685881ebf634e91))
+* **recommendation-controller:** removing duplicated config.globals merge on params ([2782025](https://github.com/searchspring/snap/commit/2782025b4f2023bb69bfb8cb28cf244065687b76))
+
+
+
+
+
 ## [0.9.2](https://github.com/searchspring/snap/compare/v0.9.1...v0.9.2) (2021-09-29)
 
 **Note:** Version bump only for package @searchspring/snap-controller

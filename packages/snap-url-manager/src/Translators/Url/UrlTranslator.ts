@@ -134,18 +134,28 @@ export class UrlTranslator implements Translator {
 			.map((kvPair) => {
 				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
 				return { key: key.split('.'), value, type: ParamLocationType.QUERY };
+			})
+			.filter((param) => {
+				// remove core fields that do not contain a value
+				const isCoreField = this.reverseMapping[param.key[0]];
+				return !isCoreField || (isCoreField && param.value);
 			});
 	}
 
 	protected parseHashString(hashString: string): Array<UrlParameter> {
 		const params = [];
 		const justHashString = hashString.split('#').join('/') || '';
-
 		justHashString
 			.split('/')
 			.filter((v) => v)
 			.map((hashEntries) => {
 				return hashEntries.split(':').map((v) => decodeHashComponent(v));
+			})
+			.filter((param) => {
+				// remove core fields that do not contain a value
+				const [key, value] = param;
+				const isCoreField = this.reverseMapping[key];
+				return !isCoreField || (isCoreField && value);
 			})
 			.forEach((decodedHashEntries) => {
 				if (decodedHashEntries.length == 1) {

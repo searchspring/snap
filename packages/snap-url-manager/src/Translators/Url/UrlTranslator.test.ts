@@ -520,6 +520,38 @@ describe('UrlTranslator', () => {
 			expect(pageTwoParams.query).toEqual('shoes');
 			expect(pageTwoParams.page).toEqual(2);
 		});
+
+		it('deserializes and removes core query parameters with no value', () => {
+			const translator = new UrlTranslator({
+				parameters: {
+					core: {
+						query: { name: 'search' },
+					},
+				},
+			});
+
+			const url = 'http://somesite.com?search=&otherValue=1&otherEmpty=';
+
+			const params: UrlState = translator.deserialize(url);
+
+			expect(params).toEqual({ otherValue: ['1'], otherEmpty: [] });
+		});
+
+		it('deserializes and removes core hash parameters with no value', () => {
+			const translator = new UrlTranslator({
+				parameters: {
+					core: {
+						sort: { name: 'sorting' },
+					},
+				},
+			});
+
+			const url = 'http://somesite.com#/sorting:/otherValue:1/otherEmpty:/';
+
+			const params: UrlState = translator.deserialize(url);
+
+			expect(params).toEqual({ otherValue: ['1'], otherEmpty: [] });
+		});
 	});
 
 	describe('serialize', () => {

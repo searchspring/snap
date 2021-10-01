@@ -2,7 +2,8 @@
   "pagination": {
     "totalResults": 73668,
     "page": 1,
-    "pageSize": 30
+    "pageSize": 30,
+    "totalPages":2463
   },
   "sorting": [],
   "results": [

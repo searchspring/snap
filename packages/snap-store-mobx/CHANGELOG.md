@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/searchspring/snap/compare/v0.9.2...v0.9.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* **paginationstore:** adding support for totalPages in the pagination store ([a867ea4](https://github.com/searchspring/snap/commit/a867ea4e6cc02b2360f281247c5c18c738cc1070))
+
+
+
+
+
 ## [0.9.2](https://github.com/searchspring/snap/compare/v0.9.1...v0.9.2) (2021-09-29)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
