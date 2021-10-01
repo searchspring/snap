@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/searchspring/snap/compare/v0.9.2...v0.9.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* **dev-cookie:** dev cookie name did not conform to other cookie names 'ssXxx' ([0addc52](https://github.com/searchspring/snap/commit/0addc52b2c72c09a017e573d5685881ebf634e91))
+* **paginationstore:** adding support for totalPages in the pagination store ([a867ea4](https://github.com/searchspring/snap/commit/a867ea4e6cc02b2360f281247c5c18c738cc1070))
+* **recommendation-controller:** removing duplicated config.globals merge on params ([2782025](https://github.com/searchspring/snap/commit/2782025b4f2023bb69bfb8cb28cf244065687b76))
+* **snap-preact:** unifying interface to get recommendations instantiator ([14f4c01](https://github.com/searchspring/snap/commit/14f4c0122349c8d1aca258ad2eebd2f85107b246))
+* **urltranslator:** remove core parameters that have empty values ([d48211a](https://github.com/searchspring/snap/commit/d48211a935d82bc89ac3c33ac37bbabe606832f1))
+
+
+
+
+
 ## [0.9.2](https://github.com/searchspring/snap/compare/v0.9.1...v0.9.2) (2021-09-29)
 
 

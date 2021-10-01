@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/searchspring/snap/compare/v0.9.2...v0.9.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* **snap-preact:** unifying interface to get recommendations instantiator ([14f4c01](https://github.com/searchspring/snap/commit/14f4c0122349c8d1aca258ad2eebd2f85107b246))
+
+
+
+
+
 ## [0.9.2](https://github.com/searchspring/snap/compare/v0.9.1...v0.9.2) (2021-09-29)
 
 
