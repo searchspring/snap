@@ -282,7 +282,6 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			console.log('sending params', params);
 			const response = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
