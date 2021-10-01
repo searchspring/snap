@@ -262,7 +262,7 @@ export class RecommendationController extends AbstractController {
 			await this.init();
 		}
 
-		const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
+		const params = this.params;
 
 		try {
 			try {
