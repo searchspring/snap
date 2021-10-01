@@ -262,7 +262,7 @@ export class RecommendationController extends AbstractController {
 			await this.init();
 		}
 
-		const params: Record<string, any> = deepmerge({ ...this.params }, this.config.globals);
+		const params = this.params;
 
 		try {
 			try {
@@ -282,6 +282,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
+			console.log('sending params', params);
 			const response = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
