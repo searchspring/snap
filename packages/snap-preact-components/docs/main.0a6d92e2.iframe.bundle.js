@@ -17708,8 +17708,8 @@
 								? void 0
 								: _b.params.query.filter(function (param) {
 										return 'dev' === param.key;
-								  }).length) > 0 && cookies.set('ssdev', '1', 'Lax', 0);
-						var dev = cookies.get('ssdev');
+								  }).length) > 0 && cookies.set('ssDev', '1', 'Lax', 0);
+						var dev = cookies.get('ssDev');
 						this.environment = '1' === dev ? 'development' : 'production';
 					}
 					return (
@@ -18148,7 +18148,7 @@
 											case 1:
 												_a.sent(), (_a.label = 2);
 											case 2:
-												(params = cjs_default()(__assign({}, this.params), this.config.globals)), (_a.label = 3);
+												(params = this.params), (_a.label = 3);
 											case 3:
 												_a.trys.push([3, 17, , 18]), (_a.label = 4);
 											case 4:
@@ -19127,6 +19127,7 @@
 						page: pagination.currentPage,
 						pageSize: pagination.perPage,
 						defaultPageSize: pagination.defaultPerPage,
+						totalPages: pagination.totalPages,
 					},
 				};
 			}),
@@ -20706,6 +20707,7 @@
 							);
 						}),
 						(UrlTranslator.prototype.parseQueryString = function (queryString) {
+							var _this = this;
 							return (queryString.split('?').pop() || '')
 								.split('&')
 								.filter(function (v) {
@@ -20718,10 +20720,15 @@
 										key = _a[0],
 										value = _a[1];
 									return { key: key.split('.'), value, type: ParamLocationType.QUERY };
+								})
+								.filter(function (param) {
+									var isCoreField = _this.reverseMapping[param.key[0]];
+									return !isCoreField || (isCoreField && param.value);
 								});
 						}),
 						(UrlTranslator.prototype.parseHashString = function (hashString) {
-							var params = [];
+							var _this = this,
+								params = [];
 							return (
 								(hashString.split('#').join('/') || '')
 									.split('/')
@@ -20736,6 +20743,12 @@
 												return string;
 											})(v);
 										});
+									})
+									.filter(function (param) {
+										var key = param[0],
+											value = param[1],
+											isCoreField = _this.reverseMapping[key];
+										return !isCoreField || (isCoreField && value);
 									})
 									.forEach(function (decodedHashEntries) {
 										if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: void 0, type: ParamLocationType.HASH });
@@ -21683,7 +21696,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.2' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.3' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -21713,7 +21726,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.2');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.3');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22668,13 +22681,15 @@
 					(__webpack_require__(33132),
 					(function () {
 						function PaginationStore(config, services, paginationData) {
-							void 0 === paginationData && (paginationData = { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24 }),
+							void 0 === paginationData &&
+								(paginationData = { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24, totalPages: void 0 }),
 								(this.services = services),
 								(this.controllerConfig = config),
 								(this.page = paginationData.page),
 								(this.pageSize = paginationData.pageSize),
 								(this.totalResults = paginationData.totalResults),
 								(this.defaultPageSize = paginationData.defaultPageSize),
+								(this.totalPages = paginationData.totalPages),
 								(this.pageSizeOptions = [
 									{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
 									{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
@@ -22684,9 +22699,9 @@
 									page: mobx_esm.LO,
 									pageSize: mobx_esm.LO,
 									totalResults: mobx_esm.LO,
+									totalPages: mobx_esm.LO,
 									begin: mobx_esm.Fl,
 									end: mobx_esm.Fl,
-									totalPages: mobx_esm.Fl,
 									multiplePages: mobx_esm.Fl,
 									current: mobx_esm.Fl,
 									first: mobx_esm.Fl,
@@ -22711,13 +22726,6 @@
 							Object.defineProperty(PaginationStore.prototype, 'end', {
 								get: function get() {
 									return this.pageSize * this.page > this.totalResults ? this.totalResults : this.pageSize * this.page;
-								},
-								enumerable: !1,
-								configurable: !0,
-							}),
-							Object.defineProperty(PaginationStore.prototype, 'totalPages', {
-								get: function get() {
-									return Math.ceil(this.totalResults / this.pageSize);
 								},
 								enumerable: !1,
 								configurable: !0,
