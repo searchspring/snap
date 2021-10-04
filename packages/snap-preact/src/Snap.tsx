@@ -1,5 +1,6 @@
 import deepmerge from 'deepmerge';
 import { h, render } from 'preact';
+import { configure as configureMobx, extendObservable } from 'mobx';
 
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
@@ -36,6 +37,7 @@ type ExtendedTarget = Target & {
 
 export type SnapConfig = {
 	url?: UrlTranslatorConfig;
+	configureMobx?: MobxConfig;
 	client: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
@@ -70,6 +72,18 @@ export type SnapConfig = {
 		}[];
 	};
 };
+
+interface MobxConfig {
+	useProxies?: 'always' | 'never' | 'ifavailable';
+	enforceActions?: 'always' | 'never' | 'observed';
+	computedRequiresReaction?: boolean;
+	reactionRequiresObservable?: boolean;
+	observableRequiresReaction?: boolean;
+	isolateGlobalState?: boolean;
+	disableErrorBoundaries?: boolean;
+	safeDescriptors?: boolean;
+	reactionScheduler?: (f: () => void) => void;
+}
 
 type ControllerTypes = SearchController | AutocompleteController | FinderController | RecommendationController;
 enum DynamicImportNames {
@@ -153,6 +167,10 @@ export class Snap {
 		this.config = config;
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+		}
+
+		if (this.config.configureMobx) {
+			configureMobx(this.config.configureMobx);
 		}
 
 		this.client = new Client(this.config.client.globals, this.config.client.config);
