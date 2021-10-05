@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -13,7 +13,7 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
-import { defined } from '../../../utilities';
+import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
@@ -83,6 +83,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText,
 		iconOverflowMore,
 		iconOverflowLess,
+		overflowSlot,
 		disableStyles,
 		className,
 		style,
@@ -202,10 +203,10 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	};
 
 	let limitedValues;
-	if ((facet as ValueFacet)?.overflow && limit && !disableOverflow) {
+	if ((facet as ValueFacet)?.overflow && Number.isInteger(limit) && !disableOverflow) {
 		(facet as ValueFacet).overflow.setLimit(limit);
 		limitedValues = (facet as ValueFacet)?.refinedValues;
-	} else if ((facet as ValueFacet)?.overflow && limit) {
+	} else if ((facet as ValueFacet)?.overflow && Number.isInteger(limit)) {
 		limitedValues = (facet as ValueFacet)?.values.slice(0, limit);
 	} else {
 		limitedValues = (facet as ValueFacet)?.values;
@@ -251,8 +252,14 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 
 					{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
 						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
-							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
-							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
+							{overflowSlot ? (
+								cloneWithProps(overflowSlot, { facet })
+							) : (
+								<>
+									<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
+									<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
+								</>
+							)}
 						</div>
 					)}
 				</Dropdown>
@@ -280,6 +287,7 @@ export interface FacetProps extends ComponentProps {
 	iconColor?: string;
 	iconExpand?: IconType | string;
 	limit?: number;
+	overflowSlot?: JSX.Element;
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;

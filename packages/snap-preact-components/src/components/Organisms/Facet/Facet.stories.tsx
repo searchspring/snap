@@ -170,6 +170,14 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
+		overflowSlot: {
+			description: 'Slot for custom overflow (show more/less) button',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		...componentArgs,
 	},
 };
