@@ -69,13 +69,6 @@ const valueProps = {
 <Facet facet={controller.store.facets[0]} valueProps={valueProps} />
 ```
 
-### hideIcon
-The `hideIcon` prop prevents the facet collapse icon from rendering.
-
-```jsx
-<Facet facet={controller.store.facets[0]} hideIcon={true} />
-```
-
 ### iconExpand
 The `iconExpand` prop is the name of the icon to render when the facet is in its collapsed state.
 
@@ -104,18 +97,34 @@ The `showLessText` prop contains the text to display in the facet overflow butto
 <Facet facet={controller.store.facets[0]} showLessText={'Show Less'} />
 ```
 
-### iconshowMoreExpand
-The `iconshowMoreExpand` prop contains the icon name of the facet overflow button when collapsed. Default is `'plus'`
+### iconOverflowMore
+The `iconOverflowMore` prop contains the icon name of the facet overflow button when collapsed. Default is `'plus'`
 
 ```jsx
-<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'plus'} />
+<Facet facet={controller.store.facets[0]} iconOverflowMore={'plus'} />
 ```
 
-### iconshowMoreExpand
-The `iconshowMoreExpand` prop contains the icon name of the facet overflow button when expanded. Default is `'minus'`
+### iconOverflowLess
+The `iconOverflowLess` prop contains the icon name of the facet overflow button when expanded. Default is `'minus'`
 
 ```jsx
-<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'minus'} />
+<Facet facet={controller.store.facets[0]} iconOverflowLess={'minus'} />
+```
+
+### overflowSlot
+The `overflowSlot` prop is a JSX element to used change the display of the show more/less toggle.
+
+```typescript
+const Overflow = (props) => {
+	const facet = props.facet;
+	return (
+		<div>Show { facet.overflow.remaining > 0 ? `${facet.overflow.remaining} ` : ''}{facet.overflow.remaining > 0 ? 'more' : 'less'}...</div>
+	)
+}
+```
+
+```jsx
+<Facet facet={controller.store.facets[0]} overflowSlot={<Overflow/>} />
 ```
 
 ### iconColor

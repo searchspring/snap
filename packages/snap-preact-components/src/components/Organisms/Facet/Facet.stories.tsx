@@ -63,16 +63,6 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideIcon: {
-			description: 'Hide facet header icons',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
 		color: {
 			description: 'Select color',
 			table: {
@@ -152,9 +142,9 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		iconshowMoreExpand: {
+		iconOverflowMore: {
 			defaultValue: 'plus',
-			description: 'Icon for when facet is collapsed',
+			description: 'Icon for when facet can show more',
 			table: {
 				type: {
 					summary: 'string',
@@ -166,9 +156,9 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
-		iconshowLessExpand: {
+		iconOverflowLess: {
 			defaultValue: 'minus',
-			description: 'Icon for when facet is expanded',
+			description: 'Icon for when facet can show less',
 			table: {
 				type: {
 					summary: 'string',
@@ -178,6 +168,14 @@ export default {
 			control: {
 				type: 'select',
 				options: [...Object.keys(iconPaths)],
+			},
+		},
+		overflowSlot: {
+			description: 'Slot for custom overflow (show more/less) button',
+			table: {
+				type: {
+					summary: 'component',
+				},
 			},
 		},
 		...componentArgs,
