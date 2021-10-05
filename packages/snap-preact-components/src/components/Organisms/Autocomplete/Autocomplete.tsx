@@ -445,7 +445,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 					{!hideFacets &&
 						(facetsSlot ? (
-							<div className="ss__autocomplete__facets">{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller })}</div>
+							<div className="ss__autocomplete__facets">
+								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller, valueProps })}
+							</div>
 						) : (
 							facetsToShow.length > 0 && (
 								<>
