@@ -10741,7 +10741,7 @@
 											? (0, emotion_react_browser_esm.tZ)(
 													'div',
 													{ className: 'ss__autocomplete__facets' },
-													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, controller })
+													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, controller, valueProps })
 											  )
 											: facetsToShow.length > 0 &&
 											  (0, emotion_react_browser_esm.tZ)(
@@ -11475,19 +11475,6 @@
 							'<Facet facet={controller.store.facets[0]} valueProps={valueProps} />\n'
 						)
 					),
-					(0, esm.kt)('h3', { id: 'hideicon' }, 'hideIcon'),
-					(0, esm.kt)(
-						'p',
-						null,
-						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideIcon'),
-						' prop prevents the facet collapse icon from rendering.'
-					),
-					(0, esm.kt)(
-						'pre',
-						null,
-						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facet facet={controller.store.facets[0]} hideIcon={true} />\n')
-					),
 					(0, esm.kt)('h3', { id: 'iconexpand' }, 'iconExpand'),
 					(0, esm.kt)(
 						'p',
@@ -11558,12 +11545,12 @@
 							"<Facet facet={controller.store.facets[0]} showLessText={'Show Less'} />\n"
 						)
 					),
-					(0, esm.kt)('h3', { id: 'iconshowmoreexpand' }, 'iconshowMoreExpand'),
+					(0, esm.kt)('h3', { id: 'iconoverflowmore' }, 'iconOverflowMore'),
 					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'iconshowMoreExpand'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'iconOverflowMore'),
 						' prop contains the icon name of the facet overflow button when collapsed. Default is ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'plus'")
 					),
@@ -11573,15 +11560,15 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'plus'} />\n"
+							"<Facet facet={controller.store.facets[0]} iconOverflowMore={'plus'} />\n"
 						)
 					),
-					(0, esm.kt)('h3', { id: 'iconshowmoreexpand-1' }, 'iconshowMoreExpand'),
+					(0, esm.kt)('h3', { id: 'iconoverflowless' }, 'iconOverflowLess'),
 					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'iconshowMoreExpand'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'iconOverflowLess'),
 						' prop contains the icon name of the facet overflow button when expanded. Default is ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'minus'")
 					),
@@ -11591,7 +11578,33 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Facet facet={controller.store.facets[0]} iconshowMoreExpand={'minus'} />\n"
+							"<Facet facet={controller.store.facets[0]} iconOverflowLess={'minus'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'overflowslot' }, 'overflowSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'overflowSlot'),
+						' prop is a JSX element to used change the display of the show more/less toggle.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const Overflow = (props) => {\n    const facet = props.facet;\n    return (\n        <div>Show { facet.overflow.remaining > 0 ? `${facet.overflow.remaining} ` : ''}{facet.overflow.remaining > 0 ? 'more' : 'less'}...</div>\n    )\n}\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} overflowSlot={<Overflow/>} />\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'iconcolor' }, 'iconColor'),
@@ -11769,11 +11782,6 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
-						hideIcon: {
-							description: 'Hide facet header icons',
-							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
-							control: { type: 'boolean' },
-						},
 						color: { description: 'Select color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						iconColor: {
 							description: 'Select icon color',
@@ -11809,18 +11817,19 @@
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'Show Less' } },
 							control: { type: 'text' },
 						},
-						iconshowMoreExpand: {
+						iconOverflowMore: {
 							defaultValue: 'plus',
-							description: 'Icon for when facet is collapsed',
+							description: 'Icon for when facet can show more',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'plus' } },
 							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
-						iconshowLessExpand: {
+						iconOverflowLess: {
 							defaultValue: 'minus',
-							description: 'Icon for when facet is expanded',
+							description: 'Icon for when facet can show less',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'minus' } },
 							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
+						overflowSlot: { description: 'Slot for custom overflow (show more/less) button', table: { type: { summary: 'component' } } },
 					},
 					componentArgs.p
 				),
@@ -12002,22 +12011,30 @@
 		30650: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { r: () => Facet });
-			__webpack_require__(43105), __webpack_require__(32501), __webpack_require__(58188), __webpack_require__(15735), __webpack_require__(6886);
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(28165),
-				classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72779),
-				classnames__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(69038),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1492),
-				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(75999),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(25774),
-				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(68978),
-				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(20682),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6572),
-				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(30766),
-				_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(20874),
-				_utilities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(27193),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(64189),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79367),
+			__webpack_require__(43105),
+				__webpack_require__(33132),
+				__webpack_require__(71245),
+				__webpack_require__(32501),
+				__webpack_require__(58188),
+				__webpack_require__(15735),
+				__webpack_require__(6886);
+			var preact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(33847),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(69038),
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(1492),
+				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(75999),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(25774),
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(68978),
+				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(20682),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6572),
+				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(30766),
+				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
+				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(27193),
+				_utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(64170),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(79367),
 				__assign = function () {
 					return (
 						(__assign =
@@ -12034,7 +12051,7 @@
 					var _b,
 						color = _a.color,
 						theme = _a.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
 						width: '100%',
 						margin: '0 0 20px 0',
 						'& .ss__facet__header': {
@@ -12050,7 +12067,7 @@
 						'& .ss__facet__show-more-less': { display: 'block', margin: '8px', cursor: 'pointer', '& .ss__icon': { marginRight: '8px' } },
 					});
 				},
-				Facet = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_6__.Pi)(function (properties) {
+				Facet = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__.Pi)(function (properties) {
 					var _a,
 						_b,
 						_c,
@@ -12069,7 +12086,7 @@
 						_r,
 						_s,
 						limitedValues,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
 							__assign(
@@ -12081,8 +12098,8 @@
 										iconExpand: 'angle-down',
 										showMoreText: 'Show More',
 										showLessText: 'Show Less',
-										iconshowMoreExpand: 'plus',
-										iconshowLessExpand: 'minus',
+										iconOverflowMore: 'plus',
+										iconOverflowLess: 'minus',
 									},
 									null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.facet
 								),
@@ -12092,7 +12109,6 @@
 						),
 						disableCollapse = props.disableCollapse,
 						facet = props.facet,
-						hideIcon = props.hideIcon,
 						iconCollapse = props.iconCollapse,
 						iconExpand = props.iconExpand,
 						limit = props.limit,
@@ -12103,8 +12119,9 @@
 						valueProps = props.valueProps,
 						showMoreText = props.showMoreText,
 						showLessText = props.showLessText,
-						iconshowMoreExpand = props.iconshowMoreExpand,
-						iconshowLessExpand = props.iconshowLessExpand,
+						iconOverflowMore = props.iconOverflowMore,
+						iconOverflowLess = props.iconOverflowLess,
+						overflowSlot = props.overflowSlot,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -12115,7 +12132,7 @@
 										{ className: 'ss__facet__dropdown', disableClickOutside: !0, disableOverlay: !0 },
 										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.dropdown
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -12125,7 +12142,7 @@
 										{ className: 'ss__facet__dropdown__icon', size: '12px', color: iconColor || color },
 										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -12135,7 +12152,7 @@
 										{ className: 'ss__facet__show-more-less__icon', size: '10px', color: iconColor || color },
 										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.icon
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
@@ -12145,7 +12162,7 @@
 										{ className: 'ss__facet__facet-hierarchy-options' },
 										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.facetHierarchyOptions
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
 								{ theme: props.theme }
 							),
@@ -12155,7 +12172,7 @@
 										{ className: 'ss__facet__facet-list-options' },
 										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.facetListOptions
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
 								{ theme: props.theme }
 							),
@@ -12165,7 +12182,7 @@
 										{ className: 'ss__facet__facet-grid-options' },
 										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.facetGridOptions
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
 								{ theme: props.theme }
 							),
@@ -12175,7 +12192,7 @@
 										{ className: 'ss__facet__facet-palette-options' },
 										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetPaletteOptions
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles, previewOnFocus, valueProps })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
 								{ theme: props.theme }
 							),
@@ -12185,15 +12202,15 @@
 										{ className: 'ss__facet__facet-slider' },
 										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.facetSlider
 									),
-									(0, _utilities__WEBPACK_IMPORTED_MODULE_9__.r)({ disableStyles })
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
 						};
-					(null === (_m = facet) || void 0 === _m ? void 0 : _m.overflow) && limit && !disableOverflow
+					(null === (_m = facet) || void 0 === _m ? void 0 : _m.overflow) && Number.isInteger(limit) && !disableOverflow
 						? (facet.overflow.setLimit(limit), (limitedValues = null === (_o = facet) || void 0 === _o ? void 0 : _o.refinedValues))
 						: (limitedValues =
-								(null === (_p = facet) || void 0 === _p ? void 0 : _p.overflow) && limit
+								(null === (_p = facet) || void 0 === _p ? void 0 : _p.overflow) && Number.isInteger(limit)
 									? null === (_q = facet) || void 0 === _q
 										? void 0
 										: _q.values.slice(0, limit)
@@ -12203,66 +12220,65 @@
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facet({ color, theme }), style]),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_10__.n,
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_13__.n,
 							null,
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 								'div',
 								__assign({}, styling, {
-									className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(
+									className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(
 										'ss__facet',
 										'ss__facet--' + facet.display,
 										'ss__facet--' + facet.field,
 										className
 									),
 								}),
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_11__.L,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__.L,
 									__assign({}, subProps.dropdown, {
 										open: disableCollapse || !(null == facet ? void 0 : facet.collapsed),
 										onClick: function onClick(e) {
 											return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
 										},
-										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
 											{ className: 'ss__facet__header' },
 											null == facet ? void 0 : facet.label,
-											!hideIcon &&
-												!disableCollapse &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
+											!disableCollapse &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
 													__assign({}, subProps.icon, { icon: (null == facet ? void 0 : facet.collapsed) ? iconExpand : iconCollapse })
 												)
 										),
 									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 										'div',
-										{ className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__facet__options', className) },
+										{ className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss__facet__options', className) },
 										(function () {
 											switch (null == facet ? void 0 : facet.display) {
-												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.SLIDER:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_14__.C,
+												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.SLIDER:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_17__.C,
 														__assign({}, subProps.facetSlider, { facet })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.GRID:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_15__.v,
+												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.GRID:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_18__.v,
 														__assign({}, subProps.facetGridOptions, { values: limitedValues })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.PALETTE:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_16__.m,
+												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.PALETTE:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_19__.m,
 														__assign({}, subProps.facetPaletteOptions, { values: limitedValues })
 													);
-												case _types__WEBPACK_IMPORTED_MODULE_13__.uw.HIERARCHY:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_17__.j,
+												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.HIERARCHY:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_20__.j,
 														__assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
 													);
 												default:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_18__.X,
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_21__.X,
 														__assign({}, subProps.facetListOptions, { values: limitedValues })
 													);
 											}
@@ -12271,7 +12287,7 @@
 									!disableOverflow &&
 										(null === (_s = facet) || void 0 === _s ? void 0 : _s.overflow) &&
 										facet.overflow.enabled &&
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
 											{
 												className: 'ss__facet__show-more-less',
@@ -12279,11 +12295,21 @@
 													return facet.overflow.toggle();
 												},
 											},
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)(
-												_Atoms_Icon__WEBPACK_IMPORTED_MODULE_12__.J,
-												__assign({}, subProps.showMoreLessIcon, { icon: facet.overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand })
-											),
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_7__.tZ)('span', null, facet.overflow.remaining > 0 ? showMoreText : showLessText)
+											overflowSlot
+												? (0, _utilities__WEBPACK_IMPORTED_MODULE_22__.d)(overflowSlot, { facet })
+												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														preact__WEBPACK_IMPORTED_MODULE_7__.HY,
+														null,
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
+															__assign({}, subProps.showMoreLessIcon, { icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess })
+														),
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															'span',
+															null,
+															facet.overflow.remaining > 0 ? showMoreText : showLessText
+														)
+												  )
 										)
 								)
 							)
@@ -21696,7 +21722,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.3' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.4' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -21726,7 +21752,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.3');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.4');
 						}),
 						(this.track = {
 							event: function event(payload) {
