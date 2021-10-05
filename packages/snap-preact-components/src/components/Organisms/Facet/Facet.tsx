@@ -59,8 +59,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconExpand: 'angle-down',
 		showMoreText: 'Show More',
 		showLessText: 'Show Less',
-		iconshowMoreExpand: 'plus',
-		iconshowLessExpand: 'minus',
+		iconOverflowMore: 'plus',
+		iconOverflowLess: 'minus',
 		// global theme
 		...globalTheme?.components?.facet,
 		// props
@@ -71,7 +71,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const {
 		disableCollapse,
 		facet,
-		hideIcon,
 		iconCollapse,
 		iconExpand,
 		limit,
@@ -82,8 +81,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		valueProps,
 		showMoreText,
 		showLessText,
-		iconshowMoreExpand,
-		iconshowLessExpand,
+		iconOverflowMore,
+		iconOverflowLess,
 		disableStyles,
 		className,
 		style,
@@ -229,7 +228,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					button={
 						<div className="ss__facet__header">
 							{facet?.label}
-							{!hideIcon && !disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 						</div>
 					}
 				>
@@ -252,7 +251,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 
 					{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
 						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
-							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconshowMoreExpand : iconshowLessExpand} />
+							<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
 							<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
 						</div>
 					)}
@@ -280,13 +279,12 @@ export interface FacetProps extends ComponentProps {
 	iconCollapse?: IconType | string;
 	iconColor?: string;
 	iconExpand?: IconType | string;
-	hideIcon?: boolean;
 	limit?: number;
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 	showMoreText?: string;
 	showLessText?: string;
-	iconshowMoreExpand?: string;
-	iconshowLessExpand?: string;
+	iconOverflowMore?: string;
+	iconOverflowLess?: string;
 }
