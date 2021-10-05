@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/searchspring/snap/compare/v0.9.3...v0.9.4) (2021-10-05)
+
+
+### Bug Fixes
+
+* **autocomplete-component:** adding missing 'valueProps' prop to facetsSlot ([60ea6f8](https://github.com/searchspring/snap/commit/60ea6f8027268efe25ff5a359b12b2103c417693))
+* **facet-component:** adding overflow slot ([0dd2b69](https://github.com/searchspring/snap/commit/0dd2b69885e4cca9b80bff61cda698b38663f60f))
+* **facet-component:** removing 'hideIcon' prop and renaming the overflow icons ([0279f6e](https://github.com/searchspring/snap/commit/0279f6ef156d635338c74d0c59286f0c4c9a80f3))
+
+
+
+
+
 ## [0.9.3](https://github.com/searchspring/snap/compare/v0.9.2...v0.9.3) (2021-10-01)
 
 
