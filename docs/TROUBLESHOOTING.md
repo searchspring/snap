@@ -6,7 +6,7 @@ Here are a few common gotchas. If you do not find what you're looking for here o
 If you attempt to render a snap component using a DomTargeter before the target element exists on the page, the target will not be found and the rendering inside of the `onTarget` callback will not occur. Re-targetting can be manually invoked in these cases. 
 
 ```typescript
-searchPageTarget.retarget();
+searchPageTargeter.retarget();
 ```
 
 ### Some middleware isn't executing at all
