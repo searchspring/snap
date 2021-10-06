@@ -74,7 +74,7 @@ Lets go over a few things.
 
 Lets look at the Search controller that we are creating.
 
-The `config` object contains all controller configurations. The most notable property here is the required `id` with a given value of `'search'`. This will be the name of the search controller that we can then interface with the return of the `new Snap()` instance via the `getController` method. 
+The `config` object contains all controller configurations. The most notable property here is the required `id` with a given value of `'search'`. This will be the name of the search controller that we can then interface with the return of the `new Snap()` instance via the `getController` method. In snap-preact controllers are created only as needed (typically when a targeter has found a target), their creation is an asynchronous process. The `getController` method will return a promise that will resolve to the controller object requested immediately after its creation.
 
 For example:
 
@@ -85,7 +85,7 @@ snap.getController('search').then((search) => {
 });
 ```
 
-If multiple controllers are needed at the same time, usage of the `getControllers` method is necessary. The `getControllers` method returns an array of controllers in the order requested by the parameters.
+If multiple controllers are needed at the same time, usage of the `getControllers` method is necessary. The `getControllers` method returns a promise that resolves to an array of controllers in the order requested by the parameters. The promise only resolves when ALL of the controllers have been created - if a controller is specified that is never created the promise will never resolve. For this reason this method should only be used when all controllers are needed simultaneously.
 
 ```typescript
 const snap = new Snap(config);
