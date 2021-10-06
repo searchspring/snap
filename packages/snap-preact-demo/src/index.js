@@ -27,9 +27,6 @@ let config = {
 			},
 		},
 	},
-	configureMobx: {
-		useProxies: 'never',
-	},
 	client: {
 		globals: {
 			siteId: '8uyt2m',

@@ -169,8 +169,11 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
+		//useProxies never as default.
 		if (this.config.configureMobx) {
-			configureMobx(this.config.configureMobx);
+			configureMobx({ useProxies: 'never', ...this.config.configureMobx });
+		} else {
+			configureMobx({ useProxies: 'never' });
 		}
 
 		this.client = new Client(this.config.client.globals, this.config.client.config);
