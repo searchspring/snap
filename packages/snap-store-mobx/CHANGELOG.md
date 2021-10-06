@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.5](https://github.com/searchspring/snap/compare/v0.9.4...v0.9.5) (2021-10-06)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+
+
+
+
 ## [0.9.4](https://github.com/searchspring/snap/compare/v0.9.3...v0.9.4) (2021-10-05)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

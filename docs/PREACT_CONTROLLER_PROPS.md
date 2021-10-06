@@ -78,16 +78,16 @@ export const Results = observer(withController((props) => {
 	const controller = props.controller;
 	const { results } = controller.store;
 
-		return (
-			<ul class="ss__results">
-				{results.map((result) => (
-					<li class="ss__result" key={result.id}>
-						{{
-							banner: <InlineBanner banner={result} />,
-						}[result.type] || <Result result={result} />}
-					</li>
-				))}
-			</ul>
-		)
+	return (
+		<ul class="ss__results">
+			{results.map((result) => (
+				<li class="ss__result" key={result.id}>
+					{{
+						banner: <InlineBanner banner={result} />,
+					}[result.type] || <Result result={result} />}
+				</li>
+			))}
+		</ul>
+	)
 }));
 ```
