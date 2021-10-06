@@ -74,13 +74,24 @@ Lets go over a few things.
 
 Lets look at the Search controller that we are creating.
 
-The `config` object contains our controller configuration. The most notable property here is the required `id` with a given value of `'search'`. This will be the name of the controller that can then be interfaced with the return of the `new Snap()` instance via the `controllers` object. 
+The `config` object contains all controller configurations. The most notable property here is the required `id` with a given value of `'search'`. This will be the name of the search controller that we can then interface with the return of the `new Snap()` instance via the `getController` method. 
 
 For example:
 
 ```typescript
-const snap = new Snap(config)
-const { search } = snap.controllers;
+const snap = new Snap(config);
+snap.getController('search').then((search) => {
+	// do things with controller
+});
+```
+
+If multiple controllers are needed at the same time, usage of the `getControllers` method is necessary. The `getControllers` method returns an array of controllers in the order requested by the parameters.
+
+```typescript
+const snap = new Snap(config);
+snap.getControllers('search', 'autocomplete').then(([search, autocomplete]) => {
+	// do things with controllers
+});
 ```
 
 We also have a `targeters` array of DomTargeter `targeter` configuration objects. Each object defines an entry point on the page where a component will be rendered. 
