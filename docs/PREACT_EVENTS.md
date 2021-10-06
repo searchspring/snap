@@ -104,15 +104,15 @@ const config = {
 
 On the controller we can attach middleware via `on` or `plugin` methods.
 
-We can attach events to our controllers after they have been created by a Snap instance via the `controllers` property that contains an object of all the controllers that have been specified in the config.
+We can attach events to our controllers after they have been created by a Snap instance via the `getController` method. This method returns a promise that resolves to the requested controller object.
 
 Lets use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
 
 ```typescript
 const snap = new Snap(config);
-const { search } = snap.controllers;
-
-console.log("Search Controller: ", search);
+snap.getController('search').then((search) => {
+	console.log("Search Controller: ", search);
+});
 ```
 
 We can now attach middleware events in the following methods:
@@ -120,21 +120,26 @@ We can now attach middleware events in the following methods:
 ### controller.on
 
 ```typescript
-search.on('afterSearch', async(eventData, next) => {
-	console.log("runs on afterSearch", eventData);
-	await next();
+snap.getController('search').then((search) => {
+	search.on('afterSearch', async(eventData, next) => {
+		console.log("runs on afterSearch", eventData);
+		await next();
+	});
 });
 ```
 
 ### controller.plugin
 
 ```typescript
-search.plugin((controller) => {
-	controller.on('afterStore', async(eventData, next) => {
-		console.log("runs on afterStore", eventData);
-		await next();
+snap.getController('search').then((search) => {
+	search.plugin((controller) => {
+		controller.on('afterStore', async(eventData, next) => {
+			console.log("runs on afterStore", eventData);
+			await next();
+		});
 	});
 });
+
 ```
 
 Next we will attach a plugin that takes additional parameters. This could be useful for sending contextual data into your plugin.
@@ -148,7 +153,9 @@ const paramPlugin = (controller, ...params) => {
 	});
 }
 
-search.plugin(paramPlugin, 'param1', 'param2');
+snap.getController('search').then((search) => {
+	search.plugin(paramPlugin, 'param1', 'param2');
+});
 ```
 
 ## Available Events
