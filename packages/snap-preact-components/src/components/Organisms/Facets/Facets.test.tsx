@@ -23,7 +23,7 @@ describe('Facets Component', () => {
 		expect(count).toBe(args.facets.length);
 	});
 
-	it('has all facets with limit prop', () => {
+	it('has limited facets with limit prop', () => {
 		const args = {
 			facets: searchResponse.facets,
 			limit: 2,

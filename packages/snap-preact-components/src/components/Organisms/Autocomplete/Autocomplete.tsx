@@ -262,6 +262,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const subProps: AutocompleteSubProps = {
 		facets: {
+			// default props
+			limit: 3,
 			// global theme
 			...globalTheme?.components?.facet,
 			// inherited props
@@ -469,7 +471,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{facetsTitle}</h5>
 											</div>
 										) : null}
-										<Facets {...subProps.facets} facets={facetsToShow} limit={3} />
+										<Facets {...subProps.facets} facets={facetsToShow} />
 										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
 									</div>
 								</>
