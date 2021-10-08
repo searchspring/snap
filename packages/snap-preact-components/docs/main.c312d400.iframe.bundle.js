@@ -21722,7 +21722,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.6' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.7' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -21752,7 +21752,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.6');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.7');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22241,7 +22241,10 @@
 										27 == e.keyCode && (e.target.blur(), _this.setFocused());
 									},
 									focus: function focus(e) {
-										e.stopPropagation(), _this.setFocused(e.target);
+										e.stopPropagation(),
+											setTimeout(function () {
+												_this.setFocused(e.target);
+											});
 									},
 									formSubmit: function formSubmit(e) {
 										return AutocompleteController_awaiter(_this, void 0, void 0, function () {
