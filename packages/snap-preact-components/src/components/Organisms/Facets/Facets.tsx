@@ -28,7 +28,11 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		...properties.theme?.components?.facets,
 	};
 
-	const { facets, disableStyles, className, style } = props;
+	const { limit, disableStyles, className, style } = props;
+	let { facets } = props;
+	if (limit > 0) {
+		facets = facets.slice(0, +limit);
+	}
 
 	const subProps: FacetsSubProps = {
 		facet: {
@@ -70,5 +74,6 @@ interface FacetsSubProps {
 
 export interface FacetsProps extends ComponentProps {
 	facets?: any;
+	limit?: number;
 	controller?: SearchController | AutocompleteController;
 }

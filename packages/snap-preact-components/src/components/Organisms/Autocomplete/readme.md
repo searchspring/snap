@@ -5,7 +5,7 @@ Renders an autocomplete popup that binds to an `<input>` element.
 The autocomplete layout renders terms, facets, banners, and results.
 
 ## Components Used
-- Facet
+- Facets
 - Banner
 - Results
 
