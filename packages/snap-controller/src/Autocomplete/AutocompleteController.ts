@@ -202,7 +202,11 @@ export class AutocompleteController extends AbstractController {
 			},
 			focus: (e: FocusEvent): void => {
 				e.stopPropagation();
-				this.setFocused(e.target as HTMLInputElement);
+
+				// timeout to ensure focus happens AFTER click
+				setTimeout(() => {
+					this.setFocused(e.target as HTMLInputElement);
+				});
 			},
 			formSubmit: async (e): Promise<void> => {
 				const form = e.target;
