@@ -247,6 +247,16 @@ export class Snap {
 					this.config.controllers[type].forEach((controller, index) => {
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
+								let bound = false;
+								const runBind = () => {
+									if (!bound) {
+										bound = true;
+										setTimeout(() => {
+											(this.controllers[controller.config.id] as AutocompleteController).bind();
+										});
+									}
+								};
+
 								const targetFunction = async (target, elem, originalElem) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && onTarget(target, elem, originalElem);
@@ -297,7 +307,7 @@ export class Snap {
 												controller.url,
 												resolve
 											);
-											(cntrlr as AutocompleteController).bind();
+											runBind();
 											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
 											cntrlr.addTargeter(targeter);
 										}

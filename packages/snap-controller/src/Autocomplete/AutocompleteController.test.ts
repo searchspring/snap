@@ -255,6 +255,10 @@ describe('Autocomplete Controller', () => {
 		inputEl.value = 'wh';
 		inputEl.dispatchEvent(new Event('focus'));
 		inputEl.dispatchEvent(new Event('keyup'));
+
+		// to deal with setTimeout used in focus event
+		await new Promise((resolve) => setTimeout(resolve));
+
 		expect(controller.store.reset).not.toHaveBeenCalled();
 		expect(controller.urlManager.reset).not.toHaveBeenCalled();
 		expect(controller.setFocused).toHaveBeenCalledTimes(1);
@@ -263,6 +267,10 @@ describe('Autocomplete Controller', () => {
 		inputEl.value = '';
 		inputEl.dispatchEvent(new Event('focus'));
 		inputEl.dispatchEvent(new Event('keyup'));
+
+		// to deal with setTimeout used in focus event
+		await new Promise((resolve) => setTimeout(resolve));
+
 		expect(controller.store.reset).toHaveBeenCalled();
 		expect(controller.urlManager.reset).toHaveBeenCalled();
 		expect(controller.setFocused).toHaveBeenCalledTimes(2);
