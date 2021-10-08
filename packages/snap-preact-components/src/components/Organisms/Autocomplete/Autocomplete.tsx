@@ -215,6 +215,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideFacets,
 		hideContent,
 		hideBanners,
+		hideLink,
 		horizontalTerms,
 		vertical,
 		termsTitle,
@@ -227,6 +228,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		contentSlot,
 		resultsSlot,
 		noResultsSlot,
+		linkSlot,
 		disableStyles,
 		className,
 		width,
@@ -395,7 +397,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideTerms && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, controller })
+								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (
@@ -451,7 +453,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideFacets &&
 						(facetsSlot ? (
 							<div className="ss__autocomplete__facets">
-								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller, valueProps })}
+								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
 							</div>
 						) : (
 							facetsToShow.length > 0 && (
@@ -513,14 +515,18 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
 
-								{search?.query?.string && results.length > 0 ? (
-									<div className="ss__autocomplete__content__info">
-										<a href={state.url.href}>
-											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-											{search.query.string}"
-											<Icon {...subProps.icon} />
-										</a>
-									</div>
+								{!hideLink ? (
+									linkSlot ? (
+										cloneElement(linkSlot, { search, results, pagination, filters, controller })
+									) : search?.query?.string && results.length > 0 ? (
+										<div className="ss__autocomplete__content__info">
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										</div>
+									) : null
 								) : null}
 							</div>
 						) : null
@@ -569,6 +575,7 @@ export interface AutocompleteProps extends ComponentProps {
 	hideFacets?: boolean;
 	hideContent?: boolean;
 	hideBanners?: boolean;
+	hideLink?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
 	termsTitle?: string;
@@ -581,7 +588,8 @@ export interface AutocompleteProps extends ComponentProps {
 	contentSlot?: JSX.Element;
 	resultsSlot?: JSX.Element;
 	noResultsSlot?: JSX.Element;
+	linkSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
-	controller?: AutocompleteController;
+	controller: AutocompleteController;
 	width?: string;
 }
