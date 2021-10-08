@@ -117,6 +117,7 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	async setFocused(inputElement?: HTMLInputElement): Promise<void> {
+		console.log('set focused!', inputElement);
 		if (this.store.state.focusedInput !== inputElement) {
 			this.store.state.focusedInput = inputElement;
 			// fire focusChange event
@@ -201,8 +202,13 @@ export class AutocompleteController extends AbstractController {
 				}
 			},
 			focus: (e: FocusEvent): void => {
+				console.log('focusing!');
 				e.stopPropagation();
-				this.setFocused(e.target as HTMLInputElement);
+
+				// timeout to ensure focus happens AFTER click
+				setTimeout(() => {
+					this.setFocused(e.target as HTMLInputElement);
+				});
 			},
 			formSubmit: async (e): Promise<void> => {
 				const form = e.target;
@@ -277,6 +283,7 @@ export class AutocompleteController extends AbstractController {
 		},
 		document: {
 			click: (e: MouseEvent): void => {
+				console.log('click!', e.target);
 				const inputs = document.querySelectorAll(this.config.selector);
 				if (Array.from(inputs).includes(e.target as Element)) {
 					e.stopPropagation();
