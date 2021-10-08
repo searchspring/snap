@@ -260,8 +260,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const subProps: AutocompleteSubProps = {
 		facets: {
-			// default props
-			className: 'ss__autocomplete__facets',
 			// global theme
 			...globalTheme?.components?.facet,
 			// inherited props
@@ -272,7 +270,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			theme: {
 				components: {
 					facet: {
-						className: 'ss__autocomplete__facet',
 						limit: 6,
 						disableOverflow: true,
 						disableCollapse: true,
