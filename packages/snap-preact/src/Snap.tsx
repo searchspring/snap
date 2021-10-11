@@ -1,7 +1,5 @@
 import deepmerge from 'deepmerge';
 import { h, render } from 'preact';
-import { configure as configureMobx, extendObservable } from 'mobx';
-
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -37,7 +35,6 @@ type ExtendedTarget = Target & {
 
 export type SnapConfig = {
 	url?: UrlTranslatorConfig;
-	configureMobx?: MobxConfig;
 	client: {
 		globals: ClientGlobals;
 		config?: ClientConfig;
@@ -167,13 +164,6 @@ export class Snap {
 		this.config = config;
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
-		}
-
-		//useProxies never as default.
-		if (this.config.configureMobx) {
-			configureMobx({ useProxies: 'never', ...this.config.configureMobx });
-		} else {
-			configureMobx({ useProxies: 'never' });
 		}
 
 		this.client = new Client(this.config.client.globals, this.config.client.config);
