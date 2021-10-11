@@ -131,16 +131,16 @@ export class Snap {
 		let importPromise;
 		switch (type) {
 			case DynamicImportNames.SEARCH:
-				importPromise = import('./create/searchController');
+				importPromise = import('./create/createSearchController');
 				break;
 			case DynamicImportNames.AUTOCOMPLETE:
-				importPromise = import('./create/autocompleteController');
+				importPromise = import('./create/createAutocompleteController');
 				break;
 			case DynamicImportNames.FINDER:
-				importPromise = import('./create/finderController');
+				importPromise = import('./create/createFinderController');
 				break;
 			case DynamicImportNames.RECOMMENDATION:
-				importPromise = import('./create/recommendationController');
+				importPromise = import('./create/createRecommendationController');
 				break;
 		}
 
