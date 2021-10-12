@@ -1,3 +1,5 @@
+import { configure as configureMobx, extendObservable } from 'mobx';
+
 import { AutocompleteController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
@@ -8,6 +10,8 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 import type { SnapControllerServices, SnapAutocompleteControllerConfig } from '../types';
+
+configureMobx({ useProxies: 'never' });
 
 export default (config: SnapAutocompleteControllerConfig, services?: SnapControllerServices): AutocompleteController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();

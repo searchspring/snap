@@ -1,6 +1,5 @@
 import deepmerge from 'deepmerge';
 import { h, render } from 'preact';
-
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -71,6 +70,18 @@ export type SnapConfig = {
 	};
 };
 
+interface MobxConfig {
+	useProxies?: 'always' | 'never' | 'ifavailable';
+	enforceActions?: 'always' | 'never' | 'observed';
+	computedRequiresReaction?: boolean;
+	reactionRequiresObservable?: boolean;
+	observableRequiresReaction?: boolean;
+	isolateGlobalState?: boolean;
+	disableErrorBoundaries?: boolean;
+	safeDescriptors?: boolean;
+	reactionScheduler?: (f: () => void) => void;
+}
+
 type ControllerTypes = SearchController | AutocompleteController | FinderController | RecommendationController;
 enum DynamicImportNames {
 	SEARCH = 'searchController',
@@ -120,16 +131,16 @@ export class Snap {
 		let importPromise;
 		switch (type) {
 			case DynamicImportNames.SEARCH:
-				importPromise = import('./create/searchController');
+				importPromise = import('./create/createSearchController');
 				break;
 			case DynamicImportNames.AUTOCOMPLETE:
-				importPromise = import('./create/autocompleteController');
+				importPromise = import('./create/createAutocompleteController');
 				break;
 			case DynamicImportNames.FINDER:
-				importPromise = import('./create/finderController');
+				importPromise = import('./create/createFinderController');
 				break;
 			case DynamicImportNames.RECOMMENDATION:
-				importPromise = import('./create/recommendationController');
+				importPromise = import('./create/createRecommendationController');
 				break;
 		}
 
