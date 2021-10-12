@@ -324,14 +324,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: {
-				components: {
-					result: {
-						hideBadge: true,
+			theme: deepmerge(
+				{
+					components: {
+						result: {
+							hideBadge: true,
+						},
 					},
-					...props.theme?.components,
 				},
-			},
+				{ ...props.theme }
+			),
 		},
 		icon: {
 			// default props
