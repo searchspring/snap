@@ -5,6 +5,7 @@ import { useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
@@ -271,36 +272,34 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: {
-				components: {
-					facet: {
-						limit: 6,
-						disableOverflow: true,
-						disableCollapse: true,
-						previewOnFocus: true,
-						valueProps,
-						theme: {
-							components: {
-								facetGridOptions: {
-									columns: 3,
-								},
-								facetHierarchyOptions: {
-									hideCount: true,
-								},
-								facetListOptions: {
-									hideCheckbox: true,
-									hideCount: true,
-								},
-								facetPaletteOptions: {
-									hideLabel: true,
-									columns: 3,
-								},
-							},
+			theme: deepmerge(
+				{
+					components: {
+						facet: {
+							limit: 6,
+							disableOverflow: true,
+							disableCollapse: true,
+							previewOnFocus: true,
+							valueProps,
 						},
-						...props.theme?.components?.facet,
+						facetGridOptions: {
+							columns: 3,
+						},
+						facetHierarchyOptions: {
+							hideCount: true,
+						},
+						facetListOptions: {
+							hideCheckbox: true,
+							hideCount: true,
+						},
+						facetPaletteOptions: {
+							hideLabel: true,
+							columns: 3,
+						},
 					},
 				},
-			},
+				{ ...props.theme }
+			),
 		},
 		banner: {
 			// default props

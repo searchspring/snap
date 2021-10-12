@@ -9,14 +9,8 @@ export class Autocomplete extends Component {
 
 		const theme = {
 			components: {
-				facets: {
-					theme: {
-						components: {
-							facet: {
-								limit: 5,
-							},
-						},
-					},
+				facet: {
+					limit: 5,
 				},
 			},
 		};
