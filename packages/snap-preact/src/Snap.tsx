@@ -34,6 +34,10 @@ type ExtendedTarget = Target & {
 };
 
 type ContextVariables = {
+	shopper?: {
+		id: string;
+		[variable: string]: any;
+	};
 	[variable: string]: any;
 };
 
