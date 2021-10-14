@@ -201,14 +201,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		768: {
 			columns: 2,
-			rows: 2,
+			rows: 3,
 		},
 	};
 	const displaySettings = useDisplaySettings(breakpoints);
 	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
 		props = {
 			...props,
 			...displaySettings,
+			theme,
 		};
 	}
 	const {
@@ -266,7 +268,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			// default props
 			limit: 3,
 			// global theme
-			...globalTheme?.components?.facet,
+			...globalTheme?.components?.facets,
 			// inherited props
 			...defined({
 				disableStyles,
