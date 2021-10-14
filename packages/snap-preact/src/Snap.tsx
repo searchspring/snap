@@ -33,7 +33,16 @@ type ExtendedTarget = Target & {
 	prefetch?: boolean;
 };
 
+type ContextVariables = {
+	shopper?: {
+		id: string;
+		[variable: string]: any;
+	};
+	[variable: string]: any;
+};
+
 export type SnapConfig = {
+	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client: {
 		globals: ClientGlobals;
@@ -69,18 +78,6 @@ export type SnapConfig = {
 		}[];
 	};
 };
-
-interface MobxConfig {
-	useProxies?: 'always' | 'never' | 'ifavailable';
-	enforceActions?: 'always' | 'never' | 'observed';
-	computedRequiresReaction?: boolean;
-	reactionRequiresObservable?: boolean;
-	observableRequiresReaction?: boolean;
-	isolateGlobalState?: boolean;
-	disableErrorBoundaries?: boolean;
-	safeDescriptors?: boolean;
-	reactionScheduler?: (f: () => void) => void;
-}
 
 type ControllerTypes = SearchController | AutocompleteController | FinderController | RecommendationController;
 enum DynamicImportNames {
@@ -165,13 +162,21 @@ export class Snap {
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
-
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
 		this.logger = new Logger('Snap Preact ');
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};
+
+		// autotrack shopper id from the context
+		if (this.config.context && this.config.context.shopper?.id) {
+			this.tracker.track.shopper.login({
+				data: {
+					id: this.config.context.shopper.id,
+				},
+			});
+		}
 
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
