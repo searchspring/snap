@@ -20,3 +20,10 @@ The optional`facets` prop specifies a reference to the facets store array. If no
 ```jsx
 <Facets controller={controller} facets={facets} />
 ```
+
+### limit
+The `limit` prop will limit the maximum number of facets to display.
+
+```jsx
+<Facets controller={controller} facets={facets} limit={3}/>
+```
