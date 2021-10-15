@@ -199,13 +199,13 @@ window.searchspring.track.cart.view({
                 sku: 'product123',
                 childSku: 'product123_a',
                 qty: '1',
-                priice: `9.99`,
+                price: '9.99',
             },
             {
                 sku: 'product456',
                 childSku: 'product456_a',
                 qty: '2',
-                priice: `10.99`,
+                price: '10.99',
             },
         ]
     }
@@ -240,13 +240,13 @@ window.searchspring.track.order.transaction({
                 sku: 'product123',
                 childSku: 'product123_a',
                 qty: '1',
-                priice: `9.99`
+                price: '9.99'
             },
             {
                 sku: 'product456',
                 childSku: 'product456_a',
                 qty: '2',
-                priice: `10.99`
+                price: '10.99'
             },
         ]
     }
