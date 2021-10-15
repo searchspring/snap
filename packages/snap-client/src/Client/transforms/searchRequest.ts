@@ -10,7 +10,8 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 		transformSearchRequest.pagination(request),
 		transformSearchRequest.siteId(request),
 		transformSearchRequest.facets(request),
-		transformSearchRequest.tracking(request)
+		transformSearchRequest.tracking(request),
+		transformSearchRequest.personalization(request)
 	);
 }
 
@@ -162,4 +163,32 @@ transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	}
 
 	return {};
+};
+
+transformSearchRequest.personalization = (request: SearchRequestModel = {}) => {
+	const personalization = request.personalization || {};
+	const params: {
+		skipPersonalization?: boolean;
+		cart?: string;
+		shopper?: string;
+		lastViewed?: string;
+	} = {};
+
+	if (personalization.disabled) {
+		params.skipPersonalization = personalization.disabled;
+	}
+
+	if (personalization.cart) {
+		params.cart = personalization.cart;
+	}
+
+	if (personalization.lastViewed) {
+		params.lastViewed = personalization.lastViewed;
+	}
+
+	if (personalization.shopper) {
+		params.shopper = personalization.shopper;
+	}
+
+	return params;
 };

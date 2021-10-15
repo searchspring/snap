@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
+
+
+### Features
+
+* add personalization params and transforms to search and autocomplete request params ([05c709d](https://github.com/searchspring/snap/commit/05c709dc0d11e145cf3837d76414c0efe0423286))
+
+
+
+
+
 ## [0.9.7](https://github.com/searchspring/snap/compare/v0.9.6...v0.9.7) (2021-10-08)
 
 **Note:** Version bump only for package @searchspring/snap-client

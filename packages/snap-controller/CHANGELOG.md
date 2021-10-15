@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
+
+
+### Bug Fixes
+
+* **querystore:** fixing 'rq' and 'oq' bug where they were only using the first letter of value ([2d5faec](https://github.com/searchspring/snap/commit/2d5faecb76dac3b0ad2cda3b557eba902036bcb3))
+* remove redundant globals, update docs with link to api docs ([b679a3a](https://github.com/searchspring/snap/commit/b679a3aa53c730a3caf96b22af2ab4badf69d4e4))
+
+
+### Features
+
+* add personalization params and transforms to search and autocomplete request params ([05c709d](https://github.com/searchspring/snap/commit/05c709dc0d11e145cf3837d76414c0efe0423286))
+
+
+
+
+
 ## [0.9.7](https://github.com/searchspring/snap/compare/v0.9.6...v0.9.7) (2021-10-08)
 
 

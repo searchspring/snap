@@ -1,6 +1,5 @@
 import deepmerge from 'deepmerge';
 import { h, render } from 'preact';
-
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -34,7 +33,16 @@ type ExtendedTarget = Target & {
 	prefetch?: boolean;
 };
 
+type ContextVariables = {
+	shopper?: {
+		id: string;
+		[variable: string]: any;
+	};
+	[variable: string]: any;
+};
+
 export type SnapConfig = {
+	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client: {
 		globals: ClientGlobals;
@@ -120,16 +128,16 @@ export class Snap {
 		let importPromise;
 		switch (type) {
 			case DynamicImportNames.SEARCH:
-				importPromise = import('./create/searchController');
+				importPromise = import('./create/createSearchController');
 				break;
 			case DynamicImportNames.AUTOCOMPLETE:
-				importPromise = import('./create/autocompleteController');
+				importPromise = import('./create/createAutocompleteController');
 				break;
 			case DynamicImportNames.FINDER:
-				importPromise = import('./create/finderController');
+				importPromise = import('./create/createFinderController');
 				break;
 			case DynamicImportNames.RECOMMENDATION:
-				importPromise = import('./create/recommendationController');
+				importPromise = import('./create/createRecommendationController');
 				break;
 		}
 
@@ -154,13 +162,21 @@ export class Snap {
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
-
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
 		this.logger = new Logger('Snap Preact ');
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};
+
+		// autotrack shopper id from the context
+		if (this.config.context && this.config.context.shopper?.id) {
+			this.tracker.track.shopper.login({
+				data: {
+					id: this.config.context.shopper.id,
+				},
+			});
+		}
 
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
