@@ -2443,7 +2443,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55974),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59685),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (
@@ -2773,7 +2773,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(55974),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(59685),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -4545,7 +4545,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5035,7 +5035,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -5454,7 +5454,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5965,7 +5965,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -7226,7 +7226,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -7892,7 +7892,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -8365,7 +8365,7 @@
 				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -9290,7 +9290,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -10329,20 +10329,22 @@
 					(__webpack_require__(34769),
 					__webpack_require__(94908),
 					__webpack_require__(77950),
-					__webpack_require__(32501),
 					__webpack_require__(95342),
 					__webpack_require__(43450),
 					__webpack_require__(74069),
+					__webpack_require__(32501),
 					__webpack_require__(85940),
 					__webpack_require__(34619)),
 				es = __webpack_require__(69038),
 				emotion_react_browser_esm = __webpack_require__(28165),
 				classnames = __webpack_require__(72779),
 				classnames_default = __webpack_require__.n(classnames),
+				cjs = __webpack_require__(39714),
+				cjs_default = __webpack_require__.n(cjs),
 				Icon = __webpack_require__(6572),
 				Results = __webpack_require__(69159),
 				Banner = __webpack_require__(39358),
-				Facet = __webpack_require__(30650),
+				Facets = __webpack_require__(48958),
 				defined = __webpack_require__(27193),
 				cloneWithProps = __webpack_require__(64170),
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
@@ -10474,8 +10476,6 @@
 						_h,
 						_j,
 						_k,
-						_l,
-						_m,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -10491,15 +10491,23 @@
 						breakpoints = props.breakpoints || {
 							0: { columns: 2, rows: 1, hideFacets: !0, vertical: !0 },
 							540: { columns: 3, rows: 1, vertical: !0 },
-							768: { columns: 2, rows: 2 },
+							768: { columns: 2, rows: 3 },
 						},
 						displaySettings = (0, useDisplaySettings.o)(breakpoints);
-					displaySettings && Object.keys(displaySettings).length && (props = __assign(__assign({}, props), displaySettings));
+					if (displaySettings && Object.keys(displaySettings).length) {
+						var theme_1 = cjs_default()(
+							(null == props ? void 0 : props.theme) || {},
+							(null == displaySettings ? void 0 : displaySettings.theme) || {}
+						);
+						props = __assign(__assign(__assign({}, props), displaySettings), { theme: theme_1 });
+					}
 					var inputViewportOffsetBottom,
+						delayTimeout,
 						hideTerms = props.hideTerms,
 						hideFacets = props.hideFacets,
 						hideContent = props.hideContent,
 						hideBanners = props.hideBanners,
+						hideLink = props.hideLink,
 						horizontalTerms = props.horizontalTerms,
 						vertical = props.vertical,
 						termsTitle = props.termsTitle,
@@ -10512,6 +10520,7 @@
 						contentSlot = props.contentSlot,
 						resultsSlot = props.resultsSlot,
 						noResultsSlot = props.noResultsSlot,
+						linkSlot = props.linkSlot,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						width = props.width,
@@ -10525,82 +10534,6 @@
 							null == input || input.setAttribute('spellcheck', 'false'),
 							null == input || input.setAttribute('autocomplete', 'off');
 					}
-					var delayTimeout,
-						subProps = {
-							facet: __assign(
-								__assign(
-									__assign(
-										{ className: 'ss__autocomplete__facet', limit: 6, disableOverflow: !0, disableCollapse: !0 },
-										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.facet
-									),
-									(0, defined.r)({ disableStyles })
-								),
-								{
-									theme: {
-										components: __assign(
-											{
-												facetGridOptions: { columns: 3 },
-												facetHierarchyOptions: { hideCount: !0 },
-												facetListOptions: { hideCheckbox: !0, hideCount: !0 },
-												facetPaletteOptions: { hideLabel: !0, columns: 3 },
-											},
-											null === (_e = props.theme) || void 0 === _e ? void 0 : _e.components
-										),
-									},
-								}
-							),
-							banner: __assign(
-								__assign(
-									__assign(
-										{ className: 'ss__autocomplete__banner' },
-										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.banner
-									),
-									(0, defined.r)({ disableStyles })
-								),
-								{ theme: props.theme }
-							),
-							results: __assign(
-								__assign(
-									__assign(
-										{ className: 'ss__autocomplete__results', breakpoints },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.results
-									),
-									(0, defined.r)({ disableStyles })
-								),
-								{
-									theme: {
-										components: __assign({ result: { hideBadge: !0 } }, null === (_h = props.theme) || void 0 === _h ? void 0 : _h.components),
-									},
-								}
-							),
-							icon: __assign(
-								__assign(
-									__assign(
-										{ className: 'ss__autocomplete__icon', icon: 'angle-right', size: '10px' },
-										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.icon
-									),
-									(0, defined.r)({ disableStyles })
-								),
-								{ theme: props.theme }
-							),
-						},
-						_o = controller.store,
-						search = _o.search,
-						terms = _o.terms,
-						trending = _o.trending,
-						results = _o.results,
-						merchandising = _o.merchandising,
-						pagination = _o.pagination,
-						loaded = _o.loaded,
-						filters = _o.filters,
-						facets = _o.facets,
-						state = _o.state;
-					controller &&
-						'string' == typeof input &&
-						((input = document.querySelector(input)),
-						(0, hooks_module.d4)(function () {
-							controller.bind();
-						}, []));
 					var valueProps = {
 							onMouseEnter: function onMouseEnter(e) {
 								clearTimeout(delayTimeout),
@@ -10612,15 +10545,82 @@
 								clearTimeout(delayTimeout);
 							},
 						},
-						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
+						subProps = {
+							facets: __assign(
+								__assign(
+									__assign({ limit: 3 }, null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.facets),
+									(0, defined.r)({ disableStyles })
+								),
+								{
+									theme: cjs_default()(
+										{
+											components: {
+												facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
+												facetGridOptions: { columns: 3 },
+												facetHierarchyOptions: { hideCount: !0 },
+												facetListOptions: { hideCheckbox: !0, hideCount: !0 },
+												facetPaletteOptions: { hideLabel: !0, columns: 3 },
+											},
+										},
+										__assign({}, props.theme)
+									),
+								}
+							),
+							banner: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__autocomplete__banner' },
+										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.banner
+									),
+									(0, defined.r)({ disableStyles })
+								),
+								{ theme: props.theme }
+							),
+							results: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__autocomplete__results', breakpoints },
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.results
+									),
+									(0, defined.r)({ disableStyles })
+								),
+								{ theme: cjs_default()({ components: { result: { hideBadge: !0 } } }, __assign({}, props.theme)) }
+							),
+							icon: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__autocomplete__icon', icon: 'angle-right', size: '10px' },
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
+									),
+									(0, defined.r)({ disableStyles })
+								),
+								{ theme: props.theme }
+							),
+						},
+						_l = controller.store,
+						search = _l.search,
+						terms = _l.terms,
+						trending = _l.trending,
+						results = _l.results,
+						merchandising = _l.merchandising,
+						pagination = _l.pagination,
+						loaded = _l.loaded,
+						filters = _l.filters,
+						facets = _l.facets,
+						state = _l.state;
+					controller &&
+						'string' == typeof input &&
+						((input = document.querySelector(input)),
+						(0, hooks_module.d4)(function () {
+							controller.bind();
+						}, []));
+					var visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
 						showTrending = (null == trending ? void 0 : trending.length) && 0 === terms.length,
 						facetsToShow =
 							facets.length &&
-							facets
-								.filter(function (facet) {
-									return facet.display !== types.uw.SLIDER;
-								})
-								.slice(0, 3),
+							facets.filter(function (facet) {
+								return facet.display !== types.uw.SLIDER;
+							}),
 						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded,
 						styling = {};
 					return (
@@ -10631,7 +10631,7 @@
 										inputViewportOffsetBottom,
 										hideFacets,
 										horizontalTerms,
-										noResults: (null === (_k = null == search ? void 0 : search.query) || void 0 === _k ? void 0 : _k.string) && 0 === results.length,
+										noResults: (null === (_h = null == search ? void 0 : search.query) || void 0 === _h ? void 0 : _h.string) && 0 === results.length,
 										contentSlotExists: !!contentSlot,
 										viewportMaxHeight,
 										vertical,
@@ -10658,7 +10658,7 @@
 											'div',
 											{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
 											termsSlot
-												? (0, cloneWithProps.d)(termsSlot, { terms, trending, controller })
+												? (0, cloneWithProps.d)(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, controller })
 												: (0, emotion_react_browser_esm.tZ)(
 														preact_module.HY,
 														null,
@@ -10741,7 +10741,7 @@
 											? (0, emotion_react_browser_esm.tZ)(
 													'div',
 													{ className: 'ss__autocomplete__facets' },
-													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, controller, valueProps })
+													(0, cloneWithProps.d)(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })
 											  )
 											: facetsToShow.length > 0 &&
 											  (0, emotion_react_browser_esm.tZ)(
@@ -10764,10 +10764,7 @@
 																	(0, emotion_react_browser_esm.tZ)('h5', null, facetsTitle)
 															  )
 															: null,
-														facetsToShow.map(function (facet) {
-															return (0,
-															emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet, previewOnFocus: !0, valueProps }));
-														}),
+														(0, emotion_react_browser_esm.tZ)(Facets.m, __assign({}, subProps.facets, { facets: facetsToShow })),
 														hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.LEFT })
 													)
 											  )),
@@ -10781,7 +10778,7 @@
 										  )
 										: results.length > 0 ||
 										  Object.keys(merchandising.content).length > 0 ||
-										  (null === (_l = null == search ? void 0 : search.query) || void 0 === _l ? void 0 : _l.string)
+										  (null === (_j = null == search ? void 0 : search.query) || void 0 === _j ? void 0 : _j.string)
 										? (0, emotion_react_browser_esm.tZ)(
 												'div',
 												{ className: 'ss__autocomplete__content' },
@@ -10819,7 +10816,11 @@
 																  )
 													  ),
 												hideBanners ? null : (0, emotion_react_browser_esm.tZ)(Banner.j, { content: merchandising.content, type: types.$.FOOTER }),
-												(null === (_m = null == search ? void 0 : search.query) || void 0 === _m ? void 0 : _m.string) && results.length > 0
+												hideLink
+													? null
+													: linkSlot
+													? (0, preact_module.Tm)(linkSlot, { search, results, pagination, filters, controller })
+													: (null === (_k = null == search ? void 0 : search.query) || void 0 === _k ? void 0 : _k.string) && results.length > 0
 													? (0, emotion_react_browser_esm.tZ)(
 															'div',
 															{ className: 'ss__autocomplete__content__info' },
@@ -10864,7 +10865,7 @@
 					return null == string ? void 0 : string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -10898,9 +10899,10 @@
 					(0, esm.kt)(
 						'ul',
 						null,
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Facet'),
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Facets'),
 						(0, esm.kt)('li', { parentName: 'ul' }, 'Banner'),
-						(0, esm.kt)('li', { parentName: 'ul' }, 'Results')
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Results'),
+						(0, esm.kt)('li', { parentName: 'ul' }, 'Icon')
 					),
 					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
 					(0, esm.kt)('h3', { id: 'input' }, 'input'),
@@ -10960,6 +10962,315 @@
 							'<Autocomplete controller={controller} input={\'#searchInput\'} width="800px" />\n'
 						)
 					),
+					(0, esm.kt)('h3', { id: 'horizontalterms' }, 'horizontalTerms'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'horizontalTerms'),
+						" prop will alter autocomplete's CSS to display terms horizontally."
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} horizontalTerms={true} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'vertical' }, 'vertical'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'vertical'),
+						" prop will alter autocomplete's CSS to display in a vertical layout."
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} vertical={true} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'termstitle' }, 'termsTitle'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'termsTitle'),
+						' prop will display the given text above the autocomplete terms area. The default value is blank and does not affect the trending terms title ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trendingTitle'),
+						'.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} termsTitle={'Terms'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'trendingtitle' }, 'trendingTitle'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trendingTitle'),
+						" prop will display the given text above the autocomplete terms area when trending terms are displayed. The default value is 'Popular Searches' and does not affect non-trending terms title ",
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'termsTitle'),
+						'. Also requires ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller.config.settings.trending.limit'),
+						' to be configured)'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} trendingTitle={'Trending'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'facetstitle' }, 'facetsTitle'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facetsTitle'),
+						' prop will display the given text above the autocomplete facets area. (default is blank)'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} facetsTitle={'Filter By'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'contenttitle' }, 'contentTitle'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'contentTitle'),
+						' prop will display the given text above the autocomplete content area. (default is blank)'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} contentTitle={'Results'} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'viewportmaxheight' }, 'viewportMaxHeight'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'viewportMaxHeight'),
+						' prop will restrict autocomplete from overflowing the viewport. The max height of autocomplete will always be visible in the viewport. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} viewportMaxHeight={true} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'termsslot' }, 'termsSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'termsSlot'),
+						' prop accepts a custom JSX element to render instead of the default terms section. This will also replace the trending terms.'
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'terms'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trending'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'termsTitle'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'trendingTitle'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'showTrending'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} termsSlot={<CustomTermsComponent />} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'facetsslot' }, 'facetsSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facetsSlot'),
+						' prop accepts a custom JSX element to render instead of the default facets section. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facets'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'merchandising'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'facetsTitle'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideBanners'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'valueProps')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} facetsSlot={<CustomFacetsComponent />} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'contentslot' }, 'contentSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'contentSlot'),
+						' prop accepts a custom JSX element to render instead of the default content section. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'merchandising'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'search'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'filters'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} contentSlot={<CustomContentComponent />} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'resultsslot' }, 'resultsSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'resultsSlot'),
+						' prop accepts a custom JSX element to render instead of the default results section. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'contentTitle'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} resultsSlot={<CustomResultsComponent />} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'noresultsslot' }, 'noResultsSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'noResultsSlot'),
+						' prop accepts a custom JSX element to render instead of the default no results section. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'search'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} noResultsSlot={<CustomNoResultsComponent />} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'linkslot' }, 'linkSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'linkSlot'),
+						' prop accepts a custom JSX element to render instead of the default "see n results for keyword" link section. '
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The following props are available to be used within your custom component: ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'search'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'filters'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} linkSlot={<CustomLinkComponent />} />\n"
+						)
+					),
 					(0, esm.kt)('h3', { id: 'hidefacets' }, 'hideFacets'),
 					(0, esm.kt)(
 						'p',
@@ -10994,6 +11305,57 @@
 							"<Autocomplete controller={controller} input={'#searchInput'} hideTerms={true} />\n"
 						)
 					),
+					(0, esm.kt)('h3', { id: 'hidecontent' }, 'hideContent'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideContent'),
+						' prop specifies if the content area within autocomplete should be rendered.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} hideContent={true} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'hidebanners' }, 'hideBanners'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideBanners'),
+						' prop specifies if the banners within autocomplete should be rendered. (inline banners not affected)'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} hideBanners={true} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'hidelink' }, 'hideLink'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideLink'),
+						' prop specifies if the "see n results for keyword" text within autocomplete should be rendered.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} hideLink={true} />\n"
+						)
+					),
 					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)(
 						'p',
@@ -11002,7 +11364,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'breakpoints'),
 						' prop contains a breakpoints object that is passed to the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<Results />'),
-						' sub-component.'
+						" sub-component.\nWhen the viewport is between the Object's key value, those props will be merged with any exisiting Autocomplete component props."
 					),
 					(0, esm.kt)('p', null, 'Default Autocomplete ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'breakpoints'), ' object:'),
 					(0, esm.kt)(
@@ -11011,7 +11373,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const breakpoints = {\n    0: {\n        columns: 2,\n        rows: 1,\n    },\n    540: {\n        columns: 3,\n        rows: 1,\n    },\n    768: {\n        columns: 4,\n        rows: 1,\n    },\n    991: {\n        columns: 2,\n        rows: 2,\n    },\n};\n'
+							'const breakpoints = {\n    0: {\n        columns: 2,\n        rows: 1,\n        hideFacets: true,\n        vertical: true,\n    },\n    540: {\n        columns: 3,\n        rows: 1,\n        vertical: true,\n    },\n    768: {\n        columns: 2,\n        rows: 3,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -11217,6 +11579,12 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						hideLink: {
+							defaultValue: !1,
+							description: 'prevent the "see n results for keyword" link from rendering (hideContent will also hide this)',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						horizontalTerms: {
 							defaultValue: !1,
 							description: 'display terms horizontally, (not required if vertical prop is true)',
@@ -11262,6 +11630,7 @@
 						termsSlot: { description: 'Slot for custom terms component', table: { type: { summary: 'component' } } },
 						facetsSlot: { description: 'Slot for custom facets component', table: { type: { summary: 'component' } } },
 						contentSlot: { description: 'Slot for custom content component', table: { type: { summary: 'component' } } },
+						linkSlot: { description: 'Slot for custom "see n results for keyword" link component', table: { type: { summary: 'component' } } },
 						breakpoints: { description: 'Breakpoints options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 					},
 					componentArgs.p
@@ -11338,7 +11707,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12317,7 +12686,7 @@
 					);
 				});
 		},
-		52609: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		93555: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => Facets_stories });
@@ -12336,87 +12705,9 @@
 			var preact_module = __webpack_require__(33847),
 				mobxreact_esm = __webpack_require__(18495),
 				blocks = __webpack_require__(63255),
-				emotion_react_browser_esm = (__webpack_require__(43450), __webpack_require__(28165)),
-				classnames = __webpack_require__(72779),
-				classnames_default = __webpack_require__.n(classnames),
-				es = __webpack_require__(69038),
-				Facet = __webpack_require__(30650),
-				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
-				cache = __webpack_require__(79367),
-				defined = __webpack_require__(27193),
-				__assign = function () {
-					return (
-						(__assign =
-							Object.assign ||
-							function (t) {
-								for (var s, i = 1, n = arguments.length; i < n; i++)
-									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-								return t;
-							}),
-						__assign.apply(this, arguments)
-					);
-				},
-				CSS_facets = function facets() {
-					return (0, emotion_react_browser_esm.iv)({});
-				},
-				Facets = (0, es.Pi)(function (properties) {
-					var _a,
-						_b,
-						_c,
-						_d,
-						_e,
-						_f,
-						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
-						props = __assign(
-							__assign(
-								__assign(
-									{
-										facets:
-											null === (_b = null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.store) || void 0 === _b
-												? void 0
-												: _b.facets,
-									},
-									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.facets
-								),
-								properties
-							),
-							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.facets
-						),
-						facets = props.facets,
-						disableStyles = props.disableStyles,
-						className = props.className,
-						style = props.style,
-						subProps = {
-							facet: __assign(
-								__assign(
-									__assign(
-										{ className: 'ss__facets__facet' },
-										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.facet
-									),
-									(0, defined.r)({ disableStyles })
-								),
-								{ theme: props.theme }
-							),
-						},
-						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facets(), style]),
-						(null == facets ? void 0 : facets.length) > 0 &&
-							(0, emotion_react_browser_esm.tZ)(
-								cache.n,
-								null,
-								(0, emotion_react_browser_esm.tZ)(
-									'div',
-									__assign({ className: classnames_default()('ss__facets', className) }, styling),
-									facets.map(function (facet) {
-										return (0, emotion_react_browser_esm.tZ)(Facet.r, __assign({}, subProps.facet, { facet }));
-									})
-								)
-							)
-					);
-				}),
+				Facets = __webpack_require__(48958),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -12463,20 +12754,33 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facets controller={controller} facets={facets} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'limit' }, 'limit'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'limit'),
+						' prop will limit the maximum number of facets to display.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Facets controller={controller} facets={facets} limit={3}/>\n')
 					)
 				);
 			}
 			MDXContent.isMDXComponent = !0;
-			var Facets_stories_assign = function () {
+			var __assign = function () {
 					return (
-						(Facets_stories_assign =
+						(__assign =
 							Object.assign ||
 							function (t) {
 								for (var s, i = 1, n = arguments.length; i < n; i++)
 									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
 								return t;
 							}),
-						Facets_stories_assign.apply(this, arguments)
+						__assign.apply(this, arguments)
 					);
 				},
 				__awaiter = function (thisArg, _arguments, P, generator) {
@@ -12589,7 +12893,7 @@
 				};
 			const Facets_stories = {
 				title: 'Organisms/Facets',
-				component: Facets,
+				component: Facets.m,
 				parameters: {
 					docs: {
 						page: function page() {
@@ -12602,13 +12906,19 @@
 						return (0, preact_module.h)('div', { style: { maxWidth: '300px' } }, (0, preact_module.h)(Story, null));
 					},
 				],
-				argTypes: Facets_stories_assign(
+				argTypes: __assign(
 					{
 						facets: {
 							description: 'Facets store reference',
 							type: { required: !1 },
 							table: { type: { summary: 'Facets store object' } },
 							control: { type: 'none' },
+						},
+						limit: {
+							description: 'Maximum number of facets to display',
+							type: { required: !1 },
+							table: { type: { summary: 'number' } },
+							control: { type: 'number' },
 						},
 					},
 					componentArgs.p
@@ -12618,7 +12928,7 @@
 				ObservableFacets = (0, mobxreact_esm.Pi)(function (_a) {
 					var args = _a.args,
 						controller = _a.controller;
-					return (0, preact_module.h)(Facets, Facets_stories_assign({}, args, { controller }));
+					return (0, preact_module.h)(Facets.m, __assign({}, args, { controller }));
 				}),
 				Default = function Template(args, _a) {
 					var controller = _a.loaded.controller;
@@ -12638,6 +12948,93 @@
 					});
 				},
 			];
+		},
+		48958: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { m: () => Facets });
+			__webpack_require__(43105), __webpack_require__(32501), __webpack_require__(43450);
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28165),
+				classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72779),
+				classnames__WEBPACK_IMPORTED_MODULE_3___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(69038),
+				_Facet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(30650),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64189),
+				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(79367),
+				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(27193),
+				__assign = function () {
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
+				},
+				CSS_facets = function facets() {
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.iv)({});
+				},
+				Facets = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						_d,
+						_e,
+						_f,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
+						props = __assign(
+							__assign(
+								__assign(
+									{
+										facets:
+											null === (_b = null === (_a = properties.controller) || void 0 === _a ? void 0 : _a.store) || void 0 === _b
+												? void 0
+												: _b.facets,
+									},
+									null === (_c = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _c ? void 0 : _c.facets
+								),
+								properties
+							),
+							null === (_e = null === (_d = properties.theme) || void 0 === _d ? void 0 : _d.components) || void 0 === _e ? void 0 : _e.facets
+						),
+						limit = props.limit,
+						disableStyles = props.disableStyles,
+						className = props.className,
+						style = props.style,
+						facets = props.facets;
+					limit > 0 && (facets = facets.slice(0, +limit));
+					var subProps = {
+							facet: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__facets__facet' },
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.facet
+									),
+									(0, _utilities__WEBPACK_IMPORTED_MODULE_7__.r)({ disableStyles })
+								),
+								{ theme: props.theme }
+							),
+						},
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facets(), style]),
+						(null == facets ? void 0 : facets.length) > 0 &&
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_8__.n,
+								null,
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(
+									'div',
+									__assign({ className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('ss__facets', className) }, styling),
+									facets.map(function (facet) {
+										return (0,
+										_emotion_react__WEBPACK_IMPORTED_MODULE_5__.tZ)(_Facet__WEBPACK_IMPORTED_MODULE_9__.r, __assign({}, subProps.facet, { facet }));
+									})
+								)
+							)
+					);
+				});
 		},
 		53726: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -12796,7 +13193,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13516,7 +13913,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13965,7 +14362,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(55974),
+				snapify = __webpack_require__(59685),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -17149,7 +17546,7 @@
 				);
 			}
 		},
-		55974: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		59685: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -17163,16 +17560,18 @@
 				__webpack_require__(94148),
 				__webpack_require__(85371),
 				__webpack_require__(94908),
-				__webpack_require__(77950),
-				__webpack_require__(52506),
-				__webpack_require__(47256),
-				__webpack_require__(43105),
-				__webpack_require__(38695),
-				__webpack_require__(1939),
-				__webpack_require__(95094);
+				__webpack_require__(77950);
 			var BeaconType,
 				BeaconCategory,
-				cjs = __webpack_require__(39714),
+				mobx_esm = __webpack_require__(80075),
+				cjs =
+					(__webpack_require__(52506),
+					__webpack_require__(47256),
+					__webpack_require__(43105),
+					__webpack_require__(38695),
+					__webpack_require__(1939),
+					__webpack_require__(95094),
+					__webpack_require__(39714)),
 				cjs_default = __webpack_require__.n(cjs);
 			!(function (BeaconType) {
 				(BeaconType.PRODUCT = 'product'),
@@ -18972,7 +19371,8 @@
 					transformSearchRequest.pagination(request),
 					transformSearchRequest.siteId(request),
 					transformSearchRequest.facets(request),
-					transformSearchRequest.tracking(request)
+					transformSearchRequest.tracking(request),
+					transformSearchRequest.personalization(request)
 				);
 			}
 			(transformSearchRequest.sorts = function (request) {
@@ -19072,6 +19472,18 @@
 					void 0 === request && (request = {});
 					var reqTracking = request.tracking || {};
 					return reqTracking.userId ? { userId: reqTracking.userId } : {};
+				}),
+				(transformSearchRequest.personalization = function (request) {
+					void 0 === request && (request = {});
+					var personalization = request.personalization || {},
+						params = {};
+					return (
+						personalization.disabled && (params.skipPersonalization = personalization.disabled),
+						personalization.cart && (params.cart = personalization.cart),
+						personalization.lastViewed && (params.lastViewed = personalization.lastViewed),
+						personalization.shopper && (params.shopper = personalization.shopper),
+						params
+					);
 				});
 			__webpack_require__(85940);
 			function htmlUnescape(value) {
@@ -20165,8 +20577,7 @@
 						}),
 						Client
 					);
-				})(),
-				mobx_esm = __webpack_require__(80075);
+				})();
 			(0, mobx_esm.jQ)({ enforceActions: 'never' });
 			var AbstractStore = (function () {
 					function AbstractStore(config) {
@@ -21722,7 +22133,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.9.7' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.10.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -21752,7 +22163,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.9.7');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.10.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22007,14 +22418,15 @@
 						(null === (_a = window.searchspring) || void 0 === _a ? void 0 : _a.track) || this.setGlobal(),
 						this.sendEvents();
 				};
+			(0, mobx_esm.jQ)({ useProxies: 'never' });
 			function getSearchParams(state) {
 				var params = {};
 				if (
 					(state.tag && ((params.merchandising = params.merchandising || {}), (params.merchandising.landingPage = state.tag)),
 					state.query &&
 						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
-					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq[0])),
-					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq[0])),
+					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq)),
+					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq)),
 					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
 					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
 					state.sort)
@@ -22458,8 +22870,27 @@
 						AutocompleteController_extends(AutocompleteController, _super),
 						Object.defineProperty(AutocompleteController.prototype, 'params', {
 							get: function get() {
-								var urlState = this.urlManager.state;
-								return cjs_default()(AutocompleteController_assign({}, getSearchParams(urlState)), this.config.globals);
+								var _a,
+									_b,
+									_c,
+									urlState = this.urlManager.state,
+									params = cjs_default()(AutocompleteController_assign({}, getSearchParams(urlState)), this.config.globals),
+									userId = this.tracker.getUserId().userId;
+								if (
+									(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
+									!(null === (_b = null === (_a = this.config.globals) || void 0 === _a ? void 0 : _a.personalization) || void 0 === _b
+										? void 0
+										: _b.disabled))
+								) {
+									var cartItems = this.tracker.getCartItems();
+									cartItems.length && ((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
+									var lastViewedItems = this.tracker.getLastViewedItems();
+									lastViewedItems.length &&
+										((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
+									var shopperId = null === (_c = this.tracker.getShopperId()) || void 0 === _c ? void 0 : _c.shopperId;
+									shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
+								}
+								return params;
 							},
 							enumerable: !1,
 							configurable: !0,
@@ -23543,6 +23974,7 @@
 						AutocompleteStore
 					);
 				})(AbstractStore);
+			(0, mobx_esm.jQ)({ useProxies: 'never' });
 			var SearchController_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
 						return (
@@ -23974,12 +24406,29 @@
 							get: function get() {
 								var _a,
 									_b,
+									_c,
+									_d,
+									_e,
 									params = cjs_default()(SearchController_assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
 								(null === (_b = null === (_a = this.config.settings) || void 0 === _a ? void 0 : _a.redirects) || void 0 === _b
 									? void 0
 									: _b.merchandising) || ((params.search = params.search || {}), (params.search.redirectResponse = 'full'));
 								var userId = this.tracker.getUserId().userId;
-								return userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)), params;
+								if (
+									(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
+									!(null === (_d = null === (_c = this.config.globals) || void 0 === _c ? void 0 : _c.personalization) || void 0 === _d
+										? void 0
+										: _d.disabled))
+								) {
+									var cartItems = this.tracker.getCartItems();
+									cartItems.length && ((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
+									var lastViewedItems = this.tracker.getLastViewedItems();
+									lastViewedItems.length &&
+										((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
+									var shopperId = null === (_e = this.tracker.getShopperId()) || void 0 === _e ? void 0 : _e.shopperId;
+									shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
+								}
+								return params;
 							},
 							enumerable: !1,
 							configurable: !0,
@@ -24067,6 +24516,7 @@
 						SearchStore
 					);
 				})(AbstractStore);
+			(0, mobx_esm.jQ)({ useProxies: 'never' });
 			var snapify_awaiter = function (thisArg, _arguments, P, generator) {
 					return new (P || (P = Promise))(function (resolve, reject) {
 						function fulfilled(value) {
@@ -25304,7 +25754,7 @@
 				'./components/Molecules/Slideout/Slideout.stories.tsx': 48265,
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': 3661,
 				'./components/Organisms/Facet/Facet.stories.tsx': 42289,
-				'./components/Organisms/Facets/Facets.stories.tsx': 52609,
+				'./components/Organisms/Facets/Facets.stories.tsx': 93555,
 				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': 53726,
 				'./components/Organisms/Recommendation/Recommendation.stories.tsx': 35918,
 				'./components/Organisms/Results/Results.stories.tsx': 30177,
