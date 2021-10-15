@@ -177,7 +177,7 @@ export class SearchController extends AbstractController {
 				params.personalization.lastViewed = lastViewedItems.join(',');
 			}
 
-			const { shopperId } = this.tracker.getShopperId();
+			const shopperId = this.tracker.getShopperId()?.shopperId;
 			if (shopperId) {
 				params.personalization = params.personalization || {};
 				params.personalization.shopper = shopperId;
