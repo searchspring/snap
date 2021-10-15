@@ -29,6 +29,7 @@
 		"@searchspring/snap-preact": "^0.9.7",
 		"@searchspring/snap-toolbox": "^0.9.7",
 		"classnames": "^2.3.1",
+		"deepmerge": "^4.2.2",
 		"mobx-react-lite": "^3.2.1",
 		"react-ranger": "^2.1.0",
 		"swiper": "^6.8.4"

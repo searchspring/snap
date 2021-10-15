@@ -9,7 +9,7 @@ The `FinderController` should be used for building product finders. It makes que
 |---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 | url | URL to be redirected to upon clicking finder's 'find' button | ➖ | ✔️ |
-| globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
 | fields | an array of finder field configurations | ➖ | ✔️ |
 | fields.field | required field name | ➖ | ✔️ |
 | fields.label | optional finder label | ➖ |   |

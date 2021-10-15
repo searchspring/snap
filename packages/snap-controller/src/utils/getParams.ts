@@ -48,12 +48,12 @@ export function getSearchParams(state): Record<string, any> {
 
 	if (state.rq) {
 		params.search = params.search || {};
-		params.search.subQuery = state.rq[0];
+		params.search.subQuery = state.rq;
 	}
 
 	if (state.oq) {
 		params.search = params.search || {};
-		params.search.originalQuery = state.oq[0];
+		params.search.originalQuery = state.oq;
 	}
 
 	if (state.page) {

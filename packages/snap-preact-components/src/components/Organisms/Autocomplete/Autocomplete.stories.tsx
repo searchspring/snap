@@ -111,6 +111,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideLink: {
+			defaultValue: false,
+			description: 'prevent the "see n results for keyword" link from rendering (hideContent will also hide this)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		horizontalTerms: {
 			defaultValue: false,
 			description: 'display terms horizontally, (not required if vertical prop is true)',
@@ -206,6 +217,14 @@ export default {
 		},
 		contentSlot: {
 			description: 'Slot for custom content component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		linkSlot: {
+			description: 'Slot for custom "see n results for keyword" link component',
 			table: {
 				type: {
 					summary: 'component',

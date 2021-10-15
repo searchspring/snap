@@ -5,13 +5,14 @@ import { useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProp, BreakpointsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
-import { Facet, FacetProps } from '../../Organisms/Facet';
+import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
@@ -200,14 +201,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		768: {
 			columns: 2,
-			rows: 2,
+			rows: 3,
 		},
 	};
 	const displaySettings = useDisplaySettings(breakpoints);
 	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
 		props = {
 			...props,
 			...displaySettings,
+			theme,
 		};
 	}
 	const {
@@ -215,6 +218,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		hideFacets,
 		hideContent,
 		hideBanners,
+		hideLink,
 		horizontalTerms,
 		vertical,
 		termsTitle,
@@ -227,6 +231,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		contentSlot,
 		resultsSlot,
 		noResultsSlot,
+		linkSlot,
 		disableStyles,
 		className,
 		width,
@@ -244,40 +249,59 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		input?.setAttribute('spellcheck', 'false');
 		input?.setAttribute('autocomplete', 'off');
 	}
+	let delayTimeout;
+	const delayTime = 333;
+	const valueProps = {
+		onMouseEnter: (e) => {
+			clearTimeout(delayTimeout);
+			delayTimeout = setTimeout(() => {
+				e.target.focus();
+			}, delayTime);
+		},
+		onMouseLeave: () => {
+			clearTimeout(delayTimeout);
+		},
+	};
+
 	const subProps: AutocompleteSubProps = {
-		facet: {
+		facets: {
 			// default props
-			className: 'ss__autocomplete__facet',
-			limit: 6,
-			disableOverflow: true,
-			disableCollapse: true,
+			limit: 3,
 			// global theme
-			...globalTheme?.components?.facet,
+			...globalTheme?.components?.facets,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
-
 			// component theme overrides
-			theme: {
-				components: {
-					facetGridOptions: {
-						columns: 3,
+			theme: deepmerge(
+				{
+					components: {
+						facet: {
+							limit: 6,
+							disableOverflow: true,
+							disableCollapse: true,
+							previewOnFocus: true,
+							valueProps,
+						},
+						facetGridOptions: {
+							columns: 3,
+						},
+						facetHierarchyOptions: {
+							hideCount: true,
+						},
+						facetListOptions: {
+							hideCheckbox: true,
+							hideCount: true,
+						},
+						facetPaletteOptions: {
+							hideLabel: true,
+							columns: 3,
+						},
 					},
-					facetHierarchyOptions: {
-						hideCount: true,
-					},
-					facetListOptions: {
-						hideCheckbox: true,
-						hideCount: true,
-					},
-					facetPaletteOptions: {
-						hideLabel: true,
-						columns: 3,
-					},
-					...props.theme?.components,
 				},
-			},
+				{ ...props.theme }
+			),
 		},
 		banner: {
 			// default props
@@ -302,14 +326,16 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: {
-				components: {
-					result: {
-						hideBadge: true,
+			theme: deepmerge(
+				{
+					components: {
+						result: {
+							hideBadge: true,
+						},
 					},
-					...props.theme?.components,
 				},
-			},
+				{ ...props.theme }
+			),
 		},
 		icon: {
 			// default props
@@ -339,23 +365,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}, []);
 	}
 
-	let delayTimeout;
-	const delayTime = 333;
-	const valueProps = {
-		onMouseEnter: (e) => {
-			clearTimeout(delayTimeout);
-			delayTimeout = setTimeout(() => {
-				e.target.focus();
-			}, delayTime);
-		},
-		onMouseLeave: () => {
-			clearTimeout(delayTimeout);
-		},
-	};
-
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && terms.length === 0;
-	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER).slice(0, 3);
+	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER);
 	const onlyTerms = trending?.length && !loaded;
 
 	const styling: { css?: any } = {};
@@ -390,7 +402,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideTerms && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, controller })
+								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (
@@ -446,7 +458,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideFacets &&
 						(facetsSlot ? (
 							<div className="ss__autocomplete__facets">
-								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, controller, valueProps })}
+								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
 							</div>
 						) : (
 							facetsToShow.length > 0 && (
@@ -462,9 +474,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												<h5>{facetsTitle}</h5>
 											</div>
 										) : null}
-										{facetsToShow.map((facet) => (
-											<Facet {...subProps.facet} facet={facet} previewOnFocus={true} valueProps={valueProps} />
-										))}
+										<Facets {...subProps.facets} facets={facetsToShow} />
 										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
 									</div>
 								</>
@@ -510,14 +520,18 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
 
-								{search?.query?.string && results.length > 0 ? (
-									<div className="ss__autocomplete__content__info">
-										<a href={state.url.href}>
-											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-											{search.query.string}"
-											<Icon {...subProps.icon} />
-										</a>
-									</div>
+								{!hideLink ? (
+									linkSlot ? (
+										cloneElement(linkSlot, { search, results, pagination, filters, controller })
+									) : search?.query?.string && results.length > 0 ? (
+										<div className="ss__autocomplete__content__info">
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										</div>
+									) : null
 								) : null}
 							</div>
 						) : null
@@ -554,7 +568,7 @@ const escapeRegExp = (string: string): string => {
 };
 
 interface AutocompleteSubProps {
-	facet: FacetProps;
+	facets: FacetsProps;
 	banner: BannerProps;
 	results: ResultsProp;
 	icon: IconProps;
@@ -566,6 +580,7 @@ export interface AutocompleteProps extends ComponentProps {
 	hideFacets?: boolean;
 	hideContent?: boolean;
 	hideBanners?: boolean;
+	hideLink?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
 	termsTitle?: string;
@@ -578,7 +593,8 @@ export interface AutocompleteProps extends ComponentProps {
 	contentSlot?: JSX.Element;
 	resultsSlot?: JSX.Element;
 	noResultsSlot?: JSX.Element;
+	linkSlot?: JSX.Element;
 	breakpoints?: BreakpointsProps;
-	controller?: AutocompleteController;
+	controller: AutocompleteController;
 	width?: string;
 }

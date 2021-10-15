@@ -120,7 +120,7 @@ export class RecommendationInstantiator {
 					globals,
 					...this.config.config,
 				};
-				const createRecommendationController = (await import('../create/recommendationController')).default;
+				const createRecommendationController = (await import('../create/createRecommendationController')).default;
 				const client = this.config.services?.client || this.client;
 				const tracker = this.config.services?.tracker || this.tracker;
 				const recs = createRecommendationController(
