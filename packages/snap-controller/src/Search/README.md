@@ -8,6 +8,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 |---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| globals.personalization.disabled | disable personalized boosts| ➖ |   |
 | settings.redirects.merchandising | enable merchandising redirects | true |   |
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |

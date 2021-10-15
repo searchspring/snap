@@ -8,7 +8,12 @@ export type StoreConfig = {
 
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
-	globals?: any;
+	globals?: {
+		personalization?: {
+			disabled: boolean;
+		};
+		[any: string]: unknown;
+	};
 	settings?: {
 		redirects?: {
 			merchandising?: boolean;
@@ -39,7 +44,12 @@ export type FinderFieldConfig = {
 
 // Autocomplete config
 export type AutocompleteStoreConfig = StoreConfig & {
-	globals?: any;
+	globals?: {
+		personalization?: {
+			disabled: boolean;
+		};
+		[any: string]: unknown;
+	};
 	selector: string;
 	action?: string;
 	settings?: {

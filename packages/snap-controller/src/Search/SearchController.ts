@@ -164,6 +164,29 @@ export class SearchController extends AbstractController {
 			params.tracking.userId = userId;
 		}
 
+		if (this.config.globals?.personalization?.disabled) {
+			params.personalization = params.personalization || {};
+			params.personalization.disabled = true;
+		} else {
+			const cartItems = this.tracker.getCartItems();
+			if (cartItems.length) {
+				params.personalization = params.personalization || {};
+				params.personalization.cart = cartItems.join(',');
+			}
+
+			const lastViewedItems = this.tracker.getLastViewedItems();
+			if (lastViewedItems.length) {
+				params.personalization = params.personalization || {};
+				params.personalization.lastViewed = lastViewedItems.join(',');
+			}
+
+			const { shopperId } = this.tracker.getShopperId();
+			if (shopperId) {
+				params.personalization = params.personalization || {};
+				params.personalization.shopper = shopperId;
+			}
+		}
+
 		return params;
 	}
 
