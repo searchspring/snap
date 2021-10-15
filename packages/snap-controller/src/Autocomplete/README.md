@@ -9,8 +9,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | id | unique identifier for this controller | ➖ | ✔️ |
 | selector | css selector for input elements that DOM events should be bound to | ➖ | ✔️ |
 | action | optional way to override the form action or provide one when it does not exist | ➖ |   |
-| globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
-| globals.personalization.disabled | disable personalized boosts| ➖ |   |
+| globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
 | settings.initializeFromUrl | initialize the controller with query parameter from URL (pre-fill input with current search) | true |   |
 | settings.syncInputs | if the selector targets multiple inputs, the value of those inputs will be synced | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |

@@ -119,10 +119,7 @@ export class AutocompleteController extends AbstractController {
 			params.tracking.userId = userId;
 		}
 
-		if (this.config.globals?.personalization?.disabled) {
-			params.personalization = params.personalization || {};
-			params.personalization.disabled = true;
-		} else {
+		if (!this.config.globals?.personalization?.disabled) {
 			const cartItems = this.tracker.getCartItems();
 			if (cartItems.length) {
 				params.personalization = params.personalization || {};

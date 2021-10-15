@@ -8,7 +8,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 |---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 | tag | unique name of the recommendations profile | ➖ | ✔️ |
-| globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
 
 <br>
 
