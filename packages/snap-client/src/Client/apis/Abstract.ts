@@ -6,6 +6,7 @@ export type HTTPHeaders = { [key: string]: string };
 export type HTTPQuery = { [key: string]: string | number | null | boolean | Array<string | number | null | boolean> | HTTPQuery };
 export type HTTPBody = Json | FormData | URLSearchParams;
 
+const MAX_RETRY = 5;
 export interface RequestOpts {
 	path: string;
 	method: HTTPMethod;
@@ -15,6 +16,9 @@ export interface RequestOpts {
 }
 
 export class API {
+	retryDelay = 1000;
+	retryCount = 0;
+
 	constructor(protected configuration: ApiConfiguration) {
 		// nothing else todo
 	}
@@ -23,7 +27,19 @@ export class API {
 		const { url, init } = this.createFetchParams(context);
 		const response = await this.fetchApi(url, init);
 		if (response.status >= 200 && response.status < 300) {
+			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+			this.retryDelay = 1000;
 			return response;
+		} else if (response.status == 429) {
+			// request was rate limited
+			if (this.retryCount < MAX_RETRY) {
+				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
+				this.retryDelay = this.retryDelay * 2;
+				this.retryCount++;
+				return await this.request(context);
+			} else {
+				throw `Request Rate Limited: Could not fetch results after ${MAX_RETRY} attempts`;
+			}
 		}
 		throw response;
 	}
