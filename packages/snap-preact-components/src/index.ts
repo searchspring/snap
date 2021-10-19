@@ -14,6 +14,7 @@ export * from './components/Atoms/Price';
 // MOLECULES
 export * from './components/Molecules/Carousel';
 export * from './components/Molecules/Checkbox';
+export * from './components/Molecules/ErrorHandler';
 export * from './components/Molecules/FacetGridOptions';
 export * from './components/Molecules/FacetHierarchyOptions';
 export * from './components/Molecules/FacetListOptions';
