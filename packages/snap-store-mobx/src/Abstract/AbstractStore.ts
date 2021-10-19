@@ -1,5 +1,5 @@
 import { makeObservable, observable, toJS, configure } from 'mobx';
-import type { StoreConfigs } from '../types';
+import type { StoreConfigs, ErrorType } from '../types';
 
 configure({
 	// useProxies: "never",  // for IE 11 (es5) support
@@ -11,6 +11,11 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = false;
 	public loaded = false;
+	public error: {
+		code?: number;
+		type: ErrorType;
+		message: string;
+	};
 	public config: StoreConfigs;
 
 	constructor(config: StoreConfigs) {

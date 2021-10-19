@@ -77,3 +77,9 @@ export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderS
 export type StoreServices = {
 	urlManager?: UrlManager;
 };
+
+export enum ErrorType {
+	WARNING = 'warning',
+	INFO = 'info',
+	ERROR = 'error',
+}

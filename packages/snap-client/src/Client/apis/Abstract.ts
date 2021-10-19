@@ -1,3 +1,5 @@
+import { fibonacci } from '../utils/fibonacci';
+
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
 export type Json = any;
@@ -6,7 +8,6 @@ export type HTTPHeaders = { [key: string]: string };
 export type HTTPQuery = { [key: string]: string | number | null | boolean | Array<string | number | null | boolean> | HTTPQuery };
 export type HTTPBody = Json | FormData | URLSearchParams;
 
-const MAX_RETRY = 5;
 export interface RequestOpts {
 	path: string;
 	method: HTTPMethod;
@@ -16,8 +17,8 @@ export interface RequestOpts {
 }
 
 export class API {
-	retryDelay = 1000;
-	retryCount = 0;
+	private retryDelay = 1000;
+	private retryCount = 1;
 
 	constructor(protected configuration: ApiConfiguration) {
 		// nothing else todo
@@ -31,17 +32,16 @@ export class API {
 			this.retryDelay = 1000;
 			return response;
 		} else if (response.status == 429) {
-			// request was rate limited
-			if (this.retryCount < MAX_RETRY) {
+			if (this.retryCount < this.configuration.maxRetry) {
 				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
-				this.retryDelay = this.retryDelay * 2;
+				this.retryDelay = fibonacci(this.retryCount) * 1000;
 				this.retryCount++;
 				return await this.request(context);
 			} else {
-				throw `Request Rate Limited: Could not fetch results after ${MAX_RETRY} attempts`;
+				throw response.status;
 			}
 		}
-		throw response;
+		throw response.status;
 	}
 
 	private createFetchParams(context: RequestOpts) {
@@ -79,12 +79,18 @@ export interface ApiConfigurationParameters {
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
+	maxRetry?: number;
 }
 
 export class ApiConfiguration {
+	public maxRetry = 8;
+
 	constructor(private configuration: ApiConfigurationParameters) {
 		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
 		configuration.basePath = configuration.basePath || apiHost;
+		if (configuration.maxRetry) {
+			this.maxRetry = configuration.maxRetry;
+		}
 	}
 
 	getSiteId(): string {
