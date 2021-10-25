@@ -41,6 +41,7 @@ export class FinderStore extends AbstractStore {
 	}
 
 	update(data: SearchResponseModel & { meta: MetaResponseModel; selections: SelectionStore[] }): void {
+		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
