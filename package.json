@@ -1,6 +1,7 @@
 {
 	"name": "@searchspring/snap",
 	"private": true,
+	"type": "module",
 	"workspaces": [
 		"packages/*",
 		"packages/snapps/*"
@@ -9,6 +10,7 @@
 		"commit": "cz",
 		"build": "lerna exec --stream 'npm run build'",
 		"build:docs": "lerna exec --stream --parallel 'npm run build:docs'",
+		"build:feed": "node ./docs/generateFeed.js",
 		"test": "npm run test --workspaces",
 		"dev": "lerna exec --parallel --stream 'npm run dev'",
 		"dev:docs": "serve ./ -l 2222",
