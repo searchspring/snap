@@ -112,7 +112,7 @@ The `iconOverflowLess` prop contains the icon name of the facet overflow button 
 ```
 
 ### overflowSlot
-The `overflowSlot` prop is a JSX element to used change the display of the show more/less toggle.
+The `overflowSlot` prop is a JSX element used to change the display of the show more/less toggle.
 
 ```typescript
 const Overflow = (props) => {
@@ -126,6 +126,46 @@ const Overflow = (props) => {
 ```jsx
 <Facet facet={controller.store.facets[0]} overflowSlot={<Overflow/>} />
 ```
+
+
+### fields
+The `fields` prop allows you to manually change prop values on a per-facet level, sorted by the facet label.
+
+```typescript
+const fieldsProp = {
+	Color: {
+		limit: 6,
+	},
+	Size: { 
+		disableOverflow: true,
+		disableCollapse: true,
+	}
+},
+```
+
+```jsx
+<Facet facet={controller.store.facets[0]} fields={fieldsProp} />
+```
+
+
+### optionsSlot
+The `optionsSlot` prop is a JSX element used to manually set the options component used, regardless of the facet.display type. Returns the facet data.
+
+```typescript
+const CustomFacetOptions = (props) => {
+	const facet = props.facet;
+	return (
+		<div>
+			{facet && facet.values.map(value => <span>{value.label}</span>)}
+		</div>
+	)
+}
+```
+
+```jsx
+<Facet facet={controller.store.facets[0]} optionsSlot={<CustomFacetOptions/>} />
+```
+
 
 ### iconColor
 The `iconColor` prop sets the facet icon color.

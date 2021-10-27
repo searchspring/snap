@@ -51,7 +51,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: FacetProps = {
+	let props: FacetProps = {
 		// default props
 		limit: 12,
 		disableOverflow: false,
@@ -67,6 +67,14 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.facet,
 	};
+
+	//manual props override on a per facet level using the fields prop
+	if (props.fields && props.fields[props.facet.label]) {
+		props = {
+			...props,
+			...props.fields[props.facet.label],
+		};
+	}
 
 	const {
 		disableCollapse,
@@ -84,6 +92,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconOverflowMore,
 		iconOverflowLess,
 		overflowSlot,
+		optionsSlot,
 		disableStyles,
 		className,
 		style,
@@ -235,17 +244,22 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				>
 					<div className={classnames('ss__facet__options', className)}>
 						{(() => {
-							switch (facet?.display) {
-								case FacetDisplay.SLIDER:
-									return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
-								case FacetDisplay.GRID:
-									return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
-								case FacetDisplay.PALETTE:
-									return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
-								case FacetDisplay.HIERARCHY:
-									return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
-								default:
-									return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+							//manual options component
+							if (optionsSlot) {
+								return cloneWithProps(optionsSlot, { facet });
+							} else {
+								switch (facet?.display) {
+									case FacetDisplay.SLIDER:
+										return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+									case FacetDisplay.GRID:
+										return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
+									case FacetDisplay.PALETTE:
+										return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
+									case FacetDisplay.HIERARCHY:
+										return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
+									default:
+										return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+								}
 							}
 						})()}
 					</div>
@@ -279,15 +293,19 @@ interface FacetSubProps {
 	showMoreLessIcon: IconProps;
 }
 
-export interface FacetProps extends ComponentProps {
-	disableCollapse?: boolean;
+export interface FacetProps extends OptionalFacetProps {
 	facet: ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet | HierarchyFacet;
+}
+
+interface OptionalFacetProps extends ComponentProps {
+	disableCollapse?: boolean;
 	color?: string;
 	iconCollapse?: IconType | string;
 	iconColor?: string;
 	iconExpand?: IconType | string;
 	limit?: number;
 	overflowSlot?: JSX.Element;
+	optionsSlot?: JSX.Element;
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
@@ -295,4 +313,9 @@ export interface FacetProps extends ComponentProps {
 	showLessText?: string;
 	iconOverflowMore?: string;
 	iconOverflowLess?: string;
+	fields?: FieldProps;
 }
+
+type FieldProps = {
+	[variable: string]: FacetProps;
+};
