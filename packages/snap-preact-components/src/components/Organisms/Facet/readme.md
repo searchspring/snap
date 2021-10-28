@@ -129,7 +129,7 @@ const Overflow = (props) => {
 
 
 ### fields
-The `fields` prop allows you to manually change prop values on a per-facet level, sorted by the facet label.
+The `fields` prop allows you to manually change prop values on a per-facet level, sorted by the facet field.
 
 ```typescript
 const fieldsProp = {
@@ -149,7 +149,7 @@ const fieldsProp = {
 
 
 ### optionsSlot
-The `optionsSlot` prop is a JSX element used to manually set the options component used, regardless of the facet.display type. Returns the facet data.
+The `optionsSlot` prop is a JSX element used to manually set the options component used, regardless of the facet.display type. Returns the facet,valueProps, limit, & previewOnFocus prop values.
 
 ```typescript
 const CustomFacetOptions = (props) => {

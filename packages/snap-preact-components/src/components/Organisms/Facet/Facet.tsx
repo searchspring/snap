@@ -67,12 +67,11 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.facet,
 	};
-
 	//manual props override on a per facet level using the fields prop
-	if (props.fields && props.fields[props.facet.label]) {
+	if (props.fields && props.fields[props.facet?.field]) {
 		props = {
 			...props,
-			...props.fields[props.facet.label],
+			...props.fields[props.facet?.field],
 		};
 	}
 
@@ -246,7 +245,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						{(() => {
 							//manual options component
 							if (optionsSlot) {
-								return cloneWithProps(optionsSlot, { facet });
+								return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
 							} else {
 								switch (facet?.display) {
 									case FacetDisplay.SLIDER:
