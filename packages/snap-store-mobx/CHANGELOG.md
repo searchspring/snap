@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* **facet:** bugfix for issue [#231](https://github.com/searchspring/snap/issues/231), Issue when switching between slider and list types ([21c97c5](https://github.com/searchspring/snap/commit/21c97c51a6c8b33e0bcbfae0e63e504bfc9623b6))
+
+
+### Features
+
+* modify retry delay to fibonacci algo, modify error code handling of request failures ([50613da](https://github.com/searchspring/snap/commit/50613da92db014552f3ff6a529fb742b4559cc02))
+
+
+
+
+
 # [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
 
 

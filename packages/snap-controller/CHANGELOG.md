@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
+
+
+### Features
+
+* modify retry delay to fibonacci algo, modify error code handling of request failures ([50613da](https://github.com/searchspring/snap/commit/50613da92db014552f3ff6a529fb742b4559cc02))
+
+
+
+
+
 # [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
 
 
