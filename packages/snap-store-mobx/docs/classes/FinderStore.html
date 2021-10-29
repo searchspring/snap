@@ -94,6 +94,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="FinderStore.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="FinderStore.html#controller" class="tsd-kind-icon">controller</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="FinderStore.html#custom" class="tsd-kind-icon">custom</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="FinderStore.html#error" class="tsd-kind-icon">error</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="FinderStore.html#loaded" class="tsd-kind-icon">loaded</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="FinderStore.html#loading" class="tsd-kind-icon">loading</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="FinderStore.html#meta" class="tsd-kind-icon">meta</a></li>
@@ -128,7 +129,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L18">Finder/FinderStore.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L18">Finder/FinderStore.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -154,7 +155,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#config">config</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L12">Finder/FinderStore.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L12">Finder/FinderStore.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -165,7 +166,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#controller">controller</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L10">Abstract/AbstractStore.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,12 +177,37 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#custom">custom</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L11">Abstract/AbstractStore.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>code<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="../enums/ErrorType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ErrorType</a><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#error">error</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L14">Abstract/AbstractStore.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> code<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>type<span class="tsd-signature-symbol">: </span><a href="../enums/ErrorType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ErrorType</a></h5>
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -192,7 +218,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#loaded">loaded</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L13">Abstract/AbstractStore.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L13">Abstract/AbstractStore.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +229,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#loading">loading</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L12">Abstract/AbstractStore.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -213,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">meta<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MetaResponseModel</span><span class="tsd-signature-symbol"> = {}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L13">Finder/FinderStore.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L13">Finder/FinderStore.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -223,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">pagination<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PaginationStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L15">Finder/FinderStore.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L15">Finder/FinderStore.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">selections<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectionStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L16">Finder/FinderStore.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L16">Finder/FinderStore.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -243,7 +269,7 @@
 					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <a href="../modules.html#StoreServices" class="tsd-signature-type" data-tsd-kind="Type alias">StoreServices</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L11">Finder/FinderStore.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L11">Finder/FinderStore.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -253,7 +279,7 @@
 					<div class="tsd-signature tsd-kind-icon">storage<span class="tsd-signature-symbol">:</span> <a href="StorageStore.html" class="tsd-signature-type" data-tsd-kind="Class">StorageStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L14">Finder/FinderStore.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L14">Finder/FinderStore.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -271,7 +297,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#setConfig">setConfig</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L26">Abstract/AbstractStore.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L31">Abstract/AbstractStore.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -294,7 +320,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L37">Finder/FinderStore.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L37">Finder/FinderStore.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -321,7 +347,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#toJSON">toJSON</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L32">Abstract/AbstractStore.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Abstract/AbstractStore.ts#L37">Abstract/AbstractStore.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -345,7 +371,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="AbstractStore.html">AbstractStore</a>.<a href="AbstractStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/searchspring/snap/blob/991eabad/packages/snap-store-mobx/src/Finder/FinderStore.ts#L43">Finder/FinderStore.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/searchspring/snap/blob/40f2fa35/packages/snap-store-mobx/src/Finder/FinderStore.ts#L43">Finder/FinderStore.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -371,6 +397,9 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
+						<a href="../enums/ErrorType.html" class="tsd-kind-icon">Error<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
 						<a href="../enums/StorageType.html" class="tsd-kind-icon">Storage<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -395,6 +424,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="FinderStore.html#custom" class="tsd-kind-icon">custom</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="FinderStore.html#error" class="tsd-kind-icon">error</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="FinderStore.html#loaded" class="tsd-kind-icon">loaded</a>

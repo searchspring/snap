@@ -1799,7 +1799,7 @@
 					'M42.565 37.031c0 6.375-4.563 11.406-11.187 12.5v5.469c0 0.563-0.438 1-1 1h-4.219c-0.531 0-1-0.438-1-1v-5.469c-7.312-1.031-11.312-5.406-11.469-5.594-0.312-0.375-0.344-0.906-0.063-1.281l3.219-4.219c0.156-0.219 0.438-0.344 0.719-0.375s0.563 0.063 0.75 0.281c0.063 0.031 4.438 4.219 9.969 4.219 3.063 0 6.375-1.625 6.375-5.156 0-3-3.688-4.469-7.906-6.156-5.625-2.219-12.625-5.031-12.625-12.875 0-5.75 4.5-10.5 11.031-11.75v-5.625c0-0.563 0.469-1 1-1h4.219c0.563 0 1 0.438 1 1v5.5c6.344 0.719 9.719 4.156 9.844 4.281 0.312 0.344 0.375 0.812 0.156 1.187l-2.531 4.563c-0.156 0.281-0.406 0.469-0.719 0.5-0.312 0.063-0.594-0.031-0.844-0.219-0.031-0.031-3.812-3.375-8.5-3.375-3.969 0-6.719 1.969-6.719 4.812 0 3.312 3.812 4.781 8.25 6.5 5.75 2.219 12.25 4.75 12.25 12.281z',
 				envelope:
 					'M56 20.188v24.812c0 2.75-2.25 5-5 5h-46c-2.75 0-5-2.25-5-5v-24.812c0.938 1.031 2 1.938 3.156 2.719 5.187 3.531 10.437 7.063 15.531 10.781 2.625 1.938 5.875 4.312 9.281 4.312h0.063c3.406 0 6.656-2.375 9.281-4.312 5.094-3.688 10.344-7.25 15.562-10.781 1.125-0.781 2.188-1.687 3.125-2.719zM56 11c0 3.5-2.594 6.656-5.344 8.562-4.875 3.375-9.781 6.75-14.625 10.156-2.031 1.406-5.469 4.281-8 4.281h-0.063c-2.531 0-5.969-2.875-8-4.281-4.844-3.406-9.75-6.781-14.594-10.156-2.219-1.5-5.375-5.031-5.375-7.875 0-3.063 1.656-5.688 5-5.688h46c2.719 0 5 2.25 5 5z',
-				'exclamation-circle':
+				error:
 					'M28 0c15.458 0 28 12.542 28 28s-12.542 28-28 28-28-12.542-28-28 12.542-28 28-28zM32.667 45.464v-6.927c0-0.656-0.51-1.203-1.13-1.203h-7c-0.656 0-1.203 0.547-1.203 1.203v6.927c0 0.656 0.547 1.203 1.203 1.203h7c0.62 0 1.13-0.547 1.13-1.203zM32.594 32.922l0.656-22.641c0-0.255-0.109-0.51-0.365-0.656-0.219-0.182-0.547-0.292-0.875-0.292h-8.021c-0.328 0-0.656 0.109-0.875 0.292-0.255 0.146-0.365 0.401-0.365 0.656l0.62 22.641c0 0.51 0.547 0.911 1.24 0.911h6.745c0.656 0 1.203-0.401 1.24-0.911z',
 				eye: 'M28 20.374q3.098 0 5.362 2.264t2.264 5.362-2.264 5.362-5.362 2.264-5.362-2.264-2.264-5.362 2.264-5.362 5.362-2.264zM28 40.749q5.243 0 8.996-3.753t3.753-8.996-3.753-8.996-8.996-3.753-8.996 3.753-3.753 8.996 3.753 8.996 8.996 3.753zM28 8.936q9.413 0 17.038 5.243t10.962 13.821q-3.336 8.579-10.962 13.821t-17.038 5.243-17.038-5.243-10.962-13.821q3.336-8.579 10.962-13.821t17.038-5.243z',
 				'eye-thin':
@@ -1810,6 +1810,7 @@
 					'M28 52c-0.5 0-1-0.188-1.375-0.563l-19.5-18.813c-0.25-0.219-7.125-6.5-7.125-14 0-9.156 5.594-14.625 14.938-14.625 5.469 0 10.594 4.312 13.062 6.75 2.469-2.437 7.594-6.75 13.062-6.75 9.344 0 14.938 5.469 14.938 14.625 0 7.5-6.875 13.781-7.156 14.063l-19.469 18.75c-0.375 0.375-0.875 0.563-1.375 0.563z',
 				'heart-o':
 					'M52 18.625c0-8.781-5.937-10.625-10.938-10.625-4.656 0-9.906 5.031-11.531 6.969-0.75 0.906-2.313 0.906-3.063 0-1.625-1.938-6.875-6.969-11.531-6.969-5 0-10.938 1.844-10.938 10.625 0 5.719 5.781 11.031 5.844 11.094l18.156 17.5 18.125-17.469c0.094-0.094 5.875-5.406 5.875-11.125zM56 18.625c0 7.5-6.875 13.781-7.156 14.063l-19.469 18.75c-0.375 0.375-0.875 0.563-1.375 0.563s-1-0.188-1.375-0.563l-19.5-18.813c-0.25-0.219-7.125-6.5-7.125-14 0-9.156 5.594-14.625 14.938-14.625 5.469 0 10.594 4.312 13.062 6.75 2.469-2.437 7.594-6.75 13.062-6.75 9.344 0 14.938 5.469 14.938 14.625z',
+				info: 'M56.1425 28.2143C56.1425 43.6783 43.6065 56.2143 28.1425 56.2143C12.6786 56.2143 0.142578 43.6783 0.142578 28.2143C0.142578 12.7504 12.6786 0.214325 28.1425 0.214325C43.6065 0.214325 56.1425 12.7504 56.1425 28.2143ZM32.2543 16.7406C33.1441 15.8361 33.587 14.7358 33.587 13.4469C33.587 12.1603 33.1441 11.0578 32.2543 10.1417C31.3665 9.22792 30.2961 8.76988 29.0452 8.76988C27.7901 8.76988 26.7156 9.22562 25.8194 10.1417C24.9232 11.0578 24.4741 12.1603 24.4741 13.4469C24.4741 14.7358 24.9232 15.8361 25.8194 16.7406C26.7177 17.6498 27.7901 18.1032 29.0452 18.1032C30.2961 18.1032 31.3665 17.6498 32.2543 16.7406ZM29.9419 45.5994C30.7373 45.2628 31.8057 44.7746 33.1417 44.1326C33.1417 44.1326 32.9859 42.1999 32.4746 42.3716C31.9633 42.5432 31.5033 42.6302 31.0983 42.6302C30.237 42.6302 29.6304 42.4585 29.2785 42.113C28.9285 41.7675 28.7544 41.1188 28.7544 40.1669C28.7544 39.7902 28.8076 39.2285 28.9175 38.4928C29.0238 37.7527 29.1466 37.0951 29.2822 36.52L30.9462 29.3555C31.1093 28.6979 31.2211 27.9756 31.2816 27.1865C31.342 26.3996 31.3714 25.849 31.3714 25.5369C31.3714 24.0255 30.9352 22.7995 30.0647 21.8543C29.1942 20.9091 27.9536 20.4365 26.3464 20.4365C25.4521 20.4365 24.5065 20.6305 23.5059 21.0161C22.5053 21.4018 21.4588 21.8654 20.3648 22.4071C20.3648 22.4071 20.6323 24.3198 21.0868 24.157C21.5395 23.9943 21.983 23.9096 22.4155 23.9096C23.2969 23.9096 23.8907 24.0924 24.2022 24.4535C24.5138 24.8146 24.6695 25.4566 24.6695 26.3751C24.6695 26.8833 24.6201 27.4473 24.5174 28.0603C24.4167 28.6778 24.2902 29.3309 24.1418 30.0198L22.4704 37.2111C22.322 37.9667 22.2139 38.6444 22.1461 39.2441C22.0783 39.8437 22.0453 40.4322 22.0453 41.0051C22.0453 42.483 22.4943 43.7024 23.3922 44.6632C24.2902 45.6217 25.5492 46.1032 27.1674 46.1032C28.2211 46.1032 29.1466 45.936 29.9419 45.5994Z',
 				'layout-grid':
 					'M16 41v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM16 25v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM36 41v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM16 9v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM36 25v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM56 41v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM36 9v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM56 25v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3zM56 9v6c0 1.656-1.344 3-3 3h-10c-1.656 0-3-1.344-3-3v-6c0-1.656 1.344-3 3-3h10c1.656 0 3 1.344 3 3z',
 				'layout-large':
@@ -1838,6 +1839,7 @@
 					'M38.264 34.007l10.298-9.995-14.202-2.087-6.361-12.856-6.361 12.856-14.202 2.087 10.298 9.995-2.457 14.168 12.721-6.697 12.688 6.697zM56 21.993c0 0.606-0.438 1.178-0.875 1.615l-12.216 11.913 2.894 16.827c0.034 0.236 0.034 0.438 0.034 0.673 0 0.909-0.404 1.683-1.38 1.683-0.471 0-0.942-0.168-1.346-0.404l-15.111-7.942-15.111 7.942c-0.438 0.236-0.875 0.404-1.346 0.404-0.976 0-1.413-0.808-1.413-1.683 0-0.236 0.034-0.438 0.067-0.673l2.894-16.827-12.25-11.913c-0.404-0.438-0.841-1.010-0.841-1.615 0-1.010 1.043-1.413 1.885-1.548l16.894-2.457 7.572-15.312c0.303-0.639 0.875-1.38 1.649-1.38s1.346 0.74 1.649 1.38l7.572 15.312 16.894 2.457c0.808 0.135 1.885 0.538 1.885 1.548z',
 				'video-camera':
 					'M56 11v34c0 0.812-0.5 1.531-1.219 1.844-0.25 0.094-0.531 0.156-0.781 0.156-0.531 0-1.031-0.188-1.406-0.594l-12.594-12.594v5.187c0 4.969-4.031 9-9 9h-22c-4.969 0-9-4.031-9-9v-22c0-4.969 4.031-9 9-9h22c4.969 0 9 4.031 9 9v5.156l12.594-12.562c0.375-0.406 0.875-0.594 1.406-0.594 0.25 0 0.531 0.063 0.781 0.156 0.719 0.312 1.219 1.031 1.219 1.844z',
+				warn: 'M31.2981 5.28228C29.8323 2.74341 26.1677 2.74341 24.7019 5.28228L0.515899 47.1737C-0.94992 49.7126 0.88235 52.8861 3.81399 52.8861H52.186C55.1176 52.8861 56.9499 49.7126 55.4841 47.1737L31.2981 5.28228ZM25.2229 35.0037L24.8264 18.837C24.8264 18.655 24.8923 18.4729 25.047 18.3686C25.1794 18.2387 25.3776 18.1601 25.5759 18.1601H30.4241C30.6223 18.1601 30.8206 18.238 30.953 18.3686C31.1071 18.4729 31.1736 18.655 31.1736 18.837L30.7988 35.0037C30.7988 35.3679 30.4682 35.6542 30.0493 35.6542H25.9724C25.5759 35.6542 25.2453 35.3679 25.2229 35.0037ZM25.1788 43.9593V39.0131C25.1788 38.5447 25.487 38.1541 25.8618 38.1541H30.0929C30.4894 38.1541 30.82 38.5447 30.82 39.0131V43.9593C30.82 44.4277 30.4894 44.8183 30.0929 44.8183H25.8618C25.487 44.8183 25.1788 44.4277 25.1788 43.9593Z',
 				wrench:
 					'M12.407 45.809c0-1.193-0.988-2.181-2.181-2.181s-2.181 0.988-2.181 2.181 0.988 2.181 2.181 2.181 2.181-0.988 2.181-2.181zM34.357 31.494l-23.245 23.245c-0.784 0.784-1.909 1.261-3.068 1.261s-2.284-0.477-3.102-1.261l-3.613-3.681c-0.818-0.784-1.295-1.909-1.295-3.068s0.477-2.284 1.295-3.102l23.211-23.211c1.772 4.465 5.351 8.044 9.816 9.816zM55.966 16.667c0 1.125-0.409 2.522-0.784 3.613-2.147 6.067-7.976 10.259-14.418 10.259-8.419 0-15.27-6.851-15.27-15.27s6.851-15.27 15.27-15.27c2.488 0 5.726 0.75 7.805 2.147 0.341 0.239 0.545 0.545 0.545 0.954 0 0.375-0.239 0.75-0.545 0.954l-9.987 5.76v7.635l6.578 3.647c1.125-0.648 9.032-5.624 9.714-5.624s1.091 0.511 1.091 1.193z',
 			};
@@ -2443,7 +2445,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_Banner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(39358),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59685),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(98309),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				__assign = function () {
 					return (
@@ -2773,7 +2775,7 @@
 				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63255),
 				_InlineBanner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31340),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(55625),
-				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(59685),
+				_utilities_snapify__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(98309),
 				_Merchandising_readme_md__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74886),
 				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
 				__assign = function () {
@@ -4523,6 +4525,418 @@
 					);
 				});
 		},
+		8205: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, {
+					CustomError: () => CustomError,
+					Error: () => Error,
+					Info: () => Info,
+					Warning: () => Warning,
+					default: () => ErrorHandler_stories,
+				});
+			__webpack_require__(43105), __webpack_require__(65584);
+			var preact_module = __webpack_require__(33847),
+				blocks = __webpack_require__(63255),
+				types = __webpack_require__(68204),
+				emotion_react_browser_esm =
+					(__webpack_require__(39529),
+					__webpack_require__(31235),
+					__webpack_require__(67890),
+					__webpack_require__(94908),
+					__webpack_require__(77950),
+					__webpack_require__(28165)),
+				classnames = __webpack_require__(72779),
+				classnames_default = __webpack_require__.n(classnames),
+				es = __webpack_require__(69038),
+				Icon = __webpack_require__(6572),
+				Button = __webpack_require__(60295),
+				LightenDarkenColor =
+					(__webpack_require__(32501),
+					__webpack_require__(68995),
+					__webpack_require__(58188),
+					__webpack_require__(88233),
+					__webpack_require__(99120),
+					function LightenDarkenColor(col, amt) {
+						var usePound = !1;
+						'#' == col[0] && ((col = col.slice(1)), (usePound = !0));
+						var num = parseInt(col, 16),
+							r = (num >> 16) + amt;
+						r > 255 ? (r = 255) : r < 0 && (r = 0);
+						var b = ((num >> 8) & 255) + amt;
+						b > 255 ? (b = 255) : b < 0 && (b = 0);
+						var g = (255 & num) + amt;
+						return g > 255 ? (g = 255) : g < 0 && (g = 0), (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+					}),
+				defined = __webpack_require__(27193),
+				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
+				cache = __webpack_require__(79367),
+				__assign = function () {
+					return (
+						(__assign =
+							Object.assign ||
+							function (t) {
+								for (var s, i = 1, n = arguments.length; i < n; i++)
+									for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+								return t;
+							}),
+						__assign.apply(this, arguments)
+					);
+				},
+				CSS_errorHandler = function errorHandler(_a) {
+					var _b,
+						_c,
+						_d,
+						_e,
+						_f,
+						_g,
+						_h,
+						_j,
+						_k,
+						_l,
+						_m,
+						_o,
+						_p,
+						_q,
+						_r,
+						_s,
+						_t,
+						_u,
+						_v,
+						_w,
+						_x,
+						theme = _a.theme;
+					return (0, emotion_react_browser_esm.iv)({
+						borderRadius: '2px',
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						borderLeft: '4px solid',
+						'.ss__error-handler__message': { padding: '10px', display: 'flex', alignItems: 'center', '.ss__icon': { marginRight: '5px' } },
+						'& .ss__error-handler__button': {
+							backgroundColor: 'white',
+							color: 'inherit',
+							borderColor: null === (_b = theme.colors) || void 0 === _b ? void 0 : _b.primary,
+							width: ['150px', 'fit-content'],
+							margin: '5px 10px',
+							'.ss__icon': { marginRight: '5px' },
+						},
+						'&.ss__error-handler--error': {
+							backgroundColor: LightenDarkenColor(
+								(null === (_d = null === (_c = theme.colors) || void 0 === _c ? void 0 : _c.message) || void 0 === _d ? void 0 : _d.error) || 'red',
+								180
+							),
+							borderLeftColor:
+								(null === (_f = null === (_e = theme.colors) || void 0 === _e ? void 0 : _e.message) || void 0 === _f ? void 0 : _f.error) ||
+								'#ff0000',
+							'.ss__error-handler__message': {
+								'.ss__icon': {
+									fill:
+										(null === (_h = null === (_g = theme.colors) || void 0 === _g ? void 0 : _g.message) || void 0 === _h ? void 0 : _h.error) ||
+										'#ff0000',
+								},
+							},
+						},
+						'&.ss__error-handler--warning': {
+							backgroundColor: LightenDarkenColor(
+								(null === (_k = null === (_j = theme.colors) || void 0 === _j ? void 0 : _j.message) || void 0 === _k ? void 0 : _k.warning) ||
+									'yellow',
+								180
+							),
+							borderLeftColor:
+								(null === (_m = null === (_l = theme.colors) || void 0 === _l ? void 0 : _l.message) || void 0 === _m ? void 0 : _m.warning) ||
+								'#ffff00',
+							'.ss__icon': {
+								fill:
+									(null === (_p = null === (_o = theme.colors) || void 0 === _o ? void 0 : _o.message) || void 0 === _p ? void 0 : _p.warning) ||
+									'#ffff00',
+							},
+							'.ss__error-handler__button': {
+								borderColor:
+									(null === (_r = null === (_q = theme.colors) || void 0 === _q ? void 0 : _q.message) || void 0 === _r ? void 0 : _r.warning) ||
+									'#ffff00',
+							},
+						},
+						'&.ss__error-handler--info': {
+							backgroundColor: LightenDarkenColor(
+								(null === (_t = null === (_s = theme.colors) || void 0 === _s ? void 0 : _s.message) || void 0 === _t ? void 0 : _t.info) || 'blue',
+								180
+							),
+							borderLeftColor:
+								(null === (_v = null === (_u = theme.colors) || void 0 === _u ? void 0 : _u.message) || void 0 === _v ? void 0 : _v.info) ||
+								'#0000ff',
+							'.ss__error-handler__message': {
+								'.ss__icon': {
+									fill:
+										(null === (_x = null === (_w = theme.colors) || void 0 === _w ? void 0 : _w.message) || void 0 === _x ? void 0 : _x.info) ||
+										'#0000ff',
+								},
+							},
+						},
+					});
+				},
+				ErrorHandler = (0, es.Pi)(function (properties) {
+					var _a,
+						_b,
+						_c,
+						_d,
+						_e,
+						_f,
+						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
+						theme = __assign(__assign({}, globalTheme), properties.theme),
+						props = __assign(
+							__assign(
+								__assign({}, null === (_a = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _a ? void 0 : _a.carousel),
+								properties
+							),
+							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.carousel
+						),
+						controller = props.controller,
+						error = props.error,
+						disableStyles = props.disableStyles,
+						style = props.style,
+						onRetryClick = props.onRetryClick,
+						className = props.className,
+						subProps = {
+							icon: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__error-handler__icon' },
+										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.icon
+									),
+									(0, defined.r)({ disableStyles })
+								),
+								{ theme: props.theme }
+							),
+							button: __assign(
+								__assign(
+									__assign(
+										{ className: 'ss__error-handler__button' },
+										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.button
+									),
+									(0, defined.r)({ disableStyles })
+								),
+								{ theme: props.theme }
+							),
+						},
+						errorObject = (null === (_f = null == controller ? void 0 : controller.store) || void 0 === _f ? void 0 : _f.error) || error,
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_errorHandler({ theme }), style]),
+						Object.values(types.N).includes(null == errorObject ? void 0 : errorObject.type) &&
+							(null == errorObject ? void 0 : errorObject.message) &&
+							(0, emotion_react_browser_esm.tZ)(
+								cache.n,
+								null,
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									__assign({ className: classnames_default()('ss__error-handler', 'ss__error-handler--' + errorObject.type, className) }, styling),
+									(function () {
+										switch (errorObject.type) {
+											case types.N.WARNING:
+												return (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													(0, emotion_react_browser_esm.tZ)(
+														'div',
+														{ className: 'ss__error-handler__message' },
+														(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'warn' })),
+														(0, emotion_react_browser_esm.tZ)('b', null, 'Warning: '),
+														errorObject.message
+													),
+													429 == (null == errorObject ? void 0 : errorObject.code)
+														? (0, emotion_react_browser_esm.tZ)(
+																Button.z,
+																__assign({}, subProps.button, {
+																	onClick: function onClick(e) {
+																		onRetryClick ? onRetryClick(e) : null == controller || controller.search();
+																	},
+																}),
+																(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'rotate-right' })),
+																'Reload'
+														  )
+														: null
+												);
+											case types.N.ERROR:
+												return (0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__error-handler__message' },
+													(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'error' })),
+													(0, emotion_react_browser_esm.tZ)('b', null, 'Error: '),
+													errorObject.message
+												);
+											case types.N.INFO:
+												return (0, emotion_react_browser_esm.tZ)(
+													'div',
+													{ className: 'ss__error-handler__message' },
+													(0, emotion_react_browser_esm.tZ)(Icon.J, __assign({}, subProps.icon, { icon: 'info' })),
+													(0, emotion_react_browser_esm.tZ)('b', null, 'Info: '),
+													errorObject.message
+												);
+										}
+									})()
+								)
+							)
+					);
+				}),
+				componentArgs = __webpack_require__(55625),
+				esm = (__webpack_require__(66741), __webpack_require__(30876));
+			function _extends() {
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'errorhandler' }, 'ErrorHandler'),
+					(0, esm.kt)('p', null, 'Renders error messages.'),
+					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
+					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Icon'), (0, esm.kt)('li', { parentName: 'ul' }, 'Button')),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'controller' }, 'controller'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller'),
+						' prop specifies a reference to a Snap controller. This is the standard usage.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<ErrorHandler controller={controller} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'error' }, 'error'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'error'),
+						' prop provides an alternative means of utilizing the component to display errors messages.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { ErrorType } from '@searchspring/snap-store-mobx';\nconst errorObject = {\n    code: 500,\n    type: ErrorType.ERROR,\n    message: 'Invalid Search Request or Service Unavailable',\n}\n\n<ErrorHandler error={errorObject} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'onretryclick' }, 'onRetryClick'),
+					(0, esm.kt)(
+						'p',
+						null,
+						"When a request has been rate limited, a 'warning' error with code ",
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '429'),
+						" will be generated. For this error the component will render a 'retry' button to try the request again. By default the retry button will run the provided controller's ",
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'search'),
+						' method unless the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onRetryClick'),
+						' prop is provided.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<ErrorHandler controller={controller} onRetryClick={(e) => {\n    // do something\n    controller.search();\n}}/>\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { ErrorType } from '@searchspring/snap-store-mobx';\nconst errorObject = {\n    code: 429,\n    type: ErrorType.WARNING,\n    message: 'Too many requests try again later',\n}\n\n<ErrorHandler error={errorObject} onRetryClick={(e) => {\n    // do something\n}}/>\n"
+						)
+					),
+					(0, esm.kt)('h2', { id: 'errorhandle-types' }, 'ErrorHandle Types'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"import { ErrorType } from '@searchspring/snap-store-mobx';\n\nexport enum ErrorType {\n    WARNING = 'warning',\n    INFO = 'info',\n    ERROR = 'error',\n}\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			var ErrorHandler_stories_assign = function () {
+				return (
+					(ErrorHandler_stories_assign =
+						Object.assign ||
+						function (t) {
+							for (var s, i = 1, n = arguments.length; i < n; i++)
+								for (var p in (s = arguments[i])) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+							return t;
+						}),
+					ErrorHandler_stories_assign.apply(this, arguments)
+				);
+			};
+			const ErrorHandler_stories = {
+				title: 'Molecules/ErrorHandler',
+				component: ErrorHandler,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px', height: '300px' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: ErrorHandler_stories_assign(
+					{
+						controller: {
+							description: 'Controller reference',
+							type: { required: !1 },
+							table: { type: { summary: 'Controller object' } },
+							control: { type: 'none' },
+						},
+						error: {
+							description: 'Error object containing message and type',
+							type: { required: !1 },
+							table: { type: { summary: 'Error object' } },
+							control: { type: 'object' },
+						},
+						onRetryClick: { description: 'Retry button click event handler', table: { type: { summary: 'function' } }, action: 'onRetryClick' },
+					},
+					componentArgs.p
+				),
+			};
+			var Template = function Template(args) {
+					return (0, preact_module.h)(ErrorHandler, ErrorHandler_stories_assign({}, args));
+				},
+				Warning = Template.bind({});
+			Warning.args = { controller: { store: { error: { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' } } } };
+			var Error = Template.bind({});
+			Error.args = { controller: { store: { error: { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' } } } };
+			var Info = Template.bind({});
+			Info.args = { controller: { store: { error: { code: 200, type: types.N.INFO, message: 'Something important happened' } } } };
+			var CustomError = Template.bind({});
+			CustomError.args = { error: { type: types.N.INFO, message: 'Custom error using info type' } };
+		},
 		92429: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -4545,7 +4959,7 @@
 				blocks = __webpack_require__(63255),
 				FacetGridOptions = __webpack_require__(75999),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5035,7 +5449,7 @@
 				blocks = __webpack_require__(63255),
 				FacetHierarchyOptions = __webpack_require__(68978),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -5454,7 +5868,7 @@
 				blocks = __webpack_require__(63255),
 				FacetListOptions = __webpack_require__(1492),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -5965,7 +6379,7 @@
 				blocks = __webpack_require__(63255),
 				FacetPaletteOptions = __webpack_require__(25774),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -6885,7 +7299,7 @@
 				__webpack_require__(88233),
 				__webpack_require__(99120),
 				__webpack_require__(68995),
-				__webpack_require__(91321),
+				__webpack_require__(61657),
 				__webpack_require__(13489);
 			function str_repeat(i, m) {
 				for (var o = []; m > 0; o[--m] = i);
@@ -7073,6 +7487,18 @@
 						_b,
 						_c,
 						_d,
+						_e,
+						_f,
+						_g,
+						_h,
+						_j,
+						_k,
+						_l,
+						_m,
+						_o,
+						_p,
+						_q,
+						_r,
 						globalTheme = (0, emotion_element_99289b21_browser_esm.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -7100,15 +7526,29 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
-						_e = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
-						values = _e[0],
-						setValues = _e[1],
-						_f = (0, hooks_module.eJ)([facet.active.low, facet.active.high]),
-						active = _f[0],
-						setActive = _f[1];
-					(values[0] == facet.active.low && values[1] == facet.active.high) ||
-						(setActive([facet.active.low, facet.active.high]), setValues([facet.active.low, facet.active.high]));
-					var _g = (0, react_ranger.S)({
+						_s = (0, hooks_module.eJ)([
+							null === (_e = facet.active) || void 0 === _e ? void 0 : _e.low,
+							null === (_f = facet.active) || void 0 === _f ? void 0 : _f.high,
+						]),
+						values = _s[0],
+						setValues = _s[1],
+						_t = (0, hooks_module.eJ)([
+							null === (_g = facet.active) || void 0 === _g ? void 0 : _g.low,
+							null === (_h = facet.active) || void 0 === _h ? void 0 : _h.high,
+						]),
+						active = _t[0],
+						setActive = _t[1];
+					(values[0] == (null === (_j = facet.active) || void 0 === _j ? void 0 : _j.low) &&
+						values[1] == (null === (_k = facet.active) || void 0 === _k ? void 0 : _k.high)) ||
+						(setActive([
+							null === (_l = facet.active) || void 0 === _l ? void 0 : _l.low,
+							null === (_m = facet.active) || void 0 === _m ? void 0 : _m.high,
+						]),
+						setValues([
+							null === (_o = facet.active) || void 0 === _o ? void 0 : _o.low,
+							null === (_p = facet.active) || void 0 === _p ? void 0 : _p.high,
+						]));
+					var _u = (0, react_ranger.S)({
 							values: active,
 							onChange: function onChange(val) {
 								var _a;
@@ -7123,15 +7563,15 @@
 							onDrag: function onDrag(val) {
 								setActive(val), _onDrag && _onDrag(val);
 							},
-							min: facet.range.low,
-							max: facet.range.high,
+							min: null === (_q = facet.range) || void 0 === _q ? void 0 : _q.low,
+							max: null === (_r = facet.range) || void 0 === _r ? void 0 : _r.high,
 							stepSize: facet.step,
 							tickSize,
 						}),
-						getTrackProps = _g.getTrackProps,
-						ticks = _g.ticks,
-						segments = _g.segments,
-						handles = _g.handles,
+						getTrackProps = _u.getTrackProps,
+						ticks = _u.ticks,
+						segments = _u.segments,
+						handles = _u.handles,
 						styling = {};
 					return (
 						disableStyles
@@ -7226,7 +7666,7 @@
 				Filter = __webpack_require__(70768),
 				paths = __webpack_require__(86285),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -7892,7 +8332,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -8365,7 +8805,7 @@
 				Result = __webpack_require__(23267),
 				Image = __webpack_require__(49680),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -9290,7 +9730,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				paths = __webpack_require__(86285),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -10616,11 +11056,11 @@
 						}, []));
 					var visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
 						showTrending = (null == trending ? void 0 : trending.length) && 0 === terms.length,
-						facetsToShow =
-							facets.length &&
-							facets.filter(function (facet) {
-								return facet.display !== types.uw.SLIDER;
-							}),
+						facetsToShow = facets.length
+							? facets.filter(function (facet) {
+									return facet.display !== types.uw.SLIDER;
+							  })
+							: [],
 						onlyTerms = (null == trending ? void 0 : trending.length) && !loaded,
 						styling = {};
 					return (
@@ -10865,7 +11305,7 @@
 					return null == string ? void 0 : string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				},
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -11707,7 +12147,7 @@
 				paths = __webpack_require__(86285),
 				types = __webpack_require__(20874),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -11956,7 +12396,7 @@
 						null,
 						'The ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'overflowSlot'),
-						' prop is a JSX element to used change the display of the show more/less toggle.'
+						' prop is a JSX element used to change the display of the show more/less toggle.'
 					),
 					(0, esm.kt)(
 						'pre',
@@ -11974,6 +12414,58 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							'<Facet facet={controller.store.facets[0]} overflowSlot={<Overflow/>} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'fields' }, 'fields'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'fields'),
+						' prop allows you to manually change prop values on a per-facet level, sorted by the facet field.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const fieldsProp = {\n    Color: {\n        limit: 6,\n    },\n    Size: { \n        disableOverflow: true,\n        disableCollapse: true,\n    }\n},\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} fields={fieldsProp} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'optionsslot' }, 'optionsSlot'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'optionsSlot'),
+						' prop is a JSX element used to manually set the options component used, regardless of the facet.display type. Returns the facet,valueProps, limit, & previewOnFocus prop values.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							'const CustomFacetOptions = (props) => {\n    const facet = props.facet;\n    return (\n        <div>\n            {facet && facet.values.map(value => <span>{value.label}</span>)}\n        </div>\n    )\n}\n'
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Facet facet={controller.store.facets[0]} optionsSlot={<CustomFacetOptions/>} />\n'
 						)
 					),
 					(0, esm.kt)('h3', { id: 'iconcolor' }, 'iconColor'),
@@ -12199,6 +12691,8 @@
 							control: { type: 'select', options: __spreadArray([], Object.keys(paths.N), !0) },
 						},
 						overflowSlot: { description: 'Slot for custom overflow (show more/less) button', table: { type: { summary: 'component' } } },
+						optionsSlot: { description: 'Slot for custom facet option components', table: { type: { summary: 'component' } } },
+						fields: { defaultValue: {}, description: 'Change props per facet', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 					},
 					componentArgs.p
 				),
@@ -12392,16 +12886,16 @@
 				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(72779),
 				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(69038),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(1492),
-				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(75999),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(25774),
-				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(68978),
-				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(20682),
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(1492),
+				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(75999),
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(25774),
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(68978),
+				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(20682),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6572),
 				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(30766),
-				_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(20874),
+				_types__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(20874),
 				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(27193),
-				_utilities__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(64170),
+				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(64170),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(64189),
 				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(79367),
 				__assign = function () {
@@ -12454,7 +12948,8 @@
 						_q,
 						_r,
 						_s,
-						limitedValues,
+						_t,
+						_u,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.u)(),
 						theme = __assign(__assign({}, globalTheme), properties.theme),
 						props = __assign(
@@ -12475,7 +12970,11 @@
 								properties
 							),
 							null === (_c = null === (_b = properties.theme) || void 0 === _b ? void 0 : _b.components) || void 0 === _c ? void 0 : _c.facet
-						),
+						);
+					props.fields &&
+						props.fields[null === (_d = props.facet) || void 0 === _d ? void 0 : _d.field] &&
+						(props = __assign(__assign({}, props), props.fields[null === (_e = props.facet) || void 0 === _e ? void 0 : _e.field]));
+					var limitedValues,
 						disableCollapse = props.disableCollapse,
 						facet = props.facet,
 						iconCollapse = props.iconCollapse,
@@ -12491,6 +12990,7 @@
 						iconOverflowMore = props.iconOverflowMore,
 						iconOverflowLess = props.iconOverflowLess,
 						overflowSlot = props.overflowSlot,
+						optionsSlot = props.optionsSlot,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
@@ -12499,7 +12999,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__dropdown', disableClickOutside: !0, disableOverlay: !0 },
-										null === (_d = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _d ? void 0 : _d.dropdown
+										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.dropdown
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
@@ -12509,7 +13009,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__dropdown__icon', size: '12px', color: iconColor || color },
-										null === (_e = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _e ? void 0 : _e.icon
+										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
@@ -12519,7 +13019,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__show-more-less__icon', size: '10px', color: iconColor || color },
-										null === (_f = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _f ? void 0 : _f.icon
+										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.icon
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
@@ -12529,7 +13029,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-hierarchy-options' },
-										null === (_g = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _g ? void 0 : _g.facetHierarchyOptions
+										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.facetHierarchyOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
@@ -12539,7 +13039,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-list-options' },
-										null === (_h = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _h ? void 0 : _h.facetListOptions
+										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetListOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
@@ -12549,7 +13049,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-grid-options' },
-										null === (_j = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _j ? void 0 : _j.facetGridOptions
+										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.facetGridOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
@@ -12559,7 +13059,7 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-palette-options' },
-										null === (_k = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _k ? void 0 : _k.facetPaletteOptions
+										null === (_m = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _m ? void 0 : _m.facetPaletteOptions
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps })
 								),
@@ -12569,120 +13069,123 @@
 								__assign(
 									__assign(
 										{ className: 'ss__facet__facet-slider' },
-										null === (_l = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _l ? void 0 : _l.facetSlider
+										null === (_o = null == globalTheme ? void 0 : globalTheme.components) || void 0 === _o ? void 0 : _o.facetSlider
 									),
 									(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles })
 								),
 								{ theme: props.theme }
 							),
 						};
-					(null === (_m = facet) || void 0 === _m ? void 0 : _m.overflow) && Number.isInteger(limit) && !disableOverflow
-						? (facet.overflow.setLimit(limit), (limitedValues = null === (_o = facet) || void 0 === _o ? void 0 : _o.refinedValues))
+					(null === (_p = facet) || void 0 === _p ? void 0 : _p.overflow) && Number.isInteger(limit) && !disableOverflow
+						? (facet.overflow.setLimit(limit), (limitedValues = null === (_q = facet) || void 0 === _q ? void 0 : _q.refinedValues))
 						: (limitedValues =
-								(null === (_p = facet) || void 0 === _p ? void 0 : _p.overflow) && Number.isInteger(limit)
-									? null === (_q = facet) || void 0 === _q
+								(null === (_r = facet) || void 0 === _r ? void 0 : _r.overflow) && Number.isInteger(limit)
+									? null === (_s = facet) || void 0 === _s
 										? void 0
-										: _q.values.slice(0, limit)
-									: null === (_r = facet) || void 0 === _r
+										: _s.values.slice(0, limit)
+									: null === (_t = facet) || void 0 === _t
 									? void 0
-									: _r.values);
+									: _t.values);
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facet({ color, theme }), style]),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-							_providers__WEBPACK_IMPORTED_MODULE_13__.n,
-							null,
+						facet &&
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-								'div',
-								__assign({}, styling, {
-									className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(
-										'ss__facet',
-										'ss__facet--' + facet.display,
-										'ss__facet--' + facet.field,
-										className
-									),
-								}),
+								_providers__WEBPACK_IMPORTED_MODULE_13__.n,
+								null,
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__.L,
-									__assign({}, subProps.dropdown, {
-										open: disableCollapse || !(null == facet ? void 0 : facet.collapsed),
-										onClick: function onClick(e) {
-											return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
-										},
-										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-											'div',
-											{ className: 'ss__facet__header' },
-											null == facet ? void 0 : facet.label,
-											!disableCollapse &&
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-													__assign({}, subProps.icon, { icon: (null == facet ? void 0 : facet.collapsed) ? iconExpand : iconCollapse })
-												)
+									'div',
+									__assign({}, styling, {
+										className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(
+											'ss__facet',
+											'ss__facet--' + facet.display,
+											'ss__facet--' + facet.field,
+											className
 										),
 									}),
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-										'div',
-										{ className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss__facet__options', className) },
-										(function () {
-											switch (null == facet ? void 0 : facet.display) {
-												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.SLIDER:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_17__.C,
-														__assign({}, subProps.facetSlider, { facet })
-													);
-												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.GRID:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_18__.v,
-														__assign({}, subProps.facetGridOptions, { values: limitedValues })
-													);
-												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.PALETTE:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_19__.m,
-														__assign({}, subProps.facetPaletteOptions, { values: limitedValues })
-													);
-												case _types__WEBPACK_IMPORTED_MODULE_16__.uw.HIERARCHY:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_20__.j,
-														__assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
-													);
-												default:
-													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_21__.X,
-														__assign({}, subProps.facetListOptions, { values: limitedValues })
-													);
-											}
-										})()
-									),
-									!disableOverflow &&
-										(null === (_s = facet) || void 0 === _s ? void 0 : _s.overflow) &&
-										facet.overflow.enabled &&
+										_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__.L,
+										__assign({}, subProps.dropdown, {
+											open: disableCollapse || !(null == facet ? void 0 : facet.collapsed),
+											onClick: function onClick(e) {
+												return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
+											},
+											button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+												'div',
+												{ className: 'ss__facet__header' },
+												null == facet ? void 0 : facet.label,
+												!disableCollapse &&
+													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
+														__assign({}, subProps.icon, { icon: (null == facet ? void 0 : facet.collapsed) ? iconExpand : iconCollapse })
+													)
+											),
+										}),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
-											{
-												className: 'ss__facet__show-more-less',
-												onClick: function onClick() {
-													return facet.overflow.toggle();
+											{ className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss__facet__options', className) },
+											(function () {
+												if (optionsSlot)
+													return (0, _utilities__WEBPACK_IMPORTED_MODULE_16__.d)(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+												switch (null == facet ? void 0 : facet.display) {
+													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.SLIDER:
+														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_18__.C,
+															__assign({}, subProps.facetSlider, { facet })
+														);
+													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.GRID:
+														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_19__.v,
+															__assign({}, subProps.facetGridOptions, { values: limitedValues })
+														);
+													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.PALETTE:
+														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_20__.m,
+															__assign({}, subProps.facetPaletteOptions, { values: limitedValues })
+														);
+													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.HIERARCHY:
+														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_21__.j,
+															__assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
+														);
+													default:
+														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_22__.X,
+															__assign({}, subProps.facetListOptions, { values: limitedValues })
+														);
+												}
+											})()
+										),
+										!disableOverflow &&
+											(null === (_u = facet) || void 0 === _u ? void 0 : _u.overflow) &&
+											facet.overflow.enabled &&
+											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+												'div',
+												{
+													className: 'ss__facet__show-more-less',
+													onClick: function onClick() {
+														return facet.overflow.toggle();
+													},
 												},
-											},
-											overflowSlot
-												? (0, _utilities__WEBPACK_IMPORTED_MODULE_22__.d)(overflowSlot, { facet })
-												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														preact__WEBPACK_IMPORTED_MODULE_7__.HY,
-														null,
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-															__assign({}, subProps.showMoreLessIcon, { icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess })
-														),
-														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															'span',
+												overflowSlot
+													? (0, _utilities__WEBPACK_IMPORTED_MODULE_16__.d)(overflowSlot, { facet })
+													: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+															preact__WEBPACK_IMPORTED_MODULE_7__.HY,
 															null,
-															facet.overflow.remaining > 0 ? showMoreText : showLessText
-														)
-												  )
-										)
+															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+																_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
+																__assign({}, subProps.showMoreLessIcon, { icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess })
+															),
+															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+																'span',
+																null,
+																facet.overflow.remaining > 0 ? showMoreText : showLessText
+															)
+													  )
+											)
+									)
 								)
 							)
-						)
 					);
 				});
 		},
@@ -12707,7 +13210,7 @@
 				blocks = __webpack_require__(63255),
 				Facets = __webpack_require__(48958),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13193,7 +13696,7 @@
 					);
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -13913,7 +14416,7 @@
 					controller.log.error('<Recommendation> Component received invalid number of children');
 				}),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
 				return (
@@ -14362,7 +14865,7 @@
 				blocks = __webpack_require__(63255),
 				Results = __webpack_require__(69159),
 				componentArgs = __webpack_require__(55625),
-				snapify = __webpack_require__(59685),
+				snapify = __webpack_require__(98309),
 				types = __webpack_require__(20874),
 				esm = (__webpack_require__(66741), __webpack_require__(30876));
 			function _extends() {
@@ -17546,7 +18049,7 @@
 				);
 			}
 		},
-		59685: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		98309: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { K: () => Snapify });
 			__webpack_require__(73439),
@@ -18263,6 +18766,7 @@
 						AbstractController
 					);
 				})(),
+				types = __webpack_require__(68204),
 				__extends =
 					((_extendStatics = function extendStatics(d, b) {
 						return (
@@ -18624,7 +19128,22 @@
 											case 16:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 18];
 											case 17:
-												return (err_4 = _a.sent()) && console.error(err_4), [3, 18];
+												if ((err_4 = _a.sent())) {
+													switch (err_4) {
+														case 429:
+															(this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
+																this.log.warn(this.store.error);
+															break;
+														case 500:
+															(this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+																this.log.error(this.store.error);
+															break;
+														default:
+															this.log.error(err_4);
+													}
+													this.store.loading = !1;
+												}
+												return [3, 18];
 											case 18:
 												return [2];
 										}
@@ -18690,6 +19209,7 @@
 				Abstract_awaiter =
 					(__webpack_require__(24895),
 					__webpack_require__(46168),
+					__webpack_require__(54226),
 					__webpack_require__(14121),
 					__webpack_require__(65584),
 					__webpack_require__(85713),
@@ -18805,6 +19325,8 @@
 					function API(configuration) {
 						var _this = this;
 						(this.configuration = configuration),
+							(this.retryDelay = 1e3),
+							(this.retryCount = 1),
 							(this.fetchApi = function (url, init) {
 								return Abstract_awaiter(_this, void 0, void 0, function () {
 									return Abstract_generator(this, function (_a) {
@@ -18821,14 +19343,47 @@
 					return (
 						(API.prototype.request = function (context) {
 							return Abstract_awaiter(this, void 0, void 0, function () {
-								var _a, url, init, response;
+								var _a,
+									url,
+									init,
+									response,
+									_this = this;
 								return Abstract_generator(this, function (_b) {
 									switch (_b.label) {
 										case 0:
 											return (_a = this.createFetchParams(context)), (url = _a.url), (init = _a.init), [4, this.fetchApi(url, init)];
 										case 1:
-											if ((response = _b.sent()).status >= 200 && response.status < 300) return [2, response];
-											throw response;
+											return (response = _b.sent()).status >= 200 && response.status < 300
+												? ((this.retryCount = 0), (this.retryDelay = 1e3), [2, response])
+												: [3, 2];
+										case 2:
+											return 429 != response.status
+												? [3, 6]
+												: this.retryCount < this.configuration.maxRetry
+												? [
+														4,
+														new Promise(function (resolve) {
+															return setTimeout(resolve, _this.retryDelay);
+														}),
+												  ]
+												: [3, 5];
+										case 3:
+											return (
+												_b.sent(),
+												(this.retryDelay =
+													1e3 *
+													(function fibonacci(num) {
+														for (var temp, a = 1, b = 0; num >= 0; ) (temp = a), (a += b), (b = temp), num--;
+														return b;
+													})(this.retryCount)),
+												this.retryCount++,
+												[4, this.request(context)]
+											);
+										case 4:
+											return [2, _b.sent()];
+										case 5:
+										case 6:
+											throw response.status;
 									}
 								});
 							});
@@ -18854,9 +19409,9 @@
 				})(),
 				ApiConfiguration = (function () {
 					function ApiConfiguration(configuration) {
-						this.configuration = configuration;
+						(this.configuration = configuration), (this.maxRetry = 8);
 						var apiHost = 'https://' + configuration.siteId + '.a.searchspring.io';
-						configuration.basePath = configuration.basePath || apiHost;
+						(configuration.basePath = configuration.basePath || apiHost), configuration.maxRetry && (this.maxRetry = configuration.maxRetry);
 					}
 					return (
 						(ApiConfiguration.prototype.getSiteId = function () {
@@ -19971,7 +20526,6 @@
 						HybridAPI
 					);
 				})(API);
-			__webpack_require__(54226);
 			var Recommend_extends = (function () {
 					var _extendStatics = function extendStatics(d, b) {
 						return (
@@ -20765,7 +21319,8 @@
 							this.update({});
 						}),
 						(RecommendationStore.prototype.update = function (data) {
-							(this.loaded = !!data.profile),
+							(this.error = void 0),
+								(this.loaded = !!data.profile),
 								(this.profile = new ProfileStore(this.services, data.profile)),
 								(this.results = new ResultStore(this.config, this.services, data.results));
 						}),
@@ -21859,7 +22414,7 @@
 					);
 				})(),
 				Profiler =
-					(__webpack_require__(91321),
+					(__webpack_require__(61657),
 					(function () {
 						function Profiler(namespace) {
 							(this.namespace = namespace), (this.profiles = []);
@@ -22133,7 +22688,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.10.0' } }),
+						(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.11.0' } }),
 						(this.id = (0, v4.Z)());
 				},
 				Tracker_assign = function () {
@@ -22163,7 +22718,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.10.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.11.0');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -22815,7 +23370,22 @@
 											case 14:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 16];
 											case 15:
-												return (err_6 = _d.sent()) && console.error(err_6), [3, 16];
+												if ((err_6 = _d.sent())) {
+													switch (err_6) {
+														case 429:
+															(this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
+																this.log.warn(this.store.error);
+															break;
+														case 500:
+															(this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+																this.log.error(this.store.error);
+															break;
+														default:
+															this.log.error(err_6);
+													}
+													this.store.loading = !1;
+												}
+												return [3, 16];
 											case 16:
 												return [2];
 										}
@@ -23528,8 +24098,14 @@
 						void 0 === facetsData && (facetsData = []);
 						var facets = facetsData
 							.filter(function (facet) {
-								var _a, _b, _c, _d;
+								var _a,
+									_b,
+									_c,
+									_d,
+									facetMeta = meta.facets[facet.field];
 								if (null === (_b = null === (_a = config.settings) || void 0 === _a ? void 0 : _a.facets) || void 0 === _b ? void 0 : _b.trim) {
+									if (('slider' == facetMeta.display && 'range' !== facet.type) || ('range' == facet.type && 'slider' !== facetMeta.display))
+										return !1;
 									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
 									if (0 == (null === (_c = facet.values) || void 0 === _c ? void 0 : _c.length)) return !1;
 									if (!facet.filtered && 1 == (null === (_d = facet.values) || void 0 === _d ? void 0 : _d.length))
@@ -23940,7 +24516,8 @@
 						}),
 						(AutocompleteStore.prototype.update = function (data) {
 							var _this = this;
-							(this.loaded = !!data.pagination),
+							(this.error = void 0),
+								(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
 								data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
 								this.state.locks.terms.locked ||
@@ -24294,7 +24871,22 @@
 											case 19:
 												return afterStoreProfile.stop(), this.log.profile(afterStoreProfile), [3, 21];
 											case 20:
-												return (err_4 = _j.sent()) && console.error(err_4), [3, 21];
+												if ((err_4 = _j.sent())) {
+													switch (err_4) {
+														case 429:
+															(this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
+																this.log.warn(this.store.error);
+															break;
+														case 500:
+															(this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+																this.log.error(this.store.error);
+															break;
+														default:
+															this.log.error(err_4);
+													}
+													this.store.loading = !1;
+												}
+												return [3, 21];
 											case 21:
 												return [2];
 										}
@@ -24502,7 +25094,8 @@
 					return (
 						SearchStore_extends(SearchStore, _super),
 						(SearchStore.prototype.update = function (data) {
-							(this.data = JSON.parse(JSON.stringify(data))),
+							(this.error = void 0),
+								(this.data = JSON.parse(JSON.stringify(data))),
 								(this.loaded = !!data.pagination),
 								(this.meta = data.meta),
 								(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
@@ -24766,7 +25359,16 @@
 			var client_api = __webpack_require__(14419),
 				esm = __webpack_require__(87537),
 				preact_module = __webpack_require__(33847),
-				defaultTheme = { colors: { primary: '#3A23AD', secondary: '#00cee1', hover: '#f8f6fd', text: { secondary: '#ffffff' } }, components: {} },
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
 				emotion_element_99289b21_browser_esm = __webpack_require__(64189),
 				injectStylesIntoStyleTag = __webpack_require__(67851),
 				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
@@ -24850,6 +25452,14 @@
 		30808: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__(44595);
+		},
+		68204: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			var ErrorType;
+			__webpack_require__.d(__webpack_exports__, { N: () => ErrorType }),
+				(function (ErrorType) {
+					(ErrorType.WARNING = 'warning'), (ErrorType.INFO = 'info'), (ErrorType.ERROR = 'error');
+				})(ErrorType || (ErrorType = {}));
 		},
 		96006: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -25742,6 +26352,7 @@
 				'./components/Atoms/Price/Price.stories.tsx': 87740,
 				'./components/Molecules/Carousel/Carousel.stories.tsx': 13147,
 				'./components/Molecules/Checkbox/Checkbox.stories.tsx': 5638,
+				'./components/Molecules/ErrorHandler/ErrorHandler.stories.tsx': 8205,
 				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx': 92429,
 				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx': 923,
 				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx': 44784,
