@@ -277,7 +277,7 @@ describe('Search Controller', () => {
 		});
 
 		const oq = 'wheel';
-		controller.urlManager = controller.urlManager.set('oq', [oq]);
+		controller.urlManager = controller.urlManager.set('oq', oq);
 		expect(controller.params.search.originalQuery).toBe(oq);
 	});
 
@@ -293,7 +293,7 @@ describe('Search Controller', () => {
 		});
 
 		const rq = 'wheel';
-		controller.urlManager = controller.urlManager.set('rq', [rq]);
+		controller.urlManager = controller.urlManager.set('rq', rq);
 		expect(controller.params.search.subQuery).toBe(rq);
 	});
 

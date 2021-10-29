@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { URL as utilsURL } from '../utils/URL';
@@ -112,6 +112,32 @@ export class AutocompleteController extends AbstractController {
 	get params(): AutocompleteRequestModel {
 		const urlState = this.urlManager.state;
 		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
+
+		const { userId } = this.tracker.getUserId();
+		if (userId) {
+			params.tracking = params.tracking || {};
+			params.tracking.userId = userId;
+		}
+
+		if (!this.config.globals?.personalization?.disabled) {
+			const cartItems = this.tracker.getCartItems();
+			if (cartItems.length) {
+				params.personalization = params.personalization || {};
+				params.personalization.cart = cartItems.join(',');
+			}
+
+			const lastViewedItems = this.tracker.getLastViewedItems();
+			if (lastViewedItems.length) {
+				params.personalization = params.personalization || {};
+				params.personalization.lastViewed = lastViewedItems.join(',');
+			}
+
+			const shopperId = this.tracker.getShopperId()?.shopperId;
+			if (shopperId) {
+				params.personalization = params.personalization || {};
+				params.personalization.shopper = shopperId;
+			}
+		}
 
 		return params;
 	}
@@ -473,7 +499,28 @@ export class AutocompleteController extends AbstractController {
 			this.log.profile(afterStoreProfile);
 		} catch (err) {
 			if (err) {
-				console.error(err);
+				switch (err) {
+					case 429:
+						this.store.error = {
+							code: 429,
+							type: ErrorType.WARNING,
+							message: 'Too many requests try again later',
+						};
+						this.log.warn(this.store.error);
+						break;
+					case 500:
+						this.store.error = {
+							code: 500,
+							type: ErrorType.ERROR,
+							message: 'Invalid Search Request or Service Unavailable',
+						};
+						this.log.error(this.store.error);
+						break;
+					default:
+						this.log.error(err);
+						break;
+				}
+				this.store.loading = false;
 			}
 		}
 	};

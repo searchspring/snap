@@ -40,6 +40,16 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		limit: {
+			description: 'Maximum number of facets to display',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
 		...componentArgs,
 	},
 };

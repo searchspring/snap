@@ -5,7 +5,7 @@ Renders an autocomplete popup that binds to an `<input>` element.
 The autocomplete layout renders terms, facets, banners, and results.
 
 ## Components Used
-- Facet
+- Facets
 - Banner
 - Results
 - Icon
@@ -178,7 +178,7 @@ The `hideLink` prop specifies if the "see n results for keyword" text within aut
 
 ### breakpoints
 The `breakpoints` prop contains a breakpoints object that is passed to the `<Results />` sub-component.
-When the viewport is between the Object's key value, those props will be applied to the Autocomplete component.
+When the viewport is between the Object's key value, those props will be merged with any exisiting Autocomplete component props.
 
 Default Autocomplete `breakpoints` object:
 
@@ -197,7 +197,7 @@ const breakpoints = {
     },
     768: {
         columns: 2,
-        rows: 2,
+        rows: 3,
     },
 };
 ```

@@ -8,6 +8,11 @@ export const defaultTheme: Theme = {
 		text: {
 			secondary: '#ffffff',
 		},
+		message: {
+			error: '#cc1212',
+			warning: '#ecaa15',
+			info: '#4c3ce2',
+		},
 	},
 	components: {},
 };
@@ -19,6 +24,11 @@ export interface Theme {
 		hover?: string;
 		text?: {
 			secondary: string;
+		};
+		message?: {
+			error: string;
+			warning: string;
+			info: string;
 		};
 	};
 	components?: any;

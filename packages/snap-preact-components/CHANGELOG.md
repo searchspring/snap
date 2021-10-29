@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
+
+
+### Bug Fixes
+
+* **autocomplete:** add theme prop deepmerge to results subprop ([ac21190](https://github.com/searchspring/snap/commit/ac21190aa3fbc9f6bbc18a191d9e8cda40547fd1))
+* **autocomplete:** deepmerge default subprop with theme props ([616aaba](https://github.com/searchspring/snap/commit/616aabad4d5dbc0904938891750cc82f4ca9f056))
+* **autocomplete:** deepmerge prop theme with breakpoint theme ([ae0717f](https://github.com/searchspring/snap/commit/ae0717f96f15e722b0bb34df30d0f1ac54dcb10f))
+* remove duplicate subprop class ss__autocomplete__facets ([0ba88b5](https://github.com/searchspring/snap/commit/0ba88b5163996cfb2351d00bdd3f4d0267b2bfad))
+
+
+### Features
+
+* **autocomplete:** add linkSlot & hideLink props, update docs, add props to facetsSlot & termsSlot ([81547f0](https://github.com/searchspring/snap/commit/81547f013eb1e68671653ebc19efa5711ecc65dc))
+* **facets:** add limit prop to Facets component, refact Autocomplete to use Facets ([de36bcc](https://github.com/searchspring/snap/commit/de36bcc76a65f4993321b536133281d6ee02edba))
+
+
+
+
+
 ## [0.9.7](https://github.com/searchspring/snap/compare/v0.9.6...v0.9.7) (2021-10-08)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

@@ -1,3 +1,5 @@
+import { fibonacci } from '../utils/fibonacci';
+
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
 export type Json = any;
@@ -15,6 +17,9 @@ export interface RequestOpts {
 }
 
 export class API {
+	private retryDelay = 1000;
+	private retryCount = 1;
+
 	constructor(protected configuration: ApiConfiguration) {
 		// nothing else todo
 	}
@@ -23,9 +28,20 @@ export class API {
 		const { url, init } = this.createFetchParams(context);
 		const response = await this.fetchApi(url, init);
 		if (response.status >= 200 && response.status < 300) {
+			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+			this.retryDelay = 1000;
 			return response;
+		} else if (response.status == 429) {
+			if (this.retryCount < this.configuration.maxRetry) {
+				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
+				this.retryDelay = fibonacci(this.retryCount) * 1000;
+				this.retryCount++;
+				return await this.request(context);
+			} else {
+				throw response.status;
+			}
 		}
-		throw response;
+		throw response.status;
 	}
 
 	private createFetchParams(context: RequestOpts) {
@@ -63,12 +79,18 @@ export interface ApiConfigurationParameters {
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
+	maxRetry?: number;
 }
 
 export class ApiConfiguration {
+	public maxRetry = 8;
+
 	constructor(private configuration: ApiConfigurationParameters) {
 		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
 		configuration.basePath = configuration.basePath || apiHost;
+		if (configuration.maxRetry) {
+			this.maxRetry = configuration.maxRetry;
+		}
 	}
 
 	getSiteId(): string {
