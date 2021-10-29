@@ -44,6 +44,7 @@ export class SearchStore extends AbstractStore {
 	}
 
 	update(data: SearchResponseModel & { meta: MetaResponseModel }): void {
+		this.error = undefined;
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
