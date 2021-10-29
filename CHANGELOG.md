@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* **autocomplete-component:** changing 'facetsToShow' to always be an array ([df3a59f](https://github.com/searchspring/snap/commit/df3a59f4a941f00d74e6aaad155049dd1a681fb1))
+* **client:** add retry logic for 429 rate limited requests ([e443efa](https://github.com/searchspring/snap/commit/e443efaca3c5155c60c9c1b0f33c66c21901f2bd))
+* **facet:** bugfix for issue [#231](https://github.com/searchspring/snap/issues/231), Issue when switching between slider and list types ([21c97c5](https://github.com/searchspring/snap/commit/21c97c51a6c8b33e0bcbfae0e63e504bfc9623b6))
+* **theme:** add message colors to default theme ([782155c](https://github.com/searchspring/snap/commit/782155c2f4068124496b57ab96bb3b8d44e7191c))
+
+
+### Features
+
+* **errorhandler:** add ErrorHandler Component, updated icons ([6d50f84](https://github.com/searchspring/snap/commit/6d50f84b098f2e3d31b712236d945946828e3443))
+* **facet.tsx:** added optionsSlot & fields props to facet component ([09846c0](https://github.com/searchspring/snap/commit/09846c0a87cf422bf83dea4526e06b8e72274071))
+* modify retry delay to fibonacci algo, modify error code handling of request failures ([50613da](https://github.com/searchspring/snap/commit/50613da92db014552f3ff6a529fb742b4559cc02))
+
+
+
+
+
 # [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
 
 

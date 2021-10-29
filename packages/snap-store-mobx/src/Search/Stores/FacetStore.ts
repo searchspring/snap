@@ -33,8 +33,14 @@ export class FacetStore extends Array {
 	) {
 		const facets = facetsData
 			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
+				const facetMeta = meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
 				if (config.settings?.facets?.trim) {
-					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
+					if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
+						return false;
+					} else if (
+						facet.type === 'range' &&
+						(facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high
+					) {
 						return false;
 					} else if (facet.values?.length == 0) {
 						return false;

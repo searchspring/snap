@@ -178,6 +178,26 @@ export default {
 				},
 			},
 		},
+		optionsSlot: {
+			description: 'Slot for custom facet option components',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
+		fields: {
+			defaultValue: {},
+			description: 'Change props per facet',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: {
+				type: 'object',
+			},
+		},
 		...componentArgs,
 	},
 };
