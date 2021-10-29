@@ -228,56 +228,58 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	}
 
 	return (
-		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
-				<Dropdown
-					{...subProps.dropdown}
-					open={disableCollapse || !facet?.collapsed}
-					onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
-					button={
-						<div className="ss__facet__header">
-							{facet?.label}
-							{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
-						</div>
-					}
-				>
-					<div className={classnames('ss__facet__options', className)}>
-						{(() => {
-							//manual options component
-							if (optionsSlot) {
-								return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
-							} else {
-								switch (facet?.display) {
-									case FacetDisplay.SLIDER:
-										return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
-									case FacetDisplay.GRID:
-										return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
-									case FacetDisplay.PALETTE:
-										return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
-									case FacetDisplay.HIERARCHY:
-										return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
-									default:
-										return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+		facet && (
+			<CacheProvider>
+				<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
+					<Dropdown
+						{...subProps.dropdown}
+						open={disableCollapse || !facet?.collapsed}
+						onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
+						button={
+							<div className="ss__facet__header">
+								{facet?.label}
+								{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
+							</div>
+						}
+					>
+						<div className={classnames('ss__facet__options', className)}>
+							{(() => {
+								//manual options component
+								if (optionsSlot) {
+									return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+								} else {
+									switch (facet?.display) {
+										case FacetDisplay.SLIDER:
+											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+										case FacetDisplay.GRID:
+											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
+										case FacetDisplay.PALETTE:
+											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
+										case FacetDisplay.HIERARCHY:
+											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
+										default:
+											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+									}
 								}
-							}
-						})()}
-					</div>
-
-					{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-						<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
-							{overflowSlot ? (
-								cloneWithProps(overflowSlot, { facet })
-							) : (
-								<>
-									<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
-									<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
-								</>
-							)}
+							})()}
 						</div>
-					)}
-				</Dropdown>
-			</div>
-		</CacheProvider>
+
+						{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
+							<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+								{overflowSlot ? (
+									cloneWithProps(overflowSlot, { facet })
+								) : (
+									<>
+										<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
+										<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
+									</>
+								)}
+							</div>
+						)}
+					</Dropdown>
+				</div>
+			</CacheProvider>
+		)
 	);
 });
 
