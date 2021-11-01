@@ -84,7 +84,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, detailSlot, fallback, disableStyles, className, layout, style, controller } = props;
+	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, style, controller } = props;
 
 	const core = result?.mappings?.core;
 
@@ -155,7 +155,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							}}
 						>
 							{!hideBadge && onSale && <Badge {...subProps.badge} />}
-							<Image {...subProps.image} />
+							{!hideImage && <Image {...subProps.image} />}
 						</a>
 					</div>
 					<div className="ss__result__details">
@@ -207,6 +207,7 @@ export interface ResultProps extends ComponentProps {
 	result: ResultType;
 	hideBadge?: boolean;
 	hideTitle?: boolean;
+	hideImage?: boolean;
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element;
 	fallback?: string;
