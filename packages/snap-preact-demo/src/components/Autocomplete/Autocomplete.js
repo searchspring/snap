@@ -38,6 +38,6 @@ export class Autocomplete extends Component {
 			},
 		};
 
-		return <LibraryAutocomplete controller={controller} input={controller.config.selector} theme={theme} />;
+		return <LibraryAutocomplete controller={controller} input={controller.config.selector} breakpoints={breakpoints} theme={theme} />;
 	}
 }
