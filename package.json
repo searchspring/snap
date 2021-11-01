@@ -9,7 +9,7 @@
 	"scripts": {
 		"commit": "cz",
 		"build": "lerna exec --stream 'npm run build'",
-		"build:docs": "lerna exec --stream --parallel 'npm run build:docs'",
+		"build:docs": "lerna exec --stream --parallel 'npm run build:docs' && npm run build:feed",
 		"build:feed": "node ./docs/generateFeed.js",
 		"test": "npm run test --workspaces",
 		"dev": "lerna exec --parallel --stream 'npm run dev'",

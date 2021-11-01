@@ -124,6 +124,7 @@
 				template: `
 					<iframe v-if="routeData.type == 'iframe'" :src="routeData.url"></iframe>
 					<Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
+					<div id="searchWrapper"></div>
 				`,
 				computed: {
 					currentRoute() {
@@ -223,7 +224,10 @@
 							</div>
 						</router-link>
 						<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
-						
+						<div id="search-container">
+								<h3> Search </h3>
+								<input id="searchBar" type="text" />
+							</div>
 						<div id="navigation" :class="{ visible: navVisible }" >
 							<div v-for="section in documents" class="section">
 								<h3>{{ section.categoryName }}</h3>

@@ -16,6 +16,13 @@ body {
 	box-sizing: inherit;
 }
 
+#search-container {
+	color: hsl(247deg 67% 33%);
+    padding: 0px 20px 0px 20px;
+    margin: 0;
+	margin-bottom: 20px;
+}
+
 a {
 	text-decoration: none;
 	color: #4c3ce2;
