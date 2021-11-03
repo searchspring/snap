@@ -9,7 +9,7 @@ describe('formatNumber', () => {
 		expect(output).toBe(undefined);
 
 		//@ts-ignore
-		let output = formatNumber('7');
+		output = formatNumber('7');
 		expect(output).toBe(undefined);
 
 		output = formatNumber(Number.NaN);
