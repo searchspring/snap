@@ -19,6 +19,7 @@ export class SearchStore extends AbstractStore {
 	public pagination: PaginationStore;
 	public sorting: SortingStore;
 	public storage: StorageStore;
+	public counter: number = 0;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
 		super(config);
@@ -40,10 +41,12 @@ export class SearchStore extends AbstractStore {
 			results: observable,
 			pagination: observable,
 			sorting: observable,
+			counter: observable,
 		});
 	}
 
 	update(data: SearchResponseModel & { meta: MetaResponseModel }): void {
+		this.counter++;
 		this.error = undefined;
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
