@@ -122,17 +122,6 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideImage: {
-			defaultValue: false,
-			description: 'prevent the product image from rendering in the result component',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
 		horizontalTerms: {
 			defaultValue: false,
 			description: 'display terms horizontally, (not required if vertical prop is true)',

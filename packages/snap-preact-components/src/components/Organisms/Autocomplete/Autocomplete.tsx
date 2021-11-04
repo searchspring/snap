@@ -179,7 +179,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		facetsTitle: '',
 		contentTitle: '',
 		width: '100%',
-		hideImage: false,
 		// global theme
 		...globalTheme?.components?.autocomplete,
 		// props
@@ -330,7 +329,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					components: {
 						result: {
 							hideBadge: true,
-							hideImage: props.hideImage,
 						},
 					},
 				},
@@ -580,7 +578,6 @@ export interface AutocompleteProps extends ComponentProps {
 	hideFacets?: boolean;
 	hideContent?: boolean;
 	hideBanners?: boolean;
-	hideImage?: boolean;
 	hideLink?: boolean;
 	horizontalTerms?: boolean;
 	vertical?: boolean;
