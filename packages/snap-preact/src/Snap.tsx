@@ -208,13 +208,14 @@ export class Snap {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && onTarget(target, elem, originalElem);
 
-									if (typeof target.component == 'function') {
+									try {
 										const Component = await (target as ExtendedTarget).component();
 										setTimeout(() => {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 										});
-									} else {
-										console.error(`Uncaught Error - Did you accidentally pass a JSX Element as JSX twice?
+									} catch (err) {
+										this.logger.error(
+											`Uncaught Error - Did you accidentally pass a JSX Element as JSX twice?
 	This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
 			
 				instead of - 
@@ -227,19 +228,30 @@ export class Snap {
 				},
 			]
 
-				try - 
+				or - 
 
 			targeters: [
 				{
 					selector: '#searchspring-content',
 					hideTarget: true,
-					component: async () => {
-						return (await import('./components/Content/Content')).Content;
-					},
+					component: Content,
 				},
 			]
-										`);
-										console.warn('The error above happened in the following targeter in the Snap Config', target);
+
+				please try - 
+
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: () => Content
+				},
+			]
+
+			
+The error above happened in the following targeter in the Snap Config`,
+											target
+										);
 									}
 								};
 
