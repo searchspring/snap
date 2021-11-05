@@ -6,6 +6,8 @@ import deepmerge from 'deepmerge';
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
 import { combineMerge } from './middleware/functions';
+import { ContentSkel } from './components/Content/Skel';
+import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
 
@@ -68,6 +70,7 @@ let config = {
 						selector: '#searchspring-content',
 						hideTarget: true,
 						// prefetch: true,
+						skeleton: () => ContentSkel,
 						component: async () => {
 							return (await import('./components/Content/Content')).Content;
 						},
@@ -76,6 +79,7 @@ let config = {
 						selector: '#searchspring-sidebar',
 						hideTarget: true,
 						// prefetch: true,
+						skeleton: () => SidebarSkel,
 						component: async () => {
 							return (await import('./components/Sidebar/Sidebar')).Sidebar;
 						},

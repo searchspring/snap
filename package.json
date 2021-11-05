@@ -54,5 +54,8 @@
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
 		}
+	},
+	"dependencies": {
+		"react-loading-skeleton": "^3.0.1"
 	}
 }

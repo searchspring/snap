@@ -28,6 +28,7 @@ type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<RootComponent> | RootComponent;
+	skeleton?: () => Promise<any>;
 	props?: unknown;
 	onTarget?: OnTarget;
 	prefetch?: boolean;
@@ -237,6 +238,13 @@ export class Snap {
 										runSearch();
 										cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
 									} else {
+										if (target.skeleton) {
+											const Skeleton = await (target as ExtendedTarget).skeleton();
+											setTimeout(() => {
+												render(<Skeleton />, document.querySelector(target.selector));
+											});
+										}
+
 										const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
 											const cntrlr = await this.createController(
 												DynamicImportNames.SEARCH,
