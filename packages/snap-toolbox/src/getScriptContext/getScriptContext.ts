@@ -3,7 +3,7 @@ type ContextVariables = {
 };
 
 export function getScriptContext(script: Element, evaluate?: string[]): ContextVariables {
-	if (!script || typeof script !== 'object' || script.constructor.name != 'HTMLScriptElement') {
+	if (!script || typeof script !== 'object' || script.tagName !== 'SCRIPT') {
 		throw new Error('script tag must be provided');
 	}
 
@@ -19,8 +19,8 @@ export function getScriptContext(script: Element, evaluate?: string[]): ContextV
 	const variables: Record<string, unknown> = {};
 
 	// grab all element attributes and put into variables
-	script.getAttributeNames().map((attr) => {
-		variables[attr] = script.getAttribute(attr);
+	Object.values(script.attributes).map((attr) => {
+		variables[attr.nodeName] = script.getAttribute(attr.nodeName);
 	});
 
 	try {
