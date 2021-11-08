@@ -131,7 +131,12 @@
 						return this.$route.path;
 					},
 					routeData() {
-						return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' }
+						if (this.routes[this.currentRoute].url.includes('?params') && this.routes[this.currentRoute].type === 'iframe') {
+							const params = decodeURIComponent(window.location.href.split('?')[1] || '');
+							return { type: 'iframe', url: `${this.routes[this.currentRoute].url}${params}`}
+						}
+
+						return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' };
 					}
 				}
 			});
