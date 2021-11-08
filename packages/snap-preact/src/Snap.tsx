@@ -21,6 +21,7 @@ import type {
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
+import { URL } from './URL';
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, RootComponent } from './types';
@@ -160,6 +161,21 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
+
+		// TODO: rename URL (it is not a class, should be capitalized) and move to toolbox
+		const urlParams = URL(window.location.href);
+		const branchParam = urlParams.params.query.filter((param) => (param.key = 'branch'))[0];
+		console.log('stuff:', branchParam, urlParams, this.config.context);
+
+		if (branchParam?.value) {
+			console.log('loading bundle from: ' + branchParam.value);
+			const script = document.createElement('script');
+			// TODO: use URL to add a param
+			script.src = `${this.config.context?.src}?branch=${branchParam.value}`;
+			// document.head.appendChild(script);
+			return;
+		}
+
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
