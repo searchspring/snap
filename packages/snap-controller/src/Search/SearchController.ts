@@ -65,7 +65,7 @@ export class SearchController extends AbstractController {
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
 			const searchStore = search.controller.store as SearchStore;
-			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && searchStore.counter < 2) {
+			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				window.location.replace(redirectURL);
 				return false;
 			}
