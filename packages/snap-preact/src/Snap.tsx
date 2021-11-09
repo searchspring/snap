@@ -215,7 +215,7 @@ export class Snap {
 										});
 									} catch (err) {
 										this.logger.error(
-											`Uncaught Error - Did you accidentally pass a JSX Element as JSX twice?
+											`Uncaught Error - Invalid value passed as the component.
 	This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
 			
 				instead of - 
