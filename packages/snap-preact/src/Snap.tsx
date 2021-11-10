@@ -238,14 +238,14 @@ export class Snap {
 										runSearch();
 										cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
 									} else {
-										if (target.skeleton) {
-											const Skeleton = await (target as ExtendedTarget).skeleton();
-											setTimeout(() => {
-												render(<Skeleton />, document.querySelector(target.selector));
-											});
-										}
-
 										const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+											if (target.skeleton) {
+												const Skeleton = await (target as ExtendedTarget).skeleton();
+												setTimeout(() => {
+													render(<Skeleton />, elem);
+												});
+											}
+
 											const cntrlr = await this.createController(
 												DynamicImportNames.SEARCH,
 												controller.config,
