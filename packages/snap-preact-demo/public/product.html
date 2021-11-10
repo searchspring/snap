@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="website.css">
 
     <script src="dist/bundle.js"></script>
+	
+	<!-- use these for local ie11 testing -->
+	<!-- <script type="module" src="dist/bundle.js"></script> -->
+	<!-- <script nomodule src="dist/universal.bundle.js"></script> -->
 </head>
 
 <body class="ss-lite-site">
@@ -220,13 +224,15 @@
         </div>
     </footer>
     <script>
-        try {
-            window.searchspring.track.product.view({
-                data: {
-                    sku: "C-AD-W1-1869P"
-                }
-            })    
-        } catch (e) {}
+       setTimeout(function(){
+            try {
+                window.searchspring.track.product.view({
+                    data: {
+                        sku: "C-AD-W1-1869P"
+                    }
+                })
+            } catch (e){}
+        }, 1000)
     </script>
 </body>
 

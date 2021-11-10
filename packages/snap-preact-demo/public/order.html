@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="website.css">
 
     <script src="dist/bundle.js"></script>
+	
+	<!-- use these for local ie11 testing -->
+	<!-- <script type="module" src="dist/bundle.js"></script> -->
+	<!-- <script nomodule src="dist/universal.bundle.js"></script> -->
 </head>
 
 <body class="ss-lite-site">
@@ -206,24 +210,27 @@
         </div>
     </footer>
     <script>
-        try {
-            window.searchspring.track.order.transaction({
-                data: {
-                    items: [
-                    {
-                        sku: "C-BP-G7-B1469",
-                        qty: "1",
-                        price: "22"
-                    },
-                    {
-                        sku: "C-VJ-P2-32007",
-                        qty: "1",
-                        price: "39"
-                    },
-                ]
-                }
-            })
-        } catch (e) { }
+        setTimeout(function(){
+            try {
+                window.searchspring.track.order.transaction({
+                    data: {
+                        items: [
+                        {
+                            sku: "C-BP-G7-B1469",
+                            qty: "1",
+                            price: "22"
+                        },
+                        {
+                            sku: "C-VJ-P2-32007",
+                            qty: "1",
+                            price: "39"
+                        },
+                    ]
+                    }
+                })
+            } catch (e){}
+        }, 1000)
+        
     </script>
 </body>
 

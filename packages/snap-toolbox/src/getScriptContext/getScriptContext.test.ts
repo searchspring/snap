@@ -4,8 +4,10 @@ describe('getScriptContext', () => {
 	it('expects a script tag as the first parameter', () => {
 		const scriptTag = document.createElement('div');
 
+		// invalid param that should throw
 		expect(() => {
-			getScriptContext(scriptTag);
+			// @ts-ignore
+			getScriptContext([], scriptTag);
 		}).toThrow();
 	});
 
@@ -13,23 +15,27 @@ describe('getScriptContext', () => {
 		const scriptTag = document.createElement('script');
 		scriptTag.setAttribute('type', 'searchspring');
 
+		// invalid param that should throw
 		expect(() => {
 			// @ts-ignore
-			getScriptContext(scriptTag, 'options');
+			getScriptContext('options', scriptTag);
 		}).toThrow();
 
+		// invalid param that should throw
 		expect(() => {
 			// @ts-ignore
-			getScriptContext(scriptTag, [1, 2, 3]);
+			getScriptContext([1, 2, 3], scriptTag);
 		}).toThrow();
 
+		// invalid param that should throw
 		expect(() => {
 			// @ts-ignore
-			getScriptContext(scriptTag, ['thing', 2, { one: 1 }]);
+			getScriptContext(['thing', 2, { one: 1 }], scriptTag);
 		}).toThrow();
 
+		// invalid param that should throw
 		expect(() => {
-			getScriptContext(scriptTag, ['options']);
+			getScriptContext(['options'], scriptTag);
 		}).not.toThrow();
 	});
 
@@ -37,49 +43,49 @@ describe('getScriptContext', () => {
 		expect(() => {
 			const scriptTag = document.createElement('script');
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.id = 'search';
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.id = 'searchspring';
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).not.toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.id = 'searchspring-context';
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).not.toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.setAttribute('type', 'notsearchspring');
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.setAttribute('type', 'searchspring');
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).not.toThrow();
 
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.setAttribute('type', 'searchspring/recommend');
 
-			getScriptContext(scriptTag);
+			getScriptContext([], scriptTag);
 		}).not.toThrow();
 	});
 
@@ -88,7 +94,7 @@ describe('getScriptContext', () => {
 		scriptTag.id = 'searchspring-context';
 		scriptTag.setAttribute('profile', 'trending');
 
-		const vars = getScriptContext(scriptTag);
+		const vars = getScriptContext([], scriptTag);
 
 		expect(vars).toHaveProperty('id', 'searchspring-context');
 		expect(vars).toHaveProperty('profile', 'trending');
@@ -99,7 +105,7 @@ describe('getScriptContext', () => {
 		scriptTag.setAttribute('type', 'searchspring/recommend');
 		scriptTag.setAttribute('profile', 'trending');
 
-		const vars = getScriptContext(scriptTag);
+		const vars = getScriptContext([], scriptTag);
 
 		expect(vars).toHaveProperty('type', 'searchspring/recommend');
 		expect(vars).toHaveProperty('profile', 'trending');
@@ -113,7 +119,7 @@ describe('getScriptContext', () => {
 			shopperId = 'snap';
 		`;
 
-		const vars = getScriptContext(scriptTag, ['siteId']);
+		const vars = getScriptContext(['siteId'], scriptTag);
 		expect(vars).toHaveProperty('siteId', 'abc123');
 		expect(vars).not.toHaveProperty('shopperId', 'snap');
 	});
@@ -129,7 +135,7 @@ describe('getScriptContext', () => {
 			};
 		`;
 
-		const vars = getScriptContext(scriptTag, ['func', 'options']);
+		const vars = getScriptContext(['func', 'options'], scriptTag);
 		expect(vars.func()).toBe('returned value');
 		expect(vars).toHaveProperty('options');
 		expect(vars.options).toStrictEqual({

@@ -86,14 +86,10 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, branch, options } = getScriptContext(elem, [
-					'shopperId',
-					'shopper',
-					'product',
-					'seed',
-					'branch',
-					'options',
-				]);
+				const { shopper, shopperId, product, seed, branch, options } = getScriptContext(
+					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'],
+					elem as HTMLScriptElement
+				);
 
 				if (shopper || shopperId) {
 					globals.shopper = shopper || shopperId;

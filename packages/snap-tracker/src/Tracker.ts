@@ -412,7 +412,11 @@ export class Tracker {
 			eventsToSend.forEach((event) => {
 				events.push({ ...event });
 			});
-			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(events));
+			try {
+				this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify(events));
+			} catch (e) {
+				console.log('e1:', e);
+			}
 		}
 
 		clearTimeout(this.isSending);
@@ -423,7 +427,11 @@ export class Tracker {
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(JSON.stringify(events.length == 1 ? events[0] : events));
 			}
-			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
+			try {
+				this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
+			} catch (e) {
+				console.log('e1:', e);
+			}
 		}, BATCH_TIMEOUT);
 	};
 }

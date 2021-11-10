@@ -11,7 +11,10 @@ describe('Autocomplete', () => {
 				this.skip();
 			}
 			cy.get('.searchspring-ac').focus();
-			cy.get('.ss__autocomplete').should('exist');
+			cy.snapStore('autocomplete').then((store) => {
+				cy.wait(1000);
+				cy.get('.ss__autocomplete').should('exist');
+			});
 		});
 	});
 	it('has trending terms', function () {

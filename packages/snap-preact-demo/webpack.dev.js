@@ -2,12 +2,12 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 
-const es5 = merge(common, {
+const universal = merge(common, {
 	mode: 'development',
-	entry: './src/bundle.js',
+	entry: './src/universal.js',
 	output: {
-		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		filename: 'universal.bundle.js',
+		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
 	target: 'browserslist',
 	module: {
@@ -38,9 +38,14 @@ const es5 = merge(common, {
 	},
 });
 
-const modern = merge(common, {
+const bundle = merge(common, {
 	mode: 'development',
 	entry: './src/index.js',
+	output: {
+		filename: 'bundle.js',
+		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		publicPath: '/dist/',
+	},
 	module: {
 		rules: [
 			{
@@ -50,13 +55,8 @@ const modern = merge(common, {
 			},
 		],
 	},
-	output: {
-		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
-	},
 	target: 'web',
 	devtool: 'source-map',
 });
 
-module.exports = [es5, modern];
+module.exports = [universal, bundle];

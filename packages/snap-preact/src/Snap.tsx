@@ -3,7 +3,7 @@ import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version, DomTargeter } from '@searchspring/snap-toolbox';
+import { version, DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -21,7 +21,6 @@ import type {
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
-import { URL } from './URL';
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, RootComponent } from './types';
@@ -88,6 +87,20 @@ enum DynamicImportNames {
 	FINDER = 'finderController',
 	RECOMMENDATION = 'recommendationController',
 }
+const CookiePopup = (props) => {
+	return (
+		<div class="ss-popup">
+			<button
+				onClick={() => {
+					cookies.unset('ss-branch');
+					window.location.reload();
+				}}
+			>
+				Remove ss-branch cookie
+			</button>
+		</div>
+	);
+};
 
 export class Snap {
 	config: SnapConfig;
@@ -161,27 +174,65 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
+		this.logger = new Logger('Snap Preact ');
 
-		// TODO: rename URL (it is not a class, should be capitalized) and move to toolbox
-		const urlParams = URL(window.location.href);
-		const branchParam = urlParams.params.query.filter((param) => (param.key = 'branch'))[0];
-		console.log('stuff:', branchParam, urlParams, this.config.context);
+		try {
+			const urlParams = url(window.location.href);
+			const branchParam = urlParams.params?.query?.branch;
 
-		if (branchParam?.value) {
-			console.log('loading bundle from: ' + branchParam.value);
-			const script = document.createElement('script');
-			// TODO: use URL to add a param
-			script.src = `${this.config.context?.src}?branch=${branchParam.value}`;
-			// document.head.appendChild(script);
-			return;
-		}
+			if (cookies.get('ss-branch')) {
+				this.logger.warn(`Loading '${branchParam}' branch.`);
+				new DomTargeter(
+					[
+						{
+							selector: 'body',
+							component: <CookiePopup />,
+							inject: {
+								action: 'append', // before, after, append, prepend
+								element: () => {
+									const branchContainer = document.createElement('div');
+									branchContainer.className = 'ss__branch--target';
+									return branchContainer;
+								},
+							},
+						},
+					],
+					(target, elem) => {
+						render(target.component, elem);
+					}
+				);
+			} else if (branchParam) {
+				cookies.set('ss-branch', branchParam);
+				window.location.reload();
 
+				// snapui.searchspring.io/siteid/branch/bundle.js
+				// chunks currently not passed the branch param...
+				// snapui.searchspring.io/siteid/bundle.js?branch=branching
+
+				// snapui.searchspring.io/siteid/bundle.js <- lambda original script which may have given universal
+
+				/*
+					option1:
+						continue to use snapui.searchspring.io/siteid/bundle.js?branch=branching
+						somehow make chunks add query param from bundle
+					option2:
+						remove branch params functionality from lambda
+						alter lambda to diferentially serve universal on branch paths in addition to root paths
+						snapui.searchspring.io/siteid/branch/bundle.js AND snapui.searchspring.io/siteid/bundle.js
+					option3?:
+						somehow mark code build as universal (or not) and explicitly load the proper branch bundle
+						snapui.searchspring.io/siteid/branch/universal.bundle.js OR snapui.searchspring.io/siteid/branch/bundle.js
+					option4:
+						snapui.searchspring.io/loader.js?siteId=...&branch=...
+							
+				*/
+			}
+		} catch (e) {}
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
-		this.logger = new Logger('Snap Preact ');
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};

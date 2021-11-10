@@ -7,15 +7,14 @@
 	"license": "MIT",
 	"scripts": {
 		"analyze": "webpack --config webpack.prod.js --analyze",
-		"analyze:modern": "webpack --config webpack.prod.modern.js --analyze",
+		"analyze:universal": "webpack --config webpack.prod.universal.js --analyze",
 		"build": "echo 'not building demo store'",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
-		"build:watch": "rm -fr ./dist && webpack --config webpack.prod.js --watch --mode=production",
 		"cypress": "cypress open --project tests",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)"
+		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)"
 	},
 	"dependencies": {
 		"@searchspring/snap-preact": "^0.10.0",

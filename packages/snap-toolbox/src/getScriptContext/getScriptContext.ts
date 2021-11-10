@@ -1,26 +1,34 @@
+import { getCurrentScript } from '../getCurrentScript/getCurrentScript';
+
 type ContextVariables = {
 	[variable: string]: any;
 };
 
-export function getScriptContext(script: Element, evaluate?: string[]): ContextVariables {
+export function getScriptContext(evaluate?: string[], script?: HTMLScriptElement | string): ContextVariables {
 	if (!script || typeof script !== 'object' || script.tagName !== 'SCRIPT') {
-		throw new Error('script tag must be provided');
+		script = getCurrentScript(typeof script == 'string' ? script : undefined);
+
+		if (!script) {
+			throw new Error(`getScriptContext could not find a valid script tag or invalid selector`);
+		}
 	}
 
+	const scriptElem = script as HTMLScriptElement;
+
 	// check script type
-	if (!script.getAttribute('type')?.match(/^searchspring/) && !script.id?.match(/^searchspring/)) {
+	if (!scriptElem.getAttribute('type')?.match(/^searchspring/) && !scriptElem.id?.match(/^searchspring/)) {
 		throw new Error('script type or id attribute must start with "searchspring"');
 	}
 
 	if ((evaluate && !Array.isArray(evaluate)) || (evaluate && !evaluate.reduce((accu, name) => accu && typeof name === 'string', true))) {
-		throw new Error('getScriptContext second parameter must be an array of strings');
+		throw new Error('getScriptContext first parameter must be an array of strings');
 	}
 
 	const variables: Record<string, unknown> = {};
 
 	// grab all element attributes and put into variables
-	Object.values(script.attributes).map((attr) => {
-		variables[attr.nodeName] = script.getAttribute(attr.nodeName);
+	Object.values(scriptElem.attributes).map((attr) => {
+		variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
 	});
 
 	try {
@@ -28,7 +36,7 @@ export function getScriptContext(script: Element, evaluate?: string[]): ContextV
 		evaluate?.forEach((name) => {
 			const fn = new Function(`
 				var ${evaluate.join(', ')};
-				${script.innerHTML}
+				${scriptElem.innerHTML}
 				return ${name};
 			`);
 
