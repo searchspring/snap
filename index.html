@@ -122,23 +122,75 @@
 			app.component('Content', { 
 				props: ['routes'],
 				template: `
-					<iframe v-if="routeData.type == 'iframe'" :src="routeData.url"></iframe>
+					<iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
 					<Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
 					<div id="searchWrapper"></div>
 				`,
 				computed: {
 					currentRoute() {
+						console.log("this.$route.path", this.$route.path)
 						return this.$route.path;
 					},
 					routeData() {
-						if (this.routes[this.currentRoute].url.includes('?params') && this.routes[this.currentRoute].type === 'iframe') {
-							const params = decodeURIComponent(window.location.href.split('?')[1] || '');
+						const params = decodeURIComponent(window.location.href.split('?params=')[1] || '');
+						if (params && this.routes[this.currentRoute] && this.routes[this.currentRoute].url && this.routes[this.currentRoute].type === 'iframe') {
 							return { type: 'iframe', url: `${this.routes[this.currentRoute].url}${params}`}
 						}
 
 						return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' };
 					}
+				},
+				methods: {
+					onLoad() {
+						const mutations = [];
+						// Select the node that will be observed for mutations
+						const targetNode = document.getElementById('frame').contentWindow.document.querySelector('title');
+						console.log("targetNode", targetNode)
+
+						/*
+							new MutationObserver(function() {console.log(document.title);}).observe(document.querySelector('title'),{ childList: true });
+						*/
+	
+						// Options for the observer (which mutations to observe)
+						// const config = { attributes: true, childList: true, subtree: true };
+						const config = { characterData: true, attributes: true, childList: true, subtree: true};
+						
+	
+						// Callback function to execute when mutations are observed
+						const callback = function(mutationsList, observer) {
+							
+							mutations.push(mutationsList[0])
+							if(mutationsList.length && mutations.length > 1) {
+								const url = mutationsList[0].target.baseURI;
+								const params = encodeURIComponent(`?${url.split('?')[1]}`);
+								const fullRoute = window.location.href.split('#')[1] // '/components-preact?params=%3Fpath%3D%2Fdocs%2FOrganisms-Autocomplete'
+								const route = fullRoute.split('?')[0]; // '/components-preact'
+								const newRoute = `${route}?params=${params}`;
+								console.log('update URL to ->', newRoute);
+								window.location.hash = newRoute;
+							}
+						};
+	
+						// Create an observer instance linked to the callback function
+						const observer = new MutationObserver(callback);
+	
+						// Start observing the target node for configured mutations
+						observer.observe(targetNode, config);
+	
+						// setTimeout(() => {
+						// 	// this is the initial call that works in FF (and Chrome/Safari naturally)
+						// 	console.log("targetNode", targetNode)
+	
+						// 	const retargetNode = document.getElementById('frame').contentWindow.document.body;
+						// 	console.log("retargetNode", retargetNode)
+						// 	observer.observe(targetNode, config);
+						// }, 3000);
+	
+						// Later, you can stop observing
+						// observer.disconnect();
+					},
 				}
+				
 			});
 
 			app.component('Markdown', { 
@@ -276,4 +328,11 @@
 	</script>
 
 </body>
+<script>
+	// document.querySelector("iframe").addEventListener('load', function() {
+	// 	console.log("iframe loaded")
+	// 	console.log(document.querySelector("iframe").contentWindow.location.href)
+	// })
+
+</script>
 </html>

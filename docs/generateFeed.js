@@ -58,14 +58,13 @@ const OUTPUT_FILE = 'snap-docs.json';
 						if (markdown) {
 							docEntries.push({
 								name: link.label,
-								url: `https://raw.githubusercontent.com/searchspring/snap/main/docs/${link.url.replace('./docs/', '')}`,
 								route: link.route,
 								price: 0,
 								description: markdown,
 								image: '',
 								sku: `sku${link.route}`,
 								id: link.route,
-								categoryHierarchy: `${catRoot}>${link.label}`,
+								categoryHierarchy: `${catRoot} > ${link.hierarchyLabel || link.label}`,
 							});
 						}
 					} catch (err) {
@@ -74,7 +73,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 				}
 
 				if (link.links) {
-					generateLinks(link.links, `${catRoot}>${link.label}`);
+					generateLinks(link.links, `${catRoot} > ${link.label}`);
 				}
 			}
 		});
@@ -124,12 +123,14 @@ const OUTPUT_FILE = 'snap-docs.json';
 			const packagePath = path.split('/snap/packages/')[1];
 			const [libraryDir, _, __, type, componentName, ___] = packagePath.split('/');
 			const lang = libraryDir.split('-')[1];
+			const route = libraryDir.includes('snap-preact-components') ? 'components-preact' : ''; // TODO: refactor once more options
 
 			const encodedParams = encodeURIComponent(`?path=/docs/${type}-${componentName}`);
 
 			return {
 				label: `${componentName} ${lang[0].toUpperCase() + lang.slice(1)} Component`,
-				route: `/${libraryDir}?params=${encodedParams}`,
+				hierarchyLabel: componentName,
+				route: `/${route}?params=${encodedParams}`,
 				type: 'iframe',
 				url: `./packages/${libraryDir}/src/components/${type}/${componentName}/readme.md`,
 				searchable: true,
