@@ -3,7 +3,8 @@ import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version, DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
+import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { BranchOverride, BRANCH_COOKIE } from './components/BranchOverride';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -87,20 +88,6 @@ enum DynamicImportNames {
 	FINDER = 'finderController',
 	RECOMMENDATION = 'recommendationController',
 }
-const CookiePopup = (props) => {
-	return (
-		<div class="ss-popup">
-			<button
-				onClick={() => {
-					cookies.unset('ss-branch');
-					window.location.reload();
-				}}
-			>
-				Remove ss-branch cookie
-			</button>
-		</div>
-	);
-};
 
 export class Snap {
 	config: SnapConfig;
@@ -175,59 +162,6 @@ export class Snap {
 	constructor(config: SnapConfig) {
 		this.config = config;
 		this.logger = new Logger('Snap Preact ');
-
-		try {
-			const urlParams = url(window.location.href);
-			const branchParam = urlParams.params?.query?.branch;
-
-			if (cookies.get('ss-branch')) {
-				this.logger.warn(`Loading '${branchParam}' branch.`);
-				new DomTargeter(
-					[
-						{
-							selector: 'body',
-							component: <CookiePopup />,
-							inject: {
-								action: 'append', // before, after, append, prepend
-								element: () => {
-									const branchContainer = document.createElement('div');
-									branchContainer.className = 'ss__branch--target';
-									return branchContainer;
-								},
-							},
-						},
-					],
-					(target, elem) => {
-						render(target.component, elem);
-					}
-				);
-			} else if (branchParam) {
-				cookies.set('ss-branch', branchParam);
-				window.location.reload();
-
-				// snapui.searchspring.io/siteid/branch/bundle.js
-				// chunks currently not passed the branch param...
-				// snapui.searchspring.io/siteid/bundle.js?branch=branching
-
-				// snapui.searchspring.io/siteid/bundle.js <- lambda original script which may have given universal
-
-				/*
-					option1:
-						continue to use snapui.searchspring.io/siteid/bundle.js?branch=branching
-						somehow make chunks add query param from bundle
-					option2:
-						remove branch params functionality from lambda
-						alter lambda to diferentially serve universal on branch paths in addition to root paths
-						snapui.searchspring.io/siteid/branch/bundle.js AND snapui.searchspring.io/siteid/bundle.js
-					option3?:
-						somehow mark code build as universal (or not) and explicitly load the proper branch bundle
-						snapui.searchspring.io/siteid/branch/universal.bundle.js OR snapui.searchspring.io/siteid/branch/bundle.js
-					option4:
-						snapui.searchspring.io/loader.js?siteId=...&branch=...
-							
-				*/
-			}
-		} catch (e) {}
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
@@ -251,10 +185,54 @@ export class Snap {
 
 		// log version
 		this.logger.imageText({
-			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
+			url: 'https://snapui.searchspring.io/favicon.svg',
 			text: `[${version}]`,
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
+
+		try {
+			const urlParams = url(window.location.href);
+			const branchParam = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+
+			if (branchParam && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
+				// set a cookie or localstorage with branch
+				if (featureFlags.cookies) {
+					cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000); // 1 hour
+				} else {
+					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not work!');
+				}
+
+				// append script with new branch in path
+				const script = document.createElement('script');
+				script.src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
+				script.setAttribute(BRANCH_COOKIE, '1');
+				document.head.appendChild(script);
+
+				// prevent instantiation of config
+				return;
+			} else if (cookies.get(BRANCH_COOKIE)) {
+				this.logger.setMode(LogMode.DEVELOPMENT);
+				this.logger.warn(`Loading '${branchParam}' build.`);
+				new DomTargeter(
+					[
+						{
+							selector: 'body',
+							inject: {
+								action: 'append', // before, after, append, prepend
+								element: () => {
+									const branchContainer = document.createElement('div');
+									branchContainer.className = 'ss__branch--target';
+									return branchContainer;
+								},
+							},
+						},
+					],
+					(target, elem) => {
+						render(<BranchOverride branch={branchParam} />, elem);
+					}
+				);
+			}
+		} catch (e) {}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
