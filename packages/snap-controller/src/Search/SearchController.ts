@@ -153,7 +153,7 @@ export class SearchController extends AbstractController {
 		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
-		if (!this.config.settings?.redirects?.merchandising || (!params.filters && this.store.loaded)) {
+		if (!this.config.settings?.redirects?.merchandising || this.store.loaded) {
 			params.search = params.search || {};
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
