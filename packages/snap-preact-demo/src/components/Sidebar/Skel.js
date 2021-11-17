@@ -1,6 +1,5 @@
 import { h, Fragment, Component } from 'preact';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import { Skeleton } from '@searchspring/snap-preact-components';
 
 export class SidebarSkel extends Component {
 	render() {
