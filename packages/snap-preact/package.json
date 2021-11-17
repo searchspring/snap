@@ -29,6 +29,7 @@
 		"@searchspring/snap-toolbox": "^0.10.0",
 		"@searchspring/snap-tracker": "^0.10.0",
 		"@searchspring/snap-url-manager": "^0.10.0",
+		"@searchspring/snap-preact-components": "^0.10.0",
 		"deepmerge": "^4.2.2"
 	},
 	"devDependencies": {

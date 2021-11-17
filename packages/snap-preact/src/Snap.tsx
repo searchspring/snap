@@ -4,7 +4,6 @@ import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
-import { BranchOverride, BRANCH_COOKIE } from './components/BranchOverride';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -25,6 +24,9 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, RootComponent } from './types';
+
+const BRANCH_COOKIE = 'ssBranch';
+const SS_DEV_COOKIE = 'ssDev';
 
 type ExtendedTarget = Target & {
 	name?: string;
@@ -198,21 +200,21 @@ export class Snap {
 				// set a cookie or localstorage with branch
 				if (featureFlags.cookies) {
 					cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000); // 1 hour
+					cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
 				} else {
-					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not work!');
+					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
 				}
+
+				this.logger.setMode(LogMode.DEVELOPMENT);
+				this.logger.warn(`...loading '${branchParam}' build...`);
 
 				// append script with new branch in path
 				const script = document.createElement('script');
-				script.src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
-				script.setAttribute(BRANCH_COOKIE, '1');
+				const src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
+				script.src = src;
+				script.setAttribute(BRANCH_COOKIE, '');
 				document.head.appendChild(script);
 
-				// prevent instantiation of config
-				return;
-			} else if (cookies.get(BRANCH_COOKIE)) {
-				this.logger.setMode(LogMode.DEVELOPMENT);
-				this.logger.warn(`Loading '${branchParam}' build.`);
 				new DomTargeter(
 					[
 						{
@@ -227,10 +229,14 @@ export class Snap {
 							},
 						},
 					],
-					(target, elem) => {
-						render(<BranchOverride branch={branchParam} />, elem);
+					async (target, elem) => {
+						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
+						render(<BranchOverride branch={branchParam} cookieName={BRANCH_COOKIE} bundleUrl={src} />, elem);
 					}
 				);
+
+				// prevent instantiation of config
+				return;
 			}
 		} catch (e) {}
 
