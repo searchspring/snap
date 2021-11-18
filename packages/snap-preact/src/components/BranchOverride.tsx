@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'preact/hooks';
 import { url, cookies } from '@searchspring/snap-toolbox';
-import { useMediaQuery, Icon } from '@searchspring/snap-preact-components';
 
 type FileHeaderDetails = {
 	lastModified: string;
 };
+
+const icons = {
+	'close-thin':
+		'M56 5.638l-22.362 22.362 22.362 22.362-5.638 5.638-22.362-22.362-22.362 22.362-5.638-5.638 22.362-22.362-22.362-22.362 5.638-5.638 22.362 22.362 22.362-22.362z',
+	warn: 'M31.2981 5.28228C29.8323 2.74341 26.1677 2.74341 24.7019 5.28228L0.515899 47.1737C-0.94992 49.7126 0.88235 52.8861 3.81399 52.8861H52.186C55.1176 52.8861 56.9499 49.7126 55.4841 47.1737L31.2981 5.28228ZM25.2229 35.0037L24.8264 18.837C24.8264 18.655 24.8923 18.4729 25.047 18.3686C25.1794 18.2387 25.3776 18.1601 25.5759 18.1601H30.4241C30.6223 18.1601 30.8206 18.238 30.953 18.3686C31.1071 18.4729 31.1736 18.655 31.1736 18.837L30.7988 35.0037C30.7988 35.3679 30.4682 35.6542 30.0493 35.6542H25.9724C25.5759 35.6542 25.2453 35.3679 25.2229 35.0037ZM25.1788 43.9593V39.0131C25.1788 38.5447 25.487 38.1541 25.8618 38.1541H30.0929C30.4894 38.1541 30.82 38.5447 30.82 39.0131V43.9593C30.82 44.4277 30.4894 44.8183 30.0929 44.8183H25.8618C25.487 44.8183 25.1788 44.4277 25.1788 43.9593Z',
+};
+
 const fetchBundleDetails = async (url: string): Promise<FileHeaderDetails> => {
 	return new Promise((resolve, reject) => {
 		const request = new XMLHttpRequest();
@@ -14,7 +20,6 @@ const fetchBundleDetails = async (url: string): Promise<FileHeaderDetails> => {
 			if (request.readyState === XMLHttpRequest.DONE) {
 				const status = request.status;
 				if (status === 0 || (status >= 200 && status < 400)) {
-					console.log('status', status, request);
 					resolve({
 						lastModified: request.getResponseHeader('Last-Modified').split(',')[1],
 					});
@@ -136,7 +141,7 @@ const themes = {
 };
 
 export const BranchOverride = (props: { branch: string; cookieName: string; bundleUrl: string }): JSX.Element => {
-	const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 	const [themeName, setThemeName] = useState(prefersDark ? 'darkTheme' : 'lightTheme');
 	const [details, setDetails] = useState(null);
 	useEffect(() => {
@@ -185,7 +190,9 @@ export const BranchOverride = (props: { branch: string; cookieName: string; bund
 							popup.style.cursor = 'pointer';
 						}}
 					>
-						<Icon icon="close-thin" size="18px" color={themes[themeName].top.close.fill} />
+						<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px">
+							<path fill={themes[themeName].top.close.fill} d={icons['close-thin']} />
+						</svg>
 					</div>
 
 					<div
@@ -209,7 +216,9 @@ export const BranchOverride = (props: { branch: string; cookieName: string; bund
 					>
 						{details == 'failure' ? (
 							<>
-								<Icon icon="warn" size="14px" color={themes[themeName].details.branch.color} style="margin-right: 10px;" />
+								<svg style="margin-right: 10px;" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px">
+									<path fill={themes[themeName].details.branch.color} d={icons['warn']} />
+								</svg>
 								Branch not found!
 							</>
 						) : (

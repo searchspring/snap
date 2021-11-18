@@ -4,7 +4,7 @@ describe('Tracking', () => {
 	it('tracked shopper login', () => {
 		cy.visit('http://localhost:4444');
 
-		const shopperId = '123456';
+		const shopperId = 'snapdev';
 		cy.get('#login').click();
 		cy.get('#login-modal').find('input').type(shopperId);
 		cy.get('#login-modal').find('button').click();

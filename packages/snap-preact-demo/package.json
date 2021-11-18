@@ -14,7 +14,8 @@
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)"
+		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)",
+		"lighthouse": "lhci autorun --throttling.cpuSlowdownMultiplier=2.2"
 	},
 	"dependencies": {
 		"@searchspring/snap-preact": "^0.10.0",
