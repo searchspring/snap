@@ -64,8 +64,8 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
-
-			if (redirectURL && config?.settings?.redirects?.merchandising) {
+			const searchStore = search.controller.store as SearchStore;
+			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -153,7 +153,7 @@ export class SearchController extends AbstractController {
 		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
-		if (!this.config.settings?.redirects?.merchandising) {
+		if (!this.config.settings?.redirects?.merchandising || this.store.loaded) {
 			params.search = params.search || {};
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}

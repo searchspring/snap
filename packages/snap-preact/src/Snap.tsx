@@ -267,11 +267,51 @@ export class Snap {
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && onTarget(target, elem, originalElem);
 
-								const Component = await (target as ExtendedTarget).component();
+								try {
+									const Component = await (target as ExtendedTarget).component();
+									setTimeout(() => {
+										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+									});
+								} catch (err) {
+									this.logger.error(
+										`Uncaught Error - Invalid value passed as the component.
+	This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
+			
+				instead of - 
 
-								setTimeout(() => {
-									render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
-								});
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: <Content/>,
+				},
+			]
+
+				or - 
+
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: Content,
+				},
+			]
+
+				please try - 
+
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: () => Content
+				},
+			]
+
+			
+The error above happened in the following targeter in the Snap Config`,
+										target
+									);
+								}
 							};
 
 							controller?.targeters?.forEach(async (target, target_index) => {
