@@ -233,6 +233,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 						<div className={'ss__facet-slider__handles'}>
 							{handles.map(({ value, active, getHandleProps }, idx) => (
 								<button
+									type="button"
 									{...getHandleProps({
 										style: {
 											appearance: 'none',

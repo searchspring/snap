@@ -1,5 +1,5 @@
 export const cookies: Cookies = {
-	set: (name: string, val: string, sameSite: string, expires?: number): void => {
+	set: (name: string, val: string, sameSite?: string, expires?: number): void => {
 		sameSite = sameSite || 'Lax';
 
 		let cookie = name + '=' + encodeURIComponent(val) + ';' + 'SameSite=' + sameSite + ';path=/;';

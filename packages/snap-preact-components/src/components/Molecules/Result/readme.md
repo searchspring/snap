@@ -37,6 +37,13 @@ The `hidePricing` prop will prevent the pricing from rendering.
 <Result result={controller.store.results[0]} hidePricing={true} />
 ```
 
+### hideImage
+The `hideImage` prop will prevent the image from rendering.
+
+```jsx
+<Result result={controller.store.results[0]} hideImage={true} />
+```
+
 ### detailSlot
 The `detailSlot` prop is a JSX element to used display additional content below the title and pricing sections.
 
