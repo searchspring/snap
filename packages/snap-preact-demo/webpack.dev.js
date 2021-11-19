@@ -20,7 +20,7 @@ const universal = merge(common, {
 		],
 	},
 	devServer: {
-		https: false,
+		https: true,
 		port: 4444,
 		hot: true,
 		allowedHosts: 'all',
@@ -38,7 +38,7 @@ const universal = merge(common, {
 	},
 });
 
-const bundle = merge(common, {
+const modern = merge(common, {
 	mode: 'development',
 	entry: './src/index.js',
 	output: {
@@ -59,4 +59,4 @@ const bundle = merge(common, {
 	devtool: 'source-map',
 });
 
-module.exports = [universal, bundle];
+module.exports = [universal, modern];

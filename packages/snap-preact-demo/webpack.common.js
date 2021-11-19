@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();

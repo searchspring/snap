@@ -2,7 +2,7 @@ import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 describe('Tracking', () => {
 	it('tracked shopper login', () => {
-		cy.visit('http://localhost:4444');
+		cy.visit('https://localhost:4444');
 
 		const shopperId = 'snapdev';
 		cy.get('#login').click();
@@ -23,7 +23,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product click', () => {
-		cy.visit('http://localhost:4444');
+		cy.visit('https://localhost:4444');
 
 		cy.snapStore().then((store) => {
 			expect(store).to.haveOwnProperty('pagination');
@@ -63,7 +63,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product view', () => {
-		cy.visit('http://localhost:4444/product.html');
+		cy.visit('https://localhost:4444/product.html');
 
 		cy.snapStore().then((store) => {
 			cy.wait(`@${BeaconType.PRODUCT}`).should((interception) => {
@@ -95,7 +95,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked cart view', () => {
-		cy.visit('http://localhost:4444/cart.html');
+		cy.visit('https://localhost:4444/cart.html');
 		cy.snapStore().then((store) => {
 			cy.wait(`@${BeaconType.CART}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
@@ -133,7 +133,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked order transaction', () => {
-		cy.visit('http://localhost:4444/order.html');
+		cy.visit('https://localhost:4444/order.html');
 		cy.snapStore().then((store) => {
 			cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
@@ -170,7 +170,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked all recommendation interaction events', () => {
-		cy.visit('http://localhost:4444/product.html');
+		cy.visit('https://localhost:4444/product.html');
 
 		cy.snapStore('recommend_similar0').then((store) => {
 			expect(store).to.haveOwnProperty('results');

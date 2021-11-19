@@ -237,32 +237,30 @@
         <div class="ss-lite-footer-copyright">
             <div class="ss-lite-wrapper">
                 <p>
-                    &copy; 2020 <a href="//searchspring.com" target="_blank">Searchspring</a> - All rights reserved.
+                    &copy; 2022 <a href="//searchspring.com" target="_blank">Searchspring</a> - All rights reserved.
                 </p>
             </div>
         </div>
     </footer>
     <script>
-        setTimeout(function(){
-            try {
-                window.searchspring.track.cart.view({
-                    data: {
-                        items: [
-                            {
-                                sku: "C-BP-G7-B1469",
-                                qty: "1",
-                                price: "22"
-                            },
-                            {
-                                sku: "C-VJ-P2-32007",
-                                qty: "1",
-                                price: "39"
-                            },
-                        ]
-                    }
-                })
-            } catch (e){}
-       }, 1000)
+        try {
+            window.searchspring.track.cart.view({
+                data: {
+                    items: [
+                        {
+                            sku: "C-BP-G7-B1469",
+                            qty: "1",
+                            price: "22"
+                        },
+                        {
+                            sku: "C-VJ-P2-32007",
+                            qty: "1",
+                            price: "39"
+                        },
+                    ]
+                }
+            })
+        } catch (e){}
     </script>
 </body>
 
