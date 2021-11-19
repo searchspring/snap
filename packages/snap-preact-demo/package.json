@@ -7,14 +7,15 @@
 	"license": "MIT",
 	"scripts": {
 		"analyze": "webpack --config webpack.prod.js --analyze",
+		"analyze:universal": "webpack --config webpack.prod.universal.js --analyze",
 		"build": "echo 'not building demo store'",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
-		"build:watch": "rm -fr ./dist && webpack --config webpack.prod.js --watch --mode=production",
 		"cypress": "cypress open --project tests",
 		"dev": "kill $(lsof -ti:4444,8888); webpack serve --config webpack.dev.js",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)"
+		"test": "(kill $(lsof -ti:4444,8888); webpack serve --config webpack.prod.js & cypress run --project tests; r=$?; kill $(lsof -ti:4444,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)",
+		"lighthouse": "lhci autorun --throttling.cpuSlowdownMultiplier=2.2"
 	},
 	"dependencies": {
 		"@searchspring/snap-preact": "^0.10.0",
@@ -33,9 +34,8 @@
 		"@babel/preset-env": "^7.15.6",
 		"@babel/preset-react": "^7.14.5",
 		"@babel/runtime": "^7.15.4",
-		"@prefresh/webpack": "^3.3.2",
 		"babel-loader": "^8.2.2",
-		"core-js": "^3.17.3",
+		"core-js": "^3.19.0",
 		"css-loader": "^6.2.0",
 		"cypress": "8.5.0",
 		"file-loader": "^6.2.0",

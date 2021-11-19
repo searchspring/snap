@@ -16,6 +16,7 @@ export class SelectionStore extends Array {
 		storage: StorageStore
 	) {
 		if (!facets || !meta) {
+			super();
 			return;
 		}
 		// re-order facets to match our config

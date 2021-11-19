@@ -1,10 +1,8 @@
-const path = require('path');
 const webpack = require('webpack');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
 module.exports = {
-	entry: './src/index.js',
 	stats: {
 		modulesSort: 'size',
 		modulesSpace: 70,
@@ -20,11 +18,6 @@ module.exports = {
 	],
 	module: {
 		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: ['babel-loader'],
-			},
 			{
 				test: /\.(css|scss)$/,
 				exclude: /\.module\.(css|scss)$/,
@@ -50,11 +43,6 @@ module.exports = {
 				use: ['file-loader'],
 			},
 		],
-	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
-		chunkFilename: 'snap_[name].js',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx'],

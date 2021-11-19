@@ -2,9 +2,9 @@ import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 describe('Tracking', () => {
 	it('tracked shopper login', () => {
-		cy.visit('http://localhost:4444');
+		cy.visit('https://localhost:4444');
 
-		const shopperId = '123456';
+		const shopperId = 'snapdev';
 		cy.get('#login').click();
 		cy.get('#login-modal').find('input').type(shopperId);
 		cy.get('#login-modal').find('button').click();
@@ -23,7 +23,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product click', () => {
-		cy.visit('http://localhost:4444');
+		cy.visit('https://localhost:4444');
 
 		cy.snapStore().then((store) => {
 			expect(store).to.haveOwnProperty('pagination');
@@ -63,110 +63,114 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product view', () => {
-		cy.visit('http://localhost:4444/product.html');
-		cy.wait(500);
-		cy.wait(`@${BeaconType.PRODUCT}`).should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.response.body).to.have.property('success').to.equal(true);
+		cy.visit('https://localhost:4444/product.html');
 
-			const beacon = interception.request.body.filter((event) => event.type === BeaconType.PRODUCT)[0];
+		cy.snapStore().then((store) => {
+			cy.wait(`@${BeaconType.PRODUCT}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-			expect(beacon.category).to.equal(BeaconCategory.PAGEVIEW);
+				const beacon = interception.request.body.filter((event) => event.type === BeaconType.PRODUCT)[0];
 
-			expect(beacon.event).to.be.an('object').to.include.all.keys(['sku']);
-			expect(beacon.event.sku).to.equal('C-AD-W1-1869P');
-		});
+				expect(beacon.category).to.equal(BeaconCategory.PAGEVIEW);
 
-		cy.wait('@pixel').should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.request.method).to.equal('GET');
-			const urlParams = interception.request.url
-				.split('is.gif?')[1]
-				.split('&')
-				.map((urlPair) => {
-					const [key, value] = urlPair.split('=');
-					return { key, value };
-				});
-			const sku = urlParams.filter((param) => param.key === 'sku')[0].value;
-			expect(sku).to.equal('C-AD-W1-1869P');
+				expect(beacon.event).to.be.an('object').to.include.all.keys(['sku']);
+				expect(beacon.event.sku).to.equal('C-AD-W1-1869P');
+			});
+
+			cy.wait('@pixel').should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.request.method).to.equal('GET');
+				const urlParams = interception.request.url
+					.split('is.gif?')[1]
+					.split('&')
+					.map((urlPair) => {
+						const [key, value] = urlPair.split('=');
+						return { key, value };
+					});
+				const sku = urlParams.filter((param) => param.key === 'sku')[0].value;
+				expect(sku).to.equal('C-AD-W1-1869P');
+			});
 		});
 	});
 
 	it('tracked cart view', () => {
-		cy.visit('http://localhost:4444/cart.html');
-		cy.wait(500);
-		cy.wait(`@${BeaconType.CART}`).should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.response.body).to.have.property('success').to.equal(true);
+		cy.visit('https://localhost:4444/cart.html');
+		cy.snapStore().then((store) => {
+			cy.wait(`@${BeaconType.CART}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-			const beacon = interception.request.body.filter((event) => event.type === BeaconType.CART)[0];
+				const beacon = interception.request.body.filter((event) => event.type === BeaconType.CART)[0];
 
-			expect(beacon.category).to.equal(BeaconCategory.CARTVIEW);
+				expect(beacon.category).to.equal(BeaconCategory.CARTVIEW);
 
-			expect(beacon.event).to.have.property('items');
-			expect(beacon.event.items).to.be.an('array').to.have.length(2);
+				expect(beacon.event).to.have.property('items');
+				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-			expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-			expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-		});
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+			});
 
-		cy.wait('@pixel').should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.request.method).to.equal('GET');
-			const urlParams = interception.request.url
-				.split('is.gif?')[1]
-				.split('&')
-				.map((urlPair) => {
-					const [key, value] = urlPair.split('=');
-					return { key, value };
-				});
-			const a = urlParams.filter((param) => param.key === 'a')[0].value;
-			expect(a).to.equal('basket');
-			const items = urlParams.filter((param) => param.key === 'item');
-			expect(items).to.have.length(2);
-			expect(items[0].value).to.equal('C-BP-G7-B1469;1;22;');
-			expect(items[1].value).to.equal('C-VJ-P2-32007;1;39;');
+			cy.wait('@pixel').should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.request.method).to.equal('GET');
+				const urlParams = interception.request.url
+					.split('is.gif?')[1]
+					.split('&')
+					.map((urlPair) => {
+						const [key, value] = urlPair.split('=');
+						return { key, value };
+					});
+				const a = urlParams.filter((param) => param.key === 'a')[0].value;
+				expect(a).to.equal('basket');
+				const items = urlParams.filter((param) => param.key === 'item');
+				expect(items).to.have.length(2);
+				expect(items[0].value).to.equal('C-BP-G7-B1469;1;22;');
+				expect(items[1].value).to.equal('C-VJ-P2-32007;1;39;');
+			});
 		});
 	});
 
 	it('tracked order transaction', () => {
-		cy.visit('http://localhost:4444/order.html');
-		cy.wait(500);
-		cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.response.body).to.have.property('success').to.equal(true);
+		cy.visit('https://localhost:4444/order.html');
+		cy.snapStore().then((store) => {
+			cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.response.body).to.have.property('success').to.equal(true);
 
-			const beacon = interception.request.body.filter((event) => event.type === BeaconType.ORDER)[0];
-			expect(beacon.category).to.equal(BeaconCategory.ORDERVIEW);
+				const beacon = interception.request.body.filter((event) => event.type === BeaconType.ORDER)[0];
+				expect(beacon.category).to.equal(BeaconCategory.ORDERVIEW);
 
-			expect(beacon.event).to.have.property('items');
-			expect(beacon.event.items).to.be.an('array').to.have.length(2);
+				expect(beacon.event).to.have.property('items');
+				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-			expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-			expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-		});
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+			});
 
-		cy.wait('@pixel').should((interception) => {
-			expect(interception.state).to.equal('Complete');
-			expect(interception.request.method).to.equal('GET');
-			const urlParams = interception.request.url
-				.split('is.gif?')[1]
-				.split('&')
-				.map((urlPair) => {
-					const [key, value] = urlPair.split('=');
-					return { key, value };
-				});
-			const a = urlParams.filter((param) => param.key === 'a')[0].value;
-			expect(a).to.equal('sale');
-			const items = urlParams.filter((param) => param.key === 'item');
-			expect(items).to.have.length(2);
-			expect(items[0].value).to.equal('C-BP-G7-B1469;1;22;');
-			expect(items[1].value).to.equal('C-VJ-P2-32007;1;39;');
+			cy.wait('@pixel').should((interception) => {
+				expect(interception.state).to.equal('Complete');
+				expect(interception.request.method).to.equal('GET');
+				const urlParams = interception.request.url
+					.split('is.gif?')[1]
+					.split('&')
+					.map((urlPair) => {
+						const [key, value] = urlPair.split('=');
+						return { key, value };
+					});
+				const a = urlParams.filter((param) => param.key === 'a')[0].value;
+				expect(a).to.equal('sale');
+				const items = urlParams.filter((param) => param.key === 'item');
+				expect(items).to.have.length(2);
+				expect(items[0].value).to.equal('C-BP-G7-B1469;1;22;');
+				expect(items[1].value).to.equal('C-VJ-P2-32007;1;39;');
+			});
 		});
 	});
 
 	it('tracked all recommendation interaction events', () => {
-		cy.visit('http://localhost:4444/product.html');
+		cy.visit('https://localhost:4444/product.html');
 
 		cy.snapStore('recommend_similar0').then((store) => {
 			expect(store).to.haveOwnProperty('results');

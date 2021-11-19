@@ -18,7 +18,7 @@ describe('Infinite Setting Test', () => {
 				},
 			};
 		});
-		cy.visit('http://localhost:4444/');
+		cy.visit('https://localhost:4444/');
 
 		cy.snapStore().then((store) => {
 			expect(store.config.settings.infinite).to.deep.equal({ backfill });
@@ -63,7 +63,7 @@ describe('Infinite Setting Test', () => {
 				},
 			};
 		});
-		cy.visit('http://localhost:4444/');
+		cy.visit('https://localhost:4444/');
 		cy.snapStore().then((store) => {
 			expect(store.config.settings.infinite).to.deep.equal({ backfill });
 
