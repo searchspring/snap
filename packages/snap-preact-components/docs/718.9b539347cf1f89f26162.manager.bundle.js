@@ -1,6 +1,6 @@
-/*! For license information please see 900.8f6e3318c32522401412.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 718.9b539347cf1f89f26162.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[900],
+	[718],
 	{
 		43128: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -5222,6 +5222,35 @@
 					},
 				});
 			});
+		},
+		53243: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__(18178);
+			var SourceType,
+				esm = __webpack_require__(21872),
+				types = __webpack_require__(31665),
+				PANEL_ID = ''.concat('storybook/docs', '/panel');
+			''.concat('storybook/docs', '/snippet-rendered');
+			!(function (SourceType) {
+				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
+			})(SourceType || (SourceType = {})),
+				esm.KP.register('storybook/docs', function () {
+					esm.KP.add(PANEL_ID, {
+						type: types.V.TAB,
+						title: 'Docs',
+						route: function route(_ref) {
+							var storyId = _ref.storyId,
+								refId = _ref.refId;
+							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
+						},
+						match: function match(_ref2) {
+							return 'docs' === _ref2.viewMode;
+						},
+						render: function render() {
+							return null;
+						},
+					});
+				});
 		},
 		98429: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -34157,6 +34186,15 @@
 				throw TypeError(String(argument) + ' is not an object');
 			};
 		},
+		92460: (module, __unused_webpack_exports, __webpack_require__) => {
+			var fails = __webpack_require__(24229);
+			module.exports = fails(function () {
+				if ('function' == typeof ArrayBuffer) {
+					var buffer = new ArrayBuffer(8);
+					Object.isExtensible(buffer) && Object.defineProperty(buffer, 'a', { value: 8 });
+				}
+			});
+		},
 		97065: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var toObject = __webpack_require__(92991),
@@ -35605,16 +35643,12 @@
 				defineProperty = __webpack_require__(31787).f,
 				getOwnPropertyNamesModule = __webpack_require__(78151),
 				getOwnPropertyNamesExternalModule = __webpack_require__(10166),
+				isExtensible = __webpack_require__(35343),
 				uid = __webpack_require__(81441),
 				FREEZING = __webpack_require__(68476),
 				REQUIRED = !1,
 				METADATA = uid('meta'),
 				id = 0,
-				isExtensible =
-					Object.isExtensible ||
-					function () {
-						return !0;
-					},
 				setMetadata = function (it) {
 					defineProperty(it, METADATA, { value: { objectID: 'O' + id++, weakData: {} } });
 				},
@@ -36339,6 +36373,22 @@
 							: null;
 				  };
 		},
+		35343: (module, __unused_webpack_exports, __webpack_require__) => {
+			var fails = __webpack_require__(24229),
+				isObject = __webpack_require__(85052),
+				classof = __webpack_require__(27079),
+				ARRAY_BUFFER_NON_EXTENSIBLE = __webpack_require__(92460),
+				$isExtensible = Object.isExtensible,
+				FAILS_ON_PRIMITIVES = fails(function () {
+					$isExtensible(1);
+				});
+			module.exports =
+				FAILS_ON_PRIMITIVES || ARRAY_BUFFER_NON_EXTENSIBLE
+					? function isExtensible(it) {
+							return !!isObject(it) && (!ARRAY_BUFFER_NON_EXTENSIBLE || 'ArrayBuffer' != classof(it)) && (!$isExtensible || $isExtensible(it));
+					  }
+					: $isExtensible;
+		},
 		91321: (module, __unused_webpack_exports, __webpack_require__) => {
 			var uncurryThis = __webpack_require__(65968);
 			module.exports = uncurryThis({}.isPrototypeOf);
@@ -36734,7 +36784,7 @@
 				store = __webpack_require__(85353);
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
-			})('versions', []).push({ version: '3.19.0', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
+			})('versions', []).push({ version: '3.19.1', mode: IS_PURE ? 'pure' : 'global', copyright: '© 2021 Denis Pushkarev (zloirock.ru)' });
 		},
 		37942: (module, __unused_webpack_exports, __webpack_require__) => {
 			var anObject = __webpack_require__(21176),
@@ -39364,10 +39414,10 @@
 				collection = __webpack_require__(69789),
 				collectionWeak = __webpack_require__(63370),
 				isObject = __webpack_require__(85052),
+				isExtensible = __webpack_require__(35343),
 				enforceIternalState = __webpack_require__(56407).enforce,
 				NATIVE_WEAK_MAP = __webpack_require__(18694),
 				IS_IE11 = !global.ActiveXObject && 'ActiveXObject' in global,
-				isExtensible = Object.isExtensible,
 				wrapper = function (init) {
 					return function WeakMap() {
 						return init(this, arguments.length ? arguments[0] : void 0);
@@ -55528,6 +55578,7 @@
 								: (function ue(a, b) {
 										if (se) return 'compositionend' === a || (!je && qe(a, b)) ? ((a = ae()), ($d = Zd = Yd = null), (se = !1), a) : null;
 										switch (a) {
+											case 'paste':
 											default:
 												return null;
 											case 'keypress':
@@ -63781,35 +63832,6 @@
 			'use strict';
 			var warning = function () {};
 			module.exports = warning;
-		},
-		58300: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__(18178);
-			var SourceType,
-				esm = __webpack_require__(21872),
-				types = __webpack_require__(31665),
-				PANEL_ID = ''.concat('storybook/docs', '/panel');
-			''.concat('storybook/docs', '/snippet-rendered');
-			!(function (SourceType) {
-				(SourceType.AUTO = 'auto'), (SourceType.CODE = 'code'), (SourceType.DYNAMIC = 'dynamic');
-			})(SourceType || (SourceType = {})),
-				esm.KP.register('storybook/docs', function () {
-					esm.KP.add(PANEL_ID, {
-						type: types.V.TAB,
-						title: 'Docs',
-						route: function route(_ref) {
-							var storyId = _ref.storyId,
-								refId = _ref.refId;
-							return refId ? '/docs/'.concat(refId, '_').concat(storyId) : '/docs/'.concat(storyId);
-						},
-						match: function match(_ref2) {
-							return 'docs' === _ref2.viewMode;
-						},
-						render: function render() {
-							return null;
-						},
-					});
-				});
 		},
 		91680: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';

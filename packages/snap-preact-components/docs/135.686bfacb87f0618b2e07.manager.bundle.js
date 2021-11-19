@@ -61,7 +61,10 @@
 				f = function (e) {
 					return 'touches' in e;
 				},
-				v = function (e, r, t) {
+				v = function (e) {
+					return (e && e.ownerDocument.defaultView) || self;
+				},
+				d = function (e, r, t) {
 					var n = e.getBoundingClientRect(),
 						o = f(r)
 							? (function (e, r) {
@@ -69,107 +72,108 @@
 									return e[0];
 							  })(r.touches, t)
 							: r;
-					return { left: s((o.pageX - (n.left + window.pageXOffset)) / n.width), top: s((o.pageY - (n.top + window.pageYOffset)) / n.height) };
+					return { left: s((o.pageX - (n.left + v(e).pageXOffset)) / n.width), top: s((o.pageY - (n.top + v(e).pageYOffset)) / n.height) };
 				},
-				d = function (e) {
+				h = function (e) {
 					!f(e) && e.preventDefault();
 				},
-				h = react.memo(function (o) {
+				m = react.memo(function (o) {
 					var a = o.onMove,
 						l = o.onKey,
 						s = c(o, ['onMove', 'onKey']),
-						h = (0, react.useRef)(null),
-						m = i(a),
-						g = i(l),
-						p = (0, react.useRef)(null),
-						b = (0, react.useRef)(!1),
-						_ = (0, react.useMemo)(
+						m = (0, react.useRef)(null),
+						g = i(a),
+						p = i(l),
+						b = (0, react.useRef)(null),
+						_ = (0, react.useRef)(!1),
+						x = (0, react.useMemo)(
 							function () {
 								var e = function (e) {
-										d(e), (f(e) ? e.touches.length > 0 : e.buttons > 0) && h.current ? m(v(h.current, e, p.current)) : t(!1);
+										h(e), (f(e) ? e.touches.length > 0 : e.buttons > 0) && m.current ? g(d(m.current, e, b.current)) : t(!1);
 									},
 									r = function () {
 										return t(!1);
 									};
 								function t(t) {
-									var n = b.current,
-										o = t ? self.addEventListener : self.removeEventListener;
-									o(n ? 'touchmove' : 'mousemove', e), o(n ? 'touchend' : 'mouseup', r);
+									var n = _.current,
+										o = v(m.current),
+										a = t ? o.addEventListener : o.removeEventListener;
+									a(n ? 'touchmove' : 'mousemove', e), a(n ? 'touchend' : 'mouseup', r);
 								}
 								return [
 									function (e) {
 										var r = e.nativeEvent,
-											n = h.current;
+											n = m.current;
 										if (
 											n &&
-											(d(r),
+											(h(r),
 											!(function (e, r) {
 												return r && !f(e);
-											})(r, b.current) && n)
+											})(r, _.current) && n)
 										) {
 											if (f(r)) {
-												b.current = !0;
+												_.current = !0;
 												var o = r.changedTouches || [];
-												o.length && (p.current = o[0].identifier);
+												o.length && (b.current = o[0].identifier);
 											}
-											n.focus(), m(v(n, r, p.current)), t(!0);
+											n.focus(), g(d(n, r, b.current)), t(!0);
 										}
 									},
 									function (e) {
 										var r = e.which || e.keyCode;
 										r < 37 ||
 											r > 40 ||
-											(e.preventDefault(), g({ left: 39 === r ? 0.05 : 37 === r ? -0.05 : 0, top: 40 === r ? 0.05 : 38 === r ? -0.05 : 0 }));
+											(e.preventDefault(), p({ left: 39 === r ? 0.05 : 37 === r ? -0.05 : 0, top: 40 === r ? 0.05 : 38 === r ? -0.05 : 0 }));
 									},
 									t,
 								];
 							},
-							[g, m]
+							[p, g]
 						),
-						x = _[0],
-						C = _[1],
-						E = _[2];
+						C = x[0],
+						E = x[1],
+						H = x[2];
 					return (
 						(0, react.useEffect)(
 							function () {
-								return E;
+								return H;
 							},
-							[E]
+							[H]
 						),
 						react.createElement(
 							'div',
 							u({}, s, {
-								onTouchStart: x,
-								onMouseDown: x,
+								onTouchStart: C,
+								onMouseDown: C,
 								className: 'react-colorful__interactive',
-								ref: h,
-								onKeyDown: C,
+								ref: m,
+								onKeyDown: E,
 								tabIndex: 0,
 								role: 'slider',
 							})
 						)
 					);
 				}),
-				m = function (e) {
+				g = function (e) {
 					return e.filter(Boolean).join(' ');
 				},
-				g = function (r) {
+				p = function (r) {
 					var t = r.color,
 						n = r.left,
 						o = r.top,
 						a = void 0 === o ? 0.5 : o,
-						l = m(['react-colorful__pointer', r.className]);
+						l = g(['react-colorful__pointer', r.className]);
 					return react.createElement(
 						'div',
 						{ className: l, style: { top: 100 * a + '%', left: 100 * n + '%' } },
 						react.createElement('div', { className: 'react-colorful__pointer-fill', style: { backgroundColor: t } })
 					);
 				},
-				p = function (e, r, t) {
+				b = function (e, r, t) {
 					return void 0 === r && (r = 0), void 0 === t && (t = Math.pow(10, r)), Math.round(t * e) / t;
 				},
-				b = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) },
-				_ = function (e) {
+				_ = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) },
+				x = function (e) {
 					return (
 						'#' === e[0] && (e = e.substr(1)),
 						e.length < 6
@@ -177,38 +181,38 @@
 							: { r: parseInt(e.substr(0, 2), 16), g: parseInt(e.substr(2, 2), 16), b: parseInt(e.substr(4, 2), 16), a: 1 }
 					);
 				},
-				x = function (e, r) {
-					return void 0 === r && (r = 'deg'), Number(e) * (b[r] || 1);
+				C = function (e, r) {
+					return void 0 === r && (r = 'deg'), Number(e) * (_[r] || 1);
 				},
-				C = function (e) {
+				E = function (e) {
 					var r = /hsla?\(?\s*(-?\d*\.?\d+)(deg|rad|grad|turn)?[,\s]+(-?\d*\.?\d+)%?[,\s]+(-?\d*\.?\d+)%?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(
 						e
 					);
 					return r
-						? H({ h: x(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
+						? M({ h: C(r[1], r[2]), s: Number(r[3]), l: Number(r[4]), a: void 0 === r[5] ? 1 : Number(r[5]) / (r[6] ? 100 : 1) })
 						: { h: 0, s: 0, v: 0, a: 1 };
 				},
-				H = function (e) {
+				M = function (e) {
 					var r = e.s,
 						t = e.l;
 					return { h: e.h, s: (r *= (t < 50 ? t : 100 - t) / 100) > 0 ? ((2 * r) / (t + r)) * 100 : 0, v: t + r, a: e.a };
 				},
-				M = function (e) {
+				N = function (e) {
 					var r = e.s,
 						t = e.v,
 						n = e.a,
 						o = ((200 - r) * t) / 100;
-					return { h: p(e.h), s: p(o > 0 && o < 200 ? ((r * t) / 100 / (o <= 100 ? o : 200 - o)) * 100 : 0), l: p(o / 2), a: p(n, 2) };
-				},
-				N = function (e) {
-					var r = M(e);
-					return 'hsl(' + r.h + ', ' + r.s + '%, ' + r.l + '%)';
+					return { h: b(e.h), s: b(o > 0 && o < 200 ? ((r * t) / 100 / (o <= 100 ? o : 200 - o)) * 100 : 0), l: b(o / 2), a: b(n, 2) };
 				},
 				w = function (e) {
-					var r = M(e);
-					return 'hsla(' + r.h + ', ' + r.s + '%, ' + r.l + '%, ' + r.a + ')';
+					var r = N(e);
+					return 'hsl(' + r.h + ', ' + r.s + '%, ' + r.l + '%)';
 				},
 				y = function (e) {
+					var r = N(e);
+					return 'hsla(' + r.h + ', ' + r.s + '%, ' + r.l + '%, ' + r.a + ')';
+				},
+				q = function (e) {
 					var r = e.h,
 						t = e.s,
 						n = e.v,
@@ -219,12 +223,12 @@
 						u = n * (1 - (r - a) * t),
 						c = n * (1 - (1 - r + a) * t),
 						i = a % 6;
-					return { r: p(255 * [n, u, l, l, c, n][i]), g: p(255 * [c, n, n, u, l, l][i]), b: p(255 * [l, l, c, n, n, u][i]), a: p(o, 2) };
+					return { r: b(255 * [n, u, l, l, c, n][i]), g: b(255 * [c, n, n, u, l, l][i]), b: b(255 * [l, l, c, n, n, u][i]), a: b(o, 2) };
 				},
-				O = function (e) {
+				I = function (e) {
 					var r = /rgba?\(?\s*(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(e);
 					return r
-						? z({
+						? B({
 								r: Number(r[1]) / (r[2] ? 100 / 255 : 1),
 								g: Number(r[3]) / (r[4] ? 100 / 255 : 1),
 								b: Number(r[5]) / (r[6] ? 100 / 255 : 1),
@@ -232,11 +236,11 @@
 						  })
 						: { h: 0, s: 0, v: 0, a: 1 };
 				},
-				j = function (e) {
+				z = function (e) {
 					var r = e.toString(16);
 					return r.length < 2 ? '0' + r : r;
 				},
-				z = function (e) {
+				B = function (e) {
 					var r = e.r,
 						t = e.g,
 						n = e.b,
@@ -244,17 +248,17 @@
 						a = Math.max(r, t, n),
 						l = a - Math.min(r, t, n),
 						u = l ? (a === r ? (t - n) / l : a === t ? 2 + (n - r) / l : 4 + (r - t) / l) : 0;
-					return { h: p(60 * (u < 0 ? u + 6 : u)), s: p(a ? (l / a) * 100 : 0), v: p((a / 255) * 100), a: o };
+					return { h: b(60 * (u < 0 ? u + 6 : u)), s: b(a ? (l / a) * 100 : 0), v: b((a / 255) * 100), a: o };
 				},
 				K = react.memo(function (r) {
 					var t = r.hue,
 						n = r.onChange,
-						o = m(['react-colorful__hue', r.className]);
+						o = g(['react-colorful__hue', r.className]);
 					return react.createElement(
 						'div',
 						{ className: o },
 						react.createElement(
-							h,
+							m,
 							{
 								onMove: function (e) {
 									n({ h: 360 * e.left });
@@ -263,21 +267,21 @@
 									n({ h: s(t + 360 * e.left, 0, 360) });
 								},
 								'aria-label': 'Hue',
-								'aria-valuetext': p(t),
+								'aria-valuetext': b(t),
 							},
-							react.createElement(g, { className: 'react-colorful__hue-pointer', left: t / 360, color: N({ h: t, s: 100, v: 100, a: 1 }) })
+							react.createElement(p, { className: 'react-colorful__hue-pointer', left: t / 360, color: w({ h: t, s: 100, v: 100, a: 1 }) })
 						)
 					);
 				}),
 				L = react.memo(function (r) {
 					var t = r.hsva,
 						n = r.onChange,
-						o = { backgroundColor: N({ h: t.h, s: 100, v: 100, a: 1 }) };
+						o = { backgroundColor: w({ h: t.h, s: 100, v: 100, a: 1 }) };
 					return react.createElement(
 						'div',
 						{ className: 'react-colorful__saturation', style: o },
 						react.createElement(
-							h,
+							m,
 							{
 								onMove: function (e) {
 									n({ s: 100 * e.left, v: 100 - 100 * e.top });
@@ -286,9 +290,9 @@
 									n({ s: s(t.s + 100 * e.left, 0, 100), v: s(t.v - 100 * e.top, 0, 100) });
 								},
 								'aria-label': 'Color',
-								'aria-valuetext': 'Saturation ' + p(t.s) + '%, Brightness ' + p(t.v) + '%',
+								'aria-valuetext': 'Saturation ' + b(t.s) + '%, Brightness ' + b(t.v) + '%',
 							},
-							react.createElement(g, { className: 'react-colorful__saturation-pointer', top: 1 - t.v / 100, left: t.s / 100, color: N(t) })
+							react.createElement(p, { className: 'react-colorful__saturation-pointer', top: 1 - t.v / 100, left: t.s / 100, color: w(t) })
 						)
 					);
 				}),
@@ -297,10 +301,10 @@
 					for (var t in e) if (e[t] !== r[t]) return !1;
 					return !0;
 				},
-				D = function (e, r) {
+				S = function (e, r) {
 					return e.replace(/\s/g, '') === r.replace(/\s/g, '');
 				};
-			function S(e, t, l) {
+			function T(e, t, l) {
 				var u = i(l),
 					c = (0, react.useState)(function () {
 						return e.toHsva(t);
@@ -331,63 +335,67 @@
 				}, []);
 				return [s, d];
 			}
-			var T,
-				F,
+			var F,
 				P = 'undefined' != typeof window ? react.useLayoutEffect : react.useEffect,
-				R = function () {
+				R = new Map(),
+				V = function (e) {
 					P(function () {
-						if ('undefined' != typeof document && !F) {
-							(F = document.createElement('style')).innerHTML =
-								'.react-colorful{position:relative;display:flex;flex-direction:column;width:200px;height:200px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.react-colorful__saturation{position:relative;flex-grow:1;border-color:transparent;border-bottom:12px solid #000;border-radius:8px 8px 0 0;background-image:linear-gradient(0deg,#000,transparent),linear-gradient(90deg,#fff,hsla(0,0%,100%,0))}.react-colorful__alpha-gradient,.react-colorful__pointer-fill{content:"";position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;border-radius:inherit}.react-colorful__alpha-gradient,.react-colorful__saturation{box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}.react-colorful__alpha,.react-colorful__hue{position:relative;height:24px}.react-colorful__hue{background:linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red)}.react-colorful__last-control{border-radius:0 0 8px 8px}.react-colorful__interactive{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:inherit;outline:none;touch-action:none}.react-colorful__pointer{position:absolute;z-index:1;box-sizing:border-box;width:28px;height:28px;transform:translate(-50%,-50%);background-color:#fff;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}.react-colorful__interactive:focus .react-colorful__pointer{transform:translate(-50%,-50%) scale(1.1)}.react-colorful__alpha,.react-colorful__alpha-pointer{background-color:#fff;background-image:url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>\')}.react-colorful__saturation-pointer{z-index:3}.react-colorful__hue-pointer{z-index:2}';
-							var e = T || __webpack_require__.nc;
-							e && F.setAttribute('nonce', e), document.head.appendChild(F);
+						var r = e.current ? e.current.ownerDocument : document;
+						if (void 0 !== r && !R.has(r)) {
+							var t = r.createElement('style');
+							(t.innerHTML =
+								'.react-colorful{position:relative;display:flex;flex-direction:column;width:200px;height:200px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.react-colorful__saturation{position:relative;flex-grow:1;border-color:transparent;border-bottom:12px solid #000;border-radius:8px 8px 0 0;background-image:linear-gradient(0deg,#000,transparent),linear-gradient(90deg,#fff,hsla(0,0%,100%,0))}.react-colorful__alpha-gradient,.react-colorful__pointer-fill{content:"";position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;border-radius:inherit}.react-colorful__alpha-gradient,.react-colorful__saturation{box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}.react-colorful__alpha,.react-colorful__hue{position:relative;height:24px}.react-colorful__hue{background:linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red)}.react-colorful__last-control{border-radius:0 0 8px 8px}.react-colorful__interactive{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:inherit;outline:none;touch-action:none}.react-colorful__pointer{position:absolute;z-index:1;box-sizing:border-box;width:28px;height:28px;transform:translate(-50%,-50%);background-color:#fff;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}.react-colorful__interactive:focus .react-colorful__pointer{transform:translate(-50%,-50%) scale(1.1)}.react-colorful__alpha,.react-colorful__alpha-pointer{background-color:#fff;background-image:url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>\')}.react-colorful__saturation-pointer{z-index:3}.react-colorful__hue-pointer{z-index:2}'),
+								R.set(r, t);
+							var n = F || __webpack_require__.nc;
+							n && t.setAttribute('nonce', n), r.head.appendChild(t);
 						}
 					}, []);
 				},
-				$ = function (r) {
-					var t = r.className,
-						n = r.colorModel,
-						o = r.color,
-						a = void 0 === o ? n.defaultColor : o,
-						l = r.onChange,
-						i = c(r, ['className', 'colorModel', 'color', 'onChange']);
-					R();
-					var s = S(n, a, l),
-						f = s[0],
-						v = s[1],
-						d = m(['react-colorful', t]);
+				$ = function (t) {
+					var n = t.className,
+						o = t.colorModel,
+						a = t.color,
+						l = void 0 === a ? o.defaultColor : a,
+						i = t.onChange,
+						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
+						f = (0, react.useRef)(null);
+					V(f);
+					var v = T(o, l, i),
+						d = v[0],
+						h = v[1],
+						m = g(['react-colorful', n]);
 					return react.createElement(
 						'div',
-						u({}, i, { className: d }),
-						react.createElement(L, { hsva: f, onChange: v }),
-						react.createElement(K, { hue: f.h, onChange: v, className: 'react-colorful__last-control' })
+						u({}, s, { ref: f, className: m }),
+						react.createElement(L, { hsva: d, onChange: h }),
+						react.createElement(K, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
 				G = {
 					defaultColor: '000',
 					toHsva: function (e) {
-						return z(_(e));
+						return B(x(e));
 					},
 					fromHsva: function (e) {
-						return (t = (r = y(e)).g), (n = r.b), '#' + j(r.r) + j(t) + j(n);
+						return (t = (r = q(e)).g), (n = r.b), '#' + z(r.r) + z(t) + z(n);
 						var r, t, n;
 					},
 					equal: function (e, r) {
-						return e.toLowerCase() === r.toLowerCase() || A(_(e), _(r));
+						return e.toLowerCase() === r.toLowerCase() || A(x(e), x(r));
 					},
 				},
 				Q = function (r) {
 					var t = r.className,
 						n = r.hsva,
 						o = r.onChange,
-						a = { backgroundImage: 'linear-gradient(90deg, ' + w(Object.assign({}, n, { a: 0 })) + ', ' + w(Object.assign({}, n, { a: 1 })) + ')' },
-						l = m(['react-colorful__alpha', t]);
+						a = { backgroundImage: 'linear-gradient(90deg, ' + y(Object.assign({}, n, { a: 0 })) + ', ' + y(Object.assign({}, n, { a: 1 })) + ')' },
+						l = g(['react-colorful__alpha', t]);
 					return react.createElement(
 						'div',
 						{ className: l },
 						react.createElement('div', { className: 'react-colorful__alpha-gradient', style: a }),
 						react.createElement(
-							h,
+							m,
 							{
 								onMove: function (e) {
 									o({ a: e.left });
@@ -396,41 +404,42 @@
 									o({ a: s(n.a + e.left) });
 								},
 								'aria-label': 'Alpha',
-								'aria-valuetext': p(100 * n.a) + '%',
+								'aria-valuetext': b(100 * n.a) + '%',
 							},
-							react.createElement(g, { className: 'react-colorful__alpha-pointer', left: n.a, color: w(n) })
+							react.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: y(n) })
 						)
 					);
 				},
-				U = function (r) {
-					var t = r.className,
-						n = r.colorModel,
-						o = r.color,
-						a = void 0 === o ? n.defaultColor : o,
-						l = r.onChange,
-						i = c(r, ['className', 'colorModel', 'color', 'onChange']);
-					R();
-					var s = S(n, a, l),
-						f = s[0],
-						v = s[1],
-						d = m(['react-colorful', t]);
+				U = function (t) {
+					var n = t.className,
+						o = t.colorModel,
+						a = t.color,
+						l = void 0 === a ? o.defaultColor : a,
+						i = t.onChange,
+						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
+						f = (0, react.useRef)(null);
+					V(f);
+					var v = T(o, l, i),
+						d = v[0],
+						h = v[1],
+						m = g(['react-colorful', n]);
 					return react.createElement(
 						'div',
-						u({}, i, { className: d }),
-						react.createElement(L, { hsva: f, onChange: v }),
-						react.createElement(K, { hue: f.h, onChange: v }),
-						react.createElement(Q, { hsva: f, onChange: v, className: 'react-colorful__last-control' })
+						u({}, s, { ref: f, className: m }),
+						react.createElement(L, { hsva: d, onChange: h }),
+						react.createElement(K, { hue: d.h, onChange: h }),
+						react.createElement(Q, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
-				Z = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: C, fromHsva: w, equal: D },
-				me = {
+				ee = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: E, fromHsva: y, equal: S },
+				ge = {
 					defaultColor: 'rgba(0, 0, 0, 1)',
-					toHsva: O,
+					toHsva: I,
 					fromHsva: function (e) {
-						var r = y(e);
+						var r = q(e);
 						return 'rgba(' + r.r + ', ' + r.g + ', ' + r.b + ', ' + r.a + ')';
 					},
-					equal: D,
+					equal: S,
 				},
 				color_convert = __webpack_require__(11137),
 				color_convert_default = __webpack_require__.n(color_convert),
@@ -642,10 +651,10 @@
 						return react.createElement($, u({}, r, { colorModel: G }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.RGB, function (r) {
-						return react.createElement(U, u({}, r, { colorModel: me }));
+						return react.createElement(U, u({}, r, { colorModel: ge }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.HSL, function (r) {
-						return react.createElement(U, u({}, r, { colorModel: Z }));
+						return react.createElement(U, u({}, r, { colorModel: ee }));
 					}),
 					_ColorPicker),
 				fallbackColor =
@@ -1117,6 +1126,8 @@
 					let r, g, b;
 					switch (i) {
 						default:
+						case 6:
+						case 0:
 							(r = v), (g = n), (b = wh);
 							break;
 						case 1:
