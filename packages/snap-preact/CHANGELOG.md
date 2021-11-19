@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
+
+
+### Features
+
+* getContext, update tests, refactor components out of branchOverride ([717bd8b](https://github.com/searchspring/snap/commit/717bd8bdaade6c532f02bad376b10b69a0ac445c))
+* **snap-preact:** updated BranchOverride with dynamic import, themes and display date modified ([2ac155d](https://github.com/searchspring/snap/commit/2ac155d7bf35ac17bb49993e0d2691b7f484a5c2))
+* **snap-preact:** work towards making branch bundle switching occur client side (instead of lambda) ([43a9f25](https://github.com/searchspring/snap/commit/43a9f251da4d743168fb0cde0fd8a7517b649798))
+
+
+
+
+
 # [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
 
 **Note:** Version bump only for package @searchspring/snap-preact

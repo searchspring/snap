@@ -4,10 +4,29 @@ const path = require('path');
 
 module.exports = merge(common, {
 	mode: 'production',
-	target: 'browserslist',
+	entry: './src/index.js',
+	output: {
+		filename: 'bundle.js',
+		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+	},
+	target: 'web',
+	module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env'],
+					},
+				},
+			},
+		],
+	},
 	devServer: {
 		client: false,
-		https: false,
+		https: true,
 		port: 4444,
 		hot: false,
 		allowedHosts: 'all',

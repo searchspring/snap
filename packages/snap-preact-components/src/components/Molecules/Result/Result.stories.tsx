@@ -70,6 +70,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideImage: {
+			description: 'Hide image',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		detailSlot: {
 			description: 'Slot for more product details (under price)',
 			table: {

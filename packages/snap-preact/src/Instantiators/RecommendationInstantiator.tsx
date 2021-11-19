@@ -1,6 +1,6 @@
 import { render } from 'preact';
 
-import { DomTargeter, getScriptContext } from '@searchspring/snap-toolbox';
+import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
 import type { Logger } from '@searchspring/snap-logger';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
@@ -86,14 +86,10 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, branch, options } = getScriptContext(elem, [
-					'shopperId',
-					'shopper',
-					'product',
-					'seed',
-					'branch',
-					'options',
-				]);
+				const { shopper, shopperId, product, seed, branch, options } = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'],
+					elem as HTMLScriptElement
+				);
 
 				if (shopper || shopperId) {
 					globals.shopper = shopper || shopperId;
