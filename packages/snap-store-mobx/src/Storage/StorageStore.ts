@@ -79,15 +79,15 @@ export class StorageStore {
 	get(path: string): any {
 		switch (this.type) {
 			case StorageType.SESSION:
-				this.state = JSON.parse(window.sessionStorage.getItem(this.key));
+				this.state = JSON.parse(window.sessionStorage.getItem(this.key)) || {};
 				break;
 			case StorageType.LOCAL:
-				this.state = JSON.parse(window.localStorage.getItem(this.key));
+				this.state = JSON.parse(window.localStorage.getItem(this.key)) || {};
 				break;
 			case StorageType.COOKIE:
 				const data = utils.cookies.get(this.key);
 				if (data) {
-					this.state = JSON.parse(data);
+					this.state = JSON.parse(data) || {};
 				}
 				break;
 		}
