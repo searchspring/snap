@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* **storagestore:** fallback to empty object when get() does not find anything ([f6e3c13](https://github.com/searchspring/snap/commit/f6e3c131f51398331892da353a27c5e6491ad721))
+
+
+
+
+
 # [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
 
 
