@@ -338,6 +338,9 @@ export class AutocompleteController extends AbstractController {
 
 		const inputs = document.querySelectorAll(this.config.selector);
 		inputs.forEach((input: HTMLInputElement) => {
+			input.setAttribute('spellcheck', 'false');
+			input.setAttribute('autocomplete', 'off');
+
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
 			input.addEventListener('keyup', this.handlers.input.keyUp);
