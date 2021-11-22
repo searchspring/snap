@@ -428,9 +428,9 @@ var documents = [
 					},
 					{
 						label: 'Script Context',
-						route: '/package-toolbox-getScriptContext',
+						route: '/package-toolbox-getContext',
 						type: 'markdown',
-						url: './packages/snap-toolbox/src/getScriptContext/README.md',
+						url: './packages/snap-toolbox/src/getContext/README.md',
 						searchable: true,
 					},
 					{
