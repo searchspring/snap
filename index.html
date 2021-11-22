@@ -128,24 +128,43 @@
 				`,
 				computed: {
 					currentRoute() {
-						console.log("this.$route.path", this.$route.path)
 						return this.$route.path;
 					},
 					routeData() {
 						const params = decodeURIComponent(window.location.href.split('?params=')[1] || '');
+
+						// check if base URL (minus params) has changed
+						// if it hasn't maybe do something different like push state in iframe with new URL
+
+						// get previous route and compare it to currentRoute
+						const previousFullRoute = localStorage.getItem('ssDocsPreviousRoute');
+						const [previousRoute, previousRouteParams] = previousFullRoute.split('?params=');
+						console.log('previousFullRoute', previousFullRoute);
+						console.log('previousRoute', previousRoute);
+						console.log('previousRouteParams', previousRouteParams);
+						// previousRoute == 'components-preact'
+						console.log('currentRoute', this.currentRoute);
+						
 						if (params && this.routes[this.currentRoute] && this.routes[this.currentRoute].url && this.routes[this.currentRoute].type === 'iframe') {
-							return { type: 'iframe', url: `${this.routes[this.currentRoute].url}${params}`}
+							console.log(`need to goto: ${this.routes[this.currentRoute].url}${params}`);
+							if (previousRoute == this.currentRoute) {
+								return { type: 'iframe', url: `${this.routes[this.currentRoute].url}`}
+							} else {
+								// return { type: 'iframe', url: `${this.routes[this.currentRoute].url}`}
+								return { type: 'iframe', url: `${this.routes[this.currentRoute].url}${params}`}
+							}
+							
 						}
 
 						return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' };
 					}
 				},
+				
 				methods: {
 					onLoad() {
 						const mutations = [];
 						// Select the node that will be observed for mutations
 						const targetNode = document.getElementById('frame').contentWindow.document.querySelector('title');
-						console.log("targetNode", targetNode)
 
 						/*
 							new MutationObserver(function() {console.log(document.title);}).observe(document.querySelector('title'),{ childList: true });
@@ -166,7 +185,6 @@
 								const fullRoute = window.location.href.split('#')[1] // '/components-preact?params=%3Fpath%3D%2Fdocs%2FOrganisms-Autocomplete'
 								const route = fullRoute.split('?')[0]; // '/components-preact'
 								const newRoute = `${route}?params=${params}`;
-								console.log('update URL to ->', newRoute);
 								window.location.hash = newRoute;
 							}
 						};
@@ -314,6 +332,12 @@
 				history: VueRouter.createWebHashHistory(),
 				routes,
 			});
+			
+
+			router.beforeEach((to, from) => {
+				console.log('in router beforeEach', to, from);
+				localStorage.setItem('ssDocsPreviousRoute', from.fullPath);
+			})
 
 			app.use(router);
 
