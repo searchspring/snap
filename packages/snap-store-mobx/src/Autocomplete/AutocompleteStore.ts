@@ -95,6 +95,7 @@ export class AutocompleteStore extends AbstractStore {
 	}
 
 	update(data: AutocompleteResponseModel & { meta: MetaResponseModel }): void {
+		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 

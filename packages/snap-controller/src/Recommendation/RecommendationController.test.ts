@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
@@ -105,7 +106,7 @@ describe('Recommendation Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			const spy = jest.spyOn(console, 'error');
+			const spy = jest.spyOn(controller.log, 'error');
 			controller.on(event, () => {
 				throw 'errrrrr!';
 			}); // throw an error
@@ -113,7 +114,7 @@ describe('Recommendation Controller', () => {
 			controller.init();
 			await controller.search();
 
-			expect(spy).toHaveBeenCalledTimes(1);
+			expect(spy).toHaveBeenCalledTimes(2);
 			spy.mockClear();
 		});
 	});

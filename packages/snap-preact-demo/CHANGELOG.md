@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* **filtersummary.tsx:** onClearAllClick should clear the page by default ([de8f78e](https://github.com/searchspring/snap/commit/de8f78e32d992c83498bb6212059b175f7b78de8))
+
+
+### Features
+
+* getContext, update tests, refactor components out of branchOverride ([717bd8b](https://github.com/searchspring/snap/commit/717bd8bdaade6c532f02bad376b10b69a0ac445c))
+
+
+
+
+
+# [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
 # [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

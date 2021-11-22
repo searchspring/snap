@@ -9,6 +9,7 @@ import {
 	Facets,
 	StoreProvider,
 	withStore,
+	withController,
 	ControllerProvider,
 } from '@searchspring/snap-preact-components';
 
@@ -29,6 +30,7 @@ export class Sidebar extends Component {
 	}
 }
 
+@withController
 @withStore
 @observer
 export class SidebarContents extends Component {
@@ -41,7 +43,7 @@ export class SidebarContents extends Component {
 
 		return (
 			<div class="ss-sidebar-container">
-				<FilterSummary hideClearAll filters={filters} />
+				<FilterSummary filters={filters} controller={this.props.controller} />
 
 				{onSaleFacet && (
 					<Select

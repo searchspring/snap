@@ -180,7 +180,7 @@ window.searchspring.track.product.view({
 Tracks user login and sets `context.shopperId` value. Should be invoked when a user has logged into their account.
 
 ```typescript
-const shopperId = "123456"
+const shopperId = "snapdev"
 window.searchspring.track.shopper.login({
     data: {
         id: shopperId

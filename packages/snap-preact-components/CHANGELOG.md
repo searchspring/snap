@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* **facetslider-component:** adding 'type="button"' to slider handles to  prevent form submission ([86f3909](https://github.com/searchspring/snap/commit/86f39094725cd94de25ffb14145fc14ee5af332d))
+* **filtersummary.tsx:** onClearAllClick should clear the page by default ([de8f78e](https://github.com/searchspring/snap/commit/de8f78e32d992c83498bb6212059b175f7b78de8))
+
+
+### Features
+
+* **result:** added new hideImage prop to result & autocomplete to hide the product image ([c7c2032](https://github.com/searchspring/snap/commit/c7c2032c1000d37651da213be0004757aa2fab72))
+
+
+
+
+
+# [0.11.0](https://github.com/searchspring/snap/compare/v0.10.0...v0.11.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* **autocomplete-component:** changing 'facetsToShow' to always be an array ([df3a59f](https://github.com/searchspring/snap/commit/df3a59f4a941f00d74e6aaad155049dd1a681fb1))
+* **facet:** bugfix for issue [#231](https://github.com/searchspring/snap/issues/231), Issue when switching between slider and list types ([21c97c5](https://github.com/searchspring/snap/commit/21c97c51a6c8b33e0bcbfae0e63e504bfc9623b6))
+* **theme:** add message colors to default theme ([782155c](https://github.com/searchspring/snap/commit/782155c2f4068124496b57ab96bb3b8d44e7191c))
+
+
+### Features
+
+* **errorhandler:** add ErrorHandler Component, updated icons ([6d50f84](https://github.com/searchspring/snap/commit/6d50f84b098f2e3d31b712236d945946828e3443))
+* **facet.tsx:** added optionsSlot & fields props to facet component ([09846c0](https://github.com/searchspring/snap/commit/09846c0a87cf422bf83dea4526e06b8e72274071))
+
+
+
+
+
 # [0.10.0](https://github.com/searchspring/snap/compare/v0.9.7...v0.10.0) (2021-10-15)
 
 

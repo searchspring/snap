@@ -167,12 +167,12 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		style,
 	} = props;
 
-	const [values, setValues] = useState([facet.active.low, facet.active.high]);
+	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
 
-	const [active, setActive] = useState([facet.active.low, facet.active.high]);
-	if (values[0] != facet.active.low || values[1] != facet.active.high) {
-		setActive([facet.active.low, facet.active.high]);
-		setValues([facet.active.low, facet.active.high]);
+	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
+	if (values[0] != facet.active?.low || values[1] != facet.active?.high) {
+		setActive([facet.active?.low, facet.active?.high]);
+		setValues([facet.active?.low, facet.active?.high]);
 	}
 
 	const { getTrackProps, ticks, segments, handles } = useRanger({
@@ -188,8 +188,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			setActive(val);
 			onDrag && onDrag(val);
 		},
-		min: facet.range.low,
-		max: facet.range.high,
+		min: facet.range?.low,
+		max: facet.range?.high,
 		stepSize: facet.step,
 		tickSize: tickSize,
 	});
@@ -233,6 +233,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 						<div className={'ss__facet-slider__handles'}>
 							{handles.map(({ value, active, getHandleProps }, idx) => (
 								<button
+									type="button"
 									{...getHandleProps({
 										style: {
 											appearance: 'none',

@@ -1,6 +1,6 @@
 describe('Autocomplete', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:4444/');
+		cy.visit('https://localhost:4444/');
 	});
 	it('does not render if input not focused', () => {
 		cy.get('.ss__autocomplete').should('not.exist');
@@ -11,7 +11,10 @@ describe('Autocomplete', () => {
 				this.skip();
 			}
 			cy.get('.searchspring-ac').focus();
-			cy.get('.ss__autocomplete').should('exist');
+			cy.snapStore('autocomplete').then((store) => {
+				cy.wait(1000);
+				cy.get('.ss__autocomplete').should('exist');
+			});
 		});
 	});
 	it('has trending terms', function () {

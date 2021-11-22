@@ -246,8 +246,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}
 		const rect = input?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
-		input?.setAttribute('spellcheck', 'false');
-		input?.setAttribute('autocomplete', 'off');
 	}
 	let delayTimeout;
 	const delayTime = 333;
@@ -367,7 +365,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
 	const showTrending = trending?.length && terms.length === 0;
-	const facetsToShow = facets.length && facets.filter((facet) => facet.display !== FacetDisplay.SLIDER);
+	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
 
 	const styling: { css?: any } = {};

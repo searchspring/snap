@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
@@ -64,8 +64,8 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
-
-			if (redirectURL && config?.settings?.redirects?.merchandising) {
+			const searchStore = search.controller.store as SearchStore;
+			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -153,7 +153,7 @@ export class SearchController extends AbstractController {
 		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
 
 		// redirect setting
-		if (!this.config.settings?.redirects?.merchandising) {
+		if (!this.config.settings?.redirects?.merchandising || this.store.loaded) {
 			params.search = params.search || {};
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
@@ -314,7 +314,28 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterStoreProfile);
 		} catch (err) {
 			if (err) {
-				console.error(err);
+				switch (err) {
+					case 429:
+						this.store.error = {
+							code: 429,
+							type: ErrorType.WARNING,
+							message: 'Too many requests try again later',
+						};
+						this.log.warn(this.store.error);
+						break;
+					case 500:
+						this.store.error = {
+							code: 500,
+							type: ErrorType.ERROR,
+							message: 'Invalid Search Request or Service Unavailable',
+						};
+						this.log.error(this.store.error);
+						break;
+					default:
+						this.log.error(err);
+						break;
+				}
+				this.store.loading = false;
 			}
 		}
 	};

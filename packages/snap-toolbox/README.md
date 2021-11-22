@@ -27,5 +27,5 @@ npm install --save @searchspring/snap-toolbox
 
 ## Import
 ```typescript
-import { filters, DomTargeter, getFlags, featureFlags, cookies } from '@searchspring/snap-toolbox';
+import { filters, DomTargeter, getFlags, featureFlags, cookies, url } from '@searchspring/snap-toolbox';
 ```

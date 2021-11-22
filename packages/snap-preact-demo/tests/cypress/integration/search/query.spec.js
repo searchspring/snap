@@ -1,6 +1,6 @@
 describe('Query', () => {
 	it('runs the query', () => {
-		cy.visit('http://localhost:4444/?q=dress');
+		cy.visit('https://localhost:4444/?q=dress');
 
 		cy.snapStore().then((store) => {
 			expect(store).to.haveOwnProperty('pagination');
