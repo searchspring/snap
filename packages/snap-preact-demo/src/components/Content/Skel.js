@@ -6,18 +6,18 @@ export class ContentSkel extends Component {
 		return (
 			<>
 				<div className="ss-header-container">
-					<Skeleton height={33} width={300} />
+					<Skeleton height="33px" width="300px" />
 				</div>
 				<div className="ss-results">
 					<div className="toolbar">
 						<div style={{ display: 'inline-block', margin: '10px' }}>
-							<Skeleton height={33} width={180} />
+							<Skeleton height="33px" width="180px" />
 						</div>
 						<div style={{ display: 'inline-block', margin: '10px' }}>
-							<Skeleton height={33} width={180} />
+							<Skeleton height="33px" width="180px" />
 						</div>
 						<div style={{ float: 'right' }}>
-							<Skeleton height={30} width={300} />
+							<Skeleton height="30px" width="300px" />
 						</div>
 					</div>
 					<div className="ss__results" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gridTemplateRows: 'auto', gap: '20px' }}>
@@ -34,10 +34,10 @@ export class ContentSkel extends Component {
 const ResultsSkel = () => {
 	return (
 		<div className="ss-result">
-			<Skeleton height={320} width={212} />
-			<Skeleton height={42} width={212} />
-			<Skeleton height={25} width={212} />
-			<Skeleton height={30} width={212} />
+			<Skeleton height="320px" width="212px" />
+			<Skeleton height="42px" width="212px" />
+			<Skeleton height="25px" width="212px" />
+			<Skeleton height="30px" width="212px" />
 		</div>
 	);
 };

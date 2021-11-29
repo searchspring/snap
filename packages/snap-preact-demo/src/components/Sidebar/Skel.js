@@ -19,14 +19,14 @@ const FacetSkel = () => {
 	return (
 		<div className="ss-facet">
 			<div className="ss__facet__header" style={{ margin: '10px 0px' }}>
-				<Skeleton height={35} width={250} />
+				<Skeleton height="35px" width="250px" />
 			</div>
 			<div className="ss__facet__options">
 				{Array.from({ length: 5 }).map((_, index) => (
 					<div class="ss__facet-list-options__option" style={{ display: 'flex' }}>
-						<Skeleton height={33} width={33} key={index} />
+						<Skeleton height="33px" width="33px" key={index} />
 						<div style={{ marginLeft: '8px' }}>
-							<Skeleton height={33} width={250} key={index} />
+							<Skeleton height="33px" width="250px" key={index} />
 						</div>
 					</div>
 				))}

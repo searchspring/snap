@@ -27,7 +27,6 @@ export default {
 					width: '200px',
 					height: '200px',
 					position: 'relative',
-					border: '2px dotted lightgrey',
 				}}
 			>
 				<Story height="200px" />
@@ -40,20 +39,20 @@ export default {
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'number',
+					summary: 'string',
 				},
 			},
-			control: { type: 'number' },
+			control: { type: 'text' },
 		},
 		width: {
 			description: 'Numeric value to set the width of the Skeleton',
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'number',
+					summary: 'string',
 				},
 			},
-			control: { type: 'number' },
+			control: { type: 'text' },
 		},
 		round: {
 			table: {
@@ -74,6 +73,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		secondaryColor: {
+			description: 'Secondary color',
+			defaultValue: '#f5f5f5',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'string' },
+			},
+			control: { type: 'text' },
+		},
 		...componentArgs,
 	},
 };
@@ -82,13 +92,13 @@ const Template = (args) => <Skeleton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-	width: 200,
-	height: 200,
+	width: '100px',
+	height: '100px',
 };
 
-export const Round = (args) => <Skeleton {...args} />;
-Round.args = {
-	width: 200,
-	height: 200,
+export const Circle = (args) => <Skeleton {...args} />;
+Circle.args = {
+	width: '100px',
+	height: '100px',
 	round: true,
 };

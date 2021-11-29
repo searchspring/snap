@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { h } from 'preact';
 
-import { jsx, css } from '@emotion/react';
+import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
@@ -10,20 +10,11 @@ import { ComponentProps } from '../../../types';
 import { CSSProperties } from 'react';
 
 const CSS = {
-	skeleton: ({ width, height, round, bgcolor }) =>
+	skeleton: ({ width, height, round, bgcolor, secondaryColor, animation }) =>
 		css({
-			'@keyframes react-loading-skeleton': {
-				from: {
-					transform: 'translateX(-100%)',
-				},
-				to: {
-					transform: 'translateX(100%)',
-				},
-			},
-
-			width: `${width}px`,
-			height: `${height}px`,
-			borderRadius: round ? `${width}px` : '0.25rem',
+			width: width,
+			height: height,
+			borderRadius: round ? width : '0.25rem',
 
 			backgroundColor: bgcolor,
 			display: 'inline-flex',
@@ -41,15 +32,20 @@ const CSS = {
 				right: '0',
 				height: '100%',
 				backgroundRepeat: 'no-repeat',
-				backgroundImage: `linear-gradient(90deg, ${bgcolor}, #f5f5f5, ${bgcolor})`,
+				backgroundImage: `linear-gradient(90deg, ${bgcolor}, ${secondaryColor}, ${bgcolor})`,
 				transform: 'translateX(-100%)',
-				animationName: 'react-loading-skeleton',
-				animationDirection: 'normal',
-				animationDuration: '1.5s',
+				animation: `${animation} 1.5s linear infinite`,
 				animationTimingFunction: 'ease-in-out',
-				animationIterationCount: 'infinite',
 			},
 		}),
+	animation: keyframes({
+		from: {
+			transform: 'translateX(-100%)',
+		},
+		to: {
+			transform: 'translateX(100%)',
+		},
+	}),
 };
 
 export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
@@ -58,17 +54,18 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const props: SkeletonProps = {
 		// default props
 		bgcolor: '#ebebeb',
+		secondaryColor: '#f5f5f5',
 		// global theme
 		...globalTheme?.components?.skeleton,
 		// props
 		...properties,
 		...properties.theme?.components?.skeleton,
 	};
-	const { width, height, round, bgcolor, disableStyles, className, style } = props;
+	const { width, height, round, bgcolor, secondaryColor, disableStyles, className, style } = props;
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.skeleton({ width, height, round, bgcolor }), style];
+		styling.css = [CSS.skeleton({ width, height, round, bgcolor, secondaryColor, animation: CSS.animation }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -80,8 +77,9 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 });
 
 export interface SkeletonProps extends ComponentProps {
-	width: number;
-	height: number;
+	width: string;
+	height: string;
 	round?: boolean;
 	bgcolor?: string;
+	secondaryColor?: string;
 }
