@@ -19,7 +19,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 			{
 				name: 'Preact',
 				route: '/components-preact',
-				path: './packages/snap-preact-components/src/components',
+				path: './packages/snap-preact-components/src/',
 			},
 		];
 
@@ -121,18 +121,46 @@ const OUTPUT_FILE = 'snap-docs.json';
 		const paths = await findMarkdownFiles(details.path);
 		const links = paths.map((path) => {
 			const packagePath = path.split('/snap/packages/')[1];
-			const [libraryDir, _, __, type, componentName, ___] = packagePath.split('/');
-			const lang = libraryDir.split('-')[1];
-			const route = libraryDir.includes('snap-preact-components') ? 'components-preact' : ''; // TODO: refactor once more options
+			// const [libraryDir, _, directory, type, componentName, markdownFile] = packagePath.split('/');
 
-			const encodedParams = encodeURIComponent(`?path=/docs/${type}-${componentName}`);
+			const [libraryDir, _, grouping, ...remainingPaths] = packagePath.split('/');
+			const [markdownFile, componentName, type] = remainingPaths.reverse();
+			// grouping = components / documentation / hooks
+			// type = atom / molecule / organism or About / Theme / Usage
+
+			const lang = libraryDir.split('-')[1];
+			const route = libraryDir.split('-').reverse().slice(0, 2).join('-'); //.includes('snap-preact-components') ? 'components-preact' : ''; // TODO: refactor once more options
+			const url = `./packages/${packagePath}`;
+			const componentLibrary = `${lang[0].toUpperCase() + lang.slice(1)}`; // Preact
+			let label = `${componentLibrary}`;
+
+			switch (grouping) {
+				case 'components': {
+					// Preact Component: Results
+					label += ` Component: ${componentName}`;
+					break;
+				}
+				case 'documentation': {
+					// Preact: About
+					label += `: ${componentName}`;
+					break;
+				}
+				case 'hooks': {
+					// Preact Hook: useThingy
+					label += ` Hook: ${componentName} Hook`;
+					break;
+				}
+			}
+
+			const encodedParams = encodeURIComponent(`?path=/docs/${type || grouping}-${componentName}`);
 
 			return {
-				label: `${componentName} ${lang[0].toUpperCase() + lang.slice(1)} Component`,
+				label,
+				displayName: componentName,
 				hierarchyLabel: componentName,
 				route: `/${route}?params=${encodedParams}`,
 				type: 'iframe',
-				url: `./packages/${libraryDir}/src/components/${type}/${componentName}/readme.md`,
+				url,
 				searchable: true,
 			};
 		});
