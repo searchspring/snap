@@ -9,7 +9,7 @@ module.exports = merge(common, {
 		filename: 'universal.bundle.js',
 		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
@@ -18,7 +18,14 @@ module.exports = merge(common, {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'],
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									browserslistEnv: 'universal',
+								},
+							],
+						],
 					},
 				},
 			},
@@ -26,7 +33,7 @@ module.exports = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: false,
+		https: true,
 		port: 4444,
 		hot: false,
 		allowedHosts: 'all',

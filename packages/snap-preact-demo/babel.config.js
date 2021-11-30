@@ -8,7 +8,9 @@ module.exports = (api) => {
 				{
 					modules: false,
 					useBuiltIns: 'usage',
-					corejs: '3.19',
+					corejs: {
+						version: '3.19',
+					},
 				},
 			],
 			['@babel/preset-react'],
@@ -30,6 +32,6 @@ module.exports = (api) => {
 				},
 			],
 			['@babel/plugin-transform-arrow-functions'],
-		].filter(Boolean),
+		],
 	};
 };
