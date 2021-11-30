@@ -1,6 +1,6 @@
 ## Configuration
 
-Lets define our config. The config that is provided to Snap will create and return controllers that are specified in the config. In this example, we will be creating a Search and Autocomplete controller.
+Let's define our config. The config that is provided to Snap will create and return controllers that are specified in the config. In this example, we will be creating a Search and Autocomplete controller.
 
 ```typescript
 const config = {
@@ -60,7 +60,7 @@ const config = {
 };
 ```
 
-Lets go over a few things.
+Let's go over a few things.
 
 `config.url` is optional and contains a [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) object that is passed to the core [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
 
