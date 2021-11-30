@@ -22,7 +22,7 @@ const snap = new Snap(config);
 ```
 
 ## Configuration
-A configuration object provided to Snap will determin the services that will be created. 
+A configuration object provided to Snap will determine the services that will be created. 
 
 Full example:
 
