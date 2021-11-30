@@ -7,39 +7,39 @@ import { Skeleton } from './Skeleton';
 
 describe('Skeleton Component', () => {
 	it('renders', () => {
-		const rendered = render(<Skeleton height={200} width={200} />);
+		const rendered = render(<Skeleton height="200px" width="200px" />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
 	});
 
 	it('has correct demmensions', () => {
-		const rendered = render(<Skeleton height={400} width={300} />);
+		const rendered = render(<Skeleton height="400px" width="300px" />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('height:400px; width:300px');
 	});
 
 	it('can change the bg color', () => {
-		const rendered = render(<Skeleton height={400} width={300} bgcolor={'red'} />);
+		const rendered = render(<Skeleton height="400px" width="300px" bgcolor={'red'} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('background-color:red');
 	});
 
 	it('can change to a circle', () => {
-		const rendered = render(<Skeleton height={300} width={300} round={true} />);
+		const rendered = render(<Skeleton height="300px" width="300px" round={true} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('border-radius:300px');
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Skeleton className={className} height={300} width={300} />);
+		const rendered = render(<Skeleton className={className} height="300px" width="300px" />);
 		const imageElement = rendered.container.querySelector('.ss__skeleton');
 
 		expect(imageElement).toHaveClass(className);
 	});
 
 	it('disables styles', () => {
-		const rendered = render(<Skeleton disableStyles height={300} width={300} />);
+		const rendered = render(<Skeleton disableStyles height="300px" width="300px" />);
 		const imageElement = rendered.container.querySelector('.ss__skeleton');
 
 		expect(imageElement.classList).toHaveLength(1);
@@ -59,7 +59,7 @@ describe('Skeleton theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Skeleton height={300} width={300} />
+				<Skeleton height="300px" width="300px" />
 			</ThemeProvider>
 		);
 		const pagination = rendered.container.querySelector('.ss__skeleton');
@@ -75,7 +75,7 @@ describe('Skeleton theming works', () => {
 				},
 			},
 		};
-		const rendered = render(<Skeleton height={300} width={300} theme={propTheme} />);
+		const rendered = render(<Skeleton height="300px" width="300px" theme={propTheme} />);
 		const pagination = rendered.container.querySelector('.ss__skeleton');
 		expect(pagination).toBeInTheDocument();
 		expect(pagination.classList.length).toBe(1);
@@ -98,7 +98,7 @@ describe('Skeleton theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Skeleton height={300} width={300} theme={propTheme} />
+				<Skeleton height="300px" width="300px" theme={propTheme} />
 			</ThemeProvider>
 		);
 
