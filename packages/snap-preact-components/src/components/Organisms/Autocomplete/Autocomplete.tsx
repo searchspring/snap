@@ -246,8 +246,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}
 		const rect = input?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
-		input?.setAttribute('spellcheck', 'false');
-		input?.setAttribute('autocomplete', 'off');
 	}
 	let delayTimeout;
 	const delayTime = 333;

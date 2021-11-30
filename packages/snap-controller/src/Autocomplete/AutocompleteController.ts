@@ -1,9 +1,9 @@
 import deepmerge from 'deepmerge';
 
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
+import { url } from '@searchspring/snap-toolbox';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
-import { URL as utilsURL } from '../utils/URL';
 
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
@@ -11,8 +11,6 @@ import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 const INPUT_DELAY = 200;
-
-const utils = { url: utilsURL };
 
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -182,22 +180,15 @@ export class AutocompleteController extends AbstractController {
 		input: {
 			enterKey: async (e: KeyboardEvent): Promise<void> => {
 				if (e.keyCode == 13) {
-					const actionUrl = utils.url(this.config.action);
+					const actionUrl = url(this.config.action);
 					const input = e.target as HTMLInputElement;
 
 					let query = input.value;
 					if (!this.store.loading && this.store.search.originalQuery) {
 						query = this.store.search.query.string;
-						actionUrl.params.query.push({
-							key: 'oq',
-							value: this.store.search.originalQuery.string,
-						});
+						actionUrl.params.query['oq'] = this.store.search.originalQuery.string;
 					}
-
-					actionUrl.params.query.push({
-						key: input.name || (this.urlManager.getTranslatorConfig().queryParameter as string),
-						value: query,
-					});
+					actionUrl.params.query[input.name || (this.urlManager.getTranslatorConfig().queryParameter as string)] = query;
 
 					// TODO expected spell correct behavior queryAssumption
 
@@ -338,6 +329,9 @@ export class AutocompleteController extends AbstractController {
 
 		const inputs = document.querySelectorAll(this.config.selector);
 		inputs.forEach((input: HTMLInputElement) => {
+			input.setAttribute('spellcheck', 'false');
+			input.setAttribute('autocomplete', 'off');
+
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
 			input.addEventListener('keyup', this.handlers.input.keyUp);

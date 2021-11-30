@@ -3,7 +3,7 @@ import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version, DomTargeter } from '@searchspring/snap-toolbox';
+import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -21,8 +21,12 @@ import type {
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
+import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
 import type { SnapControllerServices, RootComponent } from './types';
+
+const BRANCH_COOKIE = 'ssBranch';
+const SS_DEV_COOKIE = 'ssDev';
 
 type ExtendedTarget = Target & {
 	name?: string;
@@ -160,12 +164,12 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
+		this.logger = new Logger('Snap Preact ');
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
-		this.logger = new Logger('Snap Preact ');
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};
@@ -184,85 +188,157 @@ export class Snap {
 
 		// log version
 		this.logger.imageText({
-			url: 'https://searchspring.com/wp-content/themes/SearchSpring-Theme/dist/images/favicons/favicon.svg',
+			url: 'https://snapui.searchspring.io/favicon.svg',
 			text: `[${version}]`,
 			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
 		});
+
+		try {
+			const urlParams = url(window.location.href);
+			const branchParam = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+
+			if (branchParam && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
+				// set a cookie or localstorage with branch
+				if (featureFlags.cookies) {
+					cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000); // 1 hour
+					cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
+				} else {
+					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
+				}
+
+				this.logger.setMode(LogMode.DEVELOPMENT);
+				this.logger.warn(`...loading '${branchParam}' build...`);
+
+				// append script with new branch in path
+				const script = document.createElement('script');
+				const src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
+				script.src = src;
+				script.setAttribute(BRANCH_COOKIE, '');
+				document.head.appendChild(script);
+
+				new DomTargeter(
+					[
+						{
+							selector: 'body',
+							inject: {
+								action: 'append', // before, after, append, prepend
+								element: () => {
+									const branchContainer = document.createElement('div');
+									branchContainer.className = 'ss__branch--target';
+									return branchContainer;
+								},
+							},
+						},
+					],
+					async (target, elem) => {
+						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
+						render(<BranchOverride branch={branchParam} cookieName={BRANCH_COOKIE} bundleUrl={src} />, elem);
+					}
+				);
+
+				// prevent instantiation of config
+				return;
+			}
+		} catch (e) {}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'search': {
 					this.config.controllers[type].forEach((controller, index) => {
-						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
-							try {
-								let searched = false;
-								const runSearch = () => {
-									if (!searched) {
-										searched = true;
-										setTimeout(() => {
-											this.controllers[controller.config.id].search();
-										});
-									}
-								};
+						try {
+							const cntrlr = createSearchController(
+								{
+									url: deepmerge(this.config.url || {}, controller.url || {}),
+									controller: controller.config,
+								},
+								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+							);
+							this.controllers[cntrlr.config.id] = cntrlr;
 
-								const targetFunction = async (target, elem, originalElem) => {
-									const onTarget = target.onTarget as OnTarget;
-									onTarget && onTarget(target, elem, originalElem);
+							let searched = false;
+							const runSearch = () => {
+								if (!searched) {
+									searched = true;
+									this.controllers[controller.config.id].search();
+								}
+							};
 
+							const targetFunction = async (target, elem, originalElem) => {
+								if (target.skeleton) {
+									const Skeleton = await (target as ExtendedTarget).skeleton();
+									setTimeout(() => {
+										render(<Skeleton />, elem);
+									});
+								}
+
+								runSearch();
+								const onTarget = target.onTarget as OnTarget;
+								onTarget && onTarget(target, elem, originalElem);
+
+								try {
 									const Component = await (target as ExtendedTarget).component();
-
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
-								};
+								} catch (err) {
+									this.logger.error(
+										`Uncaught Error - Invalid value passed as the component.
+	This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
+			
+				instead of - 
 
-								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.SEARCH, controller.config, controller.services, controller.url, resolve);
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: <Content/>,
+				},
+			]
+
+				or - 
+
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: Content,
+				},
+			]
+
+				please try - 
+
+			targeters: [
+				{
+					selector: '#searchspring-content',
+					hideTarget: true,
+					component: () => Content
+				},
+			]
+
+			
+The error above happened in the following targeter in the Snap Config`,
+										target
+									);
+								}
+							};
+
+							controller?.targeters?.forEach(async (target, target_index) => {
+								if (!target.selector) {
+									throw new Error(`Targets at index ${target_index} missing selector value (string).`);
+								}
+								if (!target.component) {
+									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
-								controller?.targeters?.forEach(async (target, target_index) => {
-									if (!target.selector) {
-										throw new Error(`Targets at index ${target_index} missing selector value (string).`);
-									}
-									if (!target.component) {
-										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
-									}
-									if (target.prefetch) {
-										const cntrlr = await this.createController(
-											DynamicImportNames.SEARCH,
-											controller.config,
-											controller.services,
-											controller.url,
-											resolve
-										);
-										runSearch();
-										cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
-									} else {
-										const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-											if (target.skeleton) {
-												const Skeleton = await (target as ExtendedTarget).skeleton();
-												setTimeout(() => {
-													render(<Skeleton />, elem);
-												});
-											}
+								if (target.prefetch) {
+									runSearch();
+								}
 
-											const cntrlr = await this.createController(
-												DynamicImportNames.SEARCH,
-												controller.config,
-												controller.services,
-												controller.url,
-												resolve
-											);
-											runSearch();
-											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
-											cntrlr.addTargeter(targeter);
-										});
-									}
-								});
-							} catch (err) {
-								this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
-							}
-						});
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
+							});
+						} catch (err) {
+							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
+						}
 					});
 					break;
 				}

@@ -1,7 +1,7 @@
-import 'preact/debug';
-import { h, Fragment, render } from 'preact';
 import deepmerge from 'deepmerge';
-/* searchspring imports */
+
+import { Snap } from '@searchspring/snap-preact';
+import { getContext } from '@searchspring/snap-toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
@@ -11,12 +11,18 @@ import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
 
-import { Snap } from '@searchspring/snap-preact';
+/*
+	context
+ */
+
+const context = getContext(['shopper']);
+
 /*
 	configuration and instantiation
  */
 
 let config = {
+	context,
 	url: {
 		settings: {
 			coreType: 'query',
@@ -52,12 +58,6 @@ let config = {
 			{
 				config: {
 					id: 'search',
-					middleware: {
-						init: ({ controller }, next) => {
-							controller.log.debug('in config init...', controller);
-							next();
-						},
-					},
 					plugins: [[afterStore], [configurable, 'thing1', 'thing2']],
 					settings: {
 						redirects: {

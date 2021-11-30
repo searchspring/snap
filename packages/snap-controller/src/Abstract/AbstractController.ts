@@ -1,7 +1,5 @@
 import { LogMode } from '@searchspring/snap-logger';
-import { DomTargeter, cookies } from '@searchspring/snap-toolbox';
-
-import { URL } from '../utils/URL';
+import { DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
@@ -106,7 +104,7 @@ export abstract class AbstractController {
 			this.tracker.setNamespace(this.config.id);
 		}
 		// set environment
-		if (URL(window.location.href)?.params.query.filter((param) => param.key === 'dev').length > 0) {
+		if (url(window.location.href)?.params?.query?.dev) {
 			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
 		}
 		const dev = cookies.get(SS_DEV_COOKIE);

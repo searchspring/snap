@@ -1,5 +1,3 @@
-const dev = process.env.NODE_ENV === 'development';
-
 module.exports = (api) => {
 	api.cache.using(() => process.env.NODE_ENV);
 
@@ -8,10 +6,9 @@ module.exports = (api) => {
 			[
 				'@babel/preset-env',
 				{
-					useBuiltIns: 'entry',
-					corejs: {
-						version: 3,
-					},
+					modules: false,
+					useBuiltIns: 'usage',
+					corejs: '3.19',
 				},
 			],
 			['@babel/preset-react'],
@@ -33,7 +30,6 @@ module.exports = (api) => {
 				},
 			],
 			['@babel/plugin-transform-arrow-functions'],
-			dev && ['@prefresh/babel-plugin'],
 		].filter(Boolean),
 	};
 };
