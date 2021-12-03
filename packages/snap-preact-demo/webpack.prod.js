@@ -4,17 +4,17 @@ const path = require('path');
 
 module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/index.js',
+	entry: './src/universal.js',
 	output: {
 		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist:modern',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
+				include: [/node_modules\/@searchspring/, path.resolve(__dirname, 'src'), path.resolve(__dirname, '../')],
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -22,7 +22,7 @@ module.exports = merge(common, {
 							[
 								'@babel/preset-env',
 								{
-									browserslistEnv: 'modern',
+									browserslistEnv: 'universal',
 								},
 							],
 						],
@@ -33,7 +33,7 @@ module.exports = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		server: 'https',
 		port: 4444,
 		hot: false,
 		allowedHosts: 'all',
