@@ -264,13 +264,6 @@ export class Snap {
 							};
 
 							const targetFunction = async (target, elem, originalElem) => {
-								if (target.skeleton) {
-									const Skeleton = await (target as ExtendedTarget).skeleton();
-									setTimeout(() => {
-										render(<Skeleton />, elem);
-									});
-								}
-
 								runSearch();
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && onTarget(target, elem, originalElem);
@@ -334,7 +327,15 @@ The error above happened in the following targeter in the Snap Config`,
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
+									if (target.skeleton) {
+										const Skeleton = await (target as ExtendedTarget).skeleton();
+										setTimeout(() => {
+											render(<Skeleton />, elem);
+										});
+									}
+									targetFunction(target, elem, originalElem);
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
