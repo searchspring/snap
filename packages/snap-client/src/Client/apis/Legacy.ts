@@ -7,14 +7,17 @@ export class LegacyAPI extends API {
 		queryParameters.resultsFormat = 'native';
 		const headerParameters: HTTPHeaders = {};
 
-		const legacyResponse = await this.request({
-			path,
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters,
-		});
+		const legacyResponse = await this.request(
+			{
+				path,
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			path + JSON.stringify(queryParameters)
+		);
 
-		return legacyResponse.json();
+		return legacyResponse;
 	}
 
 	async postMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {
@@ -22,27 +25,33 @@ export class LegacyAPI extends API {
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request({
-			path: '/api/meta/meta.json',
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/meta/meta.json',
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			'/api/meta/meta.json' + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as MetaResponseModel;
 	}
 
 	async getMeta(queryParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request({
-			path: '/api/meta/meta.json',
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters as unknown as HTTPQuery,
-		});
+		const response = await this.request(
+			{
+				path: '/api/meta/meta.json',
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters as unknown as HTTPQuery,
+			},
+			'/api/meta/meta.json' + JSON.stringify(queryParameters)
+		);
 
-		return response.json();
+		return response as MetaResponseModel;
 	}
 
 	async getSearch(queryParameters: any): Promise<any> {

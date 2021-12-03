@@ -15,7 +15,9 @@ export class HybridAPI extends API {
 		const legacyRequestParameters = requestParameters;
 
 		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
+		const legacyRequester = new LegacyAPI(
+			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
+		);
 
 		return legacyRequester.getMeta(legacyRequestParameters);
 	}
@@ -24,7 +26,9 @@ export class HybridAPI extends API {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
+		const legacyRequester = new LegacyAPI(
+			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
+		);
 
 		const legacyData = await legacyRequester.getSearch(legacyRequestParameters);
 
@@ -46,8 +50,12 @@ export class HybridAPI extends API {
 		}
 
 		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const suggestRequester = new SuggestAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
-		const legacyRequester = new LegacyAPI(new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() }));
+		const suggestRequester = new SuggestAPI(
+			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
+		);
+		const legacyRequester = new LegacyAPI(
+			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
+		);
 
 		const suggestResults = await suggestRequester.getSuggest(suggestParams);
 		const transformedSuggestResults = transformSuggestResponse(suggestResults);

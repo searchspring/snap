@@ -29,11 +29,19 @@ const defaultConfig: ClientConfig = {
 	meta: {
 		prefetch: true,
 		ttl: 300000,
+		cache: {
+			enabled: true,
+			expiresAfter: 300000,
+		},
 	},
 	search: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/search',
+		},
+		cache: {
+			enabled: true,
+			expiresAfter: 300000,
 		},
 	},
 	autocomplete: {
@@ -41,17 +49,29 @@ const defaultConfig: ClientConfig = {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/autocomplete',
 		},
+		cache: {
+			enabled: true,
+			expiresAfter: 300000,
+		},
 	},
 	recommend: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/recommend',
 		},
+		cache: {
+			enabled: true,
+			expiresAfter: 300000,
+		},
 	},
 	suggest: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/recommend',
+		},
+		cache: {
+			enabled: true,
+			expiresAfter: 300000,
 		},
 	},
 };
@@ -72,6 +92,7 @@ const cache: Cache = {};
 export class Client {
 	private globals: ClientGlobals;
 	private config: ClientConfig;
+	private context: any;
 	private requesters: {
 		autocomplete: HybridAPI;
 		meta: HybridAPI;
@@ -80,13 +101,14 @@ export class Client {
 		suggest: SuggestAPI;
 	};
 
-	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
+	constructor(globals: ClientGlobals, config: ClientConfig = {}, context?: any) {
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}
 
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
+		this.context = context;
 
 		cache[this.globals.siteId] = cache[this.globals.siteId] || {};
 
@@ -95,30 +117,35 @@ export class Client {
 				new ApiConfiguration({
 					basePath: this.config.autocomplete?.api?.host,
 					siteId: this.globals.siteId,
+					cacheSettings: this.config.autocomplete.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.meta?.api?.host,
 					siteId: this.globals.siteId,
+					cacheSettings: this.config.meta.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					basePath: this.config.recommend?.api?.host,
 					siteId: this.globals.siteId,
+					cacheSettings: this.config.recommend.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.search?.api?.host,
 					siteId: this.globals.siteId,
+					cacheSettings: this.config.search.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					basePath: this.config.suggest?.api?.host,
 					siteId: this.globals.siteId,
+					cacheSettings: this.config.suggest.cache,
 				})
 			),
 		};

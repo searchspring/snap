@@ -1,4 +1,6 @@
 import { fibonacci } from '../utils/fibonacci';
+import { NetworkCache } from '../NetworkCache/NetworkCache';
+import { CacheConfig } from '../../types';
 
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
@@ -19,24 +21,43 @@ export interface RequestOpts {
 export class API {
 	private retryDelay = 1000;
 	private retryCount = 1;
-
-	constructor(protected configuration: ApiConfiguration) {
-		// nothing else todo
+	public clearNetworkCache() {
+		this.networkCache.clear();
 	}
 
-	protected async request(context: RequestOpts): Promise<Response> {
+	private networkCache = new NetworkCache<any>();
+
+	constructor(protected configuration: ApiConfiguration) {}
+
+	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
 		const { url, init } = this.createFetchParams(context);
+
+		if (cacheKey) {
+			let cachedResponse = this.networkCache.get(cacheKey);
+			if (cachedResponse) {
+				const parsed = JSON.parse(cachedResponse);
+				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+				this.retryDelay = 1000;
+				return parsed;
+			}
+		}
+
 		const response = await this.fetchApi(url, init);
+		const responseJSON = await response.json();
 		if (response.status >= 200 && response.status < 300) {
 			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 			this.retryDelay = 1000;
-			return response;
+			if (cacheKey) {
+				// save in the cache before returning
+				this.networkCache.set(cacheKey, responseJSON, this.configuration.cacheSettings);
+			}
+			return responseJSON;
 		} else if (response.status == 429) {
 			if (this.retryCount < this.configuration.maxRetry) {
 				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
 				this.retryDelay = fibonacci(this.retryCount) * 1000;
 				this.retryCount++;
-				return await this.request(context);
+				return await this.request(context, cacheKey);
 			} else {
 				throw response.status;
 			}
@@ -80,12 +101,15 @@ export interface ApiConfigurationParameters {
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 	maxRetry?: number;
+	cacheSettings?: CacheConfig;
 }
 
 export class ApiConfiguration {
 	public maxRetry = 8;
-
+	public cacheSettings: CacheConfig;
 	constructor(private configuration: ApiConfigurationParameters) {
+		this.cacheSettings = configuration.cacheSettings;
+
 		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
 		configuration.basePath = configuration.basePath || apiHost;
 		if (configuration.maxRetry) {
