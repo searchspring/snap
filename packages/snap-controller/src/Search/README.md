@@ -10,6 +10,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
 | settings.redirects.merchandising | enable merchandising redirects | true |   |
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | true |   |
+| settings.facets.pinFiltered | selected facet options move to the top of the options array | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
