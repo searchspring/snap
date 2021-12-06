@@ -18,8 +18,8 @@ describe('Skeleton Component', () => {
 		expect(skeleton).toHaveStyle('height:400px; width:300px');
 	});
 
-	it('can change the bg color', () => {
-		const rendered = render(<Skeleton height="400px" width="300px" bgcolor={'red'} />);
+	it('can change the backgroundColor color', () => {
+		const rendered = render(<Skeleton height="400px" width="300px" backgroundColor={'red'} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toHaveStyle('background-color:red');
 	});

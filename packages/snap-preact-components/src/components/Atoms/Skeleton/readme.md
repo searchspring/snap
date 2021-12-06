@@ -27,18 +27,18 @@ The `round` prop is used for when you are wanting to render a circle instead of 
 <Skeleton height='200px' width='150px'/>
 ```
 
-### Bgcolor
+### backgroundColor
 
-The `bgcolor` prop is used for changing the background color of the skeleton.
+The `backgroundColor` prop is used for changing the background color of the skeleton.
 
 ```jsx
-<Skeleton height='200px' width='150px' bgcolor='#333333'/>
+<Skeleton height='200px' width='150px' backgroundColor='#333333'/>
 ```
 
-### SecondaryColor
+### animatedColor
 
-The `secondaryColor` prop is used for changing the color of the moving vertical loading bar.
+The `animatedColor` prop is used for changing the color of the moving vertical loading bar.
 
 ```jsx
-<Skeleton height='200px' width='150px' bgcolor='#333333' secondaryColor="#000000" />
+<Skeleton height='200px' width='150px' backgroundColor='#333333' animatedColor="#000000" />
 ```

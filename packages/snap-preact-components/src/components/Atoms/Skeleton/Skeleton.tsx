@@ -10,13 +10,13 @@ import { ComponentProps } from '../../../types';
 import { CSSProperties } from 'react';
 
 const CSS = {
-	skeleton: ({ width, height, round, bgcolor, secondaryColor, animation }) =>
+	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }) =>
 		css({
 			width: width,
 			height: height,
 			borderRadius: round ? width : '0.25rem',
 
-			backgroundColor: bgcolor,
+			backgroundColor: backgroundColor,
 			display: 'inline-flex',
 			lineHeight: '1',
 
@@ -32,7 +32,7 @@ const CSS = {
 				right: '0',
 				height: '100%',
 				backgroundRepeat: 'no-repeat',
-				backgroundImage: `linear-gradient(90deg, ${bgcolor}, ${secondaryColor}, ${bgcolor})`,
+				backgroundImage: `linear-gradient(90deg, ${backgroundColor}, ${animatedColor}, ${backgroundColor})`,
 				transform: 'translateX(-100%)',
 				animation: `${animation} 1.5s linear infinite`,
 				animationTimingFunction: 'ease-in-out',
@@ -53,19 +53,19 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const props: SkeletonProps = {
 		// default props
-		bgcolor: '#ebebeb',
-		secondaryColor: '#f5f5f5',
+		backgroundColor: '#ebebeb',
+		animatedColor: '#f5f5f5',
 		// global theme
 		...globalTheme?.components?.skeleton,
 		// props
 		...properties,
 		...properties.theme?.components?.skeleton,
 	};
-	const { width, height, round, bgcolor, secondaryColor, disableStyles, className, style } = props;
+	const { width, height, round, backgroundColor, animatedColor, disableStyles, className, style } = props;
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.skeleton({ width, height, round, bgcolor, secondaryColor, animation: CSS.animation }), style];
+		styling.css = [CSS.skeleton({ width, height, round, backgroundColor, animatedColor, animation: CSS.animation }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -80,6 +80,6 @@ export interface SkeletonProps extends ComponentProps {
 	width: string;
 	height: string;
 	round?: boolean;
-	bgcolor?: string;
-	secondaryColor?: string;
+	backgroundColor?: string;
+	animatedColor?: string;
 }

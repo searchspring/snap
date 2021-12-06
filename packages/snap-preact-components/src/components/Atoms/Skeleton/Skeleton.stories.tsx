@@ -35,7 +35,7 @@ export default {
 	],
 	argTypes: {
 		height: {
-			description: 'Numeric value to set the height of the Skeleton',
+			description: 'CSS sizing to set the height of the Skeleton',
 			defaultValue: '100px',
 			type: { required: true },
 			table: {
@@ -46,7 +46,7 @@ export default {
 			control: { type: 'text' },
 		},
 		width: {
-			description: 'Numeric value to set the width of the Skeleton',
+			description: 'CSS sizing to set the width of the Skeleton',
 			defaultValue: '100px',
 			type: { required: true },
 			table: {
@@ -64,7 +64,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		bgcolor: {
+		backgroundColor: {
 			description: 'Background color',
 			defaultValue: '#ebebeb',
 			table: {
@@ -75,8 +75,8 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		secondaryColor: {
-			description: 'Secondary color',
+		animatedColor: {
+			description: 'Color setting for the vertical animated bar',
 			defaultValue: '#f5f5f5',
 			table: {
 				type: {
