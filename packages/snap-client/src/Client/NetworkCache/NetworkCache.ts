@@ -35,12 +35,12 @@ export class NetworkCache<T> {
 	}
 
 	public set(key: number | string, value: any, cacheSettings?: CacheConfig): void {
-		try {
-			if (!cacheSettings) {
-				cacheSettings = this.defaultCacheSettings;
-			}
+		if (!cacheSettings) {
+			cacheSettings = this.defaultCacheSettings;
+		}
 
-			if (cacheSettings.enabled) {
+		if (cacheSettings.enabled) {
+			try {
 				const stored: any = sessionStorage.getItem('ss-networkcache');
 				const newStored = {
 					...(stored && JSON.parse(stored)),
@@ -52,9 +52,9 @@ export class NetworkCache<T> {
 				};
 
 				sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+			} catch (err) {
+				console.warn('something went wrong, browser might not have cookies enabled');
 			}
-		} catch (err) {
-			console.warn('something went wrong, browser might not have cookies enabled');
 		}
 	}
 
