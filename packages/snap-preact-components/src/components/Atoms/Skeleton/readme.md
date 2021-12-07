@@ -24,7 +24,7 @@ The `width` prop specifies the css width of the skeleton div.
 The `round` prop is used for when you are wanting to render a circle instead of a block.
 
 ```jsx
-<Skeleton height='200px' width='150px'/>
+<Skeleton height='200px' width='150px' round="true"/>
 ```
 
 ### backgroundColor
