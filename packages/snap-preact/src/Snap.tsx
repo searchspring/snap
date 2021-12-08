@@ -252,7 +252,9 @@ export class Snap {
 								},
 								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);
+
 							this.controllers[cntrlr.config.id] = cntrlr;
+							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
 							let searched = false;
 							const runSearch = () => {

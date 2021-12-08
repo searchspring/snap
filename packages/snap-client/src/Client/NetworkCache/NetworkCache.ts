@@ -10,6 +10,7 @@ export class NetworkCache<T> {
 		try {
 			const stored: any = sessionStorage.getItem('ss-networkcache');
 			const localData = stored && JSON.parse(stored);
+
 			if (localData && key && localData[key]) {
 				const now = new Date();
 				// compare the expiry time of the item with the current time

@@ -4,8 +4,14 @@ type ContextVariables = {
 
 export function getContext(evaluate: string[], script?: HTMLScriptElement | string): ContextVariables {
 	if (!script || typeof script === 'string') {
-		const scripts = Array.from(document.querySelectorAll((script as string) || 'script#searchspring-context,script[src*="snapui.searchspring.io"]'));
-		script = scripts.filter((script) => script.innerHTML.length).pop() as HTMLScriptElement;
+		const scripts = Array.from(document.querySelectorAll((script as string) || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
+
+		script = scripts
+			.sort((a, b) => {
+				// order them by innerHTML (so that popped script has innerHTML)
+				return a.innerHTML.length - b.innerHTML.length;
+			})
+			.pop() as HTMLScriptElement;
 	}
 
 	if (!script || typeof script !== 'object' || script.tagName !== 'SCRIPT') {
@@ -15,8 +21,12 @@ export function getContext(evaluate: string[], script?: HTMLScriptElement | stri
 	const scriptElem = script as HTMLScriptElement;
 
 	// check script type
-	if (!scriptElem.getAttribute('type')?.match(/^searchspring/) && !scriptElem.id?.match(/^searchspring/)) {
-		throw new Error('getContext: script type or id attribute must start with "searchspring"');
+	if (
+		!scriptElem.getAttribute('type')?.match(/^searchspring/i) &&
+		!scriptElem.id?.match(/^searchspring/i) &&
+		!scriptElem.src?.match(/\/\/snapui.searchspring.io/i)
+	) {
+		throw new Error('getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"');
 	}
 
 	if ((evaluate && !Array.isArray(evaluate)) || (evaluate && !evaluate.reduce((accu, name) => accu && typeof name === 'string', true))) {
@@ -43,7 +53,7 @@ export function getContext(evaluate: string[], script?: HTMLScriptElement | stri
 		});
 	} catch (err) {
 		console.error('getContext: failed to parse variables - error in context');
-		console.error(err);
+		throw err;
 	}
 
 	return variables;
