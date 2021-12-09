@@ -22,7 +22,7 @@
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
 		"@searchspring/prettier": "^1.0.2",
-		"@searchspring/snapi-types": "^0.1.21",
+		"@searchspring/snapi-types": "^0.1.22",
 		"@types/jest": "^27.0.1",
 		"@types/jsdom": "^16.2.13",
 		"@types/seamless-immutable": "^7.1.16",

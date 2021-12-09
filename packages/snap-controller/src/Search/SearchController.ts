@@ -158,9 +158,11 @@ export class SearchController extends AbstractController {
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
 
+		params.tracking = params.tracking || {};
+		params.tracking.domain = window.location.href;
+
 		const { userId } = this.tracker.getUserId();
 		if (userId) {
-			params.tracking = params.tracking || {};
 			params.tracking.userId = userId;
 		}
 
