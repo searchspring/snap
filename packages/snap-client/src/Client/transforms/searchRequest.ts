@@ -157,12 +157,19 @@ transformSearchRequest.facets = (request: SearchRequestModel = {}) => {
 
 transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {
 	const reqTracking = request.tracking || {};
+	const params: {
+		userId?: string;
+		domain?: string;
+	} = {};
 
 	if (reqTracking.userId) {
-		return { userId: reqTracking.userId };
+		params.userId = reqTracking.userId;
+	}
+	if (reqTracking.domain) {
+		params.domain = reqTracking.domain;
 	}
 
-	return {};
+	return params;
 };
 
 transformSearchRequest.personalization = (request: SearchRequestModel = {}) => {
