@@ -1,6 +1,6 @@
 describe('Autocomplete', () => {
 	beforeEach(() => {
-		cy.visit('https://localhost:4444/');
+		cy.visit('https://localhost:2222/');
 	});
 	it('does not render if input not focused', () => {
 		cy.get('.ss__autocomplete').should('not.exist');

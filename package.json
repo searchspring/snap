@@ -11,7 +11,7 @@
 		"build:docs": "lerna exec --stream --parallel 'npm run build:docs'",
 		"test": "npm run test --workspaces",
 		"dev": "lerna exec --parallel --stream 'npm run dev'",
-		"dev:docs": "serve ./ -l 2222",
+		"dev:docs": "serve ./ -l 1111",
 		"lint": "npm run lint --workspaces",
 		"clean": "lerna clean -y && rm -rf ./node_modules",
 		"format": "lerna exec --parallel --stream 'npm run format'",
@@ -22,7 +22,7 @@
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
 		"@searchspring/prettier": "^1.0.2",
-		"@searchspring/snapi-types": "^0.1.21",
+		"@searchspring/snapi-types": "^0.1.22",
 		"@types/jest": "^27.0.1",
 		"@types/jsdom": "^16.2.13",
 		"@types/seamless-immutable": "^7.1.16",

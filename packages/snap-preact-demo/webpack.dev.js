@@ -33,7 +33,7 @@ const universal = merge(common, {
 	},
 	devServer: {
 		server: 'https',
-		port: 4444,
+		port: 2222,
 		hot: true,
 		allowedHosts: 'all',
 		headers: {
