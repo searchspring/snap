@@ -78,7 +78,7 @@ export type RecommendCombinedResponseModel = ProfileResponseModel & { results: S
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	batches: {
-		[paramHash: string]: {
+		[siteId: string]: {
 			timeout: number;
 			request: any;
 			deferreds?: Deferred[];
@@ -109,9 +109,9 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		const paramHash = otherParams?.siteId || this.configuration.getSiteId();
-		this.batches[paramHash] = this.batches[paramHash] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
-		const paramBatch = this.batches[paramHash];
+		const siteId = otherParams?.siteId || this.configuration.getSiteId();
+		this.batches[siteId] = this.batches[siteId] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		const paramBatch = this.batches[siteId];
 
 		const deferred = new Deferred();
 
@@ -138,7 +138,7 @@ export class RecommendAPI extends API {
 				});
 			}
 
-			delete this.batches[paramHash];
+			delete this.batches[siteId];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
