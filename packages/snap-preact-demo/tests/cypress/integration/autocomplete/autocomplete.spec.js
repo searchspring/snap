@@ -34,7 +34,7 @@ describe('Autocomplete', () => {
 			}
 			cy.get('.searchspring-ac').focus();
 
-			cy.get('.ss__autocomplete__terms__option:first a').should('exist').trigger('focus');
+			cy.get('.ss__autocomplete__terms__option:first a').should('exist').focus();
 			cy.snapStore('autocomplete').then((store) => {
 				cy.get('.ss__autocomplete__terms__option').should('have.length', store.trending.length);
 				cy.get('.ss__autocomplete__facets .ss__facet').should('have.length.lte', store.facets.length);
@@ -49,9 +49,9 @@ describe('Autocomplete', () => {
 			}
 			cy.get('.searchspring-ac').focus();
 
-			cy.get('.ss__autocomplete__terms__option:first a').should('exist').trigger('focus');
+			cy.get('.ss__autocomplete__terms__option:first a').should('exist').focus();
 			cy.snapStore('autocomplete').then((store) => {
-				cy.get('.ss__autocomplete__facets .ss__facet a').first().should('exist').trigger('focus');
+				cy.get('.ss__autocomplete__facets .ss__facet a').first().should('exist').focus();
 				cy.snapStore('autocomplete').then((store) => {
 					const facet = store.facets.filter((facet) => facet.filtered);
 					expect(facet.length).to.equal(1);
