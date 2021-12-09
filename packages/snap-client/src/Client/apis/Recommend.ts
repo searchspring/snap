@@ -1,7 +1,5 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
-import { hashParams } from '../utils/hashParams';
 import { charsParams } from '../utils/charsParams';
-import type { ParameterObject } from '../../types';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
 export type RecommendRequestModel = {
@@ -111,7 +109,7 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		const paramHash = hashParams(otherParams as ParameterObject);
+		const paramHash = otherParams?.siteId || this.configuration.getSiteId();
 		this.batches[paramHash] = this.batches[paramHash] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
 		const paramBatch = this.batches[paramHash];
 
