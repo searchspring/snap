@@ -32,6 +32,7 @@ type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<RootComponent> | RootComponent;
+	skeleton?: () => Promise<any>;
 	props?: unknown;
 	onTarget?: OnTarget;
 	prefetch?: boolean;
@@ -252,7 +253,9 @@ export class Snap {
 								},
 								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);
+
 							this.controllers[cntrlr.config.id] = cntrlr;
+							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
 							let searched = false;
 							const runSearch = () => {
@@ -326,7 +329,15 @@ The error above happened in the following targeter in the Snap Config`,
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
+									if (target.skeleton) {
+										const Skeleton = await (target as ExtendedTarget).skeleton();
+										setTimeout(() => {
+											render(<Skeleton />, elem);
+										});
+									}
+									targetFunction(target, elem, originalElem);
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);
