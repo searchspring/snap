@@ -1,6 +1,6 @@
 describe('Injection', () => {
 	beforeEach(() => {
-		cy.visit('https://localhost:4444/');
+		cy.visit('https://localhost:2222/');
 	});
 
 	it('injects into main containers', () => {
