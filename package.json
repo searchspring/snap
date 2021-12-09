@@ -11,7 +11,7 @@
 		"build:docs": "lerna exec --stream --parallel 'npm run build:docs'",
 		"test": "npm run test --workspaces",
 		"dev": "lerna exec --parallel --stream 'npm run dev'",
-		"dev:docs": "serve ./ -l 2222",
+		"dev:docs": "serve ./ -l 1111",
 		"lint": "npm run lint --workspaces",
 		"clean": "lerna clean -y && rm -rf ./node_modules",
 		"format": "lerna exec --parallel --stream 'npm run format'",
