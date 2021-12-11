@@ -349,7 +349,7 @@ export class UrlTranslator implements Translator {
 			? this.config.urlRoot.split('?')[0]
 			: this.config.urlRoot.includes('#')
 			? this.config.urlRoot.split('#')[0]
-			: this.config.urlRoot;
+			: this.config.urlRoot || window.location.pathname;
 
 		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
 		const stateParams = this.stateToParams(state);
@@ -357,31 +357,29 @@ export class UrlTranslator implements Translator {
 		const queryParams = params.filter((p) => p.type == ParamLocationType.QUERY);
 		const hashParams = params.filter((p) => p.type == ParamLocationType.HASH);
 
-		const paramString =
-			(queryParams.length
-				? '?' +
-				  queryParams
-						.map((param) => {
-							const keyString = encodeURIComponent(param.key.join('.'));
-							const valueString = param.value ? '=' + encodeURIComponent(param.value) : '';
-							return keyString + valueString;
-						})
-						.join('&')
-				: this.config.urlRoot
-				? ''
-				: window.location.pathname) +
-			(hashParams.length
-				? '#/' +
-				  hashParams
-						.map((param) => {
-							const keyString = param.key.map((k) => encodeHashComponent(k)).join(':');
-							const valueString = param.value ? ':' + encodeHashComponent(param.value) : '';
-							return keyString + valueString;
-						})
-						.join('/')
-				: '');
+		const queryParamString = queryParams.length
+			? '?' +
+			  queryParams
+					.map((param) => {
+						const keyString = encodeURIComponent(param.key.join('.'));
+						const valueString = param.value ? '=' + encodeURIComponent(param.value) : '';
+						return keyString + valueString;
+					})
+					.join('&')
+			: '';
 
-		return `${root}${paramString}`;
+		const hashParamString = hashParams.length
+			? '#/' +
+			  hashParams
+					.map((param) => {
+						const keyString = param.key.map((k) => encodeHashComponent(k)).join(':');
+						const valueString = param.value ? ':' + encodeHashComponent(param.value) : '';
+						return keyString + valueString;
+					})
+					.join('/')
+			: '';
+
+		return `${root}${queryParamString}${hashParamString}`;
 	}
 
 	// encode state into params

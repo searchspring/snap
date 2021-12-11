@@ -56,11 +56,9 @@ export class QueryStringTranslator implements Translator {
 						return encodeURIComponent(param.key.join('.')) + '=' + encodeURIComponent(param.value);
 					})
 					.join('&')
-			: this.config.urlRoot
-			? ''
-			: location.pathname;
+			: '';
 
-		return `${this.config.urlRoot}${paramString}`;
+		return `${this.config.urlRoot || window.location.pathname}${paramString}`;
 	}
 
 	protected parsePage(queryParams: Array<QueryParameter>): UrlState {
