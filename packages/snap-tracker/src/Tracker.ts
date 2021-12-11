@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, featureFlags, version } from '@searchspring/snap-toolbox';
+import { cookies, featureFlags, version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -41,6 +41,7 @@ export class Tracker {
 	context: BeaconContext;
 	isSending: number;
 	namespace = '';
+	private targeters: DomTargeter[] = [];
 
 	constructor(globals: TrackerGlobals) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
@@ -64,7 +65,42 @@ export class Tracker {
 			this.setGlobal();
 		}
 
+		// create targeters for each tracking type
+
+		// product view
+		this.targeters.push(
+			new DomTargeter([{ selector: 'script[type="searchspring/track/product/view"]', emptyTarget: false }], (target, elem) => {
+				const { data, item, siteId } = getContext(['data', 'item'], elem as HTMLScriptElement);
+				const trackingData = data || { ...item };
+				this.track.product.view({ data: trackingData, siteId });
+			})
+		);
+
+		// cart view
+		this.targeters.push(
+			new DomTargeter([{ selector: 'script[type="searchspring/track/cart/view"]', emptyTarget: false }], (target, elem) => {
+				const { data, items, siteId } = getContext(['data', 'items'], elem as HTMLScriptElement);
+				const trackingData = data || { items };
+				this.track.cart.view({ data: trackingData, siteId });
+			})
+		);
+
+		// order transaction
+		this.targeters.push(
+			new DomTargeter([{ selector: 'script[type="searchspring/track/order/transaction"]', emptyTarget: false }], (target, elem) => {
+				const { data, items, siteId } = getContext(['data', 'items', 'thing'], elem as HTMLScriptElement);
+				const trackingData = data || { items };
+				this.track.order.transaction({ data: trackingData, siteId });
+			})
+		);
+
 		this.sendEvents();
+	}
+
+	public retarget(): void {
+		this.targeters.forEach((target) => {
+			target.retarget();
+		});
 	}
 
 	setNamespace = (namespace?: string): void => {
