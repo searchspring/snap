@@ -174,8 +174,12 @@ export class Snap {
 		this._instantiatorPromises = {};
 		this.controllers = {};
 
+		if (window.searchspring && this.config.context) {
+			window.searchspring.context = this.config.context;
+		}
+
 		// autotrack shopper id from the context
-		if (this.config.context && this.config.context.shopper?.id) {
+		if (this.config.context?.shopper?.id) {
 			this.tracker.track.shopper.login({
 				id: this.config.context.shopper.id,
 			});
