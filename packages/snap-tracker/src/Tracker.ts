@@ -65,36 +65,7 @@ export class Tracker {
 			this.setGlobal();
 		}
 
-		// create targeters for each tracking type
-
-		// // product view
-		// this.targeters.push(
-		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/product/view"]', emptyTarget: false }], (target, elem) => {
-		// 		const { data, item, siteId } = getContext(['data', 'item'], elem as HTMLScriptElement);
-		// 		const trackingData = data || { ...item };
-		// 		this.track.product.view({ data: trackingData, siteId });
-		// 	})
-		// );
-
-		// // cart view
-		// this.targeters.push(
-		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/cart/view"]', emptyTarget: false }], (target, elem) => {
-		// 		const { data, items, siteId } = getContext(['data', 'items'], elem as HTMLScriptElement);
-		// 		const trackingData = data || { items };
-		// 		this.track.cart.view({ data: trackingData, siteId });
-		// 	})
-		// );
-
-		// // order transaction
-		// this.targeters.push(
-		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/order/transaction"]', emptyTarget: false }], (target, elem) => {
-		// 		const { data, items, siteId } = getContext(['data', 'items', 'thing'], elem as HTMLScriptElement);
-		// 		const trackingData = data || { items };
-		// 		this.track.order.transaction({ data: trackingData, siteId });
-		// 	})
-		// );
-
-		// targeter to do all the things
+		// one targeter to rule them all
 		this.targeters.push(
 			new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
 				const { item, items, siteId, shopper, order, type } = getContext(['item', 'items', 'siteId', 'shopper', 'order'], elem as HTMLScriptElement);
@@ -173,7 +144,7 @@ export class Tracker {
 					return;
 				}
 				if (!data.id) {
-					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login("1234")');
+					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })');
 					return;
 				}
 				let context = this.context;
@@ -255,7 +226,7 @@ export class Tracker {
 			click: (data: ProductClickEvent, siteId?: string): BeaconEvent => {
 				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
 					console.error(
-						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
+						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })`
 					);
 					return;
 				}
@@ -290,7 +261,7 @@ export class Tracker {
 			view: (data: CartViewEvent, siteId?: string): BeaconEvent => {
 				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
-						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])'
+						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
@@ -307,7 +278,7 @@ export class Tracker {
 				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
-							`track.view.cart event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							`track.view.cart event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
@@ -347,7 +318,7 @@ export class Tracker {
 			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 					);
 					return;
 				}
@@ -364,7 +335,7 @@ export class Tracker {
 				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
-							`track.order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
+							`track.order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })`
 						);
 						return;
 					}
