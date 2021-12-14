@@ -67,7 +67,7 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 ### Shopper Login Script Block
 
 ```html
-<script type="searchspring/shopper/login">
+<script type="searchspring/track/shopper/login">
     id = 'snapdev';
 </script>
 ```
