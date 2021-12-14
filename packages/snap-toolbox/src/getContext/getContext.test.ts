@@ -1,6 +1,8 @@
 import { getContext } from './getContext';
 
 describe('getContext', () => {
+	beforeEach(() => (document.body.innerHTML = ''));
+
 	it('expects a script tag as the second parameter', () => {
 		const divTag = document.createElement('div');
 
@@ -45,6 +47,57 @@ describe('getContext', () => {
 		expect(() => {
 			getContext(['options'], scriptTag);
 		}).not.toThrow();
+	});
+
+	it(`automatically finds script in document when it has an 'id' that starts with "searchspring"`, () => {
+		expect(() => {
+			const id = 'searchspring-variables';
+			const scriptTag = document.createElement('script');
+			scriptTag.id = id;
+
+			document.body.appendChild(scriptTag);
+
+			const context = getContext([]);
+			expect(context).toHaveProperty('id', id);
+		}).not.toThrow();
+	});
+
+	it(`automatically finds script in document when it has a 'src' that matches "snapui.searchspring.io"`, () => {
+		expect(() => {
+			const src = 'https://snapui.searchspring.io/y56s6x/test/bundle.js';
+			const scriptTag = document.createElement('script');
+			scriptTag.src = src;
+
+			document.body.appendChild(scriptTag);
+
+			const context = getContext([]);
+			expect(context).toHaveProperty('src', src);
+		}).not.toThrow();
+	});
+
+	it('when multiple possible context scripts are found automatically, it uses the one with innerHTML', () => {
+		const id = 'searchspring-context';
+		const shopperObject = {
+			id: 'snaptest',
+		};
+
+		const snapScriptTestTag = document.createElement('script');
+		snapScriptTestTag.src = 'https://snapui.searchspring.io/y56s6x/test/bundle.js';
+		document.body.appendChild(snapScriptTestTag);
+
+		const scriptTag = document.createElement('script');
+		scriptTag.id = id;
+		scriptTag.innerHTML = `
+			shopper = ${JSON.stringify(shopperObject)};
+		`;
+		document.body.appendChild(scriptTag);
+
+		const snapScriptTag = document.createElement('script');
+		snapScriptTag.src = 'https://snapui.searchspring.io/y56s6x/bundle.js';
+		document.body.appendChild(snapScriptTag);
+
+		const context = getContext(['shopper']);
+		expect(context.shopper).toStrictEqual(shopperObject);
 	});
 
 	it('expects the script to have "searchspring" prefix in the id or type attribute', () => {
@@ -151,5 +204,17 @@ describe('getContext', () => {
 			siteId: 'abc123',
 			categories: ['righteous', 'awesome', 'radical'],
 		});
+	});
+
+	it('supports evaluation of all valid javascript', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring/recommend');
+		scriptTag.innerHTML = `
+			error = window.dne.property
+		`;
+
+		expect(() => {
+			getContext(['error'], scriptTag);
+		}).toThrow();
 	});
 });

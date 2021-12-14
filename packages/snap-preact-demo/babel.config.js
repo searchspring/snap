@@ -30,6 +30,6 @@ module.exports = (api) => {
 				},
 			],
 			['@babel/plugin-transform-arrow-functions'],
-		].filter(Boolean),
+		],
 	};
 };

@@ -93,16 +93,7 @@ export class AutocompleteController extends AbstractController {
 		// TODO: add in future when autocomplete supports result click tracking
 		product: {
 			click: (e: MouseEvent, result): void => {
-				// const { intellisuggestData, intellisuggestSignature } = result.attributes;
-				// const target = e.target as HTMLAnchorElement;
-				// const href = target?.href || result.mappings.core?.url || undefined;
-				// this.tracker.track.product.click({
-				// 	data: {
-				// 		intellisuggestData,
-				// 		intellisuggestSignature,
-				// 		href,
-				// 	},
-				// });
+				this.log.warn('product.click tracking is not currently supported in this controller type');
 			},
 		},
 	};

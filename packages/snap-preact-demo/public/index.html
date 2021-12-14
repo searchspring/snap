@@ -192,9 +192,7 @@
 			var id = document.querySelector("#login-modal input").value;
 			if(id) {
 				window.searchspring.track.shopper.login({
-					data: {
-						id: id
-					}
+					id: id
 				});
 				document.getElementById("login-modal").style.display = "none";
 			}

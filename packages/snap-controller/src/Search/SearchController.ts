@@ -136,11 +136,9 @@ export class SearchController extends AbstractController {
 				const href = target?.href || result.mappings.core?.url || undefined;
 
 				const event = this.tracker.track.product.click({
-					data: {
-						intellisuggestData,
-						intellisuggestSignature,
-						href,
-					},
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
 				});
 
 				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
@@ -158,9 +156,11 @@ export class SearchController extends AbstractController {
 			params.search.redirectResponse = 'full' as SearchRequestModelSearchRedirectResponseEnum;
 		}
 
+		params.tracking = params.tracking || {};
+		params.tracking.domain = window.location.href;
+
 		const { userId } = this.tracker.getUserId();
 		if (userId) {
-			params.tracking = params.tracking || {};
 			params.tracking.userId = userId;
 		}
 
