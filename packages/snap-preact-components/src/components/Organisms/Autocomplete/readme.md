@@ -89,7 +89,12 @@ The `viewportMaxHeight` prop will restrict autocomplete from overflowing the vie
 ### termsSlot
 The `termsSlot` prop accepts a custom JSX element to render instead of the default terms section. This will also replace the trending terms.
 
+<<<<<<< HEAD
 The following props are available to be used within your custom component: `terms`, `trending`, `termsTitle`, `trendingTitle`, `showTrending`, `valueProps`, `emIfy`,`controller`
+=======
+The following props are available to be used within your custom component: `terms`, `trending`, `termsTitle`, `trendingTitle`, `showTrending`, `controller`, `valueProps`
+
+>>>>>>> termSlotAdditions
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} termsSlot={<CustomTermsComponent />} />
 ```
