@@ -30,15 +30,6 @@ export class SortingStore {
 					}
 					return option;
 				})
-				.filter(
-					(option, idx, self) =>
-						idx ===
-						self.findIndex(
-							(o) =>
-								//filter out duplicates with matching fields and direction
-								o.field === option.field && o.direction === option.direction
-						)
-				)
 				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -55,7 +46,7 @@ export class SortingStore {
 						option.default = true;
 					}
 
-					const optionObj = new Option(services, option);
+					const optionObj = new Option(services, option, index);
 
 					return optionObj;
 				});
@@ -82,14 +73,14 @@ class Option {
 	value: string;
 	url: UrlManager;
 
-	constructor(services: StoreServices, option) {
+	constructor(services: StoreServices, option, index) {
 		this.active = option.active;
 		this.default = option.default;
 		this.field = option.field;
 		this.label = option.label;
 		this.direction = option.direction;
 		this.type = option.type;
-		this.value = `${option.field}:${option.direction}`;
+		this.value = `${option.label}:${option.field}:${option.direction}:${index}`;
 
 		if (this.default) {
 			this.url = services.urlManager.remove('page').remove('sort');
