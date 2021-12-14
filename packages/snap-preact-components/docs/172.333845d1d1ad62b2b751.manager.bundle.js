@@ -1,4 +1,4 @@
-/*! For license information please see 172.868b4bd66370a075e711.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 172.333845d1d1ad62b2b751.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[172],
 	{
@@ -7,16 +7,17 @@
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
 					SyntaxHighlighter: () => syntaxhighlighter_SyntaxHighlighter,
+					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
 			__webpack_require__(25047),
-				__webpack_require__(43108),
 				__webpack_require__(35883),
 				__webpack_require__(43105),
 				__webpack_require__(45794),
+				__webpack_require__(58188),
+				__webpack_require__(88233),
 				__webpack_require__(34115),
 				__webpack_require__(634),
-				__webpack_require__(58188),
 				__webpack_require__(20796),
 				__webpack_require__(28673),
 				__webpack_require__(15735),
@@ -557,8 +558,7 @@
 				prism_light.registerLanguage('tsx', prism_tsx),
 				prism_light.registerLanguage('typescript', prism_typescript),
 				prism_light.registerLanguage('graphql', prism_graphql);
-			var copyToClipboard,
-				themedSyntax = memoizerific_default()(2)(function (theme) {
+			var themedSyntax = memoizerific_default()(2)(function (theme) {
 					return Object.entries(theme.code || {}).reduce(function (acc, _ref) {
 						var _ref2 = _slicedToArray(_ref, 2),
 							key = _ref2[0],
@@ -573,10 +573,11 @@
 							})({}, '* .'.concat(key), val)
 						);
 					}, {});
-				});
-			copyToClipboard =
-				null != syntaxhighlighter_navigator && syntaxhighlighter_navigator.clipboard
-					? function copyToClipboard(text) {
+				}),
+				copyToClipboard = createCopyToClipboardFunction();
+			function createCopyToClipboardFunction() {
+				return null != syntaxhighlighter_navigator && syntaxhighlighter_navigator.clipboard
+					? function (text) {
 							return syntaxhighlighter_navigator.clipboard.writeText(text);
 					  }
 					: (function () {
@@ -617,10 +618,11 @@
 									}, _callee);
 								})
 							);
-							return function copyToClipboard(_x) {
+							return function (_x) {
 								return _ref3.apply(this, arguments);
 							};
 					  })();
+			}
 			var Wrapper = dist_esm.zo.div(
 					function (_ref4) {
 						return { position: 'relative', overflow: 'hidden', color: _ref4.theme.color.defaultText };
@@ -681,10 +683,23 @@
 					var highlightableCode = format ? formatter(children) : children.trim(),
 						_useState2 = _slicedToArray((0, react.useState)(!1), 2),
 						copied = _useState2[0],
-						setCopied = _useState2[1];
+						setCopied = _useState2[1],
+						onClick = function onClick(e) {
+							e.preventDefault();
+							var selectedText = globalWindow.getSelection().toString(),
+								textToCopy = 'click' !== e.type && selectedText ? selectedText : highlightableCode;
+							copyToClipboard(textToCopy)
+								.then(function () {
+									setCopied(!0),
+										globalWindow.setTimeout(function () {
+											return setCopied(!1);
+										}, 1500);
+								})
+								.catch(esm.logger.error);
+						};
 					return react.createElement(
 						Wrapper,
-						{ bordered, padded, className },
+						{ bordered, padded, className, onCopyCapture: onClick },
 						react.createElement(
 							Scroller,
 							null,
@@ -706,26 +721,7 @@
 								highlightableCode
 							)
 						),
-						copyable
-							? react.createElement(ActionBar.o, {
-									actionItems: [
-										{
-											title: copied ? 'Copied' : 'Copy',
-											onClick: function onClick(e) {
-												e.preventDefault(),
-													copyToClipboard(highlightableCode)
-														.then(function () {
-															setCopied(!0),
-																globalWindow.setTimeout(function () {
-																	return setCopied(!1);
-																}, 1500);
-														})
-														.catch(esm.logger.error);
-											},
-										},
-									],
-							  })
-							: null
+						copyable ? react.createElement(ActionBar.o, { actionItems: [{ title: copied ? 'Copied' : 'Copy', onClick }] }) : null
 					);
 				};
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';

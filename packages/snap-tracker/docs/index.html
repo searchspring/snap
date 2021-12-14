@@ -112,7 +112,79 @@
 <span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span>
 <span style="color: #000000">    }</span>
 <span style="color: #000000">};</span>
-<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#tracking-events-with-domtargeter" id="tracking-events-with-domtargeter" style="color: inherit; text-decoration: none;">
+					<h2>Tracking Events with DomTargeter</h2>
+				</a>
+				<p>As an alternative method for tracking events, the Tracker utilizes the <code>DomTargeter</code> to look for script tags on the current page. These script tags must have a specific <code>type</code> attribute and data contents for the tracking to be used. These tracking script blocks ensure tracking events are sent when using asynchronous script execution and must be on the page prior to the <code>DOMContentLoaded</code> event to be picked up by initial targeting. If the script blocks are added after this event, the <code>retarget</code> method must be invoked.</p>
+				<a href="#retarget-method" id="retarget-method" style="color: inherit; text-decoration: none;">
+					<h3><code>retarget</code> method</h3>
+				</a>
+				<p>This method will call the <code>retarget</code> method on all <code>DomTargeters</code> set in the Tracker. Typically this would be used when new tracking script blocks have been added to the page after initial targeting.</p>
+				<a href="#shopper-login-script-block" id="shopper-login-script-block" style="color: inherit; text-decoration: none;">
+					<h3>Shopper Login Script Block</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;searchspring/track/shopper/login&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">    id = &#039;snapdev&#039;;</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#product-view-script-block" id="product-view-script-block" style="color: inherit; text-decoration: none;">
+					<h3>Product View Script Block</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;searchspring/track/product/view&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">    item = {</span>
+<span style="color: #000000FF">        sku: &#039;product123&#039;,</span>
+<span style="color: #000000FF">        childSku: &#039;product123_a&#039;,</span>
+<span style="color: #000000FF">    };</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#cart-view-script-block" id="cart-view-script-block" style="color: inherit; text-decoration: none;">
+					<h3>Cart View Script Block</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;searchspring/track/cart/view&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">    items = [</span>
+<span style="color: #000000FF">        {</span>
+<span style="color: #000000FF">            sku: &#039;product123&#039;,</span>
+<span style="color: #000000FF">            childSku: &#039;product123_a&#039;,</span>
+<span style="color: #000000FF">            qty: &#039;1&#039;,</span>
+<span style="color: #000000FF">            price: &#039;9.99&#039;,</span>
+<span style="color: #000000FF">        },</span>
+<span style="color: #000000FF">        {</span>
+<span style="color: #000000FF">            sku: &#039;product456&#039;,</span>
+<span style="color: #000000FF">            childSku: &#039;product456_a&#039;,</span>
+<span style="color: #000000FF">            qty: &#039;2&#039;,</span>
+<span style="color: #000000FF">            price: &#039;10.99&#039;,</span>
+<span style="color: #000000FF">        },</span>
+<span style="color: #000000FF">    ];</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#order-transaction-script-block" id="order-transaction-script-block" style="color: inherit; text-decoration: none;">
+					<h3>Order Transaction Script Block</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;searchspring/track/order/transaction&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">    order = {</span>
+<span style="color: #000000FF">        id: &#039;123456&#039;,</span>
+<span style="color: #000000FF">        total: &#039;31.97&#039;,</span>
+<span style="color: #000000FF">        city: &#039;Los Angeles&#039;,</span>
+<span style="color: #000000FF">        state: &#039;CA&#039;,</span>
+<span style="color: #000000FF">        country: &#039;US&#039;,</span>
+<span style="color: #000000FF">    };</span>
+<span style="color: #000000FF">    items = [</span>
+<span style="color: #000000FF">        {</span>
+<span style="color: #000000FF">            sku: &#039;product123&#039;,</span>
+<span style="color: #000000FF">            childSku: &#039;product123_a&#039;,</span>
+<span style="color: #000000FF">            qty: &#039;1&#039;,</span>
+<span style="color: #000000FF">            price: &#039;9.99&#039;</span>
+<span style="color: #000000FF">        },</span>
+<span style="color: #000000FF">        {</span>
+<span style="color: #000000FF">            sku: &#039;product456&#039;,</span>
+<span style="color: #000000FF">            childSku: &#039;product456_a&#039;,</span>
+<span style="color: #000000FF">            qty: &#039;2&#039;,</span>
+<span style="color: #000000FF">            price: &#039;10.99&#039;</span>
+<span style="color: #000000FF">        },</span>
+<span style="color: #000000FF">    ];</span>
+<span style="color: #800000">&lt;/script&gt;</span>
 </code></pre>
 				<a href="#track-methods" id="track-methods" style="color: inherit; text-decoration: none;">
 					<h2><code>track</code> methods</h2>
@@ -120,22 +192,17 @@
 				<p>The Tracker contains various tracking methods available on the <code>track</code> object. This object is exposed to the browser&#39;s <code>window</code> via the first Snap Controller that has been instantiated. This will use the <code>siteId</code> that has been provided to the Snap Tracker instance of the respective Controller Services.</p>
 				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span>
 </code></pre>
-				<p>Each tracking method expects an object. This object must contain a <code>data</code> key and an object containing the tracking data. </p>
-				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+				<p>Each tracking method expects a data object which contains different attributes depending on the method.</p>
+				<pre><code class="language-typescript"><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<p>If a bundle is using multiple Snap Controllers with different <code>siteId</code>, an optional <code>siteId</code> parameter can be specified to overwrite any event <code>siteId</code></p>
-				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">    </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;abc123&#039;</span>
-<span style="color: #000000">})</span>
+				<pre><code class="language-typescript"><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}, </span><span style="color: #A31515">&#039;abc123&#039;</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#generic-event-trackevent" id="generic-event-trackevent" style="color: inherit; text-decoration: none;">
 					<h3>Generic Event <code>track.event</code></h3>
@@ -151,7 +218,7 @@
 <span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span>
 <span style="color: #000000">    }</span>
 <span style="color: #000000">};</span>
-<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #795E26">event</span><span style="color: #000000">(</span><span style="color: #001080">payload</span><span style="color: #000000">)</span>
 </code></pre>
 				<a href="#event-payload" id="event-payload" style="color: inherit; text-decoration: none;">
 					<h4>Event Payload</h4>
@@ -194,92 +261,85 @@
 <span style="color: #000000">    ...</span>
 <span style="color: #000000">}):</span>
 
-<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">click</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">click</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">intellisuggestData:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;37d5578e1d1646ac97701a063ba84777&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">intellisuggestSignature:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;5739a2596d3b4161b041ce1764ffa04d&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">href:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#product-view-trackproductview" id="product-view-trackproductview" style="color: inherit; text-decoration: none;">
 					<h3>Product View <code>track.product.view</code></h3>
 				</a>
 				<p>Tracks product page views. Should be invoked from a product detail page. A <code>sku</code> and/or <code>childSku</code> are required.</p>
-				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+				<pre><code class="language-typescript"><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">product</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#shopper-login-trackshopperlogin" id="shopper-login-trackshopperlogin" style="color: inherit; text-decoration: none;">
 					<h3>Shopper Login <code>track.shopper.login</code></h3>
 				</a>
 				<p>Tracks user login and sets <code>context.shopperId</code> value. Should be invoked when a user has logged into their account.</p>
 				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">shopperId</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;snapdev&quot;</span>
-<span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">shopper</span><span style="color: #000000">.</span><span style="color: #795E26">login</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #001080">shopperId</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+<span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">shopper</span><span style="color: #000000">.</span><span style="color: #795E26">login</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #001080">shopperId</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#cart-view-trackcartview" id="cart-view-trackcartview" style="color: inherit; text-decoration: none;">
 					<h3>Cart View <code>track.cart.view</code></h3>
 				</a>
 				<p>Tracks cart contents. Should be invoked from a cart page. Each item object must contain a <code>qty</code>, <code>price</code>, (<code>sku</code> and/or <code>childSku</code>)</p>
-				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">cart</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;9.99&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;10.99&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        ]</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+				<pre><code class="language-typescript"><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">cart</span><span style="color: #000000">.</span><span style="color: #795E26">view</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;9.99&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;10.99&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#order-transaction-trackordertransaction" id="order-transaction-trackordertransaction" style="color: inherit; text-decoration: none;">
 					<h3>Order Transaction <code>track.order.transaction</code></h3>
 				</a>
 				<p>Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:</p>
-				<p><code>orderId</code> - (optional) order id</p>
-				<p><code>total</code> - (optional) sub total of all items</p>
-				<p><code>city</code> - (optional) city name</p>
-				<p><code>state</code> - (optional) 2 digit state abbreviation (US only)</p>
-				<p><code>country</code> - (optional) 2 digit country abbreviation    (ie. &#39;US&#39;, &#39;CA&#39;, &#39;MX&#39;, &#39;PL&#39;, &#39;JP&#39;)</p>
-				<p><code>items</code> - required array of items - same object provided to <code>track.cart.view</code> event</p>
-				<pre><code class="language-typescript"><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">searchspring</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">order</span><span style="color: #000000">.</span><span style="color: #795E26">transaction</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">orderId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;123456&#039;</span><span style="color: #000000">,</span>
+				<p><code>order</code> - (optional) object containing the following</p>
+				<p><code>order.id</code> - (optional) order id</p>
+				<p><code>order.otal</code> - (optional) sub total of all items</p>
+				<p><code>order.city</code> - (optional) city name</p>
+				<p><code>order.state</code> - (optional) 2 digit state abbreviation (US only)</p>
+				<p><code>order.country</code> - (optional) 2 digit country abbreviation    (ie. &#39;US&#39;, &#39;CA&#39;, &#39;MX&#39;, &#39;PL&#39;, &#39;JP&#39;)</p>
+				<p><code>order.items</code> - required array of items - same object provided to <code>track.cart.view</code> event</p>
+				<pre><code class="language-typescript"><span style="color: #001080">tracker</span><span style="color: #000000">.</span><span style="color: #001080">track</span><span style="color: #000000">.</span><span style="color: #001080">order</span><span style="color: #000000">.</span><span style="color: #795E26">transaction</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">order:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;123456&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">        </span><span style="color: #001080">total:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;31.97&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">        </span><span style="color: #001080">city:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Los Angeles&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">        </span><span style="color: #001080">state:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;CA&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">        </span><span style="color: #001080">country:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;US&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;9.99&#039;</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;10.99&#039;</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        ]</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">})</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">items:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product123_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;9.99&#039;</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">sku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">childSku:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;product456_a&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">qty:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">price:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;10.99&#039;</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#tracker-properties" id="tracker-properties" style="color: inherit; text-decoration: none;">
 					<h2>Tracker properties</h2>
@@ -433,6 +493,9 @@
 						<a href="interfaces/CustomBeaconEvent.html" class="tsd-kind-icon">Custom<wbr>Beacon<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/OrderTransactionData.html" class="tsd-kind-icon">Order<wbr>Transaction<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/OrderTransactionEvent.html" class="tsd-kind-icon">Order<wbr>Transaction<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -473,6 +536,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 		</div>
 	</div>
