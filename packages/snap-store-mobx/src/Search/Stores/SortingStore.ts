@@ -28,9 +28,17 @@ export class SortingStore {
 					if (!search?.query) {
 						return option.type == 'field';
 					}
-
-					return option;
+					if (option.field) return option;
 				})
+				.filter(
+					(option, idx, self) =>
+						idx ===
+						self.findIndex(
+							(o) =>
+								//filter out duplicates with matching fields and direction
+								o.field === option.field && o.direction === option.direction
+						)
+				)
 				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
