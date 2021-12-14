@@ -136,11 +136,9 @@ export class SearchController extends AbstractController {
 				const href = target?.href || result.mappings.core?.url || undefined;
 
 				const event = this.tracker.track.product.click({
-					data: {
-						intellisuggestData,
-						intellisuggestSignature,
-						href,
-					},
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
 				});
 
 				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
