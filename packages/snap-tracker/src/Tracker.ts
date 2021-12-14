@@ -18,7 +18,7 @@ import {
 	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
-	OrderTransactionEvent,
+	OrderTransactionData,
 	Product,
 } from './types';
 
@@ -67,30 +67,55 @@ export class Tracker {
 
 		// create targeters for each tracking type
 
-		// product view
-		this.targeters.push(
-			new DomTargeter([{ selector: 'script[type="searchspring/track/product/view"]', emptyTarget: false }], (target, elem) => {
-				const { data, item, siteId } = getContext(['data', 'item'], elem as HTMLScriptElement);
-				const trackingData = data || { ...item };
-				this.track.product.view({ data: trackingData, siteId });
-			})
-		);
+		// // product view
+		// this.targeters.push(
+		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/product/view"]', emptyTarget: false }], (target, elem) => {
+		// 		const { data, item, siteId } = getContext(['data', 'item'], elem as HTMLScriptElement);
+		// 		const trackingData = data || { ...item };
+		// 		this.track.product.view({ data: trackingData, siteId });
+		// 	})
+		// );
 
-		// cart view
-		this.targeters.push(
-			new DomTargeter([{ selector: 'script[type="searchspring/track/cart/view"]', emptyTarget: false }], (target, elem) => {
-				const { data, items, siteId } = getContext(['data', 'items'], elem as HTMLScriptElement);
-				const trackingData = data || { items };
-				this.track.cart.view({ data: trackingData, siteId });
-			})
-		);
+		// // cart view
+		// this.targeters.push(
+		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/cart/view"]', emptyTarget: false }], (target, elem) => {
+		// 		const { data, items, siteId } = getContext(['data', 'items'], elem as HTMLScriptElement);
+		// 		const trackingData = data || { items };
+		// 		this.track.cart.view({ data: trackingData, siteId });
+		// 	})
+		// );
 
-		// order transaction
+		// // order transaction
+		// this.targeters.push(
+		// 	new DomTargeter([{ selector: 'script[type="searchspring/track/order/transaction"]', emptyTarget: false }], (target, elem) => {
+		// 		const { data, items, siteId } = getContext(['data', 'items', 'thing'], elem as HTMLScriptElement);
+		// 		const trackingData = data || { items };
+		// 		this.track.order.transaction({ data: trackingData, siteId });
+		// 	})
+		// );
+
+		// targeter to do all the things
 		this.targeters.push(
-			new DomTargeter([{ selector: 'script[type="searchspring/track/order/transaction"]', emptyTarget: false }], (target, elem) => {
-				const { data, items, siteId } = getContext(['data', 'items', 'thing'], elem as HTMLScriptElement);
-				const trackingData = data || { items };
-				this.track.order.transaction({ data: trackingData, siteId });
+			new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
+				const { item, items, siteId, shopper, order, type } = getContext(['item', 'items', 'siteId', 'shopper', 'order'], elem as HTMLScriptElement);
+
+				switch (type) {
+					case 'searchspring/track/shopper/login':
+						this.track.shopper.login(shopper, siteId);
+						break;
+					case 'searchspring/track/product/view':
+						this.track.product.view(item, siteId);
+						break;
+					case 'searchspring/track/cart/view':
+						this.track.cart.view({ items }, siteId);
+						break;
+					case 'searchspring/track/order/transaction':
+						this.track.order.transaction({ order, items }, siteId);
+						break;
+					default:
+						console.error(`${type} event is not supported or incorrect`);
+						break;
+				}
 			})
 		);
 
@@ -142,31 +167,31 @@ export class Tracker {
 		},
 
 		shopper: {
-			login: (details: { data: ShopperLoginEvent; siteId?: string }): BeaconEvent => {
+			login: (data: ShopperLoginEvent, siteId?: string): BeaconEvent => {
 				// sets shopperid if logged in
 				if (!featureFlags.cookies) {
 					return;
 				}
-				if (!details.data.id) {
+				if (!data.id) {
 					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login("1234")');
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
 				}
 				const storedShopperId = this.getShopperId()?.shopperId;
-				details.data.id = `${details.data.id}`;
-				if (storedShopperId != details.data.id) {
+				data.id = `${data.id}`;
+				if (storedShopperId != data.id) {
 					// user's logged in id has changed, update shopperId cookie send login event
-					cookies.set(SHOPPERID_COOKIE_NAME, details.data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-					this.context.shopperId = details.data.id;
+					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
+					this.context.shopperId = data.id;
 
 					const payload = {
 						type: BeaconType.LOGIN,
@@ -179,19 +204,19 @@ export class Tracker {
 			},
 		},
 		product: {
-			view: (details: { data: ProductViewEvent; siteId: string }): BeaconEvent => {
-				if (!details?.data?.sku && !details?.data?.childSku) {
+			view: (data: ProductViewEvent, siteId: string): BeaconEvent => {
+				if (!data?.sku && !data?.childSku) {
 					console.error(
 						'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
@@ -201,45 +226,45 @@ export class Tracker {
 					category: BeaconCategory.PAGEVIEW,
 					context,
 					event: {
-						sku: details.data?.sku ? `${details.data.sku}` : undefined,
-						childSku: details.data?.childSku ? `${details.data.childSku}` : undefined,
+						sku: data?.sku ? `${data.sku}` : undefined,
+						childSku: data?.childSku ? `${data.childSku}` : undefined,
 					},
 				};
 
 				// save recently viewed products to cookie
-				if (details.data?.sku || details.data?.childSku) {
+				if (data?.sku || data?.childSku) {
 					const viewedProducts = cookies.get(VIEWED_PRODUCTS);
 					const products = viewedProducts ? new Set(viewedProducts.split(',')) : new Set();
-					products.add(details.data?.sku || details.data.childSku);
+					products.add(data?.sku || data.childSku);
 					cookies.set(VIEWED_PRODUCTS, Array.from(products).slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
 				}
 
 				// legacy tracking
-				if (details.data?.sku) {
+				if (data?.sku) {
 					// only send sku to pixel tracker if present (don't send childSku)
 					new PixelEvent({
 						...payload,
 						event: {
-							sku: details.data.sku,
+							sku: data.sku,
 						},
 					});
 				}
 
 				return this.track.event(payload);
 			},
-			click: (details: { data: ProductClickEvent; siteId?: string }): BeaconEvent => {
-				if (!details.data?.intellisuggestData || !details.data?.intellisuggestSignature) {
+			click: (data: ProductClickEvent, siteId?: string): BeaconEvent => {
+				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
 					console.error(
 						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product([{ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" }])`
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
@@ -249,9 +274,9 @@ export class Tracker {
 					category: BeaconCategory.INTERACTION,
 					context,
 					event: {
-						intellisuggestData: details.data.intellisuggestData,
-						intellisuggestSignature: details.data.intellisuggestSignature,
-						href: details.data?.href ? `${details.data.href}` : undefined,
+						intellisuggestData: data.intellisuggestData,
+						intellisuggestSignature: data.intellisuggestSignature,
+						href: data?.href ? `${data.href}` : undefined,
 					},
 				};
 
@@ -262,24 +287,24 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: (details: { data: CartViewEvent; siteId?: string }): BeaconEvent => {
-				if (!Array.isArray(details?.data?.items) || !details?.data?.items.length) {
+			view: (data: CartViewEvent, siteId?: string): BeaconEvent => {
+				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
 						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
 				}
-				const items = details.data.items.map((item, index) => {
+				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
 							`track.view.cart event: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
@@ -319,24 +344,24 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: (details: { data: OrderTransactionEvent; siteId?: string }): BeaconEvent => {
-				if (!details.data?.items || !Array.isArray(details.data.items) || !details.data.items.length) {
+			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent => {
+				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
-						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], orderId: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
+						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }], id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US"})'
 					);
 					return;
 				}
 				let context = this.context;
-				if (details.siteId) {
+				if (siteId) {
 					context = deepmerge(context, {
 						context: {
 							website: {
-								trackingCode: details.siteId,
+								trackingCode: siteId,
 							},
 						},
 					});
 				}
-				const items = details.data.items.map((item, index) => {
+				const items = data.items.map((item, index) => {
 					if (!item?.qty || !item?.price || (!item?.sku && !item?.childSku)) {
 						console.error(
 							`track.order.transaction event: object parameter \`items\`: item ${item} at index ${index} requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view([{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }])`
@@ -356,12 +381,12 @@ export class Tracker {
 					return product;
 				});
 				const eventPayload = {
+					orderId: data?.order?.id ? `${data.order.id}` : undefined,
+					total: data?.order?.total ? `${data.order.total}` : undefined,
+					city: data?.order?.city ? `${data.order.city}` : undefined,
+					state: data?.order?.state ? `${data.order.state}` : undefined,
+					country: data?.order?.country ? `${data.order.country}` : undefined,
 					items,
-					orderId: details.data?.orderId ? `${details.data.orderId}` : undefined,
-					total: details.data?.total ? `${details.data.total}` : undefined,
-					city: details.data?.city ? `${details.data.city}` : undefined,
-					state: details.data?.state ? `${details.data.state}` : undefined,
-					country: details.data?.country ? `${details.data.country}` : undefined,
 				};
 				const payload = {
 					type: BeaconType.ORDER,

@@ -38,7 +38,7 @@ const controller = new SearchController(config, {
 });
 
 console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
-console.log(tracker.track.product.click === window.searchspring.track.product.click) // true
+console.log(tracker.track.product.click === tracker.track.product.click) // true
 ```
 
 ## Standalone usage
@@ -55,7 +55,81 @@ const payload = {
         href: '/product123'
     }
 };
-window.searchspring.track.event(payload)
+tracker.track.event(payload)
+```
+
+## Tracking Events with DomTargeter
+As an alternative method for tracking events, the Tracker utilizes the `DomTargeter` to look for script tags on the current page. These script tags must have a specific `type` attribute and data contents for the tracking to be used. These tracking script blocks ensure tracking events are sent when using asynchronous script execution and must be on the page prior to the `DOMContentLoaded` event to be picked up by initial targeting. If the script blocks are added after this event, the `retarget` method must be invoked.
+
+### `retarget` method
+This method will call the `retarget` method on all `DomTargeters` set in the Tracker. Typically this would be used when new tracking script blocks have been added to the page after initial targeting.
+
+### Shopper Login Script Block
+
+```html
+<script type="searchspring/shopper/login">
+    id = 'snapdev';
+</script>
+```
+
+### Product View Script Block
+
+```html
+<script type="searchspring/track/product/view">
+    item = {
+        sku: 'product123',
+        childSku: 'product123_a',
+    };
+</script>
+```
+
+### Cart View Script Block
+
+```html
+<script type="searchspring/track/cart/view">
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ];
+</script>
+```
+
+### Order Transaction Script Block
+
+```html
+<script type="searchspring/track/order/transaction">
+    order = {
+        id: '123456',
+        total: '31.97',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'US',
+    };
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ];
+</script>
 ```
 
 ## `track` methods
@@ -65,27 +139,22 @@ The Tracker contains various tracking methods available on the `track` object. T
 window.searchspring.track
 ```
 
-Each tracking method expects an object. This object must contain a `data` key and an object containing the tracking data. 
+Each tracking method expects a data object which contains different attributes depending on the method.
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    }
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+});
 ```
 
 If a bundle is using multiple Snap Controllers with different `siteId`, an optional `siteId` parameter can be specified to overwrite any event `siteId`
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    },
-    siteId: 'abc123'
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+}, 'abc123');
 ```
 
 ### Generic Event `track.event`
@@ -102,7 +171,7 @@ const payload = {
         href: '/product123'
     }
 };
-window.searchspring.track.event(payload)
+tracker.track.event(payload)
 ```
 
 #### Event Payload
@@ -155,25 +224,21 @@ const searchController = new SearchController({
     ...
 }):
 
-window.searchspring.track.product.click({
-    data: {
-        intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
-        intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
-        href: '/product123',
-    }
-})
+tracker.track.product.click({
+    intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+    intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+    href: '/product123',
+});
 ```
 
 ### Product View `track.product.view`
 Tracks product page views. Should be invoked from a product detail page. A `sku` and/or `childSku` are required.
 
 ```typescript
-window.searchspring.track.product.view({
-    data: {
-        sku: 'product123',
-        childSku: 'product123_a',
-    }
-})
+tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+});
 ```
 
 ### Shopper Login `track.shopper.login`
@@ -181,76 +246,74 @@ Tracks user login and sets `context.shopperId` value. Should be invoked when a u
 
 ```typescript
 const shopperId = "snapdev"
-window.searchspring.track.shopper.login({
-    data: {
-        id: shopperId
-    }
-})
+tracker.track.shopper.login({
+    id: shopperId
+});
 ```
 
 ### Cart View `track.cart.view`
 Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
 
 ```typescript
-window.searchspring.track.cart.view({
-    data: {
-        items: [
-            {
-                sku: 'product123',
-                childSku: 'product123_a',
-                qty: '1',
-                price: '9.99',
-            },
-            {
-                sku: 'product456',
-                childSku: 'product456_a',
-                qty: '2',
-                price: '10.99',
-            },
-        ]
-    }
-})
+tracker.track.cart.view({
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ]
+});
 ```
 
 ### Order Transaction `track.order.transaction`
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
-`orderId` - (optional) order id
+`order` - (optional) object containing the following
 
-`total` - (optional) sub total of all items
+`order.id` - (optional) order id
 
-`city` - (optional) city name
+`order.otal` - (optional) sub total of all items
 
-`state` - (optional) 2 digit state abbreviation (US only)
+`order.city` - (optional) city name
 
-`country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
+`order.state` - (optional) 2 digit state abbreviation (US only)
 
-`items` - required array of items - same object provided to `track.cart.view` event
+`order.country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
+
+`order.items` - required array of items - same object provided to `track.cart.view` event
 
 ```typescript
-window.searchspring.track.order.transaction({
-    data: {
-        orderId: '123456',
+tracker.track.order.transaction({
+    order: {
+        id: '123456',
         total: '31.97',
         city: 'Los Angeles',
         state: 'CA',
         country: 'US',
-        items: [
-            {
-                sku: 'product123',
-                childSku: 'product123_a',
-                qty: '1',
-                price: '9.99'
-            },
-            {
-                sku: 'product456',
-                childSku: 'product456_a',
-                qty: '2',
-                price: '10.99'
-            },
-        ]
-    }
-})
+    },
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ]
+});
 ```
 
 ## Tracker properties

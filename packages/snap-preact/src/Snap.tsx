@@ -177,9 +177,7 @@ export class Snap {
 		// autotrack shopper id from the context
 		if (this.config.context && this.config.context.shopper?.id) {
 			this.tracker.track.shopper.login({
-				data: {
-					id: this.config.context.shopper.id,
-				},
+				id: this.config.context.shopper.id,
 			});
 		}
 
