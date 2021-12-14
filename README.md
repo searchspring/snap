@@ -126,14 +126,14 @@ Executes `npm run dev` across all packages sequentially. All packages will be li
 npm run dev
 ```
 
-Demo store: http://localhost:4444
+Demo store: http://localhost:2222
 
 Webpack bundle analyzer: http://localhost:8888
 
 ## Docs
 Serves the contents of the root directory to allow you to view the docs
 
-Docs: http://localhost:2222/
+Docs: http://localhost:1111/
 
 ```shell
 npm run dev:docs

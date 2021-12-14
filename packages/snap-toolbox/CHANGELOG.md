@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **domtargeter.ts:** removing interactive so scripts loaded with defer tag wait for DOMContentLoaded ([10b9ca3](https://github.com/searchspring/snap/commit/10b9ca3ee8a3ad563f01e1b919d433c2f2fb725e))
+* **toolbox-getcontext:** making the function more robust and not requiring innerHTML ([f62a284](https://github.com/searchspring/snap/commit/f62a28416f5abe2daead261d108a8e39c0871b5f))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 

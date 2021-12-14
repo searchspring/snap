@@ -78,9 +78,7 @@ export interface CartViewEvent {
 	items: Product[];
 }
 
-export interface Product {
-	sku?: string;
-	childSku?: string;
+export interface Product extends ProductViewEvent {
 	qty: string | number;
 	price: string | number;
 }
@@ -91,7 +89,17 @@ export interface OrderTransactionEvent {
 	city?: string;
 	state?: string;
 	country?: string;
+	items: Product[];
+}
 
+export interface OrderTransactionData {
+	order?: {
+		id?: string | number;
+		total?: string | number;
+		city?: string;
+		state?: string;
+		country?: string;
+	};
 	items: Product[];
 }
 
@@ -134,17 +142,17 @@ export interface CustomBeaconEvent {
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
 	shopper: {
-		login: (details: { data: ShopperLoginEvent; siteId?: string }) => BeaconEvent;
+		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent;
 	};
 	product: {
-		view: (details: { data: ProductViewEvent; siteId?: string }) => BeaconEvent;
-		click: (details: { data: ProductClickEvent; siteId?: string }) => BeaconEvent;
+		view: (data: ProductViewEvent, siteId?: string) => BeaconEvent;
+		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent;
 	};
 	cart: {
-		view: (details: { data: CartViewEvent; siteId?: string }) => BeaconEvent;
+		view: (data: CartViewEvent, siteId?: string) => BeaconEvent;
 	};
 	order: {
-		transaction: (details: { data: OrderTransactionEvent; siteId?: string }) => BeaconEvent;
+		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent;
 	};
 }
 

@@ -6,22 +6,34 @@ const universal = merge(common, {
 	mode: 'development',
 	entry: './src/universal.js',
 	output: {
-		filename: 'universal.bundle.js',
-		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
+		filename: 'bundle.js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: ['babel-loader'],
+				include: [/node_modules\/@searchspring/, path.resolve(__dirname, 'src'), path.resolve(__dirname, '../')],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									browserslistEnv: 'universal',
+								},
+							],
+						],
+					},
+				},
 			},
 		],
 	},
 	devServer: {
-		https: true,
-		port: 4444,
+		server: 'https',
+		port: 2222,
 		hot: true,
 		allowedHosts: 'all',
 		headers: {
@@ -35,27 +47,45 @@ const universal = merge(common, {
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
+		client: {
+			overlay: {
+				errors: true,
+				warnings: false,
+			},
+		},
 	},
+	devtool: 'source-map',
 });
 
 const modern = merge(common, {
 	mode: 'development',
 	entry: './src/index.js',
 	output: {
-		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
+		filename: 'modern.bundle.js',
+		chunkFilename: 'modern.bundle.chunk.[fullhash:8].[id].js',
 	},
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									browserslistEnv: 'modern',
+								},
+							],
+						],
+					},
+				},
 			},
 		],
 	},
-	target: 'web',
 	devtool: 'source-map',
 });
 

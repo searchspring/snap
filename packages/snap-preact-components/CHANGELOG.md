@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **preact-component-image:** changing useRef to have a default empty string value ([e679aed](https://github.com/searchspring/snap/commit/e679aed6461efa7bd7371b44388d10743d28033a))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 

@@ -27,7 +27,7 @@ export class DomTargeter {
 
 		this.retarget();
 
-		if (/complete|interactive|loaded/.test(this.document.readyState)) {
+		if (/complete|loaded/.test(this.document.readyState)) {
 			// DOMContent has loaded - unhide targets
 			this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
 		} else {

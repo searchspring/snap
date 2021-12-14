@@ -47,7 +47,7 @@ describe('Tracker', () => {
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 
 		const shopperId = 'abc123';
-		const payload = { data: { id: shopperId } };
+		const payload = { id: shopperId };
 		await tracker.track.shopper.login(payload);
 
 		expect(tracker.context.shopperId).toStrictEqual(shopperId);
@@ -60,16 +60,14 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 
 		const payload = {
-			data: {
-				sku: 'abc123',
-				childSku: 'abc123_a',
-			},
+			sku: 'abc123',
+			childSku: 'abc123_a',
 		};
 		const beaconEvent = await tracker.track.product.view(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.PRODUCT);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -81,17 +79,15 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.product, 'click');
 
 		const payload = {
-			data: {
-				intellisuggestData: 'abc123',
-				intellisuggestSignature: 'def456',
-				href: '/test',
-			},
+			intellisuggestData: 'abc123',
+			intellisuggestSignature: 'def456',
+			href: '/test',
 		};
 		const beaconEvent = await tracker.track.product.click(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.CLICK);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.INTERACTION);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -103,28 +99,26 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
 		const payload = {
-			data: {
-				items: [
-					{
-						sku: 'abc123',
-						childSku: 'abc123_a',
-						qty: '1',
-						price: '9.99',
-					},
-					{
-						sku: 'def456',
-						childSku: 'def456_a',
-						qty: '2',
-						price: '10.99',
-					},
-				],
-			},
+			items: [
+				{
+					sku: 'abc123',
+					childSku: 'abc123_a',
+					qty: '1',
+					price: '9.99',
+				},
+				{
+					sku: 'def456',
+					childSku: 'def456_a',
+					qty: '2',
+					price: '10.99',
+				},
+			],
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -136,26 +130,24 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
 		const payload = {
-			data: {
-				items: [
-					{
-						childSku: 'abc123_a',
-						qty: '1',
-						price: '9.99',
-					},
-					{
-						childSku: 'def456_a',
-						qty: '2',
-						price: '10.99',
-					},
-				],
-			},
+			items: [
+				{
+					childSku: 'abc123_a',
+					qty: '1',
+					price: '9.99',
+				},
+				{
+					childSku: 'def456_a',
+					qty: '2',
+					price: '10.99',
+				},
+			],
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -167,27 +159,34 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
 		const payload = {
-			data: {
-				orderId: '123456',
+			order: {
+				id: '123456',
 				total: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
-				items: [
-					{
-						sku: 'abc123',
-						childSku: 'abc123_a',
-						qty: '1',
-						price: '9.99',
-					},
-				],
 			},
+			items: [
+				{
+					sku: 'abc123',
+					childSku: 'abc123_a',
+					qty: '1',
+					price: '9.99',
+				},
+			],
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual({
+			orderId: payload.order.id,
+			total: payload.order.total,
+			city: payload.order.city,
+			state: payload.order.state,
+			country: payload.order.country,
+			items: payload.items,
+		});
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -199,27 +198,34 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
 		const payload = {
-			data: {
-				orderId: '123456',
+			order: {
+				id: '123456',
 				total: '9.99',
 				city: 'Los Angeles',
 				state: 'CA',
 				country: 'US',
-				items: [
-					{
-						sku: 'abc123',
-						childSku: 'abc123_a',
-						qty: '1',
-						price: '9.99',
-					},
-				],
 			},
+			items: [
+				{
+					sku: 'abc123',
+					childSku: 'abc123_a',
+					qty: '1',
+					price: '9.99',
+				},
+			],
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
 		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
 		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload.data);
+		expect(beaconEvent.event).toStrictEqual({
+			orderId: payload.order.id,
+			total: payload.order.total,
+			city: payload.order.city,
+			state: payload.order.state,
+			country: payload.order.country,
+			items: payload.items,
+		});
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);

@@ -10,6 +10,7 @@ export * from './components/Atoms/Loading';
 export * from './components/Atoms/Merchandising';
 export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
+export * from './components/Atoms/Skeleton';
 
 // MOLECULES
 export * from './components/Molecules/Carousel';
