@@ -28,7 +28,7 @@ export class SortingStore {
 					if (!search?.query) {
 						return option.type == 'field';
 					}
-					if (option.field) return option;
+					return option;
 				})
 				.filter(
 					(option, idx, self) =>
