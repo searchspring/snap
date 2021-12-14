@@ -38,7 +38,7 @@ const controller = new SearchController(config, {
 });
 
 console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
-console.log(tracker.track.product.click === tracker.track.product.click) // true
+console.log(tracker.track.product.click === window.searchspring.track.product.click) // true
 ```
 
 ## Standalone usage
