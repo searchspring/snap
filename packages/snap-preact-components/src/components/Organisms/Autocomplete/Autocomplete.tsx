@@ -400,7 +400,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideTerms && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, controller })
+								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (

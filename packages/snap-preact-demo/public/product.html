@@ -223,14 +223,11 @@
             </div>
         </div>
     </footer>
-    <script>
-       try {
-            window.searchspring.track.product.view({
-                data: {
-                    sku: "C-AD-W1-1869P"
-                }
-            })
-        } catch (e){}
+
+    <script type="searchspring/track/product/view">
+        item = {
+            sku: "C-AD-W1-1869P"
+        };
     </script>
 </body>
 

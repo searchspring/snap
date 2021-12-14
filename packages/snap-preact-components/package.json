@@ -60,7 +60,6 @@
 		"@testing-library/preact": "^2.0.1",
 		"@testing-library/user-event": "^13.2.1",
 		"mobx-react": "^7.2.0",
-		"node-sass": "^6.0.1",
 		"preact": "^10.5.14",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",

@@ -44,7 +44,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
 
-	const prevSrcRef = useRef();
+	const prevSrcRef = useRef('');
 	useEffect(() => {
 		prevSrcRef.current = src;
 	});
