@@ -133,11 +133,13 @@ const OUTPUT_FILE = 'snap-docs.json';
 			const url = `./packages/${packagePath}`;
 			const componentLibrary = `${lang[0].toUpperCase() + lang.slice(1)}`; // Preact
 			let label = `${componentLibrary}`;
+			let hierarchyLabel = componentName;
 
 			switch (grouping) {
 				case 'components': {
 					// Preact Component: Results
 					label += ` Component: ${componentName}`;
+					hierarchyLabel = `${type} > ${componentName}`;
 					break;
 				}
 				case 'documentation': {
@@ -157,7 +159,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 			return {
 				label,
 				displayName: componentName,
-				hierarchyLabel: componentName,
+				hierarchyLabel,
 				route: `/${route}?params=${encodedParams}`,
 				type: 'iframe',
 				url,
