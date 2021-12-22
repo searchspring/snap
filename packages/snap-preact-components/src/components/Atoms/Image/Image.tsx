@@ -32,6 +32,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	const props: ImageProps = {
 		// default props
 		fallback: FALLBACK_IMAGE_URL,
+		lazy: true,
 		// global theme
 		...globalTheme?.components?.image,
 		// props
@@ -39,7 +40,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, fallback, hoverSrc, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
@@ -65,7 +66,7 @@ export function Image(properties: ImageProps): JSX.Element {
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}
 					title={alt}
-					loading="lazy"
+					loading={lazy ? 'lazy' : undefined}
 					onLoad={() => {
 						setVisibility('visible');
 						onLoad && onLoad();
@@ -95,4 +96,5 @@ export interface ImageProps extends ComponentProps {
 	onMouseOut?: (e: MouseEvent) => void;
 	onLoad?: () => void;
 	onClick?: (e: MouseEvent) => void;
+	lazy?: boolean;
 }
