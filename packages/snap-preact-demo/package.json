@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.13.0",
+	"version": "0.13.1",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -18,8 +18,8 @@
 		"lighthouse": "lhci autorun --throttling.cpuSlowdownMultiplier=2.2"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.13.0",
-		"@searchspring/snap-preact-components": "^0.13.0",
+		"@searchspring/snap-preact": "^0.13.1",
+		"@searchspring/snap-preact-components": "^0.13.1",
 		"deepmerge": "^4.2.2",
 		"mobx": "^6.3.3",
 		"mobx-react": "^7.2.0",
