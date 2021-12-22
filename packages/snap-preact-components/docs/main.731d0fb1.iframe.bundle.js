@@ -1893,6 +1893,23 @@
 							"<Image src={searchResponse.results.mappings.core.imageUrl} hoverSrc={searchResponse.results.mappings.core.hoverImg} alt='image' />\n"
 						)
 					),
+					(0, esm.kt)('h3', { id: 'lazy' }, 'lazy'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'lazy'),
+						' prop is used to disable the lazy loading feature. Enabled by default. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} lazy={false} alt='image' />\n"
+						)
+					),
 					(0, esm.kt)('h3', { id: 'events' }, 'Events'),
 					(0, esm.kt)('h4', { id: 'onmouseover' }, 'onMouseOver'),
 					(0, esm.kt)(
@@ -1989,6 +2006,12 @@
 							defaultValue: Image.a,
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'string' } },
 							control: { type: 'text' },
+						},
+						lazy: {
+							defaultValue: !0,
+							description: 'Image lazy loading',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
+							control: { type: 'boolean' },
 						},
 						hoverSrc: { description: 'Image onHover url', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 						onLoad: { description: 'Image loaded event handler', table: { type: { summary: 'function' } }, action: 'onLoad' },
@@ -2105,7 +2128,7 @@
 					_properties$theme$com,
 					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_15__.u)(),
 					props = Object.assign(
-						{ fallback: FALLBACK_IMAGE_URL },
+						{ fallback: FALLBACK_IMAGE_URL, lazy: !0 },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 							? void 0
 							: _globalTheme$componen.image,
@@ -2121,6 +2144,7 @@
 					src = props.src,
 					fallback = props.fallback,
 					hoverSrc = props.hoverSrc,
+					lazy = props.lazy,
 					_onMouseOver = props.onMouseOver,
 					_onMouseOut = props.onMouseOut,
 					_onLoad = props.onLoad,
@@ -2152,7 +2176,7 @@
 								src: (isHovering ? hoverSrc : src) || fallback,
 								alt,
 								title: alt,
-								loading: 'lazy',
+								loading: lazy ? 'lazy' : void 0,
 								onLoad: function onLoad() {
 									setVisibility('visible'), _onLoad && _onLoad();
 								},
@@ -20117,6 +20141,10 @@
 					HybridAPI
 				);
 			})(API);
+			function hashParams(params) {
+				if ('object' != typeof params) throw new Error('function requires an object');
+				return JSON.stringify(params);
+			}
 			function charsParams(params) {
 				if ('object' != typeof params) throw new Error('function requires an object');
 				return Object.keys(params).reduce(function (count, key) {
@@ -20365,7 +20393,7 @@
 												otherParams,
 												_ref2,
 												tag,
-												siteId,
+												paramHash,
 												paramBatch,
 												deferred,
 												_this3 = this;
@@ -20386,13 +20414,13 @@
 																return _context3.abrupt('return');
 															case 4:
 																return (
-																	(siteId = (null == otherParams ? void 0 : otherParams.siteId) || this.configuration.getSiteId()),
-																	(this.batches[siteId] = this.batches[siteId] || {
+																	(paramHash = hashParams(otherParams)),
+																	(this.batches[paramHash] = this.batches[paramHash] || {
 																		timeout: null,
 																		request: Object.assign({ tags: [] }, otherParams),
 																		deferreds: [],
 																	}),
-																	(paramBatch = this.batches[siteId]),
+																	(paramBatch = this.batches[paramHash]),
 																	(deferred = new Deferred()),
 																	paramBatch.request.tags.push(tag),
 																	paramBatch.deferreds.push(deferred),
@@ -20427,7 +20455,7 @@
 																											def.reject(_context2.t0);
 																										});
 																								case 12:
-																									delete _this3.batches[siteId];
+																									delete _this3.batches[paramHash];
 																								case 13:
 																								case 'end':
 																									return _context2.stop();
@@ -23168,7 +23196,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.1' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_defineProperties(target, props) {
@@ -23200,7 +23228,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.0');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.1');
 						}),
 						(this.track = {
 							event: function event(payload) {
