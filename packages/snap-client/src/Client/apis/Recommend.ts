@@ -1,5 +1,7 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
+import { hashParams } from '../utils/hashParams';
 import { charsParams } from '../utils/charsParams';
+import type { ParameterObject } from '../../types';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
 export type RecommendRequestModel = {
@@ -78,7 +80,7 @@ export type RecommendCombinedResponseModel = ProfileResponseModel & { results: S
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	batches: {
-		[siteId: string]: {
+		[paramHash: string]: {
 			timeout: number;
 			request: any;
 			deferreds?: Deferred[];
@@ -109,9 +111,9 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		const siteId = otherParams?.siteId || this.configuration.getSiteId();
-		this.batches[siteId] = this.batches[siteId] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
-		const paramBatch = this.batches[siteId];
+		const paramHash = hashParams(otherParams as ParameterObject);
+		this.batches[paramHash] = this.batches[paramHash] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		const paramBatch = this.batches[paramHash];
 
 		const deferred = new Deferred();
 
@@ -138,7 +140,7 @@ export class RecommendAPI extends API {
 				});
 			}
 
-			delete this.batches[siteId];
+			delete this.batches[paramHash];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
