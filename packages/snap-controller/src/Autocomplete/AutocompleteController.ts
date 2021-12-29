@@ -11,6 +11,9 @@ import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 const INPUT_DELAY = 200;
+const KEY_ENTER = 13;
+const KEY_ESCAPE = 27;
+const PARAM_ORIGINAL_QUERY = 'oq';
 
 const defaultConfig: AutocompleteControllerConfig = {
 	id: 'autocomplete',
@@ -170,16 +173,28 @@ export class AutocompleteController extends AbstractController {
 	handlers = {
 		input: {
 			enterKey: async (e: KeyboardEvent): Promise<void> => {
-				if (e.keyCode == 13) {
+				if (e.keyCode == KEY_ENTER) {
 					const actionUrl = url(this.config.action);
 					const input = e.target as HTMLInputElement;
 
-					let query = input.value;
-					if (!this.store.loading && this.store.search.originalQuery) {
-						query = this.store.search.query.string;
-						actionUrl.params.query['oq'] = this.store.search.originalQuery.string;
+					// when spellCorrection is enabled
+					if (this.config.globals?.search?.query?.spellCorrection) {
+						// wait until loading is complete before submission
+						// TODO make this better
+						await timeout(INPUT_DELAY + 1);
+						while (this.store.loading) {
+							await timeout(INPUT_DELAY);
+						}
+
+						// use corrected query and originalQuery
+						if (this.store.search.originalQuery) {
+							input.value = this.store.search.query.string;
+							actionUrl.params.query[PARAM_ORIGINAL_QUERY] = this.store.search.originalQuery.string;
+						}
 					}
-					actionUrl.params.query[input.name || (this.urlManager.getTranslatorConfig().queryParameter as string)] = query;
+
+					const inputParam = input.name || (this.urlManager.getTranslatorConfig().queryParameter as string);
+					actionUrl.params.query[inputParam] = input.value;
 
 					// TODO expected spell correct behavior queryAssumption
 
@@ -203,7 +218,7 @@ export class AutocompleteController extends AbstractController {
 				}
 			},
 			escKey: (e: KeyboardEvent): void => {
-				if (e.keyCode == 27) {
+				if (e.keyCode == KEY_ESCAPE) {
 					(e.target as HTMLInputElement).blur();
 					this.setFocused();
 				}
@@ -222,15 +237,22 @@ export class AutocompleteController extends AbstractController {
 
 				e.preventDefault();
 
-				let query = input.value;
-				if (this.store.search.originalQuery) {
-					query = this.store.search.query.string;
-					addHiddenFormInput(form, 'oq', this.store.search.originalQuery.string);
+				// when spellCorrection is enabled
+				if (this.config.globals?.search?.query?.spellCorrection) {
+					// wait until loading is complete before submission
+					// TODO make this better
+					await timeout(INPUT_DELAY + 1);
+					while (this.store.loading) {
+						await timeout(INPUT_DELAY);
+					}
+
+					if (this.store.search.originalQuery) {
+						input.value = this.store.search.query.string;
+						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
+					}
 				}
 
 				// TODO expected spell correct behavior queryAssumption
-
-				input.value = query;
 
 				try {
 					await this.eventManager.fire('beforeSubmit', {
@@ -250,6 +272,9 @@ export class AutocompleteController extends AbstractController {
 				form.submit();
 			},
 			keyUp: (e: KeyboardEvent): void => {
+				// ignore enter and escape keys
+				if (e?.keyCode == KEY_ENTER || e?.keyCode == KEY_ESCAPE) return;
+
 				// return focus on keyup if it was lost
 				if (e.isTrusted && this.store.state.focusedInput !== (e.target as HTMLInputElement)) {
 					this.setFocused(e.target as HTMLInputElement);
@@ -517,4 +542,10 @@ function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) 
 	inputElem.name = name;
 	inputElem.value = value;
 	form.append(inputElem);
+}
+
+async function timeout(time: number): Promise<void> {
+	return new Promise((resolve) => {
+		window.setTimeout(resolve, time);
+	});
 }
