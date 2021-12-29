@@ -97,6 +97,13 @@ let config = {
 							limit: 5,
 						},
 					},
+					globals: {
+						search: {
+							query: {
+								spellCorrection: true,
+							},
+						},
+					},
 				},
 				targeters: [
 					{
