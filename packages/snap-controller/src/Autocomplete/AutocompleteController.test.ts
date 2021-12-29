@@ -11,6 +11,8 @@ import { AutocompleteController } from './AutocompleteController';
 import { MockClient } from '../__mocks__/MockClient';
 import { SearchData } from '../__mocks__/SearchData';
 
+const INPUT_DELAY = 200;
+
 let acConfig = {
 	id: 'ac',
 	selector: '#search_query',
@@ -289,8 +291,8 @@ describe('Autocomplete Controller', () => {
 		inputEl.dispatchEvent(new Event('focus'));
 		inputEl.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 })); // Enter key
 
-		// timeout needed due to beforeSubmit event
-		await new Promise((resolve) => setTimeout(resolve));
+		// timeout needed due to beforeSubmit event and awaiting further input
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY + 1));
 		expect(window.location.href).toBe(`${acConfig.action}?search_query=${inputEl.value}`);
 	});
 });

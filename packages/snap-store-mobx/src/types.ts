@@ -48,6 +48,13 @@ export type AutocompleteStoreConfig = StoreConfig & {
 		personalization?: {
 			disabled: boolean;
 		};
+		search?: {
+			[any: string]: unknown;
+			query?: {
+				[any: string]: unknown;
+				spellCorrection?: boolean;
+			};
+		};
 		[any: string]: unknown;
 	};
 	selector: string;
