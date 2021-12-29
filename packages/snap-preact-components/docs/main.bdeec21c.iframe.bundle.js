@@ -23196,7 +23196,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.1' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.2' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_defineProperties(target, props) {
@@ -23228,7 +23228,7 @@
 								}));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.1');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.2');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23794,57 +23794,80 @@
 									enterKey:
 										((_enterKey = AutocompleteController_asyncToGenerator(
 											regeneratorRuntime.mark(function _callee(e) {
-												var actionUrl, input, query, newUrl;
+												var _this$config$globals, _this$config$globals$, _this$config$globals$2, actionUrl, input, inputParam, newUrl;
 												return regeneratorRuntime.wrap(
 													function _callee$(_context) {
 														for (;;)
 															switch ((_context.prev = _context.next)) {
 																case 0:
 																	if (13 != e.keyCode) {
-																		_context.next = 22;
+																		_context.next = 30;
 																		break;
 																	}
-																	return (
-																		(actionUrl = url(_this.config.action)),
+																	if (
+																		((actionUrl = url(_this.config.action)),
 																		(input = e.target),
-																		(query = input.value),
-																		!_this.store.loading &&
-																			_this.store.search.originalQuery &&
-																			((query = _this.store.search.query.string),
-																			(actionUrl.params.query.oq = _this.store.search.originalQuery.string)),
-																		(actionUrl.params.query[input.name || _this.urlManager.getTranslatorConfig().queryParameter] = query),
-																		(_context.prev = 6),
-																		(_context.next = 9),
+																		null === (_this$config$globals = _this.config.globals) ||
+																			void 0 === _this$config$globals ||
+																			null === (_this$config$globals$ = _this$config$globals.search) ||
+																			void 0 === _this$config$globals$ ||
+																			null === (_this$config$globals$2 = _this$config$globals$.query) ||
+																			void 0 === _this$config$globals$2 ||
+																			!_this$config$globals$2.spellCorrection)
+																	) {
+																		_context.next = 12;
+																		break;
+																	}
+																	return (_context.next = 6), timeout(201);
+																case 6:
+																	if (!_this.store.loading) {
+																		_context.next = 11;
+																		break;
+																	}
+																	return (_context.next = 9), timeout(200);
+																case 9:
+																	_context.next = 6;
+																	break;
+																case 11:
+																	_this.store.search.originalQuery &&
+																		((input.value = _this.store.search.query.string),
+																		(actionUrl.params.query.oq = _this.store.search.originalQuery.string));
+																case 12:
+																	return (
+																		(inputParam = input.name || _this.urlManager.getTranslatorConfig().queryParameter),
+																		(actionUrl.params.query[inputParam] = input.value),
+																		(_context.prev = 14),
+																		(_context.next = 17),
 																		_this.eventManager.fire('beforeSubmit', {
 																			controller: AutocompleteController_assertThisInitialized(_this),
 																			input,
 																		})
 																	);
-																case 9:
-																	_context.next = 20;
+																case 17:
+																	_context.next = 28;
 																	break;
-																case 11:
+																case 19:
 																	if (
-																		((_context.prev = 11),
-																		(_context.t0 = _context.catch(6)),
+																		((_context.prev = 19),
+																		(_context.t0 = _context.catch(14)),
 																		'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 																	) {
-																		_context.next = 18;
+																		_context.next = 26;
 																		break;
 																	}
 																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context.abrupt('return');
-																case 18:
+																case 26:
 																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context.t0);
-																case 20:
+																case 28:
 																	(newUrl = actionUrl.url()), (window.location.href = newUrl);
-																case 22:
+																case 30:
 																case 'end':
 																	return _context.stop();
 															}
 													},
 													_callee,
 													null,
-													[[6, 11]]
+													[[14, 19]]
 												);
 											})
 										)),
@@ -23863,53 +23886,75 @@
 									formSubmit:
 										((_formSubmit = AutocompleteController_asyncToGenerator(
 											regeneratorRuntime.mark(function _callee2(e) {
-												var form, input, query;
+												var _this$config$globals2, _this$config$globals3, _this$config$globals4, form, input;
 												return regeneratorRuntime.wrap(
 													function _callee2$(_context2) {
 														for (;;)
 															switch ((_context2.prev = _context2.next)) {
 																case 0:
-																	return (
-																		(form = e.target),
+																	if (
+																		((form = e.target),
 																		(input = form.querySelector('input[ss-autocomplete-input]')),
 																		e.preventDefault(),
-																		(query = input.value),
-																		_this.store.search.originalQuery &&
-																			((query = _this.store.search.query.string),
-																			addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string)),
-																		(input.value = query),
-																		(_context2.prev = 6),
-																		(_context2.next = 9),
+																		null === (_this$config$globals2 = _this.config.globals) ||
+																			void 0 === _this$config$globals2 ||
+																			null === (_this$config$globals3 = _this$config$globals2.search) ||
+																			void 0 === _this$config$globals3 ||
+																			null === (_this$config$globals4 = _this$config$globals3.query) ||
+																			void 0 === _this$config$globals4 ||
+																			!_this$config$globals4.spellCorrection)
+																	) {
+																		_context2.next = 12;
+																		break;
+																	}
+																	return (_context2.next = 6), timeout(201);
+																case 6:
+																	if (!_this.store.loading) {
+																		_context2.next = 11;
+																		break;
+																	}
+																	return (_context2.next = 9), timeout(200);
+																case 9:
+																	_context2.next = 6;
+																	break;
+																case 11:
+																	_this.store.search.originalQuery &&
+																		((input.value = _this.store.search.query.string),
+																		addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
+																case 12:
+																	return (
+																		(_context2.prev = 12),
+																		(_context2.next = 15),
 																		_this.eventManager.fire('beforeSubmit', {
 																			controller: AutocompleteController_assertThisInitialized(_this),
 																			input,
 																		})
 																	);
-																case 9:
-																	_context2.next = 20;
+																case 15:
+																	_context2.next = 26;
 																	break;
-																case 11:
+																case 17:
 																	if (
-																		((_context2.prev = 11),
-																		(_context2.t0 = _context2.catch(6)),
+																		((_context2.prev = 17),
+																		(_context2.t0 = _context2.catch(12)),
 																		'cancelled' != (null === _context2.t0 || void 0 === _context2.t0 ? void 0 : _context2.t0.message))
 																	) {
-																		_context2.next = 18;
+																		_context2.next = 24;
 																		break;
 																	}
 																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context2.abrupt('return');
-																case 18:
+																case 24:
 																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context2.t0);
-																case 20:
+																case 26:
 																	form.submit();
-																case 21:
+																case 27:
 																case 'end':
 																	return _context2.stop();
 															}
 													},
 													_callee2,
 													null,
-													[[6, 11]]
+													[[12, 17]]
 												);
 											})
 										)),
@@ -23917,21 +23962,23 @@
 											return _formSubmit.apply(this, arguments);
 										}),
 									keyUp: function keyUp(e) {
-										e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
-										var value = e.target.value;
-										if (_this.store.state.input != value || !_this.store.loaded) {
-											if (((_this.store.state.input = value), _this.config.settings.syncInputs))
-												document.querySelectorAll(_this.config.selector).forEach(function (input) {
-													input.value = value;
-												});
-											clearTimeout(_this.handlers.input.timeoutDelay),
-												value
-													? (_this.handlers.input.timeoutDelay = setTimeout(function () {
-															_this.store.state.locks.terms.unlock(),
-																_this.store.state.locks.facets.unlock(),
-																_this.urlManager.set({ query: _this.store.state.input }).go();
-													  }, 200))
-													: (_this.store.reset(), _this.urlManager.reset().go());
+										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
+											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
+											var value = e.target.value;
+											if (_this.store.state.input != value || !_this.store.loaded) {
+												if (((_this.store.state.input = value), _this.config.settings.syncInputs))
+													document.querySelectorAll(_this.config.selector).forEach(function (input) {
+														input.value = value;
+													});
+												clearTimeout(_this.handlers.input.timeoutDelay),
+													value
+														? (_this.handlers.input.timeoutDelay = setTimeout(function () {
+																_this.store.state.locks.terms.unlock(),
+																	_this.store.state.locks.facets.unlock(),
+																	_this.urlManager.set({ query: _this.store.state.input }).go();
+														  }, 200))
+														: (_this.store.reset(), _this.urlManager.reset().go());
+											}
 										}
 									},
 									timeoutDelay: void 0,
@@ -24243,18 +24290,18 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$globals,
-										_this$config$globals$,
+									var _this$config$globals5,
+										_this$config$globals6,
 										urlState = this.urlManager.state,
 										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
 										userId = this.tracker.getUserId().userId;
 									if (
 										(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
-										null === (_this$config$globals = this.config.globals) ||
-											void 0 === _this$config$globals ||
-											null === (_this$config$globals$ = _this$config$globals.personalization) ||
-											void 0 === _this$config$globals$ ||
-											!_this$config$globals$.disabled)
+										null === (_this$config$globals5 = this.config.globals) ||
+											void 0 === _this$config$globals5 ||
+											null === (_this$config$globals6 = _this$config$globals5.personalization) ||
+											void 0 === _this$config$globals6 ||
+											!_this$config$globals6.disabled)
 									) {
 										var _this$tracker$getShop,
 											cartItems = this.tracker.getCartItems();
@@ -24442,6 +24489,30 @@
 			function addHiddenFormInput(form, name, value) {
 				var inputElem = document.createElement('input');
 				(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
+			}
+			function timeout(_x10) {
+				return _timeout.apply(this, arguments);
+			}
+			function _timeout() {
+				return (_timeout = AutocompleteController_asyncToGenerator(
+					regeneratorRuntime.mark(function _callee10(time) {
+						return regeneratorRuntime.wrap(function _callee10$(_context10) {
+							for (;;)
+								switch ((_context10.prev = _context10.next)) {
+									case 0:
+										return _context10.abrupt(
+											'return',
+											new Promise(function (resolve) {
+												window.setTimeout(resolve, time);
+											})
+										);
+									case 1:
+									case 'end':
+										return _context10.stop();
+								}
+						}, _callee10);
+					})
+				)).apply(this, arguments);
 			}
 			function MerchandisingStore_toConsumableArray(arr) {
 				return (
