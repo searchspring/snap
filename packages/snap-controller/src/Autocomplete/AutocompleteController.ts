@@ -280,7 +280,7 @@ export class AutocompleteController extends AbstractController {
 					this.setFocused(e.target as HTMLInputElement);
 				}
 
-				const value = (e.target as HTMLInputElement).value;
+				const value = (e.target as HTMLInputElement).value.trim();
 
 				// prevent search when value is unchanged
 				if (this.store.state.input == value && this.store.loaded) {
