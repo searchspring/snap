@@ -101,15 +101,10 @@ export function getSearchParams(state): Record<string, any> {
 						value,
 					});
 				} else if (typeof value.low != 'undefined' && typeof value.high != 'undefined') {
-					let correctedValue = { ...value };
-					if (value.low == null) {
-						correctedValue.low = 0;
-					}
-
 					params.filters.push({
 						type: 'range',
 						field: field,
-						value: correctedValue,
+						value,
 					});
 				}
 			});
