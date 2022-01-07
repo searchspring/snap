@@ -52,7 +52,7 @@ export class HybridAPI extends API {
 		const suggestResults = await suggestRequester.getSuggest(suggestParams);
 		const transformedSuggestResults = transformSuggestResponse(suggestResults);
 
-		const q = transformedSuggestResults.correctedQuery || (suggestResults.suggested || {}).text || suggestResults.query;
+		const q = (suggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || suggestResults.query;
 
 		const queryParameters = {
 			...legacyRequestParameters,

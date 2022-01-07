@@ -196,7 +196,7 @@ export const BranchOverride = (props: { branch: string; cookieName: string; bund
 					</div>
 
 					<div
-						style={`border-radius: 5px; padding: 6px; height: 100%; line-height: 14px; text-align: center; cursor: pointer; font-size: 11px; border: ${themes[themeName].top.button.border}; float: right; margin-right: 14px;`}
+						style={`border-radius: 5px; padding: 6px; height: 100%; line-height: 14px; text-align: center; cursor: pointer; font-size: 10px; border: ${themes[themeName].top.button.border}; float: right; margin-right: 14px;`}
 						onClick={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
@@ -210,9 +210,9 @@ export const BranchOverride = (props: { branch: string; cookieName: string; bund
 					</div>
 				</div>
 
-				<div style="padding: 0px 15px;">
+				<div style="padding: 0px 15px; font-size: 12px;">
 					<span
-						style={`font-weight: bold; font-style: ${themes[themeName].details.branch.style}; color: ${themes[themeName].details.branch.color}; font-size: 16px; line-height: 20px; display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;`}
+						style={`font-weight: bold; font-style: ${themes[themeName].details.branch.style}; color: ${themes[themeName].details.branch.color}; font-size: 14px; line-height: 20px; display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;`}
 					>
 						{details == 'failure' ? (
 							<>
