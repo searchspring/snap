@@ -1,363 +1,119 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@searchspring/snap-preact</title>
-	<meta name="description" content="Documentation for @searchspring/snap-preact">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@searchspring/snap-preact</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>@searchspring/snap-preact</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#snap-preact" id="snap-preact" style="color: inherit; text-decoration: none;">
-					<h1>Snap Preact</h1>
-				</a>
-				<p><a href="https://www.npmjs.com/package/@searchspring/snap-preact"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-preact.svg?style=flat"></a></p>
-				<p>Snap Preact is an abstraction layer that provides a config based interface for creating a Searchspring integration quickly.</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>To install the <code>snap-preact</code> package and it&#39;s dependencies:</p>
-				<pre><code class="language-bash"><span style="color: #000000">npm install --save @searchspring/snap-preact</span>
-</code></pre>
-				<a href="#instantiation" id="instantiation" style="color: inherit; text-decoration: none;">
-					<h2>Instantiation</h2>
-				</a>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Snap</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@searchspring/snap-preact&#039;</span><span style="color: #000000">;</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@searchspring/snap-preact</title><meta name="description" content="Documentation for @searchspring/snap-preact"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@searchspring/snap-preact</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@searchspring/snap-preact</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#snap-preact" id="snap-preact" style="color: inherit; text-decoration: none;">
+  <h1>Snap Preact</h1>
+</a>
+<p><a href="https://www.npmjs.com/package/@searchspring/snap-preact"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-preact.svg?style=flat"></a></p>
+<p>Snap Preact is an abstraction layer that provides a config based interface for creating a Searchspring integration quickly.</p>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">snap</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Snap</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">);</span>
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>To install the <code>snap-preact</code> package and it&#39;s dependencies:</p>
+<pre><code class="language-bash"><span class="hl-0">npm install --save @searchspring/snap-preact</span>
 </code></pre>
-				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
-					<h2>Configuration</h2>
-				</a>
-				<p>A configuration object provided to Snap will determin the services that will be created. </p>
-				<p>Full example:</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">parameters:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">core:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                </span><span style="color: #001080">query:</span><span style="color: #000000"> { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">    </span><span style="color: #001080">client:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">globals:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;xxxxxx&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">    </span><span style="color: #001080">controllers:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">search:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">settings:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">redirects:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                            </span><span style="color: #001080">merchandising:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        },</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                },</span>
-<span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                    {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-content&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                    {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-sidebar&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                ],</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        ],</span>
-<span style="color: #000000">        </span><span style="color: #001080">autocomplete:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;autocomplete&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input.searchspring-ac&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">settings:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">trending:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                            </span><span style="color: #001080">limit:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        },</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                },</span>
-<span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                    {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input.searchspring-ac&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Autocomplete</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                ],</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        ],</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">};</span>
-</code></pre>
-				<a href="#configclient" id="configclient" style="color: inherit; text-decoration: none;">
-					<h3>config.client</h3>
-				</a>
-				<p>A single client instance will be created and shared across all services using the provided config. </p>
-				<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-client">@searchspring/snap-client</a> documentation for full client config options.</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">client:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">globals:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">siteId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;xxxxxx&#039;</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<a href="#configinstantiators" id="configinstantiators" style="color: inherit; text-decoration: none;">
-					<h3>config.instantiators</h3>
-				</a>
-				<p>The <code>instantiators</code> object must be defined if any Recommendation controllers have also been defined via <code>config.controllers.recommendation</code></p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">instantiators:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">recommendation:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">components:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                </span><span style="color: #795E26">Standard</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Standard</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                </span><span style="color: #001080">branch:</span><span style="color: #000000"> </span><span style="color: #0070C1">BRANCHNAME</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #001080">services:</span><span style="color: #000000"> {}</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">    </span><span style="color: #001080">controllers:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">recommendation:</span><span style="color: #000000"> []</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<p><code>recommendation.components</code> - required mapping of recommendation components.</p>
-				<p><code>recommendation.config.branch</code> - required current git branch name. Defined via webpack during bundle build:</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">webpack</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;webpack&#039;</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">childProcess</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;child_process&#039;</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">branchName</span><span style="color: #000000"> = </span><span style="color: #001080">childProcess</span><span style="color: #000000">.</span><span style="color: #795E26">execSync</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;git rev-parse --abbrev-ref HEAD&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">toString</span><span style="color: #000000">().</span><span style="color: #795E26">trim</span><span style="color: #000000">();</span>
 
-<span style="color: #267F99">module</span><span style="color: #000000">.</span><span style="color: #267F99">exports</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">webpack</span><span style="color: #000000">.</span><span style="color: #795E26">DefinePlugin</span><span style="color: #000000">({</span>
-<span style="color: #000000">            </span><span style="color: #001080">BRANCHNAME:</span><span style="color: #000000"> </span><span style="color: #A31515">`&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">branchName</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;`</span><span style="color: #000000">,</span>
-<span style="color: #000000">        }),</span>
-<span style="color: #000000">    ],</span>
-<span style="color: #000000">}</span>
+<a href="#instantiation" id="instantiation" style="color: inherit; text-decoration: none;">
+  <h2>Instantiation</h2>
+</a>
+<pre><code class="language-typescript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">Snap</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;@searchspring/snap-preact&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">snap</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">Snap</span><span class="hl-0">(</span><span class="hl-2">config</span><span class="hl-0">);</span>
 </code></pre>
-				<p><code>recommendation.selector</code> - optional selector to target recommendation instances if using a non-standard installation. Default selector: <code>script[type=&quot;searchspring/recommend&quot;]</code></p>
-				<p><code>recommendation.services</code> - optional object of <code>ControllerServices</code> </p>
-				<a href="#configurl" id="configurl" style="color: inherit; text-decoration: none;">
-					<h3>config.url</h3>
-				</a>
-				<p>The <code>url</code> object contains the config provided to each <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url"><code>UrlTranslator</code></a> created by Snap Preact.</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">parameters:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">core:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                </span><span style="color: #001080">query:</span><span style="color: #000000"> { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">                </span><span style="color: #001080">page:</span><span style="color: #000000"> { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;p&#039;</span><span style="color: #000000"> }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">    },</span>
-<span style="color: #000000">}</span>
+
+<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+  <h2>Configuration</h2>
+</a>
+<p>A configuration object provided to Snap will determin the services that will be created. </p>
+<p>Full example:</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">url:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">parameters:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-2">core:</span><span class="hl-0"> {</span><br/><span class="hl-0">                </span><span class="hl-2">query:</span><span class="hl-0"> { </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&#39;search&#39;</span><span class="hl-0"> },</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-2">client:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">globals:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-2">siteId:</span><span class="hl-0"> </span><span class="hl-3">&#39;xxxxxx&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-2">controllers:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">search:</span><span class="hl-0"> [</span><br/><span class="hl-0">            {</span><br/><span class="hl-0">                </span><span class="hl-2">config:</span><span class="hl-0"> {</span><br/><span class="hl-0">                    </span><span class="hl-2">id:</span><span class="hl-0"> </span><span class="hl-3">&#39;search&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                    </span><span class="hl-2">settings:</span><span class="hl-0"> {</span><br/><span class="hl-0">                        </span><span class="hl-2">redirects:</span><span class="hl-0"> {</span><br/><span class="hl-0">                            </span><span class="hl-2">merchandising:</span><span class="hl-0"> </span><span class="hl-4">false</span><span class="hl-0">,</span><br/><span class="hl-0">                        },</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                },</span><br/><span class="hl-0">                </span><span class="hl-2">targets:</span><span class="hl-0"> [</span><br/><span class="hl-0">                    {</span><br/><span class="hl-0">                        </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;#searchspring-content&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-6">component</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Content</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-2">hideTarget:</span><span class="hl-0"> </span><span class="hl-4">true</span><span class="hl-0">,</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                    {</span><br/><span class="hl-0">                        </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;#searchspring-sidebar&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-6">component</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Sidebar</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-2">hideTarget:</span><span class="hl-0"> </span><span class="hl-4">true</span><span class="hl-0">,</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                ],</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">        ],</span><br/><span class="hl-0">        </span><span class="hl-2">autocomplete:</span><span class="hl-0"> [</span><br/><span class="hl-0">            {</span><br/><span class="hl-0">                </span><span class="hl-2">config:</span><span class="hl-0"> {</span><br/><span class="hl-0">                    </span><span class="hl-2">id:</span><span class="hl-0"> </span><span class="hl-3">&#39;autocomplete&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                    </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;input.searchspring-ac&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                    </span><span class="hl-2">settings:</span><span class="hl-0"> {</span><br/><span class="hl-0">                        </span><span class="hl-2">trending:</span><span class="hl-0"> {</span><br/><span class="hl-0">                            </span><span class="hl-2">limit:</span><span class="hl-0"> </span><span class="hl-7">5</span><span class="hl-0">,</span><br/><span class="hl-0">                        },</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                },</span><br/><span class="hl-0">                </span><span class="hl-2">targets:</span><span class="hl-0"> [</span><br/><span class="hl-0">                    {</span><br/><span class="hl-0">                        </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;input.searchspring-ac&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-6">component</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Autocomplete</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-2">hideTarget:</span><span class="hl-0"> </span><span class="hl-4">true</span><span class="hl-0">,</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                ],</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">        ],</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">};</span>
 </code></pre>
-				<a href="#configcontrollers" id="configcontrollers" style="color: inherit; text-decoration: none;">
-					<h3>config.controllers</h3>
-				</a>
-				<p>The <code>controllers</code> object contains a list of controllers to create for each controller type. </p>
-				<p>Available controllers:</p>
-				<ul>
-					<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search">SearchController</a> </li>
-					<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete">AutocompleteController</a></li>
-					<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder">FinderController</a></li>
-					<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation">RecommendationController</a></li>
-				</ul>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">controllers:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">search:</span><span style="color: #000000"> [],</span>
-<span style="color: #000000">        </span><span style="color: #001080">autocomplete:</span><span style="color: #000000"> [],</span>
-<span style="color: #000000">        </span><span style="color: #001080">finder:</span><span style="color: #000000"> [],</span>
-<span style="color: #000000">        </span><span style="color: #001080">recommendation:</span><span style="color: #000000"> [],</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">}</span>
+
+<a href="#configclient" id="configclient" style="color: inherit; text-decoration: none;">
+  <h3>config.client</h3>
+</a>
+<p>A single client instance will be created and shared across all services using the provided config. </p>
+<p>See <a href="https://github.com/searchspring/snap/tree/main/packages/snap-client">@searchspring/snap-client</a> documentation for full client config options.</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">client:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">globals:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-2">siteId:</span><span class="hl-0"> </span><span class="hl-3">&#39;xxxxxx&#39;</span><br/><span class="hl-0">        }</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">}</span>
 </code></pre>
-				<p>Each array entry contains an object with the following properties:</p>
-				<p><code>config</code> - required controller config for the corresponding controller. See Controller specific documentation for all available configuration options.</p>
-				<p><code>targets</code> - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component <code>controller</code> prop and the controller&#39;s <code>search</code> method invoked.</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExtendedTarget</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">selector</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">inject</span><span style="color: #000000">?: {</span>
-<span style="color: #000000">        </span><span style="color: #001080">action</span><span style="color: #000000">: </span><span style="color: #A31515">&#039;before&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;after&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;append&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;prepend&#039;</span><span style="color: #000000"> | </span><span style="color: #A31515">&#039;replace&#039;</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #267F99">Element</span><span style="color: #000000"> | ((</span><span style="color: #001080">target</span><span style="color: #000000">: </span><span style="color: #267F99">Target</span><span style="color: #000000">, </span><span style="color: #001080">element</span><span style="color: #000000">: </span><span style="color: #267F99">Element</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">Element</span><span style="color: #000000">);</span>
-<span style="color: #000000">    };</span>
-<span style="color: #000000">    </span><span style="color: #001080">hideTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">emptyTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">name</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #795E26">component</span><span style="color: #000000">?: () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">RootComponent</span><span style="color: #000000">&gt; | </span><span style="color: #267F99">RootComponent</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">props</span><span style="color: #000000">?: </span><span style="color: #267F99">unknown</span><span style="color: #000000">;  </span><span style="color: #008000">// additional props to pass to the component</span>
-<span style="color: #000000">    </span><span style="color: #001080">onTarget</span><span style="color: #000000">?: </span><span style="color: #267F99">OnTarget</span><span style="color: #000000">;  </span><span style="color: #008000">// additional scripts to execute when target is found</span>
-<span style="color: #000000">    </span><span style="color: #001080">prefetch</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;  </span><span style="color: #008000">// run controller search before finding targets</span>
-<span style="color: #000000">}</span>
+
+<a href="#configinstantiators" id="configinstantiators" style="color: inherit; text-decoration: none;">
+  <h3>config.instantiators</h3>
+</a>
+<p>The <code>instantiators</code> object must be defined if any Recommendation controllers have also been defined via <code>config.controllers.recommendation</code></p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">instantiators:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">recommendation:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-2">components:</span><span class="hl-0"> {</span><br/><span class="hl-0">                </span><span class="hl-6">Standard</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Standard</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">            </span><span class="hl-2">config:</span><span class="hl-0"> {</span><br/><span class="hl-0">                </span><span class="hl-2">branch:</span><span class="hl-0"> </span><span class="hl-5">BRANCHNAME</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">            </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-2">services:</span><span class="hl-0"> {}</span><br/><span class="hl-0">        }</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    </span><span class="hl-2">controllers:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">recommendation:</span><span class="hl-0"> []</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">}</span>
 </code></pre>
-				<p><code>services</code> - optional object of <code>ControllerServices</code> to be used for this controller in place of the default services</p>
-				<p><code>url</code> - optional <code>UrlTranslator</code> config object to be used with the <code>UrlManager</code> for this controller</p>
-				<p>An example creating a SearchController:</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">controllers:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">search:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;search&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                },</span>
-<span style="color: #000000">                </span><span style="color: #001080">targets:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                    {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-content&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Content</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                    {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">selector:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#searchspring-sidebar&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #795E26">component</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">Sidebar</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">hideTarget:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                ],</span>
-<span style="color: #000000">                </span><span style="color: #001080">services:</span><span style="color: #000000"> {}</span>
-<span style="color: #000000">            }</span>
-<span style="color: #000000">        ]</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">}</span>
+<p><code>recommendation.components</code> - required mapping of recommendation components.</p>
+<p><code>recommendation.config.branch</code> - required current git branch name. Defined via webpack during bundle build:</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">webpack</span><span class="hl-0"> = </span><span class="hl-6">require</span><span class="hl-0">(</span><span class="hl-3">&#39;webpack&#39;</span><span class="hl-0">);</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">childProcess</span><span class="hl-0"> = </span><span class="hl-6">require</span><span class="hl-0">(</span><span class="hl-3">&#39;child_process&#39;</span><span class="hl-0">);</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">branchName</span><span class="hl-0"> = </span><span class="hl-2">childProcess</span><span class="hl-0">.</span><span class="hl-6">execSync</span><span class="hl-0">(</span><span class="hl-3">&#39;git rev-parse --abbrev-ref HEAD&#39;</span><span class="hl-0">).</span><span class="hl-6">toString</span><span class="hl-0">().</span><span class="hl-6">trim</span><span class="hl-0">();</span><br/><br/><span class="hl-8">module</span><span class="hl-0">.</span><span class="hl-8">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">plugins:</span><span class="hl-0"> [</span><br/><span class="hl-0">        </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-2">webpack</span><span class="hl-0">.</span><span class="hl-6">DefinePlugin</span><span class="hl-0">({</span><br/><span class="hl-0">            </span><span class="hl-2">BRANCHNAME:</span><span class="hl-0"> </span><span class="hl-3">`&quot;</span><span class="hl-4">${</span><span class="hl-2">branchName</span><span class="hl-4">}</span><span class="hl-3">&quot;`</span><span class="hl-0">,</span><br/><span class="hl-0">        }),</span><br/><span class="hl-0">    ],</span><br/><span class="hl-0">}</span>
 </code></pre>
-				<p>The controller config <code>id</code> will be the name of the controller that you will then interface from the return of creating the <code>new Snap()</code> instance via the <code>controllers</code> object. </p>
-				<p>For example, if using the <code>config</code> example above:</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">snap</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Snap</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">search</span><span style="color: #000000"> } = </span><span style="color: #001080">snap</span><span style="color: #000000">.</span><span style="color: #001080">controllers</span><span style="color: #000000">;</span>
+<p><code>recommendation.selector</code> - optional selector to target recommendation instances if using a non-standard installation. Default selector: <code>script[type=&quot;searchspring/recommend&quot;]</code></p>
+<p><code>recommendation.services</code> - optional object of <code>ControllerServices</code> </p>
+
+<a href="#configurl" id="configurl" style="color: inherit; text-decoration: none;">
+  <h3>config.url</h3>
+</a>
+<p>The <code>url</code> object contains the config provided to each <a href="https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url"><code>UrlTranslator</code></a> created by Snap Preact.</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">url:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">parameters:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-2">core:</span><span class="hl-0"> {</span><br/><span class="hl-0">                </span><span class="hl-2">query:</span><span class="hl-0"> { </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&#39;search&#39;</span><span class="hl-0"> },</span><br/><span class="hl-0">                </span><span class="hl-2">page:</span><span class="hl-0"> { </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&#39;p&#39;</span><span class="hl-0"> }</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">}</span>
 </code></pre>
-				<a href="#properties" id="properties" style="color: inherit; text-decoration: none;">
-					<h2>properties</h2>
-				</a>
-				<p>After instantiating an instance of Snap, the following properties can be accessed. </p>
-				<a href="#config" id="config" style="color: inherit; text-decoration: none;">
-					<h3>config</h3>
-				</a>
-				<p>A reference to the config that was provided.</p>
-				<a href="#logger" id="logger" style="color: inherit; text-decoration: none;">
-					<h3>logger</h3>
-				</a>
-				<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-logger">@searchspring/snap-logger</a> instance used by each controller.</p>
-				<a href="#client" id="client" style="color: inherit; text-decoration: none;">
-					<h3>client</h3>
-				</a>
-				<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-client">@searchspring/snap-client</a> instance used by each controller.</p>
-				<a href="#tracker" id="tracker" style="color: inherit; text-decoration: none;">
-					<h3>tracker</h3>
-				</a>
-				<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-tracker">@searchspring/snap-tracker</a> instance used by each controller.</p>
-				<a href="#controllers" id="controllers" style="color: inherit; text-decoration: none;">
-					<h3>controllers</h3>
-				</a>
-				<p>An object containing all controllers that have been created. </p>
-				<a href="#recommendations" id="recommendations" style="color: inherit; text-decoration: none;">
-					<h3>recommendations</h3>
-				</a>
-				<p>A reference to <code>RecommendationInstantiator</code> instance if creating recommendation instances.</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/Snap.html" class="tsd-kind-icon">Snap</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#SnapConfig" class="tsd-kind-icon">Snap<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-property">
-						<a href="modules.html#createAutocompleteController" class="tsd-kind-icon">create<wbr>Autocomplete<wbr>Controller</a>
-					</li>
-					<li class=" tsd-kind-property">
-						<a href="modules.html#createFinderController" class="tsd-kind-icon">create<wbr>Finder<wbr>Controller</a>
-					</li>
-					<li class=" tsd-kind-property">
-						<a href="modules.html#createRecommendationsController" class="tsd-kind-icon">create<wbr>Recommendations<wbr>Controller</a>
-					</li>
-					<li class=" tsd-kind-property">
-						<a href="modules.html#createSearchController" class="tsd-kind-icon">create<wbr>Search<wbr>Controller</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#configcontrollers" id="configcontrollers" style="color: inherit; text-decoration: none;">
+  <h3>config.controllers</h3>
+</a>
+<p>The <code>controllers</code> object contains a list of controllers to create for each controller type. </p>
+<p>Available controllers:</p>
+<ul>
+<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search">SearchController</a> </li>
+<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete">AutocompleteController</a></li>
+<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder">FinderController</a></li>
+<li><a href="https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation">RecommendationController</a></li>
+</ul>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">controllers:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">search:</span><span class="hl-0"> [],</span><br/><span class="hl-0">        </span><span class="hl-2">autocomplete:</span><span class="hl-0"> [],</span><br/><span class="hl-0">        </span><span class="hl-2">finder:</span><span class="hl-0"> [],</span><br/><span class="hl-0">        </span><span class="hl-2">recommendation:</span><span class="hl-0"> [],</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">}</span>
+</code></pre>
+<p>Each array entry contains an object with the following properties:</p>
+<p><code>config</code> - required controller config for the corresponding controller. See Controller specific documentation for all available configuration options.</p>
+<p><code>targets</code> - optional array of Target objects. Targets thats have been found will have the corresponding controller provided to the target component <code>controller</code> prop and the controller&#39;s <code>search</code> method invoked.</p>
+<pre><code class="language-typescript"><span class="hl-4">type</span><span class="hl-0"> </span><span class="hl-8">ExtendedTarget</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">selector</span><span class="hl-0">: </span><span class="hl-8">string</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-2">inject</span><span class="hl-0">?: {</span><br/><span class="hl-0">        </span><span class="hl-2">action</span><span class="hl-0">: </span><span class="hl-3">&#39;before&#39;</span><span class="hl-0"> | </span><span class="hl-3">&#39;after&#39;</span><span class="hl-0"> | </span><span class="hl-3">&#39;append&#39;</span><span class="hl-0"> | </span><span class="hl-3">&#39;prepend&#39;</span><span class="hl-0"> | </span><span class="hl-3">&#39;replace&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-2">element</span><span class="hl-0">: </span><span class="hl-8">Element</span><span class="hl-0"> | ((</span><span class="hl-2">target</span><span class="hl-0">: </span><span class="hl-8">Target</span><span class="hl-0">, </span><span class="hl-2">element</span><span class="hl-0">: </span><span class="hl-8">Element</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-8">Element</span><span class="hl-0">);</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">    </span><span class="hl-2">hideTarget</span><span class="hl-0">?: </span><span class="hl-8">boolean</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-2">emptyTarget</span><span class="hl-0">?: </span><span class="hl-8">boolean</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-2">name</span><span class="hl-0">?: </span><span class="hl-8">string</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-6">component</span><span class="hl-0">?: () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-8">Promise</span><span class="hl-0">&lt;</span><span class="hl-8">RootComponent</span><span class="hl-0">&gt; | </span><span class="hl-8">RootComponent</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-2">props</span><span class="hl-0">?: </span><span class="hl-8">unknown</span><span class="hl-0">;  </span><span class="hl-9">// additional props to pass to the component</span><br/><span class="hl-0">    </span><span class="hl-2">onTarget</span><span class="hl-0">?: </span><span class="hl-8">OnTarget</span><span class="hl-0">;  </span><span class="hl-9">// additional scripts to execute when target is found</span><br/><span class="hl-0">    </span><span class="hl-2">prefetch</span><span class="hl-0">?: </span><span class="hl-8">boolean</span><span class="hl-0">;  </span><span class="hl-9">// run controller search before finding targets</span><br/><span class="hl-0">}</span>
+</code></pre>
+<p><code>services</code> - optional object of <code>ControllerServices</code> to be used for this controller in place of the default services</p>
+<p><code>url</code> - optional <code>UrlTranslator</code> config object to be used with the <code>UrlManager</code> for this controller</p>
+<p>An example creating a SearchController:</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">config</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">controllers:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">search:</span><span class="hl-0"> [</span><br/><span class="hl-0">            {</span><br/><span class="hl-0">                </span><span class="hl-2">config:</span><span class="hl-0"> {</span><br/><span class="hl-0">                    </span><span class="hl-2">id:</span><span class="hl-0"> </span><span class="hl-3">&#39;search&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                },</span><br/><span class="hl-0">                </span><span class="hl-2">targets:</span><span class="hl-0"> [</span><br/><span class="hl-0">                    {</span><br/><span class="hl-0">                        </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;#searchspring-content&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-6">component</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Content</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-2">hideTarget:</span><span class="hl-0"> </span><span class="hl-4">true</span><span class="hl-0">,</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                    {</span><br/><span class="hl-0">                        </span><span class="hl-2">selector:</span><span class="hl-0"> </span><span class="hl-3">&#39;#searchspring-sidebar&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-6">component</span><span class="hl-2">:</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">Sidebar</span><span class="hl-0">,</span><br/><span class="hl-0">                        </span><span class="hl-2">hideTarget:</span><span class="hl-0"> </span><span class="hl-4">true</span><span class="hl-0">,</span><br/><span class="hl-0">                    },</span><br/><span class="hl-0">                ],</span><br/><span class="hl-0">                </span><span class="hl-2">services:</span><span class="hl-0"> {}</span><br/><span class="hl-0">            }</span><br/><span class="hl-0">        ]</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">}</span>
+</code></pre>
+<p>The controller config <code>id</code> will be the name of the controller that you will then interface from the return of creating the <code>new Snap()</code> instance via the <code>controllers</code> object. </p>
+<p>For example, if using the <code>config</code> example above:</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">snap</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">Snap</span><span class="hl-0">(</span><span class="hl-2">config</span><span class="hl-0">);</span><br/><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-5">search</span><span class="hl-0"> } = </span><span class="hl-2">snap</span><span class="hl-0">.</span><span class="hl-2">controllers</span><span class="hl-0">;</span>
+</code></pre>
+
+<a href="#properties" id="properties" style="color: inherit; text-decoration: none;">
+  <h2>properties</h2>
+</a>
+<p>After instantiating an instance of Snap, the following properties can be accessed. </p>
+
+<a href="#config" id="config" style="color: inherit; text-decoration: none;">
+  <h3>config</h3>
+</a>
+<p>A reference to the config that was provided.</p>
+
+<a href="#logger" id="logger" style="color: inherit; text-decoration: none;">
+  <h3>logger</h3>
+</a>
+<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-logger">@searchspring/snap-logger</a> instance used by each controller.</p>
+
+<a href="#client" id="client" style="color: inherit; text-decoration: none;">
+  <h3>client</h3>
+</a>
+<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-client">@searchspring/snap-client</a> instance used by each controller.</p>
+
+<a href="#tracker" id="tracker" style="color: inherit; text-decoration: none;">
+  <h3>tracker</h3>
+</a>
+<p>A reference to the shared <a href="https://github.com/searchspring/snap/tree/main/packages/snap-tracker">@searchspring/snap-tracker</a> instance used by each controller.</p>
+
+<a href="#controllers" id="controllers" style="color: inherit; text-decoration: none;">
+  <h3>controllers</h3>
+</a>
+<p>An object containing all controllers that have been created. </p>
+
+<a href="#recommendations" id="recommendations" style="color: inherit; text-decoration: none;">
+  <h3>recommendations</h3>
+</a>
+<p>A reference to <code>RecommendationInstantiator</code> instance if creating recommendation instances.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Snap.html" class="tsd-kind-icon">Snap</a></li><li class="tsd-kind-type-alias"><a href="modules.html#SnapConfig" class="tsd-kind-icon">Snap<wbr/>Config</a></li><li class="tsd-kind-property"><a href="modules.html#createAutocompleteController" class="tsd-kind-icon">create<wbr/>Autocomplete<wbr/>Controller</a></li><li class="tsd-kind-property"><a href="modules.html#createFinderController" class="tsd-kind-icon">create<wbr/>Finder<wbr/>Controller</a></li><li class="tsd-kind-property"><a href="modules.html#createRecommendationsController" class="tsd-kind-icon">create<wbr/>Recommendations<wbr/>Controller</a></li><li class="tsd-kind-property"><a href="modules.html#createSearchController" class="tsd-kind-icon">create<wbr/>Search<wbr/>Controller</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
