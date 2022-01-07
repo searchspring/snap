@@ -174,17 +174,6 @@ export class Snap {
 		this._instantiatorPromises = {};
 		this.controllers = {};
 
-		if (window.searchspring && this.config.context) {
-			window.searchspring.context = this.config.context;
-		}
-
-		// autotrack shopper id from the context
-		if (this.config.context?.shopper?.id) {
-			this.tracker.track.shopper.login({
-				id: this.config.context.shopper.id,
-			});
-		}
-
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
 
@@ -209,7 +198,7 @@ export class Snap {
 				}
 
 				this.logger.setMode(LogMode.DEVELOPMENT);
-				this.logger.warn(`...loading '${branchParam}' build...`);
+				this.logger.warn(`...loading build... '${branchParam}'`);
 
 				// append script with new branch in path
 				const script = document.createElement('script');
@@ -238,10 +227,21 @@ export class Snap {
 					}
 				);
 
-				// prevent instantiation of config
+				// prevent further instantiation of config
 				return;
 			}
 		} catch (e) {}
+
+		if (window.searchspring && this.config.context) {
+			window.searchspring.context = this.config.context;
+		}
+
+		// autotrack shopper id from the context
+		if (this.config.context?.shopper?.id) {
+			this.tracker.track.shopper.login({
+				id: this.config.context.shopper.id,
+			});
+		}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
