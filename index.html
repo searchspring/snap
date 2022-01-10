@@ -15,6 +15,8 @@
 	<title>Snap Documentation</title>
 
 	<link rel="icon" href="./favicon.ico">
+
+	<script src="https://snapui.searchspring.io/vrntn7/bundle.js" id="searchspring-context"></script>
 </head>
 <body>
 	<div id="app"></div>
@@ -114,6 +116,7 @@
 					<div id="content">
 						<router-view :routes="routes"></router-view>
 					</div>
+					<div id="ac-overlay"></div>
 				`
 			}
 
@@ -271,8 +274,6 @@
 						</router-link>
 						<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
 						<div id="search-container">
-								<h3> Search </h3>
-								<input id="searchBar" type="text" />
 							</div>
 						<div id="navigation" :class="{ visible: navVisible }" >
 							<div v-for="section in documents" class="section">
