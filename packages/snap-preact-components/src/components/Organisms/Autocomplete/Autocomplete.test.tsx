@@ -3,6 +3,8 @@ import { h } from 'preact';
 import { v4 as uuidv4 } from 'uuid';
 import { render } from '@testing-library/preact';
 
+import { ThemeProvider } from '../../../providers';
+
 import { Autocomplete } from '../../Organisms/Autocomplete/Autocomplete';
 import { createAutocompleteController } from '@searchspring/snap-preact';
 
@@ -13,6 +15,7 @@ const client = {
 };
 let config;
 let controllerConfigId;
+
 describe('Autocomplete Component', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
@@ -59,5 +62,405 @@ describe('Autocomplete Component', () => {
 		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
+	});
+
+	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+
+		const breakpoints = {
+			768: {
+				columns: 3,
+				rows: 3,
+			},
+		};
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			breakpoints,
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+		expect(results[0]).toBeInTheDocument();
+		expect(results.length).toEqual(9);
+	});
+
+	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			hideTerms: true,
+			hideFacets: true,
+			hideContent: true,
+			hideLink: true,
+		};
+
+		const otherArgs = {
+			controller,
+			input: controller.config.selector,
+			hideTerms: false,
+			hideFacets: false,
+			hideContent: false,
+			hideLink: false,
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let renderedWithout = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
+		let terms = renderedWithout.container.querySelector('.ss__autocomplete__terms');
+		expect(terms).not.toBeInTheDocument();
+
+		let facets = renderedWithout.container.querySelector('.ss__autocomplete__facets');
+		expect(facets).not.toBeInTheDocument();
+
+		let content = renderedWithout.container.querySelector('.ss__autocomplete__content');
+		expect(content).not.toBeInTheDocument();
+
+		let link = renderedWithout.container.querySelector('.ss__autocomplete__content__info');
+		expect(link).not.toBeInTheDocument();
+
+		let renderedWith = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target') });
+
+		let terms2 = renderedWith.container.querySelector('.ss__autocomplete__terms');
+		expect(terms2).toBeInTheDocument();
+
+		let facets2 = renderedWith.container.querySelector('.ss__autocomplete__facets');
+		expect(facets2).toBeInTheDocument();
+
+		let content2 = renderedWith.container.querySelector('.ss__autocomplete__content');
+		expect(content2).toBeInTheDocument();
+
+		let link2 = renderedWith.container.querySelector('.ss__autocomplete__content__info');
+		expect(link2).toBeInTheDocument();
+	});
+
+	//this needs a different term
+	it('can hideBanners', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			hideBanners: true,
+		};
+
+		const otherArgs = {
+			controller,
+			input: controller.config.selector,
+			hideBanners: false,
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		//note this test assumes there is a banner available on that term.. which at this time there is
+		//todo use a mock for this
+		input.value = 'red';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
+		expect(banners).not.toBeInTheDocument();
+
+		let renderedWithBanners = render(<Autocomplete {...otherArgs} />, { container: document.getElementById('target') });
+		let banners2 = renderedWithBanners.container.querySelector('.ss__banner');
+		expect(banners2).toBeInTheDocument();
+	});
+
+	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			termsTitle: 'custom termsTitle',
+			facetsTitle: 'custom facetsTitle',
+			contentTitle: 'custom contentTitle',
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
+		let termTitle = rendered.container.querySelector('.ss__autocomplete__title');
+		expect(termTitle).toHaveTextContent(args.termsTitle);
+
+		let facetsTitle = rendered.container.querySelector('.ss__autocomplete__title--facets');
+		expect(facetsTitle).toHaveTextContent(args.facetsTitle);
+
+		let contentTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+		expect(contentTitle).toHaveTextContent(args.contentTitle);
+	});
+
+	//this needed a different term
+	it('can set a custom trending title', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			trendingTitle: 'Lorem Ipsum',
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
+		expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+	});
+
+	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			termsSlot: <div>custom termsSlot</div>,
+			facetsSlot: <div>custom facetsSlot</div>,
+			resultsSlot: <div>custom resultsSlot</div>,
+			linkSlot: <div id="findMe">custom linkSlot</div>,
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
+		let termsSlot = rendered.container.querySelector('.ss__autocomplete__terms');
+		expect(termsSlot).toHaveTextContent('custom termsSlot');
+
+		let facetSlot = rendered.container.querySelector('.ss__autocomplete__facets');
+		expect(facetSlot).toHaveTextContent('custom facetsSlot');
+
+		let resultsSlot = rendered.container.querySelector('.ss__autocomplete__content__results');
+		let defaultTitle = rendered.container.querySelector('.ss__autocomplete__title--content');
+		expect(defaultTitle).not.toBeInTheDocument();
+		expect(resultsSlot).toHaveTextContent('custom resultsSlot');
+
+		let defaultLink = rendered.container.querySelector('.ss__autocomplete__content__info');
+		let linkSlot = rendered.container.querySelector('.ss__autocomplete__content #findMe');
+
+		expect(defaultLink).not.toBeInTheDocument();
+		expect(linkSlot).toHaveTextContent('custom linkSlot');
+	});
+
+	//cant render both content slot and results slot at the same time.
+	it('can set a custom content slot', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			contentSlot: <div>Lorem Ipsum</div>,
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
+		expect(contentSlot).toHaveTextContent('Lorem Ipsum');
+	});
+
+	// needs own term
+	it('can set a custom noResults slot', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			noResultsSlot: <div>Lorem Ipsum</div>,
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = '3regujifdkoclprtjigfkvmdckoswkrjeifkd';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
+		expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
+	});
+
+	it('can set a custom css width', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+			width: '200px',
+		};
+		//lets test both px and percent to be safe, both should be allowed.
+		const args2 = {
+			controller,
+			input: controller.config.selector,
+			width: '100%',
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'shirt';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let ac = rendered.container.querySelector('.ss__autocomplete');
+		const styles = getComputedStyle(ac);
+		expect(styles['width']).toBe(args.width);
+
+		let rendered2 = render(<Autocomplete {...args2} />, { container: document.getElementById('target') });
+		let ac2 = rendered2.container.querySelector('.ss__autocomplete');
+		const styles2 = getComputedStyle(ac2);
+		expect(styles2['width']).toBe(args2.width);
+	});
+});
+
+describe('AutoComplete theming works', () => {
+	beforeEach(() => {
+		document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
+		controllerConfigId = uuidv4().split('-').join('');
+		config = {
+			id: controllerConfigId,
+			selector: 'input.searchspring-ac',
+			settings: {
+				trending: {
+					limit: 5,
+				},
+			},
+		};
+	});
+
+	it('is themeable with ThemeProvider', async () => {
+		const globalTheme = {
+			components: {
+				autocomplete: {
+					trendingTitle: 'Lorem Ipsum',
+				},
+			},
+		};
+
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+		await new Promise((r) => setTimeout(r, 1000));
+
+		const rendered = render(
+			<ThemeProvider theme={globalTheme}>
+				<Autocomplete {...args} />
+			</ThemeProvider>,
+			{ container: document.getElementById('target') }
+		);
+
+		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+		expect(element).toBeInTheDocument();
+		expect(element).toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+	});
+
+	it('is themeable with theme prop', async () => {
+		const propTheme = {
+			components: {
+				autocomplete: {
+					trendingTitle: 'Lorem Ipsum',
+				},
+			},
+		};
+
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+		await new Promise((r) => setTimeout(r, 1000));
+
+		const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container: document.getElementById('target') });
+
+		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+		expect(element).toBeInTheDocument();
+		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+	});
+
+	it('is theme prop overrides ThemeProvider', async () => {
+		const globalTheme = {
+			components: {
+				autocomplete: {
+					trendingTitle: 'shouldnt find this',
+				},
+			},
+		};
+		const propTheme = {
+			components: {
+				autocomplete: {
+					trendingTitle: 'should find this',
+				},
+			},
+		};
+
+		const controller = createAutocompleteController({ client, controller: config });
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+		await new Promise((r) => setTimeout(r, 1000));
+
+		const rendered = render(
+			<ThemeProvider theme={globalTheme}>
+				<Autocomplete {...args} theme={propTheme} />
+			</ThemeProvider>,
+			{ container: document.getElementById('target') }
+		);
+
+		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
+		expect(element).toBeInTheDocument();
+		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+		expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
 	});
 });
