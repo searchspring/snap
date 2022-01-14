@@ -15,11 +15,16 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 const CSS = {
 	palette: ({ columns, gapSize, theme }) =>
 		css({
-			display: 'grid',
-			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
-			gap: gapSize,
+			display: 'flex',
+			flexFlow: 'row wrap',
 			'& .ss__facet-palette-options__option': {
-				position: 'relative',
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px )`,
+				marginRight: gapSize,
+				marginBottom: gapSize,
+				[`:nth-of-type(${columns}n)`]: {
+					marginRight: '0',
+				},
+
 				'&:hover': {
 					cursor: 'pointer',
 					'.ss__facet-palette-options__option__wrapper': {
@@ -48,9 +53,6 @@ const CSS = {
 					border: '1px solid #EBEBEB',
 					borderRadius: '100%',
 					position: 'relative',
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
 					'& .ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
@@ -71,6 +73,15 @@ const CSS = {
 					overflow: 'hidden',
 					textOverflow: 'ellipsis',
 					whiteSpace: 'nowrap',
+				},
+			},
+			'@supports (display: grid)': {
+				display: 'grid',
+				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+				gap: gapSize,
+				'& .ss__facet-palette-options__option': {
+					margin: '0',
+					width: 'initial',
 				},
 			},
 		}),

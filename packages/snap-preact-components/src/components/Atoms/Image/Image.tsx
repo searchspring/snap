@@ -16,9 +16,10 @@ const CSS = {
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
-			height: '100%',
+			height: 'auto',
 			'& img': {
 				visibility,
+				flexShrink: '0',
 				objectFit: 'contain',
 				maxWidth: '100%',
 				maxHeight: '100%',

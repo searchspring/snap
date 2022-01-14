@@ -18,10 +18,32 @@ import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 const CSS = {
 	results: ({ columns, gapSize }) =>
 		css({
-			display: 'grid',
-			gridTemplateColumns: `repeat(${columns}, 1fr)`,
-			gridTemplateRows: 'auto',
-			gap: gapSize,
+			display: 'flex',
+			flexFlow: 'row wrap',
+			'& .ss__result': {
+				boxSizing: 'border-box',
+				flex: '0 1 auto',
+				width: `calc(${100 / columns}% - (${columns - 1} * ${gapSize} / ${columns} ) )`,
+				marginRight: gapSize,
+				marginBottom: gapSize,
+
+				[`&:nth-of-type(${columns}n)`]: {
+					marginRight: '0',
+				},
+				[`&:nth-last-of-type(-n+${columns})`]: {
+					marginBottom: '0',
+				},
+			},
+			'@supports (display: grid)': {
+				display: 'grid',
+				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+				gridTemplateRows: 'auto',
+				gap: gapSize,
+				'& .ss__result': {
+					width: 'initial',
+					margin: 0,
+				},
+			},
 		}),
 };
 

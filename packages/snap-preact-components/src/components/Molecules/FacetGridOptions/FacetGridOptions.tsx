@@ -11,30 +11,25 @@ import { ComponentProps, ValueFacetValue } from '../../../types';
 const CSS = {
 	grid: ({ columns, gapSize, theme }) =>
 		css({
-			display: 'grid',
-			gridTemplateColumns: `repeat(${columns}, 1fr)`,
-			gridAutoRows: `1fr`,
-			gap: gapSize,
+			display: 'flex',
+			flexFlow: 'row wrap',
 
-			'&::before': {
-				content: '""',
-				width: 0,
-				paddingBottom: '100%',
-				gridRow: '1 / 1',
-				gridColumn: '1 / 1',
-			},
-			'&> *:first-of-type': {
-				gridRow: '1 / 1',
-				gridColumn: '1 / 1',
-			},
 			'& .ss__facet-grid-options__option': {
-				border: `1px solid ${theme.colors?.primary || '#333'}`,
 				display: 'flex',
-				alignItems: 'center',
 				justifyContent: 'center',
+				alignItems: 'center',
+				flex: '0 1 auto',
+				border: `1px solid ${theme.colors?.primary || '#333'}`,
 				textAlign: 'center',
 				wordBreak: 'break-all',
+				boxSizing: 'border-box',
+				padding: '1em 0',
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px)`,
+				margin: `0 ${gapSize} ${gapSize} 0`,
 
+				[`:nth-of-type(${columns}n)`]: {
+					marginRight: '0',
+				},
 				'&.ss__facet-grid-options__option--filtered': {
 					background: theme.colors?.primary || '#ccc',
 					color: theme.colors?.text?.secondary,
@@ -47,6 +42,30 @@ const CSS = {
 					'&.ss__facet-grid-options__option__value--smaller': {
 						fontSize: '70%',
 					},
+				},
+			},
+
+			'@supports (display: grid)': {
+				display: 'grid',
+				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+				gridAutoRows: `1fr`,
+				gap: gapSize,
+
+				'& .ss__facet-grid-options__option': {
+					padding: '0',
+					margin: '0',
+					width: 'initial',
+				},
+				'&::before': {
+					content: '""',
+					width: 0,
+					paddingBottom: '100%',
+					gridRow: '1 / 1',
+					gridColumn: '1 / 1',
+				},
+				'&> *:first-of-type': {
+					gridRow: '1 / 1',
+					gridColumn: '1 / 1',
 				},
 			},
 		}),
