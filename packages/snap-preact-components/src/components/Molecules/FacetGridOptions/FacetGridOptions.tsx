@@ -13,6 +13,9 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
+			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			gap: gapSize,
+			gridAutoRows: `1fr`,
 
 			'& .ss__facet-grid-options__option': {
 				display: 'flex',
@@ -47,9 +50,6 @@ const CSS = {
 
 			'@supports (display: grid)': {
 				display: 'grid',
-				gridTemplateColumns: `repeat(${columns}, 1fr)`,
-				gridAutoRows: `1fr`,
-				gap: gapSize,
 
 				'& .ss__facet-grid-options__option': {
 					padding: '0',

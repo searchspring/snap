@@ -20,6 +20,10 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
+			gap: gapSize,
+			gridTemplateRows: 'auto',
+			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+
 			'& .ss__result': {
 				boxSizing: 'border-box',
 				flex: '0 1 auto',
@@ -36,9 +40,7 @@ const CSS = {
 			},
 			'@supports (display: grid)': {
 				display: 'grid',
-				gridTemplateColumns: `repeat(${columns}, 1fr)`,
-				gridTemplateRows: 'auto',
-				gap: gapSize,
+
 				'& .ss__result': {
 					width: 'initial',
 					margin: 0,

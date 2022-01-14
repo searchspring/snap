@@ -17,6 +17,9 @@ const CSS = {
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
+			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
+			gap: gapSize,
+
 			'& .ss__facet-palette-options__option': {
 				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px )`,
 				marginRight: gapSize,
@@ -77,8 +80,7 @@ const CSS = {
 			},
 			'@supports (display: grid)': {
 				display: 'grid',
-				gridTemplateColumns: `repeat(${columns}, 1fr)`,
-				gap: gapSize,
+
 				'& .ss__facet-palette-options__option': {
 					margin: '0',
 					width: 'initial',
