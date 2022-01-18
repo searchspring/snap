@@ -11,26 +11,29 @@ import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestReque
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 
 export class HybridAPI extends API {
+	private requesters: {
+		legacy: LegacyAPI;
+		suggest: SuggestAPI;
+	};
+
+	constructor(configuration: ApiConfiguration) {
+		super(configuration);
+
+		this.requesters = {
+			legacy: new LegacyAPI(new ApiConfiguration({ basePath: configuration.basePath, cacheSettings: this.configuration.cacheSettings })),
+			suggest: new SuggestAPI(new ApiConfiguration({ basePath: configuration.basePath, cacheSettings: this.configuration.cacheSettings })),
+		};
+	}
+
 	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const legacyRequestParameters = requestParameters;
-
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(
-			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
-		);
-
-		return legacyRequester.getMeta(legacyRequestParameters);
+		return this.requesters.legacy.getMeta(legacyRequestParameters);
 	}
 
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const legacyRequester = new LegacyAPI(
-			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
-		);
-
-		const legacyData = await legacyRequester.getSearch(legacyRequestParameters);
+		const legacyData = await this.requesters.legacy.getSearch(legacyRequestParameters);
 
 		return transformSearchResponse(legacyData, requestParameters);
 	}
@@ -49,15 +52,7 @@ export class HybridAPI extends API {
 			suggestParams.disableSpellCorrect = true;
 		}
 
-		const apiHost = `https://${legacyRequestParameters.siteId}.a.searchspring.io`;
-		const suggestRequester = new SuggestAPI(
-			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
-		);
-		const legacyRequester = new LegacyAPI(
-			new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId(), cacheSettings: this.configuration.cacheSettings })
-		);
-
-		const suggestResults = await suggestRequester.getSuggest(suggestParams);
+		const suggestResults = await this.requesters.suggest.getSuggest(suggestParams);
 		const transformedSuggestResults = transformSuggestResponse(suggestResults);
 
 		const q = transformedSuggestResults.correctedQuery || (suggestResults.suggested || {}).text || suggestResults.query;
@@ -68,7 +63,7 @@ export class HybridAPI extends API {
 			q,
 		};
 
-		const legacyResults = await legacyRequester.getAutocomplete(queryParameters);
+		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);
 		const searchResults = transformSearchResponse(legacyResults, requestParameters);
 
 		return {

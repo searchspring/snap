@@ -27,11 +27,8 @@ import deepmerge from 'deepmerge';
 
 const defaultConfig: ClientConfig = {
 	meta: {
-		prefetch: true,
-		ttl: 300000,
 		cache: {
-			enabled: true,
-			expiresAfter: 300000,
+			purgable: false,
 		},
 	},
 	search: {
@@ -39,19 +36,11 @@ const defaultConfig: ClientConfig = {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/search',
 		},
-		cache: {
-			enabled: true,
-			expiresAfter: 300000,
-		},
 	},
 	autocomplete: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/autocomplete',
-		},
-		cache: {
-			enabled: true,
-			expiresAfter: 300000,
 		},
 	},
 	recommend: {
@@ -59,35 +48,14 @@ const defaultConfig: ClientConfig = {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/recommend',
 		},
-		cache: {
-			enabled: true,
-			expiresAfter: 300000,
-		},
 	},
 	suggest: {
 		api: {
 			// host: 'https://snapi.kube.searchspring.io',
 			// path: '/api/v1/recommend',
 		},
-		cache: {
-			enabled: true,
-			expiresAfter: 300000,
-		},
 	},
 };
-
-type Cache = {
-	[siteId: string]: {
-		meta?: {
-			data?: MetaResponseModel;
-			promise?: Promise<MetaResponseModel>;
-			created?: number;
-		};
-	};
-};
-
-// TODO: expire meta data
-const cache: Cache = {};
 
 export class Client {
 	private globals: ClientGlobals;
@@ -110,95 +78,61 @@ export class Client {
 		this.config = deepmerge(defaultConfig, config);
 		this.context = context;
 
-		cache[this.globals.siteId] = cache[this.globals.siteId] || {};
-
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.autocomplete?.api?.host,
-					siteId: this.globals.siteId,
 					cacheSettings: this.config.autocomplete.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.meta?.api?.host,
-					siteId: this.globals.siteId,
 					cacheSettings: this.config.meta.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					basePath: this.config.recommend?.api?.host,
-					siteId: this.globals.siteId,
 					cacheSettings: this.config.recommend.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					basePath: this.config.search?.api?.host,
-					siteId: this.globals.siteId,
 					cacheSettings: this.config.search.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					basePath: this.config.suggest?.api?.host,
-					siteId: this.globals.siteId,
 					cacheSettings: this.config.suggest.cache,
 				})
 			),
 		};
-
-		if (this.config.meta.prefetch && !cache[this.globals.siteId].meta) {
-			this.fetchMeta();
-		}
 	}
 
-	get meta(): MetaResponseModel {
-		return cache[this.globals.siteId].meta?.data;
-	}
-
-	fetchMeta(params?: MetaRequestModel): Promise<MetaResponseModel> {
+	async meta(params?: MetaRequestModel): Promise<MetaResponseModel> {
 		const defaultParams: MetaRequestModel = { siteId: this.globals.siteId };
 		params = deepmerge(defaultParams, params || {});
-		cache[params.siteId] = cache[params.siteId] || {};
-		cache[params.siteId].meta = {};
-		const metaCache = cache[params.siteId].meta;
 
-		metaCache.promise = this.requesters.meta.getMeta(params);
-
-		metaCache.promise
-			.then((data) => {
-				metaCache.data = data;
-				metaCache.created = Date.now();
-			})
-			.catch((err) => {
-				console.error(`Failed to fetch meta data for '${params.siteId}'.`);
-				console.error(err);
-			});
-
-		return metaCache.promise;
+		return this.requesters.meta.getMeta(params);
 	}
 
-	async autocomplete(params: AutocompleteRequestModel = {}): Promise<[AutocompleteResponseModel, MetaResponseModel]> {
+	async autocomplete(params: AutocompleteRequestModel = {}): Promise<[MetaResponseModel, AutocompleteResponseModel]> {
 		if (!params.search?.query?.string) {
 			throw 'query string parameter is required';
 		}
 
 		params = deepmerge(this.globals, params);
 
-		!cache[params.siteId]?.meta && this.fetchMeta({ siteId: params.siteId });
-
-		return Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise]);
+		return Promise.all([this.meta({ siteId: params.siteId }), this.requesters.autocomplete.getAutocomplete(params)]);
 	}
 
-	async search(params: SearchRequestModel = {}): Promise<[SearchResponseModel, MetaResponseModel]> {
+	async search(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {
 		params = deepmerge(this.globals, params);
 
-		!cache[params.siteId]?.meta && this.fetchMeta({ siteId: params.siteId });
-
-		return Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise]);
+		return Promise.all([this.meta({ siteId: params.siteId }), this.requesters.search.getSearch(params)]);
 	}
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {

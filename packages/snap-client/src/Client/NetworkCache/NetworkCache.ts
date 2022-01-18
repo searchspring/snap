@@ -1,58 +1,92 @@
-import { CacheConfig } from '../../types';
+import deepmerge from 'deepmerge';
 
-export class NetworkCache<T> {
-	defaultCacheSettings: CacheConfig = {
-		enabled: true,
-		expiresAfter: 300000,
-	};
+import { CacheConfig, Cache, CacheEntry } from '../../types';
 
-	public get(key: number | string | undefined): T | undefined {
+const CACHE_STORAGE_KEY = 'ss-networkcache';
+
+const defaultCacheSettings: CacheConfig = {
+	enabled: true,
+	ttl: 300000,
+	maxCacheSize: 200, // KB
+	purgable: true,
+};
+
+export class NetworkCache {
+	private memoryCache: Cache = {};
+	config: CacheConfig;
+
+	constructor(config?: CacheConfig) {
+		this.config = deepmerge(defaultCacheSettings, config || {});
+	}
+
+	public get(key: string): Response {
 		try {
-			const stored: any = sessionStorage.getItem('ss-networkcache');
-			const localData = stored && JSON.parse(stored);
+			if (this.memoryCache[key]) {
+				if (Date.now() > this.memoryCache[key].expires) {
+					return this.memoryCache[key].value;
+				}
+			}
+
+			const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
+			const localData: Cache = stored && JSON.parse(stored);
 
 			if (localData && key && localData[key]) {
-				const now = new Date();
 				// compare the expiry time of the item with the current time
-				if (now.getTime() > localData[key].expires) {
+				if (Date.now() > localData[key].expires) {
 					// remove item
 					const newStored = {
 						...localData,
 					};
 					delete newStored[key];
 					//update storage
-					sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+					sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
 
 					return undefined;
 				} else {
 					return localData[key].value;
 				}
-			} else {
-				return undefined;
 			}
 		} catch (err) {
 			console.warn('something went wrong, browser might not have cookies enabled');
 		}
 	}
 
-	public set(key: number | string, value: any, cacheSettings?: CacheConfig): void {
-		if (!cacheSettings) {
-			cacheSettings = this.defaultCacheSettings;
-		}
-
-		if (cacheSettings.enabled) {
+	public set(key: string, value: Response): void {
+		if (this.config.enabled) {
 			try {
-				const stored: any = sessionStorage.getItem('ss-networkcache');
-				const newStored = {
+				const cacheObject = {
+					value,
+					expires: Date.now() + this.config.ttl,
+					purgable: this.config.purgable,
+				};
+
+				this.memoryCache[key] = cacheObject;
+
+				const stored: any = sessionStorage.getItem(CACHE_STORAGE_KEY);
+				const newStored: Cache = {
 					...(stored && JSON.parse(stored)),
 				};
-				const now = new Date();
-				newStored[key] = {
-					value: JSON.stringify(value),
-					expires: now.getTime() + cacheSettings.expiresAfter,
-				};
+				newStored[key] = cacheObject;
 
-				sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+				let size = new TextEncoder().encode(JSON.stringify(newStored)).length / 1024;
+
+				while (size > this.config.maxCacheSize) {
+					const oldestKey = Object.keys(newStored)
+						.filter((key) => newStored[key].purgable)
+						.sort((a, b) => {
+							return newStored[a].expires - newStored[b].expires;
+						})[0];
+
+					if (!oldestKey) break;
+					delete newStored[oldestKey];
+
+					// recalculate size after removing oldest
+					size = new TextEncoder().encode(JSON.stringify(newStored)).length / 1024;
+				}
+
+				if (size < this.config.maxCacheSize) {
+					sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+				}
 			} catch (err) {
 				console.warn('something went wrong, browser might not have cookies enabled');
 			}
@@ -61,7 +95,8 @@ export class NetworkCache<T> {
 
 	public clear() {
 		try {
-			sessionStorage.setItem('ss-networkcache', '');
+			this.memoryCache = {};
+			sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 		} catch (err) {
 			console.warn('something went wrong, browser might not have cookies enabled');
 		}

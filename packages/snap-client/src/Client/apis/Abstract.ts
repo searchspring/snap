@@ -21,24 +21,22 @@ export interface RequestOpts {
 export class API {
 	private retryDelay = 1000;
 	private retryCount = 1;
-	public clearNetworkCache() {
-		this.networkCache.clear();
+
+	public cache: NetworkCache;
+
+	constructor(protected configuration: ApiConfiguration) {
+		this.cache = new NetworkCache(configuration.cacheSettings);
 	}
-
-	private networkCache = new NetworkCache<any>();
-
-	constructor(protected configuration: ApiConfiguration) {}
 
 	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
 		const { url, init } = this.createFetchParams(context);
 
 		if (cacheKey) {
-			let cachedResponse = this.networkCache.get(cacheKey);
+			const cachedResponse = this.cache.get(cacheKey);
 			if (cachedResponse) {
-				const parsed = JSON.parse(cachedResponse);
 				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 				this.retryDelay = 1000;
-				return parsed;
+				return cachedResponse;
 			}
 		}
 
@@ -49,7 +47,7 @@ export class API {
 			this.retryDelay = 1000;
 			if (cacheKey) {
 				// save in the cache before returning
-				this.networkCache.set(cacheKey, responseJSON, this.configuration.cacheSettings);
+				this.cache.set(cacheKey, responseJSON);
 			}
 			return responseJSON;
 		} else if (response.status == 429) {
@@ -66,11 +64,17 @@ export class API {
 	}
 
 	private createFetchParams(context: RequestOpts) {
-		let url = this.configuration.basePath + context.path;
+		// grab siteID out of context to generate apiHost fo URL
+		const siteId = context?.body?.siteId || context?.query?.siteId;
+		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+
+		let url = `${this.configuration.basePath || siteIdHost}/${context.path}`;
+
 		if (context.query !== undefined && Object.keys(context.query).length !== 0) {
 			// only add the querystring to the URL if there are query parameters.
 			url += '?' + this.configuration.queryParamsStringify(context.query);
 		}
+
 		const body =
 			(typeof FormData !== 'undefined' && context.body instanceof FormData) || context.body instanceof URLSearchParams || isBlob(context.body)
 				? context.body
@@ -95,7 +99,6 @@ export class API {
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
-	siteId: string;
 	basePath?: string; // override base path
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
@@ -109,16 +112,9 @@ export class ApiConfiguration {
 	public cacheSettings: CacheConfig;
 	constructor(private configuration: ApiConfigurationParameters) {
 		this.cacheSettings = configuration.cacheSettings;
-
-		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
-		configuration.basePath = configuration.basePath || apiHost;
 		if (configuration.maxRetry) {
 			this.maxRetry = configuration.maxRetry;
 		}
-	}
-
-	getSiteId(): string {
-		return this.configuration.siteId;
 	}
 
 	get basePath(): string {

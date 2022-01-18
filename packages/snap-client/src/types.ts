@@ -1,7 +1,5 @@
 export type ClientConfig = {
 	meta?: {
-		prefetch?: boolean;
-		ttl?: number;
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
@@ -24,8 +22,20 @@ export type ClientConfig = {
 };
 
 export type CacheConfig = {
-	enabled: boolean;
-	expiresAfter: number;
+	enabled?: boolean;
+	ttl?: number;
+	maxCacheSize?: number;
+	purgable?: boolean;
+};
+
+export type CacheEntry = {
+	value: Response;
+	expires?: number;
+	purgable?: boolean;
+};
+
+export type Cache = {
+	[key: string]: CacheEntry;
 };
 
 export type SnapApiConfig = {
