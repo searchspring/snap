@@ -1,7 +1,8 @@
 import 'core-js/features/promise';
-export const polyfills = async (): Promise<void> => {
-	return new Promise((resolve) => {
-		const promises = [];
+export function polyfills(): Promise<void> {
+	return new Promise(function (resolve) {
+		// eslint-disable-next-line no-var
+		var promises = [];
 
 		if (!('fetch' in window)) {
 			promises.push(import('whatwg-fetch'));
@@ -13,8 +14,8 @@ export const polyfills = async (): Promise<void> => {
 			promises.push(import('core-js/stable'));
 		}
 
-		Promise.all(promises).then(() => {
+		Promise.all(promises).then(function () {
 			resolve();
 		});
 	});
-};
+}
