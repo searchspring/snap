@@ -68,7 +68,7 @@ export class API {
 		const siteId = context?.body?.siteId || context?.query?.siteId;
 		const siteIdHost = `https://${siteId}.a.searchspring.io`;
 
-		let url = `${this.configuration.basePath || siteIdHost}/${context.path}`;
+		let url = `${this.configuration.basePath || siteIdHost}${context.path}`;
 
 		if (context.query !== undefined && Object.keys(context.query).length !== 0) {
 			// only add the querystring to the URL if there are query parameters.

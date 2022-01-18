@@ -22,7 +22,7 @@ export class NetworkCache {
 	public get(key: string): Response {
 		try {
 			if (this.memoryCache[key]) {
-				if (Date.now() > this.memoryCache[key].expires) {
+				if (Date.now() < this.memoryCache[key].expires) {
 					return this.memoryCache[key].value;
 				}
 			}

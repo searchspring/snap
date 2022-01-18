@@ -161,6 +161,7 @@ export class Client {
 
 		const recommendParams: RecommendRequestModel = {
 			tags: [tag],
+			siteId: params.siteId || this.globals.siteId,
 			...otherParams,
 		};
 
