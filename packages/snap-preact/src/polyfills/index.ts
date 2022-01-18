@@ -1,3 +1,4 @@
+import 'core-js/features/promise';
 export const polyfills = async (): Promise<void> => {
 	return new Promise((resolve) => {
 		const promises = [];
