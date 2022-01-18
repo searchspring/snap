@@ -242,25 +242,20 @@
             </div>
         </div>
     </footer>
-    <script>
-        try {
-            window.searchspring.track.cart.view({
-                data: {
-                    items: [
-                        {
-                            sku: "C-BP-G7-B1469",
-                            qty: "1",
-                            price: "22"
-                        },
-                        {
-                            sku: "C-VJ-P2-32007",
-                            qty: "1",
-                            price: "39"
-                        },
-                    ]
-                }
-            })
-        } catch (e){}
+
+    <script type="searchspring/track/cart/view">
+        items = [
+            {
+                sku: "C-BP-G7-B1469",
+                qty: 1,
+                price: 22
+            },
+            {
+                sku: "C-VJ-P2-32007",
+                qty: 1,
+                price: 39
+            },
+        ];
     </script>
 </body>
 

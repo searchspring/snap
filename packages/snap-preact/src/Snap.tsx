@@ -32,6 +32,7 @@ type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<RootComponent> | RootComponent;
+	skeleton?: () => Promise<any>;
 	props?: unknown;
 	onTarget?: OnTarget;
 	prefetch?: boolean;
@@ -173,15 +174,6 @@ export class Snap {
 		this._instantiatorPromises = {};
 		this.controllers = {};
 
-		// autotrack shopper id from the context
-		if (this.config.context && this.config.context.shopper?.id) {
-			this.tracker.track.shopper.login({
-				data: {
-					id: this.config.context.shopper.id,
-				},
-			});
-		}
-
 		// TODO environment switch using URL?
 		this.logger.setMode(process.env.NODE_ENV as LogMode);
 
@@ -206,7 +198,7 @@ export class Snap {
 				}
 
 				this.logger.setMode(LogMode.DEVELOPMENT);
-				this.logger.warn(`...loading '${branchParam}' build...`);
+				this.logger.warn(`...loading build... '${branchParam}'`);
 
 				// append script with new branch in path
 				const script = document.createElement('script');
@@ -235,10 +227,21 @@ export class Snap {
 					}
 				);
 
-				// prevent instantiation of config
+				// prevent further instantiation of config
 				return;
 			}
 		} catch (e) {}
+
+		if (window.searchspring && this.config.context) {
+			window.searchspring.context = this.config.context;
+		}
+
+		// autotrack shopper id from the context
+		if (this.config.context?.shopper?.id) {
+			this.tracker.track.shopper.login({
+				id: this.config.context.shopper.id,
+			});
+		}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
@@ -328,7 +331,15 @@ The error above happened in the following targeter in the Snap Config`,
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, targetFunction);
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
+									if (target.skeleton) {
+										const Skeleton = await (target as ExtendedTarget).skeleton();
+										setTimeout(() => {
+											render(<Skeleton />, elem);
+										});
+									}
+									targetFunction(target, elem, originalElem);
+								});
 							});
 						} catch (err) {
 							this.logger.error(`Failed to instantiate ${type} controller at index ${index}.`, err);

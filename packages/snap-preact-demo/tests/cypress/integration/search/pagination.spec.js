@@ -1,6 +1,6 @@
 describe('Pagination', () => {
 	beforeEach(() => {
-		cy.visit('https://localhost:4444/');
+		cy.visit('https://localhost:2222/');
 	});
 
 	it('can paginate', () => {

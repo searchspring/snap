@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **autocomplete:** pass down banner subProps ([8036a20](https://github.com/searchspring/snap/commit/8036a2092b22c98f34cbfd8d2b7010a3d4241d62))
+* **getparams:** added a null check for range filters with null low values ([af1bbf1](https://github.com/searchspring/snap/commit/af1bbf1b765ec278fd49e677bc6a91ab5fcb8408))
+* **hybrid.ts:** use suggested query before spell corrected query ([a8792ce](https://github.com/searchspring/snap/commit/a8792cea26b3659654792d19541405e652a7e0e5))
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+
+### Bug Fixes
+
+* **autocomplete-controller:** when spell correction is used the controller will wait for response ([0d65093](https://github.com/searchspring/snap/commit/0d650935ac0c310595fcb6d8e1843cb703afbd25))
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **domtargeter.ts:** removing interactive so scripts loaded with defer tag wait for DOMContentLoaded ([10b9ca3](https://github.com/searchspring/snap/commit/10b9ca3ee8a3ad563f01e1b919d433c2f2fb725e))
+* **preact-component-image:** changing useRef to have a default empty string value ([e679aed](https://github.com/searchspring/snap/commit/e679aed6461efa7bd7371b44388d10743d28033a))
+* **searchrequest:** add missing tracking.domain search request param ([45afe2d](https://github.com/searchspring/snap/commit/45afe2d089b0d172290e36854a89998bb607c019))
+* **snap-preact:** fixing issue in getController after making SearchController creation synchronous ([bb25898](https://github.com/searchspring/snap/commit/bb258989ce4e4b0546df4b6169d84bb210b24694))
+* **sortingstore:** remove duplicate sort options ([3723b8a](https://github.com/searchspring/snap/commit/3723b8a436e0f9302db822fe64b9ff2fc1bf739e))
+* **toolbox-getcontext:** making the function more robust and not requiring innerHTML ([f62a284](https://github.com/searchspring/snap/commit/f62a28416f5abe2daead261d108a8e39c0871b5f))
+
+
+### Features
+
+* **snap-preact:** adding context to the window global ([1e10921](https://github.com/searchspring/snap/commit/1e109216a1430259690518c14332c333da6fb5b7))
+* **snap.tsx:** adding Skeleton template support and examples ([ac426bc](https://github.com/searchspring/snap/commit/ac426bcc7ef2794a747183a21e8e89d70bcf40e1))
+* **tracker:** adding ability to track using script tags ([b655062](https://github.com/searchspring/snap/commit/b65506258ebc8845af0fb5c19efbf159e045e60d))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 

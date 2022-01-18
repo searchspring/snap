@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **autocomplete:** pass down banner subProps ([8036a20](https://github.com/searchspring/snap/commit/8036a2092b22c98f34cbfd8d2b7010a3d4241d62))
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **preact-component-image:** changing useRef to have a default empty string value ([e679aed](https://github.com/searchspring/snap/commit/e679aed6461efa7bd7371b44388d10743d28033a))
+
+
+
+
+
 # [0.12.0](https://github.com/searchspring/snap/compare/v0.11.0...v0.12.0) (2021-11-19)
 
 
