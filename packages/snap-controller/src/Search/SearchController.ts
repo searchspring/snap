@@ -72,7 +72,7 @@ export class SearchController extends AbstractController {
 
 			if (
 				config?.settings?.redirects?.singleResult &&
-				search?.response.search.query &&
+				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
 				!search?.response?.filters?.length
 			) {
