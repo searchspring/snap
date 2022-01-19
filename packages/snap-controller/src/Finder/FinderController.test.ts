@@ -48,7 +48,7 @@ describe('Finder Controller', () => {
 
 	it('Hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderHierarchyConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new FinderStore(finderHierarchyConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -85,7 +85,7 @@ describe('Finder Controller', () => {
 
 	it('Non-hierarchy type can make selection', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new FinderStore(finderNonhierarchyConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -118,7 +118,7 @@ describe('Finder Controller', () => {
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
+				client: new MockClient(globals, {}),
 				store: new FinderStore(finderHierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
@@ -140,7 +140,7 @@ describe('Finder Controller', () => {
 
 	it('can call reset method', async () => {
 		const controller = new FinderController(finderNonhierarchyConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new FinderStore(finderNonhierarchyConfig, services),
 			urlManager,
 			eventManager: new EventManager(),

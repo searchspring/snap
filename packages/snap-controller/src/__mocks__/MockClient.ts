@@ -20,11 +20,11 @@ export class MockClient extends Client {
 
 	async search() {
 		const searchData = new SearchData({ search: this.mockDataFile });
-		return Promise.all([searchData as SearchResponseModel, searchData.meta as MetaResponseModel]);
+		return Promise.all([searchData.meta as MetaResponseModel, searchData as SearchResponseModel]);
 	}
 
 	async autocomplete() {
 		const searchData = new SearchData({ search: this.mockDataFile });
-		return Promise.all([searchData as SearchResponseModel, searchData.meta as MetaResponseModel]);
+		return Promise.all([searchData.meta as MetaResponseModel, searchData as SearchResponseModel]);
 	}
 }

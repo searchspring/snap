@@ -18,9 +18,6 @@ let searchConfig: SearchControllerConfig = {
 	globals: {
 		filters: [],
 	},
-	meta: {
-		prefetch: false,
-	},
 	settings: {
 		redirects: {
 			merchandising: false,
@@ -43,7 +40,7 @@ describe('Network Cache', () => {
 	});
 
 	beforeEach(() => {
-		// make sure the fridge starts out empty for each test
+		// make sure the storage starts out empty for each test
 		mockStorage = {};
 	});
 
@@ -61,7 +58,7 @@ describe('Network Cache', () => {
 	});
 	it('caches search responses and uses them', async () => {
 		const controller = new SearchController(searchConfig, {
-			client: new Client(globals, {}),
+			client: new Client(globals),
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -69,22 +66,34 @@ describe('Network Cache', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
+		//no cache initially
 		expect(mockStorage['ss-networkcache']).toBeUndefined();
 
+		//mock fetch
 		const fetchfn = jest.spyOn(global.window, 'fetch');
-		await controller.search();
-		expect(fetchfn).toHaveBeenCalledTimes(1);
 
+		//make a search
+		await controller.search();
+
+		//expect meta and search calls to fire
+		expect(fetchfn).toHaveBeenCalledTimes(2);
+
+		//now we have cache
 		expect(mockStorage['ss-networkcache']).toBeDefined();
 
+		// we used the cache
 		expect(global.Storage.prototype.getItem).toHaveBeenCalled();
 
+		//make another call
 		await controller.search();
 
-		expect(global.Storage.prototype.setItem).toHaveBeenCalled();
+		//cache was updated
 		expect(mockStorage['ss-networkcache']).toBeDefined();
-		expect(fetchfn).toHaveBeenCalledTimes(1);
 
+		//but it did not make additional calls and used previous cache response
+		expect(fetchfn).toHaveBeenCalledTimes(2);
+
+		//check that there are results that we pulled from cache
 		expect(controller.store.results.length).toBeGreaterThan(0);
 	});
 });
