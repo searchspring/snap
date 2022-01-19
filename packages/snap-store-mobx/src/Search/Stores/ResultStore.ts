@@ -23,7 +23,7 @@ export class ResultStore extends Array {
 		merchData?: SearchResponseModelMerchandising
 	) {
 		let results = (resultData || []).map((result) => {
-			return new Product(services, result);
+			return new Product(services, result, false);
 		});
 
 		if (merchData?.content?.inline) {
@@ -70,18 +70,34 @@ class Banner {
 }
 
 class Product {
-	type = 'product';
+	type: string;
 	id: string;
 	attributes: Record<string, unknown> = {};
 	mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
 	custom = {};
+	children?: Array<Product> = [];
 
-	constructor(services: StoreServices, result: SearchResponseModelResult) {
+	constructor(services: StoreServices, result: SearchResponseModelResult, isVariant?: boolean) {
 		this.id = result.id;
+		this.type = isVariant ? 'variant' : 'product';
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
+
+		if (result?.children?.length) {
+			this.children = result.children.map((variant, index) => {
+				return new Product(
+					services,
+					{
+						...variant,
+						id: `${result.id}-${index}`,
+						mappings: { core: {} },
+					},
+					true
+				);
+			});
+		}
 
 		makeObservable(this, {
 			id: observable,

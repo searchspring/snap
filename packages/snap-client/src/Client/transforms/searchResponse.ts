@@ -94,12 +94,27 @@ transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 			};
 		}, {});
 
+	const children =
+		rawResult?.children?.map((child) => {
+			return {
+				attributes: {
+					...Object.keys(child).reduce((attributes, key) => {
+						return {
+							...attributes,
+							[key]: decodeProperty(child[key]),
+						};
+					}, {}),
+				},
+			};
+		}) || [];
+
 	return new Result({
 		id: rawResult.uid,
 		mappings: {
 			core: coreFieldValues,
 		},
 		attributes,
+		children,
 	});
 };
 
