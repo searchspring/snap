@@ -83,6 +83,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		onError: {
+			description: 'Image error event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onError',
+		},
 		onLoad: {
 			description: 'Image loaded event handler',
 			table: {
