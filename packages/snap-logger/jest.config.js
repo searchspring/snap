@@ -1,4 +1,5 @@
 const rootConfig = require('../../jest.config.json');
 module.exports = {
-	...rootConfig
-}
+	...rootConfig,
+	testEnvironment: '<rootDir>/customEnvironment.js',
+};
