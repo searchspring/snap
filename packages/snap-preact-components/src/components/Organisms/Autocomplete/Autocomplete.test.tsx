@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { h } from 'preact';
 import { v4 as uuidv4 } from 'uuid';
 import { render } from '@testing-library/preact';
+import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers';
 
@@ -92,6 +93,77 @@ describe('Autocomplete Component', () => {
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 		expect(results[0]).toBeInTheDocument();
 		expect(results.length).toEqual(9);
+	});
+
+	it('can hover over terms, & facets', async () => {
+		const controller = createAutocompleteController({ client, controller: config });
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+
+		controller.bind();
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 's';
+
+		await new Promise((r) => setTimeout(r, 1000));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
+		//first test the terms.
+		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
+		let terms = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option');
+		const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+
+		//there should be results
+		expect(results[0]).toBeInTheDocument();
+		//we need to save this for later
+		const firstResult = results[0].innerHTML;
+		//there should be terms
+		expect(termLinks[0]).toBeInTheDocument();
+		//first term should be auto selected
+		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
+
+		//now lets hover over the next term
+		userEvent.hover(termLinks[1]);
+		await new Promise((r) => setTimeout(r, 1000));
+
+		//now lets check for the new results
+		let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+		//there should be new results available
+		expect(newResults[0]).toBeInTheDocument();
+		// we will need to save this for later
+		const newFirstResult = newResults[0].innerHTML;
+		//new result should be different from the previous result
+		expect(newFirstResult).not.toEqual(firstResult);
+
+		//first term should no longer be active, and hover term should be.
+		expect(terms[1]).toHaveClass('ss__autocomplete__terms__option--active');
+		expect(terms[0]).not.toHaveClass('ss__autocomplete__terms__option--active');
+
+		//now lets test the facets
+		const facetOptions = rendered.container.querySelectorAll('.ss__facet-list-options__option');
+
+		//there should be facets
+		expect(facetOptions[0]).toBeInTheDocument();
+		//shouldnt be active
+		expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
+
+		//now lets hover over one
+		userEvent.hover(facetOptions[0]);
+		await new Promise((r) => setTimeout(r, 1000));
+
+		//check for the new results
+		let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+		expect(newNewResults[0]).toBeInTheDocument();
+		//new results should again be different from previous results
+		expect(newNewResults[0].innerHTML).not.toEqual(newFirstResult);
+
+		//hover facet should have now be active.
+		expect(facetOptions[0]).toHaveClass('ss__facet-list-options__option--filtered');
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
