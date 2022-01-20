@@ -255,9 +255,9 @@ export class SearchController extends AbstractController {
 					}
 
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([data]) => {
-						previousResults = previousResults.concat(data.results);
-					});
+					//need to filter out all the meta calls
+					const filteredResponses = backfillResponses[0].filter((response) => response.results);
+					filteredResponses.map((data) => (previousResults = previousResults.concat(data.results)));
 				}
 
 				response.results = [...previousResults, ...(response.results || [])];
