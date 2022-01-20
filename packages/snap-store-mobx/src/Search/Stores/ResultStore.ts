@@ -23,7 +23,7 @@ export class ResultStore extends Array {
 		merchData?: SearchResponseModelMerchandising
 	) {
 		let results = (resultData || []).map((result) => {
-			return new Product(services, result, false);
+			return new Product(services, result);
 		});
 
 		if (merchData?.content?.inline) {
@@ -70,7 +70,7 @@ class Banner {
 }
 
 class Product {
-	type: string;
+	type = 'product';
 	id: string;
 	attributes: Record<string, unknown> = {};
 	mappings: SearchResponseModelResultMappings = {
@@ -79,25 +79,52 @@ class Product {
 	custom = {};
 	children?: Array<Product> = [];
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, isVariant?: boolean) {
+	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id;
-		this.type = isVariant ? 'variant' : 'product';
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
 
 		if (result?.children?.length) {
 			this.children = result.children.map((variant, index) => {
-				return new Product(
-					services,
-					{
-						...variant,
-						id: `${result.id}-${index}`,
-						mappings: { core: {} },
-					},
-					true
-				);
+				return new Variant(services, {
+					mappings: { core: {} },
+					id: `${result.id}-${index}`,
+					...variant,
+				});
 			});
 		}
+
+		makeObservable(this, {
+			id: observable,
+			attributes: observable,
+			custom: observable,
+		});
+
+		// must set all subo
+		const coreObservables = Object.keys(result.mappings.core).reduce((map, key) => {
+			return {
+				...map,
+				[key]: observable,
+			};
+		}, {});
+
+		makeObservable(this.mappings.core, coreObservables);
+	}
+}
+
+class Variant {
+	type = 'variant';
+	id: string;
+	attributes: Record<string, unknown> = {};
+	mappings: SearchResponseModelResultMappings = {
+		core: {},
+	};
+	custom = {};
+
+	constructor(services: StoreServices, result: SearchResponseModelResult) {
+		this.id = result.id;
+		this.attributes = result.attributes;
+		this.mappings = result.mappings;
 
 		makeObservable(this, {
 			id: observable,
