@@ -39,7 +39,7 @@
 		"babel-loader": "^8.2.3",
 		"core-js": "^3.20.2",
 		"css-loader": "^6.5.1",
-		"cypress": "9.2.0",
+		"cypress": "8.5.0",
 		"file-loader": "^6.2.0",
 		"sass": "^1.46.0",
 		"sass-loader": "^12.4.0",
