@@ -479,8 +479,6 @@ Array of product variants. Each variant contains the same properties as the pare
 
 `mappings.core` will be an empty object. All attributes can be found in `attributes`
 
-`children` will be an empty array as variants of variants are not supported.
-
 
 ### `custom` property
 See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
