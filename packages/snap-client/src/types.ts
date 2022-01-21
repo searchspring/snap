@@ -39,8 +39,7 @@ export type Cache = {
 };
 
 export type SnapApiConfig = {
-	host?: string;
-	path?: string;
+	origin?: string;
 };
 
 export type ClientGlobals = {

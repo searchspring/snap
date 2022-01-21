@@ -33,26 +33,22 @@ const defaultConfig: ClientConfig = {
 	},
 	search: {
 		api: {
-			// host: 'https://snapi.kube.searchspring.io',
-			// path: '/api/v1/search',
+			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
 	autocomplete: {
 		api: {
-			// host: 'https://snapi.kube.searchspring.io',
-			// path: '/api/v1/autocomplete',
+			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
 	recommend: {
 		api: {
-			// host: 'https://snapi.kube.searchspring.io',
-			// path: '/api/v1/recommend',
+			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
 	suggest: {
 		api: {
-			// host: 'https://snapi.kube.searchspring.io',
-			// path: '/api/v1/recommend',
+			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
 };
@@ -60,7 +56,6 @@ const defaultConfig: ClientConfig = {
 export class Client {
 	private globals: ClientGlobals;
 	private config: ClientConfig;
-	private context: any;
 	private requesters: {
 		autocomplete: HybridAPI;
 		meta: HybridAPI;
@@ -69,43 +64,42 @@ export class Client {
 		suggest: SuggestAPI;
 	};
 
-	constructor(globals: ClientGlobals, config: ClientConfig = {}, context?: any) {
+	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}
 
 		this.globals = globals;
 		this.config = deepmerge(defaultConfig, config);
-		this.context = context;
 
 		this.requesters = {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
-					basePath: this.config.autocomplete?.api?.host,
+					origin: this.config.autocomplete?.api?.origin,
 					cacheSettings: this.config.autocomplete.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
-					basePath: this.config.meta?.api?.host,
+					origin: this.config.meta?.api?.origin,
 					cacheSettings: this.config.meta.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
-					basePath: this.config.recommend?.api?.host,
+					origin: this.config.recommend?.api?.origin,
 					cacheSettings: this.config.recommend.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
-					basePath: this.config.search?.api?.host,
+					origin: this.config.search?.api?.origin,
 					cacheSettings: this.config.search.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
-					basePath: this.config.suggest?.api?.host,
+					origin: this.config.suggest?.api?.origin,
 					cacheSettings: this.config.suggest.cache,
 				})
 			),

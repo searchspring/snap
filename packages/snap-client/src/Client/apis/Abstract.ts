@@ -66,9 +66,14 @@ export class API {
 	private createFetchParams(context: RequestOpts) {
 		// grab siteID out of context to generate apiHost fo URL
 		const siteId = context?.body?.siteId || context?.query?.siteId;
-		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+		if (!siteId) {
+			throw new Error(`Request failed. Missing "siteId" parameter.`);
+		}
 
-		let url = `${this.configuration.basePath || siteIdHost}${context.path}`;
+		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+		const origin = (this.configuration.origin || siteIdHost).replace(/\/$/, '');
+
+		let url = `${origin}/${context.path.replace(/^\//, '')}`;
 
 		if (context.query !== undefined && Object.keys(context.query).length !== 0) {
 			// only add the querystring to the URL if there are query parameters.
@@ -99,7 +104,7 @@ export class API {
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
-	basePath?: string; // override base path
+	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
@@ -108,17 +113,22 @@ export interface ApiConfigurationParameters {
 }
 
 export class ApiConfiguration {
-	public maxRetry = 8;
-	public cacheSettings: CacheConfig;
 	constructor(private configuration: ApiConfigurationParameters) {
-		this.cacheSettings = configuration.cacheSettings;
-		if (configuration.maxRetry) {
-			this.maxRetry = configuration.maxRetry;
+		if (!configuration.maxRetry) {
+			this.configuration.maxRetry = 8;
 		}
 	}
 
-	get basePath(): string {
-		return this.configuration.basePath;
+	get cacheSettings(): CacheConfig {
+		return this.configuration.cacheSettings;
+	}
+
+	get maxRetry(): number {
+		return this.configuration.maxRetry;
+	}
+
+	get origin(): string {
+		return this.configuration.origin;
 	}
 
 	get fetchApi(): FetchAPI {

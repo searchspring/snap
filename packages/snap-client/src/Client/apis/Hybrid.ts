@@ -20,8 +20,8 @@ export class HybridAPI extends API {
 		super(configuration);
 
 		this.requesters = {
-			legacy: new LegacyAPI(new ApiConfiguration({ basePath: configuration.basePath, cacheSettings: this.configuration.cacheSettings })),
-			suggest: new SuggestAPI(new ApiConfiguration({ basePath: configuration.basePath, cacheSettings: this.configuration.cacheSettings })),
+			legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: this.configuration.cacheSettings })),
+			suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: this.configuration.cacheSettings })),
 		};
 	}
 
