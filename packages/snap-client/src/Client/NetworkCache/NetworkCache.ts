@@ -68,8 +68,7 @@ export class NetworkCache {
 				};
 				newStored[key] = cacheObject;
 
-				let size = new TextEncoder().encode(JSON.stringify(newStored)).length / 1024;
-
+				let size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
 				while (size > this.config.maxCacheSize) {
 					const oldestKey = Object.keys(newStored)
 						.filter((key) => newStored[key].purgable)
@@ -81,7 +80,7 @@ export class NetworkCache {
 					delete newStored[oldestKey];
 
 					// recalculate size after removing oldest
-					size = new TextEncoder().encode(JSON.stringify(newStored)).length / 1024;
+					size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
 				}
 
 				if (size < this.config.maxCacheSize) {

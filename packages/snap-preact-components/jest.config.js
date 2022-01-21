@@ -9,5 +9,4 @@ module.exports = {
 	},
 	roots: ['./src/components'],
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-	testEnvironment: '<rootDir>/customEnvironment.js',
 };
