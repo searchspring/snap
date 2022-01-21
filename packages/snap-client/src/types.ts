@@ -24,7 +24,7 @@ export type ClientConfig = {
 export type CacheConfig = {
 	enabled?: boolean;
 	ttl?: number;
-	maxCacheSize?: number;
+	maxSize?: number;
 	purgable?: boolean;
 };
 

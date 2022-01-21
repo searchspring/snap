@@ -1,13 +1,13 @@
 import deepmerge from 'deepmerge';
 
-import { CacheConfig, Cache, CacheEntry } from '../../types';
+import { CacheConfig, Cache } from '../../types';
 
 const CACHE_STORAGE_KEY = 'ss-networkcache';
 
-const defaultCacheSettings: CacheConfig = {
+const defaultConfig: CacheConfig = {
 	enabled: true,
-	ttl: 300000,
-	maxCacheSize: 200, // KB
+	ttl: 300000, // ms
+	maxSize: 200, // KB
 	purgable: true,
 };
 
@@ -16,7 +16,7 @@ export class NetworkCache {
 	config: CacheConfig;
 
 	constructor(config?: CacheConfig) {
-		this.config = deepmerge(defaultCacheSettings, config || {});
+		this.config = deepmerge(defaultConfig, config || {});
 	}
 
 	public get(key: string): Response {
@@ -69,7 +69,7 @@ export class NetworkCache {
 				newStored[key] = cacheObject;
 
 				let size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
-				while (size > this.config.maxCacheSize) {
+				while (size > this.config.maxSize) {
 					const oldestKey = Object.keys(newStored)
 						.filter((key) => newStored[key].purgable)
 						.sort((a, b) => {
@@ -83,7 +83,7 @@ export class NetworkCache {
 					size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
 				}
 
-				if (size < this.config.maxCacheSize) {
+				if (size < this.config.maxSize) {
 					sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
 				}
 			} catch (err) {
