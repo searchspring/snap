@@ -87,7 +87,15 @@ export class Tracker {
 						console.error(`${type} event is not supported or incorrect`);
 						break;
 				}
+			}),
+			new DomTargeter([{ selector: '[data-ss-sku]', emptyTarget: false }], (target, elem) => {
+				// if possible, use root entry point targets instead of document
+				document.removeEventListener('click', this.cartAttributeListener);
+				document.addEventListener('click', this.cartAttributeListener);
 			})
+			// add another target for on click of clear all from cart to then call this.clearCart
+			// selector would be predefined ie ss-clear-cart to allow attribute via template,
+			// and check if onfig.clearCartSelector is present and attach click event listener to it
 		);
 
 		this.sendEvents();
@@ -98,6 +106,26 @@ export class Tracker {
 			target.retarget();
 		});
 	}
+
+	cartAttributeListener = (event) => {
+		if (event.target.getAttribute('data-ss-sku')) {
+			const attributes = {};
+			Object.values(event.target.attributes).forEach((attr: any) => {
+				attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
+			});
+			const skus = attributes['data-ss-sku']?.split(',');
+			const qty = Number.isInteger(+attributes['data-ss-qty']) ? +attributes['data-ss-qty'] : 1;
+			if (skus?.length) {
+				if (qty === 1) {
+					this.addToCart(skus);
+				} else if (qty > 1 && skus.length === 1) {
+					for (let index = 0; index < qty; index++) {
+						this.addToCart(skus);
+					}
+				}
+			}
+		}
+	};
 
 	setNamespace = (namespace?: string): void => {
 		let prefix = 'tracker';
@@ -122,6 +150,7 @@ export class Tracker {
 	};
 
 	track: TrackMethods = {
+		// add addToCart and clearCart method here so it's available on window
 		event: (payload: BeaconPayload): BeaconEvent => {
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
@@ -303,9 +332,8 @@ export class Tracker {
 
 				// save cart items to cookie
 				if (items.length) {
-					const products = [];
-					items.map((item) => products.push(item.sku || item.childSku));
-					cookies.set(CART_PRODUCTS, products.join(','), COOKIE_SAMESITE, 0);
+					const products = items.map((item) => item.sku || item.childSku);
+					this.addToCart(products);
 				}
 
 				// legacy tracking
@@ -435,6 +463,17 @@ export class Tracker {
 			return [];
 		}
 		return items.split(',');
+	};
+
+	addToCart = (items: string[]): void => {
+		const currentCartItems = this.getCartItems();
+		const newCartItems = [...currentCartItems, ...items];
+		cookies.set(CART_PRODUCTS, newCartItems.join(','), COOKIE_SAMESITE, 0);
+	};
+
+	clearCart = (): void => {
+		// clearCart after events have been sent
+		cookies.unset(CART_PRODUCTS);
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
