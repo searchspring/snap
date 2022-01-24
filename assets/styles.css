@@ -82,6 +82,10 @@ table td {
 	align-items: center;
 }
 
+.logo-container img {
+	width: 250px;
+}
+
 #navigation-wrapper {
 	width: 250px;
 	height: 100vh;
@@ -94,10 +98,6 @@ table td {
 
 #navigation-wrapper .collapseNav {
 	display: none;
-}
-
-#navigation-wrapper img {
-	width: 100%;
 }
 
 #navigation {
