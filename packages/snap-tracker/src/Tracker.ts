@@ -87,16 +87,11 @@ export class Tracker {
 						console.error(`${type} event is not supported or incorrect`);
 						break;
 				}
-			}),
-			new DomTargeter([{ selector: '[data-ss-sku]', emptyTarget: false }], (target, elem) => {
-				// if possible, use root entry point targets instead of document
-				document.removeEventListener('click', this.cartAttributeListener);
-				document.addEventListener('click', this.cartAttributeListener);
 			})
-			// add another target for on click of clear all from cart to then call this.clearCart
-			// selector would be predefined ie ss-clear-cart to allow attribute via template,
-			// and check if onfig.clearCartSelector is present and attach click event listener to it
 		);
+
+		document.removeEventListener('click', this.attributeClickEventListener);
+		document.addEventListener('click', this.attributeClickEventListener);
 
 		this.sendEvents();
 	}
@@ -107,22 +102,29 @@ export class Tracker {
 		});
 	}
 
-	cartAttributeListener = (event) => {
-		if (event.target.getAttribute('data-ss-sku')) {
+	attributeClickEventListener = (event) => {
+		event.preventDefault();
+
+		const containsAnyAttribute = Object.values(event.target.attributes).some((attribute: Attr) => {
+			const attributes = ['data-ss-sku', 'data-ss-remove', 'data-ss-clearall'];
+			return attributes.includes(attribute.nodeName);
+		});
+
+		if (containsAnyAttribute) {
 			const attributes = {};
-			Object.values(event.target.attributes).forEach((attr: any) => {
+			Object.values(event.target.attributes).forEach((attr: Attr) => {
 				attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
 			});
-			const skus = attributes['data-ss-sku']?.split(',');
-			const qty = Number.isInteger(+attributes['data-ss-qty']) ? +attributes['data-ss-qty'] : 1;
-			if (skus?.length) {
-				if (qty === 1) {
-					this.addToCart(skus);
-				} else if (qty > 1 && skus.length === 1) {
-					for (let index = 0; index < qty; index++) {
-						this.addToCart(skus);
-					}
-				}
+
+			if (attributes['data-ss-sku']) {
+				const skus = attributes['data-ss-sku'].split(',');
+				this.addToCart(skus);
+			} else if (attributes['data-ss-remove']) {
+				const skus = attributes['data-ss-remove'].split(',');
+				this.removeFromCart(skus);
+			} else if ('data-ss-clearall' in attributes) {
+				// does not expect a value
+				this.clearCart();
 			}
 		}
 	};
@@ -150,7 +152,6 @@ export class Tracker {
 	};
 
 	track: TrackMethods = {
-		// add addToCart and clearCart method here so it's available on window
 		event: (payload: BeaconPayload): BeaconEvent => {
 			const event: BeaconPayload = {
 				type: payload?.type || BeaconType.CUSTOM,
@@ -394,6 +395,9 @@ export class Tracker {
 					event: eventPayload,
 				};
 
+				// clear cart items from cookie when order is placed
+				this.clearCart();
+
 				// legacy tracking
 				new PixelEvent(payload);
 
@@ -466,13 +470,24 @@ export class Tracker {
 	};
 
 	addToCart = (items: string[]): void => {
-		const currentCartItems = this.getCartItems();
-		const newCartItems = [...currentCartItems, ...items];
-		cookies.set(CART_PRODUCTS, newCartItems.join(','), COOKIE_SAMESITE, 0);
+		if (items.length) {
+			const currentCartItems = this.getCartItems();
+			const itemsToAdd = items.map((item) => item.trim());
+			const uniqueCartItems = [...new Set([...currentCartItems, ...itemsToAdd])];
+			cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+		}
+	};
+
+	removeFromCart = (items: string[]): void => {
+		if (items.length) {
+			const currentCartItems = this.getCartItems();
+			const itemsToRemove = items.map((item) => item.trim());
+			const updatedItems = currentCartItems.filter((item) => itemsToRemove.includes(item));
+			cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+		}
 	};
 
 	clearCart = (): void => {
-		// clearCart after events have been sent
 		cookies.unset(CART_PRODUCTS);
 	};
 
