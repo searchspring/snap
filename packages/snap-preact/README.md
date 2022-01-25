@@ -276,3 +276,15 @@ An object containing all controllers that have been created.
 ### recommendations
 A reference to `RecommendationInstantiator` instance if creating recommendation instances.
 
+
+## polyfills
+
+Snap Preact provides various polyfills to ensure legacy browser support.
+
+```typescript
+import { polyfills } from '@searchspring/snap-preact';
+
+polyfills.then(() => {
+	import('./index');
+})
+```
