@@ -148,7 +148,9 @@ const CSS = {
 				'& .ss__banner.ss__banner--footer': {
 					margin: '10px 0',
 				},
-
+				'& .ss__autocomplete__content__results': {
+					minHeight: '0%',
+				},
 				'& .ss__autocomplete__content__info': {
 					padding: '10px',
 					textAlign: noResults ? 'center' : 'right',
