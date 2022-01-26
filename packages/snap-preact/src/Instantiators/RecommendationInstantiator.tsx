@@ -86,8 +86,8 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, branch, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options'],
+				const { shopper, shopperId, product, seed, branch, options, realtime } = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options', 'realtime'],
 					elem as HTMLScriptElement
 				);
 
@@ -113,6 +113,7 @@ export class RecommendationInstantiator {
 				const controllerConfig = {
 					id: `recommend_${tag + (profileCount[tag] - 1)}`,
 					tag,
+					realtime: Boolean(realtime),
 					globals,
 					...this.config.config,
 				};

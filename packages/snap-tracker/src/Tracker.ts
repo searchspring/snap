@@ -105,27 +105,34 @@ export class Tracker {
 	attributeClickEventListener = (event) => {
 		event.preventDefault();
 
-		const containsAnyAttribute = Object.values(event.target.attributes).some((attribute: Attr) => {
-			const attributes = ['data-ss-sku', 'data-ss-remove', 'data-ss-clearall'];
-			return attributes.includes(attribute.nodeName);
+		const attributes = {};
+		Object.values(event.target.attributes).forEach((attr: Attr) => {
+			attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
 		});
 
-		if (containsAnyAttribute) {
-			const attributes = {};
-			Object.values(event.target.attributes).forEach((attr: Attr) => {
-				attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
+		if (attributes['ss-cart-add']) {
+			// add skus to cart
+			const skus = attributes['ss-cart-add'].split(',');
+			this.addToCart(skus);
+			this.updateRecsControllers();
+		} else if (attributes['ss-cart-remove']) {
+			// remove skus from cart
+			const skus = attributes['ss-cart-remove'].split(',');
+			this.removeFromCart(skus);
+			this.updateRecsControllers();
+		} else if ('ss-cart-clear' in attributes) {
+			// clear all from cart
+			this.clearCart();
+			this.updateRecsControllers();
+		} else if (attributes['ss-intellisuggest'] && attributes['ss-intellisuggest-signature']) {
+			const intellisuggestData = attributes['ss-intellisuggest'];
+			const intellisuggestSignature = attributes['ss-intellisuggest-signature'];
+			const href = attributes['href'];
+			this.track.product.click({
+				intellisuggestData,
+				intellisuggestSignature,
+				href,
 			});
-
-			if (attributes['data-ss-sku']) {
-				const skus = attributes['data-ss-sku'].split(',');
-				this.addToCart(skus);
-			} else if (attributes['data-ss-remove']) {
-				const skus = attributes['data-ss-remove'].split(',');
-				this.removeFromCart(skus);
-			} else if ('data-ss-clearall' in attributes) {
-				// does not expect a value
-				this.clearCart();
-			}
 		}
 	};
 
@@ -233,11 +240,11 @@ export class Tracker {
 				};
 
 				// save recently viewed products to cookie
-				if (data?.sku || data?.childSku) {
-					const viewedProducts = cookies.get(VIEWED_PRODUCTS);
-					const products = viewedProducts ? new Set(viewedProducts.split(',')) : new Set();
-					products.add(data?.sku || data.childSku);
-					cookies.set(VIEWED_PRODUCTS, Array.from(products).slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+				const sku = data?.sku || data?.childSku;
+				if (sku) {
+					const lastViewedProducts = this.getLastViewedItems();
+					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
+					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
 				}
 
 				// legacy tracking
@@ -473,7 +480,15 @@ export class Tracker {
 		if (items.length) {
 			const currentCartItems = this.getCartItems();
 			const itemsToAdd = items.map((item) => item.trim());
-			const uniqueCartItems = [...new Set([...currentCartItems, ...itemsToAdd])];
+			const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
+			cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+		}
+	};
+
+	setCartItems = (items: string[]): void => {
+		if (items.length) {
+			const cartItems = items.map((item) => item.trim());
+			const uniqueCartItems = Array.from(new Set(cartItems));
 			cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
 		}
 	};
@@ -482,13 +497,24 @@ export class Tracker {
 		if (items.length) {
 			const currentCartItems = this.getCartItems();
 			const itemsToRemove = items.map((item) => item.trim());
-			const updatedItems = currentCartItems.filter((item) => itemsToRemove.includes(item));
+			const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
 			cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
 		}
 	};
 
 	clearCart = (): void => {
 		cookies.unset(CART_PRODUCTS);
+	};
+
+	updateRecsControllers = (): void => {
+		if (window.searchspring.controller) {
+			Object.keys(window.searchspring.controller).forEach((name) => {
+				const controller = window.searchspring.controller[name];
+				if (controller.type === 'recommendation' && controller.config?.realtime) {
+					controller.search();
+				}
+			});
+		}
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
