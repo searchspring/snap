@@ -151,16 +151,15 @@ class Selection extends SelectionBase {
 		this.selected = this.disabled ? '' : storageData.selected || '';
 	}
 
-	select(value) {
+	select(value = '') {
 		if (this.loading) return;
 
+		this.selected = value;
+		this.storage.set('selected', value);
+
 		if (!value) {
-			this.selected = '';
-			this.storage.set('selected', '');
 			this.services.urlManager.remove(`filter.${this.field}`).go();
 		} else {
-			this.selected = value;
-			this.storage.set('selected', value);
 			this.services.urlManager.set(`filter.${this.field}`, value).go();
 		}
 	}
@@ -179,12 +178,12 @@ class SelectionHierarchy extends SelectionBase {
 		let storageData = this.storage.get();
 
 		if (!storageData) {
-			// undefined, initial state for first dropdown
+			// nothing in storage - initial state for first dropdown
 			this.storage.set(`${this.config.key}.values`, facet.values);
 			storageData = this.storage.get();
 		} else if (storageData[this.config.key]?.values) {
-			// set values from storage
-			this.selected = storageData[this.config.key].selected;
+			// set selected from storage
+			this.selected = storageData[this.config.key]?.selected || '';
 		} else {
 			// value does not exist in storage
 			const storedLevels = this.storage.get();
@@ -194,10 +193,10 @@ class SelectionHierarchy extends SelectionBase {
 			const selectedLevels = Object.keys(storedLevels).filter((key) => storedLevels[key].selected);
 			const lastSelected = selectedLevels[selectedLevels.length - 1];
 
-			const labelindex = levels.indexOf(this.config.key);
-			const lastselectedindex = levels.indexOf(lastSelected);
+			const labelIndex = levels.indexOf(this.config.key);
+			const lastSelectedIndex = levels.indexOf(lastSelected);
 
-			if (lastselectedindex != -1 && labelindex == lastselectedindex + 1) {
+			if (lastSelectedIndex != -1 && labelIndex == lastSelectedIndex + 1) {
 				this.storage.set(`${this.config.key}.values`, facet.values);
 			} else {
 				this.disabled = true;
@@ -229,7 +228,11 @@ class SelectionHierarchy extends SelectionBase {
 				value = value || this.storage.get(`${key}.selected`);
 			});
 
-		this.services.urlManager.set(`filter.${this.field}`, value).go();
+		if (!value) {
+			this.services.urlManager.remove(`filter.${this.field}`).go();
+		} else {
+			this.services.urlManager.set(`filter.${this.field}`, value).go();
+		}
 	}
 }
 
