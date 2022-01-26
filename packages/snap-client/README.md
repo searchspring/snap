@@ -94,6 +94,19 @@ export type SnapApiConfig = {
 Snap Client is a dependency of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
 
 
+
+## Cache usage
+Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cache`. Settings include: 
+
+  `enabled`: to opt out - Defaults to `true`, 
+
+  `ttl`: to adjust how long the requests are stored (in ms) - Defaults to `300000`,
+
+  `maxSize`: to adjust the maximum size of the cache allowed to be stored in localStorage (in kb - Defaults to `200`,
+
+  `purgeable`: to allow auto purging of the requests from localstorage when maxSize is hit, based on time remaining to expiration.  - Defaults to `true` with the exception of `meta`,
+
+
 ## Standalone usage
 ```typescript
 const client = new Client(globals, clientConfig);
