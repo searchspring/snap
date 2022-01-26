@@ -153,8 +153,10 @@ class RangeFacet extends Facet {
 			// store bigger range
 			this.storage.set(`facets.${this.field}.range`, facet.range);
 			this.range = facet.range;
-		} else {
+		} else if (this.range.high !== facet.range.high || this.range.low !== facet.range.low) {
+			this.range = facet.range;
 			// range hasn't changed
+			this.storage.set(`facets.${this.field}.range`, facet.range);
 		}
 
 		// TODO: Fix api
