@@ -85,9 +85,9 @@ export type CacheConfig = {
 };
 
 export type SnapApiConfig = {
-	host?: string;
-	path?: string;
+	origin?: string;
 };
+
 ```
 
 ## Controller usage
