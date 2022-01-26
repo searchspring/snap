@@ -16,6 +16,7 @@ export type RecommendationInstantiatorConfig = {
 	};
 	config: {
 		branch: string;
+		realtime?: boolean;
 	} & Attachments;
 	selector?: string;
 	services?: SnapControllerServices;
