@@ -25,13 +25,13 @@ export type CacheConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;
-	purgable?: boolean;
+	purgeable?: boolean;
 };
 
 export type CacheEntry = {
 	value: Response;
 	expires?: number;
-	purgable?: boolean;
+	purgeable?: boolean;
 };
 
 export type Cache = {

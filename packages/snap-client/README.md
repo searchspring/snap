@@ -81,7 +81,7 @@ export type CacheConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;
-	purgable?: boolean;
+	purgeable?: boolean;
 };
 
 export type SnapApiConfig = {

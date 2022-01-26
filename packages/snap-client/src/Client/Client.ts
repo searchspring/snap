@@ -28,7 +28,7 @@ import deepmerge from 'deepmerge';
 const defaultConfig: ClientConfig = {
 	meta: {
 		cache: {
-			purgable: false,
+			purgeable: false,
 		},
 	},
 	search: {

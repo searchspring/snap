@@ -8,7 +8,7 @@ const defaultConfig: CacheConfig = {
 	enabled: true,
 	ttl: 300000, // ms
 	maxSize: 200, // KB
-	purgable: true,
+	purgeable: true,
 };
 
 export class NetworkCache {
@@ -57,7 +57,7 @@ export class NetworkCache {
 				const cacheObject = {
 					value,
 					expires: Date.now() + this.config.ttl,
-					purgable: this.config.purgable,
+					purgeable: this.config.purgeable,
 				};
 
 				this.memoryCache[key] = cacheObject;
@@ -71,7 +71,7 @@ export class NetworkCache {
 				let size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024;
 				while (size > this.config.maxSize) {
 					const oldestKey = Object.keys(newStored)
-						.filter((key) => newStored[key].purgable)
+						.filter((key) => newStored[key].purgeable)
 						.sort((a, b) => {
 							return newStored[a].expires - newStored[b].expires;
 						})[0];
