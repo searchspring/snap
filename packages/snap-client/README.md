@@ -55,22 +55,33 @@ Object required for all controllers
 
 ```typescript
 export type ClientConfig = {
-	meta?: {
-		prefetch?: boolean;
-		ttl?: number;
+  meta?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
-	trending?: {
-		prefetch?: boolean;
-		ttl?: number;
+	recommend?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
+	suggest?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
+};
+
+export type CacheConfig = {
+	enabled?: boolean;
+	ttl?: number;
+	maxSize?: number;
+	purgable?: boolean;
 };
 
 export type SnapApiConfig = {
