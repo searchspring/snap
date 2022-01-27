@@ -234,8 +234,9 @@ export class Snap {
 			}
 		} catch (e) {}
 
-		if (window.searchspring && this.config.context) {
-			window.searchspring.context = this.config.context;
+		if (window.searchspring) {
+			if (this.config.context) window.searchspring.context = this.config.context;
+			if (this.client) window.searchspring.client = this.client;
 		}
 
 		// autotrack shopper id from the context

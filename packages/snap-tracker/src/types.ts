@@ -4,6 +4,10 @@ export type TrackerGlobals = {
 	siteId: string;
 };
 
+export type TrackerConfig = {
+	namespace?: string;
+};
+
 export interface BeaconPayload {
 	type: BeaconType;
 	category: BeaconCategory;

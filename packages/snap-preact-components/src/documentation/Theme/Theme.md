@@ -1,31 +1,3 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import searchspringLogo from '../assets/searchspring-logo.svg';
-
-<Meta title="Doumentation/Theme" />
-
-<style>{`
-	.header {
-		display: flex;
-		align-items: center;
-	}
-
-	.header .subtitle {
-		text-transform: uppercase;
-		color: #00cee1;
-	}
-
-	.header img {
-			width: 300px;
-			margin-right: 20px;
-		}
-`}</style>
-
-<div class="header">
-	<span class="subtitle">SNAP PREACT COMPONENETS</span>
-</div>
-
----
-
 Snap components allows for theming at both the global and component level.
 
 ### Theme object

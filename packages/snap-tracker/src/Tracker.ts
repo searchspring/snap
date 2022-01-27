@@ -20,6 +20,7 @@ import {
 	ShopperLoginEvent,
 	OrderTransactionData,
 	Product,
+	TrackerConfig,
 } from './types';
 
 const BATCH_TIMEOUT = 150;
@@ -34,22 +35,37 @@ const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
 const CART_PRODUCTS = 'ssCartProducts';
 
+const defaultConfig: TrackerConfig = {
+	namespace: 'track',
+};
+
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
 	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
-	namespace = '';
+
+	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals) {
+	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
+		this.config = deepmerge(defaultConfig, config || {});
+
 		this.globals = globals;
-		this.setNamespace();
+
+		this.localStorage = new StorageStore({
+			type: StorageType.LOCAL,
+			key: `ss-${this.config.namespace}-${this.globals.siteId}-local`,
+		});
+		this.sessionStorage = new StorageStore({
+			type: StorageType.SESSION,
+			key: `ss-${this.config.namespace}-${this.globals.siteId}-session`,
+		});
 
 		this.context = {
 			...this.getUserId(),
@@ -109,24 +125,25 @@ export class Tracker {
 		Object.values(event.target.attributes).forEach((attr: Attr) => {
 			attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
 		});
-
-		if (attributes['ss-cart-add']) {
+		// this.config.namespace === 'track'
+		// ss-track-cart-add
+		if (attributes[`ss-${this.config.namespace}-cart-add`]) {
 			// add skus to cart
-			const skus = attributes['ss-cart-add'].split(',');
+			const skus = attributes[`ss-${this.config.namespace}-cart-add`].split(',');
 			this.addToCart(skus);
 			this.updateRecsControllers();
-		} else if (attributes['ss-cart-remove']) {
+		} else if (attributes[`ss-${this.config.namespace}-cart-remove`]) {
 			// remove skus from cart
-			const skus = attributes['ss-cart-remove'].split(',');
+			const skus = attributes[`ss-${this.config.namespace}-cart-remove`].split(',');
 			this.removeFromCart(skus);
 			this.updateRecsControllers();
-		} else if ('ss-cart-clear' in attributes) {
+		} else if (`ss-${this.config.namespace}-cart-clear` in attributes) {
 			// clear all from cart
 			this.clearCart();
 			this.updateRecsControllers();
-		} else if (attributes['ss-intellisuggest'] && attributes['ss-intellisuggest-signature']) {
-			const intellisuggestData = attributes['ss-intellisuggest'];
-			const intellisuggestSignature = attributes['ss-intellisuggest-signature'];
+		} else if (attributes[`ss-${this.config.namespace}-intellisuggest`] && attributes[`ss-${this.config.namespace}-intellisuggest-signature`]) {
+			const intellisuggestData = attributes[`ss-${this.config.namespace}-intellisuggest`];
+			const intellisuggestSignature = attributes[`ss-${this.config.namespace}-intellisuggest-signature`];
 			const href = attributes['href'];
 			this.track.product.click({
 				intellisuggestData,
@@ -134,22 +151,6 @@ export class Tracker {
 				href,
 			});
 		}
-	};
-
-	setNamespace = (namespace?: string): void => {
-		let prefix = 'tracker';
-		if (namespace) {
-			this.namespace = `${namespace}`;
-			prefix = namespace;
-		}
-		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
-			key: `ss-${prefix}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${prefix}-${this.globals.siteId}-session`,
-		});
 	};
 
 	setGlobal = (): void => {
