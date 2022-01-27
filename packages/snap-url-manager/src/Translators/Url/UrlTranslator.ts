@@ -286,8 +286,8 @@ export class UrlTranslator implements Translator {
 						[param.key[1]]: [
 							...(Array.isArray(currentValue) ? currentValue : [currentValue]),
 							{
-								[RangeValueProperties.LOW]: +param.value || null,
-								[RangeValueProperties.HIGH]: +nextRangeParam.value || null,
+								[RangeValueProperties.LOW]: isNaN(+param.value) ? null : +param.value,
+								[RangeValueProperties.HIGH]: isNaN(+nextRangeParam.value) ? null : +nextRangeParam.value,
 							},
 						],
 					},

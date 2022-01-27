@@ -148,7 +148,9 @@ const CSS = {
 				'& .ss__banner.ss__banner--footer': {
 					margin: '10px 0',
 				},
-
+				'& .ss__autocomplete__content__results': {
+					minHeight: '0%',
+				},
 				'& .ss__autocomplete__content__info': {
 					padding: '10px',
 					textAlign: noResults ? 'center' : 'right',
@@ -473,7 +475,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											</div>
 										) : null}
 										<Facets {...subProps.facets} facets={facetsToShow} />
-										{!hideBanners ? <Banner content={merchandising.content} type={BannerType.LEFT} /> : null}
+										{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.LEFT} /> : null}
 									</div>
 								</>
 							)
@@ -486,8 +488,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							</div>
 						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
 							<div className="ss__autocomplete__content">
-								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.HEADER} /> : null}
-								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.BANNER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.HEADER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.BANNER} /> : null}
 								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
 										{resultsSlot ? (
@@ -516,7 +518,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									</div>
 								)}
 
-								{!hideBanners ? <Banner content={merchandising.content} type={BannerType.FOOTER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.FOOTER} /> : null}
 
 								{!hideLink ? (
 									linkSlot ? (

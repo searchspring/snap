@@ -32,6 +32,14 @@ The `hoverSrc` prop specifiesthe URL of the alternative image to display on hove
 <Image src={searchResponse.results.mappings.core.imageUrl} hoverSrc={searchResponse.results.mappings.core.hoverImg} alt='image' />
 ```
 
+
+### lazy
+The `lazy` prop is used to disable the lazy loading feature. Enabled by default. 
+
+```jsx
+<Image src={searchResponse.results.mappings.core.imageUrl} lazy={false} alt='image' />
+```
+
 ### Events
 
 #### onMouseOver
@@ -48,11 +56,18 @@ The `onMouseOut` prop allows for a custom callback function when the mouse curso
 <Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOut={(e)=>{console.log(e)}} />
 ```
 
+#### onError
+The `onError` prop allows for a custom callback function when the image has encountered an error.
+
+```jsx
+<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onError={(e)=>{console.log(e)}} />
+```
+
 #### onLoad
 The `onLoad` prop allows for a custom callback function when the image has finished loading.
 
 ```jsx
-<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={()=>{}} />
+<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={(e)=>{console.log(e)}} />
 ```
 
 #### onClick

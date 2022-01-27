@@ -42,7 +42,7 @@ describe('Tracking', () => {
 	it('tracked product click', () => {
 		cy.visit('https://localhost:2222');
 
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			expect(store).to.haveOwnProperty('pagination');
 			expect(store.pagination.totalResults).to.be.greaterThan(0);
 
@@ -82,7 +82,7 @@ describe('Tracking', () => {
 	it('tracked product view', () => {
 		cy.visit('https://localhost:2222/product.html');
 
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			cy.wait(`@${BeaconType.PRODUCT}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
 				expect(interception.response.body).to.have.property('success').to.equal(true);
@@ -113,7 +113,7 @@ describe('Tracking', () => {
 
 	it('tracked cart view', () => {
 		cy.visit('https://localhost:2222/cart.html');
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			cy.wait(`@${BeaconType.CART}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
 				expect(interception.response.body).to.have.property('success').to.equal(true);
@@ -151,7 +151,7 @@ describe('Tracking', () => {
 
 	it('tracked order transaction', () => {
 		cy.visit('https://localhost:2222/order.html');
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
 				expect(interception.response.body).to.have.property('success').to.equal(true);
@@ -189,7 +189,7 @@ describe('Tracking', () => {
 	it('tracked all recommendation interaction events', () => {
 		cy.visit('https://localhost:2222/product.html');
 
-		cy.snapStore('recommend_similar0').then((store) => {
+		cy.snapController('recommend_similar0').then(({ store }) => {
 			expect(store).to.haveOwnProperty('results');
 			expect(store.results).to.have.length.above(0);
 

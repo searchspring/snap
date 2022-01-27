@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **autocomplete:** pass down banner subProps ([8036a20](https://github.com/searchspring/snap/commit/8036a2092b22c98f34cbfd8d2b7010a3d4241d62))
+* **getparams:** added a null check for range filters with null low values ([af1bbf1](https://github.com/searchspring/snap/commit/af1bbf1b765ec278fd49e677bc6a91ab5fcb8408))
+* **hybrid.ts:** use suggested query before spell corrected query ([a8792ce](https://github.com/searchspring/snap/commit/a8792cea26b3659654792d19541405e652a7e0e5))
+
+
+
+
+
+## [0.13.2](https://github.com/searchspring/snap/compare/v0.13.1...v0.13.2) (2021-12-29)
+
+
+### Bug Fixes
+
+* **autocomplete-controller:** when spell correction is used the controller will wait for response ([0d65093](https://github.com/searchspring/snap/commit/0d650935ac0c310595fcb6d8e1843cb703afbd25))
+
+
+
+
+
+## [0.13.1](https://github.com/searchspring/snap/compare/v0.13.0...v0.13.1) (2021-12-22)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
 # [0.13.0](https://github.com/searchspring/snap/compare/v0.12.0...v0.13.0) (2021-12-14)
 
 

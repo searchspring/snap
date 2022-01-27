@@ -97,6 +97,13 @@ let config = {
 							limit: 5,
 						},
 					},
+					globals: {
+						search: {
+							query: {
+								spellCorrection: true,
+							},
+						},
+					},
 				},
 				targeters: [
 					{
@@ -132,7 +139,7 @@ let config = {
 				targeters: [
 					{
 						name: 'finder',
-						selector: '#finder',
+						selector: '#searchspring-finder',
 						component: async () => {
 							return (await import('./components/Finder/Finder')).Finder;
 						},

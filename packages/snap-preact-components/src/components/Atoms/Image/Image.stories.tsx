@@ -63,6 +63,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		lazy: {
+			defaultValue: true,
+			description: 'Image lazy loading',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
 		hoverSrc: {
 			description: 'Image onHover url',
 			table: {
@@ -71,6 +82,15 @@ export default {
 				},
 			},
 			control: { type: 'text' },
+		},
+		onError: {
+			description: 'Image error event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onError',
 		},
 		onLoad: {
 			description: 'Image loaded event handler',
