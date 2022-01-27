@@ -6,13 +6,13 @@ import type { ParameterObject } from '../../types';
 
 export type RecommendRequestModel = {
 	tags: string[];
+	siteId: string;
 	product?: string;
 	shopper?: string;
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	siteId?: string;
 	batched?: boolean;
 };
 
@@ -53,13 +53,13 @@ export type ProfileResponseModel = {
 
 export type RecommendCombinedRequestModel = {
 	tag: string;
+	siteId: string;
 	product?: string;
 	shopper?: string;
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	siteId?: string;
 	branch?: string;
 };
 
@@ -96,14 +96,17 @@ export class RecommendAPI extends API {
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request({
-			path: '/api/personalized-recommendations/profile.json',
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/personalized-recommendations/profile.json',
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			'/api/personalized-recommendations/profile.json' + JSON.stringify(queryParameters)
+		);
 
-		return response.json();
+		return response as unknown as ProfileResponseModel;
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
@@ -112,10 +115,10 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		let key = hashParams(otherParams as ParameterObject);
+		let key = hashParams(otherParams as RecommendRequestModel);
 		if ('batched' in otherParams) {
 			if (otherParams.batched) {
-				key = otherParams?.siteId || this.configuration.getSiteId();
+				key = otherParams.siteId;
 			}
 			delete otherParams.batched; // remove from request parameters
 		}
@@ -157,16 +160,19 @@ export class RecommendAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 
 		const siteId = queryParameters.siteId;
-		delete queryParameters.siteId;
+		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request({
-			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters,
-		});
+		const response = await this.request(
+			{
+				path,
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			path + JSON.stringify(queryParameters)
+		);
 
-		return response.json();
+		return response as unknown as RecommendResponseModel;
 	}
 
 	async postRecommendations(requestParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
@@ -174,15 +180,18 @@ export class RecommendAPI extends API {
 		headerParameters['Content-Type'] = 'application/json';
 
 		const siteId = requestParameters.siteId;
-		delete requestParameters.siteId;
+		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request({
-			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path,
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			path + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as unknown as RecommendResponseModel;
 	}
 }

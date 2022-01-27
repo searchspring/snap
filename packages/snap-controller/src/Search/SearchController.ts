@@ -72,7 +72,7 @@ export class SearchController extends AbstractController {
 
 			if (
 				config?.settings?.redirects?.singleResult &&
-				search?.response.search.query &&
+				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
 				!search?.response?.filters?.length
 			) {
@@ -232,7 +232,7 @@ export class SearchController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [response, meta] = await this.client.search(params);
+			const [meta, response] = await this.client.search(params);
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
@@ -255,7 +255,7 @@ export class SearchController extends AbstractController {
 					}
 
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([data]) => {
+					backfillResponses.map(([meta, data]) => {
 						previousResults = previousResults.concat(data.results);
 					});
 				}
