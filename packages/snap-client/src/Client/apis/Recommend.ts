@@ -1,6 +1,8 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
+import { hashParams } from '../utils/hashParams';
 import { charsParams } from '../utils/charsParams';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
+import type { ParameterObject } from '../../types';
 
 export type RecommendRequestModel = {
 	tags: string[];
@@ -11,6 +13,7 @@ export type RecommendRequestModel = {
 	lastViewed?: string[];
 	test?: boolean;
 	siteId?: string;
+	batched?: boolean;
 };
 
 export type RecommendResponseModel = {
@@ -78,7 +81,7 @@ export type RecommendCombinedResponseModel = ProfileResponseModel & { results: S
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	batches: {
-		[siteId: string]: {
+		[key: string]: {
 			timeout: number;
 			request: any;
 			deferreds?: Deferred[];
@@ -109,9 +112,15 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		const siteId = otherParams?.siteId || this.configuration.getSiteId();
-		this.batches[siteId] = this.batches[siteId] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
-		const paramBatch = this.batches[siteId];
+		let key = hashParams(otherParams as ParameterObject);
+		if ('batched' in otherParams) {
+			if (otherParams.batched) {
+				key = otherParams?.siteId || this.configuration.getSiteId();
+			}
+			delete otherParams.batched; // remove from request parameters
+		}
+		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		const paramBatch = this.batches[key];
 
 		const deferred = new Deferred();
 
@@ -138,7 +147,7 @@ export class RecommendAPI extends API {
 				});
 			}
 
-			delete this.batches[siteId];
+			delete this.batches[key];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
