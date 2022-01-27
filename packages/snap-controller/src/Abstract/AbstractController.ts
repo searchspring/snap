@@ -100,9 +100,6 @@ export abstract class AbstractController {
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);
 
-		if (!this.tracker.namespace) {
-			this.tracker.setNamespace(this.config.id);
-		}
 		// set environment
 		if (url(window.location.href)?.params?.query?.dev) {
 			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);

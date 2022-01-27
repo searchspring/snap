@@ -45,7 +45,7 @@ describe('Finder Controller', () => {
 		finderHierarchyConfig.id = uuidv4().split('-').join('');
 		finderNonhierarchyConfig.id = uuidv4().split('-').join('');
 	});
-
+  
 	describe('Hierarchy Type', () => {
 		it('can make selection', async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
@@ -78,7 +78,6 @@ describe('Finder Controller', () => {
 			jest.spyOn(controller, 'search');
 			controller.store.selections[0].select(valueToSelect);
 			expect(controller.search).toHaveBeenCalled();
-
 			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
 			expect(controller.store.selections[0].field).toBe(field);
 			expect(controller.store.selections[0].selected).toBe(valueToSelect);
@@ -110,7 +109,7 @@ describe('Finder Controller', () => {
 
 		it('can call reset method', async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
+				client: new MockClient(globals, {}),
 				store: new FinderStore(finderHierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),

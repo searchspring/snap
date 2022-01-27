@@ -20,6 +20,7 @@ import {
 	ShopperLoginEvent,
 	OrderTransactionData,
 	Product,
+	TrackerConfig,
 } from './types';
 
 const BATCH_TIMEOUT = 150;
@@ -34,22 +35,37 @@ const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
 const CART_PRODUCTS = 'ssCartProducts';
 
+const defaultConfig: TrackerConfig = {
+	namespace: 'tracker',
+};
+
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
 	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
-	namespace = '';
+
+	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals) {
+	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
+		this.config = deepmerge(defaultConfig, config || {});
+
 		this.globals = globals;
-		this.setNamespace();
+
+		this.localStorage = new StorageStore({
+			type: StorageType.LOCAL,
+			key: `ss-${this.config.namespace}-${this.globals.siteId}-local`,
+		});
+		this.sessionStorage = new StorageStore({
+			type: StorageType.SESSION,
+			key: `ss-${this.config.namespace}-${this.globals.siteId}-session`,
+		});
 
 		this.context = {
 			...this.getUserId(),
@@ -98,22 +114,6 @@ export class Tracker {
 			target.retarget();
 		});
 	}
-
-	setNamespace = (namespace?: string): void => {
-		let prefix = 'tracker';
-		if (namespace) {
-			this.namespace = `${namespace}`;
-			prefix = namespace;
-		}
-		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
-			key: `ss-${prefix}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${prefix}-${this.globals.siteId}-session`,
-		});
-	};
 
 	setGlobal = (): void => {
 		window.searchspring = window.searchspring || {};
