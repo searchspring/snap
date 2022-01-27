@@ -36,8 +36,8 @@ describe('Tracker', () => {
 
 		const tracker = new Tracker(globals);
 
-		expect(tracker.localStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-local`);
-		expect(tracker.sessionStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-session`);
+		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
+		expect(tracker.sessionStorage.key).toStrictEqual(`ss-track-${globals.siteId}-session`);
 
 		const tracker2 = new Tracker(globals, config);
 
