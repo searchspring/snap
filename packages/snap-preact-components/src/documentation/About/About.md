@@ -1,31 +1,3 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import searchspringLogo from '../assets/searchspring-logo.svg';
-
-<Meta title="Doumentation/About" />
-
-<style>{`
-	.header {
-		display: flex;
-		align-items: center;
-	}
-
-	.header .subtitle {
-		text-transform: uppercase;
-		color: #00cee1;
-	}
-
-	.header img {
-			width: 300px;
-			margin-right: 20px;
-		}
-`}</style>
-
-<div class="header">
-	<span class="subtitle">SNAP PREACT COMPONENETS</span>
-</div>
-
----
-
 Welcome to the Snap React Component Library! 
 This collection of ecommerce components allows you to quickly build and theme a layout for use with Searchspring's Snap SDK.
 
@@ -53,4 +25,3 @@ Things start getting more interesting and tangible when we start combining atoms
 Organisms level components utilize one or more molecule components to start building complex sections of a layout. This includes components such as Autocomplete, Facets, and Results.
 
 Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
-
