@@ -37,7 +37,6 @@ const CART_PRODUCTS = 'ssCartProducts';
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
-	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
 	namespace = '';
@@ -108,10 +107,6 @@ export class Tracker {
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
 			key: `ss-${prefix}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${prefix}-${this.globals.siteId}-session`,
 		});
 	};
 
@@ -396,8 +391,8 @@ export class Tracker {
 		let sessionId;
 		if (featureFlags.storage) {
 			try {
-				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
-				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
 				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
