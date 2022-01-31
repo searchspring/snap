@@ -77,7 +77,7 @@ class Product {
 		core: {},
 	};
 	custom = {};
-	children?: Array<Product> = [];
+	children?: Array<Child> = [];
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id;
@@ -86,8 +86,7 @@ class Product {
 
 		if (result?.children?.length) {
 			this.children = result.children.map((variant, index) => {
-				return new Variant(services, {
-					mappings: { core: {} },
+				return new Child(services, {
 					id: `${result.id}-${index}`,
 					...variant,
 				});
@@ -112,35 +111,21 @@ class Product {
 	}
 }
 
-class Variant {
-	type = 'variant';
+class Child {
+	type = 'child';
 	id: string;
 	attributes: Record<string, unknown> = {};
-	mappings: SearchResponseModelResultMappings = {
-		core: {},
-	};
 	custom = {};
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id;
 		this.attributes = result.attributes;
-		this.mappings = result.mappings;
 
 		makeObservable(this, {
 			id: observable,
 			attributes: observable,
 			custom: observable,
 		});
-
-		// must set all subo
-		const coreObservables = Object.keys(result.mappings.core).reduce((map, key) => {
-			return {
-				...map,
-				[key]: observable,
-			};
-		}, {});
-
-		makeObservable(this.mappings.core, coreObservables);
 	}
 }
 
