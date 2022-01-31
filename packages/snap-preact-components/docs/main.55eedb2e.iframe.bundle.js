@@ -23216,7 +23216,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.3' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.4' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_defineProperties(target, props) {
@@ -23241,14 +23241,10 @@
 						(this.setNamespace = function (namespace) {
 							var prefix = 'tracker';
 							namespace && ((_this.namespace = '' + namespace), (prefix = namespace)),
-								(_this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + prefix + '-' + _this.globals.siteId + '-local' })),
-								(_this.sessionStorage = new StorageStore({
-									type: StorageType.SESSION,
-									key: 'ss-' + prefix + '-' + _this.globals.siteId + '-session',
-								}));
+								(_this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + prefix + '-' + _this.globals.siteId + '-local' }));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.3');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.4');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23451,8 +23447,8 @@
 							var sessionId;
 							if (featureFlags.storage)
 								try {
-									(sessionId = _this.sessionStorage.get('ssSessionIdNamespace') || (0, v4.Z)()),
-										_this.sessionStorage.set('ssSessionIdNamespace', sessionId),
+									(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
+										window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
 										featureFlags.cookies && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
 								} catch (e) {
 									console.error('Failed to persist session id to session storage:', e);
