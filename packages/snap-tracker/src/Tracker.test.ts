@@ -11,7 +11,6 @@ describe('Tracker', () => {
 
 		expect(tracker.globals).toStrictEqual(globals);
 		expect(tracker.localStorage).toBeDefined();
-		expect(tracker.sessionStorage).toBeDefined();
 		expect(tracker.context).toBeDefined();
 		expect(tracker.context.userId).toBeDefined();
 		expect(tracker.context.sessionId).toBeDefined();
@@ -37,12 +36,10 @@ describe('Tracker', () => {
 		const tracker = new Tracker(globals);
 
 		expect(tracker.localStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-local`);
-		expect(tracker.sessionStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-session`);
 
 		const tracker2 = new Tracker(globals, config);
 
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.namespace}-${globals.siteId}-local`);
-		expect(tracker2.sessionStorage.key).toStrictEqual(`ss-${config.namespace}-${globals.siteId}-session`);
 	});
 
 	it('can invoke track.shopper.login', async () => {

@@ -42,7 +42,6 @@ const defaultConfig: TrackerConfig = {
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
-	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
 
@@ -61,10 +60,6 @@ export class Tracker {
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
 			key: `ss-${this.config.namespace}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${this.config.namespace}-${this.globals.siteId}-session`,
 		});
 
 		this.context = {
@@ -377,14 +372,14 @@ export class Tracker {
 	getUserId = (): Record<string, string> => {
 		let userId;
 		try {
-			userId = featureFlags.storage && this.localStorage.get(USERID_COOKIE_NAME);
+			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
 			if (featureFlags.cookies) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 			} else if (!userId && featureFlags.storage) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
-				this.localStorage.set(USERID_COOKIE_NAME, userId);
+				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
@@ -396,8 +391,8 @@ export class Tracker {
 		let sessionId;
 		if (featureFlags.storage) {
 			try {
-				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
-				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
 				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
