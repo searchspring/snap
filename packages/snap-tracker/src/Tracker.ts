@@ -372,14 +372,14 @@ export class Tracker {
 	getUserId = (): Record<string, string> => {
 		let userId;
 		try {
-			userId = featureFlags.storage && this.localStorage.get(USERID_COOKIE_NAME);
+			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
 			if (featureFlags.cookies) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 			} else if (!userId && featureFlags.storage) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
-				this.localStorage.set(USERID_COOKIE_NAME, userId);
+				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
