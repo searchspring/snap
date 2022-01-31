@@ -300,7 +300,7 @@ class Value {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = services.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value);
+			this.url = services.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value.toString());
 		} else {
 			let valueUrl = services.urlManager?.remove('page');
 			if (facet.multiple == 'single') {
