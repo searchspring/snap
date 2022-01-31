@@ -23216,7 +23216,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.4' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.5' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_defineProperties(target, props) {
@@ -23244,7 +23244,7 @@
 								(_this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + prefix + '-' + _this.globals.siteId + '-local' }));
 						}),
 						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.4');
+							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.5');
 						}),
 						(this.track = {
 							event: function event(payload) {
@@ -23434,10 +23434,10 @@
 						(this.getUserId = function () {
 							var userId;
 							try {
-								(userId = featureFlags.storage && _this.localStorage.get('ssUserId')),
+								(userId = featureFlags.storage && window.localStorage.getItem('ssUserId')),
 									featureFlags.cookies
 										? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
-										: !userId && featureFlags.storage && ((userId = (0, v4.Z)()), _this.localStorage.set('ssUserId', userId));
+										: !userId && featureFlags.storage && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
 							} catch (e) {
 								console.error('Failed to persist user id to cookie or local storage:', e);
 							}
