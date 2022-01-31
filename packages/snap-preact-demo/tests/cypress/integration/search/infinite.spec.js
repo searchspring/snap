@@ -20,7 +20,7 @@ describe('Infinite Setting Test', () => {
 		});
 		cy.visit('https://localhost:2222/');
 
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			expect(store.config.settings.infinite).to.deep.equal({ backfill });
 
 			// initial page
@@ -29,7 +29,7 @@ describe('Infinite Setting Test', () => {
 
 			// click next page, results should be appended
 			cy.get('.ss__pagination__page--next').first().click();
-			cy.snapStore().then((store) => {
+			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 2);
 				expect(store.pagination.begin).to.equal(1);
 				cy.get('.ss__result').should('have.length', resultsPerPage * 2);
@@ -37,7 +37,7 @@ describe('Infinite Setting Test', () => {
 
 			//refresh page, should not backfill
 			cy.reload().then(() => {
-				cy.snapStore().then((store) => {
+				cy.snapController().then(({ store }) => {
 					expect(store.results.length).to.equal(resultsPerPage);
 				});
 			});
@@ -64,7 +64,7 @@ describe('Infinite Setting Test', () => {
 			};
 		});
 		cy.visit('https://localhost:2222/');
-		cy.snapStore().then((store) => {
+		cy.snapController().then(({ store }) => {
 			expect(store.config.settings.infinite).to.deep.equal({ backfill });
 
 			// initial page
@@ -73,7 +73,7 @@ describe('Infinite Setting Test', () => {
 
 			// click next page, results should be appended
 			cy.get('.ss__pagination__page--next').first().click();
-			cy.snapStore().then((store) => {
+			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 2);
 				expect(store.pagination.begin).to.equal(1);
 				cy.get('.ss__result').should('have.length', resultsPerPage * 2);
@@ -81,14 +81,14 @@ describe('Infinite Setting Test', () => {
 
 			//refresh page, should backfill
 			cy.reload().then(() => {
-				cy.snapStore().then((store) => {
+				cy.snapController().then(({ store }) => {
 					expect(store.results.length).to.equal(resultsPerPage * 2);
 				});
 			});
 
 			// click next page again, expect 3 pages of results
 			cy.get('.ss__pagination__page--next').first().click();
-			cy.snapStore().then((store) => {
+			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 3);
 				expect(store.pagination.begin).to.equal(1);
 				cy.get('.ss__result').should('have.length', resultsPerPage * 3);
@@ -96,7 +96,7 @@ describe('Infinite Setting Test', () => {
 
 			//refresh page, should NOT backfill again due to page > backfill and is at page 1
 			cy.reload().then(() => {
-				cy.snapStore().then((store) => {
+				cy.snapController().then(({ store }) => {
 					expect(store.results.length).to.equal(resultsPerPage);
 					expect(store.pagination.current.number).to.equal(1);
 				});

@@ -20,6 +20,7 @@ import {
 	ShopperLoginEvent,
 	OrderTransactionData,
 	Product,
+	TrackerConfig,
 } from './types';
 
 const BATCH_TIMEOUT = 150;
@@ -34,22 +35,32 @@ const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
 const CART_PRODUCTS = 'ssCartProducts';
 
+const defaultConfig: TrackerConfig = {
+	namespace: 'tracker',
+};
+
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
-	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
-	namespace = '';
+
+	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals) {
+	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
+		this.config = deepmerge(defaultConfig, config || {});
+
 		this.globals = globals;
-		this.setNamespace();
+
+		this.localStorage = new StorageStore({
+			type: StorageType.LOCAL,
+			key: `ss-${this.config.namespace}-${this.globals.siteId}-local`,
+		});
 
 		this.context = {
 			...this.getUserId(),
@@ -98,22 +109,6 @@ export class Tracker {
 			target.retarget();
 		});
 	}
-
-	setNamespace = (namespace?: string): void => {
-		let prefix = 'tracker';
-		if (namespace) {
-			this.namespace = `${namespace}`;
-			prefix = namespace;
-		}
-		this.localStorage = new StorageStore({
-			type: StorageType.LOCAL,
-			key: `ss-${prefix}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${prefix}-${this.globals.siteId}-session`,
-		});
-	};
 
 	setGlobal = (): void => {
 		window.searchspring = window.searchspring || {};
@@ -377,14 +372,14 @@ export class Tracker {
 	getUserId = (): Record<string, string> => {
 		let userId;
 		try {
-			userId = featureFlags.storage && this.localStorage.get(USERID_COOKIE_NAME);
+			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
 			if (featureFlags.cookies) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 			} else if (!userId && featureFlags.storage) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
-				this.localStorage.set(USERID_COOKIE_NAME, userId);
+				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
@@ -396,8 +391,8 @@ export class Tracker {
 		let sessionId;
 		if (featureFlags.storage) {
 			try {
-				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
-				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
 				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);

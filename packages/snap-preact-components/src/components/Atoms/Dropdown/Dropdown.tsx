@@ -17,7 +17,7 @@ const CSS = {
 			position: 'relative',
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__content': {
-					position: `${disableOverlay ? 'initial' : null}` as 'initial',
+					position: disableOverlay ? 'relative' : null,
 					visibility: 'visible',
 					opacity: 1,
 				},

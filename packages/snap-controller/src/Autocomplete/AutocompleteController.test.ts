@@ -44,7 +44,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: {},
 		urlManager,
 		eventManager: new EventManager(),
@@ -53,7 +53,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager: {},
 		eventManager: new EventManager(),
@@ -62,7 +62,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: { events: null, fire: null, on: null },
@@ -71,7 +71,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: {
@@ -86,7 +86,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -95,7 +95,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -109,7 +109,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -134,7 +134,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -158,7 +158,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -181,7 +181,7 @@ describe('Autocomplete Controller', () => {
 		// settings.initializeFromUrl is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -205,7 +205,7 @@ describe('Autocomplete Controller', () => {
 		// settings.facets.trim is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -238,7 +238,7 @@ describe('Autocomplete Controller', () => {
 		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),

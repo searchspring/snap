@@ -16,9 +16,10 @@ const CSS = {
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
-			height: '100%',
+			height: 'auto',
 			'& img': {
 				visibility,
+				flexShrink: '0',
 				objectFit: 'contain',
 				maxWidth: '100%',
 				maxHeight: '100%',
@@ -40,7 +41,7 @@ export function Image(properties: ImageProps): JSX.Element {
 		...properties.theme?.components?.image,
 	};
 
-	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onLoad, onClick, disableStyles, className, style } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
 
 	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
@@ -67,12 +68,15 @@ export function Image(properties: ImageProps): JSX.Element {
 					alt={alt}
 					title={alt}
 					loading={lazy ? 'lazy' : undefined}
-					onLoad={() => {
+					onLoad={(e) => {
 						setVisibility('visible');
-						onLoad && onLoad();
+						onLoad && onLoad(e as any);
 					}}
 					onClick={(e) => onClick && onClick(e as any)}
-					onError={(e) => ((e.target as HTMLImageElement).src = fallback)}
+					onError={(e) => {
+						(e.target as HTMLImageElement).src = fallback;
+						onError && onError(e as any);
+					}}
 					onMouseOver={(e) => {
 						hoverSrc && setHover(true);
 						onMouseOver && onMouseOver(e as any);
@@ -94,7 +98,8 @@ export interface ImageProps extends ComponentProps {
 	hoverSrc?: string;
 	onMouseOver?: (e: MouseEvent) => void;
 	onMouseOut?: (e: MouseEvent) => void;
-	onLoad?: () => void;
+	onError?: (e: Event) => void;
+	onLoad?: (e: Event) => void;
 	onClick?: (e: MouseEvent) => void;
 	lazy?: boolean;
 }
