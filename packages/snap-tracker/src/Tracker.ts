@@ -36,13 +36,12 @@ const MAX_VIEWED_COUNT = 15;
 const CART_PRODUCTS = 'ssCartProducts';
 
 const defaultConfig: TrackerConfig = {
-	namespace: 'track',
+	id: 'track',
 };
 
 export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
-	sessionStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
 
@@ -60,11 +59,7 @@ export class Tracker {
 
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
-			key: `ss-${this.config.namespace}-${this.globals.siteId}-local`,
-		});
-		this.sessionStorage = new StorageStore({
-			type: StorageType.SESSION,
-			key: `ss-${this.config.namespace}-${this.globals.siteId}-session`,
+			key: `ss-${this.config.id}-${this.globals.siteId}-local`,
 		});
 
 		this.context = {
@@ -125,25 +120,25 @@ export class Tracker {
 		Object.values(event.target.attributes).forEach((attr: Attr) => {
 			attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
 		});
-		// this.config.namespace === 'track'
-		// ss-track-cart-add
-		if (attributes[`ss-${this.config.namespace}-cart-add`]) {
+
+		if (attributes[`ss-${this.config.id}-cart-add`]) {
 			// add skus to cart
-			const skus = attributes[`ss-${this.config.namespace}-cart-add`].split(',');
+			const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
 			this.addToCart(skus);
 			this.updateRecsControllers();
-		} else if (attributes[`ss-${this.config.namespace}-cart-remove`]) {
+		} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
 			// remove skus from cart
-			const skus = attributes[`ss-${this.config.namespace}-cart-remove`].split(',');
+			const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
 			this.removeFromCart(skus);
 			this.updateRecsControllers();
-		} else if (`ss-${this.config.namespace}-cart-clear` in attributes) {
+		} else if (`ss-${this.config.id}-cart-clear` in attributes) {
 			// clear all from cart
 			this.clearCart();
 			this.updateRecsControllers();
-		} else if (attributes[`ss-${this.config.namespace}-intellisuggest`] && attributes[`ss-${this.config.namespace}-intellisuggest-signature`]) {
-			const intellisuggestData = attributes[`ss-${this.config.namespace}-intellisuggest`];
-			const intellisuggestSignature = attributes[`ss-${this.config.namespace}-intellisuggest-signature`];
+		} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
+			// product click
+			const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
+			const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
 			const href = attributes['href'];
 			this.track.product.click({
 				intellisuggestData,
@@ -417,14 +412,14 @@ export class Tracker {
 	getUserId = (): Record<string, string> => {
 		let userId;
 		try {
-			userId = featureFlags.storage && this.localStorage.get(USERID_COOKIE_NAME);
+			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
 			if (featureFlags.cookies) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 			} else if (!userId && featureFlags.storage) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
-				this.localStorage.set(USERID_COOKIE_NAME, userId);
+				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
 			}
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
@@ -436,8 +431,8 @@ export class Tracker {
 		let sessionId;
 		if (featureFlags.storage) {
 			try {
-				sessionId = this.sessionStorage.get(SESSIONID_STORAGE_NAME) || uuidv4();
-				this.sessionStorage.set(SESSIONID_STORAGE_NAME, sessionId);
+				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
+				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
 				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
