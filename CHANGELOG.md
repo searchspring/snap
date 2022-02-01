@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/searchspring/snap/compare/v0.15.0...v0.15.1) (2022-02-01)
+
+
+### Features
+
+* **publish:** publish packages without verifying registry user ([9bf4eae](https://github.com/searchspring/snap/commit/9bf4eaed1883c32fe4a515363f916c06ea196392))
+
+
+
+
+
 # [0.15.0](https://github.com/searchspring/snap/compare/v0.14.0...v0.15.0) (2022-02-01)
 
 
