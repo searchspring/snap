@@ -77,6 +77,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	globals?: any;
 	tag: string;
 	branch?: string;
+	realtime?: boolean;
 	batched?: boolean;
 };
 

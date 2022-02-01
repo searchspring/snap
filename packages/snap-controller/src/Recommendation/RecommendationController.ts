@@ -24,6 +24,7 @@ const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
 	tag: '',
 	batched: true,
+	realtime: false,
 	globals: {},
 };
 
@@ -241,8 +242,8 @@ export class RecommendationController extends AbstractController {
 			branch: this.config.branch || 'production',
 		};
 		const shopperId = this.tracker.context.shopperId;
-		const cart = this.tracker.getCartItems();
-		const lastViewed = this.tracker.getLastViewedItems();
+		const cart = this.tracker.cookies.cart.get();
+		const lastViewed = this.tracker.cookies.viewed.get();
 		if (shopperId) {
 			params.shopper = shopperId;
 		}

@@ -16,6 +16,7 @@ export type RecommendationInstantiatorConfig = {
 	};
 	config: {
 		branch: string;
+		realtime?: boolean;
 		batched?: boolean;
 	} & Attachments;
 	selector?: string;
@@ -87,10 +88,26 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, branch, batched, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'branch', 'batched', 'options'],
+				const { shopper, shopperId, product, seed, options } = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'options'],
 					elem as HTMLScriptElement
 				);
+
+				/*
+					type instantiatorContext = {
+						shopper?: string;
+						shopperId?: string;
+						product?: string;
+						seed?: string;
+						options?: {
+							siteId?: string;
+							branch?: string;
+							batched?: boolean;
+							realtime?: boolean;
+							categories?: any;
+						}
+					}
+				*/
 
 				if (shopper || shopperId) {
 					globals.shopper = shopper || shopperId;
@@ -98,16 +115,13 @@ export class RecommendationInstantiator {
 				if (product || seed) {
 					globals.product = product || seed;
 				}
-				if (branch) {
-					globals.branch = branch;
+				if (options?.branch) {
+					globals.branch = options.branch;
 				}
-				if (typeof batched === 'boolean') {
-					globals.batched = batched;
-				}
-				if (options && options.siteId) {
+				if (options?.siteId) {
 					globals.siteId = options.siteId;
 				}
-				if (options && options.categories) {
+				if (options?.categories) {
 					globals.categories = options.categories;
 				}
 
@@ -117,9 +131,12 @@ export class RecommendationInstantiator {
 				const controllerConfig = {
 					id: `recommend_${tag + (profileCount[tag] - 1)}`,
 					tag,
+					batched: options?.batched ?? true,
+					realtime: Boolean(options?.realtime),
 					globals,
 					...this.config.config,
 				};
+
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
 				const client = this.config.services?.client || this.client;
 				const tracker = this.config.services?.tracker || this.tracker;
