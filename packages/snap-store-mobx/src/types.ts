@@ -78,6 +78,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	tag: string;
 	branch?: string;
 	realtime?: boolean;
+	batched?: boolean;
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;

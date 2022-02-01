@@ -23,6 +23,7 @@ type RecommendationTrackMethods = {
 const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
 	tag: '',
+	batched: true,
 	globals: {},
 };
 
@@ -235,6 +236,7 @@ export class RecommendationController extends AbstractController {
 	get params(): Record<string, any> {
 		const params = {
 			tag: this.config.tag,
+			batched: this.config.batched,
 			...this.config.globals,
 			branch: this.config.branch || 'production',
 		};

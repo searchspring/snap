@@ -17,6 +17,7 @@ export type RecommendationInstantiatorConfig = {
 	config: {
 		branch: string;
 		realtime?: boolean;
+		batched?: boolean;
 	} & Attachments;
 	selector?: string;
 	services?: SnapControllerServices;
@@ -87,8 +88,8 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, branch, options, realtime } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options', 'realtime'],
+				const { shopper, shopperId, product, seed, branch, options, realtime, batched } = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'branch', 'options', 'realtime', 'batched'],
 					elem as HTMLScriptElement
 				);
 
@@ -100,6 +101,9 @@ export class RecommendationInstantiator {
 				}
 				if (branch) {
 					globals.branch = branch;
+				}
+				if (typeof batched === 'boolean') {
+					globals.batched = batched;
 				}
 				if (options && options.siteId) {
 					globals.siteId = options.siteId;
