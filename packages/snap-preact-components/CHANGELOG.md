@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/searchspring/snap/compare/v0.14.0...v0.15.0) (2022-02-01)
+
+
+### Features
+
+* **readme:** centering the snap logo and also moving to 0.15.0 ([9e05a3c](https://github.com/searchspring/snap/commit/9e05a3ca8195aa1c790322addcc05c9ec70dfc5d))
+
+
+
+
+
 # [0.14.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.14.0) (2022-02-01)
 
 
