@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.14.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **facetslider:** bugfix for slider that causes it to set lower and upper range to zero ([3a51f5d](https://github.com/searchspring/snap/commit/3a51f5db41a14e76c4d66a62498a46da5718d38a))
+* **resultstore:** remove mappings from children, refactor Variant to Child ([816dcd3](https://github.com/searchspring/snap/commit/816dcd3d3c6c76b36ba1d0274b01174d7f9ba453))
+
+
+### Features
+
+* add batched config and context setting to disable batching ([d4c0ac2](https://github.com/searchspring/snap/commit/d4c0ac28d1bd220df0fac948dbb77b4dc5c4504e))
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **resultstore:** add children variant support to resultStore ([a911b6f](https://github.com/searchspring/snap/commit/a911b6fe12ef1b2d036b1198aecb502887b54be8))
+
+
+
+
+
 ## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

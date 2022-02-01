@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.14.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* add promise polyfill ([c698b76](https://github.com/searchspring/snap/commit/c698b76078dd23ad13b528f4da74e28233d0cff3))
+* add realtime type to RecommendationInstantiatorConfig ([eee7a1a](https://github.com/searchspring/snap/commit/eee7a1a9c13d270aae7dafa0d35181d8eb75baab))
+* refactor polyfill to es5 syntax ([5cad0bd](https://github.com/searchspring/snap/commit/5cad0bd2b120aab9adc40d2998a58b292bb6215b))
+* remove fetch and core-js from polyfills ([6a371aa](https://github.com/searchspring/snap/commit/6a371aac0a417011b3b76d26a723c66a5b84502a))
+* remove unused variable ([9a5b13a](https://github.com/searchspring/snap/commit/9a5b13ad77ba72911dd48a35060a8618e1d5a734))
+
+
+### Features
+
+* add batched config and context setting to disable batching ([d4c0ac2](https://github.com/searchspring/snap/commit/d4c0ac28d1bd220df0fac948dbb77b4dc5c4504e))
+* add polyfills export to snap preact ([a841f39](https://github.com/searchspring/snap/commit/a841f395997897319fc7827c7241afa4eeb83b2a))
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+
+
+
+
+
 ## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
 
 **Note:** Version bump only for package @searchspring/snap-preact

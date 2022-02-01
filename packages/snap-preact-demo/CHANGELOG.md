@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.14.0) (2022-02-01)
+
+
+### Features
+
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **tracker:** wip: add initial cart attribute tracking ([5036896](https://github.com/searchspring/snap/commit/5036896f1022ccd9801946559e0762de36668363))
+
+
+
+
+
 ## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
