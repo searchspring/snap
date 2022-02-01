@@ -45,7 +45,6 @@
 		"@searchspring/snap-logger": "^0.15.0",
 		"@searchspring/snap-profiler": "^0.15.0",
 		"@searchspring/snap-store-mobx": "^0.15.0",
-		"@searchspring/snap-toolbox": "^0.14.0",
 		"@searchspring/snap-url-manager": "^0.15.0",
 		"@storybook/addon-actions": "^6.4.9",
 		"@storybook/addon-controls": "^6.4.9",
