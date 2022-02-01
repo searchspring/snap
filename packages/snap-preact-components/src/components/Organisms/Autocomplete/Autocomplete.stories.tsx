@@ -1,5 +1,4 @@
 import { h, Fragment } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 

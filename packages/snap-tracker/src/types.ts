@@ -5,7 +5,7 @@ export type TrackerGlobals = {
 };
 
 export type TrackerConfig = {
-	namespace?: string;
+	id: string;
 };
 
 export interface BeaconPayload {

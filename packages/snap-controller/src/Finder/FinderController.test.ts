@@ -45,7 +45,7 @@ describe('Finder Controller', () => {
 		finderHierarchyConfig.id = uuidv4().split('-').join('');
 		finderNonhierarchyConfig.id = uuidv4().split('-').join('');
 	});
-  
+
 	describe('Hierarchy Type', () => {
 		it('can make selection', async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
