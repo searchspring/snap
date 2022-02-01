@@ -88,7 +88,7 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, options, realtime } = getContext(
+				const { shopper, shopperId, product, seed, options } = getContext(
 					['shopperId', 'shopper', 'product', 'seed', 'options'],
 					elem as HTMLScriptElement
 				);
