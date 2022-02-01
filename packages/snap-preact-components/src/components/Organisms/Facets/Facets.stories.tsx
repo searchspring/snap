@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -56,12 +55,8 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Facets', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacets = observer(({ args, controller }) => {
-	return <Facets {...args} controller={controller} />;
-});
-
 const Template = (args: FacetsProps, { loaded: { controller } }) => {
-	return <ObservableFacets args={args} controller={controller} />;
+	return <Facets {...args} controller={controller} />;
 };
 
 export const Default = Template.bind({});
