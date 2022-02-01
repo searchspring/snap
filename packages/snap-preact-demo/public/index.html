@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 	<link rel="stylesheet" href="website.css">
 
-	<script id="searchspring-context" src="dist/bundle.js">
+	<script id="searchspring-context" src="bundle.js">
 		shopper = {
 			id: 'snapdev'
 		};
@@ -191,7 +191,7 @@
 		function setShopperID(){
 			var id = document.querySelector("#login-modal input").value;
 			if(id) {
-				window.searchspring.track.shopper.login({
+				window.searchspring.tracker.track.shopper.login({
 					id: id
 				});
 				document.getElementById("login-modal").style.display = "none";

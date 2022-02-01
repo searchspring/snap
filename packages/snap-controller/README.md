@@ -21,14 +21,6 @@ Snap Controller is a top-level package that requires the following dependencies 
 
 <a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger)
 
-<details>
-	<summary>Package dependencies hierarchy</summary>
-	<br/>
-	<img src="https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true"/>
-</details>
-
-<br>
-
 ## Installation
 
 To install the `snap-controller` package and it's services:

@@ -28,9 +28,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 15
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@searchspring'
+          node-version: 16
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -47,16 +45,24 @@ jobs:
 
       - name: Install packages
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
       
       - name: Build
-        run: | 
+        run: |
           npm run build
+
+      - name: Build Feed
+        run: |
+          npm run build:feed
 
       - name: Build docs
         run: |
           npm run build:docs 
-          git add -A packages/snap-*/docs/ 
+          git add docs/snap-docs.json
+          git add -A packages/snap-*/docs/
           git commit -m "chore(docs): generation"
           git push
+
+      - name: Request Re-index of Feed
+        run: |
+          sleep 3
+          curl -v -XPUT -u vrntn7:${{ secrets.DOCS_WEBSITE_SECRET_KEY }} https://index-api.searchspring.net/api/index/feed?feedId=4617

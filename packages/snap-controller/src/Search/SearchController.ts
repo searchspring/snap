@@ -72,7 +72,7 @@ export class SearchController extends AbstractController {
 
 			if (
 				config?.settings?.redirects?.singleResult &&
-				search?.response.search.query &&
+				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
 				!search?.response?.filters?.length
 			) {
@@ -159,25 +159,25 @@ export class SearchController extends AbstractController {
 		params.tracking = params.tracking || {};
 		params.tracking.domain = window.location.href;
 
-		const { userId } = this.tracker.getUserId();
+		const userId = this.tracker.getUserId();
 		if (userId) {
 			params.tracking.userId = userId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
-			const cartItems = this.tracker.getCartItems();
+			const cartItems = this.tracker.cookies.cart.get();
 			if (cartItems.length) {
 				params.personalization = params.personalization || {};
 				params.personalization.cart = cartItems.join(',');
 			}
 
-			const lastViewedItems = this.tracker.getLastViewedItems();
+			const lastViewedItems = this.tracker.cookies.viewed.get();
 			if (lastViewedItems.length) {
 				params.personalization = params.personalization || {};
 				params.personalization.lastViewed = lastViewedItems.join(',');
 			}
 
-			const shopperId = this.tracker.getShopperId()?.shopperId;
+			const shopperId = this.tracker.getShopperId();
 			if (shopperId) {
 				params.personalization = params.personalization || {};
 				params.personalization.shopper = shopperId;
@@ -232,7 +232,7 @@ export class SearchController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [response, meta] = await this.client.search(params);
+			const [meta, response] = await this.client.search(params);
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
@@ -255,7 +255,7 @@ export class SearchController extends AbstractController {
 					}
 
 					const backfillResponses = await Promise.all(backfills);
-					backfillResponses.map(([data]) => {
+					backfillResponses.map(([meta, data]) => {
 						previousResults = previousResults.concat(data.results);
 					});
 				}

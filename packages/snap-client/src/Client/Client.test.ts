@@ -17,16 +17,16 @@ describe('SNAP Client', () => {
 		}).toThrow();
 
 		expect(() => {
-			new Client({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
+			new Client({ siteId: '8uyt2m' });
 		}).not.toThrow();
 	});
 
-	it('does not prefetch meta when option is not set', (done) => {
-		const client = new Client({ siteId: '8uyt2m' }, { meta: { prefetch: false } });
+	it('always prefetch meta', (done) => {
+		const client = new Client({ siteId: '8uyt2m' });
 
 		setTimeout(() => {
 			try {
-				expect(client.meta).toBeUndefined();
+				expect(client.meta).toBeDefined();
 				done();
 			} catch (err) {
 				done(err);

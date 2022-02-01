@@ -23,6 +23,7 @@ const CSS = {
 				height: '100%',
 				'& .ss__result__image-wrapper': {
 					flex: '1 0 auto',
+					minHeight: '0%',
 				},
 			},
 			'&.ss__result--list': {
