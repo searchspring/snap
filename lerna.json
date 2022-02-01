@@ -8,7 +8,6 @@
 	"command": {
 		"publish": {
 			"message": "chore(publish): %s",
-			"registry": "https://npm.pkg.github.com",
 			"conventionalCommits": true
 		}
 	}
