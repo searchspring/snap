@@ -358,7 +358,7 @@ Internal product id.
 If `type` is `banner`, id will be set to `` `ssid-${banner.config.position.index}` ``
 
 ### `attributes` property
-Only applicable to results with `type` of `product` or `variant`
+Only applicable to results with `type` of `product` or `child`
 Product attributes object. Will contain all attributes that have been indexed and enabled in the Searchspring Management Console
 
 ```json
@@ -473,11 +473,11 @@ Only applicable to results with `type` of `product`
 
 Array of product variants. Each variant contains the same properties as the parent object with the following differences:
 
-`type` will be `variant`
+`type` will be `child`
 
 `id` will contain the id of the parent with a suffix of the variant index.
 
-`mappings.core` will be an empty object. All attributes can be found in `attributes`
+`mappings` is not present. All attributes can be found in `attributes`
 
 
 ### `custom` property
