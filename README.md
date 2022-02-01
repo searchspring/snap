@@ -1,4 +1,6 @@
-<img src="images/flat-logo-snap.svg"/>  
+<p align="center">
+  <img src="images/flat-logo-snap.svg"/>  
+</p>
 <br/><br/>
 
 Welcome to Snap - Searchspring's SDK for integrating into front end web apps. We invite your participation through issues, discussions and pull requests! Please reference Searchspring's [Community Contribution Guidelines](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md).
