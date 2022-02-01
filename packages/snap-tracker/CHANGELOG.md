@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** use native localStorage for getUserId ([782a285](https://github.com/searchspring/snap/commit/782a285748e8ae7272f1462cfd2ca3f339ea7d0f))
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** refactor getSessionId to match is.js native interface instead of StorageStore ([b5224de](https://github.com/searchspring/snap/commit/b5224de77eedc45c204af3e0bf64159c0b7891c6))
+
+
+
+
+
 ## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
