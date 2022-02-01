@@ -24,6 +24,7 @@ const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
 	tag: '',
 	batched: true,
+	realtime: false,
 	globals: {},
 };
 
