@@ -38,7 +38,7 @@ const controller = new SearchController(config, {
 });
 
 console.log(tracker.track.product.click === controller.tracker.track.product.click) // true
-console.log(tracker.track.product.click === window.searchspring.track.product.click) // true
+console.log(tracker.track.product.click === window.searchspring.tracker.track.product.click) // true
 ```
 
 ## Standalone usage
@@ -133,10 +133,10 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 ```
 
 ## `track` methods
-The Tracker contains various tracking methods available on the `track` object. This object is exposed to the browser's `window` via the first Snap Controller that has been instantiated. This will use the `siteId` that has been provided to the Snap Tracker instance of the respective Controller Services.
+The Tracker object is exposed to the browser's `window` via the first Snap Controller that has been instantiated. This will use the `siteId` that has been provided to the Snap Tracker instance of the respective Controller Services. The Tracker contains various tracking methods available on the `track` object within it. 
 
 ```typescript
-window.searchspring.track
+window.searchspring.tracker.track
 ```
 
 Each tracking method expects a data object which contains different attributes depending on the method.
@@ -336,14 +336,6 @@ tracker.localStorage.set('key', 'value')
 tracker.localStorage.get('key') // 'value'
 ```
 
-### `sessionStorage` property
-A reference to the StorageStore object for accessing Tracker session storage.
-
-```typescript
-const tracker = new Tracker();
-tracker.sessionStorage.set('key', 'value')
-tracker.sessionStorage.get('key') // 'value'
-```
 
 ### `context` property
 The `context` property is generated at the time of instantiating Tracker. It is part of each event payload and provides context of the event.
@@ -377,7 +369,7 @@ The `isSending` property contains the return value from `setTimeout` and when de
 The `namespace` property contains the Tracker namespace. Invoking this method is only required if a bundle contains multiple Tracker instances. 
 
 ### `track` property
-The `track` property contains various tracking events. See `track` methods section above. 
+The `track` property contains various tracking events. See `track` methods section above.
 
 ### `getUserId` method
 Returns an object containing the `userId` stored in the `ssUserId` cookie (with a fallback to localstorage.) If key doesn't exist, a new ID will be generated, saved to cookie/localstorage, and returned. 
@@ -409,24 +401,71 @@ console.log(tracker.getShopperId())
 // { shopperId: 'shopper0001' }
 ```
 
-### `getLastViewedItems` method
-Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+### `cookies` property
+The `cookies` property provides access to the `cart` and `viewed` tracking cookies.
 
-```typescript
-const tracker = new Tracker();
-
-console.log(tracker.getViewedItems()) 
-// ['sku1', 'sku2']
-```
-
-
-### `getCartItems` method
+#### `cookies.cart.get` method
 Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
 
 ```typescript
 const tracker = new Tracker();
 
-console.log(tracker.getCartItems()) 
+console.log(tracker.cookies.cart.get()) 
+// ['sku1', 'sku2']
+```
+
+#### `cookies.cart.add` method
+Provides a means of adding cart products to the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.cart.get());
+// ['sku1', 'sku2']
+
+console.log(tracker.cookies.cart.add(['sku3']));
+// ['sku1', 'sku2', 'sku3']
+```
+
+#### `cookies.cart.remove` method
+Provides a means for removing `skus` from the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.cart.get());
+// ['sku1', 'sku2']
+
+tracker.cookies.cart.remove(['sku1']);
+// ['sku2']
+```
+
+#### `cookies.cart.set` method
+Provides a means of setting the `ssCartProducts` cookie via an array of product `skus`.
+
+```typescript
+const tracker = new Tracker();
+
+tracker.cookies.cart.set(['sku1', 'sku2']);
+// ['sku1', 'sku2']
+```
+
+#### `cookies.cart.clear` method
+Empties the `ssCartProducts` cookie.
+
+```typescript
+const tracker = new Tracker();
+
+tracker.cookies.cart.clear();
+```
+
+#### `cookies.viewed.get` method
+Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+
+```typescript
+const tracker = new Tracker();
+
+console.log(tracker.cookies.viewed.get());
 // ['sku1', 'sku2']
 ```
 

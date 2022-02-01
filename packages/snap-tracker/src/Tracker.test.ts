@@ -30,7 +30,7 @@ describe('Tracker', () => {
 
 	it('can pass config and use custom namespace', async () => {
 		const config = {
-			namespace: 'trackerrrr',
+			id: 'trackerrrr',
 		};
 
 		const tracker = new Tracker(globals);
@@ -39,7 +39,7 @@ describe('Tracker', () => {
 
 		const tracker2 = new Tracker(globals, config);
 
-		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.namespace}-${globals.siteId}-local`);
+		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
 	});
 
 	it('can invoke track.shopper.login', async () => {

@@ -251,7 +251,7 @@ export class Snap {
 			const cart = this.config.context.shopper.cart;
 			if (Array.isArray(cart)) {
 				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
-				this.tracker.setCartItems(cartItems);
+				this.tracker.cookies.cart.set(cartItems);
 			}
 		}
 

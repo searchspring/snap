@@ -31,9 +31,9 @@ const VIEWED_COOKIE_EXPIRATION = 220752000000; // 7 years
 const COOKIE_SAMESITE = 'Lax';
 const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
+const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
-const CART_PRODUCTS = 'ssCartProducts';
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
@@ -63,17 +63,19 @@ export class Tracker {
 		});
 
 		this.context = {
-			...this.getUserId(),
-			...this.getSessionId(),
-			...this.getShopperId(),
+			userId: this.getUserId(),
+			sessionId: this.getSessionId(),
+			shopperId: this.getShopperId(),
 			pageLoadId: uuidv4(),
 			website: {
 				trackingCode: this.globals.siteId,
 			},
 		};
 
-		if (!window.searchspring?.track) {
-			this.setGlobal();
+		if (!window.searchspring?.tracker) {
+			window.searchspring = window.searchspring || {};
+			window.searchspring.tracker = this;
+			window.searchspring.version = version;
 		}
 
 		// one targeter to rule them all
@@ -101,8 +103,51 @@ export class Tracker {
 			})
 		);
 
-		document.removeEventListener('click', this.attributeClickEventListener);
-		document.addEventListener('click', this.attributeClickEventListener);
+		document.addEventListener('click', (event: Event) => {
+			event.preventDefault();
+
+			const attributes = {};
+			Object.values((event.target as HTMLElement).attributes).forEach((attr: Attr) => {
+				attributes[attr.nodeName] = (event.target as HTMLElement).getAttribute(attr.nodeName);
+			});
+
+			const updateRecsControllers = (): void => {
+				if (window.searchspring.controller) {
+					Object.keys(window.searchspring.controller).forEach((name) => {
+						const controller = window.searchspring.controller[name];
+						if (controller.type === 'recommendation' && controller.config?.realtime) {
+							controller.search();
+						}
+					});
+				}
+			};
+
+			if (attributes[`ss-${this.config.id}-cart-add`]) {
+				// add skus to cart
+				const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
+				this.cookies.cart.add(skus);
+				updateRecsControllers();
+			} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
+				// remove skus from cart
+				const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
+				this.cookies.cart.remove(skus);
+				updateRecsControllers();
+			} else if (`ss-${this.config.id}-cart-clear` in attributes) {
+				// clear all from cart
+				this.cookies.cart.clear();
+				updateRecsControllers();
+			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
+				// product click
+				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
+				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
+				const href = attributes['href'];
+				this.track.product.click({
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
+				});
+			}
+		});
 
 		this.sendEvents();
 	}
@@ -112,47 +157,6 @@ export class Tracker {
 			target.retarget();
 		});
 	}
-
-	attributeClickEventListener = (event) => {
-		event.preventDefault();
-
-		const attributes = {};
-		Object.values(event.target.attributes).forEach((attr: Attr) => {
-			attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
-		});
-
-		if (attributes[`ss-${this.config.id}-cart-add`]) {
-			// add skus to cart
-			const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
-			this.addToCart(skus);
-			this.updateRecsControllers();
-		} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
-			// remove skus from cart
-			const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
-			this.removeFromCart(skus);
-			this.updateRecsControllers();
-		} else if (`ss-${this.config.id}-cart-clear` in attributes) {
-			// clear all from cart
-			this.clearCart();
-			this.updateRecsControllers();
-		} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
-			// product click
-			const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
-			const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
-			const href = attributes['href'];
-			this.track.product.click({
-				intellisuggestData,
-				intellisuggestSignature,
-				href,
-			});
-		}
-	};
-
-	setGlobal = (): void => {
-		window.searchspring = window.searchspring || {};
-		window.searchspring.track = this.track;
-		window.searchspring.version = version;
-	};
 
 	track: TrackMethods = {
 		event: (payload: BeaconPayload): BeaconEvent => {
@@ -190,7 +194,7 @@ export class Tracker {
 						},
 					});
 				}
-				const storedShopperId = this.getShopperId()?.shopperId;
+				const storedShopperId = this.getShopperId();
 				data.id = `${data.id}`;
 				if (storedShopperId != data.id) {
 					// user's logged in id has changed, update shopperId cookie send login event
@@ -238,7 +242,7 @@ export class Tracker {
 				// save recently viewed products to cookie
 				const sku = data?.sku || data?.childSku;
 				if (sku) {
-					const lastViewedProducts = this.getLastViewedItems();
+					const lastViewedProducts = this.cookies.viewed.get();
 					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
 					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
 				}
@@ -337,7 +341,7 @@ export class Tracker {
 				// save cart items to cookie
 				if (items.length) {
 					const products = items.map((item) => item.sku || item.childSku);
-					this.addToCart(products);
+					this.cookies.cart.add(products);
 				}
 
 				// legacy tracking
@@ -399,7 +403,7 @@ export class Tracker {
 				};
 
 				// clear cart items from cookie when order is placed
-				this.clearCart();
+				this.cookies.cart.clear();
 
 				// legacy tracking
 				new PixelEvent(payload);
@@ -409,7 +413,7 @@ export class Tracker {
 		},
 	};
 
-	getUserId = (): Record<string, string> => {
+	getUserId = (): string => {
 		let userId;
 		try {
 			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
@@ -424,10 +428,11 @@ export class Tracker {
 		} catch (e) {
 			console.error('Failed to persist user id to cookie or local storage:', e);
 		}
-		return { userId };
+
+		return userId;
 	};
 
-	getSessionId = (): Record<string, string> => {
+	getSessionId = (): string => {
 		let sessionId;
 		if (featureFlags.storage) {
 			try {
@@ -445,72 +450,64 @@ export class Tracker {
 				cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0);
 			}
 		}
-		return { sessionId };
+
+		return sessionId;
 	};
 
-	getShopperId = (): Record<string, string> => {
+	getShopperId = (): string => {
 		const shopperId = cookies.get(SHOPPERID_COOKIE_NAME);
 		if (!shopperId) {
 			return;
 		}
-		return { shopperId };
+
+		return shopperId;
 	};
 
-	getCartItems = (): string[] => {
-		const items = cookies.get(CART_PRODUCTS);
-		if (!items) {
-			return [];
-		}
-		return items.split(',');
-	};
-
-	getLastViewedItems = (): string[] => {
-		const items = cookies.get(VIEWED_PRODUCTS);
-		if (!items) {
-			return [];
-		}
-		return items.split(',');
-	};
-
-	addToCart = (items: string[]): void => {
-		if (items.length) {
-			const currentCartItems = this.getCartItems();
-			const itemsToAdd = items.map((item) => item.trim());
-			const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
-			cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
-		}
-	};
-
-	setCartItems = (items: string[]): void => {
-		if (items.length) {
-			const cartItems = items.map((item) => item.trim());
-			const uniqueCartItems = Array.from(new Set(cartItems));
-			cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
-		}
-	};
-
-	removeFromCart = (items: string[]): void => {
-		if (items.length) {
-			const currentCartItems = this.getCartItems();
-			const itemsToRemove = items.map((item) => item.trim());
-			const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
-			cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
-		}
-	};
-
-	clearCart = (): void => {
-		cookies.unset(CART_PRODUCTS);
-	};
-
-	updateRecsControllers = (): void => {
-		if (window.searchspring.controller) {
-			Object.keys(window.searchspring.controller).forEach((name) => {
-				const controller = window.searchspring.controller[name];
-				if (controller.type === 'recommendation' && controller.config?.realtime) {
-					controller.search();
+	cookies = {
+		cart: {
+			get: (): string[] => {
+				const items = cookies.get(CART_PRODUCTS);
+				if (!items) {
+					return [];
 				}
-			});
-		}
+				return items.split(',');
+			},
+			set: (items: string[]): void => {
+				if (items.length) {
+					const cartItems = items.map((item) => item.trim());
+					const uniqueCartItems = Array.from(new Set(cartItems));
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+				}
+			},
+			add: (items: string[]): void => {
+				if (items.length) {
+					const currentCartItems = this.cookies.cart.get();
+					const itemsToAdd = items.map((item) => item.trim());
+					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
+					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+				}
+			},
+			remove: (items: string[]): void => {
+				if (items.length) {
+					const currentCartItems = this.cookies.cart.get();
+					const itemsToRemove = items.map((item) => item.trim());
+					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
+					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+				}
+			},
+			clear: () => {
+				cookies.unset(CART_PRODUCTS);
+			},
+		},
+		viewed: {
+			get: (): string[] => {
+				const items = cookies.get(VIEWED_PRODUCTS);
+				if (!items) {
+					return [];
+				}
+				return items.split(',');
+			},
+		},
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {

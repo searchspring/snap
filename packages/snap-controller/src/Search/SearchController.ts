@@ -159,25 +159,25 @@ export class SearchController extends AbstractController {
 		params.tracking = params.tracking || {};
 		params.tracking.domain = window.location.href;
 
-		const { userId } = this.tracker.getUserId();
+		const userId = this.tracker.getUserId();
 		if (userId) {
 			params.tracking.userId = userId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
-			const cartItems = this.tracker.getCartItems();
+			const cartItems = this.tracker.cookies.cart.get();
 			if (cartItems.length) {
 				params.personalization = params.personalization || {};
 				params.personalization.cart = cartItems.join(',');
 			}
 
-			const lastViewedItems = this.tracker.getLastViewedItems();
+			const lastViewedItems = this.tracker.cookies.viewed.get();
 			if (lastViewedItems.length) {
 				params.personalization = params.personalization || {};
 				params.personalization.lastViewed = lastViewedItems.join(',');
 			}
 
-			const shopperId = this.tracker.getShopperId()?.shopperId;
+			const shopperId = this.tracker.getShopperId();
 			if (shopperId) {
 				params.personalization = params.personalization || {};
 				params.personalization.shopper = shopperId;
