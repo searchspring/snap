@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.16.0...v0.20.0) (2022-02-01)
+
+
+### Features
+
+* **publish:** changed packages to publish public ([acd4acc](https://github.com/searchspring/snap/commit/acd4acc29323aea13d415d1ae8e36e32defa3c70))
+
+
+
+
+
 # [0.16.0](https://github.com/searchspring/snap/compare/v0.15.1...v0.16.0) (2022-02-01)
 
 
