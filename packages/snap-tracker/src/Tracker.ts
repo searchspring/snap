@@ -104,8 +104,6 @@ export class Tracker {
 		);
 
 		document.addEventListener('click', (event: Event) => {
-			event.preventDefault();
-
 			const attributes = {};
 			Object.values((event.target as HTMLElement).attributes).forEach((attr: Attr) => {
 				attributes[attr.nodeName] = (event.target as HTMLElement).getAttribute(attr.nodeName);
