@@ -965,7 +965,7 @@
 					return (0, emotion_react_browser_esm.iv)({
 						position: 'relative',
 						'&.ss__dropdown--open': {
-							'& .ss__dropdown__content': { position: '' + (disableOverlay ? 'initial' : null), visibility: 'visible', opacity: 1 },
+							'& .ss__dropdown__content': { position: disableOverlay ? 'relative' : null, visibility: 'visible', opacity: 1 },
 						},
 						'.ss__dropdown__button': { cursor: disableOverlay ? 'default' : 'pointer' },
 						'.ss__dropdown__content': { position: 'absolute', minWidth: '100%', visibility: 'hidden', opacity: 0, top: 'auto', left: 0 },
@@ -1945,6 +1945,23 @@
 							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onMouseOut={(e)=>{console.log(e)}} />\n"
 						)
 					),
+					(0, esm.kt)('h4', { id: 'onerror' }, 'onError'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onError'),
+						' prop allows for a custom callback function when the image has encountered an error.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onError={(e)=>{console.log(e)}} />\n"
+						)
+					),
 					(0, esm.kt)('h4', { id: 'onload' }, 'onLoad'),
 					(0, esm.kt)(
 						'p',
@@ -1959,7 +1976,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
-							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={()=>{}} />\n"
+							"<Image src={searchResponse.results.mappings.core.imageUrl} alt='image' onLoad={(e)=>{console.log(e)}} />\n"
 						)
 					),
 					(0, esm.kt)('h4', { id: 'onclick' }, 'onClick'),
@@ -2014,6 +2031,7 @@
 							control: { type: 'boolean' },
 						},
 						hoverSrc: { description: 'Image onHover url', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						onError: { description: 'Image error event handler', table: { type: { summary: 'function' } }, action: 'onError' },
 						onLoad: { description: 'Image loaded event handler', table: { type: { summary: 'function' } }, action: 'onLoad' },
 						onClick: { description: 'Image click event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 						onMouseOver: { description: 'Image mouse enter event handler', table: { type: { summary: 'function' } }, action: 'onMouseOver' },
@@ -2118,8 +2136,8 @@
 						display: 'flex',
 						flexDirection: 'column',
 						justifyContent: 'center',
-						height: '100%',
-						'& img': { visibility, objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
+						height: 'auto',
+						'& img': { visibility, flexShrink: '0', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
 					});
 				};
 			function Image(properties) {
@@ -2147,6 +2165,7 @@
 					lazy = props.lazy,
 					_onMouseOver = props.onMouseOver,
 					_onMouseOut = props.onMouseOut,
+					_onError = props.onError,
 					_onLoad = props.onLoad,
 					_onClick = props.onClick,
 					disableStyles = props.disableStyles,
@@ -2177,14 +2196,14 @@
 								alt,
 								title: alt,
 								loading: lazy ? 'lazy' : void 0,
-								onLoad: function onLoad() {
-									setVisibility('visible'), _onLoad && _onLoad();
+								onLoad: function onLoad(e) {
+									setVisibility('visible'), _onLoad && _onLoad(e);
 								},
 								onClick: function onClick(e) {
 									return _onClick && _onClick(e);
 								},
 								onError: function onError(e) {
-									return (e.target.src = fallback);
+									(e.target.src = fallback), _onError && _onError(e);
 								},
 								onMouseOver: function onMouseOver(e) {
 									hoverSrc && setHover(!0), _onMouseOver && _onMouseOver(e);
@@ -5243,25 +5262,33 @@
 						_theme$colors3,
 						_theme$colors3$text,
 						_theme$colors4,
+						_ss__facetGridOp,
 						columns = _ref.columns,
 						gapSize = _ref.gapSize,
 						theme = _ref.theme;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.iv)({
-						display: 'grid',
+						display: 'flex',
+						flexFlow: 'row wrap',
 						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
-						gridAutoRows: '1fr',
 						gap: gapSize,
-						'&::before': { content: '""', width: 0, paddingBottom: '100%', gridRow: '1 / 1', gridColumn: '1 / 1' },
-						'&> *:first-of-type': { gridRow: '1 / 1', gridColumn: '1 / 1' },
-						'& .ss__facet-grid-options__option': {
-							border:
-								'1px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333'),
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							textAlign: 'center',
-							wordBreak: 'break-all',
-							'&.ss__facet-grid-options__option--filtered': {
+						gridAutoRows: '1fr',
+						'& .ss__facet-grid-options__option':
+							((_ss__facetGridOp = {
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								flex: '0 1 auto',
+								border:
+									'1px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333'),
+								textAlign: 'center',
+								wordBreak: 'break-all',
+								boxSizing: 'border-box',
+								padding: '1em 0',
+								width: 'calc(100% / ' + columns + ' - ' + 2 * Math.round((columns + 2) / 2) + 'px)',
+								margin: '0 ' + gapSize + ' ' + gapSize + ' 0',
+							}),
+							(_ss__facetGridOp[':nth-of-type(' + columns + 'n)'] = { marginRight: '0' }),
+							(_ss__facetGridOp['&.ss__facet-grid-options__option--filtered'] = {
 								background: (null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary) || '#ccc',
 								color:
 									null === (_theme$colors3 = theme.colors) ||
@@ -5270,12 +5297,20 @@
 									void 0 === _theme$colors3$text
 										? void 0
 										: _theme$colors3$text.secondary,
-							},
-							'&:hover:not(.ss__facet-grid-options__option--filtered)': {
+							}),
+							(_ss__facetGridOp['&:hover:not(.ss__facet-grid-options__option--filtered)'] = {
 								cursor: 'pointer',
 								background: (null === (_theme$colors4 = theme.colors) || void 0 === _theme$colors4 ? void 0 : _theme$colors4.hover) || '#f8f8f8',
-							},
-							'& .ss__facet-grid-options__option__value': { '&.ss__facet-grid-options__option__value--smaller': { fontSize: '70%' } },
+							}),
+							(_ss__facetGridOp['& .ss__facet-grid-options__option__value'] = {
+								'&.ss__facet-grid-options__option__value--smaller': { fontSize: '70%' },
+							}),
+							_ss__facetGridOp),
+						'@supports (display: grid)': {
+							display: 'grid',
+							'& .ss__facet-grid-options__option': { padding: '0', margin: '0', width: 'initial' },
+							'&::before': { content: '""', width: 0, paddingBottom: '100%', gridRow: '1 / 1', gridColumn: '1 / 1' },
+							'&> *:first-of-type': { gridRow: '1 / 1', gridColumn: '1 / 1' },
 						},
 					});
 				},
@@ -6451,36 +6486,44 @@
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_palette = function palette(_ref) {
 					var _theme$colors,
+						_ss__facetPalette,
 						columns = _ref.columns,
 						gapSize = _ref.gapSize,
 						theme = _ref.theme;
 					return (0, emotion_react_browser_esm.iv)({
-						display: 'grid',
+						display: 'flex',
+						flexFlow: 'row wrap',
 						gridTemplateColumns: 'repeat(' + columns + ', calc((100% - (' + (columns - 1) + ' * ' + gapSize + '))/ ' + columns + '))',
 						gap: gapSize,
-						'& .ss__facet-palette-options__option': {
-							position: 'relative',
-							'&:hover': {
+						'& .ss__facet-palette-options__option':
+							((_ss__facetPalette = {
+								width: 'calc(100% / ' + columns + ' - ' + 2 * Math.round((columns + 2) / 2) + 'px )',
+								marginRight: gapSize,
+								marginBottom: gapSize,
+							}),
+							(_ss__facetPalette[':nth-of-type(' + columns + 'n)'] = { marginRight: '0' }),
+							(_ss__facetPalette['&:hover'] = {
 								cursor: 'pointer',
 								'.ss__facet-palette-options__option__wrapper': { borderColor: '#EBEBEB' },
 								'& .ss__facet-palette-options__option__palette': { '& .ss__facet-palette-options__icon': { opacity: 1 } },
-							},
-							'& .ss__facet-palette-options__option__wrapper': { border: '2px solid transparent', borderRadius: '100%', padding: '2px' },
-							'&.ss__facet-palette-options__option--filtered': {
+							}),
+							(_ss__facetPalette['& .ss__facet-palette-options__option__wrapper'] = {
+								border: '2px solid transparent',
+								borderRadius: '100%',
+								padding: '2px',
+							}),
+							(_ss__facetPalette['&.ss__facet-palette-options__option--filtered'] = {
 								'& .ss__facet-palette-options__option__wrapper': {
 									borderColor: (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#333',
 									padding: '0px',
 									borderWidth: '4px',
 								},
-							},
-							'& .ss__facet-palette-options__option__palette': {
+							}),
+							(_ss__facetPalette['& .ss__facet-palette-options__option__palette'] = {
 								paddingTop: 'calc(100% - 2px)',
 								border: '1px solid #EBEBEB',
 								borderRadius: '100%',
 								position: 'relative',
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
 								'& .ss__facet-palette-options__icon': {
 									position: 'absolute',
 									top: 0,
@@ -6494,15 +6537,16 @@
 									strokeLinejoin: 'round',
 									opacity: 0,
 								},
-							},
-							'& .ss__facet-palette-options__option__value': {
+							}),
+							(_ss__facetPalette['& .ss__facet-palette-options__option__value'] = {
 								display: 'block',
 								textAlign: 'center',
 								overflow: 'hidden',
 								textOverflow: 'ellipsis',
 								whiteSpace: 'nowrap',
-							},
-						},
+							}),
+							_ss__facetPalette),
+						'@supports (display: grid)': { display: 'grid', '& .ss__facet-palette-options__option': { margin: '0', width: 'initial' } },
 					});
 				},
 				FacetPaletteOptions = (0, es.Pi)(function (properties) {
@@ -7255,10 +7299,15 @@
 										null !== (_facet$services = facet.services) &&
 										void 0 !== _facet$services &&
 										_facet$services.urlManager &&
-										facet.services.urlManager
-											.remove('page')
-											.set('filter.' + facet.field, { low: val[0], high: val[1] })
-											.go(),
+										(val[0] == facet.range.low && val[1] == facet.range.high
+											? facet.services.urlManager
+													.remove('page')
+													.remove('filter.' + facet.field)
+													.go()
+											: facet.services.urlManager
+													.remove('page')
+													.set('filter.' + facet.field, { low: val[0], high: val[1] })
+													.go()),
 									_onChange && _onChange(val);
 							},
 							onDrag: function onDrag(val) {
@@ -8729,7 +8778,12 @@
 			var types = __webpack_require__('./src/types.ts'),
 				CSS_result = function result() {
 					return (0, emotion_react_browser_esm.iv)({
-						'&.ss__result--grid': { display: 'flex', flexDirection: 'column', height: '100%', '& .ss__result__image-wrapper': { flex: '1 0 auto' } },
+						'&.ss__result--grid': {
+							display: 'flex',
+							flexDirection: 'column',
+							height: '100%',
+							'& .ss__result__image-wrapper': { flex: '1 0 auto', minHeight: '0%' },
+						},
 						'&.ss__result--list': {
 							display: 'flex',
 							flexDirection: 'row',
@@ -10426,6 +10480,7 @@
 									padding: vertical ? '10px 20px' : '10px',
 									'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': { marginBottom: '10px' },
 									'& .ss__banner.ss__banner--footer': { margin: '10px 0' },
+									'& .ss__autocomplete__content__results': { minHeight: '0%' },
 									'& .ss__autocomplete__content__info': {
 										padding: '10px',
 										textAlign: noResults ? 'center' : 'right',
@@ -11115,7 +11170,7 @@
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'valueProps'),
 						', ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'emIfy'),
-						',',
+						', ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller')
 					),
 					(0, esm.kt)(
@@ -12613,7 +12668,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -12742,14 +12796,9 @@
 				),
 			};
 			var snapInstance = snapify.K.search({ id: 'Facets', globals: { siteId: '8uyt2m' } }),
-				ObservableFacets = (0, mobxreact_esm.Pi)(function (_ref) {
-					var args = _ref.args,
-						controller = _ref.controller;
+				Default = function Template(args, _ref) {
+					var controller = _ref.loaded.controller;
 					return (0, preact_module.h)(Facets.m, Object.assign({}, args, { controller }));
-				}),
-				Default = function Template(args, _ref2) {
-					var controller = _ref2.loaded.controller;
-					return (0, preact_module.h)(ObservableFacets, { args, controller });
 				}.bind({});
 			Default.loaders = [
 				_asyncToGenerator(
@@ -14154,7 +14203,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				Results = __webpack_require__('./src/components/Organisms/Results/Results.tsx'),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
@@ -14402,16 +14450,19 @@
 				),
 			};
 			var snapInstance = snapify.K.search({ id: 'Results', globals: { siteId: '8uyt2m' } }),
-				ObservableGridResults = (0, mobxreact_esm.Pi)(function (_ref) {
+				Grid = function GridTemplate(args, _ref) {
 					var _controller$store,
-						args = _ref.args,
-						controller = _ref.controller;
-					return (0,
-					preact_module.h)(Results.u, Object.assign({}, args, { controller, results: null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results }));
-				}),
-				Grid = function GridTemplate(args, _ref2) {
-					var controller = _ref2.loaded.controller;
-					return (0, preact_module.h)(ObservableGridResults, { args, controller });
+						controller = _ref.loaded.controller;
+					return (0, preact_module.h)(
+						Results.u,
+						Object.assign({}, args, {
+							controller,
+							results:
+								null == controller || null === (_controller$store = controller.store) || void 0 === _controller$store
+									? void 0
+									: _controller$store.results,
+						})
+					);
 				}.bind({});
 			Grid.loaders = [
 				_asyncToGenerator(
@@ -14431,17 +14482,21 @@
 					})
 				),
 			];
-			var ObservableListResults = (0, mobxreact_esm.Pi)(function (_ref4) {
-					var _controller$store2,
-						args = _ref4.args,
-						controller = _ref4.controller;
-					return (0,
-					preact_module.h)(Results.u, Object.assign({}, args, { controller, results: null == controller || null === (_controller$store2 = controller.store) || void 0 === _controller$store2 ? void 0 : _controller$store2.results, layout: types.Ar.LIST }));
-				}),
-				List = function ListTemplate(args, _ref5) {
-					var controller = _ref5.loaded.controller;
-					return (0, preact_module.h)(ObservableListResults, { args, controller });
-				}.bind({});
+			var List = function ListTemplate(args, _ref3) {
+				var _controller$store2,
+					controller = _ref3.loaded.controller;
+				return (0, preact_module.h)(
+					Results.u,
+					Object.assign({}, args, {
+						controller,
+						results:
+							null == controller || null === (_controller$store2 = controller.store) || void 0 === _controller$store2
+								? void 0
+								: _controller$store2.results,
+						layout: types.Ar.LIST,
+					})
+				);
+			}.bind({});
 			List.loaders = [
 				_asyncToGenerator(
 					regeneratorRuntime.mark(function _callee2() {
@@ -14484,13 +14539,27 @@
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				CSS_results = function results(_ref) {
-					var columns = _ref.columns,
+					var _ss__result,
+						columns = _ref.columns,
 						gapSize = _ref.gapSize;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.iv)({
-						display: 'grid',
-						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
-						gridTemplateRows: 'auto',
+						display: 'flex',
+						flexFlow: 'row wrap',
 						gap: gapSize,
+						gridTemplateRows: 'auto',
+						gridTemplateColumns: 'repeat(' + columns + ', 1fr)',
+						'& .ss__result':
+							((_ss__result = {
+								boxSizing: 'border-box',
+								flex: '0 1 auto',
+								width: 'calc(' + 100 / columns + '% - (' + (columns - 1) + ' * ' + gapSize + ' / ' + columns + ' ) )',
+								marginRight: gapSize,
+								marginBottom: gapSize,
+							}),
+							(_ss__result['&:nth-of-type(' + columns + 'n)'] = { marginRight: '0' }),
+							(_ss__result['&:nth-last-of-type(-n+' + columns + ')'] = { marginBottom: '0' }),
+							_ss__result),
+						'@supports (display: grid)': { display: 'grid', '& .ss__result': { width: 'initial', margin: 0 } },
 					});
 				},
 				defaultBreakpointsProps = { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
@@ -18038,7 +18107,6 @@
 							(this.tracker = tracker),
 							this.log.setNamespace(this.config.id),
 							this.profiler.setNamespace(this.config.id),
-							this.tracker.namespace || this.tracker.setNamespace(this.config.id),
 							null !== (_url = url(window.location.href)) &&
 								void 0 !== _url &&
 								null !== (_url$params = _url.params) &&
@@ -18335,7 +18403,7 @@
 					_getPrototypeOf(o)
 				);
 			}
-			var defaultConfig = { id: 'recommend', tag: '', globals: {} },
+			var defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
 				RecommendationController = (function (_AbstractController) {
 					!(function _inherits(subClass, superClass) {
 						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
@@ -18729,10 +18797,12 @@
 							{
 								key: 'params',
 								get: function get() {
-									var params = Object.assign({ tag: this.config.tag }, this.config.globals, { branch: this.config.branch || 'production' }),
+									var params = Object.assign({ tag: this.config.tag, batched: this.config.batched }, this.config.globals, {
+											branch: this.config.branch || 'production',
+										}),
 										shopperId = this.tracker.context.shopperId,
-										cart = this.tracker.getCartItems(),
-										lastViewed = this.tracker.getLastViewedItems();
+										cart = this.tracker.cookies.cart.get(),
+										lastViewed = this.tracker.cookies.viewed.get();
 									return (
 										shopperId && (params.shopper = shopperId),
 										null != cart && cart.length && (params.cart = cart),
@@ -18747,8 +18817,8 @@
 					);
 				})(AbstractController),
 				fibonacci =
-					(__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
-					__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
 					__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.date.to-iso-string.js'),
@@ -18756,6 +18826,98 @@
 						for (var temp, a = 1, b = 0; num >= 0; ) (temp = a), (a += b), (b = temp), num--;
 						return b;
 					});
+			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js');
+			function NetworkCache_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			var NetworkCache_defaultConfig = { enabled: !0, ttl: 3e5, maxSize: 200, purgeable: !0 },
+				NetworkCache = (function () {
+					function NetworkCache(config) {
+						!(function NetworkCache_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, NetworkCache),
+							(this.memoryCache = {}),
+							(this.config = cjs_default()(NetworkCache_defaultConfig, config || {}));
+					}
+					return (
+						(function NetworkCache_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && NetworkCache_defineProperties(Constructor.prototype, protoProps),
+								staticProps && NetworkCache_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(NetworkCache, [
+							{
+								key: 'get',
+								value: function get(key) {
+									try {
+										if (this.memoryCache[key] && Date.now() < this.memoryCache[key].expires) return this.memoryCache[key].value;
+										var stored = sessionStorage.getItem('ss-networkcache'),
+											localData = stored && JSON.parse(stored);
+										if (localData && key && localData[key]) {
+											if (Date.now() > localData[key].expires) {
+												var newStored = Object.assign({}, localData);
+												return delete newStored[key], void sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+											}
+											return localData[key].value;
+										}
+									} catch (err) {
+										console.warn('something went wrong, browser might not have cookies enabled');
+									}
+								},
+							},
+							{
+								key: 'set',
+								value: function set(key, value) {
+									var _this = this;
+									if (this.config.enabled)
+										try {
+											!(function () {
+												var cacheObject = { value, expires: Date.now() + _this.config.ttl, purgeable: _this.config.purgeable };
+												_this.memoryCache[key] = cacheObject;
+												var stored = sessionStorage.getItem('ss-networkcache'),
+													newStored = Object.assign({}, stored && JSON.parse(stored));
+												newStored[key] = cacheObject;
+												for (var size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024; size > _this.config.maxSize; ) {
+													var oldestKey = Object.keys(newStored)
+														.filter(function (key) {
+															return newStored[key].purgeable;
+														})
+														.sort(function (a, b) {
+															return newStored[a].expires - newStored[b].expires;
+														})[0];
+													if (!oldestKey) break;
+													delete newStored[oldestKey], (size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024);
+												}
+												size < _this.config.maxSize && sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+											})();
+										} catch (err) {
+											console.warn('something went wrong, browser might not have cookies enabled');
+										}
+								},
+							},
+							{
+								key: 'clear',
+								value: function clear() {
+									try {
+										(this.memoryCache = {}), sessionStorage.setItem('ss-networkcache', '');
+									} catch (err) {
+										console.warn('something went wrong, browser might not have cookies enabled');
+									}
+								},
+							},
+						]),
+						NetworkCache
+					);
+				})();
 			function Abstract_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 				try {
 					var info = gen[key](arg),
@@ -18829,7 +18991,8 @@
 								return function (_x, _x2) {
 									return _ref.apply(this, arguments);
 								};
-							})());
+							})()),
+							(this.cache = new NetworkCache(configuration.cacheSettings));
 					}
 					var _request;
 					return (
@@ -18838,58 +19001,76 @@
 								key: 'request',
 								value:
 									((_request = Abstract_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee2(context) {
+										regeneratorRuntime.mark(function _callee2(context, cacheKey) {
 											var _this$createFetchPara,
 												url,
 												init,
+												cachedResponse,
 												response,
+												responseJSON,
 												_this2 = this;
 											return regeneratorRuntime.wrap(
 												function _callee2$(_context2) {
 													for (;;)
 														switch ((_context2.prev = _context2.next)) {
 															case 0:
-																return (
-																	(_this$createFetchPara = this.createFetchParams(context)),
+																if (
+																	((_this$createFetchPara = this.createFetchParams(context)),
 																	(url = _this$createFetchPara.url),
 																	(init = _this$createFetchPara.init),
-																	(_context2.next = 3),
-																	this.fetchApi(url, init)
-																);
-															case 3:
-																if (!((response = _context2.sent).status >= 200 && response.status < 300)) {
-																	_context2.next = 10;
+																	!cacheKey)
+																) {
+																	_context2.next = 7;
 																	break;
 																}
-																return (this.retryCount = 0), (this.retryDelay = 1e3), _context2.abrupt('return', response);
-															case 10:
+																if (!(cachedResponse = this.cache.get(cacheKey))) {
+																	_context2.next = 7;
+																	break;
+																}
+																return (this.retryCount = 0), (this.retryDelay = 1e3), _context2.abrupt('return', cachedResponse);
+															case 7:
+																return (_context2.next = 9), this.fetchApi(url, init);
+															case 9:
+																return (response = _context2.sent), (_context2.next = 12), response.json();
+															case 12:
+																if (((responseJSON = _context2.sent), !(response.status >= 200 && response.status < 300))) {
+																	_context2.next = 20;
+																	break;
+																}
+																return (
+																	(this.retryCount = 0),
+																	(this.retryDelay = 1e3),
+																	cacheKey && this.cache.set(cacheKey, responseJSON),
+																	_context2.abrupt('return', responseJSON)
+																);
+															case 20:
 																if (429 != response.status) {
-																	_context2.next = 22;
+																	_context2.next = 32;
 																	break;
 																}
 																if (!(this.retryCount < this.configuration.maxRetry)) {
-																	_context2.next = 21;
+																	_context2.next = 31;
 																	break;
 																}
 																return (
-																	(_context2.next = 14),
+																	(_context2.next = 24),
 																	new Promise(function (resolve) {
 																		return setTimeout(resolve, _this2.retryDelay);
 																	})
 																);
-															case 14:
+															case 24:
 																return (
 																	(this.retryDelay = 1e3 * fibonacci(this.retryCount)),
 																	this.retryCount++,
-																	(_context2.next = 18),
-																	this.request(context)
+																	(_context2.next = 28),
+																	this.request(context, cacheKey)
 																);
-															case 18:
+															case 28:
 																return _context2.abrupt('return', _context2.sent);
-															case 21:
-															case 22:
+															case 31:
+															case 32:
 																throw response.status;
-															case 23:
+															case 33:
 															case 'end':
 																return _context2.stop();
 														}
@@ -18899,14 +19080,21 @@
 											);
 										})
 									)),
-									function request(_x3) {
+									function request(_x3, _x4) {
 										return _request.apply(this, arguments);
 									}),
 							},
 							{
 								key: 'createFetchParams',
 								value: function createFetchParams(context) {
-									var url = this.configuration.basePath + context.path;
+									var _context$body,
+										_context$query,
+										siteId =
+											(null == context || null === (_context$body = context.body) || void 0 === _context$body ? void 0 : _context$body.siteId) ||
+											(null == context || null === (_context$query = context.query) || void 0 === _context$query ? void 0 : _context$query.siteId);
+									if (!siteId) throw new Error('Request failed. Missing "siteId" parameter.');
+									var siteIdHost = 'https://' + siteId + '.a.searchspring.io',
+										url = (this.configuration.origin || siteIdHost).replace(/\/$/, '') + '/' + context.path.replace(/^\//, '');
 									void 0 !== context.query &&
 										0 !== Object.keys(context.query).length &&
 										(url += '?' + this.configuration.queryParamsStringify(context.query));
@@ -18928,22 +19116,28 @@
 				})(),
 				ApiConfiguration = (function () {
 					function ApiConfiguration(configuration) {
-						Abstract_classCallCheck(this, ApiConfiguration), (this.configuration = configuration), (this.maxRetry = 8);
-						var apiHost = 'https://' + configuration.siteId + '.a.searchspring.io';
-						(configuration.basePath = configuration.basePath || apiHost), configuration.maxRetry && (this.maxRetry = configuration.maxRetry);
+						Abstract_classCallCheck(this, ApiConfiguration),
+							(this.configuration = configuration),
+							configuration.maxRetry || (this.configuration.maxRetry = 8);
 					}
 					return (
 						Abstract_createClass(ApiConfiguration, [
 							{
-								key: 'getSiteId',
-								value: function getSiteId() {
-									return this.configuration.siteId;
+								key: 'cacheSettings',
+								get: function get() {
+									return this.configuration.cacheSettings;
 								},
 							},
 							{
-								key: 'basePath',
+								key: 'maxRetry',
 								get: function get() {
-									return this.configuration.basePath;
+									return this.configuration.maxRetry;
+								},
+							},
+							{
+								key: 'origin',
+								get: function get() {
+									return this.configuration.origin;
 								},
 							},
 							{
@@ -19126,10 +19320,13 @@
 																(queryParameters.resultsFormat = 'native'),
 																(headerParameters = {}),
 																(_context.next = 5),
-																this.request({ path, method: 'GET', headers: headerParameters, query: queryParameters })
+																this.request(
+																	{ path, method: 'GET', headers: headerParameters, query: queryParameters },
+																	path + JSON.stringify(queryParameters)
+																)
 															);
 														case 5:
-															return (legacyResponse = _context.sent), _context.abrupt('return', legacyResponse.json());
+															return (legacyResponse = _context.sent), _context.abrupt('return', legacyResponse);
 														case 7:
 														case 'end':
 															return _context.stop();
@@ -19158,10 +19355,13 @@
 															return (
 																((headerParameters = {})['Content-Type'] = 'application/json'),
 																(_context2.next = 4),
-																this.request({ path: '/api/meta/meta.json', method: 'POST', headers: headerParameters, body: requestParameters })
+																this.request(
+																	{ path: '/api/meta/meta.json', method: 'POST', headers: headerParameters, body: requestParameters },
+																	'/api/meta/meta.json' + JSON.stringify(requestParameters)
+																)
 															);
 														case 4:
-															return (response = _context2.sent), _context2.abrupt('return', response.json());
+															return (response = _context2.sent), _context2.abrupt('return', response);
 														case 6:
 														case 'end':
 															return _context2.stop();
@@ -19190,10 +19390,13 @@
 															return (
 																(headerParameters = {}),
 																(_context3.next = 3),
-																this.request({ path: '/api/meta/meta.json', method: 'GET', headers: headerParameters, query: queryParameters })
+																this.request(
+																	{ path: '/api/meta/meta.json', method: 'GET', headers: headerParameters, query: queryParameters },
+																	'/api/meta/meta.json' + JSON.stringify(queryParameters)
+																)
 															);
 														case 3:
-															return (response = _context3.sent), _context3.abrupt('return', response.json());
+															return (response = _context3.sent), _context3.abrupt('return', response);
 														case 5:
 														case 'end':
 															return _context3.stop();
@@ -19413,10 +19616,13 @@
 															return (
 																(headerParameters = {}),
 																(_context.next = 3),
-																this.request({ path: '/api/suggest/query', method: 'GET', headers: headerParameters, query: queryParameters })
+																this.request(
+																	{ path: '/api/suggest/query', method: 'GET', headers: headerParameters, query: queryParameters },
+																	'/api/suggest/query' + JSON.stringify(queryParameters)
+																)
 															);
 														case 3:
-															return (response = _context.sent), _context.abrupt('return', response.json());
+															return (response = _context.sent), _context.abrupt('return', response);
 														case 5:
 														case 'end':
 															return _context.stop();
@@ -19445,10 +19651,13 @@
 															return (
 																((headerParameters = {})['Content-Type'] = 'application/json'),
 																(_context2.next = 4),
-																this.request({ path: '/api/suggest/query', method: 'POST', headers: headerParameters, body: requestParameters })
+																this.request(
+																	{ path: '/api/suggest/query', method: 'POST', headers: headerParameters, body: requestParameters },
+																	'/api/suggest/query' + JSON.stringify(requestParameters)
+																)
 															);
 														case 4:
-															return (response = _context2.sent), _context2.abrupt('return', response.json());
+															return (response = _context2.sent), _context2.abrupt('return', response);
 														case 6:
 														case 'end':
 															return _context2.stop();
@@ -19477,10 +19686,13 @@
 															return (
 																(headerParameters = {}),
 																(_context3.next = 3),
-																this.request({ path: '/api/suggest/trending', method: 'GET', headers: headerParameters, query: queryParameters })
+																this.request(
+																	{ path: '/api/suggest/trending', method: 'GET', headers: headerParameters, query: queryParameters },
+																	'/api/suggest/trending' + JSON.stringify(queryParameters)
+																)
 															);
 														case 3:
-															return (response = _context3.sent), _context3.abrupt('return', response.json());
+															return (response = _context3.sent), _context3.abrupt('return', response);
 														case 5:
 														case 'end':
 															return _context3.stop();
@@ -19509,10 +19721,13 @@
 															return (
 																((headerParameters = {})['Content-Type'] = 'application/json'),
 																(_context4.next = 4),
-																this.request({ path: '/api/suggest/trending', method: 'POST', headers: headerParameters, body: requestParameters })
+																this.request(
+																	{ path: '/api/suggest/trending', method: 'POST', headers: headerParameters, body: requestParameters },
+																	'/api/suggest/trending' + JSON.stringify(requestParameters)
+																)
 															);
 														case 4:
-															return (response = _context4.sent), _context4.abrupt('return', response.json());
+															return (response = _context4.sent), _context4.abrupt('return', response);
 														case 6:
 														case 'end':
 															return _context4.stop();
@@ -19555,6 +19770,31 @@
 					transformSearchRequest.facets(request),
 					transformSearchRequest.tracking(request),
 					transformSearchRequest.personalization(request)
+				);
+			}
+			function htmlUnescape(value) {
+				return value
+					.replace(/&gt;/g, '>')
+					.replace(/&lt;/g, '<')
+					.replace(/&#0?39;/g, "'")
+					.replace(/&quot;/g, '"')
+					.replace(/&amp;/g, '&');
+			}
+			function searchResponse_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function searchResponse_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && searchResponse_defineProperties(Constructor.prototype, protoProps),
+					staticProps && searchResponse_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
 				);
 			}
 			(transformSearchRequest.sorts = function () {
@@ -19670,32 +19910,6 @@
 						params
 					);
 				});
-			__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js');
-			function htmlUnescape(value) {
-				return value
-					.replace(/&gt;/g, '>')
-					.replace(/&lt;/g, '<')
-					.replace(/&#0?39;/g, "'")
-					.replace(/&quot;/g, '"')
-					.replace(/&amp;/g, '&');
-			}
-			function searchResponse_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function searchResponse_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && searchResponse_defineProperties(Constructor.prototype, protoProps),
-					staticProps && searchResponse_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
 			var CORE_FIELDS = [
 					'uid',
 					'sku',
@@ -19775,9 +19989,6 @@
 					});
 				};
 			}
-			function Hybrid_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
 			function Hybrid_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -19852,23 +20063,38 @@
 					return { results: ((response || {}).results || []).map(transformSearchResponse.result) };
 				}),
 				(transformSearchResponse.result = function (rawResult) {
-					var coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
-						var _Object$assign;
-						return void 0 !== rawResult[key]
-							? Object.assign({}, coreFields, (((_Object$assign = {})[key] = decodeProperty(rawResult[key])), _Object$assign))
-							: coreFields;
-					}, {});
+					var _rawResult$children,
+						coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
+							var _Object$assign;
+							return void 0 !== rawResult[key]
+								? Object.assign({}, coreFields, (((_Object$assign = {})[key] = decodeProperty(rawResult[key])), _Object$assign))
+								: coreFields;
+						}, {});
 					coreFieldValues.price && (coreFieldValues.price = +coreFieldValues.price),
 						coreFieldValues.msrp && (coreFieldValues.msrp = +coreFieldValues.msrp);
 					var attributes = Object.keys(rawResult)
-						.filter(function (k) {
-							return -1 == CORE_FIELDS.indexOf(k);
-						})
-						.reduce(function (attributes, key) {
-							var _Object$assign2;
-							return Object.assign({}, attributes, (((_Object$assign2 = {})[key] = decodeProperty(rawResult[key])), _Object$assign2));
-						}, {});
-					return new Result({ id: rawResult.uid, mappings: { core: coreFieldValues }, attributes });
+							.filter(function (k) {
+								return -1 == CORE_FIELDS.indexOf(k);
+							})
+							.reduce(function (attributes, key) {
+								var _Object$assign2;
+								return Object.assign({}, attributes, (((_Object$assign2 = {})[key] = decodeProperty(rawResult[key])), _Object$assign2));
+							}, {}),
+						children =
+							(null == rawResult || null === (_rawResult$children = rawResult.children) || void 0 === _rawResult$children
+								? void 0
+								: _rawResult$children.map(function (child) {
+										return {
+											attributes: Object.assign(
+												{},
+												Object.keys(child).reduce(function (attributes, key) {
+													var _Object$assign3;
+													return Object.assign({}, attributes, (((_Object$assign3 = {})[key] = decodeProperty(child[key])), _Object$assign3));
+												}, {})
+											),
+										};
+								  })) || [];
+					return new Result({ id: rawResult.uid, mappings: { core: coreFieldValues }, attributes, children });
 				}),
 				(transformSearchResponse.filters = function (response) {
 					return {
@@ -20003,8 +20229,18 @@
 					_getSearch,
 					_getMeta,
 					_super = Hybrid_createSuper(HybridAPI);
-				function HybridAPI() {
-					return Hybrid_classCallCheck(this, HybridAPI), _super.apply(this, arguments);
+				function HybridAPI(configuration) {
+					var _this;
+					return (
+						(function Hybrid_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, HybridAPI),
+						((_this = _super.call(this, configuration)).requesters = {
+							legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: _this.configuration.cacheSettings })),
+							suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: _this.configuration.cacheSettings })),
+						}),
+						_this
+					);
 				}
 				return (
 					(function Hybrid_createClass(Constructor, protoProps, staticProps) {
@@ -20020,20 +20256,17 @@
 							value:
 								((_getMeta = Hybrid_asyncToGenerator(
 									regeneratorRuntime.mark(function _callee(requestParameters) {
-										var legacyRequestParameters, apiHost, legacyRequester;
+										var legacyRequestParameters;
 										return regeneratorRuntime.wrap(
 											function _callee$(_context) {
 												for (;;)
 													switch ((_context.prev = _context.next)) {
 														case 0:
 															return (
-																(apiHost = 'https://' + (legacyRequestParameters = requestParameters).siteId + '.a.searchspring.io'),
-																(legacyRequester = new LegacyAPI(
-																	new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() })
-																)),
-																_context.abrupt('return', legacyRequester.getMeta(legacyRequestParameters))
+																(legacyRequestParameters = requestParameters),
+																_context.abrupt('return', this.requesters.legacy.getMeta(legacyRequestParameters))
 															);
-														case 4:
+														case 2:
 														case 'end':
 															return _context.stop();
 													}
@@ -20052,7 +20285,7 @@
 							value:
 								((_getSearch = Hybrid_asyncToGenerator(
 									regeneratorRuntime.mark(function _callee2(requestParameters) {
-										var legacyRequestParameters, apiHost, legacyRequester, legacyData;
+										var legacyRequestParameters, legacyData;
 										return regeneratorRuntime.wrap(
 											function _callee2$(_context2) {
 												for (;;)
@@ -20060,18 +20293,14 @@
 														case 0:
 															return (
 																(legacyRequestParameters = transformSearchRequest(requestParameters)),
-																(apiHost = 'https://' + legacyRequestParameters.siteId + '.a.searchspring.io'),
-																(legacyRequester = new LegacyAPI(
-																	new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() })
-																)),
-																(_context2.next = 5),
-																legacyRequester.getSearch(legacyRequestParameters)
+																(_context2.next = 3),
+																this.requesters.legacy.getSearch(legacyRequestParameters)
 															);
-														case 5:
+														case 3:
 															return (
 																(legacyData = _context2.sent), _context2.abrupt('return', transformSearchResponse(legacyData, requestParameters))
 															);
-														case 7:
+														case 5:
 														case 'end':
 															return _context2.stop();
 													}
@@ -20092,9 +20321,6 @@
 									regeneratorRuntime.mark(function _callee3(requestParameters) {
 										var legacyRequestParameters,
 											suggestParams,
-											apiHost,
-											suggestRequester,
-											legacyRequester,
 											suggestResults,
 											transformedSuggestResults,
 											q,
@@ -20115,26 +20341,19 @@
 																	suggestionCount: (requestParameters.suggestions || {}).count || 5,
 																}),
 																((requestParameters.search || {}).query || {}).spellCorrection || (suggestParams.disableSpellCorrect = !0),
-																(apiHost = 'https://' + legacyRequestParameters.siteId + '.a.searchspring.io'),
-																(suggestRequester = new SuggestAPI(
-																	new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() })
-																)),
-																(legacyRequester = new LegacyAPI(
-																	new ApiConfiguration({ basePath: apiHost, siteId: this.configuration.getSiteId() })
-																)),
-																(_context3.next = 8),
-																suggestRequester.getSuggest(suggestParams)
+																(_context3.next = 5),
+																this.requesters.suggest.getSuggest(suggestParams)
 															);
-														case 8:
+														case 5:
 															return (
 																(suggestResults = _context3.sent),
 																(transformedSuggestResults = transformSuggestResponse(suggestResults)),
 																(q = (suggestResults.suggested || {}).text || transformedSuggestResults.correctedQuery || suggestResults.query),
 																(queryParameters = Object.assign({}, legacyRequestParameters, { redirectResponse: 'full', q })),
-																(_context3.next = 14),
-																legacyRequester.getAutocomplete(queryParameters)
+																(_context3.next = 11),
+																this.requesters.legacy.getAutocomplete(queryParameters)
 															);
-														case 14:
+														case 11:
 															return (
 																(legacyResults = _context3.sent),
 																(searchResults = transformSearchResponse(legacyResults, requestParameters)),
@@ -20143,7 +20362,7 @@
 																	Object.assign({}, searchResults, { search: { query: q }, autocomplete: transformedSuggestResults })
 																)
 															);
-														case 17:
+														case 14:
 														case 'end':
 															return _context3.stop();
 													}
@@ -20381,15 +20600,18 @@
 																return (
 																	(headerParameters = {}),
 																	(_context.next = 3),
-																	this.request({
-																		path: '/api/personalized-recommendations/profile.json',
-																		method: 'GET',
-																		headers: headerParameters,
-																		query: queryParameters,
-																	})
+																	this.request(
+																		{
+																			path: '/api/personalized-recommendations/profile.json',
+																			method: 'GET',
+																			headers: headerParameters,
+																			query: queryParameters,
+																		},
+																		'/api/personalized-recommendations/profile.json' + JSON.stringify(queryParameters)
+																	)
 																);
 															case 3:
-																return (response = _context.sent), _context.abrupt('return', response.json());
+																return (response = _context.sent), _context.abrupt('return', response);
 															case 5:
 															case 'end':
 																return _context.stop();
@@ -20413,7 +20635,7 @@
 												otherParams,
 												_ref2,
 												tag,
-												paramHash,
+												key,
 												paramBatch,
 												deferred,
 												_this3 = this;
@@ -20434,13 +20656,14 @@
 																return _context3.abrupt('return');
 															case 4:
 																return (
-																	(paramHash = hashParams(otherParams)),
-																	(this.batches[paramHash] = this.batches[paramHash] || {
+																	(key = hashParams(otherParams)),
+																	'batched' in otherParams && (otherParams.batched && (key = otherParams.siteId), delete otherParams.batched),
+																	(this.batches[key] = this.batches[key] || {
 																		timeout: null,
 																		request: Object.assign({ tags: [] }, otherParams),
 																		deferreds: [],
 																	}),
-																	(paramBatch = this.batches[paramHash]),
+																	(paramBatch = this.batches[key]),
 																	(deferred = new Deferred()),
 																	paramBatch.request.tags.push(tag),
 																	paramBatch.deferreds.push(deferred),
@@ -20475,7 +20698,7 @@
 																											def.reject(_context2.t0);
 																										});
 																								case 12:
-																									delete _this3.batches[paramHash];
+																									delete _this3.batches[key];
 																								case 13:
 																								case 'end':
 																									return _context2.stop();
@@ -20491,7 +20714,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 13:
+															case 14:
 															case 'end':
 																return _context3.stop();
 														}
@@ -20510,7 +20733,7 @@
 								value:
 									((_getRecommendations = Recommend_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee4(queryParameters) {
-											var headerParameters, siteId, response;
+											var headerParameters, siteId, path, response;
 											return regeneratorRuntime.wrap(
 												function _callee4$(_context4) {
 													for (;;)
@@ -20519,17 +20742,15 @@
 																return (
 																	(headerParameters = {}),
 																	(siteId = queryParameters.siteId),
-																	delete queryParameters.siteId,
+																	(path = '/boost/' + siteId + '/recommend'),
 																	(_context4.next = 5),
-																	this.request({
-																		path: '/boost/' + (siteId || this.configuration.getSiteId()) + '/recommend',
-																		method: 'GET',
-																		headers: headerParameters,
-																		query: queryParameters,
-																	})
+																	this.request(
+																		{ path, method: 'GET', headers: headerParameters, query: queryParameters },
+																		path + JSON.stringify(queryParameters)
+																	)
 																);
 															case 5:
-																return (response = _context4.sent), _context4.abrupt('return', response.json());
+																return (response = _context4.sent), _context4.abrupt('return', response);
 															case 7:
 															case 'end':
 																return _context4.stop();
@@ -20549,7 +20770,7 @@
 								value:
 									((_postRecommendations = Recommend_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee5(requestParameters) {
-											var headerParameters, siteId, response;
+											var headerParameters, siteId, path, response;
 											return regeneratorRuntime.wrap(
 												function _callee5$(_context5) {
 													for (;;)
@@ -20558,17 +20779,15 @@
 																return (
 																	((headerParameters = {})['Content-Type'] = 'application/json'),
 																	(siteId = requestParameters.siteId),
-																	delete requestParameters.siteId,
+																	(path = '/boost/' + siteId + '/recommend'),
 																	(_context5.next = 6),
-																	this.request({
-																		path: '/boost/' + (siteId || this.configuration.getSiteId()) + '/recommend',
-																		method: 'POST',
-																		headers: headerParameters,
-																		body: requestParameters,
-																	})
+																	this.request(
+																		{ path, method: 'POST', headers: headerParameters, body: requestParameters },
+																		path + JSON.stringify(requestParameters)
+																	)
 																);
 															case 6:
-																return (response = _context5.sent), _context5.abrupt('return', response.json());
+																return (response = _context5.sent), _context5.abrupt('return', response);
 															case 8:
 															case 'end':
 																return _context5.stop();
@@ -20693,13 +20912,12 @@
 				}
 			}
 			var Client_defaultConfig = {
-					meta: { prefetch: !0, ttl: 3e5 },
+					meta: { cache: { purgeable: !1 } },
 					search: { api: {} },
 					autocomplete: { api: {} },
 					recommend: { api: {} },
 					suggest: { api: {} },
 				},
-				cache = {},
 				Client = (function () {
 					function Client(globals) {
 						var _this$config$autocomp,
@@ -20716,72 +20934,70 @@
 						if ((Client_classCallCheck(this, Client), null == globals || !globals.siteId)) throw 'no siteId specified!';
 						(this.globals = globals),
 							(this.config = cjs_default()(Client_defaultConfig, config)),
-							(cache[this.globals.siteId] = cache[this.globals.siteId] || {}),
 							(this.requesters = {
 								autocomplete: new HybridAPI(
 									new ApiConfiguration({
-										basePath:
+										origin:
 											null === (_this$config$autocomp = this.config.autocomplete) ||
 											void 0 === _this$config$autocomp ||
 											null === (_this$config$autocomp2 = _this$config$autocomp.api) ||
 											void 0 === _this$config$autocomp2
 												? void 0
-												: _this$config$autocomp2.host,
-										siteId: this.globals.siteId,
+												: _this$config$autocomp2.origin,
+										cacheSettings: this.config.autocomplete.cache,
 									})
 								),
 								meta: new HybridAPI(
 									new ApiConfiguration({
-										basePath:
+										origin:
 											null === (_this$config$meta = this.config.meta) ||
 											void 0 === _this$config$meta ||
 											null === (_this$config$meta$api = _this$config$meta.api) ||
 											void 0 === _this$config$meta$api
 												? void 0
-												: _this$config$meta$api.host,
-										siteId: this.globals.siteId,
+												: _this$config$meta$api.origin,
+										cacheSettings: this.config.meta.cache,
 									})
 								),
 								recommend: new RecommendAPI(
 									new ApiConfiguration({
-										basePath:
+										origin:
 											null === (_this$config$recommen = this.config.recommend) ||
 											void 0 === _this$config$recommen ||
 											null === (_this$config$recommen2 = _this$config$recommen.api) ||
 											void 0 === _this$config$recommen2
 												? void 0
-												: _this$config$recommen2.host,
-										siteId: this.globals.siteId,
+												: _this$config$recommen2.origin,
+										cacheSettings: this.config.recommend.cache,
 									})
 								),
 								search: new HybridAPI(
 									new ApiConfiguration({
-										basePath:
+										origin:
 											null === (_this$config$search = this.config.search) ||
 											void 0 === _this$config$search ||
 											null === (_this$config$search$a = _this$config$search.api) ||
 											void 0 === _this$config$search$a
 												? void 0
-												: _this$config$search$a.host,
-										siteId: this.globals.siteId,
+												: _this$config$search$a.origin,
+										cacheSettings: this.config.search.cache,
 									})
 								),
 								suggest: new SuggestAPI(
 									new ApiConfiguration({
-										basePath:
+										origin:
 											null === (_this$config$suggest = this.config.suggest) ||
 											void 0 === _this$config$suggest ||
 											null === (_this$config$suggest$ = _this$config$suggest.api) ||
 											void 0 === _this$config$suggest$
 												? void 0
-												: _this$config$suggest$.host,
-										siteId: this.globals.siteId,
+												: _this$config$suggest$.origin,
+										cacheSettings: this.config.suggest.cache,
 									})
 								),
-							}),
-							this.config.meta.prefetch && !cache[this.globals.siteId].meta && this.fetchMeta();
+							});
 					}
-					var _recommend, _trending, _search, _autocomplete;
+					var _recommend, _trending, _search, _autocomplete, _meta;
 					return (
 						(function Client_createClass(Constructor, protoProps, staticProps) {
 							return (
@@ -20793,79 +21009,74 @@
 						})(Client, [
 							{
 								key: 'meta',
-								get: function get() {
-									var _cache$this$globals$s;
-									return null === (_cache$this$globals$s = cache[this.globals.siteId].meta) || void 0 === _cache$this$globals$s
-										? void 0
-										: _cache$this$globals$s.data;
-								},
-							},
-							{
-								key: 'fetchMeta',
-								value: function fetchMeta(params) {
-									var defaultParams = { siteId: this.globals.siteId };
-									(params = cjs_default()(defaultParams, params || {})),
-										(cache[params.siteId] = cache[params.siteId] || {}),
-										(cache[params.siteId].meta = {});
-									var metaCache = cache[params.siteId].meta;
-									return (
-										(metaCache.promise = this.requesters.meta.getMeta(params)),
-										metaCache.promise
-											.then(function (data) {
-												(metaCache.data = data), (metaCache.created = Date.now());
-											})
-											.catch(function (err) {
-												console.error("Failed to fetch meta data for '" + params.siteId + "'."), console.error(err);
-											}),
-										metaCache.promise
-									);
-								},
-							},
-							{
-								key: 'autocomplete',
 								value:
-									((_autocomplete = Client_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee() {
-											var _params$search,
-												_params$search$query,
-												_cache$params$siteId,
-												params,
-												_args = arguments;
+									((_meta = Client_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee(params) {
+											var defaultParams;
 											return regeneratorRuntime.wrap(
 												function _callee$(_context) {
 													for (;;)
 														switch ((_context.prev = _context.next)) {
 															case 0:
+																return (
+																	(defaultParams = { siteId: this.globals.siteId }),
+																	(params = cjs_default()(defaultParams, params || {})),
+																	_context.abrupt('return', this.requesters.meta.getMeta(params))
+																);
+															case 3:
+															case 'end':
+																return _context.stop();
+														}
+												},
+												_callee,
+												this
+											);
+										})
+									)),
+									function meta(_x) {
+										return _meta.apply(this, arguments);
+									}),
+							},
+							{
+								key: 'autocomplete',
+								value:
+									((_autocomplete = Client_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee2() {
+											var _params$search,
+												_params$search$query,
+												params,
+												_args2 = arguments;
+											return regeneratorRuntime.wrap(
+												function _callee2$(_context2) {
+													for (;;)
+														switch ((_context2.prev = _context2.next)) {
+															case 0:
 																if (
-																	((params = _args.length > 0 && void 0 !== _args[0] ? _args[0] : {}),
+																	((params = _args2.length > 0 && void 0 !== _args2[0] ? _args2[0] : {}),
 																	null !== (_params$search = params.search) &&
 																		void 0 !== _params$search &&
 																		null !== (_params$search$query = _params$search.query) &&
 																		void 0 !== _params$search$query &&
 																		_params$search$query.string)
 																) {
-																	_context.next = 3;
+																	_context2.next = 3;
 																	break;
 																}
 																throw 'query string parameter is required';
 															case 3:
 																return (
 																	(params = cjs_default()(this.globals, params)),
-																	(null === (_cache$params$siteId = cache[params.siteId]) ||
-																		void 0 === _cache$params$siteId ||
-																		!_cache$params$siteId.meta) &&
-																		this.fetchMeta({ siteId: params.siteId }),
-																	_context.abrupt(
+																	_context2.abrupt(
 																		'return',
-																		Promise.all([this.requesters.autocomplete.getAutocomplete(params), cache[params.siteId].meta.promise])
+																		Promise.all([this.meta({ siteId: params.siteId }), this.requesters.autocomplete.getAutocomplete(params)])
 																	)
 																);
-															case 6:
+															case 5:
 															case 'end':
-																return _context.stop();
+																return _context2.stop();
 														}
 												},
-												_callee,
+												_callee2,
 												this
 											);
 										})
@@ -20878,33 +21089,28 @@
 								key: 'search',
 								value:
 									((_search = Client_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee2() {
-											var _cache$params$siteId2,
-												params,
-												_args2 = arguments;
+										regeneratorRuntime.mark(function _callee3() {
+											var params,
+												_args3 = arguments;
 											return regeneratorRuntime.wrap(
-												function _callee2$(_context2) {
+												function _callee3$(_context3) {
 													for (;;)
-														switch ((_context2.prev = _context2.next)) {
+														switch ((_context3.prev = _context3.next)) {
 															case 0:
 																return (
-																	(params = _args2.length > 0 && void 0 !== _args2[0] ? _args2[0] : {}),
+																	(params = _args3.length > 0 && void 0 !== _args3[0] ? _args3[0] : {}),
 																	(params = cjs_default()(this.globals, params)),
-																	(null === (_cache$params$siteId2 = cache[params.siteId]) ||
-																		void 0 === _cache$params$siteId2 ||
-																		!_cache$params$siteId2.meta) &&
-																		this.fetchMeta({ siteId: params.siteId }),
-																	_context2.abrupt(
+																	_context3.abrupt(
 																		'return',
-																		Promise.all([this.requesters.search.getSearch(params), cache[params.siteId].meta.promise])
+																		Promise.all([this.meta({ siteId: params.siteId }), this.requesters.search.getSearch(params)])
 																	)
 																);
-															case 4:
+															case 3:
 															case 'end':
-																return _context2.stop();
+																return _context3.stop();
 														}
 												},
-												_callee2,
+												_callee3,
 												this
 											);
 										})
@@ -20917,66 +21123,17 @@
 								key: 'trending',
 								value:
 									((_trending = Client_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee3(params) {
-											return regeneratorRuntime.wrap(
-												function _callee3$(_context3) {
-													for (;;)
-														switch ((_context3.prev = _context3.next)) {
-															case 0:
-																return (
-																	(params = cjs_default()({ siteId: this.globals.siteId }, params || {})),
-																	_context3.abrupt('return', this.requesters.suggest.getTrending(params))
-																);
-															case 2:
-															case 'end':
-																return _context3.stop();
-														}
-												},
-												_callee3,
-												this
-											);
-										})
-									)),
-									function trending(_x) {
-										return _trending.apply(this, arguments);
-									}),
-							},
-							{
-								key: 'recommend',
-								value:
-									((_recommend = Client_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee4(params) {
-											var tag, otherParams, profileParams, recommendParams, _yield$Promise$all, _yield$Promise$all2, profile, recommendations;
 											return regeneratorRuntime.wrap(
 												function _callee4$(_context4) {
 													for (;;)
 														switch ((_context4.prev = _context4.next)) {
 															case 0:
-																if (((tag = params.tag), (otherParams = Client_objectWithoutProperties(params, Client_excluded)), tag)) {
-																	_context4.next = 3;
-																	break;
-																}
-																throw 'tag parameter is required';
-															case 3:
 																return (
-																	(profileParams = { tag, siteId: params.siteId || this.globals.siteId }),
-																	otherParams.branch && ((profileParams.branch = otherParams.branch), delete otherParams.branch),
-																	(recommendParams = Object.assign({ tags: [tag] }, otherParams)),
-																	(_context4.next = 8),
-																	Promise.all([
-																		this.requesters.recommend.getProfile(profileParams),
-																		this.requesters.recommend.batchRecommendations(recommendParams),
-																	])
+																	(params = cjs_default()({ siteId: this.globals.siteId }, params || {})),
+																	_context4.abrupt('return', this.requesters.suggest.getTrending(params))
 																);
-															case 8:
-																return (
-																	(_yield$Promise$all = _context4.sent),
-																	(_yield$Promise$all2 = Client_slicedToArray(_yield$Promise$all, 2)),
-																	(profile = _yield$Promise$all2[0]),
-																	(recommendations = _yield$Promise$all2[1]),
-																	_context4.abrupt('return', Object.assign({}, profile, { results: recommendations[0].results }))
-																);
-															case 13:
+															case 2:
 															case 'end':
 																return _context4.stop();
 														}
@@ -20986,7 +21143,56 @@
 											);
 										})
 									)),
-									function recommend(_x2) {
+									function trending(_x2) {
+										return _trending.apply(this, arguments);
+									}),
+							},
+							{
+								key: 'recommend',
+								value:
+									((_recommend = Client_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee5(params) {
+											var tag, otherParams, profileParams, recommendParams, _yield$Promise$all, _yield$Promise$all2, profile, recommendations;
+											return regeneratorRuntime.wrap(
+												function _callee5$(_context5) {
+													for (;;)
+														switch ((_context5.prev = _context5.next)) {
+															case 0:
+																if (((tag = params.tag), (otherParams = Client_objectWithoutProperties(params, Client_excluded)), tag)) {
+																	_context5.next = 3;
+																	break;
+																}
+																throw 'tag parameter is required';
+															case 3:
+																return (
+																	(profileParams = { tag, siteId: params.siteId || this.globals.siteId }),
+																	otherParams.branch && ((profileParams.branch = otherParams.branch), delete otherParams.branch),
+																	(recommendParams = Object.assign({ tags: [tag], siteId: params.siteId || this.globals.siteId }, otherParams)),
+																	(_context5.next = 8),
+																	Promise.all([
+																		this.requesters.recommend.getProfile(profileParams),
+																		this.requesters.recommend.batchRecommendations(recommendParams),
+																	])
+																);
+															case 8:
+																return (
+																	(_yield$Promise$all = _context5.sent),
+																	(_yield$Promise$all2 = Client_slicedToArray(_yield$Promise$all, 2)),
+																	(profile = _yield$Promise$all2[0]),
+																	(recommendations = _yield$Promise$all2[1]),
+																	_context5.abrupt('return', Object.assign({}, profile, { results: recommendations[0].results }))
+																);
+															case 13:
+															case 'end':
+																return _context5.stop();
+														}
+												},
+												_callee5,
+												this
+											);
+										})
+									)),
+									function recommend(_x3) {
 										return _recommend.apply(this, arguments);
 									}),
 							},
@@ -21041,8 +21247,7 @@
 					AbstractStore
 				);
 			})();
-			__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
@@ -21273,20 +21478,38 @@
 						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, mappings: mobx_esm.LO, attributes: mobx_esm.LO });
 				}),
 				Product = ResultStore_createClass(function Product(services, result) {
+					var _result$children;
 					ResultStore_classCallCheck(this, Product),
 						(this.type = 'product'),
 						(this.attributes = {}),
 						(this.mappings = { core: {} }),
 						(this.custom = {}),
+						(this.children = []),
 						(this.id = result.id),
 						(this.attributes = result.attributes),
 						(this.mappings = result.mappings),
+						null != result &&
+							null !== (_result$children = result.children) &&
+							void 0 !== _result$children &&
+							_result$children.length &&
+							(this.children = result.children.map(function (variant, index) {
+								return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
+							})),
 						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
 					var coreObservables = Object.keys(result.mappings.core).reduce(function (map, key) {
 						var _Object$assign;
 						return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.LO), _Object$assign));
 					}, {});
 					(0, mobx_esm.rC)(this.mappings.core, coreObservables);
+				}),
+				Child = ResultStore_createClass(function Child(services, result) {
+					ResultStore_classCallCheck(this, Child),
+						(this.type = 'child'),
+						(this.attributes = {}),
+						(this.custom = {}),
+						(this.id = result.id),
+						(this.attributes = result.attributes),
+						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
 				});
 			function ProfileStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
@@ -23216,9 +23439,37 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.13.5' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.20.2' } }),
 					(this.id = (0, v4.Z)());
 			});
+			function Tracker_toConsumableArray(arr) {
+				return (
+					(function Tracker_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return Tracker_arrayLikeToArray(arr);
+					})(arr) ||
+					(function Tracker_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function Tracker_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return Tracker_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tracker_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function Tracker_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function Tracker_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
 			function Tracker_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -23228,377 +23479,450 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var Tracker = (function () {
-				function Tracker(globals) {
-					var _window$searchspring,
-						_this = this;
-					if (
-						((function Tracker_classCallCheck(instance, Constructor) {
-							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-						})(this, Tracker),
-						(this.namespace = ''),
-						(this.targeters = []),
-						(this.setNamespace = function (namespace) {
-							var prefix = 'tracker';
-							namespace && ((_this.namespace = '' + namespace), (prefix = namespace)),
-								(_this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + prefix + '-' + _this.globals.siteId + '-local' }));
-						}),
-						(this.setGlobal = function () {
-							(window.searchspring = window.searchspring || {}), (window.searchspring.track = _this.track), (window.searchspring.version = '0.13.5');
-						}),
-						(this.track = {
-							event: function event(payload) {
-								var event = {
-										type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
-										category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
-										context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
-										event: payload.event,
-										pid: (null == payload ? void 0 : payload.pid) || void 0,
+			var Tracker_defaultConfig = { id: 'track' },
+				Tracker = (function () {
+					function Tracker(globals, config) {
+						var _window$searchspring,
+							_this = this;
+						if (
+							((function Tracker_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, Tracker),
+							(this.targeters = []),
+							(this.track = {
+								event: function event(payload) {
+									var event = {
+											type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
+											category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
+											context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
+											event: payload.event,
+											pid: (null == payload ? void 0 : payload.pid) || void 0,
+										},
+										beaconEvent = new BeaconEvent(event);
+									return _this.sendEvents([beaconEvent]), beaconEvent;
+								},
+								shopper: {
+									login: function login(data, siteId) {
+										if (featureFlags.cookies)
+											if (data.id) {
+												var context = _this.context;
+												siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+												var storedShopperId = _this.getShopperId();
+												if (((data.id = '' + data.id), storedShopperId != data.id)) {
+													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id);
+													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
+													return _this.track.event(payload);
+												}
+											} else
+												console.error(
+													'tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })'
+												);
 									},
-									beaconEvent = new BeaconEvent(event);
-								return _this.sendEvents([beaconEvent]), beaconEvent;
-							},
-							shopper: {
-								login: function login(data, siteId) {
-									var _this$getShopperId;
-									if (featureFlags.cookies)
-										if (data.id) {
+								},
+								product: {
+									view: function view(data, siteId) {
+										if ((null != data && data.sku) || (null != data && data.childSku)) {
 											var context = _this.context;
 											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-											var storedShopperId =
-												null === (_this$getShopperId = _this.getShopperId()) || void 0 === _this$getShopperId ? void 0 : _this$getShopperId.shopperId;
-											if (((data.id = '' + data.id), storedShopperId != data.id)) {
-												cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id);
-												var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
-												return _this.track.event(payload);
+											var payload = {
+													type: BeaconType.PRODUCT,
+													category: BeaconCategory.PAGEVIEW,
+													context,
+													event: {
+														sku: null != data && data.sku ? '' + data.sku : void 0,
+														childSku: null != data && data.childSku ? '' + data.childSku : void 0,
+													},
+												},
+												sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
+											if (sku) {
+												var lastViewedProducts = _this.cookies.viewed.get(),
+													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
+														return item.trim();
+													});
+												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6);
 											}
-										} else
-											console.error(
-												'tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })'
+											return (
+												null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })),
+												_this.track.event(payload)
 											);
-								},
-							},
-							product: {
-								view: function view(data, siteId) {
-									if ((null != data && data.sku) || (null != data && data.childSku)) {
-										var context = _this.context;
-										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-										var payload = {
-											type: BeaconType.PRODUCT,
-											category: BeaconCategory.PAGEVIEW,
-											context,
-											event: {
-												sku: null != data && data.sku ? '' + data.sku : void 0,
-												childSku: null != data && data.childSku ? '' + data.childSku : void 0,
-											},
-										};
-										if ((null != data && data.sku) || (null != data && data.childSku)) {
-											var viewedProducts = cookies.get('ssViewedProducts'),
-												products = viewedProducts ? new Set(viewedProducts.split(',')) : new Set();
-											products.add((null == data ? void 0 : data.sku) || data.childSku),
-												cookies.set('ssViewedProducts', Array.from(products).slice(0, 15).join(','), 'Lax', 220752e6);
 										}
-										return (
-											null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })), _this.track.event(payload)
+										console.error(
+											'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
 										);
-									}
-									console.error(
-										'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
-									);
-								},
-								click: function click(data, siteId) {
-									if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
-										var context = _this.context;
-										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-										var payload = {
-											type: BeaconType.CLICK,
-											category: BeaconCategory.INTERACTION,
-											context,
-											event: {
-												intellisuggestData: data.intellisuggestData,
-												intellisuggestSignature: data.intellisuggestSignature,
-												href: null != data && data.href ? '' + data.href : void 0,
-											},
-										};
-										return new TrackEvent(payload), _this.track.event(payload);
-									}
-									console.error(
-										'track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })'
-									);
-								},
-							},
-							cart: {
-								view: function view(data, siteId) {
-									if (Array.isArray(null == data ? void 0 : data.items) && null != data && data.items.length) {
-										var context = _this.context;
-										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-										var items = data.items.map(function (item, index) {
-												if (
-													null != item &&
-													item.qty &&
-													null != item &&
-													item.price &&
-													((null != item && item.sku) || (null != item && item.childSku))
-												) {
-													var product = { qty: '' + item.qty, price: '' + item.price };
-													return (
-														null != item && item.sku && (product.sku = '' + item.sku),
-														null != item && item.childSku && (product.childSku = '' + item.childSku),
-														product
-													);
-												}
-												console.error(
-													'track.view.cart event: item ' +
-														item +
-														' at index ' +
-														index +
-														' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-												);
-											}),
-											payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
-										if (items.length) {
-											var products = [];
-											items.map(function (item) {
-												return products.push(item.sku || item.childSku);
-											}),
-												cookies.set('ssCartProducts', products.join(','), 'Lax', 0);
+									},
+									click: function click(data, siteId) {
+										if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var payload = {
+												type: BeaconType.CLICK,
+												category: BeaconCategory.INTERACTION,
+												context,
+												event: {
+													intellisuggestData: data.intellisuggestData,
+													intellisuggestSignature: data.intellisuggestSignature,
+													href: null != data && data.href ? '' + data.href : void 0,
+												},
+											};
+											return new TrackEvent(payload), _this.track.event(payload);
 										}
-										return new PixelEvent(payload), _this.track.event(payload);
-									}
-									console.error(
-										'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-									);
+										console.error(
+											'track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })'
+										);
+									},
 								},
-							},
-							order: {
-								transaction: function transaction(data, siteId) {
-									var _data$order, _data$order2, _data$order3, _data$order4, _data$order5;
-									if (null != data && data.items && Array.isArray(data.items) && data.items.length) {
-										var context = _this.context;
-										siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-										var items = data.items.map(function (item, index) {
-												if (
-													null != item &&
-													item.qty &&
-													null != item &&
-													item.price &&
-													((null != item && item.sku) || (null != item && item.childSku))
-												) {
-													var product = { qty: '' + item.qty, price: '' + item.price };
-													return (
-														null != item && item.sku && (product.sku = '' + item.sku),
-														null != item && item.childSku && (product.childSku = '' + item.childSku),
-														product
+								cart: {
+									view: function view(data, siteId) {
+										if (Array.isArray(null == data ? void 0 : data.items) && null != data && data.items.length) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var items = data.items.map(function (item, index) {
+													if (
+														null != item &&
+														item.qty &&
+														null != item &&
+														item.price &&
+														((null != item && item.sku) || (null != item && item.childSku))
+													) {
+														var product = { qty: '' + item.qty, price: '' + item.price };
+														return (
+															null != item && item.sku && (product.sku = '' + item.sku),
+															null != item && item.childSku && (product.childSku = '' + item.childSku),
+															product
+														);
+													}
+													console.error(
+														'track.view.cart event: item ' +
+															item +
+															' at index ' +
+															index +
+															' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
 													);
-												}
-												console.error(
-													'track.order.transaction event: object parameter `items`: item ' +
-														item +
-														' at index ' +
-														index +
-														' requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-												);
-											}),
-											eventPayload = {
-												orderId:
-													null != data && null !== (_data$order = data.order) && void 0 !== _data$order && _data$order.id
-														? '' + data.order.id
-														: void 0,
-												total:
-													null != data && null !== (_data$order2 = data.order) && void 0 !== _data$order2 && _data$order2.total
-														? '' + data.order.total
-														: void 0,
-												city:
-													null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.city
-														? '' + data.order.city
-														: void 0,
-												state:
-													null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.state
-														? '' + data.order.state
-														: void 0,
-												country:
-													null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.country
-														? '' + data.order.country
-														: void 0,
-												items,
-											},
-											payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload };
-										return new PixelEvent(payload), _this.track.event(payload);
-									}
-									console.error(
-										'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-									);
-								},
-							},
-						}),
-						(this.getUserId = function () {
-							var userId;
-							try {
-								(userId = featureFlags.storage && window.localStorage.getItem('ssUserId')),
-									featureFlags.cookies
-										? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
-										: !userId && featureFlags.storage && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
-							} catch (e) {
-								console.error('Failed to persist user id to cookie or local storage:', e);
-							}
-							return { userId };
-						}),
-						(this.getSessionId = function () {
-							var sessionId;
-							if (featureFlags.storage)
-								try {
-									(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
-										window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
-										featureFlags.cookies && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
-								} catch (e) {
-									console.error('Failed to persist session id to session storage:', e);
-								}
-							else
-								featureFlags.cookies &&
-									((sessionId = cookies.get('ssSessionIdNamespace')) ||
-										((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
-							return { sessionId };
-						}),
-						(this.getShopperId = function () {
-							var shopperId = cookies.get('ssShopperId');
-							if (shopperId) return { shopperId };
-						}),
-						(this.getCartItems = function () {
-							var items = cookies.get('ssCartProducts');
-							return items ? items.split(',') : [];
-						}),
-						(this.getLastViewedItems = function () {
-							var items = cookies.get('ssViewedProducts');
-							return items ? items.split(',') : [];
-						}),
-						(this.sendEvents = function (eventsToSend) {
-							var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
-							eventsToSend &&
-								(eventsToSend.forEach(function (event) {
-									events.push(Object.assign({}, event));
-								}),
-								_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
-								clearTimeout(_this.isSending),
-								(_this.isSending = window.setTimeout(function () {
-									if (events.length) {
-										var xhr = new XMLHttpRequest();
-										xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
-											xhr.setRequestHeader('Content-Type', 'application/json'),
-											xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
-									}
-									_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
-								}, 150));
-						}),
-						'object' != typeof globals || 'string' != typeof globals.siteId)
-					)
-						throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
-					(this.globals = globals),
-						this.setNamespace(),
-						(this.context = Object.assign({}, this.getUserId(), this.getSessionId(), this.getShopperId(), {
-							pageLoadId: (0, v4.Z)(),
-							website: { trackingCode: this.globals.siteId },
-						})),
-						(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.track) ||
-							this.setGlobal(),
-						this.targeters.push(
-							new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
-								var _getContext = (function getContext(evaluate, script) {
-										var _scriptElem$getAttrib, _scriptElem$id, _scriptElem$src;
-										if (
-											((script && 'string' != typeof script) ||
-												(script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
-													.sort(function (a, b) {
-														return a.innerHTML.length - b.innerHTML.length;
-													})
-													.pop()),
-											!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
-										)
-											throw new Error('getContext: did not find a script tag');
-										var scriptElem = script;
-										if (
-											!(
-												(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
-													void 0 !== _scriptElem$getAttrib &&
-													_scriptElem$getAttrib.match(/^searchspring/i)) ||
-												(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
-												(null !== (_scriptElem$src = scriptElem.src) &&
-													void 0 !== _scriptElem$src &&
-													_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
-											)
-										)
-											throw new Error('getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"');
-										if (
-											(evaluate && !Array.isArray(evaluate)) ||
-											(evaluate &&
-												!evaluate.reduce(function (accu, name) {
-													return accu && 'string' == typeof name;
-												}, !0))
-										)
-											throw new Error('getContext: first parameter must be an array of strings');
-										var variables = {};
-										Object.values(scriptElem.attributes).map(function (attr) {
-											variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
-										});
-										try {
-											null == evaluate ||
-												evaluate.forEach(function (name) {
-													var fn = new Function(
-														'\n\t\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t\t' + scriptElem.innerHTML + '\n\t\t\t\treturn ' + name + ';\n\t\t\t'
-													);
-													variables[name] = fn();
+												}),
+												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
+											if (items.length) {
+												var products = items.map(function (item) {
+													return item.sku || item.childSku;
 												});
-										} catch (err) {
-											throw (console.error('getContext: failed to parse variables - error in context'), err);
+												_this.cookies.cart.add(products);
+											}
+											return new PixelEvent(payload), _this.track.event(payload);
 										}
-										return variables;
-									})(['item', 'items', 'siteId', 'shopper', 'order'], elem),
-									item = _getContext.item,
-									items = _getContext.items,
-									siteId = _getContext.siteId,
-									shopper = _getContext.shopper,
-									order = _getContext.order,
-									type = _getContext.type;
-								switch (type) {
-									case 'searchspring/track/shopper/login':
-										_this.track.shopper.login(shopper, siteId);
-										break;
-									case 'searchspring/track/product/view':
-										_this.track.product.view(item, siteId);
-										break;
-									case 'searchspring/track/cart/view':
-										_this.track.cart.view({ items }, siteId);
-										break;
-									case 'searchspring/track/order/transaction':
-										_this.track.order.transaction({ order, items }, siteId);
-										break;
-									default:
-										console.error(type + ' event is not supported or incorrect');
+										console.error(
+											'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+										);
+									},
+								},
+								order: {
+									transaction: function transaction(data, siteId) {
+										var _data$order, _data$order2, _data$order3, _data$order4, _data$order5;
+										if (null != data && data.items && Array.isArray(data.items) && data.items.length) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var items = data.items.map(function (item, index) {
+													if (
+														null != item &&
+														item.qty &&
+														null != item &&
+														item.price &&
+														((null != item && item.sku) || (null != item && item.childSku))
+													) {
+														var product = { qty: '' + item.qty, price: '' + item.price };
+														return (
+															null != item && item.sku && (product.sku = '' + item.sku),
+															null != item && item.childSku && (product.childSku = '' + item.childSku),
+															product
+														);
+													}
+													console.error(
+														'track.order.transaction event: object parameter `items`: item ' +
+															item +
+															' at index ' +
+															index +
+															' requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+													);
+												}),
+												eventPayload = {
+													orderId:
+														null != data && null !== (_data$order = data.order) && void 0 !== _data$order && _data$order.id
+															? '' + data.order.id
+															: void 0,
+													total:
+														null != data && null !== (_data$order2 = data.order) && void 0 !== _data$order2 && _data$order2.total
+															? '' + data.order.total
+															: void 0,
+													city:
+														null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.city
+															? '' + data.order.city
+															: void 0,
+													state:
+														null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.state
+															? '' + data.order.state
+															: void 0,
+													country:
+														null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.country
+															? '' + data.order.country
+															: void 0,
+													items,
+												},
+												payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload };
+											return _this.cookies.cart.clear(), new PixelEvent(payload), _this.track.event(payload);
+										}
+										console.error(
+											'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+										);
+									},
+								},
+							}),
+							(this.getUserId = function () {
+								var userId;
+								try {
+									(userId = featureFlags.storage && window.localStorage.getItem('ssUserId')),
+										featureFlags.cookies
+											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
+											: !userId && featureFlags.storage && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
+								} catch (e) {
+									console.error('Failed to persist user id to cookie or local storage:', e);
 								}
-							})
-						),
-						this.sendEvents();
-				}
-				return (
-					(function Tracker_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && Tracker_defineProperties(Constructor.prototype, protoProps),
-							staticProps && Tracker_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(Tracker, [
-						{
-							key: 'retarget',
-							value: function retarget() {
-								this.targeters.forEach(function (target) {
-									target.retarget();
+								return userId;
+							}),
+							(this.getSessionId = function () {
+								var sessionId;
+								if (featureFlags.storage)
+									try {
+										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
+											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
+											featureFlags.cookies && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
+									} catch (e) {
+										console.error('Failed to persist session id to session storage:', e);
+									}
+								else
+									featureFlags.cookies &&
+										((sessionId = cookies.get('ssSessionIdNamespace')) ||
+											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
+								return sessionId;
+							}),
+							(this.getShopperId = function () {
+								var shopperId = cookies.get('ssShopperId');
+								if (shopperId) return shopperId;
+							}),
+							(this.cookies = {
+								cart: {
+									get: function get() {
+										var items = cookies.get('ssCartProducts');
+										return items ? items.split(',') : [];
+									},
+									set: function set(items) {
+										if (items.length) {
+											var cartItems = items.map(function (item) {
+													return item.trim();
+												}),
+												uniqueCartItems = Array.from(new Set(cartItems));
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0);
+										}
+									},
+									add: function add(items) {
+										if (items.length) {
+											var currentCartItems = _this.cookies.cart.get(),
+												itemsToAdd = items.map(function (item) {
+													return item.trim();
+												}),
+												uniqueCartItems = Array.from(
+													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
+												);
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0);
+										}
+									},
+									remove: function remove(items) {
+										if (items.length) {
+											var currentCartItems = _this.cookies.cart.get(),
+												itemsToRemove = items.map(function (item) {
+													return item.trim();
+												}),
+												updatedItems = currentCartItems.filter(function (item) {
+													return !itemsToRemove.includes(item);
+												});
+											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0);
+										}
+									},
+									clear: function clear() {
+										cookies.unset('ssCartProducts');
+									},
+								},
+								viewed: {
+									get: function get() {
+										var items = cookies.get('ssViewedProducts');
+										return items ? items.split(',') : [];
+									},
+								},
+							}),
+							(this.sendEvents = function (eventsToSend) {
+								var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
+								eventsToSend &&
+									(eventsToSend.forEach(function (event) {
+										events.push(Object.assign({}, event));
+									}),
+									_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
+									clearTimeout(_this.isSending),
+									(_this.isSending = window.setTimeout(function () {
+										if (events.length) {
+											var xhr = new XMLHttpRequest();
+											xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
+												xhr.setRequestHeader('Content-Type', 'application/json'),
+												xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
+										}
+										_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
+									}, 150));
+							}),
+							'object' != typeof globals || 'string' != typeof globals.siteId)
+						)
+							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
+						(this.config = cjs_default()(Tracker_defaultConfig, config || {})),
+							(this.globals = globals),
+							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
+							(this.context = {
+								userId: this.getUserId(),
+								sessionId: this.getSessionId(),
+								shopperId: this.getShopperId(),
+								pageLoadId: (0, v4.Z)(),
+								website: { trackingCode: this.globals.siteId },
+							}),
+							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.20.2')),
+							this.targeters.push(
+								new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
+									var _getContext = (function getContext(evaluate, script) {
+											var _scriptElem$getAttrib, _scriptElem$id, _scriptElem$src;
+											if (
+												((script && 'string' != typeof script) ||
+													(script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
+														.sort(function (a, b) {
+															return a.innerHTML.length - b.innerHTML.length;
+														})
+														.pop()),
+												!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
+											)
+												throw new Error('getContext: did not find a script tag');
+											var scriptElem = script;
+											if (
+												!(
+													(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
+														void 0 !== _scriptElem$getAttrib &&
+														_scriptElem$getAttrib.match(/^searchspring/i)) ||
+													(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
+													(null !== (_scriptElem$src = scriptElem.src) &&
+														void 0 !== _scriptElem$src &&
+														_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
+												)
+											)
+												throw new Error('getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"');
+											if (
+												(evaluate && !Array.isArray(evaluate)) ||
+												(evaluate &&
+													!evaluate.reduce(function (accu, name) {
+														return accu && 'string' == typeof name;
+													}, !0))
+											)
+												throw new Error('getContext: first parameter must be an array of strings');
+											var variables = {};
+											Object.values(scriptElem.attributes).map(function (attr) {
+												variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
+											});
+											try {
+												null == evaluate ||
+													evaluate.forEach(function (name) {
+														var fn = new Function(
+															'\n\t\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t\t' + scriptElem.innerHTML + '\n\t\t\t\treturn ' + name + ';\n\t\t\t'
+														);
+														variables[name] = fn();
+													});
+											} catch (err) {
+												throw (console.error('getContext: failed to parse variables - error in context'), err);
+											}
+											return variables;
+										})(['item', 'items', 'siteId', 'shopper', 'order'], elem),
+										item = _getContext.item,
+										items = _getContext.items,
+										siteId = _getContext.siteId,
+										shopper = _getContext.shopper,
+										order = _getContext.order,
+										type = _getContext.type;
+									switch (type) {
+										case 'searchspring/track/shopper/login':
+											_this.track.shopper.login(shopper, siteId);
+											break;
+										case 'searchspring/track/product/view':
+											_this.track.product.view(item, siteId);
+											break;
+										case 'searchspring/track/cart/view':
+											_this.track.cart.view({ items }, siteId);
+											break;
+										case 'searchspring/track/order/transaction':
+											_this.track.order.transaction({ order, items }, siteId);
+											break;
+										default:
+											console.error(type + ' event is not supported or incorrect');
+									}
+								})
+							),
+							document.addEventListener('click', function (event) {
+								event.preventDefault();
+								var attributes = {};
+								Object.values(event.target.attributes).forEach(function (attr) {
+									attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
 								});
+								var updateRecsControllers = function updateRecsControllers() {
+									window.searchspring.controller &&
+										Object.keys(window.searchspring.controller).forEach(function (name) {
+											var _controller$config,
+												controller = window.searchspring.controller[name];
+											'recommendation' === controller.type &&
+												null !== (_controller$config = controller.config) &&
+												void 0 !== _controller$config &&
+												_controller$config.realtime &&
+												controller.search();
+										});
+								};
+								if (attributes['ss-' + _this.config.id + '-cart-add']) {
+									var skus = attributes['ss-' + _this.config.id + '-cart-add'].split(',');
+									_this.cookies.cart.add(skus), updateRecsControllers();
+								} else if (attributes['ss-' + _this.config.id + '-cart-remove']) {
+									var _skus = attributes['ss-' + _this.config.id + '-cart-remove'].split(',');
+									_this.cookies.cart.remove(_skus), updateRecsControllers();
+								} else if ('ss-' + _this.config.id + '-cart-clear' in attributes) _this.cookies.cart.clear(), updateRecsControllers();
+								else if (
+									attributes['ss-' + _this.config.id + '-intellisuggest'] &&
+									attributes['ss-' + _this.config.id + '-intellisuggest-signature']
+								) {
+									var intellisuggestData = attributes['ss-' + _this.config.id + '-intellisuggest'],
+										intellisuggestSignature = attributes['ss-' + _this.config.id + '-intellisuggest-signature'],
+										href = attributes.href;
+									_this.track.product.click({ intellisuggestData, intellisuggestSignature, href });
+								}
+							}),
+							this.sendEvents();
+					}
+					return (
+						(function Tracker_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && Tracker_defineProperties(Constructor.prototype, protoProps),
+								staticProps && Tracker_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(Tracker, [
+							{
+								key: 'retarget',
+								value: function retarget() {
+									this.targeters.forEach(function (target) {
+										target.retarget();
+									});
+								},
 							},
-						},
-					]),
-					Tracker
-				);
-			})();
+						]),
+						Tracker
+					);
+				})();
 			(0, mobx_esm.jQ)({ useProxies: 'never' });
 			function getSearchParams(state) {
 				var params = {};
@@ -24056,8 +24380,8 @@
 										searchProfile,
 										_yield$_this$client$a,
 										_yield$_this$client$a2,
-										response,
 										meta,
+										response,
 										afterSearchProfile,
 										afterStoreProfile;
 									return regeneratorRuntime.wrap(
@@ -24112,9 +24436,8 @@
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
-															(response = _yield$_this$client$a2[0]),
-															(meta = _yield$_this$client$a2[1]),
-															response.meta || (response.meta = meta),
+															(meta = _yield$_this$client$a2[0]),
+															(response = _yield$_this$client$a2[1]).meta || (response.meta = meta),
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
@@ -24310,7 +24633,7 @@
 										_this$config$globals6,
 										urlState = this.urlManager.state,
 										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
-										userId = this.tracker.getUserId().userId;
+										userId = this.tracker.getUserId();
 									if (
 										(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
 										null === (_this$config$globals5 = this.config.globals) ||
@@ -24319,17 +24642,13 @@
 											void 0 === _this$config$globals6 ||
 											!_this$config$globals6.disabled)
 									) {
-										var _this$tracker$getShop,
-											cartItems = this.tracker.getCartItems();
+										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
 											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
-										var lastViewedItems = this.tracker.getLastViewedItems();
+										var lastViewedItems = this.tracker.cookies.viewed.get();
 										lastViewedItems.length &&
 											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
-										var shopperId =
-											null === (_this$tracker$getShop = this.tracker.getShopperId()) || void 0 === _this$tracker$getShop
-												? void 0
-												: _this$tracker$getShop.shopperId;
+										var shopperId = this.tracker.getShopperId();
 										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
 									}
 									return params;
@@ -25888,11 +26207,8 @@
 							(_this.step = facet.step);
 						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
 						return (
-							storedRange && facet.filtered
-								? facet.range.low > storedRange.low || facet.range.high < storedRange.high
-									? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
-									: (facet.range.low < storedRange.low || facet.range.high > storedRange.high) &&
-									  (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range))
+							storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)
+								? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
 								: (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range)),
 							(_this.active = facet.active || facet.range),
 							(_this.formatSeparator = (null == facetMeta ? void 0 : facetMeta.formatSeparator) || '-'),
@@ -26695,8 +27011,8 @@
 										searchProfile,
 										_yield$_this$client$s,
 										_yield$_this$client$s2,
-										response,
 										meta,
+										response,
 										_this$store$data,
 										_this$config$settings3,
 										previousResults,
@@ -26788,9 +27104,8 @@
 														if (
 															((_yield$_this$client$s = _context.sent),
 															(_yield$_this$client$s2 = SearchController_slicedToArray(_yield$_this$client$s, 2)),
-															(response = _yield$_this$client$s2[0]),
-															(meta = _yield$_this$client$s2[1]),
-															response.meta || (response.meta = meta),
+															(meta = _yield$_this$client$s2[0]),
+															(response = _yield$_this$client$s2[1]).meta || (response.meta = meta),
 															!(
 																_this.config.settings.infinite &&
 																(null === (_params$pagination3 = params.pagination) || void 0 === _params$pagination3
@@ -26819,7 +27134,8 @@
 														return (_context.next = 45), Promise.all(backfills);
 													case 45:
 														_context.sent.map(function (_ref3) {
-															var data = SearchController_slicedToArray(_ref3, 1)[0];
+															var _ref4 = SearchController_slicedToArray(_ref3, 2),
+																data = (_ref4[0], _ref4[1]);
 															previousResults = previousResults.concat(data.results);
 														});
 													case 47:
@@ -26966,9 +27282,11 @@
 												_config$settings2,
 												_config$settings2$red,
 												_search$response3,
-												_search$response3$pag,
+												_search$response3$sea,
 												_search$response4,
-												_search$response4$fil,
+												_search$response4$pag,
+												_search$response5,
+												_search$response5$fil,
 												config,
 												redirectURL,
 												searchStore;
@@ -27014,21 +27332,25 @@
 																void 0 === _config$settings2$red ||
 																!_config$settings2$red.singleResult ||
 																null == search ||
-																!search.response.search.query ||
+																null === (_search$response3 = search.response) ||
+																void 0 === _search$response3 ||
+																null === (_search$response3$sea = _search$response3.search) ||
+																void 0 === _search$response3$sea ||
+																!_search$response3$sea.query ||
 																1 !==
 																	(null == search ||
-																	null === (_search$response3 = search.response) ||
-																	void 0 === _search$response3 ||
-																	null === (_search$response3$pag = _search$response3.pagination) ||
-																	void 0 === _search$response3$pag
+																	null === (_search$response4 = search.response) ||
+																	void 0 === _search$response4 ||
+																	null === (_search$response4$pag = _search$response4.pagination) ||
+																	void 0 === _search$response4$pag
 																		? void 0
-																		: _search$response3$pag.totalResults) ||
+																		: _search$response4$pag.totalResults) ||
 																(null != search &&
-																	null !== (_search$response4 = search.response) &&
-																	void 0 !== _search$response4 &&
-																	null !== (_search$response4$fil = _search$response4.filters) &&
-																	void 0 !== _search$response4$fil &&
-																	_search$response4$fil.length)
+																	null !== (_search$response5 = search.response) &&
+																	void 0 !== _search$response5 &&
+																	null !== (_search$response5$fil = _search$response5.filters) &&
+																	void 0 !== _search$response5$fil &&
+																	_search$response5$fil.length)
 															) {
 																_context3.next = 9;
 																break;
@@ -27123,7 +27445,7 @@
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
 										(params.tracking.domain = window.location.href);
-									var userId = this.tracker.getUserId().userId;
+									var userId = this.tracker.getUserId();
 									if (
 										(userId && (params.tracking.userId = userId),
 										null === (_this$config$globals = this.config.globals) ||
@@ -27132,17 +27454,13 @@
 											void 0 === _this$config$globals$ ||
 											!_this$config$globals$.disabled)
 									) {
-										var _this$tracker$getShop,
-											cartItems = this.tracker.getCartItems();
+										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
 											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
-										var lastViewedItems = this.tracker.getLastViewedItems();
+										var lastViewedItems = this.tracker.cookies.viewed.get();
 										lastViewedItems.length &&
 											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
-										var shopperId =
-											null === (_this$tracker$getShop = this.tracker.getShopperId()) || void 0 === _this$tracker$getShop
-												? void 0
-												: _this$tracker$getShop.shopperId;
+										var shopperId = this.tracker.getShopperId();
 										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
 									}
 									return params;
@@ -27636,6 +27954,7 @@
 					case 'globalTypes':
 						var v = {};
 						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
 					case 'decorateStory':
 					case 'renderToDOM':
 						return null;
@@ -27649,9 +27968,9 @@
 			(module = __webpack_require__.nmd(module)),
 				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
 					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
 						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$'
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
 						),
 					],
 					module,
@@ -27987,14 +28306,13 @@
 			}
 			MDXContent.isMDXComponent = !0;
 		},
-		'./src/documents/About.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/documentation/About/About.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends =
@@ -28011,107 +28329,110 @@
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
-				return (0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+				return (0, esm.kt)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__.h_, {
-						title: 'Doumentation/About',
-						mdxType: 'Meta',
-					}),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'div',
-						{ class: 'header' },
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('hr', null),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						"Welcome to the Snap React Component Library!\nThis collection of ecommerce components allows you to quickly build and theme a layout for use with Searchspring's Snap SDK."
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'installation' }, 'Installation'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'installation' }, 'Installation'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-sh' },
-							'npm install --save @searchspring/snap-preact-components\n'
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-sh' }, 'npm install --save @searchspring/snap-preact-components\n')
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h2', { id: 'atomic-design-methodology' }, 'Atomic Design Methodology'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Snap components follow the Atomic design methodology. Components are organized into three levels:'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'atoms' }, 'Atoms'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h2', { id: 'atomic-design-methodology' }, 'Atomic Design Methodology'),
+					(0, esm.kt)('p', null, 'Snap components follow the Atomic design methodology. Components are organized into three levels:'),
+					(0, esm.kt)('h3', { id: 'atoms' }, 'Atoms'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'Atom level components are the basic building blocks of an ecommerce layout. This includes components such as Badge, Button, and Icon.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'molecules' }, 'Molecules'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'molecules' }, 'Molecules'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'Molecule level components utilize one or more atom components to start building the contents of a layout. This includes components such as Pagination, Select, and Slider.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'organisms' }, 'Organisms'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'organisms' }, 'Organisms'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'Organisms level components utilize one or more molecule components to start building complex sections of a layout. This includes components such as Autocomplete, Facets, and Results.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.'
 					)
 				);
 			}
+			function About_stories_extends() {
+				return (
+					(About_stories_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					About_stories_extends.apply(this, arguments)
+				);
+			}
 			MDXContent.isMDXComponent = !0;
+			const About_stories_layoutProps = {};
+			function About_stories_MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					About_stories_extends({}, About_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)(blocks.h_, { title: 'Documentation/About', mdxType: 'Meta' }),
+					(0, esm.kt)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
+					),
+					(0, esm.kt)('div', { class: 'header' }, (0, esm.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.kt)('hr', null),
+					(0, esm.kt)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			About_stories_MDXContent.isMDXComponent = !0;
 			const __page = () => {
 				throw new Error('Docs-only story');
 			};
 			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Doumentation/About', includeStories: ['__page'] },
+			const componentMeta = { title: 'Documentation/About', includeStories: ['__page'] },
 				mdxStoryNameToKey = {};
 			(componentMeta.parameters = componentMeta.parameters || {}),
 				(componentMeta.parameters.docs = {
 					...(componentMeta.parameters.docs || {}),
 					page: () =>
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__.aT,
-							{ mdxStoryNameToKey, mdxComponentAnnotations: componentMeta },
-							(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(MDXContent, null)
-						),
+						(0, esm.kt)(dist_esm.aT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.kt)(About_stories_MDXContent, null)),
 				});
-			const __WEBPACK_DEFAULT_EXPORT__ = componentMeta;
+			const About_stories = componentMeta;
 		},
-		'./src/documents/Theme.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/documentation/Theme/Theme.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends =
@@ -28128,381 +28449,351 @@
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
-				return (0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+				return (0, esm.kt)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__.h_, {
-						title: 'Doumentation/Theme',
-						mdxType: 'Meta',
-					}),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'div',
-						{ class: 'header' },
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('hr', null),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Snap components allows for theming at both the global and component level.'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'theme-object' }, 'Theme object'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Snap components allows for theming at both the global and component level.'),
+					(0, esm.kt)('h3', { id: 'theme-object' }, 'Theme object'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'A theme object contains a ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'components'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'components'),
 						' object with one or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'For example, this ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'globalTheme'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'globalTheme'),
 						' theme object will apply the prop ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, "color={'blue'}"),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, "color={'blue'}"),
 						' for all ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '<Button />'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<Button />'),
 						' components and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'hideCount={false}'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideCount={false}'),
 						' for all ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '<facetListOptions />'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<facetListOptions />'),
 						' components.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n        },\n        facetListOptions: {\n            hideCount: false,\n        },\n    },\n};\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							'const globalTheme = {\n    components: {\n        facetListOptions: {\n            hideCount: false,\n            theme: {\n                components: {\n                    checkbox: {\n                        native: true\n                    }\n                }\n            }\n        }\n    }\n};\n'
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'The theme object also contains colors used throughout components:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'The theme object also contains colors used throughout components:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const globalTheme = {\n    colors: {\n        primary: '#3A23AD',\n        secondary: '#00cee1',\n        hover: '#f8f6fd',\n        text: {\n            secondary: '#ffffff'  \n        }\n    },\n    components: {}\n}\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.primary'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.primary'),
 						' - primary color used throughout components'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.secondary'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.secondary'),
 						' - secondary color used to accent components'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, (0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.hover'), ' - background color for element hover state'),
+					(0, esm.kt)(
 						'p',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.hover'),
-						' - background color for element hover state'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.text.secondary'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.text.secondary'),
 						' - text color when element background is ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.primary')
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme.colors.primary')
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'themeprovider' }, 'ThemeProvider'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Using a ThemeProvider applies a global theme to all its children components'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'themeprovider' }, 'ThemeProvider'),
+					(0, esm.kt)('p', null, 'Using a ThemeProvider applies a global theme to all its children components'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"import { ThemeProvider, Button } from '@searchspring/snap-preact-components'\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'component-theme' }, 'Component Theme'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'component-theme' }, 'Component Theme'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme'),
 						' prop is available on all components and allows for theming of a single component. '
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'The component ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme'),
 						' is merged with the global theme, therefore component theme props will overwrite any common props on the global theme object.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'In the following example, the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '<Button />'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<Button />'),
 						' component will contain ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, "color={'green'}"),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, "color={'green'}"),
 						' from ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'propTheme'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'propTheme'),
 						' and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'native={true}'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'native={true}'),
 						' from ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'globalTheme')
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'globalTheme')
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n            native: true\n        },\n    },\n};\nconst propTheme = {\n    components: {\n        button: {\n            color: 'green',\n        },\n    },\n};\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"\n<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} theme={propTheme} />\n</ThemeProvider>\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'component-style' }, 'Component Style'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'component-style' }, 'Component Style'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'style'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'style'),
 						' prop is available on all components and allows for styling of components at the global (via the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme'),
 						' prop) or the component level (via the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'style'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'style'),
 						' prop)'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Styles are applied to the root element of the component and uses CSS object syntax.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Standard CSS:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Styles are applied to the root element of the component and uses CSS object syntax.'),
+					(0, esm.kt)('p', null, 'Standard CSS:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-css' },
-							'{\n    background-color: red;\n    color: #cccccc;\n}\n'
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-css' }, '{\n    background-color: red;\n    color: #cccccc;\n}\n')
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'In CSS object syntax, properties are camel case and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, "'-'"),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'-'"),
 						' are removed:'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"{ \n    backgroundColor: '#ffff00',\n    color: '#cccccc',\n}\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Global level styling via ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'theme'),
-						' prop:'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Global level styling via ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'theme'), ' prop:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const globalTheme = {\n    components: {\n        button: {\n            style: {\n                backgroundColor: '#ffff00',\n                color: '#cccccc'\n            }\n        },\n    },\n};\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Component level styling via ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'style'),
-						' prop:'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Component level styling via ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'style'), ' prop:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const buttonStyles = {\n    backgroundColor: '#ffff00',\n    color: '#cccccc'\n};\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Button content={'click me!'} style={buttonStyles} />\n"
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} style={buttonStyles} />\n")
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'disable-component-styles' }, 'Disable Component Styles'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'disable-component-styles' }, 'Disable Component Styles'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'disableStyles'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'disableStyles'),
 						' prop is available on all components and allows for disabling all styles of the component, including any styles being applied at the global or component level. '
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'This can be done at the global level:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'This can be done at the global level:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							'const globalTheme = {\n    components: {\n        button: {\n            disableStyles: true,\n    },\n};\n'
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Or at the component level:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Or at the component level:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Button content={'click me!'} disableStyles={true} />\n"
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} disableStyles={true} />\n")
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'component-class-names' }, 'Component Class Names'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('h3', { id: 'component-class-names' }, 'Component Class Names'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'className'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'className'),
 						' prop is available on all components and allows for adding a class to the root level class list of a component. '
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'By default, all components will contain a class name of ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'ss-${componentname}'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'ss-${componentname}'),
 						', for example ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, "'ss-button'")
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, "'ss-button'")
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'This can be done at the global level:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'This can be done at the global level:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"const globalTheme = {\n    components: {\n        button: {\n            className: 'my-btn-class',\n    },\n};\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Or at the component level:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Or at the component level:'),
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<Button content={'click me!'} className={'my-btn-class'} />\n"
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} className={'my-btn-class'} />\n")
 					)
 				);
 			}
+			function Theme_stories_extends() {
+				return (
+					(Theme_stories_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Theme_stories_extends.apply(this, arguments)
+				);
+			}
 			MDXContent.isMDXComponent = !0;
+			const Theme_stories_layoutProps = {};
+			function Theme_stories_MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					Theme_stories_extends({}, Theme_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)(blocks.h_, { title: 'Documentation/Theme', mdxType: 'Meta' }),
+					(0, esm.kt)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
+					),
+					(0, esm.kt)('div', { class: 'header' }, (0, esm.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.kt)('hr', null),
+					(0, esm.kt)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			Theme_stories_MDXContent.isMDXComponent = !0;
 			const __page = () => {
 				throw new Error('Docs-only story');
 			};
 			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Doumentation/Theme', includeStories: ['__page'] },
+			const componentMeta = { title: 'Documentation/Theme', includeStories: ['__page'] },
 				mdxStoryNameToKey = {};
 			(componentMeta.parameters = componentMeta.parameters || {}),
 				(componentMeta.parameters.docs = {
 					...(componentMeta.parameters.docs || {}),
 					page: () =>
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__.aT,
-							{ mdxStoryNameToKey, mdxComponentAnnotations: componentMeta },
-							(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(MDXContent, null)
-						),
+						(0, esm.kt)(dist_esm.aT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.kt)(Theme_stories_MDXContent, null)),
 				});
-			const __WEBPACK_DEFAULT_EXPORT__ = componentMeta;
+			const Theme_stories = componentMeta;
 		},
-		'./src/documents/Usage.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'./src/documentation/Usage/Usage.stories.mdx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => __WEBPACK_DEFAULT_EXPORT__ });
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
 			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
 					(_extends =
@@ -28519,117 +28810,121 @@
 			}
 			const layoutProps = {};
 			function MDXContent({ components, ...props }) {
-				return (0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+				return (0, esm.kt)(
 					'wrapper',
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__.h_, {
-						title: 'Doumentation/Usage',
-						mdxType: 'Meta',
-					}),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'div',
-						{ class: 'header' },
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('hr', null),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'Snap Preact components are designed to be used with the Snap MobX store package ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '@searchspring/snap-store-mobx'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '@searchspring/snap-store-mobx'),
 						' .'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'p',
 						null,
 						'Snap stores are a dependency for Snap controllers ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller'),
 						'. Snap controllers such as ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'SearchController'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'SearchController'),
 						' contain a reference to the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'SearchStore'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'SearchStore'),
 						' that was provided in the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'ControllerServices'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'ControllerServices'),
 						' object named ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'searchControllerServices'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'searchControllerServices'),
 						' below.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Many component props are tied to the design of the store for ease of use:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('p', null, 'Many component props are tied to the design of the store for ease of use:'),
+					(0, esm.kt)(
 						'p',
 						null,
 						'In this example, the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'store.pagination'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'store.pagination'),
 						' property is provided to the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'pagination'),
 						' prop of the ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '<Pagination />'),
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '<Pagination />'),
 						' component.'
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"import { SearchController } from '@searchspring/snap-controller';\n\nconst searchController = new SearchController(searchConfig, searchControllerServices);\n\nconsole.log(searchController.store)\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
 							"import { Pagination } from '@searchspring/snap-preact-components';\n"
 						)
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)(
 						'pre',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<Pagination pagination={searchController.store.pagination} />\n'
-						)
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Pagination pagination={searchController.store.pagination} />\n')
 					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('br', null),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+					(0, esm.kt)('br', null),
+					(0, esm.kt)(
 						'p',
 						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'strong',
-							{ parentName: 'p' },
-							"A full usage example for each component can be seen in the component's 'Docs' tab"
-						)
+						(0, esm.kt)('strong', { parentName: 'p' }, "Usage examples for each component can be seen in the component's 'Docs' tab.")
 					)
 				);
 			}
+			function Usage_stories_extends() {
+				return (
+					(Usage_stories_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					Usage_stories_extends.apply(this, arguments)
+				);
+			}
 			MDXContent.isMDXComponent = !0;
+			const Usage_stories_layoutProps = {};
+			function Usage_stories_MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					Usage_stories_extends({}, Usage_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)(blocks.h_, { title: 'Documentation/Usage', mdxType: 'Meta' }),
+					(0, esm.kt)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
+					),
+					(0, esm.kt)('div', { class: 'header' }, (0, esm.kt)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.kt)('hr', null),
+					(0, esm.kt)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			Usage_stories_MDXContent.isMDXComponent = !0;
 			const __page = () => {
 				throw new Error('Docs-only story');
 			};
 			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Doumentation/Usage', includeStories: ['__page'] },
+			const componentMeta = { title: 'Documentation/Usage', includeStories: ['__page'] },
 				mdxStoryNameToKey = {};
 			(componentMeta.parameters = componentMeta.parameters || {}),
 				(componentMeta.parameters.docs = {
 					...(componentMeta.parameters.docs || {}),
 					page: () =>
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							_storybook_addon_docs__WEBPACK_IMPORTED_MODULE_2__.aT,
-							{ mdxStoryNameToKey, mdxComponentAnnotations: componentMeta },
-							(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(MDXContent, null)
-						),
+						(0, esm.kt)(dist_esm.aT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.kt)(Usage_stories_MDXContent, null)),
 				});
-			const __WEBPACK_DEFAULT_EXPORT__ = componentMeta;
+			const Usage_stories = componentMeta;
 		},
-		'./src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$': (
+		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$': (
 			module,
 			__unused_webpack_exports,
 			__webpack_require__
@@ -28689,17 +28984,17 @@
 				(webpackContext.resolve = webpackContextResolve),
 				(module.exports = webpackContext),
 				(webpackContext.id =
-					'./src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$');
+					'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$');
 		},
-		'./src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$': (
+		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$': (
 			module,
 			__unused_webpack_exports,
 			__webpack_require__
 		) => {
 			var map = {
-				'./documents/About.stories.mdx': './src/documents/About.stories.mdx',
-				'./documents/Theme.stories.mdx': './src/documents/Theme.stories.mdx',
-				'./documents/Usage.stories.mdx': './src/documents/Usage.stories.mdx',
+				'./documentation/About/About.stories.mdx': './src/documentation/About/About.stories.mdx',
+				'./documentation/Theme/Theme.stories.mdx': './src/documentation/Theme/Theme.stories.mdx',
+				'./documentation/Usage/Usage.stories.mdx': './src/documentation/Usage/Usage.stories.mdx',
 			};
 			function webpackContext(req) {
 				var id = webpackContextResolve(req);
@@ -28717,7 +29012,7 @@
 			}),
 				(webpackContext.resolve = webpackContextResolve),
 				(module.exports = webpackContext),
-				(webpackContext.id = './src sync recursive ^\\.(?:(?:^|\\/|(?:(?:(?%21(?:^|\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$');
+				(webpackContext.id = './src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$');
 		},
 		'?c95a': () => {},
 	},

@@ -1,6 +1,8 @@
 (() => {
 	'use strict';
 	var deferred,
+		leafPrototypes,
+		getProto,
 		inProgress,
 		__webpack_modules__ = {},
 		__webpack_module_cache__ = {};
@@ -36,6 +38,21 @@
 			var getter = module && module.__esModule ? () => module.default : () => module;
 			return __webpack_require__.d(getter, { a: getter }), getter;
 		}),
+		(getProto = Object.getPrototypeOf ? (obj) => Object.getPrototypeOf(obj) : (obj) => obj.__proto__),
+		(__webpack_require__.t = function (value, mode) {
+			if ((1 & mode && (value = this(value)), 8 & mode)) return value;
+			if ('object' == typeof value && value) {
+				if (4 & mode && value.__esModule) return value;
+				if (16 & mode && 'function' == typeof value.then) return value;
+			}
+			var ns = Object.create(null);
+			__webpack_require__.r(ns);
+			var def = {};
+			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+			for (var current = 2 & mode && value; 'object' == typeof current && !~leafPrototypes.indexOf(current); current = getProto(current))
+				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => value[key]));
+			return (def.default = () => value), __webpack_require__.d(ns, def), ns;
+		}),
 		(__webpack_require__.d = (exports, definition) => {
 			for (var key in definition)
 				__webpack_require__.o(definition, key) &&
@@ -48,8 +65,15 @@
 		(__webpack_require__.u = (chunkId) =>
 			chunkId +
 			'.' +
-			{ 135: '1373946c', 172: '2078a058', 491: '0f60d212', 531: '423e6823', 887: '736dcdea', 994: 'f6a61452' }[chunkId] +
-			'.iframe.bundle.js'),
+			{
+				135: '78afa96e855bcaabb02b',
+				172: 'f58ebb6e19baa476f067',
+				531: 'b8613cd91a7e2b55e9ac',
+				887: 'e47dc74f918fe1dcee68',
+				950: '2642e4df532e5802c74b',
+				994: '17344e1649ffb630050e',
+			}[chunkId] +
+			'.manager.bundle.js'),
 		(__webpack_require__.g = (function () {
 			if ('object' == typeof globalThis) return globalThis;
 			try {
@@ -158,7 +182,7 @@
 					for (parentChunkLoadingFunction && parentChunkLoadingFunction(data); i < chunkIds.length; i++)
 						(chunkId = chunkIds[i]),
 							__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId] && installedChunks[chunkId][0](),
-							(installedChunks[chunkIds[i]] = 0);
+							(installedChunks[chunkId] = 0);
 					return __webpack_require__.O(result);
 				},
 				chunkLoadingGlobal = (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []);
