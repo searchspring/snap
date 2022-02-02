@@ -139,7 +139,7 @@ let config = {
 				targeters: [
 					{
 						name: 'finder',
-						selector: '#finder',
+						selector: '#searchspring-finder',
 						component: async () => {
 							return (await import('./components/Finder/Finder')).Finder;
 						},

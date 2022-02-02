@@ -28,15 +28,18 @@ describe('Tracker', () => {
 		expect(tracker.track.order.transaction).toBeDefined();
 	});
 
-	it('can invoke setNamespace method', async () => {
+	it('can pass config and use custom namespace', async () => {
+		const config = {
+			id: 'trackerrrr',
+		};
+
 		const tracker = new Tracker(globals);
 
-		expect(tracker.localStorage.key).toStrictEqual(`ss-tracker-${globals.siteId}-local`);
+		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
 
-		const namespace = 'hello';
-		tracker.setNamespace(namespace);
+		const tracker2 = new Tracker(globals, config);
 
-		expect(tracker.localStorage.key).toStrictEqual(`ss-${namespace}-${globals.siteId}-local`);
+		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
 	});
 
 	it('can invoke track.shopper.login', async () => {

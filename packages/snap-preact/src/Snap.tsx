@@ -18,6 +18,7 @@ import type {
 	RecommendationControllerConfig,
 	ControllerConfigs,
 } from '@searchspring/snap-controller';
+import type { Product } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -41,6 +42,7 @@ type ExtendedTarget = Target & {
 type ContextVariables = {
 	shopper?: {
 		id: string;
+		cart?: Product[];
 		[variable: string]: any;
 	};
 	[variable: string]: any;
@@ -232,8 +234,9 @@ export class Snap {
 			}
 		} catch (e) {}
 
-		if (window.searchspring && this.config.context) {
-			window.searchspring.context = this.config.context;
+		if (window.searchspring) {
+			if (this.config.context) window.searchspring.context = this.config.context;
+			if (this.client) window.searchspring.client = this.client;
 		}
 
 		// autotrack shopper id from the context
@@ -241,6 +244,15 @@ export class Snap {
 			this.tracker.track.shopper.login({
 				id: this.config.context.shopper.id,
 			});
+		}
+
+		// auto populate cart cookie from the context
+		if (this.config.context?.shopper?.cart) {
+			const cart = this.config.context.shopper.cart;
+			if (Array.isArray(cart)) {
+				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
+				this.tracker.cookies.cart.set(cartItems);
+			}
 		}
 
 		Object.keys(this.config?.controllers || {}).forEach((type) => {

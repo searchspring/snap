@@ -1,26 +1,45 @@
 export type ClientConfig = {
 	meta?: {
-		prefetch?: boolean;
-		ttl?: number;
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	recommend?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	suggest?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 };
 
+export type CacheConfig = {
+	enabled?: boolean;
+	ttl?: number;
+	maxSize?: number;
+	purgeable?: boolean;
+};
+
+export type CacheEntry = {
+	value: Response;
+	expires?: number;
+	purgeable?: boolean;
+};
+
+export type Cache = {
+	[key: string]: CacheEntry;
+};
+
 export type SnapApiConfig = {
-	host?: string;
-	path?: string;
+	origin?: string;
 };
 
 export type ClientGlobals = {

@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -115,12 +114,8 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
 
-const ObservableGridResults = observer(({ args, controller }) => {
-	return <Results {...args} controller={controller} results={controller?.store?.results} />;
-});
-
 const GridTemplate = (args: ResultsProp, { loaded: { controller } }) => {
-	return <ObservableGridResults args={args} controller={controller} />;
+	return <Results {...args} controller={controller} results={controller?.store?.results} />;
 };
 
 export const Grid = GridTemplate.bind({});
@@ -133,12 +128,8 @@ Grid.loaders = [
 	},
 ];
 
-const ObservableListResults = observer(({ args, controller }) => {
-	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
-});
-
 const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
-	return <ObservableListResults args={args} controller={controller} />;
+	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
 };
 
 export const List = ListTemplate.bind({});

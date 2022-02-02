@@ -1,31 +1,3 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import searchspringLogo from '../assets/searchspring-logo.svg';
-
-<Meta title="Doumentation/Usage" />
-
-<style>{`
-	.header {
-		display: flex;
-		align-items: center;
-	}
-
-	.header .subtitle {
-		text-transform: uppercase;
-		color: #00cee1;
-	}
-
-	.header img {
-			width: 300px;
-			margin-right: 20px;
-		}
-`}</style>
-
-<div class="header">
-	<span class="subtitle">SNAP PREACT COMPONENETS</span>
-</div>
-
----
-
 Snap Preact components are designed to be used with the Snap MobX store package `@searchspring/snap-store-mobx` .
 
 Snap stores are a dependency for Snap controllers `@searchspring/snap-controller`. Snap controllers such as `SearchController` contain a reference to the `SearchStore` that was provided in the `ControllerServices` object named `searchControllerServices` below.
@@ -53,4 +25,4 @@ import { Pagination } from '@searchspring/snap-preact-components';
 
 <br/>
 
-**A full usage example for each component can be seen in the component's 'Docs' tab**
+**Usage examples for each component can be seen in the component's 'Docs' tab.**

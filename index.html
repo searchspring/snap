@@ -15,6 +15,8 @@
 	<title>Snap Documentation</title>
 
 	<link rel="icon" href="./favicon.ico">
+
+	<script src="https://snapui.searchspring.io/vrntn7/bundle.js" id="searchspring-context"></script>
 </head>
 <body>
 	<div id="app"></div>
@@ -78,607 +80,241 @@
 			});
 			return markdown
 		}
-		const documents = [
-			{
-				categoryName: 'Welcome',
-				links: [
-					{
-						label: 'About Snap',
-						route: '/',
-						type: 'markdown',
-						url: './docs/ABOUT.md'
-					}, 
-				]
-			},
-			{
-				categoryName: 'Getting Started',
-				links: [
-					{
-						label: 'Setup',
-						route: '/start-setup',
-						type: 'markdown',
-						url: './docs/SETUP.md'
-					}, 
-					{
-						label: 'Preact',
-						route: '/start-preact',
-						type: 'markdown',
-						url: './docs/PREACT.md',
-						links: [
-							{
-								label: 'Configuration',
-								route: '/start-preact-config',
-								type: 'markdown',
-								url: './docs/PREACT_CONFIG.md'
-							},
-							{
-								label: 'Controller Props',
-								route: '/start-preact-controller-props',
-								type: 'markdown',
-								url: './docs/PREACT_CONTROLLER_PROPS.md'
-							},
-							{
-								label: 'Displaying Data',
-								route: '/start-preact-displaying-data',
-								type: 'markdown',
-								url: './docs/PREACT_DISPLAYING_DATA.md'
-							},
-							{
-								label: 'Events',
-								route: '/start-preact-events',
-								type: 'markdown',
-								url: './docs/PREACT_EVENTS.md'
-							},
-						]
-					}, 
-					{
-						label: 'Advanced',
-						route: '/advanced',
-						type: 'markdown',
-						url: './docs/ADVANCED.md',
-						links: [
-							{
-								label: 'Installation',
-								route: '/advanced-installation',
-								type: 'markdown',
-								url: './docs/ADVANCED_INSTALLATION.md',
-							}, {
-								label: 'Client',
-								route: '/advanced-client',
-								type: 'markdown',
-								url: './docs/ADVANCED_CLIENT.md',
-							}, {
-								label: 'Tracker',
-								route: '/advanced-tracker',
-								type: 'markdown',
-								url: './docs/ADVANCED_TRACKER.md',
-							}, {
-								label: 'Search',
-								route: '/advanced-search',
-								type: 'markdown',
-								url: './docs/ADVANCED_SEARCH.md',
-							}, {
-								label: 'Autocomplete',
-								route: '/advanced-autocomplete',
-								type: 'markdown',
-								url: './docs/ADVANCED_AUTOCOMPLETE.md',
-							}, {
-								label: 'Finder',
-								route: '/advanced-finder',
-								type: 'markdown',
-								url: './docs/ADVANCED_FINDER.md',
-							}, 
-						]
-					}, 
-					{
-						label: 'Integration',
-						route: '/advanced-integration',
-						type: 'markdown',
-						url: './docs/INTEGRATION.md',
-					},
-					{
-						label: 'Troubleshooting',
-						route: '/troubleshooting',
-						type: 'markdown',
-						url: './docs/TROUBLESHOOTING.md',
-					},
-				]
-			},
-			 {
-				categoryName: 'Packages',
-				links: [
-					{
-						label: 'Preact',
-						route: '/package-preact',
-						type: 'markdown',
-						url: './packages/snap-preact/README.md',
-						links: [
-							{
-								label: 'Instantiators',
-								route: '/package-preact-instantiator',
-								type: 'markdown',
-								url: './packages/snap-preact/src/Instantiators/README.md',
-							}, 	
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-preact/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					},
-					{
-						label: 'Controller',
-						route: '/package-controller',
-						type: 'markdown',
-						url: './packages/snap-controller/README.md',
-						links: [
-							{
-								label: 'Abstract',
-								route: '/package-controller-abstract',
-								type: 'markdown',
-								url: './packages/snap-controller/src/Abstract/README.md',
-							}, {
-								label: 'Autocomplete',
-								route: '/package-controller-autocomplete',
-								type: 'markdown',
-								url: './packages/snap-controller/src/Autocomplete/README.md',
-							}, {
-								label: 'Finder',
-								route: '/package-controller-finder',
-								type: 'markdown',
-								url: './packages/snap-controller/src/Finder/README.md',
-							}, {
-								label: 'Recommendation',
-								route: '/package-controller-recommendation',
-								type: 'markdown',
-								url: './packages/snap-controller/src/Recommendation/README.md',
-							}, {
-								label: 'Search',
-								route: '/package-controller-search',
-								type: 'markdown',
-								url: './packages/snap-controller/src/Search/README.md',
-							}, {
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-controller/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Client',
-						route: '/package-client',
-						type: 'markdown',
-						url: './packages/snap-client/README.md',
-						links: [
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-client/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Store',
-						route: '/package-storeMobx',
-						type: 'markdown',
-						url: './packages/snap-store-mobx/README.md',
-						links: [
-							{
-								label: 'Abstract',
-								route: '/package-storeMobx-abstract',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Abstract/README.md',
-							}, {
-								label: 'Autocomplete',
-								route: '/package-storeMobx-autocomplete',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Autocomplete/README.md',
-							}, {
-								label: 'Finder',
-								route: '/package-storeMobx-finder',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Finder/README.md',
-							}, {
-								label: 'Recommendation',
-								route: '/package-storeMobx-recommendation',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Recommendation/README.md',
-							}, {
-								label: 'Search',
-								route: '/package-storeMobx-search',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Search/README.md',
-							}, {
-								label: 'Storage',
-								route: '/package-storeMobx-storage',
-								type: 'markdown',
-								url: './packages/snap-store-mobx/src/Storage/README.md',
-							}, {
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-store-mobx/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Url Manager',
-						route: '/package-urlManager',
-						type: 'markdown',
-						url: './packages/snap-url-manager/README.md',
-						links: [
-							{
-								label: 'Translators',
-								route: '/package-urlManager-translators',
-								type: 'markdown',
-								url: './packages/snap-url-manager/src/Translators/README.md',
-							}, {
-								label: 'QueryString Translator',
-								route: '/package-urlManager-translators-queryString',
-								type: 'markdown',
-								url: './packages/snap-url-manager/src/Translators/QueryString/README.md',
-							}, {
-								label: 'Url Translator',
-								route: '/package-urlManager-translators-url',
-								type: 'markdown',
-								url: './packages/snap-url-manager/src/Translators/Url/README.md',
-							}, {
-								label: 'Linkers',
-								route: '/package-urlManager-linkers',
-								type: 'markdown',
-								url: './packages/snap-url-manager/src/linkers/README.md',
-							}, {
-								label: 'React Linker',
-								route: '/package-urlManager-linkers-react',
-								type: 'markdown',
-								url: './packages/snap-url-manager/src/linkers/react/README.md',
-							}, {
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-url-manager/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Event Manager',
-						route: '/package-eventManager',
-						type: 'markdown',
-						url: './packages/snap-event-manager/README.md',
-						links: [
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-event-manager/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Profiler',
-						route: '/package-profiler',
-						type: 'markdown',
-						url: './packages/snap-profiler/README.md',
-						links: [
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-profiler/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Logger',
-						route: '/package-logger',
-						type: 'markdown',
-						url: './packages/snap-logger/README.md',
-						links: [
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-logger/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Tracker',
-						route: '/package-tracker',
-						type: 'markdown',
-						url: './packages/snap-tracker/README.md',
-						links: [
-							{
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-tracker/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}, {
-						label: 'Toolbox',
-						route: '/package-toolbox',
-						type: 'markdown',
-						url: './packages/snap-toolbox/README.md',
-						links: [
-							{
-								label: 'Cookies',
-								route: '/package-toolbox-cookies',
-								type: 'markdown',
-								url: './packages/snap-toolbox/src/cookies/README.md',
-							}, {
-								label: 'DomTargeter',
-								route: '/package-toolbox-domTargeter',
-								type: 'markdown',
-								url: './packages/snap-toolbox/src/DomTargeter/README.md',
-							}, {
-								label: 'Feature Flags',
-								route: '/package-toolbox-featureFlags',
-								type: 'markdown',
-								url: './packages/snap-toolbox/src/featureFlags/README.md',
-							}, {
-								label: 'Filters',
-								route: '/package-toolbox-filters',
-								type: 'markdown',
-								url: './packages/snap-toolbox/src/filters/README.md',
-							}, {
-								label: 'Script Context',
-								route: '/package-toolbox-getContext',
-								type: 'markdown',
-								url: './packages/snap-toolbox/src/getContext/README.md',
-							}, {
-								label: 'Typedocs',
-								type: 'external',
-								url: 'https://searchspring.github.io/snap/packages/snap-toolbox/docs/',
-								icon: 'fas fa-external-link-alt fa-1x'
-							}, 
-						]
-					}
-				]
-			}, {
-				categoryName: 'Components',
-				links: [
-					{
-						label: 'Preact',
-						route: '/components-preact',
-						type: 'iframe',
-						url: './packages/snap-preact-components/docs/'
-					}
-				]
-			}, {
-				categoryName: 'API',
-				links: [
-					{
-						label: 'Documentation',
-						route: '/api-docs',
-						type: 'iframe',
-						url: 'https://searchspring.github.io/snapi-oas/'
-					}, {
-						label: 'Explorer',
-						route: '/api-explorer',
-						type: 'iframe',
-						url: 'https://searchspring.github.io/snapi-explorer/'
-					}
-				]
-			}, {
-				categoryName: 'Development',
-				links: [
-					{
-						label: 'Change Log',
-						route: '/dev-changelog',
-						type: 'markdown',
-						url: './CHANGELOG.md'
-					}
-				]
-			}, {
-				categoryName: 'Links',
-				links: [
-				/* TODO
-					{
-						label: 'Demo',
-						type: 'external',
-						url: 'http://try.searchspring.com',
-						icon: 'fas fa-external-link-alt fa-1x'
-					},
-				*/
-					{
-						label: 'Github Repository',
-						type: 'external',
-						url: 'https://github.com/searchspring/snap',
-						icon: 'fas fa-external-link-alt fa-1x'
-					}, {
-						label: 'Discussions',
-						type: 'external',
-						url: 'https://github.com/searchspring/snap/discussions',
-						icon: 'fas fa-external-link-alt fa-1x'
-					}, {
-						label: 'Report an Issue',
-						type: 'external',
-						url: 'https://github.com/searchspring/snap/issues',
-						icon: 'fas fa-external-link-alt fa-1x'
-					}
-				]
-			}
-		];
-
-		const App = {
-			data() {
-				return {
-					documents
-				}
-			},
-			computed: {
-				routes() {
-					const routeMap = this.documents.reduce((acc, section) => {
-						section?.links?.forEach((link) => {
-							if (link.route) {
-								acc[link.route] = link;
-							}
-
-							link?.links?.forEach((sublink) => {
-								if (sublink.route) {
-									acc[sublink.route] = sublink;
-								}
-							})
-						});
-
-						return acc;
-					}, {});
-
-					return routeMap;
-				},
-			},
-			template: `
-				<Navigation :documents="documents"></Navigation>
-
-				<div id="content">
-					<router-view :routes="routes"></router-view>
-				</div>
-			`
-		}
-
-		const app = Vue.createApp(App);
-
-		app.component('Content', { 
-			props: ['routes'],
-			template: `
-				<iframe v-if="routeData.type == 'iframe'" :src="routeData.url"></iframe>
-				<Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
-			`,
-			computed: {
-				currentRoute() {
-					return this.$route.path;
-				},
-				routeData() {
-					return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' }
-				}
-			}
-		});
-
-		app.component('Markdown', { 
-			props: ['src'],
-			template: `
-				<div id="markdown" v-html="markedHTML"></div>
-			`,
-			data() {
-				return {
-					markdown: '',
-				}
-			},
-			watch: {
-				src() {
-					this.getMarkdown(this.src);
-				}
-			},
-			computed: {
-				markedHTML() {
-					return marked(this.markdown);
-				}
-			},
-			created() {
-				this.getMarkdown(this.src);
-			},
-			updated() {
-				window.highlight();
-			},
-			methods: {
-				async getMarkdown(file) {
-					this.markdown = '';
-					const response = await fetch(file);
-					let text = await response.text()
-					this.iframe = "";
-					this.markdown = modifyLinks(text);
-				}
-			}
-		});
-
-		app.component('Link', {
-			props: ['link', 'active'],
-			template: `
-				<router-link v-if="link.route" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
-					{{link.label}}
-				</router-link>
 		
-				<a v-else-if="link.type == 'external'" :href="link.url" target="_blank">
-					{{link.label}}
-					<i v-if="link.icon" :class="link.icon"></i>
-				</a>
-			`,
-		});
-
-		app.component('Navigation', {
-			props: ['documents'],
-			components: ['Link'],
-			data() {
-				return {
-					navVisible: true,
-				}
-			},
-			computed: {
-				currentRoute() {
-					return this.$route.path;
-				}
-			},
-			methods: {
-				toggleNav() {
-					this.navVisible = !this.navVisible
+		import('./docs/documents.js').then(function (_) {
+			const documents = _.default;
+			const App = {
+				data() {
+					return {
+						documents
+					}
 				},
-				inRoute(link) {
-					if (link?.route) {
-						const includedRoutes = [link.route];
+				computed: {
+					routes() {
+						const routeMap = this.documents.reduce((acc, section) => {
+							section?.links?.forEach((link) => {
+								if (link.route) {
+									acc[link.route] = link;
+								}
 
-						link.links?.forEach(sublink => includedRoutes.push(sublink.route));
+								link?.links?.forEach((sublink) => {
+									if (sublink.route) {
+										acc[sublink.route] = sublink;
+									}
+								})
+							});
 
-						return includedRoutes.includes(this.currentRoute);
+							return acc;
+						}, {});
+
+						return routeMap;
+					},
+				},
+				template: `
+					<Navigation :documents="documents"></Navigation>
+
+					<div id="content">
+						<router-view :routes="routes"></router-view>
+					</div>
+					<div id="ac-overlay"></div>
+				`
+			}
+
+			const app = Vue.createApp(App);
+
+			app.component('Content', { 
+				props: ['routes'],
+				template: `
+					<iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
+					<Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
+					<div id="searchWrapper"></div>
+				`,
+				computed: {
+					currentRoute() {
+						return this.$route.path;
+					},
+					routeData() {
+						const params = decodeURIComponent(window.location.href.split('?params=')[1] || '');
+
+						if (params && this.routes[this.currentRoute] && this.routes[this.currentRoute].url && this.routes[this.currentRoute].type === 'iframe') {
+							const currentiFrameSrc = document.querySelector('iframe')?.src;
+							let url = currentiFrameSrc || `${this.routes[this.currentRoute].url}${params}`;
+							if(params.includes('&ac')) {
+								url = `${this.routes[this.currentRoute].url}${params}`;
+							}
+							if(url.startsWith('http') && url.includes('/packages/')) {
+								url = `./packages/${url.split('/packages/')[1]}`
+							}
+							return { type: 'iframe', url }
+						}
+
+						return this.routes[this.currentRoute] || { type: 'markdown', url: './docs/404.md' };
+					}
+				},
+				
+				methods: {
+					onLoad() {
+						const mutations = [];
+						// Select the node that will be observed for mutations
+						const targetNode = document.getElementById('frame').contentWindow.document.querySelector('title');
+	
+						// Options for the observer (which mutations to observe)
+						const config = { characterData: true, attributes: true, childList: true, subtree: true};
+						
+						// Callback function to execute when mutations are observed
+						const callback = function(mutationsList, observer) {
+							
+							mutations.push(mutationsList[0])
+							if(mutationsList.length && mutations.length > 1) {
+								const url = mutationsList[0].target.baseURI;
+								const params = encodeURIComponent(`?${url.split('?')[1]}`);
+								const fullRoute = window.location.href.split('#')[1] // '/components-preact?params=%3Fpath%3D%2Fdocs%2FOrganisms-Autocomplete'
+								const route = fullRoute.split('?')[0]; // '/components-preact'
+								const newRoute = `${route}?params=${params}`;
+								window.location.hash = newRoute;
+							}
+						};
+	
+						// Create an observer instance linked to the callback function
+						const observer = new MutationObserver(callback);
+	
+						// Start observing the target node for configured mutations
+						observer.observe(targetNode, config);
+					},
+				}
+				
+			});
+
+			app.component('Markdown', { 
+				props: ['src'],
+				template: `
+					<div id="markdown" v-html="markedHTML"></div>
+				`,
+				data() {
+					return {
+						markdown: '',
+					}
+				},
+				watch: {
+					src() {
+						this.getMarkdown(this.src);
+					}
+				},
+				computed: {
+					markedHTML() {
+						return marked(this.markdown);
+					}
+				},
+				created() {
+					this.getMarkdown(this.src);
+				},
+				updated() {
+					window.highlight();
+				},
+				methods: {
+					async getMarkdown(file) {
+						this.markdown = '';
+						const response = await fetch(file);
+						let text = await response.text()
+						this.iframe = "";
+						this.markdown = modifyLinks(text);
 					}
 				}
-			},
-			template: `
-				<div id="navigation-wrapper">
-					<router-link :key="'/'" :to="'/'">
-						<div id="header">
-							<div class="logo-container">
-								<img src="./images/logo-snap.svg"/>
+			});
+
+			app.component('Link', {
+				props: ['link', 'active'],
+				template: `
+					<router-link v-if="link.route" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
+						{{link.label}}
+					</router-link>
+			
+					<a v-else-if="link.type == 'external'" :href="link.url" target="_blank">
+						{{link.label}}
+						<i v-if="link.icon" :class="link.icon"></i>
+					</a>
+				`,
+			});
+
+			app.component('Navigation', {
+				props: ['documents'],
+				components: ['Link'],
+				data() {
+					return {
+						navVisible: true,
+					}
+				},
+				computed: {
+					currentRoute() {
+						return this.$route.path;
+					}
+				},
+				methods: {
+					toggleNav() {
+						this.navVisible = !this.navVisible
+					},
+					inRoute(link) {
+						if (link?.route) {
+							const includedRoutes = [link.route];
+
+							link.links?.forEach(sublink => includedRoutes.push(sublink.route));
+
+							return includedRoutes.includes(this.currentRoute);
+						}
+					}
+				},
+				template: `
+					<div id="navigation-wrapper">
+						<router-link :key="'/'" :to="'/'">
+							<div id="header">
+								<div class="logo-container">
+									<img src="./images/logo-snap.svg"/>
+								</div>
+							</div>
+						</router-link>
+						<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
+						<div id="search-container">
+							</div>
+						<div id="navigation" :class="{ visible: navVisible }" >
+							<div v-for="section in documents" class="section">
+								<h3>{{ section.categoryName }}</h3>
+								<ul class="links">
+									<li v-for="link in section.links">
+										<Link :link="link" :active="inRoute(link)" />
+
+										<ul v-if="link.links && inRoute(link)" class="sublinks">
+											<li v-for="sublink in link.links">
+												<Link :link="sublink" :active="inRoute(sublink)"/>
+											</li>
+										</ul>
+									</li>
+								</ul>
 							</div>
 						</div>
-					</router-link>
-					<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
-					
-					<div id="navigation" :class="{ visible: navVisible }" >
-						<div v-for="section in documents" class="section">
-							<h3>{{ section.categoryName }}</h3>
-							<ul class="links">
-								<li v-for="link in section.links">
-									<Link :link="link" :active="inRoute(link)" />
-
-									<ul v-if="link.links && inRoute(link)" class="sublinks">
-										<li v-for="sublink in link.links">
-											<Link :link="sublink" :active="inRoute(sublink)"/>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
 					</div>
-				</div>
-			`,
-		});
-
-		const routes = [
-			{ path: '/',      component: app.component('Content') },
-			{ path: '/:path', component: app.component('Content') },
-		]
-
-		const router = VueRouter.createRouter({
-			history: VueRouter.createWebHashHistory(),
-			routes,
-		});
-
-		app.use(router);
-
-		app.mount('#app');
-
-		window.highlight = function() {
-			document.querySelectorAll('pre code').forEach((block) => {
-				hljs.highlightBlock(block);
+				`,
 			});
-		}
+
+			const routes = [
+				{ path: '/',      component: app.component('Content') },
+				{ path: '/:path', component: app.component('Content') },
+			]
+
+			const router = VueRouter.createRouter({
+				history: VueRouter.createWebHashHistory(),
+				routes,
+			});
+
+			app.use(router);
+
+			app.mount('#app');
+
+			window.highlight = function() {
+				document.querySelectorAll('pre code').forEach((block) => {
+					hljs.highlightBlock(block);
+				});
+			}
+		})
 	</script>
 
 </body>
