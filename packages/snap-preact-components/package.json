@@ -64,6 +64,5 @@
 		"react-dom": "^16.14.0",
 		"ts-loader": "^9.2.6"
 	},
-	"sideEffects": false,
-	"gitHead": "122405b27b497c7bb6a189c30535fdc197bc3ef0"
+	"sideEffects": false
 }

@@ -38,6 +38,5 @@
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
-	],
-	"gitHead": "122405b27b497c7bb6a189c30535fdc197bc3ef0"
+	]
 }
