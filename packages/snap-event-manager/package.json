@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-event-manager",
-	"version": "0.20.0",
+	"version": "0.20.1",
 	"description": "Snap Event Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -22,5 +22,6 @@
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
-	]
+	],
+	"gitHead": "122405b27b497c7bb6a189c30535fdc197bc3ef0"
 }
