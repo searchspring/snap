@@ -76,7 +76,6 @@ export class UrlTranslator implements Translator {
 
 	constructor(config: UrlTranslatorConfig = {}) {
 		this.config = deepmerge(defaultConfig, config);
-
 		Object.keys(this.config.parameters.core).forEach((param) => {
 			// param prefix
 			if (this.config.settings.corePrefix) {
@@ -353,7 +352,10 @@ export class UrlTranslator implements Translator {
 
 		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
 		const stateParams = this.stateToParams(state);
-		const params = [...rootUrlParams, ...stateParams];
+		let params = [...rootUrlParams, ...stateParams];
+		//dedupe the params
+		params = params.filter((object, index) => index === params.findIndex((obj) => JSON.stringify(obj) === JSON.stringify(object)));
+
 		const queryParams = params.filter((p) => p.type == ParamLocationType.QUERY);
 		const hashParams = params.filter((p) => p.type == ParamLocationType.HASH);
 
