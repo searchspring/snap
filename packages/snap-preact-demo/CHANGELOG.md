@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+
+
+
+
 ## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
@@ -19,39 +27,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [0.20.0](https://github.com/searchspring/snap/compare/v0.16.0...v0.20.0) (2022-02-01)
-
-**Note:** Version bump only for package @searchspring/snap-preact-demo
-
-
-
-
-
-# [0.16.0](https://github.com/searchspring/snap/compare/v0.15.1...v0.16.0) (2022-02-01)
-
-**Note:** Version bump only for package @searchspring/snap-preact-demo
-
-
-
-
-
-## [0.15.1](https://github.com/searchspring/snap/compare/v0.15.0...v0.15.1) (2022-02-01)
-
-**Note:** Version bump only for package @searchspring/snap-preact-demo
-
-
-
-
-
-# [0.15.0](https://github.com/searchspring/snap/compare/v0.14.0...v0.15.0) (2022-02-01)
-
-**Note:** Version bump only for package @searchspring/snap-preact-demo
-
-
-
-
-
-# [0.14.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.14.0) (2022-02-01)
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
 
 
 ### Features
