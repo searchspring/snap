@@ -23439,7 +23439,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.20.3' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.20.4' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -23788,7 +23788,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.20.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.20.4')),
 							this.targeters.push(
 								new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
 									var _getContext = (function getContext(evaluate, script) {
@@ -23866,7 +23866,6 @@
 								})
 							),
 							document.addEventListener('click', function (event) {
-								event.preventDefault();
 								var attributes = {};
 								Object.values(event.target.attributes).forEach(function (attr) {
 									attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
