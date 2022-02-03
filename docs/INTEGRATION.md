@@ -60,7 +60,7 @@ The innerHTML of the script MUST only contain variable assignments without `var`
 
 
 ### Background Filters
-Background filters allow a page to be refined without displaying the active filter to the end user. This is primairly used for category pages, although can also be used for custom functionallity such as restricting visibility of products to user groups. The filter value is retrieved from a context variable and applied as a background filter within the Snap config object. 
+Background filters allow a page to be refined without displaying the active filter to the end-user. This is primarily used for category pages, although can also be used for custom functionality such as restricting visibility of products to user groups. The filter value is retrieved from a context variable and applied as a background filter within the Snap config object. 
 
 In this example, we'll retrieve the `collection` object from the context and apply it as a category background filter for our search controller.
 
@@ -119,10 +119,10 @@ const snap = new Snap(config);
 
 
 ## Tracking
-Certain reports depends on beacon data being tracked. These are events tracked outside of the integration code and should be added to various pages.
+Certain reports depend on beacon data being tracked. These are events tracked outside of the integration code and should be added to various pages.
 
 ### Shopper Login
-Identifies the logged in user. Should be invoked if a user is logged into their account. The value should contain any unique identifier (ie. user ID, email, hash)
+Identifies the logged-in user. Should be invoked if a user is logged into their account. The value should contain any unique identifier (ie. user ID, email, hash)
 
 ```html
 <script type="searchspring/track/shopper/login">
@@ -313,7 +313,7 @@ window.tracker.track.product.click({
 
 This is not required if the above `Cart View` and `Order Transaction` tracking has not been implemented OR you are not using the `realtime` recommendations configuration. 
 
-Adding the following attributes allows for real time updates to any recommendations (disabled by default) when the cart changes.
+Adding the following attributes allows for real-time updates to any recommendations (disabled by default) when the cart changes.
 
 If you are using multiple custom Tracker instances with a different tracker `config.id`, attributes are namespaced by the trackers `id` (Default: `'track'`, Example: `ss-track-cart-add`)
 
