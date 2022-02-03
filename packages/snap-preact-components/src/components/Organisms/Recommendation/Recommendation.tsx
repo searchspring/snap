@@ -4,6 +4,7 @@ import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
 
@@ -13,6 +14,8 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { BreakpointsProps } from '../../Organisms/Results';
 
 const CSS = {
 	recommendation: ({ vertical }) =>
@@ -63,7 +66,7 @@ const defaultVerticalRecommendationBreakpoints = {
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: RecommendationProps = {
+	let props: RecommendationProps = {
 		// default props
 		breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
 		pagination: false,
@@ -74,6 +77,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		// props
 		...properties.theme?.components?.recommendation,
 	};
+
+	const displaySettings = useDisplaySettings(props.breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
 	const {
 		title,
@@ -217,7 +230,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 export interface RecommendationProps extends ComponentProps {
 	title?: JSX.Element | string;
-	breakpoints?: any;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;

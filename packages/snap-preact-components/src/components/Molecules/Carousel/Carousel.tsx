@@ -5,6 +5,7 @@ import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import 'swiper/swiper.min.css';
 
@@ -13,6 +14,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { BreakpointsProps } from '../../Organisms/Results';
 
 const CSS = {
 	carousel: ({ theme, vertical }) =>
@@ -139,7 +142,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: CarouselProps = {
+	let props: CarouselProps = {
 		// default props
 		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
@@ -150,6 +153,16 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.carousel,
 	};
+
+	const displaySettings = useDisplaySettings(props.breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
 	const {
 		children,
@@ -266,7 +279,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 });
 
 export interface CarouselProps extends ComponentProps {
-	breakpoints?: any;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
