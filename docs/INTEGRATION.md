@@ -17,7 +17,6 @@ The bundle should be included in the `<head>` tag, ideally near the top of the n
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 
-	<meta name="referrer" content="no-referrer-when-downgrade">
 	<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js"></script>
 </head>
 <body>
@@ -27,7 +26,334 @@ The bundle should be included in the `<head>` tag, ideally near the top of the n
 
 ```
 
-The "referrer" `meta` tag is necessary for enabling branch overrides in the URL (?branch=branchname). This functionality is only currently possible with Searchspring maintained Snap repositories.
+## Context variables
+
+Context variables are conditionally rendered within the script's innerHTML. They provide context for Snap and can be retrieved using [getContext](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/getContext)
+
+The innerHTML of the script MUST only contain variable assignments without `var`, `let`, or `const`. Each declaration should end with a semi-colon to ensure minification does not impact the functions ability to parse the innerHTML.
+
+```html
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+	product = 'C-AD-W1-1869P';
+	shopper = {
+		id: 'snapdev',
+		cart: [
+			{ sku: 'product_1' }
+		]
+	};
+	options = {
+		siteId: 'abc123',
+		categories: ['righteous', 'awesome', 'radical']
+	};
+</script>
 ```
-<meta name="referrer" content="no-referrer-when-downgrade">
+
+| Option | Value | Page | Description |
+|---|---|:---:|---|
+| product | current product sku | product detail page | required if product detail pages contain recommendations |
+| shopper.id | logged in user unique identifier | all | required for personalization functionallity |
+| shopper.cart | current cart contents | all | required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
+| options.siteId | global siteId overwrite | all | optional global siteId overwrite |
+| options.categories | category path | recommendations | optional category path |
+| branch | template branch overwrite | recommendations | optional branch overwrite for recommendations template |
+| batched | boolean (default: `true`) | recommendations | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config]((https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)) |
+
+
+### Background Filters
+Background filters allow a page to be refined without displaying the active filter to the end user. This is primairly used for category pages, although can also be used for custom functionallity such as restricting visibility of products to user groups. The filter value is retrieved from a context variable and applied as a background filter within the Snap config object. 
+
+In this example, we'll retrieve the `collection` object from the context and apply it as a category background filter for our search controller.
+
+Background filters can also be applied to all services by setting `client.globals.filters` instead.
+
+
+```html
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+	collection = {
+		handle: 'Shirts'
+	};
+</script>
+```
+
+```typescript
+import { getContext } from '@searchspring/snap-toolbox';
+
+const context = getContext(['collection']);
+let backgroundFilters = [];
+
+if (context.collection?.handle) {
+	// set background filter
+	if (context.collection.handle != 'all') {
+		backgroundFilters.push({
+			field: 'collection_handle',
+			value: context.collection.handle,
+			type: 'value',
+			background: true,
+		});
+	}
+}
+
+const config = {
+	context,
+	client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+	controllers: {
+		search: [
+			{
+				config: {
+					id: 'search',
+					globals: {
+						filters: backgroundFilters,
+					},
+				},
+			},
+		],
+	},
+};
+
+const snap = new Snap(config);
+```
+
+
+## Tracking
+Certain reports depends on beacon data being tracked. These are events tracked outside of the integration code and should be added to various pages.
+
+### Shopper Login
+Identifies the logged in user. Should be invoked if a user is logged into their account. The value should contain any unique identifier (ie. user ID, email, hash)
+
+```html
+<script type="searchspring/track/shopper/login">
+    id = 'snapdev';
+</script>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.track.shopper.login` method
+
+```typescript
+window.tracker.track.shopper.login({
+    id: 'snapdev'
+});
+```
+
+### Product View
+Tracks product page views. Should only be installed on product detail pages. A `sku` and/or `childSku` are required.
+
+```html
+<script type="searchspring/track/product/view">
+    item = {
+        sku: 'product123',
+        childSku: 'product123_a',
+    };
+</script>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.track.product.view` method
+
+```typescript
+window.tracker.track.product.view({
+    sku: 'product123',
+    childSku: 'product123_a',
+});
+```
+
+
+### Cart View 
+Tracks cart contents. Should only be installed on a cart page. If the checkout process does not contain a dedicated cart page (ie. slideout cart) then this method should be invoked when the cart comes into view. 
+
+Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
+
+```html
+<script type="searchspring/track/cart/view">
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ];
+</script>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.track.cart.view` method.
+
+```typescript
+window.tracker.track.cart.view({
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99',
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99',
+        },
+    ]
+});
+```
+
+
+### Order Transaction
+Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
+
+`order` - (optional) object containing the following
+
+`order.id` - (optional) order id
+
+`order.otal` - (optional) sub total of all items
+
+`order.city` - (optional) city name
+
+`order.state` - (optional) 2 digit state abbreviation (US only)
+
+`order.country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
+
+`order.items` - required array of items - same object provided to `track.cart.view` event
+
+```html
+<script type="searchspring/track/order/transaction">
+    order = {
+        id: '123456',
+        total: '31.97',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'US',
+    };
+    items = [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ];
+</script>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.track.order.transaction` method
+
+```typescript
+window.tracker.track.order.transaction({
+    order: {
+        id: '123456',
+        total: '31.97',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'US',
+    },
+    items: [
+        {
+            sku: 'product123',
+            childSku: 'product123_a',
+            qty: '1',
+            price: '9.99'
+        },
+        {
+            sku: 'product456',
+            childSku: 'product456_a',
+            qty: '2',
+            price: '10.99'
+        },
+    ]
+});
+```
+
+
+### Product Click
+Tracks product click events. This event can be included within the Snap integration. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method.  
+
+```jsx
+searchController.store.results.map(result)=>{(
+    <a href={core.url} onMouseDown={(e)=>{result.track.click(e)}}>
+)}
+```
+
+Alternatively, this can also be integrated using the `ss-track-intellisuggest` and `ss-track-intellisuggest-signature` attributes.
+
+```jsx
+searchController.store.results.map(result)=>{(
+    <a href={core.url} ss-track-intellisuggest={result.attributes.intellisuggestData} ss-track-intellisuggest-signature={result.attributes.intellisuggestSignature}>
+)}
+```
+
+
+Alternatively, this can also be integrated using the `window.tracker.track.product.click` method. 
+
+The `intellisuggestData` and `intellisuggestSignature` values are returned from SearchSpring's Search API on each `result.attributes` object. An optional `href` value can also be provided. 
+
+```typescript
+window.tracker.track.product.click({
+    intellisuggestData: '37d5578e1d1646ac97701a063ba84777',
+    intellisuggestSignature: '5739a2596d3b4161b041ce1764ffa04d',
+    href: '/product123',
+});
+```
+
+
+## Cart Attribute Tracking
+
+This is not required if the above `Cart View` and `Order Transaction` tracking has not been implemented OR you are not using the `realtime` recommendations configuration. 
+
+Adding the following attributes allows for real time updates to any recommendations (disabled by default) when the cart changes.
+
+If you are using multiple custom Tracker instances with a different tracker `config.id`, attributes are namespaced by the trackers `id` (Default: `'track'`, Example: `ss-track-cart-add`)
+
+### Add to cart
+Adds product `sku` (or `childSku`) to `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
+
+```html
+<button ss-track-cart-add='product123'>Add to cart</button>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.cookies.cart.add` method
+
+```typescript
+window.tracker.cookies.cart.add(['product123'])
+```
+
+
+### Remove from cart
+Removes product `sku` (or `childSku`) from `ssCartProducts` cookie. Supports multiple skus using a comma delimiter.
+
+```html
+<button ss-track-cart-remove='product123'>Remove</button>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.cookies.cart.remove` method
+
+```typescript
+window.tracker.cookies.cart.remove(['product123'])
+```
+
+
+### Clear cart
+Clears all products currently stored in the `ssCartProducts` cookie.
+
+```html
+<button ss-track-cart-clear>Clear Cart</button>
+```
+
+Alternatively, this can also be integrated using the `window.tracker.cookies.cart.remove` method
+
+```typescript
+window.tracker.cookies.cart.clear()
 ```

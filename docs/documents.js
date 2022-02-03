@@ -115,6 +115,15 @@ var documents = [
 				type: 'markdown',
 				url: './docs/INTEGRATION.md',
 				searchable: true,
+				links: [
+					{
+						label: 'Debugging',
+						route: '/advanced-installation-debugging',
+						type: 'markdown',
+						url: './docs/DEBUGGING.md',
+						searchable: true,
+					},
+				],
 			},
 			{
 				label: 'Troubleshooting',
