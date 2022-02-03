@@ -285,28 +285,24 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							disableCollapse: true,
 							previewOnFocus: true,
 							valueProps,
-							theme: {
-								components: {
-									facetGridOptions: {
-										columns: 3,
-										onClick: onFacetOptionClick,
-									},
-									facetHierarchyOptions: {
-										hideCount: true,
-										onClick: onFacetOptionClick,
-									},
-									facetListOptions: {
-										hideCheckbox: true,
-										hideCount: true,
-										onClick: onFacetOptionClick,
-									},
-									facetPaletteOptions: {
-										hideLabel: true,
-										columns: 3,
-										onClick: onFacetOptionClick,
-									},
-								},
-							},
+						},
+						facetGridOptions: {
+							columns: 3,
+							onClick: onFacetOptionClick,
+						},
+						facetHierarchyOptions: {
+							hideCount: true,
+							onClick: onFacetOptionClick,
+						},
+						facetListOptions: {
+							hideCheckbox: true,
+							hideCount: true,
+							onClick: onFacetOptionClick,
+						},
+						facetPaletteOptions: {
+							hideLabel: true,
+							columns: 3,
+							onClick: onFacetOptionClick,
 						},
 					},
 				},
