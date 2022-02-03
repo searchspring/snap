@@ -13,9 +13,8 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, BreakpointsProps } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { BreakpointsProps } from '../../Organisms/Results';
 
 const CSS = {
 	carousel: ({ theme, vertical }) =>

@@ -12,10 +12,9 @@ import { Carousel, CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, BreakpointsProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { BreakpointsProps } from '../../Organisms/Results';
 
 const CSS = {
 	recommendation: ({ vertical }) =>
