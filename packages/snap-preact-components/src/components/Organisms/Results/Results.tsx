@@ -100,7 +100,6 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 			// inherited props
 			...defined({
 				disableStyles,
-				onClick,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -113,7 +112,6 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 			// inherited props
 			...defined({
 				disableStyles,
-				onClick,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -159,7 +157,6 @@ export interface ResultsProp extends ComponentProps {
 	gapSize?: string;
 	layout?: LayoutType;
 	breakpoints?: BreakpointsProps;
-	onClick?: (e: React.MouseEvent) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }
 

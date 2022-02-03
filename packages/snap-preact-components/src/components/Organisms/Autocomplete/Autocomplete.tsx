@@ -234,9 +234,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		resultsSlot,
 		noResultsSlot,
 		linkSlot,
-		onClickResult,
-		onClickFacetOption,
-		onClickTerm,
+		onFacetOptionClick,
+		onTermClick,
 		disableStyles,
 		className,
 		width,
@@ -286,31 +285,28 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 							disableCollapse: true,
 							previewOnFocus: true,
 							valueProps,
-							theme: deepmerge(
-								{
-									components: {
-										facetGridOptions: {
-											columns: 3,
-											onClick: onClickFacetOption,
-										},
-										facetHierarchyOptions: {
-											hideCount: true,
-											onClick: onClickFacetOption,
-										},
-										facetListOptions: {
-											hideCheckbox: true,
-											hideCount: true,
-											onClick: onClickFacetOption,
-										},
-										facetPaletteOptions: {
-											hideLabel: true,
-											columns: 3,
-											onClick: onClickFacetOption,
-										},
+							theme: {
+								components: {
+									facetGridOptions: {
+										columns: 3,
+										onClick: onFacetOptionClick,
+									},
+									facetHierarchyOptions: {
+										hideCount: true,
+										onClick: onFacetOptionClick,
+									},
+									facetListOptions: {
+										hideCheckbox: true,
+										hideCount: true,
+										onClick: onFacetOptionClick,
+									},
+									facetPaletteOptions: {
+										hideLabel: true,
+										columns: 3,
+										onClick: onFacetOptionClick,
 									},
 								},
-								{ ...props.theme }
-							),
+							},
 						},
 					},
 				},
@@ -345,7 +341,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					components: {
 						result: {
 							hideBadge: true,
-							onClick: onClickResult,
 						},
 					},
 				},
@@ -417,7 +412,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideTerms && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onClickTerm, controller })
+								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (
@@ -435,7 +430,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														})}
 													>
 														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onClickTerm && onClickTerm(e)}
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onTermClick && onTermClick(e)}
 															href={term.url.href}
 															{...valueProps}
 															onFocus={() => term.preview()}
@@ -617,7 +612,6 @@ export interface AutocompleteProps extends ComponentProps {
 	breakpoints?: BreakpointsProps;
 	controller: AutocompleteController;
 	width?: string;
-	onClickResult?: (e) => void;
-	onClickFacetOption?: (e) => void;
-	onClickTerm?: (e) => void;
+	onFacetOptionClick?: (e) => void;
+	onTermClick?: (e) => void;
 }

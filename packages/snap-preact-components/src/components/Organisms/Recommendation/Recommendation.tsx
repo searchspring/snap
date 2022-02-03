@@ -89,9 +89,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		style,
 		className,
 		vertical,
-		onNextButtonClick,
-		onPrevButtonClick,
-		onClick,
 		...additionalProps
 	} = props;
 
@@ -193,21 +190,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						prevButton={prevButton}
 						nextButton={nextButton}
 						hideButtons={hideButtons}
-						onNextButtonClick={(e) => {
-							controller.track.click(e);
-							onNextButtonClick && onNextButtonClick(e);
-						}}
-						onPrevButtonClick={(e) => {
-							controller.track.click(e);
-							onPrevButtonClick && onPrevButtonClick(e);
-						}}
+						onNextButtonClick={(e) => controller.track.click(e)}
+						onPrevButtonClick={(e) => controller.track.click(e)}
 						onClick={(swiper, e) => {
 							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
 							controller.track.click(e);
 							if (!Number.isNaN(clickedIndex)) {
 								controller.track.product.click(e, results[clickedIndex]);
 							}
-							onClick && onClick(e, results[clickedIndex]);
 						}}
 						loop={loop}
 						breakpoints={breakpoints}
@@ -236,9 +226,6 @@ export interface RecommendationProps extends ComponentProps {
 	controller: RecommendationController;
 	children?: JSX.Element[];
 	vertical?: boolean;
-	onClick?: (e: React.MouseEvent, result: any) => void;
-	onNextButtonClick: (e: React.MouseEvent) => void;
-	onPrevButtonClick: (e: React.MouseEvent) => void;
 }
 
 interface RecommendationSubProps {
