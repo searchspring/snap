@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { BreakpointsProps, BreakpointsEntry } from '../components/Organisms/Results/Results';
+import { BreakpointsProps, BreakpointsEntry } from '../types';
 
 export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry {
 	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;

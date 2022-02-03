@@ -10,12 +10,12 @@ import deepmerge from 'deepmerge';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProp, BreakpointsProps } from '../../Organisms/Results';
+import { Results, ResultsProp } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
+import { BannerType, ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
