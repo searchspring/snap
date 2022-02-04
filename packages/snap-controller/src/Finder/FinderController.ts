@@ -21,7 +21,7 @@ export class FinderController extends AbstractController {
 	constructor(
 		config: FinderControllerConfig,
 		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
-		context: ContextVariables
+		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 

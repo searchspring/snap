@@ -49,7 +49,7 @@ export class SearchController extends AbstractController {
 	constructor(
 		config: SearchControllerConfig,
 		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
-		context: ContextVariables
+		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 

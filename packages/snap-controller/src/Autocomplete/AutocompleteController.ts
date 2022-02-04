@@ -53,7 +53,7 @@ export class AutocompleteController extends AbstractController {
 	constructor(
 		config: AutocompleteControllerConfig,
 		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
-		context: ContextVariables
+		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
