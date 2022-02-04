@@ -41,15 +41,20 @@ export class API {
 		}
 
 		const response = await this.fetchApi(url, init);
-		const responseJSON = await response.json();
 		if (response.status >= 200 && response.status < 300) {
-			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
-			this.retryDelay = 1000;
-			if (cacheKey) {
-				// save in the cache before returning
-				this.cache.set(cacheKey, responseJSON);
+			try {
+				const responseJSON = await response.json();
+				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+				this.retryDelay = 1000;
+				if (cacheKey) {
+					// save in the cache before returning
+					this.cache.set(cacheKey, responseJSON);
+				}
+				return responseJSON;
+			} catch (e) {
+				// proceed if the response is not JSON (ie. preflightCache)
+				return;
 			}
-			return responseJSON;
 		} else if (response.status == 429) {
 			if (this.retryCount < this.configuration.maxRetry) {
 				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry

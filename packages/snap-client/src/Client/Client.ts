@@ -10,6 +10,7 @@ import {
 	RecommendCombinedResponseModel,
 	ApiConfiguration,
 	ProfileRequestModel,
+	PreflightRequestModel,
 } from './apis';
 
 import type { ClientGlobals, ClientConfig } from '../types';
@@ -168,5 +169,21 @@ export class Client {
 			...profile,
 			results: recommendations[0].results,
 		};
+	}
+
+	async preflight(params: PreflightRequestModel): Promise<Response> {
+		const { userId, siteId, shopper, cart, lastViewed } = params;
+		if (!userId || !siteId) {
+			throw 'preflight is missing userId or siteId';
+		}
+		const preflightParams: PreflightRequestModel = {
+			userId,
+			siteId,
+			shopper,
+			cart,
+			lastViewed,
+		};
+
+		return this.requesters.recommend.preflightCache(preflightParams);
 	}
 }

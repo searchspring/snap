@@ -13,7 +13,7 @@ import type { SnapControllerServices, SnapRecommendationControllerConfig } from 
 
 configureMobx({ useProxies: 'never' });
 
-export default (config: SnapRecommendationControllerConfig, services?: SnapControllerServices): RecommendationController => {
+export default (config: SnapRecommendationControllerConfig, client: Client, services?: SnapControllerServices): RecommendationController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker).detach(true);
 
 	const cntrlr = new RecommendationController(config.controller, {
@@ -23,7 +23,7 @@ export default (config: SnapRecommendationControllerConfig, services?: SnapContr
 		eventManager: services?.eventManager || new EventManager(),
 		profiler: services?.profiler || new Profiler(),
 		logger: services?.logger || new Logger(),
-		tracker: services?.tracker || new Tracker(config.client.globals),
+		tracker: services?.tracker || new Tracker(config.client.globals, client),
 	});
 
 	return cntrlr;

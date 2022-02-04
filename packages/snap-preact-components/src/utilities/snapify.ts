@@ -9,11 +9,13 @@ import type {
 	AutocompleteControllerConfig,
 	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
+import { Client } from '@searchspring/snap-client';
 
 const controllers = {};
-const client = {
+const clientConfig = {
 	globals: { siteId: '8uyt2m' },
 };
+const client = new Client(clientConfig.globals, {});
 export class Snapify {
 	static recommendation(config: RecommendationControllerConfig): RecommendationController {
 		const id = config.id;
@@ -21,7 +23,10 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController({ client, controller: config }));
+		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController(
+			{ client: clientConfig, controller: config },
+			client
+		));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.log.debug('controller', controller);
@@ -39,7 +44,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client, controller: config }));
+		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client: clientConfig, controller: config }, client));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
 			controller.log.debug('controller', controller);
@@ -58,7 +63,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: SearchController = (controllers[id] = createSearchController({ client, controller: config }));
+		const cntrlr: SearchController = (controllers[id] = createSearchController({ client: clientConfig, controller: config }, client));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);

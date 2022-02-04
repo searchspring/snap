@@ -22,6 +22,7 @@ import {
 	Product,
 	TrackerConfig,
 } from './types';
+import type { Client } from '@searchspring/snap-client';
 
 const BATCH_TIMEOUT = 150;
 const USERID_COOKIE_NAME = 'ssUserId';
@@ -41,6 +42,7 @@ const defaultConfig: TrackerConfig = {
 
 export class Tracker {
 	globals: TrackerGlobals;
+	client: Client;
 	localStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
@@ -48,7 +50,7 @@ export class Tracker {
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
+	constructor(globals: TrackerGlobals, client: Client, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
@@ -56,6 +58,7 @@ export class Tracker {
 		this.config = deepmerge(defaultConfig, config || {});
 
 		this.globals = globals;
+		this.client = client;
 
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
@@ -156,6 +159,16 @@ export class Tracker {
 		});
 	}
 
+	sendPreflight = (): void => {
+		this.client.preflight({
+			userId: this.getUserId(),
+			siteId: this.context.website.trackingCode,
+			shopper: this.getShopperId(),
+			cart: this.cookies.cart.get().join(','), // TODO: remove join once API supports multiple same params, also update PreflightRequestModel
+			lastViewed: this.cookies.viewed.get().join(','),
+		});
+	};
+
 	track: TrackMethods = {
 		event: (payload: BeaconPayload): BeaconEvent => {
 			const event: BeaconPayload = {
@@ -198,6 +211,8 @@ export class Tracker {
 					// user's logged in id has changed, update shopperId cookie send login event
 					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 					this.context.shopperId = data.id;
+
+					this.sendPreflight();
 
 					const payload = {
 						type: BeaconType.LOGIN,
@@ -243,6 +258,7 @@ export class Tracker {
 					const lastViewedProducts = this.cookies.viewed.get();
 					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
 					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+					this.sendPreflight();
 				}
 
 				// legacy tracking
@@ -483,6 +499,8 @@ export class Tracker {
 					const itemsToAdd = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					this.sendPreflight();
 				}
 			},
 			remove: (items: string[]): void => {
