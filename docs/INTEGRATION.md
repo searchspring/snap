@@ -26,24 +26,43 @@ The bundle should be included in the `<head>` tag, ideally near the top of the n
 
 ```
 
-## Context variables
+## Bundle Context variables
 
-Context variables are conditionally rendered within the script's innerHTML. They provide context for Snap and can be retrieved using [getContext](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/getContext)
+Bundle context variables are conditionally rendered within the `bundle.js` script's innerHTML. They provide context for Snap and can be retrieved using [getContext](https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/getContext)
 
 The innerHTML of the script MUST only contain variable assignments without `var`, `let`, or `const`. Each declaration should end with a semi-colon to ensure minification does not impact the functions ability to parse the innerHTML.
 
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
-	product = 'C-AD-W1-1869P';
 	shopper = {
 		id: 'snapdev',
 		cart: [
-			{ sku: 'product_1' }
+			{
+                sku: 'product123', 
+                childSku: 'product123_a' ,
+            }
 		]
 	};
-	options = {
+</script>
+```
+
+| Option | Value | Page | Description |
+|---|---|:---:|---|
+| shopper.id | logged in user unique identifier | all | required for personalization functionallity |
+| shopper.cart | Array of cart objects, each object in the array can contain `sku` and/or `childSku` | all | current cart contents, required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
+
+
+## Recommendation Context variables
+Similar to the above context variables however these do not apply globally. They instead reside in a profile script innterHTML.
+
+```html
+<script type="searchspring/recommend" profile="similar">
+    product = "C-AD-W1-1869P";
+    options = {
 		siteId: 'abc123',
-		categories: ['righteous', 'awesome', 'radical']
+		categories: ['righteous', 'awesome', 'radical'],
+        branch: 'production',
+        batched: true
 	};
 </script>
 ```
@@ -51,13 +70,10 @@ The innerHTML of the script MUST only contain variable assignments without `var`
 | Option | Value | Page | Description |
 |---|---|:---:|---|
 | product | current product sku | product detail page | required if product detail pages contain recommendations |
-| shopper.id | logged in user unique identifier | all | required for personalization functionallity |
-| shopper.cart | current cart contents | all | required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |
-| options.categories | category path | recommendations | optional category path |
-| branch | template branch overwrite | recommendations | optional branch overwrite for recommendations template |
-| batched | boolean (default: `true`) | recommendations | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config]((https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)) |
-
+| options.categories | category path | all | optional category path |
+| options.branch | template branch overwrite | all | optional branch overwrite for recommendations template |
+| options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config]((https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)) |
 
 ### Background Filters
 Background filters allow a page to be refined without displaying the active filter to the end-user. This is primarily used for category pages, although can also be used for custom functionality such as restricting visibility of products to user groups. The filter value is retrieved from a context variable and applied as a background filter within the Snap config object. 
@@ -283,7 +299,7 @@ Tracks product click events. This event can be included within the Snap integrat
 
 ```jsx
 searchController.store.results.map(result)=>{(
-    <a href={core.url} onMouseDown={(e)=>{result.track.click(e)}}>
+    <a href={core.url} onMouseDown={(e)=>{searchController.track.product.click(e, result)}}>
 )}
 ```
 
