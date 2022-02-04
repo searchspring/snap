@@ -7,7 +7,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent, ContextVariables } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -39,8 +39,12 @@ export class RecommendationController extends AbstractController {
 		product: {},
 	};
 
-	constructor(config: RecommendationControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
+	constructor(
+		config: RecommendationControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context: ContextVariables
+	) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
 		if (!config.tag) {
 			throw new Error(`Invalid config passed to RecommendationController. The "tag" attribute is required.`);

@@ -10,7 +10,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
-import type { ControllerServices, ControllerConfig, Attachments } from '../types';
+import type { ControllerServices, ControllerConfig, Attachments, ContextVariables } from '../types';
 
 const SS_DEV_COOKIE = 'ssDev';
 export abstract class AbstractController {
@@ -24,6 +24,8 @@ export abstract class AbstractController {
 	public profiler: Profiler;
 	public log: Logger;
 	public tracker: Tracker;
+	public context: ContextVariables;
+
 	public targeters: {
 		[key: string]: DomTargeter;
 	} = {};
@@ -35,7 +37,11 @@ export abstract class AbstractController {
 		return this._initialized;
 	}
 
-	constructor(config: ControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
+	constructor(
+		config: ControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context: ContextVariables = {}
+	) {
 		if (typeof config != 'object' || typeof config.id != 'string' || !config.id.match(/^[a-zA-Z0-9_-]*$/)) {
 			throw new Error(`Invalid config passed to controller. The "id" attribute must be an alphanumeric string.`);
 		}
@@ -93,6 +99,7 @@ export abstract class AbstractController {
 		this.profiler = profiler;
 		this.log = logger;
 		this.tracker = tracker;
+		this.context = context;
 
 		// configure the logger
 		this.log.setNamespace(this.config.id);

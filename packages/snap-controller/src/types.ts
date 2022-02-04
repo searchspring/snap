@@ -63,6 +63,15 @@ export type Attachments = {
 	[any: string]: unknown;
 };
 
+export type ContextVariables = {
+	shopper?: {
+		id: string;
+		cart?: string[];
+		[variable: string]: any;
+	};
+	[variable: string]: any;
+};
+
 export type ControllerConfig = StoreConfig & Attachments;
 
 // Search Config
