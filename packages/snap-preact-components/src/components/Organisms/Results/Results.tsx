@@ -89,7 +89,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		};
 	}
 
-	const { disableStyles, className, layout, style, onClick, controller } = props;
+	const { disableStyles, className, layout, style, controller } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
