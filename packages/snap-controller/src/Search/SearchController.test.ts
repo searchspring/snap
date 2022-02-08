@@ -31,14 +31,15 @@ describe('Search Controller', () => {
 		searchConfig.id = uuidv4().split('-').join('');
 	});
 	it('has results after search method called', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 		const searchfn = jest.spyOn(controller, 'search');
 		const initfn = jest.spyOn(controller, 'init');
@@ -66,15 +67,15 @@ describe('Search Controller', () => {
 
 	it('tests merchandising redirect setting', async () => {
 		// settings.redirects.merchandising is true by default
-
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -95,15 +96,15 @@ describe('Search Controller', () => {
 
 	it('tests merchandising redirect setting with single result', async () => {
 		// settings.redirects.merchandising is true by default
-
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -131,15 +132,15 @@ describe('Search Controller', () => {
 				},
 			},
 		};
-
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		expect(controller.config.settings.redirects.merchandising).toBe(false);
@@ -172,15 +173,15 @@ describe('Search Controller', () => {
 				},
 			},
 		};
-
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		expect(controller.config.settings.infinite.backfill).toBe(searchConfig.settings.infinite.backfill);
@@ -193,14 +194,15 @@ describe('Search Controller', () => {
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware err handled`, async function () {
+			const client = new MockClient(globals, {});
 			const controller = new SearchController(searchConfig, {
-				client: new MockClient(globals, {}),
+				client,
 				store: new SearchStore(searchConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 
 			controller.on(event, () => false); // return false to stop middleware
@@ -220,14 +222,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set landingPage param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 		const landingPageCampaign = '35x12-50r20-mud-tires';
 		controller.urlManager = controller.urlManager.set('tag', landingPageCampaign);
@@ -235,14 +238,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set page param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		const page = 2;
@@ -251,14 +255,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set pageSize param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		const pageSize = 72;
@@ -267,14 +272,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set oq param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		const oq = 'wheel';
@@ -283,14 +289,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set rq param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		const rq = 'wheel';
@@ -299,14 +306,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set sort param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		const badsort = { price: 'ASC' };
@@ -319,14 +327,15 @@ describe('Search Controller', () => {
 	});
 
 	it('can set filter param', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.urlManager = controller.urlManager.set('filter', { color: 'blue' });

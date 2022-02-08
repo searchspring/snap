@@ -48,14 +48,15 @@ describe('Finder Controller', () => {
 
 	describe('Hierarchy Type', () => {
 		it('can make selection', async () => {
+			const client = new MockClient(globals, { meta: { prefetch: false } });
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
+				client,
 				store: new FinderStore(finderHierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 			controller.client.mockDataFile = 'finder.include.ss_accessory';
 			controller.init();
@@ -86,14 +87,15 @@ describe('Finder Controller', () => {
 		const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 		events.forEach((event) => {
 			it(`tests ${event} middleware err handled`, async () => {
+				const client = new MockClient(globals, { meta: { prefetch: false } });
 				const controller = new FinderController(finderHierarchyConfig, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client,
 					store: new FinderStore(finderHierarchyConfig, services),
 					urlManager,
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
 					logger: new Logger(),
-					tracker: new Tracker(globals),
+					tracker: new Tracker(globals, client),
 				});
 
 				controller.on(event, () => false); // return false to stop middleware
@@ -108,14 +110,15 @@ describe('Finder Controller', () => {
 		});
 
 		it('can call reset method', async () => {
+			const client = new MockClient(globals, {});
 			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, {}),
+				client,
 				store: new FinderStore(finderHierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 			controller.init();
 			await controller.search();
@@ -149,14 +152,15 @@ describe('Finder Controller', () => {
 
 	describe('Non-hierarchy Type', () => {
 		it('Non-hierarchy type can make selection', async () => {
+			const client = new MockClient(globals, { meta: { prefetch: false } });
 			const controller = new FinderController(finderNonhierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
+				client,
 				store: new FinderStore(finderNonhierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 			controller.init();
 			await controller.search();
@@ -182,14 +186,15 @@ describe('Finder Controller', () => {
 		const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 		events.forEach((event) => {
 			it(`tests ${event} middleware err handled`, async () => {
+				const client = new MockClient(globals, { meta: { prefetch: false } });
 				const controller = new FinderController(finderNonhierarchyConfig, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client,
 					store: new FinderStore(finderNonhierarchyConfig, services),
 					urlManager,
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
 					logger: new Logger(),
-					tracker: new Tracker(globals),
+					tracker: new Tracker(globals, client),
 				});
 
 				controller.on(event, () => false); // return false to stop middleware
@@ -204,14 +209,15 @@ describe('Finder Controller', () => {
 		});
 
 		it('can call reset method', async () => {
+			const client = new MockClient(globals, { meta: { prefetch: false } });
 			const controller = new FinderController(finderNonhierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
+				client,
 				store: new FinderStore(finderNonhierarchyConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 			controller.init();
 			await controller.search();

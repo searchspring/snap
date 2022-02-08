@@ -33,6 +33,7 @@ let acConfig = {
 const urlManager = new UrlManager(new QueryStringTranslator({ queryParameter: 'search_query' }), reactLinker);
 const services = { urlManager };
 const globals = { siteId: 'ga9kq2' }; //TODO: change to 8uyt2m (snap.searchspring.io)
+const client = new MockClient(globals, {});
 const badArgs = [
 	{
 		client: {},
@@ -41,16 +42,16 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, {}),
 	},
 	{
-		client: new MockClient(globals, {}),
+		client,
 		store: {},
 		urlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -59,7 +60,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -68,7 +69,7 @@ const badArgs = [
 		eventManager: { events: null, fire: null, on: null },
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -83,7 +84,7 @@ const badArgs = [
 		},
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -92,7 +93,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: {},
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -106,7 +107,7 @@ const badArgs = [
 			create: null,
 		},
 		logger: new Logger(),
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -115,7 +116,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: {},
-		tracker: new Tracker(globals),
+		tracker: new Tracker(globals, client),
 	},
 ];
 
@@ -133,14 +134,15 @@ describe('Autocomplete Controller', () => {
 	});
 
 	it('has results after search method called', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -157,14 +159,15 @@ describe('Autocomplete Controller', () => {
 	});
 
 	it('has no results if query is blank', async () => {
+		const client = new MockClient(globals, {});
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -179,15 +182,15 @@ describe('Autocomplete Controller', () => {
 
 	it('sets query from urlManager (settings.initializeFromUrl)', async () => {
 		// settings.initializeFromUrl is true by default
-
+		const client = new MockClient(globals, {});
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -203,15 +206,15 @@ describe('Autocomplete Controller', () => {
 
 	it('trims facets (settings.facets.trim)', async () => {
 		// settings.facets.trim is true by default
-
+		const client = new MockClient(globals, {});
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.init();
@@ -237,14 +240,15 @@ describe('Autocomplete Controller', () => {
 		inputEl.setAttribute('id', 'search_query');
 		document.body.appendChild(inputEl);
 
+		const client = new MockClient(globals, {});
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		await controller.init();

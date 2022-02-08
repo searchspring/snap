@@ -33,29 +33,30 @@ describe('Recommendation Controller', () => {
 				id: recommendConfig.id,
 				tag: undefined,
 			};
-
+			const client = new MockClient(globals, {});
 			// @ts-ignore
 			const controller = new RecommendationController(configWithoutTag, {
-				client: new MockClient(globals, {}),
+				client,
 				store: new RecommendationStore(configWithoutTag, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 		}).toThrow();
 	});
 
 	it(`adds a test param when in development environment`, async function () {
+		const client = new MockClient(globals, {});
 		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
+			client,
 			store: new RecommendationStore(recommendConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 
 		controller.environment = LogMode.DEVELOPMENT;
@@ -68,14 +69,15 @@ describe('Recommendation Controller', () => {
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware cancellation handled`, async function () {
+			const client = new MockClient(globals, {});
 			const controller = new RecommendationController(recommendConfig, {
-				client: new MockClient(globals, {}),
+				client,
 				store: new RecommendationStore(recommendConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 
 			const spy = jest.spyOn(console, 'log');
@@ -96,14 +98,15 @@ describe('Recommendation Controller', () => {
 
 	events.forEach((event) => {
 		it(`tests ${event} middleware error handled`, async function () {
+			const client = new MockClient(globals, {});
 			const controller = new RecommendationController(recommendConfig, {
-				client: new MockClient(globals, {}),
+				client,
 				store: new RecommendationStore(recommendConfig, services),
 				urlManager,
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals),
+				tracker: new Tracker(globals, client),
 			});
 
 			const spy = jest.spyOn(controller.log, 'error');

@@ -22,7 +22,6 @@ import {
 	Product,
 	TrackerConfig,
 } from './types';
-import type { Client } from '@searchspring/snap-client';
 
 const BATCH_TIMEOUT = 150;
 const USERID_COOKIE_NAME = 'ssUserId';
@@ -42,7 +41,7 @@ const defaultConfig: TrackerConfig = {
 
 export class Tracker {
 	globals: TrackerGlobals;
-	client: Client;
+	client: any;
 	localStorage: StorageStore;
 	context: BeaconContext;
 	isSending: number;
@@ -50,7 +49,7 @@ export class Tracker {
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals, client: Client, config?: TrackerConfig) {
+	constructor(globals: TrackerGlobals, client: any, config?: TrackerConfig) {
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
@@ -539,10 +538,7 @@ export class Tracker {
 		clearTimeout(this.isSending);
 		this.isSending = window.setTimeout(() => {
 			if (events.length) {
-				const xhr = new XMLHttpRequest();
-				xhr.open('POST', 'https://beacon.searchspring.io/beacon');
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.send(JSON.stringify(events.length == 1 ? events[0] : events));
+				this.client.beacon(events);
 			}
 			this.localStorage.set(LOCALSTORAGE_BEACON_POOL_NAME, JSON.stringify([]));
 		}, BATCH_TIMEOUT);

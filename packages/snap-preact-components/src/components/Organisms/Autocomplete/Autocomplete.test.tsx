@@ -5,7 +5,7 @@ import { render } from '@testing-library/preact';
 
 import { Autocomplete } from '../../Organisms/Autocomplete/Autocomplete';
 import { createAutocompleteController } from '@searchspring/snap-preact';
-
+import { Client } from '@searchspring/snap-client';
 const client = {
 	globals: {
 		siteId: '8uyt2m',
@@ -33,7 +33,7 @@ describe('Autocomplete Component', () => {
 		expect(input).toBeInTheDocument();
 	});
 	it('does not render if input have not been focused', () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = createAutocompleteController({ client, controller: config }, new Client(client.globals, {}));
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -45,7 +45,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('renders after input has been focused', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = createAutocompleteController({ client, controller: config }, new Client(client.globals, {}));
 		const args = {
 			controller,
 			input: controller.config.selector,

@@ -71,7 +71,7 @@ export class API {
 	private createFetchParams(context: RequestOpts) {
 		// grab siteID out of context to generate apiHost fo URL
 		const siteId = context?.body?.siteId || context?.query?.siteId;
-		if (!siteId) {
+		if (!siteId && !this.configuration.origin) {
 			throw new Error(`Request failed. Missing "siteId" parameter.`);
 		}
 

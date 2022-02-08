@@ -3,6 +3,7 @@ import {
 	HybridAPI,
 	SuggestAPI,
 	RecommendAPI,
+	BeaconAPI,
 	TrendingRequestModel,
 	TrendingResponseModel,
 	RecommendRequestModel,
@@ -52,6 +53,11 @@ const defaultConfig: ClientConfig = {
 			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
+	beacon: {
+		api: {
+			origin: 'https://beacon.searchspring.io',
+		},
+	},
 };
 
 export class Client {
@@ -63,6 +69,7 @@ export class Client {
 		search: HybridAPI;
 		recommend: RecommendAPI;
 		suggest: SuggestAPI;
+		beacon: BeaconAPI;
 	};
 
 	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
@@ -102,6 +109,12 @@ export class Client {
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
 					cacheSettings: this.config.suggest.cache,
+				})
+			),
+			beacon: new BeaconAPI(
+				new ApiConfiguration({
+					origin: this.config.beacon?.api?.origin,
+					cacheSettings: this.config.beacon.cache,
 				})
 			),
 		};
@@ -185,5 +198,9 @@ export class Client {
 		};
 
 		return this.requesters.recommend.preflightCache(preflightParams);
+	}
+
+	beacon(events: Array<any>): Promise<Response> {
+		return this.requesters.beacon.sendEvents(events);
 	}
 }

@@ -57,14 +57,15 @@ describe('Network Cache', () => {
 		searchConfig.id = uuidv4().split('-').join('');
 	});
 	it('caches search responses and uses them', async () => {
+		const client = new Client(globals);
 		const controller = new SearchController(searchConfig, {
-			client: new Client(globals),
+			client,
 			store: new SearchStore(searchConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals),
+			tracker: new Tracker(globals, client),
 		});
 		//no cache initially
 		expect(mockStorage['ss-networkcache']).toBeUndefined();

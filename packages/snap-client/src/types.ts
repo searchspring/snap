@@ -19,6 +19,10 @@ export type ClientConfig = {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
+	beacon?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
 };
 
 export type CacheConfig = {
