@@ -66,7 +66,7 @@ export type RecommendCombinedRequestModel = {
 export type PreflightRequestModel = {
 	userId: string;
 	siteId: string;
-	shopper: string;
+	shopper?: string;
 	cart?: string;
 	lastViewed?: string;
 };

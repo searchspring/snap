@@ -189,10 +189,16 @@ export class Client {
 		const preflightParams: PreflightRequestModel = {
 			userId,
 			siteId,
-			shopper,
-			cart,
-			lastViewed,
 		};
+		if (shopper) {
+			preflightParams.shopper = shopper;
+		}
+		if (cart) {
+			preflightParams.cart = cart;
+		}
+		if (lastViewed) {
+			preflightParams.lastViewed = lastViewed;
+		}
 
 		return this.requesters.recommend.preflightCache(preflightParams);
 	}

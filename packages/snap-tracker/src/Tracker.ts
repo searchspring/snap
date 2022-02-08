@@ -165,7 +165,7 @@ export class Tracker {
 		const cart = this.cookies.cart.get().join(','); // TODO: remove join once API supports multiple same params, also update PreflightRequestModel
 		const lastViewed = this.cookies.viewed.get().join(','); //
 
-		if (shopper && (cart || lastViewed)) {
+		if (userId && siteId && (cart || lastViewed)) {
 			this.client.preflight({
 				userId,
 				siteId,
@@ -265,7 +265,9 @@ export class Tracker {
 					const lastViewedProducts = this.cookies.viewed.get();
 					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
 					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
-					this.sendPreflight();
+					if (!lastViewedProducts.includes(sku)) {
+						this.sendPreflight();
+					}
 				}
 
 				// legacy tracking
@@ -507,7 +509,10 @@ export class Tracker {
 					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
 
-					this.sendPreflight();
+					const itemsHaveChanged = currentCartItems.filter((item) => itemsToAdd.includes(item)).length !== itemsToAdd.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			remove: (items: string[]): void => {
