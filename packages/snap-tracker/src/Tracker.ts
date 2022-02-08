@@ -159,13 +159,21 @@ export class Tracker {
 	}
 
 	sendPreflight = (): void => {
-		this.client.preflight({
-			userId: this.getUserId(),
-			siteId: this.context.website.trackingCode,
-			shopper: this.getShopperId(),
-			cart: this.cookies.cart.get().join(','), // TODO: remove join once API supports multiple same params, also update PreflightRequestModel
-			lastViewed: this.cookies.viewed.get().join(','),
-		});
+		const userId = this.getUserId();
+		const siteId = this.context.website.trackingCode;
+		const shopper = this.getShopperId();
+		const cart = this.cookies.cart.get().join(','); // TODO: remove join once API supports multiple same params, also update PreflightRequestModel
+		const lastViewed = this.cookies.viewed.get().join(','); //
+
+		if (shopper && (cart || lastViewed)) {
+			this.client.preflight({
+				userId,
+				siteId,
+				shopper,
+				cart,
+				lastViewed,
+			});
+		}
 	};
 
 	track: TrackMethods = {

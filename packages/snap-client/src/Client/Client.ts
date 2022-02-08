@@ -186,9 +186,6 @@ export class Client {
 
 	async preflight(params: PreflightRequestModel): Promise<Response> {
 		const { userId, siteId, shopper, cart, lastViewed } = params;
-		if (!userId || !siteId) {
-			throw 'preflight is missing userId or siteId';
-		}
 		const preflightParams: PreflightRequestModel = {
 			userId,
 			siteId,

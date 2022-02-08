@@ -28,7 +28,7 @@ describe('Infinite Setting Test', () => {
 			cy.get('.ss__result').should('have.length', resultsPerPage);
 
 			// click next page, results should be appended
-			cy.get('.ss__pagination__page--next').first().click();
+			cy.get('.ss__pagination__page--next').first().click({ force: true });
 			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 2);
 				expect(store.pagination.begin).to.equal(1);
