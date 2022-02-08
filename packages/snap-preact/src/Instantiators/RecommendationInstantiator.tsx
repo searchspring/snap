@@ -95,7 +95,10 @@ export class RecommendationInstantiator {
 
 				/*
 					type instantiatorContext = {
-						shopper?: string;
+						shopper?: {
+							id?: string;
+							cart?: Array<{ sku: string; }>;
+						};
 						shopperId?: string;
 						product?: string;
 						seed?: string;
@@ -110,7 +113,7 @@ export class RecommendationInstantiator {
 				*/
 
 				if (shopper || shopperId) {
-					globals.shopper = shopper || shopperId;
+					globals.shopper = shopper?.id || shopperId;
 				}
 				if (product || seed) {
 					globals.product = product || seed;
