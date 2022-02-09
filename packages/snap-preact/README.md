@@ -218,6 +218,7 @@ type ExtendedTarget = {
 
 `url` - optional `UrlTranslator` config object to be used with the `UrlManager` for this controller
 
+`context` - optional `Context` object to be used to set a controller specific context. Defaults to the global context, if no context prop is provided. 
 
 An example creating a SearchController:
 
@@ -226,6 +227,7 @@ const config = {
 	controllers: {
 		search: [
 			{
+				context: SearchContext,
 				config: {
 					id: 'search',
 				},
