@@ -10,7 +10,7 @@ import type {
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
 } from '@searchspring/snap-store-mobx';
-import type { Tracker } from '@searchspring/snap-tracker';
+import type { Tracker, ProductViewEvent } from '@searchspring/snap-tracker';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
@@ -66,7 +66,7 @@ export type Attachments = {
 export type ContextVariables = {
 	shopper?: {
 		id: string;
-		cart?: string[];
+		cart?: ProductViewEvent[];
 		[variable: string]: any;
 	};
 	[variable: string]: any;

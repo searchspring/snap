@@ -17,6 +17,7 @@ import type {
 	FinderControllerConfig,
 	RecommendationControllerConfig,
 	ControllerConfigs,
+	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
@@ -37,15 +38,6 @@ type ExtendedTarget = Target & {
 	props?: unknown;
 	onTarget?: OnTarget;
 	prefetch?: boolean;
-};
-
-type ContextVariables = {
-	shopper?: {
-		id: string;
-		cart?: Product[];
-		[variable: string]: any;
-	};
-	[variable: string]: any;
 };
 
 export type SnapConfig = {
