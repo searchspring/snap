@@ -57,31 +57,32 @@ Object required for all controllers
 export type ClientConfig = {
   meta?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheConfig;
 	};
 	recommend?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheConfig;
 	};
 	suggest?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheConfig;
 	};
 };
 
-export type CacheConfig = {
+export type CacheSettingsConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;
 	purgeable?: boolean;
+	cache?: { [key: string]: Response };
 };
 
 export type SnapApiConfig = {
@@ -96,7 +97,7 @@ Snap Client is a dependency of Snap Controller and it is recommended to use the 
 
 
 ## Cache usage
-Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cache`. Settings include: 
+Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cacheSettings`. Settings include: 
 
   `enabled`: to opt out - Defaults to `true`, 
 
@@ -105,6 +106,10 @@ Each requester in the Snap Client has its own cache settings, which can be confi
   `maxSize`: to adjust the maximum size of the cache allowed to be stored in localStorage (in kb - Defaults to `200`,
 
   `purgeable`: to allow auto purging of the requests from localstorage when maxSize is hit, based on time remaining to expiration.  - Defaults to `true` with the exception of `meta`,
+
+  `cache`: to allow preload the cache. This is primarily used to Email Recommendations.
+
+
 
 
 ## Standalone usage

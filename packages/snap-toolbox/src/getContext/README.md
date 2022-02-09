@@ -72,3 +72,5 @@ const context = getContext(['product', 'shopper', 'options'], scriptTag);
 ```
 
 Note: `snap-preact` does automatic shopper login tracking if the context is passed to it with a `shopper.id`.
+
+Note: `snap-preact` automatically gets the context if no context is passed in the config. However it will only get shopper and config context variables.
