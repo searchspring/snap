@@ -1,31 +1,50 @@
+export type ContextVariables = {
+	shopper?: {
+		id: string;
+		cart?: any[];
+		[variable: string]: any;
+	};
+	config?: {
+		client?: {
+			[endpoint: string]: {
+				cacheSettings?: {
+					[key: string]: any;
+				};
+			};
+		};
+	};
+	[variable: string]: any;
+};
+
 export type ClientConfig = {
 	meta?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheSettingsConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheSettingsConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheSettingsConfig;
 	};
 	recommend?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheSettingsConfig;
 	};
 	suggest?: {
 		api?: SnapApiConfig;
-		cache?: CacheConfig;
+		cacheSettings?: CacheSettingsConfig;
 	};
 };
 
-export type CacheConfig = {
+export type CacheSettingsConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;
 	purgeable?: boolean;
+	cache?: { [key: string]: Response };
 };
 
 export type CacheEntry = {

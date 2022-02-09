@@ -1,6 +1,6 @@
 import { fibonacci } from '../utils/fibonacci';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
-import { CacheConfig } from '../../types';
+import { CacheSettingsConfig } from '../../types';
 
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
@@ -109,7 +109,7 @@ export interface ApiConfigurationParameters {
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 	maxRetry?: number;
-	cacheSettings?: CacheConfig;
+	cacheSettings?: CacheSettingsConfig;
 }
 
 export class ApiConfiguration {
@@ -119,7 +119,7 @@ export class ApiConfiguration {
 		}
 	}
 
-	get cacheSettings(): CacheConfig {
+	get cacheSettings(): CacheSettingsConfig {
 		return this.configuration.cacheSettings;
 	}
 

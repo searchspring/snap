@@ -39,11 +39,14 @@ type ExtendedTarget = Target & {
 	prefetch?: boolean;
 };
 
-type ContextVariables = {
+export type ContextVariables = {
 	shopper?: {
 		id: string;
 		cart?: Product[];
 		[variable: string]: any;
+	};
+	config?: {
+		client?: ClientConfig;
 	};
 	[variable: string]: any;
 };
@@ -170,7 +173,9 @@ export class Snap {
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
-		this.client = new Client(this.config.client.globals, this.config.client.config);
+
+		const mergedConfig: ClientConfig = { ...this.config.client.config, ...this.config.context?.config?.client };
+		this.client = new Client(this.config.client.globals, mergedConfig);
 		this.tracker = new Tracker(this.config.client.globals);
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};

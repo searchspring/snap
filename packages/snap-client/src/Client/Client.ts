@@ -27,7 +27,7 @@ import deepmerge from 'deepmerge';
 
 const defaultConfig: ClientConfig = {
 	meta: {
-		cache: {
+		cacheSettings: {
 			purgeable: false,
 		},
 	},
@@ -76,31 +76,31 @@ export class Client {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.autocomplete?.api?.origin,
-					cacheSettings: this.config.autocomplete.cache,
+					cacheSettings: this.config.autocomplete.cacheSettings,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.meta?.api?.origin,
-					cacheSettings: this.config.meta.cache,
+					cacheSettings: this.config.meta.cacheSettings,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					origin: this.config.recommend?.api?.origin,
-					cacheSettings: this.config.recommend.cache,
+					cacheSettings: this.config.recommend.cacheSettings,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.search?.api?.origin,
-					cacheSettings: this.config.search.cache,
+					cacheSettings: this.config.search.cacheSettings,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
-					cacheSettings: this.config.suggest.cache,
+					cacheSettings: this.config.suggest.cacheSettings,
 				})
 			),
 		};
