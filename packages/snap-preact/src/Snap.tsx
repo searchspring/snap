@@ -4,6 +4,7 @@ import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { getContext } from '@searchspring/snap-toolbox';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -169,6 +170,10 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
+		//get default context info if no context is passed in
+		if (!this.config.context) {
+			this.config.context = getContext();
+		}
 		this.logger = new Logger('Snap Preact ');
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);

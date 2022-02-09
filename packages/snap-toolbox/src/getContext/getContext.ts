@@ -2,7 +2,7 @@ type ContextVariables = {
 	[variable: string]: any;
 };
 
-export function getContext(evaluate: string[], script?: HTMLScriptElement | string): ContextVariables {
+export function getContext(evaluate: string[] = [], script?: HTMLScriptElement | string): ContextVariables {
 	if (!script || typeof script === 'string') {
 		const scripts = Array.from(document.querySelectorAll((script as string) || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
 
@@ -31,6 +31,14 @@ export function getContext(evaluate: string[], script?: HTMLScriptElement | stri
 
 	if ((evaluate && !Array.isArray(evaluate)) || (evaluate && !evaluate.reduce((accu, name) => accu && typeof name === 'string', true))) {
 		throw new Error('getContext: first parameter must be an array of strings');
+	}
+
+	//always grab config && shopper
+	if (evaluate.indexOf('config') == -1) {
+		evaluate.push('config');
+	}
+	if (evaluate.indexOf('shopper') == -1) {
+		evaluate.push('shopper');
 	}
 
 	const variables: Record<string, unknown> = {};
