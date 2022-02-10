@@ -50,14 +50,16 @@ const configuration = {
 };
 
 const urlManager = new UrlManager(new UrlTranslator());
+const globals = { siteId: 'abc123' }
+const client = new Client(globals);
 const services = {
-	client: new Client({ siteId: 'abc123' }),
+	client,
 	store: new SearchStore(configuration, { urlManager }),
 	urlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
-	tracker: new Tracker(),
+	tracker: new Tracker(globals, { client }),
 }
 
 const controller = new SearchController(configuration, services);

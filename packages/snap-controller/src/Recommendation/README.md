@@ -35,14 +35,16 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const recommendationUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
+const globals = { siteId: 'abc123' };
+const client = new Client(globals, clientConfig);
 const recommendationController = new RecommendationController(recommendationConfig, {
-		client: new Client(globals, clientConfig),
+		client,
 		store: new RecommendationsStore(recommendationConfig, { urlManager: recommendationUrlManager }),
 		urlManager: recommendationUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(),
+		tracker: new Tracker(globals, { client }),
 	}
 ));
 ```

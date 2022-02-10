@@ -56,7 +56,7 @@ describe('Finder Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 			controller.client.mockDataFile = 'finder.include.ss_accessory';
 			controller.init();
@@ -95,7 +95,7 @@ describe('Finder Controller', () => {
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
 					logger: new Logger(),
-					tracker: new Tracker(globals, client),
+					tracker: new Tracker(globals, { client }),
 				});
 
 				controller.on(event, () => false); // return false to stop middleware
@@ -118,7 +118,7 @@ describe('Finder Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 			controller.init();
 			await controller.search();
@@ -160,7 +160,7 @@ describe('Finder Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 			controller.init();
 			await controller.search();
@@ -194,7 +194,7 @@ describe('Finder Controller', () => {
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
 					logger: new Logger(),
-					tracker: new Tracker(globals, client),
+					tracker: new Tracker(globals, { client }),
 				});
 
 				controller.on(event, () => false); // return false to stop middleware
@@ -217,7 +217,7 @@ describe('Finder Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 			controller.init();
 			await controller.search();

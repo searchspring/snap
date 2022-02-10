@@ -35,7 +35,6 @@ describe('Autocomplete', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.wrap(config).its('startingQuery').should('have.length.at.least', 1);
 			cy.wrap(config).its('selectors.website.input').should('have.length.at.least', 1);
-			cy.visit(config.url);
 		});
 
 		it('snap bundle exists on autocomplete page', () => {

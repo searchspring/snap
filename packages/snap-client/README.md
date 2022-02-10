@@ -51,11 +51,11 @@ const globals = {
 ```
 
 ## Client Config
-Object required for all controllers
+Optional configuration for each requester. This can be used to specifiy a development origin URL or to configure cache settings per requester.
 
 ```typescript
 export type ClientConfig = {
-  meta?: {
+	meta?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
@@ -72,6 +72,14 @@ export type ClientConfig = {
 		cache?: CacheConfig;
 	};
 	suggest?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
+	personalization?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
+	beacon?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
@@ -126,7 +134,7 @@ Makes a request to the Searchspring Search API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const [meta, results] = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -154,21 +162,65 @@ const results = await client.autocomplete({
 });
 ```
 
-## `meta` property
-The meta property contains the metadata related to the siteId that the client was instantiated with. This data is to be used together with search results. Metadata contains site configuration like facet and sorting information.
-
-Note that the `search` method sets the `meta` property, therefore it must be called before attempting to access the `meta` property.
+## `meta` method
+Makes a request to the Searchspring Search API to fetch meta properties, it returns a promise. The `search` method utilizes this method.  
 
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
-  search: {
-    query: {
-      string: 'dress'
-    }
-  }
-});
+const meta = await client.meta();
 
 const meta = client.meta;
 ```
+
+## `trending` method
+Makes a request to the Searchspring Trending API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+
+const results = await client.trending({
+  siteId: 'abc123',
+  limit: 5
+});
+```
+
+## `recommend` method
+Makes a request to the Searchspring Recommend API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+
+const results = await client.recommend({
+  tag: 'similar',
+	siteId: 'abc123',
+	product: 'product123',
+	shopper: 'snapdev',
+});
+```
+
+## `preflight` method
+Makes a request to the Searchspring Preflight API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+
+const results = await client.preflight({
+  siteId: 'abc123',
+  userId: '2e69b18d-ff67-4169-83d8-984e1c8629c2',
+	shopper: 'snapdev',
+	cart: ['product123'],
+	lastViewed: ['product123'],
+});
+```
+
+## `beacon` method
+Makes a request to the Searchspring Beacon API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const events: BeaconEvents[] = [];
+const results = await client.beacon(events);
+```
+
+See [@searchspring/snap-tracker](https://github.com/searchspring/snap/tree/main/packages/snap-tracker) Beacon Event Payload

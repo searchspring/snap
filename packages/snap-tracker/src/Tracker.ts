@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Client } from '@searchspring/snap-client';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { cookies, featureFlags, version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
@@ -8,7 +9,6 @@ import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
 import { BeaconEvent } from './BeaconEvent';
 import {
-	TrackerGlobals,
 	TrackMethods,
 	BeaconPayload,
 	BeaconType,
@@ -35,12 +35,16 @@ const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
 
+type TrackerServices = {
+	client?: Client;
+};
+
 const defaultConfig: TrackerConfig = {
 	id: 'track',
+	siteId: '',
 };
 
 export class Tracker {
-	globals: TrackerGlobals;
 	client: any;
 	localStorage: StorageStore;
 	context: BeaconContext;
@@ -49,19 +53,18 @@ export class Tracker {
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
-	constructor(globals: TrackerGlobals, client: any, config?: TrackerConfig) {
-		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
+	constructor(config: TrackerConfig, services?: TrackerServices) {
+		this.config = deepmerge(defaultConfig, config || {});
+
+		if (typeof config.siteId != 'string' || !config.siteId) {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
-		this.config = deepmerge(defaultConfig, config || {});
-
-		this.globals = globals;
-		this.client = client;
+		this.client = services?.client || new Client({ siteId: config.siteId }, {});
 
 		this.localStorage = new StorageStore({
 			type: StorageType.LOCAL,
-			key: `ss-${this.config.id}-${this.globals.siteId}-local`,
+			key: `ss-${this.config.id}-${this.config.siteId}-local`,
 		});
 
 		this.context = {
@@ -70,7 +73,7 @@ export class Tracker {
 			shopperId: this.getShopperId(),
 			pageLoadId: uuidv4(),
 			website: {
-				trackingCode: this.globals.siteId,
+				trackingCode: this.config.siteId,
 			},
 		};
 
@@ -162,10 +165,10 @@ export class Tracker {
 		const userId = this.getUserId();
 		const siteId = this.context.website.trackingCode;
 		const shopper = this.getShopperId();
-		const cart = this.cookies.cart.get().join(','); // TODO: remove join once API supports multiple same params, also update PreflightRequestModel
-		const lastViewed = this.cookies.viewed.get().join(','); //
+		const cart = this.cookies.cart.get();
+		const lastViewed = this.cookies.viewed.get();
 
-		if (userId && siteId && (cart || lastViewed)) {
+		if (userId && siteId && (cart.length || lastViewed.length)) {
 			this.client.preflight({
 				userId,
 				siteId,
@@ -500,6 +503,11 @@ export class Tracker {
 					const cartItems = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set(cartItems));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = cartItems.filter((item) => items.includes(item)).length !== items.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			add: (items: string[]): void => {
@@ -521,10 +529,18 @@ export class Tracker {
 					const itemsToRemove = items.map((item) => item.trim());
 					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
 					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = currentCartItems.length !== updatedItems.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			clear: () => {
-				cookies.unset(CART_PRODUCTS);
+				if (this.cookies.cart.get().length) {
+					cookies.unset(CART_PRODUCTS);
+					this.sendPreflight();
+				}
 			},
 		},
 		viewed: {

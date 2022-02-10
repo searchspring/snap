@@ -5,11 +5,9 @@ The Snap Tracker, like the Client, is required for all Snap controller instances
 const tracker = new Tracker(globals);
 ```
 
-The Snap Tracker requires `TrackerGlobals` for instantiation.
+The Snap Tracker requires `TrackerGlobals` or `ClientGlobals` for instantiation.
 
 ### Global Config
-The `TrackerGlobals` object requires only a `siteId`.
-
 You can find your Searchspring `siteId` in the [Searchspring Management Console](https://manage.searchspring.net) and define it directly:
 
 ```typescript

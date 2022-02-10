@@ -41,14 +41,16 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const searchUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
+const globals = { siteId: 'abc123' };
+const client = new Client(globals);
 const searchController = new SearchController(searchConfig, {
-	client: new Client({ siteId: 'abc123' }),
+	client,
 	store: new SearchStore(searchConfig, { urlManager: searchUrlManager }),
 	urlManager: searchUrlManager,
 	eventManager: new EventManager(),
 	profiler: new Profiler(),
 	logger: new Logger(),
-	tracker: new Tracker(),
+	tracker: new Tracker(globals, { client }),
 });
 ```
 

@@ -39,7 +39,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 		const searchfn = jest.spyOn(controller, 'search');
 		const initfn = jest.spyOn(controller, 'init');
@@ -75,7 +75,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -104,7 +104,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -140,7 +140,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		expect(controller.config.settings.redirects.merchandising).toBe(false);
@@ -181,7 +181,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		expect(controller.config.settings.infinite.backfill).toBe(searchConfig.settings.infinite.backfill);
@@ -202,7 +202,7 @@ describe('Search Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 
 			controller.on(event, () => false); // return false to stop middleware
@@ -230,7 +230,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 		const landingPageCampaign = '35x12-50r20-mud-tires';
 		controller.urlManager = controller.urlManager.set('tag', landingPageCampaign);
@@ -246,7 +246,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		const page = 2;
@@ -263,7 +263,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		const pageSize = 72;
@@ -280,7 +280,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		const oq = 'wheel';
@@ -297,7 +297,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		const rq = 'wheel';
@@ -314,7 +314,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		const badsort = { price: 'ASC' };
@@ -335,7 +335,7 @@ describe('Search Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.urlManager = controller.urlManager.set('filter', { color: 'blue' });

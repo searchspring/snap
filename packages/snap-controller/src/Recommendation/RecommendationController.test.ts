@@ -42,7 +42,7 @@ describe('Recommendation Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 		}).toThrow();
 	});
@@ -56,7 +56,7 @@ describe('Recommendation Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.environment = LogMode.DEVELOPMENT;
@@ -77,7 +77,7 @@ describe('Recommendation Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 
 			const spy = jest.spyOn(console, 'log');
@@ -106,7 +106,7 @@ describe('Recommendation Controller', () => {
 				eventManager: new EventManager(),
 				profiler: new Profiler(),
 				logger: new Logger(),
-				tracker: new Tracker(globals, client),
+				tracker: new Tracker(globals, { client }),
 			});
 
 			const spy = jest.spyOn(controller.log, 'error');

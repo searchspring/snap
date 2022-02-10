@@ -4,4 +4,5 @@ export * from './Recommend';
 export * from './Snap';
 export * from './Suggest';
 export * from './Hybrid';
+export * from './Personalization';
 export * from './Beacon';

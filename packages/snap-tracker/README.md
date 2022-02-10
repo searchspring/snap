@@ -18,14 +18,21 @@ npm install --save @searchspring/snap-tracker
 ```typescript
 import { Tracker } from '@searchspring/snap-tracker';
 ```
+
+## Instantiation
+
+When creating a `Tracker` instance, a `TrackerGlobals` or `ClientGlobals` is required and must contain the `siteId` property. Optionally, a `TrackerServices` object can be provided as the 2nd parameter containing a `client` property. If a client service is not provided, a new `Client` will be instantiated with the `siteId` provided in the config. See [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client)
+
 ## Controller usage
 Snap Tracker is a dependency of Snap Controller and Tracker events can be invoked via the `tracker` reference of any Snap Controller. 
 
 ```typescript
 const globals = { siteId: 'abc123' };
-const tracker = new Tracker(globals);
+const client = new Client(globals);
+const tracker = new Tracker(globals, { client });
 const controller = new SearchController(config, {
     ...
+    client,
     tracker,
     ...
 });
@@ -38,7 +45,9 @@ console.log(tracker.track.product.click === window.searchspring.tracker.track.pr
 Snap Tracker can also be used without a Snap Controller. Typically used to send events before an integration has gone live. 
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' }
+const client = new Client(globals);
+const tracker = new Tracker(globals, { client });
 const payload = {
     type: BeaconType.CLICK,
     category: BeaconCategory.INTERACTION, 
@@ -211,9 +220,10 @@ If invoking directly, the `intellisuggestData` and `intellisuggestSignature` val
 ```typescript
 import { SearchController } from '@searchspring/snap-controller';
 import { Tracker } from '@searchspring/snap-tracker';
+const globals = { siteId: 'abc123' };
 const searchController = new SearchController({
     ...
-    tracker: new Tracker(),
+    tracker: new Tracker(globals),
     ...
 }):
 
@@ -324,7 +334,8 @@ console.log(tracker.globals === globals) // true
 A reference to the StorageStore object for accessing Tracker local storage.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 tracker.localStorage.set('key', 'value')
 tracker.localStorage.get('key') // 'value'
 ```
@@ -368,7 +379,8 @@ The `track` property contains various tracking events. See `track` methods secti
 Returns an object containing the `userId` stored in the `ssUserId` cookie (with a fallback to localstorage.) If key doesn't exist, a new ID will be generated, saved to cookie/localstorage, and returned. 
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.getUserId()) 
 // { userId: '0560d7e7-148a-4b1d-b12c-924f164d3d00' }
@@ -378,7 +390,8 @@ console.log(tracker.getUserId())
 Returns an object containing the `sessionId` stored in the `ssSessionIdNamespace` session storage (with a fallback to cookies.) If key doesn't exist, a new ID will be generated, saved to session storage/cookie, and returned. 
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.getSessionId()) 
 // { sessionId: 'f4b25c96-9ca1-4ac6-ad04-f5ce933f8b61' }
@@ -388,7 +401,8 @@ console.log(tracker.getSessionId())
 Returns an object containing the `shopperId` stored in the `ssShopperId` cookie. This value is set via the SearchController `SearchController.tracker.track.shopper.login` event
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.getShopperId()) 
 // { shopperId: 'shopper0001' }
@@ -401,7 +415,8 @@ The `cookies` property provides access to the `cart` and `viewed` tracking cooki
 Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.cookies.cart.get()) 
 // ['sku1', 'sku2']
@@ -411,7 +426,8 @@ console.log(tracker.cookies.cart.get())
 Provides a means of adding cart products to the `ssCartProducts` cookie.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.cookies.cart.get());
 // ['sku1', 'sku2']
@@ -424,7 +440,8 @@ console.log(tracker.cookies.cart.add(['sku3']));
 Provides a means for removing `skus` from the `ssCartProducts` cookie.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.cookies.cart.get());
 // ['sku1', 'sku2']
@@ -437,7 +454,8 @@ tracker.cookies.cart.remove(['sku1']);
 Provides a means of setting the `ssCartProducts` cookie via an array of product `skus`.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 tracker.cookies.cart.set(['sku1', 'sku2']);
 // ['sku1', 'sku2']
@@ -447,7 +465,8 @@ tracker.cookies.cart.set(['sku1', 'sku2']);
 Empties the `ssCartProducts` cookie.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 tracker.cookies.cart.clear();
 ```
@@ -456,7 +475,8 @@ tracker.cookies.cart.clear();
 Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 
 console.log(tracker.cookies.viewed.get());
 // ['sku1', 'sku2']
@@ -466,7 +486,8 @@ console.log(tracker.cookies.viewed.get());
 Sends event(s) to beacon (and various legacy) endpoint(s). 
 
 ```typescript
-const tracker = new Tracker();
+const globals = { siteId: 'abc123' };
+const tracker = new Tracker(globals);
 const event1 = new BeaconEvent();
 const event2 = new BeaconEvent();
 tracker.sendEvents([event1, event2])

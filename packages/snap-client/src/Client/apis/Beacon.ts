@@ -1,11 +1,7 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 
 export class BeaconAPI extends API {
-	constructor(config: ApiConfiguration) {
-		super(config);
-	}
-
-	async sendEvents(events: Array<any>): Promise<Response> {
+	async send(events: Array<any>): Promise<Response> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 

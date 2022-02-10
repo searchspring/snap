@@ -65,7 +65,7 @@ describe('Network Cache', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 		//no cache initially
 		expect(mockStorage['ss-networkcache']).toBeUndefined();

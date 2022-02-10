@@ -90,14 +90,16 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const finderUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
+const globals = { siteId: 'abc123' };
+const client = new Client(globals);
 const finderController = new FinderController(finderConfig, {
-		client: new Client(globals, clientConfig),
+		client,
 		store: new FinderStore(finderConfig, { urlManager: finderUrlManager }),
 		urlManager: finderUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(),
+		tracker: new Tracker(globals, { client }),
 	}
 ));
 ```

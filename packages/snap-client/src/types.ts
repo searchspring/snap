@@ -23,6 +23,10 @@ export type ClientConfig = {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
+	personalization?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
 };
 
 export type CacheConfig = {

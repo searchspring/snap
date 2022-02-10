@@ -155,7 +155,6 @@ export class Snap {
 						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
 					},
-					services?.client || this.client,
 					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
 				);
 				resolve(this.controllers[config.id]);
@@ -172,7 +171,7 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 		this.client = new Client(this.config.client.globals, this.config.client.config);
-		this.tracker = new Tracker(this.config.client.globals, this.client);
+		this.tracker = new Tracker(this.config.client.globals, { client: this.client });
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};
@@ -266,7 +265,6 @@ export class Snap {
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
 								},
-								controller.services?.client || this.client,
 								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);
 

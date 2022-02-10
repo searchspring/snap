@@ -41,14 +41,16 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
 const autocompleteUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
+const globals = { siteId: 'abc123' };
+const client = new Client(globals, clientConfig);
 const autocompleteController = new AutocompleteController(autocompleteConfig, {
-		client: new Client(globals, clientConfig),
+		client,
 		store: new AutocompleteStore(autocompleteConfig, { urlManager: autocompleteUrlManager }),
 		urlManager: autocompleteUrlManager,
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(),
+		tracker: new Tracker(globals, { client }),
 	}
 ));
 ```

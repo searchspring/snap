@@ -1,11 +1,8 @@
+import { ClientGlobals } from '@searchspring/snap-client';
 import { BeaconEvent } from './BeaconEvent';
 
-export type TrackerGlobals = {
-	siteId: string;
-};
-
-export type TrackerConfig = {
-	id: string;
+export type TrackerConfig = ClientGlobals & {
+	id?: string;
 };
 
 export interface BeaconPayload {

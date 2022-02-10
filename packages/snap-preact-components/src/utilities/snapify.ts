@@ -23,10 +23,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController(
-			{ client: clientConfig, controller: config },
-			client
-		));
+		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController({ client: clientConfig, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.log.debug('controller', controller);
@@ -44,7 +41,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client: clientConfig, controller: config }, client));
+		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client: clientConfig, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AutocompleteController }, next) => {
 			controller.log.debug('controller', controller);
@@ -63,7 +60,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: SearchController = (controllers[id] = createSearchController({ client: clientConfig, controller: config }, client));
+		const cntrlr: SearchController = (controllers[id] = createSearchController({ client: clientConfig, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: SearchController }, next) => {
 			controller.log.debug('controller', controller);

@@ -42,7 +42,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals, {}),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client,
@@ -51,7 +51,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -60,7 +60,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -69,7 +69,7 @@ const badArgs = [
 		eventManager: { events: null, fire: null, on: null },
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -84,7 +84,7 @@ const badArgs = [
 		},
 		profiler: new Profiler(),
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -93,7 +93,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: {},
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -107,7 +107,7 @@ const badArgs = [
 			create: null,
 		},
 		logger: new Logger(),
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 	{
 		client: new MockClient(globals, {}),
@@ -116,7 +116,7 @@ const badArgs = [
 		eventManager: new EventManager(),
 		profiler: new Profiler(),
 		logger: {},
-		tracker: new Tracker(globals, client),
+		tracker: new Tracker(globals, { client }),
 	},
 ];
 
@@ -142,7 +142,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -167,7 +167,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -190,7 +190,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -214,7 +214,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		controller.init();
@@ -248,7 +248,7 @@ describe('Autocomplete Controller', () => {
 			eventManager: new EventManager(),
 			profiler: new Profiler(),
 			logger: new Logger(),
-			tracker: new Tracker(globals, client),
+			tracker: new Tracker(globals, { client }),
 		});
 
 		await controller.init();

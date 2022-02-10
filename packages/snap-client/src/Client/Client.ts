@@ -3,6 +3,7 @@ import {
 	HybridAPI,
 	SuggestAPI,
 	RecommendAPI,
+	PersonalizationAPI,
 	BeaconAPI,
 	TrendingRequestModel,
 	TrendingResponseModel,
@@ -53,6 +54,11 @@ const defaultConfig: ClientConfig = {
 			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
+	personalization: {
+		api: {
+			// origin: 'https://snapi.kube.searchspring.io',
+		},
+	},
 	beacon: {
 		api: {
 			origin: 'https://beacon.searchspring.io',
@@ -69,16 +75,17 @@ export class Client {
 		search: HybridAPI;
 		recommend: RecommendAPI;
 		suggest: SuggestAPI;
+		personalization: PersonalizationAPI;
 		beacon: BeaconAPI;
 	};
 
-	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
+	constructor(globals: ClientGlobals, config?: ClientConfig) {
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}
 
 		this.globals = globals;
-		this.config = deepmerge(defaultConfig, config);
+		this.config = deepmerge(defaultConfig, config || {});
 
 		this.requesters = {
 			autocomplete: new HybridAPI(
@@ -109,6 +116,13 @@ export class Client {
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
 					cacheSettings: this.config.suggest.cache,
+				})
+			),
+			personalization: new PersonalizationAPI(
+				new ApiConfiguration({
+					origin: this.config.personalization?.api?.origin,
+					cacheSettings: this.config.personalization.cache,
+					maxRetry: 0,
 				})
 			),
 			beacon: new BeaconAPI(
@@ -150,8 +164,6 @@ export class Client {
 	}
 
 	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
-		// TODO - batching
-
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';
@@ -200,10 +212,10 @@ export class Client {
 			preflightParams.lastViewed = lastViewed;
 		}
 
-		return this.requesters.recommend.preflightCache(preflightParams);
+		return this.requesters.personalization.preflightCache(preflightParams);
 	}
 
 	beacon(events: Array<any>): Promise<Response> {
-		return this.requesters.beacon.sendEvents(events);
+		return this.requesters.beacon.send(events);
 	}
 }

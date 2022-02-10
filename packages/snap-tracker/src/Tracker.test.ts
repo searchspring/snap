@@ -3,15 +3,14 @@ import { Tracker } from './Tracker';
 import { BeaconCategory, BeaconType } from './types';
 import { Client } from '@searchspring/snap-client';
 const globals = {
-	siteId: 'xxxzzz',
+	siteId: 'abc123',
 };
 const client = new Client(globals);
 
 describe('Tracker', () => {
 	it('can create instance', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
-		expect(tracker.globals).toStrictEqual(globals);
 		expect(tracker.localStorage).toBeDefined();
 		expect(tracker.client).toBeDefined();
 		expect(tracker.context).toBeDefined();
@@ -36,17 +35,17 @@ describe('Tracker', () => {
 			id: 'trackerrrr',
 		};
 
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
 
-		const tracker2 = new Tracker(globals, client, config);
+		const tracker2 = new Tracker({ ...globals, ...config }, { client });
 
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
 	});
 
 	it('can invoke track.shopper.login', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
 
 		const shopperId = 'abc123';
@@ -58,7 +57,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.view event method', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.product, 'view');
 
@@ -77,7 +76,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.product.click event method', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.product, 'click');
 
@@ -97,7 +96,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view event method', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
@@ -128,7 +127,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.cart.view event method without item skus', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.cart, 'view');
 
@@ -157,7 +156,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.order.transaction event method', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
@@ -196,7 +195,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke track.order.transaction event method without item skus', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
 
@@ -235,7 +234,7 @@ describe('Tracker', () => {
 	});
 
 	it('can invoke generic track.event method', async () => {
-		const tracker = new Tracker(globals, client);
+		const tracker = new Tracker(globals, { client });
 
 		const eventFn = jest.spyOn(tracker.track, 'event');
 

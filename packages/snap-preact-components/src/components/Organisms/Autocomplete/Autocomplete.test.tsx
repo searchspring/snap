@@ -6,11 +6,7 @@ import { render } from '@testing-library/preact';
 import { Autocomplete } from '../../Organisms/Autocomplete/Autocomplete';
 import { createAutocompleteController } from '@searchspring/snap-preact';
 import { Client } from '@searchspring/snap-client';
-const client = {
-	globals: {
-		siteId: '8uyt2m',
-	},
-};
+
 let config;
 let controllerConfigId;
 describe('Autocomplete Component', () => {
@@ -18,11 +14,18 @@ describe('Autocomplete Component', () => {
 		document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
 		controllerConfigId = uuidv4().split('-').join('');
 		config = {
-			id: controllerConfigId,
-			selector: 'input.searchspring-ac',
-			settings: {
-				trending: {
-					limit: 5,
+			client: {
+				globals: {
+					siteId: '8uyt2m',
+				},
+			},
+			controller: {
+				id: controllerConfigId,
+				selector: 'input.searchspring-ac',
+				settings: {
+					trending: {
+						limit: 5,
+					},
 				},
 			},
 		};
@@ -33,7 +36,7 @@ describe('Autocomplete Component', () => {
 		expect(input).toBeInTheDocument();
 	});
 	it('does not render if input have not been focused', () => {
-		const controller = createAutocompleteController({ client, controller: config }, new Client(client.globals, {}));
+		const controller = createAutocompleteController(config);
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -45,7 +48,7 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('renders after input has been focused', async () => {
-		const controller = createAutocompleteController({ client, controller: config }, new Client(client.globals, {}));
+		const controller = createAutocompleteController(config);
 		const args = {
 			controller,
 			input: controller.config.selector,
