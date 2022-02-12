@@ -1,0 +1,3733 @@
+{
+  "search": {
+    "query": "red"
+  },
+  "pagination": {
+    "totalResults": 261,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30,
+    "totalPages":9
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "174939",
+      "mappings": {
+        "core": {
+          "uid": "174939",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-MCY-O4-81207",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_4_studio__805_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_4_studio__805_large.jpg",
+          "name": "Quite Alright Marsala Red Cardigan",
+          "sku": "C-MCY-O4-81207",
+          "brand": "Miracle City"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1vV1jtT1N9G1MDQyMGcwBEJjAwYjM0OG9KLMFADkmgnR",
+        "intellisuggestSignature": "b2601bef12020590a48687333cf54691a20c69f41ebf17aaa9dc0a574f1003b9",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "57",
+        "ss_product_type": "Cardigan",
+        "keywords": [
+          "cardi",
+          "sweater",
+          "open front cardigan",
+          "open front",
+          "outer wear",
+          "cardegan",
+          "cute- basic",
+          "staple",
+          "casual",
+          "layer",
+          "red",
+          "marsala"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "You know that moment when you’re sitting in a nice restaurant, enjoying an intimate meal with your beau, when suddenly the server—who's been falling all over himself around you all evening—accidently spills the glass of red wine you’ve been savoring, effectively ruining your outfit? And rather than throttle him, you just smile gracefully and tell him it’s quite alright. “But wait,” you ask, “how do you expect me to miraculously attain such saintly graciousness as to dismiss the ruination of such beloved attire?” The answer is simple; you’ll be thinking that the loss of one outfit gives you the perfect excuse to seek its replacement. A cozy new cardigan for instance (hint; like this one). So, as the wine stain becomes permanent, this one happy thought will no doubt make you feel so indebted to the server that you’ll be hard-pressed not to leave a good tip despite. Model is wearing a small. • 55% Cotton 30% Acrylic 15% Nylon • Hand Wash Cold • Unlined • Imported",
+        "title": "Quite Alright Marsala Red Cardigan",
+        "ss_clicks": "3157",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "3682",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "21",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "53",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "12",
+        "popularity": "3682",
+        "product_type_unigram": "cardigan",
+        "id": "1b212eb831f579079ccd63df6992725e"
+      }
+    },
+    {
+      "id": "147371",
+      "mappings": {
+        "core": {
+          "uid": "147371",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-SB-R3-S337",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/43_1989_copyright_reddressboutique_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/43_1989_copyright_reddressboutique_2016_large.jpg",
+          "name": "Gossip Girl Red Jeggings",
+          "sku": "C-SB-R3-S337",
+          "brand": "Scarlet Boulevard"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1g120g0y1g02NjZnMGQwYjA2YDAyM2RIL8pMAQDQoQlu",
+        "intellisuggestSignature": "335ef7dfdb8353cbe0d654dd6853f03c522dd30aedb46a01a909506e0033dc0c",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "47",
+        "ss_product_type": "Jeggings",
+        "keywords": [
+          "jeggings",
+          "leggings",
+          "red jeggings",
+          "red pants",
+          "denim",
+          "pants",
+          "red",
+          "spandex",
+          "jeans",
+          "colored jeans",
+          "colored pants",
+          "skinnies",
+          "skinny jeans"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Take your fall style out of the style book of Serena Van Der Woodsen in these bright woven stretch Gossip Girl Red Jeggings. Colored skinnies are in, and we love them paired with some of this season’s cutest print tops. Play it casual-cool with a funky pair of sneakers, or dress it up with some platform heels. No matter what your look, these jeans will keep your style on-trend. Jeggings feature 5-pocket styling, zipper/button fly. • 65% Cotton, 32% Polyester, 3% Spandex • Machine Wash Cold • Unlined • Imported",
+        "title": "Gossip Girl Red Jeggings",
+        "ss_clicks": "3839",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2189",
+        "ss_sale_price": "39",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;Bottoms on Sale"
+        ],
+        "on_sale": "Yes",
+        "collection": "Gossip Girl",
+        "sale_price": "19",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Bottoms on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31"
+        ],
+        "material": "Cotton",
+        "days_since_published": "52",
+        "size_pants": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31"
+        ],
+        "quantity_available": "32",
+        "popularity": "2189",
+        "product_type_unigram": "jeggings",
+        "id": "ccf677d84c500f0dcd2ef7cb8550b228"
+      }
+    },
+    {
+      "id": "144360",
+      "mappings": {
+        "core": {
+          "uid": "144360",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/F-BRK-R5-DIA12",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_3_5174_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_3_5174_1_large.jpg",
+          "name": "Basically Perfect Red Pointed Pumps",
+          "sku": "F-BRK-R5-DIA12",
+          "brand": "Anne Michelle"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw03UK8tYNMtV18XQ0NGIwZDBmMDZgMDIzZEgvykwBAOgYCf8",
+        "intellisuggestSignature": "905b7046ef611fcf0be25cbaa481a047d31f57cb6f51d211c69c3979bd26c2f3",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "53",
+        "ss_product_type": "Pumps",
+        "keywords": [
+          "heels",
+          "red heels",
+          "high heel shoes",
+          "high heels",
+          "pointed toe",
+          "red heel",
+          "red high heels",
+          "red pumps",
+          "pumps"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Whoever said that perfection rested in anything other than these Basically Perfect Red Pointed Pumps hasn’t had a pair for herself! Whether making your legs look longer or giving a casual look a touch of sophistication and glam, this heel is perfect in every way possible!! Red, pointed toe heels. • Heel measures 4.25&quot; • Man made materials • Imported",
+        "title": "Basically Perfect Red Pointed Pumps",
+        "ss_clicks": "3892",
+        "size_footwear": [
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2134",
+        "ss_sale_price": "30",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Sale&gt;Shoes on Sale",
+          "All Shoes&gt;All Heels&gt;Pumps",
+          "All Shoes",
+          "All Sale",
+          "All Shoes&gt;All Heels",
+          "Shop By Trend&gt;Prep In Your Step",
+          "Gifts for Her",
+          "Valentine's Day&gt;Valentine's Day Shoes",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Valentine's Day",
+          "All Sale&gt;30% off"
+        ],
+        "on_sale": "Yes",
+        "collection": "Basically Perfect",
+        "sale_price": "21",
+        "condition": "New",
+        "product_type": [
+          "All Shoes &gt; All Heels &gt; Pumps",
+          "Valentine's Day &gt; Valentine's Day Shoes",
+          "All Sale &gt; 30% off",
+          "Shop By Trend &gt; Prep In Your Step",
+          "All Sale &gt; Shoes on Sale",
+          "All Shoes &gt; All Heels",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10",
+          "11"
+        ],
+        "days_since_published": "45",
+        "quantity_available": "41",
+        "popularity": "2134",
+        "product_type_unigram": "pumps",
+        "id": "1c9770fee01ec2015d2f6d07ec9294dd"
+      }
+    },
+    {
+      "id": "173841",
+      "mappings": {
+        "core": {
+          "uid": "173841",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-MNJ-R4-23421",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_029_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_029_large.jpg",
+          "name": "Lady Of Class Red Skater Dress",
+          "sku": "C-MNJ-R4-23421",
+          "brand": "Maniju"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1vX189INMtE1MjYxMmQwZDBhMDZgMDIzZEgvykwBAOQ6Cc0",
+        "intellisuggestSignature": "43edd1eb8e59f22dafe0cd464f28f1de77ab17ef5badf755f8e93fac74692e6c",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "60",
+        "ss_product_type": "Dress",
+        "keywords": [
+          "party dress",
+          "red",
+          "red dress",
+          "holiday dress",
+          "christmas",
+          "short dress",
+          "silk",
+          "skater dress",
+          "holiday"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "A Lady of Class is a great many things; an excellent judge of character, a poised and elegant woman of intelligence, a smart, judicial, shrewd gal who knows how to get what she wants, but above all else, she knows when to say something and when to say nothing at all. In other words, she knows when to let her wardrobe do all the talking for her. This dress says volumes, and we'll leave it up to you, what you want it say and to whom you would like it to speak. We hear it works wonders on ex-husbands and current mother-in-laws. Dress features scoop neckline, hidden back zipper, lace arm detail. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Imported",
+        "title": "Lady Of Class Red Skater Dress",
+        "ss_clicks": "3293",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2039",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "20",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "101",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "19",
+        "popularity": "2039",
+        "product_type_unigram": "dress",
+        "id": "168bf696949f66e28ba0f01b733a207f"
+      }
+    },
+    {
+      "id": "172021",
+      "mappings": {
+        "core": {
+          "uid": "172021",
+          "price": 56,
+          "msrp": 75,
+          "url": "/product/B-UE-R6-12177",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_295_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_295_large.jpg",
+          "name": "I've Got Plans Brick Red Handbag",
+          "sku": "B-UE-R6-12177",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0g111Q0y0zU0MjQ3ZzBkMGUwNmAwMjNkSC_KTAEA2IAJig",
+        "intellisuggestSignature": "ddc1bf7349a070ad6388efb65553f72dac1f8e365aa4459e834a10a6727adcf7",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "36",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "Brick Red Handbag",
+          "Bag",
+          "Handbag",
+          "Tote",
+          "Purse",
+          "Big Purse",
+          "Red",
+          "Dark Red",
+          "Red",
+          "Red Purse",
+          "Red Handbag",
+          "Strap",
+          "Faux Leather",
+          "Vegan",
+          "Vegan Leather",
+          "Top Handle",
+          "Tote"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "I've Got Plans to look pretty and polished, and this Brick Red Handbag will help bring those goals to fruition! You really know how to make things happen! This faux leather top handle handbag features a removable adjustable strap, zipper closure, gold hardware, 2 exterior zipper pockets, interior zipper pocket, 2 interior open pockets, printed lining, and a removable coin pouch. Peta approved vegan. • Purse measures 11&quot; High, 12&quot; Wide, 8&quot; Deep • Additional Shoulder Strap Drop: 18.5&quot; - 23.5&quot; • Handle Drop: 6&quot; • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "title": "I've Got Plans Brick Red Handbag",
+        "ss_clicks": "2445",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "4455",
+        "ss_sale_price": "56",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "28",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Faux Leather",
+        "days_since_published": "40",
+        "quantity_available": "9",
+        "popularity": "4455",
+        "product_type_unigram": "handbag",
+        "id": "e3aaed030fe728d4b195f9f61ae4f8f6"
+      }
+    },
+    {
+      "id": "168694",
+      "mappings": {
+        "core": {
+          "uid": "168694",
+          "price": 82,
+          "msrp": 100,
+          "url": "/product/B-UE-R6-12324",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_2_274_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_274_large.jpg",
+          "name": "Little Lady Dark Red Handbag",
+          "sku": "B-UE-R6-12324",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0g111Q0y0zU0MjYyYTBkMGMwNmAwMjNkSC_KTAEA2CYJhQ",
+        "intellisuggestSignature": "c02dca434cee115b43398e8bef243ccb7491e4f3ea10192d4f05b3de34c08da0",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "39",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "Red Handbag",
+          "Red",
+          "Dark Red",
+          "Burgundy",
+          "Handbag",
+          "Gray Handbag",
+          "Purse",
+          "Tote",
+          "Bag",
+          "Vegan",
+          "Accessory"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Keep your essentials and style by your side with the Little Lady Dark Red Handbag. This bag features a gold zipper closure, 2 handles, removable strap, exterior zipper pockets, floral print lining, interior zipper pocket, and 2 interior open pockets. Peta approved Vegan. • Purse measures 10&quot; High, 16&quot; Wide, 5&quot; Deep • Handle Drop: 5&quot; • Additional Shoulder Strap Drop: 19&quot;- 22&quot; • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Little Lady Dark Red Handbag",
+        "ss_clicks": "1039",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2550",
+        "ss_sale_price": "82",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "40",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "100",
+        "quantity_available": "2",
+        "popularity": "2550",
+        "product_type_unigram": "handbag",
+        "id": "b54926c50e6435a29b95c7376267b71d"
+      }
+    },
+    {
+      "id": "155520",
+      "mappings": {
+        "core": {
+          "uid": "155520",
+          "price": 40,
+          "msrp": 50,
+          "url": "/product/B-JO-O4-002ML",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_2_154_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_154_large.jpg",
+          "name": "Nicest Thing Brick Red Clutch",
+          "sku": "B-JO-O4-002ML",
+          "brand": "Joia"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0vXy1_U30TUwMPL1YTBkMGcwNmAwMjNkSC_KTAEA2sYJrw",
+        "intellisuggestSignature": "3c41c4546a80ca152e3265c94c49f7f9ca9b6c84b627f899dfffb71ad67135b9",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "36",
+        "ss_product_type": "Clutch",
+        "keywords": [
+          "clutch",
+          "bag",
+          "brick",
+          "red",
+          "brick red clutch",
+          "evening bag",
+          "handbag",
+          "purse",
+          "accessory"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "One of the Nicest Things you can gift yourself is something fashionable and functional, so this Brick Red Clutch is pretty and pleasant! This cute and versatile clutch will keep your necessities stylishly safe. Wear folded as a clutch or unfolded as a handbag. Either way, it’ll look amazing! This fold over clutch features a zipper closure, magnetic button closures, 2 inner open pockets, an inner zipper pocket, a detachable chain, and an outer zipper with a tassel. • Width measures 12&quot; • Height measures 7&quot; • Opened height measures 11&quot; • Imported",
+        "title": "Nicest Thing Brick Red Clutch",
+        "sale_price": "28",
+        "ss_clicks": "3642",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "2488",
+        "ss_sale_price": "40",
+        "product_type": [
+          "All Sale &gt; 30% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "80",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Sale&gt;30% off"
+        ],
+        "on_sale": "Yes",
+        "quantity_available": "13",
+        "popularity": "2488",
+        "product_type_unigram": "clutch",
+        "id": "0bff4ac5c5fca1b06db1fd06fc55cf1f"
+      }
+    },
+    {
+      "id": "171070",
+      "mappings": {
+        "core": {
+          "uid": "171070",
+          "price": 56,
+          "msrp": 75,
+          "url": "/product/B-UE-R5-2181B",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_331_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_331_large.jpg",
+          "name": "On A Mission Red Handbag",
+          "sku": "B-UE-R5-2181B",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0g111Q0y1TUytDB0YjBksGAwNmAwMjNkSC_KTAEA2WUJmA",
+        "intellisuggestSignature": "0194abd5a47608a7052ed81d00bf133208bae968bdbd79860f59840c23d9b408",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "37",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "red",
+          "dark red",
+          "leather",
+          "vegan leather",
+          "faux leather",
+          "fake leather",
+          "hand bag",
+          "purse",
+          "basic",
+          "preppy",
+          "fall"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Oh girl, we've found the perfect adventure loving sidekick with this gorgeous Red Handbag! Who's up for the journey with our On A Mission Red Handbag? Handbag features front envelope pocket, zipper detail, and double strap. Peta approved Vegan. • Purse measures 12&quot; High, 15&quot; Wide, 5.5&quot; Deep • Handle Drop: 9&quot; - 13&quot; • Additional Shoulder Strap Drop: 16&quot; - 21&quot; • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "On A Mission Red Handbag",
+        "ss_clicks": "903",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2249",
+        "ss_sale_price": "56",
+        "size_universal": "One Size",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Accessories on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": "Yes",
+        "sale_price": "28",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Accessories on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "109",
+        "quantity_available": "19",
+        "popularity": "2249",
+        "product_type_unigram": "handbag",
+        "id": "a0ef9eb942e1317cb53b2d3dd9362a7d"
+      }
+    },
+    {
+      "id": "176593",
+      "mappings": {
+        "core": {
+          "uid": "176593",
+          "price": 79,
+          "msrp": 100,
+          "url": "/product/C-BB-R4-16137",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_2_4279_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_2_4279_large.jpg",
+          "name": "All In Favor Red Sweater",
+          "sku": "C-BB-R4-16137",
+          "brand": "BB Dakota"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1nVy0g0y0TU0MzQ2ZzBksGQwNmAwMjNkSC_KTAEA1lwJdw",
+        "intellisuggestSignature": "6fe461060b9425b069dfae2bfa691ebf028ad60ce8422abc2390566ea3f45e3c",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "26",
+        "ss_product_type": "Sweater",
+        "keywords": [
+          "bb dakota",
+          "bb sweater",
+          "jack by bb dakota",
+          "red- red",
+          "dark red",
+          "red bb dakota sweater",
+          "long sweater",
+          "oversized sweater",
+          "cable knit sweater",
+          "cable knit",
+          "v neck",
+          "v-neck top",
+          "fall",
+          "winter"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "What would life be like if there were an audience helping you get dressed every single morning? You could hold up an outfit and the viewers could vote yes or no depending on whether or not they liked it. Creepy or cool? However you view the idea, we're sure that they'd vote 'All In Favor' for this gorgeous red sweater! It's a sure fire winner! Model is wearing an x-small. • 100% Polyester • Hand Wash Cold • Unlined • Imported",
+        "title": "All In Favor Red Sweater",
+        "ss_clicks": "2586",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2093",
+        "ss_sale_price": "79",
+        "season": "Fall",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Brands We Love",
+          "Brands We Love&gt;BB Dakota"
+        ],
+        "on_sale": "Yes",
+        "collection": "All In Favor",
+        "sale_price": "39.5",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "Brands We Love &gt; BB Dakota",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "90",
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "5",
+        "popularity": "2093",
+        "product_type_unigram": "sweater",
+        "id": "0da2f945ffc64cb66371bfb59c5686fd"
+      }
+    },
+    {
+      "id": "175285",
+      "mappings": {
+        "core": {
+          "uid": "175285",
+          "price": 42,
+          "msrp": 50,
+          "url": "/product/C-AD-R7-1846S",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/285_lcp_7947_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/285_lcp_7947_reddressboutique_large.jpg",
+          "name": "Chic And Easy Wine Red Top",
+          "sku": "C-AD-R7-1846S",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1nV00Q0y1zW0MDELZjBkMDRgMDZgMDIzZEgvykwBAOIqCcc",
+        "intellisuggestSignature": "b92a0bd1b3441916c8d74556ba6f59ef52f1124d1e691dac18b5ebbcdbf66294",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "28",
+        "ss_product_type": "Top",
+        "keywords": [
+          "blouse- shirt",
+          "top",
+          "long sleeve",
+          "cute",
+          "dressy",
+          "work wear",
+          "office",
+          "professional",
+          "red",
+          "dark red",
+          "wine"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Anything that's this Chic is Easy, and anything this Easy can be made Chic. Except that girl in your Chem 101 class, the one that sits in the third row, five seats to left. She's easy and there's absolutely nothing that's even remotely chic about her, and even with a ton of work, time, and loads of TLC, that girl cannot be saved from herself. A deity could help her out, maybe, but barring that, and the aid of this blouse, she's out of luck. But seriously, this top is Chic and Easy, and 99.9% of women can pull it off with nary a pitfall! Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Made in the USA",
+        "title": "Chic And Easy Wine Red Top",
+        "ss_clicks": "503",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "1790",
+        "ss_sale_price": "42",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "All Sale&gt;Tops on Sale",
+          "All Sale&gt;Going Fast on Sale",
+          "Gifts for Her",
+          "All Sale&gt;50% off",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "Yes",
+        "collection": "Chic And Easy",
+        "sale_price": "21",
+        "condition": "New",
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Going Fast on Sale",
+          "All Sale &gt; Tops on Sale",
+          "All Sale",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "90",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "1790",
+        "product_type_unigram": "top",
+        "id": "7563df58e91a67c291ea973dfdff3278"
+      }
+    },
+    {
+      "id": "180509",
+      "mappings": {
+        "core": {
+          "uid": "180509",
+          "price": 38,
+          "msrp": 50,
+          "url": "/product/B-UE-R4-14030",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3630_copyright_reddressboutique_2017-2_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3630_copyright_reddressboutique_2017-2_large.jpg",
+          "name": "True To Your Cool Red Clutch",
+          "sku": "B-UE-R4-14030",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0g111Q0y0TU0MTA2YDBkMDRkANJGZoYM6UWZKQDgyQmr",
+        "intellisuggestSignature": "1956d4ea495627d6a7a056f83d69bee07313f86cc531ff8d0bc68f9a3e3268e7",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "48",
+        "ss_product_type": "Clutch",
+        "keywords": [
+          "red",
+          "red clutch",
+          "bag",
+          "studded bag",
+          "stud embellishments",
+          "gold",
+          "red",
+          "tumbled vegan leather",
+          "wristlet",
+          "clutch",
+          "accessories"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "You’ve gotta stay True To Your Cool when you’re headed out for a girl’s night. Your closest pals each know you like the back of their hand and they know when you’re not feeling quite right. This clutch though? It fits perfectly with your personal brand of cool. Your friends will wonder why they didn’t snatch it up first and beg you to let them borrow it! This clutch features a wrist strap and studded detailing. • Height measures 6.5&quot; width measures 11&quot; • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "True To Your Cool Red Clutch",
+        "ss_clicks": "2374",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "4421",
+        "ss_sale_price": "38",
+        "product_type": [
+          "All Accessories &gt; Clutches",
+          "Shop By Trend &gt; Girl's Night Out",
+          "All Accessories &gt; Handbags/Purses",
+          "Shop By Trend",
+          "What's New",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "28",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;Girl's Night Out",
+          "All Accessories",
+          "All Accessories&gt;Clutches",
+          "What's New",
+          "Gifts for Her",
+          "All Accessories&gt;Handbags/Purses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "quantity_available": "22",
+        "popularity": "4421",
+        "product_type_unigram": "clutch",
+        "id": "73236b346adb1e1add196636bf2f92b5"
+      }
+    },
+    {
+      "id": "182822",
+      "mappings": {
+        "core": {
+          "uid": "182822",
+          "price": 34,
+          "msrp": 50,
+          "url": "/product/C-VJ-R4-12920",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0792_copyright_reddressboutique_2017__copy_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0792_copyright_reddressboutique_2017__copy_large.jpg",
+          "name": "Classic Summer Red Gingham Top",
+          "sku": "C-VJ-R4-12920",
+          "brand": "Aura L'atiste"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1g3z0g0y0TU0sjQyYDBkMDRiMDZgMDIzZEgvykwBAOIOCbk",
+        "intellisuggestSignature": "67cd3224ade72bf06c58552758127a60544fc1b11c24b7516957541a18b9cf91",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "48",
+        "ss_product_type": "Top",
+        "keywords": [
+          "red gingham top",
+          "red",
+          "gingham",
+          "top",
+          "gingham top",
+          "red top",
+          "red gingham",
+          "tie front",
+          "button down",
+          "button down top",
+          "white and red top",
+          "short sleeve top",
+          "preppy top",
+          "tie front top"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Swimming parties, BBQs, listening to children play in sprinklers and watching them chase fireflies as the evening comes to a close. Sounds like Classic Summer, and you're going to need a new top for all that excitement (and perhaps a bottle of wine). It's the time of year for vacations, long weekends, and giving yourself a mental break. Usually you just scramble to get that item first checked off of your list and completely forget the last one. So here's to Summer! And that new top you're going to buy yourself (which will then remind you to give yourself that emotional break whenever you wear it). Red and white gingham plaid collared button down top features a fly front placket, tie front and a slight high low hemline. Model is wearing a small. • 60% Rayon 40% Polyester • Machine Wash Cold • Unlined • Imported",
+        "title": "Classic Summer Red Gingham Top",
+        "ss_clicks": "186",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "4334",
+        "ss_sale_price": "34",
+        "product_type": [
+          "Shop By Trend &gt; Gameday Looks &gt; Gameday Looks-Red &amp; Black",
+          "Shop By Trend &gt; Gameday Looks",
+          "Shop By Trend &gt; Playful Plaids",
+          "Shop By Trend &gt; Spring Preview",
+          "Shop By Trend &gt; Summer Staples",
+          "Shop By Trend &gt; Red",
+          "White &amp; Blue Looks",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "34",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;Spring Preview",
+          "Shop By Trend&gt;Summer Staples",
+          "Shop By Trend&gt;Red",
+          "Shop By Trend&gt;Gameday Looks&gt;Gameday Looks-Red &amp; Black",
+          "White &amp; Blue Looks",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Gameday Looks",
+          "Shop By Trend&gt;Playful Plaids"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "31",
+        "popularity": "4334",
+        "product_type_unigram": "top",
+        "id": "0b73bcf71f690cbb8261e3ed1f7e6b41"
+      }
+    },
+    {
+      "id": "174797",
+      "mappings": {
+        "core": {
+          "uid": "174797",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/F-CCF-R4-COEN",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_1_13_accessories_2443_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_1_13_accessories_2443_large.jpg",
+          "name": "Do I Dare Red Pointed Pumps",
+          "sku": "F-CCF-R4-COEN",
+          "brand": "City Classified"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw03V2dtMNMtF19nf1YzBkMDRmMDZgMDIzZEgvykwBAOhMChA",
+        "intellisuggestSignature": "df9b3455e7b364cfa4f78ae41613d1c612f8002069021ed4a282983d88351fc2",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "73",
+        "ss_product_type": "Pumps",
+        "keywords": [
+          "pump",
+          "heel",
+          "stiletto",
+          "professional",
+          "work",
+          "office",
+          "gno",
+          "date night",
+          "valentine",
+          "red",
+          "red dress red",
+          "hot red",
+          "leather",
+          "patent leather",
+          "faux leather"
+        ],
+        "color": [
+          "Red"
+        ],
+        "black_friday": "yes",
+        "multi_colors": "no",
+        "description": "You've seen the pumps, you've drooled over the pumps, you've imagined the pumps on your to-die-for stems ... and you've asked yourself, &quot;Do I Dare?&quot; And our answer is ... &quot;YES!&quot; Yes, you dare. You dare to look fabulous! You dare to take a chance! You dare to show off your love of fashion in these awesome red heels! Heel measures 3.5&quot; • Vegan friendly, man made materials • Imported",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Do I Dare Red Pointed Pumps",
+        "ss_clicks": "2730",
+        "size_footwear": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "3881",
+        "ss_sale_price": "26",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Shoes&gt;Shoes on Trend",
+          "All Shoes&gt;All Heels&gt;Pumps",
+          "All Shoes",
+          "All Shoes&gt;All Heels",
+          "Shop By Trend&gt;The Work Shop",
+          "Gifts for Her",
+          "Valentine's Day&gt;Valentine's Day Shoes",
+          "Special Occasion",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Valentine's Day"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Shoes &gt; All Heels &gt; Pumps",
+          "Valentine's Day &gt; Valentine's Day Shoes",
+          "Shop By Trend &gt; The Work Shop",
+          "All Shoes &gt; Shoes on Trend",
+          "All Shoes &gt; All Heels",
+          "Special Occasion",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "5.5",
+          "6",
+          "6.5",
+          "7",
+          "7.5",
+          "8",
+          "8.5",
+          "9",
+          "10"
+        ],
+        "days_since_published": "67",
+        "quantity_available": "53",
+        "popularity": "3881",
+        "product_type_unigram": "pumps",
+        "id": "2f7ed61c1380330f21d87dd5151e9020"
+      }
+    },
+    {
+      "id": "182835",
+      "mappings": {
+        "core": {
+          "uid": "182835",
+          "price": 22,
+          "msrp": 25,
+          "url": "/product/J-PAN-R4-11804",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5426_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5426_copyright_reddressboutique_2017__large.jpg",
+          "name": "Quite Continental Red Earrings",
+          "sku": "J-PAN-R4-11804",
+          "brand": "Pannee"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWHw0g1w9NMNMtE1NLQwMGEwZDA0YTA2YDAyM2RIL8pMAQDuLwoB",
+        "intellisuggestSignature": "bf6b2825c74b49c113a2af3a5aa934e303e487e29f3aaadfcccbebbea9dc093e",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "63",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "red",
+          "black",
+          "red and black",
+          "red black",
+          "pendant",
+          "pendent",
+          "pendant earrings",
+          "earing",
+          "earings",
+          "earring",
+          "fun",
+          "cute"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "There's something different about you ... a new haircut? No, that's not it. New makeup? No, that's not it either. Aha! That smashing new pair of earrings just came in and they light up your whole face. That radiant smile you're wearing with them doesn't hurt, naturally. •Imported",
+        "title": "Quite Continental Red Earrings",
+        "ss_clicks": "3031",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "3708",
+        "ss_sale_price": "22",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "143",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Gifts for Her&gt;Gifts Under $25",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "29",
+        "popularity": "3708",
+        "product_type_unigram": "earrings",
+        "id": "6672a35867c529a4fc4f48ae0c2b7239"
+      }
+    },
+    {
+      "id": "176900",
+      "mappings": {
+        "core": {
+          "uid": "176900",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-SHE-R4-L4088",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4833_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
+          "name": "Caught In A Reverie Red Lace Dress",
+          "sku": "C-SHE-R4-L4088",
+          "brand": "She + Sky"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1g32cNUNMtH1MTGwsGAwZDA0ZTA2YDAyM2RIL8pMAQDwXAoe",
+        "intellisuggestSignature": "16c2dc49942c6ceba6fdc5ad13be8b44a98bf5aa7198d9b81fbae9387bb57cef",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "61",
+        "ss_product_type": "Dress",
+        "keywords": [
+          "red",
+          "red dress red",
+          "cherry red",
+          "cherry",
+          "valentines",
+          "valentine",
+          "occasion",
+          "lace",
+          "red lace",
+          "lace dress",
+          "sexy dress",
+          "cute",
+          "pretty",
+          "stunning",
+          "sexy"
+        ],
+        "color": [
+          "Red"
+        ],
+        "black_friday": "yes",
+        "multi_colors": "no",
+        "description": "As wondrous as life can be at its best, there are an equal number of times when it can be dull as dirt. Thank goodness for your active imagination, because you can while away the hours with the most rewarding of daydreams. A bit of advice though, if we may: dress as though you expect something exciting to happen at any moment, even at the height of your boredom. You don’t want to be caught in a reverie, unprepared to make your daydreams a reality when opportunity strikes. This lace dress is versatile in that way, and stunning to boot. Model is wearing a small. • 70% Cotton 30% Polyester • Lining 100% Polyester • Hand Wash Cold • Lined • Imported",
+        "title": "Caught In A Reverie Red Lace Dress",
+        "ss_clicks": "4133",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "3271",
+        "ss_sale_price": "46",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "Style Influencer&gt;Holly Boyd",
+          "All Dresses&gt;Shop by Color&gt;Red Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Style Influencer",
+          "Special Occasion&gt;Party Dresses",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion",
+          "Valentine's Day&gt;Valentine's Day Dresses",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Valentine's Day"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Red Dresses",
+          "All Dresses &gt; Shop by Color",
+          "Special Occasion &gt; Party Dresses",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "Style Influencer &gt; Holly Boyd",
+          "Valentine's Day &gt; Valentine's Day Dresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "75",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "6",
+        "popularity": "3271",
+        "product_type_unigram": "dress",
+        "id": "b96fc0d5f588d886e6e84ed25269127e"
+      }
+    },
+    {
+      "id": "169037",
+      "mappings": {
+        "core": {
+          "uid": "169037",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/B-UE-R6-385SA",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_2_142_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_2_142_large.jpg",
+          "name": "Hold Me Near Brick Red Clutch",
+          "sku": "B-UE-R6-385SA",
+          "brand": "Urban Expressions"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0g111Q0y0zW2MA12ZDBkMDRjMDZgMDIzZEgvykwBAOWwCe4",
+        "intellisuggestSignature": "91603032fbad3a2022764bd80abfa418ad830112e50f1c663963767a147925c6",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "44",
+        "ss_product_type": "Clutch",
+        "keywords": [
+          "clutch",
+          "purse",
+          "bag",
+          "gno",
+          "night out",
+          "dates night",
+          "date night",
+          "accessory",
+          "red",
+          "rust",
+          "paprika"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Hold Me Near and style is sure to never escape you with this Brick Red Clutch by your side! Now if only we could make that annoying guy go away...This snakeskin print clutch features a foldover magnetic closure, removable gunmetal grey chain strap, printed lining, 1 interior open and zipper pocket, and 1 exterior button pocket. Peta approved vegan. • Purse measures 7.5&quot; High, 13&quot; Wide, 5&quot; Deep • Shell: 100% Polyurethane • Lining: 100% Polyester",
+        "title": "Hold Me Near Brick Red Clutch",
+        "ss_clicks": "2278",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "3123",
+        "ss_sale_price": "46",
+        "product_type": [
+          "All Accessories &gt; Clutches",
+          "All Accessories &gt; Handbags/Purses",
+          "All Accessories",
+          "Going Fast",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Polyester",
+        "days_since_published": "46",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "All Accessories&gt;Clutches",
+          "Going Fast",
+          "Gifts for Her",
+          "All Accessories&gt;Handbags/Purses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "quantity_available": "2",
+        "popularity": "3123",
+        "product_type_unigram": "clutch",
+        "id": "c114adb392c2678a91f9ebda7f2474e0"
+      }
+    },
+    {
+      "id": "180873",
+      "mappings": {
+        "core": {
+          "uid": "180873",
+          "price": 25,
+          "msrp": 25,
+          "url": "/product/C-FAI-R4-BK155",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1272_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1272_copyright_reddressboutique_2017__large.jpg",
+          "name": "Which Wave Red Bikini Bottom",
+          "sku": "C-FAI-R4-BK155",
+          "brand": "5th Avenue"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1nVz9NQNMtF18jY0NWUwZDA0ZzA2YDAyM2RIL8pMAQDvUQoY",
+        "intellisuggestSignature": "35adb0b650ccd32b72e35aa84c5b706bc609bba34054131655edff22cd4ad1f8",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "63",
+        "ss_product_type": "Bottom",
+        "keywords": [
+          "Red Bikini Bottom",
+          "Red Bottom",
+          "Bikini",
+          "Bikini Bottom",
+          "Swimwear",
+          "Two Piece",
+          "Swimsuit",
+          "red Swimsuit",
+          "Tie Bottoms",
+          "string bikini"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Life is full of tough choices. Where to go to college. What career to pursue. Whom to marry. And, most importantly, what swimsuit you should wear on which occasion. But, once you’ve found the right bikini for you, the choice gets much, much simpler. Instead of the big questions in life, you can focus on the more pertinent matters, like Which Wave will you body surf back to shore once the Piña Coladas are ready. Model is wearing a small. • 80% Nylon 20% Spandex • Hand Wash Cold • Unlined • Imported",
+        "title": "Which Wave Red Bikini Bottom",
+        "ss_clicks": "1211",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "2809",
+        "product_type": [
+          "Swimwear &gt; Two Piece",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "Swimwear",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "36",
+        "ss_regular_price": "25",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Swimwear&gt;Two Piece",
+          "What's New",
+          "Gifts for Her",
+          "Swimwear",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "16",
+        "popularity": "2809",
+        "product_type_unigram": "bottom",
+        "id": "9ca62e17d040a9aec58028aad3ee3da8"
+      }
+    },
+    {
+      "id": "174819",
+      "mappings": {
+        "core": {
+          "uid": "174819",
+          "price": 55,
+          "msrp": 75,
+          "url": "/product/B-LS-R2-DR951",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/240_lcp_7864_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/240_lcp_7864_reddressboutique_large.jpg",
+          "name": "In The Moment Red Multi Bag",
+          "sku": "B-LS-R2-DR951",
+          "brand": "Love Stitch"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0vUJ1g0y0nUJsjQ1ZABCCwZjAwYjM0OG9KLMFADmdgny",
+        "intellisuggestSignature": "08604be704bcde55a82c06ac3550ec73bbe4196cfc4db4ac6d5c7215a0775af8",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "60",
+        "ss_product_type": "Bag",
+        "keywords": [
+          "drawstring bag",
+          "sack",
+          "nap sack",
+          "draw string",
+          "handbag",
+          "hand bag",
+          "pouch",
+          "cross body bag"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "You may find yourself caught up “In The Moment”, but do not let that keep you from noticing this bag!! Have this tribal satchel bag come along with you for this moment on and you’ll have no worries about being the sight that is seen!! Bucket bag with a small interior zipper pocket. Fully Lined. Shell: 90% Cotton, 10% Polyester. Lining: 100% Polyester. Made in India.",
+        "title": "In The Moment Red Multi Bag",
+        "ss_clicks": "3019",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "2684",
+        "ss_sale_price": "55",
+        "product_type": [
+          "Shop By Trend &gt; Gameday Looks &gt; Gameday Looks-Red &amp; Black",
+          "Shop By Trend &gt; Gameday Looks",
+          "All Accessories &gt; Handbags/Purses",
+          "Shop By Trend",
+          "All Accessories",
+          "Gifts for Her"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "material": "Cotton",
+        "days_since_published": "166",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Accessories",
+          "Shop By Trend&gt;Gameday Looks&gt;Gameday Looks-Red &amp; Black",
+          "Gifts for Her",
+          "All Accessories&gt;Handbags/Purses",
+          "Shop By Trend&gt;Gameday Looks"
+        ],
+        "on_sale": "No",
+        "quantity_available": "11",
+        "popularity": "2684",
+        "product_type_unigram": "bag",
+        "id": "0eff2ffa0cda64bee4df39443ea3f443"
+      }
+    },
+    {
+      "id": "181225",
+      "mappings": {
+        "core": {
+          "uid": "181225",
+          "price": 54,
+          "msrp": 75,
+          "url": "/product/C-LXL-R4-D3819",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2041_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2041_copyright_reddressboutique_2017__large.jpg",
+          "name": "With All My Heart Red Dress",
+          "sku": "C-LXL-R4-D3819",
+          "brand": "Ever After"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1vWJ8NENMtF1MbYwtGQwZAASxgYMRmaGDOlFmSkA8aoKKw",
+        "intellisuggestSignature": "fe13d617fdb8e4174f679edf1bf08468085d3e51c93c8ecc66d0d6f5f794265e",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "74",
+        "ss_product_type": "Dress",
+        "keywords": [
+          "red",
+          "red dress",
+          "skater dress",
+          "party dress",
+          "bow",
+          "bowsleeve",
+          "tie sleeve",
+          "girly",
+          "chic dress",
+          "cocktail dress",
+          "event ready"
+        ],
+        "color": [
+          "Red"
+        ],
+        "black_friday": "yes",
+        "dress_length_name": "Micro",
+        "multi_colors": "no",
+        "description": "Dear Ex-boyfriend, I bought a new dress online the other day. It has precisely the shape that you love on me, even the color. I can see us at our favorite restaurant, in that quiet little booth in the corner, all cuddled up, enjoying our meal and our time together. Unfortunately, you turned into one of ‘those’ guys. The controlling type that likes to tell women what to do and where to go, and I’m just not for that. So to answer your text from last night: No we’re never ever ever getting back together. To cement that answer, enclosed in this envelope you will find a picture of me in the dress, on a date with my new boyfriend. Enjoy. With All My Heart, your loving and now happy Ex-girlfriend. This dress features a sweetheart neckline, zipper and fish hook in the back and visible stitching along bust and bottom. Also features adjustable sash tie around arms, full lining and a structured bodice. Model is wearing a small. • 95% Polyester 5% Spandex • Hand Wash Cold • Unlined • Made in the",
+        "title": "With All My Heart Red Dress",
+        "ss_clicks": "1127",
+        "saturation": "high",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2635",
+        "ss_sale_price": "54",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "All Dresses",
+          "All Dresses&gt;Short Dresses",
+          "Brands We Love&gt;Red Dress Label&gt;Ever After",
+          "All Dresses&gt;Shop by Color&gt;Red Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Special Occasion&gt;Party Dresses",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Red Dresses",
+          "Brands We Love &gt; Red Dress Label &gt; Ever After",
+          "All Dresses &gt; Shop by Color",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "All Dresses &gt; Short Dresses",
+          "Special Occasion &gt; Party Dresses",
+          "Gifts for Her"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "117",
+        "dress_length": "30",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "31",
+        "popularity": "2635",
+        "product_type_unigram": "dress",
+        "id": "54a0523981c54d20ef830ce37754cb03"
+      }
+    },
+    {
+      "id": "176944",
+      "mappings": {
+        "core": {
+          "uid": "176944",
+          "price": 16,
+          "msrp": 25,
+          "url": "/product/J-HOT-R3-FD23",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_3_5640_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_3_5640_large.jpg",
+          "name": "Completely You Red Tassel Bracelet",
+          "sku": "J-HOT-R3-FD23",
+          "brand": "House of Tuhina"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWHw0vXwD9ENMtZ1czEyZjBkMDJgMDZgMDIzZEgvykwBAOfkCfo",
+        "intellisuggestSignature": "9cae34d0ad22a751a366192490daada52b397f5f8767195d38461f5ddd66f4dd",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "56",
+        "ss_product_type": "Bracelet",
+        "keywords": [
+          "tassel",
+          "tassle",
+          "tassel bracelet",
+          "bracelet",
+          "statement jewelry",
+          "red tassels",
+          "statement bracelet",
+          "red"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Completely You and adorably true, this Red Tassel Bracelet rings true with style and incredible cuteness. It’s you in accessory form! This gold bracelet has black thread woven throughout it and is adorned with tassels. Bracelet measures 7&quot; around. • Button loop closure • Handcrafted in India",
+        "title": "Completely You Red Tassel Bracelet",
+        "ss_clicks": "1981",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "2387",
+        "ss_sale_price": "16",
+        "product_type": [
+          "Shop By Trend &gt; Worth The Tassel",
+          "All Jewelry &gt; Bracelets",
+          "Shop By Trend &gt; Vacation Ready",
+          "What's New",
+          "All Jewelry",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "29",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Jewelry&gt;Bracelets",
+          "Gifts for Her&gt;Gifts Under $25",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Shop By Trend&gt;Worth The Tassel",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "32",
+        "popularity": "2387",
+        "product_type_unigram": "bracelet",
+        "id": "816a3f1f100c6d21714e434ea9960f89"
+      }
+    },
+    {
+      "id": "182408",
+      "mappings": {
+        "core": {
+          "uid": "182408",
+          "price": 30,
+          "msrp": 50,
+          "url": "/product/J-RDB-R6-SC581",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2535_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2535_copyright_reddressboutique_2017__large.jpg",
+          "name": "I'm Charmed Red Pendant Necklace",
+          "sku": "J-RDB-R6-SC581",
+          "brand": "RDB"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWHw0g1ycdINMtMNdja1MGQwZDAyZDA2YDAyM2RIL8pMAQDyHAow",
+        "intellisuggestSignature": "2b266b2706a306780ae4c29b3ef55e19dc92ed6db644c2a0cada335d24171ac2",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "41",
+        "ss_product_type": "Pen",
+        "keywords": [
+          "red",
+          "burgundy",
+          "pendant",
+          "pendent",
+          "teardrop",
+          "tear drop",
+          "neck lace",
+          "dainty",
+          "simple",
+          "delicate",
+          "jewelry",
+          "accessories"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "After a guy introduces himself and you do the same and then reply with, I’m Charmed, he’ll definitely agree when you're wearing this dreamy Red Pendant Necklace (he would anyway, now that we think about it). In fact, as entrancing as you’ll look in this mesmerizing necklace, he’ll think you may have put a spell on him. This gold chain necklace features a teardrop shaped pendant. Necklace measures 20.5&quot; around. • Lobster clasp closure • Locally Made in Athens, GA",
+        "title": "I'm Charmed Red Pendant Necklace",
+        "ss_clicks": "3675",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "2204",
+        "ss_sale_price": "30",
+        "product_type": [
+          "All Jewelry &gt; Necklaces",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "180",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "What's New",
+          "Gifts for Her",
+          "All Jewelry&gt;Necklaces",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "6",
+        "popularity": "2204",
+        "product_type_unigram": "necklace",
+        "id": "243665a79d2502827265f4d1da3289ac"
+      }
+    },
+    {
+      "id": "183186",
+      "mappings": {
+        "core": {
+          "uid": "183186",
+          "price": 58,
+          "msrp": 75,
+          "url": "/product/C-MB-R4-16687",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5783_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5783_copyright_reddressboutique_2017__large.jpg",
+          "name": "Make A Statement Red Lace Dress",
+          "sku": "C-MB-R4-16687",
+          "brand": "Marine"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1vV10g0y0TU0M7MwZzBkMDJiMDZgMDIzZEgvykwBAOFQCbc",
+        "intellisuggestSignature": "3a1795f1ee3417515543bdb7aa934f6a0df447f34fdadbd15420a9a354a1e477",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "61",
+        "ss_product_type": "Dress",
+        "keywords": [
+          "red",
+          "red dress",
+          "red lace dress",
+          "lace",
+          "crochet",
+          "body con",
+          "bodycon dress",
+          "cocktail dress",
+          "wedding guest",
+          "crochet lace"
+        ],
+        "color": [
+          "Red"
+        ],
+        "black_friday": "yes",
+        "multi_colors": "no",
+        "description": "How do you gain the attention of an entire room? The banging of a loud gavel would do it, sure, but how polite is that? Not at all. Screaming? Sure it would work but it would panic everyone and the screaming would pretty much be everything you would accomplish. Slowly descend a Cinderella staircase while clad in a gorgeous dress? Yup, that's the ticket! That's the best way to Make A Statement and make it stick! Mid-length dress features a lace up peek-a-boo front and an exposed back zipper with hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
+        "title": "Make A Statement Red Lace Dress",
+        "ss_clicks": "4233",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2189",
+        "ss_sale_price": "58",
+        "holiday_styles": "yes",
+        "ss_category_hierarchy": [
+          "Special Occasion&gt;Graduation Dresses",
+          "Shop By Trend",
+          "All Dresses",
+          "Shop By Trend&gt;Girl's Night Out",
+          "All Dresses&gt;Shop by Color&gt;Red Dresses",
+          "All Dresses&gt;Shop by Color",
+          "Gifts for Her",
+          "Special Occasion&gt;Wedding Guest Dress",
+          "Special Occasion&gt;Formal Dresses",
+          "Special Occasion"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Red Dresses",
+          "Special Occasion &gt; Formal Dresses",
+          "Special Occasion &gt; Graduation Dresses",
+          "Shop By Trend &gt; Girl's Night Out",
+          "Special Occasion &gt; Wedding Guest Dress",
+          "All Dresses &gt; Shop by Color",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Polyester",
+        "days_since_published": "112",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "37",
+        "popularity": "2189",
+        "product_type_unigram": "dress",
+        "id": "7e218520bf047946dc5c2c89b80b0612"
+      }
+    },
+    {
+      "id": "179662",
+      "mappings": {
+        "core": {
+          "uid": "179662",
+          "price": 55,
+          "msrp": 75,
+          "url": "/product/C-FAI-R4-OP155",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3357_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3357_copyright_reddressboutique_2017_large.jpg",
+          "name": "Sunny Vibes Red One-Piece Swimsuit",
+          "sku": "C-FAI-R4-OP155",
+          "brand": "5th Avenue"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1nVz9NQNMtH1DzA0NWUwZDAyZjA2YDAyM2RIL8pMAQDwsgon",
+        "intellisuggestSignature": "edbc31120b2b4da157501ff2966a9500dcbef2c00235ea8a09cbaff32e1a634b",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "70",
+        "ss_product_type": "Swimsuit",
+        "keywords": [
+          "red",
+          "red swimsuit",
+          "one piece",
+          "single piece",
+          "swim",
+          "swimsuit",
+          "whole piece",
+          "beach",
+          "vacation",
+          "spring break",
+          "pool",
+          "sexy",
+          "straps",
+          "strappy back"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "You feel that? That tingly sensation crawling along your skin like a warm summer breeze? That just means that you’re picking up good vibrations (you, and the Beach Boys). And oh, the joys those Sunny Vibes bring (particularly when you’re soaking them up in a flattering new swimsuit). With all this refreshing warmth, and sunlight, and life, you’ll be hard pressed to remember what you ever found so appealing about the changing of the seasons. Swimwear includes padded inserts. • 80% Nylon 20% Spandex • Hand Wash Cold • Unlined • Imported",
+        "title": "Sunny Vibes Red One-Piece Swimsuit",
+        "ss_clicks": "1127",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "2134",
+        "ss_sale_price": "55",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Going Fast",
+          "Gifts for Her",
+          "Swimwear&gt;One Piece",
+          "Swimwear"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Swimwear &gt; One Piece",
+          "Swimwear",
+          "Going Fast",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "33",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large",
+          "X-Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "2134",
+        "product_type_unigram": "swimsuit",
+        "id": "98fc34ba07237c8fddb3c8786be422e2"
+      }
+    },
+    {
+      "id": "180021",
+      "mappings": {
+        "core": {
+          "uid": "180021",
+          "price": 6,
+          "msrp": 25,
+          "url": "/product/A-NYX-BLS28",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3526_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3526_copyright_reddressboutique_2017_large.jpg",
+          "name": "NYX Heat Wave Red Butter Lipstick",
+          "sku": "A-NYX-BLS28",
+          "brand": "NYX"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1PWLjNB18gk2smAwZDAyYTA2YDAyM2RIL8pMAQDWVwmz",
+        "intellisuggestSignature": "beec291bcafd69beea0c3775cd7c732139d2f06ed153520eaed97f7062ed26b3",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "48",
+        "ss_product_type": "Lipstick",
+        "keywords": [
+          "Nyx",
+          "nyx brand",
+          "nyx makeup",
+          "makeup",
+          "make-up",
+          "lipstick",
+          "lip stick",
+          "butter",
+          "butter lipstick",
+          "butter lip stick",
+          "red",
+          "true red",
+          "bright red"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Treat your lips to a kiss of smooth, creamy color with our irresistible Butter Lipsticks. The formula’s delicate satin texture fused with highly saturated color delivers full-yet-lightweight coverage with a luxurious satin finish. All shades contain the following unless otherwise noted: Ricinus Communis (Castor) Seed Oil, Polyglyceryl-3 Diisostearate, Diisostearyl Malate, Pentaerythrityl Tetraisostearate, Bis-Diglyceryl Polyacyladipate-2, Octyldodecanol, Caprylic/Capric Triglyceride, Oleyl Alcohol, Euphorbia Cerifera (Candelilla) Wax/Candelilla Cera/Cire de Candelilla, Polyethylene, Ozokerite, Hydrogenated Microcrystalline Wax, Tocopheryl Acetate, Tocopherol, Hydrogenated Palm Glycerides Citrate, BHT, Alumina, Flavor/Aroma. MAY CONTAIN / PEUT CONTENIR (+/-): Mica, Titanium Dioxide (CI 77891), Iron Oxides (CI 77491, CI 77492, CI 77499), Red 6 (CI 15850), Red 7 (CI 15850), Red 28 Lake (CI 45410), Red 36 (CI 12085), Yellow 5 Lake (CI 19140), Blue 1 Lake (CI 42090).",
+        "title": "NYX Heat Wave Red Butter Lipstick",
+        "ss_clicks": "4354",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "1818",
+        "ss_sale_price": "6",
+        "product_type": [
+          "All Accessories &gt; Beauty &gt; Lips",
+          "All Accessories &gt; Beauty",
+          "What's New",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Stocking Stuffers",
+          "Gifts for Her &gt; Gifts Under $25",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "9",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Gifts for Her&gt;Stocking Stuffers",
+          "Gifts for Her&gt;Gifts Under $25",
+          "What's New",
+          "Gifts for Her",
+          "All Accessories&gt;Beauty",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Accessories&gt;Beauty&gt;Lips"
+        ],
+        "on_sale": "No",
+        "quantity_available": "12",
+        "popularity": "1818",
+        "product_type_unigram": "lipstick",
+        "id": "471e22a961eb7b5826b1a5b6d054587a"
+      }
+    },
+    {
+      "id": "182743",
+      "mappings": {
+        "core": {
+          "uid": "182743",
+          "price": 28,
+          "msrp": 50,
+          "url": "/product/J-AZ-R4-E1844",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6086_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6086_copyright_reddressboutique_2017__large.jpg",
+          "name": "Most Popular Red Statement Earrings",
+          "sku": "J-AZ-R4-E1844",
+          "brand": "Anzell"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWHw0nWM0g0y0XU1tDAxYTBkMDJlMDZgMDIzZEgvykwBAOR2Cdc",
+        "intellisuggestSignature": "0a9ab6e51db75e894eb23a79c893adfb222755a265c820c6d49e12314a18d5dc",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "70",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "earring",
+          "earrings",
+          "earing",
+          "earings",
+          "beads",
+          "beaded",
+          "pendant",
+          "pendent",
+          "ball",
+          "bauble",
+          "bobble",
+          "bauble bar",
+          "statement",
+          "statement earring",
+          "red",
+          "true red",
+          "summer",
+          "fun",
+          "cute",
+          "trendy"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "You and these earrings have a surprising amount in common. For example, when you wear them, and instantly become the Most Popular girl in the room, then the earrings in turn will become the Most Popular accessory in your jewelry collection. If that doesn’t make you soul mates, we don’t know what does. Earrings measure 2.5&quot; • Imported",
+        "title": "Most Popular Red Statement Earrings",
+        "ss_clicks": "1303",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "1758",
+        "ss_sale_price": "28",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "What's New",
+          "All Jewelry",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "93",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "All Jewelry&gt;Earrings",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "11",
+        "popularity": "1758",
+        "product_type_unigram": "earrings",
+        "id": "46984ba8bea28b9382b138ba7c57ceae"
+      }
+    },
+    {
+      "id": "178547",
+      "mappings": {
+        "core": {
+          "uid": "178547",
+          "price": 62,
+          "msrp": 75,
+          "url": "/product/C-DD-R4-1761",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/swimshoot3-21300copyright_reddressboutique__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/swimshoot3-21300copyright_reddressboutique__large.jpg",
+          "name": "Rescue Me Red One-Piece Swimsuit",
+          "sku": "C-DD-R4-1761",
+          "brand": "Dippin' Daisy's"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1nVx0Q0y0TU0NzNkMGQwMmMwNgCShgzpRZkpANY0CXc",
+        "intellisuggestSignature": "a7419f1665104b5e172f0866d58d0e48d950301f0b145bdcadaf6a0c65ec6808",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "61",
+        "ss_product_type": "Swimsuit",
+        "keywords": [
+          "red",
+          "one piece",
+          "single piece",
+          "swim",
+          "swimsuit",
+          "whole piece",
+          "lace up",
+          "beach",
+          "vacation",
+          "spring break",
+          "pool",
+          "sexy",
+          "baywatch",
+          "lifeguard",
+          "bay watch"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "We'll admit it, in this swimsuit, you'll catch a few eyes. Those same eyes will wish you were running down the beach, perhaps in slow motion, with the intent of saving their lives. Those who are lucky enough to have already caught your heart are going to look for every excuse possible to pretend they're drowning so they can at least playfully ask to be saved between flailing in the water and pretending to gasp for breath between kisses (awe). All-in-all, it's what we consider a no-lose suit! Model is wearing a medium. Red Dress stylists suggest sizing up for best fit. Swimwear includes padded inserts. • 80% Nylon 20% Spandex • 100% Polyester lining • Hand Wash Cold • Fully Lined Swimsuit • Made in the USA",
+        "title": "Rescue Me Red One-Piece Swimsuit",
+        "ss_clicks": "239",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "1632",
+        "ss_sale_price": "62",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Going Fast",
+          "Gifts for Her",
+          "Swimwear&gt;One Piece",
+          "Swimwear"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Swimwear &gt; One Piece",
+          "Swimwear",
+          "Going Fast",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Spandex",
+        "days_since_published": "138",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "1632",
+        "product_type_unigram": "swimsuit",
+        "id": "223733590b9b474c673d114e75c4d3c0"
+      }
+    },
+    {
+      "id": "180827",
+      "mappings": {
+        "core": {
+          "uid": "180827",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-UG-R4-C0329",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1683_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1683_copyright_reddressboutique_2017__large.jpg",
+          "name": "Relish The Moment Red Embroidered Dress",
+          "sku": "C-UG-R4-C0329",
+          "brand": "Aura L'atiste"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1g111w0y0XU2MDayZDBkMDJnMDZgMDIzZEgvykwBAON8Cc4",
+        "intellisuggestSignature": "1882ad187921791ab4a412bd261fc78f6587f3e7dce0616a917220105dfc3f01",
+        "ss_insights_quadrant": "Poor Performer",
+        "gross_margin": "55",
+        "ss_product_type": "Dress",
+        "keywords": [
+          "red",
+          "red dress",
+          "sundress",
+          "sun dress",
+          "embroidered dress",
+          "embroidery",
+          "flowy dress",
+          "casual cute",
+          "flowers",
+          "flower embroidery",
+          "sleeveless",
+          "sleeve less",
+          "keyhole",
+          "cut out",
+          "summer",
+          "spring",
+          "vacation"
+        ],
+        "color": [
+          "Red"
+        ],
+        "dress_length_name": "Mini",
+        "multi_colors": "no",
+        "pattern": "Embroidered",
+        "description": "The thing about moments is that they're fleeting. They're there one moment, gone the next. Most of the time, you don't even realize you missed a moment until it's already over with. Our solution, Relish The Moment by celebrating it in this gorgeous Embroidered Dress. Why is clothing important? Because it's memorable. It adds to the moment and it helps you to slow down and realize how special the moment is before it passes you by. So if anything, we're doing you a huge favor by making you take stock of what really matters. Who knew fashion could do something so meaningful? We did. We totally did. Red sun dress features a flowy, drop waist silhouette with an asymmetrical hemline, keyhole opening in front, exposed zipped in back, and colorful flower embroidery throughout the front and back. Model is wearing a small. • 65% Cotton 35% Polyester • Hand Wash Cold • Unlined • Imported",
+        "title": "Relish The Moment Red Embroidered Dress",
+        "ss_clicks": "1886",
+        "saturation": "high",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "1502",
+        "ss_sale_price": "46",
+        "season": "Summer",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Short Dresses",
+          "All Dresses&gt;Casual Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color&gt;Red Dresses",
+          "All Dresses&gt;Shop by Color",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Red Dresses",
+          "All Dresses &gt; Sundresses",
+          "All Dresses &gt; Short Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Casual Dresses",
+          "Shop By Trend &gt; Spring Preview",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "66",
+        "dress_length": "34",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "1",
+        "popularity": "1502",
+        "product_type_unigram": "dress",
+        "id": "7a665f54fb840d83b8e18b6b185d7bd8"
+      }
+    },
+    {
+      "id": "173402",
+      "mappings": {
+        "core": {
+          "uid": "173402",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/B-ITB-R4-1015",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_studio_accessories_301_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_studio_accessories_301_large.jpg",
+          "name": "Moving On Up Red Handbag",
+          "sku": "B-ITB-R4-1015",
+          "brand": "It Bag"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw0vUMcdINMtE1NDA0ZTBkMLJgMDZgMDIzZEgvykwBAOMKCcc",
+        "intellisuggestSignature": "fa970cde1233a9b586f648228c91b40347b878448570fcdaf44d8058c1da86d0",
+        "ss_insights_quadrant": "Best Performer",
+        "gross_margin": "58",
+        "ss_product_type": "Handbag",
+        "keywords": [
+          "handbag",
+          "purse",
+          "bag",
+          "pocket book",
+          "pocketbook",
+          "red",
+          "red purse",
+          "red handbag"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "Ah, the glass ceiling. That infamous invisible barrier people say you can’t ascend past. But you, you laugh in the face of repression. Nothing can stop you from moving on up. See, you even have the handbag to prove it. • Vegan friendly, man made materials • Imported • Height measures 12&quot; • Width measures 15&quot; • Depth measures 7&quot;",
+        "vegan_friendly": "Vegan Friendly",
+        "title": "Moving On Up Red Handbag",
+        "ss_clicks": "3394",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "1203",
+        "ss_sale_price": "48",
+        "product_type": [
+          "All Accessories &gt; Handbags/Purses",
+          "Going Fast",
+          "All Accessories",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "days_since_published": "68",
+        "ss_category_hierarchy": [
+          "All Accessories",
+          "Going Fast",
+          "Gifts for Her",
+          "All Accessories&gt;Handbags/Purses",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": "No",
+        "quantity_available": "3",
+        "popularity": "1203",
+        "product_type_unigram": "handbag",
+        "id": "b9b2d13ef58dbd96cab5be2ba5200c16"
+      }
+    },
+    {
+      "id": "170281",
+      "mappings": {
+        "core": {
+          "uid": "170281",
+          "price": 26,
+          "msrp": 50,
+          "url": "/product/J-GS-R7-67109",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/386_7129_copyright_reddressboutique_2016_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/386_7129_copyright_reddressboutique_2016_large.jpg",
+          "name": "Ways Of The Heart Red Earrings",
+          "sku": "J-GS-R7-67109",
+          "brand": "Stella"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWHw0nUP1g0y1zUzNzSwZDBkMLJkMDZgMDIzZEgvykwBAOOTCc4",
+        "intellisuggestSignature": "a24b5c848b87ef4f9cf0116dde74ff1a867a8f13cea9f61a0525aea6aef84509",
+        "ss_insights_quadrant": "Under Exposed",
+        "gross_margin": "42",
+        "ss_product_type": "Earrings",
+        "keywords": [
+          "red",
+          "red earrings",
+          "statement earrings",
+          "chandelier earrings",
+          "statement jewelry",
+          "red jewelry",
+          "dangle earrings"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "description": "The Ways Of The Heart, sometimes they can be quite confusing, but one thing’s for sure, your love for these Red Earrings makes perfect sense! And they’ll look absolutely lovely on you! Gold drop chandelier earrings with faceted pendants. • Fish hook backs • Imported",
+        "title": "Ways Of The Heart Red Earrings",
+        "ss_clicks": "2271",
+        "color_family": [
+          "Red"
+        ],
+        "condition": "New",
+        "sales_rank": "998",
+        "ss_sale_price": "26",
+        "product_type": [
+          "All Jewelry &gt; Earrings",
+          "All Jewelry",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "ONE SIZE"
+        ],
+        "days_since_published": "153",
+        "size_universal": "One Size",
+        "ss_category_hierarchy": [
+          "All Jewelry&gt;Earrings",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50",
+          "All Jewelry"
+        ],
+        "on_sale": "No",
+        "quantity_available": "7",
+        "popularity": "998",
+        "product_type_unigram": "earrings",
+        "id": "ffe73ae3e6dcafacc4055d3927dbc59f"
+      }
+    },
+    {
+      "id": "180935",
+      "mappings": {
+        "core": {
+          "uid": "180935",
+          "price": 39,
+          "msrp": 50,
+          "url": "/product/C-UG-R4-C0106",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3920_copyright_reddressboutique_2017_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3920_copyright_reddressboutique_2017_large.jpg",
+          "name": "Nod To Nature Red Embroidered Top",
+          "sku": "C-UG-R4-C0106",
+          "brand": "Aura L'atiste"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYChKTWFw1g111w0y0XU2MDQwYzBkMDYAISMzQ4b0oswUAOKrCcE",
+        "intellisuggestSignature": "f5c38a66449308d1154f4e86adc0a13c7da433cd496d1f59af3860f6b8257d14",
+        "ss_insights_quadrant": "Over Exposed",
+        "gross_margin": "42",
+        "ss_product_type": "Top",
+        "keywords": [
+          "red embroidered top",
+          "top",
+          "shirt",
+          "blouse",
+          "red",
+          "embroider",
+          "embroidery",
+          "red top",
+          "embroidered top",
+          "boho top",
+          "boho",
+          "three quarter sleeve",
+          "flowy top"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": "no",
+        "pattern": "Embroidered",
+        "description": "Every garment worth its fabric has a Nod To Nature somewhere in its hypothetical bones. Some nods are simply more obvious than others. Like this one, for instance. This blouse is pretty and would compliment any wardrobe, is ready for your boho loving self, and is just pleading to go home with you. Or to you, rather. Since this is online, technically. Long sleeve blouse features floral embroidery and a lace-up front with a tassel tie. Has a loose fit with elasticized wrist cuffs. Model is wearing a small. • 60% Cotton 40% Polyester • Hand Wash Cold • Unlined • Imported",
+        "title": "Nod To Nature Red Embroidered Top",
+        "ss_clicks": "4003",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": "564",
+        "ss_sale_price": "39",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "Shop By Trend&gt;Fresh Florals",
+          "All Tops&gt;Blouses &amp; Shirts",
+          "What's New",
+          "Gifts for Her",
+          "Shop By Trend&gt;Vacation Ready",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Brands We Love",
+          "Brands We Love&gt;Red Dress Label",
+          "Brands We Love&gt;Red Dress Label&gt;Aura",
+          "All Tops"
+        ],
+        "on_sale": "No",
+        "condition": "New",
+        "product_type": [
+          "Brands We Love &gt; Red Dress Label &gt; Aura",
+          "Shop By Trend &gt; Fresh Florals",
+          "Shop By Trend &gt; Vacation Ready",
+          "All Tops &gt; Blouses &amp; Shirts",
+          "What's New",
+          "All Tops",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": "Cotton",
+        "days_since_published": "120",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": "10",
+        "popularity": "564",
+        "product_type_unigram": "top",
+        "id": "7552c4cf0696a1b6f25ead7bb650e456"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "range-buckets",
+      "field": "price",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": null,
+          "high": 20,
+          "label": "up to $20",
+          "count": 522
+        },
+        {
+          "filtered": false,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 854
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 1625
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 1160
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 435
+        },
+        {
+          "filtered": false,
+          "low": 75,
+          "high": 100,
+          "label": "$75 to $100",
+          "count": 59
+        },
+        {
+          "filtered": false,
+          "low": 100,
+          "high": 150,
+          "label": "$100 to $150",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "low": 150,
+          "high": 200,
+          "label": "$150 to $200",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "low": 200,
+          "high": 500,
+          "label": "$200 to $500",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "brand",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "4 Sienna",
+          "label": "4 Sienna",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Aakaa",
+          "label": "Aakaa",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Adriana",
+          "label": "Adriana",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 19
+        },
+        {
+          "filtered": false,
+          "value": "Anama",
+          "label": "Anama",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "ANM",
+          "label": "ANM",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Anne Michelle",
+          "label": "Anne Michelle",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Anzell",
+          "label": "Anzell",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ark & Co",
+          "label": "Ark & Co",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aryeh",
+          "label": "Aryeh",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Bamboo",
+          "label": "Bamboo",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "BB Dakota",
+          "label": "BB Dakota",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "BB Daktota",
+          "label": "BB Daktota",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Blu Pepper",
+          "label": "Blu Pepper",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Breckelle's",
+          "label": "Breckelle's",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "BSharp",
+          "label": "BSharp",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Buddy Love",
+          "label": "Buddy Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ces Femme",
+          "label": "Ces Femme",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Cezanne",
+          "label": "Cezanne",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Charlie Southern",
+          "label": "Charlie Southern",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ci Sono",
+          "label": "Ci Sono",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "City Classified",
+          "label": "City Classified",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Coalition",
+          "label": "Coalition",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Colorfully Yours",
+          "label": "Colorfully Yours",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Cotton Candy",
+          "label": "Cotton Candy",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Deco",
+          "label": "Deco",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Dippin' Daisy's",
+          "label": "Dippin' Daisy's",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Dynamic Asia",
+          "label": "Dynamic Asia",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "E2 Clothing",
+          "label": "E2 Clothing",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Easel",
+          "label": "Easel",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ellison",
+          "label": "Ellison",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Emory Park",
+          "label": "Emory Park",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Entro",
+          "label": "Entro",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Essue",
+          "label": "Essue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ever After",
+          "label": "Ever After",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Everly",
+          "label": "Everly",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ezra",
+          "label": "Ezra",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fame",
+          "label": "Fame",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fashionomics",
+          "label": "Fashionomics",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Flying Tomato",
+          "label": "Flying Tomato",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fringe",
+          "label": "Fringe",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Girly Accessories",
+          "label": "Girly Accessories",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Hayden",
+          "label": "Hayden",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hello Miss",
+          "label": "Hello Miss",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Hem & Thread",
+          "label": "Hem & Thread",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hot + Delicious",
+          "label": "Hot + Delicious",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "House of Tuhina",
+          "label": "House of Tuhina",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hyfve",
+          "label": "Hyfve",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "ss_category_hierarchy",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 261
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 41
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "All Accessories",
+          "label": "All Accessories",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "All Pajamas",
+          "label": "All Pajamas",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Shop Lookbook",
+          "label": "Shop Lookbook",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "All Jewelry",
+          "label": "All Jewelry",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Home & Office Decor",
+          "label": "Home & Office Decor",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "White & Blue Looks",
+          "label": "White & Blue Looks",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All Intimates",
+          "label": "All Intimates",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Top Rated",
+          "label": "Top Rated",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "on_sale",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 116
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 145
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "24",
+          "label": "24",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "ONE SIZE",
+          "label": "ONE SIZE",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_dress",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 198
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "material",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Rubber",
+          "label": "Rubber",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 111
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 44
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "season",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 30
+        },
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 29
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "dress_length_name",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "pattern",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Paisley",
+          "label": "Paisley",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_footwear",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 16
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "saturation",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "collection",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "All In Favor",
+          "label": "All In Favor",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "All Purpose",
+          "label": "All Purpose",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Answer To Your Layers",
+          "label": "Answer To Your Layers",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "At My Best",
+          "label": "At My Best",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Basically Perfect",
+          "label": "Basically Perfect",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Beauty In Believing",
+          "label": "Beauty In Believing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Chic And Easy",
+          "label": "Chic And Easy",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "City Of Stars",
+          "label": "City Of Stars",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Gossip Girl",
+          "label": "Gossip Girl",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "The Story",
+          "label": "The Story",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size_pants",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "24",
+          "label": "24",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 5
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {}
+  }
+}

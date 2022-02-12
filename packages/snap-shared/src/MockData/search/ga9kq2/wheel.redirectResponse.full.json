@@ -1,0 +1,937 @@
+{
+    "search": {
+      "query": "wh"
+    },
+    "pagination": {
+      "totalResults": 12,
+      "page": 1,
+      "defaultPageSize": 30,
+      "pageSize": 30
+    },
+    "sorting": [],
+    "results": [
+      {
+        "id": "588171",
+        "mappings": {
+          "core": {
+            "uid": "588171",
+            "price": 75.97,
+            "msrp": 83.57,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-195-60r15-92t-14222nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588171/images/948950/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__90905.1570810144.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588171/images/948950/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__90905.1570810144.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 195/60R15 92T",
+            "sku": "14222NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTIy8ovwZjAEQmMDBkMjhvSizBQAi3oHqQ",
+          "intellisuggestSignature": "2c47a032da2740210f59dad8a00bb77ffbe59a9eff63c2238a52dadbaac8f3c2",
+          "ss_boosting_rule": "15",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "15 Inch Tires",
+            "195-60-15",
+            "Tire Finder",
+            "195",
+            "60",
+            "15",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "92t",
+          "id": "cb291f859c3e11d7cec88ff67f14ae21"
+        }
+      },
+      {
+        "id": "588182",
+        "mappings": {
+          "core": {
+            "uid": "588182",
+            "price": 89.97,
+            "msrp": 98.97,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-215-60r16-99t-14224nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588182/images/948961/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__29096.1570761643.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588182/images/948961/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__29096.1570761643.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 215/60R16 99T",
+            "sku": "14224NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTIy8YvwZjBkMGIwNmAwNGJIL8pMAQCLrAes",
+          "intellisuggestSignature": "0dfb7e30739885d05fc0ee82c314d1116e88d84a804bab9dde306b04077d5073",
+          "ss_boosting_rule": "14",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "16 Inch Tires",
+            "215-60-16",
+            "Tire Finder",
+            "215",
+            "60",
+            "16",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "99t",
+          "id": "f4b4ae6504c0327d9f5e75bbbe46540a"
+        }
+      },
+      {
+        "id": "588181",
+        "mappings": {
+          "core": {
+            "uid": "588181",
+            "price": 92.97,
+            "msrp": 102.27,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-215-55r17-98t-14217nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588181/images/948960/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__72289.1570759709.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588181/images/948960/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__72289.1570759709.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 215/55R17 98T",
+            "sku": "14217NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTI094vwZjBkMGYwNmAwNGJIL8pMAQCL3Qev",
+          "intellisuggestSignature": "950d5126a0588f21d69359895ee30f78438e327fb93f0539eed0fe9ec3363cd9",
+          "ss_boosting_rule": "14",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "17 Inch Tires",
+            "215-55-17",
+            "Tire Finder",
+            "215",
+            "55",
+            "17",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "98t",
+          "id": "42d6d23d9d784a12dd2c507d0dbd6b0d"
+        }
+      },
+      {
+        "id": "588180",
+        "mappings": {
+          "core": {
+            "uid": "588180",
+            "price": 86.97,
+            "msrp": 95.67,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-215-55r16-97t-14216nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588180/images/948959/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__28994.1570759712.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588180/images/948959/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__28994.1570759712.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 215/55R16 97T",
+            "sku": "14216NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTI084vwZjBkMGEwNmAwNGJIL8pMAQCL1gev",
+          "intellisuggestSignature": "0d2af2e79f9949f4edae161ae5967b42aa9e29797c62ba1fdc7c2d862ab5dfee",
+          "ss_boosting_rule": "14",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "16 Inch Tires",
+            "215-55-16",
+            "Tire Finder",
+            "215",
+            "55",
+            "16",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "97t",
+          "id": "62585e4a3d96db62f9b8d4a2f6676346"
+        }
+      },
+      {
+        "id": "588177",
+        "mappings": {
+          "core": {
+            "uid": "588177",
+            "price": 84.97,
+            "msrp": 93.47,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-205-60r16-92t-14149nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588177/images/948956/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__09974.1570806417.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588177/images/948956/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__09974.1570806417.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 205/60R16 92T",
+            "sku": "14149NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTSx9IvwZjBkMGUwNmAwNGJIL8pMAQCMQge1",
+          "intellisuggestSignature": "92a192c43df5765284379ad4ca3107cc17de6872a28f2a9cbcb77c942081d5b8",
+          "ss_boosting_rule": "14",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "16 Inch Tires",
+            "205-60-16",
+            "Tire Finder",
+            "205",
+            "60",
+            "16",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "92t",
+          "id": "415e1aa563ce94cd15acce9869aaa455"
+        }
+      },
+      {
+        "id": "588193",
+        "mappings": {
+          "core": {
+            "uid": "588193",
+            "price": 97.97,
+            "msrp": 107.77,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-235-55r17-103t-14219nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588193/images/948972/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__16870.1570784400.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588193/images/948972/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__16870.1570784400.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 235/55R17 103T",
+            "sku": "14219NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTK09IvwZjBkMGMwNmAwNGJIL8pMAQCMJwe0",
+          "intellisuggestSignature": "f9c84a92eaea91653436459a5f7ea8892dd25f284fc5ec20a22e1f3284b864e6",
+          "ss_boosting_rule": "13",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "17 Inch Tires",
+            "235-55-17",
+            "Tire Finder",
+            "235",
+            "55",
+            "17",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "103t",
+          "id": "06443c735d37d57ef19f3f03f13b7034"
+        }
+      },
+      {
+        "id": "588190",
+        "mappings": {
+          "core": {
+            "uid": "588190",
+            "price": 99.97,
+            "msrp": 109.97,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-225-55r17-101t-14218nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588190/images/948969/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__09381.1570790484.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588190/images/948969/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__09381.1570790484.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 225/55R17 101T",
+            "sku": "14218NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTK08IvwZjBkMGcwNmAwNGJIL8pMAQCMIAe0",
+          "intellisuggestSignature": "3eefd37b1eab9c546d71cee0bee4719394f291b8288fccabf81c24ac4838c198",
+          "ss_boosting_rule": "13",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "17 Inch Tires",
+            "225-55-17",
+            "Tire Finder",
+            "225",
+            "55",
+            "17",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "101t",
+          "id": "cb64c2779af7ea8bba1612d97612b377"
+        }
+      },
+      {
+        "id": "588189",
+        "mappings": {
+          "core": {
+            "uid": "588189",
+            "price": 91.97,
+            "msrp": 101.17,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-225-50r17-98t-14212nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588189/images/948968/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__11626.1570803319.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588189/images/948968/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__11626.1570803319.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 225/50R17 98T",
+            "sku": "14212NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTI08ovwZjBksGAwNmAwNGJIL8pMAQCLugev",
+          "intellisuggestSignature": "92052952fb86b29aae5a42b976efa7d04453cc6d0ff8618b06b4c90f8f59b2a1",
+          "ss_boosting_rule": "13",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "17 Inch Tires",
+            "225-50-17",
+            "Tire Finder",
+            "225",
+            "50",
+            "17",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "98t",
+          "id": "b32e61d8c2a50dfdca19e50430a252be"
+        }
+      },
+      {
+        "id": "588185",
+        "mappings": {
+          "core": {
+            "uid": "588185",
+            "price": 83.97,
+            "msrp": 92.37,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-215-70r15-98t-14234nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588185/images/948964/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__13482.1570771356.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588185/images/948964/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__13482.1570771356.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 215/70R15 98T",
+            "sku": "14234NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTI28YvwZjBksGQwNmAwNGJIL8pMAQCMFAe0",
+          "intellisuggestSignature": "b45801d56e36edf367aa2c1f63e9a3856bfb50b32496c74251891f931caf5b4e",
+          "ss_boosting_rule": "13",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "15 Inch Tires",
+            "215-70-15",
+            "Tire Finder",
+            "215",
+            "70",
+            "15",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "98t",
+          "id": "3c152185bd81925338b86cbda3523492"
+        }
+      },
+      {
+        "id": "588184",
+        "mappings": {
+          "core": {
+            "uid": "588184",
+            "price": 90.97,
+            "msrp": 100.07,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-215-65r16-102t-14228nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588184/images/948963/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__33795.1570803518.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588184/images/948963/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__33795.1570803518.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 215/65R16 102T",
+            "sku": "14228NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MTKy8IvwZjBkMDRgMDZgMDRiSC_KTAEAk28H3w",
+          "intellisuggestSignature": "4761ef31be6c27c0a165a8d5fd844d18e503b44e57670cfbe139e45d628e7d42",
+          "ss_boosting_rule": "13",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "16 Inch Tires",
+            "215-65-16",
+            "Tire Finder",
+            "215",
+            "65",
+            "16",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "102t",
+          "id": "d32358a2476b85e788dba87d0932d309"
+        }
+      },
+      {
+        "id": "588188",
+        "mappings": {
+          "core": {
+            "uid": "588188",
+            "price": 104.97,
+            "msrp": 115.47,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-225-45r18-95t-16252nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588188/images/948967/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__49190.1570803821.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588188/images/948967/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__49190.1570803821.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 225/45R18 95T",
+            "sku": "16252NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MzI18ovwZjBkMDRkMDZgMDRiSC_KTAEAk3AH3w",
+          "intellisuggestSignature": "43c6501b5184374c6a0775f54ab2e86e4fa49898a60a2223ffb115979bd1c9d5",
+          "ss_boosting_rule": "12",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "18 Inch Tires",
+            "225-45-18",
+            "Tire Finder",
+            "225",
+            "45",
+            "18",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "95t",
+          "id": "68162e2d39f3da06bcde404ddf4a66a8"
+        }
+      },
+      {
+        "id": "588192",
+        "mappings": {
+          "core": {
+            "uid": "588192",
+            "price": 112.97,
+            "msrp": 124.27,
+            "url": "https://www.bbwheelsonline.com/nexen-winguard-winspike-wh62-tires-235-50r18-101t-16257nxk/",
+            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588192/images/948971/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__31889.1570743971.200.190.jpg?c=2",
+            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/588192/images/948971/256873-wintersnowtrucktires-nexen-winguardwinspikesuv__06657__51152.1526491703.1280.1280__95535.1551851285.1280.1280__31889.1570743971.200.190.jpg?c=2",
+            "name": "Nexen Winguard Winspike WH62 Tire 235/50R18 101T",
+            "sku": "16257NXK",
+            "brand": "NEXEN"
+          }
+        },
+        "attributes": {
+          "intellisuggestData": "eJxLT7TMLjRiYCjPYDA0MzI194vwZjBkMDRiMDYAkelFmSkAk-AH5Q",
+          "intellisuggestSignature": "5e5b92c4b16433e499f48132d8c23eb469f5ccf4324e5f1ff81a48e38c807f7b",
+          "ss_boosting_rule": "8",
+          "ga_unique_purchases": "1",
+          "option_set_id": "234",
+          "categories": [
+            "Tires",
+            "TIRES BY SIZE",
+            "18 Inch Tires",
+            "235-50-18",
+            "Tire Finder",
+            "235",
+            "50",
+            "18",
+            "TIRES BY BRAND",
+            "Nexen",
+            "Winguard Winspike WH62"
+          ],
+          "reviews_rating_sum": "0",
+          "reviews_count": "0",
+          "product_type_unigram": "101t",
+          "id": "8414175a1fb9e8c704f041215e0e630a"
+        }
+      }
+    ],
+    "facets": [
+      {
+        "type": "value",
+        "field": "custom_accessory_type",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Tires",
+            "label": "Tires",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_tire_size_1",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "235",
+            "label": "235",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "225",
+            "label": "225",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "215",
+            "label": "215",
+            "count": 5
+          },
+          {
+            "filtered": false,
+            "value": "205",
+            "label": "205",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "195",
+            "label": "195",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_tire_size_2",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "70",
+            "label": "70",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "65",
+            "label": "65",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "60",
+            "label": "60",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "55",
+            "label": "55",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "50",
+            "label": "50",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "45",
+            "label": "45",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_wheel_size",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "18",
+            "label": "18",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "17",
+            "label": "17",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "16",
+            "label": "16",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "15",
+            "label": "15",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_tire_type",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Winter",
+            "label": "Winter",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_product_brand",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Nexen",
+            "label": "Nexen",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "field": "custom_tire_load",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Non 8 or 10 Ply",
+            "label": "Non 8 or 10 Ply",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "field": "calculated_price",
+        "filtered": false,
+        "step": 1,
+        "range": {
+          "low": 75,
+          "high": 113
+        },
+        "active": {
+          "low": 75,
+          "high": 113
+        }
+      },
+      {
+        "type": "value",
+        "field": "ss_vehicle",
+        "filtered": false,
+        "values": []
+      },
+      {
+        "type": "value",
+        "field": "ss_accessory",
+        "filtered": false,
+        "values": []
+      },
+      {
+        "type": "value",
+        "field": "ss_tire",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "1980",
+            "label": "1980",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "1981",
+            "label": "1981",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1982",
+            "label": "1982",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1983",
+            "label": "1983",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1984",
+            "label": "1984",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1985",
+            "label": "1985",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1986",
+            "label": "1986",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1987",
+            "label": "1987",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "1988",
+            "label": "1988",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1989",
+            "label": "1989",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1990",
+            "label": "1990",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1991",
+            "label": "1991",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1992",
+            "label": "1992",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "1993",
+            "label": "1993",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "1994",
+            "label": "1994",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "1995",
+            "label": "1995",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "1996",
+            "label": "1996",
+            "count": 5
+          },
+          {
+            "filtered": false,
+            "value": "1997",
+            "label": "1997",
+            "count": 6
+          },
+          {
+            "filtered": false,
+            "value": "1998",
+            "label": "1998",
+            "count": 7
+          },
+          {
+            "filtered": false,
+            "value": "1999",
+            "label": "1999",
+            "count": 9
+          },
+          {
+            "filtered": false,
+            "value": "2000",
+            "label": "2000",
+            "count": 10
+          },
+          {
+            "filtered": false,
+            "value": "2001",
+            "label": "2001",
+            "count": 11
+          },
+          {
+            "filtered": false,
+            "value": "2002",
+            "label": "2002",
+            "count": 11
+          },
+          {
+            "filtered": false,
+            "value": "2003",
+            "label": "2003",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2004",
+            "label": "2004",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2005",
+            "label": "2005",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2006",
+            "label": "2006",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2007",
+            "label": "2007",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2008",
+            "label": "2008",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2009",
+            "label": "2009",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2010",
+            "label": "2010",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2011",
+            "label": "2011",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2012",
+            "label": "2012",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2013",
+            "label": "2013",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2014",
+            "label": "2014",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2015",
+            "label": "2015",
+            "count": 12
+          },
+          {
+            "filtered": false,
+            "value": "2016",
+            "label": "2016",
+            "count": 11
+          },
+          {
+            "filtered": false,
+            "value": "2017",
+            "label": "2017",
+            "count": 11
+          },
+          {
+            "filtered": false,
+            "value": "2018",
+            "label": "2018",
+            "count": 11
+          },
+          {
+            "filtered": false,
+            "value": "2019",
+            "label": "2019",
+            "count": 10
+          },
+          {
+            "filtered": false,
+            "value": "2020",
+            "label": "2020",
+            "count": 10
+          },
+          {
+            "filtered": false,
+            "value": "2021",
+            "label": "2021",
+            "count": 10
+          }
+        ]
+      }
+    ],
+    "merchandising": {
+        "redirect": "https://www.bbwheelsonline.com/search-truck-wheels-by-vehicle/",
+        "content": {}
+      }
+  }
