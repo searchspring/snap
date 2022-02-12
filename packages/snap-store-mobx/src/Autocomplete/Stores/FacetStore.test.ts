@@ -1,14 +1,15 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { FacetStore } from './FacetStore';
 import { StateStore } from './StateStore';
 import { StorageStore } from '../../Storage/StorageStore';
 
-import { SearchData } from '../../__mocks__/SearchData';
-
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
+
+const mockData = new MockData();
 
 const autocompleteConfig = {
 	id: 'autocomplete',
@@ -25,7 +26,7 @@ describe('Facet store', () => {
 	});
 
 	it('uses the search store FacetStore', () => {
-		const searchData = new SearchData({ search: 'autocomplete' });
+		const searchData = mockData.autocompleteMeta();
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
 		const facetStore = new FacetStore(
@@ -42,7 +43,7 @@ describe('Facet store', () => {
 	});
 
 	it('adds a preview function to each facet value', () => {
-		const searchData = new SearchData({ search: 'autocomplete' });
+		const searchData = mockData.autocompleteMeta();
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
 

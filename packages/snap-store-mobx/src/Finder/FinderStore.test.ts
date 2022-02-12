@@ -1,16 +1,16 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { FinderStore } from './FinderStore';
-
-import { SearchData } from '../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
-describe('Finder Store', () => {
-	let searchData;
+const mockData = new MockData({ siteId: 'ga9kq2', search: 'hierarchy' });
+const searchData = mockData.searchMeta();
 
+describe('Finder Store', () => {
 	const config = {
 		id: 'finder',
 		url: '/',
@@ -22,10 +22,6 @@ describe('Finder Store', () => {
 			},
 		],
 	};
-
-	beforeEach(() => {
-		searchData = new SearchData({ siteId: 'ga9kq2', search: 'hierarchy' });
-	});
 
 	it('returns correct initial state', () => {
 		const finderStore = new FinderStore(config, services);

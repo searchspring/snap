@@ -1,9 +1,8 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { TrendingStore } from './TrendingStore';
 import { StateStore } from './StateStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const mockResetTerms = jest.fn();
 
@@ -12,6 +11,7 @@ const services = {
 };
 
 const rootState = new StateStore(services);
+const mockData = new MockData();
 
 describe('Trending Store', () => {
 	it('has a symbol species of Array', () => {
@@ -31,7 +31,8 @@ describe('Trending Store', () => {
 	});
 
 	it('contains the correct terms', () => {
-		const searchData = new SearchData({ search: 'trending' });
+		const searchData = mockData.trending();
+
 		const trendingData = searchData.trending;
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 		expect(trendingStore).toHaveLength(trendingData.queries.length);
@@ -49,7 +50,8 @@ describe('Trending Store', () => {
 	});
 
 	it('has terms with undefined url properties when no controller is present', () => {
-		const searchData = new SearchData({ search: 'trending' });
+		const searchData = mockData.trending();
+
 		const trendingData = searchData.trending;
 		const trendingStore = new TrendingStore(undefined, trendingData, mockResetTerms, rootState);
 
@@ -61,7 +63,8 @@ describe('Trending Store', () => {
 	it('has terms with undefined url properties when no urlManager is present', () => {
 		const services = {};
 
-		const searchData = new SearchData({ search: 'trending' });
+		const searchData = mockData.trending();
+
 		const trendingData = searchData.trending;
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 
@@ -71,7 +74,8 @@ describe('Trending Store', () => {
 	});
 
 	it('has a preview function on terms', () => {
-		const searchData = new SearchData({ search: 'trending' });
+		const searchData = mockData.trending();
+
 		const trendingData = searchData.trending;
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 

@@ -1,16 +1,17 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { QueryStore } from './QueryStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
 
+const mockData = new MockData();
+
 describe('QueryStore store', () => {
 	it('has undefined query on blank search', () => {
-		const searchData = new SearchData();
+		const searchData = mockData.searchMeta();
 		const queryStore = new QueryStore(services, searchData.search);
 
 		expect(queryStore).toBeDefined();
@@ -19,7 +20,8 @@ describe('QueryStore store', () => {
 	});
 
 	it('has didYouMean when search data has didYouMean', () => {
-		const searchData = new SearchData({ search: 'dym' });
+		const searchData = mockData.searchMeta('dym');
+
 		const queryStore = new QueryStore(services, searchData.search);
 
 		expect(queryStore).toBeDefined();
