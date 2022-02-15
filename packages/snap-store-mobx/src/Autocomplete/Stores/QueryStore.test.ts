@@ -1,16 +1,18 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { QueryStore } from './QueryStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
+const mockData = new MockData();
+
 describe('QueryStore store', () => {
 	it('contains search', () => {
-		const searchData = new SearchData({ search: 'autocomplete' });
+		const searchData = mockData.autocompleteMeta();
+
 		const queryStore = new QueryStore(services, searchData.autocomplete, searchData.search);
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
@@ -19,7 +21,8 @@ describe('QueryStore store', () => {
 	});
 
 	it('contains originalQuery in search when corrected', () => {
-		const searchData = new SearchData({ search: 'corrected' });
+		const searchData = mockData.autocompleteMeta('corrected');
+
 		const queryStore = new QueryStore(services, searchData.autocomplete, searchData.search);
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();

@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { PaginationStore } from './PaginationStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 const searchConfig = {
 	id: 'search',
@@ -17,7 +18,7 @@ describe('Pagination Store', () => {
 	beforeEach(() => {
 		expect.hasAssertions();
 
-		searchData = new SearchData();
+		searchData = mockData.searchMeta();
 	});
 
 	it('sets properties to undefined given undefined', () => {
@@ -61,7 +62,7 @@ describe('Pagination Store', () => {
 	});
 
 	it('knows the begin number when on a specific page', () => {
-		searchData = new SearchData({ search: 'page10' });
+		searchData = mockData.searchMeta('page10');
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.begin).toBeDefined;
@@ -161,7 +162,7 @@ describe('Pagination Store', () => {
 	});
 
 	it('does not get prev page when on first page', () => {
-		searchData = new SearchData({ search: 'page10' });
+		searchData = mockData.searchMeta('page10');
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 
@@ -247,7 +248,7 @@ describe('Pagination Store', () => {
 	});
 
 	it('pages have proper values when max is a float', () => {
-		searchData = new SearchData({ search: 'page10' });
+		searchData = mockData.searchMeta('page10');
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		const pages = pagination.getPages(5);

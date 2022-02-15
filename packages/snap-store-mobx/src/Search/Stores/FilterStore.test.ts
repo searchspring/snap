@@ -1,19 +1,20 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { FilterStore } from './FilterStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 describe('Filter Store', () => {
 	let searchData;
 	beforeEach(() => {
 		expect.hasAssertions();
 
-		searchData = new SearchData({ search: 'filtered' });
+		searchData = mockData.searchMeta('filtered');
 	});
 
 	it('has a symbol species of Array', () => {

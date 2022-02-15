@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { ResultStore } from './ResultStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 const searchConfig = {
 	id: 'search',
@@ -34,14 +35,16 @@ describe('ResultStore', () => {
 	});
 
 	it('returns an array the same length as the results passed in', () => {
-		const searchData = new SearchData();
+		const searchData = mockData.searchMeta();
+
 		const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results.length);
 	});
 
 	it('has result data that matches what was passed in', () => {
-		const searchData = new SearchData();
+		const searchData = mockData.searchMeta();
+
 		const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
@@ -62,7 +65,8 @@ describe('ResultStore', () => {
 
 	describe('with inline banners', () => {
 		it('splices inline banners into the results array', () => {
-			const searchData = new SearchData({ search: 'inlineBanners' });
+			const searchData = mockData.searchMeta('inlineBanners');
+
 			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
@@ -70,7 +74,8 @@ describe('ResultStore', () => {
 		});
 
 		it('splices inline banners into the results array', () => {
-			const searchData = new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page1' });
+			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
+
 			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination.pageSize);
@@ -81,7 +86,8 @@ describe('ResultStore', () => {
 		});
 
 		it('splices inline banners into the results array', () => {
-			const searchData = new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page2' });
+			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page2');
+
 			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(1);
