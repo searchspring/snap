@@ -1,4 +1,5 @@
 import { render } from 'preact';
+import deepmerge from 'deepmerge';
 
 import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
@@ -88,11 +89,12 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const globals: any = {};
 
-				const { shopper, shopperId, product, seed, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'options'],
-					elem as HTMLScriptElement
-				);
+				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options'], elem as HTMLScriptElement);
 
+				const globalcontext = getContext(['shopperId', 'shopper', 'config']);
+
+				const { shopper, shopperId, product, seed, options } = elemContext;
+				const context = deepmerge(elemContext, globalcontext);
 				/*
 					type instantiatorContext = {
 						shopper?: string;
@@ -145,7 +147,8 @@ export class RecommendationInstantiator {
 						url: this.config.url || {},
 						controller: controllerConfig,
 					},
-					{ client, tracker }
+					{ client, tracker },
+					context
 				);
 
 				this.uses.forEach((attachements) => recs.use(attachements));

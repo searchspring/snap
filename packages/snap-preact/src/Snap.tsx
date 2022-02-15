@@ -18,6 +18,7 @@ import type {
 	FinderControllerConfig,
 	RecommendationControllerConfig,
 	ControllerConfigs,
+	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
@@ -40,18 +41,6 @@ type ExtendedTarget = Target & {
 	prefetch?: boolean;
 };
 
-export type ContextVariables = {
-	shopper?: {
-		id: string;
-		cart?: Product[];
-		[variable: string]: any;
-	};
-	config?: {
-		client?: ClientConfig;
-	};
-	[variable: string]: any;
-};
-
 export type SnapConfig = {
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
@@ -68,24 +57,28 @@ export type SnapConfig = {
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
 			targeters: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 	};
 };
@@ -134,7 +127,8 @@ export class Snap {
 		config: ControllerConfigs,
 		services: SnapControllerServices,
 		urlConfig: UrlTranslatorConfig,
-		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void
+		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void,
+		context?: ContextVariables
 	): Promise<ControllerTypes> => {
 		let importPromise;
 		switch (type) {
@@ -159,7 +153,8 @@ export class Snap {
 						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
 					},
-					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
+					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker },
+					context || this.config.context
 				);
 				resolve(this.controllers[config.id]);
 			}
@@ -171,15 +166,14 @@ export class Snap {
 	constructor(config: SnapConfig) {
 		this.config = config;
 		//get default context info if no context is passed in
-		if (!this.config.context) {
-			this.config.context = getContext();
-		}
+		this.config.context = deepmerge(getContext(['shopper', 'config']), this.config.context || {});
+
 		this.logger = new Logger('Snap Preact ');
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		const mergedConfig: ClientConfig = { ...this.config.client.config, ...this.config.context?.config?.client };
+		const mergedConfig: ClientConfig = deepmerge(this.config.client.config || {}, this.config.context?.config?.client || {});
 		this.client = new Client(this.config.client.globals, mergedConfig);
 		this.tracker = new Tracker(this.config.client.globals);
 		this._controllerPromises = {};
@@ -275,7 +269,8 @@ export class Snap {
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
 								},
-								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker },
+								controller.context || this.config.context
 							);
 
 							this.controllers[cntrlr.config.id] = cntrlr;
@@ -399,7 +394,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.AUTOCOMPLETE,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -432,7 +434,8 @@ The error above happened in the following targeter in the Snap Config`,
 												controller.config,
 												controller.services,
 												controller.url,
-												resolve
+												resolve,
+												controller.context
 											);
 											runBind();
 											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
@@ -471,7 +474,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.FINDER, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.FINDER,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -487,7 +497,8 @@ The error above happened in the following targeter in the Snap Config`,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											resolve,
+											controller.context
 										);
 										runSearch();
 										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
@@ -525,7 +536,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.RECOMMENDATION,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -541,7 +559,8 @@ The error above happened in the following targeter in the Snap Config`,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											resolve,
+											controller.context
 										);
 										runSearch();
 										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);

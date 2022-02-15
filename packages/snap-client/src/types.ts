@@ -19,32 +19,32 @@ export type ContextVariables = {
 export type ClientConfig = {
 	meta?: {
 		api?: SnapApiConfig;
-		cacheSettings?: CacheSettingsConfig;
+		cache?: CacheConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
-		cacheSettings?: CacheSettingsConfig;
+		cache?: CacheConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
-		cacheSettings?: CacheSettingsConfig;
+		cache?: CacheConfig;
 	};
 	recommend?: {
 		api?: SnapApiConfig;
-		cacheSettings?: CacheSettingsConfig;
+		cache?: CacheConfig;
 	};
 	suggest?: {
 		api?: SnapApiConfig;
-		cacheSettings?: CacheSettingsConfig;
+		cache?: CacheConfig;
 	};
 };
 
-export type CacheSettingsConfig = {
+export type CacheConfig = {
 	enabled?: boolean;
 	ttl?: number;
 	maxSize?: number;
 	purgeable?: boolean;
-	cache?: { [key: string]: Response };
+	entries?: { [key: string]: Response };
 };
 
 export type CacheEntry = {

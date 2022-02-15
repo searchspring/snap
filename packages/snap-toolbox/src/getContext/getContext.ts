@@ -33,14 +33,6 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		throw new Error('getContext: first parameter must be an array of strings');
 	}
 
-	//always grab config && shopper
-	if (evaluate.indexOf('config') == -1) {
-		evaluate.push('config');
-	}
-	if (evaluate.indexOf('shopper') == -1) {
-		evaluate.push('shopper');
-	}
-
 	const variables: Record<string, unknown> = {};
 
 	// grab all element attributes and put into variables

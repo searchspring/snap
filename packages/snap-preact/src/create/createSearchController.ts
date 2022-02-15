@@ -12,18 +12,22 @@ import type { SnapControllerServices, SnapSearchControllerConfig } from '../type
 
 configureMobx({ useProxies: 'never' });
 
-export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
+export default (config: SnapSearchControllerConfig, services?: SnapControllerServices, context?: any): SearchController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
 
-	const cntrlr = new SearchController(config.controller, {
-		client: services?.client || new Client(config.client.globals, config.client.config),
-		store: services?.store || new SearchStore(config.controller, { urlManager }),
-		urlManager,
-		eventManager: services?.eventManager || new EventManager(),
-		profiler: services?.profiler || new Profiler(),
-		logger: services?.logger || new Logger(),
-		tracker: services?.tracker || new Tracker(config.client.globals),
-	});
+	const cntrlr = new SearchController(
+		config.controller,
+		{
+			client: services?.client || new Client(config.client.globals, config.client.config),
+			store: services?.store || new SearchStore(config.controller, { urlManager }),
+			urlManager,
+			eventManager: services?.eventManager || new EventManager(),
+			profiler: services?.profiler || new Profiler(),
+			logger: services?.logger || new Logger(),
+			tracker: services?.tracker || new Tracker(config.client.globals),
+		},
+		context
+	);
 
 	return cntrlr;
 };

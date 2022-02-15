@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
+import { getContext } from '@searchspring/snap-toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
@@ -10,15 +11,14 @@ import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
 
-/*
-	context
- */
+const context = getContext(['shopper', 'config']);
 
 /*
 	configuration and instantiation
  */
 
 let config = {
+	context,
 	url: {
 		settings: {
 			coreType: 'query',

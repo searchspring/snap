@@ -6,7 +6,15 @@ import { getSearchParams } from '../utils/getParams';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type {
+	SearchControllerConfig,
+	BeforeSearchObj,
+	AfterSearchObj,
+	AfterStoreObj,
+	ControllerServices,
+	NextEvent,
+	ContextVariables,
+} from '../types';
 import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
@@ -38,8 +46,12 @@ export class SearchController extends AbstractController {
 	config: SearchControllerConfig;
 	storage: StorageStore;
 
-	constructor(config: SearchControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
+	constructor(
+		config: SearchControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context?: ContextVariables
+	) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
