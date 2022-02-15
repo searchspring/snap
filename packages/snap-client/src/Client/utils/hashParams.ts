@@ -1,4 +1,4 @@
-import { ParameterObject } from '../../types';
+import { ParameterObject } from '@searchspring/snap-toolbox';
 
 export function hashParams(params: ParameterObject): string {
 	if (typeof params != 'object') {

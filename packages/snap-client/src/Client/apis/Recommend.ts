@@ -1,8 +1,7 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
-import { charsParams } from '../utils/charsParams';
+import { charsParams } from '@searchspring/snap-toolbox';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
-import type { ParameterObject } from '../../types';
 
 export type RecommendRequestModel = {
 	tags: string[];
