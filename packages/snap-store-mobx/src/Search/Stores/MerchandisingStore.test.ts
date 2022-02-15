@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { MerchandisingStore } from './MerchandisingStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 describe('Merchandising Store', () => {
 	const emptyMerchStore = { redirect: '', content: {} };
@@ -26,21 +27,21 @@ describe('Merchandising Store', () => {
 	});
 
 	it('has banner content', () => {
-		const data = new SearchData({ search: 'merchandising' });
+		const data = mockData.searchMeta('merchandising');
 		const merchStore = new MerchandisingStore(services, data.merchandising);
 
 		expect(merchStore.content).toEqual(data.merchandising.content);
 	});
 
 	it('has more banner content', () => {
-		const data = new SearchData({ siteId: 'ga9kq2', search: 'merchandising_page1' });
+		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
 		const merchStore = new MerchandisingStore(services, data.merchandising);
 
 		expect(merchStore.content).toEqual(data.merchandising.content);
 	});
 
 	it('has redirect', () => {
-		const data = new SearchData({ search: 'redirect' });
+		const data = mockData.resetConfig().searchMeta('redirect');
 		const merchStore = new MerchandisingStore(services, data.merchandising);
 		expect(merchStore.redirect).toEqual(data.merchandising.redirect);
 	});

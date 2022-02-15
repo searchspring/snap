@@ -77,11 +77,21 @@ class Product {
 		core: {},
 	};
 	custom = {};
+	children?: Array<Child> = [];
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id;
 		this.attributes = result.attributes;
 		this.mappings = result.mappings;
+
+		if (result?.children?.length) {
+			this.children = result.children.map((variant, index) => {
+				return new Child(services, {
+					id: `${result.id}-${index}`,
+					...variant,
+				});
+			});
+		}
 
 		makeObservable(this, {
 			id: observable,
@@ -98,6 +108,24 @@ class Product {
 		}, {});
 
 		makeObservable(this.mappings.core, coreObservables);
+	}
+}
+
+class Child {
+	type = 'child';
+	id: string;
+	attributes: Record<string, unknown> = {};
+	custom = {};
+
+	constructor(services: StoreServices, result: SearchResponseModelResult) {
+		this.id = result.id;
+		this.attributes = result.attributes;
+
+		makeObservable(this, {
+			id: observable,
+			attributes: observable,
+			custom: observable,
+		});
 	}
 }
 

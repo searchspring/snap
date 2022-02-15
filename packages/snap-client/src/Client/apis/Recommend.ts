@@ -1,18 +1,18 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
-import { charsParams } from '../utils/charsParams';
-import type { ParameterObject } from '../../types';
+import { charsParams } from '@searchspring/snap-toolbox';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
 export type RecommendRequestModel = {
 	tags: string[];
+	siteId: string;
 	product?: string;
 	shopper?: string;
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	siteId?: string;
+	batched?: boolean;
 };
 
 export type RecommendResponseModel = {
@@ -52,13 +52,13 @@ export type ProfileResponseModel = {
 
 export type RecommendCombinedRequestModel = {
 	tag: string;
+	siteId: string;
 	product?: string;
 	shopper?: string;
 	categories?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	siteId?: string;
 	branch?: string;
 };
 
@@ -80,7 +80,7 @@ export type RecommendCombinedResponseModel = ProfileResponseModel & { results: S
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	batches: {
-		[paramHash: string]: {
+		[key: string]: {
 			timeout: number;
 			request: any;
 			deferreds?: Deferred[];
@@ -95,14 +95,17 @@ export class RecommendAPI extends API {
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request({
-			path: '/api/personalized-recommendations/profile.json',
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters,
-		});
+		const response = await this.request(
+			{
+				path: '/api/personalized-recommendations/profile.json',
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			'/api/personalized-recommendations/profile.json' + JSON.stringify(queryParameters)
+		);
 
-		return response.json();
+		return response as unknown as ProfileResponseModel;
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
@@ -111,9 +114,15 @@ export class RecommendAPI extends API {
 
 		if (!tag) return;
 
-		const paramHash = hashParams(otherParams as ParameterObject);
-		this.batches[paramHash] = this.batches[paramHash] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
-		const paramBatch = this.batches[paramHash];
+		let key = hashParams(otherParams as RecommendRequestModel);
+		if ('batched' in otherParams) {
+			if (otherParams.batched) {
+				key = otherParams.siteId;
+			}
+			delete otherParams.batched; // remove from request parameters
+		}
+		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		const paramBatch = this.batches[key];
 
 		const deferred = new Deferred();
 
@@ -140,7 +149,7 @@ export class RecommendAPI extends API {
 				});
 			}
 
-			delete this.batches[paramHash];
+			delete this.batches[key];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
@@ -150,16 +159,19 @@ export class RecommendAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 
 		const siteId = queryParameters.siteId;
-		delete queryParameters.siteId;
+		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request({
-			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
-			method: 'GET',
-			headers: headerParameters,
-			query: queryParameters,
-		});
+		const response = await this.request(
+			{
+				path,
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			path + JSON.stringify(queryParameters)
+		);
 
-		return response.json();
+		return response as unknown as RecommendResponseModel;
 	}
 
 	async postRecommendations(requestParameters: RecommendRequestModel): Promise<RecommendResponseModel> {
@@ -167,15 +179,18 @@ export class RecommendAPI extends API {
 		headerParameters['Content-Type'] = 'application/json';
 
 		const siteId = requestParameters.siteId;
-		delete requestParameters.siteId;
+		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request({
-			path: `/boost/${siteId || this.configuration.getSiteId()}/recommend`,
-			method: 'POST',
-			headers: headerParameters,
-			body: requestParameters,
-		});
+		const response = await this.request(
+			{
+				path,
+				method: 'POST',
+				headers: headerParameters,
+				body: requestParameters,
+			},
+			path + JSON.stringify(requestParameters)
+		);
 
-		return response.json();
+		return response as unknown as RecommendResponseModel;
 	}
 }

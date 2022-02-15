@@ -51,43 +51,67 @@ const globals = {
 ```
 
 ## Client Config
-Object required for all controllers
+Optional configuration for each requester. This can be used to specifiy a development origin URL or to configure cache settings per requester.
 
 ```typescript
 export type ClientConfig = {
-	meta?: {
-		prefetch?: boolean;
-		ttl?: number;
+  meta?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	search?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 	autocomplete?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
-	trending?: {
-		prefetch?: boolean;
-		ttl?: number;
+	recommend?: {
 		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
+	suggest?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
 	};
 };
 
-export type SnapApiConfig = {
-	host?: string;
-	path?: string;
+export type CacheConfig = {
+	enabled?: boolean;
+	ttl?: number;
+	maxSize?: number;
+	purgeable?: boolean;
 };
+
+export type SnapApiConfig = {
+	origin?: string;
+};
+
 ```
 
 ## Controller usage
 Snap Client is a dependency of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
 
 
+
+## Cache usage
+Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cache`. Settings include: 
+
+  `enabled`: to opt out - Defaults to `true`, 
+
+  `ttl`: to adjust how long the requests are stored (in ms) - Defaults to `300000`,
+
+  `maxSize`: to adjust the maximum size of the cache allowed to be stored in localStorage (in kb - Defaults to `200`,
+
+  `purgeable`: to allow auto purging of the requests from localstorage when maxSize is hit, based on time remaining to expiration.  - Defaults to `true` with the exception of `meta`,
+
+
 ## Standalone usage
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const [meta, results] = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -102,7 +126,7 @@ Makes a request to the Searchspring Search API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const [meta, results] = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -117,7 +141,7 @@ Makes a request to the Searchspring Autocomplete API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.autocomplete({
+const [meta, results] = await client.autocomplete({
   suggestions: {
     count: 5
   },
@@ -130,21 +154,34 @@ const results = await client.autocomplete({
 });
 ```
 
-## `meta` property
-The meta property contains the metadata related to the siteId that the client was instantiated with. This data is to be used together with search results. Metadata contains site configuration like facet and sorting information.
-
-Note that the `search` method sets the `meta` property, therefore it must be called before attempting to access the `meta` property.
+## `meta` method
+Makes a request to the Searchspring Search API to fetch meta properties, it returns a promise. The `search` method utilizes this method.
 
 ```typescript
 const client = new Client(globals, clientConfig);
+const meta = await client.meta();
+```
 
-const results = await client.search({
-  search: {
-    query: {
-      string: 'dress'
-    }
-  }
+## `trending` method
+Makes a request to the Searchspring Trending API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const results = await client.trending({
+  siteId: 'abc123',
+  limit: 5
 });
+```
 
-const meta = client.meta;
+## `recommend` method
+Makes a request to the Searchspring Recommend API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const results = await client.recommend({
+  tag: 'similar',
+  siteId: 'abc123',
+  product: 'product123',
+  shopper: 'snapdev',
+});
 ```

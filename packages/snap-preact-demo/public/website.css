@@ -583,10 +583,6 @@ input[type='text'] {
 
 /* Main
 ============================================== */
-.ss-lite-site {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column; }
 
 .ss-lite-main {
   flex: 1;
@@ -751,4 +747,8 @@ input[type='text'] {
 #login-modal button {
   display: block;
   margin: 20px auto;
+}
+
+.ss__autocomplete {
+  width: 100%;
 }

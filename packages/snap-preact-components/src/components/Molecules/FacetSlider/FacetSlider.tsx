@@ -180,7 +180,11 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		onChange: (val) => {
 			setActive(val);
 			if (facet?.services?.urlManager) {
-				facet.services.urlManager.remove('page').set(`filter.${facet.field}`, { low: val[0], high: val[1] }).go();
+				if (val[0] == facet.range.low && val[1] == facet.range.high) {
+					facet.services.urlManager.remove('page').remove(`filter.${facet.field}`).go();
+				} else {
+					facet.services.urlManager.remove('page').set(`filter.${facet.field}`, { low: val[0], high: val[1] }).go();
+				}
 			}
 			onChange && onChange(val);
 		},

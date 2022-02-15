@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **controller-finder:** fixing bug with reset and hierarchy types of finders ([cb94ebd](https://github.com/searchspring/snap/commit/cb94ebd42f5481a8108f2d4d1575e5eb679552f8))
+* **tracker.ts:** added config for tracker namespace, force all controllers to use same namespace ([6f8bd2f](https://github.com/searchspring/snap/commit/6f8bd2ff6ca04dabff5aa70f363452f0b287fc07))
+
+
+### Features
+
+* add batched config and context setting to disable batching ([d4c0ac2](https://github.com/searchspring/snap/commit/d4c0ac28d1bd220df0fac948dbb77b4dc5c4504e))
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **networkcache:** added memory caching ability to networkcache, removed meta getter, refactoring ([e70744d](https://github.com/searchspring/snap/commit/e70744d4a8749435cff1e0fcc599e5a2d5c30c6c))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
 ## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
 
 **Note:** Version bump only for package @searchspring/snap-controller

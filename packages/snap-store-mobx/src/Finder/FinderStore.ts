@@ -26,7 +26,7 @@ export class FinderStore extends AbstractStore {
 
 		this.storage = new StorageStore();
 
-		this.update({ meta: {}, selections: [] });
+		this.update({ meta: {} });
 
 		makeObservable(this, {
 			selections: observable,
@@ -40,7 +40,7 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	update(data: SearchResponseModel & { meta: MetaResponseModel; selections: SelectionStore[] }): void {
+	update(data: SearchResponseModel & { meta: MetaResponseModel }): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;

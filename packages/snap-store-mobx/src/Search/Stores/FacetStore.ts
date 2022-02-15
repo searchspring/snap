@@ -142,19 +142,12 @@ class RangeFacet extends Facet {
 		this.step = facet.step;
 
 		const storedRange = this.storage.get(`facets.${this.field}.range`);
-		if (!storedRange || !facet.filtered) {
-			this.storage.set(`facets.${this.field}.range`, facet.range);
-			this.range = facet.range;
-		} else if (facet.range.low > storedRange.low || facet.range.high < storedRange.high) {
+		if (storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)) {
 			// range from API has shrunk
 			this.range = this.storage.get(`facets.${this.field}.range`);
-		} else if (facet.range.low < storedRange.low || facet.range.high > storedRange.high) {
-			// range from API has grown
-			// store bigger range
+		} else {
 			this.storage.set(`facets.${this.field}.range`, facet.range);
 			this.range = facet.range;
-		} else {
-			// range hasn't changed
 		}
 
 		// TODO: Fix api
@@ -245,6 +238,8 @@ class ValueFacet extends Facet {
 								const filteredValues = facet.values.filter((value) => value.filtered);
 								return new HierarchyValue(services, this, value, filteredValues);
 							} else {
+								// converting values to strings to ensure UrlManager state matches state created from URL
+								value.value = value.value.toString();
 								return new Value(services, this, value);
 							}
 						case 'range-buckets':

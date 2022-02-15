@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **facetslider:** bugfix for slider that causes it to set lower and upper range to zero ([3a51f5d](https://github.com/searchspring/snap/commit/3a51f5db41a14e76c4d66a62498a46da5718d38a))
+
+
+### Features
+
+* **image:** add onError event, fix onLoad event param ([ce353c5](https://github.com/searchspring/snap/commit/ce353c54245b650dd5e9764b1bc88894a7e1bbd0))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
 ## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
 
 

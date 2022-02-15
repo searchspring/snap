@@ -115,7 +115,8 @@ const config = {
 				Standard: () => Standard
 			},
 			config: {
-				branch: BRANCHNAME
+				branch: BRANCHNAME,
+				batched: true
 			},
 			selector: '',
 			services: {}
@@ -144,6 +145,8 @@ module.exports = {
 	],
 }
 ```
+
+`recommendation.config.batched` - optional boolean (default: `true`) to batch multiple recommendations into a single network request
 
 `recommendation.selector` - optional selector to target recommendation instances if using a non-standard installation. Default selector: `script[type="searchspring/recommend"]`
 
@@ -276,3 +279,15 @@ An object containing all controllers that have been created.
 ### recommendations
 A reference to `RecommendationInstantiator` instance if creating recommendation instances.
 
+
+## polyfills
+
+Snap Preact provides various polyfills to ensure legacy browser support.
+
+```typescript
+import { polyfills } from '@searchspring/snap-preact';
+
+polyfills.then(() => {
+	import('./index');
+})
+```

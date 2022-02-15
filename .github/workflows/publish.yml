@@ -22,9 +22,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 15
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@searchspring'
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -41,8 +40,6 @@ jobs:
 
       - name: Install packages
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
 
       - name: Build
         run: | 
@@ -54,4 +51,4 @@ jobs:
       - name: Publish packages
         run: npm run publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

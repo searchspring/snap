@@ -8,8 +8,8 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 
 import { AutocompleteController } from './AutocompleteController';
-import { MockClient } from '../__mocks__/MockClient';
-import { SearchData } from '../__mocks__/SearchData';
+
+import { MockClient } from '@searchspring/snap-shared';
 
 const INPUT_DELAY = 200;
 
@@ -44,7 +44,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: {},
 		urlManager,
 		eventManager: new EventManager(),
@@ -53,7 +53,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager: {},
 		eventManager: new EventManager(),
@@ -62,7 +62,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: { events: null, fire: null, on: null },
@@ -71,7 +71,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: {
@@ -86,7 +86,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -95,7 +95,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -109,7 +109,7 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 	{
-		client: new MockClient(globals, { meta: { prefetch: false } }),
+		client: new MockClient(globals, {}),
 		store: new AutocompleteStore(acConfig, services),
 		urlManager,
 		eventManager: new EventManager(),
@@ -134,7 +134,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -149,7 +149,7 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
-		controller.client.mockDataFile = 'autocomplete.query.wh';
+		controller.client.mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/autocomplete.query.wh.json
 		expect(controller.store.results.length).toBeGreaterThan(0);
 		expect(controller.store.results.length).toBe(acConfig.globals.pagination.pageSize);
@@ -158,7 +158,7 @@ describe('Autocomplete Controller', () => {
 
 	it('has no results if query is blank', async () => {
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -172,7 +172,7 @@ describe('Autocomplete Controller', () => {
 		const query = '';
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
-		controller.client.mockDataFile = 'autocomplete.query.blank';
+		controller.client.mockData.updateConfig({ autocomplete: 'autocomplete.query.blank' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/autocomplete.query.blank.json
 		expect(controller.store.results.length).toBe(0);
 	});
@@ -181,7 +181,7 @@ describe('Autocomplete Controller', () => {
 		// settings.initializeFromUrl is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -196,7 +196,7 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
-		controller.client.mockDataFile = 'autocomplete.query.wh';
+		controller.client.mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/autocomplete.query.wh.json
 		expect(controller.store.results.length).toBeGreaterThan(0);
 	});
@@ -205,7 +205,7 @@ describe('Autocomplete Controller', () => {
 		// settings.facets.trim is true by default
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),
@@ -220,7 +220,7 @@ describe('Autocomplete Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
-		controller.client.mockDataFile = 'autocomplete.query.bumpers';
+		controller.client.mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/autocomplete.query.bumpers.json
 		expect(controller.store.results.length).toBeGreaterThan(0);
 		const facetsWithValues = controller.store.facets.filter((facet) => facet.values?.length != 0);
@@ -238,7 +238,7 @@ describe('Autocomplete Controller', () => {
 		document.body.appendChild(inputEl);
 
 		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, { meta: { prefetch: false } }),
+			client: new MockClient(globals, {}),
 			store: new AutocompleteStore(acConfig, services),
 			urlManager,
 			eventManager: new EventManager(),

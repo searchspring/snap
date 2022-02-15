@@ -5,8 +5,6 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { Carousel } from './Carousel';
 import { Icon, iconPaths } from '../../Atoms/Icon';
 import { componentArgs } from '../../../utilities';
-import { Snapify } from '../../../utilities/snapify';
-import { Result } from '../Result';
 import Readme from './readme.md';
 
 export default {

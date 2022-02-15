@@ -1,4 +1,6 @@
 import { fibonacci } from '../utils/fibonacci';
+import { NetworkCache } from '../NetworkCache/NetworkCache';
+import { CacheConfig } from '../../types';
 
 const isBlob = (value: any) => typeof Blob !== 'undefined' && value instanceof Blob;
 
@@ -20,23 +22,40 @@ export class API {
 	private retryDelay = 1000;
 	private retryCount = 1;
 
+	public cache: NetworkCache;
+
 	constructor(protected configuration: ApiConfiguration) {
-		// nothing else todo
+		this.cache = new NetworkCache(configuration.cacheSettings);
 	}
 
-	protected async request(context: RequestOpts): Promise<Response> {
+	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
 		const { url, init } = this.createFetchParams(context);
+
+		if (cacheKey) {
+			const cachedResponse = this.cache.get(cacheKey);
+			if (cachedResponse) {
+				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
+				this.retryDelay = 1000;
+				return cachedResponse;
+			}
+		}
+
 		const response = await this.fetchApi(url, init);
+		const responseJSON = await response.json();
 		if (response.status >= 200 && response.status < 300) {
 			this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 			this.retryDelay = 1000;
-			return response;
+			if (cacheKey) {
+				// save in the cache before returning
+				this.cache.set(cacheKey, responseJSON);
+			}
+			return responseJSON;
 		} else if (response.status == 429) {
 			if (this.retryCount < this.configuration.maxRetry) {
 				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
 				this.retryDelay = fibonacci(this.retryCount) * 1000;
 				this.retryCount++;
-				return await this.request(context);
+				return await this.request(context, cacheKey);
 			} else {
 				throw response.status;
 			}
@@ -45,11 +64,22 @@ export class API {
 	}
 
 	private createFetchParams(context: RequestOpts) {
-		let url = this.configuration.basePath + context.path;
+		// grab siteID out of context to generate apiHost fo URL
+		const siteId = context?.body?.siteId || context?.query?.siteId;
+		if (!siteId) {
+			throw new Error(`Request failed. Missing "siteId" parameter.`);
+		}
+
+		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+		const origin = (this.configuration.origin || siteIdHost).replace(/\/$/, '');
+
+		let url = `${origin}/${context.path.replace(/^\//, '')}`;
+
 		if (context.query !== undefined && Object.keys(context.query).length !== 0) {
 			// only add the querystring to the URL if there are query parameters.
 			url += '?' + this.configuration.queryParamsStringify(context.query);
 		}
+
 		const body =
 			(typeof FormData !== 'undefined' && context.body instanceof FormData) || context.body instanceof URLSearchParams || isBlob(context.body)
 				? context.body
@@ -74,31 +104,31 @@ export class API {
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
-	siteId: string;
-	basePath?: string; // override base path
+	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 	maxRetry?: number;
+	cacheSettings?: CacheConfig;
 }
 
 export class ApiConfiguration {
-	public maxRetry = 8;
-
 	constructor(private configuration: ApiConfigurationParameters) {
-		const apiHost = `https://${configuration.siteId}.a.searchspring.io`;
-		configuration.basePath = configuration.basePath || apiHost;
-		if (configuration.maxRetry) {
-			this.maxRetry = configuration.maxRetry;
+		if (!configuration.maxRetry) {
+			this.configuration.maxRetry = 8;
 		}
 	}
 
-	getSiteId(): string {
-		return this.configuration.siteId;
+	get cacheSettings(): CacheConfig {
+		return this.configuration.cacheSettings;
 	}
 
-	get basePath(): string {
-		return this.configuration.basePath;
+	get maxRetry(): number {
+		return this.configuration.maxRetry;
+	}
+
+	get origin(): string {
+		return this.configuration.origin;
 	}
 
 	get fetchApi(): FetchAPI {

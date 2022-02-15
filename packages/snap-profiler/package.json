@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-profiler",
-	"version": "0.13.3",
+	"version": "0.20.3",
 	"description": "Snap Profiler",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"repository": "https://github.com/searchspring/snap",
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/searchspring"
+		"access": "public"
 	},
 	"scripts": {
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",

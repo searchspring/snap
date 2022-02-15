@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.20.2](https://github.com/searchspring/snap/compare/v0.20.1...v0.20.2) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.20.1](https://github.com/searchspring/snap/compare/v0.20.0...v0.20.1) (2022-02-02)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+# [0.20.0](https://github.com/searchspring/snap/compare/v0.13.5...v0.20.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* add promise polyfill ([c698b76](https://github.com/searchspring/snap/commit/c698b76078dd23ad13b528f4da74e28233d0cff3))
+* add realtime type to RecommendationInstantiatorConfig ([eee7a1a](https://github.com/searchspring/snap/commit/eee7a1a9c13d270aae7dafa0d35181d8eb75baab))
+* **client:** batch recommendations by siteId instead of params ([36d7f84](https://github.com/searchspring/snap/commit/36d7f84f5162b4b9eaade51be92e18d3134dbb9f))
+* **controller-finder:** fixing bug with reset and hierarchy types of finders ([cb94ebd](https://github.com/searchspring/snap/commit/cb94ebd42f5481a8108f2d4d1575e5eb679552f8))
+* **facetslider:** bugfix for slider that causes it to set lower and upper range to zero ([3a51f5d](https://github.com/searchspring/snap/commit/3a51f5db41a14e76c4d66a62498a46da5718d38a))
+* **index.html:** switched to http-server to fix blank storybook bug, attempting to fix iframe render ([e693a3a](https://github.com/searchspring/snap/commit/e693a3a6e1e90803dcc3cf8cf9764d88d9675eb0))
+* refactor polyfill to es5 syntax ([5cad0bd](https://github.com/searchspring/snap/commit/5cad0bd2b120aab9adc40d2998a58b292bb6215b))
+* remove fetch and core-js from polyfills ([6a371aa](https://github.com/searchspring/snap/commit/6a371aac0a417011b3b76d26a723c66a5b84502a))
+* remove unused variable ([9a5b13a](https://github.com/searchspring/snap/commit/9a5b13ad77ba72911dd48a35060a8618e1d5a734))
+* **resultstore:** remove mappings from children, refactor Variant to Child ([816dcd3](https://github.com/searchspring/snap/commit/816dcd3d3c6c76b36ba1d0274b01174d7f9ba453))
+* **snap-docs:** bugfix for firefox ss logo image sizing in doc app ([f13672c](https://github.com/searchspring/snap/commit/f13672c194aeaa3667afcb6d9789ddf95e51c6c0))
+* **tracker.ts:** added config for tracker namespace, force all controllers to use same namespace ([6f8bd2f](https://github.com/searchspring/snap/commit/6f8bd2ff6ca04dabff5aa70f363452f0b287fc07))
+
+
+### Features
+
+* add batched config and context setting to disable batching ([d4c0ac2](https://github.com/searchspring/snap/commit/d4c0ac28d1bd220df0fac948dbb77b4dc5c4504e))
+* add polyfills export to snap preact ([a841f39](https://github.com/searchspring/snap/commit/a841f395997897319fc7827c7241afa4eeb83b2a))
+* add realtime config, add cart to context, refactor attribute names ([789dcd3](https://github.com/searchspring/snap/commit/789dcd34cc298340618c3debeb144524d7ff1b66))
+* **image:** add onError event, fix onLoad event param ([ce353c5](https://github.com/searchspring/snap/commit/ce353c54245b650dd5e9764b1bc88894a7e1bbd0))
+* **networkcache.ts:** added network request caching and support to config ([bc11c14](https://github.com/searchspring/snap/commit/bc11c14e92119f204bbbd1c27f51709e8d49fe92))
+* **networkcache:** added memory caching ability to networkcache, removed meta getter, refactoring ([e70744d](https://github.com/searchspring/snap/commit/e70744d4a8749435cff1e0fcc599e5a2d5c30c6c))
+* **resultstore:** add children variant support to resultStore ([a911b6f](https://github.com/searchspring/snap/commit/a911b6fe12ef1b2d036b1198aecb502887b54be8))
+* **tracker:** finalize attribute tracking for add to cart, remove, clear ([b5bf033](https://github.com/searchspring/snap/commit/b5bf033d6ccf171980bafa1cd9b4b7ba93015ac0))
+* **tracker:** wip: add initial cart attribute tracking ([5036896](https://github.com/searchspring/snap/commit/5036896f1022ccd9801946559e0762de36668363))
+
+
+
+
+
+## [0.13.5](https://github.com/searchspring/snap/compare/v0.13.4...v0.13.5) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** use native localStorage for getUserId ([782a285](https://github.com/searchspring/snap/commit/782a285748e8ae7272f1462cfd2ca3f339ea7d0f))
+
+
+
+
+
+## [0.13.4](https://github.com/searchspring/snap/compare/v0.13.3...v0.13.4) (2022-01-31)
+
+
+### Bug Fixes
+
+* **tracker:** refactor getSessionId to match is.js native interface instead of StorageStore ([b5224de](https://github.com/searchspring/snap/commit/b5224de77eedc45c204af3e0bf64159c0b7891c6))
+
+
+
+
+
 ## [0.13.3](https://github.com/searchspring/snap/compare/v0.13.2...v0.13.3) (2022-01-07)
 
 
