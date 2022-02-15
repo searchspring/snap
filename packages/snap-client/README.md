@@ -51,7 +51,7 @@ const globals = {
 ```
 
 ## Client Config
-Object required for all controllers
+Optional configuration for each requester. This can be used to specifiy a development origin URL or to configure cache settings per requester.
 
 ```typescript
 export type ClientConfig = {
@@ -111,7 +111,7 @@ Each requester in the Snap Client has its own cache settings, which can be confi
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const [meta, results] = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -126,7 +126,7 @@ Makes a request to the Searchspring Search API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const [meta, results] = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -141,7 +141,7 @@ Makes a request to the Searchspring Autocomplete API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const results = await client.autocomplete({
+const [meta, results] = await client.autocomplete({
   suggestions: {
     count: 5
   },
@@ -155,20 +155,33 @@ const results = await client.autocomplete({
 ```
 
 ## `meta` property
-The meta property contains the metadata related to the siteId that the client was instantiated with. This data is to be used together with search results. Metadata contains site configuration like facet and sorting information.
-
-Note that the `search` method sets the `meta` property, therefore it must be called before attempting to access the `meta` property.
+Makes a request to the Searchspring Search API to fetch meta properties, it returns a promise. The `search` method utilizes this method.
 
 ```typescript
 const client = new Client(globals, clientConfig);
+const meta = await client.meta();
+```
 
-const results = await client.search({
-  search: {
-    query: {
-      string: 'dress'
-    }
-  }
+## `trending` method
+Makes a request to the Searchspring Trending API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const results = await client.trending({
+  siteId: 'abc123',
+  limit: 5
 });
+```
 
-const meta = client.meta;
+## `recommend` method
+Makes a request to the Searchspring Recommend API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const results = await client.recommend({
+  tag: 'similar',
+	siteId: 'abc123',
+	product: 'product123',
+	shopper: 'snapdev',
+});
 ```
