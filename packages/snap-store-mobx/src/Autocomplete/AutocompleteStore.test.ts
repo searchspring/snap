@@ -1,12 +1,14 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { AutocompleteStore } from './AutocompleteStore';
-
-import { SearchData } from '../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
+
+const mockData = new MockData();
+
 const autocompleteConfig = {
 	id: 'autocomplete',
 	selector: undefined,
@@ -19,7 +21,7 @@ const autocompleteConfig = {
 describe('Autocomplete Store', () => {
 	let searchData;
 	beforeEach(() => {
-		searchData = new SearchData({ search: 'autocomplete' });
+		searchData = mockData.autocompleteMeta();
 	});
 
 	it('links the controller and controller urlManager to state', () => {
