@@ -154,7 +154,7 @@ const [meta, results] = await client.autocomplete({
 });
 ```
 
-## `meta` property
+## `meta` method
 Makes a request to the Searchspring Search API to fetch meta properties, it returns a promise. The `search` method utilizes this method.
 
 ```typescript
@@ -180,8 +180,8 @@ Makes a request to the Searchspring Recommend API and returns a promise.
 const client = new Client(globals, clientConfig);
 const results = await client.recommend({
   tag: 'similar',
-	siteId: 'abc123',
-	product: 'product123',
-	shopper: 'snapdev',
+  siteId: 'abc123',
+  product: 'product123',
+  shopper: 'snapdev',
 });
 ```
