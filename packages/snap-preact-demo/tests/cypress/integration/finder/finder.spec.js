@@ -12,7 +12,6 @@ const config = {
 		},
 	},
 };
-let controllers;
 
 config?.pages?.forEach((page, _i) => {
 	describe(`${page.url || _i}`, () => {
@@ -39,7 +38,7 @@ config?.pages?.forEach((page, _i) => {
 
 				it('contains finders on page', function () {
 					cy.window().then((win) => {
-						controllers = Object.keys(win.searchspring.controller).filter((id) => win.searchspring.controller[id].type === 'finder'); //.map(id => win.searchspring.controller[id]);
+						const controllers = Object.keys(win.searchspring.controller).filter((id) => win.searchspring.controller[id].type === 'finder'); //.map(id => win.searchspring.controller[id]);
 						expect(controllers.length).to.be.gte(page.finderIds.length);
 						page.finderIds.forEach((id) => {
 							expect(controllers.includes(id)).to.be.true;
