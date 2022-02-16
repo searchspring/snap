@@ -38,7 +38,7 @@ config?.pages?.forEach((page, _i) => {
 
 				it('contains finders on page', function () {
 					cy.window().then((win) => {
-						const controllers = Object.keys(win.searchspring.controller).filter((id) => win.searchspring.controller[id].type === 'finder'); //.map(id => win.searchspring.controller[id]);
+						const controllers = Object.keys(win.searchspring.controller).filter((id) => win.searchspring.controller[id].type === 'finder');
 						expect(controllers.length).to.be.gte(page.finderIds.length);
 						page.finderIds.forEach((id) => {
 							expect(controllers.includes(id)).to.be.true;
@@ -90,8 +90,8 @@ config?.pages?.forEach((page, _i) => {
 							cy.get(targetSelector)
 								.first()
 								.find('select')
-								.each(($el, _i) => {
-									expect($el.prop('disabled')).to.be.false;
+								.each((select, _i) => {
+									expect(select.prop('disabled')).to.be.false;
 								});
 						});
 					});
@@ -111,11 +111,7 @@ config?.pages?.forEach((page, _i) => {
 											const valueToSelect = options[0]?.value;
 											expect(valueToSelect).to.exist;
 
-											cy.get(select)
-												.select(valueToSelect, {
-													force: true,
-												})
-												.should('have.value', valueToSelect);
+											cy.get(select).select(valueToSelect, { force: true }).should('have.value', valueToSelect);
 
 											cy.snapController(id).then(({ store }) => {
 												expect(store.selections[index].selected).to.equal(valueToSelect);
@@ -156,11 +152,7 @@ config?.pages?.forEach((page, _i) => {
 											.sort((a, b) => b.count - a.count)[0]?.value;
 										expect(valueToSelect).to.exist;
 
-										cy.get(select)
-											.select(valueToSelect, {
-												force: true,
-											})
-											.should('have.value', valueToSelect);
+										cy.get(select).select(valueToSelect, { force: true }).should('have.value', valueToSelect);
 
 										cy.snapController(id).then(({ store }) => {
 											expect(store.selections[firstSelectedIndex].selected).to.equal(valueToSelect);
@@ -184,9 +176,7 @@ config?.pages?.forEach((page, _i) => {
 							});
 
 							// click on find button
-							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({
-								force: true,
-							});
+							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({ force: true });
 						});
 					});
 				});
@@ -240,11 +230,7 @@ config?.pages?.forEach((page, _i) => {
 											const valueToSelect = options[0]?.value;
 											expect(valueToSelect).to.exist;
 
-											cy.get(select)
-												.select(valueToSelect, {
-													force: true,
-												})
-												.should('have.value', valueToSelect);
+											cy.get(select).select(valueToSelect, { force: true }).should('have.value', valueToSelect);
 
 											cy.snapController(id).then(({ store }) => {
 												expect(store.selections[index].selected).to.equal(valueToSelect);
@@ -280,11 +266,7 @@ config?.pages?.forEach((page, _i) => {
 											.sort((a, b) => b.count - a.count)[0]?.value;
 										expect(valueToSelect).to.exist;
 
-										cy.get(select)
-											.select(valueToSelect, {
-												force: true,
-											})
-											.should('have.value', valueToSelect);
+										cy.get(select).select(valueToSelect, { force: true }).should('have.value', valueToSelect);
 
 										cy.snapController(id).then(({ store }) => {
 											expect(store.selections[firstSelectedIndex].selected).to.equal(valueToSelect);
@@ -315,9 +297,7 @@ config?.pages?.forEach((page, _i) => {
 							});
 
 							// click on find button
-							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({
-								force: true,
-							});
+							cy.get(targetSelector).find(config.selectors?.finder?.findButton).should('exist').click({ force: true });
 						});
 					});
 				});
