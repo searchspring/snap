@@ -93,7 +93,7 @@ describe('Autocomplete Component', () => {
 		(input as HTMLInputElement).focus();
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY));
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
