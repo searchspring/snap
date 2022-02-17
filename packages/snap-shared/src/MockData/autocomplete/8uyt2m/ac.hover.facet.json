@@ -1,372 +1,44 @@
 {
     "pagination": {
-      "totalResults": 0,
+      "totalResults": 1,
       "page": 1,
       "pageSize": 30,
       "defaultPageSize": 24,
-      "totalPages": 0
+      "totalPages": 1
     },
-    "results": [{
-        "id": "176900",
+    "results": [
+      {
+        "id": "168065",
         "mappings": {
           "core": {
-            "uid": "176900",
-            "sku": "C-SHE-R4-L4088",
-            "name": "Caught In A Reverie Red Lace Dress",
-            "url": "/product/C-SHE-R4-L4088",
-            "price": 46,
+            "uid": "168065",
+            "sku": "C-FS-G2-48AAX",
+            "name": "Fringe Too Legit Heather Gray Jogger Pants",
+            "url": "/product/C-FS-G2-48AAX",
+            "addToCartUrl": "/product/C-FS-G2-48AAX",
+            "price": 34,
             "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4833_thumb_med.jpg",
-            "description": [
-              "As wondrous as life can be at its best, there are an equal number of times when it can be dull as dirt. Thank goodness for your active imagination, because you can while away the hours with the most rewarding of daydreams. A bit of advice though, if we may: dress as though you expect something exciting to happen at any moment, even at the height of your boredom. You don’t want to be caught in a reverie, unprepared to make your daydreams a reality when opportunity strikes. This lace dress is versatile in that way, and stunning to boot. Model is wearing a small. • 70% Cotton 30% Polyester • Lining 100% Polyester • Hand Wash Cold • Lined • Imported"
-            ],
-            "brand": "She + Sky",
-            "popularity": "3271"
+            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/124_4658_copyright_reddressboutique_2016_large.jpg",
+            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/124_4658_copyright_reddressboutique_2016_large.jpg",
+            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/124_4658_copyright_reddressboutique_2016_thumb_med.jpg",
+            "rating": "5",
+            "ratingCount": "1111",
+            "description": "Always on the go and getting things done, you’re not gonna let restrictive clothes in your way, so the Fringe Too Legit Heather Grey Jogger Pants are perfect for you! You’ll be moving around with ease, with the comfort of pajamas, in these fashionable joggers! These soft and fuzzy joggers feature a relaxed fit, elastic drawstring waist, functional slant side pockets, tapered legs, and ankle cuffs. Model is wearing a small. • 98% Rayon, 2% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+            "stockMessage": "In stock",
+            "brand": "4 Sienna",
+            "popularity": "521",
+            "caption": "Captions!"
           }
         },
         "attributes": {
-          "black_friday": "yes",
-          "color": [
-            "Red"
-          ],
-          "color_family": [
-            "Red"
-          ],
-          "condition": [
-            "New"
-          ],
-          "days_since_published": [
-            "75"
-          ],
-          "gross_margin": [
-            "61"
-          ],
-          "holiday_styles": "yes",
-          "id": "b96fc0d5f588d886e6e84ed25269127e",
-          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1g32cNUNMtH1MTGwsGAwZDBiMGAwNDRiSC_KTAEEAAD__z0CC_M",
-          "intellisuggestSignature": "61195cbbeb38f0670bde55c6097b092b253ecda1f5a38942327a5a8e27e1af6a",
-          "keywords": [
-            "red",
-            "red dress red",
-            "cherry red",
-            "cherry",
-            "valentines",
-            "valentine",
-            "occasion",
-            "lace",
-            "red lace",
-            "lace dress",
-            "sexy dress",
-            "cute",
-            "pretty",
-            "stunning",
-            "sexy"
-          ],
-          "material": [
-            "Cotton"
-          ],
-          "multi_colors": [
-            "no"
-          ],
-          "on_sale": [
-            "No"
-          ],
-          "product_type": [
-            "All Dresses > Shop by Color > Red Dresses",
-            "All Dresses > Shop by Color",
-            "Special Occasion > Party Dresses",
-            "Special Occasion > Wedding Guest Dress",
-            "Style Influencer > Holly Boyd",
-            "Valentine's Day > Valentine's Day Dresses",
-            "Gifts for Her",
-            "Gifts for Her > Gifts Under $50"
-          ],
-          "product_type_unigram": "dress",
-          "quantity_available": [
-            "6"
-          ],
-          "sales_rank": [
-            "3271"
-          ],
-          "size": [
-            "Small",
-            "Medium",
-            "Large"
-          ],
-          "size_dress": [
-            "Small",
-            "Medium",
-            "Large"
-          ],
-          "ss_category_hierarchy": [
-            "All Dresses",
-            "Style Influencer>Holly Boyd",
-            "All Dresses>Shop by Color>Red Dresses",
-            "All Dresses>Shop by Color",
-            "Style Influencer",
-            "Special Occasion>Party Dresses",
-            "Gifts for Her",
-            "Special Occasion>Wedding Guest Dress",
-            "Special Occasion",
-            "Valentine's Day>Valentine's Day Dresses",
-            "Gifts for Her>Gifts Under $50",
-            "Valentine's Day"
-          ],
-          "ss_clicks": [
-            "4133"
-          ],
-          "ss_insights_quadrant": [
-            "Best Performer"
-          ],
-          "ss_product_type": [
-            "Dress"
-          ],
-          "ss_sale_price": "46",
-          "title": [
-            "Caught In A Reverie Red Lace Dress"
-          ]
+          "id": "b99c0860e7a8e5682df996d27299e979",
+          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nUL1nU30jWxcHSMYDBkMGQwYDBkSC_KTAEEAAD__xSUC0E",
+          "intellisuggestSignature": "3e80fa075b7a14e6433c8ebde327875fbcd64530a83eb29ab41f758ff5246908",
+          "product_type_unigram": "pants"
         },
         "children": []
-      },
-      {
-        "id": "179559",
-        "mappings": {
-          "core": {
-            "uid": "179559",
-            "sku": "C-MB-R4-16591",
-            "name": "Two Become One Red Lace Dress",
-            "url": "/product/C-MB-R4-16591",
-            "price": 56,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26246_thumb_med.jpg",
-            "description": [
-              "When it comes to white lace, how’s a girl supposed to wear it and not immediately think of a fairy tale wedding? At some point in all of our lives we’ve dreamed about it (though some of us hold onto that dream longer than others). But as enticing as the promise of “Two Become One” is, white lace has a far more practical, and far more effective purpose—making you look your most beautiful, no matter the occasion. Bodycon style dress features a red crochet lace overlay with a peek-a-boo midriff and plunging neckline. Dress has a slight stretch and features a v back with peek-a-boo panels and an invisible back zipper. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
-            ],
-            "brand": "Marine",
-            "popularity": "2945"
-          }
-        },
-        "attributes": {
-          "black_friday": "yes",
-          "color": [
-            "Red"
-          ],
-          "color_family": [
-            "Red"
-          ],
-          "condition": [
-            "New"
-          ],
-          "days_since_published": [
-            "76"
-          ],
-          "gross_margin": [
-            "40"
-          ],
-          "holiday_styles": "yes",
-          "id": "71f2e6e472fac0994d693fa01e1d13a5",
-          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1vV10g0y0TU0M7U0ZDBkMGYwYDA0NGJIL8pMAQQAAP__LEMLiQ",
-          "intellisuggestSignature": "085ab67e7504e6977699b7d702f27785ceb66971fea26220f69adbcdd47c84c1",
-          "keywords": [
-            "red",
-            "red dress",
-            "red lace dress",
-            "lace",
-            "crochet",
-            "body con",
-            "bodycon dress",
-            "cocktail dress",
-            "wedding guest",
-            "crochet lace"
-          ],
-          "material": [
-            "Polyester"
-          ],
-          "multi_colors": [
-            "no"
-          ],
-          "on_sale": [
-            "No"
-          ],
-          "product_type": [
-            "All Dresses > Shop by Color > Red Dresses",
-            "Special Occasion > Formal Dresses",
-            "Special Occasion > Graduation Dresses",
-            "Special Occasion > Wedding Guest Dress",
-            "All Dresses > Shop by Color",
-            "All Dresses > Cocktail Dresses",
-            "Gifts for Her"
-          ],
-          "product_type_unigram": "dress",
-          "quantity_available": [
-            "2"
-          ],
-          "sales_rank": [
-            "2945"
-          ],
-          "size": [
-            "Small",
-            "Medium",
-            "Large"
-          ],
-          "size_dress": [
-            "Small",
-            "Medium",
-            "Large"
-          ],
-          "ss_category_hierarchy": [
-            "Special Occasion>Graduation Dresses",
-            "All Dresses",
-            "All Dresses>Shop by Color>Red Dresses",
-            "All Dresses>Shop by Color",
-            "Gifts for Her",
-            "Special Occasion>Wedding Guest Dress",
-            "All Dresses>Cocktail Dresses",
-            "Special Occasion>Formal Dresses",
-            "Special Occasion"
-          ],
-          "ss_clicks": [
-            "3206"
-          ],
-          "ss_insights_quadrant": [
-            "Best Performer"
-          ],
-          "ss_product_type": [
-            "Dress"
-          ],
-          "ss_sale_price": "56",
-          "title": [
-            "Two Become One Red Lace Dress"
-          ]
-        },
-        "children": []
-      },
-      {
-        "id": "180367",
-        "mappings": {
-          "core": {
-            "uid": "180367",
-            "sku": "C-MB-R4-16707",
-            "name": "Drop Dead Gorgeous Red Lace Dress",
-            "url": "/product/C-MB-R4-16707",
-            "price": 58,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26498_thumb_med.jpg",
-            "description": [
-              "Trying to pick his jaw off the floor is exactly what he will be doing when he sees you in this Drop Dead Gorgeous Red Lace Dress. The other ladies at the party will have to keep their husbands (and jealousy) in check because you will for sure be THE talk of the night. Red lace dress features a form fitting silhouette with invisible back zipper toped with a double hook and eye closure. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported"
-            ],
-            "brand": "Ever After",
-            "popularity": "2822"
-          }
-        },
-        "attributes": {
-          "brightness": "high",
-          "color": [
-            "Red"
-          ],
-          "color_family": [
-            "Red"
-          ],
-          "condition": [
-            "New"
-          ],
-          "days_since_published": [
-            "136"
-          ],
-          "dress_length": "36",
-          "dress_length_name": "Above knee",
-          "gross_margin": [
-            "27"
-          ],
-          "id": "4a0648f8179714944b278d17d4522619",
-          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1vV10g0y0TU0MzcwZzBkMGEwYDA0NGJIL8pMAQQAAP__LDoLiQ",
-          "intellisuggestSignature": "50f2f9024c6aae1f0a9fa193f14200320da2c136929d410043a89105d3a125c5",
-          "keywords": [
-            "red",
-            "red lace dress",
-            "red dress",
-            "lace",
-            "lace dress",
-            "crochet lace",
-            "body con",
-            "bodycon",
-            "cocktail dress",
-            "cocktail"
-          ],
-          "material": [
-            "Polyester"
-          ],
-          "multi_colors": [
-            "no"
-          ],
-          "on_sale": [
-            "No"
-          ],
-          "product_type": [
-            "All Dresses > Shop by Color > Red Dresses",
-            "Brands We Love > Red Dress Label > Ever After",
-            "All Dresses > Shop by Color",
-            "Shop By Trend > Girl's Night Out",
-            "All Dresses > Cocktail Dresses",
-            "All Dresses > Lace Dresses",
-            "Gifts for Her"
-          ],
-          "product_type_unigram": "dress",
-          "quantity_available": [
-            "20"
-          ],
-          "sales_rank": [
-            "2822"
-          ],
-          "saturation": "high",
-          "size": [
-            "Small",
-            "Medium",
-            "Large",
-            "1X",
-            "2X",
-            "3X"
-          ],
-          "size_dress": [
-            "Small",
-            "Medium",
-            "Large",
-            "1X",
-            "2X",
-            "3X"
-          ],
-          "ss_category_hierarchy": [
-            "Shop By Trend",
-            "All Dresses",
-            "Shop By Trend>Girl's Night Out",
-            "Brands We Love>Red Dress Label>Ever After",
-            "All Dresses>Shop by Color>Red Dresses",
-            "All Dresses>Shop by Color",
-            "Gifts for Her",
-            "All Dresses>Cocktail Dresses",
-            "All Dresses>Lace Dresses",
-            "Brands We Love",
-            "Brands We Love>Red Dress Label"
-          ],
-          "ss_clicks": [
-            "3512"
-          ],
-          "ss_insights_quadrant": [
-            "Under Exposed"
-          ],
-          "ss_product_type": [
-            "Dress"
-          ],
-          "ss_sale_price": "58",
-          "title": [
-            "Drop Dead Gorgeous Red Lace Dress"
-          ]
-        },
-        "children": []
-      }],
+      }
+    ],
     "filters": [
       {
         "type": "value",
@@ -375,7 +47,458 @@
         "value": "4 Sienna"
       }
     ],
-    "facets": [],
+    "facets": [
+      {
+        "field": "color_family",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Gray",
+            "label": "Gray",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "size",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Large",
+            "label": "Large",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Medium",
+            "label": "Medium",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Small",
+            "label": "Small",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "price",
+        "type": "range",
+        "filtered": false,
+        "step": 0.25,
+        "range": {
+          "low": 34,
+          "high": 34
+        }
+      },
+      {
+        "field": "brand",
+        "type": "value",
+        "filtered": true,
+        "values": [
+          {
+            "filtered": true,
+            "value": "4 Sienna",
+            "label": "4 Sienna",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "12 PM by Mon Ami",
+            "label": "12 PM by Mon Ami",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Aakaa",
+            "label": "Aakaa",
+            "count": 14
+          },
+          {
+            "filtered": false,
+            "value": "Adrienne",
+            "label": "Adrienne",
+            "count": 6
+          },
+          {
+            "filtered": false,
+            "value": "After Market",
+            "label": "After Market",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Anama",
+            "label": "Anama",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Ark & Co",
+            "label": "Ark & Co",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Aryeh",
+            "label": "Aryeh",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "Aura L'atiste",
+            "label": "Aura L'atiste",
+            "count": 45
+          },
+          {
+            "filtered": false,
+            "value": "Ayepeach",
+            "label": "Ayepeach",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "BB Dakota",
+            "label": "BB Dakota",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "BB Daktota",
+            "label": "BB Daktota",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Blu Pepper",
+            "label": "Blu Pepper",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "Ces Femme",
+            "label": "Ces Femme",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Cezanne",
+            "label": "Cezanne",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "City Classified",
+            "label": "City Classified",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Color Thread",
+            "label": "Color Thread",
+            "count": 5
+          },
+          {
+            "filtered": false,
+            "value": "Deco",
+            "label": "Deco",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Do+Be",
+            "label": "Do+Be",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Dress Forum",
+            "label": "Dress Forum",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "E2 Clothing",
+            "label": "E2 Clothing",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "Easel",
+            "label": "Easel",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Entro",
+            "label": "Entro",
+            "count": 9
+          },
+          {
+            "filtered": false,
+            "value": "Essue",
+            "label": "Essue",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Ever After",
+            "label": "Ever After",
+            "count": 25
+          },
+          {
+            "filtered": false,
+            "value": "Everly",
+            "label": "Everly",
+            "count": 5
+          },
+          {
+            "filtered": false,
+            "value": "Ezra",
+            "label": "Ezra",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Fable",
+            "label": "Fable",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "Fashionomics",
+            "label": "Fashionomics",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Flying Tomato",
+            "label": "Flying Tomato",
+            "count": 5
+          },
+          {
+            "filtered": false,
+            "value": "Fringe",
+            "label": "Fringe",
+            "count": 13
+          },
+          {
+            "filtered": false,
+            "value": "Hello Miss",
+            "label": "Hello Miss",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "Hommage",
+            "label": "Hommage",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Honey Punch",
+            "label": "Honey Punch",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Hot + Delicious",
+            "label": "Hot + Delicious",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Hyfve",
+            "label": "Hyfve",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Illa Illa",
+            "label": "Illa Illa",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "INA Fashion",
+            "label": "INA Fashion",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Janette",
+            "label": "Janette",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "JJ's Fairyland",
+            "label": "JJ's Fairyland",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Jodifl",
+            "label": "Jodifl",
+            "count": 4
+          },
+          {
+            "filtered": false,
+            "value": "Just Me",
+            "label": "Just Me",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "L'Atiste",
+            "label": "L'Atiste",
+            "count": 6
+          },
+          {
+            "filtered": false,
+            "value": "LacBleu",
+            "label": "LacBleu",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Latiste",
+            "label": "Latiste",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "Le Lis",
+            "label": "Le Lis",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Love In",
+            "label": "Love In",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Love Riche",
+            "label": "Love Riche",
+            "count": 3
+          },
+          {
+            "filtered": false,
+            "value": "Love Stitch",
+            "label": "Love Stitch",
+            "count": 2
+          },
+          {
+            "filtered": false,
+            "value": "LovPosh",
+            "label": "LovPosh",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "ss_category_hierarchy",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "All Bottoms",
+            "label": "All Bottoms",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Athleisure",
+            "label": "Athleisure",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Brands We Love",
+            "label": "Brands We Love",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Gifts for Her",
+            "label": "Gifts for Her",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "days_since_published",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": 121,
+            "label": 121,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "material",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Spandex",
+            "label": "Spandex",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "on_sale",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "No",
+            "label": "No",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "field": "size_dress",
+        "type": "value",
+        "filtered": false,
+        "values": [
+          {
+            "filtered": false,
+            "value": "Large",
+            "label": "Large",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Medium",
+            "label": "Medium",
+            "count": 1
+          },
+          {
+            "filtered": false,
+            "value": "Small",
+            "label": "Small",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "sorting": [],
     "merchandising": {
       "redirect": "",
@@ -399,19 +522,6 @@
         "type": "exact",
         "source": "popular-query"
       },
-      "alternatives": [
-        {
-          "text": "red dresses"
-        },
-        {
-          "text": "red dress short"
-        },
-        {
-          "text": "red mini dress"
-        },
-        {
-          "text": "red long dress"
-        }
-      ]
+      "alternatives": []
     }
   }

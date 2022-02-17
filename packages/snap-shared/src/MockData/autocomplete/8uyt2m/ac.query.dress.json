@@ -4102,12 +4102,12 @@
     "personalized": false
   },
   "search": {
-    "query": "red dress"
+    "query": "dress"
   },
   "autocomplete": {
-    "query": "red dress",
+    "query": "dress",
     "suggested": {
-      "text": "red dress",
+      "text": "dress",
       "type": "exact",
       "source": "popular-query"
     },

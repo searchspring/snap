@@ -1,15 +1,9 @@
 {
     "facets": {
-      "availability": {
-        "display": "list",
-        "label": "In Stock",
-        "collapsed": false,
-        "multiple": "or"
-      },
       "brand": {
         "display": "list",
         "label": "Brand",
-        "collapsed": true,
+        "collapsed": false,
         "multiple": "or"
       },
       "collection": {
@@ -21,19 +15,19 @@
       "color_family": {
         "display": "palette",
         "label": "Color",
-        "collapsed": true,
+        "collapsed": false,
+        "multiple": "or"
+      },
+      "days_since_published": {
+        "display": "list",
+        "label": "Days Old",
+        "collapsed": false,
         "multiple": "or"
       },
       "dress_length_name": {
         "display": "list",
         "label": "Dress Length",
         "collapsed": true,
-        "multiple": "or"
-      },
-      "in_stock": {
-        "display": "list",
-        "label": "In Stock?",
-        "collapsed": false,
         "multiple": "or"
       },
       "material": {
@@ -61,6 +55,12 @@
         "formatSeparator": "-",
         "formatValue": "$%01.2f"
       },
+      "sale_price": {
+        "display": "list",
+        "label": "sale_price",
+        "collapsed": false,
+        "multiple": "or"
+      },
       "saturation": {
         "display": "list",
         "label": "Color Intensity",
@@ -76,13 +76,13 @@
       "size": {
         "display": "grid",
         "label": "Size",
-        "collapsed": true,
+        "collapsed": false,
         "multiple": "and"
       },
       "size_dress": {
         "display": "grid",
         "label": "Dress Size",
-        "collapsed": true,
+        "collapsed": false,
         "multiple": "single"
       },
       "size_footwear": {
@@ -116,19 +116,7 @@
         "type": "field",
         "field": "sales_rank",
         "direction": "desc",
-        "label": "Best Sellers"
-      },
-      {
-        "type": "field",
-        "field": "price",
-        "direction": "desc",
-        "label": "Price ($$$ - $)"
-      },
-      {
-        "type": "field",
-        "field": "price",
-        "direction": "asc",
-        "label": "Price ($ - $S$)"
+        "label": "Most Popular"
       },
       {
         "type": "field",
@@ -138,9 +126,27 @@
       },
       {
         "type": "field",
+        "field": "price",
+        "direction": "asc",
+        "label": "Price ($ - $S$)"
+      },
+      {
+        "type": "field",
+        "field": "price",
+        "direction": "desc",
+        "label": "Price ($$$ - $)"
+      },
+      {
+        "type": "field",
         "field": "title",
         "direction": "desc",
         "label": "Name (Z - A)"
+      },
+      {
+        "type": "field",
+        "field": "sales_rank",
+        "direction": "desc",
+        "label": "Total Sold"
       }
     ]
   }
