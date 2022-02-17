@@ -7,21 +7,29 @@ import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { Autocomplete } from '../../Organisms/Autocomplete/Autocomplete';
-import { createAutocompleteController } from '@searchspring/snap-preact';
+import { MockClient } from '@searchspring/snap-shared';
+import { AutocompleteController, INPUT_DELAY } from '@searchspring/snap-controller';
+import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 
-const client = {
-	globals: {
-		siteId: '8uyt2m',
-	},
-};
-let config;
+import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { EventManager } from '@searchspring/snap-event-manager';
+import { Profiler } from '@searchspring/snap-profiler';
+import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
+
+const globals = { siteId: '8uyt2m' };
+
+let acConfig;
 let controllerConfigId;
+let services;
+let urlManager;
 
 describe('Autocomplete Component', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
 		controllerConfigId = uuidv4().split('-').join('');
-		config = {
+
+		acConfig = {
 			id: controllerConfigId,
 			selector: 'input.searchspring-ac',
 			settings: {
@@ -30,14 +38,29 @@ describe('Autocomplete Component', () => {
 				},
 			},
 		};
+
+		urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+		services = { urlManager };
 	});
 
 	it('contains an input element on the page', () => {
 		const input = document.querySelector('.searchspring-ac');
 		expect(input).toBeInTheDocument();
 	});
+
 	it('does not render if input have not been focused', () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		controller.init();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -49,24 +72,47 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('renders after input has been focused', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
-		await new Promise((r) => setTimeout(r, 1000));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY));
 
 		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
 	});
 
 	it('renders results if you type, uses breakpoints to set num products rendered. ', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
 
 		const breakpoints = {
 			768: {
@@ -81,13 +127,12 @@ describe('Autocomplete Component', () => {
 			breakpoints,
 		};
 
-		controller.bind();
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
@@ -96,20 +141,29 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can hover over terms, & facets', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
 
 		const args = {
 			controller,
 			input: controller.config.selector,
 		};
 
-		controller.bind();
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 's';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
@@ -127,8 +181,13 @@ describe('Autocomplete Component', () => {
 		//first term should be auto selected
 		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
 
+		controller.client.mockData.updateConfig({ autocomplete: 'ac.query.reddress', meta: 'ac.query.reddress' });
+		controller.urlManager = controller.urlManager.reset().set('query', 'red dress');
+
 		//now lets hover over the next term
 		userEvent.hover(termLinks[1]);
+
+		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, 1000));
 
 		//now lets check for the new results
@@ -152,8 +211,13 @@ describe('Autocomplete Component', () => {
 		//shouldnt be active
 		expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
 
+		controller.client.mockData.updateConfig({ autocomplete: 'ac.hover.facet', meta: 'ac.hover.facet' });
+		controller.urlManager = controller.urlManager.set('filter', { brand: '4 Sienna' });
+
 		//now lets hover over one
 		userEvent.hover(facetOptions[0]);
+
+		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, 1000));
 
 		//check for the new results
@@ -167,7 +231,18 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can use hide props to hide/show hideTerms, hideFacets, hideContent, hideLink', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -185,13 +260,13 @@ describe('Autocomplete Component', () => {
 			hideContent: false,
 			hideLink: false,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let renderedWithout = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
@@ -224,7 +299,18 @@ describe('Autocomplete Component', () => {
 
 	//this needs a different term
 	it('can hideBanners', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -236,15 +322,17 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			hideBanners: false,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
 		//todo use a mock for this
-		input.value = 'red';
+		input.value = 'red dress';
+		controller.client.mockData.updateConfig({ autocomplete: 'ac.banners', meta: 'ac.query.reddress' });
+		controller.urlManager = controller.urlManager.reset().set('query', 'red dress');
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let renderedWithoutBanners = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let banners = renderedWithoutBanners.container.querySelector('.ss__banner');
@@ -256,7 +344,18 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -265,13 +364,12 @@ describe('Autocomplete Component', () => {
 			contentTitle: 'custom contentTitle',
 		};
 
-		controller.bind();
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
@@ -287,19 +385,32 @@ describe('Autocomplete Component', () => {
 
 	//this needed a different term
 	it('can set a custom trending title', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 			trendingTitle: 'Lorem Ipsum',
 		};
 
-		controller.bind();
+		controller.client.mockData.updateConfig({ autocomplete: 'ac.query.blank' });
+		controller.urlManager = controller.urlManager.reset().set('query', '');
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
@@ -307,7 +418,18 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -317,13 +439,12 @@ describe('Autocomplete Component', () => {
 			linkSlot: <div id="findMe">custom linkSlot</div>,
 		};
 
-		controller.bind();
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
@@ -347,20 +468,30 @@ describe('Autocomplete Component', () => {
 
 	//cant render both content slot and results slot at the same time.
 	it('can set a custom content slot', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 			contentSlot: <div>Lorem Ipsum</div>,
 		};
 
-		controller.bind();
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let contentSlot = rendered.container.querySelector('.ss__autocomplete__content');
@@ -369,20 +500,34 @@ describe('Autocomplete Component', () => {
 
 	// needs own term
 	it('can set a custom noResults slot', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 			noResultsSlot: <div>Lorem Ipsum</div>,
 		};
 
-		controller.bind();
+		controller.client.mockData.updateConfig({ autocomplete: 'ac.noresults' });
+		controller.urlManager = controller.urlManager.reset().set('query', 'efjii4iieiiedid');
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
-		input.focus();
-		input.value = '3regujifdkoclprtjigfkvmdckoswkrjeifkd';
+		input.value = 'efjii4iieiiedid';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		input.focus();
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let noResultsSlot = rendered.container.querySelector('.ss__autocomplete__content__no-results');
@@ -390,7 +535,18 @@ describe('Autocomplete Component', () => {
 	});
 
 	it('can set a custom css width', async () => {
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
@@ -402,13 +558,13 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			width: '100%',
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
-		input.value = 'shirt';
+		input.value = 'dress';
 
-		await new Promise((r) => setTimeout(r, 1000));
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let ac = rendered.container.querySelector('.ss__autocomplete');
@@ -426,7 +582,7 @@ describe('AutoComplete theming works', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '<div>' + '  <input type="text" class="searchspring-ac">' + '<div id="target"></div></div>';
 		controllerConfigId = uuidv4().split('-').join('');
-		config = {
+		acConfig = {
 			id: controllerConfigId,
 			selector: 'input.searchspring-ac',
 			settings: {
@@ -435,27 +591,42 @@ describe('AutoComplete theming works', () => {
 				},
 			},
 		};
+
+		urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+		services = { urlManager };
 	});
 
 	it('is themeable with ThemeProvider', async () => {
 		const globalTheme = {
 			components: {
 				autocomplete: {
-					trendingTitle: 'Lorem Ipsum',
+					termsTitle: 'Lorem Ipsum',
 				},
 			},
 		};
 
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
-		await new Promise((r) => setTimeout(r, 1000));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
@@ -466,62 +637,86 @@ describe('AutoComplete theming works', () => {
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
 		expect(element).toBeInTheDocument();
-		expect(element).toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+		expect(element).toHaveTextContent(globalTheme.components.autocomplete.termsTitle);
 	});
 
 	it('is themeable with theme prop', async () => {
 		const propTheme = {
 			components: {
 				autocomplete: {
-					trendingTitle: 'Lorem Ipsum',
+					termsTitle: 'Lorem Ipsum',
 				},
 			},
 		};
 
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
-		await new Promise((r) => setTimeout(r, 1000));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		const rendered = render(<Autocomplete {...args} theme={propTheme} />, { container: document.getElementById('target') });
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
 		expect(element).toBeInTheDocument();
-		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
+		expect(element).toHaveTextContent(propTheme.components.autocomplete.termsTitle);
 	});
 
 	it('is theme prop overrides ThemeProvider', async () => {
 		const globalTheme = {
 			components: {
 				autocomplete: {
-					trendingTitle: 'shouldnt find this',
+					termsTitle: 'shouldnt find this',
 				},
 			},
 		};
 		const propTheme = {
 			components: {
 				autocomplete: {
-					trendingTitle: 'should find this',
+					termsTitle: 'should find this',
 				},
 			},
 		};
 
-		const controller = createAutocompleteController({ client, controller: config });
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+
 		const args = {
 			controller,
 			input: controller.config.selector,
 		};
-		controller.bind();
 
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
-		await new Promise((r) => setTimeout(r, 1000));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
@@ -532,7 +727,7 @@ describe('AutoComplete theming works', () => {
 
 		const element = rendered.container.querySelector('.ss__autocomplete__title h5');
 		expect(element).toBeInTheDocument();
-		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
-		expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+		expect(element).toHaveTextContent(propTheme.components.autocomplete.termsTitle);
+		expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.termsTitle);
 	});
 });

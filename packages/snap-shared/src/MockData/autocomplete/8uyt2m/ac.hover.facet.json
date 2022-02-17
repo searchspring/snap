@@ -1,0 +1,417 @@
+{
+    "pagination": {
+      "totalResults": 0,
+      "page": 1,
+      "pageSize": 30,
+      "defaultPageSize": 24,
+      "totalPages": 0
+    },
+    "results": [{
+        "id": "176900",
+        "mappings": {
+          "core": {
+            "uid": "176900",
+            "sku": "C-SHE-R4-L4088",
+            "name": "Caught In A Reverie Red Lace Dress",
+            "url": "/product/C-SHE-R4-L4088",
+            "price": 46,
+            "msrp": 50,
+            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
+            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4833_thumb_med.jpg",
+            "description": [
+              "As wondrous as life can be at its best, there are an equal number of times when it can be dull as dirt. Thank goodness for your active imagination, because you can while away the hours with the most rewarding of daydreams. A bit of advice though, if we may: dress as though you expect something exciting to happen at any moment, even at the height of your boredom. You don’t want to be caught in a reverie, unprepared to make your daydreams a reality when opportunity strikes. This lace dress is versatile in that way, and stunning to boot. Model is wearing a small. • 70% Cotton 30% Polyester • Lining 100% Polyester • Hand Wash Cold • Lined • Imported"
+            ],
+            "brand": "She + Sky",
+            "popularity": "3271"
+          }
+        },
+        "attributes": {
+          "black_friday": "yes",
+          "color": [
+            "Red"
+          ],
+          "color_family": [
+            "Red"
+          ],
+          "condition": [
+            "New"
+          ],
+          "days_since_published": [
+            "75"
+          ],
+          "gross_margin": [
+            "61"
+          ],
+          "holiday_styles": "yes",
+          "id": "b96fc0d5f588d886e6e84ed25269127e",
+          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1g32cNUNMtH1MTGwsGAwZDBiMGAwNDRiSC_KTAEEAAD__z0CC_M",
+          "intellisuggestSignature": "61195cbbeb38f0670bde55c6097b092b253ecda1f5a38942327a5a8e27e1af6a",
+          "keywords": [
+            "red",
+            "red dress red",
+            "cherry red",
+            "cherry",
+            "valentines",
+            "valentine",
+            "occasion",
+            "lace",
+            "red lace",
+            "lace dress",
+            "sexy dress",
+            "cute",
+            "pretty",
+            "stunning",
+            "sexy"
+          ],
+          "material": [
+            "Cotton"
+          ],
+          "multi_colors": [
+            "no"
+          ],
+          "on_sale": [
+            "No"
+          ],
+          "product_type": [
+            "All Dresses > Shop by Color > Red Dresses",
+            "All Dresses > Shop by Color",
+            "Special Occasion > Party Dresses",
+            "Special Occasion > Wedding Guest Dress",
+            "Style Influencer > Holly Boyd",
+            "Valentine's Day > Valentine's Day Dresses",
+            "Gifts for Her",
+            "Gifts for Her > Gifts Under $50"
+          ],
+          "product_type_unigram": "dress",
+          "quantity_available": [
+            "6"
+          ],
+          "sales_rank": [
+            "3271"
+          ],
+          "size": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "size_dress": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "ss_category_hierarchy": [
+            "All Dresses",
+            "Style Influencer>Holly Boyd",
+            "All Dresses>Shop by Color>Red Dresses",
+            "All Dresses>Shop by Color",
+            "Style Influencer",
+            "Special Occasion>Party Dresses",
+            "Gifts for Her",
+            "Special Occasion>Wedding Guest Dress",
+            "Special Occasion",
+            "Valentine's Day>Valentine's Day Dresses",
+            "Gifts for Her>Gifts Under $50",
+            "Valentine's Day"
+          ],
+          "ss_clicks": [
+            "4133"
+          ],
+          "ss_insights_quadrant": [
+            "Best Performer"
+          ],
+          "ss_product_type": [
+            "Dress"
+          ],
+          "ss_sale_price": "46",
+          "title": [
+            "Caught In A Reverie Red Lace Dress"
+          ]
+        },
+        "children": []
+      },
+      {
+        "id": "179559",
+        "mappings": {
+          "core": {
+            "uid": "179559",
+            "sku": "C-MB-R4-16591",
+            "name": "Two Become One Red Lace Dress",
+            "url": "/product/C-MB-R4-16591",
+            "price": 56,
+            "msrp": 75,
+            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
+            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26246_thumb_med.jpg",
+            "description": [
+              "When it comes to white lace, how’s a girl supposed to wear it and not immediately think of a fairy tale wedding? At some point in all of our lives we’ve dreamed about it (though some of us hold onto that dream longer than others). But as enticing as the promise of “Two Become One” is, white lace has a far more practical, and far more effective purpose—making you look your most beautiful, no matter the occasion. Bodycon style dress features a red crochet lace overlay with a peek-a-boo midriff and plunging neckline. Dress has a slight stretch and features a v back with peek-a-boo panels and an invisible back zipper. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+            ],
+            "brand": "Marine",
+            "popularity": "2945"
+          }
+        },
+        "attributes": {
+          "black_friday": "yes",
+          "color": [
+            "Red"
+          ],
+          "color_family": [
+            "Red"
+          ],
+          "condition": [
+            "New"
+          ],
+          "days_since_published": [
+            "76"
+          ],
+          "gross_margin": [
+            "40"
+          ],
+          "holiday_styles": "yes",
+          "id": "71f2e6e472fac0994d693fa01e1d13a5",
+          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1vV10g0y0TU0M7U0ZDBkMGYwYDA0NGJIL8pMAQQAAP__LEMLiQ",
+          "intellisuggestSignature": "085ab67e7504e6977699b7d702f27785ceb66971fea26220f69adbcdd47c84c1",
+          "keywords": [
+            "red",
+            "red dress",
+            "red lace dress",
+            "lace",
+            "crochet",
+            "body con",
+            "bodycon dress",
+            "cocktail dress",
+            "wedding guest",
+            "crochet lace"
+          ],
+          "material": [
+            "Polyester"
+          ],
+          "multi_colors": [
+            "no"
+          ],
+          "on_sale": [
+            "No"
+          ],
+          "product_type": [
+            "All Dresses > Shop by Color > Red Dresses",
+            "Special Occasion > Formal Dresses",
+            "Special Occasion > Graduation Dresses",
+            "Special Occasion > Wedding Guest Dress",
+            "All Dresses > Shop by Color",
+            "All Dresses > Cocktail Dresses",
+            "Gifts for Her"
+          ],
+          "product_type_unigram": "dress",
+          "quantity_available": [
+            "2"
+          ],
+          "sales_rank": [
+            "2945"
+          ],
+          "size": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "size_dress": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "ss_category_hierarchy": [
+            "Special Occasion>Graduation Dresses",
+            "All Dresses",
+            "All Dresses>Shop by Color>Red Dresses",
+            "All Dresses>Shop by Color",
+            "Gifts for Her",
+            "Special Occasion>Wedding Guest Dress",
+            "All Dresses>Cocktail Dresses",
+            "Special Occasion>Formal Dresses",
+            "Special Occasion"
+          ],
+          "ss_clicks": [
+            "3206"
+          ],
+          "ss_insights_quadrant": [
+            "Best Performer"
+          ],
+          "ss_product_type": [
+            "Dress"
+          ],
+          "ss_sale_price": "56",
+          "title": [
+            "Two Become One Red Lace Dress"
+          ]
+        },
+        "children": []
+      },
+      {
+        "id": "180367",
+        "mappings": {
+          "core": {
+            "uid": "180367",
+            "sku": "C-MB-R4-16707",
+            "name": "Drop Dead Gorgeous Red Lace Dress",
+            "url": "/product/C-MB-R4-16707",
+            "price": 58,
+            "msrp": 75,
+            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
+            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26498_thumb_med.jpg",
+            "description": [
+              "Trying to pick his jaw off the floor is exactly what he will be doing when he sees you in this Drop Dead Gorgeous Red Lace Dress. The other ladies at the party will have to keep their husbands (and jealousy) in check because you will for sure be THE talk of the night. Red lace dress features a form fitting silhouette with invisible back zipper toped with a double hook and eye closure. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported"
+            ],
+            "brand": "Ever After",
+            "popularity": "2822"
+          }
+        },
+        "attributes": {
+          "brightness": "high",
+          "color": [
+            "Red"
+          ],
+          "color_family": [
+            "Red"
+          ],
+          "condition": [
+            "New"
+          ],
+          "days_since_published": [
+            "136"
+          ],
+          "dress_length": "36",
+          "dress_length_name": "Above knee",
+          "gross_margin": [
+            "27"
+          ],
+          "id": "4a0648f8179714944b278d17d4522619",
+          "intellisuggestData": "eJwqTs4tNM9jYChKTVFIKUotLmZw1vV10g0y0TU0MzcwZzBkMGEwYDA0NGJIL8pMAQQAAP__LDoLiQ",
+          "intellisuggestSignature": "50f2f9024c6aae1f0a9fa193f14200320da2c136929d410043a89105d3a125c5",
+          "keywords": [
+            "red",
+            "red lace dress",
+            "red dress",
+            "lace",
+            "lace dress",
+            "crochet lace",
+            "body con",
+            "bodycon",
+            "cocktail dress",
+            "cocktail"
+          ],
+          "material": [
+            "Polyester"
+          ],
+          "multi_colors": [
+            "no"
+          ],
+          "on_sale": [
+            "No"
+          ],
+          "product_type": [
+            "All Dresses > Shop by Color > Red Dresses",
+            "Brands We Love > Red Dress Label > Ever After",
+            "All Dresses > Shop by Color",
+            "Shop By Trend > Girl's Night Out",
+            "All Dresses > Cocktail Dresses",
+            "All Dresses > Lace Dresses",
+            "Gifts for Her"
+          ],
+          "product_type_unigram": "dress",
+          "quantity_available": [
+            "20"
+          ],
+          "sales_rank": [
+            "2822"
+          ],
+          "saturation": "high",
+          "size": [
+            "Small",
+            "Medium",
+            "Large",
+            "1X",
+            "2X",
+            "3X"
+          ],
+          "size_dress": [
+            "Small",
+            "Medium",
+            "Large",
+            "1X",
+            "2X",
+            "3X"
+          ],
+          "ss_category_hierarchy": [
+            "Shop By Trend",
+            "All Dresses",
+            "Shop By Trend>Girl's Night Out",
+            "Brands We Love>Red Dress Label>Ever After",
+            "All Dresses>Shop by Color>Red Dresses",
+            "All Dresses>Shop by Color",
+            "Gifts for Her",
+            "All Dresses>Cocktail Dresses",
+            "All Dresses>Lace Dresses",
+            "Brands We Love",
+            "Brands We Love>Red Dress Label"
+          ],
+          "ss_clicks": [
+            "3512"
+          ],
+          "ss_insights_quadrant": [
+            "Under Exposed"
+          ],
+          "ss_product_type": [
+            "Dress"
+          ],
+          "ss_sale_price": "58",
+          "title": [
+            "Drop Dead Gorgeous Red Lace Dress"
+          ]
+        },
+        "children": []
+      }],
+    "filters": [
+      {
+        "type": "value",
+        "field": "brand",
+        "label": "4 Sienna",
+        "value": "4 Sienna"
+      }
+    ],
+    "facets": [],
+    "sorting": [],
+    "merchandising": {
+      "redirect": "",
+      "is_elevated": [],
+      "elevated": [],
+      "removed": [],
+      "content": {},
+      "facets": [],
+      "facetsHide": [],
+      "experiments": [],
+      "variants": [],
+      "personalized": false
+    },
+    "search": {
+      "query": "red dress"
+    },
+    "autocomplete": {
+      "query": "red dress",
+      "suggested": {
+        "text": "red dress",
+        "type": "exact",
+        "source": "popular-query"
+      },
+      "alternatives": [
+        {
+          "text": "red dresses"
+        },
+        {
+          "text": "red dress short"
+        },
+        {
+          "text": "red mini dress"
+        },
+        {
+          "text": "red long dress"
+        }
+      ]
+    }
+  }
