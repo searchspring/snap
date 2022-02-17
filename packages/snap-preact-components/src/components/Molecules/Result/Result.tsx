@@ -152,7 +152,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 					<div className="ss__result__image-wrapper">
 						<a
 							href={core.url}
-							onMouseDown={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 								onClick && onClick(e);
 								controller?.track?.product?.click(e, result);
 							}}
@@ -166,7 +166,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							<div className="ss__result__details__title">
 								<a
 									href={core.url}
-									onMouseDown={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+									onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 										onClick && onClick(e);
 										controller?.track?.product?.click(e, result);
 									}}
