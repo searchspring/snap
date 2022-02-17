@@ -10,7 +10,7 @@ import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, Aft
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
-const INPUT_DELAY = 200;
+export const INPUT_DELAY = 200;
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const PARAM_ORIGINAL_QUERY = 'oq';
