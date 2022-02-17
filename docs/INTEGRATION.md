@@ -73,7 +73,8 @@ Similar to the above context variables however these do not apply globally. They
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |
 | options.categories | category path | all | optional category path |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template |
-| options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config]((https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)) |
+| options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
+| options.limits | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
 
 ### Background Filters
 Background filters allow a page to be refined without displaying the active filter to the end-user. This is primarily used for category pages, although can also be used for custom functionality such as restricting visibility of products to user groups. The filter value is retrieved from a context variable and applied as a background filter within the Snap config object. 

@@ -108,6 +108,7 @@ export class RecommendationInstantiator {
 							batched?: boolean;
 							realtime?: boolean;
 							categories?: any;
+							limits?: number;
 						}
 					}
 				*/
@@ -126,6 +127,9 @@ export class RecommendationInstantiator {
 				}
 				if (options?.categories) {
 					globals.categories = options.categories;
+				}
+				if (options?.limits && Number.isInteger(Number(options.limits))) {
+					globals.limits = Number(options.limits);
 				}
 
 				const tag = injectedElem.getAttribute('searchspring-recommend');
