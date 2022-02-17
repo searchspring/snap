@@ -205,3 +205,34 @@ See `<Results />` component documentation for further details.
 ```jsx
 <Autocomplete controller={controller} input={'#searchInput'} breakpoints={breakpoints} />
 ```
+
+
+### onFacetOptionClick
+The `onFacetOptionClick` prop contains a custom onClick event handler for facet options. Function is passed the click event. 
+
+
+```typescript
+const CustomOnClickFunc = (e) => {
+    console.log('You Clicked a Facet Option!' , e)
+};
+```
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} onFacetOptionClick={CustomOnClickFunc} />
+```
+
+
+
+### onTermClick
+The `onTermClick` prop contains a custom onClick event handler for Suggested & Trending Terms. Function is passed the click event. 
+
+
+```typescript
+const CustomOnTermClick = (e) => {
+    console.log('You Clicked a term!' , e)
+};
+```
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} onTermClick={CustomOnTermClick} />
+```

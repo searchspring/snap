@@ -241,6 +241,24 @@ export default {
 				type: 'object',
 			},
 		},
+		onFacetOptionClick: {
+			description: 'Custom onClick event handler for facet options.',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
+		onTermClick: {
+			description: 'Custom onClick event handler for Suggested & Trending Terms',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
 		...componentArgs,
 	},
 };
