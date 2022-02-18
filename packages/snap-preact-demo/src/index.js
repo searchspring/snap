@@ -146,6 +146,26 @@ let config = {
 					},
 				],
 			},
+			{
+				config: {
+					id: 'finder_hierarchy',
+					url: '/',
+					fields: [
+						{
+							field: 'ss_category_hierarchy',
+						},
+					],
+				},
+				targeters: [
+					{
+						name: 'finder_hierarchy',
+						selector: '#searchspring-finder-hierarchy',
+						component: async () => {
+							return (await import('./components/Finder/Finder')).Finder;
+						},
+					},
+				],
+			},
 		],
 	},
 };
