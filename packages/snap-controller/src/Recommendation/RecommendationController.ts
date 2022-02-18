@@ -25,7 +25,6 @@ const defaultConfig: RecommendationControllerConfig = {
 	tag: '',
 	batched: true,
 	realtime: false,
-	limits: 20,
 	globals: {},
 };
 
@@ -239,7 +238,6 @@ export class RecommendationController extends AbstractController {
 		const params = {
 			tag: this.config.tag,
 			batched: this.config.batched,
-			limits: this.config.limits,
 			...this.config.globals,
 			branch: this.config.branch || 'production',
 		};

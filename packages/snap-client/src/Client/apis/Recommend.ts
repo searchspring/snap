@@ -13,7 +13,7 @@ export type RecommendRequestModel = {
 	lastViewed?: string[];
 	test?: boolean;
 	batched?: boolean;
-	limits?: number[];
+	limits?: number | number[];
 };
 
 export type RecommendResponseModel = {
@@ -128,7 +128,7 @@ export class RecommendAPI extends API {
 		const deferred = new Deferred();
 
 		paramBatch.request.tags.push(tag);
-		paramBatch.request.limits.push(limits);
+		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
 		paramBatch.deferreds.push(deferred);
 		window.clearTimeout(paramBatch.timeout);

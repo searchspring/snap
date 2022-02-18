@@ -1,4 +1,5 @@
 import { render } from 'preact';
+import deepmerge from 'deepmerge';
 
 import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
@@ -86,7 +87,7 @@ export class RecommendationInstantiator {
 				},
 			],
 			async (target, injectedElem, elem) => {
-				const globals: any = {};
+				const contextGlobals: any = {};
 
 				const { shopper, shopperId, product, seed, options } = getContext(
 					['shopperId', 'shopper', 'product', 'seed', 'options'],
@@ -114,34 +115,39 @@ export class RecommendationInstantiator {
 				*/
 
 				if (shopper || shopperId) {
-					globals.shopper = shopper?.id || shopperId;
+					contextGlobals.shopper = shopper?.id || shopperId;
 				}
 				if (product || seed) {
-					globals.product = product || seed;
+					contextGlobals.product = product || seed;
 				}
 				if (options?.branch) {
-					globals.branch = options.branch;
+					contextGlobals.branch = options.branch;
 				}
 				if (options?.siteId) {
-					globals.siteId = options.siteId;
+					contextGlobals.siteId = options.siteId;
 				}
 				if (options?.categories) {
-					globals.categories = options.categories;
+					contextGlobals.categories = options.categories;
 				}
-				if (options?.limit && Number.isInteger(Number(options.limit))) {
-					globals.limits = Number(options.limit);
+				if (options?.limit && Number.isInteger(Number(options?.limit))) {
+					contextGlobals.limits = Number(options?.limit);
 				}
 
 				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
+
+				const defaultGlobals = {
+					limits: 20,
+				};
+				const globals = deepmerge(deepmerge(defaultGlobals, this.config.config?.globals || {}), contextGlobals);
 
 				const controllerConfig = {
 					id: `recommend_${tag + (profileCount[tag] - 1)}`,
 					tag,
 					batched: options?.batched ?? true,
 					realtime: Boolean(options?.realtime),
-					globals,
 					...this.config.config,
+					globals,
 				};
 
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
