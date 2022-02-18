@@ -13,7 +13,8 @@ export type RecommendRequestModel = {
 	lastViewed?: string[];
 	test?: boolean;
 	batched?: boolean;
-	limits?: number;
+	limit?: number;
+	limits?: number[];
 };
 
 export type RecommendResponseModel = {
@@ -110,7 +111,7 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const { tags, limits, ...otherParams } = parameters;
+		const { tags, limit, ...otherParams } = parameters;
 		const [tag] = tags || [];
 
 		if (!tag) return;
@@ -128,9 +129,9 @@ export class RecommendAPI extends API {
 		const deferred = new Deferred();
 
 		paramBatch.request.tags.push(tag);
-		if (limits) {
+		if (limit) {
 			paramBatch.request.limits = paramBatch.request.limits || [];
-			paramBatch.request.limits.push(limits);
+			paramBatch.request.limits.push(limit);
 		}
 
 		paramBatch.deferreds.push(deferred);
