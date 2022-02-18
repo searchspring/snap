@@ -148,7 +148,7 @@ let config = {
 			},
 			{
 				config: {
-					id: 'finder-hierarchy',
+					id: 'finder_hierarchy',
 					url: '/',
 					fields: [
 						{
@@ -158,7 +158,7 @@ let config = {
 				},
 				targeters: [
 					{
-						name: 'finder-hierarchy',
+						name: 'finder_hierarchy',
 						selector: '#searchspring-finder-hierarchy',
 						component: async () => {
 							return (await import('./components/Finder/Finder')).Finder;

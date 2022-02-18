@@ -4,7 +4,7 @@
  * config.pages[].finderIds must contain a list of all finder id's to be tested on the page.
  */
 const config = {
-	pages: [{ url: 'https://localhost:2222/finder.html', finderIds: ['finder', 'finder-hierarchy'] }],
+	pages: [{ url: 'https://localhost:2222/finder.html', finderIds: ['finder', 'finder_hierarchy'] }],
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		finder: {
@@ -173,6 +173,11 @@ config?.pages?.forEach((page, _i) => {
 								const expectedUrl = controller.store.selections.filter((selection) => selection.selected)[0].services.urlManager.href;
 								expect(expectedUrl).to.exist;
 								expect(newUrl).to.contain(expectedUrl.substring(1)); //remove first character '?'
+
+								const findButtonUrl = controller.store.config.url;
+								if (findButtonUrl) {
+									expect(newUrl).to.contain(findButtonUrl);
+								}
 							});
 
 							// click on find button
@@ -294,6 +299,11 @@ config?.pages?.forEach((page, _i) => {
 								const expectedUrl = controller.store.selections.filter((selection) => selection.selected)[0].services.urlManager.href;
 								expect(expectedUrl).to.exist;
 								expect(newUrl).to.contain(expectedUrl.substring(1)); //remove first character '?'
+
+								const findButtonUrl = controller.store.config.url;
+								if (findButtonUrl) {
+									expect(newUrl).to.contain(findButtonUrl);
+								}
 							});
 
 							// click on find button
