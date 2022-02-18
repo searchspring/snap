@@ -142,9 +142,9 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							aria-label={value.value}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
-							href={value.url?.link.href}
+							href={value.url?.link?.href}
 							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url.link.onClick(e);
+								value.url?.link?.onClick(e);
 								onClick && onClick(e);
 							}}
 						>

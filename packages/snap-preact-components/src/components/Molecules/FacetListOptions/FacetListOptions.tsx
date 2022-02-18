@@ -73,6 +73,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		values?.length && (
 			<CacheProvider>
@@ -82,9 +83,9 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
-							href={value.url?.link.href}
+							href={value.url?.link?.href}
 							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url.link.onClick(e);
+								value.url?.link?.onClick(e);
 								onClick && onClick(e);
 							}}
 						>

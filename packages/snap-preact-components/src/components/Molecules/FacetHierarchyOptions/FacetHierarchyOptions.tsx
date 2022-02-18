@@ -82,9 +82,9 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 								{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
 								{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
 							)}
-							href={value.url?.link.href}
+							href={value.url?.link?.href}
 							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url.link.onClick(e);
+								value.url?.link?.onClick(e);
 								onClick && onClick(e);
 							}}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
