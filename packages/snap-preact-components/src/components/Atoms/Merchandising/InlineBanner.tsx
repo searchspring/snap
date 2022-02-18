@@ -37,10 +37,10 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		layout: Layout.GRID,
 		banner: {},
 		// global theme
-		...globalTheme?.components?.banner,
+		...globalTheme?.components?.inlineBanner,
 		// props
 		...properties,
-		...properties.theme?.components?.banner,
+		...properties.theme?.components?.inlineBanner,
 	};
 
 	const { banner, disableStyles, className, width, layout, onClick, style } = props;
@@ -51,6 +51,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		banner &&
 		banner.value && (
