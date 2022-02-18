@@ -46,7 +46,7 @@ describe('Tracking', () => {
 			expect(store).to.haveOwnProperty('pagination');
 			expect(store.pagination.totalResults).to.be.greaterThan(0);
 
-			cy.get(`.ss__result:first`).should('exist').trigger('mousedown');
+			cy.get(`.ss__result:first`).should('exist').trigger('click');
 
 			cy.wait(`@${BeaconType.CLICK}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');
