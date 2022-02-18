@@ -26,7 +26,7 @@ describe('Facet store', () => {
 	});
 
 	it('uses the search store FacetStore', () => {
-		const searchData = mockData.searchMeta();
+		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
 		const facetStore = new FacetStore(
@@ -43,7 +43,7 @@ describe('Facet store', () => {
 	});
 
 	it('adds a preview function to each facet value', () => {
-		const searchData = mockData.searchMeta();
+		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
 		const rootState = new StateStore(services);
 
