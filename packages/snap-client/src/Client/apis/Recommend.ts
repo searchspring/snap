@@ -13,7 +13,6 @@ export type RecommendRequestModel = {
 	lastViewed?: string[];
 	test?: boolean;
 	batched?: boolean;
-	limit?: number;
 	limits?: number[];
 };
 
@@ -111,7 +110,7 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const { tags, limit, ...otherParams } = parameters;
+		const { tags, limits, ...otherParams } = parameters;
 		const [tag] = tags || [];
 
 		if (!tag) return;
@@ -123,16 +122,13 @@ export class RecommendAPI extends API {
 			}
 			delete otherParams.batched; // remove from request parameters
 		}
-		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], ...otherParams }, deferreds: [] };
+		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [], ...otherParams }, deferreds: [] };
 		const paramBatch = this.batches[key];
 
 		const deferred = new Deferred();
 
 		paramBatch.request.tags.push(tag);
-		if (limit) {
-			paramBatch.request.limits = paramBatch.request.limits || [];
-			paramBatch.request.limits.push(limit);
-		}
+		paramBatch.request.limits.push(limits);
 
 		paramBatch.deferreds.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
