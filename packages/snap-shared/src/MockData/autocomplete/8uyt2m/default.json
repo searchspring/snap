@@ -2408,15 +2408,7 @@
   "sorting": [],
   "merchandising": {
     "redirect": "",
-    "is_elevated": [],
-    "elevated": [],
-    "removed": [],
-    "content": {},
-    "facets": [],
-    "facetsHide": [],
-    "experiments": [],
-    "variants": [],
-    "personalized": false
+    "content": {}
   },
   "search": {
     "query": "dress"
