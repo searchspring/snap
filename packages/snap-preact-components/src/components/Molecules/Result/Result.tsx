@@ -85,7 +85,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, style, controller } = props;
+	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
+		props;
 
 	const core = result?.mappings?.core;
 
@@ -151,7 +152,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 					<div className="ss__result__image-wrapper">
 						<a
 							href={core.url}
-							onMouseDown={(e) => {
+							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+								onClick && onClick(e);
 								controller?.track?.product?.click(e, result);
 							}}
 						>
@@ -164,7 +166,8 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							<div className="ss__result__details__title">
 								<a
 									href={core.url}
-									onMouseDown={(e) => {
+									onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+										onClick && onClick(e);
 										controller?.track?.product?.click(e, result);
 									}}
 									dangerouslySetInnerHTML={{
@@ -214,5 +217,6 @@ export interface ResultProps extends ComponentProps {
 	fallback?: string;
 	layout?: LayoutType;
 	truncateTitle?: TruncateTitleProps;
+	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }

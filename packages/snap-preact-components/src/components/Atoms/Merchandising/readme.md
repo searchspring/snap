@@ -58,3 +58,17 @@ The `layout` prop specifies if this banner will be rendered in a `grid` or `list
 ```jsx
 <InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />
 ```
+
+
+### onClick
+The `onClick` prop contains a custom onClick event handler. Function is passed the click event. 
+
+```typescript
+const CustomBannerClick = (e) => {
+    console.log('You Clicked a banner!' , e)
+};
+```
+
+```jsx
+<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} onClick={CustomBannerClick} />
+```

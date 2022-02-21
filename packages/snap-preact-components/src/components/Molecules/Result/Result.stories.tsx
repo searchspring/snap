@@ -125,6 +125,15 @@ export default {
 				options: [Layout.GRID, Layout.LIST],
 			},
 		},
+		onClick: {
+			description: 'Custom onClick event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
 		controller: {
 			description: 'Controller reference',
 			table: {
