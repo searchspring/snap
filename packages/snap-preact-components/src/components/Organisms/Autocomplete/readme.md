@@ -228,11 +228,11 @@ The `onTermClick` prop contains a custom onClick event handler for Suggested & T
 
 
 ```typescript
-const CustomOnTermClick = (e) => {
+const customOnClickFunc = (e) => {
     console.log('You Clicked a term!' , e)
 };
 ```
 
 ```jsx
-<Autocomplete controller={controller} input={'#searchInput'} onTermClick={CustomOnTermClick} />
+<Autocomplete controller={controller} input={'#searchInput'} onTermClick={customOnClickFunc} />
 ```

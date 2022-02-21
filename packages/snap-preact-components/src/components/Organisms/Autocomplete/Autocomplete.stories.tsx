@@ -248,7 +248,7 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
+			action: 'onFacetOptionClick',
 		},
 		onTermClick: {
 			description: 'Custom onClick event handler for Suggested & Trending Terms',
@@ -257,7 +257,7 @@ export default {
 					summary: 'function',
 				},
 			},
-			action: 'onClick',
+			action: 'onTermClick',
 		},
 		...componentArgs,
 	},
