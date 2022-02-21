@@ -152,9 +152,9 @@ export class Snap {
 					{
 						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
+						context: deepmerge(this.config.context || {}, context || {}),
 					},
-					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker },
-					context || this.config.context
+					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
 				);
 				resolve(this.controllers[config.id]);
 			}
@@ -268,9 +268,9 @@ export class Snap {
 								{
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
+									context: deepmerge(this.config.context || {}, controller.context || {}),
 								},
-								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker },
-								controller.context || this.config.context
+								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);
 
 							this.controllers[cntrlr.config.id] = cntrlr;

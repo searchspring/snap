@@ -12,7 +12,7 @@ import type { SnapControllerServices, SnapSearchControllerConfig } from '../type
 
 configureMobx({ useProxies: 'never' });
 
-export default (config: SnapSearchControllerConfig, services?: SnapControllerServices, context?: any): SearchController => {
+export default (config: SnapSearchControllerConfig, services?: SnapControllerServices): SearchController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker);
 
 	const cntrlr = new SearchController(
@@ -26,7 +26,7 @@ export default (config: SnapSearchControllerConfig, services?: SnapControllerSer
 			logger: services?.logger || new Logger(),
 			tracker: services?.tracker || new Tracker(config.client.globals),
 		},
-		context
+		config.context
 	);
 
 	return cntrlr;

@@ -7,7 +7,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, RecommendationController, Attachments } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
@@ -23,6 +23,7 @@ export type RecommendationInstantiatorConfig = {
 	selector?: string;
 	services?: SnapControllerServices;
 	url?: UrlTranslatorConfig;
+	context?: ContextVariables;
 };
 
 export type RecommendationInstantiatorServices = {
@@ -146,9 +147,9 @@ export class RecommendationInstantiator {
 					{
 						url: this.config.url || {},
 						controller: controllerConfig,
+						context: deepmerge(this.config.context || {}, context || {}),
 					},
-					{ client, tracker },
-					context
+					{ client, tracker }
 				);
 
 				this.uses.forEach((attachements) => recs.use(attachements));
