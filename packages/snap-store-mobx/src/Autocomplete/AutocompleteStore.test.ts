@@ -7,7 +7,7 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
-const mockData = new MockData();
+const mockData = new MockData({ meta: 'ac.meta' });
 
 const autocompleteConfig = {
 	id: 'autocomplete',
@@ -20,6 +20,7 @@ const autocompleteConfig = {
 
 describe('Autocomplete Store', () => {
 	let searchData;
+
 	beforeEach(() => {
 		searchData = mockData.autocompleteMeta();
 	});

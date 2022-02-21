@@ -7,11 +7,9 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 
-import { AutocompleteController } from './AutocompleteController';
+import { AutocompleteController, INPUT_DELAY } from './AutocompleteController';
 
 import { MockClient } from '@searchspring/snap-shared';
-
-const INPUT_DELAY = 200;
 
 let acConfig = {
 	id: 'ac',

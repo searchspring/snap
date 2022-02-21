@@ -98,13 +98,12 @@ describe('Term Store', () => {
 		termStore.forEach((term, index) => {
 			expect(term.active).toBe(index === 0 ? true : false);
 		});
-
-		termStore[2].preview();
+		termStore[1].preview();
 
 		expect(mockResetTrending).toHaveBeenCalled();
 
 		termStore.forEach((term, index) => {
-			expect(term.active).toBe(index === 2 ? true : false);
+			expect(term.active).toBe(index === 1 ? true : false);
 		});
 
 		expect(rootState.locks.terms.locked).toBe(true);
