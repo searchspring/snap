@@ -101,7 +101,7 @@ const CSS = {
 		}),
 };
 
-const defaultCarouselBreakpoints = {
+export const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -129,7 +129,7 @@ const defaultCarouselBreakpoints = {
 	},
 };
 
-const defaultVerticalCarouselBreakpoints = {
+export const defaultVerticalCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -146,6 +146,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
+		autoAdjustSlides: true,
 		// global theme
 		...globalTheme?.components?.carousel,
 		//props
@@ -156,6 +157,12 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const displaySettings = useDisplaySettings(props.breakpoints);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+
+		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
+			displaySettings.slidesPerView = props.children.length;
+			displaySettings.slidesPerGroup = props.children.length;
+			displaySettings.loop = false;
+		}
 		props = {
 			...props,
 			...displaySettings,
@@ -172,6 +179,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		prevButton,
 		hideButtons,
 		vertical,
+		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -245,7 +253,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						}}
 						direction={vertical ? 'vertical' : 'horizontal'}
 						loop={loop}
-						breakpoints={breakpoints}
 						pagination={
 							pagination
 								? {
@@ -254,6 +261,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								: false
 						}
 						{...additionalProps}
+						{...displaySettings}
 					>
 						{children.map((child) => {
 							return <SwiperSlide>{child}</SwiperSlide>;
@@ -285,6 +293,7 @@ export interface CarouselProps extends ComponentProps {
 	loop?: boolean;
 	vertical?: boolean;
 	pagination?: boolean;
+	autoAdjustSlides?: boolean;
 	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;
 	onPrevButtonClick?: (e) => void;
