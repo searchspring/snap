@@ -1,21 +1,3 @@
-export type ContextVariables = {
-	shopper?: {
-		id: string;
-		cart?: any[];
-		[variable: string]: any;
-	};
-	config?: {
-		client?: {
-			[endpoint: string]: {
-				cacheSettings?: {
-					[key: string]: any;
-				};
-			};
-		};
-	};
-	[variable: string]: any;
-};
-
 export type ClientConfig = {
 	meta?: {
 		api?: SnapApiConfig;
