@@ -94,10 +94,8 @@ export type SnapApiConfig = {
 ## Controller usage
 Snap Client is a dependency of Snap Controller and it is recommended to use the Controller's `search` method to perform a search. 
 
-
-
 ## Cache usage
-Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cacheSettings`. Settings include: 
+Each requester in the Snap Client has its own cache settings, which can be configured via the `ClientConfig` under `cache`. Settings include: 
 
   `enabled`: to opt out - Defaults to `true`, 
 
@@ -107,10 +105,68 @@ Each requester in the Snap Client has its own cache settings, which can be confi
 
   `purgeable`: to allow auto purging of the requests from localstorage when maxSize is hit, based on time remaining to expiration.  - Defaults to `true` with the exception of `meta`,
 
-  `entries`: to allow preload the cache. This is primarily used to Email Recommendations.
+  `entries`: to allow preload the cache. This is primarily used in Email Recommendations. 
 
+```typescript
+const metaResponse = {
+    "facets": {
+        "brand": {
+            "display": "list",
+            "label": "Brand",
+            "collapsed": false,
+            "multiple": "or"
+        },
+        "collection": {
+            "display": "list",
+            "label": "Collection",
+            "collapsed": false,
+            "multiple": "or"
+        },
+        "color_family": {
+            "display": "palette",
+            "label": "Color",
+            "collapsed": false,
+            "multiple": "or"
+        }
+    },
+    "sortOptions": [
+        {
+            "type": "relevance",
+            "field": "relevance",
+            "direction": "desc",
+            "label": "Best Match"
+        },
+        {
+            "type": "field",
+            "field": "sales_rank",
+            "direction": "desc",
+            "label": "Most Popular"
+        }
+    ]
+};
 
+const metaKey = `/api/meta/meta.json{"siteId":"8uyt2m"}`;
 
+const clientConfig = {
+  search: {
+    cache: {
+      entries: {
+        [metaKey]: metaResponse
+      }
+    }
+  }
+}
+
+const client = new Client(globals, clientConfig);
+
+const results = await client.search({
+  search: {
+    query: {
+      string: 'dress'
+    }
+  }
+});
+```
 
 ## Standalone usage
 ```typescript
