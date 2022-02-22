@@ -40,6 +40,7 @@ export class RecommendationInstantiator {
 	tracker: Tracker;
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
+	globalContext: ContextVariables;
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
@@ -47,6 +48,7 @@ export class RecommendationInstantiator {
 
 	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
 		this.config = config;
+		this.globalContext = getContext(['shopper', 'config']);
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -91,11 +93,9 @@ export class RecommendationInstantiator {
 				const globals: any = {};
 
 				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options'], elem as HTMLScriptElement);
-
-				const globalcontext = getContext(['shopperId', 'shopper', 'config']);
-
+				const context = deepmerge(this.globalContext, elemContext);
 				const { shopper, shopperId, product, seed, options } = elemContext;
-				const context = deepmerge(elemContext, globalcontext);
+
 				/*
 					type instantiatorContext = {
 						shopper?: string;
