@@ -61,8 +61,14 @@ describe('feature flags', () => {
 
 		it('is false when doNotTrack is set', () => {
 			(global.window as any).navigator.cookieEnabled = true;
-			(global.window as any).navigator.doNotTrack = true;
+			(global.window as any).navigator.doNotTrack = '1';
 			expect(getFlags('user agent not considered').cookies()).toEqual(false);
+		});
+
+		it(`is true when doNotTrack is set to 'unspecified'`, () => {
+			(global.window as any).navigator.cookieEnabled = true;
+			(global.window as any).navigator.doNotTrack = 'unspecified';
+			expect(getFlags('user agent not considered').cookies()).toEqual(true);
 		});
 	});
 
