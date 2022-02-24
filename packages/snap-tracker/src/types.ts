@@ -143,6 +143,14 @@ export interface CustomBeaconEvent {
 	[key: string]: any;
 }
 
+export type PreflightRequestModel = {
+	userId: string;
+	siteId: string;
+	shopper?: string;
+	cart?: string[];
+	lastViewed?: string[];
+};
+
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
 	shopper: {

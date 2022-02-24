@@ -37,13 +37,13 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		layout: Layout.GRID,
 		banner: {},
 		// global theme
-		...globalTheme?.components?.banner,
+		...globalTheme?.components?.inlineBanner,
 		// props
 		...properties,
-		...properties.theme?.components?.banner,
+		...properties.theme?.components?.inlineBanner,
 	};
 
-	const { banner, disableStyles, className, width, layout, style } = props;
+	const { banner, disableStyles, className, width, layout, onClick, style } = props;
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
@@ -51,11 +51,15 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		banner &&
 		banner.value && (
 			<CacheProvider>
 				<div
+					onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+						onClick && onClick(e);
+					}}
 					className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
 					{...styling}
 					dangerouslySetInnerHTML={{
@@ -71,4 +75,5 @@ export interface InlineBannerProps extends ComponentProps {
 	banner: InlineBannerContent;
 	width?: string;
 	layout?: LayoutType;
+	onClick?: (e: React.MouseEvent) => void;
 }

@@ -136,8 +136,6 @@ export class Client {
 	}
 
 	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
-		// TODO - batching
-
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';

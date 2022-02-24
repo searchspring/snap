@@ -139,11 +139,14 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-							onClick={onClick}
 							aria-label={value.value}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
-							{...value.url?.link}
+							href={value.url?.link?.href}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
 						>
 							<div className="ss__facet-palette-options__option__wrapper">
 								<div
@@ -171,7 +174,7 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 	columns?: number;
 	gapSize?: string;
 	hideIcon?: boolean;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

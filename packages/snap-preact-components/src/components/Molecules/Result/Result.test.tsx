@@ -4,6 +4,7 @@ import { Result } from './Result';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
+import userEvent from '@testing-library/user-event';
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -68,6 +69,17 @@ describe('Result Component', () => {
 		const rendered = render(<Result result={searchResponse.results[1]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
+	});
+
+	it('can set a custom onClick function', () => {
+		const onClickFunc = jest.fn();
+
+		const rendered = render(<Result result={searchResponse.results[1]} onClick={onClickFunc} />);
+		const resultElement = rendered.container.querySelector('.ss__result a');
+		expect(resultElement).toBeInTheDocument();
+
+		userEvent.click(resultElement);
+		expect(onClickFunc).toHaveBeenCalled();
 	});
 });
 

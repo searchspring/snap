@@ -5,6 +5,7 @@ import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import 'swiper/swiper.min.css';
 
@@ -12,7 +13,8 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, BreakpointsProps } from '../../../types';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
 	carousel: ({ theme, vertical }) =>
@@ -56,6 +58,9 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': {
+					display: 'none',
+				},
 			},
 			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
@@ -99,7 +104,7 @@ const CSS = {
 		}),
 };
 
-const defaultCarouselBreakpoints = {
+export const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -127,7 +132,7 @@ const defaultCarouselBreakpoints = {
 	},
 };
 
-const defaultVerticalCarouselBreakpoints = {
+export const defaultVerticalCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,
 		slidesPerGroup: 1,
@@ -139,17 +144,34 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: CarouselProps = {
+	let props: CarouselProps = {
 		// default props
 		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
+		autoAdjustSlides: true,
 		// global theme
 		...globalTheme?.components?.carousel,
 		//props
 		...properties,
 		...properties.theme?.components?.carousel,
 	};
+
+	const displaySettings = useDisplaySettings(props.breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+
+		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView) {
+			displaySettings.slidesPerView = props.children.length;
+			displaySettings.slidesPerGroup = props.children.length;
+			displaySettings.loop = false;
+		}
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
 	const {
 		children,
@@ -160,6 +182,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		prevButton,
 		hideButtons,
 		vertical,
+		autoAdjustSlides,
 		onInit,
 		onNextButtonClick,
 		onPrevButtonClick,
@@ -205,17 +228,15 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...styling}
 					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
 				>
-					{!hideButtons && (
-						<div className="ss__carousel__prev-wrapper">
-							<div
-								className="ss__carousel__prev"
-								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
-							>
-								{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
-							</div>
+					<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
+						<div
+							className="ss__carousel__prev"
+							ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+							onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
+						>
+							{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
 						</div>
-					)}
+					</div>
 
 					<Swiper
 						centerInsufficientSlides={true}
@@ -233,7 +254,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						}}
 						direction={vertical ? 'vertical' : 'horizontal'}
 						loop={loop}
-						breakpoints={breakpoints}
 						pagination={
 							pagination
 								? {
@@ -242,23 +262,22 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								: false
 						}
 						{...additionalProps}
+						{...displaySettings}
 					>
 						{children.map((child) => {
 							return <SwiperSlide>{child}</SwiperSlide>;
 						})}
 					</Swiper>
 
-					{!hideButtons && (
-						<div className="ss__carousel__next-wrapper">
-							<div
-								className="ss__carousel__next"
-								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
-								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
-							>
-								{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
-							</div>
+					<div className={classnames('ss__carousel__next-wrapper', { 'ss__carousel__next-wrapper--hidden': hideButtons })}>
+						<div
+							className="ss__carousel__next"
+							ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+							onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
+						>
+							{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
 						</div>
-					)}
+					</div>
 				</div>
 			</CacheProvider>
 		)
@@ -266,13 +285,14 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 });
 
 export interface CarouselProps extends ComponentProps {
-	breakpoints?: any;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
 	vertical?: boolean;
 	pagination?: boolean;
+	autoAdjustSlides?: boolean;
 	onClick?: (swiper, e) => void;
 	onNextButtonClick?: (e) => void;
 	onPrevButtonClick?: (e) => void;

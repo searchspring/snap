@@ -4,6 +4,7 @@ import { Results } from './Results';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
 import { ThemeProvider } from '../../../providers';
+import userEvent from '@testing-library/user-event';
 
 describe('Results Component', () => {
 	const theme = {
@@ -93,5 +94,32 @@ describe('Results Component', () => {
 		const resultsElement = rendered.container.querySelector('.ss__results');
 		const styles = getComputedStyle(resultsElement);
 		expect(styles.backgroundColor).toBe(themeOverride.components.results.style.backgroundColor);
+	});
+
+	it('can pass child component props via the theme', () => {
+		const clickFunc = jest.fn();
+		const theme2 = {
+			components: {
+				result: {
+					onClick: clickFunc,
+				},
+			},
+		};
+
+		const args = {
+			layout: Layout.GRID,
+			results: searchResponse.results,
+		};
+		const rendered = render(
+			<ThemeProvider theme={theme2}>
+				<Results {...args} />
+			</ThemeProvider>
+		);
+		expect(clickFunc).not.toHaveBeenCalled();
+
+		const resultElement = rendered.container.querySelector('.ss__results .ss__result a');
+		userEvent.click(resultElement);
+
+		expect(clickFunc).toHaveBeenCalled();
 	});
 });

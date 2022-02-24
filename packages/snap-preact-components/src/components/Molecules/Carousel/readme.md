@@ -82,12 +82,15 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 <Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
 ```
 
+### autoAdjustSlides
+The `autoAdjustSlides` prop when set to `false` will disable the carousel from automatically adjusting the `slidesPerGroup`, `slidesPerView` and `loop` props when the `children` length is less than the current `slidesPerView`
+
 ### breakpoints
 An object that modifies the responsive behavior of the carousel at various viewports. 
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however any [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can also be specified. 
+The default configuration contains the following properties, however **`any Carousel props`** or [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can also be specified. 
 
 `slidesPerView` - number of products to display per page
 
@@ -121,6 +124,14 @@ const defaultCarouselBreakpoints = {
 		slidesPerView: 5,
 		slidesPerGroup: 5,
 		spaceBetween: 10,
+	},
+};
+
+const defaultVerticalCarouselBreakpoints = {
+	0: {
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 0,
 	},
 };
 ```
