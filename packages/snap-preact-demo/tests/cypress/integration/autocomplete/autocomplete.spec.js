@@ -81,6 +81,21 @@ describe('Autocomplete', () => {
 			});
 		});
 
+		it('auto selects first trending term', function () {
+			cy.snapController('autocomplete').then((controller) => {
+				if (!controller?.config?.settings?.trending.showResults) {
+					this.skip();
+				}
+
+				cy.get(config?.selectors?.website?.input).focus({ force: true });
+
+				cy.get(config?.selectors?.autocomplete.term).should('have.length', controller.store.trending.length);
+				cy.get(`${config?.selectors?.autocomplete.term}:first`).should('have.class', 'ss__autocomplete__terms__option--active');
+				expect(controller.store.trending[0].active).to.equal(true);
+				cy.get(config?.selectors?.autocomplete.result).should('exist');
+			});
+		});
+
 		it('can focus a trending term', function () {
 			cy.snapController('autocomplete').then((controller) => {
 				if (!controller?.config?.settings?.trending) {
@@ -89,7 +104,7 @@ describe('Autocomplete', () => {
 
 				cy.get(config?.selectors?.website?.input).focus({ force: true });
 
-				cy.get(`${config?.selectors?.autocomplete.term}:first a`).rightclick({ force: true }); // trigger onFocus event
+				cy.get(`${config?.selectors?.autocomplete.term}:last a`).rightclick({ force: true }); // trigger onFocus event
 
 				cy.wait('@autocomplete').should('exist');
 
