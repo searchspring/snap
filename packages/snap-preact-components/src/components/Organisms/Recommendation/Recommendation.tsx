@@ -4,15 +4,17 @@ import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import deepmerge from 'deepmerge';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
 
-import { Carousel, CarouselProps } from '../../Molecules/Carousel';
+import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, BreakpointsProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
+import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
 	recommendation: ({ vertical }) =>
@@ -24,48 +26,12 @@ const CSS = {
 		}),
 };
 
-const defaultRecommendationBreakpoints = {
-	0: {
-		slidesPerView: 1,
-		slidesPerGroup: 1,
-		spaceBetween: 0,
-	},
-	480: {
-		slidesPerView: 2,
-		slidesPerGroup: 2,
-		spaceBetween: 10,
-	},
-	768: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-		spaceBetween: 10,
-	},
-	1024: {
-		slidesPerView: 4,
-		slidesPerGroup: 4,
-		spaceBetween: 10,
-	},
-	1200: {
-		slidesPerView: 5,
-		slidesPerGroup: 5,
-		spaceBetween: 10,
-	},
-};
-
-const defaultVerticalRecommendationBreakpoints = {
-	0: {
-		slidesPerView: 1,
-		slidesPerGroup: 1,
-		spaceBetween: 0,
-	},
-};
-
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const props: RecommendationProps = {
+	let props: RecommendationProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
+		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
 		pagination: false,
 		loop: true,
 		// global theme
@@ -74,6 +40,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		// props
 		...properties.theme?.components?.recommendation,
 	};
+
+	const displaySettings = useDisplaySettings(props.breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
 
 	const {
 		title,
@@ -200,10 +176,11 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 							}
 						}}
 						loop={loop}
-						breakpoints={breakpoints}
 						pagination={pagination}
+						breakpoints={breakpoints}
 						{...subProps.carousel}
 						{...additionalProps}
+						{...displaySettings}
 					>
 						{children
 							? children.map((child) => child)
@@ -217,7 +194,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 export interface RecommendationProps extends ComponentProps {
 	title?: JSX.Element | string;
-	breakpoints?: any;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
