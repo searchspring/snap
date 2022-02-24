@@ -59,11 +59,11 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 });
 
 Cypress.Commands.add('snapController', (controllerId = 'search') => {
-	cy.window().then((window) => {
+	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve, reject) => {
-			const checkTimeout = 100;
+			const checkTimeout = 200;
 			let interval = setInterval(() => {
-				const cntrlr = window.searchspring.controller[controllerId];
+				const cntrlr = window?.searchspring?.controller[controllerId];
 
 				if (cntrlr) {
 					clearInterval(interval);
@@ -85,7 +85,7 @@ Cypress.Commands.add('snapController', (controllerId = 'search') => {
 });
 
 Cypress.Commands.add('waitForBundle', () => {
-	cy.window().then((window) => {
+	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
 			const checkTimeout = 100;
 			let interval = setInterval(() => {
