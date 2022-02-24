@@ -33,28 +33,23 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		throw new Error('getContext: first parameter must be an array of strings');
 	}
 
-	const variables: Record<string, unknown> = {};
+	const variables: ContextVariables = {};
 
 	// grab all element attributes and put into variables
 	Object.values(scriptElem.attributes).map((attr) => {
 		variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
 	});
 
-	try {
-		// evaluate text and put into variables
-		evaluate?.forEach((name) => {
-			const fn = new Function(`
-				var ${evaluate.join(', ')};
-				${scriptElem.innerHTML}
-				return ${name};
-			`);
+	// evaluate text and put into variables
+	evaluate?.forEach((name) => {
+		const fn = new Function(`
+			var ${evaluate.join(', ')};
+			${scriptElem.innerHTML}
+			return ${name};
+		`);
 
-			variables[name] = fn();
-		});
-	} catch (err) {
-		console.error('getContext: failed to parse variables - error in context');
-		throw err;
-	}
+		variables[name] = fn();
+	});
 
 	return variables;
 }
