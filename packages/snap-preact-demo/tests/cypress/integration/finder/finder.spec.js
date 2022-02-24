@@ -8,6 +8,7 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		finder: {
+			wrapper: '.finder-container',
 			findButton: 'button.searchspring-finder_submit',
 		},
 	},
@@ -19,38 +20,26 @@ config?.pages?.forEach((page, _i) => {
 			let type;
 
 			describe(`Finder id: ${id || _i}`, () => {
-				it('adds snap bundle to search page', () => {
-					cy.on('uncaught:exception', (err, runnable) => false);
+				it('has valid config', () => {
+					cy.wrap(page).its('url').should('have.length.at.least', 1);
 					cy.visit(page.url);
-
-					cy.addLocalSnap();
-
-					cy.waitForBundle().then(() => {
-						cy.window().then((win) => {
-							expect(win.searchspring).to.exist;
-						});
-					});
 
 					if (config.disableGA) {
 						window[`ga-disable-${config.disableGA}`] = true;
 					}
 				});
 
-				it('contains finders on page', function () {
-					cy.window().then((win) => {
-						const controllers = Object.keys(win.searchspring.controller).filter((id) => win.searchspring.controller[id].type === 'finder');
-						expect(controllers.length).to.be.gte(page.finderIds.length);
-						page.finderIds.forEach((id) => {
-							expect(controllers.includes(id)).to.be.true;
-						});
-					});
-				});
-
 				it('renders', () => {
 					cy.snapController(id).then((controller) => {
 						const targetSelector = controller.targeters[id].targets.map((target) => target.selector).join(',');
 
-						cy.get(targetSelector).first().should('exist').should('not.be.empty');
+						// assert target selector found on page
+						cy.get(targetSelector).first().should('exist');
+
+						if (config.selectors?.finder?.wrapper) {
+							// assert target selector has had component rendered into it
+							cy.get(targetSelector).first().find(config.selectors.finder.wrapper).first().should('exist');
+						}
 					});
 				});
 
