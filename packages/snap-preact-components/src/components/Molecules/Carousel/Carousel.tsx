@@ -58,6 +58,9 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': {
+					display: 'none',
+				},
 			},
 			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
@@ -225,17 +228,15 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...styling}
 					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
 				>
-					{!hideButtons && (
-						<div className="ss__carousel__prev-wrapper">
-							<div
-								className="ss__carousel__prev"
-								ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
-								onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
-							>
-								{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
-							</div>
+					<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
+						<div
+							className="ss__carousel__prev"
+							ref={navigationPrevRef as React.RefObject<HTMLDivElement>}
+							onClick={onPrevButtonClick && ((e) => onPrevButtonClick(e))}
+						>
+							{prevButton || <Icon icon={vertical ? 'angle-up' : 'angle-left'} {...subProps.icon} />}
 						</div>
-					)}
+					</div>
 
 					<Swiper
 						centerInsufficientSlides={true}
@@ -268,17 +269,15 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						})}
 					</Swiper>
 
-					{!hideButtons && (
-						<div className="ss__carousel__next-wrapper">
-							<div
-								className="ss__carousel__next"
-								ref={navigationNextRef as React.RefObject<HTMLDivElement>}
-								onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
-							>
-								{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
-							</div>
+					<div className={classnames('ss__carousel__next-wrapper', { 'ss__carousel__next-wrapper--hidden': hideButtons })}>
+						<div
+							className="ss__carousel__next"
+							ref={navigationNextRef as React.RefObject<HTMLDivElement>}
+							onClick={onNextButtonClick && ((e) => onNextButtonClick(e))}
+						>
+							{nextButton || <Icon icon={vertical ? 'angle-down' : 'angle-right'} {...subProps.icon} />}
 						</div>
-					)}
+					</div>
 				</div>
 			</CacheProvider>
 		)
