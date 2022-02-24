@@ -96,6 +96,7 @@ export class Snap {
 	logger: Logger;
 	client: Client;
 	tracker: Tracker;
+	context: ContextVariables;
 	_controllerPromises: {
 		[controllerConfigId: string]: Promise<ControllerTypes>;
 	};
@@ -152,7 +153,7 @@ export class Snap {
 					{
 						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
-						context: deepmerge(this.config.context || {}, context || {}),
+						context: deepmerge(this.context || {}, context || {}),
 					},
 					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
 				);
@@ -165,16 +166,25 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
-		//get default context info if no context is passed in
-		this.config.context = deepmerge(getContext(['shopper', 'config']), this.config.context || {});
 
 		this.logger = new Logger('Snap Preact ');
+
+		let globalContext: ContextVariables = {};
+		try {
+			// get global context
+			globalContext = getContext(['shopper', 'config']);
+		} catch (err) {
+			this.logger.error('failed to find global context');
+		}
+
+		this.config = deepmerge(this.config || {}, (globalContext.config as SnapConfig) || {});
+		this.context = deepmerge(globalContext || {}, this.config.context || {});
+
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		const mergedConfig: ClientConfig = deepmerge(this.config.client.config || {}, this.config.context?.config?.client || {});
-		this.client = new Client(this.config.client.globals, mergedConfig);
+		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
@@ -239,20 +249,20 @@ export class Snap {
 		} catch (e) {}
 
 		if (window.searchspring) {
-			if (this.config.context) window.searchspring.context = this.config.context;
+			window.searchspring.context = this.context;
 			if (this.client) window.searchspring.client = this.client;
 		}
 
 		// autotrack shopper id from the context
-		if (this.config.context?.shopper?.id) {
+		if (this.context?.shopper?.id) {
 			this.tracker.track.shopper.login({
-				id: this.config.context.shopper.id,
+				id: this.context.shopper.id,
 			});
 		}
 
 		// auto populate cart cookie from the context
-		if (this.config.context?.shopper?.cart) {
-			const cart = this.config.context.shopper.cart;
+		if (this.context?.shopper?.cart) {
+			const cart = this.context.shopper.cart;
 			if (Array.isArray(cart)) {
 				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
 				this.tracker.cookies.cart.set(cartItems);
@@ -268,7 +278,7 @@ export class Snap {
 								{
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
-									context: deepmerge(this.config.context || {}, controller.context || {}),
+									context: deepmerge(this.context || {}, controller.context || {}),
 								},
 								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);

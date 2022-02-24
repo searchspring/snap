@@ -40,7 +40,7 @@ export class RecommendationInstantiator {
 	tracker: Tracker;
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
-	globalContext: ContextVariables;
+	context: ContextVariables;
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
@@ -48,7 +48,6 @@ export class RecommendationInstantiator {
 
 	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
 		this.config = config;
-		this.globalContext = getContext(['shopper', 'config']);
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -65,6 +64,16 @@ export class RecommendationInstantiator {
 		this.client = client;
 		this.tracker = tracker;
 		this.logger = logger;
+
+		let globalContext = {};
+		try {
+			// get global context
+			globalContext = getContext(['shopper']);
+		} catch (err) {
+			this.logger.error('failed to find global context for recommendation instantiator');
+		}
+
+		this.context = deepmerge(globalContext || {}, config.context || {});
 
 		const profileCount = {};
 		this.targeter = new DomTargeter(
@@ -93,12 +102,15 @@ export class RecommendationInstantiator {
 				const globals: any = {};
 
 				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options'], elem as HTMLScriptElement);
-				const context = deepmerge(this.globalContext, elemContext);
-				const { shopper, shopperId, product, seed, options } = elemContext;
+				const context = deepmerge(this.context, elemContext);
+
+				const { shopper, shopperId, product, seed, options } = context;
 
 				/*
 					type instantiatorContext = {
-						shopper?: string;
+						shopper?: {
+							id: string;
+						};
 						shopperId?: string;
 						product?: string;
 						seed?: string;
@@ -112,8 +124,8 @@ export class RecommendationInstantiator {
 					}
 				*/
 
-				if (shopper || shopperId) {
-					globals.shopper = shopper || shopperId;
+				if (shopper?.id || shopperId) {
+					globals.shopper = shopper?.id || shopperId;
 				}
 				if (product || seed) {
 					globals.product = product || seed;
@@ -147,7 +159,7 @@ export class RecommendationInstantiator {
 					{
 						url: this.config.url || {},
 						controller: controllerConfig,
-						context: deepmerge(this.config.context || {}, context || {}),
+						context,
 					},
 					{ client, tracker }
 				);
