@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* add limit to RecommendationInstantiatorConfig type ([e5bb19d](https://github.com/searchspring/snap/commit/e5bb19da4ab11003249fd3480f9e515b2e8287d1))
+* allow for limits param in recommendations globals or context ([bb09402](https://github.com/searchspring/snap/commit/bb094024c158601d95e979868a33174ab8132783))
+* deepmerge recommendations context globals with config and defaults ([ade3377](https://github.com/searchspring/snap/commit/ade337717d6717f96ecdf79b16bcff11f1c6df31))
+* pr feedback - add default limit, update types and docs ([9b9124a](https://github.com/searchspring/snap/commit/9b9124ad3f048f8ca910e53841eb62283bb355c9))
+* **recommendationinstantiator:** fix shopper.id ([1b7715a](https://github.com/searchspring/snap/commit/1b7715a5e71797302af160b5d5aad3bf54e7fccb))
+* remove limit, rename limit -> limits in config, refactor batching limits logic ([58b4302](https://github.com/searchspring/snap/commit/58b43026e2f8af7ba262091553dac7dd49af0f9f))
+
+
+### Features
+
+* add custom space to recommendations instantiator context variables ([d05d35b](https://github.com/searchspring/snap/commit/d05d35b0bc84ac123ece803d821a96de24a008f2))
+* **getcontext:** alter getContext to noly pull attributes as requested via 'evaluate' parameter ([9c51dd0](https://github.com/searchspring/snap/commit/9c51dd03eab78ede5757a89cc237f4530429bda6))
+
+
+
+
+
 ## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
 
 **Note:** Version bump only for package @searchspring/snap-preact
