@@ -5,6 +5,7 @@ import type {
 	AutocompleteControllerConfig,
 	FinderControllerConfig,
 	RecommendationControllerConfig,
+	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager, UrlTranslatorConfig } from '@searchspring/snap-url-manager';
@@ -32,6 +33,7 @@ export type SnapSearchControllerConfig = {
 		config?: ClientConfig;
 	};
 	controller: SearchControllerConfig;
+	context?: ContextVariables;
 };
 
 export type SnapAutocompleteControllerConfig = {
@@ -41,6 +43,7 @@ export type SnapAutocompleteControllerConfig = {
 		config?: ClientConfig;
 	};
 	controller: AutocompleteControllerConfig;
+	context?: ContextVariables;
 };
 
 export type SnapFinderControllerConfig = {
@@ -50,6 +53,7 @@ export type SnapFinderControllerConfig = {
 		config?: ClientConfig;
 	};
 	controller: FinderControllerConfig;
+	context?: ContextVariables;
 };
 
 export type SnapRecommendationControllerConfig = {
@@ -59,4 +63,5 @@ export type SnapRecommendationControllerConfig = {
 		config?: ClientConfig;
 	};
 	controller: RecommendationControllerConfig;
+	context?: ContextVariables;
 };

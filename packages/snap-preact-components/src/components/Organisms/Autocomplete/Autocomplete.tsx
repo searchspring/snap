@@ -10,12 +10,12 @@ import deepmerge from 'deepmerge';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProp, BreakpointsProps } from '../../Organisms/Results';
+import { Results, ResultsProp } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { BannerType, ComponentProps, FacetDisplay } from '../../../types';
+import { BannerType, ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -206,15 +206,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			rows: 3,
 		},
 	};
-	const displaySettings = useDisplaySettings(breakpoints);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
-		props = {
-			...props,
-			...displaySettings,
-			theme,
-		};
-	}
+
 	const {
 		hideTerms,
 		hideFacets,
@@ -234,21 +226,15 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		resultsSlot,
 		noResultsSlot,
 		linkSlot,
+		onFacetOptionClick,
+		onTermClick,
 		disableStyles,
 		className,
 		width,
 		style,
 		controller,
 	} = props;
-	let { input } = props;
-	let inputViewportOffsetBottom;
-	if (input) {
-		if (typeof input === 'string') {
-			input = document.querySelector(input) as Element;
-		}
-		const rect = input?.getBoundingClientRect();
-		inputViewportOffsetBottom = rect?.bottom || 0;
-	}
+
 	let delayTimeout;
 	const delayTime = 333;
 	const valueProps = {
@@ -263,6 +249,59 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
+	const themeOverride: Theme = {
+		components: {
+			facet: {
+				limit: 6,
+				disableOverflow: true,
+				disableCollapse: true,
+				previewOnFocus: true,
+				valueProps,
+			},
+			facetGridOptions: {
+				columns: 3,
+				onClick: onFacetOptionClick,
+			},
+			facetHierarchyOptions: {
+				hideCount: true,
+				onClick: onFacetOptionClick,
+			},
+			facetListOptions: {
+				hideCheckbox: true,
+				hideCount: true,
+				onClick: onFacetOptionClick,
+			},
+			facetPaletteOptions: {
+				hideLabel: true,
+				columns: 3,
+				onClick: onFacetOptionClick,
+			},
+			result: {
+				hideBadge: true,
+			},
+		},
+	};
+
+	const displaySettings = useDisplaySettings(breakpoints);
+	if (displaySettings && Object.keys(displaySettings).length) {
+		const theme = deepmerge(themeOverride, props?.theme || {}, displaySettings?.theme || {});
+		props = {
+			...props,
+			...displaySettings,
+			theme,
+		};
+	}
+
+	let { input } = props;
+	let inputViewportOffsetBottom;
+	if (input) {
+		if (typeof input === 'string') {
+			input = document.querySelector(input) as Element;
+		}
+		const rect = input?.getBoundingClientRect();
+		inputViewportOffsetBottom = rect?.bottom || 0;
+	}
+
 	const subProps: AutocompleteSubProps = {
 		facets: {
 			// default props
@@ -273,35 +312,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			...defined({
 				disableStyles,
 			}),
-			// component theme overrides
-			theme: deepmerge(
-				{
-					components: {
-						facet: {
-							limit: 6,
-							disableOverflow: true,
-							disableCollapse: true,
-							previewOnFocus: true,
-							valueProps,
-						},
-						facetGridOptions: {
-							columns: 3,
-						},
-						facetHierarchyOptions: {
-							hideCount: true,
-						},
-						facetListOptions: {
-							hideCheckbox: true,
-							hideCount: true,
-						},
-						facetPaletteOptions: {
-							hideLabel: true,
-							columns: 3,
-						},
-					},
-				},
-				{ ...props.theme }
-			),
+			theme: props.theme,
 		},
 		banner: {
 			// default props
@@ -326,16 +337,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: deepmerge(
-				{
-					components: {
-						result: {
-							hideBadge: true,
-						},
-					},
-				},
-				{ ...props.theme }
-			),
+			theme: props.theme,
 		},
 		icon: {
 			// default props
@@ -402,7 +404,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					{!hideTerms && (
 						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, controller })
+								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
 							) : (
 								<>
 									{terms.length > 0 ? (
@@ -419,7 +421,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 															'ss__autocomplete__terms__option--active': term.active,
 														})}
 													>
-														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+														<a
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onTermClick && onTermClick(e)}
+															href={term.url.href}
+															{...valueProps}
+															onFocus={() => term.preview()}
+														>
 															{emIfy(term.value, state.input)}
 														</a>
 													</div>
@@ -442,7 +449,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 															'ss__autocomplete__terms__option--active': term.active,
 														})}
 													>
-														<a href={term.url.href} {...valueProps} onFocus={() => term.preview()}>
+														<a
+															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onTermClick && onTermClick(e)}
+															href={term.url.href}
+															{...valueProps}
+															onFocus={() => term.preview()}
+														>
 															{emIfy(term.value, state.input)}
 														</a>
 													</div>
@@ -597,4 +609,6 @@ export interface AutocompleteProps extends ComponentProps {
 	breakpoints?: BreakpointsProps;
 	controller: AutocompleteController;
 	width?: string;
+	onFacetOptionClick?: (e) => void;
+	onTermClick?: (e) => void;
 }

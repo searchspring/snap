@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { RecommendationStore } from './RecommendationStore';
-
-import { SearchData } from '../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 describe('RecommendationStore store', () => {
 	it('can create empty RecommendationsStore', () => {
@@ -21,9 +22,7 @@ describe('RecommendationStore store', () => {
 	});
 
 	it('can create RecommendationsStore with mock data', () => {
-		const profile = new SearchData({ search: 'profile' }).profile;
-		const results = new SearchData({ search: 'recommend' })[0].results;
-		const data = { profile, results };
+		const data = mockData.recommend();
 
 		const recommendationConfig = {
 			id: 'rec',

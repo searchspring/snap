@@ -102,10 +102,13 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 					{values.map((value) => (
 						<a
 							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-							onClick={onClick}
 							onFocus={() => previewOnFocus && value.preview && value.preview()}
 							{...valueProps}
-							{...value.url?.link}
+							href={value.url?.link?.href}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
 						>
 							<span
 								className={classnames('ss__facet-grid-options__option__value', {
@@ -126,7 +129,7 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	values: ValueFacetValue[];
 	columns?: number;
 	gapSize?: string;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
 }

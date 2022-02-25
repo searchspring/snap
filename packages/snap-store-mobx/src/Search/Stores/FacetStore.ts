@@ -238,6 +238,8 @@ class ValueFacet extends Facet {
 								const filteredValues = facet.values.filter((value) => value.filtered);
 								return new HierarchyValue(services, this, value, filteredValues);
 							} else {
+								// converting values to strings to ensure UrlManager state matches state created from URL
+								value.value = value.value.toString();
 								return new Value(services, this, value);
 							}
 						case 'range-buckets':

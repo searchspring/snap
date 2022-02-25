@@ -260,3 +260,11 @@ export enum FacetDisplay {
 	SLIDER = 'slider',
 	HIERARCHY = 'hierarchy',
 }
+
+export type BreakpointsProps = {
+	[key: number]: BreakpointsEntry;
+};
+
+export type BreakpointsEntry = {
+	[property: string]: any;
+};

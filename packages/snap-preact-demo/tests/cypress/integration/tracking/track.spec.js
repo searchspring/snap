@@ -4,6 +4,10 @@ describe('Tracking', () => {
 	it('tracked shopper login', () => {
 		cy.visit('https://localhost:2222');
 
+		cy.waitForBundle().then((searchspring) => {
+			expect(searchspring).to.exist;
+		});
+
 		const shopperId = 'snaptest';
 		cy.get('#login').click();
 		cy.get('#login-modal').find('input').type(shopperId);
@@ -40,13 +44,11 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product click', () => {
-		cy.visit('https://localhost:2222');
-
 		cy.snapController().then(({ store }) => {
 			expect(store).to.haveOwnProperty('pagination');
 			expect(store.pagination.totalResults).to.be.greaterThan(0);
 
-			cy.get(`.ss__result:first`).should('exist').trigger('mousedown');
+			cy.get(`.ss__result:first`).should('exist').trigger('click');
 
 			cy.wait(`@${BeaconType.CLICK}`).should((interception) => {
 				expect(interception.state).to.equal('Complete');

@@ -22,12 +22,13 @@ const snap = new Snap(config);
 ```
 
 ## Configuration
-A configuration object provided to Snap will determin the services that will be created. 
+A configuration object provided to Snap will determine the services that will be created. 
 
 Full example:
 
 ```typescript
 const config = {
+	context: globalContext,
 	url: {
 		parameters: {
 			core: {
@@ -89,6 +90,8 @@ const config = {
 };
 ```
 
+### `config.context` - optional `Context` object to be used to set the global context. If no context is provided, a default context taken from the integration script (`shopper` variable) will be used, otherwise the provided `config.context` is merged with the script context. This context becomes the `globalContext` that is passed to all controllers that are created.
+
 ### config.client
 A single client instance will be created and shared across all services using the provided config. 
 
@@ -111,6 +114,7 @@ The `instantiators` object must be defined if any Recommendation controllers hav
 const config = {
 	instantiators: {
 		recommendation: {
+			context: recommendationContext,
 			components: {
 				Standard: () => Standard
 			},
@@ -129,6 +133,8 @@ const config = {
 ```
 
 `recommendation.components` - required mapping of recommendation components.
+
+`recommendation.context` - optional `Context` object to be used to set controller specific context. Defaults to the global context if no context prop is provided, or if one is provided, it is merged into the global context.
 
 `recommendation.config.branch` - required current git branch name. Defined via webpack during bundle build:
 
@@ -218,6 +224,7 @@ type ExtendedTarget = {
 
 `url` - optional `UrlTranslator` config object to be used with the `UrlManager` for this controller
 
+`context` - optional `Context` object to be used to set controller specific context. Defaults to the global context if no context prop is provided, or if one is provided, it is merged into the global context.
 
 An example creating a SearchController:
 
@@ -226,6 +233,7 @@ const config = {
 	controllers: {
 		search: [
 			{
+				context: searchContext,
 				config: {
 					id: 'search',
 				},

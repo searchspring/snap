@@ -1,14 +1,16 @@
 import { configure } from 'mobx';
 
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { FacetStore } from './FacetStore';
-import { SearchData } from '../../__mocks__/SearchData';
 import { StorageStore } from '../../Storage/StorageStore';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 const searchConfig = {
 	id: 'search',
@@ -23,7 +25,8 @@ describe('Facet Store', () => {
 	let searchData, storageStore;
 	beforeEach(() => {
 		expect.hasAssertions();
-		searchData = new SearchData();
+
+		searchData = mockData.searchMeta();
 
 		storageStore = new StorageStore();
 	});
@@ -89,7 +92,8 @@ describe('Facet Store', () => {
 	});
 
 	it('it clears the selected options', () => {
-		searchData = new SearchData({ search: 'filtered' });
+		searchData = mockData.searchMeta('filtered');
+
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 		expect(facets[0].clear.url.constructor.name).toStrictEqual(services.urlManager.constructor.name);
@@ -198,7 +202,8 @@ describe('Facet Store', () => {
 	});
 
 	it('uses range facet when needed', () => {
-		searchData = new SearchData({ search: 'range' });
+		searchData = mockData.searchMeta('range');
+
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 		const rangeFacet = facets.filter((facet) => facet.type == 'range').pop();
 
@@ -237,7 +242,8 @@ describe('Facet Store', () => {
 			});
 
 			it('has a removal URL for filter value when it is filtered/active', () => {
-				searchData = new SearchData({ search: 'filtered' });
+				searchData = mockData.searchMeta('filtered');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredValueFacet = facets.filter((facet) => facet.type == 'value' && facet.filtered).pop();
 
@@ -249,7 +255,8 @@ describe('Facet Store', () => {
 			});
 
 			it('has a URL for filter value when it is not filtered/active', () => {
-				searchData = new SearchData();
+				searchData = mockData.searchMeta();
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredValueFacet = facets.filter((facet) => facet.type == 'value').pop();
 
@@ -262,7 +269,8 @@ describe('Facet Store', () => {
 			});
 
 			it('uses HierarchyValue when the hierarchy display type is used', () => {
-				searchData = new SearchData({ search: 'filteredHierarchy' });
+				searchData = mockData.searchMeta('filteredHierarchy');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const hierarchyFacet = facets.filter((facet) => facet.display == 'hierarchy').pop();
 
@@ -273,7 +281,8 @@ describe('Facet Store', () => {
 			});
 
 			it.skip('supports multi select facets', () => {
-				searchData = new SearchData({ search: 'filtered' });
+				searchData = mockData.searchMeta('filtered');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const multiSelectFacet = facets.filter((facet) => facet.filtered && facet.type == 'value' && facet.multiple != 'single')[0];
 
@@ -287,7 +296,8 @@ describe('Facet Store', () => {
 			});
 
 			it('supports single select facets', () => {
-				searchData = new SearchData({ search: 'filtered' });
+				searchData = mockData.searchMeta('filtered');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const singleSelectFacet = facets.filter((facet) => facet.multiple == 'single' && facet.filtered).pop();
 
@@ -316,7 +326,8 @@ describe('Facet Store', () => {
 			});
 
 			it('has a URL for filter value when it is filtered/active', () => {
-				searchData = new SearchData({ search: 'filteredRangeBucket' });
+				searchData = mockData.searchMeta('filteredRangeBucket');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
 
@@ -329,7 +340,8 @@ describe('Facet Store', () => {
 			});
 
 			it('has a removal URL for filter value when it is not filtered/active', () => {
-				searchData = new SearchData({ search: 'filteredRangeBucket' });
+				searchData = mockData.searchMeta('filteredRangeBucket');
+
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets' && facet.filtered).pop();
 				const filteredValues = filteredRangeBucketFacet.values.filter((value) => !value.filtered);
@@ -339,7 +351,8 @@ describe('Facet Store', () => {
 			});
 
 			it('has a removal URL for filter value when it is filtered/active with single select', () => {
-				searchData = new SearchData({ search: 'filteredRangeBucket' });
+				searchData = mockData.searchMeta('filteredRangeBucket');
+
 				searchData.meta.facets.price.multiple = 'single';
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets
@@ -362,7 +375,8 @@ describe('Facet Store', () => {
 
 	describe('RangeFacet', () => {
 		it('it merges the proper facet meta', () => {
-			searchData = new SearchData({ search: 'range' });
+			searchData = mockData.searchMeta('range');
+
 			const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 			const rangeFacets = facets.filter((facet) => facet.type == 'range');
 
@@ -373,7 +387,8 @@ describe('Facet Store', () => {
 		});
 
 		it('it has the correct facet properties', () => {
-			searchData = new SearchData({ search: 'range' });
+			searchData = mockData.searchMeta('range');
+
 			const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 			facets.forEach((facet, index) => {

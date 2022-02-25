@@ -4,6 +4,7 @@ import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
+import { getContext } from '@searchspring/snap-toolbox';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type {
@@ -17,6 +18,7 @@ import type {
 	FinderControllerConfig,
 	RecommendationControllerConfig,
 	ControllerConfigs,
+	ContextVariables,
 } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
@@ -39,15 +41,6 @@ type ExtendedTarget = Target & {
 	prefetch?: boolean;
 };
 
-type ContextVariables = {
-	shopper?: {
-		id: string;
-		cart?: Product[];
-		[variable: string]: any;
-	};
-	[variable: string]: any;
-};
-
 export type SnapConfig = {
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
@@ -64,24 +57,28 @@ export type SnapConfig = {
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
 			targeters: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		finder?: {
 			config: FinderControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 		recommendation?: {
 			config: RecommendationControllerConfig;
 			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
+			context?: ContextVariables;
 		}[];
 	};
 };
@@ -99,6 +96,7 @@ export class Snap {
 	logger: Logger;
 	client: Client;
 	tracker: Tracker;
+	context: ContextVariables;
 	_controllerPromises: {
 		[controllerConfigId: string]: Promise<ControllerTypes>;
 	};
@@ -130,7 +128,8 @@ export class Snap {
 		config: ControllerConfigs,
 		services: SnapControllerServices,
 		urlConfig: UrlTranslatorConfig,
-		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void
+		resolve: (value?: ControllerTypes | PromiseLike<ControllerTypes>) => void,
+		context?: ContextVariables
 	): Promise<ControllerTypes> => {
 		let importPromise;
 		switch (type) {
@@ -154,6 +153,7 @@ export class Snap {
 					{
 						url: deepmerge(this.config.url || {}, urlConfig || {}),
 						controller: config,
+						context: deepmerge(this.context || {}, context || {}),
 					},
 					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
 				);
@@ -166,10 +166,24 @@ export class Snap {
 
 	constructor(config: SnapConfig) {
 		this.config = config;
+
 		this.logger = new Logger('Snap Preact ');
+
+		let globalContext: ContextVariables = {};
+		try {
+			// get global context
+			globalContext = getContext(['shopper', 'config']);
+		} catch (err) {
+			this.logger.error('failed to find global context');
+		}
+
+		this.config = deepmerge(this.config || {}, (globalContext.config as SnapConfig) || {});
+		this.context = deepmerge(globalContext || {}, this.config.context || {});
+
 		if (!this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
+
 		this.client = new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = new Tracker(this.config.client.globals);
 		this._controllerPromises = {};
@@ -235,20 +249,20 @@ export class Snap {
 		} catch (e) {}
 
 		if (window.searchspring) {
-			if (this.config.context) window.searchspring.context = this.config.context;
+			window.searchspring.context = this.context;
 			if (this.client) window.searchspring.client = this.client;
 		}
 
 		// autotrack shopper id from the context
-		if (this.config.context?.shopper?.id) {
+		if (this.context?.shopper?.id) {
 			this.tracker.track.shopper.login({
-				id: this.config.context.shopper.id,
+				id: this.context.shopper.id,
 			});
 		}
 
 		// auto populate cart cookie from the context
-		if (this.config.context?.shopper?.cart) {
-			const cart = this.config.context.shopper.cart;
+		if (this.context?.shopper?.cart) {
+			const cart = this.context.shopper.cart;
 			if (Array.isArray(cart)) {
 				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
 				this.tracker.cookies.cart.set(cartItems);
@@ -264,6 +278,7 @@ export class Snap {
 								{
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: controller.config,
+									context: deepmerge(this.context || {}, controller.context || {}),
 								},
 								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
 							);
@@ -389,7 +404,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.AUTOCOMPLETE, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.AUTOCOMPLETE,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -422,7 +444,8 @@ The error above happened in the following targeter in the Snap Config`,
 												controller.config,
 												controller.services,
 												controller.url,
-												resolve
+												resolve,
+												controller.context
 											);
 											runBind();
 											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
@@ -461,7 +484,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.FINDER, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.FINDER,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -477,7 +507,8 @@ The error above happened in the following targeter in the Snap Config`,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											resolve,
+											controller.context
 										);
 										runSearch();
 										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
@@ -515,7 +546,14 @@ The error above happened in the following targeter in the Snap Config`,
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(DynamicImportNames.RECOMMENDATION, controller.config, controller.services, controller.url, resolve);
+									this.createController(
+										DynamicImportNames.RECOMMENDATION,
+										controller.config,
+										controller.services,
+										controller.url,
+										resolve,
+										controller.context
+									);
 								}
 
 								controller?.targeters?.forEach(async (target, target_index) => {
@@ -531,7 +569,8 @@ The error above happened in the following targeter in the Snap Config`,
 											controller.config,
 											controller.services,
 											controller.url,
-											resolve
+											resolve,
+											controller.context
 										);
 										runSearch();
 										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
@@ -551,11 +590,15 @@ The error above happened in the following targeter in the Snap Config`,
 		if (config?.instantiators?.recommendation) {
 			try {
 				this._instantiatorPromises.recommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
-					return new RecommendationInstantiator(config.instantiators.recommendation, {
-						client: config.instantiators.recommendation?.services?.client || this.client,
-						tracker: config.instantiators.recommendation?.services?.tracker || this.tracker,
-						logger: config.instantiators.recommendation?.services?.logger || this.logger,
-					});
+					return new RecommendationInstantiator(
+						config.instantiators.recommendation,
+						{
+							client: config.instantiators.recommendation?.services?.client || this.client,
+							tracker: config.instantiators.recommendation?.services?.tracker || this.tracker,
+							logger: config.instantiators.recommendation?.services?.logger || this.logger,
+						},
+						this.context
+					);
 				});
 			} catch (err) {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);

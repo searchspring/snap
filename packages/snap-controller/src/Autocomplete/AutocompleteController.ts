@@ -6,11 +6,19 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, NextEvent } from '../types';
+import type {
+	AutocompleteControllerConfig,
+	BeforeSearchObj,
+	AfterSearchObj,
+	AfterStoreObj,
+	ControllerServices,
+	NextEvent,
+	ContextVariables,
+} from '../types';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
-const INPUT_DELAY = 200;
+export const INPUT_DELAY = 200;
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
 const PARAM_ORIGINAL_QUERY = 'oq';
@@ -42,8 +50,12 @@ export class AutocompleteController extends AbstractController {
 	public config: AutocompleteControllerConfig;
 	public storage: StorageStore;
 
-	constructor(config: AutocompleteControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
+	constructor(
+		config: AutocompleteControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context?: ContextVariables
+	) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);

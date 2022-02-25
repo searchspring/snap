@@ -202,7 +202,7 @@ Tracks product click events. It is reccomended to invoke on each product `onmous
 
 ```jsx
 searchController.store.results.map(result)=>{(
-    <a href={core.url} onMouseDown={(e)=>{result.track.click(e)}}>
+    <a href={core.url} onMouseDown={(e)=>{searchController.track.product.click(e, result)}}>
 )}
 ```
 

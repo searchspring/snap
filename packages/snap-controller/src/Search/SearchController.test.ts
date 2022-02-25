@@ -8,9 +8,9 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
+import { MockClient } from '@searchspring/snap-shared';
 
 import { SearchController } from './SearchController';
-import { MockClient } from '../__mocks__/MockClient';
 import type { SearchControllerConfig } from '../types';
 
 const globals = { siteId: 'ga9kq2' }; // bbwheels
@@ -88,7 +88,7 @@ describe('Search Controller', () => {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockDataFile = 'wheel';
+		controller.client.mockData.updateConfig({ search: 'wheel' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/wheel.json
 		expect(window.location.replace).toHaveBeenCalledTimes(1);
 	});
@@ -117,7 +117,7 @@ describe('Search Controller', () => {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockDataFile = '40745sk';
+		controller.client.mockData.updateConfig({ search: '40745sk' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/40745sk.json
 		expect(window.location.replace).toHaveBeenCalledTimes(1);
 	});
@@ -156,7 +156,7 @@ describe('Search Controller', () => {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockDataFile = 'wheel.redirectResponse.full';
+		controller.client.mockData.updateConfig({ search: 'wheel.redirectResponse.full' });
 		await controller.search(); // /src/__mocks__/data/ga9kq2/searches/wheel.redirectResponse.full.json
 		// should not redirect whem redirectResponse='full'
 		expect(window.location.replace).not.toHaveBeenCalled();

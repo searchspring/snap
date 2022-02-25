@@ -76,31 +76,31 @@ export class Client {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.autocomplete?.api?.origin,
-					cacheSettings: this.config.autocomplete.cache,
+					cache: this.config.autocomplete.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.meta?.api?.origin,
-					cacheSettings: this.config.meta.cache,
+					cache: this.config.meta.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					origin: this.config.recommend?.api?.origin,
-					cacheSettings: this.config.recommend.cache,
+					cache: this.config.recommend.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.search?.api?.origin,
-					cacheSettings: this.config.search.cache,
+					cache: this.config.search.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
-					cacheSettings: this.config.suggest.cache,
+					cache: this.config.suggest.cache,
 				})
 			),
 		};
@@ -136,8 +136,6 @@ export class Client {
 	}
 
 	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
-		// TODO - batching
-
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';
