@@ -47,8 +47,9 @@ export class RecommendationInstantiator {
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
 	public targeter: DomTargeter;
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
+	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
+		this.context = deepmerge(context || {}, config.context || {});
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -65,16 +66,6 @@ export class RecommendationInstantiator {
 		this.client = client;
 		this.tracker = tracker;
 		this.logger = logger;
-
-		let globalContext = {};
-		try {
-			// get global context
-			globalContext = getContext(['shopper']);
-		} catch (err) {
-			this.logger.error('failed to find global context for recommendation instantiator');
-		}
-
-		this.context = deepmerge(globalContext || {}, config.context || {});
 
 		const profileCount = {};
 		this.targeter = new DomTargeter(
