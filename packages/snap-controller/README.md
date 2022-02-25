@@ -91,7 +91,7 @@ The `logger` service provides logging functionality to a controller. Each contro
 
 
 ## Context
-Each Controller can optionally take a 3rd parameter for `Context`. This is to allow each individual controller to have its own individual context if so desired. If no Context param is provided, the global context is used by default. 
+Each Controller can optionally take a 3rd parameter for `Context`. This is to allow each individual controller to have its own individual context if so desired.
 
 The context is exposed as `controller.context`
 ```typescript

@@ -5,10 +5,10 @@ This utility function gets a script tags attributes and innerHTML declarations a
 import { getContext } from '@searchspring/snap-toolbox';
 ```
 
-The function takes two parameters, the first being an array of innerHTML variable names to evaluate, and the second optional parameter for a script tag element or CSS selector string. If the script tag element is not provided, the function will query the DOM for a Snap script (using src or #searchspring-context selector).
+The function takes two parameters, the first being an array of script tag attributes or innerHTML variable names to evaluate. The second optional parameter for a script tag element or CSS selector string. If the script tag element is not provided, the function will query the DOM for a Snap script (using src or #searchspring-context selector).
 
-The script element must have an ID or type that begins with `searchspring`.  
-For example: `type="searchspring"`, `type="searchspring/context"`, `type="searchspring/controller"`, or `id="searchspring-context"`.
+The script element must either have a src containing `snapui.searchspring.io` or an id or type attribute that begins with `searchspring`.  
+For example: `src="https://snapui.searchspring.io/siteId/bundle.js"`, `type="searchspring"`, `type="searchspring/context"`, `type="searchspring/controller"`, or `id="searchspring-context"`.
 
 The innerHTML of the script MUST only contain variable assignments without `var`, `let`, or `const`. Each declaration should end with a semi-colon to ensure minification does not impact the functions ability to parse the innerHTML.
 
