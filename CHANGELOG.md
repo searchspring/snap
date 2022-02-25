@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* add limit to RecommendationInstantiatorConfig type ([e5bb19d](https://github.com/searchspring/snap/commit/e5bb19da4ab11003249fd3480f9e515b2e8287d1))
+* allow for limits param in recommendations globals or context ([bb09402](https://github.com/searchspring/snap/commit/bb094024c158601d95e979868a33174ab8132783))
+* **client:** adding 'deepmerge' as a package dependency ([835802f](https://github.com/searchspring/snap/commit/835802ff31e053a75e66d5cd39953f55658d3531))
+* deepmerge recommendations context globals with config and defaults ([ade3377](https://github.com/searchspring/snap/commit/ade337717d6717f96ecdf79b16bcff11f1c6df31))
+* **facetstore.ts:** stringify facet value in facet url ([26dc5f8](https://github.com/searchspring/snap/commit/26dc5f818f4d485e617d67c4eeb7d4a0b8a821dd))
+* **featureflags:** updating cookie feature flag logic to properly utilize the 'doNotTrack' flag ([96e8603](https://github.com/searchspring/snap/commit/96e8603f4124b9a07af0675241d010656788be75))
+* hide carousel prev/next buttons if hideButtons instead of removing ([4a1c41d](https://github.com/searchspring/snap/commit/4a1c41de0a6be783a0b68027a0c20a4f8dbbb470))
+* pr feedback - add default limit, update types and docs ([9b9124a](https://github.com/searchspring/snap/commit/9b9124ad3f048f8ca910e53841eb62283bb355c9))
+* pr feedback: rename finder id, add config.url assertion on page change ([6c68f8f](https://github.com/searchspring/snap/commit/6c68f8faf1c6f46e795e673b3ecb13a080a4d469))
+* **recommendationinstantiator:** fix shopper.id ([1b7715a](https://github.com/searchspring/snap/commit/1b7715a5e71797302af160b5d5aad3bf54e7fccb))
+* remove limit, rename limit -> limits in config, refactor batching limits logic ([58b4302](https://github.com/searchspring/snap/commit/58b43026e2f8af7ba262091553dac7dd49af0f9f))
+* **result.tsx:** changing from onMouseDown to onClick to fix recommendation onclick prop not working ([fa77195](https://github.com/searchspring/snap/commit/fa771953c4b4d45088991234306b5e17f74e075d))
+
+
+### Features
+
+* add custom space to recommendations instantiator context variables ([d05d35b](https://github.com/searchspring/snap/commit/d05d35b0bc84ac123ece803d821a96de24a008f2))
+* add personalization preflightCache to Tracker, move charsParams to toolbox ([85cc74d](https://github.com/searchspring/snap/commit/85cc74d4a5d3b7ddc36827b7f2c1d9a3f08217a9))
+* **carousel.tsx:** breakpoints bugfix, new autoAdjustSlides prop added ([bcd06a2](https://github.com/searchspring/snap/commit/bcd06a23ee522144f3ade7a8e3a94326a6b6c51e))
+* **getcontext:** alter getContext to noly pull attributes as requested via 'evaluate' parameter ([9c51dd0](https://github.com/searchspring/snap/commit/9c51dd03eab78ede5757a89cc237f4530429bda6))
+* **preact-components:** adding onClick props on organisms to tie into children onClick functions ([69449ae](https://github.com/searchspring/snap/commit/69449ae95031e698e794ee147f257ed29dc1e6ac))
+
+
+
+
+
 ## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
 
 **Note:** Version bump only for package @searchspring/snap
