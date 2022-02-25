@@ -13,28 +13,28 @@
 				main = { margin: 'auto', padding: 30, borderRadius: 10, background: 'rgba(0,0,0,0.03)' },
 				heading = { textAlign: 'center' },
 				NoDocs = function NoDocs() {
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ style: wrapper, className: 'sb-nodocs sb-wrapper' },
-						compat_module.ZP.createElement(
+						compat_module.default.createElement(
 							'div',
 							{ style: main },
-							compat_module.ZP.createElement('h1', { style: heading }, 'No Docs'),
-							compat_module.ZP.createElement(
+							compat_module.default.createElement('h1', { style: heading }, 'No Docs'),
+							compat_module.default.createElement(
 								'p',
 								null,
 								"Sorry, but there are no docs for the selected story. To add them, set the story's ",
-								compat_module.ZP.createElement('code', null, 'docs'),
+								compat_module.default.createElement('code', null, 'docs'),
 								' parameter. If you think this is an error:'
 							),
-							compat_module.ZP.createElement(
+							compat_module.default.createElement(
 								'ul',
 								null,
-								compat_module.ZP.createElement('li', null, 'Please check the story definition.'),
-								compat_module.ZP.createElement('li', null, 'Please check the Storybook config.'),
-								compat_module.ZP.createElement('li', null, 'Try reloading the page.')
+								compat_module.default.createElement('li', null, 'Please check the story definition.'),
+								compat_module.default.createElement('li', null, 'Please check the Storybook config.'),
+								compat_module.default.createElement('li', null, 'Try reloading the page.')
 							),
-							compat_module.ZP.createElement(
+							compat_module.default.createElement(
 								'p',
 								null,
 								"If the problem persists, check the browser console, or the terminal you've run Storybook from."
@@ -107,7 +107,7 @@
 										}
 										_context.t0 = function (_ref) {
 											var children = _ref.children;
-											return compat_module.ZP.createElement(compat_module.ZP.Fragment, null, children);
+											return compat_module.default.createElement(compat_module.default.Fragment, null, children);
 										};
 									case 11:
 										if (((DocsContainer = _context.t0), (_context.t3 = docs.page), _context.t3)) {
@@ -128,14 +128,14 @@
 									case 20:
 										return (
 											(Page = _context.t2),
-											(docsElement = compat_module.ZP.createElement(
+											(docsElement = compat_module.default.createElement(
 												DocsContainer,
 												{ key: story.componentId, context: docsContext },
-												compat_module.ZP.createElement(Page, null)
+												compat_module.default.createElement(Page, null)
 											)),
 											(_context.next = 24),
 											new Promise(function (resolve) {
-												compat_module.ZP.render(docsElement, element, resolve);
+												compat_module.default.render(docsElement, element, resolve);
 											})
 										);
 									case 24:
@@ -147,7 +147,7 @@
 				)).apply(this, arguments);
 			}
 			function unmountDocs(element) {
-				compat_module.ZP.unmountComponentAtNode(element);
+				compat_module.default.unmountComponentAtNode(element);
 			}
 			NoDocs.displayName = 'NoDocs';
 		},

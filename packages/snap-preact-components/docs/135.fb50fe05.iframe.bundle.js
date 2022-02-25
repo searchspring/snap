@@ -49,8 +49,8 @@
 				return o;
 			}
 			function i(e) {
-				var t = (0, compat_module.sO)(e),
-					n = (0, compat_module.sO)(function (e) {
+				var t = (0, compat_module.useRef)(e),
+					n = (0, compat_module.useRef)(function (e) {
 						t.current && t.current(e);
 					});
 				return (t.current = e), n.current;
@@ -77,16 +77,16 @@
 				h = function (e) {
 					!f(e) && e.preventDefault();
 				},
-				m = compat_module.ZP.memo(function (o) {
+				m = compat_module.default.memo(function (o) {
 					var a = o.onMove,
 						l = o.onKey,
 						s = c(o, ['onMove', 'onKey']),
-						m = (0, compat_module.sO)(null),
+						m = (0, compat_module.useRef)(null),
 						g = i(a),
 						p = i(l),
-						b = (0, compat_module.sO)(null),
-						_ = (0, compat_module.sO)(!1),
-						x = (0, compat_module.Ye)(
+						b = (0, compat_module.useRef)(null),
+						_ = (0, compat_module.useRef)(!1),
+						x = (0, compat_module.useMemo)(
 							function () {
 								var e = function (e) {
 										h(e), (f(e) ? e.touches.length > 0 : e.buttons > 0) && m.current ? g(d(m.current, e, b.current)) : t(!1);
@@ -134,13 +134,13 @@
 						E = x[1],
 						H = x[2];
 					return (
-						(0, compat_module.d4)(
+						(0, compat_module.useEffect)(
 							function () {
 								return H;
 							},
 							[H]
 						),
-						compat_module.ZP.createElement(
+						compat_module.default.createElement(
 							'div',
 							u({}, s, {
 								onTouchStart: C,
@@ -163,10 +163,10 @@
 						o = r.top,
 						a = void 0 === o ? 0.5 : o,
 						l = g(['react-colorful__pointer', r.className]);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: l, style: { top: 100 * a + '%', left: 100 * n + '%' } },
-						compat_module.ZP.createElement('div', { className: 'react-colorful__pointer-fill', style: { backgroundColor: t } })
+						compat_module.default.createElement('div', { className: 'react-colorful__pointer-fill', style: { backgroundColor: t } })
 					);
 				},
 				b = function (e, r, t) {
@@ -250,14 +250,14 @@
 						u = l ? (a === r ? (t - n) / l : a === t ? 2 + (n - r) / l : 4 + (r - t) / l) : 0;
 					return { h: b(60 * (u < 0 ? u + 6 : u)), s: b(a ? (l / a) * 100 : 0), v: b((a / 255) * 100), a: o };
 				},
-				K = compat_module.ZP.memo(function (r) {
+				K = compat_module.default.memo(function (r) {
 					var t = r.hue,
 						n = r.onChange,
 						o = g(['react-colorful__hue', r.className]);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: o },
-						compat_module.ZP.createElement(
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -269,18 +269,22 @@
 								'aria-label': 'Hue',
 								'aria-valuetext': b(t),
 							},
-							compat_module.ZP.createElement(p, { className: 'react-colorful__hue-pointer', left: t / 360, color: w({ h: t, s: 100, v: 100, a: 1 }) })
+							compat_module.default.createElement(p, {
+								className: 'react-colorful__hue-pointer',
+								left: t / 360,
+								color: w({ h: t, s: 100, v: 100, a: 1 }),
+							})
 						)
 					);
 				}),
-				L = compat_module.ZP.memo(function (r) {
+				L = compat_module.default.memo(function (r) {
 					var t = r.hsva,
 						n = r.onChange,
 						o = { backgroundColor: w({ h: t.h, s: 100, v: 100, a: 1 }) };
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: 'react-colorful__saturation', style: o },
-						compat_module.ZP.createElement(
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -292,7 +296,12 @@
 								'aria-label': 'Color',
 								'aria-valuetext': 'Saturation ' + b(t.s) + '%, Brightness ' + b(t.v) + '%',
 							},
-							compat_module.ZP.createElement(p, { className: 'react-colorful__saturation-pointer', top: 1 - t.v / 100, left: t.s / 100, color: w(t) })
+							compat_module.default.createElement(p, {
+								className: 'react-colorful__saturation-pointer',
+								top: 1 - t.v / 100,
+								left: t.s / 100,
+								color: w(t),
+							})
 						)
 					);
 				}),
@@ -306,13 +315,13 @@
 				};
 			function T(e, t, l) {
 				var u = i(l),
-					c = (0, compat_module.eJ)(function () {
+					c = (0, compat_module.useState)(function () {
 						return e.toHsva(t);
 					}),
 					s = c[0],
 					f = c[1],
-					v = (0, compat_module.sO)({ color: t, hsva: s });
-				(0, compat_module.d4)(
+					v = (0, compat_module.useRef)({ color: t, hsva: s });
+				(0, compat_module.useEffect)(
 					function () {
 						if (!e.equal(t, v.current.color)) {
 							var r = e.toHsva(t);
@@ -321,14 +330,14 @@
 					},
 					[t, e]
 				),
-					(0, compat_module.d4)(
+					(0, compat_module.useEffect)(
 						function () {
 							var r;
 							A(s, v.current.hsva) || e.equal((r = e.fromHsva(s)), v.current.color) || ((v.current = { hsva: s, color: r }), u(r));
 						},
 						[s, e, u]
 					);
-				var d = (0, compat_module.I4)(function (e) {
+				var d = (0, compat_module.useCallback)(function (e) {
 					f(function (r) {
 						return Object.assign({}, r, e);
 					});
@@ -336,7 +345,7 @@
 				return [s, d];
 			}
 			var F,
-				P = 'undefined' != typeof window ? compat_module.bt : compat_module.d4,
+				P = 'undefined' != typeof window ? compat_module.useLayoutEffect : compat_module.useEffect,
 				R = new Map(),
 				V = function (e) {
 					P(function () {
@@ -358,17 +367,17 @@
 						l = void 0 === a ? o.defaultColor : a,
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
-						f = (0, compat_module.sO)(null);
+						f = (0, compat_module.useRef)(null);
 					V(f);
 					var v = T(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						compat_module.ZP.createElement(L, { hsva: d, onChange: h }),
-						compat_module.ZP.createElement(K, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(L, { hsva: d, onChange: h }),
+						compat_module.default.createElement(K, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
 				G = {
@@ -390,11 +399,11 @@
 						o = r.onChange,
 						a = { backgroundImage: 'linear-gradient(90deg, ' + y(Object.assign({}, n, { a: 0 })) + ', ' + y(Object.assign({}, n, { a: 1 })) + ')' },
 						l = g(['react-colorful__alpha', t]);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: l },
-						compat_module.ZP.createElement('div', { className: 'react-colorful__alpha-gradient', style: a }),
-						compat_module.ZP.createElement(
+						compat_module.default.createElement('div', { className: 'react-colorful__alpha-gradient', style: a }),
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -406,7 +415,7 @@
 								'aria-label': 'Alpha',
 								'aria-valuetext': b(100 * n.a) + '%',
 							},
-							compat_module.ZP.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: y(n) })
+							compat_module.default.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: y(n) })
 						)
 					);
 				},
@@ -417,18 +426,18 @@
 						l = void 0 === a ? o.defaultColor : a,
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
-						f = (0, compat_module.sO)(null);
+						f = (0, compat_module.useRef)(null);
 					V(f);
 					var v = T(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						compat_module.ZP.createElement(L, { hsva: d, onChange: h }),
-						compat_module.ZP.createElement(K, { hue: d.h, onChange: h }),
-						compat_module.ZP.createElement(Q, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(L, { hsva: d, onChange: h }),
+						compat_module.default.createElement(K, { hue: d.h, onChange: h }),
+						compat_module.default.createElement(Q, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
 				ee = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: E, fromHsva: y, equal: S },
@@ -468,7 +477,7 @@
 				}
 				return target;
 			}
-			var Note = esm.zo.div(function (_ref) {
+			var Note = esm.styled.div(function (_ref) {
 					var theme = _ref.theme;
 					return {
 						padding: '2px 6px',
@@ -488,7 +497,7 @@
 				TooltipNote = function TooltipNote(_ref2) {
 					var note = _ref2.note,
 						props = _objectWithoutProperties(_ref2, ['note']);
-					return compat_module.ZP.createElement(Note, props, note);
+					return compat_module.default.createElement(Note, props, note);
 				};
 			TooltipNote.displayName = 'TooltipNote';
 			var _ColorPicker,
@@ -579,20 +588,20 @@
 				}
 				return target;
 			}
-			var Wrapper = esm.zo.div({ position: 'relative', maxWidth: 250 }),
-				PickerTooltip = (0, esm.zo)(lazy_WithTooltip.R)({ position: 'absolute', zIndex: 1, top: 4, left: 4 }),
-				TooltipContent = esm.zo.div({
+			var Wrapper = esm.styled.div({ position: 'relative', maxWidth: 250 }),
+				PickerTooltip = (0, esm.styled)(lazy_WithTooltip.R)({ position: 'absolute', zIndex: 1, top: 4, left: 4 }),
+				TooltipContent = esm.styled.div({
 					width: 200,
 					margin: 5,
 					'.react-colorful__saturation': { borderRadius: '4px 4px 0 0' },
 					'.react-colorful__hue': { boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 5%)' },
 					'.react-colorful__last-control': { borderRadius: '0 0 4px 4px' },
 				}),
-				Color_Note = (0, esm.zo)(TooltipNote)(function (_ref) {
+				Color_Note = (0, esm.styled)(TooltipNote)(function (_ref) {
 					return { fontFamily: _ref.theme.typography.fonts.base };
 				}),
-				Swatches = esm.zo.div({ display: 'grid', gridTemplateColumns: 'repeat(9, 16px)', gap: 6, padding: 3, marginTop: 5, width: 200 }),
-				SwatchColor = esm.zo.div(function (_ref2) {
+				Swatches = esm.styled.div({ display: 'grid', gridTemplateColumns: 'repeat(9, 16px)', gap: 6, padding: 3, marginTop: 5, width: 200 }),
+				SwatchColor = esm.styled.div(function (_ref2) {
 					var theme = _ref2.theme;
 					return {
 						width: 16,
@@ -616,17 +625,17 @@
 								'url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>\')',
 								', linear-gradient(#fff, #fff)'
 							);
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						SwatchColor,
 						_extends({}, props, { active, onClick, style: Object.assign({}, style, { backgroundImage }) })
 					);
 				};
 			Swatch.displayName = 'Swatch';
 			var ColorSpace,
-				Input = (0, esm.zo)(esm_form.l.Input)(function (_ref4) {
+				Input = (0, esm.styled)(esm_form.l.Input)(function (_ref4) {
 					return { width: '100%', paddingLeft: 30, paddingRight: 30, boxSizing: 'border-box', fontFamily: _ref4.theme.typography.fonts.base };
 				}),
-				ToggleIcon = (0, esm.zo)(icon.P)(function (_ref5) {
+				ToggleIcon = (0, esm.styled)(icon.P)(function (_ref5) {
 					return {
 						position: 'absolute',
 						zIndex: 1,
@@ -651,13 +660,13 @@
 				SHORTHEX_REGEXP = /^\s*#?([0-9a-f]{3})\s*$/i,
 				ColorPicker =
 					(_defineProperty((_ColorPicker = {}), ColorSpace.HEX, function (r) {
-						return compat_module.ZP.createElement($, u({}, r, { colorModel: G }));
+						return compat_module.default.createElement($, u({}, r, { colorModel: G }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.RGB, function (r) {
-						return compat_module.ZP.createElement(U, u({}, r, { colorModel: ge }));
+						return compat_module.default.createElement(U, u({}, r, { colorModel: ge }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.HSL, function (r) {
-						return compat_module.ZP.createElement(U, u({}, r, { colorModel: ee }));
+						return compat_module.default.createElement(U, u({}, r, { colorModel: ee }));
 					}),
 					_ColorPicker),
 				fallbackColor =
@@ -748,27 +757,27 @@
 					}
 				},
 				useColorInput = function useColorInput(initialValue, onChange) {
-					var _useState2 = _slicedToArray((0, compat_module.eJ)(initialValue || ''), 2),
+					var _useState2 = _slicedToArray((0, compat_module.useState)(initialValue || ''), 2),
 						value = _useState2[0],
 						setValue = _useState2[1],
 						_useState4 = _slicedToArray(
-							(0, compat_module.eJ)(function () {
+							(0, compat_module.useState)(function () {
 								return parseValue(value);
 							}),
 							2
 						),
 						color = _useState4[0],
 						setColor = _useState4[1],
-						_useState6 = _slicedToArray((0, compat_module.eJ)((null == color ? void 0 : color.colorSpace) || ColorSpace.HEX), 2),
+						_useState6 = _slicedToArray((0, compat_module.useState)((null == color ? void 0 : color.colorSpace) || ColorSpace.HEX), 2),
 						colorSpace = _useState6[0],
 						setColorSpace = _useState6[1];
-					(0, compat_module.d4)(
+					(0, compat_module.useEffect)(
 						function () {
 							void 0 === initialValue && (setValue(''), setColor(void 0), setColorSpace(ColorSpace.HEX));
 						},
 						[initialValue]
 					);
-					var realValue = (0, compat_module.Ye)(
+					var realValue = (0, compat_module.useMemo)(
 							function () {
 								return (function getRealValue(value, color, colorSpace) {
 									if (!value || null == color || !color.valid) return fallbackColor[colorSpace];
@@ -790,7 +799,7 @@
 							},
 							[value, color, colorSpace]
 						),
-						updateValue = (0, compat_module.I4)(
+						updateValue = (0, compat_module.useCallback)(
 							function (update) {
 								var parsed = parseValue(update);
 								setValue((null == parsed ? void 0 : parsed.value) || update || ''),
@@ -798,7 +807,7 @@
 							},
 							[onChange]
 						),
-						cycleColorSpace = (0, compat_module.I4)(
+						cycleColorSpace = (0, compat_module.useCallback)(
 							function () {
 								var next = COLOR_SPACES.indexOf(colorSpace) + 1;
 								next >= COLOR_SPACES.length && (next = 0), setColorSpace(COLOR_SPACES[next]);
@@ -828,16 +837,16 @@
 						colorSpace = _useColorInput.colorSpace,
 						cycleColorSpace = _useColorInput.cycleColorSpace,
 						_usePresets = (function usePresets(presetColors, currentColor, colorSpace) {
-							var _useState8 = _slicedToArray((0, compat_module.eJ)(null != currentColor && currentColor.valid ? [currentColor] : []), 2),
+							var _useState8 = _slicedToArray((0, compat_module.useState)(null != currentColor && currentColor.valid ? [currentColor] : []), 2),
 								selectedColors = _useState8[0],
 								setSelectedColors = _useState8[1];
-							(0, compat_module.d4)(
+							(0, compat_module.useEffect)(
 								function () {
 									void 0 === currentColor && setSelectedColors([]);
 								},
 								[currentColor]
 							);
-							var presets = (0, compat_module.Ye)(
+							var presets = (0, compat_module.useMemo)(
 									function () {
 										return (presetColors || [])
 											.map(function (preset) {
@@ -853,7 +862,7 @@
 									},
 									[presetColors, selectedColors]
 								),
-								addPreset = (0, compat_module.I4)(
+								addPreset = (0, compat_module.useCallback)(
 									function (color) {
 										null != color &&
 											color.valid &&
@@ -871,10 +880,10 @@
 						presets = _usePresets.presets,
 						addPreset = _usePresets.addPreset,
 						Picker = ColorPicker[colorSpace];
-					return compat_module.ZP.createElement(
+					return compat_module.default.createElement(
 						Wrapper,
 						null,
-						compat_module.ZP.createElement(
+						compat_module.default.createElement(
 							PickerTooltip,
 							{
 								trigger: 'click',
@@ -883,28 +892,28 @@
 								onVisibilityChange: function onVisibilityChange() {
 									return addPreset(color);
 								},
-								tooltip: compat_module.ZP.createElement(
+								tooltip: compat_module.default.createElement(
 									TooltipContent,
 									null,
-									compat_module.ZP.createElement(Picker, {
+									compat_module.default.createElement(Picker, {
 										color: 'transparent' === realValue ? '#000000' : realValue,
 										onChange: updateValue,
 										onFocus,
 										onBlur,
 									}),
 									presets.length > 0 &&
-										compat_module.ZP.createElement(
+										compat_module.default.createElement(
 											Swatches,
 											null,
 											presets.map(function (preset, index) {
-												return compat_module.ZP.createElement(
+												return compat_module.default.createElement(
 													lazy_WithTooltip.R,
 													{
 														key: ''.concat(preset.value, '-').concat(index),
 														hasChrome: !1,
-														tooltip: compat_module.ZP.createElement(Color_Note, { note: preset.keyword || preset.value }),
+														tooltip: compat_module.default.createElement(Color_Note, { note: preset.keyword || preset.value }),
 													},
-													compat_module.ZP.createElement(Swatch, {
+													compat_module.default.createElement(Swatch, {
 														value: preset[colorSpace],
 														active: color && id(preset[colorSpace]) === id(color[colorSpace]),
 														onClick: function onClick() {
@@ -916,9 +925,9 @@
 										)
 								),
 							},
-							compat_module.ZP.createElement(Swatch, { value: realValue, style: { margin: 4 } })
+							compat_module.default.createElement(Swatch, { value: realValue, style: { margin: 4 } })
 						),
-						compat_module.ZP.createElement(Input, {
+						compat_module.default.createElement(Input, {
 							id: (0, helpers.d)(name),
 							value,
 							onChange: function onChange(e) {
@@ -929,7 +938,7 @@
 							},
 							placeholder: 'Choose color...',
 						}),
-						value ? compat_module.ZP.createElement(ToggleIcon, { icon: 'markup', onClick: cycleColorSpace }) : null
+						value ? compat_module.default.createElement(ToggleIcon, { icon: 'markup', onClick: cycleColorSpace }) : null
 					);
 				};
 			ColorControl.displayName = 'ColorControl';

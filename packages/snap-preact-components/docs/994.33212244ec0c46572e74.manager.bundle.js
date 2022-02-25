@@ -1817,7 +1817,7 @@
 					var fallback = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0;
 					return actual.split('-')[0] === requests ? value : fallback;
 				}),
-				Arrow = esm.zo.div(
+				Arrow = esm.styled.div(
 					{ position: 'absolute', borderStyle: 'solid' },
 					function (_ref) {
 						var placement = _ref.placement,
@@ -1872,7 +1872,7 @@
 						};
 					}
 				),
-				Wrapper = esm.zo.div(
+				Wrapper = esm.styled.div(
 					function (_ref3) {
 						return { display: _ref3.hidden ? 'none' : 'inline-block', zIndex: 2147483647 };
 					},
@@ -1991,13 +1991,13 @@
 			(Tooltip_Tooltip.displayName = 'Tooltip'),
 				(Tooltip_Tooltip.defaultProps = { color: void 0, arrowRef: void 0, tooltipRef: void 0, hasChrome: !0, placement: 'top', arrowProps: {} });
 			var WithTooltip_document = window_default().document,
-				TargetContainer = esm.zo.div(
+				TargetContainer = esm.styled.div(
 					_templateObject || (_templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  cursor: ', ';\n'])),
 					function (props) {
 						return 'hover' === props.mode ? 'default' : 'pointer';
 					}
 				),
-				TargetSvgContainer = esm.zo.g(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(['\n  cursor: ', ';\n'])), function (props) {
+				TargetSvgContainer = esm.styled.g(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(['\n  cursor: ', ';\n'])), function (props) {
 					return 'hover' === props.mode ? 'default' : 'pointer';
 				}),
 				WithTooltipPure = function WithTooltipPure(_ref) {

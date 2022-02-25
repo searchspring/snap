@@ -1,4 +1,4 @@
-/*! For license information please see 887.736dcdea.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 887.23c8cb58.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[887],
 	{
@@ -70,10 +70,10 @@
 					className = _ref.className,
 					children = _ref.children,
 					rest = _objectWithoutProperties(_ref, ['options', 'extensions', 'className', 'children']),
-					osTargetRef = react__WEBPACK_IMPORTED_MODULE_12__.ZP.useRef(),
-					osInstance = react__WEBPACK_IMPORTED_MODULE_12__.ZP.useRef();
+					osTargetRef = react__WEBPACK_IMPORTED_MODULE_12__.default.useRef(),
+					osInstance = react__WEBPACK_IMPORTED_MODULE_12__.default.useRef();
 				return (
-					react__WEBPACK_IMPORTED_MODULE_12__.ZP.useEffect(function () {
+					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(function () {
 						return (
 							(osInstance.current = overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default()(osTargetRef.current, options, extensions)),
 							mergeHostClassNames(osInstance.current, className),
@@ -83,51 +83,51 @@
 							}
 						);
 					}, []),
-					react__WEBPACK_IMPORTED_MODULE_12__.ZP.useEffect(
+					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(
 						function () {
 							overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default().valid(osInstance.current) && osInstance.current.options(options);
 						},
 						[options]
 					),
-					react__WEBPACK_IMPORTED_MODULE_12__.ZP.useEffect(
+					react__WEBPACK_IMPORTED_MODULE_12__.default.useEffect(
 						function () {
 							overlayscrollbars__WEBPACK_IMPORTED_MODULE_13___default().valid(osInstance.current) &&
 								mergeHostClassNames(osInstance.current, className);
 						},
 						[className]
 					),
-					react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+					react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 						'div',
 						_extends({ className: 'os-host' }, rest, { ref: osTargetRef }),
-						react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement('div', { className: 'os-resize-observer-host' }),
-						react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-resize-observer-host' }),
+						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 							'div',
 							{ className: 'os-padding' },
-							react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 								'div',
 								{ className: 'os-viewport' },
-								react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement('div', { className: 'os-content' }, children)
+								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-content' }, children)
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 							'div',
 							{ className: 'os-scrollbar os-scrollbar-horizontal ' },
-							react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 								'div',
 								{ className: 'os-scrollbar-track' },
-								react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement('div', { className: 'os-scrollbar-handle' })
+								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-handle' })
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 							'div',
 							{ className: 'os-scrollbar os-scrollbar-vertical' },
-							react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement(
+							react__WEBPACK_IMPORTED_MODULE_12__.default.createElement(
 								'div',
 								{ className: 'os-scrollbar-track' },
-								react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement('div', { className: 'os-scrollbar-handle' })
+								react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-handle' })
 							)
 						),
-						react__WEBPACK_IMPORTED_MODULE_12__.ZP.createElement('div', { className: 'os-scrollbar-corner' })
+						react__WEBPACK_IMPORTED_MODULE_12__.default.createElement('div', { className: 'os-scrollbar-corner' })
 					)
 				);
 			};

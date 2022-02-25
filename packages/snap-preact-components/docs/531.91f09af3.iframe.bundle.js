@@ -286,7 +286,7 @@
 					};
 				},
 				GlobalScrollAreaStyles = function GlobalScrollAreaStyles() {
-					return react__WEBPACK_IMPORTED_MODULE_2__.ZP.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_3__.xB, {
+					return react__WEBPACK_IMPORTED_MODULE_2__.default.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_3__.xB, {
 						styles: getScrollAreaStyles,
 					});
 				};

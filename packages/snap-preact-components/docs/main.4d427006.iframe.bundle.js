@@ -116,7 +116,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_badge = function badge(_ref) {
@@ -127,7 +127,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 						props = Object.assign(
 							{ position: { top: 0, left: 0 } },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -181,7 +181,7 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_breadcrumbs = function breadcrumbs() {
 					return (0, emotion_react_browser_esm.iv)({
@@ -193,7 +193,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ separator: '>' },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -528,7 +528,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_button = function button(_ref) {
@@ -571,7 +571,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -911,7 +911,7 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
 			var cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts');
 			function _slicedToArray(arr, i) {
@@ -977,7 +977,7 @@
 						_properties$theme$com,
 						showContent,
 						setShowContent,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ startOpen: !1 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -1090,7 +1090,7 @@
 				formatNumber = __webpack_require__('../snap-toolbox/dist/esm/filters/formatNumber.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_formattedNumber = function formattedNumber() {
 					return (0, emotion_react_browser_esm.iv)({});
@@ -1099,7 +1099,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+					globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 					props = Object.assign(
 						{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !0 },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -1631,7 +1631,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
 				_paths__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
@@ -1652,7 +1652,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.u)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.a)(),
 					theme = Object.assign({}, globalTheme, properties.theme),
 					props = Object.assign(
 						{ size: '16px', viewBox: '0 0 56 56' },
@@ -2080,7 +2080,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_13___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_13__),
 				_providers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/providers/cache.tsx');
 			function _slicedToArray(arr, i) {
@@ -2144,7 +2144,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_15__.u)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_15__.a)(),
 					props = Object.assign(
 						{ fallback: FALLBACK_IMAGE_URL, lazy: !0 },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -2227,7 +2227,7 @@
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS = {
 					loadingBar: function loadingBar(_ref) {
@@ -2277,7 +2277,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+					globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 					theme = Object.assign({}, globalTheme, properties.theme),
 					props = Object.assign(
 						{ height: '5px' },
@@ -2621,7 +2621,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
 				_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/types.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_banner = function banner() {
@@ -2632,7 +2632,7 @@
 					_properties$theme,
 					_properties$theme$com,
 					_content$type,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.u)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 					props = Object.assign(
 						{ content: [], type: '' },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -2748,6 +2748,7 @@
 							control: { type: 'select', options: [_types__WEBPACK_IMPORTED_MODULE_10__.Ar.GRID, _types__WEBPACK_IMPORTED_MODULE_10__.Ar.LIST] },
 						},
 						width: { description: 'InlineBanner width', table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						onClick: { description: 'Custom onClick event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 					},
 					_utilities__WEBPACK_IMPORTED_MODULE_11__.p
 				),
@@ -2815,7 +2816,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
 				_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/types.ts'),
@@ -2837,25 +2838,26 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.u)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.a)(),
 					props = Object.assign(
 						{ layout: _types__WEBPACK_IMPORTED_MODULE_4__.Ar.GRID, banner: {} },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 							? void 0
-							: _globalTheme$componen.banner,
+							: _globalTheme$componen.inlineBanner,
 						properties,
 						null === (_properties$theme = properties.theme) ||
 							void 0 === _properties$theme ||
 							null === (_properties$theme$com = _properties$theme.components) ||
 							void 0 === _properties$theme$com
 							? void 0
-							: _properties$theme$com.banner
+							: _properties$theme$com.inlineBanner
 					),
 					banner = props.banner,
 					disableStyles = props.disableStyles,
 					className = props.className,
 					width = props.width,
 					layout = props.layout,
+					_onClick = props.onClick,
 					style = props.style,
 					styling = {};
 				return (
@@ -2868,7 +2870,12 @@
 							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.tZ)(
 								'div',
 								Object.assign(
-									{ className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className) },
+									{
+										onClick: function onClick(e) {
+											_onClick && _onClick(e);
+										},
+										className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__inline-banner', 'ss__inline-banner--' + layout, className),
+									},
 									styling,
 									{ dangerouslySetInnerHTML: { __html: banner.value } }
 								)
@@ -3004,7 +3011,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
 				_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_overlay = function overlay(_ref) {
@@ -3025,7 +3032,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.u)(),
+					globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_3__.a)(),
 					props = Object.assign(
 						{ color: 'rgba(0,0,0,0.8)', transitionSpeed: '0.25s' },
 						null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -3246,7 +3253,7 @@
 			var emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_price = function price(_ref) {
 					var _theme$colors,
@@ -3260,7 +3267,7 @@
 				var _globalTheme$componen,
 					_properties$theme,
 					_properties$theme$com,
-					globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+					globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 					theme = Object.assign({}, globalTheme, properties.theme),
 					props = Object.assign(
 						{ symbol: '$', decimalPlaces: 2, padDecimalPlaces: !0, thousandsSeparator: ',', decimalSeparator: '.', symbolAfter: !1, lineThrough: !1 },
@@ -3321,7 +3328,7 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS = {
 					skeleton: function skeleton(_ref) {
@@ -3362,7 +3369,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ backgroundColor: '#ebebeb', animatedColor: '#f5f5f5' },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -3669,13 +3676,34 @@
 							'<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>\n'
 						)
 					),
+					(0, esm.kt)('h3', { id: 'autoadjustslides' }, 'autoAdjustSlides'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'autoAdjustSlides'),
+						' prop when set to ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'false'),
+						' will disable the carousel from automatically adjusting the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'slidesPerGroup'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'slidesPerView'),
+						' and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'loop'),
+						' props when the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'children'),
+						' length is less than the current ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'slidesPerView')
+					),
 					(0, esm.kt)('h3', { id: 'breakpoints' }, 'breakpoints'),
 					(0, esm.kt)('p', null, 'An object that modifies the responsive behavior of the carousel at various viewports. '),
 					(0, esm.kt)('p', null, 'The object key specified the viewport for when the parameters will be applied. '),
 					(0, esm.kt)(
 						'p',
 						null,
-						'The default configuration contains the following properties, however any ',
+						'The default configuration contains the following properties, however ',
+						(0, esm.kt)('strong', { parentName: 'p' }, (0, esm.kt)('inlineCode', { parentName: 'strong' }, 'any Carousel props')),
+						' or ',
 						(0, esm.kt)(
 							'a',
 							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
@@ -3697,7 +3725,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const defaultCarouselBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
+							'const defaultCarouselBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n\nconst defaultVerticalCarouselBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -3714,7 +3742,7 @@
 			MDXContent.isMDXComponent = !0;
 			const Carousel_stories = {
 				title: 'Molecules/Carousel',
-				component: Carousel.l,
+				component: Carousel.lr,
 				parameters: {
 					docs: {
 						page: function page() {
@@ -3761,6 +3789,13 @@
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Breakpoint object' } },
 							control: { type: 'object' },
 						},
+						autoAdjustSlides: {
+							defaultValue: !0,
+							description:
+								'If true and children length is less than the current breakpoint slidesPerView value, slidesPerView and slidesPerGroup will be set to the children length and loop to false',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
+							control: { type: 'boolean' },
+						},
 						onNextButtonClick: {
 							description: 'Carousel next button click event handler',
 							table: { type: { summary: 'function' } },
@@ -3780,7 +3815,7 @@
 			var colors = Array.from(Array(9).keys()),
 				Colors = function Colors(props) {
 					return (0, preact_module.h)(
-						Carousel.l,
+						Carousel.lr,
 						Object.assign({}, props),
 						colors.map(function (number, index) {
 							return (0,
@@ -3791,7 +3826,7 @@
 			Colors.args = { pagination: !0, hideButtons: !0, loop: !1 };
 			var Icons = function Icons(props) {
 				return (0, preact_module.h)(
-					Carousel.l,
+					Carousel.lr,
 					Object.assign({}, props),
 					Object.keys(paths.N).map(function (icon, index) {
 						return (0,
@@ -3819,29 +3854,36 @@
 		},
 		'./src/components/Molecules/Carousel/Carousel.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { l: () => Carousel });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+			__webpack_require__.d(__webpack_exports__, {
+				iZ: () => defaultCarouselBreakpoints,
+				EJ: () => defaultVerticalCarouselBreakpoints,
+				lr: () => Carousel,
+			});
+			__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
 			var preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_16__ =
+				deepmerge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				deepmerge__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_8__),
+				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__ =
 					(__webpack_require__('../../node_modules/swiper/swiper.min.css'), __webpack_require__('./src/components/Atoms/Icon/Icon.tsx')),
-				swiper_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
 					'breakpoints',
@@ -3851,6 +3893,7 @@
 					'prevButton',
 					'hideButtons',
 					'vertical',
+					'autoAdjustSlides',
 					'onInit',
 					'onNextButtonClick',
 					'onPrevButtonClick',
@@ -3885,7 +3928,7 @@
 						_theme$colors2,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
 						display: 'flex',
 						maxWidth: '100%',
 						maxHeight: vertical ? '100%' : null,
@@ -3903,7 +3946,12 @@
 							background:
 								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || 'inherit',
 						},
-						'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': { display: 'flex', justifyContent: 'center', alignItems: 'center' },
+						'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': { display: 'none' },
+						},
 						'.ss__carousel__next, .ss__carousel__prev': {
 							padding: '5px',
 							cursor: 'pointer',
@@ -3951,10 +3999,15 @@
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
-							{ breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints, pagination: !1, loop: !0 },
+							{
+								breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+								pagination: !1,
+								loop: !0,
+								autoAdjustSlides: !0,
+							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.carousel,
@@ -3966,33 +4019,47 @@
 								? void 0
 								: _properties$theme$com.carousel
 						),
-						children = props.children,
-						breakpoints = props.breakpoints,
-						loop = props.loop,
-						pagination = props.pagination,
-						nextButton = props.nextButton,
-						prevButton = props.prevButton,
-						hideButtons = props.hideButtons,
-						vertical = props.vertical,
-						_onInit = props.onInit,
-						onNextButtonClick = props.onNextButtonClick,
-						onPrevButtonClick = props.onPrevButtonClick,
-						_onClick = props.onClick,
-						disableStyles = props.disableStyles,
-						style = props.style,
-						className = props.className,
-						additionalProps = _objectWithoutProperties(props, _excluded),
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__.o)(props.breakpoints);
+					if (displaySettings && Object.keys(displaySettings).length) {
+						var _props,
+							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_8___default()(
+								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
+								(null == displaySettings ? void 0 : displaySettings.theme) || {}
+							);
+						props.autoAdjustSlides &&
+							props.children.length < displaySettings.slidesPerView &&
+							((displaySettings.slidesPerView = props.children.length),
+							(displaySettings.slidesPerGroup = props.children.length),
+							(displaySettings.loop = !1)),
+							(props = Object.assign({}, props, displaySettings, { theme: _theme }));
+					}
+					var _props2 = props,
+						children = _props2.children,
+						loop = (_props2.breakpoints, _props2.loop),
+						pagination = _props2.pagination,
+						nextButton = _props2.nextButton,
+						prevButton = _props2.prevButton,
+						hideButtons = _props2.hideButtons,
+						vertical = _props2.vertical,
+						_onInit = (_props2.autoAdjustSlides, _props2.onInit),
+						onNextButtonClick = _props2.onNextButtonClick,
+						onPrevButtonClick = _props2.onPrevButtonClick,
+						_onClick = _props2.onClick,
+						disableStyles = _props2.disableStyles,
+						style = _props2.style,
+						className = _props2.className,
+						additionalProps = _objectWithoutProperties(_props2, _excluded),
 						subProps = {
 							icon: Object.assign(
 								{ className: 'ss__carousel__icon' },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_13__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						};
-					swiper_core__WEBPACK_IMPORTED_MODULE_12__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_13__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z]);
+					swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z]);
 					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
 						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
 						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
@@ -4000,38 +4067,41 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
 						children &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_15__.n,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_17__.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 									'div',
 									Object.assign({ ref: rootComponentRef }, styling, {
 										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
 									}),
-									!hideButtons &&
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										'div',
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__prev-wrapper', {
+												'ss__carousel__prev-wrapper--hidden': hideButtons,
+											}),
+										},
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
-											{ className: 'ss__carousel__prev-wrapper' },
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-												'div',
-												{
-													className: 'ss__carousel__prev',
-													ref: navigationPrevRef,
-													onClick:
-														onPrevButtonClick &&
-														function (e) {
-															return onPrevButtonClick(e);
-														},
-												},
-												prevButton ||
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_16__.J,
-														Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
-													)
-											)
-										),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-										swiper_react__WEBPACK_IMPORTED_MODULE_17__.t,
+											{
+												className: 'ss__carousel__prev',
+												ref: navigationPrevRef,
+												onClick:
+													onPrevButtonClick &&
+													function (e) {
+														return onPrevButtonClick(e);
+													},
+											},
+											prevButton ||
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+													Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
+												)
+										)
+									),
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										swiper_react__WEBPACK_IMPORTED_MODULE_19__.t,
 										Object.assign(
 											{
 												centerInsufficientSlides: !0,
@@ -4045,37 +4115,40 @@
 												},
 												direction: vertical ? 'vertical' : 'horizontal',
 												loop,
-												breakpoints,
 												pagination: !!pagination && { clickable: !0 },
 											},
-											additionalProps
+											additionalProps,
+											displaySettings
 										),
 										children.map(function (child) {
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_18__.o, null, child);
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_20__.o, null, child);
 										})
 									),
-									!hideButtons &&
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										'div',
+										{
+											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__next-wrapper', {
+												'ss__carousel__next-wrapper--hidden': hideButtons,
+											}),
+										},
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
 											'div',
-											{ className: 'ss__carousel__next-wrapper' },
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-												'div',
-												{
-													className: 'ss__carousel__next',
-													ref: navigationNextRef,
-													onClick:
-														onNextButtonClick &&
-														function (e) {
-															return onNextButtonClick(e);
-														},
-												},
-												nextButton ||
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
-														_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_16__.J,
-														Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
-													)
-											)
+											{
+												className: 'ss__carousel__next',
+												ref: navigationNextRef,
+												onClick:
+													onNextButtonClick &&
+													function (e) {
+														return onNextButtonClick(e);
+													},
+											},
+											nextButton ||
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+													Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
+												)
 										)
+									)
 								)
 							)
 					);
@@ -4347,7 +4420,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_utilities__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/utilities/defined.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/providers/cache.tsx'),
 				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx');
@@ -4426,7 +4499,7 @@
 						_theme$colors2,
 						checkedState,
 						setCheckedState,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_16__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_16__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ size: '12px', startChecked: !1 },
@@ -4575,7 +4648,7 @@
 						return g > 255 ? (g = 255) : g < 0 && (g = 0), (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 					}),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_errorHandler = function errorHandler(_ref) {
 					var _theme$colors,
@@ -4719,7 +4792,7 @@
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_controller$store,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -5253,7 +5326,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_grid = function grid(_ref) {
@@ -5318,7 +5391,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ columns: 4, gapSize: '8px' },
@@ -5336,7 +5409,7 @@
 						values = props.values,
 						columns = props.columns,
 						gapSize = props.gapSize,
-						onClick = props.onClick,
+						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
 						disableStyles = props.disableStyles,
@@ -5353,7 +5426,7 @@
 									'div',
 									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options', className) }),
 									values.map(function (value) {
-										var _value$url;
+										var _value$url, _value$url$link;
 										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'a',
 											Object.assign(
@@ -5361,13 +5434,29 @@
 													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-grid-options__option', {
 														'ss__facet-grid-options__option--filtered': value.filtered,
 													}),
-													onClick,
 													onFocus: function onFocus() {
 														return previewOnFocus && value.preview && value.preview();
 													},
 												},
 												valueProps,
-												null === (_value$url = value.url) || void 0 === _value$url ? void 0 : _value$url.link
+												{
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
+												}
 											),
 											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 												'span',
@@ -5596,7 +5685,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_hierarchy = function hierarchy(_ref) {
@@ -5638,7 +5727,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -5655,7 +5744,7 @@
 						),
 						values = props.values,
 						hideCount = props.hideCount,
-						onClick = props.onClick,
+						_onClick = props.onClick,
 						disableStyles = props.disableStyles,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
@@ -5674,7 +5763,7 @@
 										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-hierarchy-options', className),
 									}),
 									values.map(function (value) {
-										var _value$url;
+										var _value$url, _value$url$link;
 										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'a',
 											Object.assign(
@@ -5684,10 +5773,22 @@
 														{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
 														{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
 													),
-													onClick,
-												},
-												null === (_value$url = value.url) || void 0 === _value$url ? void 0 : _value$url.link,
-												{
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
 													onFocus: function onFocus() {
 														return previewOnFocus && value.preview && value.preview();
 													},
@@ -6010,7 +6111,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/utilities/defined.ts'),
@@ -6046,7 +6147,7 @@
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{},
@@ -6064,7 +6165,7 @@
 						values = props.values,
 						hideCheckbox = props.hideCheckbox,
 						hideCount = props.hideCount,
-						onClick = props.onClick,
+						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
 						disableStyles = props.disableStyles,
@@ -6091,7 +6192,7 @@
 									'div',
 									Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options', className) }),
 									values.map(function (value) {
-										var _value$url;
+										var _value$url, _value$url$link;
 										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
 											'a',
 											Object.assign(
@@ -6099,13 +6200,29 @@
 													className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__facet-list-options__option', {
 														'ss__facet-list-options__option--filtered': value.filtered,
 													}),
-													onClick,
 													onFocus: function onFocus() {
 														return previewOnFocus && value.preview && value.preview();
 													},
 												},
 												valueProps,
-												null === (_value$url = value.url) || void 0 === _value$url ? void 0 : _value$url.link
+												{
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
+												}
 											),
 											!hideCheckbox &&
 												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.tZ)(
@@ -6482,7 +6599,7 @@
 			}
 			var defined = __webpack_require__('./src/utilities/defined.ts'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_palette = function palette(_ref) {
 					var _theme$colors,
@@ -6554,7 +6671,7 @@
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ values: [], columns: 4, gapSize: '8px' },
@@ -6574,7 +6691,7 @@
 						columns = props.columns,
 						gapSize = props.gapSize,
 						hideIcon = props.hideIcon,
-						onClick = props.onClick,
+						_onClick = props.onClick,
 						previewOnFocus = props.previewOnFocus,
 						valueProps = props.valueProps,
 						disableStyles = props.disableStyles,
@@ -6601,7 +6718,7 @@
 									'div',
 									Object.assign({}, styling, { className: classnames_default()('ss__facet-palette-options', className) }),
 									values.map(function (value) {
-										var _value$url;
+										var _value$url, _value$url$link;
 										return (0, emotion_react_browser_esm.tZ)(
 											'a',
 											Object.assign(
@@ -6609,14 +6726,30 @@
 													className: classnames_default()('ss__facet-palette-options__option', {
 														'ss__facet-palette-options__option--filtered': value.filtered,
 													}),
-													onClick,
 													'aria-label': value.value,
 													onFocus: function onFocus() {
 														return previewOnFocus && value.preview && value.preview();
 													},
 												},
 												valueProps,
-												null === (_value$url = value.url) || void 0 === _value$url ? void 0 : _value$url.link
+												{
+													href:
+														null === (_value$url = value.url) ||
+														void 0 === _value$url ||
+														null === (_value$url$link = _value$url.link) ||
+														void 0 === _value$url$link
+															? void 0
+															: _value$url$link.href,
+													onClick: function onClick(e) {
+														var _value$url2, _value$url2$link;
+														null === (_value$url2 = value.url) ||
+															void 0 === _value$url2 ||
+															null === (_value$url2$link = _value$url2.link) ||
+															void 0 === _value$url2$link ||
+															_value$url2$link.onClick(e),
+															_onClick && _onClick(e);
+													},
+												}
 											),
 											(0, emotion_react_browser_esm.tZ)(
 												'div',
@@ -6979,7 +7112,7 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				react_ranger = __webpack_require__('../../node_modules/react-ranger/dist/react-ranger.mjs'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
 			__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -7229,7 +7362,7 @@
 						_facet$active8,
 						_facet$active9,
 						_facet$active10,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -7717,7 +7850,7 @@
 				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
 				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/utilities/defined.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/providers/cache.tsx'),
 				_Atoms_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/components/Atoms/Button/Button.tsx'),
@@ -7736,7 +7869,7 @@
 						_properties$theme$com,
 						_globalTheme$componen2,
 						_globalTheme$componen3,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.a)(),
 						props = Object.assign(
 							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -7844,7 +7977,7 @@
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
@@ -7870,7 +8003,7 @@
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ pages: 5 },
@@ -8675,6 +8808,7 @@
 							table: { type: { summary: 'string' } },
 							control: { type: 'select', options: [types.Ar.GRID, types.Ar.LIST] },
 						},
+						onClick: { description: 'Custom onClick event handler', table: { type: { summary: 'function' } }, action: 'onClick' },
 						controller: { description: 'Controller reference', table: { type: { summary: 'Controller' } }, control: { type: 'none' } },
 					},
 					componentArgs.p
@@ -8770,7 +8904,7 @@
 				Image = __webpack_require__('./src/components/Atoms/Image/Image.tsx'),
 				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
 				Price = __webpack_require__('./src/components/Atoms/Price/Price.tsx'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts');
@@ -8815,7 +8949,7 @@
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_globalTheme$componen4,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ layout: types.Ar.GRID },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -8839,6 +8973,7 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						layout = props.layout,
+						_onClick = props.onClick,
 						style = props.style,
 						controller = props.controller,
 						core = null == result || null === (_result$mappings = result.mappings) || void 0 === _result$mappings ? void 0 : _result$mappings.core,
@@ -8896,14 +9031,15 @@
 											'a',
 											{
 												href: core.url,
-												onMouseDown: function onMouseDown(e) {
+												onClick: function onClick(e) {
 													var _controller$track, _controller$track$pro;
-													null == controller ||
-														null === (_controller$track = controller.track) ||
-														void 0 === _controller$track ||
-														null === (_controller$track$pro = _controller$track.product) ||
-														void 0 === _controller$track$pro ||
-														_controller$track$pro.click(e, result);
+													_onClick && _onClick(e),
+														null == controller ||
+															null === (_controller$track = controller.track) ||
+															void 0 === _controller$track ||
+															null === (_controller$track$pro = _controller$track.product) ||
+															void 0 === _controller$track$pro ||
+															_controller$track$pro.click(e, result);
 												},
 											},
 											!hideBadge && onSale && (0, emotion_react_browser_esm.tZ)(Badge.C, Object.assign({}, subProps.badge)),
@@ -8919,14 +9055,15 @@
 												{ className: 'ss__result__details__title' },
 												(0, emotion_react_browser_esm.tZ)('a', {
 													href: core.url,
-													onMouseDown: function onMouseDown(e) {
+													onClick: function onClick(e) {
 														var _controller$track2, _controller$track2$pr;
-														null == controller ||
-															null === (_controller$track2 = controller.track) ||
-															void 0 === _controller$track2 ||
-															null === (_controller$track2$pr = _controller$track2.product) ||
-															void 0 === _controller$track2$pr ||
-															_controller$track2$pr.click(e, result);
+														_onClick && _onClick(e),
+															null == controller ||
+																null === (_controller$track2 = controller.track) ||
+																void 0 === _controller$track2 ||
+																null === (_controller$track2$pr = _controller$track2.product) ||
+																void 0 === _controller$track2$pr ||
+																_controller$track2$pr.click(e, result);
 													},
 													dangerouslySetInnerHTML: { __html: displayName },
 												})
@@ -8985,7 +9122,7 @@
 				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				Dropdown = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
@@ -9111,7 +9248,7 @@
 						_globalTheme$componen4,
 						_selection2,
 						setSelection,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ iconOpen: 'angle-down', iconClose: 'angle-up', separator: ': ', startOpen: !1 },
@@ -9928,7 +10065,7 @@
 				classnames_default = __webpack_require__.n(classnames),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
 			function _slicedToArray(arr, i) {
 				return (
@@ -10051,7 +10188,7 @@
 					_properties$theme,
 					_properties$theme$com,
 					_globalTheme$componen2,
-					globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+					globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 					props = Object.assign(
 						{
 							active: !1,
@@ -10388,7 +10525,7 @@
 				Facets = __webpack_require__('./src/components/Organisms/Facets/Facets.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
 				cloneWithProps = __webpack_require__('./src/utilities/cloneWithProps.ts'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				types = __webpack_require__('./src/types.ts'),
 				useDisplaySettings = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
@@ -10506,7 +10643,8 @@
 						_globalTheme$componen5,
 						_search$query2,
 						_search$query3,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						delayTimeout,
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ termsTitle: '', trendingTitle: 'Popular Searches', facetsTitle: '', contentTitle: '', width: '100%' },
@@ -10526,49 +10664,33 @@
 							540: { columns: 3, rows: 1, vertical: !0 },
 							768: { columns: 2, rows: 3 },
 						},
-						displaySettings = (0, useDisplaySettings.o)(breakpoints);
-					if (displaySettings && Object.keys(displaySettings).length) {
-						var _props,
-							_theme = cjs_default()(
-								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
-								(null == displaySettings ? void 0 : displaySettings.theme) || {}
-							);
-						props = Object.assign({}, props, displaySettings, { theme: _theme });
-					}
-					var inputViewportOffsetBottom,
-						delayTimeout,
-						_props2 = props,
-						hideTerms = _props2.hideTerms,
-						hideFacets = _props2.hideFacets,
-						hideContent = _props2.hideContent,
-						hideBanners = _props2.hideBanners,
-						hideLink = _props2.hideLink,
-						horizontalTerms = _props2.horizontalTerms,
-						vertical = _props2.vertical,
-						termsTitle = _props2.termsTitle,
-						trendingTitle = _props2.trendingTitle,
-						facetsTitle = _props2.facetsTitle,
-						contentTitle = _props2.contentTitle,
-						viewportMaxHeight = _props2.viewportMaxHeight,
-						termsSlot = _props2.termsSlot,
-						facetsSlot = _props2.facetsSlot,
-						contentSlot = _props2.contentSlot,
-						resultsSlot = _props2.resultsSlot,
-						noResultsSlot = _props2.noResultsSlot,
-						linkSlot = _props2.linkSlot,
-						disableStyles = _props2.disableStyles,
-						className = _props2.className,
-						width = _props2.width,
-						style = _props2.style,
-						controller = _props2.controller,
-						input = props.input;
-					if (input) {
-						var _input;
-						'string' == typeof input && (input = document.querySelector(input));
-						var rect = null === (_input = input) || void 0 === _input ? void 0 : _input.getBoundingClientRect();
-						inputViewportOffsetBottom = (null == rect ? void 0 : rect.bottom) || 0;
-					}
-					var valueProps = {
+						_props = props,
+						hideTerms = _props.hideTerms,
+						hideFacets = _props.hideFacets,
+						hideContent = _props.hideContent,
+						hideBanners = _props.hideBanners,
+						hideLink = _props.hideLink,
+						horizontalTerms = _props.horizontalTerms,
+						vertical = _props.vertical,
+						termsTitle = _props.termsTitle,
+						trendingTitle = _props.trendingTitle,
+						facetsTitle = _props.facetsTitle,
+						contentTitle = _props.contentTitle,
+						viewportMaxHeight = _props.viewportMaxHeight,
+						termsSlot = _props.termsSlot,
+						facetsSlot = _props.facetsSlot,
+						contentSlot = _props.contentSlot,
+						resultsSlot = _props.resultsSlot,
+						noResultsSlot = _props.noResultsSlot,
+						linkSlot = _props.linkSlot,
+						onFacetOptionClick = _props.onFacetOptionClick,
+						onTermClick = _props.onTermClick,
+						disableStyles = _props.disableStyles,
+						className = _props.className,
+						width = _props.width,
+						style = _props.style,
+						controller = _props.controller,
+						valueProps = {
 							onMouseEnter: function onMouseEnter(e) {
 								clearTimeout(delayTimeout),
 									(delayTimeout = setTimeout(function () {
@@ -10579,27 +10701,42 @@
 								clearTimeout(delayTimeout);
 							},
 						},
-						subProps = {
+						themeOverride = {
+							components: {
+								facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
+								facetGridOptions: { columns: 3, onClick: onFacetOptionClick },
+								facetHierarchyOptions: { hideCount: !0, onClick: onFacetOptionClick },
+								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: onFacetOptionClick },
+								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: onFacetOptionClick },
+								result: { hideBadge: !0 },
+							},
+						},
+						displaySettings = (0, useDisplaySettings.o)(breakpoints);
+					if (displaySettings && Object.keys(displaySettings).length) {
+						var _props2,
+							_theme = cjs_default()(
+								themeOverride,
+								(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme) || {},
+								(null == displaySettings ? void 0 : displaySettings.theme) || {}
+							);
+						props = Object.assign({}, props, displaySettings, { theme: _theme });
+					}
+					var inputViewportOffsetBottom,
+						input = props.input;
+					if (input) {
+						var _input;
+						'string' == typeof input && (input = document.querySelector(input));
+						var rect = null === (_input = input) || void 0 === _input ? void 0 : _input.getBoundingClientRect();
+						inputViewportOffsetBottom = (null == rect ? void 0 : rect.bottom) || 0;
+					}
+					var subProps = {
 							facets: Object.assign(
 								{ limit: 3 },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.facets,
 								(0, defined.r)({ disableStyles }),
-								{
-									theme: cjs_default()(
-										{
-											components: {
-												facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
-												facetGridOptions: { columns: 3 },
-												facetHierarchyOptions: { hideCount: !0 },
-												facetListOptions: { hideCheckbox: !0, hideCount: !0 },
-												facetPaletteOptions: { hideLabel: !0, columns: 3 },
-											},
-										},
-										Object.assign({}, props.theme)
-									),
-								}
+								{ theme: props.theme }
 							),
 							banner: Object.assign(
 								{ className: 'ss__autocomplete__banner' },
@@ -10615,7 +10752,7 @@
 									? void 0
 									: _globalTheme$componen4.results,
 								(0, defined.r)({ disableStyles }),
-								{ theme: cjs_default()({ components: { result: { hideBadge: !0 } } }, Object.assign({}, props.theme)) }
+								{ theme: props.theme }
 							),
 							icon: Object.assign(
 								{ className: 'ss__autocomplete__icon', icon: 'angle-right', size: '10px' },
@@ -10690,7 +10827,17 @@
 										'div',
 										{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
 										termsSlot
-											? (0, cloneWithProps.d)(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, controller })
+											? (0, cloneWithProps.d)(termsSlot, {
+													terms,
+													trending,
+													termsTitle,
+													trendingTitle,
+													showTrending,
+													valueProps,
+													emIfy,
+													onTermClick,
+													controller,
+											  })
 											: (0, emotion_react_browser_esm.tZ)(
 													preact_module.HY,
 													null,
@@ -10718,11 +10865,20 @@
 																			},
 																			(0, emotion_react_browser_esm.tZ)(
 																				'a',
-																				Object.assign({ href: term.url.href }, valueProps, {
-																					onFocus: function onFocus() {
-																						return term.preview();
+																				Object.assign(
+																					{
+																						onClick: function onClick(e) {
+																							return onTermClick && onTermClick(e);
+																						},
+																						href: term.url.href,
 																					},
-																				}),
+																					valueProps,
+																					{
+																						onFocus: function onFocus() {
+																							return term.preview();
+																						},
+																					}
+																				),
 																				emIfy(term.value, state.input)
 																			)
 																		);
@@ -10754,11 +10910,20 @@
 																			},
 																			(0, emotion_react_browser_esm.tZ)(
 																				'a',
-																				Object.assign({ href: term.url.href }, valueProps, {
-																					onFocus: function onFocus() {
-																						return term.preview();
+																				Object.assign(
+																					{
+																						onClick: function onClick(e) {
+																							return onTermClick && onTermClick(e);
+																						},
+																						href: term.url.href,
 																					},
-																				}),
+																					valueProps,
+																					{
+																						onFocus: function onFocus() {
+																							return term.preview();
+																						},
+																					}
+																				),
 																				emIfy(term.value, state.input)
 																			)
 																		);
@@ -11453,6 +11618,58 @@
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<Autocomplete controller={controller} input={'#searchInput'} breakpoints={breakpoints} />\n"
 						)
+					),
+					(0, esm.kt)('h3', { id: 'onfacetoptionclick' }, 'onFacetOptionClick'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onFacetOptionClick'),
+						' prop contains a custom onClick event handler for facet options. Function is passed the click event. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const CustomOnClickFunc = (e) => {\n    console.log('You Clicked a Facet Option!' , e)\n};\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} onFacetOptionClick={CustomOnClickFunc} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'ontermclick' }, 'onTermClick'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onTermClick'),
+						' prop contains a custom onClick event handler for Suggested & Trending Terms. Function is passed the click event. '
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const customOnClickFunc = (e) => {\n    console.log('You Clicked a term!' , e)\n};\n"
+						)
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Autocomplete controller={controller} input={'#searchInput'} onTermClick={customOnClickFunc} />\n"
+						)
 					)
 				);
 			}
@@ -11599,6 +11816,16 @@
 						contentSlot: { description: 'Slot for custom content component', table: { type: { summary: 'component' } } },
 						linkSlot: { description: 'Slot for custom "see n results for keyword" link component', table: { type: { summary: 'component' } } },
 						breakpoints: { description: 'Breakpoints options object', table: { type: { summary: 'object' } }, control: { type: 'object' } },
+						onFacetOptionClick: {
+							description: 'Custom onClick event handler for facet options.',
+							table: { type: { summary: 'function' } },
+							action: 'onFacetOptionClick',
+						},
+						onTermClick: {
+							description: 'Custom onClick event handler for Suggested & Trending Terms',
+							table: { type: { summary: 'function' } },
+							action: 'onTermClick',
+						},
 					},
 					componentArgs.p
 				),
@@ -12386,7 +12613,7 @@
 				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/utilities/defined.ts'),
 				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_facet = function facet(_ref) {
@@ -12424,7 +12651,7 @@
 						_globalTheme$componen8,
 						_globalTheme$componen9,
 						_props$facet2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -12831,7 +13058,7 @@
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				_Facet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/components/Organisms/Facet/Facet.tsx'),
 				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/providers/cache.tsx'),
 				_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/utilities/defined.ts'),
@@ -12846,7 +13073,7 @@
 						_properties$theme$com,
 						_globalTheme$componen2,
 						_facets,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.a)(),
 						props = Object.assign(
 							{
 								facets:
@@ -12941,7 +13168,7 @@
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				Filter = __webpack_require__('./src/components/Molecules/Filter/Filter.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_filterSummary = function filterSummary() {
 					return (0, emotion_react_browser_esm.iv)({
@@ -12957,7 +13184,7 @@
 						_properties$theme$com,
 						_globalTheme$componen2,
 						_subProps$filter,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{
 								title: 'Current Filters',
@@ -13484,8 +13711,7 @@
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
-					(__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -13495,6 +13721,7 @@
 					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
@@ -13505,10 +13732,12 @@
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames_default = __webpack_require__.n(classnames),
 				es = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				cjs_default = __webpack_require__.n(cjs),
 				Carousel = __webpack_require__('./src/components/Molecules/Carousel/Carousel.tsx'),
 				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
 				defined = __webpack_require__('./src/utilities/defined.ts'),
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				cache = __webpack_require__('./src/providers/cache.tsx');
 			function _slicedToArray(arr, i) {
 				return (
@@ -13556,21 +13785,22 @@
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			var _excluded = [
-				'title',
-				'controller',
-				'children',
-				'breakpoints',
-				'loop',
-				'pagination',
-				'nextButton',
-				'prevButton',
-				'hideButtons',
-				'disableStyles',
-				'style',
-				'className',
-				'vertical',
-			];
+			var useDisplaySettings = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_excluded = [
+					'title',
+					'controller',
+					'children',
+					'breakpoints',
+					'loop',
+					'pagination',
+					'nextButton',
+					'prevButton',
+					'hideButtons',
+					'disableStyles',
+					'style',
+					'className',
+					'vertical',
+				];
 			function _toConsumableArray(arr) {
 				return (
 					(function _arrayWithoutHoles(arr) {
@@ -13668,14 +13898,6 @@
 						'.ss__result__image-wrapper': { height: vertical ? '85%' : null },
 					});
 				},
-				defaultRecommendationBreakpoints = {
-					0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 },
-					480: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 10 },
-					768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 10 },
-					1024: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 10 },
-					1200: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 10 },
-				},
-				defaultVerticalRecommendationBreakpoints = { 0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 } },
 				Recommendation = (0, es.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
@@ -13684,13 +13906,9 @@
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_controller$track,
-						globalTheme = (0, emotion_element_699e6908_browser_esm.u)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
-							{
-								breakpoints: properties.vertical ? defaultVerticalRecommendationBreakpoints : defaultRecommendationBreakpoints,
-								pagination: !1,
-								loop: !0,
-							},
+							{ breakpoints: properties.vertical ? Carousel.EJ : Carousel.iZ, pagination: !1, loop: !0 },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.recommendation,
@@ -13702,20 +13920,30 @@
 								? void 0
 								: _properties$theme$com.recommendation
 						),
-						title = props.title,
-						controller = props.controller,
-						children = props.children,
-						breakpoints = props.breakpoints,
-						loop = props.loop,
-						pagination = props.pagination,
-						nextButton = props.nextButton,
-						prevButton = props.prevButton,
-						hideButtons = props.hideButtons,
-						disableStyles = props.disableStyles,
-						style = props.style,
-						className = props.className,
-						vertical = props.vertical,
-						additionalProps = _objectWithoutProperties(props, _excluded);
+						displaySettings = (0, useDisplaySettings.o)(props.breakpoints);
+					if (displaySettings && Object.keys(displaySettings).length) {
+						var _props,
+							theme = cjs_default()(
+								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
+								(null == displaySettings ? void 0 : displaySettings.theme) || {}
+							);
+						props = Object.assign({}, props, displaySettings, { theme });
+					}
+					var _props2 = props,
+						title = _props2.title,
+						controller = _props2.controller,
+						children = _props2.children,
+						breakpoints = _props2.breakpoints,
+						loop = _props2.loop,
+						pagination = _props2.pagination,
+						nextButton = _props2.nextButton,
+						prevButton = _props2.prevButton,
+						hideButtons = _props2.hideButtons,
+						disableStyles = _props2.disableStyles,
+						style = _props2.style,
+						className = _props2.className,
+						vertical = _props2.vertical,
+						additionalProps = _objectWithoutProperties(_props2, _excluded);
 					if (!controller || 'recommendation' !== controller.type)
 						throw new Error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
 					if (!children || children.length === controller.store.results.length) {
@@ -13795,7 +14023,7 @@
 										Object.assign({ ref: rootComponentRef }, styling, { className: classnames_default()('ss__recommendation', className) }),
 										title && (0, emotion_react_browser_esm.tZ)('h3', { className: 'ss__recommendation__title' }, title),
 										(0, emotion_react_browser_esm.tZ)(
-											Carousel.l,
+											Carousel.lr,
 											Object.assign(
 												{
 													onInit: function onInit(swiper) {
@@ -13821,11 +14049,12 @@
 														controller.track.click(e), Number.isNaN(clickedIndex) || controller.track.product.click(e, results[clickedIndex]);
 													},
 													loop,
-													breakpoints,
 													pagination,
+													breakpoints,
 												},
 												subProps.carousel,
-												additionalProps
+												additionalProps,
+												displaySettings
 											),
 											children
 												? children.map(function (child) {
@@ -14011,7 +14240,9 @@
 					(0, esm.kt)(
 						'p',
 						null,
-						'The default configuration contains the following properties, however any ',
+						'The default configuration contains the following properties, however ',
+						(0, esm.kt)('strong', { parentName: 'p' }, (0, esm.kt)('inlineCode', { parentName: 'strong' }, 'any Recommendation props')),
+						', or ',
 						(0, esm.kt)(
 							'a',
 							{ parentName: 'p', href: 'https://swiperjs.com/swiper-api#parameters', target: '_blank', rel: 'nofollow noopener noreferrer' },
@@ -14033,7 +14264,7 @@
 						(0, esm.kt)(
 							'code',
 							{ parentName: 'pre', className: 'language-typescript' },
-							'const defaultRecommendationBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n'
+							'const defaultRecommendationBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n    480: {\n        slidesPerView: 2,\n        slidesPerGroup: 2,\n        spaceBetween: 10,\n    },\n    768: {\n        slidesPerView: 3,\n        slidesPerGroup: 3,\n        spaceBetween: 10,\n    },\n    1024: {\n        slidesPerView: 4,\n        slidesPerGroup: 4,\n        spaceBetween: 10,\n    },\n    1200: {\n        slidesPerView: 5,\n        slidesPerGroup: 5,\n        spaceBetween: 10,\n    },\n};\n\nconst defaultVerticalRecommendationBreakpoints = {\n    0: {\n        slidesPerView: 1,\n        slidesPerGroup: 1,\n        spaceBetween: 0,\n    },\n};\n'
 						)
 					),
 					(0, esm.kt)(
@@ -14534,7 +14765,7 @@
 				_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/types.ts'),
 				_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/utilities/defined.ts'),
 				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
@@ -14574,7 +14805,7 @@
 						_props2,
 						_props3,
 						_results,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.u)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.a)(),
 						props = Object.assign(
 							{
 								results:
@@ -17301,7 +17532,7 @@
 			__webpack_require__.d(__webpack_exports__, { n: () => CacheProvider });
 			var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				_emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
 				emotionCache = (0, __webpack_require__('../../node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js').Z)({ key: 'ss', prepend: !0 }),
 				CacheProvider = function CacheProvider(props) {
@@ -18039,6 +18270,9 @@
 					});
 				};
 			}
+			function AbstractController_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
 			function AbstractController_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -18059,11 +18293,10 @@
 							eventManager = _ref.eventManager,
 							profiler = _ref.profiler,
 							logger = _ref.logger,
-							tracker = _ref.tracker;
+							tracker = _ref.tracker,
+							context = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
 						if (
-							((function AbstractController_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, AbstractController),
+							(AbstractController_classCallCheck(this, AbstractController),
 							(this.type = 'abstract'),
 							(this.targeters = {}),
 							(this._initialized = !1),
@@ -18105,6 +18338,7 @@
 							(this.profiler = profiler),
 							(this.log = logger),
 							(this.tracker = tracker),
+							(this.context = context),
 							this.log.setNamespace(this.config.id),
 							this.profiler.setNamespace(this.config.id),
 							null !== (_url = url(window.location.href)) &&
@@ -18414,7 +18648,7 @@
 							superClass && _setPrototypeOf(subClass, superClass);
 					})(RecommendationController, _AbstractController);
 					var _super = _createSuper(RecommendationController);
-					function RecommendationController(config, _ref) {
+					function RecommendationController(config, _ref, context) {
 						var _this,
 							client = _ref.client,
 							store = _ref.store,
@@ -18427,7 +18661,8 @@
 							((function RecommendationController_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 							})(this, RecommendationController),
-							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker })).type = 'recommendation'),
+							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
+								'recommendation'),
 							(_this.events = { click: null, impression: null, render: null, product: {} }),
 							(_this.track = {
 								product: {
@@ -18840,11 +19075,16 @@
 			var NetworkCache_defaultConfig = { enabled: !0, ttl: 3e5, maxSize: 200, purgeable: !0 },
 				NetworkCache = (function () {
 					function NetworkCache(config) {
+						var _this = this;
 						!(function NetworkCache_classCallCheck(instance, Constructor) {
 							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 						})(this, NetworkCache),
 							(this.memoryCache = {}),
-							(this.config = cjs_default()(NetworkCache_defaultConfig, config || {}));
+							(this.config = cjs_default()(NetworkCache_defaultConfig, config || {})),
+							this.config.entries &&
+								Object.keys(this.config.entries).map(function (key) {
+									_this.set(key, _this.config.entries[key]);
+								});
 					}
 					return (
 						(function NetworkCache_createClass(Constructor, protoProps, staticProps) {
@@ -18877,16 +19117,16 @@
 							{
 								key: 'set',
 								value: function set(key, value) {
-									var _this = this;
+									var _this2 = this;
 									if (this.config.enabled)
 										try {
 											!(function () {
-												var cacheObject = { value, expires: Date.now() + _this.config.ttl, purgeable: _this.config.purgeable };
-												_this.memoryCache[key] = cacheObject;
+												var cacheObject = { value, expires: Date.now() + _this2.config.ttl, purgeable: _this2.config.purgeable };
+												_this2.memoryCache[key] = cacheObject;
 												var stored = sessionStorage.getItem('ss-networkcache'),
 													newStored = Object.assign({}, stored && JSON.parse(stored));
 												newStored[key] = cacheObject;
-												for (var size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024; size > _this.config.maxSize; ) {
+												for (var size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024; size > _this2.config.maxSize; ) {
 													var oldestKey = Object.keys(newStored)
 														.filter(function (key) {
 															return newStored[key].purgeable;
@@ -18897,7 +19137,7 @@
 													if (!oldestKey) break;
 													delete newStored[oldestKey], (size = new Blob([JSON.stringify(newStored)], { endings: 'native' }).size / 1024);
 												}
-												size < _this.config.maxSize && sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
+												size < _this2.config.maxSize && sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
 											})();
 										} catch (err) {
 											console.warn('something went wrong, browser might not have cookies enabled');
@@ -18992,7 +19232,7 @@
 									return _ref.apply(this, arguments);
 								};
 							})()),
-							(this.cache = new NetworkCache(configuration.cacheSettings));
+							(this.cache = new NetworkCache(configuration.cache));
 					}
 					var _request;
 					return (
@@ -19123,9 +19363,9 @@
 					return (
 						Abstract_createClass(ApiConfiguration, [
 							{
-								key: 'cacheSettings',
+								key: 'cache',
 								get: function get() {
-									return this.configuration.cacheSettings;
+									return this.configuration.cache;
 								},
 							},
 							{
@@ -20236,8 +20476,8 @@
 							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 						})(this, HybridAPI),
 						((_this = _super.call(this, configuration)).requesters = {
-							legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: _this.configuration.cacheSettings })),
-							suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cacheSettings: _this.configuration.cacheSettings })),
+							legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cache: _this.configuration.cache })),
+							suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cache: _this.configuration.cache })),
 						}),
 						_this
 					);
@@ -20397,7 +20637,7 @@
 						: count + keyLength + 1 + ('' + value).length;
 				}, 1);
 			}
-			var _excluded = ['tags'];
+			var _excluded = ['tags', 'limits'];
 			function Recommend_slicedToArray(arr, i) {
 				return (
 					(function Recommend_arrayWithHoles(arr) {
@@ -20632,6 +20872,7 @@
 									((_batchRecommendations = Recommend_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee3(parameters) {
 											var tags,
+												limits,
 												otherParams,
 												_ref2,
 												tag,
@@ -20646,6 +20887,7 @@
 															case 0:
 																if (
 																	((tags = parameters.tags),
+																	(limits = parameters.limits),
 																	(otherParams = _objectWithoutProperties(parameters, _excluded)),
 																	(_ref2 = Recommend_slicedToArray(tags || [], 1)),
 																	(tag = _ref2[0]))
@@ -20660,12 +20902,13 @@
 																	'batched' in otherParams && (otherParams.batched && (key = otherParams.siteId), delete otherParams.batched),
 																	(this.batches[key] = this.batches[key] || {
 																		timeout: null,
-																		request: Object.assign({ tags: [] }, otherParams),
+																		request: Object.assign({ tags: [], limits: [] }, otherParams),
 																		deferreds: [],
 																	}),
 																	(paramBatch = this.batches[key]),
 																	(deferred = new Deferred()),
 																	paramBatch.request.tags.push(tag),
+																	(paramBatch.request.limits = paramBatch.request.limits.concat(limits)),
 																	paramBatch.deferreds.push(deferred),
 																	window.clearTimeout(paramBatch.timeout),
 																	(paramBatch.timeout = window.setTimeout(
@@ -20714,7 +20957,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 14:
+															case 15:
 															case 'end':
 																return _context3.stop();
 														}
@@ -20944,7 +21187,7 @@
 											void 0 === _this$config$autocomp2
 												? void 0
 												: _this$config$autocomp2.origin,
-										cacheSettings: this.config.autocomplete.cache,
+										cache: this.config.autocomplete.cache,
 									})
 								),
 								meta: new HybridAPI(
@@ -20956,7 +21199,7 @@
 											void 0 === _this$config$meta$api
 												? void 0
 												: _this$config$meta$api.origin,
-										cacheSettings: this.config.meta.cache,
+										cache: this.config.meta.cache,
 									})
 								),
 								recommend: new RecommendAPI(
@@ -20968,7 +21211,7 @@
 											void 0 === _this$config$recommen2
 												? void 0
 												: _this$config$recommen2.origin,
-										cacheSettings: this.config.recommend.cache,
+										cache: this.config.recommend.cache,
 									})
 								),
 								search: new HybridAPI(
@@ -20980,7 +21223,7 @@
 											void 0 === _this$config$search$a
 												? void 0
 												: _this$config$search$a.origin,
-										cacheSettings: this.config.search.cache,
+										cache: this.config.search.cache,
 									})
 								),
 								suggest: new SuggestAPI(
@@ -20992,7 +21235,7 @@
 											void 0 === _this$config$suggest$
 												? void 0
 												: _this$config$suggest$.origin,
-										cacheSettings: this.config.suggest.cache,
+										cache: this.config.suggest.cache,
 									})
 								),
 							});
@@ -23052,7 +23295,7 @@
 							return !isIE() || isIE() >= 10;
 						},
 						cookies: function cookies() {
-							return window.navigator && window.navigator.cookieEnabled && !window.navigator.doNotTrack;
+							return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
 						},
 						storage: function storage() {
 							try {
@@ -23439,7 +23682,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.20.4' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.20.5' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -23509,7 +23752,7 @@
 												siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
 												var storedShopperId = _this.getShopperId();
 												if (((data.id = '' + data.id), storedShopperId != data.id)) {
-													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id);
+													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
 													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
 													return _this.track.event(payload);
 												}
@@ -23539,7 +23782,8 @@
 													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
 														return item.trim();
 													});
-												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6);
+												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6),
+													lastViewedProducts.includes(sku) || _this.sendPreflight();
 											}
 											return (
 												null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })),
@@ -23706,6 +23950,39 @@
 								var shopperId = cookies.get('ssShopperId');
 								if (shopperId) return shopperId;
 							}),
+							(this.sendPreflight = function () {
+								var userId = _this.getUserId(),
+									siteId = _this.context.website.trackingCode,
+									shopper = _this.getShopperId(),
+									cart = _this.cookies.cart.get(),
+									lastViewed = _this.cookies.viewed.get();
+								if (userId && siteId && (shopper || cart.length || lastViewed.length)) {
+									var preflightParams = { userId, siteId },
+										queryStringParams = '?userId=' + encodeURIComponent(userId) + '&siteId=' + encodeURIComponent(siteId);
+									shopper && ((preflightParams.shopper = shopper), (queryStringParams += '&shopper=' + encodeURIComponent(shopper))),
+										cart.length &&
+											((preflightParams.cart = cart),
+											(queryStringParams += cart
+												.map(function (item) {
+													return '&cart=' + encodeURIComponent(item);
+												})
+												.join(''))),
+										lastViewed.length &&
+											((preflightParams.lastViewed = lastViewed),
+											(queryStringParams += lastViewed
+												.map(function (item) {
+													return '&lastViewed=' + encodeURIComponent(item);
+												})
+												.join('')));
+									var endpoint = 'https://' + siteId + '.a.searchspring.io/api/personalization/preflightCache',
+										xhr = new XMLHttpRequest();
+									charsParams(preflightParams) > 1024
+										? (xhr.open('POST', endpoint),
+										  xhr.setRequestHeader('Content-Type', 'application/json'),
+										  xhr.send(JSON.stringify(preflightParams)))
+										: (xhr.open('GET', endpoint + queryStringParams), xhr.send());
+								}
+							}),
 							(this.cookies = {
 								cart: {
 									get: function get() {
@@ -23718,7 +23995,10 @@
 													return item.trim();
 												}),
 												uniqueCartItems = Array.from(new Set(cartItems));
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0);
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												cartItems.filter(function (item) {
+													return items.includes(item);
+												}).length !== items.length && _this.sendPreflight();
 										}
 									},
 									add: function add(items) {
@@ -23730,7 +24010,10 @@
 												uniqueCartItems = Array.from(
 													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
 												);
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0);
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												currentCartItems.filter(function (item) {
+													return itemsToAdd.includes(item);
+												}).length !== itemsToAdd.length && _this.sendPreflight();
 										}
 									},
 									remove: function remove(items) {
@@ -23742,11 +24025,12 @@
 												updatedItems = currentCartItems.filter(function (item) {
 													return !itemsToRemove.includes(item);
 												});
-											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0);
+											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
+												currentCartItems.length !== updatedItems.length && _this.sendPreflight();
 										}
 									},
 									clear: function clear() {
-										cookies.unset('ssCartProducts');
+										_this.cookies.cart.get().length && (cookies.unset('ssCartProducts'), _this.sendPreflight());
 									},
 								},
 								viewed: {
@@ -23788,20 +24072,23 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.20.4')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.20.5')),
 							this.targeters.push(
 								new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
-									var _getContext = (function getContext(evaluate, script) {
-											var _scriptElem$getAttrib, _scriptElem$id, _scriptElem$src;
-											if (
-												((script && 'string' != typeof script) ||
-													(script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
-														.sort(function (a, b) {
-															return a.innerHTML.length - b.innerHTML.length;
-														})
-														.pop()),
-												!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
-											)
+									var _getContext = (function getContext() {
+											var _scriptElem$getAttrib,
+												_scriptElem$id,
+												_scriptElem$src,
+												evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
+												script = arguments.length > 1 ? arguments[1] : void 0;
+											if (!script || 'string' == typeof script) {
+												script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
+													.sort(function (a, b) {
+														return a.innerHTML.length - b.innerHTML.length;
+													})
+													.pop();
+											}
+											if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
 												throw new Error('getContext: did not find a script tag');
 											var scriptElem = script;
 											if (
@@ -23825,22 +24112,24 @@
 											)
 												throw new Error('getContext: first parameter must be an array of strings');
 											var variables = {};
-											Object.values(scriptElem.attributes).map(function (attr) {
-												variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
-											});
-											try {
+											return (
 												null == evaluate ||
 													evaluate.forEach(function (name) {
 														var fn = new Function(
-															'\n\t\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t\t' + scriptElem.innerHTML + '\n\t\t\t\treturn ' + name + ';\n\t\t\t'
+															'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
 														);
 														variables[name] = fn();
-													});
-											} catch (err) {
-												throw (console.error('getContext: failed to parse variables - error in context'), err);
-											}
-											return variables;
-										})(['item', 'items', 'siteId', 'shopper', 'order'], elem),
+													}),
+												Object.values(scriptElem.attributes).map(function (attr) {
+													var name = attr.nodeName;
+													evaluate.includes(name) && (variables[name] = scriptElem.getAttribute(name));
+												}),
+												Object.keys(variables).forEach(function (key) {
+													void 0 === variables[key] && delete variables[key];
+												}),
+												variables
+											);
+										})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
 										item = _getContext.item,
 										items = _getContext.items,
 										siteId = _getContext.siteId,
@@ -23861,7 +24150,7 @@
 											_this.track.order.transaction({ order, items }, siteId);
 											break;
 										default:
-											console.error(type + ' event is not supported or incorrect');
+											console.error("event '" + type + "' is not supported");
 									}
 								})
 							),
@@ -24105,7 +24394,7 @@
 					var _bind,
 						_setFocused,
 						_super = AutocompleteController_createSuper(AutocompleteController);
-					function AutocompleteController(config, _ref) {
+					function AutocompleteController(config, _ref, context) {
 						var _this,
 							_formSubmit,
 							_enterKey,
@@ -24120,7 +24409,8 @@
 							(function AutocompleteController_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 							})(this, AutocompleteController),
-							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker })).type = 'autocomplete'),
+							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
+								'autocomplete'),
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
@@ -26267,7 +26557,7 @@
 													});
 													return new HierarchyValue(services, FacetStore_assertThisInitialized(_this2), value, filteredValues);
 												}
-												return new Value(services, FacetStore_assertThisInitialized(_this2), value);
+												return (value.value = value.value.toString()), new Value(services, FacetStore_assertThisInitialized(_this2), value);
 											case 'range-buckets':
 												return new RangeValue(services, FacetStore_assertThisInitialized(_this2), value);
 										}
@@ -26950,7 +27240,7 @@
 							superClass && SearchController_setPrototypeOf(subClass, superClass);
 					})(SearchController, _AbstractController);
 					var _super = SearchController_createSuper(SearchController);
-					function SearchController(config, _ref) {
+					function SearchController(config, _ref, context) {
 						var _this,
 							client = _ref.client,
 							store = _ref.store,
@@ -26963,7 +27253,7 @@
 							(function SearchController_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 							})(this, SearchController),
-							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker })).type = 'search'),
+							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type = 'search'),
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
@@ -27695,15 +27985,19 @@
 									var cntrlr = (controllers[id] = (function (config, services) {
 										var urlManager =
 											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach(!0);
-										return new RecommendationController(config.controller, {
-											client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-											store: (null == services ? void 0 : services.store) || new RecommendationStore(config.controller, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-										});
+										return new RecommendationController(
+											config.controller,
+											{
+												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+												store: (null == services ? void 0 : services.store) || new RecommendationStore(config.controller, { urlManager }),
+												urlManager,
+												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+												logger: (null == services ? void 0 : services.logger) || new Logger(),
+												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+											},
+											config.context
+										);
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -27747,15 +28041,19 @@
 									var cntrlr = (controllers[id] = (function (config, services) {
 										var urlManager =
 											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();
-										return new AutocompleteController(config.controller, {
-											client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-											store: (null == services ? void 0 : services.store) || new AutocompleteStore(config.controller, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-										});
+										return new AutocompleteController(
+											config.controller,
+											{
+												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+												store: (null == services ? void 0 : services.store) || new AutocompleteStore(config.controller, { urlManager }),
+												urlManager,
+												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+												logger: (null == services ? void 0 : services.logger) || new Logger(),
+												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+											},
+											config.context
+										);
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -27798,15 +28096,19 @@
 									if (controllers[id]) return controllers[id];
 									var cntrlr = (controllers[id] = (function (config, services) {
 										var urlManager = (null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker);
-										return new SearchController(config.controller, {
-											client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-											store: (null == services ? void 0 : services.store) || new SearchStore(config.controller, { urlManager }),
-											urlManager,
-											eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-											profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-											logger: (null == services ? void 0 : services.logger) || new Logger(),
-											tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-										});
+										return new SearchController(
+											config.controller,
+											{
+												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
+												store: (null == services ? void 0 : services.store) || new SearchStore(config.controller, { urlManager }),
+												urlManager,
+												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
+												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
+												logger: (null == services ? void 0 : services.logger) || new Logger(),
+												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
+											},
+											config.context
+										);
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -27874,7 +28176,7 @@
 					},
 					components: {},
 				},
-				emotion_element_699e6908_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-699e6908.browser.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
 				injectStylesIntoStyleTag = __webpack_require__(
 					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
 				),
@@ -27887,7 +28189,7 @@
 			styles.Z.locals;
 			var decorators = [
 					function (Story) {
-						return (0, preact_module.h)(emotion_element_699e6908_browser_esm.a, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
 					},
 				],
 				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
@@ -28299,6 +28601,32 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} layout={'grid'} />\n"
+						)
+					),
+					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'onclick' }, 'onClick'),
+					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						'p',
+						null,
+						'The ',
+						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'onClick'),
+						' prop contains a custom onClick event handler. Function is passed the click event. '
+					),
+					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						'pre',
+						null,
+						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-typescript' },
+							"const CustomBannerClick = (e) => {\n    console.log('You Clicked a banner!' , e)\n};\n"
+						)
+					),
+					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+						'pre',
+						null,
+						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<InlineBanner banner={controller?.store?.merchandising?.content.inline[0]} onClick={CustomBannerClick} />\n'
 						)
 					)
 				);

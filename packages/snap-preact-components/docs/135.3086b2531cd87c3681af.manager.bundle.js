@@ -468,7 +468,7 @@
 				}
 				return target;
 			}
-			var Note = esm.zo.div(function (_ref) {
+			var Note = esm.styled.div(function (_ref) {
 					var theme = _ref.theme;
 					return {
 						padding: '2px 6px',
@@ -579,20 +579,20 @@
 				}
 				return target;
 			}
-			var Wrapper = esm.zo.div({ position: 'relative', maxWidth: 250 }),
-				PickerTooltip = (0, esm.zo)(lazy_WithTooltip.R)({ position: 'absolute', zIndex: 1, top: 4, left: 4 }),
-				TooltipContent = esm.zo.div({
+			var Wrapper = esm.styled.div({ position: 'relative', maxWidth: 250 }),
+				PickerTooltip = (0, esm.styled)(lazy_WithTooltip.R)({ position: 'absolute', zIndex: 1, top: 4, left: 4 }),
+				TooltipContent = esm.styled.div({
 					width: 200,
 					margin: 5,
 					'.react-colorful__saturation': { borderRadius: '4px 4px 0 0' },
 					'.react-colorful__hue': { boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 5%)' },
 					'.react-colorful__last-control': { borderRadius: '0 0 4px 4px' },
 				}),
-				Color_Note = (0, esm.zo)(TooltipNote)(function (_ref) {
+				Color_Note = (0, esm.styled)(TooltipNote)(function (_ref) {
 					return { fontFamily: _ref.theme.typography.fonts.base };
 				}),
-				Swatches = esm.zo.div({ display: 'grid', gridTemplateColumns: 'repeat(9, 16px)', gap: 6, padding: 3, marginTop: 5, width: 200 }),
-				SwatchColor = esm.zo.div(function (_ref2) {
+				Swatches = esm.styled.div({ display: 'grid', gridTemplateColumns: 'repeat(9, 16px)', gap: 6, padding: 3, marginTop: 5, width: 200 }),
+				SwatchColor = esm.styled.div(function (_ref2) {
 					var theme = _ref2.theme;
 					return {
 						width: 16,
@@ -620,10 +620,10 @@
 				};
 			Swatch.displayName = 'Swatch';
 			var ColorSpace,
-				Input = (0, esm.zo)(esm_form.l.Input)(function (_ref4) {
+				Input = (0, esm.styled)(esm_form.l.Input)(function (_ref4) {
 					return { width: '100%', paddingLeft: 30, paddingRight: 30, boxSizing: 'border-box', fontFamily: _ref4.theme.typography.fonts.base };
 				}),
-				ToggleIcon = (0, esm.zo)(icon.P)(function (_ref5) {
+				ToggleIcon = (0, esm.styled)(icon.P)(function (_ref5) {
 					return {
 						position: 'absolute',
 						zIndex: 1,
