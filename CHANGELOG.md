@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.5](https://github.com/searchspring/snap/compare/v0.20.4...v0.20.5) (2022-02-25)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.20.4](https://github.com/searchspring/snap/compare/v0.20.3...v0.20.4) (2022-02-02)
+
+
+### Bug Fixes
+
+* **tracker:** remove preventDefault from attribute click event listener ([09734c9](https://github.com/searchspring/snap/commit/09734c9252dbaed8d9a453e8de7ed1c0f55accce))
+
+
+
+
+
 ## [0.20.3](https://github.com/searchspring/snap/compare/v0.20.2...v0.20.3) (2022-02-02)
 
 **Note:** Version bump only for package @searchspring/snap

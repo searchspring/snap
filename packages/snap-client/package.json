@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-client",
-	"version": "0.20.3",
+	"version": "0.20.5",
 	"description": "Snap Client",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,7 +20,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.20.3",
+		"@searchspring/snap-toolbox": "^0.20.5",
 		"deepmerge": "^4.2.2"
 	},
 	"sideEffects": false,

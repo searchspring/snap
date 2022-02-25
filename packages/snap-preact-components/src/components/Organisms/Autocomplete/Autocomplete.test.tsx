@@ -70,13 +70,13 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
-
-		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		await new Promise((r) => setTimeout(r, INPUT_DELAY));
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
@@ -99,6 +99,8 @@ describe('Autocomplete Component', () => {
 			breakpoints,
 		};
 
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
@@ -106,7 +108,6 @@ describe('Autocomplete Component', () => {
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 		expect(results[0]).toBeInTheDocument();
 		expect(results.length).toEqual(9);
@@ -121,14 +122,14 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 1000));
-
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 500));
 
 		//first test the terms.
 		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
@@ -150,7 +151,7 @@ describe('Autocomplete Component', () => {
 		userEvent.hover(termLinks[1]);
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, 1000));
+		await new Promise((r) => setTimeout(r, 500));
 
 		//now lets check for the new results
 		let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
@@ -179,7 +180,7 @@ describe('Autocomplete Component', () => {
 		userEvent.hover(facetOptions[0]);
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, 1000));
+		await new Promise((r) => setTimeout(r, 500));
 
 		//check for the new results
 		let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
