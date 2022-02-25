@@ -35,11 +35,6 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 
 	const variables: ContextVariables = {};
 
-	// grab all element attributes and put into variables
-	Object.values(scriptElem.attributes).map((attr) => {
-		variables[attr.nodeName] = scriptElem.getAttribute(attr.nodeName);
-	});
-
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
 		const fn = new Function(`
@@ -49,6 +44,19 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		`);
 
 		variables[name] = fn();
+	});
+
+	// grab element attributes and put into variables
+	Object.values(scriptElem.attributes).map((attr) => {
+		const name = attr.nodeName;
+		if (evaluate.includes(name)) {
+			variables[name] = scriptElem.getAttribute(name);
+		}
+	});
+
+	// remove undefined entries
+	Object.keys(variables).forEach((key) => {
+		if (typeof variables[key] === 'undefined') delete variables[key];
 	});
 
 	return variables;

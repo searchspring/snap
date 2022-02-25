@@ -82,7 +82,10 @@ export class Tracker {
 		// one targeter to rule them all
 		this.targeters.push(
 			new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
-				const { item, items, siteId, shopper, order, type } = getContext(['item', 'items', 'siteId', 'shopper', 'order'], elem as HTMLScriptElement);
+				const { item, items, siteId, shopper, order, type } = getContext(
+					['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+					elem as HTMLScriptElement
+				);
 
 				switch (type) {
 					case 'searchspring/track/shopper/login':
@@ -98,7 +101,7 @@ export class Tracker {
 						this.track.order.transaction({ order, items }, siteId);
 						break;
 					default:
-						console.error(`${type} event is not supported or incorrect`);
+						console.error(`event '${type}' is not supported`);
 						break;
 				}
 			})

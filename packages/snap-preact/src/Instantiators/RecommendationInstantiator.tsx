@@ -102,7 +102,7 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const contextGlobals: any = {};
 
-				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options'], elem as HTMLScriptElement);
+				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options', 'profile'], elem as HTMLScriptElement);
 				const context = deepmerge(this.context, elemContext);
 
 				const { shopper, shopperId, product, seed, options } = context;
