@@ -7,7 +7,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, RecommendationController, Attachments } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
@@ -24,6 +24,7 @@ export type RecommendationInstantiatorConfig = {
 	selector?: string;
 	services?: SnapControllerServices;
 	url?: UrlTranslatorConfig;
+	context?: ContextVariables;
 };
 
 export type RecommendationInstantiatorServices = {
@@ -40,13 +41,15 @@ export class RecommendationInstantiator {
 	tracker: Tracker;
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
+	context: ContextVariables;
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
 	public targeter: DomTargeter;
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
+	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
+		this.context = deepmerge(context || {}, config.context || {});
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -90,16 +93,15 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const contextGlobals: any = {};
 
-				const { shopper, shopperId, product, seed, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'options'],
-					elem as HTMLScriptElement
-				);
+				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options', 'profile'], elem as HTMLScriptElement);
+				const context = deepmerge(this.context, elemContext);
+
+				const { shopper, shopperId, product, seed, options } = context;
 
 				/*
 					type instantiatorContext = {
 						shopper?: {
-							id?: string;
-							cart?: Array<{ sku: string; }>;
+							id: string;
 						};
 						shopperId?: string;
 						product?: string;
@@ -158,6 +160,7 @@ export class RecommendationInstantiator {
 					{
 						url: this.config.url || {},
 						controller: controllerConfig,
+						context,
 					},
 					{ client, tracker }
 				);

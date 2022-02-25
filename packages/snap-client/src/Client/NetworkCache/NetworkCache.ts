@@ -17,6 +17,11 @@ export class NetworkCache {
 
 	constructor(config?: CacheConfig) {
 		this.config = deepmerge(defaultConfig, config || {});
+		if (this.config.entries) {
+			Object.keys(this.config.entries).map((key) => {
+				this.set(key, this.config.entries[key]);
+			});
+		}
 	}
 
 	public get(key: string): Response {

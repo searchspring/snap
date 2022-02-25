@@ -16,15 +16,19 @@ configureMobx({ useProxies: 'never' });
 export default (config: SnapAutocompleteControllerConfig, services?: SnapControllerServices): AutocompleteController => {
 	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();
 
-	const cntrlr = new AutocompleteController(config.controller, {
-		client: services?.client || new Client(config.client.globals, config.client.config),
-		store: services?.store || new AutocompleteStore(config.controller, { urlManager }),
-		urlManager,
-		eventManager: services?.eventManager || new EventManager(),
-		profiler: services?.profiler || new Profiler(),
-		logger: services?.logger || new Logger(),
-		tracker: services?.tracker || new Tracker(config.client.globals),
-	});
+	const cntrlr = new AutocompleteController(
+		config.controller,
+		{
+			client: services?.client || new Client(config.client.globals, config.client.config),
+			store: services?.store || new AutocompleteStore(config.controller, { urlManager }),
+			urlManager,
+			eventManager: services?.eventManager || new EventManager(),
+			profiler: services?.profiler || new Profiler(),
+			logger: services?.logger || new Logger(),
+			tracker: services?.tracker || new Tracker(config.client.globals),
+		},
+		config.context
+	);
 
 	return cntrlr;
 };

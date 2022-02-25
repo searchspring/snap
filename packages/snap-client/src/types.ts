@@ -26,6 +26,7 @@ export type CacheConfig = {
 	ttl?: number;
 	maxSize?: number;
 	purgeable?: boolean;
+	entries?: { [key: string]: Response };
 };
 
 export type CacheEntry = {
