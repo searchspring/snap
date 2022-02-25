@@ -25,7 +25,7 @@ export class API {
 	public cache: NetworkCache;
 
 	constructor(protected configuration: ApiConfiguration) {
-		this.cache = new NetworkCache(configuration.cacheSettings);
+		this.cache = new NetworkCache(configuration.cache);
 	}
 
 	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
@@ -109,7 +109,7 @@ export interface ApiConfigurationParameters {
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
 	maxRetry?: number;
-	cacheSettings?: CacheConfig;
+	cache?: CacheConfig;
 }
 
 export class ApiConfiguration {
@@ -119,8 +119,8 @@ export class ApiConfiguration {
 		}
 	}
 
-	get cacheSettings(): CacheConfig {
-		return this.configuration.cacheSettings;
+	get cache(): CacheConfig {
+		return this.configuration.cache;
 	}
 
 	get maxRetry(): number {

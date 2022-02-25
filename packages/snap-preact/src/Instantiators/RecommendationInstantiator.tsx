@@ -1,4 +1,5 @@
 import { render } from 'preact';
+import deepmerge from 'deepmerge';
 
 import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
 
@@ -6,7 +7,7 @@ import type { Logger } from '@searchspring/snap-logger';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { Client } from '@searchspring/snap-client';
 import type { Tracker } from '@searchspring/snap-tracker';
-import type { AbstractController, RecommendationController, Attachments } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
@@ -18,10 +19,12 @@ export type RecommendationInstantiatorConfig = {
 		branch: string;
 		realtime?: boolean;
 		batched?: boolean;
+		limit?: number;
 	} & Attachments;
 	selector?: string;
 	services?: SnapControllerServices;
 	url?: UrlTranslatorConfig;
+	context?: ContextVariables;
 };
 
 export type RecommendationInstantiatorServices = {
@@ -38,13 +41,15 @@ export class RecommendationInstantiator {
 	tracker: Tracker;
 	logger: Logger;
 	config: RecommendationInstantiatorConfig;
+	context: ContextVariables;
 	uses: Attachments[] = [];
 	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
 	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
 	public targeter: DomTargeter;
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices) {
+	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
+		this.context = deepmerge(context || {}, config.context || {});
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -86,16 +91,18 @@ export class RecommendationInstantiator {
 				},
 			],
 			async (target, injectedElem, elem) => {
-				const globals: any = {};
+				const contextGlobals: any = {};
 
-				const { shopper, shopperId, product, seed, options } = getContext(
-					['shopperId', 'shopper', 'product', 'seed', 'options'],
-					elem as HTMLScriptElement
-				);
+				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options', 'profile'], elem as HTMLScriptElement);
+				const context = deepmerge(this.context, elemContext);
+
+				const { shopper, shopperId, product, seed, options } = context;
 
 				/*
 					type instantiatorContext = {
-						shopper?: string;
+						shopper?: {
+							id: string;
+						};
 						shopperId?: string;
 						product?: string;
 						seed?: string;
@@ -105,36 +112,45 @@ export class RecommendationInstantiator {
 							batched?: boolean;
 							realtime?: boolean;
 							categories?: any;
+							limit?: number;
 						}
 					}
 				*/
 
 				if (shopper || shopperId) {
-					globals.shopper = shopper || shopperId;
+					contextGlobals.shopper = shopper?.id || shopperId;
 				}
 				if (product || seed) {
-					globals.product = product || seed;
+					contextGlobals.product = product || seed;
 				}
 				if (options?.branch) {
-					globals.branch = options.branch;
+					contextGlobals.branch = options.branch;
 				}
 				if (options?.siteId) {
-					globals.siteId = options.siteId;
+					contextGlobals.siteId = options.siteId;
 				}
 				if (options?.categories) {
-					globals.categories = options.categories;
+					contextGlobals.categories = options.categories;
+				}
+				if (options?.limit && Number.isInteger(Number(options?.limit))) {
+					contextGlobals.limits = Number(options?.limit);
 				}
 
 				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
+
+				const defaultGlobals = {
+					limits: 20,
+				};
+				const globals = deepmerge(deepmerge(defaultGlobals, this.config.config?.globals || {}), contextGlobals);
 
 				const controllerConfig = {
 					id: `recommend_${tag + (profileCount[tag] - 1)}`,
 					tag,
 					batched: options?.batched ?? true,
 					realtime: Boolean(options?.realtime),
-					globals,
 					...this.config.config,
+					globals,
 				};
 
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
@@ -144,6 +160,7 @@ export class RecommendationInstantiator {
 					{
 						url: this.config.url || {},
 						controller: controllerConfig,
+						context,
 					},
 					{ client, tracker }
 				);

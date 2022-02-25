@@ -54,6 +54,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		onClick: {
+			description: 'Custom onClick event handler',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			action: 'onClick',
+		},
 		...componentArgs,
 	},
 	decorators: [

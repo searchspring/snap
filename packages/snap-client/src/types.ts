@@ -26,6 +26,7 @@ export type CacheConfig = {
 	ttl?: number;
 	maxSize?: number;
 	purgeable?: boolean;
+	entries?: { [key: string]: Response };
 };
 
 export type CacheEntry = {
@@ -46,5 +47,3 @@ export type ClientGlobals = {
 	siteId: string;
 	[configurationPath: string]: any;
 };
-
-export type ParameterObject = Record<string, boolean | string | string[] | number | number[]>;

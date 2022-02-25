@@ -1,13 +1,14 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { SelectionStore } from './SelectionStore';
 import { StorageStore } from '../../Storage/StorageStore';
 
-import { SearchData } from '../../__mocks__/SearchData';
-
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
+
+const mockData = new MockData({ siteId: 'ga9kq2', search: 'hierarchy' });
 
 describe('SelectionStore', () => {
 	it('has a symbol species of Array', () => {
@@ -32,7 +33,8 @@ describe('SelectionStore', () => {
 		let data, store, selectionValue;
 
 		beforeAll(() => {
-			data = new SearchData({ siteId: 'ga9kq2', search: 'hierarchy' });
+			data = mockData.searchMeta();
+
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
 		});
 
@@ -64,7 +66,8 @@ describe('SelectionStore', () => {
 			expect(fn).toBeCalled();
 
 			// change data to simulate API call due to urlManager change via set().go() invocation
-			data = new SearchData({ siteId: 'ga9kq2', search: 'hierarchy_selected' });
+			data = mockData.searchMeta('hierarchy_selected');
+
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
 
 			store.forEach((selection, index) => {
@@ -142,7 +145,8 @@ describe('SelectionStore', () => {
 		let data, store, storage, selectionValue;
 
 		beforeAll(() => {
-			data = new SearchData({ siteId: 'ga9kq2', search: 'hierarchy' });
+			data = mockData.searchMeta('hierarchy');
+
 			storage = new StorageStore();
 
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
@@ -167,7 +171,8 @@ describe('SelectionStore', () => {
 			expect(fn).toBeCalled();
 
 			// change data to simulate API call due to urlManager change via set().go() invocation
-			data = new SearchData({ siteId: 'ga9kq2', search: 'hierarchy_selected' });
+			data = mockData.searchMeta('hierarchy_selected');
+
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
 
 			expect(store.length).toBe(config.fields.length + 1); // 1 -> 2 selections after selection
@@ -205,7 +210,8 @@ describe('SelectionStore', () => {
 		};
 
 		beforeAll(() => {
-			data = new SearchData({ siteId: 'ga9kq2', search: 'non_hierarchy' });
+			data = mockData.searchMeta('non_hierarchy');
+
 			storage = new StorageStore();
 
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
@@ -243,7 +249,8 @@ describe('SelectionStore', () => {
 			store[0].select(selectionValue);
 			expect(fn).toBeCalled();
 
-			data = new SearchData({ siteId: 'ga9kq2', search: 'non_hierarchy_selected' });
+			data = mockData.searchMeta('non_hierarchy_selected');
+
 			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
 
 			expect(store[0].selected).toBe(selectionValue);

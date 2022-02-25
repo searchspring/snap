@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { SearchStore } from './SearchStore';
-import { SearchData } from '../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -11,10 +11,13 @@ const searchConfig = {
 	id: 'search',
 };
 
+const mockData = new MockData();
+
 describe('Search Store', () => {
 	let searchData;
+
 	beforeEach(() => {
-		searchData = new SearchData();
+		searchData = mockData.searchMeta();
 	});
 
 	it('returns correct initial state', () => {

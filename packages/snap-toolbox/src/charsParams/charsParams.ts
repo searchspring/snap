@@ -1,4 +1,4 @@
-import { ParameterObject } from '../../types';
+export type ParameterObject = Record<string, boolean | string | string[] | number | number[]>;
 
 export function charsParams(params: ParameterObject): number {
 	if (typeof params != 'object') {

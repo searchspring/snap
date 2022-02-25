@@ -6,9 +6,9 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
+import { MockClient } from '@searchspring/snap-shared';
 
 import { FinderController } from './FinderController';
-import { MockClient } from '../__mocks__/MockClient';
 
 const globals = { siteId: 'ga9kq2' };
 
@@ -57,7 +57,7 @@ describe('Finder Controller', () => {
 				logger: new Logger(),
 				tracker: new Tracker(globals),
 			});
-			controller.client.mockDataFile = 'finder.include.ss_accessory';
+			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 			controller.init();
 			await controller.search(); // /src/__mocks__/data/ga9kq2/searches/finder.include.ss_accessory.json
 

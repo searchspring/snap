@@ -2,6 +2,8 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { Facets } from './Facets';
 import { searchResponse } from '../../../mocks/searchResponse';
+import { ThemeProvider } from '../../../providers';
+import userEvent from '@testing-library/user-event';
 
 describe('Facets Component', () => {
 	it('renders', () => {
@@ -33,5 +35,74 @@ describe('Facets Component', () => {
 		const count = facetsElement.querySelectorAll('.ss__facet').length;
 		expect(count).toBeLessThanOrEqual(args.facets.length);
 		expect(count).toBe(args.limit);
+	});
+});
+
+describe('Facets Component is themeable', () => {
+	const globalTheme = {
+		components: {
+			facets: {
+				className: 'customClassName',
+			},
+		},
+	};
+
+	const args = {
+		facets: searchResponse.facets,
+		limit: 2,
+	};
+
+	it('is themeable with ThemeProvider', () => {
+		const rendered = render(
+			<ThemeProvider theme={globalTheme}>
+				<Facets {...args} />
+			</ThemeProvider>
+		);
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		expect(facetsElement).toHaveClass(globalTheme.components.facets.className);
+	});
+
+	it('is themeable with theme prop', () => {
+		const rendered = render(<Facets {...args} theme={globalTheme} />);
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		expect(facetsElement).toHaveClass(globalTheme.components.facets.className);
+	});
+
+	it('is themeable with theme prop overrides ThemeProvider', () => {
+		const theme = {
+			components: {
+				facets: {
+					className: 'otherCustomClassName',
+				},
+			},
+		};
+		const rendered = render(
+			<ThemeProvider theme={globalTheme}>
+				<Facets {...args} theme={theme} />
+			</ThemeProvider>
+		);
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		expect(facetsElement).toHaveClass(theme.components.facets.className);
+		expect(facetsElement).not.toHaveClass(globalTheme.components.facets.className);
+	});
+
+	it('can pass child component props via the theme', () => {
+		const clickFunc = jest.fn();
+		const theme2 = {
+			components: {
+				facetListOptions: {
+					onClick: clickFunc,
+				},
+			},
+		};
+
+		const rendered = render(<Facets {...args} theme={theme2} />);
+
+		expect(clickFunc).not.toHaveBeenCalled();
+
+		const resultElement = rendered.container.querySelector('.ss__facet-list-options__option');
+		userEvent.click(resultElement);
+
+		expect(clickFunc).toHaveBeenCalled();
 	});
 });

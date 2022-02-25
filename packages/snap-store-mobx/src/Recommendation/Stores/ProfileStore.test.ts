@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { ProfileStore } from './ProfileStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 describe('ProfileStore store', () => {
 	it('does not create profile with bad data', () => {
@@ -17,7 +18,8 @@ describe('ProfileStore store', () => {
 	});
 
 	it('create profile using mock profile data', () => {
-		const profile = new SearchData({ search: 'profile' }).profile;
+		const profile = mockData.recommend().profile;
+		console.log('profile?', profile);
 
 		const store = new ProfileStore(services, profile);
 		expect(store.tag).toStrictEqual(profile.tag);

@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
-import { getContext } from '@searchspring/snap-toolbox';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
@@ -12,17 +11,10 @@ import { SidebarSkel } from './components/Sidebar/Skel';
 import './styles/custom.scss';
 
 /*
-	context
- */
-
-const context = getContext(['shopper']);
-
-/*
 	configuration and instantiation
  */
 
 let config = {
-	context,
 	url: {
 		settings: {
 			coreType: 'query',
@@ -140,6 +132,26 @@ let config = {
 					{
 						name: 'finder',
 						selector: '#searchspring-finder',
+						component: async () => {
+							return (await import('./components/Finder/Finder')).Finder;
+						},
+					},
+				],
+			},
+			{
+				config: {
+					id: 'finder_hierarchy',
+					url: '/',
+					fields: [
+						{
+							field: 'ss_category_hierarchy',
+						},
+					],
+				},
+				targeters: [
+					{
+						name: 'finder_hierarchy',
+						selector: '#searchspring-finder-hierarchy',
 						component: async () => {
 							return (await import('./components/Finder/Finder')).Finder;
 						},

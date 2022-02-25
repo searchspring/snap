@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, featureFlags, version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { cookies, featureFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -21,6 +21,7 @@ import {
 	OrderTransactionData,
 	Product,
 	TrackerConfig,
+	PreflightRequestModel,
 } from './types';
 
 const BATCH_TIMEOUT = 150;
@@ -81,7 +82,10 @@ export class Tracker {
 		// one targeter to rule them all
 		this.targeters.push(
 			new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
-				const { item, items, siteId, shopper, order, type } = getContext(['item', 'items', 'siteId', 'shopper', 'order'], elem as HTMLScriptElement);
+				const { item, items, siteId, shopper, order, type } = getContext(
+					['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+					elem as HTMLScriptElement
+				);
 
 				switch (type) {
 					case 'searchspring/track/shopper/login':
@@ -97,7 +101,7 @@ export class Tracker {
 						this.track.order.transaction({ order, items }, siteId);
 						break;
 					default:
-						console.error(`${type} event is not supported or incorrect`);
+						console.error(`event '${type}' is not supported`);
 						break;
 				}
 			})
@@ -198,7 +202,7 @@ export class Tracker {
 					// user's logged in id has changed, update shopperId cookie send login event
 					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
 					this.context.shopperId = data.id;
-
+					this.sendPreflight();
 					const payload = {
 						type: BeaconType.LOGIN,
 						category: BeaconCategory.PERSONALIZATION,
@@ -243,6 +247,9 @@ export class Tracker {
 					const lastViewedProducts = this.cookies.viewed.get();
 					const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
 					cookies.set(VIEWED_PRODUCTS, uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','), COOKIE_SAMESITE, VIEWED_COOKIE_EXPIRATION);
+					if (!lastViewedProducts.includes(sku)) {
+						this.sendPreflight();
+					}
 				}
 
 				// legacy tracking
@@ -461,6 +468,47 @@ export class Tracker {
 		return shopperId;
 	};
 
+	sendPreflight = (): void => {
+		const userId = this.getUserId();
+		const siteId = this.context.website.trackingCode;
+		const shopper = this.getShopperId();
+		const cart = this.cookies.cart.get();
+		const lastViewed = this.cookies.viewed.get();
+
+		if (userId && siteId && (shopper || cart.length || lastViewed.length)) {
+			const preflightParams: PreflightRequestModel = {
+				userId,
+				siteId,
+			};
+
+			let queryStringParams = `?userId=${encodeURIComponent(userId)}&siteId=${encodeURIComponent(siteId)}`;
+			if (shopper) {
+				preflightParams.shopper = shopper;
+				queryStringParams += `&shopper=${encodeURIComponent(shopper)}`;
+			}
+			if (cart.length) {
+				preflightParams.cart = cart;
+				queryStringParams += cart.map((item) => `&cart=${encodeURIComponent(item)}`).join('');
+			}
+			if (lastViewed.length) {
+				preflightParams.lastViewed = lastViewed;
+				queryStringParams += lastViewed.map((item) => `&lastViewed=${encodeURIComponent(item)}`).join('');
+			}
+
+			const endpoint = `https://${siteId}.a.searchspring.io/api/personalization/preflightCache`;
+			const xhr = new XMLHttpRequest();
+
+			if (charsParams(preflightParams) > 1024) {
+				xhr.open('POST', endpoint);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.send(JSON.stringify(preflightParams));
+			} else {
+				xhr.open('GET', endpoint + queryStringParams);
+				xhr.send();
+			}
+		}
+	};
+
 	cookies = {
 		cart: {
 			get: (): string[] => {
@@ -475,6 +523,11 @@ export class Tracker {
 					const cartItems = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set(cartItems));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = cartItems.filter((item) => items.includes(item)).length !== items.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			add: (items: string[]): void => {
@@ -483,6 +536,11 @@ export class Tracker {
 					const itemsToAdd = items.map((item) => item.trim());
 					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = currentCartItems.filter((item) => itemsToAdd.includes(item)).length !== itemsToAdd.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			remove: (items: string[]): void => {
@@ -491,10 +549,18 @@ export class Tracker {
 					const itemsToRemove = items.map((item) => item.trim());
 					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
 					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0);
+
+					const itemsHaveChanged = currentCartItems.length !== updatedItems.length;
+					if (itemsHaveChanged) {
+						this.sendPreflight();
+					}
 				}
 			},
 			clear: () => {
-				cookies.unset(CART_PRODUCTS);
+				if (this.cookies.cart.get().length) {
+					cookies.unset(CART_PRODUCTS);
+					this.sendPreflight();
+				}
 			},
 		},
 		viewed: {

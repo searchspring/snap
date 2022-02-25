@@ -7,8 +7,9 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
+import { MockClient } from '@searchspring/snap-shared';
+
 import { RecommendationController } from './RecommendationController';
-import { MockClient } from '../__mocks__/MockClient';
 
 const globals = { siteId: '8uyt2m' };
 

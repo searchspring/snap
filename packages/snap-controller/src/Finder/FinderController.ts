@@ -5,7 +5,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import type { FinderStore } from '@searchspring/snap-store-mobx';
-import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent } from '../types';
+import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent, ContextVariables } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
@@ -18,8 +18,12 @@ export class FinderController extends AbstractController {
 	public store: FinderStore;
 	config: FinderControllerConfig;
 
-	constructor(config: FinderControllerConfig, { client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices) {
-		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker });
+	constructor(
+		config: FinderControllerConfig,
+		{ client, store, urlManager, eventManager, profiler, logger, tracker }: ControllerServices,
+		context?: ContextVariables
+	) {
+		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);

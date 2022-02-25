@@ -10,7 +10,7 @@ import type { SearchController, AutocompleteController, RecommendationController
 
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType } from '../../../types';
+import { ComponentProps, Layout, Result as ResultType, LayoutType, InlineBannerContent, BannerType, BreakpointsProps } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -160,13 +160,6 @@ export interface ResultsProp extends ComponentProps {
 	controller?: SearchController | AutocompleteController | RecommendationController;
 }
 
-export type BreakpointsProps = {
-	[key: number]: BreakpointsEntry;
-};
-
-export type BreakpointsEntry = {
-	[property: string]: any;
-};
 interface ResultsSubProps {
 	result: ResultProps;
 	inlineBanner: InlineBannerProps;

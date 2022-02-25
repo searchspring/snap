@@ -1,12 +1,13 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { MockData } from '@searchspring/snap-shared';
 
 import { SortingStore } from './SortingStore';
-
-import { SearchData } from '../../__mocks__/SearchData';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
+
+const mockData = new MockData();
 
 describe('Sorting Store', () => {
 	beforeEach(() => {
@@ -19,13 +20,13 @@ describe('Sorting Store', () => {
 	});
 
 	it('returns an empty array when nothing is passed as sorting', () => {
-		const searchData = new SearchData();
+		const searchData = mockData.searchMeta();
 		const sort = new SortingStore(services, undefined, undefined, searchData.meta);
 		expect(sort.options.length).toBeGreaterThan(0);
 	});
 
 	it('uses the search response sorting data to set the "current" sort', () => {
-		const searchData = new SearchData({ search: 'sorting' });
+		const searchData = mockData.searchMeta('sorting');
 		const sort = new SortingStore(services, searchData.sorting, undefined, searchData.meta);
 
 		expect(sort.current).toBeDefined();
@@ -35,7 +36,7 @@ describe('Sorting Store', () => {
 
 	describe('without a search query', () => {
 		it('uses the meta data to construct its options', () => {
-			const searchData = new SearchData();
+			const searchData = mockData.searchMeta();
 			const sort = new SortingStore(services, undefined, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions.filter((option) => option.type == 'field');
 
@@ -53,7 +54,7 @@ describe('Sorting Store', () => {
 		});
 
 		it('uses the first sort option to set "current" when the search response sorting data is empty', () => {
-			const searchData = new SearchData();
+			const searchData = mockData.searchMeta();
 			const sort = new SortingStore(services, undefined, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions.filter((option) => option.type == 'field');
 
@@ -65,7 +66,7 @@ describe('Sorting Store', () => {
 		});
 
 		it('uses the first sorting option to set "current" when response sorting data is not empty', () => {
-			const searchData = new SearchData({ search: 'sorting' });
+			const searchData = mockData.searchMeta('sorting');
 			const sort = new SortingStore(services, searchData.sorting, undefined, searchData.meta);
 			const sortingData = searchData.meta.sortOptions.filter((option) => option.type == 'field');
 
@@ -79,7 +80,7 @@ describe('Sorting Store', () => {
 
 	describe('with a search query', () => {
 		it('uses the meta data to construct its options', () => {
-			const searchData = new SearchData({ search: 'dress' });
+			const searchData = mockData.searchMeta('dress');
 			const sort = new SortingStore(services, undefined, searchData.search, searchData.meta);
 			const sortingData = searchData.meta.sortOptions;
 			const relevanceSorts = searchData.meta.sortOptions.filter((option) => option.type == 'relevance');
@@ -100,7 +101,7 @@ describe('Sorting Store', () => {
 		});
 
 		it('uses the first sorting option to set "current" when response sorting data is not empty', () => {
-			const searchData = new SearchData({ search: 'dressSorting' });
+			const searchData = mockData.searchMeta('dressSorting');
 			const sort = new SortingStore(services, searchData.sorting, searchData.search, searchData.meta);
 			const sortingData = searchData.meta.sortOptions;
 
