@@ -10504,11 +10504,11 @@
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				hooks_module =
-					(__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
@@ -10637,6 +10637,7 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
+						_props,
 						_globalTheme$componen2,
 						_globalTheme$componen3,
 						_globalTheme$componen4,
@@ -10644,8 +10645,8 @@
 						_search$query2,
 						_search$query3,
 						delayTimeout,
+						inputViewportOffsetBottom,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
-						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{ termsTitle: '', trendingTitle: 'Popular Searches', facetsTitle: '', contentTitle: '', width: '100%' },
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -10664,32 +10665,6 @@
 							540: { columns: 3, rows: 1, vertical: !0 },
 							768: { columns: 2, rows: 3 },
 						},
-						_props = props,
-						hideTerms = _props.hideTerms,
-						hideFacets = _props.hideFacets,
-						hideContent = _props.hideContent,
-						hideBanners = _props.hideBanners,
-						hideLink = _props.hideLink,
-						horizontalTerms = _props.horizontalTerms,
-						vertical = _props.vertical,
-						termsTitle = _props.termsTitle,
-						trendingTitle = _props.trendingTitle,
-						facetsTitle = _props.facetsTitle,
-						contentTitle = _props.contentTitle,
-						viewportMaxHeight = _props.viewportMaxHeight,
-						termsSlot = _props.termsSlot,
-						facetsSlot = _props.facetsSlot,
-						contentSlot = _props.contentSlot,
-						resultsSlot = _props.resultsSlot,
-						noResultsSlot = _props.noResultsSlot,
-						linkSlot = _props.linkSlot,
-						onFacetOptionClick = _props.onFacetOptionClick,
-						onTermClick = _props.onTermClick,
-						disableStyles = _props.disableStyles,
-						className = _props.className,
-						width = _props.width,
-						style = _props.style,
-						controller = _props.controller,
 						valueProps = {
 							onMouseEnter: function onMouseEnter(e) {
 								clearTimeout(delayTimeout),
@@ -10704,32 +10679,54 @@
 						themeOverride = {
 							components: {
 								facet: { limit: 6, disableOverflow: !0, disableCollapse: !0, previewOnFocus: !0, valueProps },
-								facetGridOptions: { columns: 3, onClick: onFacetOptionClick },
-								facetHierarchyOptions: { hideCount: !0, onClick: onFacetOptionClick },
-								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: onFacetOptionClick },
-								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: onFacetOptionClick },
+								facetGridOptions: { columns: 3, onClick: properties.onFacetOptionClick },
+								facetHierarchyOptions: { hideCount: !0, onClick: properties.onFacetOptionClick },
+								facetListOptions: { hideCheckbox: !0, hideCount: !0, onClick: properties.onFacetOptionClick },
+								facetPaletteOptions: { hideLabel: !0, columns: 3, onClick: properties.onFacetOptionClick },
 								result: { hideBadge: !0 },
 							},
 						},
-						displaySettings = (0, useDisplaySettings.o)(breakpoints);
-					if (displaySettings && Object.keys(displaySettings).length) {
-						var _props2,
-							_theme = cjs_default()(
-								themeOverride,
-								(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme) || {},
+						displaySettings = (0, useDisplaySettings.o)(breakpoints) || {},
+						theme = cjs_default()(
+							themeOverride,
+							cjs_default()(
+								(null === (_props = props) || void 0 === _props ? void 0 : _props.theme) || {},
 								(null == displaySettings ? void 0 : displaySettings.theme) || {}
-							);
-						props = Object.assign({}, props, displaySettings, { theme: _theme });
-					}
-					var inputViewportOffsetBottom,
-						input = props.input;
+							)
+						),
+						input = (props = Object.assign({}, props, displaySettings, { theme })).input;
 					if (input) {
 						var _input;
 						'string' == typeof input && (input = document.querySelector(input));
 						var rect = null === (_input = input) || void 0 === _input ? void 0 : _input.getBoundingClientRect();
 						inputViewportOffsetBottom = (null == rect ? void 0 : rect.bottom) || 0;
 					}
-					var subProps = {
+					var _props3 = props,
+						hideTerms = _props3.hideTerms,
+						hideFacets = _props3.hideFacets,
+						hideContent = _props3.hideContent,
+						hideBanners = _props3.hideBanners,
+						hideLink = _props3.hideLink,
+						horizontalTerms = _props3.horizontalTerms,
+						vertical = _props3.vertical,
+						termsTitle = _props3.termsTitle,
+						trendingTitle = _props3.trendingTitle,
+						facetsTitle = _props3.facetsTitle,
+						contentTitle = _props3.contentTitle,
+						viewportMaxHeight = _props3.viewportMaxHeight,
+						termsSlot = _props3.termsSlot,
+						facetsSlot = _props3.facetsSlot,
+						contentSlot = _props3.contentSlot,
+						resultsSlot = _props3.resultsSlot,
+						noResultsSlot = _props3.noResultsSlot,
+						linkSlot = _props3.linkSlot,
+						onTermClick = _props3.onTermClick,
+						disableStyles = _props3.disableStyles,
+						className = _props3.className,
+						width = _props3.width,
+						style = _props3.style,
+						controller = _props3.controller,
+						subProps = {
 							facets: Object.assign(
 								{ limit: 3 },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
@@ -23682,7 +23679,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.21.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.21.1' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24072,7 +24069,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.21.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.21.1')),
 							this.targeters.push(
 								new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
 									var _getContext = (function getContext() {
