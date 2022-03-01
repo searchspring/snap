@@ -629,4 +629,70 @@ describe('AutoComplete theming works', () => {
 		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
 		expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
 	});
+
+	it('breakpoints override theme prop', async () => {
+		// Change the viewport to 500px.
+		global.innerWidth = 1200;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const theme = {
+			components: {
+				facet: {
+					limit: 9,
+				},
+			},
+		};
+
+		const customBreakpoints = {
+			0: {},
+			700: {
+				theme: {
+					components: {
+						facet: {
+							limit: 4,
+						},
+					},
+				},
+			},
+		};
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			breakpoints: customBreakpoints,
+			theme: theme,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
+		rendered.debug();
+		let options = acFacet.querySelectorAll('.ss__facet__options a');
+
+		expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		options = acFacet.querySelectorAll('.ss__facet__options a');
+
+		expect(options.length).toEqual(theme.components.facet.limit);
+	});
 });

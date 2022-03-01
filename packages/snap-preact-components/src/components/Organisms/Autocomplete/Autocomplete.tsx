@@ -172,7 +172,6 @@ const CSS = {
 
 export const Autocomplete = observer((properties: AutocompleteProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	let props: AutocompleteProps = {
 		// default props
@@ -254,16 +253,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const displaySettings = useDisplaySettings(breakpoints);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(themeOverride, props?.theme || {}, displaySettings?.theme || {});
-		props = {
-			...props,
-			...displaySettings,
-			theme,
-		};
-	}
-
+	const displaySettings = useDisplaySettings(breakpoints) || {};
+	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+	props = {
+		...props,
+		...displaySettings,
+		theme,
+	};
 	let { input } = props;
 	let inputViewportOffsetBottom;
 	if (input) {
