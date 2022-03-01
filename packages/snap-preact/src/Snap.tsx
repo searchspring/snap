@@ -587,15 +587,15 @@ The error above happened in the following targeter in the Snap Config`,
 			}
 		});
 
-		if (config?.instantiators?.recommendation) {
+		if (this.config?.instantiators?.recommendation) {
 			try {
 				this._instantiatorPromises.recommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
 					return new RecommendationInstantiator(
-						config.instantiators.recommendation,
+						this.config.instantiators.recommendation,
 						{
-							client: config.instantiators.recommendation?.services?.client || this.client,
-							tracker: config.instantiators.recommendation?.services?.tracker || this.tracker,
-							logger: config.instantiators.recommendation?.services?.logger || this.logger,
+							client: this.config.instantiators.recommendation?.services?.client || this.client,
+							tracker: this.config.instantiators.recommendation?.services?.tracker || this.tracker,
+							logger: this.config.instantiators.recommendation?.services?.logger || this.logger,
 						},
 						this.context
 					);

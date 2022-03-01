@@ -70,13 +70,13 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
-		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY));
+
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
@@ -99,14 +99,14 @@ describe('Autocomplete Component', () => {
 			breakpoints,
 		};
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 		expect(results[0]).toBeInTheDocument();
@@ -122,14 +122,14 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 500));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		//first test the terms.
 		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
@@ -250,7 +250,6 @@ describe('Autocomplete Component', () => {
 		expect(link2).toBeInTheDocument();
 	});
 
-	//this needs a different term
 	it('can hideBanners', async () => {
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
@@ -317,7 +316,6 @@ describe('Autocomplete Component', () => {
 		expect(contentTitle).toHaveTextContent(args.contentTitle);
 	});
 
-	//this needed a different term
 	it('can set a custom trending title', async () => {
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
@@ -463,6 +461,50 @@ describe('Autocomplete Component', () => {
 		const styles2 = getComputedStyle(ac2);
 		expect(styles2['width']).toBe(args2.width);
 	});
+
+	it('can use breakpoints', async () => {
+		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const customBreakpoints = {
+			0: {
+				hideFacets: true,
+			},
+			700: {
+				hideFacets: false,
+			},
+		};
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			breakpoints: customBreakpoints,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
+
+		expect(acFacets).toBeInTheDocument();
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		// acFacets = rendered.container.querySelector('.ss__autocomplete .ss__autocomplete__facets');
+		expect(acFacets).not.toBeInTheDocument();
+	});
 });
 
 describe('AutoComplete theming works', () => {
@@ -586,5 +628,71 @@ describe('AutoComplete theming works', () => {
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveTextContent(propTheme.components.autocomplete.trendingTitle);
 		expect(element).not.toHaveTextContent(globalTheme.components.autocomplete.trendingTitle);
+	});
+
+	it('breakpoints override theme prop', async () => {
+		// Change the viewport to 500px.
+		global.innerWidth = 1200;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const theme = {
+			components: {
+				facet: {
+					limit: 9,
+				},
+			},
+		};
+
+		const customBreakpoints = {
+			0: {},
+			700: {
+				theme: {
+					components: {
+						facet: {
+							limit: 4,
+						},
+					},
+				},
+			},
+		};
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			breakpoints: customBreakpoints,
+			theme: theme,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+		let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
+
+		let options = acFacet.querySelectorAll('.ss__facet__options a');
+
+		expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		options = acFacet.querySelectorAll('.ss__facet__options a');
+
+		expect(options.length).toEqual(theme.components.facet.limit);
 	});
 });
