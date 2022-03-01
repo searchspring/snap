@@ -9,4 +9,5 @@ module.exports = {
 	},
 	roots: ['./src/components'],
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+	displayName: 'snap-preact-components',
 };

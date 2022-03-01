@@ -16,8 +16,8 @@
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "jest --passWithNoTests",
-		"test:watch": "jest --watch"
+		"test": "jest --passWithNoTests --projects=''",
+		"test:watch": "jest --watch --projects=''"
 	},
 	"dependencies": {
 		"@searchspring/snap-client": "^0.21.0",

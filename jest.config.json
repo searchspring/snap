@@ -4,7 +4,11 @@
 	},
 	"testRegex": "\\.(test|spec)\\.(jsx?|tsx?)$",
 	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+	"projects": ["<rootDir>/packages/*/jest.config.js"],
+	"coveragePathIgnorePatterns": ["<rootDir>/dist/"],
+	"coverageReporters": ["json", "html"],
+	"coverageDirectory": "<rootDir>/coverage/",
+	"testEnvironment": "jsdom",
 	"collectCoverage": true,
-	"roots": ["./src"],
-	"testEnvironment": "jsdom"
+    "verbose": true
 }
