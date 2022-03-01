@@ -172,7 +172,6 @@ const CSS = {
 
 export const Autocomplete = observer((properties: AutocompleteProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	let props: AutocompleteProps = {
 		// default props
@@ -207,34 +206,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const {
-		hideTerms,
-		hideFacets,
-		hideContent,
-		hideBanners,
-		hideLink,
-		horizontalTerms,
-		vertical,
-		termsTitle,
-		trendingTitle,
-		facetsTitle,
-		contentTitle,
-		viewportMaxHeight,
-		termsSlot,
-		facetsSlot,
-		contentSlot,
-		resultsSlot,
-		noResultsSlot,
-		linkSlot,
-		onFacetOptionClick,
-		onTermClick,
-		disableStyles,
-		className,
-		width,
-		style,
-		controller,
-	} = props;
-
 	let delayTimeout;
 	const delayTime = 333;
 	const valueProps = {
@@ -260,21 +231,21 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			},
 			facetGridOptions: {
 				columns: 3,
-				onClick: onFacetOptionClick,
+				onClick: properties.onFacetOptionClick,
 			},
 			facetHierarchyOptions: {
 				hideCount: true,
-				onClick: onFacetOptionClick,
+				onClick: properties.onFacetOptionClick,
 			},
 			facetListOptions: {
 				hideCheckbox: true,
 				hideCount: true,
-				onClick: onFacetOptionClick,
+				onClick: properties.onFacetOptionClick,
 			},
 			facetPaletteOptions: {
 				hideLabel: true,
 				columns: 3,
-				onClick: onFacetOptionClick,
+				onClick: properties.onFacetOptionClick,
 			},
 			result: {
 				hideBadge: true,
@@ -282,16 +253,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	const displaySettings = useDisplaySettings(breakpoints);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(themeOverride, props?.theme || {}, displaySettings?.theme || {});
-		props = {
-			...props,
-			...displaySettings,
-			theme,
-		};
-	}
-
+	const displaySettings = useDisplaySettings(breakpoints) || {};
+	const theme = deepmerge(themeOverride, deepmerge(props?.theme || {}, displaySettings?.theme || {}));
+	props = {
+		...props,
+		...displaySettings,
+		theme,
+	};
 	let { input } = props;
 	let inputViewportOffsetBottom;
 	if (input) {
@@ -301,6 +269,33 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		const rect = input?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
 	}
+
+	const {
+		hideTerms,
+		hideFacets,
+		hideContent,
+		hideBanners,
+		hideLink,
+		horizontalTerms,
+		vertical,
+		termsTitle,
+		trendingTitle,
+		facetsTitle,
+		contentTitle,
+		viewportMaxHeight,
+		termsSlot,
+		facetsSlot,
+		contentSlot,
+		resultsSlot,
+		noResultsSlot,
+		linkSlot,
+		onTermClick,
+		disableStyles,
+		className,
+		width,
+		style,
+		controller,
+	} = props;
 
 	const subProps: AutocompleteSubProps = {
 		facets: {
