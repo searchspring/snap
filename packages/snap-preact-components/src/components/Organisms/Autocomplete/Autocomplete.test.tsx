@@ -70,13 +70,13 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
-		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY));
+
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).toBeInTheDocument();
@@ -99,14 +99,14 @@ describe('Autocomplete Component', () => {
 			breakpoints,
 		};
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		let results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 		expect(results[0]).toBeInTheDocument();
@@ -122,14 +122,14 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 		};
 
-		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
-
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 500));
+
+		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 
 		//first test the terms.
 		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
@@ -677,7 +677,7 @@ describe('AutoComplete theming works', () => {
 
 		let rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
 		let acFacet = rendered.container.querySelector('.ss__autocomplete .ss__facet');
-		rendered.debug();
+
 		let options = acFacet.querySelectorAll('.ss__facet__options a');
 
 		expect(options).toHaveLength(customBreakpoints[700].theme.components.facet.limit);
