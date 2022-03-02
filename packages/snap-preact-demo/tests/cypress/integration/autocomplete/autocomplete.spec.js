@@ -39,6 +39,26 @@ describe('Autocomplete', () => {
 		});
 
 		it('snap bundle exists on autocomplete page', () => {
+			//force trending showResults to true for the tests.
+			cy.on('window:before:load', (win) => {
+				win.mergeSnapConfig = {
+					controllers: {
+						autocomplete: [
+							{
+								config: {
+									settings: {
+										trending: {
+											limit: 5,
+											showResults: true,
+										},
+									},
+								},
+							},
+						],
+					},
+				};
+			});
+
 			cy.visit(config.url);
 
 			cy.waitForBundle().then((searchspring) => {
