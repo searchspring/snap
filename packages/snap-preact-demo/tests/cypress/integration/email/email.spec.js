@@ -28,10 +28,11 @@ describe('Email Recs', () => {
 		});
 
 		it('snap bundle exists on email page', () => {
-			cy.visit(config.url);
-
 			cy.waitForBundle().then((searchspring) => {
 				expect(searchspring).to.exist;
+				cy.window().then((window) => {
+					expect(window.RecsReady).to.equal(undefined);
+				});
 			});
 		});
 	});
@@ -40,7 +41,6 @@ describe('Email Recs', () => {
 		it('has a controller with an products in store immediately', function () {
 			cy.snapController('recommend_email-test20').then(({ store }) => {
 				expect(store.results.length).to.equal(20);
-				expect(window.RecsReady).to.equal(undefined);
 			});
 		});
 
@@ -48,15 +48,14 @@ describe('Email Recs', () => {
 			cy.get(`${config?.selectors?.email.result}`).should('have.length', 20);
 		});
 
-		it('runs the recsReady event', function () {
-			return cy.window().then((window) => {
-				expect(window.RecsReady).to.equal(true);
-			});
-		});
-
-		it('has 20 images in the dom', function () {
-			return cy.document().then((doc) => {
-				expect(doc.images.length).to.equal(20);
+		it('runs the recsReady event when the images are done loading', function () {
+			cy.waitForRecsReady().then(() => {
+				return cy.window().then((window) => {
+					expect(window.RecsReady).to.equal(true);
+					return cy.document().then((doc) => {
+						expect(doc.images.length).to.equal(20);
+					});
+				});
 			});
 		});
 	});
