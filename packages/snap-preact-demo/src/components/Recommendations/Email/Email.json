@@ -1,4 +1,5 @@
 {
+	"type": "snap/recommendation/email",
 	"name": "Email",
 	"label": "Default Template",
 	"description": "a decent template...",
