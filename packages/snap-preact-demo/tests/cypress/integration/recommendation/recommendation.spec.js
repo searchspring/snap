@@ -82,12 +82,14 @@ describe('Recommendations', () => {
 					});
 
 				//need to wait for the carousel slide effect to finish
-				cy.wait(1000);
+				cy.wait(300);
 
 				//click the prev button
 				cy.get(config?.selectors?.recommendation.prevArrow)
 					.click()
 					.then(($button) => {
+						cy.wait(300);
+
 						//get the new active again
 						const newerActive = doc.querySelector(
 							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
