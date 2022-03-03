@@ -65,14 +65,18 @@ describe('Recommendations', () => {
 				cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
 
 				//get the initial active product
-				const intialActive = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result}`);
+				const intialActive = doc.querySelector(
+					`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+				).innerHTML;
 				let newActive;
 				//click the next button
 				cy.get(config?.selectors?.recommendation.nextArrow)
 					.click()
 					.then(($button) => {
 						//get the new active product
-						newActive = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result}`);
+						newActive = doc.querySelector(
+							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+						).innerHTML;
 						//should have changed
 						expect(newActive).to.not.equal(intialActive);
 					});
@@ -84,10 +88,10 @@ describe('Recommendations', () => {
 				cy.get(config?.selectors?.recommendation.prevArrow)
 					.click()
 					.then(($button) => {
-						cy.wait(300);
-
 						//get the new active again
-						const newerActive = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result}`);
+						const newerActive = doc.querySelector(
+							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+						).innerHTML;
 
 						//these should have changed back
 						expect(newerActive).to.equal(intialActive);
