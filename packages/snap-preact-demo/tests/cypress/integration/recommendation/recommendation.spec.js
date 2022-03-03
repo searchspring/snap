@@ -82,7 +82,7 @@ describe('Recommendations', () => {
 					});
 
 				//need to wait for the carousel slide effect to finish
-				cy.wait(300);
+				cy.wait(1000);
 
 				//click the prev button
 				cy.get(config?.selectors?.recommendation.prevArrow)
