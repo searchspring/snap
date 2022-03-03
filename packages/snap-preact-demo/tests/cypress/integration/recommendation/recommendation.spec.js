@@ -58,46 +58,48 @@ describe('Recommendations', () => {
 		});
 
 		it('renders carousel next/prev butons', function () {
-			cy.document().then((doc) => {
+			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 				cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
 				cy.get(config?.selectors?.recommendation.prevArrow).should('exist');
 
 				cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
 
 				//get the initial active product
-				const intialActive = doc.querySelector(
-					`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-				).innerHTML;
-				let newActive;
-				//click the next button
-				cy.get(config?.selectors?.recommendation.nextArrow)
-					.click()
-					.then(($button) => {
-						//get the new active product
-						newActive = doc.querySelector(
-							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-						).innerHTML;
-						//should have changed
-						expect(newActive).to.not.equal(intialActive);
-					});
+				cy.get(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`)
+					.should('exist')
+					.invoke('text')
+					.then((intialActive) => {
+						cy.get(config?.selectors?.recommendation.nextArrow)
+							.should('exist')
+							.click({ force: true })
+							.wait(1050) // wait for any animation and swiper to update
+							.then(() => {
+								cy.get(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`)
+									.should('exist')
+									.invoke('text')
+									.then((newActive) => {
+										expect(newActive).to.not.equal(intialActive);
 
-				//need to wait for the carousel slide effect to finish
-				cy.wait(300);
-
-				//click the prev button
-				cy.get(config?.selectors?.recommendation.prevArrow)
-					.click()
-					.then(($button) => {
-						cy.wait(300);
-
-						//get the new active again
-						const newerActive = doc.querySelector(
-							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-						).innerHTML;
-
-						//these should have changed back
-						expect(newerActive).to.equal(intialActive);
-						expect(newerActive).to.not.equal(newActive);
+										//click the prev button
+										cy.get(config?.selectors?.recommendation.prevArrow)
+											.should('exist')
+											.click({ force: true })
+											.wait(1050)
+											.then(() => {
+												//get the new active again
+												cy.get(
+													`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+												)
+													.should('exist')
+													.invoke('text')
+													.then((newerActive) => {
+														//these should have changed back
+														expect(newerActive).to.equal(intialActive);
+														expect(newerActive).to.not.equal(newActive);
+													});
+											});
+									});
+							});
 					});
 			});
 		});
