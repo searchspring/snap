@@ -68,6 +68,7 @@ export type AutocompleteStoreConfig = StoreConfig & {
 		};
 		trending?: {
 			limit: number;
+			showResults?: boolean;
 		};
 	};
 };
