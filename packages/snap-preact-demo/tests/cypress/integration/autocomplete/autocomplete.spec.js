@@ -57,19 +57,6 @@ describe('Autocomplete', () => {
 		});
 
 		it('renders trending terms when input focused', function () {
-			cy.window().then((window) => {
-				if (!window?.searchspring?.controller?.autocomplete?.config?.settings?.trending) {
-					this.skip();
-				}
-
-				cy.get(config?.selectors?.website?.input).focus({ force: true });
-				cy.snapController('autocomplete').then(({ store }) => {
-					cy.get(config?.selectors?.autocomplete.main).should('exist');
-				});
-			});
-		});
-
-		it('has trending terms', function () {
 			cy.snapController('autocomplete').then((controller) => {
 				if (!controller?.config?.settings?.trending) {
 					this.skip();
@@ -77,6 +64,7 @@ describe('Autocomplete', () => {
 
 				cy.get(config?.selectors?.website?.input).focus({ force: true });
 
+				cy.get(config?.selectors?.autocomplete.main).should('exist');
 				cy.get(config?.selectors?.autocomplete.term).should('have.length', controller.store.trending.length);
 			});
 		});

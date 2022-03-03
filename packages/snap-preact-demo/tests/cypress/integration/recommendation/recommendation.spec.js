@@ -84,6 +84,8 @@ describe('Recommendations', () => {
 				cy.get(config?.selectors?.recommendation.prevArrow)
 					.click()
 					.then(($button) => {
+						cy.wait(300);
+
 						//get the new active again
 						const newerActive = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result}`);
 
