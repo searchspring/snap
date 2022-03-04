@@ -149,13 +149,23 @@ describe('Dropdown Component', () => {
 		expect(contentElement.innerHTML).toBe('im closed');
 	});
 
-	it('disables styles', () => {
-		const buttonText = 'click me';
-		const contentText = 'this is the content';
-		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
+	//this doesnt work for unkown reasons
+	it.skip('can disable overlay with prop', () => {
+		const rendered = render(<Dropdown button={'open me'} open={true} disableOverlay={true} />);
 
-		const dropdown = rendered.container.querySelector('.ss__dropdown');
-		expect(dropdown.classList).toHaveLength(1);
+		const dropdownElement = rendered.container.querySelector(`.ss__dropdown`);
+		expect(dropdownElement).toBeInTheDocument();
+
+		expect(dropdownElement).toHaveClass('ss__dropdown--open');
+
+		const dropdownContent = rendered.container.querySelector(`.ss__dropdown .ss__dropdown__content`);
+		const dropdownButton = rendered.container.querySelector(`.ss__dropdown .ss__dropdown__button`);
+
+		const dropdownContentstyles = getComputedStyle(dropdownContent);
+		const dropdownButtonstyles = getComputedStyle(dropdownButton);
+
+		expect(dropdownContentstyles.visibility).toBe('visible');
+		expect(dropdownButtonstyles.cursor).tobe('default');
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {
@@ -219,6 +229,15 @@ describe('Dropdown Component', () => {
 
 		userEvent.click(button);
 		expect(clickFn).not.toHaveBeenCalled();
+	});
+
+	it('disables styles', () => {
+		const buttonText = 'click me';
+		const contentText = 'this is the content';
+		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown');
+		expect(dropdown.classList).toHaveLength(1);
 	});
 
 	it('is themeable with ThemeProvider', () => {

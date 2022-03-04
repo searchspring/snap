@@ -78,6 +78,25 @@ describe('Icon Component', () => {
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
 	});
 
+	it('renders cog icon with sizing', () => {
+		const icon = 'cog';
+
+		const width = '10px';
+		const height = '15px';
+
+		const rendered = render(<Icon icon={icon} width={width} height={height} />);
+		expect(rendered.container).toBeInTheDocument();
+
+		const svg = rendered.container.querySelector('svg');
+
+		const styles = getComputedStyle(svg);
+		expect(styles.width).toBe(width);
+		expect(styles.height).toBe(height);
+
+		const path = svg.querySelector('path');
+		expect(path).toHaveAttribute('d', iconPaths[icon]);
+	});
+
 	it('renders cog icon with custom props', () => {
 		const icon = 'cog';
 		const color = '#ff0000';

@@ -25,6 +25,18 @@ describe('Badge Component', () => {
 		styles = getComputedStyle(badge);
 
 		expect(styles.left).toEqual('0px');
+
+		const bottomPosition = { bottom: 0 };
+		rendered.rerender(<Badge position={bottomPosition}>{CHILDREN}</Badge>);
+		styles = getComputedStyle(badge);
+
+		expect(styles.bottom).toEqual('0px');
+
+		const topPosition = { top: 0 };
+		rendered.rerender(<Badge position={topPosition}>{CHILDREN}</Badge>);
+		styles = getComputedStyle(badge);
+
+		expect(styles.top).toEqual('0px');
 	});
 
 	describe('Badge with content', () => {

@@ -1,14 +1,16 @@
 import { h } from 'preact';
 
 import { ThemeProvider } from '../../../providers';
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 
 import { Image, FALLBACK_IMAGE_URL } from './Image';
 import { searchResponse, badSearchResponse } from '../../../mocks/searchResponse';
+import userEvent from '@testing-library/user-event';
 
 describe('image Component', () => {
 	const result = searchResponse.results[0].mappings.core;
 	const badResult = badSearchResponse.results[0].mappings.core;
+	const rolloverImage = searchResponse.results[2].mappings.core.thumbnailImageUrl;
 
 	it('renders', () => {
 		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} />);
@@ -56,6 +58,48 @@ describe('image Component', () => {
 			const imageElement = rendered.container.querySelector('.ss__image img');
 			expect(imageElement).toHaveAttribute('src', fallbackImage);
 		});
+	});
+
+	describe('hover src', () => {
+		it('should change src on hover & run a custom onhoverfunc prop', async () => {
+			const onHoverFunc = jest.fn();
+			const rendered = render(<Image alt={badResult.name} onMouseOver={onHoverFunc} src={result.thumbnailImageUrl} hoverSrc={rolloverImage} />);
+			const imageElement = rendered.container.querySelector('.ss__image img');
+			console.log(result.thumbnailImageUrl);
+			console.log(rolloverImage);
+
+			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+			userEvent.hover(imageElement);
+			await waitFor(() => expect(onHoverFunc).toHaveBeenCalled());
+			expect(imageElement).toHaveAttribute('src', rolloverImage);
+		});
+	});
+
+	describe('click func', () => {
+		it('custom onclick src on hover', () => {
+			const clickfunc = jest.fn();
+
+			const rendered = render(<Image alt={badResult.name} src={result.thumbnailImageUrl} onClick={clickfunc} />);
+			const imageElement = rendered.container.querySelector('.ss__image img');
+
+			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+			userEvent.click(imageElement);
+			expect(clickfunc).toHaveBeenCalled();
+		});
+	});
+
+	//this should work, but doesnt, jest doesnt actually load assets,
+	//so the img onLoad event never fires.
+	it.skip('custom onLoad func', async () => {
+		const onLoadFunc = jest.fn();
+		expect(onLoadFunc).not.toHaveBeenCalled();
+
+		const rendered = await render(<Image alt={badResult.name} src={result.thumbnailImageUrl} onLoad={onLoadFunc} />);
+		const imageElement = rendered.container.querySelector('.ss__image img');
+
+		expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
+		await waitFor(() => expect(document.images).toHaveLength(1));
+		expect(onLoadFunc).toHaveBeenCalled();
 	});
 });
 
