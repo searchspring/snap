@@ -1,14 +1,9 @@
-{
-	"transform": {
-		"^.+\\.tsx?$": "ts-jest"
-	},
-	"testRegex": "\\.(test|spec)\\.(jsx?|tsx?)$",
-	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-	"projects": ["<rootDir>/packages/*/jest.config.js"],
-	"coveragePathIgnorePatterns": ["<rootDir>/dist/"],
-	"coverageReporters": ["json", "html"],
+ {
+    "projects": [
+        "<rootDir>/packages/snap-*/jest.config.js"
+    ],
+    "coverageReporters": ["json", "html"],
 	"coverageDirectory": "<rootDir>/coverage/",
-	"testEnvironment": "jsdom",
 	"collectCoverage": true,
-	"verbose": true
+    "verbose": true
 }

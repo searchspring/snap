@@ -16,8 +16,8 @@
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "jest --projects=''",
-		"test:watch": "jest --watch --projects=''"
+		"test": "jest",
+		"test:watch": "jest --watch"
 	},
 	"sideEffects": false,
 	"files": [

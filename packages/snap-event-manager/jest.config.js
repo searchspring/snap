@@ -1,4 +1,4 @@
-const rootConfig = require('../../jest.config.json');
+const rootConfig = require('../../jest.base.config.json');
 module.exports = {
 	...rootConfig,
 	displayName: 'snap-event-manager',

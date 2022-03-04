@@ -21,8 +21,8 @@
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/components/**/*.{js,jsx,ts,tsx}'",
 		"storybook": "start-storybook -p 6006",
-		"test": "jest --projects=''",
-		"test:watch": "jest --watch --projects=''"
+		"test": "jest",
+		"test:watch": "jest --watch"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.7.1",
