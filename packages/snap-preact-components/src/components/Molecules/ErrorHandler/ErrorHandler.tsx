@@ -83,10 +83,10 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const props: ErrorHandlerProps = {
 		// global theme
-		...globalTheme?.components?.carousel,
+		...globalTheme?.components?.errorHandler,
 		//props
 		...properties,
-		...properties.theme?.components?.carousel,
+		...properties.theme?.components?.errorHandler,
 	};
 
 	const { controller, error, disableStyles, style, onRetryClick, className } = props;
