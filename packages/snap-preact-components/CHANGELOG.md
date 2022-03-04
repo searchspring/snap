@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/searchspring/snap/compare/v0.21.0...v0.21.1) (2022-03-01)
+
+
+### Bug Fixes
+
+* **autocomplete.tsx:** breakpoints prop should override theme prop ([193f5a8](https://github.com/searchspring/snap/commit/193f5a8bf4ae0742a760217e1039cf18d8d0119d))
+* **autocomplete.tsx:** bugfix for autocomplete breakpoints prop not working ([d9472fd](https://github.com/searchspring/snap/commit/d9472fdb53da4b6a16ba559cb02c0a6cfe31bafc))
+
+
+
+
+
 # [0.21.0](https://github.com/searchspring/snap/compare/v0.20.5...v0.21.0) (2022-02-25)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
