@@ -59,46 +59,52 @@ describe('Recommendations', () => {
 
 		it('renders carousel next/prev butons', function () {
 			cy.document().then((doc) => {
-				cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
-				cy.get(config?.selectors?.recommendation.prevArrow).should('exist');
+				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
+					cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
+					cy.get(config?.selectors?.recommendation.prevArrow).should('exist');
 
-				cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
+					cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
 
-				//get the initial active product
-				const intialActive = doc.querySelector(
-					`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-				).innerHTML;
-				let newActive;
-				//click the next button
-				cy.get(config?.selectors?.recommendation.nextArrow)
-					.click()
-					.then(($button) => {
-						//get the new active product
-						newActive = doc.querySelector(
-							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-						).innerHTML;
-						//should have changed
-						expect(newActive).to.not.equal(intialActive);
-					});
+					//get the initial active product
+					const intialActive = doc.querySelector(
+						`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+					).innerHTML;
+					let newActive;
+					//click the next button
+					cy.get(config?.selectors?.recommendation.nextArrow)
+						.click()
+						.then(($button) => {
+							//get the new active product
+							newActive = doc.querySelector(
+								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+							).innerHTML;
+							//should have changed
+							expect(newActive).to.not.equal(intialActive);
+						});
 
-				//need to wait for the carousel slide effect to finish
-				cy.wait(300);
+					//need to wait for the carousel slide effect to finish
+					cy.wait(300);
 
-				//click the prev button
-				cy.get(config?.selectors?.recommendation.prevArrow)
-					.click()
-					.then(($button) => {
-						cy.wait(300);
+					//click the prev button
+					cy.get(config?.selectors?.recommendation.prevArrow)
+						.click()
+						.then(($button) => {
+							cy.wait(300);
 
-						//get the new active again
-						const newerActive = doc.querySelector(
-							`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-						).innerHTML;
+							//get the new active again
+							const newerActiveIndex = doc.querySelector(`${config?.selectors?.recommendation.activeSlide}`).getAttribute('data-swiper-slide-index');
 
-						//these should have changed back
-						expect(newerActive).to.equal(intialActive);
-						expect(newerActive).to.not.equal(newActive);
-					});
+							const newerActiveTitle = doc.querySelector(
+								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+							).innerHTML;
+
+							const storeTitle = store.results[parseInt(newerActiveIndex)].mappings.core.name;
+
+							//these should have changed back
+							expect(newerActiveTitle).to.equal(storeTitle);
+							expect(newerActiveTitle).to.not.equal(newActive);
+						});
+				});
 			});
 		});
 
