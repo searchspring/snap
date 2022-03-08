@@ -26,7 +26,7 @@ describe('Facet Store', () => {
 	beforeEach(() => {
 		expect.hasAssertions();
 
-		searchData = mockData.searchMeta();
+		searchData = mockData.resetConfig().searchMeta();
 
 		storageStore = new StorageStore();
 	});
@@ -211,6 +211,7 @@ describe('Facet Store', () => {
 	});
 
 	it('uses range values (range-buckets) when needed', () => {
+		searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('priceBuckets');
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 		const rangeFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
 
@@ -312,6 +313,7 @@ describe('Facet Store', () => {
 
 		describe('range-buckets', () => {
 			it('stores the correct facet values', () => {
+				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('priceBuckets');
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 				facets.forEach((facet, index) => {
@@ -326,7 +328,7 @@ describe('Facet Store', () => {
 			});
 
 			it('has a URL for filter value when it is filtered/active', () => {
-				searchData = mockData.searchMeta('filteredRangeBucket');
+				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
 
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
@@ -340,7 +342,7 @@ describe('Facet Store', () => {
 			});
 
 			it('has a removal URL for filter value when it is not filtered/active', () => {
-				searchData = mockData.searchMeta('filteredRangeBucket');
+				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
 
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets' && facet.filtered).pop();
@@ -351,7 +353,7 @@ describe('Facet Store', () => {
 			});
 
 			it('has a removal URL for filter value when it is filtered/active with single select', () => {
-				searchData = mockData.searchMeta('filteredRangeBucket');
+				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
 
 				searchData.meta.facets.price.multiple = 'single';
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);

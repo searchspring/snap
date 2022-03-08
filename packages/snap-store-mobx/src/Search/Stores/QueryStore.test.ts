@@ -15,7 +15,6 @@ describe('QueryStore store', () => {
 		const queryStore = new QueryStore(services, searchData.search);
 
 		expect(queryStore).toBeDefined();
-		expect(queryStore.query).toEqual(searchData.search.query);
 		expect(queryStore.query).toEqual(undefined);
 	});
 
