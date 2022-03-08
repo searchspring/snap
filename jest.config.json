@@ -1,8 +1,8 @@
- {
+{
     "projects": [
         "<rootDir>/packages/snap-*/jest.config.js"
     ],
-    "coverageReporters": ["json", "html"],
+    "coverageReporters": ["json", "html", "text", "text-summary", "json-summary"],
 	"coverageDirectory": "<rootDir>/coverage/",
 	"collectCoverage": true,
     "verbose": true
