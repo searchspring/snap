@@ -57,7 +57,7 @@ describe('Recommendations', () => {
 			});
 		});
 
-		it('renders carousel next/prev butons', function () {
+		it('renders carousel next buttons', function () {
 			cy.document().then((doc) => {
 				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 					cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
@@ -81,9 +81,22 @@ describe('Recommendations', () => {
 							//should have changed
 							expect(newActive).to.not.equal(intialActive);
 						});
+				});
+			});
+		});
 
-					//need to wait for the carousel slide effect to finish
-					cy.wait(300);
+		it('renders carousel prev buttons', function () {
+			cy.document().then((doc) => {
+				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
+					cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
+					cy.get(config?.selectors?.recommendation.prevArrow).should('exist');
+
+					cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
+
+					//get the initial active product
+					const intialActive = doc.querySelector(
+						`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
+					).innerHTML;
 
 					//click the prev button
 					cy.get(config?.selectors?.recommendation.prevArrow)
@@ -102,7 +115,7 @@ describe('Recommendations', () => {
 
 							//these should have changed back
 							expect(newerActiveTitle).to.equal(storeTitle);
-							expect(newerActiveTitle).to.not.equal(newActive);
+							expect(newerActiveTitle).to.not.equal(intialActive);
 						});
 				});
 			});
