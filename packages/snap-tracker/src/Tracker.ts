@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { cookies, featureFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
+import { cookies, getFlags, version, DomTargeter, getContext, charsParams } from '@searchspring/snap-toolbox';
 
 import { TrackEvent } from './TrackEvent';
 import { PixelEvent } from './PixelEvent';
@@ -79,33 +79,35 @@ export class Tracker {
 			window.searchspring.version = version;
 		}
 
-		// one targeter to rule them all
-		this.targeters.push(
-			new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
-				const { item, items, siteId, shopper, order, type } = getContext(
-					['item', 'items', 'siteId', 'shopper', 'order', 'type'],
-					elem as HTMLScriptElement
-				);
+		// since this is in the constructor, setTimeout is required for jest.spyOn
+		setTimeout(() => {
+			this.targeters.push(
+				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
+					const { item, items, siteId, shopper, order, type } = getContext(
+						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
+						elem as HTMLScriptElement
+					);
 
-				switch (type) {
-					case 'searchspring/track/shopper/login':
-						this.track.shopper.login(shopper, siteId);
-						break;
-					case 'searchspring/track/product/view':
-						this.track.product.view(item, siteId);
-						break;
-					case 'searchspring/track/cart/view':
-						this.track.cart.view({ items }, siteId);
-						break;
-					case 'searchspring/track/order/transaction':
-						this.track.order.transaction({ order, items }, siteId);
-						break;
-					default:
-						console.error(`event '${type}' is not supported`);
-						break;
-				}
-			})
-		);
+					switch (type) {
+						case 'searchspring/track/shopper/login':
+							this.track.shopper.login(shopper, siteId);
+							break;
+						case 'searchspring/track/product/view':
+							this.track.product.view(item, siteId);
+							break;
+						case 'searchspring/track/cart/view':
+							this.track.cart.view({ items }, siteId);
+							break;
+						case 'searchspring/track/order/transaction':
+							this.track.order.transaction({ order, items }, siteId);
+							break;
+						default:
+							console.error(`event '${type}' is not supported`);
+							break;
+					}
+				})
+			);
+		});
 
 		document.addEventListener('click', (event: Event) => {
 			const attributes = {};
@@ -179,13 +181,15 @@ export class Tracker {
 		shopper: {
 			login: (data: ShopperLoginEvent, siteId?: string): BeaconEvent => {
 				// sets shopperid if logged in
-				if (!featureFlags.cookies) {
+				if (!getFlags().cookies()) {
 					return;
 				}
 				if (!data.id) {
 					console.error('tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })');
 					return;
 				}
+				data.id = `${data.id}`;
+
 				let context = this.context;
 				if (siteId) {
 					context = deepmerge(context, {
@@ -195,9 +199,9 @@ export class Tracker {
 							},
 						},
 					});
+					context.shopperId = data.id;
 				}
 				const storedShopperId = this.getShopperId();
-				data.id = `${data.id}`;
 				if (storedShopperId != data.id) {
 					// user's logged in id has changed, update shopperId cookie send login event
 					cookies.set(SHOPPERID_COOKIE_NAME, data.id, COOKIE_SAMESITE, COOKIE_EXPIRATION);
@@ -345,7 +349,7 @@ export class Tracker {
 
 				// save cart items to cookie
 				if (items.length) {
-					const products = items.map((item) => item.sku || item.childSku);
+					const products = items.map((item) => item?.sku || item?.childSku || '').filter((sku) => sku);
 					this.cookies.cart.add(products);
 				}
 
@@ -421,11 +425,11 @@ export class Tracker {
 	getUserId = (): string => {
 		let userId;
 		try {
-			userId = featureFlags.storage && window.localStorage.getItem(USERID_COOKIE_NAME);
-			if (featureFlags.cookies) {
+			userId = getFlags().storage() && window.localStorage.getItem(USERID_COOKIE_NAME);
+			if (getFlags().cookies()) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
-			} else if (!userId && featureFlags.storage) {
+			} else if (!userId && getFlags().storage()) {
 				// if cookies are disabled, use localStorage instead
 				userId = uuidv4();
 				window.localStorage.setItem(USERID_COOKIE_NAME, userId);
@@ -439,15 +443,15 @@ export class Tracker {
 
 	getSessionId = (): string => {
 		let sessionId;
-		if (featureFlags.storage) {
+		if (getFlags().storage()) {
 			try {
 				sessionId = window.sessionStorage.getItem(SESSIONID_STORAGE_NAME) || uuidv4();
 				window.sessionStorage.setItem(SESSIONID_STORAGE_NAME, sessionId);
-				featureFlags.cookies && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
+				getFlags().cookies() && cookies.set(SESSIONID_STORAGE_NAME, sessionId, COOKIE_SAMESITE, 0); //session cookie
 			} catch (e) {
 				console.error('Failed to persist session id to session storage:', e);
 			}
-		} else if (featureFlags.cookies) {
+		} else if (getFlags().cookies()) {
 			// use cookies if sessionStorage is not enabled and only reset cookie if new session to keep expiration
 			sessionId = cookies.get(SESSIONID_STORAGE_NAME);
 			if (!sessionId) {
@@ -576,7 +580,6 @@ export class Tracker {
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
 		const events = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]');
-
 		if (eventsToSend) {
 			eventsToSend.forEach((event) => {
 				events.push({ ...event });

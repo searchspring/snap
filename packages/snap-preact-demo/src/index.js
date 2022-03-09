@@ -38,6 +38,9 @@ let config = {
 				Recs: async () => {
 					return (await import('./components/Recommendations/')).Recs;
 				},
+				Email: async () => {
+					return (await import('./components/Recommendations/')).Email;
+				},
 			},
 
 			config: {

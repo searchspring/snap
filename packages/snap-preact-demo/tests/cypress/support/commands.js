@@ -114,3 +114,12 @@ Cypress.Commands.add('waitForIdle', (options) => {
 		});
 	});
 });
+
+Cypress.Commands.add('waitForRecsReady', () => {
+	return cy.document().then((doc) => {
+		return new Cypress.Promise((resolve) => {
+			let timeout = setTimeout(resolve, 5000);
+			doc.addEventListener('RecsReady', resolve);
+		});
+	});
+});

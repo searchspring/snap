@@ -371,4 +371,24 @@ describe('request facets transform', () => {
 		expect(p1).toEqual({});
 		expect(p2).toEqual({});
 	});
+
+	it(`can toggle 'disableFacetDrillDown'`, () => {
+		const params = transformSearchRequest.facets({
+			facets: {
+				autoDrillDown: false,
+			},
+		});
+
+		expect(params).toEqual({ disableFacetDrillDown: true });
+	});
+
+	it(`does not set 'disableFacetDrillDown' as false`, () => {
+		const params = transformSearchRequest.facets({
+			facets: {
+				autoDrillDown: true,
+			},
+		});
+
+		expect(params).toEqual({});
+	});
 });

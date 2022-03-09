@@ -428,6 +428,48 @@ describe('Autocomplete Component', () => {
 		expect(noResultsSlot).toHaveTextContent('Lorem Ipsum');
 	});
 
+	it('auto selects first trending term', async () => {
+		const trendingACConfig = {
+			id: controllerConfigId,
+			selector: 'input.searchspring-ac',
+			settings: {
+				trending: {
+					limit: 5,
+					showResults: true,
+				},
+			},
+		};
+
+		const controller = createAutocompleteController({ client: config, controller: trendingACConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+
+		// to deal with timeoutDelay setTimeout used in focus event
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
+
+		const rendered = render(<Autocomplete {...args} />, { container: document.getElementById('target') });
+
+		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+		expect(autocomplete).toBeInTheDocument();
+
+		const terms = rendered.container.querySelectorAll('.ss__autocomplete__terms__option');
+		expect(terms.length).toBe(controller.store.trending.length);
+
+		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
+
+		expect(controller.store.trending[0].active).toBeTruthy();
+
+		let results = rendered.container.querySelectorAll('.ss__result');
+		expect(results[0]).toBeInTheDocument();
+	});
+
 	it('can set a custom css width', async () => {
 		const controller = createAutocompleteController({ client: config, controller: acConfig }, { client: mockClient });
 		await controller.bind();
