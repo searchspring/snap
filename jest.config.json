@@ -1,4 +1,5 @@
 {
+    "bail": true,
     "projects": [
         "<rootDir>/packages/snap-*/jest.config.js"
     ],
