@@ -53,6 +53,22 @@ describe('FilterSummary Component', () => {
 		expect(title).toHaveTextContent('you clicked these earlier');
 	});
 
+	it('renders with specified icons', async () => {
+		const args = {
+			filters: filters,
+			clearAllIcon: 'circle',
+			filterIcon: 'check',
+		};
+
+		const rendered = render(<FilterSummary {...args} />);
+
+		const filterIcon = rendered.container.querySelector('.ss__filter-summary .ss__filter .ss__icon');
+		const clearAllIcon = rendered.container.querySelector('.ss__filter-summary__clear-all .ss__icon');
+
+		expect(filterIcon).toHaveClass(`ss__icon--${args.filterIcon}`);
+		expect(clearAllIcon).toHaveClass(`ss__icon--${args.clearAllIcon}`);
+	});
+
 	it('can hide the facet label', () => {
 		const rendered = render(<FilterSummary filters={filters} hideFacetLabel={true} />);
 		const facetLabel = rendered.container.querySelector('.ss__filter__label');

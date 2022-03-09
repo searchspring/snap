@@ -110,6 +110,35 @@ describe('Facet Component', () => {
 			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
 		});
 
+		it('renders with specified icons', async () => {
+			const args = {
+				facet: facetOverflowMock as unknown as ValueFacet,
+				iconCollapse: 'angle-down',
+				iconExpand: 'angle-up',
+				iconOverflowMore: 'check',
+				iconOverflowLess: 'circle',
+			};
+			const rendered = render(<Facet {...args} />);
+
+			const headerIconElement = rendered.container.querySelector('.ss__facet__header .ss__icon');
+			const showMoreLessElem = rendered.container.querySelector('.ss__facet__show-more-less .ss__icon');
+
+			expect(headerIconElement).toBeInTheDocument();
+			expect(headerIconElement).toHaveClass(`ss__icon--${args.iconCollapse}`);
+			expect(showMoreLessElem).toHaveClass(`ss__icon--${args.iconOverflowMore}`);
+
+			args.facet.collapsed = false;
+
+			const rendered2 = render(<Facet {...args} />);
+
+			const headerIconElement2 = rendered2.container.querySelector('.ss__facet__header .ss__icon');
+			const showMoreLessElem2 = rendered2.container.querySelector('.ss__facet__show-more-less .ss__icon');
+
+			expect(headerIconElement2).toBeInTheDocument();
+			expect(headerIconElement2).toHaveClass(`ss__icon--${args.iconCollapse}`);
+			expect(showMoreLessElem2).toHaveClass(`ss__icon--${args.iconOverflowMore}`);
+		});
+
 		it('set custom overflow slot', async () => {
 			const elem = <span className="findMe">Show More please</span>;
 			const args = {
