@@ -2572,18 +2572,74 @@
   ],
   "facets": [
     {
+      "type": "range-buckets",
       "field": "price",
-      "type": "range",
       "filtered": false,
-      "step": 5,
-      "range": {
-        "low": 0,
-        "high": 280
-      },
-      "active": {
-        "low": 0,
-        "high": 280
-      }
+      "values": [
+        {
+          "filtered": false,
+          "low": null,
+          "high": 20,
+          "label": "up to $20",
+          "count": 522
+        },
+        {
+          "filtered": false,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 854
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 1625
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 1160
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 435
+        },
+        {
+          "filtered": false,
+          "low": 75,
+          "high": 100,
+          "label": "$75 to $100",
+          "count": 59
+        },
+        {
+          "filtered": false,
+          "low": 100,
+          "high": 150,
+          "label": "$100 to $150",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "low": 150,
+          "high": 200,
+          "label": "$150 to $200",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "low": 200,
+          "high": 500,
+          "label": "$200 to $500",
+          "count": 3
+        }
+      ]
     },
     {
       "type": "value",
