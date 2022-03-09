@@ -97,6 +97,15 @@ describe('Filter Component', () => {
 		expect(clickFn).toHaveBeenCalled();
 	});
 
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<Filter {...args} className={className} />);
+
+		const filterElement = rendered.container.querySelector('.ss__filter');
+		expect(filterElement).toBeInTheDocument();
+		expect(filterElement).toHaveClass(className);
+	});
+
 	it('can disable styles', () => {
 		const rendered = render(<Filter {...args} disableStyles />);
 

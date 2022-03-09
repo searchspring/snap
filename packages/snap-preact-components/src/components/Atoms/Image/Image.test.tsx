@@ -65,8 +65,6 @@ describe('image Component', () => {
 			const onHoverFunc = jest.fn();
 			const rendered = render(<Image alt={badResult.name} onMouseOver={onHoverFunc} src={result.thumbnailImageUrl} hoverSrc={rolloverImage} />);
 			const imageElement = rendered.container.querySelector('.ss__image img');
-			console.log(result.thumbnailImageUrl);
-			console.log(rolloverImage);
 
 			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
 			userEvent.hover(imageElement);
@@ -119,9 +117,9 @@ describe('Image theming works', () => {
 				<Image alt={result.name} src={result.thumbnailImageUrl} />
 			</ThemeProvider>
 		);
-		const pagination = rendered.container.querySelector('.ss__image');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const image = rendered.container.querySelector('.ss__image');
+		expect(image).toBeInTheDocument();
+		expect(image.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -133,9 +131,9 @@ describe('Image theming works', () => {
 			},
 		};
 		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} theme={propTheme} />);
-		const pagination = rendered.container.querySelector('.ss__image');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const image = rendered.container.querySelector('.ss__image');
+		expect(image).toBeInTheDocument();
+		expect(image.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -159,8 +157,8 @@ describe('Image theming works', () => {
 			</ThemeProvider>
 		);
 
-		const pagination = rendered.container.querySelector('.ss__image');
-		expect(pagination).toBeInTheDocument();
-		expect(pagination.classList.length).toBe(1);
+		const image = rendered.container.querySelector('.ss__image');
+		expect(image).toBeInTheDocument();
+		expect(image.classList.length).toBe(1);
 	});
 });

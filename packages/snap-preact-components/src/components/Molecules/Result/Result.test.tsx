@@ -5,6 +5,7 @@ import { searchResponse } from '../../../mocks/searchResponse';
 import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
+import { Layout } from '../../../types';
 
 describe('Result Component', () => {
 	it('renders', () => {
@@ -65,10 +66,40 @@ describe('Result Component', () => {
 		expect(priceElement).not.toBeInTheDocument();
 	});
 
+	it('hides image section', () => {
+		const args = {
+			result: searchResponse.results[0],
+			hideImage: true,
+		};
+		const rendered = render(<Result {...args} />);
+		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image');
+		expect(imageElement).not.toBeInTheDocument();
+	});
+
 	it('should display a fallback image', () => {
 		const rendered = render(<Result result={searchResponse.results[1]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
+	});
+
+	it('should can change the layout', () => {
+		const rendered = render(<Result result={searchResponse.results[1]} layout={Layout.LIST} />);
+		const Element = rendered.container.querySelector('.ss__result');
+		expect(Element).toHaveClass(`ss__result--${Layout.LIST}`);
+	});
+
+	it('can truncate the title', () => {
+		const args = {
+			result: searchResponse.results[1],
+			truncateTitle: {
+				limit: 3,
+				append: '...',
+			},
+		};
+		const rendered = render(<Result {...args} />);
+		const Element = rendered.container.querySelector('.ss__result__details__title a');
+		expect(Element.innerHTML.length).toBeLessThanOrEqual(6);
+		expect(Element).toHaveTextContent('...');
 	});
 
 	it('can set a custom onClick function', () => {
@@ -80,6 +111,23 @@ describe('Result Component', () => {
 
 		userEvent.click(resultElement);
 		expect(onClickFunc).toHaveBeenCalled();
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<Result result={searchResponse.results[1]} className={className} />);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+		expect(resultElement).toBeInTheDocument();
+		expect(resultElement).toHaveClass(className);
+	});
+
+	it('can disable styles', () => {
+		const rendered = render(<Result result={searchResponse.results[1]} disableStyles />);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+
+		expect(resultElement.classList).toHaveLength(2);
 	});
 });
 

@@ -1,8 +1,10 @@
 import { h } from 'preact';
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import { Facet } from './Facet';
-import { searchResponse, listFacetMock, paletteFacetMock, gridFacetMock } from '../../../mocks/searchResponse';
-import { FacetDisplay, ValueFacet } from '../../../types';
+import { ThemeProvider } from '../../../providers';
+import { searchResponse, listFacetMock, paletteFacetMock, gridFacetMock, hierarchyFacetMock, facetOverflowMock } from '../../../mocks/searchResponse';
+import { FacetDisplay, ValueFacet, HierarchyFacet } from '../../../types';
+import userEvent from '@testing-library/user-event';
 
 describe('Facet Component', () => {
 	//TODO: type: FacetType and display: FacetDisplay in interface BaseFacet not compatible with searchResponse mock data?
@@ -63,5 +65,180 @@ describe('Facet Component', () => {
 		});
 	});
 
-	//TODO: add hierarchy when available
+	describe('Slider hierarchy Display', () => {
+		it('renders', () => {
+			const args = {
+				facet: hierarchyFacetMock as HierarchyFacet,
+			};
+			args.facet.collapsed = false;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
+			expect(facetElement).toBeInTheDocument();
+			const hierarchyElement = facetElement.querySelector('.ss__facet-hierarchy-options');
+			expect(hierarchyElement).toBeInTheDocument();
+		});
+	});
+
+	describe('Facet props', () => {
+		it('color prop', () => {
+			const args = {
+				facet: listFacetMock as ValueFacet,
+				color: 'red',
+			};
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__header');
+			expect(facetElement).toBeInTheDocument();
+			const styles = getComputedStyle(facetElement);
+			expect(styles.color).toBe(args.color);
+		});
+
+		it('show more/less text prop', async () => {
+			const args = {
+				facet: facetOverflowMock as unknown as ValueFacet,
+				showMoreText: 'Show More please',
+				showLessText: 'Show Less please',
+			};
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less');
+			expect(facetElement).toBeInTheDocument();
+			expect(facetElement).toHaveTextContent(args.showMoreText);
+
+			userEvent.click(facetElement);
+
+			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
+		});
+
+		it('set custom overflow slot', async () => {
+			const elem = <span className="findMe">Show More please</span>;
+			const args = {
+				facet: facetOverflowMock as unknown as ValueFacet,
+				overflowSlot: elem,
+			};
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less');
+			expect(facetElement).toBeInTheDocument();
+			const overflowSlot = rendered.container.querySelector('.findMe');
+			expect(overflowSlot).toBeInTheDocument();
+			expect(overflowSlot).toHaveTextContent('Show More please');
+		});
+
+		it('set custom options slot', async () => {
+			const option = <span className="findMe">stuff and things</span>;
+			const args = {
+				facet: facetOverflowMock as unknown as ValueFacet,
+				optionsSlot: option,
+			};
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__options');
+			expect(facetElement).toBeInTheDocument();
+
+			const optionsSlot = rendered.container.querySelector('.findMe');
+			expect(optionsSlot).toBeInTheDocument();
+			expect(optionsSlot).toHaveTextContent('stuff and things');
+		});
+
+		it('can use limit prop', async () => {
+			const args = {
+				facet: facetOverflowMock as unknown as ValueFacet,
+				limit: 3,
+				disableOverflow: true,
+			};
+
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+
+			expect(facetElement.length).toBe(args.limit);
+		});
+	});
+
+	it('renders with classname', () => {
+		const args = {
+			facet: listFacetMock as ValueFacet,
+			className: 'classy',
+		};
+
+		const rendered = render(<Facet {...args} />);
+
+		const facetElement = rendered.container.querySelector('.ss__facet');
+		expect(facetElement).toHaveClass(args.className);
+	});
+
+	it('disables styles', () => {
+		const args = {
+			facet: listFacetMock as ValueFacet,
+			disableStyles: true,
+		};
+
+		const rendered = render(<Facet {...args} />);
+
+		const facetElement = rendered.container.querySelector('.ss__facet');
+
+		expect(facetElement.classList).toHaveLength(3);
+	});
+
+	describe('Image theming works', () => {
+		it('is themeable with ThemeProvider', () => {
+			const globalTheme = {
+				components: {
+					facet: {
+						className: 'classy',
+					},
+				},
+			};
+			const rendered = render(
+				<ThemeProvider theme={globalTheme}>
+					<Facet facet={listFacetMock} />
+				</ThemeProvider>
+			);
+			const facet = rendered.container.querySelector('.ss__facet');
+			expect(facet).toBeInTheDocument();
+			expect(facet).toHaveClass(globalTheme.components.facet.className);
+		});
+
+		it('is themeable with theme prop', () => {
+			const propTheme = {
+				components: {
+					facet: {
+						className: 'classy',
+					},
+				},
+			};
+			const rendered = render(<Facet facet={listFacetMock} theme={propTheme} />);
+			const facet = rendered.container.querySelector('.ss__facet');
+			expect(facet).toBeInTheDocument();
+			expect(facet).toHaveClass(propTheme.components.facet.className);
+		});
+
+		it('is theme prop overrides ThemeProvider', () => {
+			const globalTheme = {
+				components: {
+					facet: {
+						className: 'not classy',
+					},
+				},
+			};
+			const propTheme = {
+				components: {
+					facet: {
+						className: 'classy',
+					},
+				},
+			};
+			const rendered = render(
+				<ThemeProvider theme={globalTheme}>
+					<Facet facet={listFacetMock} theme={propTheme} />
+				</ThemeProvider>
+			);
+
+			const facet = rendered.container.querySelector('.ss__facet');
+			expect(facet).toBeInTheDocument();
+			expect(facet).toHaveClass(propTheme.components.facet.className);
+			expect(facet).not.toHaveClass(globalTheme.components.facet.className);
+		});
+	});
 });

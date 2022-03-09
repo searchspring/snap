@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import { Results } from './Results';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
@@ -44,6 +44,85 @@ describe('Results Component', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} />);
 		const results = rendered.container.querySelectorAll('.ss__results__result');
 		expect(results.length).toBe(searchResponse.results.length);
+	});
+
+	it('renders correct number of products when passing rows and columns', () => {
+		const args = {
+			rows: 2,
+			columns: 3,
+		};
+
+		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} {...args} />);
+		const results = rendered.container.querySelectorAll('.ss__result');
+		expect(results.length).toBe(args.columns * args.rows);
+	});
+
+	it('renders custom rows and gapsize', () => {
+		const args = {
+			columns: 6,
+			gapSize: '40px',
+		};
+
+		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} {...args} />);
+		const resultsElement = rendered.container.querySelector('.ss__results');
+		const resultsElementStyles = getComputedStyle(resultsElement);
+
+		expect(resultsElementStyles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+
+		const result = rendered.container.querySelector('.ss__result');
+
+		expect(result).toBeInTheDocument();
+		const resultStyles = getComputedStyle(result);
+		expect(resultStyles.marginRight).toBe(args.gapSize);
+		expect(resultStyles.marginBottom).toBe(args.gapSize);
+	});
+
+	it('can use breakpoints', async () => {
+		const customBreakpoints = {
+			0: {
+				layout: Layout.GRID,
+			},
+			700: {
+				layout: Layout.LIST,
+			},
+		};
+
+		const args = {
+			breakpoints: customBreakpoints,
+		};
+		const rendered = render(<Results results={searchResponse.results} {...args} />);
+		const resultsElement = rendered.container.querySelector('.ss__results');
+
+		expect(resultsElement).toBeInTheDocument();
+		expect(resultsElement).toHaveClass('ss__results-list');
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		global.dispatchEvent(new Event('resize'));
+
+		// to deal with render delay
+		await waitFor(() => {
+			expect(resultsElement).toHaveClass('ss__results-grid');
+		});
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<Results results={searchResponse.results} className={className} />);
+
+		const resultsElement = rendered.container.querySelector('.ss__results');
+		expect(resultsElement).toBeInTheDocument();
+		expect(resultsElement).toHaveClass(className);
+	});
+
+	it('can disable styles', () => {
+		const rendered = render(<Results results={searchResponse.results} disableStyles />);
+
+		const resultsElement = rendered.container.querySelector('.ss__results');
+
+		expect(resultsElement.classList).toHaveLength(2);
 	});
 
 	it('is themeable with ThemeProvider', () => {
