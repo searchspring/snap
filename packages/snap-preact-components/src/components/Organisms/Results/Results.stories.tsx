@@ -88,7 +88,20 @@ export default {
 			control: { type: 'text' },
 		},
 		breakpoints: {
-			defaultValue: {},
+			defaultValue: {
+				0: {
+					columns: 1,
+				},
+				540: {
+					columns: 2,
+				},
+				768: {
+					columns: 3,
+				},
+				991: {
+					columns: 4,
+				},
+			},
 			description: 'Breakpoints options object',
 			table: {
 				type: {
