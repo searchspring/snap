@@ -139,20 +139,29 @@ transformSearchRequest.siteId = (request: SearchRequestModel = {}) => {
 
 transformSearchRequest.facets = (request: SearchRequestModel = {}) => {
 	const facets = request.facets || {};
+	const params: {
+		includedFacets?: string[];
+		excludedFacets?: string[];
+		disableFacetDrillDown?: boolean;
+	} = {};
 
 	if (facets.include && facets.include.length && facets.exclude && facets.exclude.length) {
 		throw 'cannot use facet include and exclude at the same time';
 	}
 
 	if (facets.include?.length) {
-		return { includedFacets: facets.include };
+		params.includedFacets = facets.include;
 	}
 
 	if (facets.exclude?.length) {
-		return { excludedFacets: facets.exclude };
+		params.excludedFacets = facets.exclude;
 	}
 
-	return {};
+	if (facets.autoDrillDown === false) {
+		params.disableFacetDrillDown = true;
+	}
+
+	return params;
 };
 
 transformSearchRequest.tracking = (request: SearchRequestModel = {}) => {

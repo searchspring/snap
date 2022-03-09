@@ -60,12 +60,16 @@ export class FinderController extends AbstractController {
 
 	get params(): Record<string, any> {
 		const urlState = this.urlManager.state;
-		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
 
-		// get only the finder fields
-		params.facets = {
-			include: this.config.fields.map((fieldConfig) => fieldConfig.field),
+		// get only the finder fields and disable auto drill down
+		const defaultParams = {
+			facets: {
+				include: this.config.fields.map((fieldConfig) => fieldConfig.field),
+				autoDrillDown: false,
+			},
 		};
+
+		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, deepmerge(defaultParams, this.config.globals));
 
 		return params;
 	}
