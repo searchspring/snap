@@ -192,13 +192,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		0: {
 			columns: 2,
 			rows: 1,
-			hideFacets: true,
-			vertical: true,
+			hideFacets: props.hideFacets || true,
+			vertical: props.vertical || true,
 		},
 		540: {
 			columns: 3,
 			rows: 1,
-			vertical: true,
+			vertical: props.vertical || true,
 		},
 		768: {
 			columns: 2,
