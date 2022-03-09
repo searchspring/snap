@@ -15,48 +15,48 @@ export class SelectionStore extends Array {
 		loading: boolean,
 		storage: StorageStore
 	) {
-		if (!facets || !meta) {
-			super();
-			return;
-		}
-		// re-order facets to match our config
-		config?.fields &&
-			facets.sort((a, b) => {
-				const fields = config.fields.map((fieldConfig) => fieldConfig.field);
-				return fields.indexOf(a.field) - fields.indexOf(b.field);
-			});
 		const selections = [];
-		config?.fields?.forEach((fieldObj) => {
-			let facet: any = facets?.filter((facet) => facet.field == fieldObj.field).pop();
 
-			facet = {
-				...meta?.facets[fieldObj.field],
-				...facet,
-			};
-
-			const isHierarchy = facet.display === 'hierarchy';
-			if (isHierarchy) {
-				// filter out history/current hierarchy values
-				const filtered = facet.filtered && facet.values.filter((value) => value.filtered).pop();
-
-				if (filtered) {
-					const filteredLevel = filtered.value.split(facet.hierarchyDelimiter).length;
-
-					facet.values = facet.values.filter((value, index) => {
-						return (value.value && value.value.split(facet.hierarchyDelimiter).length > filteredLevel) || index == facet.values.length - 1;
-					});
-				}
-
-				const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
-
-				levels?.map((level, index) => {
-					const levelConfig: LevelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
-					selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
+		if (facets && meta) {
+			// re-order facets to match our config
+			config?.fields &&
+				facets.sort((a, b) => {
+					const fields = config.fields.map((fieldConfig) => fieldConfig.field);
+					return fields.indexOf(a.field) - fields.indexOf(b.field);
 				});
-			} else {
-				selections.push(new Selection(services, config.id, facet, fieldObj, loading, storage));
-			}
-		});
+
+			config?.fields?.forEach((fieldObj) => {
+				let facet: any = facets?.filter((facet) => facet.field == fieldObj.field).pop();
+
+				facet = {
+					...meta?.facets[fieldObj.field],
+					...facet,
+				};
+
+				const isHierarchy = facet.display === 'hierarchy';
+				if (isHierarchy) {
+					// filter out history/current hierarchy values
+					const filtered = facet.filtered && facet.values.filter((value) => value.filtered).pop();
+
+					if (filtered) {
+						const filteredLevel = filtered.value.split(facet.hierarchyDelimiter).length;
+
+						facet.values = facet.values.filter((value, index) => {
+							return (value.value && value.value.split(facet.hierarchyDelimiter).length > filteredLevel) || index == facet.values.length - 1;
+						});
+					}
+
+					const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
+
+					levels?.map((level, index) => {
+						const levelConfig: LevelConfig = { index, label: fieldObj.levels ? level : '', key: `ss-${index}` };
+						selections.push(new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage));
+					});
+				} else {
+					selections.push(new Selection(services, config.id, facet, fieldObj, loading, storage));
+				}
+			});
+		}
 
 		super(...selections);
 	}
