@@ -1,0 +1,12 @@
+{
+	"transform": {
+		"^.+\\.tsx?$": "ts-jest"
+	},
+	"testRegex": "\\.(test|spec)\\.(jsx?|tsx?)$",
+	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+	"coveragePathIgnorePatterns": ["<rootDir>/dist/"],
+	"testEnvironment": "jsdom",
+	"collectCoverage": true,
+	"verbose": true,
+	"roots": ["<rootDir>/src"]
+}

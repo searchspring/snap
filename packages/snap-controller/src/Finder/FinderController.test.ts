@@ -47,6 +47,57 @@ describe('Finder Controller', () => {
 	});
 
 	describe('Hierarchy Type', () => {
+		it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
+			const controller = new FinderController(finderHierarchyConfig, {
+				client: new MockClient(globals, { meta: { prefetch: false } }),
+				store: new FinderStore(finderHierarchyConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			});
+
+			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+			controller.init();
+
+			const params = controller.params;
+			expect(params.facets).toStrictEqual({
+				include: finderHierarchyConfig.fields.map((field) => field.field),
+				autoDrillDown: false,
+			});
+		});
+
+		it(`allows for config globals to overwrite / merge with default parameters`, async () => {
+			const config = {
+				...finderHierarchyConfig,
+				globals: {
+					facets: {
+						include: ['ss-special'],
+						autoDrillDown: true,
+					},
+				},
+			};
+			const controller = new FinderController(config, {
+				client: new MockClient(globals, { meta: { prefetch: false } }),
+				store: new FinderStore(finderHierarchyConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			});
+
+			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+			controller.init();
+
+			const params = controller.params;
+			expect(params.facets).toStrictEqual({
+				include: finderHierarchyConfig.fields.map((field) => field.field).concat('ss-special'),
+				autoDrillDown: true,
+			});
+		});
+
 		it('can make selection', async () => {
 			const controller = new FinderController(finderHierarchyConfig, {
 				client: new MockClient(globals, { meta: { prefetch: false } }),
@@ -148,7 +199,57 @@ describe('Finder Controller', () => {
 	});
 
 	describe('Non-hierarchy Type', () => {
-		it('Non-hierarchy type can make selection', async () => {
+		it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
+			const controller = new FinderController(finderNonhierarchyConfig, {
+				client: new MockClient(globals, { meta: { prefetch: false } }),
+				store: new FinderStore(finderNonhierarchyConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			});
+
+			controller.init();
+
+			const params = controller.params;
+			expect(params.facets).toStrictEqual({
+				include: finderNonhierarchyConfig.fields.map((field) => field.field),
+				autoDrillDown: false,
+			});
+		});
+
+		it(`allows for config globals to overwrite / merge with default parameters`, async () => {
+			const config = {
+				...finderNonhierarchyConfig,
+				globals: {
+					facets: {
+						include: ['ss-special'],
+						autoDrillDown: true,
+					},
+				},
+			};
+			const controller = new FinderController(config, {
+				client: new MockClient(globals, { meta: { prefetch: false } }),
+				store: new FinderStore(finderNonhierarchyConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			});
+
+			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+			controller.init();
+
+			const params = controller.params;
+			expect(params.facets).toStrictEqual({
+				include: finderNonhierarchyConfig.fields.map((field) => field.field).concat('ss-special'),
+				autoDrillDown: true,
+			});
+		});
+
+		it('can make selection', async () => {
 			const controller = new FinderController(finderNonhierarchyConfig, {
 				client: new MockClient(globals, { meta: { prefetch: false } }),
 				store: new FinderStore(finderNonhierarchyConfig, services),

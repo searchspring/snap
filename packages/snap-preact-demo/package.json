@@ -1,14 +1,14 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "0.21.1",
+	"version": "0.22.0",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
 	"scripts": {
 		"analyze": "webpack --config webpack.modern.js --analyze",
 		"analyze:universal": "webpack --config webpack.universal.js --analyze",
-		"build": "rm -rf ./dist && webpack --config webpack.modern.js && webpack --config webpack.universal.js",
+		"build": "echo 'not building demo store'",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
 		"cypress": "cypress open --project tests",
 		"dev": "kill $(lsof -ti:2222,8888); webpack serve --config webpack.dev.js",
@@ -18,8 +18,8 @@
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.21.1",
-		"@searchspring/snap-preact-components": "^0.21.1",
+		"@searchspring/snap-preact": "^0.22.0",
+		"@searchspring/snap-preact-components": "^0.22.0",
 		"deepmerge": "^4.2.2",
 		"mobx": "^6.3.12",
 		"mobx-react": "^7.2.1",

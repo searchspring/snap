@@ -34,13 +34,18 @@ export class FacetStore extends Array {
 		const facets = facetsData
 			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
 				const facetMeta = meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
+
+				// exclude facets that have no meta data
+				if (!facetMeta) return false;
+
+				// exclude facets that have mismatched meta data
+				if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
+					return false;
+				}
+
+				// trim facets - remove facets that have no use
 				if (config.settings?.facets?.trim) {
-					if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
-						return false;
-					} else if (
-						facet.type === 'range' &&
-						(facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high
-					) {
+					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
 						return false;
@@ -48,6 +53,7 @@ export class FacetStore extends Array {
 						return facet.values[0].count != pagination.totalResults;
 					}
 				}
+
 				return true;
 			})
 			.map((facet) => {
