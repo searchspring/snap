@@ -32,7 +32,7 @@ export class PixelEvent {
 				this.event = payload.event as CartViewEvent;
 				this.src += '&a=basket';
 				this.event.items.forEach((item) => {
-					if (item.sku) {
+					if (item?.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}
 				});
@@ -46,7 +46,7 @@ export class PixelEvent {
 				if (state) this.src += `&state=${encodeURIComponent(state)}`;
 				if (country) this.src += `&country=${encodeURIComponent(country)}`;
 				items.forEach((item) => {
-					if (item.sku) {
+					if (item?.sku) {
 						this.src += `&item=${encodeURIComponent(item.sku)};${encodeURIComponent(item?.qty || '')};${encodeURIComponent(item?.price || '')};`;
 					}
 				});
