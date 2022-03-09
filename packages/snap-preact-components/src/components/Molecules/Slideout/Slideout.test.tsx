@@ -132,10 +132,10 @@ describe('Slideout Component', () => {
 			slideDirection: 'right' as SlideDirectionType,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
+		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
 		const styles = getComputedStyle(overlayElement);
-		expect(styles.right).toBe('0');
-		expect(styles.left).toBe('initial');
+		expect(styles.right).toBe('0px');
+		expect(styles.left).toBe('');
 	});
 
 	it('can set custom transitionSpeed', () => {
@@ -144,18 +144,7 @@ describe('Slideout Component', () => {
 			transitionSpeed: '0.55s' as SlideDirectionType,
 		};
 		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
-		const styles = getComputedStyle(overlayElement);
-		expect(styles.transition).toBe(`left ${args.transitionSpeed}`);
-	});
-
-	it('can set custom transitionSpeed', () => {
-		const args = {
-			active: true,
-			transitionSpeed: '0.55s' as SlideDirectionType,
-		};
-		const rendered = render(<Slideout {...args} />);
-		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
+		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.transition).toBe(`left ${args.transitionSpeed}`);
 	});
@@ -180,7 +169,7 @@ describe('Slideout Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__slideout');
 
-		expect(resultElement.classList).toHaveLength(1);
+		expect(resultElement.classList).toHaveLength(2);
 	});
 
 	it('is themeable with ThemeProvider', () => {
