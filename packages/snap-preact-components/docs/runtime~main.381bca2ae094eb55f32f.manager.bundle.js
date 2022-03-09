@@ -1,6 +1,8 @@
 (() => {
 	'use strict';
 	var deferred,
+		leafPrototypes,
+		getProto,
 		inProgress,
 		__webpack_modules__ = {},
 		__webpack_module_cache__ = {};
@@ -36,6 +38,21 @@
 			var getter = module && module.__esModule ? () => module.default : () => module;
 			return __webpack_require__.d(getter, { a: getter }), getter;
 		}),
+		(getProto = Object.getPrototypeOf ? (obj) => Object.getPrototypeOf(obj) : (obj) => obj.__proto__),
+		(__webpack_require__.t = function (value, mode) {
+			if ((1 & mode && (value = this(value)), 8 & mode)) return value;
+			if ('object' == typeof value && value) {
+				if (4 & mode && value.__esModule) return value;
+				if (16 & mode && 'function' == typeof value.then) return value;
+			}
+			var ns = Object.create(null);
+			__webpack_require__.r(ns);
+			var def = {};
+			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+			for (var current = 2 & mode && value; 'object' == typeof current && !~leafPrototypes.indexOf(current); current = getProto(current))
+				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => value[key]));
+			return (def.default = () => value), __webpack_require__.d(ns, def), ns;
+		}),
 		(__webpack_require__.d = (exports, definition) => {
 			for (var key in definition)
 				__webpack_require__.o(definition, key) &&
@@ -48,8 +65,15 @@
 		(__webpack_require__.u = (chunkId) =>
 			chunkId +
 			'.' +
-			{ 135: 'fb50fe05', 172: 'c8739579', 491: 'b6101329', 531: '91f09af3', 887: '23c8cb58', 994: '673577e8' }[chunkId] +
-			'.iframe.bundle.js'),
+			{
+				135: '3086b2531cd87c3681af',
+				172: 'c70b8fc477621b824dfd',
+				531: '167a147ccb6e13010c80',
+				887: 'e47dc74f918fe1dcee68',
+				950: '2642e4df532e5802c74b',
+				994: '33212244ec0c46572e74',
+			}[chunkId] +
+			'.manager.bundle.js'),
 		(__webpack_require__.g = (function () {
 			if ('object' == typeof globalThis) return globalThis;
 			try {

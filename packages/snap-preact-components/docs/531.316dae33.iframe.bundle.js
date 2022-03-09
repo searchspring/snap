@@ -2,13 +2,18 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[531],
 	{
-		70531: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/components/dist/esm/ScrollArea/GlobalScrollAreaStyles.js': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { getScrollAreaStyles: () => getScrollAreaStyles, default: () => __WEBPACK_DEFAULT_EXPORT__ });
-			__webpack_require__(32501), __webpack_require__(22144);
+				__webpack_require__.d(__webpack_exports__, { default: () => __WEBPACK_DEFAULT_EXPORT__, getScrollAreaStyles: () => getScrollAreaStyles });
+			__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.freeze.js');
 			var _templateObject,
-				react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2784),
-				_storybook_theming__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(67718);
+				react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				_storybook_theming__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/core/dist/core.browser.esm.js');
 			var hsResizeObserverDummyAnimation = (0, _storybook_theming__WEBPACK_IMPORTED_MODULE_3__.F4)(
 					_templateObject ||
 						(_templateObject = (function _taggedTemplateLiteral(strings, raw) {
@@ -281,7 +286,7 @@
 					};
 				},
 				GlobalScrollAreaStyles = function GlobalScrollAreaStyles() {
-					return react__WEBPACK_IMPORTED_MODULE_2__.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_3__.xB, {
+					return react__WEBPACK_IMPORTED_MODULE_2__.default.createElement(_storybook_theming__WEBPACK_IMPORTED_MODULE_3__.xB, {
 						styles: getScrollAreaStyles,
 					});
 				};

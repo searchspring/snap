@@ -1,4 +1,4 @@
-/*! For license information please see 159.6184e899.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 159.34a84f89.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[159],
 	{
@@ -1834,7 +1834,7 @@
 		},
 		'../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { iv: () => css, tZ: () => jsx, F4: () => keyframes });
+			__webpack_require__.d(__webpack_exports__, { F4: () => keyframes, iv: () => css, tZ: () => jsx });
 			var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
 				_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_4__ =
 					(__webpack_require__('../../node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js'),
@@ -2160,21 +2160,21 @@
 		'../../node_modules/@popperjs/core/lib/enums.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				we: () => top,
-				I: () => bottom,
-				F2: () => right,
-				t$: () => left,
-				d7: () => auto,
-				mv: () => basePlacements,
 				BL: () => start,
-				ut: () => end,
-				zV: () => clippingParents,
+				Ct: () => placements,
+				F2: () => right,
+				I: () => bottom,
 				Pj: () => viewport,
-				k5: () => popper,
 				YP: () => reference,
 				bw: () => variationPlacements,
-				Ct: () => placements,
+				d7: () => auto,
+				k5: () => popper,
+				mv: () => basePlacements,
+				t$: () => left,
+				ut: () => end,
+				we: () => top,
 				xs: () => modifierPhases,
+				zV: () => clippingParents,
 			});
 			var top = 'top',
 				bottom = 'bottom',
@@ -4393,7 +4393,7 @@
 		},
 		'../../node_modules/@storybook/addons/dist/esm/hooks.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { c8: () => HooksContext, DM: () => applyHooks, Ye: () => useMemo, d4: () => useEffect });
+			__webpack_require__.d(__webpack_exports__, { DM: () => applyHooks, Ye: () => useMemo, c8: () => HooksContext, d4: () => useEffect });
 			__webpack_require__('../../node_modules/core-js/modules/es.weak-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
@@ -5948,7 +5948,7 @@
 		},
 		'../../node_modules/@storybook/client-logger/dist/esm/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { kg: () => logger, IH: () => once, IC: () => pretty });
+			__webpack_require__.d(__webpack_exports__, { IC: () => pretty, IH: () => once, kg: () => logger });
 			__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
@@ -6358,7 +6358,7 @@
 		},
 		'../../node_modules/@storybook/components/dist/esm/bar/button.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Y6: () => TabButton, hU: () => IconButton, Z$: () => IconButtonSkeleton });
+			__webpack_require__.d(__webpack_exports__, { Y6: () => TabButton, Z$: () => IconButtonSkeleton, hU: () => IconButton });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
@@ -12275,7 +12275,7 @@
 		},
 		'../../node_modules/@storybook/components/dist/esm/blocks/Source.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { ui: () => SourceError, Hw: () => Source, iS: () => StyledSyntaxHighlighter });
+			__webpack_require__.d(__webpack_exports__, { Hw: () => Source, iS: () => StyledSyntaxHighlighter, ui: () => SourceError });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
@@ -12415,7 +12415,7 @@
 		},
 		'../../node_modules/@storybook/components/dist/esm/controls/helpers.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { d: () => getControlId, O: () => getControlSetterButtonId });
+			__webpack_require__.d(__webpack_exports__, { O: () => getControlSetterButtonId, d: () => getControlId });
 			__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js');
 			var getControlId = function getControlId(value) {
@@ -13546,7 +13546,7 @@
 			__webpack_require__
 		) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { R: () => WithTooltip, D: () => WithTooltipPure });
+			__webpack_require__.d(__webpack_exports__, { D: () => WithTooltipPure, R: () => WithTooltip });
 			__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js');
 			var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
@@ -13589,7 +13589,7 @@
 			__webpack_require__
 		) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { H2: () => H2, H3: () => H3, EK: () => Code, i9: () => ResetWrapper, wx: () => components });
+			__webpack_require__.d(__webpack_exports__, { EK: () => Code, H2: () => H2, H3: () => H3, i9: () => ResetWrapper, wx: () => components });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -13990,7 +13990,7 @@
 		},
 		'../../node_modules/@storybook/components/dist/esm/typography/shared.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { g$: () => headerCommon, CI: () => codeCommon, YX: () => withReset, vl: () => withMargin });
+			__webpack_require__.d(__webpack_exports__, { CI: () => codeCommon, YX: () => withReset, g$: () => headerCommon, vl: () => withMargin });
 			var polished__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/polished/dist/polished.esm.js'),
 				headerCommon = function headerCommon(_ref) {
 					return {
@@ -18377,41 +18377,41 @@
 			var events;
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
 					CHANNEL_CREATED: () => CHANNEL_CREATED,
 					CONFIG_ERROR: () => CONFIG_ERROR,
-					STORY_INDEX_INVALIDATED: () => STORY_INDEX_INVALIDATED,
-					STORY_SPECIFIED: () => STORY_SPECIFIED,
-					SET_STORIES: () => SET_STORIES,
-					SET_CURRENT_STORY: () => SET_CURRENT_STORY,
 					CURRENT_STORY_WAS_SET: () => CURRENT_STORY_WAS_SET,
-					FORCE_RE_RENDER: () => FORCE_RE_RENDER,
-					FORCE_REMOUNT: () => FORCE_REMOUNT,
-					STORY_PREPARED: () => STORY_PREPARED,
-					STORY_CHANGED: () => STORY_CHANGED,
-					STORY_UNCHANGED: () => STORY_UNCHANGED,
-					STORY_RENDERED: () => STORY_RENDERED,
-					STORY_MISSING: () => STORY_MISSING,
-					STORY_ERRORED: () => STORY_ERRORED,
-					STORY_THREW_EXCEPTION: () => STORY_THREW_EXCEPTION,
-					STORY_RENDER_PHASE_CHANGED: () => STORY_RENDER_PHASE_CHANGED,
-					UPDATE_STORY_ARGS: () => UPDATE_STORY_ARGS,
-					STORY_ARGS_UPDATED: () => STORY_ARGS_UPDATED,
-					RESET_STORY_ARGS: () => RESET_STORY_ARGS,
-					SET_GLOBALS: () => SET_GLOBALS,
-					UPDATE_GLOBALS: () => UPDATE_GLOBALS,
-					GLOBALS_UPDATED: () => GLOBALS_UPDATED,
-					REGISTER_SUBSCRIPTION: () => REGISTER_SUBSCRIPTION,
-					PREVIEW_KEYDOWN: () => PREVIEW_KEYDOWN,
-					SELECT_STORY: () => SELECT_STORY,
-					STORIES_COLLAPSE_ALL: () => STORIES_COLLAPSE_ALL,
-					STORIES_EXPAND_ALL: () => STORIES_EXPAND_ALL,
 					DOCS_RENDERED: () => DOCS_RENDERED,
+					FORCE_REMOUNT: () => FORCE_REMOUNT,
+					FORCE_RE_RENDER: () => FORCE_RE_RENDER,
+					GLOBALS_UPDATED: () => GLOBALS_UPDATED,
+					IGNORED_EXCEPTION: () => IGNORED_EXCEPTION,
+					NAVIGATE_URL: () => NAVIGATE_URL,
+					PREVIEW_KEYDOWN: () => PREVIEW_KEYDOWN,
+					REGISTER_SUBSCRIPTION: () => REGISTER_SUBSCRIPTION,
+					RESET_STORY_ARGS: () => RESET_STORY_ARGS,
+					SELECT_STORY: () => SELECT_STORY,
+					SET_CURRENT_STORY: () => SET_CURRENT_STORY,
+					SET_GLOBALS: () => SET_GLOBALS,
+					SET_STORIES: () => SET_STORIES,
 					SHARED_STATE_CHANGED: () => SHARED_STATE_CHANGED,
 					SHARED_STATE_SET: () => SHARED_STATE_SET,
-					NAVIGATE_URL: () => NAVIGATE_URL,
+					STORIES_COLLAPSE_ALL: () => STORIES_COLLAPSE_ALL,
+					STORIES_EXPAND_ALL: () => STORIES_EXPAND_ALL,
+					STORY_ARGS_UPDATED: () => STORY_ARGS_UPDATED,
+					STORY_CHANGED: () => STORY_CHANGED,
+					STORY_ERRORED: () => STORY_ERRORED,
+					STORY_INDEX_INVALIDATED: () => STORY_INDEX_INVALIDATED,
+					STORY_MISSING: () => STORY_MISSING,
+					STORY_PREPARED: () => STORY_PREPARED,
+					STORY_RENDERED: () => STORY_RENDERED,
+					STORY_RENDER_PHASE_CHANGED: () => STORY_RENDER_PHASE_CHANGED,
+					STORY_SPECIFIED: () => STORY_SPECIFIED,
+					STORY_THREW_EXCEPTION: () => STORY_THREW_EXCEPTION,
+					STORY_UNCHANGED: () => STORY_UNCHANGED,
+					UPDATE_GLOBALS: () => UPDATE_GLOBALS,
 					UPDATE_QUERY_PARAMS: () => UPDATE_QUERY_PARAMS,
-					IGNORED_EXCEPTION: () => IGNORED_EXCEPTION,
+					UPDATE_STORY_ARGS: () => UPDATE_STORY_ARGS,
+					default: () => __WEBPACK_DEFAULT_EXPORT__,
 				}),
 				(function (events) {
 					(events.CHANNEL_CREATED = 'channelCreated'),
@@ -18629,14 +18629,14 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
-					storiesOf: () => _preview__WEBPACK_IMPORTED_MODULE_0__.ML,
-					setAddon: () => _preview__WEBPACK_IMPORTED_MODULE_0__.fV,
 					addDecorator: () => _preview__WEBPACK_IMPORTED_MODULE_0__.$9,
 					addParameters: () => _preview__WEBPACK_IMPORTED_MODULE_0__.h1,
 					configure: () => _preview__WEBPACK_IMPORTED_MODULE_0__.jQ,
-					getStorybook: () => _preview__WEBPACK_IMPORTED_MODULE_0__.pn,
 					forceReRender: () => _preview__WEBPACK_IMPORTED_MODULE_0__.nr,
+					getStorybook: () => _preview__WEBPACK_IMPORTED_MODULE_0__.pn,
 					raw: () => _preview__WEBPACK_IMPORTED_MODULE_0__.LZ,
+					setAddon: () => _preview__WEBPACK_IMPORTED_MODULE_0__.fV,
+					storiesOf: () => _preview__WEBPACK_IMPORTED_MODULE_0__.ML,
 				});
 			var _preview__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/preview/index.js'),
 				_preview_types_6_0__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
@@ -19951,10 +19951,10 @@
 		'../../node_modules/@storybook/theming/dist/esm/utils.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				TE: () => mkColor,
-				tG: () => lightenColor,
-				r5: () => darkenColor,
 				Q$: () => getPreferredColorScheme,
+				TE: () => mkColor,
+				r5: () => darkenColor,
+				tG: () => lightenColor,
 			});
 			__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -29809,7 +29809,7 @@
 		},
 		'../../node_modules/emotion-theming/dist/emotion-theming.browser.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { f6: () => ThemeProvider, Fg: () => useTheme });
+			__webpack_require__.d(__webpack_exports__, { Fg: () => useTheme, f6: () => ThemeProvider });
 			var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
 					'../../node_modules/@babel/runtime/helpers/esm/defineProperty.js'
 				),
@@ -38227,9 +38227,8 @@
 						return t;
 					}).apply(this, arguments);
 			}
-			var n = /[\'\"]/;
-			const r = ['children', 'options'],
-				o = [
+			const n = ['children', 'options'],
+				r = [
 					'allowFullScreen',
 					'allowTransparency',
 					'autoComplete',
@@ -38271,68 +38270,68 @@
 					'tabIndex',
 					'useMap',
 				].reduce((t, e) => ((t[e.toLowerCase()] = e), t), { for: 'htmlFor' }),
-				c = { amp: '&', apos: "'", gt: '>', lt: '<', nbsp: ' ', quot: '“' },
-				a = ['style', 'script'],
-				u = /([-A-Z0-9_:]+)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|(?:\{((?:\\.|{[^}]*?}|[^}])*)\})))?/gi,
-				i = /mailto:/i,
-				l = /\n{2,}$/,
-				s = /^( *>[^\n]+(\n[^\n]+)*\n*)+\n{2,}/,
-				_ = /^ *> ?/gm,
-				f = /^ {2,}\n/,
-				d = /^(?:( *[-*_]) *){3,}(?:\n *)+\n/,
-				p = /^\s*(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n *)+\n?/,
-				g = /^(?: {4}[^\n]+\n*)+(?:\n *)+\n?/,
-				m = /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
-				y = /^(?:\n *)*\n/,
-				h = /\r\n?/g,
-				k = /^\[\^([^\]]+)](:.*)\n/,
-				x = /^\[\^([^\]]+)]/,
-				v = /\f/g,
+				o = { amp: '&', apos: "'", gt: '>', lt: '<', nbsp: ' ', quot: '“' },
+				c = ['style', 'script'],
+				a = /([-A-Z0-9_:]+)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|(?:\{((?:\\.|{[^}]*?}|[^}])*)\})))?/gi,
+				u = /mailto:/i,
+				i = /\n{2,}$/,
+				l = /^( *>[^\n]+(\n[^\n]+)*\n*)+\n{2,}/,
+				s = /^ *> ?/gm,
+				_ = /^ {2,}\n/,
+				f = /^(?:( *[-*_]) *){3,}(?:\n *)+\n/,
+				d = /^\s*(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n *)+\n?/,
+				p = /^(?: {4}[^\n]+\n*)+(?:\n *)+\n?/,
+				g = /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
+				m = /^(?:\n *)*\n/,
+				y = /\r\n?/g,
+				h = /^\[\^([^\]]+)](:.*)\n/,
+				k = /^\[\^([^\]]+)]/,
+				x = /\f/g,
 				b = /^\s*?\[(x|\s)\]/,
-				S = /^ *(#{1,6}) *([^\n]+?)(?: +#*)?(?:\n *)*(?:\n|$)/,
-				$ = /^([^\n]+)\n *(=|-){3,} *(?:\n *)+\n/,
-				w = /^ *(?!<[a-z][^ >/]* ?\/>)<([a-z][^ >/]*) ?([^>]*)\/{0}>\n?(\s*(?:<\1[^>]*?>[\s\S]*?<\/\1>|(?!<\1)[\s\S])*?)<\/\1>\n*/i,
-				z = /&([a-z]+);/g,
-				E = /^<!--[\s\S]*?(?:-->)/,
-				A = /^(data|aria|x)-[a-z_][a-z\d_.-]*$/,
-				R = /^ *<([a-z][a-z0-9:]*)(?:\s+((?:<.*?>|[^>])*))?\/?>(?!<\/\1>)(\s*\n)?/i,
-				I = /^\{.*\}$/,
-				M = /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
-				O = /^<([^ >]+@[^ >]+)>/,
-				B = /^<([^ >]+:\/[^ >]+)>/,
-				L = / *\n+$/,
-				T = /(?:^|\n)( *)$/,
-				j = /-([a-z])?/gi,
-				C = /^(.*\|?.*)\n *(\|? *[-:]+ *\|[-| :]*)\n((?:.*\|.*\n)*)\n?/,
-				D = /^\[([^\]]*)\]:\s*(\S+)\s*("([^"]*)")?/,
-				N = /^!\[([^\]]*)\] ?\[([^\]]*)\]/,
-				Z = /^\[([^\]]*)\] ?\[([^\]]*)\]/,
-				F = /(\[|\])/g,
-				P = /(\n|^[-*]\s|^#|^ {2,}|^-{2,}|^>\s)/,
-				G = /\t/g,
-				H = /^ *\| */,
-				q = /(^ *\||\| *$)/g,
-				U = / *$/,
-				V = /^ *:-+: *$/,
-				W = /^ *:-+ *$/,
-				Q = /^ *-+: *$/,
-				X = /^([*_])\1((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1\1(?!\1)/,
-				J = /^([*_])((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1(?!\1|\w)/,
-				K = /^~~((?:\[.*?\]|<.*?>(?:.*?<.*?>)?|`.*?`|.)*?)~~/,
-				Y = /^\\([^0-9A-Za-z\s])/,
-				tt = /^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n|\w+:\S|$)/i,
-				et = /^\n+/,
-				nt = /^([ \t]*)/,
-				rt = /\\([^0-9A-Z\s])/gi,
-				ot = new RegExp('^( *)((?:[*+-]|\\d+\\.)) +'),
-				ct = new RegExp('^( *)((?:[*+-]|\\d+\\.)) +[^\\n]*(?:\\n(?!\\1(?:[*+-]|\\d+\\.) )[^\\n]*)*(\\n|$)', 'gm'),
-				at = new RegExp('^( *)((?:[*+-]|\\d+\\.)) [\\s\\S]+?(?:\\n{2,}(?! )(?!\\1(?:[*+-]|\\d+\\.) (?!(?:[*+-]|\\d+\\.) ))\\n*|\\s*\\n*$)'),
-				ut = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*',
-				it = new RegExp('^\\[(' + ut + ')\\]\\(\\s*<?((?:[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"]([\\s\\S]*?)[\'"])?\\s*\\)'),
-				lt = new RegExp('^!\\[(' + ut + ')\\]\\(\\s*<?((?:[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"]([\\s\\S]*?)[\'"])?\\s*\\)'),
-				st = [s, g, p, S, $, E, ct, at, C],
-				_t = [...st, /^[^\n]+(?:  \n|\n{2,})/, w, R];
-			function ft(t) {
+				v = /^ *(#{1,6}) *([^\n]+?)(?: +#*)?(?:\n *)*(?:\n|$)/,
+				S = /^([^\n]+)\n *(=|-){3,} *(?:\n *)+\n/,
+				$ = /^ *(?!<[a-z][^ >/]* ?\/>)<([a-z][^ >/]*) ?([^>]*)\/{0}>\n?(\s*(?:<\1[^>]*?>[\s\S]*?<\/\1>|(?!<\1)[\s\S])*?)<\/\1>\n*/i,
+				w = /&([a-z]+);/g,
+				z = /^<!--[\s\S]*?(?:-->)/,
+				E = /^(data|aria|x)-[a-z_][a-z\d_.-]*$/,
+				A = /^ *<([a-z][a-z0-9:]*)(?:\s+((?:<.*?>|[^>])*))?\/?>(?!<\/\1>)(\s*\n)?/i,
+				R = /^\{.*\}$/,
+				I = /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
+				M = /^<([^ >]+@[^ >]+)>/,
+				O = /^<([^ >]+:\/[^ >]+)>/,
+				B = / *\n+$/,
+				L = /(?:^|\n)( *)$/,
+				T = /-([a-z])?/gi,
+				j = /^(.*\|?.*)\n *(\|? *[-:]+ *\|[-| :]*)\n((?:.*\|.*\n)*)\n?/,
+				C = /^\[([^\]]*)\]:\s*(\S+)\s*("([^"]*)")?/,
+				D = /^!\[([^\]]*)\] ?\[([^\]]*)\]/,
+				N = /^\[([^\]]*)\] ?\[([^\]]*)\]/,
+				Z = /(\[|\])/g,
+				F = /(\n|^[-*]\s|^#|^ {2,}|^-{2,}|^>\s)/,
+				P = /\t/g,
+				G = /^ *\| */,
+				H = /(^ *\||\| *$)/g,
+				q = / *$/,
+				U = /^ *:-+: *$/,
+				V = /^ *:-+ *$/,
+				W = /^ *-+: *$/,
+				Q = /^([*_])\1((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1\1(?!\1)/,
+				X = /^([*_])((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1(?!\1|\w)/,
+				J = /^~~((?:\[.*?\]|<.*?>(?:.*?<.*?>)?|`.*?`|.)*?)~~/,
+				K = /^\\([^0-9A-Za-z\s])/,
+				Y = /^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n|\w+:\S|$)/i,
+				tt = /^\n+/,
+				et = /^([ \t]*)/,
+				nt = /\\([^0-9A-Z\s])/gi,
+				rt = new RegExp('^( *)((?:[*+-]|\\d+\\.)) +'),
+				ot = new RegExp('^( *)((?:[*+-]|\\d+\\.)) +[^\\n]*(?:\\n(?!\\1(?:[*+-]|\\d+\\.) )[^\\n]*)*(\\n|$)', 'gm'),
+				ct = new RegExp('^( *)((?:[*+-]|\\d+\\.)) [\\s\\S]+?(?:\\n{2,}(?! )(?!\\1(?:[*+-]|\\d+\\.) (?!(?:[*+-]|\\d+\\.) ))\\n*|\\s*\\n*$)'),
+				at = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*',
+				ut = new RegExp('^\\[(' + at + ')\\]\\(\\s*<?((?:[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"]([\\s\\S]*?)[\'"])?\\s*\\)'),
+				it = new RegExp('^!\\[(' + at + ')\\]\\(\\s*<?((?:[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"]([\\s\\S]*?)[\'"])?\\s*\\)'),
+				lt = [l, p, d, v, S, z, ot, ct, j],
+				st = [...lt, /^[^\n]+(?:  \n|\n{2,})/, $, A];
+			function _t(t) {
 				return t
 					.replace(/[ÀÁÂÃÄÅàáâãäåæÆ]/g, 'a')
 					.replace(/[çÇ]/g, 'c')
@@ -38347,10 +38346,10 @@
 					.replace(/ /gi, '-')
 					.toLowerCase();
 			}
-			function dt(t) {
-				return Q.test(t) ? 'right' : V.test(t) ? 'center' : W.test(t) ? 'left' : null;
+			function ft(t) {
+				return W.test(t) ? 'right' : U.test(t) ? 'center' : V.test(t) ? 'left' : null;
 			}
-			function pt(t, e, n) {
+			function dt(t, e, n) {
 				const r = n.t;
 				n.t = !0;
 				const o = e(t.trim(), n);
@@ -38360,54 +38359,54 @@
 					o.forEach(function (t, e) {
 						'tableSeparator' === t.type
 							? 0 !== e && e !== o.length - 1 && c.push([])
-							: ('text' !== t.type || (null != o[e + 1] && 'tableSeparator' !== o[e + 1].type) || (t.content = t.content.replace(U, '')),
+							: ('text' !== t.type || (null != o[e + 1] && 'tableSeparator' !== o[e + 1].type) || (t.content = t.content.replace(q, '')),
 							  c[c.length - 1].push(t));
 					}),
 					c
 				);
 			}
-			function gt(t, e, n) {
+			function pt(t, e, n) {
 				n.o = !0;
-				const r = pt(t[1], e, n),
-					o = t[2].replace(q, '').split('|').map(dt),
+				const r = dt(t[1], e, n),
+					o = t[2].replace(H, '').split('|').map(ft),
 					c = (function (t, e, n) {
 						return t
 							.trim()
 							.split('\n')
 							.map(function (t) {
-								return pt(t, e, n);
+								return dt(t, e, n);
 							});
 					})(t[3], e, n);
 				return (n.o = !1), { align: o, cells: c, header: r, type: 'table' };
 			}
-			function mt(t, e) {
+			function gt(t, e) {
 				return null == t.align[e] ? {} : { textAlign: t.align[e] };
 			}
-			function yt(t) {
+			function mt(t) {
 				return function (e, n) {
 					return n.o ? t.exec(e) : null;
 				};
 			}
-			function ht(t) {
+			function yt(t) {
 				return function (e, n) {
 					return n.o || n.u ? t.exec(e) : null;
 				};
 			}
-			function kt(t) {
+			function ht(t) {
 				return function (e, n) {
 					return n.o || n.u ? null : t.exec(e);
 				};
 			}
-			function xt(t) {
+			function kt(t) {
 				return function (e) {
 					return t.exec(e);
 				};
 			}
-			function vt(t, e, n) {
+			function xt(t, e, n) {
 				if (e.o || e.u) return null;
 				if (n && !n.endsWith('\n')) return null;
 				let r = '';
-				t.split('\n').every((t) => !st.some((e) => e.test(t)) && ((r += t + '\n'), t.trim()));
+				t.split('\n').every((t) => !lt.some((e) => e.test(t)) && ((r += t + '\n'), t.trim()));
 				const o = r.trimEnd();
 				return '' == o ? null : [r, o];
 			}
@@ -38424,94 +38423,93 @@
 				}
 				return t;
 			}
-			function St(t) {
-				return t.replace(rt, '$1');
+			function vt(t) {
+				return t.replace(nt, '$1');
 			}
-			function $t(t, e, n) {
+			function St(t, e, n) {
 				const r = n.o || !1,
 					o = n.u || !1;
 				(n.o = !0), (n.u = !0);
 				const c = t(e, n);
 				return (n.o = r), (n.u = o), c;
 			}
-			function wt(t, e, n) {
+			function $t(t, e, n) {
 				const r = n.o || !1,
 					o = n.u || !1;
 				(n.o = !1), (n.u = !0);
 				const c = t(e, n);
 				return (n.o = r), (n.u = o), c;
 			}
-			function zt(t, e, n) {
+			function wt(t, e, n) {
 				return (n.o = !1), t(e + '\n\n', n);
 			}
-			const Et = (t, e, n) => ({ content: $t(e, t[1], n) });
-			function At() {
+			const zt = (t, e, n) => ({ content: St(e, t[1], n) });
+			function Et() {
 				return {};
 			}
-			function Rt() {
+			function At() {
 				return null;
 			}
-			function It(...t) {
+			function Rt(...t) {
 				return t.filter(Boolean).join(' ');
 			}
-			function Mt(t, e, n) {
+			function It(t, e, n) {
 				let r = t;
 				const o = e.split('.');
 				for (; o.length && ((r = r[o[0]]), void 0 !== r); ) o.shift();
 				return r || n;
 			}
-			var Ot, t;
-			function Bt(r, q = {}) {
-				(q.overrides = q.overrides || {}),
-					(q.slugify = q.slugify || ft),
-					(q.namedCodesToUnicode = q.namedCodesToUnicode ? e({}, c, q.namedCodesToUnicode) : c);
-				const U = q.createElement || react__WEBPACK_IMPORTED_MODULE_0__.default.createElement;
-				function V(t, n, ...r) {
-					const o = Mt(q.overrides, `${t}.props`, {});
-					return U(
+			var Mt, t;
+			function Ot(n, H = {}) {
+				(H.overrides = H.overrides || {}),
+					(H.slugify = H.slugify || _t),
+					(H.namedCodesToUnicode = H.namedCodesToUnicode ? e({}, o, H.namedCodesToUnicode) : o);
+				const q = H.createElement || react__WEBPACK_IMPORTED_MODULE_0__.createElement;
+				function U(t, n, ...r) {
+					const o = It(H.overrides, `${t}.props`, {});
+					return q(
 						(function (t, e) {
-							const n = Mt(e, t);
-							return n ? ('function' == typeof n || ('object' == typeof n && 'render' in n) ? n : Mt(e, `${t}.component`, t)) : t;
-						})(t, q.overrides),
-						e({}, n, o, { className: It(null == n ? void 0 : n.className, o.className) || void 0 }),
+							const n = It(e, t);
+							return n ? ('function' == typeof n || ('object' == typeof n && 'render' in n) ? n : It(e, `${t}.component`, t)) : t;
+						})(t, H.overrides),
+						e({}, n, o, { className: Rt(null == n ? void 0 : n.className, o.className) || void 0 }),
 						...r
 					);
 				}
-				function W(e) {
+				function V(e) {
 					let n = !1;
-					q.forceInline ? (n = !0) : q.forceBlock || (n = !1 === P.test(e));
-					const r = pt(dt(n ? e : `${e.trimEnd().replace(et, '')}\n\n`, { o: n }));
+					H.forceInline ? (n = !0) : H.forceBlock || (n = !1 === F.test(e));
+					const r = dt(ft(n ? e : `${e.trimEnd().replace(tt, '')}\n\n`, { o: n }));
 					for (; 'string' == typeof r[r.length - 1] && !r[r.length - 1].trim(); ) r.pop();
-					if (null === q.wrapper) return r;
-					const o = q.wrapper || (n ? 'span' : 'div');
+					if (null === H.wrapper) return r;
+					const o = H.wrapper || (n ? 'span' : 'div');
 					let c;
-					if (r.length > 1 || q.forceWrapper) c = r;
+					if (r.length > 1 || H.forceWrapper) c = r;
 					else {
-						if (1 === r.length) return (c = r[0]), 'string' == typeof c ? V('span', { key: 'outer' }, c) : c;
+						if (1 === r.length) return (c = r[0]), 'string' == typeof c ? U('span', { key: 'outer' }, c) : c;
 						c = null;
 					}
-					return react__WEBPACK_IMPORTED_MODULE_0__.default.createElement(o, { key: 'outer' }, c);
+					return react__WEBPACK_IMPORTED_MODULE_0__.createElement(o, { key: 'outer' }, c);
 				}
-				function Q(e) {
-					const r = e.match(u);
-					return r
-						? r.reduce(function (e, r, c) {
-								const a = r.indexOf('=');
-								if (-1 !== a) {
-									const u = ((t = r.slice(0, a)),
+				function W(e) {
+					const n = e.match(a);
+					return n
+						? n.reduce(function (e, n, o) {
+								const c = n.indexOf('=');
+								if (-1 !== c) {
+									const a = ((t = n.slice(0, c)),
 										-1 !== t.indexOf('-') &&
-											null === t.match(A) &&
-											(t = t.replace(j, function (t, e) {
+											null === t.match(E) &&
+											(t = t.replace(T, function (t, e) {
 												return e.toUpperCase();
 											})),
 										t).trim(),
-										i = (function (t) {
-											return t
-												? (n.test(t.charAt(0)) && (t = t.substr(1)), n.test(t.charAt(t.length - 1)) && (t = t.substr(0, t.length - 1)), t)
-												: '';
-										})(r.slice(a + 1).trim()),
-										l = o[u] || u,
-										s = (e[l] = (function (t, e) {
+										u = (function (t) {
+											const e = t[0];
+											return ('"' === e || "'" === e) && t.length >= 2 && t[t.length - 1] === e ? t.slice(1, -1) : t;
+										})(n.slice(c + 1).trim()),
+										i = r[a] || a,
+										l = (e[i] = (function (t, e) {
 											return 'style' === t
 												? e.split(/;\s?/).reduce(function (t, e) {
 														const n = e.slice(0, e.indexOf(':'));
@@ -38519,112 +38517,112 @@
 												  }, {})
 												: 'href' === t
 												? bt(e)
-												: (e.match(I) && (e = e.slice(1, e.length - 1)), 'true' === e || ('false' !== e && e));
-										})(u, i));
-									'string' == typeof s &&
-										(w.test(s) || R.test(s)) &&
-										(e[l] = react__WEBPACK_IMPORTED_MODULE_0__.default.cloneElement(W(s.trim()), { key: c }));
-								} else 'style' !== r && (e[o[r] || r] = !0);
+												: (e.match(R) && (e = e.slice(1, e.length - 1)), 'true' === e || ('false' !== e && e));
+										})(a, u));
+									'string' == typeof l &&
+										($.test(l) || A.test(l)) &&
+										(e[i] = react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(V(l.trim()), { key: o }));
+								} else 'style' !== n && (e[r[n] || n] = !0);
 								var t;
 								return e;
 						  }, {})
 						: void 0;
 				}
-				const rt = [],
-					ut = {},
-					st = {
+				const nt = [],
+					at = {},
+					lt = {
 						blockQuote: {
-							i: kt(s),
-							l: Ot.HIGH,
-							_: (t, e, n) => ({ content: e(t[0].replace(_, ''), n) }),
-							p: (t, e, n) => V('blockquote', { key: n.g }, e(t.content, n)),
+							i: ht(l),
+							l: Mt.HIGH,
+							_: (t, e, n) => ({ content: e(t[0].replace(s, ''), n) }),
+							p: (t, e, n) => U('blockquote', { key: n.g }, e(t.content, n)),
 						},
-						breakLine: { i: xt(f), l: Ot.HIGH, _: At, p: (t, e, n) => V('br', { key: n.g }) },
-						breakThematic: { i: kt(d), l: Ot.HIGH, _: At, p: (t, e, n) => V('hr', { key: n.g }) },
+						breakLine: { i: kt(_), l: Mt.HIGH, _: Et, p: (t, e, n) => U('br', { key: n.g }) },
+						breakThematic: { i: ht(f), l: Mt.HIGH, _: Et, p: (t, e, n) => U('hr', { key: n.g }) },
 						codeBlock: {
-							i: kt(g),
-							l: Ot.MAX,
+							i: ht(p),
+							l: Mt.MAX,
 							_: (t) => ({ content: t[0].replace(/^ {4}/gm, '').replace(/\n+$/, ''), lang: void 0 }),
-							p: (t, e, n) => V('pre', { key: n.g }, V('code', { className: t.lang ? `lang-${t.lang}` : '' }, t.content)),
+							p: (t, e, n) => U('pre', { key: n.g }, U('code', { className: t.lang ? `lang-${t.lang}` : '' }, t.content)),
 						},
-						codeFenced: { i: kt(p), l: Ot.MAX, _: (t) => ({ content: t[3], lang: t[2] || void 0, type: 'codeBlock' }) },
-						codeInline: { i: ht(m), l: Ot.LOW, _: (t) => ({ content: t[2] }), p: (t, e, n) => V('code', { key: n.g }, t.content) },
-						footnote: { i: kt(k), l: Ot.MAX, _: (t) => (rt.push({ footnote: t[2], identifier: t[1] }), {}), p: Rt },
+						codeFenced: { i: ht(d), l: Mt.MAX, _: (t) => ({ content: t[3], lang: t[2] || void 0, type: 'codeBlock' }) },
+						codeInline: { i: yt(g), l: Mt.LOW, _: (t) => ({ content: t[2] }), p: (t, e, n) => U('code', { key: n.g }, t.content) },
+						footnote: { i: ht(h), l: Mt.MAX, _: (t) => (nt.push({ footnote: t[2], identifier: t[1] }), {}), p: At },
 						footnoteReference: {
-							i: yt(x),
-							l: Ot.HIGH,
-							_: (t) => ({ content: t[1], target: `#${q.slugify(t[1])}` }),
-							p: (t, e, n) => V('a', { key: n.g, href: bt(t.target) }, V('sup', { key: n.g }, t.content)),
+							i: mt(k),
+							l: Mt.HIGH,
+							_: (t) => ({ content: t[1], target: `#${H.slugify(t[1])}` }),
+							p: (t, e, n) => U('a', { key: n.g, href: bt(t.target) }, U('sup', { key: n.g }, t.content)),
 						},
 						gfmTask: {
-							i: yt(b),
-							l: Ot.HIGH,
+							i: mt(b),
+							l: Mt.HIGH,
 							_: (t) => ({ completed: 'x' === t[1].toLowerCase() }),
-							p: (t, e, n) => V('input', { checked: t.completed, key: n.g, readOnly: !0, type: 'checkbox' }),
+							p: (t, e, n) => U('input', { checked: t.completed, key: n.g, readOnly: !0, type: 'checkbox' }),
 						},
 						heading: {
-							i: kt(S),
-							l: Ot.HIGH,
-							_: (t, e, n) => ({ content: $t(e, t[2], n), id: q.slugify(t[2]), level: t[1].length }),
-							p: (t, e, n) => ((t.tag = `h${t.level}`), V(t.tag, { id: t.id, key: n.g }, e(t.content, n))),
+							i: ht(v),
+							l: Mt.HIGH,
+							_: (t, e, n) => ({ content: St(e, t[2], n), id: H.slugify(t[2]), level: t[1].length }),
+							p: (t, e, n) => ((t.tag = `h${t.level}`), U(t.tag, { id: t.id, key: n.g }, e(t.content, n))),
 						},
-						headingSetext: { i: kt($), l: Ot.MAX, _: (t, e, n) => ({ content: $t(e, t[1], n), level: '=' === t[2] ? 1 : 2, type: 'heading' }) },
-						htmlComment: { i: xt(E), l: Ot.HIGH, _: () => ({}), p: Rt },
+						headingSetext: { i: ht(S), l: Mt.MAX, _: (t, e, n) => ({ content: St(e, t[1], n), level: '=' === t[2] ? 1 : 2, type: 'heading' }) },
+						htmlComment: { i: kt(z), l: Mt.HIGH, _: () => ({}), p: At },
 						image: {
-							i: ht(lt),
-							l: Ot.HIGH,
-							_: (t) => ({ alt: t[1], target: St(t[2]), title: t[3] }),
-							p: (t, e, n) => V('img', { key: n.g, alt: t.alt || void 0, title: t.title || void 0, src: bt(t.target) }),
+							i: yt(it),
+							l: Mt.HIGH,
+							_: (t) => ({ alt: t[1], target: vt(t[2]), title: t[3] }),
+							p: (t, e, n) => U('img', { key: n.g, alt: t.alt || void 0, title: t.title || void 0, src: bt(t.target) }),
 						},
 						link: {
-							i: yt(it),
-							l: Ot.LOW,
-							_: (t, e, n) => ({ content: wt(e, t[1], n), target: St(t[2]), title: t[3] }),
-							p: (t, e, n) => V('a', { key: n.g, href: bt(t.target), title: t.title }, e(t.content, n)),
+							i: mt(ut),
+							l: Mt.LOW,
+							_: (t, e, n) => ({ content: $t(e, t[1], n), target: vt(t[2]), title: t[3] }),
+							p: (t, e, n) => U('a', { key: n.g, href: bt(t.target), title: t.title }, e(t.content, n)),
 						},
 						linkAngleBraceStyleDetector: {
-							i: yt(B),
-							l: Ot.MAX,
+							i: mt(O),
+							l: Mt.MAX,
 							_: (t) => ({ content: [{ content: t[1], type: 'text' }], target: t[1], type: 'link' }),
 						},
 						linkBareUrlDetector: {
-							i: (t, e) => (e.m ? null : yt(M)(t, e)),
-							l: Ot.MAX,
+							i: (t, e) => (e.m ? null : mt(I)(t, e)),
+							l: Mt.MAX,
 							_: (t) => ({ content: [{ content: t[1], type: 'text' }], target: t[1], title: void 0, type: 'link' }),
 						},
 						linkMailtoDetector: {
-							i: yt(O),
-							l: Ot.MAX,
+							i: mt(M),
+							l: Mt.MAX,
 							_(t) {
 								let e = t[1],
 									n = t[1];
-								return i.test(n) || (n = 'mailto:' + n), { content: [{ content: e.replace('mailto:', ''), type: 'text' }], target: n, type: 'link' };
+								return u.test(n) || (n = 'mailto:' + n), { content: [{ content: e.replace('mailto:', ''), type: 'text' }], target: n, type: 'link' };
 							},
 						},
 						list: {
 							i(t, e, n) {
-								const r = T.exec(n);
-								return !r || (!e.h && e.o) ? null : at.exec((t = r[1] + t));
+								const r = L.exec(n);
+								return !r || (!e.h && e.o) ? null : ct.exec((t = r[1] + t));
 							},
-							l: Ot.HIGH,
+							l: Mt.HIGH,
 							_(t, e, n) {
 								const r = t[2],
 									o = r.length > 1,
 									c = o ? +r : void 0,
-									a = t[0].replace(l, '\n').match(ct);
+									a = t[0].replace(i, '\n').match(ot);
 								let u = !1;
 								return {
 									items: a.map(function (t, r) {
-										const o = ot.exec(t)[0].length,
+										const o = rt.exec(t)[0].length,
 											c = new RegExp('^ {1,' + o + '}', 'gm'),
-											i = t.replace(c, '').replace(ot, ''),
+											i = t.replace(c, '').replace(rt, ''),
 											l = r === a.length - 1,
 											s = -1 !== i.indexOf('\n\n') || (l && u);
 										u = s;
 										const _ = n.o,
 											f = n.h;
 										let d;
-										(n.h = !0), s ? ((n.o = !1), (d = i.replace(L, '\n\n'))) : ((n.o = !0), (d = i.replace(L, '')));
+										(n.h = !0), s ? ((n.o = !1), (d = i.replace(B, '\n\n'))) : ((n.o = !0), (d = i.replace(B, '')));
 										const p = e(d, n);
 										return (n.o = _), (n.h = f), p;
 									}),
@@ -38633,60 +38631,60 @@
 								};
 							},
 							p: (t, e, n) =>
-								V(
+								U(
 									t.ordered ? 'ol' : 'ul',
 									{ key: n.g, start: t.start },
 									t.items.map(function (t, r) {
-										return V('li', { key: r }, e(t, n));
+										return U('li', { key: r }, e(t, n));
 									})
 								),
 						},
-						newlineCoalescer: { i: kt(y), l: Ot.LOW, _: At, p: () => '\n' },
-						paragraph: { i: vt, l: Ot.LOW, _: Et, p: (t, e, n) => V('p', { key: n.g }, e(t.content, n)) },
-						ref: { i: yt(D), l: Ot.MAX, _: (t) => ((ut[t[1]] = { target: t[2], title: t[4] }), {}), p: Rt },
+						newlineCoalescer: { i: ht(m), l: Mt.LOW, _: Et, p: () => '\n' },
+						paragraph: { i: xt, l: Mt.LOW, _: zt, p: (t, e, n) => U('p', { key: n.g }, e(t.content, n)) },
+						ref: { i: mt(C), l: Mt.MAX, _: (t) => ((at[t[1]] = { target: t[2], title: t[4] }), {}), p: At },
 						refImage: {
-							i: ht(N),
-							l: Ot.MAX,
+							i: yt(D),
+							l: Mt.MAX,
 							_: (t) => ({ alt: t[1] || void 0, ref: t[2] }),
-							p: (t, e, n) => V('img', { key: n.g, alt: t.alt, src: bt(ut[t.ref].target), title: ut[t.ref].title }),
+							p: (t, e, n) => U('img', { key: n.g, alt: t.alt, src: bt(at[t.ref].target), title: at[t.ref].title }),
 						},
 						refLink: {
-							i: yt(Z),
-							l: Ot.MAX,
-							_: (t, e, n) => ({ content: e(t[1], n), fallbackContent: e(t[0].replace(F, '\\$1'), n), ref: t[2] }),
+							i: mt(N),
+							l: Mt.MAX,
+							_: (t, e, n) => ({ content: e(t[1], n), fallbackContent: e(t[0].replace(Z, '\\$1'), n), ref: t[2] }),
 							p: (t, e, n) =>
-								ut[t.ref]
-									? V('a', { key: n.g, href: bt(ut[t.ref].target), title: ut[t.ref].title }, e(t.content, n))
-									: V('span', { key: n.g }, e(t.fallbackContent, n)),
+								at[t.ref]
+									? U('a', { key: n.g, href: bt(at[t.ref].target), title: at[t.ref].title }, e(t.content, n))
+									: U('span', { key: n.g }, e(t.fallbackContent, n)),
 						},
 						table: {
-							i: kt(C),
-							l: Ot.HIGH,
-							_: gt,
+							i: ht(j),
+							l: Mt.HIGH,
+							_: pt,
 							p: (t, e, n) =>
-								V(
+								U(
 									'table',
 									{ key: n.g },
-									V(
+									U(
 										'thead',
 										null,
-										V(
+										U(
 											'tr',
 											null,
 											t.header.map(function (r, o) {
-												return V('th', { key: o, style: mt(t, o) }, e(r, n));
+												return U('th', { key: o, style: gt(t, o) }, e(r, n));
 											})
 										)
 									),
-									V(
+									U(
 										'tbody',
 										null,
 										t.cells.map(function (r, o) {
-											return V(
+											return U(
 												'tr',
 												{ key: o },
 												r.map(function (r, o) {
-													return V('td', { key: o, style: mt(t, o) }, e(r, n));
+													return U('td', { key: o, style: gt(t, o) }, e(r, n));
 												})
 											);
 										})
@@ -38695,60 +38693,60 @@
 						},
 						tableSeparator: {
 							i: function (t, e) {
-								return e.t ? H.exec(t) : null;
+								return e.t ? G.exec(t) : null;
 							},
-							l: Ot.HIGH,
+							l: Mt.HIGH,
 							_: function () {
 								return { type: 'tableSeparator' };
 							},
 							p: () => ' | ',
 						},
 						text: {
-							i: xt(tt),
-							l: Ot.MIN,
-							_: (t) => ({ content: t[0].replace(z, (t, e) => (q.namedCodesToUnicode[e] ? q.namedCodesToUnicode[e] : t)) }),
+							i: kt(Y),
+							l: Mt.MIN,
+							_: (t) => ({ content: t[0].replace(w, (t, e) => (H.namedCodesToUnicode[e] ? H.namedCodesToUnicode[e] : t)) }),
 							p: (t) => t.content,
 						},
 						textBolded: {
-							i: ht(X),
-							l: Ot.MED,
+							i: yt(Q),
+							l: Mt.MED,
 							_: (t, e, n) => ({ content: e(t[2], n) }),
-							p: (t, e, n) => V('strong', { key: n.g }, e(t.content, n)),
+							p: (t, e, n) => U('strong', { key: n.g }, e(t.content, n)),
 						},
 						textEmphasized: {
-							i: ht(J),
-							l: Ot.LOW,
+							i: yt(X),
+							l: Mt.LOW,
 							_: (t, e, n) => ({ content: e(t[2], n) }),
-							p: (t, e, n) => V('em', { key: n.g }, e(t.content, n)),
+							p: (t, e, n) => U('em', { key: n.g }, e(t.content, n)),
 						},
-						textEscaped: { i: ht(Y), l: Ot.HIGH, _: (t) => ({ content: t[1], type: 'text' }) },
-						textStrikethroughed: { i: ht(K), l: Ot.LOW, _: Et, p: (t, e, n) => V('del', { key: n.g }, e(t.content, n)) },
+						textEscaped: { i: yt(K), l: Mt.HIGH, _: (t) => ({ content: t[1], type: 'text' }) },
+						textStrikethroughed: { i: yt(J), l: Mt.LOW, _: zt, p: (t, e, n) => U('del', { key: n.g }, e(t.content, n)) },
 					};
-				!0 !== q.disableParsingRawHTML &&
-					((st.htmlBlock = {
-						i: xt(w),
-						l: Ot.HIGH,
+				!0 !== H.disableParsingRawHTML &&
+					((lt.htmlBlock = {
+						i: kt($),
+						l: Mt.HIGH,
 						_(t, e, n) {
-							const [, r] = t[3].match(nt),
+							const [, r] = t[3].match(et),
 								o = new RegExp(`^${r}`, 'gm'),
-								c = t[3].replace(o, ''),
-								u = ((i = c), _t.some((t) => t.test(i)) ? zt : $t);
+								a = t[3].replace(o, ''),
+								u = ((i = a), st.some((t) => t.test(i)) ? wt : St);
 							var i;
 							const l = t[1].toLowerCase(),
-								s = -1 !== a.indexOf(l);
+								s = -1 !== c.indexOf(l);
 							n.m = n.m || 'a' === l;
-							const _ = s ? t[3] : u(e, c, n);
-							return (n.m = !1), { attrs: Q(t[2]), content: _, noInnerParse: s, tag: s ? l : t[1] };
+							const _ = s ? t[3] : u(e, a, n);
+							return (n.m = !1), { attrs: W(t[2]), content: _, noInnerParse: s, tag: s ? l : t[1] };
 						},
-						p: (t, n, r) => V(t.tag, e({ key: r.g }, t.attrs), t.noInnerParse ? t.content : n(t.content, r)),
+						p: (t, n, r) => U(t.tag, e({ key: r.g }, t.attrs), t.noInnerParse ? t.content : n(t.content, r)),
 					}),
-					(st.htmlSelfClosing = {
-						i: xt(R),
-						l: Ot.HIGH,
-						_: (t) => ({ attrs: Q(t[2] || ''), tag: t[1] }),
-						p: (t, n, r) => V(t.tag, e({}, t.attrs, { key: r.g })),
+					(lt.htmlSelfClosing = {
+						i: kt(A),
+						l: Mt.HIGH,
+						_: (t) => ({ attrs: W(t[2] || ''), tag: t[1] }),
+						p: (t, n, r) => U(t.tag, e({}, t.attrs, { key: r.g })),
 					}));
-				const dt = (function (t) {
+				const ft = (function (t) {
 						let e = Object.keys(t);
 						function n(r, o) {
 							let c = [],
@@ -38780,16 +38778,16 @@
 							function (t, e) {
 								return n(
 									(function (t) {
-										return t.replace(h, '\n').replace(v, '').replace(G, '    ');
+										return t.replace(y, '\n').replace(x, '').replace(P, '    ');
 									})(t),
 									e
 								);
 							}
 						);
-					})(st),
-					pt =
-						((t = st),
-						(Bt = function (e, n, r) {
+					})(lt),
+					dt =
+						((t = lt),
+						(Ot = function (e, n, r) {
 							return t[e.type].p(e, n, r);
 						}),
 						function t(e, n = {}) {
@@ -38805,32 +38803,32 @@
 								}
 								return (n.g = r), o;
 							}
-							return Bt(e, t, n);
+							return Ot(e, t, n);
 						});
-				var t, Bt;
-				const Lt = W(r);
-				return rt.length
-					? V(
+				var t, Ot;
+				const Bt = V(n);
+				return nt.length
+					? U(
 							'div',
 							null,
-							Lt,
-							V(
+							Bt,
+							U(
 								'footer',
 								{ key: 'footer' },
-								rt.map(function (t) {
-									return V('div', { id: q.slugify(t.identifier), key: t.identifier }, t.identifier, pt(dt(t.footnote, { o: !0 })));
+								nt.map(function (t) {
+									return U('div', { id: H.slugify(t.identifier), key: t.identifier }, t.identifier, dt(ft(t.footnote, { o: !0 })));
 								})
 							)
 					  )
-					: Lt;
+					: Bt;
 			}
-			((t = Ot || (Ot = {}))[(t.MAX = 0)] = 'MAX'),
+			((t = Mt || (Mt = {}))[(t.MAX = 0)] = 'MAX'),
 				(t[(t.HIGH = 1)] = 'HIGH'),
 				(t[(t.MED = 2)] = 'MED'),
 				(t[(t.LOW = 3)] = 'LOW'),
 				(t[(t.MIN = 4)] = 'MIN');
 			const __WEBPACK_DEFAULT_EXPORT__ = (e) => {
-				let { children: n, options: o } = e,
+				let { children: r, options: o } = e,
 					c = (function (t, e) {
 						if (null == t) return {};
 						var n,
@@ -38839,8 +38837,8 @@
 							c = Object.keys(t);
 						for (r = 0; r < c.length; r++) e.indexOf((n = c[r])) >= 0 || (o[n] = t[n]);
 						return o;
-					})(e, r);
-				return react__WEBPACK_IMPORTED_MODULE_0__.default.cloneElement(Bt(n, o), c);
+					})(e, n);
+				return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(Ot(r, o), c);
 			};
 		},
 		'../../node_modules/memoizerific/memoizerific.js': (module) => {
@@ -39520,24 +39518,24 @@
 		'../../node_modules/mobx/dist/mobx.esm.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				so: () => $mobx,
-				le: () => Reaction,
 				$$: () => allowStateChanges,
-				mJ: () => allowStateReadsEnd,
-				wM: () => allowStateReadsStart,
-				aD: () => action,
-				Fl: () => computed,
-				jQ: () => configure,
-				cp: () => createAtom,
-				Gf: () => getDependencyTree,
 				Ei: () => isObservableArray,
+				Fl: () => computed,
+				Gf: () => getDependencyTree,
 				LJ: () => isObservableMap,
-				Pb: () => isObservableObject,
-				rC: () => makeObservable,
 				LO: () => observable,
+				Pb: () => isObservableObject,
 				U5: () => reaction,
 				ZN: () => toJS,
+				aD: () => action,
+				cp: () => createAtom,
+				jQ: () => configure,
+				le: () => Reaction,
+				mJ: () => allowStateReadsEnd,
+				rC: () => makeObservable,
 				rg: () => untracked,
+				so: () => $mobx,
+				wM: () => allowStateReadsStart,
 			});
 			function die(error) {
 				for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) args[_key - 1] = arguments[_key];
@@ -43768,6 +43766,31 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
+					Children: () => k,
+					Component: () => preact__WEBPACK_IMPORTED_MODULE_1__.wA,
+					Fragment: () => preact__WEBPACK_IMPORTED_MODULE_1__.HY,
+					PureComponent: () => E,
+					StrictMode: () => fn,
+					Suspense: () => L,
+					SuspenseList: () => M,
+					__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: () => X,
+					cloneElement: () => rn,
+					createContext: () => preact__WEBPACK_IMPORTED_MODULE_1__.kr,
+					createElement: () => preact__WEBPACK_IMPORTED_MODULE_1__.az,
+					createFactory: () => tn,
+					createPortal: () => W,
+					createRef: () => preact__WEBPACK_IMPORTED_MODULE_1__.Vf,
+					default: () => __WEBPACK_DEFAULT_EXPORT__,
+					findDOMNode: () => on,
+					flushSync: () => cn,
+					forwardRef: () => x,
+					hydrate: () => $,
+					isValidElement: () => en,
+					lazy: () => F,
+					memo: () => g,
+					render: () => B,
+					unmountComponentAtNode: () => un,
+					unstable_batchedUpdates: () => ln,
 					useCallback: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__.I4,
 					useContext: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__.qp,
 					useDebugValue: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__.Qb,
@@ -43779,32 +43802,7 @@
 					useReducer: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__._Y,
 					useRef: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__.sO,
 					useState: () => preact_hooks__WEBPACK_IMPORTED_MODULE_0__.eJ,
-					createElement: () => preact__WEBPACK_IMPORTED_MODULE_1__.az,
-					createContext: () => preact__WEBPACK_IMPORTED_MODULE_1__.kr,
-					createRef: () => preact__WEBPACK_IMPORTED_MODULE_1__.Vf,
-					Fragment: () => preact__WEBPACK_IMPORTED_MODULE_1__.HY,
-					Component: () => preact__WEBPACK_IMPORTED_MODULE_1__.wA,
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
 					version: () => nn,
-					Children: () => k,
-					render: () => B,
-					hydrate: () => $,
-					unmountComponentAtNode: () => un,
-					createPortal: () => W,
-					createFactory: () => tn,
-					cloneElement: () => rn,
-					isValidElement: () => en,
-					findDOMNode: () => on,
-					PureComponent: () => E,
-					memo: () => g,
-					forwardRef: () => x,
-					flushSync: () => cn,
-					unstable_batchedUpdates: () => ln,
-					StrictMode: () => fn,
-					Suspense: () => L,
-					SuspenseList: () => M,
-					lazy: () => F,
-					__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: () => X,
 				});
 			var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js');
@@ -44224,17 +44222,17 @@
 		'../../node_modules/preact/dist/preact.module.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				sY: () => S,
+				HY: () => d,
+				Tm: () => B,
+				Vf: () => p,
+				YM: () => l,
 				ZB: () => q,
 				az: () => v,
-				h: () => v,
-				HY: () => d,
-				Vf: () => p,
-				wA: () => _,
-				Tm: () => B,
-				kr: () => D,
 				bR: () => A,
-				YM: () => l,
+				h: () => v,
+				kr: () => D,
+				sY: () => S,
+				wA: () => _,
 			});
 			var n,
 				l,
@@ -44718,17 +44716,17 @@
 		'../../node_modules/preact/hooks/dist/hooks.module.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				eJ: () => l,
-				_Y: () => p,
-				d4: () => y,
-				bt: () => h,
-				sO: () => s,
-				aP: () => _,
-				Ye: () => d,
 				I4: () => A,
-				qp: () => F,
 				Qb: () => T,
+				Ye: () => d,
+				_Y: () => p,
+				aP: () => _,
+				bt: () => h,
 				cO: () => q,
+				d4: () => y,
+				eJ: () => l,
+				qp: () => F,
+				sO: () => s,
 			});
 			var t,
 				u,
@@ -46696,7 +46694,7 @@
 							: isObject(src[key]) && isObject(target[key]) && Object.keys(src[key]).length > 0 && extend(target[key], src[key]);
 					});
 			}
-			__webpack_require__.d(__webpack_exports__, { Me: () => getDocument, Jj: () => getWindow });
+			__webpack_require__.d(__webpack_exports__, { Jj: () => getWindow, Me: () => getDocument });
 			var ssrDocument = {
 				body: {},
 				addEventListener: function () {},
@@ -50841,11 +50839,11 @@
 			}
 			__webpack_require__.d(__webpack_exports__, {
 				Kn: () => isObject,
-				l7: () => extend,
+				XE: () => needsScrollbar,
 				d7: () => needsNavigation,
 				fw: () => needsPagination,
-				XE: () => needsScrollbar,
 				kI: () => uniqueClasses,
+				l7: () => extend,
 			});
 		},
 		'../../node_modules/swiper/esm/utils/dom.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -51445,14 +51443,14 @@
 		'../../node_modules/swiper/esm/utils/utils.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				cP: () => deleteProps,
-				Y3: () => nextTick,
-				zO: () => now,
 				R6: () => getTranslate,
-				l7: () => extend,
-				cR: () => bindModuleMethods,
-				Wc: () => classesToSelector,
 				Up: () => createElementIfNotDefined,
+				Wc: () => classesToSelector,
+				Y3: () => nextTick,
+				cP: () => deleteProps,
+				cR: () => bindModuleMethods,
+				l7: () => extend,
+				zO: () => now,
 			});
 			var ssr_window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/ssr-window/ssr-window.esm.js');
 			function deleteProps(obj) {
@@ -52037,7 +52035,7 @@
 		},
 		'../../node_modules/telejson/dist/esm/index.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { pM: () => isJSON, Pz: () => stringify, Qc: () => parse });
+			__webpack_require__.d(__webpack_exports__, { Pz: () => stringify, Qc: () => parse, pM: () => isJSON });
 			var is_regex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/is-regex/index.js'),
 				is_regex__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(is_regex__WEBPACK_IMPORTED_MODULE_0__),
 				is_function__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/is-function/index.js'),
@@ -52480,8 +52478,8 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
 				$4: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.ArgsTable,
-				h_: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.Meta,
 				Uh: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.PRIMARY_STORY,
+				h_: () => _dist_esm_blocks__WEBPACK_IMPORTED_MODULE_2__.Meta,
 			});
 			var util_deprecate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/util-deprecate/browser.js'),
 				util_deprecate__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(util_deprecate__WEBPACK_IMPORTED_MODULE_0__),
@@ -57783,4 +57781,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=159.6184e899.iframe.bundle.js.map
+//# sourceMappingURL=159.34a84f89.iframe.bundle.js.map

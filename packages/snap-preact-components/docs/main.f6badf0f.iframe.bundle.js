@@ -44,9 +44,9 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
-					BadgeWithContent: () => BadgeWithContent,
 					BadgeWithChildren: () => BadgeWithChildren,
+					BadgeWithContent: () => BadgeWithContent,
+					default: () => __WEBPACK_DEFAULT_EXPORT__,
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
@@ -2062,7 +2062,7 @@
 		},
 		'./src/components/Atoms/Image/Image.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { a: () => FALLBACK_IMAGE_URL, E: () => Image });
+			__webpack_require__.d(__webpack_exports__, { E: () => Image, a: () => FALLBACK_IMAGE_URL });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -2430,11 +2430,11 @@
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
-					Header: () => Header,
 					Footer: () => Footer,
-					Secondary: () => Secondary,
+					Header: () => Header,
 					Left: () => Left,
+					Secondary: () => Secondary,
+					default: () => __WEBPACK_DEFAULT_EXPORT__,
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
@@ -2677,7 +2677,7 @@
 		'./src/components/Atoms/Merchandising/InlineBanner.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, { default: () => __WEBPACK_DEFAULT_EXPORT__, Default: () => Default });
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => __WEBPACK_DEFAULT_EXPORT__ });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
@@ -3855,8 +3855,8 @@
 		'./src/components/Molecules/Carousel/Carousel.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
-				iZ: () => defaultCarouselBreakpoints,
 				EJ: () => defaultVerticalCarouselBreakpoints,
+				iZ: () => defaultCarouselBreakpoints,
 				lr: () => Carousel,
 			});
 			__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
@@ -10779,7 +10779,7 @@
 						}, []));
 					var _search$query,
 						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
-						showTrending = (null == trending ? void 0 : trending.length) && 0 === terms.length,
+						showTrending = !state.input && (null == trending ? void 0 : trending.length) && 0 === terms.length,
 						facetsToShow = facets.length
 							? facets.filter(function (facet) {
 									return facet.display !== types.uw.SLIDER;
@@ -15027,7 +15027,7 @@
 		},
 		'./src/mocks/searchResponse.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { v1: () => sliderFacetMock, kZ: () => searchResponse });
+			__webpack_require__.d(__webpack_exports__, { kZ: () => searchResponse, v1: () => sliderFacetMock });
 			var gridFacetMock = {
 					field: 'size',
 					label: 'Size',
@@ -20120,14 +20120,22 @@
 					var _facets$include,
 						_facets$exclude,
 						request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-						facets = request.facets || {};
+						facets = request.facets || {},
+						params = {};
 					if (facets.include && facets.include.length && facets.exclude && facets.exclude.length)
 						throw 'cannot use facet include and exclude at the same time';
-					return null !== (_facets$include = facets.include) && void 0 !== _facets$include && _facets$include.length
-						? { includedFacets: facets.include }
-						: null !== (_facets$exclude = facets.exclude) && void 0 !== _facets$exclude && _facets$exclude.length
-						? { excludedFacets: facets.exclude }
-						: {};
+					return (
+						null !== (_facets$include = facets.include) &&
+							void 0 !== _facets$include &&
+							_facets$include.length &&
+							(params.includedFacets = facets.include),
+						null !== (_facets$exclude = facets.exclude) &&
+							void 0 !== _facets$exclude &&
+							_facets$exclude.length &&
+							(params.excludedFacets = facets.exclude),
+						!1 === facets.autoDrillDown && (params.disableFacetDrillDown = !0),
+						params
+					);
 				}),
 				(transformSearchRequest.tracking = function () {
 					var request = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
@@ -23276,34 +23284,36 @@
 				v4 =
 					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
 					__webpack_require__('../snap-tracker/node_modules/uuid/dist/esm-browser/v4.js'));
-			var flags = (function getFlags() {
-					var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
-					userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
-					var ieVersion,
-						isIE = function isIE() {
-							if (void 0 === ieVersion) {
-								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
-								ieVersion = !!version && Number(version);
-							}
-							return ieVersion;
-						};
-					return {
-						cors: function cors() {
-							return !isIE() || isIE() >= 10;
-						},
-						cookies: function cookies() {
-							return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
-						},
-						storage: function storage() {
-							try {
-								return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
-							} catch (e) {
-								return !1;
-							}
-						},
+			function getFlags() {
+				var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
+				userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
+				var ieVersion,
+					isIE = function isIE() {
+						if (void 0 === ieVersion) {
+							var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
+							ieVersion = !!version && Number(version);
+						}
+						return ieVersion;
 					};
-				})(),
-				featureFlags = { cors: flags.cors(), cookies: flags.cookies(), storage: flags.storage() };
+				return {
+					cors: function cors() {
+						return !isIE() || isIE() >= 10;
+					},
+					cookies: function cookies() {
+						return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
+					},
+					storage: function storage() {
+						try {
+							return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
+						} catch (e) {
+							return !1;
+						}
+					},
+				};
+			}
+			var flags = getFlags(),
+				featureFlags_cookies = (flags.cors(), flags.cookies()),
+				featureFlags_storage = flags.storage();
 			function _createForOfIteratorHelper(o, allowArrayLike) {
 				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
 				if (!it) {
@@ -23405,20 +23415,20 @@
 								config.type)
 							) {
 								case StorageType.SESSION:
-									(this.type = featureFlags.storage ? config.type : null),
+									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
 											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.LOCAL:
-									(this.type = featureFlags.storage ? config.type : null),
+									(this.type = featureFlags_storage ? config.type : null),
 										this.type &&
 											!window.localStorage.getItem(this.key) &&
 											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
 											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
 									break;
 								case StorageType.COOKIE:
-									if (featureFlags.cookies) {
+									if (featureFlags_cookies) {
 										this.type = config.type;
 										var data = utils_cookies.get(this.key);
 										data && (this.state = JSON.parse(data));
@@ -23600,7 +23610,7 @@
 						'&u=' +
 						encodeURIComponent(payload.context.userId) +
 						'&ce=' +
-						(featureFlags.cookies ? '1' : '0') +
+						(featureFlags_cookies ? '1' : '0') +
 						'&pt=' +
 						encodeURIComponent(document.title) +
 						'&v=1&x=' +
@@ -23615,7 +23625,8 @@
 						(this.event = payload.event),
 							(this.src += '&a=basket'),
 							this.event.items.forEach(function (item) {
-								item.sku &&
+								null != item &&
+									item.sku &&
 									(_this.src +=
 										'&item=' +
 										encodeURIComponent(item.sku) +
@@ -23641,7 +23652,8 @@
 							state && (this.src += '&state=' + encodeURIComponent(state)),
 							country && (this.src += '&country=' + encodeURIComponent(country)),
 							items.forEach(function (item) {
-								item.sku &&
+								null != item &&
+									item.sku &&
 									(_this.src +=
 										'&item=' +
 										encodeURIComponent(item.sku) +
@@ -23679,7 +23691,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.21.1' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.22.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -23743,12 +23755,14 @@
 								},
 								shopper: {
 									login: function login(data, siteId) {
-										if (featureFlags.cookies)
+										if (getFlags().cookies())
 											if (data.id) {
+												data.id = '' + data.id;
 												var context = _this.context;
-												siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-												var storedShopperId = _this.getShopperId();
-												if (((data.id = '' + data.id), storedShopperId != data.id)) {
+												if (
+													(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
+													_this.getShopperId() != data.id)
+												) {
 													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
 													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
 													return _this.track.event(payload);
@@ -23842,9 +23856,13 @@
 												}),
 												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
 											if (items.length) {
-												var products = items.map(function (item) {
-													return item.sku || item.childSku;
-												});
+												var products = items
+													.map(function (item) {
+														return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
+													})
+													.filter(function (sku) {
+														return sku;
+													});
 												_this.cookies.cart.add(products);
 											}
 											return new PixelEvent(payload), _this.track.event(payload);
@@ -23918,10 +23936,10 @@
 							(this.getUserId = function () {
 								var userId;
 								try {
-									(userId = featureFlags.storage && window.localStorage.getItem('ssUserId')),
-										featureFlags.cookies
+									(userId = getFlags().storage() && window.localStorage.getItem('ssUserId')),
+										getFlags().cookies()
 											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
-											: !userId && featureFlags.storage && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
+											: !userId && getFlags().storage() && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
 								} catch (e) {
 									console.error('Failed to persist user id to cookie or local storage:', e);
 								}
@@ -23929,16 +23947,16 @@
 							}),
 							(this.getSessionId = function () {
 								var sessionId;
-								if (featureFlags.storage)
+								if (getFlags().storage())
 									try {
 										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
 											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
-											featureFlags.cookies && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
+											getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
 									} catch (e) {
 										console.error('Failed to persist session id to session storage:', e);
 									}
 								else
-									featureFlags.cookies &&
+									getFlags().cookies() &&
 										((sessionId = cookies.get('ssSessionIdNamespace')) ||
 											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
 								return sessionId;
@@ -24069,88 +24087,92 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.21.1')),
-							this.targeters.push(
-								new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
-									var _getContext = (function getContext() {
-											var _scriptElem$getAttrib,
-												_scriptElem$id,
-												_scriptElem$src,
-												evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
-												script = arguments.length > 1 ? arguments[1] : void 0;
-											if (!script || 'string' == typeof script) {
-												script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
-													.sort(function (a, b) {
-														return a.innerHTML.length - b.innerHTML.length;
-													})
-													.pop();
-											}
-											if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
-												throw new Error('getContext: did not find a script tag');
-											var scriptElem = script;
-											if (
-												!(
-													(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
-														void 0 !== _scriptElem$getAttrib &&
-														_scriptElem$getAttrib.match(/^searchspring/i)) ||
-													(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
-													(null !== (_scriptElem$src = scriptElem.src) &&
-														void 0 !== _scriptElem$src &&
-														_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.22.0')),
+							setTimeout(function () {
+								_this.targeters.push(
+									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
+										var _getContext = (function getContext() {
+												var _scriptElem$getAttrib,
+													_scriptElem$id,
+													_scriptElem$src,
+													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
+													script = arguments.length > 1 ? arguments[1] : void 0;
+												if (!script || 'string' == typeof script) {
+													script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
+														.sort(function (a, b) {
+															return a.innerHTML.length - b.innerHTML.length;
+														})
+														.pop();
+												}
+												if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
+													throw new Error('getContext: did not find a script tag');
+												var scriptElem = script;
+												if (
+													!(
+														(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
+															void 0 !== _scriptElem$getAttrib &&
+															_scriptElem$getAttrib.match(/^searchspring/i)) ||
+														(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
+														(null !== (_scriptElem$src = scriptElem.src) &&
+															void 0 !== _scriptElem$src &&
+															_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
+													)
 												)
-											)
-												throw new Error('getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"');
-											if (
-												(evaluate && !Array.isArray(evaluate)) ||
-												(evaluate &&
-													!evaluate.reduce(function (accu, name) {
-														return accu && 'string' == typeof name;
-													}, !0))
-											)
-												throw new Error('getContext: first parameter must be an array of strings');
-											var variables = {};
-											return (
-												null == evaluate ||
-													evaluate.forEach(function (name) {
-														var fn = new Function(
-															'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
-														);
-														variables[name] = fn();
+													throw new Error(
+														'getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"'
+													);
+												if (
+													(evaluate && !Array.isArray(evaluate)) ||
+													(evaluate &&
+														!evaluate.reduce(function (accu, name) {
+															return accu && 'string' == typeof name;
+														}, !0))
+												)
+													throw new Error('getContext: first parameter must be an array of strings');
+												var variables = {};
+												return (
+													null == evaluate ||
+														evaluate.forEach(function (name) {
+															var fn = new Function(
+																'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+															);
+															variables[name] = fn();
+														}),
+													Object.values(scriptElem.attributes).map(function (attr) {
+														var name = attr.nodeName;
+														evaluate.includes(name) && (variables[name] = scriptElem.getAttribute(name));
 													}),
-												Object.values(scriptElem.attributes).map(function (attr) {
-													var name = attr.nodeName;
-													evaluate.includes(name) && (variables[name] = scriptElem.getAttribute(name));
-												}),
-												Object.keys(variables).forEach(function (key) {
-													void 0 === variables[key] && delete variables[key];
-												}),
-												variables
-											);
-										})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
-										item = _getContext.item,
-										items = _getContext.items,
-										siteId = _getContext.siteId,
-										shopper = _getContext.shopper,
-										order = _getContext.order,
-										type = _getContext.type;
-									switch (type) {
-										case 'searchspring/track/shopper/login':
-											_this.track.shopper.login(shopper, siteId);
-											break;
-										case 'searchspring/track/product/view':
-											_this.track.product.view(item, siteId);
-											break;
-										case 'searchspring/track/cart/view':
-											_this.track.cart.view({ items }, siteId);
-											break;
-										case 'searchspring/track/order/transaction':
-											_this.track.order.transaction({ order, items }, siteId);
-											break;
-										default:
-											console.error("event '" + type + "' is not supported");
-									}
-								})
-							),
+													Object.keys(variables).forEach(function (key) {
+														void 0 === variables[key] && delete variables[key];
+													}),
+													variables
+												);
+											})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
+											item = _getContext.item,
+											items = _getContext.items,
+											siteId = _getContext.siteId,
+											shopper = _getContext.shopper,
+											order = _getContext.order,
+											type = _getContext.type;
+										switch (type) {
+											case 'searchspring/track/shopper/login':
+												_this.track.shopper.login(shopper, siteId);
+												break;
+											case 'searchspring/track/product/view':
+												_this.track.product.view(item, siteId);
+												break;
+											case 'searchspring/track/cart/view':
+												_this.track.cart.view({ items }, siteId);
+												break;
+											case 'searchspring/track/order/transaction':
+												_this.track.order.transaction({ order, items }, siteId);
+												break;
+											default:
+												console.error("event '" + type + "' is not supported");
+										}
+									})
+								);
+							}),
 							document.addEventListener('click', function (event) {
 								var attributes = {};
 								Object.values(event.target.attributes).forEach(function (attr) {
@@ -24945,6 +24967,7 @@
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee8(inputElement) {
+											var _this$store$state, _this$store$trending, _this$store$terms, _this$config$settings3, _this$config$settings4;
 											return regeneratorRuntime.wrap(
 												function _callee8$(_context8) {
 													for (;;)
@@ -24983,7 +25006,18 @@
 															case 18:
 																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
 															case 21:
-																null == inputElement || inputElement.dispatchEvent(new Event('keyup'));
+																(null !== (_this$store$state = this.store.state) && void 0 !== _this$store$state && _this$store$state.input) ||
+																null === (_this$store$trending = this.store.trending) ||
+																void 0 === _this$store$trending ||
+																!_this$store$trending.length ||
+																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
+																null === (_this$config$settings3 = this.config.settings) ||
+																void 0 === _this$config$settings3 ||
+																null === (_this$config$settings4 = _this$config$settings3.trending) ||
+																void 0 === _this$config$settings4 ||
+																!_this$config$settings4.showResults
+																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
+																	: this.store.trending[0].preview();
 															case 22:
 															case 'end':
 																return _context8.stop();
@@ -25035,9 +25069,9 @@
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee9() {
-											var _this$config$settings3,
-												_this$config$settings4,
-												_this$store$trending,
+											var _this$config$settings5,
+												_this$config$settings6,
+												_this$store$trending2,
 												_this3 = this;
 											return regeneratorRuntime.wrap(
 												function _callee9$(_context9) {
@@ -25078,15 +25112,15 @@
 																				),
 																			document.activeElement === input && _this3.setFocused(input);
 																	}),
-																	(null === (_this$config$settings3 = this.config.settings) ||
-																	void 0 === _this$config$settings3 ||
-																	null === (_this$config$settings4 = _this$config$settings3.trending) ||
-																	void 0 === _this$config$settings4
+																	(null === (_this$config$settings5 = this.config.settings) ||
+																	void 0 === _this$config$settings5 ||
+																	null === (_this$config$settings6 = _this$config$settings5.trending) ||
+																	void 0 === _this$config$settings6
 																		? void 0
-																		: _this$config$settings4.limit) > 0 &&
-																		(null === (_this$store$trending = this.store.trending) ||
-																			void 0 === _this$store$trending ||
-																			!_this$store$trending.length) &&
+																		: _this$config$settings6.limit) > 0 &&
+																		(null === (_this$store$trending2 = this.store.trending) ||
+																			void 0 === _this$store$trending2 ||
+																			!_this$store$trending2.length) &&
 																		this.searchTrending(),
 																	document.addEventListener('click', this.handlers.document.click);
 															case 8:
@@ -26389,6 +26423,8 @@
 								var _config$settings,
 									_config$settings$face,
 									facetMeta = meta.facets[facet.field];
+								if (!facetMeta) return !1;
+								if (('slider' == facetMeta.display && 'range' !== facet.type) || ('range' == facet.type && 'slider' !== facetMeta.display)) return !1;
 								if (
 									null !== (_config$settings = config.settings) &&
 									void 0 !== _config$settings &&
@@ -26397,8 +26433,6 @@
 									_config$settings$face.trim
 								) {
 									var _facet$values, _facet$values2;
-									if (('slider' == facetMeta.display && 'range' !== facet.type) || ('range' == facet.type && 'slider' !== facetMeta.display))
-										return !1;
 									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
 									if (0 == (null === (_facet$values = facet.values) || void 0 === _facet$values ? void 0 : _facet$values.length)) return !1;
 									if (
