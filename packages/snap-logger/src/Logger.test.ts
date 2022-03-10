@@ -5,7 +5,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 
 describe('Logger', () => {
 	beforeEach(() => {
-		console.log = jest.fn().mockImplementation((text) => console.warn(text));
+		console.log = jest.fn();
 	});
 
 	const customPrefix = 'custom namespace:';
