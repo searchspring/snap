@@ -6,7 +6,7 @@ on:
 
 jobs:
   Tests:
-    runs-on: ubuntu-latest
+    runs-on: cypress/browsers:node16.13.2-chrome97-ff96
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
