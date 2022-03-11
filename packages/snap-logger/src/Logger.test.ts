@@ -8,6 +8,10 @@ describe('Logger', () => {
 		console.log = jest.fn();
 	});
 
+	afterAll(() => {
+		jest.resetAllMocks();
+	});
+
 	const customPrefix = 'custom namespace:';
 	const prefix = '';
 
