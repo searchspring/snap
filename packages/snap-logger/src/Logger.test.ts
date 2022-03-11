@@ -11,7 +11,7 @@ describe('Logger', () => {
 	});
 
 	afterAll(() => {
-		consoleLogMock.mockReset();
+		consoleLogMock.mockRestore();
 	});
 
 	const customPrefix = 'custom namespace:';
