@@ -20,7 +20,7 @@ const config = {
 			result: '.ss__result',
 			nextArrow: '.ss__recommendation .ss__carousel__next',
 			prevArrow: '.ss__recommendation .ss__carousel__prev',
-			activeSlide: '.swiper-slide-active',
+			activeSlide: '.ss__recommendation .swiper-slide-active',
 			controller: 'recommend_similar0',
 		},
 	},
@@ -109,12 +109,15 @@ describe('Recommendations', () => {
 					cy.get(config?.selectors?.recommendation.nextArrow)
 						.click()
 						.then(($button) => {
+							cy.wait(300);
+
 							//get the new active product
 							newActive = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
 							).innerHTML;
 
 							//get the new active again
+
 							const newerActiveIndex = doc.querySelector(`${config?.selectors?.recommendation.activeSlide}`).getAttribute('data-swiper-slide-index');
 							const storeTitle = store.results[parseInt(newerActiveIndex)].mappings.core.name;
 
