@@ -75,8 +75,6 @@ describe('Recommendations', () => {
 					cy.get(config?.selectors?.recommendation.prevArrow)
 						.click()
 						.then(($button) => {
-							cy.wait(300);
-
 							const newerActiveTitle = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
 							).innerHTML;
@@ -89,10 +87,6 @@ describe('Recommendations', () => {
 		});
 
 		it('renders carousel next buttons', function () {
-			//for unknown reasons, clicking both prev and next buttons in the same test fails when running this test in the cloud...
-			//to get around this, reload the page before we click the second button.
-			cy.visit(config.url);
-
 			cy.document().then((doc) => {
 				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 					cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
@@ -109,8 +103,6 @@ describe('Recommendations', () => {
 					cy.get(config?.selectors?.recommendation.nextArrow)
 						.click()
 						.then(($button) => {
-							cy.wait(300);
-
 							//get the new active product
 							newActive = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
