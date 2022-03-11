@@ -90,6 +90,7 @@ let config = {
 					settings: {
 						trending: {
 							limit: 5,
+							showResults: true,
 						},
 					},
 					globals: {
