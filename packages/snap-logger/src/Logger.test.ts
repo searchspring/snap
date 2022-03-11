@@ -4,12 +4,14 @@ import { emoji } from './emoji';
 import { Profiler } from '@searchspring/snap-profiler';
 
 describe('Logger', () => {
+	let consoleLogMock: any = jest.fn();
 	beforeEach(() => {
-		console.log = jest.fn();
+		consoleLogMock.mockReset();
+		consoleLogMock = jest.spyOn(console, 'log').mockImplementation();
 	});
 
 	afterAll(() => {
-		jest.resetAllMocks();
+		consoleLogMock.mockReset();
 	});
 
 	const customPrefix = 'custom namespace:';
