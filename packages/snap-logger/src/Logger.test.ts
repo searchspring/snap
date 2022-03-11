@@ -6,8 +6,8 @@ import { Profiler } from '@searchspring/snap-profiler';
 describe('Logger', () => {
 	let consoleLogMock: any = jest.fn();
 	beforeEach(() => {
-		consoleLogMock.mockReset();
-		consoleLogMock = jest.spyOn(console, 'log').mockImplementation();
+		consoleLogMock.mockClear();
+		consoleLogMock = jest.spyOn(console, 'log');
 	});
 
 	afterAll(() => {
