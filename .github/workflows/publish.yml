@@ -46,6 +46,8 @@ jobs:
           npm run build
 
       - name: Tests
+        env:
+          NODE_OPTIONS: "--max-old-space-size=2048"
         run: npm run test
 
       - name: Publish packages
