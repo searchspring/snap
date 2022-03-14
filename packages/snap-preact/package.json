@@ -30,7 +30,8 @@
 		"@searchspring/snap-tracker": "^0.22.0",
 		"@searchspring/snap-url-manager": "^0.22.0",
 		"deepmerge": "^4.2.2",
-		"intersection-observer": "^0.12.0"
+		"intersection-observer": "^0.12.0",
+		"is-plain-object": "^5.0.0"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.20"
