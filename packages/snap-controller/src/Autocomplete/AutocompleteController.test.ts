@@ -287,7 +287,7 @@ describe('Autocomplete Controller', () => {
 
 		inputEl.value = 'wh';
 		inputEl.dispatchEvent(new Event('focus'));
-		inputEl.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 })); // Enter key
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 13 })); // Enter key
 
 		// timeout needed due to beforeSubmit event and awaiting further input
 		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY + 1));
