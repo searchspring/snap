@@ -86,7 +86,7 @@ describe('Recommendations', () => {
 			});
 		});
 
-		it('renders carousel next buttons', function () {
+		it.skip('renders carousel next buttons', function () {
 			cy.document().then((doc) => {
 				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 					cy.get(config?.selectors?.recommendation.nextArrow).should('exist');
