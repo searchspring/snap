@@ -8,7 +8,7 @@ export class Logger {
 	private prefix = '';
 
 	constructor(prefix?: string) {
-		this.prefix = prefix;
+		this.prefix = prefix || '';
 	}
 
 	public setNamespace(group: string): void {
@@ -52,7 +52,7 @@ export class Logger {
 		);
 	}
 
-	public image({ url, width, height }: { url: string; width: number; height: number }, ...params: any[]): void {
+	public image({ url, width, height }: { url: string; width: number | string; height: number | string }, ...params: any[]): void {
 		const styles = {
 			size: `font-size: 1px; padding: ${height || width} ${width || height};`,
 			background: `background: url("${url}") no-repeat; background-size: contain;`,
