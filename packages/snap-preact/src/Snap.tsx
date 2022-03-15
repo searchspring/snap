@@ -1,4 +1,5 @@
 import deepmerge from 'deepmerge';
+import { isPlainObject } from 'is-plain-object';
 import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
 import { Logger, LogMode } from '@searchspring/snap-logger';
@@ -155,7 +156,15 @@ export class Snap {
 						controller: config,
 						context: deepmerge(this.context || {}, context || {}),
 					},
-					{ client: services?.client || this.client, tracker: services?.tracker || this.tracker }
+					{
+						client: services?.client || this.client,
+						store: services?.store,
+						urlManager: services?.urlManager,
+						eventManager: services?.eventManager,
+						profiler: services?.profiler,
+						logger: services?.logger,
+						tracker: services?.tracker || this.tracker,
+					}
 				);
 				resolve(this.controllers[config.id]);
 			}
@@ -177,7 +186,11 @@ export class Snap {
 			this.logger.error('failed to find global context');
 		}
 
-		this.config = deepmerge(this.config || {}, (globalContext.config as SnapConfig) || {});
+		// merge configs - but only merge plain objects
+		this.config = deepmerge(this.config || {}, (globalContext.config as SnapConfig) || {}, {
+			isMergeableObject: isPlainObject,
+		});
+
 		this.context = deepmerge(globalContext || {}, this.config.context || {});
 
 		if (!this.config?.client?.globals?.siteId) {
@@ -280,7 +293,15 @@ export class Snap {
 									controller: controller.config,
 									context: deepmerge(this.context || {}, controller.context || {}),
 								},
-								{ client: controller.services?.client || this.client, tracker: controller.services?.tracker || this.tracker }
+								{
+									client: controller.services?.client || this.client,
+									store: controller.services?.store,
+									urlManager: controller.services?.urlManager,
+									eventManager: controller.services?.eventManager,
+									profiler: controller.services?.profiler,
+									logger: controller.services?.logger,
+									tracker: controller.services?.tracker || this.tracker,
+								}
 							);
 
 							this.controllers[cntrlr.config.id] = cntrlr;

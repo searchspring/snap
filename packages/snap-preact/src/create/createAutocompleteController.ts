@@ -14,7 +14,7 @@ import type { SnapControllerServices, SnapAutocompleteControllerConfig } from '.
 configureMobx({ useProxies: 'never' });
 
 export default (config: SnapAutocompleteControllerConfig, services?: SnapControllerServices): AutocompleteController => {
-	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();
+	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach();
 
 	const cntrlr = new AutocompleteController(
 		config.controller,

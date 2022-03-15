@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* **autocompletecontroller.ts:** after removing a query, trending terms show & auto select 1st term ([b514da4](https://github.com/searchspring/snap/commit/b514da407b49c5391a6e5268d7d21d4f2b32a23c))
+
+
+### Features
+
+* **autocomplete-controller:** change the use of `config.action` and utilize UrlManager for URL ([f89c02f](https://github.com/searchspring/snap/commit/f89c02fddfd12bfb9381246f65b107c5958587a5))
+
+
+
+
+
 # [0.22.0](https://github.com/searchspring/snap/compare/v0.21.1...v0.22.0) (2022-03-09)
 
 

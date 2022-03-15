@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* **snap-preact:** fixing config services wiring and config merge issue with non-plain objects ([afab290](https://github.com/searchspring/snap/commit/afab290d971b579a3dccdaace755097c0e191e0f))
+
+
+
+
+
 # [0.22.0](https://github.com/searchspring/snap/compare/v0.21.1...v0.22.0) (2022-03-09)
 
 **Note:** Version bump only for package @searchspring/snap-preact
