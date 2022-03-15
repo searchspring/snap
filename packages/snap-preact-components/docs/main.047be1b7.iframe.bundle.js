@@ -17764,7 +17764,7 @@
 							(this.emoji = emoji),
 							(this.colors = colors),
 							(this.prefix = ''),
-							(this.prefix = prefix);
+							(this.prefix = prefix || '');
 					}
 					return (
 						(function _createClass(Constructor, protoProps, staticProps) {
@@ -23691,7 +23691,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.22.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.23.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24087,7 +24087,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.22.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.23.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -24442,19 +24442,20 @@
 									enterKey:
 										((_enterKey = AutocompleteController_asyncToGenerator(
 											regeneratorRuntime.mark(function _callee(e) {
-												var _this$config$globals, _this$config$globals$, _this$config$globals$2, actionUrl, input, inputParam, newUrl;
+												var _this$config$globals, _this$config$globals$, _this$config$globals$2, input, actionUrl;
 												return regeneratorRuntime.wrap(
 													function _callee$(_context) {
 														for (;;)
 															switch ((_context.prev = _context.next)) {
 																case 0:
 																	if (13 != e.keyCode) {
-																		_context.next = 30;
+																		_context.next = 29;
 																		break;
 																	}
 																	if (
-																		((actionUrl = url(_this.config.action)),
-																		(input = e.target),
+																		((input = e.target),
+																		(actionUrl = _this.store.services.urlManager),
+																		e.preventDefault(),
 																		null === (_this$config$globals = _this.config.globals) ||
 																			void 0 === _this$config$globals ||
 																			null === (_this$config$globals$ = _this$config$globals.search) ||
@@ -24463,27 +24464,26 @@
 																			void 0 === _this$config$globals$2 ||
 																			!_this$config$globals$2.spellCorrection)
 																	) {
+																		_context.next = 13;
+																		break;
+																	}
+																	return (_context.next = 7), timeout(201);
+																case 7:
+																	if (!_this.store.loading) {
 																		_context.next = 12;
 																		break;
 																	}
-																	return (_context.next = 6), timeout(201);
-																case 6:
-																	if (!_this.store.loading) {
-																		_context.next = 11;
-																		break;
-																	}
-																	return (_context.next = 9), timeout(200);
-																case 9:
-																	_context.next = 6;
+																	return (_context.next = 10), timeout(200);
+																case 10:
+																	_context.next = 7;
 																	break;
-																case 11:
+																case 12:
 																	_this.store.search.originalQuery &&
 																		((input.value = _this.store.search.query.string),
-																		(actionUrl.params.query.oq = _this.store.search.originalQuery.string));
-																case 12:
+																		(actionUrl = actionUrl.set('oq', _this.store.search.originalQuery.string)));
+																case 13:
 																	return (
-																		(inputParam = input.name || _this.urlManager.getTranslatorConfig().queryParameter),
-																		(actionUrl.params.query[inputParam] = input.value),
+																		(actionUrl = actionUrl.set('query', input.value)),
 																		(_context.prev = 14),
 																		(_context.next = 17),
 																		_this.eventManager.fire('beforeSubmit', {
@@ -24507,8 +24507,8 @@
 																case 26:
 																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context.t0);
 																case 28:
-																	(newUrl = actionUrl.url()), (window.location.href = newUrl);
-																case 30:
+																	window.location.href = actionUrl.href;
+																case 29:
 																case 'end':
 																	return _context.stop();
 															}
@@ -24614,18 +24614,29 @@
 											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
 											var value = e.target.value;
 											if (_this.store.state.input != value || !_this.store.loaded) {
+												var _this$store$trending, _this$config$settings, _this$config$settings2;
 												if (((_this.store.state.input = value), _this.config.settings.syncInputs))
 													document.querySelectorAll(_this.config.selector).forEach(function (input) {
 														input.value = value;
 													});
-												clearTimeout(_this.handlers.input.timeoutDelay),
-													value
-														? (_this.handlers.input.timeoutDelay = setTimeout(function () {
-																_this.store.state.locks.terms.unlock(),
-																	_this.store.state.locks.facets.unlock(),
-																	_this.urlManager.set({ query: _this.store.state.input }).go();
-														  }, 200))
-														: (_this.store.reset(), _this.urlManager.reset().go());
+												if ((clearTimeout(_this.handlers.input.timeoutDelay), value))
+													_this.handlers.input.timeoutDelay = setTimeout(function () {
+														_this.store.state.locks.terms.unlock(),
+															_this.store.state.locks.facets.unlock(),
+															_this.urlManager.set({ query: _this.store.state.input }).go();
+													}, 200);
+												else
+													_this.store.reset(),
+														_this.urlManager.reset().go(),
+														null !== (_this$store$trending = _this.store.trending) &&
+															void 0 !== _this$store$trending &&
+															_this$store$trending.length &&
+															null !== (_this$config$settings = _this.config.settings) &&
+															void 0 !== _this$config$settings &&
+															null !== (_this$config$settings2 = _this$config$settings.trending) &&
+															void 0 !== _this$config$settings2 &&
+															_this$config$settings2.showResults &&
+															_this.store.trending[0].preview();
 											}
 										}
 									},
@@ -24640,7 +24651,7 @@
 							}),
 							(_this.searchTrending = AutocompleteController_asyncToGenerator(
 								regeneratorRuntime.mark(function _callee3() {
-									var terms, storedTerms, _this$config$settings, _this$config$settings2, trendingParams, trendingProfile;
+									var terms, storedTerms, _this$config$settings3, _this$config$settings4, trendingParams, trendingProfile;
 									return regeneratorRuntime.wrap(function _callee3$(_context3) {
 										for (;;)
 											switch ((_context3.prev = _context3.next)) {
@@ -24655,12 +24666,12 @@
 													return (
 														(trendingParams = {
 															limit:
-																(null === (_this$config$settings = _this.config.settings) ||
-																void 0 === _this$config$settings ||
-																null === (_this$config$settings2 = _this$config$settings.trending) ||
-																void 0 === _this$config$settings2
+																(null === (_this$config$settings3 = _this.config.settings) ||
+																void 0 === _this$config$settings3 ||
+																null === (_this$config$settings4 = _this$config$settings3.trending) ||
+																void 0 === _this$config$settings4
 																	? void 0
-																	: _this$config$settings2.limit) || 5,
+																	: _this$config$settings4.limit) || 5,
 														}),
 														(trendingProfile = _this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
 														(_context3.next = 9),
@@ -24967,7 +24978,7 @@
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee8(inputElement) {
-											var _this$store$state, _this$store$trending, _this$store$terms, _this$config$settings3, _this$config$settings4;
+											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings5, _this$config$settings6;
 											return regeneratorRuntime.wrap(
 												function _callee8$(_context8) {
 													for (;;)
@@ -25006,16 +25017,17 @@
 															case 18:
 																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
 															case 21:
+																!inputElement ||
 																(null !== (_this$store$state = this.store.state) && void 0 !== _this$store$state && _this$store$state.input) ||
-																null === (_this$store$trending = this.store.trending) ||
-																void 0 === _this$store$trending ||
-																!_this$store$trending.length ||
+																null === (_this$store$trending2 = this.store.trending) ||
+																void 0 === _this$store$trending2 ||
+																!_this$store$trending2.length ||
 																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
-																null === (_this$config$settings3 = this.config.settings) ||
-																void 0 === _this$config$settings3 ||
-																null === (_this$config$settings4 = _this$config$settings3.trending) ||
-																void 0 === _this$config$settings4 ||
-																!_this$config$settings4.showResults
+																null === (_this$config$settings5 = this.config.settings) ||
+																void 0 === _this$config$settings5 ||
+																null === (_this$config$settings6 = _this$config$settings5.trending) ||
+																void 0 === _this$config$settings6 ||
+																!_this$config$settings6.showResults
 																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
 																	: this.store.trending[0].preview();
 															case 22:
@@ -25054,8 +25066,8 @@
 										inputs.forEach(function (input) {
 											var _input$form;
 											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
-												input.removeEventListener('keyup', _this2.handlers.input.enterKey),
-												input.removeEventListener('keyup', _this2.handlers.input.escKey),
+												input.removeEventListener('keydown', _this2.handlers.input.enterKey),
+												input.removeEventListener('keydown', _this2.handlers.input.escKey),
 												input.removeEventListener('focus', _this2.handlers.input.focus),
 												null === (_input$form = input.form) ||
 													void 0 === _input$form ||
@@ -25069,9 +25081,9 @@
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
 										regeneratorRuntime.mark(function _callee9() {
-											var _this$config$settings5,
-												_this$config$settings6,
-												_this$store$trending2,
+											var _this$config$settings7,
+												_this$config$settings8,
+												_this$store$trending3,
 												_this3 = this;
 											return regeneratorRuntime.wrap(
 												function _callee9$(_context9) {
@@ -25095,14 +25107,12 @@
 																				_this3.store.state.input &&
 																				(input.value = _this3.store.state.input),
 																			input.addEventListener('focus', _this3.handlers.input.focus),
-																			input.addEventListener('keyup', _this3.handlers.input.escKey);
-																		var form = input.form,
-																			formActionUrl = _this3.config.action;
-																		!form && _this3.config.action
-																			? input.addEventListener('keyup', _this3.handlers.input.enterKey)
-																			: form &&
-																			  (_this3.config.action ? (form.action = _this3.config.action) : (formActionUrl = form.action),
-																			  form.addEventListener('submit', _this3.handlers.input.formSubmit)),
+																			input.addEventListener('keydown', _this3.handlers.input.escKey);
+																		var formActionUrl,
+																			form = input.form;
+																		_this3.config.action
+																			? ((formActionUrl = _this3.config.action), input.addEventListener('keydown', _this3.handlers.input.enterKey))
+																			: form && ((formActionUrl = form.action), form.addEventListener('submit', _this3.handlers.input.formSubmit)),
 																			formActionUrl &&
 																				_this3.store.setService(
 																					'urlManager',
@@ -25112,15 +25122,15 @@
 																				),
 																			document.activeElement === input && _this3.setFocused(input);
 																	}),
-																	(null === (_this$config$settings5 = this.config.settings) ||
-																	void 0 === _this$config$settings5 ||
-																	null === (_this$config$settings6 = _this$config$settings5.trending) ||
-																	void 0 === _this$config$settings6
+																	(null === (_this$config$settings7 = this.config.settings) ||
+																	void 0 === _this$config$settings7 ||
+																	null === (_this$config$settings8 = _this$config$settings7.trending) ||
+																	void 0 === _this$config$settings8
 																		? void 0
-																		: _this$config$settings6.limit) > 0 &&
-																		(null === (_this$store$trending2 = this.store.trending) ||
-																			void 0 === _this$store$trending2 ||
-																			!_this$store$trending2.length) &&
+																		: _this$config$settings8.limit) > 0 &&
+																		(null === (_this$store$trending3 = this.store.trending) ||
+																			void 0 === _this$store$trending3 ||
+																			!_this$store$trending3.length) &&
 																		this.searchTrending(),
 																	document.addEventListener('click', this.handlers.document.click);
 															case 8:
@@ -28014,8 +28024,9 @@
 									var id = config.id;
 									if (controllers[id]) return controllers[id];
 									var cntrlr = (controllers[id] = (function (config, services) {
-										var urlManager =
-											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach(!0);
+										var urlManager = (
+											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker)
+										).detach(!0);
 										return new RecommendationController(
 											config.controller,
 											{
@@ -28070,8 +28081,9 @@
 									var id = config.id;
 									if (controllers[id]) return controllers[id];
 									var cntrlr = (controllers[id] = (function (config, services) {
-										var urlManager =
-											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker).detach();
+										var urlManager = (
+											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker)
+										).detach();
 										return new AutocompleteController(
 											config.controller,
 											{
