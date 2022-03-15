@@ -170,8 +170,14 @@ export class AutocompleteController extends AbstractController {
 			}
 		}
 
-		//auto select first trending term?
-		if (!this.store.state?.input && this.store.trending?.length && !this.store.terms?.length && this.config.settings?.trending?.showResults) {
+		// auto select first trending term?
+		if (
+			inputElement &&
+			!this.store.state?.input &&
+			this.store.trending?.length &&
+			!this.store.terms?.length &&
+			this.config.settings?.trending?.showResults
+		) {
 			this.store.trending[0].preview();
 		} else {
 			inputElement?.dispatchEvent(new Event('keyup'));
@@ -189,10 +195,12 @@ export class AutocompleteController extends AbstractController {
 
 	handlers = {
 		input: {
-			enterKey: async (e: KeyboardEvent): Promise<void> => {
+			enterKey: async (e: KeyboardEvent): Promise<boolean> => {
 				if (e.keyCode == KEY_ENTER) {
-					const actionUrl = url(this.config.action);
 					const input = e.target as HTMLInputElement;
+					let actionUrl = this.store.services.urlManager;
+
+					e.preventDefault();
 
 					// when spellCorrection is enabled
 					if (this.config.globals?.search?.query?.spellCorrection) {
@@ -206,12 +214,11 @@ export class AutocompleteController extends AbstractController {
 						// use corrected query and originalQuery
 						if (this.store.search.originalQuery) {
 							input.value = this.store.search.query.string;
-							actionUrl.params.query[PARAM_ORIGINAL_QUERY] = this.store.search.originalQuery.string;
+							actionUrl = actionUrl.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 						}
 					}
 
-					const inputParam = input.name || (this.urlManager.getTranslatorConfig().queryParameter as string);
-					actionUrl.params.query[inputParam] = input.value;
+					actionUrl = actionUrl.set('query', input.value);
 
 					// TODO expected spell correct behavior queryAssumption
 
@@ -230,8 +237,7 @@ export class AutocompleteController extends AbstractController {
 						}
 					}
 
-					const newUrl = actionUrl.url();
-					window.location.href = newUrl;
+					window.location.href = actionUrl.href;
 				}
 			},
 			escKey: (e: KeyboardEvent): void => {
@@ -349,8 +355,8 @@ export class AutocompleteController extends AbstractController {
 		const inputs = document.querySelectorAll(`input[${INPUT_ATTRIBUTE}]`);
 		inputs?.forEach((input: HTMLInputElement) => {
 			input.removeEventListener('keyup', this.handlers.input.keyUp);
-			input.removeEventListener('keyup', this.handlers.input.enterKey);
-			input.removeEventListener('keyup', this.handlers.input.escKey);
+			input.removeEventListener('keydown', this.handlers.input.enterKey);
+			input.removeEventListener('keydown', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
 			input.form?.removeEventListener('submit', this.handlers.input.formSubmit);
 		});
@@ -378,21 +384,16 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			input.addEventListener('focus', this.handlers.input.focus);
-			input.addEventListener('keyup', this.handlers.input.escKey);
+			input.addEventListener('keydown', this.handlers.input.escKey);
 
 			const form = input.form;
+			let formActionUrl;
 
-			let formActionUrl = this.config.action;
-
-			if (!form && this.config.action) {
-				input.addEventListener('keyup', this.handlers.input.enterKey);
+			if (this.config.action) {
+				formActionUrl = this.config.action;
+				input.addEventListener('keydown', this.handlers.input.enterKey);
 			} else if (form) {
-				if (this.config.action) {
-					form.action = this.config.action;
-				} else {
-					formActionUrl = form.action;
-				}
-
+				formActionUrl = form.action;
 				form.addEventListener('submit', this.handlers.input.formSubmit);
 			}
 
