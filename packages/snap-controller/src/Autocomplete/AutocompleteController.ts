@@ -319,6 +319,10 @@ export class AutocompleteController extends AbstractController {
 					// TODO cancel any current requests?
 					this.store.reset();
 					this.urlManager.reset().go();
+
+					if (this.store.trending?.length && this.config.settings?.trending?.showResults) {
+						this.store.trending[0].preview();
+					}
 				} else {
 					this.handlers.input.timeoutDelay = setTimeout(() => {
 						this.store.state.locks.terms.unlock();
