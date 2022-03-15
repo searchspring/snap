@@ -71,8 +71,8 @@ const defaultConfig: UrlTranslatorConfig = {
 const CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
 
 export class UrlTranslator implements Translator {
-	private config: UrlTranslatorConfig;
-	private reverseMapping: Record<string, string> = {};
+	protected config: UrlTranslatorConfig;
+	protected reverseMapping: Record<string, string> = {};
 
 	constructor(config: UrlTranslatorConfig = {}) {
 		this.config = deepmerge(defaultConfig, config);

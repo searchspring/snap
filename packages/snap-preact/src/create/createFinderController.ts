@@ -14,7 +14,7 @@ import type { SnapControllerServices, SnapFinderControllerConfig } from '../type
 configureMobx({ useProxies: 'never' });
 
 export default (config: SnapFinderControllerConfig, services?: SnapControllerServices): FinderController => {
-	const urlManager = services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker).detach(true);
+	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
 
 	const cntrlr = new FinderController(
 		config.controller,
