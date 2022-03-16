@@ -141,7 +141,7 @@ describe('Slideout Component', () => {
 	it('can set custom transitionSpeed', () => {
 		const args = {
 			active: true,
-			transitionSpeed: '0.55s' as SlideDirectionType,
+			transitionSpeed: '0.55s',
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
