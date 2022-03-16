@@ -149,25 +149,6 @@ describe('Dropdown Component', () => {
 		expect(contentElement.innerHTML).toBe('im closed');
 	});
 
-	//this doesnt work for unkown reasons
-	it.skip('can disable overlay with prop', () => {
-		const rendered = render(<Dropdown button={'open me'} open={true} disableOverlay={true} />);
-
-		const dropdownElement = rendered.container.querySelector(`.ss__dropdown`);
-		expect(dropdownElement).toBeInTheDocument();
-
-		expect(dropdownElement).toHaveClass('ss__dropdown--open');
-
-		const dropdownContent = rendered.container.querySelector(`.ss__dropdown .ss__dropdown__content`);
-		const dropdownButton = rendered.container.querySelector(`.ss__dropdown .ss__dropdown__button`);
-
-		const dropdownContentstyles = getComputedStyle(dropdownContent);
-		const dropdownButtonstyles = getComputedStyle(dropdownButton);
-
-		expect(dropdownContentstyles.visibility).toBe('visible');
-		expect(dropdownButtonstyles.cursor).tobe('default');
-	});
-
 	it('fires onToggle prop when clicked outside (while opened)', () => {
 		const buttonText = 'click me';
 		const contentText = 'this is the content';

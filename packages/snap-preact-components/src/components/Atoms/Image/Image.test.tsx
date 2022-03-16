@@ -85,20 +85,6 @@ describe('image Component', () => {
 			expect(clickfunc).toHaveBeenCalled();
 		});
 	});
-
-	//this should work, but doesnt, jest doesnt actually load assets,
-	//so the img onLoad event never fires.
-	it.skip('custom onLoad func', async () => {
-		const onLoadFunc = jest.fn();
-		expect(onLoadFunc).not.toHaveBeenCalled();
-
-		const rendered = await render(<Image alt={badResult.name} src={result.thumbnailImageUrl} onLoad={onLoadFunc} />);
-		const imageElement = rendered.container.querySelector('.ss__image img');
-
-		expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
-		await waitFor(() => expect(document.images).toHaveLength(1));
-		expect(onLoadFunc).toHaveBeenCalled();
-	});
 });
 
 describe('Image theming works', () => {

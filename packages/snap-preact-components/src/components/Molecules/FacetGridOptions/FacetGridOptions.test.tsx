@@ -9,7 +9,6 @@ import { gridFacetMock } from '../../../mocks/searchResponse';
 describe('FacetGridOptions Component', () => {
 	let gridComponent;
 	let gridElement;
-	beforeEach(() => {});
 
 	it('renders', () => {
 		gridComponent = render(<FacetGridOptions values={gridFacetMock.values} />);

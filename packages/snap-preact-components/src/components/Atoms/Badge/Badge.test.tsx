@@ -9,8 +9,6 @@ const CONTENT = 'sale';
 const CLASSNAME = 'sale-badge';
 const CHILDREN = <div>{CONTENT}</div>;
 
-// TODO: Add test to fully cover position prop
-
 describe('Badge Component', () => {
 	it('positions badge based on prop', () => {
 		const position = { right: 0 };

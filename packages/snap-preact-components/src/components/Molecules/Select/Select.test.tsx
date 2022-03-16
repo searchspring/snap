@@ -194,23 +194,6 @@ describe('Select Component', () => {
 			});
 		});
 
-		it.skip('it does not close the dropdown when using stayOpenOnSelection', () => {
-			const selectFn = jest.fn();
-			const selectIndex = 1;
-
-			const rendered = render(<Select stayOpenOnSelection={true} options={options} onSelect={selectFn} />);
-
-			const selectElement = rendered.container.querySelector('.ss__select');
-			const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
-			const dropdownButton = selectElement.querySelector('.ss__dropdown__button');
-			const dropdownElement = selectElement.querySelector('.ss__dropdown');
-
-			userEvent.click(dropdownButton);
-			userEvent.click(optionElements[selectIndex]);
-
-			expect(dropdownElement).toHaveClass('ss__dropdown--open');
-		});
-
 		it('it shows clearSelection label when a selection is made', async () => {
 			const clearSelectionLabel = 'clear selection';
 			const rendered = render(<Select clearSelection={clearSelectionLabel} options={options} />);
