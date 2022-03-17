@@ -36,6 +36,7 @@ describe('Search Controller', () => {
 		expect(() => {
 			// @ts-ignore
 			const controller = new SearchController(
+				// @ts-ignore
 				{ id: 123 },
 				{
 					client: new MockClient(globals, {}),
