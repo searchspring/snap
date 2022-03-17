@@ -44,7 +44,9 @@ export class FacetStore extends Array {
 				}
 
 				// trim facets - remove facets that have no use
-				if (config.settings?.facets?.trim) {
+				const facetConfig = config.settings?.facets?.fields[facet.field];
+				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig.trim : config.settings?.facets?.trim;
+				if (shouldTrim) {
 					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
@@ -61,7 +63,7 @@ export class FacetStore extends Array {
 
 				switch (facet.type) {
 					case 'range':
-						return new RangeFacet(services, storage, facet, facetMeta);
+						return new RangeFacet(config, services, storage, facet, facetMeta);
 					case 'value':
 					case 'range-buckets':
 					default:
@@ -142,12 +144,20 @@ class RangeFacet extends Facet {
 	formatSeparator: string;
 	formatValue: string;
 
-	constructor(services: StoreServices, storage: StorageStore, facet: SearchResponseModelFacetRange, facetMeta: MetaResponseModelFacetSlider) {
+	constructor(
+		config: SearchStoreConfig | AutocompleteStoreConfig,
+		services: StoreServices,
+		storage: StorageStore,
+		facet: SearchResponseModelFacetRange,
+		facetMeta: MetaResponseModelFacetSlider
+	) {
 		super(services, storage, facet, facetMeta);
 
 		this.step = facet.step;
 
-		const storedRange = this.storage.get(`facets.${this.field}.range`);
+		const facetConfig = config.settings?.facets?.fields[facet.field];
+		const shouldStore = typeof facetConfig?.storeRange == 'boolean' ? facetConfig.storeRange : config.settings?.facets?.storeRange;
+		const storedRange = shouldStore && this.storage.get(`facets.${this.field}.range`);
 		if (storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)) {
 			// range from API has shrunk
 			this.range = this.storage.get(`facets.${this.field}.range`);
@@ -254,7 +264,9 @@ class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		if (config.settings?.facets?.pinFiltered && facetMeta.display !== 'hierarchy') {
+		const facetConfig = config.settings?.facets?.fields[facet.field];
+		const shouldPin = typeof facetConfig?.pinFiltered == 'boolean' ? facetConfig.pinFiltered : config.settings?.facets?.pinFiltered;
+		if (shouldPin && facetMeta.display !== 'hierarchy') {
 			this.values.sort((a, b) => Number(b.filtered) - Number(a.filtered));
 		}
 
