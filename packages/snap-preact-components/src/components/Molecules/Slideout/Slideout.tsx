@@ -13,7 +13,6 @@ import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const CSS = {
 	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
-		//@ts-ignore
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -117,7 +116,7 @@ export interface SlideoutProps extends ComponentProps {
 	slideDirection?: SlideDirectionType;
 }
 
-type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';
+export type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';
 interface SlideoutSubProps {
 	overlay: OverlayProps;
 }

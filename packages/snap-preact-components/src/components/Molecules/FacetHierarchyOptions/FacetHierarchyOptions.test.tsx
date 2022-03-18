@@ -1,32 +1,10 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
 import { hierarchyFacetMock, hierarchyFacetFilteredMock } from '../../../mocks/searchResponse';
-
-describe('hierarchyValue Component', () => {
-	let hierarchyValueComponent;
-	beforeEach(() => {
-		hierarchyValueComponent = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} />);
-	});
-
-	it('renders', () => {
-		const hierarchyValueElement = hierarchyValueComponent.container.querySelector('.ss__facet-hierarchy-options');
-		expect(hierarchyValueElement).toBeInTheDocument();
-	});
-
-	it('renders label and count', () => {
-		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss__facet-hierarchy-options__option');
-
-		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
-
-		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values[0].label);
-
-		const optionCount = hierarchyOption[0].querySelector('.ss__facet-hierarchy-options__option__value__count');
-		expect(optionCount).toHaveTextContent(hierarchyFacetMock.values[0].count.toString());
-	});
-});
 
 describe('hierarchyValue Component', () => {
 	let hierarchyValueComponent;
@@ -81,6 +59,34 @@ describe('hierarchyValue Component hiding count', () => {
 
 		expect(hierarchyOption[0]).toHaveTextContent(hierarchyFacetMock.values[0].label);
 		expect(hierarchyOption[0]).not.toHaveTextContent(hierarchyFacetMock.values[0].count.toString());
+	});
+});
+
+describe('FacetHierarchyOptions generic props work', () => {
+	it('can disable styling', () => {
+		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} disableStyles={true} />);
+
+		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
+		expect(hierarchyOption.classList.length).toBe(1);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} className={className} />);
+
+		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
+		expect(hierarchyOption).toBeInTheDocument();
+		expect(hierarchyOption).toHaveClass(className);
+	});
+
+	it('can set custom onClick func', () => {
+		const onClickFunc = jest.fn();
+		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} onClick={onClickFunc} />);
+
+		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option');
+		expect(hierarchyOption).toBeInTheDocument();
+		userEvent.click(hierarchyOption);
+		expect(onClickFunc).toHaveBeenCalled();
 	});
 });
 

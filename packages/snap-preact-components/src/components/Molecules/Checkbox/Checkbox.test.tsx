@@ -47,6 +47,13 @@ describe('Checkbox Component', () => {
 			expect(svgElement).not.toBeInTheDocument();
 		});
 
+		it('can handle checked state internally', () => {
+			const rendered = render(<Checkbox startChecked={true} />);
+			const svgElement = rendered.container.querySelector('svg');
+
+			expect(svgElement).toBeInTheDocument();
+		});
+
 		it('renders an icon when checked', () => {
 			const rendered = render(<Checkbox checked />);
 			const svgElement = rendered.container.querySelector('svg');
@@ -104,6 +111,18 @@ describe('Checkbox Component', () => {
 			expect(styles.height).toBe(`calc(${size} - 30%)`);
 			expect(styles.fill).toBe(color);
 			expect(path).toHaveAttribute('d', iconPaths[icon]);
+		});
+
+		it('can use iconColor prop instead of color', () => {
+			const icon = 'close-thin';
+			const iconColor = 'blue';
+			const size = '12px';
+
+			const rendered = render(<Checkbox checked size={size} icon={icon} iconColor={iconColor} />);
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
+			const svg = checkboxElement.querySelector('svg');
+			const styles = getComputedStyle(svg);
+			expect(styles.fill).toBe(iconColor);
 		});
 
 		it('can disableStyles', () => {
@@ -177,6 +196,14 @@ describe('Checkbox Component', () => {
 
 			expect(inputElement).toBeInTheDocument();
 			expect(inputElement.checked).toBe(false);
+		});
+
+		it('can handle checked state internally', () => {
+			const rendered = render(<Checkbox native startChecked={true} />);
+			const inputElement = rendered.container.querySelector('input');
+
+			expect(inputElement).toBeInTheDocument();
+			expect(inputElement.checked).toBe(true);
 		});
 
 		it('does not render an icon when checked', () => {

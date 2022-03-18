@@ -28,18 +28,24 @@ describe('Merchandising Banner Component', () => {
 		});
 	});
 
+	it('doesnt render if empty', () => {
+		const rendered = render(<Banner content={[]} type={BannerType.LEFT} />);
+		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--left');
+		expect(merchBannerElement).not.toBeInTheDocument();
+	});
+
+	it('can disable styling', () => {
+		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={BannerType.BANNER} />);
+		const loadingbarElement = rendered.container.querySelector('.ss__banner');
+		expect(loadingbarElement.classList.length).toBe(2);
+	});
+
 	it('renders with classname', () => {
 		const className = 'classy';
 		const rendered = render(<Banner className={className} content={searchResponse.merchandising.content} type={BannerType.BANNER} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement).toHaveClass(className);
-	});
-
-	it('doesnt render if empty', () => {
-		const rendered = render(<Banner content={[]} type={BannerType.LEFT} />);
-		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--left');
-		expect(merchBannerElement).not.toBeInTheDocument();
 	});
 
 	it('is themeable with ThemeProvider', () => {

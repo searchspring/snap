@@ -49,23 +49,23 @@ const CSS = {
 		}),
 };
 
-const defaultBreakpointsProps = {
-	0: {
-		columns: 1,
-	},
-	540: {
-		columns: 2,
-	},
-	768: {
-		columns: 3,
-	},
-	991: {
-		columns: 4,
-	},
-};
-
 export const Results = observer((properties: ResultsProp): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+
+	const defaultBreakpointsProps = {
+		0: {
+			columns: properties.columns || 1,
+		},
+		540: {
+			columns: properties.columns || 2,
+		},
+		768: {
+			columns: properties.columns || 3,
+		},
+		991: {
+			columns: properties.columns || 4,
+		},
+	};
 
 	let props: ResultsProp = {
 		// default props
@@ -134,7 +134,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 
 	return results?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__results', className)}>
+			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
 				{results.map((result) =>
 					(() => {
 						switch (result.type) {

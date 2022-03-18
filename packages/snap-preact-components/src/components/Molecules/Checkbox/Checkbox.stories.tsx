@@ -86,6 +86,16 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		startChecked: {
+			description: 'Checkbox is checked initially(managed state)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		native: {
 			description: 'Render as unstyled native checkbox',
 			table: {

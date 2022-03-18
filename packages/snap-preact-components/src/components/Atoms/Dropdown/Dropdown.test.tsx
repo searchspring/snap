@@ -149,15 +149,6 @@ describe('Dropdown Component', () => {
 		expect(contentElement.innerHTML).toBe('im closed');
 	});
 
-	it('disables styles', () => {
-		const buttonText = 'click me';
-		const contentText = 'this is the content';
-		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
-
-		const dropdown = rendered.container.querySelector('.ss__dropdown');
-		expect(dropdown.classList).toHaveLength(1);
-	});
-
 	it('fires onToggle prop when clicked outside (while opened)', () => {
 		const buttonText = 'click me';
 		const contentText = 'this is the content';
@@ -219,6 +210,15 @@ describe('Dropdown Component', () => {
 
 		userEvent.click(button);
 		expect(clickFn).not.toHaveBeenCalled();
+	});
+
+	it('disables styles', () => {
+		const buttonText = 'click me';
+		const contentText = 'this is the content';
+		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown');
+		expect(dropdown.classList).toHaveLength(1);
 	});
 
 	it('is themeable with ThemeProvider', () => {

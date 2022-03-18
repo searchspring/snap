@@ -110,6 +110,39 @@ describe('Lets test the Pagination Component optional props', () => {
 		expect(next).toHaveTextContent('NEXT');
 		expect(prev).toHaveTextContent('PREV');
 	});
+
+	it('custom first and last buttns', () => {
+		const args = {
+			firstButton: 'FIRST',
+			lastButton: 'LAST',
+		};
+
+		const rendered = render(<Pagination pagination={paginationMock} {...args} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+
+		const first = rendered.container.querySelector('.ss__pagination__page--first');
+		const last = rendered.container.querySelector('.ss__pagination__page--last');
+		expect(first).toHaveTextContent(args.firstButton);
+		expect(last).toHaveTextContent(args.lastButton);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<Pagination pagination={paginationMock} className={className} />);
+
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		expect(paginationElement).toHaveClass(className);
+	});
+
+	it('can disable styles', () => {
+		const rendered = render(<Pagination pagination={paginationMock} disableStyles />);
+
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+
+		expect(paginationElement.classList).toHaveLength(1);
+	});
 });
 
 describe('Pagination theming works', () => {
