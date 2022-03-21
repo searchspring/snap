@@ -44,9 +44,10 @@ export class FacetStore extends Array {
 				}
 
 				// trim facets - remove facets that have no use
-				const facetConfig = config.settings?.facets?.fields[facet.field];
+				const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
 				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig.trim : config.settings?.facets?.trim;
 				if (shouldTrim) {
+					console.log('trimming...');
 					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
@@ -54,6 +55,8 @@ export class FacetStore extends Array {
 					} else if (!facet.filtered && facet.values?.length == 1) {
 						return facet.values[0].count != pagination.totalResults;
 					}
+				} else {
+					console.log('not trimming...', typeof facetConfig?.trim == 'boolean', facetConfig, config.settings?.facets?.trim);
 				}
 
 				return true;
@@ -155,7 +158,7 @@ class RangeFacet extends Facet {
 
 		this.step = facet.step;
 
-		const facetConfig = config.settings?.facets?.fields[facet.field];
+		const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
 		const shouldStore = typeof facetConfig?.storeRange == 'boolean' ? facetConfig.storeRange : config.settings?.facets?.storeRange;
 		const storedRange = shouldStore && this.storage.get(`facets.${this.field}.range`);
 		if (storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)) {
@@ -264,7 +267,7 @@ class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		const facetConfig = config.settings?.facets?.fields[facet.field];
+		const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
 		const shouldPin = typeof facetConfig?.pinFiltered == 'boolean' ? facetConfig.pinFiltered : config.settings?.facets?.pinFiltered;
 		if (shouldPin && facetMeta.display !== 'hierarchy') {
 			this.values.sort((a, b) => Number(b.filtered) - Number(a.filtered));
