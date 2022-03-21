@@ -22976,8 +22976,8 @@
 							key: 'remove',
 							value: function remove(func) {
 								var stringyFunc = func.toString();
-								this.functions = this.functions.filter(function (func) {
-									return func.toString() != stringyFunc;
+								this.functions = this.functions.filter(function (fn) {
+									return func.name !== fn.name || fn.toString() != stringyFunc;
 								});
 							},
 						},
@@ -23691,7 +23691,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.23.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.23.1' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24087,7 +24087,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.23.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.23.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
