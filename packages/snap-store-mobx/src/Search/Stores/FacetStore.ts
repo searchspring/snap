@@ -47,7 +47,6 @@ export class FacetStore extends Array {
 				const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
 				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig.trim : config.settings?.facets?.trim;
 				if (shouldTrim) {
-					console.log('trimming...');
 					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
 						return false;
 					} else if (facet.values?.length == 0) {
@@ -55,8 +54,6 @@ export class FacetStore extends Array {
 					} else if (!facet.filtered && facet.values?.length == 1) {
 						return facet.values[0].count != pagination.totalResults;
 					}
-				} else {
-					console.log('not trimming...', typeof facetConfig?.trim == 'boolean', facetConfig, config.settings?.facets?.trim);
 				}
 
 				return true;
