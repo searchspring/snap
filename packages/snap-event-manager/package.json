@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-event-manager",
-	"version": "0.23.0",
+	"version": "0.23.1",
 	"description": "Snap Event Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -16,7 +16,7 @@
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "jest --passWithNoTests",
+		"test": "jest",
 		"test:watch": "jest --watch"
 	},
 	"sideEffects": false,

@@ -8,7 +8,7 @@ export class EventManager {
 		// noop
 	}
 
-	async fire<T>(event: string, context: T): Promise<void> {
+	async fire<T>(event: string, context?: T): Promise<void> {
 		if (this.events[event]) {
 			await this.events[event].dispatch(context);
 		}
