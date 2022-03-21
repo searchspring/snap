@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* **event-manager:** making the context optional, adding some types to functions and enhancing remove ([0373bfb](https://github.com/searchspring/snap/commit/0373bfb79d43a565e66170eee9d24a38fef667f6))
+
+
+
+
+
 # [0.23.0](https://github.com/searchspring/snap/compare/v0.22.0...v0.23.0) (2022-03-15)
 
 
