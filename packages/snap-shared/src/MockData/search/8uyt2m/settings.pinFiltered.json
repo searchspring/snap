@@ -1,0 +1,679 @@
+{
+  "search": {},
+  "filters": [
+    {
+      "type": "value",
+      "field": "size",
+      "label": "Large",
+      "value": "Large"
+    },
+    {
+      "type": "value",
+      "field": "color_family",
+      "label": "Blue",
+      "value": "Blue"
+    }
+  ],
+  "pagination": {
+    "totalResults": 5,
+    "page": 1,
+    "defaultPageSize": 24,
+    "pageSize": 30,
+    "totalPages": 1
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "183529",
+      "mappings": {
+        "core": {
+          "uid": "183529",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-EN-R4-D7793",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7217_copyright_reddressboutique_2017_-2_1_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7217_copyright_reddressboutique_2017_-2_1_large.jpg",
+          "name": "Make Your Getaway Red Floral Print Maxi Dress",
+          "sku": "C-EN-R4-D7793"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nX10w0y0XUxN7c0ZjAEQmMDBkNLM4b0oswUAKtpCGY",
+        "intellisuggestSignature": "d1a6bbc44b6fbdd68b9fd3d256145f11b4b9bcb388aeb03318d1168637641209",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "50"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "red",
+          "floral",
+          "floral print",
+          "long dress",
+          "maxi",
+          "maxy",
+          "maxey",
+          "fun",
+          "spring",
+          "event",
+          "guest"
+        ],
+        "color": [
+          "Red"
+        ],
+        "dress_length_name": "Ankle",
+        "multi_colors": [
+          "no"
+        ],
+        "pattern": [
+          "Floral"
+        ],
+        "description": [
+          "Oh, there are so many incredible movie-esque scenarios that I contemplated setting this scene with. Great moments of tension and excitement, bravery and a dash of careless passion! But in the end, I trusted my gut and decided that ultimately, it's going to be better if you imagine it yourself--created from scratch. Your mind is going to come up with the absolute best situation possible, the perfect scene. So what's it going to be? What would it be like to Make Your Getaway? And what are you getting away from? The corporate world? The daily routine of seeing the same four walls of your house? Maybe seeing the same town you've seen for way too many years? It's all up to you ... and this darling maxi dress, of course. Maxi dress features a v-neckline with adjustable ruffle straps (up to 2.5\\&quot;). Skirt has an invisible back zipper and two slits. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "Make Your Getaway Red Floral Print Maxi Dress"
+        ],
+        "ss_clicks": [
+          "297"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": [
+          "66"
+        ],
+        "ss_sale_price": "46",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Playsuits",
+          "Playsuits&gt;Rompers",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "Playsuits &gt; Rompers",
+          "Playsuits",
+          "What's New",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "10"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "56"
+        ],
+        "popularity": "66",
+        "product_type_unigram": "dress",
+        "id": "ee724d2899d6231512aec7736a660b37"
+      }
+    },
+    {
+      "id": "172472",
+      "mappings": {
+        "core": {
+          "uid": "172472",
+          "price": 46,
+          "msrp": 50,
+          "url": "/product/C-AD-R4-02STZ",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_10_pajama_party__146_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_pajama_party__146_large.jpg",
+          "name": "Sweet Dreams Pajama Romper",
+          "sku": "C-AD-R4-02STZ",
+          "brand": "Adrienne"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nV00Q0y0TUwCg6JYjBkMGIwNmAwtDRjSC_KTAEAro8Ing",
+        "intellisuggestSignature": "8010be1df7b89f1842ae93c11e42528ed547a64cdc7fdc6912eceb7652181c39",
+        "ss_insights_quadrant": [
+          "Over Exposed"
+        ],
+        "gross_margin": [
+          "38"
+        ],
+        "ss_product_type": [
+          "Romper"
+        ],
+        "keywords": [
+          "Romper",
+          "onesie",
+          "playsuit",
+          "play suit",
+          "sleep suit",
+          "sleepsuit",
+          "sleeper",
+          "long sleeve",
+          "long sleeve romper",
+          "stripes",
+          "stars",
+          "print",
+          "red",
+          "v-neck",
+          "vneck",
+          "v neck",
+          "button up",
+          "buttonup",
+          "button down",
+          "buttondown",
+          "cute",
+          "trendy",
+          "comfy",
+          "casual",
+          "pj"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Sweet Dreams are made of these (pajamas). Who am I to dis-a-grEEEeee? I’ve traveled the world (web) and the seven seeeeeeAAAAssss (the new arrivals page). Every-bo-dy’s looking for something (like these absurdly comfortable jammies)… What? Do you –not- sing out loud when you find the perfect pajama romper? Model is wearing a small. • 96% Polyester, 4% Spandex • Hand Wash Cold • Unlined • Made in the USA"
+        ],
+        "title": [
+          "Sweet Dreams Pajama Romper"
+        ],
+        "ss_clicks": [
+          "3007"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "1670"
+        ],
+        "ss_sale_price": "46",
+        "product_type": [
+          "Playsuits &gt; Rompers",
+          "Shop Lookbook &gt; Pajama Party",
+          "All Pajamas &gt; Rompers and Onesies",
+          "All Pajamas",
+          "Shop Lookbook",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "20"
+        ],
+        "ss_category_hierarchy": [
+          "Playsuits",
+          "Playsuits&gt;Rompers",
+          "All Pajamas",
+          "Gifts for Her",
+          "Shop Lookbook",
+          "All Pajamas&gt;Rompers and Onesies",
+          "Shop Lookbook&gt;Pajama Party",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "50"
+        ],
+        "popularity": "1670",
+        "product_type_unigram": "romper",
+        "id": "95e38960336d34e5b37366fcbb441a32"
+      }
+    },
+    {
+      "id": "174034",
+      "mappings": {
+        "core": {
+          "uid": "174034",
+          "price": 58,
+          "msrp": 75,
+          "url": "/product/C-MC-R7-DCX93",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_474_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_474_large.jpg",
+          "name": "Whisper Of The Heart Burgundy Lace Dress",
+          "sku": "C-MC-R7-DCX93",
+          "brand": "Moon"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1vV11g0y13VxjrA0ZjBkMGYwNmAwtDRjSC_KTAEAruUIlQ",
+        "intellisuggestSignature": "4fc7250b0993e90c22aae2eb05d5c59894776e2add1a2a2acbcb9dd955a6bad7",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "39"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "burgundy",
+          "burgundy dress",
+          "lace dress",
+          "lace",
+          "crochet",
+          "crochet dress",
+          "long sleeve dress",
+          "long sleeves",
+          "peplum skirt",
+          "cinched waist dress",
+          "mock neck",
+          "mock neck dress",
+          "holiday dress",
+          "christmas"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "The heart knows what it wants, and, if you listen, you can hear its fluttering voice whispering guidance when you need it most. And when would a girl need a whisper of the heart more than when shopping for the perfect gown? I know, I know, there are a million things more dire than dress-shopping, but you try telling that to a woman when she finds the right outfit, and hears that whisper. If you’ve never experienced it, for one, shining moment, nothing else in the world matters but the thought of how you’ll look in that dress. Dress features exposed gold zipper, full nude lining on bust and skirt-small open lace band at waist. Model is wearing a small. • Self: 100% Polyester, Lining: 100% Lining • Hand Wash Cold • Made in the USA • Imported"
+        ],
+        "title": [
+          "Whisper Of The Heart Burgundy Lace Dress"
+        ],
+        "ss_clicks": [
+          "3826"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": [
+          "612"
+        ],
+        "ss_sale_price": "58",
+        "ss_category_hierarchy": [
+          "All Sale",
+          "Gifts for Her",
+          "All Sale&gt;Dresses on sale",
+          "All Sale&gt;50% off"
+        ],
+        "on_sale": [
+          "Yes"
+        ],
+        "sale_price": [
+          "29"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Sale &gt; 50% off",
+          "All Sale &gt; Dresses on sale",
+          "All Sale",
+          "Gifts for Her"
+        ],
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "29"
+        ],
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "1"
+        ],
+        "popularity": "612",
+        "product_type_unigram": "dress",
+        "id": "443165da83f42ff4dd44005a7ae5d700"
+      }
+    },
+    {
+      "id": "169915",
+      "mappings": {
+        "core": {
+          "uid": "169915",
+          "price": 48,
+          "msrp": 50,
+          "url": "/product/C-ZS-R7-63153",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0939__copyright_reddressboutique_thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0939__copyright_reddressboutique_large.jpg",
+          "name": "Z Supply Marled Pullover",
+          "sku": "C-ZS-R7-63153",
+          "brand": "Z Supply"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1o0K1g0y1zUzNjQ1ZjBkMGEwNmAwtDRjSC_KTAEArF4Iag",
+        "intellisuggestSignature": "fc1d7a632534e077ab9c4f69d55609464643fc49aeafc539ebe63ea85114e9a6",
+        "ss_insights_quadrant": [
+          "Under Exposed"
+        ],
+        "gross_margin": [
+          "66"
+        ],
+        "ss_product_type": [
+          "Pullover"
+        ],
+        "keywords": [
+          "zsupply",
+          "z-supply",
+          "zee supply",
+          "zeesupply",
+          "z",
+          "zee",
+          "supply",
+          "z supply weekender",
+          "z supply sweater",
+          "z supply pullover",
+          "z supply sweatshirt",
+          "sweater",
+          "sweatshirt",
+          "sweat shirt",
+          "pullover",
+          "pull over",
+          "comfy",
+          "casual cute",
+          "trendy",
+          "cool",
+          "sangria -"
+        ],
+        "color": [
+          "Red"
+        ],
+        "multi_colors": [
+          "no"
+        ],
+        "description": [
+          "Comfy, cute, warm, and wonderful, the Z Supply Marled Pullover In Sangria will be your #ootd for many days to come! You won’t want to take this lovely number off! This marled knit sweater pullover features long sleeves, drawstring hood, kangaroo pocket, ribbed cuffs and hem, and hi lo hem with side slits. Model is wearing a small. • 68% Rayon, 29% Polyester, 3% Spandex • Hand Wash Cold • Unlined • Imported"
+        ],
+        "title": [
+          "Z Supply Marled Pullover"
+        ],
+        "ss_clicks": [
+          "1449"
+        ],
+        "color_family": [
+          "Red"
+        ],
+        "condition": [
+          "New"
+        ],
+        "sales_rank": [
+          "44"
+        ],
+        "ss_sale_price": "48",
+        "product_type": [
+          "Athleisure &gt; Athleisure Tops",
+          "Brands We Love &gt; Z Supply",
+          "All Tops &gt; Casual Tops",
+          "Shop By Trend &gt; Comfy Casual",
+          "All Tops &gt; Outerwear",
+          "All Tops &gt; Sweaters",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "size": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "16"
+        ],
+        "ss_category_hierarchy": [
+          "All Tops&gt;Casual Tops",
+          "Shop By Trend",
+          "Brands We Love&gt;Z Supply",
+          "Shop By Trend&gt;Comfy Casual",
+          "All Tops&gt;Sweaters",
+          "All Tops&gt;Outerwear",
+          "Gifts for Her",
+          "Athleisure",
+          "Gifts for Her&gt;Gifts Under $50",
+          "Athleisure&gt;Athleisure Tops",
+          "Brands We Love",
+          "All Tops"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "size_dress": [
+          "X-Small",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "8"
+        ],
+        "popularity": "44",
+        "product_type_unigram": "pullover",
+        "id": "1fa3a47db530a71ed625644bec08e33f"
+      }
+    },
+    {
+      "id": "181323",
+      "mappings": {
+        "core": {
+          "uid": "181323",
+          "price": 44,
+          "msrp": 50,
+          "url": "/product/C-EN-V2-D7422",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2940_copyright_reddressboutique_2017__thumb_med.jpg",
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2940_copyright_reddressboutique_2017__large.jpg",
+          "name": "As Cute As They Come Purple Off-The-Shoulder Dress",
+          "sku": "C-EN-V2-D7422",
+          "brand": "Aura L'atiste"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJwrTs4tNM9jYGBw1nX10w0z0nUxNzEyYjBkMGUwNmAwtDRjSC_KTAEAqwcIYQ",
+        "intellisuggestSignature": "c7233e0eb1ad1ab3cab933c9560e185afc0076cc11fd01dc6699b68ed9d61b05",
+        "ss_insights_quadrant": [
+          "Best Performer"
+        ],
+        "gross_margin": [
+          "47"
+        ],
+        "ss_product_type": [
+          "Dress"
+        ],
+        "keywords": [
+          "purple",
+          "purple",
+          "off the shoulder",
+          "off shoulder",
+          "cold shoulder",
+          "dress",
+          "off the shoulder dress",
+          "ruffle",
+          "ruffle dress",
+          "gingham",
+          "short sleeves",
+          "spring",
+          "cute",
+          "preppy"
+        ],
+        "color": [
+          "Purple",
+          "Red"
+        ],
+        "dress_length_name": "Above knee",
+        "multi_colors": [
+          "yes"
+        ],
+        "description": [
+          "It’s easy to find a cute dress, if one knows where to look. But there’s cute, and then there’s squealing-with-glee, “I’m gonna’ die if I don’t have it” cute. This dress? It’s As Cute as They Come. So cute in fact, that it really deserves it’s own word to set it apart from regular ole humdrum kinda cute. A new word, untainted by dresses of lesser cuteness. Like, “supercute-a-fragalisticexpialadorable.” Yeah, that about sums it up. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported"
+        ],
+        "title": [
+          "As Cute As They Come Purple Off-The-Shoulder Dress"
+        ],
+        "ss_clicks": [
+          "532"
+        ],
+        "saturation": "high",
+        "color_family": [
+          "Red"
+        ],
+        "sales_rank": [
+          "4213"
+        ],
+        "ss_sale_price": "44",
+        "season": "Spring",
+        "ss_category_hierarchy": [
+          "Shop By Trend",
+          "All Dresses",
+          "All Dresses&gt;Shop by Color&gt;Purple Dresses",
+          "Shop By Trend&gt;Spring Preview",
+          "All Dresses&gt;Shop by Color",
+          "All Dresses&gt;Print Dresses",
+          "All Dresses&gt;Sundresses",
+          "Gifts for Her",
+          "Shop By Trend&gt;Off The Shoulder Trend",
+          "Gifts for Her&gt;Gifts Under $50"
+        ],
+        "on_sale": [
+          "No"
+        ],
+        "condition": [
+          "New"
+        ],
+        "product_type": [
+          "All Dresses &gt; Shop by Color &gt; Purple Dresses",
+          "All Dresses &gt; Shop by Color",
+          "All Dresses &gt; Print Dresses",
+          "Shop By Trend &gt; Off The Shoulder Trend",
+          "Shop By Trend &gt; Spring Preview",
+          "All Dresses &gt; Sundresses",
+          "Gifts for Her",
+          "Gifts for Her &gt; Gifts Under $50"
+        ],
+        "brightness": "high",
+        "size": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "material": [
+          "Polyester"
+        ],
+        "days_since_published": [
+          "107"
+        ],
+        "dress_length": "36",
+        "size_dress": [
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "quantity_available": [
+          "13"
+        ],
+        "popularity": "4213",
+        "product_type_unigram": "dress",
+        "id": "1a7aa6075759afe9b6a70173020ff325"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "value",
+      "field": "color_family",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 5
+        },
+        {
+          "filtered": true,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "size",
+      "filtered": true,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 5
+        },
+        {
+          "filtered": true,
+          "value": "Large",
+          "label": "Large",
+          "count": 5
+        }
+      ]
+    }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {}
+  }
+}

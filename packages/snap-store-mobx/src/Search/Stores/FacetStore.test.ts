@@ -6,6 +6,8 @@ import { MockData } from '@searchspring/snap-shared';
 import { FacetStore } from './FacetStore';
 import { StorageStore } from '../../Storage/StorageStore';
 
+import type { SearchResponseModelFacetRange } from '@searchspring/snapi-types';
+
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
 };
@@ -219,6 +221,349 @@ describe('Facet Store', () => {
 			expect(value.value).toBeUndefined();
 			expect(value.low).toBeDefined();
 			expect(value.high).toBeDefined();
+		});
+	});
+
+	describe('Settings', () => {
+		describe('Trim Facets', () => {
+			it('can be set to trim no facets', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							trim: false,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.trim');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(4);
+			});
+
+			it('can be set to trim all facets', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							trim: true,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.trim');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).not.toBe(searchData.facets.length);
+				expect(facets.length).toBe(1);
+			});
+
+			it('can be set to NOT trim a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							trim: true,
+							fields: {
+								color_family: {
+									trim: false,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.trim');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(2);
+			});
+
+			it('can be set to trim a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							trim: false,
+							fields: {
+								color_family: {
+									trim: true,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.trim');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(3);
+			});
+		});
+
+		describe('Pin Filtered Facets', () => {
+			it('can be set to pin all selected facet values to the top of the values array', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							pinFiltered: true,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.pinFiltered');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(2);
+				facets.forEach((facet) => {
+					facet.values.forEach((value, index) => {
+						if (index == 0) {
+							expect(value).toHaveProperty('filtered', true);
+						}
+					});
+				});
+			});
+
+			it('can be set to NOT pin all selected facet values to the top of the values array', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							pinFiltered: false,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.pinFiltered');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(2);
+				facets.forEach((facet) => {
+					expect(facet.values[2]).toHaveProperty('filtered', true);
+				});
+			});
+
+			it('can be set to NOT pin all selected facet values to the top of the values array for a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							pinFiltered: true,
+							fields: {
+								size: {
+									pinFiltered: false,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.pinFiltered');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(2);
+				facets.forEach((facet) => {
+					if (facet.field == 'size') {
+						expect(facet.values[2]).toHaveProperty('filtered', true);
+					} else {
+						expect(facet.values[0]).toHaveProperty('filtered', true);
+					}
+				});
+			});
+
+			it('can be set to pin all selected facet values to the top of the values array for a specific facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							pinFiltered: false,
+							fields: {
+								size: {
+									pinFiltered: true,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.pinFiltered');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(2);
+				facets.forEach((facet) => {
+					if (facet.field == 'size') {
+						expect(facet.values[0]).toHaveProperty('filtered', true);
+					} else {
+						expect(facet.values[2]).toHaveProperty('filtered', true);
+					}
+				});
+			});
+		});
+
+		describe('Store Range', () => {
+			it('can be set to store range facet boundaries', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							storeRange: true,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.storeRange');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(1);
+				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+
+				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
+
+				const filteredSearchData = mockData.searchMeta('settings.storeRange.filtered');
+
+				const updatedFacets = new FacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					filteredSearchData.facets,
+					filteredSearchData.pagination,
+					filteredSearchData.meta
+				);
+				expect(updatedFacets.length).toBe(1);
+				expect(updatedFacets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+			});
+
+			it('can be set to NOT store range facet boundaries', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							storeRange: false,
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.storeRange');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(1);
+				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+
+				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
+
+				const filteredSearchData = mockData.searchMeta('settings.storeRange.filtered');
+
+				const updatedFacets = new FacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					filteredSearchData.facets,
+					filteredSearchData.pagination,
+					filteredSearchData.meta
+				);
+				expect(updatedFacets.length).toBe(1);
+				expect(updatedFacets[0].range.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].range.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+			});
+
+			it('can be set to store range facet boundaries per facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							storeRange: false,
+							fields: {
+								price: {
+									storeRange: true,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.storeRange');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(1);
+				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+
+				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
+
+				const filteredSearchData = mockData.searchMeta('settings.storeRange.filtered');
+
+				const updatedFacets = new FacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					filteredSearchData.facets,
+					filteredSearchData.pagination,
+					filteredSearchData.meta
+				);
+				expect(updatedFacets.length).toBe(1);
+				expect(updatedFacets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+			});
+
+			it('can be set to NOT store range facet boundaries per facet', () => {
+				const settingsConfig = {
+					...searchConfig,
+					settings: {
+						facets: {
+							storeRange: true,
+							fields: {
+								price: {
+									storeRange: false,
+								},
+							},
+						},
+					},
+				};
+
+				const searchData = mockData.searchMeta('settings.storeRange');
+
+				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				expect(facets.length).toBe(1);
+				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+
+				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
+
+				const filteredSearchData = mockData.searchMeta('settings.storeRange.filtered');
+
+				const updatedFacets = new FacetStore(
+					settingsConfig,
+					services,
+					storageStore,
+					filteredSearchData.facets,
+					filteredSearchData.pagination,
+					filteredSearchData.meta
+				);
+				expect(updatedFacets.length).toBe(1);
+				expect(updatedFacets[0].range.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].range.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
+				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+			});
 		});
 	});
 
