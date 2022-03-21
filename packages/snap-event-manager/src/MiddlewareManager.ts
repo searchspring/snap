@@ -1,29 +1,29 @@
 import type { Middleware, Callback } from './types';
 
 export class MiddlewareManager<T> {
-	functions: Middleware<T>[];
+	private functions: Middleware<T>[];
 
 	constructor() {
 		this.functions = [];
 	}
 
-	use(...func: Middleware<T>[]): void {
+	public use(...func: Middleware<T>[]): void {
 		this.functions.push(...func);
 	}
 
-	remove(func: Middleware<T>): void {
+	public remove(func: Middleware<T>): void {
 		const stringyFunc: string = func.toString();
 
-		this.functions = this.functions.filter((func) => {
-			return func.toString() != stringyFunc;
+		this.functions = this.functions.filter((fn) => {
+			return func.name !== fn.name || fn.toString() != stringyFunc;
 		});
 	}
 
-	clear(): void {
+	public clear(): void {
 		this.functions = [];
 	}
 
-	async dispatch(context: T): Promise<void> {
+	public async dispatch(context?: T): Promise<void> {
 		const cancelling = await runFunctionsWithAbortWrapper(context, this.functions);
 
 		if (cancelling == true) {
