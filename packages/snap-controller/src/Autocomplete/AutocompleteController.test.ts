@@ -233,30 +233,6 @@ describe('Autocomplete Controller', () => {
 		setFocusedfn.mockClear();
 	});
 
-	it('sets query from urlManager (settings.initializeFromUrl)', async () => {
-		// settings.initializeFromUrl is true by default
-
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		controller.init();
-
-		const query = 'wh';
-		controller.urlManager = controller.urlManager.reset().set('query', query);
-		expect(controller.urlManager.state.query).toBe(query);
-
-		controller.client.mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
-		await controller.search();
-		expect(controller.store.results.length).toBeGreaterThan(0);
-	});
-
 	it('trims facets (settings.facets.trim)', async () => {
 		// settings.facets.trim is true by default
 
@@ -810,6 +786,42 @@ describe('Autocomplete Controller', () => {
 		expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
 
 		logErrorfn.mockClear();
+	});
+
+	it(`tests focusChange middleware err handled`, async function () {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const middleware = jest.fn(() => {
+			return false; // return false to stop middleware
+		});
+		const event = 'focusChange';
+		controller.on(event, middleware);
+
+		expect(middleware).not.toHaveBeenCalled();
+
+		const spy = jest.spyOn(controller.log, 'warn');
+
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector);
+		const query = 'bumpers';
+		inputEl.value = query;
+		inputEl.focus();
+
+		await controller.bind();
+		await new Promise((resolve) => setTimeout(resolve));
+
+		expect(middleware).toHaveBeenCalledTimes(1);
+
+		expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+
+		spy.mockClear();
 	});
 
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
