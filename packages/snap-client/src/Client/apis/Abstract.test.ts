@@ -5,6 +5,7 @@ describe('Abstract Api', () => {
 	it('has expected default values', () => {
 		const api = new API(new ApiConfiguration({}));
 
+		//doesnt need any config
 		expect(() => {
 			new API(new ApiConfiguration({}));
 		}).not.toThrow();
