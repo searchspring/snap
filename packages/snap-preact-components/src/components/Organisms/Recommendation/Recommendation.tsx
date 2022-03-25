@@ -12,7 +12,7 @@ import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCar
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps } from '../../../types';
+import { ComponentProps, BreakpointsProps, Result as ResultType, InlineBannerContent } from '../../../types';
 import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
@@ -57,6 +57,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		children,
 		breakpoints,
 		loop,
+		results,
 		pagination,
 		nextButton,
 		prevButton,
@@ -72,12 +73,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
-	if (children && children.length !== controller.store.results.length) {
+	if (!results && children && children.length !== controller.store.results.length) {
 		controller.log.error(`<Recommendation> Component received invalid number of children`);
 		return;
 	}
 
-	const results = controller.store?.results;
+	const resultsToRender = results || controller.store?.results;
 
 	const subProps: RecommendationSubProps = {
 		carousel: {
@@ -117,13 +118,13 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 		let resultLoopCount = [index, index + count];
 		let resultLoopOverCount;
-		if (index + count > results.length - 1) {
+		if (index + count > resultsToRender.length - 1) {
 			resultLoopCount = [index];
-			resultLoopOverCount = [0, index + count - results.length];
+			resultLoopOverCount = [0, index + count - resultsToRender.length];
 		}
-		let resultsImpressions = results.slice(...resultLoopCount);
+		let resultsImpressions = resultsToRender.slice(...resultLoopCount);
 		if (resultLoopOverCount) {
-			resultsImpressions = resultsImpressions.concat(results.slice(...resultLoopOverCount));
+			resultsImpressions = resultsImpressions.concat(resultsToRender.slice(...resultLoopOverCount));
 		}
 
 		resultsImpressions.map((result) => {
@@ -136,7 +137,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		sendProductImpression(initialIndexes[0], initialIndexes[1]);
 	}
 
-	(children || results.length) && (controller as RecommendationController)?.track?.render();
+	(children || resultsToRender.length) && (controller as RecommendationController)?.track?.render();
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
@@ -146,7 +147,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	}
 
 	return (
-		(children || results?.length) && (
+		(children || resultsToRender?.length) && (
 			<CacheProvider>
 				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__recommendation', className)}>
 					{title && <h3 className="ss__recommendation__title">{title}</h3>}
@@ -172,7 +173,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
 							controller.track.click(e);
 							if (!Number.isNaN(clickedIndex)) {
-								controller.track.product.click(e, results[clickedIndex]);
+								controller.track.product.click(e, resultsToRender[clickedIndex]);
 							}
 						}}
 						loop={loop}
@@ -184,7 +185,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					>
 						{children
 							? children.map((child) => child)
-							: results.map((result) => <Result controller={controller} result={result} {...subProps.result} />)}
+							: resultsToRender.map((result) => <Result controller={controller} result={result} {...subProps.result} />)}
 					</Carousel>
 				</div>
 			</CacheProvider>
@@ -199,6 +200,7 @@ export interface RecommendationProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
+	results?: ResultType[] | InlineBannerContent[];
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: JSX.Element[];

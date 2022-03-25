@@ -29,6 +29,19 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 <Recommendation controller={controller} loop={true} />
 ```
 
+### results
+The `results` prop specifies a reference to the results store array. This will override any results specified in `children` and `controller.store.results`
+
+```jsx
+<Recommendation controller={controller} results={controller.store.results} />
+```
+
+If you are slicing the results store array, it is recommended to use the `results` prop instead of slicing the `children`
+
+```jsx
+<Recommendation controller={controller} results={controller.store.results.slice(0,4)} />
+```
+
 ### title
 The `title` prop specifies the carousel title
 
