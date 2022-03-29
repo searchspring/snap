@@ -63,9 +63,9 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
 
-		this.client = client;
-		this.tracker = tracker;
-		this.logger = logger;
+		this.client = this.config.services?.client || client;
+		this.tracker = this.config.services?.tracker || tracker;
+		this.logger = this.config.services?.logger || logger;
 
 		const profileCount = {};
 		this.targeter = new DomTargeter(
@@ -153,8 +153,8 @@ export class RecommendationInstantiator {
 					cartContents = cart;
 				}
 				if (Array.isArray(cartContents)) {
-					(this.config.services?.tracker || this.tracker).cookies.cart.set(cartContents);
-					contextGlobals.cart = (this.config.services?.tracker || this.tracker).cookies.cart.get();
+					this.tracker.cookies.cart.set(cartContents);
+					contextGlobals.cart = this.tracker.cookies.cart.get();
 				}
 
 				const tag = injectedElem.getAttribute('searchspring-recommend');
@@ -175,8 +175,8 @@ export class RecommendationInstantiator {
 				};
 
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const client = this.config.services?.client || this.client;
-				const tracker = this.config.services?.tracker || this.tracker;
+				const client = this.client;
+				const tracker = this.tracker;
 				const recs = createRecommendationController(
 					{
 						url: this.config.url || {},
