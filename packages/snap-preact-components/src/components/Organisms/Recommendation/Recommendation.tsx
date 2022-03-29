@@ -73,12 +73,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
-	if (!results && children && children.length !== controller.store.results.length) {
-		controller.log.error(`<Recommendation> Component received invalid number of children`);
+	const resultsToRender = results || controller.store?.results;
+
+	if (children && children.length !== resultsToRender.length) {
+		controller.log.error(
+			`<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'`
+		);
 		return;
 	}
-
-	const resultsToRender = results || controller.store?.results;
 
 	const subProps: RecommendationSubProps = {
 		carousel: {

@@ -66,7 +66,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		results: {
-			description: 'Results store reference, overrides children and controller.store.results',
+			description: 'Results store reference, overrides controller.store.results',
 			type: { required: false },
 			table: {
 				type: {
