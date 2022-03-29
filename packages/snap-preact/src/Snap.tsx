@@ -62,7 +62,7 @@ export type SnapConfig = {
 		}[];
 		autocomplete?: {
 			config: AutocompleteControllerConfig;
-			targeters: ExtendedTarget[];
+			targeters?: ExtendedTarget[];
 			services?: SnapControllerServices;
 			url?: UrlTranslatorConfig;
 			context?: ContextVariables;
