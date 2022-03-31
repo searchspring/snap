@@ -29,15 +29,17 @@ describe('Overlay Component', () => {
 		expect(overlayElement).not.toBeInTheDocument();
 	});
 
-	it('is has custom color', () => {
+	it('is has custom color & transition speed', () => {
 		const args = {
 			active: true,
 			color: 'rgba(0, 0, 0, 0.3)',
+			transitionSpeed: '0.35s',
 		};
 		const rendered = render(<Overlay {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement);
 		expect(styles.backgroundColor).toBe(args.color);
+		expect(styles.transition).toBe(`background ${args.transitionSpeed} ease,left 0s ease`);
 	});
 
 	it('can disable styling', () => {

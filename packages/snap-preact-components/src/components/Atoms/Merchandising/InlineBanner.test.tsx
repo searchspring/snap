@@ -25,6 +25,20 @@ describe('Merchandising Inline Banner Component', () => {
 		userEvent.click(merchBannerElement);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
+
+	it('can disable styling', () => {
+		const rendered = render(<InlineBanner disableStyles={true} banner={searchResponse.merchandising.content.inline[0]} />);
+		const loadingbarElement = rendered.container.querySelector('.ss__inline-banner');
+		expect(loadingbarElement.classList.length).toBe(2);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<InlineBanner className={className} banner={searchResponse.merchandising.content.inline[0]} />);
+		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
+		expect(merchBannerElement).toBeInTheDocument();
+		expect(merchBannerElement).toHaveClass(className);
+	});
 });
 
 describe('InlineBanner theming works', () => {

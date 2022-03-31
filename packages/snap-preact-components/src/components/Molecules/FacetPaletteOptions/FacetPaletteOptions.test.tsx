@@ -1,6 +1,6 @@
 import { h } from 'preact';
-
 import { render } from '@testing-library/preact';
+import userEvent from '@testing-library/user-event';
 
 import { FacetPaletteOptions } from './FacetPaletteOptions';
 import { paletteFacetMock } from '../../../mocks/searchResponse';
@@ -58,6 +58,50 @@ describe('FacetPaletteOptions Component', () => {
 
 		expect(paletteOptionsElement).not.toBeInTheDocument();
 		expect(selectedIcons).not.toBeInTheDocument();
+	});
+
+	it('can disable styling', () => {
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} disableStyles={true} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
+		expect(paletteElement.classList.length).toBe(1);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} className={className} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
+		expect(paletteElement).toBeInTheDocument();
+		expect(paletteElement).toHaveClass(className);
+	});
+
+	it('can set custom onClick func', () => {
+		const onClickFunc = jest.fn();
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} onClick={onClickFunc} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options__option');
+		expect(paletteElement).toBeInTheDocument();
+		userEvent.click(paletteElement);
+		expect(onClickFunc).toHaveBeenCalled();
+	});
+
+	it('can change gapsize and columns', () => {
+		const args = {
+			gapSize: '10px',
+			columns: 2,
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} {...args} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
+		expect(paletteElement).toBeInTheDocument();
+		const styles = getComputedStyle(paletteElement);
+		expect(styles.gap).toBe(args.gapSize);
+		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, calc((100% - (${args.columns - 1} * ${args.gapSize}))/ ${args.columns}))`);
+
+		const paletteOptionElement = rendered.container.querySelector('.ss__facet-palette-options__option');
+		const optionStyles = getComputedStyle(paletteOptionElement);
+		expect(optionStyles.width).toBe(`calc(100% / ${args.columns} - ${2 * Math.round((args.columns + 2) / 2)}px )`);
 	});
 
 	it('is themeable with ThemeProvider', () => {

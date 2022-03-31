@@ -11,135 +11,293 @@ import { MockClient } from '@searchspring/snap-shared';
 import { FinderController } from './FinderController';
 
 const globals = { siteId: 'ga9kq2' };
-
-const finderHierarchyConfig = {
-	id: 'accessoriesFinder',
-	url: '',
-	selector: '.searchspring-finder_accessories',
-	wrapSelect: true,
-	type: 'ymm',
-	className: 'ss-vehicle-finder',
-	fields: [
-		{
-			field: 'ss_accessory',
-			levels: ['Type', 'Year', 'Make', 'Model'],
-		},
-	],
-};
-
-const finderNonhierarchyConfig = {
-	id: 'tiresBySize',
-	url: '',
-	selector: '.searchspring-finder_tires_by_size',
-	wrapSelect: false,
-	fields: [{ field: 'custom_tire_size_1' }, { field: 'custom_tire_size_2' }, { field: 'custom_wheel_size' }],
-};
-
-let urlManager, services;
+const configs = [
+	{
+		id: 'accessoriesFinder',
+		url: '',
+		selector: '.searchspring-finder_accessories',
+		wrapSelect: true,
+		type: 'ymm',
+		className: 'ss-vehicle-finder',
+		fields: [
+			{
+				field: 'ss_accessory',
+				levels: ['Type', 'Year', 'Make', 'Model'],
+			},
+		],
+	},
+	{
+		id: 'tiresBySize',
+		url: '',
+		selector: '.searchspring-finder_tires_by_size',
+		wrapSelect: false,
+		fields: [{ field: 'custom_tire_size_1' }, { field: 'custom_tire_size_2' }, { field: 'custom_wheel_size' }],
+	},
+];
 
 describe('Finder Controller', () => {
-	beforeEach(() => {
-		urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
-		services = { urlManager };
+	configs.forEach((baseConfig) => {
+		const isHierarchy = 'levels' in baseConfig.fields[0];
+		let urlManager, services, config;
 
-		finderHierarchyConfig.id = uuidv4().split('-').join('');
-		finderNonhierarchyConfig.id = uuidv4().split('-').join('');
-	});
+		describe(`${isHierarchy ? 'Hierarchy' : 'Non-Hierarchy'} Type`, () => {
+			beforeEach(() => {
+				urlManager = new UrlManager(new QueryStringTranslator(), reactLinker).detach();
+				services = { urlManager };
 
-	describe('Hierarchy Type', () => {
-		it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
-			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderHierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
+				config = Object.assign({}, baseConfig);
+				config.id = uuidv4().split('-').join('');
 			});
 
-			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
-			controller.init();
+			it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
 
-			const params = controller.params;
-			expect(params.facets).toStrictEqual({
-				include: finderHierarchyConfig.fields.map((field) => field.field),
-				autoDrillDown: false,
+				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				controller.init();
+
+				const params = controller.params;
+				expect(params.facets).toStrictEqual({
+					include: config.fields.map((field) => field.field),
+					autoDrillDown: false,
+				});
 			});
-		});
 
-		it(`allows for config globals to overwrite / merge with default parameters`, async () => {
-			const config = {
-				...finderHierarchyConfig,
-				globals: {
-					facets: {
-						include: ['ss-special'],
-						autoDrillDown: true,
+			it(`allows for config globals to overwrite / merge with default parameters`, async () => {
+				config = {
+					...config,
+					globals: {
+						facets: {
+							include: ['ss-special'],
+							autoDrillDown: true,
+						},
 					},
-				},
-			};
-			const controller = new FinderController(config, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderHierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
+				};
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				controller.init();
+
+				const params = controller.params;
+				expect(params.facets).toStrictEqual({
+					include: config.fields.map((field) => field.field).concat('ss-special'),
+					autoDrillDown: true,
+				});
 			});
 
-			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
-			controller.init();
+			it(`sets root URL params`, async () => {
+				config.url = '/search/accessories';
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
 
-			const params = controller.params;
-			expect(params.facets).toStrictEqual({
-				include: finderHierarchyConfig.fields.map((field) => field.field).concat('ss-special'),
-				autoDrillDown: true,
+				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				controller.init();
+
+				expect(controller.urlManager.href).toContain(controller.config.url);
 			});
-		});
 
-		it('can make selection', async () => {
-			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderHierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
-			controller.init();
-			await controller.search(); // /src/__mocks__/data/ga9kq2/searches/finder.include.ss_accessory.json
+			it('can make selection', async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
 
-			expect(controller.store.selections.length).toBe(finderHierarchyConfig.fields[0].levels.length);
+				if (isHierarchy) {
+					controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+					controller.init();
+					await controller.search();
 
-			controller.store.selections.forEach((selection, index) => {
-				expect(selection.display).toBe('hierarchy');
-				if (index === 0) {
-					expect(selection.disabled).toBe(false);
+					expect(controller.store.selections.length).toBe(config.fields[0].levels.length);
+
+					controller.store.selections.forEach((selection, index) => {
+						expect(selection.display).toBe('hierarchy');
+						if (index === 0) {
+							expect(selection.disabled).toBe(false);
+						} else {
+							expect(selection.disabled).toBe(true);
+						}
+					});
+					const firstSelection = controller.store.selections[0];
+					const field = firstSelection.field;
+					const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+
+					jest.spyOn(controller, 'search');
+					controller.store.selections[0].select(valueToSelect);
+					expect(controller.search).toHaveBeenCalled();
+					expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
+					expect(controller.store.selections[0].field).toBe(field);
+					expect(controller.store.selections[0].selected).toBe(valueToSelect);
 				} else {
-					expect(selection.disabled).toBe(true);
+					controller.init();
+					await controller.search();
+
+					expect(controller.store.selections.length).toBe(config.fields.length);
+
+					controller.store.selections.forEach((selection) => {
+						expect(selection.disabled).toBe(false);
+					});
+					const firstSelection = controller.store.selections[0];
+					const field = firstSelection.field;
+					const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+
+					jest.spyOn(controller, 'search');
+					controller.store.selections[0].select(valueToSelect);
+					expect(controller.search).toHaveBeenCalled();
+
+					expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
+					expect(controller.store.selections[0].field).toBe(field);
+					expect(controller.store.selections[0].selected).toBe(valueToSelect);
 				}
 			});
-			const firstSelection = controller.store.selections[0];
-			const field = firstSelection.field;
-			const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
 
-			jest.spyOn(controller, 'search');
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.search).toHaveBeenCalled();
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-		});
-
-		const events = ['beforeSearch', 'afterSearch', 'afterStore'];
-		events.forEach((event) => {
-			it(`tests ${event} middleware err handled`, async () => {
-				const controller = new FinderController(finderHierarchyConfig, {
+			it('can invoke find method', async () => {
+				config.url = '/search/accessories';
+				const controller = new FinderController(config, {
 					client: new MockClient(globals, { meta: { prefetch: false } }),
-					store: new FinderStore(finderHierarchyConfig, services),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				controller.init();
+				await controller.search();
+
+				delete window.location;
+				window.location = {
+					...window.location,
+					href: null, // jest does not support window location changes
+				};
+
+				await controller.find();
+
+				expect(window.location.href).toContain(controller.urlManager.href);
+			});
+
+			const events = ['beforeSearch', 'afterSearch', 'afterStore'];
+			events.forEach((event) => {
+				it(`tests ${event} middleware err handled`, async () => {
+					const controller = new FinderController(config, {
+						client: new MockClient(globals, { meta: { prefetch: false } }),
+						store: new FinderStore(config, services),
+						urlManager,
+						eventManager: new EventManager(),
+						profiler: new Profiler(),
+						logger: new Logger(),
+						tracker: new Tracker(globals),
+					});
+
+					controller.on(event, () => false); // return false to stop middleware
+					const spy = jest.spyOn(controller.log, 'warn');
+
+					controller.init();
+					await controller.search();
+
+					expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+					spy.mockClear();
+				});
+			});
+
+			it('can call reset method', async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+				controller.init();
+				await controller.search();
+
+				const firstSelection = controller.store.selections[0];
+				const field = firstSelection.field;
+				const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+
+				controller.store.selections[0].select(valueToSelect);
+				expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
+				expect(controller.store.selections[0].field).toBe(field);
+				expect(controller.store.selections[0].selected).toBe(valueToSelect);
+				expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
+
+				controller.reset();
+				await controller.search(); // reset() calls search() however is async, call again to assert
+				expect(controller.urlManager.state.filter).not.toBeDefined();
+				expect(controller.store.selections[0].field).toBe(field);
+				expect(controller.store.selections[0].selected).toBeFalsy();
+
+				// re-select
+				controller.store.selections[0].select(valueToSelect);
+				expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
+				expect(controller.store.selections[0].field).toBe(field);
+				expect(controller.store.selections[0].selected).toBe(valueToSelect);
+				expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
+			});
+
+			const middlewareEvents = ['beforeSearch', 'afterSearch', 'afterStore'];
+			middlewareEvents.forEach((event) => {
+				it(`tests ${event} middleware err handled`, async () => {
+					const controller = new FinderController(config, {
+						client: new MockClient(globals, {}),
+						store: new FinderStore(config, services),
+						urlManager,
+						eventManager: new EventManager(),
+						profiler: new Profiler(),
+						logger: new Logger(),
+						tracker: new Tracker(globals),
+					});
+
+					const middleware = jest.fn(() => {
+						throw new Error('middleware error');
+					});
+					controller.on(event, middleware);
+
+					expect(middleware).not.toHaveBeenCalled();
+
+					const logErrorfn = jest.spyOn(controller.log, 'error');
+					await controller.search();
+
+					expect(middleware).toHaveBeenCalledTimes(1);
+					expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+
+					logErrorfn.mockClear();
+				});
+			});
+
+			it('logs error if 429', async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
@@ -147,145 +305,23 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.on(event, () => false); // return false to stop middleware
-				const spy = jest.spyOn(console, 'log');
+				controller.client.search = jest.fn(() => {
+					throw 429;
+				});
 
-				controller.init();
 				await controller.search();
 
-				expect(console.log).toHaveBeenCalledTimes(1);
-				spy.mockClear();
-			});
-		});
-
-		it('can call reset method', async () => {
-			const controller = new FinderController(finderHierarchyConfig, {
-				client: new MockClient(globals, {}),
-				store: new FinderStore(finderHierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			controller.init();
-			await controller.search();
-
-			const firstSelection = controller.store.selections[0];
-			const field = firstSelection.field;
-			const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
-
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-			expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
-
-			controller.reset();
-			await controller.search(); // reset() calls search() however is async, call again to assert
-			expect(controller.urlManager.state.filter).not.toBeDefined();
-			expect(controller.store.selections[0].field).toBe(field);
-			// expect(controller.store.selections[0].selected).toBe('');
-			// the above line is failing for some reason - falsy used for now
-			expect(controller.store.selections[0].selected).toBeFalsy();
-
-			// re-select
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-			expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
-		});
-	});
-
-	describe('Non-hierarchy Type', () => {
-		it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
-			const controller = new FinderController(finderNonhierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderNonhierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
+				expect(controller.store.error).toStrictEqual({
+					code: 429,
+					type: 'warning',
+					message: 'Too many requests try again later',
+				});
 			});
 
-			controller.init();
-
-			const params = controller.params;
-			expect(params.facets).toStrictEqual({
-				include: finderNonhierarchyConfig.fields.map((field) => field.field),
-				autoDrillDown: false,
-			});
-		});
-
-		it(`allows for config globals to overwrite / merge with default parameters`, async () => {
-			const config = {
-				...finderNonhierarchyConfig,
-				globals: {
-					facets: {
-						include: ['ss-special'],
-						autoDrillDown: true,
-					},
-				},
-			};
-			const controller = new FinderController(config, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderNonhierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-
-			controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
-			controller.init();
-
-			const params = controller.params;
-			expect(params.facets).toStrictEqual({
-				include: finderNonhierarchyConfig.fields.map((field) => field.field).concat('ss-special'),
-				autoDrillDown: true,
-			});
-		});
-
-		it('can make selection', async () => {
-			const controller = new FinderController(finderNonhierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderNonhierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			controller.init();
-			await controller.search();
-
-			expect(controller.store.selections.length).toBe(finderNonhierarchyConfig.fields.length);
-
-			controller.store.selections.forEach((selection) => {
-				expect(selection.disabled).toBe(false);
-			});
-			const firstSelection = controller.store.selections[0];
-			const field = firstSelection.field;
-			const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
-
-			jest.spyOn(controller, 'search');
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.search).toHaveBeenCalled();
-
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-		});
-
-		const events = ['beforeSearch', 'afterSearch', 'afterStore'];
-		events.forEach((event) => {
-			it(`tests ${event} middleware err handled`, async () => {
-				const controller = new FinderController(finderNonhierarchyConfig, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
-					store: new FinderStore(finderNonhierarchyConfig, services),
+			it('logs error if 500', async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
 					profiler: new Profiler(),
@@ -293,51 +329,18 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.on(event, () => false); // return false to stop middleware
-				const spy = jest.spyOn(console, 'log');
+				controller.client.search = jest.fn(() => {
+					throw 500;
+				});
 
-				controller.init();
 				await controller.search();
 
-				expect(console.log).toHaveBeenCalledTimes(1);
-				spy.mockClear();
+				expect(controller.store.error).toStrictEqual({
+					code: 500,
+					type: 'error',
+					message: 'Invalid Search Request or Service Unavailable',
+				});
 			});
-		});
-
-		it('can call reset method', async () => {
-			const controller = new FinderController(finderNonhierarchyConfig, {
-				client: new MockClient(globals, { meta: { prefetch: false } }),
-				store: new FinderStore(finderNonhierarchyConfig, services),
-				urlManager,
-				eventManager: new EventManager(),
-				profiler: new Profiler(),
-				logger: new Logger(),
-				tracker: new Tracker(globals),
-			});
-			controller.init();
-			await controller.search();
-
-			const firstSelection = controller.store.selections[0];
-			const field = firstSelection.field;
-			const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
-
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-			expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
-
-			controller.reset();
-			await controller.search(); // reset() calls search() however is async, call again to assert
-			expect(controller.urlManager.state.filter).not.toBeDefined();
-			expect(controller.store.selections[0].selected).toBe('');
-
-			// re-select
-			controller.store.selections[0].select(valueToSelect);
-			expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
-			expect(controller.store.selections[0].field).toBe(field);
-			expect(controller.store.selections[0].selected).toBe(valueToSelect);
-			expect(controller.store.selections[0].values).not.toBe(controller.store.selections[1].values);
 		});
 	});
 });
