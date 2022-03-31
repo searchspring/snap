@@ -46,38 +46,109 @@
 				__webpack_require__.d(__webpack_exports__, {
 					BadgeWithChildren: () => BadgeWithChildren,
 					BadgeWithContent: () => BadgeWithContent,
-					default: () => __WEBPACK_DEFAULT_EXPORT__,
+					default: () => Badge_stories,
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
-			var preact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/utilities/componentArgs.ts'),
-				_Badge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
-				_Badge_readme_md__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/components/Atoms/Badge/readme.md');
-			const __WEBPACK_DEFAULT_EXPORT__ = {
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				Badge = __webpack_require__('./src/components/Atoms/Badge/Badge.tsx'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'badge' }, 'Badge'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Renders an absolute-positioned badge. It is expected that the parent element contains ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'position: relative'),
+						'.'
+					),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'content' }, 'content'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'content'), ' prop specifies the badge.'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<div style="position: relative;">\n    <Badge content="Sale" />\n</div>\n'
+						)
+					),
+					(0, esm.kt)('p', null, 'Or alternatively using children:'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<div style="position: relative;">\n    <Badge>Sale</Badge>\n</div>\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'position' }, 'position'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'position'),
+						' prop specifies an object with CSS ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'top'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'bottom'),
+						', ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'left'),
+						', and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'right'),
+						' attributes. The default position is top left ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, '{ top: 0, left: 0 }'),
+						'.'
+					),
+					(0, esm.kt)('p', null, 'In this example, the badge will be 2px from the top and 2px from the right:'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>\n')
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const Badge_stories = {
 				title: 'Atoms/Badge',
-				component: _Badge__WEBPACK_IMPORTED_MODULE_4__.C,
+				component: Badge.C,
 				parameters: {
 					docs: {
 						page: function page() {
-							return (0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(
-								'div',
-								null,
-								(0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(_Badge_readme_md__WEBPACK_IMPORTED_MODULE_5__.Z, null),
-								(0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(_storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__.$4, {
-									story: _storybook_addon_docs_blocks__WEBPACK_IMPORTED_MODULE_3__.Uh,
-								})
-							);
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
 						},
 					},
 				},
 				decorators: [
 					function (Story) {
-						return (0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(
+						return (0, preact_module.h)(
 							'div',
 							{ style: { width: '200px', height: '200px', position: 'relative', border: '2px dotted lightgrey' } },
-							(0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(Story, { height: '200px' })
+							(0, preact_module.h)(Story, { height: '200px' })
 						);
 					},
 				],
@@ -92,18 +163,18 @@
 							control: { type: 'object' },
 						},
 					},
-					_utilities__WEBPACK_IMPORTED_MODULE_6__.p
+					componentArgs.p
 				),
 			};
 			var BadgeWithContent = function Template(args) {
-				return (0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(_Badge__WEBPACK_IMPORTED_MODULE_4__.C, Object.assign({}, args));
+				return (0, preact_module.h)(Badge.C, Object.assign({}, args));
 			}.bind({});
 			BadgeWithContent.args = { content: 'pink', position: { top: 0, right: 0 } };
 			var BadgeWithChildren = function BadgeWithChildren(args) {
-				return (0, preact__WEBPACK_IMPORTED_MODULE_2__.h)(
-					_Badge__WEBPACK_IMPORTED_MODULE_4__.C,
+				return (0, preact_module.h)(
+					Badge.C,
 					Object.assign({}, args),
-					(0, preact__WEBPACK_IMPORTED_MODULE_2__.h)('img', { src: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png' })
+					(0, preact_module.h)('img', { src: '//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png' })
 				);
 			};
 		},
@@ -3403,14 +3474,114 @@
 						)
 					);
 				}),
-				readme = __webpack_require__('./src/components/Atoms/Badge/readme.md');
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'skeleton' }, 'Skeleton'),
+					(0, esm.kt)('p', null, 'Renders a div with a animation for use when building loading skeletons. '),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'height' }, 'Height'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'height'),
+						' prop specifies the css height of the skeleton div.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Skeleton height='200px' width='150px'/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'width' }, 'Width'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'width'),
+						' prop specifies the css width of the skeleton div.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Skeleton height='200px' width='150px'/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'round' }, 'Round'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'round'),
+						' prop is used for when you are wanting to render a circle instead of a block.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, "<Skeleton height='200px' width='150px' round=\"true\"/>\n")
+					),
+					(0, esm.kt)('h3', { id: 'backgroundcolor' }, 'backgroundColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'backgroundColor'),
+						' prop is used for changing the background color of the skeleton.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Skeleton height='200px' width='150px' backgroundColor='#333333'/>\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'animatedcolor' }, 'animatedColor'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'animatedColor'),
+						' prop is used for changing the color of the moving vertical loading bar.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Skeleton height='200px' width='150px' backgroundColor='#333333' animatedColor=\"#000000\" />\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
 			const Skeleton_stories = {
 				title: 'Atoms/Skeleton',
 				component: Skeleton,
 				parameters: {
 					docs: {
 						page: function page() {
-							return (0, preact_module.h)('div', null, (0, preact_module.h)(readme.Z, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
 						},
 					},
 				},
@@ -4379,6 +4550,11 @@
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'theme.colors.primary' } },
 							control: { type: 'color' },
 						},
+						startChecked: {
+							description: 'Checkbox is checked initially(managed state)',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						native: {
 							description: 'Render as unstyled native checkbox',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
@@ -4798,14 +4974,14 @@
 							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
-								: _globalTheme$componen.carousel,
+								: _globalTheme$componen.errorHandler,
 							properties,
 							null === (_properties$theme = properties.theme) ||
 								void 0 === _properties$theme ||
 								null === (_properties$theme$com = _properties$theme.components) ||
 								void 0 === _properties$theme$com
 								? void 0
-								: _properties$theme$com.carousel
+								: _properties$theme$com.errorHandler
 						),
 						controller = props.controller,
 						error = props.error,
@@ -10661,8 +10837,8 @@
 								: _properties$theme$com.autocomplete
 						),
 						breakpoints = props.breakpoints || {
-							0: { columns: 2, rows: 1, hideFacets: !0, vertical: !0 },
-							540: { columns: 3, rows: 1, vertical: !0 },
+							0: { columns: 2, rows: 1, hideFacets: props.hideFacets || !0, vertical: props.vertical || !0 },
+							540: { columns: 3, rows: 1, vertical: props.vertical || !0 },
 							768: { columns: 2, rows: 3 },
 						},
 						valueProps = {
@@ -13789,6 +13965,7 @@
 					'children',
 					'breakpoints',
 					'loop',
+					'results',
 					'pagination',
 					'nextButton',
 					'prevButton',
@@ -13932,6 +14109,7 @@
 						children = _props2.children,
 						breakpoints = _props2.breakpoints,
 						loop = _props2.loop,
+						results = _props2.results,
 						pagination = _props2.pagination,
 						nextButton = _props2.nextButton,
 						prevButton = _props2.prevButton,
@@ -13943,9 +14121,10 @@
 						additionalProps = _objectWithoutProperties(_props2, _excluded);
 					if (!controller || 'recommendation' !== controller.type)
 						throw new Error("<Recommendation> Component requires 'controller' prop with an instance of RecommendationController");
-					if (!children || children.length === controller.store.results.length) {
-						var results = null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results,
-							subProps = {
+					var resultsToRender =
+						results || (null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results);
+					if (!children || children.length === resultsToRender.length) {
+						var subProps = {
 								carousel: Object.assign(
 									{ className: 'ss__recommendation__Carousel' },
 									null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
@@ -13996,22 +14175,25 @@
 								if (inViewport) {
 									var resultLoopOverCount,
 										resultLoopCount = [index, index + count];
-									index + count > results.length - 1 && ((resultLoopCount = [index]), (resultLoopOverCount = [0, index + count - results.length]));
-									var resultsImpressions = results.slice.apply(results, _toConsumableArray(resultLoopCount));
+									index + count > resultsToRender.length - 1 &&
+										((resultLoopCount = [index]), (resultLoopOverCount = [0, index + count - resultsToRender.length]));
+									var resultsImpressions = resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopCount));
 									resultLoopOverCount &&
-										(resultsImpressions = resultsImpressions.concat(results.slice.apply(results, _toConsumableArray(resultLoopOverCount)))),
+										(resultsImpressions = resultsImpressions.concat(
+											resultsToRender.slice.apply(resultsToRender, _toConsumableArray(resultLoopOverCount))
+										)),
 										resultsImpressions.map(function (result) {
 											controller.track.product.impression(result);
 										});
 								}
 							};
 						inViewport && (controller.track.impression(), sendProductImpression(initialIndexes[0], initialIndexes[1])),
-							(children || results.length) &&
+							(children || resultsToRender.length) &&
 								(null == controller || null === (_controller$track = controller.track) || void 0 === _controller$track || _controller$track.render());
 						var styling = {};
 						return (
 							disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_recommendation({ vertical }), style]),
-							(children || (null == results ? void 0 : results.length)) &&
+							(children || (null == resultsToRender ? void 0 : resultsToRender.length)) &&
 								(0, emotion_react_browser_esm.tZ)(
 									cache.n,
 									null,
@@ -14043,7 +14225,7 @@
 													},
 													onClick: function onClick(swiper, e) {
 														var clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-														controller.track.click(e), Number.isNaN(clickedIndex) || controller.track.product.click(e, results[clickedIndex]);
+														controller.track.click(e), Number.isNaN(clickedIndex) || controller.track.product.click(e, resultsToRender[clickedIndex]);
 													},
 													loop,
 													pagination,
@@ -14057,7 +14239,7 @@
 												? children.map(function (child) {
 														return child;
 												  })
-												: results.map(function (result) {
+												: resultsToRender.map(function (result) {
 														return (0, emotion_react_browser_esm.tZ)(Result.x, Object.assign({ controller, result }, subProps.result));
 												  })
 										)
@@ -14065,7 +14247,9 @@
 								)
 						);
 					}
-					controller.log.error('<Recommendation> Component received invalid number of children');
+					controller.log.error(
+						"<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'"
+					);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -14098,7 +14282,9 @@
 						null,
 						'If using children, the provided children elements array length and order must match the results stored in the ',
 						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller.store.results'),
-						' to avoid unexpected tracking behaviour.'
+						' (or ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						' prop) to avoid unexpected tracking behaviour.'
 					),
 					(0, esm.kt)(
 						'p',
@@ -14154,6 +14340,31 @@
 						'pre',
 						null,
 						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<Recommendation controller={controller} loop={true} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'results' }, 'results'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						' prop specifies a reference to the results store array to use instead of the default ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'controller.store.results')
+					),
+					(0, esm.kt)(
+						'p',
+						null,
+						'If using children, the provided children elements array length and order must match the results stored in the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'results'),
+						' prop to avoid unexpected tracking behaviour.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Recommendation controller={controller} results={controller.store.results} />\n'
+						)
 					),
 					(0, esm.kt)('h3', { id: 'title' }, 'title'),
 					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'title'), ' prop specifies the carousel title'),
@@ -14334,6 +14545,12 @@
 							description: 'Recommendation pagination loops',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !0 } },
 							control: { type: 'boolean' },
+						},
+						results: {
+							description: 'Results store reference, overrides controller.store.results',
+							type: { required: !1 },
+							table: { type: { summary: 'Results store object' } },
+							control: { type: 'none' },
 						},
 						pagination: {
 							defaultValue: !1,
@@ -14667,7 +14884,7 @@
 							control: { type: 'text' },
 						},
 						breakpoints: {
-							defaultValue: {},
+							defaultValue: { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
 							description: 'Breakpoints options object',
 							table: { type: { summary: 'object' } },
 							control: { type: 'object' },
@@ -14790,7 +15007,6 @@
 						'@supports (display: grid)': { display: 'grid', '& .ss__result': { width: 'initial', margin: 0 } },
 					});
 				},
-				defaultBreakpointsProps = { 0: { columns: 1 }, 540: { columns: 2 }, 768: { columns: 3 }, 991: { columns: 4 } },
 				Results = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_4__.Pi)(function (properties) {
 					var _properties$controlle,
 						_properties$controlle2,
@@ -14803,6 +15019,12 @@
 						_props3,
 						_results,
 						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_7__.a)(),
+						defaultBreakpointsProps = {
+							0: { columns: properties.columns || 1 },
+							540: { columns: properties.columns || 2 },
+							768: { columns: properties.columns || 3 },
+							991: { columns: properties.columns || 4 },
+						},
 						props = Object.assign(
 							{
 								results:
@@ -14874,7 +15096,9 @@
 									null,
 									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
 										'div',
-										Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', className) }),
+										Object.assign({}, styling, {
+											className: classnames__WEBPACK_IMPORTED_MODULE_5___default()('ss__results', 'ss__results-' + props.layout, className),
+										}),
 										results.map(function (result) {
 											return result.type === _types__WEBPACK_IMPORTED_MODULE_8__.$.BANNER
 												? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.tZ)(
@@ -23691,7 +23915,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.23.1' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.24.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24087,7 +24311,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.23.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.24.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -26432,15 +26656,35 @@
 							.filter(function (facet) {
 								var _config$settings,
 									_config$settings$face,
+									_config$settings2,
+									_config$settings2$fac,
+									_config$settings3,
+									_config$settings3$fac,
 									facetMeta = meta.facets[facet.field];
 								if (!facetMeta) return !1;
 								if (('slider' == facetMeta.display && 'range' !== facet.type) || ('range' == facet.type && 'slider' !== facetMeta.display)) return !1;
+								var facetConfig =
+									(null === (_config$settings = config.settings) ||
+									void 0 === _config$settings ||
+									null === (_config$settings$face = _config$settings.facets) ||
+									void 0 === _config$settings$face
+										? void 0
+										: _config$settings$face.fields) &&
+									(null === (_config$settings2 = config.settings) ||
+									void 0 === _config$settings2 ||
+									null === (_config$settings2$fac = _config$settings2.facets) ||
+									void 0 === _config$settings2$fac
+										? void 0
+										: _config$settings2$fac.fields[facet.field]);
 								if (
-									null !== (_config$settings = config.settings) &&
-									void 0 !== _config$settings &&
-									null !== (_config$settings$face = _config$settings.facets) &&
-									void 0 !== _config$settings$face &&
-									_config$settings$face.trim
+									'boolean' == typeof (null == facetConfig ? void 0 : facetConfig.trim)
+										? facetConfig.trim
+										: null === (_config$settings3 = config.settings) ||
+										  void 0 === _config$settings3 ||
+										  null === (_config$settings3$fac = _config$settings3.facets) ||
+										  void 0 === _config$settings3$fac
+										? void 0
+										: _config$settings3$fac.trim
 								) {
 									var _facet$values, _facet$values2;
 									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
@@ -26456,7 +26700,7 @@
 							.map(function (facet) {
 								var facetMeta = meta.facets[facet.field];
 								return 'range' === facet.type
-									? new RangeFacet(services, storage, facet, facetMeta)
+									? new RangeFacet(config, services, storage, facet, facetMeta)
 									: new ValueFacet(config, services, storage, facet, facetMeta);
 							});
 						return _super.call.apply(_super, [this].concat(FacetStore_toConsumableArray(facets)));
@@ -26529,13 +26773,34 @@
 				RangeFacet = (function (_Facet) {
 					FacetStore_inherits(RangeFacet, _Facet);
 					var _super2 = FacetStore_createSuper(RangeFacet);
-					function RangeFacet(services, storage, facet, facetMeta) {
-						var _this;
+					function RangeFacet(config, services, storage, facet, facetMeta) {
+						var _config$settings4, _config$settings4$fac, _config$settings5, _config$settings5$fac, _config$settings6, _config$settings6$fac, _this;
 						FacetStore_classCallCheck(this, RangeFacet),
 							((_this = _super2.call(this, services, storage, facet, facetMeta)).range = { low: 0, high: 0 }),
 							(_this.active = { low: 0, high: 0 }),
 							(_this.step = facet.step);
-						var storedRange = _this.storage.get('facets.' + _this.field + '.range');
+						var facetConfig =
+								(null === (_config$settings4 = config.settings) ||
+								void 0 === _config$settings4 ||
+								null === (_config$settings4$fac = _config$settings4.facets) ||
+								void 0 === _config$settings4$fac
+									? void 0
+									: _config$settings4$fac.fields) &&
+								(null === (_config$settings5 = config.settings) ||
+								void 0 === _config$settings5 ||
+								null === (_config$settings5$fac = _config$settings5.facets) ||
+								void 0 === _config$settings5$fac
+									? void 0
+									: _config$settings5$fac.fields[facet.field]),
+							storedRange =
+								('boolean' == typeof (null == facetConfig ? void 0 : facetConfig.storeRange)
+									? facetConfig.storeRange
+									: null === (_config$settings6 = config.settings) ||
+									  void 0 === _config$settings6 ||
+									  null === (_config$settings6$fac = _config$settings6.facets) ||
+									  void 0 === _config$settings6$fac
+									? void 0
+									: _config$settings6$fac.storeRange) && _this.storage.get('facets.' + _this.field + '.range');
 						return (
 							storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)
 								? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
@@ -26559,7 +26824,7 @@
 					FacetStore_inherits(ValueFacet, _Facet2);
 					var _super3 = FacetStore_createSuper(ValueFacet);
 					function ValueFacet(config, services, storage, facet, facetMeta) {
-						var _config$settings2, _config$settings2$fac, _this2;
+						var _config$settings7, _config$settings7$fac, _config$settings8, _config$settings8$fac, _config$settings9, _config$settings9$fac, _this2;
 						FacetStore_classCallCheck(this, ValueFacet),
 							((_this2 = _super3.call(this, services, storage, facet, facetMeta)).values = []),
 							(_this2.search = { input: '' }),
@@ -26603,16 +26868,32 @@
 												return new RangeValue(services, FacetStore_assertThisInitialized(_this2), value);
 										}
 									})) ||
-								[]),
-							null !== (_config$settings2 = config.settings) &&
-								void 0 !== _config$settings2 &&
-								null !== (_config$settings2$fac = _config$settings2.facets) &&
-								void 0 !== _config$settings2$fac &&
-								_config$settings2$fac.pinFiltered &&
-								'hierarchy' !== facetMeta.display &&
-								_this2.values.sort(function (a, b) {
-									return Number(b.filtered) - Number(a.filtered);
-								});
+								[]);
+						var facetConfig =
+							(null === (_config$settings7 = config.settings) ||
+							void 0 === _config$settings7 ||
+							null === (_config$settings7$fac = _config$settings7.facets) ||
+							void 0 === _config$settings7$fac
+								? void 0
+								: _config$settings7$fac.fields) &&
+							(null === (_config$settings8 = config.settings) ||
+							void 0 === _config$settings8 ||
+							null === (_config$settings8$fac = _config$settings8.facets) ||
+							void 0 === _config$settings8$fac
+								? void 0
+								: _config$settings8$fac.fields[facet.field]);
+						('boolean' == typeof (null == facetConfig ? void 0 : facetConfig.pinFiltered)
+							? facetConfig.pinFiltered
+							: null === (_config$settings9 = config.settings) ||
+							  void 0 === _config$settings9 ||
+							  null === (_config$settings9$fac = _config$settings9.facets) ||
+							  void 0 === _config$settings9$fac
+							? void 0
+							: _config$settings9$fac.pinFiltered) &&
+							'hierarchy' !== facetMeta.display &&
+							_this2.values.sort(function (a, b) {
+								return Number(b.filtered) - Number(a.filtered);
+							});
 						var overflowLimitedState = _this2.storage.get('facets.' + _this2.field + '.overflow.limited');
 						return (
 							void 0 !== overflowLimitedState && _this2.overflow.toggle(overflowLimitedState),
@@ -27269,7 +27550,7 @@
 			var SearchController_defaultConfig = {
 					id: 'search',
 					globals: {},
-					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0 } },
+					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0, storeRange: !0 } },
 				},
 				SearchController = (function (_AbstractController) {
 					!(function SearchController_inherits(subClass, superClass) {
@@ -28366,102 +28647,6 @@
 					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
 				}
 			}
-		},
-		'./src/components/Atoms/Badge/readme.md': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Z: () => MDXContent });
-			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
-			function _extends() {
-				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
-					_extends.apply(this, arguments)
-				);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h1', { id: 'badge' }, 'Badge'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'Renders an absolute-positioned badge. It is expected that the parent element contains ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'position: relative'),
-						'.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h2', { id: 'usage' }, 'Usage'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'content' }, 'content'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'content'),
-						' prop specifies the badge.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<div style="position: relative;">\n    <Badge content="Sale" />\n</div>\n'
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('p', null, 'Or alternatively using children:'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<div style="position: relative;">\n    <Badge>Sale</Badge>\n</div>\n'
-						)
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('h3', { id: 'position' }, 'position'),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'The ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'position'),
-						' prop specifies an object with CSS ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'top'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'bottom'),
-						', ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'left'),
-						', and ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, 'right'),
-						' attributes. The default position is top left ',
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)('inlineCode', { parentName: 'p' }, '{ top: 0, left: 0 }'),
-						'.'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'p',
-						null,
-						'In this example, the badge will be 2px from the top and 2px from the right:'
-					),
-					(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-						'pre',
-						null,
-						(0, _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__.kt)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							'<Badge position={{ "top": 2, "right": 2 }}>Sale</Badge>\n'
-						)
-					)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
 		},
 		'./src/components/Atoms/Merchandising/readme.md': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
