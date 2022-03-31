@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+
+### Features
+
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([b67248d](https://github.com/searchspring/snap/commit/b67248da94ffeb8d75763ba2f1c68c9bd84066fb))
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 **Note:** Version bump only for package @searchspring/snap-controller
