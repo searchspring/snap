@@ -60,6 +60,22 @@ describe('Slider Component', () => {
 		expect(styles.backgroundColor).toBe(colorArgs.handleColor);
 	});
 
+	it('can disable styling', () => {
+		const rendered = render(<FacetSlider {...args} disableStyles={true} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-slider');
+		expect(paletteElement.classList.length).toBe(1);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<FacetSlider {...args} className={className} />);
+
+		const paletteElement = rendered.container.querySelector('.ss__facet-slider');
+		expect(paletteElement).toBeInTheDocument();
+		expect(paletteElement).toHaveClass(className);
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const rendered = render(
 			<ThemeProvider theme={theme}>

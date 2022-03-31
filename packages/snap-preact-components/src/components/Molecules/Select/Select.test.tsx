@@ -142,23 +142,19 @@ describe('Select Component', () => {
 			expect(iconElement).toHaveClass(`ss__icon--${props.iconClose}`);
 		});
 
-		// it('is open on render when using startOpen prop', () => {
-		// 	const rendered = render(<Select startOpen options={options} />);
-		// 	const selectElement = rendered.container.querySelector('.ss__select');
-		// 	const dropdownContainer = selectElement.querySelector('.ss__dropdown__content');
-		// 	const dropdownContainerStyles = getComputedStyle(dropdownContainer);
+		it('is open on render when using startOpen prop', () => {
+			const rendered = render(<Select startOpen options={options} />);
+			const selectElement = rendered.container.querySelector('.ss__select');
+			const dropdownElement = selectElement.querySelector('.ss__dropdown');
+			expect(dropdownElement).toHaveClass('ss__dropdown--open');
+		});
 
-		// 	expect(dropdownContainerStyles.visibility).toBe('visible');
-		// });
-
-		// it('is open on render when using startOpen prop', () => {
-		// 	const rendered = render(<Select startOpen options={options} />);
-		// 	const selectElement = rendered.container.querySelector('.ss__select');
-		// 	const dropdownContainer = selectElement.querySelector('.ss__dropdown__content');
-		// 	const dropdownContainerStyles = getComputedStyle(dropdownContainer);
-
-		// 	expect(dropdownContainerStyles.visibility).toBe('visible');
-		// });
+		it('is closed on render when using startOpen false prop', () => {
+			const rendered = render(<Select startOpen={false} options={options} />);
+			const selectElement = rendered.container.querySelector('.ss__select');
+			const dropdownElement = selectElement.querySelector('.ss__dropdown');
+			expect(dropdownElement).not.toHaveClass('ss__dropdown--open');
+		});
 
 		it('opens and closes on button click', async () => {
 			const rendered = render(<Select options={options} />);
@@ -167,12 +163,10 @@ describe('Select Component', () => {
 			const dropdownButton = dropdownElement.querySelector('.ss__dropdown__button');
 
 			expect(dropdownElement).not.toHaveClass('ss__dropdown--open');
-			// expect(dropdownContainerStyles.visibility).toBe('hidden');
 
 			await userEvent.click(dropdownButton);
 
 			expect(dropdownElement).toHaveClass('ss__dropdown--open');
-			// expect(dropdownContainerStyles.visibility).toBe('visible');
 		});
 
 		it('it adds "selected" class on option selection and closes the dropdown', async () => {
@@ -188,9 +182,7 @@ describe('Select Component', () => {
 			await userEvent.click(dropdownButton);
 			await userEvent.click(optionElements[selectIndex]);
 
-			// const dropdownContainerStyles = getComputedStyle(dropdownContainer);
 			expect(selectElement).not.toHaveClass('ss__dropdown--open');
-			//expect(dropdownContainerStyles.visibility).toBe('hidden');
 
 			expect(selectFn).toHaveBeenCalledWith(expect.anything(), options[selectIndex]);
 			optionElements.forEach((optionElement, index) => {
@@ -201,24 +193,6 @@ describe('Select Component', () => {
 				}
 			});
 		});
-
-		// it('it does not close the dropdown when using stayOpenOnSelection', () => {
-		// 	const selectFn = jest.fn();
-		// 	const selectIndex = 1;
-
-		// 	const rendered = render(<Select stayOpenOnSelection options={options} onSelect={selectFn} />);
-
-		// 	const selectElement = rendered.container.querySelector('.ss__select');
-		// 	const optionElements = selectElement.querySelectorAll('.ss__select__select__option');
-		// 	const dropdownButton = selectElement.querySelector('.ss__dropdown__button');
-		// 	const dropdownContainer = selectElement.querySelector('.ss__dropdown__content');
-
-		// 	userEvent.click(dropdownButton);
-		// 	userEvent.click(optionElements[selectIndex]);
-
-		// 	const dropdownContainerStyles = getComputedStyle(dropdownContainer);
-		// 	expect(dropdownContainerStyles.visibility).toBe('visible');
-		// });
 
 		it('it shows clearSelection label when a selection is made', async () => {
 			const clearSelectionLabel = 'clear selection';
@@ -343,6 +317,15 @@ describe('Select Component', () => {
 			expect(selectElement.classList).toHaveLength(1);
 		});
 
+		it('renders with classname', () => {
+			const className = 'classy';
+			const rendered = render(<Select options={options} className={className} />);
+
+			const selectElement = rendered.container.querySelector('.ss__select');
+			expect(selectElement).toBeInTheDocument();
+			expect(selectElement).toHaveClass(className);
+		});
+
 		it('is themeable with ThemeProvider', () => {
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
@@ -455,6 +438,15 @@ describe('Select Component', () => {
 			expect(selectFn).not.toHaveBeenCalledWith(expect.anything(), options[1]);
 			expect(optionsElements[0].selected).toBe(true);
 			expect(optionsElements[1].selected).toBe(false);
+		});
+
+		it('renders with classname', () => {
+			const className = 'classy';
+			const rendered = render(<Select native options={options} className={className} />);
+
+			const selectElement = rendered.container.querySelector('.ss__select');
+			expect(selectElement).toBeInTheDocument();
+			expect(selectElement).toHaveClass(className);
 		});
 
 		it('is themeable with ThemeProvider', () => {

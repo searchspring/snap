@@ -30,6 +30,7 @@ const defaultConfig: SearchControllerConfig = {
 		facets: {
 			trim: true,
 			pinFiltered: true,
+			storeRange: true,
 		},
 	},
 };

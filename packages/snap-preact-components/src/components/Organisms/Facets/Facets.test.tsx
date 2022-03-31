@@ -36,6 +36,30 @@ describe('Facets Component', () => {
 		expect(count).toBeLessThanOrEqual(args.facets.length);
 		expect(count).toBe(args.limit);
 	});
+
+	it('renders with classname', () => {
+		const args = {
+			facets: searchResponse.facets,
+			className: 'classy',
+		};
+
+		const rendered = render(<Facets {...args} />);
+
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		expect(facetsElement).toHaveClass(args.className);
+	});
+
+	it('disables styles', () => {
+		const args = {
+			facets: searchResponse.facets,
+			disableStyles: true,
+		};
+
+		const rendered = render(<Facets {...args} />);
+
+		const facetsElement = rendered.container.querySelector('.ss__facets');
+		expect(facetsElement.classList).toHaveLength(1);
+	});
 });
 
 describe('Facets Component is themeable', () => {

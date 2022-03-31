@@ -5,7 +5,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { componentArgs } from '../../../utilities';
 import { Skeleton } from './Skeleton';
-import Readme from '../Badge/readme.md';
+import Readme from '../Skeleton/readme.md';
 
 export default {
 	title: `Atoms/Skeleton`,

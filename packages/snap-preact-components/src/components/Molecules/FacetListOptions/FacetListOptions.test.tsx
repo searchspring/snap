@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
@@ -56,6 +57,34 @@ describe('ListValue Component hiding checkbox and count', () => {
 
 		expect(listOption[0]).toHaveTextContent(listFacetMock.values[0].label);
 		expect(listOption[0]).not.toHaveTextContent(listFacetMock.values[0].count.toString());
+	});
+});
+
+describe('FacetListOptions generic props work', () => {
+	it('can disable styling', () => {
+		const rendered = render(<FacetListOptions values={listFacetMock.values} disableStyles={true} />);
+
+		const listOption = rendered.container.querySelector('.ss__facet-list-options');
+		expect(listOption.classList.length).toBe(1);
+	});
+
+	it('renders with classname', () => {
+		const className = 'classy';
+		const rendered = render(<FacetListOptions values={listFacetMock.values} className={className} />);
+
+		const listOption = rendered.container.querySelector('.ss__facet-list-options');
+		expect(listOption).toBeInTheDocument();
+		expect(listOption).toHaveClass(className);
+	});
+
+	it('can set custom onClick func', () => {
+		const onClickFunc = jest.fn();
+		const rendered = render(<FacetListOptions values={listFacetMock.values} onClick={onClickFunc} />);
+
+		const listOption = rendered.container.querySelector('.ss__facet-list-options__option');
+		expect(listOption).toBeInTheDocument();
+		userEvent.click(listOption);
+		expect(onClickFunc).toHaveBeenCalled();
 	});
 });
 

@@ -65,6 +65,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		results: {
+			description: 'Results store reference, overrides controller.store.results',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Results store object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		pagination: {
 			defaultValue: false,
 			description: 'Display pagination dots',
