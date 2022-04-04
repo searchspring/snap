@@ -15,10 +15,10 @@ export class Finder extends Component {
 						{selections.map((selection) =>
 							controller.config.wrapSelect ? (
 								<div class="finder-column finder-dropdown form-select-wrapper">
-									<Dropdown selection={selection} store={loading} />
+									<Dropdown selection={selection} store={store} loading={loading} />
 								</div>
 							) : (
-								<Dropdown selection={selection} store={loading} />
+								<Dropdown selection={selection} store={store} loading={loading} />
 							)
 						)}
 
@@ -31,6 +31,16 @@ export class Finder extends Component {
 								class="button button--primary searchspring-finder_submit"
 							>
 								Shop Now
+							</button>
+							&nbsp;
+							<button
+								onClick={() => {
+									controller.reset();
+								}}
+								disabled={loading}
+								class="button button--primary searchspring-finder_submit"
+							>
+								Reset
 							</button>
 						</div>
 					</div>

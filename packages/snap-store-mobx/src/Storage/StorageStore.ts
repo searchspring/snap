@@ -24,21 +24,23 @@ export class StorageStore {
 			}
 
 			switch (config.type) {
-				case StorageType.SESSION:
+				case StorageType.SESSION: {
 					this.type = featureFlags.storage ? config.type : null;
 					if (this.type) {
 						this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
 						window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
-				case StorageType.LOCAL:
+				}
+				case StorageType.LOCAL: {
 					this.type = featureFlags.storage ? config.type : null;
 					if (this.type && !window.localStorage.getItem(this.key)) {
 						this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
 						window.localStorage.setItem(this.key, JSON.stringify(this.state));
 					}
 					break;
-				case StorageType.COOKIE:
+				}
+				case StorageType.COOKIE: {
 					if (featureFlags.cookies) {
 						this.type = config.type;
 						const data = utils.cookies.get(this.key);
@@ -47,6 +49,10 @@ export class StorageStore {
 						}
 					}
 					break;
+				}
+				default: {
+					this.type = StorageType.MEMORY;
+				}
 			}
 		}
 	}
@@ -136,4 +142,5 @@ export enum StorageType {
 	SESSION = 'session',
 	LOCAL = 'local',
 	COOKIE = 'cookie',
+	MEMORY = 'memory',
 }

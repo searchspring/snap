@@ -41,6 +41,7 @@ export type FinderStoreConfig = StoreConfig & {
 	globals?: any;
 	url?: string;
 	fields: FinderFieldConfig[];
+	persist?: boolean;
 };
 
 export type FinderFieldConfig = {
@@ -101,3 +102,15 @@ export enum ErrorType {
 	INFO = 'info',
 	ERROR = 'error',
 }
+
+export type SelectedSelection = {
+	// field: string;
+	selected: string;
+	// index: number;
+	isHierarchy: boolean;
+	// values: Array<any>;
+	data?: Array<any>;
+	// type: string;
+	facet: any;
+	config: FinderStoreConfig;
+};

@@ -198,9 +198,15 @@ describe('Finder Controller', () => {
 					href: null, // jest does not support window location changes
 				};
 
+				const beforeFindfn = jest.spyOn(controller.eventManager, 'fire');
 				await controller.find();
 
+				expect(beforeFindfn).toHaveBeenCalledWith('beforeFind', { controller });
+
+				// await new Promise((resolve) => setTimeout(resolve));
 				expect(window.location.href).toContain(controller.urlManager.href);
+
+				beforeFindfn.mockClear();
 			});
 
 			const events = ['beforeSearch', 'afterSearch', 'afterStore'];

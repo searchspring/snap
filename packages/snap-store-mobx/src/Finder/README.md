@@ -56,6 +56,12 @@ const value = selections[0].values[0]
 selections[0].select(value)
 ```
 
+### `save` method
+The `save` method when invoked will save any current finder selections to local storage. (requires `config.persist` to be `true`)
+
+### `loadPersisted` method
+The `loadPersisted` method when invoked will update the store with data that has been saved to local storage using the `save` method. (requires `config.persist` to be `true`)
+
 ### `config` property
 
 A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
@@ -65,6 +71,9 @@ A reference to the data stored in the [StorageStore](https://github.com/searchsp
 
 ### `storage` property
 A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
+
+### `persistedStorage` property
+A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) used for persisting finder selections (requires `config.persist` to be `true`)
 
 ### `controller` property
 A reference to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)

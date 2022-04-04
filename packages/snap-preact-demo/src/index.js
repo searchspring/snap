@@ -32,22 +32,22 @@ let config = {
 			siteId: '8uyt2m',
 		},
 	},
-	instantiators: {
-		recommendation: {
-			components: {
-				Recs: async () => {
-					return (await import('./components/Recommendations/')).Recs;
-				},
-				Email: async () => {
-					return (await import('./components/Recommendations/')).Email;
-				},
-			},
+	// instantiators: {
+	// 	recommendation: {
+	// 		components: {
+	// 			Recs: async () => {
+	// 				return (await import('./components/Recommendations/')).Recs;
+	// 			},
+	// 			Email: async () => {
+	// 				return (await import('./components/Recommendations/')).Email;
+	// 			},
+	// 		},
 
-			config: {
-				branch: BRANCHNAME,
-			},
-		},
-	},
+	// 		config: {
+	// 			branch: BRANCHNAME,
+	// 		},
+	// 	},
+	// },
 	controllers: {
 		search: [
 			{
@@ -82,35 +82,38 @@ let config = {
 				],
 			},
 		],
-		autocomplete: [
-			{
-				config: {
-					id: 'autocomplete',
-					selector: 'input.searchspring-ac',
-					settings: {
-						trending: {
-							limit: 5,
-						},
-					},
-					globals: {
-						search: {
-							query: {
-								spellCorrection: true,
-							},
-						},
-					},
-				},
-				targeters: [
-					{
-						selector: 'input.searchspring-ac',
-						hideTarget: true,
-						component: async () => {
-							return (await import('./components/Autocomplete/Autocomplete')).Autocomplete;
-						},
-					},
-				],
-			},
-		],
+		// autocomplete: [
+		// 	{
+		// 		config: {
+		// 			id: 'autocomplete',
+		// 			selector: 'input.searchspring-ac',
+		// 			settings: {
+		// 				trending: {
+		// 					limit: 5,
+		// 				},
+		// 			},
+		// 			globals: {
+		// 				search: {
+		// 					query: {
+		// 						spellCorrection: true,
+		// 					},
+		// 				},
+		// 				pagination: {
+		// 					pageSize: 3,
+		// 				}
+		// 			},
+		// 		},
+		// 		targeters: [
+		// 			{
+		// 				selector: 'input.searchspring-ac',
+		// 				hideTarget: true,
+		// 				component: async () => {
+		// 					return (await import('./components/Autocomplete/Autocomplete')).Autocomplete;
+		// 				},
+		// 			},
+		// 		],
+		// 	},
+		// ],
 		finder: [
 			{
 				config: {
@@ -130,6 +133,7 @@ let config = {
 							label: 'Brand',
 						},
 					],
+					persist: true,
 				},
 				targeters: [
 					{
@@ -148,8 +152,10 @@ let config = {
 					fields: [
 						{
 							field: 'ss_category_hierarchy',
+							// levels: ['a', 'b', 'c'],
 						},
 					],
+					persist: true,
 				},
 				targeters: [
 					{

@@ -14,6 +14,7 @@ The `FinderController` should be used for building product finders. It makes que
 | fields.field | required field name | ➖ | ✔️ |
 | fields.label | optional finder label | ➖ |   |
 | fields.levels | optional finder selection levels (hierarchy only) | ➖ |   |
+| persist | optional boolean to persist finder selections across navigation | false |   |
 
 <br>
 
@@ -148,3 +149,7 @@ finderController.reset();
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
 - no operation
+
+###  beforeFind
+- Called with `eventData` = { controller }
+- Invoked after invoking the `find` method, before `window.location.href` is changed

@@ -1,4 +1,4 @@
-import type { FinderStoreConfig, FinderFieldConfig, StoreServices } from '../../types';
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { MetaResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
 
@@ -13,11 +13,43 @@ export class SelectionStore extends Array {
 		facets: SearchResponseModelFacet[],
 		meta: MetaResponseModel,
 		loading: boolean,
-		storage: StorageStore
+		storage: StorageStore,
+		selectedSelections: SelectedSelection[]
 	) {
 		const selections = [];
 
-		if (facets && meta) {
+		if (selectedSelections?.length) {
+			config.fields.forEach((fieldObj) => {
+				const storedData: SelectedSelection = selectedSelections.find((selection) => selection.facet.field === fieldObj.field);
+
+				if (storedData) {
+					const { isHierarchy, facet, selected } = storedData;
+					if (isHierarchy) {
+						selectedSelections.forEach((selection, index) => {
+							const levels = fieldObj?.levels || facet?.values[facet?.values.length - 1]?.value.split(facet.hierarchyDelimiter);
+							const levelConfig: LevelConfig = { index, label: fieldObj.levels ? levels[index] : '', key: `ss-${index}` };
+							const selectionHierarchy = new SelectionHierarchy(services, config.id, facet, levelConfig, loading, storage);
+
+							selectionHierarchy.selected = selection.selected;
+							// selectionHierarchy.data = selection.data;
+							selectionHierarchy.data = facet.values;
+							// selectionHierarchy.disabled = true;
+							services.urlManager = services.urlManager.set(`filter.${selection.facet.field}`, selection.selected);
+							selections.push(selectionHierarchy);
+						});
+					} else {
+						const selection = new Selection(services, config.id, facet, fieldObj, loading, storage);
+
+						selection.selected = selected;
+						selection.storage.set('selected', selected);
+						// selection.disabled = true;
+						selection.data = facet.values;
+						services.urlManager = services.urlManager.set(`filter.${facet.field}`, selected);
+						selections.push(selection);
+					}
+				}
+			});
+		} else if (facets && meta) {
 			// re-order facets to match our config
 			config?.fields &&
 				facets.sort((a, b) => {
@@ -58,6 +90,21 @@ export class SelectionStore extends Array {
 			});
 		}
 
+		// sets persisted selections
+		// selections?.forEach((selection) => {
+		// 	selectedSelections?.forEach((selectedSelection) => {
+		// 		if (selectedSelection.field == selection.field) {
+		// 			selection.select(selectedSelection.selected);
+		// 		}
+		// 	});
+		// });
+
+		// if(selections?.length && selectedSelections?.length) {
+		// 	selections.forEach((selection, index) => {
+		// 		selection.select(selectedSelections[index].selected);
+		// 	});
+		// }
+
 		super(...selections);
 	}
 }
@@ -74,6 +121,7 @@ class SelectionBase {
 	disabled = false;
 	selected = '';
 	custom = {};
+	facet: any; //TODO: add typeing
 
 	services: StoreServices;
 	loading: boolean;
@@ -96,6 +144,7 @@ class SelectionBase {
 		this.config = selectionConfig;
 
 		// inherit all standard facet properties
+		this.facet = facet;
 		this.type = facet.type;
 		this.field = facet.field;
 		this.filtered = facet.filtered;
@@ -152,6 +201,8 @@ class Selection extends SelectionBase {
 	}
 
 	select(value = '') {
+		console.log('select');
+		console.log('loading', this.loading);
 		if (this.loading) return;
 
 		this.selected = value;
