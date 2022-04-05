@@ -1,9 +1,9 @@
 import deepmerge from 'deepmerge';
 
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
-import { url } from '@searchspring/snap-toolbox';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
+import { ControllerTypes } from '../types';
 
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import type {
@@ -45,7 +45,7 @@ type AutocompleteTrackMethods = {
 };
 
 export class AutocompleteController extends AbstractController {
-	public type = 'autocomplete';
+	public type = ControllerTypes.autocomplete;
 	public store: AutocompleteStore;
 	public config: AutocompleteControllerConfig;
 	public storage: StorageStore;

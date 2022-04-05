@@ -24,6 +24,12 @@ export type SnapControllerServices = {
 	tracker?: Tracker;
 };
 
+export type SnapControllerConfigs =
+	| SnapSearchControllerConfig
+	| SnapAutocompleteControllerConfig
+	| SnapFinderControllerConfig
+	| SnapRecommendationControllerConfig;
+
 export type RootComponent = React.ElementType<{ controller: AbstractController }>;
 
 export type SnapSearchControllerConfig = {

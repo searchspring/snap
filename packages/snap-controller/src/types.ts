@@ -45,6 +45,13 @@ export type AfterStoreObj = {
 	response: any;
 };
 
+export enum ControllerTypes {
+	search = 'search',
+	autocomplete = 'autocomplete',
+	finder = 'finder',
+	recommendation = 'recommendation',
+}
+
 export type ControllerServices = {
 	client: Client;
 	store: AbstractStore;

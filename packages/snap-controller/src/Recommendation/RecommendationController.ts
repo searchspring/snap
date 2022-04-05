@@ -3,6 +3,7 @@ import deepmerge from 'deepmerge';
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 import { LogMode } from '@searchspring/snap-logger';
 import { AbstractController } from '../Abstract/AbstractController';
+import { ControllerTypes } from '../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
@@ -29,7 +30,7 @@ const defaultConfig: RecommendationControllerConfig = {
 };
 
 export class RecommendationController extends AbstractController {
-	public type = 'recommendation';
+	public type = ControllerTypes.recommendation;
 	public store: RecommendationStore;
 	config: RecommendationControllerConfig;
 	events = {

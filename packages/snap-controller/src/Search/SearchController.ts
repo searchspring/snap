@@ -3,6 +3,7 @@ import deepmerge from 'deepmerge';
 import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
+import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
@@ -41,7 +42,7 @@ type SearchTrackMethods = {
 };
 
 export class SearchController extends AbstractController {
-	public type = 'search';
+	public type = ControllerTypes.search;
 	public store: SearchStore;
 	config: SearchControllerConfig;
 	storage: StorageStore;
