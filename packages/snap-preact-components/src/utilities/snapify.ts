@@ -1,6 +1,6 @@
 import { h, render } from 'preact';
 /* searchspring imports */
-import { createSearchController, createAutocompleteController, createRecommendationsController } from '@searchspring/snap-preact';
+import { createSearchController, createAutocompleteController, createRecommendationController } from '@searchspring/snap-preact';
 import type {
 	SearchController,
 	AutocompleteController,
@@ -21,7 +21,7 @@ export class Snapify {
 			return controllers[id];
 		}
 
-		const cntrlr: RecommendationController = (controllers[id] = createRecommendationsController({ client, controller: config }));
+		const cntrlr: RecommendationController = (controllers[id] = createRecommendationController({ client, controller: config }));
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.log.debug('controller', controller);
