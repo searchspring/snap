@@ -6,7 +6,7 @@ export class Finder extends Component {
 	render() {
 		const controller = this.props.controller;
 		const store = controller.store;
-		const { selections, loading } = store;
+		const { selections, loading, pagination } = store;
 
 		return (
 			selections.length > 0 && (
@@ -21,6 +21,8 @@ export class Finder extends Component {
 								<Dropdown selection={selection} store={store} loading={loading} />
 							)
 						)}
+
+						<span style={{ color: '#aaa', 'font-size': '10px' }}>{` ${pagination.totalResults} results`}</span>
 
 						<div class="finder-column finder-button ss-shop">
 							<button
@@ -66,7 +68,7 @@ class Dropdown extends Component {
 			>
 				{selection?.values?.map((value) => (
 					<option value={value.value} selected={selection.selected === value.value}>
-						{value.label}
+						{value.label} {value.count ? `(${value.count})` : ''}
 					</option>
 				))}
 			</select>

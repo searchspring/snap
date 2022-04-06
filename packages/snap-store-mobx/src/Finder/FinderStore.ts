@@ -16,6 +16,9 @@ export class FinderStore extends AbstractStore {
 	persistedStorage: StorageStore;
 	pagination: PaginationStore;
 	selections: SelectionStore;
+	state = {
+		persisted: false,
+	};
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
@@ -26,10 +29,10 @@ export class FinderStore extends AbstractStore {
 
 		this.services = services;
 
-		if (config.persist) {
+		if (config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
 				type: StorageType.LOCAL,
-				key: `${config.id}-persisted`,
+				key: `ss-${config.id}-persisted`,
 			});
 		}
 
@@ -50,20 +53,16 @@ export class FinderStore extends AbstractStore {
 	}
 
 	save(): void {
-		if (this.config.persist && this.selections.filter((selection) => selection.selected).length) {
+		if (this.config.persist?.enabled && this.selections.filter((selection) => selection.selected).length) {
+			this.persistedStorage.set('config', this.config);
 			this.persistedStorage.set('data', this.data);
+			this.persistedStorage.set('date', Date.now());
 			this.persistedStorage.set(
 				'selections',
 				this.selections.map((selection, index) => {
 					return {
-						config: this.config,
-						// field: selection.field,
 						selected: selection.selected,
-						// index,
-						isHierarchy: Boolean(selection?.hierarchyDelimiter),
-						// values: selection.values,
-						// data: selection.data,
-						// type: selection.type,
+						data: selection.data,
 						facet: selection.facet,
 					};
 				})
@@ -72,28 +71,36 @@ export class FinderStore extends AbstractStore {
 	}
 
 	reset = (): void => {
-		if (this.config.persist) {
+		if (this.config.persist?.enabled) {
 			this.persistedStorage.clear();
+			this.state.persisted = false;
 		}
-		this.selections = [];
-		this.loaded = false;
-		this.services.urlManager.remove('filter').go();
+
+		if (this.services.urlManager.state.filter) {
+			this.storage.clear();
+			this.selections = [];
+			this.loaded = false;
+		}
 	};
 
-	loadPersisted(): boolean {
-		if (this.config.persist && !this.loaded) {
+	loadPersisted(): void {
+		if (this.config.persist?.enabled && !this.loaded) {
+			const date = this.persistedStorage.get('date');
 			const data = this.persistedStorage.get('data');
+			const config = this.persistedStorage.get('config');
 			const selections = this.persistedStorage.get('selections');
+			const isExpired = this.config.persist.expiration && Date.now() - date > this.config.persist.expiration;
+
 			if (data && selections.filter((selection) => selection.selected).length) {
-				if (JSON.stringify(selections[0]?.config) === JSON.stringify(this.config)) {
+				if (JSON.stringify(config) === JSON.stringify(this.config) && !isExpired) {
 					this.update(data, selections);
-					// this.services.urlManager.go();
-					return true;
+					this.state.persisted = true;
+					this.services.urlManager.go();
+				} else {
+					this.reset();
 				}
-				this.reset();
 			}
 		}
-		return false;
 	}
 
 	update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
@@ -102,6 +109,13 @@ export class FinderStore extends AbstractStore {
 		this.loaded = !!data.pagination;
 		this.meta = data.meta;
 		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
-		this.selections = new SelectionStore(this.config, this.services, data.facets, this.meta, this.loading, this.storage, selectedSelections);
+		this.selections = new SelectionStore(this.config, this.services, {
+			state: this.state,
+			facets: data.facets,
+			meta: this.meta,
+			loading: this.loading,
+			storage: this.storage,
+			selections: selectedSelections,
+		});
 	}
 }

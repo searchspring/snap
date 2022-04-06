@@ -41,7 +41,11 @@ export type FinderStoreConfig = StoreConfig & {
 	globals?: any;
 	url?: string;
 	fields: FinderFieldConfig[];
-	persist?: boolean;
+	persist?: {
+		enabled: boolean;
+		lockSelections?: boolean;
+		expiration?: number;
+	};
 };
 
 export type FinderFieldConfig = {

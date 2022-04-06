@@ -15,7 +15,11 @@ const defaultConfig: FinderControllerConfig = {
 		},
 	},
 	fields: [],
-	persist: false,
+	persist: {
+		enabled: false,
+		lockSelections: true,
+		expiration: 0,
+	},
 };
 
 export class FinderController extends AbstractController {
@@ -44,7 +48,6 @@ export class FinderController extends AbstractController {
 			});
 		}
 
-		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (finder: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
 			finder.controller.store.loading = true;
 
@@ -52,7 +55,6 @@ export class FinderController extends AbstractController {
 		});
 
 		// TODO: move this to afterStore
-		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
@@ -62,16 +64,7 @@ export class FinderController extends AbstractController {
 		// attach config plugins and event middleware
 		this.use(this.config);
 
-		// this.store.loadPersisted();
-		// this.eventManager.on('init', async (finder: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
-		// 	// check for persistence
-		// 	if (this.config.persist) {
-		// 		const selections = this.store.persistedStorage.get('selections');
-		// 		console.log("init selections", selections)
-		// 	}
-
-		// 	await next();
-		// });
+		this.store.loadPersisted();
 	}
 
 	get params(): Record<string, any> {
@@ -106,22 +99,14 @@ export class FinderController extends AbstractController {
 				throw err;
 			}
 		}
-		console.log('this.urlManager.href ', this.urlManager.href);
-		console.log('this.store.services.urlManager.href ', this.store.services.urlManager.href);
 
-		// window.location.href = this.urlManager.href;
+		window.location.href = this.urlManager.href;
 	};
 
 	reset = (): void => {
-		console.log('reset invoked');
-		// only need to reset when selections have been made
-		this.store.storage.clear();
 		this.store.reset();
-
-		// this.urlManager.remove('filter').go();
-
-		// this.search();
-		// this.urlManager = this.urlManager.reset()
+		this.urlManager.remove('filter').go();
+		this.store.setService('urlManager', this.urlManager);
 	};
 
 	search = async (): Promise<void> => {
@@ -129,35 +114,9 @@ export class FinderController extends AbstractController {
 			await this.init();
 		}
 
-		const hasPersisted = this.store.loadPersisted();
-		console.log('CONTROLLER SEARCH!!!', hasPersisted);
-		if (hasPersisted) {
+		if (this.store.state.persisted) {
 			return;
 		}
-
-		/*
-
-			TODO:
-			(bug): when changing selections and a value is removed from other selections, the UrlManager still has old selections
-
-		 */
-
-		// idea 1
-		// prevent API requests on persistence loads
-		// would have to lock selections until reset
-		// reset would clear persisted data and trigger search()
-		// persisted data loaded into selections stores on init or construction
-		// if persisted maybe we prevent searches
-
-		// general ideas to prevent future problems
-		// stored persisted selections should be keyed or tied to the finder config to prevent issues when finder design changes
-		// ^ maybe auto-reset when persisted data conflicts with finder config
-
-		// idea 2
-		// persist values and selection per SelectionStore
-		// good UX for quickly changing selections after storage
-		// data can go stale
-		// requires two storage stores
 
 		const params = this.params;
 
@@ -237,20 +196,6 @@ export class FinderController extends AbstractController {
 
 			afterStoreProfile.stop();
 			this.log.profile(afterStoreProfile);
-
-			// init()
-			// check if persisted storage
-			// then populate selections from storage
-			// init could call search() via async/await
-			// when init concludes then search() is run (by default)
-
-			// setTimeout(() => {
-			// this.search('')
-			// Selection.select();
-			// delete the selection that was just made
-			// next search would call next selection
-
-			// })
 		} catch (err) {
 			if (err) {
 				switch (err) {
