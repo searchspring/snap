@@ -7229,6 +7229,7 @@
 							control: { type: 'boolean' },
 						},
 						tickSize: {
+							defaultValue: 20,
 							description: 'distance between ticks',
 							table: { type: { summary: 'number' }, defaultValue: { summary: 20 } },
 							control: { type: 'number' },
@@ -20656,8 +20657,9 @@
 				}),
 				(transformSearchResponse.search = function (response, request) {
 					var didYouMean = ((response || {}).didYouMean || {}).query,
-						originalQuery = ((request || {}).search || {}).originalQuery;
-					return { search: { query: (((request || {}).search || {}).query || {}).string, didYouMean, originalQuery } };
+						originalQuery = ((request || {}).search || {}).originalQuery,
+						matchType = ((response || {}).query || {}).matchType;
+					return { search: { query: (((request || {}).search || {}).query || {}).string, didYouMean, originalQuery, matchType } };
 				}),
 				(transformSuggestResponse.query = function (response) {
 					return null != response && response.query ? { query: response.query } : {};
@@ -23657,6 +23659,9 @@
 										var data = utils_cookies.get(this.key);
 										data && (this.state = JSON.parse(data));
 									}
+									break;
+								default:
+									this.type = StorageType.MEMORY;
 							}
 					}
 					return (
@@ -23749,7 +23754,7 @@
 					);
 				})();
 			!(function (StorageType) {
-				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie');
+				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie'), (StorageType.MEMORY = 'memory');
 			})(StorageType || (StorageType = {}));
 			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
@@ -23915,7 +23920,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.24.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.25.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24311,7 +24316,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.24.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.25.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -28111,6 +28116,7 @@
 						null != search &&
 							search.originalQuery &&
 							((this.originalQuery = new QueryStore_Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
+						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.LO)),
 						(0, mobx_esm.rC)(this, observables);
 				}),
 				QueryStore_Query = Stores_QueryStore_createClass(function Query(services, query) {

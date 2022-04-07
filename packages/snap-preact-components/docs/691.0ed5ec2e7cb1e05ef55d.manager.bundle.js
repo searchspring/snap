@@ -1,4 +1,4 @@
-/*! For license information please see 691.dce42e54f296f62370dd.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 691.0ed5ec2e7cb1e05ef55d.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[691],
 	{
@@ -8469,7 +8469,7 @@
 						mode = _ref.mode,
 						fullAPI = _ref.fullAPI,
 						dismissedVersionNotification = store.getState().dismissedVersionNotification,
-						state = { versions: Object.assign({ current: { version: '6.4.19' } }, getVersionCheckData()), dismissedVersionNotification },
+						state = { versions: Object.assign({ current: { version: '6.4.20' } }, getVersionCheckData()), dismissedVersionNotification },
 						api = {
 							getCurrentVersion: function getCurrentVersion() {
 								return store.getState().versions.current;
@@ -16816,38 +16816,56 @@
 				}
 				return parsedPath;
 			}
-			function invariant(cond, message) {
-				if (!cond) throw new Error(message);
-			}
 			const NavigationContext = (0, react.createContext)(null);
 			const LocationContext = (0, react.createContext)(null);
 			const RouteContext = (0, react.createContext)({ outlet: null, matches: [] });
-			function react_router_Router(_ref3) {
-				let {
-					basename: basenameProp = '/',
-					children = null,
-					location: locationProp,
-					navigationType = history_Action.Pop,
-					navigator,
-					static: staticProp = !1,
-				} = _ref3;
-				useInRouterContext() && invariant(!1);
-				let basename = normalizePathname(basenameProp),
-					navigationContext = (0, react.useMemo)(() => ({ basename, navigator, static: staticProp }), [basename, navigator, staticProp]);
-				'string' == typeof locationProp && (locationProp = node_modules_history_parsePath(locationProp));
-				let { pathname = '/', search = '', hash = '', state = null, key = 'default' } = locationProp,
-					location = (0, react.useMemo)(() => {
-						let trailingPathname = stripBasename(pathname, basename);
-						return null == trailingPathname ? null : { pathname: trailingPathname, search, hash, state, key };
-					}, [basename, pathname, search, hash, state, key]);
-				return null == location
-					? null
-					: (0, react.createElement)(
-							NavigationContext.Provider,
-							{ value: navigationContext },
-							(0, react.createElement)(LocationContext.Provider, { children, value: { location, navigationType } })
-					  );
+			function invariant(cond, message) {
+				if (!cond) throw new Error(message);
 			}
+			function resolveTo(toArg, routePathnames, locationPathname) {
+				let from,
+					to = 'string' == typeof toArg ? node_modules_history_parsePath(toArg) : toArg,
+					toPathname = '' === toArg || '' === to.pathname ? '/' : to.pathname;
+				if (null == toPathname) from = locationPathname;
+				else {
+					let routePathnameIndex = routePathnames.length - 1;
+					if (toPathname.startsWith('..')) {
+						let toSegments = toPathname.split('/');
+						for (; '..' === toSegments[0]; ) toSegments.shift(), (routePathnameIndex -= 1);
+						to.pathname = toSegments.join('/');
+					}
+					from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : '/';
+				}
+				let path = (function resolvePath(to, fromPathname) {
+					void 0 === fromPathname && (fromPathname = '/');
+					let { pathname: toPathname, search = '', hash = '' } = 'string' == typeof to ? node_modules_history_parsePath(to) : to,
+						pathname = toPathname
+							? toPathname.startsWith('/')
+								? toPathname
+								: (function resolvePathname(relativePath, fromPathname) {
+										let segments = fromPathname.replace(/\/+$/, '').split('/');
+										return (
+											relativePath.split('/').forEach((segment) => {
+												'..' === segment ? segments.length > 1 && segments.pop() : '.' !== segment && segments.push(segment);
+											}),
+											segments.length > 1 ? segments.join('/') : '/'
+										);
+								  })(toPathname, fromPathname)
+							: fromPathname;
+					return { pathname, search: normalizeSearch(search), hash: normalizeHash(hash) };
+				})(to, from);
+				return toPathname && '/' !== toPathname && toPathname.endsWith('/') && !path.pathname.endsWith('/') && (path.pathname += '/'), path;
+			}
+			function stripBasename(pathname, basename) {
+				if ('/' === basename) return pathname;
+				if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) return null;
+				let nextChar = pathname.charAt(basename.length);
+				return nextChar && '/' !== nextChar ? null : pathname.slice(basename.length) || '/';
+			}
+			const joinPaths = (paths) => paths.join('/').replace(/\/\/+/g, '/'),
+				normalizePathname = (pathname) => pathname.replace(/\/+$/, '').replace(/^\/*/, '/'),
+				normalizeSearch = (search) => (search && '?' !== search ? (search.startsWith('?') ? search : '?' + search) : ''),
+				normalizeHash = (hash) => (hash && '#' !== hash ? (hash.startsWith('#') ? hash : '#' + hash) : '');
 			function useHref(to) {
 				useInRouterContext() || invariant(!1);
 				let { basename, navigator } = (0, react.useContext)(NavigationContext),
@@ -16896,50 +16914,32 @@
 					routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
 				return (0, react.useMemo)(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
 			}
-			function resolveTo(toArg, routePathnames, locationPathname) {
-				let from,
-					to = 'string' == typeof toArg ? node_modules_history_parsePath(toArg) : toArg,
-					toPathname = '' === toArg || '' === to.pathname ? '/' : to.pathname;
-				if (null == toPathname) from = locationPathname;
-				else {
-					let routePathnameIndex = routePathnames.length - 1;
-					if (toPathname.startsWith('..')) {
-						let toSegments = toPathname.split('/');
-						for (; '..' === toSegments[0]; ) toSegments.shift(), (routePathnameIndex -= 1);
-						to.pathname = toSegments.join('/');
-					}
-					from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : '/';
-				}
-				let path = (function resolvePath(to, fromPathname) {
-					void 0 === fromPathname && (fromPathname = '/');
-					let { pathname: toPathname, search = '', hash = '' } = 'string' == typeof to ? node_modules_history_parsePath(to) : to,
-						pathname = toPathname
-							? toPathname.startsWith('/')
-								? toPathname
-								: (function resolvePathname(relativePath, fromPathname) {
-										let segments = fromPathname.replace(/\/+$/, '').split('/');
-										return (
-											relativePath.split('/').forEach((segment) => {
-												'..' === segment ? segments.length > 1 && segments.pop() : '.' !== segment && segments.push(segment);
-											}),
-											segments.length > 1 ? segments.join('/') : '/'
-										);
-								  })(toPathname, fromPathname)
-							: fromPathname;
-					return { pathname, search: normalizeSearch(search), hash: normalizeHash(hash) };
-				})(to, from);
-				return toPathname && '/' !== toPathname && toPathname.endsWith('/') && !path.pathname.endsWith('/') && (path.pathname += '/'), path;
+			function react_router_Router(_ref3) {
+				let {
+					basename: basenameProp = '/',
+					children = null,
+					location: locationProp,
+					navigationType = history_Action.Pop,
+					navigator,
+					static: staticProp = !1,
+				} = _ref3;
+				useInRouterContext() && invariant(!1);
+				let basename = normalizePathname(basenameProp),
+					navigationContext = (0, react.useMemo)(() => ({ basename, navigator, static: staticProp }), [basename, navigator, staticProp]);
+				'string' == typeof locationProp && (locationProp = node_modules_history_parsePath(locationProp));
+				let { pathname = '/', search = '', hash = '', state = null, key = 'default' } = locationProp,
+					location = (0, react.useMemo)(() => {
+						let trailingPathname = stripBasename(pathname, basename);
+						return null == trailingPathname ? null : { pathname: trailingPathname, search, hash, state, key };
+					}, [basename, pathname, search, hash, state, key]);
+				return null == location
+					? null
+					: (0, react.createElement)(
+							NavigationContext.Provider,
+							{ value: navigationContext },
+							(0, react.createElement)(LocationContext.Provider, { children, value: { location, navigationType } })
+					  );
 			}
-			function stripBasename(pathname, basename) {
-				if ('/' === basename) return pathname;
-				if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) return null;
-				let nextChar = pathname.charAt(basename.length);
-				return nextChar && '/' !== nextChar ? null : pathname.slice(basename.length) || '/';
-			}
-			const joinPaths = (paths) => paths.join('/').replace(/\/\/+/g, '/'),
-				normalizePathname = (pathname) => pathname.replace(/\/+$/, '').replace(/^\/*/, '/'),
-				normalizeSearch = (search) => (search && '?' !== search ? (search.startsWith('?') ? search : '?' + search) : ''),
-				normalizeHash = (hash) => (hash && '#' !== hash ? (hash.startsWith('#') ? hash : '#' + hash) : '');
 			function react_router_dom_extends() {
 				return (
 					(react_router_dom_extends =
@@ -25932,7 +25932,6 @@
 					return {
 						display: 'none',
 						'@media (min-width: 600px)': {
-							display: 'block',
 							position: 'absolute',
 							top: 10,
 							right: 15,
@@ -25966,7 +25965,7 @@
 							return refId ? 'storybook-ref-'.concat(refId) : 'storybook-preview-iframe';
 						})(refId),
 						styles = (0, react.useMemo)(function () {
-							return { '[data-is-storybook="false"]': { visibility: 'hidden' }, '[data-is-storybook="true"]': { visibility: 'visible' } };
+							return { '#root [data-is-storybook="false"]': { display: 'none' }, '#root [data-is-storybook="true"]': { display: 'block' } };
 						}, []),
 						_useState2 = FramesRenderer_slicedToArray(
 							(0, react.useState)({
@@ -40898,33 +40897,6 @@
 				);
 			};
 		},
-		74670: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var toStr = Object.prototype.toString,
-				isPrimitive = __webpack_require__(53919),
-				isCallable = __webpack_require__(9680),
-				ES5internalSlots___DefaultValue__ = function (O) {
-					var actualHint;
-					if (
-						(actualHint = arguments.length > 1 ? arguments[1] : '[object Date]' === toStr.call(O) ? String : Number) === String ||
-						actualHint === Number
-					) {
-						var value,
-							i,
-							methods = actualHint === String ? ['toString', 'valueOf'] : ['valueOf', 'toString'];
-						for (i = 0; i < methods.length; ++i) if (isCallable(O[methods[i]]) && ((value = O[methods[i]]()), isPrimitive(value))) return value;
-						throw new TypeError('No default value');
-					}
-					throw new TypeError('invalid [[DefaultValue]] hint supplied');
-				};
-			module.exports = function ToPrimitive(input) {
-				return isPrimitive(input)
-					? input
-					: arguments.length > 1
-					? ES5internalSlots___DefaultValue__(input, arguments[1])
-					: ES5internalSlots___DefaultValue__(input);
-			};
-		},
 		53919: (module) => {
 			'use strict';
 			module.exports = function isPrimitive(value) {
@@ -52336,10 +52308,11 @@
 				hexRgbaRegex = /^#[a-fA-F0-9]{8}$/,
 				reducedHexRegex = /^#[a-fA-F0-9]{3}$/,
 				reducedRgbaHexRegex = /^#[a-fA-F0-9]{4}$/,
-				rgbRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/i,
-				rgbaRegex = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*([-+]?[0-9]*[.]?[0-9]+)\s*\)$/i,
-				hslRegex = /^hsl\(\s*(\d{0,3}[.]?[0-9]+)\s*,\s*(\d{1,3}[.]?[0-9]?)%\s*,\s*(\d{1,3}[.]?[0-9]?)%\s*\)$/i,
-				hslaRegex = /^hsla\(\s*(\d{0,3}[.]?[0-9]+)\s*,\s*(\d{1,3}[.]?[0-9]?)%\s*,\s*(\d{1,3}[.]?[0-9]?)%\s*,\s*([-+]?[0-9]*[.]?[0-9]+)\s*\)$/i;
+				rgbRegex = /^rgb\(\s*(\d{1,3})\s*(?:,)?\s*(\d{1,3})\s*(?:,)?\s*(\d{1,3})\s*\)$/i,
+				rgbaRegex = /^rgb(?:a)?\(\s*(\d{1,3})\s*(?:,)?\s*(\d{1,3})\s*(?:,)?\s*(\d{1,3})\s*(?:,|\/)\s*([-+]?[0-9]*[.]?[0-9]?[0-9]?[%]?)\s*\)$/i,
+				hslRegex = /^hsl\(\s*(\d{0,3}[.]?[0-9]+(?:deg)?)\s*(?:,)?\s*(\d{1,3}[.]?[0-9]?)%\s*(?:,)?\s*(\d{1,3}[.]?[0-9]?)%\s*\)$/i,
+				hslaRegex =
+					/^hsl(?:a)?\(\s*(\d{0,3}[.]?[0-9]+(?:deg)?)\s*(?:,)?\s*(\d{1,3}[.]?[0-9]?)%\s*(?:,)?\s*(\d{1,3}[.]?[0-9]?)%\s*(?:,|\/)\s*([-+]?[0-9]*[.]?[0-9]?[0-9]?[%]?)\s*\)$/i;
 			function parseToRgb(color) {
 				if ('string' != typeof color) throw new PolishedError(3);
 				var normalizedColor = (function nameToHex(color) {
@@ -52386,7 +52359,7 @@
 						red: parseInt('' + rgbaMatched[1], 10),
 						green: parseInt('' + rgbaMatched[2], 10),
 						blue: parseInt('' + rgbaMatched[3], 10),
-						alpha: parseFloat('' + rgbaMatched[4]),
+						alpha: parseFloat('' + rgbaMatched[4]) > 1 ? parseFloat('' + rgbaMatched[4]) / 100 : parseFloat('' + rgbaMatched[4]),
 					};
 				var hslMatched = hslRegex.exec(normalizedColor);
 				if (hslMatched) {
@@ -52410,7 +52383,7 @@
 						red: parseInt('' + _hslRgbMatched[1], 10),
 						green: parseInt('' + _hslRgbMatched[2], 10),
 						blue: parseInt('' + _hslRgbMatched[3], 10),
-						alpha: parseFloat('' + hslaMatched[4]),
+						alpha: parseFloat('' + hslaMatched[4]) > 1 ? parseFloat('' + hslaMatched[4]) / 100 : parseFloat('' + hslaMatched[4]),
 					};
 				}
 				throw new PolishedError(5);
@@ -62368,7 +62341,7 @@
 		59042: function (module) {
 			!(function (window, define) {
 				var _ = {
-						version: '2.13.1',
+						version: '2.13.2',
 						areas: {},
 						apis: {},
 						inherit: function (api, o) {
@@ -62674,6 +62647,7 @@
 				ToString = __webpack_require__(35906),
 				Type = __webpack_require__(18132),
 				flagsGetter = __webpack_require__(82201),
+				$indexOf = __webpack_require__(62680)('String.prototype.indexOf'),
 				OrigRegExp = RegExp,
 				supportsConstructingWithFlags = 'flags' in RegExp.prototype,
 				regexMatchAll = function SymbolMatchAll(string) {
@@ -62691,8 +62665,8 @@
 						matcher = tmp.matcher,
 						lastIndex = ToLength(Get(R, 'lastIndex'));
 					Set(matcher, 'lastIndex', lastIndex, !0);
-					var global = flags.indexOf('g') > -1,
-						fullUnicode = flags.indexOf('u') > -1;
+					var global = $indexOf(flags, 'g') > -1,
+						fullUnicode = $indexOf(flags, 'u') > -1;
 					return CreateRegExpStringIterator(matcher, S, global, fullUnicode);
 				},
 				defineP = Object.defineProperty,
@@ -64026,10 +64000,10 @@
 		},
 		72026: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var $Object = __webpack_require__(67286)('%Object%'),
-				isPrimitive = __webpack_require__(45819),
-				$preventExtensions = $Object.preventExtensions,
-				$isExtensible = $Object.isExtensible;
+			var GetIntrinsic = __webpack_require__(67286),
+				$preventExtensions = GetIntrinsic('%Object.preventExtensions%', !0),
+				$isExtensible = GetIntrinsic('%Object.isExtensible%', !0),
+				isPrimitive = __webpack_require__(45819);
 			module.exports = $preventExtensions
 				? function IsExtensible(obj) {
 						return !isPrimitive(obj) && $isExtensible(obj);
@@ -64301,11 +64275,15 @@
 		},
 		76113: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var ES5ToInteger = __webpack_require__(4906),
-				ToNumber = __webpack_require__(84583);
-			module.exports = function ToInteger(value) {
+			var abs = __webpack_require__(46382),
+				floor = __webpack_require__(26827),
+				ToNumber = __webpack_require__(84583),
+				$isNaN = __webpack_require__(97911),
+				$isFinite = __webpack_require__(51832),
+				$sign = __webpack_require__(79747);
+			module.exports = function ToIntegerOrInfinity(value) {
 				var number = ToNumber(value);
-				return 0 !== number && (number = ES5ToInteger(number)), 0 === number ? 0 : number;
+				return $isNaN(number) || 0 === number ? 0 : $isFinite(number) ? $sign(number) * floor(abs(number)) : number;
 			};
 		},
 		69808: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -64439,7 +64417,7 @@
 				$fromCharCode = GetIntrinsic('%String.fromCharCode%'),
 				isLeadingSurrogate = __webpack_require__(24628),
 				isTrailingSurrogate = __webpack_require__(14495);
-			module.exports = function UTF16DecodeSurrogatePair(lead, trail) {
+			module.exports = function UTF16SurrogatePairToCodePoint(lead, trail) {
 				if (!isLeadingSurrogate(lead) || !isTrailingSurrogate(trail))
 					throw new $TypeError('Assertion failed: `lead` must be a leading surrogate char code, and `trail` must be a trailing surrogate char code');
 				return $fromCharCode(lead) + $fromCharCode(trail);
@@ -64467,36 +64445,6 @@
 				return value;
 			};
 		},
-		4906: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var abs = __webpack_require__(78483),
-				floor = __webpack_require__(53114),
-				ToNumber = __webpack_require__(92123),
-				$isNaN = __webpack_require__(97911),
-				$isFinite = __webpack_require__(51832),
-				$sign = __webpack_require__(79747);
-			module.exports = function ToInteger(value) {
-				var number = ToNumber(value);
-				return $isNaN(number) ? 0 : 0 !== number && $isFinite(number) ? $sign(number) * floor(abs(number)) : number;
-			};
-		},
-		92123: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var ToPrimitive = __webpack_require__(19086);
-			module.exports = function ToNumber(value) {
-				var prim = ToPrimitive(value, Number);
-				if ('string' != typeof prim) return +prim;
-				var trimmed = prim.replace(
-					/^[ \t\x0b\f\xa0\ufeff\n\r\u2028\u2029\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000\u0085]+|[ \t\x0b\f\xa0\ufeff\n\r\u2028\u2029\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000\u0085]+$/g,
-					''
-				);
-				return /^0[ob]|^[+-]0x/.test(trimmed) ? NaN : +trimmed;
-			};
-		},
-		19086: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			module.exports = __webpack_require__(74670);
-		},
 		96222: (module) => {
 			'use strict';
 			module.exports = function Type(x) {
@@ -64515,20 +64463,6 @@
 					: void 0;
 			};
 		},
-		78483: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var $abs = __webpack_require__(67286)('%Math.abs%');
-			module.exports = function abs(x) {
-				return $abs(x);
-			};
-		},
-		53114: (module) => {
-			'use strict';
-			var $floor = Math.floor;
-			module.exports = function floor(x) {
-				return $floor(x);
-			};
-		},
 		90982: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			module.exports = __webpack_require__(67286);
@@ -64542,7 +64476,7 @@
 				} catch (e) {
 					$defineProperty = null;
 				}
-			var hasArrayLengthDefineBug = Object.defineProperty && 0 === Object.defineProperty([], 'length', { value: 1 }).length,
+			var hasArrayLengthDefineBug = $defineProperty && 0 === $defineProperty([], 'length', { value: 1 }).length,
 				isArray = hasArrayLengthDefineBug && __webpack_require__(91680),
 				$isEnumerable = __webpack_require__(62680)('Object.prototype.propertyIsEnumerable');
 			module.exports = function DefineOwnProperty(IsDataDescriptor, SameValue, FromPropertyDescriptor, O, P, desc) {

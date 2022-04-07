@@ -224,8 +224,9 @@
 								var isFirefox = -1 !== navigator.userAgent.toLowerCase().indexOf('firefox');
 								if (-1 !== navigator.userAgent.indexOf('Trident') && isHTMLElement(element) && 'fixed' === getComputedStyle(element).position)
 									return null;
+								var currentNode = getParentNode(element);
 								for (
-									var currentNode = getParentNode(element);
+									isShadowRoot(currentNode) && (currentNode = currentNode.host);
 									isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0;
 
 								) {
@@ -509,11 +510,12 @@
 						placement === enums.we || ((placement === enums.t$ || placement === enums.F2) && variation === enums.ut))
 					)
 						(sideY = enums.I),
-							(y -= (isFixed && win.visualViewport ? win.visualViewport.height : offsetParent[heightProp]) - popperRect.height),
+							(y -=
+								(isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : offsetParent[heightProp]) - popperRect.height),
 							(y *= gpuAcceleration ? 1 : -1);
 					if (placement === enums.t$ || ((placement === enums.we || placement === enums.I) && variation === enums.ut))
 						(sideX = enums.F2),
-							(x -= (isFixed && win.visualViewport ? win.visualViewport.width : offsetParent[widthProp]) - popperRect.width),
+							(x -= (isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.width : offsetParent[widthProp]) - popperRect.width),
 							(x *= gpuAcceleration ? 1 : -1);
 				}
 				var _Object$assign,
