@@ -235,6 +235,10 @@ snap.getController('search').then((search) => {
 - Always invoked after data has been stored in Mobx store
 - no operation
 
+###  beforeFind
+- Called with `eventData` = { controller }
+- Invoked after invoking the `find` method, before `window.location.href` is changed
+
 ## Recommendation Events
 
 ### init

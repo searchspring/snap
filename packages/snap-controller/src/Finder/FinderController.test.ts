@@ -49,6 +49,58 @@ describe('Finder Controller', () => {
 				config.id = uuidv4().split('-').join('');
 			});
 
+			it(`can persist selections`, async () => {
+				config = {
+					...config,
+					persist: {
+						enabled: true,
+					},
+				};
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				await controller.search();
+
+				const firstSelection = controller.store.selections[0];
+				const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+				firstSelection.select(valueToSelect);
+
+				// save selections
+				await controller.find();
+
+				expect(controller.store.selections[0].selected).toBe(valueToSelect);
+
+				/**
+				 * Create a new controller with the same id to simulate a new page load
+				 */
+				delete window.searchspring.controller[config.id];
+
+				const controller2 = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				expect(controller2.store.selections[0].selected).toBe(valueToSelect);
+
+				// all selections should be disabled
+				expect(controller2.config.persist.lockSelections).toBe(true);
+				controller2.store.selections.forEach((selection) => {
+					expect(selection.disabled).toBe(true);
+				});
+			});
+
 			it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
 				const controller = new FinderController(config, {
 					client: new MockClient(globals, { meta: { prefetch: false } }),
@@ -198,9 +250,14 @@ describe('Finder Controller', () => {
 					href: null, // jest does not support window location changes
 				};
 
+				const beforeFindfn = jest.spyOn(controller.eventManager, 'fire');
 				await controller.find();
 
+				expect(beforeFindfn).toHaveBeenCalledWith('beforeFind', { controller });
+
 				expect(window.location.href).toContain(controller.urlManager.href);
+
+				beforeFindfn.mockClear();
 			});
 
 			const events = ['beforeSearch', 'afterSearch', 'afterStore'];
@@ -225,6 +282,30 @@ describe('Finder Controller', () => {
 					expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
 					spy.mockClear();
 				});
+			});
+
+			it(`tests beforeFind middleware err handled`, async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, { meta: { prefetch: false } }),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				const event = 'beforeFind';
+				controller.on(event, () => false); // return false to stop middleware
+				const spy = jest.spyOn(controller.log, 'warn');
+
+				controller.init();
+				await controller.search();
+
+				await controller.find();
+
+				expect(spy).toHaveBeenCalledWith(`'${event}' middleware cancelled`);
+				spy.mockClear();
 			});
 
 			it('can call reset method', async () => {
@@ -266,7 +347,7 @@ describe('Finder Controller', () => {
 
 			const middlewareEvents = ['beforeSearch', 'afterSearch', 'afterStore'];
 			middlewareEvents.forEach((event) => {
-				it(`tests ${event} middleware err handled`, async () => {
+				it(`logs error if middleware throws in ${event}`, async () => {
 					const controller = new FinderController(config, {
 						client: new MockClient(globals, {}),
 						store: new FinderStore(config, services),
@@ -292,6 +373,37 @@ describe('Finder Controller', () => {
 
 					logErrorfn.mockClear();
 				});
+			});
+
+			it(`logs error if middleware throws in beforeFind`, async () => {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				const event = 'beforeFind';
+				const middleware = jest.fn(() => {
+					throw new Error('middleware error');
+				});
+				controller.on(event, middleware);
+
+				expect(middleware).not.toHaveBeenCalled();
+
+				const logErrorfn = jest.spyOn(controller.log, 'error');
+				controller.init();
+				await controller.search();
+
+				await controller.find();
+
+				expect(middleware).toHaveBeenCalledTimes(1);
+				expect(logErrorfn).toHaveBeenCalledWith(`error in '${event}' middleware`);
+
+				logErrorfn.mockClear();
 			});
 
 			it('logs error if 429', async () => {
