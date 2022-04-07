@@ -229,9 +229,26 @@ export class Snap {
 				this.logger.setMode(LogMode.DEVELOPMENT);
 				this.logger.warn(`...loading build... '${branchParam}'`);
 
+				//lets try and get the siteId from the current bundle script in case there its not the same as the config.
+				let siteId;
+				try {
+					const scriptsrc = document.getElementById('searchspring-context').getAttribute('src');
+					siteId = scriptsrc
+						.split('')
+						.reverse()
+						.join('')
+						.match(/\/.+?\//)[0]
+						.split('')
+						.reverse()
+						.join('')
+						.replace(/\//g, '');
+				} catch (err) {
+					siteId = this.config.client.globals.siteId;
+				}
+
 				// append script with new branch in path
 				const script = document.createElement('script');
-				const src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
+				const src = `https://snapui.searchspring.io/${siteId}/${branchParam}/bundle.js`;
 				script.src = src;
 				script.setAttribute(BRANCH_COOKIE, '');
 				document.head.appendChild(script);
