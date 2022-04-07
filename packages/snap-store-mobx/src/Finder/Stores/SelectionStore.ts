@@ -213,11 +213,9 @@ class Selection extends SelectionBase {
 		this.state.persisted = false;
 
 		if (!value) {
-			this.services.urlManager = this.services.urlManager.remove(`filter.${this.field}`);
-			this.services.urlManager.go();
+			this.services.urlManager.remove(`filter.${this.field}`).go();
 		} else {
-			this.services.urlManager = this.services.urlManager.set(`filter.${this.field}`, value);
-			this.services.urlManager.go();
+			this.services.urlManager.set(`filter.${this.field}`, value).go();
 		}
 	}
 }
@@ -287,11 +285,9 @@ class SelectionHierarchy extends SelectionBase {
 			});
 
 		if (!value) {
-			this.services.urlManager = this.services.urlManager.remove(`filter.${this.field}`);
-			this.services.urlManager.go();
+			this.services.urlManager.remove(`filter.${this.field}`).go();
 		} else {
-			this.services.urlManager = this.services.urlManager.set(`filter.${this.field}`, value);
-			this.services.urlManager.go();
+			this.services.urlManager.set(`filter.${this.field}`, value).go();
 		}
 	}
 }

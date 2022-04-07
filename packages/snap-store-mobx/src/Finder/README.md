@@ -2,10 +2,10 @@
 The finder store is meant to hold the API response and associated selection state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
 ```typescript
-import { FinderStore } from '@searchspring/snap-store-mobx'
+import { FinderStore, FinderStoreConfig } from '@searchspring/snap-store-mobx'
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-const finderConfig = {
+const finderConfig: FinderStoreConfig = {
 	id: 'finder',
 	url: '/search',
 	fields: [
@@ -33,7 +33,7 @@ See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-s
 
 ## `config` property
 
-A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
+A reference to the `FinderStoreConfig` object that was provided to instantiate the FinderStore
 
 ## `data` property
 A reference to the data stored in the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) for this selection
@@ -48,7 +48,7 @@ A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main
 An object used for finder state.
 
 ### `persisted` property
-Then `state.persisted` property is used to determine if finder selections have been persisted. (requires `config.persist.enabled` to be `true`)
+The `state.persisted` property is used to determine if finder selections have been persisted. (requires `config.persist.enabled` to be `true`)
 
 Will be set to `true` when the `loadPersisted` method is invoked and `selections` have been persisted from local storage. 
 

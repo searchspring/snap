@@ -87,23 +87,16 @@ export class FinderController extends AbstractController {
 		await this.store.save(); // save current selections to storage
 
 		try {
-			try {
-				await this.eventManager.fire('beforeFind', {
-					controller: this,
-				});
-			} catch (err) {
-				if (err?.message == 'cancelled') {
-					this.log.warn(`'beforeFind' middleware cancelled`);
-					return;
-				} else {
-					this.log.error(`error in 'beforeFind' middleware`);
-					throw err;
-				}
-			}
+			await this.eventManager.fire('beforeFind', {
+				controller: this,
+			});
 		} catch (err) {
-			if (err) {
-				this.log.error(err);
+			if (err?.message == 'cancelled') {
+				this.log.warn(`'beforeFind' middleware cancelled`);
+			} else {
+				this.log.error(`error in 'beforeFind' middleware`);
 			}
+			return;
 		}
 
 		window.location.href = this.urlManager.href;
