@@ -30,4 +30,13 @@ describe('QueryStore store', () => {
 		expect(queryStore.didYouMean.string).toEqual(searchData.search.didYouMean);
 		expect(queryStore.didYouMean.url).toBeDefined();
 	});
+
+	it('has matchType when search data has matchType', () => {
+		const searchData = mockData.searchMeta('matchType');
+
+		const queryStore = new QueryStore(services, searchData.search);
+
+		expect(queryStore).toBeDefined();
+		expect(queryStore.matchType).toEqual(searchData.search.matchType);
+	});
 });

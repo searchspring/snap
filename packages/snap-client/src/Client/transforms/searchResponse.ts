@@ -270,12 +270,14 @@ transformSearchResponse.merchandising = (response) => {
 transformSearchResponse.search = (response, request) => {
 	const didYouMean = ((response || {}).didYouMean || {}).query;
 	const originalQuery = ((request || {}).search || {}).originalQuery;
+	const matchType = ((response || {}).query || {}).matchType;
 
 	return {
 		search: {
 			query: (((request || {}).search || {}).query || {}).string,
 			didYouMean,
 			originalQuery,
+			matchType,
 		},
 	};
 };
