@@ -40,7 +40,7 @@ export class Finder extends Component {
 									controller.reset();
 								}}
 								disabled={loading}
-								class="button button--primary searchspring-finder_submit"
+								class="button button--primary searchspring-finder_reset"
 							>
 								Reset
 							</button>
