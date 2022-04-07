@@ -130,6 +130,7 @@ export class Tracker {
 					`ss-${this.config.id}-cart-view`,
 					`ss-${this.config.id}-intellisuggest`,
 					`ss-${this.config.id}-intellisuggest-signature`,
+					`href`,
 				];
 				const attributes = {};
 				let levels = 0;
