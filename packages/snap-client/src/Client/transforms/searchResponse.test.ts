@@ -243,6 +243,12 @@ const mockDidYouMean = {
 	highlight: '<em>red</em>',
 };
 
+const mockMatchType = {
+	query: {
+		matchType: 'expanded',
+	},
+};
+
 const mockResponse = {
 	results: [mockSingleResult, mockSingleResult],
 	filterSummary: mockFilterSummary,
@@ -542,6 +548,12 @@ describe('search response search transformer facets', () => {
 
 		expect(response.search.didYouMean).toEqual(mockDidYouMean.query);
 		expect(response.search.query).toEqual(mockRequest.search.query.string);
+	});
+
+	it('has matchType', () => {
+		const response = transformSearchResponse.search(mockMatchType, mockRequest);
+
+		expect(response.search.matchType).toEqual(mockMatchType.query.matchType);
 	});
 });
 

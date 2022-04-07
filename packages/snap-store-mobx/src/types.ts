@@ -1,5 +1,5 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-
+import type { SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -41,6 +41,11 @@ export type FinderStoreConfig = StoreConfig & {
 	globals?: any;
 	url?: string;
 	fields: FinderFieldConfig[];
+	persist?: {
+		enabled: boolean;
+		lockSelections?: boolean;
+		expiration?: number;
+	};
 };
 
 export type FinderFieldConfig = {
@@ -101,3 +106,13 @@ export enum ErrorType {
 	INFO = 'info',
 	ERROR = 'error',
 }
+
+export type SelectedSelection = {
+	selected: string;
+	data: SearchResponseModelFacetValueAllOfValues[];
+	facet: any;
+};
+
+export type FinderStoreState = {
+	persisted: boolean;
+};

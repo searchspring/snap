@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Features
+
+* **controller-finder:** adding persistence configuration and functionality ([eac3ef4](https://github.com/searchspring/snap/commit/eac3ef40fc19c08a4cede96923efe861ffded8d6))
+* **wip:** finder persisting ([3a87f9a](https://github.com/searchspring/snap/commit/3a87f9ad73518ad52f2d6b07443226a5a9c1ffd8))
+
+
+
+
+
 # [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
