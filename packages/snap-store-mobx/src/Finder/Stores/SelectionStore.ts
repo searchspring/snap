@@ -1,9 +1,9 @@
-import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection } from '../../types';
+import type { FinderStoreConfig, FinderFieldConfig, StoreServices, SelectedSelection, FinderStoreState } from '../../types';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { MetaResponseModel, SearchResponseModelFacet, SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
 
 type SelectionStoreData = {
-	state: any;
+	state: FinderStoreState;
 	facets: SearchResponseModelFacet[];
 	meta: MetaResponseModel;
 	loading: boolean;
@@ -113,7 +113,7 @@ export class SelectionStore extends Array {
 }
 
 class SelectionBase {
-	state: any;
+	state: FinderStoreState;
 	type: string;
 	field: string;
 	filtered = false;
@@ -125,7 +125,7 @@ class SelectionBase {
 	disabled = false;
 	selected = '';
 	custom = {};
-	facet: any; //TODO: add typeing
+	facet: any; //TODO: add typing
 
 	services: StoreServices;
 	loading: boolean;
@@ -136,7 +136,7 @@ class SelectionBase {
 	constructor(
 		services: StoreServices,
 		id: string,
-		state: any,
+		state: FinderStoreState,
 		facet,
 		selectionConfig: FinderFieldConfig | LevelConfig,
 		loading: boolean,

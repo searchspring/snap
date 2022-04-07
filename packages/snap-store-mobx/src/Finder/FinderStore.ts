@@ -5,7 +5,7 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { PaginationStore } from '../Search/Stores';
 import { StorageStore, StorageType } from '../Storage/StorageStore';
 import { SelectionStore } from './Stores';
-import type { FinderStoreConfig, StoreServices, SelectedSelection } from '../types';
+import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
 
 export class FinderStore extends AbstractStore {
 	services: StoreServices;
@@ -16,7 +16,7 @@ export class FinderStore extends AbstractStore {
 	persistedStorage: StorageStore;
 	pagination: PaginationStore;
 	selections: SelectionStore;
-	state = {
+	state: FinderStoreState = {
 		persisted: false,
 	};
 
@@ -59,12 +59,12 @@ export class FinderStore extends AbstractStore {
 			this.persistedStorage.set('date', Date.now());
 			this.persistedStorage.set(
 				'selections',
-				this.selections.map((selection, index) => {
+				this.selections.map((selection) => {
 					return {
 						selected: selection.selected,
 						data: selection.data,
 						facet: selection.facet,
-					};
+					} as SelectedSelection;
 				})
 			);
 		}

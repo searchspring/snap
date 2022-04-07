@@ -22,18 +22,7 @@ export class Results extends Component {
 				<div class="clear"></div>
 
 				<Profile name="results" controller={controller}>
-					<ResultsComponent
-						controller={controller}
-						results={results}
-						theme={{
-							components: {
-								result: {
-									// disableStyles: true,
-									hideBadge: true,
-								},
-							},
-						}}
-					/>
+					<ResultsComponent controller={controller} results={results} />
 				</Profile>
 
 				<div class="clear"></div>

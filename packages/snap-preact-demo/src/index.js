@@ -98,9 +98,6 @@ let config = {
 								spellCorrection: true,
 							},
 						},
-						pagination: {
-							pageSize: 3,
-						},
 					},
 				},
 				targeters: [
@@ -133,10 +130,6 @@ let config = {
 							label: 'Brand',
 						},
 					],
-					// persist: {
-					// 	enabled: true,
-					// 	lockSelections: true,
-					// },
 				},
 				targeters: [
 					{
@@ -155,13 +148,8 @@ let config = {
 					fields: [
 						{
 							field: 'ss_category_hierarchy',
-							// levels: ['a', 'b', 'c'],
 						},
 					],
-					// persist: {
-					// 	enabled: true,
-					// 	lockSelections: true,
-					// },
 				},
 				targeters: [
 					{
