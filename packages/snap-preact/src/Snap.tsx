@@ -229,7 +229,7 @@ export class Snap {
 				this.logger.setMode(LogMode.DEVELOPMENT);
 				this.logger.warn(`...loading build... '${branchParam}'`);
 
-				//lets try and get the siteId from the current bundle script in case there its not the same as the config.
+				//lets try and get the siteId from the current bundle script in case its not the same as the config.
 				let siteId;
 				try {
 					const scriptsrc = document.getElementById('searchspring-context').getAttribute('src');
