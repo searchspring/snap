@@ -30,12 +30,19 @@ describe('SelectionStore', () => {
 
 		const storage = new StorageStore();
 
-		let data, store, selectionValue;
+		let data, store, selectionValue, selectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta();
-
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			selectionStoreData = {
+				state: { persisted: false },
+				facets: data.facets,
+				meta: data.meta,
+				loading: false,
+				storage: storage,
+				selections: [],
+			};
+			store = new SelectionStore(config, services, selectionStoreData);
 		});
 
 		it('has correct number of selections', () => {
@@ -68,7 +75,7 @@ describe('SelectionStore', () => {
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
 
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			store = new SelectionStore(config, services, selectionStoreData);
 
 			store.forEach((selection, index) => {
 				switch (index) {
@@ -142,14 +149,20 @@ describe('SelectionStore', () => {
 			],
 		};
 
-		let data, store, storage, selectionValue;
+		let data, store, storage, selectionValue, selectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta('hierarchy');
-
 			storage = new StorageStore();
-
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			selectionStoreData = {
+				state: { persisted: false },
+				facets: data.facets,
+				meta: data.meta,
+				loading: false,
+				storage: storage,
+				selections: [],
+			};
+			store = new SelectionStore(config, services, selectionStoreData);
 		});
 
 		it('is not using levels for this test', () => {
@@ -173,7 +186,16 @@ describe('SelectionStore', () => {
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
 
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			selectionStoreData = {
+				state: { persisted: false },
+				facets: data.facets,
+				meta: data.meta,
+				loading: false,
+				storage: storage,
+				selections: [],
+			};
+
+			store = new SelectionStore(config, services, selectionStoreData);
 
 			expect(store.length).toBe(config.fields.length + 1); // 1 -> 2 selections after selection
 
@@ -184,7 +206,7 @@ describe('SelectionStore', () => {
 	});
 
 	describe('Non-hierarchy', () => {
-		let data, store, storage, selectionValue;
+		let data, store, storage, selectionValue, selectionStoreData;
 
 		const config = {
 			id: 'finder2',
@@ -211,10 +233,16 @@ describe('SelectionStore', () => {
 
 		beforeAll(() => {
 			data = mockData.searchMeta('non_hierarchy');
-
 			storage = new StorageStore();
-
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			selectionStoreData = {
+				state: { persisted: false },
+				facets: data.facets,
+				meta: data.meta,
+				loading: false,
+				storage: storage,
+				selections: [],
+			};
+			store = new SelectionStore(config, services, selectionStoreData);
 		});
 
 		it('has correct number of selections', () => {
@@ -251,7 +279,7 @@ describe('SelectionStore', () => {
 
 			data = mockData.searchMeta('non_hierarchy_selected');
 
-			store = new SelectionStore(config, services, data.facets, data.meta, false, storage);
+			store = new SelectionStore(config, services, selectionStoreData);
 
 			expect(store[0].selected).toBe(selectionValue);
 
