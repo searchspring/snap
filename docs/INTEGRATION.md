@@ -58,6 +58,7 @@ Similar to the above context variables however these do not apply globally. They
 ```html
 <script type="searchspring/recommend" profile="similar">
     product = "C-AD-W1-1869P";
+    cart = ['C-AD-W1-1869P'];
     options = {
 		siteId: 'abc123',
 		categories: ['righteous', 'awesome', 'radical'],
@@ -79,6 +80,7 @@ Similar to the above context variables however these do not apply globally. They
 | Option | Value | Page | Description |
 |---|---|:---:|---|
 | product | current product sku | product detail page | required if product detail pages contain recommendations |
+| cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |
 | options.categories | category path | all | optional category path |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template |
@@ -339,7 +341,7 @@ window.tracker.track.product.click({
 
 This is not required if the above `Cart View` and `Order Transaction` tracking has not been implemented OR you are not using the `realtime` recommendations configuration. 
 
-Adding the following attributes allows for real-time updates to any recommendations (disabled by default) when the cart changes.
+Adding the following attributes to clickable cart elements allows for real-time updates to any recommendations (disabled by default) when the cart changes. If the click event occurs on a nested element, the attribute data will attempt to be retrieved from up to 3 parent nodes.
 
 If you are using multiple custom Tracker instances with a different tracker `config.id`, attributes are namespaced by the trackers `id` (Default: `'track'`, Example: `ss-track-cart-add`)
 
@@ -382,4 +384,11 @@ Alternatively, this can also be integrated using the `window.tracker.cookies.car
 
 ```typescript
 window.tracker.cookies.cart.clear()
+```
+
+### View cart
+Allows for real-time updates to any recommendations when an element with this attribute is clicked.
+
+```html
+<button ss-track-cart-view>View Cart</button>
 ```
