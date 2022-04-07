@@ -61,7 +61,9 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 
 ```html
 <script type="searchspring/track/shopper/login">
-    id = 'snapdev';
+    shopper = {
+		id: 'snapdev',
+	};
 </script>
 ```
 

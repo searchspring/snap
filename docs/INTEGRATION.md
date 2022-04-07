@@ -64,6 +64,15 @@ Similar to the above context variables however these do not apply globally. They
         branch: 'production',
         batched: true
 	};
+    shopper = {
+		id: 'snapdev',
+		cart: [
+			{
+                sku: 'product123', 
+                childSku: 'product123_a' ,
+            }
+		]
+	};
 </script>
 ```
 

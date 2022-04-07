@@ -2,7 +2,7 @@
 
 Renders a carousel of product recommendations, built using the Carousel Component.
 
-If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` to avoid unexpected tracking behaviour.
+If using children, the provided children elements array length and order must match the results stored in the `controller.store.results` (or `results` prop) to avoid unexpected tracking behaviour.
 
 Any modification to the results array and data are recommended to be made using an `afterSearch` and/or `afterStore` event via the Controller instead of making modifications in the component.
 
@@ -27,6 +27,15 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 
 ```jsx
 <Recommendation controller={controller} loop={true} />
+```
+
+### results
+The `results` prop specifies a reference to the results store array to use instead of the default `controller.store.results`
+
+If using children, the provided children elements array length and order must match the results stored in the `results` prop to avoid unexpected tracking behaviour.
+
+```jsx
+<Recommendation controller={controller} results={controller.store.results} />
 ```
 
 ### title

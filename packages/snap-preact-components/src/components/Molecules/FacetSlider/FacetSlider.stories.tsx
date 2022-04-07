@@ -49,6 +49,7 @@ export default {
 			control: { type: 'boolean' },
 		},
 		tickSize: {
+			defaultValue: 20,
 			description: 'distance between ticks',
 			table: {
 				type: {

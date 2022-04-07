@@ -31,6 +31,8 @@ Contains information about the query that was requested from the Search API.
 
 `search.originalQuery` - Query object - original query if spell correction occurred
 
+`search.matchType` - string - Indicates the type of search matching that was required for this search. Will return `expanded` when an Expanded Search is applied after finding zero results for the initial strict search. 
+
 ### Query object
 An Query object contains the respective query `string` and generated query `url`.
 
