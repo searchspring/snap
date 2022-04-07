@@ -95,6 +95,7 @@ export class FinderController extends AbstractController {
 				this.log.warn(`'beforeFind' middleware cancelled`);
 			} else {
 				this.log.error(`error in 'beforeFind' middleware`);
+				this.log.error(err);
 			}
 			return;
 		}
