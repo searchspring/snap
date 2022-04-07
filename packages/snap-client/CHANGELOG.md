@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Features
+
+* add matchType to QueryStore and supporting client transform ([2f01e81](https://github.com/searchspring/snap/commit/2f01e81c0fdf9a1f6cef7203f07d536ae91c8412))
+
+
+
+
+
 # [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
 
 **Note:** Version bump only for package @searchspring/snap-client
