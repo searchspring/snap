@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batched recommendations not spreading all params ([7b59ad8](https://github.com/searchspring/snap/commit/7b59ad85c0a7b5721e66e76c4dac4f981c50507f))
+
+
+
+
+
 # [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
 
 
