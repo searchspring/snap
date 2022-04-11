@@ -92,13 +92,13 @@ describe('Middleware Manager', () => {
 		const middlewareManager = new MiddlewareManager();
 		const testFunc = jest.fn();
 
-		const fn1 = (context, next) => {
+		const fn1 = (_context: any, next: any) => {
 			testFunc();
 			next();
 			testFunc();
 		};
 
-		const fn2 = (context, next) => {
+		const fn2 = (_context: any, next: any) => {
 			testFunc();
 			next();
 			testFunc();
@@ -114,14 +114,14 @@ describe('Middleware Manager', () => {
 		const middlewareManager = new MiddlewareManager();
 		const testFunc = jest.fn();
 
-		const fn1 = (context, next) => {
+		const fn1 = (_context: any, next: any) => {
 			testFunc();
 			// next();
 			testFunc();
 		};
 
 		// function will never be called
-		const fn2 = (context, next) => {
+		const fn2 = (_context: any, next: any) => {
 			testFunc();
 			next();
 			testFunc();
@@ -135,10 +135,10 @@ describe('Middleware Manager', () => {
 
 	it(`throws when an attached function returns 'false'`, async () => {
 		const middlewareManager = new MiddlewareManager();
-		const testFunc = (context, next) => {
+		const testFunc = (_context: any, next: any) => {
 			next();
 		};
-		const anotherTestFunc = (context, next) => {
+		const anotherTestFunc = (_context: any, next: any) => {
 			return false;
 			next();
 		};

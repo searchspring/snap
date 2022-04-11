@@ -24,7 +24,7 @@ export class MiddlewareManager<T> {
 	}
 
 	public async dispatch(context?: T): Promise<void> {
-		const cancelling = await runFunctionsWithAbortWrapper(context, this.functions);
+		const cancelling = await runFunctionsWithAbortWrapper(context || ({} as T), this.functions);
 
 		if (cancelling == true) {
 			throw new Error('cancelled');
