@@ -21131,15 +21131,12 @@
 																return (
 																	(key = hashParams(otherParams)),
 																	'batched' in otherParams && (otherParams.batched && (key = otherParams.siteId), delete otherParams.batched),
-																	(this.batches[key] = this.batches[key] || {
-																		timeout: null,
-																		request: Object.assign({ tags: [], limits: [] }, otherParams),
-																		deferreds: [],
-																	}),
+																	(this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] }),
 																	(paramBatch = this.batches[key]),
 																	(deferred = new Deferred()),
 																	paramBatch.request.tags.push(tag),
 																	(paramBatch.request.limits = paramBatch.request.limits.concat(limits)),
+																	(paramBatch.request = cjs_default()(paramBatch.request, otherParams)),
 																	paramBatch.deferreds.push(deferred),
 																	window.clearTimeout(paramBatch.timeout),
 																	(paramBatch.timeout = window.setTimeout(
@@ -21188,7 +21185,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 15:
+															case 16:
 															case 'end':
 																return _context3.stop();
 														}
@@ -23920,7 +23917,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.25.0' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.25.1' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24316,7 +24313,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.25.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.25.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
