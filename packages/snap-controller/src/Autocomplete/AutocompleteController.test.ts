@@ -566,8 +566,7 @@ describe('Autocomplete Controller', () => {
 		inputEl.dispatchEvent(new Event('keyup'));
 
 		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
-		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
-
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY + 100));
 		expect(controller.store.search.originalQuery).toBeDefined();
 
 		delete window.location;
