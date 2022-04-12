@@ -221,22 +221,12 @@ describe('Network Cache', () => {
 		});
 
 		it('can use the get function', async () => {
-			// @ts-ignore
-			let memoryCache = cache.memoryCache;
-
-			expect(memoryCache).toBeDefined();
-
 			const getterResponse = cache.get('key');
 
 			expect(getterResponse).toEqual(typedResponse);
 		});
 
 		it('can use the get & clear function', async () => {
-			// @ts-ignore
-			let memoryCache = cache.memoryCache;
-
-			expect(memoryCache).toBeDefined();
-
 			const getterResponse = cache.get('key');
 
 			expect(getterResponse).toEqual(typedResponse);
@@ -250,11 +240,6 @@ describe('Network Cache', () => {
 		});
 
 		it('the get function returns undefined when it finds no key', async () => {
-			// @ts-ignore
-			let memoryCache = cache.memoryCache;
-
-			expect(memoryCache).toBeDefined();
-
 			const getterResponse = cache.get('thisdoesntexist');
 
 			expect(getterResponse).toEqual(undefined);

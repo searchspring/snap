@@ -44,29 +44,26 @@ describe('Abstract Api', () => {
 		expect(api.fetchApi).toBeDefined();
 	});
 
+	const customHeaders: HTTPHeaders = {
+		customheader: 'customkey',
+	};
+
+	let CustomCacheConfig = {
+		ttl: 2222,
+		enabled: false,
+		maxSize: 4, // KB
+		purgeable: false,
+	};
+
+	// set up
+	const fetchfn = jest
+		.spyOn(global.window, 'fetch')
+		.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve() } as unknown as Response));
+
 	it('can pass in all the props', async () => {
-		// set up
-		const fetchfn = jest
-			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ json: () => Promise.resolve() } as unknown as Response));
-
-		let queryParamMockfn = jest.fn(() => 'here');
-
-		const customHeaders: HTTPHeaders = {
-			customheader: 'customkey',
-		};
-
-		let CustomCacheConfig = {
-			ttl: 2222,
-			enabled: false,
-			maxSize: 4, // KB
-			purgeable: false,
-		};
-
 		let config: ApiConfigurationParameters = {
 			origin: 'https://searchspring.com',
 			fetchApi: global.window.fetch,
-			queryParamsStringify: queryParamMockfn,
 			headers: customHeaders,
 			maxRetry: 2,
 			cache: CustomCacheConfig,
@@ -99,10 +96,42 @@ describe('Abstract Api', () => {
 
 		//reset
 		fetchfn.mockClear();
+	});
+
+	it('can pass pass in queryParamsStringify', async () => {
+		let queryParamMockfn = jest.fn(() => 'here');
+
+		let config: ApiConfigurationParameters = {
+			origin: 'https://searchspring.com',
+			fetchApi: global.window.fetch,
+			queryParamsStringify: queryParamMockfn,
+		};
+
+		let api;
+		// end set up
+
+		expect(() => {
+			api = new API(new ApiConfiguration(config));
+		}).not.toThrow();
 
 		//can use query params stringify
 		expect(api.configuration.queryParamsStringify(['string', 'thing'])).toBe('here');
 		expect(queryParamMockfn).toHaveBeenCalled();
+	});
+
+	it('can use createFetchParams', async () => {
+		let config: ApiConfigurationParameters = {
+			origin: 'https://searchspring.com',
+			fetchApi: global.window.fetch,
+			headers: customHeaders,
+		};
+
+		let api;
+		// end set up
+
+		expect(() => {
+			api = new API(new ApiConfiguration(config));
+		}).not.toThrow();
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -137,14 +166,33 @@ describe('Abstract Api', () => {
 		// @ts-ignore
 		const params = api2.createFetchParams(contextWithQuery);
 		expect(params.url).toBe('https://searchspring.com/api/v1/autocomplete?key=value');
+	});
+
+	it('can use cacheKey', async () => {
+		let config: ApiConfigurationParameters = {
+			origin: 'https://searchspring.com',
+			fetchApi: global.window.fetch,
+			headers: customHeaders,
+		};
+
+		let api;
+		expect(() => {
+			api = new API(new ApiConfiguration(config));
+		}).not.toThrow();
+
+		const body = { siteId: '8uyt2m' };
+		const context = {
+			path: '/api/v1/autocomplete',
+			method: 'POST',
+			headers: config.headers,
+			body: body,
+		};
 
 		//can use the cacheKey
 		const cacheKey = '/api/v1/autocomplete' + JSON.stringify(body);
 
 		let request;
-		try {
-			request = await api.request(context, cacheKey);
-		} catch (err) {}
+		request = await api.request(context, cacheKey);
 
 		expect(fetchfn).toHaveBeenCalled();
 
@@ -162,9 +210,7 @@ describe('Abstract Api', () => {
 		api.cache.get = getCache;
 
 		//no cache key
-		try {
-			request = await api.request(context);
-		} catch (err) {}
+		request = await api.request(context);
 		expect(fetchfn200).toHaveBeenCalled();
 		expect(request).toEqual({ found: true });
 		expect(setCache).not.toHaveBeenCalled();
@@ -173,9 +219,7 @@ describe('Abstract Api', () => {
 		fetchfn200.mockClear();
 
 		//with a cache key
-		try {
-			request = await api.request(context, cacheKey);
-		} catch (err) {}
+		request = await api.request(context, cacheKey);
 
 		expect(request).not.toEqual({ found: true });
 		expect(request).toEqual({ foundInCache: true });
@@ -184,15 +228,37 @@ describe('Abstract Api', () => {
 		expect(getCache).toHaveBeenCalled();
 
 		fetchfn200.mockClear();
+	});
+
+	it('can handle 429s', async () => {
+		let config: ApiConfigurationParameters = {
+			origin: 'https://searchspring.com',
+			fetchApi: global.window.fetch,
+			headers: customHeaders,
+			maxRetry: 2,
+		};
+
+		let api;
+		expect(() => {
+			api = new API(new ApiConfiguration(config));
+		}).not.toThrow();
+
+		const body = { siteId: '8uyt2m' };
+		const context = {
+			path: '/api/v1/autocomplete',
+			method: 'POST',
+			headers: config.headers,
+			body: body,
+		};
 
 		//can handle 429s and retry correct amount of times.
 		const fetchfn429 = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 429, json: () => Promise.resolve({ broken: true }) } as unknown as Response));
 
-		try {
-			expect(await api.request(context)).toThrow();
-		} catch (err) {}
+		await expect(async () => {
+			await api.request(context);
+		}).rejects.toBe(429);
 
 		expect(fetchfn429).toHaveBeenCalledTimes(config.maxRetry + 1);
 	});

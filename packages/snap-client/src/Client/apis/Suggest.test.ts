@@ -19,117 +19,101 @@ describe('Suggest Api', () => {
 		expect(api.postTrending).toBeDefined();
 	});
 
-	it('can call getSuggest', () => {
+	it('can call getSuggest', async () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
 
-		//@ts-ignore
-		api.request = requestMock;
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+
 		const params = {
+			body: undefined,
 			headers: {},
 			method: 'GET',
-			path: '/api/suggest/query',
-			query: {
-				query: 'dress',
-				siteId: '8uyt2m',
-			},
 		};
-		const cacheKey = '/api/suggest/query{"siteId":"8uyt2m","query":"dress"}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/suggest/query?siteId=8uyt2m&query=dress';
 
-		api.getSuggest({
+		await api.getSuggest({
 			siteId: '8uyt2m',
 			query: 'dress',
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
-		requestMock.mockReset();
+		requestMock.mockClear();
 	});
 
-	it('can call postSuggest', () => {
+	it('can call postSuggest', async () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
-
-		//@ts-ignore
-		api.request = requestMock;
 
 		const params = {
-			body: {
-				query: 'dress',
-				siteId: '8uyt2m',
-			},
+			body: '{"siteId":"88uyt2m","query":"dress"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
-			path: '/api/suggest/query',
 		};
-		const cacheKey = '/api/suggest/query{"siteId":"8uyt2m","query":"dress"}';
+		const requestUrl = 'https://88uyt2m.a.searchspring.io/api/suggest/query';
 
-		api.postSuggest({
-			siteId: '8uyt2m',
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+
+		await api.postSuggest({
+			siteId: '88uyt2m',
 			query: 'dress',
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
 		requestMock.mockReset();
 	});
 
-	it('can call getTrending', () => {
+	it('can call getTrending', async () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
-
-		//@ts-ignore
-		api.request = requestMock;
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
 
 		const params = {
+			body: undefined,
 			headers: {},
 			method: 'GET',
-			path: '/api/suggest/trending',
-			query: {
-				siteId: '8uyt2m',
-				limit: 4,
-			},
 		};
-		const cacheKey = '/api/suggest/trending{"siteId":"8uyt2m","limit":4}';
 
-		api.getTrending({
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/suggest/trending?siteId=8uyt2m&limit=4';
+
+		await api.getTrending({
 			siteId: '8uyt2m',
 			limit: 4,
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
 		requestMock.mockReset();
 	});
 
-	it('can call postTrending', () => {
+	it('can call postTrending', async () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
-
-		//@ts-ignore
-		api.request = requestMock;
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
 
 		const params = {
-			body: {
-				limit: 4,
-				siteId: '8uyt2m',
-			},
+			body: '{"siteId":"8uuyt2m","limit":4}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
-			path: '/api/suggest/trending',
 		};
-		const cacheKey = '/api/suggest/trending{"siteId":"8uyt2m","limit":4}';
+		const requestUrl = 'https://8uuyt2m.a.searchspring.io/api/suggest/trending';
 
-		api.postTrending({
-			siteId: '8uyt2m',
+		await api.postTrending({
+			siteId: '8uuyt2m',
 			limit: 4,
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
 		requestMock.mockReset();
 	});

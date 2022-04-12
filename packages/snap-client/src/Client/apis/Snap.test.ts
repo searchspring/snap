@@ -17,77 +17,71 @@ describe('Snap Api', () => {
 		expect(api.postAutocomplete).toBeDefined();
 	});
 
-	it('can call postMeta', () => {
+	it('can call postMeta', async () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
 
-		//@ts-ignore
-		api.request = requestMock;
 		const metaParams = {
-			body: {
-				siteId: '8uyt2m',
-			},
+			body: '{"siteId":"8uyt2m"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
-			path: '/api/v1/meta',
 		};
-		const cacheKey = '/api/v1/meta{"siteId":"8uyt2m"}';
 
-		api.postMeta({
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/meta';
+
+		await api.postMeta({
 			siteId: '8uyt2m',
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(metaParams, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, metaParams);
 
 		requestMock.mockReset();
 	});
 
-	it('can call postSearch', () => {
+	it('can call postSearch', async () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
-
-		//@ts-ignore
-		api.request = requestMock;
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
 
 		const searchParams = {
-			body: {},
+			body: '{"siteId":"8uyt2m"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
-			path: '/api/v1/search',
 		};
-		const cacheKey = '/api/v1/search{}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/search';
 
-		api.postSearch({});
+		await api.postSearch({ siteId: '8uyt2m' });
 
-		expect(requestMock).toHaveBeenCalledWith(searchParams, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, searchParams);
 
 		requestMock.mockReset();
 	});
 
-	it('can call postAutocomplete', () => {
+	it('can call postAutocomplete', async () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
-
-		//@ts-ignore
-		api.request = requestMock;
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
 
 		const searchParams = {
-			body: {},
+			body: '{"siteId":"8uyt2m"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
-			path: '/api/v1/autocomplete',
 		};
-		const cacheKey = '/api/v1/autocomplete{}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/autocomplete';
 
-		api.postAutocomplete({});
+		await api.postAutocomplete({ siteId: '8uyt2m' });
 
-		expect(requestMock).toHaveBeenCalledWith(searchParams, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, searchParams);
 
 		requestMock.mockReset();
 	});

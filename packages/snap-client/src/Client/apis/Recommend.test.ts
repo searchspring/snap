@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { RecommendAPI } from './Recommend';
 
-describe('Legacy Api', () => {
+describe('Recommend Api', () => {
 	it('has expected default functions', () => {
 		let api;
 
@@ -21,90 +21,80 @@ describe('Legacy Api', () => {
 		expect(api.postRecommendations).toBeDefined();
 	});
 
-	it('can call getProfile', () => {
+	it('can call getProfile', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
 
-		//@ts-ignore
-		api.request = requestMock;
 		const params = {
+			body: undefined,
 			headers: {},
 			method: 'GET',
-			path: '/api/personalized-recommendations/profile.json',
-			query: {
-				siteId: '8uyt2m',
-				tag: 'dress',
-			},
 		};
 
-		const cacheKey = '/api/personalized-recommendations/profile.json{"siteId":"8uyt2m","tag":"dress"}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/personalized-recommendations/profile.json?siteId=8uyt2m&tag=dress';
 
-		api.getProfile({
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+
+		await api.getProfile({
 			siteId: '8uyt2m',
 			tag: 'dress',
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
-		requestMock.mockReset();
+		requestMock.mockClear();
 	});
 
-	it('can call getRecommendations', () => {
+	it('can call getRecommendations', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
 
-		//@ts-ignore
-		api.request = requestMock;
 		const params = {
 			method: 'GET',
-			path: '/boost/8uyt2m/recommend',
 			headers: {},
-			query: {
-				siteId: '8uyt2m',
-				tags: ['dress'],
-			},
 		};
 
-		const cacheKey = '/boost/8uyt2m/recommend{"siteId":"8uyt2m","tags":["dress"]}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?siteId=8uyt2m&tags=dress';
 
-		api.getRecommendations({
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+
+		await api.getRecommendations({
 			siteId: '8uyt2m',
 			tags: ['dress'],
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
-		requestMock.mockReset();
+		requestMock.mockClear();
 	});
 
-	it('can call postRecommendations', () => {
+	it('can call postRecommendations', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
-		const requestMock = jest.spyOn(global.window, 'fetch');
 
-		//@ts-ignore
-		api.request = requestMock;
 		const params = {
 			method: 'POST',
-			path: '/boost/8uyt2m/recommend',
+			body: '{"siteId":"88uyt2m","tags":["dress"]}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: {
-				siteId: '8uyt2m',
-				tags: ['dress'],
-			},
 		};
 
-		const cacheKey = '/boost/8uyt2m/recommend{"siteId":"8uyt2m","tags":["dress"]}';
+		const requestUrl = 'https://88uyt2m.a.searchspring.io/boost/88uyt2m/recommend';
 
-		api.postRecommendations({
-			siteId: '8uyt2m',
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+
+		await api.postRecommendations({
+			siteId: '88uyt2m',
 			tags: ['dress'],
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
-		requestMock.mockReset();
+		requestMock.mockClear();
 	});
 
 	it('can call batchRecommendations', async () => {
@@ -141,10 +131,6 @@ describe('Legacy Api', () => {
 			},
 		];
 
-		const requestMock = jest.spyOn(global.window, 'fetch').mockResolvedValue(response as unknown as Response);
-
-		//@ts-ignore
-		api.request = requestMock;
 		const params = {
 			method: 'GET',
 			path: '/boost/8uyt2m/recommend',
@@ -156,18 +142,20 @@ describe('Legacy Api', () => {
 			},
 		};
 
-		const cacheKey = '/boost/8uyt2m/recommend{"tags":["similar"],"limits":[null],"siteId":"8uyt2m"}';
+		const requestUrl = '/boost/8uyt2m/recommend{"tags":["similar"],"limits":[null],"siteId":"8uyt2m"}';
 
-		expect(
-			api.batchRecommendations({
-				siteId: '8uyt2m',
-				tags: ['similar'],
-			})
-		).resolves.not.toThrow();
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as unknown as Response));
+
+		await api.batchRecommendations({
+			siteId: '8uyt2m',
+			tags: ['similar'],
+		});
 
 		//add delay for paramBatch.timeout
 		setTimeout(() => {
-			expect(requestMock).toHaveBeenCalledWith(params, cacheKey);
+			expect(requestMock).toHaveBeenCalledWith(params, requestUrl);
 
 			requestMock.mockReset();
 		}, 400);
