@@ -35,6 +35,7 @@ const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 15;
+const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
@@ -110,11 +111,6 @@ export class Tracker {
 		});
 
 		document.addEventListener('click', (event: Event) => {
-			const attributes = {};
-			Object.values((event.target as HTMLElement).attributes).forEach((attr: Attr) => {
-				attributes[attr.nodeName] = (event.target as HTMLElement).getAttribute(attr.nodeName);
-			});
-
 			const updateRecsControllers = (): void => {
 				if (window.searchspring.controller) {
 					Object.keys(window.searchspring.controller).forEach((name) => {
@@ -125,6 +121,38 @@ export class Tracker {
 					});
 				}
 			};
+
+			const getClickAttributes = (event: Event): Record<string, any> => {
+				const attributeList = [
+					`ss-${this.config.id}-cart-add`,
+					`ss-${this.config.id}-cart-remove`,
+					`ss-${this.config.id}-cart-clear`,
+					`ss-${this.config.id}-cart-view`,
+					`ss-${this.config.id}-intellisuggest`,
+					`ss-${this.config.id}-intellisuggest-signature`,
+					`href`,
+				];
+				const attributes = {};
+				let levels = 0;
+				let elem = event && (event.target as HTMLElement);
+
+				while (Object.keys(attributes).length == 0 && elem && levels <= MAX_PARENT_LEVELS) {
+					Object.values(elem.attributes).forEach((attr: Attr) => {
+						var attrName = attr.nodeName;
+
+						if (attributeList.indexOf(attrName) != -1) {
+							attributes[attrName] = elem.getAttribute(attrName);
+						}
+					});
+
+					elem = elem.parentElement;
+					levels++;
+				}
+
+				return attributes;
+			};
+
+			const attributes = getClickAttributes(event);
 
 			if (attributes[`ss-${this.config.id}-cart-add`]) {
 				// add skus to cart
@@ -139,6 +167,9 @@ export class Tracker {
 			} else if (`ss-${this.config.id}-cart-clear` in attributes) {
 				// clear all from cart
 				this.cookies.cart.clear();
+				updateRecsControllers();
+			} else if (`ss-${this.config.id}-cart-view` in attributes) {
+				// update recs
 				updateRecsControllers();
 			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
 				// product click
