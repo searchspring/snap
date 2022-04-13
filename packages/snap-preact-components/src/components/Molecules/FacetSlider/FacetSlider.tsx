@@ -171,6 +171,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	if (isNaN(Number(tickSize)) || Number(tickSize) <= 0) {
 		// fallback to default (causes chrome to crash)
 		tickSize = properties.facet?.step * 10 || 20;
+	} else {
+		tickSize = Number(tickSize);
 	}
 
 	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
