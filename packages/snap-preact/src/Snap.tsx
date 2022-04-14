@@ -229,31 +229,23 @@ export class Snap {
 				this.logger.setMode(LogMode.DEVELOPMENT);
 				this.logger.warn(`...loading build... '${branchParam}'`);
 
-				//lets try and get the path and siteId from the current bundle script in case its not the same as the config.
-				let path;
-				try {
-					const scripts = Array.from(document.querySelectorAll('script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
-					const script = scripts
-						.sort((a, b) => {
-							// order them by innerHTML (so that popped script has innerHTML)
-							return a.innerHTML.length - b.innerHTML.length;
-						})
-						.pop() as HTMLScriptElement;
+				// get the path and siteId from the current bundle script in case its not the same as the client config
+				let path = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/`;
+				const script = document.querySelector('script[src*="//snapui.searchspring.io"]');
 
-					const scriptsrc = script.getAttribute('src');
-
-					path = scriptsrc.match(/.*\/[a-zA-Z0-9]{6}\//);
-				} catch (err) {
-					// default
-					path = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/`;
+				if (script) {
+					const scriptRoot = script.getAttribute('src').match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
+					if (scriptRoot) {
+						path = scriptRoot.toString();
+					}
 				}
 
 				// append script with new branch in path
-				const script = document.createElement('script');
+				const branchScript = document.createElement('script');
 				const src = `${path}${branchParam}/bundle.js`;
-				script.src = src;
-				script.setAttribute(BRANCH_COOKIE, '');
-				document.head.appendChild(script);
+				branchScript.src = src;
+				branchScript.setAttribute(BRANCH_COOKIE, '');
+				document.head.appendChild(branchScript);
 
 				new DomTargeter(
 					[
