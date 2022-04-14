@@ -1,18 +1,9 @@
 import 'whatwg-fetch';
-
 import { v4 as uuidv4 } from 'uuid';
-import { Client } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-import { SearchController } from '../../../../snap-controller/src';
 import type { SearchControllerConfig } from '../../../../snap-controller/src/types';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
 
-const globals = { siteId: '8uyt2m' };
 const CACHE_STORAGE_KEY = 'ss-networkcache';
 const metaResponse = {
 	facets: {
@@ -95,106 +86,6 @@ describe('Network Cache', () => {
 
 	beforeEach(() => {
 		searchConfig.id = uuidv4().split('-').join('');
-	});
-	it('caches search responses and uses them', async () => {
-		const controller = new SearchController(searchConfig, {
-			client: new Client(globals),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		//no cache initially
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
-
-		//mock fetch
-		const fetchfn = jest.spyOn(global.window, 'fetch');
-
-		//make a search
-		await controller.search();
-
-		//expect meta and search calls to fire
-		expect(fetchfn).toHaveBeenCalledTimes(2);
-
-		//now we have cache
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeDefined();
-
-		// we used the cache
-		expect(global.Storage.prototype.getItem).toHaveBeenCalled();
-
-		controller.urlManager.reset().set('query', 'dress').go();
-		//make another call
-		await controller.search();
-
-		//cache was updated
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeDefined();
-
-		//it did make additional calls because the params changed
-		expect(fetchfn).toHaveBeenCalledTimes(4);
-
-		//check that there are results that we pulled from cache
-		expect(controller.store.results.length).toBeGreaterThan(0);
-
-		controller.urlManager.reset().set('query', '').go();
-		//make another call
-		await controller.search();
-
-		//but it did not make additional calls and used previous cache response
-		expect(fetchfn).toHaveBeenCalledTimes(4);
-
-		fetchfn.mockClear();
-
-		fetchfn.mockReset();
-	});
-
-	it('can be disabled via the config', async () => {
-		const clientConfig = {
-			search: {
-				cache: {
-					enabled: false,
-				},
-			},
-			meta: {
-				cache: {
-					enabled: false,
-				},
-			},
-		};
-
-		const controller = new SearchController(searchConfig, {
-			client: new Client(globals, clientConfig),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		//no cache initially
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
-
-		//mock fetch
-		const fetchfn = jest.spyOn(global.window, 'fetch');
-
-		//make a search
-		await controller.search();
-
-		//expect meta and search calls to fire
-		expect(fetchfn).toHaveBeenCalledTimes(2);
-
-		//still no cache
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
-
-		//make another call
-		await controller.search();
-
-		//cache was updated
-		expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
-
-		//but it did make additional calls
-		expect(fetchfn).toHaveBeenCalledTimes(4);
 	});
 
 	describe('can set, get and clear', () => {
