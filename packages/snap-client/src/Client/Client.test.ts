@@ -60,22 +60,18 @@ describe('Snap Client', () => {
 
 		const client = new Client({ siteId: '8uyt2m' }, config);
 
-		setTimeout(() => {
-			try {
-				expect(client.meta).toBeDefined();
-				// @ts-ignore
-				let clientConfig = client.config;
+		expect(client.meta).toBeDefined();
+		// @ts-ignore
+		let clientConfig = client.config;
 
-				expect(clientConfig.meta.api.origin).toBe(config.meta.api.origin);
+		expect(clientConfig.meta.api.origin).toBe(config.meta.api.origin);
 
-				//check it merged with the default config
-				expect(clientConfig.meta.cache.purgeable).toBe(false);
-				expect(clientConfig.search.api.origin).toBe(config.search.api.origin);
-				expect(clientConfig.autocomplete.api.origin).toBe(config.autocomplete.api.origin);
-				expect(clientConfig.recommend.api.origin).toBe(config.recommend.api.origin);
-				expect(clientConfig.suggest.api.origin).toBe(config.suggest.api.origin);
-			} catch (err) {}
-		});
+		//check it merged with the default config
+		expect(clientConfig.meta.cache.purgeable).toBe(false);
+		expect(clientConfig.search.api.origin).toBe(config.search.api.origin);
+		expect(clientConfig.autocomplete.api.origin).toBe(config.autocomplete.api.origin);
+		expect(clientConfig.recommend.api.origin).toBe(config.recommend.api.origin);
+		expect(clientConfig.suggest.api.origin).toBe(config.suggest.api.origin);
 	});
 
 	it('has all the fetch functions defined', () => {
