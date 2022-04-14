@@ -63,9 +63,9 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
 
-		this.client = client;
-		this.tracker = tracker;
-		this.logger = logger;
+		this.client = this.config.services?.client || client;
+		this.tracker = this.config.services?.tracker || tracker;
+		this.logger = this.config.services?.logger || logger;
 
 		const profileCount = {};
 		this.targeter = new DomTargeter(
@@ -93,10 +93,13 @@ export class RecommendationInstantiator {
 			async (target, injectedElem, elem) => {
 				const contextGlobals: any = {};
 
-				const elemContext = getContext(['shopperId', 'shopper', 'product', 'seed', 'options', 'profile', 'custom'], elem as HTMLScriptElement);
+				const elemContext = getContext(
+					['shopperId', 'shopper', 'product', 'seed', 'cart', 'options', 'profile', 'custom'],
+					elem as HTMLScriptElement
+				);
 				const context = deepmerge(this.context, elemContext);
 
-				const { shopper, shopperId, product, seed, options } = context;
+				const { shopper, shopperId, product, seed, cart, options } = context;
 
 				/*
 					type instantiatorContext = {
@@ -106,6 +109,7 @@ export class RecommendationInstantiator {
 						shopperId?: string;
 						product?: string;
 						seed?: string;
+						cart?: string[] | () => string[];
 						options?: {
 							siteId?: string;
 							branch?: string;
@@ -135,6 +139,23 @@ export class RecommendationInstantiator {
 				if (options?.limit && Number.isInteger(Number(options?.limit))) {
 					contextGlobals.limits = Number(options?.limit);
 				}
+				let cartContents;
+				if (typeof cart === 'function') {
+					try {
+						const cartFuncContents = cart();
+						if (Array.isArray(cartFuncContents)) {
+							cartContents = cartFuncContents;
+						}
+					} catch (e) {
+						this.logger.warn(`Error getting cart contents from function`, e);
+					}
+				} else if (Array.isArray(cart)) {
+					cartContents = cart;
+				}
+				if (Array.isArray(cartContents)) {
+					this.tracker.cookies.cart.set(cartContents);
+					contextGlobals.cart = this.tracker.cookies.cart.get();
+				}
 
 				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
@@ -154,8 +175,8 @@ export class RecommendationInstantiator {
 				};
 
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const client = this.config.services?.client || this.client;
-				const tracker = this.config.services?.tracker || this.tracker;
+				const client = this.client;
+				const tracker = this.tracker;
 				const recs = createRecommendationController(
 					{
 						url: this.config.url || {},

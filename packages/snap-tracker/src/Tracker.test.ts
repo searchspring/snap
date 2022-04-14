@@ -245,6 +245,32 @@ describe('Attribute Click Tracking', () => {
 
 		trackEvent.mockRestore();
 	});
+
+	it('can track if nested element is clicked', async () => {
+		const attribute = 'ss-track-cart-add';
+		const skus = ['abc123'];
+
+		global.document.body.innerHTML = `<div>
+			<button ${attribute}='${skus.join(',')}'>
+				<span class='click'>Click Me</span>
+			</button>
+		</div>`;
+
+		const tracker = new Tracker(globals);
+		const trackEvent = jest.spyOn(tracker.cookies.cart, 'add');
+
+		const clickEvent = new Event('click', {
+			bubbles: true, // required because our click event is attached to the document
+		});
+
+		const span = global.document.querySelector('span.click');
+		span.dispatchEvent(clickEvent);
+
+		expect(trackEvent).toHaveBeenCalledWith(skus);
+		expect(global.document.cookie).toContain(`ssCartProducts=${encodeURIComponent(skus.join(','))}`);
+
+		trackEvent.mockRestore();
+	});
 });
 describe('Tracker', () => {
 	afterAll(() => {

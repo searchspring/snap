@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* convert tickSize to number ([7471841](https://github.com/searchspring/snap/commit/7471841a9f35bb609046f0f96a7f8d03c65f342c))
+* **facetslider:** prevent chrome from crashing when tickSize <= 0 ([dfecb49](https://github.com/searchspring/snap/commit/dfecb495c99fe0e4e381b1e2d8ec70d526b6b94f))
+
+
+
+
+
 ## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

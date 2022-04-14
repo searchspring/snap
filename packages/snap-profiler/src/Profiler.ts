@@ -5,7 +5,7 @@ export class Profiler {
 	public profiles: Profile<any>[];
 
 	constructor(namespace?: string) {
-		this.namespace = namespace;
+		this.namespace = namespace || '';
 		this.profiles = [];
 	}
 
@@ -41,10 +41,10 @@ class Profile<T> {
 	public context: T;
 	public status = 'pending';
 	public time: ProfileTime = {
-		date: undefined,
-		begin: undefined,
-		end: undefined,
-		run: undefined,
+		date: 0,
+		begin: 0,
+		end: 0,
+		run: 0,
 	};
 
 	constructor(namespace: string, { type, name, context }: ProfileDetails<T>) {
@@ -66,7 +66,7 @@ class Profile<T> {
 	}
 
 	public stop(): Profile<T> {
-		if (!this.time.end) {
+		if (!this.time.end && this.time.begin) {
 			this.time.date = Date.now();
 			this.time.end = window.performance.now();
 			this.time.run = +(this.time.end - this.time.begin).toFixed(3);
