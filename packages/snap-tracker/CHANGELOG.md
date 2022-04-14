@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* add parent traversal for attribute tracking, refactor instantiator services ([dc61f52](https://github.com/searchspring/snap/commit/dc61f5212185b814ba5f8f02840a79d7831062e7))
+* **tracker:** add href attribute to attributeList ([1fec898](https://github.com/searchspring/snap/commit/1fec8986843afbddbd466c91191176924114fd11))
+
+
+
+
+
 ## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
 
 **Note:** Version bump only for package @searchspring/snap-tracker

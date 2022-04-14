@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* add parent traversal for attribute tracking, refactor instantiator services ([dc61f52](https://github.com/searchspring/snap/commit/dc61f5212185b814ba5f8f02840a79d7831062e7))
+* convert tickSize to number ([7471841](https://github.com/searchspring/snap/commit/7471841a9f35bb609046f0f96a7f8d03c65f342c))
+* **facetslider:** prevent chrome from crashing when tickSize <= 0 ([dfecb49](https://github.com/searchspring/snap/commit/dfecb495c99fe0e4e381b1e2d8ec70d526b6b94f))
+* **tracker:** add href attribute to attributeList ([1fec898](https://github.com/searchspring/snap/commit/1fec8986843afbddbd466c91191176924114fd11))
+
+
+### Features
+
+* **recommendationinstantiator:** add cart param to recs context ([9b3d633](https://github.com/searchspring/snap/commit/9b3d633325020187c1472024ca33b8620ba16ab4))
+* **snap.tsx:** adding siteId override for branch switch query param ([58b5b56](https://github.com/searchspring/snap/commit/58b5b5616425f1ee01fed5990309961330f2eb81))
+
+
+
+
+
 ## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
 
 
