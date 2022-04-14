@@ -4,7 +4,7 @@ describe('Profiler', () => {
 	it('does not require a namespace in the constructor', () => {
 		const profiler = new Profiler();
 
-		expect(profiler.namespace).toBeUndefined();
+		expect(profiler.namespace).toBe('');
 		expect(profiler.profiles).toHaveLength(0);
 	});
 
@@ -19,7 +19,7 @@ describe('Profiler', () => {
 	it('exposes a function to change the namespace', () => {
 		const profiler = new Profiler();
 
-		expect(profiler.namespace).toBeUndefined();
+		expect(profiler.namespace).toBe('');
 
 		const namespace = 'spacey';
 		profiler.setNamespace(namespace);
@@ -30,7 +30,7 @@ describe('Profiler', () => {
 	it('does not allow a change in the namespace once set', () => {
 		const profiler = new Profiler();
 
-		expect(profiler.namespace).toBeUndefined();
+		expect(profiler.namespace).toBe('');
 
 		const namespace = 'spacey';
 		profiler.setNamespace(namespace);
@@ -61,7 +61,7 @@ describe('Profiler', () => {
 		expect(profile).toHaveProperty('name', name);
 		expect(profile).toHaveProperty('context', context);
 		expect(profile).toHaveProperty('status', 'pending');
-		expect(profile).toHaveProperty('time', { date: undefined, begin: undefined, end: undefined, run: undefined });
+		expect(profile).toHaveProperty('time', { date: 0, begin: 0, end: 0, run: 0 });
 	});
 
 	it('can create many new profiles', () => {
@@ -77,7 +77,7 @@ describe('Profiler', () => {
 			expect(profile).toHaveProperty('type', `type${i}`);
 			expect(profile).toHaveProperty('name', `name${i}`);
 			expect(profile).toHaveProperty('context', { value: i });
-			expect(profile).toHaveProperty('time', { date: undefined, begin: undefined, end: undefined, run: undefined });
+			expect(profile).toHaveProperty('time', { date: 0, begin: 0, end: 0, run: 0 });
 		}
 
 		expect(profiler.profiles).toHaveLength(10);
