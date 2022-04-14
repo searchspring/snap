@@ -7271,6 +7271,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { C: () => FacetSlider });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
@@ -7535,10 +7536,7 @@
 						_facet$active6,
 						_facet$range,
 						_facet$range2,
-						_facet$active7,
-						_facet$active8,
-						_facet$active9,
-						_facet$active10,
+						_properties$facet2,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
@@ -7564,7 +7562,6 @@
 						handleColor = props.handleColor,
 						handleDraggingColor = props.handleDraggingColor,
 						showTicks = props.showTicks,
-						tickSize = props.tickSize,
 						facet = props.facet,
 						stickyHandleLabel = props.stickyHandleLabel,
 						_onChange = props.onChange,
@@ -7572,6 +7569,15 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
+						tickSize = props.tickSize;
+					isNaN(Number(tickSize)) || Number(tickSize) <= 0
+						? (tickSize =
+								10 * (null === (_properties$facet2 = properties.facet) || void 0 === _properties$facet2 ? void 0 : _properties$facet2.step) || 20)
+						: (tickSize = Number(tickSize));
+					var _facet$active7,
+						_facet$active8,
+						_facet$active9,
+						_facet$active10,
 						_useState2 = _slicedToArray(
 							(0, hooks_module.eJ)([
 								null === (_facet$active = facet.active) || void 0 === _facet$active ? void 0 : _facet$active.low,
@@ -23220,7 +23226,7 @@
 												for (;;)
 													switch ((_context.prev = _context.next)) {
 														case 0:
-															return (_context.next = 2), runFunctionsWithAbortWrapper(context, this.functions);
+															return (_context.next = 2), runFunctionsWithAbortWrapper(context || {}, this.functions);
 														case 2:
 															if (1 != _context.sent) {
 																_context.next = 5;
@@ -23439,7 +23445,7 @@
 			}
 			var Profiler = (function () {
 					function Profiler(namespace) {
-						Profiler_classCallCheck(this, Profiler), (this.namespace = namespace), (this.profiles = []);
+						Profiler_classCallCheck(this, Profiler), (this.namespace = namespace || ''), (this.profiles = []);
 					}
 					return (
 						Profiler_createClass(Profiler, [
@@ -23471,7 +23477,7 @@
 							context = _ref2.context;
 						Profiler_classCallCheck(this, Profile),
 							(this.status = 'pending'),
-							(this.time = { date: void 0, begin: void 0, end: void 0, run: void 0 }),
+							(this.time = { date: 0, begin: 0, end: 0, run: 0 }),
 							(this.namespace = namespace),
 							(this.type = type),
 							(this.name = name),
@@ -23491,7 +23497,8 @@
 								key: 'stop',
 								value: function stop() {
 									return (
-										this.time.end ||
+										!this.time.end &&
+											this.time.begin &&
 											((this.time.date = Date.now()),
 											(this.time.end = window.performance.now()),
 											(this.time.run = +(this.time.end - this.time.begin).toFixed(3)),
@@ -23917,7 +23924,7 @@
 					Object.keys(payload).forEach(function (key) {
 						_this[key] = payload[key];
 					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.25.1' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.26.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24313,7 +24320,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.25.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.26.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -24400,22 +24407,43 @@
 								);
 							}),
 							document.addEventListener('click', function (event) {
-								var attributes = {};
-								Object.values(event.target.attributes).forEach(function (attr) {
-									attributes[attr.nodeName] = event.target.getAttribute(attr.nodeName);
-								});
 								var updateRecsControllers = function updateRecsControllers() {
-									window.searchspring.controller &&
-										Object.keys(window.searchspring.controller).forEach(function (name) {
-											var _controller$config,
-												controller = window.searchspring.controller[name];
-											'recommendation' === controller.type &&
-												null !== (_controller$config = controller.config) &&
-												void 0 !== _controller$config &&
-												_controller$config.realtime &&
-												controller.search();
-										});
-								};
+										window.searchspring.controller &&
+											Object.keys(window.searchspring.controller).forEach(function (name) {
+												var _controller$config,
+													controller = window.searchspring.controller[name];
+												'recommendation' === controller.type &&
+													null !== (_controller$config = controller.config) &&
+													void 0 !== _controller$config &&
+													_controller$config.realtime &&
+													controller.search();
+											});
+									},
+									attributes = (function getClickAttributes(event) {
+										for (
+											var attributeList = [
+													'ss-' + _this.config.id + '-cart-add',
+													'ss-' + _this.config.id + '-cart-remove',
+													'ss-' + _this.config.id + '-cart-clear',
+													'ss-' + _this.config.id + '-cart-view',
+													'ss-' + _this.config.id + '-intellisuggest',
+													'ss-' + _this.config.id + '-intellisuggest-signature',
+													'href',
+												],
+												attributes = {},
+												levels = 0,
+												elem = event && event.target;
+											0 == Object.keys(attributes).length && elem && levels <= 3;
+
+										)
+											Object.values(elem.attributes).forEach(function (attr) {
+												var attrName = attr.nodeName;
+												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem.getAttribute(attrName));
+											}),
+												(elem = elem.parentElement),
+												levels++;
+										return attributes;
+									})(event);
 								if (attributes['ss-' + _this.config.id + '-cart-add']) {
 									var skus = attributes['ss-' + _this.config.id + '-cart-add'].split(',');
 									_this.cookies.cart.add(skus), updateRecsControllers();
@@ -24423,6 +24451,7 @@
 									var _skus = attributes['ss-' + _this.config.id + '-cart-remove'].split(',');
 									_this.cookies.cart.remove(_skus), updateRecsControllers();
 								} else if ('ss-' + _this.config.id + '-cart-clear' in attributes) _this.cookies.cart.clear(), updateRecsControllers();
+								else if ('ss-' + _this.config.id + '-cart-view' in attributes) updateRecsControllers();
 								else if (
 									attributes['ss-' + _this.config.id + '-intellisuggest'] &&
 									attributes['ss-' + _this.config.id + '-intellisuggest-signature']
