@@ -2,12 +2,13 @@
 import { h, Fragment } from 'preact';
 import { useState, useRef } from 'preact/hooks';
 
-import { jsx, css } from '@emotion/react';
+import { jsx, css, Global } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-import 'swiper/swiper.min.css';
+
+import { styles } from './styles';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -228,6 +229,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...styling}
 					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
 				>
+					<Global styles={css(styles)} />
 					<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
 						<div
 							className="ss__carousel__prev"

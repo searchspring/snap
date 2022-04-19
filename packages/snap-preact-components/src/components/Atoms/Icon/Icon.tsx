@@ -14,6 +14,7 @@ const CSS = {
 			fill: color || theme.colors?.primary,
 			width: width || size,
 			height: height || size,
+			position: 'relative',
 		}),
 };
 
