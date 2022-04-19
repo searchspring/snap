@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
@@ -35,7 +36,6 @@ const wait = (time = 1) => {
 describe('Snap Preact', () => {
 	beforeEach(() => {
 		delete window.searchspring;
-		cookies.unset(BRANCH_COOKIE);
 
 		document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-content"></div>`;
 	});
@@ -117,6 +117,8 @@ describe('Snap Preact', () => {
 		const spy = jest.spyOn(logger, 'warn');
 		const snap = new Snap(baseConfig, { logger });
 		expect(spy).toHaveBeenCalledWith(`...loading build... '${branchParam}'`);
+
+		cookies.unset(BRANCH_COOKIE);
 	});
 
 	it('exposes itself globally on the window', () => {
@@ -276,22 +278,22 @@ describe('Snap Preact', () => {
 			const logger = new Logger();
 			const spy = jest.spyOn(logger, 'error');
 
+			// valid config - no errors logged
 			new Snap(searchConfig, { logger });
 			expect(spy).toHaveBeenCalledTimes(0);
 
-			// @ts-ignore - allowing for invalid component
-			searchConfig.controllers.search[0].targeters[0].component = Component;
+			// invalid config - logs error due to missing selector
+			delete searchConfig.controllers.search[0].targeters[0].selector;
+			delete window.searchspring.controller.search;
 			new Snap(searchConfig, { logger });
 			expect(spy).toHaveBeenCalledTimes(1);
 
-			delete searchConfig.controllers.search[0].targeters[0].selector;
-			new Snap(searchConfig, { logger });
-			expect(spy).toHaveBeenCalledTimes(2);
-
+			// invalid config - logs error due to missing component
 			searchConfig.controllers.search[0].targeters[0].selector = '#searchspring-content';
 			delete searchConfig.controllers.search[0].targeters[0].component;
+			delete window.searchspring.controller.search;
 			new Snap(searchConfig, { logger });
-			expect(spy).toHaveBeenCalledTimes(3);
+			expect(spy).toHaveBeenCalledTimes(2);
 		});
 
 		it(`runs the controller 'search' method when a targeter selector is found`, async () => {
@@ -929,13 +931,16 @@ describe('Snap Preact', () => {
 				...baseConfig,
 				instantiators: {
 					recommendation: {
-						components: {},
+						components: {
+							thing: () => Component,
+						},
 						config: {
 							branch: 'production',
 						},
 					},
 				},
 			};
+
 			const snap = new Snap(instantiatorConfig);
 
 			const instantiator = await snap.getInstantiator('recommendations');
