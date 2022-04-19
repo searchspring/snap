@@ -5,64 +5,68 @@ import { UrlState, Translator, UrlStateSort, RangeValueProperties, UrlStateFilte
 type UrlParameter = {
 	key: Array<string>;
 	value: string;
-	type: ParamLocationType;
+	type: keyof typeof ParamLocationType;
 };
 
 type MapOptions = {
-	name?: string;
-	type?: ParamLocationType;
+	name: string;
+	type: keyof typeof ParamLocationType;
 };
 
-type CoreMap = {
-	query?: MapOptions;
-	oq?: MapOptions;
-	rq?: MapOptions;
-	tag?: MapOptions;
-	page?: MapOptions;
-	pageSize?: MapOptions;
-	sort?: MapOptions;
-	filter?: MapOptions;
+type UnnamedMapOptions = {
+	type: keyof typeof ParamLocationType;
+};
+
+export type CoreMap = {
+	query: MapOptions;
+	oq: MapOptions;
+	rq: MapOptions;
+	tag: MapOptions;
+	page: MapOptions;
+	pageSize: MapOptions;
+	sort: MapOptions;
+	filter: MapOptions;
 };
 
 type CustomMap = {
-	[param: string]: {
-		type?: ParamLocationType;
-	};
+	[param: string]: UnnamedMapOptions;
 };
 
 export type UrlTranslatorParametersConfig = {
-	core?: CoreMap;
-	custom?: CustomMap;
+	core: CoreMap;
+	custom: CustomMap;
 };
 
 export type UrlTranslatorConfig = {
-	urlRoot?: string;
-	settings?: {
-		corePrefix?: string;
-		coreType?: ParamLocationType;
-		customType?: ParamLocationType;
-		rootParams?: boolean;
+	urlRoot: string;
+	settings: {
+		corePrefix: string;
+		coreType?: keyof typeof ParamLocationType;
+		customType: keyof typeof ParamLocationType;
+		rootParams: boolean;
 	};
-	parameters?: UrlTranslatorParametersConfig;
+	parameters: UrlTranslatorParametersConfig;
 };
+
+type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
 const defaultConfig: UrlTranslatorConfig = {
 	urlRoot: '',
 	settings: {
 		corePrefix: '',
-		customType: ParamLocationType.HASH,
+		customType: ParamLocationType.hash,
 		rootParams: true,
 	},
 	parameters: {
 		core: {
-			query: { name: 'q', type: ParamLocationType.QUERY },
-			oq: { name: 'oq', type: ParamLocationType.QUERY },
-			rq: { name: 'rq', type: ParamLocationType.QUERY },
-			tag: { name: 'tag', type: ParamLocationType.QUERY },
-			page: { name: 'page', type: ParamLocationType.QUERY },
-			pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
-			sort: { name: 'sort', type: ParamLocationType.HASH },
-			filter: { name: 'filter', type: ParamLocationType.HASH },
+			query: { name: 'q', type: ParamLocationType.query },
+			oq: { name: 'oq', type: ParamLocationType.query },
+			rq: { name: 'rq', type: ParamLocationType.query },
+			tag: { name: 'tag', type: ParamLocationType.query },
+			page: { name: 'page', type: ParamLocationType.query },
+			pageSize: { name: 'pageSize', type: ParamLocationType.hash },
+			sort: { name: 'sort', type: ParamLocationType.hash },
+			filter: { name: 'filter', type: ParamLocationType.hash },
 		},
 		custom: {},
 	},
@@ -74,29 +78,31 @@ export class UrlTranslator implements Translator {
 	protected config: UrlTranslatorConfig;
 	protected reverseMapping: Record<string, string> = {};
 
-	constructor(config: UrlTranslatorConfig = {}) {
-		this.config = deepmerge(defaultConfig, config);
+	constructor(config?: DeepPartial<UrlTranslatorConfig>) {
+		this.config = deepmerge(defaultConfig, (config as UrlTranslatorConfig) || {});
 
-		Object.keys(this.config.parameters.core).forEach((param) => {
+		Object.keys(this.config.parameters.core).forEach((param: string) => {
+			const coreParam = this.config.parameters.core[param as keyof CoreMap];
+
 			// param prefix
 			if (this.config.settings.corePrefix) {
-				this.config.parameters.core[param].name = this.config.settings.corePrefix + this.config.parameters.core[param].name;
+				coreParam.name = this.config.settings.corePrefix + coreParam.name;
 			}
 
 			// global type override
-			const paramType = this.config.settings.coreType;
-			if (paramType && Object.values(ParamLocationType).includes(paramType)) {
-				this.config.parameters.core[param].type = (config?.parameters?.core && config?.parameters?.core[param]?.type) || paramType;
+			const paramType = this.config.settings?.coreType;
+			if (paramType && Object.values(ParamLocationType).includes(paramType as ParamLocationType)) {
+				coreParam.type = (config?.parameters?.core && coreParam.type) || paramType;
 			}
 
 			// create reverse mapping for quick lookup later
-			this.reverseMapping[this.config.parameters.core[param].name] = param;
+			this.reverseMapping[coreParam.name] = param;
 		});
 
-		const implicit = this.config.settings.customType;
-		if (implicit && !Object.values(ParamLocationType).includes(implicit)) {
+		const implicit = this.config.settings?.customType;
+		if (implicit && !Object.values(ParamLocationType).includes(implicit as ParamLocationType)) {
 			// invalid type specified - falling back to hash as implicit type
-			this.config.settings.customType = ParamLocationType.HASH;
+			this.config.settings.customType = ParamLocationType.hash;
 		}
 	}
 
@@ -133,7 +139,7 @@ export class UrlTranslator implements Translator {
 			.filter((v) => v)
 			.map((kvPair) => {
 				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
-				return { key: key.split('.'), value, type: ParamLocationType.QUERY };
+				return { key: key.split('.'), value, type: ParamLocationType.query };
 			})
 			.filter((param) => {
 				// remove core fields that do not contain a value
@@ -143,7 +149,7 @@ export class UrlTranslator implements Translator {
 	}
 
 	protected parseHashString(hashString: string): Array<UrlParameter> {
-		const params = [];
+		const params: Array<UrlParameter> = [];
 		const justHashString = hashString.split('#').join('/') || '';
 		justHashString
 			.split('/')
@@ -159,15 +165,15 @@ export class UrlTranslator implements Translator {
 			})
 			.forEach((decodedHashEntries) => {
 				if (decodedHashEntries.length == 1) {
-					params.push({ key: [decodedHashEntries[0]], value: undefined, type: ParamLocationType.HASH });
+					params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
 				} else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
 					const [value, ...keys] = decodedHashEntries.reverse();
-					params.push({ key: keys.reverse(), value, type: ParamLocationType.HASH });
+					params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
 				} else if (decodedHashEntries.length && decodedHashEntries.length == 4) {
 					// range filter
 					const [path0, path1, low, high] = decodedHashEntries;
-					params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.HASH });
-					params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.HASH });
+					params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash });
+					params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
 				}
 			});
 
@@ -177,15 +183,15 @@ export class UrlTranslator implements Translator {
 	// parse params into state
 
 	protected paramsToState(params: Array<UrlParameter>): UrlState {
-		const coreOtherParams = [],
-			coreFilterParams = [],
-			coreSortParams = [],
-			otherParams = [];
+		const coreOtherParams: Array<UrlParameter> = [],
+			coreFilterParams: Array<UrlParameter> = [],
+			coreSortParams: Array<UrlParameter> = [],
+			otherParams: Array<UrlParameter> = [];
 
 		params?.forEach((param) => {
 			const coreStateKey = this.reverseMapping[param.key[0]];
-			const coreConfig: MapOptions = this.config.parameters.core[coreStateKey];
-			const customStateKey: MapOptions = this.config.parameters.custom[param.key[0]];
+			const coreConfig: MapOptions = this.config.parameters.core[coreStateKey as keyof CoreMap];
+			const customStateKey: UnnamedMapOptions = this.config.parameters.custom[param.key[0]];
 
 			if (coreStateKey) {
 				// core state
@@ -354,8 +360,8 @@ export class UrlTranslator implements Translator {
 		const rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [];
 		const stateParams = this.stateToParams(state);
 		const params = [...rootUrlParams, ...stateParams];
-		const queryParams = params.filter((p) => p.type == ParamLocationType.QUERY);
-		const hashParams = params.filter((p) => p.type == ParamLocationType.HASH);
+		const queryParams = params.filter((p) => p.type == ParamLocationType.query);
+		const hashParams = params.filter((p) => p.type == ParamLocationType.hash);
 
 		const paramString =
 			(queryParams.length
@@ -423,7 +429,7 @@ export class UrlTranslator implements Translator {
 					typeof value[RangeValueProperties.LOW] != 'undefined' &&
 					typeof value[RangeValueProperties.HIGH] != 'undefined'
 				) {
-					if (filterConfig.type == ParamLocationType.QUERY) {
+					if (filterConfig.type == ParamLocationType.query) {
 						return [
 							{
 								key: [filterConfig.name, key, RangeValueProperties.LOW],
@@ -436,7 +442,7 @@ export class UrlTranslator implements Translator {
 								type: filterConfig.type,
 							},
 						];
-					} else if (filterConfig.type == ParamLocationType.HASH) {
+					} else if (filterConfig.type == ParamLocationType.hash) {
 						return [
 							{
 								key: [filterConfig.name, key, '' + (value[RangeValueProperties.LOW] ?? '*')],
@@ -478,7 +484,7 @@ export class UrlTranslator implements Translator {
 			})
 			.map((param) => {
 				if (CORE_FIELDS.includes(param) && !except.includes(param)) {
-					const paramConfig = this.config.parameters.core[param];
+					const paramConfig = this.config.parameters.core[param as keyof CoreMap];
 					if (param == 'page' && state[param] == 1) {
 						// do not include page 1
 					} else {
@@ -512,9 +518,9 @@ export class UrlTranslator implements Translator {
 							})
 						);
 					} else {
-						params = params.concat({ key: [...currentPath, key], value: undefined, type });
+						params = params.concat({ key: [...currentPath, key], value: '', type });
 					}
-				} else if (typeof value == 'object' && Object.keys(value).length) {
+				} else if (typeof value == 'object' && Object.keys(value || {}).length) {
 					addRecursive(value as Record<string, unknown>, [...currentPath, key]);
 				} else {
 					const customConfig = this.config.parameters.custom[currentPath[0] || key];
