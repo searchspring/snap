@@ -28,6 +28,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
+import { getBundleDetails } from './getBundleDetails/getBundleDetails';
 import type { SnapControllerServices, SnapControllerConfigs, RootComponent } from './types';
 
 export const BRANCH_COOKIE = 'ssBranch';
@@ -269,11 +270,11 @@ export class Snap {
 				this.logger.setMode(LogMode.DEVELOPMENT);
 				this.logger.warn(`...loading build... '${branchParam}'`);
 
-				// append script with new branch in path
+				// append branch override script
 				const script = document.createElement('script');
 				const src = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/${branchParam}/bundle.js`;
 				script.src = src;
-				script.setAttribute(BRANCH_COOKIE, '');
+				script.setAttribute(BRANCH_COOKIE, branchParam);
 				document.head.appendChild(script);
 
 				new DomTargeter(
@@ -284,15 +285,35 @@ export class Snap {
 								action: 'append', // before, after, append, prepend
 								element: () => {
 									const branchContainer = document.createElement('div');
-									branchContainer.className = 'ss__branch--target';
+									branchContainer.id = 'searchspring-branch-override';
 									return branchContainer;
 								},
 							},
 						},
 					],
 					async (target, elem) => {
+						let bundleDetails, error;
+						try {
+							bundleDetails = await getBundleDetails(src);
+						} catch (err) {
+							error = err;
+						}
+
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
-						render(<BranchOverride branch={branchParam} cookieName={BRANCH_COOKIE} bundleUrl={src} />, elem);
+						render(
+							<BranchOverride
+								name={branchParam}
+								details={bundleDetails}
+								error={error}
+								onRemoveClick={() => {
+									cookies.unset(BRANCH_COOKIE);
+									const urlState = url(window.location.href);
+									delete urlState.params.query['branch'];
+									window.location.href = urlState.url();
+								}}
+							/>,
+							elem
+						);
 					}
 				);
 
