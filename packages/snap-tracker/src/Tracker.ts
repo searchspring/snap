@@ -45,7 +45,7 @@ export class Tracker {
 	globals: TrackerGlobals;
 	localStorage: StorageStore;
 	context: BeaconContext;
-	isSending: number;
+	isSending: number | undefined;
 
 	private config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
@@ -65,7 +65,7 @@ export class Tracker {
 		});
 
 		this.context = {
-			userId: this.getUserId(),
+			userId: this.getUserId() || '',
 			sessionId: this.getSessionId(),
 			shopperId: this.getShopperId(),
 			pageLoadId: uuidv4(),
@@ -83,7 +83,7 @@ export class Tracker {
 		// since this is in the constructor, setTimeout is required for jest.spyOn
 		setTimeout(() => {
 			this.targeters.push(
-				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target, elem) => {
+				new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: false }], (target: any, elem: Element) => {
 					const { item, items, siteId, shopper, order, type } = getContext(
 						['item', 'items', 'siteId', 'shopper', 'order', 'type'],
 						elem as HTMLScriptElement
@@ -132,16 +132,18 @@ export class Tracker {
 					`ss-${this.config.id}-intellisuggest-signature`,
 					`href`,
 				];
-				const attributes = {};
+				const attributes: { [key: string]: any } = {};
 				let levels = 0;
-				let elem = event && (event.target as HTMLElement);
 
-				while (Object.keys(attributes).length == 0 && elem && levels <= MAX_PARENT_LEVELS) {
+				let elem: HTMLElement | null = null;
+				elem = event && (event.target as HTMLElement);
+
+				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
 					Object.values(elem.attributes).forEach((attr: Attr) => {
 						var attrName = attr.nodeName;
 
 						if (attributeList.indexOf(attrName) != -1) {
-							attributes[attrName] = elem.getAttribute(attrName);
+							attributes[attrName] = elem && elem.getAttribute(attrName);
 						}
 					});
 
@@ -203,14 +205,14 @@ export class Tracker {
 				pid: payload?.pid || undefined,
 			};
 
-			const beaconEvent = new BeaconEvent(event);
+			const beaconEvent = new BeaconEvent(event as BeaconPayload);
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
 		},
 
 		shopper: {
-			login: (data: ShopperLoginEvent, siteId?: string): BeaconEvent => {
+			login: (data: ShopperLoginEvent, siteId?: string): BeaconEvent | undefined => {
 				// sets shopperid if logged in
 				if (!getFlags().cookies()) {
 					return;
@@ -249,7 +251,7 @@ export class Tracker {
 			},
 		},
 		product: {
-			view: (data: ProductViewEvent, siteId: string): BeaconEvent => {
+			view: (data: ProductViewEvent, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.sku && !data?.childSku) {
 					console.error(
 						'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
@@ -300,7 +302,7 @@ export class Tracker {
 
 				return this.track.event(payload);
 			},
-			click: (data: ProductClickEvent, siteId?: string): BeaconEvent => {
+			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
 					console.error(
 						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })`
@@ -335,7 +337,7 @@ export class Tracker {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string): BeaconEvent => {
+			view: (data: CartViewEvent, siteId?: string): BeaconEvent | undefined => {
 				if (!Array.isArray(data?.items) || !data?.items.length) {
 					console.error(
 						'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -391,7 +393,7 @@ export class Tracker {
 			},
 		},
 		order: {
-			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent => {
+			transaction: (data: OrderTransactionData, siteId?: string): BeaconEvent | undefined => {
 				if (!data?.items || !Array.isArray(data.items) || !data.items.length) {
 					console.error(
 						'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
@@ -453,10 +455,10 @@ export class Tracker {
 		},
 	};
 
-	getUserId = (): string => {
+	getUserId = (): string | undefined | null => {
 		let userId;
 		try {
-			userId = getFlags().storage() && window.localStorage.getItem(USERID_COOKIE_NAME);
+			if (getFlags().storage()) userId = window.localStorage.getItem(USERID_COOKIE_NAME);
 			if (getFlags().cookies()) {
 				userId = userId || cookies.get(USERID_COOKIE_NAME) || uuidv4();
 				cookies.set(USERID_COOKIE_NAME, userId, COOKIE_SAMESITE, COOKIE_EXPIRATION);
@@ -472,7 +474,7 @@ export class Tracker {
 		return userId;
 	};
 
-	getSessionId = (): string => {
+	getSessionId = (): string | undefined => {
 		let sessionId;
 		if (getFlags().storage()) {
 			try {
@@ -494,7 +496,7 @@ export class Tracker {
 		return sessionId;
 	};
 
-	getShopperId = (): string => {
+	getShopperId = (): string | undefined => {
 		const shopperId = cookies.get(SHOPPERID_COOKIE_NAME);
 		if (!shopperId) {
 			return;
@@ -510,7 +512,7 @@ export class Tracker {
 		const cart = this.cookies.cart.get();
 		const lastViewed = this.cookies.viewed.get();
 
-		if (userId && siteId && (shopper || cart.length || lastViewed.length)) {
+		if (userId && typeof userId == 'string' && siteId && (shopper || cart.length || lastViewed.length)) {
 			const preflightParams: PreflightRequestModel = {
 				userId,
 				siteId,
