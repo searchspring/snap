@@ -10,8 +10,17 @@ import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, Controlle
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
-	globals: {},
+	globals: {
+		pagination: {
+			pageSize: 0,
+		},
+	},
 	fields: [],
+	persist: {
+		enabled: false,
+		lockSelections: true,
+		expiration: 0,
+	},
 };
 
 export class FinderController extends AbstractController {
@@ -40,7 +49,6 @@ export class FinderController extends AbstractController {
 			});
 		}
 
-		// add 'beforeSearch' middleware
 		this.eventManager.on('beforeSearch', async (finder: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
 			finder.controller.store.loading = true;
 
@@ -48,7 +56,6 @@ export class FinderController extends AbstractController {
 		});
 
 		// TODO: move this to afterStore
-		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
 			await next();
 
@@ -57,6 +64,8 @@ export class FinderController extends AbstractController {
 
 		// attach config plugins and event middleware
 		this.use(this.config);
+
+		this.store.loadPersisted();
 	}
 
 	get params(): Record<string, any> {
@@ -75,21 +84,39 @@ export class FinderController extends AbstractController {
 		return params;
 	}
 
-	find = (): void => {
+	find = async (): Promise<void> => {
+		await this.store.save(); // save current selections to storage
+
+		try {
+			await this.eventManager.fire('beforeFind', {
+				controller: this,
+			});
+		} catch (err) {
+			if (err?.message == 'cancelled') {
+				this.log.warn(`'beforeFind' middleware cancelled`);
+			} else {
+				this.log.error(`error in 'beforeFind' middleware`);
+				this.log.error(err);
+			}
+			return;
+		}
+
 		window.location.href = this.urlManager.href;
 	};
 
 	reset = (): void => {
-		// only need to reset when selections have been made
-		if (this.urlManager.state.filter) {
-			this.store.storage.clear();
-			this.urlManager.remove('filter').go();
-		}
+		this.store.reset();
+		this.urlManager.remove('filter').go();
+		this.store.setService('urlManager', this.urlManager);
 	};
 
 	search = async (): Promise<void> => {
 		if (!this.initialized) {
 			await this.init();
+		}
+
+		if (this.store.state.persisted) {
+			return;
 		}
 
 		const params = this.params;

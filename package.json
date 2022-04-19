@@ -20,13 +20,13 @@
 		"clean:docs": "lerna exec --parallel --stream 'rm -rf ./docs'",
 		"format": "lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
-		"publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes",
+		"publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
 		"prepare": "husky install"
 	},
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
 		"@searchspring/prettier": "^1.0.2",
-		"@searchspring/snapi-types": "^0.1.24",
+		"@searchspring/snapi-types": "^0.1.25",
 		"@types/jest": "^27.4.1",
 		"@types/jsdom": "^16.2.14",
 		"@types/seamless-immutable": "^7.1.16",

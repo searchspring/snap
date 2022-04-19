@@ -2,10 +2,10 @@
 The finder store is meant to hold the API response and associated selection state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
 ```typescript
-import { FinderStore } from '@searchspring/snap-store-mobx'
+import { FinderStore, FinderStoreConfig } from '@searchspring/snap-store-mobx'
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-const finderConfig = {
+const finderConfig: FinderStoreConfig = {
 	id: 'finder',
 	url: '/search',
 	fields: [
@@ -31,6 +31,35 @@ The meta property is an object containing the meta data retrieved from the Searc
 ## `pagination` property
 See [SearchStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search) `pagination` property
 
+## `config` property
+
+A reference to the `FinderStoreConfig` object that was provided to instantiate the FinderStore
+
+## `data` property
+A reference to the data stored in the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) for this selection
+
+## `storage` property
+A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
+
+## `persistedStorage` property
+A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) used for persisting finder selections (requires `config.persist.enabled` to be `true`)
+
+## `state` property
+An object used for finder state.
+
+### `persisted` property
+The `state.persisted` property is used to determine if finder selections have been persisted. (requires `config.persist.enabled` to be `true`)
+
+Will be set to `true` when the `loadPersisted` method is invoked and `selections` have been persisted from local storage. 
+
+Will be set to `false` when the `reset` method is invoked or any selections has been changed. 
+
+## `save` method
+The `save` method when invoked will save any current finder selections to local storage. (requires `config.persist` to be `true`)
+
+## `loadPersisted` method
+The `loadPersisted` method when invoked will update the store with data that has been saved to local storage using the `save` method. (requires `config.persist` to be `true`)
+
 ## `selections` property
 An array of `Selection` and `SelectionHierarchy` objects. Each object represents a finder dropdown selection.
 
@@ -55,16 +84,6 @@ The `select` method should be invoked when a selection has been made, such as in
 const value = selections[0].values[0]
 selections[0].select(value)
 ```
-
-### `config` property
-
-A reference to the selection config object that was provided to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
-
-### `data` property
-A reference to the data stored in the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage) for this selection
-
-### `storage` property
-A reference to the [StorageStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)
 
 ### `controller` property
 A reference to the [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)

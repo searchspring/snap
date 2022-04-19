@@ -6,7 +6,7 @@ export class Finder extends Component {
 	render() {
 		const controller = this.props.controller;
 		const store = controller.store;
-		const { selections, loading } = store;
+		const { selections, loading, pagination } = store;
 
 		return (
 			selections.length > 0 && (
@@ -15,12 +15,14 @@ export class Finder extends Component {
 						{selections.map((selection) =>
 							controller.config.wrapSelect ? (
 								<div class="finder-column finder-dropdown form-select-wrapper">
-									<Dropdown selection={selection} store={loading} />
+									<Dropdown selection={selection} store={store} loading={loading} />
 								</div>
 							) : (
-								<Dropdown selection={selection} store={loading} />
+								<Dropdown selection={selection} store={store} loading={loading} />
 							)
 						)}
+
+						<span style={{ color: '#aaa', 'font-size': '10px' }}>{` ${pagination.totalResults} results`}</span>
 
 						<div class="finder-column finder-button ss-shop">
 							<button
@@ -31,6 +33,16 @@ export class Finder extends Component {
 								class="button button--primary searchspring-finder_submit"
 							>
 								Shop Now
+							</button>
+							&nbsp;
+							<button
+								onClick={() => {
+									controller.reset();
+								}}
+								disabled={loading}
+								class="button button--primary searchspring-finder_reset"
+							>
+								Reset
 							</button>
 						</div>
 					</div>
@@ -56,7 +68,7 @@ class Dropdown extends Component {
 			>
 				{selection?.values?.map((value) => (
 					<option value={value.value} selected={selection.selected === value.value}>
-						{value.label}
+						{value.label} {value.count ? `(${value.count})` : ''}
 					</option>
 				))}
 			</select>

@@ -1,5 +1,5 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-
+import type { SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -19,9 +19,10 @@ export type SearchStoreConfig = StoreConfig & {
 			merchandising?: boolean;
 			singleResult?: boolean;
 		};
-		facets?: {
-			trim?: boolean;
-			pinFiltered?: boolean;
+		facets?: FacetStoreConfig & {
+			fields?: {
+				[field: string]: FacetStoreConfig;
+			};
 		};
 		infinite?: {
 			backfill?: number;
@@ -29,11 +30,22 @@ export type SearchStoreConfig = StoreConfig & {
 	};
 };
 
+type FacetStoreConfig = {
+	trim?: boolean;
+	pinFiltered?: boolean;
+	storeRange?: boolean;
+};
+
 // Finder Config
 export type FinderStoreConfig = StoreConfig & {
 	globals?: any;
 	url?: string;
 	fields: FinderFieldConfig[];
+	persist?: {
+		enabled: boolean;
+		lockSelections?: boolean;
+		expiration?: number;
+	};
 };
 
 export type FinderFieldConfig = {
@@ -62,9 +74,10 @@ export type AutocompleteStoreConfig = StoreConfig & {
 	settings?: {
 		initializeFromUrl?: boolean;
 		syncInputs?: boolean;
-		facets?: {
-			trim?: boolean;
-			pinFiltered?: boolean;
+		facets?: FacetStoreConfig & {
+			fields?: {
+				[field: string]: FacetStoreConfig;
+			};
 		};
 		trending?: {
 			limit: number;
@@ -93,3 +106,13 @@ export enum ErrorType {
 	INFO = 'info',
 	ERROR = 'error',
 }
+
+export type SelectedSelection = {
+	selected: string;
+	data: SearchResponseModelFacetValueAllOfValues[];
+	facet: any;
+};
+
+export type FinderStoreState = {
+	persisted: boolean;
+};

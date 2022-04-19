@@ -11,7 +11,9 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.redirects.merchandising | enable merchandising redirects | true |   |
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | true |   |
 | settings.facets.pinFiltered | selected facet options move to the top of the options array | true |   |
+| settings.facets.storeRange | range facets keep their initial boundary ranges from first load | true |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
+| settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 
