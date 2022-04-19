@@ -154,7 +154,7 @@ const lightTheme = {
 		},
 	},
 	bottom: {
-		content: 'Preview functionality may differ from production?',
+		content: 'Preview functionality may differ from production.',
 		branch: {
 			color: '#3a23ad',
 			style: 'italic',
