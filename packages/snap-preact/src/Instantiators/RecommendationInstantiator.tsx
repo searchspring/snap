@@ -179,7 +179,7 @@ export class RecommendationInstantiator {
 				const tracker = this.tracker;
 				const recs = createRecommendationController(
 					{
-						url: this.config.url || {},
+						url: this.config.url,
 						controller: controllerConfig,
 						context,
 					},
