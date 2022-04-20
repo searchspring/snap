@@ -3,46 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import type { SearchControllerConfig } from '../../../../snap-controller/src/types';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
+import { MockData } from '@searchspring/snap-shared';
 
+const mockData = new MockData();
 const CACHE_STORAGE_KEY = 'ss-networkcache';
-const metaResponse = {
-	facets: {
-		brand: {
-			display: 'list',
-			label: 'Brand',
-			collapsed: false,
-			multiple: 'or',
-		},
-		collection: {
-			display: 'list',
-			label: 'Collection',
-			collapsed: false,
-			multiple: 'or',
-		},
-		color_family: {
-			display: 'palette',
-			label: 'Color',
-			collapsed: false,
-			multiple: 'or',
-		},
-	},
-	sortOptions: [
-		{
-			type: 'relevance',
-			field: 'relevance',
-			direction: 'desc',
-			label: 'Best Match',
-		},
-		{
-			type: 'field',
-			field: 'sales_rank',
-			direction: 'desc',
-			label: 'Most Popular',
-		},
-	],
-};
 
-const typedResponse = metaResponse as unknown as Response;
+const typedResponse = mockData.meta() as Response;
 
 let searchConfig: SearchControllerConfig = {
 	id: 'search',
@@ -235,7 +201,8 @@ describe('Network Cache', () => {
 			const cache = new NetworkCache(cacheConfig);
 			// @ts-ignore
 			let memoryCache = cache.memoryCache;
-			expect(memoryCache['key'].value).toEqual(typedResponse);
+			expect(memoryCache[key].value).toEqual(typedResponse);
+			expect(cache.get(key)).toEqual(typedResponse);
 		});
 	});
 });

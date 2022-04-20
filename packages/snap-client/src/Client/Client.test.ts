@@ -1,6 +1,9 @@
 import 'whatwg-fetch';
 import { Client } from './Client';
 import type { ClientConfig } from '../types';
+import { MockData } from '@searchspring/snap-shared';
+
+const mockData = new MockData();
 
 const wait = (time = undefined) => {
 	return new Promise((resolve) => {
@@ -101,7 +104,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 			const acparams = {
 				search: {
@@ -183,7 +186,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 			const metaprops = { siteId: '88uyt2m' };
 
@@ -216,9 +219,14 @@ describe('Snap Client', () => {
 
 			const searchRequesterSpy = jest.spyOn(searchRequester, 'request' as never);
 
+			//@ts-ignore
+			const metaRequester = client.requesters.meta.requesters.legacy;
+
+			const metaRequesterSpy = jest.spyOn(metaRequester, 'request' as never);
+
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 			const searchprops = { siteId: '8uyt2m' };
 
@@ -232,6 +240,21 @@ describe('Snap Client', () => {
 
 			expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
+
+			const metaRequest = {
+				headers: {},
+				method: 'GET',
+				path: '/api/meta/meta.json',
+				query: {
+					siteId: '8uyt2m',
+				},
+			};
+
+			const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+
+			expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
+			expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
+
 			expect(fetchApiMock).toHaveBeenCalledTimes(2);
 			fetchApiMock.mockReset();
 		});
@@ -246,7 +269,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 			const trendingprops = { siteId: '8uyt2m' };
 
@@ -274,7 +297,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve([mockData.recommend()]) } as Response));
 
 			const recommendprops = { siteId: '8uyt2m', tag: 'dress' };
 
@@ -296,7 +319,11 @@ describe('Snap Client', () => {
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(recommendRequesterSpy.mock.calls).toEqual([[recommendparams, recommendcacheKey]]);
-			expect(fetchApiMock).toHaveBeenCalledTimes(1);
+
+			//wait for batch timeout
+			await wait(300);
+
+			expect(fetchApiMock).toHaveBeenCalledTimes(2);
 			fetchApiMock.mockReset();
 		});
 	});

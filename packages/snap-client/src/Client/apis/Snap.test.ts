@@ -21,7 +21,7 @@ describe('Snap Api', () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const metaParams = {
 			body: '{"siteId":"8uyt2m"}',
@@ -46,7 +46,7 @@ describe('Snap Api', () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const searchParams = {
 			body: '{"siteId":"8uyt2m"}',
@@ -68,7 +68,7 @@ describe('Snap Api', () => {
 		let api = new SnapAPI(new ApiConfiguration({}));
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const searchParams = {
 			body: '{"siteId":"8uyt2m"}',

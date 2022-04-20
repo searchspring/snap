@@ -5,11 +5,6 @@ describe('Abstract Api', () => {
 	it('has expected default values', () => {
 		const api = new API(new ApiConfiguration({}));
 
-		//doesnt need any config
-		expect(() => {
-			new API(new ApiConfiguration({}));
-		}).not.toThrow();
-
 		expect(api.cache).toEqual({
 			config: {
 				enabled: true,
@@ -58,7 +53,7 @@ describe('Abstract Api', () => {
 	// set up
 	const fetchfn = jest
 		.spyOn(global.window, 'fetch')
-		.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve() } as unknown as Response));
+		.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve() } as Response));
 
 	it('can pass in all the props', async () => {
 		let config: ApiConfigurationParameters = {
@@ -201,20 +196,17 @@ describe('Abstract Api', () => {
 		//handles 200s
 		const fetchfn200 = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ found: true }) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ found: true }) } as Response));
 
-		const setCache = jest.fn();
-		const getCache = jest.fn(() => Promise.resolve({ foundInCache: true }));
-
-		api.cache.set = setCache;
-		api.cache.get = getCache;
+		const setCacheSpy = jest.spyOn(api.cache, 'set');
+		const getCacheSpy = jest.spyOn(api.cache, 'get').mockImplementation(() => Promise.resolve({ foundInCache: true }));
 
 		//no cache key
 		request = await api.request(context);
 		expect(fetchfn200).toHaveBeenCalled();
 		expect(request).toEqual({ found: true });
-		expect(setCache).not.toHaveBeenCalled();
-		expect(getCache).not.toHaveBeenCalled();
+		expect(setCacheSpy).not.toHaveBeenCalled();
+		expect(getCacheSpy).not.toHaveBeenCalled();
 
 		fetchfn200.mockClear();
 
@@ -224,8 +216,8 @@ describe('Abstract Api', () => {
 		expect(request).not.toEqual({ found: true });
 		expect(request).toEqual({ foundInCache: true });
 
-		expect(setCache).not.toHaveBeenCalled();
-		expect(getCache).toHaveBeenCalled();
+		expect(setCacheSpy).not.toHaveBeenCalled();
+		expect(getCacheSpy).toHaveBeenCalled();
 
 		fetchfn200.mockClear();
 	});
@@ -254,7 +246,7 @@ describe('Abstract Api', () => {
 		//can handle 429s and retry correct amount of times.
 		const fetchfn429 = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 429, json: () => Promise.resolve({ broken: true }) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 429, json: () => Promise.resolve({ broken: true }) } as Response));
 
 		await expect(async () => {
 			await api.request(context);

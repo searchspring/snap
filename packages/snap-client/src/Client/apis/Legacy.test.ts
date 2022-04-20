@@ -25,7 +25,7 @@ describe('Legacy Api', () => {
 		let api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			headers: {},
@@ -44,7 +44,7 @@ describe('Legacy Api', () => {
 		let api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			headers: {},
@@ -64,7 +64,7 @@ describe('Legacy Api', () => {
 		let api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			body: '{"siteId":"88uyt2m"}',
@@ -86,7 +86,7 @@ describe('Legacy Api', () => {
 		let api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			headers: {},
@@ -106,7 +106,7 @@ describe('Legacy Api', () => {
 		let api = new LegacyAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			headers: {},
@@ -127,7 +127,7 @@ describe('Legacy Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			body: undefined,
@@ -147,7 +147,7 @@ describe('Legacy Api', () => {
 
 		requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		//can get endpoint with custom path
 		//@ts-ignore

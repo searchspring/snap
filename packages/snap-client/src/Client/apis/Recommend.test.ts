@@ -1,6 +1,15 @@
 import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { RecommendAPI } from './Recommend';
+import { MockData } from '@searchspring/snap-shared';
+
+const mockData = new MockData();
+
+const wait = (time = undefined) => {
+	return new Promise((resolve) => {
+		setTimeout(resolve, time);
+	});
+};
 
 describe('Recommend Api', () => {
 	it('has expected default functions', () => {
@@ -34,7 +43,7 @@ describe('Recommend Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		await api.getProfile({
 			siteId: '8uyt2m',
@@ -58,7 +67,7 @@ describe('Recommend Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		await api.getRecommendations({
 			siteId: '8uyt2m',
@@ -85,7 +94,7 @@ describe('Recommend Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		await api.postRecommendations({
 			siteId: '88uyt2m',
@@ -99,54 +108,17 @@ describe('Recommend Api', () => {
 
 	it('can call batchRecommendations', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
-		const response = [
-			{
-				results: [
-					{
-						id: '182022',
-						mappings: {
-							core: {
-								uid: '182022',
-								name: 'Stripe Out Blue Off-The-Shoulder Dress',
-								sku: 'C-AD-I2-69PST',
-								msrp: 50,
-								price: 48,
-								thumbnailImageUrl:
-									'https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2950_copyright_reddressboutique_2017__thumb_med.jpg',
-								url: '/product/C-AD-I2-69PST',
-								rating: '5',
-								brand: 'Adrienne',
-								popularity: 1135,
-								imageUrl:
-									'https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2950_copyright_reddressboutique_2017__large.jpg',
-								ratingCount: 1111,
-							},
-						},
-						attributes: {},
-					},
-				],
-				profile: {
-					tag: 'similar',
-				},
-			},
-		];
 
 		const params = {
 			method: 'GET',
-			path: '/boost/8uyt2m/recommend',
 			headers: {},
-			query: {
-				limits: [undefined],
-				siteId: '8uyt2m',
-				tags: ['similar'],
-			},
 		};
 
-		const requestUrl = '/boost/8uyt2m/recommend{"tags":["similar"],"limits":[null],"siteId":"8uyt2m"}';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&limits=undefined&siteId=8uyt2m';
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
 		await api.batchRecommendations({
 			siteId: '8uyt2m',
@@ -154,10 +126,9 @@ describe('Recommend Api', () => {
 		});
 
 		//add delay for paramBatch.timeout
-		setTimeout(() => {
-			expect(requestMock).toHaveBeenCalledWith(params, requestUrl);
+		await wait(250);
 
-			requestMock.mockReset();
-		}, 400);
+		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
+		requestMock.mockReset();
 	});
 });

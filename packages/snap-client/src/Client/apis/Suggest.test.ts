@@ -24,7 +24,7 @@ describe('Suggest Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			body: undefined,
@@ -57,7 +57,7 @@ describe('Suggest Api', () => {
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		await api.postSuggest({
 			siteId: '88uyt2m',
@@ -73,7 +73,7 @@ describe('Suggest Api', () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			body: undefined,
@@ -97,7 +97,7 @@ describe('Suggest Api', () => {
 		let api = new SuggestAPI(new ApiConfiguration({}));
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as unknown as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
 			body: '{"siteId":"8uuyt2m","limit":4}',
