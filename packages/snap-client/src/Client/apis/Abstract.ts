@@ -20,7 +20,7 @@ export interface RequestOpts {
 
 export class API {
 	private retryDelay = 1000;
-	private retryCount = 1;
+	private retryCount = 0;
 
 	public cache: NetworkCache;
 
@@ -51,7 +51,7 @@ export class API {
 			}
 			return responseJSON;
 		} else if (response.status == 429) {
-			if (this.retryCount <= this.configuration.maxRetry) {
+			if (this.retryCount < this.configuration.maxRetry) {
 				await new Promise((resolve) => setTimeout(resolve, this.retryDelay)); // delay retry
 				this.retryDelay = fibonacci(this.retryCount) * 1000;
 				this.retryCount++;

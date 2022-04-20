@@ -25,7 +25,7 @@ describe('Abstract Api', () => {
 		expect(api.retryDelay).toEqual(1000);
 
 		// @ts-ignore
-		expect(api.retryCount).toEqual(1);
+		expect(api.retryCount).toEqual(0);
 
 		expect(api.cache).toBeDefined();
 
