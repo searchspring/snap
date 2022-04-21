@@ -8,7 +8,7 @@ export type TrackerConfig = {
 	id: string;
 };
 
-export interface BeaconPayload {
+export type BeaconPayload = {
 	type: BeaconType;
 	category: BeaconCategory;
 	context?: BeaconContext;
@@ -23,7 +23,7 @@ export interface BeaconPayload {
 		| Record<string, never>;
 	id?: string;
 	pid?: string | null;
-}
+};
 
 export enum BeaconType {
 	PRODUCT = 'product',
@@ -154,17 +154,17 @@ export type PreflightRequestModel = {
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
 	shopper: {
-		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent;
+		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	product: {
-		view: (data: ProductViewEvent, siteId?: string) => BeaconEvent;
-		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent;
+		view: (data: ProductViewEvent, siteId?: string) => BeaconEvent | undefined;
+		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (data: CartViewEvent, siteId?: string) => BeaconEvent;
+		view: (data: CartViewEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	order: {
-		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent;
+		transaction: (data: OrderTransactionData, siteId?: string) => BeaconEvent | undefined;
 	};
 }
 

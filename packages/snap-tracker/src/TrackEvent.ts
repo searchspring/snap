@@ -29,7 +29,7 @@ export class TrackEvent {
 			this.endpoint +
 			`?d=${encodeURIComponent(this.intellisuggestData)}` +
 			`&s=${encodeURIComponent(this.intellisuggestSignature)}` +
-			`&u=${encodeURIComponent(this.href)}`;
+			`&u=${encodeURIComponent(this.href || '')}`;
 
 		if (window.document.referrer) {
 			this.src += `&r=${encodeURIComponent(window.document.referrer)}`;

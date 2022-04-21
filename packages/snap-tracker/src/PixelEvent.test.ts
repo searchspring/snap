@@ -27,7 +27,7 @@ describe('PixelEvent', () => {
 		expect(event.src).toContain('&a=viewItem');
 		expect(event.src).toContain(event.endpoint);
 		expect(event.src).toContain(data.event.sku);
-		expect(event.img.src).toBe(event.src);
+		expect(event.img?.src).toBe(event.src);
 	});
 
 	it('can create cart view event', async () => {
@@ -72,7 +72,7 @@ describe('PixelEvent', () => {
 			expect(event.src).toContain(cartItem.price);
 		});
 
-		expect(event.img.src).toBe(event.src);
+		expect(event.img?.src).toBe(event.src);
 	});
 
 	it('can create order view event', async () => {
@@ -129,6 +129,6 @@ describe('PixelEvent', () => {
 		expect(event.src).toContain(`&state=${encodeURIComponent(data.event.state)}`);
 		expect(event.src).toContain(`&country=${encodeURIComponent(data.event.country)}`);
 
-		expect(event.img.src).toBe(event.src);
+		expect(event.img?.src).toBe(event.src);
 	});
 });
