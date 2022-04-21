@@ -208,13 +208,6 @@ export class SearchController extends AbstractController {
 		const params = this.params;
 
 		try {
-			const stringyParams = JSON.stringify(params);
-			const prevStringyParams = this.storage.get('lastStringyParams');
-			if (stringyParams == prevStringyParams) {
-				// no param change - not searching
-				return;
-			}
-
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -228,6 +221,13 @@ export class SearchController extends AbstractController {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
 				}
+			}
+
+			const stringyParams = JSON.stringify(params);
+			const prevStringyParams = this.storage.get('lastStringyParams');
+			if (stringyParams == prevStringyParams) {
+				// no param change - not searching
+				return;
 			}
 
 			if (this.config.settings.infinite) {
