@@ -19437,7 +19437,7 @@
 						Abstract_classCallCheck(this, API),
 							(this.configuration = configuration),
 							(this.retryDelay = 1e3),
-							(this.retryCount = 1),
+							(this.retryCount = 0),
 							(this.fetchApi = (function () {
 								var _ref = Abstract_asyncToGenerator(
 									regeneratorRuntime.mark(function _callee(url, init) {
@@ -23807,7 +23807,7 @@
 						'&s=' +
 						encodeURIComponent(this.intellisuggestSignature) +
 						'&u=' +
-						encodeURIComponent(this.href)),
+						encodeURIComponent(this.href || '')),
 					window.document.referrer && (this.src += '&r=' + encodeURIComponent(window.document.referrer)),
 					(this.img = new Image(1, 1)),
 					(this.img.src = this.src);
@@ -23830,7 +23830,10 @@
 				);
 			}
 			var PixelEvent = PixelEvent_createClass(function PixelEvent(payload) {
-				var _this = this;
+				var _payload$context,
+					_payload$context$webs,
+					_payload$context2,
+					_this = this;
 				switch (
 					((function PixelEvent_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
@@ -23839,9 +23842,21 @@
 					(this.src =
 						this.endpoint +
 						'?s=' +
-						encodeURIComponent(payload.context.website.trackingCode) +
+						encodeURIComponent(
+							(null == payload ||
+							null === (_payload$context = payload.context) ||
+							void 0 === _payload$context ||
+							null === (_payload$context$webs = _payload$context.website) ||
+							void 0 === _payload$context$webs
+								? void 0
+								: _payload$context$webs.trackingCode) || ''
+						) +
 						'&u=' +
-						encodeURIComponent(payload.context.userId) +
+						encodeURIComponent(
+							(null == payload || null === (_payload$context2 = payload.context) || void 0 === _payload$context2
+								? void 0
+								: _payload$context2.userId) || ''
+						) +
 						'&ce=' +
 						(featureFlags_cookies ? '1' : '0') +
 						'&pt=' +
@@ -23917,14 +23932,17 @@
 				);
 			}
 			var BeaconEvent = BeaconEvent_createClass(function BeaconEvent(payload) {
-				var _this = this;
 				!(function BeaconEvent_classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 				})(this, BeaconEvent),
-					Object.keys(payload).forEach(function (key) {
-						_this[key] = payload[key];
-					}),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.26.0' } }),
+					(this.type = payload.type),
+					(this.category = payload.category),
+					(this.context = payload.context),
+					(this.meta = payload.meta),
+					(this.event = payload.event),
+					(this.id = payload.id),
+					(this.pid = payload.pid),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.26.1' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -24169,7 +24187,7 @@
 							(this.getUserId = function () {
 								var userId;
 								try {
-									(userId = getFlags().storage() && window.localStorage.getItem('ssUserId')),
+									getFlags().storage() && (userId = window.localStorage.getItem('ssUserId')),
 										getFlags().cookies()
 											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
 											: !userId && getFlags().storage() && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
@@ -24204,7 +24222,7 @@
 									shopper = _this.getShopperId(),
 									cart = _this.cookies.cart.get(),
 									lastViewed = _this.cookies.viewed.get();
-								if (userId && siteId && (shopper || cart.length || lastViewed.length)) {
+								if (userId && 'string' == typeof userId && siteId && (shopper || cart.length || lastViewed.length)) {
 									var preflightParams = { userId, siteId },
 										queryStringParams = '?userId=' + encodeURIComponent(userId) + '&siteId=' + encodeURIComponent(siteId);
 									shopper && ((preflightParams.shopper = shopper), (queryStringParams += '&shopper=' + encodeURIComponent(shopper))),
@@ -24313,14 +24331,14 @@
 							(this.globals = globals),
 							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
 							(this.context = {
-								userId: this.getUserId(),
+								userId: this.getUserId() || '',
 								sessionId: this.getSessionId(),
 								shopperId: this.getShopperId(),
 								pageLoadId: (0, v4.Z)(),
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.26.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.26.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -24420,25 +24438,22 @@
 											});
 									},
 									attributes = (function getClickAttributes(event) {
-										for (
-											var attributeList = [
-													'ss-' + _this.config.id + '-cart-add',
-													'ss-' + _this.config.id + '-cart-remove',
-													'ss-' + _this.config.id + '-cart-clear',
-													'ss-' + _this.config.id + '-cart-view',
-													'ss-' + _this.config.id + '-intellisuggest',
-													'ss-' + _this.config.id + '-intellisuggest-signature',
-													'href',
-												],
-												attributes = {},
-												levels = 0,
-												elem = event && event.target;
-											0 == Object.keys(attributes).length && elem && levels <= 3;
-
-										)
+										var attributeList = [
+												'ss-' + _this.config.id + '-cart-add',
+												'ss-' + _this.config.id + '-cart-remove',
+												'ss-' + _this.config.id + '-cart-clear',
+												'ss-' + _this.config.id + '-cart-view',
+												'ss-' + _this.config.id + '-intellisuggest',
+												'ss-' + _this.config.id + '-intellisuggest-signature',
+												'href',
+											],
+											attributes = {},
+											levels = 0,
+											elem = null;
+										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
 											Object.values(elem.attributes).forEach(function (attr) {
 												var attrName = attr.nodeName;
-												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem.getAttribute(attrName));
+												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
 											}),
 												(elem = elem.parentElement),
 												levels++;
@@ -27674,38 +27689,38 @@
 														}
 														return (_context.next = 3), _this.init();
 													case 3:
-														if (
-															((params = _this.params),
-															(_context.prev = 4),
-															(stringyParams = JSON.stringify(params)),
-															(prevStringyParams = _this.storage.get('lastStringyParams')),
-															stringyParams != prevStringyParams)
-														) {
-															_context.next = 9;
-															break;
-														}
-														return _context.abrupt('return');
-													case 9:
 														return (
-															(_context.prev = 9),
-															(_context.next = 12),
+															(params = _this.params),
+															(_context.prev = 4),
+															(_context.prev = 5),
+															(_context.next = 8),
 															_this.eventManager.fire('beforeSearch', { controller: SearchController_assertThisInitialized(_this), request: params })
 														);
-													case 12:
-														_context.next = 23;
+													case 8:
+														_context.next = 19;
 														break;
-													case 14:
+													case 10:
 														if (
-															((_context.prev = 14),
-															(_context.t0 = _context.catch(9)),
+															((_context.prev = 10),
+															(_context.t0 = _context.catch(5)),
 															'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 														) {
-															_context.next = 21;
+															_context.next = 17;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-													case 21:
+													case 17:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
+													case 19:
+														if (
+															((stringyParams = JSON.stringify(params)),
+															(prevStringyParams = _this.storage.get('lastStringyParams')),
+															stringyParams != prevStringyParams)
+														) {
+															_context.next = 23;
+															break;
+														}
+														return _context.abrupt('return');
 													case 23:
 														if (!_this.config.settings.infinite) {
 															_context.next = 30;
@@ -27877,7 +27892,7 @@
 										null,
 										[
 											[4, 89],
-											[9, 14],
+											[5, 10],
 											[51, 56],
 											[70, 75],
 										]
