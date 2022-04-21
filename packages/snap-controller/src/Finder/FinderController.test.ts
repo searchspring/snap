@@ -57,7 +57,7 @@ describe('Finder Controller', () => {
 					},
 				};
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -83,7 +83,7 @@ describe('Finder Controller', () => {
 				delete window.searchspring.controller[config.id];
 
 				const controller2 = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -95,6 +95,7 @@ describe('Finder Controller', () => {
 				expect(controller2.store.selections[0].selected).toBe(valueToSelect);
 
 				// all selections should be disabled
+				// @ts-ignore
 				expect(controller2.config.persist.lockSelections).toBe(true);
 				controller2.store.selections.forEach((selection) => {
 					expect(selection.disabled).toBe(true);
@@ -103,7 +104,7 @@ describe('Finder Controller', () => {
 
 			it(`sets search params for 'include' and 'autoDrillDown'`, async () => {
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -133,7 +134,7 @@ describe('Finder Controller', () => {
 					},
 				};
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -155,7 +156,7 @@ describe('Finder Controller', () => {
 			it(`sets root URL params`, async () => {
 				config.url = '/search/accessories';
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -172,7 +173,7 @@ describe('Finder Controller', () => {
 
 			it('can make selection', async () => {
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -232,7 +233,7 @@ describe('Finder Controller', () => {
 			it('can invoke find method', async () => {
 				config.url = '/search/accessories';
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
@@ -264,7 +265,7 @@ describe('Finder Controller', () => {
 			events.forEach((event) => {
 				it(`tests ${event} middleware err handled`, async () => {
 					const controller = new FinderController(config, {
-						client: new MockClient(globals, { meta: { prefetch: false } }),
+						client: new MockClient(globals, {}),
 						store: new FinderStore(config, services),
 						urlManager,
 						eventManager: new EventManager(),
@@ -286,7 +287,7 @@ describe('Finder Controller', () => {
 
 			it(`tests beforeFind middleware err handled`, async () => {
 				const controller = new FinderController(config, {
-					client: new MockClient(globals, { meta: { prefetch: false } }),
+					client: new MockClient(globals, {}),
 					store: new FinderStore(config, services),
 					urlManager,
 					eventManager: new EventManager(),
