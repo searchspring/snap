@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { Tracker } from './Tracker';
-import { BeaconCategory, BeaconType } from './types';
+import { BeaconCategory, BeaconType, CartViewEvent, OrderTransactionData } from './types';
 
 const globals = {
 	siteId: 'xxxzzz',
@@ -153,7 +153,7 @@ describe('Attribute Click Tracking', () => {
 		});
 
 		const button = global.document.querySelector(`[${attribute}]`);
-		button.dispatchEvent(clickEvent);
+		button?.dispatchEvent(clickEvent);
 
 		expect(trackEvent).toHaveBeenCalledWith(skus);
 		expect(global.document.cookie).toContain(`ssCartProducts=${encodeURIComponent(skus.join(','))}`);
@@ -177,7 +177,7 @@ describe('Attribute Click Tracking', () => {
 		});
 
 		const button = global.document.querySelector(`[${attribute}]`);
-		button.dispatchEvent(clickEvent);
+		button?.dispatchEvent(clickEvent);
 
 		expect(trackEvent).toHaveBeenCalledWith(skus);
 		expect(global.document.cookie).not.toContain(`${skus[0]}`);
@@ -205,7 +205,7 @@ describe('Attribute Click Tracking', () => {
 		});
 
 		const button = global.document.querySelector(`[${attribute}]`);
-		button.dispatchEvent(clickEvent);
+		button?.dispatchEvent(clickEvent);
 
 		expect(trackEvent).toHaveBeenCalledTimes(1);
 		expect(global.document.cookie).not.toContain(`${skus[0]}`);
@@ -235,7 +235,7 @@ describe('Attribute Click Tracking', () => {
 		});
 
 		const button = global.document.querySelector('[ss-track-intellisuggest][ss-track-intellisuggest-signature]');
-		button.dispatchEvent(clickEvent);
+		button?.dispatchEvent(clickEvent);
 
 		expect(trackEvent).toHaveBeenCalledWith({
 			intellisuggestData,
@@ -264,7 +264,7 @@ describe('Attribute Click Tracking', () => {
 		});
 
 		const span = global.document.querySelector('span.click');
-		span.dispatchEvent(clickEvent);
+		span?.dispatchEvent(clickEvent);
 
 		expect(trackEvent).toHaveBeenCalledWith(skus);
 		expect(global.document.cookie).toContain(`ssCartProducts=${encodeURIComponent(skus.join(','))}`);
@@ -359,7 +359,7 @@ describe('Tracker', () => {
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
 
-		const querystring = `?userId=${encodeURIComponent(tracker.context.userId)}&siteId=${encodeURIComponent(
+		const querystring = `?userId=${encodeURIComponent(tracker.context.userId || '')}&siteId=${encodeURIComponent(
 			tracker.globals.siteId
 		)}&cart=${encodeURIComponent(items[0])}`;
 		expect(xhrMock.open).toBeCalledWith(
@@ -548,9 +548,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.product.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.PRODUCT);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.PRODUCT);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.PAGEVIEW);
+		expect(beaconEvent?.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -615,9 +615,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.product.click(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CLICK);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.INTERACTION);
-		expect(beaconEvent.event).toStrictEqual(payload);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CLICK);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.INTERACTION);
+		expect(beaconEvent?.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -715,9 +715,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent?.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -746,9 +746,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent?.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -777,9 +777,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.cart.view(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent.event).toStrictEqual(payload);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
+		expect(beaconEvent?.event).toStrictEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
@@ -793,7 +793,7 @@ describe('Tracker', () => {
 		const consoleError = jest.spyOn(console, 'error');
 
 		let consoleCount = 0;
-		let payload = {
+		let payload: CartViewEvent = {
 			items: [],
 		};
 		await tracker.track.cart.view(payload);
@@ -805,11 +805,13 @@ describe('Tracker', () => {
 		// without qty, price, childSku or sku
 		payload = {
 			items: [
+				// @ts-ignore
 				{
 					childSku: 'abc123_a',
 					// qty: '1',
 					price: '9.99',
 				},
+				// @ts-ignore
 				{
 					childSku: 'def456_a',
 					qty: '2',
@@ -896,9 +898,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual({
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
 			city: payload.order.city,
@@ -937,9 +939,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.order.transaction(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent.event).toStrictEqual({
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
+		expect(beaconEvent?.event).toStrictEqual({
 			orderId: payload.order.id,
 			total: payload.order.total,
 			city: payload.order.city,
@@ -960,7 +962,7 @@ describe('Tracker', () => {
 		const consoleError = jest.spyOn(console, 'error');
 
 		let consoleCount = 0;
-		let payload = {
+		let payload: OrderTransactionData = {
 			order: {
 				id: '123456',
 				total: '9.99',
@@ -987,12 +989,14 @@ describe('Tracker', () => {
 				country: 'US',
 			},
 			items: [
+				//@ts-ignore
 				{
 					sku: 'abc123',
 					childSku: 'abc123_a',
 					// qty: '1',
 					price: '9.99',
 				},
+				//@ts-ignore
 				{
 					sku: 'abc123',
 					childSku: 'abc123_a',
@@ -1082,9 +1086,9 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.event(payload);
 
-		expect(beaconEvent.type).toStrictEqual(BeaconType.CUSTOM);
-		expect(beaconEvent.category).toStrictEqual(BeaconCategory.CUSTOM);
-		expect(beaconEvent.event).toStrictEqual(payload.event);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.CUSTOM);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CUSTOM);
+		expect(beaconEvent?.event).toStrictEqual(payload.event);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
