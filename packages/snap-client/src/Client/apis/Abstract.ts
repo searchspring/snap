@@ -120,15 +120,15 @@ export class ApiConfiguration {
 	}
 
 	get cache(): CacheConfig {
-		return this.configuration.cache;
+		return this.configuration?.cache || {};
 	}
 
 	get maxRetry(): number {
-		return this.configuration.maxRetry;
+		return this.configuration.maxRetry || 8;
 	}
 
 	get origin(): string {
-		return this.configuration.origin;
+		return this.configuration.origin || '';
 	}
 
 	get fetchApi(): FetchAPI {

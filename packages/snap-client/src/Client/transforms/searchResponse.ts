@@ -33,8 +33,8 @@ const CORE_FIELDS = [
 	'caption',
 ];
 
-class Result {
-	constructor(result) {
+class Result implements SearchResponseModelResult {
+	constructor(result: SearchResponseModelResult) {
 		Object.assign(this, result);
 	}
 }
@@ -51,13 +51,22 @@ export function transformSearchResponse(response: any, request: SearchRequestMod
 	};
 }
 
-transformSearchResponse.pagination = (response): { pagination: SearchResponseModelPagination } => {
-	const pagination = (response || {}).pagination || {};
+transformSearchResponse.pagination = (response: SearchResponseModel): { pagination: SearchResponseModelPagination } => {
+	const pagination:
+		| {
+				page: number;
+				currentPage: number;
+				perPage: number;
+				defaultPerPage: number;
+				totalPages: number;
+				totalResults: number;
+		  }
+		| SearchResponseModelPagination = (response || {}).pagination || {};
 
 	return {
 		pagination: {
 			totalResults: pagination.totalResults,
-			page: pagination.currentPage,
+			page: pagination.currentPage || pagination.page,
 			pageSize: pagination.perPage,
 			defaultPageSize: pagination.defaultPerPage,
 			totalPages: pagination.totalPages,
@@ -65,7 +74,7 @@ transformSearchResponse.pagination = (response): { pagination: SearchResponseMod
 	};
 };
 
-transformSearchResponse.results = (response) => {
+transformSearchResponse.results = (response: SearchResponseModel) => {
 	const results = (response || {}).results || [];
 
 	return { results: results.map(transformSearchResponse.result) };

@@ -1,5 +1,13 @@
 import { mergeParams } from '../utils';
-import { SearchRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import {
+	SearchRequestModel,
+	SearchRequestModelFilterRange,
+	SearchRequestModelFilterValue,
+	SearchRequestModelSorts,
+	SearchRequestModelSortsDirectionEnum,
+	SearchRequestModelFilter,
+	SearchRequestModelFilterRangeAllOfValue,
+} from '@searchspring/snapi-types';
 
 export function transformSearchRequest(request: SearchRequestModel): any {
 	return mergeParams(
@@ -16,7 +24,7 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 }
 
 transformSearchRequest.sorts = (request: SearchRequestModel = {}) => {
-	return (request.sorts || []).reduce((acc, sort) => {
+	return (request.sorts || []).reduce((acc: Record<string, Array<SearchRequestModelSortsDirectionEnum>>, sort: SearchRequestModelSorts) => {
 		if (!sort.field && !sort.direction) {
 			return acc;
 		}
@@ -31,7 +39,7 @@ transformSearchRequest.sorts = (request: SearchRequestModel = {}) => {
 
 		return {
 			...acc,
-			['sort.' + sort.field]: (acc[sort.field] || []).concat(sort.direction),
+			['sort.' + sort.field]: (acc[sort.field] || []).concat([sort.direction]),
 		};
 	}, {});
 };
@@ -65,38 +73,48 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 };
 
 transformSearchRequest.filters = (request: SearchRequestModel = {}) => {
-	return (request.filters || []).reduce((acc, filter: SearchRequestModelFilterRange | SearchRequestModelFilterValue) => {
-		const baseKey = filter.background ? 'bgfilter' : 'filter';
+	return (request.filters || []).reduce(
+		(
+			acc: Record<string, Array<string | number | SearchRequestModelFilterRangeAllOfValue | undefined>>,
+			filter: SearchRequestModelFilterRange | SearchRequestModelFilterValue
+		) => {
+			const baseKey = filter.background ? 'bgfilter' : 'filter';
 
-		if (filter.type == 'value') {
-			const key = baseKey + '.' + filter.field;
+			if (filter.type == 'value') {
+				const key = baseKey + '.' + filter.field;
 
-			return {
-				...acc,
-				[key]: (acc[key] || []).concat([filter.value]),
-			};
-		} else if (filter.type == 'range') {
-			const keyLow = baseKey + '.' + filter.field + '.low';
-			const keyHigh = baseKey + '.' + filter.field + '.high';
+				return {
+					...acc,
+					[key]: (acc[key] || []).concat([filter.value]),
+				};
+			} else if (filter.type == 'range') {
+				const keyLow = baseKey + '.' + filter.field + '.low';
+				const keyHigh = baseKey + '.' + filter.field + '.high';
 
-			const low = (filter as SearchRequestModelFilterRange).value.low ?? '*';
-			const high = (filter as SearchRequestModelFilterRange).value.high ?? '*';
+				const low = (filter as SearchRequestModelFilterRange)?.value?.low ?? '*';
+				const high = (filter as SearchRequestModelFilterRange)?.value?.high ?? '*';
 
-			return {
-				...acc,
-				[keyLow]: (acc[keyLow] || []).concat([low]),
-				[keyHigh]: (acc[keyHigh] || []).concat([high]),
-			};
-		}
+				return {
+					...acc,
+					[keyLow]: (acc[keyLow] || []).concat([low]),
+					[keyHigh]: (acc[keyHigh] || []).concat([high]),
+				};
+			}
 
-		return acc;
-	}, {});
+			return acc;
+		},
+		{}
+	);
 };
 
 transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
 	const reqMerch = request.merchandising || {};
 
-	const merch = reqMerch.disabled ? { disableMerchandising: true } : {};
+	const merch: {
+		disableMerchandising?: boolean;
+		tag?: string[];
+		'landing-page'?: string;
+	} = reqMerch.disabled ? { disableMerchandising: true } : {};
 
 	if (reqMerch.landingPage) {
 		merch['landing-page'] = reqMerch.landingPage;
