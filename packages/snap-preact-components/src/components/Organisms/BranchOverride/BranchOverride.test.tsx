@@ -7,19 +7,6 @@ import { BranchOverride } from './BranchOverride';
 import { ThemeProvider } from '../../../providers';
 
 describe('BranchOverride Component', () => {
-	const { location } = window;
-
-	beforeAll(() => {
-		delete window.location;
-
-		// @ts-ignore
-		window.location = {
-			href: 'https://www.merch.com?branch=branch',
-		};
-	});
-
-	afterAll(() => jest.clearAllMocks);
-
 	const branch = 'branch';
 	const url = 'https://snapui.searchspring.io/y56s6x/branch/bundle.js';
 	const lastModified = '07 Jan 2022 22:42:39 GMT';
@@ -106,12 +93,13 @@ describe('BranchOverride Component', () => {
 	});
 
 	it('displays branch failure on bad branch', async () => {
+		const name = 'badBranch';
 		const error = {
 			message: 'Branch not found...',
 			description: 'Unable to find the branch.',
 		};
 
-		const rendered = render(<BranchOverride name="bad" error={error} />);
+		const rendered = render(<BranchOverride name={name} error={error} />);
 
 		// wait for rendering of component
 		await waitFor(() => {
@@ -124,7 +112,49 @@ describe('BranchOverride Component', () => {
 		// branch name
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement.innerHTML).toContain('bad');
+		expect(bottomRightElement.innerHTML).toContain(name);
+
+		// error message
+		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
+		expect(bottomLeftElement).toBeInTheDocument();
+		expect(bottomLeftElement.textContent).toContain(error.message);
+
+		// error description
+		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
+		expect(bottomContentElement).toBeInTheDocument();
+		expect(bottomContentElement.textContent).toContain(error.description);
+	});
+
+	it(`displays branch failure when both 'error' and 'details' props are provided`, async () => {
+		const error = {
+			message: 'Branch not found...',
+			description: 'Unable to find the branch.',
+		};
+
+		const rendered = render(<BranchOverride {...props} error={error} />);
+
+		// wait for rendering of component
+		await waitFor(() => {
+			const overrideElement = rendered.container.querySelector('.ss__branch-override');
+			expect(overrideElement).toBeInTheDocument();
+			const styles = getComputedStyle(overrideElement);
+			expect(styles.background).toBe('rgba(130, 6, 6, 0.9)');
+		});
+
+		// branch name
+		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
+		expect(bottomRightElement).toBeInTheDocument();
+		expect(bottomRightElement.innerHTML).toContain(props.name);
+
+		// error message
+		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
+		expect(bottomLeftElement).toBeInTheDocument();
+		expect(bottomLeftElement.textContent).toContain(error.message);
+
+		// error description
+		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
+		expect(bottomContentElement).toBeInTheDocument();
+		expect(bottomContentElement.textContent).toContain(error.description);
 	});
 
 	it('can disable styles', async () => {

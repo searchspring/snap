@@ -222,7 +222,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
 			// default props
-			className: 'ss__facet__dropdown__icon',
+			className: 'ss__branch-override__bottom__left__icon',
 			size: '12px',
 			// global theme
 			...globalTheme?.components?.icon,
@@ -300,7 +300,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 						)}
 					</span>
 
-					<span className="ss__branch-override__bottom__right">{details?.lastModified || name}</span>
+					<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
 					<div className="ss__branch-override__bottom__content">{error?.description || themes[themeName].bottom.content}</div>
 				</div>
 			</div>

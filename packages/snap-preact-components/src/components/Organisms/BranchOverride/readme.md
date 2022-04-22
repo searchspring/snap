@@ -1,7 +1,7 @@
 # BranchOverride
 
 Renders a popup to show when a branch override is in place.
-Executed `onRemoveClick` prop when the remove button is clicked.
+Executes `onRemoveClick` prop when the remove button is clicked.
 Must have `name` and either `details` or `error` props to render.
 
 ## Components Used
@@ -45,14 +45,14 @@ The `onRemoveClick` prop is a function to be called when the 'remove' button is 
 
 ```jsx
 const whenRemoved = (e, name) => {
-	console.log(`removed the ${} branch`);
+	console.log(`remove clicked in the override for the '${name}' branch`);
 };
 
-<BranchOverride name="testing" url="https://snapui.searchspring.io/siteid/testing/bundle.js" onRemoveClick={whenRemoved} />
+<BranchOverride name="testing" onRemoveClick={whenRemoved} />
 ```
 
 ### darkMode
-The `darkMode` prop is used to set the component styling to prefer dark. By default the component will auto detect the browser preference.
+The `darkMode` prop is used to set the component styling to prefer (or not to prefer) dark mode. By default the component will auto detect the browser preference.
 
 ```jsx
 const details = {
@@ -60,5 +60,5 @@ const details = {
 	lastModified: '1 Feb 2022 1:02:03 GMT'
 };
 
-<BranchOverride next="testing" details={details} darkMode />
+<BranchOverride next="testing" details={details} darkMode={false} />
 ```

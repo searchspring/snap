@@ -53,7 +53,7 @@ export default {
 			control: { type: 'object' },
 		},
 		error: {
-			description: 'URL of the branch resource',
+			description: 'Object containing error message and description',
 			type: { required: false },
 			table: {
 				type: {
@@ -66,7 +66,7 @@ export default {
 			description: 'optional function to run on remove button click',
 			table: {
 				type: {
-					summary: '(e: Event, name: string, url: string) => void',
+					summary: '(e: Event, name: string) => void',
 				},
 			},
 			action: 'onRemoveClick',
