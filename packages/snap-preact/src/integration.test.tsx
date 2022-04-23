@@ -61,6 +61,55 @@ describe('Snap Preact Integration', () => {
 		expect(snap.context).toStrictEqual(context);
 	});
 
+	it(`merges context from #searchspring-context with context in the config and the context takes priority`, () => {
+		const contextConfig = {
+			...baseConfig,
+			context: {
+				shopper: {
+					id: 'snapper',
+				},
+				category: 'something',
+			},
+		};
+		const snap = new Snap(contextConfig);
+
+		expect(snap.context).toStrictEqual({ ...context, category: 'something' });
+	});
+
+	it(`can use the 'config' in a script context to set context`, () => {
+		const config = {
+			context: {
+				category: 'something',
+			},
+		};
+
+		const contextString = `config = ${JSON.stringify(config)}; shopper = ${JSON.stringify(context.shopper)};`;
+		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
+
+		const snap = new Snap(baseConfig);
+
+		expect(snap.context).toStrictEqual({ ...context, config: config, category: 'something' });
+	});
+
+	it(`can use the 'config' in a script context to set siteId`, () => {
+		const config = {
+			client: {
+				globals: {
+					siteId: 'yyyyyy',
+				},
+			},
+		};
+
+		const contextString = `config = ${JSON.stringify(config)}; shopper = ${JSON.stringify(context.shopper)};`;
+		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
+
+		const snap = new Snap(baseConfig);
+
+		expect(snap.context).toStrictEqual({ ...context, config: config });
+		// @ts-ignore - verifying globals using context set siteId
+		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
+	});
+
 	it(`takes the branch param from the URL and add a new script block`, async () => {
 		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
 

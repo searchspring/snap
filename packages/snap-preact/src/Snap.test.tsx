@@ -12,7 +12,7 @@ import type {
 } from '@searchspring/snap-controller';
 
 import { Snap, BRANCH_COOKIE } from './Snap';
-import { AutocompleteStore } from '@searchspring/snap-store-mobx';
+import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
 
 const baseConfig = {
 	client: {
@@ -922,8 +922,8 @@ describe('Snap Preact', () => {
 			const snap = new Snap(baseConfig);
 
 			await expect(async () => {
-				await snap.getInstantiator('recommendations');
-			}).rejects.toBe(`getInstantiator could not find instantiator with id: recommendations`);
+				await snap.getInstantiator('recommendation');
+			}).rejects.toBe(`getInstantiator could not find instantiator with id: recommendation`);
 		});
 
 		it('returns an instantiator when the requested id exists', async () => {
@@ -943,7 +943,7 @@ describe('Snap Preact', () => {
 
 			const snap = new Snap(instantiatorConfig);
 
-			const instantiator = await snap.getInstantiator('recommendations');
+			const instantiator = await snap.getInstantiator('recommendation');
 			expect(instantiator).toBeDefined();
 			expect(instantiator.config.config.branch).toBe('production');
 		});
