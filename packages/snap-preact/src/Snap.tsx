@@ -28,7 +28,6 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import { getBundleDetails } from './getBundleDetails/getBundleDetails';
 import type { SnapControllerServices, SnapControllerConfigs, RootComponent } from './types';
 
 export const BRANCH_COOKIE = 'ssBranch';
@@ -305,6 +304,7 @@ export class Snap {
 					async (target, elem) => {
 						let bundleDetails, error;
 						try {
+							const getBundleDetails = (await import('./getBundleDetails/getBundleDetails')).getBundleDetails;
 							bundleDetails = await getBundleDetails(src);
 						} catch (err) {
 							error = err;
@@ -670,7 +670,7 @@ export class Snap {
 
 		if (this.config?.instantiators?.recommendation) {
 			try {
-				this._instantiatorPromises.recommendations = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
+				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
 					return new RecommendationInstantiator(
 						this.config.instantiators.recommendation,
 						{
