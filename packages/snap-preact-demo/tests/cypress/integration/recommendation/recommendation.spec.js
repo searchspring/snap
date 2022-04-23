@@ -21,7 +21,7 @@ const config = {
 			nextArrow: '.ss__recommendation .ss__carousel__next',
 			prevArrow: '.ss__recommendation .ss__carousel__prev',
 			activeSlide: '.ss__recommendation .swiper-slide-active',
-			controller: 'recommend_similar0',
+			controller: 'recommend_similar_0',
 		},
 	},
 };
