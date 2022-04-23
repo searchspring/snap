@@ -1,6 +1,6 @@
 import { UrlManager } from './UrlManager/UrlManager';
 import { QueryStringTranslator, UrlTranslator } from './Translators';
-import { ParamLocationType } from './types';
+import { UrlState, ParamLocationType } from './types';
 
 let url = '';
 
@@ -195,15 +195,15 @@ describe('UrlManager Integration Tests', () => {
 					return url;
 				}
 
-				go(_url) {
+				go(_url: string) {
 					url = _url;
 				}
 
-				serialize(state) {
+				serialize(state: UrlState) {
 					return '#' + JSON.stringify(state);
 				}
 
-				deserialize(url) {
+				deserialize(url: string) {
 					return JSON.parse(url.replace(/^#/, '') || '{}');
 				}
 			}
@@ -225,15 +225,15 @@ describe('UrlManager Integration Tests', () => {
 					return window.location.hash;
 				}
 
-				go(hash) {
+				go(hash: string) {
 					window.location.hash = hash;
 				}
 
-				serialize(state) {
+				serialize(state: UrlState) {
 					return '#' + super.serialize(state).split('?').pop();
 				}
 
-				deserialize(url) {
+				deserialize(url: string) {
 					return super.deserialize('?' + url.replace(/^\#?\/*/, ''));
 				}
 			}
@@ -456,8 +456,8 @@ describe('UrlManager Integration Tests', () => {
 						query: { name: 'search' },
 					},
 					custom: {
-						store: { type: ParamLocationType.HASH },
-						view: { type: ParamLocationType.QUERY },
+						store: { type: ParamLocationType.hash },
+						view: { type: ParamLocationType.query },
 					},
 				},
 			};

@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

@@ -20,7 +20,7 @@ export interface RequestOpts {
 
 export class API {
 	private retryDelay = 1000;
-	private retryCount = 1;
+	private retryCount = 0;
 
 	public cache: NetworkCache;
 

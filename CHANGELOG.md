@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **controller-search:** moving param check to after `beforeSearch` event fire ([1a1be22](https://github.com/searchspring/snap/commit/1a1be22abfe788a2497260ed46f304e8592dbccd))
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* add parent traversal for attribute tracking, refactor instantiator services ([dc61f52](https://github.com/searchspring/snap/commit/dc61f5212185b814ba5f8f02840a79d7831062e7))
+* convert tickSize to number ([7471841](https://github.com/searchspring/snap/commit/7471841a9f35bb609046f0f96a7f8d03c65f342c))
+* **facetslider:** prevent chrome from crashing when tickSize <= 0 ([dfecb49](https://github.com/searchspring/snap/commit/dfecb495c99fe0e4e381b1e2d8ec70d526b6b94f))
+* **tracker:** add href attribute to attributeList ([1fec898](https://github.com/searchspring/snap/commit/1fec8986843afbddbd466c91191176924114fd11))
+
+
+### Features
+
+* **recommendationinstantiator:** add cart param to recs context ([9b3d633](https://github.com/searchspring/snap/commit/9b3d633325020187c1472024ca33b8620ba16ab4))
+* **snap.tsx:** adding siteId override for branch switch query param ([58b5b56](https://github.com/searchspring/snap/commit/58b5b5616425f1ee01fed5990309961330f2eb81))
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batched recommendations not spreading all params ([7b59ad8](https://github.com/searchspring/snap/commit/7b59ad85c0a7b5721e66e76c4dac4f981c50507f))
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* **facetslider.stories.tsx:** adding default value for ticksize prop in facetSlider component story ([dfa2590](https://github.com/searchspring/snap/commit/dfa2590ed8c6fe1934f222c4ca14c26fd2543f33))
+* **findercontroller:** log beforeFind middleware error ([b117c52](https://github.com/searchspring/snap/commit/b117c525026eb612b96483c95c3dd19f7c4eefe1))
+
+
+### Features
+
+* add matchType to QueryStore and supporting client transform ([2f01e81](https://github.com/searchspring/snap/commit/2f01e81c0fdf9a1f6cef7203f07d536ae91c8412))
+* **controller-finder:** adding persistence configuration and functionality ([eac3ef4](https://github.com/searchspring/snap/commit/eac3ef40fc19c08a4cede96923efe861ffded8d6))
+* **wip:** finder persisting ([3a87f9a](https://github.com/searchspring/snap/commit/3a87f9ad73518ad52f2d6b07443226a5a9c1ffd8))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+
+### Bug Fixes
+
+* **errorhandler.tsx:** bugfix for theme spreading in errorhandler component ([f610a23](https://github.com/searchspring/snap/commit/f610a2356c0f416a82cc6cd0e95e49e6e89d46e3))
+* **facet-store:** fixing logic around individual facet settings ([663806d](https://github.com/searchspring/snap/commit/663806d2e5bcb075fd7df57ad5cf5d1529c6cbcf))
+* **recommendation:** ensure children length matches results or controller.store.results, update docs ([2a957b8](https://github.com/searchspring/snap/commit/2a957b858d68c9c6862327bdaaf2b1213609a0bc))
+
+
+### Features
+
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([b67248d](https://github.com/searchspring/snap/commit/b67248da94ffeb8d75763ba2f1c68c9bd84066fb))
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([f885286](https://github.com/searchspring/snap/commit/f885286db82844fb03bfed0cea4d5ffed63addfe))
+* **recommendations:** add results prop to recommendations component, allows for slicing results ([08b438b](https://github.com/searchspring/snap/commit/08b438b25685a563419919991efeea7f87a21629))
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 
