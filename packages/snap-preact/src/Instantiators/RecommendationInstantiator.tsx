@@ -41,7 +41,7 @@ export class RecommendationInstantiator {
 	public client: Client;
 	public tracker: Tracker;
 	public logger: Logger;
-	public controllers: {
+	public controller: {
 		[key: string]: RecommendationController;
 	} = {};
 	public config: RecommendationInstantiatorConfig;
@@ -88,18 +88,21 @@ export class RecommendationInstantiator {
 						element: (target, origElement) => {
 							const profile = origElement.getAttribute('profile');
 
-							if (profile) {
-								const recsContainer = document.createElement('div');
-								recsContainer.setAttribute('searchspring-recommend', profile);
-								return recsContainer;
-							} else {
-								this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, origElement);
-							}
+							const recsContainer = document.createElement('div');
+							recsContainer.setAttribute('searchspring-recommend', profile);
+							return recsContainer;
 						},
 					},
 				},
 			],
 			async (target, injectedElem, elem) => {
+				const tag = injectedElem.getAttribute('searchspring-recommend');
+
+				if (!tag) {
+					this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, elem);
+					return;
+				}
+
 				const contextGlobals: any = {};
 
 				const elemContext = getContext(
@@ -166,7 +169,6 @@ export class RecommendationInstantiator {
 					contextGlobals.cart = this.tracker.cookies.cart.get();
 				}
 
-				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
 				const defaultGlobals = {
@@ -175,7 +177,7 @@ export class RecommendationInstantiator {
 				const globals = deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals);
 
 				const controllerConfig = {
-					id: `recommend_${tag + (profileCount[tag] - 1)}`,
+					id: `recommend_${tag}_${profileCount[tag] - 1}`,
 					tag,
 					batched: options?.batched ?? true,
 					realtime: Boolean(options?.realtime),
@@ -186,7 +188,7 @@ export class RecommendationInstantiator {
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
 				const controller = createRecommendationController(
 					{
-						url: this.config.url || {},
+						url: this.config.url,
 						controller: controllerConfig,
 						context,
 					},
@@ -201,7 +203,7 @@ export class RecommendationInstantiator {
 
 				controller.addTargeter(this.targeter);
 
-				this.controllers[controller.config.id] = controller;
+				this.controller[controller.config.id] = controller;
 
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;

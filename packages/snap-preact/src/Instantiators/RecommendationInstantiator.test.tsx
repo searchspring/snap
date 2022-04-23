@@ -78,22 +78,6 @@ describe('RecommendationInstantiator', () => {
 		}).toThrow();
 	});
 
-	it('throws if configuration is not complete', () => {
-		const invalidConfig = {
-			components: {
-				Default: async () => Component,
-			},
-			config: {
-				branch: 'production',
-			},
-		};
-
-		expect(() => {
-			// @ts-ignore - testing bad instantiation
-			const recommendationInstantiator = new RecommendationInstantiator(invalidConfig);
-		}).toThrow();
-	});
-
 	it('throws if configuration is missing component mapping', () => {
 		const invalidConfig = {
 			client: {
@@ -124,7 +108,7 @@ describe('RecommendationInstantiator', () => {
 		// properties are defined
 		expect(recommendationInstantiator.config).toStrictEqual(baseConfig);
 		expect(recommendationInstantiator.context).toStrictEqual({});
-		expect(recommendationInstantiator.controllers).toStrictEqual({});
+		expect(recommendationInstantiator.controller).toStrictEqual({});
 
 		// @ts-ignore - checking private property
 		expect(recommendationInstantiator.client.globals.siteId).toBe(baseConfig.client.globals.siteId);
@@ -136,11 +120,9 @@ describe('RecommendationInstantiator', () => {
 		const client = new MockClient(baseConfig.client.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
-		expect(() => {
-			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
-			expect(Object.keys(recommendationInstantiator.controllers).length).toBe(0);
-			expect(clientSpy).toHaveBeenCalledTimes(0);
-		}).toThrow();
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(0);
+		expect(clientSpy).toHaveBeenCalledTimes(0);
 	});
 
 	it('logs an error when the profile response does not contain templateParameters', async () => {
@@ -154,9 +136,10 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { logger, client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(1);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
+		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing templateParameters!`);
 	});
 
 	it('logs an error when the profile response does not contain a component', async () => {
@@ -170,9 +153,10 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { logger, client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(1);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
+		expect(loggerSpy).toHaveBeenCalledWith(`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is missing component!`);
 	});
 
 	it('logs an error when the profile response does not find a mapped component', async () => {
@@ -192,12 +176,15 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(modifiedConfig, { logger, client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(1);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(loggerSpy).toHaveBeenCalledTimes(1);
+		expect(loggerSpy).toHaveBeenCalledWith(
+			`profile '${DEFAULT_PROFILE}' found on [object HTMLScriptElement] is expecting component mapping for 'Default' - verify instantiator config.`
+		);
 	});
 
-	it('creates a controllers when it finds a target', async () => {
+	it('creates a controller when it finds a target', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
 		const client = new MockClient(baseConfig.client.globals, {});
@@ -205,10 +192,10 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(1);
-		Object.keys(recommendationInstantiator.controllers).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controllers[controllerId];
-			expect(controllerId).toBe(`recommend_${controller.context.profile}${index}`);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
 		});
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 	});
@@ -217,19 +204,23 @@ describe('RecommendationInstantiator', () => {
 		document.body.innerHTML = `
 		<script type="searchspring/recommend" profile="trending"></script>
 		<script type="searchspring/recommend" profile="trending"></script>
-		<script type="searchspring/recommend" profile="trending"></script>`;
+		<script type="searchspring/recommend" profile="trending"></script>
+		<script type="searchspring/recommend" profile="similar"></script>`;
+
+		const profileCount = {};
 
 		const client = new MockClient(baseConfig.client.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(3);
-		Object.keys(recommendationInstantiator.controllers).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controllers[controllerId];
-			expect(controllerId).toBe(`recommend_${controller.context.profile}${index}`);
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(4);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			profileCount[controller.context.profile] = profileCount[controller.context.profile] + 1 || 0;
+			expect(controllerId).toBe(`recommend_${controller.context.profile}_${profileCount[controller.context.profile]}`);
 		});
-		expect(clientSpy).toHaveBeenCalledTimes(3);
+		expect(clientSpy).toHaveBeenCalledTimes(4);
 	});
 
 	it('makes the context found on the target available', async () => {
@@ -239,7 +230,7 @@ describe('RecommendationInstantiator', () => {
 			options = {
 				branch: 'testing',
 				siteId: 'abc123',
-				categories: ['cats'],
+				categories: ['cats', 'dogs'],
 				limit: 5
 			}
 		</script>`;
@@ -249,9 +240,9 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controllers).length).toBe(1);
-		Object.keys(recommendationInstantiator.controllers).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controllers[controllerId];
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controller.context).toStrictEqual({
 				profile: 'trending',
 				shopper: {
@@ -260,7 +251,7 @@ describe('RecommendationInstantiator', () => {
 				product: 'sku1',
 				options: {
 					branch: 'testing',
-					categories: ['cats'],
+					categories: ['cats', 'dogs'],
 					limit: 5,
 					siteId: 'abc123',
 				},
@@ -271,7 +262,7 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledWith({
 			batched: true,
 			branch: 'testing',
-			categories: ['cats'],
+			categories: ['cats', 'dogs'],
 			limits: 5,
 			product: 'sku1',
 			shopper: 'snapdev',
@@ -280,7 +271,7 @@ describe('RecommendationInstantiator', () => {
 		});
 	});
 
-	it('will utilize attachments (plugins / middleware) added via methods upon creation of controllers', async () => {
+	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
 		const plugin = jest.fn();
@@ -312,8 +303,8 @@ describe('RecommendationInstantiator', () => {
 		});
 		await wait();
 
-		Object.keys(recommendationInstantiator.controllers).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controllers[controllerId];
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(6);
 			expect(plugin).toHaveBeenCalledTimes(1);
@@ -327,7 +318,7 @@ describe('RecommendationInstantiator', () => {
 		});
 	});
 
-	it('will utilize config based attachments (plugins / middleware) on created controllers', async () => {
+	it('will utilize config based attachments (plugins / middleware) on created controller', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
 		const plugin = jest.fn();
@@ -357,8 +348,8 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });
 		await wait();
 
-		Object.keys(recommendationInstantiator.controllers).forEach((controllerId, index) => {
-			const controller = recommendationInstantiator.controllers[controllerId];
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
 			expect(clientSpy).toHaveBeenCalledTimes(1);
 			expect(middlewareFn).toHaveBeenCalledTimes(3);
 			expect(plugin).toHaveBeenCalledTimes(1);
