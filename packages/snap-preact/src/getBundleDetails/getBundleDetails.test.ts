@@ -18,23 +18,12 @@ describe('getBundleDetails function', () => {
 			// return "Last-Modified" date
 			return `Fri, ${modifiedDate}`;
 		});
-
-		delete window.location;
-
-		// @ts-ignore
-		window.location = {
-			href: 'https://www.merch.com?branch=branch',
-		};
 	});
 
 	afterAll(() => jest.clearAllMocks);
 
 	it('fetches bundle details from requested bundle URL', () => {
 		const url = 'https://snapui.searchspring.io/siteId/next/bundle.js';
-		// @ts-ignore
-		xhrMock.status = 200;
-
-		jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
 
 		const fetchPromise = getBundleDetails(url).then((details) => {
 			expect(details.lastModified).toBe('07 Jan 2022 22:42:39 GMT');

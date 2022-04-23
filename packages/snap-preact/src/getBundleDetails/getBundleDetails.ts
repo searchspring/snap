@@ -22,7 +22,7 @@ export const getBundleDetails = async (url: string): Promise<BundleDetails> => {
 			}
 		};
 
-		request.onerror = () => reject();
+		request.onerror = () => reject({ message: 'Branch load fail!', description: 'There was an error with the request.' });
 
 		request.send();
 	});
