@@ -110,11 +110,9 @@ export class RecommendAPI extends API {
 		return response as unknown as ProfileResponseModel;
 	}
 
-	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel | undefined> {
+	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		const { tags, limits, ...otherParams } = parameters;
 		const [tag] = tags || [];
-
-		if (!tag) return;
 
 		let key = hashParams(otherParams as RecommendRequestModel);
 		if ('batched' in otherParams) {

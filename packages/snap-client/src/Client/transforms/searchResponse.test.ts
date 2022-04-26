@@ -1,4 +1,5 @@
-import { transformSearchResponse } from './searchResponse';
+import { transformSearchResponse, searchResponseType } from './searchResponse';
+import { SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
 
 const mockSingleResult = {
 	intellisuggestData: 'eJwrLzbIKTBkYGDwCDcyMDC01HXy8db1CGcwBEITIwYjQ2MLhvSizBQAuS0I0Q',
@@ -245,17 +246,19 @@ const mockDidYouMean = {
 
 const mockMatchType = {
 	query: {
-		matchType: 'expanded',
+		matchType: SearchResponseModelSearchMatchTypeEnum.Expanded,
 	},
 };
 
-const mockResponse = {
+const mockResponse: searchResponseType = {
 	results: [mockSingleResult, mockSingleResult],
 	filterSummary: mockFilterSummary,
 	facets: mockFacets,
 	merchandising: mockMerchandising,
 	pagination: mockPagination,
 	sorting: mockSorting,
+	...mockDidYouMean,
+	...mockMatchType,
 };
 
 const mockRequest = {
@@ -276,8 +279,6 @@ describe('search response transformer', () => {
 		const pagination = jest.spyOn(transformSearchResponse, 'pagination');
 		const merchandising = jest.spyOn(transformSearchResponse, 'merchandising');
 		const search = jest.spyOn(transformSearchResponse, 'search');
-
-		const searchResponse = transformSearchResponse(mockResponse, mockRequest);
 
 		expect(results).toHaveBeenCalled();
 		expect(filters).toHaveBeenCalled();
@@ -313,7 +314,7 @@ describe('search response transformer pagination', () => {
 	it('transforms pagination', () => {
 		const response = transformSearchResponse.pagination({
 			pagination: mockPagination,
-		});
+		} as searchResponseType);
 
 		expect(response.pagination.totalResults).toEqual(mockPagination.totalResults);
 		expect(response.pagination.defaultPageSize).toEqual(mockPagination.defaultPerPage);
@@ -325,7 +326,7 @@ describe('search response transformer pagination', () => {
 	it('still returns object if passed undefined', () => {
 		// @ts-ignore
 		expect(typeof transformSearchResponse.pagination().pagination).toEqual('object');
-		expect(typeof transformSearchResponse.pagination({}).pagination).toEqual('object');
+		expect(typeof transformSearchResponse.pagination({} as searchResponseType).pagination).toEqual('object');
 	});
 });
 
@@ -336,7 +337,7 @@ describe('search response transformer result', () => {
 		expect(result.id).toEqual(mockSingleResult.uid);
 
 		expect(typeof result.mappings).toEqual('object');
-		expect(typeof result.mappings.core).toEqual('object');
+		expect(typeof result.mappings?.core).toEqual('object');
 		expect(typeof result.attributes).toEqual('object');
 	});
 
@@ -345,14 +346,14 @@ describe('search response transformer result', () => {
 
 		// TODO: Add all core fields
 
-		expect(result.mappings.core.name).toEqual(mockSingleResult.name);
-		expect(result.mappings.core.sku).toEqual(mockSingleResult.sku);
-		expect(result.mappings.core.imageUrl).toEqual(mockSingleResult.imageUrl);
-		expect(result.mappings.core.thumbnailImageUrl).toEqual(mockSingleResult.thumbnailImageUrl);
-		expect(result.mappings.core.price).toEqual(+mockSingleResult.price);
-		expect(result.mappings.core.brand).toEqual(mockSingleResult.brand);
-		expect(result.mappings.core.url).toEqual(mockSingleResult.url);
-		expect(result.mappings.core.uid).toEqual(mockSingleResult.uid);
+		expect(result.mappings?.core?.name).toEqual(mockSingleResult.name);
+		expect(result.mappings?.core?.sku).toEqual(mockSingleResult.sku);
+		expect(result.mappings?.core?.imageUrl).toEqual(mockSingleResult.imageUrl);
+		expect(result.mappings?.core?.thumbnailImageUrl).toEqual(mockSingleResult.thumbnailImageUrl);
+		expect(result.mappings?.core?.price).toEqual(+mockSingleResult.price);
+		expect(result.mappings?.core?.brand).toEqual(mockSingleResult.brand);
+		expect(result.mappings?.core?.url).toEqual(mockSingleResult.url);
+		expect(result.mappings?.core?.uid).toEqual(mockSingleResult.uid);
 	});
 
 	it('leaves core fields out of attributes', () => {
@@ -360,28 +361,29 @@ describe('search response transformer result', () => {
 
 		// TODO: Add all core fields
 
-		expect(typeof result.attributes.name).toEqual('undefined');
-		expect(typeof result.attributes.sku).toEqual('undefined');
-		expect(typeof result.attributes.imageUrl).toEqual('undefined');
-		expect(typeof result.attributes.thumbnailImageUrl).toEqual('undefined');
-		expect(typeof result.attributes.price).toEqual('undefined');
-		expect(typeof result.attributes.brand).toEqual('undefined');
-		expect(typeof result.attributes.url).toEqual('undefined');
-		expect(typeof result.attributes.uid).toEqual('undefined');
+		expect(typeof result.attributes?.name).toEqual('undefined');
+		expect(typeof result.attributes?.sku).toEqual('undefined');
+		expect(typeof result.attributes?.imageUrl).toEqual('undefined');
+		expect(typeof result.attributes?.thumbnailImageUrl).toEqual('undefined');
+		expect(typeof result.attributes?.price).toEqual('undefined');
+		expect(typeof result.attributes?.brand).toEqual('undefined');
+		expect(typeof result.attributes?.url).toEqual('undefined');
+		expect(typeof result.attributes?.uid).toEqual('undefined');
 	});
 
 	it('builds attributes', () => {
 		const result = transformSearchResponse.result(mockSingleResult);
 
-		expect(result.attributes.ss_in_stock).toEqual('In Stock');
-		expect(result.attributes.handle).toEqual('over-this-shit-face-mask');
-		expect(result.attributes.variant_color).toEqual(['Black']);
+		expect(result.attributes?.ss_in_stock).toEqual('In Stock');
+		expect(result.attributes?.handle).toEqual('over-this-shit-face-mask');
+		expect(result.attributes?.variant_color).toEqual(['Black']);
 	});
 
 	it('maps all results through result transformer', () => {
 		const response = transformSearchResponse.results({
+			...mockResponse,
 			results: [mockSingleResult, mockSingleResult, mockSingleResult],
-		});
+		} as searchResponseType);
 
 		expect(response.results.length).toEqual(3);
 	});
@@ -389,19 +391,20 @@ describe('search response transformer result', () => {
 	it('still returns array if passed undefined', () => {
 		// @ts-ignore
 		expect(transformSearchResponse.results().results instanceof Array).toEqual(true);
+		// @ts-ignore
 		expect(transformSearchResponse.results({}).results instanceof Array).toEqual(true);
 	});
 });
 
 describe('search response facet transformer', () => {
 	it('has facets', () => {
-		const response = transformSearchResponse.facets({ facets: mockFacets });
+		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets });
 
 		expect(response.facets.length).toEqual(3);
 	});
 
 	it('has correct top-level keys for list facets', () => {
-		const response = transformSearchResponse.facets({ facets: mockFacets });
+		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets });
 
 		response.facets.forEach((facet) => {
 			expect(Object.keys(facet)).toEqual(['field', 'type', 'filtered', 'values']);
@@ -409,22 +412,16 @@ describe('search response facet transformer', () => {
 	});
 
 	it('has same values', () => {
-		const response = transformSearchResponse.facets({ facets: mockFacets });
+		const response = transformSearchResponse.facets({ ...mockResponse, facets: mockFacets });
 
 		expect(response.facets[0].values.length).toEqual(3);
 		expect(response.facets[1].values.length).toEqual(2);
-
-		// response.facets[0].values.forEach((value, i) => {
-		// 	expect(value).toEqual(mockFacets[0].values[i]);
-		// });
-		// response.facets[1].values.forEach((value, i) => {
-		// 	expect(value).toEqual(mockFacets[1].values[i]);
-		// });
 	});
 
 	it('still returns object if passed undefined', () => {
 		// @ts-ignore
 		expect(typeof transformSearchResponse.facets().facets).toEqual('object');
+		// @ts-ignore
 		expect(typeof transformSearchResponse.facets({}).facets).toEqual('object');
 	});
 });
@@ -432,6 +429,7 @@ describe('search response facet transformer', () => {
 describe('search response sorting transformer', () => {
 	it('is empty when there are no active sorts', () => {
 		const response = transformSearchResponse.sorting({
+			...mockResponse,
 			sorting: mockSorting,
 		});
 
@@ -443,6 +441,7 @@ describe('search response sorting transformer', () => {
 		(activeSorting.options[0] as any).active = true;
 
 		const response = transformSearchResponse.sorting({
+			...mockResponse,
 			sorting: activeSorting,
 		});
 
@@ -460,6 +459,7 @@ describe('search response sorting transformer', () => {
 		(activeSorting.options[1] as any).active = true;
 
 		const response = transformSearchResponse.sorting({
+			...mockResponse,
 			sorting: activeSorting,
 		});
 
@@ -480,13 +480,14 @@ describe('search response sorting transformer', () => {
 describe('search response filterSummary transformer', () => {
 	it('has same values', () => {
 		const response = transformSearchResponse.filters({
+			...mockResponse,
 			filterSummary: mockFilterSummary,
 		});
 
 		expect(Array.isArray(response.filters)).toBe(true);
 		expect(response.filters.length).toBe(mockFilterSummary.length);
 
-		response.filters.forEach((filter, index) => {
+		response.filters.forEach((filter: any, index: any) => {
 			const mockFilter = mockFilterSummary[index];
 
 			expect(filter.field).toBe(mockFilter.field);
@@ -506,6 +507,7 @@ describe('search response filterSummary transformer', () => {
 	it('returns empty array if passed no data', () => {
 		// @ts-ignore
 		expect(Array.isArray(transformSearchResponse.filters().filters)).toBe(true);
+		// @ts-ignore
 		expect(Array.isArray(transformSearchResponse.filters([]).filters)).toBe(true);
 	});
 });
@@ -515,6 +517,7 @@ describe('search response merch transformer', () => {
 
 	it('has same values', () => {
 		const response = transformSearchResponse.merchandising({
+			...mockResponse,
 			merchandising: mockMerchandising,
 		});
 
@@ -524,11 +527,13 @@ describe('search response merch transformer', () => {
 	it('still returns object if passed undefined', () => {
 		// @ts-ignore
 		expect(typeof transformSearchResponse.merchandising().merchandising).toEqual('object');
+		// @ts-ignore
 		expect(typeof transformSearchResponse.merchandising({}).merchandising).toEqual('object');
 	});
 
 	it('ensures content is always an object', () => {
 		const response = transformSearchResponse.merchandising({
+			...mockResponse,
 			merchandising: mockMerchandising,
 		});
 
@@ -541,6 +546,7 @@ describe('search response search transformer facets', () => {
 	it('has didYouMean and query', () => {
 		const response = transformSearchResponse.search(
 			{
+				...mockResponse,
 				didYouMean: mockDidYouMean,
 			},
 			mockRequest
@@ -551,7 +557,7 @@ describe('search response search transformer facets', () => {
 	});
 
 	it('has matchType', () => {
-		const response = transformSearchResponse.search(mockMatchType, mockRequest);
+		const response = transformSearchResponse.search(mockResponse, mockRequest);
 
 		expect(response.search.matchType).toEqual(mockMatchType.query.matchType);
 	});
@@ -565,6 +571,7 @@ describe('hierarchy facets', () => {
 
 		const response = transformSearchResponse.facets(
 			{
+				...mockResponse,
 				facets: mockFacets,
 			},
 			mockRequest
@@ -573,8 +580,8 @@ describe('hierarchy facets', () => {
 		//console.log(JSON.stringify(response.facets, null, 2));
 		const hierarchyFacet = response.facets[2];
 
-		const values = hierarchyFacet.values.map((v) => v.value);
-		const labels = hierarchyFacet.values.map((v) => v.label);
+		const values = hierarchyFacet.values.map((v: any) => v.value);
+		const labels = hierarchyFacet.values.map((v: any) => v.label);
 
 		expect(values).toEqual([
 			null,
@@ -607,6 +614,7 @@ describe('hierarchy facets', () => {
 
 		const response = transformSearchResponse.facets(
 			{
+				...mockResponse,
 				facets: mockFacets,
 			},
 			mockRequest
@@ -615,8 +623,8 @@ describe('hierarchy facets', () => {
 		//console.log(JSON.stringify(response.facets, null, 2));
 		const hierarchyFacet = response.facets[2];
 
-		const values = hierarchyFacet.values.map((v) => v.value);
-		const labels = hierarchyFacet.values.map((v) => v.label);
+		const values = hierarchyFacet.values.map((v: any) => v.value);
+		const labels = hierarchyFacet.values.map((v: any) => v.label);
 
 		expect(values).toEqual(['Mermaid>Mermaid Monofins>Fantasy Fin Monofins', 'Mermaid>Mermaid Monofins>Monofin Replacement Parts']);
 

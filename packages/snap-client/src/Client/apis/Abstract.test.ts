@@ -64,27 +64,30 @@ describe('Abstract Api', () => {
 			cache: CustomCacheConfig,
 		};
 
-		let api;
 		// end set up
 
-		expect(() => {
-			api = new API(new ApiConfiguration(config));
-		}).not.toThrow();
+		let api = new API(new ApiConfiguration(config));
 
 		//has correct values
-		expect(api.cache).toEqual({
+		expect(api?.cache).toEqual({
 			config: {
 				...CustomCacheConfig,
 			},
 			memoryCache: {},
 		});
 
-		expect(api.configuration.origin).toBe(config.origin);
-		expect(api.configuration.maxRetry).toBe(config.maxRetry);
-		expect(api.configuration.cache).toBe(config.cache);
-		expect(api.configuration.headers).toBe(config.headers);
+		//these are private and typescript isnt happy about us testing them.
+		// @ts-ignore
+		expect(api?.configuration?.origin).toBe(config.origin);
+		// @ts-ignore
+		expect(api?.configuration?.maxRetry).toBe(config.maxRetry);
+		// @ts-ignore
+		expect(api?.configuration?.cache).toBe(config.cache);
+		// @ts-ignore
+		expect(api?.configuration?.headers).toBe(config.headers);
 
 		//can use passed in fetch function
+		// @ts-ignore
 		await api.fetchApi();
 
 		expect(fetchfn).toHaveBeenCalled();
@@ -102,15 +105,13 @@ describe('Abstract Api', () => {
 			queryParamsStringify: queryParamMockfn,
 		};
 
-		let api;
 		// end set up
 
-		expect(() => {
-			api = new API(new ApiConfiguration(config));
-		}).not.toThrow();
+		let api = new API(new ApiConfiguration(config));
 
 		//can use query params stringify
-		expect(api.configuration.queryParamsStringify(['string', 'thing'])).toBe('here');
+		// @ts-ignore
+		expect(api?.configuration?.queryParamsStringify(['string', 'thing'])).toBe('here');
 		expect(queryParamMockfn).toHaveBeenCalled();
 	});
 
@@ -121,12 +122,8 @@ describe('Abstract Api', () => {
 			headers: customHeaders,
 		};
 
-		let api;
 		// end set up
-
-		expect(() => {
-			api = new API(new ApiConfiguration(config));
-		}).not.toThrow();
+		let api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -137,6 +134,7 @@ describe('Abstract Api', () => {
 		};
 
 		//can use createFetchParams and get back expected values
+		//@ts-ignore
 		const fetchParams = api.createFetchParams(context);
 		expect(fetchParams).toBeDefined();
 		expect(fetchParams.url).toBe(`${config.origin}/api/v1/autocomplete`);
@@ -146,6 +144,7 @@ describe('Abstract Api', () => {
 
 		//create fetch params requires a site id
 		const badContext = { ...context, body: {} };
+		//@ts-ignore
 		expect(() => api.createFetchParams(badContext)).toThrowError(`Request failed. Missing "siteId" parameter.`);
 
 		let config2: ApiConfigurationParameters = {
@@ -170,10 +169,7 @@ describe('Abstract Api', () => {
 			headers: customHeaders,
 		};
 
-		let api;
-		expect(() => {
-			api = new API(new ApiConfiguration(config));
-		}).not.toThrow();
+		let api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -187,6 +183,7 @@ describe('Abstract Api', () => {
 		const cacheKey = '/api/v1/autocomplete' + JSON.stringify(body);
 
 		let request;
+		//@ts-ignore
 		request = await api.request(context, cacheKey);
 
 		expect(fetchfn).toHaveBeenCalled();
@@ -199,9 +196,10 @@ describe('Abstract Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ found: true }) } as Response));
 
 		const setCacheSpy = jest.spyOn(api.cache, 'set');
-		const getCacheSpy = jest.spyOn(api.cache, 'get').mockImplementation(() => Promise.resolve({ foundInCache: true }));
+		const getCacheSpy = jest.spyOn(api.cache, 'get').mockImplementation(() => Promise.resolve({ foundInCache: true }) as unknown as Response);
 
 		//no cache key
+		//@ts-ignore
 		request = await api.request(context);
 		expect(fetchfn200).toHaveBeenCalled();
 		expect(request).toEqual({ found: true });
@@ -211,6 +209,7 @@ describe('Abstract Api', () => {
 		fetchfn200.mockClear();
 
 		//with a cache key
+		//@ts-ignore
 		request = await api.request(context, cacheKey);
 
 		expect(request).not.toEqual({ found: true });
@@ -230,10 +229,7 @@ describe('Abstract Api', () => {
 			maxRetry: 2,
 		};
 
-		let api;
-		expect(() => {
-			api = new API(new ApiConfiguration(config));
-		}).not.toThrow();
+		let api = new API(new ApiConfiguration(config));
 
 		const body = { siteId: '8uyt2m' };
 		const context = {
@@ -249,9 +245,10 @@ describe('Abstract Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 429, json: () => Promise.resolve({ broken: true }) } as Response));
 
 		await expect(async () => {
+			//@ts-ignore
 			await api.request(context);
 		}).rejects.toBe(429);
 
-		expect(fetchfn429).toHaveBeenCalledTimes(config.maxRetry + 1);
+		expect(fetchfn429).toHaveBeenCalledTimes((config.maxRetry || 0) + 1);
 	});
 });

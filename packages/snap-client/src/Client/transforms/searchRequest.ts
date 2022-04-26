@@ -5,7 +5,6 @@ import {
 	SearchRequestModelFilterValue,
 	SearchRequestModelSorts,
 	SearchRequestModelSortsDirectionEnum,
-	SearchRequestModelFilter,
 	SearchRequestModelFilterRangeAllOfValue,
 } from '@searchspring/snapi-types';
 

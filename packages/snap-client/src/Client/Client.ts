@@ -1,5 +1,4 @@
 import {
-	LegacyAPI,
 	HybridAPI,
 	SuggestAPI,
 	RecommendAPI,

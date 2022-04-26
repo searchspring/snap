@@ -1,4 +1,4 @@
-import { SearchRequestModelFilterValue, SearchRequestModelFilterRange } from '@searchspring/snapi-types';
+import { SearchRequestModelFilterValue, SearchRequestModelFilterRange, SearchRequestModelFilter } from '@searchspring/snapi-types';
 
 import { transformSearchRequest } from './searchRequest';
 
@@ -167,15 +167,15 @@ describe('search request filter transform', () => {
 		const params = transformSearchRequest.filters({
 			filters: [
 				{
-					type: 'range' as any,
+					type: 'range',
 					field: 'price',
 					value: {
-						low: null,
+						low: undefined,
 						high: 50,
 					},
 				} as SearchRequestModelFilterRange,
 				{
-					type: 'range' as any,
+					type: 'range',
 					field: 'width',
 					value: {
 						low: 25,
@@ -191,7 +191,7 @@ describe('search request filter transform', () => {
 					background: true,
 				} as SearchRequestModelFilterRange,
 				,
-			],
+			] as SearchRequestModelFilter[],
 		});
 
 		expect(params).toEqual({

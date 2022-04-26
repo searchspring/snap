@@ -94,7 +94,7 @@ export class API {
 		return { url, init };
 	}
 
-	private fetchApi = async (url: string, init: RequestInit) => {
+	private fetchApi = async (url: RequestInfo, init?: RequestInit | undefined) => {
 		const response = await this.configuration.fetchApi(url, init);
 
 		return response;

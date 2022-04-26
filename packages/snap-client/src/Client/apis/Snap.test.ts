@@ -4,17 +4,13 @@ import { SnapAPI } from './Snap';
 
 describe('Snap Api', () => {
 	it('has expected default functions', () => {
-		let api;
+		let api = new SnapAPI(new ApiConfiguration({}));
 
-		expect(() => {
-			api = new SnapAPI(new ApiConfiguration({}));
-		}).not.toThrow();
+		expect(api?.postMeta).toBeDefined();
 
-		expect(api.postMeta).toBeDefined();
+		expect(api?.postSearch).toBeDefined();
 
-		expect(api.postSearch).toBeDefined();
-
-		expect(api.postAutocomplete).toBeDefined();
+		expect(api?.postAutocomplete).toBeDefined();
 	});
 
 	it('can call postMeta', async () => {
