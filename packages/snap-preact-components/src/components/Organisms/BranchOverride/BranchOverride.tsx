@@ -43,6 +43,7 @@ const CSS = {
 				'.ss__branch-override__top__logo': {
 					display: 'inline-block',
 					height: '30px',
+					maxHeight: '30px',
 					verticalAlign: 'middle',
 				},
 				'.ss__branch-override__top__collapse': {
