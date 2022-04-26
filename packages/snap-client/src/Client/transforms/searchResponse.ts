@@ -178,11 +178,11 @@ transformSearchResponse.pagination = (response: searchResponseType): { paginatio
 
 	return {
 		pagination: {
-			totalResults: pagination.totalResults,
-			page: pagination.currentPage,
-			pageSize: pagination.perPage,
-			defaultPageSize: pagination.defaultPerPage,
-			totalPages: pagination.totalPages,
+			totalResults: pagination?.totalResults,
+			page: pagination?.currentPage,
+			pageSize: pagination?.perPage,
+			defaultPageSize: pagination?.defaultPerPage,
+			totalPages: pagination?.totalPages,
 		},
 	};
 };

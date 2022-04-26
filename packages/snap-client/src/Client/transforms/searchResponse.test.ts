@@ -246,7 +246,7 @@ const mockDidYouMean = {
 
 const mockMatchType = {
 	query: {
-		matchType: SearchResponseModelSearchMatchTypeEnum.Expanded,
+		matchType: 'expanded' as SearchResponseModelSearchMatchTypeEnum.Expanded,
 	},
 };
 
@@ -279,6 +279,8 @@ describe('search response transformer', () => {
 		const pagination = jest.spyOn(transformSearchResponse, 'pagination');
 		const merchandising = jest.spyOn(transformSearchResponse, 'merchandising');
 		const search = jest.spyOn(transformSearchResponse, 'search');
+
+		const searchResponse = transformSearchResponse(mockResponse, mockRequest);
 
 		expect(results).toHaveBeenCalled();
 		expect(filters).toHaveBeenCalled();
@@ -522,13 +524,6 @@ describe('search response merch transformer', () => {
 		});
 
 		expect(response.merchandising).toEqual(mockMerchandising);
-	});
-
-	it('still returns object if passed undefined', () => {
-		// @ts-ignore
-		expect(typeof transformSearchResponse.merchandising().merchandising).toEqual('object');
-		// @ts-ignore
-		expect(typeof transformSearchResponse.merchandising({}).merchandising).toEqual('object');
 	});
 
 	it('ensures content is always an object', () => {
