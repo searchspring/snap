@@ -36,6 +36,10 @@ export class MockClient extends Client {
 		return Promise.all([this.meta() as MetaResponseModel, autocompleteData as AutocompleteResponseModel]);
 	}
 
+	async recommend() {
+		return this.mockData.recommend();
+	}
+
 	async trending(): Promise<TrendingResponseModel> {
 		return this.mockData.trending();
 	}

@@ -4,6 +4,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
+import { ControllerTypes } from '../types';
 import type { FinderStore } from '@searchspring/snap-store-mobx';
 import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent, ContextVariables } from '../types';
 
@@ -23,7 +24,7 @@ const defaultConfig: FinderControllerConfig = {
 };
 
 export class FinderController extends AbstractController {
-	public type = 'finder';
+	public type = ControllerTypes.finder;
 	public store: FinderStore;
 	config: FinderControllerConfig;
 

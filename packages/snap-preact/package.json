@@ -16,7 +16,7 @@
 		"dev": "tsc --watch",
 		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-		"test": "jest --passWithNoTests",
+		"test": "jest",
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
@@ -24,6 +24,7 @@
 		"@searchspring/snap-controller": "^0.26.1",
 		"@searchspring/snap-event-manager": "^0.26.1",
 		"@searchspring/snap-logger": "^0.26.1",
+		"@searchspring/snap-preact-components": "^0.26.1",
 		"@searchspring/snap-profiler": "^0.26.1",
 		"@searchspring/snap-store-mobx": "^0.26.1",
 		"@searchspring/snap-toolbox": "^0.26.1",
