@@ -2,13 +2,11 @@
 import { h, Fragment } from 'preact';
 import { useState, useRef } from 'preact/hooks';
 
-import { jsx, css, Global } from '@emotion/react';
+import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-
-import { styles } from './styles';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -76,9 +74,35 @@ const CSS = {
 			'.swiper-container': {
 				display: 'flex',
 				flexDirection: 'column',
+				marginLeft: 'auto',
+				marginRight: 'auto',
+				position: 'relative',
+				overflow: 'hidden',
+				listStyle: 'none',
+				padding: 0,
+				zIndex: 1,
+			},
+			'.swiper-container-vertical': {
+				'.swiper-wrapper': {
+					flexDirection: 'column',
+				},
 			},
 			'.swiper-wrapper': {
 				order: 0,
+				position: 'relative',
+				width: '100%',
+				height: '100%',
+				zIndex: 1,
+				display: 'flex',
+				transitionProperty: 'transform',
+				boxSizing: 'content-box',
+			},
+			'.swiper-slide': {
+				flexShrink: 0,
+				width: '100%',
+				height: '100%',
+				position: 'relative',
+				transitionProperty: 'transform',
 			},
 			'.swiper-pagination': {
 				display: 'flex',
@@ -101,6 +125,15 @@ const CSS = {
 					opacity: '0.8',
 					background: theme?.colors?.primary || '#000',
 				},
+			},
+			'.swiper-container-pointer-events': {
+				touchAction: 'pan-y',
+				'&.swiper-container-vertical': {
+					touchAction: 'pan-x',
+				},
+			},
+			'.swiper-slide-invisible-blank': {
+				visibility: 'hidden',
 			},
 		}),
 };
@@ -229,7 +262,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...styling}
 					className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
 				>
-					<Global styles={css(styles)} />
 					<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
 						<div
 							className="ss__carousel__prev"
