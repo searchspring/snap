@@ -29,6 +29,7 @@ export * from './components/Molecules/FacetSlider';
 
 // ORGANISMS
 export * from './components/Organisms/Autocomplete';
+export * from './components/Organisms/BranchOverride';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
 export * from './components/Organisms/FilterSummary';

@@ -10,8 +10,7 @@
                 "component": "Default",
                 "branch": "production",
                 "group": "smc"
-            },
-            "templateParameters": { "headerText": "Trending Products" }
+            }
         }
     }
 }
