@@ -21,7 +21,10 @@
 	},
 	"dependencies": {
 		"@searchspring/snap-toolbox": "^0.26.1",
-		"deepmerge": "^4.2.2"
+		"deepmerge": "^4.2.2",
+		"flexsearch": "^0.7.21",
+		"itemsjs": "^2.1.14",
+		"minisearch": "^4.0.3"
 	},
 	"sideEffects": false,
 	"files": [
