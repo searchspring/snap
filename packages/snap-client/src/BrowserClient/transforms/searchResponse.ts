@@ -47,7 +47,7 @@ export function transformSearchResponse(response: any, request: SearchRequestMod
 		// ...transformSearchResponse.facets(response, request),
 		...transformSearchResponse.sorting(request),
 		// ...transformSearchResponse.merchandising(response),
-		// ...transformSearchResponse.search(response, request),
+		...transformSearchResponse.search(response, request),
 	};
 }
 
@@ -256,16 +256,9 @@ transformSearchResponse.merchandising = (response) => {
 };
 
 transformSearchResponse.search = (response, request) => {
-	const didYouMean = ((response || {}).didYouMean || {}).query;
-	const originalQuery = ((request || {}).search || {}).originalQuery;
-	const matchType = ((response || {}).query || {}).matchType;
-
 	return {
 		search: {
-			query: (((request || {}).search || {}).query || {}).string,
-			didYouMean,
-			originalQuery,
-			matchType,
+			query: request?.search?.query?.string,
 		},
 	};
 };
