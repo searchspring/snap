@@ -4,10 +4,14 @@ import deepmerge from 'deepmerge';
 
 import { transformSearchResponse, transformSearchRequest } from './transforms';
 
-import type { ClientGlobals } from '../types';
+import { ApiConfiguration, SuggestAPI, TrendingRequestModel, TrendingResponseModel } from '../Client/apis';
+
+import type { ClientGlobals, SnapApiConfig, CacheConfig } from '../types';
 import type { SearchResult } from './types';
 
 import type {
+	AutocompleteRequestModel,
+	AutocompleteResponseModel,
 	MetaRequestModel,
 	MetaResponseModel,
 	MetaResponseModelFacetList,
@@ -54,6 +58,10 @@ type BrowserConfig = {
 	};
 	miniSearch?: {};
 	itemsJs?: {};
+	suggest?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
 	options: {
 		defaultPageSize: number;
 	};
@@ -73,9 +81,14 @@ class Deferred {
 }
 
 export class BrowserClient {
+	private requesters: {
+		suggest: SuggestAPI;
+	};
+
 	private globals: ClientGlobals;
 	private config: BrowserConfig;
 	private miniSearch: MiniSearch;
+	private miniSearchAc: MiniSearch;
 	private itemsJs: ItemsJS;
 	private data: BrowserData = {};
 	private ready: Deferred;
@@ -89,6 +102,15 @@ export class BrowserClient {
 		this.globals = globals;
 		this.config = deepmerge(this.defaultConfig, config);
 
+		this.requesters = {
+			suggest: new SuggestAPI(
+				new ApiConfiguration({
+					origin: this.config.suggest?.api?.origin,
+					cache: this.config.suggest.cache,
+				})
+			),
+		};
+
 		this.init();
 	}
 
@@ -97,6 +119,11 @@ export class BrowserClient {
 			feed: {},
 			miniSearch: {},
 			itemsJs: {},
+			suggest: {
+				api: {
+					// origin: 'https://snapi.kube.searchspring.io',
+				},
+			},
 			options: {
 				defaultPageSize: 20,
 			},
@@ -126,6 +153,12 @@ export class BrowserClient {
 				fields: this.data.searchableFields,
 			});
 			this.miniSearch.addAll(this.data.products);
+
+			this.miniSearchAc = new MiniSearch({
+				fields: ['name'],
+			});
+			// TODO: kinda bad to store products twice
+			this.miniSearchAc.addAll(this.data.products);
 
 			const supportedDisplayTypes = ['list', 'palette', 'grid'];
 			const aggregations = {};
@@ -199,6 +232,58 @@ export class BrowserClient {
 		await this.ready.promise;
 
 		return this.data.meta;
+	}
+
+	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
+		params = deepmerge({ siteId: this.globals.siteId }, params || {});
+
+		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
+	}
+
+	async autocomplete(params: AutocompleteRequestModel = {}): Promise<[MetaResponseModel, AutocompleteResponseModel]> {
+		if (!params.search?.query?.string) {
+			throw 'query string parameter is required';
+		}
+
+		console.log('-- autocomplete start --');
+
+		params = deepmerge(this.globals, params);
+
+		// get suggestions from minisearch
+		let query = params.search?.query?.string;
+		let suggested;
+		let alternatives;
+		const suggestions = this.miniSearchAc.autoSuggest(params.search?.query?.string, {});
+		suggestions
+			.sort((a, b) => {
+				return a.suggestion.length - b.suggestion.length;
+			})
+			.slice(0, 5);
+
+		if (suggestions.length != 0) {
+			suggested = {
+				text: suggestions[0].suggestion,
+			};
+			alternatives = suggestions.slice(1).map((alt) => {
+				return {
+					text: alt.suggestion,
+				};
+			});
+			params.search.query.string = suggested.text;
+		}
+
+		// return results from itemsjs with search from first suggestion
+		const [meta, searchResponse] = await this.search(params);
+		const response = {
+			autocomplete: {
+				query,
+				suggested,
+				alternatives,
+			},
+			...searchResponse,
+		};
+
+		return Promise.all([meta, response]);
 	}
 
 	async search(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {

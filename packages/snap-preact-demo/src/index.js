@@ -89,9 +89,9 @@ let config = {
 					id: 'autocomplete',
 					selector: 'input.searchspring-ac',
 					settings: {
-						// trending: {
-						// 	limit: 5,
-						// },
+						trending: {
+							limit: 5,
+						},
 					},
 					globals: {
 						search: {
