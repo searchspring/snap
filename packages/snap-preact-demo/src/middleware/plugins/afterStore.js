@@ -5,7 +5,7 @@ export function afterStore(controller) {
 	});
 	controller.on('afterStore', async ({ controller: { store } }, next) => {
 		mutateFacets(store.facets);
-		mutateResults(store.results);
+		// mutateResults(store.results);
 
 		await next();
 	});

@@ -11,6 +11,7 @@ import type {
 	MetaRequestModel,
 	MetaResponseModel,
 	MetaResponseModelFacetList,
+	MetaResponseModelFacetListMultipleEnum,
 	SearchRequestModel,
 	SearchResponseModel,
 	SearchResponseModelResult,
@@ -93,6 +94,7 @@ export class BrowserClient {
 
 	get defaultConfig(): BrowserConfig {
 		return {
+			feed: {},
 			miniSearch: {},
 			itemsJs: {},
 			options: {
@@ -125,13 +127,14 @@ export class BrowserClient {
 			});
 			this.miniSearch.addAll(this.data.products);
 
+			const supportedDisplayTypes = ['list', 'palette', 'grid'];
 			const aggregations = {};
 			Object.keys(this.data.meta?.facets).forEach((field) => {
 				const facet = this.data.meta?.facets[field] as MetaResponseModelFacetList;
-				if (facet?.display == 'list') {
+				if (supportedDisplayTypes.includes(facet?.display)) {
 					aggregations[field] = {
 						title: facet.label,
-						conjunctive: true,
+						conjunction: facet.multiple != ('or' as MetaResponseModelFacetListMultipleEnum.Or),
 						size: 100,
 					};
 				}

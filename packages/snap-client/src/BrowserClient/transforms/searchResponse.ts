@@ -43,8 +43,8 @@ export function transformSearchResponse(response: any, request: SearchRequestMod
 	return {
 		...transformSearchResponse.pagination(response, options),
 		...transformSearchResponse.results(response),
-		// ...transformSearchResponse.filters(response),
-		// ...transformSearchResponse.facets(response, request),
+		...transformSearchResponse.filters(response, request),
+		...transformSearchResponse.facets(response, request),
 		...transformSearchResponse.sorting(request),
 		// ...transformSearchResponse.merchandising(response),
 		...transformSearchResponse.search(response, request),
@@ -118,26 +118,18 @@ transformSearchResponse.result = (rawResult): SearchResponseModelResult => {
 	});
 };
 
-transformSearchResponse.filters = (response) => {
-	const filterSummary = (response || {}).filterSummary || [];
+transformSearchResponse.filters = (response, request) => {
+	const filterSummary = request.filters || [];
 
 	return {
 		filters: filterSummary.map((filter) => {
 			let value = filter.value;
 			let type = 'value';
 
-			if (typeof filter.value == 'object') {
-				(type = 'range'),
-					(value = {
-						low: +filter.value.rangeLow,
-						high: +filter.value.rangeHigh,
-					});
-			}
-
 			return {
 				type,
 				field: filter.field,
-				label: filter.filterValue,
+				label: filter.value,
 				value,
 			};
 		}),
@@ -146,92 +138,37 @@ transformSearchResponse.filters = (response) => {
 
 transformSearchResponse.facets = (response, request: SearchRequestModel = {}) => {
 	const filters = request.filters || [];
-	const facets = (response || {}).facets || [];
+	const facets = response?.data?.aggregations || {};
 
 	return {
-		facets: facets.map((facet) => {
+		facets: Object.keys(facets).map((field) => {
+			// assuming all value type facets for now
+			const facet = facets[field];
+
 			let transformedFacet: SearchResponseModelFacetValue | SearchResponseModelFacetRange = {
-				field: facet.field,
+				field: facet.name,
 				type: 'value',
-				filtered: Boolean(facet.facet_active),
+				filtered: false,
 			};
 
-			if (facet.step) {
-				transformedFacet = {
-					...transformedFacet,
-					type: 'range',
-					step: facet.step,
-					range: {
-						low: facet.range[0] == '*' ? null : +facet.range[0],
-						high: facet.range[1] == '*' ? null : +facet.range[1],
-					},
-				};
-
-				if (facet.active && facet.active.length > 1) {
-					transformedFacet.active = {
-						low: facet.active[0] == '*' ? null : +facet.active[0],
-						high: facet.active[1] == '*' ? null : +facet.active[1],
-					};
-				}
-			} else if (facet.values instanceof Array) {
-				if (facet.type == 'hierarchy') {
-					transformedFacet.type = 'value';
-
-					(transformedFacet as SearchResponseModelFacetValue).values = (facet.values || []).map((value) => {
+			if (facet.buckets instanceof Array) {
+				const filteredValues = facet.buckets.filter((value) => {
+					return value.selected;
+				});
+				transformedFacet.filtered = filteredValues.length > 0;
+				transformedFacet.type = 'value';
+				(transformedFacet as SearchResponseModelFacetValue).values = facet.buckets
+					.filter((value) => {
+						return value.doc_count;
+					})
+					.map((value) => {
 						return {
-							filtered: Boolean(value.active),
-							value: value.value,
-							label: value.label,
-							count: value.count,
+							filtered: value.selected,
+							value: value.key,
+							label: value.key,
+							count: value.doc_count,
 						};
 					});
-
-					const filterSelected = filters.find((f) => f.field == facet.field);
-
-					const newValues = [];
-					if (filterSelected && !filterSelected.background) {
-						const valueLevels = (filterSelected as SearchRequestModelFilterValue).value.split(facet.hierarchyDelimiter);
-
-						for (let i = valueLevels.length - 1; i >= 0; i--) {
-							const valueSplit = valueLevels.slice(0, i + 1);
-							const value = valueSplit.join(facet.hierarchyDelimiter);
-							newValues.unshift({
-								value,
-								filtered: value == (filterSelected as SearchRequestModelFilterValue).value,
-								label: valueSplit[valueSplit.length - 1],
-							});
-						}
-
-						newValues.unshift({
-							value: null,
-							filtered: false,
-							label: 'View All',
-						});
-					}
-
-					(transformedFacet as SearchResponseModelFacetValue).values = newValues.concat((transformedFacet as SearchResponseModelFacetValue).values);
-				} else if (facet.values[0].type == 'value') {
-					transformedFacet.type = 'value';
-					(transformedFacet as SearchResponseModelFacetValue).values = facet.values.map((value) => {
-						return {
-							filtered: value.active,
-							value: value.value,
-							label: value.label,
-							count: value.count,
-						};
-					});
-				} else if (facet.values[0].type == 'range') {
-					transformedFacet.type = 'range-buckets';
-					(transformedFacet as SearchResponseModelFacetValue).values = facet.values.map((value) => {
-						return {
-							filtered: value.active,
-							low: value.low == '*' ? null : +value.low,
-							high: value.high == '*' ? null : +value.high,
-							label: value.label,
-							count: value.count,
-						};
-					});
-				}
 			}
 
 			return transformedFacet;

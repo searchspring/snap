@@ -244,3 +244,23 @@ export type SearchResult = {
 export type MatchInfo = {
 	[term: string]: string[];
 };
+
+/**
+ * The type of auto-suggestions
+ */
+export type Suggestion = {
+	/**
+	 * The suggestion
+	 */
+	suggestion: string;
+
+	/**
+	 * Suggestion as an array of terms
+	 */
+	terms: string[];
+
+	/**
+	 * Score for the suggestion
+	 */
+	score: number;
+};

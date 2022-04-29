@@ -4,7 +4,7 @@ export function transformSearchRequest(request: SearchRequestModel, options): an
 	return {
 		...transformSearchRequest.sorts(request),
 		...transformSearchRequest.search(request),
-		// transformSearchRequest.filters(request),
+		...transformSearchRequest.filters(request),
 		// transformSearchRequest.merchandising(request),
 		...transformSearchRequest.pagination(request, options),
 		// transformSearchRequest.siteId(request),
@@ -63,32 +63,21 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 };
 
 transformSearchRequest.filters = (request: SearchRequestModel = {}) => {
-	return (request.filters || []).reduce((acc, filter: SearchRequestModelFilterRange | SearchRequestModelFilterValue) => {
-		const baseKey = filter.background ? 'bgfilter' : 'filter';
-
+	const filters = (request.filters || []).reduce((acc, filter: SearchRequestModelFilterRange | SearchRequestModelFilterValue) => {
+		const key = filter.field;
 		if (filter.type == 'value') {
-			const key = baseKey + '.' + filter.field;
-
 			return {
 				...acc,
 				[key]: (acc[key] || []).concat([filter.value]),
-			};
-		} else if (filter.type == 'range') {
-			const keyLow = baseKey + '.' + filter.field + '.low';
-			const keyHigh = baseKey + '.' + filter.field + '.high';
-
-			const low = (filter as SearchRequestModelFilterRange).value.low ?? '*';
-			const high = (filter as SearchRequestModelFilterRange).value.high ?? '*';
-
-			return {
-				...acc,
-				[keyLow]: (acc[keyLow] || []).concat([low]),
-				[keyHigh]: (acc[keyHigh] || []).concat([high]),
 			};
 		}
 
 		return acc;
 	}, {});
+
+	return {
+		filters,
+	};
 };
 
 transformSearchRequest.merchandising = (request: SearchRequestModel = {}) => {
