@@ -30,6 +30,37 @@ const CSS = {
 				borderBottom: `2px solid ${theme.colors?.primary || '#ccc'}`,
 				padding: '6px 0',
 			},
+			'& .ss__facet--search': {
+				margin: '16px 0 0 0',
+				display: 'flex',
+				flexDirection: 'column',
+				width: '100%',
+				'& .ss__facet__search--wrapper': {
+					display: 'flex',
+					alignItems: 'center',
+					width: '100%',
+					height: '45px',
+					border: `1px solid ${theme.colors?.primary || '#ccc'}`,
+					borderRadius: '4px',
+					'& .ss__facet__search--icon': {
+						display: 'flex',
+						alignItems: 'center',
+						height: '100%',
+						paddingLeft: '16px',
+						paddingRight: '12px',
+					},
+					'& input': {
+						display: 'flex',
+						alignItems: 'center',
+						width: '100%',
+						height: '100%',
+						outline: '2px solid transparent',
+						outlineOffset: '2px',
+						paddingRight: '16px',
+						border: '0',
+					},
+				},
+			},
 			'& .ss__facet__options': {
 				marginTop: '8px',
 				maxHeight: '300px',
@@ -61,6 +92,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText: 'Show Less',
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
+		searchable: false,
 		// global theme
 		...globalTheme?.components?.facet,
 		// props
@@ -95,6 +127,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		searchable,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -227,6 +260,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	// Search within facet
+	const searchableFacet = {
+		allowableTypes: ['list', 'grid', 'palette'],
+		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
+			(facet as ValueFacet)!.search = {
+				input: e.target.value,
+			};
+		},
+	};
+
 	return (
 		facet && (
 			<CacheProvider>
@@ -242,6 +285,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							</div>
 						}
 					>
+						{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
+							<div className="ss__facet--search">
+								<div className="ss__facet__search--wrapper">
+									<div className="ss__facet__search--icon">
+										<Icon icon="search" />
+									</div>
+									<input type="search" className="input" onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+								</div>
+							</div>
+						)}
 						<div className={classnames('ss__facet__options', className)}>
 							{(() => {
 								//manual options component
@@ -315,6 +368,7 @@ interface OptionalFacetProps extends ComponentProps {
 	iconOverflowMore?: string;
 	iconOverflowLess?: string;
 	fields?: FieldProps;
+	searchable?: boolean;
 }
 
 type FieldProps = {
