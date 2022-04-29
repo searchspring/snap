@@ -1,12 +1,12 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
-import { withStore } from '@searchspring/snap-preact-components';
+import { withStore, Banner } from '@searchspring/snap-preact-components';
 
 @withStore
 @observer
 export class Header extends Component {
 	render() {
-		const { pagination, search, custom } = this.props.store;
+		const { pagination, search, custom, merchandising } = this.props.store;
 
 		return (
 			<header class="ss-header-container">
@@ -41,7 +41,7 @@ export class Header extends Component {
 					Search instead for "<a class="ss-oq-link" href="{{ originalQuery.url }}">{{ originalQuery.value }}</a>"
 				</div> */}
 
-				{/* <Merch position="header"/> */}
+				<Banner content={merchandising?.content} type={'header'} />
 			</header>
 		);
 	}

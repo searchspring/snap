@@ -45,7 +45,7 @@ export function Banner(properties: BannerProps): JSX.Element {
 	}
 	return (
 		content &&
-		content[type]?.length && (
+		content[type]?.length > 0 && (
 			<CacheProvider>
 				<div
 					className={classnames('ss__banner', `ss__banner--${type}`, className)}

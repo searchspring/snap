@@ -7,7 +7,7 @@ import { transformSearchResponse, transformSearchRequest } from './transforms';
 import { ApiConfiguration, SuggestAPI, TrendingRequestModel, TrendingResponseModel } from '../Client/apis';
 
 import type { ClientGlobals, SnapApiConfig, CacheConfig } from '../types';
-import type { SearchResult } from './types';
+import type { SearchResult, MerchandisingFeed } from './types';
 
 import type {
 	AutocompleteRequestModel,
@@ -47,6 +47,7 @@ type BrowserData = {
 	meta?: MetaResponseModel;
 	searchableFields?: string[];
 	fields?: string[];
+	merch?: MerchandisingFeed;
 };
 
 type BrowserConfig = {
@@ -55,6 +56,7 @@ type BrowserConfig = {
 		fields?: string;
 		searchableFields?: string;
 		meta?: string;
+		merch?: string;
 	};
 	miniSearch?: {};
 	itemsJs?: {};
@@ -94,7 +96,6 @@ export class BrowserClient {
 	private ready: Deferred;
 
 	constructor(globals: ClientGlobals, config: Partial<BrowserConfig> = {}) {
-		console.log('constructor');
 		if (!globals?.siteId) {
 			throw 'no siteId specified!';
 		}
@@ -116,7 +117,6 @@ export class BrowserClient {
 
 	get defaultConfig(): BrowserConfig {
 		return {
-			feed: {},
 			miniSearch: {},
 			itemsJs: {},
 			suggest: {
@@ -157,7 +157,7 @@ export class BrowserClient {
 			this.miniSearchAc = new MiniSearch({
 				fields: ['name'],
 			});
-			// TODO: kinda bad to store products twice
+			// TODO: bad to store products twice
 			this.miniSearchAc.addAll(this.data.products);
 
 			const supportedDisplayTypes = ['list', 'palette', 'grid'];
@@ -205,19 +205,22 @@ export class BrowserClient {
 		const fetchSearchableFields = window.fetch(this.config.feed.searchableFields);
 		const fetchFields = window.fetch(this.config.feed.fields);
 		const fetchMeta = window.fetch(this.config.feed.meta);
+		const fetchMerch = window.fetch(this.config.feed.merch);
 
-		const [productsResponse, searchableFieldsResponse, fieldsResponse, metaResponse] = await Promise.all([
+		const [productsResponse, searchableFieldsResponse, fieldsResponse, metaResponse, merchResponse] = await Promise.all([
 			fetchProducts,
 			fetchSearchableFields,
 			fetchFields,
 			fetchMeta,
+			fetchMerch,
 		]);
 
-		const [products, searchableFields, fields, meta] = await Promise.all([
+		const [products, searchableFields, fields, meta, merch] = await Promise.all([
 			productsResponse.json(),
 			searchableFieldsResponse.json(),
 			fieldsResponse.json(),
 			metaResponse.json(),
+			merchResponse.json(),
 		]);
 
 		return {
@@ -225,6 +228,7 @@ export class BrowserClient {
 			searchableFields,
 			fields,
 			meta,
+			merch,
 		};
 	}
 
@@ -253,12 +257,18 @@ export class BrowserClient {
 		let query = params.search?.query?.string;
 		let suggested;
 		let alternatives;
-		const suggestions = this.miniSearchAc.autoSuggest(params.search?.query?.string, {});
-		suggestions
+		let suggestions = this.miniSearchAc.autoSuggest(params.search?.query?.string, {});
+		suggestions = suggestions
 			.sort((a, b) => {
 				return a.suggestion.length - b.suggestion.length;
 			})
-			.slice(0, 5);
+			.sort((a, b) => {
+				if (query === a.suggestion) {
+					return -1;
+				}
+				return 1;
+			})
+			.slice(0, params.suggestions?.count || 5);
 
 		if (suggestions.length != 0) {
 			suggested = {
@@ -293,16 +303,35 @@ export class BrowserClient {
 		params = deepmerge(this.globals, params);
 
 		const query = params?.search?.query?.string;
-		let searchItems: SearchResult[];
+		let productIds: string[];
+
+		// handle merchandising
+		const merchandising = this.getCampaign(params);
+		const elevations = merchandising?.elevations;
 
 		// TODO 'refine query'
 		if (query) {
-			searchItems = this.miniSearch.search(query, this.config.miniSearch);
+			let productIds = this.miniSearch.search(query, this.config.miniSearch).map((item) => item.id);
+		} else {
+			productIds = this.data.products.map((product) => product.id);
 		}
+
+		if (productIds?.length && elevations.length && !params.sorts?.length) {
+			// elevations = [id, id, id, ...];
+			// elevate searchItems
+			console.log('elevating', elevations);
+			elevations.reverse().forEach((elevation) => {
+				const index = productIds.indexOf(elevation);
+				productIds.splice(index, 0);
+				productIds.unshift(elevation);
+			});
+		}
+
+		console.log('productIds', productIds);
 
 		const transformedRequest = transformSearchRequest(params, this.config.options);
 		const itemsJsRequest = {
-			ids: searchItems?.map((v) => v.id) || undefined,
+			ids: productIds,
 			isExactSearch: false,
 			removeStopWordFilter: true,
 			is_all_filtered_items: true,
@@ -314,11 +343,91 @@ export class BrowserClient {
 		console.log('---- itemJs request: ', itemsJsRequest);
 		console.log('---- itemJs response: ', itemsJsResponse);
 
-		const response = transformSearchResponse(itemsJsResponse, params, this.config.options);
+		const response = {
+			...transformSearchResponse(itemsJsResponse, params, this.config.options),
+			merchandising,
+		};
 
 		console.log('---- search request: ', params);
 		console.log('---- search response: ', response);
 
 		return Promise.all([this.meta(), response]);
 	}
+
+	private getCampaign(request) {
+		// Create new deep copy of campaigns
+		let results = [];
+		for (let i = 0; i < this.data.merch.length; i++) {
+			results.push(Object.assign({}, this.data.merch[i]));
+		}
+
+		results.forEach((campaign) => {
+			campaign.score = 0;
+
+			if (campaign.queryMatch && !request?.search?.query) {
+				// If the campaign has a query but the request does not it's not a match
+				campaign.score = 0;
+			} else if (campaign.filters && !request.filters) {
+				// If campaign has filters but request does not it's not a match
+				campaign.score = 0;
+			} else {
+				if (campaign.filters) {
+					let campaignFilters = campaign.filters.map((f) => f.field + ':' + f.value);
+					let reqFilters = request.filters.map((f) => f.field + ':' + f.value);
+					// If a campaign has filters the query needs to have all of those filters (possibly more)
+					let diff = campaignFilters.filter((filter) => {
+						return !reqFilters.includes(filter);
+					});
+
+					if (diff.length === 0) {
+						campaign.score = 1000 * campaign.filters.length;
+					}
+				}
+
+				if (campaign.queryMatch) {
+					let q = cleanQuery(campaign.queryMatch.q);
+
+					if (campaign.queryMatch.type === 'exact' && q == request?.search?.query?.string) {
+						campaign.score += q.length * 10;
+					}
+
+					if (campaign.queryMatch.type === 'contains' && request?.search?.query?.string.includes(q)) {
+						campaign.score += q.length;
+					}
+				}
+			}
+		});
+
+		results = results.filter((campaign) => campaign.score > 0).sort((a, b) => b.score - a.score);
+
+		let merchandising = {
+			content: {
+				header: [],
+				banner: [],
+				footer: [],
+				left: [],
+				inline: [],
+			},
+			elevations: [],
+		};
+
+		results.forEach((campaign) => {
+			if (campaign.merchandising) {
+				Object.keys(campaign.merchandising.content).forEach((position) => {
+					if (merchandising.content[position].length == 0) {
+						merchandising.content[position] = campaign.merchandising.content[position];
+					}
+				});
+			}
+			if (campaign.merchandising.elevations && merchandising.elevations.length == 0) {
+				merchandising.elevations = campaign.merchandising.elevations;
+			}
+		});
+
+		return merchandising;
+	}
+}
+
+function cleanQuery(q) {
+	return q.toLowerCase().replace(/[^a-z0-9]/g, '-');
 }

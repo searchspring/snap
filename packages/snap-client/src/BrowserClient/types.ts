@@ -1,3 +1,4 @@
+import type { SearchResponseModelMerchandisingContent } from '@searchspring/snapi-types';
 export type ItemJSQuery<T = any> = {
 	/**
 	 * Amount of items per page.
@@ -264,3 +265,18 @@ export type Suggestion = {
 	 */
 	score: number;
 };
+
+export type MerchandisingFeed = {
+	id: number;
+	queryMatch?: {
+		q: string;
+		type: string;
+	};
+	filters?: {
+		field: string;
+		value: string;
+	}[];
+	merchandising: {
+		content: SearchResponseModelMerchandisingContent;
+	};
+}[];
