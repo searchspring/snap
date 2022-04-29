@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
+import { BrowserClient } from '@searchspring/snap-client';
 
 import { afterStore } from './middleware/plugins/afterStore';
 import { configurable } from './middleware/plugins/configurable';
@@ -29,7 +30,7 @@ let config = {
 	},
 	client: {
 		globals: {
-			siteId: '8uyt2m',
+			siteId: 'rrh0k8',
 		},
 	},
 	instantiators: {
@@ -170,4 +171,11 @@ if (window?.mergeSnapConfig) {
 	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
 }
 
-const snap = new Snap(config);
+const snap = new Snap(config, {
+	client: new BrowserClient(
+		{
+			siteId: 'rrh0k8',
+		},
+		{}
+	),
+});
