@@ -240,7 +240,6 @@ export class BrowserClient {
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
-
 		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
@@ -311,15 +310,13 @@ export class BrowserClient {
 
 		// TODO 'refine query'
 		if (query) {
-			let productIds = this.miniSearch.search(query, this.config.miniSearch).map((item) => item.id);
+			productIds = this.miniSearch.search(query, this.config.miniSearch).map((item) => item.id);
 		} else {
 			productIds = this.data.products.map((product) => product.id);
 		}
 
 		if (productIds?.length && elevations.length && !params.sorts?.length) {
-			// elevations = [id, id, id, ...];
 			// elevate searchItems
-			console.log('elevating', elevations);
 			elevations.reverse().forEach((elevation) => {
 				const index = productIds.indexOf(elevation);
 				productIds.splice(index, 0);
@@ -328,7 +325,6 @@ export class BrowserClient {
 		}
 
 		console.log('productIds', productIds);
-
 		const transformedRequest = transformSearchRequest(params, this.config.options);
 		const itemsJsRequest = {
 			ids: productIds,
@@ -357,7 +353,7 @@ export class BrowserClient {
 	private getCampaign(request) {
 		// Create new deep copy of campaigns
 		let results = [];
-		for (let i = 0; i < this.data.merch.length; i++) {
+		for (let i = 0; i < this.data.merch?.length; i++) {
 			results.push(Object.assign({}, this.data.merch[i]));
 		}
 
@@ -408,11 +404,12 @@ export class BrowserClient {
 				left: [],
 				inline: [],
 			},
+			redirect: '',
 			elevations: [],
 		};
 
 		results.forEach((campaign) => {
-			if (campaign.merchandising) {
+			if (campaign.merchandising?.content) {
 				Object.keys(campaign.merchandising.content).forEach((position) => {
 					if (merchandising.content[position].length == 0) {
 						merchandising.content[position] = campaign.merchandising.content[position];
@@ -421,6 +418,9 @@ export class BrowserClient {
 			}
 			if (campaign.merchandising.elevations && merchandising.elevations.length == 0) {
 				merchandising.elevations = campaign.merchandising.elevations;
+			}
+			if (campaign.merchandising.redirect) {
+				merchandising.redirect = campaign.merchandising.redirect;
 			}
 		});
 
