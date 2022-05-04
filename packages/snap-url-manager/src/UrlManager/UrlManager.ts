@@ -273,7 +273,7 @@ export class UrlManager {
 		return this.linker(this);
 	}
 
-	subscribe(cb: (prev: ImmutableObject<UrlState>, next?: ImmutableObject<UrlState>) => void): () => void {
+	subscribe(cb: (prev?: ImmutableObject<UrlState>, next?: ImmutableObject<UrlState>) => void): () => void {
 		return this.watcherPool.subscribe(() => {
 			const prevState = this.prevState;
 			const state = this.mergedState;
@@ -287,7 +287,7 @@ function removeArrayDuplicates(array: Array<any> | any): Array<any> | any {
 	if (Array.isArray(array) && array.length) {
 		return array.reduce(
 			(accu, item) => {
-				if (!accu.some((keep) => compareObjects(keep, item))) {
+				if (!accu.some((keep: unknown) => compareObjects(keep, item))) {
 					accu.push(item);
 				}
 
@@ -299,7 +299,7 @@ function removeArrayDuplicates(array: Array<any> | any): Array<any> | any {
 	return array;
 }
 
-function arrayConcatMerger(current: unknown, other: unknown): Array<any> {
+function arrayConcatMerger(current: unknown, other: unknown): Array<any> | undefined {
 	if (current instanceof Array && other instanceof Array) {
 		return removeArrayDuplicates([...current, ...other]);
 	}

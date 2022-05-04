@@ -2,16 +2,21 @@ import { render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { Client } from '@searchspring/snap-client';
+import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
 
-import type { Logger } from '@searchspring/snap-logger';
+import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { Client } from '@searchspring/snap-client';
-import type { Tracker } from '@searchspring/snap-tracker';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { SnapControllerServices, RootComponent } from '../types';
 
 export type RecommendationInstantiatorConfig = {
+	client?: {
+		globals: ClientGlobals;
+		config?: ClientConfig;
+	};
 	components: {
 		[name: string]: () => Promise<RootComponent> | RootComponent;
 	};
@@ -22,34 +27,33 @@ export type RecommendationInstantiatorConfig = {
 		limit?: number;
 	} & Attachments;
 	selector?: string;
-	services?: SnapControllerServices;
 	url?: UrlTranslatorConfig;
 	context?: ContextVariables;
 };
 
 export type RecommendationInstantiatorServices = {
-	client: Client;
-	logger: Logger;
-	tracker: Tracker;
+	client?: Client;
+	logger?: Logger;
+	tracker?: Tracker;
 };
 
 export class RecommendationInstantiator {
-	controllers: {
+	public client: Client;
+	public tracker: Tracker;
+	public logger: Logger;
+	public controller: {
 		[key: string]: RecommendationController;
 	} = {};
-	client: Client;
-	tracker: Tracker;
-	logger: Logger;
-	config: RecommendationInstantiatorConfig;
-	context: ContextVariables;
-	uses: Attachments[] = [];
-	plugins: { (cntrlr: AbstractController): Promise<void> }[] = [];
-	middleware: { event: string; func: Middleware<unknown>[] }[] = [];
+	public config: RecommendationInstantiatorConfig;
+	public context: ContextVariables;
 	public targeter: DomTargeter;
 
-	constructor(config: RecommendationInstantiatorConfig, { client, logger, tracker }: RecommendationInstantiatorServices, context?: ContextVariables) {
+	private uses: Attachments[] = [];
+	private plugins: { func: (cntrlr: AbstractController, ...args) => Promise<void>; args: unknown[] }[] = [];
+	private middleware: { event: string; func: Middleware<unknown>[] }[] = [];
+
+	constructor(config: RecommendationInstantiatorConfig, services?: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
-		this.context = deepmerge(context || {}, config.context || {});
 
 		if (!this.config) {
 			throw new Error(`Recommendation Instantiator config is required`);
@@ -59,13 +63,18 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
 		}
 
-		if (!this.config.components || typeof this.config.components != 'object') {
+		if (!this.config.components || typeof this.config.components != 'object' || !Object.keys(this.config.components).length) {
 			throw new Error(`Recommendation Instantiator config must contain 'components' mapping property`);
 		}
 
-		this.client = this.config.services?.client || client;
-		this.tracker = this.config.services?.tracker || tracker;
-		this.logger = this.config.services?.logger || logger;
+		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
+			throw new Error(`Recommendation Instantiator config must contain a valid config.client.globals.siteId value`);
+		}
+
+		this.context = deepmerge(context || {}, config.context || {});
+		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
+		this.tracker = services?.tracker || new Tracker(this.config.client.globals);
+		this.logger = services?.logger || new Logger('RecommendationInstantiator ');
 
 		const profileCount = {};
 		this.targeter = new DomTargeter(
@@ -79,18 +88,21 @@ export class RecommendationInstantiator {
 						element: (target, origElement) => {
 							const profile = origElement.getAttribute('profile');
 
-							if (profile) {
-								const recsContainer = document.createElement('div');
-								recsContainer.setAttribute('searchspring-recommend', profile);
-								return recsContainer;
-							} else {
-								this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, origElement);
-							}
+							const recsContainer = document.createElement('div');
+							recsContainer.setAttribute('searchspring-recommend', profile);
+							return recsContainer;
 						},
 					},
 				},
 			],
 			async (target, injectedElem, elem) => {
+				const tag = injectedElem.getAttribute('searchspring-recommend');
+
+				if (!tag) {
+					this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, elem);
+					return;
+				}
+
 				const contextGlobals: any = {};
 
 				const elemContext = getContext(
@@ -157,16 +169,15 @@ export class RecommendationInstantiator {
 					contextGlobals.cart = this.tracker.cookies.cart.get();
 				}
 
-				const tag = injectedElem.getAttribute('searchspring-recommend');
 				profileCount[tag] = profileCount[tag] + 1 || 1;
 
 				const defaultGlobals = {
 					limits: 20,
 				};
-				const globals = deepmerge(deepmerge(defaultGlobals, this.config.config?.globals || {}), contextGlobals);
+				const globals = deepmerge(deepmerge(defaultGlobals, this.config.client?.globals || {}), contextGlobals);
 
 				const controllerConfig = {
-					id: `recommend_${tag + (profileCount[tag] - 1)}`,
+					id: `recommend_${tag}_${profileCount[tag] - 1}`,
 					tag,
 					batched: options?.batched ?? true,
 					realtime: Boolean(options?.realtime),
@@ -175,56 +186,54 @@ export class RecommendationInstantiator {
 				};
 
 				const createRecommendationController = (await import('../create/createRecommendationController')).default;
-				const client = this.client;
-				const tracker = this.tracker;
-				const recs = createRecommendationController(
+				const controller = createRecommendationController(
 					{
-						url: this.config.url || {},
+						url: this.config.url,
 						controller: controllerConfig,
 						context,
 					},
-					{ client, tracker }
+					{ client: this.client, tracker: this.tracker }
 				);
 
-				this.uses.forEach((attachements) => recs.use(attachements));
-				this.plugins.forEach((plugin) => recs.plugin(plugin));
-				this.middleware.forEach((middleware) => recs.on(middleware.event, ...middleware.func));
+				this.uses.forEach((attachements) => controller.use(attachements));
+				this.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
+				this.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 
-				await recs.search();
+				await controller.search();
 
-				recs.addTargeter(this.targeter);
+				controller.addTargeter(this.targeter);
 
-				this.controllers[recs.config.id] = recs;
+				this.controller[controller.config.id] = controller;
 
-				const profileVars = recs.store.profile.display.templateParameters;
-				const component = recs.store.profile.display.template?.component;
+				const profileVars = controller.store.profile.display.templateParameters;
+				const component = controller.store.profile.display.template?.component;
 
 				if (!profileVars) {
-					recs.log.error(`profile failed to load!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is missing templateParameters!`);
 					return;
 				}
 
 				if (!component) {
-					recs.log.error(`template does not support components!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is missing component!`);
 					return;
 				}
 
-				const RecommendationsComponent = this.config.components && (await this.config.components[component]());
+				const RecommendationsComponent = this.config.components[component] && (await this.config.components[component]());
 
 				if (!RecommendationsComponent) {
-					recs.log.error(`component '${profileVars.component}' not found!`);
+					this.logger.error(`profile '${tag}' found on ${elem} is expecting component mapping for '${component}' - verify instantiator config.`);
 					return;
 				}
 
 				setTimeout(() => {
-					render(<RecommendationsComponent controller={recs} />, injectedElem);
+					render(<RecommendationsComponent controller={controller} />, injectedElem);
 				});
 			}
 		);
 	}
 
-	public plugin(func: (cntrlr: AbstractController) => Promise<void>): void {
-		this.plugins.push(func);
+	public plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): void {
+		this.plugins.push({ func, args });
 	}
 
 	public on<T>(event: string, ...func: Middleware<T>[]): void {
