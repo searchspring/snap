@@ -1,17 +1,17 @@
 # Instantiators
 
 ## RecommendationInstantiator
-The `RecommendationInstantiator` class handles the targetting and creation of recommendation controllers from querying the DOM.
+The `RecommendationInstantiator` class handles the targetting and creation of recommendation controllers. The instantiator looks for targets in the DOM, creates a controller and injects components into the DOM.
 
 
-### controllers
+### controller
 
-The `controllers` property contains an object of all recommendation instance that has been found on the page. Each instance will have its own `RecommendationController` instance created and added to the `controllers` object. 
+The `controller` property is an object of recommendation controller instances that have been created.
 
-All controllers can be accessed via the `controllers` object where the key is the id of the controller that was created. The controller id is generated based on the `profile` attribute and it's occurance count (starting at 0.) It follows the following format: 
+All controllers can be accessed via the `controller` object where the key is the id of the controller that was created. The controller id is generated based on the `profile` attribute and it's occurance count (starting at 0.) It follows the following format: 
 
 ```typescript
-id: `recommend_${tag + (profileCount[tag] - 1)}`,
+id: `recommend_${tag}_${profileCount[tag] - 1}`,
 ```
 
 For example, if the page contains the following single recommendation instance:
@@ -20,17 +20,8 @@ For example, if the page contains the following single recommendation instance:
 <script type="searchspring/personalized-recommendations" profile="trending"></script>
 ```
 
-The controller id would be `recommend_trending0` and can be accesed as follows:
+The controller id would be `recommend_trending_0`.
 
-```typescript
-import { Snap } from '@searchspring/snap-preact';
-
-const snap = new Snap(config);
-const recommendations = snap.recommendations;
-const controllers = recommendations.controllers;
-const { recommend_trending0 } = controllers;
-
-console.log("recommend_trending0", recommend_trending0)
 ```
 
 ### client
@@ -50,7 +41,7 @@ A reference to the shared [@searchspring/snap-logger](https://github.com/searchs
 
 ### config
 
-A reference to the `config.instantiators.recommendation` config object as part of the config that was provided to Snap.
+A reference to the config object used in instantiation.
 
 ### uses
 

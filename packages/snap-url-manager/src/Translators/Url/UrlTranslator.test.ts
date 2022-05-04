@@ -1,4 +1,4 @@
-import { UrlTranslator } from './UrlTranslator';
+import { UrlTranslator, CoreMap } from './UrlTranslator';
 import { UrlState, ParamLocationType } from '../../types';
 
 describe('UrlTranslator', () => {
@@ -68,7 +68,7 @@ describe('UrlTranslator', () => {
 
 		const queryString = new customTranslator({
 			urlRoot: '/search#view:grid',
-			parameters: { core: { page: { type: 'hash' as ParamLocationType } } },
+			parameters: { core: { page: { type: 'hash' } } },
 		});
 
 		const params = {
@@ -127,19 +127,19 @@ describe('UrlTranslator', () => {
 
 			expect(defaultConfig.settings).toEqual({
 				corePrefix: '',
-				customType: ParamLocationType.HASH,
+				customType: ParamLocationType.hash,
 				rootParams: true,
 			});
 
 			expect(defaultConfig.parameters.core).toEqual({
-				query: { name: 'q', type: ParamLocationType.QUERY },
-				oq: { name: 'oq', type: ParamLocationType.QUERY },
-				rq: { name: 'rq', type: ParamLocationType.QUERY },
-				tag: { name: 'tag', type: ParamLocationType.QUERY },
-				page: { name: 'page', type: ParamLocationType.QUERY },
-				pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
-				sort: { name: 'sort', type: ParamLocationType.HASH },
-				filter: { name: 'filter', type: ParamLocationType.HASH },
+				query: { name: 'q', type: ParamLocationType.query },
+				oq: { name: 'oq', type: ParamLocationType.query },
+				rq: { name: 'rq', type: ParamLocationType.query },
+				tag: { name: 'tag', type: ParamLocationType.query },
+				page: { name: 'page', type: ParamLocationType.query },
+				pageSize: { name: 'pageSize', type: ParamLocationType.hash },
+				sort: { name: 'sort', type: ParamLocationType.hash },
+				filter: { name: 'filter', type: ParamLocationType.hash },
 			});
 
 			expect(defaultConfig.parameters.custom).toEqual({});
@@ -153,20 +153,20 @@ describe('UrlTranslator', () => {
 			});
 			const config = queryString.getConfig();
 
-			expect(config.settings.customType).toEqual(ParamLocationType.HASH);
+			expect(config.settings.customType).toEqual(ParamLocationType.hash);
 		});
 
 		it('can set the type of all core params with one setting', () => {
 			const queryString = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.HASH,
+					coreType: ParamLocationType.hash,
 				},
 			});
 			const config = queryString.getConfig();
 
 			Object.keys(config.parameters.core).forEach((coreKey) => {
-				const coreParamConfig = config.parameters.core[coreKey];
-				expect(coreParamConfig.type).toEqual(ParamLocationType.HASH);
+				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
+				expect(coreParamConfig.type).toEqual(ParamLocationType.hash);
 			});
 		});
 
@@ -179,14 +179,14 @@ describe('UrlTranslator', () => {
 			const config = queryString.getConfig();
 
 			expect(config.parameters.core).toEqual({
-				query: { name: 'q', type: ParamLocationType.QUERY },
-				oq: { name: 'oq', type: ParamLocationType.QUERY },
-				rq: { name: 'rq', type: ParamLocationType.QUERY },
-				tag: { name: 'tag', type: ParamLocationType.QUERY },
-				page: { name: 'page', type: ParamLocationType.QUERY },
-				pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
-				sort: { name: 'sort', type: ParamLocationType.HASH },
-				filter: { name: 'filter', type: ParamLocationType.HASH },
+				query: { name: 'q', type: ParamLocationType.query },
+				oq: { name: 'oq', type: ParamLocationType.query },
+				rq: { name: 'rq', type: ParamLocationType.query },
+				tag: { name: 'tag', type: ParamLocationType.query },
+				page: { name: 'page', type: ParamLocationType.query },
+				pageSize: { name: 'pageSize', type: ParamLocationType.hash },
+				sort: { name: 'sort', type: ParamLocationType.hash },
+				filter: { name: 'filter', type: ParamLocationType.hash },
 			});
 		});
 	});
@@ -214,8 +214,10 @@ describe('UrlTranslator', () => {
 
 			expect(params.query).toBe('correct');
 
-			expect(params.filter.color).toEqual(['blue']);
-			expect(params.filter.brand).toEqual(['nike', 'adidas']);
+			expect(params).toHaveProperty('filter', {
+				color: ['blue'],
+				brand: ['nike', 'adidas'],
+			});
 		});
 
 		it('deserializes core state correctly', () => {
@@ -255,7 +257,7 @@ describe('UrlTranslator', () => {
 				'/#/q:shoes/oq:shoez/rq:shiny/tag:taggy/page:7/pageSize:40/filter:color:red/filter:color:orange/filter:brand:adidas/filter:price:99.99:299.99/sort:name:desc';
 			const queryString = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.HASH,
+					coreType: ParamLocationType.hash,
 				},
 			});
 			const params: UrlState = queryString.deserialize(url);
@@ -291,7 +293,7 @@ describe('UrlTranslator', () => {
 				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc';
 			const queryString = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.QUERY,
+					coreType: ParamLocationType.query,
 				},
 			});
 			const params: UrlState = queryString.deserialize(url);
@@ -327,7 +329,7 @@ describe('UrlTranslator', () => {
 				'?q=shoes&oq=shoez&rq=shiny&tag=taggy&page=7&pageSize=40&filter.color=red&filter.color=orange&filter.brand=adidas&filter.price.low=99.99&filter.price.high=299.99&sort.name=desc';
 			const queryString = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.HASH,
+					coreType: ParamLocationType.hash,
 				},
 			});
 			const params: UrlState = queryString.deserialize(url);
@@ -348,14 +350,14 @@ describe('UrlTranslator', () => {
 			const queryString = new UrlTranslator({
 				parameters: {
 					core: {
-						query: { name: 'query', type: ParamLocationType.HASH },
-						oq: { name: 'originalQuery', type: ParamLocationType.HASH },
-						rq: { name: 'refinedQuery', type: ParamLocationType.HASH },
-						tag: { name: 'landingPage', type: ParamLocationType.HASH },
-						page: { name: 'p', type: ParamLocationType.HASH },
-						pageSize: { name: 'size', type: ParamLocationType.QUERY },
-						filter: { name: 'facet', type: ParamLocationType.QUERY },
-						sort: { name: 'order', type: ParamLocationType.QUERY },
+						query: { name: 'query', type: ParamLocationType.hash },
+						oq: { name: 'originalQuery', type: ParamLocationType.hash },
+						rq: { name: 'refinedQuery', type: ParamLocationType.hash },
+						tag: { name: 'landingPage', type: ParamLocationType.hash },
+						page: { name: 'p', type: ParamLocationType.hash },
+						pageSize: { name: 'size', type: ParamLocationType.query },
+						filter: { name: 'facet', type: ParamLocationType.query },
+						sort: { name: 'order', type: ParamLocationType.query },
 					},
 				},
 			});
@@ -450,7 +452,7 @@ describe('UrlTranslator', () => {
 				parameters: {
 					core: {
 						filter: {
-							type: ParamLocationType.QUERY,
+							type: ParamLocationType.query,
 						},
 					},
 				},
@@ -632,7 +634,7 @@ describe('UrlTranslator', () => {
 
 			const translator = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.HASH,
+					coreType: ParamLocationType.hash,
 				},
 			});
 
@@ -666,7 +668,7 @@ describe('UrlTranslator', () => {
 
 			const translator = new UrlTranslator({
 				settings: {
-					coreType: ParamLocationType.QUERY,
+					coreType: ParamLocationType.query,
 				},
 			});
 
@@ -701,14 +703,14 @@ describe('UrlTranslator', () => {
 			const translator = new UrlTranslator({
 				parameters: {
 					core: {
-						query: { name: 'query', type: ParamLocationType.HASH },
-						oq: { name: 'originalQuery', type: ParamLocationType.HASH },
-						rq: { name: 'refinedQuery', type: ParamLocationType.HASH },
-						tag: { name: 'landingPage', type: ParamLocationType.HASH },
-						page: { name: 'p', type: ParamLocationType.HASH },
-						pageSize: { name: 'size', type: ParamLocationType.QUERY },
-						filter: { name: 'facet', type: ParamLocationType.QUERY },
-						sort: { name: 'order', type: ParamLocationType.QUERY },
+						query: { name: 'query', type: ParamLocationType.hash },
+						oq: { name: 'originalQuery', type: ParamLocationType.hash },
+						rq: { name: 'refinedQuery', type: ParamLocationType.hash },
+						tag: { name: 'landingPage', type: ParamLocationType.hash },
+						page: { name: 'p', type: ParamLocationType.hash },
+						pageSize: { name: 'size', type: ParamLocationType.query },
+						filter: { name: 'facet', type: ParamLocationType.query },
+						sort: { name: 'order', type: ParamLocationType.query },
 					},
 				},
 			});
@@ -835,11 +837,11 @@ describe('UrlTranslator', () => {
 				parameters: {
 					core: {
 						query: { name: 'search' },
-						sort: { name: 'order', type: ParamLocationType.QUERY },
+						sort: { name: 'order', type: ParamLocationType.query },
 					},
 					custom: {
-						ga: { type: ParamLocationType.HASH },
-						googs: { type: ParamLocationType.QUERY },
+						ga: { type: ParamLocationType.hash },
+						googs: { type: ParamLocationType.query },
 					},
 				},
 			};
@@ -859,7 +861,7 @@ describe('UrlTranslator', () => {
 			const config = {
 				urlRoot: 'https://www.website.com/search.html',
 				settings: {
-					customType: ParamLocationType.HASH,
+					customType: ParamLocationType.hash,
 				},
 			};
 			const translator = new UrlTranslator(config);
@@ -878,7 +880,7 @@ describe('UrlTranslator', () => {
 			const config = {
 				urlRoot: 'https://www.website.com/search.html',
 				settings: {
-					customType: ParamLocationType.QUERY,
+					customType: ParamLocationType.query,
 				},
 			};
 			const translator = new UrlTranslator(config);

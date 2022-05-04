@@ -51,6 +51,6 @@ export interface TranslatorConfig {
 }
 
 export enum ParamLocationType {
-	HASH = 'hash',
-	QUERY = 'query',
+	hash = 'hash',
+	query = 'query',
 }
