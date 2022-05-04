@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* **component-branchoverride:** correcting documentation and ensuring 'error' prop takes priority ([1885eb1](https://github.com/searchspring/snap/commit/1885eb19dace0741a68fd07067819aa565a92cd8))
+
+
+
+
+
 ## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
