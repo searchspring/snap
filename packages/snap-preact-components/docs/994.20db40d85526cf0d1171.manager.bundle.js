@@ -506,7 +506,6 @@
 							'static' !== getComputedStyle((offsetParent = getDocumentElement(popper))).position &&
 							'absolute' === position &&
 							((heightProp = 'scrollHeight'), (widthProp = 'scrollWidth')),
-						(offsetParent = offsetParent),
 						placement === enums.we || ((placement === enums.t$ || placement === enums.F2) && variation === enums.ut))
 					)
 						(sideY = enums.I),
@@ -1308,17 +1307,19 @@
 									fn: function fn(_ref) {
 										var state = _ref.state,
 											elements = Object.keys(state.elements);
-										setState({
-											styles: fromEntries(
-												elements.map(function (element) {
-													return [element, state.styles[element] || {}];
-												})
-											),
-											attributes: fromEntries(
-												elements.map(function (element) {
-													return [element, state.attributes[element]];
-												})
-											),
+										react_dom.flushSync(function () {
+											setState({
+												styles: fromEntries(
+													elements.map(function (element) {
+														return [element, state.styles[element] || {}];
+													})
+												),
+												attributes: fromEntries(
+													elements.map(function (element) {
+														return [element, state.attributes[element]];
+													})
+												),
+											});
 										});
 									},
 									requires: ['computeStyles'],
@@ -1413,7 +1414,7 @@
 						return function () {
 							return setRef(innerRef, null);
 						};
-					}),
+					}, []),
 					react.useEffect(
 						function () {
 							warning_default()(Boolean(setReferenceNode), '`Reference` should not be used outside of a `Manager` component.');

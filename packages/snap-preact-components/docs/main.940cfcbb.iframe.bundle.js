@@ -1717,6 +1717,7 @@
 						fill: color || (null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary),
 						width: width || size,
 						height: height || size,
+						position: 'relative',
 					});
 				};
 			function Icon(properties) {
@@ -4036,25 +4037,24 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
 			var preact_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_6___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__),
 				mobx_react_lite__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
 				deepmerge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
 				deepmerge__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_8__),
-				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
-				swiper_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
-				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__ =
-					(__webpack_require__('../../node_modules/swiper/swiper.min.css'), __webpack_require__('./src/components/Atoms/Icon/Icon.tsx')),
-				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
-				swiper_react__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+				swiper_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/swiper/esm/components/core/core-class.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/swiper/esm/components/pagination/pagination.js'),
+				swiper_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('../../node_modules/swiper/esm/components/navigation/navigation.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper.js'),
+				swiper_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('../../node_modules/swiper/esm/react/swiper-slide.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/providers/cache.tsx'),
+				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				_excluded = [
 					'children',
 					'breakpoints',
@@ -4099,7 +4099,7 @@
 						_theme$colors2,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.iv)({
 						display: 'flex',
 						maxWidth: '100%',
 						maxHeight: vertical ? '100%' : null,
@@ -4129,8 +4129,29 @@
 							lineHeight: 0,
 							'&.swiper-button-disabled': { opacity: '0.3', cursor: 'default' },
 						},
-						'.swiper-container': { display: 'flex', flexDirection: 'column' },
-						'.swiper-wrapper': { order: 0 },
+						'.swiper-container': {
+							display: 'flex',
+							flexDirection: 'column',
+							marginLeft: 'auto',
+							marginRight: 'auto',
+							position: 'relative',
+							overflow: 'hidden',
+							listStyle: 'none',
+							padding: 0,
+							zIndex: 1,
+						},
+						'.swiper-container-vertical': { '.swiper-wrapper': { flexDirection: 'column' } },
+						'.swiper-wrapper': {
+							order: 0,
+							position: 'relative',
+							width: '100%',
+							height: '100%',
+							zIndex: 1,
+							display: 'flex',
+							transitionProperty: 'transform',
+							boxSizing: 'content-box',
+						},
+						'.swiper-slide': { flexShrink: 0, width: '100%', height: '100%', position: 'relative', transitionProperty: 'transform' },
 						'.swiper-pagination': {
 							display: 'flex',
 							justifyContent: 'center',
@@ -4155,6 +4176,8 @@
 									'#000',
 							},
 						},
+						'.swiper-container-pointer-events': { touchAction: 'pan-y', '&.swiper-container-vertical': { touchAction: 'pan-x' } },
+						'.swiper-slide-invisible-blank': { visibility: 'hidden' },
 					});
 				},
 				defaultCarouselBreakpoints = {
@@ -4170,7 +4193,7 @@
 						_properties$theme,
 						_properties$theme$com,
 						_globalTheme$componen2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_10__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -4190,7 +4213,7 @@
 								? void 0
 								: _properties$theme$com.carousel
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_12__.o)(props.breakpoints);
+						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_11__.o)(props.breakpoints);
 					if (displaySettings && Object.keys(displaySettings).length) {
 						var _props,
 							_theme = deepmerge__WEBPACK_IMPORTED_MODULE_8___default()(
@@ -4226,11 +4249,11 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_13__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						};
-					swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_16__.Z]);
+					swiper_core__WEBPACK_IMPORTED_MODULE_13__.Z.use([swiper_core__WEBPACK_IMPORTED_MODULE_14__.Z, swiper_core__WEBPACK_IMPORTED_MODULE_15__.Z]);
 					var navigationPrevRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
 						navigationNextRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
 						rootComponentRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_5__.sO)(null),
@@ -4238,22 +4261,22 @@
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_carousel({ theme, vertical }), style]),
 						children &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_17__.n,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+								_providers__WEBPACK_IMPORTED_MODULE_16__.n,
 								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 									'div',
 									Object.assign({ ref: rootComponentRef }, styling, {
 										className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className),
 									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 										'div',
 										{
 											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__prev-wrapper', {
 												'ss__carousel__prev-wrapper--hidden': hideButtons,
 											}),
 										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 											'div',
 											{
 												className: 'ss__carousel__prev',
@@ -4265,14 +4288,14 @@
 													},
 											},
 											prevButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__.J,
 													Object.assign({ icon: vertical ? 'angle-up' : 'angle-left' }, subProps.icon)
 												)
 										)
 									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-										swiper_react__WEBPACK_IMPORTED_MODULE_19__.t,
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+										swiper_react__WEBPACK_IMPORTED_MODULE_18__.t,
 										Object.assign(
 											{
 												centerInsufficientSlides: !0,
@@ -4292,17 +4315,17 @@
 											displaySettings
 										),
 										children.map(function (child) {
-											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_20__.o, null, child);
+											return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(swiper_react__WEBPACK_IMPORTED_MODULE_19__.o, null, child);
 										})
 									),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 										'div',
 										{
 											className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('ss__carousel__next-wrapper', {
 												'ss__carousel__next-wrapper--hidden': hideButtons,
 											}),
 										},
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
 											'div',
 											{
 												className: 'ss__carousel__next',
@@ -4314,8 +4337,8 @@
 													},
 											},
 											nextButton ||
-												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_18__.J,
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_9__.tZ)(
+													_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_17__.J,
 													Object.assign({ icon: vertical ? 'angle-down' : 'angle-right' }, subProps.icon)
 												)
 										)
@@ -12050,6 +12073,527 @@
 					breakpoints: { 0: { columns: 1, rows: 1 }, 320: { columns: 2, rows: 1, hideFacets: !0, vertical: !0 }, 768: { columns: 3, rows: 1 } },
 				});
 		},
+		'./src/components/Organisms/BranchOverride/BranchOverride.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, {
+					Auto: () => Auto,
+					Dark: () => Dark,
+					Error: () => Error,
+					Light: () => Light,
+					default: () => BranchOverride_stories,
+				});
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				emotion_react_browser_esm =
+					(__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+					__webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js')),
+				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames_default = __webpack_require__.n(classnames),
+				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				Icon = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				defined = __webpack_require__('./src/utilities/defined.ts'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js');
+			function _slicedToArray(arr, i) {
+				return (
+					(function _arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function _iterableToArrayLimit(arr, i) {
+						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
+						if (null == _i) return;
+						var _s,
+							_e,
+							_arr = [],
+							_n = !0,
+							_d = !1;
+						try {
+							for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function _unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			var CSS_override = function override(_ref) {
+					var theme = _ref.theme;
+					return (0, emotion_react_browser_esm.iv)({
+						width: '360px',
+						height: '120px',
+						overflow: 'hidden',
+						fontSize: '14px',
+						position: 'fixed',
+						zIndex: 9999,
+						cursor: 'auto',
+						bottom: '50px',
+						right: 0,
+						background: theme.main.background,
+						color: theme.main.color,
+						border: theme.main.border,
+						borderRight: 0,
+						borderTopLeftRadius: '5px',
+						borderBottomLeftRadius: '5px',
+						boxShadow: theme.main.boxShadow,
+						transition: 'height ease 0.2s, right ease 0.5s 0.2s',
+						'&.ss__branch-override--collapsed': {
+							transition: 'height ease 0.5s 0.5s, right ease 0.5s',
+							right: '-316px',
+							height: '50px',
+							cursor: 'pointer',
+						},
+						'.ss__branch-override__top': {
+							padding: '10px',
+							background: theme.top.background,
+							borderBottom: theme.top.border,
+							'.ss__branch-override__top__logo': { display: 'inline-block', height: '30px', maxHeight: '30px', verticalAlign: 'middle' },
+							'.ss__branch-override__top__collapse': { display: 'inline-block', float: 'right', padding: '5px', cursor: 'pointer' },
+							'.ss__branch-override__top__button': {
+								borderRadius: '5px',
+								padding: '6px',
+								height: '100%',
+								lineHeight: '14px',
+								textAlign: 'center',
+								cursor: 'pointer',
+								fontSize: '10px',
+								border: theme.top.button.border,
+								color: theme.top.button.color,
+								float: 'right',
+								marginRight: '14px',
+							},
+						},
+						'.ss__branch-override__bottom': {
+							padding: '10px 15px',
+							fontSize: '12px',
+							'.ss__branch-override__bottom__left': {
+								fontWeight: 'bold',
+								fontStyle: theme.bottom.branch.style,
+								color: theme.bottom.branch.color,
+								fontSize: '14px',
+								lineHeight: '20px',
+								display: 'inline-flex',
+								alignItems: 'center',
+								maxWidth: '180px',
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								svg: { marginRight: '10px' },
+							},
+							'.ss__branch-override__bottom__right': {
+								float: 'right',
+								fontStyle: 'italic',
+								color: theme.bottom.additional.color,
+								fontSize: '12px',
+								lineHeight: '20px',
+							},
+							'.ss__branch-override__bottom__content': { marginTop: '10px' },
+						},
+					});
+				},
+				themes = {
+					darkTheme: {
+						main: { border: '0', background: 'rgba(59, 35, 173, 0.9)', color: '#fff', boxShadow: '#4c3ce2 1px 1px 3px 0px' },
+						top: {
+							background: 'rgba(59, 35, 173, 0.3)',
+							border: '1px solid #4c3de1',
+							logo: { src: 'https://snapui.searchspring.io/searchspring_light.svg' },
+							button: { border: '1px solid #fff', color: '#fff', content: 'STOP PREVIEW' },
+							close: { fill: '#fff' },
+						},
+						bottom: {
+							content: 'Preview functionality may differ from production.',
+							branch: { color: '#03cee1', style: 'italic' },
+							additional: { color: '#03cee1' },
+						},
+					},
+					lightTheme: {
+						main: {
+							border: '1px solid #ccc',
+							background: 'rgba(255, 255, 255, 0.95)',
+							color: '#515151',
+							boxShadow: 'rgba(81, 81, 81, 0.5) 1px 1px 3px 0px',
+						},
+						top: {
+							border: '1px solid #ccc',
+							logo: { src: 'https://snapui.searchspring.io/searchspring.svg' },
+							button: { border: '1px solid #515151', color: '#515151', content: 'STOP PREVIEW' },
+							close: { fill: '#515151' },
+						},
+						bottom: {
+							content: 'Preview functionality may differ from production.',
+							branch: { color: '#3a23ad', style: 'italic' },
+							additional: { color: '#3a23ad' },
+						},
+					},
+					failureTheme: {
+						main: { border: '0', background: 'rgba(130, 6, 6, 0.9)', color: '#fff', boxShadow: 'rgba(130, 6, 6, 0.4) 1px 1px 3px 0px' },
+						top: {
+							background: 'rgba(130, 6, 6, 0.3)',
+							border: '1px solid #760000',
+							logo: { src: 'https://snapui.searchspring.io/searchspring_light.svg' },
+							button: { border: '1px solid #fff', color: '#fff', content: 'REMOVE' },
+							close: { fill: '#fff' },
+						},
+						bottom: {
+							content: 'Incorrect branch name or branch no longer exists.',
+							branch: { color: '#be9628', style: 'italic' },
+							additional: { color: '#be9628' },
+						},
+					},
+				},
+				BranchOverride = function BranchOverride(properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						_globalTheme$componen2,
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
+						props =
+							(Object.assign({}, globalTheme, properties.theme),
+							Object.assign(
+								{},
+								null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+									? void 0
+									: _globalTheme$componen.branchOverride,
+								properties,
+								null === (_properties$theme = properties.theme) ||
+									void 0 === _properties$theme ||
+									null === (_properties$theme$com = _properties$theme.components) ||
+									void 0 === _properties$theme$com
+									? void 0
+									: _properties$theme$com.branchOverride
+							)),
+						name = props.name,
+						details = props.details,
+						error = props.error,
+						className = props.className,
+						darkMode = props.darkMode,
+						disableStyles = props.disableStyles,
+						style = props.style,
+						onRemoveClick = props.onRemoveClick,
+						subProps = {
+							icon: Object.assign(
+								{ className: 'ss__branch-override__bottom__left__icon', size: '12px' },
+								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
+									? void 0
+									: _globalTheme$componen2.icon,
+								(0, defined.r)({ disableStyles }),
+								{ theme: props.theme }
+							),
+						},
+						prefersDark = 'boolean' == typeof darkMode ? darkMode : !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+						_useState2 = _slicedToArray((0, hooks_module.eJ)(prefersDark ? 'darkTheme' : 'lightTheme'), 2),
+						themeName = _useState2[0],
+						setThemeName = _useState2[1],
+						_useState4 = _slicedToArray((0, hooks_module.eJ)(0), 2),
+						collapsed = _useState4[0],
+						setCollapsed = _useState4[1];
+					error && setThemeName('failureTheme');
+					var styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_override({ theme: themes[themeName] }), style]),
+						(details || error) &&
+							name &&
+							(0, emotion_react_browser_esm.tZ)(
+								'div',
+								Object.assign(
+									{ className: classnames_default()('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className) },
+									styling,
+									{
+										onClick: function onClick(e) {
+											e.preventDefault(), e.stopPropagation(), setCollapsed(0);
+										},
+									}
+								),
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									{ className: 'ss__branch-override__top' },
+									(0, emotion_react_browser_esm.tZ)('img', { className: 'ss__branch-override__top__logo', src: themes[themeName].top.logo.src }),
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{
+											className: 'ss__branch-override__top__collapse',
+											onClick: function onClick(e) {
+												e.preventDefault(), e.stopPropagation(), setCollapsed(1);
+											},
+										},
+										(0, emotion_react_browser_esm.tZ)(
+											Icon.J,
+											Object.assign({ size: '18px', color: themes[themeName].top.close.fill }, subProps.icon, { icon: 'close-thin' })
+										)
+									),
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{
+											className: 'ss__branch-override__top__button',
+											onClick: function onClick(e) {
+												e.preventDefault(), e.stopPropagation(), onRemoveClick && onRemoveClick(e, name);
+											},
+										},
+										themes[themeName].top.button.content
+									)
+								),
+								(0, emotion_react_browser_esm.tZ)(
+									'div',
+									{ className: 'ss__branch-override__bottom' },
+									(0, emotion_react_browser_esm.tZ)(
+										'span',
+										{ className: 'ss__branch-override__bottom__left' },
+										error
+											? (0, emotion_react_browser_esm.tZ)(
+													preact_module.HY,
+													null,
+													(0, emotion_react_browser_esm.tZ)(
+														Icon.J,
+														Object.assign({ size: '12px', color: themes[themeName].bottom.branch.color }, subProps.icon, { icon: 'warn' })
+													),
+													(0, emotion_react_browser_esm.tZ)('span', null, error.message)
+											  )
+											: name
+									),
+									(0, emotion_react_browser_esm.tZ)(
+										'span',
+										{ className: 'ss__branch-override__bottom__right' },
+										error ? name : null == details ? void 0 : details.lastModified
+									),
+									(0, emotion_react_browser_esm.tZ)(
+										'div',
+										{ className: 'ss__branch-override__bottom__content' },
+										(null == error ? void 0 : error.description) || themes[themeName].bottom.content
+									)
+								)
+							)
+					);
+				},
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends =
+						Object.assign ||
+						function (target) {
+							for (var i = 1; i < arguments.length; i++) {
+								var source = arguments[i];
+								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+							}
+							return target;
+						}),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'branchoverride' }, 'BranchOverride'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'Renders a popup to show when a branch override is in place.\nExecutes ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onRemoveClick'),
+						' prop when the remove button is clicked.\nMust have ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'name'),
+						' and either ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'details'),
+						' or ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'error'),
+						' props to render.'
+					),
+					(0, esm.kt)('h2', { id: 'components-used' }, 'Components Used'),
+					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Icon')),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)('h3', { id: 'name' }, 'name'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The required ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'name'),
+						' prop expects a string containing the name of the override branch.'
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<BranchOverride name="testing" />\n')),
+					(0, esm.kt)('h3', { id: 'details' }, 'details'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'details'),
+						' prop expects an object containing strings for the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'url'),
+						' and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'lastModified'),
+						' date of the override branch bundle.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"const details = {\n    url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js',\n    lastModified: '1 Feb 2022 1:02:03 GMT'\n};\n\n<BranchOverride name=\"testing\" details={details} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'error' }, 'error'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'error'),
+						' prop expects an object containing strings for the ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'message'),
+						' and ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'description'),
+						' of the error.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"const error = {\n    message: 'Branch not found!',\n    description: 'Incorrect branch name or branch no longer exists.'\n};\n\n<BranchOverride name=\"next\" error={error} />\n"
+						)
+					),
+					(0, esm.kt)('h3', { id: 'onremoveclick' }, 'onRemoveClick'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onRemoveClick'),
+						" prop is a function to be called when the 'remove' button is clicked"
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'const whenRemoved = (e, name) => {\n    console.log(`remove clicked in the override for the \'${name}\' branch`);\n};\n\n<BranchOverride name="testing" onRemoveClick={whenRemoved} />\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'darkmode' }, 'darkMode'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'darkMode'),
+						' prop is used to set the component styling to prefer (or not to prefer) dark mode. By default the component will auto detect the browser preference.'
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"const details = {\n    url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js',\n    lastModified: '1 Feb 2022 1:02:03 GMT'\n};\n\n<BranchOverride next=\"testing\" details={details} darkMode={false} />\n"
+						)
+					)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const BranchOverride_stories = {
+				title: 'Organisms/BranchOverride',
+				component: BranchOverride,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px', position: 'relative' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: Object.assign(
+					{
+						name: { description: 'bundle branch name', type: { required: !0 }, table: { type: { summary: 'string' } }, control: { type: 'text' } },
+						details: {
+							description: 'Object containing details for branch override',
+							type: { required: !1 },
+							table: { type: { summary: '{ url: string; lastModified: string }' } },
+							control: { type: 'object' },
+						},
+						error: {
+							description: 'Object containing error message and description',
+							type: { required: !1 },
+							table: { type: { summary: '{ message: string; description: string }' } },
+							control: { type: 'object' },
+						},
+						onRemoveClick: {
+							description: 'optional function to run on remove button click',
+							table: { type: { summary: '(e: Event, name: string) => void' } },
+							action: 'onRemoveClick',
+						},
+						darkMode: {
+							description: 'force dark darkMode',
+							type: { required: !1 },
+							table: { type: { summary: 'boolean' } },
+							control: { type: 'boolean' },
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var Template = function Template(args) {
+					return (0, preact_module.h)(BranchOverride, Object.assign({}, args));
+				},
+				Auto = Template.bind({});
+			Auto.args = { name: 'next', details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' } };
+			var Dark = Template.bind({});
+			Dark.args = {
+				name: 'next',
+				details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' },
+				darkMode: !0,
+			};
+			var Error = Template.bind({});
+			Error.args = { name: 'testing', error: { message: 'Branch not found!', description: 'Incorrect branch name or branch no longer exists.' } };
+			var Light = Template.bind({});
+			Light.args = {
+				name: 'next',
+				details: { url: 'https://snapui.searchspring.io/y56s6x/next/bundle.js', lastModified: '1 Feb 2022 1:02:03 GMT' },
+				darkMode: !1,
+			};
+		},
 		'./src/components/Organisms/Facet/Facet.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -17857,77 +18401,57 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.date.to-json.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.url.to-json.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var BeaconType,
-				BeaconCategory,
-				mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js'),
-				cjs =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
-					__webpack_require__('../../node_modules/deepmerge/dist/cjs.js')),
-				cjs_default = __webpack_require__.n(cjs);
-			!(function (BeaconType) {
-				(BeaconType.PRODUCT = 'product'),
-					(BeaconType.CART = 'cart'),
-					(BeaconType.ORDER = 'transaction'),
-					(BeaconType.LOGIN = 'login'),
-					(BeaconType.CLICK = 'click'),
-					(BeaconType.CUSTOM = 'custom'),
-					(BeaconType.PROFILE_RENDER = 'profile.render'),
-					(BeaconType.PROFILE_IMPRESSION = 'profile.impression'),
-					(BeaconType.PROFILE_CLICK = 'profile.click'),
-					(BeaconType.PROFILE_PRODUCT_RENDER = 'profile.product.render'),
-					(BeaconType.PROFILE_PRODUCT_IMPRESSION = 'profile.product.impression'),
-					(BeaconType.PROFILE_PRODUCT_CLICK = 'profile.product.click');
-			})(BeaconType || (BeaconType = {})),
-				(function (BeaconCategory) {
-					(BeaconCategory.PAGEVIEW = 'searchspring.page.view'),
-						(BeaconCategory.CARTVIEW = 'searchspring.shop.cart'),
-						(BeaconCategory.ORDERVIEW = 'searchspring.shop.transaction'),
-						(BeaconCategory.PERSONALIZATION = 'searchspring.personalization'),
-						(BeaconCategory.RECOMMENDATIONS = 'searchspring.recommendations.user-interactions'),
-						(BeaconCategory.INTERACTION = 'searchspring.user-interactions'),
-						(BeaconCategory.CUSTOM = 'custom');
-				})(BeaconCategory || (BeaconCategory = {}));
-			__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			var colors = {
-					blue: '#3379c1',
-					bluelight: '#688BA3',
-					bluedark: '#1B3141',
-					bluegreen: '#318495',
-					grey: '#61717B',
-					green: '#507B43',
-					greendark: '#63715F',
-					greenblue: '#46927D',
-					indigo: '#4c3ce2',
-					orange: '#ecaa15',
-					orangelight: '#ff6600',
-					orangedark: '#c59600',
-					red: '#cc1212',
-					redlight: '#f30707',
-					reddark: '#8E111C',
-					yellow: '#d1d432',
-				},
+			var cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				cjs_default = __webpack_require__.n(cjs),
+				colors =
+					(__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+					{
+						blue: '#3379c1',
+						bluelight: '#688BA3',
+						bluedark: '#1B3141',
+						bluegreen: '#318495',
+						grey: '#61717B',
+						green: '#507B43',
+						greendark: '#63715F',
+						greenblue: '#46927D',
+						indigo: '#4c3ce2',
+						orange: '#ecaa15',
+						orangelight: '#ff6600',
+						orangedark: '#c59600',
+						red: '#cc1212',
+						redlight: '#f30707',
+						reddark: '#8E111C',
+						yellow: '#d1d432',
+					}),
 				emoji =
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.from-code-point.js'),
 					{
@@ -18156,11 +18680,7 @@
 			!(function (LogMode) {
 				(LogMode.PRODUCTION = 'production'), (LogMode.DEVELOPMENT = 'development');
 			})(LogMode || (LogMode = {}));
-			__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.string.split.js');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -18781,7 +19301,358 @@
 					);
 				})(),
 				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js');
-			function RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+			__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js');
+			function getFlags() {
+				var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
+				userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
+				var ieVersion,
+					isIE = function isIE() {
+						if (void 0 === ieVersion) {
+							var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
+							ieVersion = !!version && Number(version);
+						}
+						return ieVersion;
+					};
+				return {
+					cors: function cors() {
+						return !isIE() || isIE() >= 10;
+					},
+					cookies: function cookies() {
+						return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
+					},
+					storage: function storage() {
+						try {
+							return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
+						} catch (e) {
+							return !1;
+						}
+					},
+				};
+			}
+			var flags = getFlags(),
+				featureFlags_cookies = (flags.cors(), flags.cookies()),
+				featureFlags_storage = flags.storage();
+			function _createForOfIteratorHelper(o, allowArrayLike) {
+				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
+				if (!it) {
+					if (
+						Array.isArray(o) ||
+						(it = (function StorageStore_unsupportedIterableToArray(o, minLen) {
+							if (!o) return;
+							if ('string' == typeof o) return StorageStore_arrayLikeToArray(o, minLen);
+							var n = Object.prototype.toString.call(o).slice(8, -1);
+							'Object' === n && o.constructor && (n = o.constructor.name);
+							if ('Map' === n || 'Set' === n) return Array.from(o);
+							if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return StorageStore_arrayLikeToArray(o, minLen);
+						})(o)) ||
+						(allowArrayLike && o && 'number' == typeof o.length)
+					) {
+						it && (o = it);
+						var i = 0,
+							F = function F() {};
+						return {
+							s: F,
+							n: function n() {
+								return i >= o.length ? { done: !0 } : { done: !1, value: o[i++] };
+							},
+							e: function e(_e) {
+								throw _e;
+							},
+							f: F,
+						};
+					}
+					throw new TypeError(
+						'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+					);
+				}
+				var err,
+					normalCompletion = !0,
+					didErr = !1;
+				return {
+					s: function s() {
+						it = it.call(o);
+					},
+					n: function n() {
+						var step = it.next();
+						return (normalCompletion = step.done), step;
+					},
+					e: function e(_e2) {
+						(didErr = !0), (err = _e2);
+					},
+					f: function f() {
+						try {
+							normalCompletion || null == it.return || it.return();
+						} finally {
+							if (didErr) throw err;
+						}
+					},
+				};
+			}
+			function StorageStore_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function StorageStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			var StorageType,
+				utils_cookies = cookies,
+				StorageStore = (function () {
+					function StorageStore(config) {
+						var _config$cookie, _config$cookie2;
+						if (
+							((function StorageStore_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, StorageStore),
+							(this.type = null),
+							(this.expiration = 31536e6),
+							(this.sameSite = void 0),
+							(this.key = 'ss-storage'),
+							(this.state = {}),
+							config)
+						)
+							switch (
+								('' !== config.key.trim() && (this.key = config.key.trim()),
+								null != config &&
+									null !== (_config$cookie = config.cookie) &&
+									void 0 !== _config$cookie &&
+									_config$cookie.expiration &&
+									(this.expiration = config.cookie.expiration),
+								null != config &&
+									null !== (_config$cookie2 = config.cookie) &&
+									void 0 !== _config$cookie2 &&
+									_config$cookie2.sameSite &&
+									(this.sameSite = config.cookie.sameSite),
+								config.type)
+							) {
+								case StorageType.SESSION:
+									(this.type = featureFlags_storage ? config.type : null),
+										this.type &&
+											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
+											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.LOCAL:
+									(this.type = featureFlags_storage ? config.type : null),
+										this.type &&
+											!window.localStorage.getItem(this.key) &&
+											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
+											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
+									break;
+								case StorageType.COOKIE:
+									if (featureFlags_cookies) {
+										this.type = config.type;
+										var data = utils_cookies.get(this.key);
+										data && (this.state = JSON.parse(data));
+									}
+									break;
+								default:
+									this.type = StorageType.MEMORY;
+							}
+					}
+					return (
+						(function StorageStore_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && StorageStore_defineProperties(Constructor.prototype, protoProps),
+								staticProps && StorageStore_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(StorageStore, [
+							{
+								key: 'set',
+								value: function set(path, value) {
+									var paths = null == path ? void 0 : path.split('.'),
+										location = this.state;
+									switch (
+										(null == paths ||
+											paths.forEach(function (p, i) {
+												i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
+											}),
+										this.type)
+									) {
+										case StorageType.SESSION:
+											window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+											break;
+										case StorageType.LOCAL:
+											window.localStorage.setItem(this.key, JSON.stringify(this.state));
+											break;
+										case StorageType.COOKIE:
+											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
+									}
+								},
+							},
+							{
+								key: 'get',
+								value: function get(path) {
+									switch (this.type) {
+										case StorageType.SESSION:
+											this.state = JSON.parse(window.sessionStorage.getItem(this.key)) || {};
+											break;
+										case StorageType.LOCAL:
+											this.state = JSON.parse(window.localStorage.getItem(this.key)) || {};
+											break;
+										case StorageType.COOKIE:
+											var data = utils_cookies.get(this.key);
+											data && (this.state = JSON.parse(data) || {});
+									}
+									var paths = null == path ? void 0 : path.split('.');
+									if (null != paths && paths.length) {
+										var _step,
+											value = this.state,
+											_iterator = _createForOfIteratorHelper(paths);
+										try {
+											for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+												var p = _step.value;
+												if (!value || void 0 === value[p]) {
+													value = void 0;
+													break;
+												}
+												value = value[p];
+											}
+										} catch (err) {
+											_iterator.e(err);
+										} finally {
+											_iterator.f();
+										}
+										return value;
+									}
+								},
+							},
+							{
+								key: 'clear',
+								value: function clear() {
+									switch (this.type) {
+										case StorageType.SESSION:
+											window.sessionStorage.removeItem(this.key);
+											break;
+										case StorageType.LOCAL:
+											window.localStorage.removeItem(this.key);
+											break;
+										case StorageType.COOKIE:
+											utils_cookies.unset(this.key);
+									}
+									this.state = {};
+								},
+							},
+						]),
+						StorageStore
+					);
+				})();
+			!(function (StorageType) {
+				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie'), (StorageType.MEMORY = 'memory');
+			})(StorageType || (StorageType = {}));
+			var ControllerTypes;
+			__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js');
+			function getSearchParams(state) {
+				var params = {};
+				if (
+					(state.tag && ((params.merchandising = params.merchandising || {}), (params.merchandising.landingPage = state.tag)),
+					state.query &&
+						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
+					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq)),
+					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq)),
+					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
+					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
+					state.sort)
+				) {
+					params.sorts = params.sorts || [];
+					var sort = (Array.isArray(state.sort) ? state.sort : [state.sort])[0];
+					sort && sort.field && sort.direction && params.sorts.push({ field: sort.field, direction: sort.direction });
+				}
+				return (
+					state.filter &&
+						((params.filters = params.filters || []),
+						Object.keys(state.filter).forEach(function (field) {
+							if ('string' == typeof field) {
+								var filter = state.filter[field];
+								(Array.isArray(filter) ? filter : [filter]).forEach(function (value) {
+									'object' != typeof value
+										? params.filters.push({ type: 'value', field, value })
+										: void 0 !== value.low && void 0 !== value.high && params.filters.push({ type: 'range', field, value });
+								});
+							}
+						})),
+					params
+				);
+			}
+			function SearchController_toConsumableArray(arr) {
+				return (
+					(function SearchController_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return SearchController_arrayLikeToArray(arr);
+					})(arr) ||
+					(function SearchController_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					SearchController_unsupportedIterableToArray(arr) ||
+					(function SearchController_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function SearchController_slicedToArray(arr, i) {
+				return (
+					(function SearchController_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function SearchController_iterableToArrayLimit(arr, i) {
+						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
+						if (null == _i) return;
+						var _s,
+							_e,
+							_arr = [],
+							_n = !0,
+							_d = !1;
+						try {
+							for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					SearchController_unsupportedIterableToArray(arr, i) ||
+					(function SearchController_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function SearchController_unsupportedIterableToArray(o, minLen) {
+				if (o) {
+					if ('string' == typeof o) return SearchController_arrayLikeToArray(o, minLen);
+					var n = Object.prototype.toString.call(o).slice(8, -1);
+					return (
+						'Object' === n && o.constructor && (n = o.constructor.name),
+						'Map' === n || 'Set' === n
+							? Array.from(o)
+							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
+							? SearchController_arrayLikeToArray(o, minLen)
+							: void 0
+					);
+				}
+			}
+			function SearchController_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 				try {
 					var info = gen[key](arg),
 						value = info.value;
@@ -18790,23 +19661,23 @@
 				}
 				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
 			}
-			function RecommendationController_asyncToGenerator(fn) {
+			function SearchController_asyncToGenerator(fn) {
 				return function () {
 					var self = this,
 						args = arguments;
 					return new Promise(function (resolve, reject) {
 						var gen = fn.apply(self, args);
 						function _next(value) {
-							RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+							SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
 						}
 						function _throw(err) {
-							RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+							SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
 						}
 						_next(void 0);
 					});
 				};
 			}
-			function RecommendationController_defineProperties(target, props) {
+			function SearchController_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -18865,8 +19736,20 @@
 					_getPrototypeOf(o)
 				);
 			}
-			var defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
-				RecommendationController = (function (_AbstractController) {
+			!(function (ControllerTypes) {
+				(ControllerTypes.search = 'search'),
+					(ControllerTypes.autocomplete = 'autocomplete'),
+					(ControllerTypes.finder = 'finder'),
+					(ControllerTypes.recommendation = 'recommendation');
+			})(ControllerTypes || (ControllerTypes = {}));
+			var BeaconType,
+				BeaconCategory,
+				defaultConfig = {
+					id: 'search',
+					globals: {},
+					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0, storeRange: !0 } },
+				},
+				SearchController = (function (_AbstractController) {
 					!(function _inherits(subClass, superClass) {
 						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
 						(subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -18874,9 +19757,9 @@
 						})),
 							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
 							superClass && _setPrototypeOf(subClass, superClass);
-					})(RecommendationController, _AbstractController);
-					var _super = _createSuper(RecommendationController);
-					function RecommendationController(config, _ref, context) {
+					})(SearchController, _AbstractController);
+					var _super = _createSuper(SearchController);
+					function SearchController(config, _ref, context) {
 						var _this,
 							client = _ref.client,
 							store = _ref.store,
@@ -18885,182 +19768,68 @@
 							profiler = _ref.profiler,
 							logger = _ref.logger,
 							tracker = _ref.tracker;
-						if (
-							((function RecommendationController_classCallCheck(instance, Constructor) {
+						return (
+							(function SearchController_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, RecommendationController),
+							})(this, SearchController),
 							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
-								'recommendation'),
-							(_this.events = { click: null, impression: null, render: null, product: {} }),
+								ControllerTypes.search),
 							(_this.track = {
 								product: {
 									click: function click(e, result) {
-										if (_this.store.profile.tag && result && _this.events.click) {
-											var payload = {
-													type: BeaconType.PROFILE_PRODUCT_CLICK,
-													category: BeaconCategory.RECOMMENDATIONS,
-													context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-													event: {
-														context: {
-															action: 'navigate',
-															placement: _this.store.profile.placement,
-															tag: _this.store.profile.tag,
-															type: 'product-recommendation',
-														},
-														product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
-													},
-													pid: _this.events.click.id,
-												},
-												event = _this.tracker.track.event(payload);
-											return (
-												_this.eventManager.fire('track.product.click', {
-													controller: _assertThisInitialized(_this),
-													event: e,
-													result,
-													trackEvent: event,
-												}),
-												event
-											);
+										var _result$mappings$core;
+										if (_this.config.settings.infinite) {
+											var scrollMap = {};
+											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
 										}
-									},
-									impression: function impression(result) {
-										var _this$events$product$;
-										if (
-											_this.store.profile.tag &&
-											result &&
-											_this.events.impression &&
-											(null === (_this$events$product$ = _this.events.product[result.id]) ||
-												void 0 === _this$events$product$ ||
-												!_this$events$product$.impression)
-										) {
-											var payload = {
-												type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-												category: BeaconCategory.RECOMMENDATIONS,
-												context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-												event: {
-													context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-													product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
-												},
-												pid: _this.events.impression.id,
-											};
-											_this.events.product[result.id] = _this.events.product[result.id] || {};
-											var event = (_this.events.product[result.id].impression = _this.tracker.track.event(payload));
-											return (
-												_this.eventManager.fire('track.product.impression', { controller: _assertThisInitialized(_this), result, trackEvent: event }),
-												event
-											);
-										}
-									},
-									render: function render(result) {
-										var _this$events$product$2;
-										if (
-											_this.store.profile.tag &&
-											result &&
-											_this.events.render &&
-											(null === (_this$events$product$2 = _this.events.product[result.id]) ||
-												void 0 === _this$events$product$2 ||
-												!_this$events$product$2.render)
-										) {
-											var payload = {
-												type: BeaconType.PROFILE_PRODUCT_RENDER,
-												category: BeaconCategory.RECOMMENDATIONS,
-												context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-												event: {
-													context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-													product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
-												},
-												pid: _this.events.render.id,
-											};
-											_this.events.product[result.id] = _this.events.product[result.id] || {};
-											var event = (_this.events.product[result.id].render = _this.tracker.track.event(payload));
-											return (
-												_this.eventManager.fire('track.product.render', { controller: _assertThisInitialized(_this), result, trackEvent: event }),
-												event
-											);
-										}
-									},
-								},
-								click: function click(e) {
-									if (_this.store.profile.tag) {
-										var event = _this.tracker.track.event({
-											type: BeaconType.PROFILE_CLICK,
-											category: BeaconCategory.RECOMMENDATIONS,
-											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-											event: {
-												context: {
-													action: 'navigate',
-													placement: _this.store.profile.placement,
-													tag: _this.store.profile.tag,
-													type: 'product-recommendation',
-												},
-												profile: {
-													tag: _this.store.profile.tag,
-													placement: _this.store.profile.placement,
-													threshold: _this.store.profile.display.threshold,
-													templateId: _this.store.profile.display.template.uuid,
-												},
-											},
-										});
+										var _result$attributes = result.attributes,
+											intellisuggestData = _result$attributes.intellisuggestData,
+											intellisuggestSignature = _result$attributes.intellisuggestSignature,
+											target = e.target,
+											href =
+												(null == target ? void 0 : target.href) ||
+												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+													? void 0
+													: _result$mappings$core.url) ||
+												void 0,
+											event = _this.tracker.track.product.click({ intellisuggestData, intellisuggestSignature, href });
 										return (
-											(_this.events.click = event),
-											_this.eventManager.fire('track.click', { controller: _assertThisInitialized(_this), event: e, trackEvent: event }),
-											event
-										);
-									}
-								},
-								impression: function impression() {
-									if (_this.store.profile.tag && !_this.events.impression) {
-										var event = _this.tracker.track.event({
-											type: BeaconType.PROFILE_IMPRESSION,
-											category: BeaconCategory.RECOMMENDATIONS,
-											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-											event: {
-												context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-												profile: {
-													tag: _this.store.profile.tag,
-													placement: _this.store.profile.placement,
-													threshold: _this.store.profile.display.threshold,
-													templateId: _this.store.profile.display.template.uuid,
-												},
-											},
-										});
-										return (
-											(_this.events.impression = event),
-											_this.eventManager.fire('track.impression', { controller: _assertThisInitialized(_this), trackEvent: event }),
-											event
-										);
-									}
-								},
-								render: function render() {
-									if (_this.store.profile.tag && !_this.events.render) {
-										var event = _this.tracker.track.event({
-											type: BeaconType.PROFILE_RENDER,
-											category: BeaconCategory.RECOMMENDATIONS,
-											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
-											event: {
-												context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-												profile: {
-													tag: _this.store.profile.tag,
-													placement: _this.store.profile.placement,
-													threshold: _this.store.profile.display.threshold,
-													templateId: _this.store.profile.display.template.uuid,
-												},
-											},
-										});
-										return (
-											(_this.events.render = event),
-											_this.store.results.forEach(function (result) {
-												return _this.track.product.render(result);
+											_this.eventManager.fire('track.product.click', {
+												controller: _assertThisInitialized(_this),
+												event: e,
+												result,
+												trackEvent: event,
 											}),
-											_this.eventManager.fire('track.render', { controller: _assertThisInitialized(_this), trackEvent: event }),
 											event
 										);
-									}
+									},
 								},
 							}),
-							(_this.search = RecommendationController_asyncToGenerator(
+							(_this.search = SearchController_asyncToGenerator(
 								regeneratorRuntime.mark(function _callee() {
-									var params, searchProfile, response, afterSearchProfile, afterStoreProfile;
+									var params,
+										_params$pagination3,
+										stringyParams,
+										prevStringyParams,
+										_this$config$settings,
+										_params$pagination,
+										_this$config$settings2,
+										_params$pagination2,
+										preventBackfill,
+										dontBackfill,
+										searchProfile,
+										_yield$_this$client$s,
+										_yield$_this$client$s2,
+										meta,
+										response,
+										_this$store$data,
+										_this$config$settings3,
+										previousResults,
+										backfills,
+										page,
+										backfillParams,
+										afterSearchProfile,
+										afterStoreProfile;
 									return regeneratorRuntime.wrap(
 										function _callee$(_context) {
 											for (;;)
@@ -19095,6 +19864,771 @@
 													case 17:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
 													case 19:
+														if (
+															((stringyParams = JSON.stringify(params)),
+															(prevStringyParams = _this.storage.get('lastStringyParams')),
+															stringyParams != prevStringyParams)
+														) {
+															_context.next = 23;
+															break;
+														}
+														return _context.abrupt('return');
+													case 23:
+														if (!_this.config.settings.infinite) {
+															_context.next = 30;
+															break;
+														}
+														if (
+															((preventBackfill =
+																(null === (_this$config$settings = _this.config.settings.infinite) || void 0 === _this$config$settings
+																	? void 0
+																	: _this$config$settings.backfill) &&
+																!_this.store.results.length &&
+																(null === (_params$pagination = params.pagination) || void 0 === _params$pagination
+																	? void 0
+																	: _params$pagination.page) > _this.config.settings.infinite.backfill),
+															(dontBackfill =
+																!(
+																	null !== (_this$config$settings2 = _this.config.settings.infinite) &&
+																	void 0 !== _this$config$settings2 &&
+																	_this$config$settings2.backfill
+																) &&
+																!_this.store.results.length &&
+																(null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
+																	? void 0
+																	: _params$pagination2.page) > 1),
+															!preventBackfill && !dontBackfill)
+														) {
+															_context.next = 30;
+															break;
+														}
+														return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
+													case 30:
+														return (
+															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+															(_context.next = 33),
+															_this.client.search(params)
+														);
+													case 33:
+														if (
+															((_yield$_this$client$s = _context.sent),
+															(_yield$_this$client$s2 = SearchController_slicedToArray(_yield$_this$client$s, 2)),
+															(meta = _yield$_this$client$s2[0]),
+															(response = _yield$_this$client$s2[1]).meta || (response.meta = meta),
+															!(
+																_this.config.settings.infinite &&
+																(null === (_params$pagination3 = params.pagination) || void 0 === _params$pagination3
+																	? void 0
+																	: _params$pagination3.page) > 1
+															))
+														) {
+															_context.next = 48;
+															break;
+														}
+														if (
+															((previousResults =
+																(null === (_this$store$data = _this.store.data) || void 0 === _this$store$data ? void 0 : _this$store$data.results) ||
+																[]),
+															null === (_this$config$settings3 = _this.config.settings) ||
+																void 0 === _this$config$settings3 ||
+																!_this$config$settings3.infinite.backfill ||
+																previousResults.length)
+														) {
+															_context.next = 47;
+															break;
+														}
+														for (backfills = [], page = 1; page < params.pagination.page; page++)
+															(backfillParams = cjs_default()(Object.assign({}, params), { pagination: { page } })),
+																backfills.push(_this.client.search(backfillParams));
+														return (_context.next = 45), Promise.all(backfills);
+													case 45:
+														_context.sent.map(function (_ref3) {
+															var _ref4 = SearchController_slicedToArray(_ref3, 2),
+																data = (_ref4[0], _ref4[1]);
+															previousResults = previousResults.concat(data.results);
+														});
+													case 47:
+														response.results = [].concat(
+															SearchController_toConsumableArray(previousResults),
+															SearchController_toConsumableArray(response.results || [])
+														);
+													case 48:
+														return (
+															searchProfile.stop(),
+															_this.log.profile(searchProfile),
+															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
+															(_context.prev = 51),
+															(_context.next = 54),
+															_this.eventManager.fire('afterSearch', { controller: _assertThisInitialized(_this), request: params, response })
+														);
+													case 54:
+														_context.next = 66;
+														break;
+													case 56:
+														if (
+															((_context.prev = 56),
+															(_context.t1 = _context.catch(51)),
+															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
+														) {
+															_context.next = 64;
+															break;
+														}
+														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
+													case 64:
+														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
+													case 66:
+														return (
+															afterSearchProfile.stop(),
+															_this.log.profile(afterSearchProfile),
+															_this.store.update(response),
+															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
+															(_context.prev = 70),
+															(_context.next = 73),
+															_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
+														);
+													case 73:
+														_context.next = 85;
+														break;
+													case 75:
+														if (
+															((_context.prev = 75),
+															(_context.t2 = _context.catch(70)),
+															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
+														) {
+															_context.next = 83;
+															break;
+														}
+														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
+													case 83:
+														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
+													case 85:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 104);
+														break;
+													case 89:
+														if (((_context.prev = 89), (_context.t3 = _context.catch(4)), !_context.t3)) {
+															_context.next = 104;
+															break;
+														}
+														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 95 : 500 === _context.t4 ? 98 : 101);
+														break;
+													case 95:
+														return (
+															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
+															_this.log.warn(_this.store.error),
+															_context.abrupt('break', 103)
+														);
+													case 98:
+														return (
+															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+															_this.log.error(_this.store.error),
+															_context.abrupt('break', 103)
+														);
+													case 101:
+														return _this.log.error(_context.t3), _context.abrupt('break', 103);
+													case 103:
+														_this.store.loading = !1;
+													case 104:
+													case 'end':
+														return _context.stop();
+												}
+										},
+										_callee,
+										null,
+										[
+											[4, 89],
+											[5, 10],
+											[51, 56],
+											[70, 75],
+										]
+									);
+								})
+							)),
+							(_this.config = cjs_default()(defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
+							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+							_this.storage.set('lastStringyParams', void 0),
+							_this.eventManager.on(
+								'beforeSearch',
+								(function () {
+									var _ref5 = SearchController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee2(search, next) {
+											return regeneratorRuntime.wrap(function _callee2$(_context2) {
+												for (;;)
+													switch ((_context2.prev = _context2.next)) {
+														case 0:
+															return (search.controller.store.loading = !0), (_context2.next = 3), next();
+														case 3:
+														case 'end':
+															return _context2.stop();
+													}
+											}, _callee2);
+										})
+									);
+									return function (_x, _x2) {
+										return _ref5.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterSearch',
+								(function () {
+									var _ref6 = SearchController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee3(search, next) {
+											var _search$response,
+												_search$response$merc,
+												_config$settings,
+												_config$settings$redi,
+												_search$response2,
+												_search$response2$fil,
+												_config$settings2,
+												_config$settings2$red,
+												_search$response3,
+												_search$response3$sea,
+												_search$response4,
+												_search$response4$pag,
+												_search$response5,
+												_search$response5$fil,
+												config,
+												redirectURL,
+												searchStore;
+											return regeneratorRuntime.wrap(function _callee3$(_context3) {
+												for (;;)
+													switch ((_context3.prev = _context3.next)) {
+														case 0:
+															if (
+																((config = search.controller.config),
+																(redirectURL =
+																	null === (_search$response = search.response) ||
+																	void 0 === _search$response ||
+																	null === (_search$response$merc = _search$response.merchandising) ||
+																	void 0 === _search$response$merc
+																		? void 0
+																		: _search$response$merc.redirect),
+																(searchStore = search.controller.store),
+																!redirectURL ||
+																	null == config ||
+																	null === (_config$settings = config.settings) ||
+																	void 0 === _config$settings ||
+																	null === (_config$settings$redi = _config$settings.redirects) ||
+																	void 0 === _config$settings$redi ||
+																	!_config$settings$redi.merchandising ||
+																	(null != search &&
+																		null !== (_search$response2 = search.response) &&
+																		void 0 !== _search$response2 &&
+																		null !== (_search$response2$fil = _search$response2.filters) &&
+																		void 0 !== _search$response2$fil &&
+																		_search$response2$fil.length) ||
+																	searchStore.loaded)
+															) {
+																_context3.next = 6;
+																break;
+															}
+															return window.location.replace(redirectURL), _context3.abrupt('return', !1);
+														case 6:
+															if (
+																null == config ||
+																null === (_config$settings2 = config.settings) ||
+																void 0 === _config$settings2 ||
+																null === (_config$settings2$red = _config$settings2.redirects) ||
+																void 0 === _config$settings2$red ||
+																!_config$settings2$red.singleResult ||
+																null == search ||
+																null === (_search$response3 = search.response) ||
+																void 0 === _search$response3 ||
+																null === (_search$response3$sea = _search$response3.search) ||
+																void 0 === _search$response3$sea ||
+																!_search$response3$sea.query ||
+																1 !==
+																	(null == search ||
+																	null === (_search$response4 = search.response) ||
+																	void 0 === _search$response4 ||
+																	null === (_search$response4$pag = _search$response4.pagination) ||
+																	void 0 === _search$response4$pag
+																		? void 0
+																		: _search$response4$pag.totalResults) ||
+																(null != search &&
+																	null !== (_search$response5 = search.response) &&
+																	void 0 !== _search$response5 &&
+																	null !== (_search$response5$fil = _search$response5.filters) &&
+																	void 0 !== _search$response5$fil &&
+																	_search$response5$fil.length)
+															) {
+																_context3.next = 9;
+																break;
+															}
+															return (
+																window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
+																_context3.abrupt('return', !1)
+															);
+														case 9:
+															return (_context3.next = 11), next();
+														case 11:
+														case 'end':
+															return _context3.stop();
+													}
+											}, _callee3);
+										})
+									);
+									return function (_x3, _x4) {
+										return _ref6.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterStore',
+								(function () {
+									var _ref7 = SearchController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee4(search, next) {
+											var _this$config$settings4, stringyParams, scrollMap, scrollToPosition, checkCount, heightCheck;
+											return regeneratorRuntime.wrap(function _callee4$(_context4) {
+												for (;;)
+													switch ((_context4.prev = _context4.next)) {
+														case 0:
+															return (_context4.next = 2), next();
+														case 2:
+															(search.controller.store.loading = !1),
+																(stringyParams = JSON.stringify(search.request)),
+																_this.storage.set('lastStringyParams', stringyParams),
+																null !== (_this$config$settings4 = _this.config.settings) &&
+																	void 0 !== _this$config$settings4 &&
+																	_this$config$settings4.infinite &&
+																	0 === window.scrollY &&
+																	((scrollMap = _this.storage.get('scrollMap') || {}),
+																	(scrollToPosition = scrollMap[stringyParams]) &&
+																		((checkCount = 0),
+																		(heightCheck = window.setInterval(function () {
+																			document.documentElement.scrollHeight >= scrollToPosition &&
+																				(window.scrollTo(0, scrollToPosition),
+																				_this.log.debug('scrolling to: ', scrollMap[stringyParams]),
+																				window.clearInterval(heightCheck)),
+																				checkCount > 40 && window.clearInterval(heightCheck),
+																				checkCount++;
+																		}, 50))));
+														case 6:
+														case 'end':
+															return _context4.stop();
+													}
+											}, _callee4);
+										})
+									);
+									return function (_x5, _x6) {
+										return _ref7.apply(this, arguments);
+									};
+								})()
+							),
+							_this.use(_this.config),
+							_this
+						);
+					}
+					return (
+						(function SearchController_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && SearchController_defineProperties(Constructor.prototype, protoProps),
+								staticProps && SearchController_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(SearchController, [
+							{
+								key: 'params',
+								get: function get() {
+									var _this$config$settings5,
+										_this$config$settings6,
+										_this$config$globals,
+										_this$config$globals$,
+										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
+									(null !== (_this$config$settings5 = this.config.settings) &&
+										void 0 !== _this$config$settings5 &&
+										null !== (_this$config$settings6 = _this$config$settings5.redirects) &&
+										void 0 !== _this$config$settings6 &&
+										_this$config$settings6.merchandising &&
+										!this.store.loaded) ||
+										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
+										(params.tracking = params.tracking || {}),
+										(params.tracking.domain = window.location.href);
+									var userId = this.tracker.getUserId();
+									if (
+										(userId && (params.tracking.userId = userId),
+										null === (_this$config$globals = this.config.globals) ||
+											void 0 === _this$config$globals ||
+											null === (_this$config$globals$ = _this$config$globals.personalization) ||
+											void 0 === _this$config$globals$ ||
+											!_this$config$globals$.disabled)
+									) {
+										var cartItems = this.tracker.cookies.cart.get();
+										cartItems.length &&
+											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
+										var lastViewedItems = this.tracker.cookies.viewed.get();
+										lastViewedItems.length &&
+											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
+										var shopperId = this.tracker.getShopperId();
+										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
+									}
+									return params;
+								},
+							},
+						]),
+						SearchController
+					);
+				})(AbstractController);
+			function RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function RecommendationController_asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							RecommendationController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
+					});
+				};
+			}
+			function RecommendationController_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function RecommendationController_setPrototypeOf(o, p) {
+				return (
+					(RecommendationController_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					RecommendationController_setPrototypeOf(o, p)
+				);
+			}
+			function RecommendationController_createSuper(Derived) {
+				var hasNativeReflectConstruct = (function RecommendationController_isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = RecommendationController_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = RecommendationController_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return RecommendationController_possibleConstructorReturn(this, result);
+				};
+			}
+			function RecommendationController_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return RecommendationController_assertThisInitialized(self);
+			}
+			function RecommendationController_assertThisInitialized(self) {
+				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+				return self;
+			}
+			function RecommendationController_getPrototypeOf(o) {
+				return (
+					(RecommendationController_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					RecommendationController_getPrototypeOf(o)
+				);
+			}
+			!(function (BeaconType) {
+				(BeaconType.PRODUCT = 'product'),
+					(BeaconType.CART = 'cart'),
+					(BeaconType.ORDER = 'transaction'),
+					(BeaconType.LOGIN = 'login'),
+					(BeaconType.CLICK = 'click'),
+					(BeaconType.CUSTOM = 'custom'),
+					(BeaconType.PROFILE_RENDER = 'profile.render'),
+					(BeaconType.PROFILE_IMPRESSION = 'profile.impression'),
+					(BeaconType.PROFILE_CLICK = 'profile.click'),
+					(BeaconType.PROFILE_PRODUCT_RENDER = 'profile.product.render'),
+					(BeaconType.PROFILE_PRODUCT_IMPRESSION = 'profile.product.impression'),
+					(BeaconType.PROFILE_PRODUCT_CLICK = 'profile.product.click');
+			})(BeaconType || (BeaconType = {})),
+				(function (BeaconCategory) {
+					(BeaconCategory.PAGEVIEW = 'searchspring.page.view'),
+						(BeaconCategory.CARTVIEW = 'searchspring.shop.cart'),
+						(BeaconCategory.ORDERVIEW = 'searchspring.shop.transaction'),
+						(BeaconCategory.PERSONALIZATION = 'searchspring.personalization'),
+						(BeaconCategory.RECOMMENDATIONS = 'searchspring.recommendations.user-interactions'),
+						(BeaconCategory.INTERACTION = 'searchspring.user-interactions'),
+						(BeaconCategory.CUSTOM = 'custom');
+				})(BeaconCategory || (BeaconCategory = {}));
+			var RecommendationController_defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
+				RecommendationController = (function (_AbstractController) {
+					!(function RecommendationController_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && RecommendationController_setPrototypeOf(subClass, superClass);
+					})(RecommendationController, _AbstractController);
+					var _super = RecommendationController_createSuper(RecommendationController);
+					function RecommendationController(config, _ref, context) {
+						var _this,
+							client = _ref.client,
+							store = _ref.store,
+							urlManager = _ref.urlManager,
+							eventManager = _ref.eventManager,
+							profiler = _ref.profiler,
+							logger = _ref.logger,
+							tracker = _ref.tracker;
+						if (
+							((function RecommendationController_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, RecommendationController),
+							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
+								ControllerTypes.recommendation),
+							(_this.events = { click: null, impression: null, render: null, product: {} }),
+							(_this.track = {
+								product: {
+									click: function click(e, result) {
+										if (_this.store.profile.tag && result && _this.events.click) {
+											var payload = {
+													type: BeaconType.PROFILE_PRODUCT_CLICK,
+													category: BeaconCategory.RECOMMENDATIONS,
+													context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+													event: {
+														context: {
+															action: 'navigate',
+															placement: _this.store.profile.placement,
+															tag: _this.store.profile.tag,
+															type: 'product-recommendation',
+														},
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
+													},
+													pid: _this.events.click.id,
+												},
+												event = _this.tracker.track.event(payload);
+											return (
+												_this.eventManager.fire('track.product.click', {
+													controller: RecommendationController_assertThisInitialized(_this),
+													event: e,
+													result,
+													trackEvent: event,
+												}),
+												event
+											);
+										}
+									},
+									impression: function impression(result) {
+										var _this$events$product$;
+										if (
+											_this.store.profile.tag &&
+											result &&
+											_this.events.impression &&
+											(null === (_this$events$product$ = _this.events.product[result.id]) ||
+												void 0 === _this$events$product$ ||
+												!_this$events$product$.impression)
+										) {
+											var payload = {
+												type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
+												category: BeaconCategory.RECOMMENDATIONS,
+												context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+												event: {
+													context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
+													product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
+												},
+												pid: _this.events.impression.id,
+											};
+											_this.events.product[result.id] = _this.events.product[result.id] || {};
+											var event = (_this.events.product[result.id].impression = _this.tracker.track.event(payload));
+											return (
+												_this.eventManager.fire('track.product.impression', {
+													controller: RecommendationController_assertThisInitialized(_this),
+													result,
+													trackEvent: event,
+												}),
+												event
+											);
+										}
+									},
+									render: function render(result) {
+										var _this$events$product$2;
+										if (
+											_this.store.profile.tag &&
+											result &&
+											_this.events.render &&
+											(null === (_this$events$product$2 = _this.events.product[result.id]) ||
+												void 0 === _this$events$product$2 ||
+												!_this$events$product$2.render)
+										) {
+											var payload = {
+												type: BeaconType.PROFILE_PRODUCT_RENDER,
+												category: BeaconCategory.RECOMMENDATIONS,
+												context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+												event: {
+													context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
+													product: { id: result.id, mappings: { core: result.mappings.core }, seed: _this.config.globals.seed },
+												},
+												pid: _this.events.render.id,
+											};
+											_this.events.product[result.id] = _this.events.product[result.id] || {};
+											var event = (_this.events.product[result.id].render = _this.tracker.track.event(payload));
+											return (
+												_this.eventManager.fire('track.product.render', {
+													controller: RecommendationController_assertThisInitialized(_this),
+													result,
+													trackEvent: event,
+												}),
+												event
+											);
+										}
+									},
+								},
+								click: function click(e) {
+									if (_this.store.profile.tag) {
+										var event = _this.tracker.track.event({
+											type: BeaconType.PROFILE_CLICK,
+											category: BeaconCategory.RECOMMENDATIONS,
+											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+											event: {
+												context: {
+													action: 'navigate',
+													placement: _this.store.profile.placement,
+													tag: _this.store.profile.tag,
+													type: 'product-recommendation',
+												},
+												profile: {
+													tag: _this.store.profile.tag,
+													placement: _this.store.profile.placement,
+													threshold: _this.store.profile.display.threshold,
+													templateId: _this.store.profile.display.template.uuid,
+												},
+											},
+										});
+										return (
+											(_this.events.click = event),
+											_this.eventManager.fire('track.click', {
+												controller: RecommendationController_assertThisInitialized(_this),
+												event: e,
+												trackEvent: event,
+											}),
+											event
+										);
+									}
+								},
+								impression: function impression() {
+									if (_this.store.profile.tag && !_this.events.impression) {
+										var event = _this.tracker.track.event({
+											type: BeaconType.PROFILE_IMPRESSION,
+											category: BeaconCategory.RECOMMENDATIONS,
+											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+											event: {
+												context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
+												profile: {
+													tag: _this.store.profile.tag,
+													placement: _this.store.profile.placement,
+													threshold: _this.store.profile.display.threshold,
+													templateId: _this.store.profile.display.template.uuid,
+												},
+											},
+										});
+										return (
+											(_this.events.impression = event),
+											_this.eventManager.fire('track.impression', {
+												controller: RecommendationController_assertThisInitialized(_this),
+												trackEvent: event,
+											}),
+											event
+										);
+									}
+								},
+								render: function render() {
+									if (_this.store.profile.tag && !_this.events.render) {
+										var event = _this.tracker.track.event({
+											type: BeaconType.PROFILE_RENDER,
+											category: BeaconCategory.RECOMMENDATIONS,
+											context: _this.config.globals.siteId ? { website: { trackingCode: _this.config.globals.siteId } } : null,
+											event: {
+												context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
+												profile: {
+													tag: _this.store.profile.tag,
+													placement: _this.store.profile.placement,
+													threshold: _this.store.profile.display.threshold,
+													templateId: _this.store.profile.display.template.uuid,
+												},
+											},
+										});
+										return (
+											(_this.events.render = event),
+											_this.store.results.forEach(function (result) {
+												return _this.track.product.render(result);
+											}),
+											_this.eventManager.fire('track.render', {
+												controller: RecommendationController_assertThisInitialized(_this),
+												trackEvent: event,
+											}),
+											event
+										);
+									}
+								},
+							}),
+							(_this.search = RecommendationController_asyncToGenerator(
+								regeneratorRuntime.mark(function _callee() {
+									var params, searchProfile, response, afterSearchProfile, afterStoreProfile;
+									return regeneratorRuntime.wrap(
+										function _callee$(_context) {
+											for (;;)
+												switch ((_context.prev = _context.next)) {
+													case 0:
+														if (_this.initialized) {
+															_context.next = 3;
+															break;
+														}
+														return (_context.next = 3), _this.init();
+													case 3:
+														return (
+															(params = _this.params),
+															(_context.prev = 4),
+															(_context.prev = 5),
+															(_context.next = 8),
+															_this.eventManager.fire('beforeSearch', {
+																controller: RecommendationController_assertThisInitialized(_this),
+																request: params,
+															})
+														);
+													case 8:
+														_context.next = 19;
+														break;
+													case 10:
+														if (
+															((_context.prev = 10),
+															(_context.t0 = _context.catch(5)),
+															'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
+														) {
+															_context.next = 17;
+															break;
+														}
+														return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
+													case 17:
+														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
+													case 19:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 															(_context.next = 22),
@@ -19108,7 +20642,11 @@
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
 															(_context.prev = 26),
 															(_context.next = 29),
-															_this.eventManager.fire('afterSearch', { controller: _assertThisInitialized(_this), request: params, response })
+															_this.eventManager.fire('afterSearch', {
+																controller: RecommendationController_assertThisInitialized(_this),
+																request: params,
+																response,
+															})
 														);
 													case 29:
 														_context.next = 41;
@@ -19133,7 +20671,11 @@
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 															(_context.prev = 45),
 															(_context.next = 48),
-															_this.eventManager.fire('afterStore', { controller: _assertThisInitialized(_this), request: params, response })
+															_this.eventManager.fire('afterStore', {
+																controller: RecommendationController_assertThisInitialized(_this),
+																request: params,
+																response,
+															})
 														);
 													case 48:
 														_context.next = 60;
@@ -19196,7 +20738,7 @@
 						)
 							throw new Error('Invalid config passed to RecommendationController. The "tag" attribute is required.');
 						return (
-							(_this.config = cjs_default()(defaultConfig, _this.config)),
+							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
 							_this.eventManager.on(
 								'beforeSearch',
@@ -19260,9 +20802,10 @@
 							{
 								key: 'params',
 								get: function get() {
-									var params = Object.assign({ tag: this.config.tag, batched: this.config.batched }, this.config.globals, {
-											branch: this.config.branch || 'production',
-										}),
+									var params = Object.assign(
+											{ tag: this.config.tag, batched: this.config.batched, branch: this.config.branch || 'production' },
+											this.config.globals
+										),
 										shopperId = this.tracker.context.shopperId,
 										cart = this.tracker.cookies.cart.get(),
 										lastViewed = this.tracker.cookies.viewed.get();
@@ -19278,19 +20821,930 @@
 						]),
 						RecommendationController
 					);
-				})(AbstractController),
-				fibonacci =
-					(__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-					__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.date.to-iso-string.js'),
-					function fibonacci(num) {
-						for (var temp, a = 1, b = 0; num >= 0; ) (temp = a), (a += b), (b = temp), num--;
-						return b;
+				})(AbstractController);
+			function AutocompleteController_slicedToArray(arr, i) {
+				return (
+					(function AutocompleteController_arrayWithHoles(arr) {
+						if (Array.isArray(arr)) return arr;
+					})(arr) ||
+					(function AutocompleteController_iterableToArrayLimit(arr, i) {
+						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
+						if (null == _i) return;
+						var _s,
+							_e,
+							_arr = [],
+							_n = !0,
+							_d = !1;
+						try {
+							for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
+						} catch (err) {
+							(_d = !0), (_e = err);
+						} finally {
+							try {
+								_n || null == _i.return || _i.return();
+							} finally {
+								if (_d) throw _e;
+							}
+						}
+						return _arr;
+					})(arr, i) ||
+					(function AutocompleteController_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return AutocompleteController_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return AutocompleteController_arrayLikeToArray(o, minLen);
+					})(arr, i) ||
+					(function AutocompleteController_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function AutocompleteController_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function AutocompleteController_asyncToGenerator(fn) {
+				return function () {
+					var self = this,
+						args = arguments;
+					return new Promise(function (resolve, reject) {
+						var gen = fn.apply(self, args);
+						function _next(value) {
+							AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+						}
+						function _throw(err) {
+							AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+						}
+						_next(void 0);
 					});
-			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js');
+				};
+			}
+			function AutocompleteController_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function AutocompleteController_setPrototypeOf(o, p) {
+				return (
+					(AutocompleteController_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					AutocompleteController_setPrototypeOf(o, p)
+				);
+			}
+			function AutocompleteController_createSuper(Derived) {
+				var hasNativeReflectConstruct = (function AutocompleteController_isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = AutocompleteController_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = AutocompleteController_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return AutocompleteController_possibleConstructorReturn(this, result);
+				};
+			}
+			function AutocompleteController_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return AutocompleteController_assertThisInitialized(self);
+			}
+			function AutocompleteController_assertThisInitialized(self) {
+				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+				return self;
+			}
+			function AutocompleteController_getPrototypeOf(o) {
+				return (
+					(AutocompleteController_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					AutocompleteController_getPrototypeOf(o)
+				);
+			}
+			var AutocompleteController_defaultConfig = {
+					id: 'autocomplete',
+					selector: '',
+					action: '',
+					globals: {},
+					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
+				},
+				AutocompleteController = (function (_AbstractController) {
+					!(function AutocompleteController_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && AutocompleteController_setPrototypeOf(subClass, superClass);
+					})(AutocompleteController, _AbstractController);
+					var _bind,
+						_setFocused,
+						_super = AutocompleteController_createSuper(AutocompleteController);
+					function AutocompleteController(config, _ref, context) {
+						var _this,
+							_formSubmit,
+							_enterKey,
+							client = _ref.client,
+							store = _ref.store,
+							urlManager = _ref.urlManager,
+							eventManager = _ref.eventManager,
+							profiler = _ref.profiler,
+							logger = _ref.logger,
+							tracker = _ref.tracker;
+						return (
+							(function AutocompleteController_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, AutocompleteController),
+							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
+								ControllerTypes.autocomplete),
+							(_this.track = {
+								product: {
+									click: function click(e, result) {
+										_this.log.warn('product.click tracking is not currently supported in this controller type');
+									},
+								},
+							}),
+							(_this.handlers = {
+								input: {
+									enterKey:
+										((_enterKey = AutocompleteController_asyncToGenerator(
+											regeneratorRuntime.mark(function _callee(e) {
+												var _this$config$globals, _this$config$globals$, _this$config$globals$2, input, actionUrl;
+												return regeneratorRuntime.wrap(
+													function _callee$(_context) {
+														for (;;)
+															switch ((_context.prev = _context.next)) {
+																case 0:
+																	if (13 != e.keyCode) {
+																		_context.next = 29;
+																		break;
+																	}
+																	if (
+																		((input = e.target),
+																		(actionUrl = _this.store.services.urlManager),
+																		e.preventDefault(),
+																		null === (_this$config$globals = _this.config.globals) ||
+																			void 0 === _this$config$globals ||
+																			null === (_this$config$globals$ = _this$config$globals.search) ||
+																			void 0 === _this$config$globals$ ||
+																			null === (_this$config$globals$2 = _this$config$globals$.query) ||
+																			void 0 === _this$config$globals$2 ||
+																			!_this$config$globals$2.spellCorrection)
+																	) {
+																		_context.next = 13;
+																		break;
+																	}
+																	return (_context.next = 7), timeout(201);
+																case 7:
+																	if (!_this.store.loading) {
+																		_context.next = 12;
+																		break;
+																	}
+																	return (_context.next = 10), timeout(200);
+																case 10:
+																	_context.next = 7;
+																	break;
+																case 12:
+																	_this.store.search.originalQuery &&
+																		((input.value = _this.store.search.query.string),
+																		(actionUrl = actionUrl.set('oq', _this.store.search.originalQuery.string)));
+																case 13:
+																	return (
+																		(actionUrl = actionUrl.set('query', input.value)),
+																		(_context.prev = 14),
+																		(_context.next = 17),
+																		_this.eventManager.fire('beforeSubmit', {
+																			controller: AutocompleteController_assertThisInitialized(_this),
+																			input,
+																		})
+																	);
+																case 17:
+																	_context.next = 28;
+																	break;
+																case 19:
+																	if (
+																		((_context.prev = 19),
+																		(_context.t0 = _context.catch(14)),
+																		'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
+																	) {
+																		_context.next = 26;
+																		break;
+																	}
+																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context.abrupt('return');
+																case 26:
+																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context.t0);
+																case 28:
+																	window.location.href = actionUrl.href;
+																case 29:
+																case 'end':
+																	return _context.stop();
+															}
+													},
+													_callee,
+													null,
+													[[14, 19]]
+												);
+											})
+										)),
+										function enterKey(_x) {
+											return _enterKey.apply(this, arguments);
+										}),
+									escKey: function escKey(e) {
+										27 == e.keyCode && (e.target.blur(), _this.setFocused());
+									},
+									focus: function focus(e) {
+										e.stopPropagation(),
+											setTimeout(function () {
+												_this.setFocused(e.target);
+											});
+									},
+									formSubmit:
+										((_formSubmit = AutocompleteController_asyncToGenerator(
+											regeneratorRuntime.mark(function _callee2(e) {
+												var _this$config$globals2, _this$config$globals3, _this$config$globals4, form, input;
+												return regeneratorRuntime.wrap(
+													function _callee2$(_context2) {
+														for (;;)
+															switch ((_context2.prev = _context2.next)) {
+																case 0:
+																	if (
+																		((form = e.target),
+																		(input = form.querySelector('input[ss-autocomplete-input]')),
+																		e.preventDefault(),
+																		null === (_this$config$globals2 = _this.config.globals) ||
+																			void 0 === _this$config$globals2 ||
+																			null === (_this$config$globals3 = _this$config$globals2.search) ||
+																			void 0 === _this$config$globals3 ||
+																			null === (_this$config$globals4 = _this$config$globals3.query) ||
+																			void 0 === _this$config$globals4 ||
+																			!_this$config$globals4.spellCorrection)
+																	) {
+																		_context2.next = 12;
+																		break;
+																	}
+																	return (_context2.next = 6), timeout(201);
+																case 6:
+																	if (!_this.store.loading) {
+																		_context2.next = 11;
+																		break;
+																	}
+																	return (_context2.next = 9), timeout(200);
+																case 9:
+																	_context2.next = 6;
+																	break;
+																case 11:
+																	_this.store.search.originalQuery &&
+																		((input.value = _this.store.search.query.string),
+																		addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
+																case 12:
+																	return (
+																		(_context2.prev = 12),
+																		(_context2.next = 15),
+																		_this.eventManager.fire('beforeSubmit', {
+																			controller: AutocompleteController_assertThisInitialized(_this),
+																			input,
+																		})
+																	);
+																case 15:
+																	_context2.next = 26;
+																	break;
+																case 17:
+																	if (
+																		((_context2.prev = 17),
+																		(_context2.t0 = _context2.catch(12)),
+																		'cancelled' != (null === _context2.t0 || void 0 === _context2.t0 ? void 0 : _context2.t0.message))
+																	) {
+																		_context2.next = 24;
+																		break;
+																	}
+																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context2.abrupt('return');
+																case 24:
+																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context2.t0);
+																case 26:
+																	form.submit();
+																case 27:
+																case 'end':
+																	return _context2.stop();
+															}
+													},
+													_callee2,
+													null,
+													[[12, 17]]
+												);
+											})
+										)),
+										function formSubmit(_x2) {
+											return _formSubmit.apply(this, arguments);
+										}),
+									keyUp: function keyUp(e) {
+										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
+											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
+											var value = e.target.value;
+											if (_this.store.state.input != value || !_this.store.loaded) {
+												var _this$store$trending, _this$config$settings, _this$config$settings2;
+												if (((_this.store.state.input = value), _this.config.settings.syncInputs))
+													document.querySelectorAll(_this.config.selector).forEach(function (input) {
+														input.value = value;
+													});
+												if ((clearTimeout(_this.handlers.input.timeoutDelay), value))
+													_this.handlers.input.timeoutDelay = setTimeout(function () {
+														_this.store.state.locks.terms.unlock(),
+															_this.store.state.locks.facets.unlock(),
+															_this.urlManager.set({ query: _this.store.state.input }).go();
+													}, 200);
+												else
+													_this.store.reset(),
+														_this.urlManager.reset().go(),
+														null !== (_this$store$trending = _this.store.trending) &&
+															void 0 !== _this$store$trending &&
+															_this$store$trending.length &&
+															null !== (_this$config$settings = _this.config.settings) &&
+															void 0 !== _this$config$settings &&
+															null !== (_this$config$settings2 = _this$config$settings.trending) &&
+															void 0 !== _this$config$settings2 &&
+															_this$config$settings2.showResults &&
+															_this.store.trending[0].preview();
+											}
+										}
+									},
+									timeoutDelay: void 0,
+								},
+								document: {
+									click: function click(e) {
+										var inputs = document.querySelectorAll(_this.config.selector);
+										Array.from(inputs).includes(e.target) ? e.stopPropagation() : _this.setFocused();
+									},
+								},
+							}),
+							(_this.searchTrending = AutocompleteController_asyncToGenerator(
+								regeneratorRuntime.mark(function _callee3() {
+									var terms, storedTerms, _this$config$settings3, _this$config$settings4, trendingParams, trendingProfile;
+									return regeneratorRuntime.wrap(function _callee3$(_context3) {
+										for (;;)
+											switch ((_context3.prev = _context3.next)) {
+												case 0:
+													if (!(storedTerms = _this.storage.get('terms'))) {
+														_context3.next = 5;
+														break;
+													}
+													(terms = JSON.parse(storedTerms)), (_context3.next = 13);
+													break;
+												case 5:
+													return (
+														(trendingParams = {
+															limit:
+																(null === (_this$config$settings3 = _this.config.settings) ||
+																void 0 === _this$config$settings3 ||
+																null === (_this$config$settings4 = _this$config$settings3.trending) ||
+																void 0 === _this$config$settings4
+																	? void 0
+																	: _this$config$settings4.limit) || 5,
+														}),
+														(trendingProfile = _this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
+														(_context3.next = 9),
+														_this.client.trending(trendingParams)
+													);
+												case 9:
+													(terms = _context3.sent),
+														trendingProfile.stop(),
+														_this.log.profile(trendingProfile),
+														_this.storage.set('terms', JSON.stringify(terms));
+												case 13:
+													_this.store.updateTrendingTerms(terms);
+												case 14:
+												case 'end':
+													return _context3.stop();
+											}
+									}, _callee3);
+								})
+							)),
+							(_this.search = AutocompleteController_asyncToGenerator(
+								regeneratorRuntime.mark(function _callee4() {
+									var _params$search,
+										_params$search$query,
+										params,
+										searchProfile,
+										_yield$_this$client$a,
+										_yield$_this$client$a2,
+										meta,
+										response,
+										afterSearchProfile,
+										afterStoreProfile;
+									return regeneratorRuntime.wrap(
+										function _callee4$(_context4) {
+											for (;;)
+												switch ((_context4.prev = _context4.next)) {
+													case 0:
+														if (
+															null != (params = _this.params) &&
+															null !== (_params$search = params.search) &&
+															void 0 !== _params$search &&
+															null !== (_params$search$query = _params$search.query) &&
+															void 0 !== _params$search$query &&
+															_params$search$query.string
+														) {
+															_context4.next = 3;
+															break;
+														}
+														return _context4.abrupt('return');
+													case 3:
+														return (
+															(_context4.prev = 3),
+															(_context4.prev = 4),
+															(_context4.next = 7),
+															_this.eventManager.fire('beforeSearch', {
+																controller: AutocompleteController_assertThisInitialized(_this),
+																request: params,
+															})
+														);
+													case 7:
+														_context4.next = 18;
+														break;
+													case 9:
+														if (
+															((_context4.prev = 9),
+															(_context4.t0 = _context4.catch(4)),
+															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
+														) {
+															_context4.next = 16;
+															break;
+														}
+														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
+													case 16:
+														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
+													case 18:
+														return (
+															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+															(_context4.next = 21),
+															_this.client.autocomplete(params)
+														);
+													case 21:
+														return (
+															(_yield$_this$client$a = _context4.sent),
+															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
+															(meta = _yield$_this$client$a2[0]),
+															(response = _yield$_this$client$a2[1]).meta || (response.meta = meta),
+															searchProfile.stop(),
+															_this.log.profile(searchProfile),
+															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
+															(_context4.prev = 29),
+															(_context4.next = 32),
+															_this.eventManager.fire('afterSearch', {
+																controller: AutocompleteController_assertThisInitialized(_this),
+																request: params,
+																response,
+															})
+														);
+													case 32:
+														_context4.next = 44;
+														break;
+													case 34:
+														if (
+															((_context4.prev = 34),
+															(_context4.t1 = _context4.catch(29)),
+															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
+														) {
+															_context4.next = 42;
+															break;
+														}
+														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
+													case 42:
+														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
+													case 44:
+														return (
+															afterSearchProfile.stop(),
+															_this.log.profile(afterSearchProfile),
+															_this.store.update(response),
+															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
+															(_context4.prev = 48),
+															(_context4.next = 51),
+															_this.eventManager.fire('afterStore', {
+																controller: AutocompleteController_assertThisInitialized(_this),
+																request: params,
+																response,
+															})
+														);
+													case 51:
+														_context4.next = 63;
+														break;
+													case 53:
+														if (
+															((_context4.prev = 53),
+															(_context4.t2 = _context4.catch(48)),
+															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
+														) {
+															_context4.next = 61;
+															break;
+														}
+														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
+													case 61:
+														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
+													case 63:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 82);
+														break;
+													case 67:
+														if (((_context4.prev = 67), (_context4.t3 = _context4.catch(3)), !_context4.t3)) {
+															_context4.next = 82;
+															break;
+														}
+														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 73 : 500 === _context4.t4 ? 76 : 79);
+														break;
+													case 73:
+														return (
+															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
+															_this.log.warn(_this.store.error),
+															_context4.abrupt('break', 81)
+														);
+													case 76:
+														return (
+															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+															_this.log.error(_this.store.error),
+															_context4.abrupt('break', 81)
+														);
+													case 79:
+														return _this.log.error(_context4.t3), _context4.abrupt('break', 81);
+													case 81:
+														_this.store.loading = !1;
+													case 82:
+													case 'end':
+														return _context4.stop();
+												}
+										},
+										_callee4,
+										null,
+										[
+											[3, 67],
+											[4, 9],
+											[29, 34],
+											[48, 53],
+										]
+									);
+								})
+							)),
+							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
+							_this.store.setConfig(_this.config),
+							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
+							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
+							_this.eventManager.on(
+								'beforeSearch',
+								(function () {
+									var _ref4 = AutocompleteController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee5(ac, next) {
+											return regeneratorRuntime.wrap(function _callee5$(_context5) {
+												for (;;)
+													switch ((_context5.prev = _context5.next)) {
+														case 0:
+															return (ac.controller.store.loading = !0), (_context5.next = 3), next();
+														case 3:
+														case 'end':
+															return _context5.stop();
+													}
+											}, _callee5);
+										})
+									);
+									return function (_x3, _x4) {
+										return _ref4.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterSearch',
+								(function () {
+									var _ref5 = AutocompleteController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee6(ac, next) {
+											return regeneratorRuntime.wrap(function _callee6$(_context6) {
+												for (;;)
+													switch ((_context6.prev = _context6.next)) {
+														case 0:
+															return (_context6.next = 2), next();
+														case 2:
+															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
+																_context6.next = 5;
+																break;
+															}
+															return (ac.controller.store.loading = !1), _context6.abrupt('return', !1);
+														case 5:
+														case 'end':
+															return _context6.stop();
+													}
+											}, _callee6);
+										})
+									);
+									return function (_x5, _x6) {
+										return _ref5.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterStore',
+								(function () {
+									var _ref6 = AutocompleteController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee7(ac, next) {
+											return regeneratorRuntime.wrap(function _callee7$(_context7) {
+												for (;;)
+													switch ((_context7.prev = _context7.next)) {
+														case 0:
+															return (_context7.next = 2), next();
+														case 2:
+															ac.controller.store.loading = !1;
+														case 3:
+														case 'end':
+															return _context7.stop();
+													}
+											}, _callee7);
+										})
+									);
+									return function (_x7, _x8) {
+										return _ref6.apply(this, arguments);
+									};
+								})()
+							),
+							_this.use(_this.config),
+							_this
+						);
+					}
+					return (
+						(function AutocompleteController_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && AutocompleteController_defineProperties(Constructor.prototype, protoProps),
+								staticProps && AutocompleteController_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(AutocompleteController, [
+							{
+								key: 'params',
+								get: function get() {
+									var _this$config$globals5,
+										_this$config$globals6,
+										urlState = this.urlManager.state,
+										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
+										userId = this.tracker.getUserId();
+									if (
+										(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
+										null === (_this$config$globals5 = this.config.globals) ||
+											void 0 === _this$config$globals5 ||
+											null === (_this$config$globals6 = _this$config$globals5.personalization) ||
+											void 0 === _this$config$globals6 ||
+											!_this$config$globals6.disabled)
+									) {
+										var cartItems = this.tracker.cookies.cart.get();
+										cartItems.length &&
+											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
+										var lastViewedItems = this.tracker.cookies.viewed.get();
+										lastViewedItems.length &&
+											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
+										var shopperId = this.tracker.getShopperId();
+										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
+									}
+									return params;
+								},
+							},
+							{
+								key: 'setFocused',
+								value:
+									((_setFocused = AutocompleteController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee8(inputElement) {
+											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings5, _this$config$settings6;
+											return regeneratorRuntime.wrap(
+												function _callee8$(_context8) {
+													for (;;)
+														switch ((_context8.prev = _context8.next)) {
+															case 0:
+																if (this.store.state.focusedInput === inputElement) {
+																	_context8.next = 21;
+																	break;
+																}
+																return (
+																	(this.store.state.focusedInput = inputElement),
+																	(_context8.prev = 2),
+																	(_context8.prev = 3),
+																	(_context8.next = 6),
+																	this.eventManager.fire('focusChange', { controller: this })
+																);
+															case 6:
+																_context8.next = 16;
+																break;
+															case 8:
+																if (
+																	((_context8.prev = 8),
+																	(_context8.t0 = _context8.catch(3)),
+																	'cancelled' != (null === _context8.t0 || void 0 === _context8.t0 ? void 0 : _context8.t0.message))
+																) {
+																	_context8.next = 14;
+																	break;
+																}
+																this.log.warn("'focusChange' middleware cancelled"), (_context8.next = 16);
+																break;
+															case 14:
+																throw (this.log.error("error in 'focusChange' middleware"), _context8.t0);
+															case 16:
+																_context8.next = 21;
+																break;
+															case 18:
+																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
+															case 21:
+																!inputElement ||
+																(null !== (_this$store$state = this.store.state) && void 0 !== _this$store$state && _this$store$state.input) ||
+																null === (_this$store$trending2 = this.store.trending) ||
+																void 0 === _this$store$trending2 ||
+																!_this$store$trending2.length ||
+																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
+																null === (_this$config$settings5 = this.config.settings) ||
+																void 0 === _this$config$settings5 ||
+																null === (_this$config$settings6 = _this$config$settings5.trending) ||
+																void 0 === _this$config$settings6 ||
+																!_this$config$settings6.showResults
+																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
+																	: this.store.trending[0].preview();
+															case 22:
+															case 'end':
+																return _context8.stop();
+														}
+												},
+												_callee8,
+												this,
+												[
+													[2, 18],
+													[3, 8],
+												]
+											);
+										})
+									)),
+									function setFocused(_x9) {
+										return _setFocused.apply(this, arguments);
+									}),
+							},
+							{
+								key: 'reset',
+								value: function reset() {
+									document.querySelectorAll(this.config.selector).forEach(function (input) {
+										input.value = '';
+									}),
+										this.store.reset();
+								},
+							},
+							{
+								key: 'unbind',
+								value: function unbind() {
+									var _this2 = this,
+										inputs = document.querySelectorAll('input[ss-autocomplete-input]');
+									null == inputs ||
+										inputs.forEach(function (input) {
+											var _input$form;
+											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
+												input.removeEventListener('keydown', _this2.handlers.input.enterKey),
+												input.removeEventListener('keydown', _this2.handlers.input.escKey),
+												input.removeEventListener('focus', _this2.handlers.input.focus),
+												null === (_input$form = input.form) ||
+													void 0 === _input$form ||
+													_input$form.removeEventListener('submit', _this2.handlers.input.formSubmit);
+										}),
+										document.removeEventListener('click', this.handlers.document.click);
+								},
+							},
+							{
+								key: 'bind',
+								value:
+									((_bind = AutocompleteController_asyncToGenerator(
+										regeneratorRuntime.mark(function _callee9() {
+											var _this$config$settings7,
+												_this$config$settings8,
+												_this$store$trending3,
+												_this3 = this;
+											return regeneratorRuntime.wrap(
+												function _callee9$(_context9) {
+													for (;;)
+														switch ((_context9.prev = _context9.next)) {
+															case 0:
+																if (this.initialized) {
+																	_context9.next = 3;
+																	break;
+																}
+																return (_context9.next = 3), this.init();
+															case 3:
+																this.unbind(),
+																	document.querySelectorAll(this.config.selector).forEach(function (input) {
+																		input.setAttribute('spellcheck', 'false'),
+																			input.setAttribute('autocomplete', 'off'),
+																			input.setAttribute('ss-autocomplete-input', ''),
+																			input.addEventListener('keyup', _this3.handlers.input.keyUp),
+																			_this3.config.settings.initializeFromUrl &&
+																				!input.value &&
+																				_this3.store.state.input &&
+																				(input.value = _this3.store.state.input),
+																			input.addEventListener('focus', _this3.handlers.input.focus),
+																			input.addEventListener('keydown', _this3.handlers.input.escKey);
+																		var formActionUrl,
+																			form = input.form;
+																		_this3.config.action
+																			? ((formActionUrl = _this3.config.action), input.addEventListener('keydown', _this3.handlers.input.enterKey))
+																			: form && ((formActionUrl = form.action), form.addEventListener('submit', _this3.handlers.input.formSubmit)),
+																			formActionUrl &&
+																				_this3.store.setService(
+																					'urlManager',
+																					_this3.urlManager.withConfig(function (translatorConfig) {
+																						return Object.assign({}, translatorConfig, { urlRoot: formActionUrl });
+																					})
+																				),
+																			document.activeElement === input && _this3.setFocused(input);
+																	}),
+																	(null === (_this$config$settings7 = this.config.settings) ||
+																	void 0 === _this$config$settings7 ||
+																	null === (_this$config$settings8 = _this$config$settings7.trending) ||
+																	void 0 === _this$config$settings8
+																		? void 0
+																		: _this$config$settings8.limit) > 0 &&
+																		(null === (_this$store$trending3 = this.store.trending) ||
+																			void 0 === _this$store$trending3 ||
+																			!_this$store$trending3.length) &&
+																		this.searchTrending(),
+																	document.addEventListener('click', this.handlers.document.click);
+															case 8:
+															case 'end':
+																return _context9.stop();
+														}
+												},
+												_callee9,
+												this
+											);
+										})
+									)),
+									function bind() {
+										return _bind.apply(this, arguments);
+									}),
+							},
+						]),
+						AutocompleteController
+					);
+				})(AbstractController);
+			function addHiddenFormInput(form, name, value) {
+				var inputElem = document.createElement('input');
+				(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
+			}
+			function timeout(_x10) {
+				return _timeout.apply(this, arguments);
+			}
+			function _timeout() {
+				return (_timeout = AutocompleteController_asyncToGenerator(
+					regeneratorRuntime.mark(function _callee10(time) {
+						return regeneratorRuntime.wrap(function _callee10$(_context10) {
+							for (;;)
+								switch ((_context10.prev = _context10.next)) {
+									case 0:
+										return _context10.abrupt(
+											'return',
+											new Promise(function (resolve) {
+												window.setTimeout(resolve, time);
+											})
+										);
+									case 1:
+									case 'end':
+										return _context10.stop();
+								}
+						}, _callee10);
+					})
+				)).apply(this, arguments);
+			}
+			__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-iso-string.js');
+			var fibonacci = function fibonacci(num) {
+				for (var temp, a = 1, b = 0; num >= 0; ) (temp = a), (a += b), (b = temp), num--;
+				return b;
+			};
+			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js');
 			function NetworkCache_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -20214,8 +22668,7 @@
 					SuggestAPI
 				);
 			})(API);
-			__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			function transformSearchRequest(request) {
 				return (function mergeParams() {
 					for (var ret = {}, _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
@@ -21388,7 +23841,8 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			var Client_defaultConfig = {
+			var ContentType,
+				Client_defaultConfig = {
 					meta: { cache: { purgeable: !1 } },
 					search: { api: {} },
 					autocomplete: { api: {} },
@@ -21676,3779 +24130,12 @@
 						]),
 						Client
 					);
-				})();
-			function AbstractStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			(0, mobx_esm.jQ)({ enforceActions: 'never' });
-			var AbstractStore = (function () {
-				function AbstractStore(config) {
-					!(function AbstractStore_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, AbstractStore),
-						(this.custom = {}),
-						(this.loading = !1),
-						(this.loaded = !1),
-						(this.config = config),
-						(0, mobx_esm.rC)(this, { custom: mobx_esm.LO, loading: mobx_esm.LO, loaded: mobx_esm.LO });
-				}
-				return (
-					(function AbstractStore_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && AbstractStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && AbstractStore_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(AbstractStore, [
-						{
-							key: 'setConfig',
-							value: function setConfig(newConfig) {
-								this.config = newConfig;
-							},
-						},
-						{
-							key: 'toJSON',
-							value: function toJSON() {
-								var thing = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : this;
-								return (0, mobx_esm.ZN)(thing);
-							},
-						},
-					]),
-					AbstractStore
-				);
-			})();
+				})(),
+				mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js');
 			__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.map.js');
-			function ResultStore_toConsumableArray(arr) {
-				return (
-					(function ResultStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return ResultStore_arrayLikeToArray(arr);
-					})(arr) ||
-					(function ResultStore_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function ResultStore_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return ResultStore_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ResultStore_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function ResultStore_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function ResultStore_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function ResultStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function ResultStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function ResultStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && ResultStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && ResultStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function ResultStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function ResultStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
-			}
-			function _wrapNativeSuper(Class) {
-				var _cache = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(_wrapNativeSuper = function _wrapNativeSuper(Class) {
-						if (
-							null === Class ||
-							!(function _isNativeFunction(fn) {
-								return -1 !== Function.toString.call(fn).indexOf('[native code]');
-							})(Class)
-						)
-							return Class;
-						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== _cache) {
-							if (_cache.has(Class)) return _cache.get(Class);
-							_cache.set(Class, Wrapper);
-						}
-						function Wrapper() {
-							return _construct(Class, arguments, ResultStore_getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(Class.prototype, {
-								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
-							})),
-							ResultStore_setPrototypeOf(Wrapper, Class)
-						);
-					}),
-					_wrapNativeSuper(Class)
-				);
-			}
-			function _construct(Parent, args, Class) {
-				return (
-					(_construct = ResultStore_isNativeReflectConstruct()
-						? Reflect.construct
-						: function _construct(Parent, args, Class) {
-								var a = [null];
-								a.push.apply(a, args);
-								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && ResultStore_setPrototypeOf(instance, Class.prototype), instance;
-						  }),
-					_construct.apply(null, arguments)
-				);
-			}
-			function ResultStore_isNativeReflectConstruct() {
-				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-				if (Reflect.construct.sham) return !1;
-				if ('function' == typeof Proxy) return !0;
-				try {
-					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-				} catch (e) {
-					return !1;
-				}
-			}
-			function ResultStore_setPrototypeOf(o, p) {
-				return (
-					(ResultStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					ResultStore_setPrototypeOf(o, p)
-				);
-			}
-			function ResultStore_getPrototypeOf(o) {
-				return (
-					(ResultStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					ResultStore_getPrototypeOf(o)
-				);
-			}
-			var ResultStore = (function (_Array, _Symbol$species) {
-					!(function ResultStore_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && ResultStore_setPrototypeOf(subClass, superClass);
-					})(ResultStore, _Array);
-					var _super = (function ResultStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = ResultStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = ResultStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = ResultStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return ResultStore_possibleConstructorReturn(this, result);
-						};
-					})(ResultStore);
-					function ResultStore(config, services, resultData, paginationData, merchData) {
-						var _merchData$content;
-						ResultStore_classCallCheck(this, ResultStore);
-						var results = (resultData || []).map(function (result) {
-							return new Product(services, result);
-						});
-						if (
-							null != merchData &&
-							null !== (_merchData$content = merchData.content) &&
-							void 0 !== _merchData$content &&
-							_merchData$content.inline
-						) {
-							var banners = merchData.content.inline
-								.sort(function (a, b) {
-									return a.config.position.index - b.config.position.index;
-								})
-								.map(function (banner) {
-									return new Banner(services, banner);
-								});
-							banners &&
-								null != paginationData &&
-								paginationData.totalResults &&
-								(results = (function addBannersToResults(config, results, banners, paginationData) {
-									var _config$settings,
-										productCount = results.length,
-										minIndex = paginationData.pageSize * (paginationData.page - 1),
-										maxIndex = minIndex + paginationData.pageSize;
-									null != config &&
-										null !== (_config$settings = config.settings) &&
-										void 0 !== _config$settings &&
-										_config$settings.infinite &&
-										(minIndex = 0);
-									return (
-										banners
-											.reduce(function (adding, banner) {
-												var resultCount = productCount + adding.length;
-												return (
-													banner.config.position.index >= minIndex &&
-														(banner.config.position.index < maxIndex || resultCount < paginationData.pageSize) &&
-														adding.push(banner),
-													adding
-												);
-											}, [])
-											.forEach(function (banner, index) {
-												var adjustedIndex = banner.config.position.index - minIndex;
-												adjustedIndex > productCount - 1 && (adjustedIndex = productCount + index), results.splice(adjustedIndex, 0, banner);
-											}),
-										results
-									);
-								})(config, results, banners, paginationData));
-						}
-						return _super.call.apply(_super, [this].concat(ResultStore_toConsumableArray(results)));
-					}
-					return (
-						ResultStore_createClass(ResultStore, null, [
-							{
-								key: _Symbol$species,
-								get: function get() {
-									return Array;
-								},
-							},
-						]),
-						ResultStore
-					);
-				})(_wrapNativeSuper(Array), Symbol.species),
-				Banner = ResultStore_createClass(function Banner(services, banner) {
-					ResultStore_classCallCheck(this, Banner),
-						(this.type = 'banner'),
-						(this.attributes = {}),
-						(this.mappings = { core: {} }),
-						(this.custom = {}),
-						(this.id = 'ss-ib-' + banner.config.position.index),
-						(this.config = banner.config),
-						(this.value = banner.value),
-						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, mappings: mobx_esm.LO, attributes: mobx_esm.LO });
-				}),
-				Product = ResultStore_createClass(function Product(services, result) {
-					var _result$children;
-					ResultStore_classCallCheck(this, Product),
-						(this.type = 'product'),
-						(this.attributes = {}),
-						(this.mappings = { core: {} }),
-						(this.custom = {}),
-						(this.children = []),
-						(this.id = result.id),
-						(this.attributes = result.attributes),
-						(this.mappings = result.mappings),
-						null != result &&
-							null !== (_result$children = result.children) &&
-							void 0 !== _result$children &&
-							_result$children.length &&
-							(this.children = result.children.map(function (variant, index) {
-								return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
-							})),
-						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
-					var coreObservables = Object.keys(result.mappings.core).reduce(function (map, key) {
-						var _Object$assign;
-						return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.LO), _Object$assign));
-					}, {});
-					(0, mobx_esm.rC)(this.mappings.core, coreObservables);
-				}),
-				Child = ResultStore_createClass(function Child(services, result) {
-					ResultStore_classCallCheck(this, Child),
-						(this.type = 'child'),
-						(this.attributes = {}),
-						(this.custom = {}),
-						(this.id = result.id),
-						(this.attributes = result.attributes),
-						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
-				});
-			function ProfileStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function ProfileStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && ProfileStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && ProfileStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var ProfileStore = ProfileStore_createClass(function ProfileStore(services, profile) {
-				!(function ProfileStore_classCallCheck(instance, Constructor) {
-					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-				})(this, ProfileStore),
-					(this.display = {}),
-					null != profile &&
-						profile.tag &&
-						((this.tag = profile.tag),
-						(this.placement = profile.placement),
-						(this.display = profile.display),
-						(0, mobx_esm.rC)(this, { tag: mobx_esm.LO, placement: mobx_esm.LO, display: mobx_esm.LO }));
-			});
-			function RecommendationStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function RecommendationStore_setPrototypeOf(o, p) {
-				return (
-					(RecommendationStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					RecommendationStore_setPrototypeOf(o, p)
-				);
-			}
-			function RecommendationStore_createSuper(Derived) {
-				var hasNativeReflectConstruct = (function RecommendationStore_isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = RecommendationStore_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = RecommendationStore_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return RecommendationStore_possibleConstructorReturn(this, result);
-				};
-			}
-			function RecommendationStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return RecommendationStore_assertThisInitialized(self);
-			}
-			function RecommendationStore_assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			function RecommendationStore_getPrototypeOf(o) {
-				return (
-					(RecommendationStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					RecommendationStore_getPrototypeOf(o)
-				);
-			}
-			var RecommendationStore = (function (_AbstractStore) {
-					!(function RecommendationStore_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && RecommendationStore_setPrototypeOf(subClass, superClass);
-					})(RecommendationStore, _AbstractStore);
-					var _super = RecommendationStore_createSuper(RecommendationStore);
-					function RecommendationStore(config, services) {
-						var _services$urlManager, _this;
-						if (
-							((function RecommendationStore_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, RecommendationStore),
-							((_this = _super.call(this, config)).loaded = !1),
-							'object' != typeof services ||
-								'function' !=
-									typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-										? void 0
-										: _services$urlManager.subscribe))
-						)
-							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
-						return (
-							(_this.services = services),
-							_this.reset(),
-							(0, mobx_esm.rC)(RecommendationStore_assertThisInitialized(_this), { profile: mobx_esm.LO, results: mobx_esm.LO }),
-							_this
-						);
-					}
-					return (
-						(function RecommendationStore_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && RecommendationStore_defineProperties(Constructor.prototype, protoProps),
-								staticProps && RecommendationStore_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(RecommendationStore, [
-							{
-								key: 'reset',
-								value: function reset() {
-									this.update({});
-								},
-							},
-							{
-								key: 'update',
-								value: function update(data) {
-									(this.error = void 0),
-										(this.loaded = !!data.profile),
-										(this.profile = new ProfileStore(this.services, data.profile)),
-										(this.results = new ResultStore(this.config, this.services, data.results));
-								},
-							},
-						]),
-						RecommendationStore
-					);
-				})(AbstractStore),
-				seamless_immutable_development =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.some.js'),
-					__webpack_require__('../../node_modules/seamless-immutable/seamless-immutable.development.js')),
-				seamless_immutable_development_default = __webpack_require__.n(seamless_immutable_development);
-			function UrlManager_toConsumableArray(arr) {
-				return (
-					(function UrlManager_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return UrlManager_arrayLikeToArray(arr);
-					})(arr) ||
-					(function UrlManager_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function UrlManager_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return UrlManager_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return UrlManager_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function UrlManager_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function UrlManager_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function UrlManager_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function UrlManager_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function UrlManager_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && UrlManager_defineProperties(Constructor.prototype, protoProps),
-					staticProps && UrlManager_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var WatcherPool = (function () {
-					function WatcherPool() {
-						UrlManager_classCallCheck(this, WatcherPool), (this.callbacks = []);
-					}
-					return (
-						UrlManager_createClass(WatcherPool, [
-							{
-								key: 'subscribe',
-								value: function subscribe(cb) {
-									var _this = this;
-									return (
-										this.callbacks.push(cb),
-										function () {
-											return (_this.callbacks = _this.callbacks.filter(function (_cb) {
-												return _cb != cb;
-											}));
-										}
-									);
-								},
-							},
-							{
-								key: 'notify',
-								value: function notify() {
-									this.callbacks.forEach(function (cb) {
-										return cb();
-									});
-								},
-							},
-						]),
-						WatcherPool
-					);
-				})(),
-				UrlManager = (function () {
-					function UrlManager(translator, linker, globalState, localState, watcherPool) {
-						var _this2 = this,
-							omissions = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : [],
-							detached = arguments.length > 6 ? arguments[6] : void 0;
-						UrlManager_classCallCheck(this, UrlManager),
-							(this.linker = linker),
-							(this.omissions = omissions),
-							(this.detached = detached),
-							(this.urlState = seamless_immutable_development_default()({})),
-							(this.globalState = seamless_immutable_development_default()({})),
-							(this.localState = seamless_immutable_development_default()({})),
-							(this.mergedState = seamless_immutable_development_default()({})),
-							(this.localState = seamless_immutable_development_default()(localState || {})),
-							(this.globalState = seamless_immutable_development_default()(globalState || {})),
-							(this.translator = translator),
-							watcherPool
-								? (this.watcherPool = watcherPool)
-								: ((this.watcherPool = new WatcherPool()),
-								  this.translator.bindExternalEvents instanceof Function &&
-										this.translator.bindExternalEvents(function () {
-											return _this2.watcherPool.notify();
-										})),
-							this.subscribe(function () {
-								_this2.refresh();
-							}),
-							this.refresh();
-					}
-					return (
-						UrlManager_createClass(UrlManager, [
-							{
-								key: 'without',
-								value: function without(obj, fullPath, values) {
-									var path = fullPath.slice(0, -1),
-										lastKey = fullPath[fullPath.length - 1];
-									return path.length
-										? obj.getIn(path)
-											? obj.updateIn(path, function (node) {
-													return updateNode(lastKey, node);
-											  })
-											: obj
-										: null != values && values.length
-										? updateNode(lastKey, obj)
-										: obj.without(lastKey);
-									function updateNode(key, node) {
-										return void 0 === node[lastKey]
-											? node
-											: node[lastKey] instanceof Array
-											? values && values.length
-												? node.set(
-														lastKey,
-														node[lastKey].filter(function (value) {
-															return !values.some(function (removeValue) {
-																return compareObjects(value, removeValue);
-															});
-														})
-												  )
-												: node.without(lastKey)
-											: 'object' == typeof node
-											? node.without(lastKey)
-											: node;
-									}
-								},
-							},
-							{
-								key: 'getTranslatorUrl',
-								value: function getTranslatorUrl() {
-									return this.detached ? this.detached.url : this.translator.getCurrentUrl();
-								},
-							},
-							{
-								key: 'refresh',
-								value: function refresh() {
-									var _this3 = this;
-									(this.prevState = this.mergedState),
-										(this.urlState = this.omissions.reduce(function (state, om) {
-											return _this3.without(state, om.path, om.values);
-										}, seamless_immutable_development_default()(this.translator.deserialize(this.getTranslatorUrl())))),
-										(this.mergedState = this.globalState.merge(this.urlState, { deep: !0, merger: arrayConcatMerger })),
-										(this.mergedState = this.mergedState.merge(this.localState, { deep: !0, merger: arrayConcatMerger }));
-								},
-							},
-							{
-								key: 'state',
-								get: function get() {
-									return this.mergedState;
-								},
-							},
-							{
-								key: 'unpackPathAndState',
-								value: function unpackPathAndState(stateOrPath, _state) {
-									return {
-										path: stateOrPath instanceof Array ? stateOrPath : 'string' == typeof stateOrPath ? stateOrPath.split('.') : [],
-										state: stateOrPath instanceof Array || 'object' != typeof stateOrPath ? (void 0 === _state ? {} : _state) : stateOrPath,
-									};
-								},
-							},
-							{
-								key: 'set',
-								value: function set() {
-									var _this$unpackPathAndSt = this.unpackPathAndState(
-											arguments.length <= 0 ? void 0 : arguments[0],
-											arguments.length <= 1 ? void 0 : arguments[1]
-										),
-										path = _this$unpackPathAndSt.path,
-										state = _this$unpackPathAndSt.state,
-										newState = path.length ? this.localState.setIn(path, removeArrayDuplicates(state)) : removeArrayDuplicates(state),
-										omissions = removeArrayDuplicates(
-											this.omissions.concat(
-												path.length
-													? { path }
-													: Object.keys(this.urlState).map(function (key) {
-															return { path: [key] };
-													  })
-											)
-										);
-									return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, omissions, this.detached);
-								},
-							},
-							{
-								key: 'merge',
-								value: function merge() {
-									var _this4 = this,
-										_this$unpackPathAndSt2 = this.unpackPathAndState(
-											arguments.length <= 0 ? void 0 : arguments[0],
-											arguments.length <= 1 ? void 0 : arguments[1]
-										),
-										path = _this$unpackPathAndSt2.path,
-										state = _this$unpackPathAndSt2.state,
-										newState = path.length
-											? this.localState.updateIn(path, function (oldState) {
-													if (oldState instanceof Array) {
-														var newValues = Array.isArray(state) ? state : [state];
-														return removeArrayDuplicates(oldState.concat(newValues));
-													}
-													if ('object' == typeof oldState)
-														return Array.isArray(state)
-															? state.length
-																? removeArrayDuplicates([oldState].concat(state))
-																: oldState
-															: oldState.merge(state, { deep: !0, merger: arrayConcatMerger });
-													if (void 0 !== oldState) {
-														var _newValues = (Array.isArray(state) ? state : [state]).filter(function (value) {
-															return !compareObjects(value, oldState);
-														});
-														return _newValues.length ? removeArrayDuplicates([oldState].concat(_newValues)) : oldState;
-													}
-													return void 0 === oldState && _this4.urlState.getIn(path) instanceof Array && !Array.isArray(state) ? [state] : state;
-											  })
-											: this.localState.merge(state, { deep: !0, merger: arrayConcatMerger });
-									return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, this.omissions, this.detached);
-								},
-							},
-							{
-								key: 'remove',
-								value: function remove(_path, values) {
-									var path = this.unpackPathAndState(_path, {}).path;
-									values = void 0 !== values ? (values instanceof Array ? values : [values]) : [];
-									var without = this.without(this.localState, path, values),
-										omissions = removeArrayDuplicates(this.omissions.concat({ path, values }));
-									return new UrlManager(this.translator, this.linker, this.globalState, without, this.watcherPool, omissions, this.detached);
-								},
-							},
-							{
-								key: 'reset',
-								value: function reset() {
-									return new UrlManager(
-										this.translator,
-										this.linker,
-										this.globalState,
-										{},
-										this.watcherPool,
-										Object.keys(this.urlState).map(function (k) {
-											return { path: [k] };
-										}),
-										this.detached
-									);
-								},
-							},
-							{
-								key: 'withConfig',
-								value: function withConfig(config) {
-									return (
-										config instanceof Function && (config = config(this.translator.getConfig())),
-										new UrlManager(
-											new (Object.getPrototypeOf(this.translator).constructor)(config),
-											this.linker,
-											this.globalState,
-											this.localState,
-											this.watcherPool,
-											this.omissions,
-											this.detached
-										)
-									);
-								},
-							},
-							{
-								key: 'withGlobals',
-								value: function withGlobals(globals) {
-									return new UrlManager(this.translator, this.linker, globals, this.localState, this.watcherPool, this.omissions, this.detached);
-								},
-							},
-							{
-								key: 'getTranslatorConfig',
-								value: function getTranslatorConfig() {
-									return this.translator.getConfig();
-								},
-							},
-							{
-								key: 'href',
-								get: function get() {
-									return this.translator.serialize(this.state);
-								},
-							},
-							{
-								key: 'go',
-								value: function go(config) {
-									this.detached ? (this.detached.url = this.href) : this.translator.go(this.href, config), this.watcherPool.notify();
-								},
-							},
-							{
-								key: 'detach',
-								value: function detach() {
-									var reset = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-									return new UrlManager(this.translator, this.linker, this.globalState, this.localState, new WatcherPool(), this.omissions, {
-										url: reset ? '' : this.getTranslatorUrl(),
-									});
-								},
-							},
-							{
-								key: 'link',
-								get: function get() {
-									return this.linker ? this.linker(this) : {};
-								},
-							},
-							{
-								key: 'subscribe',
-								value: function subscribe(cb) {
-									var _this5 = this;
-									return this.watcherPool.subscribe(function () {
-										var prevState = _this5.prevState,
-											state = _this5.mergedState;
-										cb(prevState, state);
-									});
-								},
-							},
-						]),
-						UrlManager
-					);
-				})();
-			function removeArrayDuplicates(array) {
-				return Array.isArray(array) && array.length
-					? array.reduce(
-							function (accu, item) {
-								return (
-									accu.some(function (keep) {
-										return compareObjects(keep, item);
-									}) || accu.push(item),
-									accu
-								);
-							},
-							[array[0]]
-					  )
-					: array;
-			}
-			function arrayConcatMerger(current, other) {
-				if (current instanceof Array && other instanceof Array)
-					return removeArrayDuplicates([].concat(UrlManager_toConsumableArray(current), UrlManager_toConsumableArray(other)));
-			}
-			function compareObjects(obj1, obj2) {
-				if (!obj1 && !obj2) return !0;
-				if ((!obj1 && obj2) || (obj1 && !obj2)) return !1;
-				var typeA = typeof obj1;
-				if (typeA !== typeof obj2) return !1;
-				if (['string', 'number', 'boolean', 'undefined'].includes(typeA)) return obj1 === obj2;
-				var isArrayA = Array.isArray(obj1);
-				if (isArrayA !== Array.isArray(obj2)) return !1;
-				if (!isArrayA) {
-					if (!compareObjects(Object.keys(obj1).sort(), Object.keys(obj2).sort())) return !1;
-					var result = !0;
-					return (
-						Object.keys(obj1).forEach(function (key) {
-							compareObjects(obj1[key], obj2[key]) || (result = !1);
-						}),
-						result
-					);
-				}
-				if (obj1.length != obj2.length) return !1;
-				for (var i = 0; i < obj1.length; i++) if (!compareObjects(obj1[i], obj2[i])) return !1;
-				return !0;
-			}
-			var RangeValueProperties, ParamLocationType;
-			__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js');
-			function UrlTranslator_slicedToArray(arr, i) {
-				return (
-					UrlTranslator_arrayWithHoles(arr) ||
-					(function UrlTranslator_iterableToArrayLimit(arr, i) {
-						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-						if (null == _i) return;
-						var _s,
-							_e,
-							_arr = [],
-							_n = !0,
-							_d = !1;
-						try {
-							for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					UrlTranslator_unsupportedIterableToArray(arr, i) ||
-					UrlTranslator_nonIterableRest()
-				);
-			}
-			function UrlTranslator_nonIterableRest() {
-				throw new TypeError(
-					'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-				);
-			}
-			function UrlTranslator_arrayWithHoles(arr) {
-				if (Array.isArray(arr)) return arr;
-			}
-			function UrlTranslator_toConsumableArray(arr) {
-				return (
-					(function UrlTranslator_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return UrlTranslator_arrayLikeToArray(arr);
-					})(arr) ||
-					UrlTranslator_iterableToArray(arr) ||
-					UrlTranslator_unsupportedIterableToArray(arr) ||
-					(function UrlTranslator_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function UrlTranslator_unsupportedIterableToArray(o, minLen) {
-				if (o) {
-					if ('string' == typeof o) return UrlTranslator_arrayLikeToArray(o, minLen);
-					var n = Object.prototype.toString.call(o).slice(8, -1);
-					return (
-						'Object' === n && o.constructor && (n = o.constructor.name),
-						'Map' === n || 'Set' === n
-							? Array.from(o)
-							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-							? UrlTranslator_arrayLikeToArray(o, minLen)
-							: void 0
-					);
-				}
-			}
-			function UrlTranslator_iterableToArray(iter) {
-				if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-			}
-			function UrlTranslator_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function UrlTranslator_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function UrlTranslator_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			!(function (RangeValueProperties) {
-				(RangeValueProperties.LOW = 'low'), (RangeValueProperties.HIGH = 'high');
-			})(RangeValueProperties || (RangeValueProperties = {})),
-				(function (ParamLocationType) {
-					(ParamLocationType.HASH = 'hash'), (ParamLocationType.QUERY = 'query');
-				})(ParamLocationType || (ParamLocationType = {}));
-			var UrlTranslator_defaultConfig = {
-					urlRoot: '',
-					settings: { corePrefix: '', customType: ParamLocationType.HASH, rootParams: !0 },
-					parameters: {
-						core: {
-							query: { name: 'q', type: ParamLocationType.QUERY },
-							oq: { name: 'oq', type: ParamLocationType.QUERY },
-							rq: { name: 'rq', type: ParamLocationType.QUERY },
-							tag: { name: 'tag', type: ParamLocationType.QUERY },
-							page: { name: 'page', type: ParamLocationType.QUERY },
-							pageSize: { name: 'pageSize', type: ParamLocationType.HASH },
-							sort: { name: 'sort', type: ParamLocationType.HASH },
-							filter: { name: 'filter', type: ParamLocationType.HASH },
-						},
-						custom: {},
-					},
-				},
-				UrlTranslator_CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'],
-				UrlTranslator = (function () {
-					function UrlTranslator() {
-						var _this = this,
-							config = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-						UrlTranslator_classCallCheck(this, UrlTranslator),
-							(this.reverseMapping = {}),
-							(this.config = cjs_default()(UrlTranslator_defaultConfig, config)),
-							Object.keys(this.config.parameters.core).forEach(function (param) {
-								_this.config.settings.corePrefix &&
-									(_this.config.parameters.core[param].name = _this.config.settings.corePrefix + _this.config.parameters.core[param].name);
-								var _config$parameters,
-									_config$parameters2,
-									_config$parameters2$c,
-									paramType = _this.config.settings.coreType;
-								paramType &&
-									Object.values(ParamLocationType).includes(paramType) &&
-									(_this.config.parameters.core[param].type =
-										((null == config || null === (_config$parameters = config.parameters) || void 0 === _config$parameters
-											? void 0
-											: _config$parameters.core) &&
-											(null == config ||
-											null === (_config$parameters2 = config.parameters) ||
-											void 0 === _config$parameters2 ||
-											null === (_config$parameters2$c = _config$parameters2.core[param]) ||
-											void 0 === _config$parameters2$c
-												? void 0
-												: _config$parameters2$c.type)) ||
-										paramType);
-								_this.reverseMapping[_this.config.parameters.core[param].name] = param;
-							});
-						var implicit = this.config.settings.customType;
-						implicit && !Object.values(ParamLocationType).includes(implicit) && (this.config.settings.customType = ParamLocationType.HASH);
-					}
-					return (
-						(function UrlTranslator_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && UrlTranslator_defineProperties(Constructor.prototype, protoProps),
-								staticProps && UrlTranslator_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(UrlTranslator, [
-							{
-								key: 'bindExternalEvents',
-								value: function bindExternalEvents(update) {
-									window.addEventListener('popstate', update);
-								},
-							},
-							{
-								key: 'getCurrentUrl',
-								value: function getCurrentUrl() {
-									return window.location.search + window.location.hash;
-								},
-							},
-							{
-								key: 'getConfig',
-								value: function getConfig() {
-									return cjs_default()({}, this.config);
-								},
-							},
-							{
-								key: 'deserialize',
-								value: function deserialize(url) {
-									var params = this.parseUrlParams(url);
-									return this.paramsToState(params);
-								},
-							},
-							{
-								key: 'parseUrlParams',
-								value: function parseUrlParams(url) {
-									var queryString = (url.includes('?') && (url.split('?').pop() || '').split('#').shift()) || '',
-										hashString = (url.includes('#') && url.substring(url.indexOf('#') + 1)) || '';
-									return [].concat(
-										UrlTranslator_toConsumableArray(this.parseHashString(hashString)),
-										UrlTranslator_toConsumableArray(this.parseQueryString(queryString))
-									);
-								},
-							},
-							{
-								key: 'parseQueryString',
-								value: function parseQueryString(queryString) {
-									var _this2 = this;
-									return (queryString.split('?').pop() || '')
-										.split('&')
-										.filter(function (v) {
-											return v;
-										})
-										.map(function (kvPair) {
-											var _kvPair$split$map2 = UrlTranslator_slicedToArray(
-													kvPair.split('=').map(function (v) {
-														return decodeURIComponent(v.replace(/\+/g, ' '));
-													}),
-													2
-												),
-												key = _kvPair$split$map2[0],
-												value = _kvPair$split$map2[1];
-											return { key: key.split('.'), value, type: ParamLocationType.QUERY };
-										})
-										.filter(function (param) {
-											var isCoreField = _this2.reverseMapping[param.key[0]];
-											return !isCoreField || (isCoreField && param.value);
-										});
-								},
-							},
-							{
-								key: 'parseHashString',
-								value: function parseHashString(hashString) {
-									var _this3 = this,
-										params = [];
-									return (
-										(hashString.split('#').join('/') || '')
-											.split('/')
-											.filter(function (v) {
-												return v;
-											})
-											.map(function (hashEntries) {
-												return hashEntries.split(':').map(function (v) {
-													return (function decodeHashComponent(string) {
-														'string' == typeof string &&
-															((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
-														return string;
-													})(v);
-												});
-											})
-											.filter(function (param) {
-												var _param = UrlTranslator_slicedToArray(param, 2),
-													key = _param[0],
-													value = _param[1],
-													isCoreField = _this3.reverseMapping[key];
-												return !isCoreField || (isCoreField && value);
-											})
-											.forEach(function (decodedHashEntries) {
-												if (1 == decodedHashEntries.length)
-													params.push({ key: [decodedHashEntries[0]], value: void 0, type: ParamLocationType.HASH });
-												else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
-													var _decodedHashEntries$r2 = (function UrlTranslator_toArray(arr) {
-															return (
-																UrlTranslator_arrayWithHoles(arr) ||
-																UrlTranslator_iterableToArray(arr) ||
-																UrlTranslator_unsupportedIterableToArray(arr) ||
-																UrlTranslator_nonIterableRest()
-															);
-														})(decodedHashEntries.reverse()),
-														value = _decodedHashEntries$r2[0],
-														keys = _decodedHashEntries$r2.slice(1);
-													params.push({ key: keys.reverse(), value, type: ParamLocationType.HASH });
-												} else if (decodedHashEntries.length && 4 == decodedHashEntries.length) {
-													var _decodedHashEntries = UrlTranslator_slicedToArray(decodedHashEntries, 4),
-														path0 = _decodedHashEntries[0],
-														path1 = _decodedHashEntries[1],
-														low = _decodedHashEntries[2],
-														high = _decodedHashEntries[3];
-													params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.HASH }),
-														params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.HASH });
-												}
-											}),
-										params
-									);
-								},
-							},
-							{
-								key: 'paramsToState',
-								value: function paramsToState(params) {
-									var _this4 = this,
-										coreOtherParams = [],
-										coreFilterParams = [],
-										coreSortParams = [],
-										otherParams = [];
-									return (
-										null == params ||
-											params.forEach(function (param) {
-												var coreStateKey = _this4.reverseMapping[param.key[0]],
-													coreConfig = _this4.config.parameters.core[coreStateKey],
-													customStateKey = _this4.config.parameters.custom[param.key[0]];
-												if (coreStateKey)
-													switch (coreStateKey) {
-														case 'filter':
-															coreConfig.type == param.type && coreFilterParams.push(param);
-															break;
-														case 'sort':
-															coreConfig.type == param.type && coreSortParams.push(param);
-															break;
-														default:
-															coreConfig.type == param.type && coreOtherParams.push(param);
-													}
-												else
-													UrlTranslator_CORE_FIELDS.includes(param.key[0]) ||
-														(customStateKey ||
-															(_this4.config.parameters.custom[param.key[0]] = { type: param.type || _this4.config.settings.customType }),
-														otherParams.push(param));
-											}),
-										Object.assign(
-											{},
-											this.parseCoreOther(coreOtherParams),
-											this.parseCoreFilter(coreFilterParams),
-											this.parseCoreSort(coreSortParams),
-											this.parseOther(otherParams)
-										)
-									);
-								},
-							},
-							{
-								key: 'parseCoreOther',
-								value: function parseCoreOther(otherParams) {
-									var _this5 = this,
-										state = {},
-										numberTypeParams = ['page', 'pageSize'];
-									return otherParams
-										? (otherParams.forEach(function (param) {
-												var coreKey = _this5.reverseMapping[param.key[0]];
-												if (numberTypeParams.includes(coreKey)) {
-													var numValue = Number(param.value);
-													(('page' == coreKey && numValue > 1) || 'page' != coreKey) && (state[coreKey] = numValue);
-												} else state[coreKey] = param.value;
-										  }),
-										  state)
-										: {};
-								},
-							},
-							{
-								key: 'parseCoreFilter',
-								value: function parseCoreFilter(filterParams) {
-									var valueFilterParams = filterParams.filter(function (p) {
-											return 2 == p.key.length;
-										}),
-										rangeFilterParams = filterParams.filter(function (p) {
-											return 3 == p.key.length;
-										}),
-										valueFilters = valueFilterParams.reduce(function (state, param) {
-											var _Object$assign,
-												currentValue = (state.filter || {})[param.key[1]] || [];
-											return {
-												filter: Object.assign(
-													{},
-													state.filter,
-													((_Object$assign = {}),
-													(_Object$assign[param.key[1]] = [].concat(
-														UrlTranslator_toConsumableArray(Array.isArray(currentValue) ? currentValue : [currentValue]),
-														[param.value]
-													)),
-													_Object$assign)
-												),
-											};
-										}, {}),
-										rangeFilters = rangeFilterParams.reduce(function (state, param, index) {
-											var newState = state,
-												nextRangeParam = rangeFilterParams[index + 1];
-											if (
-												index % 2 == 0 &&
-												nextRangeParam &&
-												nextRangeParam.key[1] == param.key[1] &&
-												param.key[2] == RangeValueProperties.LOW &&
-												nextRangeParam.key[2] == RangeValueProperties.HIGH
-											) {
-												var _ref,
-													_Object$assign2,
-													currentValue = (state.filter || {})[param.key[1]] || [];
-												newState = {
-													filter: Object.assign(
-														{},
-														state.filter,
-														((_Object$assign2 = {}),
-														(_Object$assign2[param.key[1]] = [].concat(
-															UrlTranslator_toConsumableArray(Array.isArray(currentValue) ? currentValue : [currentValue]),
-															[
-																((_ref = {}),
-																(_ref[RangeValueProperties.LOW] = isNaN(+param.value) ? null : +param.value),
-																(_ref[RangeValueProperties.HIGH] = isNaN(+nextRangeParam.value) ? null : +nextRangeParam.value),
-																_ref),
-															]
-														)),
-														_Object$assign2)
-													),
-												};
-											}
-											return newState;
-										}, {});
-									return Object.assign(
-										{},
-										valueFilters.filter || rangeFilters.filter ? { filter: Object.assign({}, valueFilters.filter, rangeFilters.filter) } : {}
-									);
-								},
-							},
-							{
-								key: 'parseCoreSort',
-								value: function parseCoreSort(sortParams) {
-									return sortParams.length
-										? {
-												sort: sortParams.map(function (param) {
-													return { field: param.key[1], direction: param.value };
-												}),
-										  }
-										: {};
-								},
-							},
-							{
-								key: 'parseOther',
-								value: function parseOther(otherParams) {
-									var state = {};
-									return (
-										otherParams.forEach(function (param) {
-											var node = state;
-											param.key.forEach(function (key, i) {
-												i == param.key.length - 1
-													? ((node[key] = node[key] || []), param.value && node[key].push(param.value))
-													: ((node[key] = node[key] || {}), (node = node[key]));
-											});
-										}),
-										state
-									);
-								},
-							},
-							{
-								key: 'serialize',
-								value: function serialize(state) {
-									var root = this.config.urlRoot.includes('?')
-											? this.config.urlRoot.split('?')[0]
-											: this.config.urlRoot.includes('#')
-											? this.config.urlRoot.split('#')[0]
-											: this.config.urlRoot,
-										rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [],
-										stateParams = this.stateToParams(state),
-										params = [].concat(UrlTranslator_toConsumableArray(rootUrlParams), UrlTranslator_toConsumableArray(stateParams)),
-										queryParams = params.filter(function (p) {
-											return p.type == ParamLocationType.QUERY;
-										}),
-										hashParams = params.filter(function (p) {
-											return p.type == ParamLocationType.HASH;
-										});
-									return (
-										'' +
-										root +
-										((queryParams.length
-											? '?' +
-											  queryParams
-													.map(function (param) {
-														return encodeURIComponent(param.key.join('.')) + (param.value ? '=' + encodeURIComponent(param.value) : '');
-													})
-													.join('&')
-											: this.config.urlRoot
-											? ''
-											: window.location.pathname) +
-											(hashParams.length
-												? '#/' +
-												  hashParams
-														.map(function (param) {
-															return (
-																param.key
-																	.map(function (k) {
-																		return encodeHashComponent(k);
-																	})
-																	.join(':') + (param.value ? ':' + encodeHashComponent(param.value) : '')
-															);
-														})
-														.join('/')
-												: ''))
-									);
-								},
-							},
-							{
-								key: 'stateToParams',
-								value: function stateToParams(state) {
-									return [].concat(
-										UrlTranslator_toConsumableArray(this.encodeCoreOther(state, ['filter', 'sort'])),
-										UrlTranslator_toConsumableArray(this.encodeCoreFilters(state)),
-										UrlTranslator_toConsumableArray(this.encodeCoreSorts(state)),
-										UrlTranslator_toConsumableArray(this.encodeOther(state))
-									);
-								},
-							},
-							{
-								key: 'encodeCoreFilters',
-								value: function encodeCoreFilters(state) {
-									var filterConfig = this.config.parameters.core.filter;
-									return state.filter && filterConfig
-										? Object.keys(state.filter).flatMap(function (key) {
-												if (!state.filter || !state.filter[key]) return [];
-												var filter = state.filter[key];
-												return (filter instanceof Array ? filter : [filter]).flatMap(function (value) {
-													if ('string' == typeof value || 'number' == typeof value || 'boolean' == typeof value)
-														return [{ key: [filterConfig.name, key], value: '' + value, type: filterConfig.type }];
-													if ('object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]) {
-														var _value$RangeValueProp, _value$RangeValueProp2, _value$RangeValueProp3, _value$RangeValueProp4;
-														if (filterConfig.type == ParamLocationType.QUERY)
-															return [
-																{
-																	key: [filterConfig.name, key, RangeValueProperties.LOW],
-																	value:
-																		'' +
-																		(null !== (_value$RangeValueProp = value[RangeValueProperties.LOW]) && void 0 !== _value$RangeValueProp
-																			? _value$RangeValueProp
-																			: '*'),
-																	type: filterConfig.type,
-																},
-																{
-																	key: [filterConfig.name, key, RangeValueProperties.HIGH],
-																	value:
-																		'' +
-																		(null !== (_value$RangeValueProp2 = value[RangeValueProperties.HIGH]) && void 0 !== _value$RangeValueProp2
-																			? _value$RangeValueProp2
-																			: '*'),
-																	type: filterConfig.type,
-																},
-															];
-														if (filterConfig.type == ParamLocationType.HASH)
-															return [
-																{
-																	key: [
-																		filterConfig.name,
-																		key,
-																		'' +
-																			(null !== (_value$RangeValueProp3 = value[RangeValueProperties.LOW]) && void 0 !== _value$RangeValueProp3
-																				? _value$RangeValueProp3
-																				: '*'),
-																	],
-																	value:
-																		'' +
-																		(null !== (_value$RangeValueProp4 = value[RangeValueProperties.HIGH]) && void 0 !== _value$RangeValueProp4
-																			? _value$RangeValueProp4
-																			: '*'),
-																	type: filterConfig.type,
-																},
-															];
-													}
-													return [];
-												});
-										  })
-										: [];
-								},
-							},
-							{
-								key: 'encodeCoreSorts',
-								value: function encodeCoreSorts(state) {
-									var sortConfig = this.config.parameters.core.sort;
-									return state.sort && sortConfig
-										? (state.sort instanceof Array ? state.sort : [state.sort]).map(function (sort) {
-												return { key: [sortConfig.name, sort.field], value: sort.direction, type: sortConfig.type };
-										  })
-										: [];
-								},
-							},
-							{
-								key: 'encodeCoreOther',
-								value: function encodeCoreOther(state, except) {
-									var _this6 = this,
-										params = [];
-									return (
-										Object.keys(state)
-											.sort(function (a, b) {
-												return UrlTranslator_CORE_FIELDS.indexOf(a) - UrlTranslator_CORE_FIELDS.indexOf(b);
-											})
-											.map(function (param) {
-												if (UrlTranslator_CORE_FIELDS.includes(param) && !except.includes(param)) {
-													var paramConfig = _this6.config.parameters.core[param];
-													('page' == param && 1 == state[param]) ||
-														params.push({ key: [paramConfig.name], value: '' + state[param], type: paramConfig.type });
-												}
-											}),
-										params
-									);
-								},
-							},
-							{
-								key: 'encodeOther',
-								value: function encodeOther(state) {
-									var _this7 = this,
-										params = [];
-									return (
-										(function addRecursive(obj, currentPath) {
-											Object.keys(obj).forEach(function (key) {
-												if (0 != currentPath.length || !UrlTranslator_CORE_FIELDS.includes(key)) {
-													var value = obj[key];
-													if (value instanceof Array) {
-														var customConfig = _this7.config.parameters.custom[currentPath[0] || key],
-															type = (null == customConfig ? void 0 : customConfig.type) || _this7.config.settings.customType;
-														params = value.length
-															? params.concat(
-																	value.map(function (v) {
-																		return { key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: v, type };
-																	})
-															  )
-															: params.concat({ key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: void 0, type });
-													} else if ('object' == typeof value && Object.keys(value).length)
-														addRecursive(value, [].concat(UrlTranslator_toConsumableArray(currentPath), [key]));
-													else {
-														var _customConfig = _this7.config.parameters.custom[currentPath[0] || key],
-															_type = (null == _customConfig ? void 0 : _customConfig.type) || _this7.config.settings.customType,
-															stringValue = 'object' == typeof value ? void 0 : value;
-														params = params.concat([
-															{ key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: stringValue, type: _type },
-														]);
-													}
-												}
-											});
-										})(state, []),
-										params
-									);
-								},
-							},
-							{
-								key: 'go',
-								value: function go(url, config) {
-									url != this.getCurrentUrl() &&
-										('replace' == (null == config ? void 0 : config.history)
-											? history.replaceState(null, '', url)
-											: history.pushState(null, '', url));
-								},
-							},
-						]),
-						UrlTranslator
-					);
-				})();
-			function encodeHashComponent(string) {
-				return 'string' == typeof string && (string = (string = encodeURIComponent(string)).replace(/%/g, '$$25')), string;
-			}
-			function reactLinker(urlManager) {
-				return {
-					href: urlManager.href,
-					onClick: function onClick(ev) {
-						(null != urlManager && urlManager.detached) || ev.preventDefault(), urlManager.go();
-					},
-				};
-			}
-			function MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function MiddlewareManager_asyncToGenerator(fn) {
-				return function () {
-					var self = this,
-						args = arguments;
-					return new Promise(function (resolve, reject) {
-						var gen = fn.apply(self, args);
-						function _next(value) {
-							MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-						}
-						function _throw(err) {
-							MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-						}
-						_next(void 0);
-					});
-				};
-			}
-			function MiddlewareManager_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			var MiddlewareManager = (function () {
-				function MiddlewareManager() {
-					!(function MiddlewareManager_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, MiddlewareManager),
-						(this.functions = []);
-				}
-				var _dispatch;
-				return (
-					(function MiddlewareManager_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && MiddlewareManager_defineProperties(Constructor.prototype, protoProps),
-							staticProps && MiddlewareManager_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(MiddlewareManager, [
-						{
-							key: 'use',
-							value: function use() {
-								var _this$functions;
-								(_this$functions = this.functions).push.apply(_this$functions, arguments);
-							},
-						},
-						{
-							key: 'remove',
-							value: function remove(func) {
-								var stringyFunc = func.toString();
-								this.functions = this.functions.filter(function (fn) {
-									return func.name !== fn.name || fn.toString() != stringyFunc;
-								});
-							},
-						},
-						{
-							key: 'clear',
-							value: function clear() {
-								this.functions = [];
-							},
-						},
-						{
-							key: 'dispatch',
-							value:
-								((_dispatch = MiddlewareManager_asyncToGenerator(
-									regeneratorRuntime.mark(function _callee(context) {
-										return regeneratorRuntime.wrap(
-											function _callee$(_context) {
-												for (;;)
-													switch ((_context.prev = _context.next)) {
-														case 0:
-															return (_context.next = 2), runFunctionsWithAbortWrapper(context || {}, this.functions);
-														case 2:
-															if (1 != _context.sent) {
-																_context.next = 5;
-																break;
-															}
-															throw new Error('cancelled');
-														case 5:
-														case 'end':
-															return _context.stop();
-													}
-											},
-											_callee,
-											this
-										);
-									})
-								)),
-								function dispatch(_x) {
-									return _dispatch.apply(this, arguments);
-								}),
-						},
-					]),
-					MiddlewareManager
-				);
-			})();
-			function runFunctionsWithAbortWrapper(_x2, _x3) {
-				return _runFunctionsWithAbortWrapper.apply(this, arguments);
-			}
-			function _runFunctionsWithAbortWrapper() {
-				return (_runFunctionsWithAbortWrapper = MiddlewareManager_asyncToGenerator(
-					regeneratorRuntime.mark(function _callee2(context, functions) {
-						var cancelled;
-						return regeneratorRuntime.wrap(function _callee2$(_context2) {
-							for (;;)
-								switch ((_context2.prev = _context2.next)) {
-									case 0:
-										return (
-											(cancelled = !1),
-											(_context2.next = 3),
-											runFunctions(context, functions, function (proceed) {
-												!1 === proceed && (cancelled = !0);
-											})
-										);
-									case 3:
-										return _context2.abrupt('return', cancelled);
-									case 4:
-									case 'end':
-										return _context2.stop();
-								}
-						}, _callee2);
-					})
-				)).apply(this, arguments);
-			}
-			function runFunctions(_x4, _x5, _x6) {
-				return _runFunctions.apply(this, arguments);
-			}
-			function _runFunctions() {
-				return (_runFunctions = MiddlewareManager_asyncToGenerator(
-					regeneratorRuntime.mark(function _callee4(context, functions, callback) {
-						var func, proceed;
-						return regeneratorRuntime.wrap(function _callee4$(_context4) {
-							for (;;)
-								switch ((_context4.prev = _context4.next)) {
-									case 0:
-										if (functions.length) {
-											_context4.next = 2;
-											break;
-										}
-										return _context4.abrupt('return');
-									case 2:
-										return (
-											(func = functions[0]),
-											(_context4.next = 5),
-											func(
-												context,
-												MiddlewareManager_asyncToGenerator(
-													regeneratorRuntime.mark(function _callee3() {
-														return regeneratorRuntime.wrap(function _callee3$(_context3) {
-															for (;;)
-																switch ((_context3.prev = _context3.next)) {
-																	case 0:
-																		return (_context3.next = 2), runFunctions(context, functions.slice(1), callback);
-																	case 2:
-																	case 'end':
-																		return _context3.stop();
-																}
-														}, _callee3);
-													})
-												)
-											)
-										);
-									case 5:
-										(proceed = _context4.sent), callback(proceed);
-									case 7:
-									case 'end':
-										return _context4.stop();
-								}
-						}, _callee4);
-					})
-				)).apply(this, arguments);
-			}
-			function EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function EventManager_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			var EventManager = (function () {
-				function EventManager() {
-					!(function EventManager_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, EventManager),
-						(this.events = {});
-				}
-				var _fire;
-				return (
-					(function EventManager_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && EventManager_defineProperties(Constructor.prototype, protoProps),
-							staticProps && EventManager_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(EventManager, [
-						{
-							key: 'fire',
-							value:
-								((_fire = (function EventManager_asyncToGenerator(fn) {
-									return function () {
-										var self = this,
-											args = arguments;
-										return new Promise(function (resolve, reject) {
-											var gen = fn.apply(self, args);
-											function _next(value) {
-												EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-											}
-											function _throw(err) {
-												EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-											}
-											_next(void 0);
-										});
-									};
-								})(
-									regeneratorRuntime.mark(function _callee(event, context) {
-										return regeneratorRuntime.wrap(
-											function _callee$(_context) {
-												for (;;)
-													switch ((_context.prev = _context.next)) {
-														case 0:
-															if (!this.events[event]) {
-																_context.next = 3;
-																break;
-															}
-															return (_context.next = 3), this.events[event].dispatch(context);
-														case 3:
-															return _context.abrupt('return', Promise.resolve());
-														case 4:
-														case 'end':
-															return _context.stop();
-													}
-											},
-											_callee,
-											this
-										);
-									})
-								)),
-								function fire(_x, _x2) {
-									return _fire.apply(this, arguments);
-								}),
-						},
-						{
-							key: 'on',
-							value: function on(event) {
-								var _this$events$event;
-								this.events[event] || (this.events[event] = new MiddlewareManager());
-								for (var _len = arguments.length, func = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++)
-									func[_key - 1] = arguments[_key];
-								(_this$events$event = this.events[event]).use.apply(_this$events$event, func);
-							},
-						},
-					]),
-					EventManager
-				);
-			})();
-			__webpack_require__('../../node_modules/core-js/modules/es.number.to-fixed.js');
-			function Profiler_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function Profiler_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function Profiler_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && Profiler_defineProperties(Constructor.prototype, protoProps),
-					staticProps && Profiler_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var Profiler = (function () {
-					function Profiler(namespace) {
-						Profiler_classCallCheck(this, Profiler), (this.namespace = namespace || ''), (this.profiles = []);
-					}
-					return (
-						Profiler_createClass(Profiler, [
-							{
-								key: 'setNamespace',
-								value: function setNamespace(namespace) {
-									this.namespace || (this.namespace = namespace);
-								},
-							},
-							{
-								key: 'create',
-								value: function create(_ref) {
-									var type = _ref.type,
-										name = _ref.name,
-										context = _ref.context;
-									if (!name) throw new Error('Profile name is required.');
-									var profile = new Profile(this.namespace, { type, name, context });
-									return this.profiles.push(profile), profile;
-								},
-							},
-						]),
-						Profiler
-					);
-				})(),
-				Profile = (function () {
-					function Profile(namespace, _ref2) {
-						var type = _ref2.type,
-							name = _ref2.name,
-							context = _ref2.context;
-						Profiler_classCallCheck(this, Profile),
-							(this.status = 'pending'),
-							(this.time = { date: 0, begin: 0, end: 0, run: 0 }),
-							(this.namespace = namespace),
-							(this.type = type),
-							(this.name = name),
-							(this.context = context);
-					}
-					return (
-						Profiler_createClass(Profile, [
-							{
-								key: 'start',
-								value: function start() {
-									return (
-										this.time.begin || ((this.time.date = Date.now()), (this.time.begin = window.performance.now()), (this.status = 'started')), this
-									);
-								},
-							},
-							{
-								key: 'stop',
-								value: function stop() {
-									return (
-										!this.time.end &&
-											this.time.begin &&
-											((this.time.date = Date.now()),
-											(this.time.end = window.performance.now()),
-											(this.time.run = +(this.time.end - this.time.begin).toFixed(3)),
-											(this.status = 'finished')),
-										this
-									);
-								},
-							},
-						]),
-						Profile
-					);
-				})(),
-				v4 =
-					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
-					__webpack_require__('../snap-tracker/node_modules/uuid/dist/esm-browser/v4.js'));
-			function getFlags() {
-				var userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
-				userAgent = (userAgent || (window.navigator || {}).userAgent || '').toLowerCase();
-				var ieVersion,
-					isIE = function isIE() {
-						if (void 0 === ieVersion) {
-							var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
-							ieVersion = !!version && Number(version);
-						}
-						return ieVersion;
-					};
-				return {
-					cors: function cors() {
-						return !isIE() || isIE() >= 10;
-					},
-					cookies: function cookies() {
-						return window.navigator && window.navigator.cookieEnabled && !('doNotTrack' in window.navigator && '1' === window.navigator.doNotTrack);
-					},
-					storage: function storage() {
-						try {
-							return window.localStorage.setItem('ss-test', 'ss-test'), window.localStorage.removeItem('ss-test'), !0;
-						} catch (e) {
-							return !1;
-						}
-					},
-				};
-			}
-			var flags = getFlags(),
-				featureFlags_cookies = (flags.cors(), flags.cookies()),
-				featureFlags_storage = flags.storage();
-			function _createForOfIteratorHelper(o, allowArrayLike) {
-				var it = ('undefined' != typeof Symbol && o[Symbol.iterator]) || o['@@iterator'];
-				if (!it) {
-					if (
-						Array.isArray(o) ||
-						(it = (function StorageStore_unsupportedIterableToArray(o, minLen) {
-							if (!o) return;
-							if ('string' == typeof o) return StorageStore_arrayLikeToArray(o, minLen);
-							var n = Object.prototype.toString.call(o).slice(8, -1);
-							'Object' === n && o.constructor && (n = o.constructor.name);
-							if ('Map' === n || 'Set' === n) return Array.from(o);
-							if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return StorageStore_arrayLikeToArray(o, minLen);
-						})(o)) ||
-						(allowArrayLike && o && 'number' == typeof o.length)
-					) {
-						it && (o = it);
-						var i = 0,
-							F = function F() {};
-						return {
-							s: F,
-							n: function n() {
-								return i >= o.length ? { done: !0 } : { done: !1, value: o[i++] };
-							},
-							e: function e(_e) {
-								throw _e;
-							},
-							f: F,
-						};
-					}
-					throw new TypeError(
-						'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-					);
-				}
-				var err,
-					normalCompletion = !0,
-					didErr = !1;
-				return {
-					s: function s() {
-						it = it.call(o);
-					},
-					n: function n() {
-						var step = it.next();
-						return (normalCompletion = step.done), step;
-					},
-					e: function e(_e2) {
-						(didErr = !0), (err = _e2);
-					},
-					f: function f() {
-						try {
-							normalCompletion || null == it.return || it.return();
-						} finally {
-							if (didErr) throw err;
-						}
-					},
-				};
-			}
-			function StorageStore_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function StorageStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			var StorageType,
-				utils_cookies = cookies,
-				StorageStore = (function () {
-					function StorageStore(config) {
-						var _config$cookie, _config$cookie2;
-						if (
-							((function StorageStore_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, StorageStore),
-							(this.type = null),
-							(this.expiration = 31536e6),
-							(this.sameSite = void 0),
-							(this.key = 'ss-storage'),
-							(this.state = {}),
-							config)
-						)
-							switch (
-								('' !== config.key.trim() && (this.key = config.key.trim()),
-								null != config &&
-									null !== (_config$cookie = config.cookie) &&
-									void 0 !== _config$cookie &&
-									_config$cookie.expiration &&
-									(this.expiration = config.cookie.expiration),
-								null != config &&
-									null !== (_config$cookie2 = config.cookie) &&
-									void 0 !== _config$cookie2 &&
-									_config$cookie2.sameSite &&
-									(this.sameSite = config.cookie.sameSite),
-								config.type)
-							) {
-								case StorageType.SESSION:
-									(this.type = featureFlags_storage ? config.type : null),
-										this.type &&
-											((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
-											window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
-									break;
-								case StorageType.LOCAL:
-									(this.type = featureFlags_storage ? config.type : null),
-										this.type &&
-											!window.localStorage.getItem(this.key) &&
-											((this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}')),
-											window.localStorage.setItem(this.key, JSON.stringify(this.state)));
-									break;
-								case StorageType.COOKIE:
-									if (featureFlags_cookies) {
-										this.type = config.type;
-										var data = utils_cookies.get(this.key);
-										data && (this.state = JSON.parse(data));
-									}
-									break;
-								default:
-									this.type = StorageType.MEMORY;
-							}
-					}
-					return (
-						(function StorageStore_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && StorageStore_defineProperties(Constructor.prototype, protoProps),
-								staticProps && StorageStore_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(StorageStore, [
-							{
-								key: 'set',
-								value: function set(path, value) {
-									var paths = null == path ? void 0 : path.split('.'),
-										location = this.state;
-									switch (
-										(null == paths ||
-											paths.forEach(function (p, i) {
-												i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
-											}),
-										this.type)
-									) {
-										case StorageType.SESSION:
-											window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-											break;
-										case StorageType.LOCAL:
-											window.localStorage.setItem(this.key, JSON.stringify(this.state));
-											break;
-										case StorageType.COOKIE:
-											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration);
-									}
-								},
-							},
-							{
-								key: 'get',
-								value: function get(path) {
-									switch (this.type) {
-										case StorageType.SESSION:
-											this.state = JSON.parse(window.sessionStorage.getItem(this.key)) || {};
-											break;
-										case StorageType.LOCAL:
-											this.state = JSON.parse(window.localStorage.getItem(this.key)) || {};
-											break;
-										case StorageType.COOKIE:
-											var data = utils_cookies.get(this.key);
-											data && (this.state = JSON.parse(data) || {});
-									}
-									var paths = null == path ? void 0 : path.split('.');
-									if (null != paths && paths.length) {
-										var _step,
-											value = this.state,
-											_iterator = _createForOfIteratorHelper(paths);
-										try {
-											for (_iterator.s(); !(_step = _iterator.n()).done; ) {
-												var p = _step.value;
-												if (!value || void 0 === value[p]) {
-													value = void 0;
-													break;
-												}
-												value = value[p];
-											}
-										} catch (err) {
-											_iterator.e(err);
-										} finally {
-											_iterator.f();
-										}
-										return value;
-									}
-								},
-							},
-							{
-								key: 'clear',
-								value: function clear() {
-									switch (this.type) {
-										case StorageType.SESSION:
-											window.sessionStorage.removeItem(this.key);
-											break;
-										case StorageType.LOCAL:
-											window.localStorage.removeItem(this.key);
-											break;
-										case StorageType.COOKIE:
-											utils_cookies.unset(this.key);
-									}
-									this.state = {};
-								},
-							},
-						]),
-						StorageStore
-					);
-				})();
-			!(function (StorageType) {
-				(StorageType.SESSION = 'session'), (StorageType.LOCAL = 'local'), (StorageType.COOKIE = 'cookie'), (StorageType.MEMORY = 'memory');
-			})(StorageType || (StorageType = {}));
-			function TrackEvent_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function TrackEvent_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && TrackEvent_defineProperties(Constructor.prototype, protoProps),
-					staticProps && TrackEvent_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var TrackEvent = TrackEvent_createClass(function TrackEvent(payload) {
-				var _payload$event, _payload$event2, _payload$event3;
-				if (
-					((function TrackEvent_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, TrackEvent),
-					(payload.event = payload.event),
-					!payload.context || !payload.event)
-				)
-					throw 'TrackEvent: object parameter required a valid `context` BeaconContext and `event` ProductClickEvent objects';
-				if (
-					null === (_payload$event = payload.event) ||
-					void 0 === _payload$event ||
-					!_payload$event.intellisuggestData ||
-					null === (_payload$event2 = payload.event) ||
-					void 0 === _payload$event2 ||
-					!_payload$event2.intellisuggestSignature
-				)
-					throw 'TrackEvent: object parameter `event` ProductClickEvent object requires valid intellisuggestData and intellisuggestSignature values. These are the corresponding attributes in the Searchspring API response.';
-				(this.intellisuggestData = payload.event.intellisuggestData),
-					(this.intellisuggestSignature = payload.event.intellisuggestSignature),
-					(this.href = (null === (_payload$event3 = payload.event) || void 0 === _payload$event3 ? void 0 : _payload$event3.href) || ''),
-					(this.endpoint = 'https://' + payload.context.website.trackingCode + '.a.searchspring.io/api/track/track.json'),
-					(this.src =
-						this.endpoint +
-						'?d=' +
-						encodeURIComponent(this.intellisuggestData) +
-						'&s=' +
-						encodeURIComponent(this.intellisuggestSignature) +
-						'&u=' +
-						encodeURIComponent(this.href || '')),
-					window.document.referrer && (this.src += '&r=' + encodeURIComponent(window.document.referrer)),
-					(this.img = new Image(1, 1)),
-					(this.img.src = this.src);
-			});
-			function PixelEvent_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function PixelEvent_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && PixelEvent_defineProperties(Constructor.prototype, protoProps),
-					staticProps && PixelEvent_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var PixelEvent = PixelEvent_createClass(function PixelEvent(payload) {
-				var _payload$context,
-					_payload$context$webs,
-					_payload$context2,
-					_this = this;
-				switch (
-					((function PixelEvent_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, PixelEvent),
-					(this.endpoint = 'https://d3cgm8py10hi0z.cloudfront.net/is.gif'),
-					(this.src =
-						this.endpoint +
-						'?s=' +
-						encodeURIComponent(
-							(null == payload ||
-							null === (_payload$context = payload.context) ||
-							void 0 === _payload$context ||
-							null === (_payload$context$webs = _payload$context.website) ||
-							void 0 === _payload$context$webs
-								? void 0
-								: _payload$context$webs.trackingCode) || ''
-						) +
-						'&u=' +
-						encodeURIComponent(
-							(null == payload || null === (_payload$context2 = payload.context) || void 0 === _payload$context2
-								? void 0
-								: _payload$context2.userId) || ''
-						) +
-						'&ce=' +
-						(featureFlags_cookies ? '1' : '0') +
-						'&pt=' +
-						encodeURIComponent(document.title) +
-						'&v=1&x=' +
-						Math.floor(2147483647 * Math.random()) +
-						(window.document.referrer ? '&r=' + encodeURIComponent(window.document.referrer) : '')),
-					payload.category)
-				) {
-					case BeaconCategory.PAGEVIEW:
-						(this.event = payload.event), (this.src += '&a=viewItem'), this.event.sku && (this.src += '&sku=' + encodeURIComponent(this.event.sku));
-						break;
-					case BeaconCategory.CARTVIEW:
-						(this.event = payload.event),
-							(this.src += '&a=basket'),
-							this.event.items.forEach(function (item) {
-								null != item &&
-									item.sku &&
-									(_this.src +=
-										'&item=' +
-										encodeURIComponent(item.sku) +
-										';' +
-										encodeURIComponent((null == item ? void 0 : item.qty) || '') +
-										';' +
-										encodeURIComponent((null == item ? void 0 : item.price) || '') +
-										';');
-							});
-						break;
-					case BeaconCategory.ORDERVIEW:
-						var _this$event = (this.event = payload.event),
-							orderId = _this$event.orderId,
-							total = _this$event.total,
-							city = _this$event.city,
-							state = _this$event.state,
-							country = _this$event.country,
-							items = _this$event.items;
-						(this.src += '&a=sale'),
-							orderId && (this.src += '&orderId=' + encodeURIComponent(orderId)),
-							total && (this.src += '&total=' + encodeURIComponent(total)),
-							city && (this.src += '&city=' + encodeURIComponent(city)),
-							state && (this.src += '&state=' + encodeURIComponent(state)),
-							country && (this.src += '&country=' + encodeURIComponent(country)),
-							items.forEach(function (item) {
-								null != item &&
-									item.sku &&
-									(_this.src +=
-										'&item=' +
-										encodeURIComponent(item.sku) +
-										';' +
-										encodeURIComponent((null == item ? void 0 : item.qty) || '') +
-										';' +
-										encodeURIComponent((null == item ? void 0 : item.price) || '') +
-										';');
-							});
-				}
-				this.src.includes('&a=') && ((this.img = new Image(1, 1)), (this.img.src = this.src));
-			});
-			function BeaconEvent_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function BeaconEvent_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && BeaconEvent_defineProperties(Constructor.prototype, protoProps),
-					staticProps && BeaconEvent_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var BeaconEvent = BeaconEvent_createClass(function BeaconEvent(payload) {
-				!(function BeaconEvent_classCallCheck(instance, Constructor) {
-					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-				})(this, BeaconEvent),
-					(this.type = payload.type),
-					(this.category = payload.category),
-					(this.context = payload.context),
-					(this.meta = payload.meta),
-					(this.event = payload.event),
-					(this.id = payload.id),
-					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.26.1' } }),
-					(this.id = (0, v4.Z)());
-			});
-			function Tracker_toConsumableArray(arr) {
-				return (
-					(function Tracker_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return Tracker_arrayLikeToArray(arr);
-					})(arr) ||
-					(function Tracker_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function Tracker_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return Tracker_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tracker_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function Tracker_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function Tracker_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function Tracker_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			var Tracker_defaultConfig = { id: 'track' },
-				Tracker = (function () {
-					function Tracker(globals, config) {
-						var _window$searchspring,
-							_this = this;
-						if (
-							((function Tracker_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, Tracker),
-							(this.targeters = []),
-							(this.track = {
-								event: function event(payload) {
-									var event = {
-											type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
-											category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
-											context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
-											event: payload.event,
-											pid: (null == payload ? void 0 : payload.pid) || void 0,
-										},
-										beaconEvent = new BeaconEvent(event);
-									return _this.sendEvents([beaconEvent]), beaconEvent;
-								},
-								shopper: {
-									login: function login(data, siteId) {
-										if (getFlags().cookies())
-											if (data.id) {
-												data.id = '' + data.id;
-												var context = _this.context;
-												if (
-													(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
-													_this.getShopperId() != data.id)
-												) {
-													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
-													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
-													return _this.track.event(payload);
-												}
-											} else
-												console.error(
-													'tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })'
-												);
-									},
-								},
-								product: {
-									view: function view(data, siteId) {
-										if ((null != data && data.sku) || (null != data && data.childSku)) {
-											var context = _this.context;
-											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-											var payload = {
-													type: BeaconType.PRODUCT,
-													category: BeaconCategory.PAGEVIEW,
-													context,
-													event: {
-														sku: null != data && data.sku ? '' + data.sku : void 0,
-														childSku: null != data && data.childSku ? '' + data.childSku : void 0,
-													},
-												},
-												sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
-											if (sku) {
-												var lastViewedProducts = _this.cookies.viewed.get(),
-													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
-														return item.trim();
-													});
-												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6),
-													lastViewedProducts.includes(sku) || _this.sendPreflight();
-											}
-											return (
-												null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })),
-												_this.track.event(payload)
-											);
-										}
-										console.error(
-											'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
-										);
-									},
-									click: function click(data, siteId) {
-										if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
-											var context = _this.context;
-											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-											var payload = {
-												type: BeaconType.CLICK,
-												category: BeaconCategory.INTERACTION,
-												context,
-												event: {
-													intellisuggestData: data.intellisuggestData,
-													intellisuggestSignature: data.intellisuggestSignature,
-													href: null != data && data.href ? '' + data.href : void 0,
-												},
-											};
-											return new TrackEvent(payload), _this.track.event(payload);
-										}
-										console.error(
-											'track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })'
-										);
-									},
-								},
-								cart: {
-									view: function view(data, siteId) {
-										if (Array.isArray(null == data ? void 0 : data.items) && null != data && data.items.length) {
-											var context = _this.context;
-											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-											var items = data.items.map(function (item, index) {
-													if (
-														null != item &&
-														item.qty &&
-														null != item &&
-														item.price &&
-														((null != item && item.sku) || (null != item && item.childSku))
-													) {
-														var product = { qty: '' + item.qty, price: '' + item.price };
-														return (
-															null != item && item.sku && (product.sku = '' + item.sku),
-															null != item && item.childSku && (product.childSku = '' + item.childSku),
-															product
-														);
-													}
-													console.error(
-														'track.view.cart event: item ' +
-															item +
-															' at index ' +
-															index +
-															' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-													);
-												}),
-												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
-											if (items.length) {
-												var products = items
-													.map(function (item) {
-														return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
-													})
-													.filter(function (sku) {
-														return sku;
-													});
-												_this.cookies.cart.add(products);
-											}
-											return new PixelEvent(payload), _this.track.event(payload);
-										}
-										console.error(
-											'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-										);
-									},
-								},
-								order: {
-									transaction: function transaction(data, siteId) {
-										var _data$order, _data$order2, _data$order3, _data$order4, _data$order5;
-										if (null != data && data.items && Array.isArray(data.items) && data.items.length) {
-											var context = _this.context;
-											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
-											var items = data.items.map(function (item, index) {
-													if (
-														null != item &&
-														item.qty &&
-														null != item &&
-														item.price &&
-														((null != item && item.sku) || (null != item && item.childSku))
-													) {
-														var product = { qty: '' + item.qty, price: '' + item.price };
-														return (
-															null != item && item.sku && (product.sku = '' + item.sku),
-															null != item && item.childSku && (product.childSku = '' + item.childSku),
-															product
-														);
-													}
-													console.error(
-														'track.order.transaction event: object parameter `items`: item ' +
-															item +
-															' at index ' +
-															index +
-															' requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-													);
-												}),
-												eventPayload = {
-													orderId:
-														null != data && null !== (_data$order = data.order) && void 0 !== _data$order && _data$order.id
-															? '' + data.order.id
-															: void 0,
-													total:
-														null != data && null !== (_data$order2 = data.order) && void 0 !== _data$order2 && _data$order2.total
-															? '' + data.order.total
-															: void 0,
-													city:
-														null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.city
-															? '' + data.order.city
-															: void 0,
-													state:
-														null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.state
-															? '' + data.order.state
-															: void 0,
-													country:
-														null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.country
-															? '' + data.order.country
-															: void 0,
-													items,
-												},
-												payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload };
-											return _this.cookies.cart.clear(), new PixelEvent(payload), _this.track.event(payload);
-										}
-										console.error(
-											'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
-										);
-									},
-								},
-							}),
-							(this.getUserId = function () {
-								var userId;
-								try {
-									getFlags().storage() && (userId = window.localStorage.getItem('ssUserId')),
-										getFlags().cookies()
-											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
-											: !userId && getFlags().storage() && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
-								} catch (e) {
-									console.error('Failed to persist user id to cookie or local storage:', e);
-								}
-								return userId;
-							}),
-							(this.getSessionId = function () {
-								var sessionId;
-								if (getFlags().storage())
-									try {
-										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
-											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
-											getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
-									} catch (e) {
-										console.error('Failed to persist session id to session storage:', e);
-									}
-								else
-									getFlags().cookies() &&
-										((sessionId = cookies.get('ssSessionIdNamespace')) ||
-											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
-								return sessionId;
-							}),
-							(this.getShopperId = function () {
-								var shopperId = cookies.get('ssShopperId');
-								if (shopperId) return shopperId;
-							}),
-							(this.sendPreflight = function () {
-								var userId = _this.getUserId(),
-									siteId = _this.context.website.trackingCode,
-									shopper = _this.getShopperId(),
-									cart = _this.cookies.cart.get(),
-									lastViewed = _this.cookies.viewed.get();
-								if (userId && 'string' == typeof userId && siteId && (shopper || cart.length || lastViewed.length)) {
-									var preflightParams = { userId, siteId },
-										queryStringParams = '?userId=' + encodeURIComponent(userId) + '&siteId=' + encodeURIComponent(siteId);
-									shopper && ((preflightParams.shopper = shopper), (queryStringParams += '&shopper=' + encodeURIComponent(shopper))),
-										cart.length &&
-											((preflightParams.cart = cart),
-											(queryStringParams += cart
-												.map(function (item) {
-													return '&cart=' + encodeURIComponent(item);
-												})
-												.join(''))),
-										lastViewed.length &&
-											((preflightParams.lastViewed = lastViewed),
-											(queryStringParams += lastViewed
-												.map(function (item) {
-													return '&lastViewed=' + encodeURIComponent(item);
-												})
-												.join('')));
-									var endpoint = 'https://' + siteId + '.a.searchspring.io/api/personalization/preflightCache',
-										xhr = new XMLHttpRequest();
-									charsParams(preflightParams) > 1024
-										? (xhr.open('POST', endpoint),
-										  xhr.setRequestHeader('Content-Type', 'application/json'),
-										  xhr.send(JSON.stringify(preflightParams)))
-										: (xhr.open('GET', endpoint + queryStringParams), xhr.send());
-								}
-							}),
-							(this.cookies = {
-								cart: {
-									get: function get() {
-										var items = cookies.get('ssCartProducts');
-										return items ? items.split(',') : [];
-									},
-									set: function set(items) {
-										if (items.length) {
-											var cartItems = items.map(function (item) {
-													return item.trim();
-												}),
-												uniqueCartItems = Array.from(new Set(cartItems));
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
-												cartItems.filter(function (item) {
-													return items.includes(item);
-												}).length !== items.length && _this.sendPreflight();
-										}
-									},
-									add: function add(items) {
-										if (items.length) {
-											var currentCartItems = _this.cookies.cart.get(),
-												itemsToAdd = items.map(function (item) {
-													return item.trim();
-												}),
-												uniqueCartItems = Array.from(
-													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
-												);
-											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
-												currentCartItems.filter(function (item) {
-													return itemsToAdd.includes(item);
-												}).length !== itemsToAdd.length && _this.sendPreflight();
-										}
-									},
-									remove: function remove(items) {
-										if (items.length) {
-											var currentCartItems = _this.cookies.cart.get(),
-												itemsToRemove = items.map(function (item) {
-													return item.trim();
-												}),
-												updatedItems = currentCartItems.filter(function (item) {
-													return !itemsToRemove.includes(item);
-												});
-											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
-												currentCartItems.length !== updatedItems.length && _this.sendPreflight();
-										}
-									},
-									clear: function clear() {
-										_this.cookies.cart.get().length && (cookies.unset('ssCartProducts'), _this.sendPreflight());
-									},
-								},
-								viewed: {
-									get: function get() {
-										var items = cookies.get('ssViewedProducts');
-										return items ? items.split(',') : [];
-									},
-								},
-							}),
-							(this.sendEvents = function (eventsToSend) {
-								var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
-								eventsToSend &&
-									(eventsToSend.forEach(function (event) {
-										events.push(Object.assign({}, event));
-									}),
-									_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
-									clearTimeout(_this.isSending),
-									(_this.isSending = window.setTimeout(function () {
-										if (events.length) {
-											var xhr = new XMLHttpRequest();
-											xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
-												xhr.setRequestHeader('Content-Type', 'application/json'),
-												xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
-										}
-										_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
-									}, 150));
-							}),
-							'object' != typeof globals || 'string' != typeof globals.siteId)
-						)
-							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
-						(this.config = cjs_default()(Tracker_defaultConfig, config || {})),
-							(this.globals = globals),
-							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
-							(this.context = {
-								userId: this.getUserId() || '',
-								sessionId: this.getSessionId(),
-								shopperId: this.getShopperId(),
-								pageLoadId: (0, v4.Z)(),
-								website: { trackingCode: this.globals.siteId },
-							}),
-							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.26.1')),
-							setTimeout(function () {
-								_this.targeters.push(
-									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
-										var _getContext = (function getContext() {
-												var _scriptElem$getAttrib,
-													_scriptElem$id,
-													_scriptElem$src,
-													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
-													script = arguments.length > 1 ? arguments[1] : void 0;
-												if (!script || 'string' == typeof script) {
-													script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
-														.sort(function (a, b) {
-															return a.innerHTML.length - b.innerHTML.length;
-														})
-														.pop();
-												}
-												if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
-													throw new Error('getContext: did not find a script tag');
-												var scriptElem = script;
-												if (
-													!(
-														(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
-															void 0 !== _scriptElem$getAttrib &&
-															_scriptElem$getAttrib.match(/^searchspring/i)) ||
-														(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
-														(null !== (_scriptElem$src = scriptElem.src) &&
-															void 0 !== _scriptElem$src &&
-															_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
-													)
-												)
-													throw new Error(
-														'getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"'
-													);
-												if (
-													(evaluate && !Array.isArray(evaluate)) ||
-													(evaluate &&
-														!evaluate.reduce(function (accu, name) {
-															return accu && 'string' == typeof name;
-														}, !0))
-												)
-													throw new Error('getContext: first parameter must be an array of strings');
-												var variables = {};
-												return (
-													null == evaluate ||
-														evaluate.forEach(function (name) {
-															var fn = new Function(
-																'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
-															);
-															variables[name] = fn();
-														}),
-													Object.values(scriptElem.attributes).map(function (attr) {
-														var name = attr.nodeName;
-														evaluate.includes(name) && (variables[name] = scriptElem.getAttribute(name));
-													}),
-													Object.keys(variables).forEach(function (key) {
-														void 0 === variables[key] && delete variables[key];
-													}),
-													variables
-												);
-											})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
-											item = _getContext.item,
-											items = _getContext.items,
-											siteId = _getContext.siteId,
-											shopper = _getContext.shopper,
-											order = _getContext.order,
-											type = _getContext.type;
-										switch (type) {
-											case 'searchspring/track/shopper/login':
-												_this.track.shopper.login(shopper, siteId);
-												break;
-											case 'searchspring/track/product/view':
-												_this.track.product.view(item, siteId);
-												break;
-											case 'searchspring/track/cart/view':
-												_this.track.cart.view({ items }, siteId);
-												break;
-											case 'searchspring/track/order/transaction':
-												_this.track.order.transaction({ order, items }, siteId);
-												break;
-											default:
-												console.error("event '" + type + "' is not supported");
-										}
-									})
-								);
-							}),
-							document.addEventListener('click', function (event) {
-								var updateRecsControllers = function updateRecsControllers() {
-										window.searchspring.controller &&
-											Object.keys(window.searchspring.controller).forEach(function (name) {
-												var _controller$config,
-													controller = window.searchspring.controller[name];
-												'recommendation' === controller.type &&
-													null !== (_controller$config = controller.config) &&
-													void 0 !== _controller$config &&
-													_controller$config.realtime &&
-													controller.search();
-											});
-									},
-									attributes = (function getClickAttributes(event) {
-										var attributeList = [
-												'ss-' + _this.config.id + '-cart-add',
-												'ss-' + _this.config.id + '-cart-remove',
-												'ss-' + _this.config.id + '-cart-clear',
-												'ss-' + _this.config.id + '-cart-view',
-												'ss-' + _this.config.id + '-intellisuggest',
-												'ss-' + _this.config.id + '-intellisuggest-signature',
-												'href',
-											],
-											attributes = {},
-											levels = 0,
-											elem = null;
-										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
-											Object.values(elem.attributes).forEach(function (attr) {
-												var attrName = attr.nodeName;
-												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
-											}),
-												(elem = elem.parentElement),
-												levels++;
-										return attributes;
-									})(event);
-								if (attributes['ss-' + _this.config.id + '-cart-add']) {
-									var skus = attributes['ss-' + _this.config.id + '-cart-add'].split(',');
-									_this.cookies.cart.add(skus), updateRecsControllers();
-								} else if (attributes['ss-' + _this.config.id + '-cart-remove']) {
-									var _skus = attributes['ss-' + _this.config.id + '-cart-remove'].split(',');
-									_this.cookies.cart.remove(_skus), updateRecsControllers();
-								} else if ('ss-' + _this.config.id + '-cart-clear' in attributes) _this.cookies.cart.clear(), updateRecsControllers();
-								else if ('ss-' + _this.config.id + '-cart-view' in attributes) updateRecsControllers();
-								else if (
-									attributes['ss-' + _this.config.id + '-intellisuggest'] &&
-									attributes['ss-' + _this.config.id + '-intellisuggest-signature']
-								) {
-									var intellisuggestData = attributes['ss-' + _this.config.id + '-intellisuggest'],
-										intellisuggestSignature = attributes['ss-' + _this.config.id + '-intellisuggest-signature'],
-										href = attributes.href;
-									_this.track.product.click({ intellisuggestData, intellisuggestSignature, href });
-								}
-							}),
-							this.sendEvents();
-					}
-					return (
-						(function Tracker_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && Tracker_defineProperties(Constructor.prototype, protoProps),
-								staticProps && Tracker_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(Tracker, [
-							{
-								key: 'retarget',
-								value: function retarget() {
-									this.targeters.forEach(function (target) {
-										target.retarget();
-									});
-								},
-							},
-						]),
-						Tracker
-					);
-				})();
-			(0, mobx_esm.jQ)({ useProxies: 'never' });
-			function getSearchParams(state) {
-				var params = {};
-				if (
-					(state.tag && ((params.merchandising = params.merchandising || {}), (params.merchandising.landingPage = state.tag)),
-					state.query &&
-						((params.search = params.search || {}), (params.search.query = params.search.query || {}), (params.search.query.string = state.query)),
-					state.rq && ((params.search = params.search || {}), (params.search.subQuery = state.rq)),
-					state.oq && ((params.search = params.search || {}), (params.search.originalQuery = state.oq)),
-					state.page && ((params.pagination = params.pagination || {}), (params.pagination.page = state.page)),
-					state.pageSize && ((params.pagination = params.pagination || {}), (params.pagination.pageSize = state.pageSize)),
-					state.sort)
-				) {
-					params.sorts = params.sorts || [];
-					var sort = (Array.isArray(state.sort) ? state.sort : [state.sort])[0];
-					sort && sort.field && sort.direction && params.sorts.push({ field: sort.field, direction: sort.direction });
-				}
-				return (
-					state.filter &&
-						((params.filters = params.filters || []),
-						Object.keys(state.filter).forEach(function (field) {
-							if ('string' == typeof field) {
-								var filter = state.filter[field];
-								(Array.isArray(filter) ? filter : [filter]).forEach(function (value) {
-									'object' != typeof value
-										? params.filters.push({ type: 'value', field, value })
-										: void 0 !== value.low && void 0 !== value.high && params.filters.push({ type: 'range', field, value });
-								});
-							}
-						})),
-					params
-				);
-			}
-			function AutocompleteController_slicedToArray(arr, i) {
-				return (
-					(function AutocompleteController_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function AutocompleteController_iterableToArrayLimit(arr, i) {
-						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-						if (null == _i) return;
-						var _s,
-							_e,
-							_arr = [],
-							_n = !0,
-							_d = !1;
-						try {
-							for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !i || _arr.length !== i); _n = !0);
-						} catch (err) {
-							(_d = !0), (_e = err);
-						} finally {
-							try {
-								_n || null == _i.return || _i.return();
-							} finally {
-								if (_d) throw _e;
-							}
-						}
-						return _arr;
-					})(arr, i) ||
-					(function AutocompleteController_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return AutocompleteController_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return AutocompleteController_arrayLikeToArray(o, minLen);
-					})(arr, i) ||
-					(function AutocompleteController_nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function AutocompleteController_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-				try {
-					var info = gen[key](arg),
-						value = info.value;
-				} catch (error) {
-					return void reject(error);
-				}
-				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
-			}
-			function AutocompleteController_asyncToGenerator(fn) {
-				return function () {
-					var self = this,
-						args = arguments;
-					return new Promise(function (resolve, reject) {
-						var gen = fn.apply(self, args);
-						function _next(value) {
-							AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
-						}
-						function _throw(err) {
-							AutocompleteController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
-						}
-						_next(void 0);
-					});
-				};
-			}
-			function AutocompleteController_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function AutocompleteController_setPrototypeOf(o, p) {
-				return (
-					(AutocompleteController_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					AutocompleteController_setPrototypeOf(o, p)
-				);
-			}
-			function AutocompleteController_createSuper(Derived) {
-				var hasNativeReflectConstruct = (function AutocompleteController_isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = AutocompleteController_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = AutocompleteController_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return AutocompleteController_possibleConstructorReturn(this, result);
-				};
-			}
-			function AutocompleteController_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return AutocompleteController_assertThisInitialized(self);
-			}
-			function AutocompleteController_assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			function AutocompleteController_getPrototypeOf(o) {
-				return (
-					(AutocompleteController_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					AutocompleteController_getPrototypeOf(o)
-				);
-			}
-			var ContentType,
-				AutocompleteController_defaultConfig = {
-					id: 'autocomplete',
-					selector: '',
-					action: '',
-					globals: {},
-					settings: { initializeFromUrl: !0, syncInputs: !0, facets: { trim: !0, pinFiltered: !0 } },
-				},
-				AutocompleteController = (function (_AbstractController) {
-					!(function AutocompleteController_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && AutocompleteController_setPrototypeOf(subClass, superClass);
-					})(AutocompleteController, _AbstractController);
-					var _bind,
-						_setFocused,
-						_super = AutocompleteController_createSuper(AutocompleteController);
-					function AutocompleteController(config, _ref, context) {
-						var _this,
-							_formSubmit,
-							_enterKey,
-							client = _ref.client,
-							store = _ref.store,
-							urlManager = _ref.urlManager,
-							eventManager = _ref.eventManager,
-							profiler = _ref.profiler,
-							logger = _ref.logger,
-							tracker = _ref.tracker;
-						return (
-							(function AutocompleteController_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, AutocompleteController),
-							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type =
-								'autocomplete'),
-							(_this.track = {
-								product: {
-									click: function click(e, result) {
-										_this.log.warn('product.click tracking is not currently supported in this controller type');
-									},
-								},
-							}),
-							(_this.handlers = {
-								input: {
-									enterKey:
-										((_enterKey = AutocompleteController_asyncToGenerator(
-											regeneratorRuntime.mark(function _callee(e) {
-												var _this$config$globals, _this$config$globals$, _this$config$globals$2, input, actionUrl;
-												return regeneratorRuntime.wrap(
-													function _callee$(_context) {
-														for (;;)
-															switch ((_context.prev = _context.next)) {
-																case 0:
-																	if (13 != e.keyCode) {
-																		_context.next = 29;
-																		break;
-																	}
-																	if (
-																		((input = e.target),
-																		(actionUrl = _this.store.services.urlManager),
-																		e.preventDefault(),
-																		null === (_this$config$globals = _this.config.globals) ||
-																			void 0 === _this$config$globals ||
-																			null === (_this$config$globals$ = _this$config$globals.search) ||
-																			void 0 === _this$config$globals$ ||
-																			null === (_this$config$globals$2 = _this$config$globals$.query) ||
-																			void 0 === _this$config$globals$2 ||
-																			!_this$config$globals$2.spellCorrection)
-																	) {
-																		_context.next = 13;
-																		break;
-																	}
-																	return (_context.next = 7), timeout(201);
-																case 7:
-																	if (!_this.store.loading) {
-																		_context.next = 12;
-																		break;
-																	}
-																	return (_context.next = 10), timeout(200);
-																case 10:
-																	_context.next = 7;
-																	break;
-																case 12:
-																	_this.store.search.originalQuery &&
-																		((input.value = _this.store.search.query.string),
-																		(actionUrl = actionUrl.set('oq', _this.store.search.originalQuery.string)));
-																case 13:
-																	return (
-																		(actionUrl = actionUrl.set('query', input.value)),
-																		(_context.prev = 14),
-																		(_context.next = 17),
-																		_this.eventManager.fire('beforeSubmit', {
-																			controller: AutocompleteController_assertThisInitialized(_this),
-																			input,
-																		})
-																	);
-																case 17:
-																	_context.next = 28;
-																	break;
-																case 19:
-																	if (
-																		((_context.prev = 19),
-																		(_context.t0 = _context.catch(14)),
-																		'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
-																	) {
-																		_context.next = 26;
-																		break;
-																	}
-																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context.abrupt('return');
-																case 26:
-																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context.t0);
-																case 28:
-																	window.location.href = actionUrl.href;
-																case 29:
-																case 'end':
-																	return _context.stop();
-															}
-													},
-													_callee,
-													null,
-													[[14, 19]]
-												);
-											})
-										)),
-										function enterKey(_x) {
-											return _enterKey.apply(this, arguments);
-										}),
-									escKey: function escKey(e) {
-										27 == e.keyCode && (e.target.blur(), _this.setFocused());
-									},
-									focus: function focus(e) {
-										e.stopPropagation(),
-											setTimeout(function () {
-												_this.setFocused(e.target);
-											});
-									},
-									formSubmit:
-										((_formSubmit = AutocompleteController_asyncToGenerator(
-											regeneratorRuntime.mark(function _callee2(e) {
-												var _this$config$globals2, _this$config$globals3, _this$config$globals4, form, input;
-												return regeneratorRuntime.wrap(
-													function _callee2$(_context2) {
-														for (;;)
-															switch ((_context2.prev = _context2.next)) {
-																case 0:
-																	if (
-																		((form = e.target),
-																		(input = form.querySelector('input[ss-autocomplete-input]')),
-																		e.preventDefault(),
-																		null === (_this$config$globals2 = _this.config.globals) ||
-																			void 0 === _this$config$globals2 ||
-																			null === (_this$config$globals3 = _this$config$globals2.search) ||
-																			void 0 === _this$config$globals3 ||
-																			null === (_this$config$globals4 = _this$config$globals3.query) ||
-																			void 0 === _this$config$globals4 ||
-																			!_this$config$globals4.spellCorrection)
-																	) {
-																		_context2.next = 12;
-																		break;
-																	}
-																	return (_context2.next = 6), timeout(201);
-																case 6:
-																	if (!_this.store.loading) {
-																		_context2.next = 11;
-																		break;
-																	}
-																	return (_context2.next = 9), timeout(200);
-																case 9:
-																	_context2.next = 6;
-																	break;
-																case 11:
-																	_this.store.search.originalQuery &&
-																		((input.value = _this.store.search.query.string),
-																		addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
-																case 12:
-																	return (
-																		(_context2.prev = 12),
-																		(_context2.next = 15),
-																		_this.eventManager.fire('beforeSubmit', {
-																			controller: AutocompleteController_assertThisInitialized(_this),
-																			input,
-																		})
-																	);
-																case 15:
-																	_context2.next = 26;
-																	break;
-																case 17:
-																	if (
-																		((_context2.prev = 17),
-																		(_context2.t0 = _context2.catch(12)),
-																		'cancelled' != (null === _context2.t0 || void 0 === _context2.t0 ? void 0 : _context2.t0.message))
-																	) {
-																		_context2.next = 24;
-																		break;
-																	}
-																	return _this.log.warn("'beforeSubmit' middleware cancelled"), _context2.abrupt('return');
-																case 24:
-																	_this.log.error("error in 'beforeSubmit' middleware"), console.error(_context2.t0);
-																case 26:
-																	form.submit();
-																case 27:
-																case 'end':
-																	return _context2.stop();
-															}
-													},
-													_callee2,
-													null,
-													[[12, 17]]
-												);
-											})
-										)),
-										function formSubmit(_x2) {
-											return _formSubmit.apply(this, arguments);
-										}),
-									keyUp: function keyUp(e) {
-										if (13 != (null == e ? void 0 : e.keyCode) && 27 != (null == e ? void 0 : e.keyCode)) {
-											e.isTrusted && _this.store.state.focusedInput !== e.target && _this.setFocused(e.target);
-											var value = e.target.value;
-											if (_this.store.state.input != value || !_this.store.loaded) {
-												var _this$store$trending, _this$config$settings, _this$config$settings2;
-												if (((_this.store.state.input = value), _this.config.settings.syncInputs))
-													document.querySelectorAll(_this.config.selector).forEach(function (input) {
-														input.value = value;
-													});
-												if ((clearTimeout(_this.handlers.input.timeoutDelay), value))
-													_this.handlers.input.timeoutDelay = setTimeout(function () {
-														_this.store.state.locks.terms.unlock(),
-															_this.store.state.locks.facets.unlock(),
-															_this.urlManager.set({ query: _this.store.state.input }).go();
-													}, 200);
-												else
-													_this.store.reset(),
-														_this.urlManager.reset().go(),
-														null !== (_this$store$trending = _this.store.trending) &&
-															void 0 !== _this$store$trending &&
-															_this$store$trending.length &&
-															null !== (_this$config$settings = _this.config.settings) &&
-															void 0 !== _this$config$settings &&
-															null !== (_this$config$settings2 = _this$config$settings.trending) &&
-															void 0 !== _this$config$settings2 &&
-															_this$config$settings2.showResults &&
-															_this.store.trending[0].preview();
-											}
-										}
-									},
-									timeoutDelay: void 0,
-								},
-								document: {
-									click: function click(e) {
-										var inputs = document.querySelectorAll(_this.config.selector);
-										Array.from(inputs).includes(e.target) ? e.stopPropagation() : _this.setFocused();
-									},
-								},
-							}),
-							(_this.searchTrending = AutocompleteController_asyncToGenerator(
-								regeneratorRuntime.mark(function _callee3() {
-									var terms, storedTerms, _this$config$settings3, _this$config$settings4, trendingParams, trendingProfile;
-									return regeneratorRuntime.wrap(function _callee3$(_context3) {
-										for (;;)
-											switch ((_context3.prev = _context3.next)) {
-												case 0:
-													if (!(storedTerms = _this.storage.get('terms'))) {
-														_context3.next = 5;
-														break;
-													}
-													(terms = JSON.parse(storedTerms)), (_context3.next = 13);
-													break;
-												case 5:
-													return (
-														(trendingParams = {
-															limit:
-																(null === (_this$config$settings3 = _this.config.settings) ||
-																void 0 === _this$config$settings3 ||
-																null === (_this$config$settings4 = _this$config$settings3.trending) ||
-																void 0 === _this$config$settings4
-																	? void 0
-																	: _this$config$settings4.limit) || 5,
-														}),
-														(trendingProfile = _this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start()),
-														(_context3.next = 9),
-														_this.client.trending(trendingParams)
-													);
-												case 9:
-													(terms = _context3.sent),
-														trendingProfile.stop(),
-														_this.log.profile(trendingProfile),
-														_this.storage.set('terms', JSON.stringify(terms));
-												case 13:
-													_this.store.updateTrendingTerms(terms);
-												case 14:
-												case 'end':
-													return _context3.stop();
-											}
-									}, _callee3);
-								})
-							)),
-							(_this.search = AutocompleteController_asyncToGenerator(
-								regeneratorRuntime.mark(function _callee4() {
-									var _params$search,
-										_params$search$query,
-										params,
-										searchProfile,
-										_yield$_this$client$a,
-										_yield$_this$client$a2,
-										meta,
-										response,
-										afterSearchProfile,
-										afterStoreProfile;
-									return regeneratorRuntime.wrap(
-										function _callee4$(_context4) {
-											for (;;)
-												switch ((_context4.prev = _context4.next)) {
-													case 0:
-														if (
-															null != (params = _this.params) &&
-															null !== (_params$search = params.search) &&
-															void 0 !== _params$search &&
-															null !== (_params$search$query = _params$search.query) &&
-															void 0 !== _params$search$query &&
-															_params$search$query.string
-														) {
-															_context4.next = 3;
-															break;
-														}
-														return _context4.abrupt('return');
-													case 3:
-														return (
-															(_context4.prev = 3),
-															(_context4.prev = 4),
-															(_context4.next = 7),
-															_this.eventManager.fire('beforeSearch', {
-																controller: AutocompleteController_assertThisInitialized(_this),
-																request: params,
-															})
-														);
-													case 7:
-														_context4.next = 18;
-														break;
-													case 9:
-														if (
-															((_context4.prev = 9),
-															(_context4.t0 = _context4.catch(4)),
-															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
-														) {
-															_context4.next = 16;
-															break;
-														}
-														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
-													case 16:
-														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
-													case 18:
-														return (
-															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context4.next = 21),
-															_this.client.autocomplete(params)
-														);
-													case 21:
-														return (
-															(_yield$_this$client$a = _context4.sent),
-															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
-															(meta = _yield$_this$client$a2[0]),
-															(response = _yield$_this$client$a2[1]).meta || (response.meta = meta),
-															searchProfile.stop(),
-															_this.log.profile(searchProfile),
-															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 29),
-															(_context4.next = 32),
-															_this.eventManager.fire('afterSearch', {
-																controller: AutocompleteController_assertThisInitialized(_this),
-																request: params,
-																response,
-															})
-														);
-													case 32:
-														_context4.next = 44;
-														break;
-													case 34:
-														if (
-															((_context4.prev = 34),
-															(_context4.t1 = _context4.catch(29)),
-															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
-														) {
-															_context4.next = 42;
-															break;
-														}
-														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 42:
-														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
-													case 44:
-														return (
-															afterSearchProfile.stop(),
-															_this.log.profile(afterSearchProfile),
-															_this.store.update(response),
-															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 48),
-															(_context4.next = 51),
-															_this.eventManager.fire('afterStore', {
-																controller: AutocompleteController_assertThisInitialized(_this),
-																request: params,
-																response,
-															})
-														);
-													case 51:
-														_context4.next = 63;
-														break;
-													case 53:
-														if (
-															((_context4.prev = 53),
-															(_context4.t2 = _context4.catch(48)),
-															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
-														) {
-															_context4.next = 61;
-															break;
-														}
-														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 61:
-														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
-													case 63:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 82);
-														break;
-													case 67:
-														if (((_context4.prev = 67), (_context4.t3 = _context4.catch(3)), !_context4.t3)) {
-															_context4.next = 82;
-															break;
-														}
-														(_context4.t4 = _context4.t3), (_context4.next = 429 === _context4.t4 ? 73 : 500 === _context4.t4 ? 76 : 79);
-														break;
-													case 73:
-														return (
-															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-															_this.log.warn(_this.store.error),
-															_context4.abrupt('break', 81)
-														);
-													case 76:
-														return (
-															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_this.log.error(_this.store.error),
-															_context4.abrupt('break', 81)
-														);
-													case 79:
-														return _this.log.error(_context4.t3), _context4.abrupt('break', 81);
-													case 81:
-														_this.store.loading = !1;
-													case 82:
-													case 'end':
-														return _context4.stop();
-												}
-										},
-										_callee4,
-										null,
-										[
-											[3, 67],
-											[4, 9],
-											[29, 34],
-											[48, 53],
-										]
-									);
-								})
-							)),
-							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
-							_this.store.setConfig(_this.config),
-							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
-							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
-							_this.eventManager.on(
-								'beforeSearch',
-								(function () {
-									var _ref4 = AutocompleteController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee5(ac, next) {
-											return regeneratorRuntime.wrap(function _callee5$(_context5) {
-												for (;;)
-													switch ((_context5.prev = _context5.next)) {
-														case 0:
-															return (ac.controller.store.loading = !0), (_context5.next = 3), next();
-														case 3:
-														case 'end':
-															return _context5.stop();
-													}
-											}, _callee5);
-										})
-									);
-									return function (_x3, _x4) {
-										return _ref4.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterSearch',
-								(function () {
-									var _ref5 = AutocompleteController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee6(ac, next) {
-											return regeneratorRuntime.wrap(function _callee6$(_context6) {
-												for (;;)
-													switch ((_context6.prev = _context6.next)) {
-														case 0:
-															return (_context6.next = 2), next();
-														case 2:
-															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
-																_context6.next = 4;
-																break;
-															}
-															return _context6.abrupt('return', !1);
-														case 4:
-														case 'end':
-															return _context6.stop();
-													}
-											}, _callee6);
-										})
-									);
-									return function (_x5, _x6) {
-										return _ref5.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterStore',
-								(function () {
-									var _ref6 = AutocompleteController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee7(ac, next) {
-											return regeneratorRuntime.wrap(function _callee7$(_context7) {
-												for (;;)
-													switch ((_context7.prev = _context7.next)) {
-														case 0:
-															return (_context7.next = 2), next();
-														case 2:
-															ac.controller.store.loading = !1;
-														case 3:
-														case 'end':
-															return _context7.stop();
-													}
-											}, _callee7);
-										})
-									);
-									return function (_x7, _x8) {
-										return _ref6.apply(this, arguments);
-									};
-								})()
-							),
-							_this.use(_this.config),
-							_this
-						);
-					}
-					return (
-						(function AutocompleteController_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && AutocompleteController_defineProperties(Constructor.prototype, protoProps),
-								staticProps && AutocompleteController_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(AutocompleteController, [
-							{
-								key: 'params',
-								get: function get() {
-									var _this$config$globals5,
-										_this$config$globals6,
-										urlState = this.urlManager.state,
-										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
-										userId = this.tracker.getUserId();
-									if (
-										(userId && ((params.tracking = params.tracking || {}), (params.tracking.userId = userId)),
-										null === (_this$config$globals5 = this.config.globals) ||
-											void 0 === _this$config$globals5 ||
-											null === (_this$config$globals6 = _this$config$globals5.personalization) ||
-											void 0 === _this$config$globals6 ||
-											!_this$config$globals6.disabled)
-									) {
-										var cartItems = this.tracker.cookies.cart.get();
-										cartItems.length &&
-											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
-										var lastViewedItems = this.tracker.cookies.viewed.get();
-										lastViewedItems.length &&
-											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
-										var shopperId = this.tracker.getShopperId();
-										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
-									}
-									return params;
-								},
-							},
-							{
-								key: 'setFocused',
-								value:
-									((_setFocused = AutocompleteController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee8(inputElement) {
-											var _this$store$state, _this$store$trending2, _this$store$terms, _this$config$settings5, _this$config$settings6;
-											return regeneratorRuntime.wrap(
-												function _callee8$(_context8) {
-													for (;;)
-														switch ((_context8.prev = _context8.next)) {
-															case 0:
-																if (this.store.state.focusedInput === inputElement) {
-																	_context8.next = 21;
-																	break;
-																}
-																return (
-																	(this.store.state.focusedInput = inputElement),
-																	(_context8.prev = 2),
-																	(_context8.prev = 3),
-																	(_context8.next = 6),
-																	this.eventManager.fire('focusChange', { controller: this })
-																);
-															case 6:
-																_context8.next = 16;
-																break;
-															case 8:
-																if (
-																	((_context8.prev = 8),
-																	(_context8.t0 = _context8.catch(3)),
-																	'cancelled' != (null === _context8.t0 || void 0 === _context8.t0 ? void 0 : _context8.t0.message))
-																) {
-																	_context8.next = 14;
-																	break;
-																}
-																this.log.warn("'focusChange' middleware cancelled"), (_context8.next = 16);
-																break;
-															case 14:
-																throw (this.log.error("error in 'focusChange' middleware"), _context8.t0);
-															case 16:
-																_context8.next = 21;
-																break;
-															case 18:
-																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
-															case 21:
-																!inputElement ||
-																(null !== (_this$store$state = this.store.state) && void 0 !== _this$store$state && _this$store$state.input) ||
-																null === (_this$store$trending2 = this.store.trending) ||
-																void 0 === _this$store$trending2 ||
-																!_this$store$trending2.length ||
-																(null !== (_this$store$terms = this.store.terms) && void 0 !== _this$store$terms && _this$store$terms.length) ||
-																null === (_this$config$settings5 = this.config.settings) ||
-																void 0 === _this$config$settings5 ||
-																null === (_this$config$settings6 = _this$config$settings5.trending) ||
-																void 0 === _this$config$settings6 ||
-																!_this$config$settings6.showResults
-																	? null == inputElement || inputElement.dispatchEvent(new Event('keyup'))
-																	: this.store.trending[0].preview();
-															case 22:
-															case 'end':
-																return _context8.stop();
-														}
-												},
-												_callee8,
-												this,
-												[
-													[2, 18],
-													[3, 8],
-												]
-											);
-										})
-									)),
-									function setFocused(_x9) {
-										return _setFocused.apply(this, arguments);
-									}),
-							},
-							{
-								key: 'reset',
-								value: function reset() {
-									document.querySelectorAll(this.config.selector).forEach(function (input) {
-										input.value = '';
-									}),
-										this.store.reset();
-								},
-							},
-							{
-								key: 'unbind',
-								value: function unbind() {
-									var _this2 = this,
-										inputs = document.querySelectorAll('input[ss-autocomplete-input]');
-									null == inputs ||
-										inputs.forEach(function (input) {
-											var _input$form;
-											input.removeEventListener('keyup', _this2.handlers.input.keyUp),
-												input.removeEventListener('keydown', _this2.handlers.input.enterKey),
-												input.removeEventListener('keydown', _this2.handlers.input.escKey),
-												input.removeEventListener('focus', _this2.handlers.input.focus),
-												null === (_input$form = input.form) ||
-													void 0 === _input$form ||
-													_input$form.removeEventListener('submit', _this2.handlers.input.formSubmit);
-										}),
-										document.removeEventListener('click', this.handlers.document.click);
-								},
-							},
-							{
-								key: 'bind',
-								value:
-									((_bind = AutocompleteController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee9() {
-											var _this$config$settings7,
-												_this$config$settings8,
-												_this$store$trending3,
-												_this3 = this;
-											return regeneratorRuntime.wrap(
-												function _callee9$(_context9) {
-													for (;;)
-														switch ((_context9.prev = _context9.next)) {
-															case 0:
-																if (this.initialized) {
-																	_context9.next = 3;
-																	break;
-																}
-																return (_context9.next = 3), this.init();
-															case 3:
-																this.unbind(),
-																	document.querySelectorAll(this.config.selector).forEach(function (input) {
-																		input.setAttribute('spellcheck', 'false'),
-																			input.setAttribute('autocomplete', 'off'),
-																			input.setAttribute('ss-autocomplete-input', ''),
-																			input.addEventListener('keyup', _this3.handlers.input.keyUp),
-																			_this3.config.settings.initializeFromUrl &&
-																				!input.value &&
-																				_this3.store.state.input &&
-																				(input.value = _this3.store.state.input),
-																			input.addEventListener('focus', _this3.handlers.input.focus),
-																			input.addEventListener('keydown', _this3.handlers.input.escKey);
-																		var formActionUrl,
-																			form = input.form;
-																		_this3.config.action
-																			? ((formActionUrl = _this3.config.action), input.addEventListener('keydown', _this3.handlers.input.enterKey))
-																			: form && ((formActionUrl = form.action), form.addEventListener('submit', _this3.handlers.input.formSubmit)),
-																			formActionUrl &&
-																				_this3.store.setService(
-																					'urlManager',
-																					_this3.urlManager.withConfig(function (translatorConfig) {
-																						return Object.assign({}, translatorConfig, { urlRoot: formActionUrl });
-																					})
-																				),
-																			document.activeElement === input && _this3.setFocused(input);
-																	}),
-																	(null === (_this$config$settings7 = this.config.settings) ||
-																	void 0 === _this$config$settings7 ||
-																	null === (_this$config$settings8 = _this$config$settings7.trending) ||
-																	void 0 === _this$config$settings8
-																		? void 0
-																		: _this$config$settings8.limit) > 0 &&
-																		(null === (_this$store$trending3 = this.store.trending) ||
-																			void 0 === _this$store$trending3 ||
-																			!_this$store$trending3.length) &&
-																		this.searchTrending(),
-																	document.addEventListener('click', this.handlers.document.click);
-															case 8:
-															case 'end':
-																return _context9.stop();
-														}
-												},
-												_callee9,
-												this
-											);
-										})
-									)),
-									function bind() {
-										return _bind.apply(this, arguments);
-									}),
-							},
-						]),
-						AutocompleteController
-					);
-				})(AbstractController);
-			function addHiddenFormInput(form, name, value) {
-				var inputElem = document.createElement('input');
-				(inputElem.type = 'hidden'), (inputElem.name = name), (inputElem.value = value), form.append(inputElem);
-			}
-			function timeout(_x10) {
-				return _timeout.apply(this, arguments);
-			}
-			function _timeout() {
-				return (_timeout = AutocompleteController_asyncToGenerator(
-					regeneratorRuntime.mark(function _callee10(time) {
-						return regeneratorRuntime.wrap(function _callee10$(_context10) {
-							for (;;)
-								switch ((_context10.prev = _context10.next)) {
-									case 0:
-										return _context10.abrupt(
-											'return',
-											new Promise(function (resolve) {
-												window.setTimeout(resolve, time);
-											})
-										);
-									case 1:
-									case 'end':
-										return _context10.stop();
-								}
-						}, _callee10);
-					})
-				)).apply(this, arguments);
-			}
 			function MerchandisingStore_toConsumableArray(arr) {
 				return (
 					(function MerchandisingStore_arrayWithoutHoles(arr) {
@@ -25485,13 +24172,13 @@
 					return self;
 				})(self);
 			}
-			function MerchandisingStore_wrapNativeSuper(Class) {
+			function _wrapNativeSuper(Class) {
 				var _cache = 'function' == typeof Map ? new Map() : void 0;
 				return (
-					(MerchandisingStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+					(_wrapNativeSuper = function _wrapNativeSuper(Class) {
 						if (
 							null === Class ||
-							!(function MerchandisingStore_isNativeFunction(fn) {
+							!(function _isNativeFunction(fn) {
 								return -1 !== Function.toString.call(fn).indexOf('[native code]');
 							})(Class)
 						)
@@ -25502,7 +24189,7 @@
 							_cache.set(Class, Wrapper);
 						}
 						function Wrapper() {
-							return MerchandisingStore_construct(Class, arguments, MerchandisingStore_getPrototypeOf(this).constructor);
+							return _construct(Class, arguments, MerchandisingStore_getPrototypeOf(this).constructor);
 						}
 						return (
 							(Wrapper.prototype = Object.create(Class.prototype, {
@@ -25511,12 +24198,12 @@
 							MerchandisingStore_setPrototypeOf(Wrapper, Class)
 						);
 					}),
-					MerchandisingStore_wrapNativeSuper(Class)
+					_wrapNativeSuper(Class)
 				);
 			}
-			function MerchandisingStore_construct(Parent, args, Class) {
+			function _construct(Parent, args, Class) {
 				return (
-					(MerchandisingStore_construct = MerchandisingStore_isNativeReflectConstruct()
+					(_construct = MerchandisingStore_isNativeReflectConstruct()
 						? Reflect.construct
 						: function _construct(Parent, args, Class) {
 								var a = [null];
@@ -25524,7 +24211,7 @@
 								var instance = new (Function.bind.apply(Parent, a))();
 								return Class && MerchandisingStore_setPrototypeOf(instance, Class.prototype), instance;
 						  }),
-					MerchandisingStore_construct.apply(null, arguments)
+					_construct.apply(null, arguments)
 				);
 			}
 			function MerchandisingStore_isNativeReflectConstruct() {
@@ -25634,877 +24321,7 @@
 						]),
 						Content
 					);
-				})(MerchandisingStore_wrapNativeSuper(Array), Symbol.species);
-			function FilterStore_toConsumableArray(arr) {
-				return (
-					(function FilterStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return FilterStore_arrayLikeToArray(arr);
-					})(arr) ||
-					(function FilterStore_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function FilterStore_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return FilterStore_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return FilterStore_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function FilterStore_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function FilterStore_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function FilterStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function FilterStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function FilterStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && FilterStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && FilterStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function FilterStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function FilterStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
-			}
-			function FilterStore_wrapNativeSuper(Class) {
-				var _cache = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(FilterStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
-						if (
-							null === Class ||
-							!(function FilterStore_isNativeFunction(fn) {
-								return -1 !== Function.toString.call(fn).indexOf('[native code]');
-							})(Class)
-						)
-							return Class;
-						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== _cache) {
-							if (_cache.has(Class)) return _cache.get(Class);
-							_cache.set(Class, Wrapper);
-						}
-						function Wrapper() {
-							return FilterStore_construct(Class, arguments, FilterStore_getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(Class.prototype, {
-								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
-							})),
-							FilterStore_setPrototypeOf(Wrapper, Class)
-						);
-					}),
-					FilterStore_wrapNativeSuper(Class)
-				);
-			}
-			function FilterStore_construct(Parent, args, Class) {
-				return (
-					(FilterStore_construct = FilterStore_isNativeReflectConstruct()
-						? Reflect.construct
-						: function _construct(Parent, args, Class) {
-								var a = [null];
-								a.push.apply(a, args);
-								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && FilterStore_setPrototypeOf(instance, Class.prototype), instance;
-						  }),
-					FilterStore_construct.apply(null, arguments)
-				);
-			}
-			function FilterStore_isNativeReflectConstruct() {
-				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-				if (Reflect.construct.sham) return !1;
-				if ('function' == typeof Proxy) return !0;
-				try {
-					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-				} catch (e) {
-					return !1;
-				}
-			}
-			function FilterStore_setPrototypeOf(o, p) {
-				return (
-					(FilterStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					FilterStore_setPrototypeOf(o, p)
-				);
-			}
-			function FilterStore_getPrototypeOf(o) {
-				return (
-					(FilterStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					FilterStore_getPrototypeOf(o)
-				);
-			}
-			var FilterStore = (function (_Array, _Symbol$species) {
-					!(function FilterStore_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && FilterStore_setPrototypeOf(subClass, superClass);
-					})(FilterStore, _Array);
-					var _super = (function FilterStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = FilterStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = FilterStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = FilterStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return FilterStore_possibleConstructorReturn(this, result);
-						};
-					})(FilterStore);
-					function FilterStore(services) {
-						var filtersData = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
-							meta = arguments.length > 2 ? arguments[2] : void 0;
-						FilterStore_classCallCheck(this, FilterStore);
-						var filters = filtersData.map(function (filter) {
-							var facetMeta = meta.facets[filter.field];
-							if ('range' === filter.type) {
-								var rangeFilter = filter;
-								return new RangeFilter(services, {
-									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
-									value: {
-										low: rangeFilter.value.low,
-										high: rangeFilter.value.high,
-										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
-									},
-								});
-							}
-							var valueFilter = filter;
-							return new Filter(services, {
-								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
-								value: { value: valueFilter.value, label: valueFilter.label },
-							});
-						});
-						return _super.call.apply(_super, [this].concat(FilterStore_toConsumableArray(filters)));
-					}
-					return (
-						FilterStore_createClass(FilterStore, null, [
-							{
-								key: _Symbol$species,
-								get: function get() {
-									return Array;
-								},
-							},
-						]),
-						FilterStore
-					);
-				})(FilterStore_wrapNativeSuper(Array), Symbol.species),
-				Filter = FilterStore_createClass(function Filter(services, filter) {
-					var _services$urlManager;
-					FilterStore_classCallCheck(this, Filter),
-						(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
-						(this.url =
-							null == services || null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-								? void 0
-								: _services$urlManager.remove('page').remove('filter.' + this.facet.field, this.value.value)),
-						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
-				}),
-				RangeFilter = FilterStore_createClass(function RangeFilter(services, filter) {
-					var _services$urlManager2;
-					FilterStore_classCallCheck(this, RangeFilter),
-						(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
-						(this.url =
-							null == services || null === (_services$urlManager2 = services.urlManager) || void 0 === _services$urlManager2
-								? void 0
-								: _services$urlManager2.remove('page').remove('filter.' + filter.facet.field, { low: filter.value.low, high: filter.value.high })),
-						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
-				});
-			__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js');
-			function PaginationStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function PaginationStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function PaginationStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && PaginationStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && PaginationStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var PaginationStore = (function () {
-					function PaginationStore(config, services) {
-						var paginationData =
-							arguments.length > 2 && void 0 !== arguments[2]
-								? arguments[2]
-								: { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24, totalPages: void 0 };
-						PaginationStore_classCallCheck(this, PaginationStore),
-							(this.services = services),
-							(this.controllerConfig = config),
-							(this.page = paginationData.page),
-							(this.pageSize = paginationData.pageSize),
-							(this.totalResults = paginationData.totalResults),
-							(this.defaultPageSize = paginationData.defaultPageSize),
-							(this.totalPages = paginationData.totalPages),
-							(this.pageSizeOptions = [
-								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
-								{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
-								{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
-							]),
-							(0, mobx_esm.rC)(this, {
-								page: mobx_esm.LO,
-								pageSize: mobx_esm.LO,
-								totalResults: mobx_esm.LO,
-								totalPages: mobx_esm.LO,
-								begin: mobx_esm.Fl,
-								end: mobx_esm.Fl,
-								multiplePages: mobx_esm.Fl,
-								current: mobx_esm.Fl,
-								first: mobx_esm.Fl,
-								last: mobx_esm.Fl,
-								next: mobx_esm.Fl,
-								previous: mobx_esm.Fl,
-								getPages: mobx_esm.aD,
-								setPageSize: mobx_esm.aD,
-							});
-					}
-					return (
-						PaginationStore_createClass(PaginationStore, [
-							{
-								key: 'begin',
-								get: function get() {
-									var _this$controllerConfi;
-									return null !== (_this$controllerConfi = this.controllerConfig.settings) &&
-										void 0 !== _this$controllerConfi &&
-										_this$controllerConfi.infinite
-										? 1
-										: this.pageSize * (this.page - 1) + 1;
-								},
-							},
-							{
-								key: 'end',
-								get: function get() {
-									return this.pageSize * this.page > this.totalResults ? this.totalResults : this.pageSize * this.page;
-								},
-							},
-							{
-								key: 'multiplePages',
-								get: function get() {
-									return this.pageSize < this.totalResults;
-								},
-							},
-							{
-								key: 'current',
-								get: function get() {
-									return new Page(this.services, { number: this.page, active: !0 });
-								},
-							},
-							{
-								key: 'first',
-								get: function get() {
-									return new Page(this.services, { number: 1, active: 1 == this.page });
-								},
-							},
-							{
-								key: 'last',
-								get: function get() {
-									return new Page(this.services, { number: this.totalPages, active: this.totalPages == this.page });
-								},
-							},
-							{
-								key: 'next',
-								get: function get() {
-									if (this.page < this.totalPages) return new Page(this.services, { number: this.page + 1 });
-								},
-							},
-							{
-								key: 'previous',
-								get: function get() {
-									if (this.page > 1) return new Page(this.services, { number: this.page - 1 });
-								},
-							},
-							{
-								key: 'getPages',
-								value: function getPages(min, max) {
-									if (!Number.isInteger(min)) return [];
-									if (Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
-									else {
-										var surrounding = min - 1,
-											from = this.page,
-											to = this.page,
-											last = to - from;
-										do {
-											if (((last = to - from), to < this.totalPages && to++, to - from >= surrounding)) break;
-											from > 1 && from--;
-										} while (last != to - from && to - from < surrounding);
-										(min = from - this.page), (max = to - this.page);
-									}
-									for (var pages = [], i = this.page + min; i <= this.page + max; i++)
-										i > 0 && i <= this.totalPages && pages.push(new Page(this.services, { number: i, active: i == this.page }));
-									return pages;
-								},
-							},
-							{
-								key: 'setPageSize',
-								value: function setPageSize(num) {
-									num && this.services.urlManager.remove('page').set('pageSize', num).go();
-								},
-							},
-						]),
-						PaginationStore
-					);
-				})(),
-				Page = PaginationStore_createClass(function Page(services, page) {
-					var _this$services, _this$services$urlMan;
-					PaginationStore_classCallCheck(this, Page),
-						(this.services = services),
-						(this.number = page.number),
-						(this.active = page.active || !1),
-						(this.url =
-							null === (_this$services = this.services) ||
-							void 0 === _this$services ||
-							null === (_this$services$urlMan = _this$services.urlManager) ||
-							void 0 === _this$services$urlMan
-								? void 0
-								: _this$services$urlMan.set('page', this.number)),
-						(this.key = this.url.href);
-				});
-			function SortingStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function SortingStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function SortingStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && SortingStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && SortingStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var SortingStore = (function () {
-					function SortingStore(services, sorting, search, meta) {
-						if ((SortingStore_classCallCheck(this, SortingStore), (this.options = []), services && meta.sortOptions)) {
-							var activeSort = sorting && sorting.length && sorting[0];
-							(this.options = meta.sortOptions
-								.filter(function (option) {
-									return null != search && search.query ? option : 'field' == option.type;
-								})
-								.map(function (option, index) {
-									return (
-										(option.active = !1),
-										activeSort && activeSort.field == option.field && activeSort.direction == option.direction
-											? (option.active = !0)
-											: activeSort || 0 !== index || (option.active = !0),
-										(option.default = !1),
-										0 === index && (option.default = !0),
-										new Option(services, option, index)
-									);
-								})),
-								(0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
-						}
-					}
-					return (
-						SortingStore_createClass(SortingStore, [
-							{
-								key: 'current',
-								get: function get() {
-									return this.options
-										.filter(function (option) {
-											return option.active;
-										})
-										.pop();
-								},
-							},
-						]),
-						SortingStore
-					);
-				})(),
-				Option = SortingStore_createClass(function Option(services, option, index) {
-					SortingStore_classCallCheck(this, Option),
-						(this.active = option.active),
-						(this.default = option.default),
-						(this.field = option.field),
-						(this.label = option.label),
-						(this.direction = option.direction),
-						(this.type = option.type),
-						(this.value = option.label + ':' + option.field + ':' + option.direction + ':' + index),
-						this.default
-							? (this.url = services.urlManager.remove('page').remove('sort'))
-							: (this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }])),
-						(0, mobx_esm.rC)(this, { field: mobx_esm.LO, label: mobx_esm.LO, direction: mobx_esm.LO, type: mobx_esm.LO, value: mobx_esm.LO });
-				});
-			function StateStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function StateStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function StateStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && StateStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && StateStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			var StateStore = (function () {
-					function StateStore(services) {
-						StateStore_classCallCheck(this, StateStore),
-							(this.focusedInput = void 0),
-							(this.input = ''),
-							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
-							(this.url = services.urlManager),
-							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
-					}
-					return (
-						StateStore_createClass(StateStore, [
-							{
-								key: 'reset',
-								value: function reset() {
-									(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
-								},
-							},
-						]),
-						StateStore
-					);
-				})(),
-				Lock = (function () {
-					function Lock() {
-						var state = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-						StateStore_classCallCheck(this, Lock), (this.state = this.startState = state);
-					}
-					return (
-						StateStore_createClass(Lock, [
-							{
-								key: 'reset',
-								value: function reset() {
-									this.state = this.startState;
-								},
-							},
-							{
-								key: 'locked',
-								get: function get() {
-									return this.state;
-								},
-							},
-							{
-								key: 'lock',
-								value: function lock() {
-									this.state = !0;
-								},
-							},
-							{
-								key: 'unlock',
-								value: function unlock() {
-									this.state = !1;
-								},
-							},
-						]),
-						Lock
-					);
-				})();
-			function TermStore_toConsumableArray(arr) {
-				return (
-					(function TermStore_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return TermStore_arrayLikeToArray(arr);
-					})(arr) ||
-					(function TermStore_iterableToArray(iter) {
-						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
-					})(arr) ||
-					(function TermStore_unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return TermStore_arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return TermStore_arrayLikeToArray(o, minLen);
-					})(arr) ||
-					(function TermStore_nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function TermStore_arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
-			}
-			function TermStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			function TermStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function TermStore_createClass(Constructor, protoProps, staticProps) {
-				return (
-					protoProps && TermStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && TermStore_defineProperties(Constructor, staticProps),
-					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-					Constructor
-				);
-			}
-			function TermStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function TermStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
-			}
-			function TermStore_wrapNativeSuper(Class) {
-				var _cache = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(TermStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
-						if (
-							null === Class ||
-							!(function TermStore_isNativeFunction(fn) {
-								return -1 !== Function.toString.call(fn).indexOf('[native code]');
-							})(Class)
-						)
-							return Class;
-						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== _cache) {
-							if (_cache.has(Class)) return _cache.get(Class);
-							_cache.set(Class, Wrapper);
-						}
-						function Wrapper() {
-							return TermStore_construct(Class, arguments, TermStore_getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(Class.prototype, {
-								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
-							})),
-							TermStore_setPrototypeOf(Wrapper, Class)
-						);
-					}),
-					TermStore_wrapNativeSuper(Class)
-				);
-			}
-			function TermStore_construct(Parent, args, Class) {
-				return (
-					(TermStore_construct = TermStore_isNativeReflectConstruct()
-						? Reflect.construct
-						: function _construct(Parent, args, Class) {
-								var a = [null];
-								a.push.apply(a, args);
-								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && TermStore_setPrototypeOf(instance, Class.prototype), instance;
-						  }),
-					TermStore_construct.apply(null, arguments)
-				);
-			}
-			function TermStore_isNativeReflectConstruct() {
-				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-				if (Reflect.construct.sham) return !1;
-				if ('function' == typeof Proxy) return !0;
-				try {
-					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-				} catch (e) {
-					return !1;
-				}
-			}
-			function TermStore_setPrototypeOf(o, p) {
-				return (
-					(TermStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					TermStore_setPrototypeOf(o, p)
-				);
-			}
-			function TermStore_getPrototypeOf(o) {
-				return (
-					(TermStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					TermStore_getPrototypeOf(o)
-				);
-			}
-			var TermStore = (function (_Array, _Symbol$species) {
-					!(function TermStore_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && TermStore_setPrototypeOf(subClass, superClass);
-					})(TermStore, _Array);
-					var _super = (function TermStore_createSuper(Derived) {
-						var hasNativeReflectConstruct = TermStore_isNativeReflectConstruct();
-						return function _createSuperInternal() {
-							var result,
-								Super = TermStore_getPrototypeOf(Derived);
-							if (hasNativeReflectConstruct) {
-								var NewTarget = TermStore_getPrototypeOf(this).constructor;
-								result = Reflect.construct(Super, arguments, NewTarget);
-							} else result = Super.apply(this, arguments);
-							return TermStore_possibleConstructorReturn(this, result);
-						};
-					})(TermStore);
-					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
-						var _autocomplete$suggest;
-						TermStore_classCallCheck(this, TermStore);
-						var suggestions = TermStore_toConsumableArray(
-							(null != autocomplete && autocomplete.alternatives ? autocomplete.alternatives : []).map(function (term) {
-								return term.text;
-							})
-						);
-						null != autocomplete &&
-						null !== (_autocomplete$suggest = autocomplete.suggested) &&
-						void 0 !== _autocomplete$suggest &&
-						_autocomplete$suggest.text
-							? suggestions.unshift(autocomplete.suggested.text)
-							: null != autocomplete &&
-							  autocomplete.query &&
-							  paginationData.totalResults &&
-							  suggestions.unshift(null == autocomplete ? void 0 : autocomplete.query);
-						var terms = [];
-						return (
-							suggestions.map(function (term, index) {
-								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
-							}),
-							_super.call.apply(_super, [this].concat(terms))
-						);
-					}
-					return (
-						TermStore_createClass(TermStore, null, [
-							{
-								key: _Symbol$species,
-								get: function get() {
-									return Array;
-								},
-							},
-						]),
-						TermStore
-					);
-				})(TermStore_wrapNativeSuper(Array), Symbol.species),
-				Term = TermStore_createClass(function Term(services, term, terms, resetTerms, rootState) {
-					var _services$urlManager,
-						_this = this;
-					TermStore_classCallCheck(this, Term),
-						(this.active = term.active),
-						(this.value = term.value),
-						(this.url =
-							null == services || null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-								? void 0
-								: _services$urlManager.set({ query: this.value })),
-						(this.preview = function () {
-							var _this$url;
-							resetTerms(),
-								terms.map(function (term) {
-									term.active = !1;
-								}),
-								(_this.active = !0),
-								rootState.locks.terms.lock(),
-								rootState.locks.facets.unlock(),
-								null === (_this$url = _this.url) || void 0 === _this$url || _this$url.set({ query: _this.value }).go();
-						}),
-						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
-				});
-			function TrendingStore_defineProperties(target, props) {
-				for (var i = 0; i < props.length; i++) {
-					var descriptor = props[i];
-					(descriptor.enumerable = descriptor.enumerable || !1),
-						(descriptor.configurable = !0),
-						'value' in descriptor && (descriptor.writable = !0),
-						Object.defineProperty(target, descriptor.key, descriptor);
-				}
-			}
-			function TrendingStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return (function TrendingStore_assertThisInitialized(self) {
-					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-					return self;
-				})(self);
-			}
-			function TrendingStore_wrapNativeSuper(Class) {
-				var _cache = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(TrendingStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
-						if (
-							null === Class ||
-							!(function TrendingStore_isNativeFunction(fn) {
-								return -1 !== Function.toString.call(fn).indexOf('[native code]');
-							})(Class)
-						)
-							return Class;
-						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== _cache) {
-							if (_cache.has(Class)) return _cache.get(Class);
-							_cache.set(Class, Wrapper);
-						}
-						function Wrapper() {
-							return TrendingStore_construct(Class, arguments, TrendingStore_getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(Class.prototype, {
-								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
-							})),
-							TrendingStore_setPrototypeOf(Wrapper, Class)
-						);
-					}),
-					TrendingStore_wrapNativeSuper(Class)
-				);
-			}
-			function TrendingStore_construct(Parent, args, Class) {
-				return (
-					(TrendingStore_construct = TrendingStore_isNativeReflectConstruct()
-						? Reflect.construct
-						: function _construct(Parent, args, Class) {
-								var a = [null];
-								a.push.apply(a, args);
-								var instance = new (Function.bind.apply(Parent, a))();
-								return Class && TrendingStore_setPrototypeOf(instance, Class.prototype), instance;
-						  }),
-					TrendingStore_construct.apply(null, arguments)
-				);
-			}
-			function TrendingStore_isNativeReflectConstruct() {
-				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-				if (Reflect.construct.sham) return !1;
-				if ('function' == typeof Proxy) return !0;
-				try {
-					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-				} catch (e) {
-					return !1;
-				}
-			}
-			function TrendingStore_setPrototypeOf(o, p) {
-				return (
-					(TrendingStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					TrendingStore_setPrototypeOf(o, p)
-				);
-			}
-			function TrendingStore_getPrototypeOf(o) {
-				return (
-					(TrendingStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					TrendingStore_getPrototypeOf(o)
-				);
-			}
-			var TrendingStore = (function (_Array, _Symbol$species) {
-				!(function TrendingStore_inherits(subClass, superClass) {
-					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-					(subClass.prototype = Object.create(superClass && superClass.prototype, {
-						constructor: { value: subClass, writable: !0, configurable: !0 },
-					})),
-						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-						superClass && TrendingStore_setPrototypeOf(subClass, superClass);
-				})(TrendingStore, _Array);
-				var _super = (function TrendingStore_createSuper(Derived) {
-					var hasNativeReflectConstruct = TrendingStore_isNativeReflectConstruct();
-					return function _createSuperInternal() {
-						var result,
-							Super = TrendingStore_getPrototypeOf(Derived);
-						if (hasNativeReflectConstruct) {
-							var NewTarget = TrendingStore_getPrototypeOf(this).constructor;
-							result = Reflect.construct(Super, arguments, NewTarget);
-						} else result = Super.apply(this, arguments);
-						return TrendingStore_possibleConstructorReturn(this, result);
-					};
-				})(TrendingStore);
-				function TrendingStore(services, trendingData, resetTerms, rootState) {
-					var _trendingData$queries;
-					!(function TrendingStore_classCallCheck(instance, Constructor) {
-						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-					})(this, TrendingStore);
-					var terms = [];
-					return (
-						null == trendingData ||
-							null === (_trendingData$queries = trendingData.queries) ||
-							void 0 === _trendingData$queries ||
-							_trendingData$queries.map(function (term) {
-								terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
-							}),
-						_super.call.apply(_super, [this].concat(terms))
-					);
-				}
-				return (
-					(function TrendingStore_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && TrendingStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && TrendingStore_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(TrendingStore, null, [
-						{
-							key: _Symbol$species,
-							get: function get() {
-								return Array;
-							},
-						},
-					]),
-					TrendingStore
-				);
-			})(TrendingStore_wrapNativeSuper(Array), Symbol.species);
+				})(_wrapNativeSuper(Array), Symbol.species);
 			function QueryStore_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
@@ -26525,19 +24342,23 @@
 			function QueryStore_classCallCheck(instance, Constructor) {
 				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 			}
-			var QueryStore = QueryStore_createClass(function QueryStore(services, autocomplete, search) {
+			var QueryStore = QueryStore_createClass(function QueryStore(services, search) {
 					QueryStore_classCallCheck(this, QueryStore);
 					var observables = {};
-					null != search && search.query && ((this.query = new Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
-						null != autocomplete &&
-							autocomplete.correctedQuery &&
-							((this.originalQuery = new Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
+					null != search && search.query && ((this.query = new Query(services, search.query)), (observables.query = mobx_esm.LO)),
+						null != search &&
+							search.didYouMean &&
+							((this.didYouMean = new Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
+						null != search &&
+							search.originalQuery &&
+							((this.originalQuery = new Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
+						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.LO)),
 						(0, mobx_esm.rC)(this, observables);
 				}),
-				Query = QueryStore_createClass(function Query(urlManager, query) {
+				Query = QueryStore_createClass(function Query(services, query) {
 					QueryStore_classCallCheck(this, Query),
 						(this.string = query),
-						(this.url = urlManager.set({ query: this.string })),
+						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
 						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js');
@@ -27049,6 +24870,1495 @@
 								: _valueUrl4.merge('filter.' + facet.field, [{ low: this.low, high: this.high }]);
 					}
 				});
+			function FilterStore_toConsumableArray(arr) {
+				return (
+					(function FilterStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return FilterStore_arrayLikeToArray(arr);
+					})(arr) ||
+					(function FilterStore_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function FilterStore_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return FilterStore_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return FilterStore_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function FilterStore_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function FilterStore_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function FilterStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function FilterStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function FilterStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && FilterStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && FilterStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function FilterStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return (function FilterStore_assertThisInitialized(self) {
+					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+					return self;
+				})(self);
+			}
+			function FilterStore_wrapNativeSuper(Class) {
+				var _cache = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(FilterStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+						if (
+							null === Class ||
+							!(function FilterStore_isNativeFunction(fn) {
+								return -1 !== Function.toString.call(fn).indexOf('[native code]');
+							})(Class)
+						)
+							return Class;
+						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== _cache) {
+							if (_cache.has(Class)) return _cache.get(Class);
+							_cache.set(Class, Wrapper);
+						}
+						function Wrapper() {
+							return FilterStore_construct(Class, arguments, FilterStore_getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(Class.prototype, {
+								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
+							})),
+							FilterStore_setPrototypeOf(Wrapper, Class)
+						);
+					}),
+					FilterStore_wrapNativeSuper(Class)
+				);
+			}
+			function FilterStore_construct(Parent, args, Class) {
+				return (
+					(FilterStore_construct = FilterStore_isNativeReflectConstruct()
+						? Reflect.construct
+						: function _construct(Parent, args, Class) {
+								var a = [null];
+								a.push.apply(a, args);
+								var instance = new (Function.bind.apply(Parent, a))();
+								return Class && FilterStore_setPrototypeOf(instance, Class.prototype), instance;
+						  }),
+					FilterStore_construct.apply(null, arguments)
+				);
+			}
+			function FilterStore_isNativeReflectConstruct() {
+				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+				if (Reflect.construct.sham) return !1;
+				if ('function' == typeof Proxy) return !0;
+				try {
+					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+				} catch (e) {
+					return !1;
+				}
+			}
+			function FilterStore_setPrototypeOf(o, p) {
+				return (
+					(FilterStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					FilterStore_setPrototypeOf(o, p)
+				);
+			}
+			function FilterStore_getPrototypeOf(o) {
+				return (
+					(FilterStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					FilterStore_getPrototypeOf(o)
+				);
+			}
+			var FilterStore = (function (_Array, _Symbol$species) {
+					!(function FilterStore_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && FilterStore_setPrototypeOf(subClass, superClass);
+					})(FilterStore, _Array);
+					var _super = (function FilterStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = FilterStore_isNativeReflectConstruct();
+						return function _createSuperInternal() {
+							var result,
+								Super = FilterStore_getPrototypeOf(Derived);
+							if (hasNativeReflectConstruct) {
+								var NewTarget = FilterStore_getPrototypeOf(this).constructor;
+								result = Reflect.construct(Super, arguments, NewTarget);
+							} else result = Super.apply(this, arguments);
+							return FilterStore_possibleConstructorReturn(this, result);
+						};
+					})(FilterStore);
+					function FilterStore(services) {
+						var filtersData = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
+							meta = arguments.length > 2 ? arguments[2] : void 0;
+						FilterStore_classCallCheck(this, FilterStore);
+						var filters = filtersData.map(function (filter) {
+							var facetMeta = meta.facets[filter.field];
+							if ('range' === filter.type) {
+								var rangeFilter = filter;
+								return new RangeFilter(services, {
+									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
+									value: {
+										low: rangeFilter.value.low,
+										high: rangeFilter.value.high,
+										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
+									},
+								});
+							}
+							var valueFilter = filter;
+							return new Filter(services, {
+								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
+								value: { value: valueFilter.value, label: valueFilter.label },
+							});
+						});
+						return _super.call.apply(_super, [this].concat(FilterStore_toConsumableArray(filters)));
+					}
+					return (
+						FilterStore_createClass(FilterStore, null, [
+							{
+								key: _Symbol$species,
+								get: function get() {
+									return Array;
+								},
+							},
+						]),
+						FilterStore
+					);
+				})(FilterStore_wrapNativeSuper(Array), Symbol.species),
+				Filter = FilterStore_createClass(function Filter(services, filter) {
+					var _services$urlManager;
+					FilterStore_classCallCheck(this, Filter),
+						(this.facet = filter.facet),
+						(this.value = filter.value),
+						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.url =
+							null == services || null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
+								? void 0
+								: _services$urlManager.remove('page').remove('filter.' + this.facet.field, this.value.value)),
+						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
+				}),
+				RangeFilter = FilterStore_createClass(function RangeFilter(services, filter) {
+					var _services$urlManager2;
+					FilterStore_classCallCheck(this, RangeFilter),
+						(this.facet = filter.facet),
+						(this.value = filter.value),
+						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.url =
+							null == services || null === (_services$urlManager2 = services.urlManager) || void 0 === _services$urlManager2
+								? void 0
+								: _services$urlManager2.remove('page').remove('filter.' + filter.facet.field, { low: filter.value.low, high: filter.value.high })),
+						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
+				});
+			__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js');
+			function ResultStore_toConsumableArray(arr) {
+				return (
+					(function ResultStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return ResultStore_arrayLikeToArray(arr);
+					})(arr) ||
+					(function ResultStore_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function ResultStore_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return ResultStore_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ResultStore_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function ResultStore_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function ResultStore_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function ResultStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function ResultStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function ResultStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && ResultStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && ResultStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function ResultStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return (function ResultStore_assertThisInitialized(self) {
+					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+					return self;
+				})(self);
+			}
+			function ResultStore_wrapNativeSuper(Class) {
+				var _cache = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(ResultStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+						if (
+							null === Class ||
+							!(function ResultStore_isNativeFunction(fn) {
+								return -1 !== Function.toString.call(fn).indexOf('[native code]');
+							})(Class)
+						)
+							return Class;
+						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== _cache) {
+							if (_cache.has(Class)) return _cache.get(Class);
+							_cache.set(Class, Wrapper);
+						}
+						function Wrapper() {
+							return ResultStore_construct(Class, arguments, ResultStore_getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(Class.prototype, {
+								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
+							})),
+							ResultStore_setPrototypeOf(Wrapper, Class)
+						);
+					}),
+					ResultStore_wrapNativeSuper(Class)
+				);
+			}
+			function ResultStore_construct(Parent, args, Class) {
+				return (
+					(ResultStore_construct = ResultStore_isNativeReflectConstruct()
+						? Reflect.construct
+						: function _construct(Parent, args, Class) {
+								var a = [null];
+								a.push.apply(a, args);
+								var instance = new (Function.bind.apply(Parent, a))();
+								return Class && ResultStore_setPrototypeOf(instance, Class.prototype), instance;
+						  }),
+					ResultStore_construct.apply(null, arguments)
+				);
+			}
+			function ResultStore_isNativeReflectConstruct() {
+				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+				if (Reflect.construct.sham) return !1;
+				if ('function' == typeof Proxy) return !0;
+				try {
+					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+				} catch (e) {
+					return !1;
+				}
+			}
+			function ResultStore_setPrototypeOf(o, p) {
+				return (
+					(ResultStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					ResultStore_setPrototypeOf(o, p)
+				);
+			}
+			function ResultStore_getPrototypeOf(o) {
+				return (
+					(ResultStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					ResultStore_getPrototypeOf(o)
+				);
+			}
+			var ResultStore = (function (_Array, _Symbol$species) {
+					!(function ResultStore_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && ResultStore_setPrototypeOf(subClass, superClass);
+					})(ResultStore, _Array);
+					var _super = (function ResultStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = ResultStore_isNativeReflectConstruct();
+						return function _createSuperInternal() {
+							var result,
+								Super = ResultStore_getPrototypeOf(Derived);
+							if (hasNativeReflectConstruct) {
+								var NewTarget = ResultStore_getPrototypeOf(this).constructor;
+								result = Reflect.construct(Super, arguments, NewTarget);
+							} else result = Super.apply(this, arguments);
+							return ResultStore_possibleConstructorReturn(this, result);
+						};
+					})(ResultStore);
+					function ResultStore(config, services, resultData, paginationData, merchData) {
+						var _merchData$content;
+						ResultStore_classCallCheck(this, ResultStore);
+						var results = (resultData || []).map(function (result) {
+							return new Product(services, result);
+						});
+						if (
+							null != merchData &&
+							null !== (_merchData$content = merchData.content) &&
+							void 0 !== _merchData$content &&
+							_merchData$content.inline
+						) {
+							var banners = merchData.content.inline
+								.sort(function (a, b) {
+									return a.config.position.index - b.config.position.index;
+								})
+								.map(function (banner) {
+									return new Banner(services, banner);
+								});
+							banners &&
+								null != paginationData &&
+								paginationData.totalResults &&
+								(results = (function addBannersToResults(config, results, banners, paginationData) {
+									var _config$settings,
+										productCount = results.length,
+										minIndex = paginationData.pageSize * (paginationData.page - 1),
+										maxIndex = minIndex + paginationData.pageSize;
+									null != config &&
+										null !== (_config$settings = config.settings) &&
+										void 0 !== _config$settings &&
+										_config$settings.infinite &&
+										(minIndex = 0);
+									return (
+										banners
+											.reduce(function (adding, banner) {
+												var resultCount = productCount + adding.length;
+												return (
+													banner.config.position.index >= minIndex &&
+														(banner.config.position.index < maxIndex || resultCount < paginationData.pageSize) &&
+														adding.push(banner),
+													adding
+												);
+											}, [])
+											.forEach(function (banner, index) {
+												var adjustedIndex = banner.config.position.index - minIndex;
+												adjustedIndex > productCount - 1 && (adjustedIndex = productCount + index), results.splice(adjustedIndex, 0, banner);
+											}),
+										results
+									);
+								})(config, results, banners, paginationData));
+						}
+						return _super.call.apply(_super, [this].concat(ResultStore_toConsumableArray(results)));
+					}
+					return (
+						ResultStore_createClass(ResultStore, null, [
+							{
+								key: _Symbol$species,
+								get: function get() {
+									return Array;
+								},
+							},
+						]),
+						ResultStore
+					);
+				})(ResultStore_wrapNativeSuper(Array), Symbol.species),
+				Banner = ResultStore_createClass(function Banner(services, banner) {
+					ResultStore_classCallCheck(this, Banner),
+						(this.type = 'banner'),
+						(this.attributes = {}),
+						(this.mappings = { core: {} }),
+						(this.custom = {}),
+						(this.id = 'ss-ib-' + banner.config.position.index),
+						(this.config = banner.config),
+						(this.value = banner.value),
+						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, mappings: mobx_esm.LO, attributes: mobx_esm.LO });
+				}),
+				Product = ResultStore_createClass(function Product(services, result) {
+					var _result$children;
+					ResultStore_classCallCheck(this, Product),
+						(this.type = 'product'),
+						(this.attributes = {}),
+						(this.mappings = { core: {} }),
+						(this.custom = {}),
+						(this.children = []),
+						(this.id = result.id),
+						(this.attributes = result.attributes),
+						(this.mappings = result.mappings),
+						null != result &&
+							null !== (_result$children = result.children) &&
+							void 0 !== _result$children &&
+							_result$children.length &&
+							(this.children = result.children.map(function (variant, index) {
+								return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
+							})),
+						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
+					var coreObservables = Object.keys(result.mappings.core).reduce(function (map, key) {
+						var _Object$assign;
+						return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.LO), _Object$assign));
+					}, {});
+					(0, mobx_esm.rC)(this.mappings.core, coreObservables);
+				}),
+				Child = ResultStore_createClass(function Child(services, result) {
+					ResultStore_classCallCheck(this, Child),
+						(this.type = 'child'),
+						(this.attributes = {}),
+						(this.custom = {}),
+						(this.id = result.id),
+						(this.attributes = result.attributes),
+						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
+				});
+			__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js');
+			function PaginationStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function PaginationStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function PaginationStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && PaginationStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && PaginationStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var PaginationStore = (function () {
+					function PaginationStore(config, services) {
+						var paginationData =
+							arguments.length > 2 && void 0 !== arguments[2]
+								? arguments[2]
+								: { page: void 0, pageSize: void 0, totalResults: void 0, defaultPageSize: 24, totalPages: void 0 };
+						PaginationStore_classCallCheck(this, PaginationStore),
+							(this.services = services),
+							(this.controllerConfig = config),
+							(this.page = paginationData.page),
+							(this.pageSize = paginationData.pageSize),
+							(this.totalResults = paginationData.totalResults),
+							(this.defaultPageSize = paginationData.defaultPageSize),
+							(this.totalPages = paginationData.totalPages),
+							(this.pageSizeOptions = [
+								{ label: 'Show ' + this.defaultPageSize, value: this.defaultPageSize },
+								{ label: 'Show ' + 2 * this.defaultPageSize, value: 2 * this.defaultPageSize },
+								{ label: 'Show ' + 3 * this.defaultPageSize, value: 3 * this.defaultPageSize },
+							]),
+							(0, mobx_esm.rC)(this, {
+								page: mobx_esm.LO,
+								pageSize: mobx_esm.LO,
+								totalResults: mobx_esm.LO,
+								totalPages: mobx_esm.LO,
+								begin: mobx_esm.Fl,
+								end: mobx_esm.Fl,
+								multiplePages: mobx_esm.Fl,
+								current: mobx_esm.Fl,
+								first: mobx_esm.Fl,
+								last: mobx_esm.Fl,
+								next: mobx_esm.Fl,
+								previous: mobx_esm.Fl,
+								getPages: mobx_esm.aD,
+								setPageSize: mobx_esm.aD,
+							});
+					}
+					return (
+						PaginationStore_createClass(PaginationStore, [
+							{
+								key: 'begin',
+								get: function get() {
+									var _this$controllerConfi;
+									return null !== (_this$controllerConfi = this.controllerConfig.settings) &&
+										void 0 !== _this$controllerConfi &&
+										_this$controllerConfi.infinite
+										? 1
+										: this.pageSize * (this.page - 1) + 1;
+								},
+							},
+							{
+								key: 'end',
+								get: function get() {
+									return this.pageSize * this.page > this.totalResults ? this.totalResults : this.pageSize * this.page;
+								},
+							},
+							{
+								key: 'multiplePages',
+								get: function get() {
+									return this.pageSize < this.totalResults;
+								},
+							},
+							{
+								key: 'current',
+								get: function get() {
+									return new Page(this.services, { number: this.page, active: !0 });
+								},
+							},
+							{
+								key: 'first',
+								get: function get() {
+									return new Page(this.services, { number: 1, active: 1 == this.page });
+								},
+							},
+							{
+								key: 'last',
+								get: function get() {
+									return new Page(this.services, { number: this.totalPages, active: this.totalPages == this.page });
+								},
+							},
+							{
+								key: 'next',
+								get: function get() {
+									if (this.page < this.totalPages) return new Page(this.services, { number: this.page + 1 });
+								},
+							},
+							{
+								key: 'previous',
+								get: function get() {
+									if (this.page > 1) return new Page(this.services, { number: this.page - 1 });
+								},
+							},
+							{
+								key: 'getPages',
+								value: function getPages(min, max) {
+									if (!Number.isInteger(min)) return [];
+									if (Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
+									else {
+										var surrounding = min - 1,
+											from = this.page,
+											to = this.page,
+											last = to - from;
+										do {
+											if (((last = to - from), to < this.totalPages && to++, to - from >= surrounding)) break;
+											from > 1 && from--;
+										} while (last != to - from && to - from < surrounding);
+										(min = from - this.page), (max = to - this.page);
+									}
+									for (var pages = [], i = this.page + min; i <= this.page + max; i++)
+										i > 0 && i <= this.totalPages && pages.push(new Page(this.services, { number: i, active: i == this.page }));
+									return pages;
+								},
+							},
+							{
+								key: 'setPageSize',
+								value: function setPageSize(num) {
+									num && this.services.urlManager.remove('page').set('pageSize', num).go();
+								},
+							},
+						]),
+						PaginationStore
+					);
+				})(),
+				Page = PaginationStore_createClass(function Page(services, page) {
+					var _this$services, _this$services$urlMan;
+					PaginationStore_classCallCheck(this, Page),
+						(this.services = services),
+						(this.number = page.number),
+						(this.active = page.active || !1),
+						(this.url =
+							null === (_this$services = this.services) ||
+							void 0 === _this$services ||
+							null === (_this$services$urlMan = _this$services.urlManager) ||
+							void 0 === _this$services$urlMan
+								? void 0
+								: _this$services$urlMan.set('page', this.number)),
+						(this.key = this.url.href);
+				});
+			function SortingStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function SortingStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function SortingStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && SortingStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && SortingStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var SortingStore = (function () {
+					function SortingStore(services, sorting, search, meta) {
+						if ((SortingStore_classCallCheck(this, SortingStore), (this.options = []), services && meta.sortOptions)) {
+							var activeSort = sorting && sorting.length && sorting[0];
+							(this.options = meta.sortOptions
+								.filter(function (option) {
+									return null != search && search.query ? option : 'field' == option.type;
+								})
+								.map(function (option, index) {
+									return (
+										(option.active = !1),
+										activeSort && activeSort.field == option.field && activeSort.direction == option.direction
+											? (option.active = !0)
+											: activeSort || 0 !== index || (option.active = !0),
+										(option.default = !1),
+										0 === index && (option.default = !0),
+										new Option(services, option, index)
+									);
+								})),
+								(0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
+						}
+					}
+					return (
+						SortingStore_createClass(SortingStore, [
+							{
+								key: 'current',
+								get: function get() {
+									return this.options
+										.filter(function (option) {
+											return option.active;
+										})
+										.pop();
+								},
+							},
+						]),
+						SortingStore
+					);
+				})(),
+				Option = SortingStore_createClass(function Option(services, option, index) {
+					SortingStore_classCallCheck(this, Option),
+						(this.active = option.active),
+						(this.default = option.default),
+						(this.field = option.field),
+						(this.label = option.label),
+						(this.direction = option.direction),
+						(this.type = option.type),
+						(this.value = option.label + ':' + option.field + ':' + option.direction + ':' + index),
+						this.default
+							? (this.url = services.urlManager.remove('page').remove('sort'))
+							: (this.url = services.urlManager.remove('page').set('sort', [{ field: this.field, direction: this.direction }])),
+						(0, mobx_esm.rC)(this, { field: mobx_esm.LO, label: mobx_esm.LO, direction: mobx_esm.LO, type: mobx_esm.LO, value: mobx_esm.LO });
+				});
+			function AbstractStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			(0, mobx_esm.jQ)({ enforceActions: 'never' });
+			var AbstractStore = (function () {
+				function AbstractStore(config) {
+					!(function AbstractStore_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, AbstractStore),
+						(this.custom = {}),
+						(this.loading = !1),
+						(this.loaded = !1),
+						(this.config = config),
+						(0, mobx_esm.rC)(this, { custom: mobx_esm.LO, loading: mobx_esm.LO, loaded: mobx_esm.LO });
+				}
+				return (
+					(function AbstractStore_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && AbstractStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && AbstractStore_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
+						);
+					})(AbstractStore, [
+						{
+							key: 'setConfig',
+							value: function setConfig(newConfig) {
+								this.config = newConfig;
+							},
+						},
+						{
+							key: 'toJSON',
+							value: function toJSON() {
+								var thing = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : this;
+								return (0, mobx_esm.ZN)(thing);
+							},
+						},
+					]),
+					AbstractStore
+				);
+			})();
+			function SearchStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function SearchStore_setPrototypeOf(o, p) {
+				return (
+					(SearchStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					SearchStore_setPrototypeOf(o, p)
+				);
+			}
+			function SearchStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = (function SearchStore_isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = SearchStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = SearchStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return SearchStore_possibleConstructorReturn(this, result);
+				};
+			}
+			function SearchStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return SearchStore_assertThisInitialized(self);
+			}
+			function SearchStore_assertThisInitialized(self) {
+				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+				return self;
+			}
+			function SearchStore_getPrototypeOf(o) {
+				return (
+					(SearchStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					SearchStore_getPrototypeOf(o)
+				);
+			}
+			var SearchStore = (function (_AbstractStore) {
+				!(function SearchStore_inherits(subClass, superClass) {
+					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+					(subClass.prototype = Object.create(superClass && superClass.prototype, {
+						constructor: { value: subClass, writable: !0, configurable: !0 },
+					})),
+						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+						superClass && SearchStore_setPrototypeOf(subClass, superClass);
+				})(SearchStore, _AbstractStore);
+				var _super = SearchStore_createSuper(SearchStore);
+				function SearchStore(config, services) {
+					var _services$urlManager, _this;
+					if (
+						((function SearchStore_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, SearchStore),
+						((_this = _super.call(this, config)).meta = {}),
+						'object' != typeof services ||
+							'function' !=
+								typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
+									? void 0
+									: _services$urlManager.subscribe))
+					)
+						throw new Error('Invalid service \'urlManager\' passed to SearchStore. Missing "subscribe" function.');
+					return (
+						(_this.services = services),
+						(_this.storage = new StorageStore()),
+						_this.update({ meta: _this.meta }),
+						(0, mobx_esm.rC)(SearchStore_assertThisInitialized(_this), {
+							search: mobx_esm.LO,
+							merchandising: mobx_esm.LO,
+							facets: mobx_esm.LO,
+							filters: mobx_esm.LO,
+							results: mobx_esm.LO,
+							pagination: mobx_esm.LO,
+							sorting: mobx_esm.LO,
+						}),
+						_this
+					);
+				}
+				return (
+					(function SearchStore_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && SearchStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && SearchStore_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
+						);
+					})(SearchStore, [
+						{
+							key: 'update',
+							value: function update(data) {
+								(this.error = void 0),
+									(this.data = JSON.parse(JSON.stringify(data))),
+									(this.loaded = !!data.pagination),
+									(this.meta = data.meta),
+									(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
+									(this.search = new QueryStore(this.services, data.search)),
+									(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
+									(this.filters = new FilterStore(this.services, data.filters, this.meta)),
+									(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+									(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
+									(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+							},
+						},
+					]),
+					SearchStore
+				);
+			})(AbstractStore);
+			function ProfileStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function ProfileStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && ProfileStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && ProfileStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var ProfileStore = ProfileStore_createClass(function ProfileStore(services, profile) {
+				!(function ProfileStore_classCallCheck(instance, Constructor) {
+					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+				})(this, ProfileStore),
+					(this.display = {}),
+					null != profile &&
+						profile.tag &&
+						((this.tag = profile.tag),
+						(this.placement = profile.placement),
+						(this.display = profile.display),
+						(0, mobx_esm.rC)(this, { tag: mobx_esm.LO, placement: mobx_esm.LO, display: mobx_esm.LO }));
+			});
+			function RecommendationStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function RecommendationStore_setPrototypeOf(o, p) {
+				return (
+					(RecommendationStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					RecommendationStore_setPrototypeOf(o, p)
+				);
+			}
+			function RecommendationStore_createSuper(Derived) {
+				var hasNativeReflectConstruct = (function RecommendationStore_isNativeReflectConstruct() {
+					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+					if (Reflect.construct.sham) return !1;
+					if ('function' == typeof Proxy) return !0;
+					try {
+						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+					} catch (e) {
+						return !1;
+					}
+				})();
+				return function _createSuperInternal() {
+					var result,
+						Super = RecommendationStore_getPrototypeOf(Derived);
+					if (hasNativeReflectConstruct) {
+						var NewTarget = RecommendationStore_getPrototypeOf(this).constructor;
+						result = Reflect.construct(Super, arguments, NewTarget);
+					} else result = Super.apply(this, arguments);
+					return RecommendationStore_possibleConstructorReturn(this, result);
+				};
+			}
+			function RecommendationStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return RecommendationStore_assertThisInitialized(self);
+			}
+			function RecommendationStore_assertThisInitialized(self) {
+				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+				return self;
+			}
+			function RecommendationStore_getPrototypeOf(o) {
+				return (
+					(RecommendationStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					RecommendationStore_getPrototypeOf(o)
+				);
+			}
+			var RecommendationStore = (function (_AbstractStore) {
+				!(function RecommendationStore_inherits(subClass, superClass) {
+					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+					(subClass.prototype = Object.create(superClass && superClass.prototype, {
+						constructor: { value: subClass, writable: !0, configurable: !0 },
+					})),
+						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+						superClass && RecommendationStore_setPrototypeOf(subClass, superClass);
+				})(RecommendationStore, _AbstractStore);
+				var _super = RecommendationStore_createSuper(RecommendationStore);
+				function RecommendationStore(config, services) {
+					var _services$urlManager, _this;
+					if (
+						((function RecommendationStore_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, RecommendationStore),
+						((_this = _super.call(this, config)).loaded = !1),
+						'object' != typeof services ||
+							'function' !=
+								typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
+									? void 0
+									: _services$urlManager.subscribe))
+					)
+						throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
+					return (
+						(_this.services = services),
+						_this.reset(),
+						(0, mobx_esm.rC)(RecommendationStore_assertThisInitialized(_this), { profile: mobx_esm.LO, results: mobx_esm.LO }),
+						_this
+					);
+				}
+				return (
+					(function RecommendationStore_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && RecommendationStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && RecommendationStore_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
+						);
+					})(RecommendationStore, [
+						{
+							key: 'reset',
+							value: function reset() {
+								this.update({});
+							},
+						},
+						{
+							key: 'update',
+							value: function update(data) {
+								(this.error = void 0),
+									(this.loaded = !!data.profile),
+									(this.profile = new ProfileStore(this.services, data.profile)),
+									(this.results = new ResultStore(this.config, this.services, data.results));
+							},
+						},
+					]),
+					RecommendationStore
+				);
+			})(AbstractStore);
+			function StateStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function StateStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function StateStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && StateStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && StateStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var StateStore = (function () {
+					function StateStore(services) {
+						StateStore_classCallCheck(this, StateStore),
+							(this.focusedInput = void 0),
+							(this.input = ''),
+							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
+							(this.url = services.urlManager),
+							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
+					}
+					return (
+						StateStore_createClass(StateStore, [
+							{
+								key: 'reset',
+								value: function reset() {
+									(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
+								},
+							},
+						]),
+						StateStore
+					);
+				})(),
+				Lock = (function () {
+					function Lock() {
+						var state = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
+						StateStore_classCallCheck(this, Lock), (this.state = this.startState = state);
+					}
+					return (
+						StateStore_createClass(Lock, [
+							{
+								key: 'reset',
+								value: function reset() {
+									this.state = this.startState;
+								},
+							},
+							{
+								key: 'locked',
+								get: function get() {
+									return this.state;
+								},
+							},
+							{
+								key: 'lock',
+								value: function lock() {
+									this.state = !0;
+								},
+							},
+							{
+								key: 'unlock',
+								value: function unlock() {
+									this.state = !1;
+								},
+							},
+						]),
+						Lock
+					);
+				})();
+			function TermStore_toConsumableArray(arr) {
+				return (
+					(function TermStore_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return TermStore_arrayLikeToArray(arr);
+					})(arr) ||
+					(function TermStore_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function TermStore_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return TermStore_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return TermStore_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function TermStore_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function TermStore_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function TermStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function TermStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function TermStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && TermStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && TermStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function TermStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return (function TermStore_assertThisInitialized(self) {
+					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+					return self;
+				})(self);
+			}
+			function TermStore_wrapNativeSuper(Class) {
+				var _cache = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(TermStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+						if (
+							null === Class ||
+							!(function TermStore_isNativeFunction(fn) {
+								return -1 !== Function.toString.call(fn).indexOf('[native code]');
+							})(Class)
+						)
+							return Class;
+						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== _cache) {
+							if (_cache.has(Class)) return _cache.get(Class);
+							_cache.set(Class, Wrapper);
+						}
+						function Wrapper() {
+							return TermStore_construct(Class, arguments, TermStore_getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(Class.prototype, {
+								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
+							})),
+							TermStore_setPrototypeOf(Wrapper, Class)
+						);
+					}),
+					TermStore_wrapNativeSuper(Class)
+				);
+			}
+			function TermStore_construct(Parent, args, Class) {
+				return (
+					(TermStore_construct = TermStore_isNativeReflectConstruct()
+						? Reflect.construct
+						: function _construct(Parent, args, Class) {
+								var a = [null];
+								a.push.apply(a, args);
+								var instance = new (Function.bind.apply(Parent, a))();
+								return Class && TermStore_setPrototypeOf(instance, Class.prototype), instance;
+						  }),
+					TermStore_construct.apply(null, arguments)
+				);
+			}
+			function TermStore_isNativeReflectConstruct() {
+				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+				if (Reflect.construct.sham) return !1;
+				if ('function' == typeof Proxy) return !0;
+				try {
+					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+				} catch (e) {
+					return !1;
+				}
+			}
+			function TermStore_setPrototypeOf(o, p) {
+				return (
+					(TermStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					TermStore_setPrototypeOf(o, p)
+				);
+			}
+			function TermStore_getPrototypeOf(o) {
+				return (
+					(TermStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					TermStore_getPrototypeOf(o)
+				);
+			}
+			var TermStore = (function (_Array, _Symbol$species) {
+					!(function TermStore_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && TermStore_setPrototypeOf(subClass, superClass);
+					})(TermStore, _Array);
+					var _super = (function TermStore_createSuper(Derived) {
+						var hasNativeReflectConstruct = TermStore_isNativeReflectConstruct();
+						return function _createSuperInternal() {
+							var result,
+								Super = TermStore_getPrototypeOf(Derived);
+							if (hasNativeReflectConstruct) {
+								var NewTarget = TermStore_getPrototypeOf(this).constructor;
+								result = Reflect.construct(Super, arguments, NewTarget);
+							} else result = Super.apply(this, arguments);
+							return TermStore_possibleConstructorReturn(this, result);
+						};
+					})(TermStore);
+					function TermStore(services, autocomplete, paginationData, resetTerms, rootState) {
+						var _autocomplete$suggest;
+						TermStore_classCallCheck(this, TermStore);
+						var suggestions = TermStore_toConsumableArray(
+							(null != autocomplete && autocomplete.alternatives ? autocomplete.alternatives : []).map(function (term) {
+								return term.text;
+							})
+						);
+						null != autocomplete &&
+						null !== (_autocomplete$suggest = autocomplete.suggested) &&
+						void 0 !== _autocomplete$suggest &&
+						_autocomplete$suggest.text
+							? suggestions.unshift(autocomplete.suggested.text)
+							: null != autocomplete &&
+							  autocomplete.query &&
+							  paginationData.totalResults &&
+							  suggestions.unshift(null == autocomplete ? void 0 : autocomplete.query);
+						var terms = [];
+						return (
+							suggestions.map(function (term, index) {
+								return terms.push(new Term(services, { active: 0 === index, value: term }, terms, resetTerms, rootState));
+							}),
+							_super.call.apply(_super, [this].concat(terms))
+						);
+					}
+					return (
+						TermStore_createClass(TermStore, null, [
+							{
+								key: _Symbol$species,
+								get: function get() {
+									return Array;
+								},
+							},
+						]),
+						TermStore
+					);
+				})(TermStore_wrapNativeSuper(Array), Symbol.species),
+				Term = TermStore_createClass(function Term(services, term, terms, resetTerms, rootState) {
+					var _services$urlManager,
+						_this = this;
+					TermStore_classCallCheck(this, Term),
+						(this.active = term.active),
+						(this.value = term.value),
+						(this.url =
+							null == services || null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
+								? void 0
+								: _services$urlManager.set({ query: this.value })),
+						(this.preview = function () {
+							var _this$url;
+							resetTerms(),
+								terms.map(function (term) {
+									term.active = !1;
+								}),
+								(_this.active = !0),
+								rootState.locks.terms.lock(),
+								rootState.locks.facets.unlock(),
+								null === (_this$url = _this.url) || void 0 === _this$url || _this$url.set({ query: _this.value }).go();
+						}),
+						(0, mobx_esm.rC)(this, { active: mobx_esm.LO, value: mobx_esm.LO });
+				});
+			function TrendingStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function TrendingStore_possibleConstructorReturn(self, call) {
+				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
+				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
+				return (function TrendingStore_assertThisInitialized(self) {
+					if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+					return self;
+				})(self);
+			}
+			function TrendingStore_wrapNativeSuper(Class) {
+				var _cache = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(TrendingStore_wrapNativeSuper = function _wrapNativeSuper(Class) {
+						if (
+							null === Class ||
+							!(function TrendingStore_isNativeFunction(fn) {
+								return -1 !== Function.toString.call(fn).indexOf('[native code]');
+							})(Class)
+						)
+							return Class;
+						if ('function' != typeof Class) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== _cache) {
+							if (_cache.has(Class)) return _cache.get(Class);
+							_cache.set(Class, Wrapper);
+						}
+						function Wrapper() {
+							return TrendingStore_construct(Class, arguments, TrendingStore_getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(Class.prototype, {
+								constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 },
+							})),
+							TrendingStore_setPrototypeOf(Wrapper, Class)
+						);
+					}),
+					TrendingStore_wrapNativeSuper(Class)
+				);
+			}
+			function TrendingStore_construct(Parent, args, Class) {
+				return (
+					(TrendingStore_construct = TrendingStore_isNativeReflectConstruct()
+						? Reflect.construct
+						: function _construct(Parent, args, Class) {
+								var a = [null];
+								a.push.apply(a, args);
+								var instance = new (Function.bind.apply(Parent, a))();
+								return Class && TrendingStore_setPrototypeOf(instance, Class.prototype), instance;
+						  }),
+					TrendingStore_construct.apply(null, arguments)
+				);
+			}
+			function TrendingStore_isNativeReflectConstruct() {
+				if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
+				if (Reflect.construct.sham) return !1;
+				if ('function' == typeof Proxy) return !0;
+				try {
+					return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+				} catch (e) {
+					return !1;
+				}
+			}
+			function TrendingStore_setPrototypeOf(o, p) {
+				return (
+					(TrendingStore_setPrototypeOf =
+						Object.setPrototypeOf ||
+						function _setPrototypeOf(o, p) {
+							return (o.__proto__ = p), o;
+						}),
+					TrendingStore_setPrototypeOf(o, p)
+				);
+			}
+			function TrendingStore_getPrototypeOf(o) {
+				return (
+					(TrendingStore_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf
+						: function _getPrototypeOf(o) {
+								return o.__proto__ || Object.getPrototypeOf(o);
+						  }),
+					TrendingStore_getPrototypeOf(o)
+				);
+			}
+			var TrendingStore = (function (_Array, _Symbol$species) {
+				!(function TrendingStore_inherits(subClass, superClass) {
+					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+					(subClass.prototype = Object.create(superClass && superClass.prototype, {
+						constructor: { value: subClass, writable: !0, configurable: !0 },
+					})),
+						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+						superClass && TrendingStore_setPrototypeOf(subClass, superClass);
+				})(TrendingStore, _Array);
+				var _super = (function TrendingStore_createSuper(Derived) {
+					var hasNativeReflectConstruct = TrendingStore_isNativeReflectConstruct();
+					return function _createSuperInternal() {
+						var result,
+							Super = TrendingStore_getPrototypeOf(Derived);
+						if (hasNativeReflectConstruct) {
+							var NewTarget = TrendingStore_getPrototypeOf(this).constructor;
+							result = Reflect.construct(Super, arguments, NewTarget);
+						} else result = Super.apply(this, arguments);
+						return TrendingStore_possibleConstructorReturn(this, result);
+					};
+				})(TrendingStore);
+				function TrendingStore(services, trendingData, resetTerms, rootState) {
+					var _trendingData$queries;
+					!(function TrendingStore_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, TrendingStore);
+					var terms = [];
+					return (
+						null == trendingData ||
+							null === (_trendingData$queries = trendingData.queries) ||
+							void 0 === _trendingData$queries ||
+							_trendingData$queries.map(function (term) {
+								terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
+							}),
+						_super.call.apply(_super, [this].concat(terms))
+					);
+				}
+				return (
+					(function TrendingStore_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && TrendingStore_defineProperties(Constructor.prototype, protoProps),
+							staticProps && TrendingStore_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
+						);
+					})(TrendingStore, null, [
+						{
+							key: _Symbol$species,
+							get: function get() {
+								return Array;
+							},
+						},
+					]),
+					TrendingStore
+				);
+			})(TrendingStore_wrapNativeSuper(Array), Symbol.species);
+			function Stores_QueryStore_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function Stores_QueryStore_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && Stores_QueryStore_defineProperties(Constructor.prototype, protoProps),
+					staticProps && Stores_QueryStore_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			function Stores_QueryStore_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			var QueryStore_QueryStore = Stores_QueryStore_createClass(function QueryStore(services, autocomplete, search) {
+					Stores_QueryStore_classCallCheck(this, QueryStore);
+					var observables = {};
+					null != search &&
+						search.query &&
+						((this.query = new QueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
+						null != autocomplete &&
+							autocomplete.correctedQuery &&
+							((this.originalQuery = new QueryStore_Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
+						(0, mobx_esm.rC)(this, observables);
+				}),
+				QueryStore_Query = Stores_QueryStore_createClass(function Query(urlManager, query) {
+					Stores_QueryStore_classCallCheck(this, Query),
+						(this.string = query),
+						(this.url = urlManager.set({ query: this.string })),
+						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
+				});
 			function Stores_FacetStore_toConsumableArray(arr) {
 				return (
 					(function Stores_FacetStore_arrayWithoutHoles(arr) {
@@ -27298,170 +26608,528 @@
 				);
 			}
 			var AutocompleteStore = (function (_AbstractStore) {
-				!(function AutocompleteStore_inherits(subClass, superClass) {
-					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-					(subClass.prototype = Object.create(superClass && superClass.prototype, {
-						constructor: { value: subClass, writable: !0, configurable: !0 },
-					})),
-						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-						superClass && AutocompleteStore_setPrototypeOf(subClass, superClass);
-				})(AutocompleteStore, _AbstractStore);
-				var _super = AutocompleteStore_createSuper(AutocompleteStore);
-				function AutocompleteStore(config, services) {
-					var _services$urlManager, _this;
-					if (
-						((function AutocompleteStore_classCallCheck(instance, Constructor) {
-							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-						})(this, AutocompleteStore),
-						((_this = _super.call(this, config)).meta = {}),
-						'object' != typeof services ||
-							'function' !=
-								typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-									? void 0
-									: _services$urlManager.subscribe))
-					)
-						throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
-					return (
-						(_this.services = services),
-						(_this.state = new StateStore(services)),
-						(_this.storage = new StorageStore()),
-						(_this.trending = []),
-						_this.reset(),
-						(0, mobx_esm.rC)(AutocompleteStore_assertThisInitialized(_this), {
-							state: mobx_esm.LO,
-							search: mobx_esm.LO,
-							terms: mobx_esm.LO,
-							facets: mobx_esm.LO,
-							filters: mobx_esm.LO,
-							merchandising: mobx_esm.LO,
-							results: mobx_esm.LO,
-							pagination: mobx_esm.LO,
-							sorting: mobx_esm.LO,
-						}),
-						_this
-					);
-				}
-				return (
-					(function AutocompleteStore_createClass(Constructor, protoProps, staticProps) {
+					!(function AutocompleteStore_inherits(subClass, superClass) {
+						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
+						(subClass.prototype = Object.create(superClass && superClass.prototype, {
+							constructor: { value: subClass, writable: !0, configurable: !0 },
+						})),
+							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
+							superClass && AutocompleteStore_setPrototypeOf(subClass, superClass);
+					})(AutocompleteStore, _AbstractStore);
+					var _super = AutocompleteStore_createSuper(AutocompleteStore);
+					function AutocompleteStore(config, services) {
+						var _services$urlManager, _this;
+						if (
+							((function AutocompleteStore_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, AutocompleteStore),
+							((_this = _super.call(this, config)).meta = {}),
+							'object' != typeof services ||
+								'function' !=
+									typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
+										? void 0
+										: _services$urlManager.subscribe))
+						)
+							throw new Error('Invalid service \'urlManager\' passed to AutocompleteStore. Missing "subscribe" function.');
 						return (
-							protoProps && AutocompleteStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && AutocompleteStore_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
+							(_this.services = services),
+							(_this.state = new StateStore(services)),
+							(_this.storage = new StorageStore()),
+							(_this.trending = []),
+							_this.reset(),
+							(0, mobx_esm.rC)(AutocompleteStore_assertThisInitialized(_this), {
+								state: mobx_esm.LO,
+								search: mobx_esm.LO,
+								terms: mobx_esm.LO,
+								facets: mobx_esm.LO,
+								filters: mobx_esm.LO,
+								merchandising: mobx_esm.LO,
+								results: mobx_esm.LO,
+								pagination: mobx_esm.LO,
+								sorting: mobx_esm.LO,
+							}),
+							_this
 						);
-					})(AutocompleteStore, [
-						{
-							key: 'reset',
-							value: function reset() {
-								this.state.reset(), this.update({ meta: this.meta }), this.resetTrending();
+					}
+					return (
+						(function AutocompleteStore_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && AutocompleteStore_defineProperties(Constructor.prototype, protoProps),
+								staticProps && AutocompleteStore_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(AutocompleteStore, [
+							{
+								key: 'reset',
+								value: function reset() {
+									this.state.reset(), this.update({ meta: this.meta }), this.resetTrending();
+								},
 							},
-						},
-						{
-							key: 'resetTrending',
-							value: function resetTrending() {
-								var _this$trending;
-								null !== (_this$trending = this.trending) &&
-									void 0 !== _this$trending &&
-									_this$trending.length &&
-									this.trending.forEach(function (term) {
-										term.active = !1;
-									});
+							{
+								key: 'resetTrending',
+								value: function resetTrending() {
+									var _this$trending;
+									null !== (_this$trending = this.trending) &&
+										void 0 !== _this$trending &&
+										_this$trending.length &&
+										this.trending.forEach(function (term) {
+											term.active = !1;
+										});
+								},
 							},
-						},
-						{
-							key: 'resetTerms',
-							value: function resetTerms() {
-								var _this$terms;
-								(null === (_this$terms = this.terms) || void 0 === _this$terms ? void 0 : _this$terms.length) > 0 &&
-									this.terms.forEach(function (term) {
-										term.active = !1;
-									});
+							{
+								key: 'resetTerms',
+								value: function resetTerms() {
+									var _this$terms;
+									(null === (_this$terms = this.terms) || void 0 === _this$terms ? void 0 : _this$terms.length) > 0 &&
+										this.terms.forEach(function (term) {
+											term.active = !1;
+										});
+								},
 							},
-						},
-						{
-							key: 'setService',
-							value: function setService(name, service) {
-								this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
+							{
+								key: 'setService',
+								value: function setService(name, service) {
+									this.services[name] && service && ((this.services[name] = service), 'urlManager' === name && (this.state.url = service));
+								},
 							},
-						},
-						{
-							key: 'updateTrendingTerms',
-							value: function updateTrendingTerms(data) {
-								var _this2 = this;
-								this.trending = new TrendingStore(
-									this.services,
-									data.trending,
-									function () {
-										_this2.resetTerms();
-									},
-									this.state
-								);
+							{
+								key: 'updateTrendingTerms',
+								value: function updateTrendingTerms(data) {
+									var _this2 = this;
+									this.trending = new TrendingStore(
+										this.services,
+										data.trending,
+										function () {
+											_this2.resetTerms();
+										},
+										this.state
+									);
+								},
 							},
-						},
-						{
-							key: 'update',
-							value: function update(data) {
-								var _this3 = this;
-								(this.error = void 0),
-									(this.loaded = !!data.pagination),
-									(this.meta = data.meta),
-									data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
-									this.state.locks.terms.locked ||
-										((this.terms = new TermStore(
-											this.services,
-											data.autocomplete,
-											data.pagination,
-											function () {
-												_this3.resetTrending();
-											},
-											this.state
-										)),
-										data.autocomplete && this.state.locks.terms.lock()),
-									(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-									(this.search = new QueryStore(this.services, data.autocomplete, data.search)),
-									this.state.locks.facets.locked ||
-										(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
-									(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-									(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
-									((0 === this.results.length &&
-										!this.trending.filter(function (term) {
-											return term.active;
-										}).length) ||
-										this.terms.filter(function (term) {
-											return term.active;
-										}).length) &&
-										this.resetTrending(),
-									(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-									(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+							{
+								key: 'update',
+								value: function update(data) {
+									var _this3 = this;
+									(this.error = void 0),
+										(this.loaded = !!data.pagination),
+										(this.meta = data.meta),
+										data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
+										this.state.locks.terms.locked ||
+											((this.terms = new TermStore(
+												this.services,
+												data.autocomplete,
+												data.pagination,
+												function () {
+													_this3.resetTrending();
+												},
+												this.state
+											)),
+											data.autocomplete && this.state.locks.terms.lock()),
+										(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
+										(this.search = new QueryStore_QueryStore(this.services, data.autocomplete, data.search)),
+										this.state.locks.facets.locked ||
+											(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
+										(this.filters = new FilterStore(this.services, data.filters, this.meta)),
+										(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+										((0 === this.results.length &&
+											!this.trending.filter(function (term) {
+												return term.active;
+											}).length) ||
+											this.terms.filter(function (term) {
+												return term.active;
+											}).length) &&
+											this.resetTrending(),
+										(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
+										(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+								},
 							},
-						},
-					]),
-					AutocompleteStore
-				);
-			})(AbstractStore);
-			(0, mobx_esm.jQ)({ useProxies: 'never' });
-			function SearchController_toConsumableArray(arr) {
+						]),
+						AutocompleteStore
+					);
+				})(AbstractStore),
+				seamless_immutable_development =
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.some.js'),
+					__webpack_require__('../../node_modules/seamless-immutable/seamless-immutable.development.js')),
+				seamless_immutable_development_default = __webpack_require__.n(seamless_immutable_development);
+			function UrlManager_toConsumableArray(arr) {
 				return (
-					(function SearchController_arrayWithoutHoles(arr) {
-						if (Array.isArray(arr)) return SearchController_arrayLikeToArray(arr);
+					(function UrlManager_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return UrlManager_arrayLikeToArray(arr);
 					})(arr) ||
-					(function SearchController_iterableToArray(iter) {
+					(function UrlManager_iterableToArray(iter) {
 						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
 					})(arr) ||
-					SearchController_unsupportedIterableToArray(arr) ||
-					(function SearchController_nonIterableSpread() {
+					(function UrlManager_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return UrlManager_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return UrlManager_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function UrlManager_nonIterableSpread() {
 						throw new TypeError(
 							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function SearchController_slicedToArray(arr, i) {
+			function UrlManager_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function UrlManager_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function UrlManager_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function UrlManager_createClass(Constructor, protoProps, staticProps) {
 				return (
-					(function SearchController_arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
-					(function SearchController_iterableToArrayLimit(arr, i) {
+					protoProps && UrlManager_defineProperties(Constructor.prototype, protoProps),
+					staticProps && UrlManager_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var RangeValueProperties,
+				ParamLocationType,
+				WatcherPool = (function () {
+					function WatcherPool() {
+						UrlManager_classCallCheck(this, WatcherPool), (this.callbacks = []);
+					}
+					return (
+						UrlManager_createClass(WatcherPool, [
+							{
+								key: 'subscribe',
+								value: function subscribe(cb) {
+									var _this = this;
+									return (
+										this.callbacks.push(cb),
+										function () {
+											return (_this.callbacks = _this.callbacks.filter(function (_cb) {
+												return _cb != cb;
+											}));
+										}
+									);
+								},
+							},
+							{
+								key: 'notify',
+								value: function notify() {
+									this.callbacks.forEach(function (cb) {
+										return cb();
+									});
+								},
+							},
+						]),
+						WatcherPool
+					);
+				})(),
+				UrlManager = (function () {
+					function UrlManager(translator, linker, globalState, localState, watcherPool) {
+						var _this2 = this,
+							omissions = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : [],
+							detached = arguments.length > 6 ? arguments[6] : void 0;
+						UrlManager_classCallCheck(this, UrlManager),
+							(this.linker = linker),
+							(this.omissions = omissions),
+							(this.detached = detached),
+							(this.urlState = seamless_immutable_development_default()({})),
+							(this.globalState = seamless_immutable_development_default()({})),
+							(this.localState = seamless_immutable_development_default()({})),
+							(this.mergedState = seamless_immutable_development_default()({})),
+							(this.localState = seamless_immutable_development_default()(localState || {})),
+							(this.globalState = seamless_immutable_development_default()(globalState || {})),
+							(this.translator = translator),
+							watcherPool
+								? (this.watcherPool = watcherPool)
+								: ((this.watcherPool = new WatcherPool()),
+								  this.translator.bindExternalEvents instanceof Function &&
+										this.translator.bindExternalEvents(function () {
+											return _this2.watcherPool.notify();
+										})),
+							this.subscribe(function () {
+								_this2.refresh();
+							}),
+							this.refresh();
+					}
+					return (
+						UrlManager_createClass(UrlManager, [
+							{
+								key: 'without',
+								value: function without(obj, fullPath, values) {
+									var path = fullPath.slice(0, -1),
+										lastKey = fullPath[fullPath.length - 1];
+									return path.length
+										? obj.getIn(path)
+											? obj.updateIn(path, function (node) {
+													return updateNode(lastKey, node);
+											  })
+											: obj
+										: null != values && values.length
+										? updateNode(lastKey, obj)
+										: obj.without(lastKey);
+									function updateNode(key, node) {
+										return void 0 === node[lastKey]
+											? node
+											: node[lastKey] instanceof Array
+											? values && values.length
+												? node.set(
+														lastKey,
+														node[lastKey].filter(function (value) {
+															return !values.some(function (removeValue) {
+																return compareObjects(value, removeValue);
+															});
+														})
+												  )
+												: node.without(lastKey)
+											: 'object' == typeof node
+											? node.without(lastKey)
+											: node;
+									}
+								},
+							},
+							{
+								key: 'getTranslatorUrl',
+								value: function getTranslatorUrl() {
+									return this.detached ? this.detached.url : this.translator.getCurrentUrl();
+								},
+							},
+							{
+								key: 'refresh',
+								value: function refresh() {
+									var _this3 = this;
+									(this.prevState = this.mergedState),
+										(this.urlState = this.omissions.reduce(function (state, om) {
+											return _this3.without(state, om.path, om.values);
+										}, seamless_immutable_development_default()(this.translator.deserialize(this.getTranslatorUrl())))),
+										(this.mergedState = this.globalState.merge(this.urlState, { deep: !0, merger: arrayConcatMerger })),
+										(this.mergedState = this.mergedState.merge(this.localState, { deep: !0, merger: arrayConcatMerger }));
+								},
+							},
+							{
+								key: 'state',
+								get: function get() {
+									return this.mergedState;
+								},
+							},
+							{
+								key: 'unpackPathAndState',
+								value: function unpackPathAndState(stateOrPath, _state) {
+									return {
+										path: stateOrPath instanceof Array ? stateOrPath : 'string' == typeof stateOrPath ? stateOrPath.split('.') : [],
+										state: stateOrPath instanceof Array || 'object' != typeof stateOrPath ? (void 0 === _state ? {} : _state) : stateOrPath,
+									};
+								},
+							},
+							{
+								key: 'set',
+								value: function set() {
+									var _this$unpackPathAndSt = this.unpackPathAndState(
+											arguments.length <= 0 ? void 0 : arguments[0],
+											arguments.length <= 1 ? void 0 : arguments[1]
+										),
+										path = _this$unpackPathAndSt.path,
+										state = _this$unpackPathAndSt.state,
+										newState = path.length ? this.localState.setIn(path, removeArrayDuplicates(state)) : removeArrayDuplicates(state),
+										omissions = removeArrayDuplicates(
+											this.omissions.concat(
+												path.length
+													? { path }
+													: Object.keys(this.urlState).map(function (key) {
+															return { path: [key] };
+													  })
+											)
+										);
+									return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, omissions, this.detached);
+								},
+							},
+							{
+								key: 'merge',
+								value: function merge() {
+									var _this4 = this,
+										_this$unpackPathAndSt2 = this.unpackPathAndState(
+											arguments.length <= 0 ? void 0 : arguments[0],
+											arguments.length <= 1 ? void 0 : arguments[1]
+										),
+										path = _this$unpackPathAndSt2.path,
+										state = _this$unpackPathAndSt2.state,
+										newState = path.length
+											? this.localState.updateIn(path, function (oldState) {
+													if (oldState instanceof Array) {
+														var newValues = Array.isArray(state) ? state : [state];
+														return removeArrayDuplicates(oldState.concat(newValues));
+													}
+													if ('object' == typeof oldState)
+														return Array.isArray(state)
+															? state.length
+																? removeArrayDuplicates([oldState].concat(state))
+																: oldState
+															: oldState.merge(state, { deep: !0, merger: arrayConcatMerger });
+													if (void 0 !== oldState) {
+														var _newValues = (Array.isArray(state) ? state : [state]).filter(function (value) {
+															return !compareObjects(value, oldState);
+														});
+														return _newValues.length ? removeArrayDuplicates([oldState].concat(_newValues)) : oldState;
+													}
+													return void 0 === oldState && _this4.urlState.getIn(path) instanceof Array && !Array.isArray(state) ? [state] : state;
+											  })
+											: this.localState.merge(state, { deep: !0, merger: arrayConcatMerger });
+									return new UrlManager(this.translator, this.linker, this.globalState, newState, this.watcherPool, this.omissions, this.detached);
+								},
+							},
+							{
+								key: 'remove',
+								value: function remove(_path, values) {
+									var path = this.unpackPathAndState(_path, {}).path;
+									values = void 0 !== values ? (values instanceof Array ? values : [values]) : [];
+									var without = this.without(this.localState, path, values),
+										omissions = removeArrayDuplicates(this.omissions.concat({ path, values }));
+									return new UrlManager(this.translator, this.linker, this.globalState, without, this.watcherPool, omissions, this.detached);
+								},
+							},
+							{
+								key: 'reset',
+								value: function reset() {
+									return new UrlManager(
+										this.translator,
+										this.linker,
+										this.globalState,
+										{},
+										this.watcherPool,
+										Object.keys(this.urlState).map(function (k) {
+											return { path: [k] };
+										}),
+										this.detached
+									);
+								},
+							},
+							{
+								key: 'withConfig',
+								value: function withConfig(config) {
+									return (
+										config instanceof Function && (config = config(this.translator.getConfig())),
+										new UrlManager(
+											new (Object.getPrototypeOf(this.translator).constructor)(config),
+											this.linker,
+											this.globalState,
+											this.localState,
+											this.watcherPool,
+											this.omissions,
+											this.detached
+										)
+									);
+								},
+							},
+							{
+								key: 'withGlobals',
+								value: function withGlobals(globals) {
+									return new UrlManager(this.translator, this.linker, globals, this.localState, this.watcherPool, this.omissions, this.detached);
+								},
+							},
+							{
+								key: 'getTranslatorConfig',
+								value: function getTranslatorConfig() {
+									return this.translator.getConfig();
+								},
+							},
+							{
+								key: 'href',
+								get: function get() {
+									return this.translator.serialize(this.state);
+								},
+							},
+							{
+								key: 'go',
+								value: function go(config) {
+									this.detached ? (this.detached.url = this.href) : this.translator.go(this.href, config), this.watcherPool.notify();
+								},
+							},
+							{
+								key: 'detach',
+								value: function detach() {
+									var reset = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
+									return new UrlManager(this.translator, this.linker, this.globalState, this.localState, new WatcherPool(), this.omissions, {
+										url: reset ? '' : this.getTranslatorUrl(),
+									});
+								},
+							},
+							{
+								key: 'link',
+								get: function get() {
+									return this.linker ? this.linker(this) : {};
+								},
+							},
+							{
+								key: 'subscribe',
+								value: function subscribe(cb) {
+									var _this5 = this;
+									return this.watcherPool.subscribe(function () {
+										var prevState = _this5.prevState,
+											state = _this5.mergedState;
+										cb(prevState, state);
+									});
+								},
+							},
+						]),
+						UrlManager
+					);
+				})();
+			function removeArrayDuplicates(array) {
+				return Array.isArray(array) && array.length
+					? array.reduce(
+							function (accu, item) {
+								return (
+									accu.some(function (keep) {
+										return compareObjects(keep, item);
+									}) || accu.push(item),
+									accu
+								);
+							},
+							[array[0]]
+					  )
+					: array;
+			}
+			function arrayConcatMerger(current, other) {
+				if (current instanceof Array && other instanceof Array)
+					return removeArrayDuplicates([].concat(UrlManager_toConsumableArray(current), UrlManager_toConsumableArray(other)));
+			}
+			function compareObjects(obj1, obj2) {
+				if (!obj1 && !obj2) return !0;
+				if ((!obj1 && obj2) || (obj1 && !obj2)) return !1;
+				var typeA = typeof obj1;
+				if (typeA !== typeof obj2) return !1;
+				if (['string', 'number', 'boolean', 'undefined'].includes(typeA)) return obj1 === obj2;
+				var isArrayA = Array.isArray(obj1);
+				if (isArrayA !== Array.isArray(obj2)) return !1;
+				if (!isArrayA) {
+					if (!compareObjects(Object.keys(obj1).sort(), Object.keys(obj2).sort())) return !1;
+					var result = !0;
+					return (
+						Object.keys(obj1).forEach(function (key) {
+							compareObjects(obj1[key], obj2[key]) || (result = !1);
+						}),
+						result
+					);
+				}
+				if (obj1.length != obj2.length) return !1;
+				for (var i = 0; i < obj1.length; i++) if (!compareObjects(obj1[i], obj2[i])) return !1;
+				return !0;
+			}
+			function UrlTranslator_slicedToArray(arr, i) {
+				return (
+					UrlTranslator_arrayWithHoles(arr) ||
+					(function UrlTranslator_iterableToArrayLimit(arr, i) {
 						var _i = null == arr ? null : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
 						if (null == _i) return;
 						var _s,
@@ -27482,34 +27150,611 @@
 						}
 						return _arr;
 					})(arr, i) ||
-					SearchController_unsupportedIterableToArray(arr, i) ||
-					(function SearchController_nonIterableRest() {
+					UrlTranslator_unsupportedIterableToArray(arr, i) ||
+					UrlTranslator_nonIterableRest()
+				);
+			}
+			function UrlTranslator_nonIterableRest() {
+				throw new TypeError(
+					'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+				);
+			}
+			function UrlTranslator_arrayWithHoles(arr) {
+				if (Array.isArray(arr)) return arr;
+			}
+			function UrlTranslator_toConsumableArray(arr) {
+				return (
+					(function UrlTranslator_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return UrlTranslator_arrayLikeToArray(arr);
+					})(arr) ||
+					UrlTranslator_iterableToArray(arr) ||
+					UrlTranslator_unsupportedIterableToArray(arr) ||
+					(function UrlTranslator_nonIterableSpread() {
 						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
 					})()
 				);
 			}
-			function SearchController_unsupportedIterableToArray(o, minLen) {
+			function UrlTranslator_unsupportedIterableToArray(o, minLen) {
 				if (o) {
-					if ('string' == typeof o) return SearchController_arrayLikeToArray(o, minLen);
+					if ('string' == typeof o) return UrlTranslator_arrayLikeToArray(o, minLen);
 					var n = Object.prototype.toString.call(o).slice(8, -1);
 					return (
 						'Object' === n && o.constructor && (n = o.constructor.name),
 						'Map' === n || 'Set' === n
 							? Array.from(o)
 							: 'Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-							? SearchController_arrayLikeToArray(o, minLen)
+							? UrlTranslator_arrayLikeToArray(o, minLen)
 							: void 0
 					);
 				}
 			}
-			function SearchController_arrayLikeToArray(arr, len) {
+			function UrlTranslator_iterableToArray(iter) {
+				if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+			}
+			function UrlTranslator_arrayLikeToArray(arr, len) {
 				(null == len || len > arr.length) && (len = arr.length);
 				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 				return arr2;
 			}
-			function SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+			function UrlTranslator_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			!(function (RangeValueProperties) {
+				(RangeValueProperties.LOW = 'low'), (RangeValueProperties.HIGH = 'high');
+			})(RangeValueProperties || (RangeValueProperties = {})),
+				(function (ParamLocationType) {
+					(ParamLocationType.hash = 'hash'), (ParamLocationType.query = 'query');
+				})(ParamLocationType || (ParamLocationType = {}));
+			var UrlTranslator_defaultConfig = {
+					urlRoot: '',
+					settings: { corePrefix: '', customType: ParamLocationType.hash, rootParams: !0 },
+					parameters: {
+						core: {
+							query: { name: 'q', type: ParamLocationType.query },
+							oq: { name: 'oq', type: ParamLocationType.query },
+							rq: { name: 'rq', type: ParamLocationType.query },
+							tag: { name: 'tag', type: ParamLocationType.query },
+							page: { name: 'page', type: ParamLocationType.query },
+							pageSize: { name: 'pageSize', type: ParamLocationType.hash },
+							sort: { name: 'sort', type: ParamLocationType.hash },
+							filter: { name: 'filter', type: ParamLocationType.hash },
+						},
+						custom: {},
+					},
+				},
+				UrlTranslator_CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'],
+				UrlTranslator = (function () {
+					function UrlTranslator(config) {
+						var _this$config$settings2,
+							_this = this;
+						!(function UrlTranslator_classCallCheck(instance, Constructor) {
+							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+						})(this, UrlTranslator),
+							(this.reverseMapping = {}),
+							(this.config = cjs_default()(UrlTranslator_defaultConfig, config || {})),
+							Object.keys(this.config.parameters.core).forEach(function (param) {
+								var _this$config$settings,
+									coreParam = _this.config.parameters.core[param];
+								_this.config.settings.corePrefix && (coreParam.name = _this.config.settings.corePrefix + coreParam.name);
+								var _config$parameters,
+									paramType =
+										null === (_this$config$settings = _this.config.settings) || void 0 === _this$config$settings
+											? void 0
+											: _this$config$settings.coreType;
+								paramType &&
+									Object.values(ParamLocationType).includes(paramType) &&
+									(coreParam.type =
+										((null == config || null === (_config$parameters = config.parameters) || void 0 === _config$parameters
+											? void 0
+											: _config$parameters.core) &&
+											coreParam.type) ||
+										paramType);
+								_this.reverseMapping[coreParam.name] = param;
+							});
+						var implicit =
+							null === (_this$config$settings2 = this.config.settings) || void 0 === _this$config$settings2
+								? void 0
+								: _this$config$settings2.customType;
+						implicit && !Object.values(ParamLocationType).includes(implicit) && (this.config.settings.customType = ParamLocationType.hash);
+					}
+					return (
+						(function UrlTranslator_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && UrlTranslator_defineProperties(Constructor.prototype, protoProps),
+								staticProps && UrlTranslator_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(UrlTranslator, [
+							{
+								key: 'bindExternalEvents',
+								value: function bindExternalEvents(update) {
+									window.addEventListener('popstate', update);
+								},
+							},
+							{
+								key: 'getCurrentUrl',
+								value: function getCurrentUrl() {
+									return window.location.search + window.location.hash;
+								},
+							},
+							{
+								key: 'getConfig',
+								value: function getConfig() {
+									return cjs_default()({}, this.config);
+								},
+							},
+							{
+								key: 'deserialize',
+								value: function deserialize(url) {
+									var params = this.parseUrlParams(url);
+									return this.paramsToState(params);
+								},
+							},
+							{
+								key: 'parseUrlParams',
+								value: function parseUrlParams(url) {
+									var queryString = (url.includes('?') && (url.split('?').pop() || '').split('#').shift()) || '',
+										hashString = (url.includes('#') && url.substring(url.indexOf('#') + 1)) || '';
+									return [].concat(
+										UrlTranslator_toConsumableArray(this.parseHashString(hashString)),
+										UrlTranslator_toConsumableArray(this.parseQueryString(queryString))
+									);
+								},
+							},
+							{
+								key: 'parseQueryString',
+								value: function parseQueryString(queryString) {
+									var _this2 = this;
+									return (queryString.split('?').pop() || '')
+										.split('&')
+										.filter(function (v) {
+											return v;
+										})
+										.map(function (kvPair) {
+											var _kvPair$split$map2 = UrlTranslator_slicedToArray(
+													kvPair.split('=').map(function (v) {
+														return decodeURIComponent(v.replace(/\+/g, ' '));
+													}),
+													2
+												),
+												key = _kvPair$split$map2[0],
+												value = _kvPair$split$map2[1];
+											return { key: key.split('.'), value, type: ParamLocationType.query };
+										})
+										.filter(function (param) {
+											var isCoreField = _this2.reverseMapping[param.key[0]];
+											return !isCoreField || (isCoreField && param.value);
+										});
+								},
+							},
+							{
+								key: 'parseHashString',
+								value: function parseHashString(hashString) {
+									var _this3 = this,
+										params = [];
+									return (
+										(hashString.split('#').join('/') || '')
+											.split('/')
+											.filter(function (v) {
+												return v;
+											})
+											.map(function (hashEntries) {
+												return hashEntries.split(':').map(function (v) {
+													return (function decodeHashComponent(string) {
+														'string' == typeof string &&
+															((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
+														return string;
+													})(v);
+												});
+											})
+											.filter(function (param) {
+												var _param = UrlTranslator_slicedToArray(param, 2),
+													key = _param[0],
+													value = _param[1],
+													isCoreField = _this3.reverseMapping[key];
+												return !isCoreField || (isCoreField && value);
+											})
+											.forEach(function (decodedHashEntries) {
+												if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
+												else if (decodedHashEntries.length && decodedHashEntries.length <= 3) {
+													var _decodedHashEntries$r2 = (function UrlTranslator_toArray(arr) {
+															return (
+																UrlTranslator_arrayWithHoles(arr) ||
+																UrlTranslator_iterableToArray(arr) ||
+																UrlTranslator_unsupportedIterableToArray(arr) ||
+																UrlTranslator_nonIterableRest()
+															);
+														})(decodedHashEntries.reverse()),
+														value = _decodedHashEntries$r2[0],
+														keys = _decodedHashEntries$r2.slice(1);
+													params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
+												} else if (decodedHashEntries.length && 4 == decodedHashEntries.length) {
+													var _decodedHashEntries = UrlTranslator_slicedToArray(decodedHashEntries, 4),
+														path0 = _decodedHashEntries[0],
+														path1 = _decodedHashEntries[1],
+														low = _decodedHashEntries[2],
+														high = _decodedHashEntries[3];
+													params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash }),
+														params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+												}
+											}),
+										params
+									);
+								},
+							},
+							{
+								key: 'paramsToState',
+								value: function paramsToState(params) {
+									var _this4 = this,
+										coreOtherParams = [],
+										coreFilterParams = [],
+										coreSortParams = [],
+										otherParams = [];
+									return (
+										null == params ||
+											params.forEach(function (param) {
+												var coreStateKey = _this4.reverseMapping[param.key[0]],
+													coreConfig = _this4.config.parameters.core[coreStateKey],
+													customStateKey = _this4.config.parameters.custom[param.key[0]];
+												if (coreStateKey)
+													switch (coreStateKey) {
+														case 'filter':
+															coreConfig.type == param.type && coreFilterParams.push(param);
+															break;
+														case 'sort':
+															coreConfig.type == param.type && coreSortParams.push(param);
+															break;
+														default:
+															coreConfig.type == param.type && coreOtherParams.push(param);
+													}
+												else
+													UrlTranslator_CORE_FIELDS.includes(param.key[0]) ||
+														(customStateKey ||
+															(_this4.config.parameters.custom[param.key[0]] = { type: param.type || _this4.config.settings.customType }),
+														otherParams.push(param));
+											}),
+										Object.assign(
+											{},
+											this.parseCoreOther(coreOtherParams),
+											this.parseCoreFilter(coreFilterParams),
+											this.parseCoreSort(coreSortParams),
+											this.parseOther(otherParams)
+										)
+									);
+								},
+							},
+							{
+								key: 'parseCoreOther',
+								value: function parseCoreOther(otherParams) {
+									var _this5 = this,
+										state = {},
+										numberTypeParams = ['page', 'pageSize'];
+									return otherParams
+										? (otherParams.forEach(function (param) {
+												var coreKey = _this5.reverseMapping[param.key[0]];
+												if (numberTypeParams.includes(coreKey)) {
+													var numValue = Number(param.value);
+													(('page' == coreKey && numValue > 1) || 'page' != coreKey) && (state[coreKey] = numValue);
+												} else state[coreKey] = param.value;
+										  }),
+										  state)
+										: {};
+								},
+							},
+							{
+								key: 'parseCoreFilter',
+								value: function parseCoreFilter(filterParams) {
+									var valueFilterParams = filterParams.filter(function (p) {
+											return 2 == p.key.length;
+										}),
+										rangeFilterParams = filterParams.filter(function (p) {
+											return 3 == p.key.length;
+										}),
+										valueFilters = valueFilterParams.reduce(function (state, param) {
+											var _Object$assign,
+												currentValue = (state.filter || {})[param.key[1]] || [];
+											return {
+												filter: Object.assign(
+													{},
+													state.filter,
+													((_Object$assign = {}),
+													(_Object$assign[param.key[1]] = [].concat(
+														UrlTranslator_toConsumableArray(Array.isArray(currentValue) ? currentValue : [currentValue]),
+														[param.value]
+													)),
+													_Object$assign)
+												),
+											};
+										}, {}),
+										rangeFilters = rangeFilterParams.reduce(function (state, param, index) {
+											var newState = state,
+												nextRangeParam = rangeFilterParams[index + 1];
+											if (
+												index % 2 == 0 &&
+												nextRangeParam &&
+												nextRangeParam.key[1] == param.key[1] &&
+												param.key[2] == RangeValueProperties.LOW &&
+												nextRangeParam.key[2] == RangeValueProperties.HIGH
+											) {
+												var _ref,
+													_Object$assign2,
+													currentValue = (state.filter || {})[param.key[1]] || [];
+												newState = {
+													filter: Object.assign(
+														{},
+														state.filter,
+														((_Object$assign2 = {}),
+														(_Object$assign2[param.key[1]] = [].concat(
+															UrlTranslator_toConsumableArray(Array.isArray(currentValue) ? currentValue : [currentValue]),
+															[
+																((_ref = {}),
+																(_ref[RangeValueProperties.LOW] = isNaN(+param.value) ? null : +param.value),
+																(_ref[RangeValueProperties.HIGH] = isNaN(+nextRangeParam.value) ? null : +nextRangeParam.value),
+																_ref),
+															]
+														)),
+														_Object$assign2)
+													),
+												};
+											}
+											return newState;
+										}, {});
+									return Object.assign(
+										{},
+										valueFilters.filter || rangeFilters.filter ? { filter: Object.assign({}, valueFilters.filter, rangeFilters.filter) } : {}
+									);
+								},
+							},
+							{
+								key: 'parseCoreSort',
+								value: function parseCoreSort(sortParams) {
+									return sortParams.length
+										? {
+												sort: sortParams.map(function (param) {
+													return { field: param.key[1], direction: param.value };
+												}),
+										  }
+										: {};
+								},
+							},
+							{
+								key: 'parseOther',
+								value: function parseOther(otherParams) {
+									var state = {};
+									return (
+										otherParams.forEach(function (param) {
+											var node = state;
+											param.key.forEach(function (key, i) {
+												i == param.key.length - 1
+													? ((node[key] = node[key] || []), param.value && node[key].push(param.value))
+													: ((node[key] = node[key] || {}), (node = node[key]));
+											});
+										}),
+										state
+									);
+								},
+							},
+							{
+								key: 'serialize',
+								value: function serialize(state) {
+									var root = this.config.urlRoot.includes('?')
+											? this.config.urlRoot.split('?')[0]
+											: this.config.urlRoot.includes('#')
+											? this.config.urlRoot.split('#')[0]
+											: this.config.urlRoot,
+										rootUrlParams = this.config.settings.rootParams ? this.parseUrlParams(this.config.urlRoot) : [],
+										stateParams = this.stateToParams(state),
+										params = [].concat(UrlTranslator_toConsumableArray(rootUrlParams), UrlTranslator_toConsumableArray(stateParams)),
+										queryParams = params.filter(function (p) {
+											return p.type == ParamLocationType.query;
+										}),
+										hashParams = params.filter(function (p) {
+											return p.type == ParamLocationType.hash;
+										});
+									return (
+										'' +
+										root +
+										((queryParams.length
+											? '?' +
+											  queryParams
+													.map(function (param) {
+														return encodeURIComponent(param.key.join('.')) + (param.value ? '=' + encodeURIComponent(param.value) : '');
+													})
+													.join('&')
+											: this.config.urlRoot
+											? ''
+											: window.location.pathname) +
+											(hashParams.length
+												? '#/' +
+												  hashParams
+														.map(function (param) {
+															return (
+																param.key
+																	.map(function (k) {
+																		return encodeHashComponent(k);
+																	})
+																	.join(':') + (param.value ? ':' + encodeHashComponent(param.value) : '')
+															);
+														})
+														.join('/')
+												: ''))
+									);
+								},
+							},
+							{
+								key: 'stateToParams',
+								value: function stateToParams(state) {
+									return [].concat(
+										UrlTranslator_toConsumableArray(this.encodeCoreOther(state, ['filter', 'sort'])),
+										UrlTranslator_toConsumableArray(this.encodeCoreFilters(state)),
+										UrlTranslator_toConsumableArray(this.encodeCoreSorts(state)),
+										UrlTranslator_toConsumableArray(this.encodeOther(state))
+									);
+								},
+							},
+							{
+								key: 'encodeCoreFilters',
+								value: function encodeCoreFilters(state) {
+									var filterConfig = this.config.parameters.core.filter;
+									return state.filter && filterConfig
+										? Object.keys(state.filter).flatMap(function (key) {
+												if (!state.filter || !state.filter[key]) return [];
+												var filter = state.filter[key];
+												return (filter instanceof Array ? filter : [filter]).flatMap(function (value) {
+													if ('string' == typeof value || 'number' == typeof value || 'boolean' == typeof value)
+														return [{ key: [filterConfig.name, key], value: '' + value, type: filterConfig.type }];
+													if ('object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]) {
+														var _value$RangeValueProp, _value$RangeValueProp2, _value$RangeValueProp3, _value$RangeValueProp4;
+														if (filterConfig.type == ParamLocationType.query)
+															return [
+																{
+																	key: [filterConfig.name, key, RangeValueProperties.LOW],
+																	value:
+																		'' +
+																		(null !== (_value$RangeValueProp = value[RangeValueProperties.LOW]) && void 0 !== _value$RangeValueProp
+																			? _value$RangeValueProp
+																			: '*'),
+																	type: filterConfig.type,
+																},
+																{
+																	key: [filterConfig.name, key, RangeValueProperties.HIGH],
+																	value:
+																		'' +
+																		(null !== (_value$RangeValueProp2 = value[RangeValueProperties.HIGH]) && void 0 !== _value$RangeValueProp2
+																			? _value$RangeValueProp2
+																			: '*'),
+																	type: filterConfig.type,
+																},
+															];
+														if (filterConfig.type == ParamLocationType.hash)
+															return [
+																{
+																	key: [
+																		filterConfig.name,
+																		key,
+																		'' +
+																			(null !== (_value$RangeValueProp3 = value[RangeValueProperties.LOW]) && void 0 !== _value$RangeValueProp3
+																				? _value$RangeValueProp3
+																				: '*'),
+																	],
+																	value:
+																		'' +
+																		(null !== (_value$RangeValueProp4 = value[RangeValueProperties.HIGH]) && void 0 !== _value$RangeValueProp4
+																			? _value$RangeValueProp4
+																			: '*'),
+																	type: filterConfig.type,
+																},
+															];
+													}
+													return [];
+												});
+										  })
+										: [];
+								},
+							},
+							{
+								key: 'encodeCoreSorts',
+								value: function encodeCoreSorts(state) {
+									var sortConfig = this.config.parameters.core.sort;
+									return state.sort && sortConfig
+										? (state.sort instanceof Array ? state.sort : [state.sort]).map(function (sort) {
+												return { key: [sortConfig.name, sort.field], value: sort.direction, type: sortConfig.type };
+										  })
+										: [];
+								},
+							},
+							{
+								key: 'encodeCoreOther',
+								value: function encodeCoreOther(state, except) {
+									var _this6 = this,
+										params = [];
+									return (
+										Object.keys(state)
+											.sort(function (a, b) {
+												return UrlTranslator_CORE_FIELDS.indexOf(a) - UrlTranslator_CORE_FIELDS.indexOf(b);
+											})
+											.map(function (param) {
+												if (UrlTranslator_CORE_FIELDS.includes(param) && !except.includes(param)) {
+													var paramConfig = _this6.config.parameters.core[param];
+													('page' == param && 1 == state[param]) ||
+														params.push({ key: [paramConfig.name], value: '' + state[param], type: paramConfig.type });
+												}
+											}),
+										params
+									);
+								},
+							},
+							{
+								key: 'encodeOther',
+								value: function encodeOther(state) {
+									var _this7 = this,
+										params = [];
+									return (
+										(function addRecursive(obj, currentPath) {
+											Object.keys(obj).forEach(function (key) {
+												if (0 != currentPath.length || !UrlTranslator_CORE_FIELDS.includes(key)) {
+													var value = obj[key];
+													if (value instanceof Array) {
+														var customConfig = _this7.config.parameters.custom[currentPath[0] || key],
+															type = (null == customConfig ? void 0 : customConfig.type) || _this7.config.settings.customType;
+														params = value.length
+															? params.concat(
+																	value.map(function (v) {
+																		return { key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: v, type };
+																	})
+															  )
+															: params.concat({ key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: '', type });
+													} else if ('object' == typeof value && Object.keys(value || {}).length)
+														addRecursive(value, [].concat(UrlTranslator_toConsumableArray(currentPath), [key]));
+													else {
+														var _customConfig = _this7.config.parameters.custom[currentPath[0] || key],
+															_type = (null == _customConfig ? void 0 : _customConfig.type) || _this7.config.settings.customType,
+															stringValue = 'object' == typeof value ? void 0 : value;
+														params = params.concat([
+															{ key: [].concat(UrlTranslator_toConsumableArray(currentPath), [key]), value: stringValue, type: _type },
+														]);
+													}
+												}
+											});
+										})(state, []),
+										params
+									);
+								},
+							},
+							{
+								key: 'go',
+								value: function go(url, config) {
+									url != this.getCurrentUrl() &&
+										('replace' == (null == config ? void 0 : config.history)
+											? history.replaceState(null, '', url)
+											: history.pushState(null, '', url));
+								},
+							},
+						]),
+						UrlTranslator
+					);
+				})();
+			function encodeHashComponent(string) {
+				return 'string' == typeof string && (string = (string = encodeURIComponent(string)).replace(/%/g, '$$25')), string;
+			}
+			function reactLinker(urlManager) {
+				return {
+					href: urlManager.href,
+					onClick: function onClick(ev) {
+						(null != urlManager && urlManager.detached) || ev.preventDefault(), urlManager.go();
+					},
+				};
+			}
+			function MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 				try {
 					var info = gen[key](arg),
 						value = info.value;
@@ -27518,23 +27763,23 @@
 				}
 				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
 			}
-			function SearchController_asyncToGenerator(fn) {
+			function MiddlewareManager_asyncToGenerator(fn) {
 				return function () {
 					var self = this,
 						args = arguments;
 					return new Promise(function (resolve, reject) {
 						var gen = fn.apply(self, args);
 						function _next(value) {
-							SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+							MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
 						}
 						function _throw(err) {
-							SearchController_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+							MiddlewareManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
 						}
 						_next(void 0);
 					});
 				};
 			}
-			function SearchController_defineProperties(target, props) {
+			function MiddlewareManager_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -27543,591 +27788,166 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function SearchController_setPrototypeOf(o, p) {
+			var MiddlewareManager = (function () {
+				function MiddlewareManager() {
+					!(function MiddlewareManager_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, MiddlewareManager),
+						(this.functions = []);
+				}
+				var _dispatch;
 				return (
-					(SearchController_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					SearchController_setPrototypeOf(o, p)
-				);
-			}
-			function SearchController_createSuper(Derived) {
-				var hasNativeReflectConstruct = (function SearchController_isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = SearchController_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = SearchController_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return SearchController_possibleConstructorReturn(this, result);
-				};
-			}
-			function SearchController_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return SearchController_assertThisInitialized(self);
-			}
-			function SearchController_assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			function SearchController_getPrototypeOf(o) {
-				return (
-					(SearchController_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					SearchController_getPrototypeOf(o)
-				);
-			}
-			var SearchController_defaultConfig = {
-					id: 'search',
-					globals: {},
-					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0, storeRange: !0 } },
-				},
-				SearchController = (function (_AbstractController) {
-					!(function SearchController_inherits(subClass, superClass) {
-						if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-						(subClass.prototype = Object.create(superClass && superClass.prototype, {
-							constructor: { value: subClass, writable: !0, configurable: !0 },
-						})),
-							Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-							superClass && SearchController_setPrototypeOf(subClass, superClass);
-					})(SearchController, _AbstractController);
-					var _super = SearchController_createSuper(SearchController);
-					function SearchController(config, _ref, context) {
-						var _this,
-							client = _ref.client,
-							store = _ref.store,
-							urlManager = _ref.urlManager,
-							eventManager = _ref.eventManager,
-							profiler = _ref.profiler,
-							logger = _ref.logger,
-							tracker = _ref.tracker;
+					(function MiddlewareManager_createClass(Constructor, protoProps, staticProps) {
 						return (
-							(function SearchController_classCallCheck(instance, Constructor) {
-								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-							})(this, SearchController),
-							((_this = _super.call(this, config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context)).type = 'search'),
-							(_this.track = {
-								product: {
-									click: function click(e, result) {
-										var _result$mappings$core;
-										if (_this.config.settings.infinite) {
-											var scrollMap = {};
-											(scrollMap[_this.storage.get('lastStringyParams')] = window.scrollY), _this.storage.set('scrollMap', scrollMap);
-										}
-										var _result$attributes = result.attributes,
-											intellisuggestData = _result$attributes.intellisuggestData,
-											intellisuggestSignature = _result$attributes.intellisuggestSignature,
-											target = e.target,
-											href =
-												(null == target ? void 0 : target.href) ||
-												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-													? void 0
-													: _result$mappings$core.url) ||
-												void 0,
-											event = _this.tracker.track.product.click({ intellisuggestData, intellisuggestSignature, href });
-										return (
-											_this.eventManager.fire('track.product.click', {
-												controller: SearchController_assertThisInitialized(_this),
-												event: e,
-												result,
-												trackEvent: event,
-											}),
-											event
-										);
-									},
-								},
-							}),
-							(_this.search = SearchController_asyncToGenerator(
-								regeneratorRuntime.mark(function _callee() {
-									var params,
-										_params$pagination3,
-										stringyParams,
-										prevStringyParams,
-										_this$config$settings,
-										_params$pagination,
-										_this$config$settings2,
-										_params$pagination2,
-										preventBackfill,
-										dontBackfill,
-										searchProfile,
-										_yield$_this$client$s,
-										_yield$_this$client$s2,
-										meta,
-										response,
-										_this$store$data,
-										_this$config$settings3,
-										previousResults,
-										backfills,
-										page,
-										backfillParams,
-										afterSearchProfile,
-										afterStoreProfile;
-									return regeneratorRuntime.wrap(
-										function _callee$(_context) {
-											for (;;)
-												switch ((_context.prev = _context.next)) {
-													case 0:
-														if (_this.initialized) {
-															_context.next = 3;
-															break;
-														}
-														return (_context.next = 3), _this.init();
-													case 3:
-														return (
-															(params = _this.params),
-															(_context.prev = 4),
-															(_context.prev = 5),
-															(_context.next = 8),
-															_this.eventManager.fire('beforeSearch', { controller: SearchController_assertThisInitialized(_this), request: params })
-														);
-													case 8:
-														_context.next = 19;
-														break;
-													case 10:
-														if (
-															((_context.prev = 10),
-															(_context.t0 = _context.catch(5)),
-															'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
-														) {
-															_context.next = 17;
-															break;
-														}
-														return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-													case 17:
-														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
-													case 19:
-														if (
-															((stringyParams = JSON.stringify(params)),
-															(prevStringyParams = _this.storage.get('lastStringyParams')),
-															stringyParams != prevStringyParams)
-														) {
-															_context.next = 23;
-															break;
-														}
-														return _context.abrupt('return');
-													case 23:
-														if (!_this.config.settings.infinite) {
-															_context.next = 30;
-															break;
-														}
-														if (
-															((preventBackfill =
-																(null === (_this$config$settings = _this.config.settings.infinite) || void 0 === _this$config$settings
-																	? void 0
-																	: _this$config$settings.backfill) &&
-																!_this.store.results.length &&
-																(null === (_params$pagination = params.pagination) || void 0 === _params$pagination
-																	? void 0
-																	: _params$pagination.page) > _this.config.settings.infinite.backfill),
-															(dontBackfill =
-																!(
-																	null !== (_this$config$settings2 = _this.config.settings.infinite) &&
-																	void 0 !== _this$config$settings2 &&
-																	_this$config$settings2.backfill
-																) &&
-																!_this.store.results.length &&
-																(null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
-																	? void 0
-																	: _params$pagination2.page) > 1),
-															!preventBackfill && !dontBackfill)
-														) {
-															_context.next = 30;
-															break;
-														}
-														return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-													case 30:
-														return (
-															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context.next = 33),
-															_this.client.search(params)
-														);
-													case 33:
-														if (
-															((_yield$_this$client$s = _context.sent),
-															(_yield$_this$client$s2 = SearchController_slicedToArray(_yield$_this$client$s, 2)),
-															(meta = _yield$_this$client$s2[0]),
-															(response = _yield$_this$client$s2[1]).meta || (response.meta = meta),
-															!(
-																_this.config.settings.infinite &&
-																(null === (_params$pagination3 = params.pagination) || void 0 === _params$pagination3
-																	? void 0
-																	: _params$pagination3.page) > 1
-															))
-														) {
-															_context.next = 48;
-															break;
-														}
-														if (
-															((previousResults =
-																(null === (_this$store$data = _this.store.data) || void 0 === _this$store$data ? void 0 : _this$store$data.results) ||
-																[]),
-															null === (_this$config$settings3 = _this.config.settings) ||
-																void 0 === _this$config$settings3 ||
-																!_this$config$settings3.infinite.backfill ||
-																previousResults.length)
-														) {
-															_context.next = 47;
-															break;
-														}
-														for (backfills = [], page = 1; page < params.pagination.page; page++)
-															(backfillParams = cjs_default()(Object.assign({}, params), { pagination: { page } })),
-																backfills.push(_this.client.search(backfillParams));
-														return (_context.next = 45), Promise.all(backfills);
-													case 45:
-														_context.sent.map(function (_ref3) {
-															var _ref4 = SearchController_slicedToArray(_ref3, 2),
-																data = (_ref4[0], _ref4[1]);
-															previousResults = previousResults.concat(data.results);
-														});
-													case 47:
-														response.results = [].concat(
-															SearchController_toConsumableArray(previousResults),
-															SearchController_toConsumableArray(response.results || [])
-														);
-													case 48:
-														return (
-															searchProfile.stop(),
-															_this.log.profile(searchProfile),
-															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context.prev = 51),
-															(_context.next = 54),
-															_this.eventManager.fire('afterSearch', {
-																controller: SearchController_assertThisInitialized(_this),
-																request: params,
-																response,
-															})
-														);
-													case 54:
-														_context.next = 66;
-														break;
-													case 56:
-														if (
-															((_context.prev = 56),
-															(_context.t1 = _context.catch(51)),
-															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
-														) {
-															_context.next = 64;
-															break;
-														}
-														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-													case 64:
-														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-													case 66:
-														return (
-															afterSearchProfile.stop(),
-															_this.log.profile(afterSearchProfile),
-															_this.store.update(response),
-															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context.prev = 70),
-															(_context.next = 73),
-															_this.eventManager.fire('afterStore', {
-																controller: SearchController_assertThisInitialized(_this),
-																request: params,
-																response,
-															})
-														);
-													case 73:
-														_context.next = 85;
-														break;
-													case 75:
-														if (
-															((_context.prev = 75),
-															(_context.t2 = _context.catch(70)),
-															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
-														) {
-															_context.next = 83;
-															break;
-														}
-														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-													case 83:
-														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-													case 85:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 104);
-														break;
-													case 89:
-														if (((_context.prev = 89), (_context.t3 = _context.catch(4)), !_context.t3)) {
-															_context.next = 104;
-															break;
-														}
-														(_context.t4 = _context.t3), (_context.next = 429 === _context.t4 ? 95 : 500 === _context.t4 ? 98 : 101);
-														break;
-													case 95:
-														return (
-															(_this.store.error = { code: 429, type: types.N.WARNING, message: 'Too many requests try again later' }),
-															_this.log.warn(_this.store.error),
-															_context.abrupt('break', 103)
-														);
-													case 98:
-														return (
-															(_this.store.error = { code: 500, type: types.N.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_this.log.error(_this.store.error),
-															_context.abrupt('break', 103)
-														);
-													case 101:
-														return _this.log.error(_context.t3), _context.abrupt('break', 103);
-													case 103:
-														_this.store.loading = !1;
-													case 104:
-													case 'end':
-														return _context.stop();
-												}
-										},
-										_callee,
-										null,
-										[
-											[4, 89],
-											[5, 10],
-											[51, 56],
-											[70, 75],
-										]
-									);
-								})
-							)),
-							(_this.config = cjs_default()(SearchController_defaultConfig, _this.config)),
-							_this.store.setConfig(_this.config),
-							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
-							_this.storage.set('lastStringyParams', void 0),
-							_this.eventManager.on(
-								'beforeSearch',
-								(function () {
-									var _ref5 = SearchController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee2(search, next) {
-											return regeneratorRuntime.wrap(function _callee2$(_context2) {
-												for (;;)
-													switch ((_context2.prev = _context2.next)) {
-														case 0:
-															return (search.controller.store.loading = !0), (_context2.next = 3), next();
-														case 3:
-														case 'end':
-															return _context2.stop();
-													}
-											}, _callee2);
-										})
-									);
-									return function (_x, _x2) {
-										return _ref5.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterSearch',
-								(function () {
-									var _ref6 = SearchController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee3(search, next) {
-											var _search$response,
-												_search$response$merc,
-												_config$settings,
-												_config$settings$redi,
-												_search$response2,
-												_search$response2$fil,
-												_config$settings2,
-												_config$settings2$red,
-												_search$response3,
-												_search$response3$sea,
-												_search$response4,
-												_search$response4$pag,
-												_search$response5,
-												_search$response5$fil,
-												config,
-												redirectURL,
-												searchStore;
-											return regeneratorRuntime.wrap(function _callee3$(_context3) {
-												for (;;)
-													switch ((_context3.prev = _context3.next)) {
-														case 0:
-															if (
-																((config = search.controller.config),
-																(redirectURL =
-																	null === (_search$response = search.response) ||
-																	void 0 === _search$response ||
-																	null === (_search$response$merc = _search$response.merchandising) ||
-																	void 0 === _search$response$merc
-																		? void 0
-																		: _search$response$merc.redirect),
-																(searchStore = search.controller.store),
-																!redirectURL ||
-																	null == config ||
-																	null === (_config$settings = config.settings) ||
-																	void 0 === _config$settings ||
-																	null === (_config$settings$redi = _config$settings.redirects) ||
-																	void 0 === _config$settings$redi ||
-																	!_config$settings$redi.merchandising ||
-																	(null != search &&
-																		null !== (_search$response2 = search.response) &&
-																		void 0 !== _search$response2 &&
-																		null !== (_search$response2$fil = _search$response2.filters) &&
-																		void 0 !== _search$response2$fil &&
-																		_search$response2$fil.length) ||
-																	searchStore.loaded)
-															) {
-																_context3.next = 6;
-																break;
-															}
-															return window.location.replace(redirectURL), _context3.abrupt('return', !1);
-														case 6:
-															if (
-																null == config ||
-																null === (_config$settings2 = config.settings) ||
-																void 0 === _config$settings2 ||
-																null === (_config$settings2$red = _config$settings2.redirects) ||
-																void 0 === _config$settings2$red ||
-																!_config$settings2$red.singleResult ||
-																null == search ||
-																null === (_search$response3 = search.response) ||
-																void 0 === _search$response3 ||
-																null === (_search$response3$sea = _search$response3.search) ||
-																void 0 === _search$response3$sea ||
-																!_search$response3$sea.query ||
-																1 !==
-																	(null == search ||
-																	null === (_search$response4 = search.response) ||
-																	void 0 === _search$response4 ||
-																	null === (_search$response4$pag = _search$response4.pagination) ||
-																	void 0 === _search$response4$pag
-																		? void 0
-																		: _search$response4$pag.totalResults) ||
-																(null != search &&
-																	null !== (_search$response5 = search.response) &&
-																	void 0 !== _search$response5 &&
-																	null !== (_search$response5$fil = _search$response5.filters) &&
-																	void 0 !== _search$response5$fil &&
-																	_search$response5$fil.length)
-															) {
-																_context3.next = 9;
-																break;
-															}
-															return (
-																window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
-																_context3.abrupt('return', !1)
-															);
-														case 9:
-															return (_context3.next = 11), next();
-														case 11:
-														case 'end':
-															return _context3.stop();
-													}
-											}, _callee3);
-										})
-									);
-									return function (_x3, _x4) {
-										return _ref6.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterStore',
-								(function () {
-									var _ref7 = SearchController_asyncToGenerator(
-										regeneratorRuntime.mark(function _callee4(search, next) {
-											var _this$config$settings4, stringyParams, scrollMap, scrollToPosition, checkCount, heightCheck;
-											return regeneratorRuntime.wrap(function _callee4$(_context4) {
-												for (;;)
-													switch ((_context4.prev = _context4.next)) {
-														case 0:
-															return (_context4.next = 2), next();
-														case 2:
-															(search.controller.store.loading = !1),
-																(stringyParams = JSON.stringify(search.request)),
-																_this.storage.set('lastStringyParams', stringyParams),
-																null !== (_this$config$settings4 = _this.config.settings) &&
-																	void 0 !== _this$config$settings4 &&
-																	_this$config$settings4.infinite &&
-																	0 === window.scrollY &&
-																	((scrollMap = _this.storage.get('scrollMap') || {}),
-																	(scrollToPosition = scrollMap[stringyParams]) &&
-																		((checkCount = 0),
-																		(heightCheck = window.setInterval(function () {
-																			document.documentElement.scrollHeight >= scrollToPosition &&
-																				(window.scrollTo(0, scrollToPosition),
-																				_this.log.debug('scrolling to: ', scrollMap[stringyParams]),
-																				window.clearInterval(heightCheck)),
-																				checkCount > 40 && window.clearInterval(heightCheck),
-																				checkCount++;
-																		}, 50))));
-														case 6:
-														case 'end':
-															return _context4.stop();
-													}
-											}, _callee4);
-										})
-									);
-									return function (_x5, _x6) {
-										return _ref7.apply(this, arguments);
-									};
-								})()
-							),
-							_this.use(_this.config),
-							_this
+							protoProps && MiddlewareManager_defineProperties(Constructor.prototype, protoProps),
+							staticProps && MiddlewareManager_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
 						);
-					}
-					return (
-						(function SearchController_createClass(Constructor, protoProps, staticProps) {
-							return (
-								protoProps && SearchController_defineProperties(Constructor.prototype, protoProps),
-								staticProps && SearchController_defineProperties(Constructor, staticProps),
-								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-								Constructor
-							);
-						})(SearchController, [
-							{
-								key: 'params',
-								get: function get() {
-									var _this$config$settings5,
-										_this$config$settings6,
-										_this$config$globals,
-										_this$config$globals$,
-										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals);
-									(null !== (_this$config$settings5 = this.config.settings) &&
-										void 0 !== _this$config$settings5 &&
-										null !== (_this$config$settings6 = _this$config$settings5.redirects) &&
-										void 0 !== _this$config$settings6 &&
-										_this$config$settings6.merchandising &&
-										!this.store.loaded) ||
-										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
-										(params.tracking = params.tracking || {}),
-										(params.tracking.domain = window.location.href);
-									var userId = this.tracker.getUserId();
-									if (
-										(userId && (params.tracking.userId = userId),
-										null === (_this$config$globals = this.config.globals) ||
-											void 0 === _this$config$globals ||
-											null === (_this$config$globals$ = _this$config$globals.personalization) ||
-											void 0 === _this$config$globals$ ||
-											!_this$config$globals$.disabled)
-									) {
-										var cartItems = this.tracker.cookies.cart.get();
-										cartItems.length &&
-											((params.personalization = params.personalization || {}), (params.personalization.cart = cartItems.join(',')));
-										var lastViewedItems = this.tracker.cookies.viewed.get();
-										lastViewedItems.length &&
-											((params.personalization = params.personalization || {}), (params.personalization.lastViewed = lastViewedItems.join(',')));
-										var shopperId = this.tracker.getShopperId();
-										shopperId && ((params.personalization = params.personalization || {}), (params.personalization.shopper = shopperId));
-									}
-									return params;
-								},
+					})(MiddlewareManager, [
+						{
+							key: 'use',
+							value: function use() {
+								var _this$functions;
+								(_this$functions = this.functions).push.apply(_this$functions, arguments);
 							},
-						]),
-						SearchController
-					);
-				})(AbstractController);
-			function Stores_QueryStore_defineProperties(target, props) {
+						},
+						{
+							key: 'remove',
+							value: function remove(func) {
+								var stringyFunc = func.toString();
+								this.functions = this.functions.filter(function (fn) {
+									return func.name !== fn.name || fn.toString() != stringyFunc;
+								});
+							},
+						},
+						{
+							key: 'clear',
+							value: function clear() {
+								this.functions = [];
+							},
+						},
+						{
+							key: 'dispatch',
+							value:
+								((_dispatch = MiddlewareManager_asyncToGenerator(
+									regeneratorRuntime.mark(function _callee(context) {
+										return regeneratorRuntime.wrap(
+											function _callee$(_context) {
+												for (;;)
+													switch ((_context.prev = _context.next)) {
+														case 0:
+															return (_context.next = 2), runFunctionsWithAbortWrapper(context || {}, this.functions);
+														case 2:
+															if (1 != _context.sent) {
+																_context.next = 5;
+																break;
+															}
+															throw new Error('cancelled');
+														case 5:
+														case 'end':
+															return _context.stop();
+													}
+											},
+											_callee,
+											this
+										);
+									})
+								)),
+								function dispatch(_x) {
+									return _dispatch.apply(this, arguments);
+								}),
+						},
+					]),
+					MiddlewareManager
+				);
+			})();
+			function runFunctionsWithAbortWrapper(_x2, _x3) {
+				return _runFunctionsWithAbortWrapper.apply(this, arguments);
+			}
+			function _runFunctionsWithAbortWrapper() {
+				return (_runFunctionsWithAbortWrapper = MiddlewareManager_asyncToGenerator(
+					regeneratorRuntime.mark(function _callee2(context, functions) {
+						var cancelled;
+						return regeneratorRuntime.wrap(function _callee2$(_context2) {
+							for (;;)
+								switch ((_context2.prev = _context2.next)) {
+									case 0:
+										return (
+											(cancelled = !1),
+											(_context2.next = 3),
+											runFunctions(context, functions, function (proceed) {
+												!1 === proceed && (cancelled = !0);
+											})
+										);
+									case 3:
+										return _context2.abrupt('return', cancelled);
+									case 4:
+									case 'end':
+										return _context2.stop();
+								}
+						}, _callee2);
+					})
+				)).apply(this, arguments);
+			}
+			function runFunctions(_x4, _x5, _x6) {
+				return _runFunctions.apply(this, arguments);
+			}
+			function _runFunctions() {
+				return (_runFunctions = MiddlewareManager_asyncToGenerator(
+					regeneratorRuntime.mark(function _callee4(context, functions, callback) {
+						var func, proceed;
+						return regeneratorRuntime.wrap(function _callee4$(_context4) {
+							for (;;)
+								switch ((_context4.prev = _context4.next)) {
+									case 0:
+										if (functions.length) {
+											_context4.next = 2;
+											break;
+										}
+										return _context4.abrupt('return');
+									case 2:
+										return (
+											(func = functions[0]),
+											(_context4.next = 5),
+											func(
+												context,
+												MiddlewareManager_asyncToGenerator(
+													regeneratorRuntime.mark(function _callee3() {
+														return regeneratorRuntime.wrap(function _callee3$(_context3) {
+															for (;;)
+																switch ((_context3.prev = _context3.next)) {
+																	case 0:
+																		return (_context3.next = 2), runFunctions(context, functions.slice(1), callback);
+																	case 2:
+																	case 'end':
+																		return _context3.stop();
+																}
+														}, _callee3);
+													})
+												)
+											)
+										);
+									case 5:
+										(proceed = _context4.sent), callback(proceed);
+									case 7:
+									case 'end':
+										return _context4.stop();
+								}
+						}, _callee4);
+					})
+				)).apply(this, arguments);
+			}
+			function EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+				try {
+					var info = gen[key](arg),
+						value = info.value;
+				} catch (error) {
+					return void reject(error);
+				}
+				info.done ? resolve(value) : Promise.resolve(value).then(_next, _throw);
+			}
+			function EventManager_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -28136,37 +27956,176 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function Stores_QueryStore_createClass(Constructor, protoProps, staticProps) {
+			var EventManager = (function () {
+				function EventManager() {
+					!(function EventManager_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, EventManager),
+						(this.events = {});
+				}
+				var _fire;
 				return (
-					protoProps && Stores_QueryStore_defineProperties(Constructor.prototype, protoProps),
-					staticProps && Stores_QueryStore_defineProperties(Constructor, staticProps),
+					(function EventManager_createClass(Constructor, protoProps, staticProps) {
+						return (
+							protoProps && EventManager_defineProperties(Constructor.prototype, protoProps),
+							staticProps && EventManager_defineProperties(Constructor, staticProps),
+							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+							Constructor
+						);
+					})(EventManager, [
+						{
+							key: 'fire',
+							value:
+								((_fire = (function EventManager_asyncToGenerator(fn) {
+									return function () {
+										var self = this,
+											args = arguments;
+										return new Promise(function (resolve, reject) {
+											var gen = fn.apply(self, args);
+											function _next(value) {
+												EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'next', value);
+											}
+											function _throw(err) {
+												EventManager_asyncGeneratorStep(gen, resolve, reject, _next, _throw, 'throw', err);
+											}
+											_next(void 0);
+										});
+									};
+								})(
+									regeneratorRuntime.mark(function _callee(event, context) {
+										return regeneratorRuntime.wrap(
+											function _callee$(_context) {
+												for (;;)
+													switch ((_context.prev = _context.next)) {
+														case 0:
+															if (!this.events[event]) {
+																_context.next = 3;
+																break;
+															}
+															return (_context.next = 3), this.events[event].dispatch(context);
+														case 3:
+															return _context.abrupt('return', Promise.resolve());
+														case 4:
+														case 'end':
+															return _context.stop();
+													}
+											},
+											_callee,
+											this
+										);
+									})
+								)),
+								function fire(_x, _x2) {
+									return _fire.apply(this, arguments);
+								}),
+						},
+						{
+							key: 'on',
+							value: function on(event) {
+								var _this$events$event;
+								this.events[event] || (this.events[event] = new MiddlewareManager());
+								for (var _len = arguments.length, func = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++)
+									func[_key - 1] = arguments[_key];
+								(_this$events$event = this.events[event]).use.apply(_this$events$event, func);
+							},
+						},
+					]),
+					EventManager
+				);
+			})();
+			__webpack_require__('../../node_modules/core-js/modules/es.number.to-fixed.js');
+			function Profiler_classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+			}
+			function Profiler_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function Profiler_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && Profiler_defineProperties(Constructor.prototype, protoProps),
+					staticProps && Profiler_defineProperties(Constructor, staticProps),
 					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
 					Constructor
 				);
 			}
-			function Stores_QueryStore_classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-			}
-			var QueryStore_QueryStore = Stores_QueryStore_createClass(function QueryStore(services, search) {
-					Stores_QueryStore_classCallCheck(this, QueryStore);
-					var observables = {};
-					null != search && search.query && ((this.query = new QueryStore_Query(services, search.query)), (observables.query = mobx_esm.LO)),
-						null != search &&
-							search.didYouMean &&
-							((this.didYouMean = new QueryStore_Query(services, search.didYouMean)), (observables.didYouMean = mobx_esm.LO)),
-						null != search &&
-							search.originalQuery &&
-							((this.originalQuery = new QueryStore_Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.LO)),
-						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.LO)),
-						(0, mobx_esm.rC)(this, observables);
-				}),
-				QueryStore_Query = Stores_QueryStore_createClass(function Query(services, query) {
-					Stores_QueryStore_classCallCheck(this, Query),
-						(this.string = query),
-						(this.url = services.urlManager.remove('page').remove('filter').set('query', this.string)),
-						(0, mobx_esm.rC)(this, { string: mobx_esm.LO });
-				});
-			function SearchStore_defineProperties(target, props) {
+			var Profiler = (function () {
+					function Profiler(namespace) {
+						Profiler_classCallCheck(this, Profiler), (this.namespace = namespace || ''), (this.profiles = []);
+					}
+					return (
+						Profiler_createClass(Profiler, [
+							{
+								key: 'setNamespace',
+								value: function setNamespace(namespace) {
+									this.namespace || (this.namespace = namespace);
+								},
+							},
+							{
+								key: 'create',
+								value: function create(_ref) {
+									var type = _ref.type,
+										name = _ref.name,
+										context = _ref.context;
+									if (!name) throw new Error('Profile name is required.');
+									var profile = new Profile(this.namespace, { type, name, context });
+									return this.profiles.push(profile), profile;
+								},
+							},
+						]),
+						Profiler
+					);
+				})(),
+				Profile = (function () {
+					function Profile(namespace, _ref2) {
+						var type = _ref2.type,
+							name = _ref2.name,
+							context = _ref2.context;
+						Profiler_classCallCheck(this, Profile),
+							(this.status = 'pending'),
+							(this.time = { date: 0, begin: 0, end: 0, run: 0 }),
+							(this.namespace = namespace),
+							(this.type = type),
+							(this.name = name),
+							(this.context = context);
+					}
+					return (
+						Profiler_createClass(Profile, [
+							{
+								key: 'start',
+								value: function start() {
+									return (
+										this.time.begin || ((this.time.date = Date.now()), (this.time.begin = window.performance.now()), (this.status = 'started')), this
+									);
+								},
+							},
+							{
+								key: 'stop',
+								value: function stop() {
+									return (
+										!this.time.end &&
+											this.time.begin &&
+											((this.time.date = Date.now()),
+											(this.time.end = window.performance.now()),
+											(this.time.run = +(this.time.end - this.time.begin).toFixed(3)),
+											(this.status = 'finished')),
+										this
+									);
+								},
+							},
+						]),
+						Profile
+					);
+				})(),
+				v4 =
+					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
+					__webpack_require__('../snap-tracker/node_modules/uuid/dist/esm-browser/v4.js'));
+			function TrackEvent_defineProperties(target, props) {
 				for (var i = 0; i < props.length; i++) {
 					var descriptor = props[i];
 					(descriptor.enumerable = descriptor.enumerable || !1),
@@ -28175,126 +28134,737 @@
 						Object.defineProperty(target, descriptor.key, descriptor);
 				}
 			}
-			function SearchStore_setPrototypeOf(o, p) {
+			function TrackEvent_createClass(Constructor, protoProps, staticProps) {
 				return (
-					(SearchStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
-					SearchStore_setPrototypeOf(o, p)
+					protoProps && TrackEvent_defineProperties(Constructor.prototype, protoProps),
+					staticProps && TrackEvent_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
 				);
 			}
-			function SearchStore_createSuper(Derived) {
-				var hasNativeReflectConstruct = (function SearchStore_isNativeReflectConstruct() {
-					if ('undefined' == typeof Reflect || !Reflect.construct) return !1;
-					if (Reflect.construct.sham) return !1;
-					if ('function' == typeof Proxy) return !0;
-					try {
-						return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
-					} catch (e) {
-						return !1;
-					}
-				})();
-				return function _createSuperInternal() {
-					var result,
-						Super = SearchStore_getPrototypeOf(Derived);
-					if (hasNativeReflectConstruct) {
-						var NewTarget = SearchStore_getPrototypeOf(this).constructor;
-						result = Reflect.construct(Super, arguments, NewTarget);
-					} else result = Super.apply(this, arguments);
-					return SearchStore_possibleConstructorReturn(this, result);
-				};
-			}
-			function SearchStore_possibleConstructorReturn(self, call) {
-				if (call && ('object' == typeof call || 'function' == typeof call)) return call;
-				if (void 0 !== call) throw new TypeError('Derived constructors may only return object or undefined');
-				return SearchStore_assertThisInitialized(self);
-			}
-			function SearchStore_assertThisInitialized(self) {
-				if (void 0 === self) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				return self;
-			}
-			function SearchStore_getPrototypeOf(o) {
-				return (
-					(SearchStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
-						: function _getPrototypeOf(o) {
-								return o.__proto__ || Object.getPrototypeOf(o);
-						  }),
-					SearchStore_getPrototypeOf(o)
-				);
-			}
-			var SearchStore = (function (_AbstractStore) {
-				!(function SearchStore_inherits(subClass, superClass) {
-					if ('function' != typeof superClass && null !== superClass) throw new TypeError('Super expression must either be null or a function');
-					(subClass.prototype = Object.create(superClass && superClass.prototype, {
-						constructor: { value: subClass, writable: !0, configurable: !0 },
-					})),
-						Object.defineProperty(subClass, 'prototype', { writable: !1 }),
-						superClass && SearchStore_setPrototypeOf(subClass, superClass);
-				})(SearchStore, _AbstractStore);
-				var _super = SearchStore_createSuper(SearchStore);
-				function SearchStore(config, services) {
-					var _services$urlManager, _this;
-					if (
-						((function SearchStore_classCallCheck(instance, Constructor) {
-							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
-						})(this, SearchStore),
-						((_this = _super.call(this, config)).meta = {}),
-						'object' != typeof services ||
-							'function' !=
-								typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-									? void 0
-									: _services$urlManager.subscribe))
-					)
-						throw new Error('Invalid service \'urlManager\' passed to SearchStore. Missing "subscribe" function.');
-					return (
-						(_this.services = services),
-						(_this.storage = new StorageStore()),
-						_this.update({ meta: _this.meta }),
-						(0, mobx_esm.rC)(SearchStore_assertThisInitialized(_this), {
-							search: mobx_esm.LO,
-							merchandising: mobx_esm.LO,
-							facets: mobx_esm.LO,
-							filters: mobx_esm.LO,
-							results: mobx_esm.LO,
-							pagination: mobx_esm.LO,
-							sorting: mobx_esm.LO,
-						}),
-						_this
-					);
+			var TrackEvent = TrackEvent_createClass(function TrackEvent(payload) {
+				var _payload$event, _payload$event2, _payload$event3;
+				if (
+					((function TrackEvent_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, TrackEvent),
+					(payload.event = payload.event),
+					!payload.context || !payload.event)
+				)
+					throw 'TrackEvent: object parameter required a valid `context` BeaconContext and `event` ProductClickEvent objects';
+				if (
+					null === (_payload$event = payload.event) ||
+					void 0 === _payload$event ||
+					!_payload$event.intellisuggestData ||
+					null === (_payload$event2 = payload.event) ||
+					void 0 === _payload$event2 ||
+					!_payload$event2.intellisuggestSignature
+				)
+					throw 'TrackEvent: object parameter `event` ProductClickEvent object requires valid intellisuggestData and intellisuggestSignature values. These are the corresponding attributes in the Searchspring API response.';
+				(this.intellisuggestData = payload.event.intellisuggestData),
+					(this.intellisuggestSignature = payload.event.intellisuggestSignature),
+					(this.href = (null === (_payload$event3 = payload.event) || void 0 === _payload$event3 ? void 0 : _payload$event3.href) || ''),
+					(this.endpoint = 'https://' + payload.context.website.trackingCode + '.a.searchspring.io/api/track/track.json'),
+					(this.src =
+						this.endpoint +
+						'?d=' +
+						encodeURIComponent(this.intellisuggestData) +
+						'&s=' +
+						encodeURIComponent(this.intellisuggestSignature) +
+						'&u=' +
+						encodeURIComponent(this.href || '')),
+					window.document.referrer && (this.src += '&r=' + encodeURIComponent(window.document.referrer)),
+					(this.img = new Image(1, 1)),
+					(this.img.src = this.src);
+			});
+			function PixelEvent_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
 				}
+			}
+			function PixelEvent_createClass(Constructor, protoProps, staticProps) {
 				return (
-					(function SearchStore_createClass(Constructor, protoProps, staticProps) {
-						return (
-							protoProps && SearchStore_defineProperties(Constructor.prototype, protoProps),
-							staticProps && SearchStore_defineProperties(Constructor, staticProps),
-							Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
-							Constructor
-						);
-					})(SearchStore, [
-						{
-							key: 'update',
-							value: function update(data) {
-								(this.error = void 0),
-									(this.data = JSON.parse(JSON.stringify(data))),
-									(this.loaded = !!data.pagination),
-									(this.meta = data.meta),
-									(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-									(this.search = new QueryStore_QueryStore(this.services, data.search)),
-									(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
-									(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-									(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
-									(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-									(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
-							},
-						},
-					]),
-					SearchStore
+					protoProps && PixelEvent_defineProperties(Constructor.prototype, protoProps),
+					staticProps && PixelEvent_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
 				);
-			})(AbstractStore);
-			(0, mobx_esm.jQ)({ useProxies: 'never' });
+			}
+			var PixelEvent = PixelEvent_createClass(function PixelEvent(payload) {
+				var _payload$context,
+					_payload$context$webs,
+					_payload$context2,
+					_this = this;
+				switch (
+					((function PixelEvent_classCallCheck(instance, Constructor) {
+						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+					})(this, PixelEvent),
+					(this.endpoint = 'https://d3cgm8py10hi0z.cloudfront.net/is.gif'),
+					(this.src =
+						this.endpoint +
+						'?s=' +
+						encodeURIComponent(
+							(null == payload ||
+							null === (_payload$context = payload.context) ||
+							void 0 === _payload$context ||
+							null === (_payload$context$webs = _payload$context.website) ||
+							void 0 === _payload$context$webs
+								? void 0
+								: _payload$context$webs.trackingCode) || ''
+						) +
+						'&u=' +
+						encodeURIComponent(
+							(null == payload || null === (_payload$context2 = payload.context) || void 0 === _payload$context2
+								? void 0
+								: _payload$context2.userId) || ''
+						) +
+						'&ce=' +
+						(featureFlags_cookies ? '1' : '0') +
+						'&pt=' +
+						encodeURIComponent(document.title) +
+						'&v=1&x=' +
+						Math.floor(2147483647 * Math.random()) +
+						(window.document.referrer ? '&r=' + encodeURIComponent(window.document.referrer) : '')),
+					payload.category)
+				) {
+					case BeaconCategory.PAGEVIEW:
+						(this.event = payload.event), (this.src += '&a=viewItem'), this.event.sku && (this.src += '&sku=' + encodeURIComponent(this.event.sku));
+						break;
+					case BeaconCategory.CARTVIEW:
+						(this.event = payload.event),
+							(this.src += '&a=basket'),
+							this.event.items.forEach(function (item) {
+								null != item &&
+									item.sku &&
+									(_this.src +=
+										'&item=' +
+										encodeURIComponent(item.sku) +
+										';' +
+										encodeURIComponent((null == item ? void 0 : item.qty) || '') +
+										';' +
+										encodeURIComponent((null == item ? void 0 : item.price) || '') +
+										';');
+							});
+						break;
+					case BeaconCategory.ORDERVIEW:
+						var _this$event = (this.event = payload.event),
+							orderId = _this$event.orderId,
+							total = _this$event.total,
+							city = _this$event.city,
+							state = _this$event.state,
+							country = _this$event.country,
+							items = _this$event.items;
+						(this.src += '&a=sale'),
+							orderId && (this.src += '&orderId=' + encodeURIComponent(orderId)),
+							total && (this.src += '&total=' + encodeURIComponent(total)),
+							city && (this.src += '&city=' + encodeURIComponent(city)),
+							state && (this.src += '&state=' + encodeURIComponent(state)),
+							country && (this.src += '&country=' + encodeURIComponent(country)),
+							items.forEach(function (item) {
+								null != item &&
+									item.sku &&
+									(_this.src +=
+										'&item=' +
+										encodeURIComponent(item.sku) +
+										';' +
+										encodeURIComponent((null == item ? void 0 : item.qty) || '') +
+										';' +
+										encodeURIComponent((null == item ? void 0 : item.price) || '') +
+										';');
+							});
+				}
+				this.src.includes('&a=') && ((this.img = new Image(1, 1)), (this.img.src = this.src));
+			});
+			function BeaconEvent_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			function BeaconEvent_createClass(Constructor, protoProps, staticProps) {
+				return (
+					protoProps && BeaconEvent_defineProperties(Constructor.prototype, protoProps),
+					staticProps && BeaconEvent_defineProperties(Constructor, staticProps),
+					Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+					Constructor
+				);
+			}
+			var BeaconEvent = BeaconEvent_createClass(function BeaconEvent(payload) {
+				!(function BeaconEvent_classCallCheck(instance, Constructor) {
+					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+				})(this, BeaconEvent),
+					(this.type = payload.type),
+					(this.category = payload.category),
+					(this.context = payload.context),
+					(this.meta = payload.meta),
+					(this.event = payload.event),
+					(this.id = payload.id),
+					(this.pid = payload.pid),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.1' } }),
+					(this.id = (0, v4.Z)());
+			});
+			function Tracker_toConsumableArray(arr) {
+				return (
+					(function Tracker_arrayWithoutHoles(arr) {
+						if (Array.isArray(arr)) return Tracker_arrayLikeToArray(arr);
+					})(arr) ||
+					(function Tracker_iterableToArray(iter) {
+						if (('undefined' != typeof Symbol && null != iter[Symbol.iterator]) || null != iter['@@iterator']) return Array.from(iter);
+					})(arr) ||
+					(function Tracker_unsupportedIterableToArray(o, minLen) {
+						if (!o) return;
+						if ('string' == typeof o) return Tracker_arrayLikeToArray(o, minLen);
+						var n = Object.prototype.toString.call(o).slice(8, -1);
+						'Object' === n && o.constructor && (n = o.constructor.name);
+						if ('Map' === n || 'Set' === n) return Array.from(o);
+						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tracker_arrayLikeToArray(o, minLen);
+					})(arr) ||
+					(function Tracker_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function Tracker_arrayLikeToArray(arr, len) {
+				(null == len || len > arr.length) && (len = arr.length);
+				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+				return arr2;
+			}
+			function Tracker_defineProperties(target, props) {
+				for (var i = 0; i < props.length; i++) {
+					var descriptor = props[i];
+					(descriptor.enumerable = descriptor.enumerable || !1),
+						(descriptor.configurable = !0),
+						'value' in descriptor && (descriptor.writable = !0),
+						Object.defineProperty(target, descriptor.key, descriptor);
+				}
+			}
+			var Tracker_defaultConfig = { id: 'track' },
+				Tracker = (function () {
+					function Tracker(globals, config) {
+						var _window$searchspring,
+							_this = this;
+						if (
+							((function Tracker_classCallCheck(instance, Constructor) {
+								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
+							})(this, Tracker),
+							(this.targeters = []),
+							(this.track = {
+								event: function event(payload) {
+									var event = {
+											type: (null == payload ? void 0 : payload.type) || BeaconType.CUSTOM,
+											category: (null == payload ? void 0 : payload.category) || BeaconCategory.CUSTOM,
+											context: null != payload && payload.context ? cjs_default()(_this.context, payload.context) : _this.context,
+											event: payload.event,
+											pid: (null == payload ? void 0 : payload.pid) || void 0,
+										},
+										beaconEvent = new BeaconEvent(event);
+									return _this.sendEvents([beaconEvent]), beaconEvent;
+								},
+								shopper: {
+									login: function login(data, siteId) {
+										if (getFlags().cookies())
+											if (data.id) {
+												data.id = '' + data.id;
+												var context = _this.context;
+												if (
+													(siteId && ((context = cjs_default()(context, { context: { website: { trackingCode: siteId } } })).shopperId = data.id),
+													_this.getShopperId() != data.id)
+												) {
+													cookies.set('ssShopperId', data.id, 'Lax', 31536e6), (_this.context.shopperId = data.id), _this.sendPreflight();
+													var payload = { type: BeaconType.LOGIN, category: BeaconCategory.PERSONALIZATION, context, event: {} };
+													return _this.track.event(payload);
+												}
+											} else
+												console.error(
+													'tracker.shopper.login event: requires a valid shopper ID parameter. Example: tracker.shopper.login({ id: "1234" })'
+												);
+									},
+								},
+								product: {
+									view: function view(data, siteId) {
+										if ((null != data && data.sku) || (null != data && data.childSku)) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var payload = {
+													type: BeaconType.PRODUCT,
+													category: BeaconCategory.PAGEVIEW,
+													context,
+													event: {
+														sku: null != data && data.sku ? '' + data.sku : void 0,
+														childSku: null != data && data.childSku ? '' + data.childSku : void 0,
+													},
+												},
+												sku = (null == data ? void 0 : data.sku) || (null == data ? void 0 : data.childSku);
+											if (sku) {
+												var lastViewedProducts = _this.cookies.viewed.get(),
+													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
+														return item.trim();
+													});
+												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6),
+													lastViewedProducts.includes(sku) || _this.sendPreflight();
+											}
+											return (
+												null != data && data.sku && new PixelEvent(Object.assign({}, payload, { event: { sku: data.sku } })),
+												_this.track.event(payload)
+											);
+										}
+										console.error(
+											'track.product.view event: requires a valid sku and/or childSku. \nExample: track.product.view({ sku: "product123", childSku: "product123_a" })'
+										);
+									},
+									click: function click(data, siteId) {
+										if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var payload = {
+												type: BeaconType.CLICK,
+												category: BeaconCategory.INTERACTION,
+												context,
+												event: {
+													intellisuggestData: data.intellisuggestData,
+													intellisuggestSignature: data.intellisuggestSignature,
+													href: null != data && data.href ? '' + data.href : void 0,
+												},
+											};
+											return new TrackEvent(payload), _this.track.event(payload);
+										}
+										console.error(
+											'track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })'
+										);
+									},
+								},
+								cart: {
+									view: function view(data, siteId) {
+										if (Array.isArray(null == data ? void 0 : data.items) && null != data && data.items.length) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var items = data.items.map(function (item, index) {
+													if (
+														null != item &&
+														item.qty &&
+														null != item &&
+														item.price &&
+														((null != item && item.sku) || (null != item && item.childSku))
+													) {
+														var product = { qty: '' + item.qty, price: '' + item.price };
+														return (
+															null != item && item.sku && (product.sku = '' + item.sku),
+															null != item && item.childSku && (product.childSku = '' + item.childSku),
+															product
+														);
+													}
+													console.error(
+														'track.view.cart event: item ' +
+															item +
+															' at index ' +
+															index +
+															' requires a valid qty, price, and (sku and/or childSku.) \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+													);
+												}),
+												payload = { type: BeaconType.CART, category: BeaconCategory.CARTVIEW, context, event: { items } };
+											if (items.length) {
+												var products = items
+													.map(function (item) {
+														return (null == item ? void 0 : item.sku) || (null == item ? void 0 : item.childSku) || '';
+													})
+													.filter(function (sku) {
+														return sku;
+													});
+												_this.cookies.cart.add(products);
+											}
+											return new PixelEvent(payload), _this.track.event(payload);
+										}
+										console.error(
+											'track.view.cart event: parameter must be an array of cart items. \nExample: track.view.cart({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+										);
+									},
+								},
+								order: {
+									transaction: function transaction(data, siteId) {
+										var _data$order, _data$order2, _data$order3, _data$order4, _data$order5;
+										if (null != data && data.items && Array.isArray(data.items) && data.items.length) {
+											var context = _this.context;
+											siteId && (context = cjs_default()(context, { context: { website: { trackingCode: siteId } } }));
+											var items = data.items.map(function (item, index) {
+													if (
+														null != item &&
+														item.qty &&
+														null != item &&
+														item.price &&
+														((null != item && item.sku) || (null != item && item.childSku))
+													) {
+														var product = { qty: '' + item.qty, price: '' + item.price };
+														return (
+															null != item && item.sku && (product.sku = '' + item.sku),
+															null != item && item.childSku && (product.childSku = '' + item.childSku),
+															product
+														);
+													}
+													console.error(
+														'track.order.transaction event: object parameter `items`: item ' +
+															item +
+															' at index ' +
+															index +
+															' requires a valid qty, price, and (sku and/or childSku.) \nExample: order.view({ items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+													);
+												}),
+												eventPayload = {
+													orderId:
+														null != data && null !== (_data$order = data.order) && void 0 !== _data$order && _data$order.id
+															? '' + data.order.id
+															: void 0,
+													total:
+														null != data && null !== (_data$order2 = data.order) && void 0 !== _data$order2 && _data$order2.total
+															? '' + data.order.total
+															: void 0,
+													city:
+														null != data && null !== (_data$order3 = data.order) && void 0 !== _data$order3 && _data$order3.city
+															? '' + data.order.city
+															: void 0,
+													state:
+														null != data && null !== (_data$order4 = data.order) && void 0 !== _data$order4 && _data$order4.state
+															? '' + data.order.state
+															: void 0,
+													country:
+														null != data && null !== (_data$order5 = data.order) && void 0 !== _data$order5 && _data$order5.country
+															? '' + data.order.country
+															: void 0,
+													items,
+												},
+												payload = { type: BeaconType.ORDER, category: BeaconCategory.ORDERVIEW, context, event: eventPayload };
+											return _this.cookies.cart.clear(), new PixelEvent(payload), _this.track.event(payload);
+										}
+										console.error(
+											'track.order.transaction event: object parameter must contain `items` array of cart items. \nExample: order.transaction({ order: { id: "1001", total: "9.99", city: "Los Angeles", state: "CA", country: "US" }, items: [{ sku: "product123", childSku: "product123_a", qty: "1", price: "9.99" }] })'
+										);
+									},
+								},
+							}),
+							(this.getUserId = function () {
+								var userId;
+								try {
+									getFlags().storage() && (userId = window.localStorage.getItem('ssUserId')),
+										getFlags().cookies()
+											? ((userId = userId || cookies.get('ssUserId') || (0, v4.Z)()), cookies.set('ssUserId', userId, 'Lax', 31536e6))
+											: !userId && getFlags().storage() && ((userId = (0, v4.Z)()), window.localStorage.setItem('ssUserId', userId));
+								} catch (e) {
+									console.error('Failed to persist user id to cookie or local storage:', e);
+								}
+								return userId;
+							}),
+							(this.getSessionId = function () {
+								var sessionId;
+								if (getFlags().storage())
+									try {
+										(sessionId = window.sessionStorage.getItem('ssSessionIdNamespace') || (0, v4.Z)()),
+											window.sessionStorage.setItem('ssSessionIdNamespace', sessionId),
+											getFlags().cookies() && cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0);
+									} catch (e) {
+										console.error('Failed to persist session id to session storage:', e);
+									}
+								else
+									getFlags().cookies() &&
+										((sessionId = cookies.get('ssSessionIdNamespace')) ||
+											((sessionId = (0, v4.Z)()), cookies.set('ssSessionIdNamespace', sessionId, 'Lax', 0)));
+								return sessionId;
+							}),
+							(this.getShopperId = function () {
+								var shopperId = cookies.get('ssShopperId');
+								if (shopperId) return shopperId;
+							}),
+							(this.sendPreflight = function () {
+								var userId = _this.getUserId(),
+									siteId = _this.context.website.trackingCode,
+									shopper = _this.getShopperId(),
+									cart = _this.cookies.cart.get(),
+									lastViewed = _this.cookies.viewed.get();
+								if (userId && 'string' == typeof userId && siteId && (shopper || cart.length || lastViewed.length)) {
+									var preflightParams = { userId, siteId },
+										queryStringParams = '?userId=' + encodeURIComponent(userId) + '&siteId=' + encodeURIComponent(siteId);
+									shopper && ((preflightParams.shopper = shopper), (queryStringParams += '&shopper=' + encodeURIComponent(shopper))),
+										cart.length &&
+											((preflightParams.cart = cart),
+											(queryStringParams += cart
+												.map(function (item) {
+													return '&cart=' + encodeURIComponent(item);
+												})
+												.join(''))),
+										lastViewed.length &&
+											((preflightParams.lastViewed = lastViewed),
+											(queryStringParams += lastViewed
+												.map(function (item) {
+													return '&lastViewed=' + encodeURIComponent(item);
+												})
+												.join('')));
+									var endpoint = 'https://' + siteId + '.a.searchspring.io/api/personalization/preflightCache',
+										xhr = new XMLHttpRequest();
+									charsParams(preflightParams) > 1024
+										? (xhr.open('POST', endpoint),
+										  xhr.setRequestHeader('Content-Type', 'application/json'),
+										  xhr.send(JSON.stringify(preflightParams)))
+										: (xhr.open('GET', endpoint + queryStringParams), xhr.send());
+								}
+							}),
+							(this.cookies = {
+								cart: {
+									get: function get() {
+										var items = cookies.get('ssCartProducts');
+										return items ? items.split(',') : [];
+									},
+									set: function set(items) {
+										if (items.length) {
+											var cartItems = items.map(function (item) {
+													return item.trim();
+												}),
+												uniqueCartItems = Array.from(new Set(cartItems));
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												cartItems.filter(function (item) {
+													return items.includes(item);
+												}).length !== items.length && _this.sendPreflight();
+										}
+									},
+									add: function add(items) {
+										if (items.length) {
+											var currentCartItems = _this.cookies.cart.get(),
+												itemsToAdd = items.map(function (item) {
+													return item.trim();
+												}),
+												uniqueCartItems = Array.from(
+													new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
+												);
+											cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0),
+												currentCartItems.filter(function (item) {
+													return itemsToAdd.includes(item);
+												}).length !== itemsToAdd.length && _this.sendPreflight();
+										}
+									},
+									remove: function remove(items) {
+										if (items.length) {
+											var currentCartItems = _this.cookies.cart.get(),
+												itemsToRemove = items.map(function (item) {
+													return item.trim();
+												}),
+												updatedItems = currentCartItems.filter(function (item) {
+													return !itemsToRemove.includes(item);
+												});
+											cookies.set('ssCartProducts', updatedItems.join(','), 'Lax', 0),
+												currentCartItems.length !== updatedItems.length && _this.sendPreflight();
+										}
+									},
+									clear: function clear() {
+										_this.cookies.cart.get().length && (cookies.unset('ssCartProducts'), _this.sendPreflight());
+									},
+								},
+								viewed: {
+									get: function get() {
+										var items = cookies.get('ssViewedProducts');
+										return items ? items.split(',') : [];
+									},
+								},
+							}),
+							(this.sendEvents = function (eventsToSend) {
+								var events = JSON.parse(_this.localStorage.get('ssBeaconPool') || '[]');
+								eventsToSend &&
+									(eventsToSend.forEach(function (event) {
+										events.push(Object.assign({}, event));
+									}),
+									_this.localStorage.set('ssBeaconPool', JSON.stringify(events))),
+									clearTimeout(_this.isSending),
+									(_this.isSending = window.setTimeout(function () {
+										if (events.length) {
+											var xhr = new XMLHttpRequest();
+											xhr.open('POST', 'https://beacon.searchspring.io/beacon'),
+												xhr.setRequestHeader('Content-Type', 'application/json'),
+												xhr.send(JSON.stringify(1 == events.length ? events[0] : events));
+										}
+										_this.localStorage.set('ssBeaconPool', JSON.stringify([]));
+									}, 150));
+							}),
+							'object' != typeof globals || 'string' != typeof globals.siteId)
+						)
+							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
+						(this.config = cjs_default()(Tracker_defaultConfig, config || {})),
+							(this.globals = globals),
+							(this.localStorage = new StorageStore({ type: StorageType.LOCAL, key: 'ss-' + this.config.id + '-' + this.globals.siteId + '-local' })),
+							(this.context = {
+								userId: this.getUserId() || '',
+								sessionId: this.getSessionId(),
+								shopperId: this.getShopperId(),
+								pageLoadId: (0, v4.Z)(),
+								website: { trackingCode: this.globals.siteId },
+							}),
+							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.1')),
+							setTimeout(function () {
+								_this.targeters.push(
+									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
+										var _getContext = (function getContext() {
+												var _scriptElem$getAttrib,
+													_scriptElem$id,
+													_scriptElem$src,
+													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
+													script = arguments.length > 1 ? arguments[1] : void 0;
+												if (!script || 'string' == typeof script) {
+													script = Array.from(document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'))
+														.sort(function (a, b) {
+															return a.innerHTML.length - b.innerHTML.length;
+														})
+														.pop();
+												}
+												if (!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
+													throw new Error('getContext: did not find a script tag');
+												var scriptElem = script;
+												if (
+													!(
+														(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
+															void 0 !== _scriptElem$getAttrib &&
+															_scriptElem$getAttrib.match(/^searchspring/i)) ||
+														(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
+														(null !== (_scriptElem$src = scriptElem.src) &&
+															void 0 !== _scriptElem$src &&
+															_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
+													)
+												)
+													throw new Error(
+														'getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"'
+													);
+												if (
+													(evaluate && !Array.isArray(evaluate)) ||
+													(evaluate &&
+														!evaluate.reduce(function (accu, name) {
+															return accu && 'string' == typeof name;
+														}, !0))
+												)
+													throw new Error('getContext: first parameter must be an array of strings');
+												var variables = {};
+												return (
+													null == evaluate ||
+														evaluate.forEach(function (name) {
+															var fn = new Function(
+																'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+															);
+															variables[name] = fn();
+														}),
+													Object.values(scriptElem.attributes).map(function (attr) {
+														var name = attr.nodeName;
+														evaluate.includes(name) && (variables[name] = scriptElem.getAttribute(name));
+													}),
+													Object.keys(variables).forEach(function (key) {
+														void 0 === variables[key] && delete variables[key];
+													}),
+													variables
+												);
+											})(['item', 'items', 'siteId', 'shopper', 'order', 'type'], elem),
+											item = _getContext.item,
+											items = _getContext.items,
+											siteId = _getContext.siteId,
+											shopper = _getContext.shopper,
+											order = _getContext.order,
+											type = _getContext.type;
+										switch (type) {
+											case 'searchspring/track/shopper/login':
+												_this.track.shopper.login(shopper, siteId);
+												break;
+											case 'searchspring/track/product/view':
+												_this.track.product.view(item, siteId);
+												break;
+											case 'searchspring/track/cart/view':
+												_this.track.cart.view({ items }, siteId);
+												break;
+											case 'searchspring/track/order/transaction':
+												_this.track.order.transaction({ order, items }, siteId);
+												break;
+											default:
+												console.error("event '" + type + "' is not supported");
+										}
+									})
+								);
+							}),
+							document.addEventListener('click', function (event) {
+								var updateRecsControllers = function updateRecsControllers() {
+										window.searchspring.controller &&
+											Object.keys(window.searchspring.controller).forEach(function (name) {
+												var _controller$config,
+													controller = window.searchspring.controller[name];
+												'recommendation' === controller.type &&
+													null !== (_controller$config = controller.config) &&
+													void 0 !== _controller$config &&
+													_controller$config.realtime &&
+													controller.search();
+											});
+									},
+									attributes = (function getClickAttributes(event) {
+										var attributeList = [
+												'ss-' + _this.config.id + '-cart-add',
+												'ss-' + _this.config.id + '-cart-remove',
+												'ss-' + _this.config.id + '-cart-clear',
+												'ss-' + _this.config.id + '-cart-view',
+												'ss-' + _this.config.id + '-intellisuggest',
+												'ss-' + _this.config.id + '-intellisuggest-signature',
+												'href',
+											],
+											attributes = {},
+											levels = 0,
+											elem = null;
+										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
+											Object.values(elem.attributes).forEach(function (attr) {
+												var attrName = attr.nodeName;
+												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
+											}),
+												(elem = elem.parentElement),
+												levels++;
+										return attributes;
+									})(event);
+								if (attributes['ss-' + _this.config.id + '-cart-add']) {
+									var skus = attributes['ss-' + _this.config.id + '-cart-add'].split(',');
+									_this.cookies.cart.add(skus), updateRecsControllers();
+								} else if (attributes['ss-' + _this.config.id + '-cart-remove']) {
+									var _skus = attributes['ss-' + _this.config.id + '-cart-remove'].split(',');
+									_this.cookies.cart.remove(_skus), updateRecsControllers();
+								} else if ('ss-' + _this.config.id + '-cart-clear' in attributes) _this.cookies.cart.clear(), updateRecsControllers();
+								else if ('ss-' + _this.config.id + '-cart-view' in attributes) updateRecsControllers();
+								else if (
+									attributes['ss-' + _this.config.id + '-intellisuggest'] &&
+									attributes['ss-' + _this.config.id + '-intellisuggest-signature']
+								) {
+									var intellisuggestData = attributes['ss-' + _this.config.id + '-intellisuggest'],
+										intellisuggestSignature = attributes['ss-' + _this.config.id + '-intellisuggest-signature'],
+										href = attributes.href;
+									_this.track.product.click({ intellisuggestData, intellisuggestSignature, href });
+								}
+							}),
+							this.sendEvents();
+					}
+					return (
+						(function Tracker_createClass(Constructor, protoProps, staticProps) {
+							return (
+								protoProps && Tracker_defineProperties(Constructor.prototype, protoProps),
+								staticProps && Tracker_defineProperties(Constructor, staticProps),
+								Object.defineProperty(Constructor, 'prototype', { writable: !1 }),
+								Constructor
+							);
+						})(Tracker, [
+							{
+								key: 'retarget',
+								value: function retarget() {
+									this.targeters.forEach(function (target) {
+										target.retarget();
+									});
+								},
+							},
+						]),
+						Tracker
+					);
+				})();
 			function snapify_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 				try {
 					var info = gen[key](arg),
@@ -28351,23 +28921,17 @@
 								value: function recommendation(config) {
 									var id = config.id;
 									if (controllers[id]) return controllers[id];
-									var cntrlr = (controllers[id] = (function (config, services) {
-										var urlManager = (
-											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker)
-										).detach(!0);
-										return new RecommendationController(
-											config.controller,
-											{
-												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-												store: (null == services ? void 0 : services.store) || new RecommendationStore(config.controller, { urlManager }),
-												urlManager,
-												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-												logger: (null == services ? void 0 : services.logger) || new Logger(),
-												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-											},
-											config.context
-										);
+									var cntrlr = (controllers[id] = (function createRecommendationController(config) {
+										var urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(!0);
+										return new RecommendationController(config.controller, {
+											client: new Client(config.client.globals, config.client.config),
+											store: new RecommendationStore(config.controller, { urlManager }),
+											urlManager,
+											eventManager: new EventManager(),
+											profiler: new Profiler(),
+											logger: new Logger(),
+											tracker: new Tracker(config.client.globals),
+										});
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -28408,23 +28972,17 @@
 								value: function autocomplete(config) {
 									var id = config.id;
 									if (controllers[id]) return controllers[id];
-									var cntrlr = (controllers[id] = (function (config, services) {
-										var urlManager = (
-											(null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker)
-										).detach();
-										return new AutocompleteController(
-											config.controller,
-											{
-												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-												store: (null == services ? void 0 : services.store) || new AutocompleteStore(config.controller, { urlManager }),
-												urlManager,
-												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-												logger: (null == services ? void 0 : services.logger) || new Logger(),
-												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-											},
-											config.context
-										);
+									var cntrlr = (controllers[id] = (function createAutocompleteController(config) {
+										var urlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
+										return new AutocompleteController(config.controller, {
+											client: new Client(config.client.globals, config.client.config),
+											store: new AutocompleteStore(config.controller, { urlManager }),
+											urlManager,
+											eventManager: new EventManager(),
+											profiler: new Profiler(),
+											logger: new Logger(),
+											tracker: new Tracker(config.client.globals),
+										});
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -28465,21 +29023,17 @@
 								value: function search(config) {
 									var id = config.id;
 									if (controllers[id]) return controllers[id];
-									var cntrlr = (controllers[id] = (function (config, services) {
-										var urlManager = (null == services ? void 0 : services.urlManager) || new UrlManager(new UrlTranslator(config.url), reactLinker);
-										return new SearchController(
-											config.controller,
-											{
-												client: (null == services ? void 0 : services.client) || new Client(config.client.globals, config.client.config),
-												store: (null == services ? void 0 : services.store) || new SearchStore(config.controller, { urlManager }),
-												urlManager,
-												eventManager: (null == services ? void 0 : services.eventManager) || new EventManager(),
-												profiler: (null == services ? void 0 : services.profiler) || new Profiler(),
-												logger: (null == services ? void 0 : services.logger) || new Logger(),
-												tracker: (null == services ? void 0 : services.tracker) || new Tracker(config.client.globals),
-											},
-											config.context
-										);
+									var cntrlr = (controllers[id] = (function createSearchController(config) {
+										var urlManager = new UrlManager(new UrlTranslator(), reactLinker);
+										return new SearchController(config.controller, {
+											client: new Client(config.client.globals, config.client.config),
+											store: new SearchStore(config.controller, { urlManager }),
+											urlManager,
+											eventManager: new EventManager(),
+											profiler: new Profiler(),
+											logger: new Logger(),
+											tracker: new Tracker(config.client.globals),
+										});
 									})({ client, controller: config }));
 									return (
 										cntrlr.on(
@@ -29563,6 +30117,7 @@
 				'./components/Molecules/Select/Select.stories.tsx': './src/components/Molecules/Select/Select.stories.tsx',
 				'./components/Molecules/Slideout/Slideout.stories.tsx': './src/components/Molecules/Slideout/Slideout.stories.tsx',
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': './src/components/Organisms/Autocomplete/Autocomplete.stories.tsx',
+				'./components/Organisms/BranchOverride/BranchOverride.stories.tsx': './src/components/Organisms/BranchOverride/BranchOverride.stories.tsx',
 				'./components/Organisms/Facet/Facet.stories.tsx': './src/components/Organisms/Facet/Facet.stories.tsx',
 				'./components/Organisms/Facets/Facets.stories.tsx': './src/components/Organisms/Facets/Facets.stories.tsx',
 				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': './src/components/Organisms/FilterSummary/FilterSummary.stories.tsx',
@@ -29622,7 +30177,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[159],
+			[905],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
