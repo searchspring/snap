@@ -279,17 +279,11 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 									cloneWithProps(overflowSlot, { facet })
 								) : (
 									<>
-										{/* @ts-ignore */}
-										<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow?.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
-										{/* @ts-ignore */}
-										<span>
-											{(facet as ValueFacet) &&
-											(facet as ValueFacet).overflow &&
-											(facet as ValueFacet).overflow?.remaining !== undefined &&
-											(facet as ValueFacet).overflow?.remaining > 0
-												? showMoreText
-												: showLessText}
-										</span>
+										<Icon
+											{...subProps.showMoreLessIcon}
+											icon={((facet as ValueFacet).overflow?.remaining || 0) > 0 ? iconOverflowMore : iconOverflowLess}
+										/>
+										<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
 									</>
 								)}
 							</div>
