@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
@@ -16,7 +16,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	results: ({ columns, gapSize }) =>
+	results: ({ columns, gapSize }: { columns: number; gapSize: string }) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -81,7 +81,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints);
+	const displaySettings = useDisplaySettings(props.breakpoints || defaultBreakpointsProps);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		props = {
 			...props,
@@ -118,16 +118,14 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		},
 	};
 
-	let results;
-	if (props?.columns > 0 && props?.rows > 0) {
-		results = props.results.slice(0, props.columns * props.rows);
-	} else {
-		results = props.results;
+	let results = props.results;
+	if (props?.columns && props?.rows && props?.columns > 0 && props?.rows > 0) {
+		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
+		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns || 4, gapSize: props.gapSize || '20px' }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -135,19 +133,28 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result) =>
+				{results.map((result: ResultType | InlineBannerContent) =>
 					(() => {
 						switch (result.type) {
-							case BannerType.BANNER:
-								return <InlineBanner key={result.uid} {...subProps.inlineBanner} banner={result} layout={props.layout} />;
+							case BannerType.banner:
+								return (
+									<InlineBanner
+										key={(result as InlineBannerContent).uid}
+										{...subProps.inlineBanner}
+										banner={result as InlineBannerContent}
+										layout={props.layout}
+									/>
+								);
 							default:
-								return <Result key={result.uid} {...subProps.result} result={result} layout={props.layout} controller={controller} />;
+								return <Result key={result.uid} {...subProps.result} result={result as ResultType} layout={props.layout} controller={controller} />;
 						}
 					})()
 				)}
 			</div>
 		</CacheProvider>
-	) : null;
+	) : (
+		<Fragment></Fragment>
+	);
 });
 
 export interface ResultsProp extends ComponentProps {

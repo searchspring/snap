@@ -7,11 +7,12 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
+import { CSSProperties } from 'react';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility }) =>
+	image: ({ visibility }: { visibility: CSSProperties['visibility'] }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -43,7 +44,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
 
-	const [visibility, setVisibility] = useState('hidden');
+	const [visibility, setVisibility] = useState<CSSProperties['visibility']>('hidden');
 	const [isHovering, setHover] = useState(false);
 
 	const prevSrcRef = useRef('');
@@ -68,22 +69,22 @@ export function Image(properties: ImageProps): JSX.Element {
 					alt={alt}
 					title={alt}
 					loading={lazy ? 'lazy' : undefined}
-					onLoad={(e) => {
+					onLoad={(e: React.MouseEvent<HTMLImageElement>) => {
 						setVisibility('visible');
-						onLoad && onLoad(e as any);
+						onLoad && onLoad(e);
 					}}
-					onClick={(e) => onClick && onClick(e as any)}
-					onError={(e) => {
-						(e.target as HTMLImageElement).src = fallback;
-						onError && onError(e as any);
+					onClick={(e: React.MouseEvent<HTMLImageElement>) => onClick && onClick(e)}
+					onError={(e: React.MouseEvent<HTMLImageElement>) => {
+						(e.target as HTMLImageElement).src = fallback || '';
+						onError && onError(e);
 					}}
-					onMouseOver={(e) => {
+					onMouseOver={(e: React.MouseEvent<HTMLImageElement>) => {
 						hoverSrc && setHover(true);
-						onMouseOver && onMouseOver(e as any);
+						onMouseOver && onMouseOver(e);
 					}}
-					onMouseOut={(e) => {
+					onMouseOut={(e: React.MouseEvent<HTMLImageElement>) => {
 						hoverSrc && setHover(false);
-						onMouseOut && onMouseOut(e as any);
+						onMouseOut && onMouseOut(e);
 					}}
 				/>
 			</div>
@@ -96,10 +97,10 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	onMouseOver?: (e: MouseEvent) => void;
-	onMouseOut?: (e: MouseEvent) => void;
-	onError?: (e: Event) => void;
-	onLoad?: (e: Event) => void;
-	onClick?: (e: MouseEvent) => void;
+	onMouseOver?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onMouseOut?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onError?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onLoad?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	lazy?: boolean;
 }

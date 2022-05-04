@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 
-export const useIntersection = (ref, rootMargin = '0px', fireOnce = false) => {
+export const useIntersection = (ref: any, rootMargin = '0px', fireOnce = false) => {
 	// State and setter for storing whether element is visible
 	const [isIntersecting, setIntersecting] = useState(false);
 	useEffect(() => {

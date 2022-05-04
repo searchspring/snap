@@ -12,12 +12,12 @@ import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
-	dropdown: ({ disableOverlay }) =>
+	dropdown: ({ disableOverlay }: { disableOverlay?: boolean }) =>
 		css({
 			position: 'relative',
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__content': {
-					position: disableOverlay ? 'relative' : null,
+					position: disableOverlay ? 'relative' : undefined,
 					visibility: 'visible',
 					opacity: 1,
 				},
@@ -65,18 +65,18 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		style,
 	} = props;
 
-	let showContent, setShowContent;
+	let showContent: boolean | undefined, setShowContent: any;
 
 	const stateful = open === undefined;
 	if (stateful) {
-		[showContent, setShowContent] = useState(startOpen);
+		[showContent, setShowContent] = useState<boolean | undefined>(startOpen);
 	} else {
 		showContent = open;
 	}
 
-	const innerRef =
-		!disableClickOutside &&
-		useClickOutside<HTMLDivElement>((e) => {
+	let innerRef: React.RefObject<HTMLElement> | undefined = undefined;
+	if (!disableClickOutside) {
+		innerRef = useClickOutside<HTMLElement>((e) => {
 			if (showContent) {
 				if (!disabled) {
 					stateful && setShowContent(false);
@@ -84,10 +84,11 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				}
 			}
 		});
+	}
 
-	const toggleShowContent = (e) => {
+	const toggleShowContent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (stateful) {
-			setShowContent((prev) => {
+			setShowContent((prev: boolean) => {
 				onToggle && onToggle(e, !prev);
 				return !prev;
 			});
@@ -102,13 +103,17 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	}
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)} ref={innerRef}>
+			<div
+				{...styling}
+				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
+				ref={(innerRef as React.LegacyRef<HTMLDivElement>) || undefined}
+			>
 				<div
 					className="ss__dropdown__button"
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
-							onClick && onClick(e as any);
+							onClick && onClick(e);
 						}
 					}}
 				>
@@ -131,8 +136,8 @@ export interface DropdownProps extends ComponentProps {
 	disabled?: boolean;
 	open?: boolean;
 	disableOverlay?: boolean;
-	onClick?: (event: Event) => void;
-	onToggle?: (event: Event, showContent: boolean) => void;
+	onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
 }

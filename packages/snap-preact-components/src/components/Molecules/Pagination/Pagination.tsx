@@ -9,9 +9,10 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { PaginationStore } from '@searchspring/snap-store-mobx/dist/cjs/Search/Stores';
 
 const CSS = {
-	pagination: ({ theme }) =>
+	pagination: ({ theme }: { theme: Theme }) =>
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
@@ -89,65 +90,65 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		store?.totalResults && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__pagination', className)}>
-					<>
-						{/* Prev */}
-						{store.previous && !hidePrev && (
-							<a
-								{...store.previous.url.link}
-								className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
-								aria-label={'previous page'}
-							>
-								{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
+	return store?.totalResults ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__pagination', className)}>
+				<>
+					{/* Prev */}
+					{store.previous && !hidePrev && (
+						<a
+							{...store.previous.url.link}
+							className={classnames('ss__pagination__page', 'ss__pagination__page--previous')}
+							aria-label={'previous page'}
+						>
+							{prevButton ? prevButton : <Icon {...subProps.icon} icon={'angle-left'} />}
+						</a>
+					)}
+
+					{/* first */}
+					{!pageNumbers.includes(store.first.number) && !hideFirst && (
+						<>
+							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} aria-label={'first page'}>
+								{firstButton ? firstButton : store.first.number}
 							</a>
-						)}
+							{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
+						</>
+					)}
 
-						{/* first */}
-						{!pageNumbers.includes(store.first.number) && !hideFirst && (
-							<>
-								<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} aria-label={'first page'}>
-									{firstButton ? firstButton : store.first.number}
+					{/* pages */}
+					{_pages &&
+						_pages.map((page) =>
+							page.active ? (
+								<span className={classnames('ss__pagination__page', 'ss__pagination__page--active')}>{page.number}</span>
+							) : (
+								<a {...page.url.link} className="ss__pagination__page" aria-label={`page ${page.number}`}>
+									{page.number}
 								</a>
-								{!pageNumbers.includes(2) && !hideEllipsis && <span>&hellip;</span>}
-							</>
+							)
 						)}
 
-						{/* pages */}
-						{_pages &&
-							_pages.map((page) =>
-								page.active ? (
-									<span className={classnames('ss__pagination__page', 'ss__pagination__page--active')}>{page.number}</span>
-								) : (
-									<a {...page.url.link} className="ss__pagination__page" aria-label={`page ${page.number}`}>
-										{page.number}
-									</a>
-								)
-							)}
+					{/* last page */}
+					{!pageNumbers.includes(store.last.number) && !hideLast && (
+						<>
+							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
-						{/* last page */}
-						{!pageNumbers.includes(store.last.number) && !hideLast && (
-							<>
-								{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
-
-								<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} aria-label={'last page'}>
-									{lastButton ? lastButton : store.last.number}
-								</a>
-							</>
-						)}
-
-						{/* next */}
-						{store.next && !hideNext && (
-							<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'next page'}>
-								{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
+							<a {...store.last.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--last')} aria-label={'last page'}>
+								{lastButton ? lastButton : store.last.number}
 							</a>
-						)}
-					</>
-				</div>
-			</CacheProvider>
-		)
+						</>
+					)}
+
+					{/* next */}
+					{store.next && !hideNext && (
+						<a {...store.next.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--next')} aria-label={'next page'}>
+							{nextButton ? nextButton : <Icon {...subProps.icon} icon={'angle-right'} />}
+						</a>
+					)}
+				</>
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -157,7 +158,7 @@ interface PaginationSubProps {
 
 // TODO: possibly lower num of props
 export interface PaginationProps extends ComponentProps {
-	pagination: any; //TODO: update pagination mock data, 'any' to pass pagination tests
+	pagination: PaginationStore;
 	pages?: number;
 	pagesLeft?: number;
 	pagesRight?: number;

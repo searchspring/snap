@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { BreakpointsProps, BreakpointsEntry } from '../types';
 
-export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry {
+export function useDisplaySettings(breakpointsObj: BreakpointsProps): BreakpointsEntry | undefined {
 	if (!breakpointsObj || !Object.keys(breakpointsObj).length) return;
 
 	// Call getDisplaySettings right away to prevent flashing
@@ -24,13 +24,13 @@ export function useDisplaySettings(breakpointsObj: BreakpointsProps): Breakpoint
 	return displaySettings;
 }
 
-const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry => {
+const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry | undefined => {
 	let breakpointsSettings;
 
 	const currentScreenWidth = window.innerWidth;
 	const sortedList = Object.keys(breakpoints)
 		?.sort((a, b) => parseInt(a) - parseInt(b))
-		.map((vp) => ({ [vp]: breakpoints[vp] }));
+		.map((vp) => ({ [vp]: breakpoints[vp as unknown as keyof typeof breakpoints] }));
 	if (sortedList.length) {
 		//loop through and find the desired breakpoints setting
 		for (let i = 0; i < sortedList.length; i++) {
@@ -53,11 +53,13 @@ const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry => 
 
 		return breakpointsSettings;
 	}
+
+	return breakpointsSettings;
 };
 
-const debounce = (func, timeout = 200) => {
-	let timer;
-	return (...args) => {
+const debounce = (func: () => void, timeout = 200) => {
+	let timer: any;
+	return (...args: any) => {
 		clearTimeout(timer);
 		timer = setTimeout(() => {
 			func.apply(this, args);

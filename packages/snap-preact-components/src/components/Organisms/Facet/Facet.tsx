@@ -12,12 +12,21 @@ import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from '../../Molecul
 import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
+import {
+	ComponentProps,
+	FacetDisplay,
+	ValueFacet,
+	RangeFacet,
+	RangeBucketFacet,
+	BaseFacet,
+	HierarchyFacet,
+	HierarchyFacetValue,
+} from '../../../types';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	facet: ({ color, theme }) =>
+	facet: ({ color, theme }: { color?: string; theme: Theme }) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
@@ -211,8 +220,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	};
 
 	let limitedValues;
-	if ((facet as ValueFacet)?.overflow && Number.isInteger(limit) && !disableOverflow) {
-		(facet as ValueFacet).overflow.setLimit(limit);
+	if ((facet as ValueFacet)?.overflow && limit && Number.isInteger(limit) && !disableOverflow) {
+		(facet as ValueFacet).overflow?.setLimit(limit);
 		limitedValues = (facet as ValueFacet)?.refinedValues;
 	} else if ((facet as ValueFacet)?.overflow && Number.isInteger(limit)) {
 		limitedValues = (facet as ValueFacet)?.values.slice(0, limit);
@@ -234,7 +243,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					<Dropdown
 						{...subProps.dropdown}
 						open={disableCollapse || !facet?.collapsed}
-						onClick={(e) => !disableCollapse && facet?.toggleCollapse()}
+						onClick={(e) => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 						button={
 							<div className="ss__facet__header">
 								{facet?.label}
@@ -252,26 +261,35 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										case FacetDisplay.SLIDER:
 											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 										case FacetDisplay.GRID:
-											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues} />;
+											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues || []} />;
 										case FacetDisplay.PALETTE:
-											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues} />;
+											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues || []} />;
 										case FacetDisplay.HIERARCHY:
-											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues} />;
+											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(limitedValues as HierarchyFacetValue[]) || []} />;
 										default:
-											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues} />;
+											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues || []} />;
 									}
 								}
 							})()}
 						</div>
 
-						{!disableOverflow && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow.enabled && (
-							<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow.toggle()}>
+						{!disableOverflow && facet && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow?.enabled && (
+							<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()}>
 								{overflowSlot ? (
 									cloneWithProps(overflowSlot, { facet })
 								) : (
 									<>
-										<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
-										<span>{(facet as ValueFacet).overflow.remaining > 0 ? showMoreText : showLessText}</span>
+										{/* @ts-ignore */}
+										<Icon {...subProps.showMoreLessIcon} icon={(facet as ValueFacet).overflow?.remaining > 0 ? iconOverflowMore : iconOverflowLess} />
+										{/* @ts-ignore */}
+										<span>
+											{(facet as ValueFacet) &&
+											(facet as ValueFacet).overflow &&
+											(facet as ValueFacet).overflow?.remaining !== undefined &&
+											(facet as ValueFacet).overflow?.remaining > 0
+												? showMoreText
+												: showLessText}
+										</span>
 									</>
 								)}
 							</div>

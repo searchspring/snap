@@ -8,7 +8,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	overlay: ({ color, transitionSpeed }) =>
+	overlay: ({ color, transitionSpeed }: { color?: string; transitionSpeed?: string }) =>
 		//@ts-ignore
 		css({
 			transition: `background ${transitionSpeed} ease 0s, left 0s ease ${transitionSpeed}`,

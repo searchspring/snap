@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -21,9 +21,6 @@ export function Banner(properties: BannerProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 
 	const props: BannerProps = {
-		// default props
-		content: [],
-		type: '',
 		// global theme
 		...globalTheme?.components?.banner,
 		// props
@@ -33,9 +30,9 @@ export function Banner(properties: BannerProps): JSX.Element {
 
 	const { content, type, disableStyles, className, style } = props;
 
-	if (type === BannerType.INLINE) {
-		console.warn(`BannerType '${BannerType.INLINE}' is not supported in <Banner /> component`);
-		return;
+	if (type === BannerType.inline) {
+		console.warn(`BannerType '${BannerType.inline}' is not supported in <Banner /> component`);
+		return <Fragment></Fragment>;
 	}
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
@@ -43,23 +40,26 @@ export function Banner(properties: BannerProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		content &&
-		content[type]?.length && (
-			<CacheProvider>
-				<div
-					className={classnames('ss__banner', `ss__banner--${type}`, className)}
-					{...styling}
-					dangerouslySetInnerHTML={{
-						__html: content[props.type].join(''),
-					}}
-				/>
-			</CacheProvider>
-		)
+	let bannerContent;
+	if (content && content[type]) {
+		bannerContent = content[type] as string[];
+	}
+	return bannerContent && bannerContent.length ? (
+		<CacheProvider>
+			<div
+				className={classnames('ss__banner', `ss__banner--${type}`, className)}
+				{...styling}
+				dangerouslySetInnerHTML={{
+					__html: bannerContent.join(''),
+				}}
+			/>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 
 export interface BannerProps extends ComponentProps {
-	content: BannerContent | [];
+	content: BannerContent;
 	type: BannerType;
 }

@@ -7,6 +7,7 @@ import { FacetListOptions, FacetListOptionsProps } from './FacetListOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetListOptions/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetListOptions`,
@@ -22,7 +23,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -96,17 +97,16 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'FacetListOptions', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacetListOptions = observer(({ args, controller }) => {
+const ObservableFacetListOptions = observer(({ args, controller }: { args: FacetListOptionsProps; controller: SearchController }) => {
 	const brandFacet = controller?.store?.facets.filter((facet) => facet.field == 'brand').pop();
 
 	return <FacetListOptions {...args} values={brandFacet.values} />;
 });
 
-const Template = (args: FacetListOptionsProps, { loaded: { controller } }) => {
+export const Default = (args: FacetListOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservableFacetListOptions args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -104,13 +104,15 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						icon={clearAllIcon}
 						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel
-						valueLabel={clearAllLabel}
+						valueLabel={clearAllLabel || ''}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
 					/>
 				)}
 			</div>
 		</CacheProvider>
-	) : null;
+	) : (
+		<Fragment></Fragment>
+	);
 });
 
 export interface FilterSummaryProps extends ComponentProps {
@@ -122,8 +124,8 @@ export interface FilterSummaryProps extends ComponentProps {
 	hideFacetLabel?: boolean;
 	clearAllLabel?: string;
 	hideClearAll?: boolean;
-	onClick?: (e: Event, filterFilter) => void;
-	onClearAllClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, filterFilter: FilterType) => void;
+	onClearAllClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	controller?: SearchController | AutocompleteController;
 }
 

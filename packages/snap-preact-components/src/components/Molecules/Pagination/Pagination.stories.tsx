@@ -7,6 +7,7 @@ import { Pagination, PaginationProps } from './Pagination';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Pagination/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Pagination`,
@@ -154,15 +155,14 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Pagination', globals: { siteId: '8uyt2m' } });
 
-const ObservablePagination = observer(({ args, controller }) => {
+const ObservablePagination = observer(({ args, controller }: { args: PaginationProps; controller: SearchController }) => {
 	return <Pagination {...args} pagination={controller?.store?.pagination} />;
 });
 
-const Template = (args: PaginationProps, { loaded: { controller } }) => {
+export const Default = (args: PaginationProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservablePagination args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

@@ -8,6 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
 import Readme from '../Filter/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Filter`,
@@ -111,7 +112,8 @@ const snapInstance = Snapify.search({
 		],
 	},
 });
-const Template = (args: FilterProps, { loaded: { controller } }) => (
+
+export const Default = (args: FilterProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
 	<Filter
 		{...args}
 		facetLabel={controller?.store?.facets.filter((facet) => facet.type === FacetType.VALUE).shift().label}
@@ -124,7 +126,6 @@ const Template = (args: FilterProps, { loaded: { controller } }) => (
 	/>
 );
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -134,7 +135,19 @@ Default.loaders = [
 	},
 ];
 
-export const NoFacetLabel = Template.bind({});
+export const NoFacetLabel = (args: FilterProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Filter
+		{...args}
+		facetLabel={controller?.store?.facets.filter((facet) => facet.type === FacetType.VALUE).shift().label}
+		valueLabel={
+			controller?.store?.facets
+				.filter((facet) => facet.type === FacetType.VALUE)
+				.shift()
+				.values.shift().value
+		}
+	/>
+);
+
 NoFacetLabel.loaders = [
 	async () => {
 		await snapInstance.search();

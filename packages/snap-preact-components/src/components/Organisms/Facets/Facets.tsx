@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 const CSS = {
@@ -30,7 +30,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	const { limit, disableStyles, className, style } = props;
 	let { facets } = props;
-	if (limit > 0) {
+	if (limit && facets && limit > 0) {
 		facets = facets.slice(0, +limit);
 	}
 
@@ -55,16 +55,16 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		facets?.length > 0 && (
-			<CacheProvider>
-				<div className={classnames('ss__facets', className)} {...styling}>
-					{facets.map((facet) => (
-						<Facet {...subProps.facet} facet={facet} />
-					))}
-				</div>
-			</CacheProvider>
-		)
+	return facets && facets?.length > 0 ? (
+		<CacheProvider>
+			<div className={classnames('ss__facets', className)} {...styling}>
+				{facets.map((facet) => (
+					<Facet {...subProps.facet} facet={facet} />
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -72,8 +72,10 @@ interface FacetsSubProps {
 	facet: FacetProps;
 }
 
+type individualFacetType = ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet | HierarchyFacet;
+
 export interface FacetsProps extends ComponentProps {
-	facets?: any;
+	facets?: individualFacetType[];
 	limit?: number;
 	controller?: SearchController | AutocompleteController;
 }

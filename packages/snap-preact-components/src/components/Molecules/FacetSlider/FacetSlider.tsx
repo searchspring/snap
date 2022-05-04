@@ -11,8 +11,30 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RangeFacet } from '../../../types';
 import { sprintf } from '../../../utilities';
 
+type IFacetSliderStyles = {
+	railColor?: string;
+	trackColor?: string;
+	handleColor?: string;
+	valueTextColor?: string;
+	handleDraggingColor?: string;
+	showTicks?: boolean;
+	stickyHandleLabel?: boolean;
+	tickTextColor?: string;
+	theme: Theme;
+};
+
 const CSS = {
-	facetSlider: ({ railColor, trackColor, handleColor, valueTextColor, handleDraggingColor, showTicks, stickyHandleLabel, tickTextColor, theme }) =>
+	facetSlider: ({
+		railColor,
+		trackColor,
+		handleColor,
+		valueTextColor,
+		handleDraggingColor,
+		showTicks,
+		stickyHandleLabel,
+		tickTextColor,
+		theme,
+	}: IFacetSliderStyles) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -185,7 +207,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	const { getTrackProps, ticks, segments, handles } = useRanger({
 		values: active,
-		onChange: (val) => {
+		onChange: (val: number[]) => {
 			setActive(val);
 			if (facet?.services?.urlManager) {
 				if (val[0] == facet.range.low && val[1] == facet.range.high) {
@@ -196,7 +218,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			}
 			onChange && onChange(val);
 		},
-		onDrag: (val) => {
+		onDrag: (val: number[]) => {
 			setActive(val);
 			onDrag && onDrag(val);
 		},
@@ -225,67 +247,63 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		facet.range &&
-		facet.active &&
-		facet.step && (
-			<CacheProvider>
-				<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
-					<div className="ss__facet-slider__slider">
-						{showTicks &&
-							ticks.map(({ value, getTickProps }) => (
-								<div className="ss__facet-slider__tick" {...getTickProps()}>
-									<div className="ss__facet-slider__tick__label">{value}</div>
-								</div>
-							))}
-
-						{segments.map(({ getSegmentProps }, index) => (
-							<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
+	return facet.range && facet.active && facet.step ? (
+		<CacheProvider>
+			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
+				<div className="ss__facet-slider__slider">
+					{showTicks &&
+						ticks.map(({ value, getTickProps }: { value: number; getTickProps: any }) => (
+							<div className="ss__facet-slider__tick" {...getTickProps()}>
+								<div className="ss__facet-slider__tick__label">{value}</div>
+							</div>
 						))}
-						<div className={'ss__facet-slider__handles'}>
-							{handles.map(({ value, active, getHandleProps }, idx) => (
-								<button
-									type="button"
-									{...getHandleProps({
-										style: {
-											appearance: 'none',
-											border: 'none',
-											background: 'transparent',
-											outline: 'none',
-										},
-									})}
-								>
-									<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
-										{stickyHandleLabel && (
-											<label
-												className={classnames(
-													'ss__facet-slider__handle__label',
-													'ss__facet-slider__handle__label--sticky',
-													`ss__facet-slider__handle__label--${idx}`,
-													{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
-													{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
-												)}
-											>
-												{sprintf(facet.formatValue, value)}
-											</label>
-										)}
-									</div>
-								</button>
-							))}
-						</div>
+
+					{segments.map(({ getSegmentProps }: { getSegmentProps: any }, index: number) => (
+						<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
+					))}
+					<div className={'ss__facet-slider__handles'}>
+						{handles.map(({ value, active, getHandleProps }: { value: number; active: boolean; getHandleProps: any }, idx: number) => (
+							<button
+								type="button"
+								{...getHandleProps({
+									style: {
+										appearance: 'none',
+										border: 'none',
+										background: 'transparent',
+										outline: 'none',
+									},
+								})}
+							>
+								<div className={classnames('ss__facet-slider__handle', { 'ss__facet-slider__handle--active': active })}>
+									{stickyHandleLabel && (
+										<label
+											className={classnames(
+												'ss__facet-slider__handle__label',
+												'ss__facet-slider__handle__label--sticky',
+												`ss__facet-slider__handle__label--${idx}`,
+												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
+												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
+											)}
+										>
+											{sprintf(facet.formatValue, value)}
+										</label>
+									)}
+								</div>
+							</button>
+						))}
 					</div>
-					{!stickyHandleLabel && (
-						<div className={'ss__facet-slider__labels'}>
-							{handles.map(({ value }, idx) => (
-								<label className={classnames('ss__facet-slider__label', `ss__facet-slider__label--${idx}`)}>
-									{sprintf(facet.formatValue, value)}
-								</label>
-							))}
-						</div>
-					)}
 				</div>
-			</CacheProvider>
-		)
+				{!stickyHandleLabel && (
+					<div className={'ss__facet-slider__labels'}>
+						{handles.map(({ value }: { value: number }, idx: number) => (
+							<label className={classnames('ss__facet-slider__label', `ss__facet-slider__label--${idx}`)}>{sprintf(facet.formatValue, value)}</label>
+						))}
+					</div>
+				)}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

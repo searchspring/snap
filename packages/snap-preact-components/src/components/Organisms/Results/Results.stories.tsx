@@ -8,6 +8,7 @@ import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
 
 import Readme from './readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Results`,
@@ -23,7 +24,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -127,11 +128,10 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Results', globals: { siteId: '8uyt2m' } });
 
-const GridTemplate = (args: ResultsProp, { loaded: { controller } }) => {
+export const Grid = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} />;
 };
 
-export const Grid = GridTemplate.bind({});
 Grid.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -141,11 +141,10 @@ Grid.loaders = [
 	},
 ];
 
-const ListTemplate = (args: ResultsProp, { loaded: { controller } }) => {
+export const List = (args: ResultsProp, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Results {...args} controller={controller} results={controller?.store?.results} layout={Layout.LIST} />;
 };
 
-export const List = ListTemplate.bind({});
 List.loaders = [
 	async () => {
 		await snapInstance.search();

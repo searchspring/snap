@@ -9,11 +9,11 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	badge: ({ position }) =>
+	badge: ({ style }: any) =>
 		css({
 			display: 'inline-block',
 			position: 'absolute',
-			...position,
+			...style,
 		}),
 };
 

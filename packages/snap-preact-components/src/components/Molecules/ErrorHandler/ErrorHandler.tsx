@@ -16,7 +16,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 import type { AbstractController } from '@searchspring/snap-controller';
 
 const CSS = {
-	errorHandler: ({ theme }) =>
+	errorHandler: ({ theme }: { theme: Theme }) =>
 		css({
 			borderRadius: '2px',
 			display: 'flex',
@@ -126,66 +126,65 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		Object.values(ErrorType).includes(errorObject?.type) &&
-		errorObject?.message && (
-			<CacheProvider>
-				<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className)} {...styling}>
-					{(() => {
-						switch (errorObject.type) {
-							case ErrorType.WARNING:
-								return (
-									<>
-										<div className="ss__error-handler__message">
-											<Icon {...subProps.icon} icon={'warn'} />
-											<b>Warning:&nbsp;</b>
-											{errorObject.message}
-										</div>
-										{errorObject?.code == 429 ? (
-											<Button
-												{...subProps.button}
-												onClick={(e) => {
-													onRetryClick ? onRetryClick(e) : controller?.search();
-												}}
-											>
-												<Icon {...subProps.icon} icon={'rotate-right'} />
-												Reload
-											</Button>
-										) : null}
-									</>
-								);
-							case ErrorType.ERROR:
-								return (
+	return Object.values(ErrorType).includes(errorObject?.type) && errorObject?.message ? (
+		<CacheProvider>
+			<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className)} {...styling}>
+				{(() => {
+					switch (errorObject.type) {
+						case ErrorType.WARNING:
+							return (
+								<>
 									<div className="ss__error-handler__message">
-										<Icon {...subProps.icon} icon={'error'} />
-										<b>Error:&nbsp;</b>
+										<Icon {...subProps.icon} icon={'warn'} />
+										<b>Warning:&nbsp;</b>
 										{errorObject.message}
 									</div>
-								);
-							case ErrorType.INFO:
-								return (
-									<div className="ss__error-handler__message">
-										<Icon {...subProps.icon} icon={'info'} />
-										<b>Info:&nbsp;</b>
-										{errorObject.message}
-									</div>
-								);
-						}
-					})()}
-				</div>
-			</CacheProvider>
-		)
+									{errorObject?.code == 429 ? (
+										<Button
+											{...subProps.button}
+											onClick={(e) => {
+												onRetryClick ? onRetryClick(e) : controller?.search();
+											}}
+										>
+											<Icon {...subProps.icon} icon={'rotate-right'} />
+											Reload
+										</Button>
+									) : null}
+								</>
+							);
+						case ErrorType.ERROR:
+							return (
+								<div className="ss__error-handler__message">
+									<Icon {...subProps.icon} icon={'error'} />
+									<b>Error:&nbsp;</b>
+									{errorObject.message}
+								</div>
+							);
+						case ErrorType.INFO:
+							return (
+								<div className="ss__error-handler__message">
+									<Icon {...subProps.icon} icon={'info'} />
+									<b>Info:&nbsp;</b>
+									{errorObject.message}
+								</div>
+							);
+					}
+				})()}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface ErrorHandlerProps extends ComponentProps {
 	controller?: AbstractController;
-	error?: {
+	error: {
 		code?: number;
 		type: ErrorType;
 		message: string;
 	};
-	onRetryClick?: (e: Event) => void;
+	onRetryClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 interface ErrorHandlerSubProps {

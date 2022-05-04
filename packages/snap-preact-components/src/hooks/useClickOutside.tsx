@@ -1,8 +1,10 @@
 import { h } from 'preact';
 import { useRef, useEffect } from 'preact/hooks';
 
-export function useClickOutside<T extends HTMLElement>(callback: (e: Event) => void): preact.RefObject<T> {
+export function useClickOutside<T extends HTMLElement>(callback: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void): preact.RefObject<T> {
+	// @ts-ignore
 	const callbackRef: preact.RefObject<CallableFunction> = useRef();
+	// @ts-ignore
 	const innerRef: preact.RefObject<T> = useRef();
 
 	useEffect(() => {
@@ -14,8 +16,8 @@ export function useClickOutside<T extends HTMLElement>(callback: (e: Event) => v
 
 		return () => document.removeEventListener('click', handleClick);
 
-		function handleClick(e) {
-			if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)) callbackRef.current(e);
+		function handleClick(e: MouseEvent) {
+			if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target as HTMLElement)) callbackRef.current(e);
 		}
 	}, []);
 

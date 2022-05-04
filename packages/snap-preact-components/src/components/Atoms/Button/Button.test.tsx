@@ -30,7 +30,7 @@ describe('Button Component', () => {
 		});
 
 		it('renders with children prop', () => {
-			const content = <h1 class="child">childbutton</h1>;
+			const content = <h1 className="child">childbutton</h1>;
 			const rendered = render(<Button>{content}</Button>);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
@@ -231,7 +231,7 @@ describe('Button Component', () => {
 		});
 
 		it('renders with children prop', () => {
-			const content = <h1 class="child">childbutton</h1>;
+			const content = <h1 className="child">childbutton</h1>;
 			const rendered = render(<Button native>{content}</Button>);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');

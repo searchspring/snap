@@ -8,8 +8,14 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
+type IButtonStyles = {
+	color?: string;
+	backgroundColor?: string;
+	borderColor?: string;
+	theme: Theme;
+};
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }) =>
+	button: ({ color, backgroundColor, borderColor, theme }: IButtonStyles) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
@@ -65,7 +71,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			  ],
 		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
 		disabled,
-		onClick: (e) => !disabled && onClick && onClick(e),
+		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
 	return (
 		(content || children) && (
@@ -94,5 +100,5 @@ export interface ButtonProps extends ComponentProps {
 	children?: any;
 	disabled?: boolean;
 	native?: boolean;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

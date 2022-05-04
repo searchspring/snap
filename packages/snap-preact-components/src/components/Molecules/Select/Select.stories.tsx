@@ -8,6 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { iconPaths } from '../../Atoms/Icon';
 import Readme from '../Select/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Select`,
@@ -217,7 +218,7 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Select', globals: { siteId: '8uyt2m' } });
 
-const ObservableSelect = observer(({ args, controller }) => {
+const ObservableSelect = observer(({ args, controller }: { args: SelectProps; controller: SearchController }) => {
 	return (
 		<Select
 			{...args}
@@ -230,11 +231,10 @@ const ObservableSelect = observer(({ args, controller }) => {
 	);
 });
 
-const Template = (args: SelectProps, { loaded: { controller } }) => {
+export const Default = (args: SelectProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservableSelect args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -247,7 +247,10 @@ Default.args = {
 	label: 'Sort By',
 };
 
-export const Native = Template.bind({});
+export const Native = (args: SelectProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <ObservableSelect args={args} controller={controller} />;
+};
+
 Native.loaders = [
 	async () => {
 		await snapInstance.search();

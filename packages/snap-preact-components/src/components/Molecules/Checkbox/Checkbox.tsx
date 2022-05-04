@@ -11,8 +11,14 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
+type ICheckboxStyles = {
+	size?: string;
+	color?: string;
+	theme: Theme;
+};
+
 const CSS = {
-	checkbox: ({ size, color, theme }) =>
+	checkbox: ({ size, color, theme }: ICheckboxStyles) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -68,19 +74,19 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		},
 	};
 
-	let checkedState, setCheckedState;
+	let checkedState: boolean | undefined, setCheckedState: any;
 
 	const stateful = checked === undefined;
 	if (stateful) {
-		[checkedState, setCheckedState] = useState(startChecked);
+		[checkedState, setCheckedState] = useState<boolean | undefined>(startChecked);
 	} else {
 		checkedState = checked;
 	}
 
-	const clickFunc = (e) => {
+	const clickFunc = (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => {
 		if (!disabled) {
 			if (stateful) {
-				setCheckedState((prev) => {
+				setCheckedState((prev: boolean) => {
 					return !prev;
 				});
 			}
@@ -128,7 +134,7 @@ export interface CheckboxProps extends ComponentProps {
 	disabled?: boolean;
 	icon?: string;
 	iconColor?: string;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string;
 	startChecked?: boolean;
 	native?: boolean;

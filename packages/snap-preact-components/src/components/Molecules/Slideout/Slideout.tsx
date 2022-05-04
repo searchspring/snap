@@ -11,8 +11,14 @@ import { ComponentProps } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
+type ISlideoutStyles = {
+	isActive: boolean;
+	width?: string;
+	transitionSpeed?: string;
+	slideDirection?: string;
+};
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection }) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection }: ISlideoutStyles) =>
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -37,7 +43,6 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	const props: SlideoutProps = {
 		// default props
-		active: false,
 		displayAt: '',
 		slideDirection: 'left',
 		width: '300px',
@@ -76,9 +81,14 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		setActive(!isActive);
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
-	const isVisible = useMediaQuery(displayAt, () => {
-		document.body.style.overflow = '';
-	});
+
+	let isVisible: boolean = true;
+	if (displayAt) {
+		isVisible = useMediaQuery(displayAt, () => {
+			document.body.style.overflow = '';
+		});
+	}
+
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
 	const styling: { css?: any } = {};
@@ -87,21 +97,21 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		isVisible && (
-			<CacheProvider>
-				{buttonContent && (
-					<div className="ss__slideout__button" onClick={() => toggleActive()}>
-						{buttonContent}
-					</div>
-				)}
-
-				<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-					{cloneWithProps(children, { toggleActive, active: isActive })}
+	return isVisible ? (
+		<CacheProvider>
+			{buttonContent && (
+				<div className="ss__slideout__button" onClick={() => toggleActive()}>
+					{buttonContent}
 				</div>
-				<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
-			</CacheProvider>
-		)
+			)}
+
+			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
+				{cloneWithProps(children, { toggleActive, active: isActive })}
+			</div>
+			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 

@@ -17,7 +17,20 @@ import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerType, ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import React from 'react';
 
+type IACStyles = {
+	inputViewportOffsetBottom?: number;
+	hideFacets?: boolean;
+	horizontalTerms?: boolean;
+	noResults?: boolean | string;
+	contentSlotExists: boolean;
+	viewportMaxHeight?: boolean;
+	vertical?: boolean;
+	width?: string;
+	style: any;
+	theme: Theme;
+};
 const CSS = {
 	Autocomplete: ({
 		inputViewportOffsetBottom,
@@ -30,7 +43,7 @@ const CSS = {
 		width,
 		style,
 		theme,
-	}) =>
+	}: IACStyles) =>
 		css({
 			'&, & *, & *:before, & *:after': {
 				boxSizing: 'border-box',
@@ -69,15 +82,10 @@ const CSS = {
 			},
 
 			'& .ss__autocomplete__terms': {
-				// flex: `0 0 ${vertical || horizontalTerms || showTrending ? 'auto' : '150px'}`,
-				// order: 1,
-				// background: '#f8f8f8',
-				// width: horizontalTerms && !vertical ? '100%' : null,
 				flex: `1 1 auto`,
 				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
 				order: 1,
 				background: '#f8f8f8',
-				// width: horizontalTerms && !vertical ? '100%' : null,
 
 				'& .ss__autocomplete__terms__options': {
 					display: vertical || horizontalTerms ? 'flex' : null,
@@ -206,13 +214,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	let delayTimeout;
+	let delayTimeout: any;
 	const delayTime = 333;
 	const valueProps = {
-		onMouseEnter: (e) => {
+		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) => {
 			clearTimeout(delayTimeout);
 			delayTimeout = setTimeout(() => {
-				e.target.focus();
+				(e.target as HTMLAnchorElement).focus();
 			}, delayTime);
 		},
 		onMouseLeave: () => {
@@ -260,13 +268,13 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		...displaySettings,
 		theme,
 	};
-	let { input } = props;
+	let input: String | Element | null = props.input;
 	let inputViewportOffsetBottom;
 	if (input) {
 		if (typeof input === 'string') {
-			input = document.querySelector(input) as Element;
+			input = document.querySelector(input);
 		}
-		const rect = input?.getBoundingClientRect();
+		const rect = (input as Element)?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
 	}
 
@@ -388,170 +396,170 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		styling.css = [style];
 	}
 
-	return (
-		visible && (
-			<CacheProvider>
-				<div
-					{...styling}
-					className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
-					onClick={(e) => e.stopPropagation()}
-				>
-					{!hideTerms && (
-						<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
-							{termsSlot ? (
-								cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
-							) : (
-								<>
-									{terms.length > 0 ? (
-										<>
-											{termsTitle ? (
-												<div className="ss__autocomplete__title ss__autocomplete__title--terms">
-													<h5>{termsTitle}</h5>
-												</div>
-											) : null}
-											<div className="ss__autocomplete__terms__options">
-												{terms.map((term) => (
-													<div
-														className={classnames('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														})}
-													>
-														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onTermClick && onTermClick(e)}
-															href={term.url.href}
-															{...valueProps}
-															onFocus={() => term.preview()}
-														>
-															{emIfy(term.value, state.input)}
-														</a>
-													</div>
-												))}
-											</div>
-										</>
-									) : null}
-
-									{showTrending ? (
-										<>
-											{trendingTitle ? (
-												<div className="ss__autocomplete__title ss__autocomplete__title--trending">
-													<h5>{trendingTitle}</h5>
-												</div>
-											) : null}
-											<div className="ss__autocomplete__terms__options">
-												{trending.map((term) => (
-													<div
-														className={classnames('ss__autocomplete__terms__option', {
-															'ss__autocomplete__terms__option--active': term.active,
-														})}
-													>
-														<a
-															onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => onTermClick && onTermClick(e)}
-															href={term.url.href}
-															{...valueProps}
-															onFocus={() => term.preview()}
-														>
-															{emIfy(term.value, state.input)}
-														</a>
-													</div>
-												))}
-											</div>
-										</>
-									) : null}
-								</>
-							)}
-						</div>
-					)}
-
-					{!hideFacets &&
-						(facetsSlot ? (
-							<div className="ss__autocomplete__facets">
-								{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
-							</div>
+	return visible ? (
+		<CacheProvider>
+			<div
+				{...styling}
+				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
+				onClick={(e) => e.stopPropagation()}
+			>
+				{!hideTerms && (
+					<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
+						{termsSlot ? (
+							cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
 						) : (
-							facetsToShow.length > 0 && (
-								<>
-									{facetsTitle && vertical ? (
+							<>
+								{terms.length > 0 ? (
+									<>
+										{termsTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--terms">
+												<h5>{termsTitle}</h5>
+											</div>
+										) : null}
+										<div className="ss__autocomplete__terms__options">
+											{terms.map((term) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														href={term.url.href}
+														{...valueProps}
+														onFocus={() => term.preview()}
+													>
+														{emIfy(term.value, state.input)}
+													</a>
+												</div>
+											))}
+										</div>
+									</>
+								) : null}
+
+								{showTrending ? (
+									<>
+										{trendingTitle ? (
+											<div className="ss__autocomplete__title ss__autocomplete__title--trending">
+												<h5>{trendingTitle}</h5>
+											</div>
+										) : null}
+										<div className="ss__autocomplete__terms__options">
+											{trending.map((term) => (
+												<div
+													className={classnames('ss__autocomplete__terms__option', {
+														'ss__autocomplete__terms__option--active': term.active,
+													})}
+												>
+													<a
+														onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => onTermClick && onTermClick(e)}
+														href={term.url.href}
+														{...valueProps}
+														onFocus={() => term.preview()}
+													>
+														{emIfy(term.value, state.input)}
+													</a>
+												</div>
+											))}
+										</div>
+									</>
+								) : null}
+							</>
+						)}
+					</div>
+				)}
+
+				{!hideFacets &&
+					(facetsSlot ? (
+						<div className="ss__autocomplete__facets">
+							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
+						</div>
+					) : (
+						facetsToShow.length > 0 && (
+							<>
+								{facetsTitle && vertical ? (
+									<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
+										<h5>{facetsTitle}</h5>
+									</div>
+								) : null}
+								<div className="ss__autocomplete__facets">
+									{facetsTitle && !vertical ? (
 										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 											<h5>{facetsTitle}</h5>
 										</div>
 									) : null}
-									<div className="ss__autocomplete__facets">
-										{facetsTitle && !vertical ? (
-											<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
-												<h5>{facetsTitle}</h5>
-											</div>
-										) : null}
-										<Facets {...subProps.facets} facets={facetsToShow} />
-										{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.LEFT} /> : null}
-									</div>
-								</>
-							)
-						))}
+									<Facets {...subProps.facets} facets={facetsToShow} />
+									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.left} /> : null}
+								</div>
+							</>
+						)
+					))}
 
-					{!hideContent ? (
-						contentSlot ? (
-							<div className="ss__autocomplete__content">
-								{cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
-							</div>
-						) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
-							<div className="ss__autocomplete__content">
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.HEADER} /> : null}
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.BANNER} /> : null}
-								{results.length > 0 ? (
-									<div className="ss__autocomplete__content__results">
-										{resultsSlot ? (
-											cloneElement(resultsSlot, { results, contentTitle, controller })
-										) : (
-											<>
-												{contentTitle && results.length > 0 ? (
-													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-														<h5>{contentTitle}</h5>
-													</div>
-												) : null}
-												<Results results={results} {...subProps.results} controller={controller} />
-											</>
-										)}
-									</div>
-								) : (
-									<div className="ss__autocomplete__content__no-results">
-										{noResultsSlot ? (
-											cloneElement(noResultsSlot, { search, pagination, controller })
-										) : (
-											<>
-												<p>No results found for "{search.query.string}".</p>
-												<p>Please try another search.</p>
-											</>
-										)}
-									</div>
-								)}
+				{!hideContent ? (
+					contentSlot ? (
+						<div className="ss__autocomplete__content">
+							{cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+						</div>
+					) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
+						<div className="ss__autocomplete__content">
+							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.header} /> : null}
+							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.banner} /> : null}
+							{results.length > 0 ? (
+								<div className="ss__autocomplete__content__results">
+									{resultsSlot ? (
+										cloneElement(resultsSlot, { results, contentTitle, controller })
+									) : (
+										<>
+											{contentTitle && results.length > 0 ? (
+												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+													<h5>{contentTitle}</h5>
+												</div>
+											) : null}
+											<Results results={results} {...subProps.results} controller={controller} />
+										</>
+									)}
+								</div>
+							) : (
+								<div className="ss__autocomplete__content__no-results">
+									{noResultsSlot ? (
+										cloneElement(noResultsSlot, { search, pagination, controller })
+									) : (
+										<>
+											<p>No results found for "{search.query.string}".</p>
+											<p>Please try another search.</p>
+										</>
+									)}
+								</div>
+							)}
 
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.FOOTER} /> : null}
+							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.footer} /> : null}
 
-								{!hideLink ? (
-									linkSlot ? (
-										cloneElement(linkSlot, { search, results, pagination, filters, controller })
-									) : search?.query?.string && results.length > 0 ? (
-										<div className="ss__autocomplete__content__info">
-											<a href={state.url.href}>
-												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-												{search.query.string}"
-												<Icon {...subProps.icon} />
-											</a>
-										</div>
-									) : null
-								) : null}
-							</div>
-						) : null
-					) : null}
-				</div>
-			</CacheProvider>
-		)
+							{!hideLink ? (
+								linkSlot ? (
+									cloneElement(linkSlot, { search, results, pagination, filters, controller })
+								) : search?.query?.string && results.length > 0 ? (
+									<div className="ss__autocomplete__content__info">
+										<a href={state.url.href}>
+											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+											{search.query.string}"
+											<Icon {...subProps.icon} />
+										</a>
+									</div>
+								) : null
+							) : null}
+						</div>
+					) : null
+				) : null}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
-const emIfy = (term, search) => {
+const emIfy = (term: string, search: string) => {
 	const match = term.match(escapeRegExp(search));
-	if (search && term && match) {
+	if (search && term && match && match.index) {
 		const beforeMatch = term.slice(0, match.index);
 		const afterMatch = term.slice(match.index + search.length, term.length);
 		return (
@@ -604,6 +612,6 @@ export interface AutocompleteProps extends ComponentProps {
 	breakpoints?: BreakpointsProps;
 	controller: AutocompleteController;
 	width?: string;
-	onFacetOptionClick?: (e) => void;
-	onTermClick?: (e) => void;
+	onFacetOptionClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+	onTermClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }

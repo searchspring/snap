@@ -9,8 +9,17 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { CSSProperties } from 'react';
 
+type ISkelStyles = {
+	width: string;
+	height: string;
+	round?: boolean;
+	backgroundColor?: string;
+	animatedColor?: string;
+	animation?: string;
+};
+
 const CSS = {
-	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }) =>
+	skeleton: ({ width, height, round, backgroundColor, animatedColor, animation }: ISkelStyles) =>
 		css({
 			width: width,
 			height: height,

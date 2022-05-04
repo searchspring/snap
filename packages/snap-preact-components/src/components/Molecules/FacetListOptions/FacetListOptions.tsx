@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
 
 const CSS = {
-	list: ({ theme, hideCheckbox }) =>
+	list: ({ theme, hideCheckbox }: { theme: Theme; hideCheckbox?: boolean }) =>
 		css({
 			'& .ss__facet-list-options__option': {
 				display: 'flex',
@@ -74,31 +74,31 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-list-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
-						>
-							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
-							<span className="ss__facet-list-options__option__value">
-								{value.label}
-								{!hideCount && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
-							</span>
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-list-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
+						<span className="ss__facet-list-options__option__value">
+							{value.label}
+							{!hideCount && value.count && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+						</span>
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

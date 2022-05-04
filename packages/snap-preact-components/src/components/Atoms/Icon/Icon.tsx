@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,8 +8,16 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
+type IIconStyles = {
+	color?: string;
+	height?: string;
+	width?: string;
+	size?: string;
+	theme: Theme;
+};
+
 const CSS = {
-	icon: ({ color, height, width, size, theme }) =>
+	icon: ({ color, height, width, size, theme }: IIconStyles) =>
 		css({
 			fill: color || theme.colors?.primary,
 			width: width || size,
@@ -34,7 +42,7 @@ export function Icon(properties: IconProps): JSX.Element {
 	};
 	const { color, icon, path, size, width, height, viewBox, disableStyles, className, style } = props;
 
-	const iconPath = iconPaths[icon] || path;
+	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
@@ -43,21 +51,21 @@ export function Icon(properties: IconProps): JSX.Element {
 		styling.css = [style];
 	}
 
-	return (
-		iconPath && (
-			<CacheProvider>
-				<svg
-					{...styling}
-					className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
-					viewBox={viewBox}
-					xmlns="http://www.w3.org/2000/svg"
-					width={disableStyles && (width || size)}
-					height={disableStyles && (height || size)}
-				>
-					<path fill={disableStyles && color} d={iconPath} />
-				</svg>
-			</CacheProvider>
-		)
+	return iconPath ? (
+		<CacheProvider>
+			<svg
+				{...styling}
+				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
+				viewBox={viewBox}
+				xmlns="http://www.w3.org/2000/svg"
+				width={disableStyles ? width || size : undefined}
+				height={disableStyles ? height || size : undefined}
+			>
+				<path fill={disableStyles ? color : undefined} d={iconPath} />
+			</svg>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Price } from './Price';
+import { Price, PriceProps } from './Price';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Price/readme.md';
 
@@ -124,20 +124,18 @@ export default {
 	},
 };
 
-const Template = (args) => <Price {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: PriceProps) => <Price {...args} />;
 Default.args = {
 	value: 1099.99,
 };
 
-export const lineThrough = Template.bind({});
+export const lineThrough = (args: PriceProps) => <Price {...args} />;
 lineThrough.args = {
 	value: 1199.99,
 	lineThrough: true,
 };
 
-export const CustomCurrency = Template.bind({});
+export const CustomCurrency = (args: PriceProps) => <Price {...args} />;
 CustomCurrency.args = {
 	value: 999.99,
 	symbol: ' €',

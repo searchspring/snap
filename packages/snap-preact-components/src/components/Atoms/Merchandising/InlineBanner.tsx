@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -7,7 +7,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
 
 const CSS = {
-	inlineBanner: ({ width }) =>
+	inlineBanner: ({ width }: { width?: string }) =>
 		css({
 			height: '100%',
 			display: 'flex',
@@ -52,27 +52,26 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 		styling.css = [style];
 	}
 
-	return (
-		banner &&
-		banner.value && (
-			<CacheProvider>
-				<div
-					onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-						onClick && onClick(e);
-					}}
-					className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
-					{...styling}
-					dangerouslySetInnerHTML={{
-						__html: banner.value,
-					}}
-				/>
-			</CacheProvider>
-		)
+	return banner && banner.value ? (
+		<CacheProvider>
+			<div
+				onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+					onClick && onClick(e);
+				}}
+				className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
+				{...styling}
+				dangerouslySetInnerHTML={{
+					__html: banner.value,
+				}}
+			/>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 
 export interface InlineBannerProps extends ComponentProps {
-	banner: InlineBannerContent;
+	banner?: InlineBannerContent;
 	width?: string;
 	layout?: LayoutType;
 	onClick?: (e: React.MouseEvent) => void;

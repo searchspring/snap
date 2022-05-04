@@ -10,8 +10,42 @@ import { ComponentProps } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
+type componentTheme = {
+	main: {
+		border: string;
+		background: string;
+		color: string;
+		boxShadow: string;
+	};
+	top: {
+		background?: string;
+		border: string;
+		logo: {
+			src: string;
+		};
+		button: {
+			border: string;
+			color: string;
+			content: string;
+		};
+		close: {
+			fill: string;
+		};
+	};
+	bottom: {
+		content: string;
+		branch: {
+			color: string;
+			style: string;
+		};
+		additional: {
+			color: string;
+		};
+	};
+};
+
 const CSS = {
-	override: ({ theme }) =>
+	override: ({ theme }: { theme: componentTheme }) =>
 		css({
 			width: '360px',
 			height: '120px',
@@ -99,7 +133,7 @@ const CSS = {
 		}),
 };
 
-const darkTheme = {
+const darkTheme: componentTheme = {
 	main: {
 		border: '0',
 		background: 'rgba(59, 35, 173, 0.9)',
@@ -133,7 +167,7 @@ const darkTheme = {
 	},
 };
 
-const lightTheme = {
+const lightTheme: componentTheme = {
 	main: {
 		border: '1px solid #ccc',
 		background: 'rgba(255, 255, 255, 0.95)',
@@ -166,7 +200,7 @@ const lightTheme = {
 	},
 };
 
-const failureTheme = {
+const failureTheme: componentTheme = {
 	main: {
 		border: '0',
 		background: 'rgba(130, 6, 6, 0.9)',
@@ -246,66 +280,65 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.override({ theme: themes[themeName] }), style];
+		styling.css = [CSS.override({ theme: themes[themeName as keyof typeof themes] }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		(details || error) &&
-		name && (
-			<div
-				className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
-				{...styling}
-				onClick={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					setCollapsed(0);
-				}}
-			>
-				<div className="ss__branch-override__top">
-					<img className="ss__branch-override__top__logo" src={themes[themeName].top.logo.src} />
+	return (details || error) && name ? (
+		<div
+			className={classnames('ss__branch-override', { 'ss__branch-override--collapsed': collapsed }, className)}
+			{...styling}
+			onClick={(e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				setCollapsed(0);
+			}}
+		>
+			<div className="ss__branch-override__top">
+				<img className="ss__branch-override__top__logo" src={themes[themeName as keyof typeof themes].top.logo.src} />
 
-					<div
-						className="ss__branch-override__top__collapse"
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							setCollapsed(1);
-						}}
-					>
-						<Icon size="18px" color={themes[themeName].top.close.fill} {...subProps.icon} icon="close-thin" />
-					</div>
-
-					<div
-						className="ss__branch-override__top__button"
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							onRemoveClick && onRemoveClick(e, name);
-						}}
-					>
-						{themes[themeName].top.button.content}
-					</div>
+				<div
+					className="ss__branch-override__top__collapse"
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						setCollapsed(1);
+					}}
+				>
+					<Icon size="18px" color={themes[themeName as keyof typeof themes].top.close.fill} {...subProps.icon} icon="close-thin" />
 				</div>
 
-				<div className="ss__branch-override__bottom">
-					<span className="ss__branch-override__bottom__left">
-						{error ? (
-							<>
-								<Icon size="12px" color={themes[themeName].bottom.branch.color} {...subProps.icon} icon="warn" />
-								<span>{error.message}</span>
-							</>
-						) : (
-							name
-						)}
-					</span>
-
-					<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
-					<div className="ss__branch-override__bottom__content">{error?.description || themes[themeName].bottom.content}</div>
+				<div
+					className="ss__branch-override__top__button"
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						onRemoveClick && onRemoveClick(e, name);
+					}}
+				>
+					{themes[themeName as keyof typeof themes].top.button.content}
 				</div>
 			</div>
-		)
+
+			<div className="ss__branch-override__bottom">
+				<span className="ss__branch-override__bottom__left">
+					{error ? (
+						<>
+							<Icon size="12px" color={themes[themeName as keyof typeof themes].bottom.branch.color} {...subProps.icon} icon="warn" />
+							<span>{error.message}</span>
+						</>
+					) : (
+						name
+					)}
+				</span>
+
+				<span className="ss__branch-override__bottom__right">{error ? name : details?.lastModified}</span>
+				<div className="ss__branch-override__bottom__content">{error?.description || themes[themeName as keyof typeof themes].bottom.content}</div>
+			</div>
+		</div>
+	) : (
+		<Fragment></Fragment>
 	);
 };
 
@@ -323,6 +356,6 @@ export interface BranchOverrideProps extends ComponentProps {
 		url: string;
 		lastModified: string;
 	};
-	onRemoveClick?: (e, name: string) => void;
+	onRemoveClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, name: string) => void;
 	darkMode?: boolean;
 }

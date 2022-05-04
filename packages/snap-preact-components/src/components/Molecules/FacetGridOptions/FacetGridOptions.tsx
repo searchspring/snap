@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,8 +8,14 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, ValueFacetValue } from '../../../types';
 
+type IGridStyles = {
+	columns?: number;
+	gapSize?: string;
+	theme: Theme;
+};
+
 const CSS = {
-	grid: ({ columns, gapSize, theme }) =>
+	grid: ({ columns = 4, gapSize, theme }: IGridStyles) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -95,33 +101,33 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						<span
+							className={classnames('ss__facet-grid-options__option__value', {
+								'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+							})}
 						>
-							<span
-								className={classnames('ss__facet-grid-options__option__value', {
-									'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-								})}
-							>
-								{value.label}
-							</span>
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+							{value.label}
+						</span>
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

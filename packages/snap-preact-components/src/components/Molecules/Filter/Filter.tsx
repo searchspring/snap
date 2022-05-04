@@ -81,22 +81,20 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		styling.css = [style];
 	}
 	return (
-		valueLabel && (
-			<CacheProvider>
-				<a {...styling} className={classnames('ss__filter', className)} onClick={(e) => onClick && onClick(e as any)} {...url?.link}>
-					<Button {...subProps.button}>
-						<Icon {...subProps.icon} />
-						{!hideFacetLabel && (
-							<span className="ss__filter__label">
-								{facetLabel}
-								{separator && <span className="ss__filter__label__separator">{separator}</span>}
-							</span>
-						)}
-						<span className="ss__filter__value">{valueLabel}</span>
-					</Button>
-				</a>
-			</CacheProvider>
-		)
+		<CacheProvider>
+			<a {...styling} className={classnames('ss__filter', className)} onClick={(e) => onClick && onClick(e)} {...url?.link}>
+				<Button {...subProps.button}>
+					<Icon {...subProps.icon} />
+					{!hideFacetLabel && (
+						<span className="ss__filter__label">
+							{facetLabel}
+							{separator && <span className="ss__filter__label__separator">{separator}</span>}
+						</span>
+					)}
+					<span className="ss__filter__value">{valueLabel}</span>
+				</Button>
+			</a>
+		</CacheProvider>
 	);
 });
 
@@ -105,7 +103,7 @@ export interface FilterProps extends ComponentProps {
 	valueLabel: string;
 	url?: any;
 	hideFacetLabel?: boolean;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	icon?: string;
 	separator?: string;
 }

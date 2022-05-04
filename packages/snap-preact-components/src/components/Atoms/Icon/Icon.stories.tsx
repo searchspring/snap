@@ -5,7 +5,7 @@ import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import { Icon } from './Icon';
 import { IconProps } from '../../../types';
 import { iconPaths } from './paths';
-import { componentArgs } from '../../../utilities';
+import { componentArgs, shiftColor } from '../../../utilities';
 import Readme from '../Icon/readme.md';
 
 export default {
@@ -100,8 +100,6 @@ export default {
 	},
 };
 
-const Template = (props: IconProps) => <Icon {...props} />;
-
 export const Default = (props: IconProps): JSX.Element => <Icon {...props} />;
 Default.args = {
 	icon: 'cogs',
@@ -114,10 +112,9 @@ Custom.args = {
 	size: '60px',
 };
 
-export const CustomPath = Template.bind({});
+export const CustomPath = (props: IconProps): JSX.Element => <Icon {...props} />;
 CustomPath.args = {
-	path:
-		'M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z',
+	path: 'M12.9,13.8C12.9,13.8,12.9,13.8,12.9,13.8c-0.1,0.1-0.3,0.2-0.5,0.2C4.5,17.9,1.9,28.8,6.6,38.5l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2C43.5,20.6,46.2,9.7,41.5,0L12.9,13.8zM8.6,42.1C8.6,42.1,8.6,42.1,8.6,42.1c-0.1,0.1-0.3,0.1-0.5,0.2C0.3,46.1-2.4,57,2.3,66.7l28.6-13.8 c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.2c7.9-3.8,10.5-14.8,5.8-24.4L8.6,42.1z',
 	size: '70px',
 	viewBox: '0 0 70 70',
 };
@@ -146,35 +143,3 @@ Gallery.parameters = {
 		showPanel: false,
 	},
 };
-
-function shiftColor(base, change) {
-	const colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
-
-	if (!base || !change) {
-		return '#000000';
-	}
-
-	if (!base.match(colorRegEx) || !change.match(colorRegEx)) {
-		return '#000000';
-	}
-
-	// remove '#'s
-	base = base.replace(/\#/g, '');
-	change = change.replace(/\#/g, '');
-
-	let newColor = '';
-	for (let i = 0; i < 3; i++) {
-		const basePiece = parseInt(base.substring(i * 2, i * 2 + 2), 16);
-		const changePiece = parseInt(change.substring(i * 2, i * 2 + 2), 16);
-		let newPiece: string | number;
-
-		newPiece = basePiece + changePiece;
-		newPiece = newPiece > 255 ? 255 : newPiece;
-
-		newPiece = newPiece.toString(16);
-		newPiece = newPiece.length < 2 ? '0' + newPiece : newPiece;
-		newColor += newPiece;
-	}
-
-	return `#${newColor}`;
-}

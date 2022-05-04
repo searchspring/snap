@@ -12,8 +12,14 @@ import { ValueFacetValue, ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
+type IPalleteStyles = {
+	columns?: number;
+	gapSize?: string;
+	theme: Theme;
+};
+
 const CSS = {
-	palette: ({ columns, gapSize, theme }) =>
+	palette: ({ columns = 4, gapSize, theme }: IPalleteStyles) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -95,7 +101,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	const props: FacetPaletteOptionsProps = {
 		// default props
-		values: [],
 		columns: 4,
 		gapSize: '8px',
 		// global theme
@@ -132,39 +137,39 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-palette-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
-							aria-label={value.value}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
-						>
-							<div className="ss__facet-palette-options__option__wrapper">
-								<div
-									className={classnames(
-										'ss__facet-palette-options__option__palette',
-										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
-									)}
-									css={{ background: value.value }}
-								>
-									{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
-								</div>
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-palette-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames('ss__facet-palette-options__option', { 'ss__facet-palette-options__option--filtered': value.filtered })}
+						aria-label={value.value}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+					>
+						<div className="ss__facet-palette-options__option__wrapper">
+							<div
+								className={classnames(
+									'ss__facet-palette-options__option__palette',
+									`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
+								)}
+								css={{ background: value.value }}
+							>
+								{!hideIcon && value.filtered && <Icon {...subProps.icon} />}
 							</div>
-							{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+						</div>
+						{!hideLabel && <span className="ss__facet-palette-options__option__value">{value.label}</span>}
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

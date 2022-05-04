@@ -6,6 +6,7 @@ import { Autocomplete, AutocompleteProps } from './Autocomplete';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Autocomplete/readme.md';
+import { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Autocomplete`,
@@ -21,7 +22,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -276,7 +277,7 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
+export const Default = (args: AutocompleteProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
@@ -284,7 +285,6 @@ const Template = (args: AutocompleteProps, { loaded: { controller } }) => {
 	return <Autocomplete {...args} controller={controller} input={controller?.config.selector} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => ({
 		controller: await snapInstance,

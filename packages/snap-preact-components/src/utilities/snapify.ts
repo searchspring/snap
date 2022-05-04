@@ -14,13 +14,13 @@ import type { SearchControllerConfig, AutocompleteControllerConfig, Recommendati
 
 type CreateConfig = {
 	client: {
-		globals?: ClientGlobals;
+		globals: ClientGlobals;
 		config?: ClientConfig;
 	};
 	controller: SearchControllerConfig | AutocompleteControllerConfig | RecommendationControllerConfig;
 };
 
-const controllers = {};
+const controllers: any = {};
 const client = {
 	globals: { siteId: '8uyt2m' },
 };

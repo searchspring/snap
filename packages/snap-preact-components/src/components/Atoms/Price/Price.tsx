@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 
 const CSS = {
-	price: ({ theme }) =>
+	price: ({ theme }: { theme: Theme }) =>
 		css({
 			color: theme.colors?.primary,
 			'&.ss__price--strike': {

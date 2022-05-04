@@ -15,20 +15,23 @@ export interface Result {
 	mappings: Mappings;
 	attributes: any;
 	type?: string;
+	uid?: string;
 	track?: {
 		click: (e?: any) => void;
 	};
 }
 export enum BannerType {
-	HEADER = 'header',
-	FOOTER = 'footer',
-	LEFT = 'left',
-	BANNER = 'banner',
-	INLINE = 'inline',
+	header = 'header',
+	footer = 'footer',
+	left = 'left',
+	banner = 'banner',
+	inline = 'inline',
 }
 
 export type InlineBannerContent = {
 	value: string;
+	type?: string;
+	uid?: string;
 	config: {
 		position: {
 			index: number;

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
@@ -7,8 +7,16 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
+type ILoadingBarStyles = {
+	color?: string;
+	height?: string;
+	backgroundColor?: string;
+	theme: Theme;
+	animation?: string;
+};
+
 const CSS = {
-	loadingBar: ({ color, height, backgroundColor, theme, animation }) =>
+	loadingBar: ({ color, height, backgroundColor, theme, animation }: ILoadingBarStyles) =>
 		//@ts-ignore
 		css({
 			height: height,
@@ -64,14 +72,14 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
-		active && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__loading-bar', className)}>
-					<div className="ss__loading-bar__bar"></div>
-				</div>
-			</CacheProvider>
-		)
+	return active ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__loading-bar', className)}>
+				<div className="ss__loading-bar__bar"></div>
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 }
 

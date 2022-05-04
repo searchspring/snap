@@ -2,11 +2,12 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Recommendation } from './Recommendation';
+import { Recommendation, RecommendationProps } from './Recommendation';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
+import { RecommendationController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Recommendation`,
@@ -22,7 +23,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -142,12 +143,14 @@ export default {
 };
 
 const snapInstance = Snapify.recommendation({ id: 'Recommendation', tag: 'trending', globals: { siteId: '8uyt2m' } });
-export const Default = (props, { loaded: { controller } }) => {
+
+export const Default = (props: RecommendationProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
 	return <Recommendation {...props} controller={controller} />;
 };
+
 Default.loaders = [
 	async () => {
-		snapInstance.on('afterStore', async ({ controller }, next) => {
+		snapInstance.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
 			controller.store.results.forEach((result) => (result.mappings.core.url = 'javascript:void(0);'));
 			await next();
 		});

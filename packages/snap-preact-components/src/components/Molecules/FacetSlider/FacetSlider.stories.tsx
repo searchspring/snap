@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -145,6 +145,4 @@ export default {
 	},
 };
 
-const Template = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
-
-export const Price = Template.bind({});
+export const Price = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;

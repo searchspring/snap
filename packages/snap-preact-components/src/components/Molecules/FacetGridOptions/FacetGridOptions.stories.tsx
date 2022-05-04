@@ -7,6 +7,7 @@ import { FacetGridOptions, FacetGridOptionsProps } from './FacetGridOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetGridOptions/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetGridOptions`,
@@ -22,7 +23,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -96,17 +97,16 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'FacetGridOptions', globals: { siteId: '8uyt2m' } });
 
-const ObservableFacetGridOptions = observer(({ args, controller }) => {
+const ObservableFacetGridOptions = observer(({ args, controller }: { args: FacetGridOptionsProps; controller: SearchController }) => {
 	const sizeFacet = controller?.store?.facets.filter((facet) => facet.field == 'size_dress').pop();
 
 	return <FacetGridOptions {...args} values={sizeFacet.values} />;
 });
 
-const Template = (args: FacetGridOptionsProps, { loaded: { controller } }) => {
+export const Default = (args: FacetGridOptionsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <ObservableFacetGridOptions args={args} controller={controller} />;
 };
 
-export const Default = Template.bind({});
 Default.loaders = [
 	async () => {
 		await snapInstance.search();

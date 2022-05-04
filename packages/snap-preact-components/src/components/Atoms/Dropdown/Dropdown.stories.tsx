@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Dropdown } from './Dropdown';
+import { Dropdown, DropdownProps } from './Dropdown';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Dropdown/readme.md';
 import { Badge } from '../Badge/Badge';
@@ -121,42 +121,32 @@ export default {
 	},
 };
 
-const Template = (args) => <Dropdown {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: DropdownProps) => <Dropdown {...args} />;
 Default.args = {
 	button: 'button text',
 	content: 'content text',
 };
 
-const Template2 = (args) => <Dropdown {...args} />;
-
-export const ExternalState = Template2.bind({});
+export const ExternalState = (args: DropdownProps) => <Dropdown {...args} />;
 ExternalState.args = {
 	button: 'button text',
 	content: 'content text',
 	open: true,
 };
 
-const Template3 = (args) => <Dropdown {...args} />;
-
-export const JSXContent = Template3.bind({});
+export const JSXContent = (args: DropdownProps) => <Dropdown {...args} />;
 JSXContent.args = {
 	button: 'button text',
 	content: <Badge content={'jsx content - (note this component receieved the open state as a prop)'} />,
 };
 
-const Template4 = (args) => <Dropdown button={args.button}>{args.content}</Dropdown>;
-
-export const JSXChildren = Template4.bind({});
+export const JSXChildren = (args: DropdownProps) => <Dropdown button={args.button}>{args.content}</Dropdown>;
 JSXChildren.args = {
 	button: 'button text',
 	content: <Badge content={'jsx content - (note this component receieved the open state as a prop)'} />,
 };
 
-const Template5 = (args) => <Dropdown button={args.button}>{args.content}</Dropdown>;
-
-export const StringChildren = Template5.bind({});
+export const StringChildren = (args: DropdownProps) => <Dropdown button={args.button}>{args.content}</Dropdown>;
 StringChildren.args = {
 	button: 'button text',
 	content: 'string content - (note this component receieved the open state as a prop)',

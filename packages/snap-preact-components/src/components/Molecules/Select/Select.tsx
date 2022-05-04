@@ -13,8 +13,14 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
+type ISelectStyles = {
+	color?: string;
+	backgroundColor?: string;
+	borderColor?: string;
+	theme: Theme;
+};
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, label, selection, theme }) =>
+	select: ({ color, backgroundColor, borderColor, theme }: ISelectStyles) =>
 		//@ts-ignore
 		css({
 			display: 'inline-flex',
@@ -139,16 +145,16 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	};
 
 	// only single selection support for now
-	let selection = selected;
-	let setSelection;
+	let selection: Option | undefined = selected;
+	let setSelection: any;
 
 	// open state
-	const [open, setOpen] = useState(startOpen);
+	const [open, setOpen] = useState<boolean | undefined>(startOpen);
 
 	// selection state
 	const stateful = selection === undefined;
 	if (stateful) {
-		[selection, setSelection] = useState(undefined);
+		[selection, setSelection] = useState<Option | undefined>(undefined);
 	} else {
 		selection = Array.isArray(selected) ? selected[0] : selection;
 	}
@@ -163,8 +169,8 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		];
 	}
 
-	const makeSelection = (e: Event, option?: Option) => {
-		option = option.value ? option : undefined;
+	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
+		option = option && option.value ? option : undefined;
 
 		if (option != selection) {
 			onSelect && onSelect(e, option);
@@ -182,90 +188,88 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
-			styling.css = [CSS.select({ color, backgroundColor, borderColor, label, selection: selection || '', theme }), style];
+			styling.css = [CSS.select({ color, backgroundColor, borderColor, theme }), style];
 		}
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		options &&
-		(typeof options == 'object' || Array.isArray(options)) &&
-		options.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
-					{native ? (
-						<>
-							{label && !hideLabelOnSelection && (
-								<span className="ss__select__label">
-									{label}
-									{separator && <span className="ss__select__label__separator">{separator}</span>}
-								</span>
-							)}
+	return options && (typeof options == 'object' || Array.isArray(options)) && options.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
+				{native ? (
+					<>
+						{label && !hideLabelOnSelection && (
+							<span className="ss__select__label">
+								{label}
+								{separator && <span className="ss__select__label__separator">{separator}</span>}
+							</span>
+						)}
 
-							<select
-								className="ss__select__select"
-								disabled={disabled || undefined}
-								onChange={(e) => {
-									const selectElement = e.target;
-									const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
-									const selectedOption = options
-										.filter((option, index) => {
-											return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
-										})
-										.pop();
-									!disabled && makeSelection(e as any, selectedOption);
-								}}
-							>
-								{!selection && clearSelection && (
-									<option className="ss__select__select__option" selected value="">
-										{clearSelection}
-									</option>
-								)}
-								{options.map((option, index) => (
-									<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
-										{option.label}
-									</option>
-								))}
-							</select>
-						</>
-					) : (
-						<Dropdown
-							{...subProps.dropdown}
-							disableClickOutside={disableClickOutside}
-							open={open}
-							onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
-							onClick={(e) => setOpen((prev) => !prev)}
-							button={
-								<Button {...subProps.button}>
-									{label && !hideLabelOnSelection && (
-										<span className="ss__select__label">
-											{label}
-											{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
-										</span>
-									)}
-									{selection && <span className="ss__select__selection">{selection?.label}</span>}
-									<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
-								</Button>
-							}
+						<select
+							className="ss__select__select"
+							disabled={disabled || undefined}
+							onChange={(e) => {
+								const selectElement = e.target;
+								const selectedOptionElement = selectElement.options[selectElement.selectedIndex];
+								const selectedOption = options
+									.filter((option, index) => {
+										return option.label == selectedOptionElement.text && (option.value == selectedOptionElement.value || option.value == index);
+									})
+									.pop();
+								!disabled && makeSelection(e, selectedOption);
+							}}
 						>
-							<ul className="ss__select__select">
-								{options.map((option) => (
-									<li
-										className={classnames('ss__select__select__option', {
-											'ss__select__select__option--selected': selection?.value === option.value,
-										})}
-										onClick={(e) => !disabled && makeSelection(e as any, option)}
-									>
-										<span>{option.label}</span>
-									</li>
-								))}
-							</ul>
-						</Dropdown>
-					)}
-				</div>
-			</CacheProvider>
-		)
+							{!selection && clearSelection && (
+								<option className="ss__select__select__option" selected value="">
+									{clearSelection}
+								</option>
+							)}
+							{options.map((option, index) => (
+								<option className="ss__select__select__option" selected={selection?.value === option.value} value={option.value ?? index}>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</>
+				) : (
+					<Dropdown
+						{...subProps.dropdown}
+						disableClickOutside={disableClickOutside}
+						open={open}
+						onToggle={(e, state) => setOpen((prev) => state ?? !prev)}
+						onClick={(e) => setOpen((prev) => !prev)}
+						button={
+							<Button {...subProps.button}>
+								{label && !hideLabelOnSelection && (
+									<span className="ss__select__label">
+										{label}
+										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
+									</span>
+								)}
+								{selection && <span className="ss__select__selection">{selection?.label}</span>}
+								<Icon {...subProps.icon} icon={open ? iconClose : iconOpen} />
+							</Button>
+						}
+					>
+						<ul className="ss__select__select">
+							{options.map((option) => (
+								<li
+									className={classnames('ss__select__select__option', {
+										'ss__select__select__option--selected': selection?.value === option.value,
+									})}
+									onClick={(e) => !disabled && makeSelection(e as any, option)}
+								>
+									<span>{option.label}</span>
+								</li>
+							))}
+						</ul>
+					</Dropdown>
+				)}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -294,7 +298,7 @@ export interface SelectProps extends ComponentProps {
 	iconOpen?: IconType | string;
 	label?: string | JSX.Element;
 	native?: boolean;
-	onSelect?: (e: Event, option: Option) => void;
+	onSelect?: (e: React.ChangeEvent<HTMLSelectElement>, option: Option | undefined) => void;
 	selected?: Option;
 	separator?: string | JSX.Element;
 	startOpen?: boolean;
