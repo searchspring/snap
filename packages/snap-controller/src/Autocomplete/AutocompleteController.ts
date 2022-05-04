@@ -89,6 +89,7 @@ export class AutocompleteController extends AbstractController {
 
 			// cancel search if no input or query doesn't match current urlState
 			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+				ac.controller.store.loading = false;
 				return false;
 			}
 		});
