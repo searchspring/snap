@@ -79,7 +79,7 @@ describe('search request search transform', () => {
 		expect(params).toEqual({});
 	});
 
-	it('generates trimmed query', () => {
+	it('should not trim query', () => {
 		const params = transformSearchRequest.search({
 			search: {
 				query: {
@@ -88,19 +88,7 @@ describe('search request search transform', () => {
 			},
 		});
 
-		expect(params.q).toEqual('a query');
-	});
-
-	it("accepts extended 'string' syntax", () => {
-		const params = transformSearchRequest.search({
-			search: {
-				query: {
-					string: ' extended query ',
-				},
-			},
-		});
-
-		expect(params.q).toEqual('extended query');
+		expect(params.q).toEqual(' a query ');
 	});
 
 	it('generates trimmed subQuery parameter', () => {
