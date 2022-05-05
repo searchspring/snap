@@ -131,8 +131,11 @@ export class RecommendAPI extends API {
 		paramBatch.request.tags.push(tag);
 		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
-		paramBatch.request = deepmerge(paramBatch.request, otherParams);
-
+		paramBatch.request = { ...paramBatch.request, ...otherParams };
+		if (paramBatch.request['lastViewed']) {
+			//we only want the 5 newest viewed products
+			paramBatch.request['lastViewed'] = paramBatch.request['lastViewed'].slice(0, 5);
+		}
 		paramBatch.deferreds.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
@@ -140,6 +143,10 @@ export class RecommendAPI extends API {
 			let requestMethod = 'getRecommendations';
 			if (charsParams(paramBatch.request) > 1024) {
 				requestMethod = 'postRecommendations';
+				//post request needs products as a string.
+				if (paramBatch.request['product']) {
+					paramBatch.request['product'] = paramBatch.request['product'].toString();
+				}
 			}
 
 			try {
