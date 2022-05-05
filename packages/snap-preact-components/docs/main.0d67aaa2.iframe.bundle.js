@@ -22737,7 +22737,7 @@
 						reqSearch = request.search || {},
 						search = {};
 					return (
-						reqSearch.query && reqSearch.query.string && (search.q = reqSearch.query.string.trim()),
+						reqSearch.query && reqSearch.query.string && (search.q = reqSearch.query.string),
 						reqSearch.subQuery && (search.rq = reqSearch.subQuery.trim()),
 						reqSearch.originalQuery && (search.originalQuery = reqSearch.originalQuery.trim()),
 						reqSearch.redirectResponse && (search.redirectResponse = reqSearch.redirectResponse),
@@ -28307,7 +28307,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.1' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.2' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -28703,7 +28703,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
