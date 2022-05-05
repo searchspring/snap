@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.2](https://github.com/searchspring/snap/compare/v0.27.1...v0.27.2) (2022-05-05)
+
+
+### Bug Fixes
+
+* **searchrequest:** allow queries with leading and trailing spaces ([3cac19d](https://github.com/searchspring/snap/commit/3cac19d8667ff6b1126be6676d10eb4e648c7572))
+
+
+
+
+
 ## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
 
 **Note:** Version bump only for package @searchspring/snap-client
