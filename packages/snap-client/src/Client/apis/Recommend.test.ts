@@ -135,7 +135,7 @@ describe('Recommend Api', () => {
 	it('batchRecommendations trims and batches as expected', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
 
-		const params = {
+		const GETParams = {
 			method: 'GET',
 			headers: {},
 		};
@@ -164,7 +164,7 @@ describe('Recommend Api', () => {
 			product: ['marnie-runner-2-7x10'],
 		};
 
-		const GETrequestUrl =
+		const GETRequestUrl =
 			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=20&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&product=marnie-runner-2-7x10';
 
 		let requestMock = jest
@@ -172,61 +172,21 @@ describe('Recommend Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
 		//15 lastViewed trimmed to first 5, & product array changed to single product string
+		// @ts-ignore
 		api.batchRecommendations({
-			siteId: '8uyt2m',
 			tags: ['similar'],
-			batched: true,
-			lastViewed: [
-				'marnie-runner-2-7x10',
-				'ruby-runner-2-7x10',
-				'abbie-runner-2-7x10',
-				'riley-4x6',
-				'joely-5x8',
-				'helena-4x6',
-				'kwame-4x6',
-				'sadie-4x6',
-				'candice-runner-2-7x10',
-				'esmeray-4x6',
-				'camilla-230x160',
-				'candice-4x6',
-				'sahara-4x6',
-				'dayna-4x6',
-				'moema-4x6',
-			],
-			limits: 20,
-			// @ts-ignore
-			product: ['marnie-runner-2-7x10'],
+			...batchParams,
 		});
+		// @ts-ignore
 		api.batchRecommendations({
-			siteId: '8uyt2m',
 			tags: ['crossSell'],
-			batched: true,
-			lastViewed: [
-				'marnie-runner-2-7x10',
-				'ruby-runner-2-7x10',
-				'abbie-runner-2-7x10',
-				'riley-4x6',
-				'joely-5x8',
-				'helena-4x6',
-				'kwame-4x6',
-				'sadie-4x6',
-				'candice-runner-2-7x10',
-				'esmeray-4x6',
-				'camilla-230x160',
-				'candice-4x6',
-				'sahara-4x6',
-				'dayna-4x6',
-				'moema-4x6',
-			],
-			limits: 20,
-			// @ts-ignore
-			product: ['marnie-runner-2-7x10'],
+			...batchParams,
 		});
 
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(GETrequestUrl, params);
+		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
 		requestMock.mockReset();
 
 		//now lets try a post
