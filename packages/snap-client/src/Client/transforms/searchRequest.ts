@@ -46,7 +46,7 @@ transformSearchRequest.search = (request: SearchRequestModel = {}) => {
 	} = {};
 
 	if (reqSearch.query && reqSearch.query.string) {
-		search.q = reqSearch.query.string.trim();
+		search.q = reqSearch.query.string;
 	}
 
 	if (reqSearch.subQuery) {
