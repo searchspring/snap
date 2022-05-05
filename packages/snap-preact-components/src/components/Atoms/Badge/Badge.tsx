@@ -9,11 +9,11 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps } from '../../../types';
 
 const CSS = {
-	badge: ({ style }: any) =>
+	badge: ({ position }: any) =>
 		css({
 			display: 'inline-block',
 			position: 'absolute',
-			...style,
+			...position,
 		}),
 };
 
@@ -40,6 +40,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__badge', className)}>

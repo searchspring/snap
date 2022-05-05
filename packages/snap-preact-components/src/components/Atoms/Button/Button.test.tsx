@@ -23,7 +23,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			expect(buttonElement.classList.length).toBeGreaterThan(1);
+			expect(buttonElement?.classList.length).toBeGreaterThan(1);
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			const childElement = buttonElement.querySelector('.child');
+			const childElement = buttonElement?.querySelector('.child');
 			expect(childElement).toBeInTheDocument();
 
 			const childElementAltSelector = rendered.getByText('childbutton');
@@ -90,7 +90,8 @@ describe('Button Component', () => {
 			const rendered = render(<Button onClick={clickFn}>{content}</Button>);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
-			userEvent.click(buttonElement);
+
+			if (buttonElement) userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
 		});
@@ -104,7 +105,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(buttonElement).toBeInTheDocument();
 
-			userEvent.click(buttonElement);
+			if (buttonElement) userEvent.click(buttonElement);
 			expect(clickFn).not.toHaveBeenCalled();
 		});
 
@@ -115,10 +116,11 @@ describe('Button Component', () => {
 			};
 
 			const rendered = render(<Button style={style} content={content} />);
-			const buttonElement = rendered.container.querySelector('.ss__button');
-			const styles = getComputedStyle(buttonElement);
+			const buttonElement = rendered?.container.querySelector('.ss__button');
+			let styles;
+			if (buttonElement) styles = getComputedStyle(buttonElement);
 
-			expect(styles.padding).toBe(style.padding);
+			expect(styles?.padding).toBe(style.padding);
 		});
 
 		it('can disable styles', () => {
@@ -126,8 +128,8 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button disableStyles>{content}</Button>);
 
-			const buttonElement = rendered.container.querySelector('.ss__button');
-			expect(buttonElement.classList.length).toBe(2);
+			const buttonElement = rendered?.container.querySelector('.ss__button');
+			expect(buttonElement?.classList.length).toBe(2);
 			expect(buttonElement).toBeInTheDocument();
 		});
 
@@ -149,9 +151,10 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 
-			const styles = getComputedStyle(buttonElement);
+			let styles;
+			if (buttonElement) styles = getComputedStyle(buttonElement);
 
-			expect(styles.color).toBe(globalTheme.components.button.color);
+			expect(styles?.color).toBe(globalTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
 		});
 
@@ -169,9 +172,10 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 
-			const styles = getComputedStyle(buttonElement);
+			let styles;
+			if (buttonElement) styles = getComputedStyle(buttonElement);
 
-			expect(styles.color).toBe(propTheme.components.button.color);
+			expect(styles?.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
 		});
 
@@ -201,9 +205,10 @@ describe('Button Component', () => {
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
 
-			const styles = getComputedStyle(buttonElement);
+			let styles;
+			if (buttonElement) styles = getComputedStyle(buttonElement);
 
-			expect(styles.color).toBe(propTheme.components.button.color);
+			expect(styles?.color).toBe(propTheme.components.button.color);
 			expect(buttonElement).toBeInTheDocument();
 		});
 	});
@@ -224,7 +229,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			expect(buttonElement.classList.length).toBe(2);
+			expect(buttonElement?.classList.length).toBe(2);
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();
@@ -237,7 +242,7 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			const childElement = buttonElement.querySelector('.child');
+			const childElement = buttonElement?.querySelector('.child');
 			expect(childElement).toBeInTheDocument();
 
 			const childElementAltSelector = rendered.getByText('childbutton');
@@ -306,7 +311,8 @@ describe('Button Component', () => {
 			);
 
 			const buttonElement = rendered.container.querySelector('.ss__button');
-			userEvent.click(buttonElement);
+
+			if (buttonElement) userEvent.click(buttonElement);
 
 			expect(clickFn).toHaveBeenCalled();
 		});
@@ -320,7 +326,7 @@ describe('Button Component', () => {
 			const button = rendered.container.querySelector(`.ss__button.ss__button--disabled`);
 			expect(button).toBeInTheDocument();
 
-			userEvent.click(button);
+			if (button) userEvent.click(button);
 			expect(clickFn).not.toHaveBeenCalled();
 		});
 	});
