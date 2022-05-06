@@ -24,7 +24,7 @@ describe('Filter Component', () => {
 		const valueTextElement = rendered.getByText(args.valueLabel);
 		const iconElement = rendered.container.querySelector('.ss__icon');
 
-		expect(filterElement.classList).toHaveLength(2);
+		expect(filterElement?.classList).toHaveLength(2);
 
 		expect(facetTextElement).toBeInTheDocument();
 		expect(facetTextElement).toHaveClass('ss__filter__label');
@@ -93,7 +93,7 @@ describe('Filter Component', () => {
 
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
-		userEvent.click(filterElement);
+		userEvent.click(filterElement!);
 		expect(clickFn).toHaveBeenCalled();
 	});
 
@@ -111,7 +111,7 @@ describe('Filter Component', () => {
 
 		const filterElement = rendered.container.querySelector('.ss__filter');
 
-		expect(filterElement.classList).toHaveLength(1);
+		expect(filterElement?.classList).toHaveLength(1);
 	});
 });
 

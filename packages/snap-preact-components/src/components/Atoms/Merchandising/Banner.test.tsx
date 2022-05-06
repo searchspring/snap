@@ -17,32 +17,33 @@ describe('Merchandising Banner Component', () => {
 			},
 		},
 	};
-	const typesWithContent: BannerType[] = [BannerType.HEADER, BannerType.FOOTER, BannerType.BANNER];
+	const typesWithContent: BannerType[] = [BannerType.header, BannerType.footer, BannerType.banner];
 
 	typesWithContent.forEach((type) => {
 		it(`renders type:${type} banner`, () => {
 			const rendered = render(<Banner content={searchResponse.merchandising.content} type={type} />);
 			const merchBannerElement = rendered.container.querySelector(`.ss__banner.ss__banner--${type}`);
 			expect(merchBannerElement).toBeInTheDocument();
-			expect(merchBannerElement.innerHTML).toBe(searchResponse.merchandising.content[type].join(''));
+			expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising.content[type].join(''));
 		});
 	});
 
 	it('doesnt render if empty', () => {
-		const rendered = render(<Banner content={[]} type={BannerType.LEFT} />);
+		// @ts-ignore
+		const rendered = render(<Banner content={[]} type={BannerType.left} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--left');
 		expect(merchBannerElement).not.toBeInTheDocument();
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={BannerType.BANNER} />);
+		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={BannerType.banner} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__banner');
-		expect(loadingbarElement.classList.length).toBe(2);
+		expect(loadingbarElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Banner className={className} content={searchResponse.merchandising.content} type={BannerType.BANNER} />);
+		const rendered = render(<Banner className={className} content={searchResponse.merchandising.content} type={BannerType.banner} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement).toHaveClass(className);
@@ -51,7 +52,7 @@ describe('Merchandising Banner Component', () => {
 	it('is themeable with ThemeProvider', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.BANNER,
+			type: BannerType.banner,
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
@@ -59,25 +60,25 @@ describe('Merchandising Banner Component', () => {
 			</ThemeProvider>
 		);
 		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement);
-		expect(styles.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
+		const styles = getComputedStyle(bannerElement!);
+		expect(styles?.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
 	});
 
 	it('is themeable with theme prop', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.BANNER,
+			type: BannerType.banner,
 		};
 		const rendered = render(<Banner {...args} theme={theme} />);
 		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement);
-		expect(styles.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
+		const styles = getComputedStyle(bannerElement!);
+		expect(styles?.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.BANNER,
+			type: BannerType.banner,
 		};
 		const themeOverride = {
 			components: {
@@ -94,7 +95,7 @@ describe('Merchandising Banner Component', () => {
 			</ThemeProvider>
 		);
 		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement);
-		expect(styles.backgroundColor).toBe(themeOverride.components.banner.style.backgroundColor);
+		const styles = getComputedStyle(bannerElement!);
+		expect(styles?.backgroundColor).toBe(themeOverride.components.banner.style.backgroundColor);
 	});
 });

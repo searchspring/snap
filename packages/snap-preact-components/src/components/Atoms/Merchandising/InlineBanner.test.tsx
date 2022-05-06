@@ -12,7 +12,7 @@ describe('Merchandising Inline Banner Component', () => {
 		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(merchBannerElement).toBeInTheDocument();
-		expect(merchBannerElement.innerHTML).toBe(searchResponse.merchandising.content.inline[0].value);
+		expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising.content.inline[0].value);
 	});
 
 	it('can set a custom onClick function', () => {
@@ -22,14 +22,14 @@ describe('Merchandising Inline Banner Component', () => {
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(merchBannerElement).toBeInTheDocument();
 
-		userEvent.click(merchBannerElement);
+		userEvent.click(merchBannerElement!);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 
 	it('can disable styling', () => {
 		const rendered = render(<InlineBanner disableStyles={true} banner={searchResponse.merchandising.content.inline[0]} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__inline-banner');
-		expect(loadingbarElement.classList.length).toBe(2);
+		expect(loadingbarElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {

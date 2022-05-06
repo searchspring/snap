@@ -7,7 +7,7 @@ import { FacetListOptions } from './FacetListOptions';
 import { listFacetMock } from '../../../mocks/searchResponse';
 
 describe('ListValue Component', () => {
-	let listValueComponent;
+	let listValueComponent: any;
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions values={listFacetMock.values} />);
 	});
@@ -35,7 +35,7 @@ describe('ListValue Component', () => {
 });
 
 describe('ListValue Component hiding checkbox and count', () => {
-	let listValueComponent;
+	let listValueComponent: any;
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions hideCheckbox={true} hideCount={true} values={listFacetMock.values} />);
 	});
@@ -65,7 +65,7 @@ describe('FacetListOptions generic props work', () => {
 		const rendered = render(<FacetListOptions values={listFacetMock.values} disableStyles={true} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
-		expect(listOption.classList.length).toBe(1);
+		expect(listOption?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -83,7 +83,7 @@ describe('FacetListOptions generic props work', () => {
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options__option');
 		expect(listOption).toBeInTheDocument();
-		userEvent.click(listOption);
+		userEvent.click(listOption!);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });
