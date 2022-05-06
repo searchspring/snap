@@ -111,7 +111,9 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const { tags, limits, ...otherParams } = parameters;
+		let { tags, limits, ...otherParams } = parameters;
+		if (!limits) limits = 20;
+
 		const [tag] = tags || [];
 
 		if (!tag) return;
@@ -132,10 +134,6 @@ export class RecommendAPI extends API {
 		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
 		paramBatch.request = { ...paramBatch.request, ...otherParams };
-		if (paramBatch.request['lastViewed']) {
-			//we only want the 5 newest viewed products
-			paramBatch.request['lastViewed'] = paramBatch.request['lastViewed'].slice(0, 5);
-		}
 		paramBatch.deferreds.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
