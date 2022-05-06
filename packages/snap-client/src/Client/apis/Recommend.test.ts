@@ -114,7 +114,7 @@ describe('Recommend Api', () => {
 			headers: {},
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&limits=undefined&siteId=8uyt2m';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&limits=20&siteId=8uyt2m';
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -132,54 +132,56 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
-	it('batchRecommendations trims and batches as expected', async () => {
+	const GETParams = {
+		method: 'GET',
+		headers: {},
+	};
+
+	const batchParams = {
+		siteId: '8uyt2m',
+		lastViewed: [
+			'marnie-runner-2-7x10',
+			'ruby-runner-2-7x10',
+			'abbie-runner-2-7x10',
+			'riley-4x6',
+			'joely-5x8',
+			'helena-4x6',
+			'kwame-4x6',
+			'sadie-4x6',
+			'candice-runner-2-7x10',
+			'esmeray-4x6',
+			'camilla-230x160',
+			'candice-4x6',
+			'sahara-4x6',
+			'dayna-4x6',
+			'moema-4x6',
+		],
+		product: ['marnie-runner-2-7x10'],
+	};
+
+	it('batchRecommendations batches as expected', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
-
-		const GETParams = {
-			method: 'GET',
-			headers: {},
-		};
-
-		const batchParams = {
-			siteId: '8uyt2m',
-			batched: true,
-			lastViewed: [
-				'marnie-runner-2-7x10',
-				'ruby-runner-2-7x10',
-				'abbie-runner-2-7x10',
-				'riley-4x6',
-				'joely-5x8',
-				'helena-4x6',
-				'kwame-4x6',
-				'sadie-4x6',
-				'candice-runner-2-7x10',
-				'esmeray-4x6',
-				'camilla-230x160',
-				'candice-4x6',
-				'sahara-4x6',
-				'dayna-4x6',
-				'moema-4x6',
-			],
-			limits: 20,
-			product: ['marnie-runner-2-7x10'],
-		};
-
-		const GETRequestUrl =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=20&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&product=marnie-runner-2-7x10';
 
 		let requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		//15 lastViewed trimmed to first 5, & product array changed to single product string
+		const GETRequestUrl =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=20&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+
+		//product array changed to single product string
 		// @ts-ignore
 		api.batchRecommendations({
 			tags: ['similar'],
+			limits: 20,
+			batched: true,
 			...batchParams,
 		});
 		// @ts-ignore
 		api.batchRecommendations({
 			tags: ['crossSell'],
+			limits: 20,
+			batched: true,
 			...batchParams,
 		});
 
@@ -188,6 +190,34 @@ describe('Recommend Api', () => {
 
 		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
 		requestMock.mockReset();
+	});
+	it('batchRecommendations handles undefined limits', async () => {
+		let api = new RecommendAPI(new ApiConfiguration({}));
+
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		const requestURL =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+
+		//now lets try with no limits
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			...batchParams,
+			limits: undefined,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledWith(requestURL, GETParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations handles POST requests', async () => {
+		let api = new RecommendAPI(new ApiConfiguration({}));
 
 		//now lets try a post
 		const POSTParams = {
@@ -195,7 +225,29 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: '{"tags":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99"],"limits":[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20],"siteId":"8uyt2m","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8"],"product":"marnie-runner-2-7x10"}',
+			body: JSON.stringify({
+				tags: Array.from({ length: 100 }, (item, index) => index + ''),
+				limits: Array(100).fill(20),
+				siteId: '8uyt2m',
+				lastViewed: [
+					'marnie-runner-2-7x10',
+					'ruby-runner-2-7x10',
+					'abbie-runner-2-7x10',
+					'riley-4x6',
+					'joely-5x8',
+					'helena-4x6',
+					'kwame-4x6',
+					'sadie-4x6',
+					'candice-runner-2-7x10',
+					'esmeray-4x6',
+					'camilla-230x160',
+					'candice-4x6',
+					'sahara-4x6',
+					'dayna-4x6',
+					'moema-4x6',
+				],
+				product: 'marnie-runner-2-7x10',
+			}),
 		};
 		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
