@@ -111,7 +111,9 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const { tags, limits, ...otherParams } = parameters;
+		let { tags, limits, ...otherParams } = parameters;
+		if (!limits) limits = 20;
+
 		const [tag] = tags || [];
 
 		if (!tag) return;
@@ -131,8 +133,7 @@ export class RecommendAPI extends API {
 		paramBatch.request.tags.push(tag);
 		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
-		paramBatch.request = deepmerge(paramBatch.request, otherParams);
-
+		paramBatch.request = { ...paramBatch.request, ...otherParams };
 		paramBatch.deferreds.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
@@ -140,6 +141,10 @@ export class RecommendAPI extends API {
 			let requestMethod = 'getRecommendations';
 			if (charsParams(paramBatch.request) > 1024) {
 				requestMethod = 'postRecommendations';
+				//post request needs products as a string.
+				if (paramBatch.request['product']) {
+					paramBatch.request['product'] = paramBatch.request['product'].toString();
+				}
 			}
 
 			try {

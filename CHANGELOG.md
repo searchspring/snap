@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.3](https://github.com/searchspring/snap/compare/v0.27.2...v0.27.3) (2022-05-09)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batchRecommendations function duplicating params ([f13640c](https://github.com/searchspring/snap/commit/f13640c456d378d30b33843dab66d12611137f6c))
+
+
+
+
+
 ## [0.27.2](https://github.com/searchspring/snap/compare/v0.27.1...v0.27.2) (2022-05-05)
 
 

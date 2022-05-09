@@ -34,7 +34,7 @@ const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
-const MAX_VIEWED_COUNT = 15;
+const MAX_VIEWED_COUNT = 20;
 const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
