@@ -26,7 +26,7 @@ export class NetworkCache {
 			});
 	}
 
-	public get(key: string): Response | undefined {
+	public get(key: string): Response | void {
 		try {
 			if (this.memoryCache[key]) {
 				if (Date.now() < this.memoryCache[key].expires) {

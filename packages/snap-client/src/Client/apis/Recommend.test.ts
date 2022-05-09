@@ -5,7 +5,7 @@ import { MockData } from '@searchspring/snap-shared';
 
 const mockData = new MockData();
 
-const wait = (time: undefined | number = undefined) => {
+const wait = (time?: number) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, time);
 	});

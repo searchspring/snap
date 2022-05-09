@@ -1,8 +1,7 @@
 import type { MetaResponseModel, SearchResponseModel, AutocompleteResponseModel } from '@searchspring/snapi-types';
-import { Client } from '@searchspring/snap-client';
+import { Client, ClientGlobals, ClientConfig } from '@searchspring/snap-client';
 import { MockData } from '../MockData/MockData';
-import { TrendingRequestModel, TrendingResponseModel } from '../../../snap-client/src/Client/apis';
-import type { ClientGlobals, ClientConfig } from '../../../snap-client/src/types';
+import { TrendingResponseModel } from '../../../snap-client/src/Client/apis';
 
 /*
 	// typical usage
