@@ -292,7 +292,6 @@ transformSearchResponse.facets = (response: searchResponseType, request: SearchR
 						},
 					};
 				}
-				//facet.active is a boolean?..
 				if (facet.active && typeof facet.active != 'boolean' && facet.active.length > 1) {
 					transformedFacet.active = {
 						low: facet.active[0] == '*' ? undefined : +facet.active[0],
