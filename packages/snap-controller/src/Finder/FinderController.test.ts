@@ -95,7 +95,6 @@ describe('Finder Controller', () => {
 				expect(controller2.store.selections[0].selected).toBe(valueToSelect);
 
 				// all selections should be disabled
-				// @ts-ignore
 				expect(controller2.config.persist.lockSelections).toBe(true);
 				controller2.store.selections.forEach((selection) => {
 					expect(selection.disabled).toBe(true);
