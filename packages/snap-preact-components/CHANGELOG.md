@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* **component-branchoverride:** correcting documentation and ensuring 'error' prop takes priority ([1885eb1](https://github.com/searchspring/snap/commit/1885eb19dace0741a68fd07067819aa565a92cd8))
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* convert tickSize to number ([7471841](https://github.com/searchspring/snap/commit/7471841a9f35bb609046f0f96a7f8d03c65f342c))
+* **facetslider:** prevent chrome from crashing when tickSize <= 0 ([dfecb49](https://github.com/searchspring/snap/commit/dfecb495c99fe0e4e381b1e2d8ec70d526b6b94f))
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-preact-components
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* **facetslider.stories.tsx:** adding default value for ticksize prop in facetSlider component story ([dfa2590](https://github.com/searchspring/snap/commit/dfa2590ed8c6fe1934f222c4ca14c26fd2543f33))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+
+### Bug Fixes
+
+* **errorhandler.tsx:** bugfix for theme spreading in errorhandler component ([f610a23](https://github.com/searchspring/snap/commit/f610a2356c0f416a82cc6cd0e95e49e6e89d46e3))
+* **recommendation:** ensure children length matches results or controller.store.results, update docs ([2a957b8](https://github.com/searchspring/snap/commit/2a957b858d68c9c6862327bdaaf2b1213609a0bc))
+
+
+### Features
+
+* **recommendations:** add results prop to recommendations component, allows for slicing results ([08b438b](https://github.com/searchspring/snap/commit/08b438b25685a563419919991efeea7f87a21629))
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

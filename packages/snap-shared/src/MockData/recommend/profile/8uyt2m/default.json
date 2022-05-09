@@ -1,21 +1,17 @@
 {
     "profile": {
         "tag": "trending",
-        "placement": "home-page",
+        "placement": "product-page",
         "display": {
             "threshold": 4,
             "template": {
-                "name": "preactTest",
-                "uuid": "34fdf15e-7ee1-447f-94c5-ea91086062e1",
-                "markup": "RecsHorizontalComponent",
-                "styles": ".preact-header {\r\n  color: blue;\r\n}"
+                "name": "smc__production",
+                "uuid": "aefcf718-8514-44c3-bff6-80c15dbc42fc",
+                "component": "Default",
+                "branch": "production",
+                "group": "smc"
             },
-            "templateParameters": {
-                "headerText": "Preact Recommended Products",
-                "count": 12,
-                "component": "Recs2",
-                "extraVar": ""
-            }
+            "templateParameters": { "headerText": "Trending Products" }
         }
     }
 }

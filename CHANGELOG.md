@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* **autocompletecontroller:** allow queries with spaces to be submitted ([f3c1c61](https://github.com/searchspring/snap/commit/f3c1c6149dbfde9f9fa68d6eb79ceb17561f96c0))
+* **component-branchoverride:** correcting documentation and ensuring 'error' prop takes priority ([1885eb1](https://github.com/searchspring/snap/commit/1885eb19dace0741a68fd07067819aa565a92cd8))
+* **recommendationcontroller:** fixing bug which did not allow for instantiator branch param change ([f980cae](https://github.com/searchspring/snap/commit/f980caee18e3625f28b3accfb1dbbe2c18171674))
+* **recommendationinstantiator:** changing controller naming structure -  object name to 'controller' ([5a373b9](https://github.com/searchspring/snap/commit/5a373b9975cf0d5a7f6d8a9a2b3f6eda930ec21c))
+* **recommendationinstantiator:** remove fallback url when creating recs controller ([533785a](https://github.com/searchspring/snap/commit/533785a63924a6266ff2470414242ac0244c64a8))
+* **snap-preact:** changing instantiator name to 'recommendation' from 'recommendations' ([1e48228](https://github.com/searchspring/snap/commit/1e48228560e84df7f0515b0f103bcc07eb1ddc99))
+* **snap-preact:** move controller import outside of conditional ([340b1f4](https://github.com/searchspring/snap/commit/340b1f4fd4db15e5d1f6c4d6971dc6fe67dce918))
+
+
+### Features
+
+* **instantiator-recommendation:** param plugin support, services included or passed in constructor ([4baee3c](https://github.com/searchspring/snap/commit/4baee3cb44bdd3900d73d156f7788212f6377d89))
+* **snap-preact:** added services as constructor param, async onTarget and heavily refactored ([b1cd990](https://github.com/searchspring/snap/commit/b1cd99061de3176a3554c0f523098a17a0efdc4a))
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **controller-search:** moving param check to after `beforeSearch` event fire ([1a1be22](https://github.com/searchspring/snap/commit/1a1be22abfe788a2497260ed46f304e8592dbccd))
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* add parent traversal for attribute tracking, refactor instantiator services ([dc61f52](https://github.com/searchspring/snap/commit/dc61f5212185b814ba5f8f02840a79d7831062e7))
+* convert tickSize to number ([7471841](https://github.com/searchspring/snap/commit/7471841a9f35bb609046f0f96a7f8d03c65f342c))
+* **facetslider:** prevent chrome from crashing when tickSize <= 0 ([dfecb49](https://github.com/searchspring/snap/commit/dfecb495c99fe0e4e381b1e2d8ec70d526b6b94f))
+* **tracker:** add href attribute to attributeList ([1fec898](https://github.com/searchspring/snap/commit/1fec8986843afbddbd466c91191176924114fd11))
+
+
+### Features
+
+* **recommendationinstantiator:** add cart param to recs context ([9b3d633](https://github.com/searchspring/snap/commit/9b3d633325020187c1472024ca33b8620ba16ab4))
+* **snap.tsx:** adding siteId override for branch switch query param ([58b5b56](https://github.com/searchspring/snap/commit/58b5b5616425f1ee01fed5990309961330f2eb81))
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **recommend.ts:** bugfix for batched recommendations not spreading all params ([7b59ad8](https://github.com/searchspring/snap/commit/7b59ad85c0a7b5721e66e76c4dac4f981c50507f))
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* **facetslider.stories.tsx:** adding default value for ticksize prop in facetSlider component story ([dfa2590](https://github.com/searchspring/snap/commit/dfa2590ed8c6fe1934f222c4ca14c26fd2543f33))
+* **findercontroller:** log beforeFind middleware error ([b117c52](https://github.com/searchspring/snap/commit/b117c525026eb612b96483c95c3dd19f7c4eefe1))
+
+
+### Features
+
+* add matchType to QueryStore and supporting client transform ([2f01e81](https://github.com/searchspring/snap/commit/2f01e81c0fdf9a1f6cef7203f07d536ae91c8412))
+* **controller-finder:** adding persistence configuration and functionality ([eac3ef4](https://github.com/searchspring/snap/commit/eac3ef40fc19c08a4cede96923efe861ffded8d6))
+* **wip:** finder persisting ([3a87f9a](https://github.com/searchspring/snap/commit/3a87f9ad73518ad52f2d6b07443226a5a9c1ffd8))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+
+### Bug Fixes
+
+* **errorhandler.tsx:** bugfix for theme spreading in errorhandler component ([f610a23](https://github.com/searchspring/snap/commit/f610a2356c0f416a82cc6cd0e95e49e6e89d46e3))
+* **facet-store:** fixing logic around individual facet settings ([663806d](https://github.com/searchspring/snap/commit/663806d2e5bcb075fd7df57ad5cf5d1529c6cbcf))
+* **recommendation:** ensure children length matches results or controller.store.results, update docs ([2a957b8](https://github.com/searchspring/snap/commit/2a957b858d68c9c6862327bdaaf2b1213609a0bc))
+
+
+### Features
+
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([b67248d](https://github.com/searchspring/snap/commit/b67248da94ffeb8d75763ba2f1c68c9bd84066fb))
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([f885286](https://github.com/searchspring/snap/commit/f885286db82844fb03bfed0cea4d5ffed63addfe))
+* **recommendations:** add results prop to recommendations component, allows for slicing results ([08b438b](https://github.com/searchspring/snap/commit/08b438b25685a563419919991efeea7f87a21629))
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 

@@ -21,17 +21,18 @@ export type ClientConfig = {
 	};
 };
 
-export type CacheConfig = {
-	enabled?: boolean;
-	ttl?: number;
-	maxSize?: number;
-	purgeable?: boolean;
+export type CacheConfig = Partial<DefaultCacheConfig>;
+
+export type DefaultCacheConfig = {
+	enabled: boolean;
+	ttl: number;
+	maxSize: number;
+	purgeable: boolean;
 	entries?: { [key: string]: Response };
 };
-
 export type CacheEntry = {
 	value: Response;
-	expires?: number;
+	expires: number;
 	purgeable?: boolean;
 };
 

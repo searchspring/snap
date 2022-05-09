@@ -1,5 +1,5 @@
-export function mergeParams(...args): any {
-	const ret = {};
+export function mergeParams(...args: any[]): any {
+	const ret: any = {};
 
 	args.reverse().forEach((params) => {
 		Object.keys(params).forEach((key) => {

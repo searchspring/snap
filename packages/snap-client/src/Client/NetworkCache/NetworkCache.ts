@@ -1,10 +1,10 @@
 import deepmerge from 'deepmerge';
 
-import { CacheConfig, Cache } from '../../types';
+import { CacheConfig, Cache, DefaultCacheConfig } from '../../types';
 
 const CACHE_STORAGE_KEY = 'ss-networkcache';
 
-const defaultConfig: CacheConfig = {
+const defaultConfig: DefaultCacheConfig = {
 	enabled: true,
 	ttl: 300000, // ms
 	maxSize: 200, // KB
@@ -13,18 +13,20 @@ const defaultConfig: CacheConfig = {
 
 export class NetworkCache {
 	private memoryCache: Cache = {};
-	config: CacheConfig;
+	config: DefaultCacheConfig;
 
 	constructor(config?: CacheConfig) {
 		this.config = deepmerge(defaultConfig, config || {});
-		if (this.config.entries) {
-			Object.keys(this.config.entries).map((key) => {
-				this.set(key, this.config.entries[key]);
+
+		this.config?.entries &&
+			Object.keys(this.config.entries).map((key: string) => {
+				if (this.config.entries && this.config.entries[key]) {
+					this.set(key, this.config.entries[key]);
+				}
 			});
-		}
 	}
 
-	public get(key: string): Response {
+	public get(key: string): Response | void {
 		try {
 			if (this.memoryCache[key]) {
 				if (Date.now() < this.memoryCache[key].expires) {

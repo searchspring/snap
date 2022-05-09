@@ -3,6 +3,7 @@ import deepmerge from 'deepmerge';
 import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, StorageType, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
+import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
@@ -42,7 +43,7 @@ type SearchTrackMethods = {
 };
 
 export class SearchController extends AbstractController {
-	public type = 'search';
+	public type = ControllerTypes.search;
 	public store: SearchStore;
 	config: SearchControllerConfig;
 	storage: StorageStore;
@@ -208,13 +209,6 @@ export class SearchController extends AbstractController {
 		const params = this.params;
 
 		try {
-			const stringyParams = JSON.stringify(params);
-			const prevStringyParams = this.storage.get('lastStringyParams');
-			if (stringyParams == prevStringyParams) {
-				// no param change - not searching
-				return;
-			}
-
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -228,6 +222,13 @@ export class SearchController extends AbstractController {
 					this.log.error(`error in 'beforeSearch' middleware`);
 					throw err;
 				}
+			}
+
+			const stringyParams = JSON.stringify(params);
+			const prevStringyParams = this.storage.get('lastStringyParams');
+			if (stringyParams == prevStringyParams) {
+				// no param change - not searching
+				return;
 			}
 
 			if (this.config.settings.infinite) {

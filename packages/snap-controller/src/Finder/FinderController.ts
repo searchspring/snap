@@ -4,6 +4,7 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
+import { ControllerTypes } from '../types';
 import type { FinderStore } from '@searchspring/snap-store-mobx';
 import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent, ContextVariables } from '../types';
 
@@ -23,7 +24,7 @@ const defaultConfig: FinderControllerConfig = {
 };
 
 export class FinderController extends AbstractController {
-	public type = 'finder';
+	public type = ControllerTypes.finder;
 	public store: FinderStore;
 	config: FinderControllerConfig;
 
@@ -59,6 +60,12 @@ export class FinderController extends AbstractController {
 			await next();
 
 			finder.controller.store.loading = false;
+		});
+
+		this.eventManager.on('beforeFind', async (finder: { controller: FinderController }, next: NextEvent): Promise<void | boolean> => {
+			await next();
+
+			window.location.href = this.urlManager.href;
 		});
 
 		// attach config plugins and event middleware
@@ -97,10 +104,7 @@ export class FinderController extends AbstractController {
 				this.log.error(`error in 'beforeFind' middleware`);
 				this.log.error(err);
 			}
-			return;
 		}
-
-		window.location.href = this.urlManager.href;
 	};
 
 	reset = (): void => {

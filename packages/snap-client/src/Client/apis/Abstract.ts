@@ -20,7 +20,7 @@ export interface RequestOpts {
 
 export class API {
 	private retryDelay = 1000;
-	private retryCount = 1;
+	private retryCount = 0;
 
 	public cache: NetworkCache;
 
@@ -94,7 +94,7 @@ export class API {
 		return { url, init };
 	}
 
-	private fetchApi = async (url: string, init: RequestInit) => {
+	private fetchApi = async (url: RequestInfo, init?: RequestInit) => {
 		const response = await this.configuration.fetchApi(url, init);
 
 		return response;
@@ -120,15 +120,15 @@ export class ApiConfiguration {
 	}
 
 	get cache(): CacheConfig {
-		return this.configuration.cache;
+		return this.configuration?.cache || {};
 	}
 
 	get maxRetry(): number {
-		return this.configuration.maxRetry;
+		return this.configuration.maxRetry || 8;
 	}
 
 	get origin(): string {
-		return this.configuration.origin;
+		return this.configuration.origin || '';
 	}
 
 	get fetchApi(): FetchAPI {

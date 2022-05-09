@@ -39,7 +39,7 @@ describe('Email Recs', () => {
 
 	describe('Tests Email Recs', () => {
 		it('has a controller with an products in store immediately', function () {
-			cy.snapController('recommend_email-test20').then(({ store }) => {
+			cy.snapController('recommend_email_0').then(({ store }) => {
 				expect(store.results.length).to.equal(20);
 			});
 		});

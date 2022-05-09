@@ -1,4 +1,4 @@
-import { SearchRequestModelFilterValue, SearchRequestModelFilterRange } from '@searchspring/snapi-types';
+import { SearchRequestModelFilterValue, SearchRequestModelFilterRange, SearchRequestModelFilter } from '@searchspring/snapi-types';
 
 import { transformSearchRequest } from './searchRequest';
 
@@ -79,7 +79,7 @@ describe('search request search transform', () => {
 		expect(params).toEqual({});
 	});
 
-	it('generates trimmed query', () => {
+	it('should not trim query', () => {
 		const params = transformSearchRequest.search({
 			search: {
 				query: {
@@ -88,19 +88,7 @@ describe('search request search transform', () => {
 			},
 		});
 
-		expect(params.q).toEqual('a query');
-	});
-
-	it("accepts extended 'string' syntax", () => {
-		const params = transformSearchRequest.search({
-			search: {
-				query: {
-					string: ' extended query ',
-				},
-			},
-		});
-
-		expect(params.q).toEqual('extended query');
+		expect(params.q).toEqual(' a query ');
 	});
 
 	it('generates trimmed subQuery parameter', () => {
@@ -167,15 +155,15 @@ describe('search request filter transform', () => {
 		const params = transformSearchRequest.filters({
 			filters: [
 				{
-					type: 'range' as any,
+					type: 'range',
 					field: 'price',
 					value: {
-						low: null,
+						low: undefined,
 						high: 50,
 					},
 				} as SearchRequestModelFilterRange,
 				{
-					type: 'range' as any,
+					type: 'range',
 					field: 'width',
 					value: {
 						low: 25,
@@ -191,7 +179,7 @@ describe('search request filter transform', () => {
 					background: true,
 				} as SearchRequestModelFilterRange,
 				,
-			],
+			] as SearchRequestModelFilter[],
 		});
 
 		expect(params).toEqual({

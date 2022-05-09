@@ -191,7 +191,7 @@ describe('Tracking', () => {
 	it('tracked all recommendation interaction events', () => {
 		cy.visit('https://localhost:2222/product.html');
 
-		cy.snapController('recommend_similar0').then(({ store }) => {
+		cy.snapController('recommend_similar_0').then(({ store }) => {
 			expect(store).to.haveOwnProperty('results');
 			expect(store.results).to.have.length.above(0);
 

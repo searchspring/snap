@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* **autocompletecontroller:** allow queries with spaces to be submitted ([f3c1c61](https://github.com/searchspring/snap/commit/f3c1c6149dbfde9f9fa68d6eb79ceb17561f96c0))
+* **recommendationcontroller:** fixing bug which did not allow for instantiator branch param change ([f980cae](https://github.com/searchspring/snap/commit/f980caee18e3625f28b3accfb1dbbe2c18171674))
+
+
+
+
+
+## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **controller-search:** moving param check to after `beforeSearch` event fire ([1a1be22](https://github.com/searchspring/snap/commit/1a1be22abfe788a2497260ed46f304e8592dbccd))
+
+
+
+
+
+# [0.26.0](https://github.com/searchspring/snap/compare/v0.25.1...v0.26.0) (2022-04-14)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+## [0.25.1](https://github.com/searchspring/snap/compare/v0.25.0...v0.25.1) (2022-04-11)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+
+
+
+
+# [0.25.0](https://github.com/searchspring/snap/compare/v0.24.0...v0.25.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* **findercontroller:** log beforeFind middleware error ([b117c52](https://github.com/searchspring/snap/commit/b117c525026eb612b96483c95c3dd19f7c4eefe1))
+
+
+### Features
+
+* **controller-finder:** adding persistence configuration and functionality ([eac3ef4](https://github.com/searchspring/snap/commit/eac3ef40fc19c08a4cede96923efe861ffded8d6))
+* **wip:** finder persisting ([3a87f9a](https://github.com/searchspring/snap/commit/3a87f9ad73518ad52f2d6b07443226a5a9c1ffd8))
+
+
+
+
+
+# [0.24.0](https://github.com/searchspring/snap/compare/v0.23.1...v0.24.0) (2022-03-31)
+
+
+### Features
+
+* **facet-store:** adding `storeRange` option and allowing for per-facet configuration ([b67248d](https://github.com/searchspring/snap/commit/b67248da94ffeb8d75763ba2f1c68c9bd84066fb))
+
+
+
+
+
 ## [0.23.1](https://github.com/searchspring/snap/compare/v0.23.0...v0.23.1) (2022-03-21)
 
 **Note:** Version bump only for package @searchspring/snap-controller
