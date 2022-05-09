@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/searchspring/snap/compare/v0.27.0...v0.27.1) (2022-05-04)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+
+
+
+
+# [0.27.0](https://github.com/searchspring/snap/compare/v0.26.1...v0.27.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* **recommendationinstantiator:** changing controller naming structure -  object name to 'controller' ([5a373b9](https://github.com/searchspring/snap/commit/5a373b9975cf0d5a7f6d8a9a2b3f6eda930ec21c))
+* **recommendationinstantiator:** remove fallback url when creating recs controller ([533785a](https://github.com/searchspring/snap/commit/533785a63924a6266ff2470414242ac0244c64a8))
+* **snap-preact:** changing instantiator name to 'recommendation' from 'recommendations' ([1e48228](https://github.com/searchspring/snap/commit/1e48228560e84df7f0515b0f103bcc07eb1ddc99))
+* **snap-preact:** move controller import outside of conditional ([340b1f4](https://github.com/searchspring/snap/commit/340b1f4fd4db15e5d1f6c4d6971dc6fe67dce918))
+
+
+### Features
+
+* **instantiator-recommendation:** param plugin support, services included or passed in constructor ([4baee3c](https://github.com/searchspring/snap/commit/4baee3cb44bdd3900d73d156f7788212f6377d89))
+* **snap-preact:** added services as constructor param, async onTarget and heavily refactored ([b1cd990](https://github.com/searchspring/snap/commit/b1cd99061de3176a3554c0f523098a17a0efdc4a))
+
+
+
+
+
 ## [0.26.1](https://github.com/searchspring/snap/compare/v0.26.0...v0.26.1) (2022-04-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact
