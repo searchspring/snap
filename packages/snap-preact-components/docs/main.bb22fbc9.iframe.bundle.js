@@ -23310,6 +23310,7 @@
 					HybridAPI
 				);
 			})(API);
+			__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js');
 			function hashParams(params) {
 				if ('object' != typeof params) throw new Error('function requires an object');
 				return JSON.stringify(params);
@@ -23579,14 +23580,15 @@
 																	((tags = parameters.tags),
 																	(limits = parameters.limits),
 																	(otherParams = _objectWithoutProperties(parameters, _excluded)),
+																	limits || (limits = 20),
 																	(_ref2 = Recommend_slicedToArray(tags || [], 1)),
 																	(tag = _ref2[0]))
 																) {
-																	_context3.next = 4;
+																	_context3.next = 5;
 																	break;
 																}
 																return _context3.abrupt('return');
-															case 4:
+															case 5:
 																return (
 																	(key = hashParams(otherParams)),
 																	'batched' in otherParams && (otherParams.batched && (key = otherParams.siteId), delete otherParams.batched),
@@ -23595,7 +23597,7 @@
 																	(deferred = new Deferred()),
 																	paramBatch.request.tags.push(tag),
 																	(paramBatch.request.limits = paramBatch.request.limits.concat(limits)),
-																	(paramBatch.request = cjs_default()(paramBatch.request, otherParams)),
+																	(paramBatch.request = Object.assign({}, paramBatch.request, otherParams)),
 																	paramBatch.deferreds.push(deferred),
 																	window.clearTimeout(paramBatch.timeout),
 																	(paramBatch.timeout = window.setTimeout(
@@ -23609,7 +23611,10 @@
 																								case 0:
 																									return (
 																										(requestMethod = 'getRecommendations'),
-																										charsParams(paramBatch.request) > 1024 && (requestMethod = 'postRecommendations'),
+																										charsParams(paramBatch.request) > 1024 &&
+																											((requestMethod = 'postRecommendations'),
+																											paramBatch.request.product &&
+																												(paramBatch.request.product = paramBatch.request.product.toString())),
 																										(_context2.prev = 2),
 																										(_context2.next = 5),
 																										_this3[requestMethod](paramBatch.request)
@@ -23644,7 +23649,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 16:
+															case 17:
 															case 'end':
 																return _context3.stop();
 														}
@@ -24134,7 +24139,6 @@
 				mobx_esm = __webpack_require__('../../node_modules/mobx/dist/mobx.esm.js');
 			__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.map.js');
 			function MerchandisingStore_toConsumableArray(arr) {
 				return (
@@ -28307,7 +28311,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.2' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.3' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -28409,7 +28413,7 @@
 													uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (item) {
 														return item.trim();
 													});
-												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 15).join(','), 'Lax', 220752e6),
+												cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6),
 													lastViewedProducts.includes(sku) || _this.sendPreflight();
 											}
 											return (
@@ -28703,7 +28707,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
