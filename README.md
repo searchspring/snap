@@ -31,12 +31,12 @@ npm install
 ```
 
 ## Build
-Executes `npm run build` across all packages sequentially. 
+Executes `npm run build` across all packages sequentially
 ```shell
 npm run build
 ```
 ## Dev
-Executes `npm run dev` across all packages sequentially. All packages will be linked with hot reloading.
+Executes `npm run dev` across all packages sequentially. All packages will be linked with hot reloading
 ```shell
 npm run dev
 ```
