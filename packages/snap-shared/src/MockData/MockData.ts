@@ -42,7 +42,7 @@ export class MockData {
 
 	constructor(config?: MockDataConfig) {
 		this.initialConfig = config || defaultConfig;
-		this.updateConfig(config);
+		this.updateConfig(this.initialConfig);
 	}
 
 	updateConfig(config: MockDataConfig): MockData {
@@ -110,8 +110,8 @@ export class MockData {
 
 	recommend(files?: { profileFile?: string; resultsFile?: string }) {
 		try {
-			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend.profile}.json`;
-			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend.results}.json`;
+			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config?.recommend?.profile}.json`;
+			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config?.recommend?.results}.json`;
 			return {
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,
@@ -122,7 +122,7 @@ export class MockData {
 	}
 }
 
-function getJSON(file) {
+function getJSON(file: string) {
 	const json = fs.readFileSync(file, 'utf8');
 	return JSON.parse(json);
 }

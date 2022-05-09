@@ -183,9 +183,9 @@ export class Snap {
 				break;
 		}
 
-		if (!this.controllers[config.id]) {
-			const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
+		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
 
+		if (!this.controllers[config.id]) {
 			this.controllers[config.id] = creationFunc(
 				{
 					url: deepmerge(this.config.url || {}, urlConfig || {}),

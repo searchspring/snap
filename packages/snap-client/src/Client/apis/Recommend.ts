@@ -66,8 +66,8 @@ export type RecommendCombinedRequestModel = {
 
 class Deferred {
 	promise: Promise<any>;
-	resolve;
-	reject;
+	resolve: any;
+	reject: any;
 
 	constructor() {
 		this.promise = new Promise((resolve, reject) => {
@@ -111,10 +111,10 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const { tags, limits, ...otherParams } = parameters;
-		const [tag] = tags || [];
+		let { tags, limits, ...otherParams } = parameters;
+		if (!limits) limits = 20;
 
-		if (!tag) return;
+		const [tag] = tags || [];
 
 		let key = hashParams(otherParams as RecommendRequestModel);
 		if ('batched' in otherParams) {
@@ -131,25 +131,33 @@ export class RecommendAPI extends API {
 		paramBatch.request.tags.push(tag);
 		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
-		paramBatch.request = deepmerge(paramBatch.request, otherParams);
-
-		paramBatch.deferreds.push(deferred);
+		paramBatch.request = { ...paramBatch.request, ...otherParams };
+		paramBatch.deferreds?.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
 		paramBatch.timeout = window.setTimeout(async () => {
 			let requestMethod = 'getRecommendations';
 			if (charsParams(paramBatch.request) > 1024) {
 				requestMethod = 'postRecommendations';
+				//post request needs products as a string.
+				if (paramBatch.request['product']) {
+					paramBatch.request['product'] = paramBatch.request['product'].toString();
+				}
 			}
 
 			try {
-				const response = await this[requestMethod](paramBatch.request);
+				let response: RecommendResponseModel;
+				if (charsParams(paramBatch.request) > 1024) {
+					response = await this.postRecommendations(paramBatch.request);
+				} else {
+					response = await this.getRecommendations(paramBatch.request);
+				}
 
-				paramBatch.deferreds.forEach((def, index) => {
+				paramBatch.deferreds?.forEach((def, index) => {
 					def.resolve([response[index]]);
 				});
 			} catch (err) {
-				paramBatch.deferreds.forEach((def) => {
+				paramBatch.deferreds?.forEach((def) => {
 					def.reject(err);
 				});
 			}

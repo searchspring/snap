@@ -1,5 +1,4 @@
 import {
-	LegacyAPI,
 	HybridAPI,
 	SuggestAPI,
 	RecommendAPI,
@@ -76,31 +75,31 @@ export class Client {
 			autocomplete: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.autocomplete?.api?.origin,
-					cache: this.config.autocomplete.cache,
+					cache: this.config.autocomplete?.cache,
 				})
 			),
 			meta: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.meta?.api?.origin,
-					cache: this.config.meta.cache,
+					cache: this.config.meta?.cache,
 				})
 			),
 			recommend: new RecommendAPI(
 				new ApiConfiguration({
 					origin: this.config.recommend?.api?.origin,
-					cache: this.config.recommend.cache,
+					cache: this.config.recommend?.cache,
 				})
 			),
 			search: new HybridAPI(
 				new ApiConfiguration({
 					origin: this.config.search?.api?.origin,
-					cache: this.config.search.cache,
+					cache: this.config.search?.cache,
 				})
 			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
-					cache: this.config.suggest.cache,
+					cache: this.config.suggest?.cache,
 				})
 			),
 		};
@@ -120,13 +119,13 @@ export class Client {
 
 		params = deepmerge(this.globals, params);
 
-		return Promise.all([this.meta({ siteId: params.siteId }), this.requesters.autocomplete.getAutocomplete(params)]);
+		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.autocomplete.getAutocomplete(params)]);
 	}
 
 	async search(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {
 		params = deepmerge(this.globals, params);
 
-		return Promise.all([this.meta({ siteId: params.siteId }), this.requesters.search.getSearch(params)]);
+		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.search.getSearch(params)]);
 	}
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
@@ -153,8 +152,8 @@ export class Client {
 
 		const recommendParams: RecommendRequestModel = {
 			tags: [tag],
-			siteId: params.siteId || this.globals.siteId,
 			...otherParams,
+			siteId: params.siteId || this.globals.siteId,
 		};
 
 		const [profile, recommendations] = await Promise.all([

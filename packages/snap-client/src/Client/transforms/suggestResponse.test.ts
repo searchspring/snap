@@ -4,7 +4,12 @@ const mockQuery = 'yellw';
 
 const mockCorrectedQuery = 'yellow';
 
-const mockSuggested = {
+const mockSuggested: {
+	text: string;
+	type: string;
+	completed?: [];
+	source: string;
+} = {
 	text: 'yellow',
 	type: 'exact',
 	completed: [],
@@ -113,7 +118,7 @@ describe('suggest response transformer suggested', () => {
 		const transformedResponse = {
 			suggested: mockSuggested,
 		};
-		delete transformedResponse.suggested.completed;
+		delete transformedResponse?.suggested?.completed;
 
 		expect(response).toEqual(transformedResponse);
 	});
