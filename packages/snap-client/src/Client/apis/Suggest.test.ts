@@ -4,19 +4,15 @@ import { SuggestAPI } from './Suggest';
 
 describe('Suggest Api', () => {
 	it('has expected default functions', () => {
-		let api;
+		let api = new SuggestAPI(new ApiConfiguration({}));
 
-		expect(() => {
-			api = new SuggestAPI(new ApiConfiguration({}));
-		}).not.toThrow();
+		expect(api?.getSuggest).toBeDefined();
 
-		expect(api.getSuggest).toBeDefined();
+		expect(api?.postSuggest).toBeDefined();
 
-		expect(api.postSuggest).toBeDefined();
+		expect(api?.getTrending).toBeDefined();
 
-		expect(api.getTrending).toBeDefined();
-
-		expect(api.postTrending).toBeDefined();
+		expect(api?.postTrending).toBeDefined();
 	});
 
 	it('can call getSuggest', async () => {

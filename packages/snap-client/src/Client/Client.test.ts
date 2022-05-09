@@ -5,7 +5,7 @@ import { MockData } from '@searchspring/snap-shared';
 
 const mockData = new MockData();
 
-const wait = (time = undefined) => {
+const wait = (time?: number) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, time);
 	});
@@ -67,14 +67,14 @@ describe('Snap Client', () => {
 		// @ts-ignore
 		let clientConfig = client.config;
 
-		expect(clientConfig.meta.api.origin).toBe(config.meta.api.origin);
+		expect(clientConfig?.meta?.api?.origin).toBe(config?.meta?.api?.origin);
 
 		//check it merged with the default config
-		expect(clientConfig.meta.cache.purgeable).toBe(false);
-		expect(clientConfig.search.api.origin).toBe(config.search.api.origin);
-		expect(clientConfig.autocomplete.api.origin).toBe(config.autocomplete.api.origin);
-		expect(clientConfig.recommend.api.origin).toBe(config.recommend.api.origin);
-		expect(clientConfig.suggest.api.origin).toBe(config.suggest.api.origin);
+		expect(clientConfig?.meta?.cache?.purgeable).toBe(false);
+		expect(clientConfig?.search?.api?.origin).toBe(config?.search?.api?.origin);
+		expect(clientConfig?.autocomplete?.api?.origin).toBe(config?.autocomplete?.api?.origin);
+		expect(clientConfig?.recommend?.api?.origin).toBe(config?.recommend?.api?.origin);
+		expect(clientConfig?.suggest?.api?.origin).toBe(config?.suggest?.api?.origin);
 	});
 
 	it('has all the fetch functions defined', () => {
@@ -104,7 +104,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.autocomplete()) } as Response));
 
 			const acparams = {
 				search: {
@@ -226,7 +226,7 @@ describe('Snap Client', () => {
 
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
-				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
 
 			const searchprops = { siteId: '8uyt2m' };
 

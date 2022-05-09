@@ -4,21 +4,18 @@ import { LegacyAPI } from './Legacy';
 
 describe('Legacy Api', () => {
 	it('has expected default functions', () => {
-		let api;
+		let api = new LegacyAPI(new ApiConfiguration({}));
 
-		expect(() => {
-			api = new LegacyAPI(new ApiConfiguration({}));
-		}).not.toThrow();
+		// @ts-ignore
+		expect(api?.getEndpoint).toBeDefined();
 
-		expect(api.getEndpoint).toBeDefined();
+		expect(api?.getMeta).toBeDefined();
 
-		expect(api.getMeta).toBeDefined();
+		expect(api?.getSearch).toBeDefined();
 
-		expect(api.getSearch).toBeDefined();
+		expect(api?.getAutocomplete).toBeDefined();
 
-		expect(api.getAutocomplete).toBeDefined();
-
-		expect(api.getFinder).toBeDefined();
+		expect(api?.getFinder).toBeDefined();
 	});
 
 	it('can call getMeta', async () => {

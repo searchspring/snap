@@ -66,8 +66,8 @@ export type RecommendCombinedRequestModel = {
 
 class Deferred {
 	promise: Promise<any>;
-	resolve;
-	reject;
+	resolve: any;
+	reject: any;
 
 	constructor() {
 		this.promise = new Promise((resolve, reject) => {
@@ -116,8 +116,6 @@ export class RecommendAPI extends API {
 
 		const [tag] = tags || [];
 
-		if (!tag) return;
-
 		let key = hashParams(otherParams as RecommendRequestModel);
 		if ('batched' in otherParams) {
 			if (otherParams.batched) {
@@ -134,7 +132,7 @@ export class RecommendAPI extends API {
 		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
 
 		paramBatch.request = { ...paramBatch.request, ...otherParams };
-		paramBatch.deferreds.push(deferred);
+		paramBatch.deferreds?.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
 		paramBatch.timeout = window.setTimeout(async () => {
@@ -148,13 +146,18 @@ export class RecommendAPI extends API {
 			}
 
 			try {
-				const response = await this[requestMethod](paramBatch.request);
+				let response: RecommendResponseModel;
+				if (charsParams(paramBatch.request) > 1024) {
+					response = await this.postRecommendations(paramBatch.request);
+				} else {
+					response = await this.getRecommendations(paramBatch.request);
+				}
 
-				paramBatch.deferreds.forEach((def, index) => {
+				paramBatch.deferreds?.forEach((def, index) => {
 					def.resolve([response[index]]);
 				});
 			} catch (err) {
-				paramBatch.deferreds.forEach((def) => {
+				paramBatch.deferreds?.forEach((def) => {
 					def.reject(err);
 				});
 			}
