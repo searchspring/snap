@@ -42,7 +42,7 @@ export class MockData {
 
 	constructor(config?: MockDataConfig) {
 		this.initialConfig = config || defaultConfig;
-		if (config) this.updateConfig(config);
+		this.updateConfig(this.initialConfig);
 	}
 
 	updateConfig(config: MockDataConfig): MockData {
