@@ -38,8 +38,8 @@ describe('Overlay Component', () => {
 		const rendered = render(<Overlay {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement!);
-		expect(styles?.backgroundColor).toBe(args.color);
-		expect(styles?.transition).toBe(`background ${args.transitionSpeed} ease,left 0s ease`);
+		expect(styles!.backgroundColor).toBe(args.color);
+		expect(styles!.transition).toBe(`background ${args.transitionSpeed} ease,left 0s ease`);
 	});
 
 	it('can disable styling', () => {
@@ -50,8 +50,8 @@ describe('Overlay Component', () => {
 		const rendered = render(<Overlay {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement!);
-		expect(styles?.backgroundColor).toBe('');
-		expect(overlayElement?.classList.length).toBe(2);
+		expect(styles!.backgroundColor).toBe('');
+		expect(overlayElement!.classList.length).toBe(2);
 	});
 
 	it('can custom className', () => {
@@ -61,7 +61,7 @@ describe('Overlay Component', () => {
 		};
 		const rendered = render(<Overlay {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
-		expect(overlayElement?.classList).toContain(args.className);
+		expect(overlayElement!.classList).toContain(args.className);
 	});
 
 	it('fires onClick prop when clicked', () => {
@@ -84,7 +84,7 @@ describe('Overlay Component', () => {
 		);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.overlay.color);
+		expect(styles!.backgroundColor).toBe(theme.components.overlay.color);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -92,7 +92,7 @@ describe('Overlay Component', () => {
 		const rendered = render(<Overlay {...args} theme={theme} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.overlay.color);
+		expect(styles!.backgroundColor).toBe(theme.components.overlay.color);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -111,7 +111,7 @@ describe('Overlay Component', () => {
 		);
 		const overlayElement = rendered.container.querySelector('.ss__overlay');
 		const styles = getComputedStyle(overlayElement!);
-		expect(styles?.backgroundColor).toBe(themeOverride.components.overlay.color);
-		expect(styles?.backgroundColor).not.toBe(theme.components.overlay.color);
+		expect(styles!.backgroundColor).toBe(themeOverride.components.overlay.color);
+		expect(styles!.backgroundColor).not.toBe(theme.components.overlay.color);
 	});
 });

@@ -13,12 +13,12 @@ describe('hierarchyValue Component', () => {
 	});
 
 	it('renders', () => {
-		const hierarchyValueElement = hierarchyValueComponent?.container.querySelector('.ss__facet-hierarchy-options');
+		const hierarchyValueElement = hierarchyValueComponent!.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyValueElement).toBeInTheDocument();
 	});
 
 	it('renders label and count', () => {
-		const hierarchyOption = hierarchyValueComponent?.container.querySelectorAll('.ss__facet-hierarchy-options__option');
+		const hierarchyOption = hierarchyValueComponent!.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetFilteredMock.values.length);
 
@@ -43,17 +43,17 @@ describe('hierarchyValue Component hiding count', () => {
 	});
 
 	it('renders', () => {
-		const hierarchyValueElement = hierarchyValueComponent?.container.querySelector('.ss__facet-hierarchy-options');
+		const hierarchyValueElement = hierarchyValueComponent!.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyValueElement).toBeInTheDocument();
 	});
 
 	it('doesnt render checkboxs', () => {
-		const checkbox = hierarchyValueComponent?.container.querySelector('.ss__checkbox');
+		const checkbox = hierarchyValueComponent!.container.querySelector('.ss__checkbox');
 		expect(checkbox).not.toBeInTheDocument();
 	});
 
 	it('renders label but not count', () => {
-		const hierarchyOption = hierarchyValueComponent?.container.querySelectorAll('.ss__facet-hierarchy-options__option');
+		const hierarchyOption = hierarchyValueComponent!.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
 
@@ -67,7 +67,7 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values} disableStyles={true} />);
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
-		expect(hierarchyOption?.classList.length).toBe(1);
+		expect(hierarchyOption!.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {

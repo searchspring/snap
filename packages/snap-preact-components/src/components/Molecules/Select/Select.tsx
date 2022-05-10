@@ -21,7 +21,6 @@ type ISelectStyles = {
 };
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, theme }: ISelectStyles) =>
-		//@ts-ignore
 		css({
 			display: 'inline-flex',
 			color: color,

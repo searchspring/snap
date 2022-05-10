@@ -65,7 +65,7 @@ describe('FacetListOptions generic props work', () => {
 		const rendered = render(<FacetListOptions values={listFacetMock.values} disableStyles={true} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
-		expect(listOption?.classList.length).toBe(1);
+		expect(listOption!.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {

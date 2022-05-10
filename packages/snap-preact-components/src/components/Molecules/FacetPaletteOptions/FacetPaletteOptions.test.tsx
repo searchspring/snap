@@ -64,7 +64,7 @@ describe('FacetPaletteOptions Component', () => {
 		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} disableStyles={true} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
-		expect(paletteElement?.classList.length).toBe(1);
+		expect(paletteElement!.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -96,12 +96,12 @@ describe('FacetPaletteOptions Component', () => {
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
 		const styles = getComputedStyle(paletteElement!);
-		expect(styles?.gap).toBe(args.gapSize);
-		expect(styles?.gridTemplateColumns).toBe(`repeat(${args.columns}, calc((100% - (${args.columns - 1} * ${args.gapSize}))/ ${args.columns}))`);
+		expect(styles!.gap).toBe(args.gapSize);
+		expect(styles!.gridTemplateColumns).toBe(`repeat(${args.columns}, calc((100% - (${args.columns - 1} * ${args.gapSize}))/ ${args.columns}))`);
 
 		const paletteOptionElement = rendered.container.querySelector('.ss__facet-palette-options__option');
 		const optionStyles = getComputedStyle(paletteOptionElement!);
-		expect(optionStyles?.width).toBe(`calc(100% / ${args.columns} - ${2 * Math.round((args.columns + 2) / 2)}px )`);
+		expect(optionStyles!.width).toBe(`calc(100% / ${args.columns} - ${2 * Math.round((args.columns + 2) / 2)}px )`);
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -115,7 +115,7 @@ describe('FacetPaletteOptions Component', () => {
 		);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement!);
-		expect(styles['grid-template-columns']).toBe(
+		expect(styles['grid-template-columns' as any]).toBe(
 			`repeat(${theme.components.facetPaletteOptions.columns}, calc((100% - (${theme.components.facetPaletteOptions.columns - 1} * 8px))/ ${
 				theme.components.facetPaletteOptions.columns
 			}))`
@@ -129,7 +129,7 @@ describe('FacetPaletteOptions Component', () => {
 		const rendered = render(<FacetPaletteOptions {...args} theme={theme} />);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement!);
-		expect(styles['grid-template-columns']!).toBe(
+		expect(styles['grid-template-columns' as any]).toBe(
 			`repeat(${theme.components.facetPaletteOptions.columns}, calc((100% - (${theme.components.facetPaletteOptions.columns - 1} * 8px))/ ${
 				theme.components.facetPaletteOptions.columns
 			}))`
@@ -154,7 +154,7 @@ describe('FacetPaletteOptions Component', () => {
 		);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		const styles = getComputedStyle(paletteElement!);
-		expect(styles['grid-template-columns']!).toBe(
+		expect(styles['grid-template-columns' as any]).toBe(
 			`repeat(${themeOverride.components.facetPaletteOptions.columns}, calc((100% - (${
 				themeOverride.components.facetPaletteOptions.columns - 1
 			} * 8px))/ ${themeOverride.components.facetPaletteOptions.columns}))`

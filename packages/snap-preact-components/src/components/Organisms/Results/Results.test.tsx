@@ -22,8 +22,8 @@ describe('Results Component', () => {
 		expect(resultElement).toBeInTheDocument();
 
 		const results = rendered.container.querySelector('.ss__result');
-		const styles = getComputedStyle(results);
-		expect(styles['flex-direction']).toBe('column');
+		const styles = getComputedStyle(results!);
+		expect(styles['flex-direction' as any]).toBe('column');
 	});
 
 	it('renders list view', () => {
@@ -32,12 +32,12 @@ describe('Results Component', () => {
 		expect(resultElement).toBeInTheDocument();
 
 		const result = rendered.container.querySelector('.ss__result');
-		const resultStyles = getComputedStyle(result);
-		expect(resultStyles['flex-direction']).toBe('row');
+		const resultStyles = getComputedStyle(result!);
+		expect(resultStyles['flex-direction' as any]).toBe('row');
 
 		const results = rendered.container.querySelector('.ss__results');
-		const resultsStyles = getComputedStyle(results);
-		expect(resultsStyles['grid-template-columns']).toBe('repeat(1, 1fr)');
+		const resultsStyles = getComputedStyle(results!);
+		expect(resultsStyles['grid-template-columns' as any]).toBe('repeat(1, 1fr)');
 	});
 
 	it('renders all', () => {
@@ -65,14 +65,14 @@ describe('Results Component', () => {
 
 		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__results');
-		const resultsElementStyles = getComputedStyle(resultsElement);
+		const resultsElementStyles = getComputedStyle(resultsElement!);
 
 		expect(resultsElementStyles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
 
 		const result = rendered.container.querySelector('.ss__result');
 
 		expect(result).toBeInTheDocument();
-		const resultStyles = getComputedStyle(result);
+		const resultStyles = getComputedStyle(result!);
 		expect(resultStyles.marginRight).toBe(args.gapSize);
 		expect(resultStyles.marginBottom).toBe(args.gapSize);
 	});
@@ -122,7 +122,7 @@ describe('Results Component', () => {
 
 		const resultsElement = rendered.container.querySelector('.ss__results');
 
-		expect(resultsElement.classList).toHaveLength(2);
+		expect(resultsElement!.classList).toHaveLength(2);
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -136,7 +136,7 @@ describe('Results Component', () => {
 			</ThemeProvider>
 		);
 		const resultsElement = rendered.container.querySelector('.ss__results');
-		const styles = getComputedStyle(resultsElement);
+		const styles = getComputedStyle(resultsElement!);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
 	});
 
@@ -147,7 +147,7 @@ describe('Results Component', () => {
 		};
 		const rendered = render(<Results {...args} theme={theme} />);
 		const resultsElement = rendered.container.querySelector('.ss__results');
-		const styles = getComputedStyle(resultsElement);
+		const styles = getComputedStyle(resultsElement!);
 		expect(styles.backgroundColor).toBe(theme.components.results.style.backgroundColor);
 	});
 
@@ -171,7 +171,7 @@ describe('Results Component', () => {
 			</ThemeProvider>
 		);
 		const resultsElement = rendered.container.querySelector('.ss__results');
-		const styles = getComputedStyle(resultsElement);
+		const styles = getComputedStyle(resultsElement!);
 		expect(styles.backgroundColor).toBe(themeOverride.components.results.style.backgroundColor);
 	});
 
@@ -197,7 +197,7 @@ describe('Results Component', () => {
 		expect(clickFunc).not.toHaveBeenCalled();
 
 		const resultElement = rendered.container.querySelector('.ss__results .ss__result a');
-		userEvent.click(resultElement);
+		userEvent.click(resultElement!);
 
 		expect(clickFunc).toHaveBeenCalled();
 	});

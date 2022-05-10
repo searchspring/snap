@@ -144,7 +144,7 @@ describe('FilterSummary Component', () => {
 		const rendered = render(<FilterSummary filters={filters} {...args} />);
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
-		expect(facetsElement?.classList).toHaveLength(1);
+		expect(facetsElement!.classList).toHaveLength(1);
 	});
 });
 

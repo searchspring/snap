@@ -12,7 +12,7 @@ describe('Dropdown Component', () => {
 
 		const dropdownElement = rendered.container.querySelector('.ss__dropdown');
 		expect(dropdownElement).toBeInTheDocument();
-		expect(dropdownElement?.classList).toHaveLength(2);
+		expect(dropdownElement!.classList).toHaveLength(2);
 	});
 
 	it('renders with className prop', () => {
@@ -81,10 +81,10 @@ describe('Dropdown Component', () => {
 
 		const buttonElement = rendered.container.querySelector('.button-with-props');
 		expect(buttonElement).toBeInTheDocument();
-		expect(buttonElement?.innerHTML).toBe('open me');
+		expect(buttonElement!.innerHTML).toBe('open me');
 
 		await (buttonElement as HTMLElement)!.click();
-		expect(buttonElement?.innerHTML).toBe('close me');
+		expect(buttonElement!.innerHTML).toBe('close me');
 	});
 
 	it('renders children prop with props', async () => {
@@ -111,13 +111,13 @@ describe('Dropdown Component', () => {
 
 		const childElement = rendered.container.querySelector('.child-with-props');
 		expect(childElement).toBeInTheDocument();
-		expect(childElement?.innerHTML).toBe('im closed');
+		expect(childElement!.innerHTML).toBe('im closed');
 
 		await buttonElement.click();
-		expect(childElement?.innerHTML).toBe('im open');
+		expect(childElement!.innerHTML).toBe('im open');
 
 		await (childElement as HTMLElement).click();
-		expect(childElement?.innerHTML).toBe('im closed');
+		expect(childElement!.innerHTML).toBe('im closed');
 	});
 
 	it('renders content prop with props', async () => {
@@ -140,13 +140,13 @@ describe('Dropdown Component', () => {
 
 		const contentElement = rendered.container.querySelector('.content-with-props');
 		expect(contentElement).toBeInTheDocument();
-		expect(contentElement?.innerHTML).toBe('im closed');
+		expect(contentElement!.innerHTML).toBe('im closed');
 
 		await buttonElement.click();
-		expect(contentElement?.innerHTML).toBe('im open');
+		expect(contentElement!.innerHTML).toBe('im open');
 
 		await (contentElement as HTMLElement).click();
-		expect(contentElement?.innerHTML).toBe('im closed');
+		expect(contentElement!.innerHTML).toBe('im closed');
 	});
 
 	it('fires onToggle prop when clicked outside (while opened)', () => {
@@ -218,7 +218,7 @@ describe('Dropdown Component', () => {
 		const rendered = render(<Dropdown disableStyles content={contentText} button={buttonText} />);
 
 		const dropdown = rendered.container.querySelector('.ss__dropdown');
-		expect(dropdown?.classList).toHaveLength(1);
+		expect(dropdown!.classList).toHaveLength(1);
 	});
 
 	it('is themeable with ThemeProvider', () => {

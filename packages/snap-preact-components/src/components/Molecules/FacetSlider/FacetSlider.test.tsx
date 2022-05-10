@@ -49,22 +49,22 @@ describe('Slider Component', () => {
 		const rendered = render(<FacetSlider {...args} {...colorArgs} />);
 		const trackElement = rendered.container.querySelector('.ss__facet-slider__segment');
 		let styles = getComputedStyle(trackElement!);
-		expect(styles?.backgroundColor).toBe(colorArgs.trackColor);
+		expect(styles!.backgroundColor).toBe(colorArgs.trackColor);
 
 		const railElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__rail');
 		styles = getComputedStyle(railElement!);
-		expect(styles?.backgroundColor).toBe(colorArgs.railColor);
+		expect(styles!.backgroundColor).toBe(colorArgs.railColor);
 
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle');
 		styles = getComputedStyle(handleElement!);
-		expect(styles?.backgroundColor).toBe(colorArgs.handleColor);
+		expect(styles!.backgroundColor).toBe(colorArgs.handleColor);
 	});
 
 	it('can disable styling', () => {
 		const rendered = render(<FacetSlider {...args} disableStyles={true} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-slider');
-		expect(paletteElement?.classList.length).toBe(1);
+		expect(paletteElement!.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -84,30 +84,30 @@ describe('Slider Component', () => {
 		);
 		const trackElement = rendered.container.querySelector('.ss__facet-slider__segment');
 		let styles = getComputedStyle(trackElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.trackColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.trackColor);
 
 		const railElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__rail');
 		styles = getComputedStyle(railElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.railColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.railColor);
 
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle');
 		styles = getComputedStyle(handleElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.handleColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.handleColor);
 	});
 
 	it('is themeable with theme prop', () => {
 		const rendered = render(<FacetSlider {...args} theme={theme} />);
 		const trackElement = rendered.container.querySelector('.ss__facet-slider__segment');
 		let styles = getComputedStyle(trackElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.trackColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.trackColor);
 
 		const railElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__rail');
 		styles = getComputedStyle(railElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.railColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.railColor);
 
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle');
 		styles = getComputedStyle(handleElement!);
-		expect(styles?.backgroundColor).toBe(theme.components.facetSlider.handleColor);
+		expect(styles!.backgroundColor).toBe(theme.components.facetSlider.handleColor);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -127,14 +127,14 @@ describe('Slider Component', () => {
 		);
 		const trackElement = rendered.container.querySelector('.ss__facet-slider__segment');
 		let styles = getComputedStyle(trackElement!);
-		expect(styles?.backgroundColor).toBe(themeOverride.components.facetSlider.trackColor);
+		expect(styles!.backgroundColor).toBe(themeOverride.components.facetSlider.trackColor);
 
 		const railElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__rail');
 		styles = getComputedStyle(railElement!);
-		expect(styles?.backgroundColor).toBe(themeOverride.components.facetSlider.railColor);
+		expect(styles!.backgroundColor).toBe(themeOverride.components.facetSlider.railColor);
 
 		const handleElement = rendered.container.querySelector('.ss__facet-slider .ss__facet-slider__handle');
 		styles = getComputedStyle(handleElement!);
-		expect(styles?.backgroundColor).toBe(themeOverride.components.facetSlider.handleColor);
+		expect(styles!.backgroundColor).toBe(themeOverride.components.facetSlider.handleColor);
 	});
 });

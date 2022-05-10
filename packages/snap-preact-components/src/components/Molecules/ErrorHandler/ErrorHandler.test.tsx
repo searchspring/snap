@@ -35,7 +35,7 @@ describe('Error Handler Component', () => {
 		const rendered = render(<ErrorHandler error={error} disableStyles={true} />);
 
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
-		expect(ErrorElement?.classList.length).toBe(2);
+		expect(ErrorElement!.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {

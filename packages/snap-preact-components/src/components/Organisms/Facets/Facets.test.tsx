@@ -21,7 +21,7 @@ describe('Facets Component', () => {
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		const count = facetsElement.querySelectorAll('.ss__facet').length;
+		const count = facetsElement!.querySelectorAll('.ss__facet').length;
 		expect(count).toBe(args.facets.length);
 	});
 
@@ -32,7 +32,7 @@ describe('Facets Component', () => {
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		const count = facetsElement.querySelectorAll('.ss__facet').length;
+		const count = facetsElement!.querySelectorAll('.ss__facet').length;
 		expect(count).toBeLessThanOrEqual(args.facets.length);
 		expect(count).toBe(args.limit);
 	});
@@ -58,7 +58,7 @@ describe('Facets Component', () => {
 		const rendered = render(<Facets {...args} />);
 
 		const facetsElement = rendered.container.querySelector('.ss__facets');
-		expect(facetsElement.classList).toHaveLength(1);
+		expect(facetsElement!.classList).toHaveLength(1);
 	});
 });
 
@@ -125,7 +125,7 @@ describe('Facets Component is themeable', () => {
 		expect(clickFunc).not.toHaveBeenCalled();
 
 		const resultElement = rendered.container.querySelector('.ss__facet-list-options__option');
-		userEvent.click(resultElement);
+		userEvent.click(resultElement!);
 
 		expect(clickFunc).toHaveBeenCalled();
 	});

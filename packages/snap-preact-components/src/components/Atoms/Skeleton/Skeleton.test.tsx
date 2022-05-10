@@ -42,7 +42,7 @@ describe('Skeleton Component', () => {
 		const rendered = render(<Skeleton disableStyles height="300px" width="300px" />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 
-		expect(skeleton?.classList).toHaveLength(1);
+		expect(skeleton!.classList).toHaveLength(1);
 	});
 
 	expect(true).toBe(true);
@@ -64,7 +64,7 @@ describe('Skeleton theming works', () => {
 		);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
-		expect(skeleton?.classList.length).toBe(1);
+		expect(skeleton!.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -78,7 +78,7 @@ describe('Skeleton theming works', () => {
 		const rendered = render(<Skeleton height="300px" width="300px" theme={propTheme} />);
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
-		expect(skeleton?.classList.length).toBe(1);
+		expect(skeleton!.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -104,6 +104,6 @@ describe('Skeleton theming works', () => {
 
 		const skeleton = rendered.container.querySelector('.ss__skeleton');
 		expect(skeleton).toBeInTheDocument();
-		expect(skeleton?.classList.length).toBe(1);
+		expect(skeleton!.classList.length).toBe(1);
 	});
 });

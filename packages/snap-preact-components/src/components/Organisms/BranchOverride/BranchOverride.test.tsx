@@ -26,21 +26,21 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement.classList).toHaveLength(2);
+			expect(overrideElement!.classList).toHaveLength(2);
 
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('rgba(255, 255, 255, 0.95)');
 		});
 
 		// branch name
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
 		expect(bottomLeftElement).toBeInTheDocument();
-		expect(bottomLeftElement.innerHTML).toContain(branch);
+		expect(bottomLeftElement!.innerHTML).toContain(branch);
 
 		// branch modified date
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement.innerHTML).toContain(lastModified);
+		expect(bottomRightElement!.innerHTML).toContain(lastModified);
 	});
 
 	it('can set dark mode', async () => {
@@ -50,7 +50,7 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('rgba(59, 35, 173, 0.9)');
 		});
 	});
@@ -59,7 +59,7 @@ describe('BranchOverride Component', () => {
 		const rendered = render(<BranchOverride {...props} />);
 
 		// wait for rendering of component
-		let overrideElement;
+		let overrideElement: any;
 		await waitFor(() => {
 			overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe('BranchOverride Component', () => {
 		const rendered = render(<BranchOverride {...props} onRemoveClick={removeFn} />);
 
 		// wait for rendering of component
-		let overrideElement;
+		let overrideElement: any;
 		await waitFor(() => {
 			overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
@@ -105,24 +105,24 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('rgba(130, 6, 6, 0.9)');
 		});
 
 		// branch name
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement.innerHTML).toContain(name);
+		expect(bottomRightElement!.innerHTML).toContain(name);
 
 		// error message
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
 		expect(bottomLeftElement).toBeInTheDocument();
-		expect(bottomLeftElement.textContent).toContain(error.message);
+		expect(bottomLeftElement!.textContent).toContain(error.message);
 
 		// error description
 		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
 		expect(bottomContentElement).toBeInTheDocument();
-		expect(bottomContentElement.textContent).toContain(error.description);
+		expect(bottomContentElement!.textContent).toContain(error.description);
 	});
 
 	it(`displays branch failure when both 'error' and 'details' props are provided`, async () => {
@@ -137,24 +137,24 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('rgba(130, 6, 6, 0.9)');
 		});
 
 		// branch name
 		const bottomRightElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__right');
 		expect(bottomRightElement).toBeInTheDocument();
-		expect(bottomRightElement.innerHTML).toContain(props.name);
+		expect(bottomRightElement!.innerHTML).toContain(props.name);
 
 		// error message
 		const bottomLeftElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__left');
 		expect(bottomLeftElement).toBeInTheDocument();
-		expect(bottomLeftElement.textContent).toContain(error.message);
+		expect(bottomLeftElement!.textContent).toContain(error.message);
 
 		// error description
 		const bottomContentElement = rendered.container.querySelector('.ss__branch-override .ss__branch-override__bottom__content');
 		expect(bottomContentElement).toBeInTheDocument();
-		expect(bottomContentElement.textContent).toContain(error.description);
+		expect(bottomContentElement!.textContent).toContain(error.description);
 	});
 
 	it('can disable styles', async () => {
@@ -164,7 +164,7 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement.classList).toHaveLength(1);
+			expect(overrideElement!.classList).toHaveLength(1);
 		});
 	});
 
@@ -175,7 +175,7 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('blue');
 		});
 	});
@@ -187,7 +187,7 @@ describe('BranchOverride Component', () => {
 		await waitFor(() => {
 			const overrideElement = rendered.container.querySelector('.ss__branch-override');
 			expect(overrideElement).toBeInTheDocument();
-			const styles = getComputedStyle(overrideElement);
+			const styles = getComputedStyle(overrideElement!);
 			expect(styles.background).toBe('blue');
 		});
 	});

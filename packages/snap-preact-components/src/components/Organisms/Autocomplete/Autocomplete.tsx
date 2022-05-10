@@ -498,55 +498,57 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideContent ? (
 					contentSlot ? (
 						<div className="ss__autocomplete__content">
-							{cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+							{React.cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
 						</div>
 					) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
 						<div className="ss__autocomplete__content">
-							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.header} /> : null}
-							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.banner} /> : null}
-							{results.length > 0 ? (
-								<div className="ss__autocomplete__content__results">
-									{resultsSlot ? (
-										cloneElement(resultsSlot, { results, contentTitle, controller })
-									) : (
-										<>
-											{contentTitle && results.length > 0 ? (
-												<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-													<h5>{contentTitle}</h5>
-												</div>
-											) : null}
-											<Results results={results} {...subProps.results} controller={controller} />
-										</>
-									)}
-								</div>
-							) : (
-								<div className="ss__autocomplete__content__no-results">
-									{noResultsSlot ? (
-										cloneElement(noResultsSlot, { search, pagination, controller })
-									) : (
-										<>
-											<p>No results found for "{search.query.string}".</p>
-											<p>Please try another search.</p>
-										</>
-									)}
-								</div>
-							)}
-
-							{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.footer} /> : null}
-
-							{!hideLink ? (
-								linkSlot ? (
-									cloneElement(linkSlot, { search, results, pagination, filters, controller })
-								) : search?.query?.string && results.length > 0 ? (
-									<div className="ss__autocomplete__content__info">
-										<a href={state.url.href}>
-											See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
-											{search.query.string}"
-											<Icon {...subProps.icon} />
-										</a>
+							<>
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.header} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.banner} /> : null}
+								{results.length > 0 ? (
+									<div className="ss__autocomplete__content__results">
+										{resultsSlot ? (
+											React.cloneElement(resultsSlot, { results, contentTitle, controller })
+										) : (
+											<>
+												{contentTitle && results.length > 0 ? (
+													<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+														<h5>{contentTitle}</h5>
+													</div>
+												) : null}
+												<Results results={results} {...subProps.results} controller={controller} />
+											</>
+										)}
 									</div>
-								) : null
-							) : null}
+								) : (
+									<div className="ss__autocomplete__content__no-results">
+										{noResultsSlot ? (
+											React.cloneElement(noResultsSlot, { search, pagination, controller })
+										) : (
+											<>
+												<p>No results found for "{search.query.string}".</p>
+												<p>Please try another search.</p>
+											</>
+										)}
+									</div>
+								)}
+
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.footer} /> : null}
+
+								{!hideLink ? (
+									linkSlot ? (
+										cloneElement(linkSlot, { search, results, pagination, filters, controller })
+									) : search?.query?.string && results.length > 0 ? (
+										<div className="ss__autocomplete__content__info">
+											<a href={state.url.href}>
+												See {pagination.totalResults} {filters.length > 0 ? 'filtered' : ''} result{pagination.totalResults == 1 ? '' : 's'} for "
+												{search.query.string}"
+												<Icon {...subProps.icon} />
+											</a>
+										</div>
+									) : null
+								) : null}
+							</>
 						</div>
 					) : null
 				) : null}

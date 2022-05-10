@@ -32,7 +32,7 @@ describe('Icon Component', () => {
 
 		const iconElement = rendered.container.querySelector('.ss__icon');
 
-		expect(iconElement?.classList.length).toBe(3);
+		expect(iconElement!.classList.length).toBe(3);
 	});
 
 	it('renders with classname', () => {
@@ -43,7 +43,7 @@ describe('Icon Component', () => {
 		const iconElement = rendered.container.querySelector('.ss__icon');
 
 		expect(iconElement).toHaveClass(className);
-		expect(iconElement?.classList.length).toBe(4);
+		expect(iconElement!.classList.length).toBe(4);
 	});
 
 	it('renders with additional style using prop', () => {
@@ -56,7 +56,7 @@ describe('Icon Component', () => {
 		const iconElement = rendered.container.querySelector('.ss__icon');
 		const styles = getComputedStyle(iconElement!);
 
-		expect(styles?.padding).toBe(style.padding);
+		expect(styles!.padding).toBe(style.padding);
 	});
 
 	it('renders cog icon with default props', () => {
@@ -70,9 +70,9 @@ describe('Icon Component', () => {
 		expect(svg).toHaveAttribute('viewBox', defaultProps.viewBox);
 
 		const styles = getComputedStyle(svg!);
-		expect(styles?.width).toBe(defaultProps.size);
-		expect(styles?.height).toBe(defaultProps.size);
-		expect(styles?.fill).toBe(defaultProps.color);
+		expect(styles!.width).toBe(defaultProps.size);
+		expect(styles!.height).toBe(defaultProps.size);
+		expect(styles!.fill).toBe(defaultProps.color);
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
@@ -90,8 +90,8 @@ describe('Icon Component', () => {
 		const svg = rendered.container.querySelector('svg');
 
 		const styles = getComputedStyle(svg!);
-		expect(styles?.width).toBe(width);
-		expect(styles?.height).toBe(height);
+		expect(styles!.width).toBe(width);
+		expect(styles!.height).toBe(height);
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
@@ -113,9 +113,9 @@ describe('Icon Component', () => {
 		expect(svg).toHaveAttribute('viewBox', viewBox);
 
 		const styles = getComputedStyle(svg!);
-		expect(styles?.width).toBe(size);
-		expect(styles?.height).toBe(size);
-		expect(styles?.fill).toBe(color);
+		expect(styles!.width).toBe(size);
+		expect(styles!.height).toBe(size);
+		expect(styles!.fill).toBe(color);
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
@@ -133,9 +133,9 @@ describe('Icon Component', () => {
 		expect(svg).toHaveAttribute('viewBox', defaultProps.viewBox);
 
 		const styles = getComputedStyle(svg!);
-		expect(styles?.width).toBe(defaultProps.size);
-		expect(styles?.height).toBe(defaultProps.size);
-		expect(styles?.fill).toBe(defaultProps.color);
+		expect(styles!.width).toBe(defaultProps.size);
+		expect(styles!.height).toBe(defaultProps.size);
+		expect(styles!.fill).toBe(defaultProps.color);
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', svgPath);
@@ -158,9 +158,9 @@ describe('Icon Component', () => {
 		expect(svg).toHaveAttribute('viewBox', viewBox);
 
 		const styles = getComputedStyle(svg!);
-		expect(styles?.width).toBe(size);
-		expect(styles?.height).toBe(size);
-		expect(styles?.fill).toBe(color);
+		expect(styles!.width).toBe(size);
+		expect(styles!.height).toBe(size);
+		expect(styles!.fill).toBe(color);
 
 		const path = svg!.querySelector('path');
 		expect(path).toHaveAttribute('d', svgPath);

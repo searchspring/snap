@@ -37,7 +37,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(slideoutElement).toBeInTheDocument();
 		expect(styles.left).toBe('0px');
 	});
@@ -48,7 +48,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(styles.left).toBe('-300px');
 		expect(styles.left).not.toBe('0px');
 	});
@@ -60,7 +60,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(styles.maxWidth).toBe(args.width);
 	});
 
@@ -122,7 +122,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__overlay.ss__overlay--active');
-		const styles = getComputedStyle(overlayElement);
+		const styles = getComputedStyle(overlayElement!);
 		expect(styles.background).toBe(args.overlayColor);
 	});
 
@@ -133,7 +133,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
-		const styles = getComputedStyle(overlayElement);
+		const styles = getComputedStyle(overlayElement!);
 		expect(styles.right).toBe('0px');
 		expect(styles.left).toBe('');
 	});
@@ -145,7 +145,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} />);
 		const overlayElement = rendered.container.querySelector('.ss__slideout.ss__slideout--active');
-		const styles = getComputedStyle(overlayElement);
+		const styles = getComputedStyle(overlayElement!);
 		expect(styles.transition).toBe(`left ${args.transitionSpeed}`);
 	});
 
@@ -169,7 +169,7 @@ describe('Slideout Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__slideout');
 
-		expect(resultElement.classList).toHaveLength(2);
+		expect(resultElement!.classList).toHaveLength(2);
 	});
 
 	it('is themeable with ThemeProvider', () => {
@@ -182,7 +182,7 @@ describe('Slideout Component', () => {
 			</ThemeProvider>
 		);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
 
@@ -192,7 +192,7 @@ describe('Slideout Component', () => {
 		};
 		const rendered = render(<Slideout {...args} theme={theme} />);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(styles.maxWidth).toBe(theme.components.slideout.width);
 	});
 
@@ -213,7 +213,7 @@ describe('Slideout Component', () => {
 			</ThemeProvider>
 		);
 		const slideoutElement = rendered.container.querySelector('.ss__slideout');
-		const styles = getComputedStyle(slideoutElement);
+		const styles = getComputedStyle(slideoutElement!);
 		expect(styles.maxWidth).toBe(themeOverride.components.slideout.width);
 	});
 });
