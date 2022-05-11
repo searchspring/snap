@@ -187,6 +187,51 @@ describe('Recommend Api', () => {
 		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
 		requestMock.mockReset();
 	});
+
+	it('batchRecommendations handles multiple categories as expected', async () => {
+		let api = new RecommendAPI(new ApiConfiguration({}));
+
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		const GETRequestUrl =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&tags=crossSell&limits=14&limits=10&limits=10&categories=shirts&categories=pants&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+
+		//shirt category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['similar'],
+			categories: ['shirts'],
+			limits: 14,
+			batched: true,
+			...batchParams,
+		});
+		//no category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			limits: 10,
+			batched: true,
+			...batchParams,
+		});
+		//pants category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			categories: ['pants'],
+			limits: 10,
+			batched: true,
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		requestMock.mockReset();
+	});
+
 	it('batchRecommendations handles undefined limits', async () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
 
