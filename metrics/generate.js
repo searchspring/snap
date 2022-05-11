@@ -33,7 +33,7 @@ async function prepare() {
 
 async function generateVersion(now) {
 	try {
-		fsp.stat(VERSION_FILE);
+		await fsp.stat(VERSION_FILE);
 	} catch (err) {
 		throw 'no coverage data found!';
 	}
@@ -62,7 +62,7 @@ async function generateVersion(now) {
 
 async function generateCoverage(now) {
 	try {
-		fsp.stat(COVERAGE_FILE);
+		await fsp.stat(COVERAGE_FILE);
 	} catch (err) {
 		throw 'no coverage data found!';
 	}
