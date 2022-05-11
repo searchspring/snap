@@ -5,6 +5,7 @@
 	"testRegex": "\\.(test|spec)\\.(jsx?|tsx?)$",
 	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
 	"coveragePathIgnorePatterns": ["<rootDir>/dist/"],
+	"coverageReporters": ["json", "html", "text", "text-summary", "json-summary"],
 	"testEnvironment": "jsdom",
 	"collectCoverage": true,
 	"verbose": true,
