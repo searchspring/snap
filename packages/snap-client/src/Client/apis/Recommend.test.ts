@@ -5,7 +5,7 @@ import { MockData } from '@searchspring/snap-shared';
 
 const mockData = new MockData();
 
-const wait = (time = undefined) => {
+const wait = (time?: number) => {
 	return new Promise((resolve) => {
 		setTimeout(resolve, time);
 	});
@@ -13,21 +13,17 @@ const wait = (time = undefined) => {
 
 describe('Recommend Api', () => {
 	it('has expected default functions', () => {
-		let api;
+		let api = new RecommendAPI(new ApiConfiguration({}));
 
-		expect(() => {
-			api = new RecommendAPI(new ApiConfiguration({}));
-		}).not.toThrow();
+		expect(api?.batches).toBeDefined();
 
-		expect(api.batches).toBeDefined();
+		expect(api?.getProfile).toBeDefined();
 
-		expect(api.getProfile).toBeDefined();
+		expect(api?.batchRecommendations).toBeDefined();
 
-		expect(api.batchRecommendations).toBeDefined();
+		expect(api?.getRecommendations).toBeDefined();
 
-		expect(api.getRecommendations).toBeDefined();
-
-		expect(api.postRecommendations).toBeDefined();
+		expect(api?.postRecommendations).toBeDefined();
 	});
 
 	it('can call getProfile', async () => {

@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
-import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import type { SearchControllerConfig } from '../../../../snap-controller/src/types';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
 import { MockData } from '@searchspring/snap-shared';
@@ -22,15 +21,13 @@ let searchConfig: SearchControllerConfig = {
 	},
 };
 
-const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
-const services = { urlManager };
-
-let mockStorage = {};
+let mockStorage: {
+	[key: string]: string;
+} = {};
 
 describe('Network Cache', () => {
 	beforeAll(() => {
 		global.Storage.prototype.setItem = jest.fn((key, value) => {
-			// console.log(key, value);
 			mockStorage[key] = value;
 		});
 		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
@@ -152,7 +149,7 @@ describe('Network Cache', () => {
 			await cache.set('key10', typedResponse);
 
 			const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
-			const localData: Cache = stored && JSON.parse(stored);
+			const localData = stored && JSON.parse(stored);
 			expect(localData['key']).toBeUndefined();
 			expect(localData['key10'].value).toEqual(typedResponse);
 		});
@@ -186,7 +183,7 @@ describe('Network Cache', () => {
 			await cache2.set('key10', typedResponse);
 
 			const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
-			const localData: Cache = stored && JSON.parse(stored);
+			const localData = stored && JSON.parse(stored);
 			expect(localData['key2']).toBeUndefined();
 			expect(localData['thisRemains'].value).toEqual(typedResponse);
 		});

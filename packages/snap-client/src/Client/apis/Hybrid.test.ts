@@ -1,26 +1,28 @@
 import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { HybridAPI } from './Hybrid';
+import { MockData } from '@searchspring/snap-shared';
+
+const mockData = new MockData();
 
 describe('Hybrid Api', () => {
 	it('has expected default functions', () => {
-		let api;
+		let api = new HybridAPI(new ApiConfiguration({}));
 
-		expect(() => {
-			api = new HybridAPI(new ApiConfiguration({}));
-		}).not.toThrow();
+		//@ts-ignore
+		expect(api?.requesters).toBeDefined();
 
-		expect(api.requesters).toBeDefined();
+		//@ts-ignore
+		expect(api?.requesters.legacy).toBeDefined();
 
-		expect(api.requesters.legacy).toBeDefined();
+		//@ts-ignore
+		expect(api?.requesters.suggest).toBeDefined();
 
-		expect(api.requesters.suggest).toBeDefined();
+		expect(api?.getSearch).toBeDefined();
 
-		expect(api.getSearch).toBeDefined();
+		expect(api?.getAutocomplete).toBeDefined();
 
-		expect(api.getAutocomplete).toBeDefined();
-
-		expect(api.getMeta).toBeDefined();
+		expect(api?.getMeta).toBeDefined();
 	});
 
 	it('can call getMeta', async () => {
@@ -44,7 +46,7 @@ describe('Hybrid Api', () => {
 		let api = new HybridAPI(new ApiConfiguration({}));
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
 
 		const params = {
 			body: undefined,
@@ -67,7 +69,7 @@ describe('Hybrid Api', () => {
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.autocomplete()) } as Response));
 
 		const params = {
 			body: undefined,
