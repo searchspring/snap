@@ -124,7 +124,11 @@ export class RecommendAPI extends API {
 			delete otherParams.batched; // remove from request parameters
 		}
 		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] };
-		const paramBatch = this.batches[key];
+		const paramBatch: {
+			timeout: number;
+			request: RecommendRequestModel;
+			deferreds?: Deferred[] | undefined;
+		} = this.batches[key];
 
 		const deferred = new Deferred();
 
@@ -132,13 +136,13 @@ export class RecommendAPI extends API {
 
 		if (categories) {
 			if (!paramBatch.request.categories) {
-				paramBatch.request.categories = [categories];
+				paramBatch.request.categories = categories;
 			} else {
-				paramBatch.request.categories.push(categories);
+				paramBatch.request.categories = paramBatch.request.categories.concat(categories);
 			}
 		}
 
-		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
+		paramBatch.request.limits = (paramBatch.request.limits as number[]).concat(limits);
 
 		paramBatch.request = { ...paramBatch.request, ...otherParams };
 		paramBatch.deferreds?.push(deferred);
