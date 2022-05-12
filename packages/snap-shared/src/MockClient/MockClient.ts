@@ -14,7 +14,7 @@ import { TrendingRequestModel, TrendingResponseModel } from '../../../snap-clien
 export class MockClient extends Client {
 	mockData: MockData;
 
-	constructor(global: ClientGlobals, config: ClientConfig) {
+	constructor(global: ClientGlobals, config: ClientConfig = {}) {
 		super(global, config);
 
 		this.mockData = new MockData({ siteId: global.siteId });
