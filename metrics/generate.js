@@ -10,7 +10,7 @@ const METRICS_DIR = './metrics/data';
 		await prepare();
 
 		const now = new Date();
-		await Promise.all([generateVersion(now), generateCoverage(now)]);
+		await generateCoverage(now);
 	} catch (err) {
 		console.error('unable to process coverage file');
 		console.error(err);
@@ -31,9 +31,9 @@ async function prepare() {
 	await fsp.mkdir(METRICS_DIR);
 }
 
-async function generateVersion(now) {
+async function generateCoverage(now) {
 	try {
-		await fsp.stat(VERSION_FILE);
+		await fsp.stat(COVERAGE_FILE);
 	} catch (err) {
 		throw 'no coverage data found!';
 	}
@@ -46,27 +46,6 @@ async function generateVersion(now) {
 		throw 'no version found!';
 	}
 
-	// generate metrics file to send to s3
-	const filename = `SnapRelease-${now.getFullYear()}_${now.getMonth() + 1}_${now.getDate()}_${now.getHours()}${now.getMinutes()}.json`;
-	const obj = {
-		timestamp: now,
-		type: 'snap-release',
-		data: { version },
-	};
-
-	const contents = JSON.stringify(obj);
-
-	console.log('Creating', filename, 'with contents', contents);
-	await fsp.writeFile(`${METRICS_DIR}/${filename}`, contents);
-}
-
-async function generateCoverage(now) {
-	try {
-		await fsp.stat(COVERAGE_FILE);
-	} catch (err) {
-		throw 'no coverage data found!';
-	}
-
 	const coverage = {};
 	const coverageContents = await fsp.readFile(COVERAGE_FILE, 'utf8');
 	const coverageData = JSON.parse(coverageContents);
@@ -74,7 +53,7 @@ async function generateCoverage(now) {
 	// build out coverage data
 	for (const key in coverageData) {
 		const entryData = coverageData[key];
-		let packageName = key.replace(/.*\/snap\/packages\/([^\/]*)\/.*/, '$1');
+		let packageName = key.replace(/.*\/packages\/([^\/]*)\/.*/, '$1');
 
 		if (packageName == 'total') {
 			packageName = 'monorepo';
@@ -98,19 +77,20 @@ async function generateCoverage(now) {
 	const writePromises = [];
 	for (const key in coverage) {
 		const packageData = coverage[key];
-		const filename = `SnapCoverage[${key}]-${now.getFullYear()}_${now.getMonth() + 1}_${now.getDate()}_${now.getHours()}${now.getMinutes()}.json`;
+		const filename = `SnapCoverage-${key}-${now.getFullYear()}_${now.getMonth() + 1}_${now.getDate()}_${now.getHours()}${now.getMinutes()}.json`;
 
 		const obj = {
 			timestamp: now,
 			type: 'snap-coverage',
-			data: { package: key, total: packageData.total, covered: packageData.covered, percentage: packageData.pct },
+			data: { package: key, version, total: packageData.total, covered: packageData.covered, percentage: packageData.pct },
 		};
 
-		const contents = JSON.stringify(obj);
+		const contents = JSON.stringify(obj, null, '  ');
 
 		writePromises.push(fsp.writeFile(`${METRICS_DIR}/${filename}`, contents));
 
-		console.log('Creating', filename, 'with contents', contents);
+		console.log(filename);
+		console.log(`${contents}\n`);
 	}
 
 	await Promise.all(writePromises);
