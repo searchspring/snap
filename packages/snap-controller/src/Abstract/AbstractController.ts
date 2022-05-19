@@ -115,11 +115,11 @@ export abstract class AbstractController {
 		this.environment = (dev === '1' ? 'development' : process.env.NODE_ENV) as LogMode;
 	}
 
-	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
+	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter | undefined {
 		return this.addTargeter(new DomTargeter([target], onTarget, document));
 	}
 
-	public addTargeter(target: DomTargeter): DomTargeter {
+	public addTargeter(target: DomTargeter): DomTargeter | undefined {
 		const firstTarget = target.getTargets()[0];
 		const targetName: string = (firstTarget?.name as string) ?? firstTarget?.selector;
 		if (targetName && !this.targeters[targetName]) {
@@ -150,7 +150,7 @@ export abstract class AbstractController {
 				await this.eventManager.fire('init', {
 					controller: this,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'init' middleware cancelled`);
 				} else {
@@ -194,7 +194,7 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): Promise<void> {
+	public async plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): Promise<void> {
 		await func(this, ...args);
 	}
 
@@ -225,7 +225,7 @@ export abstract class AbstractController {
 		// attach event middleware
 		if (attachments?.middleware) {
 			Object.keys(attachments.middleware).forEach((eventName) => {
-				const eventMiddleware = attachments.middleware[eventName];
+				const eventMiddleware = attachments.middleware![eventName];
 				let middlewareArray;
 				if (Array.isArray(eventMiddleware)) {
 					middlewareArray = eventMiddleware;

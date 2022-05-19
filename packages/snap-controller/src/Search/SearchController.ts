@@ -38,7 +38,7 @@ const defaultConfig: SearchControllerConfig = {
 
 type SearchTrackMethods = {
 	product: {
-		click: (e, result) => BeaconEvent;
+		click: (e: MouseEvent, result: any) => BeaconEvent | undefined;
 	};
 };
 
@@ -54,6 +54,9 @@ export class SearchController extends AbstractController {
 		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
+
+		this.store = store as SearchStore;
+		this.config = config;
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
@@ -135,11 +138,11 @@ export class SearchController extends AbstractController {
 
 	track: SearchTrackMethods = {
 		product: {
-			click: (e: MouseEvent, result): BeaconEvent => {
+			click: (e: MouseEvent, result): BeaconEvent | undefined => {
 				// store scroll position
-				if (this.config.settings.infinite) {
+				if (this.config.settings?.infinite) {
 					const stringyParams = this.storage.get('lastStringyParams');
-					const scrollMap = {};
+					const scrollMap: any = {};
 					scrollMap[stringyParams] = window.scrollY;
 					this.storage.set('scrollMap', scrollMap);
 				}
@@ -162,7 +165,7 @@ export class SearchController extends AbstractController {
 	};
 
 	get params(): SearchRequestModel {
-		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals);
+		const params: SearchRequestModel = deepmerge({ ...getSearchParams(this.urlManager.state) }, this.config.globals || {});
 
 		// redirect setting
 		if (!this.config.settings?.redirects?.merchandising || this.store.loaded) {
@@ -214,7 +217,7 @@ export class SearchController extends AbstractController {
 					controller: this,
 					request: params,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
 					return;
@@ -231,11 +234,11 @@ export class SearchController extends AbstractController {
 				return;
 			}
 
-			if (this.config.settings.infinite) {
+			if (this.config.settings?.infinite) {
 				// TODO: refactor this
 				const preventBackfill =
-					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > this.config.settings.infinite.backfill;
-				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page > 1;
+					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > this.config.settings.infinite.backfill;
+				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination?.page! > 1;
 
 				if (preventBackfill || dontBackfill) {
 					this.storage.set('scrollMap', {});
@@ -247,30 +250,32 @@ export class SearchController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			const [meta, response] = await this.client.search(params);
+			// @ts-ignore
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
+				// @ts-ignore
 				response.meta = meta;
 			}
 
 			// infinite functionality
 			// if params.page > 1 and infinite setting exists we should append results
-			if (this.config.settings.infinite && params.pagination?.page > 1) {
+			if (this.config.settings?.infinite && params.pagination?.page! > 1) {
 				// if no results fetch results...
 				let previousResults = this.store.data?.results || [];
 				if (this.config.settings?.infinite.backfill && !previousResults.length) {
 					// figure out how many pages of results to backfill and wait on all responses
 					const backfills = [];
-					for (let page = 1; page < params.pagination.page; page++) {
+					for (let page = 1; page < params.pagination?.page!; page++) {
 						const backfillParams = deepmerge({ ...params }, { pagination: { page } });
 						backfills.push(this.client.search(backfillParams));
 					}
 
 					const backfillResponses = await Promise.all(backfills);
 					backfillResponses.map(([meta, data]) => {
-						previousResults = previousResults.concat(data.results);
+						previousResults = previousResults.concat(data.results!);
 					});
 				}
 
@@ -288,7 +293,7 @@ export class SearchController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
@@ -303,6 +308,7 @@ export class SearchController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
+			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -313,7 +319,7 @@ export class SearchController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();

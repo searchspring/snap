@@ -1,5 +1,7 @@
-// translate state to snAPI params
+import { UrlState } from '@searchspring/snap-url-manager';
+import type { ImmutableObject } from 'seamless-immutable';
 
+// translate state to snAPI params
 type searchParams = {
 	search?: {
 		query?: {
@@ -21,6 +23,8 @@ type searchParams = {
 		field: string;
 		value:
 			| string
+			| number
+			| boolean
 			| {
 					low: number;
 					high: number;
@@ -32,7 +36,7 @@ type searchParams = {
 	};
 };
 
-export function getSearchParams(state): Record<string, any> {
+export function getSearchParams(state: ImmutableObject<UrlState>): Record<string, any> {
 	const params: searchParams = {};
 
 	if (state.tag) {
@@ -88,20 +92,20 @@ export function getSearchParams(state): Record<string, any> {
 				return;
 			}
 
-			const filter = state.filter[field];
+			const filter = state.filter![field];
 
 			// ensure values are an array
 			const values = Array.isArray(filter) ? filter : [filter];
 
 			values.forEach((value) => {
 				if (typeof value != 'object') {
-					params.filters.push({
+					params.filters!.push({
 						type: 'value',
 						field: field,
 						value,
 					});
 				} else if (typeof value.low != 'undefined' && typeof value.high != 'undefined') {
-					params.filters.push({
+					params.filters!.push({
 						type: 'range',
 						field: field,
 						value,
