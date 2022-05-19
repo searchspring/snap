@@ -66,8 +66,8 @@ export type RecommendCombinedRequestModel = {
 
 class Deferred {
 	promise: Promise<any>;
-	resolve;
-	reject;
+	resolve: any;
+	reject: any;
 
 	constructor() {
 		this.promise = new Promise((resolve, reject) => {
@@ -111,12 +111,10 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		let { tags, limits, ...otherParams } = parameters;
+		let { tags, limits, categories, ...otherParams } = parameters;
 		if (!limits) limits = 20;
 
 		const [tag] = tags || [];
-
-		if (!tag) return;
 
 		let key = hashParams(otherParams as RecommendRequestModel);
 		if ('batched' in otherParams) {
@@ -126,15 +124,28 @@ export class RecommendAPI extends API {
 			delete otherParams.batched; // remove from request parameters
 		}
 		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] };
-		const paramBatch = this.batches[key];
+		const paramBatch: {
+			timeout: number;
+			request: RecommendRequestModel;
+			deferreds?: Deferred[] | undefined;
+		} = this.batches[key];
 
 		const deferred = new Deferred();
 
 		paramBatch.request.tags.push(tag);
-		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
+
+		if (categories) {
+			if (!paramBatch.request.categories) {
+				paramBatch.request.categories = categories;
+			} else {
+				paramBatch.request.categories = paramBatch.request.categories.concat(categories);
+			}
+		}
+
+		paramBatch.request.limits = (paramBatch.request.limits as number[]).concat(limits);
 
 		paramBatch.request = { ...paramBatch.request, ...otherParams };
-		paramBatch.deferreds.push(deferred);
+		paramBatch.deferreds?.push(deferred);
 		window.clearTimeout(paramBatch.timeout);
 
 		paramBatch.timeout = window.setTimeout(async () => {
@@ -148,13 +159,18 @@ export class RecommendAPI extends API {
 			}
 
 			try {
-				const response = await this[requestMethod](paramBatch.request);
+				let response: RecommendResponseModel;
+				if (charsParams(paramBatch.request) > 1024) {
+					response = await this.postRecommendations(paramBatch.request);
+				} else {
+					response = await this.getRecommendations(paramBatch.request);
+				}
 
-				paramBatch.deferreds.forEach((def, index) => {
+				paramBatch.deferreds?.forEach((def, index) => {
 					def.resolve([response[index]]);
 				});
 			} catch (err) {
-				paramBatch.deferreds.forEach((def) => {
+				paramBatch.deferreds?.forEach((def) => {
 					def.reject(err);
 				});
 			}

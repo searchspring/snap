@@ -1,5 +1,5 @@
 import type { MetaResponseModel, SearchResponseModel, AutocompleteResponseModel } from '@searchspring/snapi-types';
-import { Client } from '@searchspring/snap-client';
+import { Client, ClientGlobals, ClientConfig } from '@searchspring/snap-client';
 import { MockData } from '../MockData/MockData';
 import { TrendingRequestModel, TrendingResponseModel } from '../../../snap-client/src/Client/apis';
 
@@ -14,7 +14,7 @@ import { TrendingRequestModel, TrendingResponseModel } from '../../../snap-clien
 export class MockClient extends Client {
 	mockData: MockData;
 
-	constructor(global, config) {
+	constructor(global: ClientGlobals, config: ClientConfig = {}) {
 		super(global, config);
 
 		this.mockData = new MockData({ siteId: global.siteId });
