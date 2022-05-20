@@ -15,7 +15,6 @@ export class PaginationStore {
 	defaultPageSize: number;
 	totalResults: number;
 	totalPages: number;
-	infinite: boolean;
 	controllerConfig: SearchStoreConfig;
 
 	constructor(
@@ -32,11 +31,11 @@ export class PaginationStore {
 		this.services = services;
 		this.controllerConfig = config;
 
-		this.page = paginationData.page;
-		this.pageSize = paginationData.pageSize;
-		this.totalResults = paginationData.totalResults;
-		this.defaultPageSize = paginationData.defaultPageSize;
-		this.totalPages = paginationData.totalPages;
+		this.page = paginationData.page!;
+		this.pageSize = paginationData.pageSize!;
+		this.totalResults = paginationData.totalResults!;
+		this.defaultPageSize = paginationData.defaultPageSize!;
+		this.totalPages = paginationData.totalPages!;
 
 		this.pageSizeOptions = [
 			{
@@ -111,7 +110,7 @@ export class PaginationStore {
 		});
 	}
 
-	get next(): Page {
+	get next(): Page | void {
 		if (this.page < this.totalPages) {
 			return new Page(this.services, {
 				number: this.page + 1,
@@ -119,7 +118,7 @@ export class PaginationStore {
 		}
 	}
 
-	get previous(): Page {
+	get previous(): Page | void {
 		if (this.page > 1) {
 			return new Page(this.services, {
 				number: this.page - 1,
@@ -127,12 +126,12 @@ export class PaginationStore {
 		}
 	}
 
-	getPages(min?: number, max?: number): Page[] {
+	getPages(min: number = 5, max?: number): Page[] {
 		if (!Number.isInteger(min)) {
 			return [];
 		}
 
-		if (!Number.isInteger(max)) {
+		if (typeof max == 'undefined' || !Number.isInteger(max)) {
 			const surrounding = min - 1;
 
 			let from = this.page;

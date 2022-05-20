@@ -1,17 +1,15 @@
-import {
-	HybridAPI,
-	SuggestAPI,
-	RecommendAPI,
+import { HybridAPI, SuggestAPI, RecommendAPI, ApiConfiguration } from './apis';
+
+import type {
+	ClientGlobals,
+	ClientConfig,
 	TrendingRequestModel,
 	TrendingResponseModel,
+	ProfileRequestModel,
 	RecommendRequestModel,
 	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
-	ApiConfiguration,
-	ProfileRequestModel,
-} from './apis';
-
-import type { ClientGlobals, ClientConfig } from '../types';
+} from '../types';
 
 import type {
 	MetaRequestModel,

@@ -135,7 +135,7 @@ export class Content extends Component {
 		}
 		return (
 			<ControllerProvider controller={controller}>
-				<Results results={store.controller.results}>		
+				<Results results={controller.store.results}>		
 				<div style={{ display: loading ? 'none' : 'block' }} ref={infinite}></div>
 			</ControllerProvider>
 		);

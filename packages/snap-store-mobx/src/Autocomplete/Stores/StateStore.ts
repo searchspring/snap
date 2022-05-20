@@ -7,7 +7,7 @@ export class StateStore {
 		terms: Lock;
 		facets: Lock;
 	};
-	focusedInput: HTMLInputElement = undefined;
+	focusedInput: HTMLInputElement | undefined = undefined;
 	input = '';
 	url: UrlManager;
 

@@ -18,7 +18,7 @@ export class ResultStore extends Array {
 	constructor(
 		config: SearchStoreConfig | AutocompleteStoreConfig,
 		services: StoreServices,
-		resultData: SearchResponseModelResult[],
+		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising
 	) {
@@ -29,7 +29,7 @@ export class ResultStore extends Array {
 		if (merchData?.content?.inline) {
 			const banners = merchData.content.inline
 				.sort(function (a, b) {
-					return a.config.position.index - b.config.position.index;
+					return a.config!.position!.index! - b.config!.position!.index!;
 				})
 				.map((banner) => {
 					return new Banner(services, banner);
@@ -39,7 +39,6 @@ export class ResultStore extends Array {
 				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		super(...results);
 	}
@@ -57,9 +56,9 @@ class Banner {
 	value: string;
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
-		this.id = 'ss-ib-' + banner.config.position.index;
-		this.config = banner.config;
-		this.value = banner.value;
+		this.id = 'ss-ib-' + banner.config!.position!.index;
+		this.config = banner.config!;
+		this.value = banner.value!;
 
 		makeObservable(this, {
 			id: observable,
@@ -80,9 +79,9 @@ class Product {
 	children?: Array<Child> = [];
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
-		this.id = result.id;
-		this.attributes = result.attributes;
-		this.mappings = result.mappings;
+		this.id = result.id!;
+		this.attributes = result.attributes!;
+		this.mappings = result.mappings!;
 
 		if (result?.children?.length) {
 			this.children = result.children.map((variant, index) => {
@@ -100,14 +99,14 @@ class Product {
 		});
 
 		// must set all subo
-		const coreObservables = Object.keys(result.mappings.core).reduce((map, key) => {
+		const coreObservables = Object.keys(this.mappings.core!).reduce((map, key) => {
 			return {
 				...map,
 				[key]: observable,
 			};
 		}, {});
 
-		makeObservable(this.mappings.core, coreObservables);
+		makeObservable(this.mappings.core!, coreObservables);
 	}
 }
 
@@ -118,8 +117,8 @@ class Child {
 	custom = {};
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
-		this.id = result.id;
-		this.attributes = result.attributes;
+		this.id = result.id!;
+		this.attributes = result.attributes!;
 
 		makeObservable(this, {
 			id: observable,
@@ -131,8 +130,8 @@ class Child {
 
 function addBannersToResults(config: SearchStoreConfig, results: Product[], banners: Banner[], paginationData: SearchResponseModelPagination) {
 	const productCount = results.length;
-	let minIndex = paginationData.pageSize * (paginationData.page - 1);
-	const maxIndex = minIndex + paginationData.pageSize;
+	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
+	const maxIndex = minIndex + paginationData.pageSize!;
 
 	if (config?.settings?.infinite) {
 		minIndex = 0;
@@ -142,14 +141,14 @@ function addBannersToResults(config: SearchStoreConfig, results: Product[], bann
 		.reduce((adding, banner) => {
 			const resultCount = productCount + adding.length;
 
-			if (banner.config.position.index >= minIndex && (banner.config.position.index < maxIndex || resultCount < paginationData.pageSize)) {
+			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < paginationData.pageSize!)) {
 				adding.push(banner);
 			}
 
 			return adding;
 		}, [] as Banner[])
 		.forEach((banner, index) => {
-			let adjustedIndex = banner.config.position.index - minIndex;
+			let adjustedIndex = banner.config.position!.index! - minIndex;
 			if (adjustedIndex > productCount - 1) {
 				adjustedIndex = productCount + index;
 			}

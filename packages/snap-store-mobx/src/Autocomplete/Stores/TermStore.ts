@@ -4,7 +4,7 @@ import type { StateStore } from './StateStore';
 import type { StoreServices } from '../../types';
 import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination } from '@searchspring/snapi-types';
 
-export class TermStore extends Array {
+export class TermStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
@@ -16,7 +16,7 @@ export class TermStore extends Array {
 		resetTerms: () => void,
 		rootState: StateStore
 	) {
-		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)];
+		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
 
 		if (autocomplete?.suggested?.text) {
 			suggestions.unshift(autocomplete.suggested.text);
@@ -24,7 +24,7 @@ export class TermStore extends Array {
 			suggestions.unshift(autocomplete?.query);
 		}
 
-		const terms = [];
+		const terms: Array<Term> = [];
 
 		suggestions.map((term, index) =>
 			terms.push(

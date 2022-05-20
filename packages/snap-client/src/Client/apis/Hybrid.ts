@@ -7,8 +7,9 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
+import { API, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
+import type { SuggestRequestModel } from '../../types';
 
 export class HybridAPI extends API {
 	private requesters: {

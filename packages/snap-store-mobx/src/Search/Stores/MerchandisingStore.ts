@@ -1,7 +1,7 @@
 import { observable, makeObservable } from 'mobx';
 
 import type { StoreServices } from '../../types';
-import type { SearchResponseModelMerchandising } from '@searchspring/snapi-types';
+import type { SearchResponseModelMerchandising, SearchResponseModelMerchandisingContentInline } from '@searchspring/snapi-types';
 
 enum ContentType {
 	HEADER = 'header',
@@ -20,7 +20,7 @@ export class MerchandisingStore {
 
 			if (merchData.content) {
 				Object.values(ContentType).forEach((type) => {
-					if (merchData.content[type]) {
+					if (merchData.content && merchData.content[type]) {
 						this.content[type] = new Content(merchData.content[type]);
 					}
 				});
@@ -34,7 +34,8 @@ class Content extends Array {
 		return Array;
 	}
 
-	constructor(content) {
+	constructor(content: string[] | SearchResponseModelMerchandisingContentInline[] | undefined) {
+		// @ts-ignore
 		super(...content);
 	}
 }

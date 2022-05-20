@@ -2,16 +2,14 @@ import { makeObservable, observable, toJS, configure } from 'mobx';
 import type { StoreConfigs, ErrorType } from '../types';
 
 configure({
-	// useProxies: "never",  // for IE 11 (es5) support
 	enforceActions: 'never',
 });
 
 export abstract class AbstractStore {
-	protected controller;
 	public custom = {};
 	public loading = false;
 	public loaded = false;
-	public error: {
+	public error?: {
 		code?: number;
 		type: ErrorType;
 		message: string;
@@ -32,7 +30,7 @@ export abstract class AbstractStore {
 		this.config = newConfig;
 	}
 
-	abstract update(data): void;
+	abstract update(data: any): void;
 
 	toJSON(thing = this) {
 		// TODO: make this work better

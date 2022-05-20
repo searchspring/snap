@@ -11,68 +11,55 @@ import type {
 	MetaResponseModelFacet,
 } from '@searchspring/snapi-types';
 
-export class FilterStore extends Array {
+export class FilterStore extends Array<RangeFilter | Filter> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
 	constructor(services: StoreServices, filtersData: SearchResponseModelFilter[] = [], meta: MetaResponseModel) {
 		const filters = filtersData.map((filter) => {
-			const facetMeta = meta.facets[filter.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
+			const field = filter.field!;
+			const facetMeta = meta.facets && (meta.facets[field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
 			switch (filter.type) {
 				case 'range':
 					const rangeFilter = filter as SearchResponseModelFilterRange;
-					return new RangeFilter(services, {
-						facet: {
-							field: rangeFilter.field,
-							label: facetMeta?.label || rangeFilter.field,
-						},
-						value: {
-							low: rangeFilter.value.low,
-							high: rangeFilter.value.high,
-							label: rangeFilter.label || `${rangeFilter.value.low} - ${rangeFilter.value.high}`,
-						},
-					});
+					return new RangeFilter(services, rangeFilter, facetMeta!);
 
 				case 'value':
 				default:
 					const valueFilter = filter as SearchResponseModelFilterValue;
-					return new Filter(services, {
-						facet: {
-							field: valueFilter.field,
-							label: facetMeta?.label || valueFilter.field,
-						},
-						value: {
-							value: valueFilter.value,
-							label: valueFilter.label,
-						},
-					});
+					return new Filter(services, valueFilter, facetMeta!);
 			}
 		});
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
 		super(...filters);
 	}
 }
+
 class Filter {
 	label: string;
 	facet: {
-		field: '';
-		label: '';
+		field?: string;
+		label?: string;
 	};
 	value: {
-		value: '';
-		label: '';
+		value?: string;
+		label?: string;
 	};
 
 	url: UrlManager;
 
-	constructor(services: StoreServices, filter) {
-		this.facet = filter.facet;
-		this.value = filter.value;
-		this.label = `${filter.facet.label}: ${filter.value.label}`;
+	constructor(services: StoreServices, filter: SearchResponseModelFilterValue, meta: MetaResponseModelFacet & MetaResponseModelFacetDefaults) {
+		this.facet = {
+			field: filter.field,
+			label: meta?.label || filter.field,
+		};
+		this.value = {
+			value: filter.value,
+			label: filter.label,
+		};
+		this.label = `${this.facet.label}: ${this.value.label}`;
 
 		this.url = services?.urlManager?.remove('page').remove(`filter.${this.facet.field}`, this.value.value);
 
@@ -87,23 +74,30 @@ class Filter {
 class RangeFilter {
 	label: string;
 	facet: {
-		field;
-		label;
+		field?: string;
+		label?: string;
 	};
 	value: {
-		low;
-		high;
-		label;
+		low?: number;
+		high?: number;
+		label: string;
 	};
 
 	url: UrlManager;
 
-	constructor(services: StoreServices, filter) {
-		this.facet = filter.facet;
-		this.value = filter.value;
-		this.label = `${filter.facet.label}: ${filter.value.label}`;
+	constructor(services: StoreServices, filter: SearchResponseModelFilterRange, meta: MetaResponseModelFacet & MetaResponseModelFacetDefaults) {
+		this.facet = {
+			field: filter.field,
+			label: meta?.label || filter.field,
+		};
+		this.value = {
+			low: filter?.value?.low,
+			high: filter?.value?.high,
+			label: filter.label || `${filter?.value?.low} - ${filter?.value?.high}`,
+		};
+		this.label = `${this.facet.label}: ${this.value.label}`;
 
-		this.url = services?.urlManager?.remove('page').remove(`filter.${filter.facet.field}`, { low: filter.value.low, high: filter.value.high });
+		this.url = services?.urlManager?.remove('page').remove(`filter.${this.facet.field}`, { low: this.value.low, high: this.value.high });
 
 		makeObservable(this, {
 			facet: observable,

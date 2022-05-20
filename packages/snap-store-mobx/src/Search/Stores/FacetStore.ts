@@ -2,7 +2,7 @@ import { makeObservable, observable, action, computed, reaction } from 'mobx';
 
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
+import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelFacet,
@@ -33,7 +33,7 @@ export class FacetStore extends Array {
 	) {
 		const facets = facetsData
 			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
-				const facetMeta = meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
+				const facetMeta = facet.field && meta.facets && (meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
 				// exclude facets that have no meta data
 				if (!facetMeta) return false;
@@ -44,10 +44,13 @@ export class FacetStore extends Array {
 				}
 
 				// trim facets - remove facets that have no use
-				const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
+				const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
 				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig.trim : config.settings?.facets?.trim;
 				if (shouldTrim) {
-					if (facet.type === 'range' && (facet as SearchResponseModelFacetRange).range.low == (facet as SearchResponseModelFacetRange).range.high) {
+					if (
+						facet.type === 'range' &&
+						(facet as SearchResponseModelFacetRange)?.range?.low == (facet as SearchResponseModelFacetRange)?.range?.high
+					) {
 						return false;
 					} else if (facet.values?.length == 0) {
 						return false;
@@ -59,15 +62,14 @@ export class FacetStore extends Array {
 				return true;
 			})
 			.map((facet) => {
-				const facetMeta = meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults;
-
+				const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
 				switch (facet.type) {
 					case 'range':
-						return new RangeFacet(config, services, storage, facet, facetMeta);
+						return new RangeFacet(config, services, storage, facet, facetMeta || {});
 					case 'value':
 					case 'range-buckets':
 					default:
-						return new ValueFacet(config, services, storage, facet, facetMeta);
+						return new ValueFacet(config, services, storage, facet, facetMeta || {});
 				}
 			});
 
@@ -79,8 +81,8 @@ export class FacetStore extends Array {
 
 class Facet {
 	private services: StoreServices;
-	type: string;
-	field: string;
+	type!: string;
+	field!: string;
 	filtered = false;
 	custom = {};
 	collapsed = false;
@@ -120,7 +122,7 @@ class Facet {
 
 	get clear() {
 		return {
-			url: this.services?.urlManager?.remove('page').remove(`filter.${this.field}`),
+			url: this.services.urlManager.remove('page').remove(`filter.${this.field}`),
 		};
 	}
 
@@ -132,12 +134,12 @@ class Facet {
 }
 
 class RangeFacet extends Facet {
-	step: number;
-	range: SearchRequestModelFilterRangeAllOfValue = {
+	step?: number;
+	range?: SearchRequestModelFilterRangeAllOfValue = {
 		low: 0,
 		high: 0,
 	};
-	active: SearchRequestModelFilterRangeAllOfValue = {
+	active?: SearchRequestModelFilterRangeAllOfValue = {
 		low: 0,
 		high: 0,
 	};
@@ -153,12 +155,18 @@ class RangeFacet extends Facet {
 	) {
 		super(services, storage, facet, facetMeta);
 
-		this.step = facet.step;
+		this.step = facet?.step;
 
-		const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
+		const facetConfig = (config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {};
 		const shouldStore = typeof facetConfig?.storeRange == 'boolean' ? facetConfig.storeRange : config.settings?.facets?.storeRange;
 		const storedRange = shouldStore && this.storage.get(`facets.${this.field}.range`);
-		if (storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)) {
+		if (
+			storedRange &&
+			facet.filtered &&
+			facet.range?.low &&
+			facet.range?.high &&
+			(facet.range.low > storedRange.low || facet.range.high < storedRange.high)
+		) {
 			// range from API has shrunk
 			this.range = this.storage.get(`facets.${this.field}.range`);
 		} else {
@@ -184,27 +192,35 @@ class RangeFacet extends Facet {
 }
 
 class ValueFacet extends Facet {
-	values: SearchResponseModelFacetValueAllOfValues[] = [];
+	values: Array<HierarchyValue | Value | RangeValue | undefined> = [];
 
 	search = {
 		input: '',
 	};
 
-	multiple: MetaResponseModelFacetValueMultipleEnum;
+	multiple!: MetaResponseModelFacetValueMultipleEnum;
 
-	overflow = {
+	overflow: {
+		enabled: boolean;
+		limited: boolean;
+		limit: number;
+		remaining: number | undefined;
+		setLimit: (limit: number) => void;
+		toggle: (val?: boolean) => void;
+		calculate: () => void;
+	} = {
 		enabled: false,
 		limited: true,
 		limit: 0,
 		remaining: undefined,
-		setLimit: function (limit) {
+		setLimit: function (limit: number) {
 			if (limit != this.limit) {
 				this.enabled = true;
 				this.limit = limit;
 				this.calculate();
 			}
 		},
-		toggle: (val) => {
+		toggle: (val?: boolean) => {
 			if (typeof val != 'undefined') {
 				this.overflow.limited = val;
 			} else {
@@ -251,11 +267,11 @@ class ValueFacet extends Facet {
 					switch (facet.type) {
 						case 'value':
 							if (facetMeta.display === 'hierarchy') {
-								const filteredValues = facet.values.filter((value) => value.filtered);
+								const filteredValues = facet?.values?.filter((value) => value.filtered) || [];
 								return new HierarchyValue(services, this, value, filteredValues);
 							} else {
 								// converting values to strings to ensure UrlManager state matches state created from URL
-								value.value = value.value.toString();
+								value.value = value?.value?.toString();
 								return new Value(services, this, value);
 							}
 						case 'range-buckets':
@@ -264,10 +280,10 @@ class ValueFacet extends Facet {
 				})) ||
 			[];
 
-		const facetConfig = config.settings?.facets?.fields && config.settings?.facets?.fields[facet.field];
+		const facetConfig: FacetStoreConfig = (config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {};
 		const shouldPin = typeof facetConfig?.pinFiltered == 'boolean' ? facetConfig.pinFiltered : config.settings?.facets?.pinFiltered;
 		if (shouldPin && facetMeta.display !== 'hierarchy') {
-			this.values.sort((a, b) => Number(b.filtered) - Number(a.filtered));
+			this.values.sort((a, b) => Number(b!.filtered) - Number(a!.filtered));
 		}
 
 		const overflowLimitedState = this.storage.get(`facets.${this.field}.overflow.limited`);
@@ -297,7 +313,7 @@ class ValueFacet extends Facet {
 
 		if (this.search.input) {
 			const search = new RegExp(escapeRegExp(this.search.input), 'i');
-			values = this.values.filter((value) => String(value.label).match(search));
+			values = this.values.filter((value) => String(value?.label || '').match(search));
 		}
 
 		if (this.overflow.enabled && this.overflow.limited) {
@@ -308,21 +324,22 @@ class ValueFacet extends Facet {
 	}
 }
 
-class Value {
-	label: string;
-	count: number;
-	filtered: boolean;
-	value: string;
-	custom;
+export class Value {
+	label!: string;
+	count!: number;
+	filtered!: boolean;
+	value!: string;
+	custom!: {};
 	url: UrlManager;
+	preview?: () => void;
 
 	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = services.urlManager?.remove('page').remove(`filter.${facet.field}`, value.value);
+			this.url = services.urlManager.remove('page').remove(`filter.${facet.field}`, value.value);
 		} else {
-			let valueUrl = services.urlManager?.remove('page');
+			let valueUrl = services.urlManager.remove('page');
 			if (facet.multiple == 'single') {
 				valueUrl = valueUrl?.remove(`filter.${facet.field}`);
 			}
@@ -348,36 +365,36 @@ class HierarchyValue extends Value {
 		}
 
 		if (facet.filtered && filteredValues?.length) {
-			const filteredLevel = filteredValues[0].value.split(facet.hierarchyDelimiter).length;
-			if (this.level <= filteredLevel) {
+			const filteredLevel = facet?.hierarchyDelimiter && filteredValues[0].value?.split(facet.hierarchyDelimiter).length;
+			if (filteredLevel && this.level <= filteredLevel) {
 				this.history = true;
 			}
 		}
 
 		if (value.value) {
-			this.url = services?.urlManager?.remove('page').set(`filter.${facet.field}`, value.value);
+			this.url = services.urlManager.remove('page').set(`filter.${facet.field}`, value.value);
 		} else {
-			this.url = services?.urlManager?.remove('page').remove(`filter.${facet.field}`);
+			this.url = services.urlManager.remove('page').remove(`filter.${facet.field}`);
 		}
 	}
 }
 
 class RangeValue {
-	label: string;
-	count: number;
-	filtered: boolean;
-	low: number;
-	high: number;
-	custom;
+	label!: string;
+	count!: number;
+	filtered!: boolean;
+	low!: number;
+	high!: number;
+	custom!: {};
 	url: UrlManager;
 
 	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);
 
 		if (this.filtered) {
-			this.url = services?.urlManager.remove('page').remove(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
+			this.url = services.urlManager.remove('page').remove(`filter.${facet.field}`, [{ low: this.low, high: this.high }]);
 		} else {
-			let valueUrl = services?.urlManager.remove('page');
+			let valueUrl = services.urlManager.remove('page');
 
 			if (facet.multiple == 'single') {
 				valueUrl = valueUrl?.remove(`filter.${facet.field}`);

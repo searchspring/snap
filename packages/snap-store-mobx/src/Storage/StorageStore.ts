@@ -7,9 +7,9 @@ const utils = {
 export class StorageStore {
 	type: StorageType | null = null;
 	expiration = 31536000000; // one year (ms)
-	sameSite = undefined;
+	sameSite: string = 'Lax';
 	key = 'ss-storage';
-	state = {};
+	state: Record<string, any> = {};
 
 	constructor(config?: StorageConfig) {
 		if (config) {
@@ -85,10 +85,12 @@ export class StorageStore {
 	get(path: string): any {
 		switch (this.type) {
 			case StorageType.SESSION:
-				this.state = JSON.parse(window.sessionStorage.getItem(this.key)) || {};
+				const sessionData = window.sessionStorage.getItem(this.key);
+				this.state = sessionData ? JSON.parse(sessionData) : {};
 				break;
 			case StorageType.LOCAL:
-				this.state = JSON.parse(window.localStorage.getItem(this.key)) || {};
+				const localData = window.localStorage.getItem(this.key);
+				this.state = localData ? JSON.parse(localData) : {};
 				break;
 			case StorageType.COOKIE:
 				const data = utils.cookies.get(this.key);
@@ -106,6 +108,7 @@ export class StorageStore {
 			if (value && typeof value[p] != 'undefined') {
 				value = value[p];
 			} else {
+				// @ts-ignore
 				value = undefined;
 				break;
 			}

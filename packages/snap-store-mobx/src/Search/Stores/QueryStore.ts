@@ -4,10 +4,10 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
 export class QueryStore {
-	query: Query;
-	didYouMean: Query;
-	originalQuery: Query;
-	matchType: SearchResponseModelSearchMatchTypeEnum;
+	query?: Query;
+	didYouMean?: Query;
+	originalQuery?: Query;
+	matchType?: SearchResponseModelSearchMatchTypeEnum;
 
 	constructor(services: StoreServices, search: SearchResponseModelSearch) {
 		const observables: Observables = {};

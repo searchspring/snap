@@ -5,8 +5,6 @@ import type { StoreServices } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelSortOption,
-	MetaResponseModelSortOptionDirectionEnum,
-	SearchResponseModelFacetRangeBucketsAllOfValues,
 	SearchResponseModelSearch,
 	SearchResponseModelSorting,
 } from '@searchspring/snapi-types';
@@ -23,7 +21,7 @@ export class SortingStore {
 		if (services && meta.sortOptions) {
 			const activeSort = sorting && sorting.length && sorting[0];
 
-			this.options = meta.sortOptions
+			const options = (meta.sortOptions || [])
 				.filter((option: MetaResponseModelSortOptionMutated) => {
 					if (!search?.query) {
 						return option.type == 'field';
@@ -32,6 +30,7 @@ export class SortingStore {
 				})
 				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
+					// TODO:
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore
 					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
@@ -51,6 +50,7 @@ export class SortingStore {
 					return optionObj;
 				});
 
+			this.options = options;
 			makeObservable(this, {
 				options: observable,
 				current: computed,
@@ -58,7 +58,7 @@ export class SortingStore {
 		}
 	}
 
-	get current(): Option {
+	get current(): Option | undefined {
 		return this.options.filter((option) => option.active).pop();
 	}
 }
@@ -73,13 +73,13 @@ class Option {
 	value: string;
 	url: UrlManager;
 
-	constructor(services: StoreServices, option, index) {
-		this.active = option.active;
-		this.default = option.default;
-		this.field = option.field;
-		this.label = option.label;
-		this.direction = option.direction;
-		this.type = option.type;
+	constructor(services: StoreServices, option: MetaResponseModelSortOptionMutated, index: number) {
+		this.active = option.active!;
+		this.default = option.default!;
+		this.field = option.field!;
+		this.label = option.label!;
+		this.direction = option.direction!;
+		this.type = option.type!;
 		this.value = `${option.label}:${option.field}:${option.direction}:${index}`;
 
 		if (this.default) {
