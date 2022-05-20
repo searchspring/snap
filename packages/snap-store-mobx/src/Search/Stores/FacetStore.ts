@@ -28,7 +28,7 @@ export class FacetStore extends Array {
 		services: StoreServices,
 		storage: StorageStore,
 		facetsData: SearchResponseModelFacet[] = [],
-		pagination: SearchResponseModelPagination,
+		pagination: SearchResponseModelPagination = {},
 		meta: MetaResponseModel
 	) {
 		const facets = facetsData
@@ -133,7 +133,7 @@ class Facet {
 	}
 }
 
-class RangeFacet extends Facet {
+export class RangeFacet extends Facet {
 	step?: number;
 	range?: SearchRequestModelFilterRangeAllOfValue = {
 		low: 0,
@@ -191,7 +191,7 @@ class RangeFacet extends Facet {
 	}
 }
 
-class ValueFacet extends Facet {
+export class ValueFacet extends Facet {
 	values: Array<HierarchyValue | Value | RangeValue | undefined> = [];
 
 	search = {
@@ -348,7 +348,7 @@ export class Value {
 	}
 }
 
-class HierarchyValue extends Value {
+export class HierarchyValue extends Value {
 	level = 0;
 	history = false;
 
@@ -379,7 +379,7 @@ class HierarchyValue extends Value {
 	}
 }
 
-class RangeValue {
+export class RangeValue {
 	label!: string;
 	count!: number;
 	filtered!: boolean;

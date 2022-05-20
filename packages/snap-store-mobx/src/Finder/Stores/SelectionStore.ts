@@ -100,14 +100,12 @@ export class SelectionStore extends Array<Selection | SelectionHierarchy> {
 			config?.fields?.forEach((fieldObj) => {
 				let facet: FacetWithMeta = facets.filter((facet) => facet.field == fieldObj.field).pop()!;
 
-				if (meta?.facets && meta.facets[fieldObj.field]) {
-					facet = {
-						...meta?.facets[fieldObj.field],
-						...facet,
-					};
-				}
+				facet = {
+					...((meta?.facets && meta.facets[fieldObj.field]) || {}),
+					...facet,
+				};
 
-				const isHierarchy = facet.display === 'hierarchy';
+				const isHierarchy = facet?.display === 'hierarchy';
 				if (isHierarchy) {
 					// filter out history/current hierarchy values
 					const filtered = facet.values?.filter((value) => value.filtered).pop();
