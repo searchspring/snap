@@ -110,8 +110,8 @@ export class MockData {
 
 	recommend(files?: { profileFile?: string; resultsFile?: string }) {
 		try {
-			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config?.recommend?.profile}.json`;
-			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config?.recommend?.results}.json`;
+			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend?.profile}.json`;
+			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,

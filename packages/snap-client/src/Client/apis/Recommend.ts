@@ -111,7 +111,7 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		let { tags, limits, ...otherParams } = parameters;
+		let { tags, limits, categories, ...otherParams } = parameters;
 		if (!limits) limits = 20;
 
 		const [tag] = tags || [];
@@ -124,12 +124,25 @@ export class RecommendAPI extends API {
 			delete otherParams.batched; // remove from request parameters
 		}
 		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] };
-		const paramBatch = this.batches[key];
+		const paramBatch: {
+			timeout: number;
+			request: RecommendRequestModel;
+			deferreds?: Deferred[] | undefined;
+		} = this.batches[key];
 
 		const deferred = new Deferred();
 
 		paramBatch.request.tags.push(tag);
-		paramBatch.request.limits = paramBatch.request.limits.concat(limits);
+
+		if (categories) {
+			if (!paramBatch.request.categories) {
+				paramBatch.request.categories = categories;
+			} else {
+				paramBatch.request.categories = paramBatch.request.categories.concat(categories);
+			}
+		}
+
+		paramBatch.request.limits = (paramBatch.request.limits as number[]).concat(limits);
 
 		paramBatch.request = { ...paramBatch.request, ...otherParams };
 		paramBatch.deferreds?.push(deferred);
