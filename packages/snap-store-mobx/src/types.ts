@@ -60,6 +60,13 @@ export type AutocompleteStoreConfig = StoreConfig & {
 		personalization?: {
 			disabled: boolean;
 		};
+		pagination?: {
+			pageSize?: number;
+			count?: number;
+		};
+		suggestions?: {
+			count?: number;
+		};
 		search?: {
 			[any: string]: unknown;
 			query?: {

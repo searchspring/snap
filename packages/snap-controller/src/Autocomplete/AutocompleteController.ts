@@ -149,8 +149,8 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	async setFocused(inputElement?: HTMLInputElement): Promise<void> {
-		if (this.store.state.focusedInput !== inputElement && inputElement) {
-			this.store.state.focusedInput = inputElement;
+		if (this.store.state.focusedInput !== inputElement) {
+			this.store.state.focusedInput = inputElement as HTMLInputElement;
 			// fire focusChange event
 			try {
 				try {

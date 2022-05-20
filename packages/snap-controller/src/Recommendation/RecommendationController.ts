@@ -123,7 +123,7 @@ export class RecommendationController extends AbstractController {
 					!this.store.profile.tag ||
 					!result ||
 					!this.events.impression ||
-					(this.events.product && this.events.product[result.id as keyof BeaconEvent].impression)
+					(this.events.product && this.events.product[result.id as keyof BeaconEvent]?.impression)
 				)
 					return;
 				const payload: BeaconPayload = {

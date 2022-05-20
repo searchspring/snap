@@ -2,6 +2,7 @@ import { LogMode } from '@searchspring/snap-logger';
 import { DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
+import type { MockClient } from '@searchspring/snap-shared';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
@@ -17,7 +18,7 @@ export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
-	public client; //todo: add typing
+	public client: Client | MockClient;
 	public store: AbstractStore;
 	public urlManager: UrlManager;
 	public eventManager: EventManager;

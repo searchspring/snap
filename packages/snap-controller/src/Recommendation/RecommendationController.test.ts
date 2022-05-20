@@ -1,9 +1,9 @@
 import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
-import { RecommendationStore } from '@searchspring/snap-store-mobx';
+import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
+import { Tracker, BeaconType, BeaconCategory, BeaconEvent } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger, LogMode } from '@searchspring/snap-logger';
@@ -13,7 +13,7 @@ import { RecommendationController } from './RecommendationController';
 
 const globals = { siteId: '8uyt2m' };
 
-const recommendConfig = {
+const recommendConfig: RecommendationStoreConfig = {
 	id: 'search',
 	tag: 'trending',
 };
@@ -30,9 +30,9 @@ describe('Recommendation Controller', () => {
 
 	it(`throws an error when no tag is provided in config`, async function () {
 		expect(() => {
-			const configWithoutTag = {
+			const configWithoutTag: RecommendationStoreConfig = {
 				id: recommendConfig.id,
-				tag: undefined,
+				tag: '',
 			};
 
 			// @ts-ignore
@@ -137,12 +137,12 @@ describe('Recommendation Controller', () => {
 		const event = new Event('click');
 		const eventfn = jest.spyOn(controller.eventManager, 'fire');
 
-		const eventReturn = controller.track.click(event);
+		const eventReturn = controller.track.click(event as any);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : null,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -172,12 +172,12 @@ describe('Recommendation Controller', () => {
 
 		const result = controller.store.results[0];
 
-		controller.track.product.click(event, result);
+		controller.track.product.click(event as any, result);
 
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : null,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -193,7 +193,7 @@ describe('Recommendation Controller', () => {
 					seed: controller.config.globals.seed,
 				},
 			},
-			pid: controller.events.click.id,
+			pid: controller.events.click!.id,
 		});
 		expect(eventfn).toHaveBeenCalledTimes(1);
 
@@ -223,7 +223,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : null,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -246,9 +246,9 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length + 1);
 		expect(productTrackfn).toHaveBeenCalledTimes(controller.store.results.length);
 
-		expect(Object.keys(controller.events.product)).toHaveLength(controller.store.results.length);
-		expect(controller.events.product[controller.store.results[0].id]).toBeDefined();
-		expect(controller.events.product[controller.store.results[0].id].render).toBeDefined();
+		expect(Object.keys(controller.events.product || {})).toHaveLength(controller.store.results.length);
+		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent]).toBeDefined();
+		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent].render).toBeDefined();
 
 		productTrackfn.mockClear();
 		trackfn.mockClear();
@@ -276,7 +276,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : null,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -311,7 +311,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : null,
+			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -326,12 +326,12 @@ describe('Recommendation Controller', () => {
 					seed: controller.config.globals.seed,
 				},
 			},
-			pid: controller.events.impression.id,
+			pid: controller.events.impression!.id,
 		});
 
-		expect(controller.events.product[result.id]).toBeDefined();
-		expect(controller.events.product[result.id].impression).toBeDefined();
-		expect(controller.events.product[result.id].impression).toBe(productEventReturn);
+		expect(controller.events.product![result.id as keyof BeaconEvent]).toBeDefined();
+		expect(controller.events.product![result.id as keyof BeaconEvent].impression).toBeDefined();
+		expect(controller.events.product![result.id as keyof BeaconEvent].impression).toBe(productEventReturn);
 
 		expect(eventfn).toHaveBeenCalledTimes(1);
 		expect(trackfn).toHaveBeenCalledTimes(1);
