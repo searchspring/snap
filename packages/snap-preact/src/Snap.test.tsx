@@ -161,6 +161,20 @@ describe('Snap Preact', () => {
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
 	});
 
+	it('automatically picks up the merchandising segments when provided', () => {
+		const contextConfig = {
+			...baseConfig,
+			context: {
+				merchandising: {
+					segments: ['segment1', 'segment2'],
+				},
+			},
+		};
+		const snap = new Snap(contextConfig);
+		// @ts-ignore
+		expect(snap.client.globals.merchandising).toEqual(contextConfig.context.merchandising);
+	});
+
 	describe('creates search controllers via config', () => {
 		it(`can create a search controller`, () => {
 			const searchConfig = {
