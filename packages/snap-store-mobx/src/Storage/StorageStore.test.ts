@@ -22,6 +22,7 @@ describe('Storage Store', () => {
 				const storage = new StorageStore();
 				const path = undefined;
 				const value = undefined;
+				//  @ts-ignore
 				storage.set(path, value);
 
 				expect(storage.state).toStrictEqual({});
@@ -31,6 +32,7 @@ describe('Storage Store', () => {
 				const storage = new StorageStore();
 				const path = undefined;
 				const value = 'not undefined';
+				//  @ts-ignore
 				storage.set(path, value);
 
 				expect(storage.state).toStrictEqual({});
@@ -234,9 +236,11 @@ describe('Storage Store', () => {
 					const storage = new StorageStore({ type: storageType, key: 'ss-key' });
 					const path = undefined;
 					const value = undefined;
+					//  @ts-ignore
 					storage.set(path, value);
 
 					expect(storage.state).toStrictEqual({});
+					//  @ts-ignore
 					expect(storage.get(path)).toBeUndefined();
 					storage.clear();
 				});
@@ -245,9 +249,11 @@ describe('Storage Store', () => {
 					const storage = new StorageStore({ type: storageType, key: 'ss-key' });
 					const path = undefined;
 					const value = 'not undefined';
+					//  @ts-ignore
 					storage.set(path, value);
 
 					expect(storage.state).toStrictEqual({});
+					//  @ts-ignore
 					expect(storage.get(path)).toBeUndefined();
 					storage.clear();
 				});

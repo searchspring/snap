@@ -14,7 +14,7 @@ import type {
 	SearchResponseModelFacetValueAllOfValues,
 } from '@searchspring/snapi-types';
 
-type SelectionStoreData = {
+export type SelectionStoreData = {
 	state: FinderStoreState;
 	facets: SearchResponseModelFacet[];
 	meta: MetaResponseModel;

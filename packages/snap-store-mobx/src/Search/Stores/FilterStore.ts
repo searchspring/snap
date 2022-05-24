@@ -37,7 +37,7 @@ export class FilterStore extends Array<RangeFilter | Filter> {
 	}
 }
 
-class Filter {
+export class Filter {
 	label: string;
 	facet: {
 		field?: string;
@@ -71,7 +71,7 @@ class Filter {
 	}
 }
 
-class RangeFilter {
+export class RangeFilter {
 	label: string;
 	facet: {
 		field?: string;
