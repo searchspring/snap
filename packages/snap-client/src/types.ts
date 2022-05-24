@@ -11,6 +11,10 @@ export type ClientConfig = {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
+	finder?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
 	recommend?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
