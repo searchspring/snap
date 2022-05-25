@@ -237,8 +237,14 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		if (this.context.merchandising) {
-			this.config.client.globals.merchandising = this.context.merchandising;
+		if (this.context.merchandising?.segments) {
+			if (this.config.client.globals.merchandising) {
+				this.config.client.globals.merchandising.segments = this.context.merchandising.segments;
+			} else {
+				this.config.client.globals.merchandising = {
+					segments: this.context.merchandising.segments,
+				};
+			}
 		}
 
 		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
