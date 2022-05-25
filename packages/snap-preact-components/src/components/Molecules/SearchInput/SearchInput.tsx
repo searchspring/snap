@@ -88,7 +88,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	}
 	return (
 		<CacheProvider>
-			<div {...styling} className="ss__search-input">
+			<div {...styling} className={classnames('ss__search-input', className)}>
 				<div className="ss__search-input__wrapper">
 					<div className="ss__search-input__wrapper__icon">
 						<Icon {...subProps.icon} icon="search" />

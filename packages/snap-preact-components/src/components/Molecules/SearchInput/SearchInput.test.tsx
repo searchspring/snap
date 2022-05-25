@@ -44,12 +44,12 @@ describe('SearchInput Component', () => {
 	it('can disable styling', () => {
 		const rendered = render(<SearchInput />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input');
-		expect(searchInput.classList.length).toBe(1);
+		expect(searchInput.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<SearchInput />);
+		const rendered = render(<SearchInput className={className} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input');
 
 		expect(searchInput).toBeInTheDocument();
