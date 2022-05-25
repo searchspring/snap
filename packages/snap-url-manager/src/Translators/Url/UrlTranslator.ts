@@ -92,7 +92,11 @@ export class UrlTranslator implements Translator {
 			// global type override
 			const paramType = this.config.settings?.coreType;
 			if (paramType && Object.values(ParamLocationType).includes(paramType as ParamLocationType)) {
-				coreParam.type = (config?.parameters?.core && coreParam.type) || paramType;
+				if (config?.parameters?.core && config.parameters?.core[param as keyof CoreMap]?.type) {
+					coreParam.type = config.parameters?.core[param as keyof CoreMap]?.type as ParamLocationType;
+				} else {
+					coreParam.type = paramType;
+				}
 			}
 
 			// create reverse mapping for quick lookup later
