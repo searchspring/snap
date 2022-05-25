@@ -10,6 +10,7 @@ import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGr
 import { FacetPaletteOptions, FacetPaletteOptionsProps } from '../../Molecules/FacetPaletteOptions';
 import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from '../../Molecules/FacetHierarchyOptions';
 import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
+import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
@@ -29,37 +30,6 @@ const CSS = {
 				border: 'none',
 				borderBottom: `2px solid ${theme.colors?.primary || '#ccc'}`,
 				padding: '6px 0',
-			},
-			'& .ss__facet--search': {
-				margin: '16px 0 0 0',
-				display: 'flex',
-				flexDirection: 'column',
-				width: '100%',
-				'& .ss__facet__search--wrapper': {
-					display: 'flex',
-					alignItems: 'center',
-					width: '100%',
-					height: '45px',
-					border: `1px solid ${theme.colors?.primary || '#ccc'}`,
-					borderRadius: '4px',
-					'& .ss__facet__search--icon': {
-						display: 'flex',
-						alignItems: 'center',
-						height: '100%',
-						paddingLeft: '16px',
-						paddingRight: '12px',
-					},
-					'& input': {
-						display: 'flex',
-						alignItems: 'center',
-						width: '100%',
-						height: '100%',
-						outline: '2px solid transparent',
-						outlineOffset: '2px',
-						paddingRight: '16px',
-						border: '0',
-					},
-				},
 			},
 			'& .ss__facet__options': {
 				marginTop: '8px',
@@ -241,6 +211,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			// component theme overrides
 			theme: props.theme,
 		},
+		searchInput: {
+			// default props
+			className: 'ss__facet__search-input',
+			// global theme
+			...globalTheme?.components?.searchInput,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+		},
 	};
 
 	let limitedValues;
@@ -264,9 +246,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const searchableFacet = {
 		allowableTypes: ['list', 'grid', 'palette'],
 		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
-			(facet as ValueFacet)!.search = {
-				input: e.target.value,
-			};
+			if ((facet as ValueFacet)?.search?.input) {
+				(facet as ValueFacet).search.input = e.target.value;
+			}
 		},
 	};
 
@@ -286,14 +268,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 						}
 					>
 						{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-							<div className="ss__facet--search">
-								<div className="ss__facet__search--wrapper">
-									<div className="ss__facet__search--icon">
-										<Icon icon="search" />
-									</div>
-									<input type="search" className="input" onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
-								</div>
-							</div>
+							<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
 						)}
 						<div className={classnames('ss__facet__options', className)}>
 							{(() => {
@@ -343,6 +318,7 @@ interface FacetSubProps {
 	facetPaletteOptions: FacetPaletteOptionsProps;
 	facetHierarchyOptions: FacetHierarchyOptionsProps;
 	facetSlider: FacetSliderProps;
+	searchInput: SearchInputProps;
 	icon: IconProps;
 	showMoreLessIcon: IconProps;
 }
