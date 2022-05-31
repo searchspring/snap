@@ -19,6 +19,9 @@
 		"test": "jest --passWithNoTests",
 		"test:watch": "jest --watch"
 	},
+	"dependencies": {
+		"@searchspring/snap-toolbox": "^0.27.1"
+	},
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
