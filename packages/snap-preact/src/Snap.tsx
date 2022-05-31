@@ -239,7 +239,10 @@ export class Snap {
 
 		if (this.context.merchandising?.segments) {
 			if (this.config.client.globals.merchandising) {
-				this.config.client.globals.merchandising.segments = this.context.merchandising.segments;
+				this.config.client.globals.merchandising.segments = deepmerge(
+					this.context.merchandising.segments,
+					this.config.client.globals.merchandising.segments
+				);
 			} else {
 				this.config.client.globals.merchandising = {
 					segments: this.context.merchandising.segments,
