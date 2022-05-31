@@ -244,6 +244,7 @@ export class RecommendationController extends AbstractController {
 			tag: this.config.tag,
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
+			order: this.context?.options?.order,
 			...this.config.globals,
 		};
 		const shopperId = this.tracker.context.shopperId;
