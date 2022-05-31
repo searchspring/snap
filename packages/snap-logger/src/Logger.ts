@@ -1,8 +1,9 @@
+import { AppMode } from '@searchspring/snap-toolbox';
 import { colors } from './colors';
 import { emoji } from './emoji';
 
 export class Logger {
-	private mode = LogMode.PRODUCTION;
+	private mode = AppMode.production;
 	public emoji = emoji;
 	public colors = colors;
 	private prefix = '';
@@ -15,9 +16,9 @@ export class Logger {
 		this.prefix = ` [${group}] :: `;
 	}
 
-	public setMode(mode: LogMode): void {
-		if (Object.values(LogMode).includes(mode)) {
-			this.mode = mode;
+	public setMode(mode: keyof typeof AppMode): void {
+		if (Object.values(AppMode).includes(mode as AppMode) && this.mode != mode) {
+			this.mode = mode as AppMode;
 		}
 	}
 
@@ -107,13 +108,8 @@ export class Logger {
 	}
 
 	public dev(...params: any[]): void {
-		if (this.mode === LogMode.DEVELOPMENT) {
+		if (this.mode === AppMode.development) {
 			console.log(...params);
 		}
 	}
-}
-
-export enum LogMode {
-	PRODUCTION = 'production',
-	DEVELOPMENT = 'development',
 }

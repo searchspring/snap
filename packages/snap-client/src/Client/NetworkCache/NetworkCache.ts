@@ -12,8 +12,8 @@ const defaultConfig: DefaultCacheConfig = {
 };
 
 export class NetworkCache {
-	private memoryCache: Cache = {};
-	config: DefaultCacheConfig;
+	protected memoryCache: Cache = {};
+	protected config: DefaultCacheConfig;
 
 	constructor(config?: CacheConfig) {
 		this.config = deepmerge(defaultConfig, config || {});
@@ -26,35 +26,43 @@ export class NetworkCache {
 			});
 	}
 
+	public enable() {
+		this.config.enabled = true;
+	}
+
+	public disable() {
+		this.config.enabled = false;
+	}
+
 	public get(key: string): Response | void {
-		try {
-			if (this.memoryCache[key]) {
-				if (Date.now() < this.memoryCache[key].expires) {
-					return this.memoryCache[key].value;
+		if (this.config.enabled) {
+			try {
+				if (this.memoryCache[key]) {
+					if (Date.now() < this.memoryCache[key].expires) {
+						return this.memoryCache[key].value;
+					}
 				}
-			}
 
-			const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
-			const localData: Cache = stored && JSON.parse(stored);
+				const stored = sessionStorage.getItem(CACHE_STORAGE_KEY);
+				const localData: Cache = stored && JSON.parse(stored);
 
-			if (localData && key && localData[key]) {
-				// compare the expiry time of the item with the current time
-				if (Date.now() > localData[key].expires) {
-					// remove item
-					const newStored = {
-						...localData,
-					};
-					delete newStored[key];
-					//update storage
-					sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
-
-					return undefined;
-				} else {
-					return localData[key].value;
+				if (localData && key && localData[key]) {
+					// compare the expiry time of the item with the current time
+					if (Date.now() >= localData[key].expires) {
+						// remove item
+						const newStored = {
+							...localData,
+						};
+						delete newStored[key];
+						// update storage
+						sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+					} else {
+						return localData[key].value;
+					}
 				}
+			} catch (err) {
+				console.warn('something went wrong, browser might not have cookies enabled');
 			}
-		} catch (err) {
-			console.warn('something went wrong, browser might not have cookies enabled');
 		}
 	}
 

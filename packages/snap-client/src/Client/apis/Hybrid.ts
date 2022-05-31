@@ -1,3 +1,5 @@
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import {
 	AutocompleteRequestModel,
 	AutocompleteResponseModel,
@@ -16,13 +18,50 @@ export class HybridAPI extends API {
 		suggest: SuggestAPI;
 	};
 
+	private requestersConfiguration: {
+		legacy: ApiConfiguration;
+		suggest: ApiConfiguration;
+	};
+
 	constructor(configuration: ApiConfiguration) {
 		super(configuration);
 
-		this.requesters = {
-			legacy: new LegacyAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
-			suggest: new SuggestAPI(new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache })),
+		this.requestersConfiguration = {
+			legacy: new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache }),
+			suggest: new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache }),
 		};
+
+		this.requesters = {
+			legacy: new LegacyAPI(this.requestersConfiguration.legacy),
+			suggest: new SuggestAPI(this.requestersConfiguration.suggest),
+		};
+	}
+
+	public setMode(mode: AppMode): void {
+		if (Object.values(AppMode).includes(mode as AppMode)) {
+			this.configuration.mode = mode as AppMode;
+
+			// adding searchspring-no-beacon header to requests to search API to prevent reporting
+
+			switch (mode) {
+				case AppMode.development: {
+					this.requestersConfiguration.legacy.headers = {
+						'searchspring-no-beacon': '',
+					};
+					break;
+				}
+
+				case AppMode.production: {
+					const previousHeaders = { ...this.requestersConfiguration.legacy.headers };
+					delete previousHeaders['searchspring-no-beacon'];
+
+					this.requestersConfiguration.legacy.headers = previousHeaders;
+				}
+			}
+
+			this.requesters.legacy.setMode(mode);
+			this.requesters.suggest.setMode(mode);
+		}
 	}
 
 	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {

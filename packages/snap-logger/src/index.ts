@@ -1,3 +1,3 @@
-export { Logger, LogMode } from './Logger';
+export { Logger } from './Logger';
 export { colors } from './colors';
 export { emoji } from './emoji';

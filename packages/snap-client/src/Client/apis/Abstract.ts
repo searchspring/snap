@@ -1,3 +1,6 @@
+import deepmerge from 'deepmerge';
+import { AppMode } from '@searchspring/snap-toolbox';
+
 import { fibonacci } from '../utils/fibonacci';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
 import { CacheConfig } from '../../types';
@@ -26,6 +29,10 @@ export class API {
 
 	constructor(protected configuration: ApiConfiguration) {
 		this.cache = new NetworkCache(configuration.cache);
+	}
+
+	protected get mode(): AppMode {
+		return this.configuration.mode;
 	}
 
 	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
@@ -85,25 +92,45 @@ export class API {
 				? context.body
 				: JSON.stringify(context.body);
 
-		const headers = Object.assign({}, this.configuration.headers, context.headers);
+		const headers = { ...this.configuration.headers, ...context.headers };
+
 		const init = {
 			method: context.method,
 			headers: headers,
 			body,
 		};
+
 		return { url, init };
 	}
 
-	private fetchApi = async (url: RequestInfo, init?: RequestInit) => {
+	private async fetchApi(url: RequestInfo, init?: RequestInit): Promise<Response> {
 		const response = await this.configuration.fetchApi(url, init);
 
 		return response;
-	};
+	}
+
+	public setMode(mode: AppMode): void {
+		if (Object.values(AppMode).includes(mode as AppMode)) {
+			this.configuration.mode = mode;
+
+			switch (mode) {
+				case AppMode.development: {
+					this.cache.disable();
+					break;
+				}
+				case AppMode.production: {
+					this.cache.enable();
+					break;
+				}
+			}
+		}
+	}
 }
 
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
+	mode?: keyof typeof AppMode | AppMode;
 	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
@@ -113,14 +140,20 @@ export interface ApiConfigurationParameters {
 }
 
 export class ApiConfiguration {
-	constructor(private configuration: ApiConfigurationParameters) {
+	constructor(private configuration: ApiConfigurationParameters = {}) {
 		if (!configuration.maxRetry) {
 			this.configuration.maxRetry = 8;
 		}
+
+		this.configuration.mode = this.configuration.mode || AppMode.production;
 	}
 
 	get cache(): CacheConfig {
 		return this.configuration?.cache || {};
+	}
+
+	set cache(updatedConfig: Partial<CacheConfig>) {
+		this.configuration.cache = deepmerge(this.configuration.cache || {}, updatedConfig);
 	}
 
 	get maxRetry(): number {
@@ -139,8 +172,20 @@ export class ApiConfiguration {
 		return this.configuration.queryParamsStringify || querystring;
 	}
 
-	get headers(): HTTPHeaders | undefined {
-		return this.configuration.headers;
+	get headers(): HTTPHeaders {
+		return this.configuration.headers || {};
+	}
+
+	set headers(newHeaders: HTTPHeaders) {
+		this.configuration.headers = newHeaders;
+	}
+
+	get mode(): AppMode {
+		return this.configuration.mode! as AppMode;
+	}
+
+	set mode(mode) {
+		this.configuration.mode = mode;
 	}
 }
 

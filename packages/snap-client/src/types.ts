@@ -1,4 +1,7 @@
+import { AppMode } from '@searchspring/snap-toolbox';
+
 export type ClientConfig = {
+	mode?: keyof typeof AppMode | AppMode;
 	meta?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
