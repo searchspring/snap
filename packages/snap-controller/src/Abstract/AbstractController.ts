@@ -1,5 +1,4 @@
-import { LogMode } from '@searchspring/snap-logger';
-import { DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
+import { AppMode, DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
@@ -12,7 +11,6 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
 import type { ControllerServices, ControllerConfig, Attachments, ContextVariables } from '../types';
 
-const SS_DEV_COOKIE = 'ssDev';
 export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';
@@ -30,8 +28,8 @@ export abstract class AbstractController {
 		[key: string]: DomTargeter;
 	} = {};
 
-	private _initialized = false;
-	private _environment = LogMode.PRODUCTION;
+	protected mode = AppMode.production;
+	protected _initialized = false;
 
 	get initialized(): boolean {
 		return this._initialized;
@@ -81,15 +79,6 @@ export abstract class AbstractController {
 			throw new Error(`Invalid service 'tracker' passed to controller. Missing "track" object.`);
 		}
 
-		window.searchspring = window.searchspring || {};
-		window.searchspring.controller = window.searchspring.controller || {};
-
-		if (window.searchspring.controller[config.id]) {
-			throw new Error(`Controller with id '${config.id}' is already defined`);
-		}
-
-		window.searchspring.controller[config.id] = this;
-
 		this.id = config.id;
 		this.config = config;
 		this.client = client;
@@ -107,12 +96,8 @@ export abstract class AbstractController {
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);
 
-		// set environment
-		if (url(window.location.href)?.params?.query?.dev) {
-			cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
-		}
-		const dev = cookies.get(SS_DEV_COOKIE);
-		this.environment = (dev === '1' ? 'development' : process.env.NODE_ENV) as LogMode;
+		// set mode
+		this.setMode(this.config.mode);
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
@@ -128,15 +113,14 @@ export abstract class AbstractController {
 		}
 	}
 
-	public set environment(env: LogMode) {
-		if (Object.values(LogMode).includes(env)) {
-			this._environment = env;
-			this.log.setMode(env);
-		}
-	}
+	public setMode(mode: keyof typeof AppMode | AppMode): void {
+		this.mode = mode as AppMode;
+		if (Object.values(AppMode).includes(this.mode)) {
+			this.mode = this.mode;
 
-	public get environment(): LogMode {
-		return this._environment;
+			this.log.setMode(this.mode);
+			this.client.setMode(this.mode);
+		}
 	}
 
 	public async init(): Promise<void> {

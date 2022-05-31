@@ -71,6 +71,8 @@ export class RecommendationInstantiator {
 			throw new Error(`Recommendation Instantiator config must contain a valid config.client.globals.siteId value`);
 		}
 
+		window.searchspring = window.searchspring || {};
+
 		this.context = deepmerge(context || {}, config.context || {});
 		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
 		this.tracker = services?.tracker || new Tracker(this.config.client.globals);
@@ -204,6 +206,8 @@ export class RecommendationInstantiator {
 				controller.addTargeter(this.targeter);
 
 				this.controller[controller.config.id] = controller;
+				window.searchspring.controller = window.searchspring.controller || {};
+				window.searchspring.controller[controller.config.id] = controller;
 
 				const profileVars = controller.store.profile.display.templateParameters;
 				const component = controller.store.profile.display.template?.component;

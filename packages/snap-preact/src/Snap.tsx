@@ -2,10 +2,9 @@ import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { h, render } from 'preact';
 import { Client } from '@searchspring/snap-client';
-import { Logger, LogMode } from '@searchspring/snap-logger';
+import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { version, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
-import { getContext } from '@searchspring/snap-toolbox';
+import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes } from '@searchspring/snap-controller';
 
 import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
@@ -22,7 +21,6 @@ import type {
 	ControllerConfigs,
 	ContextVariables,
 } from '@searchspring/snap-controller';
-import type { Product } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -31,7 +29,7 @@ import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './
 import type { SnapControllerServices, SnapControllerConfigs, RootComponent } from './types';
 
 export const BRANCH_COOKIE = 'ssBranch';
-export const SS_DEV_COOKIE = 'ssDev';
+export const DEV_COOKIE = 'ssDev';
 
 type ExtendedTarget = Target & {
 	name?: string;
@@ -44,6 +42,7 @@ type ExtendedTarget = Target & {
 };
 
 export type SnapConfig = {
+	mode?: AppMode;
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
@@ -128,21 +127,21 @@ This usually happens when you pass a JSX Element, and not a function that return
 
 The error above happened in the following targeter in the Snap Config`;
 export class Snap {
-	config: SnapConfig;
-	logger: Logger;
-	client: Client;
-	tracker: Tracker;
-	context: ContextVariables;
-	_controllerPromises: {
+	private mode: AppMode = AppMode.production;
+	private config: SnapConfig;
+	private _instantiatorPromises: {
+		[instantiatorId: string]: Promise<RecommendationInstantiator>;
+	};
+	private _controllerPromises: {
 		[controllerConfigId: string]: Promise<Controllers>;
 	};
 
-	controllers: {
+	public logger: Logger;
+	public client: Client;
+	public tracker: Tracker;
+	public context: ContextVariables;
+	public controllers: {
 		[controllerConfigId: string]: Controllers;
-	};
-
-	_instantiatorPromises: {
-		[instantiatorId: string]: Promise<RecommendationInstantiator>;
 	};
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
@@ -159,7 +158,41 @@ export class Snap {
 		return Promise.all(getControllerPromises);
 	};
 
+	public setMode(mode: keyof typeof AppMode | AppMode): void {
+		if (Object.values(AppMode).includes(mode as AppMode) && this.mode != mode) {
+			this.mode = mode as AppMode;
+			this.logger.setMode(this.mode);
+			this.client.setMode(this.mode);
+
+			for (const [id, controller] of Object.entries(this.controllers)) {
+				controller.setMode(this.mode);
+			}
+		}
+	}
+
 	public createController = async (
+		type: keyof typeof ControllerTypes,
+		config: ControllerConfigs,
+		services?: SnapControllerServices,
+		urlConfig?: UrlTranslatorConfig,
+		context?: ContextVariables,
+		callback?: (value?: Controllers | PromiseLike<Controllers>) => void | Promise<void>
+	): Promise<Controllers> => {
+		if (this._controllerPromises[config.id]) {
+			throw new Error(`Controller with id '${config.id}' is already defined`);
+		}
+
+		this._controllerPromises[config.id] = new Promise((resolve) =>
+			this._createController(type, config, services, urlConfig, context, async (cntrlr) => {
+				if (typeof callback == 'function') await callback(cntrlr);
+				resolve(cntrlr);
+			})
+		);
+
+		return this._controllerPromises[config.id];
+	};
+
+	private _createController = async (
 		type: keyof typeof ControllerTypes,
 		config: ControllerConfigs,
 		services?: SnapControllerServices,
@@ -186,10 +219,11 @@ export class Snap {
 		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
 
 		if (!this.controllers[config.id]) {
-			this.controllers[config.id] = creationFunc(
+			window.searchspring.controller = window.searchspring.controller || {};
+			window.searchspring.controller[config.id] = this.controllers[config.id] = creationFunc(
 				{
 					url: deepmerge(this.config.url || {}, urlConfig || {}),
-					controller: config,
+					controller: { mode: this.mode, ...config },
 					context: deepmerge(this.context || {}, context || {}),
 				},
 				{
@@ -247,31 +281,45 @@ export class Snap {
 		this._instantiatorPromises = {};
 		this.controllers = {};
 
-		// TODO environment switch using URL?
-		this.logger.setMode(process.env.NODE_ENV as LogMode);
-
-		// log version
-		this.logger.imageText({
-			url: 'https://snapui.searchspring.io/favicon.svg',
-			text: `[${version}]`,
-			style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
-		});
-
 		try {
 			const urlParams = url(window.location.href);
-			const branchParam = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+			const branchOverride = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
 
-			if (branchParam && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
-				// set a cookie or localstorage with branch
+			// devMode is set via queryParam, node env or cookie
+			let devMode = 'dev' in urlParams.params.query || process.env.NODE_ENV == AppMode.development || !!cookies.get(DEV_COOKIE);
+
+			// ability to disable via ?dev=false query param
+			if (urlParams.params.query?.dev == 'false') {
+				devMode = false;
+			}
+
+			// mode passed in the config has priority
+			if (this.config.mode) {
+				this.setMode(this.config.mode);
+			} else if (devMode) {
+				this.setMode(AppMode.development);
+
+				// log version
+				this.logger.imageText({
+					url: 'https://snapui.searchspring.io/favicon.svg',
+					text: `[${version}]`,
+					style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
+				});
+
 				if (featureFlags.cookies) {
-					cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000); // 1 hour
-					cookies.set(SS_DEV_COOKIE, '1', 'Lax', 0);
+					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
+				}
+			}
+
+			if (branchOverride && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
+				this.logger.warn(`...loading build... '${branchOverride}'`);
+
+				// set a cookie with branch
+				if (featureFlags.cookies) {
+					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000); // 1 hour
 				} else {
 					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
 				}
-
-				this.logger.setMode(LogMode.DEVELOPMENT);
-				this.logger.warn(`...loading build... '${branchParam}'`);
 
 				// get the path and siteId from the current bundle script in case its not the same as the client config
 				let path = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/`;
@@ -286,9 +334,9 @@ export class Snap {
 
 				// append script with new branch in path
 				const branchScript = document.createElement('script');
-				const src = `${path}${branchParam}/bundle.js`;
+				const src = `${path}${branchOverride}/bundle.js`;
 				branchScript.src = src;
-				branchScript.setAttribute(BRANCH_COOKIE, branchParam);
+				branchScript.setAttribute(BRANCH_COOKIE, branchOverride);
 				document.head.appendChild(branchScript);
 
 				new DomTargeter(
@@ -315,20 +363,21 @@ export class Snap {
 						}
 
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
-						render(
-							<BranchOverride
-								name={branchParam}
-								details={bundleDetails}
-								error={error}
-								onRemoveClick={() => {
-									cookies.unset(BRANCH_COOKIE);
-									const urlState = url(window.location.href);
-									delete urlState.params.query['branch'];
-									window.location.href = urlState.url();
-								}}
-							/>,
-							elem
-						);
+						BranchOverride &&
+							render(
+								<BranchOverride
+									name={branchOverride}
+									details={bundleDetails}
+									error={error}
+									onRemoveClick={() => {
+										cookies.unset(BRANCH_COOKIE);
+										const urlState = url(window.location.href);
+										delete urlState.params.query['branch'];
+										window.location.href = urlState.url();
+									}}
+								/>,
+								elem
+							);
 					}
 				);
 
@@ -337,10 +386,10 @@ export class Snap {
 			}
 		} catch (e) {}
 
-		if (window.searchspring) {
-			window.searchspring.context = this.context;
-			if (this.client) window.searchspring.client = this.client;
-		}
+		// bind to window global
+		window.searchspring = window.searchspring || {};
+		window.searchspring.context = this.context;
+		if (this.client) window.searchspring.client = this.client;
 
 		// autotrack shopper id from the context
 		if (this.context?.shopper?.id) {
@@ -363,10 +412,15 @@ export class Snap {
 				case 'search': {
 					this.config.controllers[type].forEach((controller, index) => {
 						try {
+							if (this._controllerPromises[controller.config.id]) {
+								this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+								return;
+							}
+
 							const cntrlr = createSearchController(
 								{
 									url: deepmerge(this.config.url || {}, controller.url || {}),
-									controller: controller.config,
+									controller: { mode: this.mode, ...controller.config },
 									context: deepmerge(this.context || {}, controller.context || {}),
 								},
 								{
@@ -380,7 +434,8 @@ export class Snap {
 								}
 							);
 
-							this.controllers[cntrlr.config.id] = cntrlr;
+							window.searchspring.controller = window.searchspring.controller || {};
+							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
 							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
 							let searched = false;
@@ -437,6 +492,11 @@ export class Snap {
 
 				case 'autocomplete': {
 					this.config.controllers[type].forEach((controller, index) => {
+						if (this._controllerPromises[controller.config.id]) {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let bound = false;
@@ -468,7 +528,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(
+									this._createController(
 										ControllerTypes.autocomplete,
 										controller.config,
 										controller.services,
@@ -506,7 +566,7 @@ export class Snap {
 											},
 										],
 										async (target, elem, originalElem) => {
-											const cntrlr = await this.createController(
+											const cntrlr = await this._createController(
 												ControllerTypes.autocomplete,
 												controller.config,
 												controller.services,
@@ -532,6 +592,11 @@ export class Snap {
 
 				case 'finder': {
 					this.config.controllers[type].forEach((controller, index) => {
+						if (this._controllerPromises[controller.config.id]) {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -557,7 +622,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(
+									this._createController(
 										ControllerTypes.finder,
 										controller.config,
 										controller.services,
@@ -577,7 +642,7 @@ export class Snap {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
 									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(
+										const cntrlr = await this._createController(
 											ControllerTypes.finder,
 											controller.config,
 											controller.services,
@@ -602,6 +667,11 @@ export class Snap {
 
 				case 'recommendation': {
 					this.config.controllers[type].forEach((controller, index) => {
+						if (this._controllerPromises[controller.config.id]) {
+							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
+							return;
+						}
+
 						this._controllerPromises[controller.config.id] = new Promise((resolve) => {
 							try {
 								let searched = false;
@@ -627,7 +697,7 @@ export class Snap {
 								};
 
 								if (!controller?.targeters || controller?.targeters.length === 0) {
-									this.createController(
+									this._createController(
 										ControllerTypes.recommendation,
 										controller.config,
 										controller.services,
@@ -647,7 +717,7 @@ export class Snap {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
 									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
-										const cntrlr = await this.createController(
+										const cntrlr = await this._createController(
 											ControllerTypes.recommendation,
 											controller.config,
 											controller.services,
