@@ -25,8 +25,8 @@ const defaultConfig: FinderControllerConfig = {
 
 export class FinderController extends AbstractController {
 	public type = ControllerTypes.finder;
-	public store: FinderStore;
-	config: FinderControllerConfig;
+	declare store: FinderStore;
+	declare config: FinderControllerConfig;
 
 	constructor(
 		config: FinderControllerConfig,
@@ -34,9 +34,6 @@ export class FinderController extends AbstractController {
 		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
-
-		this.store = store as FinderStore;
-		this.config = config;
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);

@@ -45,11 +45,16 @@ export class RecommendationController extends AbstractController {
 	public type = ControllerTypes.recommendation;
 	public store: RecommendationStore;
 	config: RecommendationControllerConfig;
-	events = {
-		click: undefined as BeaconEvent | undefined,
-		impression: undefined as BeaconEvent | undefined,
-		render: undefined as BeaconEvent | undefined,
-		product: {} as BeaconEvent | undefined,
+	events: {
+		click?: BeaconEvent;
+		impression?: BeaconEvent;
+		render?: BeaconEvent;
+		product?: Record<string, { impression?: BeaconEvent; render?: BeaconEvent }>;
+	} = {
+		click: undefined,
+		impression: undefined,
+		render: undefined,
+		product: {},
 	};
 
 	constructor(
@@ -119,12 +124,7 @@ export class RecommendationController extends AbstractController {
 				return event;
 			},
 			impression: (result): BeaconEvent | undefined => {
-				if (
-					!this.store.profile.tag ||
-					!result ||
-					!this.events.impression ||
-					(this.events.product && this.events.product[result.id as keyof BeaconEvent]?.impression)
-				)
+				if (!this.store.profile.tag || !result || !this.events.impression || (this.events.product && this.events.product[result.id]?.impression))
 					return;
 				const payload: BeaconPayload = {
 					type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
@@ -147,13 +147,13 @@ export class RecommendationController extends AbstractController {
 					pid: this.events.impression.id,
 				};
 
-				this.events.product![result.id as keyof BeaconEvent] = this.events.product![result.id as keyof BeaconEvent] || {};
-				const event = (this.events.product![result.id as keyof BeaconEvent].impression = this.tracker.track.event(payload));
+				this.events.product![result.id] = this.events.product![result.id] || {};
+				const event = (this.events.product![result.id].impression = this.tracker.track.event(payload));
 				this.eventManager.fire('track.product.impression', { controller: this, result, trackEvent: event });
 				return event;
 			},
 			render: (result): BeaconEvent | undefined => {
-				if (!this.store.profile.tag || !result || !this.events.render || this.events.product![result.id as keyof BeaconEvent]?.render) return;
+				if (!this.store.profile.tag || !result || !this.events.render || this.events.product![result.id]?.render) return;
 				const payload: BeaconPayload = {
 					type: BeaconType.PROFILE_PRODUCT_RENDER,
 					category: BeaconCategory.RECOMMENDATIONS,
@@ -175,8 +175,8 @@ export class RecommendationController extends AbstractController {
 					pid: this.events.render.id,
 				};
 
-				this.events.product![result.id as keyof BeaconEvent] = this.events.product![result.id as keyof BeaconEvent] || {};
-				const event = (this.events.product![result.id as keyof BeaconEvent].render = this.tracker.track.event(payload));
+				this.events.product![result.id] = this.events.product![result.id] || {};
+				const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
 				this.eventManager.fire('track.product.render', { controller: this, result, trackEvent: event });
 				return event;
 			},

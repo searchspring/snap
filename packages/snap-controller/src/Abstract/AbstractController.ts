@@ -18,7 +18,7 @@ export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
-	public client: Client | MockClient;
+	public client: Client;
 	public store: AbstractStore;
 	public urlManager: UrlManager;
 	public eventManager: EventManager;

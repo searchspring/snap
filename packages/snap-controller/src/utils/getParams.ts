@@ -1,5 +1,4 @@
-import { UrlState } from '@searchspring/snap-url-manager';
-import type { ImmutableObject } from 'seamless-immutable';
+import type { ImmutableUrlState } from '@searchspring/snap-url-manager';
 
 // translate state to snAPI params
 type searchParams = {
@@ -36,7 +35,7 @@ type searchParams = {
 	};
 };
 
-export function getSearchParams(state: ImmutableObject<UrlState>): Record<string, any> {
+export function getSearchParams(state: ImmutableUrlState): Record<string, any> {
 	const params: searchParams = {};
 
 	if (state.tag) {

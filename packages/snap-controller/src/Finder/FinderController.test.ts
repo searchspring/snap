@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { FinderStore } from '@searchspring/snap-store-mobx';
+import { FinderStore, StoreServices } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -8,6 +8,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
+import { FinderControllerConfig } from '../types';
 import { FinderController } from './FinderController';
 
 const globals = { siteId: 'ga9kq2' };
@@ -38,7 +39,7 @@ const configs = [
 describe('Finder Controller', () => {
 	configs.forEach((baseConfig) => {
 		const isHierarchy = 'levels' in baseConfig.fields[0];
-		let urlManager: UrlManager, services: any, config: any;
+		let urlManager: UrlManager, services: StoreServices, config: FinderControllerConfig;
 
 		describe(`${isHierarchy ? 'Hierarchy' : 'Non-Hierarchy'} Type`, () => {
 			beforeEach(() => {
@@ -186,7 +187,7 @@ describe('Finder Controller', () => {
 					controller.init();
 					await controller.search();
 
-					expect(controller.store.selections.length).toBe(config.fields[0].levels.length);
+					expect(controller.store.selections.length).toBe(config.fields[0].levels?.length);
 
 					controller.store.selections.forEach((selection, index) => {
 						expect(selection.display).toBe('hierarchy');

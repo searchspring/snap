@@ -47,8 +47,8 @@ type AutocompleteTrackMethods = {
 export class AutocompleteController extends AbstractController {
 	public type = ControllerTypes.autocomplete;
 	public store: AutocompleteStore;
-	public config: AutocompleteControllerConfig;
-	public storage: StorageStore;
+	declare config: AutocompleteControllerConfig;
+	declare storage: StorageStore;
 
 	constructor(
 		config: AutocompleteControllerConfig,
@@ -57,9 +57,8 @@ export class AutocompleteController extends AbstractController {
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
 
-		this.store = store as AutocompleteStore;
 		// deep merge config with defaults
-		this.config = deepmerge(defaultConfig, config);
+		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
 
 		// get current search from url before detaching
@@ -257,8 +256,8 @@ export class AutocompleteController extends AbstractController {
 				});
 			},
 			formSubmit: async (e: React.FormEvent<HTMLInputElement>): Promise<void> => {
-				const form = e.target;
-				const input: HTMLInputElement | null = (form as HTMLFormElement).querySelector(`input[${INPUT_ATTRIBUTE}]`);
+				const form = e.target as HTMLFormElement;
+				const input: HTMLInputElement | null = form.querySelector(`input[${INPUT_ATTRIBUTE}]`);
 
 				e.preventDefault();
 
@@ -273,7 +272,7 @@ export class AutocompleteController extends AbstractController {
 
 					if (this.store.search.originalQuery) {
 						input!.value = this.store.search.query.string;
-						addHiddenFormInput(form as HTMLFormElement, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
+						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 					}
 				}
 
@@ -294,7 +293,7 @@ export class AutocompleteController extends AbstractController {
 					}
 				}
 
-				(form as HTMLFormElement).submit();
+				form.submit();
 			},
 			keyUp: (e: KeyboardEvent): void => {
 				// ignore enter and escape keys

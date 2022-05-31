@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Client } from '@searchspring/snap-client';
 import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
+import { EventManager, Next } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -137,8 +137,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 		const initfn = jest.fn();
-		const paramPlugin = (controller: any, ...params: any) => {
-			controller.on('init', async ({ controller }: any, next: any) => {
+		const paramPlugin = (controller: SearchController, ...params: any) => {
+			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -166,20 +166,20 @@ describe('Search Controller', () => {
 		});
 		const initfn = jest.fn();
 
-		const initMiddleware = async (eventData: any, next: any) => {
+		const initMiddleware = async (eventData: any, next: Next) => {
 			initfn();
 			await next();
 		};
 
-		const plugin = (controller: any) => {
-			controller.on('init', async ({ controller }: any, next: any) => {
+		const plugin = (controller: SearchController) => {
+			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
 				initfn();
 				await next();
 			});
 		};
 
-		const paramPlugin = (controller: any, ...params: any) => {
-			controller.on('init', async ({ controller }: any, next: any) => {
+		const paramPlugin = (controller: SearchController, ...params: any) => {
+			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -218,7 +218,7 @@ describe('Search Controller', () => {
 		const spy = jest.spyOn(controller.log, 'warn');
 
 		const plugin = (controller: any) => {
-			controller.on('init', async ({ controller }: any, next: any) => {
+			controller.on('init', async ({ controller }: { controller: SearchController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -243,7 +243,7 @@ describe('Search Controller', () => {
 		spy.mockClear();
 
 		// test if middleware is not an array (should be converted to an array internally)
-		const initMiddleware = async (eventData: any, next: any) => {
+		const initMiddleware = async (eventData: any, next: Next) => {
 			initfn();
 			await next();
 		};
