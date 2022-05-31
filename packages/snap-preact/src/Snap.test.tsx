@@ -11,7 +11,7 @@ import type {
 	RecommendationControllerConfig,
 } from '@searchspring/snap-controller';
 
-import { Snap, BRANCH_COOKIE } from './Snap';
+import { Snap, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
 import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
 
 const baseConfig = {
@@ -76,9 +76,14 @@ describe('Snap Preact', () => {
 		expect(snap.tracker).toBeDefined();
 
 		// properties are defined
+		// @ts-ignore - accessing private property
 		expect(snap.config).toStrictEqual(baseConfig);
 		expect(snap.context).toStrictEqual({});
 		expect(snap.controllers).toStrictEqual({});
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('production');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('production');
 
 		// @ts-ignore - checking private property
 		expect(snap.client.globals.siteId).toBe(baseConfig.client.globals.siteId);
@@ -119,6 +124,19 @@ describe('Snap Preact', () => {
 		expect(spy).toHaveBeenCalledWith(`...loading build... '${branchParam}'`);
 
 		cookies.unset(BRANCH_COOKIE);
+	});
+
+	it('has mode setting functionality via cookie', () => {
+		cookies.set(DEV_COOKIE, '1', 'Lax', 3600000);
+
+		const snap = new Snap(baseConfig);
+
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('development');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('development');
+
+		cookies.unset(DEV_COOKIE);
 	});
 
 	it('exposes itself globally on the window', () => {
@@ -229,6 +247,38 @@ describe('Snap Preact', () => {
 
 			expect(snap.controllers.searchOne).toBeDefined();
 			expect(snap.controllers.searchTwo).toBeDefined();
+		});
+
+		it(`logs an error when attempting to create search controller with the same id`, () => {
+			const searchConfig = {
+				...baseConfig,
+				controllers: {
+					search: [
+						{
+							config: {
+								id: 'search',
+							},
+						},
+						{
+							config: {
+								id: 'search',
+							},
+						},
+					],
+				},
+			};
+
+			const logger = new Logger();
+			const spy = jest.spyOn(logger, 'error');
+
+			// valid config - no errors logged
+			new Snap(searchConfig, { logger });
+
+			expect(spy).toHaveBeenCalledWith(`Controller with id 'search' is already defined`);
+
+			const snap = new Snap(searchConfig);
+
+			expect(snap.controllers.search).toBeDefined();
 		});
 
 		it(`does not run the controller 'search' method when a targeter is NOT found`, async () => {

@@ -6,7 +6,8 @@ import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/sn
 import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
-import { Logger, LogMode } from '@searchspring/snap-logger';
+import { Logger } from '@searchspring/snap-logger';
+import { AppMode } from '@searchspring/snap-toolbox';
 import { MockClient } from '@searchspring/snap-shared';
 
 import { RecommendationController } from './RecommendationController';
@@ -59,8 +60,10 @@ describe('Recommendation Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		controller.environment = LogMode.DEVELOPMENT;
-		expect(controller.environment).toBe('development');
+		controller.setMode(AppMode.development);
+
+		// @ts-ignore - ignoring protected variable to ensure internal mode has switched
+		expect(controller.mode).toBe('development');
 
 		const params = controller.params;
 		expect(params.test).toBeTruthy();

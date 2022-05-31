@@ -4,7 +4,9 @@ import '@testing-library/jest-dom/extend-expect';
 import { waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
-import { Snap, BRANCH_COOKIE } from './Snap';
+import { cookies } from '@searchspring/snap-toolbox';
+
+import { Snap, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
 
 const baseConfig = {
 	client: {
@@ -39,16 +41,16 @@ describe('Snap Preact Integration', () => {
 			// return "Last-Modified" date
 			return `Fri, ${modifiedDate}`;
 		});
+	});
 
+	beforeEach(() => {
 		delete window.location;
 
 		// @ts-ignore
 		window.location = {
 			href: 'https://www.merch.com?branch=branch',
 		};
-	});
 
-	beforeEach(() => {
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
 		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
 	});
@@ -110,8 +112,10 @@ describe('Snap Preact Integration', () => {
 		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
 	});
 
-	it(`takes the branch param from the URL and add a new script block`, async () => {
+	it(`takes the branch param from the URL and adds a new script block`, async () => {
 		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
+
+		const snap = new Snap(baseConfig);
 
 		// handle mock XHR of bundle file
 		expect(xhrMock.open).toBeCalledWith('HEAD', url, true);
@@ -121,6 +125,46 @@ describe('Snap Preact Integration', () => {
 			const overrideElement = document.querySelector(`script[${BRANCH_COOKIE}]`);
 			expect(overrideElement).toBeInTheDocument();
 			expect(overrideElement).toHaveAttribute('src', url);
+
+			const branchCookie = cookies.get(BRANCH_COOKIE);
+			expect(branchCookie).toBe('branch');
+			cookies.unset(BRANCH_COOKIE);
 		});
+	});
+
+	it(`takes the dev param from the URL and sets the mode`, async () => {
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com?dev',
+		};
+
+		const snap = new Snap(baseConfig);
+
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('development');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('development');
+
+		const devCookie = cookies.get(DEV_COOKIE);
+		expect(devCookie).toBe('1');
+		cookies.unset(DEV_COOKIE);
+	});
+
+	it(`takes the dev param from the URL and sets the mode (production)`, async () => {
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com?dev=false',
+		};
+
+		const snap = new Snap(baseConfig);
+
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('production');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('production');
+
+		const devCookie = cookies.get(DEV_COOKIE);
+		expect(devCookie).toBeFalsy();
+		cookies.unset(DEV_COOKIE);
 	});
 });

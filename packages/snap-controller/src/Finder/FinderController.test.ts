@@ -80,7 +80,6 @@ describe('Finder Controller', () => {
 				/**
 				 * Create a new controller with the same id to simulate a new page load
 				 */
-				delete window.searchspring.controller[config.id];
 
 				const controller2 = new FinderController(config, {
 					client: new MockClient(globals, {}),
