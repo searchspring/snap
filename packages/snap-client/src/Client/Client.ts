@@ -104,8 +104,8 @@ export class Client {
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
-					origin: this.config.search?.api?.origin,
-					cache: this.config.search?.cache,
+					origin: this.config.finder?.api?.origin,
+					cache: this.config.finder?.cache,
 				})
 			),
 			suggest: new SuggestAPI(
