@@ -119,7 +119,6 @@ const config = {
 				Standard: () => Standard
 			},
 			config: {
-				branch: BRANCHNAME,
 				batched: true
 			},
 			selector: '',
@@ -136,21 +135,7 @@ const config = {
 
 `recommendation.context` - optional `Context` object to be used to set controller specific context. Defaults to the global context if no context prop is provided, or if one is provided, it is merged into the global context.
 
-`recommendation.config.branch` - required current git branch name. Defined via webpack during bundle build:
-
-```typescript
-const webpack = require('webpack');
-const childProcess = require('child_process');
-const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-
-module.exports = {
-	plugins: [
-		new webpack.DefinePlugin({
-			BRANCHNAME: `"${branchName}"`,
-		}),
-	],
-}
-```
+`recommendation.config.branch` - optional current git branch name - defaults to 'production'
 
 `recommendation.config.batched` - optional boolean (default: `true`) to batch multiple recommendations into a single network request
 
