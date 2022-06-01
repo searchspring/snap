@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import '@testing-library/jest-dom/extend-expect';
-import { waitFor } from '@testing-library/preact';
+import { cleanup, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Snap, BRANCH_COOKIE } from './Snap';
@@ -52,6 +52,8 @@ describe('Snap Preact Integration', () => {
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
 		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
 	});
+
+	afterEach(cleanup);
 
 	afterAll(() => jest.clearAllMocks);
 

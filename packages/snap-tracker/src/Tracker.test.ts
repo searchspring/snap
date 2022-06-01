@@ -122,7 +122,7 @@ describe('Script Block Tracking', () => {
 		const consoleError = jest.spyOn(console, 'error');
 
 		await new Promise((r) => setTimeout(r));
-		expect(consoleError).toHaveBeenCalledTimes(1);
+		expect(consoleError).toHaveBeenCalled();
 
 		consoleError.mockRestore();
 	});

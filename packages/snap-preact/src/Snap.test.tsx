@@ -1,4 +1,7 @@
 import 'whatwg-fetch';
+
+import { cleanup } from '@testing-library/preact';
+
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
@@ -39,6 +42,8 @@ describe('Snap Preact', () => {
 
 		document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-content"></div>`;
 	});
+
+	afterEach(cleanup);
 
 	it('throws if configuration is not provided', () => {
 		expect(() => {
