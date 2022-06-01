@@ -52,6 +52,7 @@ export type ProfileResponseModel = {
 	};
 };
 
+//TODO doesnt this exist in client types?
 export type RecommendCombinedRequestModel = {
 	tag: string;
 	siteId: string;

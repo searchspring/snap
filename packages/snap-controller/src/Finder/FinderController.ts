@@ -25,8 +25,8 @@ const defaultConfig: FinderControllerConfig = {
 
 export class FinderController extends AbstractController {
 	public type = ControllerTypes.finder;
-	public store: FinderStore;
-	config: FinderControllerConfig;
+	declare store: FinderStore;
+	declare config: FinderControllerConfig;
 
 	constructor(
 		config: FinderControllerConfig,
@@ -97,7 +97,7 @@ export class FinderController extends AbstractController {
 			await this.eventManager.fire('beforeFind', {
 				controller: this,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			if (err?.message == 'cancelled') {
 				this.log.warn(`'beforeFind' middleware cancelled`);
 			} else {
@@ -130,7 +130,7 @@ export class FinderController extends AbstractController {
 					controller: this,
 					request: params,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
 					return;
@@ -143,11 +143,13 @@ export class FinderController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			const [meta, response] = await this.client.finder(params);
+			// @ts-ignore
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
+				// @ts-ignore
 				response.meta = meta;
 			}
 
@@ -162,7 +164,7 @@ export class FinderController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
@@ -177,6 +179,7 @@ export class FinderController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
+			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -187,7 +190,7 @@ export class FinderController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();
