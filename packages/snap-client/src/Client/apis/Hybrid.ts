@@ -38,6 +38,14 @@ export class HybridAPI extends API {
 		return transformSearchResponse(legacyData, requestParameters);
 	}
 
+	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
+
+		const legacyData = await this.requesters.legacy.getFinder(legacyRequestParameters);
+
+		return transformSearchResponse(legacyData, requestParameters);
+	}
+
 	async getAutocomplete(requestParameters: AutocompleteRequestModel): Promise<AutocompleteResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
