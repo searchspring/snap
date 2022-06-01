@@ -419,7 +419,7 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.search = jest.fn(() => {
+				controller.client.finder = jest.fn(() => {
 					throw 429;
 				});
 
@@ -443,7 +443,7 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.search = jest.fn(() => {
+				controller.client.finder = jest.fn(() => {
 					throw 500;
 				});
 

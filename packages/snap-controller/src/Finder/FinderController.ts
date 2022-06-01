@@ -142,7 +142,7 @@ export class FinderController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.search(params);
+			const [meta, response] = await this.client.finder(params);
 			// @ts-ignore
 			if (!response.meta) {
 				/**
