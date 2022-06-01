@@ -44,8 +44,8 @@ type SearchTrackMethods = {
 
 export class SearchController extends AbstractController {
 	public type = ControllerTypes.search;
-	public store: SearchStore;
-	config: SearchControllerConfig;
+	declare store: SearchStore;
+	declare config: SearchControllerConfig;
 	storage: StorageStore;
 
 	constructor(
@@ -54,9 +54,6 @@ export class SearchController extends AbstractController {
 		context?: ContextVariables
 	) {
 		super(config, { client, store, urlManager, eventManager, profiler, logger, tracker }, context);
-
-		this.store = store as SearchStore;
-		this.config = config;
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);

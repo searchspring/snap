@@ -43,8 +43,9 @@ const defaultConfig: RecommendationControllerConfig = {
 
 export class RecommendationController extends AbstractController {
 	public type = ControllerTypes.recommendation;
-	public store: RecommendationStore;
-	config: RecommendationControllerConfig;
+	declare store: RecommendationStore;
+	declare config: RecommendationControllerConfig;
+
 	events: {
 		click?: BeaconEvent;
 		impression?: BeaconEvent;
@@ -67,9 +68,6 @@ export class RecommendationController extends AbstractController {
 		if (!config.tag) {
 			throw new Error(`Invalid config passed to RecommendationController. The "tag" attribute is required.`);
 		}
-
-		this.store = store as RecommendationStore;
-		this.config = config;
 
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
