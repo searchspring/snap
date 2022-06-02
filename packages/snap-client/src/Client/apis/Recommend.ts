@@ -114,13 +114,18 @@ export class RecommendAPI extends API {
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		let { tags, limits, categories, ...otherParams } = parameters;
 
-		//set up batch keys and deferred promises
-		let key = hashParams(otherParams as RecommendRequestModel);
-		if ('batched' in otherParams) {
-			if (otherParams.batched) {
-				key = otherParams.siteId;
+		const getKey = (parameters: RecommendRequestModel) => {
+			let key = hashParams(parameters as RecommendRequestModel);
+			if ('batched' in parameters) {
+				if (parameters.batched) {
+					key = parameters.siteId;
+				}
 			}
-		}
+			return key;
+		};
+
+		//set up batch keys and deferred promises
+		let key = getKey(otherParams as RecommendRequestModel);
 
 		this.batches[key] = this.batches[key] || { request: { tags: [], limits: [] }, deferreds: [] };
 
@@ -165,14 +170,9 @@ export class RecommendAPI extends API {
 				if (!limits) limits = 20;
 				const [tag] = tags || [];
 
-				let key = hashParams(otherParams as RecommendRequestModel);
-				if ('batched' in otherParams) {
-					if (otherParams.batched) {
-						key = otherParams.siteId;
-					}
-					delete otherParams.batched; // remove from request parameters
-				}
+				let key = getKey(otherParams as RecommendRequestModel);
 
+				delete otherParams.batched; // remove from request parameters
 				delete otherParams.order; // remove from request parameters
 
 				let paramBatch = this.batches[key];
