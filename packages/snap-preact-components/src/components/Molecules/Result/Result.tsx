@@ -155,7 +155,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							href={core.url}
 							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 								onClick && onClick(e);
-								controller?.track?.product?.click(e, result);
+								controller?.track?.product?.click(e as any, result);
 							}}
 						>
 							{!hideBadge && onSale && <Badge {...subProps.badge} />}
@@ -169,7 +169,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									href={core.url}
 									onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 										onClick && onClick(e);
-										controller?.track?.product?.click(e, result);
+										controller?.track?.product?.click(e as any, result);
 									}}
 									dangerouslySetInnerHTML={{
 										__html: displayName,

@@ -67,6 +67,10 @@ export type ClientConfig = {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
+	finder?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
 	recommend?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
@@ -231,6 +235,21 @@ const client = new Client(globals, clientConfig);
 const results = await client.trending({
   siteId: 'abc123',
   limit: 5
+});
+```
+
+## `finder` method
+Makes a request to the Searchspring finder API and returns a promise.
+
+```typescript
+const client = new Client(globals, clientConfig);
+const [meta, results] = await client.finder({
+  filters: [{
+    type: "value",
+    field: "color",
+    background: false,
+    value: "red",
+  }]
 });
 ```
 

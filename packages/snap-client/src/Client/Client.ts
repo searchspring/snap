@@ -43,6 +43,11 @@ const defaultConfig: ClientConfig = {
 			// origin: 'https://snapi.kube.searchspring.io',
 		},
 	},
+	finder: {
+		api: {
+			// origin: 'https://snapi.kube.searchspring.io',
+		},
+	},
 	suggest: {
 		api: {
 			// origin: 'https://snapi.kube.searchspring.io',
@@ -59,6 +64,7 @@ export class Client {
 		search: HybridAPI;
 		recommend: RecommendAPI;
 		suggest: SuggestAPI;
+		finder: HybridAPI;
 	};
 
 	constructor(globals: ClientGlobals, config: ClientConfig = {}) {
@@ -94,6 +100,12 @@ export class Client {
 					cache: this.config.search?.cache,
 				})
 			),
+			finder: new HybridAPI(
+				new ApiConfiguration({
+					origin: this.config.finder?.api?.origin,
+					cache: this.config.finder?.cache,
+				})
+			),
 			suggest: new SuggestAPI(
 				new ApiConfiguration({
 					origin: this.config.suggest?.api?.origin,
@@ -124,6 +136,12 @@ export class Client {
 		params = deepmerge(this.globals, params);
 
 		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.search.getSearch(params)]);
+	}
+
+	async finder(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {
+		params = deepmerge(this.globals, params);
+
+		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.finder.getFinder(params)]);
 	}
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {

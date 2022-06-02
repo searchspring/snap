@@ -9,6 +9,8 @@ import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
 import Readme from '../Filter/readme.md';
 
+import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+
 export default {
 	title: `Molecules/Filter`,
 	component: Filter,
@@ -107,10 +109,11 @@ const snapInstance = Snapify.search({
 				type: 'value',
 				field: 'color_family',
 				value: 'Blue',
-			},
+			} as SearchRequestModelFilterValue,
 		],
 	},
 });
+
 const Template = (args: FilterProps, { loaded: { controller } }) => (
 	<Filter
 		{...args}

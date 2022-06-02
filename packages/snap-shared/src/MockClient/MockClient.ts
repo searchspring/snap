@@ -29,6 +29,12 @@ export class MockClient extends Client {
 		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
 	}
 
+	async finder() {
+		const searchData = this.mockData.search();
+
+		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+	}
+
 	async autocomplete() {
 		const autocompleteData = this.mockData.autocomplete();
 

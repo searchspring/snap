@@ -3,7 +3,10 @@ import type { EventManager, Middleware, Next } from '@searchspring/snap-event-ma
 
 import type { Client } from '@searchspring/snap-client';
 import type {
-	AbstractStore,
+	SearchStore,
+	AutocompleteStore,
+	FinderStore,
+	RecommendationStore,
 	StoreConfig,
 	SearchStoreConfig,
 	FinderStoreConfig,
@@ -26,7 +29,7 @@ declare global {
 
 export type NextEvent = Next;
 
-export type PluginFunction = (cntrlr: AbstractController, ...args) => Promise<void>;
+export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void>;
 export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
 
 export type BeforeSearchObj = {
@@ -54,7 +57,7 @@ export enum ControllerTypes {
 
 export type ControllerServices = {
 	client: Client;
-	store: AbstractStore;
+	store: SearchStore | AutocompleteStore | FinderStore | RecommendationStore;
 	urlManager: UrlManager;
 	eventManager: EventManager;
 	profiler: Profiler;
