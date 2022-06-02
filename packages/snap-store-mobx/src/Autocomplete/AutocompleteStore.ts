@@ -12,15 +12,15 @@ import type { AutocompleteStoreConfig, StoreServices } from '../types';
 
 export class AutocompleteStore extends AbstractStore {
 	public services: StoreServices;
-	public meta?: MetaResponseModel;
-	public merchandising?: MerchandisingStore;
-	public search?: QueryStore;
-	public terms?: TermStore;
-	public facets?: FacetStore;
-	public filters?: FilterStore;
-	public results?: ResultStore;
-	public pagination?: PaginationStore;
-	public sorting?: SortingStore;
+	public meta!: MetaResponseModel;
+	public merchandising!: MerchandisingStore;
+	public search!: QueryStore;
+	public terms!: TermStore;
+	public facets!: FacetStore;
+	public filters!: FilterStore;
+	public results!: ResultStore;
+	public pagination!: PaginationStore;
+	public sorting!: SortingStore;
 	public state: StateStore;
 	public storage: StorageStore;
 	public trending: TrendingStore;
@@ -53,13 +53,13 @@ export class AutocompleteStore extends AbstractStore {
 		});
 	}
 
-	reset(): void {
+	public reset(): void {
 		this.state.reset();
 		this.update();
 		this.resetTrending();
 	}
 
-	resetTrending(): void {
+	public resetTrending(): void {
 		if (this.trending?.length) {
 			this.trending.forEach((term) => {
 				term.active = false;
@@ -67,13 +67,13 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	resetTerms(): void {
+	public resetTerms(): void {
 		this.terms?.forEach((term) => {
 			term.active = false;
 		});
 	}
 
-	setService(name: keyof StoreServices, service: UrlManager): void {
+	public setService(name: keyof StoreServices, service: UrlManager): void {
 		if (this.services[name] && service) {
 			this.services[name] = service;
 			if (name === 'urlManager') {
@@ -82,7 +82,7 @@ export class AutocompleteStore extends AbstractStore {
 		}
 	}
 
-	updateTrendingTerms(data: TrendingResponseModel): void {
+	public updateTrendingTerms(data: TrendingResponseModel): void {
 		this.trending = new TrendingStore(
 			this.services,
 			data,
@@ -93,7 +93,7 @@ export class AutocompleteStore extends AbstractStore {
 		);
 	}
 
-	update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
 		if (!data) return;
 		this.error = undefined;
 		this.loaded = !!data.pagination;

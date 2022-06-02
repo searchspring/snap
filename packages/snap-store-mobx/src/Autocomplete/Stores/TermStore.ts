@@ -46,10 +46,10 @@ export class TermStore extends Array<Term> {
 }
 
 export class Term {
-	active: boolean;
-	value: string;
-	preview: () => void;
-	url: UrlManager;
+	public active: boolean;
+	public value: string;
+	public preview: () => void;
+	public url: UrlManager;
 
 	constructor(services: StoreServices, term: { active: boolean; value: string }, terms: Term[], resetTerms: () => void, rootState: StateStore) {
 		this.active = term.active;

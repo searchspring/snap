@@ -5,17 +5,17 @@ import type { SearchResponseModelPagination } from '@searchspring/snapi-types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 
 export class PaginationStore {
-	private services: StoreServices;
-	page: number;
-	pageSize: number;
-	pageSizeOptions: {
+	public services: StoreServices;
+	public page: number;
+	public pageSize: number;
+	public pageSizeOptions: {
 		label: string;
 		value: number;
 	}[];
-	defaultPageSize: number;
-	totalResults: number;
-	totalPages: number;
-	controllerConfig: SearchStoreConfig;
+	public defaultPageSize: number;
+	public totalResults: number;
+	public totalPages: number;
+	public controllerConfig: SearchStoreConfig;
 
 	constructor(
 		config: SearchStoreConfig,
@@ -70,14 +70,14 @@ export class PaginationStore {
 		});
 	}
 
-	get begin(): number {
+	public get begin(): number {
 		if (this.controllerConfig.settings?.infinite) {
 			return 1;
 		}
 		return this.pageSize * (this.page - 1) + 1;
 	}
 
-	get end(): number {
+	public get end(): number {
 		if (this.pageSize * this.page > this.totalResults) {
 			return this.totalResults;
 		}
@@ -85,32 +85,32 @@ export class PaginationStore {
 		return this.pageSize * this.page;
 	}
 
-	get multiplePages(): boolean {
+	public get multiplePages(): boolean {
 		return this.pageSize < this.totalResults;
 	}
 
-	get current(): Page {
+	public get current(): Page {
 		return new Page(this.services, {
 			number: this.page,
 			active: true,
 		});
 	}
 
-	get first(): Page {
+	public get first(): Page {
 		return new Page(this.services, {
 			number: 1,
 			active: this.page == 1,
 		});
 	}
 
-	get last(): Page {
+	public get last(): Page {
 		return new Page(this.services, {
 			number: this.totalPages,
 			active: this.totalPages == this.page,
 		});
 	}
 
-	get next(): Page | void {
+	public get next(): Page | undefined {
 		if (this.page < this.totalPages) {
 			return new Page(this.services, {
 				number: this.page + 1,
@@ -118,7 +118,7 @@ export class PaginationStore {
 		}
 	}
 
-	get previous(): Page | void {
+	public get previous(): Page | undefined {
 		if (this.page > 1) {
 			return new Page(this.services, {
 				number: this.page - 1,
@@ -126,7 +126,7 @@ export class PaginationStore {
 		}
 	}
 
-	getPages(min: number = 5, max?: number): Page[] {
+	public getPages(min: number = 5, max?: number): Page[] {
 		if (!Number.isInteger(min)) {
 			return [];
 		}
@@ -177,7 +177,7 @@ export class PaginationStore {
 		return pages;
 	}
 
-	setPageSize(num: number): void {
+	public setPageSize(num: number): void {
 		if (num) {
 			this.services.urlManager.remove('page').set('pageSize', num).go();
 		}
@@ -185,11 +185,11 @@ export class PaginationStore {
 }
 
 export class Page {
-	services: StoreServices;
-	number: number;
-	active: boolean;
-	url: UrlManager;
-	key: string;
+	public services: StoreServices;
+	public number: number;
+	public active: boolean;
+	public url: UrlManager;
+	public key: string;
 
 	constructor(
 		services: StoreServices,

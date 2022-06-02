@@ -135,25 +135,25 @@ export class SelectionStore extends Array<Selection | SelectionHierarchy> {
 }
 
 class SelectionBase {
-	state: FinderStoreState;
-	type: string;
-	field: string;
-	filtered = false;
-	collapsed = false;
-	display = '';
-	label: string;
-	multiple: string;
-	id: string;
-	disabled = false;
-	selected = '';
-	custom = {};
-	facet;
+	public state: FinderStoreState;
+	public type: string;
+	public field: string;
+	public filtered = false;
+	public collapsed = false;
+	public display = '';
+	public label: string;
+	public multiple: string;
+	public id: string;
+	public disabled = false;
+	public selected = '';
+	public custom = {};
+	public facet;
 
-	services: StoreServices;
-	loading: boolean;
-	config: FinderFieldConfig | LevelConfig;
-	data?: SearchResponseModelFacetValueAllOfValues[];
-	storage;
+	public services: StoreServices;
+	public loading: boolean;
+	public config: FinderFieldConfig | LevelConfig;
+	public data?: SearchResponseModelFacetValueAllOfValues[];
+	public storage;
 
 	constructor(
 		services: StoreServices,
@@ -194,7 +194,7 @@ class SelectionBase {
 		};
 	}
 
-	get values() {
+	public get values() {
 		const values = [...(this.data || [])];
 
 		values.unshift({
@@ -208,7 +208,7 @@ class SelectionBase {
 }
 
 class Selection extends SelectionBase {
-	config!: FinderFieldConfig;
+	public config!: FinderFieldConfig;
 
 	constructor(
 		services: StoreServices,
@@ -232,7 +232,7 @@ class Selection extends SelectionBase {
 		this.selected = this.disabled ? '' : storageData.selected || '';
 	}
 
-	select(value = '') {
+	public select(value = '') {
 		if (this.loading) return;
 
 		this.selected = value;
@@ -248,8 +248,8 @@ class Selection extends SelectionBase {
 }
 
 class SelectionHierarchy extends SelectionBase {
-	hierarchyDelimiter: string;
-	config!: LevelConfig;
+	public hierarchyDelimiter: string;
+	public config!: LevelConfig;
 
 	constructor(
 		services: StoreServices,
@@ -296,7 +296,7 @@ class SelectionHierarchy extends SelectionBase {
 		this.data = storageData[this.config.key]?.values || [];
 	}
 
-	select(value = '') {
+	public select(value = '') {
 		if (this.loading) return;
 
 		this.selected = value;

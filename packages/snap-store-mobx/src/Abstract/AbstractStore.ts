@@ -9,11 +9,13 @@ export abstract class AbstractStore {
 	public custom = {};
 	public loading = false;
 	public loaded = false;
-	public error?: {
-		code?: number;
-		type: ErrorType;
-		message: string;
-	};
+	public error:
+		| {
+				code?: number;
+				type?: ErrorType;
+				message?: string;
+		  }
+		| undefined;
 	public config: StoreConfigs;
 
 	constructor(config: StoreConfigs) {

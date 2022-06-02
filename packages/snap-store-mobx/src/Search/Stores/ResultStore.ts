@@ -10,7 +10,7 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 } from '@searchspring/snapi-types';
 
-export class ResultStore extends Array {
+export class ResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
@@ -39,21 +39,20 @@ export class ResultStore extends Array {
 				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
-		// @ts-ignore
 		super(...results);
 	}
 }
 
-class Banner {
-	type = 'banner';
-	id: string;
-	attributes: Record<string, unknown> = {};
-	mappings: SearchResponseModelResultMappings = {
+export class Banner {
+	public type = 'banner';
+	public id: string;
+	public attributes: Record<string, unknown> = {};
+	public mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
-	custom = {};
-	config: SearchResponseModelMerchandisingContentConfig;
-	value: string;
+	public custom = {};
+	public config: SearchResponseModelMerchandisingContentConfig;
+	public value: string;
 
 	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
 		this.id = 'ss-ib-' + banner.config!.position!.index;
@@ -68,15 +67,15 @@ class Banner {
 	}
 }
 
-class Product {
-	type = 'product';
-	id: string;
-	attributes: Record<string, unknown> = {};
-	mappings: SearchResponseModelResultMappings = {
+export class Product {
+	public type = 'product';
+	public id: string;
+	public attributes: Record<string, unknown> = {};
+	public mappings: SearchResponseModelResultMappings = {
 		core: {},
 	};
-	custom = {};
-	children?: Array<Child> = [];
+	public custom = {};
+	public children?: Array<Child> = [];
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id!;
@@ -111,10 +110,10 @@ class Product {
 }
 
 class Child {
-	type = 'child';
-	id: string;
-	attributes: Record<string, unknown> = {};
-	custom = {};
+	public type = 'child';
+	public id: string;
+	public attributes: Record<string, unknown> = {};
+	public custom = {};
 
 	constructor(services: StoreServices, result: SearchResponseModelResult) {
 		this.id = result.id!;

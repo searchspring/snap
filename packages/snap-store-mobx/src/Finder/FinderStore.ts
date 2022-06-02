@@ -9,15 +9,15 @@ import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreSt
 import { UrlManager } from '@searchspring/snap-url-manager';
 
 export class FinderStore extends AbstractStore {
-	services: StoreServices;
-	config!: FinderStoreConfig;
-	data?: SearchResponseModel & { meta: MetaResponseModel };
-	meta: MetaResponseModel = {};
-	storage: StorageStore;
-	persistedStorage?: StorageStore;
-	pagination?: PaginationStore;
-	selections?: SelectionStore;
-	state: FinderStoreState = {
+	public services: StoreServices;
+	public config!: FinderStoreConfig;
+	public data!: SearchResponseModel & { meta: MetaResponseModel };
+	public meta: MetaResponseModel = {};
+	public storage: StorageStore;
+	public persistedStorage!: StorageStore;
+	public pagination!: PaginationStore;
+	public selections!: SelectionStore;
+	public state: FinderStoreState = {
 		persisted: false,
 	};
 
@@ -47,13 +47,13 @@ export class FinderStore extends AbstractStore {
 		});
 	}
 
-	setService(name: keyof StoreServices, service: UrlManager): void {
+	public setService(name: keyof StoreServices, service: UrlManager): void {
 		if (this.services[name] && service) {
 			this.services[name] = service;
 		}
 	}
 
-	save(): void {
+	public save(): void {
 		if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
 			this.persistedStorage.set('config', this.config);
 			this.persistedStorage.set('data', this.data);
@@ -71,7 +71,7 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	reset = (): void => {
+	public reset = (): void => {
 		if (this.config.persist?.enabled) {
 			this.persistedStorage?.clear();
 			this.state.persisted = false;
@@ -84,7 +84,7 @@ export class FinderStore extends AbstractStore {
 		}
 	};
 
-	loadPersisted(): void {
+	public loadPersisted(): void {
 		if (this.config.persist?.enabled && this.persistedStorage && !this.loaded) {
 			const date = this.persistedStorage.get('date');
 			const data = this.persistedStorage.get('data');
@@ -104,7 +104,7 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
+	public update(data: SearchResponseModel & { meta: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;

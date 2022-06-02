@@ -8,15 +8,15 @@ import { StorageStore } from '../Storage/StorageStore';
 
 export class SearchStore extends AbstractStore {
 	public services: StoreServices;
-	public data?: SearchResponseModel & { meta: MetaResponseModel };
-	public meta?: MetaResponseModel;
-	public merchandising?: MerchandisingStore;
-	public search?: QueryStore;
-	public facets?: FacetStore;
-	public filters?: FilterStore;
-	public results?: ResultStore;
-	public pagination?: PaginationStore;
-	public sorting?: SortingStore;
+	public data!: SearchResponseModel & { meta: MetaResponseModel };
+	public meta!: MetaResponseModel;
+	public merchandising!: MerchandisingStore;
+	public search!: QueryStore;
+	public facets!: FacetStore;
+	public filters!: FilterStore;
+	public results!: ResultStore;
+	public pagination!: PaginationStore;
+	public sorting!: SortingStore;
 	public storage: StorageStore;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
@@ -56,7 +56,7 @@ export class SearchStore extends AbstractStore {
 	}
 	*/
 
-	reset(): void {
+	public reset(): void {
 		this.update();
 	}
 

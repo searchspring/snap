@@ -3,13 +3,13 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 
 export class StateStore {
-	locks: {
+	public locks: {
 		terms: Lock;
 		facets: Lock;
 	};
-	focusedInput: HTMLInputElement | undefined = undefined;
-	input = '';
-	url: UrlManager;
+	public focusedInput: HTMLInputElement | undefined = undefined;
+	public input = '';
+	public url: UrlManager;
 
 	constructor(services: StoreServices) {
 		this.locks = {
@@ -27,7 +27,7 @@ export class StateStore {
 		});
 	}
 
-	reset(): void {
+	public reset(): void {
 		this.input = '';
 		this.locks.terms.reset();
 		this.locks.facets.reset();
@@ -42,19 +42,19 @@ export class Lock {
 		this.state = this.startState = state;
 	}
 
-	reset(): void {
+	public reset(): void {
 		this.state = this.startState;
 	}
 
-	get locked(): boolean {
+	public get locked(): boolean {
 		return this.state;
 	}
 
-	lock(): void {
+	public lock(): void {
 		this.state = true;
 	}
 
-	unlock(): void {
+	public unlock(): void {
 		this.state = false;
 	}
 }

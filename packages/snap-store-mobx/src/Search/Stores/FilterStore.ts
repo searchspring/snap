@@ -38,17 +38,17 @@ export class FilterStore extends Array<RangeFilter | Filter> {
 }
 
 export class Filter {
-	label: string;
-	facet: {
+	public label: string;
+	public facet: {
 		field?: string;
 		label?: string;
 	};
-	value: {
+	public value: {
 		value?: string;
 		label?: string;
 	};
 
-	url: UrlManager;
+	public url: UrlManager;
 
 	constructor(services: StoreServices, filter: SearchResponseModelFilterValue, meta: MetaResponseModelFacet & MetaResponseModelFacetDefaults) {
 		this.facet = {
@@ -72,18 +72,18 @@ export class Filter {
 }
 
 export class RangeFilter {
-	label: string;
-	facet: {
+	public label: string;
+	public facet: {
 		field?: string;
 		label?: string;
 	};
-	value: {
+	public value: {
 		low?: number;
 		high?: number;
 		label: string;
 	};
 
-	url: UrlManager;
+	public url: UrlManager;
 
 	constructor(services: StoreServices, filter: SearchResponseModelFilterRange, meta: MetaResponseModelFacet & MetaResponseModelFacetDefaults) {
 		this.facet = {

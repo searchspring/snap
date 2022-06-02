@@ -222,9 +222,13 @@ describe('Storage Store', () => {
 		};
 		it('contains custom config', () => {
 			const storage = new StorageStore(config);
+			// @ts-ignore - private property
 			expect(storage.type).toBe(config.type);
+			// @ts-ignore - private property
 			expect(storage.expiration).toBe(config.cookie.expiration);
+			// @ts-ignore - private property
 			expect(storage.sameSite).toBe(config.cookie.sameSite);
+			// @ts-ignore - private property
 			expect(storage.key).toBe(config.key);
 		});
 	});

@@ -1,7 +1,8 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
+import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types';
 
-import { ResultStore } from './ResultStore';
+import { Banner, ResultStore } from './ResultStore';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -53,15 +54,17 @@ describe('ResultStore', () => {
 			expect(result.id).toBe(searchData.results && searchData.results[index].id);
 
 			// check core mappings
-			Object.keys(result.mappings.core).forEach((key) => {
-				// @ts-ignore
-				expect(result.mappings.core[key]).toBe(searchData.results[index].mappings?.core[key]);
+			Object.keys(result.mappings.core!).forEach((key) => {
+				const core = searchData.results && searchData.results[index]?.mappings?.core;
+				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
 			});
 
 			// check attributes
 			Object.keys(result.attributes).forEach((key) => {
-				// @ts-ignore
-				expect(result.attributes[key]).toStrictEqual(searchData.results[index].attributes[key]);
+				const attributes = searchData.results && searchData.results[index] && searchData.results[index].attributes;
+				const value = attributes && attributes[key];
+				expect(result.attributes[key]).toStrictEqual(value);
 			});
 		});
 	});
@@ -73,7 +76,7 @@ describe('ResultStore', () => {
 			const results = new ResultStore(searchConfig, services, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
-			expect(results[1].value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
+			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -84,9 +87,9 @@ describe('ResultStore', () => {
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			const inlineData = searchData.merchandising?.content?.inline!;
 			expect(results[2].id).toBe(`ss-ib-${inlineData[0].config?.position?.index}`);
-			expect(results[2].value).toBe(inlineData[0].value);
+			expect((results[2] as Banner).value).toBe(inlineData[0].value);
 			expect(results[3].id).toBe(`ss-ib-${inlineData[1].config?.position?.index}`);
-			expect(results[3].value).toBe(inlineData[1].value);
+			expect((results[3] as Banner).value).toBe(inlineData[1].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -97,7 +100,7 @@ describe('ResultStore', () => {
 			expect(results.length).toBe(1);
 			const inlineData = searchData.merchandising?.content?.inline!;
 			expect(results[0].id).toBe(`ss-ib-${inlineData[2].config?.position?.index}`);
-			expect(results[0].value).toBe(inlineData[2].value);
+			expect((results[0] as Banner).value).toBe(inlineData[2].value);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -143,7 +146,7 @@ describe('ResultStore', () => {
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
-			expect(results[0].value).toBe(searchData.merchandising.content.inline[2].value);
+			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
 		});
 	});
 });

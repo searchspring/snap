@@ -746,29 +746,25 @@ describe('Facet Store', () => {
 				});
 			});
 
-			// TODO: create mock data for this, strict mode not allowing setting multiple
-			// it.skip('has a removal URL for filter value when it is filtered/active with single select', () => {
-			// 	searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
+			it('has a removal URL for filter value when it is filtered/active with single select', () => {
+				searchData = mockData.updateConfig({ meta: 'priceBucketsPriceSingle' }).searchMeta('filteredRangeBucket');
 
-			// 	// @ts-ignore
-			// 	searchData.meta?.facets?.price?.multiple = 'single';
+				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+				const filteredRangeBucketFacet: ValueFacet = facets
+					.filter((facet) => facet.type == 'range-buckets' && facet.multiple == 'single' && facet.filtered)
+					.pop();
 
-			// 	const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-			// 	const filteredRangeBucketFacet: ValueFacet = facets
-			// 		.filter((facet) => facet.type == 'range-buckets' && facet.multiple == 'single' && facet.filtered)
-			// 		.pop();
+				const selectedFacetValue = filteredRangeBucketFacet.values.filter((value) => value?.filtered).pop();
+				expect(selectedFacetValue).toHaveProperty('low');
+				expect(selectedFacetValue).toHaveProperty('high');
 
-			// 	const selectedFacetValue = filteredRangeBucketFacet.values.filter((value) => value?.filtered).pop();
-			// 	expect(selectedFacetValue).toHaveProperty('low');
-			// 	expect(selectedFacetValue).toHaveProperty('high');
+				const unselectedFacetValue = filteredRangeBucketFacet.values.filter((value) => !value?.filtered).pop() as RangeValue;
 
-			// 	const unselectedFacetValue = filteredRangeBucketFacet.values.filter((value) => !value?.filtered).pop() as RangeValue;
-
-			// 	// to find a match only once
-			// 	expect(unselectedFacetValue?.url.href).toMatch(
-			// 		`filter:${filteredRangeBucketFacet.field}:${unselectedFacetValue?.low}:${unselectedFacetValue?.high}`
-			// 	);
-			// });
+				// to find a match only once
+				expect(unselectedFacetValue?.url.href).toMatch(
+					`filter:${filteredRangeBucketFacet.field}:${unselectedFacetValue?.low}:${unselectedFacetValue?.high}`
+				);
+			});
 		});
 	});
 

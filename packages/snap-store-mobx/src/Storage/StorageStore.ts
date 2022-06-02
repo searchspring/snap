@@ -5,11 +5,11 @@ const utils = {
 };
 
 export class StorageStore {
-	type: StorageType | null = null;
-	expiration = 31536000000; // one year (ms)
-	sameSite: string = 'Lax';
-	key = 'ss-storage';
-	state: Record<string, any> = {};
+	private type: StorageType | null = null;
+	private expiration = 31536000000; // one year (ms)
+	private sameSite: string = 'Lax';
+	private key = 'ss-storage';
+	public state: Record<string, any> = {};
 
 	constructor(config?: StorageConfig) {
 		if (config) {
@@ -57,7 +57,7 @@ export class StorageStore {
 		}
 	}
 
-	set(path: string, value: any): void {
+	public set(path: string, value: any): void {
 		const paths = path?.split('.');
 		let location = this.state;
 		paths?.forEach((p, i) => {
@@ -82,7 +82,7 @@ export class StorageStore {
 		}
 	}
 
-	get(path: string): any {
+	public get(path: string): any | undefined {
 		switch (this.type) {
 			case StorageType.SESSION:
 				const sessionData = window.sessionStorage.getItem(this.key);
@@ -108,15 +108,15 @@ export class StorageStore {
 			if (value && typeof value[p] != 'undefined') {
 				value = value[p];
 			} else {
-				// @ts-ignore
-				value = undefined;
+				value = {};
+				return;
 				break;
 			}
 		}
 		return value;
 	}
 
-	clear(): void {
+	public clear(): void {
 		switch (this.type) {
 			case StorageType.SESSION:
 				window.sessionStorage.removeItem(this.key);

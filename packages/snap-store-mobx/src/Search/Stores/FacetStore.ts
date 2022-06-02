@@ -80,15 +80,15 @@ export class FacetStore extends Array {
 }
 
 class Facet {
-	private services: StoreServices;
-	type!: string;
-	field!: string;
-	filtered = false;
-	custom = {};
-	collapsed = false;
-	display = '';
-	label = '';
-	storage: StorageStore;
+	public services: StoreServices;
+	public type!: string;
+	public field!: string;
+	public filtered = false;
+	public custom = {};
+	public collapsed = false;
+	public display = '';
+	public label = '';
+	public storage: StorageStore;
 
 	constructor(
 		services: StoreServices,
@@ -120,13 +120,13 @@ class Facet {
 		}
 	}
 
-	get clear() {
+	public get clear() {
 		return {
 			url: this.services.urlManager.remove('page').remove(`filter.${this.field}`),
 		};
 	}
 
-	toggleCollapse() {
+	public toggleCollapse() {
 		this.collapsed = !this.collapsed;
 
 		this.storage.set(`facets.${this.field}.collapsed`, this.collapsed);
@@ -134,17 +134,17 @@ class Facet {
 }
 
 export class RangeFacet extends Facet {
-	step?: number;
-	range?: SearchRequestModelFilterRangeAllOfValue = {
+	public step?: number;
+	public range?: SearchRequestModelFilterRangeAllOfValue = {
 		low: 0,
 		high: 0,
 	};
-	active?: SearchRequestModelFilterRangeAllOfValue = {
+	public active?: SearchRequestModelFilterRangeAllOfValue = {
 		low: 0,
 		high: 0,
 	};
-	formatSeparator: string;
-	formatValue: string;
+	public formatSeparator: string;
+	public formatValue: string;
 
 	constructor(
 		config: SearchStoreConfig | AutocompleteStoreConfig,
@@ -160,13 +160,7 @@ export class RangeFacet extends Facet {
 		const facetConfig = (config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {};
 		const shouldStore = typeof facetConfig?.storeRange == 'boolean' ? facetConfig.storeRange : config.settings?.facets?.storeRange;
 		const storedRange = shouldStore && this.storage.get(`facets.${this.field}.range`);
-		if (
-			storedRange &&
-			facet.filtered &&
-			facet.range?.low &&
-			facet.range?.high &&
-			(facet.range.low > storedRange.low || facet.range.high < storedRange.high)
-		) {
+		if (storedRange && facet.filtered && (facet.range?.low! > storedRange.low || facet.range?.high! < storedRange.high)) {
 			// range from API has shrunk
 			this.range = this.storage.get(`facets.${this.field}.range`);
 		} else {
@@ -192,15 +186,15 @@ export class RangeFacet extends Facet {
 }
 
 export class ValueFacet extends Facet {
-	values: Array<HierarchyValue | Value | RangeValue | undefined> = [];
+	public values: Array<HierarchyValue | Value | RangeValue | undefined> = [];
 
-	search = {
+	public search = {
 		input: '',
 	};
 
-	multiple!: MetaResponseModelFacetValueMultipleEnum;
+	public multiple!: MetaResponseModelFacetValueMultipleEnum;
 
-	overflow: {
+	public overflow: {
 		enabled: boolean;
 		limited: boolean;
 		limit: number;
@@ -308,7 +302,7 @@ export class ValueFacet extends Facet {
 		);
 	}
 
-	get refinedValues() {
+	public get refinedValues() {
 		let values = this.values || [];
 
 		if (this.search.input) {
@@ -325,13 +319,13 @@ export class ValueFacet extends Facet {
 }
 
 export class Value {
-	label!: string;
-	count!: number;
-	filtered!: boolean;
-	value!: string;
-	custom!: {};
-	url: UrlManager;
-	preview?: () => void;
+	public label!: string;
+	public count!: number;
+	public filtered!: boolean;
+	public value!: string;
+	public custom!: {};
+	public url: UrlManager;
+	public preview?: () => void;
 
 	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);
@@ -349,8 +343,8 @@ export class Value {
 }
 
 export class HierarchyValue extends Value {
-	level = 0;
-	history = false;
+	public level = 0;
+	public history = false;
 
 	constructor(
 		services: StoreServices,
@@ -380,13 +374,13 @@ export class HierarchyValue extends Value {
 }
 
 export class RangeValue {
-	label!: string;
-	count!: number;
-	filtered!: boolean;
-	low!: number;
-	high!: number;
-	custom!: {};
-	url: UrlManager;
+	public label!: string;
+	public count!: number;
+	public filtered!: boolean;
+	public low!: number;
+	public high!: number;
+	public custom!: {};
+	public url: UrlManager;
 
 	constructor(services: StoreServices, facet: ValueFacet, value: SearchResponseModelFacetValueAllOfValues) {
 		Object.assign(this, value);

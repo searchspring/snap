@@ -4,8 +4,8 @@ import type { SearchResponseModelSearch, AutocompleteResponseModelAllOfAutocompl
 import type { StoreServices } from '../../types';
 
 export class QueryStore {
-	query?: Query;
-	originalQuery?: Query;
+	public query?: Query;
+	public originalQuery?: Query;
 
 	constructor(services: StoreServices, autocomplete: AutocompleteResponseModelAllOfAutocomplete, search: SearchResponseModelSearch) {
 		const observables: Observables = {};
@@ -30,8 +30,8 @@ type Observables = {
 };
 
 class Query {
-	string: string;
-	url: UrlManager;
+	public string: string;
+	public url: UrlManager;
 
 	constructor(urlManager: UrlManager, query: string) {
 		this.string = query;

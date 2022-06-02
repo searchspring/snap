@@ -3,9 +3,9 @@ import type { StoreServices } from '../../types';
 import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
 
 export class ProfileStore {
-	tag!: string;
-	placement!: string;
-	display: Record<string, any> = {};
+	public tag!: string;
+	public placement!: string;
+	public display: Record<string, any> = {};
 
 	constructor(services: StoreServices, data?: RecommendCombinedResponseModel) {
 		if (!data?.profile?.tag) {
