@@ -1,4 +1,4 @@
-/*! For license information please see main.af350d7d.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.a1d35142.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -28933,8 +28933,7 @@
 							)),
 							(_this.config = cjs_default()(AutocompleteController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
-							_this.config.settings.initializeFromUrl &&
-								((_this.store.state.input = _this.urlManager.state.query || ''), _this.urlManager.reset().go()),
+							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
 							(_this.storage = new StorageStore({ type: StorageType.SESSION, key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on(
 								'beforeSearch',
@@ -35791,7 +35790,7 @@
 					function StateStore(services) {
 						StateStore_classCallCheck(this, StateStore),
 							(this.focusedInput = void 0),
-							(this.input = ''),
+							(this.input = void 0),
 							(this.locks = { terms: new Lock(!1), facets: new Lock(!1) }),
 							(this.url = services.urlManager),
 							(0, mobx_esm.rC)(this, { focusedInput: mobx_esm.LO, locks: mobx_esm.LO, input: mobx_esm.LO, reset: mobx_esm.aD });
@@ -35801,7 +35800,7 @@
 							{
 								key: 'reset',
 								value: function reset() {
-									(this.input = ''), this.locks.terms.reset(), this.locks.facets.reset();
+									(this.input = void 0), this.locks.terms.reset(), this.locks.facets.reset();
 								},
 							},
 						]),
@@ -38919,7 +38918,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.6' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.7' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39315,7 +39314,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.6')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.7')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
