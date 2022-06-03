@@ -145,7 +145,7 @@ describe('Autocomplete Component', () => {
 		//first term should be auto selected
 		expect(terms[0]).toHaveClass('ss__autocomplete__terms__option--active');
 
-		controller.client.mockData.updateConfig({ autocomplete: 'ac.hover.term' });
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.term' });
 
 		//now lets hover over the next term
 		userEvent.hover(termLinks[1]);
@@ -174,7 +174,7 @@ describe('Autocomplete Component', () => {
 		//shouldnt be active
 		expect(facetOptions[0]).not.toHaveClass('ss__facet-list-options__option--filtered');
 
-		controller.client.mockData.updateConfig({ autocomplete: 'ac.hover.facet' });
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.hover.facet' });
 
 		//now lets hover over one
 		userEvent.hover(facetOptions[0]);
@@ -271,7 +271,7 @@ describe('Autocomplete Component', () => {
 		//note this test assumes there is a banner available on that term.. which at this time there is
 		//todo use a mock for this
 		input.value = 'dress';
-		controller.client.mockData.updateConfig({ autocomplete: 'ac.banners' });
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
 		// to deal with timeoutDelay setTimeout used in focus event
 		await new Promise((r) => setTimeout(r, INPUT_DELAY + 100));
@@ -326,7 +326,7 @@ describe('Autocomplete Component', () => {
 			trendingTitle: 'Lorem Ipsum',
 		};
 
-		controller.client.mockData.updateConfig({ autocomplete: 'ac.query.blank' });
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.query.blank' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
@@ -413,7 +413,7 @@ describe('Autocomplete Component', () => {
 			noResultsSlot: <div>Lorem Ipsum</div>,
 		};
 
-		controller.client.mockData.updateConfig({ autocomplete: 'ac.noresults' });
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.noresults' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.value = 'efjii4iieiiedid';

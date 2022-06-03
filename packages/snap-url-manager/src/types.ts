@@ -1,5 +1,7 @@
 import type { ImmutableObject } from 'seamless-immutable';
 
+export type ImmutableUrlState = ImmutableObject<UrlState>;
+
 export enum RangeValueProperties {
 	LOW = 'low',
 	HIGH = 'high',

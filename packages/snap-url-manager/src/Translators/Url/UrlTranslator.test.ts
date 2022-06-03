@@ -170,6 +170,56 @@ describe('UrlTranslator', () => {
 			});
 		});
 
+		it('can set the type of all core params as hash and set a single param as query', () => {
+			const urlConfig = {
+				parameters: {
+					core: {
+						query: { name: 'keyword', type: ParamLocationType.query },
+					},
+				},
+				settings: {
+					coreType: ParamLocationType.hash,
+				},
+			};
+
+			const queryString = new UrlTranslator(urlConfig);
+			const config = queryString.getConfig();
+
+			Object.keys(config.parameters.core).forEach((coreKey) => {
+				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
+				if (coreKey == 'query') {
+					expect(coreParamConfig.type).toEqual(ParamLocationType.query);
+				} else {
+					expect(coreParamConfig.type).toEqual(ParamLocationType.hash);
+				}
+			});
+		});
+
+		it('can set the type of all core params as query and set a single param as hash', () => {
+			const urlConfig = {
+				parameters: {
+					core: {
+						page: { name: 'p', type: ParamLocationType.hash },
+					},
+				},
+				settings: {
+					coreType: ParamLocationType.query,
+				},
+			};
+
+			const queryString = new UrlTranslator(urlConfig);
+			const config = queryString.getConfig();
+
+			Object.keys(config.parameters.core).forEach((coreKey) => {
+				const coreParamConfig = config.parameters.core[coreKey as keyof CoreMap];
+				if (coreKey == 'page') {
+					expect(coreParamConfig.type).toEqual(ParamLocationType.hash);
+				} else {
+					expect(coreParamConfig.type).toEqual(ParamLocationType.query);
+				}
+			});
+		});
+
 		it('will ignore core param type setting when it is invalid', () => {
 			const queryString = new UrlTranslator({
 				settings: {
