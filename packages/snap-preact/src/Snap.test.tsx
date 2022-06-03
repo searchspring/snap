@@ -1,4 +1,7 @@
 import 'whatwg-fetch';
+
+import { cleanup } from '@testing-library/preact';
+
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
@@ -39,6 +42,8 @@ describe('Snap Preact', () => {
 
 		document.body.innerHTML = `<script id="searchspring-context"></script><div id="searchspring-content"></div>`;
 	});
+
+	afterEach(cleanup);
 
 	it('throws if configuration is not provided', () => {
 		expect(() => {
@@ -159,6 +164,20 @@ describe('Snap Preact', () => {
 		const spy = jest.spyOn(tracker.cookies.cart, 'set');
 		const snap = new Snap(contextConfig, { tracker });
 		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
+	});
+
+	it('automatically picks up the merchandising segments when provided', () => {
+		const contextConfig = {
+			...baseConfig,
+			context: {
+				merchandising: {
+					segments: ['segment1', 'segment2'],
+				},
+			},
+		};
+		const snap = new Snap(contextConfig);
+		// @ts-ignore
+		expect(snap.client.globals.merchandising).toEqual(contextConfig.context.merchandising);
 	});
 
 	describe('creates search controllers via config', () => {
@@ -535,7 +554,7 @@ describe('Snap Preact', () => {
 			await wait();
 			expect(ac.id).toBe('ac');
 			expect(ac.targeters.acTarget).toBeDefined();
-			expect((ac.store as AutocompleteStore).state.input).toBeUndefined();
+			expect((ac.store as AutocompleteStore).state.input).toBe('');
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {

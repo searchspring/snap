@@ -72,7 +72,7 @@ describe('Autocomplete', () => {
 			cy.snapController('autocomplete').then(({ store }) => {
 				expect(store.results.length).to.equal(0);
 				expect(store.terms.length).to.equal(0);
-				expect(store.state.input).to.equal(undefined);
+				expect(store.state.input).to.equal('');
 			});
 		});
 
