@@ -1,4 +1,4 @@
-/*! For license information please see 691.b019f550898672a06bfa.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 691.8cbdcbb8dc2e61eacd03.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[691],
 	{
@@ -33986,7 +33986,7 @@
 				}
 				return (
 					(exported[CONSTRUCTOR_NAME] = Constructor),
-					$({ global: !0, forced: Constructor != NativeConstructor }, exported),
+					$({ global: !0, constructor: !0, forced: Constructor != NativeConstructor }, exported),
 					setToStringTag(Constructor, CONSTRUCTOR_NAME),
 					IS_WEAK || common.setStrong(Constructor, CONSTRUCTOR_NAME, IS_MAP),
 					Constructor
@@ -35142,18 +35142,22 @@
 			var fails = __webpack_require__(24229),
 				isCallable = __webpack_require__(26733),
 				hasOwn = __webpack_require__(98270),
-				defineProperty = __webpack_require__(31787).f,
+				DESCRIPTORS = __webpack_require__(7400),
 				CONFIGURABLE_FUNCTION_NAME = __webpack_require__(51805).CONFIGURABLE,
 				inspectSource = __webpack_require__(8511),
 				InternalStateModule = __webpack_require__(56407),
 				enforceInternalState = InternalStateModule.enforce,
 				getInternalState = InternalStateModule.get,
-				CONFIGURABLE_LENGTH = !fails(function () {
-					return 8 !== defineProperty(function () {}, 'length', { value: 8 }).length;
-				}),
+				defineProperty = Object.defineProperty,
+				CONFIGURABLE_LENGTH =
+					DESCRIPTORS &&
+					!fails(function () {
+						return 8 !== defineProperty(function () {}, 'length', { value: 8 }).length;
+					}),
 				TEMPLATE = String(String).split('String'),
 				makeBuiltIn = (module.exports = function (value, name, options) {
-					'Symbol(' === String(name).slice(0, 7) && (name = '[' + String(name).replace(/^Symbol\(([^)]*)\)/, '$1') + ']'),
+					if (
+						('Symbol(' === String(name).slice(0, 7) && (name = '[' + String(name).replace(/^Symbol\(([^)]*)\)/, '$1') + ']'),
 						options && options.getter && (name = 'get ' + name),
 						options && options.setter && (name = 'set ' + name),
 						(!hasOwn(value, 'name') || (CONFIGURABLE_FUNCTION_NAME && value.name !== name)) &&
@@ -35162,7 +35166,14 @@
 							options &&
 							hasOwn(options, 'arity') &&
 							value.length !== options.arity &&
-							defineProperty(value, 'length', { value: options.arity });
+							defineProperty(value, 'length', { value: options.arity }),
+						options && hasOwn(options, 'constructor') && options.constructor)
+					) {
+						if (DESCRIPTORS)
+							try {
+								defineProperty(value, 'prototype', { writable: !1 });
+							} catch (error) {}
+					} else value.prototype = void 0;
 					var state = enforceInternalState(value);
 					return hasOwn(state, 'source') || (state.source = TEMPLATE.join('string' == typeof name ? name : '')), value;
 				});
@@ -36042,10 +36053,10 @@
 			(module.exports = function (key, value) {
 				return store[key] || (store[key] = void 0 !== value ? value : {});
 			})('versions', []).push({
-				version: '3.22.4',
+				version: '3.22.5',
 				mode: IS_PURE ? 'pure' : 'global',
 				copyright: '© 2014-2022 Denis Pushkarev (zloirock.ru)',
-				license: 'https://github.com/zloirock/core-js/blob/v3.22.4/LICENSE',
+				license: 'https://github.com/zloirock/core-js/blob/v3.22.5/LICENSE',
 				source: 'https://github.com/zloirock/core-js',
 			});
 		},
@@ -37154,7 +37165,9 @@
 					hasOwn(NativeNumber, (key = keys[j])) &&
 						!hasOwn(NumberWrapper, key) &&
 						defineProperty(NumberWrapper, key, getOwnPropertyDescriptor(NativeNumber, key));
-				(NumberWrapper.prototype = NumberPrototype), (NumberPrototype.constructor = NumberWrapper), defineBuiltIn(global, 'Number', NumberWrapper);
+				(NumberWrapper.prototype = NumberPrototype),
+					(NumberPrototype.constructor = NumberWrapper),
+					defineBuiltIn(global, 'Number', NumberWrapper, { constructor: !0 });
 			}
 		},
 		33132: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
@@ -37756,7 +37769,7 @@
 				} catch (error) {}
 				setPrototypeOf && setPrototypeOf(NativePromisePrototype, PromisePrototype);
 			}
-			$({ global: !0, wrap: !0, forced: FORCED_PROMISE_CONSTRUCTOR }, { Promise: PromiseConstructor }),
+			$({ global: !0, constructor: !0, wrap: !0, forced: FORCED_PROMISE_CONSTRUCTOR }, { Promise: PromiseConstructor }),
 				setToStringTag(PromiseConstructor, 'Promise', !1, !0),
 				setSpecies('Promise');
 		},
@@ -38032,7 +38045,9 @@
 
 				)
 					proxyAccessor(RegExpWrapper, NativeRegExp, keys[index++]);
-				(RegExpPrototype.constructor = RegExpWrapper), (RegExpWrapper.prototype = RegExpPrototype), defineBuiltIn(global, 'RegExp', RegExpWrapper);
+				(RegExpPrototype.constructor = RegExpWrapper),
+					(RegExpWrapper.prototype = RegExpPrototype),
+					defineBuiltIn(global, 'RegExp', RegExpWrapper, { constructor: !0 });
 			}
 			setSpecies('RegExp');
 		},
@@ -38693,7 +38708,7 @@
 						},
 					}),
 					IS_PURE || defineBuiltIn(ObjectPrototype, 'propertyIsEnumerable', $propertyIsEnumerable, { unsafe: !0 }))),
-				$({ global: !0, wrap: !0, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, { Symbol: $Symbol }),
+				$({ global: !0, constructor: !0, wrap: !0, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, { Symbol: $Symbol }),
 				$forEach(objectKeys(WellKnownSymbolsStore), function (name) {
 					defineWellKnownSymbol(name);
 				}),
@@ -38768,7 +38783,7 @@
 						return '' === desc ? void 0 : desc;
 					},
 				}),
-					$({ global: !0, forced: !0 }, { Symbol: SymbolWrapper });
+					$({ global: !0, constructor: !0, forced: !0 }, { Symbol: SymbolWrapper });
 			}
 		},
 		23352: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
@@ -39253,7 +39268,7 @@
 					{ enumerable: !0 }
 				),
 				setToStringTag(URLSearchParamsConstructor, 'URLSearchParams'),
-				$({ global: !0, forced: !USE_NATIVE_URL }, { URLSearchParams: URLSearchParamsConstructor }),
+				$({ global: !0, constructor: !0, forced: !USE_NATIVE_URL }, { URLSearchParams: URLSearchParamsConstructor }),
 				!USE_NATIVE_URL && isCallable(Headers))
 			) {
 				var headersHas = uncurryThis(HeadersPrototype.has),
@@ -39288,7 +39303,7 @@
 					};
 					(RequestPrototype.constructor = RequestConstructor),
 						(RequestConstructor.prototype = RequestPrototype),
-						$({ global: !0, forced: !0, noTargetGet: !0 }, { Request: RequestConstructor });
+						$({ global: !0, constructor: !0, noTargetGet: !0, forced: !0 }, { Request: RequestConstructor });
 				}
 			}
 			module.exports = { URLSearchParams: URLSearchParamsConstructor, getState: getInternalParamsState };
@@ -40073,7 +40088,7 @@
 				nativeCreateObjectURL && defineBuiltIn(URLConstructor, 'createObjectURL', bind(nativeCreateObjectURL, NativeURL)),
 					nativeRevokeObjectURL && defineBuiltIn(URLConstructor, 'revokeObjectURL', bind(nativeRevokeObjectURL, NativeURL));
 			}
-			setToStringTag(URLConstructor, 'URL'), $({ global: !0, forced: !USE_NATIVE_URL, sham: !DESCRIPTORS }, { URL: URLConstructor });
+			setToStringTag(URLConstructor, 'URL'), $({ global: !0, constructor: !0, forced: !USE_NATIVE_URL, sham: !DESCRIPTORS }, { URL: URLConstructor });
 		},
 		14121: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 			__webpack_require__(95340);
@@ -46588,8 +46603,8 @@
 				var polyfill = getPolyfill();
 				if (define.supportsDescriptors) {
 					var descriptor = Object.getOwnPropertyDescriptor(polyfill, 'globalThis');
-					(!descriptor || (descriptor.configurable && (descriptor.enumerable || descriptor.writable || globalThis !== polyfill))) &&
-						Object.defineProperty(polyfill, 'globalThis', { configurable: !0, enumerable: !1, value: polyfill, writable: !1 });
+					(descriptor && (!descriptor.configurable || (!descriptor.enumerable && descriptor.writable && globalThis === polyfill))) ||
+						Object.defineProperty(polyfill, 'globalThis', { configurable: !0, enumerable: !1, value: polyfill, writable: !0 });
 				} else ('object' == typeof globalThis && globalThis === polyfill) || (polyfill.globalThis = polyfill);
 				return polyfill;
 			};
@@ -63784,16 +63799,6 @@
 					});
 				});
 		},
-		91680: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var $Array = __webpack_require__(67286)('%Array%'),
-				toStr = !$Array.isArray && __webpack_require__(62680)('Object.prototype.toString');
-			module.exports =
-				$Array.isArray ||
-				function IsArray(argument) {
-					return '[object Array]' === toStr(argument);
-				};
-		},
 		46620: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var inspect = __webpack_require__(99500),
@@ -64149,20 +64154,10 @@
 		70126: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var assertRecord = __webpack_require__(10487),
+				fromPropertyDescriptor = __webpack_require__(84902),
 				Type = __webpack_require__(18132);
 			module.exports = function FromPropertyDescriptor(Desc) {
-				if (void 0 === Desc) return Desc;
-				assertRecord(Type, 'Property Descriptor', 'Desc', Desc);
-				var obj = {};
-				return (
-					'[[Value]]' in Desc && (obj.value = Desc['[[Value]]']),
-					'[[Writable]]' in Desc && (obj.writable = Desc['[[Writable]]']),
-					'[[Get]]' in Desc && (obj.get = Desc['[[Get]]']),
-					'[[Set]]' in Desc && (obj.set = Desc['[[Set]]']),
-					'[[Enumerable]]' in Desc && (obj.enumerable = Desc['[[Enumerable]]']),
-					'[[Configurable]]' in Desc && (obj.configurable = Desc['[[Configurable]]']),
-					obj
-				);
+				return void 0 !== Desc && assertRecord(Type, 'Property Descriptor', 'Desc', Desc), fromPropertyDescriptor(Desc);
 			};
 		},
 		44146: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -64267,13 +64262,7 @@
 		},
 		52271: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var $Array = __webpack_require__(67286)('%Array%'),
-				toStr = !$Array.isArray && __webpack_require__(62680)('Object.prototype.toString');
-			module.exports =
-				$Array.isArray ||
-				function IsArray(argument) {
-					return '[object Array]' === toStr(argument);
-				};
+			module.exports = __webpack_require__(27595);
 		},
 		83317: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
@@ -64789,20 +64778,11 @@
 		},
 		32249: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var hasArrayLengthDefineBug,
-				$defineProperty = __webpack_require__(67286)('%Object.defineProperty%', !0);
-			if ($defineProperty)
-				try {
-					$defineProperty({}, 'a', { value: 1 });
-				} catch (e) {
-					$defineProperty = null;
-				}
-			try {
-				hasArrayLengthDefineBug = $defineProperty && 0 === $defineProperty([], 'length', { value: 1 }).length;
-			} catch (e) {
-				hasArrayLengthDefineBug = !0;
-			}
-			var isArray = hasArrayLengthDefineBug && __webpack_require__(91680),
+			var hasPropertyDescriptors = __webpack_require__(81181),
+				GetIntrinsic = __webpack_require__(67286),
+				$defineProperty = hasPropertyDescriptors() && GetIntrinsic('%Object.defineProperty%', !0),
+				hasArrayLengthDefineBug = hasPropertyDescriptors.hasArrayLengthDefineBug(),
+				isArray = hasArrayLengthDefineBug && __webpack_require__(27595),
 				$isEnumerable = __webpack_require__(62680)('Object.prototype.propertyIsEnumerable');
 			module.exports = function DefineOwnProperty(IsDataDescriptor, SameValue, FromPropertyDescriptor, O, P, desc) {
 				if (!$defineProperty) {
@@ -64817,6 +64797,16 @@
 					: ($defineProperty(O, P, FromPropertyDescriptor(desc)), !0);
 			};
 		},
+		27595: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var $Array = __webpack_require__(67286)('%Array%'),
+				toStr = !$Array.isArray && __webpack_require__(62680)('Object.prototype.toString');
+			module.exports =
+				$Array.isArray ||
+				function IsArray(argument) {
+					return '[object Array]' === toStr(argument);
+				};
+		},
 		10487: (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var GetIntrinsic = __webpack_require__(67286),
@@ -64824,8 +64814,7 @@
 				$SyntaxError = GetIntrinsic('%SyntaxError%'),
 				has = __webpack_require__(23198),
 				predicates = {
-					'Property Descriptor': function isPropertyDescriptor(Type, Desc) {
-						if ('Object' !== Type(Desc)) return !1;
+					'Property Descriptor': function isPropertyDescriptor(Desc) {
 						var allowed = { '[[Configurable]]': !0, '[[Enumerable]]': !0, '[[Get]]': !0, '[[Set]]': !0, '[[Value]]': !0, '[[Writable]]': !0 };
 						for (var key in Desc) if (has(Desc, key) && !allowed[key]) return !1;
 						var isData = has(Desc, '[[Value]]'),
@@ -64833,11 +64822,28 @@
 						if (isData && IsAccessor) throw new $TypeError('Property Descriptors may not be both accessor and data descriptors');
 						return !0;
 					},
+					'Match Record': __webpack_require__(40508),
 				};
 			module.exports = function assertRecord(Type, recordType, argumentName, value) {
 				var predicate = predicates[recordType];
 				if ('function' != typeof predicate) throw new $SyntaxError('unknown record type: ' + recordType);
-				if (!predicate(Type, value)) throw new $TypeError(argumentName + ' must be a ' + recordType);
+				if ('Object' !== Type(value) || !predicate(value)) throw new $TypeError(argumentName + ' must be a ' + recordType);
+			};
+		},
+		84902: (module) => {
+			'use strict';
+			module.exports = function fromPropertyDescriptor(Desc) {
+				if (void 0 === Desc) return Desc;
+				var obj = {};
+				return (
+					'[[Value]]' in Desc && (obj.value = Desc['[[Value]]']),
+					'[[Writable]]' in Desc && (obj.writable = !!Desc['[[Writable]]']),
+					'[[Get]]' in Desc && (obj.get = Desc['[[Get]]']),
+					'[[Set]]' in Desc && (obj.set = Desc['[[Set]]']),
+					'[[Enumerable]]' in Desc && (obj.enumerable = !!Desc['[[Enumerable]]']),
+					'[[Configurable]]' in Desc && (obj.configurable = !!Desc['[[Configurable]]']),
+					obj
+				);
 			};
 		},
 		91325: (module, __unused_webpack_exports, __webpack_require__) => {
@@ -64907,6 +64913,20 @@
 			'use strict';
 			module.exports = function isLeadingSurrogate(charCode) {
 				return 'number' == typeof charCode && charCode >= 55296 && charCode <= 56319;
+			};
+		},
+		40508: (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			var has = __webpack_require__(23198);
+			module.exports = function isMatchRecord(record) {
+				return (
+					has(record, '[[StartIndex]]') &&
+					has(record, '[[EndIndex]]') &&
+					record['[[StartIndex]]'] >= 0 &&
+					record['[[EndIndex]]'] >= record['[[StartIndex]]'] &&
+					String(parseInt(record['[[StartIndex]]'], 10)) === String(record['[[StartIndex]]']) &&
+					String(parseInt(record['[[EndIndex]]'], 10)) === String(record['[[EndIndex]]'])
+				);
 			};
 		},
 		97911: (module) => {
