@@ -8,7 +8,7 @@ export class StateStore {
 		facets: Lock;
 	};
 	focusedInput: HTMLInputElement = undefined;
-	input = '';
+	input: string | undefined = '';
 	url: UrlManager;
 
 	constructor(services: StoreServices) {
