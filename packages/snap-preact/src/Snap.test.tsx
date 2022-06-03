@@ -554,7 +554,7 @@ describe('Snap Preact', () => {
 			await wait();
 			expect(ac.id).toBe('ac');
 			expect(ac.targeters.acTarget).toBeDefined();
-			expect((ac.store as AutocompleteStore).state.input).toBe('');
+			expect((ac.store as AutocompleteStore).state.input).toBeUndefined();
 		});
 
 		it(`runs the onTarget function when a targeter selector is found`, async () => {
