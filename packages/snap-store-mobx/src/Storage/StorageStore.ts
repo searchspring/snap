@@ -110,7 +110,6 @@ export class StorageStore {
 			} else {
 				value = {};
 				return;
-				break;
 			}
 		}
 		return value;
