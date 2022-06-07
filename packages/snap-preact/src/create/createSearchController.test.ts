@@ -195,7 +195,7 @@ describe('createSearchController', () => {
 		});
 
 		it('creates an search controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createSearchController(createConfig, { logger: customLogger });
 

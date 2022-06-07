@@ -117,41 +117,6 @@ describe('Snap Client', () => {
 		}
 	});
 
-	it('can set mode via method', () => {
-		const client = new Client({ siteId: '8uyt2m' });
-		// @ts-ignore
-		expect(client.mode).toBe(AppMode.production);
-
-		// checking requesters mode
-		// @ts-ignore - verifying private property
-		for (const [name, requester] of Object.entries(client.requesters)) {
-			// @ts-ignore - verifying private property
-			expect(requester.mode).toBe(AppMode.production);
-		}
-
-		client.setMode('development');
-		// @ts-ignore - verifying private property
-		expect(client.mode).toBe(AppMode.development);
-
-		// checking requesters mode
-		// @ts-ignore - verifying private property
-		for (const [name, requester] of Object.entries(client.requesters)) {
-			// @ts-ignore - verifying private property
-			expect(requester.mode).toBe(AppMode.development);
-		}
-
-		client.setMode('production');
-		// @ts-ignore - verifying private property
-		expect(client.mode).toBe(AppMode.production);
-
-		// checking requesters mode
-		// @ts-ignore - verifying private property
-		for (const [name, requester] of Object.entries(client.requesters)) {
-			// @ts-ignore - verifying private property
-			expect(requester.mode).toBe(AppMode.production);
-		}
-	});
-
 	it('has all the fetch functions defined', () => {
 		const client = new Client({ siteId: '8uyt2m' });
 

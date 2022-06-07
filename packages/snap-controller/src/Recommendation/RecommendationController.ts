@@ -259,10 +259,6 @@ export class RecommendationController extends AbstractController {
 			params.lastViewed = lastViewed;
 		}
 
-		if (this.mode == AppMode.development) {
-			params.test = true;
-		}
-
 		return params;
 	}
 

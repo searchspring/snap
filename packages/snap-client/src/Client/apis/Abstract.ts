@@ -28,7 +28,7 @@ export class API {
 	public cache: NetworkCache;
 
 	constructor(protected configuration: ApiConfiguration) {
-		this.cache = new NetworkCache(configuration.cache);
+		this.cache = new NetworkCache(this.configuration.cache);
 	}
 
 	protected get mode(): AppMode {
@@ -108,23 +108,6 @@ export class API {
 
 		return response;
 	}
-
-	public setMode(mode: AppMode): void {
-		if (Object.values(AppMode).includes(mode as AppMode)) {
-			this.configuration.mode = mode;
-
-			switch (mode) {
-				case AppMode.development: {
-					this.cache.disable();
-					break;
-				}
-				case AppMode.production: {
-					this.cache.enable();
-					break;
-				}
-			}
-		}
-	}
 }
 
 export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
@@ -145,15 +128,16 @@ export class ApiConfiguration {
 			this.configuration.maxRetry = 8;
 		}
 
+		this.configuration.cache = this.configuration.cache || {};
 		this.configuration.mode = this.configuration.mode || AppMode.production;
+
+		if (this.configuration.mode == AppMode.development) {
+			this.configuration.cache.enabled = false;
+		}
 	}
 
 	get cache(): CacheConfig {
 		return this.configuration?.cache || {};
-	}
-
-	set cache(updatedConfig: Partial<CacheConfig>) {
-		this.configuration.cache = deepmerge(this.configuration.cache || {}, updatedConfig);
 	}
 
 	get maxRetry(): number {
@@ -176,16 +160,8 @@ export class ApiConfiguration {
 		return this.configuration.headers || {};
 	}
 
-	set headers(newHeaders: HTTPHeaders) {
-		this.configuration.headers = newHeaders;
-	}
-
 	get mode(): AppMode {
 		return this.configuration.mode! as AppMode;
-	}
-
-	set mode(mode) {
-		this.configuration.mode = mode;
 	}
 }
 

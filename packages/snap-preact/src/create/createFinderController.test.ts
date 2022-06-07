@@ -211,7 +211,7 @@ describe('createFinderController', () => {
 		});
 
 		it('creates an finder controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createFinderController(createConfig, { logger: customLogger });
 

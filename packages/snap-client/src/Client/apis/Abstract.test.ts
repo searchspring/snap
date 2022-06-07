@@ -43,20 +43,6 @@ describe('ApiConfiguration', () => {
 		expect(configuration.maxRetry).toBe(config.maxRetry);
 		expect(configuration.cache).toBe(config.cache);
 	});
-
-	it('can set properties with setters', () => {
-		const configuration = new ApiConfiguration();
-
-		const customCacheConfig = {
-			ttl: 2222,
-			enabled: false,
-			maxSize: 4, // KB
-			purgeable: false,
-		};
-
-		configuration.cache = customCacheConfig;
-		expect(configuration.cache).toStrictEqual(customCacheConfig);
-	});
 });
 
 describe('Abstract Api', () => {

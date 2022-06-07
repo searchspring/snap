@@ -16,6 +16,12 @@ configureMobx({ useProxies: 'never' });
 export default (config: SnapFinderControllerConfig, services?: SnapControllerServices): FinderController => {
 	const urlManager = (services?.urlManager || new UrlManager(new UrlTranslator(config.url), reactLinker)).detach(true);
 
+	// set client mode
+	if (config.mode && config.client?.globals) {
+		config.client.config = config.client.config || {};
+		config.client.config.mode = config.mode;
+	}
+
 	const cntrlr = new FinderController(
 		config.controller,
 		{
@@ -24,7 +30,7 @@ export default (config: SnapFinderControllerConfig, services?: SnapControllerSer
 			urlManager,
 			eventManager: services?.eventManager || new EventManager(),
 			profiler: services?.profiler || new Profiler(),
-			logger: services?.logger || new Logger(),
+			logger: services?.logger || new Logger({ mode: config.mode }),
 			tracker: services?.tracker || new Tracker(config.client.globals),
 		},
 		config.context

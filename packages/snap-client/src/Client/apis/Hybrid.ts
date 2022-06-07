@@ -9,7 +9,7 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
+import { API, ApiConfigurationParameters, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 
 export class HybridAPI extends API {
@@ -18,50 +18,21 @@ export class HybridAPI extends API {
 		suggest: SuggestAPI;
 	};
 
-	private requestersConfiguration: {
-		legacy: ApiConfiguration;
-		suggest: ApiConfiguration;
-	};
-
 	constructor(configuration: ApiConfiguration) {
 		super(configuration);
 
-		this.requestersConfiguration = {
-			legacy: new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache }),
-			suggest: new ApiConfiguration({ origin: configuration.origin, cache: this.configuration.cache }),
-		};
+		const legacyConfig: ApiConfigurationParameters = { mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache };
+		if (configuration.mode == AppMode.development) {
+			legacyConfig.headers = { 'searchspring-no-beacon': '' };
+		}
+
+		const legacyConfiguration = new ApiConfiguration(legacyConfig);
+		const suggestConfiguration = new ApiConfiguration({ mode: configuration.mode, origin: configuration.origin, cache: this.configuration.cache });
 
 		this.requesters = {
-			legacy: new LegacyAPI(this.requestersConfiguration.legacy),
-			suggest: new SuggestAPI(this.requestersConfiguration.suggest),
+			legacy: new LegacyAPI(legacyConfiguration),
+			suggest: new SuggestAPI(suggestConfiguration),
 		};
-	}
-
-	public setMode(mode: AppMode): void {
-		if (Object.values(AppMode).includes(mode as AppMode)) {
-			this.configuration.mode = mode as AppMode;
-
-			// adding searchspring-no-beacon header to requests to search API to prevent reporting
-
-			switch (mode) {
-				case AppMode.development: {
-					this.requestersConfiguration.legacy.headers = {
-						'searchspring-no-beacon': '',
-					};
-					break;
-				}
-
-				case AppMode.production: {
-					const previousHeaders = { ...this.requestersConfiguration.legacy.headers };
-					delete previousHeaders['searchspring-no-beacon'];
-
-					this.requestersConfiguration.legacy.headers = previousHeaders;
-				}
-			}
-
-			this.requesters.legacy.setMode(mode);
-			this.requesters.suggest.setMode(mode);
-		}
 	}
 
 	async getMeta(requestParameters: MetaRequestModel): Promise<MetaResponseModel> {

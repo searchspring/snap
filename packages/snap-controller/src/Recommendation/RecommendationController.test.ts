@@ -49,26 +49,6 @@ describe('Recommendation Controller', () => {
 		}).toThrow();
 	});
 
-	it(`adds a test param when in development environment`, async function () {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		controller.setMode(AppMode.development);
-
-		// @ts-ignore - ignoring protected variable to ensure internal mode has switched
-		expect(controller.mode).toBe('development');
-
-		const params = controller.params;
-		expect(params.test).toBeTruthy();
-	});
-
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware cancellation handled`, async function () {

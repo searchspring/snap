@@ -1,11 +1,9 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
-import { AppMode } from '@searchspring/snap-toolbox';
 
 // Abstract
 export type StoreConfig = {
 	id: string;
-	mode?: AppMode;
 	[any: string]: unknown;
 };
 

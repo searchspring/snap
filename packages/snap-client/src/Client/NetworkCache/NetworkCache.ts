@@ -26,14 +26,6 @@ export class NetworkCache {
 			});
 	}
 
-	public enable() {
-		this.config.enabled = true;
-	}
-
-	public disable() {
-		this.config.enabled = false;
-	}
-
 	public get(key: string): Response | void {
 		if (this.config.enabled) {
 			try {

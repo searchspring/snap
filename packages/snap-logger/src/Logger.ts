@@ -2,24 +2,24 @@ import { AppMode } from '@searchspring/snap-toolbox';
 import { colors } from './colors';
 import { emoji } from './emoji';
 
+export type LoggerConfig = {
+	prefix?: string;
+	mode?: keyof typeof AppMode | AppMode;
+};
+
 export class Logger {
 	private mode = AppMode.production;
 	public emoji = emoji;
 	public colors = colors;
 	private prefix = '';
 
-	constructor(prefix?: string) {
-		this.prefix = prefix || '';
+	constructor(config?: LoggerConfig) {
+		this.prefix = config?.prefix || '';
+		this.mode = (config?.mode || AppMode.production) as AppMode;
 	}
 
 	public setNamespace(group: string): void {
 		this.prefix = ` [${group}] :: `;
-	}
-
-	public setMode(mode: keyof typeof AppMode): void {
-		if (Object.values(AppMode).includes(mode as AppMode) && this.mode != mode) {
-			this.mode = mode as AppMode;
-		}
 	}
 
 	public error(...params: any[]): void {

@@ -42,7 +42,7 @@ type ExtendedTarget = Target & {
 };
 
 export type SnapConfig = {
-	mode?: AppMode;
+	mode?: keyof typeof AppMode | AppMode;
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
@@ -127,14 +127,14 @@ This usually happens when you pass a JSX Element, and not a function that return
 
 The error above happened in the following targeter in the Snap Config`;
 export class Snap {
-	private mode: AppMode = AppMode.production;
+	private mode = AppMode.production;
 	private config: SnapConfig;
 	private _instantiatorPromises: {
 		[instantiatorId: string]: Promise<RecommendationInstantiator>;
-	};
+	} = {};
 	private _controllerPromises: {
 		[controllerConfigId: string]: Promise<Controllers>;
-	};
+	} = {};
 
 	public logger: Logger;
 	public client: Client;
@@ -142,7 +142,7 @@ export class Snap {
 	public context: ContextVariables;
 	public controllers: {
 		[controllerConfigId: string]: Controllers;
-	};
+	} = {};
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
@@ -157,18 +157,6 @@ export class Snap {
 		controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
 		return Promise.all(getControllerPromises);
 	};
-
-	public setMode(mode: keyof typeof AppMode | AppMode): void {
-		if (Object.values(AppMode).includes(mode as AppMode) && this.mode != mode) {
-			this.mode = mode as AppMode;
-			this.logger.setMode(this.mode);
-			this.client.setMode(this.mode);
-
-			for (const [id, controller] of Object.entries(this.controllers)) {
-				controller.setMode(this.mode);
-			}
-		}
-	}
 
 	public createController = async (
 		type: keyof typeof ControllerTypes,
@@ -222,8 +210,9 @@ export class Snap {
 			window.searchspring.controller = window.searchspring.controller || {};
 			window.searchspring.controller[config.id] = this.controllers[config.id] = creationFunc(
 				{
+					mode: this.mode,
 					url: deepmerge(this.config.url || {}, urlConfig || {}),
-					controller: { mode: this.mode, ...config },
+					controller: config,
 					context: deepmerge(this.context || {}, context || {}),
 				},
 				{
@@ -248,14 +237,12 @@ export class Snap {
 	constructor(config: SnapConfig, services?: SnapServices) {
 		this.config = config;
 
-		this.logger = services?.logger || new Logger('Snap Preact ');
-
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
 			globalContext = getContext(['shopper', 'config', 'merchandising']);
 		} catch (err) {
-			this.logger.error('failed to find global context');
+			console.error('Snap failed to find global context');
 		}
 
 		// merge configs - but only merge plain objects
@@ -275,12 +262,6 @@ export class Snap {
 			this.config.client.globals.merchandising = this.context.merchandising;
 		}
 
-		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
-		this.tracker = services?.tracker || new Tracker(this.config.client.globals);
-		this._controllerPromises = {};
-		this._instantiatorPromises = {};
-		this.controllers = {};
-
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
@@ -293,26 +274,35 @@ export class Snap {
 				devMode = false;
 			}
 
-			// mode passed in the config has priority
-			if (this.config.mode) {
-				this.setMode(this.config.mode);
+			// use config mode over dev mode
+			if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
+				this.mode = this.config.mode as AppMode;
 			} else if (devMode) {
-				this.setMode(AppMode.development);
-
-				// log version
-				this.logger.imageText({
-					url: 'https://snapui.searchspring.io/favicon.svg',
-					text: `[${version}]`,
-					style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
-				});
+				this.mode = AppMode.development;
 
 				if (featureFlags.cookies) {
 					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
 				}
 			}
 
+			this.config.client.config = this.config.client.config || {};
+			this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
+			this.tracker = services?.tracker || new Tracker(this.config.client.globals);
+			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
+
+			// log version
+			this.logger.imageText({
+				url: 'https://snapui.searchspring.io/favicon.svg',
+				text: `[${version}]`,
+				style: `color: ${this.logger.colors.indigo}; font-weight: bold;`,
+			});
+
 			if (branchOverride && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
 				this.logger.warn(`...loading build... '${branchOverride}'`);
+
+				// reset the global searchspring object
+				delete window.searchspring;
 
 				// set a cookie with branch
 				if (featureFlags.cookies) {
@@ -384,7 +374,9 @@ export class Snap {
 				// prevent further instantiation of config
 				return;
 			}
-		} catch (e) {}
+		} catch (e) {
+			this.logger.error(e);
+		}
 
 		// bind to window global
 		window.searchspring = window.searchspring || {};
@@ -419,6 +411,7 @@ export class Snap {
 
 							const cntrlr = createSearchController(
 								{
+									mode: this.mode,
 									url: deepmerge(this.config.url || {}, controller.url || {}),
 									controller: { mode: this.mode, ...controller.config },
 									context: deepmerge(this.context || {}, controller.context || {}),
@@ -745,6 +738,7 @@ export class Snap {
 		if (this.config?.instantiators?.recommendation) {
 			try {
 				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
+					this.config.instantiators.recommendation.mode = this.config.instantiators.recommendation.mode || this.mode;
 					return new RecommendationInstantiator(
 						this.config.instantiators.recommendation,
 						{

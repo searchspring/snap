@@ -1,6 +1,6 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
-import { charsParams } from '@searchspring/snap-toolbox';
+import { AppMode, charsParams } from '@searchspring/snap-toolbox';
 import { SearchResponseModelResult } from '@searchspring/snapi-types';
 import deepmerge from 'deepmerge';
 
@@ -149,6 +149,10 @@ export class RecommendAPI extends API {
 		window.clearTimeout(paramBatch.timeout);
 
 		paramBatch.timeout = window.setTimeout(async () => {
+			if (this.configuration.mode == AppMode.development) {
+				paramBatch.request.test = true;
+			}
+
 			let requestMethod = 'getRecommendations';
 			if (charsParams(paramBatch.request) > 1024) {
 				requestMethod = 'postRecommendations';

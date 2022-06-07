@@ -118,16 +118,6 @@ export class Client {
 		};
 	}
 
-	public setMode(mode: keyof typeof AppMode): void {
-		if (Object.values(AppMode).includes(mode as AppMode)) {
-			this.mode = mode as AppMode;
-
-			for (const [name, requester] of Object.entries(this.requesters)) {
-				requester.setMode(this.mode);
-			}
-		}
-	}
-
 	async meta(params?: MetaRequestModel): Promise<MetaResponseModel> {
 		const defaultParams: MetaRequestModel = { siteId: this.globals.siteId };
 		params = deepmerge(defaultParams, params || {});

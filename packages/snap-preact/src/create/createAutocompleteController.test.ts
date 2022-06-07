@@ -196,7 +196,7 @@ describe('createAutocompleteController', () => {
 		});
 
 		it('creates an autocomplete controller with custom Logger service', () => {
-			const customLogger = new Logger('customLogger');
+			const customLogger = new Logger({ prefix: 'customLogger' });
 
 			const controller = createAutocompleteController(createConfig, { logger: customLogger });
 

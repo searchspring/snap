@@ -1,4 +1,4 @@
-import { AppMode, DomTargeter, cookies, url } from '@searchspring/snap-toolbox';
+import { DomTargeter } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
@@ -28,7 +28,6 @@ export abstract class AbstractController {
 		[key: string]: DomTargeter;
 	} = {};
 
-	protected mode = AppMode.production;
 	protected _initialized = false;
 
 	get initialized(): boolean {
@@ -95,9 +94,6 @@ export abstract class AbstractController {
 
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);
-
-		// set mode
-		this.setMode(this.config.mode);
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
@@ -110,16 +106,6 @@ export abstract class AbstractController {
 		if (targetName && !this.targeters[targetName]) {
 			this.targeters[targetName] = target;
 			return target;
-		}
-	}
-
-	public setMode(mode: keyof typeof AppMode | AppMode): void {
-		this.mode = mode as AppMode;
-		if (Object.values(AppMode).includes(this.mode)) {
-			this.mode = this.mode;
-
-			this.log.setMode(this.mode);
-			this.client.setMode(this.mode);
 		}
 	}
 

@@ -161,28 +161,6 @@ describe('Search Controller', () => {
 		expect(controller.initialized).toBe(false);
 	});
 
-	it('can set mode', async () => {
-		delete window.location;
-		window.location = {
-			...window.location,
-			href: 'https://www.example.com/?dev=1',
-		};
-		const controller = new TestController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		controller.setMode('development');
-
-		// @ts-ignore - ignoring protected variable to ensure internal mode has switched
-		expect(controller.mode).toBe('development');
-	});
-
 	it('warns if init is recalled', async () => {
 		const controller = new TestController(searchConfig, {
 			client: new MockClient(globals, {}),
