@@ -81,14 +81,14 @@ export type RecommendCombinedResponseModel = ProfileResponseModel & { results: S
 
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
-	batches: {
+	private batches: {
 		[key: string]: {
+			timeout: number;
 			request: any;
+			requests: any[];
 			deferreds?: Deferred[];
 		};
 	};
-	requests: any = [];
-	timeout: undefined | number = undefined;
 
 	constructor(config: ApiConfiguration) {
 		super(config);
@@ -124,103 +124,66 @@ export class RecommendAPI extends API {
 			return key;
 		};
 
-		//set up batch keys and deferred promises
-		let key = getKey(otherParams as RecommendRequestModel);
-
-		this.batches[key] = this.batches[key] || { request: { tags: [], limits: [] }, deferreds: [] };
-
+		// set up batch keys and deferred promises
+		const key = getKey(otherParams as RecommendRequestModel);
+		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, requests: [], deferreds: [] });
 		const deferred = new Deferred();
 
-		//add each request to the list
-		this.requests.push({ ...parameters });
-
-		this.batches[key].deferreds?.push(deferred);
+		// add each request to the list
+		batch.requests.push({ ...parameters });
+		batch.deferreds?.push(deferred);
 
 		//wait for all of the requests to come in
-		window.clearTimeout(this.timeout);
-		this.timeout = window.setTimeout(async () => {
-			const reorderRequests = (a: RecommendRequestModel, b: RecommendRequestModel) => {
-				//undefined order goes last
-				if (a.order == undefined && b.order == undefined) {
-					return 0;
-				}
-				if (a.order == undefined && b.order != undefined) {
-					return 1;
-				}
-				if (b.order == undefined && a.order != undefined) {
-					return -1;
-				}
-				if (a.order! < b.order!) {
-					return -1;
-				}
-				if (a.order! > b.order!) {
-					return 1;
-				}
-				return 0;
-			};
-
+		window.clearTimeout(batch.timeout);
+		batch.timeout = window.setTimeout(async () => {
 			//reorder the requests by order value in context.
-			const sortedRequests = this.requests.sort(reorderRequests);
+			const batchedRequests = batch.requests.sort(sortRequests);
 
 			//now that the requests are in proper order, map through them
 			//and build out the batches
-			sortedRequests.map((request: RecommendRequestModel) => {
+			batchedRequests.map((request: RecommendRequestModel) => {
 				let { tags, limits, categories, ...otherParams } = request;
 
 				if (!limits) limits = 20;
 				const [tag] = tags || [];
 
-				let key = getKey(otherParams as RecommendRequestModel);
-
 				delete otherParams.batched; // remove from request parameters
 				delete otherParams.order; // remove from request parameters
 
-				let paramBatch = this.batches[key];
-
-				paramBatch.request.tags.push(tag);
+				batch.request.tags.push(tag);
 
 				if (categories) {
-					if (!paramBatch.request.categories) {
-						paramBatch.request.categories = categories;
+					if (!batch.request.categories) {
+						batch.request.categories = categories;
 					} else {
-						paramBatch.request.categories = paramBatch.request.categories.concat(categories);
+						batch.request.categories = batch.request.categories.concat(categories);
 					}
 				}
 
-				paramBatch.request.limits = (paramBatch.request.limits as number[]).concat(limits);
-				paramBatch.request = { ...paramBatch.request, ...otherParams };
+				batch.request.limits = (batch.request.limits as number[]).concat(limits);
+				batch.request = { ...batch.request, ...otherParams };
 			});
 
-			//fetch and return each batch
-			Object.keys(this.batches).forEach(async (batchKey: string) => {
-				let batch = this.batches[batchKey];
-
-				//get or post?
+			try {
+				let response: RecommendResponseModel;
 				if (charsParams(batch.request) > 1024) {
-					//post request needs products as a string.
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
 					}
+					response = await this.postRecommendations(batch.request);
+				} else {
+					response = await this.getRecommendations(batch.request);
 				}
 
-				try {
-					let response: RecommendResponseModel;
-					if (charsParams(batch.request) > 1024) {
-						response = await this.postRecommendations(batch.request);
-					} else {
-						response = await this.getRecommendations(batch.request);
-					}
-
-					batch.deferreds?.forEach((def, index) => {
-						def.resolve([response[index]]);
-					});
-				} catch (err) {
-					batch.deferreds?.forEach((def) => {
-						def.reject(err);
-					});
-				}
-				delete this.batches[batchKey];
-			});
+				batch.deferreds?.forEach((def, index) => {
+					def.resolve([response[index]]);
+				});
+			} catch (err) {
+				batch.deferreds?.forEach((def) => {
+					def.reject(err);
+				});
+			}
+			delete this.batches[key];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
@@ -264,4 +227,24 @@ export class RecommendAPI extends API {
 
 		return response as unknown as RecommendResponseModel;
 	}
+}
+
+function sortRequests(a: RecommendRequestModel, b: RecommendRequestModel) {
+	// undefined order goes last
+	if (a.order == undefined && b.order == undefined) {
+		return 0;
+	}
+	if (a.order == undefined && b.order != undefined) {
+		return 1;
+	}
+	if (b.order == undefined && a.order != undefined) {
+		return -1;
+	}
+	if (a.order! < b.order!) {
+		return -1;
+	}
+	if (a.order! > b.order!) {
+		return 1;
+	}
+	return 0;
 }
