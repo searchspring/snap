@@ -15,6 +15,7 @@ describe('Recommend Api', () => {
 	it('has expected default functions', () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
 
+		// @ts-ignore - accessing private property
 		expect(api?.batches).toBeDefined();
 
 		expect(api?.getProfile).toBeDefined();
