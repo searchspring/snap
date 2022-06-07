@@ -21,7 +21,7 @@ describe('State store', () => {
 		expect(stateStore.locks).toBeDefined();
 		expect(stateStore.url).toBeDefined();
 
-		expect(stateStore.input).toBe('');
+		expect(stateStore.input).toBe(undefined);
 	});
 
 	it('links the controller urlManager', () => {
@@ -72,7 +72,7 @@ describe('State store', () => {
 
 		stateStore.reset();
 
-		expect(stateStore.input).toBe('');
+		expect(stateStore.input).toBe(undefined);
 		expect(stateStore.locks.terms.locked).toBe(false);
 		expect(stateStore.locks.facets.locked).toBe(false);
 	});

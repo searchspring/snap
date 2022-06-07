@@ -7,8 +7,9 @@ export class StateStore {
 		terms: Lock;
 		facets: Lock;
 	};
+
 	public focusedInput: HTMLInputElement | undefined = undefined;
-	public input = '';
+	public input: string | undefined = undefined;
 	public url: UrlManager;
 
 	constructor(services: StoreServices) {
@@ -28,7 +29,7 @@ export class StateStore {
 	}
 
 	public reset(): void {
-		this.input = '';
+		this.input = undefined;
 		this.locks.terms.reset();
 		this.locks.facets.reset();
 	}

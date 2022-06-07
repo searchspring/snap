@@ -63,7 +63,7 @@ export class AutocompleteController extends AbstractController {
 
 		// get current search from url before detaching
 		if (this.config.settings!.initializeFromUrl) {
-			this.store.state.input = this.urlManager.state.query || '';
+			this.store.state.input = this.urlManager.state.query;
 
 			// reset to force search on focus
 			// TODO: make a config setting for this
