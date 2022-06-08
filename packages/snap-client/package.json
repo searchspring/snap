@@ -20,8 +20,8 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.27.7",
-		"deepmerge": "^4.2.2"
+		"@searchspring/snap-toolbox": "0.27.7",
+		"deepmerge": "4.2.2"
 	},
 	"sideEffects": false,
 	"files": [

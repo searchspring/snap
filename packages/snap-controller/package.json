@@ -20,17 +20,17 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.27.7",
-		"deepmerge": "^4.2.2"
+		"@searchspring/snap-toolbox": "0.27.7",
+		"deepmerge": "4.2.2"
 	},
 	"devDependencies": {
-		"@searchspring/snap-client": "^0.27.7",
-		"@searchspring/snap-event-manager": "^0.27.7",
-		"@searchspring/snap-logger": "^0.27.7",
-		"@searchspring/snap-profiler": "^0.27.7",
-		"@searchspring/snap-store-mobx": "^0.27.7",
-		"@searchspring/snap-tracker": "^0.27.7",
-		"@searchspring/snap-url-manager": "^0.27.7"
+		"@searchspring/snap-client": "0.27.7",
+		"@searchspring/snap-event-manager": "0.27.7",
+		"@searchspring/snap-logger": "0.27.7",
+		"@searchspring/snap-profiler": "0.27.7",
+		"@searchspring/snap-store-mobx": "0.27.7",
+		"@searchspring/snap-tracker": "0.27.7",
+		"@searchspring/snap-url-manager": "0.27.7"
 	},
 	"sideEffects": false,
 	"files": [
