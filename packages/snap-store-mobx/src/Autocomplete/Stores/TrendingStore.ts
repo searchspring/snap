@@ -1,18 +1,19 @@
 import { observable, makeObservable } from 'mobx';
 
+import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { StoreServices } from '../../types';
 import type { StateStore } from './StateStore';
 import { Term } from './TermStore';
 
-export class TrendingStore extends Array {
+export class TrendingStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(services: StoreServices, trendingData, resetTerms: () => void, rootState: StateStore) {
-		const terms = [];
+	constructor(services: StoreServices, trendingData: TrendingResponseModel, resetTerms: () => void, rootState: StateStore) {
+		const terms: Array<Term> = [];
 
-		trendingData?.queries?.map((term) => {
+		trendingData?.trending?.queries?.map((term) => {
 			terms.push(
 				new Term(
 					services,

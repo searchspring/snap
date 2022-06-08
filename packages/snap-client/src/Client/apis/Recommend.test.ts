@@ -15,6 +15,7 @@ describe('Recommend Api', () => {
 	it('has expected default functions', () => {
 		let api = new RecommendAPI(new ApiConfiguration({}));
 
+		// @ts-ignore - accessing private property
 		expect(api?.batches).toBeDefined();
 
 		expect(api?.getProfile).toBeDefined();
@@ -229,6 +230,59 @@ describe('Recommend Api', () => {
 		await wait(250);
 
 		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations handles order prop as expected', async () => {
+		let api = new RecommendAPI(new ApiConfiguration({}));
+
+		let requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		//shirt category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['similar'],
+			categories: ['shirts'],
+			limits: 14,
+			order: 3,
+			batched: true,
+			...batchParams,
+		});
+		//no order
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			limits: 10,
+			batched: true,
+			...batchParams,
+		});
+		//no category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			limits: 10,
+			order: 2,
+			batched: true,
+			...batchParams,
+		});
+		//pants category
+		// @ts-ignore
+		api.batchRecommendations({
+			tags: ['crossSell'],
+			categories: ['pants'],
+			limits: 10,
+			order: 1,
+			batched: true,
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+		let reorderedGetURL =
+			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&tags=crossSell&tags=similar&tags=crossSell&limits=10&limits=10&limits=14&limits=10&categories=pants&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
+		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
 		requestMock.mockReset();
 	});
 

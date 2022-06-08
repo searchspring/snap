@@ -1,8 +1,9 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { SelectionStore } from './SelectionStore';
+import { SelectionStore, SelectionStoreData } from './SelectionStore';
 import { StorageStore } from '../../Storage/StorageStore';
+import { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
@@ -30,13 +31,16 @@ describe('SelectionStore', () => {
 
 		const storage = new StorageStore();
 
-		let data, store, selectionValue, selectionStoreData;
+		let data: SearchResponseModel & { meta: MetaResponseModel },
+			store: SelectionStore,
+			selectionValue: string | undefined,
+			selectionStoreData: SelectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta();
 			selectionStoreData = {
 				state: { persisted: false },
-				facets: data.facets,
+				facets: data.facets!,
 				meta: data.meta,
 				loading: false,
 				storage: storage,
@@ -149,14 +153,18 @@ describe('SelectionStore', () => {
 			],
 		};
 
-		let data, store, storage, selectionValue, selectionStoreData;
+		let data: SearchResponseModel & { meta: MetaResponseModel },
+			store: SelectionStore,
+			storage: StorageStore,
+			selectionValue: string | undefined,
+			selectionStoreData: SelectionStoreData;
 
 		beforeAll(() => {
 			data = mockData.searchMeta('hierarchy');
 			storage = new StorageStore();
 			selectionStoreData = {
 				state: { persisted: false },
-				facets: data.facets,
+				facets: data.facets!,
 				meta: data.meta,
 				loading: false,
 				storage: storage,
@@ -188,7 +196,7 @@ describe('SelectionStore', () => {
 
 			selectionStoreData = {
 				state: { persisted: false },
-				facets: data.facets,
+				facets: data.facets!,
 				meta: data.meta,
 				loading: false,
 				storage: storage,
@@ -206,7 +214,11 @@ describe('SelectionStore', () => {
 	});
 
 	describe('Non-hierarchy', () => {
-		let data, store, storage, selectionValue, selectionStoreData;
+		let data: SearchResponseModel & { meta: MetaResponseModel },
+			store: SelectionStore,
+			storage: StorageStore,
+			selectionValue: string | undefined,
+			selectionStoreData: SelectionStoreData;
 
 		const config = {
 			id: 'finder2',
@@ -236,7 +248,7 @@ describe('SelectionStore', () => {
 			storage = new StorageStore();
 			selectionStoreData = {
 				state: { persisted: false },
-				facets: data.facets,
+				facets: data.facets!,
 				meta: data.meta,
 				loading: false,
 				storage: storage,
@@ -251,7 +263,7 @@ describe('SelectionStore', () => {
 
 		it('adds an option to the values for resetting', () => {
 			store.forEach((selection, index) => {
-				expect(selection.values.length).toBe(selection.data.length + 1);
+				expect(selection.values.length).toBe(selection.data?.length! + 1);
 				expect(selection.values[0]).toHaveProperty('value', '');
 				expect(selection.values[0]).toHaveProperty('label', config.fields[index].label);
 			});
@@ -271,7 +283,7 @@ describe('SelectionStore', () => {
 			const valuesBeforeSelection = store.map((selection) => selection.values);
 
 			// find a value that does not yeild 0 results in further selections
-			selectionValue = store[0].values.filter((value) => value.count > 1000).pop().value; // "15"
+			selectionValue = store[0].values.filter((value) => value.count! > 1000).pop()?.value; // "15"
 
 			// make selection
 			store[0].select(selectionValue);

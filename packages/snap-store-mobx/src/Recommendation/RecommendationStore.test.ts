@@ -34,14 +34,14 @@ describe('RecommendationStore store', () => {
 
 		expect(store.loaded).toBe(true);
 
-		expect(store.profile.tag).toBe(data.profile.tag);
-		expect(store.profile.placement).toBe(data.profile.placement);
-		expect(store.profile.display).toStrictEqual(data.profile.display);
+		expect(store.profile?.tag).toBe(data.profile.tag);
+		expect(store.profile?.placement).toBe(data.profile.placement);
+		expect(store.profile?.display).toStrictEqual(data.profile.display);
 
 		expect(store.results).toHaveLength(data.results.length);
-		expect(store.results[0].type).toBe('product');
-		expect(store.results[0].id).toStrictEqual(data.results[0].id);
-		expect(store.results[0].mappings).toStrictEqual(data.results[0].mappings);
-		expect(store.results[0].attributes).toStrictEqual(data.results[0].attributes);
+		expect(store.results && store.results[0].type).toBe('product');
+		expect(store.results && store.results[0].id).toStrictEqual(data.results[0].id);
+		expect(store.results && store.results[0].mappings).toStrictEqual(data.results[0].mappings);
+		expect(store.results && store.results[0].attributes).toStrictEqual(data.results[0].attributes);
 	});
 });

@@ -5,25 +5,23 @@ import type { StoreServices } from '../../types';
 import type {
 	MetaResponseModel,
 	MetaResponseModelSortOption,
-	MetaResponseModelSortOptionDirectionEnum,
-	SearchResponseModelFacetRangeBucketsAllOfValues,
 	SearchResponseModelSearch,
 	SearchResponseModelSorting,
 } from '@searchspring/snapi-types';
 
-interface MetaResponseModelSortOptionMutated extends MetaResponseModelSortOption {
+type MetaResponseModelSortOptionMutated = MetaResponseModelSortOption & {
 	active?: boolean;
 	default?: boolean;
-}
+};
 
 export class SortingStore {
-	options: Option[] = [];
+	public options: Option[] = [];
 
 	constructor(services: StoreServices, sorting: SearchResponseModelSorting[], search: SearchResponseModelSearch, meta: MetaResponseModel) {
 		if (services && meta.sortOptions) {
-			const activeSort = sorting && sorting.length && sorting[0];
+			const activeSort = sorting?.length && sorting[0];
 
-			this.options = meta.sortOptions
+			const options = (meta.sortOptions || [])
 				.filter((option: MetaResponseModelSortOptionMutated) => {
 					if (!search?.query) {
 						return option.type == 'field';
@@ -32,9 +30,7 @@ export class SortingStore {
 				})
 				.map((option: MetaResponseModelSortOptionMutated, index: number) => {
 					option.active = false;
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					if (activeSort && activeSort.field == option.field && activeSort.direction == option.direction) {
+					if (activeSort && activeSort.field == option.field && String(activeSort.direction) == String(option.direction)) {
 						option.active = true;
 					} else if (!activeSort && index === 0) {
 						option.active = true;
@@ -51,6 +47,7 @@ export class SortingStore {
 					return optionObj;
 				});
 
+			this.options = options;
 			makeObservable(this, {
 				options: observable,
 				current: computed,
@@ -58,28 +55,28 @@ export class SortingStore {
 		}
 	}
 
-	get current(): Option {
+	public get current(): Option | undefined {
 		return this.options.filter((option) => option.active).pop();
 	}
 }
 
 class Option {
-	active: boolean;
-	default: boolean;
-	field: string;
-	label: string;
-	direction: string;
-	type: string;
-	value: string;
-	url: UrlManager;
+	public active: boolean;
+	public default: boolean;
+	public field: string;
+	public label: string;
+	public direction: string;
+	public type: string;
+	public value: string;
+	public url: UrlManager;
 
-	constructor(services: StoreServices, option, index) {
-		this.active = option.active;
-		this.default = option.default;
-		this.field = option.field;
-		this.label = option.label;
-		this.direction = option.direction;
-		this.type = option.type;
+	constructor(services: StoreServices, option: MetaResponseModelSortOptionMutated, index: number) {
+		this.active = option.active!;
+		this.default = option.default!;
+		this.field = option.field!;
+		this.label = option.label!;
+		this.direction = option.direction!;
+		this.type = option.type!;
 		this.value = `${option.label}:${option.field}:${option.direction}:${index}`;
 
 		if (this.default) {

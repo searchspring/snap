@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.7](https://github.com/searchspring/snap/compare/v0.27.6...v0.27.7) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.27.6](https://github.com/searchspring/snap/compare/v0.27.5...v0.27.6) (2022-06-03)
+
+**Note:** Version bump only for package @searchspring/snap
+
+
+
+
+
+## [0.27.5](https://github.com/searchspring/snap/compare/v0.27.4...v0.27.5) (2022-05-19)
+
+
+### Bug Fixes
+
+* **urltranslator:** fixing a bug in the core type that did not allow for proper configuration ([0162342](https://github.com/searchspring/snap/commit/016234246fa19bec4664725346999501008b4571))
+
+
+
+
+
 ## [0.27.4](https://github.com/searchspring/snap/compare/v0.27.3...v0.27.4) (2022-05-09)
 
 **Note:** Version bump only for package @searchspring/snap

@@ -6,34 +6,38 @@ import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
+import type { ResultStore } from '@searchspring/snap-store-mobx';
+
+// TODO: refactor to use mock store data
+const mockResults = searchResponse.results as unknown as ResultStore;
 
 describe('Result Component', () => {
 	it('renders', () => {
-		const rendered = render(<Result result={searchResponse.results[0]} />);
+		const rendered = render(<Result result={mockResults[0]} />);
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
 	});
 
 	it('renders image', () => {
-		const rendered = render(<Result result={searchResponse.results[0]} />);
+		const rendered = render(<Result result={mockResults[0]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toBeInTheDocument();
 	});
 
 	it('renders badge', () => {
-		const rendered = render(<Result result={searchResponse.results[0]} />);
+		const rendered = render(<Result result={mockResults[0]} />);
 		const badgeElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__badge');
 		expect(badgeElement).toBeInTheDocument();
 	});
 
 	it('renders title', () => {
-		const rendered = render(<Result result={searchResponse.results[0]} />);
+		const rendered = render(<Result result={mockResults[0]} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title').textContent;
-		expect(title).toBe(searchResponse.results[0].mappings.core.name);
+		expect(title).toBe(mockResults[0].mappings.core.name);
 	});
 
 	it('renders pricing', () => {
-		const rendered = render(<Result result={searchResponse.results[0]} />);
+		const rendered = render(<Result result={mockResults[0]} />);
 		const priceElement = rendered.container.querySelectorAll('.ss__result .ss__result__details__pricing .ss__price');
 		expect(priceElement[0]).toBeInTheDocument();
 		expect(priceElement.length).toBe(2);
@@ -41,7 +45,7 @@ describe('Result Component', () => {
 
 	it('renders details', () => {
 		const args = {
-			result: searchResponse.results[0],
+			result: mockResults[0],
 			detailSlot: <div className="details">Add to cart'</div>,
 		};
 		const rendered = render(<Result {...args} />);
@@ -52,7 +56,7 @@ describe('Result Component', () => {
 
 	it('hides various sections', () => {
 		const args = {
-			result: searchResponse.results[0],
+			result: mockResults[0],
 			hideBadge: true,
 			hideTitle: true,
 			hidePricing: true,
@@ -68,7 +72,7 @@ describe('Result Component', () => {
 
 	it('hides image section', () => {
 		const args = {
-			result: searchResponse.results[0],
+			result: mockResults[0],
 			hideImage: true,
 		};
 		const rendered = render(<Result {...args} />);
@@ -77,20 +81,20 @@ describe('Result Component', () => {
 	});
 
 	it('should display a fallback image', () => {
-		const rendered = render(<Result result={searchResponse.results[1]} />);
+		const rendered = render(<Result result={mockResults[1]} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 	});
 
 	it('should can change the layout', () => {
-		const rendered = render(<Result result={searchResponse.results[1]} layout={Layout.LIST} />);
+		const rendered = render(<Result result={mockResults[1]} layout={Layout.LIST} />);
 		const Element = rendered.container.querySelector('.ss__result');
 		expect(Element).toHaveClass(`ss__result--${Layout.LIST}`);
 	});
 
 	it('can truncate the title', () => {
 		const args = {
-			result: searchResponse.results[1],
+			result: mockResults[1],
 			truncateTitle: {
 				limit: 3,
 				append: '...',
@@ -105,7 +109,7 @@ describe('Result Component', () => {
 	it('can set a custom onClick function', () => {
 		const onClickFunc = jest.fn();
 
-		const rendered = render(<Result result={searchResponse.results[1]} onClick={onClickFunc} />);
+		const rendered = render(<Result result={mockResults[1]} onClick={onClickFunc} />);
 		const resultElement = rendered.container.querySelector('.ss__result a');
 		expect(resultElement).toBeInTheDocument();
 
@@ -115,7 +119,7 @@ describe('Result Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Result result={searchResponse.results[1]} className={className} />);
+		const rendered = render(<Result result={mockResults[1]} className={className} />);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 		expect(resultElement).toBeInTheDocument();
@@ -123,7 +127,7 @@ describe('Result Component', () => {
 	});
 
 	it('can disable styles', () => {
-		const rendered = render(<Result result={searchResponse.results[1]} disableStyles />);
+		const rendered = render(<Result result={mockResults[1]} disableStyles />);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 
@@ -142,7 +146,7 @@ describe('Result theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Result result={searchResponse.results[0]} />
+				<Result result={mockResults[0]} />
 			</ThemeProvider>
 		);
 		const result = rendered.container.querySelector('.ss__result');
@@ -159,7 +163,7 @@ describe('Result theming works', () => {
 				},
 			},
 		};
-		const rendered = render(<Result result={searchResponse.results[0]} theme={propTheme} />);
+		const rendered = render(<Result result={mockResults[0]} theme={propTheme} />);
 		const result = rendered.container.querySelector('.ss__result');
 		const title = rendered.container.querySelector('.ss__result__details__title');
 		expect(result).toBeInTheDocument();
@@ -184,7 +188,7 @@ describe('Result theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Result result={searchResponse.results[0]} theme={propTheme} />
+				<Result result={mockResults[0]} theme={propTheme} />
 			</ThemeProvider>
 		);
 

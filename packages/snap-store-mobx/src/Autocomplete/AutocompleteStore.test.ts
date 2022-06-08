@@ -2,6 +2,7 @@ import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
 import { AutocompleteStore } from './AutocompleteStore';
+import { AutocompleteResponseModel, MetaResponseModel, MetaResponseModelFacetDefaults } from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
@@ -11,7 +12,7 @@ const mockData = new MockData({ meta: 'ac.meta' });
 
 const autocompleteConfig = {
 	id: 'autocomplete',
-	selector: undefined,
+	selector: '',
 	settings: {
 		initializeFromUrl: false,
 		syncInputs: false,
@@ -19,7 +20,9 @@ const autocompleteConfig = {
 };
 
 describe('Autocomplete Store', () => {
-	let searchData;
+	let searchData: AutocompleteResponseModel & {
+		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
+	};
 
 	beforeEach(() => {
 		searchData = mockData.autocompleteMeta();
@@ -46,7 +49,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.merchandising).toEqual({ redirect: '', content: {} });
 
 		expect(autocompleteStore.search).toBeDefined();
-		expect(autocompleteStore.search.query).toBeUndefined();
+		expect(autocompleteStore.search?.query).toBeUndefined();
 
 		expect(autocompleteStore.facets).toBeDefined();
 		expect(autocompleteStore.facets).toHaveLength(0);
@@ -58,10 +61,10 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.results).toHaveLength(0);
 
 		expect(autocompleteStore.pagination).toBeDefined();
-		expect(autocompleteStore.pagination.totalResults).toBeUndefined();
+		expect(autocompleteStore.pagination?.totalResults).toBeUndefined();
 
 		expect(autocompleteStore.sorting).toBeDefined();
-		expect(autocompleteStore.sorting.options).toHaveLength(0);
+		expect(autocompleteStore.sorting?.options).toHaveLength(0);
 	});
 
 	it('update function updates all of the stores', () => {
@@ -73,21 +76,21 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.meta).toStrictEqual(searchData.meta);
 
 		expect(autocompleteStore.search).toBeDefined();
-		expect(autocompleteStore.search.query).toBeDefined();
-		expect(autocompleteStore.search.query.string).toEqual(searchData.autocomplete.query);
-		expect(autocompleteStore.search.originalQuery).toBeUndefined();
+		expect(autocompleteStore.search?.query).toBeDefined();
+		expect(autocompleteStore.search?.query?.string).toEqual(searchData.autocomplete?.query);
+		expect(autocompleteStore.search?.originalQuery).toBeUndefined();
 
 		expect(autocompleteStore.merchandising).toBeDefined();
 		expect(autocompleteStore.merchandising).toEqual(searchData.merchandising);
 
-		expect(autocompleteStore.facets).toHaveLength(searchData.facets.length);
+		expect(autocompleteStore.facets).toHaveLength(searchData?.facets?.length!);
 
 		expect(autocompleteStore.filters).toHaveLength(0);
 
-		expect(autocompleteStore.results).toHaveLength(searchData.results.length);
+		expect(autocompleteStore.results).toHaveLength(searchData?.results?.length!);
 
-		expect(autocompleteStore.pagination.totalResults).toBe(searchData.pagination.totalResults);
+		expect(autocompleteStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
 
-		expect(autocompleteStore.sorting.options).toHaveLength(searchData.meta.sortOptions.length);
+		expect(autocompleteStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.length!);
 	});
 });
