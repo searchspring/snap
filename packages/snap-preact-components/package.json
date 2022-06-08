@@ -25,27 +25,27 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.7.1",
-		"@searchspring/snap-toolbox": "^0.27.7",
-		"classnames": "^2.3.1",
-		"deepmerge": "^4.2.2",
-		"mobx-react-lite": "^3.2.3",
-		"react-ranger": "^2.1.0",
-		"swiper": "^6.8.4"
+		"@emotion/react": "11.9.0",
+		"@searchspring/snap-toolbox": "0.27.7",
+		"classnames": "2.3.1",
+		"deepmerge": "4.2.2",
+		"mobx-react-lite": "3.4.0",
+		"react-ranger": "2.1.0",
+		"swiper": "6.8.4"
 	},
 	"peerDependencies": {
 		"preact": "10.7.3"
 	},
 	"devDependencies": {
-		"@mdx-js/loader": "^1.6.22",
-		"@searchspring/snap-client": "^0.27.7",
-		"@searchspring/snap-controller": "^0.27.7",
-		"@searchspring/snap-event-manager": "^0.27.7",
-		"@searchspring/snap-logger": "^0.27.7",
-		"@searchspring/snap-profiler": "^0.27.7",
-		"@searchspring/snap-store-mobx": "^0.27.7",
-		"@searchspring/snap-tracker": "^0.27.7",
-		"@searchspring/snap-url-manager": "^0.27.7",
+		"@mdx-js/loader": "1.6.22",
+		"@searchspring/snap-client": "0.27.7",
+		"@searchspring/snap-controller": "0.27.7",
+		"@searchspring/snap-event-manager": "0.27.7",
+		"@searchspring/snap-logger": "0.27.7",
+		"@searchspring/snap-profiler": "0.27.7",
+		"@searchspring/snap-store-mobx": "0.27.7",
+		"@searchspring/snap-tracker": "0.27.7",
+		"@searchspring/snap-url-manager": "0.27.7",
 		"@storybook/addon-actions": "6.4.22",
 		"@storybook/addon-controls": "6.4.22",
 		"@storybook/addon-docs": "6.4.22",
