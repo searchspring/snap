@@ -317,10 +317,12 @@ describe('Tracker', () => {
 
 		const tracker = new Tracker(globals);
 
+		// @ts-ignore - private property
 		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
 
 		const tracker2 = new Tracker(globals, config);
 
+		// @ts-ignore - private property
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
 	});
 

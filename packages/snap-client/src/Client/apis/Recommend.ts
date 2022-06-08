@@ -1,69 +1,8 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
 import { charsParams } from '@searchspring/snap-toolbox';
-import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
-export type RecommendRequestModel = {
-	tags: string[];
-	siteId: string;
-	product?: string;
-	shopper?: string;
-	categories?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	batched?: boolean;
-	limits?: number | number[];
-	order?: number;
-};
-
-export type RecommendResponseModel = {
-	profile: {
-		tag: string;
-	};
-	results: SearchResponseModelResult[];
-}[];
-
-export type ProfileRequestModel = {
-	siteId: string;
-	tag: string;
-	branch?: string;
-};
-
-export type ProfileResponseModel = {
-	profile: {
-		tag: string;
-		placement: string;
-		display: {
-			threshold: number;
-			template: {
-				name: string;
-				uuid: string;
-				markup?: string;
-				styles?: string;
-				component?: string;
-				branch?: string;
-				group?: string;
-			};
-			templateParameters: {
-				[any: string]: unknown;
-			};
-		};
-	};
-};
-
-//TODO doesnt this exist in client types?
-export type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	shopper?: string;
-	categories?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
-};
+import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
 
 class Deferred {
 	promise: Promise<any>;
@@ -77,8 +16,6 @@ class Deferred {
 		});
 	}
 }
-
-export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
 
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {

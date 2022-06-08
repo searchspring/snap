@@ -214,7 +214,7 @@ export class AutocompleteController extends AbstractController {
 
 						// use corrected query and originalQuery
 						if (this.store.search.originalQuery) {
-							input.value = this.store.search.query.string;
+							input.value = this.store.search.query?.string!;
 							actionUrl = actionUrl?.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 						}
 					}
@@ -271,7 +271,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					if (this.store.search.originalQuery) {
-						input!.value = this.store.search.query.string;
+						if (input) {
+							input.value = this.store.search.query?.string!;
+						}
 						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 					}
 				}

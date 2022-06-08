@@ -19,12 +19,14 @@ describe('Trending Store', () => {
 	});
 
 	it('is empty when it is passed undefined', () => {
+		// @ts-ignore
 		const termStore = new TrendingStore(services, undefined, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
 	});
 
 	it('is empty when it is passed no data', () => {
+		// @ts-ignore
 		const termStore = new TrendingStore(services, {}, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
@@ -33,9 +35,9 @@ describe('Trending Store', () => {
 	it('contains the correct terms', () => {
 		const searchData = mockData.trending();
 
-		const trendingData = searchData.trending;
+		const trendingData = searchData;
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
-		expect(trendingStore).toHaveLength(trendingData.queries.length);
+		expect(trendingStore).toHaveLength(trendingData.trending.queries.length);
 
 		trendingStore.forEach((term, index) => {
 			expect(term).toHaveProperty('url');
@@ -45,14 +47,15 @@ describe('Trending Store', () => {
 			expect(term).toHaveProperty('active');
 			expect(term.active).toEqual(false);
 			expect(term).toHaveProperty('value');
-			expect(term.value).toEqual(trendingData.queries[index].searchQuery);
+			expect(term.value).toEqual(trendingData.trending.queries[index].searchQuery);
 		});
 	});
 
 	it('has terms with undefined url properties when no controller is present', () => {
 		const searchData = mockData.trending();
 
-		const trendingData = searchData.trending;
+		const trendingData = searchData;
+		// @ts-ignore
 		const trendingStore = new TrendingStore(undefined, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
@@ -65,7 +68,8 @@ describe('Trending Store', () => {
 
 		const searchData = mockData.trending();
 
-		const trendingData = searchData.trending;
+		const trendingData = searchData;
+		// @ts-ignore
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
@@ -76,7 +80,7 @@ describe('Trending Store', () => {
 	it('has a preview function on terms', () => {
 		const searchData = mockData.trending();
 
-		const trendingData = searchData.trending;
+		const trendingData = searchData;
 		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		expect(rootState.locks.terms.locked).toBe(false);

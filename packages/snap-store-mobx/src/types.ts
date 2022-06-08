@@ -25,7 +25,7 @@ export type SearchStoreConfig = StoreConfig & {
 	};
 };
 
-type FacetStoreConfig = {
+export type FacetStoreConfig = {
 	trim?: boolean;
 	pinFiltered?: boolean;
 	storeRange?: boolean;
@@ -82,7 +82,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;
 
 export type StoreServices = {
-	urlManager?: UrlManager;
+	urlManager: UrlManager;
 };
 
 export enum ErrorType {
