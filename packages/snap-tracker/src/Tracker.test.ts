@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { Tracker } from './Tracker';
-import { BeaconCategory, BeaconType, CartViewEvent, OrderTransactionData } from './types';
+import { BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
 
 const globals = {
 	siteId: 'xxxzzz',
@@ -296,6 +296,7 @@ describe('Tracker', () => {
 		expect(tracker.context.website.trackingCode).toStrictEqual(globals.siteId);
 		expect(tracker.track).toBeDefined();
 		expect(tracker.track.event).toBeDefined();
+		expect(tracker.track.error).toBeDefined();
 		expect(tracker.track.shopper.login).toBeDefined();
 		expect(tracker.track.product.view).toBeDefined();
 		expect(tracker.track.product.click).toBeDefined();
@@ -1091,6 +1092,38 @@ describe('Tracker', () => {
 		expect(beaconEvent?.type).toStrictEqual(BeaconType.CUSTOM);
 		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CUSTOM);
 		expect(beaconEvent?.event).toStrictEqual(payload.event);
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
+
+		eventFn.mockRestore();
+	});
+
+	it('can invoke track.error method', async () => {
+		const tracker = new Tracker(globals);
+
+		const eventFn = jest.spyOn(tracker.track, 'error');
+
+		const payload: TrackErrorEvent = {
+			type: 'error',
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://localhost/',
+			siteId: 'abc123',
+			framework: 'preact',
+			version: 'snapdev',
+			filename: 'https://snapui.searchspring.io/test.js',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			timeStamp: 1,
+			date: Date.now(),
+		};
+		const beaconEvent = await tracker.track.error(payload);
+
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ERROR);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.METRICS);
+		expect(beaconEvent?.event).toEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);

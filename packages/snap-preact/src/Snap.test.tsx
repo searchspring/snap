@@ -180,6 +180,52 @@ describe('Snap Preact', () => {
 		expect(snap.client.globals.merchandising).toEqual(contextConfig.context.merchandising);
 	});
 
+	it('can send beacon error events from error event listener', () => {
+		// Define the addEventListener method with a Jest mock function
+		const events = {};
+		window.addEventListener = jest.fn((event, callback) => {
+			events[event] = callback;
+		});
+		window.removeEventListener = jest.fn((event, callback) => {
+			delete events[event];
+		});
+
+		const tracker = new Tracker(baseConfig.client.globals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(baseConfig, { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		// @ts-ignore - jest event listener mock
+		events.error(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
+	});
+
+	it('can send beacon error events using beaconErrorEvent method', () => {
+		const tracker = new Tracker(baseConfig.client.globals);
+		const spy = jest.spyOn(tracker.track, 'error');
+		const snap = new Snap(baseConfig, { tracker });
+
+		const error = new ErrorEvent('error', {
+			error: new Error('test error'),
+			message: 'something went wrong!',
+			lineno: 1,
+			filename: 'https://snapui.searchspring.io/test.js',
+		});
+
+		snap.beaconErrorEvent(error);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockClear();
+	});
+
 	describe('creates search controllers via config', () => {
 		it(`can create a search controller`, () => {
 			const searchConfig = {

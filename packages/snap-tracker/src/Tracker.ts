@@ -18,6 +18,7 @@ import {
 	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
+	TrackErrorEvent,
 	OrderTransactionData,
 	Product,
 	TrackerConfig,
@@ -209,6 +210,45 @@ export class Tracker {
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
+		},
+
+		error: (data: TrackErrorEvent, siteId?: string): BeaconEvent | undefined => {
+			if (!data?.stack && !data?.message) {
+				// no console log
+				return;
+			}
+			let context = this.context;
+			if (siteId) {
+				context = deepmerge(context, {
+					context: {
+						website: {
+							trackingCode: siteId,
+						},
+					},
+				});
+			}
+			const payload = {
+				type: BeaconType.ERROR,
+				category: BeaconCategory.METRICS,
+				context,
+				event: {
+					type: data?.type || 'error',
+					userAgent: data?.userAgent || navigator.userAgent,
+					href: data?.href || window.location.href,
+					siteId: data?.siteId || context.website.trackingCode,
+					framework: data?.framework,
+					version: data?.version || version,
+					filename: data?.filename,
+					stack: data?.stack,
+					message: data?.message,
+					colno: data?.colno,
+					lineno: data?.lineno,
+					timeStamp: data?.timeStamp,
+					date: data?.date || Date.now(),
+				},
+			};
+
+			return this.track.event(payload);
 		},
 
 		shopper: {

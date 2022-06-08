@@ -199,6 +199,39 @@ const payload = {
 
 ```
 
+### Error Event `track.error`
+Tracks error events. Parameter expects a payload with various properties derived from an `ErrorEvent` object.
+Requires at least a `stack` or `message` to be provided.
+
+```typescript
+const handleErrorTracking = (event: ErrorEvent) :void => {
+    const { type, filename, colno, lineno, error: { stack }, message, timeStamp } = event;
+    const userAgent = navigator.userAgent;
+    const href = window.location.href;
+    const siteId = this.config.client.globals.siteId;
+    const framework = 'preact';
+    const date = Date.now();
+
+    const beaconPayload: TrackErrorEvent = {
+        type,
+        userAgent,
+        href,
+        siteId,
+        framework,
+        version,
+        filename,
+        stack,
+        message,
+        colno,
+        lineno,
+        timeStamp,
+        date,
+    };
+
+    tracker.track.error(beaconPayload);
+}
+```
+
 ### Product Click `track.product.click`
 Tracks product click events. It is reccomended to invoke on each product `onmousedown` event via the `result.track.click()` method. Various Snap controllers will expose these tracking events differently, see the controller documentation for details. 
 

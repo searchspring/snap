@@ -31,6 +31,7 @@ export enum BeaconType {
 	ORDER = 'transaction',
 	LOGIN = 'login',
 	CLICK = 'click',
+	ERROR = 'error',
 	CUSTOM = 'custom',
 
 	/** For Profiles Recommendations */
@@ -51,6 +52,7 @@ export enum BeaconCategory {
 	PERSONALIZATION = 'searchspring.personalization',
 	RECOMMENDATIONS = 'searchspring.recommendations.user-interactions',
 	INTERACTION = 'searchspring.user-interactions',
+	METRICS = 'searchspring.metrics',
 	CUSTOM = 'custom',
 }
 
@@ -73,6 +75,21 @@ export interface BeaconMeta {
 
 export interface ShopperLoginEvent {
 	id: string;
+}
+export interface TrackErrorEvent {
+	type?: string;
+	userAgent?: string;
+	href?: string;
+	siteId?: string;
+	framework?: string;
+	version?: string;
+	filename?: string;
+	stack?: string;
+	message?: string;
+	colno?: number;
+	lineno?: number;
+	timeStamp?: number;
+	date?: number;
 }
 export interface ProductViewEvent {
 	sku?: string;
@@ -153,6 +170,7 @@ export type PreflightRequestModel = {
 
 export interface TrackMethods {
 	event: (payload: BeaconPayload) => BeaconEvent;
+	error: (data: TrackErrorEvent) => BeaconEvent | undefined;
 	shopper: {
 		login: (data: ShopperLoginEvent, siteId?: string) => BeaconEvent | undefined;
 	};
