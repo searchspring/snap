@@ -8,6 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
 import type { ResultStore } from '@searchspring/snap-store-mobx';
 
+// TODO: refactor to use mock store data
 const mockResults = searchResponse.results as unknown as ResultStore;
 
 describe('Result Component', () => {

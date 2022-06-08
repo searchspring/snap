@@ -18,6 +18,7 @@ describe('Carousel Component', () => {
 		},
 	};
 
+	// TODO: refactor to use mock store data
 	it('renders', () => {
 		const rendered = render(
 			<Carousel>
