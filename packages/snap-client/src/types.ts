@@ -108,6 +108,7 @@ export type RecommendRequestModel = {
 	test?: boolean;
 	batched?: boolean;
 	limits?: number | number[];
+	order?: number;
 };
 
 export type RecommendResponseModel = {
