@@ -25,3 +25,9 @@ The `onChange` prop is invoked when the input's value has been changed.
 <SearchInput onChange={handleChange} />
 ```
 
+### hideIcon
+The `hideIcon` prop determines if the icon should be hidden or not. 
+
+```jsx
+<SearchInput hideIcon={true} />
+```

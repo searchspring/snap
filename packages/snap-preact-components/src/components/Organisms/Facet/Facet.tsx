@@ -45,6 +45,9 @@ const CSS = {
 					marginRight: '8px',
 				},
 			},
+			'& .ss__search-input': {
+				margin: '16px 0 0 0',
+			},
 		}),
 };
 
@@ -246,7 +249,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const searchableFacet = {
 		allowableTypes: ['list', 'grid', 'palette'],
 		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
-			if ((facet as ValueFacet)?.search?.input) {
+			if ((facet as ValueFacet)?.search) {
 				(facet as ValueFacet).search.input = e.target.value;
 			}
 		},

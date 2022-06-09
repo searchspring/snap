@@ -34,7 +34,6 @@ export default {
 	],
 	argTypes: {
 		onChange: {
-			defaultValue: true,
 			description: 'Onchange Callback',
 			table: {
 				type: {
@@ -42,6 +41,16 @@ export default {
 				},
 			},
 			action: 'onChange',
+		},
+		hideIcon: {
+			description: 'Hides icon',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		placeholder: {
 			defaultValue: 'Search',
