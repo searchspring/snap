@@ -71,14 +71,17 @@ export class RecommendAPI extends API {
 		batch.requests.push({ ...parameters });
 		batch.deferreds?.push(deferred);
 
-		//wait for all of the requests to come in
+		// wait for all of the requests to come in
 		window.clearTimeout(batch.timeout);
 		batch.timeout = window.setTimeout(async () => {
-			//reorder the requests by order value in context.
+			// delete the batch so a new one can take its place
+			delete this.batches[key];
+
+			// reorder the requests by order value in context.
 			const batchedRequests = batch.requests.sort(sortRequests);
 
-			//now that the requests are in proper order, map through them
-			//and build out the batches
+			// now that the requests are in proper order, map through them
+			// and build out the batches
 			batchedRequests.map((request: RecommendRequestModel) => {
 				let { tags, limits, categories, ...otherParams } = request;
 
@@ -121,7 +124,6 @@ export class RecommendAPI extends API {
 					def.reject(err);
 				});
 			}
-			delete this.batches[key];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
