@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
+
+
+### Bug Fixes
+
+* **client:** deleting the batch as soon as it begins execution so that new requests don't attach ([35ebeb5](https://github.com/searchspring/snap/commit/35ebeb535e2aba6d4f0bd8cb71e2b5473b2a9dd9))
+
+
+
+
+
 ## [0.27.7](https://github.com/searchspring/snap/compare/v0.27.6...v0.27.7) (2022-06-03)
 
 **Note:** Version bump only for package @searchspring/snap

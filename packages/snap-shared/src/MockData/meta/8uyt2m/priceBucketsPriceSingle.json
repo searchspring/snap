@@ -1,0 +1,133 @@
+{
+    "sortOptions": [
+      {
+        "type": "relevance",
+        "field": "relevance",
+        "direction": "desc",
+        "label": "Best Match"
+      },
+      {
+        "type": "field",
+        "field": "sales_rank",
+        "direction": "desc",
+        "label": "Most Popular"
+      },
+      {
+        "type": "field",
+        "field": "title",
+        "direction": "asc",
+        "label": "Name (A - Z)"
+      },
+      {
+        "type": "field",
+        "field": "price",
+        "direction": "asc",
+        "label": "Price ($ - $S$)"
+      },
+      {
+        "type": "field",
+        "field": "price",
+        "direction": "desc",
+        "label": "Price ($$$ - $)"
+      },
+      {
+        "type": "field",
+        "field": "title",
+        "direction": "desc",
+        "label": "Name (Z - A)"
+      }
+    ],
+    "facets": {
+      "brand": {
+        "display": "list",
+        "label": "Brand",
+        "collapsed": false,
+        "multiple": "or"
+      },
+      "collection": {
+        "display": "list",
+        "label": "Collection",
+        "collapsed": false,
+        "multiple": "or"
+      },
+      "color_family": {
+        "display": "palette",
+        "label": "Color",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "dress_length_name": {
+        "display": "list",
+        "label": "Dress Length",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "material": {
+        "display": "list",
+        "label": "Material",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "on_sale": {
+        "display": "list",
+        "label": "On Sale",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "pattern": {
+        "display": "list",
+        "label": "Pattern",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "price": {
+        "display": "list",
+        "label": "Price",
+        "collapsed": false,
+        "multiple": "single"
+      },
+      "saturation": {
+        "display": "list",
+        "label": "Color Intensity",
+        "collapsed": false,
+        "multiple": "or"
+      },
+      "season": {
+        "display": "list",
+        "label": "Season",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "size": {
+        "display": "grid",
+        "label": "Size",
+        "collapsed": false,
+        "multiple": "and"
+      },
+      "size_dress": {
+        "display": "grid",
+        "label": "Dress Size",
+        "collapsed": true,
+        "multiple": "single"
+      },
+      "size_footwear": {
+        "display": "grid",
+        "label": "Shoe Size",
+        "collapsed": false,
+        "multiple": "or"
+      },
+      "size_pants": {
+        "display": "list",
+        "label": "Pant Size",
+        "collapsed": true,
+        "multiple": "or"
+      },
+      "ss_category_hierarchy": {
+        "display": "hierarchy",
+        "label": "Category",
+        "collapsed": false,
+        "multiple": "single",
+        "hierarchyDelimiter": ">"
+      }
+    }
+  }

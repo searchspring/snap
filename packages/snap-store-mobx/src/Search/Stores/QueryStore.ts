@@ -4,10 +4,10 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
 export class QueryStore {
-	query: Query;
-	didYouMean: Query;
-	originalQuery: Query;
-	matchType: SearchResponseModelSearchMatchTypeEnum;
+	public query?: Query;
+	public didYouMean?: Query;
+	public originalQuery?: Query;
+	public matchType?: SearchResponseModelSearchMatchTypeEnum;
 
 	constructor(services: StoreServices, search: SearchResponseModelSearch) {
 		const observables: Observables = {};
@@ -44,8 +44,8 @@ type Observables = {
 };
 
 class Query {
-	string: string;
-	url: UrlManager;
+	public string: string;
+	public url: UrlManager;
 
 	constructor(services: StoreServices, query: string) {
 		this.string = query;
