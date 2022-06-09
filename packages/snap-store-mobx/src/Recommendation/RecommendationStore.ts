@@ -3,12 +3,13 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { ResultStore } from '../Search/Stores';
 import { ProfileStore } from './Stores';
 import type { RecommendationStoreConfig, StoreServices } from '../types';
+import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
 
 export class RecommendationStore extends AbstractStore {
-	services: StoreServices;
-	loaded = false;
-	profile: ProfileStore;
-	results: ResultStore;
+	public services: StoreServices;
+	public loaded = false;
+	public profile!: ProfileStore;
+	public results!: ResultStore;
 
 	constructor(config: RecommendationStoreConfig, services: StoreServices) {
 		super(config);
@@ -27,14 +28,14 @@ export class RecommendationStore extends AbstractStore {
 		});
 	}
 
-	reset(): void {
-		this.update({});
+	public reset(): void {
+		this.update();
 	}
 
-	update(data): void {
+	public update(data?: RecommendCombinedResponseModel): void {
 		this.error = undefined;
-		this.loaded = !!data.profile;
-		this.profile = new ProfileStore(this.services, data.profile);
-		this.results = new ResultStore(this.config, this.services, data.results);
+		this.loaded = !!data?.profile;
+		this.profile = new ProfileStore(this.services, data);
+		this.results = new ResultStore(this.config, this.services, data?.results);
 	}
 }

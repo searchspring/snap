@@ -1,7 +1,7 @@
 import { getSearchParams } from './getParams';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-let urlManager;
+let urlManager: UrlManager;
 
 describe('getParams', () => {
 	beforeEach(() => {

@@ -11,8 +11,9 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, LayoutType, Layout, Result as ResultType } from '../../../types';
+import { ComponentProps, LayoutType, Layout } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	result: () =>
@@ -154,7 +155,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							href={core.url}
 							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 								onClick && onClick(e);
-								controller?.track?.product?.click(e, result);
+								controller?.track?.product?.click(e as any, result);
 							}}
 						>
 							{!hideBadge && onSale && <Badge {...subProps.badge} />}
@@ -168,7 +169,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									href={core.url}
 									onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 										onClick && onClick(e);
-										controller?.track?.product?.click(e, result);
+										controller?.track?.product?.click(e as any, result);
 									}}
 									dangerouslySetInnerHTML={{
 										__html: displayName,
@@ -208,7 +209,7 @@ interface TruncateTitleProps {
 }
 
 export interface ResultProps extends ComponentProps {
-	result: ResultType;
+	result: Product;
 	hideBadge?: boolean;
 	hideTitle?: boolean;
 	hideImage?: boolean;

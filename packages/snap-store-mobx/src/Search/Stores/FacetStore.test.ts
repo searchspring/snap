@@ -3,10 +3,26 @@ import { configure } from 'mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { FacetStore } from './FacetStore';
+import { FacetStore, ValueFacet, RangeValue, Value, HierarchyValue, RangeFacet } from './FacetStore';
 import { StorageStore } from '../../Storage/StorageStore';
 
-import type { SearchResponseModelFacetRange } from '@searchspring/snapi-types';
+import type {
+	SearchResponseModel,
+	SearchResponseModelFacetRange,
+	MetaResponseModel,
+	MetaResponseModelFacet,
+	MetaResponseModelFacetDefaults,
+	MetaResponseModelFacetGrid,
+	MetaResponseModelFacetHierarchy,
+	MetaResponseModelFacetList,
+	MetaResponseModelFacetPalette,
+	MetaResponseModelFacetSlider,
+	SearchRequestModelFilterRangeAllOfValue,
+	SearchResponseModelFilterRange,
+	SearchResponseModelFacetRangeBucketsAllOfValues,
+	SearchResponseModelFacetRangeBuckets,
+	SearchResponseModelFacetValueAllOfValues,
+} from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -24,7 +40,18 @@ configure({
 });
 
 describe('Facet Store', () => {
-	let searchData, storageStore;
+	let searchData: SearchResponseModel & {
+		meta: MetaResponseModel &
+			// MetaResponseModelFacet &
+			MetaResponseModelFacetDefaults;
+		// MetaResponseModelFacetGrid &
+		// MetaResponseModelFacetHierarchy &
+		// MetaResponseModelFacetList &
+		// MetaResponseModelFacetPalette &
+		// MetaResponseModelFacetSlider
+	};
+
+	let storageStore: StorageStore;
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -38,12 +65,14 @@ describe('Facet Store', () => {
 	});
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
+		// @ts-ignore
 		const facets = new FacetStore(undefined, undefined, undefined, undefined, undefined, undefined);
 
 		expect(facets.length).toBe(0);
 	});
 
 	it('returns an empty array when passed an empty array [] of facets', () => {
+		// @ts-ignore
 		const facets = new FacetStore(searchConfig, services, storageStore, [], undefined, undefined);
 
 		expect(facets instanceof Array).toBe(true);
@@ -53,7 +82,7 @@ describe('Facet Store', () => {
 	it('returns an array the same length as the facets passed in', () => {
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
-		expect(facets.length).toBe(searchData.facets.length);
+		expect(facets.length).toBe(searchData.facets?.length);
 	});
 
 	it('adds a reference to services to each facet', () => {
@@ -68,9 +97,11 @@ describe('Facet Store', () => {
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 		facets.forEach((facet) => {
-			expect(facet.display).toBe(searchData.meta.facets[facet.field].display);
-			expect(facet.label).toBe(searchData.meta.facets[facet.field].label);
-			expect(facet.collapsed).toBe(searchData.meta.facets[facet.field].collapsed);
+			const searchDataFacet =
+				searchData.meta.facets && (searchData.meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
+			expect(facet.display).toBe(searchData.meta.facets && searchDataFacet?.display);
+			expect(facet.label).toBe(searchData.meta.facets && searchDataFacet?.label);
+			expect(facet.collapsed).toBe(searchData.meta.facets && searchDataFacet?.collapsed);
 		});
 	});
 
@@ -78,9 +109,10 @@ describe('Facet Store', () => {
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 		facets.forEach((facet, index) => {
-			expect(facet.field).toBe(searchData.facets[index].field);
-			expect(facet.filtered).toStrictEqual(searchData.facets[index].filtered);
-			expect(facet.type).toStrictEqual(searchData.facets[index].type);
+			const searchDataFacet = searchData.facets && searchData.facets[index];
+			expect(facet.field).toBe(searchDataFacet?.field);
+			expect(facet.filtered).toStrictEqual(searchDataFacet?.filtered);
+			expect(facet.type).toStrictEqual(searchDataFacet?.type);
 		});
 	});
 
@@ -215,12 +247,11 @@ describe('Facet Store', () => {
 	it('uses range values (range-buckets) when needed', () => {
 		searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('priceBuckets');
 		const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-		const rangeFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
+		const rangeFacet: ValueFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
 
-		rangeFacet.values.forEach((value) => {
-			expect(value.value).toBeUndefined();
-			expect(value.low).toBeDefined();
-			expect(value.high).toBeDefined();
+		(rangeFacet?.values as Array<RangeValue>).forEach((value) => {
+			expect(value?.low).toBeDefined();
+			expect(value?.high).toBeDefined();
 		});
 	});
 
@@ -255,7 +286,7 @@ describe('Facet Store', () => {
 				const searchData = mockData.searchMeta('settings.trim');
 
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-				expect(facets.length).not.toBe(searchData.facets.length);
+				expect(facets.length).not.toBe(searchData.facets?.length);
 				expect(facets.length).toBe(1);
 			});
 
@@ -318,7 +349,7 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				expect(facets.length).toBe(2);
 				facets.forEach((facet) => {
-					facet.values.forEach((value, index) => {
+					facet.values.forEach((value: Value, index: number) => {
 						if (index == 0) {
 							expect(value).toHaveProperty('filtered', true);
 						}
@@ -417,10 +448,12 @@ describe('Facet Store', () => {
 
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				expect(facets.length).toBe(1);
-				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+
+				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
+				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(facets[0].active.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].active.high).toBe(searchDataFacet?.range?.high);
 
 				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
 
@@ -434,11 +467,13 @@ describe('Facet Store', () => {
 					filteredSearchData.pagination,
 					filteredSearchData.meta
 				);
+
+				const updatedSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
-				expect(updatedFacets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(updatedFacets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(updatedFacets[0].active.low).toBe(updatedSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].active.high).toBe(updatedSearchDataFacet?.range?.high);
 			});
 
 			it('can be set to NOT store range facet boundaries', () => {
@@ -454,11 +489,13 @@ describe('Facet Store', () => {
 				const searchData = mockData.searchMeta('settings.storeRange');
 
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+
+				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
-				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(facets[0].active.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].active.high).toBe(searchDataFacet?.range?.high);
 
 				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
 
@@ -472,11 +509,13 @@ describe('Facet Store', () => {
 					filteredSearchData.pagination,
 					filteredSearchData.meta
 				);
+
+				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
-				expect(updatedFacets[0].range.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].range.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].range.low).toBe(filteredSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].range.high).toBe(filteredSearchDataFacet?.range?.high);
+				expect(updatedFacets[0].active.low).toBe(filteredSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].active.high).toBe(filteredSearchDataFacet?.range?.high);
 			});
 
 			it('can be set to store range facet boundaries per facet', () => {
@@ -497,11 +536,13 @@ describe('Facet Store', () => {
 				const searchData = mockData.searchMeta('settings.storeRange');
 
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+
+				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
-				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(facets[0].active.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].active.high).toBe(searchDataFacet?.range?.high);
 
 				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
 
@@ -515,11 +556,13 @@ describe('Facet Store', () => {
 					filteredSearchData.pagination,
 					filteredSearchData.meta
 				);
+
+				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
-				expect(updatedFacets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(updatedFacets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(updatedFacets[0].active.low).toBe(filteredSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].active.high).toBe(filteredSearchDataFacet?.range?.high);
 			});
 
 			it('can be set to NOT store range facet boundaries per facet', () => {
@@ -540,11 +583,13 @@ describe('Facet Store', () => {
 				const searchData = mockData.searchMeta('settings.storeRange');
 
 				const facets = new FacetStore(settingsConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
+
+				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
-				expect(facets[0].range.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].range.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(facets[0].active.low).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(facets[0].active.high).toBe((searchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
+				expect(facets[0].active.low).toBe(searchDataFacet?.range?.low);
+				expect(facets[0].active.high).toBe(searchDataFacet?.range?.high);
 
 				// load up filtered data to verify the range remains from initial search ('settings.storeRange')
 
@@ -558,11 +603,13 @@ describe('Facet Store', () => {
 					filteredSearchData.pagination,
 					filteredSearchData.meta
 				);
+
+				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
-				expect(updatedFacets[0].range.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].range.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
-				expect(updatedFacets[0].active.low).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.low);
-				expect(updatedFacets[0].active.high).toBe((filteredSearchData.facets[0] as SearchResponseModelFacetRange).range.high);
+				expect(updatedFacets[0].range.low).toBe(filteredSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].range.high).toBe(filteredSearchDataFacet?.range?.high);
+				expect(updatedFacets[0].active.low).toBe(filteredSearchDataFacet?.range?.low);
+				expect(updatedFacets[0].active.high).toBe(filteredSearchDataFacet?.range?.high);
 			});
 		});
 	});
@@ -572,7 +619,7 @@ describe('Facet Store', () => {
 			const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
 			facets.forEach((facet) => {
-				expect(facet.multiple).toBe(searchData.meta.facets[facet.field].multiple);
+				expect(facet.multiple).toBe((searchData?.meta?.facets && (searchData?.meta?.facets[facet.field] as ValueFacet))?.multiple);
 			});
 		});
 
@@ -582,7 +629,7 @@ describe('Facet Store', () => {
 
 				facets.forEach((facet, index) => {
 					if (facet.type == 'value') {
-						expect(facet.values.length).toBe(searchData.facets[index].values.length);
+						expect(facet.values.length).toBe((searchData.facets && (searchData.facets[index] as ValueFacet))?.values.length);
 					}
 				});
 			});
@@ -593,9 +640,9 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredValueFacet = facets.filter((facet) => facet.type == 'value' && facet.filtered).pop();
 
-				const filteredValues = filteredValueFacet.values.filter((value) => value.filtered);
+				const filteredValues = filteredValueFacet.values.filter((value: Value) => value.filtered);
 
-				filteredValues.forEach((filteredValue) => {
+				filteredValues.forEach((filteredValue: Value) => {
 					expect(filteredValue.url.href).not.toMatch(filteredValueFacet.field);
 				});
 			});
@@ -606,9 +653,9 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredValueFacet = facets.filter((facet) => facet.type == 'value').pop();
 
-				const filteredValues = filteredValueFacet.values.filter((value) => !value.filtered);
+				const filteredValues = filteredValueFacet.values.filter((value: Value) => !value.filtered);
 
-				filteredValues.forEach((filteredValue) => {
+				filteredValues.forEach((filteredValue: Value) => {
 					expect(filteredValue.url.href).toMatch(filteredValueFacet.field);
 					expect(filteredValue.url.href).toMatch(filteredValue.value);
 				});
@@ -620,7 +667,7 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const hierarchyFacet = facets.filter((facet) => facet.display == 'hierarchy').pop();
 
-				hierarchyFacet.values.forEach((value) => {
+				hierarchyFacet.values.forEach((value: HierarchyValue) => {
 					expect(value.url).toBeDefined();
 					expect(value.level).toBeGreaterThanOrEqual(0);
 				});
@@ -632,10 +679,10 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const multiSelectFacet = facets.filter((facet) => facet.filtered && facet.type == 'value' && facet.multiple != 'single')[0];
 
-				const selectedFacetValue = multiSelectFacet.values.filter((value) => value.filtered)[0];
+				const selectedFacetValue = multiSelectFacet.values.filter((value: Value) => value.filtered)[0];
 				expect(selectedFacetValue.value).toBeDefined();
 
-				const unselectedFacetValue = multiSelectFacet.values.filter((value) => !value.filtered)[0];
+				const unselectedFacetValue = multiSelectFacet.values.filter((value: Value) => !value.filtered)[0];
 
 				expect(unselectedFacetValue.url.href).toMatch(unselectedFacetValue.value);
 				expect(unselectedFacetValue.url.href).toMatch(selectedFacetValue.value);
@@ -647,10 +694,10 @@ describe('Facet Store', () => {
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const singleSelectFacet = facets.filter((facet) => facet.multiple == 'single' && facet.filtered).pop();
 
-				const selectedFacetValue = singleSelectFacet.values.filter((value) => value.filtered).pop();
+				const selectedFacetValue = singleSelectFacet.values.filter((value: Value) => value.filtered).pop();
 				expect(selectedFacetValue.value).toBeDefined();
 
-				const unselectedFacetValue = singleSelectFacet.values.filter((value) => !value.filtered).pop();
+				const unselectedFacetValue = singleSelectFacet.values.filter((value: Value) => !value.filtered).pop();
 
 				expect(unselectedFacetValue.url.href).not.toMatch(selectedFacetValue.value);
 			});
@@ -663,8 +710,10 @@ describe('Facet Store', () => {
 
 				facets.forEach((facet, index) => {
 					if (facet.type == 'range-buckets') {
-						expect(facet.values.length).toBe(searchData.facets[index].values.length);
-						facet.values.forEach((value) => {
+						expect(facet.values.length).toBe(
+							(searchData?.facets && (searchData.facets[index] as SearchResponseModelFacetRangeBuckets))?.values?.length
+						);
+						facet.values.forEach((value: RangeValue) => {
 							expect(value).toHaveProperty('low');
 							expect(value).toHaveProperty('high');
 						});
@@ -676,13 +725,13 @@ describe('Facet Store', () => {
 				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
 
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
+				const filteredRangeBucketFacet: ValueFacet = facets.filter((facet) => facet.type == 'range-buckets').pop();
 
-				const filteredValues = filteredRangeBucketFacet.values.filter((value) => value.filtered);
+				const filteredValues = filteredRangeBucketFacet.values.filter((value) => value?.filtered);
 
 				filteredValues.forEach((filteredValue) => {
 					// removing the filter (URL should not have the value)
-					expect(filteredValue.url.href).not.toMatch(filteredRangeBucketFacet.field);
+					expect(filteredValue?.url.href).not.toMatch(filteredRangeBucketFacet.field);
 				});
 			});
 
@@ -691,30 +740,29 @@ describe('Facet Store', () => {
 
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 				const filteredRangeBucketFacet = facets.filter((facet) => facet.type == 'range-buckets' && facet.filtered).pop();
-				const filteredValues = filteredRangeBucketFacet.values.filter((value) => !value.filtered);
-				filteredValues.forEach((filteredValue) => {
+				const filteredValues = filteredRangeBucketFacet.values.filter((value: RangeValue) => !value?.filtered);
+				filteredValues.forEach((filteredValue: RangeValue) => {
 					expect(filteredValue.url.href).toMatch(`filter:${filteredRangeBucketFacet.field}:${filteredValue.low}:${filteredValue.high}`);
 				});
 			});
 
 			it('has a removal URL for filter value when it is filtered/active with single select', () => {
-				searchData = mockData.updateConfig({ meta: 'priceBuckets' }).searchMeta('filteredRangeBucket');
+				searchData = mockData.updateConfig({ meta: 'priceBucketsPriceSingle' }).searchMeta('filteredRangeBucket');
 
-				searchData.meta.facets.price.multiple = 'single';
 				const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-				const filteredRangeBucketFacet = facets
+				const filteredRangeBucketFacet: ValueFacet = facets
 					.filter((facet) => facet.type == 'range-buckets' && facet.multiple == 'single' && facet.filtered)
 					.pop();
 
-				const selectedFacetValue = filteredRangeBucketFacet.values.filter((value) => value.filtered).pop();
+				const selectedFacetValue = filteredRangeBucketFacet.values.filter((value) => value?.filtered).pop();
 				expect(selectedFacetValue).toHaveProperty('low');
 				expect(selectedFacetValue).toHaveProperty('high');
 
-				const unselectedFacetValue = filteredRangeBucketFacet.values.filter((value) => !value.filtered).pop();
+				const unselectedFacetValue = filteredRangeBucketFacet.values.filter((value) => !value?.filtered).pop() as RangeValue;
 
 				// to find a match only once
-				expect(unselectedFacetValue.url.href).toMatch(
-					`filter:${filteredRangeBucketFacet.field}:${unselectedFacetValue.low}:${unselectedFacetValue.high}`
+				expect(unselectedFacetValue?.url.href).toMatch(
+					`filter:${filteredRangeBucketFacet.field}:${unselectedFacetValue?.low}:${unselectedFacetValue?.high}`
 				);
 			});
 		});
@@ -725,11 +773,12 @@ describe('Facet Store', () => {
 			searchData = mockData.searchMeta('range');
 
 			const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
-			const rangeFacets = facets.filter((facet) => facet.type == 'range');
+			const rangeFacets: RangeFacet[] = facets.filter((facet) => facet.type == 'range');
 
 			rangeFacets.forEach((facet) => {
-				expect(facet.formatValue).toBe(searchData.meta.facets[facet.field].formatValue);
-				expect(facet.formatSeparator).toBe(searchData.meta.facets[facet.field].formatSeparator);
+				const searchDataFacet = searchData.meta.facets && (searchData.meta.facets[facet.field] as MetaResponseModelFacetSlider);
+				expect(facet.formatValue).toBe(searchDataFacet?.formatValue);
+				expect(facet.formatSeparator).toBe(searchDataFacet?.formatSeparator);
 			});
 		});
 
@@ -738,11 +787,12 @@ describe('Facet Store', () => {
 
 			const facets = new FacetStore(searchConfig, services, storageStore, searchData.facets, searchData.pagination, searchData.meta);
 
-			facets.forEach((facet, index) => {
+			facets.forEach((facet: RangeFacet, index: number) => {
 				if (facet.type == 'range') {
-					expect(facet.step).toBe(searchData.facets[index].step);
-					expect(facet.range).toStrictEqual(searchData.facets[index].range);
-					expect(facet.active).toStrictEqual(searchData.facets[index].active);
+					const searchDataFacet = searchData.facets && (searchData.facets[index] as SearchResponseModelFacetRange);
+					expect(facet.step).toBe(searchDataFacet?.step);
+					expect(facet.range).toStrictEqual(searchDataFacet?.range);
+					expect(facet.active).toStrictEqual(searchDataFacet?.active);
 				}
 			});
 		});

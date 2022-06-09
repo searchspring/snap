@@ -1,4 +1,4 @@
-import { FacetStore as SearchFacetStore } from '../../Search/Stores';
+import { FacetStore as SearchFacetStore, Value } from '../../Search/Stores';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { StateStore } from './StateStore';
 import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
@@ -24,11 +24,11 @@ export class FacetStore extends Array {
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {
-			facet.values?.forEach((value) => {
+			facet.values?.forEach((value: Value) => {
 				value.preview = () => {
 					facets.map((facet) => {
 						facet.filtered = false;
-						facet.values?.map((value) => {
+						facet.values?.map((value: Value) => {
 							value.filtered = false;
 						});
 					});

@@ -1,4 +1,4 @@
-import { SuggestResponseModel } from '../apis';
+import { SuggestResponseModel } from '../../types';
 export function transformSuggestResponse(response: SuggestResponseModel): any {
 	return {
 		...transformSuggestResponse.query(response),
