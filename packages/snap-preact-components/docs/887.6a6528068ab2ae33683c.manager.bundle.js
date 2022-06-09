@@ -1,4 +1,4 @@
-/*! For license information please see 887.e47dc74f918fe1dcee68.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 887.6a6528068ab2ae33683c.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[887],
 	{
@@ -2487,10 +2487,13 @@
 										return COMPATIBILITY.prvD(event), !1;
 									}
 									function updateOnLoadCallback(event) {
-										var elm = FRAMEWORK(event.target);
-										eachUpdateOnLoad(function (i, updateOnLoadSelector) {
-											elm.is(updateOnLoadSelector) && update({ _contentSizeChanged: !0 });
-										});
+										var target = event.target,
+											elm = FRAMEWORK(event.target),
+											index = FRAMEWORK.inArray(target, _updateOnLoadElms);
+										index > -1 && _updateOnLoadElms.splice(index, 1),
+											eachUpdateOnLoad(function (i, updateOnLoadSelector) {
+												elm.is(updateOnLoadSelector) && update({ _contentSizeChanged: !0 });
+											});
 									}
 									function setupHostMouseTouchEvents(destroy) {
 										destroy || setupHostMouseTouchEvents(!0),
@@ -4315,8 +4318,10 @@
 												? _targetElement.hasClass(_classNameTextareaElement) && _targetElement.parent().hasClass(_classNameContentElement)
 												: _targetElement.hasClass(_classNameHostElement) && _targetElement.children(_strDot + _classNamePaddingElement)[LEXICON.l]),
 											_nativeScrollbarIsOverlaid.x && _nativeScrollbarIsOverlaid.y && !_currentPreparedOptions.nativeScrollbarsOverlaid.initialize
-												? (dispatchCallback('onInitializationWithdrawn'),
+												? ((_initialized = !0),
+												  dispatchCallback('onInitializationWithdrawn'),
 												  _domExists && (setupStructureDOM(!0), setupScrollbarsDOM(!0), setupScrollbarCornerDOM(!0)),
+												  (_initialized = !1),
 												  (_destroyed = !0),
 												  (_sleeping = !0),
 												  _base)

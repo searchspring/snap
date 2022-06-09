@@ -1,4 +1,4 @@
-/*! For license information please see main.a1d35142.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.e3c92834.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -41,6 +41,135 @@
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
 		},
+		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			var preview_namespaceObject = {};
+			__webpack_require__.r(preview_namespaceObject),
+				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
+				injectStylesIntoStyleTag = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
+				),
+				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
+				styles = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
+				),
+				options = { insert: 'head', singleton: !1 };
+			injectStylesIntoStyleTag_default()(styles.Z, options);
+			styles.Z.locals;
+			var decorators = [
+					function (Story) {
+						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+					},
+				],
+				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(preview_namespaceObject).forEach(function (key) {
+				var value = preview_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.$9)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.HZ)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.h1)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.My)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi._C)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.$P)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			(module = __webpack_require__.nmd(module)),
+				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
+					[
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__(
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
+						),
+					],
+					module,
+					!1
+				);
+		},
 		'./src/components/Atoms/Badge/Badge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -60,15 +189,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -315,15 +444,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -430,15 +559,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -711,15 +840,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -1219,15 +1348,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -1487,15 +1616,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -1876,15 +2005,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -2396,15 +2525,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -3732,15 +3861,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -3928,15 +4057,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -4241,15 +4370,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -4428,15 +4557,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -5142,15 +5271,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -5863,15 +5992,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -6049,15 +6178,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -6858,15 +6987,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -7577,15 +7706,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -8388,15 +8517,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -9261,15 +9390,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -10047,15 +10176,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -11011,15 +11140,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -11769,15 +11898,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -13077,15 +13206,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -14278,15 +14407,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -15089,15 +15218,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -16562,15 +16691,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -16802,15 +16931,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -18174,15 +18303,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -18937,15 +19066,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -20097,15 +20226,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -20877,15 +21006,15 @@
 					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -24457,6 +24586,7 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
@@ -25809,7 +25939,7 @@
 							})(this, StorageStore),
 							(this.type = null),
 							(this.expiration = 31536e6),
-							(this.sameSite = void 0),
+							(this.sameSite = 'Lax'),
 							(this.key = 'ss-storage'),
 							(this.state = {}),
 							config)
@@ -25889,10 +26019,12 @@
 								value: function get(path) {
 									switch (this.type) {
 										case StorageType.SESSION:
-											this.state = JSON.parse(window.sessionStorage.getItem(this.key)) || {};
+											var sessionData = window.sessionStorage.getItem(this.key);
+											this.state = sessionData ? JSON.parse(sessionData) : {};
 											break;
 										case StorageType.LOCAL:
-											this.state = JSON.parse(window.localStorage.getItem(this.key)) || {};
+											var localData = window.localStorage.getItem(this.key);
+											this.state = localData ? JSON.parse(localData) : {};
 											break;
 										case StorageType.COOKIE:
 											var data = utils_cookies.get(this.key);
@@ -25906,10 +26038,7 @@
 										try {
 											for (_iterator.s(); !(_step = _iterator.n()).done; ) {
 												var p = _step.value;
-												if (!value || void 0 === value[p]) {
-													value = void 0;
-													break;
-												}
+												if (!value || void 0 === value[p]) return void (value = {});
 												value = value[p];
 											}
 										} catch (err) {
@@ -26444,11 +26573,11 @@
 			}
 			function _setPrototypeOf(o, p) {
 				return (
-					(_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					_setPrototypeOf(o, p)
 				);
 			}
@@ -26485,7 +26614,7 @@
 			function _getPrototypeOf(o) {
 				return (
 					(_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -27444,11 +27573,11 @@
 			}
 			function RecommendationController_setPrototypeOf(o, p) {
 				return (
-					(RecommendationController_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(RecommendationController_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					RecommendationController_setPrototypeOf(o, p)
 				);
 			}
@@ -27485,7 +27614,7 @@
 			function RecommendationController_getPrototypeOf(o) {
 				return (
 					(RecommendationController_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -27940,8 +28069,21 @@
 							{
 								key: 'params',
 								get: function get() {
-									var params = Object.assign(
-											{ tag: this.config.tag, batched: this.config.batched, branch: this.config.branch || 'production' },
+									var _this$context,
+										_this$context$options,
+										params = Object.assign(
+											{
+												tag: this.config.tag,
+												batched: this.config.batched,
+												branch: this.config.branch || 'production',
+												order:
+													null === (_this$context = this.context) ||
+													void 0 === _this$context ||
+													null === (_this$context$options = _this$context.options) ||
+													void 0 === _this$context$options
+														? void 0
+														: _this$context$options.order,
+											},
 											this.config.globals
 										),
 										shopperId = this.tracker.context.shopperId,
@@ -28403,11 +28545,11 @@
 			}
 			function AutocompleteController_setPrototypeOf(o, p) {
 				return (
-					(AutocompleteController_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(AutocompleteController_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					AutocompleteController_setPrototypeOf(o, p)
 				);
 			}
@@ -28444,7 +28586,7 @@
 			function AutocompleteController_getPrototypeOf(o) {
 				return (
 					(AutocompleteController_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -28506,6 +28648,7 @@
 													_actionUrl3,
 													input,
 													actionUrl,
+													_this$store$search$qu,
 													_actionUrl;
 												return AutocompleteController_regeneratorRuntime().wrap(
 													function _callee$(_context) {
@@ -28543,7 +28686,10 @@
 																	break;
 																case 12:
 																	_this.store.search.originalQuery &&
-																		((input.value = _this.store.search.query.string),
+																		((input.value =
+																			null === (_this$store$search$qu = _this.store.search.query) || void 0 === _this$store$search$qu
+																				? void 0
+																				: _this$store$search$qu.string),
 																		(actionUrl =
 																			null === (_actionUrl = actionUrl) || void 0 === _actionUrl
 																				? void 0
@@ -28603,7 +28749,7 @@
 									formSubmit:
 										((_formSubmit = AutocompleteController_asyncToGenerator(
 											AutocompleteController_regeneratorRuntime().mark(function _callee2(e) {
-												var _this$config$globals2, _this$config$globals3, _this$config$globals4, form, input;
+												var _this$config$globals2, _this$config$globals3, _this$config$globals4, form, input, _this$store$search$qu2;
 												return AutocompleteController_regeneratorRuntime().wrap(
 													function _callee2$(_context2) {
 														for (;;)
@@ -28636,7 +28782,11 @@
 																	break;
 																case 11:
 																	_this.store.search.originalQuery &&
-																		((input.value = _this.store.search.query.string),
+																		(input &&
+																			(input.value =
+																				null === (_this$store$search$qu2 = _this.store.search.query) || void 0 === _this$store$search$qu2
+																					? void 0
+																					: _this$store$search$qu2.string),
 																		addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
 																case 12:
 																	return (
@@ -29269,7 +29419,6 @@
 				)).apply(this, arguments);
 			}
 			__webpack_require__('../../node_modules/core-js/modules/web.url.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.date.to-iso-string.js');
 			var fibonacci = function fibonacci(num) {
 				for (var temp, a = 1, b = 0; num >= 0; ) (temp = a), (a += b), (b = temp), num--;
@@ -30405,11 +30554,11 @@
 			}
 			function Legacy_setPrototypeOf(o, p) {
 				return (
-					(Legacy_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(Legacy_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					Legacy_setPrototypeOf(o, p)
 				);
 			}
@@ -30445,7 +30594,7 @@
 			function Legacy_getPrototypeOf(o) {
 				return (
 					(Legacy_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -31069,11 +31218,11 @@
 			}
 			function Suggest_setPrototypeOf(o, p) {
 				return (
-					(Suggest_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(Suggest_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					Suggest_setPrototypeOf(o, p)
 				);
 			}
@@ -31109,7 +31258,7 @@
 			function Suggest_getPrototypeOf(o) {
 				return (
 					(Suggest_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -31921,11 +32070,11 @@
 			}
 			function Hybrid_setPrototypeOf(o, p) {
 				return (
-					(Hybrid_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(Hybrid_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					Hybrid_setPrototypeOf(o, p)
 				);
 			}
@@ -31961,7 +32110,7 @@
 			function Hybrid_getPrototypeOf(o) {
 				return (
 					(Hybrid_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -32397,7 +32546,8 @@
 						: count + keyLength + 1 + ('' + value).length;
 				}, 1);
 			}
-			var _excluded = ['tags', 'limits', 'categories'];
+			var _excluded = ['tags', 'limits', 'categories'],
+				_excluded2 = ['tags', 'limits', 'categories'];
 			function Recommend_slicedToArray(arr, i) {
 				return (
 					(function Recommend_arrayWithHoles(arr) {
@@ -32853,11 +33003,11 @@
 			}
 			function Recommend_setPrototypeOf(o, p) {
 				return (
-					(Recommend_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(Recommend_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					Recommend_setPrototypeOf(o, p)
 				);
 			}
@@ -32893,7 +33043,7 @@
 			function Recommend_getPrototypeOf(o) {
 				return (
 					(Recommend_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -32992,15 +33142,11 @@
 								value:
 									((_batchRecommendations = Recommend_asyncToGenerator(
 										Recommend_regeneratorRuntime().mark(function _callee3(parameters) {
-											var _paramBatch$deferreds,
-												tags,
-												limits,
-												categories,
+											var _batch$deferreds,
 												otherParams,
-												_ref2,
-												tag,
+												getKey,
 												key,
-												paramBatch,
+												batch,
 												deferred,
 												_this3 = this;
 											return Recommend_regeneratorRuntime().wrap(
@@ -33009,82 +33155,91 @@
 														switch ((_context3.prev = _context3.next)) {
 															case 0:
 																return (
-																	(tags = parameters.tags),
-																	(limits = parameters.limits),
-																	(categories = parameters.categories),
+																	parameters.tags,
+																	parameters.limits,
+																	parameters.categories,
 																	(otherParams = _objectWithoutProperties(parameters, _excluded)),
-																	limits || (limits = 20),
-																	(_ref2 = Recommend_slicedToArray(tags || [], 1)),
-																	(tag = _ref2[0]),
-																	(key = hashParams(otherParams)),
-																	'batched' in otherParams && (otherParams.batched && (key = otherParams.siteId), delete otherParams.batched),
-																	(this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] }),
-																	(paramBatch = this.batches[key]),
+																	(getKey = function getKey(parameters) {
+																		var key = hashParams(parameters);
+																		return 'batched' in parameters && parameters.batched && (key = parameters.siteId), key;
+																	}),
+																	(key = getKey(otherParams)),
+																	(batch = this.batches[key] =
+																		this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, requests: [], deferreds: [] }),
 																	(deferred = new Deferred()),
-																	paramBatch.request.tags.push(tag),
-																	categories &&
-																		(paramBatch.request.categories
-																			? (paramBatch.request.categories = paramBatch.request.categories.concat(categories))
-																			: (paramBatch.request.categories = categories)),
-																	(paramBatch.request.limits = paramBatch.request.limits.concat(limits)),
-																	(paramBatch.request = Object.assign({}, paramBatch.request, otherParams)),
-																	null === (_paramBatch$deferreds = paramBatch.deferreds) ||
-																		void 0 === _paramBatch$deferreds ||
-																		_paramBatch$deferreds.push(deferred),
-																	window.clearTimeout(paramBatch.timeout),
-																	(paramBatch.timeout = window.setTimeout(
+																	batch.requests.push(Object.assign({}, parameters)),
+																	null === (_batch$deferreds = batch.deferreds) || void 0 === _batch$deferreds || _batch$deferreds.push(deferred),
+																	window.clearTimeout(batch.timeout),
+																	(batch.timeout = window.setTimeout(
 																		Recommend_asyncToGenerator(
 																			Recommend_regeneratorRuntime().mark(function _callee2() {
-																				var _paramBatch$deferreds2, response, _paramBatch$deferreds3;
+																				var _batch$deferreds2, response, _batch$deferreds3;
 																				return Recommend_regeneratorRuntime().wrap(
 																					function _callee2$(_context2) {
 																						for (;;)
 																							switch ((_context2.prev = _context2.next)) {
 																								case 0:
 																									if (
-																										(charsParams(paramBatch.request) > 1024 &&
-																											paramBatch.request.product &&
-																											(paramBatch.request.product = paramBatch.request.product.toString()),
-																										(_context2.prev = 2),
-																										!(charsParams(paramBatch.request) > 1024))
+																										(delete _this3.batches[key],
+																										batch.requests.sort(sortRequests).map(function (request) {
+																											var tags = request.tags,
+																												limits = request.limits,
+																												categories = request.categories,
+																												otherParams = _objectWithoutProperties(request, _excluded2);
+																											limits || (limits = 20);
+																											var tag = Recommend_slicedToArray(tags || [], 1)[0];
+																											delete otherParams.batched,
+																												delete otherParams.order,
+																												batch.request.tags.push(tag),
+																												categories &&
+																													(batch.request.categories
+																														? (batch.request.categories = batch.request.categories.concat(categories))
+																														: (batch.request.categories = categories)),
+																												(batch.request.limits = batch.request.limits.concat(limits)),
+																												(batch.request = Object.assign({}, batch.request, otherParams));
+																										}),
+																										(_context2.prev = 3),
+																										!(charsParams(batch.request) > 1024))
 																									) {
-																										_context2.next = 9;
+																										_context2.next = 11;
 																										break;
 																									}
-																									return (_context2.next = 6), _this3.postRecommendations(paramBatch.request);
-																								case 6:
-																									(response = _context2.sent), (_context2.next = 12);
+																									return (
+																										batch.request.product && (batch.request.product = batch.request.product.toString()),
+																										(_context2.next = 8),
+																										_this3.postRecommendations(batch.request)
+																									);
+																								case 8:
+																									(response = _context2.sent), (_context2.next = 14);
 																									break;
-																								case 9:
-																									return (_context2.next = 11), _this3.getRecommendations(paramBatch.request);
 																								case 11:
+																									return (_context2.next = 13), _this3.getRecommendations(batch.request);
+																								case 13:
 																									response = _context2.sent;
-																								case 12:
-																									null === (_paramBatch$deferreds2 = paramBatch.deferreds) ||
-																										void 0 === _paramBatch$deferreds2 ||
-																										_paramBatch$deferreds2.forEach(function (def, index) {
+																								case 14:
+																									null === (_batch$deferreds2 = batch.deferreds) ||
+																										void 0 === _batch$deferreds2 ||
+																										_batch$deferreds2.forEach(function (def, index) {
 																											def.resolve([response[index]]);
 																										}),
-																										(_context2.next = 18);
+																										(_context2.next = 20);
 																									break;
-																								case 15:
-																									(_context2.prev = 15),
-																										(_context2.t0 = _context2.catch(2)),
-																										null === (_paramBatch$deferreds3 = paramBatch.deferreds) ||
-																											void 0 === _paramBatch$deferreds3 ||
-																											_paramBatch$deferreds3.forEach(function (def) {
+																								case 17:
+																									(_context2.prev = 17),
+																										(_context2.t0 = _context2.catch(3)),
+																										null === (_batch$deferreds3 = batch.deferreds) ||
+																											void 0 === _batch$deferreds3 ||
+																											_batch$deferreds3.forEach(function (def) {
 																												def.reject(_context2.t0);
 																											});
-																								case 18:
-																									delete _this3.batches[key];
-																								case 19:
+																								case 20:
 																								case 'end':
 																									return _context2.stop();
 																							}
 																					},
 																					_callee2,
 																					null,
-																					[[2, 15]]
+																					[[3, 17]]
 																				);
 																			})
 																		),
@@ -33092,7 +33247,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 16:
+															case 10:
 															case 'end':
 																return _context3.stop();
 														}
@@ -33183,8 +33338,19 @@
 						]),
 						RecommendAPI
 					);
-				})(API),
-				Client_excluded = ['tag'];
+				})(API);
+			function sortRequests(a, b) {
+				return null == a.order && null == b.order
+					? 0
+					: null == a.order && null != b.order
+					? 1
+					: (null == b.order && null != a.order) || a.order < b.order
+					? -1
+					: a.order > b.order
+					? 1
+					: 0;
+			}
+			var Client_excluded = ['tag'];
 			function Client_slicedToArray(arr, i) {
 				return (
 					(function Client_arrayWithHoles(arr) {
@@ -34078,7 +34244,7 @@
 			function _construct(Parent, args, Class) {
 				return (
 					(_construct = MerchandisingStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -34100,18 +34266,18 @@
 			}
 			function MerchandisingStore_setPrototypeOf(o, p) {
 				return (
-					(MerchandisingStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(MerchandisingStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					MerchandisingStore_setPrototypeOf(o, p)
 				);
 			}
 			function MerchandisingStore_getPrototypeOf(o) {
 				return (
 					(MerchandisingStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -34154,7 +34320,7 @@
 							((this.redirect = merchData.redirect || ''),
 							merchData.content &&
 								Object.values(ContentType).forEach(function (type) {
-									merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
+									merchData.content && merchData.content[type] && (_this.content[type] = new Content(merchData.content[type]));
 								}));
 				}),
 				Content = (function (_Array, _Symbol$species) {
@@ -34345,7 +34511,7 @@
 			function FacetStore_construct(Parent, args, Class) {
 				return (
 					(FacetStore_construct = FacetStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -34367,18 +34533,18 @@
 			}
 			function FacetStore_setPrototypeOf(o, p) {
 				return (
-					(FacetStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(FacetStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					FacetStore_setPrototypeOf(o, p)
 				);
 			}
 			function FacetStore_getPrototypeOf(o) {
 				return (
 					(FacetStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -34390,7 +34556,7 @@
 					var _super = FacetStore_createSuper(FacetStore);
 					function FacetStore(config, services, storage) {
 						var facetsData = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [],
-							pagination = arguments.length > 4 ? arguments[4] : void 0,
+							pagination = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : {},
 							meta = arguments.length > 5 ? arguments[5] : void 0;
 						FacetStore_classCallCheck(this, FacetStore);
 						var facets = facetsData
@@ -34401,7 +34567,7 @@
 									_config$settings2$fac,
 									_config$settings3,
 									_config$settings3$fac,
-									facetMeta = meta.facets[facet.field];
+									facetMeta = facet.field && meta.facets && meta.facets[facet.field];
 								if (!facetMeta) return !1;
 								if (('slider' == facetMeta.display && 'range' !== facet.type) || ('range' == facet.type && 'slider' !== facetMeta.display)) return !1;
 								var facetConfig =
@@ -34411,6 +34577,7 @@
 									void 0 === _config$settings$face
 										? void 0
 										: _config$settings$face.fields) &&
+									facet.field &&
 									(null === (_config$settings2 = config.settings) ||
 									void 0 === _config$settings2 ||
 									null === (_config$settings2$fac = _config$settings2.facets) ||
@@ -34427,8 +34594,13 @@
 										? void 0
 										: _config$settings3$fac.trim
 								) {
-									var _facet$values, _facet$values2;
-									if ('range' === facet.type && facet.range.low == facet.range.high) return !1;
+									var _facet$range, _facet$range2, _facet$values, _facet$values2;
+									if (
+										'range' === facet.type &&
+										(null == facet || null === (_facet$range = facet.range) || void 0 === _facet$range ? void 0 : _facet$range.low) ==
+											(null == facet || null === (_facet$range2 = facet.range) || void 0 === _facet$range2 ? void 0 : _facet$range2.high)
+									)
+										return !1;
 									if (0 == (null === (_facet$values = facet.values) || void 0 === _facet$values ? void 0 : _facet$values.length)) return !1;
 									if (
 										!facet.filtered &&
@@ -34439,10 +34611,10 @@
 								return !0;
 							})
 							.map(function (facet) {
-								var facetMeta = meta.facets[facet.field];
+								var facetMeta = facet.field && meta.facets && meta.facets[facet.field];
 								return 'range' === facet.type
-									? new RangeFacet(config, services, storage, facet, facetMeta)
-									: new ValueFacet(config, services, storage, facet, facetMeta);
+									? new RangeFacet(config, services, storage, facet, facetMeta || {})
+									: new ValueFacet(config, services, storage, facet, facetMeta || {});
 							});
 						return _super.call.apply(_super, [this].concat(FacetStore_toConsumableArray(facets)));
 					}
@@ -34489,16 +34661,7 @@
 							{
 								key: 'clear',
 								get: function get() {
-									var _this$services, _this$services$urlMan;
-									return {
-										url:
-											null === (_this$services = this.services) ||
-											void 0 === _this$services ||
-											null === (_this$services$urlMan = _this$services.urlManager) ||
-											void 0 === _this$services$urlMan
-												? void 0
-												: _this$services$urlMan.remove('page').remove('filter.' + this.field),
-									};
+									return { url: this.services.urlManager.remove('page').remove('filter.' + this.field) };
 								},
 							},
 							{
@@ -34515,24 +34678,34 @@
 					FacetStore_inherits(RangeFacet, _Facet);
 					var _super2 = FacetStore_createSuper(RangeFacet);
 					function RangeFacet(config, services, storage, facet, facetMeta) {
-						var _config$settings4, _config$settings4$fac, _config$settings5, _config$settings5$fac, _config$settings6, _config$settings6$fac, _this;
+						var _config$settings4,
+							_config$settings4$fac,
+							_config$settings5,
+							_config$settings5$fac,
+							_config$settings6,
+							_config$settings6$fac,
+							_facet$range3,
+							_facet$range4,
+							_this;
 						FacetStore_classCallCheck(this, RangeFacet),
 							((_this = _super2.call(this, services, storage, facet, facetMeta)).range = { low: 0, high: 0 }),
 							(_this.active = { low: 0, high: 0 }),
-							(_this.step = facet.step);
+							(_this.step = null == facet ? void 0 : facet.step);
 						var facetConfig =
-								(null === (_config$settings4 = config.settings) ||
+								((null === (_config$settings4 = config.settings) ||
 								void 0 === _config$settings4 ||
 								null === (_config$settings4$fac = _config$settings4.facets) ||
 								void 0 === _config$settings4$fac
 									? void 0
 									: _config$settings4$fac.fields) &&
-								(null === (_config$settings5 = config.settings) ||
-								void 0 === _config$settings5 ||
-								null === (_config$settings5$fac = _config$settings5.facets) ||
-								void 0 === _config$settings5$fac
-									? void 0
-									: _config$settings5$fac.fields[facet.field]),
+									facet.field &&
+									(null === (_config$settings5 = config.settings) ||
+									void 0 === _config$settings5 ||
+									null === (_config$settings5$fac = _config$settings5.facets) ||
+									void 0 === _config$settings5$fac
+										? void 0
+										: _config$settings5$fac.fields[facet.field])) ||
+								{},
 							storedRange =
 								('boolean' == typeof (null == facetConfig ? void 0 : facetConfig.storeRange)
 									? facetConfig.storeRange
@@ -34543,7 +34716,10 @@
 									? void 0
 									: _config$settings6$fac.storeRange) && _this.storage.get('facets.' + _this.field + '.range');
 						return (
-							storedRange && facet.filtered && (facet.range.low > storedRange.low || facet.range.high < storedRange.high)
+							storedRange &&
+							facet.filtered &&
+							((null === (_facet$range3 = facet.range) || void 0 === _facet$range3 ? void 0 : _facet$range3.low) > storedRange.low ||
+								(null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.high) < storedRange.high)
 								? (_this.range = _this.storage.get('facets.' + _this.field + '.range'))
 								: (_this.storage.set('facets.' + _this.field + '.range', facet.range), (_this.range = facet.range)),
 							(_this.active = facet.active || facet.range),
@@ -34599,30 +34775,41 @@
 										switch (facet.type) {
 											case 'value':
 												if ('hierarchy' === facetMeta.display) {
-													var filteredValues = facet.values.filter(function (value) {
-														return value.filtered;
-													});
+													var _facet$values3,
+														filteredValues =
+															(null == facet || null === (_facet$values3 = facet.values) || void 0 === _facet$values3
+																? void 0
+																: _facet$values3.filter(function (value) {
+																		return value.filtered;
+																  })) || [];
 													return new HierarchyValue(services, FacetStore_assertThisInitialized(_this2), value, filteredValues);
 												}
-												return (value.value = value.value.toString()), new Value(services, FacetStore_assertThisInitialized(_this2), value);
+												var _value$value;
+												return (
+													(value.value =
+														null == value || null === (_value$value = value.value) || void 0 === _value$value ? void 0 : _value$value.toString()),
+													new Value(services, FacetStore_assertThisInitialized(_this2), value)
+												);
 											case 'range-buckets':
 												return new RangeValue(services, FacetStore_assertThisInitialized(_this2), value);
 										}
 									})) ||
 								[]);
 						var facetConfig =
-							(null === (_config$settings7 = config.settings) ||
+							((null === (_config$settings7 = config.settings) ||
 							void 0 === _config$settings7 ||
 							null === (_config$settings7$fac = _config$settings7.facets) ||
 							void 0 === _config$settings7$fac
 								? void 0
 								: _config$settings7$fac.fields) &&
-							(null === (_config$settings8 = config.settings) ||
-							void 0 === _config$settings8 ||
-							null === (_config$settings8$fac = _config$settings8.facets) ||
-							void 0 === _config$settings8$fac
-								? void 0
-								: _config$settings8$fac.fields[facet.field]);
+								facet.field &&
+								(null === (_config$settings8 = config.settings) ||
+								void 0 === _config$settings8 ||
+								null === (_config$settings8$fac = _config$settings8.facets) ||
+								void 0 === _config$settings8$fac
+									? void 0
+									: _config$settings8$fac.fields[facet.field])) ||
+							{};
 						('boolean' == typeof (null == facetConfig ? void 0 : facetConfig.pinFiltered)
 							? facetConfig.pinFiltered
 							: null === (_config$settings9 = config.settings) ||
@@ -34670,7 +34857,7 @@
 											'i'
 										);
 										values = this.values.filter(function (value) {
-											return String(value.label).match(search);
+											return String((null == value ? void 0 : value.label) || '').match(search);
 										});
 									}
 									return this.overflow.enabled && this.overflow.limited && (values = values.slice(0, this.overflow.limit)), values;
@@ -34681,20 +34868,12 @@
 					);
 				})(Facet),
 				Value = FacetStore_createClass(function Value(services, facet, value) {
-					if ((FacetStore_classCallCheck(this, Value), Object.assign(this, value), this.filtered)) {
-						var _services$urlManager;
-						this.url =
-							null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
-								? void 0
-								: _services$urlManager.remove('page').remove('filter.' + facet.field, value.value);
-					} else {
-						var _services$urlManager2,
-							_valueUrl2,
+					if ((FacetStore_classCallCheck(this, Value), Object.assign(this, value), this.filtered))
+						this.url = services.urlManager.remove('page').remove('filter.' + facet.field, value.value);
+					else {
+						var _valueUrl2,
 							_valueUrl,
-							valueUrl =
-								null === (_services$urlManager2 = services.urlManager) || void 0 === _services$urlManager2
-									? void 0
-									: _services$urlManager2.remove('page');
+							valueUrl = services.urlManager.remove('page');
 						if ('single' == facet.multiple)
 							valueUrl = null === (_valueUrl = valueUrl) || void 0 === _valueUrl ? void 0 : _valueUrl.remove('filter.' + facet.field);
 						this.url = null === (_valueUrl2 = valueUrl) || void 0 === _valueUrl2 ? void 0 : _valueUrl2.merge('filter.' + facet.field, value.value);
@@ -34704,7 +34883,7 @@
 					FacetStore_inherits(HierarchyValue, _Value);
 					var _super4 = FacetStore_createSuper(HierarchyValue);
 					function HierarchyValue(services, facet, value, filteredValues) {
-						var _this3, _services$urlManager3, _services$urlManager4;
+						var _this3;
 						if (
 							(FacetStore_classCallCheck(this, HierarchyValue),
 							((_this3 = _super4.call(this, services, facet, value)).level = 0),
@@ -34712,30 +34891,30 @@
 							value.value && facet.hierarchyDelimiter && (_this3.level = value.value.split(facet.hierarchyDelimiter).length),
 							facet.filtered && null != filteredValues && filteredValues.length)
 						) {
-							var filteredLevel = filteredValues[0].value.split(facet.hierarchyDelimiter).length;
-							_this3.level <= filteredLevel && (_this3.history = !0);
+							var _filteredValues$0$val,
+								filteredLevel =
+									(null == facet ? void 0 : facet.hierarchyDelimiter) &&
+									(null === (_filteredValues$0$val = filteredValues[0].value) || void 0 === _filteredValues$0$val
+										? void 0
+										: _filteredValues$0$val.split(facet.hierarchyDelimiter).length);
+							filteredLevel && _this3.level <= filteredLevel && (_this3.history = !0);
 						}
-						value.value
-							? (_this3.url =
-									null == services || null === (_services$urlManager3 = services.urlManager) || void 0 === _services$urlManager3
-										? void 0
-										: _services$urlManager3.remove('page').set('filter.' + facet.field, value.value))
-							: (_this3.url =
-									null == services || null === (_services$urlManager4 = services.urlManager) || void 0 === _services$urlManager4
-										? void 0
-										: _services$urlManager4.remove('page').remove('filter.' + facet.field));
-						return _this3;
+						return (
+							value.value
+								? (_this3.url = services.urlManager.remove('page').set('filter.' + facet.field, value.value))
+								: (_this3.url = services.urlManager.remove('page').remove('filter.' + facet.field)),
+							_this3
+						);
 					}
 					return FacetStore_createClass(HierarchyValue);
 				})(Value),
 				RangeValue = FacetStore_createClass(function RangeValue(services, facet, value) {
 					if ((FacetStore_classCallCheck(this, RangeValue), Object.assign(this, value), this.filtered))
-						this.url =
-							null == services ? void 0 : services.urlManager.remove('page').remove('filter.' + facet.field, [{ low: this.low, high: this.high }]);
+						this.url = services.urlManager.remove('page').remove('filter.' + facet.field, [{ low: this.low, high: this.high }]);
 					else {
 						var _valueUrl4,
 							_valueUrl3,
-							valueUrl = null == services ? void 0 : services.urlManager.remove('page');
+							valueUrl = services.urlManager.remove('page');
 						if ('single' == facet.multiple)
 							valueUrl = null === (_valueUrl3 = valueUrl) || void 0 === _valueUrl3 ? void 0 : _valueUrl3.remove('filter.' + facet.field);
 						this.url =
@@ -34832,7 +35011,7 @@
 			function FilterStore_construct(Parent, args, Class) {
 				return (
 					(FilterStore_construct = FilterStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -34854,18 +35033,18 @@
 			}
 			function FilterStore_setPrototypeOf(o, p) {
 				return (
-					(FilterStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(FilterStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					FilterStore_setPrototypeOf(o, p)
 				);
 			}
 			function FilterStore_getPrototypeOf(o) {
 				return (
 					(FilterStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -34898,23 +35077,9 @@
 							meta = arguments.length > 2 ? arguments[2] : void 0;
 						FilterStore_classCallCheck(this, FilterStore);
 						var filters = filtersData.map(function (filter) {
-							var facetMeta = meta.facets[filter.field];
-							if ('range' === filter.type) {
-								var rangeFilter = filter;
-								return new RangeFilter(services, {
-									facet: { field: rangeFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || rangeFilter.field },
-									value: {
-										low: rangeFilter.value.low,
-										high: rangeFilter.value.high,
-										label: rangeFilter.label || rangeFilter.value.low + ' - ' + rangeFilter.value.high,
-									},
-								});
-							}
-							var valueFilter = filter;
-							return new Filter(services, {
-								facet: { field: valueFilter.field, label: (null == facetMeta ? void 0 : facetMeta.label) || valueFilter.field },
-								value: { value: valueFilter.value, label: valueFilter.label },
-							});
+							var field = filter.field,
+								facetMeta = meta.facets && meta.facets[field];
+							return 'range' === filter.type ? new RangeFilter(services, filter, facetMeta) : new Filter(services, filter, facetMeta);
 						});
 						return _super.call.apply(_super, [this].concat(FilterStore_toConsumableArray(filters)));
 					}
@@ -34930,28 +35095,36 @@
 						FilterStore
 					);
 				})(FilterStore_wrapNativeSuper(Array), Symbol.species),
-				Filter = FilterStore_createClass(function Filter(services, filter) {
+				Filter = FilterStore_createClass(function Filter(services, filter, meta) {
 					var _services$urlManager;
 					FilterStore_classCallCheck(this, Filter),
-						(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.facet = { field: filter.field, label: (null == meta ? void 0 : meta.label) || filter.field }),
+						(this.value = { value: filter.value, label: filter.label }),
+						(this.label = this.facet.label + ': ' + this.value.label),
 						(this.url =
 							null == services || null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
 								? void 0
 								: _services$urlManager.remove('page').remove('filter.' + this.facet.field, this.value.value)),
 						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
 				}),
-				RangeFilter = FilterStore_createClass(function RangeFilter(services, filter) {
-					var _services$urlManager2;
+				RangeFilter = FilterStore_createClass(function RangeFilter(services, filter, meta) {
+					var _filter$value, _filter$value2, _filter$value3, _filter$value4, _services$urlManager2;
 					FilterStore_classCallCheck(this, RangeFilter),
-						(this.facet = filter.facet),
-						(this.value = filter.value),
-						(this.label = filter.facet.label + ': ' + filter.value.label),
+						(this.facet = { field: filter.field, label: (null == meta ? void 0 : meta.label) || filter.field }),
+						(this.value = {
+							low: null == filter || null === (_filter$value = filter.value) || void 0 === _filter$value ? void 0 : _filter$value.low,
+							high: null == filter || null === (_filter$value2 = filter.value) || void 0 === _filter$value2 ? void 0 : _filter$value2.high,
+							label:
+								filter.label ||
+								(null == filter || null === (_filter$value3 = filter.value) || void 0 === _filter$value3 ? void 0 : _filter$value3.low) +
+									' - ' +
+									(null == filter || null === (_filter$value4 = filter.value) || void 0 === _filter$value4 ? void 0 : _filter$value4.high),
+						}),
+						(this.label = this.facet.label + ': ' + this.value.label),
 						(this.url =
 							null == services || null === (_services$urlManager2 = services.urlManager) || void 0 === _services$urlManager2
 								? void 0
-								: _services$urlManager2.remove('page').remove('filter.' + filter.facet.field, { low: filter.value.low, high: filter.value.high })),
+								: _services$urlManager2.remove('page').remove('filter.' + this.facet.field, { low: this.value.low, high: this.value.high })),
 						(0, mobx_esm.rC)(this, { facet: mobx_esm.LO, value: mobx_esm.LO, label: mobx_esm.LO });
 				});
 			__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js');
@@ -35043,7 +35216,7 @@
 			function ResultStore_construct(Parent, args, Class) {
 				return (
 					(ResultStore_construct = ResultStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -35065,18 +35238,18 @@
 			}
 			function ResultStore_setPrototypeOf(o, p) {
 				return (
-					(ResultStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(ResultStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					ResultStore_setPrototypeOf(o, p)
 				);
 			}
 			function ResultStore_getPrototypeOf(o) {
 				return (
 					(ResultStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -35199,7 +35372,7 @@
 								return new Child(services, Object.assign({ id: result.id + '-' + index }, variant));
 							})),
 						(0, mobx_esm.rC)(this, { id: mobx_esm.LO, attributes: mobx_esm.LO, custom: mobx_esm.LO });
-					var coreObservables = Object.keys(result.mappings.core).reduce(function (map, key) {
+					var coreObservables = Object.keys(this.mappings.core).reduce(function (map, key) {
 						var _Object$assign;
 						return Object.assign({}, map, (((_Object$assign = {})[key] = mobx_esm.LO), _Object$assign));
 					}, {});
@@ -35328,9 +35501,11 @@
 							},
 							{
 								key: 'getPages',
-								value: function getPages(min, max) {
+								value: function getPages() {
+									var min = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 5,
+										max = arguments.length > 1 ? arguments[1] : void 0;
 									if (!Number.isInteger(min)) return [];
-									if (Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
+									if (void 0 !== max && Number.isInteger(max)) (min = -Math.abs(min)), (max = Math.abs(max));
 									else {
 										var surrounding = min - 1,
 											from = this.page,
@@ -35395,23 +35570,23 @@
 			var SortingStore = (function () {
 					function SortingStore(services, sorting, search, meta) {
 						if ((SortingStore_classCallCheck(this, SortingStore), (this.options = []), services && meta.sortOptions)) {
-							var activeSort = sorting && sorting.length && sorting[0];
-							(this.options = meta.sortOptions
-								.filter(function (option) {
-									return null != search && search.query ? option : 'field' == option.type;
-								})
-								.map(function (option, index) {
-									return (
-										(option.active = !1),
-										activeSort && activeSort.field == option.field && activeSort.direction == option.direction
-											? (option.active = !0)
-											: activeSort || 0 !== index || (option.active = !0),
-										(option.default = !1),
-										0 === index && (option.default = !0),
-										new Option(services, option, index)
-									);
-								})),
-								(0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
+							var activeSort = (null == sorting ? void 0 : sorting.length) && sorting[0],
+								options = (meta.sortOptions || [])
+									.filter(function (option) {
+										return null != search && search.query ? option : 'field' == option.type;
+									})
+									.map(function (option, index) {
+										return (
+											(option.active = !1),
+											activeSort && activeSort.field == option.field && String(activeSort.direction) == String(option.direction)
+												? (option.active = !0)
+												: activeSort || 0 !== index || (option.active = !0),
+											(option.default = !1),
+											0 === index && (option.default = !0),
+											new Option(services, option, index)
+										);
+									});
+							(this.options = options), (0, mobx_esm.rC)(this, { options: mobx_esm.LO, current: mobx_esm.Fl });
 						}
 					}
 					return (
@@ -35502,11 +35677,11 @@
 			}
 			function SearchStore_setPrototypeOf(o, p) {
 				return (
-					(SearchStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(SearchStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					SearchStore_setPrototypeOf(o, p)
 				);
 			}
@@ -35543,7 +35718,7 @@
 			function SearchStore_getPrototypeOf(o) {
 				return (
 					(SearchStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -35566,7 +35741,7 @@
 						((function SearchStore_classCallCheck(instance, Constructor) {
 							if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 						})(this, SearchStore),
-						((_this = _super.call(this, config)).meta = {}),
+						(_this = _super.call(this, config)),
 						'object' != typeof services ||
 							'function' !=
 								typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
@@ -35577,7 +35752,7 @@
 					return (
 						(_this.services = services),
 						(_this.storage = new StorageStore()),
-						_this.update({ meta: _this.meta }),
+						_this.update(),
 						(0, mobx_esm.rC)(SearchStore_assertThisInitialized(_this), {
 							search: mobx_esm.LO,
 							merchandising: mobx_esm.LO,
@@ -35600,19 +35775,44 @@
 						);
 					})(SearchStore, [
 						{
+							key: 'reset',
+							value: function reset() {
+								this.update();
+							},
+						},
+						{
 							key: 'update',
-							value: function update(data) {
+							value: function update() {
+								var data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
 								(this.error = void 0),
 									(this.data = JSON.parse(JSON.stringify(data))),
 									(this.loaded = !!data.pagination),
-									(this.meta = data.meta),
-									(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-									(this.search = new QueryStore(this.services, data.search)),
-									(this.facets = new FacetStore_FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta)),
+									(this.meta = data.meta || {}),
+									(this.merchandising = new MerchandisingStore(this.services, (null == data ? void 0 : data.merchandising) || {})),
+									(this.search = new QueryStore(this.services, (null == data ? void 0 : data.search) || {})),
+									(this.facets = new FacetStore_FacetStore(
+										this.config,
+										this.services,
+										this.storage,
+										data.facets,
+										(null == data ? void 0 : data.pagination) || {},
+										this.meta
+									)),
 									(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-									(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+									(this.results = new ResultStore(
+										this.config,
+										this.services,
+										(null == data ? void 0 : data.results) || [],
+										data.pagination,
+										data.merchandising
+									)),
 									(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-									(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+									(this.sorting = new SortingStore(
+										this.services,
+										(null == data ? void 0 : data.sorting) || [],
+										(null == data ? void 0 : data.search) || {},
+										this.meta
+									));
 							},
 						},
 					]),
@@ -35636,16 +35836,19 @@
 					Constructor
 				);
 			}
-			var ProfileStore = ProfileStore_createClass(function ProfileStore(services, profile) {
+			var ProfileStore = ProfileStore_createClass(function ProfileStore(services, data) {
+				var _data$profile;
 				!(function ProfileStore_classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 				})(this, ProfileStore),
 					(this.display = {}),
-					null != profile &&
-						profile.tag &&
-						((this.tag = profile.tag),
-						(this.placement = profile.placement),
-						(this.display = profile.display),
+					null != data &&
+						null !== (_data$profile = data.profile) &&
+						void 0 !== _data$profile &&
+						_data$profile.tag &&
+						((this.tag = data.profile.tag),
+						(this.placement = data.profile.placement),
+						(this.display = data.profile.display),
 						(0, mobx_esm.rC)(this, { tag: mobx_esm.LO, placement: mobx_esm.LO, display: mobx_esm.LO }));
 			});
 			function RecommendationStore_defineProperties(target, props) {
@@ -35659,11 +35862,11 @@
 			}
 			function RecommendationStore_setPrototypeOf(o, p) {
 				return (
-					(RecommendationStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(RecommendationStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					RecommendationStore_setPrototypeOf(o, p)
 				);
 			}
@@ -35700,7 +35903,7 @@
 			function RecommendationStore_getPrototypeOf(o) {
 				return (
 					(RecommendationStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -35750,16 +35953,16 @@
 						{
 							key: 'reset',
 							value: function reset() {
-								this.update({});
+								this.update();
 							},
 						},
 						{
 							key: 'update',
 							value: function update(data) {
 								(this.error = void 0),
-									(this.loaded = !!data.profile),
-									(this.profile = new ProfileStore(this.services, data.profile)),
-									(this.results = new ResultStore(this.config, this.services, data.results));
+									(this.loaded = !(null == data || !data.profile)),
+									(this.profile = new ProfileStore(this.services, data)),
+									(this.results = new ResultStore(this.config, this.services, null == data ? void 0 : data.results));
 							},
 						},
 					]),
@@ -35930,7 +36133,7 @@
 			function TermStore_construct(Parent, args, Class) {
 				return (
 					(TermStore_construct = TermStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -35952,18 +36155,18 @@
 			}
 			function TermStore_setPrototypeOf(o, p) {
 				return (
-					(TermStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(TermStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					TermStore_setPrototypeOf(o, p)
 				);
 			}
 			function TermStore_getPrototypeOf(o) {
 				return (
 					(TermStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -36100,7 +36303,7 @@
 			function TrendingStore_construct(Parent, args, Class) {
 				return (
 					(TrendingStore_construct = TrendingStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -36122,18 +36325,18 @@
 			}
 			function TrendingStore_setPrototypeOf(o, p) {
 				return (
-					(TrendingStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(TrendingStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					TrendingStore_setPrototypeOf(o, p)
 				);
 			}
 			function TrendingStore_getPrototypeOf(o) {
 				return (
 					(TrendingStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -36162,16 +36365,18 @@
 					};
 				})(TrendingStore);
 				function TrendingStore(services, trendingData, resetTerms, rootState) {
-					var _trendingData$queries;
+					var _trendingData$trendin, _trendingData$trendin2;
 					!(function TrendingStore_classCallCheck(instance, Constructor) {
 						if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 					})(this, TrendingStore);
 					var terms = [];
 					return (
 						null == trendingData ||
-							null === (_trendingData$queries = trendingData.queries) ||
-							void 0 === _trendingData$queries ||
-							_trendingData$queries.map(function (term) {
+							null === (_trendingData$trendin = trendingData.trending) ||
+							void 0 === _trendingData$trendin ||
+							null === (_trendingData$trendin2 = _trendingData$trendin.queries) ||
+							void 0 === _trendingData$trendin2 ||
+							_trendingData$trendin2.map(function (term) {
 								terms.push(new Term(services, { active: !1, value: term.searchQuery }, terms, resetTerms, rootState));
 							}),
 						_super.call.apply(_super, [this].concat(terms))
@@ -36224,6 +36429,7 @@
 						((this.query = new QueryStore_Query(services.urlManager, search.query)), (observables.query = mobx_esm.LO)),
 						null != autocomplete &&
 							autocomplete.correctedQuery &&
+							autocomplete.query &&
 							((this.originalQuery = new QueryStore_Query(services.urlManager, autocomplete.query)), (observables.originalQuery = mobx_esm.LO)),
 						(0, mobx_esm.rC)(this, observables);
 				}),
@@ -36310,7 +36516,7 @@
 			function Stores_FacetStore_construct(Parent, args, Class) {
 				return (
 					(Stores_FacetStore_construct = Stores_FacetStore_isNativeReflectConstruct()
-						? Reflect.construct
+						? Reflect.construct.bind()
 						: function _construct(Parent, args, Class) {
 								var a = [null];
 								a.push.apply(a, args);
@@ -36332,18 +36538,18 @@
 			}
 			function Stores_FacetStore_setPrototypeOf(o, p) {
 				return (
-					(Stores_FacetStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(Stores_FacetStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					Stores_FacetStore_setPrototypeOf(o, p)
 				);
 			}
 			function Stores_FacetStore_getPrototypeOf(o) {
 				return (
 					(Stores_FacetStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -36433,11 +36639,11 @@
 			}
 			function AutocompleteStore_setPrototypeOf(o, p) {
 				return (
-					(AutocompleteStore_setPrototypeOf =
-						Object.setPrototypeOf ||
-						function _setPrototypeOf(o, p) {
-							return (o.__proto__ = p), o;
-						}),
+					(AutocompleteStore_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function _setPrototypeOf(o, p) {
+								return (o.__proto__ = p), o;
+						  }),
 					AutocompleteStore_setPrototypeOf(o, p)
 				);
 			}
@@ -36474,7 +36680,7 @@
 			function AutocompleteStore_getPrototypeOf(o) {
 				return (
 					(AutocompleteStore_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf
+						? Object.getPrototypeOf.bind()
 						: function _getPrototypeOf(o) {
 								return o.__proto__ || Object.getPrototypeOf(o);
 						  }),
@@ -36497,7 +36703,7 @@
 							((function AutocompleteStore_classCallCheck(instance, Constructor) {
 								if (!(instance instanceof Constructor)) throw new TypeError('Cannot call a class as a function');
 							})(this, AutocompleteStore),
-							((_this = _super.call(this, config)).meta = {}),
+							(_this = _super.call(this, config)),
 							'object' != typeof services ||
 								'function' !=
 									typeof (null === (_services$urlManager = services.urlManager) || void 0 === _services$urlManager
@@ -36537,7 +36743,7 @@
 							{
 								key: 'reset',
 								value: function reset() {
-									this.state.reset(), this.update({ meta: this.meta }), this.resetTrending();
+									this.state.reset(), this.update(), this.resetTrending();
 								},
 							},
 							{
@@ -36556,8 +36762,9 @@
 								key: 'resetTerms',
 								value: function resetTerms() {
 									var _this$terms;
-									(null === (_this$terms = this.terms) || void 0 === _this$terms ? void 0 : _this$terms.length) > 0 &&
-										this.terms.forEach(function (term) {
+									null === (_this$terms = this.terms) ||
+										void 0 === _this$terms ||
+										_this$terms.forEach(function (term) {
 											term.active = !1;
 										});
 								},
@@ -36574,7 +36781,7 @@
 									var _this2 = this;
 									this.trending = new TrendingStore(
 										this.services,
-										data.trending,
+										data,
 										function () {
 											_this2.resetTerms();
 										},
@@ -36584,39 +36791,52 @@
 							},
 							{
 								key: 'update',
-								value: function update(data) {
-									var _this3 = this;
-									(this.error = void 0),
+								value: function update() {
+									var _this$terms2,
+										_this3 = this,
+										data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+									data &&
+										((this.error = void 0),
 										(this.loaded = !!data.pagination),
-										(this.meta = data.meta),
+										(this.meta = data.meta || {}),
 										data.search && (this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query)),
 										this.state.locks.terms.locked ||
 											((this.terms = new TermStore(
 												this.services,
-												data.autocomplete,
-												data.pagination,
+												data.autocomplete || {},
+												data.pagination || {},
 												function () {
 													_this3.resetTrending();
 												},
 												this.state
 											)),
 											data.autocomplete && this.state.locks.terms.lock()),
-										(this.merchandising = new MerchandisingStore(this.services, data.merchandising)),
-										(this.search = new QueryStore_QueryStore(this.services, data.autocomplete, data.search)),
+										(this.merchandising = new MerchandisingStore(this.services, data.merchandising || {})),
+										(this.search = new QueryStore_QueryStore(this.services, data.autocomplete || {}, data.search || {})),
 										this.state.locks.facets.locked ||
-											(this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta, this.state)),
+											(this.facets = new FacetStore(
+												this.config,
+												this.services,
+												this.storage,
+												data.facets || [],
+												data.pagination || {},
+												this.meta,
+												this.state
+											)),
 										(this.filters = new FilterStore(this.services, data.filters, this.meta)),
-										(this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising)),
+										(this.results = new ResultStore(this.config, this.services, data.results || [], data.pagination, data.merchandising)),
 										((0 === this.results.length &&
 											!this.trending.filter(function (term) {
 												return term.active;
 											}).length) ||
-											this.terms.filter(function (term) {
-												return term.active;
-											}).length) &&
+											(null !== (_this$terms2 = this.terms) &&
+												void 0 !== _this$terms2 &&
+												_this$terms2.filter(function (term) {
+													return term.active;
+												}).length)) &&
 											this.resetTrending(),
 										(this.pagination = new PaginationStore(this.config, this.services, data.pagination)),
-										(this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta));
+										(this.sorting = new SortingStore(this.services, data.sorting || [], data.search || {}, this.meta)));
 								},
 							},
 						]),
@@ -38918,7 +39138,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.7' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.8' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39314,7 +39534,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.7')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.8')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40046,135 +40266,6 @@
 					);
 				})();
 		},
-		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			var preview_namespaceObject = {};
-			__webpack_require__.r(preview_namespaceObject),
-				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				defaultTheme = {
-					colors: {
-						primary: '#3A23AD',
-						secondary: '#00cee1',
-						hover: '#f8f6fd',
-						text: { secondary: '#ffffff' },
-						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
-					},
-					components: {},
-				},
-				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
-				injectStylesIntoStyleTag = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
-				),
-				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
-				),
-				options = { insert: 'head', singleton: !1 };
-			injectStylesIntoStyleTag_default()(styles.Z, options);
-			styles.Z.locals;
-			var decorators = [
-					function (Story) {
-						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
-					},
-				],
-				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(preview_namespaceObject).forEach(function (key) {
-				var value = preview_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.$9)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.HZ)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.h1)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.My)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi._C)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.$P)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.h1)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			(module = __webpack_require__.nmd(module)),
-				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
-					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
-						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
-						),
-					],
-					module,
-					!1
-				);
-		},
 		'./storybook-init-framework-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js');
@@ -40228,15 +40319,15 @@
 			var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js');
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -40443,15 +40534,15 @@
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -40510,15 +40601,15 @@
 			}
 			function About_stories_extends() {
 				return (
-					(About_stories_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(About_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					About_stories_extends.apply(this, arguments)
 				);
 			}
@@ -40563,15 +40654,15 @@
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -40871,15 +40962,15 @@
 			}
 			function Theme_stories_extends() {
 				return (
-					(Theme_stories_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(Theme_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					Theme_stories_extends.apply(this, arguments)
 				);
 			}
@@ -40924,15 +41015,15 @@
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
 			function _extends() {
 				return (
-					(_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					_extends.apply(this, arguments)
 				);
 			}
@@ -41008,15 +41099,15 @@
 			}
 			function Usage_stories_extends() {
 				return (
-					(Usage_stories_extends =
-						Object.assign ||
-						function (target) {
-							for (var i = 1; i < arguments.length; i++) {
-								var source = arguments[i];
-								for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
-							}
-							return target;
-						}),
+					(Usage_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
 					Usage_stories_extends.apply(this, arguments)
 				);
 			}
