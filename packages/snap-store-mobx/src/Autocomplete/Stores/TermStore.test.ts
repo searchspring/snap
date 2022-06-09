@@ -20,6 +20,7 @@ describe('Term Store', () => {
 	});
 
 	it('is empty when it is passed undefined', () => {
+		// @ts-ignore
 		const termStore = new TermStore(services, undefined, undefined, mockResetTrending, rootState);
 
 		expect(termStore).toEqual([]);
@@ -33,10 +34,10 @@ describe('Term Store', () => {
 
 	it('contains the correct terms', () => {
 		const searchData = mockData.autocompleteMeta();
-		const autocomplete = searchData.autocomplete;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const autocomplete = searchData.autocomplete!;
+		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
-		const expected = [autocomplete.suggested.text, ...autocomplete.alternatives.map((alt) => alt.text)];
+		const expected = [autocomplete.suggested?.text, ...autocomplete.alternatives?.map((alt) => alt.text)!];
 
 		expect(termStore.map((term) => term.value)).toStrictEqual(expected);
 	});
@@ -44,8 +45,8 @@ describe('Term Store', () => {
 	it('builds terms with the correct properties', () => {
 		const fn = jest.spyOn(services.urlManager, 'set');
 		const searchData = mockData.autocompleteMeta();
-		const autocomplete = searchData.autocomplete;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const autocomplete = searchData.autocomplete!;
+		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
 			expect(term).toHaveProperty('value');
@@ -61,6 +62,7 @@ describe('Term Store', () => {
 	it('has terms with undefined url properties when no controller is present', () => {
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
+		// @ts-ignore
 		const termStore = new TermStore(undefined, autocomplete, searchData.pagination, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
@@ -73,6 +75,7 @@ describe('Term Store', () => {
 
 		const searchData = mockData.autocompleteMeta();
 		const autocomplete = searchData.autocomplete;
+		// @ts-ignore
 		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
 
 		termStore.forEach((term) => {
@@ -82,16 +85,16 @@ describe('Term Store', () => {
 
 	it('sets the correct active term', () => {
 		const searchData = mockData.autocompleteMeta();
-		const autocomplete = searchData.autocomplete;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const autocomplete = searchData.autocomplete!;
+		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		expect(termStore.filter((term) => term.active).map((term) => term.value)).toStrictEqual([autocomplete.query]);
 	});
 
 	it('has a preview function on terms', () => {
 		const searchData = mockData.autocompleteMeta();
-		const autocomplete = searchData.autocomplete;
-		const termStore = new TermStore(services, autocomplete, searchData.pagination, mockResetTrending, rootState);
+		const autocomplete = searchData.autocomplete!;
+		const termStore = new TermStore(services, autocomplete, searchData.pagination!, mockResetTrending, rootState);
 
 		expect(rootState.locks.terms.locked).toBe(false);
 

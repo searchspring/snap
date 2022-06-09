@@ -2,6 +2,7 @@ import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
 import { PaginationStore } from './PaginationStore';
+import { SearchResponseModel, MetaResponseModel, MetaResponseModelFacetDefaults } from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -14,7 +15,9 @@ const searchConfig = {
 };
 
 describe('Pagination Store', () => {
-	let searchData;
+	let searchData: SearchResponseModel & {
+		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
+	};
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -22,6 +25,7 @@ describe('Pagination Store', () => {
 	});
 
 	it('sets properties to undefined given undefined', () => {
+		// @ts-ignore
 		const pagination = new PaginationStore(undefined, undefined, undefined);
 		expect(pagination.page).toBeUndefined();
 		expect(pagination.pageSize).toBeUndefined();
@@ -31,19 +35,19 @@ describe('Pagination Store', () => {
 	it('sets the page', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
-		expect(pagination.page).toBe(paginationData.page);
+		expect(pagination.page).toBe(paginationData?.page);
 	});
 
 	it('sets the pageSize', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
-		expect(pagination.pageSize).toBe(paginationData.pageSize);
+		expect(pagination.pageSize).toBe(paginationData?.pageSize);
 	});
 
 	it('sets the totalResults', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
-		expect(pagination.totalResults).toBe(paginationData.totalResults);
+		expect(pagination.totalResults).toBe(paginationData?.totalResults);
 	});
 
 	it('sets the default pageSizeOptions', () => {
@@ -74,7 +78,7 @@ describe('Pagination Store', () => {
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.end).toBeDefined;
 
-		expect(pagination.end).toEqual(paginationData.pageSize * paginationData.page);
+		expect(pagination.end).toEqual(paginationData?.pageSize! * paginationData?.page!);
 		expect(pagination.end).toEqual(pagination.pageSize * pagination.page);
 	});
 
@@ -100,14 +104,14 @@ describe('Pagination Store', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.totalPages).toBeDefined;
-		expect(pagination.totalPages).toEqual(Math.ceil(paginationData.totalResults / paginationData.pageSize));
+		expect(pagination.totalPages).toEqual(Math.ceil(paginationData?.totalResults! / paginationData?.pageSize!));
 	});
 
 	it('can get multiple pages', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.multiplePages).toBeDefined;
-		expect(pagination.multiplePages).toEqual(Boolean(paginationData.pageSize < paginationData.totalResults));
+		expect(pagination.multiplePages).toEqual(Boolean(paginationData?.pageSize! < paginationData?.totalResults!));
 	});
 
 	it('can get current page', () => {
@@ -127,7 +131,7 @@ describe('Pagination Store', () => {
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.first).toBeDefined;
 		expect(pagination.first.number).toEqual(1);
-		expect(pagination.first.active).toEqual(Boolean(paginationData.page === 1));
+		expect(pagination.first.active).toEqual(Boolean(paginationData?.page === 1));
 	});
 
 	it('can get last page', () => {
@@ -135,12 +139,14 @@ describe('Pagination Store', () => {
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.last).toBeDefined;
 		expect(pagination.last.number).toEqual(pagination.totalPages);
-		expect(pagination.last.active).toEqual(Boolean(pagination.totalPages === paginationData.page));
+		expect(pagination.last.active).toEqual(Boolean(pagination.totalPages === paginationData?.page));
 	});
 
 	it('does not get next page when on last page', () => {
 		const paginationData = searchData.pagination;
-		paginationData.page = Math.floor(paginationData.totalResults / paginationData.perPage) + 1;
+
+		// @ts-ignore
+		paginationData.page = Math.floor(paginationData?.totalResults! / paginationData?.pageSize!) + 1;
 
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 		expect(pagination.next).toBeUndefined();
@@ -151,7 +157,7 @@ describe('Pagination Store', () => {
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 
 		expect(pagination.next).toBeDefined;
-		expect(pagination.next.number).toEqual(paginationData.page + 1);
+		expect(pagination.next?.number).toEqual(paginationData?.page! + 1);
 	});
 
 	it('does not get prev page when on first page', () => {
@@ -167,7 +173,7 @@ describe('Pagination Store', () => {
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
 
 		expect(pagination.previous).toBeDefined;
-		expect(pagination.previous.number).toEqual(paginationData.page - 1);
+		expect(pagination.previous?.number).toEqual(paginationData?.page! - 1);
 	});
 
 	it('can get prev page when not on first page', () => {
@@ -176,7 +182,7 @@ describe('Pagination Store', () => {
 		const newPage = 3;
 		pagination.page = newPage;
 		const page = pagination.previous;
-		expect(page.number).toBe(newPage - 1);
+		expect(page?.number).toBe(newPage - 1);
 	});
 
 	it('creates a page object that uses the urlManager', () => {
@@ -201,10 +207,10 @@ describe('Pagination Store', () => {
 		expect(services.urlManager.state.pageSize).toEqual(30);
 	});
 
-	it('returns an empty array if min and max pages arent passed into getPages', () => {
+	it('returns an array of pages with defaults if min and max pages arent passed into getPages', () => {
 		const paginationData = searchData.pagination;
 		const pagination = new PaginationStore(searchConfig, services, paginationData);
-		expect(pagination.getPages(undefined, undefined)).toEqual([]);
+		expect(pagination.getPages(undefined, undefined)).toHaveLength(5);
 	});
 
 	it('returns an array of pages', () => {

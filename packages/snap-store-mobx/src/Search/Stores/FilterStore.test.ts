@@ -1,7 +1,16 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { FilterStore } from './FilterStore';
+import { FilterStore, RangeFilter, Filter } from './FilterStore';
+import {
+	SearchResponseModel,
+	MetaResponseModel,
+	MetaResponseModelFacetDefaults,
+	MetaResponseModelFacet,
+	SearchResponseModelFilter,
+	SearchResponseModelFilterRange,
+	SearchResponseModelFilterValue,
+} from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -10,7 +19,7 @@ const services = {
 const mockData = new MockData();
 
 describe('Filter Store', () => {
-	let searchData;
+	let searchData: SearchResponseModel & { meta: MetaResponseModel };
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -22,6 +31,7 @@ describe('Filter Store', () => {
 	});
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
+		// @ts-ignore
 		const filters = new FilterStore(undefined, undefined, undefined);
 
 		expect(filters.length).toBe(0);
@@ -39,20 +49,27 @@ describe('Filter Store', () => {
 
 		// check filter values
 		filters.forEach((filter, index) => {
-			const facetField = filtersInput[index].field;
-			const facetMetaData = searchData.meta.facets[facetField];
+			const facetField = (filtersInput && filtersInput[index].field) || '';
+			const facetMetaData: (MetaResponseModelFacet & MetaResponseModelFacetDefaults) | undefined =
+				searchData.meta.facets && searchData.meta.facets[facetField];
 
 			expect(filter.facet.field).toBe(facetField);
-			expect(filter.facet.label).toBe(facetMetaData.label);
+			expect(filter.facet.label).toBe(facetMetaData?.label);
 
-			if (filtersInput[index].type === 'range') {
+			if (filtersInput && filtersInput[index].type === 'range') {
 				// range
-				expect(filter.value.high).toBe(filtersInput[index].value.high);
-				expect(filter.value.low).toBe(filtersInput[index].value.low);
+				expect((filter as RangeFilter).value.high).toBe(
+					(filtersInput[index] as SearchResponseModelFilter & SearchResponseModelFilterRange).value?.high
+				);
+				expect((filter as RangeFilter).value.low).toBe(
+					(filtersInput[index] as SearchResponseModelFilter & SearchResponseModelFilterRange).value?.low
+				);
 			} else {
 				// value
-				expect(filter.value.label).toBe(filtersInput[index].label);
-				expect(filter.value.value).toBe(filtersInput[index].value);
+				expect((filter as Filter).value.label).toBe(filtersInput && filtersInput[index].label);
+				expect((filter as Filter).value.value).toBe(
+					filtersInput && (filtersInput[index] as SearchResponseModelFilter & SearchResponseModelFilterValue).value
+				);
 			}
 		});
 	});

@@ -20,8 +20,8 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"deepmerge": "^4.2.2",
-		"seamless-immutable": "^7.1.4"
+		"deepmerge": "4.2.2",
+		"seamless-immutable": "7.1.4"
 	},
 	"sideEffects": false,
 	"files": [

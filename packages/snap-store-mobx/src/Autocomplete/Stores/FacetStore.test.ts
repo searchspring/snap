@@ -4,6 +4,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { FacetStore } from './FacetStore';
 import { StateStore } from './StateStore';
 import { StorageStore } from '../../Storage/StorageStore';
+import { Value } from '../../Search/Stores';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
@@ -13,7 +14,7 @@ const mockData = new MockData();
 
 const autocompleteConfig = {
 	id: 'autocomplete',
-	selector: undefined,
+	selector: '',
 	settings: {
 		initializeFromUrl: false,
 		syncInputs: false,
@@ -33,13 +34,13 @@ describe('Facet store', () => {
 			autocompleteConfig,
 			services,
 			storageStore,
-			searchData.facets,
-			searchData.pagination,
+			searchData.facets!,
+			searchData.pagination!,
 			searchData.meta,
 			rootState
 		);
 
-		expect(facetStore).toHaveLength(searchData.facets.length);
+		expect(facetStore).toHaveLength(searchData.facets?.length!);
 	});
 
 	it('adds a preview function to each facet value', () => {
@@ -51,8 +52,8 @@ describe('Facet store', () => {
 			autocompleteConfig,
 			services,
 			storageStore,
-			searchData.facets,
-			searchData.pagination,
+			searchData.facets!,
+			searchData.pagination!,
 			searchData.meta,
 			rootState
 		);
@@ -60,7 +61,7 @@ describe('Facet store', () => {
 		expect(rootState.locks.terms.locked).toBe(false);
 
 		facetStore.forEach((facet) => {
-			facet.values?.forEach((value) => {
+			facet.values?.forEach((value: Value) => {
 				expect(value.preview).toBeDefined();
 			});
 		});

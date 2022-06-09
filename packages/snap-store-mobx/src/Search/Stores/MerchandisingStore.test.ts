@@ -13,12 +13,15 @@ describe('Merchandising Store', () => {
 	const emptyMerchStore = { redirect: '', content: {} };
 
 	it('is empty when not passed valid params', () => {
-		let merchStore = new MerchandisingStore(undefined, undefined);
+		// @ts-ignore
+		let merchStore = new MerchandisingStore(services, undefined);
 		expect(merchStore).toEqual(emptyMerchStore);
 
+		// @ts-ignore
 		merchStore = new MerchandisingStore(services, undefined);
 		expect(merchStore).toEqual(emptyMerchStore);
 
+		// @ts-ignore
 		merchStore = new MerchandisingStore(undefined, {});
 		expect(merchStore).toEqual(emptyMerchStore);
 
@@ -28,21 +31,21 @@ describe('Merchandising Store', () => {
 
 	it('has banner content', () => {
 		const data = mockData.searchMeta('merchandising');
-		const merchStore = new MerchandisingStore(services, data.merchandising);
+		const merchStore = new MerchandisingStore(services, data.merchandising!);
 
-		expect(merchStore.content).toEqual(data.merchandising.content);
+		expect(merchStore.content).toEqual(data.merchandising?.content!);
 	});
 
 	it('has more banner content', () => {
 		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
-		const merchStore = new MerchandisingStore(services, data.merchandising);
+		const merchStore = new MerchandisingStore(services, data.merchandising!);
 
-		expect(merchStore.content).toEqual(data.merchandising.content);
+		expect(merchStore.content).toEqual(data.merchandising?.content);
 	});
 
 	it('has redirect', () => {
 		const data = mockData.resetConfig().searchMeta('redirect');
-		const merchStore = new MerchandisingStore(services, data.merchandising);
-		expect(merchStore.redirect).toEqual(data.merchandising.redirect);
+		const merchStore = new MerchandisingStore(services, data.merchandising!);
+		expect(merchStore.redirect).toEqual(data.merchandising?.redirect);
 	});
 });

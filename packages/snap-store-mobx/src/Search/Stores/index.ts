@@ -1,5 +1,5 @@
 export { MerchandisingStore } from './MerchandisingStore';
-export { FacetStore } from './FacetStore';
+export { FacetStore, Value } from './FacetStore';
 export { FilterStore } from './FilterStore';
 export { PaginationStore } from './PaginationStore';
 export { ResultStore } from './ResultStore';
