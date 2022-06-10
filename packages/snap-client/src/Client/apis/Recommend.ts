@@ -27,7 +27,7 @@ export class RecommendAPI extends API {
 	private batches: {
 		[key: string]: {
 			timeout: number;
-			request: RecommendRequestModel;
+			request: Partial<RecommendRequestModel>;
 			entries: BatchEntry[];
 		};
 	};
@@ -94,7 +94,7 @@ export class RecommendAPI extends API {
 				delete otherParams.batched; // remove from request parameters
 				delete otherParams.order; // remove from request parameters
 
-				batch.request.tags.push(tag);
+				batch.request.tags!.push(tag);
 
 				if (categories) {
 					if (!batch.request.categories) {
@@ -114,9 +114,9 @@ export class RecommendAPI extends API {
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
 					}
-					response = await this.postRecommendations(batch.request);
+					response = await this.postRecommendations(batch.request as RecommendRequestModel);
 				} else {
-					response = await this.getRecommendations(batch.request);
+					response = await this.getRecommendations(batch.request as RecommendRequestModel);
 				}
 
 				batch.entries?.forEach((entry, index) => {
