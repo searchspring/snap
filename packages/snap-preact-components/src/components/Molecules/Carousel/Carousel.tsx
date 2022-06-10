@@ -180,7 +180,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	let props: CarouselProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical
+			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
 		autoAdjustSlides: true,
@@ -206,6 +208,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			theme,
 		};
 	}
+
+	console.log(displaySettings);
 
 	const {
 		children,
@@ -286,16 +290,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
-						direction={vertical ? 'vertical' : 'horizontal'}
-						loop={loop}
-						pagination={
-							pagination
-								? {
-										clickable: true,
-								  }
-								: false
-						}
-						{...additionalProps}
 						{...displaySettings}
 					>
 						{children.map((child) => {

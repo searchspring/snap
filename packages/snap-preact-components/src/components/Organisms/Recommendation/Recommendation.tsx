@@ -32,7 +32,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	let props: RecommendationProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical
+			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
 		// global theme
