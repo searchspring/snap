@@ -17,14 +17,18 @@ class Deferred {
 	}
 }
 
+type BatchEntry = {
+	request: RecommendRequestModel;
+	deferred: Deferred;
+};
+
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
 	private batches: {
 		[key: string]: {
 			timeout: number;
-			request: any;
-			requests: any[];
-			deferreds?: Deferred[];
+			request: RecommendRequestModel;
+			entries: BatchEntry[];
 		};
 	};
 
@@ -64,12 +68,11 @@ export class RecommendAPI extends API {
 
 		// set up batch keys and deferred promises
 		const key = getKey(otherParams as RecommendRequestModel);
-		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, requests: [], deferreds: [] });
+		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
 		const deferred = new Deferred();
 
 		// add each request to the list
-		batch.requests.push({ ...parameters });
-		batch.deferreds?.push(deferred);
+		batch.entries.push({ request: parameters, deferred: deferred });
 
 		// wait for all of the requests to come in
 		window.clearTimeout(batch.timeout);
@@ -78,12 +81,12 @@ export class RecommendAPI extends API {
 			delete this.batches[key];
 
 			// reorder the requests by order value in context.
-			const batchedRequests = batch.requests.sort(sortRequests);
+			batch.entries.sort(sortBatchEntries);
 
 			// now that the requests are in proper order, map through them
 			// and build out the batches
-			batchedRequests.map((request: RecommendRequestModel) => {
-				let { tags, limits, categories, ...otherParams } = request;
+			batch.entries.map((entry) => {
+				let { tags, limits, categories, ...otherParams } = entry.request;
 
 				if (!limits) limits = 20;
 				const [tag] = tags || [];
@@ -116,12 +119,12 @@ export class RecommendAPI extends API {
 					response = await this.getRecommendations(batch.request);
 				}
 
-				batch.deferreds?.forEach((def, index) => {
-					def.resolve([response[index]]);
+				batch.entries?.forEach((entry, index) => {
+					entry.deferred.resolve([response[index]]);
 				});
 			} catch (err) {
-				batch.deferreds?.forEach((def) => {
-					def.reject(err);
+				batch.entries?.forEach((entry) => {
+					entry.deferred.reject(err);
 				});
 			}
 		}, BATCH_TIMEOUT);
@@ -169,21 +172,21 @@ export class RecommendAPI extends API {
 	}
 }
 
-function sortRequests(a: RecommendRequestModel, b: RecommendRequestModel) {
+function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
 	// undefined order goes last
-	if (a.order == undefined && b.order == undefined) {
+	if (a.request.order == undefined && b.request.order == undefined) {
 		return 0;
 	}
-	if (a.order == undefined && b.order != undefined) {
+	if (a.request.order == undefined && b.request.order != undefined) {
 		return 1;
 	}
-	if (b.order == undefined && a.order != undefined) {
+	if (b.request.order == undefined && a.request.order != undefined) {
 		return -1;
 	}
-	if (a.order! < b.order!) {
+	if (a.request.order! < b.request.order!) {
 		return -1;
 	}
-	if (a.order! > b.order!) {
+	if (a.request.order! > b.request.order!) {
 		return 1;
 	}
 	return 0;
