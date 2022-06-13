@@ -209,8 +209,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		};
 	}
 
-	console.log(displaySettings);
-
 	const {
 		children,
 		breakpoints,
@@ -290,6 +288,16 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
+						direction={vertical ? 'vertical' : 'horizontal'}
+						loop={loop}
+						pagination={
+							pagination
+								? {
+										clickable: true,
+								  }
+								: false
+						}
+						{...additionalProps}
 						{...displaySettings}
 					>
 						{children.map((child) => {
