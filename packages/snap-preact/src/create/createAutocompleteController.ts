@@ -19,13 +19,13 @@ export default (config: SnapAutocompleteControllerConfig, services?: SnapControl
 	const cntrlr = new AutocompleteController(
 		config.controller,
 		{
-			client: services?.client || new Client(config.client.globals, config.client.config),
+			client: services?.client || new Client(config.client!.globals, config.client!.config),
 			store: services?.store || new AutocompleteStore(config.controller, { urlManager }),
 			urlManager,
 			eventManager: services?.eventManager || new EventManager(),
 			profiler: services?.profiler || new Profiler(),
 			logger: services?.logger || new Logger(),
-			tracker: services?.tracker || new Tracker(config.client.globals),
+			tracker: services?.tracker || new Tracker(config.client!.globals),
 		},
 		config.context
 	);

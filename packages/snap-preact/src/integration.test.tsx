@@ -40,9 +40,10 @@ describe('Snap Preact Integration', () => {
 			return `Fri, ${modifiedDate}`;
 		});
 
+		// @ts-ignore - modifying window
 		delete window.location;
 
-		// @ts-ignore
+		// @ts-ignore - modifying window
 		window.location = {
 			href: 'https://www.merch.com?branch=branch',
 		};
