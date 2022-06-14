@@ -298,7 +298,6 @@ export class Snap {
 				const src = `${path}${branchParam}/bundle.js`;
 				branchScript.src = src;
 				branchScript.setAttribute(BRANCH_COOKIE, branchParam);
-				document.head.appendChild(branchScript);
 
 				new DomTargeter(
 					[
@@ -338,6 +337,11 @@ export class Snap {
 							/>,
 							elem
 						);
+
+						if (window?.searchspring) {
+							window.searchspring = undefined;
+						}
+						document.head.appendChild(branchScript);
 					}
 				);
 
