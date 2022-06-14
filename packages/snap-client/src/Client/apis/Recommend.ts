@@ -98,7 +98,7 @@ export class RecommendAPI extends API {
 
 				if (categories) {
 					if (!batch.request.categories) {
-						batch.request.categories = categories;
+						batch.request.categories = Array.isArray(categories) ? categories : [categories];
 					} else {
 						batch.request.categories = batch.request.categories.concat(categories);
 					}
