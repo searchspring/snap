@@ -338,9 +338,7 @@ export class Snap {
 							elem
 						);
 
-						if (window?.searchspring) {
-							window.searchspring = undefined;
-						}
+						window.searchspring = undefined;
 						document.head.appendChild(branchScript);
 					}
 				);
