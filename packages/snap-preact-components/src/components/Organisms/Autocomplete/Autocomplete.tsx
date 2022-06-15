@@ -518,7 +518,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											cloneElement(noResultsSlot, { search, pagination, controller })
 										) : (
 											<>
-												<p>No results found for "{search.originalQuery.string}".</p>
+												<p>No results found for "{search.originalQuery?.string || search.query.string}".</p>
 												<p>Please try another search.</p>
 											</>
 										)}
