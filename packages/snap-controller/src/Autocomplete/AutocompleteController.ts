@@ -6,15 +6,8 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type {
-	AutocompleteControllerConfig,
-	BeforeSearchObj,
-	AfterSearchObj,
-	AfterStoreObj,
-	ControllerServices,
-	NextEvent,
-	ContextVariables,
-} from '../types';
+import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
@@ -77,14 +70,14 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			ac.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
@@ -95,7 +88,7 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			ac.controller.store.loading = false;

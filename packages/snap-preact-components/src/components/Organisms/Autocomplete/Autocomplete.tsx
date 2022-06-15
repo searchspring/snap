@@ -370,7 +370,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		}, []);
 	}
 
-	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0);
+	const visible = Boolean(input === state.focusedInput) && (terms.length > 0 || trending?.length > 0 || state.input);
 	const showTrending = !state.input && trending?.length && terms.length === 0;
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
@@ -403,7 +403,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
 				onClick={(e) => e.stopPropagation()}
 			>
-				{!hideTerms && (
+				{!hideTerms && (showTrending || terms.length > 0 || termsSlot) && (
 					<div className={classnames('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending })}>
 						{termsSlot ? (
 							cloneWithProps(termsSlot, { terms, trending, termsTitle, trendingTitle, showTrending, valueProps, emIfy, onTermClick, controller })
@@ -429,7 +429,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														{...valueProps}
 														onFocus={() => term.preview()}
 													>
-														{emIfy(term.value, state.input)}
+														{emIfy(term.value, state.input || '')}
 													</a>
 												</div>
 											))}
@@ -457,7 +457,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 														{...valueProps}
 														onFocus={() => term.preview()}
 													>
-														{emIfy(term.value, state.input)}
+														{emIfy(term.value, state.input || '')}
 													</a>
 												</div>
 											))}
@@ -526,7 +526,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											React.cloneElement(noResultsSlot, { search, pagination, controller })
 										) : (
 											<>
-												<p>No results found for "{search.query.string}".</p>
+												<p>No results found for "{search.originalQuery?.string || search.query?.string}".</p>
 												<p>Please try another search.</p>
 											</>
 										)}
