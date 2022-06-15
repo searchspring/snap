@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-url-manager",
-	"version": "0.27.7",
+	"version": "0.27.8",
 	"description": "Snap URL Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,8 +20,8 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"deepmerge": "^4.2.2",
-		"seamless-immutable": "^7.1.4"
+		"deepmerge": "4.2.2",
+		"seamless-immutable": "7.1.4"
 	},
 	"sideEffects": false,
 	"files": [

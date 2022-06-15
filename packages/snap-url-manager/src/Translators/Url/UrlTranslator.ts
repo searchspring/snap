@@ -37,20 +37,24 @@ export type UrlTranslatorParametersConfig = {
 	custom: CustomMap;
 };
 
-export type UrlTranslatorConfig = {
+type UrlTranslatorConfigFull = {
 	urlRoot: string;
-	settings: {
-		corePrefix: string;
-		coreType?: keyof typeof ParamLocationType;
-		customType: keyof typeof ParamLocationType;
-		rootParams: boolean;
-	};
+	settings: UrlTranslatorSettingsConfig;
 	parameters: UrlTranslatorParametersConfig;
+};
+
+export type UrlTranslatorConfig = DeepPartial<UrlTranslatorConfigFull>;
+
+export type UrlTranslatorSettingsConfig = {
+	corePrefix: string;
+	coreType?: keyof typeof ParamLocationType;
+	customType: keyof typeof ParamLocationType;
+	rootParams: boolean;
 };
 
 type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
-const defaultConfig: UrlTranslatorConfig = {
+const defaultConfig: UrlTranslatorConfigFull = {
 	urlRoot: '',
 	settings: {
 		corePrefix: '',
@@ -75,11 +79,11 @@ const defaultConfig: UrlTranslatorConfig = {
 const CORE_FIELDS = ['query', 'oq', 'rq', 'tag', 'page', 'pageSize', 'sort', 'filter'];
 
 export class UrlTranslator implements Translator {
-	protected config: UrlTranslatorConfig;
+	protected config: UrlTranslatorConfigFull;
 	protected reverseMapping: Record<string, string> = {};
 
-	constructor(config?: DeepPartial<UrlTranslatorConfig>) {
-		this.config = deepmerge(defaultConfig, (config as UrlTranslatorConfig) || {});
+	constructor(config?: DeepPartial<UrlTranslatorConfigFull>) {
+		this.config = deepmerge(defaultConfig, (config as UrlTranslatorConfigFull) || {});
 
 		Object.keys(this.config.parameters.core).forEach((param: string) => {
 			const coreParam = this.config.parameters.core[param as keyof CoreMap];
@@ -118,7 +122,7 @@ export class UrlTranslator implements Translator {
 		return window.location.search + window.location.hash;
 	}
 
-	getConfig(): UrlTranslatorConfig {
+	getConfig(): UrlTranslatorConfigFull {
 		return deepmerge({}, this.config);
 	}
 

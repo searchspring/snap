@@ -7,15 +7,8 @@ import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { SearchStore } from '@searchspring/snap-store-mobx';
-import type {
-	SearchControllerConfig,
-	BeforeSearchObj,
-	AfterSearchObj,
-	AfterStoreObj,
-	ControllerServices,
-	NextEvent,
-	ContextVariables,
-} from '../types';
+import type { SearchControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
 import type { SearchRequestModel, SearchRequestModelSearchRedirectResponseEnum } from '@searchspring/snapi-types';
 
 const HEIGHT_CHECK_INTERVAL = 50;
@@ -68,14 +61,14 @@ export class SearchController extends AbstractController {
 		this.storage.set('lastStringyParams', undefined);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			search.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
 			const searchStore = search.controller.store as SearchStore;
@@ -97,7 +90,7 @@ export class SearchController extends AbstractController {
 			await next();
 		});
 
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			search.controller.store.loading = false;
