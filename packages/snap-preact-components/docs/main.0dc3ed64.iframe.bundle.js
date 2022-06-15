@@ -1,4 +1,4 @@
-/*! For license information please see main.e3c92834.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.0dc3ed64.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[179],
 	{
@@ -40,135 +40,6 @@
 				},
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
-		},
-		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-			'use strict';
-			var preview_namespaceObject = {};
-			__webpack_require__.r(preview_namespaceObject),
-				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				defaultTheme = {
-					colors: {
-						primary: '#3A23AD',
-						secondary: '#00cee1',
-						hover: '#f8f6fd',
-						text: { secondary: '#ffffff' },
-						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
-					},
-					components: {},
-				},
-				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
-				injectStylesIntoStyleTag = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
-				),
-				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
-				),
-				options = { insert: 'head', singleton: !1 };
-			injectStylesIntoStyleTag_default()(styles.Z, options);
-			styles.Z.locals;
-			var decorators = [
-					function (Story) {
-						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
-					},
-				],
-				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(preview_namespaceObject).forEach(function (key) {
-				var value = preview_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.$9)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.HZ)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.h1)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.My)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi._C)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.$P)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.h1)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			(module = __webpack_require__.nmd(module)),
-				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
-					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
-						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
-						),
-					],
-					module,
-					!1
-				);
 		},
 		'./src/components/Atoms/Badge/Badge.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -5087,7 +4958,9 @@
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
-								breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+								breakpoints: properties.vertical
+									? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+									: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 								pagination: !1,
 								loop: !0,
 								autoAdjustSlides: !0,
@@ -12828,6 +12701,211 @@
 					);
 				});
 		},
+		'./src/components/Molecules/SearchInput/SearchInput.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__),
+				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => SearchInput_stories });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js');
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
+				SearchInput = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
+				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
+				esm =
+					(__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+					__webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'));
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = arguments[i];
+									for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
+								}
+								return target;
+						  }),
+					_extends.apply(this, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.kt)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.kt)('h1', { id: 'searchinput' }, 'SearchInput'),
+					(0, esm.kt)('p', null, 'Renders an input element'),
+					(0, esm.kt)('h2', { id: 'sub-components' }, 'Sub-components'),
+					(0, esm.kt)('ul', null, (0, esm.kt)('li', { parentName: 'ul' }, 'Icon')),
+					(0, esm.kt)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<SearchInput onChange={handleChange} placeholder={placeholder}/>\n'
+						)
+					),
+					(0, esm.kt)('h3', { id: 'placeholder' }, 'placeholder'),
+					(0, esm.kt)('p', null, 'The ', (0, esm.kt)('inlineCode', { parentName: 'p' }, 'placeholder'), ' prop sets the input placeholder text. '),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<SearchInput placeholder={placeholder} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'onchange' }, 'onChange'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'onChange'),
+						" prop is invoked when the input's value has been changed. "
+					),
+					(0, esm.kt)(
+						'pre',
+						null,
+						(0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<SearchInput onChange={handleChange} />\n')
+					),
+					(0, esm.kt)('h3', { id: 'hideicon' }, 'hideIcon'),
+					(0, esm.kt)(
+						'p',
+						null,
+						'The ',
+						(0, esm.kt)('inlineCode', { parentName: 'p' }, 'hideIcon'),
+						' prop determines if the icon should be hidden or not. '
+					),
+					(0, esm.kt)('pre', null, (0, esm.kt)('code', { parentName: 'pre', className: 'language-jsx' }, '<SearchInput hideIcon={true} />\n'))
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const SearchInput_stories = {
+				title: 'Molecules/SearchInput',
+				component: SearchInput.M,
+				parameters: {
+					docs: {
+						page: function page() {
+							return (0, preact_module.h)('div', null, (0, preact_module.h)(MDXContent, null), (0, preact_module.h)(blocks.$4, { story: blocks.Uh }));
+						},
+					},
+				},
+				decorators: [
+					function (Story) {
+						return (0, preact_module.h)('div', { style: { maxWidth: '900px', height: '300px' } }, (0, preact_module.h)(Story, null));
+					},
+				],
+				argTypes: Object.assign(
+					{
+						onChange: { description: 'Onchange Callback', table: { type: { summary: 'function' } }, action: 'onChange' },
+						hideIcon: {
+							description: 'Hides icon',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
+						placeholder: {
+							defaultValue: 'Search',
+							description: 'Display placeholder text',
+							table: { type: { summary: 'string' }, defaultValue: { summary: 'Search' } },
+							control: { type: 'text' },
+						},
+					},
+					componentArgs.p
+				),
+			};
+			var Default = function Template(args) {
+				return (0, preact_module.h)(SearchInput.M, Object.assign({}, args));
+			}.bind({});
+		},
+		'./src/components/Molecules/SearchInput/SearchInput.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { M: () => SearchInput });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/utilities/defined.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/cache.tsx'),
+				CSS_searchInput = function searchInput(_ref) {
+					var _theme$colors,
+						theme = _ref.theme;
+					_ref.subProps;
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.iv)({
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						border: '1px solid ' + ((null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) || '#ccc'),
+						'& .ss__icon': { padding: '5px' },
+						'& .ss__search-input__input': { width: '100%', outline: 'none', border: '0', boxSizing: 'border-box' },
+					});
+				},
+				SearchInput = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_2__.Pi)(function (properties) {
+					var _globalTheme$componen,
+						_properties$theme,
+						_properties$theme$com,
+						_globalTheme$componen2,
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
+						theme = Object.assign({}, globalTheme, properties.theme),
+						props = Object.assign(
+							{ placeholder: 'Search', hideIcon: !1 },
+							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
+								? void 0
+								: _globalTheme$componen.searchInput,
+							properties,
+							null === (_properties$theme = properties.theme) ||
+								void 0 === _properties$theme ||
+								null === (_properties$theme$com = _properties$theme.components) ||
+								void 0 === _properties$theme$com
+								? void 0
+								: _properties$theme$com.searchInput
+						),
+						placeholder = props.placeholder,
+						_onChange = props.onChange,
+						hideIcon = props.hideIcon,
+						disableStyles = props.disableStyles,
+						style = props.style,
+						className = props.className,
+						subProps = {
+							icon: Object.assign(
+								{ className: 'ss__search-input__icon' },
+								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
+									? void 0
+									: _globalTheme$componen2.icon,
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_5__.r)({ disableStyles }),
+								{ theme: props.theme }
+							),
+						},
+						styling = {};
+					return (
+						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_searchInput({ theme, subProps }), style]),
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_6__.n,
+							null,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+								'div',
+								Object.assign({}, styling, { className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ss__search-input', className) }),
+								!hideIcon &&
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)(
+										_Atoms_Icon_Icon__WEBPACK_IMPORTED_MODULE_7__.J,
+										Object.assign({}, subProps.icon, { icon: 'search' })
+									),
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.tZ)('input', {
+									type: 'text',
+									className: 'ss__search-input__input',
+									onChange: function onChange(e) {
+										_onChange && _onChange(e);
+									},
+									placeholder,
+								})
+							)
+						)
+					);
+				});
+		},
 		'./src/components/Molecules/Select/Select.stories.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
@@ -14772,6 +14850,7 @@
 						_globalTheme$componen4,
 						_globalTheme$componen5,
 						_search$query2,
+						_search$originalQuery,
 						_search$query3,
 						delayTimeout,
 						inputViewportOffsetBottom,
@@ -14907,7 +14986,7 @@
 							controller.bind();
 						}, []));
 					var _search$query,
-						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0),
+						visible = Boolean(input === state.focusedInput) && (terms.length > 0 || (null == trending ? void 0 : trending.length) > 0 || state.input),
 						showTrending = !state.input && (null == trending ? void 0 : trending.length) && 0 === terms.length,
 						facetsToShow = facets.length
 							? facets.filter(function (facet) {
@@ -14949,6 +15028,7 @@
 									},
 								}),
 								!hideTerms &&
+									(showTrending || terms.length > 0 || termsSlot) &&
 									(0, emotion_react_browser_esm.tZ)(
 										'div',
 										{ className: classnames_default()('ss__autocomplete__terms', { 'ss__autocomplete__terms-trending': showTrending }) },
@@ -15149,7 +15229,15 @@
 															: (0, emotion_react_browser_esm.tZ)(
 																	preact_module.HY,
 																	null,
-																	(0, emotion_react_browser_esm.tZ)('p', null, 'No results found for "', search.query.string, '".'),
+																	(0, emotion_react_browser_esm.tZ)(
+																		'p',
+																		null,
+																		'No results found for "',
+																		(null === (_search$originalQuery = search.originalQuery) || void 0 === _search$originalQuery
+																			? void 0
+																			: _search$originalQuery.string) || search.query.string,
+																		'".'
+																	),
 																	(0, emotion_react_browser_esm.tZ)('p', null, 'Please try another search.')
 															  )
 												  ),
@@ -17711,6 +17799,12 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						searchable: {
+							defaultValue: !1,
+							description: 'Enables facet search within functionality',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						color: { description: 'Select color', table: { type: { summary: 'string' } }, control: { type: 'color' } },
 						iconColor: {
 							description: 'Select icon color',
@@ -17968,39 +18062,44 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js');
-			var preact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_8___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__),
-				mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
-				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js');
+			var preact__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_emotion_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_12___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_12__),
+				mobx_react_lite__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('../../node_modules/mobx-react-lite/es/index.js'),
+				_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
 					'./src/components/Molecules/FacetListOptions/FacetListOptions.tsx'
 				),
-				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+				_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
 					'./src/components/Molecules/FacetGridOptions/FacetGridOptions.tsx'
 				),
-				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+				_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
 					'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.tsx'
 				),
-				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+				_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
 					'./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.tsx'
 				),
-				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
-				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
-				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
-				_types__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/types.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/utilities/defined.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+				_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__('./src/components/Molecules/FacetSlider/FacetSlider.tsx'),
+				_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__('./src/components/Molecules/SearchInput/SearchInput.tsx'),
+				_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__('./src/components/Atoms/Icon/Icon.tsx'),
+				_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__('./src/components/Atoms/Dropdown/Dropdown.tsx'),
+				_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__('./src/types.ts'),
+				_utilities__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/utilities/defined.ts'),
+				_utilities__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__('./src/utilities/cloneWithProps.ts'),
+				_providers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__('./src/providers/cache.tsx'),
 				CSS_facet = function facet(_ref) {
 					var _theme$colors,
 						color = _ref.color,
 						theme = _ref.theme;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.iv)({
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.iv)({
 						width: '100%',
 						margin: '0 0 20px 0',
 						'& .ss__facet__header': {
@@ -18015,9 +18114,10 @@
 						},
 						'& .ss__facet__options': { marginTop: '8px', maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' },
 						'& .ss__facet__show-more-less': { display: 'block', margin: '8px', cursor: 'pointer', '& .ss__icon': { marginRight: '8px' } },
+						'& .ss__search-input': { margin: '16px 0 0 0' },
 					});
 				},
-				Facet = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_9__.Pi)(function (properties) {
+				Facet = (0, mobx_react_lite__WEBPACK_IMPORTED_MODULE_13__.Pi)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
@@ -18030,8 +18130,9 @@
 						_globalTheme$componen7,
 						_globalTheme$componen8,
 						_globalTheme$componen9,
+						_globalTheme$componen10,
 						_props$facet2,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_11__.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_15__.a)(),
 						theme = Object.assign({}, globalTheme, properties.theme),
 						props = Object.assign(
 							{
@@ -18043,6 +18144,7 @@
 								showLessText: 'Show Less',
 								iconOverflowMore: 'plus',
 								iconOverflowLess: 'minus',
+								searchable: !1,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
@@ -18083,13 +18185,14 @@
 						disableStyles = _props.disableStyles,
 						className = _props.className,
 						style = _props.style,
+						searchable = _props.searchable,
 						subProps = {
 							dropdown: Object.assign(
 								{ className: 'ss__facet__dropdown', disableClickOutside: !0, disableOverlay: !0 },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.dropdown,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 							icon: Object.assign(
@@ -18097,7 +18200,7 @@
 								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
 									? void 0
 									: _globalTheme$componen3.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 							showMoreLessIcon: Object.assign(
@@ -18105,7 +18208,7 @@
 								null == globalTheme || null === (_globalTheme$componen4 = globalTheme.components) || void 0 === _globalTheme$componen4
 									? void 0
 									: _globalTheme$componen4.icon,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 							facetHierarchyOptions: Object.assign(
@@ -18113,7 +18216,7 @@
 								null == globalTheme || null === (_globalTheme$componen5 = globalTheme.components) || void 0 === _globalTheme$componen5
 									? void 0
 									: _globalTheme$componen5.facetHierarchyOptions,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
 								{ theme: props.theme }
 							),
 							facetListOptions: Object.assign(
@@ -18121,7 +18224,7 @@
 								null == globalTheme || null === (_globalTheme$componen6 = globalTheme.components) || void 0 === _globalTheme$componen6
 									? void 0
 									: _globalTheme$componen6.facetListOptions,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
 								{ theme: props.theme }
 							),
 							facetGridOptions: Object.assign(
@@ -18129,7 +18232,7 @@
 								null == globalTheme || null === (_globalTheme$componen7 = globalTheme.components) || void 0 === _globalTheme$componen7
 									? void 0
 									: _globalTheme$componen7.facetGridOptions,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
 								{ theme: props.theme }
 							),
 							facetPaletteOptions: Object.assign(
@@ -18137,7 +18240,7 @@
 								null == globalTheme || null === (_globalTheme$componen8 = globalTheme.components) || void 0 === _globalTheme$componen8
 									? void 0
 									: _globalTheme$componen8.facetPaletteOptions,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles, previewOnFocus, valueProps }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles, previewOnFocus, valueProps }),
 								{ theme: props.theme }
 							),
 							facetSlider: Object.assign(
@@ -18145,7 +18248,15 @@
 								null == globalTheme || null === (_globalTheme$componen9 = globalTheme.components) || void 0 === _globalTheme$componen9
 									? void 0
 									: _globalTheme$componen9.facetSlider,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_12__.r)({ disableStyles }),
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
+								{ theme: props.theme }
+							),
+							searchInput: Object.assign(
+								{ className: 'ss__facet__search-input' },
+								null == globalTheme || null === (_globalTheme$componen10 = globalTheme.components) || void 0 === _globalTheme$componen10
+									? void 0
+									: _globalTheme$componen10.searchInput,
+								(0, _utilities__WEBPACK_IMPORTED_MODULE_16__.r)({ disableStyles }),
 								{ theme: props.theme }
 							),
 						};
@@ -18160,107 +18271,119 @@
 									? void 0
 									: facet.values);
 					var styling = {};
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facet({ color, theme }), style]);
+					var searchableFacet = {
+						allowableTypes: ['list', 'grid', 'palette'],
+						searchFilter: function searchFilter(e) {
+							null != facet && facet.search && (facet.search.input = e.target.value);
+						},
+					};
 					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_facet({ color, theme }), style]),
 						facet &&
-							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-								_providers__WEBPACK_IMPORTED_MODULE_13__.n,
-								null,
-								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-									'div',
-									Object.assign({}, styling, {
-										className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(
-											'ss__facet',
-											'ss__facet--' + facet.display,
-											'ss__facet--' + facet.field,
-											className
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+							_providers__WEBPACK_IMPORTED_MODULE_17__.n,
+							null,
+							(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+								'div',
+								Object.assign({}, styling, {
+									className: classnames__WEBPACK_IMPORTED_MODULE_12___default()(
+										'ss__facet',
+										'ss__facet--' + facet.display,
+										'ss__facet--' + facet.field,
+										className
+									),
+								}),
+								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+									_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_18__.L,
+									Object.assign({}, subProps.dropdown, {
+										open: disableCollapse || !(null != facet && facet.collapsed),
+										onClick: function onClick(e) {
+											return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
+										},
+										button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+											'div',
+											{ className: 'ss__facet__header' },
+											null == facet ? void 0 : facet.label,
+											!disableCollapse &&
+												(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+													_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
+													Object.assign({}, subProps.icon, { icon: null != facet && facet.collapsed ? iconExpand : iconCollapse })
+												)
 										),
 									}),
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-										_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_14__.L,
-										Object.assign({}, subProps.dropdown, {
-											open: disableCollapse || !(null != facet && facet.collapsed),
-											onClick: function onClick(e) {
-												return !disableCollapse && (null == facet ? void 0 : facet.toggleCollapse());
-											},
-											button: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-												'div',
-												{ className: 'ss__facet__header' },
-												null == facet ? void 0 : facet.label,
-												!disableCollapse &&
-													(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-														_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-														Object.assign({}, subProps.icon, { icon: null != facet && facet.collapsed ? iconExpand : iconCollapse })
-													)
-											),
-										}),
-										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-											'div',
-											{ className: classnames__WEBPACK_IMPORTED_MODULE_8___default()('ss__facet__options', className) },
-											(function () {
-												if (optionsSlot)
-													return (0, _utilities__WEBPACK_IMPORTED_MODULE_16__.d)(optionsSlot, { facet, valueProps, limit, previewOnFocus });
-												switch (null == facet ? void 0 : facet.display) {
-													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.SLIDER:
-														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_18__.C,
-															Object.assign({}, subProps.facetSlider, { facet })
-														);
-													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.GRID:
-														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_19__.v,
-															Object.assign({}, subProps.facetGridOptions, { values: limitedValues })
-														);
-													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.PALETTE:
-														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_20__.m,
-															Object.assign({}, subProps.facetPaletteOptions, { values: limitedValues })
-														);
-													case _types__WEBPACK_IMPORTED_MODULE_17__.uw.HIERARCHY:
-														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_21__.j,
-															Object.assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
-														);
-													default:
-														return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_22__.X,
-															Object.assign({}, subProps.facetListOptions, { values: limitedValues })
-														);
-												}
-											})()
+									searchable &&
+										searchableFacet.allowableTypes.includes(facet.display) &&
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+											_Molecules_SearchInput__WEBPACK_IMPORTED_MODULE_20__.M,
+											Object.assign({}, subProps.searchInput, { onChange: searchableFacet.searchFilter, placeholder: 'Search ' + facet.label })
 										),
-										!disableOverflow &&
-											(null == facet ? void 0 : facet.overflow) &&
-											facet.overflow.enabled &&
-											(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-												'div',
-												{
-													className: 'ss__facet__show-more-less',
-													onClick: function onClick() {
-														return facet.overflow.toggle();
-													},
+									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+										'div',
+										{ className: classnames__WEBPACK_IMPORTED_MODULE_12___default()('ss__facet__options', className) },
+										(function () {
+											if (optionsSlot)
+												return (0, _utilities__WEBPACK_IMPORTED_MODULE_21__.d)(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+											switch (null == facet ? void 0 : facet.display) {
+												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.SLIDER:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														_Molecules_FacetSlider__WEBPACK_IMPORTED_MODULE_23__.C,
+														Object.assign({}, subProps.facetSlider, { facet })
+													);
+												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.GRID:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														_Molecules_FacetGridOptions__WEBPACK_IMPORTED_MODULE_24__.v,
+														Object.assign({}, subProps.facetGridOptions, { values: limitedValues })
+													);
+												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.PALETTE:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														_Molecules_FacetPaletteOptions__WEBPACK_IMPORTED_MODULE_25__.m,
+														Object.assign({}, subProps.facetPaletteOptions, { values: limitedValues })
+													);
+												case _types__WEBPACK_IMPORTED_MODULE_22__.uw.HIERARCHY:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														_Molecules_FacetHierarchyOptions__WEBPACK_IMPORTED_MODULE_26__.j,
+														Object.assign({}, subProps.facetHierarchyOptions, { values: limitedValues })
+													);
+												default:
+													return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														_Molecules_FacetListOptions__WEBPACK_IMPORTED_MODULE_27__.X,
+														Object.assign({}, subProps.facetListOptions, { values: limitedValues })
+													);
+											}
+										})()
+									),
+									!disableOverflow &&
+										(null == facet ? void 0 : facet.overflow) &&
+										facet.overflow.enabled &&
+										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+											'div',
+											{
+												className: 'ss__facet__show-more-less',
+												onClick: function onClick() {
+													return facet.overflow.toggle();
 												},
-												overflowSlot
-													? (0, _utilities__WEBPACK_IMPORTED_MODULE_16__.d)(overflowSlot, { facet })
-													: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-															preact__WEBPACK_IMPORTED_MODULE_7__.HY,
+											},
+											overflowSlot
+												? (0, _utilities__WEBPACK_IMPORTED_MODULE_21__.d)(overflowSlot, { facet })
+												: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+														preact__WEBPACK_IMPORTED_MODULE_11__.HY,
+														null,
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+															_Atoms_Icon__WEBPACK_IMPORTED_MODULE_19__.J,
+															Object.assign({}, subProps.showMoreLessIcon, {
+																icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess,
+															})
+														),
+														(0, _emotion_react__WEBPACK_IMPORTED_MODULE_14__.tZ)(
+															'span',
 															null,
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-																_Atoms_Icon__WEBPACK_IMPORTED_MODULE_15__.J,
-																Object.assign({}, subProps.showMoreLessIcon, {
-																	icon: facet.overflow.remaining > 0 ? iconOverflowMore : iconOverflowLess,
-																})
-															),
-															(0, _emotion_react__WEBPACK_IMPORTED_MODULE_10__.tZ)(
-																'span',
-																null,
-																facet.overflow.remaining > 0 ? showMoreText : showLessText
-															)
-													  )
-											)
-									)
+															facet.overflow.remaining > 0 ? showMoreText : showLessText
+														)
+												  )
+										)
 								)
 							)
+						)
 					);
 				});
 		},
@@ -20050,7 +20173,11 @@
 						_controller$track,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
-							{ breakpoints: properties.vertical ? Carousel.EJ : Carousel.iZ, pagination: !1, loop: !0 },
+							{
+								breakpoints: properties.vertical ? JSON.parse(JSON.stringify(Carousel.EJ)) : JSON.parse(JSON.stringify(Carousel.iZ)),
+								pagination: !1,
+								loop: !0,
+							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
 								? void 0
 								: _globalTheme$componen.recommendation,
@@ -33142,8 +33269,7 @@
 								value:
 									((_batchRecommendations = Recommend_asyncToGenerator(
 										Recommend_regeneratorRuntime().mark(function _callee3(parameters) {
-											var _batch$deferreds,
-												otherParams,
+											var otherParams,
 												getKey,
 												key,
 												batch,
@@ -33165,15 +33291,14 @@
 																	}),
 																	(key = getKey(otherParams)),
 																	(batch = this.batches[key] =
-																		this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, requests: [], deferreds: [] }),
+																		this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] }),
 																	(deferred = new Deferred()),
-																	batch.requests.push(Object.assign({}, parameters)),
-																	null === (_batch$deferreds = batch.deferreds) || void 0 === _batch$deferreds || _batch$deferreds.push(deferred),
+																	batch.entries.push({ request: parameters, deferred }),
 																	window.clearTimeout(batch.timeout),
 																	(batch.timeout = window.setTimeout(
 																		Recommend_asyncToGenerator(
 																			Recommend_regeneratorRuntime().mark(function _callee2() {
-																				var _batch$deferreds2, response, _batch$deferreds3;
+																				var _batch$entries, response, _batch$entries2;
 																				return Recommend_regeneratorRuntime().wrap(
 																					function _callee2$(_context2) {
 																						for (;;)
@@ -33181,11 +33306,13 @@
 																								case 0:
 																									if (
 																										(delete _this3.batches[key],
-																										batch.requests.sort(sortRequests).map(function (request) {
-																											var tags = request.tags,
-																												limits = request.limits,
-																												categories = request.categories,
-																												otherParams = _objectWithoutProperties(request, _excluded2);
+																										batch.entries.sort(sortBatchEntries),
+																										batch.entries.map(function (entry) {
+																											var _entry$request = entry.request,
+																												tags = _entry$request.tags,
+																												limits = _entry$request.limits,
+																												categories = _entry$request.categories,
+																												otherParams = _objectWithoutProperties(_entry$request, _excluded2);
 																											limits || (limits = 20);
 																											var tag = Recommend_slicedToArray(tags || [], 1)[0];
 																											delete otherParams.batched,
@@ -33194,7 +33321,7 @@
 																												categories &&
 																													(batch.request.categories
 																														? (batch.request.categories = batch.request.categories.concat(categories))
-																														: (batch.request.categories = categories)),
+																														: (batch.request.categories = Array.isArray(categories) ? categories : [categories])),
 																												(batch.request.limits = batch.request.limits.concat(limits)),
 																												(batch.request = Object.assign({}, batch.request, otherParams));
 																										}),
@@ -33217,20 +33344,20 @@
 																								case 13:
 																									response = _context2.sent;
 																								case 14:
-																									null === (_batch$deferreds2 = batch.deferreds) ||
-																										void 0 === _batch$deferreds2 ||
-																										_batch$deferreds2.forEach(function (def, index) {
-																											def.resolve([response[index]]);
+																									null === (_batch$entries = batch.entries) ||
+																										void 0 === _batch$entries ||
+																										_batch$entries.forEach(function (entry, index) {
+																											entry.deferred.resolve([response[index]]);
 																										}),
 																										(_context2.next = 20);
 																									break;
 																								case 17:
 																									(_context2.prev = 17),
 																										(_context2.t0 = _context2.catch(3)),
-																										null === (_batch$deferreds3 = batch.deferreds) ||
-																											void 0 === _batch$deferreds3 ||
-																											_batch$deferreds3.forEach(function (def) {
-																												def.reject(_context2.t0);
+																										null === (_batch$entries2 = batch.entries) ||
+																											void 0 === _batch$entries2 ||
+																											_batch$entries2.forEach(function (entry) {
+																												entry.deferred.reject(_context2.t0);
 																											});
 																								case 20:
 																								case 'end':
@@ -33247,7 +33374,7 @@
 																	)),
 																	_context3.abrupt('return', deferred.promise)
 																);
-															case 10:
+															case 9:
 															case 'end':
 																return _context3.stop();
 														}
@@ -33339,14 +33466,14 @@
 						RecommendAPI
 					);
 				})(API);
-			function sortRequests(a, b) {
-				return null == a.order && null == b.order
+			function sortBatchEntries(a, b) {
+				return null == a.request.order && null == b.request.order
 					? 0
-					: null == a.order && null != b.order
+					: null == a.request.order && null != b.request.order
 					? 1
-					: (null == b.order && null != a.order) || a.order < b.order
+					: (null == b.request.order && null != a.request.order) || a.request.order < b.request.order
 					? -1
-					: a.order > b.order
+					: a.request.order > b.request.order
 					? 1
 					: 0;
 			}
@@ -39138,7 +39265,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.27.8' } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.28.0' } }),
 					(this.id = (0, v4.Z)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -39534,7 +39661,7 @@
 								website: { trackingCode: this.globals.siteId },
 							}),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.27.8')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.28.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -40265,6 +40392,135 @@
 						Snapify
 					);
 				})();
+		},
+		'./.storybook/preview.js-generated-config-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+			'use strict';
+			var preview_namespaceObject = {};
+			__webpack_require__.r(preview_namespaceObject),
+				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'),
+				injectStylesIntoStyleTag = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
+				),
+				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
+				styles = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
+				),
+				options = { insert: 'head', singleton: !1 };
+			injectStylesIntoStyleTag_default()(styles.Z, options);
+			styles.Z.locals;
+			var decorators = [
+					function (Story) {
+						return (0, preact_module.h)(emotion_element_cbed451f_browser_esm.b, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+					},
+				],
+				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(preview_namespaceObject).forEach(function (key) {
+				var value = preview_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.kg.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.$9)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.HZ)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.h1)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.My)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi._C)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.$P)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.h1)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./generated-stories-entry.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			'use strict';
+			(module = __webpack_require__.nmd(module)),
+				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
+					[
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__(
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
+						),
+					],
+					module,
+					!1
+				);
 		},
 		'./storybook-init-framework-entry.js': (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
@@ -41177,6 +41433,7 @@
 				'./components/Molecules/Filter/Filter.stories.tsx': './src/components/Molecules/Filter/Filter.stories.tsx',
 				'./components/Molecules/Pagination/Pagination.stories.tsx': './src/components/Molecules/Pagination/Pagination.stories.tsx',
 				'./components/Molecules/Result/Result.stories.tsx': './src/components/Molecules/Result/Result.stories.tsx',
+				'./components/Molecules/SearchInput/SearchInput.stories.tsx': './src/components/Molecules/SearchInput/SearchInput.stories.tsx',
 				'./components/Molecules/Select/Select.stories.tsx': './src/components/Molecules/Select/Select.stories.tsx',
 				'./components/Molecules/Slideout/Slideout.stories.tsx': './src/components/Molecules/Slideout/Slideout.stories.tsx',
 				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': './src/components/Organisms/Autocomplete/Autocomplete.stories.tsx',
