@@ -111,18 +111,4 @@ describe('Snap Preact Integration', () => {
 		// @ts-ignore - verifying globals using context set siteId
 		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
 	});
-
-	it(`takes the branch param from the URL and add a new script block`, async () => {
-		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
-
-		// handle mock XHR of bundle file
-		expect(xhrMock.open).toBeCalledWith('HEAD', url, true);
-
-		// wait for rendering of new script block
-		await waitFor(() => {
-			const overrideElement = document.querySelector(`script[${BRANCH_COOKIE}]`);
-			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement).toHaveAttribute('src', url);
-		});
-	});
 });

@@ -153,6 +153,9 @@ export interface ValueFacet extends BaseFacet {
 		limit: number;
 		setLimit: (limit: number) => any;
 	};
+	search?: {
+		input: string;
+	};
 }
 
 export interface HierarchyFacet extends BaseFacet {
