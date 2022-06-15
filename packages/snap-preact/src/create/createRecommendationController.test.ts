@@ -93,8 +93,14 @@ describe('createRecommendationController', () => {
 
 		// other
 		expect(controller.urlManager.detached).toBeDefined();
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.client.globals.siteId).toBe(createConfig.client.globals.siteId);
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.client.config.meta.cache.purgeable).toBe(createConfig.client.config.meta.cache.purgeable);
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.tracker.globals.siteId).toBe(createConfig.client.globals.siteId);
 	});
 
@@ -139,6 +145,8 @@ describe('createRecommendationController', () => {
 
 			expect(controller).toBeDefined();
 			expect(controller.client).toBe(customClient);
+			// Property is private and only accessible within class
+			// @ts-ignore
 			expect(controller.client.globals.siteId).toBe(clientConfig.siteId);
 		});
 

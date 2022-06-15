@@ -7,17 +7,16 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 
 export class SearchStore extends AbstractStore {
-	config: SearchStoreConfig;
-	services: StoreServices;
-	public data: SearchResponseModel & { meta: MetaResponseModel };
-	public meta: MetaResponseModel = {};
-	public merchandising: MerchandisingStore;
-	public search: QueryStore;
-	public facets: FacetStore;
-	public filters: FilterStore;
-	public results: ResultStore;
-	public pagination: PaginationStore;
-	public sorting: SortingStore;
+	public services: StoreServices;
+	public data!: SearchResponseModel & { meta: MetaResponseModel };
+	public meta!: MetaResponseModel;
+	public merchandising!: MerchandisingStore;
+	public search!: QueryStore;
+	public facets!: FacetStore;
+	public filters!: FilterStore;
+	public results!: ResultStore;
+	public pagination!: PaginationStore;
+	public sorting!: SortingStore;
 	public storage: StorageStore;
 
 	constructor(config: SearchStoreConfig, services: StoreServices) {
@@ -30,7 +29,7 @@ export class SearchStore extends AbstractStore {
 		this.services = services;
 
 		this.storage = new StorageStore();
-		this.update({ meta: this.meta });
+		this.update();
 
 		makeObservable(this, {
 			search: observable,
@@ -43,17 +42,35 @@ export class SearchStore extends AbstractStore {
 		});
 	}
 
-	update(data: SearchResponseModel & { meta: MetaResponseModel }): void {
+	/*
+	TODO: refactor sub-store interfaces
+	
+	interface StoreParameters {
+		config?: StoreConfigs;
+		services?: StoreServices;
+		stores?: {
+			storage?: StorageStore;
+			state?: StateStore;
+		};
+		data?: SearchResponseModel & { meta: MetaResponseModel };
+	}
+	*/
+
+	public reset(): void {
+		this.update();
+	}
+
+	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
 		this.error = undefined;
 		this.data = JSON.parse(JSON.stringify(data));
 		this.loaded = !!data.pagination;
-		this.meta = data.meta;
-		this.merchandising = new MerchandisingStore(this.services, data.merchandising);
-		this.search = new QueryStore(this.services, data.search);
-		this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data.pagination, this.meta);
+		this.meta = data.meta || {};
+		this.merchandising = new MerchandisingStore(this.services, data?.merchandising || {});
+		this.search = new QueryStore(this.services, data?.search || {});
+		this.facets = new FacetStore(this.config, this.services, this.storage, data.facets, data?.pagination || {}, this.meta);
 		this.filters = new FilterStore(this.services, data.filters, this.meta);
-		this.results = new ResultStore(this.config, this.services, data.results, data.pagination, data.merchandising);
+		this.results = new ResultStore(this.config, this.services, data?.results || [], data.pagination, data.merchandising);
 		this.pagination = new PaginationStore(this.config, this.services, data.pagination);
-		this.sorting = new SortingStore(this.services, data.sorting, data.search, this.meta);
+		this.sorting = new SortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta);
 	}
 }

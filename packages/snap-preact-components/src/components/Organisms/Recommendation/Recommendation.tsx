@@ -8,12 +8,13 @@ import deepmerge from 'deepmerge';
 import SwiperCore from 'swiper/core';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
+import type { ResultStore } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, Result as ResultType, InlineBannerContent } from '../../../types';
+import { ComponentProps, BreakpointsProps } from '../../../types';
 import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
@@ -32,7 +33,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	let props: RecommendationProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical
+			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
 		// global theme
@@ -203,7 +206,7 @@ export interface RecommendationProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
-	results?: ResultType[] | InlineBannerContent[];
+	results?: ResultStore;
 	pagination?: boolean;
 	controller: RecommendationController;
 	children?: JSX.Element[];

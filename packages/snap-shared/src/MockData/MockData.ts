@@ -108,10 +108,19 @@ export class MockData {
 		}
 	}
 
+	file(path?: string) {
+		try {
+			const dataFile = `${__dirname}/${path}`;
+			return getJSON(dataFile);
+		} catch (err) {
+			throw 'Data file not found!';
+		}
+	}
+
 	recommend(files?: { profileFile?: string; resultsFile?: string }) {
 		try {
-			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config?.recommend?.profile}.json`;
-			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config?.recommend?.results}.json`;
+			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend?.profile}.json`;
+			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,

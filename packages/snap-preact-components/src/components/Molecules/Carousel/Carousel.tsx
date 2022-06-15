@@ -180,7 +180,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	let props: CarouselProps = {
 		// default props
-		breakpoints: properties.vertical ? defaultVerticalCarouselBreakpoints : defaultCarouselBreakpoints,
+		breakpoints: properties.vertical
+			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
+			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
 		autoAdjustSlides: true,

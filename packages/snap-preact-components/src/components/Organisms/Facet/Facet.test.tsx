@@ -183,6 +183,24 @@ describe('Facet Component', () => {
 
 			expect(facetElement.length).toBe(args.limit);
 		});
+
+		it('can use searchable prop', async () => {
+			const args = {
+				facet: listFacetMock as ValueFacet,
+				searchable: true,
+			};
+
+			const rendered = render(<Facet {...args} />);
+			const searchInputElement = rendered.container.querySelector('.ss__search-input input');
+			expect(searchInputElement).toBeInTheDocument();
+			userEvent.type(searchInputElement, 'su');
+
+			await waitFor(() => expect(searchInputElement).toHaveValue('su'));
+			expect(searchInputElement).toHaveValue('su');
+
+			const optionsElement = rendered.container.querySelector('.ss__facet__options');
+			expect(optionsElement).toHaveTextContent('Summer');
+		});
 	});
 
 	it('renders with classname', () => {

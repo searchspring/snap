@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import '@testing-library/jest-dom/extend-expect';
-import { waitFor } from '@testing-library/preact';
+import { cleanup, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Snap, BRANCH_COOKIE } from './Snap';
@@ -52,6 +52,8 @@ describe('Snap Preact Integration', () => {
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
 		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
 	});
+
+	afterEach(cleanup);
 
 	afterAll(() => jest.clearAllMocks);
 
@@ -108,19 +110,5 @@ describe('Snap Preact Integration', () => {
 		expect(snap.context).toStrictEqual({ ...context, config: config });
 		// @ts-ignore - verifying globals using context set siteId
 		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
-	});
-
-	it(`takes the branch param from the URL and add a new script block`, async () => {
-		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
-
-		// handle mock XHR of bundle file
-		expect(xhrMock.open).toBeCalledWith('HEAD', url, true);
-
-		// wait for rendering of new script block
-		await waitFor(() => {
-			const overrideElement = document.querySelector(`script[${BRANCH_COOKIE}]`);
-			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement).toHaveAttribute('src', url);
-		});
 	});
 });

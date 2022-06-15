@@ -6,6 +6,7 @@ import { searchResponse } from '../../../mocks/searchResponse';
 import { Carousel } from './Carousel';
 import { Result } from '../../Molecules/Result';
 import userEvent from '@testing-library/user-event';
+import type { Product } from '@searchspring/snap-store-mobx';
 
 describe('Carousel Component', () => {
 	const theme = {
@@ -17,12 +18,13 @@ describe('Carousel Component', () => {
 		},
 	};
 
+	// TODO: refactor to use mock store data
 	it('renders', () => {
 		const rendered = render(
 			<Carousel>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -36,7 +38,7 @@ describe('Carousel Component', () => {
 			<Carousel>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -51,7 +53,7 @@ describe('Carousel Component', () => {
 			<Carousel>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -66,7 +68,7 @@ describe('Carousel Component', () => {
 			<Carousel>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -82,7 +84,7 @@ describe('Carousel Component', () => {
 			<Carousel vertical={true}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -98,7 +100,7 @@ describe('Carousel Component', () => {
 			<Carousel prevButton={prevButtonText} nextButton={nextButtonText}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -116,7 +118,7 @@ describe('Carousel Component', () => {
 		const rendered = render(
 			<Carousel hideButtons={true}>
 				{searchResponse.results.map((result, idx) => (
-					<Result result={result} key={idx} />
+					<Result result={result as unknown as Product} key={idx} />
 				))}
 			</Carousel>
 		);
@@ -137,7 +139,7 @@ describe('Carousel Component', () => {
 			<Carousel pagination onNextButtonClick={onNextFunc} onPrevButtonClick={onPrevFunc} onClick={onClickFunc}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -163,7 +165,7 @@ describe('Carousel Component', () => {
 			<Carousel pagination={true}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -194,7 +196,7 @@ describe('Carousel Component', () => {
 		const rendered = render(
 			<Carousel breakpoints={customBreakpoints}>
 				{searchResponse.results.map((result, idx) => (
-					<Result result={result} key={idx} />
+					<Result result={result as unknown as Product} key={idx} />
 				))}
 			</Carousel>
 		);
@@ -225,7 +227,7 @@ describe('Carousel Component', () => {
 			<Carousel pagination disableStyles={true}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>
@@ -241,7 +243,7 @@ describe('Carousel Component', () => {
 			<Carousel pagination className={className}>
 				{searchResponse.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
-						<Result result={result} />
+						<Result result={result as unknown as Product} />
 					</div>
 				))}
 			</Carousel>

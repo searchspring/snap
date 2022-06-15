@@ -10,16 +10,6 @@ export interface ComponentProps extends RenderableProps<any> {
 }
 
 // TODO: figure out types for URL manager
-export interface Result {
-	id: string;
-	mappings: Mappings;
-	attributes: any;
-	type?: string;
-	uid?: string;
-	track?: {
-		click: (e?: any) => void;
-	};
-}
 export enum BannerType {
 	header = 'header',
 	footer = 'footer',
@@ -164,6 +154,9 @@ export interface ValueFacet extends BaseFacet {
 		toggle: () => any;
 		limit: number;
 		setLimit: (limit: number) => any;
+	};
+	search?: {
+		input: string;
 	};
 }
 

@@ -219,7 +219,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config']);
+			globalContext = getContext(['shopper', 'config', 'merchandising']);
 		} catch (err) {
 			this.logger.error('failed to find global context');
 		}
@@ -235,6 +235,19 @@ export class Snap {
 
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+		}
+
+		if (this.context.merchandising?.segments) {
+			if (this.config.client.globals.merchandising) {
+				this.config.client.globals.merchandising.segments = deepmerge(
+					this.config.client.globals.merchandising.segments,
+					this.context.merchandising.segments
+				);
+			} else {
+				this.config.client.globals.merchandising = {
+					segments: this.context.merchandising.segments,
+				};
+			}
 		}
 
 		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
@@ -285,7 +298,6 @@ export class Snap {
 				const src = `${path}${branchParam}/bundle.js`;
 				branchScript.src = src;
 				branchScript.setAttribute(BRANCH_COOKIE, branchParam);
-				document.head.appendChild(branchScript);
 
 				new DomTargeter(
 					[
@@ -325,6 +337,9 @@ export class Snap {
 							/>,
 							elem
 						);
+
+						window.searchspring = undefined;
+						document.head.appendChild(branchScript);
 					}
 				);
 

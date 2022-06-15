@@ -7,8 +7,9 @@ import {
 	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
-import { API, HTTPHeaders, LegacyAPI, SuggestAPI, ApiConfiguration, SuggestRequestModel, SuggestResponseModel } from '.';
+import { API, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
+import type { SuggestRequestModel } from '../../types';
 
 export class HybridAPI extends API {
 	private requesters: {
@@ -34,6 +35,14 @@ export class HybridAPI extends API {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		const legacyData = await this.requesters.legacy.getSearch(legacyRequestParameters);
+
+		return transformSearchResponse(legacyData, requestParameters);
+	}
+
+	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
+
+		const legacyData = await this.requesters.legacy.getFinder(legacyRequestParameters);
 
 		return transformSearchResponse(legacyData, requestParameters);
 	}

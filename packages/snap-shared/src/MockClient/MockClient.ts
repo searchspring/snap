@@ -1,7 +1,6 @@
 import type { MetaResponseModel, SearchResponseModel, AutocompleteResponseModel } from '@searchspring/snapi-types';
-import { Client, ClientGlobals, ClientConfig } from '@searchspring/snap-client';
+import { Client, ClientGlobals, ClientConfig, TrendingResponseModel } from '@searchspring/snap-client';
 import { MockData } from '../MockData/MockData';
-import { TrendingResponseModel } from '../../../snap-client/src/Client/apis';
 
 /*
 	// typical usage
@@ -25,6 +24,12 @@ export class MockClient extends Client {
 	}
 
 	async search() {
+		const searchData = this.mockData.search();
+
+		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+	}
+
+	async finder() {
 		const searchData = this.mockData.search();
 
 		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);

@@ -5,6 +5,9 @@ import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
+import type { ResultStore } from '@searchspring/snap-store-mobx';
+
+const mockResults = searchResponse.results as unknown as ResultStore;
 
 describe('Results Component', () => {
 	const theme = {
@@ -17,8 +20,8 @@ describe('Results Component', () => {
 		},
 	};
 	it('renders grid view', () => {
-		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} />);
-		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
+		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
+		const resultElement = rendered.getByText(mockResults[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
 		const results = rendered.container.querySelector('.ss__result');
@@ -27,8 +30,8 @@ describe('Results Component', () => {
 	});
 
 	it('renders list view', () => {
-		const rendered = render(<Results layout={Layout.LIST} results={searchResponse.results} />);
-		const resultElement = rendered.getByText(searchResponse.results[0].mappings.core.name);
+		const rendered = render(<Results layout={Layout.LIST} results={mockResults} />);
+		const resultElement = rendered.getByText(mockResults[0].mappings.core.name);
 		expect(resultElement).toBeInTheDocument();
 
 		const result = rendered.container.querySelector('.ss__result');
@@ -41,9 +44,9 @@ describe('Results Component', () => {
 	});
 
 	it('renders all', () => {
-		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} />);
+		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
 		const results = rendered.container.querySelectorAll('.ss__results__result');
-		expect(results.length).toBe(searchResponse.results.length);
+		expect(results.length).toBe(mockResults.length);
 	});
 
 	it('renders correct number of products when passing rows and columns', () => {
@@ -52,7 +55,7 @@ describe('Results Component', () => {
 			columns: 3,
 		};
 
-		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} {...args} />);
+		const rendered = render(<Results layout={Layout.GRID} results={mockResults} {...args} />);
 		const results = rendered.container.querySelectorAll('.ss__result');
 		expect(results.length).toBe(args.columns * args.rows);
 	});
@@ -63,7 +66,7 @@ describe('Results Component', () => {
 			gapSize: '40px',
 		};
 
-		const rendered = render(<Results layout={Layout.GRID} results={searchResponse.results} {...args} />);
+		const rendered = render(<Results layout={Layout.GRID} results={mockResults} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__results');
 		const resultsElementStyles = getComputedStyle(resultsElement!);
 
@@ -90,7 +93,7 @@ describe('Results Component', () => {
 		const args = {
 			breakpoints: customBreakpoints,
 		};
-		const rendered = render(<Results results={searchResponse.results} {...args} />);
+		const rendered = render(<Results results={mockResults} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__results');
 
 		expect(resultsElement).toBeInTheDocument();
@@ -110,7 +113,7 @@ describe('Results Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Results results={searchResponse.results} className={className} />);
+		const rendered = render(<Results results={mockResults} className={className} />);
 
 		const resultsElement = rendered.container.querySelector('.ss__results');
 		expect(resultsElement).toBeInTheDocument();
@@ -118,7 +121,7 @@ describe('Results Component', () => {
 	});
 
 	it('can disable styles', () => {
-		const rendered = render(<Results results={searchResponse.results} disableStyles />);
+		const rendered = render(<Results results={mockResults} disableStyles />);
 
 		const resultsElement = rendered.container.querySelector('.ss__results');
 
@@ -128,7 +131,7 @@ describe('Results Component', () => {
 	it('is themeable with ThemeProvider', () => {
 		const args = {
 			layout: Layout.GRID,
-			results: searchResponse.results,
+			results: mockResults,
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
@@ -143,7 +146,7 @@ describe('Results Component', () => {
 	it('is themeable with theme prop', () => {
 		const args = {
 			layout: Layout.GRID,
-			results: searchResponse.results,
+			results: mockResults,
 		};
 		const rendered = render(<Results {...args} theme={theme} />);
 		const resultsElement = rendered.container.querySelector('.ss__results');
@@ -154,7 +157,7 @@ describe('Results Component', () => {
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = {
 			layout: Layout.GRID,
-			results: searchResponse.results,
+			results: mockResults,
 		};
 		const themeOverride = {
 			components: {
@@ -187,7 +190,7 @@ describe('Results Component', () => {
 
 		const args = {
 			layout: Layout.GRID,
-			results: searchResponse.results,
+			results: mockResults,
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme2}>

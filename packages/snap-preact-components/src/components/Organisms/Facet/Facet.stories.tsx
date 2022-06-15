@@ -64,6 +64,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		searchable: {
+			defaultValue: false,
+			description: 'Enables facet search within functionality',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		color: {
 			description: 'Select color',
 			table: {
