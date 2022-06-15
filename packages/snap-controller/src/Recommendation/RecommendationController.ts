@@ -8,7 +8,8 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import { BeaconEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, NextEvent, ContextVariables } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
+import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -74,14 +75,14 @@ export class RecommendationController extends AbstractController {
 		this.store.setConfig(this.config);
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (recommend: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeSearch', async (recommend: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			recommend.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			recommend.controller.store.loading = false;

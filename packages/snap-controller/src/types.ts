@@ -1,5 +1,5 @@
 import type { AbstractController } from './Abstract/AbstractController';
-import type { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
+import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
 import type {
@@ -18,17 +18,7 @@ import type { Profiler } from '@searchspring/snap-profiler';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Logger } from '@searchspring/snap-logger';
 
-// Global
-declare global {
-	interface Window {
-		searchspring?: any;
-	}
-}
-
 // Middleware
-
-export type NextEvent = Next;
-
 export type PluginFunction = (cntrlr: AbstractController, ...args: any) => Promise<void>;
 export type PluginGrouping = [func: PluginFunction, ...args: unknown[]];
 
