@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **autocomplete.tsx:** checking input state to determine visible bool ([1fad14e](https://github.com/searchspring/snap/commit/1fad14e938fb43da77170ccbc0c5e7a0e5657026))
+* **client:** fixing deferred resolve ordering when using `options.order` ([d74df0a](https://github.com/searchspring/snap/commit/d74df0a09b51095887460bdf934cce33afa1a3d7))
+* load branch override script after branch override component renders ([e8884a9](https://github.com/searchspring/snap/commit/e8884a9f1a10e1a20cdfd86be679eebb27d5efa4))
+* **preact-components:** dereferencing breakpoints to prevent multiple carousels from sharing values ([2de6945](https://github.com/searchspring/snap/commit/2de6945e8761b735d038e38bd79a0955ef3d5065))
+* remove failing test, assume window.searchspring ([be18438](https://github.com/searchspring/snap/commit/be18438cd64dd1a17aff0f2a16d531c648afc728))
+
+
+### Features
+
+* **facet:** add searchable prop to facet; Add searchinput component ([b055c32](https://github.com/searchspring/snap/commit/b055c32f91053b241c87a5ffd52fb5138655e0ea))
+
+
+
+
+
 ## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
 
 
