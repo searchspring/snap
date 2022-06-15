@@ -116,20 +116,6 @@ describe('Snap Preact', () => {
 		expect(snap.context.shopper!.id).toBe('snapdevscript');
 	});
 
-	it('has branch override functionality', () => {
-		const branchParam = 'override';
-		cookies.set(BRANCH_COOKIE, branchParam, 'Lax', 3600000);
-
-		const logger = new Logger('Snap Preact ');
-		const spy = jest.spyOn(logger, 'warn');
-		const snap = new Snap(baseConfig, { logger });
-		expect(spy).toHaveBeenCalledWith(`...loading build... '${branchParam}'`);
-
-		cookies.unset(BRANCH_COOKIE);
-
-		spy.mockClear();
-	});
-
 	it('exposes itself globally on the window', () => {
 		const snap = new Snap(baseConfig);
 		expect(window.searchspring).toBeDefined();
