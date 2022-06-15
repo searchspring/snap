@@ -227,24 +227,23 @@ export class Tracker {
 					},
 				});
 			}
+
+			const { userAgent, href, framework, filename, stack, message, colno, lineno, timeStamp } = data;
+
 			const payload = {
-				type: BeaconType.ERROR,
-				category: BeaconCategory.METRICS,
+				type: BeaconType.METRIC,
+				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
-					type: data?.type || 'error',
-					userAgent: data?.userAgent || navigator.userAgent,
-					href: data?.href || window.location.href,
-					siteId: data?.siteId || context.website.trackingCode,
-					framework: data?.framework,
-					version: data?.version || version,
-					filename: data?.filename,
-					stack: data?.stack,
-					message: data?.message,
-					colno: data?.colno,
-					lineno: data?.lineno,
-					timeStamp: data?.timeStamp,
-					date: data?.date || Date.now(),
+					userAgent,
+					href,
+					framework,
+					filename,
+					stack,
+					message,
+					colno,
+					lineno,
+					timeStamp,
 				},
 			};
 

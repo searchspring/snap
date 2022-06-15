@@ -208,7 +208,7 @@ describe('Snap Preact', () => {
 		spy.mockClear();
 	});
 
-	it('can send beacon error events using beaconErrorEvent method', () => {
+	it('can send beacon error events using handlers.error method', () => {
 		const tracker = new Tracker(baseConfig.client.globals);
 		const spy = jest.spyOn(tracker.track, 'error');
 		const snap = new Snap(baseConfig, { tracker });
@@ -220,7 +220,7 @@ describe('Snap Preact', () => {
 			filename: 'https://snapui.searchspring.io/test.js',
 		});
 
-		snap.beaconErrorEvent(error);
+		snap.handlers.error(error);
 
 		expect(spy).toHaveBeenCalled();
 		spy.mockClear();

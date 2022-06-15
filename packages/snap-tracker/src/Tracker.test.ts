@@ -1121,8 +1121,8 @@ describe('Tracker', () => {
 		};
 		const beaconEvent = await tracker.track.error(payload);
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ERROR);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.METRICS);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.METRIC);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.RUNTIME);
 		expect(beaconEvent?.event).toEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);

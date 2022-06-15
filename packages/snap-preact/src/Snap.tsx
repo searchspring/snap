@@ -211,49 +211,44 @@ export class Snap {
 		return this.controllers[config.id];
 	};
 
-	public beaconErrorEvent = (event: ErrorEvent): void => {
-		try {
-			const { filename } = event;
-			if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
-				const {
-					type,
-					colno,
-					lineno,
-					error: { stack },
-					message,
-					timeStamp,
-				} = event;
-				const userAgent = navigator.userAgent;
-				const href = window.location.href;
-				const siteId = this.config.client.globals.siteId;
-				const framework = 'preact';
-				const date = Date.now();
+	public handlers = {
+		error: (event: ErrorEvent): void => {
+			try {
+				const { filename } = event;
+				if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
+					const {
+						colno,
+						lineno,
+						error: { stack },
+						message,
+						timeStamp,
+					} = event;
+					const userAgent = navigator.userAgent;
+					const href = window.location.href;
+					const framework = 'preact';
 
-				const beaconPayload: TrackErrorEvent = {
-					type,
-					userAgent,
-					href,
-					siteId,
-					framework,
-					version,
-					filename,
-					stack,
-					message,
-					colno,
-					lineno,
-					timeStamp,
-					date,
-				};
-				this.tracker.track.error(beaconPayload);
+					const beaconPayload: TrackErrorEvent = {
+						userAgent,
+						href,
+						framework,
+						filename,
+						stack,
+						message,
+						colno,
+						lineno,
+						timeStamp,
+					};
+					this.tracker.track.error(beaconPayload);
+				}
+			} catch (e) {
+				// prevent error metrics from breaking the app
 			}
-		} catch (e) {
-			// prevent error metrics from breaking the app
-		}
+		},
 	};
 
 	constructor(config: SnapConfig, services?: SnapServices) {
-		window.removeEventListener('error', this.beaconErrorEvent);
-		window.addEventListener('error', this.beaconErrorEvent);
+		window.removeEventListener('error', this.handlers.error);
+		window.addEventListener('error', this.handlers.error);
 
 		this.config = config;
 
