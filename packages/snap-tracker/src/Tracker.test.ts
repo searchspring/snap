@@ -322,13 +322,22 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
 
+		// @ts-ignore - private property
+		expect(tracker.config.id).toStrictEqual('track');
+
+		// @ts-ignore - private property
+		expect(tracker.config.framework).toStrictEqual('snap');
+
 		const tracker2 = new Tracker(globals, config);
 
 		// @ts-ignore - private property
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
 
-		expect(tracker.config.id).toBe(config.id);
-		expect(tracker.config.framework).toBe(config.framework);
+		// @ts-ignore - private property
+		expect(tracker2.config.id).toBe(config.id);
+
+		// @ts-ignore - private property
+		expect(tracker2.config.framework).toBe(config.framework);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
