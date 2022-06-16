@@ -5,7 +5,8 @@ export type TrackerGlobals = {
 };
 
 export type TrackerConfig = {
-	id: string;
+	id?: string;
+	framework?: string;
 };
 
 export type BeaconPayload = {
@@ -31,7 +32,7 @@ export enum BeaconType {
 	ORDER = 'transaction',
 	LOGIN = 'login',
 	CLICK = 'click',
-	METRIC = 'metric',
+	ERROR = 'error',
 	CUSTOM = 'custom',
 
 	/** For Profiles Recommendations */
@@ -70,6 +71,7 @@ export interface BeaconMeta {
 	initiator: {
 		lib: string;
 		'lib.version': string;
+		framework: string;
 	};
 }
 
@@ -79,7 +81,6 @@ export interface ShopperLoginEvent {
 export interface TrackErrorEvent {
 	userAgent?: string;
 	href?: string;
-	framework?: string;
 	filename?: string;
 	stack?: string;
 	message?: string;

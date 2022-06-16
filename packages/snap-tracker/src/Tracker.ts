@@ -40,6 +40,7 @@ const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
+	framework: 'snap',
 };
 
 export class Tracker {
@@ -206,7 +207,7 @@ export class Tracker {
 				pid: payload?.pid || undefined,
 			};
 
-			const beaconEvent = new BeaconEvent(event as BeaconPayload);
+			const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
@@ -228,16 +229,15 @@ export class Tracker {
 				});
 			}
 
-			const { userAgent, href, framework, filename, stack, message, colno, lineno, timeStamp } = data;
+			const { userAgent, href, filename, stack, message, colno, lineno, timeStamp } = data;
 
 			const payload = {
-				type: BeaconType.METRIC,
+				type: BeaconType.ERROR,
 				category: BeaconCategory.RUNTIME,
 				context,
 				event: {
 					userAgent,
 					href,
-					framework,
 					filename,
 					stack,
 					message,

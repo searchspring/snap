@@ -227,12 +227,10 @@ export class Snap {
 					} = event;
 					const userAgent = navigator.userAgent;
 					const href = window.location.href;
-					const framework = 'preact';
 
 					const beaconPayload: TrackErrorEvent = {
 						userAgent,
 						href,
-						framework,
 						filename,
 						stack,
 						message,
@@ -291,7 +289,7 @@ export class Snap {
 		}
 
 		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
-		this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
+		this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
 		this._controllerPromises = {};
 		this._instantiatorPromises = {};
 		this.controllers = {};

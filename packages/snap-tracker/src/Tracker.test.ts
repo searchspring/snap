@@ -313,7 +313,8 @@ describe('Tracker', () => {
 
 	it('can pass config and use custom namespace', async () => {
 		const config = {
-			id: 'trackerrrr',
+			id: 'customTracker',
+			framework: 'test',
 		};
 
 		const tracker = new Tracker(globals);
@@ -325,6 +326,9 @@ describe('Tracker', () => {
 
 		// @ts-ignore - private property
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
+
+		expect(tracker.config.id).toBe(config.id);
+		expect(tracker.config.framework).toBe(config.framework);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -1105,23 +1109,18 @@ describe('Tracker', () => {
 		const eventFn = jest.spyOn(tracker.track, 'error');
 
 		const payload: TrackErrorEvent = {
-			type: 'error',
 			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
 			href: 'https://localhost/',
-			siteId: 'abc123',
-			framework: 'preact',
-			version: 'snapdev',
 			filename: 'https://snapui.searchspring.io/test.js',
 			stack: '',
 			message: 'something went wrong!',
 			colno: 1,
 			lineno: 1,
 			timeStamp: 1,
-			date: Date.now(),
 		};
 		const beaconEvent = await tracker.track.error(payload);
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.METRIC);
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ERROR);
 		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.RUNTIME);
 		expect(beaconEvent?.event).toEqual(payload);
 

@@ -28,6 +28,38 @@ describe('BeaconEvent', () => {
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.id).toBeDefined();
 		expect(event.pid).toStrictEqual(data.pid);
+		expect(event.meta.framework).toBeDefined();
+	});
+
+	it('can create event (login) with custom config', async () => {
+		const config = {
+			id: 'customTracker',
+			framework: 'test',
+		};
+		const data = {
+			type: BeaconType.LOGIN,
+			category: BeaconCategory.PERSONALIZATION,
+			context: {
+				userId: uuidv4(),
+				sessionId: uuidv4(),
+				shopperId: uuidv4(),
+				pageLoadId: uuidv4(),
+				website: {
+					trackingCode: '8uyt2m',
+				},
+			},
+			event: {},
+			pid: uuidv4(),
+		};
+		const event = new BeaconEvent(data, config);
+
+		expect(event.type).toStrictEqual(data.type);
+		expect(event.category).toStrictEqual(data.category);
+		expect(event.context).toStrictEqual(data.context);
+		expect(event.event).toStrictEqual(data.event);
+		expect(event.id).toBeDefined();
+		expect(event.pid).toStrictEqual(data.pid);
+		expect(event.meta.framework).toStrictEqual(config.framework);
 	});
 
 	it('can create product view event', async () => {

@@ -21,7 +21,7 @@ export class BeaconEvent {
 	id?: string;
 	pid?: string | null;
 
-	constructor(payload: BeaconPayload) {
+	constructor(payload: BeaconPayload, config: TrackerConfig) {
 		this.type = payload.type;
 		this.category = payload.category;
 		this.context = payload.context;
@@ -34,6 +34,7 @@ export class BeaconEvent {
 			initiator: {
 				lib: 'searchspring/snap',
 				'lib.version': version,
+				framework: config.framework,
 			},
 		};
 		this.id = uuidv4();
