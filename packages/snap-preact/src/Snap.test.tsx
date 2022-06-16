@@ -176,7 +176,9 @@ describe('Snap Preact', () => {
 
 	it('can send beacon error events from error event listener', () => {
 		// Define the addEventListener method with a Jest mock function
-		const events = {};
+		const events: {
+			[key: string]: EventListenerOrEventListenerObject;
+		} = {};
 		window.addEventListener = jest.fn((event, callback) => {
 			events[event] = callback;
 		});
