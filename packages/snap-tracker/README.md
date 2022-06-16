@@ -209,23 +209,17 @@ const handleErrorTracking = (event: ErrorEvent) :void => {
     const userAgent = navigator.userAgent;
     const href = window.location.href;
     const siteId = this.config.client.globals.siteId;
-    const framework = 'preact';
     const date = Date.now();
 
     const beaconPayload: TrackErrorEvent = {
-        type,
         userAgent,
         href,
-        siteId,
-        framework,
-        version,
         filename,
         stack,
         message,
         colno,
         lineno,
         timeStamp,
-        date,
     };
 
     tracker.track.error(beaconPayload);

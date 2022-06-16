@@ -32,7 +32,7 @@ export class BeaconEvent {
 			initiator: {
 				lib: 'searchspring/snap',
 				'lib.version': version,
-				framework: config.framework!,
+				'lib.framework': config.framework!,
 			},
 		};
 		this.id = uuidv4();

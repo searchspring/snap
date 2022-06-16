@@ -32,7 +32,7 @@ describe('BeaconEvent', () => {
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.id).toBeDefined();
 		expect(event.pid).toStrictEqual(data.pid);
-		expect(event.meta?.initiator.framework).toStrictEqual(trackerConfig.framework);
+		expect(event.meta?.initiator['lib.framework']).toStrictEqual(trackerConfig.framework);
 	});
 
 	it('can create product view event', async () => {

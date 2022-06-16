@@ -71,7 +71,7 @@ export interface BeaconMeta {
 	initiator: {
 		lib: string;
 		'lib.version': string;
-		framework: string;
+		'lib.framework': string;
 	};
 }
 
