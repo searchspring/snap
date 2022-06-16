@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact';
 
 import { searchResponse } from '../../../mocks/searchResponse';
 import { Banner } from './Banner';
-import { BannerType } from '../../../types';
+import { ContentType } from '@searchspring/snap-store-mobx';
 import { ThemeProvider } from '../../../providers';
 
 describe('Merchandising Banner Component', () => {
@@ -17,7 +17,7 @@ describe('Merchandising Banner Component', () => {
 			},
 		},
 	};
-	const typesWithContent: BannerType[] = [BannerType.header, BannerType.footer, BannerType.banner];
+	const typesWithContent: ContentType[] = [ContentType.HEADER, ContentType.FOOTER, ContentType.BANNER];
 
 	typesWithContent.forEach((type) => {
 		it(`renders type:${type} banner`, () => {
@@ -30,20 +30,20 @@ describe('Merchandising Banner Component', () => {
 
 	it('doesnt render if empty', () => {
 		// @ts-ignore
-		const rendered = render(<Banner content={[]} type={BannerType.left} />);
+		const rendered = render(<Banner content={[]} type={ContentType.LEFT} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--left');
 		expect(merchBannerElement).not.toBeInTheDocument();
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={BannerType.banner} />);
+		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={ContentType.BANNER} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__banner');
 		expect(loadingbarElement!.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<Banner className={className} content={searchResponse.merchandising.content} type={BannerType.banner} />);
+		const rendered = render(<Banner className={className} content={searchResponse.merchandising.content} type={ContentType.BANNER} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement).toHaveClass(className);
@@ -52,7 +52,7 @@ describe('Merchandising Banner Component', () => {
 	it('is themeable with ThemeProvider', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.banner,
+			type: ContentType.BANNER,
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
@@ -67,7 +67,7 @@ describe('Merchandising Banner Component', () => {
 	it('is themeable with theme prop', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.banner,
+			type: ContentType.BANNER,
 		};
 		const rendered = render(<Banner {...args} theme={theme} />);
 		const bannerElement = rendered.container.querySelector('.ss__banner');
@@ -78,7 +78,7 @@ describe('Merchandising Banner Component', () => {
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = {
 			content: searchResponse.merchandising.content,
-			type: BannerType.banner,
+			type: ContentType.BANNER,
 		};
 		const themeOverride = {
 			components: {

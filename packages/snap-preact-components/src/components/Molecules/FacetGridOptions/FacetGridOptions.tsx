@@ -6,7 +6,8 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, ValueFacetValue } from '../../../types';
+import { ComponentProps } from '../../../types';
+import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
 type IGridStyles = {
 	columns?: number;

@@ -8,8 +8,9 @@ import { observer } from 'mobx-react-lite';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, Filter as FilterType } from '../../../types';
+import { ComponentProps } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
+import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	filterSummary: () =>
@@ -93,7 +94,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						{...subProps.filter}
 						url={filter?.url}
 						facetLabel={filter?.facet?.label}
-						valueLabel={filter?.value?.label}
+						valueLabel={filter?.value?.label || ''}
 						onClick={(e) => onClick && onClick(e, filter)}
 					/>
 				))}

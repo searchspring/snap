@@ -6,7 +6,8 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, HierarchyFacetValue } from '../../../types';
+import { ComponentProps } from '../../../types';
+import { HierarchyValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	hierarchy: ({ theme }: { theme: Theme }) =>
@@ -104,7 +105,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 	);
 });
 export interface FacetHierarchyOptionsProps extends ComponentProps {
-	values: HierarchyFacetValue[];
+	values: HierarchyValue[];
 	hideCount?: boolean;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;

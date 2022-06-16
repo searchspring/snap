@@ -2,12 +2,20 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 
 import { ThemeProvider } from '../../../providers';
-
 import { FilterSummary } from './FilterSummary';
-import { filters } from '../../../mocks/store';
 import userEvent from '@testing-library/user-event';
 
+import { MockData } from '@searchspring/snap-shared';
+import { FilterStore } from '@searchspring/snap-store-mobx';
+import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+
 describe('FilterSummary Component', () => {
+	const services = {
+		urlManager: new UrlManager(new UrlTranslator()),
+	};
+	const mockData = new MockData().searchMeta('filtered');
+	const filters = new FilterStore(services, mockData.filters!, mockData.meta);
+
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
 		const FilterSummaryElement = rendered.container.querySelector('.ss__filter-summary');
@@ -149,6 +157,12 @@ describe('FilterSummary Component', () => {
 });
 
 describe('FilterSummary theming works', () => {
+	const services = {
+		urlManager: new UrlManager(new UrlTranslator()),
+	};
+	const mockData = new MockData().searchMeta('filtered');
+	const filters = new FilterStore(services, mockData.filters!, mockData.meta);
+
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {

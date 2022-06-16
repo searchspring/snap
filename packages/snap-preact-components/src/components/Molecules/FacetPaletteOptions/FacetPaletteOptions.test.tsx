@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { FacetPaletteOptions } from './FacetPaletteOptions';
 import { paletteFacetMock } from '../../../mocks/searchResponse';
 import { ThemeProvider } from '../../../providers';
+import { Value } from '@searchspring/snap-store-mobx';
 
 describe('FacetPaletteOptions Component', () => {
 	const theme = {
@@ -16,7 +17,7 @@ describe('FacetPaletteOptions Component', () => {
 	};
 
 	it('renders', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} />);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 
 		expect(paletteElement).toBeInTheDocument();
@@ -24,20 +25,20 @@ describe('FacetPaletteOptions Component', () => {
 	});
 
 	it('Palette container element has correct number of classes', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} />);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
 		expect(paletteElement).toHaveClass('ss__facet-palette-options');
 	});
 
 	it('maps through and renders the correct number of options', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} />);
 		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
 		expect(options).toHaveLength(paletteFacetMock.values.length);
 	});
 
 	it('Palette option label element has correct number of classes', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} />);
 		const paletteOptionsElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option__value');
 		const inactivePaletteOption = paletteOptionsElement[1];
 		const activePaletteOption = paletteOptionsElement[0];
@@ -46,13 +47,13 @@ describe('FacetPaletteOptions Component', () => {
 	});
 
 	it('has icons by default', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} />);
 		const selectedIcons = rendered.container.querySelector('.ss__icon');
 		expect(selectedIcons).toBeInTheDocument();
 	});
 
 	it('hideIcons and hideLabel works as expected', () => {
-		const rendered = render(<FacetPaletteOptions hideIcon={true} hideLabel={true} values={paletteFacetMock.values} />);
+		const rendered = render(<FacetPaletteOptions hideIcon={true} hideLabel={true} values={paletteFacetMock.values as Value[]} />);
 		const paletteOptionsElement = rendered.container.querySelector('.ss__facet-palette-options__option__value');
 		const selectedIcons = rendered.container.querySelector('.ss__icon');
 
@@ -61,7 +62,7 @@ describe('FacetPaletteOptions Component', () => {
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} disableStyles={true} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} disableStyles={true} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement!.classList.length).toBe(1);
@@ -69,7 +70,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} className={className} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} className={className} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
@@ -78,7 +79,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('can set custom onClick func', () => {
 		const onClickFunc = jest.fn();
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} onClick={onClickFunc} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} onClick={onClickFunc} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options__option');
 		expect(paletteElement).toBeInTheDocument();
@@ -91,7 +92,7 @@ describe('FacetPaletteOptions Component', () => {
 			gapSize: '10px',
 			columns: 2,
 		};
-		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values} {...args} />);
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as Value[]} {...args} />);
 
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
 		expect(paletteElement).toBeInTheDocument();
@@ -106,7 +107,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('is themeable with ThemeProvider', () => {
 		const args = {
-			values: paletteFacetMock.values,
+			values: paletteFacetMock.values as Value[],
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
@@ -124,7 +125,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('is themeable with theme prop', () => {
 		const args = {
-			values: paletteFacetMock.values,
+			values: paletteFacetMock.values as Value[],
 		};
 		const rendered = render(<FacetPaletteOptions {...args} theme={theme} />);
 		const paletteElement = rendered.container.querySelector('.ss__facet-palette-options');
@@ -138,7 +139,7 @@ describe('FacetPaletteOptions Component', () => {
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = {
-			values: paletteFacetMock.values,
+			values: paletteFacetMock.values as Value[],
 		};
 		const themeOverride = {
 			components: {

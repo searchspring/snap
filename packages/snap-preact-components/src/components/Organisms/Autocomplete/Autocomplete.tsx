@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import deepmerge from 'deepmerge';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
+import { ContentType } from '@searchspring/snap-store-mobx';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProp } from '../../Organisms/Results';
@@ -15,7 +16,7 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { BannerType, ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
+import { ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import React from 'react';
 
@@ -489,7 +490,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										</div>
 									) : null}
 									<Facets {...subProps.facets} facets={facetsToShow} />
-									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.left} /> : null}
+									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} /> : null}
 								</div>
 							</>
 						)
@@ -503,8 +504,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 					) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
 						<div className="ss__autocomplete__content">
 							<>
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.header} /> : null}
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.banner} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} /> : null}
 								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
 										{resultsSlot ? (
@@ -533,7 +534,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 									</div>
 								)}
 
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={BannerType.footer} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} /> : null}
 
 								{!hideLink ? (
 									linkSlot ? (

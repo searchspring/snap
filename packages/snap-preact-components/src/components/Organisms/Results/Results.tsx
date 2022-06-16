@@ -7,11 +7,11 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore } from '@searchspring/snap-store-mobx';
-
+import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
+import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, Layout, LayoutType, BannerType, BreakpointsProps } from '../../../types';
+import { InlineBannerContent, ComponentProps, Layout, LayoutType, BreakpointsProps } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -134,10 +134,10 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result: ResultType | InlineBannerContent) =>
+				{results.map((result: Product | InlineBannerContent) =>
 					(() => {
 						switch (result.type) {
-							case BannerType.banner:
+							case ContentType.BANNER:
 								return (
 									<InlineBanner
 										key={(result as InlineBannerContent).uid}
@@ -147,7 +147,15 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 									/>
 								);
 							default:
-								return <Result key={result.uid} {...subProps.result} result={result as ResultType} layout={props.layout} controller={controller} />;
+								return (
+									<Result
+										key={(result as Product).id}
+										{...subProps.result}
+										result={result as Product}
+										layout={props.layout}
+										controller={controller}
+									/>
+								);
 						}
 					})()
 				)}

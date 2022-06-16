@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
-import { Facets } from './Facets';
+import { Facets, individualFacetType } from './Facets';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 describe('Facets Component', () => {
 	it('renders', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as individualFacetType[],
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
@@ -17,7 +17,7 @@ describe('Facets Component', () => {
 
 	it('has all facets', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as individualFacetType[],
 		};
 		const rendered = render(<Facets {...args} />);
 		const facetsElement = rendered.container.querySelector('.ss__facets');
@@ -27,7 +27,7 @@ describe('Facets Component', () => {
 
 	it('has limited facets with limit prop', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as individualFacetType[],
 			limit: 2,
 		};
 		const rendered = render(<Facets {...args} />);
@@ -39,7 +39,7 @@ describe('Facets Component', () => {
 
 	it('renders with classname', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as individualFacetType[],
 			className: 'classy',
 		};
 
@@ -51,7 +51,7 @@ describe('Facets Component', () => {
 
 	it('disables styles', () => {
 		const args = {
-			facets: searchResponse.facets,
+			facets: searchResponse.facets as individualFacetType[],
 			disableStyles: true,
 		};
 
@@ -72,7 +72,7 @@ describe('Facets Component is themeable', () => {
 	};
 
 	const args = {
-		facets: searchResponse.facets,
+		facets: searchResponse.facets as individualFacetType[],
 		limit: 2,
 	};
 

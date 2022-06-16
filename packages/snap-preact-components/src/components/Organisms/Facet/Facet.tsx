@@ -13,16 +13,9 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import {
-	ComponentProps,
-	FacetDisplay,
-	ValueFacet,
-	RangeFacet,
-	RangeBucketFacet,
-	BaseFacet,
-	HierarchyFacet,
-	HierarchyFacetValue,
-} from '../../../types';
+import { ComponentProps, FacetDisplay } from '../../../types';
+import { Facet as BaseFacet, ValueFacet, RangeFacet, HierarchyValue, Value } from '@searchspring/snap-store-mobx';
+
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
@@ -259,7 +252,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		allowableTypes: ['list', 'grid', 'palette'],
 		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
 			if ((facet as ValueFacet)?.search) {
-				(facet as ValueFacet).search.input = e.target.value;
+				(facet as ValueFacet).search!.input = e.target.value;
 			}
 		},
 	};
@@ -292,13 +285,13 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										case FacetDisplay.SLIDER:
 											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 										case FacetDisplay.GRID:
-											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues || []} />;
+											return <FacetGridOptions {...subProps.facetGridOptions} values={(limitedValues as Value[]) || []} />;
 										case FacetDisplay.PALETTE:
-											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues || []} />;
+											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={(limitedValues as Value[]) || []} />;
 										case FacetDisplay.HIERARCHY:
-											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(limitedValues as HierarchyFacetValue[]) || []} />;
+											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(limitedValues as HierarchyValue[]) || []} />;
 										default:
-											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues || []} />;
+											return <FacetListOptions {...subProps.facetListOptions} values={(limitedValues as Value[]) || []} />;
 									}
 								}
 							})()}
@@ -339,7 +332,7 @@ interface FacetSubProps {
 }
 
 export interface FacetProps extends OptionalFacetProps {
-	facet: ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet | HierarchyFacet;
+	facet: ValueFacet | RangeFacet | BaseFacet;
 }
 
 interface OptionalFacetProps extends ComponentProps {

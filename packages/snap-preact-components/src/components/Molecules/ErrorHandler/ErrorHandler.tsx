@@ -126,7 +126,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	} else if (style) {
 		styling.css = [style];
 	}
-	return Object.values(ErrorType).includes(errorObject?.type) && errorObject?.message ? (
+	return Object.values(ErrorType).includes(errorObject?.type!) && errorObject?.message ? (
 		<CacheProvider>
 			<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className)} {...styling}>
 				{(() => {

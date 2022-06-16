@@ -8,6 +8,8 @@ import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
 import { RecommendationController } from '@searchspring/snap-controller';
+import type { Product } from '@searchspring/snap-store-mobx';
+import type { Next } from '@searchspring/snap-event-manager';
 
 export default {
 	title: `Organisms/Recommendation`,
@@ -150,8 +152,8 @@ export const Default = (props: RecommendationProps, { loaded: { controller } }: 
 
 Default.loaders = [
 	async () => {
-		snapInstance.on('afterStore', async ({ controller }: { controller: RecommendationController }, next) => {
-			controller.store.results.forEach((result) => (result.mappings.core.url = 'javascript:void(0);'));
+		snapInstance.on('afterStore', async ({ controller }: { controller: RecommendationController }, next: Next) => {
+			controller.store.results.forEach((result: Product) => (result.mappings.core!.url = 'javascript:void(0);'));
 			await next();
 		});
 		await snapInstance.search();

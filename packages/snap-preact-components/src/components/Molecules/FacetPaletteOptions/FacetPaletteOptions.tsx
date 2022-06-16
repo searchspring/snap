@@ -8,9 +8,10 @@ import { observer } from 'mobx-react-lite';
 import { filters } from '@searchspring/snap-toolbox';
 
 import { defined } from '../../../utilities';
-import { ValueFacetValue, ComponentProps } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
 type IPalleteStyles = {
 	columns?: number;

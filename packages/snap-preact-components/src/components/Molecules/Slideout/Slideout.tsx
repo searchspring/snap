@@ -83,11 +83,9 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 	};
 
 	let isVisible: boolean = true;
-	if (displayAt) {
-		isVisible = useMediaQuery(displayAt, () => {
-			document.body.style.overflow = '';
-		});
-	}
+	isVisible = useMediaQuery(displayAt!, () => {
+		document.body.style.overflow = '';
+	});
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 

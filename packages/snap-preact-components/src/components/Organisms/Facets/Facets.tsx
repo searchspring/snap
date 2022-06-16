@@ -8,8 +8,10 @@ import { observer } from 'mobx-react-lite';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
+import { ComponentProps } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
+
+import { Facet as BaseFacet, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	facets: () => css({}),
@@ -72,7 +74,7 @@ interface FacetsSubProps {
 	facet: FacetProps;
 }
 
-type individualFacetType = ValueFacet | RangeFacet | RangeBucketFacet | BaseFacet | HierarchyFacet;
+export type individualFacetType = ValueFacet | RangeFacet | BaseFacet;
 
 export interface FacetsProps extends ComponentProps {
 	facets?: individualFacetType[];

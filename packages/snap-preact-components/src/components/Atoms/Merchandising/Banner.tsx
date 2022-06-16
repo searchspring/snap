@@ -4,8 +4,9 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { BannerContent, BannerType, ComponentProps } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	banner: () =>
@@ -30,8 +31,8 @@ export function Banner(properties: BannerProps): JSX.Element {
 
 	const { content, type, disableStyles, className, style } = props;
 
-	if (type === BannerType.inline) {
-		console.warn(`BannerType '${BannerType.inline}' is not supported in <Banner /> component`);
+	if (type === ContentType.INLINE) {
+		console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
 		return <Fragment></Fragment>;
 	}
 	const styling: { css?: any } = {};
@@ -61,5 +62,5 @@ export function Banner(properties: BannerProps): JSX.Element {
 
 export interface BannerProps extends ComponentProps {
 	content: BannerContent;
-	type: BannerType;
+	type: ContentType;
 }

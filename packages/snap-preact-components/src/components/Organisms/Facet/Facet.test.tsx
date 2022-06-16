@@ -3,9 +3,9 @@ import { render, waitFor } from '@testing-library/preact';
 import { Facet } from './Facet';
 import { ThemeProvider } from '../../../providers';
 import { searchResponse, listFacetMock, paletteFacetMock, gridFacetMock, hierarchyFacetMock, facetOverflowMock } from '../../../mocks/searchResponse';
-import { FacetDisplay, ValueFacet, HierarchyFacet, SliderFacetValue, RangeFacet } from '../../../types';
+import { FacetDisplay } from '../../../types';
 import userEvent from '@testing-library/user-event';
-
+import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 describe('Facet Component', () => {
 	//TODO: type: FacetType and display: FacetDisplay in interface BaseFacet not compatible with searchResponse mock data!
 
@@ -14,6 +14,7 @@ describe('Facet Component', () => {
 			const args = {
 				facet: listFacetMock as ValueFacet,
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
@@ -26,8 +27,9 @@ describe('Facet Component', () => {
 	describe('Grid Facet Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: gridFacetMock as ValueFacet,
+				facet: gridFacetMock as unknown as ValueFacet,
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
@@ -42,6 +44,7 @@ describe('Facet Component', () => {
 			const args = {
 				facet: paletteFacetMock as ValueFacet,
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet facet={args.facet} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
@@ -68,7 +71,7 @@ describe('Facet Component', () => {
 	describe('Slider hierarchy Display', () => {
 		it('renders', () => {
 			const args = {
-				facet: hierarchyFacetMock as HierarchyFacet,
+				facet: hierarchyFacetMock as unknown as ValueFacet,
 			};
 			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
@@ -85,6 +88,7 @@ describe('Facet Component', () => {
 				facet: listFacetMock as ValueFacet,
 				color: 'red',
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__header');
@@ -99,6 +103,7 @@ describe('Facet Component', () => {
 				showMoreText: 'Show More please',
 				showLessText: 'Show Less please',
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less');
@@ -145,6 +150,7 @@ describe('Facet Component', () => {
 				facet: facetOverflowMock as unknown as ValueFacet,
 				overflowSlot: elem,
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less');
@@ -160,6 +166,7 @@ describe('Facet Component', () => {
 				facet: facetOverflowMock as unknown as ValueFacet,
 				optionsSlot: option,
 			};
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
@@ -176,7 +183,7 @@ describe('Facet Component', () => {
 				limit: 3,
 				disableOverflow: true,
 			};
-
+			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
@@ -193,7 +200,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet {...args} />);
 			const searchInputElement = rendered.container.querySelector('.ss__search-input input');
 			expect(searchInputElement).toBeInTheDocument();
-			userEvent.type(searchInputElement, 'su');
+			userEvent.type(searchInputElement!, 'su');
 
 			await waitFor(() => expect(searchInputElement).toHaveValue('su'));
 			expect(searchInputElement).toHaveValue('su');
@@ -239,7 +246,7 @@ describe('Facet Component', () => {
 			};
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
-					<Facet facet={listFacetMock} />
+					<Facet facet={listFacetMock as ValueFacet} />
 				</ThemeProvider>
 			);
 			const facet = rendered.container.querySelector('.ss__facet');
@@ -255,7 +262,7 @@ describe('Facet Component', () => {
 					},
 				},
 			};
-			const rendered = render(<Facet facet={listFacetMock} theme={propTheme} />);
+			const rendered = render(<Facet facet={listFacetMock as ValueFacet} theme={propTheme} />);
 			const facet = rendered.container.querySelector('.ss__facet');
 			expect(facet).toBeInTheDocument();
 			expect(facet).toHaveClass(propTheme.components.facet.className);
@@ -278,7 +285,7 @@ describe('Facet Component', () => {
 			};
 			const rendered = render(
 				<ThemeProvider theme={globalTheme}>
-					<Facet facet={listFacetMock} theme={propTheme} />
+					<Facet facet={listFacetMock as ValueFacet} theme={propTheme} />
 				</ThemeProvider>
 			);
 

@@ -6,9 +6,10 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, ValueFacetValue } from '../../../types';
+import { ComponentProps } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
+import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	list: ({ theme, hideCheckbox }: { theme: Theme; hideCheckbox?: boolean }) =>

@@ -8,7 +8,8 @@ import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RangeFacet } from '../../../types';
+import { ComponentProps } from '../../../types';
+import { RangeFacet } from '@searchspring/snap-store-mobx';
 import { sprintf } from '../../../utilities';
 
 type IFacetSliderStyles = {
@@ -163,7 +164,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	const props: FacetSliderProps = {
 		// default props
-		tickSize: properties.facet?.step * 10 || 20,
+		tickSize: properties.facet?.step ? properties.facet?.step * 10 : 20,
 		// global theme
 		...globalTheme?.components?.facetSlider,
 		// props
@@ -192,17 +193,17 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	if (isNaN(Number(tickSize)) || Number(tickSize) <= 0) {
 		// fallback to default (causes chrome to crash)
-		tickSize = properties.facet?.step * 10 || 20;
+		tickSize = properties.facet?.step ? properties.facet?.step * 10 : 20;
 	} else {
 		tickSize = Number(tickSize);
 	}
 
-	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
+	const [values, setValues] = useState([facet.active?.low || 0, facet.active?.high || 0]);
 
-	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
-	if (values[0] != facet.active?.low || values[1] != facet.active?.high) {
-		setActive([facet.active?.low, facet.active?.high]);
-		setValues([facet.active?.low, facet.active?.high]);
+	const [active, setActive] = useState([facet.active?.low || 0, facet.active?.high || 0]);
+	if ((facet.active?.low && facet.active?.high && values[0] != facet.active?.low) || values[1] != facet.active?.high) {
+		setActive([facet.active?.low!, facet.active?.high!]);
+		setValues([facet.active?.low!, facet.active?.high!]);
 	}
 
 	const { getTrackProps, ticks, segments, handles } = useRanger({
@@ -210,7 +211,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		onChange: (val: number[]) => {
 			setActive(val);
 			if (facet?.services?.urlManager) {
-				if (val[0] == facet.range.low && val[1] == facet.range.high) {
+				if (val[0] == facet.range!.low && val[1] == facet.range!.high) {
 					facet.services.urlManager.remove('page').remove(`filter.${facet.field}`).go();
 				} else {
 					facet.services.urlManager.remove('page').set(`filter.${facet.field}`, { low: val[0], high: val[1] }).go();
@@ -222,9 +223,9 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			setActive(val);
 			onDrag && onDrag(val);
 		},
-		min: facet.range?.low,
-		max: facet.range?.high,
-		stepSize: facet.step,
+		min: facet.range?.low!,
+		max: facet.range?.high!,
+		stepSize: facet.step || 1,
 		tickSize: tickSize,
 	});
 
@@ -281,8 +282,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 												'ss__facet-slider__handle__label',
 												'ss__facet-slider__handle__label--sticky',
 												`ss__facet-slider__handle__label--${idx}`,
-												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range.low },
-												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range.high }
+												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range!.low },
+												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range!.high }
 											)}
 										>
 											{sprintf(facet.formatValue, value)}

@@ -6,6 +6,7 @@ import { ThemeProvider } from '../../../providers';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import { FacetSlider } from './FacetSlider';
 import { sprintf } from '../../../utilities';
+import { RangeFacet } from '@searchspring/snap-store-mobx';
 
 describe('Slider Component', () => {
 	const theme = {
@@ -18,7 +19,7 @@ describe('Slider Component', () => {
 		},
 	};
 	const args = {
-		facet: sliderFacetMock,
+		facet: sliderFacetMock as RangeFacet,
 	};
 
 	it('renders', () => {
@@ -36,8 +37,8 @@ describe('Slider Component', () => {
 	it('both handles are where they should be and have proper text', () => {
 		const rendered = render(<FacetSlider {...args} />);
 		const sliderMarks = rendered.container.querySelectorAll('.ss__facet-slider__label');
-		expect(sliderMarks[0].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active.low));
-		expect(sliderMarks[1].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active.high));
+		expect(sliderMarks[0].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active!.low));
+		expect(sliderMarks[1].textContent).toEqual(sprintf(args.facet.formatValue, args.facet.active!.high));
 	});
 
 	it('has custom track, rail, and handle colors', () => {

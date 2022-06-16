@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					maxWidth: '900px',
@@ -66,7 +66,4 @@ export default {
 		...componentArgs,
 	},
 };
-
-const Template = (args: SearchInputProps) => <SearchInput {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: SearchInputProps) => <SearchInput {...args} />;

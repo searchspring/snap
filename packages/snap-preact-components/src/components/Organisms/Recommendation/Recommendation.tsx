@@ -8,7 +8,7 @@ import deepmerge from 'deepmerge';
 import SwiperCore from 'swiper/core';
 
 import type { RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore } from '@searchspring/snap-store-mobx';
+import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -77,7 +77,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
-	const resultsToRender = results || controller.store?.results;
+	const resultsToRender: Product[] = results || controller.store?.results;
 
 	if (children && children.length !== resultsToRender.length) {
 		controller.log.error(
@@ -172,13 +172,13 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					prevButton={prevButton}
 					nextButton={nextButton}
 					hideButtons={hideButtons}
-					onNextButtonClick={(e) => controller.track.click(e)}
-					onPrevButtonClick={(e) => controller.track.click(e)}
+					onNextButtonClick={(e) => controller.track.click(e as unknown as MouseEvent)}
+					onPrevButtonClick={(e) => controller.track.click(e as unknown as MouseEvent)}
 					onClick={(swiper, e) => {
 						const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-						controller.track.click(e);
+						controller.track.click(e as unknown as MouseEvent);
 						if (!Number.isNaN(clickedIndex)) {
-							controller.track.product.click(e, resultsToRender[clickedIndex]);
+							controller.track.product.click(e as unknown as MouseEvent, resultsToRender[clickedIndex]);
 						}
 					}}
 					loop={loop}
@@ -190,7 +190,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				>
 					{children
 						? children.map((child) => child)
-						: resultsToRender.map((result: ResultType) => <Result controller={controller} {...subProps.result} result={result} />)}
+						: resultsToRender.map((result) => <Result controller={controller} {...subProps.result} result={result} />)}
 				</Carousel>
 			</div>
 		</CacheProvider>

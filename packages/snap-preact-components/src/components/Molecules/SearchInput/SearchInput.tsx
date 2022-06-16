@@ -1,20 +1,17 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState, useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import deepmerge from 'deepmerge';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps } from '../../../types';
-import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { ComponentProps } from '../../../types';
 
 const CSS = {
-	searchInput: ({ theme, subProps }) =>
+	searchInput: ({ theme }: { theme: Theme }) =>
 		css({
 			display: 'flex',
 			alignItems: 'center',
@@ -68,7 +65,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const styling: { css?: any } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.searchInput({ theme, subProps }), style];
+		styling.css = [CSS.searchInput({ theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}

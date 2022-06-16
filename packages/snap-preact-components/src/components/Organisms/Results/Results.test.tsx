@@ -21,7 +21,7 @@ describe('Results Component', () => {
 	};
 	it('renders grid view', () => {
 		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
-		const resultElement = rendered.getByText(mockResults[0].mappings.core.name);
+		const resultElement = rendered.getByText(mockResults[0].mappings.core!.name!);
 		expect(resultElement).toBeInTheDocument();
 
 		const results = rendered.container.querySelector('.ss__result');
@@ -31,7 +31,7 @@ describe('Results Component', () => {
 
 	it('renders list view', () => {
 		const rendered = render(<Results layout={Layout.LIST} results={mockResults} />);
-		const resultElement = rendered.getByText(mockResults[0].mappings.core.name);
+		const resultElement = rendered.getByText(mockResults[0].mappings.core!.name!);
 		expect(resultElement).toBeInTheDocument();
 
 		const result = rendered.container.querySelector('.ss__result');

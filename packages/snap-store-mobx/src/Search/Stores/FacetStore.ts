@@ -79,7 +79,7 @@ export class FacetStore extends Array {
 	}
 }
 
-class Facet {
+export class Facet {
 	public services: StoreServices;
 	public type!: string;
 	public field!: string;

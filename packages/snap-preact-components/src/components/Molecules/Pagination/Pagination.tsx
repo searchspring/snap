@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { PaginationStore } from '@searchspring/snap-store-mobx/dist/cjs/Search/Stores';
+import { PaginationStore } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	pagination: ({ theme }: { theme: Theme }) =>
