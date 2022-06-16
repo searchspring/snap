@@ -378,8 +378,10 @@ export class Snap {
 									delete urlState?.params.query['branch'];
 
 									const newUrl = urlState?.url();
-									if (newUrl) {
+									if (newUrl && newUrl != window.location.href) {
 										window.location.href = newUrl;
+									} else {
+										window.location.reload();
 									}
 								}}
 							/>,

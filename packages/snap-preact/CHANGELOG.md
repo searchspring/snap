@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* load branch override script after branch override component renders ([e8884a9](https://github.com/searchspring/snap/commit/e8884a9f1a10e1a20cdfd86be679eebb27d5efa4))
+* remove failing test, assume window.searchspring ([be18438](https://github.com/searchspring/snap/commit/be18438cd64dd1a17aff0f2a16d531c648afc728))
+
+
+
+
+
 ## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
 
 **Note:** Version bump only for package @searchspring/snap-preact
