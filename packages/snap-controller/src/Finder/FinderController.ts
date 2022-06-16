@@ -6,7 +6,8 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 import type { FinderStore } from '@searchspring/snap-store-mobx';
-import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, NextEvent, ContextVariables } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
+import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, ContextVariables } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
@@ -25,8 +26,8 @@ const defaultConfig: FinderControllerConfig = {
 
 export class FinderController extends AbstractController {
 	public type = ControllerTypes.finder;
-	public store: FinderStore;
-	config: FinderControllerConfig;
+	declare store: FinderStore;
+	declare config: FinderControllerConfig;
 
 	constructor(
 		config: FinderControllerConfig,
@@ -49,20 +50,20 @@ export class FinderController extends AbstractController {
 			});
 		}
 
-		this.eventManager.on('beforeSearch', async (finder: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeSearch', async (finder: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			finder.controller.store.loading = true;
 
 			await next();
 		});
 
 		// TODO: move this to afterStore
-		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			finder.controller.store.loading = false;
 		});
 
-		this.eventManager.on('beforeFind', async (finder: { controller: FinderController }, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeFind', async (finder: { controller: FinderController }, next: Next): Promise<void | boolean> => {
 			await next();
 
 			window.location.href = this.urlManager.href;
@@ -97,7 +98,7 @@ export class FinderController extends AbstractController {
 			await this.eventManager.fire('beforeFind', {
 				controller: this,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			if (err?.message == 'cancelled') {
 				this.log.warn(`'beforeFind' middleware cancelled`);
 			} else {
@@ -130,7 +131,7 @@ export class FinderController extends AbstractController {
 					controller: this,
 					request: params,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
 					return;
@@ -142,12 +143,14 @@ export class FinderController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.search(params);
+			const [meta, response] = await this.client.finder(params);
+			// @ts-ignore
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
+				// @ts-ignore
 				response.meta = meta;
 			}
 
@@ -162,7 +165,7 @@ export class FinderController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
@@ -177,6 +180,7 @@ export class FinderController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
+			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -187,7 +191,7 @@ export class FinderController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();

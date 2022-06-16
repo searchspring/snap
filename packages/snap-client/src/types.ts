@@ -1,4 +1,5 @@
 import { AppMode } from '@searchspring/snap-toolbox';
+import { SearchResponseModelResult } from '@searchspring/snapi-types';
 
 export type ClientConfig = {
 	mode?: keyof typeof AppMode | AppMode;
@@ -11,6 +12,10 @@ export type ClientConfig = {
 		cache?: CacheConfig;
 	};
 	autocomplete?: {
+		api?: SnapApiConfig;
+		cache?: CacheConfig;
+	};
+	finder?: {
 		api?: SnapApiConfig;
 		cache?: CacheConfig;
 	};
@@ -51,3 +56,108 @@ export type ClientGlobals = {
 	siteId: string;
 	[configurationPath: string]: any;
 };
+
+export type SuggestRequestModel = {
+	siteId: string;
+	query: string;
+	language?: string;
+	suggestionCount?: number;
+	productCount?: number;
+	disableSpellCorrect?: boolean;
+};
+
+export type SuggestResponseModelSuggestion = {
+	text: string;
+	type?: string;
+	source?: string;
+	popularity?: number;
+	completed?: {
+		token: string;
+		query: string;
+		type: string;
+	}[];
+};
+
+export type SuggestResponseModel = {
+	query: string;
+	'corrected-query'?: string;
+	suggested?: SuggestResponseModelSuggestion;
+	alternatives?: SuggestResponseModelSuggestion[];
+};
+
+export type TrendingRequestModel = {
+	siteId: string;
+	limit?: number;
+};
+
+export type TrendingResponseModel = {
+	trending: {
+		queries: {
+			popularity: number;
+			searchQuery: string;
+		}[];
+	};
+};
+
+export type RecommendRequestModel = {
+	tags: string[];
+	siteId: string;
+	product?: string;
+	shopper?: string;
+	categories?: string[];
+	cart?: string[];
+	lastViewed?: string[];
+	test?: boolean;
+	batched?: boolean;
+	limits?: number | number[];
+	order?: number;
+};
+
+export type RecommendResponseModel = {
+	profile: {
+		tag: string;
+	};
+	results: SearchResponseModelResult[];
+}[];
+
+export type ProfileRequestModel = {
+	siteId: string;
+	tag: string;
+	branch?: string;
+};
+
+export type ProfileResponseModel = {
+	profile: {
+		tag: string;
+		placement: string;
+		display: {
+			threshold: number;
+			template: {
+				name: string;
+				uuid: string;
+				markup?: string;
+				styles?: string;
+				component?: string;
+				branch?: string;
+				group?: string;
+			};
+			templateParameters: {
+				[any: string]: unknown;
+			};
+		};
+	};
+};
+
+export type RecommendCombinedRequestModel = {
+	tag: string;
+	siteId: string;
+	product?: string;
+	shopper?: string;
+	categories?: string[];
+	cart?: string[];
+	lastViewed?: string[];
+	test?: boolean;
+	branch?: string;
+};
+
+export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };

@@ -2,6 +2,8 @@ import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
 import { FinderStore } from './FinderStore';
+import { FinderStoreConfig } from '../types';
+import { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
@@ -45,7 +47,7 @@ const baseNonHierarchyConfig = {
 const configs = [baseHierarchyConfig, baseNonHierarchyConfig];
 
 describe('Finder Store', () => {
-	let config, searchData;
+	let config: FinderStoreConfig, searchData: SearchResponseModel & { meta: MetaResponseModel };
 
 	beforeEach(() => {
 		config = Object.assign({}, baseHierarchyConfig);
@@ -54,6 +56,7 @@ describe('Finder Store', () => {
 
 	it('throws if invalid services object', () => {
 		expect(() => {
+			// @ts-ignore
 			const finderStore = new FinderStore(config, {});
 		}).toThrow();
 	});
@@ -76,10 +79,9 @@ describe('Finder Store', () => {
 		expect(finderStore.meta).toStrictEqual({});
 
 		expect(finderStore.pagination).toBeDefined();
-		expect(finderStore.pagination.totalResults).toBeUndefined();
+		expect(finderStore.pagination?.totalResults).toBeUndefined();
 
 		expect(finderStore.selections).toBeDefined();
-		expect(finderStore.selections).toHaveLength(0);
 	});
 
 	it('update function updates all of the stores', () => {
@@ -92,14 +94,14 @@ describe('Finder Store', () => {
 		expect(finderStore.meta).toBeDefined();
 		expect(finderStore.meta).toStrictEqual(searchData.meta);
 
-		expect(finderStore.pagination.totalResults).toBe(searchData.pagination.totalResults);
+		expect(finderStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
 
-		expect(finderStore.selections).toHaveLength(config.fields.reduce((count, field) => (count += field.levels.length), 0));
+		expect(finderStore.selections).toHaveLength(config.fields.reduce((count, field) => (count += field.levels?.length!), 0));
 	});
 
 	configs.forEach((baseConfig) => {
 		const isHierarchy = 'levels' in baseConfig.fields[0];
-		let config, searchData;
+		let config: FinderStoreConfig, searchData: SearchResponseModel & { meta: MetaResponseModel };
 
 		describe(`Finder Store with ${isHierarchy ? 'Hierarchy' : 'Non-Hierarchy'} Selections`, () => {
 			beforeEach(() => {
@@ -119,29 +121,30 @@ describe('Finder Store', () => {
 				const finderStore = new FinderStore(config, services);
 				finderStore.update(searchData);
 
-				expect(finderStore.config.persist.enabled).toBe(true);
+				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
 				expect(finderStore.state.persisted).toBe(false);
 
-				const valueToSelect = finderStore.selections[0].values.filter((value) => value.count > 10)[0].value;
-				finderStore.selections[0].select(valueToSelect);
-				expect(finderStore.selections[0].selected).toBe(valueToSelect);
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
 
 				finderStore.save();
 
-				expect(finderStore.persistedStorage.get('config')).toStrictEqual(finderStore.config);
-				expect(finderStore.persistedStorage.get('data')).toStrictEqual(finderStore.data);
-				expect(finderStore.persistedStorage.get('date')).toBeDefined();
-				expect(finderStore.persistedStorage.get('selections').length).toBeGreaterThan(0);
+				expect(finderStore.persistedStorage?.get('config')).toStrictEqual(finderStore.config);
+				expect(finderStore.persistedStorage?.get('data')).toStrictEqual(finderStore.data);
+				expect(finderStore.persistedStorage?.get('date')).toBeDefined();
+				expect(finderStore.persistedStorage?.get('selections').length).toBeGreaterThan(0);
 
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
 
 				expect(finderStore2.state.persisted).toBe(true);
-				expect(finderStore2.selections[0].selected).toBe(valueToSelect);
+				expect(finderStore2.selections && finderStore2.selections[0].selected).toBe(valueToSelect);
 
-				expect(finderStore2.config.persist.lockSelections).toBe(false);
-				finderStore2.selections.forEach((selection) => {
+				expect(finderStore2.config.persist?.lockSelections).toBe(false);
+				finderStore2.selections?.forEach((selection) => {
 					expect(selection.disabled).toBe(false);
 				});
 			});
@@ -158,14 +161,15 @@ describe('Finder Store', () => {
 				const finderStore = new FinderStore(config, services);
 				finderStore.update(searchData);
 
-				expect(finderStore.config.persist.enabled).toBe(true);
+				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
 				expect(finderStore.state.persisted).toBe(false);
-				expect(finderStore.config.persist.lockSelections).toBe(true);
+				expect(finderStore.config.persist?.lockSelections).toBe(true);
 
-				const valueToSelect = finderStore.selections[0].values.filter((value) => value.count > 10)[0].value;
-				finderStore.selections[0].select(valueToSelect);
-				expect(finderStore.selections[0].selected).toBe(valueToSelect);
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
 
 				finderStore.save();
 
@@ -173,10 +177,10 @@ describe('Finder Store', () => {
 				finderStore2.loadPersisted();
 
 				expect(finderStore2.state.persisted).toBe(true);
-				expect(finderStore2.selections[0].selected).toBe(valueToSelect);
+				expect(finderStore2.selections && finderStore2.selections[0].selected).toBe(valueToSelect);
 
-				expect(finderStore2.config.persist.lockSelections).toBe(true);
-				finderStore2.selections.forEach((selection) => {
+				expect(finderStore2.config.persist?.lockSelections).toBe(true);
+				finderStore2.selections?.forEach((selection) => {
 					expect(selection.disabled).toBe(true);
 				});
 			});
@@ -193,14 +197,15 @@ describe('Finder Store', () => {
 				const finderStore = new FinderStore(config, services);
 				finderStore.update(searchData);
 
-				expect(finderStore.config.persist.enabled).toBe(true);
+				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
 				expect(finderStore.state.persisted).toBe(false);
-				expect(finderStore.config.persist.lockSelections).toBe(true);
+				expect(finderStore.config.persist?.lockSelections).toBe(true);
 
-				const valueToSelect = finderStore.selections[0].values.filter((value) => value.count > 10)[0].value;
-				finderStore.selections[0].select(valueToSelect);
-				expect(finderStore.selections[0].selected).toBe(valueToSelect);
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
 
 				finderStore.save();
 
@@ -210,7 +215,7 @@ describe('Finder Store', () => {
 				expect(finderStore2.state.persisted).toBe(true);
 
 				// should be expired now
-				await new Promise((resolve) => setTimeout(resolve, config.persist.expiration + 10));
+				await new Promise((resolve) => setTimeout(resolve, config.persist?.expiration! + 10));
 
 				const finderStore3 = new FinderStore(config, services);
 				const spy = jest.spyOn(finderStore3, 'reset');
@@ -234,9 +239,10 @@ describe('Finder Store', () => {
 				const finderStore = new FinderStore(config, services);
 				finderStore.update(searchData);
 
-				const valueToSelect = finderStore.selections[0].values.filter((value) => value.count > 10)[0].value;
-				finderStore.selections[0].select(valueToSelect);
-				expect(finderStore.selections[0].selected).toBe(valueToSelect);
+				const selections = finderStore.selections!;
+				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
+				selections[0].select(valueToSelect);
+				expect(selections[0].selected).toBe(valueToSelect);
 
 				finderStore.save();
 
@@ -249,7 +255,7 @@ describe('Finder Store', () => {
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
 				expect(finderStore2.state.persisted).toBe(false);
-				expect(finderStore2.selections.length).toBe(0);
+				expect(finderStore2.selections?.length).toBe(0);
 			});
 		});
 	});

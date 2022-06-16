@@ -1,6 +1,7 @@
 import { DomTargeter } from '@searchspring/snap-toolbox';
 
 import type { Client } from '@searchspring/snap-client';
+import type { MockClient } from '@searchspring/snap-shared';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
@@ -15,7 +16,7 @@ export abstract class AbstractController {
 	public id: string;
 	public type = 'abstract';
 	public config: ControllerConfig;
-	public client; //todo: add typing
+	public client: Client;
 	public store: AbstractStore;
 	public urlManager: UrlManager;
 	public eventManager: EventManager;
@@ -96,11 +97,11 @@ export abstract class AbstractController {
 		this.profiler.setNamespace(this.config.id);
 	}
 
-	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter {
+	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter | undefined {
 		return this.addTargeter(new DomTargeter([target], onTarget, document));
 	}
 
-	public addTargeter(target: DomTargeter): DomTargeter {
+	public addTargeter(target: DomTargeter): DomTargeter | undefined {
 		const firstTarget = target.getTargets()[0];
 		const targetName: string = (firstTarget?.name as string) ?? firstTarget?.selector;
 		if (targetName && !this.targeters[targetName]) {
@@ -120,7 +121,7 @@ export abstract class AbstractController {
 				await this.eventManager.fire('init', {
 					controller: this,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'init' middleware cancelled`);
 				} else {
@@ -164,7 +165,7 @@ export abstract class AbstractController {
 
 	public abstract search(): Promise<void>;
 
-	public async plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): Promise<void> {
+	public async plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): Promise<void> {
 		await func(this, ...args);
 	}
 
@@ -195,7 +196,7 @@ export abstract class AbstractController {
 		// attach event middleware
 		if (attachments?.middleware) {
 			Object.keys(attachments.middleware).forEach((eventName) => {
-				const eventMiddleware = attachments.middleware[eventName];
+				const eventMiddleware = attachments.middleware![eventName];
 				let middlewareArray;
 				if (Array.isArray(eventMiddleware)) {
 					middlewareArray = eventMiddleware;

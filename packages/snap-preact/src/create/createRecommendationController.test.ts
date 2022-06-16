@@ -1,6 +1,6 @@
 import { Client } from '@searchspring/snap-client';
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
+import { UrlManager, UrlTranslator, reactLinker, CoreMap, UrlTranslatorSettingsConfig } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
@@ -93,8 +93,14 @@ describe('createRecommendationController', () => {
 
 		// other
 		expect(controller.urlManager.detached).toBeDefined();
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.client.globals.siteId).toBe(createConfig.client.globals.siteId);
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.client.config.meta.cache.purgeable).toBe(createConfig.client.config.meta.cache.purgeable);
+		// Property is private and only accessible within class
+		// @ts-ignore
 		expect(controller.tracker.globals.siteId).toBe(createConfig.client.globals.siteId);
 	});
 
@@ -121,12 +127,12 @@ describe('createRecommendationController', () => {
 
 		const translatorConfig = controller.urlManager.getTranslatorConfig() as UrlTranslatorConfig;
 		// check for custom settings
-		for (const [key, value] of Object.entries(customUrlConfig.url.settings)) {
-			expect(translatorConfig.settings[key]).toBe(value);
+		for (const [key, value] of Object.entries((customUrlConfig.url as UrlTranslatorConfig).settings || {})) {
+			expect(translatorConfig.settings![key as keyof UrlTranslatorSettingsConfig]).toBe(value);
 		}
 		// check for custom parameter configuration
-		for (const [key, value] of Object.entries(customUrlConfig.url.parameters.core)) {
-			expect(translatorConfig.parameters.core[key]).toStrictEqual(value);
+		for (const [key, value] of Object.entries((customUrlConfig.url as UrlTranslatorConfig).parameters!.core || {})) {
+			expect(translatorConfig.parameters!.core![key as keyof CoreMap]).toStrictEqual(value);
 		}
 	});
 
@@ -139,6 +145,8 @@ describe('createRecommendationController', () => {
 
 			expect(controller).toBeDefined();
 			expect(controller.client).toBe(customClient);
+			// Property is private and only accessible within class
+			// @ts-ignore
 			expect(controller.client.globals.siteId).toBe(clientConfig.siteId);
 		});
 
@@ -173,7 +181,7 @@ describe('createRecommendationController', () => {
 			expect(controller.urlManager.detached).toBeDefined();
 
 			const translatorConfig = controller.urlManager.getTranslatorConfig() as UrlTranslatorConfig;
-			expect(translatorConfig.settings.coreType).toBe(customTranslatorConfig.settings.coreType);
+			expect(translatorConfig.settings!.coreType).toBe(customTranslatorConfig.settings!.coreType);
 		});
 
 		it('creates an recommendation controller with custom EventManager service', () => {

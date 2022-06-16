@@ -7,7 +7,7 @@ import type {
 	RecommendationControllerConfig,
 	ContextVariables,
 } from '@searchspring/snap-controller';
-import type { AbstractStore } from '@searchspring/snap-store-mobx';
+import type { SearchStore, AutocompleteStore, FinderStore, RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager, UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { EventManager } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
@@ -17,7 +17,7 @@ import { AppMode } from '@searchspring/snap-toolbox';
 
 export type SnapControllerServices = {
 	client?: Client;
-	store?: AbstractStore;
+	store?: SearchStore | AutocompleteStore | FinderStore | RecommendationStore;
 	urlManager?: UrlManager;
 	eventManager?: EventManager;
 	profiler?: Profiler;
@@ -76,3 +76,9 @@ export type SnapRecommendationControllerConfig = {
 	controller: RecommendationControllerConfig;
 	context?: ContextVariables;
 };
+
+declare global {
+	interface Window {
+		searchspring?: any;
+	}
+}

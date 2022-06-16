@@ -1,6 +1,5 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchResponseModelFacetValueAllOfValues } from '@searchspring/snapi-types';
-
+import type { SearchResponseModelFacetValueAllOfValues, AutocompleteRequestModel, SearchRequestModel } from '@searchspring/snapi-types';
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -9,12 +8,7 @@ export type StoreConfig = {
 
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
-	globals?: {
-		personalization?: {
-			disabled: boolean;
-		};
-		[any: string]: unknown;
-	};
+	globals?: Partial<SearchRequestModel>;
 	settings?: {
 		redirects?: {
 			merchandising?: boolean;
@@ -31,7 +25,7 @@ export type SearchStoreConfig = StoreConfig & {
 	};
 };
 
-type FacetStoreConfig = {
+export type FacetStoreConfig = {
 	trim?: boolean;
 	pinFiltered?: boolean;
 	storeRange?: boolean;
@@ -57,19 +51,7 @@ export type FinderFieldConfig = {
 
 // Autocomplete config
 export type AutocompleteStoreConfig = StoreConfig & {
-	globals?: {
-		personalization?: {
-			disabled: boolean;
-		};
-		search?: {
-			[any: string]: unknown;
-			query?: {
-				[any: string]: unknown;
-				spellCorrection?: boolean;
-			};
-		};
-		[any: string]: unknown;
-	};
+	globals?: Partial<AutocompleteRequestModel>;
 	selector: string;
 	action?: string;
 	settings?: {
@@ -94,12 +76,13 @@ export type RecommendationStoreConfig = StoreConfig & {
 	branch?: string;
 	realtime?: boolean;
 	batched?: boolean;
+	order?: number;
 };
 
 export type StoreConfigs = SearchStoreConfig | AutocompleteStoreConfig | FinderStoreConfig | RecommendationStoreConfig;
 
 export type StoreServices = {
-	urlManager?: UrlManager;
+	urlManager: UrlManager;
 };
 
 export enum ErrorType {

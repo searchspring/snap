@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-store-mobx",
-	"version": "0.27.4",
+	"version": "0.28.0",
 	"description": "Snap MobX Store",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,11 +20,12 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.27.4",
-		"mobx": "^6.3.12"
+		"@searchspring/snap-toolbox": "^0.28.0",
+		"mobx": "6.6.0"
 	},
 	"devDependencies": {
-		"@searchspring/snap-url-manager": "^0.27.4"
+		"@searchspring/snap-client": "^0.28.0",
+		"@searchspring/snap-url-manager": "^0.28.0"
 	},
 	"sideEffects": false,
 	"files": [

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { FinderStore } from '@searchspring/snap-store-mobx';
+import { FinderStore, StoreServices } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -8,6 +8,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
+import { FinderControllerConfig } from '../types';
 import { FinderController } from './FinderController';
 
 const globals = { siteId: 'ga9kq2' };
@@ -38,7 +39,7 @@ const configs = [
 describe('Finder Controller', () => {
 	configs.forEach((baseConfig) => {
 		const isHierarchy = 'levels' in baseConfig.fields[0];
-		let urlManager, services, config;
+		let urlManager: UrlManager, services: StoreServices, config: FinderControllerConfig;
 
 		describe(`${isHierarchy ? 'Hierarchy' : 'Non-Hierarchy'} Type`, () => {
 			beforeEach(() => {
@@ -69,7 +70,7 @@ describe('Finder Controller', () => {
 				await controller.search();
 
 				const firstSelection = controller.store.selections[0];
-				const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+				const valueToSelect = firstSelection.values.filter((value: any) => value.count > 10)[0].value;
 				firstSelection.select(valueToSelect);
 
 				// save selections
@@ -94,7 +95,7 @@ describe('Finder Controller', () => {
 				expect(controller2.store.selections[0].selected).toBe(valueToSelect);
 
 				// all selections should be disabled
-				expect(controller2.config.persist.lockSelections).toBe(true);
+				expect(controller2.config.persist?.lockSelections).toBe(true);
 				controller2.store.selections.forEach((selection) => {
 					expect(selection.disabled).toBe(true);
 				});
@@ -111,12 +112,12 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				(controller.client as MockClient).mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 				controller.init();
 
 				const params = controller.params;
 				expect(params.facets).toStrictEqual({
-					include: config.fields.map((field) => field.field),
+					include: config.fields.map((field: any) => field.field),
 					autoDrillDown: false,
 				});
 			});
@@ -141,12 +142,12 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				(controller.client as MockClient).mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 				controller.init();
 
 				const params = controller.params;
 				expect(params.facets).toStrictEqual({
-					include: config.fields.map((field) => field.field).concat('ss-special'),
+					include: config.fields.map((field: any) => field.field).concat('ss-special'),
 					autoDrillDown: true,
 				});
 			});
@@ -163,7 +164,7 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				(controller.client as MockClient).mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 				controller.init();
 
 				expect(controller.urlManager.href).toContain(controller.config.url);
@@ -181,11 +182,11 @@ describe('Finder Controller', () => {
 				});
 
 				if (isHierarchy) {
-					controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+					(controller.client as MockClient).mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 					controller.init();
 					await controller.search();
 
-					expect(controller.store.selections.length).toBe(config.fields[0].levels.length);
+					expect(controller.store.selections.length).toBe(config.fields[0].levels?.length);
 
 					controller.store.selections.forEach((selection, index) => {
 						expect(selection.display).toBe('hierarchy');
@@ -197,7 +198,7 @@ describe('Finder Controller', () => {
 					});
 					const firstSelection = controller.store.selections[0];
 					const field = firstSelection.field;
-					const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+					const valueToSelect = firstSelection.values.filter((value: any) => value.count > 10)[0].value;
 
 					jest.spyOn(controller, 'search');
 					controller.store.selections[0].select(valueToSelect);
@@ -216,7 +217,7 @@ describe('Finder Controller', () => {
 					});
 					const firstSelection = controller.store.selections[0];
 					const field = firstSelection.field;
-					const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+					const valueToSelect = firstSelection.values.filter((value: any) => value.count > 10)[0].value;
 
 					jest.spyOn(controller, 'search');
 					controller.store.selections[0].select(valueToSelect);
@@ -239,14 +240,15 @@ describe('Finder Controller', () => {
 					logger: new Logger(),
 					tracker: new Tracker(globals),
 				});
-				controller.client.mockData.updateConfig({ search: 'finder.include.ss_accessory' });
+				(controller.client as MockClient).mockData.updateConfig({ search: 'finder.include.ss_accessory' });
 				controller.init();
 				await controller.search();
 
+				//@ts-ignore
 				delete window.location;
 				window.location = {
 					...window.location,
-					href: null, // jest does not support window location changes
+					href: '', // jest does not support window location changes
 				};
 
 				const beforeFindfn = jest.spyOn(controller.eventManager, 'fire');
@@ -322,7 +324,7 @@ describe('Finder Controller', () => {
 
 				const firstSelection = controller.store.selections[0];
 				const field = firstSelection.field;
-				const valueToSelect = firstSelection.values.filter((value) => value.count > 10)[0].value;
+				const valueToSelect = firstSelection.values.filter((value: any) => value.count > 10)[0].value;
 
 				controller.store.selections[0].select(valueToSelect);
 				expect(controller.urlManager.state.filter).toEqual({ [field]: [valueToSelect] });
@@ -416,7 +418,7 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.search = jest.fn(() => {
+				controller.client.finder = jest.fn(() => {
 					throw 429;
 				});
 
@@ -440,7 +442,7 @@ describe('Finder Controller', () => {
 					tracker: new Tracker(globals),
 				});
 
-				controller.client.search = jest.fn(() => {
+				controller.client.finder = jest.fn(() => {
 					throw 500;
 				});
 

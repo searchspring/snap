@@ -3,10 +3,11 @@ import type { PluginGrouping } from '@searchspring/snap-controller';
 
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
+import { Next } from '@searchspring/snap-event-manager';
 
 const DEFAULT_PROFILE = 'trending';
 
-const Component = (props) => {
+const Component = (props: any) => {
 	const controller = props.controller;
 	return <div className="injectedComponent">{controller.type}</div>;
 };
@@ -117,7 +118,7 @@ describe('RecommendationInstantiator', () => {
 	it('skips creation and logs a warning when it finds a target without a profile', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend"></script>`;
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
@@ -130,7 +131,7 @@ describe('RecommendationInstantiator', () => {
 
 		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingParameters' } });
 		const clientSpy = jest.spyOn(client, 'recommend');
 
@@ -147,7 +148,7 @@ describe('RecommendationInstantiator', () => {
 
 		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		client.mockData.updateConfig({ recommend: { profile: 'missingComponent' } });
 		const clientSpy = jest.spyOn(client, 'recommend');
 
@@ -164,7 +165,7 @@ describe('RecommendationInstantiator', () => {
 
 		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
 		const loggerSpy = jest.spyOn(logger, 'error');
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const modifiedConfig = {
@@ -187,7 +188,7 @@ describe('RecommendationInstantiator', () => {
 	it('creates a controller when it finds a target', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
@@ -207,9 +208,11 @@ describe('RecommendationInstantiator', () => {
 		<script type="searchspring/recommend" profile="trending"></script>
 		<script type="searchspring/recommend" profile="similar"></script>`;
 
-		const profileCount = {};
+		const profileCount: {
+			[key: string]: number;
+		} = {};
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
@@ -235,7 +238,7 @@ describe('RecommendationInstantiator', () => {
 			}
 		</script>`;
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
@@ -279,12 +282,12 @@ describe('RecommendationInstantiator', () => {
 		const plugin3 = jest.fn();
 		const plugin4 = jest.fn();
 		const middlewareFn = jest.fn();
-		const middleware = async (things, next) => {
+		const middleware = async (_things: any, next: Next) => {
 			middlewareFn();
 			await next();
 		};
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
@@ -324,7 +327,7 @@ describe('RecommendationInstantiator', () => {
 		const plugin = jest.fn();
 		const plugin2 = jest.fn();
 		const middlewareFn = jest.fn();
-		const middleware = async (things, next) => {
+		const middleware = async (_things: any, next: Next) => {
 			middlewareFn();
 			await next();
 		};
@@ -342,7 +345,7 @@ describe('RecommendationInstantiator', () => {
 			},
 		};
 
-		const client = new MockClient(baseConfig.client.globals, {});
+		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });

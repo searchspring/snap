@@ -102,7 +102,7 @@ table td {
 
 #navigation {
 	overflow-y: auto;
-    max-height: calc(100% - 120px);
+    max-height: calc(100% - 170px);
 }
 
 #navigation ul {

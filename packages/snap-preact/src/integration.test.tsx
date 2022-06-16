@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import '@testing-library/jest-dom/extend-expect';
-import { waitFor } from '@testing-library/preact';
+import { cleanup, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { cookies } from '@searchspring/snap-toolbox';
@@ -44,9 +44,10 @@ describe('Snap Preact Integration', () => {
 	});
 
 	beforeEach(() => {
+		// @ts-ignore - modifying window
 		delete window.location;
 
-		// @ts-ignore
+		// @ts-ignore - modifying window
 		window.location = {
 			href: 'https://www.merch.com?branch=branch',
 		};
@@ -54,6 +55,8 @@ describe('Snap Preact Integration', () => {
 		const contextString = `config = ${JSON.stringify(context.config)}; shopper = ${JSON.stringify(context.shopper)};`;
 		document.body.innerHTML = `<script id="searchspring-context">${contextString}</script>`;
 	});
+
+	afterEach(cleanup);
 
 	afterAll(() => jest.clearAllMocks);
 
@@ -112,7 +115,7 @@ describe('Snap Preact Integration', () => {
 		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
 	});
 
-	it(`takes the branch param from the URL and adds a new script block`, async () => {
+	it.skip(`takes the branch param from the URL and adds a new script block`, async () => {
 		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
 
 		const snap = new Snap(baseConfig);

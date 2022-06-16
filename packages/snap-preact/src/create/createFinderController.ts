@@ -25,13 +25,13 @@ export default (config: SnapFinderControllerConfig, services?: SnapControllerSer
 	const cntrlr = new FinderController(
 		config.controller,
 		{
-			client: services?.client || new Client(config.client.globals, config.client.config),
+			client: services?.client || new Client(config.client!.globals, config.client!.config),
 			store: services?.store || new FinderStore(config.controller, { urlManager }),
 			urlManager,
 			eventManager: services?.eventManager || new EventManager(),
 			profiler: services?.profiler || new Profiler(),
 			logger: services?.logger || new Logger({ mode: config.mode }),
-			tracker: services?.tracker || new Tracker(config.client.globals),
+			tracker: services?.tracker || new Tracker(config.client!.globals),
 		},
 		config.context
 	);

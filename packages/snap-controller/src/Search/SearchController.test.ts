@@ -2,9 +2,9 @@ import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Client } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
+import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
+import { EventManager, Next } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -22,7 +22,7 @@ let searchConfigDefault: SearchControllerConfig = {
 	},
 	settings: {},
 };
-let searchConfig;
+let searchConfig: SearchStoreConfig;
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = { urlManager };
 
@@ -88,12 +88,13 @@ describe('Search Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', redirectQuery);
 		expect(controller.urlManager.state.query).toBe(redirectQuery);
 
+		//@ts-ignore
 		delete window.location;
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockData.updateConfig({ search: 'wheel' });
+		(controller.client as MockClient).mockData.updateConfig({ search: 'wheel' });
 		await controller.search();
 		expect(window.location.replace).toHaveBeenCalledTimes(1);
 	});
@@ -117,12 +118,13 @@ describe('Search Controller', () => {
 		controller.urlManager = controller.urlManager.reset().set('query', redirectQuery);
 		expect(controller.urlManager.state.query).toBe(redirectQuery);
 
+		//@ts-ignore
 		delete window.location;
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockData.updateConfig({ search: '40745sk' });
+		(controller.client as MockClient).mockData.updateConfig({ search: '40745sk' });
 		await controller.search();
 		expect(window.location.replace).toHaveBeenCalledTimes(1);
 	});
@@ -147,21 +149,21 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		expect(controller.config.settings.redirects.merchandising).toBe(false);
-		expect(controller.params.search.redirectResponse).toBe('full');
+		expect(controller.config.settings!.redirects!.merchandising).toBe(false);
+		expect(controller.params.search!.redirectResponse).toBe('full');
 
 		controller.init();
 
 		const redirectQuery = 'wheel'; // term redirects
 		controller.urlManager = controller.urlManager.reset().set('query', redirectQuery);
 		expect(controller.urlManager.state.query).toBe(redirectQuery);
-
+		//@ts-ignore
 		delete window.location;
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
 		};
-		controller.client.mockData.updateConfig({ search: 'wheel.redirectResponse.full' });
+		(controller.client as MockClient).mockData.updateConfig({ search: 'wheel.redirectResponse.full' });
 		await controller.search();
 
 		// should not redirect whem redirectResponse='full'
@@ -189,7 +191,7 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		expect(controller.config.settings.infinite.backfill).toBe(searchConfig.settings.infinite.backfill);
+		expect(controller.config.settings!.infinite!.backfill).toBe(searchConfig.settings!.infinite!.backfill);
 
 		await controller.search();
 		expect(controller.store.results.length).toBeGreaterThan(0);
@@ -236,7 +238,7 @@ describe('Search Controller', () => {
 		});
 		const landingPageCampaign = '35x12-50r20-mud-tires';
 		controller.urlManager = controller.urlManager.set('tag', landingPageCampaign);
-		expect(controller.params.merchandising.landingPage).toBe(landingPageCampaign);
+		expect(controller.params.merchandising!.landingPage).toBe(landingPageCampaign);
 	});
 
 	it('can set page param', async () => {
@@ -252,7 +254,7 @@ describe('Search Controller', () => {
 
 		const page = 2;
 		controller.urlManager = controller.urlManager.set('page', page);
-		expect(controller.params.pagination.page).toBe(page);
+		expect(controller.params.pagination!.page).toBe(page);
 	});
 
 	it('can set pageSize param', async () => {
@@ -268,7 +270,7 @@ describe('Search Controller', () => {
 
 		const pageSize = 72;
 		controller.urlManager = controller.urlManager.set('pageSize', pageSize);
-		expect(controller.params.pagination.pageSize).toBe(pageSize);
+		expect(controller.params.pagination!.pageSize).toBe(pageSize);
 	});
 
 	it('can set oq param', async () => {
@@ -284,7 +286,7 @@ describe('Search Controller', () => {
 
 		const oq = 'wheel';
 		controller.urlManager = controller.urlManager.set('oq', oq);
-		expect(controller.params.search.originalQuery).toBe(oq);
+		expect(controller.params.search!.originalQuery).toBe(oq);
 	});
 
 	it('can set rq param', async () => {
@@ -300,7 +302,7 @@ describe('Search Controller', () => {
 
 		const rq = 'wheel';
 		controller.urlManager = controller.urlManager.set('rq', rq);
-		expect(controller.params.search.subQuery).toBe(rq);
+		expect(controller.params.search!.subQuery).toBe(rq);
 	});
 
 	it('can set sort param', async () => {
@@ -367,7 +369,7 @@ describe('Search Controller', () => {
 
 		const storagefn = jest.spyOn(controller.storage, 'set');
 
-		controller.track.product.click(event, result);
+		controller.track.product.click(event as any, result);
 
 		expect(clickfn).toHaveBeenCalledWith({
 			intellisuggestData,
@@ -402,7 +404,7 @@ describe('Search Controller', () => {
 
 		const page = 3;
 		controller.urlManager = controller.urlManager.set('page', page);
-		expect(controller.params.pagination.page).toBe(page);
+		expect(controller.params.pagination!.page).toBe(page);
 
 		await controller.search();
 
@@ -434,9 +436,9 @@ describe('Search Controller', () => {
 		});
 		const storageSetfn = jest.spyOn(controller.storage, 'set');
 
-		const page = searchConfig.settings.infinite.backfill + 1;
+		const page = searchConfig.settings!.infinite!.backfill! + 1;
 		controller.urlManager = controller.urlManager.set('page', page);
-		expect(controller.params.pagination.page).toBe(page);
+		expect(controller.params.pagination!.page).toBe(page);
 
 		await controller.search();
 
@@ -458,7 +460,7 @@ describe('Search Controller', () => {
 
 		const items = ['product123', 'product456'];
 		controller.tracker.cookies.cart.add(items);
-		expect(controller.params.personalization.cart).toEqual(items.join(','));
+		expect(controller.params.personalization!.cart).toEqual(items.join(','));
 	});
 
 	it('can set personalization lastViewed param', async () => {
@@ -475,7 +477,7 @@ describe('Search Controller', () => {
 		const product = { sku: 'product123' };
 		controller.tracker.track.product.view(product);
 
-		expect(controller.params.personalization.lastViewed).toEqual(product.sku);
+		expect(controller.params.personalization!.lastViewed).toEqual(product.sku);
 	});
 
 	it('can set personalization shopper param', async () => {
@@ -492,7 +494,7 @@ describe('Search Controller', () => {
 		const shopper = { id: 'user123' };
 		controller.tracker.track.shopper.login(shopper);
 
-		expect(controller.params.personalization.shopper).toEqual(shopper.id);
+		expect(controller.params.personalization!.shopper).toEqual(shopper.id);
 	});
 
 	it('does not search if previous search params are the same', async () => {

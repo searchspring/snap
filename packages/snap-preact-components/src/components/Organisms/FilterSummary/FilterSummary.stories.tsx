@@ -8,6 +8,8 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FilterSummary/readme.md';
 
+import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+
 export default {
 	title: `Organisms/FilterSummary`,
 	component: FilterSummary,
@@ -143,12 +145,12 @@ const snapInstance = Snapify.search({
 				type: 'value',
 				field: 'color_family',
 				value: 'Blue',
-			},
+			} as SearchRequestModelFilterValue,
 			{
 				type: 'value',
 				field: 'size',
 				value: 'Small',
-			},
+			} as SearchRequestModelFilterValue,
 		],
 	},
 });

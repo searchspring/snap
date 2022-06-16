@@ -10,7 +10,8 @@ import type { ClientConfig, ClientGlobals } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { Middleware } from '@searchspring/snap-event-manager';
-import type { SnapControllerServices, RootComponent } from '../types';
+import type { RootComponent } from '../types';
+import type { Target } from '@searchspring/snap-toolbox';
 
 export type RecommendationInstantiatorConfig = {
 	mode?: keyof typeof AppMode | AppMode;
@@ -51,7 +52,7 @@ export class RecommendationInstantiator {
 	public targeter: DomTargeter;
 
 	private uses: Attachments[] = [];
-	private plugins: { func: (cntrlr: AbstractController, ...args) => Promise<void>; args: unknown[] }[] = [];
+	private plugins: { func: (cntrlr: AbstractController, ...args: any) => Promise<void>; args: unknown[] }[] = [];
 	private middleware: { event: string; func: Middleware<unknown>[] }[] = [];
 
 	constructor(config: RecommendationInstantiatorConfig, services?: RecommendationInstantiatorServices, context?: ContextVariables) {
@@ -85,11 +86,14 @@ export class RecommendationInstantiator {
 		window.searchspring = window.searchspring || {};
 
 		this.context = deepmerge(context || {}, config.context || {});
-		this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
-		this.tracker = services?.tracker || new Tracker(this.config.client.globals);
+		this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
+		this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
 		this.logger = services?.logger || new Logger({ prefix: 'RecommendationInstantiator ', mode: this.mode });
 
-		const profileCount = {};
+		const profileCount: {
+			[key: string]: number;
+		} = {};
+
 		this.targeter = new DomTargeter(
 			[
 				{
@@ -98,8 +102,8 @@ export class RecommendationInstantiator {
 					}`,
 					inject: {
 						action: 'before',
-						element: (target, origElement) => {
-							const profile = origElement.getAttribute('profile');
+						element: (target: Target, origElement: Element) => {
+							const profile = origElement.getAttribute('profile') || '';
 
 							const recsContainer = document.createElement('div');
 							recsContainer.setAttribute('searchspring-recommend', profile);
@@ -108,8 +112,8 @@ export class RecommendationInstantiator {
 					},
 				},
 			],
-			async (target, injectedElem, elem) => {
-				const tag = injectedElem.getAttribute('searchspring-recommend');
+			async (target: Target, injectedElem: Element | undefined, elem: Element | undefined) => {
+				const tag = injectedElem?.getAttribute('searchspring-recommend');
 
 				if (!tag) {
 					this.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, elem);
@@ -122,7 +126,7 @@ export class RecommendationInstantiator {
 					['shopperId', 'shopper', 'product', 'seed', 'cart', 'options', 'profile', 'custom'],
 					elem as HTMLScriptElement
 				);
-				const context = deepmerge(this.context, elemContext);
+				const context: ContextVariables = deepmerge(this.context, elemContext);
 
 				const { shopper, shopperId, product, seed, cart, options } = context;
 
@@ -241,17 +245,19 @@ export class RecommendationInstantiator {
 				}
 
 				setTimeout(() => {
-					render(<RecommendationsComponent controller={controller} />, injectedElem);
+					if (injectedElem) {
+						render(<RecommendationsComponent controller={controller} />, injectedElem);
+					}
 				});
 			}
 		);
 	}
 
-	public plugin(func: (cntrlr: AbstractController, ...args) => Promise<void>, ...args: unknown[]): void {
+	public plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): void {
 		this.plugins.push({ func, args });
 	}
 
-	public on<T>(event: string, ...func: Middleware<T>[]): void {
+	public on<T>(event: string, ...func: Middleware<unknown>[]): void {
 		this.middleware.push({ event, func });
 	}
 

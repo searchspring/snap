@@ -10,6 +10,7 @@ import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGr
 import { FacetPaletteOptions, FacetPaletteOptionsProps } from '../../Molecules/FacetPaletteOptions';
 import { FacetHierarchyOptions, FacetHierarchyOptionsProps } from '../../Molecules/FacetHierarchyOptions';
 import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
+import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { ComponentProps, FacetDisplay, ValueFacet, RangeFacet, RangeBucketFacet, BaseFacet, HierarchyFacet } from '../../../types';
@@ -44,6 +45,9 @@ const CSS = {
 					marginRight: '8px',
 				},
 			},
+			'& .ss__search-input': {
+				margin: '16px 0 0 0',
+			},
 		}),
 };
 
@@ -61,6 +65,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText: 'Show Less',
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
+		searchable: false,
 		// global theme
 		...globalTheme?.components?.facet,
 		// props
@@ -95,6 +100,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		disableStyles,
 		className,
 		style,
+		searchable,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -208,6 +214,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			// component theme overrides
 			theme: props.theme,
 		},
+		searchInput: {
+			// default props
+			className: 'ss__facet__search-input',
+			// global theme
+			...globalTheme?.components?.searchInput,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+		},
 	};
 
 	let limitedValues;
@@ -227,6 +245,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	// Search within facet
+	const searchableFacet = {
+		allowableTypes: ['list', 'grid', 'palette'],
+		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
+			if ((facet as ValueFacet)?.search) {
+				(facet as ValueFacet).search.input = e.target.value;
+			}
+		},
+	};
+
 	return (
 		facet && (
 			<CacheProvider>
@@ -242,6 +270,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							</div>
 						}
 					>
+						{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
+							<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+						)}
 						<div className={classnames('ss__facet__options', className)}>
 							{(() => {
 								//manual options component
@@ -290,6 +321,7 @@ interface FacetSubProps {
 	facetPaletteOptions: FacetPaletteOptionsProps;
 	facetHierarchyOptions: FacetHierarchyOptionsProps;
 	facetSlider: FacetSliderProps;
+	searchInput: SearchInputProps;
 	icon: IconProps;
 	showMoreLessIcon: IconProps;
 }
@@ -315,6 +347,7 @@ interface OptionalFacetProps extends ComponentProps {
 	iconOverflowMore?: string;
 	iconOverflowLess?: string;
 	fields?: FieldProps;
+	searchable?: boolean;
 }
 
 type FieldProps = {

@@ -36,7 +36,9 @@ type ExtendedTarget = Target & {
 	controller?: AbstractController;
 	component?: () => Promise<RootComponent> | RootComponent;
 	skeleton?: () => Promise<any>;
-	props?: unknown;
+	props?: {
+		[propName: string]: any;
+	};
 	onTarget?: OnTarget;
 	prefetch?: boolean;
 };
@@ -136,9 +138,9 @@ export class Snap {
 		[controllerConfigId: string]: Promise<Controllers>;
 	} = {};
 
-	public logger: Logger;
-	public client: Client;
-	public tracker: Tracker;
+	public logger!: Logger;
+	public client!: Client;
+	public tracker!: Tracker;
 	public context: ContextVariables;
 	public controllers: {
 		[controllerConfigId: string]: Controllers;
@@ -153,7 +155,7 @@ export class Snap {
 	};
 
 	public getControllers = (...controllerIds: string[]): Promise<Controllers[]> => {
-		const getControllerPromises = [];
+		const getControllerPromises: Promise<Controllers>[] = [];
 		controllerIds.forEach((id) => getControllerPromises.push(this.getController(id)));
 		return Promise.all(getControllerPromises);
 	};
@@ -166,7 +168,7 @@ export class Snap {
 		context?: ContextVariables,
 		callback?: (value?: Controllers | PromiseLike<Controllers>) => void | Promise<void>
 	): Promise<Controllers> => {
-		if (this._controllerPromises[config.id]) {
+		if (typeof this._controllerPromises[config.id] != 'undefined') {
 			throw new Error(`Controller with id '${config.id}' is already defined`);
 		}
 
@@ -186,13 +188,10 @@ export class Snap {
 		services?: SnapControllerServices,
 		urlConfig?: UrlTranslatorConfig,
 		context?: ContextVariables,
-		callback?: (value?: Controllers | PromiseLike<Controllers>) => void | Promise<void>
+		callback?: (cntrlr: Controllers) => void | Promise<void>
 	): Promise<Controllers> => {
 		let importPromise;
 		switch (type) {
-			case ControllerTypes.search:
-				importPromise = import('./create/createSearchController');
-				break;
 			case ControllerTypes.autocomplete:
 				importPromise = import('./create/createAutocompleteController');
 				break;
@@ -202,8 +201,13 @@ export class Snap {
 			case ControllerTypes.recommendation:
 				importPromise = import('./create/createRecommendationController');
 				break;
+			case ControllerTypes.search:
+			default:
+				importPromise = import('./create/createSearchController');
+				break;
 		}
 
+		// @ts-ignore - we know the config is correct, but complicated typing
 		const creationFunc: (config: SnapControllerConfigs, services: SnapControllerServices) => Controllers = (await importPromise).default;
 
 		if (!this.controllers[config.id]) {
@@ -258,19 +262,29 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		if (this.context.merchandising) {
-			this.config.client.globals.merchandising = this.context.merchandising;
+		if (this.context.merchandising?.segments) {
+			if (this.config.client?.globals.merchandising) {
+				this.config.client.globals.merchandising.segments = deepmerge(
+					this.config.client.globals.merchandising.segments,
+					this.context.merchandising.segments
+				);
+			} else {
+				this.config.client!.globals.merchandising = {
+					segments: this.context.merchandising.segments,
+				};
+			}
 		}
 
 		try {
 			const urlParams = url(window.location.href);
-			const branchOverride = urlParams.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
 
 			// devMode is set via queryParam, node env or cookie
-			let devMode = 'dev' in urlParams.params.query || process.env.NODE_ENV == AppMode.development || !!cookies.get(DEV_COOKIE);
+			let devMode =
+				(urlParams?.params?.query && 'dev' in urlParams.params.query) || process.env.NODE_ENV == AppMode.development || !!cookies.get(DEV_COOKIE);
 
 			// ability to disable via ?dev=false query param
-			if (urlParams.params.query?.dev == 'false') {
+			if (urlParams?.params.query?.dev == 'false') {
 				devMode = false;
 			}
 
@@ -285,10 +299,10 @@ export class Snap {
 				}
 			}
 
-			this.config.client.config = this.config.client.config || {};
-			this.config.client.config.mode = this.config.client.config.mode || this.mode;
-			this.client = services?.client || new Client(this.config.client.globals, this.config.client.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client.globals);
+			this.config.client!.config = this.config.client!.config || {};
+			this.config.client!.config.mode = this.config.client!.config.mode || this.mode;
+			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// log version
@@ -301,9 +315,6 @@ export class Snap {
 			if (branchOverride && !document.querySelector(`script[${BRANCH_COOKIE}]`)) {
 				this.logger.warn(`...loading build... '${branchOverride}'`);
 
-				// reset the global searchspring object
-				delete window.searchspring;
-
 				// set a cookie with branch
 				if (featureFlags.cookies) {
 					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000); // 1 hour
@@ -312,11 +323,11 @@ export class Snap {
 				}
 
 				// get the path and siteId from the current bundle script in case its not the same as the client config
-				let path = `https://snapui.searchspring.io/${this.config.client.globals.siteId}/`;
-				const script = document.querySelector('script[src*="//snapui.searchspring.io"]');
+				let path = `https://snapui.searchspring.io/${this.config.client!.globals.siteId}/`;
+				const script: HTMLScriptElement | null = document.querySelector('script[src*="//snapui.searchspring.io"]');
 
 				if (script) {
-					const scriptRoot = script.getAttribute('src').match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
+					const scriptRoot = script.getAttribute('src')!.match(/\/\/snapui.searchspring.io\/[a-zA-Z0-9]{6}\//);
 					if (scriptRoot) {
 						path = scriptRoot.toString();
 					}
@@ -327,7 +338,6 @@ export class Snap {
 				const src = `${path}${branchOverride}/bundle.js`;
 				branchScript.src = src;
 				branchScript.setAttribute(BRANCH_COOKIE, branchOverride);
-				document.head.appendChild(branchScript);
 
 				new DomTargeter(
 					[
@@ -343,31 +353,46 @@ export class Snap {
 							},
 						},
 					],
-					async (target, elem) => {
-						let bundleDetails, error;
+					async (target: Target, elem: Element) => {
+						const error = {
+							message: 'Error',
+							description: '',
+						};
+
+						let bundleDetails;
+
 						try {
 							const getBundleDetails = (await import('./getBundleDetails/getBundleDetails')).getBundleDetails;
 							bundleDetails = await getBundleDetails(src);
 						} catch (err) {
-							error = err;
+							error.description = err as string;
 						}
 
 						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
-						BranchOverride &&
-							render(
-								<BranchOverride
-									name={branchOverride}
-									details={bundleDetails}
-									error={error}
-									onRemoveClick={() => {
-										cookies.unset(BRANCH_COOKIE);
-										const urlState = url(window.location.href);
-										delete urlState.params.query['branch'];
-										window.location.href = urlState.url();
-									}}
-								/>,
-								elem
-							);
+						render(
+							<BranchOverride
+								name={branchOverride}
+								details={bundleDetails}
+								error={error}
+								onRemoveClick={() => {
+									cookies.unset(BRANCH_COOKIE);
+									const urlState = url(window.location.href);
+									delete urlState?.params.query['branch'];
+
+									const newUrl = urlState?.url();
+									if (newUrl && newUrl != window.location.href) {
+										window.location.href = newUrl;
+									} else {
+										window.location.reload();
+									}
+								}}
+							/>,
+							elem
+						);
+
+						document.head.appendChild(branchScript);
+						// reset the global searchspring object
+						delete window.searchspring;
 					}
 				);
 
@@ -394,7 +419,7 @@ export class Snap {
 		if (this.context?.shopper?.cart) {
 			const cart = this.context.shopper.cart;
 			if (Array.isArray(cart)) {
-				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku).trim());
+				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku || '').trim());
 				this.tracker.cookies.cart.set(cartItems);
 			}
 		}
@@ -402,9 +427,9 @@ export class Snap {
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
 				case 'search': {
-					this.config.controllers[type].forEach((controller, index) => {
+					this.config.controllers![type]!.forEach((controller, index) => {
 						try {
-							if (this._controllerPromises[controller.config.id]) {
+							if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
 								this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
 								return;
 							}
@@ -439,13 +464,13 @@ export class Snap {
 								}
 							};
 
-							const targetFunction = async (target, elem, originalElem) => {
+							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 								runSearch();
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const Component = await (target as ExtendedTarget).component();
+									const Component = await target.component!();
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
 									});
@@ -466,14 +491,14 @@ export class Snap {
 									runSearch();
 								}
 
-								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target, elem, originalElem) => {
-									if (target.skeleton) {
-										const Skeleton = await (target as ExtendedTarget).skeleton();
+								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target: ExtendedTarget, elem: Element, originalElem?: Element) => {
+									if (target && target.skeleton && elem) {
+										const Skeleton = await target.skeleton!();
 										setTimeout(() => {
 											render(<Skeleton />, elem);
 										});
 									}
-									targetFunction(target, elem, originalElem);
+									targetFunction(target, elem, originalElem!);
 								});
 							});
 						} catch (err) {
@@ -484,8 +509,8 @@ export class Snap {
 				}
 
 				case 'autocomplete': {
-					this.config.controllers[type].forEach((controller, index) => {
-						if (this._controllerPromises[controller.config.id]) {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
 							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
 							return;
 						}
@@ -502,18 +527,25 @@ export class Snap {
 									}
 								};
 
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = (await (target as ExtendedTarget).component()) as React.ElementType<{
+										const Component = (await target.component!()) as React.ElementType<{
 											controller: AutocompleteController;
 											input: HTMLInputElement | string | Element;
 										}>;
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} input={originalElem} {...target.props} />, elem);
+											render(
+												<Component
+													controller={this.controllers[controller.config.id] as AutocompleteController}
+													input={originalElem}
+													{...target.props}
+												/>,
+												elem
+											);
 										});
 									} catch (err) {
 										this.logger.error(COMPONENT_ERROR, target);
@@ -528,7 +560,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -558,7 +590,7 @@ export class Snap {
 												...target,
 											},
 										],
-										async (target, elem, originalElem) => {
+										async (target: Target, elem: Element, originalElem?: Element) => {
 											const cntrlr = await this._createController(
 												ControllerTypes.autocomplete,
 												controller.config,
@@ -566,11 +598,11 @@ export class Snap {
 												controller.url,
 												controller.context,
 												(cntrlr) => {
-													resolve(cntrlr);
+													if (cntrlr) resolve(cntrlr);
 												}
 											);
 											runBind();
-											targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+											targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 											cntrlr.addTargeter(targeter);
 										}
 									);
@@ -584,8 +616,8 @@ export class Snap {
 				}
 
 				case 'finder': {
-					this.config.controllers[type].forEach((controller, index) => {
-						if (this._controllerPromises[controller.config.id]) {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
 							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
 							return;
 						}
@@ -599,12 +631,12 @@ export class Snap {
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = await (target as ExtendedTarget).component();
+										const Component = await target.component!();
 
 										setTimeout(() => {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
@@ -622,7 +654,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -634,7 +666,7 @@ export class Snap {
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
 										const cntrlr = await this._createController(
 											ControllerTypes.finder,
 											controller.config,
@@ -642,11 +674,11 @@ export class Snap {
 											controller.url,
 											controller.context,
 											(cntrlr) => {
-												resolve(cntrlr);
+												if (cntrlr) resolve(cntrlr);
 											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -659,8 +691,8 @@ export class Snap {
 				}
 
 				case 'recommendation': {
-					this.config.controllers[type].forEach((controller, index) => {
-						if (this._controllerPromises[controller.config.id]) {
+					this.config.controllers![type]!.forEach((controller, index) => {
+						if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
 							this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
 							return;
 						}
@@ -674,12 +706,12 @@ export class Snap {
 										searched = true;
 									}
 								};
-								const targetFunction = async (target, elem, originalElem) => {
+								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 									const onTarget = target.onTarget as OnTarget;
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = await (target as ExtendedTarget).component();
+										const Component = await target.component!();
 
 										setTimeout(() => {
 											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
@@ -697,7 +729,7 @@ export class Snap {
 										controller.url,
 										controller.context,
 										(cntrlr) => {
-											resolve(cntrlr);
+											if (cntrlr) resolve(cntrlr);
 										}
 									);
 								}
@@ -709,7 +741,7 @@ export class Snap {
 									if (!target.component) {
 										throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 									}
-									const targeter = new DomTargeter([{ ...target }], async (target, elem, originalElem) => {
+									const targeter = new DomTargeter([{ ...target }], async (target: Target, elem: Element, originalElem?: Element) => {
 										const cntrlr = await this._createController(
 											ControllerTypes.recommendation,
 											controller.config,
@@ -717,11 +749,11 @@ export class Snap {
 											controller.url,
 											controller.context,
 											(cntrlr) => {
-												resolve(cntrlr);
+												if (cntrlr) resolve(cntrlr);
 											}
 										);
 										runSearch();
-										targetFunction({ controller: cntrlr, ...target }, elem, originalElem);
+										targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 										cntrlr.addTargeter(targeter);
 									});
 								});
@@ -738,9 +770,9 @@ export class Snap {
 		if (this.config?.instantiators?.recommendation) {
 			try {
 				this._instantiatorPromises.recommendation = import('./Instantiators/RecommendationInstantiator').then(({ RecommendationInstantiator }) => {
-					this.config.instantiators.recommendation.mode = this.config.instantiators.recommendation.mode || this.mode;
+					this.config.instantiators!.recommendation!.mode = this.config.instantiators!.recommendation!.mode || this.mode;
 					return new RecommendationInstantiator(
-						this.config.instantiators.recommendation,
+						this.config.instantiators!.recommendation!,
 						{
 							client: this.client,
 							tracker: this.tracker,

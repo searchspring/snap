@@ -1,68 +1,8 @@
 import { API, ApiConfiguration, HTTPHeaders } from './Abstract';
 import { hashParams } from '../utils/hashParams';
 import { AppMode, charsParams } from '@searchspring/snap-toolbox';
-import { SearchResponseModelResult } from '@searchspring/snapi-types';
-import deepmerge from 'deepmerge';
 
-export type RecommendRequestModel = {
-	tags: string[];
-	siteId: string;
-	product?: string;
-	shopper?: string;
-	categories?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	batched?: boolean;
-	limits?: number | number[];
-};
-
-export type RecommendResponseModel = {
-	profile: {
-		tag: string;
-	};
-	results: SearchResponseModelResult[];
-}[];
-
-export type ProfileRequestModel = {
-	siteId: string;
-	tag: string;
-	branch?: string;
-};
-
-export type ProfileResponseModel = {
-	profile: {
-		tag: string;
-		placement: string;
-		display: {
-			threshold: number;
-			template: {
-				name: string;
-				uuid: string;
-				markup?: string;
-				styles?: string;
-				component?: string;
-				branch?: string;
-				group?: string;
-			};
-			templateParameters: {
-				[any: string]: unknown;
-			};
-		};
-	};
-};
-
-export type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	shopper?: string;
-	categories?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
-};
+import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
 
 class Deferred {
 	promise: Promise<any>;
@@ -77,15 +17,18 @@ class Deferred {
 	}
 }
 
-export type RecommendCombinedResponseModel = ProfileResponseModel & { results: SearchResponseModelResult[] };
+type BatchEntry = {
+	request: RecommendRequestModel;
+	deferred: Deferred;
+};
 
 const BATCH_TIMEOUT = 150;
 export class RecommendAPI extends API {
-	batches: {
+	private batches: {
 		[key: string]: {
 			timeout: number;
-			request: any;
-			deferreds?: Deferred[];
+			request: Partial<RecommendRequestModel>;
+			entries: BatchEntry[];
 		};
 	};
 
@@ -112,74 +55,82 @@ export class RecommendAPI extends API {
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		let { tags, limits, categories, ...otherParams } = parameters;
-		if (!limits) limits = 20;
 
-		const [tag] = tags || [];
-
-		let key = hashParams(otherParams as RecommendRequestModel);
-		if ('batched' in otherParams) {
-			if (otherParams.batched) {
-				key = otherParams.siteId;
+		const getKey = (parameters: RecommendRequestModel) => {
+			let key = hashParams(parameters as RecommendRequestModel);
+			if ('batched' in parameters) {
+				if (parameters.batched) {
+					key = parameters.siteId;
+				}
 			}
-			delete otherParams.batched; // remove from request parameters
-		}
-		this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, deferreds: [] };
-		const paramBatch: {
-			timeout: number;
-			request: RecommendRequestModel;
-			deferreds?: Deferred[] | undefined;
-		} = this.batches[key];
+			return key;
+		};
 
+		// set up batch keys and deferred promises
+		const key = getKey(otherParams as RecommendRequestModel);
+		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
 		const deferred = new Deferred();
 
-		paramBatch.request.tags.push(tag);
+		// add each request to the list
+		batch.entries.push({ request: parameters, deferred: deferred });
 
-		if (categories) {
-			if (!paramBatch.request.categories) {
-				paramBatch.request.categories = categories;
-			} else {
-				paramBatch.request.categories = paramBatch.request.categories.concat(categories);
-			}
-		}
+		// wait for all of the requests to come in
+		window.clearTimeout(batch.timeout);
+		batch.timeout = window.setTimeout(async () => {
+			// delete the batch so a new one can take its place
+			delete this.batches[key];
 
-		paramBatch.request.limits = (paramBatch.request.limits as number[]).concat(limits);
+			// reorder the requests by order value in context.
+			batch.entries.sort(sortBatchEntries);
 
-		paramBatch.request = { ...paramBatch.request, ...otherParams };
-		paramBatch.deferreds?.push(deferred);
-		window.clearTimeout(paramBatch.timeout);
+			// now that the requests are in proper order, map through them
+			// and build out the batches
+			batch.entries.map((entry) => {
+				let { tags, limits, categories, ...otherParams } = entry.request;
 
-		paramBatch.timeout = window.setTimeout(async () => {
-			if (this.configuration.mode == AppMode.development) {
-				paramBatch.request.test = true;
-			}
+				if (!limits) limits = 20;
+				const [tag] = tags || [];
 
-			let requestMethod = 'getRecommendations';
-			if (charsParams(paramBatch.request) > 1024) {
-				requestMethod = 'postRecommendations';
-				//post request needs products as a string.
-				if (paramBatch.request['product']) {
-					paramBatch.request['product'] = paramBatch.request['product'].toString();
+				delete otherParams.batched; // remove from request parameters
+				delete otherParams.order; // remove from request parameters
+
+				batch.request.tags!.push(tag);
+
+				if (categories) {
+					if (!batch.request.categories) {
+						batch.request.categories = Array.isArray(categories) ? categories : [categories];
+					} else {
+						batch.request.categories = batch.request.categories.concat(categories);
+					}
 				}
-			}
+
+				batch.request.limits = (batch.request.limits as number[]).concat(limits);
+				batch.request = { ...batch.request, ...otherParams };
+			});
 
 			try {
-				let response: RecommendResponseModel;
-				if (charsParams(paramBatch.request) > 1024) {
-					response = await this.postRecommendations(paramBatch.request);
-				} else {
-					response = await this.getRecommendations(paramBatch.request);
+				if (this.configuration.mode == AppMode.development) {
+					batch.request.test = true;
 				}
 
-				paramBatch.deferreds?.forEach((def, index) => {
-					def.resolve([response[index]]);
+				let response: RecommendResponseModel;
+				if (charsParams(batch.request) > 1024) {
+					if (batch.request['product']) {
+						batch.request['product'] = batch.request['product'].toString();
+					}
+					response = await this.postRecommendations(batch.request as RecommendRequestModel);
+				} else {
+					response = await this.getRecommendations(batch.request as RecommendRequestModel);
+				}
+
+				batch.entries?.forEach((entry, index) => {
+					entry.deferred.resolve([response[index]]);
 				});
 			} catch (err) {
-				paramBatch.deferreds?.forEach((def) => {
-					def.reject(err);
+				batch.entries?.forEach((entry) => {
+					entry.deferred.reject(err);
 				});
 			}
-
-			delete this.batches[key];
 		}, BATCH_TIMEOUT);
 
 		return deferred.promise;
@@ -223,4 +174,24 @@ export class RecommendAPI extends API {
 
 		return response as unknown as RecommendResponseModel;
 	}
+}
+
+function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
+	// undefined order goes last
+	if (a.request.order == undefined && b.request.order == undefined) {
+		return 0;
+	}
+	if (a.request.order == undefined && b.request.order != undefined) {
+		return 1;
+	}
+	if (b.request.order == undefined && a.request.order != undefined) {
+		return -1;
+	}
+	if (a.request.order! < b.request.order!) {
+		return -1;
+	}
+	if (a.request.order! > b.request.order!) {
+		return 1;
+	}
+	return 0;
 }

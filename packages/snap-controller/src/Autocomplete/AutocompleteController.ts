@@ -5,16 +5,9 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
-import type { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type {
-	AutocompleteControllerConfig,
-	BeforeSearchObj,
-	AfterSearchObj,
-	AfterStoreObj,
-	ControllerServices,
-	NextEvent,
-	ContextVariables,
-} from '../types';
+import { AutocompleteStore } from '@searchspring/snap-store-mobx';
+import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
@@ -40,14 +33,14 @@ const defaultConfig: AutocompleteControllerConfig = {
 
 type AutocompleteTrackMethods = {
 	product: {
-		click: (e, result) => void;
+		click: (e: MouseEvent, result: any) => void;
 	};
 };
 
 export class AutocompleteController extends AbstractController {
 	public type = ControllerTypes.autocomplete;
-	public store: AutocompleteStore;
-	public config: AutocompleteControllerConfig;
+	declare store: AutocompleteStore;
+	declare config: AutocompleteControllerConfig;
 	public storage: StorageStore;
 
 	constructor(
@@ -62,7 +55,7 @@ export class AutocompleteController extends AbstractController {
 		this.store.setConfig(this.config);
 
 		// get current search from url before detaching
-		if (this.config.settings.initializeFromUrl) {
+		if (this.config.settings!.initializeFromUrl) {
 			this.store.state.input = this.urlManager.state.query;
 
 			// reset to force search on focus
@@ -77,14 +70,14 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			ac.controller.store.loading = true;
 
 			await next();
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
@@ -95,7 +88,7 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: NextEvent): Promise<void | boolean> => {
+		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			ac.controller.store.loading = false;
@@ -116,7 +109,7 @@ export class AutocompleteController extends AbstractController {
 
 	get params(): AutocompleteRequestModel {
 		const urlState = this.urlManager.state;
-		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals);
+		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals!);
 
 		const userId = this.tracker.getUserId();
 		if (userId) {
@@ -149,14 +142,14 @@ export class AutocompleteController extends AbstractController {
 
 	async setFocused(inputElement?: HTMLInputElement): Promise<void> {
 		if (this.store.state.focusedInput !== inputElement) {
-			this.store.state.focusedInput = inputElement;
+			this.store.state.focusedInput = inputElement as HTMLInputElement;
 			// fire focusChange event
 			try {
 				try {
 					await this.eventManager.fire('focusChange', {
 						controller: this,
 					});
-				} catch (err) {
+				} catch (err: any) {
 					if (err?.message == 'cancelled') {
 						this.log.warn(`'focusChange' middleware cancelled`);
 					} else {
@@ -188,15 +181,15 @@ export class AutocompleteController extends AbstractController {
 	reset(): void {
 		// reset input values and state
 		const inputs = document.querySelectorAll(this.config.selector);
-		inputs.forEach((input: HTMLInputElement) => {
-			input.value = '';
+		inputs.forEach((input) => {
+			(input as HTMLInputElement).value = '';
 		});
 		this.store.reset();
 	}
 
 	handlers = {
 		input: {
-			enterKey: async (e: KeyboardEvent): Promise<boolean> => {
+			enterKey: async (e: KeyboardEvent): Promise<boolean | undefined> => {
 				if (e.keyCode == KEY_ENTER) {
 					const input = e.target as HTMLInputElement;
 					let actionUrl = this.store.services.urlManager;
@@ -214,12 +207,12 @@ export class AutocompleteController extends AbstractController {
 
 						// use corrected query and originalQuery
 						if (this.store.search.originalQuery) {
-							input.value = this.store.search.query.string;
-							actionUrl = actionUrl.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
+							input.value = this.store.search.query?.string!;
+							actionUrl = actionUrl?.set(PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 						}
 					}
 
-					actionUrl = actionUrl.set('query', input.value);
+					actionUrl = actionUrl?.set('query', input.value);
 
 					// TODO expected spell correct behavior queryAssumption
 
@@ -228,7 +221,7 @@ export class AutocompleteController extends AbstractController {
 							controller: this,
 							input,
 						});
-					} catch (err) {
+					} catch (err: any) {
 						if (err?.message == 'cancelled') {
 							this.log.warn(`'beforeSubmit' middleware cancelled`);
 							return;
@@ -238,7 +231,7 @@ export class AutocompleteController extends AbstractController {
 						}
 					}
 
-					window.location.href = actionUrl.href;
+					window.location.href = actionUrl?.href || '';
 				}
 			},
 			escKey: (e: KeyboardEvent): void => {
@@ -255,9 +248,9 @@ export class AutocompleteController extends AbstractController {
 					this.setFocused(e.target as HTMLInputElement);
 				});
 			},
-			formSubmit: async (e): Promise<void> => {
-				const form = e.target;
-				const input = form.querySelector(`input[${INPUT_ATTRIBUTE}]`);
+			formSubmit: async (e: React.FormEvent<HTMLInputElement>): Promise<void> => {
+				const form = e.target as HTMLFormElement;
+				const input: HTMLInputElement | null = form.querySelector(`input[${INPUT_ATTRIBUTE}]`);
 
 				e.preventDefault();
 
@@ -271,7 +264,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					if (this.store.search.originalQuery) {
-						input.value = this.store.search.query.string;
+						if (input) {
+							input.value = this.store.search.query?.string!;
+						}
 						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 					}
 				}
@@ -283,7 +278,7 @@ export class AutocompleteController extends AbstractController {
 						controller: this,
 						input,
 					});
-				} catch (err) {
+				} catch (err: any) {
 					if (err?.message == 'cancelled') {
 						this.log.warn(`'beforeSubmit' middleware cancelled`);
 						return;
@@ -313,10 +308,10 @@ export class AutocompleteController extends AbstractController {
 
 				this.store.state.input = value;
 
-				if (this.config.settings.syncInputs) {
+				if (this.config?.settings?.syncInputs) {
 					const inputs = document.querySelectorAll(this.config.selector);
-					inputs.forEach((input: HTMLInputElement) => {
-						input.value = value;
+					inputs.forEach((input) => {
+						(input as HTMLInputElement).value = value;
 					});
 				}
 
@@ -338,7 +333,7 @@ export class AutocompleteController extends AbstractController {
 					}, INPUT_DELAY);
 				}
 			},
-			timeoutDelay: undefined,
+			timeoutDelay: undefined as undefined | ReturnType<typeof setTimeout>,
 		},
 		document: {
 			click: (e: MouseEvent): void => {
@@ -353,13 +348,13 @@ export class AutocompleteController extends AbstractController {
 	};
 
 	unbind(): void {
-		const inputs = document.querySelectorAll(`input[${INPUT_ATTRIBUTE}]`);
-		inputs?.forEach((input: HTMLInputElement) => {
+		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(`input[${INPUT_ATTRIBUTE}]`);
+		inputs?.forEach((input) => {
 			input.removeEventListener('keyup', this.handlers.input.keyUp);
 			input.removeEventListener('keydown', this.handlers.input.enterKey);
 			input.removeEventListener('keydown', this.handlers.input.escKey);
 			input.removeEventListener('focus', this.handlers.input.focus);
-			input.form?.removeEventListener('submit', this.handlers.input.formSubmit);
+			input.form?.removeEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 		});
 		document.removeEventListener('click', this.handlers.document.click);
 	}
@@ -371,8 +366,8 @@ export class AutocompleteController extends AbstractController {
 
 		this.unbind();
 
-		const inputs = document.querySelectorAll(this.config.selector);
-		inputs.forEach((input: HTMLInputElement) => {
+		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(this.config.selector);
+		inputs.forEach((input) => {
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
 
@@ -380,7 +375,7 @@ export class AutocompleteController extends AbstractController {
 
 			input.addEventListener('keyup', this.handlers.input.keyUp);
 
-			if (this.config.settings.initializeFromUrl && !input.value && this.store.state.input) {
+			if (this.config?.settings?.initializeFromUrl && !input.value && this.store.state.input) {
 				input.value = this.store.state.input;
 			}
 
@@ -388,21 +383,21 @@ export class AutocompleteController extends AbstractController {
 			input.addEventListener('keydown', this.handlers.input.escKey);
 
 			const form = input.form;
-			let formActionUrl;
+			let formActionUrl: string | undefined;
 
 			if (this.config.action) {
 				formActionUrl = this.config.action;
 				input.addEventListener('keydown', this.handlers.input.enterKey);
 			} else if (form) {
 				formActionUrl = form.action;
-				form.addEventListener('submit', this.handlers.input.formSubmit);
+				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 			}
 
 			// set the root URL on urlManager
 			if (formActionUrl) {
 				this.store.setService(
 					'urlManager',
-					this.urlManager.withConfig((translatorConfig) => {
+					this.urlManager.withConfig((translatorConfig: any) => {
 						return {
 							...translatorConfig,
 							urlRoot: formActionUrl,
@@ -416,7 +411,7 @@ export class AutocompleteController extends AbstractController {
 			}
 		});
 
-		if (this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
+		if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
 			this.searchTrending();
 		}
 
@@ -460,7 +455,7 @@ export class AutocompleteController extends AbstractController {
 					controller: this,
 					request: params,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'beforeSearch' middleware cancelled`);
 					return;
@@ -473,11 +468,13 @@ export class AutocompleteController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			const [meta, response] = await this.client.autocomplete(params);
+			// @ts-ignore
 			if (!response.meta) {
 				/**
 				 * MockClient will overwrite the client search() method and use
 				 * SearchData to return mock data which already contains meta data
 				 */
+				// @ts-ignore
 				response.meta = meta;
 			}
 
@@ -492,7 +489,7 @@ export class AutocompleteController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterSearch' middleware cancelled`);
 					afterSearchProfile.stop();
@@ -507,6 +504,7 @@ export class AutocompleteController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
+			// @ts-ignore
 			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
@@ -517,7 +515,7 @@ export class AutocompleteController extends AbstractController {
 					request: params,
 					response,
 				});
-			} catch (err) {
+			} catch (err: any) {
 				if (err?.message == 'cancelled') {
 					this.log.warn(`'afterStore' middleware cancelled`);
 					afterStoreProfile.stop();
