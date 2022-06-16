@@ -205,11 +205,9 @@ Requires at least a `stack` or `message` to be provided.
 
 ```typescript
 const handleErrorTracking = (event: ErrorEvent) :void => {
-    const { type, filename, colno, lineno, error: { stack }, message, timeStamp } = event;
+    const { filename, colno, lineno, error: { stack }, message, timeStamp } = event;
     const userAgent = navigator.userAgent;
     const href = window.location.href;
-    const siteId = this.config.client.globals.siteId;
-    const date = Date.now();
 
     const beaconPayload: TrackErrorEvent = {
         userAgent,
