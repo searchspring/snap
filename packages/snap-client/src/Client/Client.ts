@@ -113,6 +113,7 @@ export class Client {
 			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
+					mode: this.mode,
 					origin: this.config.finder?.api?.origin,
 					cache: this.config.finder?.cache,
 				})
