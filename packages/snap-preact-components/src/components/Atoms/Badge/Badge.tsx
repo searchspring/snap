@@ -6,10 +6,10 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	badge: ({ position }: any) =>
+	badge: ({ position }: BadgeProps) =>
 		css({
 			display: 'inline-block',
 			position: 'absolute',
@@ -34,7 +34,8 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 	};
 	const { content, children, position, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
+
 	if (!disableStyles) {
 		styling.css = [CSS.badge({ position }), style];
 	} else if (style) {

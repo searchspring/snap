@@ -10,7 +10,7 @@ import { Button, ButtonProps } from '../../Atoms/Button/Button';
 import { defined, LightenDarkenColor } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { AbstractController } from '@searchspring/snap-controller';
@@ -120,7 +120,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const errorObject = controller?.store?.error || error;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.errorHandler({ theme }), style];
 	} else if (style) {

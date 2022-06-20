@@ -14,7 +14,7 @@ import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCar
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps } from '../../../types';
+import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
@@ -145,7 +145,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	(children || resultsToRender.length) && (controller as RecommendationController)?.track?.render();
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.recommendation({ vertical }), style];
 	} else if (style) {

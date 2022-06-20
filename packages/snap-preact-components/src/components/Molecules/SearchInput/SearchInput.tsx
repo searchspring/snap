@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
 	searchInput: ({ theme }: { theme: Theme }) =>
@@ -63,7 +63,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.searchInput({ theme }), style];
 	} else if (style) {

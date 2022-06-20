@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { useState, useEffect } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
@@ -278,7 +278,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		setThemeName('failureTheme');
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.override({ theme: themes[themeName as keyof typeof themes] }), style];
 	} else if (style) {

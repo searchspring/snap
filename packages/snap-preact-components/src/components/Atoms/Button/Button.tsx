@@ -5,28 +5,22 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
-type IButtonStyles = {
-	color?: string;
-	backgroundColor?: string;
-	borderColor?: string;
-	theme: Theme;
-};
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: IButtonStyles) =>
+	button: ({ color, backgroundColor, borderColor, theme }: ButtonProps) =>
 		css({
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
-			color: color || theme.colors?.primary,
+			color: color || theme?.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
+			border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
 			'&:hover': {
 				cursor: 'pointer',
-				backgroundColor: theme.colors?.hover || '#f8f8f8',
+				backgroundColor: theme?.colors?.hover || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.7,
@@ -73,6 +67,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
+
 	return (
 		(content || children) && (
 			<CacheProvider>

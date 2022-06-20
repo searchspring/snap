@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
 import { Facet as BaseFacet, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
@@ -51,7 +51,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.facets(), style];
 	} else if (style) {

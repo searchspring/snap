@@ -5,21 +5,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { iconPaths, IconType } from './paths';
 
-type IIconStyles = {
-	color?: string;
-	height?: string;
-	width?: string;
-	size?: string;
-	theme: Theme;
-};
-
 const CSS = {
-	icon: ({ color, height, width, size, theme }: IIconStyles) =>
+	icon: ({ color, height, width, size, theme }: IconProps) =>
 		css({
-			fill: color || theme.colors?.primary,
+			fill: color || theme?.colors?.primary,
 			width: width || size,
 			height: height || size,
 			position: 'relative',
@@ -44,7 +36,7 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.icon({ color, width, height, size, theme }), style];
 	} else if (style) {

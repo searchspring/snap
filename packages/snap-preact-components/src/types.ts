@@ -1,5 +1,5 @@
 import { RenderableProps } from 'preact';
-
+import { SerializedStyles } from '@emotion/react';
 import { Theme } from './providers/theme';
 
 export interface ComponentProps extends RenderableProps<any> {
@@ -66,3 +66,5 @@ export type BreakpointsProps = {
 export type BreakpointsEntry = {
 	[property: string]: any;
 };
+
+export type StylingCSS = Array<SerializedStyles | string | Record<string, string> | undefined>;

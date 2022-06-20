@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
@@ -89,7 +89,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
 	} else if (style) {

@@ -19,10 +19,10 @@ describe('Merchandising Inline Banner Component', () => {
 		const onClickFunc = jest.fn();
 
 		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} onClick={onClickFunc} />);
-		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
+		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner')!;
 		expect(merchBannerElement).toBeInTheDocument();
 
-		userEvent.click(merchBannerElement!);
+		userEvent.click(merchBannerElement);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 

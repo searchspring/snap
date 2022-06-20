@@ -4,10 +4,10 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { InlineBannerContent, ComponentProps, Layout, LayoutType } from '../../../types';
+import { InlineBannerContent, ComponentProps, Layout, LayoutType, StylingCSS } from '../../../types';
 
 const CSS = {
-	inlineBanner: ({ width }: { width?: string }) =>
+	inlineBanner: ({ width }: InlineBannerProps) =>
 		css({
 			height: '100%',
 			display: 'flex',
@@ -45,7 +45,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const { banner, disableStyles, className, width, layout, onClick, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.inlineBanner({ width }), style];
 	} else if (style) {

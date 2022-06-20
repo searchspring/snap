@@ -4,7 +4,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 
@@ -35,16 +35,18 @@ export function Banner(properties: BannerProps): JSX.Element {
 		console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
 		return <Fragment></Fragment>;
 	}
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.banner(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	let bannerContent;
 	if (content && content[type]) {
 		bannerContent = content[type] as string[];
 	}
+
 	return bannerContent && bannerContent.length ? (
 		<CacheProvider>
 			<div

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { HierarchyValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
@@ -65,7 +65,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.hierarchy({ theme }), style];
 	} else if (style) {

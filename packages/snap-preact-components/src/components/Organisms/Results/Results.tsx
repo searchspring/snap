@@ -11,7 +11,7 @@ import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { InlineBannerContent, ComponentProps, Layout, LayoutType, BreakpointsProps } from '../../../types';
+import { InlineBannerContent, ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -124,7 +124,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns || 4, gapSize: props.gapSize || '20px' }), style];
 	} else if (style) {

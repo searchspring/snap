@@ -13,7 +13,7 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay } from '../../../types';
+import { ComponentProps, FacetDisplay, StylingCSS } from '../../../types';
 import { Facet as BaseFacet, ValueFacet, RangeFacet, HierarchyValue, Value } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps } from '../../../utilities';
@@ -240,7 +240,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.facet({ color, theme }), style];
 	} else if (style) {

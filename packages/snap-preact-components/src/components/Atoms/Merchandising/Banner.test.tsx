@@ -24,12 +24,12 @@ describe('Merchandising Banner Component', () => {
 			const rendered = render(<Banner content={searchResponse.merchandising.content} type={type} />);
 			const merchBannerElement = rendered.container.querySelector(`.ss__banner.ss__banner--${type}`);
 			expect(merchBannerElement).toBeInTheDocument();
-			expect(merchBannerElement!.innerHTML).toBe(searchResponse.merchandising.content[type].join(''));
+			expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising.content[type].join(''));
 		});
 	});
 
 	it('doesnt render if empty', () => {
-		// @ts-ignore
+		// @ts-ignore - testing empty banner
 		const rendered = render(<Banner content={[]} type={ContentType.LEFT} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__banner.ss__banner--left');
 		expect(merchBannerElement).not.toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('Merchandising Banner Component', () => {
 	it('can disable styling', () => {
 		const rendered = render(<Banner disableStyles={true} content={searchResponse.merchandising.content} type={ContentType.BANNER} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__banner');
-		expect(loadingbarElement!.classList.length).toBe(2);
+		expect(loadingbarElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
@@ -59,9 +59,9 @@ describe('Merchandising Banner Component', () => {
 				<Banner {...args} />
 			</ThemeProvider>
 		);
-		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement!);
-		expect(styles!.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
+		const bannerElement = rendered.container.querySelector('.ss__banner')!;
+		const styles = getComputedStyle(bannerElement);
+		expect(styles.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -70,9 +70,9 @@ describe('Merchandising Banner Component', () => {
 			type: ContentType.BANNER,
 		};
 		const rendered = render(<Banner {...args} theme={theme} />);
-		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement!);
-		expect(styles!.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
+		const bannerElement = rendered.container.querySelector('.ss__banner')!;
+		const styles = getComputedStyle(bannerElement);
+		expect(styles.backgroundColor).toBe(theme.components.banner.style.backgroundColor);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -94,8 +94,8 @@ describe('Merchandising Banner Component', () => {
 				<Banner {...args} theme={themeOverride} />
 			</ThemeProvider>
 		);
-		const bannerElement = rendered.container.querySelector('.ss__banner');
-		const styles = getComputedStyle(bannerElement!);
-		expect(styles!.backgroundColor).toBe(themeOverride.components.banner.style.backgroundColor);
+		const bannerElement = rendered.container.querySelector('.ss__banner')!;
+		const styles = getComputedStyle(bannerElement);
+		expect(styles.backgroundColor).toBe(themeOverride.components.banner.style.backgroundColor);
 	});
 });

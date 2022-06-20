@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { RangeFacet } from '@searchspring/snap-store-mobx';
 import { sprintf } from '../../../utilities';
 
@@ -229,7 +229,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize: tickSize,
 	});
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [
 			CSS.facetSlider({

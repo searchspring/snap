@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 
@@ -77,7 +77,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.filterSummary(), style];
 	} else if (style) {
