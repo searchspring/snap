@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
+import { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -13,23 +13,23 @@ import { DomTargeter } from '@searchspring/snap-toolbox';
 import { AbstractController } from './AbstractController';
 import type { ControllerConfig } from '../types';
 
-const globals = { siteId: 'ga9kq2' };
-
-let controllerConfigDefault: ControllerConfig = {
-	id: 'abstract',
-};
-
-class TestController extends AbstractController {
-	async search() {
-		return;
-	}
-}
-
-let searchConfig;
-const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
-const services = { urlManager };
-
 describe('Search Controller', () => {
+	const globals = { siteId: 'ga9kq2' };
+
+	let controllerConfigDefault: ControllerConfig = {
+		id: 'abstract',
+	};
+
+	class TestController extends AbstractController {
+		async search() {
+			return;
+		}
+	}
+
+	let searchConfig: ControllerConfig;
+	const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+	const services = { urlManager };
+
 	beforeEach(() => {
 		searchConfig = { ...controllerConfigDefault };
 		searchConfig.id = uuidv4().split('-').join('');
@@ -190,8 +190,8 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 		const initfn = jest.fn();
-		const paramPlugin = (controller, ...params) => {
-			controller.on('init', async ({ controller }, next) => {
+		const paramPlugin = (controller: AbstractController) => {
+			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -219,20 +219,20 @@ describe('Search Controller', () => {
 		});
 		const initfn = jest.fn();
 
-		const initMiddleware = async (eventData, next) => {
+		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({ controller }: { controller: AbstractController }, next: Next) => {
 			initfn();
 			await next();
 		};
 
-		const plugin = (controller) => {
-			controller.on('init', async ({ controller }, next) => {
+		const plugin = (controller: AbstractController) => {
+			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
 		};
 
-		const paramPlugin = (controller, ...params) => {
-			controller.on('init', async ({ controller }, next) => {
+		const paramPlugin = (controller: AbstractController, ...params: any[]) => {
+			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -270,8 +270,8 @@ describe('Search Controller', () => {
 		const initfn = jest.fn();
 		const spy = jest.spyOn(controller.log, 'warn');
 
-		const plugin = (controller) => {
-			controller.on('init', async ({ controller }, next) => {
+		const plugin = (controller: AbstractController) => {
+			controller.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
 				initfn();
 				await next();
 			});
@@ -296,10 +296,11 @@ describe('Search Controller', () => {
 		spy.mockClear();
 
 		// test if middleware is not an array (should be converted to an array internally)
-		const initMiddleware = async (eventData, next) => {
+		const initMiddleware: Middleware<{ controller: AbstractController }> = async ({ controller }: { controller: AbstractController }, next: Next) => {
 			initfn();
 			await next();
 		};
+
 		controller.use({
 			middleware: {
 				init: initMiddleware,

@@ -57,7 +57,7 @@ export type ControllerServices = {
 
 export type Attachments = {
 	middleware?: {
-		[eventName: string]: Middleware<unknown> | Middleware<unknown>[];
+		[eventName: string]: Middleware<any> | Middleware<any>[];
 	};
 	plugins?: PluginGrouping[];
 	[any: string]: unknown;
