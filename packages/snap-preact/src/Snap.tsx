@@ -262,14 +262,15 @@ export class Snap {
 			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
 		}
 
-		if (this.context.merchandising?.segments) {
-			if (this.config.client?.globals.merchandising) {
+		// segmented merchandising context -> client globals
+		if (this.config.client?.globals && this.context.merchandising?.segments) {
+			if (this.config.client.globals?.merchandising) {
 				this.config.client.globals.merchandising.segments = deepmerge(
 					this.config.client.globals.merchandising.segments,
 					this.context.merchandising.segments
 				);
 			} else {
-				this.config.client!.globals.merchandising = {
+				this.config.client.globals.merchandising = {
 					segments: this.context.merchandising.segments,
 				};
 			}
@@ -279,28 +280,38 @@ export class Snap {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
 
-			// devMode is set via queryParam, node env or cookie
-			let devMode =
-				(urlParams?.params?.query && 'dev' in urlParams.params.query) || process.env.NODE_ENV == AppMode.development || !!cookies.get(DEV_COOKIE);
+			/* app mode priority:
+				1. node env
+				2. config
+				3. override via query param / cookie
+			*/
 
-			// ability to disable via ?dev=false query param
-			if (urlParams?.params.query?.dev == 'false') {
-				devMode = false;
+			// node env
+			if (process.env.NODE_ENV && Object.values(AppMode).includes(process.env.NODE_ENV as AppMode)) {
+				this.mode = process.env.NODE_ENV as AppMode;
 			}
 
-			// use config mode over dev mode
+			// config
 			if (this.config.mode && Object.values(AppMode).includes(this.config.mode as AppMode)) {
 				this.mode = this.config.mode as AppMode;
-			} else if (devMode) {
-				this.mode = AppMode.development;
+			}
 
-				if (featureFlags.cookies) {
+			// query param / cookiev override
+			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
+				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
+					cookies.unset(DEV_COOKIE);
+					this.mode = AppMode.production;
+				} else {
 					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
+					this.mode = AppMode.development;
 				}
 			}
 
-			this.config.client!.config = this.config.client!.config || {};
-			this.config.client!.config.mode = this.config.client!.config.mode || this.mode;
+			// client mode uses client config over snap config
+			if (this.config.client) {
+				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.mode = this.config.client.config.mode || this.mode;
+			}
 			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
 			this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
