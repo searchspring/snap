@@ -6,10 +6,15 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import './swiper-css.css';
+import './swiper-pagination.css';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps } from '../../../types';
@@ -37,22 +42,8 @@ const CSS = {
 				'.swiper-container': {
 					flexDirection: 'row',
 				},
-
-				'.swiper-pagination': {
-					width: 'auto',
-					order: 0,
-					flexDirection: 'column',
-					margin: 0,
-					padding: '10px',
-				},
-
-				'.swiper-pagination-bullet': {
-					margin: '4px',
-				},
 			},
-			'.swiper-pagination-bullet-active': {
-				background: theme?.colors?.primary || 'inherit',
-			},
+
 			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
 				justifyContent: 'center',
@@ -61,6 +52,7 @@ const CSS = {
 					display: 'none',
 				},
 			},
+
 			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
 				cursor: 'pointer',
@@ -70,70 +62,6 @@ const CSS = {
 					opacity: '0.3',
 					cursor: 'default',
 				},
-			},
-			'.swiper-container': {
-				display: 'flex',
-				flexDirection: 'column',
-				marginLeft: 'auto',
-				marginRight: 'auto',
-				position: 'relative',
-				overflow: 'hidden',
-				listStyle: 'none',
-				padding: 0,
-				zIndex: 1,
-			},
-			'.swiper-container-vertical': {
-				'.swiper-wrapper': {
-					flexDirection: 'column',
-				},
-			},
-			'.swiper-wrapper': {
-				order: 0,
-				position: 'relative',
-				width: '100%',
-				height: '100%',
-				zIndex: 1,
-				display: 'flex',
-				transitionProperty: 'transform',
-				boxSizing: 'content-box',
-			},
-			'.swiper-slide': {
-				flexShrink: 0,
-				width: '100%',
-				height: '100%',
-				position: 'relative',
-				transitionProperty: 'transform',
-			},
-			'.swiper-pagination': {
-				display: 'flex',
-				justifyContent: 'center',
-				marginTop: '10px',
-				width: '100%',
-				order: 1,
-				transition: '.3s opacity',
-			},
-			'.swiper-pagination-bullet': {
-				width: '8px',
-				height: '8px',
-				display: 'inline-block',
-				borderRadius: '50%',
-				background: '#000',
-				opacity: '.2',
-				cursor: 'pointer',
-				margin: '0 4px',
-				'&.swiper-pagination-bullet-active': {
-					opacity: '0.8',
-					background: theme?.colors?.primary || '#000',
-				},
-			},
-			'.swiper-container-pointer-events': {
-				touchAction: 'pan-y',
-				'&.swiper-container-vertical': {
-					touchAction: 'pan-x',
-				},
-			},
-			'.swiper-slide-invisible-blank': {
-				visibility: 'hidden',
 			},
 		}),
 };
@@ -244,8 +172,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		},
 	};
 
-	SwiperCore.use([Pagination, Navigation]);
-
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
@@ -275,8 +201,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					</div>
 
 					<Swiper
-						centerInsufficientSlides={true}
-						onInit={(swiper) => {
+						modules={[Navigation, Pagination, Scrollbar, A11y]}
+						onBeforeInit={(swiper) => {
 							//@ts-ignore
 							swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
 							//@ts-ignore
@@ -285,6 +211,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 								onInit(swiper);
 							}
 						}}
+						centerInsufficientSlides={true}
 						onClick={(swiper, e) => {
 							onClick && onClick(swiper, e);
 						}}
