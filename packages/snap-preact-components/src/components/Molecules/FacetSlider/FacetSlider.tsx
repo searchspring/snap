@@ -9,20 +9,8 @@ import { useRanger } from 'react-ranger';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { RangeFacet } from '@searchspring/snap-store-mobx';
 import { sprintf } from '../../../utilities';
-
-type IFacetSliderStyles = {
-	railColor?: string;
-	trackColor?: string;
-	handleColor?: string;
-	valueTextColor?: string;
-	handleDraggingColor?: string;
-	showTicks?: boolean;
-	stickyHandleLabel?: boolean;
-	tickTextColor?: string;
-	theme: Theme;
-};
+import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	facetSlider: ({
@@ -35,7 +23,7 @@ const CSS = {
 		stickyHandleLabel,
 		tickTextColor,
 		theme,
-	}: IFacetSliderStyles) =>
+	}: Partial<FacetSliderProps>) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
@@ -71,18 +59,18 @@ const CSS = {
 				},
 			},
 			'& .ss__facet-slider__rail': {
-				background: railColor || theme.colors?.primary || '#333',
+				background: railColor || theme?.colors?.primary || '#333',
 				height: '100%',
 			},
 			'& .ss__facet-slider__segment': {
-				background: trackColor || theme.colors?.secondary || '#ccc',
+				background: trackColor || theme?.colors?.secondary || '#ccc',
 				height: '100%',
 			},
 			'& .ss__facet-slider__handles': {
 				textAlign: 'center',
 				'& button': {
 					'& .ss__facet-slider__handle': {
-						background: handleColor || theme.colors?.primary || '#333',
+						background: handleColor || theme?.colors?.primary || '#333',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
@@ -114,7 +102,7 @@ const CSS = {
 						},
 
 						'&.ss__facet-slider__handle--active': {
-							background: handleDraggingColor || handleColor || theme.colors?.primary || '#000',
+							background: handleDraggingColor || handleColor || theme?.colors?.primary || '#000',
 							'& label.ss__facet-slider__handle__label': {
 								background: '#fff',
 								padding: '0 5px',
@@ -198,16 +186,16 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize = Number(tickSize);
 	}
 
-	const [values, setValues] = useState([facet.active?.low || 0, facet.active?.high || 0]);
+	const [values, setValues] = useState([facet.active?.low, facet.active?.high]);
+	const [active, setActive] = useState([facet.active?.low, facet.active?.high]);
 
-	const [active, setActive] = useState([facet.active?.low || 0, facet.active?.high || 0]);
 	if ((facet.active?.low && facet.active?.high && values[0] != facet.active?.low) || values[1] != facet.active?.high) {
-		setActive([facet.active?.low!, facet.active?.high!]);
-		setValues([facet.active?.low!, facet.active?.high!]);
+		setActive([facet.active?.low, facet.active?.high]);
+		setValues([facet.active?.low, facet.active?.high]);
 	}
 
 	const { getTrackProps, ticks, segments, handles } = useRanger({
-		values: active,
+		values: active as number[],
 		onChange: (val: number[]) => {
 			setActive(val);
 			if (facet?.services?.urlManager) {
@@ -225,7 +213,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		},
 		min: facet.range?.low!,
 		max: facet.range?.high!,
-		stepSize: facet.step || 1,
+		stepSize: facet.step!,
 		tickSize: tickSize,
 	});
 
@@ -253,17 +241,17 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
 				<div className="ss__facet-slider__slider">
 					{showTicks &&
-						ticks.map(({ value, getTickProps }: { value: number; getTickProps: any }) => (
+						ticks.map(({ value, getTickProps }) => (
 							<div className="ss__facet-slider__tick" {...getTickProps()}>
 								<div className="ss__facet-slider__tick__label">{value}</div>
 							</div>
 						))}
 
-					{segments.map(({ getSegmentProps }: { getSegmentProps: any }, index: number) => (
-						<div className={`${index === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} index={index} />
+					{segments.map(({ getSegmentProps }, idx: number) => (
+						<div className={`${idx === 1 ? 'ss__facet-slider__rail' : 'ss__facet-slider__segment'}`} {...getSegmentProps()} />
 					))}
 					<div className={'ss__facet-slider__handles'}>
-						{handles.map(({ value, active, getHandleProps }: { value: number; active: boolean; getHandleProps: any }, idx: number) => (
+						{handles.map(({ value, active, getHandleProps }, idx: number) => (
 							<button
 								type="button"
 								{...getHandleProps({
@@ -282,8 +270,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 												'ss__facet-slider__handle__label',
 												'ss__facet-slider__handle__label--sticky',
 												`ss__facet-slider__handle__label--${idx}`,
-												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet.range!.low },
-												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet.range!.high }
+												{ 'ss__facet-slider__handle__label--pinleft': idx == 0 && value == facet?.range?.low },
+												{ 'ss__facet-slider__handle__label--pinright': idx == 1 && value == facet?.range?.high }
 											)}
 										>
 											{sprintf(facet.formatValue, value)}
@@ -296,7 +284,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 				</div>
 				{!stickyHandleLabel && (
 					<div className={'ss__facet-slider__labels'}>
-						{handles.map(({ value }: { value: number }, idx: number) => (
+						{handles.map(({ value }, idx: number) => (
 							<label className={classnames('ss__facet-slider__label', `ss__facet-slider__label--${idx}`)}>{sprintf(facet.formatValue, value)}</label>
 						))}
 					</div>

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -16,7 +16,7 @@ const CSS = {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			border: `1px solid ${theme.colors?.primary || '#ccc'}`,
+			border: `1px solid ${theme?.colors?.primary || '#ccc'}`,
 
 			'& .ss__icon': {
 				padding: '5px',
@@ -59,7 +59,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 

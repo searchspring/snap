@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -10,6 +10,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
 
 const CSS = {
 	filter: () =>
@@ -42,7 +44,11 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		...properties.theme?.components?.filter,
 	};
 
-	const { facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style } = props;
+	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style } = props;
+
+	const link = filter?.url?.link || url?.link;
+	const value = filter?.value.label || valueLabel;
+	const label = filter?.facet.label || facetLabel;
 
 	const subProps: FilterSubProps = {
 		button: {
@@ -80,28 +86,39 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
+	return value ? (
 		<CacheProvider>
-			<a {...styling} className={classnames('ss__filter', className)} onClick={(e) => onClick && onClick(e)} {...url?.link}>
+			<a
+				{...styling}
+				className={classnames('ss__filter', className)}
+				onClick={(e) => {
+					link?.onClick && link.onClick(e);
+					onClick && onClick(e);
+				}}
+				href={link?.href}
+			>
 				<Button {...subProps.button}>
 					<Icon {...subProps.icon} />
 					{!hideFacetLabel && (
 						<span className="ss__filter__label">
-							{facetLabel}
+							{label}
 							{separator && <span className="ss__filter__label__separator">{separator}</span>}
 						</span>
 					)}
-					<span className="ss__filter__value">{valueLabel}</span>
+					<span className="ss__filter__value">{value}</span>
 				</Button>
 			</a>
 		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
 export interface FilterProps extends ComponentProps {
+	filter?: FilterType;
 	facetLabel?: string;
-	valueLabel: string;
-	url?: any;
+	valueLabel?: string;
+	url?: UrlManager;
 	hideFacetLabel?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	icon?: string;

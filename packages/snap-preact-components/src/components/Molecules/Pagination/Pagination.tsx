@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { PaginationStore } from '@searchspring/snap-store-mobx';
+import type { PaginationStore } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	pagination: ({ theme }: { theme: Theme }) =>
@@ -24,7 +24,7 @@ const CSS = {
 					fontWeight: 'bold',
 				},
 				'&:hover:not(.ss__pagination__page--active)': {
-					backgroundColor: theme.colors?.hover || '#f8f8f8',
+					backgroundColor: theme?.colors?.hover || '#f8f8f8',
 				},
 			},
 		}),
@@ -75,7 +75,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -156,7 +156,6 @@ interface PaginationSubProps {
 	icon: IconProps;
 }
 
-// TODO: possibly lower num of props
 export interface PaginationProps extends ComponentProps {
 	pagination: PaginationStore;
 	pages?: number;

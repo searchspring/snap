@@ -5,8 +5,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import SwiperCore from 'swiper/core';
 
+import type SwiperCore from 'swiper/core';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
 
@@ -19,7 +19,7 @@ import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	recommendation: ({ vertical }: { vertical?: boolean }) =>
+	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
 		css({
 			height: vertical ? '100%' : undefined,
 			'.ss__result__image-wrapper': {
@@ -45,7 +45,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		...properties.theme?.components?.recommendation,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints || defaultCarouselBreakpoints);
+	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
 		props = {
@@ -83,7 +83,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		controller.log.error(
 			`<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'`
 		);
-		<Fragment></Fragment>;
+		return <Fragment></Fragment>;
 	}
 
 	const subProps: RecommendationSubProps = {
@@ -98,7 +98,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				vertical,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		result: {
 			// default props
@@ -110,7 +110,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -190,7 +190,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				>
 					{children
 						? children.map((child) => child)
-						: resultsToRender.map((result) => <Result controller={controller} {...subProps.result} result={result} />)}
+						: resultsToRender.map((result) => <Result {...subProps.result} controller={controller} result={result} />)}
 				</Carousel>
 			</div>
 		</CacheProvider>

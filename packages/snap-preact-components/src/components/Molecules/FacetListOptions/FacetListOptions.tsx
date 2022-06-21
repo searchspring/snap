@@ -9,10 +9,10 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
-import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
+import type { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	list: ({ theme, hideCheckbox }: { theme: Theme; hideCheckbox?: boolean }) =>
+	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
 		css({
 			'& .ss__facet-list-options__option': {
 				display: 'flex',
@@ -21,11 +21,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme.colors?.hover,
+					background: theme?.colors?.hover,
 				},
 				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme.colors?.primary,
+					color: theme?.colors?.primary,
 				},
 				'& .ss__facet-list-options__option__value': {
 					marginLeft: hideCheckbox ? '' : '8px',
@@ -64,7 +64,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -92,7 +92,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} />}
 						<span className="ss__facet-list-options__option__value">
 							{value.label}
-							{!hideCount && value.count && value.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
 						</span>
 					</a>
 				))}

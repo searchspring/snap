@@ -12,14 +12,14 @@ import { CSSProperties } from 'react';
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
 const CSS = {
-	image: ({ visibility }: { visibility: CSSProperties['visibility'] }) =>
+	image: ({ visibility }: { visibility: string }) =>
 		css({
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
 			height: 'auto',
 			'& img': {
-				visibility,
+				visibility: visibility as React.CSSProperties['visibility'],
 				flexShrink: '0',
 				objectFit: 'contain',
 				maxWidth: '100%',
@@ -44,7 +44,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, disableStyles, className, style } = props;
 
-	const [visibility, setVisibility] = useState<CSSProperties['visibility']>('hidden');
+	const [visibility, setVisibility] = useState('hidden');
 	const [isHovering, setHover] = useState(false);
 
 	const prevSrcRef = useRef('');

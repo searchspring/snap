@@ -1,14 +1,14 @@
 import { h } from 'preact';
-import { render } from '@testing-library/preact';
+import { render, RenderResult } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
 import { listFacetMock } from '../../../mocks/searchResponse';
-import { Value } from '@searchspring/snap-store-mobx';
+import type { Value } from '@searchspring/snap-store-mobx';
 
 describe('ListValue Component', () => {
-	let listValueComponent: any;
+	let listValueComponent: RenderResult;
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions values={listFacetMock.values as Value[]} />);
 	});
@@ -36,7 +36,7 @@ describe('ListValue Component', () => {
 });
 
 describe('ListValue Component hiding checkbox and count', () => {
-	let listValueComponent: any;
+	let listValueComponent: RenderResult;
 	beforeEach(() => {
 		listValueComponent = render(<FacetListOptions hideCheckbox={true} hideCount={true} values={listFacetMock.values as Value[]} />);
 	});
@@ -66,7 +66,7 @@ describe('FacetListOptions generic props work', () => {
 		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} disableStyles={true} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
-		expect(listOption!.classList.length).toBe(1);
+		expect(listOption?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -82,9 +82,9 @@ describe('FacetListOptions generic props work', () => {
 		const onClickFunc = jest.fn();
 		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} onClick={onClickFunc} />);
 
-		const listOption = rendered.container.querySelector('.ss__facet-list-options__option');
+		const listOption = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		expect(listOption).toBeInTheDocument();
-		userEvent.click(listOption!);
+		userEvent.click(listOption);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });

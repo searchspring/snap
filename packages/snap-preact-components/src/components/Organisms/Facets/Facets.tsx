@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
-import { Facet as BaseFacet, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import type { Facet as BaseFacet, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	facets: () => css({}),
@@ -74,10 +74,10 @@ interface FacetsSubProps {
 	facet: FacetProps;
 }
 
-export type individualFacetType = ValueFacet | RangeFacet | BaseFacet;
+export type IndividualFacetType = ValueFacet | RangeFacet | BaseFacet;
 
 export interface FacetsProps extends ComponentProps {
-	facets?: individualFacetType[];
+	facets?: IndividualFacetType[];
 	limit?: number;
 	controller?: SearchController | AutocompleteController;
 }

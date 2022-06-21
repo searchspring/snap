@@ -1,29 +1,29 @@
 import { h } from 'preact';
-import { render } from '@testing-library/preact';
+import { render, RenderResult } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
 import { hierarchyFacetMock, hierarchyFacetFilteredMock } from '../../../mocks/searchResponse';
-import { HierarchyValue } from '@searchspring/snap-store-mobx';
+import type { HierarchyValue } from '@searchspring/snap-store-mobx';
 
 describe('hierarchyValue Component', () => {
-	let hierarchyValueComponent: any;
+	let hierarchyValueComponent: RenderResult;
 	beforeEach(() => {
 		hierarchyValueComponent = render(<FacetHierarchyOptions values={hierarchyFacetFilteredMock.values as HierarchyValue[]} />);
 	});
 
 	it('renders', () => {
-		const hierarchyValueElement = hierarchyValueComponent!.container.querySelector('.ss__facet-hierarchy-options');
+		const hierarchyValueElement = hierarchyValueComponent.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyValueElement).toBeInTheDocument();
 	});
 
 	it('renders label and count', () => {
-		const hierarchyOption = hierarchyValueComponent!.container.querySelectorAll('.ss__facet-hierarchy-options__option');
+		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetFilteredMock.values.length);
 
-		hierarchyOption.forEach((option: any, index: any) => {
+		hierarchyOption.forEach((option: Element, index: number) => {
 			expect(option).toHaveTextContent(hierarchyFacetFilteredMock.values[index].label);
 
 			if (hierarchyFacetFilteredMock.values[index].history) {
@@ -38,23 +38,23 @@ describe('hierarchyValue Component', () => {
 });
 
 describe('hierarchyValue Component hiding count', () => {
-	let hierarchyValueComponent: any;
+	let hierarchyValueComponent: RenderResult;
 	beforeEach(() => {
 		hierarchyValueComponent = render(<FacetHierarchyOptions hideCount={true} values={hierarchyFacetMock.values as HierarchyValue[]} />);
 	});
 
 	it('renders', () => {
-		const hierarchyValueElement = hierarchyValueComponent!.container.querySelector('.ss__facet-hierarchy-options');
+		const hierarchyValueElement = hierarchyValueComponent.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyValueElement).toBeInTheDocument();
 	});
 
 	it('doesnt render checkboxs', () => {
-		const checkbox = hierarchyValueComponent!.container.querySelector('.ss__checkbox');
+		const checkbox = hierarchyValueComponent.container.querySelector('.ss__checkbox');
 		expect(checkbox).not.toBeInTheDocument();
 	});
 
 	it('renders label but not count', () => {
-		const hierarchyOption = hierarchyValueComponent!.container.querySelectorAll('.ss__facet-hierarchy-options__option');
+		const hierarchyOption = hierarchyValueComponent.container.querySelectorAll('.ss__facet-hierarchy-options__option');
 
 		expect(hierarchyOption).toHaveLength(hierarchyFacetMock.values.length);
 
@@ -68,7 +68,7 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values as HierarchyValue[]} disableStyles={true} />);
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
-		expect(hierarchyOption!.classList.length).toBe(1);
+		expect(hierarchyOption?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -84,9 +84,9 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const onClickFunc = jest.fn();
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values as HierarchyValue[]} onClick={onClickFunc} />);
 
-		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option');
+		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option')!;
 		expect(hierarchyOption).toBeInTheDocument();
-		userEvent.click(hierarchyOption!);
+		userEvent.click(hierarchyOption);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });

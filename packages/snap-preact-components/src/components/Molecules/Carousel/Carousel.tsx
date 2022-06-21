@@ -16,7 +16,7 @@ import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	carousel: ({ theme, vertical }: { theme: Theme; vertical?: boolean }) =>
+	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
 		css({
 			display: 'flex',
 			maxWidth: '100%',
@@ -80,7 +80,7 @@ const CSS = {
 				overflow: 'hidden',
 				listStyle: 'none',
 				padding: 0,
-				zIndex: 1,
+				zIndex: '1',
 			},
 			'.swiper-container-vertical': {
 				'.swiper-wrapper': {
@@ -92,7 +92,7 @@ const CSS = {
 				position: 'relative',
 				width: '100%',
 				height: '100%',
-				zIndex: 1,
+				zIndex: '1',
 				display: 'flex',
 				transitionProperty: 'transform',
 				boxSizing: 'content-box',
@@ -193,7 +193,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		...properties.theme?.components?.carousel,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints || defaultCarouselBreakpoints);
+	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
 
@@ -256,7 +256,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
-	return (
+	return children?.length ? (
 		<CacheProvider>
 			<div
 				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
@@ -315,6 +315,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				</div>
 			</div>
 		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

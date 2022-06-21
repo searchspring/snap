@@ -9,14 +9,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
-type IGridStyles = {
-	columns?: number;
-	gapSize?: string;
-	theme: Theme;
-};
-
 const CSS = {
-	grid: ({ columns = 4, gapSize, theme }: IGridStyles) =>
+	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -29,24 +23,24 @@ const CSS = {
 				justifyContent: 'center',
 				alignItems: 'center',
 				flex: '0 1 auto',
-				border: `1px solid ${theme.colors?.primary || '#333'}`,
+				border: `1px solid ${theme?.colors?.primary || '#333'}`,
 				textAlign: 'center',
 				wordBreak: 'break-all',
 				boxSizing: 'border-box',
 				padding: '1em 0',
-				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px)`,
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 				margin: `0 ${gapSize} ${gapSize} 0`,
 
 				[`:nth-of-type(${columns}n)`]: {
 					marginRight: '0',
 				},
 				'&.ss__facet-grid-options__option--filtered': {
-					background: theme.colors?.primary || '#ccc',
-					color: theme.colors?.text?.secondary,
+					background: theme?.colors?.primary || '#ccc',
+					color: theme?.colors?.text?.secondary,
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme.colors?.hover || '#f8f8f8',
+					background: theme?.colors?.hover || '#f8f8f8',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {

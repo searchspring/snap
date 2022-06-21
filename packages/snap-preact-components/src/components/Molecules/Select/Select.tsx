@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h, Fragment } from 'preact';
-import { useState } from 'preact/hooks';
+import { StateUpdater, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -13,14 +13,8 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
-type ISelectStyles = {
-	color?: string;
-	backgroundColor?: string;
-	borderColor?: string;
-	theme: Theme;
-};
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, theme }: ISelectStyles) =>
+	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
 		css({
 			display: 'inline-flex',
 			color: color,
@@ -40,7 +34,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme.colors?.primary || '#333'}`,
+				border: `1px solid ${borderColor || color || theme?.colors?.primary || '#333'}`,
 				'& .ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
@@ -49,7 +43,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme.colors?.hover || '#f8f8f8',
+						backgroundColor: theme?.colors?.hover || '#f8f8f8',
 					},
 				},
 			},
@@ -109,7 +103,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				disabled,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		button: {
 			// default props
@@ -125,7 +119,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				borderColor,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		icon: {
 			// default props
@@ -139,16 +133,16 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 				size: '14px',
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
 	// only single selection support for now
 	let selection: Option | undefined = selected;
-	let setSelection: any;
+	let setSelection: StateUpdater<Option | undefined>;
 
 	// open state
-	const [open, setOpen] = useState<boolean | undefined>(startOpen);
+	const [open, setOpen] = useState<boolean>(Boolean(startOpen));
 
 	// selection state
 	const stateful = selection === undefined;
@@ -169,7 +163,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	}
 
 	const makeSelection = (e: React.ChangeEvent<HTMLSelectElement>, option?: Option) => {
-		option = option && option.value ? option : undefined;
+		option = option?.value ? option : undefined;
 
 		if (option != selection) {
 			onSelect && onSelect(e, option);
@@ -193,7 +187,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	return options && (typeof options == 'object' || Array.isArray(options)) && options.length ? (
+	return Array.isArray(options) && options.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (

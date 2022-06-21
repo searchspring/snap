@@ -6,7 +6,7 @@ import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
-import { RangeFacet } from '@searchspring/snap-store-mobx';
+import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/FacetSlider`,

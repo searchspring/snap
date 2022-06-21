@@ -108,11 +108,11 @@ describe('FilterSummary Component', () => {
 		const FilterSumElement = rendered.container.querySelector('.ss__filter-summary');
 
 		expect(FilterSumElement).toBeInTheDocument();
-		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter');
+		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter')!;
 
 		expect(filter).toBeInTheDocument();
 
-		userEvent.click(filter!);
+		userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
 	});
@@ -124,11 +124,11 @@ describe('FilterSummary Component', () => {
 		const FilterSumElement = rendered.container.querySelector('.ss__filter-summary');
 
 		expect(FilterSumElement).toBeInTheDocument();
-		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter-summary__clear-all');
+		const filter = rendered.container.querySelector('.ss__filter-summary .ss__filter-summary__clear-all')!;
 
 		expect(filter).toBeInTheDocument();
 
-		userEvent.click(filter!);
+		userEvent.click(filter);
 
 		expect(onclickfunc).toHaveBeenCalled();
 	});
@@ -152,7 +152,7 @@ describe('FilterSummary Component', () => {
 		const rendered = render(<FilterSummary filters={filters} {...args} />);
 
 		const facetsElement = rendered.container.querySelector('.ss__filter-summary');
-		expect(facetsElement!.classList).toHaveLength(1);
+		expect(facetsElement?.classList).toHaveLength(1);
 	});
 });
 

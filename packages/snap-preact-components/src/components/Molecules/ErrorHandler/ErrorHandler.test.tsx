@@ -23,11 +23,11 @@ describe('Error Handler Component', () => {
 		const onClick = jest.fn();
 		const rendered = render(<ErrorHandler error={{ code: 429, ...error }} onRetryClick={onClick} />);
 		const errorElement = rendered.container.querySelector('.ss__error-handler');
-		const retryButton = errorElement!.querySelector('.ss__error-handler__button');
+		const retryButton = errorElement?.querySelector('.ss__error-handler__button')!;
 		expect(errorElement).toBeInTheDocument();
 		expect(retryButton).toBeInTheDocument();
 
-		userEvent.click(retryButton!);
+		userEvent.click(retryButton);
 		expect(onClick).toHaveBeenCalled();
 	});
 
@@ -35,7 +35,7 @@ describe('Error Handler Component', () => {
 		const rendered = render(<ErrorHandler error={error} disableStyles={true} />);
 
 		const ErrorElement = rendered.container.querySelector('.ss__error-handler');
-		expect(ErrorElement!.classList.length).toBe(2);
+		expect(ErrorElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {

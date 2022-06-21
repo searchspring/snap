@@ -7,7 +7,7 @@ import { Pagination, PaginationProps } from './Pagination';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Pagination/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Pagination`,

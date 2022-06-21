@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
@@ -17,7 +16,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	results: ({ columns, gapSize }: { columns: number; gapSize: string }) =>
+	results: ({ columns, gapSize }: ResultsProp) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -28,7 +27,7 @@ const CSS = {
 			'& .ss__result': {
 				boxSizing: 'border-box',
 				flex: '0 1 auto',
-				width: `calc(${100 / columns}% - (${columns - 1} * ${gapSize} / ${columns} ) )`,
+				width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
 				marginRight: gapSize,
 				marginBottom: gapSize,
 
@@ -82,7 +81,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		...properties.theme?.components?.results,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints || defaultBreakpointsProps);
+	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		props = {
 			...props,
@@ -103,7 +102,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		inlineBanner: {
 			// default props
@@ -115,18 +114,18 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
 	let results = props.results;
-	if (props?.columns && props?.rows && props?.columns > 0 && props?.rows > 0) {
+	if (props?.columns && props?.rows && props.columns > 0 && props.rows > 0) {
 		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns || 4, gapSize: props.gapSize || '20px' }), style];
+		styling.css = [CSS.results({ columns: layout == Layout.LIST ? 1 : props.columns, gapSize: props.gapSize }), style];
 	} else if (style) {
 		styling.css = [style];
 	}

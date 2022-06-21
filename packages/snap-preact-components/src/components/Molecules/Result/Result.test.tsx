@@ -33,7 +33,7 @@ describe('Result Component', () => {
 	it('renders title', () => {
 		const rendered = render(<Result result={searchResponse.results[0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
-		expect(title!.textContent).toBe(searchResponse.results[0].mappings.core.name);
+		expect(title?.textContent).toBe(searchResponse.results[0].mappings.core.name);
 	});
 
 	it('renders pricing', () => {
@@ -102,7 +102,7 @@ describe('Result Component', () => {
 		};
 		const rendered = render(<Result {...args} />);
 		const Element = rendered.container.querySelector('.ss__result__details__title a');
-		expect(Element!.innerHTML.length).toBeLessThanOrEqual(6);
+		expect(Element?.innerHTML.length).toBeLessThanOrEqual(6);
 		expect(Element).toHaveTextContent('...');
 	});
 
@@ -110,10 +110,10 @@ describe('Result Component', () => {
 		const onClickFunc = jest.fn();
 
 		const rendered = render(<Result result={mockResults[1]} onClick={onClickFunc} />);
-		const resultElement = rendered.container.querySelector('.ss__result a');
+		const resultElement = rendered.container.querySelector('.ss__result a')!;
 		expect(resultElement).toBeInTheDocument();
 
-		userEvent.click(resultElement!);
+		userEvent.click(resultElement);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 
@@ -131,7 +131,7 @@ describe('Result Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 
-		expect(resultElement!.classList).toHaveLength(2);
+		expect(resultElement?.classList).toHaveLength(2);
 	});
 });
 

@@ -58,10 +58,10 @@ const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry | u
 };
 
 const debounce = (func: () => void, timeout = 200) => {
-	let timer: any;
+	let timer: number;
 	return (...args: any) => {
 		clearTimeout(timer);
-		timer = setTimeout(() => {
+		timer = window.setTimeout(() => {
 			func.apply(this, args);
 		}, timeout);
 	};

@@ -11,24 +11,18 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
-
-type IPalleteStyles = {
-	columns?: number;
-	gapSize?: string;
-	theme: Theme;
-};
+import type { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	palette: ({ columns = 4, gapSize, theme }: IPalleteStyles) =>
+	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
-			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns - 1} * ${gapSize}))/ ${columns}))`,
+			gridTemplateColumns: `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`,
 			gap: gapSize,
 
 			'& .ss__facet-palette-options__option': {
-				width: `calc(100% / ${columns} - ${2 * Math.round((columns + 2) / 2)}px )`,
+				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 				marginRight: gapSize,
 				marginBottom: gapSize,
 				[`:nth-of-type(${columns}n)`]: {
@@ -53,7 +47,7 @@ const CSS = {
 				},
 				'&.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme.colors?.primary || '#333',
+						borderColor: theme?.colors?.primary || '#333',
 						padding: '0px',
 						borderWidth: '4px',
 					},
@@ -127,7 +121,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 				size: '40%',
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 

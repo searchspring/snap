@@ -19,7 +19,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement!.querySelectorAll('.ss__facet-list-options__option').length;
+			const count = facetElement?.querySelectorAll('.ss__facet-list-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -34,7 +34,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement!.querySelectorAll('.ss__facet-grid-options__option').length;
+			const count = facetElement?.querySelectorAll('.ss__facet-grid-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -49,7 +49,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet facet={args.facet} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const count = facetElement!.querySelectorAll('.ss__facet-palette-options__option').length;
+			const count = facetElement?.querySelectorAll('.ss__facet-palette-options__option').length;
 			expect(count).toEqual(args.facet['values'].length);
 		});
 	});
@@ -59,11 +59,11 @@ describe('Facet Component', () => {
 			const args = {
 				facet: searchResponse.facets.filter((facet) => facet.display === FacetDisplay.SLIDER).pop() as RangeFacet,
 			};
-			args.facet!.collapsed = false;
+			args.facet.collapsed = false;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss__facet__options');
+			const facetElement = rendered.container.querySelector('.ss__facet__options')!;
 			expect(facetElement).toBeInTheDocument();
-			const sliderElement = facetElement!.querySelector('.ss__facet-slider');
+			const sliderElement = facetElement.querySelector('.ss__facet-slider');
 			expect(sliderElement).toBeInTheDocument();
 		});
 	});
@@ -77,7 +77,7 @@ describe('Facet Component', () => {
 			const rendered = render(<Facet {...args} />);
 			const facetElement = rendered.container.querySelector('.ss__facet__options');
 			expect(facetElement).toBeInTheDocument();
-			const hierarchyElement = facetElement!.querySelector('.ss__facet-hierarchy-options');
+			const hierarchyElement = facetElement?.querySelector('.ss__facet-hierarchy-options');
 			expect(hierarchyElement).toBeInTheDocument();
 		});
 	});
@@ -91,9 +91,9 @@ describe('Facet Component', () => {
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss__facet__header');
+			const facetElement = rendered.container.querySelector('.ss__facet__header')!;
 			expect(facetElement).toBeInTheDocument();
-			const styles = getComputedStyle(facetElement!);
+			const styles = getComputedStyle(facetElement);
 			expect(styles.color).toBe(args.color);
 		});
 
@@ -106,11 +106,11 @@ describe('Facet Component', () => {
 			// @ts-ignore - readonly
 			args.facet.refinedValues = args.facet.values;
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less');
+			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
 			expect(facetElement).toBeInTheDocument();
 			expect(facetElement).toHaveTextContent(args.showMoreText);
 
-			userEvent.click(facetElement!);
+			userEvent.click(facetElement);
 
 			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
 		});
@@ -198,9 +198,9 @@ describe('Facet Component', () => {
 			};
 
 			const rendered = render(<Facet {...args} />);
-			const searchInputElement = rendered.container.querySelector('.ss__search-input input');
+			const searchInputElement = rendered.container.querySelector('.ss__search-input input')!;
 			expect(searchInputElement).toBeInTheDocument();
-			userEvent.type(searchInputElement!, 'su');
+			userEvent.type(searchInputElement, 'su');
 
 			await waitFor(() => expect(searchInputElement).toHaveValue('su'));
 			expect(searchInputElement).toHaveValue('su');
@@ -232,7 +232,7 @@ describe('Facet Component', () => {
 
 		const facetElement = rendered.container.querySelector('.ss__facet');
 
-		expect(facetElement!.classList).toHaveLength(3);
+		expect(facetElement?.classList).toHaveLength(3);
 	});
 
 	describe('Image theming works', () => {

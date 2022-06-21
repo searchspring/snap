@@ -7,9 +7,8 @@ import { FilterSummary, FilterSummaryProps } from './FilterSummary';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FilterSummary/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
-
-import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import type { SearchController } from '@searchspring/snap-controller';
+import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 
 export default {
 	title: `Organisms/FilterSummary`,

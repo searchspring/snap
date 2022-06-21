@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, StateUpdater } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -11,21 +11,15 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
-type ICheckboxStyles = {
-	size?: string;
-	color?: string;
-	theme: Theme;
-};
-
 const CSS = {
-	checkbox: ({ size, color, theme }: ICheckboxStyles) =>
+	checkbox: ({ size, color, theme }: CheckboxProps) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
 			height: size,
 			width: size,
-			border: `1px solid ${color || theme.colors?.primary || '#333'}`,
+			border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
@@ -64,7 +58,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: iconColor || color || theme.colors?.primary,
+				color: iconColor || color || theme?.colors?.primary,
 				disableStyles,
 				icon,
 				size: size && `calc(${size} - 30%)`,
@@ -74,7 +68,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		},
 	};
 
-	let checkedState: boolean | undefined, setCheckedState: any;
+	let checkedState: boolean | undefined, setCheckedState: undefined | StateUpdater<boolean | undefined>;
 
 	const stateful = checked === undefined;
 	if (stateful) {
@@ -86,9 +80,10 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	const clickFunc = (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => {
 		if (!disabled) {
 			if (stateful) {
-				setCheckedState((prev: boolean) => {
-					return !prev;
-				});
+				setCheckedState &&
+					setCheckedState((prev?: boolean) => {
+						return !prev;
+					});
 			}
 
 			onClick && onClick(e);
@@ -105,6 +100,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			{native ? (

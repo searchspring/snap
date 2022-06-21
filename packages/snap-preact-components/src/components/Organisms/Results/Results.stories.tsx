@@ -8,7 +8,7 @@ import { Snapify } from '../../../utilities/snapify';
 import { Layout } from '../../../types';
 
 import Readme from './readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Results`,

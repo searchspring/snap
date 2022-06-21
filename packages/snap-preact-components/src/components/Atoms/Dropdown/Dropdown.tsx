@@ -10,7 +10,6 @@ import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
-import React from 'react';
 
 const CSS = {
 	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>

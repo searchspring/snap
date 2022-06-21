@@ -62,6 +62,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	const subProps: FilterSummarySubProps = {
 		filter: {
 			// default props
+			clearAllLabel: '',
 			className: 'ss__filter-summary__filter',
 			// global theme
 			...globalTheme?.components?.filter,
@@ -90,13 +91,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				<div className="ss__filter-summary__title">{title}</div>
 
 				{filters.map((filter) => (
-					<Filter
-						{...subProps.filter}
-						url={filter?.url}
-						facetLabel={filter?.facet?.label}
-						valueLabel={filter?.value?.label || ''}
-						onClick={(e) => onClick && onClick(e, filter)}
-					/>
+					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
 				))}
 
 				{!hideClearAll && (
@@ -105,7 +100,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						icon={clearAllIcon}
 						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel
-						valueLabel={clearAllLabel || ''}
+						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
 					/>
 				)}

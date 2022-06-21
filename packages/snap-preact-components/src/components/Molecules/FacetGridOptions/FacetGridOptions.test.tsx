@@ -5,7 +5,7 @@ import { ThemeProvider } from '../../../providers';
 
 import { FacetGridOptions } from './FacetGridOptions';
 import { gridFacetMock } from '../../../mocks/searchResponse';
-import { Value } from '@searchspring/snap-store-mobx';
+import type { Value } from '@searchspring/snap-store-mobx';
 
 describe('FacetGridOptions Component', () => {
 	let gridComponent;
@@ -41,7 +41,7 @@ describe('FacetGridOptions Component', () => {
 
 		gridElement = gridComponent.container.querySelector('.ss__facet-grid-options');
 
-		expect(gridElement!.classList.length).toBe(2);
+		expect(gridElement?.classList.length).toBe(2);
 		expect(gridElement).toHaveClass('ss__facet-grid-options');
 	});
 
@@ -52,7 +52,7 @@ describe('FacetGridOptions Component', () => {
 		const inactiveGridOption = gridOptionsElement[0];
 		const activeGridOption = gridOptionsElement[2];
 		expect(inactiveGridOption).toHaveClass('ss__facet-grid-options__option__value');
-		expect(activeGridOption!.parentElement).toHaveClass('ss__facet-grid-options__option--filtered');
+		expect(activeGridOption.parentElement).toHaveClass('ss__facet-grid-options__option--filtered');
 	});
 
 	it('Grid option can adjust gapSize & columns', () => {
@@ -63,18 +63,18 @@ describe('FacetGridOptions Component', () => {
 
 		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__facet-grid-options');
+		const gridOptionsElement = rendered.container.querySelector('.ss__facet-grid-options')!;
 
-		const styles = getComputedStyle(gridOptionsElement!);
-		expect(styles!.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
-		expect(styles!.gap).toBe(args.gapSize);
+		const styles = getComputedStyle(gridOptionsElement);
+		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+		expect(styles.gap).toBe(args.gapSize);
 	});
 
 	it('can disable styling', () => {
 		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} disableStyles={true} />);
 
 		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		expect(gridElement!.classList.length).toBe(1);
+		expect(gridElement?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
@@ -101,9 +101,9 @@ describe('FacetGridOptions theming works', () => {
 				<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(globalTheme.components.facetGridOptions.gapSize);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(globalTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 
@@ -116,9 +116,9 @@ describe('FacetGridOptions theming works', () => {
 			},
 		};
 		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} theme={propTheme} />);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(propTheme.components.facetGridOptions.gapSize);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 
@@ -142,9 +142,9 @@ describe('FacetGridOptions theming works', () => {
 				<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} theme={propTheme} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(propTheme.components.facetGridOptions.gapSize);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 });
