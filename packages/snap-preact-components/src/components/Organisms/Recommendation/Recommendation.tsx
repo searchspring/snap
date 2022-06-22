@@ -154,7 +154,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
-			<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__recommendation', className)}>
+			<div ref={rootComponentRef} {...styling} className={classnames('ss__recommendation', className)}>
 				{title && <h3 className="ss__recommendation__title">{title}</h3>}
 				<Carousel
 					onInit={(swiper) => {

@@ -29,8 +29,9 @@ const getDisplaySettings = (breakpoints: BreakpointsProps): BreakpointsEntry | u
 
 	const currentScreenWidth = window.innerWidth;
 	const sortedList = Object.keys(breakpoints)
-		?.sort((a, b) => parseInt(a) - parseInt(b))
-		.map((vp) => ({ [vp]: breakpoints[vp as unknown as keyof typeof breakpoints] }));
+		.map((str) => +str)
+		.sort((a, b) => a - b)
+		.map((vp) => ({ [vp]: breakpoints[vp] }));
 	if (sortedList.length) {
 		//loop through and find the desired breakpoints setting
 		for (let i = 0; i < sortedList.length; i++) {

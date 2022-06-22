@@ -2,8 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Icon } from './Icon';
-import { IconProps, StylingCSS } from '../../../types';
+import { Icon, IconProps } from './Icon';
 import { iconPaths } from './paths';
 import { componentArgs, shiftColor } from '../../../utilities';
 import Readme from '../Icon/readme.md';

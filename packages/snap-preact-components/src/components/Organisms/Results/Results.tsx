@@ -6,11 +6,11 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
+import type { ResultStore, Product, Banner } from '@searchspring/snap-store-mobx';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { InlineBannerContent, ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
+import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -133,18 +133,11 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result: Product | InlineBannerContent) =>
+				{results.map((result) =>
 					(() => {
 						switch (result.type) {
 							case ContentType.BANNER:
-								return (
-									<InlineBanner
-										key={(result as InlineBannerContent).uid}
-										{...subProps.inlineBanner}
-										banner={result as InlineBannerContent}
-										layout={props.layout}
-									/>
-								);
+								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
 								return (
 									<Result

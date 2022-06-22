@@ -6,10 +6,11 @@ import userEvent from '@testing-library/user-event';
 import { searchResponse } from '../../../mocks/searchResponse';
 import { InlineBanner } from './InlineBanner';
 import { ThemeProvider } from '../../../providers';
+import type { Banner } from '@searchspring/snap-store-mobx';
 
 describe('Merchandising Inline Banner Component', () => {
 	it('renders type:inline banner', () => {
-		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} />);
+		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner as Banner} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising.content.inline[0].value);
@@ -18,7 +19,7 @@ describe('Merchandising Inline Banner Component', () => {
 	it('can set a custom onClick function', () => {
 		const onClickFunc = jest.fn();
 
-		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} onClick={onClickFunc} />);
+		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner} onClick={onClickFunc} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner')!;
 		expect(merchBannerElement).toBeInTheDocument();
 
@@ -27,14 +28,14 @@ describe('Merchandising Inline Banner Component', () => {
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<InlineBanner disableStyles={true} banner={searchResponse.merchandising.content.inline[0]} />);
+		const rendered = render(<InlineBanner disableStyles={true} banner={searchResponse.merchandising.content.inline[0] as Banner} />);
 		const loadingbarElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(loadingbarElement?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<InlineBanner className={className} banner={searchResponse.merchandising.content.inline[0]} />);
+		const rendered = render(<InlineBanner className={className} banner={searchResponse.merchandising.content.inline[0] as Banner} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement).toHaveClass(className);
@@ -53,7 +54,7 @@ describe('InlineBanner theming works', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<InlineBanner banner={searchResponse.merchandising.content.inline[0]} />
+				<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner} />
 			</ThemeProvider>
 		);
 
@@ -70,7 +71,7 @@ describe('InlineBanner theming works', () => {
 			},
 		};
 
-		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0]} theme={propTheme} />);
+		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner} theme={propTheme} />);
 
 		const InlineBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(InlineBannerElement).toHaveClass(propTheme.components.inlineBanner.className);
@@ -95,7 +96,7 @@ describe('InlineBanner theming works', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<InlineBanner banner={searchResponse.merchandising.content.inline[0]} theme={propTheme} />
+				<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner} theme={propTheme} />
 			</ThemeProvider>
 		);
 

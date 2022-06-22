@@ -4,17 +4,19 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { InlineBannerContent, ComponentProps, Layout, LayoutType, StylingCSS } from '../../../types';
+import { ComponentProps, Layout, LayoutType, StylingCSS } from '../../../types';
+
+import type { Banner } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	inlineBanner: ({ width }: InlineBannerProps) =>
+	inlineBanner: ({ width }: Partial<InlineBannerProps>) =>
 		css({
 			height: '100%',
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
 			alignItems: 'center',
-			width: width || 'auto',
+			width: width,
 			'&.ss__inline-banner--grid': {
 				flexDirection: 'column',
 			},
@@ -35,7 +37,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const props: InlineBannerProps = {
 		// default props
 		layout: Layout.GRID,
-		banner: {},
+		width: 'auto',
 		// global theme
 		...globalTheme?.components?.inlineBanner,
 		// props
@@ -71,7 +73,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 }
 
 export interface InlineBannerProps extends ComponentProps {
-	banner?: InlineBannerContent;
+	banner: Banner;
 	width?: string;
 	layout?: LayoutType;
 	onClick?: (e: React.MouseEvent) => void;

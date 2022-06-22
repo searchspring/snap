@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { h } from 'preact';
-import { useState, StateUpdater } from 'preact/hooks';
+import { h, RefObject } from 'preact';
+import { useState, StateUpdater, MutableRef, useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -74,9 +74,9 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		showContent = open;
 	}
 
-	let innerRef: React.RefObject<HTMLElement> | undefined;
+	let innerRef: MutableRef<HTMLElement | undefined> | undefined;
 	if (!disableClickOutside) {
-		innerRef = useClickOutside<HTMLElement>((e) => {
+		innerRef = useClickOutside((e) => {
 			if (showContent) {
 				if (!disabled) {
 					stateful && setShowContent && setShowContent(false);
