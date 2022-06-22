@@ -6,6 +6,7 @@ export type Target = {
 	};
 	emptyTarget?: boolean;
 	hideTarget?: boolean;
+	autoRetarget?: boolean;
 	[any: string]: unknown;
 };
 
@@ -17,6 +18,8 @@ export class DomTargeter {
 	private onTarget: OnTarget;
 	private document: Document;
 	private styleBlockRefs: Record<string, Node> = {};
+	private autoRetarget: boolean = false;
+	private timeoutTime: number = 100;
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
@@ -27,17 +30,61 @@ export class DomTargeter {
 
 		this.retarget();
 
-		if (/complete|loaded/.test(this.document.readyState)) {
-			// DOMContent has loaded - unhide targets
-			this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
-		} else {
-			// attempt retarget on DOMContentLoaded
-			this.document.addEventListener('DOMContentLoaded', () => {
-				this.retarget();
-				// unhide targets after re-target attempt in DOMContentLoaded
-				this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
+		//find out if we are auto retargeting
+		this.targets.forEach((target) => {
+			if (target.autoRetarget) {
+				this.autoRetarget = true;
+			}
+		});
+
+		if (this.autoRetarget) {
+			this.targets.forEach((target) => {
+				const checker = () => {
+					//lets not just keep trying forever
+					if (this.timeoutTime < 1000) {
+						//increase the time till next check
+						this.timeoutTime = this.timeoutTime + 200;
+						const elems = this.domQuery(target.selector);
+						//did we find any targets?
+						if (elems && elems.length) {
+							//has this target been targeted already?
+							const foundOne = elems.filter((elem) => {
+								if (!targetedElems.find((e) => e == elem)) {
+									return true;
+								}
+							});
+							//got anything worth doing the thing for?
+							if (foundOne) {
+								this.doTheThing();
+							} else {
+								//try again soon
+								setTimeout(checker, this.timeoutTime);
+							}
+						} else {
+							//try again soon
+							setTimeout(checker, this.timeoutTime);
+						}
+					}
+				};
+				checker();
 			});
+		} else {
+			if (/complete|loaded/.test(this.document.readyState)) {
+				// DOMContent has loaded - unhide targets
+				this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
+			} else {
+				// attempt retarget on DOMContentLoaded
+				this.document.addEventListener('DOMContentLoaded', () => {
+					this.doTheThing();
+				});
+			}
 		}
+	}
+
+	doTheThing(): void {
+		this.retarget();
+		// unhide targets after re-target attempt;
+		this.targets.forEach((target) => target.hideTarget && this.unhideTarget(target.selector));
 	}
 
 	getTargets(): Array<Target> {
