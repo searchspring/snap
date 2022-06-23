@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,7 +8,7 @@ import deepmerge from 'deepmerge';
 
 import type SwiperCore from 'swiper/core';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore, Product } from '@searchspring/snap-store-mobx';
+import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -79,7 +79,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const resultsToRender: Product[] = results || controller.store?.results;
 
-	if (children && children.length !== resultsToRender.length) {
+	if (Array.isArray(children) && children.length !== resultsToRender.length) {
 		controller.log.error(
 			`<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'`
 		);
@@ -188,8 +188,8 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					{...additionalProps}
 					{...displaySettings}
 				>
-					{children
-						? children.map((child) => child)
+					{Array.isArray(children) && children.length
+						? children.map((child: any) => child)
 						: resultsToRender.map((result) => <Result {...subProps.result} controller={controller} result={result} />)}
 				</Carousel>
 			</div>
@@ -206,10 +206,10 @@ export interface RecommendationProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
-	results?: ResultStore;
+	results?: SearchResultStore;
 	pagination?: boolean;
 	controller: RecommendationController;
-	children?: JSX.Element[];
+	children?: ComponentChildren;
 	vertical?: boolean;
 }
 

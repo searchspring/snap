@@ -6,10 +6,10 @@ import { FALLBACK_IMAGE_URL } from '../../Atoms/Image';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Layout } from '../../../types';
-import type { Product, ResultStore } from '@searchspring/snap-store-mobx';
+import type { Product, SearchResultStore } from '@searchspring/snap-store-mobx';
 
 // TODO: refactor to use mock store data
-const mockResults = searchResponse.results as unknown as ResultStore;
+const mockResults = searchResponse.results as unknown as SearchResultStore;
 
 describe('Result Component', () => {
 	it('renders', () => {

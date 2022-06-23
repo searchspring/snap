@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import type { PaginationStore } from '@searchspring/snap-store-mobx';
+import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	pagination: ({ theme }: { theme: Theme }) =>
@@ -157,7 +157,7 @@ interface PaginationSubProps {
 }
 
 export interface PaginationProps extends ComponentProps {
-	pagination: PaginationStore;
+	pagination: SearchPaginationStore;
 	pages?: number;
 	pagesLeft?: number;
 	pagesRight?: number;

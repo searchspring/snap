@@ -9,7 +9,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox/Checkbox';
-import type { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	list: ({ theme, hideCheckbox }: Partial<FacetListOptionsProps>) =>
@@ -104,7 +104,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 });
 
 export interface FacetListOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
 	onClick?: (e: React.MouseEvent) => void;

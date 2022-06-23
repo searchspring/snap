@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, RefObject } from 'preact';
+import { ComponentChildren, h, RefObject } from 'preact';
 import { useState, StateUpdater, MutableRef, useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -133,7 +133,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 export interface DropdownProps extends ComponentProps {
 	button: string | JSX.Element;
 	content?: string | JSX.Element;
-	children?: any;
+	children?: ComponentChildren;
 	disabled?: boolean;
 	open?: boolean;
 	disableOverlay?: boolean;

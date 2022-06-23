@@ -4,7 +4,7 @@ import { render, RenderResult } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 
 import { Pagination } from './Pagination';
-import { PaginationStore } from '@searchspring/snap-store-mobx';
+import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
 import { MockData } from '@searchspring/snap-shared';
@@ -21,7 +21,7 @@ describe('Pagination Component', () => {
 
 	const data = new MockData().search();
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	beforeEach(() => {
 		rendered = render(<Pagination pagination={paginationStore} />);
@@ -76,7 +76,7 @@ describe('Lets test the Pagination Component optional props', () => {
 
 	const data = new MockData().search('page10');
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	it('shows all the optional buttons', () => {
 		const rendered = render(<Pagination pagination={paginationStore} />);
@@ -183,7 +183,7 @@ describe('Pagination theming works', () => {
 
 	const data = new MockData().search();
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {

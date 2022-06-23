@@ -1,4 +1,4 @@
-export function shiftColor(base: string, change: string) {
+export function shiftColor(base: string, change: string): string {
 	const colorRegEx = /^\#?[A-Fa-f0-9]{6}$/;
 
 	if (!base || !change) {

@@ -3,7 +3,8 @@ import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
-export class QueryStore {
+
+export class SearchQueryStore {
 	public query?: Query;
 	public didYouMean?: Query;
 	public originalQuery?: Query;

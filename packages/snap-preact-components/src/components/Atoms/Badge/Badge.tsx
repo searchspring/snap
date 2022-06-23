@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { ComponentChildren, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -53,7 +53,7 @@ export const Badge = observer((properties: BadgeProps): JSX.Element => {
 
 export interface BadgeProps extends ComponentProps {
 	content?: any;
-	children?: any;
+	children?: ComponentChildren;
 	position?: {
 		top?: string | number;
 		right?: string | number;

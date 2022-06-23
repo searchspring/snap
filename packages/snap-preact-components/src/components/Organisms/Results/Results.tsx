@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore, Product, Banner } from '@searchspring/snap-store-mobx';
+import type { SearchResultStore, Product, Banner } from '@searchspring/snap-store-mobx';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -159,7 +159,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 });
 
 export interface ResultsProp extends ComponentProps {
-	results?: ResultStore;
+	results?: SearchResultStore;
 	columns?: number;
 	rows?: number;
 	gapSize?: string;

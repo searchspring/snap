@@ -5,9 +5,9 @@ import { searchResponse } from '../../../mocks/searchResponse';
 import { Layout } from '../../../types';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
-import type { ResultStore } from '@searchspring/snap-store-mobx';
+import type { SearchResultStore } from '@searchspring/snap-store-mobx';
 
-const mockResults = searchResponse.results as unknown as ResultStore;
+const mockResults = searchResponse.results as unknown as SearchResultStore;
 
 describe('Results Component', () => {
 	const theme = {

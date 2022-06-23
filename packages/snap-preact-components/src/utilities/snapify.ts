@@ -20,15 +20,19 @@ type CreateConfig = {
 	controller: SearchControllerConfig | AutocompleteControllerConfig | RecommendationControllerConfig;
 };
 
-const controllers: any = {};
+const controllers: {
+	[id: string]: SearchController | AutocompleteController | RecommendationController;
+} = {};
+
 const client = {
 	globals: { siteId: '8uyt2m' },
 };
+
 export class Snapify {
 	static recommendation(config: RecommendationControllerConfig): RecommendationController {
 		const id = config.id;
 		if (controllers[id]) {
-			return controllers[id];
+			return controllers[id] as RecommendationController;
 		}
 
 		const cntrlr: RecommendationController = (controllers[id] = createRecommendationController({ client, controller: config }));
@@ -46,7 +50,7 @@ export class Snapify {
 	static autocomplete(config: AutocompleteControllerConfig): AutocompleteController {
 		const id = config.id;
 		if (controllers[id]) {
-			return controllers[id];
+			return controllers[id] as AutocompleteController;
 		}
 
 		const cntrlr: AutocompleteController = (controllers[id] = createAutocompleteController({ client, controller: config }));
@@ -65,7 +69,7 @@ export class Snapify {
 	static search(config: SearchControllerConfig): SearchController {
 		const id = config.id;
 		if (controllers[id]) {
-			return controllers[id];
+			return controllers[id] as SearchController;
 		}
 
 		const cntrlr: SearchController = (controllers[id] = createSearchController({ client, controller: config }));

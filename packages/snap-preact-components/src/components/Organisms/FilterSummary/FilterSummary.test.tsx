@@ -6,7 +6,7 @@ import { FilterSummary } from './FilterSummary';
 import userEvent from '@testing-library/user-event';
 
 import { MockData } from '@searchspring/snap-shared';
-import { FilterStore } from '@searchspring/snap-store-mobx';
+import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
 describe('FilterSummary Component', () => {
@@ -14,7 +14,7 @@ describe('FilterSummary Component', () => {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
 	const mockData = new MockData().searchMeta('filtered');
-	const filters = new FilterStore(services, mockData.filters!, mockData.meta);
+	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
 
 	it('renders with filter list', () => {
 		const rendered = render(<FilterSummary filters={filters} />);
@@ -161,7 +161,7 @@ describe('FilterSummary theming works', () => {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
 	const mockData = new MockData().searchMeta('filtered');
-	const filters = new FilterStore(services, mockData.filters!, mockData.meta);
+	const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {

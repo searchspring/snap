@@ -13,7 +13,7 @@ export enum ContentType {
 
 export type BannerContent = Partial<Record<ContentType, Content>>;
 
-export class MerchandisingStore {
+export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
 

@@ -11,7 +11,7 @@ import { defined } from '../../../utilities';
 import { ComponentProps, StylingCSS } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import type { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	palette: ({ columns, gapSize, theme }: Partial<FacetPaletteOptionsProps>) =>
@@ -169,7 +169,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 });
 
 export interface FacetPaletteOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	hideLabel?: boolean;
 	columns?: number;
 	gapSize?: string;

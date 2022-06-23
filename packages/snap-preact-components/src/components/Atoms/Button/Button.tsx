@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -68,22 +68,22 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 	};
 
-	return (
-		(content || children) && (
-			<CacheProvider>
-				{native ? (
-					<button {...elementProps}>
-						{content}
-						{children}
-					</button>
-				) : (
-					<div {...elementProps}>
-						{content}
-						{children}
-					</div>
-				)}
-			</CacheProvider>
-		)
+	return content || children ? (
+		<CacheProvider>
+			{native ? (
+				<button {...elementProps}>
+					{content}
+					{children}
+				</button>
+			) : (
+				<div {...elementProps}>
+					{content}
+					{children}
+				</div>
+			)}
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -92,7 +92,7 @@ export interface ButtonProps extends ComponentProps {
 	borderColor?: string;
 	color?: string;
 	content?: string | JSX.Element;
-	children?: any;
+	children?: ComponentChildren;
 	disabled?: boolean;
 	native?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;

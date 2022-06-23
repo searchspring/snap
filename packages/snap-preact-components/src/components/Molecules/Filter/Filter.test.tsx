@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { Filter } from './Filter';
 import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
-import { FilterStore } from '@searchspring/snap-store-mobx';
+import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 
 describe('Filter Component', () => {
 	const args = {
@@ -44,7 +44,7 @@ describe('Filter Component', () => {
 	});
 
 	it('renders with Filter prop data', () => {
-		const filters = new FilterStore(services, mockData.filters!, mockData.meta);
+		const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
 		const filter = filters[0];
 		const rendered = render(<Filter filter={filter} />);
 

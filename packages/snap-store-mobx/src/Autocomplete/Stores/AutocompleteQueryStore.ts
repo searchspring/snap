@@ -3,7 +3,7 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { SearchResponseModelSearch, AutocompleteResponseModelAllOfAutocomplete } from '@searchspring/snapi-types';
 import type { StoreServices } from '../../types';
 
-export class QueryStore {
+export class AutocompleteQueryStore {
 	public query?: Query;
 	public originalQuery?: Query;
 

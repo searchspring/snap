@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -108,7 +108,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 }
 
 export interface SlideoutProps extends ComponentProps {
-	children?: JSX.Element;
+	children?: ComponentChildren;
 	active: boolean;
 	buttonContent?: string | JSX.Element;
 	width?: string;

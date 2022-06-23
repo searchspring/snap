@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StylingCSS } from '../../../types';
-import { Value as ValueFacetValue } from '@searchspring/snap-store-mobx';
+import { FacetValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	grid: ({ columns, gapSize, theme }: Partial<FacetGridOptionsProps>) =>
@@ -127,7 +127,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 });
 
 export interface FacetGridOptionsProps extends ComponentProps {
-	values: ValueFacetValue[];
+	values: FacetValue[];
 	columns?: number;
 	gapSize?: string;
 	onClick?: (e: React.MouseEvent) => void;

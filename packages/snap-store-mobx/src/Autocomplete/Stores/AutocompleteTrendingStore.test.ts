@@ -1,8 +1,8 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { TrendingStore } from './TrendingStore';
-import { StateStore } from './StateStore';
+import { AutocompleteTrendingStore } from './AutocompleteTrendingStore';
+import { AutocompleteStateStore } from './AutocompleteStateStore';
 
 const mockResetTerms = jest.fn();
 
@@ -10,24 +10,24 @@ const services = {
 	urlManager: new UrlManager(new UrlTranslator()).detach(),
 };
 
-const rootState = new StateStore(services);
+const rootState = new AutocompleteStateStore(services);
 const mockData = new MockData();
 
 describe('Trending Store', () => {
 	it('has a symbol species of Array', () => {
-		expect(TrendingStore[Symbol.species]).toBe(Array);
+		expect(AutocompleteTrendingStore[Symbol.species]).toBe(Array);
 	});
 
 	it('is empty when it is passed undefined', () => {
 		// @ts-ignore
-		const termStore = new TrendingStore(services, undefined, mockResetTerms, rootState);
+		const termStore = new AutocompleteTrendingStore(services, undefined, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
 	});
 
 	it('is empty when it is passed no data', () => {
 		// @ts-ignore
-		const termStore = new TrendingStore(services, {}, mockResetTerms, rootState);
+		const termStore = new AutocompleteTrendingStore(services, {}, mockResetTerms, rootState);
 
 		expect(termStore).toEqual([]);
 	});
@@ -36,7 +36,7 @@ describe('Trending Store', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
 		expect(trendingStore).toHaveLength(trendingData.trending.queries.length);
 
 		trendingStore.forEach((term, index) => {
@@ -56,7 +56,7 @@ describe('Trending Store', () => {
 
 		const trendingData = searchData;
 		// @ts-ignore
-		const trendingStore = new TrendingStore(undefined, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore(undefined, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -70,7 +70,7 @@ describe('Trending Store', () => {
 
 		const trendingData = searchData;
 		// @ts-ignore
-		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		trendingStore.forEach((term) => {
 			expect(term.url).toBeUndefined();
@@ -81,7 +81,7 @@ describe('Trending Store', () => {
 		const searchData = mockData.trending();
 
 		const trendingData = searchData;
-		const trendingStore = new TrendingStore(services, trendingData, mockResetTerms, rootState);
+		const trendingStore = new AutocompleteTrendingStore(services, trendingData, mockResetTerms, rootState);
 
 		expect(rootState.locks.terms.locked).toBe(false);
 

@@ -1,10 +1,10 @@
-import { FacetStore as SearchFacetStore, Value } from '../../Search/Stores';
+import { SearchFacetStore, FacetValue } from '../../Search/Stores';
 import type { StorageStore } from '../../Storage/StorageStore';
-import type { StateStore } from './StateStore';
+import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices } from '../../types';
 import type { SearchResponseModelFacet, SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
 
-export class FacetStore extends Array {
+export class AutocompleteFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
@@ -16,7 +16,7 @@ export class FacetStore extends Array {
 		facetsData: SearchResponseModelFacet[],
 		paginationData: SearchResponseModelPagination,
 		meta: MetaResponseModel,
-		rootState: StateStore
+		rootState: AutocompleteStateStore
 	) {
 		// allow for only a singular facet option selection at a time
 		const alteredServices = { ...services, urlManager: services.urlManager.remove('filter') };
@@ -24,11 +24,11 @@ export class FacetStore extends Array {
 
 		// mutate facet values to add 'preview' function
 		facets.forEach((facet) => {
-			facet.values?.forEach((value: Value) => {
+			facet.values?.forEach((value: FacetValue) => {
 				value.preview = () => {
 					facets.map((facet) => {
 						facet.filtered = false;
-						facet.values?.map((value: Value) => {
+						facet.values?.map((value: FacetValue) => {
 							value.filtered = false;
 						});
 					});
