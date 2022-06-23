@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { Tracker } from './Tracker';
-import { BeaconCategory, BeaconType, CartViewEvent, OrderTransactionData } from './types';
+import { BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
 
 const globals = {
 	siteId: 'xxxzzz',
@@ -296,6 +296,7 @@ describe('Tracker', () => {
 		expect(tracker.context.website.trackingCode).toStrictEqual(globals.siteId);
 		expect(tracker.track).toBeDefined();
 		expect(tracker.track.event).toBeDefined();
+		expect(tracker.track.error).toBeDefined();
 		expect(tracker.track.shopper.login).toBeDefined();
 		expect(tracker.track.product.view).toBeDefined();
 		expect(tracker.track.product.click).toBeDefined();
@@ -312,7 +313,8 @@ describe('Tracker', () => {
 
 	it('can pass config and use custom namespace', async () => {
 		const config = {
-			id: 'trackerrrr',
+			id: 'customTracker',
+			framework: 'test',
 		};
 
 		const tracker = new Tracker(globals);
@@ -320,10 +322,22 @@ describe('Tracker', () => {
 		// @ts-ignore - private property
 		expect(tracker.localStorage.key).toStrictEqual(`ss-track-${globals.siteId}-local`);
 
+		// @ts-ignore - private property
+		expect(tracker.config.id).toStrictEqual('track');
+
+		// @ts-ignore - private property
+		expect(tracker.config.framework).toStrictEqual('snap');
+
 		const tracker2 = new Tracker(globals, config);
 
 		// @ts-ignore - private property
 		expect(tracker2.localStorage.key).toStrictEqual(`ss-${config.id}-${globals.siteId}-local`);
+
+		// @ts-ignore - private property
+		expect(tracker2.config.id).toBe(config.id);
+
+		// @ts-ignore - private property
+		expect(tracker2.config.framework).toBe(config.framework);
 	});
 
 	it('can persist userId in storage if cookies are disabled', async () => {
@@ -1091,6 +1105,33 @@ describe('Tracker', () => {
 		expect(beaconEvent?.type).toStrictEqual(BeaconType.CUSTOM);
 		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CUSTOM);
 		expect(beaconEvent?.event).toStrictEqual(payload.event);
+
+		expect(eventFn).toHaveBeenCalledTimes(1);
+		expect(eventFn).toHaveBeenCalledWith(payload);
+
+		eventFn.mockRestore();
+	});
+
+	it('can invoke track.error method', async () => {
+		const tracker = new Tracker(globals);
+
+		const eventFn = jest.spyOn(tracker.track, 'error');
+
+		const payload: TrackErrorEvent = {
+			userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0',
+			href: 'https://localhost/',
+			filename: 'https://snapui.searchspring.io/test.js',
+			stack: '',
+			message: 'something went wrong!',
+			colno: 1,
+			lineno: 1,
+			timeStamp: 1,
+		};
+		const beaconEvent = await tracker.track.error(payload);
+
+		expect(beaconEvent?.type).toStrictEqual(BeaconType.ERROR);
+		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.RUNTIME);
+		expect(beaconEvent?.event).toEqual(payload);
 
 		expect(eventFn).toHaveBeenCalledTimes(1);
 		expect(eventFn).toHaveBeenCalledWith(payload);
