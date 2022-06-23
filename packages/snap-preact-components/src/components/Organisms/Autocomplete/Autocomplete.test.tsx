@@ -128,7 +128,7 @@ describe('Autocomplete Component', () => {
 		input.value = 'dress';
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, INPUT_DELAY + 500));
+		await new Promise((r) => setTimeout(r, INPUT_DELAY + 10));
 
 		let rendered = render(<Autocomplete {...args} />, { container });
 
@@ -152,7 +152,7 @@ describe('Autocomplete Component', () => {
 		userEvent.hover(termLinks[1]);
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, 500));
+		await new Promise((r) => setTimeout(r, INPUT_DELAY * 2));
 
 		//now lets check for the new results
 		let newResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
@@ -181,7 +181,7 @@ describe('Autocomplete Component', () => {
 		userEvent.hover(facetOptions[0]);
 
 		// to deal with timeoutDelay setTimeout used in focus event
-		await new Promise((r) => setTimeout(r, 500));
+		await new Promise((r) => setTimeout(r, INPUT_DELAY * 2));
 
 		//check for the new results
 		let newNewResults = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
