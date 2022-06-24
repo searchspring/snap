@@ -1,4 +1,3 @@
-import { RefObject } from 'preact';
 import { useState, useEffect, MutableRef } from 'preact/hooks';
 
 export const useIntersection = (ref: MutableRef<HTMLElement | null>, rootMargin = '0px', fireOnce = false) => {
