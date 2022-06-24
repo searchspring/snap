@@ -1,25 +1,25 @@
 /** @jsx jsx */
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, StateUpdater } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
 const CSS = {
-	checkbox: ({ size, color, theme }) =>
+	checkbox: ({ size, color, theme }: CheckboxProps) =>
 		css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
 			height: size,
 			width: size,
-			border: `1px solid ${color || theme.colors?.primary || '#333'}`,
+			border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
@@ -58,7 +58,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: iconColor || color || theme.colors?.primary,
+				color: iconColor || color || theme?.colors?.primary,
 				disableStyles,
 				icon,
 				size: size && `calc(${size} - 30%)`,
@@ -68,28 +68,29 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		},
 	};
 
-	let checkedState, setCheckedState;
+	let checkedState: boolean | undefined, setCheckedState: undefined | StateUpdater<boolean | undefined>;
 
 	const stateful = checked === undefined;
 	if (stateful) {
-		[checkedState, setCheckedState] = useState(startChecked);
+		[checkedState, setCheckedState] = useState<boolean | undefined>(startChecked);
 	} else {
 		checkedState = checked;
 	}
 
-	const clickFunc = (e) => {
+	const clickFunc = (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => {
 		if (!disabled) {
 			if (stateful) {
-				setCheckedState((prev) => {
-					return !prev;
-				});
+				setCheckedState &&
+					setCheckedState((prev?: boolean) => {
+						return !prev;
+					});
 			}
 
 			onClick && onClick(e);
 		}
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		if (native) {
 			styling.css = [CSS.native(), style];
@@ -99,6 +100,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return (
 		<CacheProvider>
 			{native ? (
@@ -128,7 +130,7 @@ export interface CheckboxProps extends ComponentProps {
 	disabled?: boolean;
 	icon?: string;
 	iconColor?: string;
-	onClick?: (e: Event) => void;
+	onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLSpanElement, MouseEvent>) => void;
 	size?: string;
 	startChecked?: boolean;
 	native?: boolean;

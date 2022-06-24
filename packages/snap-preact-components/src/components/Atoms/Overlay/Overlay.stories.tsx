@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { Overlay } from './Overlay';
+import { Overlay, OverlayProps } from './Overlay';
 import { componentArgs } from '../../../utilities';
 import Readme from '../Overlay/readme.md';
 
@@ -68,9 +68,7 @@ export default {
 	},
 };
 
-const Template = (args) => <Overlay {...args} />;
-
-export const Default = Template.bind({});
+export const Default = (args: OverlayProps) => <Overlay {...args} />;
 Default.args = {
 	active: true,
 };

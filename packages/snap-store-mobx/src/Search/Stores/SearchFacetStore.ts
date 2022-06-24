@@ -19,7 +19,7 @@ import type {
 	SearchRequestModelFilterRangeAllOfValue,
 } from '@searchspring/snapi-types';
 
-export class FacetStore extends Array {
+export class SearchFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
@@ -79,7 +79,7 @@ export class FacetStore extends Array {
 	}
 }
 
-class Facet {
+export class Facet {
 	public services: StoreServices;
 	public type!: string;
 	public field!: string;
@@ -186,7 +186,7 @@ export class RangeFacet extends Facet {
 }
 
 export class ValueFacet extends Facet {
-	public values: Array<HierarchyValue | Value | RangeValue | undefined> = [];
+	public values: Array<FacetHierarchyValue | FacetValue | FacetRangeValue | undefined> = [];
 
 	public search = {
 		input: '',
@@ -262,14 +262,14 @@ export class ValueFacet extends Facet {
 						case 'value':
 							if (facetMeta.display === 'hierarchy') {
 								const filteredValues = facet?.values?.filter((value) => value.filtered) || [];
-								return new HierarchyValue(services, this, value, filteredValues);
+								return new FacetHierarchyValue(services, this, value, filteredValues);
 							} else {
 								// converting values to strings to ensure UrlManager state matches state created from URL
 								value.value = value?.value?.toString();
-								return new Value(services, this, value);
+								return new FacetValue(services, this, value);
 							}
 						case 'range-buckets':
-							return new RangeValue(services, this, value);
+							return new FacetRangeValue(services, this, value);
 					}
 				})) ||
 			[];
@@ -318,7 +318,7 @@ export class ValueFacet extends Facet {
 	}
 }
 
-export class Value {
+export class FacetValue {
 	public label!: string;
 	public count!: number;
 	public filtered!: boolean;
@@ -342,7 +342,7 @@ export class Value {
 	}
 }
 
-export class HierarchyValue extends Value {
+export class FacetHierarchyValue extends FacetValue {
 	public level = 0;
 	public history = false;
 
@@ -373,7 +373,7 @@ export class HierarchyValue extends Value {
 	}
 }
 
-export class RangeValue {
+export class FacetRangeValue {
 	public label!: string;
 	public count!: number;
 	public filtered!: boolean;

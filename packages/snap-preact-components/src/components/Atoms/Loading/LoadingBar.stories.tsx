@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { LoadingBar } from './LoadingBar';
+import { LoadingBar, LoadingBarProps } from './LoadingBar';
 import { componentArgs } from '../../../utilities';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
@@ -67,9 +67,7 @@ export default {
 	},
 };
 
-const Template = (args) => <LoadingBar {...args} />;
-
-export const Active = Template.bind({});
+export const Active = (args: LoadingBarProps) => <LoadingBar {...args} />;
 Active.args = {
 	active: true,
 };

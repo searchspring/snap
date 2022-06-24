@@ -119,17 +119,15 @@ export default {
 	},
 };
 
-const Template = (args: CheckboxProps) => <Checkbox {...args} />;
+export const Default = (args: CheckboxProps) => <Checkbox {...args} />;
 
-export const Default = Template.bind({});
-
-export const Disabled = Template.bind({});
+export const Disabled = (args: CheckboxProps) => <Checkbox {...args} />;
 Disabled.args = {
 	checked: true,
 	disabled: true,
 };
 
-export const Native = Template.bind({});
+export const Native = (args: CheckboxProps) => <Checkbox {...args} />;
 Native.args = {
 	native: true,
 };
