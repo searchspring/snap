@@ -10,7 +10,7 @@ import type { Banner } from '@searchspring/snap-store-mobx';
 
 describe('Merchandising Inline Banner Component', () => {
 	it('renders type:inline banner', () => {
-		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner as Banner} />);
+		const rendered = render(<InlineBanner banner={searchResponse.merchandising.content.inline[0] as Banner} />);
 		const merchBannerElement = rendered.container.querySelector('.ss__inline-banner');
 		expect(merchBannerElement).toBeInTheDocument();
 		expect(merchBannerElement?.innerHTML).toBe(searchResponse.merchandising.content.inline[0].value);
