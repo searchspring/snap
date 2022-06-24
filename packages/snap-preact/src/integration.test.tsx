@@ -6,9 +6,9 @@ import userEvent from '@testing-library/user-event';
 
 import { cookies } from '@searchspring/snap-toolbox';
 
-import { Snap, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
+import { Snap, SnapConfig, BRANCH_COOKIE, DEV_COOKIE } from './Snap';
 
-const baseConfig = {
+const baseConfig: SnapConfig = {
 	client: {
 		globals: {
 			siteId: 'xxxxxx',
@@ -59,6 +59,15 @@ describe('Snap Preact Integration', () => {
 	afterEach(cleanup);
 
 	afterAll(() => jest.clearAllMocks);
+
+	it(`has a default mode of 'production'`, () => {
+		const snap = new Snap(baseConfig);
+
+		// @ts-ignore - accessing private property
+		expect(snap.mode).toBe('production');
+		// @ts-ignore - accessing private property
+		expect(snap.client.mode).toBe('production');
+	});
 
 	it(`automatically grabs context from #searchspring-context using 'getContext'`, () => {
 		const snap = new Snap(baseConfig);
@@ -115,33 +124,18 @@ describe('Snap Preact Integration', () => {
 		expect(snap.client.globals.siteId).toBe(config.client.globals.siteId);
 	});
 
-	it.skip(`takes the branch param from the URL and adds a new script block`, async () => {
-		const url = 'https://snapui.searchspring.io/xxxxxx/branch/bundle.js';
-
-		const snap = new Snap(baseConfig);
-
-		// handle mock XHR of bundle file
-		expect(xhrMock.open).toBeCalledWith('HEAD', url, true);
-
-		// wait for rendering of new script block
-		await waitFor(() => {
-			const overrideElement = document.querySelector(`script[${BRANCH_COOKIE}]`);
-			expect(overrideElement).toBeInTheDocument();
-			expect(overrideElement).toHaveAttribute('src', url);
-
-			const branchCookie = cookies.get(BRANCH_COOKIE);
-			expect(branchCookie).toBe('branch');
-			cookies.unset(BRANCH_COOKIE);
-		});
-	});
-
 	it(`takes the dev param from the URL and sets the mode`, async () => {
 		// @ts-ignore
 		window.location = {
 			href: 'https://www.merch.com?dev',
 		};
 
-		const snap = new Snap(baseConfig);
+		const productionConfig: SnapConfig = {
+			...baseConfig,
+			mode: 'production',
+		};
+
+		const snap = new Snap(productionConfig);
 
 		// @ts-ignore - accessing private property
 		expect(snap.mode).toBe('development');
