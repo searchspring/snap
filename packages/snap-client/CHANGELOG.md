@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/searchspring/snap/compare/v0.27.8...v0.28.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* **client:** fixing deferred resolve ordering when using `options.order` ([d74df0a](https://github.com/searchspring/snap/commit/d74df0a09b51095887460bdf934cce33afa1a3d7))
+
+
+
+
+
 ## [0.27.8](https://github.com/searchspring/snap/compare/v0.27.7...v0.27.8) (2022-06-09)
 
 

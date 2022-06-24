@@ -22,7 +22,7 @@ For example, if the page contains the following single recommendation instance:
 
 The controller id would be `recommend_trending_0`.
 
-```
+
 
 ### client
 

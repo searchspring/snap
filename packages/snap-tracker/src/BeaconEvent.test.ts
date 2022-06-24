@@ -4,6 +4,10 @@ import { BeaconEvent } from './BeaconEvent';
 import { BeaconCategory, BeaconType } from './types';
 
 describe('BeaconEvent', () => {
+	const trackerConfig = {
+		id: 'customTracker',
+		framework: 'test',
+	};
 	it('can create login event', async () => {
 		const data = {
 			type: BeaconType.LOGIN,
@@ -20,7 +24,7 @@ describe('BeaconEvent', () => {
 			event: {},
 			pid: uuidv4(),
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
@@ -28,6 +32,7 @@ describe('BeaconEvent', () => {
 		expect(event.event).toStrictEqual(data.event);
 		expect(event.id).toBeDefined();
 		expect(event.pid).toStrictEqual(data.pid);
+		expect(event.meta?.initiator['lib.framework']).toStrictEqual(trackerConfig.framework);
 	});
 
 	it('can create product view event', async () => {
@@ -48,7 +53,7 @@ describe('BeaconEvent', () => {
 				childSku: 'product123_a',
 			},
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
@@ -84,7 +89,7 @@ describe('BeaconEvent', () => {
 				},
 			],
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
@@ -127,7 +132,7 @@ describe('BeaconEvent', () => {
 				],
 			},
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
@@ -154,7 +159,7 @@ describe('BeaconEvent', () => {
 				href: '/hello',
 			},
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
@@ -179,7 +184,7 @@ describe('BeaconEvent', () => {
 				hello: 'world',
 			},
 		};
-		const event = new BeaconEvent(data);
+		const event = new BeaconEvent(data, trackerConfig);
 
 		expect(event.type).toStrictEqual(data.type);
 		expect(event.category).toStrictEqual(data.category);
