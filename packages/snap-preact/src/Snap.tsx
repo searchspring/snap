@@ -21,6 +21,7 @@ import type {
 	ControllerConfigs,
 	ContextVariables,
 } from '@searchspring/snap-controller';
+import type { TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
@@ -238,7 +239,43 @@ export class Snap {
 		return this.controllers[config.id];
 	};
 
+	public handlers = {
+		error: (event: ErrorEvent): void => {
+			try {
+				const { filename } = event;
+				if (filename.includes('snapui.searchspring.io') && this.tracker.track.error) {
+					const {
+						colno,
+						lineno,
+						error: { stack },
+						message,
+						timeStamp,
+					} = event;
+					const userAgent = navigator.userAgent;
+					const href = window.location.href;
+
+					const beaconPayload: TrackErrorEvent = {
+						userAgent,
+						href,
+						filename,
+						stack,
+						message,
+						colno,
+						lineno,
+						timeStamp,
+					};
+					this.tracker.track.error(beaconPayload);
+				}
+			} catch (e) {
+				// prevent error metrics from breaking the app
+			}
+		},
+	};
+
 	constructor(config: SnapConfig, services?: SnapServices) {
+		window.removeEventListener('error', this.handlers.error);
+		window.addEventListener('error', this.handlers.error);
+
 		this.config = config;
 
 		let globalContext: ContextVariables = {};
@@ -313,7 +350,7 @@ export class Snap {
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
 			this.client = services?.client || new Client(this.config.client!.globals, this.config.client!.config);
-			this.tracker = services?.tracker || new Tracker(this.config.client!.globals);
+			this.tracker = services?.tracker || new Tracker(this.config.client!.globals, { framework: 'preact' });
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// log version

@@ -7,79 +7,80 @@ Renders a carousel of slides using children, built with [Swiper](https://swiperj
 
 ## Usage
 
-Additional [Swiper API parameters](https://swiperjs.com/swiper-api#parameters) can be specified as props, but may need to be camelCased where appropriate.
+Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+
 
 ```jsx
-<Carousel>{children}<Carousel/>
+<Carousel>{children}</Carousel>
 ```
 ### loop
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 
 ```jsx
-<Carousel loop>{children}<Carousel/>
+<Carousel loop>{children}</Carousel>
 ```
 
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 
 ```jsx
-<Carousel pagination>{children}<Carousel/>
+<Carousel pagination>{children}</Carousel>
 ```
 
 ### vertical 
 The `vertical` prop changes the carousel slide direction from horizontal, to vertical. 
 
 ```jsx
-<Carousel vertical>{children}<Carousel/>
+<Carousel vertical>{children}</Carousel>
 ```
 
 ### hideButtons
 The `hideButtons` prop specifies if the carousel should hide prev/next buttons.
 
 ```jsx
-<Carousel hideButtons>{children}<Carousel/>
+<Carousel hideButtons>{children}</Carousel>
 ```
 
 ### prevButton
 The `prevButton` prop specifies the previous button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Carousel prevButton={'<'}>{children}<Carousel/>
+<Carousel prevButton={'<'}>{children}</Carousel>
 ```
 
 ### nextButton
 The `nextButton` prop specifies the next button element of the carousel. This can be a string or JSX element. 
 
 ```jsx
-<Carousel nextButton={'>'}>{children}<Carousel/>
+<Carousel nextButton={'>'}>{children}</Carousel>
 ```
 
 ### onPrevButtonClick
 The `onPrevButtonClick` prop can be used to handle click events on the prevButton.
 
 ```jsx
-<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+<Carousel onPrevButtonClick={() => { /* do something */ }}>{children}</Carousel>
 ```
 
 ### onNextButtonClick
 The `onNextButtonClick` prop can be used to handle click events on the prevButton.
 
 ```jsx
-<Carousel onNextButtonClick={() => { /* do something */ }}>{children}<Carousel/>
+<Carousel onNextButtonClick={() => { /* do something */ }}>{children}</Carousel>
 ```
 
 ### onClick
 The `onClick` prop can be used to handle click events on the swiper component.
 
 ```jsx
-<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
+<Carousel onClick={(swiper, e) => { /* do something */ }}>{children}</Carousel>
 ```
 
 ### onInit
 The `onInit` prop can be used to tie into the initialization event for swiper.
 
 ```jsx
-<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}<Carousel/>
+<Carousel onInit={(swiper, e) => { /* do something */ }}>{children}</Carousel>
 ```
 
 ### autoAdjustSlides
@@ -137,5 +138,5 @@ const defaultVerticalCarouselBreakpoints = {
 ```
 
 ```jsx
-<Carousel breakpoints={defaultCarouselBreakpoints}>{children}<Carousel/>
+<Carousel breakpoints={defaultCarouselBreakpoints}>{children}</Carousel>
 ```
