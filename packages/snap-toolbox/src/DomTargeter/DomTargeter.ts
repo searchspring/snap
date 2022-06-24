@@ -39,24 +39,15 @@ export class DomTargeter {
 						const elems = this.domQuery(target.selector);
 						//did we find any targets?
 						if (elems && elems.length) {
-							//has this target been targeted already?
-							const foundOne = elems.filter((elem) => {
-								if (!targetedElems.find((e) => e == elem)) {
-									return true;
-								}
-							});
-
-							if (foundOne) {
-								this.retarget();
-								target.hideTarget && this.unhideTarget(target.selector);
-							} else {
-								//try again soon
-								setTimeout(checker, timeoutTime);
-							}
+							this.retarget();
+							target.hideTarget && this.unhideTarget(target.selector);
 						} else {
 							//try again soon
 							setTimeout(checker, timeoutTime);
 						}
+					} else {
+						//timed out, lets unhide the target
+						target.hideTarget && this.unhideTarget(target.selector);
 					}
 				};
 				checker();
@@ -66,7 +57,6 @@ export class DomTargeter {
 			} else {
 				// attempt retarget on DOMContentLoaded
 				this.document.addEventListener('DOMContentLoaded', () => {
-					// this.doTheThing();
 					this.retarget();
 					target.hideTarget && this.unhideTarget(target.selector);
 				});
