@@ -18,6 +18,7 @@ import {
 	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
+	TrackErrorEvent,
 	OrderTransactionData,
 	Product,
 	TrackerConfig,
@@ -39,6 +40,7 @@ const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
+	framework: 'snap',
 };
 
 export class Tracker {
@@ -205,10 +207,47 @@ export class Tracker {
 				pid: payload?.pid || undefined,
 			};
 
-			const beaconEvent = new BeaconEvent(event as BeaconPayload);
+			const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
 			this.sendEvents([beaconEvent]);
 
 			return beaconEvent;
+		},
+
+		error: (data: TrackErrorEvent, siteId?: string): BeaconEvent | undefined => {
+			if (!data?.stack && !data?.message) {
+				// no console log
+				return;
+			}
+			let context = this.context;
+			if (siteId) {
+				context = deepmerge(context, {
+					context: {
+						website: {
+							trackingCode: siteId,
+						},
+					},
+				});
+			}
+
+			const { userAgent, href, filename, stack, message, colno, lineno, timeStamp } = data;
+
+			const payload = {
+				type: BeaconType.ERROR,
+				category: BeaconCategory.RUNTIME,
+				context,
+				event: {
+					userAgent,
+					href,
+					filename,
+					stack,
+					message,
+					colno,
+					lineno,
+					timeStamp,
+				},
+			};
+
+			return this.track.event(payload);
 		},
 
 		shopper: {

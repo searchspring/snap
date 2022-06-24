@@ -6,6 +6,7 @@ import { Banner, BannerProps } from './Banner';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Merchandising/readme.md';
+import { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Atoms/Banner`,
@@ -50,9 +51,9 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'Banner', globals: { siteId: '8uyt2m', search: { query: { string: 'glasses' } } } });
 
-const Template = (args: BannerProps, { loaded: { controller } }) => <Banner {...args} content={controller?.store?.merchandising?.content} />;
-
-export const Header = Template.bind({});
+export const Header = (args: BannerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Banner {...args} content={controller?.store?.merchandising?.content} />
+);
 Header.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -65,7 +66,9 @@ Header.args = {
 	type: 'header',
 };
 
-export const Footer = Template.bind({});
+export const Footer = (args: BannerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Banner {...args} content={controller?.store?.merchandising?.content} />
+);
 Footer.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -78,7 +81,9 @@ Footer.args = {
 	type: 'footer',
 };
 
-export const Secondary = Template.bind({});
+export const Secondary = (args: BannerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Banner {...args} content={controller?.store?.merchandising?.content} />
+);
 Secondary.loaders = [
 	async () => {
 		await snapInstance.search();
@@ -91,7 +96,9 @@ Secondary.args = {
 	type: 'banner',
 };
 
-export const Left = Template.bind({});
+export const Left = (args: BannerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => (
+	<Banner {...args} content={controller?.store?.merchandising?.content} />
+);
 Left.loaders = [
 	async () => {
 		await snapInstance.search();

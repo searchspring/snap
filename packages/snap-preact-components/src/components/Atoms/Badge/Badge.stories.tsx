@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 import { componentArgs } from '../../../utilities';
-import { Badge } from './Badge';
+import { Badge, BadgeProps } from './Badge';
 import Readme from '../Badge/readme.md';
 
 export default {
@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div
 				style={{
 					width: '200px',
@@ -67,9 +67,8 @@ export default {
 	},
 };
 
-const Template = (args) => <Badge {...args} />;
+export const BadgeWithContent = (args: BadgeProps) => <Badge {...args} />;
 
-export const BadgeWithContent = Template.bind({});
 BadgeWithContent.args = {
 	content: 'pink',
 	position: {
@@ -78,7 +77,7 @@ BadgeWithContent.args = {
 	},
 };
 
-export const BadgeWithChildren = (args) => (
+export const BadgeWithChildren = (args: BadgeProps) => (
 	<Badge {...args}>
 		<img src="//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png" />
 	</Badge>

@@ -10,7 +10,7 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 } from '@searchspring/snapi-types';
 
-export class ResultStore extends Array<Product | Banner> {
+export class SearchResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}

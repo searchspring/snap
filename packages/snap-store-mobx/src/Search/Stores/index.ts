@@ -1,7 +1,7 @@
-export { MerchandisingStore } from './MerchandisingStore';
-export { FacetStore, Value } from './FacetStore';
-export { FilterStore } from './FilterStore';
-export { PaginationStore } from './PaginationStore';
-export { ResultStore } from './ResultStore';
-export { SortingStore } from './SortingStore';
-export { QueryStore } from './QueryStore';
+export { SearchMerchandisingStore, BannerContent, ContentType } from './SearchMerchandisingStore';
+export { SearchFacetStore, ValueFacet, RangeFacet, FacetValue, FacetHierarchyValue, FacetRangeValue } from './SearchFacetStore';
+export { SearchFilterStore, Filter } from './SearchFilterStore';
+export { SearchPaginationStore } from './SearchPaginationStore';
+export { SearchResultStore, Product, Banner } from './SearchResultStore';
+export { SearchSortingStore } from './SearchSortingStore';
+export { SearchQueryStore } from './SearchQueryStore';

@@ -1,28 +1,29 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
+import type { Swiper } from 'swiper';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import type { ResultStore } from '@searchspring/snap-store-mobx';
+import type { SearchResultStore, Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps } from '../../../types';
+import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useIntersection } from '../../../hooks';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
-	recommendation: ({ vertical }) =>
+	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
 		css({
-			height: vertical ? '100%' : null,
+			height: vertical ? '100%' : undefined,
 			'.ss__result__image-wrapper': {
-				height: vertical ? '85%' : null,
+				height: vertical ? '85%' : undefined,
 			},
 		}),
 };
@@ -44,7 +45,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		...properties.theme?.components?.recommendation,
 	};
 
-	const displaySettings = useDisplaySettings(props.breakpoints);
+	const displaySettings = useDisplaySettings(props.breakpoints!);
 	if (displaySettings && Object.keys(displaySettings).length) {
 		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {});
 		props = {
@@ -76,13 +77,13 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
-	const resultsToRender = results || controller.store?.results;
+	const resultsToRender: Product[] = results || controller.store?.results;
 
-	if (children && children.length !== resultsToRender.length) {
+	if (Array.isArray(children) && children.length !== resultsToRender.length) {
 		controller.log.error(
 			`<Recommendation> Component received invalid number of children. Must match length of 'results' prop or 'controller.store.results'`
 		);
-		return;
+		return <Fragment></Fragment>;
 	}
 
 	const subProps: RecommendationSubProps = {
@@ -97,7 +98,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				vertical,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		result: {
 			// default props
@@ -109,7 +110,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -118,7 +119,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const [initialIndexes, setInitialIndexes] = useState([0, 0]);
 	const inViewport = useIntersection(rootComponentRef, '0px', true);
 
-	const sendProductImpression = (index, count) => {
+	const sendProductImpression = (index: number, count: number) => {
 		if (!inViewport) return;
 
 		let resultLoopCount = [index, index + count];
@@ -144,57 +145,57 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	(children || resultsToRender.length) && (controller as RecommendationController)?.track?.render();
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.recommendation({ vertical }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		(children || resultsToRender?.length) && (
-			<CacheProvider>
-				<div ref={rootComponentRef as React.RefObject<HTMLDivElement>} {...styling} className={classnames('ss__recommendation', className)}>
-					{title && <h3 className="ss__recommendation__title">{title}</h3>}
-					<Carousel
-						onInit={(swiper) => {
-							//@ts-ignore
-							setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
-						}}
-						onBreakpoint={(swiper) => {
-							//@ts-ignore
-							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
-						}}
-						onSlideChange={(swiper) => {
-							//@ts-ignore
-							sendProductImpression(swiper.realIndex, swiper.loopedSlides);
-						}}
-						prevButton={prevButton}
-						nextButton={nextButton}
-						hideButtons={hideButtons}
-						onNextButtonClick={(e) => controller.track.click(e)}
-						onPrevButtonClick={(e) => controller.track.click(e)}
-						onClick={(swiper, e) => {
-							const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
-							controller.track.click(e);
-							if (!Number.isNaN(clickedIndex)) {
-								controller.track.product.click(e, resultsToRender[clickedIndex]);
-							}
-						}}
-						loop={loop}
-						pagination={pagination}
-						breakpoints={breakpoints}
-						{...subProps.carousel}
-						{...additionalProps}
-						{...displaySettings}
-					>
-						{children
-							? children.map((child) => child)
-							: resultsToRender.map((result) => <Result controller={controller} result={result} {...subProps.result} />)}
-					</Carousel>
-				</div>
-			</CacheProvider>
-		)
+	return children || resultsToRender?.length ? (
+		<CacheProvider>
+			<div ref={rootComponentRef} {...styling} className={classnames('ss__recommendation', className)}>
+				{title && <h3 className="ss__recommendation__title">{title}</h3>}
+				<Carousel
+					onInit={(swiper) => {
+						//@ts-ignore
+						setInitialIndexes([swiper.realIndex, swiper.loopedSlides]);
+					}}
+					onBreakpoint={(swiper: Swiper) => {
+						//@ts-ignore
+						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+					}}
+					onSlideChange={(swiper: Swiper) => {
+						//@ts-ignore
+						sendProductImpression(swiper.realIndex, swiper.loopedSlides);
+					}}
+					prevButton={prevButton}
+					nextButton={nextButton}
+					hideButtons={hideButtons}
+					onNextButtonClick={(e) => controller.track.click(e as unknown as MouseEvent)}
+					onPrevButtonClick={(e) => controller.track.click(e as unknown as MouseEvent)}
+					onClick={(swiper, e) => {
+						const clickedIndex = swiper.realIndex + (swiper.clickedIndex - swiper.activeIndex);
+						controller.track.click(e as unknown as MouseEvent);
+						if (!Number.isNaN(clickedIndex)) {
+							controller.track.product.click(e as unknown as MouseEvent, resultsToRender[clickedIndex]);
+						}
+					}}
+					loop={loop}
+					pagination={pagination}
+					breakpoints={breakpoints}
+					{...subProps.carousel}
+					{...additionalProps}
+					{...displaySettings}
+				>
+					{Array.isArray(children) && children.length
+						? children.map((child: any) => child)
+						: resultsToRender.map((result) => <Result {...subProps.result} controller={controller} result={result} />)}
+				</Carousel>
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 
@@ -205,10 +206,10 @@ export interface RecommendationProps extends ComponentProps {
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
 	loop?: boolean;
-	results?: ResultStore;
+	results?: SearchResultStore;
 	pagination?: boolean;
 	controller: RecommendationController;
-	children?: JSX.Element[];
+	children?: ComponentChildren;
 	vertical?: boolean;
 }
 

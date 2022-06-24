@@ -6,6 +6,7 @@ import { FacetSlider, FacetSliderProps } from './FacetSlider';
 import { componentArgs } from '../../../utilities';
 import { sliderFacetMock } from '../../../mocks/searchResponse';
 import Readme from '../FacetSlider/readme.md';
+import type { RangeFacet } from '@searchspring/snap-store-mobx';
 
 export default {
 	title: `Molecules/FacetSlider`,
@@ -21,7 +22,7 @@ export default {
 		},
 	},
 	decorators: [
-		(Story) => (
+		(Story: any) => (
 			<div style={{ maxWidth: '300px' }}>
 				<Story />
 			</div>
@@ -145,6 +146,4 @@ export default {
 	},
 };
 
-const Template = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock} />;
-
-export const Price = Template.bind({});
+export const Price = (args: FacetSliderProps) => <FacetSlider {...args} facet={sliderFacetMock as RangeFacet} />;

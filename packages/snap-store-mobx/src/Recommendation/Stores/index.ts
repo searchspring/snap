@@ -1,1 +1,1 @@
-export { ProfileStore } from './ProfileStore';
+export { RecommendationProfileStore } from './RecommendationProfileStore';

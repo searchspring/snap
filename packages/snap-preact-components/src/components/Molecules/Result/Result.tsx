@@ -11,7 +11,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, LayoutType, Layout } from '../../../types';
+import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -129,72 +129,72 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	const onSale = Boolean(core?.msrp && core?.msrp * 1 > core?.price * 1);
-	let displayName = core.name;
+	const onSale = Boolean(core?.msrp && core.price && core?.msrp * 1 > core?.price * 1);
+	let displayName = core?.name;
 	if (props.truncateTitle) {
-		displayName = filters.truncate(core.name, props.truncateTitle.limit, props.truncateTitle.append);
+		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.result(), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		core && (
-			<CacheProvider>
-				<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-					<div className="ss__result__image-wrapper">
-						<a
-							href={core.url}
-							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-								onClick && onClick(e);
-								controller?.track?.product?.click(e as any, result);
-							}}
-						>
-							{!hideBadge && onSale && <Badge {...subProps.badge} />}
-							{!hideImage && <Image {...subProps.image} />}
-						</a>
-					</div>
-					<div className="ss__result__details">
-						{!hideTitle && (
-							<div className="ss__result__details__title">
-								<a
-									href={core.url}
-									onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-										onClick && onClick(e);
-										controller?.track?.product?.click(e as any, result);
-									}}
-									dangerouslySetInnerHTML={{
-										__html: displayName,
-									}}
-								/>
-							</div>
-						)}
-						{!hidePricing && (
-							<div className="ss__result__details__pricing">
-								{core.price < core.msrp ? (
-									<>
-										<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-										&nbsp;
-										<Price {...subProps.price} value={core.price} />
-									</>
-								) : (
+	return core ? (
+		<CacheProvider>
+			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+				<div className="ss__result__image-wrapper">
+					<a
+						href={core.url}
+						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+							onClick && onClick(e);
+							controller?.track?.product?.click(e as any, result);
+						}}
+					>
+						{!hideBadge && onSale && <Badge {...subProps.badge} />}
+						{!hideImage && <Image {...subProps.image} />}
+					</a>
+				</div>
+				<div className="ss__result__details">
+					{!hideTitle && (
+						<div className="ss__result__details__title">
+							<a
+								href={core.url}
+								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+									onClick && onClick(e);
+									controller?.track?.product?.click(e as any, result);
+								}}
+								dangerouslySetInnerHTML={{
+									__html: displayName || '',
+								}}
+							/>
+						</div>
+					)}
+					{!hidePricing && (
+						<div className="ss__result__details__pricing">
+							{core.msrp && core.price && core.price < core.msrp ? (
+								<>
+									<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+									&nbsp;
 									<Price {...subProps.price} value={core.price} />
-								)}
-							</div>
-						)}
-						{cloneWithProps(detailSlot, { result })}
-					</div>
-				</article>
-			</CacheProvider>
-		)
+								</>
+							) : (
+								<Price {...subProps.price} value={core.price!} />
+							)}
+						</div>
+					)}
+					{cloneWithProps(detailSlot, { result })}
+				</div>
+			</article>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 

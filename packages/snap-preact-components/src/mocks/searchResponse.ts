@@ -13,6 +13,7 @@ export const gridFacetMock = {
 			label: '5',
 			type: 'value',
 			value: '5',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -20,6 +21,7 @@ export const gridFacetMock = {
 			label: '6',
 			type: 'value',
 			value: '6',
+			custom: '',
 		},
 		{
 			filtered: true,
@@ -27,6 +29,7 @@ export const gridFacetMock = {
 			label: '7',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -34,6 +37,7 @@ export const gridFacetMock = {
 			label: '8',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 		{
 			filtered: true,
@@ -41,6 +45,7 @@ export const gridFacetMock = {
 			label: '7.5',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -48,6 +53,7 @@ export const gridFacetMock = {
 			label: '8.5',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -55,6 +61,7 @@ export const gridFacetMock = {
 			label: 'L',
 			type: 'value',
 			value: '6',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -62,6 +69,7 @@ export const gridFacetMock = {
 			label: 'XL',
 			type: 'value',
 			value: '7',
+			custom: '',
 		},
 		{
 			filtered: false,
@@ -69,6 +77,7 @@ export const gridFacetMock = {
 			label: 'ONE SIZE',
 			type: 'value',
 			value: '8',
+			custom: '',
 		},
 	],
 };
@@ -626,6 +635,8 @@ export const searchResponse = {
 				product_type_unigram: 'dress',
 				id: 'd68bd8da07b9e98b3509412d3aa03feb',
 			},
+			type: '',
+			custom: '',
 		},
 		{
 			id: '174328',

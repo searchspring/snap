@@ -1,15 +1,16 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, HierarchyFacetValue } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
+import type { FacetHierarchyValue } from '@searchspring/snap-store-mobx';
 
 const CSS = {
-	hierarchy: ({ theme }) =>
+	hierarchy: ({ theme }: { theme: Theme }) =>
 		css({
 			'& .ss__facet-hierarchy-options__option': {
 				display: 'flex',
@@ -64,47 +65,47 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.hierarchy({ theme }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
 
-	return (
-		values?.length && (
-			<CacheProvider>
-				<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
-					{values.map((value) => (
-						<a
-							className={classnames(
-								'ss__facet-hierarchy-options__option',
-								{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
-								{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+	return values?.length ? (
+		<CacheProvider>
+			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
+				{values.map((value) => (
+					<a
+						className={classnames(
+							'ss__facet-hierarchy-options__option',
+							{ 'ss__facet-hierarchy-options__option--filtered': value.filtered },
+							{ 'ss__facet-hierarchy-options__option--return': value.history && !value.filtered }
+						)}
+						href={value.url?.link?.href}
+						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+							value.url?.link?.onClick(e);
+							onClick && onClick(e);
+						}}
+						onFocus={() => previewOnFocus && value.preview && value.preview()}
+						{...valueProps}
+					>
+						<span className="ss__facet-hierarchy-options__option__value">
+							{value.label}
+							{!hideCount && value?.count > 0 && !value.filtered && (
+								<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
 							)}
-							href={value.url?.link?.href}
-							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-								value.url?.link?.onClick(e);
-								onClick && onClick(e);
-							}}
-							onFocus={() => previewOnFocus && value.preview && value.preview()}
-							{...valueProps}
-						>
-							<span className="ss__facet-hierarchy-options__option__value">
-								{value.label}
-								{!hideCount && value.count > 0 && !value.filtered && (
-									<span className="ss__facet-hierarchy-options__option__value__count">({value.count})</span>
-								)}
-							</span>
-						</a>
-					))}
-				</div>
-			</CacheProvider>
-		)
+						</span>
+					</a>
+				))}
+			</div>
+		</CacheProvider>
+	) : (
+		<Fragment></Fragment>
 	);
 });
 export interface FacetHierarchyOptionsProps extends ComponentProps {
-	values: HierarchyFacetValue[];
+	values: FacetHierarchyValue[];
 	hideCount?: boolean;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
