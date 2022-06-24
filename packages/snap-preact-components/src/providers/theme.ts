@@ -26,7 +26,6 @@ export const defaultTheme: Theme = {
 	},
 	components: {},
 };
-
 export interface Theme {
 	colors?: {
 		primary: string;

@@ -23,6 +23,9 @@
 		"deepmerge": "4.2.2",
 		"seamless-immutable": "7.1.4"
 	},
+	"devDependencies": {
+		"@types/seamless-immutable": "7.1.16"
+	},
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"

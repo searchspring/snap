@@ -1,5 +1,5 @@
 import { RenderableProps } from 'preact';
-
+import { SerializedStyles } from '@emotion/react';
 import { Theme } from './providers/theme';
 
 export interface ComponentProps extends RenderableProps<any> {
@@ -9,17 +9,6 @@ export interface ComponentProps extends RenderableProps<any> {
 	theme?: Theme;
 }
 
-export type InlineBannerContent = {
-	value: string;
-	type?: string;
-	uid?: string;
-	config: {
-		position: {
-			index: number;
-		};
-	};
-};
-
 export enum Layout {
 	GRID = 'grid',
 	LIST = 'list',
@@ -27,23 +16,7 @@ export enum Layout {
 
 export type LayoutType = Layout.GRID | Layout.LIST;
 
-export interface IconProps {
-	className?: string;
-	color?: string;
-	icon?: string;
-	path?: string;
-	size?: string;
-	width?: string;
-	height?: string;
-	style?: Record<string, string>;
-	viewBox?: string;
-}
-
-export interface FacetIconSet {
-	activeIcon: IconProps;
-	nonActiveIcon: IconProps;
-}
-
+// TODO: move to store or use store or snapi types
 export enum FacetType {
 	VALUE = 'value',
 	RANGE = 'range',
@@ -66,3 +39,5 @@ export type BreakpointsProps = {
 export type BreakpointsEntry = {
 	[property: string]: any;
 };
+
+export type StylingCSS = Array<SerializedStyles | string | Record<string, string> | undefined>;

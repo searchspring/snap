@@ -11,7 +11,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, LayoutType, Layout } from '../../../types';
+import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -129,7 +129,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				fallback: fallback,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -139,7 +139,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.result(), style];
 	} else if (style) {

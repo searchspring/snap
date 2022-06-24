@@ -1,16 +1,16 @@
 import { h } from 'preact';
-import { render } from '@testing-library/preact';
+import { render, RenderResult } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
 import { listFacetMock } from '../../../mocks/searchResponse';
-import { Value } from '@searchspring/snap-store-mobx';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 describe('ListValue Component', () => {
-	let listValueComponent: any;
+	let listValueComponent: RenderResult;
 	beforeEach(() => {
-		listValueComponent = render(<FacetListOptions values={listFacetMock.values as Value[]} />);
+		listValueComponent = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} />);
 	});
 
 	it('renders', () => {
@@ -36,9 +36,9 @@ describe('ListValue Component', () => {
 });
 
 describe('ListValue Component hiding checkbox and count', () => {
-	let listValueComponent: any;
+	let listValueComponent: RenderResult;
 	beforeEach(() => {
-		listValueComponent = render(<FacetListOptions hideCheckbox={true} hideCount={true} values={listFacetMock.values as Value[]} />);
+		listValueComponent = render(<FacetListOptions hideCheckbox={true} hideCount={true} values={listFacetMock.values as FacetValue[]} />);
 	});
 
 	it('renders', () => {
@@ -63,15 +63,15 @@ describe('ListValue Component hiding checkbox and count', () => {
 
 describe('FacetListOptions generic props work', () => {
 	it('can disable styling', () => {
-		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} disableStyles={true} />);
+		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} disableStyles={true} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
-		expect(listOption!.classList.length).toBe(1);
+		expect(listOption?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} className={className} />);
+		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} className={className} />);
 
 		const listOption = rendered.container.querySelector('.ss__facet-list-options');
 		expect(listOption).toBeInTheDocument();
@@ -80,11 +80,11 @@ describe('FacetListOptions generic props work', () => {
 
 	it('can set custom onClick func', () => {
 		const onClickFunc = jest.fn();
-		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} onClick={onClickFunc} />);
+		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} onClick={onClickFunc} />);
 
-		const listOption = rendered.container.querySelector('.ss__facet-list-options__option');
+		const listOption = rendered.container.querySelector('.ss__facet-list-options__option')!;
 		expect(listOption).toBeInTheDocument();
-		userEvent.click(listOption!);
+		userEvent.click(listOption);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 });
@@ -100,7 +100,7 @@ describe('FacetListOptions theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<FacetListOptions values={listFacetMock.values as Value[]} />
+				<FacetListOptions values={listFacetMock.values as FacetValue[]} />
 			</ThemeProvider>
 		);
 		const Element = rendered.container.querySelector('.ss__facet-list-options');
@@ -118,7 +118,7 @@ describe('FacetListOptions theming works', () => {
 			},
 		};
 
-		const rendered = render(<FacetListOptions values={listFacetMock.values as Value[]} theme={propTheme} />);
+		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} theme={propTheme} />);
 
 		const Element = rendered.container.querySelector('.ss__facet-list-options');
 		const countElement = rendered.container.querySelector('.ss__facet-list-options__option__value__count');
@@ -143,7 +143,7 @@ describe('FacetListOptions theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<FacetListOptions values={listFacetMock.values as Value[]} theme={propTheme} />
+				<FacetListOptions values={listFacetMock.values as FacetValue[]} theme={propTheme} />
 			</ThemeProvider>
 		);
 

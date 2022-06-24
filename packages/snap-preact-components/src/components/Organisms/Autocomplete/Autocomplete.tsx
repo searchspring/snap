@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment, cloneElement } from 'preact';
+import { h, Fragment } from 'preact';
 import { useEffect } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
@@ -16,22 +16,9 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, FacetDisplay, BreakpointsProps } from '../../../types';
+import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import React from 'react';
 
-type IACStyles = {
-	inputViewportOffsetBottom?: number;
-	hideFacets?: boolean;
-	horizontalTerms?: boolean;
-	noResults?: boolean | string;
-	contentSlotExists: boolean;
-	viewportMaxHeight?: boolean;
-	vertical?: boolean;
-	width?: string;
-	style: any;
-	theme: Theme;
-};
 const CSS = {
 	Autocomplete: ({
 		inputViewportOffsetBottom,
@@ -42,9 +29,8 @@ const CSS = {
 		viewportMaxHeight,
 		vertical,
 		width,
-		style,
 		theme,
-	}: IACStyles) =>
+	}: Partial<AutocompleteProps> & { inputViewportOffsetBottom: number; noResults: boolean; contentSlotExists: boolean }) =>
 		css({
 			'&, & *, & *:before, & *:after': {
 				boxSizing: 'border-box',
@@ -52,15 +38,15 @@ const CSS = {
 
 			display: 'flex',
 			flexDirection: vertical ? 'column' : 'row',
-			flexWrap: horizontalTerms && !vertical ? 'wrap' : null,
+			flexWrap: horizontalTerms && !vertical ? 'wrap' : undefined,
 			position: 'absolute',
 			zIndex: '10002',
 			border: '1px solid #ebebeb',
 			background: '#ffffff',
 			width: width,
 			maxWidth: '100vw',
-			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : null,
-			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : null,
+			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
+			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
 
 			'&.ss__autocomplete--only-terms': {
 				width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
@@ -79,7 +65,7 @@ const CSS = {
 			},
 
 			'.ss__autocomplete__title--facets': {
-				order: vertical ? 2 : null,
+				order: vertical ? 2 : undefined,
 			},
 
 			'& .ss__autocomplete__terms': {
@@ -89,13 +75,13 @@ const CSS = {
 				background: '#f8f8f8',
 
 				'& .ss__autocomplete__terms__options': {
-					display: vertical || horizontalTerms ? 'flex' : null,
+					display: vertical || horizontalTerms ? 'flex' : undefined,
 					justifyContent: 'space-evenly',
 					flexWrap: 'wrap',
 
 					'& .ss__autocomplete__terms__option': {
-						flexGrow: vertical || horizontalTerms ? '1' : null,
-						textAlign: vertical || horizontalTerms ? 'center' : null,
+						flexGrow: vertical || horizontalTerms ? '1' : undefined,
+						textAlign: vertical || horizontalTerms ? 'center' : undefined,
 						wordBreak: 'break-all',
 
 						'& a': {
@@ -126,9 +112,9 @@ const CSS = {
 				columnGap: '20px',
 				order: 2,
 				padding: vertical ? '10px 20px' : '10px',
-				overflowY: vertical ? null : 'auto',
+				overflowY: vertical ? undefined : 'auto',
 				'& .ss__autocomplete__facet': {
-					flex: vertical ? '0 1 150px' : null,
+					flex: vertical ? '0 1 150px' : undefined,
 				},
 				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
 					{
@@ -148,7 +134,7 @@ const CSS = {
 				justifyContent: 'space-between',
 				order: 3,
 				overflowY: 'auto',
-				margin: noResults ? '0 auto' : null,
+				margin: noResults ? '0 auto' : undefined,
 				padding: vertical ? '10px 20px' : '10px',
 
 				'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
@@ -174,8 +160,6 @@ const CSS = {
 					},
 				},
 			},
-
-			...style,
 		}),
 };
 
@@ -215,12 +199,12 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 	};
 
-	let delayTimeout: any;
+	let delayTimeout: number;
 	const delayTime = 333;
 	const valueProps = {
 		onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) => {
 			clearTimeout(delayTimeout);
-			delayTimeout = setTimeout(() => {
+			delayTimeout = window.setTimeout(() => {
 				(e.target as HTMLAnchorElement).focus();
 			}, delayTime);
 		},
@@ -270,7 +254,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		theme,
 	};
 	let input: String | Element | null = props.input;
-	let inputViewportOffsetBottom;
+	let inputViewportOffsetBottom = 0;
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
@@ -376,19 +360,18 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	const facetsToShow = facets.length ? facets.filter((facet) => facet.display !== FacetDisplay.SLIDER) : [];
 	const onlyTerms = trending?.length && !loaded;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [
 			CSS.Autocomplete({
 				inputViewportOffsetBottom,
 				hideFacets,
 				horizontalTerms,
-				noResults: search?.query?.string && results.length === 0,
-				contentSlotExists: contentSlot ? true : false,
+				noResults: Boolean(search?.query?.string && results.length === 0),
+				contentSlotExists: Boolean(contentSlot),
 				viewportMaxHeight,
 				vertical,
 				width,
-				style,
 				theme,
 			}),
 			style,
@@ -499,7 +482,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideContent ? (
 					contentSlot ? (
 						<div className="ss__autocomplete__content">
-							{React.cloneElement(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+							{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller })}
 						</div>
 					) : results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string ? (
 						<div className="ss__autocomplete__content">
@@ -509,7 +492,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
 										{resultsSlot ? (
-											React.cloneElement(resultsSlot, { results, contentTitle, controller })
+											cloneWithProps(resultsSlot, { results, contentTitle, controller })
 										) : (
 											<>
 												{contentTitle && results.length > 0 ? (
@@ -524,7 +507,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								) : (
 									<div className="ss__autocomplete__content__no-results">
 										{noResultsSlot ? (
-											React.cloneElement(noResultsSlot, { search, pagination, controller })
+											cloneWithProps(noResultsSlot, { search, pagination, controller })
 										) : (
 											<>
 												<p>No results found for "{search.originalQuery?.string || search.query?.string}".</p>
@@ -538,7 +521,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{!hideLink ? (
 									linkSlot ? (
-										cloneElement(linkSlot, { search, results, pagination, filters, controller })
+										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
 									) : search?.query?.string && results.length > 0 ? (
 										<div className="ss__autocomplete__content__info">
 											<a href={state.url.href}>

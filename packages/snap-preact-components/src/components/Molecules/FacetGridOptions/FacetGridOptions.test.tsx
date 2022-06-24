@@ -5,14 +5,14 @@ import { ThemeProvider } from '../../../providers';
 
 import { FacetGridOptions } from './FacetGridOptions';
 import { gridFacetMock } from '../../../mocks/searchResponse';
-import { Value } from '@searchspring/snap-store-mobx';
+import type { FacetValue } from '@searchspring/snap-store-mobx';
 
 describe('FacetGridOptions Component', () => {
 	let gridComponent;
 	let gridElement;
 
 	it('renders', () => {
-		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />);
+		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />);
 
 		gridElement = gridComponent.container.querySelector('.ss__facet-grid-options');
 
@@ -21,14 +21,14 @@ describe('FacetGridOptions Component', () => {
 	});
 
 	it('has the correct number of options', () => {
-		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />);
+		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />);
 
 		const gridOptions = gridComponent.container.querySelectorAll('.ss__facet-grid-options__option');
 		expect(gridOptions).toHaveLength(gridFacetMock.values.length);
 	});
 
 	it('has the correct label', () => {
-		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />);
+		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />);
 
 		const gridOptions = gridComponent.container.querySelectorAll('.ss__facet-grid-options__option__value');
 		for (let i = 0; i < gridOptions.length; i++) {
@@ -37,22 +37,22 @@ describe('FacetGridOptions Component', () => {
 	});
 
 	it('Grid container element has correct number of classes', () => {
-		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />);
+		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />);
 
 		gridElement = gridComponent.container.querySelector('.ss__facet-grid-options');
 
-		expect(gridElement!.classList.length).toBe(2);
+		expect(gridElement?.classList.length).toBe(2);
 		expect(gridElement).toHaveClass('ss__facet-grid-options');
 	});
 
 	it('Grid option elements have correct classes', () => {
-		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />);
+		gridComponent = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />);
 
 		const gridOptionsElement = gridComponent.container.querySelectorAll('.ss__facet-grid-options__option__value');
 		const inactiveGridOption = gridOptionsElement[0];
 		const activeGridOption = gridOptionsElement[2];
 		expect(inactiveGridOption).toHaveClass('ss__facet-grid-options__option__value');
-		expect(activeGridOption!.parentElement).toHaveClass('ss__facet-grid-options__option--filtered');
+		expect(activeGridOption.parentElement).toHaveClass('ss__facet-grid-options__option--filtered');
 	});
 
 	it('Grid option can adjust gapSize & columns', () => {
@@ -61,25 +61,25 @@ describe('FacetGridOptions Component', () => {
 			columns: 2,
 		};
 
-		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} {...args} />);
+		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} {...args} />);
 
-		const gridOptionsElement = rendered.container.querySelector('.ss__facet-grid-options');
+		const gridOptionsElement = rendered.container.querySelector('.ss__facet-grid-options')!;
 
-		const styles = getComputedStyle(gridOptionsElement!);
-		expect(styles!.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
-		expect(styles!.gap).toBe(args.gapSize);
+		const styles = getComputedStyle(gridOptionsElement);
+		expect(styles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+		expect(styles.gap).toBe(args.gapSize);
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} disableStyles={true} />);
+		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} disableStyles={true} />);
 
 		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		expect(gridElement!.classList.length).toBe(1);
+		expect(gridElement?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} className={className} />);
+		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} className={className} />);
 
 		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
 		expect(gridElement).toBeInTheDocument();
@@ -98,12 +98,12 @@ describe('FacetGridOptions theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} />
+				<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(globalTheme.components.facetGridOptions.gapSize);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(globalTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 
@@ -115,10 +115,10 @@ describe('FacetGridOptions theming works', () => {
 				},
 			},
 		};
-		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} theme={propTheme} />);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(propTheme.components.facetGridOptions.gapSize);
+		const rendered = render(<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} theme={propTheme} />);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 
@@ -139,12 +139,12 @@ describe('FacetGridOptions theming works', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<FacetGridOptions values={gridFacetMock.values as unknown as Value[]} theme={propTheme} />
+				<FacetGridOptions values={gridFacetMock.values as unknown as FacetValue[]} theme={propTheme} />
 			</ThemeProvider>
 		);
-		const gridElement = rendered.container.querySelector('.ss__facet-grid-options');
-		const styles = getComputedStyle(gridElement!);
-		expect(styles!.gap).toBe(propTheme.components.facetGridOptions.gapSize);
+		const gridElement = rendered.container.querySelector('.ss__facet-grid-options')!;
+		const styles = getComputedStyle(gridElement);
+		expect(styles.gap).toBe(propTheme.components.facetGridOptions.gapSize);
 		expect(gridElement).toBeInTheDocument();
 	});
 });

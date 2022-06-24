@@ -8,9 +8,9 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetType } from '../../../types';
 import Readme from '../Filter/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
 
-import { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import type { SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Filter`,
@@ -26,6 +26,15 @@ export default {
 		},
 	},
 	argTypes: {
+		filter: {
+			description: 'Filter store object',
+			table: {
+				type: {
+					summary: 'object',
+				},
+			},
+			control: { type: 'object' },
+		},
 		facetLabel: {
 			description: 'Filter field',
 			table: {
@@ -37,7 +46,6 @@ export default {
 		},
 		valueLabel: {
 			description: 'Filter value',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'string',
@@ -46,7 +54,7 @@ export default {
 			control: { type: 'text' },
 		},
 		url: {
-			description: 'URL translator object',
+			description: 'URL manager object',
 			table: {
 				type: {
 					summary: 'object',

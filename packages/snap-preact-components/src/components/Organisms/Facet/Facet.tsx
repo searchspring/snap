@@ -13,14 +13,14 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay } from '../../../types';
-import { Facet as BaseFacet, ValueFacet, RangeFacet, HierarchyValue, Value } from '@searchspring/snap-store-mobx';
+import { ComponentProps, FacetDisplay, StylingCSS } from '../../../types';
+import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 
 const CSS = {
-	facet: ({ color, theme }: { color?: string; theme: Theme }) =>
+	facet: ({ color, theme }: OptionalFacetProps) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
@@ -30,7 +30,7 @@ const CSS = {
 				alignItems: 'center',
 				color: color,
 				border: 'none',
-				borderBottom: `2px solid ${theme.colors?.primary || '#ccc'}`,
+				borderBottom: `2px solid ${theme?.colors?.primary || '#ccc'}`,
 				padding: '6px 0',
 			},
 			'& .ss__facet__options': {
@@ -118,7 +118,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		icon: {
 			// default props
@@ -132,7 +132,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		showMoreLessIcon: {
 			// default props
@@ -146,7 +146,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		facetHierarchyOptions: {
 			// default props
@@ -160,7 +160,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		facetListOptions: {
 			// default props
@@ -174,7 +174,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		facetGridOptions: {
 			// default props
@@ -188,7 +188,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		facetPaletteOptions: {
 			// default props
@@ -202,7 +202,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				valueProps,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		facetSlider: {
 			// default props
@@ -214,7 +214,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 		searchInput: {
 			// default props
@@ -226,11 +226,11 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	let limitedValues;
+	let limitedValues: Array<FacetHierarchyValue | FacetValue | FacetRangeValue | undefined>;
 	if ((facet as ValueFacet)?.overflow && limit && Number.isInteger(limit) && !disableOverflow) {
 		(facet as ValueFacet).overflow?.setLimit(limit);
 		limitedValues = (facet as ValueFacet)?.refinedValues;
@@ -240,7 +240,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.facet({ color, theme }), style];
 	} else if (style) {
@@ -252,7 +252,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		allowableTypes: ['list', 'grid', 'palette'],
 		searchFilter: (e: React.ChangeEvent<HTMLInputElement>) => {
 			if ((facet as ValueFacet)?.search) {
-				(facet as ValueFacet).search!.input = e.target.value;
+				(facet as ValueFacet).search.input = e.target.value;
 			}
 		},
 	};
@@ -285,19 +285,19 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										case FacetDisplay.SLIDER:
 											return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 										case FacetDisplay.GRID:
-											return <FacetGridOptions {...subProps.facetGridOptions} values={(limitedValues as Value[]) || []} />;
+											return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} />;
 										case FacetDisplay.PALETTE:
-											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={(limitedValues as Value[]) || []} />;
+											return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} />;
 										case FacetDisplay.HIERARCHY:
-											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={(limitedValues as HierarchyValue[]) || []} />;
+											return <FacetHierarchyOptions {...subProps.facetHierarchyOptions} values={limitedValues as FacetHierarchyValue[]} />;
 										default:
-											return <FacetListOptions {...subProps.facetListOptions} values={(limitedValues as Value[]) || []} />;
+											return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} />;
 									}
 								}
 							})()}
 						</div>
 
-						{!disableOverflow && facet && (facet as ValueFacet)?.overflow && (facet as ValueFacet).overflow?.enabled && (
+						{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
 							<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()}>
 								{overflowSlot ? (
 									cloneWithProps(overflowSlot, { facet })
@@ -332,7 +332,7 @@ interface FacetSubProps {
 }
 
 export interface FacetProps extends OptionalFacetProps {
-	facet: ValueFacet | RangeFacet | BaseFacet;
+	facet: ValueFacet | RangeFacet;
 }
 
 interface OptionalFacetProps extends ComponentProps {

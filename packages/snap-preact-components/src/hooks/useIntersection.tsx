@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, MutableRef } from 'preact/hooks';
 
-export const useIntersection = (ref: any, rootMargin = '0px', fireOnce = false) => {
+export const useIntersection = (ref: MutableRef<HTMLElement | null>, rootMargin = '0px', fireOnce = false) => {
 	// State and setter for storing whether element is visible
 	const [isIntersecting, setIntersecting] = useState(false);
 	useEffect(() => {
@@ -10,7 +10,7 @@ export const useIntersection = (ref: any, rootMargin = '0px', fireOnce = false) 
 				setIntersecting(entry.isIntersecting);
 
 				if (fireOnce && entry.isIntersecting) {
-					observer.unobserve(ref.current);
+					observer.unobserve((ref as MutableRef<HTMLElement>).current);
 				}
 			},
 			{
@@ -21,7 +21,7 @@ export const useIntersection = (ref: any, rootMargin = '0px', fireOnce = false) 
 			observer.observe(ref.current);
 		}
 		return () => {
-			observer.unobserve(ref.current);
+			observer.unobserve((ref as MutableRef<HTMLElement>).current);
 		};
 	}, []); // Empty array ensures that effect is only run on mount and unmount
 	return isIntersecting;

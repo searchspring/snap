@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { QueryStore } from './QueryStore';
+import { SearchQueryStore } from './SearchQueryStore';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -9,10 +9,10 @@ const services = {
 
 const mockData = new MockData();
 
-describe('QueryStore store', () => {
+describe('SearchQueryStore store', () => {
 	it('has undefined query on blank search', () => {
 		const searchData = mockData.searchMeta();
-		const queryStore = new QueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore(services, searchData.search!);
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toEqual(undefined);
@@ -21,7 +21,7 @@ describe('QueryStore store', () => {
 	it('has didYouMean when search data has didYouMean', () => {
 		const searchData = mockData.searchMeta('dym');
 
-		const queryStore = new QueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore(services, searchData.search!);
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
@@ -34,7 +34,7 @@ describe('QueryStore store', () => {
 	it('has matchType when search data has matchType', () => {
 		const searchData = mockData.searchMeta('matchType');
 
-		const queryStore = new QueryStore(services, searchData.search!);
+		const queryStore = new SearchQueryStore(services, searchData.search!);
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.matchType).toEqual(searchData.search?.matchType);

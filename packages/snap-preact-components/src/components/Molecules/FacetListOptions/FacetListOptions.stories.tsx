@@ -7,7 +7,7 @@ import { FacetListOptions, FacetListOptionsProps } from './FacetListOptions';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../FacetListOptions/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetListOptions`,

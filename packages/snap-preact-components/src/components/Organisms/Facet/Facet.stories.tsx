@@ -9,7 +9,7 @@ import { FacetDisplay } from '../../../types';
 import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Facet/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Facet`,

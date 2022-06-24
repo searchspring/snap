@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { ComponentChildren, h, RefObject } from 'preact';
+import { useState, StateUpdater, MutableRef, useRef } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps } from '../../../utilities';
 
 const CSS = {
-	dropdown: ({ disableOverlay }: { disableOverlay?: boolean }) =>
+	dropdown: ({ disableOverlay }: Partial<DropdownProps>) =>
 		css({
 			position: 'relative',
 			'&.ss__dropdown--open': {
@@ -65,7 +65,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		style,
 	} = props;
 
-	let showContent: boolean | undefined, setShowContent: any;
+	let showContent: boolean | undefined, setShowContent: undefined | StateUpdater<boolean | undefined>;
 
 	const stateful = open === undefined;
 	if (stateful) {
@@ -74,12 +74,12 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		showContent = open;
 	}
 
-	let innerRef: React.RefObject<HTMLElement> | undefined = undefined;
+	let innerRef: MutableRef<HTMLElement | undefined> | undefined;
 	if (!disableClickOutside) {
-		innerRef = useClickOutside<HTMLElement>((e) => {
+		innerRef = useClickOutside((e) => {
 			if (showContent) {
 				if (!disabled) {
-					stateful && setShowContent(false);
+					stateful && setShowContent && setShowContent(false);
 					onToggle && onToggle(e, false);
 				}
 			}
@@ -88,14 +88,15 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 
 	const toggleShowContent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (stateful) {
-			setShowContent((prev: boolean) => {
-				onToggle && onToggle(e, !prev);
-				return !prev;
-			});
+			setShowContent &&
+				setShowContent((prev?: boolean) => {
+					onToggle && onToggle(e, !prev);
+					return !prev;
+				});
 		}
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.dropdown({ disableOverlay }), style];
 	} else if (style) {
@@ -106,7 +107,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 			<div
 				{...styling}
 				className={classnames('ss__dropdown', { 'ss__dropdown--open': showContent }, className)}
-				ref={(innerRef as React.LegacyRef<HTMLDivElement>) || undefined}
+				ref={innerRef as React.LegacyRef<HTMLDivElement>}
 			>
 				<div
 					className="ss__dropdown__button"
@@ -132,7 +133,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 export interface DropdownProps extends ComponentProps {
 	button: string | JSX.Element;
 	content?: string | JSX.Element;
-	children?: any;
+	children?: ComponentChildren;
 	disabled?: boolean;
 	open?: boolean;
 	disableOverlay?: boolean;

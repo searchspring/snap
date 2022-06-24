@@ -7,7 +7,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from '../Facets/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Organisms/Facets`,

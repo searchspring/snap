@@ -8,7 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../Result/readme.md';
 import { Layout } from '../../../types';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/Result`,

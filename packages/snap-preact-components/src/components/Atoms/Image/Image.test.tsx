@@ -33,7 +33,7 @@ describe('image Component', () => {
 		const rendered = render(<Image disableStyles alt={result.name} src={result.thumbnailImageUrl} />);
 		const imageElement = rendered.container.querySelector('.ss__image');
 
-		expect(imageElement!.classList).toHaveLength(1);
+		expect(imageElement?.classList).toHaveLength(1);
 	});
 
 	describe('Working Image', () => {
@@ -64,10 +64,10 @@ describe('image Component', () => {
 		it('should change src on hover & run a custom onhoverfunc prop', async () => {
 			const onHoverFunc = jest.fn();
 			const rendered = render(<Image alt={badResult.name} onMouseOver={onHoverFunc} src={result.thumbnailImageUrl} hoverSrc={rolloverImage} />);
-			const imageElement = rendered.container.querySelector('.ss__image img');
+			const imageElement = rendered.container.querySelector('.ss__image img')!;
 
 			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
-			userEvent.hover(imageElement!);
+			userEvent.hover(imageElement);
 			await waitFor(() => expect(onHoverFunc).toHaveBeenCalled());
 			expect(imageElement).toHaveAttribute('src', rolloverImage);
 		});
@@ -78,10 +78,10 @@ describe('image Component', () => {
 			const clickfunc = jest.fn();
 
 			const rendered = render(<Image alt={badResult.name} src={result.thumbnailImageUrl} onClick={clickfunc} />);
-			const imageElement = rendered.container.querySelector('.ss__image img');
+			const imageElement = rendered.container.querySelector('.ss__image img')!;
 
 			expect(imageElement).toHaveAttribute('src', result.thumbnailImageUrl);
-			userEvent.click(imageElement!);
+			userEvent.click(imageElement);
 			expect(clickfunc).toHaveBeenCalled();
 		});
 	});
@@ -105,7 +105,7 @@ describe('Image theming works', () => {
 		);
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image!.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -119,7 +119,7 @@ describe('Image theming works', () => {
 		const rendered = render(<Image alt={result.name} src={result.thumbnailImageUrl} theme={propTheme} />);
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image!.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -145,6 +145,6 @@ describe('Image theming works', () => {
 
 		const image = rendered.container.querySelector('.ss__image');
 		expect(image).toBeInTheDocument();
-		expect(image!.classList.length).toBe(1);
+		expect(image?.classList.length).toBe(1);
 	});
 });

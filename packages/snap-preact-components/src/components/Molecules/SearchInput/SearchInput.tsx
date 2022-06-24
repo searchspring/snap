@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
 	searchInput: ({ theme }: { theme: Theme }) =>
@@ -16,7 +16,7 @@ const CSS = {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			border: `1px solid ${theme.colors?.primary || '#ccc'}`,
+			border: `1px solid ${theme?.colors?.primary || '#ccc'}`,
 
 			'& .ss__icon': {
 				padding: '5px',
@@ -59,11 +59,11 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.searchInput({ theme }), style];
 	} else if (style) {

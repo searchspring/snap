@@ -45,7 +45,7 @@ describe('Carousel Component', () => {
 		);
 
 		const results = rendered.container.querySelector('.swiper-slide[data-swiper-slide-index="0"]');
-		expect(results!.textContent).toContain(searchResponse.results[0].mappings.core.name);
+		expect(results?.textContent).toContain(searchResponse.results[0].mappings.core.name);
 	});
 
 	it('renders the correct amount of children', () => {
@@ -60,7 +60,7 @@ describe('Carousel Component', () => {
 		);
 
 		const results = rendered.container.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .findMe');
-		expect(results!.length).toBe(searchResponse.results.length);
+		expect(results?.length).toBe(searchResponse.results.length);
 	});
 
 	it('renders next & prev buttons', () => {
@@ -144,19 +144,19 @@ describe('Carousel Component', () => {
 				))}
 			</Carousel>
 		);
-		const prev = rendered.container.querySelector('.ss__carousel__prev');
-		const next = rendered.container.querySelector('.ss__carousel__next');
+		const prev = rendered.container.querySelector('.ss__carousel__prev')!;
+		const next = rendered.container.querySelector('.ss__carousel__next')!;
 		const slide = rendered.container.querySelectorAll('.swiper-slide');
 
 		expect(onPrevFunc).not.toHaveBeenCalled();
-		userEvent.click(prev!);
+		userEvent.click(prev);
 		expect(onPrevFunc).toHaveBeenCalled();
 
 		expect(onNextFunc).not.toHaveBeenCalled();
-		userEvent.click(next!);
+		userEvent.click(next);
 		expect(onNextFunc).toHaveBeenCalled();
 
-		userEvent.click(slide[0]!);
+		userEvent.click(slide[0]);
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 
@@ -234,7 +234,7 @@ describe('Carousel Component', () => {
 		);
 
 		const CarouselElement = rendered.container.querySelector('.ss__carousel');
-		expect(CarouselElement!.classList.length).toBe(1);
+		expect(CarouselElement?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {

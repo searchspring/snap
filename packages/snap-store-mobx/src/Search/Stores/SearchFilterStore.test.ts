@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { FilterStore, RangeFilter, Filter } from './FilterStore';
+import { SearchFilterStore, RangeFilter, Filter } from './SearchFilterStore';
 import {
 	SearchResponseModel,
 	MetaResponseModel,
@@ -27,25 +27,25 @@ describe('Filter Store', () => {
 	});
 
 	it('has a symbol species of Array', () => {
-		expect(FilterStore[Symbol.species]).toBe(Array);
+		expect(SearchFilterStore[Symbol.species]).toBe(Array);
 	});
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		// @ts-ignore
-		const filters = new FilterStore(undefined, undefined, undefined);
+		const filters = new SearchFilterStore(undefined, undefined, undefined);
 
 		expect(filters.length).toBe(0);
 	});
 
 	it('returns an empty array when passed empty data', () => {
-		const filters = new FilterStore(services, [], {});
+		const filters = new SearchFilterStore(services, [], {});
 
 		expect(filters.length).toBe(0);
 	});
 
 	it('will have filter data that matches what was passed in', () => {
 		const filtersInput = searchData.filters;
-		const filters = new FilterStore(services, filtersInput, searchData.meta);
+		const filters = new SearchFilterStore(services, filtersInput, searchData.meta);
 
 		// check filter values
 		filters.forEach((filter, index) => {
@@ -76,7 +76,7 @@ describe('Filter Store', () => {
 
 	it('uses the urlManager service to generate urls on the filters', () => {
 		const filtersInput = searchData.filters;
-		const filters = new FilterStore(services, filtersInput, searchData.meta);
+		const filters = new SearchFilterStore(services, filtersInput, searchData.meta);
 
 		// check filter values
 		filters.forEach((filter, index) => {

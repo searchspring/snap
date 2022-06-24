@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -7,18 +7,12 @@ import classnames from 'classnames';
 
 import { defined, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
-type ISlideoutStyles = {
-	isActive: boolean;
-	width?: string;
-	transitionSpeed?: string;
-	slideDirection?: string;
-};
 const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection }: ISlideoutStyles) =>
+	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
 		css({
 			display: 'block',
 			position: 'fixed',
@@ -71,7 +65,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 				transitionSpeed,
 			}),
 			// component theme overrides
-			theme: props.theme,
+			theme: props?.theme,
 		},
 	};
 
@@ -82,19 +76,19 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
 
-	let isVisible: boolean = true;
-	isVisible = useMediaQuery(displayAt!, () => {
+	let isVisible = useMediaQuery(displayAt!, () => {
 		document.body.style.overflow = '';
 	});
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.slideout({ isActive, width, transitionSpeed, slideDirection }), style];
 	} else if (style) {
 		styling.css = [style];
 	}
+
 	return isVisible ? (
 		<CacheProvider>
 			{buttonContent && (
@@ -114,7 +108,7 @@ export function Slideout(properties: SlideoutProps): JSX.Element {
 }
 
 export interface SlideoutProps extends ComponentProps {
-	children?: JSX.Element;
+	children?: ComponentChildren;
 	active: boolean;
 	buttonContent?: string | JSX.Element;
 	width?: string;

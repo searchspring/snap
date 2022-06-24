@@ -1,23 +1,14 @@
 /** @jsx jsx */
 import { Fragment, h } from 'preact';
 
-import { jsx, css, keyframes } from '@emotion/react';
+import { jsx, css, keyframes, Keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
-
-type ILoadingBarStyles = {
-	color?: string;
-	height?: string;
-	backgroundColor?: string;
-	theme: Theme;
-	animation?: string;
-};
+import { ComponentProps, StylingCSS } from '../../../types';
 
 const CSS = {
-	loadingBar: ({ color, height, backgroundColor, theme, animation }: ILoadingBarStyles) =>
-		//@ts-ignore
+	loadingBar: ({ color, height, backgroundColor, theme, animation }: Partial<LoadingBarProps> & { animation: Keyframes }) =>
 		css({
 			height: height,
 			position: 'fixed',
@@ -29,14 +20,14 @@ const CSS = {
 			opacity: '1',
 			visibility: 'visible',
 			zIndex: '10000',
-			background: backgroundColor || theme.colors?.secondary || '#f8f8f8',
+			background: backgroundColor || theme?.colors?.secondary || '#f8f8f8',
 
 			'& .ss__loading-bar__bar': {
 				position: 'absolute',
 				top: '0',
 				left: '-200px',
 				height: '100%',
-				background: `${color || theme.colors?.primary || '#ccc'}`,
+				background: `${color || theme?.colors?.primary || '#ccc'}`,
 				animation: `${animation} 2s linear infinite`,
 			},
 		}),
@@ -66,7 +57,7 @@ export function LoadingBar(properties: LoadingBarProps): JSX.Element {
 
 	const { active, color, backgroundColor, height, disableStyles, className, style } = props;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.loadingBar({ height, color, backgroundColor, theme, animation: CSS.animation }), style];
 	} else if (style) {

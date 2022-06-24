@@ -1,16 +1,16 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, RenderResult } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 
 import { Pagination } from './Pagination';
-import { PaginationStore } from '@searchspring/snap-store-mobx';
+import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
 import { MockData } from '@searchspring/snap-shared';
 
 describe('Pagination Component', () => {
-	let rendered: any;
+	let rendered: RenderResult;
 	const services = {
 		urlManager: new UrlManager(new UrlTranslator()),
 	};
@@ -21,7 +21,7 @@ describe('Pagination Component', () => {
 
 	const data = new MockData().search();
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	beforeEach(() => {
 		rendered = render(<Pagination pagination={paginationStore} />);
@@ -44,7 +44,7 @@ describe('Pagination Component', () => {
 
 	it('last page has the correct number', () => {
 		const last = rendered.container.querySelector('.ss__pagination__page--last');
-		expect(last.innerHTML).toBe(paginationStore.last.number.toString());
+		expect(last?.innerHTML).toBe(paginationStore.last.number.toString());
 	});
 
 	it('renders the next page button', () => {
@@ -55,7 +55,7 @@ describe('Pagination Component', () => {
 	it('sets the active page, & the active number matches what is passed in', () => {
 		const active = rendered.container.querySelector('.ss__pagination__page--active');
 		expect(active).toBeInTheDocument();
-		expect(active.innerHTML).toBe(paginationStore.current.number.toString());
+		expect(active?.innerHTML).toBe(paginationStore.current.number.toString());
 	});
 
 	it('renders the correct number of page options', () => {
@@ -76,7 +76,7 @@ describe('Lets test the Pagination Component optional props', () => {
 
 	const data = new MockData().search('page10');
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	it('shows all the optional buttons', () => {
 		const rendered = render(<Pagination pagination={paginationStore} />);
@@ -168,7 +168,7 @@ describe('Lets test the Pagination Component optional props', () => {
 
 		const paginationElement = rendered.container.querySelector('.ss__pagination');
 
-		expect(paginationElement!.classList).toHaveLength(1);
+		expect(paginationElement?.classList).toHaveLength(1);
 	});
 });
 
@@ -183,7 +183,7 @@ describe('Pagination theming works', () => {
 
 	const data = new MockData().search();
 
-	let paginationStore = new PaginationStore(searchConfig, services, data.pagination);
+	let paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination);
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
@@ -200,7 +200,7 @@ describe('Pagination theming works', () => {
 		);
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination!.classList.length).toBe(1);
+		expect(pagination?.classList.length).toBe(1);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -214,7 +214,7 @@ describe('Pagination theming works', () => {
 		const rendered = render(<Pagination pagination={paginationStore} theme={propTheme} />);
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination!.classList.length).toBe(1);
+		expect(pagination?.classList.length).toBe(1);
 	});
 
 	it('is theme prop overrides ThemeProvider', () => {
@@ -240,6 +240,6 @@ describe('Pagination theming works', () => {
 
 		const pagination = rendered.container.querySelector('.ss__pagination');
 		expect(pagination).toBeInTheDocument();
-		expect(pagination!.classList.length).toBe(1);
+		expect(pagination?.classList.length).toBe(1);
 	});
 });

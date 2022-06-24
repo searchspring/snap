@@ -10,7 +10,7 @@ import { Button, ButtonProps } from '../../Atoms/Button/Button';
 import { defined, LightenDarkenColor } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { AbstractController } from '@searchspring/snap-controller';
@@ -37,7 +37,7 @@ const CSS = {
 			'& .ss__error-handler__button': {
 				backgroundColor: 'white',
 				color: 'inherit',
-				borderColor: theme.colors?.primary,
+				borderColor: theme?.colors?.primary,
 				width: ['150px', 'fit-content'],
 				margin: '5px 10px',
 
@@ -47,30 +47,30 @@ const CSS = {
 			},
 
 			'&.ss__error-handler--error': {
-				backgroundColor: LightenDarkenColor(theme.colors?.message?.error || 'red', 180),
-				borderLeftColor: theme.colors?.message?.error || '#ff0000',
+				backgroundColor: LightenDarkenColor(theme?.colors?.message?.error || 'red', 180),
+				borderLeftColor: theme?.colors?.message?.error || '#ff0000',
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: theme.colors?.message?.error || '#ff0000',
+						fill: theme?.colors?.message?.error || '#ff0000',
 					},
 				},
 			},
 			'&.ss__error-handler--warning': {
-				backgroundColor: LightenDarkenColor(theme.colors?.message?.warning || 'yellow', 180),
-				borderLeftColor: theme.colors?.message?.warning || '#ffff00',
+				backgroundColor: LightenDarkenColor(theme?.colors?.message?.warning || 'yellow', 180),
+				borderLeftColor: theme?.colors?.message?.warning || '#ffff00',
 				'.ss__icon': {
-					fill: theme.colors?.message?.warning || '#ffff00',
+					fill: theme?.colors?.message?.warning || '#ffff00',
 				},
 				'.ss__error-handler__button': {
-					borderColor: theme.colors?.message?.warning || '#ffff00',
+					borderColor: theme?.colors?.message?.warning || '#ffff00',
 				},
 			},
 			'&.ss__error-handler--info': {
-				backgroundColor: LightenDarkenColor(theme.colors?.message?.info || 'blue', 180),
-				borderLeftColor: theme.colors?.message?.info || '#0000ff',
+				backgroundColor: LightenDarkenColor(theme?.colors?.message?.info || 'blue', 180),
+				borderLeftColor: theme?.colors?.message?.info || '#0000ff',
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: theme.colors?.message?.info || '#0000ff',
+						fill: theme?.colors?.message?.info || '#0000ff',
 					},
 				},
 			},
@@ -120,7 +120,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const errorObject = controller?.store?.error || error;
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.errorHandler({ theme }), style];
 	} else if (style) {

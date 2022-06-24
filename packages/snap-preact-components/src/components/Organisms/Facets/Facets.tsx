@@ -8,10 +8,10 @@ import { observer } from 'mobx-react-lite';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps } from '../../../types';
+import { ComponentProps, StylingCSS } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 
-import { Facet as BaseFacet, ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
 const CSS = {
 	facets: () => css({}),
@@ -51,7 +51,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		},
 	};
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.facets(), style];
 	} else if (style) {
@@ -74,10 +74,10 @@ interface FacetsSubProps {
 	facet: FacetProps;
 }
 
-export type individualFacetType = ValueFacet | RangeFacet | BaseFacet;
+export type IndividualFacetType = ValueFacet | RangeFacet;
 
 export interface FacetsProps extends ComponentProps {
-	facets?: individualFacetType[];
+	facets?: IndividualFacetType[];
 	limit?: number;
 	controller?: SearchController | AutocompleteController;
 }

@@ -7,11 +7,12 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
+import { StylingCSS } from '../../../types';
 
 const CSS = {
-	price: ({ theme }: { theme: Theme }) =>
+	price: ({ theme }: Partial<PriceProps>) =>
 		css({
-			color: theme.colors?.primary,
+			color: theme?.colors?.primary,
 			'&.ss__price--strike': {
 				textDecoration: 'line-through',
 				color: 'initial',
@@ -63,7 +64,7 @@ export function Price(properties: PriceProps): JSX.Element {
 		symbolAfter,
 	});
 
-	const styling: { css?: any } = {};
+	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
 		styling.css = [CSS.price({ theme }), style];
 	} else if (style) {

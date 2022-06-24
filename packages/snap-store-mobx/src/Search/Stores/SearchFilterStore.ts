@@ -11,7 +11,7 @@ import type {
 	MetaResponseModelFacet,
 } from '@searchspring/snapi-types';
 
-export class FilterStore extends Array<RangeFilter | Filter> {
+export class SearchFilterStore extends Array<RangeFilter | Filter> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}

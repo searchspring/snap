@@ -7,7 +7,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
 import Readme from './readme.md';
-import { RecommendationController } from '@searchspring/snap-controller';
+import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 

@@ -30,7 +30,7 @@ describe('Breadcrumbs Component', () => {
 		const rendered = render(<Breadcrumbs {...args} />);
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 		expect(breadcrumbElement).toBeInTheDocument();
-		expect(breadcrumbElement!.classList.length).toBe(2);
+		expect(breadcrumbElement?.classList.length).toBe(2);
 	});
 
 	it('uses links when url is present in data', () => {
@@ -42,7 +42,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs li:first-child');
 		expect(breadcrumbElement).toBeInTheDocument();
 
-		const anchorElement = breadcrumbElement!.querySelector('a');
+		const anchorElement = breadcrumbElement?.querySelector('a');
 		expect(anchorElement).toBeInTheDocument();
 		expect(anchorElement).toHaveAttribute('href', url);
 		expect(anchorElement).toHaveTextContent(label);
@@ -54,7 +54,7 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs li:last-child');
 		expect(breadcrumbElement).toBeInTheDocument();
 
-		const anchorElement = breadcrumbElement!.querySelector('a');
+		const anchorElement = breadcrumbElement?.querySelector('a');
 		expect(anchorElement).not.toBeInTheDocument();
 
 		expect(breadcrumbElement).toHaveTextContent(args.data[args.data.length - 1].label);
@@ -90,17 +90,17 @@ describe('Breadcrumbs Component', () => {
 		};
 
 		const rendered = render(<Breadcrumbs {...args} style={style} />);
-		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
-		let styles = getComputedStyle(breadcrumbElement!);
+		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs')!;
+		let styles = getComputedStyle(breadcrumbElement);
 
-		expect(styles!.padding).toBe(style.padding);
+		expect(styles.padding).toBe(style.padding);
 	});
 
 	it('respects disableStyles prop when true', () => {
 		const rendered = render(<Breadcrumbs {...args} disableStyles />);
 		const breadcrumbElement = rendered.container.querySelector('.ss__breadcrumbs');
 
-		expect(breadcrumbElement!.classList.length).toBe(1);
+		expect(breadcrumbElement?.classList.length).toBe(1);
 	});
 
 	it('is themeable with ThemeProvider', () => {

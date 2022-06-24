@@ -8,7 +8,7 @@ import { componentArgs } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import { FacetDisplay } from '../../../types';
 import Readme from '../FacetHierarchyOptions/readme.md';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 
 export default {
 	title: `Molecules/FacetHierarchyOptions`,
