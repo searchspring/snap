@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { h } from 'preact';
 import { v4 as uuidv4 } from 'uuid';
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers';
@@ -135,12 +135,16 @@ describe('Autocomplete Component', () => {
 		//first test the terms.
 		let termLinks = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option a');
 		let terms = rendered.container.querySelectorAll('.ss__autocomplete .ss__autocomplete__terms__option');
-		const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+		let firstResult;
 
-		//there should be results
-		expect(results[0]).toBeInTheDocument();
-		//we need to save this for later
-		const firstResult = results[0].innerHTML;
+		await waitFor(() => {
+			const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
+			//there should be results
+			expect(results[0]).toBeInTheDocument();
+			//we need to save this for later
+			firstResult = results[0].innerHTML;
+		});
+
 		//there should be terms
 		expect(termLinks[0]).toBeInTheDocument();
 		//first term should be auto selected

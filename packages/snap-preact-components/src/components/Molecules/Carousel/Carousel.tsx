@@ -7,12 +7,8 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
-import { Swiper, Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, Navigation, Pagination, A11y } from 'swiper';
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import './swiper-css.css';
-import './swiper-pagination.css';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined } from '../../../utilities';
@@ -39,11 +35,25 @@ const CSS = {
 					alignItems: 'center',
 				},
 
-				'.swiper-container': {
+				'.swiper': {
 					flexDirection: 'row',
 				},
-			},
 
+				'.swiper-pagination': {
+					width: 'auto',
+					order: 0,
+					flexDirection: 'column',
+					margin: 0,
+					padding: '10px',
+				},
+
+				'.swiper-pagination-bullet': {
+					margin: '4px',
+				},
+			},
+			'.swiper-pagination-bullet-active': {
+				background: theme?.colors?.primary || 'inherit',
+			},
 			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
 				justifyContent: 'center',
@@ -52,7 +62,6 @@ const CSS = {
 					display: 'none',
 				},
 			},
-
 			'.ss__carousel__next, .ss__carousel__prev': {
 				padding: '5px',
 				cursor: 'pointer',
@@ -62,6 +71,70 @@ const CSS = {
 					opacity: '0.3',
 					cursor: 'default',
 				},
+			},
+			'.swiper': {
+				display: 'flex',
+				flexDirection: 'column',
+				marginLeft: 'auto',
+				marginRight: 'auto',
+				position: 'relative',
+				overflow: 'hidden',
+				listStyle: 'none',
+				padding: 0,
+				zIndex: 1,
+			},
+			'.swiper-vertical': {
+				'.swiper-wrapper': {
+					flexDirection: 'column',
+				},
+			},
+			'.swiper-wrapper': {
+				order: 0,
+				position: 'relative',
+				width: '100%',
+				height: '100%',
+				zIndex: 1,
+				display: 'flex',
+				transitionProperty: 'transform',
+				boxSizing: 'content-box',
+			},
+			'.swiper-slide': {
+				flexShrink: 0,
+				width: '100%',
+				height: '100%',
+				position: 'relative',
+				transitionProperty: 'transform',
+			},
+			'.swiper-pagination': {
+				display: 'flex',
+				justifyContent: 'center',
+				marginTop: '10px',
+				width: '100%',
+				order: 1,
+				transition: '.3s opacity',
+			},
+			'.swiper-pagination-bullet': {
+				width: '8px',
+				height: '8px',
+				display: 'inline-block',
+				borderRadius: '50%',
+				background: '#000',
+				opacity: '.2',
+				cursor: 'pointer',
+				margin: '0 4px',
+				'&.swiper-pagination-bullet-active': {
+					opacity: '0.8',
+					background: theme?.colors?.primary || '#000',
+				},
+			},
+			'.swiper-pointer-events': {
+				touchAction: 'pan-y',
+				'&.swiper-vertical': {
+					touchAction: 'pan-x',
+				},
+			},
+			'.swiper-slide-invisible-blank': {
+				visibility: 'hidden',
 			},
 		}),
 };
@@ -108,6 +181,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	let props: CarouselProps = {
 		// default props
+		modules: [],
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
@@ -154,8 +228,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		disableStyles,
 		style,
 		className,
+		modules,
 		...additionalProps
 	} = props;
+
+	const swiperModules = [Navigation, Pagination, A11y].concat(modules!);
 
 	const subProps: CarouselSubProps = {
 		icon: {
@@ -201,7 +278,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 				</div>
 
 				<SwiperComponent
-					modules={[Navigation, Pagination, Scrollbar, A11y]}
+					modules={swiperModules}
 					onBeforeInit={(swiper: Swiper) => {
 						//@ts-ignore
 						swiper.params.navigation.prevEl = navigationPrevRef.current ? navigationPrevRef.current : undefined;
@@ -261,6 +338,7 @@ export interface CarouselProps extends ComponentProps {
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onPrevButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onInit?: (swiper: Swiper) => void;
+	modules?: any[];
 	children: ComponentChildren[];
 }
 

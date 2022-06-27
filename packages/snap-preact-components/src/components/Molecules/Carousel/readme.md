@@ -8,6 +8,7 @@ Renders a carousel of slides using children, built with [Swiper](https://swiperj
 ## Usage
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
+Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 
 ```jsx
@@ -85,6 +86,14 @@ The `onInit` prop can be used to tie into the initialization event for swiper.
 
 ### autoAdjustSlides
 The `autoAdjustSlides` prop when set to `false` will disable the carousel from automatically adjusting the `slidesPerGroup`, `slidesPerView` and `loop` props when the `children` length is less than the current `slidesPerView`
+
+### modules
+The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function.
+
+```jsx
+import { Scrollbar } from 'swiper';
+<Carousel modules={[Scrollbar]} scrollbar>{children}</Carousel>
+```
 
 ### breakpoints
 An object that modifies the responsive behavior of the carousel at various viewports. 

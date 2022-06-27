@@ -129,6 +129,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		modules: {
+			description: 'Additional Swiper modules',
+			table: {
+				type: {
+					summary: 'SwiperModule[]',
+				},
+				defaultValue: { summary: '[Navigation, Pagination, A11y]' },
+			},
+		},
 		breakpoints: {
 			defaultValue: undefined,
 			description: 'Recommendation title',

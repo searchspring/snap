@@ -118,6 +118,15 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		modules: {
+			description: 'Additional Swiper modules',
+			table: {
+				type: {
+					summary: 'SwiperModule[]',
+				},
+				defaultValue: { summary: '[Navigation, Pagination, A11y]' },
+			},
+		},
 		onNextButtonClick: {
 			description: 'Carousel next button click event handler',
 			table: {
