@@ -71,8 +71,9 @@ let config = {
 						},
 					},
 					{
-						selector: '#searchspring-sidebar',
+						selector: '.searchspring-sidebar',
 						hideTarget: true,
+						autoRetarget: true,
 						// prefetch: true,
 						skeleton: () => SidebarSkel,
 						component: async () => {
