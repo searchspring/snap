@@ -244,7 +244,7 @@ describe('DomTargeter', () => {
 			<div id="content"></div>
 		`);
 
-		const Selector: Target = {
+		const selector: Target = {
 			selector: '.classToLookFor',
 			inject: {
 				action: 'append',
@@ -263,7 +263,7 @@ describe('DomTargeter', () => {
 			autoRetarget: true,
 		};
 
-		new DomTargeter([Selector], (target: Target, elem: Element) => {}, document);
+		new DomTargeter([selector], (target: Target, elem: Element) => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
@@ -282,7 +282,7 @@ describe('DomTargeter', () => {
 			<div id="content"></div>
 		`);
 
-		const Selectors: Target[] = [
+		const selectors: Target[] = [
 			{
 				selector: '.classToLookFor',
 				inject: {
@@ -319,7 +319,7 @@ describe('DomTargeter', () => {
 			},
 		];
 
-		new DomTargeter(Selectors, (target: Target, elem: Element) => {}, document);
+		new DomTargeter(selectors, (target: Target, elem: Element) => {}, document);
 
 		expect(document.querySelector('.classToLookFor')).toBe(null);
 
